@@ -14,7 +14,7 @@
   background: transparent;
   cursor: pointer;
   border: none;
-  border-bottom: 2px solid var(--a-border-strong);
+  border-bottom: 2px solid var(--ac-accordion-header-border, var(--a-border-strong));
 }
 
 .navds-accordion__header:focus {

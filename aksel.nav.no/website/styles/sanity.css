@@ -1,0 +1,12 @@
+#sanity-wrapper[data-theme="dark"] {
+  --a-text-action: var(--a-blue-200);
+  --a-border-strong: var(--a-gray-200);
+  --ac-accordion-header-text-hover: var(--a-blue-200);
+  --ac-accordion-item-bg-open: var(--a-deepblue-800);
+  --ac-accordion-item-border-open: var(--a-deepblue-200);
+}
+
+/* Override bug i sanity-ui */
+.navds-accordion svg.navds-accordion__expand-icon--filled:not([data-ui="Popover__arrow"]):not([data-ui="Tooltip__arrow"]) {
+  display: none;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { defineType, defineField } from "sanity";
 import Avatar from "boring-avatars";
 import { EditorPreview } from "../custom-components/EditorPreview";
+import { EditorPage } from "../custom-components/EditorPage";
 
 export const Editors = defineType({
   title: "Forfattere",
@@ -42,19 +43,23 @@ export const Editors = defineType({
         layout: "tags",
       },
     }),
-    /* defineField({
-      name: "profile_page",
+    defineField({
+      name: "profilside",
       type: "string",
-      title: "Profil",
-      inputComponent: profilePage,
+      title: "",
+      components: {
+        field: EditorPage,
+      },
+      readOnly: true,
       hidden: ({ currentUser, parent }) => {
         const { id, roles } = currentUser;
         return (
-          !roles.find(({ name }) => name === "administrator") &&
-          parent?.user_id?.current !== id
+          !roles.find(({ name }) =>
+            ["developer", "administrator"].includes(name)
+          ) && parent?.user_id?.current !== id
         );
       },
-    }), */
+    }),
   ],
   preview: {
     select: {
