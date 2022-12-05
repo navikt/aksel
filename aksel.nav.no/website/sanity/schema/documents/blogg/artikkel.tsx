@@ -16,7 +16,7 @@ export const Blogg = defineType({
   name: "aksel_blogg",
   type: "document",
   groups,
-  ...artikkelPreview,
+  ...artikkelPreview("Produktbloggen"),
   fields: [
     ...hiddenFields,
     titleField,

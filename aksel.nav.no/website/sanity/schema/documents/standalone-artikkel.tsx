@@ -12,7 +12,7 @@ export const Standalone = defineType({
   name: "aksel_standalone",
   type: "document",
   groups,
-  ...artikkelPreview,
+  ...artikkelPreview("Standalone-artikkel"),
   fields: [
     ...hiddenFields,
     titleField,

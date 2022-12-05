@@ -15,7 +15,7 @@ export const GrunnleggendeArtikkel = defineType({
   name: "ds_artikkel",
   type: "document",
   groups,
-  ...artikkelPreview,
+  ...artikkelPreview("Grunnleggende"),
   fields: [
     ...hiddenFields,
     titleField,

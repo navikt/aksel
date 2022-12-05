@@ -15,7 +15,7 @@ export const KomponentArtikkel = defineType({
   name: "komponent_artikkel",
   type: "document",
   groups,
-  ...artikkelPreview,
+  ...artikkelPreview("Komponenter"),
   fields: [
     ...hiddenFields,
     titleField,
