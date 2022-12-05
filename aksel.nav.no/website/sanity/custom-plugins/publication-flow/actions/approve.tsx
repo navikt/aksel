@@ -70,6 +70,7 @@ export const createWrappedApproveAction = () => {
               <Button
                 onClick={() => {
                   verifyContent();
+                  setDialogOpen(false);
                 }}
               >
                 Ja, godkjenn

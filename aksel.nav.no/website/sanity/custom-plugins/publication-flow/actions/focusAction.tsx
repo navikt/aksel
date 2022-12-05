@@ -68,6 +68,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
                     verifyContent();
                     publish.execute();
                     props.onComplete();
+                    setPublishOpen(false);
                   }}
                   variant="primary"
                   size="medium"
@@ -124,6 +125,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
                 <Button
                   onClick={() => {
                     verifyContent();
+                    setVerifyOpen(false);
                   }}
                 >
                   Ja, godkjenn
