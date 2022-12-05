@@ -43,8 +43,9 @@ const getCustomActions = (prev: DocumentActionComponent[]) => {
     }
     return action;
   });
-  const customActions = [createWrappedApproveAction()];
-  return [...defaultActions, ...customActions];
+
+  const customActions = [defaultActions[0], createWrappedApproveAction()];
+  return [...customActions, ...defaultActions.slice(1)];
 };
 
 interface PublicationFlowOptions {

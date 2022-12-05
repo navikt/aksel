@@ -52,6 +52,7 @@ export const createWrappedApproveAction = () => {
         setDialogOpen(true);
       },
       icon: PublishIcon,
+      tone: "positive",
       dialog: dialogOpen && {
         type: "dialog",
         header: "Kvalitetssjekk",
