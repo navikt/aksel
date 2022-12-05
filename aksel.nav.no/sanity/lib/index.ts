@@ -136,7 +136,7 @@ export const kategoriSlug = (prefix: string) => ({
   group: "settings",
   options: {
     source: (s) => `${s?.kategori}/${s?.heading}`,
-    slugify: (input, ...rest) => {
+    slugify: (input) => {
       return (
         `${prefix}${input}`
           .toLowerCase()

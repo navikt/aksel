@@ -1,8 +1,137 @@
 import React from "react";
-import { defineType, defineField } from "sanity";
+import {
+  defineType,
+  defineField,
+  SlugSourceContext,
+  InitialValueResolverContext,
+} from "sanity";
 import Avatar from "boring-avatars";
 import { EditorPreview } from "../custom-components/EditorPreview";
 import { EditorPage } from "../custom-components/EditorPage";
+
+const navn = [
+  "Alpesteinbukk",
+  "Amurtiger",
+  "Baktrisk kamel",
+  "Blissbukk",
+  "Borneoorangutang",
+  "Damfrosk",
+  "Dvergsilkeape",
+  "Dåhjort",
+  "Edderkoppape",
+  "Ekornape",
+  "Elandantilope",
+  "Elg",
+  "Esel",
+  "Europeisk oter",
+  "Fjellrev",
+  "Flodsvin",
+  "Fugler",
+  "Gaupe",
+  "Gepard",
+  "Gulkinngibbon",
+  "Javalangur",
+  "Jerv",
+  "Krokodille",
+  "Lavlandstapir",
+  "Løve",
+  "Løvetamarin",
+  "Nubisk geit",
+  "Papegøye",
+  "Ringhalelemur",
+  "Rødpanda",
+  "Sau",
+  "Sjimpanse",
+  "Sjiraff",
+  "Stråleskilpadde",
+  "Slanger",
+  "Steppesebra",
+  "Flamingo",
+  "Struts",
+  "Shetlandsponni",
+  "Surikat",
+  "Tiger",
+  "Ulv",
+  "Vestlandsk fjordfe",
+  "Ekorn",
+  "Bever",
+  "Lemen",
+  "Klatremus",
+  "Fjellmarkmus",
+  "Dvergmus",
+  "Småskogmus",
+  "Steinkobbe",
+  "Røyskatt",
+  "Moskusfe",
+];
+
+const adjektiv = [
+  "aktuell",
+  "alvorlig",
+  "ansvarlig",
+  "berømt",
+  "bevisst",
+  "eksisterende",
+  "fjern",
+  "forsiktig",
+  "fremmed",
+  "heldig",
+  "hjelpsom",
+  "hyppig",
+  "imponerende",
+  "kul",
+  "lykkelig",
+  "lys",
+  "merkelig",
+  "mistenkelig",
+  "modig",
+  "morsom",
+  "nysgjerrig",
+  "rå",
+  "rask",
+  "blå",
+  "rettferdig",
+  "rimelig",
+  "ryddig",
+  "selvsikker",
+  "skarp",
+  "skikkelig",
+  "skyldig",
+  "smal",
+  "sprudlende",
+  "søt",
+  "stolt",
+  "streng",
+  "sulten",
+  "tilgjengelig",
+  "vennlig",
+  "voksen",
+  "ærlig",
+  "flittig",
+];
+
+const generateName = async (
+  ctx: SlugSourceContext | InitialValueResolverContext
+) => {
+  const names = await ctx
+    .getClient({ apiVersion: "2021-06-07" })
+    .fetch(`*[_type == "editor"].anon_navn.current`);
+
+  let c = 0;
+  let res = "";
+  while ((res === "" || names.includes(res)) && c < 1000) {
+    const adj = adjektiv[Math.floor(Math.random() * adjektiv.length)];
+    const animal = navn[Math.floor(Math.random() * navn.length)];
+    res = `${adj.charAt(0).toUpperCase() + adj.slice(1)} ${animal}`;
+    c += 1;
+  }
+
+  return res;
+};
+
+const generateInitialName = async (ctx: InitialValueResolverContext) => ({
+  current: await generateName(ctx),
+});
 
 export const Editors = defineType({
   title: "Forfattere",
@@ -17,6 +146,28 @@ export const Editors = defineType({
       name: "title",
       type: "string",
       validation: (Rule) => Rule.required().error("Må legge til navn"),
+    }),
+    defineField({
+      title: "Gjør meg anonym",
+      description:
+        "På artikler bytter vi ut navnet ditt med et tullenavn. Eks. Sprudlende Tiger",
+      name: "anonym",
+      type: "boolean",
+      initialValue: true,
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      title: "Anonymt navn",
+      name: "anon_navn",
+      type: "slug",
+      initialValue: (_, ctx) => generateInitialName(ctx),
+      validation: (Rule) =>
+        Rule.required().error("Må generere et anynymt navn"),
+      hidden: ({ parent }) => !parent?.anonym,
+      options: {
+        source: "anonym",
+        slugify: (_, __, ctx) => generateName(ctx),
+      },
     }),
     defineField({
       title: "Sanity bruker-id (dev only)",
