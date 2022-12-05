@@ -1,6 +1,5 @@
 import differenceInMonths from "date-fns/differenceInMonths";
 import differenceInDays from "date-fns/differenceInDays";
-import nb from "date-fns/locale/nb";
 
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 

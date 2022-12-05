@@ -25,6 +25,7 @@ export const PanesWithCount = async (
                 ids.filter((x) => x?.kategori === x.value).length ?? 0
               })`
             )
+            .schemaType(docType)
             .filter(`_type == $docType && $kat == kategori`)
             .params({ kat: value, docType })
         )
@@ -35,6 +36,7 @@ export const PanesWithCount = async (
       .child(
         S.documentList()
           .title("Uten kategori")
+          .schemaType(docType)
           .filter(`_type == $docType && !defined(kategori)`)
           .params({ docType })
       ),
