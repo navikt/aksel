@@ -56,6 +56,7 @@ export const createWrappedApproveAction = () => {
         content: (
           <>
             <h3>Godkjenningsdialog...</h3>
+            <p>TO DO: Fyll innhold her</p>
             <p>{updateDialogContent.description[verifiedStatus]}</p>
             <ul>
               <li>{updateDialogContent.checks[verifiedStatus]}</li>
