@@ -14,6 +14,7 @@ const landingPages = [
   "grunnleggende",
   "god-praksis",
   "produktbloggen",
+  "prinsipper",
 ];
 
 export default async function preview(req, res) {

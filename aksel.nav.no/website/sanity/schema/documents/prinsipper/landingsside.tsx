@@ -11,4 +11,9 @@ export const PrinsipperLandingSide = defineType({
       type: "riktekst_standard",
     }),
   ],
+  preview: {
+    prepare: () => ({
+      title: "Landingsside prinsipper",
+    }),
+  },
 });

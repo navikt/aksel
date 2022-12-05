@@ -21,4 +21,9 @@ export const GrunnleggendeLandingSide = defineType({
     }),
     ...views,
   ],
+  preview: {
+    prepare: () => ({
+      title: "Landingsside grunnleggende",
+    }),
+  },
 });

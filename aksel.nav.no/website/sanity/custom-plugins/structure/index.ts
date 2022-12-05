@@ -53,6 +53,9 @@ export const structure = async (
     }`);
 
   const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
+  const adminOrDev = currentUser.roles.find((x) =>
+    ["developer", "administrator"].includes(x.name)
+  );
 
   return S.list()
     .title("Innholdstyper")
@@ -167,61 +170,67 @@ export const structure = async (
               )),
             ])
         ),
-      S.divider(),
-      S.listItem()
-        .title("Admin")
-        .icon(AccessDeniedIcon)
-        .child(
-          S.list()
-            .title("Admin")
-            .items([
-              S.documentListItem()
-                .title(`Forside`)
-                .schemaType(`vk_frontpage`)
-                .icon(Picture)
-                .id(`frontpage_vk_praksis`),
-              S.listItem()
-                .title("Standalone-sider")
-                .child(
-                  S.documentList()
-                    .title("Sider")
-                    .filter(`_type == 'aksel_standalone'`)
-                ),
-              S.listItem()
-                .title("Forfattere")
-                .child(
-                  S.documentList()
-                    .title("Forfattere")
-                    .filter(`_type == 'editor'`)
-                ),
-              S.listItem()
-                .title("Redirects")
-                .child(
-                  S.documentList()
-                    .title("Redirects")
-                    .filter(`_type == 'redirect'`)
-                ),
-              S.listItem()
-                .title("Komponent-eksempler Designsystemet")
-                .child(
-                  S.documentList()
-                    .title("Eksempler")
-                    .filter(`_type == 'kode_eksempler_fil'`)
-                ),
-              S.listItem()
-                .title("Token-grupper Designsystemet")
-                .child(
-                  S.documentList()
-                    .title("Grupper")
-                    .filter(`_type == 'token_kategori'`)
-                ),
-              S.listItem()
-                .title("Props Designsystemet")
-                .child(
-                  S.documentList().title("Props").filter(`_type == 'ds_props'`)
-                ),
-            ])
-        ),
+      ...(adminOrDev
+        ? [
+            S.divider(),
+            S.listItem()
+              .title("Admin")
+              .icon(AccessDeniedIcon)
+              .child(
+                S.list()
+                  .title("Admin")
+                  .items([
+                    S.documentListItem()
+                      .title(`Forside`)
+                      .schemaType(`vk_frontpage`)
+                      .icon(Picture)
+                      .id(`frontpage_vk_praksis`),
+                    S.listItem()
+                      .title("Standalone-sider")
+                      .child(
+                        S.documentList()
+                          .title("Sider")
+                          .filter(`_type == 'aksel_standalone'`)
+                      ),
+                    S.listItem()
+                      .title("Forfattere")
+                      .child(
+                        S.documentList()
+                          .title("Forfattere")
+                          .filter(`_type == 'editor'`)
+                      ),
+                    S.listItem()
+                      .title("Redirects")
+                      .child(
+                        S.documentList()
+                          .title("Redirects")
+                          .filter(`_type == 'redirect'`)
+                      ),
+                    S.listItem()
+                      .title("Komponent-eksempler Designsystemet")
+                      .child(
+                        S.documentList()
+                          .title("Eksempler")
+                          .filter(`_type == 'kode_eksempler_fil'`)
+                      ),
+                    S.listItem()
+                      .title("Token-grupper Designsystemet")
+                      .child(
+                        S.documentList()
+                          .title("Grupper")
+                          .filter(`_type == 'token_kategori'`)
+                      ),
+                    S.listItem()
+                      .title("Props Designsystemet")
+                      .child(
+                        S.documentList()
+                          .title("Props")
+                          .filter(`_type == 'ds_props'`)
+                      ),
+                  ])
+              ),
+          ]
+        : []),
 
       S.divider(),
       ...S.documentTypeListItems().filter(
@@ -239,6 +248,14 @@ const previews = [
   "aksel_standalone",
 ];
 
+const landingsider = [
+  { name: "godpraksis_landingsside", url: "god-praksis" },
+  { name: "blogg_landingsside", url: "produktbloggen" },
+  { name: "grunnleggende_landingsside", url: "grunnleggende" },
+  { name: "komponent_landingsside", url: "komponenter" },
+  { name: "prinsipper_landingsside", url: "prinsipper" },
+];
+
 export const resolveProductionUrl = (doc) => {
   const basePath = "https://aksel.nav.no";
   const devPath = "http://localhost:3000";
@@ -253,10 +270,35 @@ export const resolveProductionUrl = (doc) => {
       ? `${basePath}${previewUrl}`
       : `${devPath}${previewUrl}`;
   }
+  if (landingsider.find((x) => x.name === doc._type)) {
+    const slug = landingsider.find((x) => x.name === doc._type).url;
+    const previewUrl = `/preview/${slug}`;
+    if (!slug) {
+      return "";
+    }
+    return process.env.NODE_ENV === "production"
+      ? `${basePath}${previewUrl}`
+      : `${devPath}${previewUrl}`;
+  }
+
+  if ("aksel_tema" === doc._type) {
+    const slug = doc.slug?.current;
+    const previewUrl = `/preview/god-praksis/${slug}`;
+    if (!slug) {
+      return "";
+    }
+    return process.env.NODE_ENV === "production"
+      ? `${basePath}${previewUrl}`
+      : `${devPath}${previewUrl}`;
+  }
 };
 
 export const defaultDocumentNode = (S, { schemaType }) => {
-  if ([...previews /* , "aksel_tema" */].includes(schemaType)) {
+  if (
+    [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
+      schemaType
+    )
+  ) {
     return S.document().views([
       S.view.form(),
       S.view

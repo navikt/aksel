@@ -12,4 +12,9 @@ export const BloggLandingSide = defineType({
       type: "riktekst_standard",
     }),
   ],
+  preview: {
+    prepare: () => ({
+      title: "Landingsside produktbloggen",
+    }),
+  },
 });

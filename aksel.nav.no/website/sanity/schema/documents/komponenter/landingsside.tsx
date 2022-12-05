@@ -21,4 +21,9 @@ export const KomponentLandingSide = defineType({
     }),
     ...views,
   ],
+  preview: {
+    prepare: () => ({
+      title: "Landingsside komponenter",
+    }),
+  },
 });

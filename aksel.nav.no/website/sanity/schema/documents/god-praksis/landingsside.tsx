@@ -11,4 +11,9 @@ export const GodPraksisLandingSide = defineType({
       type: "riktekst_standard",
     }),
   ],
+  preview: {
+    prepare: () => ({
+      title: "Landingsside God-praksis",
+    }),
+  },
 });
