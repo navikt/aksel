@@ -11,6 +11,7 @@ import {
   createWrappedFocusAction,
   createWrappedRestoreAction,
   createWrappedUnpublishAction,
+  createWrappedUpdateAction,
 } from "./actions";
 import { createBadgeComponent, CreateStatusBadge } from "./badges";
 
@@ -44,7 +45,11 @@ const getCustomActions = (prev: DocumentActionComponent[]) => {
     return action;
   });
 
-  const customActions = [defaultActions[0], createWrappedApproveAction()];
+  const customActions = [
+    defaultActions[0],
+    createWrappedApproveAction(),
+    createWrappedUpdateAction(),
+  ];
   return [...customActions, ...defaultActions.slice(1)];
 };
 

@@ -5,3 +5,4 @@ export * from "./duplicate";
 export * from "./focusAction";
 export * from "./restore";
 export * from "./unpublish";
+export * from "./updateAction";
