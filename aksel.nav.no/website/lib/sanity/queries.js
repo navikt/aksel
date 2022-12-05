@@ -159,13 +159,21 @@ export const akselTema = `{"temaer": *[_type == "aksel_tema"]{
   "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
 }}`;
 
+const contributorsAll = `contributors[]->{
+  anonym == true => {"title":@.anon_navn.current},
+  anonym != true => {"title":@.title}
+}`;
+
+const contributorsSingle = `contributors[0]->{
+  anonym == true => {"title":@.anon_navn.current},
+  anonym != true => {"title":@.title}
+}`;
+
 export const akselBloggPosts = `{
   "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
     ...,
     "slug": slug.current,
-    contributors[]->{
-      title
-    }
+    ${contributorsAll}
   }
 }`;
 
@@ -185,9 +193,7 @@ export const akselForsideQuery = `*[_type == "vk_frontpage"][0]{
   "bloggs": *[_type == "aksel_blogg"] | order(_createdAt desc){
     ...,
     "slug": slug.current,
-    contributors[]->{
-      title
-    }
+    ${contributorsAll}
   },
   "temaer": *[_type == "aksel_tema"]{
     ...,
@@ -209,9 +215,7 @@ export const akselPrinsippBySlug = `{
       },
       $valid != "true" => []
     ),
-    contributors[]->{
-      title
-    }
+    ${contributorsAll}
   }
 }`;
 
@@ -225,9 +229,7 @@ export const akselDocumentBySlug = `{
       ${deRefs}
     },
     tema[]->{title, slug},
-    contributors[]->{
-      title
-    },
+    ${contributorsAll},
     relevante_artikler[]->{
       _id,
       heading,
@@ -237,16 +239,14 @@ export const akselDocumentBySlug = `{
       "slug": slug.current,
       "tema": tema[]->tag,
       ingress,
-      "contributor": contributors[0]->title,
+      "contributor": ${contributorsSingle},
     }
   }
 }`;
 
 export const akselEditorById = `*[_id == $id][0]
 {
-  contributors[]->{
-    title
-  }
+  ${contributorsAll}
 }`;
 
 export const dsDocuments = `*[_type in ["komponent_artikkel", "ds_artikkel"]]{ ..., 'slug': slug.current }`;
@@ -330,7 +330,7 @@ export const akselTemaDocs = `{
         "slug": slug.current,
         "tema": tema[]->tag,
         ingress,
-        "contributor": contributors[0]->title,
+        "contributor": ${contributorsSingle}
       }
     }
   }
@@ -348,8 +348,6 @@ export const akselBloggBySlug = `{
       },
       $valid != "true" => []
     ),
-    contributors[]->{
-      title
-    },
+    ${contributorsAll}
   }
 }`;
