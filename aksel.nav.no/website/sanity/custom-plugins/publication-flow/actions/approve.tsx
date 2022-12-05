@@ -1,5 +1,5 @@
 import { Button } from "@navikt/ds-react";
-import { differenceInMonths, formatISO } from "date-fns";
+import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
   DocumentActionDescription,
@@ -22,7 +22,7 @@ export const createWrappedApproveAction = () => {
         [
           {
             set: {
-              "updateInfo.lastVerified": formatISO(new Date()),
+              "updateInfo.lastVerified": format(new Date(), "yyyy-MM-dd"),
             },
           },
         ],

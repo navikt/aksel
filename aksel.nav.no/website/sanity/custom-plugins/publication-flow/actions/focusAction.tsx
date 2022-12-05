@@ -1,5 +1,5 @@
 import { Button } from "@navikt/ds-react";
-import { differenceInMonths, formatISO } from "date-fns";
+import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
   DocumentActionComponent,
@@ -25,7 +25,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
           {
             set: {
               updateInfo: {
-                lastVerified: formatISO(new Date()),
+                lastVerified: format(new Date(), "yyyy-MM-dd"),
               },
             },
           },

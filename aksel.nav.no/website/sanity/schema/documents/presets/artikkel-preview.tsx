@@ -1,6 +1,6 @@
 import differenceInMonths from "date-fns/differenceInMonths";
-import formatRelative from "date-fns/formatRelative";
-import nb from "date-fns/esm/locale/nb";
+import differenceInDays from "date-fns/differenceInDays";
+import nb from "date-fns/locale/nb";
 
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
@@ -16,7 +16,6 @@ export const artikkelPreview = (_type: string) => {
       },
       prepare(selection) {
         const { heading, tema, kategori, type, updateInfo } = selection;
-        console.log(updateInfo);
         if (
           [
             "ds_artikkel",
@@ -26,23 +25,30 @@ export const artikkelPreview = (_type: string) => {
           ].includes(type) &&
           updateInfo
         ) {
+          const diff = Math.abs(
+            differenceInDays(new Date(updateInfo), new Date())
+          );
           return {
             title: heading,
             subtitle: `${
               isAfter(updateInfo)
                 ? "UTDATERT"
-                : formatRelative(new Date(updateInfo), new Date(), {
-                    locale: nb,
-                  })
+                : diff === 0
+                ? "I dag"
+                : `${diff} dager`
             } | ${_type} ${
-              `/${tema}` ?? `/${kategori}` ?? "(ingen gruppering)"
+              tema ?? kategori
+                ? `${(tema ?? kategori) && "/"}${tema ?? kategori ?? ``}`
+                : ""
             }`,
           };
         }
         return {
           title: heading,
           subtitle: `${_type} ${
-            `/${tema}` ?? `/${kategori}` ?? "(ingen gruppering)"
+            tema ?? kategori
+              ? `${(tema ?? kategori) && "/"}${tema ?? kategori ?? ``}`
+              : ""
           }`,
         };
       },
