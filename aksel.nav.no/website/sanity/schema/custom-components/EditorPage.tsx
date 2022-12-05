@@ -70,7 +70,7 @@ const OutDatedList = ({ data }: { data: any[] }) => {
     () =>
       data.filter(
         (x) =>
-          !isAfter(x?.updateWarning?.lastVerified) &&
+          !isAfter(x?.updateInfo?.lastVerified) &&
           ["ds_artikkel", "aksel_artikkel", "komponent_artikkel"].includes(
             x._type
           )

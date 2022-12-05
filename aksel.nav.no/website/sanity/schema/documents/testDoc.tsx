@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { artikkelPreview } from "./presets/artikkel-preview";
 
 export const TestDoc = defineType({
   title: "Test",
   name: "testDoc",
   type: "document",
+  ...artikkelPreview("TestDoc"),
   fields: [
     defineField({
       name: "updateInfo",
