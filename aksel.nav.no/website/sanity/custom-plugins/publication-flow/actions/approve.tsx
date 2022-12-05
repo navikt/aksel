@@ -7,6 +7,8 @@ import {
   useDocumentOperation,
 } from "sanity";
 
+import { PublishIcon } from "@sanity/icons";
+
 export const createWrappedApproveAction = () => {
   const WrappedApprove = (
     props: DocumentActionProps
@@ -49,6 +51,7 @@ export const createWrappedApproveAction = () => {
       onHandle: () => {
         setDialogOpen(true);
       },
+      icon: PublishIcon,
       dialog: dialogOpen && {
         type: "dialog",
         header: "Kvalitetssjekk",
