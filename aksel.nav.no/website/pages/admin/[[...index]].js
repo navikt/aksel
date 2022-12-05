@@ -1,5 +1,4 @@
 import { NextStudio } from "next-sanity/studio";
-
 import { useEffect, useState } from "react";
 import { workspaceConfig } from "../../sanity/sanity.config";
 
@@ -21,7 +20,8 @@ const StudioPage = () => {
       <NextStudio
         config={workspaceConfig}
         scheme={scheme}
-        onSchemeChange={(s) => setScheme(s)}
+        onSchemeChange={setScheme}
+        sche
         unstable__noFavicons
       />
     </div>
