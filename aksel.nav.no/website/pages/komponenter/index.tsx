@@ -42,7 +42,10 @@ const Page = ({
         pageProps={page}
       >
         {komponentKategorier.map((kat, i) => (
-          <div className={cl({ "pb-8": i + 1 < komponentKategorier.length })}>
+          <div
+            key={i}
+            className={cl({ "pb-8": i + 1 < komponentKategorier.length })}
+          >
             <Heading
               level="2"
               size="large"
