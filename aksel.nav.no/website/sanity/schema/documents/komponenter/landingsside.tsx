@@ -1,13 +1,27 @@
 import { defineField, defineType } from "sanity";
 import { komponentKategorier } from "../../../config";
 
-const views = komponentKategorier.map((kat) =>
-  defineField({
-    title: `Intro ${kat.title}`,
-    name: `intro_${kat.value}`,
-    type: "riktekst_standard",
-  })
-);
+const views = () => {
+  const list = [];
+  komponentKategorier.forEach((kat) => {
+    list.push(
+      defineField({
+        title: `Ingress ${kat.title}`,
+        name: `ingress_${kat.value}`,
+        type: "text",
+        rows: 2,
+      })
+    );
+    list.push(
+      defineField({
+        title: `Intro ${kat.title}`,
+        name: `intro_${kat.value}`,
+        type: "riktekst_standard",
+      })
+    );
+  });
+  return list;
+};
 
 export const KomponentLandingSide = defineType({
   title: "Landingsside Komponenter",
@@ -17,9 +31,9 @@ export const KomponentLandingSide = defineType({
     defineField({
       title: "Intro",
       name: "intro",
-      type: "riktekst_standard",
+      type: "text",
     }),
-    ...views,
+    ...views(),
   ],
   preview: {
     prepare: () => ({

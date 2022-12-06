@@ -1,5 +1,17 @@
 import type { SanityKeyed } from "sanity-codegen";
 
+export type SidebarT = {
+  heading: string;
+  slug: string;
+  kategori: string;
+  tag?: string;
+}[];
+
+export type PageTypeT = {
+  type: "Komponenter" | "Grunnleggende";
+  title: string;
+};
+
 export type DsFrontPageCardT = SanityKeyed<{
   _type: "card";
   link_ref?: {

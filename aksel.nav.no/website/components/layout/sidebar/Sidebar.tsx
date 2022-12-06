@@ -1,3 +1,4 @@
+import { SidebarT } from "@/lib";
 import { logNav } from "@/utils";
 import { Expand } from "@navikt/ds-icons";
 import { BodyShort, Detail, Tag } from "@navikt/ds-react";
@@ -72,13 +73,7 @@ const NavItem = ({
   );
 };
 
-const Dropdown = ({
-  title,
-  links,
-}: {
-  title: string;
-  links: { heading: string; slug: string; kategori: string; tag?: string }[];
-}) => {
+const Dropdown = ({ title, links }: { title: string; links: SidebarT }) => {
   const [open, setOpen] = useState(true);
   const { asPath } = useRouter();
 
@@ -123,7 +118,7 @@ export const Sidebar = ({
   links,
 }: {
   kategori: "Komponenter" | "Grunnleggende";
-  links: { heading: string; slug: string; kategori: string; tag?: string }[];
+  links: SidebarT;
 }) => {
   const sections = useMemo(
     () =>
@@ -144,7 +139,7 @@ export const Sidebar = ({
   return (
     <div
       data-testid="ds-sidebar"
-      className="algolia-ignore-index w-sidebar bg-surface-default z-[1002] hidden shrink-0 self-start py-4 pr-2 md:block"
+      className="algolia-ignore-index w-sidebar bg-surface-default z-[1002] hidden shrink-0 self-start py-4 md:block"
     >
       <nav aria-label={kategori} className={cl("overflow-x-auto")}>
         <ul className="py-4 pl-6">

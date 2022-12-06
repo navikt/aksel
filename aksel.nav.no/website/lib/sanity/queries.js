@@ -283,6 +283,8 @@ export const komponentQuery = `{
   ${sidebarQuery}
 }`;
 
+export const komponentLandingQuery = `{${sidebarQuery}}`;
+
 export const grunnleggendeQuery = `{
   "page": *[_type == "ds_artikkel" && slug_v2.current == $slug] | order(_updatedAt desc)[0]
     {

@@ -1,10 +1,11 @@
-import { Footer } from "@/layout";
-import { Header } from "components/layout/header/Header";
+import { komponentLandingQuery, SidebarT } from "@/lib";
+import { getClient } from "@/sanity-client";
+import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
 
-const Page = (): JSX.Element => {
+const Page = ({ sidebar }: { sidebar: SidebarT }): JSX.Element => {
   return (
     <>
       <Head>
@@ -15,29 +16,33 @@ const Page = (): JSX.Element => {
           content="Komponenter fra designsystemet til NAV"
         />
       </Head>
-      <Header />
-      <main
-        tabIndex={-1}
-        id="hovedinnhold"
-        className="bg-surface relative flex justify-center focus:outline-none"
+      <WithSidebar
+        sidebar={sidebar}
+        pageType={{ type: "Komponenter", title: "Komponenter" }}
       >
-        <div className="min-h-screen-header flex w-full">Komponenter</div>
-      </main>
-      <Footer variant="aksel" />
+        abc
+      </WithSidebar>
     </>
   );
 };
 
-/* const WithPreview = lazy(() => import("../../components/WithPreview")); */
+const WithPreview = lazy(() => import("../../components/WithPreview"));
 
 const Wrapper = (props: any): JSX.Element => {
-  /* if (props?.preview) {
+  if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>
-        <WithPreview comp={Page} query={dsFrontpageQuery} props={props} />
+        <WithPreview
+          comp={Page}
+          query={komponentLandingQuery}
+          props={props}
+          params={{
+            type: "komponent_artikkel",
+          }}
+        />
       </PreviewSuspense>
     );
-  } */
+  }
 
   return <Page {...props} />;
 };
@@ -49,11 +54,13 @@ export const getStaticProps = async ({
 }: {
   preview?: boolean;
 }) => {
-  /* const { page } = await getClient().fetch(dsFrontpageQuery); */
+  const { sidebar } = await getClient().fetch(komponentLandingQuery, {
+    type: "komponent_artikkel",
+  });
 
   return {
     props: {
-      /* page: page, */
+      sidebar,
       slug: "/komponenter",
       preview,
     },

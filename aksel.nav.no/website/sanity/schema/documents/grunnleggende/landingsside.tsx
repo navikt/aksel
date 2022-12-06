@@ -1,13 +1,27 @@
 import { defineField, defineType } from "sanity";
 import { grunnleggendeKategorier } from "../../../config";
 
-const views = grunnleggendeKategorier.map((kat) =>
-  defineField({
-    title: `Intro ${kat.title}`,
-    name: `intro_${kat.value}`,
-    type: "riktekst_standard",
-  })
-);
+const views = () => {
+  const list = [];
+  grunnleggendeKategorier.forEach((kat) => {
+    list.push(
+      defineField({
+        title: `Ingress ${kat.title}`,
+        name: `ingress_${kat.value}`,
+        type: "text",
+        rows: 2,
+      })
+    );
+    list.push(
+      defineField({
+        title: `Intro ${kat.title}`,
+        name: `intro_${kat.value}`,
+        type: "riktekst_standard",
+      })
+    );
+  });
+  return list;
+};
 
 export const GrunnleggendeLandingSide = defineType({
   title: "Landingsside Grunnleggende",
@@ -19,7 +33,7 @@ export const GrunnleggendeLandingSide = defineType({
       name: "intro",
       type: "riktekst_standard",
     }),
-    ...views,
+    ...views(),
   ],
   preview: {
     prepare: () => ({
