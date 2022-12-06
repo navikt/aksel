@@ -21,6 +21,11 @@ const sharedConfig = {
   apiVersion: "2021-10-21",
   schema: schemas,
   ...form,
+  document: {
+    newDocumentOptions: (prev, { currentUser }) => {
+      return prev;
+    },
+  },
   plugins: [
     deskTool({
       title: "Desk",
