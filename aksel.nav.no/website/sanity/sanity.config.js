@@ -23,7 +23,13 @@ const sharedConfig = {
   ...form,
   document: {
     newDocumentOptions: (prev, { currentUser }) => {
-      return prev;
+      const adminOrDev = currentUser.roles.find((x) =>
+        ["developer", "administrator"].includes(x.name)
+      );
+      if (adminOrDev) {
+        return prev;
+      }
+      return [];
     },
   },
   plugins: [
