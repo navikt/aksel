@@ -25,7 +25,7 @@ const filtered = [
   "ds_artikkel",
   "komponent_artikkel",
   "grunnleggende_landingsside",
-  "komponent_landingsside",
+  "komponenter_landingsside",
   "media.tag",
   "editor",
   "vk_frontpage",
@@ -167,8 +167,8 @@ export const structure = async (
                   .items([
                     S.documentListItem()
                       .title(`Landingsside`)
-                      .schemaType(`komponent_landingsside`)
-                      .id(`komponent_landingsside_id1`),
+                      .schemaType(`komponenter_landingsside`)
+                      .id(`komponenter_landingsside_id1`),
                     S.divider(),
                     ...(await PanesWithCount(
                       "komponent_artikkel",
@@ -286,7 +286,7 @@ const landingsider = [
   { name: "godpraksis_landingsside", url: "god-praksis" },
   { name: "blogg_landingsside", url: "produktbloggen" },
   { name: "grunnleggende_landingsside", url: "grunnleggende" },
-  { name: "komponent_landingsside", url: "komponenter" },
+  { name: "komponenter_landingsside", url: "komponenter" },
   { name: "prinsipper_landingsside", url: "prinsipper" },
 ];
 

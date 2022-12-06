@@ -25,7 +25,7 @@ const views = () => {
 
 export const KomponentLandingSide = defineType({
   title: "Landingsside Komponenter",
-  name: "komponent_landingsside",
+  name: "komponenter_landingsside",
   type: "document",
   fields: [
     defineField({

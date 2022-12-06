@@ -31,7 +31,7 @@ export const GrunnleggendeLandingSide = defineType({
     defineField({
       title: "Intro",
       name: "intro",
-      type: "riktekst_standard",
+      type: "text",
     }),
     ...views(),
   ],

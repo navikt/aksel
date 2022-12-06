@@ -39,7 +39,6 @@ const ComponentOverview = ({
     _id: string;
     heading: string;
     slug: { current: string };
-    ingress?: any[];
     status?: SanityT.Schema.komponent_artikkel["status"];
   }[];
 }): JSX.Element => {

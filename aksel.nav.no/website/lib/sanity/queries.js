@@ -1,3 +1,8 @@
+import {
+  grunnleggendeKategorier,
+  komponentKategorier,
+} from "../../sanity/config";
+
 const markDef = `
 markDefs[]{
   ...,
@@ -283,8 +288,6 @@ export const komponentQuery = `{
   ${sidebarQuery}
 }`;
 
-export const komponentLandingQuery = `{${sidebarQuery}}`;
-
 export const grunnleggendeQuery = `{
   "page": *[_type == "ds_artikkel" && slug_v2.current == $slug] | order(_updatedAt desc)[0]
     {
@@ -297,19 +300,6 @@ export const grunnleggendeQuery = `{
   },
   ${sidebarQuery}
 }`;
-
-export const dsNavigationQuery = `
-*[_type == 'ds_navigation'][0] {
-  "headings": headings[]{
-    ...,
-    link_ref->{_id, slug},
-    menu[]{
-      ...,
-      link->{_id, slug, tags},
-    }
-  }
-}
-`;
 
 export const akselTemaNames = `*[_type == "aksel_tema" && count(*[references(^._id)]) > 0].slug`;
 
@@ -353,3 +343,25 @@ export const akselBloggBySlug = `{
     ${contributorsAll}
   }
 }`;
+
+const landingsSideQuery = (t) => {
+  const kat =
+    t === "komponenter"
+      ? komponentKategorier
+      : t === "grunnleggende"
+      ? grunnleggendeKategorier
+      : [];
+
+  return `"page": *[_type == "${t}_landingsside"][0]{
+    ...,
+    ${kat.map((x) => `intro_${x.value}[]{...,${deRefs}}`).join(",")}
+  }`;
+};
+
+export const komponentLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
+  "komponenter"
+)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,slug,status,kategori}}`;
+
+export const grunnleggendeLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
+  "grunnleggende"
+)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,slug,status,kategori}}`;

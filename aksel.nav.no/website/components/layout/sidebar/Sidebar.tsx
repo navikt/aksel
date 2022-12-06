@@ -139,10 +139,10 @@ export const Sidebar = ({
   return (
     <div
       data-testid="ds-sidebar"
-      className="algolia-ignore-index w-sidebar bg-surface-default z-[1002] hidden shrink-0 self-start py-4 md:block"
+      className="algolia-ignore-index w-sidebar bg-surface-default z-[1002] hidden shrink-0 self-start pb-4 md:block"
     >
       <nav aria-label={kategori} className={cl("overflow-x-auto")}>
-        <ul className="py-4 pl-6">
+        <ul className="pb-4 pl-6">
           {sections.map((kat) => (
             <Dropdown links={kat.pages} title={kat.title} key={kat.title} />
           ))}

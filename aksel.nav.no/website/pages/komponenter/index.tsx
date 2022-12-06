@@ -1,11 +1,30 @@
-import { komponentLandingQuery, SidebarT } from "@/lib";
+import { komponentLandingQuery, SidebarT, SanityT } from "@/lib";
+import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
+import { Heading, Ingress } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
+import ComponentOverview from "components/sanity-modules/component-overview";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
+import { komponentKategorier } from "../../sanity/config";
+import cl from "classnames";
 
-const Page = ({ sidebar }: { sidebar: SidebarT }): JSX.Element => {
+const Page = ({
+  page,
+  sidebar,
+  links,
+}: {
+  page: any;
+  links: {
+    _id: string;
+    heading: string;
+    slug: { current: string };
+    kategori: string;
+    status?: SanityT.Schema.komponent_artikkel["status"];
+  }[];
+  sidebar: SidebarT;
+}): JSX.Element => {
   return (
     <>
       <Head>
@@ -19,8 +38,30 @@ const Page = ({ sidebar }: { sidebar: SidebarT }): JSX.Element => {
       <WithSidebar
         sidebar={sidebar}
         pageType={{ type: "Komponenter", title: "Komponenter" }}
+        intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
+        pageProps={page}
       >
-        abc
+        {komponentKategorier.map((kat, i) => (
+          <div className={cl({ "pb-8": i + 1 < komponentKategorier.length })}>
+            <Heading
+              level="2"
+              size="large"
+              spacing
+              className="text-deepblue-800"
+            >
+              {kat.title}
+            </Heading>
+            {page[`ingress_${kat.value}`] && (
+              <Ingress className="mb-2">{page[`ingress_${kat.value}`]}</Ingress>
+            )}
+            {page[`intro_${kat.value}`] && (
+              <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
+            )}
+            <ComponentOverview
+              node={links.filter((x) => x.kategori === kat.value)}
+            />
+          </div>
+        ))}
       </WithSidebar>
     </>
   );
@@ -54,13 +95,18 @@ export const getStaticProps = async ({
 }: {
   preview?: boolean;
 }) => {
-  const { sidebar } = await getClient().fetch(komponentLandingQuery, {
-    type: "komponent_artikkel",
-  });
+  const { sidebar, page, links } = await getClient().fetch(
+    komponentLandingQuery,
+    {
+      type: "komponent_artikkel",
+    }
+  );
 
   return {
     props: {
+      page,
       sidebar,
+      links,
       slug: "/komponenter",
       preview,
     },
