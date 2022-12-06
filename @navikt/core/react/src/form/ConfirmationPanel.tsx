@@ -51,6 +51,7 @@ export const ConfirmationPanel = forwardRef<
             size={props.size}
             className="navds-confirmation-panel__content"
             id={`confirmation-panel-${id}`}
+            as="div"
           >
             {children}
           </BodyLong>
