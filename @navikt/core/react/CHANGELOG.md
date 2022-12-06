@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.0.7
+
+### Patch Changes
+
+- :bug: Fikset keyboard-click i monthpicker
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.7
+
 ## 2.0.6
 
 ### Patch Changes
