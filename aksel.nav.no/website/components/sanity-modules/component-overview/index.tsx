@@ -1,36 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { SanityT, urlFor } from "@/lib";
-import { Heading, Tag } from "@navikt/ds-react";
+import { Heading } from "@navikt/ds-react";
 import Nextlink from "next/link";
 import cl from "classnames";
 import Image from "next/image";
-
-const getStatus = (status?: SanityT.Schema.komponent_artikkel["status"]) => {
-  switch (status?.tag) {
-    case "beta":
-      return (
-        <Tag variant="alt1" size="small" className="absolute top-4 left-4">
-          Beta
-        </Tag>
-      );
-    case "new":
-      return (
-        <Tag variant="info" size="small" className="absolute top-4 left-4">
-          New
-        </Tag>
-      );
-    case "ready":
-      return null;
-    case "deprecated":
-      return (
-        <Tag variant="neutral" size="small" className="absolute top-4 left-4">
-          Deprecated
-        </Tag>
-      );
-    default:
-      return null;
-  }
-};
+import { StatusTag } from "components/website-modules/StatusTag";
 
 const ComponentOverview = ({
   node,
@@ -126,7 +100,9 @@ const ComponentOverview = ({
                       {x.heading}
                     </Heading>
                   </Nextlink>
-                  {getStatus(x.status)}
+                  <span className="absolute top-4 left-4">
+                    <StatusTag status={x?.status?.tag} />
+                  </span>
                 </span>
               </div>
             </div>
