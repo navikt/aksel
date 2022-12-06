@@ -21,6 +21,17 @@ const sharedConfig = {
   apiVersion: "2021-10-21",
   schema: schemas,
   ...form,
+  document: {
+    newDocumentOptions: (prev, { currentUser }) => {
+      const adminOrDev = currentUser.roles.find((x) =>
+        ["developer", "administrator"].includes(x.name)
+      );
+      if (adminOrDev) {
+        return prev;
+      }
+      return [];
+    },
+  },
   plugins: [
     deskTool({
       title: "Desk",
