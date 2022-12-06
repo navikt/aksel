@@ -51,7 +51,7 @@ export const KomponentArtikkel = defineType({
             list: [
               { title: "Beta", value: "beta" },
               { title: "New", value: "new" },
-              { title: "Ready", value: "ready" },
+              { title: "Stable", value: "ready" },
               { title: "Deprecated", value: "deprecated" },
             ],
             layout: "radio",
@@ -66,7 +66,7 @@ export const KomponentArtikkel = defineType({
       ],
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
     }),
     defineField({
