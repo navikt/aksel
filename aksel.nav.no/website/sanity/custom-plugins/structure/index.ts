@@ -7,6 +7,7 @@ import {
   OkHandIcon,
   TokenIcon,
 } from "@sanity/icons";
+import { Role } from "sanity";
 import Iframe from "sanity-plugin-iframe-pane";
 import { StructureBuilder } from "sanity/desk";
 import {
@@ -56,7 +57,19 @@ export const structure = async (
   const adminOrDev = currentUser.roles.find((x) =>
     ["developer", "administrator"].includes(x.name)
   );
-  const isBlogger = currentUser.roles.find((x) => x.name === "blogger");
+  const hasBloggerRole = currentUser.roles.find((x) => x.name === "blogger");
+  const hasGrunnleggendeRole = currentUser.roles.find(
+    (x: Role) => x.name === "grunnleggende"
+  );
+  const hasKomponenterRole = currentUser.roles.find(
+    (x: Role) => x.name === "komponenter"
+  );
+  const hasPrinsipperRole = currentUser.roles.find(
+    (x: Role) => x.name === "prinsipper"
+  );
+  const hasGodPraksisForfatterRole = currentUser.roles.find(
+    (x: Role) => x.name === "god_praksis_forfatter"
+  );
 
   return S.list()
     .title("Innholdstyper")
@@ -67,91 +80,107 @@ export const structure = async (
             S.divider(),
           ]
         : []),
-      S.listItem()
-        .title("God Praksis")
-        .icon(OkHandIcon)
-        .child(
-          S.list()
-            .title("God Praksis")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`godpraksis_landingsside`)
-                .id(`godpraksis_landingsside_id1`),
-              S.divider(),
-              ...(await GodPraksisPanes(getClient, S)),
-            ])
-        ),
-      S.listItem()
-        .title("Prinsipper")
-        .icon(BulbOutlineIcon)
-        .child(
-          S.list()
-            .title("Prinsipper")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`prinsipper_landingsside`)
-                .id(`prinsipper_landingsside_id1`),
-              S.divider(),
-              ...prinsippKategorier.map(({ value, title }) =>
-                S.listItem()
-                  .title(title)
-                  .child(
-                    S.documentList()
-                      .title(title)
-                      .filter(
-                        `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`
-                      )
-                      .params({ value })
-                  )
+      ...(hasGodPraksisForfatterRole || adminOrDev
+        ? [
+            S.listItem()
+              .title("God Praksis")
+              .icon(OkHandIcon)
+              .child(
+                S.list()
+                  .title("God Praksis")
+                  .items([
+                    S.documentListItem()
+                      .title(`Landingsside`)
+                      .schemaType(`godpraksis_landingsside`)
+                      .id(`godpraksis_landingsside_id1`),
+                    S.divider(),
+                    ...(await GodPraksisPanes(getClient, S)),
+                  ])
               ),
-              S.listItem()
-                .title("Alle artikler")
-                .child(S.documentTypeList("aksel_prinsipp")),
-            ])
-        ),
-      S.listItem()
-        .title("Grunnleggende")
-        .icon(TokenIcon)
-        .child(
-          S.list()
-            .title("Grunnleggende")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`grunnleggende_landingsside`)
-                .id(`grunnleggende_landingsside_id1`),
-              S.divider(),
-              ...(await PanesWithCount(
-                "ds_artikkel",
-                grunnleggendeKategorier,
-                getClient,
-                S
-              )),
-            ])
-        ),
-      S.listItem()
-        .title("Komponenter")
-        .icon(JoystickIcon)
-        .child(
-          S.list()
-            .title("Komponenter")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`komponent_landingsside`)
-                .id(`komponent_landingsside_id1`),
-              S.divider(),
-              ...(await PanesWithCount(
-                "komponent_artikkel",
-                komponentKategorier,
-                getClient,
-                S
-              )),
-            ])
-        ),
-      ...(isBlogger || adminOrDev
+          ]
+        : []),
+      ...(hasPrinsipperRole || adminOrDev
+        ? [
+            S.listItem()
+              .title("Prinsipper")
+              .icon(BulbOutlineIcon)
+              .child(
+                S.list()
+                  .title("Prinsipper")
+                  .items([
+                    S.documentListItem()
+                      .title(`Landingsside`)
+                      .schemaType(`prinsipper_landingsside`)
+                      .id(`prinsipper_landingsside_id1`),
+                    S.divider(),
+                    ...prinsippKategorier.map(({ value, title }) =>
+                      S.listItem()
+                        .title(title)
+                        .child(
+                          S.documentList()
+                            .title(title)
+                            .filter(
+                              `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`
+                            )
+                            .params({ value })
+                        )
+                    ),
+                    S.listItem()
+                      .title("Alle artikler")
+                      .child(S.documentTypeList("aksel_prinsipp")),
+                  ])
+              ),
+          ]
+        : []),
+      ...(hasGrunnleggendeRole || adminOrDev
+        ? [
+            S.listItem()
+              .title("Grunnleggende")
+              .icon(TokenIcon)
+              .child(
+                S.list()
+                  .title("Grunnleggende")
+                  .items([
+                    S.documentListItem()
+                      .title(`Landingsside`)
+                      .schemaType(`grunnleggende_landingsside`)
+                      .id(`grunnleggende_landingsside_id1`),
+                    S.divider(),
+                    ...(await PanesWithCount(
+                      "ds_artikkel",
+                      grunnleggendeKategorier,
+                      getClient,
+                      S
+                    )),
+                  ])
+              ),
+          ]
+        : []),
+      ...(hasKomponenterRole || adminOrDev
+        ? [
+            S.listItem()
+              .title("Komponenter")
+              .icon(JoystickIcon)
+              .child(
+                S.list()
+                  .title("Komponenter")
+                  .items([
+                    S.documentListItem()
+                      .title(`Landingsside`)
+                      .schemaType(`komponent_landingsside`)
+                      .id(`komponent_landingsside_id1`),
+                    S.divider(),
+                    ...(await PanesWithCount(
+                      "komponent_artikkel",
+                      komponentKategorier,
+                      getClient,
+                      S
+                    )),
+                  ])
+              ),
+          ]
+        : []),
+      ...(hasBloggerRole || adminOrDev
         ? [
             S.listItem()
               .title("Produktbloggen")
