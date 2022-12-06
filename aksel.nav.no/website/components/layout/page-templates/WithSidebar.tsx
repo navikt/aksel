@@ -123,7 +123,7 @@ export const WithSidebar = ({
                   </div>
                 </div>
                 {variant === "page" && pageProps.status?.bilde && (
-                  <div className="xs:block relative hidden aspect-square h-[12.5rem]">
+                  <div className="relative hidden aspect-square h-[12.5rem] lg:block">
                     <Image
                       src={urlFor(pageProps.status?.bilde).auto("format").url()}
                       decoding="async"
