@@ -11,6 +11,43 @@ import { capitalize } from "@/utils";
 import Image from "next/image";
 import { TableOfContentsv2 } from "components/website-modules/TOCv2";
 
+const HeaderCube = ({ ...props }) => (
+  <svg
+    width="354"
+    height="280"
+    viewBox="0 0 354 280"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden
+    {...props}
+  >
+    <path
+      d="M507.265 293.265L389.355 175.355V293.089L507.265 410.999V293.265Z"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M436.496 222.496L318.645 104.645L200.794 222.496L318.645 340.347L436.496 222.496Z"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M247.934 269.754L130.024 151.844V269.577L247.934 387.487V269.754Z"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M59.3133 81.1334L177.223 -36.7767L177.223 80.9564L59.3133 198.867V81.1334Z"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export const WithSidebar = ({
   children,
   sidebar,
@@ -38,19 +75,26 @@ export const WithSidebar = ({
             <main
               tabIndex={-1}
               id="hovedinnhold"
-              className="min-h-screen-header md:max-w-screen-sidebar relative w-full pr-6 focus:outline-none"
+              className="min-h-screen-header md:max-w-screen-sidebar xs:pl-6 xs:pr-6 relative w-full px-4 focus:outline-none md:pl-0"
             >
               <div
-                className={cl("mb-10 rounded-xl pl-6 md:pl-10", {
-                  "bg-surface-subtle flex items-center justify-between pr-6 md:pr-10":
-                    variant === "page",
-                  "bg-deepblue-700 grid py-24 pb-6": variant !== "page",
-                })}
+                className={cl(
+                  "mb-10 min-h-[12.5rem] rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
+                  {
+                    "bg-surface-subtle flex items-center justify-between":
+                      variant === "page",
+                    "bg-deepblue-700 grid py-[4.25rem] pb-6":
+                      variant !== "page",
+                  }
+                )}
               >
-                <div>
+                <div className="z-[1]">
                   {variant === "page" && pageProps?.kategori && (
                     <Detail as="div" className="mb-2">
-                      <NextLink href={`/${pageType.type}`} passHref>
+                      <NextLink
+                        href={`/${pageType.type.toLowerCase()}`}
+                        passHref
+                      >
                         <Link className="text-text-default">
                           {capitalize(pageType.type)}
                         </Link>
@@ -58,29 +102,40 @@ export const WithSidebar = ({
                       / {capitalize(pageProps.kategori)}
                     </Detail>
                   )}
+
                   <Heading
                     level="1"
                     size="xlarge"
                     className={cl({
                       "text-deepblue-800": variant === "page",
-                      "text-text-on-action": variant !== "page",
+                      "text-text-on-action bg-deepblue-700/80 w-fit":
+                        variant !== "page",
                     })}
                   >
                     {pageType.title}
                   </Heading>
-                  {intro && intro}
+                  <div
+                    className={cl({
+                      "bg-deepblue-700/80 w-fit": variant !== "page",
+                    })}
+                  >
+                    {intro && intro}
+                  </div>
                 </div>
                 {variant === "page" && pageProps.status?.bilde && (
-                  <div className="relative aspect-square h-[12.5rem]">
+                  <div className="xs:block relative hidden aspect-square h-[12.5rem]">
                     <Image
                       src={urlFor(pageProps.status?.bilde).auto("format").url()}
                       decoding="async"
-                      /* width="200px"
-                  height="200px" */
                       layout="fill"
                       objectFit="contain"
                       aria-hidden
                     />
+                  </div>
+                )}
+                {variant === "landingPage" && (
+                  <div className="xs:block absolute top-0 right-0 hidden">
+                    <HeaderCube className="z-0 max-h-full" />
                   </div>
                 )}
               </div>
