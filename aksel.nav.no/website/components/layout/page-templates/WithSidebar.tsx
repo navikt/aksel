@@ -1,5 +1,5 @@
 import { PageTypeT, SidebarT } from "@/lib";
-import { Heading, Ingress } from "@navikt/ds-react";
+import { Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import { Sidebar } from "components/layout/sidebar/Sidebar";

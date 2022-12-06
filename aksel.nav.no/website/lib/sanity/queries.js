@@ -360,8 +360,8 @@ const landingsSideQuery = (t) => {
 
 export const komponentLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
   "komponenter"
-)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,slug,status,kategori}}`;
+)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug_v2,status,kategori}}`;
 
 export const grunnleggendeLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
   "grunnleggende"
-)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,slug,status,kategori}}`;
+)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug_v2,status,kategori}}`;
