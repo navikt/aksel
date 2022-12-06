@@ -70,7 +70,7 @@ export const Header = ({
             <LinkElement name="God praksis" href="/god-praksis" />
             <LinkElement name="Grunnleggende" href="/grunnleggende" />
             <LinkElement name="Komponenter" href="/komponenter" />
-            <LinkElement name="Blogg" href="/produktbloggen" />
+            <LinkElement name="Bloggen" href="/produktbloggen" />
           </div>
           <div className="h-full md:hidden">
             <Hamburger />
