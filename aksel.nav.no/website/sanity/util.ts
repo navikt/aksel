@@ -24,11 +24,47 @@ export const getTemplates = (roles: Role[]) => {
         templateId: "aksel_blogg",
       },
     ],
+    god_praksis_forfatter: [
+      {
+        id: "godPraksisForfatterRole",
+        templateId: "aksel_artikkel",
+      },
+    ],
+    grunnleggende: [
+      {
+        id: "grunnleggendeRole",
+        templateId: "ds_artikkel",
+      },
+    ],
+    komponenter: [
+      {
+        id: "komponenterRole",
+        templateId: "komponent_artikkel",
+      },
+    ],
+    prinsipper: [
+      {
+        id: "prinsippereRole",
+        templateId: "aksel_prinsipp",
+      },
+    ],
+    profil: [
+      {
+        id: "profilRole",
+        templateId: "editor",
+      },
+    ],
+    tema_ansvarlig: [
+      {
+        id: "temaAnsvarligRole",
+        templateId: "aksel_tema",
+      },
+    ],
   };
   return roles
     .map((role) => {
-      if (templates[role.name]) {
-        return templates[role.name];
+      if (templates[role.name.replaceAll("-", "_")]) {
+        return templates[role.name.replaceAll("-", "_")];
       }
       return [];
     })
