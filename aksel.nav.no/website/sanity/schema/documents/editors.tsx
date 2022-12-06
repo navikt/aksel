@@ -223,14 +223,14 @@ export const Editors = defineType({
   preview: {
     select: {
       title: "title",
-      user_id: "user_id",
+      anonym: "anonym",
     },
     prepare(selection) {
-      const { title } = selection;
+      const { title, anonym } = selection;
 
       return {
         title,
-        subtitle: "Min profilside",
+        subtitle: anonym ? "Profilside | Anonym" : "Profilside",
         media: () => (
           <Avatar
             size={100}
