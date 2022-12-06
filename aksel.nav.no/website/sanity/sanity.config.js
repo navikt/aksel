@@ -11,6 +11,7 @@ import {
   structure,
 } from "./custom-plugins";
 import { form } from "./form";
+import { getTemplates } from "./util";
 
 import schemas from "./schema";
 
@@ -29,7 +30,7 @@ const sharedConfig = {
       if (adminOrDev) {
         return prev;
       }
-      return [];
+      return getTemplates(currentUser.roles);
     },
   },
   plugins: [
