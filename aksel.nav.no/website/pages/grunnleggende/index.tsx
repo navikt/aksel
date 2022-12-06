@@ -23,7 +23,7 @@ const Page = (): JSX.Element => {
       >
         <div className="min-h-screen-header flex w-full">Grunnleggende</div>
       </main>
-      <Footer variant="aksel" />
+      <Footer />
     </>
   );
 };

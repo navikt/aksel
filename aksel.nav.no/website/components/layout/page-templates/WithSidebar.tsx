@@ -81,7 +81,7 @@ export const WithSidebar = ({
                 className={cl(
                   "mb-10 min-h-[12.5rem] rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
                   {
-                    "bg-surface-subtle flex items-center justify-between":
+                    "bg-surface-subtle ring-border-subtle flex items-center  justify-between ring-1 ring-inset":
                       variant === "page",
                     "bg-deepblue-700 grid py-[4.25rem] pb-6":
                       variant !== "page",
@@ -130,6 +130,7 @@ export const WithSidebar = ({
                       layout="fill"
                       objectFit="contain"
                       aria-hidden
+                      priority
                     />
                   </div>
                 )}
@@ -154,7 +155,7 @@ export const WithSidebar = ({
             </main>
           </div>
         </div>
-        <Footer variant="ds" />
+        <Footer />
       </div>
     </>
   );

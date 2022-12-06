@@ -66,7 +66,7 @@ const AkselStandaloneTemplate = ({
           </div>
         </div>
       </main>
-      <Footer variant="aksel" />
+      <Footer />
     </>
   );
 };

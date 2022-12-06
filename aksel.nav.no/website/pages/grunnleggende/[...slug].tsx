@@ -37,7 +37,7 @@ const Page = ({
             </main>
           </div>
         </div>
-        <Footer variant="ds" />
+        <Footer />
       </div>
     </>
   );

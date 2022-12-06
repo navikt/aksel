@@ -156,7 +156,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
             </div>
           </div>
         </main>
-        <Footer variant="aksel" />
+        <Footer />
       </div>
     </>
   );

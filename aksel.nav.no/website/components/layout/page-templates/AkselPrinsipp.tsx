@@ -179,7 +179,7 @@ const AkselPrinsippTemplate = ({
           </div>
         </article>
       </main>
-      <Footer variant="aksel" />
+      <Footer />
     </>
   );
 };

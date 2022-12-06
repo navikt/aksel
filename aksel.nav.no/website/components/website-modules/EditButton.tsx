@@ -1,13 +1,9 @@
-/**
- * https://github.com/navikt/detsombetyrnoe/blob/main/src/components/PreviewBanner.tsx#L17
- */
 import { Edit } from "@navikt/ds-icons";
 import { Tooltip } from "@navikt/ds-react";
-import cl from "classnames";
 import { useContext } from "react";
 import { IdContext, useCheckAuth } from "./utils";
 
-function EditButton({ variant }: { variant: "ds" | "aksel" }): JSX.Element {
+function EditButton(): JSX.Element {
   const idCtx = useContext(IdContext);
 
   const validUser = useCheckAuth();
@@ -24,13 +20,7 @@ function EditButton({ variant }: { variant: "ds" | "aksel" }): JSX.Element {
             href={`https://verktoykasse.sanity.studio/intent/edit/id=${idCtx?.id}`}
             target="_blank"
             rel="noreferrer"
-            className={cl(
-              "editbutton absolute top-0 right-0 flex  -translate-y-[99%] items-center gap-2 overflow-hidden rounded-tl px-2 py-1  text-white transition-transform hover:translate-x-0",
-              {
-                "bg-gray-900 hover:bg-gray-700": variant === "ds",
-                "bg-deepblue-800 hover:bg-deepblue-700": variant === "aksel",
-              }
-            )}
+            className="editbutton bg-deepblue-800 hover:bg-deepblue-700 absolute top-0 right-0 flex  -translate-y-[99%] items-center gap-2 overflow-hidden rounded-tl px-2 py-1  text-white transition-transform hover:translate-x-0"
             aria-hidden
             tabIndex={-1}
           >

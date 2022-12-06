@@ -1,21 +1,15 @@
 import { BodyShort, Heading, Link } from "@navikt/ds-react";
-import cl from "classnames";
+
 import NextLink from "next/link";
 import { EditButton, ScrollTop } from "../..";
 import FooterForm from "./FooterForm";
 
-const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
+const Footer = () => {
   return (
     <footer
       data-hj-suppress
       data-theme="dark"
-      className={cl(
-        "algolia-ignore-index text-text-on-inverted relative flex w-full justify-center  px-4",
-        {
-          "bg-deepblue-800": variant === "aksel",
-          "bg-gray-900": variant === "ds",
-        }
-      )}
+      className="algolia-ignore-index text-text-on-inverted bg-deepblue-800 relative flex w-full justify-center px-4"
     >
       <div className="dynamic-wrapper relative grid w-full gap-16 py-12">
         <div className="grid gap-12 xl:grid-cols-3 xl:gap-6">
@@ -39,26 +33,22 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
                   </Link>
                 </NextLink>
               </li>
-              {variant === "aksel" && (
-                <li>
-                  <Link
-                    className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
-                    href="https://nav-it.slack.com/archives/C0370ADS0HX"
-                  >
-                    Aksel på Slack
-                  </Link>
-                </li>
-              )}
-              {variant === "ds" && (
-                <li>
+              <li>
+                <Link
+                  className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
+                  href="https://nav-it.slack.com/archives/C0370ADS0HX"
+                >
+                  Aksel på Slack
+                </Link>
+              </li>
+              {/* <li>
                   <Link
                     className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
                     href="https://nav-it.slack.com/archives/C7NE7A8UF"
                   >
                     Designsystemet på Slack
                   </Link>
-                </li>
-              )}
+                </li> */}
             </BodyShort>
           </div>
           <FooterForm />
@@ -111,7 +101,7 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
           </div>
         </div>
       </div>
-      <EditButton variant={variant} />
+      <EditButton />
     </footer>
   );
 };

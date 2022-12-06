@@ -49,6 +49,7 @@ const ComponentOverview = ({
                     layout="fixed"
                     objectFit="contain"
                     alt={x?.heading + " thumbnail"}
+                    aria-hidden
                   />
                 ) : (
                   <svg
@@ -98,11 +99,11 @@ const ComponentOverview = ({
                       className="z-10 before:absolute before:inset-0 focus:outline-none group-hover:underline"
                     >
                       {x.heading}
+                      <span className="absolute top-4 left-4">
+                        <StatusTag status={x?.status?.tag} />
+                      </span>
                     </Heading>
                   </Nextlink>
-                  <span className="absolute top-4 left-4">
-                    <StatusTag status={x?.status?.tag} />
-                  </span>
                 </span>
               </div>
             </div>

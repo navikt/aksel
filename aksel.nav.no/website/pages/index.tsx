@@ -413,7 +413,7 @@ const Forside = ({
           </section>
         </main>
 
-        <Footer variant="aksel" />
+        <Footer />
       </div>
     </>
   );

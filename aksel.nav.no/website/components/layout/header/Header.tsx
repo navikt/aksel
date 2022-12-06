@@ -13,9 +13,9 @@ const LinkElement = ({ name, href }) => {
         className={cl(
           "grid h-full place-items-center rounded-full px-4 focus:outline-none",
           {
-            "bg-surface-selected text-text-action-selected hover:bg-surface-action-subtle-hover focus:shadow-focus-gap":
+            "bg-surface-selected text-text-action-selected hover:text-deepblue-700 hover:bg-surface-action-subtle-hover focus:shadow-focus-gap":
               asPath.startsWith(href),
-            "hover:bg-surface-action-subtle-hover hover:text-text-action-selected text-text-subtle focus-visible:shadow-focus":
+            "hover:bg-surface-action-subtle-hover hover:text-deepblue-700 text-text-subtle focus-visible:shadow-focus":
               !asPath.startsWith(href),
           }
         )}

@@ -24,7 +24,7 @@ export const NoSidebarLayout = ({
         </div>
         {aside}
       </main>
-      <Footer variant="aksel" />
+      <Footer />
     </>
   );
 };

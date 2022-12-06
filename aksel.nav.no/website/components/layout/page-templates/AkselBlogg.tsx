@@ -136,7 +136,7 @@ const AkselBloggTemplate = ({
           </div>
         </div>
       </main>
-      <Footer variant="aksel" />
+      <Footer />
     </>
   );
 };
