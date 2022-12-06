@@ -18,7 +18,7 @@ const AkselBloggTemplate = ({
     return null;
   }
 
-  const authors = (data?.contributors as any)?.map((x) => x?.title);
+  const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
 
   return (
     <>

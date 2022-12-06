@@ -26,7 +26,7 @@ const AkselPrinsippTemplate = ({
     return null;
   }
 
-  const authors = (data?.contributors as any)?.map((x) => x?.title);
+  const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
   const mainPage = data?.prinsipp?.hovedside;
 
   return (

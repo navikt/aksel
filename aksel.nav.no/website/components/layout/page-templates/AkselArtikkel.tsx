@@ -27,7 +27,7 @@ const AkselArtikkelTemplate = ({
     return null;
   }
 
-  const authors = (data?.contributors as any)?.map((x) => x?.title);
+  const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
 
   const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
 

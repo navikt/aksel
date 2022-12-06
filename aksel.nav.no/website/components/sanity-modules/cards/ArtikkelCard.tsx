@@ -15,9 +15,10 @@ export const ArtikkelCard = ({
     slug: string;
     tema: string[];
     source?: string;
-    contributor: string | null;
+    contributor: { title: string } | null;
   }
 >) => {
+  console.log(contributor);
   return (
     <NextLink
       href={{
@@ -47,7 +48,9 @@ export const ArtikkelCard = ({
         </Heading>
         {ingress && <BodyShort className="mt-2 ">{ingress}</BodyShort>}
         <span className="absolute bottom-5 flex gap-2">
-          {contributor && <Detail as="span">{abbrName(contributor)}</Detail>}
+          {contributor && (
+            <Detail as="span">{abbrName(contributor.title)}</Detail>
+          )}
           {contributor && (
             <Detail as="span" className="text-text-subtle">
               —
