@@ -35,6 +35,7 @@ const Page = ({
         <meta property="og:title" content={`${page.heading} - Aksel`} />
       </Head>
       <WithSidebar
+        withToc
         sidebar={sidebar}
         pageType={{ type: "Komponenter", title: page?.heading }}
         intro={

@@ -9,7 +9,6 @@ import cl from "classnames";
 import NextLink from "next/link";
 import { capitalize } from "@/utils";
 import Image from "next/image";
-import TableOfContents from "components/website-modules/TOC";
 import { TableOfContentsv2 } from "components/website-modules/TOCv2";
 
 export const WithSidebar = ({
@@ -19,6 +18,7 @@ export const WithSidebar = ({
   intro,
   pageProps,
   variant = "landingPage",
+  withToc = false,
 }: {
   children: ReactNode;
   sidebar: SidebarT;
@@ -26,6 +26,7 @@ export const WithSidebar = ({
   pageProps: any;
   intro?: ReactNode;
   variant?: "page" | "landingPage";
+  withToc?: boolean;
 }) => {
   return (
     <>
@@ -83,11 +84,13 @@ export const WithSidebar = ({
                   </div>
                 )}
               </div>
-              <div className="flex pl-6 md:pl-10">
-                <TableOfContentsv2
-                  changedState={pageProps["content"]}
-                  hideToc={false}
-                />
+              <div className={cl("pl-6 md:pl-10", { flex: withToc })}>
+                {withToc && (
+                  <TableOfContentsv2
+                    changedState={pageProps["content"]}
+                    hideToc={false}
+                  />
+                )}
                 <div>
                   {children}
                   <Feedback docId={pageProps?._id} docType={pageProps?._type} />
