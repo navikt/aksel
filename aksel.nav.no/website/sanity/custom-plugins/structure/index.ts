@@ -1,20 +1,20 @@
 import { Picture } from "@navikt/ds-icons";
-import { StructureBuilder } from "sanity/desk";
 import {
-  OkHandIcon,
-  BulbOutlineIcon,
-  TokenIcon,
-  JoystickIcon,
-  BookIcon,
   AccessDeniedIcon,
+  BookIcon,
+  BulbOutlineIcon,
+  JoystickIcon,
+  OkHandIcon,
+  TokenIcon,
 } from "@sanity/icons";
+import Iframe from "sanity-plugin-iframe-pane";
+import { StructureBuilder } from "sanity/desk";
 import {
   bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
   prinsippKategorier,
 } from "../../config";
-import Iframe from "sanity-plugin-iframe-pane";
 
 import { GodPraksisPanes } from "./god-praksis";
 import { PanesWithCount } from "./with-count";
@@ -56,6 +56,7 @@ export const structure = async (
   const adminOrDev = currentUser.roles.find((x) =>
     ["developer", "administrator"].includes(x.name)
   );
+  const isBlogger = currentUser.roles.find((x) => x.name === "blogger");
 
   return S.list()
     .title("Innholdstyper")
@@ -150,26 +151,30 @@ export const structure = async (
               )),
             ])
         ),
-      S.listItem()
-        .title("Produktbloggen")
-        .icon(BookIcon)
-        .child(
-          S.list()
-            .title("Produktbloggen")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`blogg_landingsside`)
-                .id(`blogg_landingsside_id1`),
-              S.divider(),
-              ...(await PanesWithCount(
-                "aksel_blogg",
-                bloggKategorier,
-                getClient,
-                S
-              )),
-            ])
-        ),
+      ...(isBlogger || adminOrDev
+        ? [
+            S.listItem()
+              .title("Produktbloggen")
+              .icon(BookIcon)
+              .child(
+                S.list()
+                  .title("Produktbloggen")
+                  .items([
+                    S.documentListItem()
+                      .title(`Landingsside`)
+                      .schemaType(`blogg_landingsside`)
+                      .id(`blogg_landingsside_id1`),
+                    S.divider(),
+                    ...(await PanesWithCount(
+                      "aksel_blogg",
+                      bloggKategorier,
+                      getClient,
+                      S
+                    )),
+                  ])
+              ),
+          ]
+        : []),
       ...(adminOrDev
         ? [
             S.divider(),
