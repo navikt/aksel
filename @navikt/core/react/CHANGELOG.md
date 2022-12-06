@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.0.8
+
+### Patch Changes
+
+- Confirmationpanel wrappet med div
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.8
+
 ## 2.0.7
 
 ### Patch Changes
