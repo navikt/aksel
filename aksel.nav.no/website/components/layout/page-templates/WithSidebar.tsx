@@ -9,6 +9,8 @@ import cl from "classnames";
 import NextLink from "next/link";
 import { capitalize } from "@/utils";
 import Image from "next/image";
+import TableOfContents from "components/website-modules/TOC";
+import { TableOfContentsv2 } from "components/website-modules/TOCv2";
 
 export const WithSidebar = ({
   children,
@@ -81,9 +83,15 @@ export const WithSidebar = ({
                   </div>
                 )}
               </div>
-              <div className="pl-6 md:pl-10">
-                {children}
-                <Feedback docId={pageProps?._id} docType={pageProps?._type} />
+              <div className="flex pl-6 md:pl-10">
+                <TableOfContentsv2
+                  changedState={pageProps["content"]}
+                  hideToc={false}
+                />
+                <div>
+                  {children}
+                  <Feedback docId={pageProps?._id} docType={pageProps?._type} />
+                </div>
               </div>
             </main>
           </div>
