@@ -11,11 +11,11 @@ const LinkElement = ({ name, href }) => {
     <Link href={href} passHref>
       <a
         className={cl(
-          "grid h-full place-items-center rounded px-2 focus:outline-none",
+          "grid h-full place-items-center rounded-full px-4 focus:outline-none",
           {
-            "bg-surface-action-selected text-text-on-action hover:bg-surface-action-selected-hover focus:shadow-focus-gap":
+            "bg-surface-selected text-text-action-selected hover:bg-surface-action-subtle-hover focus:shadow-focus-gap":
               asPath.startsWith(href),
-            "hover:bg-surface-action-subtle-hover focus-visible:shadow-focus":
+            "hover:bg-surface-action-subtle-hover hover:text-text-action-selected text-text-subtle focus-visible:shadow-focus":
               !asPath.startsWith(href),
           }
         )}
@@ -33,16 +33,21 @@ const LinkElement = ({ name, href }) => {
   );
 };
 
-export const Header = ({ blogg = false }: { blogg?: boolean }) => {
+export const Header = ({
+  variant = "default",
+}: {
+  variant?: "blogg" | "subtle" | "default";
+}) => {
   return (
     <>
       <a className="skiplink" href="#hovedinnhold" tabIndex={-1}>
         Hopp til innhold
       </a>
       <header
-        className={cl("z-20 flex h-20 items-center", {
-          "bg-surface-warning-subtle": blogg,
-          "bg-surface-default": !blogg,
+        className={cl("h-header z-20 flex items-center", {
+          "bg-surface-warning-subtle": variant === "blogg",
+          "bg-surface-default": variant === "default",
+          "bg-surface-subtle": variant === "subtle",
         })}
       >
         <div className="xs:pr-6 xs:pl-4 mx-auto flex h-11 w-full max-w-7xl items-center justify-between pr-4 pl-4">
@@ -55,13 +60,13 @@ export const Header = ({ blogg = false }: { blogg?: boolean }) => {
                   e.currentTarget.getAttribute("href")
                 )
               }
-              className="hover:bg-surface-action-subtle-hover focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
+              className="focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
             >
               <Logo />
               <span className="sr-only">Aksel</span>
             </a>
           </Link>
-          <div className="hidden h-full gap-4 md:flex">
+          <div className="hidden h-full gap-2 md:flex">
             <LinkElement name="God praksis" href="/god-praksis" />
             <LinkElement name="Grunnleggende" href="/grunnleggende" />
             <LinkElement name="Komponenter" href="/komponenter" />

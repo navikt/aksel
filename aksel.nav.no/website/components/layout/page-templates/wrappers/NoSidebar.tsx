@@ -13,7 +13,7 @@ export const NoSidebarLayout = ({
 }) => {
   return (
     <>
-      <Header />
+      <Header variant="subtle" />
       <main
         tabIndex={-1}
         id="hovedinnhold"
