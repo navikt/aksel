@@ -6,10 +6,9 @@ export const Skrivehjelp = defineType({
   type: "document",
   fields: [
     defineField({
-      title: "Tittel",
-      name: "title",
-      type: "string",
-      validation: (Rule) => Rule.required(),
+      title: "Test doc skrivehjelp",
+      name: "testDoc_writeHelp",
+      type: "riktekst_enkel",
     }),
   ],
 });
