@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { block, headingStyles } from "../objects";
 
 export const Skrivehjelp = defineType({
   title: "Skrivehjelp",
@@ -8,7 +9,14 @@ export const Skrivehjelp = defineType({
     defineField({
       title: "Test doc skrivehjelp",
       name: "testDoc_writeHelp",
-      type: "riktekst_enkel",
+      type: "array",
+      of: [
+        {
+          ...block,
+          //@ts-ignore
+          styles: [...headingStyles],
+        },
+      ],
     }),
   ],
 });
