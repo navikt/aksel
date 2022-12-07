@@ -8,6 +8,7 @@ export default {
     document.Forside,
     document.Redirect,
     document.TestDoc,
+    document.Skrivehjelp,
 
     /* Komponentsider */
     document.KodeEksempelDoc,

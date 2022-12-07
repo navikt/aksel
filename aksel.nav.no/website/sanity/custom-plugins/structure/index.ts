@@ -41,6 +41,7 @@ const filtered = [
   "aksel_tema",
   "godpraksis_landingsside",
   "aksel_artikkel",
+  "skrivehjelp",
 ];
 
 export const structure = async (
@@ -261,6 +262,11 @@ export const structure = async (
                           .title("Props")
                           .filter(`_type == 'ds_props'`)
                       ),
+                    S.documentListItem()
+                      .title(`Skrivehjelp`)
+                      .schemaType(`skrivehjelp`)
+                      .icon(Picture)
+                      .id(`skrivehjelp_123`),
                   ])
               ),
           ]
