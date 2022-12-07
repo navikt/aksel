@@ -152,6 +152,8 @@ export const Editors = defineType({
     defineField({
       title: "Navn",
       name: "title",
+      description:
+        "Det er frivillig å vise navnet ditt på Aksel. Hvis du ikke ønsker at navnet ditt skal være tilgjengelig kan du velge 'Gjør meg anonym'.",
       type: "string",
       validation: (Rule) => Rule.required().error("Må legge til navn"),
     }),
