@@ -86,6 +86,20 @@ Anbefalt størrelse er 1200:630px
       };
 
       /**
+       * Gjør meg anonym - `Boolean`
+På artikler bytter vi ut navnet ditt med et tullenavn. Eks. Sprudlende Tiger
+       */
+      anonym?: boolean;
+
+      /**
+       * Anonymt navn - `Slug`
+       */
+      anon_navn?: {
+        _type: "anon_navn";
+        current: string;
+      };
+
+      /**
        * Roller - `Array`
 eks: Utvikler, Webanalytiker, uu-spesialist
        */

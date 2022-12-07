@@ -19,12 +19,14 @@ const main = async () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const transactionClient = noCdnClient(token).transaction();
 
-  const docs = await noCdnClient(token).fetch(`*[_type in ["ds_artikkel"]]`);
+  const docs = await noCdnClient(token).fetch(
+    `*[_type in ["ds_artikkel"] && defined(layout)]`
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const newData = [];
 
-  docs.forEach((data) => {
+  /* docs.forEach((data) => {
     data?.slug?.current
       ? newData.push({
           _id: data._id,
@@ -38,9 +40,9 @@ const main = async () => {
           },
         })
       : console.log(data.heading);
-  });
+  }); */
 
-  for (const data of newData) {
+  /* for (const data of newData) {
     const id = data._id;
     delete data._id;
     transactionClient.patch(id, (p) =>
@@ -48,6 +50,10 @@ const main = async () => {
         .set({ ...data })
         .unset(["metadata_feedback", "isMigrated", "artikkel_type"])
     );
+  } */
+  for (const doc of docs) {
+    console.log(doc?.heading);
+    transactionClient.patch(doc._id, (p) => p.unset(["layout"]));
   }
   /* transactionClient.create({
     _type: "redirect",
