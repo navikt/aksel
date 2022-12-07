@@ -1,4 +1,5 @@
 import { defineField } from "sanity";
+import { WriteHelp } from "../../custom-components/WriteHelp";
 
 type DocumentType =
   | "aksel_blogg"
@@ -10,11 +11,13 @@ type DocumentType =
 
 export const skrivehjelp = (documentType: DocumentType) => {
   return defineField({
-    title: "Skrivehjelp",
+    title: " ",
     name: "writeHelp",
     type: "string",
     group: "skrivehjelp",
-    description: "Hjelpen er her!",
+    components: {
+      input: WriteHelp,
+    },
     options: {
       //@ts-ignore
       docType: documentType,

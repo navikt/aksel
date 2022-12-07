@@ -1,4 +1,4 @@
-import { Picture } from "@navikt/ds-icons";
+import { FileContent, Picture } from "@navikt/ds-icons";
 import {
   AccessDeniedIcon,
   BookIcon,
@@ -265,8 +265,8 @@ export const structure = async (
                     S.documentListItem()
                       .title(`Skrivehjelp`)
                       .schemaType(`skrivehjelp`)
-                      .icon(Picture)
-                      .id(`skrivehjelp_123`),
+                      .icon(FileContent)
+                      .id(`skrivehjelp`),
                   ])
               ),
           ]
