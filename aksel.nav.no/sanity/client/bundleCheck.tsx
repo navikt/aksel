@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import config from "config:sanity";
 
-const BUNDLE_CHECK_INTERVAL = 60 * 1000;
-const BUNDLE_CHECK_INTERVAL_DECLINED = 60 * 10000;
+const BUNDLE_CHECK_INTERVAL = 60 * 5000;
+const BUNDLE_CHECK_INTERVAL_DECLINED = 60 * 20000;
 const CHANGES_AVAILABLE_MESSAGE =
   "Studioet er har nye endringer! For å ta i bruk disse vil siden nå oppdateres for den nyeste versjonen.";
 
@@ -25,6 +25,11 @@ const BundleChecker = () => {
     interval = createInterval();
 
     return () => clearInterval(interval);
+
+    /*
+    TODO: @release uncomment for redirecting to new studio
+    */
+    /* window.location.replace(`http://aksel.nav.no/admin`); */
   }, []);
 
   // We're a react component, in theory, so return null to not render anything
