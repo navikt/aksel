@@ -1,3 +1,4 @@
+import { SanityBlockContent } from "@/sanity-block";
 import { useClient } from "sanity";
 import useSWR from "swr";
 
@@ -18,7 +19,7 @@ export const WriteHelp = (props) => {
 
   return (
     <div className="flex shrink-0 items-center justify-between">
-      hello world
+      <SanityBlockContent blocks={content} />
     </div>
   );
 };
