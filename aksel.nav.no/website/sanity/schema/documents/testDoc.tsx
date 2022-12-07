@@ -10,6 +10,7 @@ export const TestDoc = defineType({
     defineField({
       name: "updateInfo",
       type: "updateWarning",
+      title: " ",
     }),
     defineField({
       name: "testInput",
