@@ -19,4 +19,8 @@ export const groups = [
     name: "seo",
     title: "SEO",
   },
+  {
+    name: "skrivehjelp",
+    title: "Skrivehjelp",
+  },
 ];
