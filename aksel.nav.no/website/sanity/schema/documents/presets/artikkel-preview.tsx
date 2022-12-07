@@ -37,7 +37,7 @@ export const artikkelPreview = (_type: string) => {
                 : `${diff} dager`
             } | ${_type} ${
               tema ?? kategori
-                ? `${(tema ?? kategori) && "/"}${tema ?? kategori ?? ``}`
+                ? `${(tema ?? kategori) && "/ "}${tema ?? kategori ?? ``}`
                 : ""
             }`,
           };
@@ -46,7 +46,7 @@ export const artikkelPreview = (_type: string) => {
           title: heading,
           subtitle: `${_type} ${
             tema ?? kategori
-              ? `${(tema ?? kategori) && "/"}${tema ?? kategori ?? ``}`
+              ? `${(tema ?? kategori) && "/ "}${tema ?? kategori ?? ``}`
               : ""
           }`,
         };
