@@ -1,0 +1,16 @@
+<svg width="600" height="338" viewBox="0 0 600 338" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_680_102617)">
+<rect width="600" height="337.5" rx="8" transform="matrix(-1 8.74228e-08 8.74228e-08 1 600 0)" fill="#005B82"/>
+<path d="M418.087 168.75L182.267 -67.0702L417.733 -67.0705L653.553 168.75L418.087 168.75Z" stroke="#C0B2D2" stroke-width="3" stroke-linejoin="round"/>
+<path d="M417.733 -67.0703L181.913 168.75L417.733 404.57L653.554 168.75L417.733 -67.0703Z" stroke="#C0B2D2" stroke-width="3" stroke-linejoin="round"/>
+<path d="M182.267 -67.0702L-53.5534 168.75L181.913 168.75L417.733 -67.0702L182.267 -67.0702Z" stroke="#C0B2D2" stroke-width="3" stroke-linejoin="round"/>
+<path d="M182.267 -67.0701L-53.5535 168.75L182.267 404.57L418.087 168.75L182.267 -67.0701Z" stroke="#C0B2D2" stroke-width="3" stroke-linejoin="round"/>
+<path d="M418.087 168.75L182.267 404.57L417.734 404.57L653.554 168.75L418.087 168.75Z" stroke="#C0B2D2" stroke-width="3" stroke-linejoin="round"/>
+<path d="M182.267 404.57L-53.5536 168.75L181.913 168.75L417.733 404.57L182.267 404.57Z" stroke="#C0B2D2" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_680_102617">
+<rect width="600" height="337.5" rx="8" transform="matrix(-1 8.74228e-08 8.74228e-08 1 600 0)" fill="white"/>
+</clipPath>
+</defs>
+</svg>
