@@ -44,6 +44,7 @@ export const LatestBlogs = ({
   if (!bloggs || bloggs.length < 3) {
     return null;
   }
+
   return (
     <div
       className={cl("xs:px-4 mx-auto grid w-full max-w-screen-xl px-6", {
@@ -94,7 +95,7 @@ export const LatestBlogs = ({
               />
             )}
           </div>
-          <Heading size="large" as="a">
+          <Heading size="large" as="div">
             <NextLink href={`/${bloggs[0].slug}`} passHref>
               <Link className="text-deepblue-500 no-underline hover:underline">
                 {bloggs[0].heading}
@@ -118,60 +119,71 @@ export const LatestBlogs = ({
         </div>
         <div
           className={cl("gap-12", {
-            "grid flex-auto grow-[1] place-items-start": variant === "forside",
+            "flex flex-auto grow-[1] place-items-start": variant === "forside",
             "col-span-1 grid": variant === "blogg",
           })}
         >
-          {bloggs.slice(1, 4).map((blog) => (
-            <div key={blog._id} className="flex gap-6">
-              {variant === "blogg" && (
-                <div className="relative hidden aspect-square h-[11.75rem] lg:block">
-                  {blog?.seo?.image ? (
-                    <Image
-                      src={urlFor(blog.seo.image).auto("format").url()}
-                      decoding="async"
-                      layout="fill"
-                      objectFit="cover"
-                      aria-hidden
-                      priority
-                      className="rounded-lg"
-                    />
-                  ) : (
-                    <Image
-                      src={getImage(blog?.heading ?? "", "small")}
-                      decoding="async"
-                      layout="fill"
-                      objectFit="contain"
-                      aria-hidden
-                      priority
-                      className="rounded-lg"
-                    />
+          <div
+            className={cl("grid gap-12", {
+              "g ": variant === "forside",
+              "": variant === "blogg",
+            })}
+          >
+            {bloggs.slice(1, 4).map((blog) => (
+              <div key={blog._id} className="flex gap-6">
+                {variant === "blogg" && (
+                  <div className="relative hidden aspect-square h-[11.75rem] lg:block">
+                    {blog?.seo?.image ? (
+                      <Image
+                        src={urlFor(blog.seo.image).auto("format").url()}
+                        decoding="async"
+                        layout="fill"
+                        objectFit="cover"
+                        aria-hidden
+                        priority
+                        className="rounded-lg"
+                      />
+                    ) : (
+                      <Image
+                        src={getImage(blog?.heading ?? "", "small")}
+                        decoding="async"
+                        layout="fill"
+                        objectFit="contain"
+                        aria-hidden
+                        priority
+                        className="rounded-lg"
+                      />
+                    )}
+                  </div>
+                )}
+                <div>
+                  <Heading size="small" as="div">
+                    <NextLink href={`/${blog.slug}`} passHref>
+                      <Link className="text-deepblue-500 no-underline hover:underline">
+                        {blog.heading}
+                      </Link>
+                    </NextLink>
+                  </Heading>
+                  <BodyLong className="mt-4" size="small">
+                    {blog?.ingress}
+                  </BodyLong>
+                  {getAuthors(blog).length > 0 && (
+                    <BodyShort
+                      size="small"
+                      className="text-text-subtle mt-4 flex gap-2"
+                    >
+                      <span className="font-semibold">
+                        {getAuthors(blog)[0]}
+                      </span>
+                      <span>
+                        {dateStr(blog?.publishedAt ?? blog._createdAt)}
+                      </span>
+                    </BodyShort>
                   )}
                 </div>
-              )}
-              <div>
-                <Heading size="small" as="a" className="">
-                  <NextLink href={`/${blog.slug}`} passHref>
-                    <Link className="text-deepblue-500 no-underline hover:underline">
-                      {blog.heading}
-                    </Link>
-                  </NextLink>
-                </Heading>
-                <BodyLong className="mt-4" size="small">
-                  {blog?.ingress}
-                </BodyLong>
-                {getAuthors(blog).length > 0 && (
-                  <BodyShort
-                    size="small"
-                    className="text-text-subtle mt-4 flex gap-2"
-                  >
-                    <span className="font-semibold">{getAuthors(blog)[0]}</span>
-                    <span>{dateStr(blog?.publishedAt ?? blog._createdAt)}</span>
-                  </BodyShort>
-                )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
@@ -201,7 +213,7 @@ export const LatestBlogs = ({
               />
             )}
           </div>
-          <Heading size="large" as="a" className="">
+          <Heading size="large" as="div">
             <NextLink href={`/${bloggs[0].slug}`} passHref>
               <Link className="text-deepblue-500 no-underline hover:underline">
                 {bloggs[0].heading}
@@ -250,7 +262,7 @@ export const LatestBlogs = ({
                 )}
               </div>
               <div>
-                <Heading size="small" as="a">
+                <Heading size="small" as="div">
                   <NextLink href={`/${blog.slug}`} passHref>
                     <Link className="text-deepblue-500 no-underline hover:underline">
                       {blog.heading}
