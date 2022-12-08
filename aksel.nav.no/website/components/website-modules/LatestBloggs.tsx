@@ -78,14 +78,16 @@ export const LatestBlogs = ({
                 />
               )}
             </div>
-            <Heading size="large" as="a" className="">
+            <Heading size="large" as="a">
               <NextLink href={`/${bloggs[0].slug}`} passHref>
                 <Link className="text-deepblue-500 no-underline hover:underline">
                   {bloggs[0].heading}
                 </Link>
               </NextLink>
             </Heading>
-            <BodyLong className="mt-4">{bloggs[0]?.ingress}</BodyLong>
+            <BodyLong className="mt-4" size="small">
+              {bloggs[0]?.ingress}
+            </BodyLong>
             {getAuthors(bloggs[0]).length > 0 && (
               <BodyShort
                 size="small"
@@ -134,7 +136,9 @@ export const LatestBlogs = ({
                       </Link>
                     </NextLink>
                   </Heading>
-                  <BodyLong className="mt-4">{blog?.ingress}</BodyLong>
+                  <BodyLong className="mt-4" size="small">
+                    {blog?.ingress}
+                  </BodyLong>
                   {getAuthors(blog).length > 0 && (
                     <BodyShort
                       size="small"
@@ -187,7 +191,9 @@ export const LatestBlogs = ({
                 </Link>
               </NextLink>
             </Heading>
-            <BodyLong className="mt-4">{bloggs[0]?.ingress}</BodyLong>
+            <BodyLong className="mt-4" size="small">
+              {bloggs[0]?.ingress}
+            </BodyLong>
             {getAuthors(bloggs[0]).length > 0 && (
               <BodyShort
                 size="small"
@@ -204,8 +210,8 @@ export const LatestBlogs = ({
           </div>
           <div className="grid w-full gap-12">
             {bloggs.slice(1, 4).map((blog) => (
-              <div key={blog._id} className="flex gap-6">
-                <div className="relative block aspect-square h-[11.75rem]">
+              <div key={blog._id}>
+                <div className="relative mb-6 block aspect-video">
                   {blog?.seo?.image ? (
                     <Image
                       src={urlFor(blog.seo.image).auto("format").url()}
@@ -229,14 +235,16 @@ export const LatestBlogs = ({
                   )}
                 </div>
                 <div>
-                  <Heading size="small" as="a" className="">
+                  <Heading size="small" as="a">
                     <NextLink href={`/${blog.slug}`} passHref>
                       <Link className="text-deepblue-500 no-underline hover:underline">
                         {blog.heading}
                       </Link>
                     </NextLink>
                   </Heading>
-                  <BodyLong className="mt-4">{blog?.ingress}</BodyLong>
+                  <BodyLong className="mt-4" size="small">
+                    {blog?.ingress}
+                  </BodyLong>
                   {getAuthors(blog).length > 0 && (
                     <BodyShort
                       size="small"
