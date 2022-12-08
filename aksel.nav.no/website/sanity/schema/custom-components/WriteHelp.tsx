@@ -19,8 +19,6 @@ export const WriteHelp = (props) => {
 
   const content = data?.[`${docType}_writeHelp`];
 
-  console.log(content);
-
   return (
     <div className="flex shrink-0 items-center justify-between">
       <BlockContent
@@ -46,7 +44,7 @@ const serializers = {
         case "h2":
           return (
             <Heading
-              className="algolia-index-lvl3 max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
+              className="algolia-index-lvl3 max-w-text mt-8 scroll-mt-20 focus:outline-none"
               spacing
               level="2"
               size="medium"
@@ -58,10 +56,10 @@ const serializers = {
         case "h3":
           return (
             <Heading
-              className="algolia-index-lvl3 max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
+              className="algolia-index-lvl3 max-w-text mt-8 scroll-mt-20 focus:outline-none"
               spacing
               level="3"
-              size="medium"
+              size="small"
               tabIndex={-1}
               id={`h${node._key}`}
               {...textProps}
@@ -70,10 +68,10 @@ const serializers = {
         case "h4":
           return (
             <Heading
-              className="algolia-index-lvl4 max-w-text text-deepblue-800 mt-6"
+              className="algolia-index-lvl4 max-w-text mt-6"
               spacing
               level="4"
-              size="small"
+              size="xsmall"
               {...textProps}
             />
           );
@@ -146,6 +144,7 @@ const serializers = {
     },
     internalLink: ({ mark, children }: { mark: any; children: any }) => {
       const { slug = {} } = mark;
+
       if (!slug || !slug.current) return children;
 
       const href = `/${slug?.current}`;
