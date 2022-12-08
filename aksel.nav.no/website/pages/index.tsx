@@ -230,7 +230,11 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
                   />
                 </div>
               )}
-              <LatestBlogs bloggs={bloggs} title="Siste fra bloggen" />
+              <LatestBlogs
+                bloggs={bloggs}
+                title="Siste fra bloggen"
+                variant="forside"
+              />
             </div>
           </div>
         </main>

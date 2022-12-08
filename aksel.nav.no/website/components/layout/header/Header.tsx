@@ -11,11 +11,11 @@ const LinkElement = ({ name, href }) => {
     <Link href={href} passHref>
       <a
         className={cl(
-          "text-text-default relative grid h-full place-items-center rounded-full px-2 focus:outline-none",
+          "text-text-default focus-visible:shadow-focus relative grid h-full place-items-center rounded px-2 focus:outline-none",
           {
             "focus:shadow-focus-gap before:bg-deepblue-700 font-semibold before:absolute before:bottom-[6px] before:z-10 before:h-1 before:w-full before:rounded-full":
               asPath.startsWith(href),
-            "focus-visible:shadow-focus": !asPath.startsWith(href),
+            "": !asPath.startsWith(href),
           }
         )}
         onClick={(e) =>
