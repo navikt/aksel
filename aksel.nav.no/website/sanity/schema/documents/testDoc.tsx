@@ -29,6 +29,6 @@ export const TestDoc = defineType({
     }),
     defineField({ type: "riktekst_standard", name: "content" }),
     SEOFields,
-    skrivehjelp("testDoc"),
+    skrivehjelp,
   ],
 });
