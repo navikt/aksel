@@ -7,8 +7,9 @@ export const Skrivehjelp = defineType({
   type: "document",
   fields: [
     defineField({
-      title: "Test doc skrivehjelp",
-      name: "testDoc_writeHelp",
+      title: "Skrivehjelp innhold",
+      description: "Innholdet som skal vises i skrivehjelpen på artiklene.",
+      name: "content",
       type: "array",
       of: [
         {

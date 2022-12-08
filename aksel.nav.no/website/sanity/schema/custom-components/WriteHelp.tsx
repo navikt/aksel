@@ -8,7 +8,6 @@ import useSWR from "swr";
 
 export const WriteHelp = (props) => {
   const client = useClient({ apiVersion: "2021-06-07" });
-  const docType = props.schemaType?.options?.docType;
   const { data, error } = useSWR(`*[_id == "skrivehjelp"][0]`, (query) =>
     client.fetch(query)
   );
@@ -17,7 +16,7 @@ export const WriteHelp = (props) => {
     return <div>Kan ikke hente skrivehjelp...</div>;
   }
 
-  const content = data?.[`${docType}_writeHelp`];
+  const content = data?.content;
 
   return (
     <div className="flex shrink-0 items-center justify-between">
