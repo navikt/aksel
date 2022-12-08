@@ -80,7 +80,7 @@ const Page = (props: PageProps): JSX.Element => {
         <title>Produktbloggen - Aksel</title>
         <meta property="og:title" content="Produktbloggen - Aksel" />
       </Head>
-      <div className="bg-surface-warning-subtle">
+      <div className="bg-[#FFFCF0]">
         <Header variant="blogg" />
         <main
           tabIndex={-1}

@@ -44,7 +44,7 @@ export const Header = ({
       </a>
       <header
         className={cl("h-header z-20 flex items-center", {
-          "bg-surface-warning-subtle": variant === "blogg",
+          "bg-[#FFFCF0]": variant === "blogg",
           "bg-surface-default": variant === "default",
           "bg-surface-subtle": variant === "subtle",
           "bg-surface-transparent": variant === "transparent",

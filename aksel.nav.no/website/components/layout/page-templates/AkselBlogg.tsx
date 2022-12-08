@@ -62,7 +62,7 @@ const AkselBloggTemplate = ({
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel xs:pb-32 bg-orange-50 pt-[8vw] pb-16 focus:outline-none"
+        className="aksel-artikkel xs:pb-32 bg-[#FFFCF0] pt-[8vw] pb-16 focus:outline-none"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose text-center">
