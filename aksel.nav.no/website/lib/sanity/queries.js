@@ -190,11 +190,6 @@ export const akselForsideQuery = `*[_type == "vk_frontpage"][0]{
       ${deRefs}
     }
   },
-  prinsipp_1 {
-    ...,
-    hovedside->{slug, heading},
-    undersider[]->{slug, heading}
-  },
   "bloggs": *[_type == "aksel_blogg"] | order(_createdAt desc)[0...4]{
     ...,
     "slug": slug.current,

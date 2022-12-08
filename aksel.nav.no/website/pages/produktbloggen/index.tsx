@@ -1,16 +1,12 @@
 import { Footer } from "@/layout";
-import { SanityT, akselBloggPosts, urlFor } from "@/lib";
+import { akselBloggPosts, SanityT } from "@/lib";
 import { getClient } from "@/sanity-client";
-import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
+import { LatestBlogs } from "components/website-modules/LatestBloggs";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import React, { lazy } from "react";
+import { lazy } from "react";
 import NotFotfund from "../404";
-import Image from "next/image";
-import NextLink from "next/link";
-import { dateStr } from "@/utils";
-import { LatestBlogs } from "components/website-modules/LatestBloggs";
 
 const Page = (props: PageProps): JSX.Element => {
   if (!props.bloggposts) {
@@ -34,33 +30,6 @@ const Page = (props: PageProps): JSX.Element => {
             <LatestBlogs bloggs={props?.bloggposts} title="Blogg" />
           </div>
         </main>
-        {/* <main
-          tabIndex={-1}
-          id="hovedinnhold"
-          className="min-h-[80vh] bg-gray-100 focus:outline-none"
-        >
-          <div className="relative bg-white px-4 pt-8 pb-8 md:pt-12">
-            <div className="dynamic-wrapper-2xl w-fit">
-              <Heading
-                level="1"
-                size="xlarge"
-                spacing
-                className="algolia-index-lvl1"
-              >
-                Produktbloggen
-              </Heading>
-            </div>
-          </div>
-          <div className="relative px-4 pt-8 pb-24">
-            <div className="dynamic-wrapper-2xl w-fit">
-              <div className="mt-4 grid gap-2 divide-y divide-gray-300">
-                {props.bloggposts.map((blog) => (
-                  <BloggCard key={blog._id} blog={blog} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </main> */}
         <Footer />
       </div>
     </>

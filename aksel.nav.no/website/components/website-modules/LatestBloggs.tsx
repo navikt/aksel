@@ -47,7 +47,7 @@ export const LatestBlogs = ({
 
   return (
     <div
-      className={cl("xs:px-4 mx-auto grid w-full max-w-screen-xl px-6", {
+      className={cl({
         "mt-28": variant === "forside",
         "mt-14": variant === "blogg",
       })}

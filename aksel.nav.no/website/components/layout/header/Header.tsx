@@ -11,12 +11,11 @@ const LinkElement = ({ name, href }) => {
     <Link href={href} passHref>
       <a
         className={cl(
-          "grid h-full place-items-center rounded-full px-4 focus:outline-none",
+          "text-text-default relative grid h-full place-items-center rounded-full px-2 focus:outline-none",
           {
-            "bg-surface-selected text-text-action-selected hover:text-deepblue-700 hover:bg-surface-action-subtle-hover focus:shadow-focus-gap":
+            "focus:shadow-focus-gap before:bg-deepblue-700 font-semibold before:absolute before:bottom-[6px] before:z-10 before:h-1 before:w-full before:rounded-full":
               asPath.startsWith(href),
-            "hover:bg-surface-action-subtle-hover hover:text-deepblue-700 text-text-subtle focus-visible:shadow-focus":
-              !asPath.startsWith(href),
+            "focus-visible:shadow-focus": !asPath.startsWith(href),
           }
         )}
         onClick={(e) =>
@@ -36,7 +35,7 @@ const LinkElement = ({ name, href }) => {
 export const Header = ({
   variant = "default",
 }: {
-  variant?: "blogg" | "subtle" | "default";
+  variant?: "blogg" | "subtle" | "default" | "transparent";
 }) => {
   return (
     <>
@@ -48,6 +47,7 @@ export const Header = ({
           "bg-surface-warning-subtle": variant === "blogg",
           "bg-surface-default": variant === "default",
           "bg-surface-subtle": variant === "subtle",
+          "bg-surface-transparent": variant === "transparent",
         })}
       >
         <div className="xs:pr-6 xs:pl-4 mx-auto flex h-11 w-full max-w-7xl items-center justify-between pr-4 pl-4">

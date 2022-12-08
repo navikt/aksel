@@ -1,20 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
-import { BloggCard, logNav, TemaCard } from "@/components";
+import { logNav, TemaCard } from "@/components";
 import { Footer } from "@/layout";
-import { SanityT, urlFor } from "@/lib";
+import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
+import { getClient } from "@/sanity-client";
 import { Next } from "@navikt/ds-icons";
 import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
 import cl from "classnames";
-import Head from "next/head";
-import NextLink from "next/link";
-import { akselForsideQuery } from "@/lib";
-import { PreviewSuspense } from "next-sanity/preview";
-import { lazy, useEffect, useState } from "react";
-import { getClient } from "@/sanity-client";
-import Snowfall from "react-snowfall";
 import { Header } from "components/layout/header/Header";
 import { LatestBlogs } from "components/website-modules/LatestBloggs";
+import { PreviewSuspense } from "next-sanity/preview";
+import Head from "next/head";
+import NextLink from "next/link";
+import { lazy, useEffect, useState } from "react";
+import Snowfall from "react-snowfall";
 
 const portalkort = [
   {
@@ -163,12 +162,7 @@ const Portaler = () => {
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({
-  prinsipp_1,
-  tekster,
-  temaer,
-  bloggs,
-}: PageProps): JSX.Element => {
+const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
   const [xmas, setXmas] = useState(false);
 
   useEffect(() => {
@@ -179,13 +173,6 @@ const Forside = ({
       setXmas(false);
     };
   }, []);
-
-  const hasPrinsipp1 =
-    prinsipp_1 &&
-    prinsipp_1?.hovedside &&
-    prinsipp_1?.vis &&
-    prinsipp_1?.undersider.length ===
-      prinsipp_1.undersider.filter((x) => !!x).length;
 
   const filteredTemas = temaer.filter((x) => x.refCount > 0);
 
@@ -217,178 +204,35 @@ const Forside = ({
         />
       </Head>
 
-      <div className="bg-deepblue-900">
-        <Header />
+      <div className="bg-[#DCCAF3]">
+        <Header variant="transparent" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-          <div className="bg-deepblue-900 from-deepblue-900 via-deepblue-900/50 to-deepblue-700 relative bg-gradient-to-b px-4 pt-16 pb-24 text-white">
-            {xmas && (
-              <div aria-hidden>
-                <Snowfall
-                  color="rgba(230, 241, 248, 0.3)"
-                  speed={[0.2, 1.0]}
-                  snowflakeCount={100}
-                  style={{ height: "120%" }}
-                  radius={[0.5, 2.0]}
-                />
-              </div>
-            )}
-            <div className="dynamic-wrapper">
-              <div className="gap-6 lg:grid lg:grid-cols-3">
-                <div className="max-w-prose pr-6 lg:col-span-2">
-                  <Heading level="1" size="xlarge">
-                    {tekster.title}
-                  </Heading>
-                  <div className="text-deepblue-100/95 mt-6">
-                    <SanityBlockContent blocks={tekster.beskrivelse} />
-                  </div>
-                </div>
-                <Portaler />
-              </div>
+          <div className="xs:px-4 mx-auto grid w-full max-w-screen-xl px-6">
+            <Heading level="1" size="xlarge">
+              {tekster.title}
+            </Heading>
+          </div>
+          <div className="bg-surface-subtle">
+            <div className="xs:px-4 mx-auto grid w-full max-w-screen-xl px-6">
+              placeholder
             </div>
           </div>
-
-          {/* Temaseksjon */}
-          {filteredTemas && filteredTemas.length > 0 && (
-            <section className="bg-deepblue-50 relative px-4 pt-16 pb-24">
-              {/* Separator */}
-              <svg
-                className="absolute inset-x-0 top-0 w-full"
-                viewBox="0 0 100 12"
-                focusable="false"
-                aria-hidden="true"
-              >
-                <polygon
-                  points="0,0 100,0 0,12"
-                  className="fill-deepblue-700"
-                ></polygon>
-              </svg>
-              <div className="dynamic-wrapper relative z-10 -mt-16">
-                <Heading
-                  level="2"
-                  size="small"
-                  className="text-text-on-inverted uppercase"
-                >
-                  Temaer
-                </Heading>
-                <div className="card-grid-3-1 mt-4">
-                  {/* Temakort */}
-                  {filteredTemas.slice(0, 7).map((tema) => (
-                    <TemaCard {...tema} key={tema._id} />
-                  ))}
+          <div className="bg-surface-default">
+            <div className="xs:px-4 mx-auto grid w-full max-w-screen-xl px-6">
+              {xmas && (
+                <div aria-hidden>
+                  <Snowfall
+                    color="rgba(230, 241, 248, 0.3)"
+                    speed={[0.2, 1.0]}
+                    snowflakeCount={100}
+                    style={{ height: "120%" }}
+                    radius={[0.5, 2.0]}
+                  />
                 </div>
-                {filteredTemas.length > 6 && (
-                  <NextLink href="/god-praksis">
-                    <a className="text-text-default hover:text-deepblue-700 mt-6 inline-block underline hover:no-underline">
-                      Utforsk alle temaer
-                    </a>
-                  </NextLink>
-                )}
-              </div>
-            </section>
-          )}
-
-          {/* Prinsipper */}
-          {hasPrinsipp1 && (
-            <section className="bg-deepblue-50 px-4 pt-0 pb-32 lg:pt-12">
-              <div className="dynamic-wrapper relative z-10">
-                <div className="lg:grid lg:grid-flow-row-dense lg:gap-x-8">
-                  <div className="lg:order-1 lg:col-start-2 lg:row-start-1 lg:-mb-8 lg:-mt-12">
-                    <img
-                      className="mx-auto max-w-xs sm:w-full lg:mx-auto lg:max-w-md"
-                      src="/images/prinsipper.webp"
-                      width="800"
-                      alt=""
-                    />
-                  </div>
-                  <div className="self-end">
-                    <div className="max-w-prose">
-                      <h2 className="mt-4 text-2xl font-semibold tracking-tight lg:mt-auto lg:text-4xl">
-                        Prinsipper for brukeropplevelse
-                      </h2>
-                      <SanityBlockContent
-                        className="mt-3"
-                        blocks={prinsipp_1?.beskrivelse}
-                      />
-                    </div>
-
-                    <div className="mt-8 flex flex-wrap gap-2 lg:max-w-4xl lg:gap-3">
-                      {prinsipp_1.undersider.map((x) => (
-                        <NextLink
-                          href={`/${x.slug.current}`}
-                          passHref
-                          key={x.slug.current}
-                        >
-                          <a className="hover:bg-deepblue-200/60 focus-visible:shadow-focus flex w-full items-center justify-between gap-4 rounded-md bg-white px-6 py-4 leading-tight shadow hover:shadow-md focus:outline-none sm:w-auto">
-                            <span className="font-semibold">{x.heading}</span>{" "}
-                            <Next
-                              className="-mr-1 sm:hidden"
-                              aria-hidden
-                              aria-label="Gå til siden"
-                            />{" "}
-                          </a>
-                        </NextLink>
-                      ))}
-                    </div>
-                    <Link
-                      className="mt-6 inline-block text-gray-800"
-                      href={`/${prinsipp_1.hovedside.slug.current}`}
-                    >
-                      Utforsk alle prinsippene
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          <section className="relative bg-white px-4 pb-24">
-            {/* Separator */}
-            <svg
-              className="absolute inset-x-0 top-0 w-full"
-              viewBox="0 0 100 12"
-              focusable="false"
-              aria-hidden="true"
-            >
-              <polygon
-                points="0,0 100,0 0,12"
-                className="fill-deepblue-50"
-              ></polygon>
-            </svg>
-
-            <div className="dynamic-wrapper relative z-10">
-              <div className="gap-6 2xl:grid 2xl:grid-cols-3 2xl:items-start">
-                {/* Redaksjons-kort */}
-                <div className="mx-auto grid max-w-lg  rounded-lg shadow 2xl:sticky 2xl:top-24">
-                  <div className="bg-deepblue-700 rounded-t-lg px-6 py-6 text-white">
-                    <Heading size="medium" level="2">
-                      Aksel trenger deg!
-                    </Heading>
-                    <BodyLong className="mt-1 max-w-prose">
-                      Vi trenger hjelp med å lage innhold til Aksel. Har du
-                      ideer, mulighet til å skrive eller lurer på noe om
-                      produktutvikling?
-                    </BodyLong>
-                  </div>
-                  <a
-                    className="bg-deepblue-300/60 hover:bg-deepblue-200 focus-visible:shadow-focus group flex items-center justify-between rounded-b-lg px-6 py-4 leading-snug hover:underline focus:outline-none focus-visible:rounded-lg"
-                    href="https://nav-it.slack.com/archives/C0370ADS0HX"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <span>
-                      Ta kontakt med{" "}
-                      <span className="font-semibold">#aksel</span> på Slack
-                    </span>
-                  </a>
-                </div>
-              </div>
+              )}
+              <LatestBlogs bloggs={bloggs} title="Siste fra bloggen" />
             </div>
-            <LatestBlogs
-              title="Siste fra bloggen"
-              bloggs={bloggs}
-              variant="forside"
-            />
-          </section>
+          </div>
         </main>
 
         <Footer />
@@ -422,12 +266,6 @@ interface PageProps {
     }
   >[];
   tekster: SanityT.Schema.vk_frontpage;
-  prinsipp_1: {
-    beskrivelse?: SanityT.Schema.riktekst_enkel;
-    vis: boolean;
-    hovedside: { heading: string; slug: { current: string } };
-    undersider: { heading: string; slug: { current: string } }[];
-  };
   slug: string;
   preview: boolean;
 }
@@ -441,7 +279,6 @@ export const getStaticProps = async ({
 
   const {
     tekster = null,
-    prinsipp_1 = null,
     bloggs = null,
     temaer = null,
   } = await client.fetch(akselForsideQuery);
@@ -449,7 +286,6 @@ export const getStaticProps = async ({
   return {
     props: {
       temaer,
-      prinsipp_1,
       bloggs,
       tekster,
       slug: "/",
