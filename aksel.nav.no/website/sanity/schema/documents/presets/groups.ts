@@ -1,5 +1,9 @@
 export const groups = [
   {
+    name: "skrivehjelp",
+    title: "Skrivehjelp",
+  },
+  {
     name: "innhold",
     title: "Innhold",
   },
@@ -18,9 +22,5 @@ export const groups = [
   {
     name: "seo",
     title: "SEO",
-  },
-  {
-    name: "skrivehjelp",
-    title: "Skrivehjelp",
   },
 ];

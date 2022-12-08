@@ -6,6 +6,7 @@ import { hiddenFields } from "../presets/hidden-fields";
 import { ingressField } from "../presets/ingress";
 import { relevanteArtiklerField } from "../presets/relevante-artikler";
 import { SEOFields } from "../presets/seo";
+import { skrivehjelp } from "../presets/skrivehjelp";
 import { sanitySlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
 
@@ -42,5 +43,6 @@ export const GodPraksisArtikkel = defineType({
     }),
     relevanteArtiklerField,
     SEOFields,
+    skrivehjelp,
   ],
 });
