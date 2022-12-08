@@ -12,7 +12,7 @@ export type BloggPageT = Partial<
   }
 >;
 
-const getAuthors = (blog: BloggPageT) =>
+export const getAuthors = (blog: BloggPageT) =>
   (blog?.contributors as any)?.map((x) => x?.title) ?? [];
 
 const getImage = (n: string, size: "small" | "large") => {

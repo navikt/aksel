@@ -13,7 +13,7 @@ const LinkElement = ({ name, href }) => {
         className={cl(
           "text-text-default focus-visible:shadow-focus relative grid h-full place-items-center rounded px-2 focus:outline-none",
           {
-            "focus:shadow-focus-gap before:bg-deepblue-700 font-semibold before:absolute before:bottom-[6px] before:z-10 before:h-1 before:w-full before:rounded-full":
+            "before:bg-deepblue-700 font-semibold before:absolute before:bottom-[6px] before:z-10 before:h-1 before:w-full before:rounded-full":
               asPath.startsWith(href),
             "": !asPath.startsWith(href),
           }

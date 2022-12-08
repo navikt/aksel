@@ -50,7 +50,8 @@ const Page = ({
               level="2"
               size="large"
               spacing
-              className="text-deepblue-800"
+              className="text-deepblue-800 scoll-mt-20"
+              id={kat.value}
             >
               {kat.title}
             </Heading>

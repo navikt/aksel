@@ -1,9 +1,13 @@
 import { Footer } from "@/layout";
 import { akselBloggPosts, SanityT } from "@/lib";
 import { getClient } from "@/sanity-client";
-import { BodyLong, Heading, Link } from "@navikt/ds-react";
+import { dateStr } from "@/utils";
+import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
-import { LatestBlogs } from "components/website-modules/LatestBloggs";
+import {
+  getAuthors,
+  LatestBlogs,
+} from "components/website-modules/LatestBloggs";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import NextLink from "next/link";
@@ -67,6 +71,9 @@ const Page = (props: PageProps): JSX.Element => {
     return <NotFotfund />;
   }
 
+  /* TODO: slice(4, -1) etter testing*/
+  const remainingPosts = props?.bloggposts?.slice(0, -1);
+
   return (
     <>
       <Head>
@@ -80,7 +87,7 @@ const Page = (props: PageProps): JSX.Element => {
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div className="xs:px-6 mx-auto grid w-full max-w-screen-xl px-4">
+          <div className="xs:px-6 mx-auto mb-40 grid w-full max-w-screen-xl px-4">
             <LatestBlogs bloggs={props?.bloggposts} title="Blogg" />
             {/* Skriv for bloggen */}
 
@@ -111,11 +118,43 @@ const Page = (props: PageProps): JSX.Element => {
               <CubeSmall />
             </div>
             {/* Flere blogger */}
-            <div>
-              <Heading level="2" size="xlarge" spacing>
-                Flere blogginnlegg
-              </Heading>
-            </div>
+            {remainingPosts && (
+              <div>
+                <Heading level="2" size="xlarge">
+                  Flere blogginnlegg
+                </Heading>
+                <div className="mt-12 grid gap-x-3 gap-y-6 sm:grid-cols-2 sm:gap-y-10 md:gap-x-6 lg:grid-cols-3">
+                  {remainingPosts.map((blog) => (
+                    <div
+                      key={blog._id}
+                      className="border-b-border-subtle border-b pb-8"
+                    >
+                      <Heading size="medium" as="div">
+                        <NextLink href={`/${blog.slug}`} passHref>
+                          <Link className="text-deepblue-500 no-underline hover:underline">
+                            {blog.heading}
+                          </Link>
+                        </NextLink>
+                      </Heading>
+                      <BodyLong className="mt-2">{blog?.ingress}</BodyLong>
+                      {getAuthors(blog).length > 0 && (
+                        <BodyShort
+                          size="small"
+                          className="text-text-subtle mt-6 flex gap-2"
+                        >
+                          <span className="font-semibold">
+                            {getAuthors(blog)[0]}
+                          </span>
+                          <span>
+                            {dateStr(blog?.publishedAt ?? blog._createdAt)}
+                          </span>
+                        </BodyShort>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </main>
         <Footer />
