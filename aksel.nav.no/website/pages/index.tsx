@@ -14,6 +14,7 @@ import { lazy, useEffect, useState } from "react";
 import { getClient } from "@/sanity-client";
 import Snowfall from "react-snowfall";
 import { Header } from "components/layout/header/Header";
+import { LatestBlogs } from "components/website-modules/LatestBloggs";
 
 const portalkort = [
   {
@@ -380,36 +381,13 @@ const Forside = ({
                     </span>
                   </a>
                 </div>
-                {/* Blogg */}
-                {bloggs && bloggs.length > 0 && (
-                  <div className="order-1 mt-16 xl:pl-12 2xl:col-span-2 2xl:mt-44">
-                    <Heading
-                      level="2"
-                      size="xsmall"
-                      className="uppercase tracking-widest"
-                    >
-                      Blogg
-                    </Heading>
-                    <div className="mt-1 divide-y divide-gray-200">
-                      {/* Blogg-kort */}
-                      {bloggs.slice(0, 7).map((blog) => (
-                        <BloggCard key={blog._id} blog={blog} />
-                      ))}
-                    </div>
-                    {bloggs?.length > 6 && (
-                      <NextLink href="/produktbloggen" passHref>
-                        <a
-                          className="text-text-default hover:text-deepblue-700 mt-6 inline-block underline hover:no-underline"
-                          href="#"
-                        >
-                          Flere bloggposter
-                        </a>
-                      </NextLink>
-                    )}
-                  </div>
-                )}
               </div>
             </div>
+            <LatestBlogs
+              title="Siste fra bloggen"
+              bloggs={bloggs}
+              variant="forside"
+            />
           </section>
         </main>
 
