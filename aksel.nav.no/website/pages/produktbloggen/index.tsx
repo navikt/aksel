@@ -21,7 +21,8 @@ const CubeLarge = () => (
     viewBox="0 0 1016 320"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="absolute right-0 hidden lg:block"
+    className="pointer-events-none absolute right-0 hidden lg:block"
+    aria-hidden
   >
     <path
       d="M849.229 637.344L1096.48 390.09L849.228 142.836L601.975 390.09L849.229 637.344Z"
@@ -42,12 +43,13 @@ const CubeLarge = () => (
 
 const CubeSmall = () => (
   <svg
-    className="absolute left-0 max-w-full overflow-hidden lg:hidden"
+    className="pointer-events-none absolute left-0 max-w-full overflow-hidden lg:hidden"
     width="390"
     height="290"
     viewBox="0 0 390 290"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    aria-hidden
   >
     <path
       d="M-0.327544 508.393L246.927 261.139H0.0431418L-247.212 508.393H-0.327544Z"

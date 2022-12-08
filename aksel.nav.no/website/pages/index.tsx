@@ -207,14 +207,18 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
       <div className="bg-[#DCCAF3]">
         <Header variant="transparent" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-          <div className="xs:px-6 mx-auto grid w-full max-w-screen-xl px-4">
-            <Heading level="1" size="xlarge">
+          <div className="xs:px-6 mx-auto mt-36 mb-32 grid w-full max-w-screen-sm place-items-center px-4 text-center">
+            <Heading
+              level="1"
+              size="xlarge"
+              className="text-deepblue-800 text-[3.25rem]"
+            >
               {tekster.title}
             </Heading>
           </div>
           <div className="bg-surface-subtle">
             <div className="xs:px-6 mx-auto grid w-full max-w-screen-xl px-4">
-              placeholder
+              {/* placeholder */}
             </div>
           </div>
           <div className="bg-surface-default">
