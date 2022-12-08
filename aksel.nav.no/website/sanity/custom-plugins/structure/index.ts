@@ -42,6 +42,7 @@ const filtered = [
   "godpraksis_landingsside",
   "aksel_artikkel",
   "skrivehjelp",
+  "publication_flow",
 ];
 
 export const structure = async (
@@ -267,6 +268,11 @@ export const structure = async (
                       .schemaType(`skrivehjelp`)
                       .icon(FileContent)
                       .id(`skrivehjelp`),
+                    S.documentListItem()
+                      .title(`Publiseringsflyt`)
+                      .schemaType(`publication_flow`)
+                      .icon(FileContent)
+                      .id(`publication_flow`),
                   ])
               ),
           ]
