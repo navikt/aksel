@@ -9,6 +9,7 @@ export default {
     document.Redirect,
     document.TestDoc,
     document.Skrivehjelp,
+    document.Publiseringsflyt,
 
     /* Komponentsider */
     document.KodeEksempelDoc,

@@ -14,6 +14,7 @@ export * from "./komponenter/props";
 export * from "./komponenter/tokens";
 export * from "./prinsipper/artikkel";
 export * from "./prinsipper/landingsside";
+export * from "./publiseringsflyt";
 export * from "./redirects";
 export * from "./skrivehjelp";
 export * from "./standalone-artikkel";
