@@ -38,7 +38,7 @@ const CubeLarge = () => (
 
 const CubeSmall = () => (
   <svg
-    className="absolute left-0 lg:hidden"
+    className="absolute left-0 max-w-full overflow-hidden lg:hidden"
     width="390"
     height="290"
     viewBox="0 0 390 290"
@@ -80,11 +80,11 @@ const Page = (props: PageProps): JSX.Element => {
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div className="xs:px-4 mx-auto grid w-full max-w-screen-xl px-6">
+          <div className="xs:px-6 mx-auto grid w-full max-w-screen-xl px-4">
             <LatestBlogs bloggs={props?.bloggposts} title="Blogg" />
             {/* Skriv for bloggen */}
 
-            <div className="relative mx-auto my-20 flex h-72 w-full max-w-[85%] items-center rounded-2xl bg-[#68D1BF] px-6 lg:h-80 lg:pl-12">
+            <div className="full-bleed my-20 flex h-72 items-center bg-[#B2F0E4] px-4 md:rounded-2xl md:px-6 lg:h-80 lg:bg-[#68D1BF] lg:pl-12">
               <div className="text-deepblue-800">
                 <Heading level="2" size="xlarge" spacing>
                   Skriv for bloggen
@@ -109,6 +109,12 @@ const Page = (props: PageProps): JSX.Element => {
               </div>
               <CubeLarge />
               <CubeSmall />
+            </div>
+            {/* Flere blogger */}
+            <div>
+              <Heading level="2" size="xlarge" spacing>
+                Flere blogginnlegg
+              </Heading>
             </div>
           </div>
         </main>

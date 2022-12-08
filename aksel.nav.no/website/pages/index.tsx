@@ -207,18 +207,18 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
       <div className="bg-[#DCCAF3]">
         <Header variant="transparent" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-          <div className="xs:px-4 mx-auto grid w-full max-w-screen-xl px-6">
+          <div className="xs:px-6 mx-auto grid w-full max-w-screen-xl px-4">
             <Heading level="1" size="xlarge">
               {tekster.title}
             </Heading>
           </div>
           <div className="bg-surface-subtle">
-            <div className="xs:px-4 mx-auto grid w-full max-w-screen-xl px-6">
+            <div className="xs:px-6 mx-auto grid w-full max-w-screen-xl px-4">
               placeholder
             </div>
           </div>
           <div className="bg-surface-default">
-            <div className="xs:px-4 mx-auto grid w-full max-w-screen-xl px-6">
+            <div className="xs:px-6 mx-auto grid w-full max-w-screen-xl px-4">
               {xmas && (
                 <div aria-hidden>
                   <Snowfall
