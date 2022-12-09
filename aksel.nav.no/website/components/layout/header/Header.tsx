@@ -50,7 +50,7 @@ export const Header = ({
           "bg-surface-transparent": variant === "transparent",
         })}
       >
-        <div className="xs:pr-6 xs:pl-4 mx-auto flex h-11 w-full max-w-7xl items-center justify-between pr-4 pl-4">
+        <div className="xs:pr-6 xs:pl-4 mx-auto flex h-11 w-full max-w-screen-2xl items-center justify-between pr-4 pl-4">
           <Link href="/" passHref>
             <a
               onClick={(e) =>

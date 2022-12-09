@@ -149,7 +149,7 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
             />
           </div>
           <div className="bg-surface-subtle min-h-96 relative">
-            <div className="centered-layout grid max-w-screen-xl">
+            <div className="centered-layout grid max-w-screen-2xl">
               <GetStarted />
             </div>
           </div>
@@ -157,7 +157,7 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
             <div className="centered-layout -translate-y-1/2">
               <ToolCard />
             </div>
-            <div className="centered-layout grid max-w-screen-xl">
+            <div className="centered-layout grid max-w-screen-2xl ">
               <LatestBloggposts
                 bloggs={bloggs}
                 title="Siste fra bloggen"
