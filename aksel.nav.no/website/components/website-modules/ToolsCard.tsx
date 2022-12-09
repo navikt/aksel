@@ -68,7 +68,7 @@ const tools = [
 
 export const ToolCard = () => {
   return (
-    <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center justify-center gap-8 rounded-2xl bg-[#99F6E4] py-12 px-2 md:flex-row md:justify-evenly md:gap-4">
+    <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center justify-center gap-16 rounded-2xl bg-[#99F6E4] py-12 px-2 md:flex-row md:justify-evenly md:gap-4">
       {tools.map((t) => (
         <div key={t.title} className="flex w-56 items-center gap-4 md:w-fit">
           <div className="rotate-45 rounded-lg bg-[#5EEAD4] p-3">
