@@ -1,4 +1,4 @@
-import { BodyShort, Link } from "@navikt/ds-react";
+import { Link } from "@navikt/ds-react";
 import NextLink from "next/link";
 const tools = [
   {

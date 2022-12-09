@@ -129,25 +129,27 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
       <div className="bg-[#DCCAF3]">
         <Header variant="transparent" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-          <div className="centered-layout xs:mt-36 xs:mb-32 mb-16 mt-20 grid max-w-screen-sm place-items-center text-center">
-            <Heading
-              level="1"
-              size="xlarge"
-              className="text-deepblue-800 xs:text-[3.25rem]"
-            >
-              {tekster.title}
-            </Heading>
-          </div>
+          <div className="min-h-screen-header pb-8">
+            <div className="centered-layout xs:mt-36 xs:mb-32 mb-16 mt-20 grid max-w-screen-sm place-items-center text-center">
+              <Heading
+                level="1"
+                size="xlarge"
+                className="text-deepblue-800 xs:text-[3.25rem]"
+              >
+                {tekster.title}
+              </Heading>
+            </div>
 
-          <IntroCards />
-          <div aria-hidden>
-            <Snowfall
-              color="rgba(0, 52, 83, 0.4)"
-              speed={[0.2, 1.0]}
-              snowflakeCount={160}
-              radius={[0.5, 2.0]}
-              style={{ height: "140%" }}
-            />
+            <IntroCards />
+            <div aria-hidden>
+              <Snowfall
+                color="rgba(0, 52, 83, 0.4)"
+                speed={[0.2, 1.0]}
+                snowflakeCount={160}
+                radius={[0.5, 2.0]}
+                style={{ height: "140%" }}
+              />
+            </div>
           </div>
           <div className="bg-surface-subtle min-h-96 relative">
             <div className="centered-layout grid max-w-screen-2xl">
