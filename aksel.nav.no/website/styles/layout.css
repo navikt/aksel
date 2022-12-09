@@ -7,9 +7,13 @@
 }
 
 .content-box {
-  @apply w-full max-w-content-w-padding px-4 pb-4 xs:mx-auto xs:px-6 md:mx-0 md:mr-auto md:px-12;
+  @apply max-w-content-w-padding xs:mx-auto xs:px-6 w-full px-4 pb-4 md:mx-0 md:mr-auto md:px-12;
 }
 
 .content-box--full {
-  @apply w-full px-4 pb-4 xs:mx-auto xs:px-6 md:mx-0 md:mr-auto md:px-12;
+  @apply xs:mx-auto xs:px-6 w-full px-4 pb-4 md:mx-0 md:mr-auto md:px-12;
+}
+
+.centered-layout {
+  @apply xs:px-6 mx-auto w-full px-4;
 }

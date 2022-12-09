@@ -89,7 +89,7 @@ const Page = (props: PageProps): JSX.Element => {
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div className="xs:px-6 mx-auto mb-40 grid w-full max-w-screen-xl px-4">
+          <div className="centered-layout mb-40 grid max-w-screen-xl">
             <LatestBlogs bloggs={props?.bloggposts} title="Blogg" />
             {/* Skriv for bloggen */}
 
