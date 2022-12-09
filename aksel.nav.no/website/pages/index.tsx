@@ -144,8 +144,9 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
             <Snowfall
               color="rgba(0, 52, 83, 0.4)"
               speed={[0.2, 1.0]}
-              snowflakeCount={100}
+              snowflakeCount={160}
               radius={[0.5, 2.0]}
+              style={{ height: "140%" }}
             />
           </div>
           <div className="bg-surface-subtle min-h-96 relative">
