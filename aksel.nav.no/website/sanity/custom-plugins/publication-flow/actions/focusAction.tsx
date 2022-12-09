@@ -1,12 +1,16 @@
 import { Button } from "@navikt/ds-react";
+import BlockContent from "@sanity/block-content-to-react";
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
   DocumentActionComponent,
   DocumentActionDescription,
   DocumentActionProps,
+  useClient,
   useDocumentOperation,
 } from "sanity";
+import useSWR from "swr";
+import { serializers } from "../../../util";
 
 export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   const WrappedFocus = (
@@ -59,8 +63,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
           onClose: () => setPublishOpen(false),
           content: (
             <>
-              <h3>Publiseringsdialog...</h3>
-              <p>TO DO: Fyll innhold her</p>
+              <QualityCheckContent type="publishContent" />
               <div className="flex justify-end gap-4">
                 <Button variant="tertiary">Nei, avbryt</Button>
                 <Button
@@ -139,4 +142,36 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   };
 
   return WrappedFocus;
+};
+
+interface QualityCheckContentProps {
+  type: "publishContent" | "preVerify" | "postVerify";
+}
+
+const QualityCheckContent = ({ type }: QualityCheckContentProps) => {
+  const client = useClient({ apiVersion: "2021-06-07" });
+  const { data, error } = useSWR(`*[_id == "publication_flow"][0]`, (query) =>
+    client.fetch(query)
+  );
+
+  if (error) {
+    return <div>Kan ikke hente sjekkliste for kvalitetssjekk...</div>;
+  }
+
+  const blocks = data?.[type];
+
+  console.log(blocks);
+
+  return (
+    <>
+      <div className="flex shrink-0 items-center justify-between">
+        <BlockContent
+          blocks={blocks ?? []}
+          serializers={serializers}
+          options={{ size: "small" }}
+          renderContainerOnSingleChild
+        />
+      </div>
+    </>
+  );
 };
