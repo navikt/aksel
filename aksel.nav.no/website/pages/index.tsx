@@ -48,7 +48,7 @@ const IntroCards = () => {
         <Link href={href} passHref>
           <a
             key={title}
-            className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group rounded-lg p-4 hover:ring-1 focus:outline-none"
+            className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none"
           >
             <span className="xs:flex items-center gap-2">
               <Icon aria-hidden className="shrink-0 text-2xl" />
