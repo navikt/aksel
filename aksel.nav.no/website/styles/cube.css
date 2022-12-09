@@ -1,0 +1,165 @@
+.aksel-cube-wrapper {
+  animation: aksel-cube-bg 5s ease infinite;
+}
+
+.aksel-cube {
+  animation: aksel-cube-rotate 5s ease-in-out infinite;
+}
+
+.aksel-cube__1 {
+  animation: aksel-cube-1 5s ease-in-out infinite;
+}
+
+.aksel-cube__2 {
+  animation: aksel-cube-2 5s ease-in-out infinite;
+}
+
+.aksel-cube__3 {
+  animation: aksel-cube-3 5s ease-in-out infinite;
+}
+
+.aksel-cube__4 {
+  animation: aksel-cube-4 5s ease-in-out infinite;
+}
+
+.aksel-cube__5 {
+  animation: aksel-cube-5 5s ease-in-out infinite;
+}
+
+.aksel-cube__6 {
+  animation: aksel-cube-6 30s ease-in-out infinite;
+}
+
+@keyframes aksel-cube-bg {
+  0% {
+    background-color: #dccaf3;
+  }
+
+  10% {
+    background-color: #dccaf3;
+  }
+
+  33% {
+    background-color: #ffeccc;
+  }
+
+  66% {
+    background-color: #b2f0e4;
+  }
+
+  90% {
+    background-color: #dccaf3;
+  }
+
+  100% {
+    background-color: #dccaf3;
+  }
+}
+
+@keyframes aksel-cube-rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  33% {
+    transform: rotate(45deg);
+  }
+
+  66% {
+    transform: rotate(45deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes aksel-cube-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  33% {
+    transform: translate(0, 0);
+  }
+
+  66% {
+    transform: translate(37.42%, -37.42%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes aksel-cube-2 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  33% {
+    transform: translate(0, 0);
+  }
+
+  66% {
+    transform: translate(24.95%, -24.95%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes aksel-cube-3 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  33% {
+    transform: translate(0, 0);
+  }
+
+  66% {
+    transform: translate(12.45%, -12.45%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes aksel-cube-5 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  33% {
+    transform: translate(0, 0);
+  }
+
+  66% {
+    transform: translate(-12.45%, 12.45%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes aksel-cube-6 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  33% {
+    transform: translate(0, 0);
+  }
+
+  66% {
+    transform: translate(-24.95%, 24.95%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
