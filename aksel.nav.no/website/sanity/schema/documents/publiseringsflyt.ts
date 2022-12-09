@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { block, headingStyles } from "../objects";
 
 export const Publiseringsflyt = defineType({
   title: "Publiseringsflyt",
@@ -6,10 +7,17 @@ export const Publiseringsflyt = defineType({
   type: "document",
   fields: [
     defineField({
-      title: "BB",
-      description: "Hello world",
-      name: "content",
-      type: "string",
+      title: "Publisering",
+      description: "Innhold til kvalitetssjekk-modal ved publisering.",
+      name: "publishContent",
+      type: "array",
+      of: [
+        {
+          ...block,
+          //@ts-ignore
+          styles: [...headingStyles],
+        },
+      ],
     }),
   ],
 });
