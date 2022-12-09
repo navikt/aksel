@@ -59,8 +59,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
           onClose: () => setPublishOpen(false),
           content: (
             <>
-              <h3>Publiseringsdialog...</h3>
-              <p>TO DO: Fyll innhold her</p>
+              <QualityCheckContent type="publish" />
               <div className="flex justify-end gap-4">
                 <Button variant="tertiary">Nei, avbryt</Button>
                 <Button
@@ -139,4 +138,16 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   };
 
   return WrappedFocus;
+};
+
+interface QualityCheckContentProps {
+  type: "publish" | "preVerify" | "postVerify";
+}
+
+const QualityCheckContent = ({ type }: QualityCheckContentProps) => {
+  return (
+    <>
+      <p>Kvalitetssjekk type: {type}</p>
+    </>
+  );
 };
