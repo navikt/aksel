@@ -17,6 +17,11 @@ export const Oppdateringsvarsel = defineType({
     defineField({
       type: "date",
       name: "lastVerified",
+      description: "Kun synlig for utviklere",
+      hidden: ({ currentUser }) => {
+        return !currentUser?.roles.some((r) => r.name === "developer");
+      },
+      readOnly: true,
     }),
   ],
 });
