@@ -143,7 +143,7 @@ interface QualityCheckContentProps {
   type: "publishContent" | "preVerify" | "postVerify";
 }
 
-const QualityCheckContent = ({ type }: QualityCheckContentProps) => {
+export const QualityCheckContent = ({ type }: QualityCheckContentProps) => {
   const client = useClient({ apiVersion: "2021-06-07" });
   const { data, error } = useSWR(`*[_id == "publication_flow"][0]`, (query) =>
     client.fetch(query)
