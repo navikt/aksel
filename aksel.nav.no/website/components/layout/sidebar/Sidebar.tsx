@@ -24,9 +24,9 @@ const NavItem = ({
       className={cl(
         "focus-within:shadow-focus peer relative rounded-sm pl-2 before:absolute before:left-0 before:z-[-1]",
         {
-          "before:border-l-deepblue-300 before:top-1/2 before:h-6 before:-translate-y-1/2 before:border-l-[8px]":
+          "before:border-l-border-action-selected  before:top-1/2 before:h-6 before:-translate-y-1/2 before:rounded-full before:border-l-[4px]":
             isActive,
-          "before:h-full before:border-l before:border-l-gray-200 hover:before:border-l-2 hover:before:border-l-gray-500":
+          "before:h-full before:rounded-full before:border-l before:border-l-gray-200 hover:before:top-1/2 hover:before:h-6 hover:before:-translate-y-1/2 hover:before:border-l-2 hover:before:border-l-gray-400":
             !isActive,
         }
       )}
