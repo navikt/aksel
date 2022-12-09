@@ -1,16 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
-import { logNav, TemaCard } from "@/components";
+import { logNav } from "@/components";
 import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
-import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Next } from "@navikt/ds-icons";
-import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
+import { Detail, Heading } from "@navikt/ds-react";
+import {
+  ComponentIcon,
+  ControlsIcon,
+  DownloadIcon,
+  TokenIcon,
+} from "@sanity/icons";
 import cl from "classnames";
 import { Header } from "components/layout/header/Header";
 import { LatestBlogs } from "components/website-modules/LatestBloggs";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
+import Link from "next/link";
 import NextLink from "next/link";
 import { lazy, useEffect, useState } from "react";
 import Snowfall from "react-snowfall";
@@ -102,60 +108,53 @@ const portalkort = [
   },
 ];
 
-const Portaler = () => {
-  const logPortalCard = (e) =>
-    logNav(
-      "portal-kort",
-      window.location.pathname,
-      e.currentTarget.getAttribute("href")
-    );
+const introcards = [
+  {
+    title: "Komponenter",
+    desc: "Bibliotekene Core, NAV.no, Interne flater",
+    icon: ComponentIcon,
+    href: "#",
+  },
+  {
+    title: "Styling",
+    desc: "Tokens for farger, spacing, shadows, etc.",
+    icon: TokenIcon,
+    href: "#",
+  },
+  {
+    title: "Stæsj",
+    desc: "Last ned font og ikoner",
+    icon: DownloadIcon,
+    href: "#",
+  },
+  /* {
+    title: "Verktøy",
+    desc: "NAVs digitale verktøy",
+    icon: ControlsIcon,
+    href: "#",
+  }, */
+];
 
+const IntroCards = () => {
   return (
-    <div className="mt-12 md:mt-4">
-      <Heading
-        level="2"
-        size="xsmall"
-        className="uppercase tracking-widest text-white"
-      >
-        Snarveier
-      </Heading>
-      <nav aria-label="Side-snarveier">
-        <ul className="mt-2 grid grid-flow-row gap-x-6 md:grid-cols-2 lg:grid-cols-1">
-          {portalkort.map((x, y) => (
-            <li
-              key={x.title}
-              className={cl("border-gray-400/20 py-2", {
-                "border-t-0  md:border-t lg:border-t-0": y === 0,
-                "border-t ": y > 0,
-              })}
-            >
-              <NextLink href={x.href} passHref>
-                <a
-                  onClick={(e) => logPortalCard(e)}
-                  className="focus-visible:shadow-focus-inverted group flex items-center gap-2 py-1 focus:outline-none md:w-auto xl:gap-3"
-                >
-                  <div className="group-hover:text-deepblue-900 relative grid aspect-square w-12 shrink-0 place-items-center rounded-full bg-blue-400 text-white group-hover:bg-white">
-                    {x.icon}
-                  </div>
-                  <div className="pr-8 text-white">
-                    <Heading
-                      level="3"
-                      size="xsmall"
-                      className="group-hover:underline"
-                    >
-                      {x.title}
-                    </Heading>
-                    <Detail size="small" className="text-deepblue-100/95">
-                      {x.description}
-                    </Detail>
-                  </div>
-                  <Next className="ml-auto shrink-0 opacity-80" aria-hidden />
-                </a>
-              </NextLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    /* grid-cols-2 */
+    <div className="grid w-full grid-cols-2 gap-6">
+      {introcards.map(({ icon: Icon, title, desc, href }) => (
+        <Link href={href} passHref>
+          <a
+            key={title}
+            className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group rounded-lg p-4 hover:ring-1 focus:outline-none"
+          >
+            <span className="xs:flex items-center gap-2">
+              <Icon aria-hidden className="shrink-0 text-2xl" />
+              <span className="text-xl font-semibold group-hover:underline">
+                {title}
+              </span>
+            </span>
+            <div className="text-text-subtle mt-2">{desc}</div>
+          </a>
+        </Link>
+      ))}
     </div>
   );
 };
@@ -207,14 +206,17 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
       <div className="bg-[#DCCAF3]">
         <Header variant="transparent" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-          <div className="centered-layout mt-36 mb-32 grid max-w-screen-sm place-items-center text-center">
+          <div className="centered-layout xs:mt-36 xs:mb-32 mb-16 mt-20 grid max-w-screen-sm place-items-center text-center">
             <Heading
               level="1"
               size="xlarge"
-              className="text-deepblue-800 text-[3.25rem]"
+              className="text-deepblue-800 xs:text-[3.25rem]"
             >
               {tekster.title}
             </Heading>
+          </div>
+          <div className="centered-layout mb-20 grid max-w-screen-md place-items-center">
+            <IntroCards />
           </div>
           <div className="bg-surface-subtle">
             <div className="centered-layout grid max-w-screen-xl">
