@@ -126,12 +126,10 @@ export function TableOfContentsv2({
     element && element?.scrollIntoView();
   };
 
-  const renderToc = !(toc.length < 2) && !hideToc;
-
   return (
     <aside
       className={cl(
-        "algolia-ignore-index sticky top-20 z-[1] order-1 my-0 mx-auto mb-16 hidden h-full w-full max-w-[160px] flex-col items-start xl:flex"
+        "algolia-ignore-index sticky top-20 z-[1] order-1 my-0 mx-6 mb-16 mr-auto hidden h-full w-full max-w-[160px] flex-col items-start xl:flex"
       )}
     >
       <BodyShort
