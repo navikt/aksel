@@ -32,7 +32,7 @@ const getImage = (n: string, size: "small" | "large") => {
   return `/images/thumbnail-large/Large-${(hash % largeOptions) - 1 + 1}.svg`;
 };
 
-export const LatestBlogs = ({
+export const LatestBloggposts = ({
   bloggs,
   title,
   variant = "blogg",
@@ -123,14 +123,14 @@ export const LatestBlogs = ({
             "col-span-1 grid": variant === "blogg",
           })}
         >
-          <div
-            className={cl("grid gap-12", {
-              "g ": variant === "forside",
-              "": variant === "blogg",
-            })}
-          >
+          <div className={cl("grid gap-12")}>
             {bloggs.slice(1, 4).map((blog) => (
-              <div key={blog._id} className="flex gap-6">
+              <div
+                key={blog._id}
+                className={cl("flex gap-6", {
+                  "border-b-border-subtle border-b pb-8": variant === "forside",
+                })}
+              >
                 {variant === "blogg" && (
                   <div className="relative hidden aspect-square h-[11.75rem] lg:block">
                     {blog?.seo?.image ? (
@@ -189,7 +189,11 @@ export const LatestBlogs = ({
 
       {/* Mobile view */}
       <div className="my-20 mx-auto grid max-w-xl gap-12 md:hidden">
-        <div className="w-full">
+        <div
+          className={cl("w-full", {
+            "border-b-border-subtle border-b pb-8": variant === "forside",
+          })}
+        >
           <div className="relative mb-10 block aspect-video">
             {bloggs[0]?.seo?.image ? (
               <Image
@@ -237,30 +241,37 @@ export const LatestBlogs = ({
         </div>
         <div className="grid w-full gap-12">
           {bloggs.slice(1, 4).map((blog) => (
-            <div key={blog._id}>
-              <div className="relative mb-6 block aspect-video">
-                {blog?.seo?.image ? (
-                  <Image
-                    src={urlFor(blog.seo.image).auto("format").url()}
-                    decoding="async"
-                    layout="fill"
-                    objectFit="cover"
-                    aria-hidden
-                    priority
-                    className="rounded-lg"
-                  />
-                ) : (
-                  <Image
-                    src={getImage(blog?.heading ?? "", "small")}
-                    decoding="async"
-                    layout="fill"
-                    objectFit="contain"
-                    aria-hidden
-                    priority
-                    className="rounded-lg"
-                  />
-                )}
-              </div>
+            <div
+              key={blog._id}
+              className={cl({
+                "border-b-border-subtle border-b pb-8": variant === "forside",
+              })}
+            >
+              {variant === "blogg" && (
+                <div className="relative mb-6 block aspect-video">
+                  {blog?.seo?.image ? (
+                    <Image
+                      src={urlFor(blog.seo.image).auto("format").url()}
+                      decoding="async"
+                      layout="fill"
+                      objectFit="cover"
+                      aria-hidden
+                      priority
+                      className="rounded-lg"
+                    />
+                  ) : (
+                    <Image
+                      src={getImage(blog?.heading ?? "", "small")}
+                      decoding="async"
+                      layout="fill"
+                      objectFit="contain"
+                      aria-hidden
+                      priority
+                      className="rounded-lg"
+                    />
+                  )}
+                </div>
+              )}
               <div>
                 <Heading size="small" as="div">
                   <NextLink href={`/${blog.slug}`} passHref>

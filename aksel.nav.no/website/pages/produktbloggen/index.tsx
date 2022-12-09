@@ -6,7 +6,7 @@ import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import {
   getAuthors,
-  LatestBlogs,
+  LatestBloggposts,
 } from "components/website-modules/LatestBloggs";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
@@ -90,7 +90,7 @@ const Page = (props: PageProps): JSX.Element => {
           className="min-h-[80vh] focus:outline-none"
         >
           <div className="centered-layout mb-40 grid max-w-screen-xl">
-            <LatestBlogs bloggs={props?.bloggposts} title="Blogg" />
+            <LatestBloggposts bloggs={props?.bloggposts} title="Blogg" />
             {/* Skriv for bloggen */}
 
             <div className="full-bleed my-20 flex h-72 items-center bg-[#B2F0E4] px-4 md:rounded-2xl md:px-6 lg:h-80 lg:bg-[#68D1BF] lg:pl-12">

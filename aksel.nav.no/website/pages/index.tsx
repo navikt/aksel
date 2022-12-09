@@ -3,8 +3,8 @@ import { logNav } from "@/components";
 import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
-import { Next } from "@navikt/ds-icons";
-import { Detail, Heading } from "@navikt/ds-react";
+import { Next, NextFilled } from "@navikt/ds-icons";
+import { Detail, Heading, Link as DsLink } from "@navikt/ds-react";
 import {
   ComponentIcon,
   ControlsIcon,
@@ -13,7 +13,7 @@ import {
 } from "@sanity/icons";
 import cl from "classnames";
 import { Header } from "components/layout/header/Header";
-import { LatestBlogs } from "components/website-modules/LatestBloggs";
+import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
@@ -137,8 +137,7 @@ const introcards = [
 
 const IntroCards = () => {
   return (
-    /* grid-cols-2 */
-    <div className="grid w-full grid-cols-2 gap-6">
+    <div className="centered-layout mb-72 grid w-full max-w-screen-md grid-cols-2  gap-6">
       {introcards.map(({ icon: Icon, title, desc, href }) => (
         <Link href={href} passHref>
           <a
@@ -159,20 +158,38 @@ const IntroCards = () => {
   );
 };
 
+const GetStarted = () => {
+  return (
+    <div className="bg-deepblue-700 text-text-on-action -top-1/2 mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
+      <Heading size="xlarge" level="2" className="text-center">
+        Kom i gang
+      </Heading>
+      <div className="xs:flex-row mx-auto mt-6 flex w-fit flex-col justify-center gap-4 md:gap-8">
+        <Link href="#" passHref>
+          <a className="focus-visible:text-text-default flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
+            Produktleder
+            <NextFilled aria-hidden className="h-6 w-6" />
+          </a>
+        </Link>
+        <Link href="#" passHref>
+          <a className="focus-visible:text-text-default flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
+            Utvikler
+            <NextFilled aria-hidden className="h-6 w-6" />
+          </a>
+        </Link>
+        <Link href="#" passHref>
+          <a className="focus-visible:text-text-default flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
+            Designer <NextFilled aria-hidden className="h-6 w-6" />
+          </a>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
 const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
-  const [xmas, setXmas] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setXmas(true), 10000);
-
-    return () => {
-      clearTimeout(t);
-      setXmas(false);
-    };
-  }, []);
-
   const filteredTemas = temaer.filter((x) => x.refCount > 0);
 
   return (
@@ -215,28 +232,25 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
               {tekster.title}
             </Heading>
           </div>
-          <div className="centered-layout mb-20 grid max-w-screen-md place-items-center">
-            <IntroCards />
+
+          <IntroCards />
+          <div aria-hidden>
+            <Snowfall
+              color="rgba(0, 52, 83, 0.4)"
+              speed={[0.2, 1.0]}
+              snowflakeCount={100}
+              radius={[0.5, 2.0]}
+            />
           </div>
-          <div className="bg-surface-subtle">
+          <div className="bg-surface-subtle relative">
             <div className="centered-layout grid max-w-screen-xl">
+              <GetStarted />
               {/* placeholder */}
             </div>
           </div>
-          <div className="bg-surface-default">
+          <div className="bg-surface-default pb-36">
             <div className="centered-layout grid max-w-screen-xl">
-              {xmas && (
-                <div aria-hidden>
-                  <Snowfall
-                    color="rgba(230, 241, 248, 0.3)"
-                    speed={[0.2, 1.0]}
-                    snowflakeCount={100}
-                    style={{ height: "120%" }}
-                    radius={[0.5, 2.0]}
-                  />
-                </div>
-              )}
-              <LatestBlogs
+              <LatestBloggposts
                 bloggs={bloggs}
                 title="Siste fra bloggen"
                 variant="forside"
