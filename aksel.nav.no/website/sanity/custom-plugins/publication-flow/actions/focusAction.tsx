@@ -117,12 +117,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
           onClose: () => setVerifyOpen(false),
           content: (
             <>
-              <h3>Godkjenningsdialog...</h3>
-              <p>TO DO: Fyll innhold her</p>
-              <p>{updateDialogContent.description[verifiedStatus]}</p>
-              <ul>
-                <li>{updateDialogContent.checks[verifiedStatus]}</li>
-              </ul>
+              <QualityCheckContent type={`${verifiedStatus}Verify`} />
               <div className="flex justify-end gap-4">
                 <Button variant="tertiary">Nei, avbryt</Button>
                 <Button
