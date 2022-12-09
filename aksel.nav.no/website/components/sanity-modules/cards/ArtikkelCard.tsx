@@ -18,7 +18,6 @@ export const ArtikkelCard = ({
     contributor: { title: string } | null;
   }
 >) => {
-  console.log(contributor);
   return (
     <NextLink
       href={{
