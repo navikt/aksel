@@ -1,12 +1,12 @@
 .aksel-cube-wrapper {
-  animation: aksel-cube-bg 30s ease infinite;
+  /* animation: aksel-cube-bg 30s ease infinite; */
   z-index: 0;
 }
 
 .aksel-cube {
   animation: aksel-cube-rotate 30s ease-in-out infinite;
   top: 16rem;
-  left: 45rem;
+  margin-left: 50%;
   position: absolute;
   z-index: -1;
   opacity: 0.3;
@@ -82,25 +82,25 @@
   0% {
     transform: rotate(-45deg);
     top: 16rem;
-    left: 45rem;
+    margin-left: 50%;
   }
 
   33% {
     transform: rotate(0);
     top: 19rem;
-    left: 31.5rem;
+    margin-left: 34.3%;
   }
 
   66% {
     transform: rotate(0);
     top: 19rem;
-    left: 31.5rem;
+    margin-left: 34.3%;
   }
 
   100% {
     transform: rotate(-45deg);
     top: 16rem;
-    left: 45rem;
+    margin-left: 50%;
   }
 }
 
