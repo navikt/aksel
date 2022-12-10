@@ -177,11 +177,10 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
 
       <div className="aksel-cube-wrapper relative max-w-[100vw] overflow-hidden bg-[#DCCAF3]">
         <Header variant="transparent" />
-        <AkselCube />
 
         <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">
           <div className="z-20 pb-8">
-            <div className="centered-layout xs:mt-36 xs:mb-32 mb-16 mt-20 grid max-w-screen-sm place-items-center text-center">
+            <div className="centered-layout xs:mt-36 xs:mb-32 relative mb-16 mt-20 grid max-w-screen-sm place-items-center text-center">
               <Heading
                 level="1"
                 size="xlarge"
@@ -189,6 +188,7 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
               >
                 {tekster.title}
               </Heading>
+              <AkselCube />
             </div>
 
             <IntroCards />
