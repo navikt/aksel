@@ -7,6 +7,7 @@
   animation: aksel-cube-rotate 30s ease-in-out infinite;
   top: 16rem;
   margin-left: 50%;
+  transform: rotate(-45deg);
   position: absolute;
   z-index: -1;
   opacity: 0.3;
