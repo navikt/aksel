@@ -1,10 +1,10 @@
 .aksel-cube-wrapper {
-  /* animation: aksel-cube-bg 30s ease infinite; */
+  animation: aksel-cube-bg 30s ease infinite;
   z-index: 0;
 }
 
 .aksel-cube {
-  animation: aksel-cube-rotate 5s ease-in-out infinite;
+  animation: aksel-cube-rotate 30s ease-in-out infinite;
   transform: rotate(-45deg);
   position: absolute;
   z-index: -1;
@@ -12,21 +12,21 @@
 }
 
 .aksel-cube-1 {
-  animation: aksel-cube-1 5s ease-in-out infinite;
+  animation: aksel-cube-1 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: translate(-95rem, -13.95rem);
 }
 
 .aksel-cube-2 {
-  animation: aksel-cube-2 5s ease-in-out infinite;
+  animation: aksel-cube-2 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: translate(-69.5rem, -13.95rem);
 }
 
 .aksel-cube-3 {
-  animation: aksel-cube-3 5s ease-in-out infinite;
+  animation: aksel-cube-3 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
@@ -38,14 +38,14 @@
 }
 
 .aksel-cube-5 {
-  animation: aksel-cube-5 5s ease-in-out infinite;
+  animation: aksel-cube-5 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
 }
 
 .aksel-cube-6 {
-  animation: aksel-cube-6 5s ease-in-out infinite;
+  animation: aksel-cube-6 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: translate(70rem, -13.95rem);
