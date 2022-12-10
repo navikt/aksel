@@ -1,33 +1,55 @@
 .aksel-cube-wrapper {
-  animation: aksel-cube-bg 5s ease infinite;
+  animation: aksel-cube-bg 30s ease infinite;
+  z-index: 0;
 }
 
 .aksel-cube {
-  animation: aksel-cube-rotate 5s ease-in-out infinite;
+  animation: aksel-cube-rotate 30s ease-in-out infinite;
+  top: 16rem;
+  left: 45rem;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.3;
 }
 
-.aksel-cube__1 {
-  animation: aksel-cube-1 5s ease-in-out infinite;
+.aksel-cube-1 {
+  animation: aksel-cube-1 30s ease-in-out infinite;
+  color: white;
+  position: absolute;
+  transform: translate(-95rem, -13.95rem);
 }
 
-.aksel-cube__2 {
-  animation: aksel-cube-2 5s ease-in-out infinite;
+.aksel-cube-2 {
+  animation: aksel-cube-2 30s ease-in-out infinite;
+  color: white;
+  position: absolute;
+  transform: translate(-69.5rem, -13.95rem);
 }
 
-.aksel-cube__3 {
-  animation: aksel-cube-3 5s ease-in-out infinite;
+.aksel-cube-3 {
+  animation: aksel-cube-3 30s ease-in-out infinite;
+  color: white;
+  position: absolute;
+  transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
 }
 
-.aksel-cube__4 {
-  animation: aksel-cube-4 5s ease-in-out infinite;
+.aksel-cube-4 {
+  color: white;
+  position: absolute;
 }
 
-.aksel-cube__5 {
-  animation: aksel-cube-5 5s ease-in-out infinite;
+.aksel-cube-5 {
+  animation: aksel-cube-5 30s ease-in-out infinite;
+  color: white;
+  position: absolute;
+  transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
 }
 
-.aksel-cube__6 {
+.aksel-cube-6 {
   animation: aksel-cube-6 30s ease-in-out infinite;
+  color: white;
+  position: absolute;
+  transform: translate(70rem, -13.95rem);
 }
 
 @keyframes aksel-cube-bg {
@@ -43,7 +65,7 @@
     background-color: #ffeccc;
   }
 
-  66% {
+  60% {
     background-color: #b2f0e4;
   }
 
@@ -58,108 +80,116 @@
 
 @keyframes aksel-cube-rotate {
   0% {
-    transform: rotate(0);
+    transform: rotate(-45deg);
+    top: 16rem;
+    left: 45rem;
   }
 
   33% {
-    transform: rotate(45deg);
+    transform: rotate(0);
+    top: 19rem;
+    left: 31.5rem;
   }
 
   66% {
-    transform: rotate(45deg);
+    transform: rotate(0);
+    top: 19rem;
+    left: 31.5rem;
   }
 
   100% {
-    transform: rotate(0);
+    transform: rotate(-45deg);
+    top: 16rem;
+    left: 45rem;
   }
 }
 
 @keyframes aksel-cube-1 {
   0% {
-    transform: translate(0, 0);
+    transform: translate(-95rem, -13.95rem);
   }
 
   33% {
-    transform: translate(0, 0);
+    transform: translate(-95rem, -13.95rem);
   }
 
   66% {
-    transform: translate(37.42%, -37.42%);
+    transform: translate(-13.8rem, -13.95rem);
   }
 
   100% {
-    transform: translate(0, 0);
+    transform: translate(-95rem, -13.95rem);
   }
 }
 
 @keyframes aksel-cube-2 {
   0% {
-    transform: translate(0, 0);
+    transform: translate(-69.5rem, -13.95rem);
   }
 
   33% {
-    transform: translate(0, 0);
+    transform: translate(-69.5rem, -13.95rem);
   }
 
   66% {
-    transform: translate(24.95%, -24.95%);
+    transform: translate(-13.95rem, -13.95rem);
   }
 
   100% {
-    transform: translate(0, 0);
+    transform: translate(-69.5rem, -13.95rem);
   }
 }
 
 @keyframes aksel-cube-3 {
   0% {
-    transform: translate(0, 0);
+    transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
   }
 
   33% {
-    transform: translate(0, 0);
+    transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
   }
 
   66% {
-    transform: translate(12.45%, -12.45%);
+    transform: scaleX(-1) rotate(90deg) translate(0, 0);
   }
 
   100% {
-    transform: translate(0, 0);
+    transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
   }
 }
 
 @keyframes aksel-cube-5 {
   0% {
-    transform: translate(0, 0);
+    transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
   }
 
   33% {
-    transform: translate(0, 0);
+    transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
   }
 
   66% {
-    transform: translate(-12.45%, 12.45%);
+    transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 0);
   }
 
   100% {
-    transform: translate(0, 0);
+    transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
   }
 }
 
 @keyframes aksel-cube-6 {
   0% {
-    transform: translate(0, 0);
+    transform: translate(70rem, -13.95rem);
   }
 
   33% {
-    transform: translate(0, 0);
+    transform: translate(70rem, -13.95rem);
   }
 
   66% {
-    transform: translate(-24.95%, 24.95%);
+    transform: translate(13.9rem, -13.95rem);
   }
 
   100% {
-    transform: translate(0, 0);
+    transform: translate(70rem, -13.95rem);
   }
 }
