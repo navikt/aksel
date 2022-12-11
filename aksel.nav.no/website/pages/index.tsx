@@ -6,6 +6,7 @@ import { NextFilled } from "@navikt/ds-icons";
 import { Heading } from "@navikt/ds-react";
 import { ComponentIcon, DownloadIcon, TokenIcon } from "@sanity/icons";
 import { Header } from "components/layout/header/Header";
+import { AkselArrow } from "components/website-modules/AkselArrow";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
@@ -63,7 +64,7 @@ const IntroCards = () => {
     </div>
   );
 };
-
+/* <div className="xs:flex-row mx-auto mt-6 flex w-fit flex-col justify-center gap-4 md:gap-8"> */
 const GetStarted = () => {
   return (
     <div className="bg-deepblue-700 text-text-on-action mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
@@ -72,20 +73,31 @@ const GetStarted = () => {
       </Heading>
       <div className="xs:flex-row mx-auto mt-6 flex w-fit flex-col justify-center gap-4 md:gap-8">
         <Link href="#" passHref>
-          <a className="focus-visible:text-text-default flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
-            Produktleder
-            <NextFilled aria-hidden className="h-6 w-6" />
+          <a className="focus-visible:text-text-default xs:grid xs:grid-cols-4 group flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
+            <span className="col-span-3">Produktleder</span>
+            <AkselArrow
+              inverted
+              className="col-span-1 col-start-4 ml-1 rotate-180"
+            />
+          </a>
+        </Link>
+
+        <Link href="#" passHref>
+          <a className="focus-visible:text-text-default xs:grid xs:grid-cols-3 group flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
+            <span className="col-span-2">Utvikler</span>
+            <AkselArrow
+              inverted
+              className="col-span-1 col-start-3 ml-1 rotate-180"
+            />
           </a>
         </Link>
         <Link href="#" passHref>
-          <a className="focus-visible:text-text-default flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
-            Utvikler
-            <NextFilled aria-hidden className="h-6 w-6" />
-          </a>
-        </Link>
-        <Link href="#" passHref>
-          <a className="focus-visible:text-text-default flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
-            Designer <NextFilled aria-hidden className="h-6 w-6" />
+          <a className="focus-visible:text-text-default xs:grid xs:grid-cols-3 group flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
+            <span className="col-span-2">Designer</span>
+            <AkselArrow
+              inverted
+              className="col-span-1 col-start-3 ml-1 rotate-180"
+            />
           </a>
         </Link>
       </div>
