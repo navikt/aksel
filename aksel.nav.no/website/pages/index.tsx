@@ -2,9 +2,10 @@
 import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
-import { Heading } from "@navikt/ds-react";
+import { BodyLong, Heading, Link as DsLink } from "@navikt/ds-react";
 import { ComponentIcon, DownloadIcon, TokenIcon } from "@sanity/icons";
 import { Header } from "components/layout/header/Header";
+import { GodPraksisCard } from "components/sanity-modules/cards/GodPraksisCard";
 import { AkselArrow } from "components/website-modules/AkselArrow";
 import { AkselCube } from "components/website-modules/Cube";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
@@ -165,9 +166,37 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
               />
             </div>
           </div>
-          <div className="bg-surface-subtle min-h-96 relative">
+          <div className="bg-surface-subtle min-h-96 relative pb-32">
             <div className="centered-layout grid max-w-screen-2xl">
               <GetStarted />
+              {/* God praksis */}
+              <div className="mx-auto">
+                <Heading
+                  level="2"
+                  size="xlarge"
+                  className="text-deepblue-800 xs:text-[3.25rem] mb-8 text-center"
+                >
+                  God praksis
+                </Heading>
+                <BodyLong className="text-center">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Commodi sunt minima dicta omnis dignissimos, necessitatibus.
+                </BodyLong>
+              </div>
+              <div className="card-grid-2-1 mx-auto mt-16 max-w-5xl">
+                <GodPraksisCard />
+                <GodPraksisCard />
+                <GodPraksisCard />
+                <GodPraksisCard />
+              </div>
+              <div className="mx-auto mt-8 pl-7">
+                <Link href="/god-praksis" passHref>
+                  <DsLink className="text-deepblue-500 group grid grid-cols-5">
+                    <span className="col-span-4">Utforsk god praksis</span>
+                    <AkselArrow className="group-focus:text-text-on-action col-span-1 col-start-5 ml-1 rotate-180" />
+                  </DsLink>
+                </Link>
+              </div>
             </div>
           </div>
           <div className="bg-surface-default relative pb-36">
