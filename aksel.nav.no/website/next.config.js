@@ -112,6 +112,12 @@ const config = () =>
             permanent: true,
           },
           {
+            source: "/storybook",
+            destination:
+              "https://master--5f801fb2aea7820022de2936.chromatic.com/",
+            permanent: true,
+          },
+          {
             source: "/prinsipper",
             destination: "/",
             permanent: false,
