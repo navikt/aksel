@@ -174,7 +174,7 @@ export const LatestBloggposts = ({
                   <BodyLong className="mt-4" size="small">
                     {blog?.ingress}
                   </BodyLong>
-                  {getAuthors(blog).length > 0 && (
+                  {getAuthors(blog).length > 0 ? (
                     <BodyShort
                       size="small"
                       className="text-text-subtle mt-4 flex gap-2"
@@ -182,6 +182,12 @@ export const LatestBloggposts = ({
                       <span className="font-semibold">
                         {getAuthors(blog)[0]}
                       </span>
+                      <span>
+                        {dateStr(blog?.publishedAt ?? blog._createdAt)}
+                      </span>
+                    </BodyShort>
+                  ) : (
+                    <BodyShort size="small" className="text-text-subtle mt-4">
                       <span>
                         {dateStr(blog?.publishedAt ?? blog._createdAt)}
                       </span>
@@ -296,12 +302,16 @@ export const LatestBloggposts = ({
                 <BodyLong className="mt-4" size="small">
                   {blog?.ingress}
                 </BodyLong>
-                {getAuthors(blog).length > 0 && (
+                {getAuthors(blog).length > 0 ? (
                   <BodyShort
                     size="small"
                     className="text-text-subtle mt-4 flex gap-2"
                   >
                     <span className="font-semibold">{getAuthors(blog)[0]}</span>
+                    <span>{dateStr(blog?.publishedAt ?? blog._createdAt)}</span>
+                  </BodyShort>
+                ) : (
+                  <BodyShort size="small" className="text-text-subtle mt-4">
                     <span>{dateStr(blog?.publishedAt ?? blog._createdAt)}</span>
                   </BodyShort>
                 )}
