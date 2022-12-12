@@ -52,8 +52,8 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div className="relative overflow-x-clip pt-12">
-            <div className="dynamic-wrapper px-4 pb-6">
+          <div className="relative overflow-x-clip pt-12 text-center">
+            <div className="dynamic-wrapper px-4 pb-6 text-center">
               <Image
                 src={urlFor(page.pictogram).auto("format").url()}
                 decoding="async"
@@ -65,12 +65,12 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
               <Heading
                 level="1"
                 size="xlarge"
-                className="algolia-index-lvl1 text-5xl"
+                className="algolia-index-lvl1 lg:text-2xlarge mt-8"
               >
                 {page.title}
               </Heading>
 
-              <div className="mt-4 flex flex-col justify-between gap-8 xl:flex-row">
+              <div className="mt-4 flex flex-col items-center justify-between gap-8 xl:flex-row">
                 <SanityBlockContent
                   blocks={page.beskrivelse}
                   noLastMargin
@@ -87,7 +87,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                   <Label
                     as="div"
                     size="small"
-                    className="bg-deepblue-700 text-text-on-inverted flex rounded-t-lg px-4 pt-4 pb-3 uppercase md:px-6 md:pt-6 md:pb-4"
+                    className="px-4 pt-4 pb-3 text-center text-sm uppercase md:px-6 md:pt-6 md:pb-4"
                   >
                     Ansvarlig for tema
                   </Label>
