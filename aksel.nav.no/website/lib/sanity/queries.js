@@ -330,7 +330,11 @@ export const akselTemaDocs = `{
         "contributor": ${contributorsSingle}
       }
     },
-    "pictogram":  pictogram.asset-> url,
+    "pictogram": pictogram.asset-> {
+        url,
+        altText,
+        description
+    },
   }
 }`;
 

@@ -21,9 +21,10 @@ type ArtiklerT = Partial<
 >;
 
 export interface AkselTemaPage
-  extends Omit<SanityT.Schema.aksel_tema, "ansvarlig"> {
+  extends Omit<SanityT.Schema.aksel_tema, "ansvarlig" | "pictogram"> {
   artikler: ArtiklerT[];
   ansvarlig?: { title?: string; roller: string[] };
+  pictogram: { url: string; altText?: string; description?: string };
 }
 
 interface PageProps {
@@ -38,8 +39,6 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
   }
 
   const hasAnsvarlig = !!page?.ansvarlig?.title;
-
-  //TO-DO: Sizes out of sync with the design system
 
   return (
     <>
@@ -57,12 +56,13 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
           <div className="relative overflow-x-clip pt-12 text-center">
             <div className="dynamic-wrapper px-4 pb-6 text-center">
               <Image
-                src={urlFor(page.pictogram).auto("format").url()}
+                src={urlFor(page.pictogram.url).auto("format").url()}
                 decoding="async"
                 width="72px"
                 height="72px"
                 layout="fixed"
                 aria-hidden
+                alt={page.pictogram?.altText}
               />
               <Heading
                 level="1"
