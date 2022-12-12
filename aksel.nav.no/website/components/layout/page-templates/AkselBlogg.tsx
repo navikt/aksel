@@ -2,6 +2,7 @@ import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
+import { AkselCubeStatic } from "components/website-modules/cube";
 import Head from "next/head";
 
 import { abbrName, dateStr, Feedback, TableOfContents } from "../..";
@@ -62,7 +63,7 @@ const AkselBloggTemplate = ({
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel xs:pb-32 bg-[#FFFCF0] pt-[8vw] pb-16 focus:outline-none"
+        className="aksel-artikkel xs:pb-32 overflow-hidden bg-[#FFFCF0] pt-[8vw] pb-16 focus:outline-none"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose text-center">
@@ -97,7 +98,8 @@ const AkselBloggTemplate = ({
             </div>
           </div>
         </div>
-        <div className="mt-16">
+        <div className="relative mt-16">
+          <AkselCubeStatic className="text-[#FFE78A] opacity-20" />
           <TableOfContents changedState={data?.content ?? []} hideToc />
           <div className="mt-8 px-4">
             <SanityBlockContent

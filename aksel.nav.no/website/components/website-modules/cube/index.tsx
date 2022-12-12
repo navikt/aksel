@@ -1,3 +1,6 @@
+import styles from "./cube.module.css";
+import cl from "classnames";
+
 const Rect = ({ ...props }) => (
   <svg
     width="28.125rem"
@@ -39,12 +42,23 @@ const Skewed = ({ ...props }) => (
 );
 
 export const AkselCube = () => (
-  <div className="aksel-cube">
-    <Skewed className="aksel-cube-1" />
-    <Rect className="aksel-cube-2" />
-    <Skewed className="aksel-cube-3" />
-    <Rect className="aksel-cube-4" />
-    <Skewed className="aksel-cube-5" />
-    <Skewed className="aksel-cube-6" />
+  <div className={styles.animated}>
+    <Skewed className={styles.animated1} />
+    <Rect className={styles.animated2} />
+    <Skewed className={styles.animated3} />
+    <Rect className={styles.animated4} />
+    <Skewed className={styles.animated5} />
+    <Skewed className={styles.animated6} />
+  </div>
+);
+
+export const AkselCubeStatic = ({ className = "" }: { className?: string }) => (
+  <div className={cl(styles.static, className)}>
+    <Skewed className={styles.static1} />
+    <Rect className={styles.static2} />
+    <Skewed className={styles.static3} />
+    <Rect className={styles.static4} />
+    <Skewed className={styles.static5} />
+    <Skewed className={styles.static6} />
   </div>
 );

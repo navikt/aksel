@@ -8,7 +8,7 @@ import { ComponentIcon, DownloadIcon, TokenIcon } from "@sanity/icons";
 import { Header } from "components/layout/header/Header";
 import { GodPraksisCard } from "components/sanity-modules/cards/GodPraksisCard";
 import AkselLink from "components/website-modules/AkselLink";
-import { AkselCube } from "components/website-modules/Cube";
+import { AkselCube } from "components/website-modules/cube";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
@@ -125,7 +125,7 @@ const Forside = ({
         />
       </Head>
 
-      <div className="aksel-cube-wrapper relative max-w-[100vw] overflow-hidden bg-[#DCCAF3]">
+      <div className="header-animated-bg relative max-w-[100vw] overflow-hidden bg-[#DCCAF3]">
         <Header variant="transparent" />
 
         <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">
