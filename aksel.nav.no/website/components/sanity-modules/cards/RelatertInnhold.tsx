@@ -31,9 +31,8 @@ const RelatertInnhold = ({
       )}
     >
       {node.lenker.map((x) => (
-        <NextLink href={getHref(x)} passHref>
+        <NextLink href={getHref(x)} passHref key={x._key}>
           <a
-            key={x._key}
             onClick={(e) =>
               logNav(
                 "relatert-innhold",
