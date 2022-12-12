@@ -1,83 +1,52 @@
-.aksel-cube-wrapper {
-  animation: aksel-cube-bg 30s ease infinite;
-  z-index: 0;
-}
-
-.aksel-cube {
-  animation: aksel-cube-rotate 30s ease-in-out infinite;
+.animated {
+  animation: rotation 30s ease-in-out infinite;
   transform: rotate(-45deg);
   position: absolute;
   z-index: -1;
   opacity: 0.3;
 }
 
-.aksel-cube-1 {
-  animation: aksel-cube-1 30s ease-in-out infinite;
+.animated1 {
+  animation: shape-1 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: translate(-95rem, -13.95rem);
 }
 
-.aksel-cube-2 {
-  animation: aksel-cube-2 30s ease-in-out infinite;
+.animated2 {
+  animation: shape-2 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: translate(-69.5rem, -13.95rem);
 }
 
-.aksel-cube-3 {
-  animation: aksel-cube-3 30s ease-in-out infinite;
+.animated3 {
+  animation: shape-3 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
 }
 
-.aksel-cube-4 {
+.animated4 {
   color: white;
   position: absolute;
 }
 
-.aksel-cube-5 {
-  animation: aksel-cube-5 30s ease-in-out infinite;
+.animated5 {
+  animation: shape-5 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
 }
 
-.aksel-cube-6 {
-  animation: aksel-cube-6 30s ease-in-out infinite;
+.animated6 {
+  animation: shape-6 30s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: translate(70rem, -13.95rem);
 }
 
-@keyframes aksel-cube-bg {
-  0% {
-    background-color: #dccaf3;
-  }
-
-  10% {
-    background-color: #dccaf3;
-  }
-
-  33% {
-    background-color: #dccaf3;
-  }
-
-  60% {
-    background-color: #b2f0e4;
-  }
-
-  90% {
-    background-color: #dccaf3;
-  }
-
-  100% {
-    background-color: #dccaf3;
-  }
-}
-
-@keyframes aksel-cube-rotate {
+@keyframes rotation {
   0% {
     transform: rotate(-45deg);
     bottom: 50%;
@@ -103,7 +72,7 @@
   }
 }
 
-@keyframes aksel-cube-1 {
+@keyframes shape-1 {
   0% {
     transform: translate(-95rem, -13.95rem);
   }
@@ -121,7 +90,7 @@
   }
 }
 
-@keyframes aksel-cube-2 {
+@keyframes shape-2 {
   0% {
     transform: translate(-69.5rem, -13.95rem);
   }
@@ -139,7 +108,7 @@
   }
 }
 
-@keyframes aksel-cube-3 {
+@keyframes shape-3 {
   0% {
     transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
   }
@@ -157,7 +126,7 @@
   }
 }
 
-@keyframes aksel-cube-5 {
+@keyframes shape-5 {
   0% {
     transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
   }
@@ -175,7 +144,7 @@
   }
 }
 
-@keyframes aksel-cube-6 {
+@keyframes shape-6 {
   0% {
     transform: translate(70rem, -13.95rem);
   }
@@ -191,4 +160,42 @@
   100% {
     transform: translate(70rem, -13.95rem);
   }
+}
+
+.static {
+  transform: rotate(70deg) translateX(50%);
+  position: absolute;
+  left: -30rem;
+  right: 0;
+  top: 20rem;
+}
+
+.static1 {
+  position: absolute;
+  transform: scaleX(-1) rotate(90deg) translate(0, -50rem);
+}
+
+.static2 {
+  position: absolute;
+  transform: translate(-6rem, 0);
+}
+
+.static3 {
+  position: absolute;
+  transform: translate(23rem, -13rem);
+}
+
+.static4 {
+  position: absolute;
+  transform: translate(68rem, -13rem);
+}
+
+.static5 {
+  position: absolute;
+  transform: translate(140rem, -13rem);
+}
+
+.static6 {
+  position: absolute;
+  transform: scaleX(-1) translate(-170rem, -26.7rem) rotate(90deg);
 }
