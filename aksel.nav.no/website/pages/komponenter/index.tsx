@@ -55,10 +55,10 @@ const Page = ({
             >
               {kat.title}
             </Heading>
-            {page[`ingress_${kat.value}`] && (
+            {page?.[`ingress_${kat.value}`] && (
               <Ingress className="mb-2">{page[`ingress_${kat.value}`]}</Ingress>
             )}
-            {page[`intro_${kat.value}`] && (
+            {page?.[`intro_${kat.value}`] && (
               <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
             )}
             <ComponentOverview
