@@ -13,9 +13,10 @@ const LinkElement = ({ name, href }) => {
         className={cl(
           "text-text-default focus-visible:shadow-focus relative grid h-full place-items-center rounded px-2 focus:outline-none",
           {
-            "before:bg-border-subtle-hover font-semibold before:absolute before:bottom-[6px] before:z-10 before:h-1 before:w-full before:rounded-full":
+            "before:bg-border-action-selected font-semibold before:absolute before:bottom-[4px] before:z-10 before:h-1 before:w-full before:rounded-full":
               asPath.startsWith(href),
-            "": !asPath.startsWith(href),
+            "hover:before:bg-border-subtle-hover before:absolute before:bottom-[4px] before:z-10 before:h-1 before:w-full before:rounded-full":
+              !asPath.startsWith(href),
           }
         )}
         onClick={(e) =>

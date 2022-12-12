@@ -123,7 +123,7 @@ export const WithSidebar = ({
                   </div>
                 </div>
                 {variant === "page" && pageProps.status?.bilde && (
-                  <div className="relative hidden aspect-square h-[12.5rem] lg:block xl:mr-[10%]">
+                  <div className="relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40">
                     <Image
                       src={urlFor(pageProps.status?.bilde).auto("format").url()}
                       decoding="async"
@@ -147,7 +147,7 @@ export const WithSidebar = ({
                     hideToc={false}
                   />
                 )}
-                <div>
+                <div className="w-full">
                   {children}
                   <Feedback docId={pageProps?._id} docType={pageProps?._type} />
                 </div>
