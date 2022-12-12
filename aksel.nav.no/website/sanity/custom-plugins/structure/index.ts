@@ -28,7 +28,7 @@ const filtered = [
   "komponenter_landingsside",
   "media.tag",
   "editor",
-  "vk_frontpage",
+  "aksel_forside",
   "redirect",
   "token_kategori",
   "kode_eksempler_fil",
@@ -218,9 +218,9 @@ export const structure = async (
                   .items([
                     S.documentListItem()
                       .title(`Forside`)
-                      .schemaType(`vk_frontpage`)
+                      .schemaType(`aksel_forside`)
                       .icon(Picture)
-                      .id(`frontpage_vk_praksis`),
+                      .id(`aksel_forside_dokument`),
                     S.listItem()
                       .title("Standalone-sider")
                       .child(
