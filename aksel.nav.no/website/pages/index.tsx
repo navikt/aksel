@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+import { ArtikkelCard } from "@/components";
 import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
-import { BodyLong, Heading, Link as DsLink } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import { ComponentIcon, DownloadIcon, TokenIcon } from "@sanity/icons";
 import { Header } from "components/layout/header/Header";
 import { GodPraksisCard } from "components/sanity-modules/cards/GodPraksisCard";
@@ -14,7 +15,7 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
 import { lazy } from "react";
-import Snowfall from "react-snowfall";
+/* import Snowfall from "react-snowfall"; */
 
 const introcards = [
   {
@@ -88,7 +89,12 @@ const GetStarted = () => {
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
+const Forside = ({
+  tekster,
+  temaer,
+  bloggs,
+  resent,
+}: PageProps): JSX.Element => {
   const filteredTemas = temaer.filter((x) => x.refCount > 0);
 
   return (
@@ -136,17 +142,17 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
             </div>
 
             <IntroCards />
-            <div aria-hidden>
+            {/* <div aria-hidden>
               <Snowfall
-                color="rgba(0, 52, 83, 0.4)"
+                color="rgba(255, 255, 83, 0.4)"
                 speed={[0.2, 1.0]}
                 snowflakeCount={160}
                 radius={[0.5, 2.0]}
                 style={{ height: "140%" }}
               />
-            </div>
+            </div> */}
           </div>
-          <div className="bg-surface-subtle min-h-96 relative pb-32">
+          <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
             <div className="centered-layout grid max-w-screen-2xl">
               <GetStarted />
               {/* God praksis */}
@@ -172,18 +178,40 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
               <div className="mx-auto mt-8">
                 <AkselLink href="/god-praksis">Utforsk god praksis</AkselLink>
               </div>
+              <div className="mt-20">
+                <Heading level="3" size="medium">
+                  Nylige artikler
+                </Heading>
+                <div className="card-grid-3-1 my-6">
+                  {resent.map((art: any) => (
+                    <ArtikkelCard
+                      level="4"
+                      variant="tema"
+                      {...art}
+                      key={art._id}
+                    />
+                  ))}
+                </div>
+                <AkselLink href="/god-praksis/artikler">
+                  Se alle artikler i god praksis
+                </AkselLink>
+              </div>
             </div>
           </div>
           <div className="bg-surface-default relative pb-36">
             <div className="centered-layout -translate-y-1/2">
               <ToolCard />
             </div>
-            <div className="centered-layout grid max-w-screen-2xl ">
+            <div className="centered-layout -mt-16 grid max-w-screen-2xl md:mt-8 ">
               <LatestBloggposts
                 bloggs={bloggs}
                 title="Siste fra bloggen"
                 variant="forside"
+                level="2"
               />
+              <AkselLink href="/produktbloggen">
+                Les flere blogginnlegg
+              </AkselLink>
             </div>
           </div>
         </main>
@@ -219,6 +247,12 @@ interface PageProps {
     }
   >[];
   tekster: SanityT.Schema.vk_frontpage;
+  resent: SanityT.Schema.aksel_artikkel &
+    {
+      slug: string;
+      tema: string[];
+      contributors?: { title?: string }[];
+    }[];
   slug: string;
   preview: boolean;
 }
@@ -234,6 +268,7 @@ export const getStaticProps = async ({
     tekster = null,
     bloggs = null,
     temaer = null,
+    resent = null,
   } = await client.fetch(akselForsideQuery);
 
   return {
@@ -241,6 +276,7 @@ export const getStaticProps = async ({
       temaer,
       bloggs,
       tekster,
+      resent,
       slug: "/",
       preview,
     },

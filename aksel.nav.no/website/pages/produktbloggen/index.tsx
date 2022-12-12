@@ -125,9 +125,9 @@ const Page = (props: PageProps): JSX.Element => {
                 <Heading level="2" size="xlarge">
                   Flere blogginnlegg
                 </Heading>
-                <div className="mt-12 grid gap-x-3 gap-y-6 sm:grid-cols-2 sm:gap-y-10 md:gap-x-6 lg:grid-cols-3">
+                <ul className="mt-12 grid gap-x-3 gap-y-6 sm:grid-cols-2 sm:gap-y-10 md:gap-x-6 lg:grid-cols-3">
                   {remainingPosts.map((blog) => (
-                    <div
+                    <li
                       key={blog._id}
                       className="border-b-border-subtle border-b pb-8"
                     >
@@ -152,9 +152,9 @@ const Page = (props: PageProps): JSX.Element => {
                           </span>
                         </BodyShort>
                       )}
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             )}
           </div>

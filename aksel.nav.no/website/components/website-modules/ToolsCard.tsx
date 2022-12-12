@@ -68,9 +68,9 @@ const tools = [
 
 export const ToolCard = () => {
   return (
-    <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center justify-center gap-16 rounded-2xl bg-[#99F6E4] py-12 px-2 md:flex-row md:justify-evenly md:gap-4">
+    <ul className="mx-auto flex w-full max-w-screen-lg flex-col items-center justify-center gap-16 rounded-2xl bg-[#99F6E4] py-12 px-2 md:flex-row md:justify-evenly md:gap-4">
       {tools.map((t) => (
-        <div key={t.title} className="flex w-56 items-center gap-4 md:w-fit">
+        <li key={t.title} className="flex w-56 items-center gap-4 md:w-fit">
           <div className="rotate-45 rounded-lg bg-[#5EEAD4] p-3">
             <div className="-rotate-45">{t.icon}</div>
           </div>
@@ -82,8 +82,8 @@ export const ToolCard = () => {
             </NextLink>
             <div>{t.description}</div>
           </div>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };

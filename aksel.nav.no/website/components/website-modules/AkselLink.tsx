@@ -7,20 +7,26 @@ const AkselLink = ({
   href,
   children,
   inverted = false,
+  className,
 }: {
   href: string;
   children: React.ReactNode;
   inverted?: boolean;
+  className?: string;
 }) => {
   return (
     <Link href={href} passHref>
       <a
-        className={cl("group relative w-fit pr-5 focus:outline-none", {
-          "white focus-visible:text-text-default focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_3px_var(--a-blue-200)]":
-            inverted,
-          "text-deepblue-500 focus-visible:text-text-on-action group-hover:text-deepblue-800 focus-visible:bg-blue-800 focus-visible:shadow-[0_0_0_3px_var(--a-blue-800)]":
-            !inverted,
-        })}
+        className={cl(
+          "group relative w-fit pr-5 focus:outline-none",
+          className,
+          {
+            "white focus-visible:text-text-default focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_3px_var(--a-blue-200)]":
+              inverted,
+            "text-deepblue-500 focus-visible:text-text-on-action group-hover:text-deepblue-800 focus-visible:bg-blue-800 focus-visible:shadow-[0_0_0_3px_var(--a-blue-800)]":
+              !inverted,
+          }
+        )}
       >
         {children}
         <svg

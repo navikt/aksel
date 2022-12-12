@@ -36,10 +36,12 @@ export const LatestBloggposts = ({
   bloggs,
   title,
   variant = "blogg",
+  level = "1",
 }: {
   bloggs: BloggPageT[];
   title: string;
   variant?: "blogg" | "forside";
+  level?: "1" | "2";
 }) => {
   if (!bloggs || bloggs.length < 3) {
     return null;
@@ -48,14 +50,13 @@ export const LatestBloggposts = ({
   return (
     <div
       className={cl({
-        "mt-28": variant === "forside",
         "mt-14": variant === "blogg",
       })}
     >
       <Heading
-        level="1"
+        level={level}
         size="xlarge"
-        className="algolia-index-lvl1 text-deepblue-800 mx-auto  w-full max-w-xl md:mx-0 md:max-w-none"
+        className="algolia-index-lvl1 text-deepblue-800 mx-auto w-full md:mx-0 md:max-w-none"
       >
         {title}
       </Heading>
@@ -95,13 +96,16 @@ export const LatestBloggposts = ({
               />
             )}
           </div>
-          <Heading size="large" as="div">
-            <NextLink href={`/${bloggs[0].slug}`} passHref>
-              <Link className="text-deepblue-500 no-underline hover:underline">
+          <NextLink href={`/${bloggs[0].slug}`} passHref>
+            <Link className="text-deepblue-500 no-underline hover:underline">
+              <Heading
+                size="large"
+                level={(Number(level) + 1).toString() as any}
+              >
                 {bloggs[0].heading}
-              </Link>
-            </NextLink>
-          </Heading>
+              </Heading>
+            </Link>
+          </NextLink>
           <BodyLong className="mt-4" size="small">
             {bloggs[0]?.ingress}
           </BodyLong>
@@ -157,13 +161,16 @@ export const LatestBloggposts = ({
                   </div>
                 )}
                 <div>
-                  <Heading size="small" as="div">
-                    <NextLink href={`/${blog.slug}`} passHref>
-                      <Link className="text-deepblue-500 no-underline hover:underline">
+                  <NextLink href={`/${blog.slug}`} passHref>
+                    <Link className="text-deepblue-500 no-underline hover:underline">
+                      <Heading
+                        size="small"
+                        level={(Number(level) + 1).toString() as any}
+                      >
                         {blog.heading}
-                      </Link>
-                    </NextLink>
-                  </Heading>
+                      </Heading>
+                    </Link>
+                  </NextLink>
                   <BodyLong className="mt-4" size="small">
                     {blog?.ingress}
                   </BodyLong>
@@ -188,7 +195,7 @@ export const LatestBloggposts = ({
       </div>
 
       {/* Mobile view */}
-      <div className="my-20 mx-auto grid max-w-xl gap-12 md:hidden">
+      <div className="my-10 mx-auto grid gap-12 md:hidden">
         <div
           className={cl("w-full", {
             "border-b-border-subtle border-b pb-8": variant === "forside",
@@ -217,13 +224,16 @@ export const LatestBloggposts = ({
               />
             )}
           </div>
-          <Heading size="large" as="div">
-            <NextLink href={`/${bloggs[0].slug}`} passHref>
-              <Link className="text-deepblue-500 no-underline hover:underline">
+          <NextLink href={`/${bloggs[0].slug}`} passHref>
+            <Link className="text-deepblue-500 no-underline hover:underline">
+              <Heading
+                size="large"
+                level={(Number(level) + 1).toString() as any}
+              >
                 {bloggs[0].heading}
-              </Link>
-            </NextLink>
-          </Heading>
+              </Heading>
+            </Link>
+          </NextLink>
           <BodyLong className="mt-4" size="small">
             {bloggs[0]?.ingress}
           </BodyLong>
@@ -273,13 +283,16 @@ export const LatestBloggposts = ({
                 </div>
               )}
               <div>
-                <Heading size="small" as="div">
-                  <NextLink href={`/${blog.slug}`} passHref>
-                    <Link className="text-deepblue-500 no-underline hover:underline">
+                <NextLink href={`/${blog.slug}`} passHref>
+                  <Link className="text-deepblue-500 no-underline hover:underline">
+                    <Heading
+                      size="small"
+                      level={(Number(level) + 1).toString() as any}
+                    >
                       {blog.heading}
-                    </Link>
-                  </NextLink>
-                </Heading>
+                    </Heading>
+                  </Link>
+                </NextLink>
                 <BodyLong className="mt-4" size="small">
                   {blog?.ingress}
                 </BodyLong>

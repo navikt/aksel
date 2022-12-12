@@ -26,7 +26,7 @@ export const GodPraksisCard = () => {
               e.currentTarget.getAttribute("href")
             )
           }
-          className="navds-heading--medium navds-heading focus-visible:after:shadow-focus mb-4 no-underline after:absolute after:inset-0 after:rounded focus:outline-none group-hover:underline"
+          className="navds-heading--medium text-deepblue-700 navds-heading focus-visible:after:shadow-focus mb-4 no-underline after:absolute after:inset-0 after:rounded focus:outline-none group-hover:underline"
         >
           Universell Utforming
         </a>
