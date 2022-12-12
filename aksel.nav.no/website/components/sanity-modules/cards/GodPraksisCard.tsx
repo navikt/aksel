@@ -2,10 +2,11 @@ import { BodyShort } from "@navikt/ds-react";
 import cl from "classnames";
 import NextLink from "next/link";
 import Image from "next/image";
+import { logNav } from "@/utils";
 
 export const GodPraksisCard = () => {
   return (
-    <div className="ring-border-subtle bg-surface-default hover:shadow-small focus-within:shadow-focus relative grid rounded-lg p-6 ring-1 ring-inset">
+    <li className="ring-border-subtle bg-surface-default hover:shadow-small focus-within:shadow-focus relative grid rounded-lg p-6 ring-1 ring-inset">
       <div className="relative mb-4 h-16 w-16">
         <Image
           src="/images/demo-pictogram.svg"
@@ -18,13 +19,13 @@ export const GodPraksisCard = () => {
       </div>
       <NextLink href="#" passHref>
         <a
-          /* onClick={(e) =>
+          onClick={(e) =>
             logNav(
               "card",
               window.location.pathname,
               e.currentTarget.getAttribute("href")
             )
-          } */
+          }
           className="navds-heading--medium navds-heading focus-visible:after:shadow-focus mb-4 no-underline after:absolute after:inset-0 after:rounded focus:outline-none group-hover:underline"
         >
           Universell Utforming
@@ -37,6 +38,6 @@ export const GodPraksisCard = () => {
       <BodyShort size="small" className="text-text-subtle">
         20 Artikler
       </BodyShort>
-    </div>
+    </li>
   );
 };

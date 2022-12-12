@@ -35,34 +35,27 @@ const introcards = [
     icon: DownloadIcon,
     href: "#",
   },
-  /* {
-    title: "Verktøy",
-    desc: "NAVs digitale verktøy",
-    icon: ControlsIcon,
-    href: "#",
-  }, */
 ];
 
 const IntroCards = () => {
   return (
-    <div className="centered-layout mb-72 grid w-full max-w-screen-md grid-cols-2  gap-6">
+    <ul className="centered-layout mb-72 grid w-full max-w-screen-md grid-cols-2 gap-6">
       {introcards.map(({ icon: Icon, title, desc, href }) => (
-        <Link href={href} passHref>
-          <a
-            key={title}
-            className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none"
-          >
-            <span className="xs:flex items-center gap-2">
-              <Icon aria-hidden className="shrink-0 text-2xl" />
-              <span className="text-xl font-semibold group-hover:underline">
-                {title}
+        <li key={title} className="grid">
+          <Link href={href} passHref>
+            <a className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none">
+              <span className="xs:flex items-center gap-2">
+                <Icon aria-hidden className="shrink-0 text-2xl" />
+                <span className="text-xl font-semibold group-hover:underline">
+                  {title}
+                </span>
               </span>
-            </span>
-            <div className="text-text-subtle mt-2">{desc}</div>
-          </a>
-        </Link>
+              <div className="text-text-subtle mt-2">{desc}</div>
+            </a>
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 
@@ -72,17 +65,23 @@ const GetStarted = () => {
       <Heading size="xlarge" level="2" className="text-center">
         Kom i gang
       </Heading>
-      <div className="xs:grid xs:grid-cols-3 mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 md:gap-8">
-        <AkselLink href="#" inverted>
-          Produktleder
-        </AkselLink>
-        <AkselLink href="#" inverted>
-          Utvikler
-        </AkselLink>
-        <AkselLink href="#" inverted>
-          Designer
-        </AkselLink>
-      </div>
+      <ul className="xs:grid xs:grid-cols-3 mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 md:gap-8">
+        <li>
+          <AkselLink href="#" inverted>
+            Produktleder
+          </AkselLink>
+        </li>
+        <li>
+          <AkselLink href="#" inverted>
+            Utvikler
+          </AkselLink>
+        </li>
+        <li>
+          <AkselLink href="#" inverted>
+            Designer
+          </AkselLink>
+        </li>
+      </ul>
     </div>
   );
 };
@@ -164,12 +163,12 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
                   Commodi sunt minima dicta omnis dignissimos, necessitatibus.
                 </BodyLong>
               </div>
-              <div className="card-grid-2-1 mx-auto mt-16 max-w-5xl">
+              <ul className="card-grid-2-1 mx-auto mt-16 max-w-5xl">
                 <GodPraksisCard />
                 <GodPraksisCard />
                 <GodPraksisCard />
                 <GodPraksisCard />
-              </div>
+              </ul>
               <div className="mx-auto mt-8">
                 <AkselLink href="/god-praksis">Utforsk god praksis</AkselLink>
               </div>

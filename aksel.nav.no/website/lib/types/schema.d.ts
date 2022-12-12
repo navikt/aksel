@@ -757,6 +757,20 @@ Del inn artiklene i flere seksjoner (vises ikke i preview før publisering desve
           sider?: Array<Sanity.KeyedReference<aksel_artikkel>>;
         }>
       >;
+
+      /**
+       * Pictogram - `Image`
+       */
+      pictogram?: {
+        asset: Sanity.Asset;
+        crop?: Sanity.ImageCrop;
+        hotspot?: Sanity.ImageHotspot;
+
+        /**
+         * Attribution - `String`
+         */
+        alt?: string;
+      };
     }
 
     /**

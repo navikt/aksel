@@ -137,5 +137,20 @@ export const Tema = defineType({
         field: TemaView,
       },
     }),
+    defineField({
+      title: "Pictogram",
+      name: "pictogram",
+      type: "image",
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Attribution",
+          hidden: true,
+          initialValue: "Tema-illustrasjon",
+        },
+      ],
+      validation: (Rule) => Rule.required().error("Tema må ha pictogram"),
+    }),
   ],
 });

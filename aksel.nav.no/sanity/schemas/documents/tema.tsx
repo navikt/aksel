@@ -130,5 +130,19 @@ export default {
         },
       ],
     },
+    {
+      title: "Pictogram",
+      name: "pictogram",
+      type: "image",
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Attribution",
+          hidden: true,
+        },
+      ],
+      validation: (Rule) => Rule.required().error("Tema må ha pictogram"),
+    },
   ],
 };
