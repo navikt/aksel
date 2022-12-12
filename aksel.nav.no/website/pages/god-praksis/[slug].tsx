@@ -1,6 +1,6 @@
-import { abbrName, ArtikkelCard, BreadCrumbs } from "@/components";
+import { abbrName, ArtikkelCard } from "@/components";
 import { Footer } from "@/layout";
-import { akselTemaDocs, getAkselTema, SanityT } from "@/lib";
+import { akselTemaDocs, getAkselTema, SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading, Label } from "@navikt/ds-react";
@@ -8,6 +8,7 @@ import cl from "classnames";
 import { Header } from "components/layout/header/Header";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
+import Image from "next/image";
 import { lazy } from "react";
 import NotFotfund from "../404";
 
@@ -38,6 +39,8 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
 
   const hasAnsvarlig = !!page?.ansvarlig?.title;
 
+  console.log(page);
+
   return (
     <>
       <Head>
@@ -53,18 +56,18 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
         >
           <div className="relative overflow-x-clip pt-12">
             <div className="dynamic-wrapper px-4 pb-6">
-              <BreadCrumbs href="/god-praksis" text="Temaer" />
+              <Image
+                src={urlFor(page.pictogram).auto("format").url()}
+                decoding="async"
+                width="72px"
+                height="72px"
+                layout="fixed"
+                aria-hidden
+              />
               <Heading
                 level="1"
                 size="xlarge"
-                className="algolia-index-lvl1 text-deepblue-700 hidden text-5xl md:block"
-              >
-                {page.title}
-              </Heading>
-              <Heading
-                level="1"
-                size="large"
-                className="algolia-index-lvl1 text-deepblue-700 block md:hidden"
+                className="algolia-index-lvl1 text-5xl"
               >
                 {page.title}
               </Heading>
@@ -207,6 +210,7 @@ export const getStaticProps = async ({
   const { tema } = await getClient().fetch(akselTemaDocs, {
     slug,
   });
+  console.log(tema);
 
   return {
     props: {

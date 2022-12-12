@@ -329,7 +329,8 @@ export const akselTemaDocs = `{
         ingress,
         "contributor": ${contributorsSingle}
       }
-    }
+    },
+    "pictogram":  pictogram.asset-> url,
   }
 }`;
 
