@@ -1,6 +1,6 @@
 import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
+import { BodyShort, Detail, Heading, Ingress } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import { BloggAd } from "components/website-modules/BloggAd";
 import { AkselCubeStatic } from "components/website-modules/cube";
@@ -105,6 +105,7 @@ const AkselBloggTemplate = ({
                 aria-hidden
                 priority
                 className="rounded-2xl"
+                alt="Illustrasjon"
               />
             </div>
           )}
