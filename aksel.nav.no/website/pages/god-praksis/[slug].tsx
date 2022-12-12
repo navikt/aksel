@@ -39,8 +39,6 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
 
   const hasAnsvarlig = !!page?.ansvarlig?.title;
 
-  console.log(page);
-
   return (
     <>
       <Head>
@@ -210,7 +208,6 @@ export const getStaticProps = async ({
   const { tema } = await getClient().fetch(akselTemaDocs, {
     slug,
   });
-  console.log(tema);
 
   return {
     props: {
