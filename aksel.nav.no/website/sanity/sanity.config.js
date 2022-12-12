@@ -55,6 +55,37 @@ const sharedConfig = {
 
 export const workspaceConfig = defineConfig([
   {
+    name: "default",
+    title: "Live",
+    dataset: "production",
+    basePath: "/admin/prod",
+    ...sharedConfig,
+    auth: createAuthStore({
+      redirectOnSingle: false,
+      mode: "replace",
+      projectId,
+      dataset: "production",
+      providers: [
+        {
+          name: "saml",
+          title: "NAV SSO",
+          url: "https://api.sanity.io/v2021-10-01/auth/saml/login/f3270b37",
+          logo: "/images/navlogo.svg",
+        },
+        {
+          name: "github",
+          title: "GitHub",
+          url: "https://api.sanity.io/v1/auth/login/github",
+        },
+        {
+          name: "google",
+          title: "Google",
+          url: "https://api.sanity.io/v1/auth/login/google",
+        },
+      ],
+    }),
+  },
+  {
     name: "dev",
     title: "Dev",
     dataset: "development",
@@ -85,37 +116,6 @@ export const workspaceConfig = defineConfig([
       ],
     }),
   },
-  /* {
-    name: "default",
-    title: "Live",
-    dataset: "production",
-    basePath: "/admin/prod",
-    ...sharedConfig,
-    auth: createAuthStore({
-      redirectOnSingle: false,
-      mode: "replace",
-      projectId,
-      dataset: "production",
-      providers: [
-        {
-          name: "saml",
-          title: "NAV SSO",
-          url: "https://api.sanity.io/v2021-10-01/auth/saml/login/f3270b37",
-          logo: "/images/navlogo.svg",
-        },
-        {
-          name: "github",
-          title: "GitHub",
-          url: "https://api.sanity.io/v1/auth/login/github",
-        },
-        {
-          name: "google",
-          title: "Google",
-          url: "https://api.sanity.io/v1/auth/login/google",
-        },
-      ],
-    }),
-  }, */
 ]);
 
 /* interface WorkspaceOptions {
