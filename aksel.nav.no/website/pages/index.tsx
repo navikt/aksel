@@ -6,7 +6,7 @@ import { BodyLong, Heading, Link as DsLink } from "@navikt/ds-react";
 import { ComponentIcon, DownloadIcon, TokenIcon } from "@sanity/icons";
 import { Header } from "components/layout/header/Header";
 import { GodPraksisCard } from "components/sanity-modules/cards/GodPraksisCard";
-import { AkselArrow } from "components/website-modules/AkselArrow";
+import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/Cube";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { ToolCard } from "components/website-modules/ToolsCard";
@@ -65,42 +65,23 @@ const IntroCards = () => {
     </div>
   );
 };
-/* <div className="xs:flex-row mx-auto mt-6 flex w-fit flex-col justify-center gap-4 md:gap-8"> */
+
 const GetStarted = () => {
   return (
     <div className="bg-deepblue-700 text-text-on-action mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
       <Heading size="xlarge" level="2" className="text-center">
         Kom i gang
       </Heading>
-      <div className="xs:flex-row mx-auto mt-6 flex w-fit flex-col justify-center gap-4 md:gap-8">
-        <Link href="#" passHref>
-          <a className="focus-visible:text-text-default xs:grid xs:grid-cols-4 group flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
-            <span className="col-span-3">Produktleder</span>
-            <AkselArrow
-              inverted
-              className="col-span-1 col-start-4 ml-1 rotate-180"
-            />
-          </a>
-        </Link>
-
-        <Link href="#" passHref>
-          <a className="focus-visible:text-text-default xs:grid xs:grid-cols-3 group flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
-            <span className="col-span-2">Utvikler</span>
-            <AkselArrow
-              inverted
-              className="col-span-1 col-start-3 ml-1 rotate-180"
-            />
-          </a>
-        </Link>
-        <Link href="#" passHref>
-          <a className="focus-visible:text-text-default xs:grid xs:grid-cols-3 group flex items-center gap-[6px] text-xl underline hover:no-underline focus:outline-none focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_2px_var(--a-blue-200)]">
-            <span className="col-span-2">Designer</span>
-            <AkselArrow
-              inverted
-              className="col-span-1 col-start-3 ml-1 rotate-180"
-            />
-          </a>
-        </Link>
+      <div className="xs:grid xs:grid-cols-3 mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 md:gap-8">
+        <AkselLink href="#" inverted>
+          Produktleder
+        </AkselLink>
+        <AkselLink href="#" inverted>
+          Utvikler
+        </AkselLink>
+        <AkselLink href="#" inverted>
+          Designer
+        </AkselLink>
       </div>
     </div>
   );
@@ -189,13 +170,8 @@ const Forside = ({ tekster, temaer, bloggs }: PageProps): JSX.Element => {
                 <GodPraksisCard />
                 <GodPraksisCard />
               </div>
-              <div className="mx-auto mt-8 pl-7">
-                <Link href="/god-praksis" passHref>
-                  <DsLink className="text-deepblue-500 group grid grid-cols-5">
-                    <span className="col-span-4">Utforsk god praksis</span>
-                    <AkselArrow className="group-focus:text-text-on-action col-span-1 col-start-5 ml-1 rotate-180" />
-                  </DsLink>
-                </Link>
+              <div className="mx-auto mt-8">
+                <AkselLink href="/god-praksis">Utforsk god praksis</AkselLink>
               </div>
             </div>
           </div>
