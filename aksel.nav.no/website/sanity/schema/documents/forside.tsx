@@ -25,7 +25,25 @@ export const Forside = defineType({
       name: "tema",
       type: "array",
       validation: (Rule) => Rule.required().min(4),
-      of: [{ type: "reference", to: [{ type: "aksel_tema" }] }],
+      of: [
+        {
+          type: "object",
+          name: "temalink",
+          fields: [
+            {
+              name: "ref",
+              type: "reference",
+              to: [{ type: "aksel_tema" }],
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              type: "text",
+              name: "intro",
+              validation: (Rule) => Rule.required().max(300),
+            },
+          ],
+        },
+      ],
     }),
     defineField({ type: "seo", title: "Seo", name: "seo" }),
   ],
