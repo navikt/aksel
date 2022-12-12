@@ -28,6 +28,7 @@
 }
 
 .navds-accordion__header-content {
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
