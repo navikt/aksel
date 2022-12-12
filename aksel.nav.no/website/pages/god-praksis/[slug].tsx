@@ -1,15 +1,15 @@
-import { abbrName, ArtikkelCard, BreadCrumbs, Slope } from "@/components";
+import { abbrName, ArtikkelCard, BreadCrumbs } from "@/components";
 import { Footer } from "@/layout";
-import { SanityT, akselTemaDocs, getAkselTema } from "@/lib";
+import { akselTemaDocs, getAkselTema, SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading, Label } from "@navikt/ds-react";
-import Head from "next/head";
-import React, { lazy } from "react";
-import NotFotfund from "../404";
 import cl from "classnames";
-import { PreviewSuspense } from "next-sanity/preview";
 import { Header } from "components/layout/header/Header";
+import { PreviewSuspense } from "next-sanity/preview";
+import Head from "next/head";
+import { lazy } from "react";
+import NotFotfund from "../404";
 
 type ArtiklerT = Partial<
   SanityT.Schema.aksel_artikkel & {
@@ -44,14 +44,14 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
         <title>{`${page.title} - Aksel`}</title>
         <meta property="og:title" content={`${page.title} - Aksel`} />
       </Head>
-      <div className="bg-white">
-        <Header />
+      <div className="bg-surface-subtle">
+        <Header variant="subtle" />
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="min-h-[80vh] bg-gray-100 focus:outline-none"
+          className="min-h-[80vh] focus:outline-none"
         >
-          <div className="relative overflow-x-clip bg-white pt-12">
+          <div className="relative overflow-x-clip pt-12">
             <div className="dynamic-wrapper px-4 pb-6">
               <BreadCrumbs href="/god-praksis" text="Temaer" />
               <Heading
@@ -109,10 +109,9 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                 </div>
               </div>
             </div>
-            <Slope />
           </div>
 
-          <div className="relative bg-gray-100 px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
+          <div className="relative px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
             <div className="dynamic-wrapper grid gap-16">
               {page.seksjoner.map((seksjon) => (
                 <div key={seksjon._key}>
