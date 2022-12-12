@@ -3,7 +3,7 @@ import { Footer } from "@/layout";
 import { akselTemaDocs, getAkselTema, SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
-import { Heading, Label } from "@navikt/ds-react";
+import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "classnames";
 import { Header } from "components/layout/header/Header";
 import { PreviewSuspense } from "next-sanity/preview";
@@ -39,6 +39,8 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
 
   const hasAnsvarlig = !!page?.ansvarlig?.title;
 
+  //TO-DO: Sizes out of sync with the design system
+
   return (
     <>
       <Head>
@@ -70,7 +72,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                 {page.title}
               </Heading>
 
-              <div className="mt-4 flex flex-col items-center justify-between gap-8 xl:flex-row">
+              <div className="mt-4 flex flex-col items-center justify-between gap-8">
                 <SanityBlockContent
                   blocks={page.beskrivelse}
                   noLastMargin
@@ -79,19 +81,15 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                 />
                 <div
                   className={cl(
-                    "max-w xs:w-96 relative z-10 h-fit rounded-lg xl:mt-[10px]",
+                    "max-w xs:w-96 relative z-10 mb-2 h-fit xl:mt-[10px]",
                     { invisible: !hasAnsvarlig }
                   )}
                   aria-hidden={!hasAnsvarlig}
                 >
-                  <Label
-                    as="div"
-                    size="small"
-                    className="px-4 pt-4 pb-3 text-center text-sm uppercase md:px-6 md:pt-6 md:pb-4"
-                  >
+                  <Detail as="div" size="small" className="mb-2" uppercase>
                     Ansvarlig for tema
-                  </Label>
-                  <div className="bg-deepblue-100 grid gap-2 rounded-b-lg px-4 py-3 md:px-6 md:py-4">
+                  </Detail>
+                  <div className="grid">
                     <div>
                       <Label as="div">
                         {page?.ansvarlig?.title
