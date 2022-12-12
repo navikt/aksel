@@ -24,6 +24,7 @@ export const createWrappedApproveAction = () => {
           {
             set: {
               "updateInfo.lastVerified": format(new Date(), "yyyy-MM-dd"),
+              /* TODO: publishedAt: format(new Date(), "yyyy-MM-dd") om ikke publisert fra før */
             },
           },
         ],
