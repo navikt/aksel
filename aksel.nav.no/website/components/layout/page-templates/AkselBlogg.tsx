@@ -1,9 +1,11 @@
 import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
+import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
+import { BloggAd } from "components/website-modules/BloggAd";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Head from "next/head";
+import Image from "next/image";
 
 import { abbrName, dateStr, Feedback, TableOfContents } from "../..";
 import Footer from "../footer/Footer";
@@ -70,33 +72,42 @@ const AkselBloggTemplate = ({
             <Heading
               level="1"
               size="xlarge"
-              className="algolia-index-lvl1 hyphen mt-1 break-words text-5xl"
+              className="algolia-index-lvl1 hyphen text-deepblue-800 mt-1 break-words text-5xl"
             >
               {data.heading}
             </Heading>
             {data?.ingress && (
-              <Ingress className="mt-4">{data?.ingress}</Ingress>
+              <Ingress className="text-deepblue-700 mt-4">
+                {data?.ingress}
+              </Ingress>
             )}
-            <div className="mt-8 inline-flex flex-wrap gap-2 text-base">
+            <div className="mt-8 inline-flex flex-wrap items-center gap-2 text-base">
+              <Detail uppercase as="span">
+                {dateStr(data?.publishedAt ?? data._createdAt)}
+              </Detail>
               {authors?.[0] && (
                 <>
+                  <span className="bg-deepblue-700 h-2 w-2 rotate-45 rounded-[1px] opacity-50" />
                   <BodyShort size="small" as="address" className="not-italic">
                     {authors?.[0]}
                   </BodyShort>
-                  <BodyShort
-                    size="small"
-                    className="text-text-subtle"
-                    as="span"
-                  >
-                    —
-                  </BodyShort>
                 </>
               )}
-              <BodyShort size="small" as="span" className="text-text-subtle">
-                {dateStr(data?.publishedAt ?? data._createdAt)}
-              </BodyShort>
             </div>
           </div>
+          {data?.seo?.image && (
+            <div className="relative mx-auto mt-20 aspect-video w-full max-w-3xl">
+              <Image
+                src={urlFor(data?.seo?.image).auto("format").url()}
+                decoding="sync"
+                layout="fill"
+                objectFit="cover"
+                aria-hidden
+                priority
+                className="rounded-2xl"
+              />
+            </div>
+          )}
         </div>
         <div className="relative mt-16">
           <AkselCubeStatic className="text-[#FFE78A] opacity-20" />
@@ -111,15 +122,19 @@ const AkselBloggTemplate = ({
         </div>
         <div className="mt-16 px-4">
           <div className="dynamic-wrapper-prose">
+            <div className="bg-deepblue-800 mx-auto mb-10 h-2 w-2 rotate-45 rounded-[1px]" />
             {authors?.length > 0 && (
-              <Label className="text-deepblue-700 mb-2" as="p">
+              <Detail
+                className="text-deepblue-700 mb-2 text-center uppercase"
+                as="p"
+              >
                 Bidragsytere
-              </Label>
+              </Detail>
             )}
             {authors?.length > 0 && (
               <BodyShort
                 as="div"
-                className="text-text-subtle mb-1 flex flex-wrap gap-1"
+                className="text-text-subtle mb-1 flex flex-wrap justify-center gap-1"
               >
                 {authors.map(abbrName).map((x, y) => (
                   <address className="not-italic" key={x}>
@@ -129,12 +144,19 @@ const AkselBloggTemplate = ({
                 ))}
               </BodyShort>
             )}
-            <BodyShort as="span" className="text-text-subtle whitespace-nowrap">
+            <BodyShort
+              as="span"
+              className="text-text-subtle flex justify-center whitespace-nowrap"
+            >
               Publisert: {dateStr(data?.publishedAt ?? data?._updatedAt)}
             </BodyShort>
           </div>
           <div className="dynamic-wrapper-prose pt-16">
             <Feedback akselFeedback docId={data?._id} docType={data?._type} />
+          </div>
+
+          <div className="max-w-content-w-padding mx-auto grid w-full">
+            <BloggAd />
           </div>
         </div>
       </main>
