@@ -1,15 +1,17 @@
-import { abbrName, ArtikkelCard, BreadCrumbs, Slope } from "@/components";
+import { abbrName, ArtikkelCard } from "@/components";
 import { Footer } from "@/layout";
-import { SanityT, akselTemaDocs, getAkselTema } from "@/lib";
+import { akselTemaDocs, getAkselTema, SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
-import { Heading, Label } from "@navikt/ds-react";
-import Head from "next/head";
-import React, { lazy } from "react";
-import NotFotfund from "../404";
+import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "classnames";
-import { PreviewSuspense } from "next-sanity/preview";
 import { Header } from "components/layout/header/Header";
+import { AkselCubeStatic } from "components/website-modules/cube";
+import { PreviewSuspense } from "next-sanity/preview";
+import Head from "next/head";
+import Image from "next/image";
+import { lazy } from "react";
+import NotFotfund from "../404";
 
 type ArtiklerT = Partial<
   SanityT.Schema.aksel_artikkel & {
@@ -20,9 +22,10 @@ type ArtiklerT = Partial<
 >;
 
 export interface AkselTemaPage
-  extends Omit<SanityT.Schema.aksel_tema, "ansvarlig"> {
+  extends Omit<SanityT.Schema.aksel_tema, "ansvarlig" | "pictogram"> {
   artikler: ArtiklerT[];
   ansvarlig?: { title?: string; roller: string[] };
+  pictogram: { url: string; altText?: string };
 }
 
 interface PageProps {
@@ -44,32 +47,41 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
         <title>{`${page.title} - Aksel`}</title>
         <meta property="og:title" content={`${page.title} - Aksel`} />
       </Head>
-      <div className="bg-white">
-        <Header />
+      <div className="bg-surface-subtle">
+        <Header variant="subtle" />
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="min-h-[80vh] bg-gray-100 focus:outline-none"
+          className="min-h-[80vh] focus:outline-none"
         >
-          <div className="relative overflow-x-clip bg-white pt-12">
-            <div className="dynamic-wrapper px-4 pb-6">
-              <BreadCrumbs href="/god-praksis" text="Temaer" />
+          <div className="relative overflow-x-clip pt-20 text-center">
+            <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
+            <div className="dynamic-wrapper px-4 pb-6 text-center">
+              <Image
+                src={urlFor(page.pictogram.url).auto("format").url()}
+                decoding="async"
+                width="72px"
+                height="72px"
+                layout="fixed"
+                aria-hidden
+                alt={page.pictogram?.altText}
+              />
               <Heading
                 level="1"
                 size="xlarge"
-                className="algolia-index-lvl1 text-deepblue-700 hidden text-5xl md:block"
+                className="algolia-index-lvl1 mt-8 hidden md:block md:text-5xl"
               >
                 {page.title}
               </Heading>
               <Heading
                 level="1"
                 size="large"
-                className="algolia-index-lvl1 text-deepblue-700 block md:hidden"
+                className="algolia-index-lvl1 mt-8 block md:hidden"
               >
                 {page.title}
               </Heading>
 
-              <div className="mt-4 flex flex-col justify-between gap-8 xl:flex-row">
+              <div className="mt-4 flex flex-col items-center justify-between gap-8">
                 <SanityBlockContent
                   blocks={page.beskrivelse}
                   noLastMargin
@@ -78,27 +90,23 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                 />
                 <div
                   className={cl(
-                    "max-w xs:w-96 relative z-10 h-fit rounded-lg xl:mt-[10px]",
+                    "max-w xs:w-96 relative z-10 mb-2 h-fit xl:mt-[10px]",
                     { invisible: !hasAnsvarlig }
                   )}
                   aria-hidden={!hasAnsvarlig}
                 >
-                  <Label
-                    as="div"
-                    size="small"
-                    className="bg-deepblue-700 text-text-on-inverted flex rounded-t-lg px-4 pt-4 pb-3 uppercase md:px-6 md:pt-6 md:pb-4"
-                  >
+                  <Detail as="div" size="small" className="mb-2" uppercase>
                     Ansvarlig for tema
-                  </Label>
-                  <div className="bg-deepblue-100 grid gap-2 rounded-b-lg px-4 py-3 md:px-6 md:py-4">
+                  </Detail>
+                  <div className="grid">
                     <div>
-                      <Label as="div">
+                      <Label as="div" className="text-xlarge">
                         {page?.ansvarlig?.title
                           ? abbrName(page?.ansvarlig?.title)
                           : ""}
                       </Label>
                       {page?.ansvarlig?.roller?.length > 0 ? (
-                        <div className="mt-[2px]">
+                        <div className="text-medium mt-[2px]">
                           {page?.ansvarlig?.roller.join(", ")}
                         </div>
                       ) : (
@@ -109,44 +117,31 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                 </div>
               </div>
             </div>
-            <Slope />
           </div>
 
-          <div className="relative bg-gray-100 px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
-            <div className="dynamic-wrapper grid gap-16">
+          <div className="relative px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
+            <div className="dynamic-wrapper grid gap-20">
               {page.seksjoner.map((seksjon) => (
                 <div key={seksjon._key}>
-                  <Heading
-                    level="2"
-                    size="large"
-                    spacing
-                    className="hidden md:block"
-                  >
-                    {seksjon.title}
-                  </Heading>
-                  <Heading
-                    level="2"
-                    size="medium"
-                    spacing
-                    className="block md:hidden"
-                  >
+                  <Heading level="2" size="medium">
                     {seksjon.title}
                   </Heading>
                   {seksjon.beskrivelse && (
-                    <div className="mt-2 mb-5 max-w-prose">
+                    <div className="max-w-prose">
                       <SanityBlockContent
                         blocks={seksjon.beskrivelse}
                         noLastMargin
                       />
                     </div>
                   )}
-                  <div className="card-grid-3-1">
+                  <div className="card-grid-3-1 mt-6">
                     {(seksjon.sider as unknown as ArtiklerT[]).map(
                       (x: ArtiklerT) => (
                         <ArtikkelCard
                           {...x}
                           source={page?.slug?.current}
                           key={x._id}
+                          variant="tema"
                         />
                       )
                     )}
