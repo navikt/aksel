@@ -40,7 +40,7 @@ const introcards = [
 
 const IntroCards = () => {
   return (
-    <ul className="centered-layout mb-72 grid w-full max-w-screen-md grid-cols-2 gap-6">
+    <ul className="centered-layout mb-56 grid w-full max-w-screen-md grid-cols-2 gap-6">
       {introcards.map(({ icon: Icon, title, desc, href }) => (
         <li key={title} className="grid">
           <Link href={href} passHref>
@@ -282,3 +282,5 @@ export const getStaticProps = async ({
 };
 
 export default Page;
+
+<div>lorem</div>;

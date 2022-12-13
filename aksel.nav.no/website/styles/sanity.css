@@ -8,6 +8,7 @@
 }
 
 /* Override bug i sanity-ui */
-.navds-accordion svg.navds-accordion__expand-icon--filled:not([data-ui="Popover__arrow"]):not([data-ui="Tooltip__arrow"]) {
+#sanity-wrapper.navds-accordion
+  svg.navds-accordion__expand-icon--filled:not([data-ui="Popover__arrow"]):not([data-ui="Tooltip__arrow"]) {
   display: none;
 }
