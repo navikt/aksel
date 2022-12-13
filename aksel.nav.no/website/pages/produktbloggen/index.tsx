@@ -20,8 +20,7 @@ const Page = (props: PageProps): JSX.Element => {
     return <NotFotfund />;
   }
 
-  /* TODO: slice(4, props?.bloggposts.length) etter testing*/
-  const remainingPosts = props?.bloggposts?.slice(0, props?.bloggposts.length);
+  const remainingPosts = props?.bloggposts?.slice(4, props?.bloggposts.length);
 
   return (
     <>
