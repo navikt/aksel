@@ -191,6 +191,10 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
     "slug": slug.current,
     ${contributorsAll}
   },
+  komigang[]{
+    ...,
+    "slug": reference->slug.current
+  },
   tema[]{
     ...,
     ...ref->,
