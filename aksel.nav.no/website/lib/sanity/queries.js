@@ -323,7 +323,7 @@ export const akselTemaDocs = `{
         _updatedAt,
         publishedAt,
         "slug": slug.current,
-        "tema": tema[]->tag,
+        "tema": tema[]->title,
         ingress,
         "contributor": ${contributorsSingle}
       }

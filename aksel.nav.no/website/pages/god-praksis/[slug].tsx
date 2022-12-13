@@ -39,7 +39,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
   }
 
   const hasAnsvarlig = !!page?.ansvarlig?.title;
-
+  console.log(page.seksjoner);
   return (
     <>
       <Head>
@@ -125,14 +125,14 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                     {seksjon.title}
                   </Heading>
                   {seksjon.beskrivelse && (
-                    <div className="mb-6 max-w-prose">
+                    <div className="max-w-prose">
                       <SanityBlockContent
                         blocks={seksjon.beskrivelse}
                         noLastMargin
                       />
                     </div>
                   )}
-                  <div className="card-grid-3-1">
+                  <div className="card-grid-3-1 mt-6">
                     {(seksjon.sider as unknown as ArtiklerT[]).map(
                       (x: ArtiklerT) => (
                         <ArtikkelCard
@@ -198,6 +198,7 @@ export const getStaticProps = async ({
   params: { slug: string };
   preview?: boolean;
 }) => {
+  console.log(slug);
   const { tema } = await getClient().fetch(akselTemaDocs, {
     slug,
   });
