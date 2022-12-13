@@ -4,6 +4,7 @@ import { getClient } from "@/sanity-client";
 import { dateStr } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
+import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
 import {
   getAuthors,
@@ -43,37 +44,12 @@ const Page = (props: PageProps): JSX.Element => {
             {/* Flere blogger */}
             {remainingPosts && (
               <div>
-                <Heading level="2" size="xlarge">
+                <Heading level="2" size="xlarge" className="text-deepblue-800">
                   Flere blogginnlegg
                 </Heading>
                 <ul className="mt-12 grid gap-x-3 gap-y-6 sm:grid-cols-2 sm:gap-y-10 md:gap-x-6 lg:grid-cols-3">
                   {remainingPosts.map((blog) => (
-                    <li
-                      key={blog._id}
-                      className="border-b-border-subtle border-b pb-8"
-                    >
-                      <Heading size="medium" as="div">
-                        <NextLink href={`/${blog.slug}`} passHref>
-                          <Link className="text-deepblue-500 no-underline hover:underline">
-                            {blog.heading}
-                          </Link>
-                        </NextLink>
-                      </Heading>
-                      <BodyLong className="mt-2">{blog?.ingress}</BodyLong>
-                      {getAuthors(blog).length > 0 && (
-                        <BodyShort
-                          size="small"
-                          className="text-text-subtle mt-6 flex gap-2"
-                        >
-                          <span className="font-semibold">
-                            {getAuthors(blog)[0]}
-                          </span>
-                          <span>
-                            {dateStr(blog?.publishedAt ?? blog._createdAt)}
-                          </span>
-                        </BodyShort>
-                      )}
-                    </li>
+                    <BloggCard key={blog._id} blog={blog} />
                   ))}
                 </ul>
               </div>

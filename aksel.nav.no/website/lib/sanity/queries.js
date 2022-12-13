@@ -344,6 +344,14 @@ export const akselBloggBySlug = `{
       $valid != "true" => []
     ),
     ${contributorsAll}
+  },
+  "morePosts": *[_type == "aksel_blogg" && slug.current != $slug] | order(publishedAt desc, _updatedAt desc)[0...3] {
+    "slug": slug.current,
+    heading,
+    _createdAt,
+    _id,
+    ${contributorsAll},
+
   }
 }`;
 
