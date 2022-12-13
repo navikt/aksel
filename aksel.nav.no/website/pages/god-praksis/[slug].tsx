@@ -53,7 +53,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div className="relative overflow-x-clip pt-12 text-center">
+          <div className="relative overflow-x-clip pt-20 text-center">
             <div className="dynamic-wrapper px-4 pb-6 text-center">
               <Image
                 src={urlFor(page.pictogram.url).auto("format").url()}
@@ -118,27 +118,14 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
           </div>
 
           <div className="relative px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
-            <div className="dynamic-wrapper grid gap-16">
+            <div className="dynamic-wrapper grid gap-20">
               {page.seksjoner.map((seksjon) => (
                 <div key={seksjon._key}>
-                  <Heading
-                    level="2"
-                    size="large"
-                    spacing
-                    className="hidden md:block"
-                  >
-                    {seksjon.title}
-                  </Heading>
-                  <Heading
-                    level="2"
-                    size="medium"
-                    spacing
-                    className="block md:hidden"
-                  >
+                  <Heading level="2" size="medium">
                     {seksjon.title}
                   </Heading>
                   {seksjon.beskrivelse && (
-                    <div className="mt-2 mb-5 max-w-prose">
+                    <div className="mb-6 max-w-prose">
                       <SanityBlockContent
                         blocks={seksjon.beskrivelse}
                         noLastMargin
