@@ -39,7 +39,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
   }
 
   const hasAnsvarlig = !!page?.ansvarlig?.title;
-  console.log(page.seksjoner);
+
   return (
     <>
       <Head>
@@ -198,7 +198,6 @@ export const getStaticProps = async ({
   params: { slug: string };
   preview?: boolean;
 }) => {
-  console.log(slug);
   const { tema } = await getClient().fetch(akselTemaDocs, {
     slug,
   });
