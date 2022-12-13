@@ -362,3 +362,15 @@ export const akselBloggBySlug = `{
     },
   }
 }`;
+
+export const akselStandaloneBySlug = `{
+  "page": *[slug.current == $slug && _type == "aksel_standalone"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${deRefs}
+    }
+  }
+}`;
