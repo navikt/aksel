@@ -6,6 +6,7 @@ import { getClient } from "@/sanity-client";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "classnames";
 import { Header } from "components/layout/header/Header";
+import { AkselCubeStatic } from "components/website-modules/cube";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Image from "next/image";
@@ -54,6 +55,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
           className="min-h-[80vh] focus:outline-none"
         >
           <div className="relative overflow-x-clip pt-20 text-center">
+            <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
             <div className="dynamic-wrapper px-4 pb-6 text-center">
               <Image
                 src={urlFor(page.pictogram.url).auto("format").url()}
