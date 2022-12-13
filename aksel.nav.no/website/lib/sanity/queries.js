@@ -292,6 +292,12 @@ export const komponentQuery = `{
         ${deRefs}
       },
   },
+  "refs": *[_type == "komponent_artikkel" && count(*[references(^._id)][slug_v2.current == $slug]) > 0][0...3]{
+    _id,
+    heading,
+    "slug": slug_v2,
+    status
+  },
   ${sidebarQuery}
 }`;
 
