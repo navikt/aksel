@@ -1,5 +1,6 @@
 import { groups } from "./presets";
 import { defineField, defineType } from "sanity";
+import { allArticleDocsRef } from "../../config";
 
 export const Forside = defineType({
   title: "Forside Aksel",
@@ -12,6 +13,32 @@ export const Forside = defineType({
       name: "title",
       type: "string",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      title: "'Kom i gang'-lenker",
+      name: "komigang",
+      type: "array",
+      validation: (Rule) => Rule.required().min(2).max(3),
+      of: [
+        {
+          type: "object",
+          name: "link",
+          fields: [
+            {
+              type: "string",
+              name: "title",
+              validation: (Rule) => Rule.required().max(50),
+            },
+            {
+              title: "Reference",
+              name: "reference",
+              type: "reference",
+              to: allArticleDocsRef,
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+        },
+      ],
     }),
     defineField({
       title: "God praksis intro",

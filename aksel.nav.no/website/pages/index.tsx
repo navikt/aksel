@@ -22,19 +22,19 @@ const introcards = [
     title: "Komponenter",
     desc: "Bibliotekene Core, NAV.no, Interne flater",
     icon: ComponentIcon,
-    href: "#",
+    href: "/komponenter",
   },
   {
     title: "Styling",
     desc: "Tokens for farger, spacing, shadows, etc.",
     icon: TokenIcon,
-    href: "#",
+    href: "/grunnleggende#styling",
   },
   {
     title: "Stæsj",
     desc: "Last ned font og ikoner",
     icon: DownloadIcon,
-    href: "#",
+    href: "/grunnleggende#staesj",
   },
 ];
 
@@ -60,28 +60,29 @@ const IntroCards = () => {
   );
 };
 
-const GetStarted = () => {
+const GetStarted = ({
+  links,
+}: {
+  links: { title: string; slug: string }[];
+}) => {
   return (
     <div className="bg-deepblue-700 text-text-on-action mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
       <Heading size="xlarge" level="2" className="text-center">
         Kom i gang
       </Heading>
-      <ul className="xs:grid xs:grid-cols-3 mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 md:gap-8">
-        <li>
-          <AkselLink href="#" inverted>
-            Produktleder
-          </AkselLink>
-        </li>
-        <li>
-          <AkselLink href="#" inverted>
-            Utvikler
-          </AkselLink>
-        </li>
-        <li>
-          <AkselLink href="#" inverted>
-            Designer
-          </AkselLink>
-        </li>
+      <ul
+        style={{
+          gridTemplateColumns: `repeat(${links.length}, minmax(0, 1fr))`,
+        }}
+        className="xs:grid mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 md:gap-8"
+      >
+        {links.map((x) => (
+          <li>
+            <AkselLink href={`/${x.slug}`} inverted>
+              {x.title}
+            </AkselLink>
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -89,7 +90,13 @@ const GetStarted = () => {
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
+const Forside = ({
+  page,
+  tema,
+  bloggs,
+  resent,
+  komigang,
+}: PageProps): JSX.Element => {
   return (
     <>
       <Head>
@@ -147,7 +154,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
             <div className="centered-layout grid max-w-screen-2xl">
-              <GetStarted />
+              <GetStarted links={komigang} />
               {/* God praksis */}
               <div className="mx-auto">
                 <Heading
@@ -250,6 +257,10 @@ interface PageProps {
       tema: string[];
       contributors?: { title?: string }[];
     }[];
+  komigang: {
+    title: string;
+    slug: string;
+  }[];
   slug: string;
   preview: boolean;
 }
@@ -266,6 +277,7 @@ export const getStaticProps = async ({
     bloggs = null,
     tema = null,
     resent = null,
+    komigang = null,
   } = await client.fetch(akselForsideQuery);
 
   return {
@@ -274,6 +286,7 @@ export const getStaticProps = async ({
       bloggs,
       page,
       resent,
+      komigang,
       slug: "/",
       preview,
     },
