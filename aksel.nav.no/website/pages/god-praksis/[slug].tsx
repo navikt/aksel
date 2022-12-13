@@ -145,6 +145,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                           {...x}
                           source={page?.slug?.current}
                           key={x._id}
+                          variant="tema"
                         />
                       )
                     )}
