@@ -4,7 +4,6 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 /* Schemas */
 /* Documents */
 import editors from "./documents/editors";
-import frontpage from "./documents/frontpage";
 import redirect from "./documents/redirects";
 import KodeEksempler from "./documents/kode-eksempler";
 import Tokens from "./documents/tokens";
@@ -26,7 +25,6 @@ export default createSchema({
   name: "default",
   types: schemaTypes.concat([
     ...v2Blocks,
-    frontpage,
     editors,
     redirect,
     Navigation,

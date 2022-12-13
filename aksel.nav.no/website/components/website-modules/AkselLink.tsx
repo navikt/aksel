@@ -2,6 +2,7 @@ import { withErrorBoundary } from "@/error-boundary";
 import Link from "next/link";
 import React from "react";
 import cl from "classnames";
+import { logNav } from "@/utils";
 
 const AkselLink = ({
   href,
@@ -27,6 +28,13 @@ const AkselLink = ({
               !inverted,
           }
         )}
+        onClick={(e) =>
+          logNav(
+            "link",
+            window.location.pathname,
+            e.currentTarget.getAttribute("href")
+          )
+        }
       >
         {children}
         <svg

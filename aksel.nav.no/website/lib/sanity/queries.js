@@ -182,22 +182,20 @@ export const akselBloggPosts = `{
   }
 }`;
 
-export const akselForsideQuery = `*[_type == "vk_frontpage"][0]{
-  "tekster": {
+export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
+  "page": {
     ...,
-    beskrivelse[]{
-      ...,
-      ${deRefs}
-    }
   },
   "bloggs": *[_type == "aksel_blogg"] | order(_createdAt desc)[0...4]{
     ...,
     "slug": slug.current,
     ${contributorsAll}
   },
-  "temaer": *[_type == "aksel_tema"]{
+  tema[]{
     ...,
-    "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
+    ...ref->,
+    "oppsummering": intro,
+    ...ref->{"refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])},
   },
   "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
     _id,

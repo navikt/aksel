@@ -89,14 +89,7 @@ const GetStarted = () => {
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({
-  tekster,
-  temaer,
-  bloggs,
-  resent,
-}: PageProps): JSX.Element => {
-  const filteredTemas = temaer.filter((x) => x.refCount > 0);
-
+const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
   return (
     <>
       <Head>
@@ -105,7 +98,7 @@ const Forside = ({
         <meta
           property="og:description"
           content={
-            tekster?.seo?.meta ??
+            page?.seo?.meta ??
             "En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i NAV."
           }
           key="ogdesc"
@@ -113,8 +106,8 @@ const Forside = ({
         <meta
           property="og:image"
           content={
-            tekster?.seo?.image
-              ? urlFor(tekster?.seo?.image)
+            page?.seo?.image
+              ? urlFor(page?.seo?.image)
                   .width(1200)
                   .height(630)
                   .fit("crop")
@@ -136,7 +129,7 @@ const Forside = ({
                 size="xlarge"
                 className="text-deepblue-800 xs:text-[3.25rem]"
               >
-                {tekster.title}
+                {page.title}
               </Heading>
               <AkselCube />
             </div>
@@ -164,16 +157,16 @@ const Forside = ({
                 >
                   God praksis
                 </Heading>
-                <BodyLong className="text-center">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Commodi sunt minima dicta omnis dignissimos, necessitatibus.
-                </BodyLong>
+                {page?.god_praksis_intro && (
+                  <BodyLong className="text-center">
+                    {page.god_praksis_intro}
+                  </BodyLong>
+                )}
               </div>
               <ul className="card-grid-2-1 mx-auto mt-16 max-w-5xl">
-                <GodPraksisCard />
-                <GodPraksisCard />
-                <GodPraksisCard />
-                <GodPraksisCard />
+                {tema.map((t) => (
+                  <GodPraksisCard key={t._id} node={t} />
+                ))}
               </ul>
               <div className="mx-auto mt-8">
                 <AkselLink href="/god-praksis">Utforsk god praksis</AkselLink>
@@ -239,14 +232,18 @@ export interface AkselTemaT extends SanityT.Schema.aksel_tema {
 }
 
 interface PageProps {
-  temaer: AkselTemaT[];
+  tema: AkselTemaT[];
   bloggs: Partial<
     SanityT.Schema.aksel_blogg & {
       slug: string;
       contributors?: { title?: string }[];
     }
   >[];
-  tekster: SanityT.Schema.vk_frontpage;
+  page: {
+    title: string;
+    god_praksis_intro: string;
+    seo: { meta: string; image: string };
+  };
   resent: SanityT.Schema.aksel_artikkel &
     {
       slug: string;
@@ -265,17 +262,17 @@ export const getStaticProps = async ({
   const client = getClient();
 
   const {
-    tekster = null,
+    page = null,
     bloggs = null,
-    temaer = null,
+    tema = null,
     resent = null,
   } = await client.fetch(akselForsideQuery);
 
   return {
     props: {
-      temaer,
+      tema,
       bloggs,
-      tekster,
+      page,
       resent,
       slug: "/",
       preview,

@@ -3,7 +3,7 @@ import { defineField, defineType } from "sanity";
 
 export const Forside = defineType({
   title: "Forside Aksel",
-  name: "vk_frontpage",
+  name: "aksel_forside",
   type: "document",
   groups,
   fields: [
@@ -14,47 +14,35 @@ export const Forside = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      title: "Beskrivelse",
-      name: "beskrivelse",
-      type: "riktekst_enkel",
+      title: "God praksis intro",
+      name: "god_praksis_intro",
+      type: "text",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      title: "Brukeropplevelse",
-      name: "prinsipp_1",
-      type: "object",
-      fields: [
+      title: "Tema",
+      description: "Tema som blir vist på forsiden",
+      name: "tema",
+      type: "array",
+      validation: (Rule) => Rule.required().min(4),
+      of: [
         {
-          title: "Vis på forside",
-          name: "vis",
-          type: "boolean",
-          validation: (Rule) => Rule.required(),
-        },
-
-        // TODO: Uncomment etter migrering av docs
-        /*
-        {
-          title: "Beskrivelse",
-          name: "beskrivelse",
-          type: "riktekst_enkel",
-          validation: (Rule) => Rule.required(),
-        },
-        {
-          title: "Hovedside",
-          name: "hovedside",
-          type: "reference",
-          weak: true,
-          to: [{ type: "aksel_prinsipp" }],
-        },
-        {
-          title: "Undersider",
-          description: "Rekkefølge bestemmer rekkefølgen på forsiden!",
-          name: "undersider",
-          type: "array",
-          of: [
-            { type: "reference", weak: true, to: [{ type: "aksel_prinsipp" }] },
+          type: "object",
+          name: "temalink",
+          fields: [
+            {
+              name: "ref",
+              type: "reference",
+              to: [{ type: "aksel_tema" }],
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              type: "text",
+              name: "intro",
+              validation: (Rule) => Rule.required().max(300),
+            },
           ],
-        },*/
+        },
       ],
     }),
     defineField({ type: "seo", title: "Seo", name: "seo" }),
