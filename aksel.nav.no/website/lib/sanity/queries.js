@@ -376,3 +376,15 @@ export const komponentLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
 export const grunnleggendeLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
   "grunnleggende"
 )}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug_v2,status,kategori}}`;
+
+export const akselStandaloneBySlug = `{
+  "page": *[slug.current == $slug && _type == "aksel_standalone"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${deRefs}
+    }
+  }
+}`;
