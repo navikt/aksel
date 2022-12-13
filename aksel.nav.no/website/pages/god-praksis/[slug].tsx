@@ -67,7 +67,14 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
               <Heading
                 level="1"
                 size="xlarge"
-                className="algolia-index-lvl1 lg:text-2xlarge mt-8"
+                className="algolia-index-lvl1 mt-8 hidden md:block md:text-5xl"
+              >
+                {page.title}
+              </Heading>
+              <Heading
+                level="1"
+                size="large"
+                className="algolia-index-lvl1 mt-8 block md:hidden"
               >
                 {page.title}
               </Heading>
@@ -91,13 +98,13 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                   </Detail>
                   <div className="grid">
                     <div>
-                      <Label as="div">
+                      <Label as="div" className="text-xlarge">
                         {page?.ansvarlig?.title
                           ? abbrName(page?.ansvarlig?.title)
                           : ""}
                       </Label>
                       {page?.ansvarlig?.roller?.length > 0 ? (
-                        <div className="mt-[2px]">
+                        <div className="text-medium mt-[2px]">
                           {page?.ansvarlig?.roller.join(", ")}
                         </div>
                       ) : (
