@@ -24,7 +24,7 @@ export interface AkselTemaPage
   extends Omit<SanityT.Schema.aksel_tema, "ansvarlig" | "pictogram"> {
   artikler: ArtiklerT[];
   ansvarlig?: { title?: string; roller: string[] };
-  pictogram: { url: string; altText?: string; description?: string };
+  pictogram: { url: string; altText?: string };
 }
 
 interface PageProps {

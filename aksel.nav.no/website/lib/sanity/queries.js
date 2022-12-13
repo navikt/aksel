@@ -333,7 +333,6 @@ export const akselTemaDocs = `{
     "pictogram": pictogram.asset-> {
         url,
         altText,
-        description
     },
   }
 }`;
