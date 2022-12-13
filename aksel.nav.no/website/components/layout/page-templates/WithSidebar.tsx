@@ -56,12 +56,14 @@ export const WithSidebar = ({
   pageProps,
   variant = "landingPage",
   withToc = false,
+  footer,
 }: {
   children: ReactNode;
   sidebar: SidebarT;
   pageType: PageTypeT;
   pageProps: any;
   intro?: ReactNode;
+  footer?: ReactNode;
   variant?: "page" | "landingPage";
   withToc?: boolean;
 }) => {
@@ -150,6 +152,7 @@ export const WithSidebar = ({
                 <div className="w-full">
                   {children}
                   <Feedback docId={pageProps?._id} docType={pageProps?._type} />
+                  {footer && <div className="w-full">{footer}</div>}
                 </div>
               </div>
             </main>
