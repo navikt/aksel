@@ -69,13 +69,17 @@ export const ArtikkelCard = ({
           </Detail>
         </span>
       ) : (
-        <Detail
-          as="span"
-          uppercase
-          className="text-text-subtle absolute bottom-5"
-        >
-          {tema[0]}
-        </Detail>
+        <>
+          {tema?.[0] && (
+            <Detail
+              as="span"
+              uppercase
+              className="text-text-subtle absolute bottom-5"
+            >
+              {tema[0]}
+            </Detail>
+          )}
+        </>
       )}
     </div>
   );
