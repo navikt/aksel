@@ -53,7 +53,8 @@ const Page = ({
               <Heading
                 level="2"
                 size="large"
-                className="text-deepblue-800 mb-6"
+                id="relaterte-komponenter"
+                className="text-deepblue-800 mb-6 scroll-m-20"
               >
                 Relaterte komponenter
               </Heading>
