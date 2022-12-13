@@ -1,18 +1,13 @@
 import { Footer } from "@/layout";
 import { akselBloggPosts, SanityT } from "@/lib";
 import { getClient } from "@/sanity-client";
-import { dateStr } from "@/utils";
-import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
+import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
-import {
-  getAuthors,
-  LatestBloggposts,
-} from "components/website-modules/LatestBloggs";
+import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import NextLink from "next/link";
 import { lazy } from "react";
 import NotFotfund from "../404";
 

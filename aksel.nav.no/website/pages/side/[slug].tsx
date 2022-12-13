@@ -1,10 +1,10 @@
-import { Feedback, TableOfContents } from "@/components";
+import { TableOfContents } from "@/components";
 import { akselStandaloneBySlug, SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
-import Header from "components/layout/header/AkselHeader";
+import { Header } from "components/layout/header/Header";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { GetServerSideProps } from "next/types";
@@ -37,7 +37,7 @@ const Page = ({
         />
       </Head>
 
-      <Header />
+      <Header variant="subtle" />
       <main
         tabIndex={-1}
         id="hovedinnhold"
@@ -65,7 +65,7 @@ const Page = ({
           </div>
         </div>
       </main>
-      <Footer variant="aksel" />
+      <Footer />
     </>
   );
 };
