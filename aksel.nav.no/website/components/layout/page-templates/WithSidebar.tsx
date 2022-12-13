@@ -69,7 +69,7 @@ export const WithSidebar = ({
     <>
       <Header />
       <div className="bg-bg-default">
-        <div className="mx-auto mt-6 flex w-full max-w-screen-2xl gap-6">
+        <div className="mx-auto mt-6 mb-24 flex w-full max-w-screen-2xl gap-6">
           <Sidebar kategori={pageType.type} links={sidebar} />
           <div className="relative w-full">
             <main
@@ -81,7 +81,7 @@ export const WithSidebar = ({
                 className={cl(
                   "mb-10 min-h-[12.5rem] rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
                   {
-                    "bg-surface-subtle ring-border-subtle flex items-center justify-between ring-1 ring-inset":
+                    "bg-surface-subtle flex items-center justify-between":
                       variant === "page",
                     "bg-deepblue-700 grid py-[4.25rem] pb-6":
                       variant !== "page",
@@ -123,7 +123,7 @@ export const WithSidebar = ({
                   </div>
                 </div>
                 {variant === "page" && pageProps.status?.bilde && (
-                  <div className="relative hidden aspect-square h-[12.5rem] lg:block xl:mr-[10%]">
+                  <div className="relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40">
                     <Image
                       src={urlFor(pageProps.status?.bilde).auto("format").url()}
                       decoding="async"
@@ -147,7 +147,7 @@ export const WithSidebar = ({
                     hideToc={false}
                   />
                 )}
-                <div>
+                <div className="w-full">
                   {children}
                   <Feedback docId={pageProps?._id} docType={pageProps?._type} />
                 </div>

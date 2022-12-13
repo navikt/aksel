@@ -57,7 +57,7 @@ export const structure = async (
 
   const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
   const adminOrDev = currentUser.roles.find((x) =>
-    ["developer", "administrator"].includes(x.name)
+    ["developer", "administrator", "editor"].includes(x.name)
   );
   const hasBloggerRole = currentUser.roles.find((x) => x.name === "blogger");
   const hasGrunnleggendeRole = currentUser.roles.find(

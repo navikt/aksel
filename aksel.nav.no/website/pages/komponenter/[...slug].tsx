@@ -1,12 +1,9 @@
-import { dateStr, LayoutPicker } from "@/components";
-import { Footer } from "@/layout";
+import { dateStr } from "@/components";
 import { getDocumentsTmp, komponentQuery } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Detail } from "@navikt/ds-react";
-import { Header } from "components/layout/header/Header";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
-import { Sidebar } from "components/layout/sidebar/Sidebar";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { BetaWarning } from "components/website-modules/BetaWarning";
 import { StatusTag } from "components/website-modules/StatusTag";

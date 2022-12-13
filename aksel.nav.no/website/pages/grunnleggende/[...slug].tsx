@@ -1,10 +1,14 @@
-import { LayoutPicker } from "@/components";
-import { Footer } from "@/layout";
+import { dateStr } from "@/components";
 import { getDocumentsTmp, grunnleggendeQuery } from "@/lib";
+import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
-import { Header } from "components/layout/header/Header";
-import { Sidebar } from "components/layout/sidebar/Sidebar";
+import { Detail } from "@navikt/ds-react";
+import { WithSidebar } from "components/layout/page-templates/WithSidebar";
+import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
+import { BetaWarning } from "components/website-modules/BetaWarning";
+import { StatusTag } from "components/website-modules/StatusTag";
 import { PreviewSuspense } from "next-sanity/preview";
+import Head from "next/head";
 import { lazy } from "react";
 import NotFotfund from "../404";
 
@@ -23,22 +27,27 @@ const Page = ({
 
   return (
     <>
-      <Header />
-      <div className="bg-bg-default flex w-full flex-col items-center">
-        <div className="flex w-full max-w-screen-xl">
-          <Sidebar kategori="Grunnleggende" links={sidebar} />
-          <div className="relative w-full">
-            <main
-              tabIndex={-1}
-              id="hovedinnhold"
-              className="min-h-screen-header md:max-w-screen-sidebar relative w-full focus:outline-none"
-            >
-              <LayoutPicker title="Aksel" data={page} />
-            </main>
-          </div>
-        </div>
-        <Footer />
-      </div>
+      <Head>
+        <title>{page?.heading ? `${page?.heading} - Aksel` : "Aksel"}</title>
+        <meta property="og:title" content={`${page.heading} - Aksel`} />
+      </Head>
+      <WithSidebar
+        withToc
+        sidebar={sidebar}
+        pageType={{ type: "Grunnleggende", title: page?.heading }}
+        intro={
+          <Detail as="div" className="mt-2 flex items-center gap-3">
+            <StatusTag showStable status={page?.status?.tag} />
+            {`OPPDATERT ${dateStr(page?._updatedAt)}`}
+          </Detail>
+        }
+        pageProps={page}
+        variant="page"
+      >
+        {page?.status?.tag === "beta" && <BetaWarning />}
+        <IntroSeksjon node={page?.intro} />
+        <SanityBlockContent blocks={page["content"]} />
+      </WithSidebar>
     </>
   );
 };
@@ -75,7 +84,7 @@ export const getStaticPaths = async (): Promise<{
     paths: await getDocumentsTmp("ds_artikkel").then((paths) =>
       paths.map((slug) => ({
         params: {
-          slug: slug.split("/").filter((x) => x !== "komponenter"),
+          slug: slug.split("/").filter((x) => x !== "grunnleggende"),
         },
       }))
     ),

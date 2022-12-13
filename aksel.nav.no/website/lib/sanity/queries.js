@@ -348,6 +348,14 @@ export const akselBloggBySlug = `{
       $valid != "true" => []
     ),
     ${contributorsAll}
+  },
+  "morePosts": *[_type == "aksel_blogg" && slug.current != $slug] | order(publishedAt desc, _updatedAt desc)[0...3] {
+    "slug": slug.current,
+    heading,
+    _createdAt,
+    _id,
+    ${contributorsAll},
+
   }
 }`;
 
@@ -372,3 +380,15 @@ export const komponentLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
 export const grunnleggendeLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
   "grunnleggende"
 )}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug_v2,status,kategori}}`;
+
+export const akselStandaloneBySlug = `{
+  "page": *[slug.current == $slug && _type == "aksel_standalone"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${deRefs}
+    }
+  }
+}`;
