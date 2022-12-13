@@ -65,7 +65,7 @@ export const Hamburger = () => {
           aria={{ modal: true }}
           overlayClassName="header-modal__overlay"
           contentLabel="Meny"
-          className="bg-surface-default max-w-screen-xs relative inset-0 block w-[90%] rounded py-14 px-11 md:hidden"
+          className="bg-surface-default xs:max-w-[90%] xs:right-6 xs:left-auto xs:w-96 absolute left-4 top-0 right-4 block  rounded py-14 px-11 md:hidden"
         >
           <nav aria-label="meny">
             <ul>
