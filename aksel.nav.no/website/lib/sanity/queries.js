@@ -402,3 +402,16 @@ export const akselStandaloneBySlug = `{
     }
   }
 }`;
+
+export const akselArticelAll = `{
+  "articles": *[_type == "aksel_artikkel"] | order(publishedAt desc) {
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
+  }
+}`;

@@ -13,7 +13,7 @@ import Image from "next/image";
 import { lazy } from "react";
 import NotFotfund from "../404";
 
-type ArtiklerT = Partial<
+export type ArtiklerT = Partial<
   SanityT.Schema.aksel_artikkel & {
     slug: string;
     tema: string[];
