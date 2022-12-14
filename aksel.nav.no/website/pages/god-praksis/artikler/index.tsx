@@ -1,3 +1,4 @@
+import { Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import Head from "next/head";
@@ -16,7 +17,15 @@ const Artikler = () => {
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div>Innhold</div>
+          <div className="centered-layout mb-40 grid max-w-screen-2xl">
+            <Heading
+              level="1"
+              size="xlarge"
+              className="algolia-index-lvl1 text-deepblue-800 my-20 md:text-[3rem]"
+            >
+              Artikler
+            </Heading>
+          </div>
         </main>
         <Footer />
       </div>
