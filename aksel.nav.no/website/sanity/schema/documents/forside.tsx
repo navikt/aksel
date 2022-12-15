@@ -1,6 +1,7 @@
 import { groups } from "./presets";
 import { defineField, defineType } from "sanity";
 import { allArticleDocsRef } from "../../config";
+import { SEOFields } from "./presets/seo";
 
 export const Forside = defineType({
   title: "Forside Aksel",
@@ -72,6 +73,6 @@ export const Forside = defineType({
         },
       ],
     }),
-    defineField({ type: "seo", title: "Seo", name: "seo" }),
+    SEOFields,
   ],
 });

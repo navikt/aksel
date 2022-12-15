@@ -85,12 +85,12 @@ const Page = ({
             <Heading
               level="1"
               size="xlarge"
-              className="algolia-index-lvl1 hyphen text-deepblue-800 mt-1 break-words text-5xl"
+              className="algolia-index-lvl1 hyphen text-deepblue-800 mt-1 break-words text-5xl leading-[1.2]"
             >
               {blogg.heading}
             </Heading>
             {blogg?.ingress && (
-              <Ingress className="text-deepblue-700 mt-4">
+              <Ingress className="text-deepblue-700 mt-4 text-2xl leading-normal">
                 {blogg?.ingress}
               </Ingress>
             )}

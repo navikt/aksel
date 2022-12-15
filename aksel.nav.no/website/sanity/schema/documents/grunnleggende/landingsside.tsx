@@ -1,5 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { grunnleggendeKategorier } from "../../../config";
+import { SEOFields } from "../presets/seo";
+import { groups } from "../presets/groups";
 
 const views = () => {
   const list = [];
@@ -27,6 +29,7 @@ export const GrunnleggendeLandingSide = defineType({
   title: "Landingsside Grunnleggende",
   name: "grunnleggende_landingsside",
   type: "document",
+  groups,
   fields: [
     defineField({
       title: "Intro",
@@ -34,6 +37,7 @@ export const GrunnleggendeLandingSide = defineType({
       type: "text",
     }),
     ...views(),
+    SEOFields,
   ],
   preview: {
     prepare: () => ({
