@@ -130,11 +130,11 @@ const Forside = ({
 
         <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">
           <div className="z-20 pb-8">
-            <div className="centered-layout xs:mt-36 xs:mb-32 relative mb-16 mt-20 grid max-w-screen-sm place-items-center text-center">
+            <div className="centered-layout xs:mt-36 xs:mb-32 xs:max-w-screen-xs relative mb-16 mt-20 grid max-w-xs place-items-center text-center">
               <Heading
                 level="1"
                 size="xlarge"
-                className="text-deepblue-800 xs:text-[3.25rem]"
+                className="text-deepblue-800 xs:text-[3.5rem]"
               >
                 {page.title}
               </Heading>
