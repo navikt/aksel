@@ -26,6 +26,7 @@ export interface AkselTemaPage
   artikler: ArtiklerT[];
   ansvarlig?: { title?: string; roller: string[] };
   pictogram: { url: string; altText?: string };
+  seo: any;
 }
 
 interface PageProps {
@@ -46,6 +47,25 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
       <Head>
         <title>{`${page.title} - Aksel`}</title>
         <meta property="og:title" content={`${page.title} - Aksel`} />
+        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
+        <meta
+          property="og:description"
+          content={page?.seo?.meta ?? ""}
+          key="ogdesc"
+        />
+        <meta
+          property="og:image"
+          content={
+            page?.seo?.image
+              ? urlFor(page?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .url()
+              : ""
+          }
+          key="ogimage"
+        />
       </Head>
       <div className="bg-surface-subtle">
         <Header variant="subtle" />

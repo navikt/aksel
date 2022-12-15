@@ -1,5 +1,5 @@
 export const getImage = (key: string, variant: "OG" | "thumbnail") => {
-  const bloggOptions = 12;
+  const bloggOptions = 11;
 
   const hash = Math.abs(
     key.split("").reduce(function (a, b) {
