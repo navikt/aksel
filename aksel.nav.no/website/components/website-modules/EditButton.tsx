@@ -17,7 +17,7 @@ function EditButton(): JSX.Element {
           delay={500}
         >
           <a
-            href={`https://verktoykasse.sanity.studio/intent/edit/id=${idCtx?.id}`}
+            href={`https://aksel.nav.no/admin/prod/intent/edit/id=${idCtx?.id}`}
             target="_blank"
             rel="noreferrer"
             className="editbutton bg-deepblue-800 hover:bg-deepblue-700 absolute top-0 right-0 flex  -translate-y-[99%] items-center gap-2 overflow-hidden rounded-tl px-2 py-1  text-white transition-transform hover:translate-x-0"
