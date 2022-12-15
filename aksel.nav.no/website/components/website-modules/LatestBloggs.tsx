@@ -4,6 +4,7 @@ import { dateStr } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { SanityT, urlFor } from "@/lib";
 import cl from "classnames";
+import { getImage } from "components/website-modules/utils/get-image";
 
 export type BloggPageT = Partial<
   SanityT.Schema.aksel_blogg & {
@@ -14,23 +15,6 @@ export type BloggPageT = Partial<
 
 export const getAuthors = (blog: BloggPageT) =>
   (blog?.contributors as any)?.map((x) => x?.title) ?? [];
-
-const getImage = (n: string, size: "small" | "large") => {
-  const smallOptions = 18;
-  const largeOptions = 4;
-
-  const hash = Math.abs(
-    n.split("").reduce(function (a, b) {
-      a = (a << 5) - a + b.charCodeAt(0);
-      return a & a;
-    }, 0)
-  );
-
-  if (size === "small") {
-    return `/images/thumbnail-small/Small-${(hash % smallOptions) - 1 + 1}.svg`;
-  }
-  return `/images/thumbnail-large/Large-${(hash % largeOptions) - 1 + 1}.svg`;
-};
 
 export const LatestBloggposts = ({
   bloggs,
@@ -86,7 +70,7 @@ export const LatestBloggposts = ({
               />
             ) : (
               <Image
-                src={getImage(bloggs[0]?.heading ?? "", "large")}
+                src={getImage(bloggs[0]?.heading ?? "", "thumbnail")}
                 decoding="async"
                 layout="fill"
                 objectFit="contain"
@@ -149,10 +133,10 @@ export const LatestBloggposts = ({
                       />
                     ) : (
                       <Image
-                        src={getImage(blog?.heading ?? "", "small")}
+                        src={getImage(blog?.heading ?? "", "thumbnail")}
                         decoding="async"
                         layout="fill"
-                        objectFit="contain"
+                        objectFit="cover"
                         aria-hidden
                         priority
                         className="rounded-lg"
@@ -220,7 +204,7 @@ export const LatestBloggposts = ({
               />
             ) : (
               <Image
-                src={getImage(bloggs[0]?.heading ?? "", "large")}
+                src={getImage(bloggs[0]?.heading ?? "", "thumbnail")}
                 decoding="async"
                 layout="fill"
                 objectFit="contain"
@@ -277,10 +261,10 @@ export const LatestBloggposts = ({
                     />
                   ) : (
                     <Image
-                      src={getImage(blog?.heading ?? "", "small")}
+                      src={getImage(blog?.heading ?? "", "thumbnail")}
                       decoding="async"
                       layout="fill"
-                      objectFit="contain"
+                      objectFit="cover"
                       aria-hidden
                       priority
                       className="rounded-lg"

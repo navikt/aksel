@@ -1,5 +1,5 @@
-export const getImage = (key: string, variant: "OG" | "display") => {
-  const largeOptions = 4;
+export const getImage = (key: string, variant: "OG" | "thumbnail") => {
+  const bloggOptions = 12;
 
   const hash = Math.abs(
     key.split("").reduce(function (a, b) {
@@ -8,5 +8,10 @@ export const getImage = (key: string, variant: "OG" | "display") => {
     }, 0)
   );
 
-  return `/images/thumbnail-large/Large-${(hash % largeOptions) - 1 + 1}.svg`;
+  const ogSrc = "https://aksel.nav.no/images/og/blogg";
+  const thumbnailSrc = "/images/thumbnail/blogg";
+
+  return `${variant === "OG" ? ogSrc : thumbnailSrc}/image-${
+    hash % (bloggOptions + 1)
+  }.${variant === "OG" ? "png" : "svg"}`;
 };

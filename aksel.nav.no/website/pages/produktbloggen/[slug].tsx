@@ -9,6 +9,7 @@ import { BloggAd } from "components/website-modules/BloggAd";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Feedback from "components/website-modules/feedback";
 import TableOfContents from "components/website-modules/TOC";
+import { getImage } from "components/website-modules/utils/get-image";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Image from "next/image";
@@ -67,7 +68,7 @@ const Page = ({
                   .height(630)
                   .fit("crop")
                   .url()
-              : ""
+              : getImage(blogg?.heading ?? "", "OG")
           }
           key="ogimage"
         />
