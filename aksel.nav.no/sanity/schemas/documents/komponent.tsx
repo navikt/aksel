@@ -66,7 +66,7 @@ export default {
         },
         {
           name: "bilde",
-          title: "Thumbnail/og-bilde",
+          title: "Thumbnail",
           type: "image",
         },
       ],
