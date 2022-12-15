@@ -2,6 +2,7 @@ import { groups } from "../presets/groups";
 import { defineField, defineType } from "sanity";
 import { TemaView } from "../../custom-components/TemaView";
 import { TemaPreview } from "../../custom-components/TemaPreview";
+import { SEOFields } from "../presets/seo";
 
 export const Tema = defineType({
   title: "Aksel Tema",
@@ -152,5 +153,6 @@ export const Tema = defineType({
       ],
       validation: (Rule) => Rule.required().error("Tema må ha pictogram"),
     }),
+    SEOFields,
   ],
 });
