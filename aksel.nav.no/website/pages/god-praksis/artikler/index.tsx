@@ -4,7 +4,7 @@ import { Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import { akselArticelAll } from "lib/sanity/queries";
+import { akselArticleAll } from "lib/sanity/queries";
 import Head from "next/head";
 import { ArtiklerT } from "../[slug]";
 
@@ -70,7 +70,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
 };
 
 export const getStaticProps = async () => {
-  const { articles } = await getClient().fetch(akselArticelAll);
+  const { articles } = await getClient().fetch(akselArticleAll);
 
   return {
     props: {

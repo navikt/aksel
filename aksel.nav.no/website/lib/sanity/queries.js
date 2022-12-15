@@ -403,7 +403,7 @@ export const akselStandaloneBySlug = `{
   }
 }`;
 
-export const akselArticelAll = `{
+export const akselArticleAll = `{
   "articles": *[_type == "aksel_artikkel"] | order(publishedAt desc) {
     _id,
     heading,
