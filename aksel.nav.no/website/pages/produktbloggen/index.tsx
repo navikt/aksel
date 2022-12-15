@@ -47,7 +47,7 @@ const Page = (props: PageProps): JSX.Element => {
           key="ogimage"
         />
       </Head>
-      <div className="bg-[#FFFCF0]">
+      <div className="bg-[#FEFCE9]">
         <Header variant="blogg" />
         <main
           tabIndex={-1}

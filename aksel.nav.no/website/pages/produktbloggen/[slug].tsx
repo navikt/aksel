@@ -86,7 +86,7 @@ const Page = ({
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel xs:pb-32 overflow-hidden bg-[#FFFCF0] pt-[8vw] pb-16 focus:outline-none"
+        className="aksel-artikkel xs:pb-32 #FEFCE9 overflow-hidden bg-[#FEFCE9] pt-[8vw] pb-16 focus:outline-none"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose text-center">
