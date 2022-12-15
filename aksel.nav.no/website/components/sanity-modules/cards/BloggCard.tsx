@@ -17,7 +17,7 @@ export const BloggCard = ({
   >;
 }) => {
   return (
-    <li key={blog._id} className="border-b-border-subtle border-b pb-8">
+    <li key={blog._id} className="border-b-border-subtle h-fit border-b pb-8">
       <Heading size="medium" as="div">
         <NextLink href={`/${blog.slug}`} passHref>
           <Link

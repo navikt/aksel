@@ -367,6 +367,7 @@ export const akselBloggBySlug = `{
     heading,
     _createdAt,
     _id,
+    ingress,
     ${contributorsAll},
 
   }
