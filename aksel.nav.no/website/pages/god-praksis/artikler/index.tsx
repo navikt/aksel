@@ -6,6 +6,7 @@ import { Header } from "components/layout/header/Header";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { akselArticleAll } from "lib/sanity/queries";
 import Head from "next/head";
+import { useState } from "react";
 import useSWR from "swr";
 import { ArtiklerT } from "../[slug]";
 
@@ -14,17 +15,28 @@ interface ArtiklerProps {
 }
 
 const Artikler = ({ articles }: ArtiklerProps) => {
-  const { data, error } = useSWR("/api/aksel-articles", (query) =>
-    fetch(query).then((res) => res.json())
+  const [allArticles, setAllArticles] = useState<ArtiklerT[]>(articles);
+  const [fetchMore, setFetchMore] = useState<boolean>(false);
+
+  const [lastPublishedAt, setLastPublishedAt] = useState<string>(
+    articles[articles.length - 1].publishedAt
   );
 
-  if (error) {
-    console.error(error);
-  }
-
-  if (data) {
-    console.log(data);
-  }
+  useSWR(
+    fetchMore
+      ? () =>
+          `/api/aksel-articles?lastId=test&lastPublishedAt=${lastPublishedAt}`
+      : null,
+    (query) =>
+      fetch(query)
+        .then((res) => res.json())
+        .then((resData) => {
+          setLastPublishedAt(resData[resData.length - 1].publishedAt);
+          setAllArticles([...allArticles, ...resData]);
+          setFetchMore(false);
+          return resData.json();
+        })
+  );
 
   return (
     <>
@@ -48,8 +60,10 @@ const Artikler = ({ articles }: ArtiklerProps) => {
             >
               Artikler
             </Heading>
+            <p>{allArticles.length}</p>
+            <button onClick={() => setFetchMore(true)}>Last flere</button>
             <div className="card-grid-3-1 mt-6">
-              {articles
+              {allArticles
                 .filter((a: ArtiklerT) => a.tema)
                 .map((x) => {
                   return (
@@ -71,7 +85,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
 };
 
 export const getStaticProps = async () => {
-  const { articles } = await getClient().fetch(akselArticleAll("[0..10]"));
+  const { articles } = await getClient().fetch(akselArticleAll("[0...20]"));
 
   return {
     props: {

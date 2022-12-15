@@ -403,17 +403,21 @@ export const akselStandaloneBySlug = `{
   }
 }`;
 
+export const akselArticleFields = `
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
+`;
+
 export const akselArticleAll = (boundry = "") => {
   return `{
-    "articles": *[_type == "aksel_artikkel"] | order(publishedAt desc)${boundry} {
-      _id,
-      heading,
-      _createdAt,
-      _updatedAt,
-      publishedAt,
-      "slug": slug.current,
-      "tema": tema[]->title,
-      ingress,
+    "articles": *[_type == "aksel_artikkel" && publishedAt != null] | order(publishedAt desc)${boundry} {
+      ${akselArticleFields}
     }
   }`;
 };
