@@ -12,6 +12,6 @@ export const getImage = (key: string, variant: "OG" | "thumbnail") => {
   const thumbnailSrc = "/images/thumbnail/blogg";
 
   return `${variant === "OG" ? ogSrc : thumbnailSrc}/image-${
-    hash % (bloggOptions + 1)
+    (hash % bloggOptions) + 1
   }.${variant === "OG" ? "png" : "svg"}`;
 };
