@@ -1,6 +1,6 @@
 import Logo from "components/assets/Logo";
 import Link from "next/link";
-import { logNav /* Search */ } from "../..";
+import { logNav } from "../..";
 import cl from "classnames";
 import { useRouter } from "next/router";
 import { Hamburger } from "components/layout/header/Hamburger";

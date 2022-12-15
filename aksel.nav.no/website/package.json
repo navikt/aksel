@@ -12,7 +12,6 @@
     "e2e": "yarn build && yarn start-server-and-test start http://localhost:3000 playwright",
     "update:props": "npx ts-node --project tsconfig.tsnode.json ./lib/update-documents/update-props",
     "update:tokens": "npx ts-node --project tsconfig.tsnode.json ./lib/update-documents/update-tokens",
-    "update:search": "npx ts-node --project tsconfig.tsnode.json ./lib/search",
     "update:eksempler": "npx ts-node --project tsconfig.tsnode.json ./lib/examples/update-sanity",
     "update:sanity": "yarn update:tokens && yarn update:props && yarn update:eksempler",
     "analyze": "cross-env ANALYZE=true next build",
@@ -21,8 +20,6 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@docsearch/css": "3.3.0",
-    "@docsearch/react": "3.3.0",
     "@radix-ui/react-tabs": "1.0.0",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^3.3.0",
@@ -34,7 +31,6 @@
     "@sanity/ui": "^1.0.0",
     "@sanity/vision": "3.0.6",
     "@svgr/webpack": "^5.5.0",
-    "algoliasearch": "4.12.2",
     "amplitude-js": "^8.8.0",
     "boring-avatars": "1.7.0",
     "classnames": "^2.3.1",
@@ -54,7 +50,6 @@
     "prismjs": "^1.27.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-instantsearch-hooks-web": "^6.26.0",
     "react-modal": "3.15.1",
     "react-snowfall": "1.2.1",
     "sanity": "3.0.6",

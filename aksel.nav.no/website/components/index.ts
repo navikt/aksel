@@ -22,7 +22,6 @@ export { default as EditButton } from "./website-modules/EditButton";
 export { default as Feedback } from "./website-modules/feedback";
 export * from "./website-modules/H2";
 export { default as PreviewBanner } from "./website-modules/PreviewBanner";
-export { default as Search } from "./website-modules/search";
 export { PrinsippSlope, Slope } from "./website-modules/Slope";
 export * from "./website-modules/TilToppen";
 export * from "./website-modules/TOC";
