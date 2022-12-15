@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import { logNav } from "../..";
 
-const LinkElement = ({ name, href }) => {
+const LinkElement = ({ name, href, onClick }) => {
   const { asPath } = useRouter();
   return (
     <li className="flex h-11 items-center">
@@ -21,13 +21,14 @@ const LinkElement = ({ name, href }) => {
               "": !asPath.startsWith(href),
             }
           )}
-          onClick={(e) =>
+          onClick={(e) => {
             logNav(
               "header",
               window.location.pathname,
               e.currentTarget.getAttribute("href")
-            )
-          }
+            );
+            onClick();
+          }}
         >
           {name}
         </a>
@@ -67,7 +68,7 @@ export const Hamburger = () => {
           contentLabel="Meny"
           className="bg-surface-default xs:max-w-[90%] xs:right-6 xs:left-auto xs:w-96 absolute left-4 top-0 right-4 block  rounded py-14 px-11 md:hidden"
         >
-          <nav aria-label="meny">
+          <nav aria-label="hovedmeny">
             <ul>
               <Button
                 variant="tertiary"
@@ -75,10 +76,26 @@ export const Hamburger = () => {
                 className="aksel-tertiary-button absolute top-2 right-2"
                 icon={<Close title="lukk meny" className="h-5 w-5" />}
               />
-              <LinkElement name="God praksis" href="/god-praksis" />
-              <LinkElement name="Grunnleggende" href="/grunnleggende" />
-              <LinkElement name="Komponenter" href="/komponenter" />
-              <LinkElement name="Blogg" href="/produktbloggen" />
+              <LinkElement
+                onClick={() => setOpen(false)}
+                name="God praksis"
+                href="/god-praksis"
+              />
+              <LinkElement
+                onClick={() => setOpen(false)}
+                name="Grunnleggende"
+                href="/grunnleggende"
+              />
+              <LinkElement
+                onClick={() => setOpen(false)}
+                name="Komponenter"
+                href="/komponenter"
+              />
+              <LinkElement
+                onClick={() => setOpen(false)}
+                name="Blogg"
+                href="/produktbloggen"
+              />
             </ul>
           </nav>
         </ReactModal>

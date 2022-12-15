@@ -8,28 +8,30 @@ import { Hamburger } from "components/layout/header/Hamburger";
 const LinkElement = ({ name, href }) => {
   const { asPath } = useRouter();
   return (
-    <Link href={href} passHref>
-      <a
-        className={cl(
-          "text-text-default focus-visible:shadow-focus relative grid h-full place-items-center rounded px-2 focus:outline-none",
-          {
-            "before:bg-border-action-selected font-semibold before:absolute before:bottom-[4px] before:z-10 before:h-1 before:w-full before:rounded-full":
-              asPath.startsWith(href),
-            "hover:before:bg-border-subtle-hover before:absolute before:bottom-[4px] before:z-10 before:h-1 before:w-full before:rounded-full":
-              !asPath.startsWith(href),
+    <li>
+      <Link href={href} passHref>
+        <a
+          className={cl(
+            "text-text-default focus-visible:shadow-focus relative grid h-full place-items-center rounded px-2 focus:outline-none",
+            {
+              "before:bg-border-action-selected font-semibold before:absolute before:bottom-[4px] before:z-10 before:h-1 before:w-full before:rounded-full":
+                asPath.startsWith(href),
+              "hover:before:bg-border-subtle-hover before:absolute before:bottom-[4px] before:z-10 before:h-1 before:w-full before:rounded-full":
+                !asPath.startsWith(href),
+            }
+          )}
+          onClick={(e) =>
+            logNav(
+              "header",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
           }
-        )}
-        onClick={(e) =>
-          logNav(
-            "header",
-            window.location.pathname,
-            e.currentTarget.getAttribute("href")
-          )
-        }
-      >
-        {name}
-      </a>
-    </Link>
+        >
+          {name}
+        </a>
+      </Link>
+    </li>
   );
 };
 
@@ -67,12 +69,14 @@ export const Header = ({
               <span className="sr-only">Aksel</span>
             </a>
           </Link>
-          <div className="hidden h-full gap-2 md:flex">
-            <LinkElement name="God praksis" href="/god-praksis" />
-            <LinkElement name="Grunnleggende" href="/grunnleggende" />
-            <LinkElement name="Komponenter" href="/komponenter" />
-            <LinkElement name="Bloggen" href="/produktbloggen" />
-          </div>
+          <nav className="hidden h-full md:block" aria-label="Hovedmeny">
+            <ul className="hidden h-full gap-2 md:flex">
+              <LinkElement name="God praksis" href="/god-praksis" />
+              <LinkElement name="Grunnleggende" href="/grunnleggende" />
+              <LinkElement name="Komponenter" href="/komponenter" />
+              <LinkElement name="Bloggen" href="/produktbloggen" />
+            </ul>
+          </nav>
           <div className="h-full md:hidden">
             <Hamburger />
           </div>
