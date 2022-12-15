@@ -58,7 +58,7 @@ const FooterForm = () => {
         ) : (
           <form onSubmit={(e) => handleSubmit(e)} className="w-full">
             <div className="mb-4 flex flex-col gap-4">
-              <Heading as="legend" size="small">
+              <Heading level="2" size="small">
                 Gi en tilbakemelding
               </Heading>
               <Textarea

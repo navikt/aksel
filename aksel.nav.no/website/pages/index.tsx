@@ -40,7 +40,7 @@ const introcards = [
 
 const IntroCards = () => {
   return (
-    <ul className="centered-layout mb-56 grid w-full max-w-screen-md grid-cols-2 gap-6">
+    <ul className="centered-layout xs:mb-36 mb-40 grid w-full max-w-screen-md grid-cols-2 gap-6">
       {introcards.map(({ icon: Icon, title, desc, href }) => (
         <li key={title} className="grid">
           <Link href={href} passHref>
@@ -77,7 +77,7 @@ const GetStarted = ({
         className="xs:grid mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 md:gap-8"
       >
         {links.map((x) => (
-          <li>
+          <li key={x.title}>
             <AkselLink href={`/${x.slug}`} inverted>
               {x.title}
             </AkselLink>
@@ -130,11 +130,11 @@ const Forside = ({
 
         <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">
           <div className="z-20 pb-8">
-            <div className="centered-layout xs:mt-36 xs:mb-32 xs:max-w-screen-xs relative mb-16 mt-20 grid max-w-xs place-items-center text-center">
+            <div className="centered-layout xs:mt-36 xs:mb-18 xs:max-w-screen-xs relative mb-16 mt-20 grid max-w-xs place-items-center text-center">
               <Heading
                 level="1"
                 size="xlarge"
-                className="text-deepblue-800 xs:text-[3.5rem]"
+                className="text-deepblue-800 xs:text-[3.5rem] leading-[1.2]"
               >
                 {page.title}
               </Heading>

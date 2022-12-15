@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="grid gap-12 xl:grid-cols-3 xl:gap-6">
           <ScrollTop />
           <div>
-            <Heading as="p" size="small">
+            <Heading level="2" size="small">
               Kontakt oss
             </Heading>
             <BodyShort as="ul" className="mt-5 grid gap-2">
