@@ -6,6 +6,7 @@ import { Header } from "components/layout/header/Header";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { akselArticleAll } from "lib/sanity/queries";
 import Head from "next/head";
+import useSWR from "swr";
 import { ArtiklerT } from "../[slug]";
 
 interface ArtiklerProps {
@@ -13,17 +14,17 @@ interface ArtiklerProps {
 }
 
 const Artikler = ({ articles }: ArtiklerProps) => {
-  // const { data, error } = useSWR(`*[_type == "aksel_artikkel"]`, (query) =>
-  //   getClient().fetch(query)
-  // );
+  const { data, error } = useSWR("/api/aksel-articles", (query) =>
+    fetch(query).then((res) => res.json())
+  );
 
-  // if (error) {
-  //   console.error(error);
-  // }
+  if (error) {
+    console.error(error);
+  }
 
-  // if (data) {
-  //   console.log(data);
-  // }
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <>
@@ -70,7 +71,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
 };
 
 export const getStaticProps = async () => {
-  const { articles } = await getClient().fetch(akselArticleAll);
+  const { articles } = await getClient().fetch(akselArticleAll("[0..10]"));
 
   return {
     props: {

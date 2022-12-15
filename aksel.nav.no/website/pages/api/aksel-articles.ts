@@ -10,7 +10,7 @@ export default async function akselAarticles(
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { articles } = await getClient().fetch(akselArticleAll);
+  const { articles } = await getClient().fetch(akselArticleAll("[0..10]"));
 
   if (!articles) {
     return res.status(500).json({ message: "Failed to load data" });
