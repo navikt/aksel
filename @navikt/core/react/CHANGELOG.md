@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.0.9
+
+### Patch Changes
+
+- ShouldCloseOnEsc i Modal
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.9
+
 ## 2.0.8
 
 ### Patch Changes

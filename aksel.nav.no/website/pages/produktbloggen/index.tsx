@@ -1,5 +1,5 @@
 import { Footer } from "@/layout";
-import { akselBloggPosts, SanityT } from "@/lib";
+import { akselBloggPosts, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
@@ -23,6 +23,24 @@ const Page = (props: PageProps): JSX.Element => {
       <Head>
         <title>Produktbloggen - Aksel</title>
         <meta property="og:title" content="Produktbloggen - Aksel" />
+        <meta
+          property="og:description"
+          content={props?.page?.seo?.meta ?? ""}
+          key="ogdesc"
+        />
+        <meta
+          property="og:image"
+          content={
+            props?.page?.seo?.image
+              ? urlFor(props?.page?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .url()
+              : ""
+          }
+          key="ogimage"
+        />
       </Head>
       <div className="bg-[#FFFCF0]">
         <Header variant="blogg" />
@@ -82,6 +100,7 @@ export type AkselBloggPage = Partial<
 
 interface PageProps {
   bloggposts: AkselBloggPage[];
+  page: any;
   preview: boolean;
 }
 
@@ -96,10 +115,11 @@ export const getStaticProps = async ({
 }: {
   preview?: boolean;
 }): Promise<StaticProps | { notFound: true }> => {
-  const { bloggposts } = await getClient().fetch(akselBloggPosts);
+  const { bloggposts, page } = await getClient().fetch(akselBloggPosts);
 
   return {
     props: {
+      page,
       bloggposts,
       preview,
     },

@@ -9,6 +9,7 @@ import { BloggAd } from "components/website-modules/BloggAd";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Feedback from "components/website-modules/feedback";
 import TableOfContents from "components/website-modules/TOC";
+import { getImage } from "components/website-modules/utils/get-image";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Image from "next/image";
@@ -67,7 +68,7 @@ const Page = ({
                   .height(630)
                   .fit("crop")
                   .url()
-              : ""
+              : getImage(blogg?.heading ?? "", "OG")
           }
           key="ogimage"
         />
@@ -84,12 +85,12 @@ const Page = ({
             <Heading
               level="1"
               size="xlarge"
-              className="algolia-index-lvl1 hyphen text-deepblue-800 mt-1 break-words text-5xl"
+              className="algolia-index-lvl1 hyphen text-deepblue-800 mt-1 break-words text-5xl leading-[1.2]"
             >
               {blogg.heading}
             </Heading>
             {blogg?.ingress && (
-              <Ingress className="text-deepblue-700 mt-4">
+              <Ingress className="text-deepblue-700 mt-4 text-2xl leading-normal">
                 {blogg?.ingress}
               </Ingress>
             )}

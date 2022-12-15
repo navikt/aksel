@@ -175,6 +175,7 @@ const contributorsSingle = `contributors[0]->{
 }`;
 
 export const akselBloggPosts = `{
+  "page": {...},
   "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
     ...,
     "slug": slug.current,

@@ -4,6 +4,7 @@ import { artikkelPreview } from "../presets/artikkel-preview";
 import { hiddenFields } from "../presets/hidden-fields";
 import { editorField } from "../presets/editors";
 import { titleField } from "../presets/title-field";
+import { SEOFields } from "../presets/seo";
 import { kategoriSlug, sanitySlug } from "../presets/slug";
 import { grunnleggendeKategorier } from "../../../config";
 
@@ -58,7 +59,7 @@ export const GrunnleggendeArtikkel = defineType({
         },
         {
           name: "bilde",
-          title: "Thumbnail/og-bilde",
+          title: "Thumbnail",
           type: "image",
         },
       ],
@@ -75,5 +76,6 @@ export const GrunnleggendeArtikkel = defineType({
       type: "riktekst_grunnleggende",
       group: "innhold",
     }),
+    SEOFields,
   ],
 });
