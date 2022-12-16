@@ -1,7 +1,8 @@
 import * as document from "./documents";
 import * as object from "./objects";
+import { SchemaPluginOptions } from "sanity";
 
-export default {
+export const schema: SchemaPluginOptions = {
   types: [
     /* Documents */
     document.Editors,

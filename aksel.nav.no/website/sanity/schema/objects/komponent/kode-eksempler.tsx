@@ -1,10 +1,11 @@
-import { Ruler } from "@navikt/ds-icons";
+import { ComponentIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 export const KodeEksempler = defineType({
-  title: "Kode-eksempler",
+  title: "Komponent-eksempel",
   name: "kode_eksempler",
   type: "object",
+  icon: ComponentIcon,
   fields: [
     defineField({
       title: "tittel",
@@ -24,7 +25,6 @@ export const KodeEksempler = defineType({
       },
     }),
   ],
-  icon: Ruler,
   preview: {
     select: {
       dir: "dir.title",
@@ -33,7 +33,7 @@ export const KodeEksempler = defineType({
       return {
         title: "Komponent-demo",
         subtitle: dir ?? "",
-        media: Ruler,
+        media: ComponentIcon,
       };
     },
   },

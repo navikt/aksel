@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.0.10
+
+### Patch Changes
+
+- Button submittet form i table
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.10
+
 ## 2.0.9
 
 ### Patch Changes

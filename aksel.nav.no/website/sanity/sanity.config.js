@@ -13,22 +13,23 @@ import {
 import { form } from "./form";
 import { getTemplates } from "./util";
 
-import schemas from "./schema";
+import { schema } from "./schema";
+import { DatabaseIcon, RemoveCircleIcon } from "@sanity/icons";
 
 const projectId = "hnbe3yhs";
 
 const sharedConfig = {
   projectId,
   apiVersion: "2021-10-21",
-  schema: schemas,
+  schema: schema,
   ...form,
   document: {
     newDocumentOptions: (prev, { currentUser }) => {
       const adminOrDev = currentUser.roles.find((x) =>
-        ["developer", "administrator"].includes(x.name)
+        ["developer", "administrator", "editor"].includes(x.name)
       );
       if (adminOrDev) {
-        return prev;
+        return [...getTemplates(currentUser.roles), ...prev];
       }
       return getTemplates(currentUser.roles);
     },
@@ -56,7 +57,8 @@ const sharedConfig = {
 export const workspaceConfig = defineConfig([
   {
     name: "default",
-    title: "Live",
+    title: "Prod",
+    icon: DatabaseIcon,
     dataset: "production",
     basePath: "/admin/prod",
     ...sharedConfig,
@@ -87,7 +89,8 @@ export const workspaceConfig = defineConfig([
   },
   {
     name: "dev",
-    title: "Dev",
+    title: "Dev (testing only)",
+    icon: RemoveCircleIcon,
     dataset: "development",
     basePath: "/admin/dev",
     ...sharedConfig,

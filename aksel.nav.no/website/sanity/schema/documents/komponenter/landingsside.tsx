@@ -2,6 +2,7 @@ import { defineField, defineType } from "sanity";
 import { komponentKategorier } from "../../../config";
 import { SEOFields } from "../presets/seo";
 import { groups } from "../presets/groups";
+import { HomeIcon } from "@sanity/icons";
 
 const views = () => {
   const list = [];
@@ -42,6 +43,7 @@ export const KomponentLandingSide = defineType({
   preview: {
     prepare: () => ({
       title: "Landingsside komponenter",
+      media: HomeIcon,
     }),
   },
 });

@@ -62,6 +62,7 @@ const FooterForm = () => {
                 Gi en tilbakemelding
               </Heading>
               <Textarea
+                className="textarea-override"
                 error={contentError.content}
                 autoComplete="off"
                 label="Melding"
@@ -81,6 +82,9 @@ const FooterForm = () => {
               />
             </div>
             {contactForm.hasWritten && <Button>Send melding</Button>}
+            <style>{`.textarea-override {
+              --ac-textarea-bg: var(--a-deepblue-800);
+            }`}</style>
           </form>
         )}
       </div>

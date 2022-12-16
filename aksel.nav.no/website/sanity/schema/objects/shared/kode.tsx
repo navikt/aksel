@@ -1,11 +1,11 @@
-import React from "react";
+import { CodeBlockIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 export const Kode = defineType({
   title: "Kode",
   name: "kode",
   type: "object",
-  icon: () => <div>{`<>`}</div>,
+  icon: CodeBlockIcon,
   fields: [
     defineField({
       name: "code",
@@ -34,7 +34,7 @@ export const Kode = defineType({
     prepare: ({ code, ref }) => ({
       title: code ? `${code?.code?.slice(0, 50)}...` : ref ? ref : "Kode",
       subtitle: "kode",
-      media: () => <div>{`</>`}</div>,
+      media: CodeBlockIcon,
     }),
   },
 });

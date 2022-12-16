@@ -2,6 +2,7 @@ import { defineField, defineType } from "sanity";
 /* import { bloggKategorier } from "../../../config"; */
 import { SEOFields } from "../presets/seo";
 import { groups } from "../presets/groups";
+import { HomeIcon } from "@sanity/icons";
 
 export const BloggLandingSide = defineType({
   title: "Landingsside Blogg",
@@ -19,6 +20,7 @@ export const BloggLandingSide = defineType({
   preview: {
     prepare: () => ({
       title: "Landingsside produktbloggen",
+      media: HomeIcon,
     }),
   },
 });
