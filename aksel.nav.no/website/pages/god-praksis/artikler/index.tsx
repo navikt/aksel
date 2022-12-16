@@ -1,6 +1,6 @@
 import { ArtikkelCard } from "@/components";
 import { getClient } from "@/sanity-client";
-import { Heading } from "@navikt/ds-react";
+import { ErrorMessage, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import { AkselCubeStatic } from "components/website-modules/cube";
@@ -20,7 +20,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
 
   const lastPublishedAt = articles[articles.length - 1].publishedAt;
 
-  const { data } = useSWR(
+  const { data, error } = useSWR(
     fetchMore
       ? () =>
           `/api/aksel-articles?lastId=test&lastPublishedAt=${lastPublishedAt}`
@@ -71,6 +71,13 @@ const Artikler = ({ articles }: ArtiklerProps) => {
                   );
                 })}
             </div>
+            {error && (
+              <div className="mt-4 flex justify-center">
+                <ErrorMessage size="medium">
+                  Kan ikke hente flere artikler, prøv igjen senere...
+                </ErrorMessage>
+              </div>
+            )}
           </div>
         </main>
         <Footer />
