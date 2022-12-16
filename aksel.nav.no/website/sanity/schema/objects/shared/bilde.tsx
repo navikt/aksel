@@ -22,14 +22,12 @@ export const Bilde = defineType({
       title: "Bilde-tekst (optional)",
       description: "Dette vil stå under bildet",
       type: "string",
-      hidden: ({ parent }) => parent?.floating,
     }),
     defineField({
       name: "small",
       title: "Bildet tar bare ~halve bredden",
       type: "boolean",
       initialValue: false,
-      hidden: ({ parent }) => parent?.floating || parent?.hide_floating,
     }),
     defineField({
       title: "Kilde",
@@ -74,22 +72,22 @@ export const Bilde = defineType({
         },
       ],
     }),
+    defineField({
+      name: "dekorativt",
+      title: "Er bildet bare dekorativt?",
+      description: "Gjemmer bildet fra skjermlesere for å minske støy",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
+      name: "background",
+      title: "Bakgrunnsfarge",
+      description: "Husk å dobbelsjekke kontrast!",
+      type: "color",
+    }),
   ],
   validation: (Rule) =>
     Rule.custom((v) => {
       return v?.asset ? true : "Må legge til et bilde";
     }).error(),
-  preview: {
-    select: {
-      alt: "alt",
-      floating: "floating",
-    },
-    prepare(selection) {
-      return {
-        title: selection?.alt,
-        subtitle: `Bilde`,
-        media: ImageIcon,
-      };
-    },
-  },
 });

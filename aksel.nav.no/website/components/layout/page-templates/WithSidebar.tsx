@@ -23,25 +23,25 @@ const HeaderCube = ({ ...props }) => (
   >
     <path
       d="M507.265 293.265L389.355 175.355V293.089L507.265 410.999V293.265Z"
-      stroke="white"
+      stroke="currentColor"
       strokeWidth="1.5"
       strokeLinejoin="round"
     />
     <path
       d="M436.496 222.496L318.645 104.645L200.794 222.496L318.645 340.347L436.496 222.496Z"
-      stroke="white"
+      stroke="currentColor"
       strokeWidth="1.5"
       strokeLinejoin="round"
     />
     <path
       d="M247.934 269.754L130.024 151.844V269.577L247.934 387.487V269.754Z"
-      stroke="white"
+      stroke="currentColor"
       strokeWidth="1.5"
       strokeLinejoin="round"
     />
     <path
       d="M59.3133 81.1334L177.223 -36.7767L177.223 80.9564L59.3133 198.867V81.1334Z"
-      stroke="white"
+      stroke="currentColor"
       strokeWidth="1.5"
       strokeLinejoin="round"
     />
@@ -81,7 +81,7 @@ export const WithSidebar = ({
             >
               <div
                 className={cl(
-                  "mb-10 min-h-[12.5rem] rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
+                  "relative mb-10 min-h-[12.5rem] overflow-hidden rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
                   {
                     "bg-surface-subtle flex items-center justify-between":
                       variant === "page",
@@ -137,12 +137,12 @@ export const WithSidebar = ({
                   </div>
                 )}
                 {variant === "landingPage" && (
-                  <div className="xs:block absolute top-0 right-0 hidden">
-                    <HeaderCube className="z-0 max-h-full" />
+                  <div className="xs:block pointer-events-none absolute top-0 right-0 hidden">
+                    <HeaderCube className="text-deepblue-300 z-0 max-h-full" />
                   </div>
                 )}
               </div>
-              <div className={cl("pl-6 md:pl-10", { flex: withToc })}>
+              <div className={cl("xs:px-6 md:px-10", { flex: withToc })}>
                 {withToc && (
                   <TableOfContentsv2
                     changedState={pageProps["content"]}

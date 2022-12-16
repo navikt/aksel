@@ -2615,6 +2615,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@icons/material@npm:^0.2.4":
+  version: 0.2.4
+  resolution: "@icons/material@npm:0.2.4"
+  peerDependencies:
+    react: "*"
+  checksum: 24baa360cb83f7e1a9e6784ac11185d57eb895b0efd3070ec915693378330f35ff9feb248f650b9649fa3e1045601286585dc05795a4c734d4849b33900351ee
+  languageName: node
+  linkType: hard
+
 "@istanbuljs/load-nyc-config@npm:^1.0.0":
   version: 1.1.0
   resolution: "@istanbuljs/load-nyc-config@npm:1.1.0"
@@ -3173,7 +3182,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-codemod@^2.0.9, @navikt/ds-codemod@workspace:@navikt/codemod":
+"@navikt/ds-codemod@^2.0.10, @navikt/ds-codemod@workspace:@navikt/codemod":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-codemod@workspace:@navikt/codemod"
   dependencies:
@@ -3200,7 +3209,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css-internal@^2.0.9, @navikt/ds-css-internal@workspace:@navikt/internal/css":
+"@navikt/ds-css-internal@^2.0.10, @navikt/ds-css-internal@workspace:@navikt/internal/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css-internal@workspace:@navikt/internal/css"
   dependencies:
@@ -3211,11 +3220,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@2.0.9, @navikt/ds-css@^2.0.9, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@2.0.10, @navikt/ds-css@^2.0.10, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^2.0.9
+    "@navikt/ds-tokens": ^2.0.10
     normalize.css: ^8.0.1
     postcss: ^8.4.0
     postcss-cli: ^9.0.0
@@ -3224,7 +3233,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-icons@^2.0.9, @navikt/ds-icons@workspace:@navikt/icons":
+"@navikt/ds-icons@^2.0.10, @navikt/ds-icons@workspace:@navikt/icons":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-icons@workspace:@navikt/icons"
   dependencies:
@@ -3260,8 +3269,8 @@ __metadata:
     "@babel/preset-env": 7.19.4
     "@babel/preset-react": 7.18.6
     "@babel/preset-typescript": 7.18.6
-    "@navikt/ds-icons": ^2.0.9
-    "@navikt/ds-react": ^2.0.9
+    "@navikt/ds-icons": ^2.0.10
+    "@navikt/ds-react": ^2.0.10
     "@rollup/plugin-babel": 6.0.2
     "@rollup/plugin-commonjs": 23.0.2
     "@rollup/plugin-node-resolve": ^15.0.1
@@ -3286,12 +3295,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react-internal@^2.0.9, @navikt/ds-react-internal@workspace:@navikt/internal/react":
+"@navikt/ds-react-internal@^2.0.10, @navikt/ds-react-internal@workspace:@navikt/internal/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react-internal@workspace:@navikt/internal/react"
   dependencies:
-    "@navikt/ds-icons": ^2.0.9
-    "@navikt/ds-react": ^2.0.9
+    "@navikt/ds-icons": ^2.0.10
+    "@navikt/ds-react": ^2.0.10
     clsx: ^1.1.1
     concurrently: 7.2.1
     copy-to-clipboard: ^3.3.1
@@ -3307,12 +3316,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@2.0.9, @navikt/ds-react@^2.0.9, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@2.0.10, @navikt/ds-react@^2.0.10, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react-dom-interactions": 0.9.2
-    "@navikt/ds-icons": ^2.0.9
+    "@navikt/ds-icons": ^2.0.10
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3348,11 +3357,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^2.0.9, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^2.0.10, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^2.0.9
+    "@navikt/ds-tokens": ^2.0.10
     "@types/jest": ^29.0.0
     color: 4.2.3
     jest: ^29.0.0
@@ -3363,7 +3372,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^2.0.9, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^2.0.10, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -4117,6 +4126,23 @@ __metadata:
     sanity: ^3.0.0
     styled-components: ^5.2.0
   checksum: 9be8050143633e59bb654889dc63202497bceb6a4cfd62d37df69408581673e5f93cadcb35701ce3c89e040b5c0f9e9cdf7ca07b0168a90809e6167aaf3f18af
+  languageName: node
+  linkType: hard
+
+"@sanity/color-input@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@sanity/color-input@npm:3.0.1"
+  dependencies:
+    "@sanity/icons": ^2.0.0
+    "@sanity/incompatible-plugin": ^1.0.4
+    "@sanity/ui": ^1.0.0
+    lodash: ^4.17.21
+    react-color: ^2.19.3
+  peerDependencies:
+    react: ^18
+    sanity: ^3.0.0
+    styled-components: ^5.2.0
+  checksum: 68c9eac4212d1bbd3bd30adb7c7e3b6c302acb2ce9e7dab6c0cce80f05ea4202de97d9a227dbeced07b974a4badba4b8a4c050ca894e9f3a8bcfefbc068d6f67
   languageName: node
   linkType: hard
 
@@ -7886,14 +7912,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/ds-codemod": ^2.0.9
-    "@navikt/ds-css": ^2.0.9
-    "@navikt/ds-css-internal": ^2.0.9
-    "@navikt/ds-icons": ^2.0.9
-    "@navikt/ds-react": ^2.0.9
-    "@navikt/ds-react-internal": ^2.0.9
-    "@navikt/ds-tailwind": ^2.0.9
-    "@navikt/ds-tokens": ^2.0.9
+    "@navikt/ds-codemod": ^2.0.10
+    "@navikt/ds-css": ^2.0.10
+    "@navikt/ds-css-internal": ^2.0.10
+    "@navikt/ds-icons": ^2.0.10
+    "@navikt/ds-react": ^2.0.10
+    "@navikt/ds-react-internal": ^2.0.10
+    "@navikt/ds-tailwind": ^2.0.10
+    "@navikt/ds-tokens": ^2.0.10
     prettier-plugin-tailwindcss: ^0.1.13
   languageName: unknown
   linkType: soft
@@ -18640,7 +18666,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.21":
+"lodash-es@npm:^4.17.15, lodash-es@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash-es@npm:4.17.21"
   checksum: 05cbffad6e2adbb331a4e16fbd826e7faee403a1a04873b82b42c0f22090f280839f85b95393f487c1303c8a3d2a010048bf06151a6cbe03eee4d388fb0a12d2
@@ -18766,7 +18792,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.21, lodash@npm:^4.17.11, lodash@npm:^4.17.12, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.17.5, lodash@npm:^4.3.0":
+"lodash@npm:4.17.21, lodash@npm:^4.0.1, lodash@npm:^4.17.11, lodash@npm:^4.17.12, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.17.5, lodash@npm:^4.3.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -19047,6 +19073,13 @@ __metadata:
   version: 1.0.4
   resolution: "markdown-escapes@npm:1.0.4"
   checksum: 6833a93d72d3f70a500658872312c6fa8015c20cc835a85ae6901fa232683fbc6ed7118ebe920fea7c80039a560f339c026597d96eee0e9de602a36921804997
+  languageName: node
+  linkType: hard
+
+"material-colors@npm:^1.2.1":
+  version: 1.2.6
+  resolution: "material-colors@npm:1.2.6"
+  checksum: 72d005ccccb82bab68eef3cd757e802668634fc86976dedb9fc564ce994f2d3258273766b7efecb7404a0031969e2d72201a1b74169763f0a53c0dd8d649209f
   languageName: node
   linkType: hard
 
@@ -22528,7 +22561,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.5.4, prop-types@npm:^15.5.7, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.4, prop-types@npm:^15.5.7, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -22882,6 +22915,23 @@ __metadata:
   peerDependencies:
     react: ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 7db6110027a51458b1a46109d2b63dd822825f483c71afef7c0c0a671f3b1aa155049dbd8651c9d536ffac83601f8823b7c3f8916b4f4ee5c3cb7647a85cce4e
+  languageName: node
+  linkType: hard
+
+"react-color@npm:^2.19.3":
+  version: 2.19.3
+  resolution: "react-color@npm:2.19.3"
+  dependencies:
+    "@icons/material": ^0.2.4
+    lodash: ^4.17.15
+    lodash-es: ^4.17.15
+    material-colors: ^1.2.1
+    prop-types: ^15.5.10
+    reactcss: ^1.2.0
+    tinycolor2: ^1.4.1
+  peerDependencies:
+    react: "*"
+  checksum: 40b49e1aa2ab27a099cc37a3fa2d5bb906b8def4dbe2d922c0e42365e386d82b03f9b06a2b29a44a51f1e114cef72e61c0ba0740581a128d951936ea4617429b
   languageName: node
   linkType: hard
 
@@ -23341,6 +23391,15 @@ __metadata:
   dependencies:
     loose-envify: ^1.1.0
   checksum: 88e38092da8839b830cda6feef2e8505dec8ace60579e46aa5490fc3dc9bba0bd50336507dc166f43e3afc1c42939c09fe33b25fae889d6f402721dcd78fca1b
+  languageName: node
+  linkType: hard
+
+"reactcss@npm:^1.2.0":
+  version: 1.2.3
+  resolution: "reactcss@npm:1.2.3"
+  dependencies:
+    lodash: ^4.0.1
+  checksum: c53e386a0881f1477e1cff661f6a6ad4c662230941f3827862193ac30f9b75cdf7bc7b4c7e5ca543d3e4e80fee1a3e9fa0056c206b1c0423726c41773ab3fe45
   languageName: node
   linkType: hard
 
@@ -24819,8 +24878,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "shadow-dom@workspace:examples/shadow-dom"
   dependencies:
-    "@navikt/ds-css": 2.0.9
-    "@navikt/ds-react": 2.0.9
+    "@navikt/ds-css": 2.0.10
+    "@navikt/ds-react": 2.0.10
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": ^2.1.0
@@ -28283,6 +28342,7 @@ __metadata:
     "@sanity/block-content-to-react": ^3.0.0
     "@sanity/client": ^3.3.0
     "@sanity/code-input": 3.0.1
+    "@sanity/color-input": ^3.0.1
     "@sanity/icons": 2.1.0
     "@sanity/image-url": 1.0.1
     "@sanity/preview-kit": ^1.2.8

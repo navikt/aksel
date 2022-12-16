@@ -40,7 +40,7 @@ const RelatertInnhold = ({
                 e.currentTarget.getAttribute("href")
               )
             }
-            className="algolia-ignore-index shadow-small focus-visible:shadow-focus bg-surface-default ring-border-subtle group grid rounded border-2 border-transparent px-4 py-3 ring-1 only-of-type:col-span-2 focus:outline-none"
+            className="algolia-ignore-index shadow-small focus-visible:shadow-focus bg-surface-default ring-border-subtle group grid rounded border-2 border-transparent px-4 py-3 ring-1 focus:outline-none"
           >
             <Heading
               as="span"

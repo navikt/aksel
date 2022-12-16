@@ -131,7 +131,7 @@ export function TableOfContentsv2({
   return (
     <aside
       className={cl(
-        "algolia-ignore-index sticky top-20 z-[1] order-1 my-0 mx-6 mb-16 mr-auto h-full w-full max-w-[160px] flex-col items-start",
+        "algolia-ignore-index xs:-mr-6 sticky top-20 z-[1] order-1 my-0 ml-6 mb-16 mr-auto h-full w-full max-w-[160px] flex-col items-start md:-mr-10",
         {
           hidden: !renderToc,
           "hidden xl:flex": renderToc,
@@ -139,7 +139,6 @@ export function TableOfContentsv2({
       )}
     >
       <BodyShort
-        size="small"
         id="toc-heading"
         className="text-deepblue-800 mb-2 font-semibold"
       >
@@ -169,8 +168,10 @@ export function TableOfContentsv2({
                     className={cl(
                       "block max-w-full no-underline hover:underline",
                       {
-                        "text-deepblue-800": link.id === activeId,
-                        "text-text-subtle": link.id !== activeId,
+                        "text-deepblue-800":
+                          link.id === activeId &&
+                          !link?.lvl3?.find((x) => x.id === activeSubId),
+                        "text-text-subtle": link.id !== activeId || activeSubId,
                       }
                     )}
                     aria-expanded={

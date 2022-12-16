@@ -1,4 +1,5 @@
 import { codeInput } from "@sanity/code-input";
+import { colorInput } from "@sanity/color-input";
 import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
 import { createAuthStore, defineConfig } from "sanity";
@@ -13,8 +14,8 @@ import {
 import { form } from "./form";
 import { getTemplates } from "./util";
 
-import { schema } from "./schema";
 import { DatabaseIcon, RemoveCircleIcon } from "@sanity/icons";
+import { schema } from "./schema";
 
 const projectId = "hnbe3yhs";
 
@@ -51,6 +52,7 @@ const sharedConfig = {
     publicationFlow({
       includedSchemas: ["testDoc"],
     }),
+    colorInput(),
   ],
 };
 
