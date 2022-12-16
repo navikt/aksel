@@ -44,6 +44,7 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
       >
         {sortable ? (
           <button
+            type="button"
             className="navds-table__sort-button"
             onClick={
               sortable && sortKey

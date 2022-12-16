@@ -85,6 +85,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           >
             {!expansionDisabled && (
               <button
+                type="button"
                 className="navds-table__toggle-expand-button"
                 aria-controls={id}
                 aria-expanded={isOpen}
