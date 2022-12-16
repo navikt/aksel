@@ -40,50 +40,52 @@ const Artikler = ({ articles }: ArtiklerProps) => {
         <title>Artikler - Aksel</title>
         <meta property="og:title" content="Artikler - Aksel" />
       </Head>
-      <div className="bg-surface-subtle">
+      <div className="bg-surface-subtle overflow-clip">
         <Header variant="subtle" />
         <main
           tabIndex={-1}
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div className="centered-layout mb-40 grid max-w-screen-2xl">
+          <div className="relative grid overflow-x-clip pb-40">
             <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
-            <Heading
-              level="1"
-              size="xlarge"
-              className="algolia-index-lvl1 text-deepblue-800 my-20 md:text-[3rem]"
-            >
-              Artikler
-            </Heading>
-            <div className="card-grid-3-1 mt-6">
-              {allArticles
-                .filter((a: ArtiklerT) => a.tema)
-                .map((x) => {
-                  return (
-                    <ArtikkelCard
-                      {...x}
-                      source={x?.slug?.current}
-                      key={x._id}
-                      variant="tema"
-                    />
-                  );
-                })}
-            </div>
-            <div className="mt-6 flex flex-col items-center">
-              {!hasFetched && (
-                <Button
-                  loading={isValidating}
-                  onClick={() => setFetchMore(true)}
-                >
-                  Last flere artikler
-                </Button>
-              )}
-              {error && (
-                <ErrorMessage size="medium" className="mt-4">
-                  Kan ikke hente flere artikler, prøv igjen senere...
-                </ErrorMessage>
-              )}
+            <div className="dynamic-wrapper">
+              <Heading
+                level="1"
+                size="xlarge"
+                className="algolia-index-lvl1 text-deepblue-800 my-20 md:text-[3rem]"
+              >
+                Artikler
+              </Heading>
+              <div className="card-grid-3-1 mt-6">
+                {allArticles
+                  .filter((a: ArtiklerT) => a.tema)
+                  .map((x) => {
+                    return (
+                      <ArtikkelCard
+                        {...x}
+                        source={x?.slug?.current}
+                        key={x._id}
+                        variant="tema"
+                      />
+                    );
+                  })}
+              </div>
+              <div className="mt-6 flex flex-col items-center">
+                {!hasFetched && (
+                  <Button
+                    loading={isValidating}
+                    onClick={() => setFetchMore(true)}
+                  >
+                    Last flere artikler
+                  </Button>
+                )}
+                {error && (
+                  <ErrorMessage size="medium" className="mt-4">
+                    Kan ikke hente flere artikler, prøv igjen senere...
+                  </ErrorMessage>
+                )}
+              </div>
             </div>
           </div>
         </main>
