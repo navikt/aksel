@@ -12,9 +12,8 @@ export default async function akselAarticles(
   }
 
   const lastPublishedAt = req.query.lastPublishedAt;
-  const lastId = req.query.lastId;
 
-  if (!lastId || !lastPublishedAt) {
+  if (!lastPublishedAt) {
     return res
       .status(400)
       .json({ message: "Missing lastId or lstPublishedAt" });

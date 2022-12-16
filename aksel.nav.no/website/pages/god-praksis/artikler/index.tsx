@@ -22,8 +22,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
 
   const { data, error } = useSWR(
     fetchMore
-      ? () =>
-          `/api/aksel-articles?lastId=test&lastPublishedAt=${lastPublishedAt}`
+      ? () => `/api/aksel-articles?lastPublishedAt=${lastPublishedAt}`
       : null,
     (query) => fetch(query).then((res) => res.json())
   );
