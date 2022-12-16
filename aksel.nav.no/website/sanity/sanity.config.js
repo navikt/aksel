@@ -13,22 +13,22 @@ import {
 import { form } from "./form";
 import { getTemplates } from "./util";
 
-import schemas from "./schema";
+import { schema } from "./schema";
 
 const projectId = "hnbe3yhs";
 
 const sharedConfig = {
   projectId,
   apiVersion: "2021-10-21",
-  schema: schemas,
+  schema: schema,
   ...form,
   document: {
     newDocumentOptions: (prev, { currentUser }) => {
       const adminOrDev = currentUser.roles.find((x) =>
-        ["developer", "administrator"].includes(x.name)
+        ["developer", "administrator", "editor"].includes(x.name)
       );
       if (adminOrDev) {
-        return prev;
+        return [...getTemplates(currentUser.roles), ...prev];
       }
       return getTemplates(currentUser.roles);
     },

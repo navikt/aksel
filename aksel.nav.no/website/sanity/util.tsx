@@ -23,57 +23,72 @@ export const toPlainText = (blocks) => {
 
 export const getTemplates = (roles: Role[]) => {
   const templates = {
-    blogger: [
+    profil: [
       {
-        id: "bloggerRole",
-        templateId: "aksel_blogg",
+        title: "Profilside",
+        id: "profilRole",
+        templateId: "editor",
+        subtitle: "(Kan bare ha 1 profilside)",
       },
     ],
     god_praksis_forfatter: [
       {
+        title: "God praksis artikkel",
         id: "godPraksisForfatterRole",
         templateId: "aksel_artikkel",
-      },
-    ],
-    grunnleggende: [
-      {
-        id: "grunnleggendeRole",
-        templateId: "ds_artikkel",
-      },
-    ],
-    komponenter: [
-      {
-        id: "komponenterRole",
-        templateId: "komponent_artikkel",
-      },
-    ],
-    prinsipper: [
-      {
-        id: "prinsippereRole",
-        templateId: "aksel_prinsipp",
-      },
-    ],
-    profil: [
-      {
-        id: "profilRole",
-        templateId: "editor",
+        subtitle: "Fagartikkel",
       },
     ],
     tema_ansvarlig: [
       {
+        title: "God praksis tema",
         id: "temaAnsvarligRole",
         templateId: "aksel_tema",
+        subtitle: "Nytt god-praksis tema",
+      },
+    ],
+    blogger: [
+      {
+        title: "Bloggpost",
+        id: "bloggerRole",
+        templateId: "aksel_blogg",
+      },
+    ],
+    grunnleggende: [
+      {
+        title: "Grunnleggende artikkel",
+        id: "grunnleggendeRole",
+        templateId: "ds_artikkel",
+        subtitle: "Guider og dokumentasjon for designsystemet",
+      },
+    ],
+    komponenter: [
+      {
+        title: "Komponent artikkel",
+        id: "komponenterRole",
+        templateId: "komponent_artikkel",
+        subtitle: "Dokumentasjon for designsystemet",
+      },
+    ],
+    prinsipper: [
+      {
+        title: "Prinsipp artikkel",
+        id: "prinsippereRole",
+        templateId: "aksel_prinsipp",
       },
     ],
   };
-  return roles
-    .map((role) => {
-      if (templates[role.name.replaceAll("-", "_")]) {
-        return templates[role.name.replaceAll("-", "_")];
-      }
-      return [];
-    })
-    .flat();
+  return Object.values(templates).flat();
+  /* return [
+    ...roles
+      .map((role) => {
+        if (templates[role.name.replaceAll("-", "_")]) {
+          return templates[role.name.replaceAll("-", "_")];
+        }
+        return [];
+      })
+      .flat(),
+  ]; */
 };
 
 export const serializers = {
