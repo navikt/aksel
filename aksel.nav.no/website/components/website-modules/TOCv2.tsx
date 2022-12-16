@@ -139,7 +139,6 @@ export function TableOfContentsv2({
       )}
     >
       <BodyShort
-        size="small"
         id="toc-heading"
         className="text-deepblue-800 mb-2 font-semibold"
       >
@@ -169,8 +168,10 @@ export function TableOfContentsv2({
                     className={cl(
                       "block max-w-full no-underline hover:underline",
                       {
-                        "text-deepblue-800": link.id === activeId,
-                        "text-text-subtle": link.id !== activeId,
+                        "text-deepblue-800":
+                          link.id === activeId &&
+                          !link?.lvl3?.find((x) => x.id === activeSubId),
+                        "text-text-subtle": link.id !== activeId || activeSubId,
                       }
                     )}
                     aria-expanded={
