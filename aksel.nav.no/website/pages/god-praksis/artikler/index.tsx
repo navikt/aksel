@@ -18,25 +18,20 @@ const Artikler = ({ articles }: ArtiklerProps) => {
   const [allArticles, setAllArticles] = useState<ArtiklerT[]>(articles);
   const [fetchMore, setFetchMore] = useState<boolean>(false);
 
-  const [lastPublishedAt, setLastPublishedAt] = useState<string>(
-    articles[articles.length - 1].publishedAt
-  );
+  const lastPublishedAt = articles[articles.length - 1].publishedAt;
 
-  useSWR(
+  const { data } = useSWR(
     fetchMore
       ? () =>
           `/api/aksel-articles?lastId=test&lastPublishedAt=${lastPublishedAt}`
       : null,
-    (query) =>
-      fetch(query)
-        .then((res) => res.json())
-        .then((resData) => {
-          setLastPublishedAt(resData[resData.length - 1].publishedAt);
-          setAllArticles([...allArticles, ...resData]);
-          setFetchMore(false);
-          return resData.json();
-        })
+    (query) => fetch(query).then((res) => res.json())
   );
+
+  if (data) {
+    setAllArticles([...allArticles, ...data]);
+    setFetchMore(false);
+  }
 
   return (
     <>
@@ -60,7 +55,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
             >
               Artikler
             </Heading>
-            <p>{allArticles.length}</p>
+            <p>{allArticles?.length}</p>
             <button onClick={() => setFetchMore(true)}>Last flere</button>
             <div className="card-grid-3-1 mt-6">
               {allArticles

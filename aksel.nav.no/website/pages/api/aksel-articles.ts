@@ -21,18 +21,19 @@ export default async function akselAarticles(
   }
 
   const query = `{
-      "articles": *[_type == "aksel_artikkel" && publishedAt != null && (publishedAt < "${format(
+      "articles": *[_type == "aksel_artikkel" && (publishedAt < "${format(
         new Date(String(lastPublishedAt)),
         "yyyy-MM-dd"
       )}" || publishedAt == "${format(
     new Date(String(lastPublishedAt)),
     "yyyy-MM-dd"
-  )}")] | order(publishedAt desc)[0...20] {
+  )}")] | order(publishedAt desc) {
           ${akselArticleFields}
         }
     }`;
 
   const { articles } = await getClient().fetch(query);
+  console.log(articles);
 
   if (!articles) {
     return res.status(500).json({ message: "Failed to load data" });
