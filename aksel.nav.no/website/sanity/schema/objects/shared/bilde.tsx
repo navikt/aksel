@@ -22,14 +22,12 @@ export const Bilde = defineType({
       title: "Bilde-tekst (optional)",
       description: "Dette vil stå under bildet",
       type: "string",
-      hidden: ({ parent }) => parent?.floating,
     }),
     defineField({
       name: "small",
       title: "Bildet tar bare ~halve bredden",
       type: "boolean",
       initialValue: false,
-      hidden: ({ parent }) => parent?.floating || parent?.hide_floating,
     }),
     defineField({
       title: "Kilde",
@@ -73,6 +71,13 @@ export const Bilde = defineType({
           hidden: ({ parent }) => !parent?.har_kilde,
         },
       ],
+    }),
+    defineField({
+      name: "dekorativt",
+      title: "Er bildet bare dekorativt?",
+      description: "Gjemmer bildet fra skjermlesere for å minske støy",
+      type: "boolean",
+      initialValue: false,
     }),
     defineField({
       name: "background",

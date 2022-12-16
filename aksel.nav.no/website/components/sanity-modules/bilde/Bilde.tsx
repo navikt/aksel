@@ -16,6 +16,7 @@ const Bilde = ({
       rgb: { a: number; b: number; g: number; r: number };
       alpha: number;
     };
+    dekorativt?: boolean;
   };
   className?: string;
 }): JSX.Element => {
@@ -43,7 +44,7 @@ const Bilde = ({
           className={cl(style.bilde, "flex justify-center p-0")}
         >
           <img
-            alt={node.alt}
+            alt={!node?.dekorativt ? node.alt : ""}
             decoding="async"
             src={urlFor(node).auto("format").url()}
             className={cl(style.bilde)}
