@@ -1,6 +1,6 @@
 import { ArtikkelCard } from "@/components";
 import { getClient } from "@/sanity-client";
-import { ErrorMessage, Heading } from "@navikt/ds-react";
+import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import { AkselCubeStatic } from "components/website-modules/cube";
@@ -17,10 +17,11 @@ interface ArtiklerProps {
 const Artikler = ({ articles }: ArtiklerProps) => {
   const [allArticles, setAllArticles] = useState<ArtiklerT[]>(articles);
   const [fetchMore, setFetchMore] = useState<boolean>(false);
+  const [hasFetched, setHasFetched] = useState<boolean>(false);
 
   const lastPublishedAt = articles[articles.length - 1].publishedAt;
 
-  const { data, error } = useSWR(
+  const { data, error, isValidating } = useSWR(
     fetchMore
       ? () => `/api/aksel-articles?lastPublishedAt=${lastPublishedAt}`
       : null,
@@ -30,6 +31,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
   if (data) {
     setAllArticles([...allArticles, ...data]);
     setFetchMore(false);
+    setHasFetched(true);
   }
 
   return (
@@ -55,7 +57,6 @@ const Artikler = ({ articles }: ArtiklerProps) => {
               Artikler
             </Heading>
             <p>{allArticles?.length}</p>
-            <button onClick={() => setFetchMore(true)}>Last flere</button>
             <div className="card-grid-3-1 mt-6">
               {allArticles
                 .filter((a: ArtiklerT) => a.tema)
@@ -70,13 +71,21 @@ const Artikler = ({ articles }: ArtiklerProps) => {
                   );
                 })}
             </div>
-            {error && (
-              <div className="mt-4 flex justify-center">
-                <ErrorMessage size="medium">
+            <div className="mt-6 flex flex-col items-center">
+              {!hasFetched && (
+                <Button
+                  loading={isValidating}
+                  onClick={() => setFetchMore(true)}
+                >
+                  Last flere artikler
+                </Button>
+              )}
+              {error && (
+                <ErrorMessage size="medium" className="mt-4">
                   Kan ikke hente flere artikler, prøv igjen senere...
                 </ErrorMessage>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </main>
         <Footer />
