@@ -14,6 +14,7 @@ import { form } from "./form";
 import { getTemplates } from "./util";
 
 import { schema } from "./schema";
+import { DatabaseIcon, RemoveCircleIcon } from "@sanity/icons";
 
 const projectId = "hnbe3yhs";
 
@@ -56,7 +57,8 @@ const sharedConfig = {
 export const workspaceConfig = defineConfig([
   {
     name: "default",
-    title: "Live",
+    title: "Prod",
+    icon: DatabaseIcon,
     dataset: "production",
     basePath: "/admin/prod",
     ...sharedConfig,
@@ -87,7 +89,8 @@ export const workspaceConfig = defineConfig([
   },
   {
     name: "dev",
-    title: "Dev",
+    title: "Dev (testing only)",
+    icon: RemoveCircleIcon,
     dataset: "development",
     basePath: "/admin/dev",
     ...sharedConfig,
