@@ -79,10 +79,11 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
             <div className="dynamic-wrapper px-4 pb-6 text-center">
               <Image
                 src={urlFor(page.pictogram.url).auto("format").url()}
-                decoding="async"
+                decoding="sync"
                 width="72px"
                 height="72px"
                 layout="fixed"
+                priority
                 aria-hidden
                 alt={page.pictogram?.altText}
               />
