@@ -33,7 +33,7 @@ export const TemaCard = ({
           })}
         >
           <Heading
-            level="3"
+            level="2"
             size="medium"
             className="mb-4 text-2xl xl:text-3xl"
           >
