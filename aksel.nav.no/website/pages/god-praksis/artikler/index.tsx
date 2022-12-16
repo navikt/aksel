@@ -6,7 +6,8 @@ import { Header } from "components/layout/header/Header";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { akselArticleAll } from "lib/sanity/queries";
 import Head from "next/head";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { ArtiklerT } from "../[slug]";
 
@@ -16,10 +17,17 @@ interface ArtiklerProps {
 
 const Artikler = ({ articles }: ArtiklerProps) => {
   const [allArticles, setAllArticles] = useState<ArtiklerT[]>(articles);
-  const [fetchMore, setFetchMore] = useState<boolean>(false);
   const [hasFetched, setHasFetched] = useState<boolean>(false);
+  const { alleArtikler } = useRouter().query;
 
   const lastPublishedAt = articles[articles.length - 1].publishedAt;
+  const [fetchMore, setFetchMore] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (alleArtikler === "true") {
+      setFetchMore(true);
+    }
+  }, [alleArtikler]);
 
   const { data, error, isValidating } = useSWR(
     fetchMore
