@@ -17,7 +17,6 @@ export function EditorPreview(props) {
   useEffect(() => {
     client.fetch(`*[_type == "editor"]`).then(setEditor);
   }, [client]);
-  console.log(props);
 
   const anonym = props?.subtitle?.includes("Anonym");
   const currentUser =

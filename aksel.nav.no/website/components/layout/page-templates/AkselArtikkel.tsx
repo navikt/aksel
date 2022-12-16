@@ -61,6 +61,11 @@ const AkselArtikkelTemplate = ({
           key="ogtitle"
         />
         <meta
+          name="description"
+          content={data?.seo?.meta ?? data?.ingress}
+          key="desc"
+        />
+        <meta
           property="og:description"
           content={data?.seo?.meta ?? data?.ingress}
           key="ogdesc"
@@ -71,6 +76,12 @@ const AkselArtikkelTemplate = ({
           content={
             data?.seo?.image
               ? urlFor(data?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .url()
+              : hasTema && (data.tema[0] as any)?.seo?.image
+              ? urlFor((data.tema[0] as any)?.seo?.image)
                   .width(1200)
                   .height(630)
                   .fit("crop")

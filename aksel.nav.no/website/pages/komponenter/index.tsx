@@ -1,4 +1,4 @@
-import { komponentLandingQuery, SidebarT, SanityT } from "@/lib";
+import { komponentLandingQuery, SidebarT, SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading, Ingress } from "@navikt/ds-react";
@@ -30,9 +30,24 @@ const Page = ({
       <Head>
         <title>Komponenter</title>
         <meta property="og:title" content="Komponenter" />
+        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
         <meta
-          name="description"
-          content="Komponenter fra designsystemet til NAV"
+          property="og:description"
+          content={page?.seo?.meta ?? ""}
+          key="ogdesc"
+        />
+        <meta
+          property="og:image"
+          content={
+            page?.seo?.image
+              ? urlFor(page?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .url()
+              : ""
+          }
+          key="ogimage"
         />
       </Head>
       <WithSidebar

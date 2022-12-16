@@ -24,6 +24,11 @@ const Page = (props: PageProps): JSX.Element => {
         <title>Produktbloggen - Aksel</title>
         <meta property="og:title" content="Produktbloggen - Aksel" />
         <meta
+          name="description"
+          content={props?.page?.seo?.meta ?? ""}
+          key="desc"
+        />
+        <meta
           property="og:description"
           content={props?.page?.seo?.meta ?? ""}
           key="ogdesc"
@@ -42,7 +47,7 @@ const Page = (props: PageProps): JSX.Element => {
           key="ogimage"
         />
       </Head>
-      <div className="bg-[#FFFCF0]">
+      <div className="bg-[#FEFCE9]">
         <Header variant="blogg" />
         <main
           tabIndex={-1}

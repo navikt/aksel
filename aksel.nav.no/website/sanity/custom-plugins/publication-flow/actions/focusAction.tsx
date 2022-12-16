@@ -155,8 +155,6 @@ export const QualityCheckContent = ({ type }: QualityCheckContentProps) => {
 
   const blocks = data?.[type];
 
-  console.log(blocks);
-
   return (
     <>
       <div className="flex shrink-0 items-center justify-between">

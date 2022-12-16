@@ -1,5 +1,5 @@
 export const getImage = (key: string, variant: "OG" | "thumbnail") => {
-  const bloggOptions = 12;
+  const bloggOptions = 11;
 
   const hash = Math.abs(
     key.split("").reduce(function (a, b) {
@@ -12,6 +12,6 @@ export const getImage = (key: string, variant: "OG" | "thumbnail") => {
   const thumbnailSrc = "/images/thumbnail/blogg";
 
   return `${variant === "OG" ? ogSrc : thumbnailSrc}/image-${
-    hash % (bloggOptions + 1)
+    (hash % bloggOptions) + 1
   }.${variant === "OG" ? "png" : "svg"}`;
 };

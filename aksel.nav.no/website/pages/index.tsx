@@ -103,6 +103,14 @@ const Forside = ({
         <title>Aksel - NAV</title>
         <meta property="og:title" content="Aksel - NAV" key="ogtitle" />
         <meta
+          name="description"
+          content={
+            page?.seo?.meta ??
+            "En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i NAV."
+          }
+          key="desc"
+        />
+        <meta
           property="og:description"
           content={
             page?.seo?.meta ??

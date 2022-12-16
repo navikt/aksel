@@ -159,7 +159,9 @@ ${defaultBlock},
 
 export const allDocuments = `*[]{...,'slug': slug.current }`;
 
-export const akselTema = `{"temaer": *[_type == "aksel_tema"]{
+export const akselTema = `*[_type == "godpraksis_landingsside"][0]{
+  "page": {...},
+  "temaer": *[_type == "aksel_tema"]{
   ...,
   "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
 }}`;
@@ -174,7 +176,7 @@ const contributorsSingle = `contributors[0]->{
   anonym != true => {"title":@.title}
 }`;
 
-export const akselBloggPosts = `{
+export const akselBloggPosts = `*[_type == "blogg_landingsside"][0]{
   "page": {...},
   "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
     ...,
@@ -241,7 +243,7 @@ export const akselDocumentBySlug = `{
       ...,
       ${deRefs}
     },
-    tema[]->{title, slug},
+    tema[]->{title, slug, seo},
     ${contributorsAll},
     relevante_artikler[]->{
       _id,
@@ -365,6 +367,7 @@ export const akselBloggBySlug = `{
     heading,
     _createdAt,
     _id,
+    ingress,
     ${contributorsAll},
 
   }

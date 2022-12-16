@@ -1,5 +1,5 @@
 import { dateStr } from "@/components";
-import { getDocumentsTmp, komponentQuery } from "@/lib";
+import { getDocumentsTmp, komponentQuery, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Detail, Heading } from "@navikt/ds-react";
@@ -33,6 +33,25 @@ const Page = ({
       <Head>
         <title>{page?.heading ? `${page?.heading} - Aksel` : "Aksel"}</title>
         <meta property="og:title" content={`${page.heading} - Aksel`} />
+        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
+        <meta
+          property="og:description"
+          content={page?.seo?.meta ?? ""}
+          key="ogdesc"
+        />
+        <meta
+          property="og:image"
+          content={
+            page?.seo?.image
+              ? urlFor(page?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .url()
+              : ""
+          }
+          key="ogimage"
+        />
       </Head>
       <WithSidebar
         withToc

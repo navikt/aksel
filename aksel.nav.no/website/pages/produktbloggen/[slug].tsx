@@ -5,6 +5,7 @@ import { abbrName, dateStr } from "@/utils";
 import { BodyShort, Detail, Heading, Ingress } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
+import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Feedback from "components/website-modules/feedback";
@@ -23,7 +24,14 @@ const Page = ({
 }: {
   slug?: string;
   blogg: SanityT.Schema.aksel_blogg;
-  morePosts: SanityT.Schema.aksel_blogg[];
+  morePosts: Partial<
+    SanityT.Schema.aksel_blogg & {
+      slug: string;
+      contributors?: {
+        title?: string;
+      }[];
+    }
+  >[];
   preview: boolean;
 }): JSX.Element => {
   if (!blogg) {
@@ -78,7 +86,7 @@ const Page = ({
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel xs:pb-32 overflow-hidden bg-[#FFFCF0] pt-[8vw] pb-16 focus:outline-none"
+        className="aksel-artikkel xs:pb-32 #FEFCE9 overflow-hidden bg-[#FEFCE9] pt-[8vw] pb-16 focus:outline-none"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose text-center">
@@ -165,6 +173,18 @@ const Page = ({
               Publisert: {dateStr(blogg?.publishedAt ?? blogg?._updatedAt)}
             </BodyShort>
           </div>
+          {morePosts && (
+            <div className="max-w-content-w-padding mx-auto mt-32 w-full">
+              <Heading level="2" size="large">
+                Flere blogginnlegg
+              </Heading>
+              <ul className="mt-12 grid gap-x-6 gap-y-6 sm:grid-cols-2 sm:gap-y-10 md:gap-x-6 lg:grid-cols-3">
+                {morePosts.map((post) => (
+                  <BloggCard key={post._id} blog={post} />
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="dynamic-wrapper-prose pt-16">
             <Feedback akselFeedback docId={blogg?._id} docType={blogg?._type} />
           </div>
@@ -203,7 +223,14 @@ export default Wrapper;
 interface StaticProps {
   props: {
     blogg: SanityT.Schema.aksel_blogg;
-    morePosts: SanityT.Schema.aksel_blogg[];
+    morePosts: Partial<
+      SanityT.Schema.aksel_blogg & {
+        slug: string;
+        contributors?: {
+          title?: string;
+        }[];
+      }
+    >[];
     slug: string;
     preview: boolean;
     validUser?: boolean;

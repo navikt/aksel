@@ -1,6 +1,6 @@
 import { TemaCard } from "@/components";
 import { Footer } from "@/layout";
-import { akselTema } from "@/lib";
+import { akselTema, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
@@ -11,20 +11,36 @@ import { AkselTemaT } from "..";
 
 interface PageProps {
   temaer: AkselTemaT[];
+  page: any;
   slug: string;
   preview: boolean;
 }
 
-const Page = ({ temaer: data }: PageProps): JSX.Element => {
+const Page = ({ temaer: data, page }: PageProps): JSX.Element => {
   const filteredTemas = data.filter((x) => x.refCount > 0);
   return (
     <>
       <Head>
-        <title>Temaer - Aksel</title>
+        <title>God praksis - Aksel</title>
         <meta property="og:title" content="Temaer - Aksel" />
+        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
         <meta
-          name="description"
-          content="Oversikt over alle tilgjengelige god praksis temaer"
+          property="og:description"
+          content={page?.seo?.meta ?? ""}
+          key="ogdesc"
+        />
+        <meta
+          property="og:image"
+          content={
+            page?.seo?.image
+              ? urlFor(page?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .url()
+              : ""
+          }
+          key="ogimage"
         />
       </Head>
       <div className="bg-gray-50">
@@ -83,10 +99,11 @@ export const getStaticProps = async ({
 }: {
   preview?: boolean;
 }) => {
-  const { temaer } = await getClient().fetch(akselTema);
+  const { temaer, page } = await getClient().fetch(akselTema);
 
   return {
     props: {
+      page,
       temaer,
       slug: "/god-praksis",
       preview,

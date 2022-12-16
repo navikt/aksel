@@ -34,7 +34,7 @@ const ComponentOverview = ({
       <ul className="component-card-grid">
         {sorted.map((x) => (
           <li key={x._id}>
-            <div className="bg-surface-subtle focus-within:shadow-focus ring-border-subtle hover:shadow-medium group relative h-56 rounded-2xl hover:ring-1">
+            <div className="bg-surface-subtle focus-within:shadow-focus ring-border-subtle hover:shadow-medium min-h-56 group relative rounded-2xl hover:ring-1">
               <div
                 className={cl(
                   "flex max-h-44 items-center justify-center overflow-hidden rounded-t-2xl"
