@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { SEOFields } from "../presets/seo";
 import { groups } from "../presets/groups";
+import { HomeIcon } from "@sanity/icons";
 
 export const GodPraksisLandingSide = defineType({
   title: "Landingsside Grunnleggende",
@@ -18,6 +19,7 @@ export const GodPraksisLandingSide = defineType({
   preview: {
     prepare: () => ({
       title: "Landingsside God-praksis",
+      media: HomeIcon,
     }),
   },
 });
