@@ -116,8 +116,8 @@ const Page = ({
               )}
             </div>
           </div>
-          {blogg?.seo?.image && (
-            <div className="relative mx-auto mt-20 aspect-video w-full max-w-3xl">
+          <div className="relative mx-auto mt-20 aspect-video w-full max-w-3xl">
+            {blogg?.seo?.image ? (
               <Image
                 src={urlFor(blogg?.seo?.image).auto("format").url()}
                 decoding="sync"
@@ -128,8 +128,19 @@ const Page = ({
                 className="rounded-2xl"
                 alt="Illustrasjon"
               />
-            </div>
-          )}
+            ) : (
+              <Image
+                src={getImage(blogg?.heading ?? "", "thumbnail")}
+                decoding="sync"
+                layout="fill"
+                objectFit="cover"
+                aria-hidden
+                priority
+                className="rounded-2xl"
+                alt="Illustrasjon"
+              />
+            )}
+          </div>
         </div>
         <div className="relative mt-16">
           <AkselCubeStatic className="text-[#FFE78A] opacity-20" />
