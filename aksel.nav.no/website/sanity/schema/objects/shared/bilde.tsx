@@ -74,22 +74,15 @@ export const Bilde = defineType({
         },
       ],
     }),
+    defineField({
+      name: "background",
+      title: "Bakgrunnsfarge",
+      description: "Husk å dobbelsjekke kontrast!",
+      type: "color",
+    }),
   ],
   validation: (Rule) =>
     Rule.custom((v) => {
       return v?.asset ? true : "Må legge til et bilde";
     }).error(),
-  preview: {
-    select: {
-      alt: "alt",
-      floating: "floating",
-    },
-    prepare(selection) {
-      return {
-        title: selection?.alt,
-        subtitle: `Bilde`,
-        media: ImageIcon,
-      };
-    },
-  },
 });

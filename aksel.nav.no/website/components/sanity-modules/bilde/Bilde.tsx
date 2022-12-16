@@ -11,12 +11,19 @@ const Bilde = ({
   node,
   className,
 }: {
-  node: SanityT.Schema.bilde;
+  node: SanityT.Schema.bilde & {
+    background?: {
+      rgb: { a: number; b: number; g: number; r: number };
+      alpha: number;
+    };
+  };
   className?: string;
 }): JSX.Element => {
   if (!node || !node.asset) {
     return null;
   }
+
+  console.log(node);
 
   return (
     <>
@@ -25,7 +32,16 @@ const Bilde = ({
           "sm:max-w-[384px]": node?.small,
         })}
       >
-        <div className={cl(style.bilde, "flex justify-center bg-gray-50 p-0")}>
+        <div
+          style={
+            node?.background
+              ? {
+                  backgroundColor: `rgba(${node.background.rgb.r},${node.background.rgb.g},${node.background.rgb.b},${node.background.rgb.a})`,
+                }
+              : { backgroundColor: "var(--a-gray-50)" }
+          }
+          className={cl(style.bilde, "flex justify-center p-0")}
+        >
           <img
             alt={node.alt}
             decoding="async"
