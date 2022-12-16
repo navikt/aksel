@@ -14,7 +14,6 @@ const StudioPage = () => {
       <NextStudio
         config={workspaceConfig}
         scheme={scheme}
-        scheme="light"
         onSchemeChange={setScheme}
         unstable__noFavicons
       />
