@@ -22,3 +22,10 @@ const StudioPage = () => {
 };
 
 export default StudioPage;
+
+/*
+TODO:
+Sort-order basert på siste godkjent/utdatert? publisedAt?
+Action for publisedAt ved første publisering
+Legge til "godkjent"-action på grunnleggende, komponenter og god-praksis
+*/
