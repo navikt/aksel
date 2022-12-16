@@ -1,4 +1,4 @@
-import { Warning } from "@navikt/ds-icons";
+import { WarningOutlineIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 import { toPlainText } from "../../../util";
 
@@ -6,7 +6,7 @@ export const Alert = defineType({
   name: "alert",
   title: "Alert",
   type: "object",
-  icon: Warning,
+  icon: WarningOutlineIcon,
   fields: [
     defineField({
       title: "Variant",
@@ -61,7 +61,7 @@ export const Alert = defineType({
       return {
         title: toPlainText(selection?.body),
         subtitle: `Alert - ${selection.variant}`,
-        media: () => <Warning />,
+        media: WarningOutlineIcon,
       };
     },
   },

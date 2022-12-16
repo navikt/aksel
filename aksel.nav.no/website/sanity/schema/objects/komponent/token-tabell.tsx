@@ -1,4 +1,4 @@
-import { Table } from "@navikt/ds-icons";
+import { TiersIcon } from "@sanity/icons";
 import { defineType } from "sanity";
 
 export const TokenTabell = defineType({
@@ -7,5 +7,5 @@ export const TokenTabell = defineType({
   type: "reference",
   to: [{ type: "token_kategori" }],
   validation: (Rule) => Rule.required(),
-  icon: Table,
+  icon: TiersIcon,
 });

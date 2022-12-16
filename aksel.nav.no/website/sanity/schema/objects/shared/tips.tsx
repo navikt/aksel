@@ -1,12 +1,12 @@
-import { toPlainText } from "../../../util";
-import { LightBulb } from "@navikt/ds-icons";
+import { BulbOutlineIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
+import { toPlainText } from "../../../util";
 
 export const Tips = defineType({
   name: "tips",
   title: "Tips",
   type: "object",
-  icon: LightBulb,
+  icon: BulbOutlineIcon,
   fields: [
     defineField({
       title: "Innhold",
@@ -25,7 +25,7 @@ export const Tips = defineType({
       return {
         title: toPlainText(selection?.body ?? []) ?? "",
         subtitle: "Tips",
-        media: LightBulb,
+        media: BulbOutlineIcon,
       };
     },
   },

@@ -1,12 +1,12 @@
-import { Success } from "@navikt/ds-icons";
-import React from "react";
+import { CheckmarkCircleIcon } from "@sanity/icons";
+
 import { defineField, defineType } from "sanity";
 
 export const DoDont = defineType({
   title: "Do / Dont",
   name: "do_dont",
   type: "object",
-  icon: Success,
+  icon: CheckmarkCircleIcon,
   fields: [
     defineField({
       type: "array",
@@ -20,7 +20,7 @@ export const DoDont = defineType({
     prepare() {
       return {
         title: "Do / Dont",
-        media: () => <Success />,
+        media: CheckmarkCircleIcon,
       };
     },
   },
