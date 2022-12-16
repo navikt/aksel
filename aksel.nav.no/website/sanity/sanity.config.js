@@ -15,6 +15,7 @@ import { form } from "./form";
 import { getTemplates } from "./util";
 
 import { DatabaseIcon, RemoveCircleIcon } from "@sanity/icons";
+import { allArticleDocuments } from "./config";
 import { schema } from "./schema";
 
 const projectId = "hnbe3yhs";
@@ -50,7 +51,12 @@ const sharedConfig = {
     visionTool(),
     unsplashImageAsset(),
     publicationFlow({
-      includedSchemas: ["testDoc"],
+      hasQualityControl: [
+        "komponent_artikkel",
+        "ds_artikkel",
+        "aksel_artikkel",
+      ],
+      hasPublishedAt: allArticleDocuments,
     }),
     colorInput(),
   ],

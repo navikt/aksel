@@ -23,30 +23,38 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
     const lastVerified = props.published?.updateInfo?.["lastVerified"];
     const lastVerifiedDraft = props.draft?.updateInfo?.["lastVerified"];
 
-    const verifyContent = () => {
-      patch.execute(
-        [
-          {
-            set: {
-              updateInfo: {
-                lastVerified: format(new Date(), "yyyy-MM-dd"),
-              },
-            },
-          },
-        ],
-        props.published
-      );
+    const cancelAction = () => {
+      setVerifyOpen(false);
+      setPublishOpen(false);
     };
 
-    const updateDialogContent = {
-      description: {
-        pre: "Før du godkjenner innholdet, har du gjort dette?",
-        post: "Artikkelen er over 6mnd gammel og må godkjennes på nytt. Før du godkjenner innholdet, har du gjort dette?",
-      },
-      checks: {
-        pre: "Hovedinnhold",
-        post: "Hovedinnhold",
-      },
+    const verifyContent = () => {
+      props.published
+        ? patch.execute(
+            [
+              {
+                set: {
+                  updateInfo: {
+                    lastVerified: format(new Date(), "yyyy-MM-dd"),
+                  },
+                },
+              },
+            ],
+            props.published
+          )
+        : patch.execute(
+            [
+              {
+                set: {
+                  updateInfo: {
+                    lastVerified: format(new Date(), "yyyy-MM-dd"),
+                  },
+                  publishedAt: new Date().toISOString(),
+                },
+              },
+            ],
+            props.published
+          );
     };
 
     // Publish action
@@ -65,7 +73,9 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
             <>
               <QualityCheckContent type="publishContent" />
               <div className="flex justify-end gap-4">
-                <Button variant="tertiary">Nei, avbryt</Button>
+                <Button variant="tertiary" onClick={cancelAction}>
+                  Nei, avbryt
+                </Button>
                 <Button
                   onClick={() => {
                     verifyContent();
@@ -119,7 +129,9 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
             <>
               <QualityCheckContent type={`${verifiedStatus}Verify`} />
               <div className="flex justify-end gap-4">
-                <Button variant="tertiary">Nei, avbryt</Button>
+                <Button variant="tertiary" onClick={cancelAction}>
+                  Nei, avbryt
+                </Button>
                 <Button
                   onClick={() => {
                     verifyContent();
