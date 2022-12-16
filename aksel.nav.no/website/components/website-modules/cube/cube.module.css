@@ -4,6 +4,7 @@
   position: absolute;
   z-index: -1;
   opacity: 0.3;
+  pointer-events: none;
 }
 
 .animated1 {
@@ -168,6 +169,7 @@
   left: -30rem;
   right: 0;
   top: 20rem;
+  pointer-events: none;
 }
 
 .static1 {
