@@ -11,7 +11,7 @@ export default async function akselAarticles(
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const lastPublishedAt = req.query.lastPublishedAt;
+  let lastPublishedAt = req.query.lastPublishedAt;
 
   if (!lastPublishedAt) {
     return res
@@ -19,23 +19,31 @@ export default async function akselAarticles(
       .json({ message: "Missing lastId or lstPublishedAt" });
   }
 
+  lastPublishedAt = format(new Date(String(lastPublishedAt)), "yyyy-MM-dd");
+
   const query = `{
-      "articles": *[_type == "aksel_artikkel" && (publishedAt < "${format(
-        new Date(String(lastPublishedAt)),
-        "yyyy-MM-dd"
-      )}" || publishedAt == "${format(
-    new Date(String(lastPublishedAt)),
-    "yyyy-MM-dd"
-  )}")] | order(publishedAt desc) {
+    "publishDateArtilcles": *[_type == "aksel_artikkel"  && defined(publishedAt) && publishedAt <= "${lastPublishedAt}"] | order(publishedAt desc) {
+          ${akselArticleFields}
+        },
+    "noPublishDateArticles": *[_type == "aksel_artikkel" && !defined(publishedAt)] | order(_updatedAt desc){
           ${akselArticleFields}
         }
     }`;
 
-  const { articles } = await getClient().fetch(query);
+  let payload = [];
 
-  if (!articles) {
-    return res.status(500).json({ message: "Failed to load data" });
-  }
+  console.log(getClient());
 
-  return res.status(200).json(articles);
+  await getClient()
+    .fetch(query)
+    .then((data) => {
+      payload = [...data.publishDateArtilcles, ...data.noPublishDateArticles];
+      return data;
+    })
+    .catch((err) => {
+      console.log("Error message: ", err.message);
+      return res.status(500).json({ message: "Failed to load data" });
+    });
+
+  return res.status(200).json(payload);
 }

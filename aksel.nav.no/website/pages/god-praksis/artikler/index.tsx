@@ -56,7 +56,6 @@ const Artikler = ({ articles }: ArtiklerProps) => {
             >
               Artikler
             </Heading>
-            <p>{allArticles?.length}</p>
             <div className="card-grid-3-1 mt-6">
               {allArticles
                 .filter((a: ArtiklerT) => a.tema)
@@ -95,7 +94,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
 };
 
 export const getStaticProps = async () => {
-  const { articles } = await getClient().fetch(akselArticleAll("[0...20]"));
+  const { articles } = await getClient().fetch(akselArticleAll("[0..21]"));
 
   return {
     props: {
