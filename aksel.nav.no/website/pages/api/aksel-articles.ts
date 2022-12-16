@@ -32,7 +32,6 @@ export default async function akselAarticles(
     }`;
 
   const { articles } = await getClient().fetch(query);
-  console.log(articles);
 
   if (!articles) {
     return res.status(500).json({ message: "Failed to load data" });
