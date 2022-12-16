@@ -142,7 +142,7 @@ export const WithSidebar = ({
                   </div>
                 )}
               </div>
-              <div className={cl("pl-6 md:pl-10", { flex: withToc })}>
+              <div className={cl("xs:px-6 md:px-10", { flex: withToc })}>
                 {withToc && (
                   <TableOfContentsv2
                     changedState={pageProps["content"]}
