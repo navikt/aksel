@@ -32,8 +32,6 @@ export default async function akselAarticles(
 
   let payload = [];
 
-  console.log(getClient());
-
   await getClient()
     .fetch(query)
     .then((data) => {
