@@ -68,7 +68,7 @@ const config: PlaywrightTestConfig = {
     {
       name: "Mobile",
       use: {
-        ...devices["iPhone 12,Pixel 5"],
+        ...devices["iPhone 12"],
       },
       testMatch: [/smoketest.test.ts/],
     },
