@@ -18,9 +18,8 @@ export const getAllPages = async (token?: string) => {
 
   return [
     "",
-    "designsystem",
-    "tema",
-    "blogg",
+    "god-praksis",
+    "produktbloggen",
     ...komponenter,
     ...grunnleggende,
     ...artikler,

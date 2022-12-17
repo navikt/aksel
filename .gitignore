@@ -149,3 +149,4 @@ tmp.json
 playwright-report/
 /test-results/
 backup-*.tar.gz
+sitemap-urls.json

@@ -22,7 +22,7 @@ const IconView = ({
       {categories.map((cat) => {
         return (
           <div key={cat.category}>
-            <Heading level="3" size="small" spacing>
+            <Heading level="2" size="small" spacing>
               {cat.category}
             </Heading>
             <div className="grid content-start justify-start gap-x-4 gap-y-6 pb-8 [grid-template-columns:repeat(auto-fit,12rem)]">
