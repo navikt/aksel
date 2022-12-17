@@ -16,7 +16,7 @@ export const LevelTwoHeading = ({
       {hidden && <div id={id} className="scroll-m-18" />}
       <Heading
         tabIndex={-1}
-        id={id}
+        id={id + (hidden ? "-hidden" : "")}
         level="2"
         size="large"
         className={cl(
