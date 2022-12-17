@@ -1,5 +1,3 @@
-import type { SanityKeyed } from "sanity-codegen";
-
 export type SidebarT = {
   heading: string;
   slug: string;
@@ -11,22 +9,6 @@ export type PageTypeT = {
   type: "Komponenter" | "Grunnleggende";
   title: string;
 };
-
-export type DsFrontPageCardT = SanityKeyed<{
-  _type: "card";
-  link_ref?: {
-    _id: string;
-    slug: string;
-  };
-  title?: string;
-  content?: string;
-  picture?: {
-    asset: any;
-    crop?: any;
-    hotspot?: any;
-    title?: string;
-  };
-}>;
 
 export enum HelpfulArticleEnum {
   "JA" = "ja",

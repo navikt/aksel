@@ -21,7 +21,6 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@radix-ui/react-tabs": "1.0.0",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^3.3.0",
     "@sanity/code-input": "3.0.1",
@@ -40,7 +39,6 @@
     "color": "4.2.3",
     "copy-to-clipboard": "^3.3.1",
     "date-fns": "2.29.3",
-    "elevator.js": "1.0.1",
     "jose": "4.10.0",
     "js-file-download": "^0.4.12",
     "jwt-decode": "3.1.2",
@@ -53,16 +51,13 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-modal": "3.15.1",
-    "react-snowfall": "1.2.1",
     "sanity": "3.0.6",
     "sanity-plugin-asset-source-unsplash": "^1.0.0",
-    "sanity-plugin-graph-view": "^2.0.1",
     "sanity-plugin-iframe-pane": "^2.1.1",
     "sanity-plugin-media": "^2.0.2",
     "sitemap": "^7.0.0",
     "swr": "^1.1.2",
-    "tailwindcss": "^3.2.0",
-    "validator": "^13.7.0"
+    "tailwindcss": "^3.2.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.5.2",
@@ -89,7 +84,6 @@
     "postcss": "^8.4.0",
     "postcss-import": "^14.1.0",
     "postcss-loader": "7.0.0",
-    "sanity-codegen": "0.9.8",
     "start-server-and-test": "^1.14.0",
     "ts-jest": "^29.0.0",
     "typescript": "^4.8.0"
