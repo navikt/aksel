@@ -58,6 +58,20 @@ const config: PlaywrightTestConfig = {
         ? { testMatch: [/.*\.e2e\.(ts|tsx)/, /smoketest.test.ts/] }
         : { testMatch: [/smoketest.test.ts/] }),
     },
+    {
+      name: "Safari",
+      use: {
+        ...devices["Desktop Safari"],
+      },
+      testMatch: [/smoketest.test.ts/],
+    },
+    {
+      name: "Mobile",
+      use: {
+        ...devices["iPhone 12,Pixel 5"],
+      },
+      testMatch: [/smoketest.test.ts/],
+    },
 
     /* {
       name: "firefox",
@@ -85,7 +99,7 @@ const config: PlaywrightTestConfig = {
     // {
     //   name: 'Mobile Safari',
     //   use: {
-    //     ...devices['iPhone 12'],
+    //     ...devices['iPhone 12,Pixel 5'],
     //   },
     // },
 
