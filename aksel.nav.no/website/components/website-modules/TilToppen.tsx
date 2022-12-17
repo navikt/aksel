@@ -19,7 +19,7 @@ export const ScrollTop = () => {
       onClick={(e) => {
         handleElevator(e);
       }}
-      className="text-xlarge text-text-on-inverted focus-visible:shadow-focus-inverted group -mt-[10px] flex h-[48px] w-fit items-center justify-center gap-2 p-2 font-semibold hover:underline focus:outline-none"
+      className="text-xlarge text-text-on-inverted focus-visible:shadow-focus-inverted group -mt-[10px] flex h-[48px] w-fit items-center justify-center gap-2 rounded p-2 font-semibold hover:underline focus:outline-none"
     >
       <svg
         fill="none"
