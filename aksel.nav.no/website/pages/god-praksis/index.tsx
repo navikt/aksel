@@ -1,9 +1,14 @@
-import { TemaCard } from "@/components";
+import { ArtikkelCard, TemaCard } from "@/components";
 import { Footer } from "@/layout";
-import { akselTema, urlFor } from "@/lib";
+import { akselTema, urlFor, SanityT } from "@/lib";
+import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
+import { Clock } from "@navikt/ds-icons";
 import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
+import { GodPraksisCard } from "components/sanity-modules/cards/GodPraksisCard";
+import { AkselCubeStatic } from "components/website-modules/cube";
+import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import React, { lazy } from "react";
@@ -11,13 +16,19 @@ import { AkselTemaT } from "..";
 
 interface PageProps {
   temaer: AkselTemaT[];
+  resent: SanityT.Schema.aksel_artikkel &
+    {
+      slug: string;
+      tema: string[];
+      contributors?: { title?: string }[];
+    }[];
   page: any;
   slug: string;
   preview: boolean;
 }
 
-const Page = ({ temaer: data, page }: PageProps): JSX.Element => {
-  const filteredTemas = data.filter((x) => x.refCount > 0);
+const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
+  const filteredTemas = temaer.filter((x) => x.refCount > 0);
   return (
     <>
       <Head>
@@ -43,32 +54,59 @@ const Page = ({ temaer: data, page }: PageProps): JSX.Element => {
           key="ogimage"
         />
       </Head>
-      <div className="bg-gray-50">
-        <Header />
+      <div className="bg-surface-subtle">
+        <Header variant="subtle" />
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="min-h-[80vh] bg-gray-100 focus:outline-none"
+          className="min-h-[80vh] focus:outline-none"
         >
-          <div className="relative bg-white px-4 pt-8 pb-8 md:pt-12">
-            <div className="dynamic-wrapper w-fit">
-              <Heading
-                level="1"
-                size="xlarge"
-                spacing
-                className="algolia-index-lvl1"
-              >
-                Temaer
-              </Heading>
+          <div className="centered-layout mb-40 grid max-w-screen-2xl pt-20">
+            <Heading
+              level="1"
+              size="xlarge"
+              className="algolia-index-lvl1 text-deepblue-800 text-5xl"
+            >
+              God praksis
+            </Heading>
+            {page.intro && (
+              <SanityBlockContent
+                isIngress
+                className="mt-8"
+                noLastMargin
+                blocks={page.intro}
+              />
+            )}
+            <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
+            <div>
+              <ul className="card-grid-3-1 mt-20 ">
+                {filteredTemas.map((t) => (
+                  <GodPraksisCard key={t._id} node={t} />
+                ))}
+              </ul>
             </div>
-          </div>
-          <div className="relative px-4 pt-8 pb-24">
-            <div className="dynamic-wrapper">
-              <div className="card-grid-3-1 mt-4">
-                {filteredTemas.map((tema) => (
-                  <TemaCard compact {...tema} key={tema._id} />
+
+            <div className="mt-24">
+              <Heading
+                level="2"
+                size="medium"
+                className="text-deepblue-800 flex items-center gap-4"
+              >
+                <Clock aria-hidden className="shrink-0" /> Nylige artikler
+              </Heading>
+              <div className="card-grid-3-1 my-6">
+                {resent.map((art: any) => (
+                  <ArtikkelCard
+                    level="3"
+                    variant="tema"
+                    {...art}
+                    key={art._id}
+                  />
                 ))}
               </div>
+            </div>
+            <div className="mt-20">
+              <ToolCard />
             </div>
           </div>
         </main>
@@ -99,12 +137,13 @@ export const getStaticProps = async ({
 }: {
   preview?: boolean;
 }) => {
-  const { temaer, page } = await getClient().fetch(akselTema);
+  const { temaer, page, resent } = await getClient().fetch(akselTema);
 
   return {
     props: {
       page,
       temaer,
+      resent,
       slug: "/god-praksis",
       preview,
     },

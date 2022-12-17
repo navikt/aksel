@@ -160,11 +160,28 @@ ${defaultBlock},
 export const allDocuments = `*[]{...,'slug': slug.current }`;
 
 export const akselTema = `*[_type == "godpraksis_landingsside"][0]{
-  "page": {...},
+  "page": {
+    ...,
+    intro[]{
+      ...,
+      ${deRefs}
+    }
+  },
   "temaer": *[_type == "aksel_tema"]{
-  ...,
-  "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
-}}`;
+    ...,
+    "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
+  },
+  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...9]{
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
+  }
+}`;
 
 const contributorsAll = `contributors[]->{
   anonym == true => {"title":@.anon_navn.current},
