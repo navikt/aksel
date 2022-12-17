@@ -1,4 +1,4 @@
-import { ArtikkelCard, TemaCard } from "@/components";
+import { ArtikkelCard } from "@/components";
 import { Footer } from "@/layout";
 import { akselTema, urlFor, SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
@@ -59,7 +59,7 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="min-h-[80vh] focus:outline-none"
+          className="relative min-h-[80vh] overflow-hidden focus:outline-none"
         >
           <div className="centered-layout mb-40 grid max-w-screen-2xl pt-20">
             <Heading
