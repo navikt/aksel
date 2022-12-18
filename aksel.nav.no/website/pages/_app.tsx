@@ -9,7 +9,6 @@ import Head from "next/head";
 import { Router } from "next/router";
 import Script from "next/script";
 import { useEffect } from "react";
-import { AuthProvider } from "../components/website-modules/utils/contexts/authprovider";
 import { IdContext } from "../components/website-modules/utils/contexts/id-context";
 import "../styles/index.css";
 
@@ -69,13 +68,11 @@ function App({
       {pageProps?.preview && <PreviewBanner />}
 
       <Provider>
-        <AuthProvider>
-          <IdContext.Provider
-            value={{ id: pageProps?.id ?? pageProps?.page?._id }}
-          >
-            <Component {...pageProps} />
-          </IdContext.Provider>
-        </AuthProvider>
+        <IdContext.Provider
+          value={{ id: pageProps?.id ?? pageProps?.page?._id }}
+        >
+          <Component {...pageProps} />
+        </IdContext.Provider>
       </Provider>
     </>
   );
