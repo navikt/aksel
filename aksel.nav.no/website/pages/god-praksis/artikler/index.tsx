@@ -57,7 +57,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
         >
           <div className="relative grid overflow-x-clip pb-40">
             <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
-            <div className="dynamic-wrapper">
+            <div className="dynamic-wrapper centered-layout">
               <Heading
                 level="1"
                 size="xlarge"
