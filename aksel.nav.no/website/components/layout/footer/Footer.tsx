@@ -41,6 +41,14 @@ const Footer = () => {
                   #Aksel på Slack
                 </Link>
               </li>
+              <li>
+                <Link
+                  className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
+                  href="/prinsipper/brukeropplevelse"
+                >
+                  Prinsipper for brukeropplevelse
+                </Link>
+              </li>
               {/* <li>
                   <Link
                     className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
