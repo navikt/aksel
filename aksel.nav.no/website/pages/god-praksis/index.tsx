@@ -1,4 +1,3 @@
-import { ArtikkelCard } from "@/components";
 import { Footer } from "@/layout";
 import { akselTema, urlFor, SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
@@ -6,6 +5,7 @@ import { getClient } from "@/sanity-client";
 import { Clock } from "@navikt/ds-icons";
 import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
+import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { ToolCard } from "components/website-modules/ToolsCard";

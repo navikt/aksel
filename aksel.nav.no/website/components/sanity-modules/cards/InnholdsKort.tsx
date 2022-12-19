@@ -1,10 +1,11 @@
+import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { logNav } from "@/utils";
 import { Heading } from "@navikt/ds-react";
 import NextLink from "next/link";
 
-export const InnholdsKort = ({
+const InnholdsKort = ({
   node,
 }: {
   node: SanityT.Schema.innholdskort & { _key: string; lenke: string };
@@ -41,3 +42,5 @@ export const InnholdsKort = ({
     </article>
   );
 };
+
+export default withErrorBoundary(InnholdsKort, "InnholdsKort");
