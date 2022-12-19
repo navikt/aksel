@@ -1,8 +1,8 @@
-import { ArtikkelCard } from "@/components";
 import { getClient } from "@/sanity-client";
 import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
+import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { akselArticleAll } from "lib/sanity/queries";
 import Head from "next/head";

@@ -22,7 +22,7 @@ export default async function akselAarticles(
   lastPublishedAt = format(new Date(String(lastPublishedAt)), "yyyy-MM-dd");
 
   const query = `{
-    "publishDateArtilcles": *[_type == "aksel_artikkel"  && defined(publishedAt) && publishedAt <= "${lastPublishedAt}"] | order(publishedAt desc) {
+    "publishDateArticles": *[_type == "aksel_artikkel"  && defined(publishedAt) && publishedAt <= "${lastPublishedAt}"] | order(publishedAt desc) {
           ${akselArticleFields}
         },
     "noPublishDateArticles": *[_type == "aksel_artikkel" && !defined(publishedAt)] | order(_updatedAt desc){
@@ -35,7 +35,7 @@ export default async function akselAarticles(
   await getClient()
     .fetch(query)
     .then((data) => {
-      payload = [...data.publishDateArtilcles, ...data.noPublishDateArticles];
+      payload = [...data.publishDateArticles, ...data.noPublishDateArticles];
       return data;
     })
     .catch((err) => {
