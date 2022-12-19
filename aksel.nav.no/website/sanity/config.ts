@@ -14,8 +14,8 @@ export const komponentKategorier = [
 ];
 
 export const grunnleggendeKategorier = [
-  { title: "Guider", value: "guider" },
   { title: "Styling", value: "styling" },
+  { title: "Guider", value: "guider" },
   { title: "Stæsj", value: "staesj" },
 ];
 
