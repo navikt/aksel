@@ -25,7 +25,7 @@ export const Bilde = defineType({
     }),
     defineField({
       name: "small",
-      title: "Bildet tar bare ~halve bredden",
+      title: "Bildet er på det meste like bred som teksten",
       type: "boolean",
       initialValue: false,
     }),

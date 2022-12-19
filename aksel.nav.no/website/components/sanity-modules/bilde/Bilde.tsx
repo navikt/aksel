@@ -28,7 +28,7 @@ const Bilde = ({
     <>
       <figure
         className={cl("m-0 mb-8 flex flex-col", style.figure, className, {
-          "sm:max-w-[384px]": node?.small,
+          "sm:max-w-text": node?.small,
         })}
       >
         <div
