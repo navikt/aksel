@@ -38,6 +38,10 @@ const TableComponent = ({
         </Table.Body>
       </Table>
       <style global jsx>{`
+        .algolia-index-body.navds-body-long.navds-typo--spacing
+          + .table-heading-margin {
+          margin-top: -1rem;
+        }
         .table-heading-margin + .navds-heading {
           margin-top: var(--a-spacing-12);
         }

@@ -14,7 +14,7 @@ export const createWrappedApproveAction = () => {
   const WrappedApprove = (
     props: DocumentActionProps
   ): DocumentActionDescription | null => {
-    const { patch } = useDocumentOperation(props.id, props.type);
+    const { patch, publish } = useDocumentOperation(props.id, props.type);
     const [dialogOpen, setDialogOpen] = useState(false);
     const lastVerified = props.published?.updateInfo?.["lastVerified"];
     if (!props.published) {
@@ -26,8 +26,9 @@ export const createWrappedApproveAction = () => {
         [
           {
             set: {
-              "updateInfo.lastVerified": format(new Date(), "yyyy-MM-dd"),
-              /* TODO: publishedAt: format(new Date(), "yyyy-MM-dd") om ikke publisert fra før */
+              updateInfo: {
+                lastVerified: format(new Date(), "yyyy-MM-dd"),
+              },
             },
           },
         ],
@@ -49,7 +50,7 @@ export const createWrappedApproveAction = () => {
       tone: "positive",
       dialog: dialogOpen && {
         type: "dialog",
-        header: "Kvalitetssjekk",
+        header: "Kvalitetssjekk før publisering",
         onClose: () => setDialogOpen(false),
         content: (
           <>
@@ -61,6 +62,8 @@ export const createWrappedApproveAction = () => {
               <Button
                 onClick={() => {
                   verifyContent();
+                  publish.execute();
+                  props.onComplete();
                   setDialogOpen(false);
                 }}
               >

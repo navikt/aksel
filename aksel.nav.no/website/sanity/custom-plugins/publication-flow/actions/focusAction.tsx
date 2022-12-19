@@ -67,7 +67,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         },
         dialog: publishOpen && {
           type: "dialog",
-          header: "Kvalitetssjekk",
+          header: "Kvalitetssjekk før publisering",
           onClose: () => setPublishOpen(false),
           content: (
             <>
@@ -123,7 +123,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         tone: "positive",
         dialog: verifyOpen && {
           type: "dialog",
-          header: "Kvalitetssjekk",
+          header: "Kvalitetssjekk før publisering",
           onClose: () => setVerifyOpen(false),
           content: (
             <>
@@ -135,6 +135,8 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
                 <Button
                   onClick={() => {
                     verifyContent();
+                    publish.execute();
+                    props.onComplete();
                     setVerifyOpen(false);
                   }}
                 >
