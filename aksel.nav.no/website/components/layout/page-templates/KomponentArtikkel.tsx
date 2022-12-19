@@ -1,7 +1,7 @@
 import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { ExternalLink } from "@navikt/ds-icons";
-import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
+import { BodyShort, Heading } from "@navikt/ds-react";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { BetaWarning } from "components/website-modules/BetaWarning";
 import Head from "next/head";
