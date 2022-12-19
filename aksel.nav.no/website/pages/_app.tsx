@@ -2,7 +2,7 @@ import { Provider } from "@navikt/ds-react";
 import PreviewBanner from "components/website-modules/PreviewBanner";
 import {
   initAmplitude,
-  logPageView,
+  usePageView,
 } from "components/website-modules/utils/amplitude";
 import { useScrollToHashOnPageLoad } from "components/website-modules/utils/util";
 import Head from "next/head";
@@ -27,6 +27,8 @@ import Script from "next/script";
 )}
 */
 
+initAmplitude();
+
 function App({
   Component,
   pageProps,
@@ -37,20 +39,15 @@ function App({
   router: Router;
 }): JSX.Element {
   useScrollToHashOnPageLoad();
+  usePageView(router, pageProps);
 
   useEffect(() => {
+    console.log("called");
     if (window.location.host === "design.nav.no") {
       window.location.replace(`http://aksel.nav.no`);
       return;
     }
-    const t = (e) => logPageView(e);
-    initAmplitude();
-    router.events.on("routeChangeComplete", t);
-    window.onload = () => logPageView(window.location.pathname, true);
-    return () => {
-      router.events.off("routeChangeComplete", t);
-    };
-  }, [router.events]);
+  }, []);
 
   return (
     <>

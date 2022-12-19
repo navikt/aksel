@@ -2,12 +2,12 @@ import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { Next } from "@navikt/ds-icons";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
+import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import Head from "next/head";
 import NextLink from "next/link";
 
 import {
   abbrName,
-  ArtikkelCard,
   BreadCrumbs,
   dateStr,
   Feedback,
