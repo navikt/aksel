@@ -42,7 +42,6 @@ function App({
   usePageView(router, pageProps);
 
   useEffect(() => {
-    console.log("called");
     if (window.location.host === "design.nav.no") {
       window.location.replace(`http://aksel.nav.no`);
       return;

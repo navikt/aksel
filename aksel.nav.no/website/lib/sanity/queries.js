@@ -423,3 +423,22 @@ export const akselStandaloneBySlug = `{
     }
   }
 }`;
+
+export const akselArticleFields = `
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
+`;
+
+export const akselArticleAll = (boundry = "") => {
+  return `{
+    "articles": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)${boundry} {
+      ${akselArticleFields}
+    }
+  }`;
+};
