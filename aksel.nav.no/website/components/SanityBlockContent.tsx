@@ -2,6 +2,7 @@ import { ExternalLink } from "@navikt/ds-icons";
 import { BodyLong, Detail, Heading, Ingress, Link } from "@navikt/ds-react";
 import BlockContent from "@sanity/block-content-to-react";
 import cl from "classnames";
+import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
 import NextLink from "next/link";
 import React, { createContext, useContext } from "react";
 import {
@@ -10,7 +11,6 @@ import {
   Bilde,
   CodeExamples,
   DoDont,
-  InnholdsKort,
   Kode,
   LevelTwoHeading,
   PropsSeksjon,

@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { ArtikkelCard } from "@/components";
 import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import { ComponentIcon, DownloadIcon, TokenIcon } from "@sanity/icons";
 import { Header } from "components/layout/header/Header";
+import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";

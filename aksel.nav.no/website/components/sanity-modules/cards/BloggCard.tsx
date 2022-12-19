@@ -1,10 +1,11 @@
+import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { getAuthors } from "components/website-modules/LatestBloggs";
 import NextLink from "next/link";
 import { dateStr, logNav } from "../..";
 
-export const BloggCard = ({
+const BloggCard = ({
   blog,
 }: {
   blog: Partial<
@@ -45,4 +46,4 @@ export const BloggCard = ({
   );
 };
 
-export default BloggCard;
+export default withErrorBoundary(BloggCard, "BloggCard");

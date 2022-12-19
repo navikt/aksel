@@ -1,4 +1,4 @@
-import { abbrName, ArtikkelCard } from "@/components";
+import { abbrName } from "@/components";
 import { Footer } from "@/layout";
 import { akselTemaDocs, getAkselTema, SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
@@ -6,6 +6,7 @@ import { getClient } from "@/sanity-client";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "classnames";
 import { Header } from "components/layout/header/Header";
+import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";

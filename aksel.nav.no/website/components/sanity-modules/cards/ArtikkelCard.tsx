@@ -1,9 +1,10 @@
+import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import NextLink from "next/link";
 import { abbrName, dateStr, logNav } from "../..";
 
-export const ArtikkelCard = ({
+const ArtikkelCard = ({
   slug,
   source,
   heading,
@@ -84,3 +85,5 @@ export const ArtikkelCard = ({
     </div>
   );
 };
+
+export default withErrorBoundary(ArtikkelCard, "ArtikkelCard");
