@@ -14,9 +14,7 @@ export default async function akselAarticles(
   let lastPublishedAt = req.query.lastPublishedAt;
 
   if (!lastPublishedAt) {
-    return res
-      .status(400)
-      .json({ message: "Missing lastId or lstPublishedAt" });
+    return res.status(400).json({ message: "Missing lastPublishedAt param" });
   }
 
   lastPublishedAt = format(new Date(String(lastPublishedAt)), "yyyy-MM-dd");
