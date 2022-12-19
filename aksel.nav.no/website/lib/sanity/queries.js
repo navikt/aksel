@@ -437,7 +437,7 @@ export const akselArticleFields = `
 
 export const akselArticleAll = (boundry = "") => {
   return `{
-    "articles": *[_type == "aksel_artikkel" && publishedAt != null] | order(publishedAt desc)${boundry} {
+    "articles": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)${boundry} {
       ${akselArticleFields}
     }
   }`;
