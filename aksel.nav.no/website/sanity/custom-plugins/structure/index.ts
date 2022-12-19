@@ -109,16 +109,17 @@ export const structure = async (
                 .id(`prinsipper_landingsside_id1`),
               S.divider(),
               ...prinsippKategorier.map(({ value, title }) =>
-                S.listItem()
-                  .title(title)
-                  .child(
-                    S.documentList()
-                      .title(title)
-                      .filter(
-                        `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`
-                      )
-                      .params({ value })
-                  )
+                S.listItem().title(title).child(
+                  S.documentList()
+                    .title(title)
+                    .filter(
+                      `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`
+                    )
+                    .params({ value })
+                  /* .menuItems([
+                        ...S.documentTypeList("aksel_prinsipp").getMenuItems(),
+                      ]) */
+                )
               ),
               S.listItem()
                 .title("Alle artikler")
@@ -200,27 +201,32 @@ export const structure = async (
                       .schemaType(`aksel_forside`)
                       .icon(Picture)
                       .id(`aksel_forside_dokument`),
-                    S.listItem()
-                      .title("Standalone-sider")
-                      .child(
-                        S.documentList()
-                          .title("Sider")
-                          .filter(`_type == 'aksel_standalone'`)
-                      ),
-                    S.listItem()
-                      .title("Forfattere")
-                      .child(
-                        S.documentList()
-                          .title("Forfattere")
-                          .filter(`_type == 'editor'`)
-                      ),
-                    S.listItem()
-                      .title("Redirects")
-                      .child(
-                        S.documentList()
-                          .title("Redirects")
-                          .filter(`_type == 'redirect'`)
-                      ),
+                    S.listItem().title("Standalone-sider").child(
+                      S.documentList()
+                        .title("Sider")
+                        .filter(`_type == 'aksel_standalone'`)
+                      /* .menuItems([
+                            ...S.documentTypeList(
+                              "aksel_standalone"
+                            ).getMenuItems(),
+                          ]) */
+                    ),
+                    S.listItem().title("Forfattere").child(
+                      S.documentList()
+                        .title("Forfattere")
+                        .filter(`_type == 'editor'`)
+                      /* .menuItems([
+                            ...S.documentTypeList("editor").getMenuItems(),
+                          ]) */
+                    ),
+                    S.listItem().title("Redirects").child(
+                      S.documentList()
+                        .title("Redirects")
+                        .filter(`_type == 'redirect'`)
+                      /* .menuItems([
+                            ...S.documentTypeList("redirect").getMenuItems(),
+                          ]) */
+                    ),
                     S.listItem()
                       .title("Komponent-eksempler Designsystemet")
                       .child(

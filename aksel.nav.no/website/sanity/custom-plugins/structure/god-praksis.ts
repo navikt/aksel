@@ -43,6 +43,7 @@ export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
             .title(`${title}`)
             .filter(`_type == 'aksel_artikkel' && $tag in tema[]->title`)
             .params({ tag: title })
+          /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
         )
     ),
     S.divider(),
@@ -53,7 +54,7 @@ export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
         S.documentList()
           .title(`Artikler uten tema`)
           .filter(`_type == 'aksel_artikkel' && !defined(tema)`)
-          .menuItemGroups([{ title: "test", id: "testid" }])
+        /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
       ),
   ];
 };

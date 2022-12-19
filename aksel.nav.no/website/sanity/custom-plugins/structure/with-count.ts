@@ -28,6 +28,7 @@ export const PanesWithCount = async (
             .schemaType(docType)
             .filter(`_type == $docType && $kat == kategori`)
             .params({ kat: value, docType })
+          /*    .menuItems([...S.documentTypeList(docType).getMenuItems()]) */
         )
     ),
     S.listItem()
@@ -39,6 +40,7 @@ export const PanesWithCount = async (
           .schemaType(docType)
           .filter(`_type == $docType && !defined(kategori)`)
           .params({ docType })
+        /* .menuItems([...S.documentTypeList(docType).getMenuItems()]) */
       ),
   ];
 };
