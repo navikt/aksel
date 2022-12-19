@@ -17,10 +17,26 @@ export default {
   groups,
   ...defaultDocPreview,
   fields: [
+    {
+      title: "Sist godkjent",
+      name: "updateInfo",
+      type: "object",
+      hidden: true,
+      fields: [
+        {
+          type: "date",
+          name: "lastVerified",
+          title: "Sist oppdatert",
+          description: "Kun synlig for utviklere",
+          readOnly: true,
+        },
+      ],
+    },
     publishedAtField,
     editorField,
     titleField,
     kategoriSlug(prefix),
+    { title: "url", name: "slug", type: "slug", hidden: true },
     {
       title: "Kategori",
       name: "kategori",
