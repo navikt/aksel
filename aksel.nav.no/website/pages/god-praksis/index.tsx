@@ -6,7 +6,7 @@ import { getClient } from "@/sanity-client";
 import { Clock } from "@navikt/ds-icons";
 import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
-import { GodPraksisCard } from "components/sanity-modules/cards/GodPraksisCard";
+import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
@@ -54,12 +54,12 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
           key="ogimage"
         />
       </Head>
-      <div className="bg-surface-subtle">
-        <Header variant="subtle" />
+      <div className="bg-surface-subtle relative overflow-hidden">
+        <Header variant="transparent" />
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="relative min-h-[80vh] overflow-hidden focus:outline-none"
+          className=" min-h-[80vh]  focus:outline-none"
         >
           <div className="centered-layout mb-40 grid max-w-screen-2xl pt-20">
             <Heading

@@ -6,7 +6,7 @@ import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import { ComponentIcon, DownloadIcon, TokenIcon } from "@sanity/icons";
 import { Header } from "components/layout/header/Header";
-import { GodPraksisCard } from "components/sanity-modules/cards/GodPraksisCard";
+import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
