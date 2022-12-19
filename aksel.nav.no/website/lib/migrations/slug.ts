@@ -24,47 +24,36 @@ const main = async () => {
   const transactionClient = noCdnClient(token).transaction();
 
   const docs = await noCdnClient(token).fetch(
-    `*[_type in ["ds_artikkel"] && defined(layout)]`
+    `*[_type in ["ds_artikkel", "komponent_artikkel"]]`
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const newData = [];
 
-  /* docs.forEach((data) => {
-    data?.slug?.current
-      ? newData.push({
-          _id: data._id,
-          kategori: "styling",
-          slug_v2: {
-            _type: "slug",
-            current: data.slug.current.replace(
-              "designsystem/side/",
-              "grunnleggende/styling/"
-            ),
-          },
-        })
-      : console.log(data.heading);
-  }); */
+  docs.forEach((data) => {
+    if (data?.slug_v2?.current) {
+      newData.push({
+        _id: data._id,
+        slug: data.slug_v2,
+      });
+      if (!data._id.includes("draft")) {
+        transactionClient.create({
+          _type: "redirect",
+          source: `/${data.slug.current}`,
+          destination: `/${data.slug_v2.current}`,
+          permanent: true,
+        });
+      }
+    } else {
+      console.log(data.heading);
+    }
+  });
 
-  /* for (const data of newData) {
+  for (const data of newData) {
     const id = data._id;
     delete data._id;
-    transactionClient.patch(id, (p) =>
-      p
-        .set({ ...data })
-        .unset(["metadata_feedback", "isMigrated", "artikkel_type"])
-    );
-  } */
-  for (const doc of docs) {
-    console.log(doc?.heading);
-    transactionClient.patch(doc._id, (p) => p.unset(["layout"]));
+    transactionClient.patch(id, (p) => p.set({ ...data }));
   }
-  /* transactionClient.create({
-    _type: "redirect",
-    source: `/tema`,
-    destination: `/god-praksis`,
-    permanent: true,
-  });*/
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: true })
