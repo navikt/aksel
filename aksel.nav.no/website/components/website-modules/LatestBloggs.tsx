@@ -61,7 +61,7 @@ export const LatestBloggposts = ({
             {bloggs[0]?.seo?.image ? (
               <Image
                 src={urlFor(bloggs[0].seo.image).auto("format").url()}
-                decoding="async"
+                decoding="sync"
                 layout="fill"
                 objectFit="cover"
                 aria-hidden
@@ -71,7 +71,7 @@ export const LatestBloggposts = ({
             ) : (
               <Image
                 src={getImage(bloggs[0]?.heading ?? "", "thumbnail")}
-                decoding="async"
+                decoding="sync"
                 layout="fill"
                 objectFit="contain"
                 aria-hidden
@@ -124,7 +124,7 @@ export const LatestBloggposts = ({
                     {blog?.seo?.image ? (
                       <Image
                         src={urlFor(blog.seo.image).auto("format").url()}
-                        decoding="async"
+                        decoding="sync"
                         layout="fill"
                         objectFit="cover"
                         aria-hidden
@@ -134,7 +134,7 @@ export const LatestBloggposts = ({
                     ) : (
                       <Image
                         src={getImage(blog?.heading ?? "", "thumbnail")}
-                        decoding="async"
+                        decoding="sync"
                         layout="fill"
                         objectFit="cover"
                         aria-hidden
@@ -195,7 +195,7 @@ export const LatestBloggposts = ({
             {bloggs[0]?.seo?.image ? (
               <Image
                 src={urlFor(bloggs[0].seo.image).auto("format").url()}
-                decoding="async"
+                decoding="sync"
                 layout="fill"
                 objectFit="cover"
                 aria-hidden
@@ -205,7 +205,7 @@ export const LatestBloggposts = ({
             ) : (
               <Image
                 src={getImage(bloggs[0]?.heading ?? "", "thumbnail")}
-                decoding="async"
+                decoding="sync"
                 layout="fill"
                 objectFit="contain"
                 aria-hidden
@@ -252,7 +252,7 @@ export const LatestBloggposts = ({
                   {blog?.seo?.image ? (
                     <Image
                       src={urlFor(blog.seo.image).auto("format").url()}
-                      decoding="async"
+                      decoding="sync"
                       layout="fill"
                       objectFit="cover"
                       aria-hidden
@@ -262,7 +262,7 @@ export const LatestBloggposts = ({
                   ) : (
                     <Image
                       src={getImage(blog?.heading ?? "", "thumbnail")}
-                      decoding="async"
+                      decoding="sync"
                       layout="fill"
                       objectFit="cover"
                       aria-hidden

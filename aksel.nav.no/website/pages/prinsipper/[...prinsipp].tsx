@@ -1,9 +1,5 @@
 import { LayoutPicker } from "@/components";
-import {
-  akselPrinsippBySlug,
-  /* isValidated, */
-  SanityT,
-} from "@/lib";
+import { akselPrinsippBySlug, SanityT } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { PreviewSuspense } from "next-sanity/preview";
 import { GetServerSideProps } from "next/types";
@@ -51,8 +47,6 @@ export default Wrapper;
 export const getServerSideProps: GetServerSideProps = async (
   context
 ): Promise<any | { notFound: true }> => {
-  /* const isValidUser = await isValidated(context); */
-
   if (context.params.prinsipp.length > 2) return { notFound: true };
 
   const { prinsipp } = await getClient().fetch(akselPrinsippBySlug, {

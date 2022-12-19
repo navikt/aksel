@@ -15,7 +15,7 @@ export const Frame = ({
     <table className="w-full">
       <thead className="sr-only">
         <tr>
-          <th></th>
+          <td />
           <th>Token navn</th>
           <th>Verdi</th>
           {hasDescription && <th>Beskrivelse</th>}

@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import { createContext, useCallback, useEffect, useState } from "react";
 
+/*
+Use: Add <AuthProvider /> as a wrapper in _app.tsx
+*/
 type AuthContextProps = {
   status:
     | "NO_FETCHED"

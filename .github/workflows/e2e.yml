@@ -47,7 +47,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: yarn workspace website e2e
+        run: yarn workspace website e2e:full
       - uses: actions/upload-artifact@v3
         if: always()
         with:

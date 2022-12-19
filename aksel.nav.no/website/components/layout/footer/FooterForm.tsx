@@ -1,7 +1,6 @@
 import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import isEmpty from "validator/lib/isEmpty";
 
 const FooterForm = () => {
   const [contactForm, setContactForm] = useState({
@@ -17,7 +16,7 @@ const FooterForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let fail = false;
-    if (isEmpty(contactForm.content, { ignore_whitespace: true })) {
+    if (!contactForm?.content || contactForm?.content.trim().length === 0) {
       setContentError({
         ...contentError,
         content: "Melding kan ikke være tom. Fyll inn meldingen.",
@@ -74,7 +73,7 @@ const FooterForm = () => {
                     hasWritten: true,
                   });
                   e.target.value &&
-                    !isEmpty(e.target.value, { ignore_whitespace: true }) &&
+                    e.target.value.trim().length !== 0 &&
                     setContentError({ ...contentError, content: "" });
                 }}
                 description="Ikke skriv inn navn eller andre personopplysninger"

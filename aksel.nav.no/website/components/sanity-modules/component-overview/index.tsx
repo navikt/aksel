@@ -32,7 +32,7 @@ const ComponentOverview = ({
   return (
     <div className="mb-8">
       <ul className="component-card-grid">
-        {sorted.map((x) => (
+        {sorted.map((x, xi) => (
           <li key={x._id}>
             <div className="bg-surface-subtle focus-within:shadow-focus ring-border-subtle hover:shadow-medium min-h-56 group relative rounded-2xl hover:ring-1">
               <div
@@ -71,11 +71,11 @@ const ComponentOverview = ({
                       fillRule="evenodd"
                       clipRule="evenodd"
                       d="M65 65h70v70H65V65Zm65 5h-5v5h5v-5Zm0 60v-5h-5v5h5Zm-20 0v-10h-5v-5h5v-10h10V85h-5v-5h-5v-5H85v5h-5v15h5v5h10v10h5v5h-5v10h5v5h10Zm-15-30V85h10v10h-5v5h-5ZM75 75v-5h-5v5h5Zm0 55v-5h-5v5h5Z"
-                      fill="url(#a)"
+                      fill={`url(#${x.heading})`}
                     />
                     <defs>
                       <linearGradient
-                        id="a"
+                        id={x.heading}
                         x1="65"
                         y1="65"
                         x2="135"

@@ -1,19 +1,22 @@
-import { Heading } from "@navikt/ds-react";
-import AkselLogo from "components/assets/AkselLogo";
+import { Heading, BodyLong } from "@navikt/ds-react";
 import React from "react";
+import { AkselCubeStatic } from "components/website-modules/cube";
 
 /* eslint-disable react/prop-types */
 const MyError = ({ statusCode }) => {
   return (
     <div
       id="vk-notFoundId"
-      className="flex h-screen w-screen items-center justify-center gap-8"
+      className="relative flex h-screen w-screen items-center justify-center gap-8 overflow-hidden"
     >
-      <AkselLogo width="10rem" height="10rem" />
+      <AkselCubeStatic className="text-deepblue-300 opacity-10" />
       <div>
         <Heading spacing level="1" size="large">
-          {statusCode} - En feil oppstod
+          {statusCode} - Det oppstod en feil!
         </Heading>
+        <BodyLong className="mb-2">
+          Det oppstod en feil ved lasting av side. Prøv å laste side på nytt.
+        </BodyLong>
       </div>
     </div>
   );

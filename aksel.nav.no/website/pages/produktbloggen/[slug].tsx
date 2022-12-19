@@ -253,11 +253,9 @@ interface StaticProps {
 export const getServerSideProps: GetServerSideProps = async (
   context
 ): Promise<StaticProps | { notFound: true }> => {
-  /* const isValidUser = await isValidated(context); */
-
   const { blogg, morePosts } = await getClient().fetch(akselBloggBySlug, {
     slug: `produktbloggen/${context.params.slug}`,
-    valid: "true" /* `${isValidUser}` */,
+    valid: "true",
   });
 
   return {

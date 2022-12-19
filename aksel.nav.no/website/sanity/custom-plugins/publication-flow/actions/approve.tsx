@@ -17,6 +17,9 @@ export const createWrappedApproveAction = () => {
     const { patch } = useDocumentOperation(props.id, props.type);
     const [dialogOpen, setDialogOpen] = useState(false);
     const lastVerified = props.published?.updateInfo?.["lastVerified"];
+    if (!props.published) {
+      return null;
+    }
 
     const verifyContent = () => {
       patch.execute(
@@ -52,7 +55,9 @@ export const createWrappedApproveAction = () => {
           <>
             <QualityCheckContent type={`${verifiedStatus}Verify`} />
             <div className="flex justify-end gap-4">
-              <Button variant="tertiary">Nei, avbryt</Button>
+              <Button variant="tertiary" onClick={() => setDialogOpen(false)}>
+                Nei, avbryt
+              </Button>
               <Button
                 onClick={() => {
                   verifyContent();

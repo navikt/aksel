@@ -2,7 +2,6 @@ import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { Next } from "@navikt/ds-icons";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
-import { FooterSlope } from "components/website-modules/Slope";
 import Head from "next/head";
 import NextLink from "next/link";
 
@@ -32,11 +31,18 @@ const AkselArtikkelTemplate = ({
   const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
 
   const aside = data?.relevante_artikler?.length > 0 && (
-    <aside className="mt-16 overflow-x-clip bg-gray-50 ">
-      <FooterSlope />
-      <div className="relative bg-gray-100 pt-12 pb-16">
+    <aside
+      className="overflow-x-clip py-8"
+      aria-labelledby="relevante-artikler-aside"
+    >
+      <div className="relativept-12 pb-16">
         <div className="dynamic-wrapper">
-          <Heading level="2" size="medium" className="text-deepblue-700 px-4">
+          <Heading
+            level="2"
+            size="medium"
+            className="text-deepblue-700 px-4"
+            id="relevante-artikler-aside"
+          >
             {data?.relevante_artikler?.length === 1
               ? `Les også`
               : `Relevante artikler`}

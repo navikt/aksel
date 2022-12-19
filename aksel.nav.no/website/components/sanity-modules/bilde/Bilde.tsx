@@ -24,8 +24,6 @@ const Bilde = ({
     return null;
   }
 
-  console.log(node);
-
   return (
     <>
       <figure

@@ -37,6 +37,7 @@ export const Alert = defineType({
         Rule.required().error("Alert må ha et heading-nivå"),
       options: {
         list: [
+          { value: "h2", title: "H2" },
           { value: "h3", title: "H3" },
           { value: "h4", title: "H4" },
         ],

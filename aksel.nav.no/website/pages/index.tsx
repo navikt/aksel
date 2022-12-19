@@ -6,7 +6,7 @@ import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import { ComponentIcon, DownloadIcon, TokenIcon } from "@sanity/icons";
 import { Header } from "components/layout/header/Header";
-import { GodPraksisCard } from "components/sanity-modules/cards/GodPraksisCard";
+import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
@@ -15,7 +15,6 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
 import { lazy } from "react";
-/* import Snowfall from "react-snowfall"; */
 
 const introcards = [
   {
@@ -150,15 +149,6 @@ const Forside = ({
             </div>
 
             <IntroCards />
-            {/* <div aria-hidden>
-              <Snowfall
-                color="rgba(255, 255, 83, 0.4)"
-                speed={[0.2, 1.0]}
-                snowflakeCount={160}
-                radius={[0.5, 2.0]}
-                style={{ height: "140%" }}
-              />
-            </div> */}
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
             <div className="centered-layout grid max-w-screen-2xl">

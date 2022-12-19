@@ -16,7 +16,7 @@ const Footer = () => {
           <ScrollTop />
           <div>
             <Heading level="2" size="small">
-              Snarveier
+              Aksel
             </Heading>
             <BodyShort as="ul" className="mt-5 grid gap-2">
               <li>

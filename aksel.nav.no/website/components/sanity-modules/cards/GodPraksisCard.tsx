@@ -1,3 +1,4 @@
+import { withErrorBoundary } from "@/error-boundary";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "classnames";
 import NextLink from "next/link";
@@ -9,7 +10,11 @@ interface AkselTemaT extends SanityT.Schema.aksel_tema {
   refCount: number;
 }
 
-export const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
+const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
+  if (!node?.pictogram || !node?.slug?.current || !node?.title) {
+    return null;
+  }
+
   return (
     <li className="ring-border-subtle bg-surface-default hover:shadow-small focus-within:shadow-focus relative grid rounded-lg p-6 ring-1 ring-inset">
       <div className="relative mb-4 h-16 w-16">
@@ -43,3 +48,5 @@ export const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
     </li>
   );
 };
+
+export default withErrorBoundary(GodPraksisCard, "GodPraksisCard");
