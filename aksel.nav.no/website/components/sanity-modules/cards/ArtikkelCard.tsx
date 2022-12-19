@@ -25,7 +25,7 @@ const ArtikkelCard = ({
   }
 >) => {
   return (
-    <div className="hover:shadow-small focus-within:shadow-focus bg-surface-default ring-border-subtle group relative rounded-lg p-5 pb-16 ring-1 ring-inset">
+    <div className="hover:shadow-small focus-within:shadow-focus bg-surface-default ring-border-subtle group relative h-fit rounded-lg p-5 pb-16 ring-1 ring-inset">
       <NextLink
         href={{
           pathname: `/${slug}`,
