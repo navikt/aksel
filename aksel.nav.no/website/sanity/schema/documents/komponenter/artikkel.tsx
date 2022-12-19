@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { komponentKategorier } from "../../../config";
 import { artikkelPreview } from "../presets/artikkel-preview";
+import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 import { editorField } from "../presets/editors";
 import { groups } from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
@@ -18,6 +19,7 @@ export const KomponentArtikkel = defineType({
   groups,
   ...artikkelPreview("Komponenter"),
   fields: [
+    oppdateringsvarsel,
     ...hiddenFields,
     titleField,
     editorField,

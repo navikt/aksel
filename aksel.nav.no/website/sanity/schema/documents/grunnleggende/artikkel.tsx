@@ -7,6 +7,7 @@ import { titleField } from "../presets/title-field";
 import { SEOFields } from "../presets/seo";
 import { kategoriSlug, sanitySlug } from "../presets/slug";
 import { grunnleggendeKategorier } from "../../../config";
+import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 
 const prefixOld = "designsystem/side/";
 const prefix = "grunnleggende/";
@@ -18,6 +19,7 @@ export const GrunnleggendeArtikkel = defineType({
   groups,
   ...artikkelPreview("Grunnleggende"),
   fields: [
+    oppdateringsvarsel,
     ...hiddenFields,
     titleField,
     editorField,

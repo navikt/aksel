@@ -5,11 +5,9 @@ import {
   innholdFieldNew,
   kategoriSlug,
   publishedAtField,
-  sanitySlug,
   titleField,
 } from "@/lib";
 
-const prefixOld = "designsystem/komponenter/";
 const prefix = "komponenter/";
 
 export default {
@@ -22,7 +20,6 @@ export default {
     publishedAtField,
     editorField,
     titleField,
-    sanitySlug(prefixOld, 3),
     kategoriSlug(prefix),
     {
       title: "Kategori",

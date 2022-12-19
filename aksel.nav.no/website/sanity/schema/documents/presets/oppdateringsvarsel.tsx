@@ -1,22 +1,18 @@
-import { defineField, defineType } from "sanity";
+import { defineField } from "sanity";
 import { UpdateInfo } from "../../custom-components";
 
-export const Oppdateringsvarsel = defineType({
-  title: "Kode",
-  name: "updateWarning",
+export const oppdateringsvarsel = defineField({
+  title: "Sist godkjent",
+  name: "updateInfo",
   type: "object",
+  components: {
+    field: UpdateInfo,
+  },
   fields: [
-    defineField({
-      name: "updateInfo",
-      type: "string",
-      title: " ",
-      components: {
-        field: UpdateInfo,
-      },
-    }),
     defineField({
       type: "date",
       name: "lastVerified",
+      title: "Sist oppdatert",
       description: "Kun synlig for utviklere",
       hidden: ({ currentUser }) => {
         return !currentUser?.roles.some((r) => r.name === "developer");

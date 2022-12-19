@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { oppdateringsvarsel } from "./presets/oppdateringsvarsel";
 import { groups } from "./presets";
 import { artikkelPreview } from "./presets/artikkel-preview";
 import { SEOFields } from "./presets/seo";
@@ -11,11 +12,7 @@ export const TestDoc = defineType({
   groups,
   ...artikkelPreview("TestDoc"),
   fields: [
-    defineField({
-      name: "updateInfo",
-      type: "updateWarning",
-      title: " ",
-    }),
+    oppdateringsvarsel,
     defineField({
       name: "testInput",
       title: "Test input",

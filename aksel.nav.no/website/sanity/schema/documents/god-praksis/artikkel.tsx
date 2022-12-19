@@ -9,6 +9,7 @@ import { SEOFields } from "../presets/seo";
 import { skrivehjelp } from "../presets/skrivehjelp";
 import { sanitySlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
+import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 
 const prefix = "god-praksis/artikler/";
 
@@ -19,6 +20,7 @@ export const GodPraksisArtikkel = defineType({
   groups,
   ...artikkelPreview("God praksis"),
   fields: [
+    oppdateringsvarsel,
     ...hiddenFields,
     titleField,
     editorField,

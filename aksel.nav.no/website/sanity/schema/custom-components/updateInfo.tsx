@@ -1,8 +1,10 @@
-import { Alert } from "@navikt/ds-react";
+import { Card, Text } from "@sanity/ui";
 import { differenceInMonths } from "date-fns";
-import { StringFieldProps, useFormValue } from "sanity";
+import { FieldProps, useFormValue } from "sanity";
 
-export function UpdateInfo(props: StringFieldProps) {
+export function UpdateInfo(props: FieldProps) {
+  const { ...restProps } = props;
+
   const verified: any = useFormValue(["updateInfo", "lastVerified"]);
   if (!verified) {
     return null;
@@ -14,8 +16,13 @@ export function UpdateInfo(props: StringFieldProps) {
   }
 
   return (
-    <Alert variant="warning">
-      Artikkelen er over 6 mnd gammel og trenger ny godkjenning.
-    </Alert>
+    <Card>
+      <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="caution">
+        <Text align="center" size={[2, 2, 3]}>
+          Artikkelen er over 6 mnd gammel og trenger ny godkjenning!
+        </Text>
+      </Card>
+      <div className="mt-4">{props.renderDefault(restProps)}</div>
+    </Card>
   );
 }

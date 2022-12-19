@@ -128,10 +128,8 @@ export const validateKategoriSlug = (Rule, prefix) =>
 
 export const kategoriSlug = (prefix: string) => ({
   title: "url (v2)",
-  name: "slug_v2",
+  name: "slug",
   type: "slug",
-  hidden: ({ currentUser }) =>
-    !currentUser.roles.find((x) => x.name === "developer"),
   validation: (Rule) => validateKategoriSlug(Rule, prefix),
   group: "settings",
   options: {
