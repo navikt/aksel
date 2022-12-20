@@ -26,6 +26,12 @@ const AkselArtikkelTemplate = ({
     return null;
   }
 
+  const date = data?.updateInfo?.lastVerified
+    ? data?.updateInfo?.lastVerified
+    : data?.publishedAt
+    ? data.publishedAt
+    : data._updatedAt;
+
   const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
 
   const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
@@ -118,7 +124,7 @@ const AkselArtikkelTemplate = ({
               as="span"
               className="text-text-subtle whitespace-nowrap"
             >
-              {dateStr(data?._updatedAt)}
+              {dateStr(date)}
             </BodyShort>
             {authors?.length > 0 && (
               <BodyShort size="small" as="div" className="flex flex-wrap gap-1">

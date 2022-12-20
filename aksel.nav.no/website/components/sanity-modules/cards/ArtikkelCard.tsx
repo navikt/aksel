@@ -11,9 +11,11 @@ const ArtikkelCard = ({
   ingress,
   contributor,
   _updatedAt,
+  publishedAt,
   variant = "god-praksis",
   tema,
   level = "2",
+  ...rest
 }: Partial<
   (SanityT.Schema.aksel_artikkel | SanityT.Schema.aksel_blogg) & {
     slug: string;
@@ -24,6 +26,12 @@ const ArtikkelCard = ({
     level?: "2" | "3" | "4";
   }
 >) => {
+  const date = (rest as any)?.updateInfo?.lastVerified
+    ? (rest as any)?.updateInfo?.lastVerified
+    : publishedAt
+    ? publishedAt
+    : _updatedAt;
+
   return (
     <div className="hover:shadow-small focus-within:ring-border-focus bg-surface-default ring-border-subtle group relative rounded-lg p-5 pb-16 ring-1 focus-within:ring-[3px]">
       <NextLink
@@ -66,7 +74,7 @@ const ArtikkelCard = ({
             </Detail>
           )}
           <Detail as="span" className="text-text-subtle">
-            {dateStr(_updatedAt)}
+            {dateStr(date)}
           </Detail>
         </span>
       ) : (

@@ -25,6 +25,12 @@ const Page = ({
     return <NotFotfund />;
   }
 
+  const date = page?.updateInfo?.lastVerified
+    ? page?.updateInfo?.lastVerified
+    : page?.publishedAt
+    ? page.publishedAt
+    : page._updatedAt;
+
   return (
     <>
       <Head>
@@ -57,7 +63,7 @@ const Page = ({
         intro={
           <Detail as="div" className="mt-2 flex items-center gap-3">
             <StatusTag showStable status={page?.status?.tag} />
-            {`OPPDATERT ${dateStr(page?._updatedAt)}`}
+            {`OPPDATERT ${dateStr(date)}`}
           </Detail>
         }
         pageProps={page}
