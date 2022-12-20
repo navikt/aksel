@@ -61,8 +61,8 @@ export const validateKategoriSlug = (Rule, prefix) =>
   });
 
 export const kategoriSlug = (prefix: string) => ({
-  title: "url (v2)",
-  name: "slug_v2",
+  title: "url",
+  name: "slug",
   type: "slug",
   validation: (Rule) => validateKategoriSlug(Rule, prefix),
   group: "settings",

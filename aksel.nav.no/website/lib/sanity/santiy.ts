@@ -67,7 +67,7 @@ export const getDocumentsTmp = async (
 ): Promise<string[]> => {
   const client = token ? noCdnClient(token) : getClient();
   const documents: any[] | null = await client.fetch(
-    `*[_type in $types]{ _type, _id, 'slug': slug_v2.current }`,
+    `*[_type in $types]{ _type, _id, 'slug': slug.current }`,
     {
       types: [source],
     }

@@ -6,10 +6,9 @@ import { editorField } from "../presets/editors";
 import { groups } from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { SEOFields } from "../presets/seo";
-import { kategoriSlug, sanitySlug } from "../presets/slug";
+import { kategoriSlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
 
-const prefixOld = "designsystem/komponenter/";
 const prefix = "komponenter/";
 
 export const KomponentArtikkel = defineType({
@@ -36,7 +35,6 @@ export const KomponentArtikkel = defineType({
         layout: "radio",
       },
     }),
-    sanitySlug(prefixOld, 3),
     kategoriSlug(prefix),
 
     defineField({

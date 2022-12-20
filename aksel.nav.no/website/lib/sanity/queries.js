@@ -286,16 +286,16 @@ export const dsDocuments = `*[_type in ["komponent_artikkel", "ds_artikkel"]]{ .
 
 const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   heading,
-  "slug": slug_v2.current,
+  "slug": slug.current,
   kategori,
   "tag": status.tag,
 }`;
 
 export const komponentQuery = `{
-  "page": *[_type == "komponent_artikkel" && slug_v2.current == $slug] | order(_updatedAt desc)[0]
+  "page": *[_type == "komponent_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
     {
       ...,
-      "slug": slug_v2.current,
+      "slug": slug.current,
       linked_package {
         "title": @->title,
         "github_link": @->github_link,
@@ -313,10 +313,10 @@ export const komponentQuery = `{
         ${deRefs}
       },
   },
-  "refs": *[_type == "komponent_artikkel" && count(*[references(^._id)][slug_v2.current == $slug]) > 0][0...3]{
+  "refs": *[_type == "komponent_artikkel" && count(*[references(^._id)][slug.current == $slug]) > 0][0...3]{
     _id,
     heading,
-    "slug": slug_v2,
+    "slug": slug,
     status
   },
   "seo": *[_type == "komponenter_landingsside"][0].seo.image,
@@ -324,10 +324,10 @@ export const komponentQuery = `{
 }`;
 
 export const grunnleggendeQuery = `{
-  "page": *[_type == "ds_artikkel" && slug_v2.current == $slug] | order(_updatedAt desc)[0]
+  "page": *[_type == "ds_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
     {
       ...,
-      "slug": slug_v2.current,
+      "slug": slug.current,
       content[]{
         ...,
         ${deRefs}
@@ -410,11 +410,11 @@ const landingsSideQuery = (t) => {
 
 export const komponentLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
   "komponenter"
-)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug_v2,status,kategori}}`;
+)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
 
 export const grunnleggendeLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
   "grunnleggende"
-)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug_v2,status,kategori}}`;
+)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
 
 export const akselStandaloneBySlug = `{
   "page": *[slug.current == $slug && _type == "aksel_standalone"] | order(_updatedAt desc)[0]

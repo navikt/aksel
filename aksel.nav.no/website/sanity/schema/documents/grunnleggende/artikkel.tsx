@@ -5,11 +5,10 @@ import { hiddenFields } from "../presets/hidden-fields";
 import { editorField } from "../presets/editors";
 import { titleField } from "../presets/title-field";
 import { SEOFields } from "../presets/seo";
-import { kategoriSlug, sanitySlug } from "../presets/slug";
+import { kategoriSlug } from "../presets/slug";
 import { grunnleggendeKategorier } from "../../../config";
 import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 
-const prefixOld = "designsystem/side/";
 const prefix = "grunnleggende/";
 
 export const GrunnleggendeArtikkel = defineType({
@@ -36,7 +35,6 @@ export const GrunnleggendeArtikkel = defineType({
         layout: "radio",
       },
     }),
-    sanitySlug(prefixOld, 3),
     kategoriSlug(prefix),
     defineField({
       title: "Metadata",
