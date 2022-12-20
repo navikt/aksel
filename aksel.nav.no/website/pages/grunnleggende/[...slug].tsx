@@ -15,10 +15,12 @@ import NotFotfund from "../404";
 const Page = ({
   page,
   sidebar,
+  seo,
 }: {
   slug?: string[];
   page: any;
   sidebar: any;
+  seo: any;
   preview: boolean;
 }): JSX.Element => {
   if (!page) {
@@ -51,6 +53,8 @@ const Page = ({
                   .height(630)
                   .fit("crop")
                   .url()
+              : seo
+              ? urlFor(seo).width(1200).height(630).fit("crop").url()
               : ""
           }
           key="ogimage"
@@ -124,7 +128,7 @@ export const getStaticProps = async ({
   params: { slug: string[] };
   preview?: boolean;
 }) => {
-  const { page, sidebar } = await getClient().fetch(grunnleggendeQuery, {
+  const { page, sidebar, seo } = await getClient().fetch(grunnleggendeQuery, {
     slug: `grunnleggende/${slug.slice(0, 2).join("/")}`,
     type: "ds_artikkel",
   });
@@ -133,6 +137,7 @@ export const getStaticProps = async ({
     props: {
       page: page,
       slug,
+      seo,
       sidebar,
       preview,
     },

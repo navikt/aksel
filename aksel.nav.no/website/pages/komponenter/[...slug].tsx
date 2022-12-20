@@ -17,11 +17,13 @@ const Page = ({
   page,
   sidebar,
   refs,
+  seo,
 }: {
   slug?: string[];
   page: any;
   refs: any[];
   sidebar: any;
+  seo: any;
   preview: boolean;
 }): JSX.Element => {
   if (!page) {
@@ -54,6 +56,8 @@ const Page = ({
                   .height(630)
                   .fit("crop")
                   .url()
+              : seo
+              ? urlFor(seo).width(1200).height(630).fit("crop").url()
               : ""
           }
           key="ogimage"
@@ -143,7 +147,7 @@ export const getStaticProps = async ({
   params: { slug: string[] };
   preview?: boolean;
 }) => {
-  const { page, sidebar, refs } = await getClient().fetch(komponentQuery, {
+  const { page, sidebar, refs, seo } = await getClient().fetch(komponentQuery, {
     slug: `komponenter/${slug.slice(0, 2).join("/")}`,
     type: "komponent_artikkel",
   });
@@ -153,6 +157,7 @@ export const getStaticProps = async ({
       page: page,
       refs,
       slug,
+      seo,
       sidebar,
       preview,
     },

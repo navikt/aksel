@@ -319,6 +319,7 @@ export const komponentQuery = `{
     "slug": slug_v2,
     status
   },
+  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
   ${sidebarQuery}
 }`;
 
@@ -332,6 +333,7 @@ export const grunnleggendeQuery = `{
         ${deRefs}
       },
   },
+  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
   ${sidebarQuery}
 }`;
 
