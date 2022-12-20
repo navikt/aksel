@@ -82,9 +82,21 @@ export const usePageView = (router: Router, pageProps: any) => {
         sh = "scrollHeight";
       return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
     }
+    if (
+      document === undefined ||
+      window?.location?.pathname?.startsWith?.("/eksempler")
+    ) {
+      return;
+    }
+
+    const scrollD = Math.round(getScrollPercent() / 10) * 10;
+    if (isNaN(scrollD)) {
+      return;
+    }
+
     logAmplitudeEvent(AmplitudeEvents.scroll, {
       side: window.location.pathname,
-      prosent: `${Math.round(getScrollPercent() / 10) * 10}%`,
+      prosent: scrollD,
     });
   }, []);
 

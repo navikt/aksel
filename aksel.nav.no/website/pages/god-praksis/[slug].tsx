@@ -76,7 +76,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div className="relative overflow-x-clip pt-20 text-center">
+          <div className="relative overflow-hidden pt-20 text-center">
             <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
             <div className="dynamic-wrapper px-4 pb-6 text-center">
               <Image
