@@ -1,5 +1,11 @@
 # @navikt/ds-icons
 
+## 2.0.11
+
+### Patch Changes
+
+- Oppdatert svg-path i ikoner
+
 ## 2.0.10
 
 ## 2.0.9
