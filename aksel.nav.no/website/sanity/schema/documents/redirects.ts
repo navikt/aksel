@@ -1,14 +1,5 @@
 import { defineField, defineType } from "sanity";
 
-const limits = [
-  "/blogg/",
-  "/artikkel/",
-  "/god-praksis/artikler/",
-  "/prinsipper/",
-  "/designsystem/side/",
-  "/designsystem/komponenter/",
-];
-
 export const Redirect = defineType({
   name: "redirect",
   title: "Redirects",
@@ -22,15 +13,6 @@ export const Redirect = defineType({
         Rule.required().custom((_, { parent }: { parent?: any }) => {
           if (!parent?.source?.startsWith?.("/")) {
             return "Kan bare redirecte fra relativ-url, eks /min/gamle/sideurl";
-          }
-          const valid = limits.find(
-            (x) => parent?.source?.startsWith?.(x) && parent.source > x
-          );
-
-          if (!valid) {
-            return `Kan bare redirecte fra sider som starter med en av disse url-ene ${limits.join(
-              ", "
-            )}`;
           }
           return true;
         }),
