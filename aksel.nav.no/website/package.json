@@ -51,6 +51,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-modal": "3.15.1",
+    "react-snowfall": "1.2.1",
     "sanity": "3.0.6",
     "sanity-plugin-asset-source-unsplash": "^1.0.0",
     "sanity-plugin-iframe-pane": "^2.1.1",

@@ -88,9 +88,10 @@ const Footer = () => {
             </svg>
             Arbeids- og velferdsetaten
           </div>
-          <BodyShort className="mb-1 self-end xl:mb-0">
+          <span className="mb-1 self-end xl:mb-0" />
+          {/* <BodyShort className="mb-1 self-end xl:mb-0">
             Redaktør: Eidar Grande Vollan
-          </BodyShort>
+          </BodyShort> */}
           <div className="hidden self-end xl:block">
             <p>&copy; 2022 NAV</p>
             <NextLink href="/side/personvernerklaering" passHref>

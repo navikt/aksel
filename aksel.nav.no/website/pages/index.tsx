@@ -14,6 +14,7 @@ import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
+import Snowfall from "react-snowfall";
 import { lazy } from "react";
 
 const introcards = [
@@ -65,7 +66,7 @@ const GetStarted = ({
   links: { title: string; slug: string }[];
 }) => {
   return (
-    <div className="bg-deepblue-700 text-text-on-action mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
+    <div className="bg-deepblue-700 text-text-on-action relative mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
       <Heading size="xlarge" level="2" className="text-center">
         Kom i gang
       </Heading>
@@ -83,6 +84,13 @@ const GetStarted = ({
           </li>
         ))}
       </ul>
+      <div aria-hidden>
+        <Snowfall
+          color="rgba(230, 241, 248, 0.3)"
+          speed={[0.2, 1.0]}
+          snowflakeCount={70}
+        />
+      </div>
     </div>
   );
 };
