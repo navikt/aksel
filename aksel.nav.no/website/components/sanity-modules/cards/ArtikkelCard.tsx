@@ -25,7 +25,7 @@ const ArtikkelCard = ({
   }
 >) => {
   return (
-    <div className="hover:shadow-small focus-within:shadow-focus bg-surface-default ring-border-subtle group relative rounded-lg p-5 pb-16 ring-1 ring-inset">
+    <div className="hover:shadow-small focus-within:ring-border-focus bg-surface-default ring-border-subtle group relative rounded-lg p-5 pb-16 ring-1 focus-within:ring-[3px]">
       <NextLink
         href={{
           pathname: `/${slug}`,
@@ -36,7 +36,7 @@ const ArtikkelCard = ({
         passHref
       >
         <a
-          className="focus-visible:after:shadow-focus after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
+          className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
           onClick={(e) =>
             logNav(
               "artikkel-kort",
