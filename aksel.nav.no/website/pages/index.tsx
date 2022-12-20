@@ -40,7 +40,7 @@ const introcards = [
 
 const IntroCards = () => {
   return (
-    <ul className="centered-layout xs:mb-36 mb-40 grid w-full max-w-screen-md grid-cols-2 gap-6">
+    <ul className="centered-layout xs:mb-36 mb-40 grid w-full max-w-screen-md grid-cols-2 gap-4 md:gap-6">
       {introcards.map(({ icon: Icon, title, desc, href }) => (
         <li key={title} className="grid">
           <Link href={href} passHref>
