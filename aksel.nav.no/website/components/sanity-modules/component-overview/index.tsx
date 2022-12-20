@@ -71,11 +71,11 @@ const ComponentOverview = ({
                       fillRule="evenodd"
                       clipRule="evenodd"
                       d="M65 65h70v70H65V65Zm65 5h-5v5h5v-5Zm0 60v-5h-5v5h5Zm-20 0v-10h-5v-5h5v-10h10V85h-5v-5h-5v-5H85v5h-5v15h5v5h10v10h5v5h-5v10h5v5h10Zm-15-30V85h10v10h-5v5h-5ZM75 75v-5h-5v5h5Zm0 55v-5h-5v5h5Z"
-                      fill={`url(#${x.heading})`}
+                      fill={`url(#${x._id})`}
                     />
                     <defs>
                       <linearGradient
-                        id={x.heading}
+                        id={x._id}
                         x1="65"
                         y1="65"
                         x2="135"
