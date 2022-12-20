@@ -54,12 +54,16 @@ const Page = ({
             >
               {kat.title}
             </Heading>
-            {page?.[`ingress_${kat.value}`] && (
-              <Ingress className="mb-2">{page[`ingress_${kat.value}`]}</Ingress>
-            )}
-            {page?.[`intro_${kat.value}`] && (
-              <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
-            )}
+            <div>
+              {page?.[`ingress_${kat.value}`] && (
+                <Ingress className="mb-4 only:mb-7">
+                  {page[`ingress_${kat.value}`]}
+                </Ingress>
+              )}
+              {page?.[`intro_${kat.value}`] && (
+                <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
+              )}
+            </div>
             <ComponentOverview
               node={links.filter((x) => x.kategori === kat.value)}
             />
