@@ -1,4 +1,4 @@
-import { grunnleggendeLandingQuery, SidebarT } from "@/lib";
+import { grunnleggendeLandingQuery, SidebarT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading, Ingress } from "@navikt/ds-react";
