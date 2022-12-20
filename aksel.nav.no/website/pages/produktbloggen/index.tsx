@@ -1,11 +1,15 @@
-import { BloggCard } from "@/components";
-import { AkselHeader, Footer } from "@/layout";
-import { SanityT, akselBloggPosts } from "@/lib";
+import { Footer } from "@/layout";
+import { akselBloggPosts, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { Heading } from "@navikt/ds-react";
+import { Header } from "components/layout/header/Header";
+import BloggCard from "components/sanity-modules/cards/BloggCard";
+import { BloggAd } from "components/website-modules/BloggAd";
+import { AkselCubeStatic } from "components/website-modules/cube";
+import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import React, { lazy } from "react";
+import { lazy } from "react";
 import NotFotfund from "../404";
 
 const Page = (props: PageProps): JSX.Element => {
@@ -13,42 +17,71 @@ const Page = (props: PageProps): JSX.Element => {
     return <NotFotfund />;
   }
 
+  const remainingPosts = props?.bloggposts?.slice(4, props?.bloggposts.length);
+
   return (
     <>
       <Head>
         <title>Produktbloggen - Aksel</title>
         <meta property="og:title" content="Produktbloggen - Aksel" />
+        <meta
+          name="description"
+          content={props?.page?.seo?.meta ?? ""}
+          key="desc"
+        />
+        <meta
+          property="og:description"
+          content={props?.page?.seo?.meta ?? ""}
+          key="ogdesc"
+        />
+        <meta
+          property="og:image"
+          content={
+            props?.page?.seo?.image
+              ? urlFor(props?.page?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .quality(100)
+                  .url()
+              : ""
+          }
+          key="ogimage"
+        />
       </Head>
-      <div className="bg-gray-50">
-        <AkselHeader variant="inngang" />
+      <div className="bg-[#FEFCE9]">
+        <Header variant="blogg" />
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="min-h-[80vh] bg-gray-100 focus:outline-none"
+          className="relative min-h-[80vh] overflow-hidden focus:outline-none"
         >
-          <div className="relative bg-white px-4 pt-8 pb-8 md:pt-12">
-            <div className="dynamic-wrapper-2xl w-fit">
-              <Heading
-                level="1"
-                size="xlarge"
-                spacing
-                className="algolia-index-lvl1"
-              >
-                Produktbloggen
-              </Heading>
-            </div>
-          </div>
-          <div className="relative px-4 pt-8 pb-24">
-            <div className="dynamic-wrapper-2xl w-fit">
-              <div className="mt-4 grid gap-2 divide-y divide-gray-300">
-                {props.bloggposts.map((blog) => (
-                  <BloggCard key={blog._id} blog={blog} />
-                ))}
+          <AkselCubeStatic className="text-[#FFE78A] opacity-10" />
+          <div className="centered-layout mb-40 grid max-w-screen-2xl">
+            <LatestBloggposts
+              bloggs={props?.bloggposts}
+              title="Blogg"
+              intro={props?.page?.intro}
+            />
+            {/* Skriv for bloggen */}
+
+            <BloggAd />
+            {/* Flere blogger */}
+            {remainingPosts && (
+              <div>
+                <Heading level="2" size="xlarge" className="text-deepblue-800">
+                  Flere blogginnlegg
+                </Heading>
+                <ul className="mt-12 grid gap-x-3 gap-y-6 sm:grid-cols-2 sm:gap-y-10 md:gap-x-6 lg:grid-cols-3">
+                  {remainingPosts.map((blog) => (
+                    <BloggCard key={blog._id} blog={blog} />
+                  ))}
+                </ul>
               </div>
-            </div>
+            )}
           </div>
         </main>
-        <Footer variant="aksel" />
+        <Footer />
       </div>
     </>
   );
@@ -79,6 +112,7 @@ export type AkselBloggPage = Partial<
 
 interface PageProps {
   bloggposts: AkselBloggPage[];
+  page: any;
   preview: boolean;
 }
 
@@ -93,10 +127,11 @@ export const getStaticProps = async ({
 }: {
   preview?: boolean;
 }): Promise<StaticProps | { notFound: true }> => {
-  const { bloggposts } = await getClient().fetch(akselBloggPosts);
+  const { bloggposts, page } = await getClient().fetch(akselBloggPosts);
 
   return {
     props: {
+      page,
       bloggposts,
       preview,
     },

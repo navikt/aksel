@@ -34,6 +34,10 @@ p.override-text-no-max {
   @apply grid gap-3 sm:grid-cols-2 md:gap-6 lg:grid-cols-3;
 }
 
+.card-grid-2-1 {
+  @apply grid gap-3 md:grid-cols-2 md:gap-6;
+}
+
 .aksel-artikkel .aksel-list-ul li::before {
   content: url("/images/list-dot.svg");
   position: absolute;
@@ -101,4 +105,8 @@ p.override-text-no-max {
     );
   background-position: 0 0, 10px 10px;
   background-size: 20px 20px;
+}
+
+.full-bleed {
+  @apply relative left-1/2 right-1/2 -mx-[50vw] w-screen md:left-auto md:right-auto md:mx-auto md:w-full md:max-w-[85%];
 }

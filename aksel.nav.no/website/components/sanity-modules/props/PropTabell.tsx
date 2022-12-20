@@ -18,7 +18,7 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
 
   return (
     <Detail
-      as="span"
+      as="div"
       className="block overflow-x-auto border border-t-0 border-gray-300 p-2 font-mono first-of-type:border-t last-of-type:rounded-b"
     >
       <dt>

@@ -1,12 +1,11 @@
-import { List } from "@navikt/ds-icons";
-import React from "react";
+import { UlistIcon } from "@sanity/icons";
 import { defineType, defineField } from "sanity";
 
 export const PropsSeksjon = defineType({
   title: "Props",
   name: "props_seksjon",
   type: "object",
-  icon: List,
+  icon: UlistIcon,
   fields: [
     defineField({
       title: "Tittel (h2)",
@@ -52,7 +51,7 @@ export const PropsSeksjon = defineType({
     prepare() {
       return {
         title: "Props",
-        media: () => <List />,
+        media: UlistIcon,
       };
     },
   },

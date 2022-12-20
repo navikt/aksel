@@ -130,6 +130,7 @@ export function TableOfContents({
 
   return (
     <aside
+      aria-labelledby="toc-heading"
       className={cl(
         "algolia-ignore-index sticky top-20 z-[1] order-1 my-0 mb-16 hidden w-72 flex-col items-start pl-4",
         {

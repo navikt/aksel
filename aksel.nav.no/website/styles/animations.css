@@ -1,0 +1,34 @@
+.header-animated-bg {
+  animation: animated-bg 30s ease infinite;
+  z-index: 0;
+}
+
+@keyframes animated-bg {
+  0% {
+    background-color: #dccaf3;
+  }
+
+  10% {
+    background-color: #dccaf3;
+  }
+
+  33% {
+    background-color: #dccaf3;
+  }
+
+  45% {
+    background-color: #b2f0e4;
+  }
+
+  60% {
+    background-color: #b2f0e4;
+  }
+
+  90% {
+    background-color: #dccaf3;
+  }
+
+  100% {
+    background-color: #dccaf3;
+  }
+}

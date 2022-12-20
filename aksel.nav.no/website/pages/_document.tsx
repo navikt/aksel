@@ -19,7 +19,7 @@ export default function Document() {
           crossOrigin="true"
         />
       </Head>
-      <body data-theme="light" className="antialiased">
+      <body data-theme="light" className="aksel antialiased">
         <Main />
         <NextScript />
       </body>

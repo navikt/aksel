@@ -1,7 +1,7 @@
 import { AmplitudeEvents, logAmplitudeEvent } from "@/components";
-import { Heading } from "@navikt/ds-react";
-import AkselLogo from "components/assets/AkselLogo";
-import React, { useEffect } from "react";
+import { BodyLong, Heading } from "@navikt/ds-react";
+import { AkselCubeStatic } from "components/website-modules/cube";
+import { useEffect } from "react";
 
 function Page() {
   useEffect(() => {
@@ -13,13 +13,16 @@ function Page() {
   return (
     <div
       id="vk-notFoundId"
-      className="flex h-screen w-screen items-center justify-center gap-8"
+      className="relative flex h-screen w-screen items-center justify-center gap-8 overflow-hidden"
     >
-      <AkselLogo width="10rem" height="10rem" />
+      <AkselCubeStatic className="text-deepblue-300 opacity-10" />
       <div>
         <Heading spacing level="1" size="large">
-          Det oppstod en feil ved lasting av side. Prøv å laste side på nytt.
+          500 - Internal Server Error
         </Heading>
+        <BodyLong className="mb-2">
+          Det oppstod en feil ved lasting av side. Prøv å laste side på nytt.
+        </BodyLong>
       </div>
     </div>
   );

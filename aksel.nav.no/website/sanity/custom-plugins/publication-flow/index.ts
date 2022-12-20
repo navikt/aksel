@@ -11,6 +11,8 @@ import {
   createWrappedFocusAction,
   createWrappedRestoreAction,
   createWrappedUnpublishAction,
+  createWrappedUpdateAction,
+  createWrappedDefaultPublish,
 } from "./actions";
 import { createBadgeComponent, CreateStatusBadge } from "./badges";
 
@@ -43,26 +45,38 @@ const getCustomActions = (prev: DocumentActionComponent[]) => {
     }
     return action;
   });
-  const customActions = [createWrappedApproveAction()];
-  return [...defaultActions, ...customActions];
+
+  const customActions = [
+    defaultActions[0],
+    createWrappedApproveAction(),
+    createWrappedUpdateAction(),
+  ];
+  return [...customActions, ...defaultActions.slice(1)];
+};
+
+const withCustomPublishAction = (prev: DocumentActionComponent[]) => {
+  return [createWrappedDefaultPublish(prev[0]), ...prev.slice(1)];
 };
 
 interface PublicationFlowOptions {
-  includedSchemas: string[];
+  hasQualityControl: string[];
+  hasPublishedAt: string[];
 }
 
 export const publicationFlow = definePlugin<PublicationFlowOptions>(
-  ({ includedSchemas }) => ({
+  ({ hasQualityControl, hasPublishedAt }) => ({
     name: "publication-flow",
     document: {
       actions: (prev, { schemaType }) => {
-        if (includedSchemas.some((e) => e === schemaType)) {
+        if (hasQualityControl.some((e) => e === schemaType)) {
           return getCustomActions(prev);
+        } else if (hasPublishedAt.some((e) => e === schemaType)) {
+          return withCustomPublishAction(prev);
         }
         return prev;
       },
       badges: (prev, { documentId, schemaType }) => {
-        if (includedSchemas.some((e) => e === schemaType)) {
+        if (hasQualityControl.some((e) => e === schemaType)) {
           return generateBadges(prev, documentId);
         }
         return prev;

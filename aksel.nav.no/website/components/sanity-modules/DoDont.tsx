@@ -43,7 +43,7 @@ const Element = ({
   return (
     <figure
       className={cl(
-        "flex min-w-full flex-1 flex-col rounded-t sm:min-w-[384px]",
+        "flex min-w-full flex-1 flex-col rounded-t sm:min-w-[440px]",
         {
           "basis-full": block?.fullwidth,
           "max-w-sm": !block?.fullwidth,
@@ -87,7 +87,7 @@ const DoDont = ({ node }: { node: SanityT.Schema.do_dont }) => {
   return (
     <div className="mb-8 last:mb-0">
       {node?.blokker?.length > 0 && (
-        <div className="last flex flex-wrap justify-between gap-8">
+        <div className="last flex flex-wrap justify-start gap-8">
           {node.blokker.map((x) => (
             <Element key={x._key} block={x} />
           ))}

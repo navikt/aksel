@@ -1,10 +1,12 @@
 [
   "/",
-  "/designsystem",
+  "/grunnleggende",
+  "/komponenter",
   "/god-praksis",
   "/produktbloggen",
+  "/komponenter/core/alert",
   "/god-praksis/innholdsarbeid",
   "/god-praksis/brukerinnsikt",
   "/god-praksis/universell-utforming",
-  "/god-praksis/artikler/innholdsstrategi-for-nav-no?tema=innholdsarbeid"
+  "/god-praksis/artikler/innholdsstrategi-for-nav-no"
 ]

@@ -114,3 +114,41 @@ export const groups = [
     title: "SEO",
   },
 ];
+
+export const validateKategoriSlug = (Rule, prefix) =>
+  Rule.required().custom((slug, { document }) => {
+    if (!slug.current.startsWith(`${prefix}${document?.kategori}/`)) {
+      return `Slug må starte med prefiks: ${prefix}${document?.kategori}`;
+    }
+    if ((slug.current.match(/\//g) || []).length > 3 - 1) {
+      return `Siden kan bare være på ${3} nivå`;
+    }
+    return true;
+  });
+
+export const kategoriSlug = (prefix: string) => ({
+  title: "url (v2)",
+  name: "slug_v2",
+  type: "slug",
+  validation: (Rule) => validateKategoriSlug(Rule, prefix),
+  group: "settings",
+  options: {
+    source: (s) => `${s?.kategori}/${s?.heading}`,
+    slugify: (input) => {
+      return (
+        `${prefix}${input}`
+          .toLowerCase()
+          .trim()
+          .slice(0, 200)
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/-+/gm, "-")
+          .replace(/æ/g, "a")
+          .replace(/å/g, "a")
+          .replace(/ø/g, "o")
+          // eslint-disable-next-line no-useless-escape
+          .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "")
+      );
+    },
+  },
+});

@@ -1,4 +1,5 @@
 import { codeInput } from "@sanity/code-input";
+import { colorInput } from "@sanity/color-input";
 import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
 import { createAuthStore, defineConfig } from "sanity";
@@ -11,16 +12,30 @@ import {
   structure,
 } from "./custom-plugins";
 import { form } from "./form";
+import { getTemplates } from "./util";
 
-import schemas from "./schema";
+import { DatabaseIcon, RemoveCircleIcon } from "@sanity/icons";
+import { allArticleDocuments } from "./config";
+import { schema } from "./schema";
 
 const projectId = "hnbe3yhs";
 
 const sharedConfig = {
   projectId,
   apiVersion: "2021-10-21",
-  schema: schemas,
+  schema: schema,
   ...form,
+  document: {
+    newDocumentOptions: (prev, { currentUser }) => {
+      const adminOrDev = currentUser.roles.find((x) =>
+        ["developer", "administrator", "editor"].includes(x.name)
+      );
+      if (adminOrDev) {
+        return [...getTemplates(currentUser.roles), ...prev];
+      }
+      return getTemplates(currentUser.roles);
+    },
+  },
   plugins: [
     deskTool({
       title: "Desk",
@@ -36,15 +51,54 @@ const sharedConfig = {
     visionTool(),
     unsplashImageAsset(),
     publicationFlow({
-      includedSchemas: ["testDoc"],
+      hasQualityControl: [
+        "komponent_artikkel",
+        "ds_artikkel",
+        "aksel_artikkel",
+      ],
+      hasPublishedAt: allArticleDocuments,
     }),
+    colorInput(),
   ],
 };
 
 export const workspaceConfig = defineConfig([
   {
+    name: "default",
+    title: "Prod",
+    icon: DatabaseIcon,
+    dataset: "production",
+    basePath: "/admin/prod",
+    ...sharedConfig,
+    auth: createAuthStore({
+      redirectOnSingle: false,
+      mode: "replace",
+      projectId,
+      dataset: "production",
+      providers: [
+        {
+          name: "saml",
+          title: "NAV SSO",
+          url: "https://api.sanity.io/v2021-10-01/auth/saml/login/f3270b37",
+          logo: "/images/navlogo.svg",
+        },
+        {
+          name: "github",
+          title: "GitHub",
+          url: "https://api.sanity.io/v1/auth/login/github",
+        },
+        {
+          name: "google",
+          title: "Google",
+          url: "https://api.sanity.io/v1/auth/login/google",
+        },
+      ],
+    }),
+  },
+  {
     name: "dev",
-    title: "Dev",
+    title: "Dev (testing only)",
+    icon: RemoveCircleIcon,
     dataset: "development",
     basePath: "/admin/dev",
     ...sharedConfig,
@@ -73,37 +127,6 @@ export const workspaceConfig = defineConfig([
       ],
     }),
   },
-  /* {
-    name: "default",
-    title: "Live",
-    dataset: "production",
-    basePath: "/admin/prod",
-    ...sharedConfig,
-    auth: createAuthStore({
-      redirectOnSingle: false,
-      mode: "replace",
-      projectId,
-      dataset: "production",
-      providers: [
-        {
-          name: "saml",
-          title: "NAV SSO",
-          url: "https://api.sanity.io/v2021-10-01/auth/saml/login/f3270b37",
-          logo: "/images/navlogo.svg",
-        },
-        {
-          name: "github",
-          title: "GitHub",
-          url: "https://api.sanity.io/v1/auth/login/github",
-        },
-        {
-          name: "google",
-          title: "Google",
-          url: "https://api.sanity.io/v1/auth/login/google",
-        },
-      ],
-    }),
-  }, */
 ]);
 
 /* interface WorkspaceOptions {

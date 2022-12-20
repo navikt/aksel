@@ -1,4 +1,4 @@
-import { Warning } from "@navikt/ds-icons";
+import { WarningOutlineIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 import { toPlainText } from "../../../util";
 
@@ -6,7 +6,7 @@ export const Alert = defineType({
   name: "alert",
   title: "Alert",
   type: "object",
-  icon: Warning,
+  icon: WarningOutlineIcon,
   fields: [
     defineField({
       title: "Variant",
@@ -37,6 +37,7 @@ export const Alert = defineType({
         Rule.required().error("Alert må ha et heading-nivå"),
       options: {
         list: [
+          { value: "h2", title: "H2" },
           { value: "h3", title: "H3" },
           { value: "h4", title: "H4" },
         ],
@@ -61,7 +62,7 @@ export const Alert = defineType({
       return {
         title: toPlainText(selection?.body),
         subtitle: `Alert - ${selection.variant}`,
-        media: () => <Warning />,
+        media: WarningOutlineIcon,
       };
     },
   },

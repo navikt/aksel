@@ -1,6 +1,5 @@
 import React from "react";
 import { withErrorBoundary } from "@/error-boundary";
-import ComponentOverview from "./component-overview";
 import dynamic from "next/dynamic";
 import TokenView from "./token-view";
 
@@ -12,7 +11,7 @@ const IconSearch = dynamic(() => import("./icon-search"), {
 type SpesialT = {
   _key: string;
   _type: "spesial_seksjon";
-  modul?: "ikonsok" | "komponentoversikt" | "token_kategori";
+  modul?: "ikonsok" | "token_kategori";
   logs?: any[];
   komponenter?: any;
   farge?: any;
@@ -26,8 +25,6 @@ const SideModul = ({ node }: { node: SpesialT }): JSX.Element => {
 
   const GetModule = () => {
     switch (node.modul) {
-      case "komponentoversikt":
-        return <ComponentOverview node={node.komponenter} />;
       case "ikonsok":
         return <IconSearch />;
       case "token_kategori":

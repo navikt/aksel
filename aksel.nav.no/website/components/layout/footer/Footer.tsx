@@ -1,28 +1,22 @@
 import { BodyShort, Heading, Link } from "@navikt/ds-react";
-import cl from "classnames";
+
 import NextLink from "next/link";
 import { EditButton, ScrollTop } from "../..";
 import FooterForm from "./FooterForm";
 
-const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
+const Footer = () => {
   return (
     <footer
       data-hj-suppress
       data-theme="dark"
-      className={cl(
-        "algolia-ignore-index text-text-on-inverted relative flex w-full justify-center  px-4",
-        {
-          "bg-deepblue-800": variant === "aksel",
-          "bg-gray-900": variant === "ds",
-        }
-      )}
+      className="algolia-ignore-index text-text-on-inverted bg-deepblue-800 relative flex w-full justify-center"
     >
-      <div className="dynamic-wrapper relative grid w-full gap-16 py-12">
+      <div className="relative z-10 mx-auto grid w-full max-w-screen-2xl gap-16 px-4 pt-12 pb-16 md:px-6">
         <div className="grid gap-12 xl:grid-cols-3 xl:gap-6">
           <ScrollTop />
           <div>
-            <Heading as="p" size="small">
-              Kontakt oss
+            <Heading level="2" size="small">
+              Aksel
             </Heading>
             <BodyShort as="ul" className="mt-5 grid gap-2">
               <li>
@@ -39,26 +33,30 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
                   </Link>
                 </NextLink>
               </li>
-              {variant === "aksel" && (
-                <li>
-                  <Link
-                    className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
-                    href="https://nav-it.slack.com/archives/C0370ADS0HX"
-                  >
-                    Aksel på Slack
-                  </Link>
-                </li>
-              )}
-              {variant === "ds" && (
-                <li>
+              <li>
+                <Link
+                  className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
+                  href="https://nav-it.slack.com/archives/C0370ADS0HX"
+                >
+                  #Aksel på Slack
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
+                  href="/prinsipper/brukeropplevelse"
+                >
+                  Prinsipper for brukeropplevelse
+                </Link>
+              </li>
+              {/* <li>
                   <Link
                     className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
                     href="https://nav-it.slack.com/archives/C7NE7A8UF"
                   >
                     Designsystemet på Slack
                   </Link>
-                </li>
-              )}
+                </li> */}
             </BodyShort>
           </div>
           <FooterForm />
@@ -90,9 +88,10 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
             </svg>
             Arbeids- og velferdsetaten
           </div>
-          <BodyShort className="mb-1 self-end xl:mb-0">
+          <span className="mb-1 self-end xl:mb-0" />
+          {/* <BodyShort className="mb-1 self-end xl:mb-0">
             Redaktør: Eidar Grande Vollan
-          </BodyShort>
+          </BodyShort> */}
           <div className="hidden self-end xl:block">
             <p>&copy; 2022 NAV</p>
             <NextLink href="/side/personvernerklaering" passHref>
@@ -111,7 +110,48 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
           </div>
         </div>
       </div>
-      <EditButton variant={variant} />
+      <EditButton />
+      <svg
+        width="548"
+        height="422"
+        viewBox="0 0 548 422"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute right-0 bottom-0 z-0"
+        aria-hidden
+        focusable={false}
+      >
+        <path
+          d="M664.991 350.212L431.631 116.852L664.64 116.852L898 350.212L664.991 350.212Z"
+          stroke="#004367"
+          strokeWidth="2.9687"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M625.456 156.037L392.097 389.396L625.456 622.756L858.816 389.396L625.456 156.037Z"
+          stroke="#004367"
+          strokeWidth="2.9687"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M353.262 195.222L119.903 428.581H352.912L586.271 195.222H353.262Z"
+          stroke="#004367"
+          strokeWidth="2.9687"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M314.076 234.407L80.7169 467.767L314.076 701.126L547.436 467.767L314.076 234.407Z"
+          stroke="#004367"
+          strokeWidth="2.9687"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M508.251 506.951L274.892 740.31H507.901L741.261 506.951H508.251Z"
+          stroke="#004367"
+          strokeWidth="2.9687"
+          strokeLinejoin="round"
+        />
+      </svg>
     </footer>
   );
 };

@@ -1,11 +1,11 @@
-import { VideoRoom } from "@navikt/ds-icons";
+import { DocumentVideoIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 export const Video = defineType({
   name: "video",
   title: "Video",
   type: "object",
-  icon: VideoRoom,
+  icon: DocumentVideoIcon,
   fields: [
     defineField({
       name: "bruk_embed",

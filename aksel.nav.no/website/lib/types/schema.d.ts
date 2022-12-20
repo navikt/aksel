@@ -3,70 +3,6 @@
 declare namespace SanityT {
   namespace Schema {
     /**
-     * Forside
-     */
-    interface vk_frontpage extends Sanity.Document {
-      _type: "vk_frontpage";
-
-      /**
-       * Tittel - `String`
-       */
-      title?: string;
-
-      /**
-       * Beskrivelse - `RegistryReference`
-       */
-      beskrivelse?: riktekst_enkel;
-
-      /**
-       * Brukeropplevelse - `Object`
-       */
-      prinsipp_1?: {
-        /**
-         * Vis på forside - `Boolean`
-         */
-        vis?: boolean;
-
-        /**
-         * Beskrivelse - `RegistryReference`
-         */
-        beskrivelse?: riktekst_enkel;
-
-        /**
-         * Hovedside - `Reference`
-         */
-        hovedside?: Sanity.Reference<aksel_prinsipp>;
-
-        /**
-       * Undersider - `Array`
-Rekkefølge bestemmer rekkefølgen på forsiden!
-       */
-        undersider?: Array<Sanity.KeyedReference<aksel_prinsipp>>;
-      };
-
-      /**
-       * SEO - `Object`
-       */
-      seo?: {
-        /**
-       * Meta/:og description - `Text`
-Anbefalt maks 150-160 bokstaver. Erstatter ingress som <meta /> description
-       */
-        meta?: string;
-
-        /**
-       * og:Image - `Image`
-Anbefalt størrelse er 1200:630px
-       */
-        image?: {
-          asset: Sanity.Asset;
-          crop?: Sanity.ImageCrop;
-          hotspot?: Sanity.ImageHotspot;
-        };
-      };
-    }
-
-    /**
      * Redaktører
      */
     interface editor extends Sanity.Document {
@@ -82,6 +18,20 @@ Anbefalt størrelse er 1200:630px
        */
       user_id?: {
         _type: "user_id";
+        current: string;
+      };
+
+      /**
+       * Gjør meg anonym - `Boolean`
+På artikler bytter vi ut navnet ditt med et tullenavn. Eks. Sprudlende Tiger
+       */
+      anonym?: boolean;
+
+      /**
+       * Anonymt navn - `Slug`
+       */
+      anon_navn?: {
+        _type: "anon_navn";
         current: string;
       };
 
@@ -161,6 +111,14 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       heading?: string;
 
       /**
+       * url (v2) - `Slug`
+       */
+      slug_v2?: {
+        _type: "slug_v2";
+        current: string;
+      };
+
+      /**
        * url - `Slug`
        */
       slug?: {
@@ -169,11 +127,14 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       };
 
       /**
-       * url (v2) - `Slug`
+       * Sist godkjent - `Object`
        */
-      slug_v2?: {
-        _type: "slug_v2";
-        current: string;
+      updateInfo?: {
+        /**
+       * Sist oppdatert - `Date`
+Kun synlig for utviklere
+       */
+        lastVerified?: string;
       };
 
       /**
@@ -191,7 +152,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
         tag?: "beta" | "new" | "ready" | "deprecated";
 
         /**
-         * Thumbnail/og-bilde - `Image`
+         * Thumbnail - `Image`
          */
         bilde?: {
           asset: Sanity.Asset;
@@ -416,6 +377,14 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       heading?: string;
 
       /**
+       * url (v2) - `Slug`
+       */
+      slug_v2?: {
+        _type: "slug_v2";
+        current: string;
+      };
+
+      /**
        * url - `Slug`
        */
       slug?: {
@@ -424,11 +393,14 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       };
 
       /**
-       * url (v2) - `Slug`
+       * Sist godkjent - `Object`
        */
-      slug_v2?: {
-        _type: "slug_v2";
-        current: string;
+      updateInfo?: {
+        /**
+       * Sist oppdatert - `Date`
+Kun synlig for utviklere
+       */
+        lastVerified?: string;
       };
 
       /**
@@ -446,7 +418,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
         tag?: "beta" | "new" | "ready" | "deprecated";
 
         /**
-         * Thumbnail/og-bilde - `Image`
+         * Thumbnail - `Image`
          */
         bilde?: {
           asset: Sanity.Asset;
@@ -483,6 +455,17 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       _type: "ds_artikkel";
 
       /**
+       * Sist godkjent - `Object`
+       */
+      updateInfo?: {
+        /**
+       * Sist oppdatert - `Date`
+Kun synlig for utviklere
+       */
+        lastVerified?: string;
+      };
+
+      /**
        * Publiseringsdato - `Datetime`
 Synlig bare for admins. Setter publiseringsdato for dokument
        */
@@ -501,18 +484,18 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       heading?: string;
 
       /**
-       * url - `Slug`
-       */
-      slug?: {
-        _type: "slug";
-        current: string;
-      };
-
-      /**
        * url (v2) - `Slug`
        */
       slug_v2?: {
         _type: "slug_v2";
+        current: string;
+      };
+
+      /**
+       * url - `Slug`
+       */
+      slug?: {
+        _type: "slug";
         current: string;
       };
 
@@ -538,6 +521,17 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
 Synlig bare for admins. Setter publiseringsdato for dokument
        */
       publishedAt?: string;
+
+      /**
+       * Sist godkjent - `Object`
+       */
+      updateInfo?: {
+        /**
+       * Sist oppdatert - `Date`
+Kun synlig for utviklere
+       */
+        lastVerified?: string;
+      };
 
       /**
        * Redaktører - `Array`
@@ -743,6 +737,20 @@ Del inn artiklene i flere seksjoner (vises ikke i preview før publisering desve
           sider?: Array<Sanity.KeyedReference<aksel_artikkel>>;
         }>
       >;
+
+      /**
+       * Pictogram - `Image`
+       */
+      pictogram?: {
+        asset: Sanity.Asset;
+        crop?: Sanity.ImageCrop;
+        hotspot?: Sanity.ImageHotspot;
+
+        /**
+         * Attribution - `String`
+         */
+        alt?: string;
+      };
     }
 
     /**
@@ -1399,7 +1407,6 @@ Husk å legge denne til i menyen også, hvis ikke blir den bare tilgjengelig via
     };
 
     type Document =
-      | vk_frontpage
       | editor
       | redirect
       | ds_navigation

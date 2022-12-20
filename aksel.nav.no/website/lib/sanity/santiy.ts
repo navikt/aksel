@@ -10,19 +10,18 @@ export function urlFor(source: any) {
 }
 
 export const getAllPages = async (token?: string) => {
-  const pages = await getDsPaths(token).then((paths) =>
-    paths.map((slugs) => slugs.join("/"))
-  );
+  const komponenter = await getDocumentsTmp("komponent_artikkel", token);
+  const grunnleggende = await getDocumentsTmp("ds_artikkel", token);
 
   const artikler = await getAkselDocuments("all", token);
   const temaer = await getAkselTema(token);
 
   return [
     "",
-    "designsystem",
-    "tema",
-    "blogg",
-    ...pages,
+    "god-praksis",
+    "produktbloggen",
+    ...komponenter,
+    ...grunnleggende,
     ...artikler,
     ...temaer.map((x) => `god-praksis/${x}`),
   ];
@@ -34,6 +33,7 @@ export const getAkselDocuments = async (
     | "aksel_blogg"
     | "aksel_prinsipp"
     | "aksel_standalone"
+    | "komponent_artikkel"
     | "all",
   token?: string
 ): Promise<string[]> => {
@@ -61,40 +61,26 @@ export const getAkselDocuments = async (
   return paths;
 };
 
-export const getDsPaths = async (token?: string): Promise<string[][]> => {
+export const getDocumentsTmp = async (
+  source: "komponent_artikkel" | "ds_artikkel",
+  token?: string
+): Promise<string[]> => {
   const client = token ? noCdnClient(token) : getClient();
-  const documents: any[] | null = await client.fetch(dsDocuments);
+  const documents: any[] | null = await client.fetch(
+    `*[_type in $types]{ _type, _id, 'slug': slug_v2.current }`,
+    {
+      types: [source],
+    }
+  );
   const paths = [];
 
-  const nonDrafts = documents.filter((x) => !x._id.startsWith("drafts."));
+  documents
+    .filter((x) => !x._id.startsWith("drafts."))
+    ?.forEach((page) => {
+      page.slug && paths.push(page.slug);
+    });
 
-  nonDrafts?.forEach((page) => {
-    if (!page.slug) {
-      return null;
-    }
-    const slug = page.slug.split("/");
-    paths.push(slug);
-  });
   return paths;
-};
-
-export const validateDsPath = (
-  doc: SanityT.Schema.ds_artikkel | SanityT.Schema.komponent_artikkel,
-  slug: string[]
-) => {
-  if (!doc) return false;
-
-  /* Check for nested pages, ex button/kode */
-  const isLvl2 = slug.length === 3;
-
-  if (slug.length === 2) return true;
-  switch (doc._type) {
-    /* Støtte gamle url-er */
-    case "komponent_artikkel":
-      return slug?.[2] === "kode";
-    default:
-      return false;
-  }
 };
 
 export const getAkselTema = async (token?: string): Promise<string[]> => {

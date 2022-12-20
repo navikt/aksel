@@ -10,7 +10,6 @@ export * from "./shared/alert";
 export * from "./shared/bilde";
 export * from "./shared/dodont";
 export * from "./shared/kode";
-export * from "./shared/oppdateringsvarsel";
 export * from "./shared/relatert-innhold";
 export * from "./shared/riktekst";
 export * from "./shared/seo";

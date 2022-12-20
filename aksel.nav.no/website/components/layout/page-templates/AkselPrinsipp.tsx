@@ -2,15 +2,15 @@ import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "classnames";
+import { Header } from "components/layout/header/Header";
 import Head from "next/head";
-import { AkselHeader, Footer } from "..";
+import { Footer } from "..";
 import {
   abbrName,
   Bilde,
   BreadCrumbs,
   dateStr,
   Feedback,
-  PrinsippSlope,
   TableOfContents,
 } from "../..";
 
@@ -25,7 +25,7 @@ const AkselPrinsippTemplate = ({
     return null;
   }
 
-  const authors = (data?.contributors as any)?.map((x) => x?.title);
+  const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
   const mainPage = data?.prinsipp?.hovedside;
 
   return (
@@ -51,13 +51,14 @@ const AkselPrinsippTemplate = ({
                   .width(1200)
                   .height(630)
                   .fit("crop")
+                  .quality(100)
                   .url()
               : ""
           }
           key="ogimage"
         />
       </Head>
-      <AkselHeader variant={mainPage ? "inngang" : "artikkel"} />
+      <Header variant={mainPage ? "default" : "subtle"} />
       <main
         tabIndex={-1}
         id="hovedinnhold"
@@ -68,7 +69,7 @@ const AkselPrinsippTemplate = ({
         <article className="overflow-x-clip">
           <div
             className={cl("max-w-aksel xs:w-[90%] mx-auto px-4", {
-              "pb-24": mainPage,
+              "pb-32": mainPage,
             })}
           >
             <div className="pt-12">
@@ -112,13 +113,12 @@ const AkselPrinsippTemplate = ({
               </div>
             </div>
           </div>
-          {mainPage && <PrinsippSlope />}
           <div
-            className={cl("pt-4", {
+            className={cl("pt-32", {
               "bg-gray-100": mainPage,
             })}
           >
-            <div className="max-w-aksel xs:w-[90%] mx-auto px-4 ">
+            <div className="max-w-aksel xs:w-[90%] mx-auto px-4">
               <div className="pb-16 md:pb-32">
                 <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
                   <TableOfContents
@@ -130,7 +130,7 @@ const AkselPrinsippTemplate = ({
                     {data?.hero_bilde && (
                       <Bilde
                         node={data.hero_bilde as any}
-                        className="xs:-mt-64 -mt-36 mb-10"
+                        className="xs:-mt-72 -mt-36 mb-10"
                       />
                     )}
                     <SanityBlockContent
@@ -178,7 +178,7 @@ const AkselPrinsippTemplate = ({
           </div>
         </article>
       </main>
-      <Footer variant="aksel" />
+      <Footer />
     </>
   );
 };

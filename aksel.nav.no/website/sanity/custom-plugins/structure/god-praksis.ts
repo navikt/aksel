@@ -1,3 +1,5 @@
+import { FileError } from "@navikt/ds-icons";
+import { MasterDetailIcon } from "@sanity/icons";
 import { StructureBuilder } from "sanity/desk";
 /* documentStore is in Alpha, so avoid using for now */
 export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
@@ -25,6 +27,7 @@ export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
   return [
     S.listItem()
       .title(`Temasider (${tema.length})`)
+      .icon(MasterDetailIcon)
       .child(S.documentTypeList("aksel_tema")),
     S.divider(),
     ...tema.map(({ title, _id }) =>
@@ -40,16 +43,18 @@ export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
             .title(`${title}`)
             .filter(`_type == 'aksel_artikkel' && $tag in tema[]->title`)
             .params({ tag: title })
+          /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
         )
     ),
     S.divider(),
     S.listItem()
       .title(`Artikler uten tema (${ids.filter((x) => !x?.tema).length ?? 0})`)
+      .icon(FileError)
       .child(
         S.documentList()
           .title(`Artikler uten tema`)
           .filter(`_type == 'aksel_artikkel' && !defined(tema)`)
-          .menuItemGroups([{ title: "test", id: "testid" }])
+        /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
       ),
   ];
 };

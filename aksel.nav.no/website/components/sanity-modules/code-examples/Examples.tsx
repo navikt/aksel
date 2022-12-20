@@ -3,10 +3,9 @@ import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
 import { BodyLong, Link, Chips } from "@navikt/ds-react";
 import cl from "classnames";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { CodeSandbox } from "./CodeSandbox";
 
-const exampleIframeId = "example-iframe";
 const iframePadding = 192;
 
 const ComponentExamples = ({
@@ -19,14 +18,13 @@ const ComponentExamples = ({
 }): JSX.Element => {
   const [iframeHeight, setIframeHeight] = useState(300);
   const [activeExample, setActiveExample] = useState(null);
+  const iframeId = useId();
 
-  const handleExampleLoad = () => {
+  const handleExampleLoad = (id: string) => {
     let attempts = 0;
 
     const waitForExampleContentToRender = setInterval(() => {
-      const exampleIframe = document.getElementById(
-        node?.title ?? exampleIframeId
-      ) as HTMLIFrameElement;
+      const exampleIframe = document.getElementById(id) as HTMLIFrameElement;
       const exampleIframeDOM = exampleIframe?.contentDocument;
       const exampleWrapper = exampleIframeDOM?.getElementById("ds-example");
 
@@ -58,14 +56,14 @@ const ComponentExamples = ({
         .trim()
     ) ?? str;
 
-  const element = (exampleUrl: string, code: string) => (
+  const element = (exampleUrl: string, code: string, id: string) => (
     <>
       <div className="overflow-hidden rounded-t border border-b-0 border-gray-300 bg-gray-50">
         <iframe
           src={exampleUrl}
           height={iframeHeight}
-          onLoad={handleExampleLoad}
-          id={node?.title ?? exampleIframeId}
+          onLoad={() => handleExampleLoad(id)}
+          id={id}
           aria-label="Komponent eksempler"
           className="min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]"
           title="Kode-eksempler"
@@ -99,7 +97,8 @@ const ComponentExamples = ({
   if (node.standalone) {
     return element(
       `/eksempler/${node.filnavn.title.replace(".tsx", "")}`,
-      node.filnavn?.filer?.[0]?.innhold ?? ""
+      node.filnavn?.filer?.[0]?.innhold ?? "",
+      iframeId
     );
   }
 
@@ -123,7 +122,7 @@ const ComponentExamples = ({
           })}
         </Chips>
       </div>
-      {node.dir.filer.map((fil) => {
+      {node.dir.filer.map((fil, xi) => {
         return (
           <div
             key={fil._key}
@@ -137,7 +136,8 @@ const ComponentExamples = ({
             )}
             {element(
               `/eksempler/${node.dir.title}/${fil.navn.replace(".tsx", "")}`,
-              fil.innhold
+              fil.innhold,
+              iframeId + xi
             )}
           </div>
         );

@@ -2,6 +2,7 @@ import { ExternalLink } from "@navikt/ds-icons";
 import { BodyLong, Detail, Heading, Ingress, Link } from "@navikt/ds-react";
 import BlockContent from "@sanity/block-content-to-react";
 import cl from "classnames";
+import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
 import NextLink from "next/link";
 import React, { createContext, useContext } from "react";
 import {
@@ -10,7 +11,6 @@ import {
   Bilde,
   CodeExamples,
   DoDont,
-  InnholdsKort,
   Kode,
   LevelTwoHeading,
   PropsSeksjon,
@@ -93,7 +93,7 @@ const serializers = {
         case "h3":
           return (
             <Heading
-              className="algolia-index-lvl3 max-w-text mt-8 scroll-mt-20 focus:outline-none"
+              className="algolia-index-lvl3 max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
               spacing
               level="3"
               size="medium"
@@ -105,7 +105,7 @@ const serializers = {
         case "h4":
           return (
             <Heading
-              className="algolia-index-lvl4 max-w-text mt-6"
+              className="algolia-index-lvl4 max-w-text text-deepblue-800 mt-6"
               spacing
               level="4"
               size="small"

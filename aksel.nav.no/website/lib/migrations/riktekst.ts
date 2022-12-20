@@ -4,15 +4,19 @@
 
 import dotenv from "dotenv";
 import { noCdnClient } from "../sanity/sanity.server";
-import { customAlphabet } from "nanoid/non-secure";
 
 dotenv.config();
 const token = process.env.SANITY_WRITE_KEY;
 
-/* Key-function used by sanity */
 const randKey = () => {
-  const nanoid = customAlphabet("1234567890abcdef", 12);
-  return nanoid();
+  let result = "";
+  let characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

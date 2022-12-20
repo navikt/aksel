@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     /* Flytt ut fra extend og refactor bruk av screen */
     screens: {
-      xs: "564px",
+      xs: "480px",
       sm: "648px",
       md: "768px",
       lg: "1024px",
@@ -28,11 +28,11 @@ module.exports = {
       spacing: {
         0: 0,
         header: "3.5rem",
-        sidebar: "18rem",
+        sidebar: "16rem",
         text: "600px",
       },
       maxWidth: {
-        "screen-sidebar": "calc(100vw - 18rem)",
+        "screen-sidebar": "calc(100vw - 16rem)",
         "content-w-padding": "896px",
         aksel: "1280px",
         text: "600px",
@@ -46,11 +46,12 @@ module.exports = {
         "screen-header": "calc(100vh - 3.5rem)",
         ...theme("spacing"),
       }),
-
       boxShadow: {
         "focus-inverted-inset": "inset var(--a-shadow-focus-inverted)",
         "focus-inset": "inset var(--a-shadow-focus)",
         "focus-gap": "0 0 0 1px white, var(--a-shadow-focus)",
+        "focus-gap-inset":
+          "inset 0 0 0 2px var(--a-border-focus), inset 0 0 0 3px white",
         header: "inset 0 -1px 0 rgb(180, 180, 180, 0.1)",
       },
       keyframes: {

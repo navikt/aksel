@@ -108,7 +108,7 @@ const config = () =>
         return [
           {
             source: "/studio",
-            destination: "https://verktoykasse.sanity.studio",
+            destination: "/admin",
             permanent: true,
           },
           {

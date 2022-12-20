@@ -1,12 +1,16 @@
 import { Button } from "@navikt/ds-react";
+import BlockContent from "@sanity/block-content-to-react";
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
   DocumentActionComponent,
   DocumentActionDescription,
   DocumentActionProps,
+  useClient,
   useDocumentOperation,
 } from "sanity";
+import useSWR from "swr";
+import { serializers } from "../../../util";
 
 export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   const WrappedFocus = (
@@ -19,30 +23,38 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
     const lastVerified = props.published?.updateInfo?.["lastVerified"];
     const lastVerifiedDraft = props.draft?.updateInfo?.["lastVerified"];
 
-    const verifyContent = () => {
-      patch.execute(
-        [
-          {
-            set: {
-              updateInfo: {
-                lastVerified: format(new Date(), "yyyy-MM-dd"),
-              },
-            },
-          },
-        ],
-        props.published
-      );
+    const cancelAction = () => {
+      setVerifyOpen(false);
+      setPublishOpen(false);
     };
 
-    const updateDialogContent = {
-      description: {
-        pre: "Før du godkjenner innholdet, har du gjort dette?",
-        post: "Artikkelen er over 6mnd gammel og må godkjennes på nytt. Før du godkjenner innholdet, har du gjort dette?",
-      },
-      checks: {
-        pre: "Hovedinnhold",
-        post: "Hovedinnhold",
-      },
+    const verifyContent = () => {
+      props.published
+        ? patch.execute(
+            [
+              {
+                set: {
+                  updateInfo: {
+                    lastVerified: format(new Date(), "yyyy-MM-dd"),
+                  },
+                },
+              },
+            ],
+            props.published
+          )
+        : patch.execute(
+            [
+              {
+                set: {
+                  updateInfo: {
+                    lastVerified: format(new Date(), "yyyy-MM-dd"),
+                  },
+                  publishedAt: new Date().toISOString(),
+                },
+              },
+            ],
+            props.published
+          );
     };
 
     // Publish action
@@ -55,19 +67,24 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         },
         dialog: publishOpen && {
           type: "dialog",
-          header: "Kvalitetssjekk",
+          header: "Kvalitetssjekk før publisering",
           onClose: () => setPublishOpen(false),
           content: (
             <>
-              <h3>Publiseringsdialog...</h3>
+              <QualityCheckContent type="publishContent" />
               <div className="flex justify-end gap-4">
-                <Button variant="tertiary">Nei, avbryt</Button>
+                <Button variant="tertiary" onClick={cancelAction}>
+                  Nei, avbryt
+                </Button>
                 <Button
                   onClick={() => {
                     verifyContent();
                     publish.execute();
                     props.onComplete();
+                    setPublishOpen(false);
                   }}
+                  variant="primary"
+                  size="medium"
                 >
                   Ja, publiser
                 </Button>
@@ -106,20 +123,21 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         tone: "positive",
         dialog: verifyOpen && {
           type: "dialog",
-          header: "Kvalitetssjekk",
+          header: "Kvalitetssjekk før publisering",
           onClose: () => setVerifyOpen(false),
           content: (
             <>
-              <h3>Godkjenningsdialog...</h3>
-              <p>{updateDialogContent.description[verifiedStatus]}</p>
-              <ul>
-                <li>{updateDialogContent.checks[verifiedStatus]}</li>
-              </ul>
+              <QualityCheckContent type={`${verifiedStatus}Verify`} />
               <div className="flex justify-end gap-4">
-                <Button variant="tertiary">Nei, avbryt</Button>
+                <Button variant="tertiary" onClick={cancelAction}>
+                  Nei, avbryt
+                </Button>
                 <Button
                   onClick={() => {
                     verifyContent();
+                    publish.execute();
+                    props.onComplete();
+                    setVerifyOpen(false);
                   }}
                 >
                   Ja, godkjenn
@@ -133,4 +151,34 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   };
 
   return WrappedFocus;
+};
+
+interface QualityCheckContentProps {
+  type: "publishContent" | "preVerify" | "postVerify";
+}
+
+export const QualityCheckContent = ({ type }: QualityCheckContentProps) => {
+  const client = useClient({ apiVersion: "2021-06-07" });
+  const { data, error } = useSWR(`*[_id == "publication_flow"][0]`, (query) =>
+    client.fetch(query)
+  );
+
+  if (error) {
+    return <div>Kan ikke hente sjekkliste for kvalitetssjekk...</div>;
+  }
+
+  const blocks = data?.[type];
+
+  return (
+    <>
+      <div className="flex shrink-0 items-center justify-between">
+        <BlockContent
+          blocks={blocks ?? []}
+          serializers={serializers}
+          options={{ size: "small" }}
+          renderContainerOnSingleChild
+        />
+      </div>
+    </>
+  );
 };

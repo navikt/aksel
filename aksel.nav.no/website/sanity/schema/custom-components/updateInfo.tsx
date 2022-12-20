@@ -1,32 +1,28 @@
-import { Card, Stack, Text } from "@sanity/ui";
-import { differenceInDays } from "date-fns";
-import { StringFieldProps } from "sanity";
+import { Card, Text } from "@sanity/ui";
+import { differenceInMonths } from "date-fns";
+import { FieldProps, useFormValue } from "sanity";
 
-type Status = "positive" | "critical" | "caution";
+export function UpdateInfo(props: FieldProps) {
+  const { ...restProps } = props;
 
-export function UpdateInfo(props: StringFieldProps) {
-  const testDate = new Date("Feb 10 2022");
-  const diff = differenceInDays(new Date(), testDate);
-  const status: Status =
-    diff > 365
-      ? "critical"
-      : diff > 150 && diff <= 365
-      ? "caution"
-      : "positive";
-
-  const messages = {
-    positive: "Article has recently been updated",
-    caution: "Article has not been updated or verified in more than 150 days",
-    critical: "Article ha not been updated or verified in more than a year.",
-  };
+  const verified: any = useFormValue(["updateInfo", "lastVerified"]);
+  if (!verified) {
+    return null;
+  }
+  const diff = differenceInMonths(new Date(), new Date(verified));
+  const outDated = diff >= 6;
+  if (!outDated) {
+    return null;
+  }
 
   return (
-    <Stack space={3}>
-      <Card padding={[3, 3, 4]} radius={2} shadow={1} tone={status}>
+    <Card>
+      <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="caution">
         <Text align="center" size={[2, 2, 3]}>
-          {messages[status]}
+          Artikkelen er over 6 mnd gammel og trenger ny godkjenning!
         </Text>
       </Card>
-    </Stack>
+      <div className="mt-4">{props.renderDefault(restProps)}</div>
+    </Card>
   );
 }

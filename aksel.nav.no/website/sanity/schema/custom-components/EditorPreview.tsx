@@ -18,6 +18,7 @@ export function EditorPreview(props) {
     client.fetch(`*[_type == "editor"]`).then(setEditor);
   }, [client]);
 
+  const anonym = props?.subtitle?.includes("Anonym");
   const currentUser =
     editor && editor.find((x) => x?.user_id?.current === user?.id);
   return (
@@ -25,7 +26,13 @@ export function EditorPreview(props) {
       {props.renderDefault({
         ...props,
         subtitle:
-          currentUser && currentUser._id === props?._id ? "Din profil" : "",
+          currentUser && currentUser._id === props?._id
+            ? anonym
+              ? "Din profil | Anonym"
+              : "Din profil"
+            : anonym
+            ? "Anonym"
+            : "",
       })}
       {editors &&
         editors.length > 0 &&

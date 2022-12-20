@@ -1,14 +1,7 @@
-import {
-  BodyLong,
-  BodyShort,
-  Button,
-  Heading,
-  ReadMore,
-} from "@navikt/ds-react";
-import cl from "classnames";
-import React, { useContext, useState } from "react";
 import { withErrorBoundary } from "@/error-boundary";
-import { AuthenticationContext, AuthenticationStatus } from "..";
+import { BodyLong, ReadMore } from "@navikt/ds-react";
+import cl from "classnames";
+import { useState } from "react";
 
 const Video = ({
   node,
@@ -25,8 +18,6 @@ const Video = ({
   };
 }): JSX.Element => {
   const [open, setOpen] = useState(false);
-  const { status, login } = useContext(AuthenticationContext);
-  const isLoggedIn = status === AuthenticationStatus.IS_AUTHENTICATED;
 
   if (
     !node ||
@@ -44,24 +35,10 @@ const Video = ({
     <figure className={cl("m-0 mb-8 flex flex-col gap-2")}>
       {node.bruk_embed ? (
         <>
-          {isLoggedIn ? (
-            <div
-              className="iframe-parent border-border-divider border"
-              dangerouslySetInnerHTML={{ __html: getVideo() }}
-            />
-          ) : (
-            <div className="grid aspect-video w-full place-content-center justify-items-center gap-4 rounded bg-gray-200">
-              <div className="">
-                <Heading as="p" size="small">
-                  Logg inn for å se videoen
-                </Heading>
-                <BodyShort as="p" size="small" className="mt-1">
-                  Bare tilgjengelig for NAV-ansatte.
-                </BodyShort>
-              </div>
-              <Button onClick={() => login()}>Logg inn</Button>
-            </div>
-          )}
+          <div
+            className="iframe-parent border-border-divider border"
+            dangerouslySetInnerHTML={{ __html: getVideo() }}
+          />
           <style jsx global>
             {`
               .iframe-parent iframe {

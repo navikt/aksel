@@ -1,11 +1,13 @@
 import { defineField, defineType } from "sanity";
-import { groups } from "../presets/groups";
-import { artikkelPreview } from "../presets/artikkel-preview";
-import { hiddenFields } from "../presets/hidden-fields";
-import { editorField } from "../presets/editors";
-import { titleField } from "../presets/title-field";
-import { kategoriSlug, sanitySlug } from "../presets/slug";
 import { komponentKategorier } from "../../../config";
+import { artikkelPreview } from "../presets/artikkel-preview";
+import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
+import { editorField } from "../presets/editors";
+import { groups } from "../presets/groups";
+import { hiddenFields } from "../presets/hidden-fields";
+import { SEOFields } from "../presets/seo";
+import { kategoriSlug, sanitySlug } from "../presets/slug";
+import { titleField } from "../presets/title-field";
 
 const prefixOld = "designsystem/komponenter/";
 const prefix = "komponenter/";
@@ -15,8 +17,9 @@ export const KomponentArtikkel = defineType({
   name: "komponent_artikkel",
   type: "document",
   groups,
-  ...artikkelPreview,
+  ...artikkelPreview("Komponenter"),
   fields: [
+    oppdateringsvarsel,
     ...hiddenFields,
     titleField,
     editorField,
@@ -51,7 +54,7 @@ export const KomponentArtikkel = defineType({
             list: [
               { title: "Beta", value: "beta" },
               { title: "New", value: "new" },
-              { title: "Ready", value: "ready" },
+              { title: "Stable", value: "ready" },
               { title: "Deprecated", value: "deprecated" },
             ],
             layout: "radio",
@@ -60,13 +63,13 @@ export const KomponentArtikkel = defineType({
         },
         {
           name: "bilde",
-          title: "Thumbnail/og-bilde",
+          title: "Thumbnail",
           type: "image",
         },
       ],
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
     }),
     defineField({
@@ -105,5 +108,6 @@ export const KomponentArtikkel = defineType({
       type: "url",
       group: "lenker",
     }),
+    SEOFields,
   ],
 });

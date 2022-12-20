@@ -15,9 +15,8 @@ export const komponentKategorier = [
 
 export const grunnleggendeKategorier = [
   { title: "Styling", value: "styling" },
-  { title: "Tokens", value: "tokens" },
-  { title: "Stæsj", value: "staesj" },
   { title: "Guider", value: "guider" },
+  { title: "Stæsj", value: "staesj" },
 ];
 
 export const monsterKategorier = [];

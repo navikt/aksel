@@ -1,14 +1,18 @@
 import { defineField, defineType } from "sanity";
+import { oppdateringsvarsel } from "./presets/oppdateringsvarsel";
+import { groups } from "./presets";
+import { artikkelPreview } from "./presets/artikkel-preview";
+import { SEOFields } from "./presets/seo";
+import { skrivehjelp } from "./presets/skrivehjelp";
 
 export const TestDoc = defineType({
   title: "Test",
   name: "testDoc",
   type: "document",
+  groups,
+  ...artikkelPreview("TestDoc"),
   fields: [
-    defineField({
-      name: "updateInfo",
-      type: "updateWarning",
-    }),
+    oppdateringsvarsel,
     defineField({
       name: "testInput",
       title: "Test input",
@@ -21,5 +25,7 @@ export const TestDoc = defineType({
       },
     }),
     defineField({ type: "riktekst_standard", name: "content" }),
+    SEOFields,
+    skrivehjelp,
   ],
 });

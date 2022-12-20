@@ -1,13 +1,16 @@
 import * as document from "./documents";
 import * as object from "./objects";
+import { SchemaPluginOptions } from "sanity";
 
-export default {
+export const schema: SchemaPluginOptions = {
   types: [
     /* Documents */
     document.Editors,
     document.Forside,
     document.Redirect,
     document.TestDoc,
+    document.Skrivehjelp,
+    document.Publiseringsflyt,
 
     /* Komponentsider */
     document.KodeEksempelDoc,
@@ -49,7 +52,6 @@ export default {
     object.Alert,
     object.Tips,
     object.UnikSidemodul,
-    object.Oppdateringsvarsel,
 
     /* Riktekst */
     object.RiktekstKomponent,

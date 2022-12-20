@@ -1,12 +1,15 @@
 import { defineField, defineType } from "sanity";
+import { artikkelPreview } from "../presets/artikkel-preview";
+import { editorField } from "../presets/editors";
 import { groups } from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
-import { editorField } from "../presets/editors";
-import { titleField } from "../presets/title-field";
 import { ingressField } from "../presets/ingress";
-import { SEOFields } from "../presets/seo";
 import { relevanteArtiklerField } from "../presets/relevante-artikler";
+import { SEOFields } from "../presets/seo";
+import { skrivehjelp } from "../presets/skrivehjelp";
 import { sanitySlug } from "../presets/slug";
+import { titleField } from "../presets/title-field";
+import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 
 const prefix = "god-praksis/artikler/";
 
@@ -15,18 +18,9 @@ export const GodPraksisArtikkel = defineType({
   name: "aksel_artikkel",
   type: "document",
   groups,
-  preview: {
-    select: {
-      heading: "heading",
-    },
-    prepare(selection) {
-      const { heading } = selection;
-      return {
-        title: heading,
-      };
-    },
-  },
+  ...artikkelPreview("God praksis"),
   fields: [
+    oppdateringsvarsel,
     ...hiddenFields,
     titleField,
     editorField,
@@ -51,5 +45,6 @@ export const GodPraksisArtikkel = defineType({
     }),
     relevanteArtiklerField,
     SEOFields,
+    skrivehjelp,
   ],
 });

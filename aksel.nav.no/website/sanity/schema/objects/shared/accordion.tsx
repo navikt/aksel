@@ -1,11 +1,13 @@
 import { Expand } from "@navikt/ds-icons";
 import { Label } from "@navikt/ds-react";
+import { StackCompactIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 export const Accordion = defineType({
   name: "accordion",
   title: "Accordion",
   type: "object",
+  icon: StackCompactIcon,
   fields: [
     defineField({
       title: "Accordion-liste",
@@ -60,6 +62,9 @@ export const Accordion = defineType({
   preview: {
     select: {
       list: "list",
+    },
+    prepare() {
+      return { title: "Accordion", media: StackCompactIcon };
     },
   },
 });

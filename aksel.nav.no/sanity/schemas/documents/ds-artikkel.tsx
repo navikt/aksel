@@ -3,12 +3,12 @@ import {
   editorField,
   groups,
   innholdFieldNew,
+  kategoriSlug,
   publishedAtField,
-  sanitySlug,
   titleField,
 } from "@/lib";
 
-const prefix = "designsystem/side/";
+const prefix = "grunnleggende/";
 
 export default {
   title: "Artikkel",
@@ -17,17 +17,26 @@ export default {
   groups,
   ...defaultDocPreview,
   fields: [
+    {
+      title: "Sist godkjent",
+      name: "updateInfo",
+      type: "object",
+      hidden: true,
+      fields: [
+        {
+          type: "date",
+          name: "lastVerified",
+          title: "Sist oppdatert",
+          description: "Kun synlig for utviklere",
+          readOnly: true,
+        },
+      ],
+    },
     publishedAtField,
     editorField,
     titleField,
-    sanitySlug(prefix, 3),
-    {
-      title: "url (v2)",
-      name: "slug_v2",
-      type: "slug",
-      hidden: ({ currentUser }) =>
-        !currentUser.roles.find((x) => x.name === "developer"),
-    },
+    kategoriSlug(prefix),
+    { title: "url", name: "slug", type: "slug", hidden: true },
     {
       title: "Kategori",
       name: "kategori",

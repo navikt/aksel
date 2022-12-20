@@ -17,7 +17,6 @@ export const UnikSidemodul = defineType({
         list: [
           { title: "Token kategori", value: "token_kategori" },
           { title: "Ikonsøk", value: "ikonsok" },
-          { title: "Komponentoversikt", value: "komponentoversikt" },
         ],
         layout: "radio",
       },

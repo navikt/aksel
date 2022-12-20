@@ -12,7 +12,7 @@ const TableComponent = ({
   }
 
   return (
-    <div className="mb-8 overflow-x-auto">
+    <div className="table-heading-margin mb-8 overflow-x-auto">
       <Table>
         <Table.Header>
           <Table.Row>
@@ -37,6 +37,15 @@ const TableComponent = ({
           ))}
         </Table.Body>
       </Table>
+      <style global jsx>{`
+        .algolia-index-body.navds-body-long.navds-typo--spacing
+          + .table-heading-margin {
+          margin-top: -1rem;
+        }
+        .table-heading-margin + .navds-heading {
+          margin-top: var(--a-spacing-12);
+        }
+      `}</style>
     </div>
   );
 };

@@ -15,7 +15,7 @@ export const Frame = ({
     <table className="w-full">
       <thead className="sr-only">
         <tr>
-          <th></th>
+          <td />
           <th>Token navn</th>
           <th>Verdi</th>
           {hasDescription && <th>Beskrivelse</th>}
@@ -25,7 +25,7 @@ export const Frame = ({
         {tokens.map((c) => (
           <tr
             key={c.name}
-            className="shadow-small ring-border-subtle flex flex-col justify-start rounded-md p-3 align-top ring-1"
+            className="ring-border-subtle flex flex-col justify-start rounded-md p-3 align-top ring-1"
           >
             <td className="component-checkered-bg rounded-md p-0">
               {Element ? (

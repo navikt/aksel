@@ -3,12 +3,12 @@ import {
   editorField,
   groups,
   innholdFieldNew,
+  kategoriSlug,
   publishedAtField,
-  sanitySlug,
   titleField,
 } from "@/lib";
 
-const prefix = "designsystem/komponenter/";
+const prefix = "komponenter/";
 
 export default {
   title: "Komponentartikkel",
@@ -20,13 +20,22 @@ export default {
     publishedAtField,
     editorField,
     titleField,
-    sanitySlug(prefix, 3),
+    kategoriSlug(prefix),
+    { title: "url", name: "slug", type: "slug", hidden: true },
     {
-      title: "url (v2)",
-      name: "slug_v2",
-      type: "slug",
-      hidden: ({ currentUser }) =>
-        !currentUser.roles.find((x) => x.name === "developer"),
+      title: "Sist godkjent",
+      name: "updateInfo",
+      type: "object",
+      hidden: true,
+      fields: [
+        {
+          type: "date",
+          name: "lastVerified",
+          title: "Sist oppdatert",
+          description: "Kun synlig for utviklere",
+          readOnly: true,
+        },
+      ],
     },
     {
       title: "Kategori",
@@ -70,7 +79,7 @@ export default {
         },
         {
           name: "bilde",
-          title: "Thumbnail/og-bilde",
+          title: "Thumbnail",
           type: "image",
         },
       ],
