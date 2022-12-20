@@ -2,7 +2,8 @@
  * https://github.com/navikt/detsombetyrnoe/blob/main/src/components/PreviewBanner.tsx#L17
  */
 import { useCheckAuth } from "./utils";
-import { BodyShort, Button, Detail } from "@navikt/ds-react";
+import { BodyShort, Button } from "@navikt/ds-react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 function PreviewBanner(): JSX.Element {
@@ -12,7 +13,7 @@ function PreviewBanner(): JSX.Element {
   if (!validUser) {
     return (
       <>
-        <div className="fixed inset-0 z-[9999] bg-gray-900/70 backdrop-blur-sm" />
+        <div className="fixed inset-0 z-[9999] bg-gray-900/80 backdrop-blur-md" />
         <div className="text-text-on-inverted fixed top-0 z-[9999] grid w-full justify-center bg-gray-900 px-4 py-4 text-center font-semibold no-underline">
           <BodyShort spacing>
             Preview ikke tilgjengelig, finner ikke innlogget Sanity bruker.
@@ -36,7 +37,13 @@ function PreviewBanner(): JSX.Element {
               Exit preview
             </Button>
           </div>
-          <Detail>Ta kontakt på slack #aksel hvis du ønsker tilgang.</Detail>
+
+          <Link
+            href="https://aksel.nav.no/god-praksis/artikler/ny-redaktor-i-aksel"
+            passHref
+          >
+            <a className="underline">Les mer om hvordan du får tilgang</a>
+          </Link>
         </div>
       </>
     );

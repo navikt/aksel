@@ -36,7 +36,7 @@ const ArtikkelCard = ({
         passHref
       >
         <a
-          className="focus-visible:after:shadow-focus after:absolute after:inset-0 after:rounded-lg focus:outline-none"
+          className="focus-visible:after:shadow-focus after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
           onClick={(e) =>
             logNav(
               "artikkel-kort",

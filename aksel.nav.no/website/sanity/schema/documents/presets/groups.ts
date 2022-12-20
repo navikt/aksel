@@ -2,6 +2,7 @@ export const groups = [
   {
     name: "skrivehjelp",
     title: "Skrivehjelp",
+    default: true,
   },
   {
     name: "innhold",

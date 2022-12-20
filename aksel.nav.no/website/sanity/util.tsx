@@ -116,7 +116,7 @@ export const serializers = {
         case "h3":
           return (
             <Heading
-              className="algolia-index-lvl3 max-w-text mt-8 scroll-mt-20 focus:outline-none"
+              className="algolia-index-lvl3 max-w-text mt-8 scroll-mt-20 first:mt-0 focus:outline-none group-first:mt-0"
               spacing
               level="3"
               size="small"

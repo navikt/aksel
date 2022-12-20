@@ -332,6 +332,7 @@ export const defaultDocumentNode = (S, { schemaType }) => {
   ) {
     return S.document().views([
       S.view.form(),
+
       S.view
         .component(Iframe)
         .options({
