@@ -5,6 +5,7 @@ import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { SanityT, urlFor } from "@/lib";
 import cl from "classnames";
 import { getImage } from "components/website-modules/utils/get-image";
+import { SanityBlockContent } from "@/sanity-block";
 
 export type BloggPageT = Partial<
   SanityT.Schema.aksel_blogg & {
@@ -21,11 +22,13 @@ export const LatestBloggposts = ({
   title,
   variant = "blogg",
   level = "1",
+  intro,
 }: {
   bloggs: BloggPageT[];
   title: string;
   variant?: "blogg" | "forside";
   level?: "1" | "2";
+  intro?: any[];
 }) => {
   if (!bloggs || bloggs.length < 3) {
     return null;
@@ -40,10 +43,21 @@ export const LatestBloggposts = ({
       <Heading
         level={level}
         size="xlarge"
-        className="algolia-index-lvl1 text-deepblue-800 mx-auto w-full md:mx-0 md:max-w-none"
+        className={cl(
+          "algolia-index-lvl1 text-deepblue-800 mx-auto w-full md:mx-0 md:max-w-none",
+          { "text-5xl": variant === "blogg" }
+        )}
       >
         {title}
       </Heading>
+      {intro && (
+        <SanityBlockContent
+          blocks={intro}
+          isIngress
+          noLastMargin
+          className="mt-6"
+        />
+      )}
       {/* Desktop-view */}
       <div
         className={cl("hidden gap-12", {

@@ -55,9 +55,13 @@ const Page = (props: PageProps): JSX.Element => {
           id="hovedinnhold"
           className="relative min-h-[80vh] overflow-hidden focus:outline-none"
         >
-          <AkselCubeStatic className="text-[#FFE78A] opacity-20" />
+          <AkselCubeStatic className="text-[#FFE78A] opacity-10" />
           <div className="centered-layout mb-40 grid max-w-screen-2xl">
-            <LatestBloggposts bloggs={props?.bloggposts} title="Blogg" />
+            <LatestBloggposts
+              bloggs={props?.bloggposts}
+              title="Blogg"
+              intro={props?.page?.intro}
+            />
             {/* Skriv for bloggen */}
 
             <BloggAd />
