@@ -33,6 +33,25 @@ const Page = ({
           name="description"
           content="Grunnelegende deler fra designsystemet til NAV"
         />
+        <meta
+          property="og:description"
+          content={page?.seo?.meta ?? ""}
+          key="ogdesc"
+        />
+        <meta
+          property="og:image"
+          content={
+            page?.seo?.image
+              ? urlFor(page?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .quality(100)
+                  .url()
+              : ""
+          }
+          key="ogimage"
+        />
       </Head>
       <WithSidebar
         sidebar={sidebar}
