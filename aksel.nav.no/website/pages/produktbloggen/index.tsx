@@ -5,6 +5,7 @@ import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
+import { AkselCubeStatic } from "components/website-modules/cube";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
@@ -52,8 +53,9 @@ const Page = (props: PageProps): JSX.Element => {
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="min-h-[80vh] focus:outline-none"
+          className="relative min-h-[80vh] overflow-hidden focus:outline-none"
         >
+          <AkselCubeStatic className="text-[#FFE78A] opacity-20" />
           <div className="centered-layout mb-40 grid max-w-screen-2xl">
             <LatestBloggposts bloggs={props?.bloggposts} title="Blogg" />
             {/* Skriv for bloggen */}
