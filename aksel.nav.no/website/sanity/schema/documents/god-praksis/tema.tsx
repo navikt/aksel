@@ -27,9 +27,14 @@ export const Tema = defineType({
       name: "oppsummering",
       type: "string",
       group: "innhold",
+
+      options: {
+        //@ts-ignore
+        maxLength: 130,
+      },
       validation: (Rule) =>
         Rule.required()
-          .max(65)
+          .max(130)
           .error("Temaet burde ha en kort oppsummering/intro på max 65tegn"),
     }),
     defineField({

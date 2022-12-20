@@ -67,7 +67,11 @@ export const Forside = defineType({
             {
               type: "text",
               name: "intro",
-              validation: (Rule) => Rule.required().max(300),
+              validation: (Rule) => Rule.required().max(210),
+              options: {
+                //@ts-ignore
+                maxLength: 210,
+              },
             },
           ],
         },
