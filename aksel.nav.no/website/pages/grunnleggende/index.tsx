@@ -59,35 +59,39 @@ const Page = ({
         intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
         pageProps={page}
       >
-        {grunnleggendeKategorier.map((kat, i) => (
-          <div
-            key={i}
-            className={cl({ "pb-8": i + 1 < grunnleggendeKategorier.length })}
-          >
-            <Heading
-              level="2"
-              size="large"
-              spacing
-              className="text-deepblue-800 scoll-mt-20"
-              id={kat.value}
+        {grunnleggendeKategorier
+          .filter(
+            (kat) => links?.filter((x) => x.kategori === kat.value).length > 0
+          )
+          .map((kat, i) => (
+            <div
+              key={i}
+              className={cl({ "pb-8": i + 1 < grunnleggendeKategorier.length })}
             >
-              {kat.title}
-            </Heading>
-            <div>
-              {page?.[`ingress_${kat.value}`] && (
-                <Ingress className="mb-4 only:mb-7">
-                  {page[`ingress_${kat.value}`]}
-                </Ingress>
-              )}
-              {page?.[`intro_${kat.value}`] && (
-                <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
-              )}
+              <Heading
+                level="2"
+                size="large"
+                spacing
+                className="text-deepblue-800 scoll-mt-20"
+                id={kat.value}
+              >
+                {kat.title}
+              </Heading>
+              <div>
+                {page?.[`ingress_${kat.value}`] && (
+                  <Ingress className="mb-4 only:mb-7">
+                    {page[`ingress_${kat.value}`]}
+                  </Ingress>
+                )}
+                {page?.[`intro_${kat.value}`] && (
+                  <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
+                )}
+              </div>
+              <ComponentOverview
+                node={links.filter((x) => x.kategori === kat.value)}
+              />
             </div>
-            <ComponentOverview
-              node={links.filter((x) => x.kategori === kat.value)}
-            />
-          </div>
-        ))}
+          ))}
       </WithSidebar>
     </>
   );
