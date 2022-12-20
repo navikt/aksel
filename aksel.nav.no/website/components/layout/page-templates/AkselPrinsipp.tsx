@@ -51,6 +51,7 @@ const AkselPrinsippTemplate = ({
                   .width(1200)
                   .height(630)
                   .fit("crop")
+                  .quality(100)
                   .url()
               : ""
           }

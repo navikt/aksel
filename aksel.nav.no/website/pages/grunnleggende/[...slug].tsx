@@ -52,6 +52,7 @@ const Page = ({
                   .width(1200)
                   .height(630)
                   .fit("crop")
+                  .quality(100)
                   .url()
               : seo
               ? urlFor(seo).width(1200).height(630).fit("crop").url()

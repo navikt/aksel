@@ -74,7 +74,9 @@ const Page = ({
               ? urlFor(blogg?.seo?.image)
                   .width(1200)
                   .height(630)
+                  .quality(100)
                   .fit("crop")
+                  .quality(100)
                   .url()
               : getImage(blogg?.heading ?? "", "OG")
           }
@@ -119,7 +121,10 @@ const Page = ({
           <div className="relative mx-auto mt-20 aspect-video w-full max-w-3xl">
             {blogg?.seo?.image ? (
               <Image
-                src={urlFor(blogg?.seo?.image).auto("format").url()}
+                src={urlFor(blogg?.seo?.image)
+                  .auto("format")
+                  .quality(100)
+                  .url()}
                 decoding="sync"
                 layout="fill"
                 objectFit="cover"
@@ -127,6 +132,7 @@ const Page = ({
                 priority
                 className="rounded-2xl"
                 alt="Illustrasjon"
+                quality={100}
               />
             ) : (
               <Image

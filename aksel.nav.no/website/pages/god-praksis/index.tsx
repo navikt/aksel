@@ -48,6 +48,7 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
                   .width(1200)
                   .height(630)
                   .fit("crop")
+                  .quality(100)
                   .url()
               : ""
           }

@@ -91,12 +91,14 @@ const AkselArtikkelTemplate = ({
                   .width(1200)
                   .height(630)
                   .fit("crop")
+                  .quality(100)
                   .url()
               : hasTema && (data.tema[0] as any)?.seo?.image
               ? urlFor((data.tema[0] as any)?.seo?.image)
                   .width(1200)
                   .height(630)
                   .fit("crop")
+                  .quality(100)
                   .url()
               : ""
           }

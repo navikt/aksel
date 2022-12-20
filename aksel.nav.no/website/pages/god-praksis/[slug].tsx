@@ -62,6 +62,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                   .width(1200)
                   .height(630)
                   .fit("crop")
+                  .quality(100)
                   .url()
               : ""
           }

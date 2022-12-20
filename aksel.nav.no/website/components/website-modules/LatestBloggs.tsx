@@ -74,7 +74,11 @@ export const LatestBloggposts = ({
           <div className="relative mb-10 block aspect-video">
             {bloggs[0]?.seo?.image ? (
               <Image
-                src={urlFor(bloggs[0].seo.image).auto("format").url()}
+                src={urlFor(bloggs[0].seo.image)
+                  .quality(100)
+                  .auto("format")
+                  .url()}
+                quality={100}
                 decoding="sync"
                 layout="fill"
                 objectFit="cover"
@@ -208,8 +212,12 @@ export const LatestBloggposts = ({
           <div className="relative mb-10 block aspect-video">
             {bloggs[0]?.seo?.image ? (
               <Image
-                src={urlFor(bloggs[0].seo.image).auto("format").url()}
+                src={urlFor(bloggs[0].seo.image)
+                  .quality(100)
+                  .auto("format")
+                  .url()}
                 decoding="sync"
+                quality={100}
                 layout="fill"
                 objectFit="cover"
                 aria-hidden
