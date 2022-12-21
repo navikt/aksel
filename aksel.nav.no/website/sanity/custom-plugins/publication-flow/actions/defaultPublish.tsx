@@ -29,10 +29,11 @@ export const createWrappedDefaultPublish = (
       tone: "positive",
       onHandle: () => {
         setIsPublishing(true);
-        patch.execute(
-          [{ set: { publishedAt: new Date().toISOString() } }],
-          props.published
-        );
+        !props.published &&
+          patch.execute(
+            [{ set: { publishedAt: new Date().toISOString() } }],
+            props.published
+          );
         publish.execute();
 
         props.onComplete();
