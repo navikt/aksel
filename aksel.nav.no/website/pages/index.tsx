@@ -86,7 +86,10 @@ const GetStarted = ({
 
   useEffect(() => {
     setReducedMotion(getPrefersReducedMotion());
-  }, []);
+    const data = localStorage.getItem("pause-animations");
+    setPause(JSON.parse(data) ?? false);
+    togglePause(JSON.parse(data) ?? false);
+  }, [togglePause]);
 
   return (
     <div className="bg-deepblue-700 text-text-on-action relative mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
@@ -115,25 +118,28 @@ const GetStarted = ({
           snowflakeCount={60}
         />
       </div>
-      <button
-        className="focus-visible:ring-border-focus-on-inverted absolute top-2 right-2 grid h-11 w-11 place-items-center rounded text-2xl focus:outline-none focus-visible:ring-2"
-        onClick={() => {
-          setPause(!pause);
-          togglePause(!pause);
-        }}
-      >
-        {pause ? (
-          <>
-            <PlayIcon aria-hidden />
-            <span className="sr-only">Start animasjon</span>
-          </>
-        ) : (
-          <>
-            <PauseIcon aria-hidden />
-            <span className="sr-only">Stopp animasjon</span>
-          </>
-        )}
-      </button>
+      {!reducedMotion && (
+        <button
+          className="focus-visible:ring-border-focus-on-inverted absolute top-2 right-2 grid h-11 w-11 place-items-center rounded text-2xl focus:outline-none focus-visible:ring-2"
+          onClick={() => {
+            setPause(!pause);
+            togglePause(!pause);
+            localStorage.setItem("pause-animations", JSON.stringify(!pause));
+          }}
+        >
+          {pause ? (
+            <>
+              <PlayIcon aria-hidden />
+              <span className="sr-only">Start animasjon</span>
+            </>
+          ) : (
+            <>
+              <PauseIcon aria-hidden />
+              <span className="sr-only">Stopp animasjon</span>
+            </>
+          )}
+        </button>
+      )}
     </div>
   );
 };
