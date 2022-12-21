@@ -74,10 +74,10 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="min-h-[80vh] focus:outline-none"
+          className="relative min-h-[80vh] overflow-hidden focus:outline-none"
         >
-          <div className="relative overflow-hidden pt-20 text-center">
-            <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
+          <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
+          <div className=" pt-20 text-center">
             <div className="dynamic-wrapper px-4 pb-6 text-center">
               <Image
                 src={urlFor(page.pictogram.url).auto("format").url()}
