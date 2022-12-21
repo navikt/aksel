@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { readExampleFile, readExampleFiles } from ".";
-import { SanityT } from "..";
-import { noCdnClient } from "../sanity/sanity.server";
+import { SanityT } from "../../lib";
+import { noCdnClient } from "../../lib/sanity/sanity.server";
 import { getExampleFiles } from "./get-example-files";
 dotenv.config();
 

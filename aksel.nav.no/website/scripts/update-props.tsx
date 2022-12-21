@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
-import { noCdnClient } from "../sanity/sanity.server";
+import { noCdnClient } from "../lib/sanity/sanity.server";
 import CoreDocs from "@navikt/ds-react/_docs.json";
 import InternalDocs from "@navikt/ds-react-internal/_docs.json";
 import NavnoDocs from "@navikt/ds-navno/_docs.json";
-import { SanityT } from "..";
+import { SanityT } from "../lib";
 
 dotenv.config();
 

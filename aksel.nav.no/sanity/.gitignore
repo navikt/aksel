@@ -1,2 +1,2 @@
 .yarn/cache
-production.tar.gz
+*.tar.gz
