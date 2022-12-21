@@ -149,8 +149,6 @@ const Forside = ({
 }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
 
-  console.log(pause);
-
   return (
     <>
       <Head>
