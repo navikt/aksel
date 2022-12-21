@@ -131,7 +131,7 @@ const Page = ({
                 aria-hidden
                 priority
                 className="rounded-2xl"
-                alt="Illustrasjon"
+                alt=""
                 quality={100}
               />
             ) : (
@@ -143,7 +143,7 @@ const Page = ({
                 aria-hidden
                 priority
                 className="rounded-2xl"
-                alt="Illustrasjon"
+                alt=""
               />
             )}
           </div>

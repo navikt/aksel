@@ -42,6 +42,7 @@ const filtered = [
   "aksel_artikkel",
   "skrivehjelp",
   "publication_flow",
+  "aksel_feedback",
 ];
 
 export const structure = async (
@@ -201,6 +202,14 @@ export const structure = async (
                       .schemaType(`aksel_forside`)
                       .icon(Picture)
                       .id(`aksel_forside_dokument`),
+                    S.listItem().title("Feedback").child(
+                      S.documentList()
+                        .title("Feedback")
+                        .filter(`_type == 'aksel_feedback'`)
+                      /* .menuItems([
+                              ...S.documentTypeList("redirect").getMenuItems(),
+                            ]) */
+                    ),
                     S.listItem().title("Standalone-sider").child(
                       S.documentList()
                         .title("Sider")
