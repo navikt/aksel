@@ -27,7 +27,16 @@ const ComponentOverview = ({
       }
       return true;
     })
-    .sort((a, b) => a?.heading?.localeCompare(b?.heading));
+    .sort((a, b) => {
+      if (a?.status?.tag === "deprecated" && b?.status?.tag === "deprecated") {
+        return 0;
+      } else if (a?.status?.tag === "deprecated") {
+        return 1;
+      } else if (b?.status?.tag === "deprecated") {
+        return -1;
+      }
+      return a?.heading?.localeCompare(b?.heading);
+    });
 
   return (
     <div className="mb-8">
@@ -37,7 +46,12 @@ const ComponentOverview = ({
             <div className="bg-surface-subtle focus-within:ring-border-focus ring-border-subtle hover:shadow-medium min-h-56 group relative rounded-2xl focus-within:ring-[3px] hover:ring-1">
               <div
                 className={cl(
-                  "flex max-h-44 items-center justify-center overflow-hidden rounded-t-2xl"
+                  "flex max-h-44 items-center justify-center overflow-hidden rounded-t-2xl",
+                  "filter",
+                  {
+                    "hue-rotate-[65deg]": x?.status?.tag === "beta",
+                    grayscale: x?.status?.tag === "deprecated",
+                  }
                 )}
               >
                 {x.status?.bilde ? (
