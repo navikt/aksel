@@ -13,6 +13,11 @@ export const TestDoc = defineType({
   groups,
   ...artikkelPreview("TestDoc"),
   fields: [
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+    }),
     oppdateringsvarsel,
     defineField({
       name: "testInput",
