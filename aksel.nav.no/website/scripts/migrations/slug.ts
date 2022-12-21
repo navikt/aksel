@@ -3,21 +3,21 @@
  */
 
 import dotenv from "dotenv";
-import { noCdnClient } from "../sanity/sanity.server";
+import { noCdnClient } from "../../lib/sanity/sanity.server";
 
 dotenv.config();
 const token = process.env.SANITY_WRITE_KEY;
 
-const randKey = () => {
+/* const randKey = () => {
   let result = "";
-  let characters =
+  const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
+  const charactersLength = characters.length;
+  for (let i = 0; i < charactersLength; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-};
+}; */
 
 const main = async () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
