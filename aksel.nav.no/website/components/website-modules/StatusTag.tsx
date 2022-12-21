@@ -17,19 +17,19 @@ export const StatusTag = ({
     case "new":
       return (
         <Tag variant="info" size="small">
-          New
+          Ny
         </Tag>
       );
     case "ready":
       return showStable ? (
         <Tag variant="success" size="small">
-          Stable
+          Stabil
         </Tag>
       ) : null;
     case "deprecated":
       return (
         <Tag variant="neutral" size="small">
-          Deprecated
+          Avviklet
         </Tag>
       );
     default:

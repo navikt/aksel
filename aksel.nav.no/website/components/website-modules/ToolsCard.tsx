@@ -76,7 +76,7 @@ export const ToolCard = () => {
           </div>
           <div>
             <NextLink href={t.href} passHref>
-              <Link className="text-text-default mb-1 font-semibold no-underline hover:underline">
+              <Link className="text-text-default mb-1 font-semibold">
                 {t.title}
               </Link>
             </NextLink>

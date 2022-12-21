@@ -63,7 +63,11 @@ const NavItem = ({
                     : "info"
                 }
               >
-                {link.tag}
+                {link.tag === "new"
+                  ? "ny"
+                  : link.tag === "deprecated"
+                  ? "Avviklet"
+                  : link.tag}
               </Tag>
             )}
           </span>
