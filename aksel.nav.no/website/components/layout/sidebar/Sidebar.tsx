@@ -130,7 +130,17 @@ export const Sidebar = ({
           ...x,
           pages: links
             .filter((y) => y?.kategori === x.value)
-            .sort((a, b) => a?.heading.localeCompare(b?.heading)),
+            .sort((a, b) => {
+              if (a?.tag === "deprecated" && b?.tag === "deprecated") {
+                return 0;
+              } else if (a?.tag === "deprecated") {
+                return 1;
+              } else if (b.tag === "deprecated") {
+                return -1;
+              }
+
+              return a?.heading.localeCompare(b?.heading);
+            }),
         }))
         .filter((x) => !(!x.pages || x.pages.length === 0)),
     [links, kategori]

@@ -5,7 +5,8 @@ const publishedAt = defineField({
   name: "publishedAt",
   type: "datetime",
   group: "settings",
-  readOnly: true,
+  readOnly: ({ currentUser }) =>
+    !currentUser.roles.find((x) => x.name === "developer"),
   hidden: ({ currentUser }) =>
     !currentUser.roles.find((x) => x.name === "developer"),
 });
