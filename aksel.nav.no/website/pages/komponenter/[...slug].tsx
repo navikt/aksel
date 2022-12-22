@@ -152,7 +152,7 @@ const Page = ({
           )
         }
       >
-        <BodyShort
+        {/* <BodyShort
           as="span"
           size="small"
           className="text-text-subtle mb-6 flex flex-wrap gap-4"
@@ -226,7 +226,7 @@ const Page = ({
               </a>
             </>
           )}
-        </BodyShort>
+        </BodyShort> */}
         {page?.status?.tag === "beta" && <BetaWarning />}
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
@@ -247,6 +247,7 @@ const Wrapper = (props: any): JSX.Element => {
           params={{
             slug: `komponenter/${props.slug.slice(0, 2).join("/")}`,
             type: "komponent_artikkel",
+            preview: "true",
           }}
           props={props}
         />
@@ -285,6 +286,7 @@ export const getStaticProps = async ({
   const { page, sidebar, refs, seo } = await getClient().fetch(komponentQuery, {
     slug: `komponenter/${slug.slice(0, 2).join("/")}`,
     type: "komponent_artikkel",
+    preview: "false",
   });
 
   return {

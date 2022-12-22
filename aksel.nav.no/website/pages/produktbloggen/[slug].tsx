@@ -270,7 +270,7 @@ export const getServerSideProps: GetServerSideProps = async (
       morePosts,
       slug: context.params.slug as string,
       preview: context.preview ?? false,
-      id: blogg?._id,
+      id: blogg?._id ?? "",
     },
     notFound: !blogg && !context.preview,
   };
