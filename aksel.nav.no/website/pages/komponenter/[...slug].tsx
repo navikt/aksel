@@ -152,7 +152,7 @@ const Page = ({
           )
         }
       >
-        {/* <BodyShort
+        <BodyShort
           as="span"
           size="small"
           className="text-text-subtle mb-6 flex flex-wrap gap-4"
@@ -226,7 +226,7 @@ const Page = ({
               </a>
             </>
           )}
-        </BodyShort> */}
+        </BodyShort>
         {page?.status?.tag === "beta" && <BetaWarning />}
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
