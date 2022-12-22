@@ -36,7 +36,6 @@ export default async function logPageView(
   const { weeks } = await client
     .fetch(query, { id })
     .then((res) => {
-      console.log(res);
       return res;
     })
     .catch((err) => {
