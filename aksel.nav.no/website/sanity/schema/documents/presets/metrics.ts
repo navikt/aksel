@@ -15,7 +15,7 @@ export const metrics = defineField({
           type: "number",
         },
         {
-          name: "week",
+          name: "weeks",
           type: "array",
           of: [
             {
