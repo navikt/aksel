@@ -30,11 +30,19 @@ export const metrics = defineField({
                   name: "views",
                   type: "number",
                 },
+                {
+                  name: "scrollLength",
+                  type: "number",
+                },
               ],
             },
           ],
         },
       ],
+    },
+    {
+      type: "number",
+      name: "avgScrollLength",
     },
   ],
 });
