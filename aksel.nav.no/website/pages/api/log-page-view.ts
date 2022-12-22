@@ -7,15 +7,15 @@ export default async function logPageView(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { slug } = req.query;
+  const { id } = req.query;
 
-  if (!slug) {
-    return res.status(400).json({ message: "Missing slug" });
+  if (!id) {
+    return res.status(400).json({ message: "Missing id" });
   }
 
-  const query = `*[slug.current == "test-slug"][0]`;
+  const query = `*[_id == $id][0]`;
   const page = await client
-    .fetch(query, { slug })
+    .fetch(query, { id })
     .then((res) => {
       console.log(res);
       return res;
