@@ -125,7 +125,14 @@ export const WithSidebar = ({
                   </div>
                 </div>
                 {variant === "page" && pageProps.status?.bilde && (
-                  <div className="relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40">
+                  <div
+                    className={cl(
+                      "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
+                      {
+                        "hue-rotate-[65deg]": pageProps?.status?.tag === "beta",
+                      }
+                    )}
+                  >
                     <Image
                       src={urlFor(pageProps.status?.bilde).auto("format").url()}
                       decoding="async"
