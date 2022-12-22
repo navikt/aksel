@@ -69,6 +69,14 @@ export const usePageView = (router: Router, pageProps: any) => {
         isDevelopment && console.error(error);
       }
       logPageView(e, data, first);
+      try {
+        if (!(isDevelopment || isTest || isPreview())) {
+          //TO-DO: Replace with correct id
+          fetch(`/api/log-page-view?id=420cd9c0-ed5b-42fb-8e5f-787372774c63`);
+        }
+      } catch (error) {
+        isDevelopment && console.error(error);
+      }
     },
     [pageProps]
   );
