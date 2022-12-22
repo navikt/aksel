@@ -1,9 +1,15 @@
 import { BodyShort, Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import cl from "classnames";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { HelpfulArticleEnum, HelpfulArticleT } from "@/lib";
-import { AmplitudeEvents, logAmplitudeEvent } from "../utils";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { FeedbackT, HelpfulArticleEnum, HelpfulArticleT } from "@/lib";
+import { AmplitudeEvents, IdContext, logAmplitudeEvent } from "../utils";
 
 const Feedback = ({
   docId,
@@ -18,6 +24,7 @@ const Feedback = ({
   akselFeedback?: boolean;
   text?: string;
 }): JSX.Element => {
+  const idCtx = useContext(IdContext);
   const { asPath, basePath } = useRouter();
   const [textValue, setTextValue] = useState("");
   const [activeState, setActiveState] = useState<HelpfulArticleEnum | null>(
@@ -41,6 +48,24 @@ const Feedback = ({
     fetch("/api/helpfulArticleFeedback", {
       method: "POST",
       body: JSON.stringify(msg),
+    });
+
+    const state = {
+      ja: "ja",
+      nei: "nei",
+      misc: "forslag",
+    };
+
+    const body: FeedbackT = {
+      message: textValue,
+      url: `${basePath}${asPath}`,
+      type: state[activeState],
+      docId: idCtx?.id,
+    };
+
+    fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify(body),
     });
   };
 

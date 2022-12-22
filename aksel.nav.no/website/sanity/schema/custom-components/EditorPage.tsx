@@ -158,6 +158,56 @@ const DraftList = ({ data }: { data: any[] }) => {
   );
 };
 
+const FeedbackList = ({ data, title }: { data: any[]; title: string }) => {
+  const schema = useSchema();
+
+  const list = useMemo(
+    () =>
+      data.filter((x) =>
+        title.startsWith("Ferdig") ? x.behandlet : !x.behandlet
+      ),
+    [data, title]
+  );
+
+  if (list.length === 0) {
+    return null;
+  }
+
+  return (
+    <Accordion.Item>
+      <Accordion.Header>{`${title} (${list.length ?? 0})`}</Accordion.Header>
+      <Accordion.Content>
+        <ul>
+          {list.map((x) => (
+            <li key={x._id}>
+              <Card flex={1}>
+                <IntentButton
+                  intent="edit"
+                  mode="ghost"
+                  padding={1}
+                  radius={0}
+                  params={{
+                    type: "aksel_feedback",
+                    id: getPublishedId(x._id),
+                  }}
+                  style={{ width: "100%" }}
+                >
+                  <Preview
+                    layout="default"
+                    schemaType={schema.get("aksel_feedback")}
+                    value={x}
+                    key={x._id}
+                  />
+                </IntentButton>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      </Accordion.Content>
+    </Accordion.Item>
+  );
+};
+
 export const EditorPage = () => {
   const user = useCurrentUser();
   const userId = useFormValue([`user_id`]) as { current?: string };
@@ -166,6 +216,15 @@ export const EditorPage = () => {
   const { data, error } = useSWR(
     `*[count((contributors[]->user_id.current)[@ == "${userId?.current}"]) > 0]`,
     (query) => client.fetch(query)
+  );
+
+  const {
+    data: fbData,
+    error: fbError,
+    isValidating: fbValidating,
+  } = useSWR(
+    `*[_type == "aksel_feedback" && $id in doc_ref->contributors[]->user_id.current]{_id, behandlet}`,
+    (query) => client.fetch(query, { id: userId.current })
   );
 
   if (error || !user) {
@@ -202,6 +261,20 @@ export const EditorPage = () => {
           </Link>
         </p>
       </div>
+      {!fbError && !fbValidating && (
+        <div className="mt-7">
+          <Heading level="2" size="small" spacing>
+            Tilbakemeldinger på artikler du er forfatter i (
+            {fbData?.length ?? 0})
+          </Heading>
+          {fbData?.length > 0 && (
+            <Accordion>
+              <FeedbackList data={fbData} title="Ubehandlet" />
+              <FeedbackList data={fbData} title="Ferdig behandlet" />
+            </Accordion>
+          )}
+        </div>
+      )}
       <div className="mt-7">
         <Heading level="2" size="small" spacing>
           Innhold du jobber med

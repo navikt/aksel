@@ -109,6 +109,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       articles,
+      id: "godpraksis_landingsside_id1",
     },
     revalidate: 60,
   };

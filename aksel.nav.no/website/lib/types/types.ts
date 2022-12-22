@@ -30,3 +30,10 @@ export type DsFeddbackMsgT = {
   user?: string;
   url: string;
 };
+
+export type FeedbackT = {
+  message: string;
+  url: string;
+  docId: string;
+  type?: "ja" | "nei" | "forslag" | "footer";
+};
