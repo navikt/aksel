@@ -6,6 +6,23 @@ export const allArticleDocuments = [
   "aksel_prinsipp",
 ];
 
+export const previews = [
+  "aksel_artikkel",
+  "komponent_artikkel",
+  "ds_artikkel",
+  "aksel_blogg",
+  "aksel_prinsipp",
+  "aksel_standalone",
+];
+
+export const landingsider = [
+  { name: "godpraksis_landingsside", url: "god-praksis" },
+  { name: "blogg_landingsside", url: "produktbloggen" },
+  { name: "grunnleggende_landingsside", url: "grunnleggende" },
+  { name: "komponenter_landingsside", url: "komponenter" },
+  { name: "prinsipper_landingsside", url: "prinsipper" },
+];
+
 export const allArticleDocsRef = allArticleDocuments.map((x) => ({ type: x }));
 
 export const komponentKategorier = [

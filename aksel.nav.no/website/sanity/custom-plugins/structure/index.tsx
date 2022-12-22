@@ -14,6 +14,8 @@ import {
   bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
+  landingsider,
+  previews,
   prinsippKategorier,
 } from "../../config";
 
@@ -287,23 +289,6 @@ export const structure = async (
         : []),
     ]);
 };
-
-const previews = [
-  "aksel_artikkel",
-  "komponent_artikkel",
-  "ds_artikkel",
-  "aksel_blogg",
-  "aksel_prinsipp",
-  "aksel_standalone",
-];
-
-const landingsider = [
-  { name: "godpraksis_landingsside", url: "god-praksis" },
-  { name: "blogg_landingsside", url: "produktbloggen" },
-  { name: "grunnleggende_landingsside", url: "grunnleggende" },
-  { name: "komponenter_landingsside", url: "komponenter" },
-  { name: "prinsipper_landingsside", url: "prinsipper" },
-];
 
 export const resolveProductionUrl = (doc) => {
   const basePath = "https://aksel.nav.no";

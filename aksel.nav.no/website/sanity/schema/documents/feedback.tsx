@@ -1,5 +1,6 @@
 import { CommentIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
+import { landingsider, previews } from "../../config";
 
 export const Feedback = defineType({
   title: "Feedback",
@@ -60,7 +61,9 @@ export const Feedback = defineType({
       type: "reference",
       weak: true,
       hidden: ({ value }) => !value,
-      to: [{ type: "aksel_artikkel" }],
+      to: [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].map(
+        (x) => ({ type: x })
+      ),
       readOnly: true,
     }),
     defineField({
