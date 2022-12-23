@@ -11,10 +11,12 @@ export default async function logPageScroll(
 ) {
   const { id, current, views, length } = req.query;
 
-  if (!(id && current && views)) {
+  if (!(id && current && views && length)) {
     return res
       .status(400)
-      .json({ message: "Missing required parameter(s). id, current or views" });
+      .json({
+        message: "Missing required parameter(s). id, current, length or views",
+      });
   }
 
   const newAverage = Math.round(
