@@ -122,7 +122,15 @@ export const usePageView = (router: Router, pageProps: any) => {
     }
   }, []);
 
+  const logTimeSpent = (timeSpent: number) => {
+    console.log(timeSpent);
+    //TO-DO: Do the api call
+  };
+
   useEffect(() => {
+    console.log("loaded");
+    const startTime = new Date().getTime();
+
     router.events.on("routeChangeComplete", logView);
     router.events.on("routeChangeStart", logScroll);
     window.onload = () => logView(window.location.pathname, true);
@@ -131,6 +139,7 @@ export const usePageView = (router: Router, pageProps: any) => {
     return () => {
       router.events.off("routeChangeComplete", logView);
       router.events.off("routeChangeStart", logScroll);
+      logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
     };
   }, [router.events, logView, logScroll]);
 };
