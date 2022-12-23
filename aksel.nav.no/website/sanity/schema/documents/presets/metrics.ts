@@ -44,5 +44,9 @@ export const metrics = defineField({
       type: "number",
       name: "avgScrollLength",
     },
+    {
+      type: "number",
+      name: "avgTime",
+    },
   ],
 });
