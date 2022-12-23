@@ -128,7 +128,6 @@ export const usePageView = (router: Router, pageProps: any) => {
   };
 
   useEffect(() => {
-    console.log("loaded");
     const startTime = new Date().getTime();
 
     router.events.on("routeChangeComplete", logView);
