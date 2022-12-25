@@ -5,7 +5,7 @@ import { Header } from "components/layout/header/Header";
 import { Sidebar } from "components/layout/sidebar/Sidebar";
 import Feedback from "components/website-modules/feedback";
 import { ReactNode } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import NextLink from "next/link";
 import { capitalize } from "@/utils";
 import Image from "next/image";

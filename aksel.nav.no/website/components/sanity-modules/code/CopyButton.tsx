@@ -2,7 +2,7 @@ import { Copy, SuccessStroke } from "@navikt/ds-icons";
 import { useRef, useState, useEffect } from "react";
 import copy from "copy-to-clipboard";
 import React from "react";
-import cl from "classnames";
+import cl from "clsx";
 import style from "./index.module.css";
 
 const copyCode = (content: string) =>

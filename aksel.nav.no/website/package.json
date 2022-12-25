@@ -35,7 +35,7 @@
     "@svgr/webpack": "^5.5.0",
     "amplitude-js": "^8.8.0",
     "boring-avatars": "1.7.0",
-    "classnames": "^2.3.1",
+    "clsx": "^1.2.1",
     "codesandbox": "^2.2.3",
     "color": "4.2.3",
     "copy-to-clipboard": "^3.3.1",

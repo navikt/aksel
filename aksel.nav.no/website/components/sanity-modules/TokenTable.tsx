@@ -4,7 +4,7 @@ import core from "@navikt/ds-css/tokens.json";
 import internal from "@navikt/ds-css-internal/tokens.json";
 import { useState } from "react";
 import { Expand } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import { Link, BodyLong, Label } from "@navikt/ds-react";
 import NextLink from "next/link";
 

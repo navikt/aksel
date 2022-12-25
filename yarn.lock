@@ -3166,7 +3166,7 @@ __metadata:
     "@rollup/plugin-commonjs": 23.0.2
     "@rollup/plugin-node-resolve": ^15.0.1
     "@svgr/cli": 6.2.1
-    clsx: ^1.1.1
+    clsx: ^1.2.1
     concurrently: 7.2.1
     copyfiles: 2.4.1
     postcss-combine-duplicated-selectors: 10.0.3
@@ -3192,7 +3192,7 @@ __metadata:
   dependencies:
     "@navikt/ds-icons": ^2.0.11
     "@navikt/ds-react": ^2.0.11
-    clsx: ^1.1.1
+    clsx: ^1.2.1
     concurrently: 7.2.1
     copy-to-clipboard: ^3.3.1
     rimraf: ^3.0.2
@@ -9831,7 +9831,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.2.5, classnames@npm:^2.3.1":
+"classnames@npm:^2.2.5":
   version: 2.3.2
   resolution: "classnames@npm:2.3.2"
   checksum: 2c62199789618d95545c872787137262e741f9db13328e216b093eea91c85ef2bfb152c1f9e63027204e2559a006a92eb74147d46c800a9f96297ae1d9f96f4e
@@ -10009,7 +10009,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.1.1, clsx@npm:^1.2.1":
+"clsx@npm:^1.2.1":
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
   checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
@@ -27170,7 +27170,7 @@ __metadata:
     autoprefixer: ^10.4.0
     babel-loader: ^8.2.0
     boring-avatars: 1.7.0
-    classnames: ^2.3.1
+    clsx: ^1.2.1
     codesandbox: ^2.2.3
     color: 4.2.3
     copy-to-clipboard: ^3.3.1

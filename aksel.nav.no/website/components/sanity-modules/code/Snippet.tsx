@@ -1,6 +1,6 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
-import cl from "classnames";
+import cl from "clsx";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import React from "react";
 import CopyButton from "./CopyButton";

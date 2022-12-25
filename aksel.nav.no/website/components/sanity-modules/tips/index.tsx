@@ -3,7 +3,7 @@ import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { Edit, LightBulb } from "@navikt/ds-icons";
 import { Detail, Link } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import React from "react";
 import style from "./tips.module.css";
 

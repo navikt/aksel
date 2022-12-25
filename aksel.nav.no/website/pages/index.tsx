@@ -22,7 +22,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Snowfall from "react-snowfall";
 import { lazy, useEffect, useState } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
 function getPrefersReducedMotion() {
   const QUERY = "(prefers-reduced-motion: no-preference)";
