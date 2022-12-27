@@ -42,6 +42,8 @@ export const GlobalSearch = () => {
     {}
   );
 
+  console.log(queryData);
+
   return (
     <div>
       <div>
@@ -69,9 +71,9 @@ export const GlobalSearch = () => {
           Søkte artikler
         </Heading>
         <ul>
-          {queryData?.map((x, xi) => (
-            <li key={xi}>{x.heading}</li>
-          ))}
+          {!queryError &&
+            queryData &&
+            queryData?.map((x, xi) => <li key={xi}>{x.heading}</li>)}
         </ul>
         <Heading level="2" size="small">
           Nyeste artikler

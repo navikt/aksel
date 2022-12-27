@@ -36,16 +36,24 @@ export default async function initialSearch(
     return res.status(405).json({ message: "No valid query" });
   }
 
-  const sanityQuery = `*[_type in $types && defined(publishedAt)] | order(publishedAt desc)[0...12] {
-    ${akselArticleFields}
-  }`;
+  const catchAllQuery = `*${query}*`;
 
+  const sanityQuery = `*[_type in $types ] | score(
+    boost(heading match $qAll, 7),
+    boost(heading match $q, 10),
+    boost(pt::text(content) match $q, 2),
+    boost(ingress match $qAll, 2),
+    boost(pt::text(intro_komponent.body) match $qAll, 3)
+  )| order(_score desc) [0...10]{
+    heading, _score
+  }`;
+  /* ${akselArticleFields} */
   const payload = [];
 
   await getClient()
-    .fetch(sanityQuery, { types: kat })
+    .fetch(sanityQuery, { types: kat, q: query, qAll: catchAllQuery })
     .then((data) => {
-      payload.push(...data);
+      payload.push(...data.filter((x) => x._score !== 0));
       return data;
     })
     .catch((err) => {
