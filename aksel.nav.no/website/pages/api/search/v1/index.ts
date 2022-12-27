@@ -36,14 +36,25 @@ export default async function initialSearch(
     return res.status(405).json({ message: "No valid query" });
   }
 
+  const words = query
+    .split(" ")
+    .map(
+      (x) => `boost(heading match "*${x}*", 3),
+  boost(heading match "${x}", 5),
+  boost(pt::text(content) match "${x}", 1),
+  boost(ingress match "*${x}*", 1),
+  boost(pt::text(intro_komponent.body) match "*${x}*", 1)`
+    )
+    .join(",");
   const catchAllQuery = `*${query}*`;
 
   const sanityQuery = `*[_type in $types ] | score(
-    boost(heading match $qAll, 7),
-    boost(heading match $q, 10),
-    boost(pt::text(content) match $q, 2),
-    boost(ingress match $qAll, 2),
-    boost(pt::text(intro_komponent.body) match $qAll, 3)
+    boost(heading match $qAll, 14),
+    boost(heading match $q, 20),
+    boost(pt::text(content) match $q, 4),
+    boost(ingress match $qAll, 4),
+    boost(pt::text(intro_komponent.body) match $qAll, 6),
+    ${words}
   )| order(_score desc) [0...10]{
     heading, _score
   }`;
