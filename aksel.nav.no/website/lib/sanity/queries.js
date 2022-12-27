@@ -446,6 +446,7 @@ export const akselArticleFields = `
     "slug": slug.current,
     "tema": tema[]->title,
     ingress,
+    status,
 `;
 
 export const akselArticleAll = (boundry = "") => {
