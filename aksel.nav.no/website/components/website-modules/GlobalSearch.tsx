@@ -32,7 +32,7 @@ export const GlobalSearch = () => {
     isValidating: queryValidating,
   } = useSWR(
     debouncedSearch !== ""
-      ? `/api/search/v1?q=${encodeURIComponent(debouncedSearch)}&kat=${toggled}`
+      ? `/api/search/v1?q=${encodeURIComponent(debouncedSearch)}&doc=${toggled}`
       : null,
     (query) =>
       fetch(query).then((res) => {

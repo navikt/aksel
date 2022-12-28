@@ -2,6 +2,7 @@ import { akselArticleFields } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { allArticleDocuments } from "../../../../sanity/config";
+import Fuse from "fuse.js";
 
 const DocMap = {
   alle: allArticleDocuments,
@@ -12,6 +13,70 @@ const DocMap = {
   blogg: ["aksel_blogg"],
 };
 
+const searchSanity = async (query: string, doctype: string[]) => {
+  if (!query || !doctype) {
+    return [];
+  }
+
+  const words = query
+    .split(" ")
+    .map(
+      (x) => `heading match "*${x}*",
+  heading match "${x}",
+  pt::text(content) match "${x}",
+  ingress match "*${x}*",
+  pt::text(intro_komponent.body) match "*${x}*"`
+    )
+    .join(",");
+
+  const catchAllQuery = `*${query}*`;
+
+  const sanityQuery = `*[_type in $types ] | score(
+    heading match $qAll,
+    heading match $q,
+    pt::text(content) match $q,
+    ingress match $qAll,
+    pt::text(intro_komponent.body) match $qAll,
+    ${words}
+  ){
+     _score,
+    ${akselArticleFields}
+    "intro": pt::text(intro_komponent.body),
+    "content": pt::text(content),
+  }`;
+
+  return await getClient()
+    .fetch(sanityQuery, { types: doctype, q: query, qAll: catchAllQuery })
+    .then((data) => {
+      return data.filter((x) => x._score !== 0);
+    })
+    .catch((err) => {
+      console.log("Error message: ", err.message);
+      return [];
+    });
+};
+
+const getSearchResults = (results, query) => {
+  /* https://fusejs.io/api/options.html */
+  const fuse = new Fuse(results, {
+    keys: [
+      { name: "heading", weight: 100 },
+      { name: "ingress", weight: 50 },
+      { name: "intro", weight: 50 },
+      { name: "content", weight: 20 },
+      { name: "status.tag", weight: 10 },
+      { name: "tema", weight: 20 },
+    ],
+    includeScore: true,
+    threshold: 0.5,
+    shouldSort: true,
+    ignoreLocation: true,
+    minMatchCharLength: 3,
+    useExtendedSearch: true,
+  });
+  return fuse.search(query);
+};
+
 export default async function initialSearch(
   req: NextApiRequest,
   res: NextApiResponse
@@ -20,74 +85,24 @@ export default async function initialSearch(
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const kat =
+  const doc =
     DocMap[
-      Array.isArray(req.query.kat) ? req.query.kat.join(" ") : req.query.kat
+      Array.isArray(req.query.doc) ? req.query.doc.join("") : req.query.doc
     ];
 
   const query = Array.isArray(req.query.q)
     ? req.query.q.join(" ")
     : req.query.q;
 
-  if (!kat) {
-    return res.status(405).json({ message: "No valid category" });
+  const hits = await searchSanity(query, doc);
+
+  if (hits.length === 0) {
+    return res.status(200).json([]);
   }
-  if (!query) {
-    return res.status(405).json({ message: "No valid query" });
-  }
 
-  const words = query
-    .split(" ")
-    .map(
-      (x) => `boost(heading match "*${x}*", 3),
-  boost(heading match "${x}", 5),
-  boost(pt::text(content) match "${x}", 1),
-  boost(ingress match "*${x}*", 1),
-  boost(pt::text(intro_komponent.body) match "*${x}*", 1)`
-    )
-    .join(",");
-  const catchAllQuery = `*${query}*`;
+  const result = getSearchResults(hits, query);
 
-  const sanityQuery = `*[_type in $types ] | score(
-    boost(heading match $qAll, 14),
-    boost(heading match $q, 20),
-    boost(pt::text(content) match $q, 4),
-    boost(ingress match $qAll, 4),
-    boost(pt::text(intro_komponent.body) match $qAll, 6),
-    ${words}
-  )| order(_score desc) [0...10]{
-    heading, _score
-  }`;
-  /* ${akselArticleFields} */
-  const payload = [];
-
-  await getClient()
-    .fetch(sanityQuery, { types: kat, q: query, qAll: catchAllQuery })
-    .then((data) => {
-      payload.push(...data.filter((x) => x._score !== 0));
-      return data;
-    })
-    .catch((err) => {
-      console.log("Error message: ", err.message);
-      return res.status(500).json({ message: "Failed to load data" });
-    });
-
-  return res.status(200).json(payload);
+  return res
+    .status(200)
+    .json(result.map((x) => ({ ...(x.item as any), _score: x.score })));
 }
-
-/*
-
-*[_type in [
-  "aksel_artikkel",
-  "komponent_artikkel",
-  "ds_artikkel",
-  "aksel_blogg",
-  "aksel_prinsipp",
-]] | score(
-  boost(heading match $term2, 7),
-  boost(heading match $term, 10),
-  boost(pt::text(content) match $term, 2),
-  boost(ingress match $term2, 2),
-  boost(pt::text(intro_komponent.body) match $term2, 3)
-) [0...10]{heading, _score}
-*/
