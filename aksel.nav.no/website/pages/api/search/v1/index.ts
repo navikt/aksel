@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { allArticleDocuments } from "../../../../sanity/config";
 import Fuse from "fuse.js";
 
-const DocMap = {
+export const DocMap = {
   alle: allArticleDocuments,
   gp: ["aksel_artikkel"],
   komponenter: ["komponent_artikkel"],

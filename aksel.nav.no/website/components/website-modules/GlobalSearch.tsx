@@ -22,8 +22,10 @@ export const GlobalSearch = () => {
     data: initialData,
     error: initialError,
     isValidating: initialValidating,
-  } = useSWR(`/api/search/v1/initial`, (query) =>
-    fetch(query).then((res) => res.json())
+  } = useSWR(
+    `/api/search/v1/initial?doc=${toggled}`,
+    (query) => fetch(query).then((res) => res.json()),
+    { revalidateOnFocus: false }
   );
 
   const {
@@ -39,10 +41,12 @@ export const GlobalSearch = () => {
         console.count("called");
         return res.json();
       }),
-    {}
+    { revalidateOnFocus: false }
   );
 
-  console.log(queryData);
+  const showQueryData = queryData && !queryValidating && q !== "";
+
+  const showNewest = initialData && !initialValidating && !q;
 
   return (
     <div>
@@ -67,22 +71,30 @@ export const GlobalSearch = () => {
         </Chips>
       </div>
       <div className="mt-8">
-        <Heading level="2" size="small">
-          Søkte artikler
-        </Heading>
-        <ul>
-          {!queryError &&
-            queryData &&
-            queryData?.map((x, xi) => <li key={xi}>{x.heading}</li>)}
-        </ul>
-        <Heading level="2" size="small">
-          Nyeste artikler
-        </Heading>
-        <ul>
-          {initialData?.map((x, xi) => (
-            <li key={xi}>{x.heading}</li>
-          ))}
-        </ul>
+        {showQueryData && (
+          <>
+            <Heading level="2" size="small">
+              Søkte artikler
+            </Heading>
+            <ul>
+              {!queryError &&
+                queryData &&
+                queryData?.map((x, xi) => <li key={xi}>{x.heading}</li>)}
+            </ul>
+          </>
+        )}
+        {showNewest && (
+          <>
+            <Heading level="2" size="small">
+              Nyeste artikler
+            </Heading>
+            <ul>
+              {initialData?.map((x, xi) => (
+                <li key={xi}>{x.heading}</li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </div>
   );
