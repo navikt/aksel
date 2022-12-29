@@ -48,5 +48,9 @@ export const metrics = defineField({
       type: "number",
       name: "avgTime",
     },
+    {
+      type: "number",
+      name: "inactiveCount",
+    },
   ],
 });

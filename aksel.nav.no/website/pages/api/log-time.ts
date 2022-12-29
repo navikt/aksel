@@ -17,20 +17,31 @@ export default async function logTime(
     });
   }
 
-  const newAverage = Math.round(
-    (Number(time) + Number(current)) / Number(views)
-  );
+  if (Number(time) <= 420) {
+    const newAverage = Math.round(
+      (Number(time) + Number(current)) / Number(views)
+    );
 
-  // If page is new, create metrics object
-  await client
-    .patch(id as string)
-    .setIfMissing({ "metrics.avgTime": 0 })
-    .set({ "metrics.avgTime": newAverage })
-    .commit()
-    .catch((err) => {
-      console.error("Error:", err);
-      return res.status(500).json({ message: "Error updating page" });
-    });
+    await client
+      .patch(id as string)
+      .setIfMissing({ "metrics.avgTime": 0 })
+      .set({ "metrics.avgTime": newAverage })
+      .commit()
+      .catch((err) => {
+        console.error("Error:", err);
+        return res.status(500).json({ message: "Error updating page" });
+      });
+  } else {
+    await client
+      .patch(id as string)
+      .setIfMissing({ "metrics.inactiveCount": 0 })
+      .inc({ "metrics.inactiveCount": 1 })
+      .commit()
+      .catch((err) => {
+        console.error("Error:", err);
+        return res.status(500).json({ message: "Error updating page" });
+      });
+  }
 
   return res.status(200).json({ message: `Page with id: ${id} updated.` });
 }

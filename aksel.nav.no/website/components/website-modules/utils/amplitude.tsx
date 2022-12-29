@@ -128,9 +128,6 @@ export const usePageView = (router: Router, pageProps: any) => {
 
   const logTimeSpent = useCallback((timeSpent: number) => {
     //return if time spent is more than 7 minutes
-    if (timeSpent > 420) {
-      return;
-    }
     try {
       if (!(isDevelopment || isTest || isPreview())) {
         const { metrics } = pageProps.page;
