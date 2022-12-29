@@ -128,8 +128,20 @@ export const usePageView = (router: Router, pageProps: any) => {
 
   const logTimeSpent = useCallback((timeSpent: number) => {
     console.log("ts", timeSpent);
-    // Test document id
-    //const _id = "420cd9c0-ed5b-42fb-8e5f-787372774c63";
+    try {
+      if (!(isDevelopment || isTest || isPreview())) {
+        const { metrics } = pageProps.page;
+        // Test document id
+        const _id = "420cd9c0-ed5b-42fb-8e5f-787372774c63";
+        fetch(
+          `/api/log-time?id=${_id}&current=${metrics.avgTime || 0}&views=${
+            metrics.pageviews.summary || 0
+          }&time=${timeSpent}`
+        );
+      }
+    } catch (error) {
+      isDevelopment && console.error(error);
+    }
   }, []);
 
   useEffect(() => {
