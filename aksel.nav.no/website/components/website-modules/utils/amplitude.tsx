@@ -71,8 +71,10 @@ export const usePageView = (router: Router, pageProps: any) => {
       logPageView(e, data, first);
       try {
         if (!(isDevelopment || isTest || isPreview())) {
+          // Test document id
+          const _id = "420cd9c0-ed5b-42fb-8e5f-787372774c63";
           //TO-DO: Replace with correct id and aksel_article check
-          fetch(`/api/log-page-view?id=420cd9c0-ed5b-42fb-8e5f-787372774c63`);
+          fetch(`/api/log-page-view?id=${_id}`);
         }
       } catch (error) {
         isDevelopment && console.error(error);
@@ -110,7 +112,9 @@ export const usePageView = (router: Router, pageProps: any) => {
     //TO-DO: Add aksel_article check
     try {
       if (!(isDevelopment || isTest || isPreview())) {
-        const { _id, metrics } = pageProps.page;
+        const { metrics } = pageProps.page;
+        // Test document id
+        const _id = "420cd9c0-ed5b-42fb-8e5f-787372774c63";
         fetch(
           `/api/log-scroll?id=${_id}&current=${
             metrics.avgScrollLength || 0
@@ -122,10 +126,11 @@ export const usePageView = (router: Router, pageProps: any) => {
     }
   }, []);
 
-  const logTimeSpent = (timeSpent: number) => {
-    console.log(timeSpent);
-    //TO-DO: Do the api call
-  };
+  const logTimeSpent = useCallback((timeSpent: number) => {
+    console.log("ts", timeSpent);
+    // Test document id
+    //const _id = "420cd9c0-ed5b-42fb-8e5f-787372774c63";
+  }, []);
 
   useEffect(() => {
     const startTime = new Date().getTime();
@@ -140,5 +145,5 @@ export const usePageView = (router: Router, pageProps: any) => {
       router.events.off("routeChangeStart", logScroll);
       logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
     };
-  }, [router.events, logView, logScroll]);
+  }, [router.events, logView, logScroll, logTimeSpent]);
 };
