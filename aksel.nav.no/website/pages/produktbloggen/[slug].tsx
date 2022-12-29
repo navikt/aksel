@@ -131,7 +131,7 @@ const Page = ({
                 aria-hidden
                 priority
                 className="rounded-2xl"
-                alt="Illustrasjon"
+                alt=""
                 quality={100}
               />
             ) : (
@@ -143,7 +143,7 @@ const Page = ({
                 aria-hidden
                 priority
                 className="rounded-2xl"
-                alt="Illustrasjon"
+                alt=""
               />
             )}
           </div>
@@ -270,7 +270,7 @@ export const getServerSideProps: GetServerSideProps = async (
       morePosts,
       slug: context.params.slug as string,
       preview: context.preview ?? false,
-      id: blogg?._id,
+      id: blogg?._id ?? "",
     },
     notFound: !blogg && !context.preview,
   };

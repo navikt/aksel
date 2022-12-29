@@ -291,6 +291,11 @@ const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   "tag": status.tag,
 }`;
 
+/**
+ * "refs" må disables i preview da next-sanity sin
+ * preview-funksjonalitet fører til en infinite loop som låser applikasjonen.
+ * Dette er på grunn av av hele datasettet blir lastet inn i preview flere ganger som til slutt låser vinduet.
+ */
 export const komponentQuery = `{
   "page": *[_type == "komponent_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
     {
@@ -313,12 +318,15 @@ export const komponentQuery = `{
         ${deRefs}
       },
   },
-  "refs": *[_type == "komponent_artikkel" && count(*[references(^._id)][slug.current == $slug]) > 0][0...3]{
-    _id,
-    heading,
-    "slug": slug,
-    status
-  },
+  "refs": select(
+    $preview == "true" => [],
+    $preview != "true" => *[_type == "komponent_artikkel" && count(*[references(^._id)][slug.current == $slug]) > 0][0...3]{
+      _id,
+      heading,
+      "slug": slug,
+      status
+    }
+  ),
   "seo": *[_type == "komponenter_landingsside"][0].seo.image,
   ${sidebarQuery}
 }`;

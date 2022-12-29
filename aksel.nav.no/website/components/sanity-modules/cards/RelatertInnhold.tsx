@@ -1,5 +1,5 @@
 import { BodyShort, Heading } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import NextLink from "next/link";
 import React from "react";
 import { logNav } from "@/components";

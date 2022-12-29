@@ -2,7 +2,7 @@
 import { SanityT, urlFor } from "@/lib";
 import { Heading } from "@navikt/ds-react";
 import Nextlink from "next/link";
-import cl from "classnames";
+import cl from "clsx";
 import Image from "next/image";
 import { StatusTag } from "components/website-modules/StatusTag";
 

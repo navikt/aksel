@@ -3,6 +3,7 @@ import {
   AccessDeniedIcon,
   BookIcon,
   BulbOutlineIcon,
+  CommentIcon,
   JoystickIcon,
   OkHandIcon,
   TokenIcon,
@@ -13,11 +14,15 @@ import {
   bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
+  landingsider,
+  previews,
   prinsippKategorier,
 } from "../../config";
 
+import { FeedbackPanes } from "./feedback";
 import { GodPraksisPanes } from "./god-praksis";
 import { PanesWithCount } from "./with-count";
+import { FeedbackView } from "./FeedbackPreview";
 
 /* import { WebPreview, JsonView } from './previews' */
 const filtered = [
@@ -42,6 +47,7 @@ const filtered = [
   "aksel_artikkel",
   "skrivehjelp",
   "publication_flow",
+  "aksel_feedback",
 ];
 
 export const structure = async (
@@ -57,6 +63,9 @@ export const structure = async (
   const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
   const adminOrDev = currentUser.roles.find((x) =>
     ["developer", "administrator", "editor"].includes(x.name)
+  );
+  const developer = currentUser.roles.find((x) =>
+    ["developer"].includes(x.name)
   );
   /* const hasBloggerRole = currentUser.roles.find((x) => x.name === "blogger");
   const hasGrunnleggendeRole = currentUser.roles.find(
@@ -201,6 +210,15 @@ export const structure = async (
                       .schemaType(`aksel_forside`)
                       .icon(Picture)
                       .id(`aksel_forside_dokument`),
+                    S.listItem()
+                      .title("Feedback")
+                      .icon(CommentIcon)
+                      .child(
+                        S.list()
+                          .title("Feedback")
+                          .items([...(await FeedbackPanes(getClient, S))])
+                      ),
+
                     S.listItem().title("Standalone-sider").child(
                       S.documentList()
                         .title("Sider")
@@ -264,28 +282,13 @@ export const structure = async (
         : []),
 
       S.divider(),
-      ...S.documentTypeListItems().filter(
-        (listItem) => !filtered.includes(listItem.getId())
-      ),
+      ...(developer
+        ? S.documentTypeListItems().filter(
+            (listItem) => !filtered.includes(listItem.getId())
+          )
+        : []),
     ]);
 };
-
-const previews = [
-  "aksel_artikkel",
-  "komponent_artikkel",
-  "ds_artikkel",
-  "aksel_blogg",
-  "aksel_prinsipp",
-  "aksel_standalone",
-];
-
-const landingsider = [
-  { name: "godpraksis_landingsside", url: "god-praksis" },
-  { name: "blogg_landingsside", url: "produktbloggen" },
-  { name: "grunnleggende_landingsside", url: "grunnleggende" },
-  { name: "komponenter_landingsside", url: "komponenter" },
-  { name: "prinsipper_landingsside", url: "prinsipper" },
-];
 
 export const resolveProductionUrl = (doc) => {
   const basePath = "https://aksel.nav.no";
@@ -324,7 +327,7 @@ export const resolveProductionUrl = (doc) => {
   }
 };
 
-export const defaultDocumentNode = (S, { schemaType }) => {
+export const defaultDocumentNode = (S, { schemaType, getClient }) => {
   if (
     [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
       schemaType
@@ -343,6 +346,10 @@ export const defaultDocumentNode = (S, { schemaType }) => {
           },
         })
         .title("Preview"),
+      S.view
+        .component(FeedbackView)
+        .icon(CommentIcon)
+        .title("Tilbakemeldinger"),
     ]);
   }
   return S.document().views([S.view.form()]);

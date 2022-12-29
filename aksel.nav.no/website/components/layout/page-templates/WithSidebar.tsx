@@ -5,7 +5,7 @@ import { Header } from "components/layout/header/Header";
 import { Sidebar } from "components/layout/sidebar/Sidebar";
 import Feedback from "components/website-modules/feedback";
 import { ReactNode } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import NextLink from "next/link";
 import { capitalize } from "@/utils";
 import Image from "next/image";
@@ -125,7 +125,14 @@ export const WithSidebar = ({
                   </div>
                 </div>
                 {variant === "page" && pageProps.status?.bilde && (
-                  <div className="relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40">
+                  <div
+                    className={cl(
+                      "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
+                      {
+                        "hue-rotate-[65deg]": pageProps?.status?.tag === "beta",
+                      }
+                    )}
+                  >
                     <Image
                       src={urlFor(pageProps.status?.bilde).auto("format").url()}
                       decoding="async"

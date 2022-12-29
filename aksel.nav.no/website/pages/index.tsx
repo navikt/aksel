@@ -3,7 +3,13 @@ import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
-import { ComponentIcon, DownloadIcon, TokenIcon } from "@sanity/icons";
+import {
+  ComponentIcon,
+  DownloadIcon,
+  PauseIcon,
+  PlayIcon,
+  TokenIcon,
+} from "@sanity/icons";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
@@ -15,7 +21,15 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
 import Snowfall from "react-snowfall";
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
+import cl from "clsx";
+
+function getPrefersReducedMotion() {
+  const QUERY = "(prefers-reduced-motion: no-preference)";
+  const mediaQueryList = window.matchMedia(QUERY);
+  const prefersReducedMotion = !mediaQueryList.matches;
+  return prefersReducedMotion;
+}
 
 const introcards = [
   {
@@ -62,9 +76,21 @@ const IntroCards = () => {
 
 const GetStarted = ({
   links,
+  togglePause,
 }: {
   links: { title: string; slug: string }[];
+  togglePause: (x: boolean) => void;
 }) => {
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [pause, setPause] = useState(false);
+
+  useEffect(() => {
+    setReducedMotion(getPrefersReducedMotion());
+    const data = localStorage.getItem("pause-animations");
+    setPause(JSON.parse(data) ?? false);
+    togglePause(JSON.parse(data) ?? false);
+  }, [togglePause]);
+
   return (
     <div className="bg-deepblue-700 text-text-on-action relative mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
       <Heading size="xlarge" level="2" className="text-center">
@@ -87,10 +113,33 @@ const GetStarted = ({
       <div aria-hidden>
         <Snowfall
           color="rgba(230, 241, 248, 0.3)"
-          speed={[0.2, 1.0]}
-          snowflakeCount={70}
+          speed={reducedMotion || pause ? [0, 0] : [0.1, 0.2]}
+          wind={reducedMotion || pause ? [0, 0] : [-0.2, 0.2]}
+          snowflakeCount={60}
         />
       </div>
+      {!reducedMotion && (
+        <button
+          className="focus-visible:ring-border-focus-on-inverted absolute top-2 right-2 grid h-11 w-11 place-items-center rounded text-2xl focus:outline-none focus-visible:ring-2"
+          onClick={() => {
+            setPause(!pause);
+            togglePause(!pause);
+            localStorage.setItem("pause-animations", JSON.stringify(!pause));
+          }}
+        >
+          {pause ? (
+            <>
+              <PlayIcon aria-hidden />
+              <span className="sr-only">Start animasjon</span>
+            </>
+          ) : (
+            <>
+              <PauseIcon aria-hidden />
+              <span className="sr-only">Stopp animasjon</span>
+            </>
+          )}
+        </button>
+      )}
     </div>
   );
 };
@@ -104,6 +153,8 @@ const Forside = ({
   resent,
   komigang,
 }: PageProps): JSX.Element => {
+  const [pause, setPause] = useState(false);
+
   return (
     <>
       <Head>
@@ -141,10 +192,15 @@ const Forside = ({
         />
       </Head>
 
-      <div className="header-animated-bg relative max-w-[100vw] overflow-hidden bg-[#DCCAF3]">
+      <div
+        className={cl(
+          "header-animated-bg relative max-w-[100vw] overflow-hidden bg-[#DCCAF3]",
+          { "animation-stop": pause }
+        )}
+      >
         <Header variant="transparent" />
 
-        <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">
+        <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-8">
             <div className="centered-layout xs:mt-36 xs:mb-18 xs:max-w-screen-xs relative mb-16 mt-20 grid max-w-xs place-items-center text-center">
               <Heading
@@ -161,7 +217,7 @@ const Forside = ({
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
             <div className="centered-layout grid max-w-screen-2xl">
-              <GetStarted links={komigang} />
+              <GetStarted links={komigang} togglePause={setPause} />
               {/* God praksis */}
               <div className="mx-auto">
                 <Heading

@@ -1,8 +1,12 @@
+import { FeedbackT } from "@/lib";
+import { IdContext } from "@/utils";
 import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const FooterForm = () => {
+  const idCtx = useContext(IdContext);
+
   const [contactForm, setContactForm] = useState({
     content: "",
     hasWritten: false,
@@ -33,6 +37,18 @@ const FooterForm = () => {
         message: contactForm.content,
         url: `${basePath}${asPath}`,
       }),
+    });
+
+    const body: FeedbackT = {
+      message: contactForm.content,
+      url: `${basePath}${asPath}`,
+      type: "footer",
+      docId: idCtx?.id,
+    };
+
+    fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify(body),
     });
 
     setSent({ status: true });

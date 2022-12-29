@@ -1,7 +1,7 @@
 import { withErrorBoundary } from "@/error-boundary";
 import Link from "next/link";
 import React from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { logNav } from "@/utils";
 
 const AkselLink = ({

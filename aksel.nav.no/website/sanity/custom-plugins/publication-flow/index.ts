@@ -67,11 +67,15 @@ export const publicationFlow = definePlugin<PublicationFlowOptions>(
   ({ hasQualityControl, hasPublishedAt }) => ({
     name: "publication-flow",
     document: {
-      actions: (prev, { schemaType }) => {
+      actions: (prev, { schemaType, currentUser }) => {
         if (hasQualityControl.some((e) => e === schemaType)) {
           return getCustomActions(prev);
         } else if (hasPublishedAt.some((e) => e === schemaType)) {
           return withCustomPublishAction(prev);
+        } else if (schemaType === "aksel_feedback") {
+          return currentUser.roles.find((x) => x.name === "developer")
+            ? prev
+            : [prev[0]];
         }
         return prev;
       },

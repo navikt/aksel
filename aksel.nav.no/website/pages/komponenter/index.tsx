@@ -8,7 +8,7 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
-import cl from "classnames";
+import cl from "clsx";
 
 const Page = ({
   page,

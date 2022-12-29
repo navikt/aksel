@@ -1,5 +1,5 @@
 import styles from "./cube.module.css";
-import cl from "classnames";
+import cl from "clsx";
 
 const Rect = ({ ...props }) => (
   <svg
