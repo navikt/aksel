@@ -127,7 +127,10 @@ export const usePageView = (router: Router, pageProps: any) => {
   }, []);
 
   const logTimeSpent = useCallback((timeSpent: number) => {
-    console.log("ts", timeSpent);
+    //return if time spent is more than 7 minutes
+    if (timeSpent > 420) {
+      return;
+    }
     try {
       if (!(isDevelopment || isTest || isPreview())) {
         const { metrics } = pageProps.page;
@@ -135,7 +138,7 @@ export const usePageView = (router: Router, pageProps: any) => {
         const _id = "420cd9c0-ed5b-42fb-8e5f-787372774c63";
         fetch(
           `/api/log-time?id=${_id}&current=${metrics?.avgTime || 0}&views=${
-            metrics?.pageviews?.summary || 0
+            metrics?.pageviews?.summary || 1
           }&time=${timeSpent}`
         );
       }
