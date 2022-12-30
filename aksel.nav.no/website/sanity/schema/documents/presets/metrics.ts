@@ -1,4 +1,5 @@
 import { defineField } from "sanity";
+import { Metrics } from "../../custom-components";
 
 export const metrics = defineField({
   name: "metrics",
@@ -6,7 +7,7 @@ export const metrics = defineField({
   title: "Statistikk",
   group: "metrics",
   fields: [
-    {
+    defineField({
       type: "object",
       name: "pageviews",
       fields: [
@@ -39,18 +40,26 @@ export const metrics = defineField({
           ],
         },
       ],
-    },
-    {
+    }),
+    defineField({
       type: "number",
       name: "avgScrollLength",
-    },
-    {
+    }),
+    defineField({
       type: "number",
       name: "avgTime",
-    },
-    {
+    }),
+    defineField({
       type: "number",
       name: "inactiveCount",
-    },
+    }),
+    defineField({
+      type: "string",
+      name: "dataVis",
+      title: " ",
+      components: {
+        input: Metrics,
+      },
+    }),
   ],
 });
