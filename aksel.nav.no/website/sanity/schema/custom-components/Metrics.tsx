@@ -1,4 +1,15 @@
 import { Heading, Stack } from "@sanity/ui";
+import { getWeek } from "date-fns";
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { useFormValue } from "sanity";
 
 export const Metrics = () => {
@@ -7,6 +18,14 @@ export const Metrics = () => {
   const avgScrollLength = useFormValue(["metrics", "avgScrollLength"]);
   const avgTime = useFormValue(["metrics", "avgTime"]);
   const inactiveCount = useFormValue(["metrics", "inactiveCount"]);
+
+  const parsedWeeks = weeks.map((week: any) => {
+    return {
+      week: getWeek(new Date(week.week)),
+      views: week.views,
+      scrollLength: week.scrollLength,
+    };
+  });
 
   return (
     <Stack>
@@ -26,6 +45,24 @@ export const Metrics = () => {
       <p>
         <>Totale inaktive: {inactiveCount}</>
       </p>
+      {weeks && (
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart width={500} height={300} data={parsedWeeks}>
+            <CartesianGrid />
+            <XAxis dataKey="week" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="views"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+            <Line type="monotone" dataKey="scrollLength" stroke="#82ca9d" />
+          </LineChart>
+        </ResponsiveContainer>
+      )}
     </Stack>
   );
 };
