@@ -1,5 +1,5 @@
 import { noCdnClient } from "@/sanity-client";
-import { isSameWeek } from "date-fns";
+import { format, isSameWeek } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const token = process.env.SANITY_WRITE_KEY;
@@ -49,7 +49,7 @@ export default async function logPageView(
       .patch(id as string)
       .prepend("metrics.pageviews.weeks", [
         {
-          week: new Date().toISOString(),
+          week: format(new Date(), "yyyy-MM-dd"),
           views: 1,
         },
       ])
@@ -81,7 +81,7 @@ export default async function logPageView(
         .patch(id as string)
         .prepend("metrics.pageviews.weeks", [
           {
-            week: new Date().toISOString(),
+            week: format(new Date(), "yyyy-MM-dd"),
             views: 1,
           },
         ])
