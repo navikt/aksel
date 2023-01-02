@@ -1,7 +1,6 @@
 import { Heading, Stack } from "@sanity/ui";
 import { getWeek } from "date-fns";
 import {
-  CartesianGrid,
   Legend,
   Line,
   LineChart,
@@ -23,14 +22,16 @@ export const Metrics = () => {
     return {
       week: getWeek(new Date(week.week)),
       views: week.views,
+      Sidevisninger: week.views,
+      Scroll: week.scrollLength,
       scrollLength: week.scrollLength,
     };
   });
 
   return (
     <Stack>
-      <Heading as="h2" size={1}>
-        Metrikker
+      <Heading as="h2" size={3}>
+        Statistikk
       </Heading>
       <p>
         <>Totale sidevisninger: {totalViews}</>
@@ -46,20 +47,19 @@ export const Metrics = () => {
         <>Totale inaktive: {inactiveCount}</>
       </p>
       {weeks && (
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height={300}>
           <LineChart width={500} height={300} data={parsedWeeks}>
-            <CartesianGrid />
             <XAxis dataKey="week" />
             <YAxis />
             <Tooltip />
             <Legend />
             <Line
               type="monotone"
-              dataKey="views"
-              stroke="#8884d8"
+              dataKey="Sidevisninger"
+              stroke="#004367"
               activeDot={{ r: 8 }}
             />
-            <Line type="monotone" dataKey="scrollLength" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="Scroll" stroke="#82ca9d" />
           </LineChart>
         </ResponsiveContainer>
       )}
