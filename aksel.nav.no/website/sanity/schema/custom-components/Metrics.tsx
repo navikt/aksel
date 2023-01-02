@@ -19,7 +19,7 @@ export const Metrics = () => {
   const avgTime = useFormValue(["metrics", "avgTime"]);
   const inactiveCount = useFormValue(["metrics", "inactiveCount"]);
 
-  const parsedWeeks = weeks.map((week: any) => {
+  const parsedWeeks = weeks?.map((week: any) => {
     return {
       week: getWeek(new Date(week.week)),
       views: week.views,
@@ -35,7 +35,7 @@ export const Metrics = () => {
       <p>
         <>Totale sidevisninger: {totalViews}</>
       </p>
-      <p>Totale uker: {weeks.length}</p>
+      <p>Totale uker: {weeks?.length}</p>
       <p>
         <>Gjennomsnitt scrolllengde: {avgScrollLength}%</>
       </p>
