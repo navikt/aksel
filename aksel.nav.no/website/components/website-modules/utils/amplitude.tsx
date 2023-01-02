@@ -70,9 +70,12 @@ export const usePageView = (router: Router, pageProps: any) => {
       }
       logPageView(e, data, first);
       try {
-        if (!(isDevelopment || isTest || isPreview())) {
+        if (
+          !(isDevelopment || isTest || isPreview()) &&
+          pageProps?.page._type === "aksel_forside"
+        ) {
           // Test document id
-          const _id = "420cd9c0-ed5b-42fb-8e5f-787372774c63";
+          const _id = pageProps?.page._id;
           //TO-DO: Replace with correct id and aksel_article check
           fetch(`/api/log-page-view?id=${_id}`);
         }
@@ -109,12 +112,13 @@ export const usePageView = (router: Router, pageProps: any) => {
       prosent: scrollD,
     });
 
-    //TO-DO: Add aksel_article check
     try {
-      if (!(isDevelopment || isTest || isPreview())) {
+      if (
+        !(isDevelopment || isTest || isPreview()) &&
+        pageProps?.page._type === "aksel_forside"
+      ) {
         const { metrics } = pageProps.page;
-        // Test document id
-        const _id = "420cd9c0-ed5b-42fb-8e5f-787372774c63";
+        const _id = pageProps?.page._id;
         fetch(
           `/api/log-scroll?id=${_id}&current=${
             metrics.avgScrollLength || 0
@@ -131,8 +135,7 @@ export const usePageView = (router: Router, pageProps: any) => {
     try {
       if (!(isDevelopment || isTest || isPreview())) {
         const { metrics } = pageProps.page;
-        // Test document id
-        const _id = "420cd9c0-ed5b-42fb-8e5f-787372774c63";
+        const _id = pageProps?.page._id;
         fetch(
           `/api/log-time?id=${_id}&current=${metrics?.avgTime || 0}&views=${
             metrics?.pageviews?.summary || 1
@@ -155,7 +158,9 @@ export const usePageView = (router: Router, pageProps: any) => {
     return () => {
       router.events.off("routeChangeComplete", logView);
       router.events.off("routeChangeStart", logScroll);
-      logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
+      if (pageProps?.page._type === "aksel_forside") {
+        logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
+      }
     };
   }, [router.events, logView, logScroll, logTimeSpent]);
 };
