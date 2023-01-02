@@ -28,6 +28,10 @@ export const Metrics = () => {
     };
   });
 
+  const parseTime = (s: number) => {
+    return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
+  };
+
   return (
     <Stack>
       <Heading as="h2" size={3}>
@@ -41,7 +45,7 @@ export const Metrics = () => {
         <>Gjennomsnitt scrolllengde: {avgScrollLength}%</>
       </p>
       <p>
-        <>Gjennomsnitt tid på siden: {avgTime} sekunder</>
+        <>Gjennomsnitt tid på siden: {parseTime(Number(avgTime))}</>
       </p>
       <p>
         <>Totale inaktive: {inactiveCount}</>
