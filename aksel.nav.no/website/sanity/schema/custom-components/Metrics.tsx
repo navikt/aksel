@@ -1,5 +1,6 @@
+import { Table } from "@navikt/ds-react";
 import { Heading, Stack } from "@sanity/ui";
-import { getWeek } from "date-fns";
+import { getWeek, getYear } from "date-fns";
 import {
   Legend,
   Line,
@@ -20,11 +21,10 @@ export const Metrics = () => {
 
   const parsedWeeks = weeks?.map((week: any) => {
     return {
-      week: getWeek(new Date(week.week)),
-      views: week.views,
+      ...week,
+      weekNumber: getWeek(new Date(week.week)),
       Sidevisninger: week.views,
       Scroll: week.scrollLength,
-      scrollLength: week.scrollLength,
     };
   });
 
@@ -58,22 +58,50 @@ export const Metrics = () => {
           <>Totale inaktive: {inactiveCount}</>
         </p>
       )}
-      {weeks && (
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart width={500} height={300} data={parsedWeeks}>
-            <XAxis dataKey="week" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="Sidevisninger"
-              stroke="#004367"
-              activeDot={{ r: 8 }}
-            />
-            <Line type="monotone" dataKey="Scroll" stroke="#82ca9d" />
-          </LineChart>
-        </ResponsiveContainer>
+      {parsedWeeks && (
+        <>
+          <ResponsiveContainer aria-hidden width="100%" height={300}>
+            <LineChart width={500} height={300} data={parsedWeeks}>
+              <XAxis dataKey="weekNumber" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="Sidevisninger"
+                stroke="#004367"
+                activeDot={{ r: 8 }}
+              />
+              <Line type="monotone" dataKey="Scroll" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+          <Table className="sr-only">
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell scope="col">Uke/år</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Sidevisninger</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Scrolldybde</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {parsedWeeks.map(
+                ({ views, scrollLength, weekNumber, week }, i) => {
+                  return (
+                    <Table.Row key={`${i}-${week}`}>
+                      <Table.HeaderCell scope="row">
+                        {weekNumber}/{getYear(new Date(week))}
+                      </Table.HeaderCell>
+                      <Table.DataCell>{views || "Mangler data"}</Table.DataCell>
+                      <Table.DataCell>
+                        {(scrollLength && scrollLength + "%") || "Mangler data"}
+                      </Table.DataCell>
+                    </Table.Row>
+                  );
+                }
+              )}
+            </Table.Body>
+          </Table>
+        </>
       )}
     </Stack>
   );
