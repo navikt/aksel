@@ -1,4 +1,5 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { CopyProvider } from "./CopyTokenv2";
 import { FontView } from "./categories/Font";
 import { GlobalView } from "./categories/Global";
 import { SemanticView } from "./categories/Semantic";
@@ -14,19 +15,47 @@ const TokenView = ({
 }) => {
   switch (true) {
     case token.title === "font":
-      return <FontView cat={token.title} />;
+      return (
+        <CopyProvider>
+          <FontView cat={token.title} />
+        </CopyProvider>
+      );
     case token.title.startsWith("global"):
-      return <GlobalView cat={token.title} />;
+      return (
+        <CopyProvider>
+          <GlobalView cat={token.title} />
+        </CopyProvider>
+      );
     case token.title.startsWith("semantic"):
-      return <SemanticView cat={token.title} />;
+      return (
+        <CopyProvider>
+          <SemanticView cat={token.title} />
+        </CopyProvider>
+      );
     case token.title === "radius":
-      return <ShapesView cat={token.title} />;
+      return (
+        <CopyProvider>
+          <ShapesView cat={token.title} />
+        </CopyProvider>
+      );
     case token.title === "shadow":
-      return <ShadowView cat={token.title} />;
+      return (
+        <CopyProvider>
+          <ShadowView cat={token.title} />
+        </CopyProvider>
+      );
     case token.title === "spacing":
-      return <SpacingView cat={token.title} />;
+      return (
+        <CopyProvider>
+          <SpacingView cat={token.title} />
+        </CopyProvider>
+      );
     case token.title === "z-index":
-      return <ZindexView cat={token.title} />;
+      return (
+        <CopyProvider>
+          <ZindexView cat={token.title} />
+        </CopyProvider>
+      );
     default:
       return null;
   }
