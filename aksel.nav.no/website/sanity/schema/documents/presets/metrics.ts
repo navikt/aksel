@@ -1,6 +1,20 @@
 import { defineField } from "sanity";
 import { Metrics } from "../../custom-components";
 
+const config = {
+  description: "Bare synlig for utviklere",
+  readOnly: true,
+  hidden: ({ currentUser }) => isDeveloper(currentUser),
+};
+
+const configCollapsed = {
+  ...config,
+  options: {
+    collapsible: true,
+    collapsed: true,
+  },
+};
+
 export const metrics = defineField({
   name: "metrics",
   type: "object",
@@ -8,8 +22,17 @@ export const metrics = defineField({
   group: "metrics",
   fields: [
     defineField({
+      type: "string",
+      name: "dataVis",
+      title: " ",
+      components: {
+        input: Metrics,
+      },
+    }),
+    defineField({
       type: "object",
       name: "pageviews",
+      ...configCollapsed,
       fields: [
         {
           name: "summary",
@@ -44,22 +67,22 @@ export const metrics = defineField({
     defineField({
       type: "number",
       name: "avgScrollLength",
+      ...config,
     }),
     defineField({
       type: "number",
       name: "avgTime",
+      ...config,
     }),
     defineField({
       type: "number",
       name: "inactiveCount",
-    }),
-    defineField({
-      type: "string",
-      name: "dataVis",
-      title: " ",
-      components: {
-        input: Metrics,
-      },
+      ...config,
     }),
   ],
 });
+
+const isDeveloper = (currentUser: any) => {
+  const { roles } = currentUser;
+  return roles.find(({ name }) => name === "developer");
+};
