@@ -37,19 +37,27 @@ export const Metrics = () => {
       <Heading as="h2" size={3}>
         Statistikk
       </Heading>
-      <p>
-        <>Totale sidevisninger: {totalViews}</>
-      </p>
-      <p>Totale uker: {weeks?.length}</p>
-      <p>
-        <>Gjennomsnitt scrolllengde: {avgScrollLength}%</>
-      </p>
-      <p>
-        <>Gjennomsnitt tid på siden: {parseTime(Number(avgTime))}</>
-      </p>
-      <p>
-        <>Totale inaktive: {inactiveCount}</>
-      </p>
+      {totalViews && (
+        <p>
+          <>Totale sidevisninger: {totalViews}</>
+        </p>
+      )}
+      {weeks && <p>Totale uker: {weeks?.length}</p>}
+      {avgScrollLength && (
+        <p>
+          <>Gjennomsnitt scrolllengde: {avgScrollLength}%</>
+        </p>
+      )}
+      {avgTime && (
+        <p>
+          <>Gjennomsnitt tid på siden: {parseTime(Number(avgTime))}</>
+        </p>
+      )}
+      {inactiveCount && (
+        <p>
+          <>Totale inaktive: {inactiveCount}</>
+        </p>
+      )}
       {weeks && (
         <ResponsiveContainer width="100%" height={300}>
           <LineChart width={500} height={300} data={parsedWeeks}>
