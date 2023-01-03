@@ -1,5 +1,5 @@
 import docs from "@navikt/ds-tokens/docs.json";
-import { Frame } from "../Frame";
+import { Frame } from "../Framev2";
 
 export const ShadowView = ({ cat }: { cat: string }) => {
   const shadows = docs[cat];
@@ -13,7 +13,7 @@ export const ShadowView = ({ cat }: { cat: string }) => {
 
         return (
           <div
-            className="min-h-16 flex h-full w-full items-center justify-center rounded-md px-4 text-5xl font-semibold"
+            className="min-h-8 grid aspect-[2/1] h-full w-full place-items-start items-center rounded-md"
             aria-hidden
             style={{
               background: isLigth

@@ -1,7 +1,7 @@
 import { PeopleInCircle } from "@navikt/ds-icons";
 import docs from "@navikt/ds-tokens/docs.json";
 import color from "color";
-import { Frame } from "../Frame";
+import { Frame } from "../Framev2";
 
 export const SemanticView = ({ cat }: { cat: string }) => {
   const colors = docs[cat];
@@ -17,7 +17,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
 
           return (
             <div
-              className="min-h-16 flex h-full w-full items-end rounded-md px-4 text-5xl font-semibold"
+              className="min-h-8 ring-border-subtle grid aspect-[2/1] h-full w-full place-items-center items-center rounded-md text-2xl font-semibold ring-1 ring-inset"
               aria-hidden
               style={{
                 color: token,
@@ -44,7 +44,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
 
           return (
             <div
-              className="min-h-16 flex h-full w-full items-center justify-center rounded-md px-4 text-4xl font-semibold"
+              className="min-h-8 ring-border-subtle grid aspect-[2/1] h-full w-full place-items-center items-center rounded-md text-2xl font-semibold ring-1 ring-inset"
               aria-hidden
               style={{
                 color: token,
@@ -68,20 +68,20 @@ export const SemanticView = ({ cat }: { cat: string }) => {
         styles="color"
         element={({ token }: { token: string }) => {
           const c = color(token);
-          const isLigth = c.luminosity() > 0.9;
+          const isLight = c.luminosity() > 0.9;
 
           return (
             <div
-              className="min-h-16 flex h-full w-full items-center justify-center rounded-md px-4 text-5xl font-semibold"
+              className="min-h-8 grid aspect-[2/1] h-full w-full rounded-md"
               aria-hidden
               style={{
-                background: isLigth
+                background: isLight
                   ? `var(--a-surface-inverted)`
                   : `var(--a-surface-default)`,
               }}
             >
               <div
-                className="h-12 w-full rounded-md"
+                className="h-8 w-full rounded-md"
                 style={{
                   border: `2px solid ${token}`,
                 }}
