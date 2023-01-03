@@ -13,7 +13,7 @@ import {
 import { useFormValue } from "sanity";
 
 export const Metrics = () => {
-  const totalViews = useFormValue(["metrics", "pageviews", "summary"]);
+  const totalViews: any = useFormValue(["metrics", "pageviews", "summary"]);
   const weeks: any = useFormValue(["metrics", "pageviews", "weeks"]);
   const avgScrollLength = useFormValue(["metrics", "avgScrollLength"]);
   const avgTime = useFormValue(["metrics", "avgTime"]);
@@ -37,26 +37,45 @@ export const Metrics = () => {
       <Heading as="h2" size={3}>
         Statistikk
       </Heading>
-      {totalViews && (
-        <p>
-          <>Totale sidevisninger: {totalViews}</>
-        </p>
+      <dl>
+        {totalViews && (
+          <div>
+            <dt>Totale sidevisninger</dt>
+            <dd>{totalViews}</dd>
+          </div>
+        )}
+      </dl>
+
+      {weeks && (
+        <div>
+          <dt>Antall uker målt</dt>
+          <dd>{weeks.length}</dd>
+        </div>
       )}
-      {weeks && <p>Totale uker: {weeks?.length}</p>}
+
       {avgScrollLength && (
-        <p>
-          <>Gjennomsnitt scrolllengde: {avgScrollLength}%</>
-        </p>
+        <div>
+          <dt>Gjennomsnittlig scrollldybde</dt>
+          <dd>
+            <>{avgScrollLength}%</>
+          </dd>
+        </div>
       )}
       {avgTime && (
-        <p>
-          <>Gjennomsnitt tid på siden: {parseTime(Number(avgTime))}</>
-        </p>
+        <div>
+          <dt>Gjennomsnittlig tid på siden</dt>
+          <dd>
+            <>{parseTime(Number(avgTime))}</>
+          </dd>
+        </div>
       )}
       {inactiveCount && (
-        <p>
-          <>Totale inaktive: {inactiveCount}</>
-        </p>
+        <div>
+          <dt>Totale inaktive</dt>
+          <dd>
+            <>{inactiveCount}</>
+          </dd>
+        </div>
       )}
       {parsedWeeks && (
         <>
