@@ -158,7 +158,7 @@ export const usePageView = (router: Router, pageProps: any) => {
     return () => {
       router.events.off("routeChangeComplete", logView);
       router.events.off("routeChangeStart", logScroll);
-      if (pageProps?.page._type === "aksel_forside") {
+      if (pageProps?.page?._type === "aksel_forside") {
         logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
       }
     };
