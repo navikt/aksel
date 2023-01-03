@@ -17,20 +17,6 @@ export enum HelpfulArticleEnum {
   "MISC" = "misc",
 }
 
-export type HelpfulArticleT = {
-  answer: HelpfulArticleEnum;
-  message?: string;
-  url: string;
-  docId: string;
-  docType: string;
-};
-
-export type DsFeddbackMsgT = {
-  message: string;
-  user?: string;
-  url: string;
-};
-
 export type FeedbackT = {
   message: string;
   url: string;

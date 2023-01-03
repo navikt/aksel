@@ -8,7 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { FeedbackT, HelpfulArticleEnum, HelpfulArticleT } from "@/lib";
+import { FeedbackT, HelpfulArticleEnum } from "@/lib";
 import { AmplitudeEvents, IdContext, logAmplitudeEvent } from "../utils";
 
 const Feedback = ({
@@ -37,19 +37,6 @@ const Feedback = ({
   const [hasLoggedFeedback, setHasLoggedFeedback] = useState(false);
 
   const fetchFeedback = () => {
-    const msg: HelpfulArticleT = {
-      answer: activeState,
-      message: textValue,
-      url: `${basePath}${asPath}`,
-      docId: docId,
-      docType: docType,
-    };
-
-    fetch("/api/helpfulArticleFeedback", {
-      method: "POST",
-      body: JSON.stringify(msg),
-    });
-
     const state = {
       ja: "ja",
       nei: "nei",

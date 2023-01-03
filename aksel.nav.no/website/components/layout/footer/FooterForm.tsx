@@ -31,14 +31,6 @@ const FooterForm = () => {
     if (fail) return;
     setContentError({ content: "" });
 
-    fetch("/api/generalFeedback", {
-      method: "POST",
-      body: JSON.stringify({
-        message: contactForm.content,
-        url: `${basePath}${asPath}`,
-      }),
-    });
-
     const body: FeedbackT = {
       message: contactForm.content,
       url: `${basePath}${asPath}`,

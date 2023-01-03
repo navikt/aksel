@@ -65,11 +65,6 @@ Blir brukt flere keys i .env under `./website`, men kun `SANITY_PRIVATE_NO_DRAFT
 
 - SANITY_WRITE_KEY:
   For å sende dokumenter til sanity, brukt til å oppdatere sandboxes/examples/farger. Trengs bare hvis kode skal synkes fra lokal branch
-- ALGOLIA_ADMIN:
-  For å oppdatere records i søkemotoren. Trengs bare hvis man oppdaterer søkeindexen lokalt.
-- ALGOLIA_ID:
-  Søkemotor index-id for å redigere riktig Index. Trengs bare for at søk skal fungere lokalt
-- TRELLO_TOKEN: Sender feedback til et egent trello-board. Ikke nødvendig lokalt hvis man ikke vil teste feedback-modulen.
 - SANITY_PREVIEW_TOKEN: Gir appen tilgang til å lese draft innhold fra sanity i "preview"-mode. Trengs for å teste preview-sider
 - SANITY_PRIVATE_NO_DRAFTS: Gir appen tilgang til å lese innhold fra Sanity da datasettet er privat
 
