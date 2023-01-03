@@ -17,7 +17,7 @@ export const Metrics = () => {
   const weeks: any = useFormValue(["metrics", "pageviews", "weeks"]);
   const avgScrollLength = useFormValue(["metrics", "avgScrollLength"]);
   const avgTime = useFormValue(["metrics", "avgTime"]);
-  const inactiveCount = useFormValue(["metrics", "inactiveCount"]);
+  const inactiveCount: any = useFormValue(["metrics", "inactiveCount"]);
 
   const parsedWeeks = weeks?.map((week: any) => {
     return {
@@ -37,46 +37,31 @@ export const Metrics = () => {
       <Heading as="h2" size={3}>
         Statistikk
       </Heading>
-      <dl>
+      <dl className="grid grid-cols-2">
         {totalViews && (
-          <div>
-            <dt>Totale sidevisninger</dt>
-            <dd>{totalViews}</dd>
-          </div>
+          <Metric description="Totale sidevisninger" value={totalViews} />
+        )}
+
+        {weeks && (
+          <Metric description="Antall uker målt" value={weeks.length} />
+        )}
+
+        {avgScrollLength && (
+          <Metric
+            description="Gjennomsnittlig scrollldybde"
+            value={avgScrollLength + "%"}
+          />
+        )}
+        {avgTime && (
+          <Metric
+            description="Gjennomsnittlig tid på siden"
+            value={parseTime(Number(avgTime))}
+          />
+        )}
+        {inactiveCount && (
+          <Metric description="Totale inaktive" value={inactiveCount} />
         )}
       </dl>
-
-      {weeks && (
-        <div>
-          <dt>Antall uker målt</dt>
-          <dd>{weeks.length}</dd>
-        </div>
-      )}
-
-      {avgScrollLength && (
-        <div>
-          <dt>Gjennomsnittlig scrollldybde</dt>
-          <dd>
-            <>{avgScrollLength}%</>
-          </dd>
-        </div>
-      )}
-      {avgTime && (
-        <div>
-          <dt>Gjennomsnittlig tid på siden</dt>
-          <dd>
-            <>{parseTime(Number(avgTime))}</>
-          </dd>
-        </div>
-      )}
-      {inactiveCount && (
-        <div>
-          <dt>Totale inaktive</dt>
-          <dd>
-            <>{inactiveCount}</>
-          </dd>
-        </div>
-      )}
       {parsedWeeks && (
         <>
           <ResponsiveContainer aria-hidden width="100%" height={300}>
@@ -123,6 +108,20 @@ export const Metrics = () => {
         </>
       )}
     </Stack>
+  );
+};
+
+interface MetricProps {
+  description: string;
+  value: string;
+}
+
+const Metric = ({ description, value }: MetricProps) => {
+  return (
+    <div>
+      <dt>{description}</dt>
+      <dd>{value}</dd>
+    </div>
   );
 };
 
