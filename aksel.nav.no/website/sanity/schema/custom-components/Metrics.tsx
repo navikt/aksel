@@ -1,5 +1,5 @@
 import { Table } from "@navikt/ds-react";
-import { Heading, Stack } from "@sanity/ui";
+import { Stack } from "@sanity/ui";
 import { getWeek, getYear } from "date-fns";
 import {
   Legend,
@@ -34,10 +34,7 @@ export const Metrics = () => {
 
   return (
     <Stack>
-      <Heading as="h2" size={3}>
-        Statistikk
-      </Heading>
-      <dl className="grid grid-cols-2">
+      <dl className="mb-8 flex flex-wrap justify-center gap-y-4">
         {totalViews && (
           <Metric description="Totale sidevisninger" value={totalViews} />
         )}
@@ -118,9 +115,9 @@ interface MetricProps {
 
 const Metric = ({ description, value }: MetricProps) => {
   return (
-    <div>
-      <dt>{description}</dt>
-      <dd>{value}</dd>
+    <div className="w-1/2 text-center">
+      <dt className="mb-2 text-xl">{description}</dt>
+      <dd className="text-3xl">{value}</dd>
     </div>
   );
 };
