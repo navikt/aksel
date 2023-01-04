@@ -1,7 +1,8 @@
-import { Clock, Down, Eye } from "@navikt/ds-icons";
+import { Down, Eye } from "@navikt/ds-icons";
 import { Table, ToggleGroup } from "@navikt/ds-react";
 import { Stack } from "@sanity/ui";
 import { getWeek, getYear } from "date-fns";
+import { useRef, useState } from "react";
 import {
   Legend,
   Line,
@@ -19,6 +20,8 @@ export const Metrics = () => {
   const avgScrollLength = useFormValue(["metrics", "avgScrollLength"]);
   const avgTime = useFormValue(["metrics", "avgTime"]);
   const inactiveCount: any = useFormValue(["metrics", "inactiveCount"]);
+  const [selected, setSelected] = useState("Sidevisninger");
+  const toggleRef = useRef(null);
 
   const parsedWeeks = weeks?.map((week: any) => {
     return {
@@ -64,22 +67,19 @@ export const Metrics = () => {
         <>
           <ToggleGroup
             aria-hidden
-            defaultValue="sidevisninger"
-            onChange={() => console.log("test")}
+            defaultValue={selected}
+            onChange={setSelected}
             size="small"
             className="mx-auto mb-8"
+            ref={toggleRef}
           >
-            <ToggleGroup.Item value="sidevisninger">
+            <ToggleGroup.Item value="Sidevisninger">
               <Eye aria-hidden />
               Sidevisninger
             </ToggleGroup.Item>
-            <ToggleGroup.Item value="scrolldybde">
+            <ToggleGroup.Item value="Scroll">
               <Down aria-hidden />
               Scrolldybde
-            </ToggleGroup.Item>
-            <ToggleGroup.Item value="tid">
-              <Clock aria-hidden />
-              Tid
             </ToggleGroup.Item>
           </ToggleGroup>
           <ResponsiveContainer aria-hidden width="100%" height={300}>
@@ -90,11 +90,10 @@ export const Metrics = () => {
               <Legend />
               <Line
                 type="monotone"
-                dataKey="Sidevisninger"
+                dataKey={selected}
                 stroke="#004367"
                 activeDot={{ r: 8 }}
               />
-              <Line type="monotone" dataKey="Scroll" stroke="#82ca9d" />
             </LineChart>
           </ResponsiveContainer>
           <Table className="sr-only">
