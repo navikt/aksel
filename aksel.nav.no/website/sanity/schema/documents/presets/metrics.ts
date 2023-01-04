@@ -84,5 +84,6 @@ export const metrics = defineField({
 
 const isDeveloper = (currentUser: any) => {
   const { roles } = currentUser;
-  return roles.find(({ name }) => name === "developer");
+
+  return !roles.some(({ name }) => name === "developer");
 };
