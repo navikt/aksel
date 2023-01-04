@@ -1,4 +1,5 @@
-import { Table } from "@navikt/ds-react";
+import { Clock, Down, Eye } from "@navikt/ds-icons";
+import { Table, ToggleGroup } from "@navikt/ds-react";
 import { Stack } from "@sanity/ui";
 import { getWeek, getYear } from "date-fns";
 import {
@@ -61,6 +62,26 @@ export const Metrics = () => {
       </dl>
       {parsedWeeks && (
         <>
+          <ToggleGroup
+            aria-hidden
+            defaultValue="sidevisninger"
+            onChange={() => console.log("test")}
+            size="small"
+            className="mx-auto mb-8"
+          >
+            <ToggleGroup.Item value="sidevisninger">
+              <Eye aria-hidden />
+              Sidevisninger
+            </ToggleGroup.Item>
+            <ToggleGroup.Item value="scrolldybde">
+              <Down aria-hidden />
+              Scrolldybde
+            </ToggleGroup.Item>
+            <ToggleGroup.Item value="tid">
+              <Clock aria-hidden />
+              Tid
+            </ToggleGroup.Item>
+          </ToggleGroup>
           <ResponsiveContainer aria-hidden width="100%" height={300}>
             <LineChart width={500} height={300} data={parsedWeeks}>
               <XAxis dataKey="weekNumber" />
