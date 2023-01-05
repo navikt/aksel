@@ -62,7 +62,7 @@ export default function SetPrivateAction(props) {
               dele offentlig kan medføre eks omdømmetap og uønsket oppmerksomhet
               utenfra. Dobbelsjekk med temaansvarlig og andre som har skrevet
               artikkelen før du velger å åpne innholdet for alle. Er du usikker
-              er det bare å sende en melding på #aksel-designsystemet eller
+              er det bare å sende en melding på #Aksel-designsystemet eller
               #aksel-redaktører på Slack.
             </BodyLong>
           ) : (

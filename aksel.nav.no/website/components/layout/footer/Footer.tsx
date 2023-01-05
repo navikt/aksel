@@ -38,7 +38,7 @@ const Footer = () => {
                   className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
                   href="https://nav-it.slack.com/archives/C7NE7A8UF"
                 >
-                  #aksel-designsystemet på Slack
+                  #Aksel-designsystemet på Slack
                 </Link>
               </li>
               <li>
