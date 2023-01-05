@@ -71,7 +71,7 @@ export const BloggAd = () => {
           Ta kontakt med{" "}
           <NextLink href="https://nav-it.slack.com/archives/C7NE7A8UF" passHref>
             <Link className="font-semibold text-[#831843]">
-              #aksel-designsystemet
+              #Aksel-designsystemet
             </Link>
           </NextLink>{" "}
           på Slack
