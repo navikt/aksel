@@ -75,8 +75,8 @@ const IntroPage = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
       >
         <ReadMore header="Har du ikke de rollene du trenger?">
           Send en melding til oss på{" "}
-          <Link href="https://nav-it.slack.com/archives/C0370ADS0HX">
-            #Aksel
+          <Link href="https://nav-it.slack.com/archives/C7NE7A8UF">
+            #aksel-designsystemet
           </Link>{" "}
           slack så fikser vi det.
         </ReadMore>

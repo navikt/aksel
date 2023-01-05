@@ -256,8 +256,8 @@ export const EditorPage = () => {
         </dl>
         <p>
           Om det er noe du mangler tilgang til kan du sende melding på{" "}
-          <Link href="https://nav-it.slack.com/archives/C0370ADS0HX">
-            #Aksel
+          <Link href="https://nav-it.slack.com/archives/C7NE7A8UF">
+            #aksel-designsystemet
           </Link>
         </p>
       </div>

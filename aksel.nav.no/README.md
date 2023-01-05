@@ -84,4 +84,4 @@ Kjøres backups hver 3 dag til GCP-bucket under `designsystem-prod`
 
 Spørsmål og kontakt kan rettes til team Aksel
 
-Aksel har også en egen slack-kanal #aksel
+Aksel har også en egen Slack-kanal #aksel-designsystemet
