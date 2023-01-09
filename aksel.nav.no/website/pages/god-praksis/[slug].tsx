@@ -43,6 +43,8 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
 
   const hasAnsvarlig = !!page?.ansvarlig?.title;
 
+  const hasPages = !!page.seksjoner.find((x) => !!x.sider);
+
   return (
     <>
       <Head>
@@ -143,35 +145,45 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
           </div>
 
           <div className="relative px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
-            <div className="dynamic-wrapper grid gap-20">
-              {page.seksjoner.map((seksjon) => (
-                <div key={seksjon._key}>
-                  <Heading level="2" size="medium">
-                    {seksjon.title}
-                  </Heading>
-                  {seksjon.beskrivelse && (
-                    <div className="max-w-prose">
-                      <SanityBlockContent
-                        blocks={seksjon.beskrivelse}
-                        noLastMargin
-                      />
+            {hasPages ? (
+              <div className="dynamic-wrapper grid gap-20">
+                {page.seksjoner.map((seksjon) =>
+                  seksjon?.sider ? (
+                    <div key={seksjon._key}>
+                      <Heading level="2" size="medium">
+                        {seksjon.title}
+                      </Heading>
+                      {seksjon.beskrivelse && (
+                        <div className="max-w-prose">
+                          <SanityBlockContent
+                            blocks={seksjon.beskrivelse}
+                            noLastMargin
+                          />
+                        </div>
+                      )}
+                      <div className="card-grid-3-1 mt-6">
+                        {(seksjon?.sider as unknown as ArtiklerT[])?.map(
+                          (x: ArtiklerT) => (
+                            <ArtikkelCard
+                              {...x}
+                              source={page?.slug?.current}
+                              key={x._id}
+                              variant="god-praksis"
+                            />
+                          )
+                        )}
+                      </div>
                     </div>
-                  )}
-                  <div className="card-grid-3-1 mt-6">
-                    {(seksjon.sider as unknown as ArtiklerT[]).map(
-                      (x: ArtiklerT) => (
-                        <ArtikkelCard
-                          {...x}
-                          source={page?.slug?.current}
-                          key={x._id}
-                          variant="god-praksis"
-                        />
-                      )
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+                  ) : null
+                )}
+              </div>
+            ) : (
+              <div className="dynamic-wrapper mb-20">
+                <Heading level="2" size="medium">
+                  Fant ingen artikler her enda...
+                </Heading>
+              </div>
+            )}
           </div>
         </main>
         <Footer />

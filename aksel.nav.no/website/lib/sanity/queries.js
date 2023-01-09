@@ -167,7 +167,7 @@ export const akselTema = `*[_type == "godpraksis_landingsside"][0]{
       ${deRefs}
     }
   },
-  "temaer": *[_type == "aksel_tema"]{
+  "temaer": *[_type == "aksel_tema" && defined(seksjoner[].sider[])]{
     ...,
     "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
   },

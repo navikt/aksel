@@ -19,7 +19,7 @@ export function TemaView(props) {
   const type = schema.get("aksel_artikkel");
 
   useEffect(() => {
-    const query = `*[_type == "aksel_tema" && defined(seksjoner) && !(_id in path("drafts.**"))]{_id,title,seksjoner, "artikler":*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && ^._id in tema[]._ref]{_id}}`;
+    const query = `*[_type == "aksel_tema" && !(_id in path("drafts.**"))]{_id,title,seksjoner, "artikler":*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && ^._id in tema[]._ref]{_id}}`;
     client.fetch(query).then(setTema);
   }, [client]);
 
