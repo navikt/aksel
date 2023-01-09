@@ -20,7 +20,7 @@ export function TemaView(props) {
   const sider = tema
     .find((x) => x.title === title)
     ?.["seksjoner"]?.reduce(
-      (b, n) => [...b, ...(n?.sider.map((x) => x._ref) ?? [])],
+      (b, n) => [...b, ...(n?.sider?.map((x) => x._ref) ?? [])],
       []
     );
   const artikler = tema.find((x) => x.title === title)?.["artikler"];
@@ -36,12 +36,6 @@ export function TemaView(props) {
       <Heading size={1}>
         {`Artikler ikke i seksjoner (${notFound.length})`}
       </Heading>
-      {notFound.length ? (
-        <Text>
-          Disse artiklene vil man ikke kunne finne i navigasjonen før dette er
-          fikset.
-        </Text>
-      ) : null}
       {notFound.map((x) => (
         <Card flex={1}>
           <IntentButton
