@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.0.12
+
+### Patch Changes
+
+- [#1737](https://github.com/navikt/Designsystemet/pull/1737) [`8a1ef5e7e`](https://github.com/navikt/Designsystemet/commit/8a1ef5e7e2c066cb80c13e14329e1585e2c427f8) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset default visuell error-state for radio
+
 ## 2.0.11
 
 ## 2.0.10
