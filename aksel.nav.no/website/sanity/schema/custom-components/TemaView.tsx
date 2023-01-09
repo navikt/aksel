@@ -1,7 +1,13 @@
-import { Stack, Heading, Card, Text } from "@sanity/ui";
+import { Card, Heading, Stack } from "@sanity/ui";
 import { useEffect, useState } from "react";
-import { IntentButton, Preview } from "sanity";
-import { getPublishedId, useClient, useSchema, useFormValue } from "sanity";
+import {
+  getPublishedId,
+  IntentButton,
+  Preview,
+  useClient,
+  useFormValue,
+  useSchema,
+} from "sanity";
 
 export function TemaView(props) {
   const client = useClient({ apiVersion: "2021-06-07" });
