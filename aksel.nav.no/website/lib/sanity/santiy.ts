@@ -8,14 +8,14 @@ export function urlFor(source: any) {
 }
 
 export const getAllPages = async (token?: string) => {
-  const pages = await sitemapPages();
+  const pages = await sitemapPages(token);
   return pages.map((x) => x.path);
 };
 
-export async function sitemapPages(): Promise<
-  { path: string; lastmod: string }[]
-> {
-  const client = getClient();
+export async function sitemapPages(
+  token?: string
+): Promise<{ path: string; lastmod: string }[]> {
+  const client = token ? noCdnClient(token) : getClient();
   const artikler = await getDocuments("all");
   const temaer = await getAkselTema();
 
