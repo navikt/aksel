@@ -16,7 +16,6 @@ export default async function logPageView(
     return res.status(400).json({ message: "Missing id" });
   }
 
-  // If page is new, create metrics object
   await client
     .patch(id as string)
     .setIfMissing({ "metrics.pageviews.weeks": [] })

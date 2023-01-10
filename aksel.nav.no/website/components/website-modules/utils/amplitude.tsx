@@ -74,9 +74,7 @@ export const usePageView = (router: Router, pageProps: any) => {
           !(isDevelopment || isTest || isPreview()) &&
           pageProps?.page._type === "aksel_forside"
         ) {
-          // Test document id
           const _id = pageProps?.page._id;
-          //TO-DO: Replace with correct id and aksel_article check
           fetch(`/api/log-page-view?id=${_id}`);
         }
       } catch (error) {
@@ -131,7 +129,6 @@ export const usePageView = (router: Router, pageProps: any) => {
   }, []);
 
   const logTimeSpent = useCallback((timeSpent: number) => {
-    //return if time spent is more than 7 minutes
     try {
       if (!(isDevelopment || isTest || isPreview())) {
         const { metrics } = pageProps.page;

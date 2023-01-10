@@ -12,18 +12,15 @@ export default async function logPageScroll(
   const { id, current, views, length } = req.query;
 
   if (!(id && current && views && length)) {
-    return res
-      .status(400)
-      .json({
-        message: "Missing required parameter(s). id, current, length or views",
-      });
+    return res.status(400).json({
+      message: "Missing required parameter(s). id, current, length or views",
+    });
   }
 
   const newAverage = Math.round(
     (Number(length) + Number(current)) / Number(views)
   );
 
-  // If page is new, create metrics object
   await client
     .patch(id as string)
     .setIfMissing({ "metrics.avgScrollLength": 0 })
