@@ -58,6 +58,8 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
 }
 
 export const usePageView = (router: Router, pageProps: any) => {
+  const hasMetrics = !!pageProps?.page?.metrics;
+
   const logView = useCallback(
     (e, first = false) => {
       const data = {};
@@ -70,10 +72,7 @@ export const usePageView = (router: Router, pageProps: any) => {
       }
       logPageView(e, data, first);
       try {
-        if (
-          !(isDevelopment || isTest || isPreview()) &&
-          pageProps?.page._type === "aksel_forside"
-        ) {
+        if (!(isDevelopment || isTest || isPreview()) && hasMetrics) {
           const _id = pageProps?.page._id;
           fetch(`/api/log-page-view?id=${_id}`);
         }
@@ -81,7 +80,7 @@ export const usePageView = (router: Router, pageProps: any) => {
         isDevelopment && console.error(error);
       }
     },
-    [pageProps]
+    [pageProps, hasMetrics]
   );
 
   /* https://stackoverflow.com/questions/2387136/cross-browser-method-to-determine-vertical-scroll-percentage-in-javascript */
@@ -111,10 +110,7 @@ export const usePageView = (router: Router, pageProps: any) => {
     });
 
     try {
-      if (
-        !(isDevelopment || isTest || isPreview()) &&
-        pageProps?.page._type === "aksel_forside"
-      ) {
+      if (!(isDevelopment || isTest || isPreview()) && hasMetrics) {
         const { metrics } = pageProps.page;
         const _id = pageProps?.page._id;
         fetch(
@@ -126,23 +122,26 @@ export const usePageView = (router: Router, pageProps: any) => {
     } catch (error) {
       isDevelopment && console.error(error);
     }
-  }, []);
+  }, [pageProps, hasMetrics]);
 
-  const logTimeSpent = useCallback((timeSpent: number) => {
-    try {
-      if (!(isDevelopment || isTest || isPreview())) {
-        const { metrics } = pageProps.page;
-        const _id = pageProps?.page._id;
-        fetch(
-          `/api/log-time?id=${_id}&current=${metrics?.avgTime || 0}&views=${
-            metrics?.pageviews?.summary || 1
-          }&time=${timeSpent}`
-        );
+  const logTimeSpent = useCallback(
+    (timeSpent: number) => {
+      try {
+        if (!(isDevelopment || isTest || isPreview()) && hasMetrics) {
+          const { metrics } = pageProps.page;
+          const _id = pageProps?.page._id;
+          fetch(
+            `/api/log-time?id=${_id}&current=${metrics?.avgTime || 0}&views=${
+              metrics?.pageviews?.summary || 1
+            }&time=${timeSpent}`
+          );
+        }
+      } catch (error) {
+        isDevelopment && console.error(error);
       }
-    } catch (error) {
-      isDevelopment && console.error(error);
-    }
-  }, []);
+    },
+    [pageProps, hasMetrics]
+  );
 
   useEffect(() => {
     const startTime = new Date().getTime();
@@ -155,9 +154,9 @@ export const usePageView = (router: Router, pageProps: any) => {
     return () => {
       router.events.off("routeChangeComplete", logView);
       router.events.off("routeChangeStart", logScroll);
-      if (pageProps?.page?._type === "aksel_forside") {
+      if (hasMetrics) {
         logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
       }
     };
-  }, [router.events, logView, logScroll, logTimeSpent]);
+  }, [router.events, logView, logScroll, logTimeSpent, hasMetrics]);
 };
