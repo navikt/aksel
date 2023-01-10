@@ -218,9 +218,9 @@ export default Wrapper;
 export const getStaticPaths = async () => {
   return {
     paths: await getAkselTema().then((paths) =>
-      paths.map((slug) => ({
+      paths.map(({ path }) => ({
         params: {
-          slug,
+          slug: path,
         },
       }))
     ),
