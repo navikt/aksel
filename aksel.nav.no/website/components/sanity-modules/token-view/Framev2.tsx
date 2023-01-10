@@ -28,7 +28,7 @@ export const Frame = ({
           const colorNode = isColor && color(c.value);
 
           return (
-            <tr key={c.name} className="flex items-center gap-1">
+            <tr key={c.name} className="flex items-center gap-4">
               <td className="component-checkered-bg m-2 mr-0 rounded-md p-0">
                 {Element ? (
                   <Element token={c.value} name={c.name} />
@@ -46,7 +46,7 @@ export const Frame = ({
               <BodyShort
                 as="td"
                 size="small"
-                className="text-text-subtle hidden text-sm tracking-tighter md:block"
+                className="text-text-subtle hidden font-mono text-sm tracking-tighter md:block"
               >
                 <CopyToken
                   val={
