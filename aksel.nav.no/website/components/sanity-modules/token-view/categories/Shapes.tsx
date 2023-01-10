@@ -1,5 +1,5 @@
 import docs from "@navikt/ds-tokens/docs.json";
-import { Frame } from "../Framev2";
+import { Frame } from "../Frame";
 
 export const ShapesView = ({ cat }: { cat: string }) => {
   const shapes = docs[cat];
@@ -11,7 +11,7 @@ export const ShapesView = ({ cat }: { cat: string }) => {
       element={({ token }: { token: string; name?: string }) => {
         return (
           <div
-            className="min-h-8 flex h-full w-full place-items-start items-center gap-2 rounded-md"
+            className="min-h-16 flex h-full w-full items-center justify-center gap-4 rounded-md px-4 text-5xl font-semibold"
             aria-hidden
             style={{
               background: `var(--a-surface-default)`,

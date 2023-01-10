@@ -1,5 +1,5 @@
 import docs from "@navikt/ds-tokens/docs.json";
-import { Frame } from "../Framev2";
+import { Frame } from "../Frame";
 
 export const SpacingView = ({ cat }: { cat: string }) => {
   const spacings = docs[cat];
@@ -9,16 +9,12 @@ export const SpacingView = ({ cat }: { cat: string }) => {
       tokens={spacings}
       styles="boxShadow"
       element={({ token }: { token: string; name?: string }) => {
-        const widest = Math.max(
-          ...spacings.map((x) => Number(x.value.replace("rem", "")))
-        );
         return (
           <div
-            className="min-h-8 grid h-full w-full place-items-start items-center rounded-md"
+            className="min-h-16 flex h-full w-full items-center justify-start rounded-md px-4 text-5xl font-semibold"
             aria-hidden
             style={{
               background: `var(--a-surface-default)`,
-              width: `${widest}rem`,
             }}
           >
             <div
