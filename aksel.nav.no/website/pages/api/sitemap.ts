@@ -16,7 +16,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       smStream.write({
         url: `/${post}`,
         changefreq: "weekly",
-        priority: 0.5,
       });
     });
 
