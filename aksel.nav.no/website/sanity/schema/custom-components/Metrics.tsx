@@ -19,7 +19,6 @@ export const Metrics = () => {
   const weeks: any = useFormValue(["metrics", "pageviews", "weeks"]);
   const avgScrollLength = useFormValue(["metrics", "avgScrollLength"]);
   const avgTime = useFormValue(["metrics", "avgTime"]);
-  const inactiveCount: any = useFormValue(["metrics", "inactiveCount"]);
   const [selected, setSelected] = useState("Sidevisninger");
   const toggleRef = useRef(null);
 
@@ -58,9 +57,6 @@ export const Metrics = () => {
             description="Gjennomsnittlig tid på siden"
             value={parseTime(Number(avgTime))}
           />
-        )}
-        {inactiveCount && (
-          <Metric description="Totale inaktive" value={inactiveCount} />
         )}
       </dl>
       {parsedWeeks && (
