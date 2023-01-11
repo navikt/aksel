@@ -1,88 +1,23 @@
-.inverted-textarea {
-  --navds-textarea-color-shadow-error: var(--navds-global-color-red-300);
-  --navds-textarea-color-border-error: var(--navds-global-color-red-400);
-  --navds-error-message-color-text: var(--navds-global-color-red-300);
-  --navds-textarea-color-border: var(--navds-semantic-color-border-inverted);
-}
-
-.inverted-textfield {
-  --navds-text-field-color-shadow-error: var(--navds-global-color-red-300);
-  --navds-text-field-color-border-error: var(--navds-global-color-red-400);
-  --navds-error-message-color-text: var(--navds-global-color-red-300);
-  --navds-text-field-color-background: transparent;
-}
-
-.inverted-textarea textarea {
-  @apply bg-transparent;
-}
-
-.inverted-textarea textarea:hover {
-  @apply border-blue-200;
-}
-
-.inverted-textarea textarea:focus {
-  @apply shadow-focus-inverted;
-}
-
 html.overflow-hidden > body.ReactModal__Body--open {
   overflow: unset;
 }
 
 .override-secondary-button {
-  --navds-semantic-color-interaction-primary: var(
-    --navds-global-color-deepblue-500
-  );
-  --navds-button-color-secondary-text: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-button-color-secondary-text-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-button-color-secondary-border: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-button-color-secondary-background-hover: var(
-    --navds-global-color-deepblue-50
-  );
+  --ac-button-secondary-text: var(--a-deepblue-500);
+  --ac-button-secondary-bg: var(--a-surface-default);
+  --ac-button-secondary-border: var(--a-deepblue-500);
+  --ac-button-secondary-hover-text: var(--a-deepblue-500);
+  --ac-button-secondary-hover-bg: var(--a-deepblue-50);
+  --ac-button-secondary-focus-border: var(--a-deepblue-500);
 }
 
 .override-secondary-button-active {
-  --navds-button-color-secondary-background-hover: var(
-    --navds-global-color-deepblue-700
-  );
-  --navds-button-color-secondary-text-hover: var(
-    --navds-semantic-color-text-inverted
-  );
+  --ac-button-secondary-text: var(--a-text-on-action);
+  --ac-button-secondary-hover-bg: var(--a-deepblue-700);
+  --ac-button-secondary-hover-text: var(--a-text-on-action);
 }
 
-.override-primary-button {
-  --navds-semantic-color-interaction-primary: var(
-    --navds-global-color-deepblue-500
-  );
-
-  --navds-button-color-primary-background: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-button-color-primary-background-hover: var(
-    --navds-global-color-deepblue-600
-  );
-  --navds-button-color-primary-background-active: var(
-    --navds-global-color-deepblue-800
-  );
-}
-
-.override-primary-button-dark {
-  --navds-semantic-color-interaction-primary: var(
-    --navds-global-color-deepblue-100
-  );
-
-  --navds-button-color-primary-background: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-button-color-primary-background-hover: var(
-    --navds-global-color-deepblue-200
-  );
-  --navds-button-color-primary-background-active: var(
-    --navds-global-color-deepblue-300
-  );
+.aksel-tertiary-button {
+  --a-text-action: var(--a-deepblue-800);
+  --a-text-action-on-action-subtle: var(--a-deepblue-800);
 }

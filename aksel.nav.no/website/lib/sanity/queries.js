@@ -1,3 +1,8 @@
+import {
+  grunnleggendeKategorier,
+  komponentKategorier,
+} from "../../sanity/config";
+
 const markDef = `
 markDefs[]{
   ...,
@@ -89,10 +94,6 @@ const defaultBlock = `
     ...,
     "ref": ref->{...},
  },
- _type == "tokens" =>{
-    ...,
-    tokenlist[]->
- },
  _type == "kode_eksempler" =>{
     ...,
     dir->,
@@ -125,13 +126,9 @@ const spesialSeksjon = `_type == "spesial_seksjon" =>{
       slug,
     }
   },
-  modul == "farge_kategori" =>{
-      "farge": farge_ref->{..., description[]{
-        ...,
-        ${markDef}
-      }
-    }
-  }
+  modul == "token_kategori" =>{
+    "token": token_ref->{...}
+}
 }`;
 
 const propsSeksjon = `_type == "props_seksjon" =>{
@@ -142,9 +139,12 @@ const propsSeksjon = `_type == "props_seksjon" =>{
   },
 }`;
 
+const tokenRef = `_type == "token_ref"=>@->`;
+
 const deRefs = `
 ${alert},
 ${tips},
+${tokenRef},
 ${markDef},
 ${introSeksjon},
 ${relatertInnhold},
@@ -159,119 +159,141 @@ ${defaultBlock},
 
 export const allDocuments = `*[]{...,'slug': slug.current }`;
 
-export const akselTema = `*[_type == "aksel_tema"]{
-  ...,
-  "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
-}`;
-
-export const akselBloggPosts = `*[_type == "aksel_blogg"] | order(_createdAt desc){
-  ...,
-  "slug": slug.current,
-  contributors[]->{
-    title
-  }
-}`;
-
-export const akselForsideQuery = `*[_type == "vk_frontpage"][0]{
-  "tekster": {
+export const akselTema = `*[_type == "godpraksis_landingsside"][0]{
+  "page": {
     ...,
-    beskrivelse[]{
+    intro[]{
       ...,
       ${deRefs}
     }
   },
-  prinsipp_1 {
+  "temaer": *[_type == "aksel_tema" && defined(seksjoner[].sider[])]{
     ...,
-    hovedside->{slug, heading},
-    undersider[]->{slug, heading}
+    "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
   },
-  "bloggs": ${akselBloggPosts},
-  "temaer": ${akselTema}
-}`;
-
-export const akselDocumentsByType = `*[_type in $types]{ _type, _id, 'slug': slug.current }`;
-
-export const akselPrinsippBySlug = `*[slug.current == $slug] | order(_updatedAt desc)[0]
-{
-  ...,
-  "slug": slug.current,
-  "content": select(
-    $valid == "true" => content[]{
-      ...,
-      ${deRefs}
-    },
-    $valid != "true" => []
-  ),
-  contributors[]->{
-    title
-  }
-}`;
-
-export const akselDocumentBySlug = `*[slug.current == $slug] | order(_updatedAt desc)[0]
-{
-  ...,
-  "slug": slug.current,
-  content[]{
-    ...,
-    ${deRefs}
-  },
-  tema[]->{title},
-  contributors[]->{
-    title
-  },
-  relevante_artikler[]->{
+  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...9]{
     _id,
     heading,
     _createdAt,
     _updatedAt,
     publishedAt,
     "slug": slug.current,
-    "tema": tema[]->tag,
+    "tema": tema[]->title,
     ingress,
-    "contributor": contributors[0]->title,
+  }
+}`;
+
+const contributorsAll = `contributors[]->{
+  anonym == true => {"title":@.anon_navn.current},
+  anonym != true => {"title":@.title}
+}`;
+
+const contributorsSingle = `contributors[0]->{
+  anonym == true => {"title":@.anon_navn.current},
+  anonym != true => {"title":@.title}
+}`;
+
+export const akselBloggPosts = `*[_type == "blogg_landingsside"][0]{
+  "page": {..., intro[]{...,${deRefs}}},
+  "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
+    ...,
+    "slug": slug.current,
+    ${contributorsAll}
+  }
+}`;
+
+export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
+  "page": {
+    ...,
+  },
+  "bloggs": *[_type == "aksel_blogg"] | order(_createdAt desc)[0...4]{
+    ...,
+    "slug": slug.current,
+    ${contributorsAll}
+  },
+  komigang[]{
+    ...,
+    "slug": reference->slug.current
+  },
+  tema[]{
+    ...,
+    ...ref->,
+    "oppsummering": intro,
+    ...ref->{"refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])},
+  },
+  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
+  }
+}`;
+
+export const akselPrinsippBySlug = `{
+  "prinsipp": *[slug.current == $slug] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    "content": select(
+      $valid == "true" => content[]{
+        ...,
+        ${deRefs}
+      },
+      $valid != "true" => []
+    ),
+    ${contributorsAll}
+  }
+}`;
+
+export const akselDocumentBySlug = `{
+  "page": *[slug.current == $slug] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${deRefs}
+    },
+    tema[]->{title, slug, seo},
+    ${contributorsAll},
+    relevante_artikler[]->{
+      _id,
+      heading,
+      _createdAt,
+      _updatedAt,
+      publishedAt,
+      updateInfo,
+      "slug": slug.current,
+      "tema": tema[]->tag,
+      ingress,
+      "contributor": ${contributorsSingle},
+    }
   }
 }`;
 
 export const akselEditorById = `*[_id == $id][0]
 {
-  contributors[]->{
-    title
-  }
+  ${contributorsAll}
 }`;
 
-export const dsDocuments = `*[_type in ["komponent_artikkel", "ds_artikkel"]]{ ..., 'slug': slug.current }`;
-
-const dsNavQuery = `"navigation": *[_type == 'ds_navigation'][0] {
-  "headings": headings[]{
-    ...,
-    link_ref->{_id, slug},
-    menu[]{
-      ...,
-      link->{_id, slug, status},
-    }
-  }
+const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
+  heading,
+  "slug": slug.current,
+  kategori,
+  "tag": status.tag,
 }`;
 
-export const dsFrontpageQuery = `{
-  "page": *[_id == "frontpage_designsystem"][0]
-  {
-   ...,
-    body[]{
-      ...,
-      ${deRefs}
-    },
-    cards[]{
-      _type == "card" =>{
-        ...,
-        link_ref->{_id, "slug": slug.current}
-      }
-    }
-  },
-  ${dsNavQuery}
-}`;
-
-export const dsSlugQuery = `{
-  "page": *[_type in ["komponent_artikkel", "ds_artikkel"] && slug.current == $slug] | order(_updatedAt desc)[0]
+/**
+ * "refs" må disables i preview da next-sanity sin
+ * preview-funksjonalitet fører til en infinite loop som låser applikasjonen.
+ * Dette er på grunn av av hele datasettet blir lastet inn i preview flere ganger som til slutt låser vinduet.
+ */
+export const komponentQuery = `{
+  "page": *[_type == "komponent_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
     {
       ...,
       "slug": slug.current,
@@ -287,45 +309,42 @@ export const dsSlugQuery = `{
         ${deRefs}
         }
       },
-      bruk_tab[]{
-        ...,
-        ${deRefs}
-      },
       content[]{
         ...,
         ${deRefs}
       },
-      content_tabs[]{
-        ...,
-        content[]{
-          ...,
-          ${deRefs}
-        }
-      },
   },
-  ${dsNavQuery}
+  "refs": select(
+    $preview == "true" => [],
+    $preview != "true" => *[_type == "komponent_artikkel" && count(*[references(^._id)][slug.current == $slug]) > 0][0...3]{
+      _id,
+      heading,
+      "slug": slug,
+      status
+    }
+  ),
+  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
+  ${sidebarQuery}
 }`;
 
-export const dsNavigationQuery = `
-*[_type == 'ds_navigation'][0] {
-  "headings": headings[]{
-    ...,
-    link_ref->{_id, slug},
-    menu[]{
+export const grunnleggendeQuery = `{
+  "page": *[_type == "ds_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
+    {
       ...,
-      link->{_id, slug, tags},
-    }
-  }
-}
-`;
+      "slug": slug.current,
+      content[]{
+        ...,
+        ${deRefs}
+      },
+  },
+  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
+  ${sidebarQuery}
+}`;
 
-export const akselTemaNames = `*[_type == "aksel_tema" && count(*[references(^._id)]) > 0].title`;
-
-export const akselTemaDocs = `*[_type == "aksel_tema"]{
-  ...,
-  "ansvarlig": ansvarlig->{title, roller},
-  bruk_seksjoner == true => {
-    "artikler": [],
+export const akselTemaDocs = `{
+  "tema": *[_type == "aksel_tema" && slug.current == $slug] | order(_updatedAt desc)[0]{
+    ...,
+    "ansvarlig": ansvarlig->{title, roller},
     seksjoner[]{
       ...,
       beskrivelse[]{
@@ -338,41 +357,95 @@ export const akselTemaDocs = `*[_type == "aksel_tema"]{
         _createdAt,
         _updatedAt,
         publishedAt,
+        updateInfo,
         "slug": slug.current,
-        "tema": tema[]->tag,
+        "tema": tema[]->title,
         ingress,
-        "contributor": contributors[0]->title,
+        "contributor": ${contributorsSingle}
       }
-    }
-  },
-  bruk_seksjoner != true => {
-    "artikler": *[_type=='aksel_artikkel' && references(^._id) && !(_id in path("drafts.**"))] | order(_createdAt desc){
-      _id,
-      heading,
-      _createdAt,
-      _updatedAt,
-      publishedAt,
-      "slug": slug.current,
-      "tema": tema[]->tag,
-      ingress,
-      "contributor": contributors[0]->title,
     },
-    "seksjoner": []
-  },
+    "pictogram": pictogram.asset-> {
+        url,
+        altText,
+    },
+  }
 }`;
 
-export const akselBloggBySlug = `*[slug.current == $slug] | order(_updatedAt desc)[0]
-{
-  ...,
-  "slug": slug.current,
-  "content": select(
-    $valid == "true" => content[]{
+export const akselBloggBySlug = `{
+  "blogg": *[slug.current == $slug && _type == "aksel_blogg"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    "content": select(
+      $valid == "true" => content[]{
+        ...,
+        ${deRefs}
+      },
+      $valid != "true" => []
+    ),
+    ${contributorsAll}
+  },
+  "morePosts": *[_type == "aksel_blogg" && slug.current != $slug] | order(publishedAt desc, _updatedAt desc)[0...3] {
+    "slug": slug.current,
+    heading,
+    _createdAt,
+    _id,
+    ingress,
+    ${contributorsAll},
+
+  }
+}`;
+
+const landingsSideQuery = (t) => {
+  const kat =
+    t === "komponenter"
+      ? komponentKategorier
+      : t === "grunnleggende"
+      ? grunnleggendeKategorier
+      : [];
+
+  return `"page": *[_type == "${t}_landingsside"][0]{
+    ...,
+    ${kat.map((x) => `intro_${x.value}[]{...,${deRefs}}`).join(",")}
+  }`;
+};
+
+export const komponentLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
+  "komponenter"
+)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
+
+export const grunnleggendeLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
+  "grunnleggende"
+)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
+
+export const akselStandaloneBySlug = `{
+  "page": *[slug.current == $slug && _type == "aksel_standalone"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
       ...,
       ${deRefs}
-    },
-    $valid != "true" => []
-  ),
-  contributors[]->{
-    title
-  },
+    }
+  }
 }`;
+
+export const akselArticleFields = `
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    updateInfo,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
+`;
+
+export const akselArticleAll = (boundry = "") => {
+  return `{
+    "articles": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)${boundry} {
+      ${akselArticleFields}
+    }
+  }`;
+};

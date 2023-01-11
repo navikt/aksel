@@ -39,7 +39,7 @@ const CodeSnippet = ({
           theme={undefined}
         >
           {({ tokens, getLineProps, getTokenProps }) => (
-            <pre className="text-text-inverted relative m-0 overflow-x-auto overflow-y-auto rounded-lg bg-gray-900 p-4 pr-16 font-mono">
+            <pre className="text-text-on-inverted relative m-0 overflow-x-auto overflow-y-auto rounded-lg bg-gray-900 p-4 pr-16 font-mono">
               {tokens.map((line, i) => (
                 <div
                   key={i}

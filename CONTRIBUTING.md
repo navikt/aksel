@@ -1,4 +1,4 @@
-# Bidra med utvikling av nye og eksisterende komponenter
+# Utvikling av nye eller eksisterende løsninger
 
 ## TL;DR
 
@@ -9,28 +9,54 @@ git clone git@github.com:navikt/Designsystemet.git
 cd Designsystemet
 yarn install
 yarn boot
-yarn dev/storybook
+
+// Storybook
+yarn storybook
+
+// Nettside
+yarn dev
 ```
 
-[http://localhost:6006](http://localhost:6006) (port auto-incrementeres hvis den allerede er i bruk av en annen server)
+Storybook: [http://localhost:6006](http://localhost:6006)
+
+Nettside: [http://localhost:3000](http://localhost:3000)
 
 ## Utviklingsmiljø
 
-Vi bruker storybook [https://storybook.js.org/](https://storybook.js.org/) som utviklermiljø.
-`yarn storybook` vil starte opp dette miljøet og kan da skrive `stories` for komponentene man vil teste [hvordan skrive storybook stories](https://storybook.js.org/docs/react/writing-stories/introduction)
+Vi bruker storybook [https://storybook.js.org/](https://storybook.js.org/) for utvikling av nye komponenter.
+Skriv `stories` for komponentene man vil teste [(hvordan skrive storybook stories)](https://storybook.js.org/docs/react/writing-stories/introduction)
 
 ## Utvikling av nye komponenter
 
-Om en modul du lager har behov for en npm-pakke så kan du legge den til i devDep/dep i pakken for så å kjøre `yarn install` i root. Yarn workspaces fikser dependency treet selv. Hvis du lurer på hvordan strukturen er satt opp, så hjelper vi deg gjerne!
+Det er ikke satt opp en template for nye komponenter, men vi følger til dels en mal.
+
+```sh
+@navikt/pakkenavn
+└─ src          # Komponenter
+   ├─ index.ts  # Alle exports
+   └─ pakkenavn
+      ├─ index.ts       # Alle exports fra komponent
+      ├─ komponent.tsx  # Komponentkode
+      └─ komponent.stories.tsx # Stories
+```
 
 ## Dokumentasjon
 
-Dokumentasjon ang komponentter finner man på [aksel.nav.no](https://design.nav.no/). Hvis man ønsker å skrive noe dokumentasjon selv gjør vi det via CMS et Sanity. Kode-eksempler blir også skrevet i (https://github.com/navikt/aksel-website/tree/main/website/pages/eksempler)[aksel-website repo]
+Dokumentasjon ang komponentter finner man på [aksel.nav.no](https://design.nav.no/). Hvis man ønsker å skrive noe dokumentasjon selv gjør vi det via CMS et Sanity. Kode-eksempler blir skrevet lokalt i (https://github.com/navikt/aksel-website/tree/main/website/pages/eksempler)[aksel-website repo]
+
+## Versjonering av pakker
+
+Vi bruker `changeset` for versionering av pakker. Se [README](https://github.com/navikt/Designsystemet/blob/master/.changeset/README.md) for mer informasjon.
 
 ## Kodekvalitet og testing
 
-Noen komponenter og løsninger blir testet med jest + react-testing-library hvert build.
+Noen komponenter og løsninger blir testet med jest + react-testing-library.
 
-- Commit: Kjører prettier på endrede filer
-- Push: Kjører tester, linter
+- Commit: Kjører prettier på endrede filer + linter
 - Ved PR: Kjører tester, linter og visuell regresjonstester
+
+## Oppdatere Aksel.nav.no
+
+Push til `master` pusher endringer til prod
+
+Push til `next` pusher endringer til aksel.dev.nav.no

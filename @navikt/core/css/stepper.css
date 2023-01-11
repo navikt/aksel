@@ -3,7 +3,7 @@
   --navds-stepper-border-width: 2px;
   --navds-stepper-line-length: 1rem;
 
-  color: var(--navds-semantic-color-interaction-primary);
+  color: var(--ac-stepper-text, var(--a-surface-action));
   font-weight: 600;
   line-height: 1;
   list-style: none;
@@ -28,7 +28,7 @@
 }
 
 .navds-stepper__line {
-  background-color: var(--navds-semantic-color-border-muted);
+  background-color: var(--ac-stepper-line, var(--a-border-default));
   width: var(--navds-stepper-border-width);
   height: 100%;
   min-height: var(--navds-stepper-line-length);
@@ -37,7 +37,7 @@
 }
 
 .navds-stepper__step--behind.navds-stepper__step--completed + .navds-stepper__line {
-  background-color: var(--navds-global-color-blue-500);
+  background-color: var(--ac-stepper-line-completed, var(--a-border-selected));
 }
 
 .navds-stepper__line--1 {
@@ -58,7 +58,7 @@
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: [circle] var(--navds-stepper-circle-size) [content] auto;
-  gap: var(--navds-spacing-2);
+  gap: var(--a-spacing-2);
   justify-content: flex-start;
   text-decoration: none;
   cursor: pointer;
@@ -76,13 +76,13 @@ button.navds-stepper__step {
 }
 
 .navds-stepper__step--non-interactive {
-  color: var(--navds-global-color-gray-600);
+  color: var(--ac-stepper-non-interactive, var(--a-text-subtle));
   cursor: default;
 }
 
 :where(.navds-stepper__step):focus {
   outline: none;
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--a-shadow-focus);
   isolation: isolate;
 }
 
@@ -94,7 +94,7 @@ button.navds-stepper__step {
   width: var(--navds-stepper-circle-size);
   height: var(--navds-stepper-circle-size);
   border: var(--navds-stepper-border-width) solid currentColor;
-  border-radius: var(--navds-border-radius-full);
+  border-radius: var(--a-border-radius-full);
   line-height: 1;
 }
 
@@ -168,7 +168,7 @@ button.navds-stepper__step {
 
 /* Active step */
 :where(.navds-stepper__step--active) .navds-stepper__content {
-  color: var(--navds-semantic-color-interaction-primary-selected);
+  color: var(--ac-stepper-active, var(--a-text-action-selected));
 }
 
 :where(.navds-stepper__step:hover) .navds-stepper__content {
@@ -180,28 +180,28 @@ button.navds-stepper__step {
 }
 
 :where(.navds-stepper__step--active) .navds-stepper__circle {
-  background-color: var(--navds-semantic-color-interaction-primary-selected);
-  border-color: var(--navds-semantic-color-interaction-primary-selected);
-  color: var(--navds-semantic-color-text-inverted);
+  background-color: var(--ac-stepper-active-bg, var(--a-surface-action-selected));
+  border-color: var(--ac-stepper-active-border, var(--a-border-action-selected));
+  color: var(--ac-stepper-active-text, var(--a-text-on-action));
 }
 
 :where(.navds-stepper__step:not(.navds-stepper__step--active):hover) .navds-stepper__circle {
-  background-color: var(--navds-semantic-color-interaction-primary-hover-subtle);
+  background-color: var(--ac-stepper-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 /* Non-interactive */
 :where(.navds-stepper__step--non-interactive.navds-stepper__step--active) .navds-stepper__content {
-  color: var(--navds-global-color-gray-900);
+  color: var(--ac-stepper-non-interactive-active, var(--a-text-default));
 }
 
 .navds-stepper__step--non-interactive.navds-stepper__step--behind.navds-stepper__step--completed + .navds-stepper__line {
-  background-color: var(--navds-global-color-gray-600);
+  background-color: var(--ac-stepper-non-interactive-line-completed, var(--a-border-strong));
 }
 
 :where(.navds-stepper__step--non-interactive.navds-stepper__step--active) .navds-stepper__circle {
-  background-color: var(--navds-global-color-gray-900);
-  border-color: var(--navds-global-color-gray-900);
-  color: var(--navds-global-color-white);
+  background-color: var(--ac-stepper-non-interactive-active-bg, var(--a-surface-inverted));
+  border-color: var(--ac-stepper-non-interactive-active-border, var(--a-surface-inverted));
+  color: var(--ac-stepper-non-interactive-active-text, var(--a-text-on-inverted));
 }
 
 :where(.navds-stepper__step--non-interactive:hover) .navds-stepper__circle {
@@ -209,14 +209,14 @@ button.navds-stepper__step {
 }
 
 :where(.navds-stepper__step--non-interactive.navds-stepper__step--active:hover) .navds-stepper__circle {
-  background-color: var(--navds-global-color-gray-900);
+  background-color: var(--ac-stepper-non-interactive-active-bg, var(--a-surface-inverted));
 }
 
 :where(.navds-stepper__step--completed.navds-stepper__step--active) .navds-stepper__circle {
   background-color: inherit;
-  color: var(--navds-global-color-deepblue-500);
+  color: var(--ac-stepper-active-completed, var(--a-text-action-selected));
 }
 
 :where(.navds-stepper__step--completed.navds-stepper__step--active.navds-stepper__step--non-interactive) .navds-stepper__circle {
-  color: var(--navds-global-color-gray-900);
+  color: var(--ac-stepper-non-interactive-active-completed, var(--a-text-default));
 }

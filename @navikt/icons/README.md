@@ -1,24 +1,19 @@
 # Aksel icons
 
-Icons created and used by NAV
+Icons created and used by NAVs designsystem
 
 ## Installation
 
-Install `@navikt/ds-icons` with yarn
-
 ```bash
   yarn add @navikt/ds-icons
-```
-
-Install `@navikt/ds-icons` with npm
-
-```bash
   npm install @navikt/ds-icons
 ```
 
 ## Usage
 
-Use as a regular React-component
+Use as a regular React-component.
+
+Tip: Use the `title` prop for accessible icons.
 
 ```javascript
 import { Star } from "@navikt/ds-icons";

@@ -1,28 +1,21 @@
-# NAV React-components
+# Aksel React-components
 
-All of NAVs core React-components
+React-components for NAVs designsystem.
 
-- Uses styling from `@navikt/ds-css`
+- Uses styling defined in `@navikt/ds-css`
 - All components implemented with React.forwardRef!
 - Most components extend native html-elements.
 
 ## Installation
 
-Install `@navikt/ds-react` with yarn
-
 ```bash
   yarn add @navikt/ds-react
-```
-
-Install `@navikt/ds-react` with npm
-
-```bash
   npm install @navikt/ds-react
 ```
 
 ## Usage
 
-Remember to also import @navikt/ds-css to apply styling! See README-link under "learn more"-section below.
+Remember to also import `@navikt/ds-css` for styling!
 
 ```javascript
 import { Button } from "@navikt/ds-react";

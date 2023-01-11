@@ -1,9 +1,15 @@
 import { BodyShort, Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import cl from "classnames";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { HelpfulArticleEnum, HelpfulArticleT } from "@/lib";
-import { AmplitudeEvents, logAmplitudeEvent } from "../utils";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { FeedbackT, HelpfulArticleEnum } from "@/lib";
+import { AmplitudeEvents, IdContext, logAmplitudeEvent } from "../utils";
 
 const Feedback = ({
   docId,
@@ -18,6 +24,7 @@ const Feedback = ({
   akselFeedback?: boolean;
   text?: string;
 }): JSX.Element => {
+  const idCtx = useContext(IdContext);
   const { asPath, basePath } = useRouter();
   const [textValue, setTextValue] = useState("");
   const [activeState, setActiveState] = useState<HelpfulArticleEnum | null>(
@@ -30,17 +37,22 @@ const Feedback = ({
   const [hasLoggedFeedback, setHasLoggedFeedback] = useState(false);
 
   const fetchFeedback = () => {
-    const msg: HelpfulArticleT = {
-      answer: activeState,
-      message: textValue,
-      url: `${basePath}${asPath}`,
-      docId: docId,
-      docType: docType,
+    const state = {
+      ja: "ja",
+      nei: "nei",
+      misc: "forslag",
     };
 
-    fetch("/api/helpfulArticleFeedback", {
+    const body: FeedbackT = {
+      message: textValue,
+      url: `${basePath}${asPath}`,
+      type: state[activeState],
+      docId: idCtx?.id,
+    };
+
+    fetch("/api/feedback", {
       method: "POST",
-      body: JSON.stringify(msg),
+      body: JSON.stringify(body),
     });
   };
 
@@ -172,7 +184,7 @@ const Feedback = ({
           <Button
             variant="secondary"
             className={cl({
-              "override-secondary-button-active bg-deepblue-800 text-text-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
+              "override-secondary-button-active bg-deepblue-800 text-text-on-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
                 activeState === HelpfulArticleEnum.JA,
             })}
             onClick={() =>
@@ -186,7 +198,7 @@ const Feedback = ({
           <Button
             variant="secondary"
             className={cl({
-              "override-secondary-button-active bg-deepblue-800 text-text-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
+              "override-secondary-button-active bg-deepblue-800 text-text-on-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
                 activeState === HelpfulArticleEnum.NEI,
             })}
             onClick={() =>
@@ -200,7 +212,7 @@ const Feedback = ({
           <Button
             variant="secondary"
             className={cl({
-              "override-secondary-button-active bg-deepblue-800 text-text-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
+              "override-secondary-button-active bg-deepblue-800 text-text-on-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
                 activeState === HelpfulArticleEnum.MISC,
             })}
             onClick={() =>
@@ -215,10 +227,7 @@ const Feedback = ({
         {activeState !== null && (
           <form
             className={cl(
-              "animate-fadeIn mt-4 flex w-full max-w-sm flex-col gap-4",
-              {
-                "override-primary-button": akselFeedback,
-              }
+              "animate-fadeIn mt-4 flex w-full max-w-sm flex-col gap-4"
             )}
           >
             <Textarea

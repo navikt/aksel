@@ -2,30 +2,27 @@
   "name": "aksel.nav.no",
   "version": "1.0.0",
   "private": true,
-  "description": "Nettside for Aksel",
+  "description": "Website for Aksel.nav.no",
+  "author": "Aksel | NAV designsystem team",
   "scripts": {
     "dev": "yarn workspace website dev",
     "build:next": "yarn workspace website build",
     "serve:next": "yarn workspace website start",
-    "sanity": "yarn workspace sanity start",
-    "sanity:deploy": "yarn workspace sanity deploy",
-    "sanity:backup": "yarn workspace sanity backup",
     "sanity:update": "yarn workspace website update:sanity",
     "test": "yarn workspace website test"
   },
   "workspaces": [
-    "sanity",
     "website"
   ],
   "dependencies": {
-    "@navikt/ds-codemod": "^1.5.9",
-    "@navikt/ds-css": "^1.5.9",
-    "@navikt/ds-css-internal": "^1.5.9",
-    "@navikt/ds-icons": "^1.5.9",
-    "@navikt/ds-react": "^1.5.9",
-    "@navikt/ds-react-internal": "^1.5.9",
-    "@navikt/ds-tailwind": "^1.5.9",
-    "@navikt/ds-tokens": "^1.5.9"
+    "@navikt/ds-codemod": "^2.0.12",
+    "@navikt/ds-css": "^2.0.12",
+    "@navikt/ds-css-internal": "^2.0.12",
+    "@navikt/ds-icons": "^2.0.12",
+    "@navikt/ds-react": "^2.0.12",
+    "@navikt/ds-react-internal": "^2.0.12",
+    "@navikt/ds-tailwind": "^2.0.12",
+    "@navikt/ds-tokens": "^2.0.12"
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.1.13"

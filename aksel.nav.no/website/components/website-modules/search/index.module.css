@@ -1,4 +1,0 @@
-.wrapper :global(.navds-search__wrapper-inner) {
-  width: 100%;
-  @apply max-w-lg;
-}

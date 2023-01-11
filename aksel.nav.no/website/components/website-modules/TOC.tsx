@@ -130,6 +130,7 @@ export function TableOfContents({
 
   return (
     <aside
+      aria-labelledby="toc-heading"
       className={cl(
         "algolia-ignore-index sticky top-20 z-[1] order-1 my-0 mb-16 hidden w-72 flex-col items-start pl-4",
         {
@@ -166,7 +167,7 @@ export function TableOfContents({
                         link.id === activeId && aksel,
                       "border-l-gray-900 font-semibold shadow-[inset_1px_0_0_0_theme(colors.gray-900),-1px_0_0_0_theme(colors.gray-900)]":
                         link.id === activeId && !aksel,
-                      "border-l-divider": link.id !== activeId,
+                      "border-l-border-divider": link.id !== activeId,
                     })}
                   >
                     <Link
@@ -176,8 +177,8 @@ export function TableOfContents({
                         "block w-64 max-w-full overflow-hidden no-underline hover:underline",
                         {
                           "text-deepblue-700": aksel && link.id === activeId,
-                          "text-text-muted": aksel && link.id !== activeId,
-                          "text-text": !aksel,
+                          "text-text-subtle": aksel && link.id !== activeId,
+                          "text-text-default": !aksel,
                         }
                       )}
                       aria-expanded={
@@ -211,7 +212,7 @@ export function TableOfContents({
                                     x.id === activeSubId && aksel,
                                   "font-semibold text-gray-900":
                                     x.id === activeSubId && !aksel,
-                                  "text-text-muted": x.id !== activeSubId,
+                                  "text-text-subtle": x.id !== activeSubId,
                                 }
                               )}
                             >

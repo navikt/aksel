@@ -1,3 +1,5 @@
+// MIGRERT
+
 import { List } from "@navikt/ds-icons";
 import React from "react";
 

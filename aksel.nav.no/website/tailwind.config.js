@@ -3,13 +3,14 @@ module.exports = {
   presets: [require("@navikt/ds-tailwind")],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
+    "./sanity/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./stories/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     /* Flytt ut fra extend og refactor bruk av screen */
     screens: {
-      xs: "564px",
+      xs: "480px",
       sm: "648px",
       md: "768px",
       lg: "1024px",
@@ -27,11 +28,11 @@ module.exports = {
       spacing: {
         0: 0,
         header: "3.5rem",
-        sidebar: "18rem",
+        sidebar: "16rem",
         text: "600px",
       },
       maxWidth: {
-        "screen-sidebar": "calc(100vw - 18rem)",
+        "screen-sidebar": "calc(100vw - 16rem)",
         "content-w-padding": "896px",
         aksel: "1280px",
         text: "600px",
@@ -45,11 +46,12 @@ module.exports = {
         "screen-header": "calc(100vh - 3.5rem)",
         ...theme("spacing"),
       }),
-
       boxShadow: {
-        "focus-inverted-inset": "inset var(--navds-shadow-focus-inverted)",
-        "focus-inset": "inset var(--navds-shadow-focus)",
-        "focus-gap": "0 0 0 1px white, var(--navds-shadow-focus)",
+        "focus-inverted-inset": "inset var(--a-shadow-focus-inverted)",
+        "focus-inset": "inset var(--a-shadow-focus)",
+        "focus-gap": "0 0 0 1px white, var(--a-shadow-focus)",
+        "focus-gap-inset":
+          "inset 0 0 0 2px var(--a-border-focus), inset 0 0 0 3px white",
         header: "inset 0 -1px 0 rgb(180, 180, 180, 0.1)",
       },
       keyframes: {
@@ -89,6 +91,57 @@ module.exports = {
             width: "500px",
           },
         },
+        popup: {
+          "0%": {
+            transform: "translateY(0)",
+          },
+          "10%": {
+            background: "var(--a-deepblue-500)",
+          },
+          "15%": {
+            transform: "translateY(-100%)",
+          },
+          "20%": {
+            background: "var(--a-deepblue-600)",
+          },
+          "50%": {
+            background: "var(--a-deepblue-500)",
+          },
+          "90%": {
+            transform: "translateY(-100%)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
+        textbounce: {
+          "8%": {
+            transform: "translateY(0)",
+          },
+          "17%": {
+            transform: "translateY(-10%)",
+          },
+          "25%": {
+            transform: "translateY(2%)",
+          },
+          "30%": {
+            transform: "translateY(0)",
+          },
+        },
+        popout: {
+          "0%": {
+            transform: "translateY(0px)",
+          },
+          "15%": {
+            transform: "translateY(-100%)",
+          },
+          "90%": {
+            transform: "translateY(-100%)",
+          },
+          "100%": {
+            transform: "translateY(0px)",
+          },
+        },
       },
       animation: {
         shimmerBg: "shimmerBg 15s ease infinite",
@@ -96,6 +149,9 @@ module.exports = {
         fadeIn: "fadeIn 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
         expand: "expand 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
         expandLg: "expandLg 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
+        popup: "popup 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
+        popout: "popout 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
+        textbounce: "textbounce 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
       },
     },
   },

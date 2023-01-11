@@ -116,6 +116,7 @@ react-docgen.json
 react-docgen-docs.json
 cjs
 esm
+@navikt/community/navno/css
 .vercel
 _docs.json
 
@@ -139,7 +140,6 @@ _docs.json
 !*/sanity/lib/
 !*/sanity/static/
 out
-test-urls.json
 videos
 sanity/scripts/renameField.js
 tmp.json
@@ -148,3 +148,6 @@ tmp.json
 /playwright/.cache/
 playwright-report/
 /test-results/
+backup-*.tar.gz
+sitemap-urls.json
+*.tar.gz

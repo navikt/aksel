@@ -1,5 +1,5 @@
 .skiplink {
-  @apply absolute left-0 z-modal -translate-y-full bg-focus p-4 text-text-inverted no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
+  @apply z-modal bg-border-focus text-text-on-inverted absolute left-0 -translate-y-full p-4 no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
 }
 
 .inline-code {
@@ -13,10 +13,20 @@
 .inline-kbd {
   white-space: nowrap;
   border-radius: 0.25rem;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--a-surface-default);
   padding: 0.125rem 0.25rem;
   font-size: 1rem;
   line-height: 1.5rem;
-  box-shadow: 0 0 0 1px rgb(38, 38, 38);
-  @apply text-text;
+  box-shadow: 0 0 0 1px var(--a-border-strong);
+  color: var(--a-text-default);
+}
+
+.aksel.ReactModal__Body--open {
+  overflow: hidden;
+  max-height: 100vh;
+}
+
+.header-modal__overlay {
+  z-index: var(--a-z-index-modal);
+  @apply bg-surface-backdrop fixed inset-0 grid place-items-center md:hidden;
 }

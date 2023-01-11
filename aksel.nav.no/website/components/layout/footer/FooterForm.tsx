@@ -1,9 +1,12 @@
+import { FeedbackT } from "@/lib";
+import { IdContext } from "@/utils";
 import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import isEmpty from "validator/lib/isEmpty";
+import { useContext, useEffect, useState } from "react";
 
 const FooterForm = () => {
+  const idCtx = useContext(IdContext);
+
   const [contactForm, setContactForm] = useState({
     content: "",
     hasWritten: false,
@@ -17,7 +20,7 @@ const FooterForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let fail = false;
-    if (isEmpty(contactForm.content, { ignore_whitespace: true })) {
+    if (!contactForm?.content || contactForm?.content.trim().length === 0) {
       setContentError({
         ...contentError,
         content: "Melding kan ikke være tom. Fyll inn meldingen.",
@@ -28,12 +31,16 @@ const FooterForm = () => {
     if (fail) return;
     setContentError({ content: "" });
 
-    fetch("/api/generalFeedback", {
+    const body: FeedbackT = {
+      message: contactForm.content,
+      url: `${basePath}${asPath}`,
+      type: "footer",
+      docId: idCtx?.id,
+    };
+
+    fetch("/api/feedback", {
       method: "POST",
-      body: JSON.stringify({
-        message: contactForm.content,
-        url: `${basePath}${asPath}`,
-      }),
+      body: JSON.stringify(body),
     });
 
     setSent({ status: true });
@@ -58,11 +65,11 @@ const FooterForm = () => {
         ) : (
           <form onSubmit={(e) => handleSubmit(e)} className="w-full">
             <div className="mb-4 flex flex-col gap-4">
-              <Heading as="legend" size="small">
+              <Heading level="2" size="small">
                 Gi en tilbakemelding
               </Heading>
               <Textarea
-                className="inverted-textarea"
+                className="textarea-override"
                 error={contentError.content}
                 autoComplete="off"
                 label="Melding"
@@ -74,18 +81,17 @@ const FooterForm = () => {
                     hasWritten: true,
                   });
                   e.target.value &&
-                    !isEmpty(e.target.value, { ignore_whitespace: true }) &&
+                    e.target.value.trim().length !== 0 &&
                     setContentError({ ...contentError, content: "" });
                 }}
                 description="Ikke skriv inn navn eller andre personopplysninger"
                 minRows={2}
               />
             </div>
-            {contactForm.hasWritten && (
-              <Button className="override-primary-button-dark">
-                Send melding
-              </Button>
-            )}
+            {contactForm.hasWritten && <Button>Send melding</Button>}
+            <style>{`.textarea-override {
+              --ac-textarea-bg: var(--a-deepblue-800);
+            }`}</style>
           </form>
         )}
       </div>

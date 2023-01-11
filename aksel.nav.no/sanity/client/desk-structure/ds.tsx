@@ -94,17 +94,13 @@ export const dsPanel = async (roles) => {
                       .icon(() => <span>{`EX`}</span>)
                       .child(S.documentTypeList("kode_eksempler_fil")),
                     S.listItem()
-                      .title("Fargekategorier")
-                      .icon(() => <Folder />)
-                      .child(S.documentTypeList("ds_color_categories")),
-                    S.listItem()
                       .title("Props")
                       .icon(() => <Folder />)
                       .child(S.documentTypeList("ds_props")),
                     S.listItem()
-                      .title("Tokens")
+                      .title("Token-kategorier")
                       .icon(() => <Folder />)
-                      .child(S.documentTypeList("ds_tokens")),
+                      .child(S.documentTypeList("token_kategori")),
                   ])
               ),
             S.divider(),

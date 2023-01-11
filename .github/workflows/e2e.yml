@@ -21,9 +21,6 @@ jobs:
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
-          echo "ALGOLIA_ADMIN=${{ secrets.ALGOLIA_ADMIN }}" >> aksel.nav.no/website/.env
-          echo "ALGOLIA_ID=${{ secrets.ALGOLIA_ID}}" >> aksel.nav.no/website/.env
-          echo "TRELLO_TOKEN=${{ secrets.TRELLO_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> aksel.nav.no/website/.env
@@ -47,7 +44,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: yarn workspace website e2e
+        run: yarn workspace website e2e:full
       - uses: actions/upload-artifact@v3
         if: always()
         with:

@@ -2,15 +2,15 @@ import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "classnames";
+import { Header } from "components/layout/header/Header";
 import Head from "next/head";
-import { AkselHeader, Footer } from "..";
+import { Footer } from "..";
 import {
   abbrName,
   Bilde,
   BreadCrumbs,
   dateStr,
   Feedback,
-  PrinsippSlope,
   TableOfContents,
 } from "../..";
 
@@ -25,7 +25,7 @@ const AkselPrinsippTemplate = ({
     return null;
   }
 
-  const authors = (data?.contributors as any)?.map((x) => x?.title);
+  const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
   const mainPage = data?.prinsipp?.hovedside;
 
   return (
@@ -51,13 +51,14 @@ const AkselPrinsippTemplate = ({
                   .width(1200)
                   .height(630)
                   .fit("crop")
+                  .quality(100)
                   .url()
               : ""
           }
           key="ogimage"
         />
       </Head>
-      <AkselHeader variant={mainPage ? "inngang" : "artikkel"} />
+      <Header variant={mainPage ? "default" : "subtle"} />
       <main
         tabIndex={-1}
         id="hovedinnhold"
@@ -67,8 +68,8 @@ const AkselPrinsippTemplate = ({
       >
         <article className="overflow-x-clip">
           <div
-            className={cl("mx-auto max-w-aksel px-4 xs:w-[90%]", {
-              "pb-24": mainPage,
+            className={cl("max-w-aksel xs:w-[90%] mx-auto px-4", {
+              "pb-32": mainPage,
             })}
           >
             <div className="pt-12">
@@ -82,7 +83,7 @@ const AkselPrinsippTemplate = ({
                 <Heading
                   level="1"
                   size="large"
-                  className="algolia-index-lvl1 mt-4 text-deepblue-700 md:text-5xl"
+                  className="algolia-index-lvl1 text-deepblue-700 mt-4 md:text-5xl"
                 >
                   {data.heading}
                 </Heading>
@@ -95,7 +96,7 @@ const AkselPrinsippTemplate = ({
                   <BodyShort
                     size="small"
                     as="span"
-                    className="whitespace-nowrap text-text-muted"
+                    className="text-text-subtle whitespace-nowrap"
                   >
                     {dateStr(data?._updatedAt)}
                   </BodyShort>
@@ -112,13 +113,12 @@ const AkselPrinsippTemplate = ({
               </div>
             </div>
           </div>
-          {mainPage && <PrinsippSlope />}
           <div
-            className={cl("pt-4", {
+            className={cl("pt-32", {
               "bg-gray-100": mainPage,
             })}
           >
-            <div className="mx-auto max-w-aksel px-4 xs:w-[90%] ">
+            <div className="max-w-aksel xs:w-[90%] mx-auto px-4">
               <div className="pb-16 md:pb-32">
                 <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
                   <TableOfContents
@@ -130,7 +130,7 @@ const AkselPrinsippTemplate = ({
                     {data?.hero_bilde && (
                       <Bilde
                         node={data.hero_bilde as any}
-                        className="-mt-36 mb-10 xs:-mt-64"
+                        className="xs:-mt-72 -mt-36 mb-10"
                       />
                     )}
                     <SanityBlockContent
@@ -139,14 +139,14 @@ const AkselPrinsippTemplate = ({
                     />
                     <div className="mt-12">
                       {authors?.length > 0 && (
-                        <Label className="mb-2 text-deepblue-700" as="p">
+                        <Label className="text-deepblue-700 mb-2" as="p">
                           Bidragsytere
                         </Label>
                       )}
                       {authors?.length > 0 && (
                         <BodyShort
                           as="div"
-                          className="mb-1 flex flex-wrap gap-1 text-text/80"
+                          className="text-text-subtle mb-1 flex flex-wrap gap-1"
                         >
                           {authors.map(abbrName).map((x, y) => (
                             <address className="not-italic" key={x}>
@@ -158,7 +158,7 @@ const AkselPrinsippTemplate = ({
                       )}
                       <BodyShort
                         as="span"
-                        className="whitespace-nowrap text-text/80"
+                        className="text-text-subtle whitespace-nowrap"
                       >
                         Publisert:{" "}
                         {dateStr(data?.publishedAt ?? data?._updatedAt)}
@@ -178,7 +178,7 @@ const AkselPrinsippTemplate = ({
           </div>
         </article>
       </main>
-      <Footer variant="aksel" />
+      <Footer />
     </>
   );
 };

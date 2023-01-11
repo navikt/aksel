@@ -1,4 +1,0 @@
-.item + .dropdown,
-.dropdown[data-open="true"] + .dropdown {
-  @apply mt-6;
-}

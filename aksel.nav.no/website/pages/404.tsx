@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { AmplitudeEvents, logAmplitudeEvent } from "@/components";
-import AkselLogo from "components/assets/AkselLogo";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import NextLink from "next/link";
+import { AkselCubeStatic } from "components/website-modules/cube";
 
 function Page() {
   useEffect(() => {
@@ -14,9 +14,9 @@ function Page() {
   return (
     <div
       id="vk-notFoundId"
-      className="flex h-screen w-screen items-center justify-center gap-8"
+      className="relative flex h-screen w-screen items-center justify-center gap-8 overflow-hidden"
     >
-      <AkselLogo width="10rem" height="10rem" />
+      <AkselCubeStatic className="text-deepblue-300 opacity-10" />
       <div>
         <Heading spacing level="1" size="large">
           404 - Fant ikke siden

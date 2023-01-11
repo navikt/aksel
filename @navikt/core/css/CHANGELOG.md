@@ -1,5 +1,49 @@
 # @navikt/ds-css
 
+## 2.0.12
+
+### Patch Changes
+
+- [#1737](https://github.com/navikt/Designsystemet/pull/1737) [`8a1ef5e7e`](https://github.com/navikt/Designsystemet/commit/8a1ef5e7e2c066cb80c13e14329e1585e2c427f8) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset default visuell error-state for radio
+
+## 2.0.11
+
+## 2.0.10
+
+## 2.0.9
+
+## 2.0.8
+
+## 2.0.7
+
+## 2.0.6
+
+## 2.0.5
+
+### Patch Changes
+
+- Reverserte border-width endrind i button
+
+## 2.0.4
+
+## 2.0.3
+
+## 2.0.2
+
+## 2.0.1
+
+### Patch Changes
+
+- [`e8007328d`](https://github.com/navikt/Designsystemet/commit/e8007328db3f6d5be696cf24f03304c79be0f3f7) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bugfixer ved bruk av tokens
+
+## 2.0.0
+
+### Major Changes
+
+- [`6b96e4833`](https://github.com/navikt/Designsystemet/commit/6b96e48330c2e013a1acee85cefccd9ccc1aece4) Thanks [@KenAJoh](https://github.com/KenAJoh)! - v2: Tokens update and font-loading
+
+## 1.5.10
+
 ## 1.5.9
 
 ### Patch Changes

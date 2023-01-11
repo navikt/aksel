@@ -37,6 +37,10 @@ export interface ModalProps {
    */
   closeButton?: boolean;
   /**
+   *
+   */
+  shouldCloseOnEsc?: boolean;
+  /**
    * Allows custom styling of ReactModal, in accordance with their typing
    */
   style?: ReactModal.Styles;
@@ -75,6 +79,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
       className,
       overlayClassName,
       shouldCloseOnOverlayClick = true,
+      shouldCloseOnEsc = true,
       closeButton = true,
       "aria-describedby": ariaDescribedBy,
       "aria-labelledby": ariaLabelledBy,
@@ -104,20 +109,26 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
       }
     };
 
+    const getParentSelector = () => {
+      if (parentSelector) {
+        return parentSelector;
+      }
+      return rootElement !== undefined
+        ? () => rootElement as HTMLElement
+        : undefined;
+    };
+
     return (
       <ReactModal
         {...rest}
-        parentSelector={
-          parentSelector ?? rootElement !== undefined
-            ? () => rootElement as HTMLElement
-            : undefined
-        }
+        parentSelector={getParentSelector()}
         style={style}
         isOpen={open}
         ref={mergedRef}
         className={cl("navds-modal", className)}
         overlayClassName={cl("navds-modal__overlay", overlayClassName)}
         shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
+        shouldCloseOnEsc={shouldCloseOnEsc}
         onRequestClose={(e) => onModalCloseRequest(e)}
         aria={{
           describedby: ariaDescribedBy,

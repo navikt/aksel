@@ -1,8 +1,8 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "1.5.9",
-  "description": "Auto-generated design-tokens for NAV design-systems framework",
-  "author": "NAV Designsystem team",
+  "version": "2.0.12",
+  "description": "Design-tokens for NAV designsystem",
+  "author": "Aksel | NAV designsystem team",
   "keywords": [
     "css",
     "less",
@@ -14,14 +14,15 @@
   "files": [
     "/dist",
     "/src",
-    "/tailwind"
+    "/tailwind",
+    "docs.json"
   ],
   "scripts": {
-    "build": "node ./build.js",
+    "build": "node ./config/build.js > /dev/null && yarn validate-docs",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
-    "token": "style-dictionary build",
+    "token": "cd config && style-dictionary build",
     "test": "jest",
-    "update": "ts-node figma/index.ts dotenv/config"
+    "validate-docs": "node config/validate-docs.js"
   },
   "repository": {
     "type": "git",
@@ -30,11 +31,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.0.0",
-    "@types/node": "^17.0.35",
-    "axios": "^0.21.3",
     "color": "4.2.3",
-    "dotenv": "^10.0.0",
-    "figma-api": "^1.7.0",
     "jest": "^29.0.0",
     "lodash": "^4.17.21",
     "nodemon": "^2.0.12",

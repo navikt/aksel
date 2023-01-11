@@ -36,7 +36,7 @@ describe("Returns if year is at start or end of range", () => {
     expect(hasNextYear(new Date(), years, 1)).toBeTruthy();
   });
   test("Should have previous year (true)", () => {
-    expect(hasNextYear(new Date("Aug 3 2023"), years, -1)).toBeTruthy();
+    expect(hasNextYear(new Date("Aug 3 2024"), years, -1)).toBeTruthy();
   });
   test("Should not have next year (false)", () => {
     expect(hasNextYear(new Date("Aug 3 2029"), years, 1)).toBeFalsy();

@@ -1,3 +1,5 @@
+/* stylelint-disable color-function-notation */
+
 /**
  * Dracula Theme originally by Zeno Rocha [@zenorocha]
  * https://draculatheme.com/
@@ -8,7 +10,7 @@
 code[class*="language-"],
 pre[class*="language-"] {
   max-width: calc(100% - 4.5rem);
-  color: var(--navds-global-color-gray-50);
+  color: var(--a-gray-50);
   background: none;
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
   text-align: left;
@@ -38,7 +40,7 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  background: var(---navds-semantic-color-canvas-background-inverted);
+  background: var(--a-surface-inverted);
 }
 
 /* Inline code */
@@ -52,7 +54,7 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: var(--navds-global-color-gray-200);
+  color: var(--a-gray-200);
 }
 
 .namespace {
@@ -68,7 +70,7 @@ pre[class*="language-"] {
 }
 
 .token.punctuation {
-  color: var(--navds-global-color-gray-50);
+  color: var(--a-gray-50);
 }
 
 .token.boolean,
@@ -83,7 +85,7 @@ pre[class*="language-"] {
 .token.builtin,
 .token.inserted {
   color: #50fa7b;
-  color: var(--navds-global-color-green-200);
+  color: var(--a-green-200);
 }
 
 .token.operator,
@@ -92,18 +94,18 @@ pre[class*="language-"] {
 .language-css .token.string,
 .style .token.string,
 .token.variable {
-  color: var(--navds-global-color-gray-50);
+  color: var(--a-gray-50);
 }
 
 .token.atrule,
 .token.attr-value,
 .token.function,
 .token.class-name {
-  color: var(--navds-global-color-blue-200);
+  color: var(--a-blue-200);
 }
 
 .token.attr-value {
-  color: var(--navds-global-color-orange-200);
+  color: var(--a-orange-200);
 }
 
 .token.keyword {
@@ -112,7 +114,7 @@ pre[class*="language-"] {
 
 .token.regex,
 .token.important {
-  color: var(--navds-global-color-blue-200);
+  color: var(--a-blue-200);
 }
 
 .token.important,

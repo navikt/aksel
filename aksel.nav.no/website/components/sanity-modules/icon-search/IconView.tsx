@@ -22,7 +22,7 @@ const IconView = ({
       {categories.map((cat) => {
         return (
           <div key={cat.category}>
-            <Heading level="3" size="small" spacing>
+            <Heading level="2" size="small" spacing>
               {cat.category}
             </Heading>
             <div className="grid content-start justify-start gap-x-4 gap-y-6 pb-8 [grid-template-columns:repeat(auto-fit,12rem)]">
@@ -32,12 +32,12 @@ const IconView = ({
                   <button
                     key={i.created_at}
                     onClick={() => handleSelect(i.name)}
-                    className="vk-icon_button group relative h-32 w-48 shrink rounded shadow-medium ring-1 ring-gray-900/20 hover:shadow-[0_0_0_2px_theme(colors.link)] focus:outline-none focus-visible:shadow-focus"
+                    className="vk-icon_button shadow-medium focus-visible:shadow-focus group relative h-32 w-48 shrink rounded ring-1 ring-gray-900/20 hover:shadow-[0_0_0_2px_var(--a-text-action)] focus:outline-none"
                   >
                     {isNew(i.created_at) && (
                       <Detail
                         size="small"
-                        className="absolute top-0 right-0 rounded-tr rounded-bl-md bg-lightblue-200 py-1 px-2 "
+                        className="bg-lightblue-200 absolute top-0 right-0 rounded-tr rounded-bl-md py-1 px-2 "
                       >
                         Ny!
                       </Detail>
@@ -52,7 +52,7 @@ const IconView = ({
                       <div className="text-center">
                         <Detail
                           size="small"
-                          className="vk-icon_button-detail text-text-muted"
+                          className="vk-icon_button-detail text-text-subtle"
                         >
                           {" "}
                           {getName(i.name)}

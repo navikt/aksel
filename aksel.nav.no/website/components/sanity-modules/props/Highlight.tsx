@@ -15,7 +15,7 @@ export const Highlighter = ({
   } else if (type === "boolean") {
     return <span className="text-[#9a050f]">{type}</span>;
   } else if (type === "number" || !Number.isNaN(parseInt(type))) {
-    return <span className="text-[#36acaa]">{type}</span>;
+    return <span className="text-deepblue-600">{type}</span>;
   } else if (isType) {
     const referencedType = null;
 

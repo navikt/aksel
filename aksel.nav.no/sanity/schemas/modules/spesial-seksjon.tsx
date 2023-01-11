@@ -2,7 +2,7 @@ import { Star } from "@navikt/ds-icons";
 import React from "react";
 
 export default {
-  title: "Sidemodul",
+  title: "Unik Sidemodul",
   type: "object",
   name: "spesial_seksjon",
   icon: Star,
@@ -14,20 +14,19 @@ export default {
       type: "string",
       options: {
         list: [
-          { title: "Farge kategori", value: "farge_kategori" },
+          { title: "Token kategori", value: "token_kategori" },
           { title: "Ikonsøk", value: "ikonsok" },
-          { title: "Endringslogg", value: "endringslogg" },
           { title: "Komponentoversikt", value: "komponentoversikt" },
         ],
         layout: "radio",
       },
     },
     {
-      title: "Farge kategori",
+      title: "Token kategori",
       type: "reference",
-      name: "farge_ref",
-      hidden: ({ parent }) => parent.modul !== "farge_kategori",
-      to: [{ type: "ds_color_categories" }],
+      name: "token_ref",
+      hidden: ({ parent }) => parent.modul !== "token_kategori",
+      to: [{ type: "token_kategori" }],
     },
   ],
   preview: {
@@ -37,7 +36,7 @@ export default {
     prepare(s) {
       return {
         title: s.modul,
-        subtitle: "Spesial seksjon",
+        subtitle: "Unik Sidemodul",
         media: () => <Star />,
       };
     },

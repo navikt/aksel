@@ -1,9 +1,11 @@
+import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
-import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
+import { getAuthors } from "components/website-modules/LatestBloggs";
 import NextLink from "next/link";
-import { dateStr, dateTimeStr, logNav } from "../..";
+import { dateStr, logNav } from "../..";
 
-export const BloggCard = ({
+const BloggCard = ({
   blog,
 }: {
   blog: Partial<
@@ -16,47 +18,32 @@ export const BloggCard = ({
   >;
 }) => {
   return (
-    <div className="grid grid-flow-row-dense grid-cols-[1fr_auto] items-start gap-x-8 py-8">
-      <Detail
-        as="time"
-        size="small"
-        className="col-span-2 uppercase tracking-wide text-text-muted xs:col-span-1"
-        dateTime={dateTimeStr(blog?.publishedAt ?? blog._createdAt)}
-      >
-        {dateStr(blog?.publishedAt ?? blog._createdAt)}
-      </Detail>
-      <Heading
-        level="3"
-        size="large"
-        className="col-span-2 col-start-1 text-gray-800 xs:col-span-1"
-      >
+    <li key={blog._id} className="border-b-border-subtle h-fit border-b pb-8">
+      <Heading size="medium" as="div">
         <NextLink href={`/${blog.slug}`} passHref>
           <Link
+            className="text-deepblue-500 no-underline hover:underline"
             onClick={(e) =>
               logNav(
-                "blog-kort",
+                "blogg-card",
                 window.location.pathname,
                 e.currentTarget.getAttribute("href")
               )
             }
-            className="text-deepblue-700 no-underline hover:underline"
           >
             {blog.heading}
           </Link>
         </NextLink>
       </Heading>
-      <BodyLong className="col-start-1 mt-1 text-gray-800">
-        {blog?.ingress}
-      </BodyLong>
-      <div className="col-start-2 row-span-3 row-start-3 xs:row-start-1">
-        {/* <img
-  className="mt-3 aspect-square w-24 bg-gray-200 sm:mt-0 sm:w-32"
-  src=""
-  alt=""
-/> */}
-      </div>
-    </div>
+      <BodyLong className="mt-2">{blog?.ingress}</BodyLong>
+      {getAuthors(blog).length > 0 && (
+        <BodyShort size="small" className="text-text-subtle mt-6 flex gap-2">
+          <span className="font-semibold">{getAuthors(blog)[0]}</span>
+          <span>{dateStr(blog?.publishedAt ?? blog._createdAt)}</span>
+        </BodyShort>
+      )}
+    </li>
   );
 };
 
-export default BloggCard;
+export default withErrorBoundary(BloggCard, "BloggCard");

@@ -40,10 +40,3 @@ spec:
         - host: cdn.sanity.io
       rules: []
       env:
-  azure:
-    application:
-      enabled: true
-      allowAllUsers: true
-      tenant: nav.no
-    sidecar:
-      enabled: true

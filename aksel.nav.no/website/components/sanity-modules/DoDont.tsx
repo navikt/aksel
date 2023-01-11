@@ -12,21 +12,21 @@ const GetIcon = (s: string) => {
       return (
         <SuccessFilled
           aria-hidden
-          className="mt-[1px] flex-shrink-0 text-large text-green-500"
+          className="text-large mt-[1px] flex-shrink-0 text-green-500"
         />
       );
     case "dont":
       return (
         <ErrorFilled
           aria-hidden
-          className="mt-[1px] flex-shrink-0 text-large text-red-500"
+          className="text-large mt-[1px] flex-shrink-0 text-red-500"
         />
       );
     case "warning":
       return (
         <WarningFilled
           aria-hidden
-          className="mt-[1px] flex-shrink-0 text-large text-orange-500"
+          className="text-large mt-[1px] flex-shrink-0 text-orange-500"
         />
       );
     default:
@@ -43,7 +43,7 @@ const Element = ({
   return (
     <figure
       className={cl(
-        "flex min-w-full flex-1 flex-col rounded-t sm:min-w-[384px]",
+        "flex min-w-full flex-1 flex-col rounded-t sm:min-w-[440px]",
         {
           "basis-full": block?.fullwidth,
           "max-w-sm": !block?.fullwidth,
@@ -51,7 +51,7 @@ const Element = ({
       )}
     >
       <img
-        className="rounded-t bg-gray-50 shadow-[0_0_0_1px_var(--navds-semantic-color-divider)]"
+        className="rounded-t bg-gray-50 shadow-[0_0_0_1px_var(--a-border-divider)]"
         alt={block.alt}
         loading="lazy"
         decoding="async"
@@ -87,7 +87,7 @@ const DoDont = ({ node }: { node: SanityT.Schema.do_dont }) => {
   return (
     <div className="mb-8 last:mb-0">
       {node?.blokker?.length > 0 && (
-        <div className="last flex flex-wrap justify-between gap-8">
+        <div className="last flex flex-wrap justify-start gap-8">
           {node.blokker.map((x) => (
             <Element key={x._key} block={x} />
           ))}

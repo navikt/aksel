@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "baseUrl": ".",
+    "resolveJsonModule": true,
     "paths": {
       "@/lib": ["lib/index.ts"]
     }

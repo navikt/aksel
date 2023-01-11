@@ -1,5 +1,118 @@
 # @navikt/ds-react
 
+## 2.0.12
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.12
+
+## 2.0.11
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.11
+
+## 2.0.10
+
+### Patch Changes
+
+- Button submittet form i table
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.10
+
+## 2.0.9
+
+### Patch Changes
+
+- ShouldCloseOnEsc i Modal
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.9
+
+## 2.0.8
+
+### Patch Changes
+
+- Confirmationpanel wrappet med div
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.8
+
+## 2.0.7
+
+### Patch Changes
+
+- :bug: Fikset keyboard-click i monthpicker
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.7
+
+## 2.0.6
+
+### Patch Changes
+
+- DateInput hadde duplikat className satt
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.6
+
+## 2.0.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.5
+
+## 2.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`e4b6237e1`](https://github.com/navikt/Designsystemet/commit/e4b6237e1bbf13b1ce5415845d558831b47caf7c)]:
+  - @navikt/ds-icons@2.0.4
+
+## 2.0.3
+
+### Patch Changes
+
+- :sparkles: La til muligheten til å velge layout-strategi for datepicker-popover
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.3
+
+## 2.0.2
+
+### Patch Changes
+
+- :bug: Fikset click-event for datepicker
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.2
+
+## 2.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.1
+
+## 2.0.0
+
+### Major Changes
+
+- [`6b96e4833`](https://github.com/navikt/Designsystemet/commit/6b96e48330c2e013a1acee85cefccd9ccc1aece4) Thanks [@KenAJoh](https://github.com/KenAJoh)! - v2: Tokens update and font-loading
+
+## 1.5.10
+
+### Patch Changes
+
+- [#1717](https://github.com/navikt/Designsystemet/pull/1717) [`d9352982d`](https://github.com/navikt/Designsystemet/commit/d9352982d42d5d12a9c5fc345e546f57c753738d) Thanks [@vebnor](https://github.com/vebnor)! - Fikset parentSelector prop i Modal
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.10
+
 ## 1.5.9
 
 ### Patch Changes

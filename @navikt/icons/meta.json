@@ -2064,6 +2064,12 @@
     "pageName": "Objects"
   },
   {
+    "name": "Reset",
+    "description": "",
+    "created_at": "2022-11-25T07:14:00.943Z",
+    "pageName": "Arrows"
+  },
+  {
     "name": "Right",
     "description": "",
     "created_at": "2020-07-01T10:37:42.642Z",

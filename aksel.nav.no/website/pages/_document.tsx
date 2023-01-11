@@ -11,8 +11,15 @@ export default function Document() {
           crossOrigin=""
         />
         <meta name="theme-color" content="#00243A" />
+        <link
+          rel="preload"
+          href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="true"
+        />
       </Head>
-      <body data-theme="light" className="antialiased">
+      <body data-theme="light" className="aksel antialiased">
         <Main />
         <NextScript />
       </body>

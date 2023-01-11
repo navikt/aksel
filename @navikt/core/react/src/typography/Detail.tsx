@@ -5,8 +5,7 @@ import { OverridableComponent } from "..";
 export interface DetailProps
   extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
-   * medium: 14px, small: 14px
-   * @default "medium"
+   * @deprecated Medium === small
    */
   size?: "medium" | "small";
   /**

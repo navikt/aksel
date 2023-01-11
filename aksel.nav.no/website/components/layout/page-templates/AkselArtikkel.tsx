@@ -1,13 +1,13 @@
-import { getTemaSlug, SanityT, urlFor } from "@/lib";
+import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { Next } from "@navikt/ds-icons";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
-import { FooterSlope } from "components/website-modules/Slope";
+import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import Head from "next/head";
 import NextLink from "next/link";
+
 import {
   abbrName,
-  ArtikkelCard,
   BreadCrumbs,
   dateStr,
   Feedback,
@@ -26,23 +26,36 @@ const AkselArtikkelTemplate = ({
     return null;
   }
 
-  const authors = (data?.contributors as any)?.map((x) => x?.title);
+  const date = data?.updateInfo?.lastVerified
+    ? data?.updateInfo?.lastVerified
+    : data?.publishedAt
+    ? data.publishedAt
+    : data._updatedAt;
+
+  const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
 
   const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
 
   const aside = data?.relevante_artikler?.length > 0 && (
-    <aside className="mt-16 overflow-x-clip bg-gray-50 ">
-      <FooterSlope />
-      <div className="relative bg-gray-100 pt-12 pb-16">
+    <aside
+      className="overflow-x-clip py-8"
+      aria-labelledby="relevante-artikler-aside"
+    >
+      <div className="relativept-12 pb-16">
         <div className="dynamic-wrapper">
-          <Heading level="2" size="medium" className="text-deepblue-700 px-4">
+          <Heading
+            level="2"
+            size="medium"
+            className="text-deepblue-700 px-4"
+            id="relevante-artikler-aside"
+          >
             {data?.relevante_artikler?.length === 1
               ? `Les også`
               : `Relevante artikler`}
           </Heading>
           <div className="card-grid-3-1 mt-6 px-4">
             {data.relevante_artikler.map((x: any) => (
-              <ArtikkelCard {...x} source={x.title} key={x._id} />
+              <ArtikkelCard {...x} key={x._id} />
             ))}
           </div>
         </div>
@@ -60,6 +73,11 @@ const AkselArtikkelTemplate = ({
           key="ogtitle"
         />
         <meta
+          name="description"
+          content={data?.seo?.meta ?? data?.ingress}
+          key="desc"
+        />
+        <meta
           property="og:description"
           content={data?.seo?.meta ?? data?.ingress}
           key="ogdesc"
@@ -73,6 +91,14 @@ const AkselArtikkelTemplate = ({
                   .width(1200)
                   .height(630)
                   .fit("crop")
+                  .quality(100)
+                  .url()
+              : hasTema && (data.tema[0] as any)?.seo?.image
+              ? urlFor((data.tema[0] as any)?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .quality(100)
                   .url()
               : ""
           }
@@ -85,7 +111,7 @@ const AkselArtikkelTemplate = ({
           <Heading
             level="1"
             size="large"
-            className="algolia-index-lvl1 text-deepblue-700 mt-4 md:text-5xl"
+            className="algolia-index-lvl1 text-deepblue-800 mt-4 md:text-5xl"
           >
             {data.heading}
           </Heading>
@@ -98,9 +124,9 @@ const AkselArtikkelTemplate = ({
             <BodyShort
               size="small"
               as="span"
-              className="text-text-muted whitespace-nowrap"
+              className="text-text-subtle whitespace-nowrap"
             >
-              {dateStr(data?._updatedAt)}
+              {dateStr(date)}
             </BodyShort>
             {authors?.length > 0 && (
               <BodyShort size="small" as="div" className="flex flex-wrap gap-1">
@@ -110,11 +136,11 @@ const AkselArtikkelTemplate = ({
           </div>
           {hasTema && (
             <div className="mt-8 flex flex-wrap gap-2">
-              {data.tema.map(({ title }: any) => (
+              {data.tema.map(({ title, slug }: any) => (
                 <span key={title}>
                   <NextLink
                     key={title}
-                    href={`/tema/${getTemaSlug(title)}`}
+                    href={`/god-praksis/${slug.current}`}
                     passHref
                   >
                     <BodyShort
@@ -148,7 +174,7 @@ const AkselArtikkelTemplate = ({
               {authors?.length > 0 && (
                 <BodyShort
                   as="div"
-                  className="text-text/80 mb-1 flex flex-wrap gap-1"
+                  className="text-text-subtle mb-1 flex flex-wrap gap-1"
                 >
                   {authors.map(abbrName).map((x, y) => (
                     <address className="not-italic" key={x}>
@@ -158,7 +184,10 @@ const AkselArtikkelTemplate = ({
                   ))}
                 </BodyShort>
               )}
-              <BodyShort as="span" className="text-text/80 whitespace-nowrap">
+              <BodyShort
+                as="span"
+                className="text-text-subtle whitespace-nowrap"
+              >
                 Publisert: {dateStr(data?.publishedAt ?? data?._updatedAt)}
               </BodyShort>
             </div>

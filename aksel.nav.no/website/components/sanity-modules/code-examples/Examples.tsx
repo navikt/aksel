@@ -6,8 +6,8 @@ import cl from "classnames";
 import { useEffect, useState } from "react";
 import { CodeSandbox } from "./CodeSandbox";
 
-const exampleIframeId = "example-iframe";
 const iframePadding = 192;
+const iframeId = "example-iframe";
 
 const ComponentExamples = ({
   node,
@@ -17,23 +17,21 @@ const ComponentExamples = ({
     filnavn?: SanityT.Schema.kode_eksempler_fil;
   };
 }): JSX.Element => {
-  const [iframeHeight, setIframeHeight] = useState(300);
   const [activeExample, setActiveExample] = useState(null);
+  const [frameState, setFrameState] = useState(300);
 
   const handleExampleLoad = () => {
     let attempts = 0;
-
     const waitForExampleContentToRender = setInterval(() => {
       const exampleIframe = document.getElementById(
-        node?.title ?? exampleIframeId
+        iframeId
       ) as HTMLIFrameElement;
       const exampleIframeDOM = exampleIframe?.contentDocument;
       const exampleWrapper = exampleIframeDOM?.getElementById("ds-example");
-
       if (exampleWrapper) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
-        setIframeHeight(newHeight);
         clearInterval(waitForExampleContentToRender);
+        setFrameState(newHeight < 300 ? 300 : newHeight);
       }
 
       attempts++;
@@ -58,35 +56,6 @@ const ComponentExamples = ({
         .trim()
     ) ?? str;
 
-  const element = (exampleUrl: string, code: string) => (
-    <>
-      <div className="overflow-hidden rounded-t border border-b-0 border-gray-300 bg-gray-50">
-        <iframe
-          src={exampleUrl}
-          height={iframeHeight}
-          onLoad={handleExampleLoad}
-          id={node?.title ?? exampleIframeId}
-          aria-label="Komponent eksempler"
-          className="min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]"
-          title="Kode-eksempler"
-        />
-      </div>
-      <div className="xs:justify-end mb-2 flex justify-center gap-2 rounded-b border border-gray-300 px-2 py-1 text-base ">
-        <CodeSandbox code={code.trim()} />
-        <Link href={exampleUrl} className="text-gray-900" target="_blank">
-          Åpne i nytt vindu
-        </Link>
-      </div>
-
-      <Snippet
-        node={{
-          _type: "kode" as const,
-          code: { code: code.trim(), language: "jsx" },
-        }}
-      />
-    </>
-  );
-
   if (
     !node.dir?.filer ||
     node.dir.filer.length === 0 ||
@@ -94,13 +63,6 @@ const ComponentExamples = ({
     (node.standalone && !node.filnavn)
   ) {
     return null;
-  }
-
-  if (node.standalone) {
-    return element(
-      `/eksempler/${node.filnavn.title.replace(".tsx", "")}`,
-      node.filnavn?.filer?.[0]?.innhold ?? ""
-    );
   }
 
   const active = activeExample ?? node?.dir?.filer?.[0]?.navn;
@@ -135,9 +97,46 @@ const ComponentExamples = ({
             {fil?.description && (
               <BodyLong className="mb-2">{fil.description}</BodyLong>
             )}
-            {element(
-              `/eksempler/${node.dir.title}/${fil.navn.replace(".tsx", "")}`,
-              fil.innhold
+
+            {active === fil.navn && (
+              <>
+                <div className="overflow-hidden rounded-t border border-b-0 border-gray-300 bg-gray-50">
+                  <iframe
+                    src={`/eksempler/${node.dir.title}/${fil.navn.replace(
+                      ".tsx",
+                      ""
+                    )}`}
+                    height={frameState}
+                    onLoad={() => handleExampleLoad()}
+                    id={iframeId}
+                    aria-label="Komponent eksempler"
+                    className={cl(
+                      "min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]"
+                    )}
+                    title="Kode-eksempler"
+                  />
+                </div>
+                <div className="xs:justify-end mb-2 flex justify-center gap-2 rounded-b border border-gray-300 px-2 py-1 text-base ">
+                  <CodeSandbox code={fil.innhold.trim()} />
+                  <Link
+                    href={`/eksempler/${node.dir.title}/${fil.navn.replace(
+                      ".tsx",
+                      ""
+                    )}`}
+                    className="text-gray-900"
+                    target="_blank"
+                  >
+                    Åpne i nytt vindu
+                  </Link>
+                </div>
+
+                <Snippet
+                  node={{
+                    _type: "kode" as const,
+                    code: { code: fil.innhold.trim(), language: "jsx" },
+                  }}
+                />
+              </>
             )}
           </div>
         );

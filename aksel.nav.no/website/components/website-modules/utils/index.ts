@@ -7,7 +7,7 @@ export * from "./hooks";
 export * from "./contexts";
 
 export const dateStr = (date: string) =>
-  format(new Date(date), "d. MMM YYY", { locale: nbLocale });
+  format(new Date(date), "d. MMMM YYY", { locale: nbLocale });
 
 export const dateTimeStr = (date: string) =>
   format(new Date(date), "d-MM-YYY", { locale: nbLocale });

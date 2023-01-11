@@ -51,16 +51,13 @@ export const WebPreviewWrapper = (props: { url: string; dev?: boolean }) => {
           {props.dev && (
             <Link href="https://doc.nais.io/device/">Krever NAISDevice</Link>
           )}
-          <HelpText title="Hva er preview?">
-            Preview viser innholdet slik det vises på nettsiden. Sjekk om du har
-            noen feil i sanity først hvis preview brekker. Hvis disse feilene
-            fortsatt ikke løses versjon, ta kontakt med utvikler.
-          </HelpText>
           <CopyToClipboard
             size="small"
             popoverText={"Kopierte lenke"}
             copyText={props.url}
-          />
+          >
+            Kopier
+          </CopyToClipboard>
           <Button
             size="small"
             onClick={() => reloadIframe()}
@@ -71,8 +68,7 @@ export const WebPreviewWrapper = (props: { url: string; dev?: boolean }) => {
             target="_blank"
             href={props.url}
             size="small"
-            aria-label="opens preview in web"
-            icon={<ExternalLink />}
+            icon={<ExternalLink title="Åpne preview i nytt vindu" />}
           />
         </div>
       </ScTop>

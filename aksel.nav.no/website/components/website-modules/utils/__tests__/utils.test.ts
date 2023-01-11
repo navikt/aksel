@@ -1,6 +1,4 @@
-import { mockNav } from "@/mockdata";
 import { abbrName, capitalize, dateStr, isNew } from "../index";
-import { getActiveHeading } from "../util";
 
 describe("Utils test", () => {
   test("isNew", () => {
@@ -29,16 +27,6 @@ describe("Utils test", () => {
 
     expect(dateStr(date)).toEqual("9. juni 2022");
     expect(dateStr(date2)).toEqual("2. mars 2021");
-  });
-
-  test("getActiveHeading", () => {
-    const active = getActiveHeading(
-      mockNav,
-      "designsystem/side/oversikt-guider"
-    );
-    const active2 = getActiveHeading(mockNav, "designsystem/side/invalidpage");
-    expect(active._key).toEqual("b8739a954c22");
-    expect(active2).toBeNull();
   });
 
   test("abbrName", () => {

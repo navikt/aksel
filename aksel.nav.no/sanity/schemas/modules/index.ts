@@ -1,30 +1,32 @@
 import Accordion from "./accordion";
 import Alert from "./alert";
+import Innholdskort from "./innholdskort";
 import Bilde from "./bilde";
-import HeroBilde from "./hero-bilde";
 import DoDont, { doDontBlock } from "./do-dont";
+import HeroBilde from "./hero-bilde";
 import introKomponent from "./intro-komponent";
 import Kode from "./kode";
+import KodeEksempler from "./kode-eksempler";
 import Props from "./props";
 import RelatertInnhold from "./relatert-innhold";
-import Innholdskort from "./innholdskort";
-import KodeEksempler from "./kode-eksempler";
+import { tmpTabell, tmpTabellRow } from "./tabellv2";
 import {
   RiktekstAksel,
   RiktekstDsArtikkel,
   RiktekstEnkel,
   RiktekstKomponent,
-  RiktekstTabell,
   RiktekstPrinsipp,
+  RiktekstTabell,
 } from "./riktekst";
 import SpesialSeksjon from "./spesial-seksjon";
-import Tabell, { TabellSchema } from "./tabell";
 import Tastatur from "./tastatur";
 import Tips from "./tips";
-import Tokens from "./tokens";
+import TokenRef from "./token-tabell";
 import Video from "./video";
 
 const v2Blocks = [
+  tmpTabell,
+  tmpTabellRow,
   /* Blocks */
   RiktekstEnkel,
   RiktekstAksel,
@@ -34,6 +36,7 @@ const v2Blocks = [
   RiktekstPrinsipp,
 
   /* Moduler */
+  /* Tabellv2, */
   DoDont,
   doDontBlock,
   Bilde,
@@ -43,16 +46,14 @@ const v2Blocks = [
   RelatertInnhold,
   Innholdskort,
   introKomponent,
-  Tabell,
-  ...TabellSchema,
   Props,
   Accordion,
   SpesialSeksjon,
   Video,
-  Tokens,
   Tips,
   Tastatur,
   KodeEksempler,
+  TokenRef,
 ];
 
 export default v2Blocks;

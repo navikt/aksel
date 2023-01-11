@@ -18,7 +18,7 @@ import { Head } from "./Head";
 interface DatePickerStandaloneDefaultProps
   extends Omit<
     DatePickerDefaultProps,
-    "open" | "onClose" | "onOpenToggle" | "wrapperClassName"
+    "open" | "onClose" | "onOpenToggle" | "wrapperClassName" | "strategy"
   > {
   /**
    * Datepicker classname

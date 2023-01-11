@@ -1,8 +1,9 @@
 import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { ExternalLink } from "@navikt/ds-icons";
-import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
+import { BodyShort, Heading } from "@navikt/ds-react";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
+import { BetaWarning } from "components/website-modules/BetaWarning";
 import Head from "next/head";
 import { dateStr, Feedback, TableOfContents } from "../..";
 
@@ -55,7 +56,6 @@ const KomponentArtikkelTemplate = ({
           content={`${data.heading} - Designsystemet`}
         />
       </Head>
-
       <div className="content-box">
         <div className="pt-8">
           <div className="flex flex-wrap gap-2"></div>
@@ -63,7 +63,7 @@ const KomponentArtikkelTemplate = ({
             size="xlarge"
             level="1"
             spacing
-            className="algolia-index-lvl1 flex flex-wrap items-center gap-4"
+            className="algolia-index-lvl1 text-deepblue-800 flex flex-wrap items-center gap-4"
           >
             {data.heading}
           </Heading>
@@ -75,7 +75,7 @@ const KomponentArtikkelTemplate = ({
             <BodyShort
               size="small"
               as="span"
-              className="text-text-muted flex items-center"
+              className="text-text-subtle flex items-center"
             >
               {`Oppdatert ${dateStr(data._updatedAt)}`}
             </BodyShort>
@@ -83,7 +83,7 @@ const KomponentArtikkelTemplate = ({
           <BodyShort
             as="span"
             size="small"
-            className="text-text-muted flex gap-4"
+            className="text-text-subtle flex gap-4"
           >
             {pack && (
               <>
@@ -91,7 +91,7 @@ const KomponentArtikkelTemplate = ({
                   target="_blank"
                   rel="noreferrer noopener"
                   href={`https://yarnpkg.com/package/${pack.title}`}
-                  className="hover:text-text focus:text-text-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+                  className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
                 >
                   Yarn
                   <ExternalLink title="Gå til yarn pakke" />
@@ -100,7 +100,7 @@ const KomponentArtikkelTemplate = ({
                   target="_blank"
                   rel="noreferrer noopener"
                   href={pack.git}
-                  className="hover:text-text focus:text-text-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+                  className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
                 >
                   Kode
                   <ExternalLink title="Gå til github-kode" />
@@ -113,7 +113,7 @@ const KomponentArtikkelTemplate = ({
                 target="_blank"
                 rel="noreferrer noopener"
                 href={data.figma_link}
-                className="hover:text-text focus:text-text-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
               >
                 Figma
                 <ExternalLink title="Åpne i Figma" />
@@ -123,28 +123,12 @@ const KomponentArtikkelTemplate = ({
         </div>
       </div>
       <div className="relative flex max-w-full md:max-w-7xl">
-        <TableOfContents changedState={data["bruk_tab"]} hideToc={false} />
+        <TableOfContents changedState={data["content"]} hideToc={false} />
         <div className="content-box">
           <div className="mt-12">
-            {data?.status && data.status?.tag === "beta" && (
-              <div className="mb-7 rounded bg-purple-50 p-4">
-                <Heading level="2" size="small" spacing>
-                  Beta
-                </Heading>
-                <BodyLong className="override-text-no-max mb-2">
-                  Komponenten er under utvikling. Dette kan medføre
-                  breaking-changes i patch/minor versjon av kodepakker. Vær
-                  forsiktig ved bruk og unngå production om mulig.
-                </BodyLong>
-                <BodyLong className="override-text-no-max">
-                  Har du innspill eller funnet en bug? Send oss en melding her
-                  eller på slack! Beta-versjon er ment for rask iterering, så
-                  alle innspill hjelper.
-                </BodyLong>
-              </div>
-            )}
+            {data?.status && data.status?.tag === "beta" && <BetaWarning />}
             <IntroSeksjon node={data.intro} />
-            <SanityBlockContent blocks={data["bruk_tab"]} />
+            <SanityBlockContent blocks={data["content"]} />
           </div>
           <Feedback docId={data?._id} docType={data?._type} />
         </div>

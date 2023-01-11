@@ -164,10 +164,10 @@ export const useDatepicker = (
 
   useEffect(() => {
     window.addEventListener("focusin", handleFocusIn);
-    window.addEventListener("click", handleFocusIn);
+    window.addEventListener("pointerdown", handleFocusIn);
     return () => {
       window?.removeEventListener?.("focusin", handleFocusIn);
-      window?.removeEventListener?.("click", handleFocusIn);
+      window?.removeEventListener?.("pointerdown", handleFocusIn);
     };
   }, [handleFocusIn]);
 

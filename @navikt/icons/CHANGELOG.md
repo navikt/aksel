@@ -1,5 +1,41 @@
 # @navikt/ds-icons
 
+## 2.0.12
+
+## 2.0.11
+
+### Patch Changes
+
+- Oppdatert svg-path i ikoner
+
+## 2.0.10
+
+## 2.0.9
+
+## 2.0.8
+
+## 2.0.7
+
+## 2.0.6
+
+## 2.0.5
+
+## 2.0.4
+
+### Patch Changes
+
+- [#1719](https://github.com/navikt/Designsystemet/pull/1719) [`e4b6237e1`](https://github.com/navikt/Designsystemet/commit/e4b6237e1bbf13b1ce5415845d558831b47caf7c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner
+
+## 2.0.3
+
+## 2.0.2
+
+## 2.0.1
+
+## 2.0.0
+
+## 1.5.10
+
 ## 1.5.9
 
 ## 1.5.8

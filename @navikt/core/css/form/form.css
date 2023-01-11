@@ -1,7 +1,7 @@
 .navds-form-field {
   display: grid;
   justify-items: start;
-  gap: var(--navds-spacing-2);
+  gap: var(--a-spacing-2);
 }
 
 .navds-form-field__description {
@@ -11,7 +11,7 @@
 .navds-form-field .navds-error-message,
 .navds-fieldset .navds-error-message {
   display: flex;
-  gap: var(--navds-spacing-2);
+  gap: var(--a-spacing-2);
 }
 
 .navds-form-field .navds-error-message::before,

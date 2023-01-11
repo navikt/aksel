@@ -1,19 +1,14 @@
-/**
- * https://github.com/navikt/detsombetyrnoe/blob/main/src/components/PreviewBanner.tsx#L17
- */
-import { useCurrentUser } from "@/lib";
 import { Edit } from "@navikt/ds-icons";
 import { Tooltip } from "@navikt/ds-react";
-import * as React from "react";
 import { useContext } from "react";
-import { IdContext } from "./utils";
-import cl from "classnames";
+import { IdContext, useCheckAuth } from "./utils";
 
-function EditButton({ variant }: { variant: "ds" | "aksel" }): JSX.Element {
-  const { data } = useCurrentUser();
+function EditButton(): JSX.Element {
   const idCtx = useContext(IdContext);
 
-  return data && idCtx?.id ? (
+  const validUser = useCheckAuth();
+
+  return validUser && idCtx?.id ? (
     <>
       <div className="overflow-hidden">
         <Tooltip
@@ -22,16 +17,10 @@ function EditButton({ variant }: { variant: "ds" | "aksel" }): JSX.Element {
           delay={500}
         >
           <a
-            href={`https://verktoykasse.sanity.studio/intent/edit/id=${idCtx?.id}`}
+            href={`https://aksel.nav.no/admin/prod/intent/edit/id=${idCtx?.id}`}
             target="_blank"
             rel="noreferrer"
-            className={cl(
-              "editbutton absolute top-0 right-0 flex  -translate-y-[99%] items-center gap-2 overflow-hidden rounded-tl px-2 py-1  text-white transition-transform hover:translate-x-0",
-              {
-                "bg-gray-900 hover:bg-gray-700": variant === "ds",
-                "bg-deepblue-800 hover:bg-deepblue-700": variant === "aksel",
-              }
-            )}
+            className="editbutton bg-deepblue-800 hover:bg-deepblue-700 absolute top-0 right-0 flex  -translate-y-[99%] items-center gap-2 overflow-hidden rounded-tl px-2 py-1  text-white transition-transform hover:translate-x-0"
             aria-hidden
             tabIndex={-1}
           >

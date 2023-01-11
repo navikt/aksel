@@ -1,67 +1,51 @@
-import { Table } from "@navikt/ds-react";
-import React from "react";
-import { SanityT } from "@/lib";
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityBlockContent } from "@/sanity-block";
-import cl from "classnames";
-import { Close, SuccessStroke } from "@navikt/ds-icons";
+import { SanityT } from "@/lib";
+import { Table } from "@navikt/ds-react";
 
 const TableComponent = ({
   node,
 }: {
-  node: SanityT.Schema.tabell;
+  node: SanityT.Schema.tabell_v2;
 }): JSX.Element => {
-  if (!node || !node.powerTable || node.powerTable?.rows?.length < 2) {
+  if (!node || !node.rows || node.rows.length < 2) {
     return null;
   }
 
   return (
-    <div className="mb-8 overflow-x-auto">
+    <div className="table-heading-margin mb-8 overflow-x-auto">
       <Table>
         <Table.Header>
           <Table.Row>
-            {node.powerTable?.rows[0].cells?.map((cell) => (
-              <Table.HeaderCell key={cell?._key} className="text-gray-800">
-                <SanityBlockContent blocks={cell?.data?.body} noLastMargin />
+            {node?.rows[0].cells?.map((cell, y) => (
+              <Table.HeaderCell
+                key={y}
+                className="text-text-subtle"
+                scope="col"
+              >
+                {cell}
               </Table.HeaderCell>
             ))}
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {node.powerTable?.rows?.slice?.(1)?.map((row) => (
+          {node?.rows?.slice?.(1)?.map((row) => (
             <Table.Row key={row?._key}>
-              {row?.cells?.map((cell) => (
-                <Table.DataCell
-                  key={cell?._key}
-                  rowSpan={cell?.rowSpan}
-                  colSpan={cell?.colSpan}
-                  className={cl({
-                    "bg-green-50": cell?.data?.status === "suksess",
-                    "bg-red-50": cell?.data?.status === "feil",
-                  })}
-                >
-                  <SanityBlockContent blocks={cell?.data?.body} noLastMargin />
-                  {!cell?.data?.body ? (
-                    cell?.data?.status === "suksess" ? (
-                      <SuccessStroke
-                        className="mx-auto text-xl"
-                        aria-label="ok"
-                        aria-hidden
-                      />
-                    ) : cell?.data?.status === "feil" ? (
-                      <Close
-                        className="mx-auto text-xl"
-                        aria-label="feil"
-                        aria-hidden
-                      />
-                    ) : null
-                  ) : null}
-                </Table.DataCell>
+              {row?.cells?.map((cell, y) => (
+                <Table.DataCell key={y}>{cell}</Table.DataCell>
               ))}
             </Table.Row>
           ))}
         </Table.Body>
       </Table>
+      <style global jsx>{`
+        .algolia-index-body.navds-body-long.navds-typo--spacing
+          + .table-heading-margin {
+          margin-top: -1rem;
+        }
+        .table-heading-margin + .navds-heading {
+          margin-top: var(--a-spacing-12);
+        }
+      `}</style>
     </div>
   );
 };
