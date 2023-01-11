@@ -154,7 +154,7 @@
   border: none;
   cursor: pointer;
   background: var(--a-surface-default);
-  box-shadow: inset 0 0 0 1px var(--a-border-danger), 0 0 0 4px var(--a-border-danger), 0 0 0 6px var(--a-surface-default);
+  box-shadow: inset 0 0 0 1px var(--a-surface-danger), 0 0 0 4px var(--a-surface-danger), 0 0 0 5px var(--a-surface-default);
   z-index: 2;
   border-radius: var(--a-border-radius-full);
   padding: 3.5px;
@@ -173,9 +173,19 @@
 }
 
 .navdsi-timeline__pin-button:focus {
-  box-shadow: inset 0 0 0 1px var(--a-border-danger), 0 0 0 3px var(--a-border-danger), 0 0 0 4px var(--a-surface-default),
+  box-shadow: inset 0 0 0 1px var(--a-surface-danger), 0 0 0 3px var(--a-surface-danger), 0 0 0 4px var(--a-surface-default),
     0 0 0 6px var(--a-border-focus);
   outline: none;
+}
+
+.navdsi-timeline__pin-button:hover {
+  box-shadow: inset 0 0 0 1px var(--a-surface-danger-hover), 0 0 0 4px var(--a-surface-danger-hover),
+    0 0 0 5px var(--a-surface-default);
+}
+
+.navdsi-timeline__pin-button:hover:focus {
+  box-shadow: inset 0 0 0 1px var(--a-surface-danger-hover), 0 0 0 3px var(--a-surface-danger-hover),
+    0 0 0 4px var(--a-surface-default), 0 0 0 6px var(--a-border-focus);
 }
 
 .navdsi-timeline__pin-wrapper::before {
