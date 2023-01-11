@@ -243,7 +243,7 @@
 }
 
 .navdsi-timeline__zoom-button:focus {
-  box-shadow: 0 0 0 1px var(--a-surface-action-subtle), 0 0 0 4px var(--a-border-focus);
+  box-shadow: 0 0 0 1px var(--a-surface-action-subtle), 0 0 0 3px var(--a-border-focus);
   border-width: 1px;
 }
 
