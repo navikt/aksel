@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   width: 100%;
+  min-width: fit-content;
 }
 
 .navdsi-timeline__axislabels {
@@ -28,6 +29,7 @@
 .navdsi-timeline__axislabels-label {
   position: absolute;
   color: var(--a-text-subtle);
+  white-space: nowrap;
 }
 
 .navdsi-timeline__row {
@@ -65,9 +67,18 @@
   font-size: 1rem;
 }
 
-.navdsi-timeline__period > * {
-  padding-left: var(--a-spacing-2);
+.navdsi-timeline__period--inner {
+  margin: 0 var(--a-spacing-1) 0 var(--a-spacing-2);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+  text-align: left;
+  height: 1rem;
 }
+
+/* .navdsi-timeline__period > * {
+  flex-shrink: 0;
+} */
 
 .navdsi-timeline__period--clickable {
   cursor: pointer;

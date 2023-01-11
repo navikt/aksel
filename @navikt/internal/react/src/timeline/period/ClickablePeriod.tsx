@@ -61,7 +61,7 @@ const ClickablePeriod = React.memo(
           aria-expanded={children ? selected : undefined}
           onFocus={() => !activeRow && initiate(index)}
         >
-          {icon}
+          <div className="navdsi-timeline__period--inner">{icon}</div>
         </button>
         {children && (
           <Popover

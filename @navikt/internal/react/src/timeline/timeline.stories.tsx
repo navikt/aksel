@@ -59,6 +59,7 @@ const row1 = [
     status: "success",
     onSelectPeriod: () => console.log("PERIOD SELECTED!"),
     icon: <SuccessFilled aria-hidden />,
+    label: "test",
     statusLabel: "Sykemeldt",
   },
   {
