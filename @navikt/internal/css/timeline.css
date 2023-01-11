@@ -199,7 +199,6 @@
   all: unset;
   cursor: pointer;
   padding: 6px 9px 6px 8px;
-  font-size: var(--a-font-size-small);
   border: 1px solid var(--a-gray-500);
   border-width: 1px 0 1px 1px;
   background: var(--a-white);
@@ -219,12 +218,12 @@
 }
 
 .navdsi-timeline__zoom-button:not([aria-pressed="true"]):hover {
-  background: var(--a-gray-100);
+  background: var(--a-surface-action-subtle-hover);
 }
 
 .navdsi-timeline__zoom-button[aria-pressed="true"] {
-  background: var(--a-gray-900);
-  color: var(--a-white);
+  background: var(--a-surface-inverted);
+  color: var(--a-text-on-inverted);
 }
 
 .navdsi-timeline__period:focus {

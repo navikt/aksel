@@ -1,3 +1,4 @@
+import { Detail } from "@navikt/ds-react";
 import {
   addMonths,
   addYears,
@@ -52,7 +53,7 @@ export const ZoomButton: ZoomButtonType = forwardRef(
         : isSameDay(endDate, startOfRange);
 
     return (
-      <li>
+      <Detail as="li">
         <button
           aria-label={
             !currentZoom
@@ -72,7 +73,7 @@ export const ZoomButton: ZoomButtonType = forwardRef(
         >
           {label}
         </button>
-      </li>
+      </Detail>
     );
   }
 );
