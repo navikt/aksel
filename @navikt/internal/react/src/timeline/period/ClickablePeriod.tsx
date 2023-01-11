@@ -43,7 +43,7 @@ const ClickablePeriod = React.memo(
         <button
           ref={buttonRef}
           onClick={() => {
-            children && setSelected(!selected);
+            children && setSelected((x) => !x);
             onSelectPeriod?.();
           }}
           aria-label={ariaLabel(start, end, status, statusLabel)}
@@ -59,7 +59,9 @@ const ClickablePeriod = React.memo(
             [direction]: `${left}%`,
           }}
           aria-expanded={children ? selected : undefined}
-          onFocus={() => !activeRow && initiate(index)}
+          onFocus={() => {
+            !activeRow && initiate(index);
+          }}
         >
           <div className="navdsi-timeline__period--inner">{icon}</div>
         </button>

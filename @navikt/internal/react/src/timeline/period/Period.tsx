@@ -77,7 +77,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       endInclusive,
       width,
       horizontalPosition,
-      status,
+      status = "neutral",
       onSelectPeriod,
       cropped,
       direction,
@@ -91,7 +91,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         buttonRef={periodRef as RefObject<HTMLButtonElement>}
         start={start}
         end={endInclusive}
-        status={status || "neutral"}
+        status={status}
         onSelectPeriod={onSelectPeriod}
         cropped={cropped || ""}
         direction={direction}
@@ -107,7 +107,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         divRef={periodRef as RefObject<HTMLDivElement>}
         start={start}
         end={endInclusive}
-        status={status || "neutral"}
+        status={status}
         cropped={cropped || ""}
         direction={direction}
         width={width}
