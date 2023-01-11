@@ -204,9 +204,11 @@ export const WithZoom = () => {
             );
           })}
         </Timeline.Row>
-        <Timeline.ZoomButton label="3 mnd" interval="month" count={3} />
-        <Timeline.ZoomButton label="7 mnd" interval="month" count={7} />
-        <Timeline.ZoomButton label="9 mnd" interval="month" count={9} />
+        <Timeline.Zoom>
+          <Timeline.Zoom.Button label="3 mnd" interval="month" count={3} />
+          <Timeline.Zoom.Button label="7 mnd" interval="month" count={7} />
+          <Timeline.Zoom.Button label="9 mnd" interval="month" count={9} />
+        </Timeline.Zoom>
       </Timeline>
     </div>
   );

@@ -26,7 +26,9 @@ export const useTimelineContext = () => {
   const context = useContext(TimelineContext);
 
   if (!context) {
-    console.warn("useTimelineContext must be used with TimelineContext");
+    console.warn(
+      "useTimelineContext must be used with TimelineContext (<Timeline />)"
+    );
   }
 
   return context;

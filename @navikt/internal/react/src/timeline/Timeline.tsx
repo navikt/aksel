@@ -12,7 +12,7 @@ import Period, { PeriodType } from "./period/Period";
 import Pin, { PinType } from "./Pin";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { parseRows } from "./utils/timeline";
-import ZoomButton, { ZoomButtonType } from "./ZoomButton";
+import Zoom, { ZoomType } from "./zoom";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode | React.ReactNode[];
@@ -46,9 +46,9 @@ interface TimelineComponent
    */
   Pin: PinType;
   /**
-   * Built-in timeline zoom button
+   * Built-in timeline zoom-component
    */
-  ZoomButton: ZoomButtonType;
+  Zoom: ZoomType;
 }
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
@@ -65,7 +65,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       (c: any) => c?.type?.componentType === "pin"
     );
 
-    const zoomButtons = React.Children.toArray(children).filter(
+    const zoomComponent = React.Children.toArray(children).find(
       (c: any) => c?.type?.componentType === "zoom"
     );
 
@@ -181,13 +181,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
               );
             })}
           </div>
-          {zoomButtons.length > 0 && (
-            <ul className="navdsi-timeline__zoom">
-              {zoomButtons.map((zoom) => {
-                return zoom;
-              })}
-            </ul>
-          )}
+          {zoomComponent && zoomComponent}
         </div>
       </TimelineContext.Provider>
     );
@@ -197,6 +191,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 Timeline.Row = TimelineRow;
 Timeline.Period = Period;
 Timeline.Pin = Pin;
-Timeline.ZoomButton = ZoomButton;
+Timeline.Zoom = Zoom;
 
 export default Timeline;

@@ -7,7 +7,7 @@ import {
   subYears,
 } from "date-fns";
 import React, { forwardRef } from "react";
-import { useTimelineContext } from "./hooks/useTimelineContext";
+import { useTimelineContext } from "../hooks/useTimelineContext";
 
 export interface ZoomButtonProps {
   /**
@@ -24,16 +24,14 @@ export interface ZoomButtonProps {
   count: number;
 }
 
-export interface ZoomButtonType
-  extends React.ForwardRefExoticComponent<
-    ZoomButtonProps & React.RefAttributes<HTMLButtonElement>
-  > {
-  componentType: string;
-}
+export type ZoomButtonType = React.ForwardRefExoticComponent<
+  ZoomButtonProps & React.RefAttributes<HTMLButtonElement>
+>;
 
-export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
+export const ZoomButton: ZoomButtonType = forwardRef(
   ({ label, interval, count, ...rest }, ref) => {
     const { setStart, endDate, startDate, direction } = useTimelineContext();
+
     let startOfRange: Date;
 
     if (interval === "month") {
@@ -77,8 +75,6 @@ export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
       </li>
     );
   }
-) as ZoomButtonType;
-
-ZoomButton.componentType = "zoom";
+);
 
 export default ZoomButton;
