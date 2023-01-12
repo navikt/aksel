@@ -174,9 +174,6 @@ export function TableOfContentsv2({
                         "text-text-subtle": link.id !== activeId || activeSubId,
                       }
                     )}
-                    aria-expanded={
-                      link?.lvl3?.length > 0 && link?.id === activeId
-                    }
                   >
                     {link.heading}
                   </Link>
