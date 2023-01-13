@@ -58,7 +58,8 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
 }
 
 export const usePageView = (router: Router, pageProps: any) => {
-  const hasMetrics = !!pageProps?.page?.metrics;
+  const pageId = pageProps?.id || pageProps?.page?._id;
+  console.log("hasId", pageId);
 
   const logView = useCallback(
     (e, first = false) => {
@@ -72,15 +73,14 @@ export const usePageView = (router: Router, pageProps: any) => {
       }
       logPageView(e, data, first);
       try {
-        if (!(isDevelopment || isTest || isPreview()) && hasMetrics) {
-          const _id = pageProps?.page._id;
-          fetch(`/api/log-page-view?id=${_id}`);
+        if (!(isDevelopment || isTest || isPreview()) && pageId) {
+          fetch(`/api/log-page-view?id=${pageId}`);
         }
       } catch (error) {
         isDevelopment && console.error(error);
       }
     },
-    [pageProps, hasMetrics]
+    [pageProps, pageId]
   );
 
   /* https://stackoverflow.com/questions/2387136/cross-browser-method-to-determine-vertical-scroll-percentage-in-javascript */
@@ -110,11 +110,11 @@ export const usePageView = (router: Router, pageProps: any) => {
     });
 
     try {
-      if (!(isDevelopment || isTest || isPreview()) && hasMetrics) {
+      if (!(isDevelopment || isTest || isPreview()) && pageId) {
         const { metrics } = pageProps.page;
-        const _id = pageProps?.page._id;
+
         fetch(
-          `/api/log-scroll?id=${_id}&current=${
+          `/api/log-scroll?id=${pageId}&current=${
             metrics.avgScrollLength || 0
           }&views=${metrics.pageviews.summary || 0}&length=${scrollD}`
         );
@@ -122,25 +122,25 @@ export const usePageView = (router: Router, pageProps: any) => {
     } catch (error) {
       isDevelopment && console.error(error);
     }
-  }, [pageProps, hasMetrics]);
+  }, [pageProps, pageId]);
 
   const logTimeSpent = useCallback(
     (timeSpent: number) => {
       try {
-        if (!(isDevelopment || isTest || isPreview()) && hasMetrics) {
+        if (!(isDevelopment || isTest || isPreview()) && pageId) {
           const { metrics } = pageProps.page;
-          const _id = pageProps?.page._id;
+
           fetch(
-            `/api/log-time?id=${_id}&current=${metrics?.avgTime || 0}&views=${
-              metrics?.pageviews?.summary || 1
-            }&time=${timeSpent}`
+            `/api/log-time?id=${pageId}&current=${
+              metrics?.avgTime || 0
+            }&views=${metrics?.pageviews?.summary || 1}&time=${timeSpent}`
           );
         }
       } catch (error) {
         isDevelopment && console.error(error);
       }
     },
-    [pageProps, hasMetrics]
+    [pageProps, pageId]
   );
 
   useEffect(() => {
@@ -154,9 +154,9 @@ export const usePageView = (router: Router, pageProps: any) => {
     return () => {
       router.events.off("routeChangeComplete", logView);
       router.events.off("routeChangeStart", logScroll);
-      if (hasMetrics) {
+      if (pageId) {
         logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
       }
     };
-  }, [router.events, logView, logScroll, logTimeSpent, hasMetrics]);
+  }, [router.events, logView, logScroll, logTimeSpent, pageId]);
 };
