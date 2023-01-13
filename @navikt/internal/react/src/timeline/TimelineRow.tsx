@@ -32,7 +32,7 @@ export interface TimelineRowType
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, headingTag, ...rest }, ref) => {
-    const { periods, id } = useRowContext();
+    const { periods } = useRowContext();
     const { setActiveRow } = useTimelineContext();
 
     const latest = periods.reduce((a, b) => {
@@ -52,7 +52,6 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
         <ol
           {...rest}
           ref={ref}
-          aria-describedby={label ? `label-${id}` : undefined}
           aria-label={
             periods.length === 0
               ? "Ingen perioder"
