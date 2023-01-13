@@ -20,9 +20,9 @@ import {
 } from "../../config";
 
 import { FeedbackPanes } from "./feedback";
+import { FeedbackView } from "./FeedbackPreview";
 import { GodPraksisPanes } from "./god-praksis";
 import { PanesWithCount } from "./with-count";
-import { FeedbackView } from "./FeedbackPreview";
 
 /* import { WebPreview, JsonView } from './previews' */
 const filtered = [
@@ -48,6 +48,7 @@ const filtered = [
   "skrivehjelp",
   "publication_flow",
   "aksel_feedback",
+  "metrics",
 ];
 
 export const structure = async (
@@ -276,6 +277,13 @@ export const structure = async (
                       .schemaType(`publication_flow`)
                       .icon(FileContent)
                       .id(`publication_flow`),
+                    S.listItem()
+                      .title("Metrikker")
+                      .child(
+                        S.documentList()
+                          .title("Metrikker")
+                          .filter(`_type == 'metrics'`)
+                      ),
                   ])
               ),
           ]
