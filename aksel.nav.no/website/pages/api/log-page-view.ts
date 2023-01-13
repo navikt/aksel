@@ -25,6 +25,7 @@ export default async function logPageView(
     await client.create({
       _id: `metrics-${id}`,
       _type: "metrics",
+      referenceId: id,
       pageviews: {
         summary: 1,
         weeks: [

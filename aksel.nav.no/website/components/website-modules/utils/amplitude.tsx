@@ -59,7 +59,6 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
 
 export const usePageView = (router: Router, pageProps: any) => {
   const pageId = pageProps?.id || pageProps?.page?._id;
-  console.log("hasId", pageId);
 
   const logView = useCallback(
     (e, first = false) => {

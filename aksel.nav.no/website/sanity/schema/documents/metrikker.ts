@@ -22,6 +22,12 @@ export const Metrikker = defineType({
   fields: [
     defineField({
       type: "string",
+      name: "referenceId",
+      title: "ID",
+      readOnly: true,
+    }),
+    defineField({
+      type: "string",
       name: "dataVis",
       title: " ",
       components: {
@@ -79,6 +85,17 @@ export const Metrikker = defineType({
       ...config,
     }),
   ],
+  preview: {
+    select: {
+      referenceId: "referenceId",
+    },
+    prepare(selection) {
+      const { referenceId } = selection;
+      return {
+        title: referenceId,
+      };
+    },
+  },
 });
 
 const isDeveloper = (currentUser: any) => {
