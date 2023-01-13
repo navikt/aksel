@@ -1,4 +1,3 @@
-import { BodyShort } from "@navikt/ds-react";
 import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { AxisLabels } from "./AxisLabels";
@@ -172,7 +171,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             })}
 
             {processedRows.map((row, i) => {
-              const tag = row.headingTag;
               return (
                 <RowContext.Provider
                   key={`row-${row.id}`}
@@ -183,18 +181,13 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
                     index: i,
                   }}
                 >
-                  {row.label && (
-                    <BodyShort
-                      as={tag}
-                      id={`label-${row.id}`}
-                      className="navdsi-timeline__row-label"
-                      size="small"
-                    >
-                      {row.icon}
-                      {row.label}
-                    </BodyShort>
-                  )}
-                  <TimelineRow label={row.label} headingTag={row.headingTag} />
+                  <TimelineRow
+                    {...row?.restProps}
+                    ref={row?.ref}
+                    label={row.label}
+                    icon={row.icon}
+                    headingTag={row.headingTag}
+                  />
                 </RowContext.Provider>
               );
             })}

@@ -105,8 +105,8 @@ export const useTimelineRows = (
         const rowIndex = i;
         const timelinePeriods = periods.periods
           .sort((a: Period, b: Period) => a.start.valueOf() - b.start.valueOf())
-          .map((period: Period, i) =>
-            spatialPeriod(
+          .map((period: Period & { restProps?: any; ref?: any }, i) => ({
+            ...spatialPeriod(
               period,
               startDate,
               endDate,
@@ -114,8 +114,10 @@ export const useTimelineRows = (
               i,
               periods.periods,
               rowIndex
-            )
-          )
+            ),
+            restProps: period?.restProps,
+            ref: period?.ref,
+          }))
           .sort(lastPeriod)
           .map(adjustedEdges)
           .map(trimmedPeriods)
@@ -127,6 +129,8 @@ export const useTimelineRows = (
           icon: periods.icon,
           periods:
             direction === "left" ? timelinePeriods : timelinePeriods.reverse(),
+          restProps: periods?.restProps,
+          ref: periods?.ref,
         };
       }),
     [rows, startDate, endDate, direction]

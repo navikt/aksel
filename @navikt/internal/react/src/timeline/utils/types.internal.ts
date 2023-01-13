@@ -35,6 +35,8 @@ export interface PositionedPeriod extends Period, Positioned {
   infoPin?: boolean;
   end: Date;
   statusLabel?: string;
+  restProps?: any;
+  ref?: any;
 }
 
 export interface Spatial {
@@ -52,6 +54,8 @@ export interface InternalSimpleTimeline {
   periods: PositionedPeriod[];
   icon?: ReactNode;
   headingTag: "h2" | "h3" | "h4" | "h5" | "h6";
+  restProps: any;
+  ref: any;
 }
 
 export interface SelectedPeriod {

@@ -1,3 +1,4 @@
+import { BodyShort } from "@navikt/ds-react";
 import { format } from "date-fns";
 import React, { forwardRef, ReactNode } from "react";
 import { PeriodContext } from "./hooks/usePeriodContext";
@@ -31,8 +32,8 @@ export interface TimelineRowType
 }
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
-  ({ label, headingTag, ...rest }, ref) => {
-    const { periods } = useRowContext();
+  ({ label, headingTag = "h3", icon, ...rest }, ref) => {
+    const { periods, id } = useRowContext();
     const { setActiveRow } = useTimelineContext();
 
     const latest = periods.reduce((a, b) => {
@@ -48,47 +49,62 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
     );
 
     return (
-      <div className="navdsi-timeline__row">
-        <ol
-          {...rest}
-          ref={ref}
-          aria-label={
-            periods.length === 0
-              ? "Ingen perioder"
-              : `${format(earliest.start, "dd.MM.yyyy")} til ${format(
-                  latest.end,
-                  "dd.MM.yyyy"
-                )}`
-          }
-          className="navdsi-timeline__row-periods"
-          onKeyDown={(e) => {
-            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-              e.preventDefault();
-              setActiveRow(e.key);
+      <>
+        {label && (
+          <BodyShort
+            as={headingTag}
+            id={`timeline-row-${id}`}
+            className="navdsi-timeline__row-label"
+            size="small"
+          >
+            {icon}
+            {label}
+          </BodyShort>
+        )}
+        <div className="navdsi-timeline__row">
+          <ol
+            {...rest}
+            ref={ref}
+            aria-label={
+              periods.length === 0
+                ? "Ingen perioder"
+                : `${format(earliest.start, "dd.MM.yyyy")} til ${format(
+                    latest.end,
+                    "dd.MM.yyyy"
+                  )}`
             }
-          }}
-        >
-          {periods &&
-            periods.map((period) => {
-              return (
-                <li key={`period-${period.id}`}>
-                  <PeriodContext.Provider
-                    value={{
-                      periodId: period.id,
-                      firstFocus: firstFocusable?.id === period.id,
-                    }}
-                  >
-                    <Period
-                      start={period.start}
-                      end={period.endInclusive}
-                      icon={period.icon}
-                    />
-                  </PeriodContext.Provider>
-                </li>
-              );
-            })}
-        </ol>
-      </div>
+            className="navdsi-timeline__row-periods"
+            onKeyDown={(e) => {
+              if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                e.preventDefault();
+                setActiveRow(e.key);
+              }
+            }}
+          >
+            {periods &&
+              periods.map((period) => {
+                return (
+                  <li key={`period-${period.id}`}>
+                    <PeriodContext.Provider
+                      value={{
+                        periodId: period.id,
+                        firstFocus: firstFocusable?.id === period.id,
+                        restProps: period?.restProps,
+                      }}
+                    >
+                      <Period
+                        start={period.start}
+                        end={period.endInclusive}
+                        icon={period.icon}
+                        ref={period?.ref}
+                      />
+                    </PeriodContext.Provider>
+                  </li>
+                );
+              })}
+          </ol>
+        </div>
+      </>
     );
   }
 ) as TimelineRowType;

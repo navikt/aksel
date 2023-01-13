@@ -217,8 +217,11 @@ export const WithZoom = () => {
 
 export const ActivePeriod = () => {
   const [activePeriod, setActivePeriod] = useState(row1[0]);
+  const restRef = React.useRef(null);
+
   return (
     <div style={{ width: "80vw" }}>
+      <button onClick={() => console.log(restRef.current)}>aa</button>
       <Timeline>
         <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
         <Timeline.Pin date={new Date("Jun 12 2022")}>Pin 2</Timeline.Pin>
@@ -271,6 +274,7 @@ export const ActivePeriod = () => {
             end={new Date("Aug 20 2022")}
             status="info"
             icon={<SuccessFilled aria-hidden />}
+            ref={restRef}
           />
         </Timeline.Row>
       </Timeline>

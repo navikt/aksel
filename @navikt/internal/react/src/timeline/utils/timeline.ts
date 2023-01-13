@@ -1,3 +1,4 @@
+import { omit } from "@navikt/ds-react";
 import React, { ReactNode } from "react";
 import { Period } from "./types.external";
 
@@ -6,6 +7,8 @@ type ParsedChild = {
   icon?: ReactNode;
   headingTag: string;
   periods: Omit<Period, "id" | "endInclusive">[];
+  restProps: any;
+  ref: any;
 };
 
 export const parseRows = (rowChildren: ReactNode[]) => {
@@ -27,6 +30,18 @@ export const parseRows = (rowChildren: ReactNode[]) => {
             children: p.props.children,
             isActive: p.props.isActive,
             statusLabel: p.props.statusLabel,
+            restProps: omit(p.props, [
+              "start",
+              "end",
+              "status",
+              "onSelectPeriod",
+              "label",
+              "icon",
+              "children",
+              "isActive",
+              "statusLabel",
+            ]),
+            ref: p?.ref,
           });
         }
       } else {
@@ -39,6 +54,18 @@ export const parseRows = (rowChildren: ReactNode[]) => {
           icon: r.props.children.props?.icon,
           children: r.props.children.props?.children,
           statusLabel: r.props.children.props?.statusLabel,
+          restProps: omit(r.props.children.props, [
+            "start",
+            "end",
+            "status",
+            "onSelectPeriod",
+            "label",
+            "icon",
+            "children",
+            "isActive",
+            "statusLabel",
+          ]),
+          ref: r.props?.children?.ref,
         });
       }
       parsedChildren.push({
@@ -46,6 +73,8 @@ export const parseRows = (rowChildren: ReactNode[]) => {
         icon: r.props.icon,
         headingTag: r.props.headingTag,
         periods: periods,
+        restProps: omit(r.props, ["label", "icon", "headingTag"]),
+        ref: (r as any)?.ref,
       });
     }
   });

@@ -52,19 +52,20 @@ export interface PeriodProps {
   icon?: ReactNode;
   children?: ReactNode;
   statusLabel?: string;
+  restProps?: any;
 }
 
 export interface PeriodType
   extends React.ForwardRefExoticComponent<
-    PeriodPropsWrapper & React.RefAttributes<HTMLDivElement>
+    PeriodPropsWrapper & React.RefAttributes<HTMLDivElement | HTMLButtonElement>
   > {
   componentType: string;
 }
 
 export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
-  ({ end, icon, ...rest }, ref) => {
+  ({ end, icon }, ref) => {
     const { periods } = useRowContext();
-    const { periodId } = usePeriodContext();
+    const { periodId, restProps } = usePeriodContext();
 
     const period = periods.find((p) => p.id === periodId);
 
@@ -87,6 +88,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
 
     return onSelectPeriod || children ? (
       <ClickablePeriod
+        periodRef={ref as React.ForwardedRef<HTMLButtonElement>}
         start={start}
         end={endInclusive}
         status={status}
@@ -99,9 +101,11 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         children={children}
         isActive={isActive}
         statusLabel={statusLabel}
+        restProps={restProps}
       />
     ) : (
       <NonClickablePeriod
+        periodRef={ref}
         start={start}
         end={endInclusive}
         status={status}
@@ -111,6 +115,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         left={horizontalPosition}
         icon={icon}
         statusLabel={statusLabel}
+        restProps={restProps}
       />
     );
   }

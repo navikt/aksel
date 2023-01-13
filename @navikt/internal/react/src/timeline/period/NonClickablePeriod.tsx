@@ -1,8 +1,11 @@
 import React from "react";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./Period";
+import cl from "clsx";
 
-interface NonClickablePeriodProps extends PeriodProps {}
+interface NonClickablePeriodProps extends PeriodProps {
+  periodRef?: React.ForwardedRef<HTMLDivElement>;
+}
 
 const NonClickablePeriod = ({
   start,
@@ -14,10 +17,17 @@ const NonClickablePeriod = ({
   width,
   icon,
   statusLabel,
+  restProps,
+  periodRef,
 }: NonClickablePeriodProps) => {
   return (
     <div
-      className={getConditionalClasses(cropped, direction, status)}
+      ref={periodRef}
+      {...restProps}
+      className={cl(
+        getConditionalClasses(cropped, direction, status),
+        restProps?.classname
+      )}
       style={{
         width: `${width}%`,
         [direction]: `${left}%`,

@@ -1,6 +1,6 @@
-import { Popover } from "@navikt/ds-react";
+import { mergeRefs, Popover } from "@navikt/ds-react";
 import cl from "clsx";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -10,6 +10,7 @@ import { PeriodProps } from "./Period";
 interface ClickablePeriodProps extends PeriodProps {
   onSelectPeriod?: () => void;
   isActive?: boolean;
+  periodRef: React.ForwardedRef<HTMLButtonElement>;
 }
 
 const ClickablePeriod = React.memo(
@@ -26,6 +27,8 @@ const ClickablePeriod = React.memo(
     children,
     isActive,
     statusLabel,
+    restProps,
+    periodRef,
   }: ClickablePeriodProps) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const [selected, setSelected] = useState(false);
@@ -33,12 +36,17 @@ const ClickablePeriod = React.memo(
     const { firstFocus } = usePeriodContext();
     const { initiate, addFocusable } = useTimelineContext();
 
+    const mergedRef = useMemo(
+      () => mergeRefs([buttonRef, periodRef]),
+      [periodRef]
+    );
+
     return (
       <>
         <button
           ref={(r) => {
             firstFocus && addFocusable(r, index);
-            buttonRef.current = r;
+            mergedRef(r);
           }}
           onClick={() => {
             children && setSelected((x) => !x);
@@ -48,6 +56,7 @@ const ClickablePeriod = React.memo(
           className={cl(
             "navdsi-timeline__period--clickable",
             getConditionalClasses(cropped, direction, status),
+            restProps?.className,
             {
               "navdsi-timeline__period--selected": isActive,
             }
