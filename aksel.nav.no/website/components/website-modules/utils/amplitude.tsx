@@ -60,6 +60,8 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
 export const usePageView = (router: Router, pageProps: any) => {
   const pageId = pageProps?.id || pageProps?.page?._id;
 
+  const isForside = pageProps?.page?._type === "aksel_forside";
+
   const logView = useCallback(
     (e, first = false) => {
       const data = {};
@@ -72,14 +74,14 @@ export const usePageView = (router: Router, pageProps: any) => {
       }
       logPageView(e, data, first);
       try {
-        if (!(isDevelopment || isTest || isPreview()) && pageId) {
+        if (!(isDevelopment || isTest || isPreview()) && isForside) {
           fetch(`/api/log-page-view?id=${pageId}`);
         }
       } catch (error) {
         isDevelopment && console.error(error);
       }
     },
-    [pageProps, pageId]
+    [pageProps, pageId, isForside]
   );
 
   /* https://stackoverflow.com/questions/2387136/cross-browser-method-to-determine-vertical-scroll-percentage-in-javascript */
@@ -109,24 +111,18 @@ export const usePageView = (router: Router, pageProps: any) => {
     });
 
     try {
-      if (!(isDevelopment || isTest || isPreview()) && pageId) {
-        const { metrics } = pageProps.page;
-
-        fetch(
-          `/api/log-scroll?id=${pageId}&current=${
-            metrics.avgScrollLength || 0
-          }&views=${metrics.pageviews.summary || 0}&length=${scrollD}`
-        );
+      if (!(isDevelopment || isTest || isPreview()) && isForside) {
+        fetch(`/api/log-scroll?id=${pageId}&length=${scrollD}`);
       }
     } catch (error) {
       isDevelopment && console.error(error);
     }
-  }, [pageProps, pageId]);
+  }, [pageId, isForside]);
 
   const logTimeSpent = useCallback(
     (timeSpent: number) => {
       try {
-        if (!(isDevelopment || isTest || isPreview()) && pageId) {
+        if (!(isDevelopment || isTest || isPreview()) && isForside) {
           const { metrics } = pageProps.page;
 
           fetch(
@@ -139,7 +135,7 @@ export const usePageView = (router: Router, pageProps: any) => {
         isDevelopment && console.error(error);
       }
     },
-    [pageProps, pageId]
+    [pageProps, pageId, isForside]
   );
 
   useEffect(() => {
@@ -153,9 +149,9 @@ export const usePageView = (router: Router, pageProps: any) => {
     return () => {
       router.events.off("routeChangeComplete", logView);
       router.events.off("routeChangeStart", logScroll);
-      if (pageId) {
+      if (isForside) {
         logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
       }
     };
-  }, [router.events, logView, logScroll, logTimeSpent, pageId]);
+  }, [router.events, logView, logScroll, logTimeSpent, isForside]);
 };

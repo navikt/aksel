@@ -9,26 +9,46 @@ export default async function logPageScroll(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id, current, views, length } = req.query;
+  const { id, length } = req.query;
 
-  if (!(id && current && views && length)) {
+  if (!id) {
     return res.status(400).json({
-      message: "Missing required parameter(s). id, current, length or views",
+      message: "Missing required parameter(s). id",
     });
   }
 
+  //check if document with id exists in sanity to prevent creating metrics for pages that don't exist
+  const page = await client.fetch(`*[_id == "${id}"][0]`);
+
+  if (!page) {
+    return res.status(400).json({
+      message: `Document with id: ${id} does not exist`,
+    });
+  }
+
+  //check if metrics doucment with id exists in sanity
+  const metrics = await client
+    .fetch(`*[_id == "metrics-${id}"][0]`)
+    .catch((err) => {
+      console.error("Error:", err);
+      return res.status(500).json({ message: "Error fetching metrics" });
+    });
+
+  const { avgScrollLength, pageviews } = metrics;
+
   const newAverage = Math.round(
-    (Number(length) + Number(current)) / Number(views)
+    (Number(length) + Number(avgScrollLength || 0)) /
+      Number(pageviews.summary || 1)
   );
 
   await client
-    .patch(id as string)
-    .setIfMissing({ "metrics.avgScrollLength": 0 })
-    .set({ "metrics.avgScrollLength": newAverage })
+    .patch(`metrics-${id}`)
+    .setIfMissing({ avgScrollLength: 0 })
+    .set({ avgScrollLength: newAverage })
     .commit()
     .catch((err) => {
       console.error("Error:", err);
-      return res.status(500).json({ message: "Error updating page" });
+      return res.status(500).json({ message: "Error updating metrics" });
     });
 
   return res.status(200).json({ message: `Page with id: ${id} updated.` });
