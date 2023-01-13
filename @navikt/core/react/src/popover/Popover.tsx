@@ -8,7 +8,7 @@ import {
   useDismiss,
   useFloating,
   useInteractions,
-} from "@floating-ui/react-dom-interactions";
+} from "@floating-ui/react";
 import cl from "clsx";
 import React, {
   forwardRef,
