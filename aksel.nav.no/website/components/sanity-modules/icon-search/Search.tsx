@@ -162,7 +162,7 @@ const IconSearch = () => {
           href="https://nav-it.slack.com/archives/C7NE7A8UF"
           target="_blank"
         >
-          #designsystem slack.
+          #Aksel-designsystemet på Slack.
         </Link>
       </BodyLong>
       <Modal open={open} onClose={() => handleClose()}>

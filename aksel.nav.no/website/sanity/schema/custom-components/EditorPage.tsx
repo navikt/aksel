@@ -70,7 +70,7 @@ const OutDatedList = ({ data }: { data: any[] }) => {
     () =>
       data.filter(
         (x) =>
-          !isAfter(x?.updateInfo?.lastVerified) &&
+          isAfter(x?.updateInfo?.lastVerified) &&
           ["ds_artikkel", "aksel_artikkel", "komponent_artikkel"].includes(
             x._type
           )
@@ -81,7 +81,7 @@ const OutDatedList = ({ data }: { data: any[] }) => {
   return (
     <Accordion.Item>
       <Accordion.Header>
-        Artikler til godkjenning ({list.length})
+        Artikler som må godkjennes ({list.length})
       </Accordion.Header>
       <Accordion.Content>
         <ul>
@@ -256,8 +256,8 @@ export const EditorPage = () => {
         </dl>
         <p>
           Om det er noe du mangler tilgang til kan du sende melding på{" "}
-          <Link href="https://nav-it.slack.com/archives/C0370ADS0HX">
-            #Aksel
+          <Link href="https://nav-it.slack.com/archives/C7NE7A8UF">
+            #Aksel-designsystemet
           </Link>
         </p>
       </div>
