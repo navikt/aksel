@@ -1,5 +1,11 @@
 # @navikt/ds-icons
 
+## 2.0.13
+
+### Patch Changes
+
+- [`a6c339123`](https://github.com/navikt/Designsystemet/commit/a6c3391237f13394063e4c004ac9efb1875fc944) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Ikonjusteringer sirkleikoner
+
 ## 2.0.12
 
 ## 2.0.11
