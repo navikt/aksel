@@ -18,7 +18,16 @@ export default async function logPageView(
     });
   }
 
-  //check if doucment with id exists in sanity
+  //check if document with id exists in sanity to prevent creating metrics for pages that don't exist
+  const page = await client.fetch(`*[_id == "${id}"][0]`);
+
+  if (!page) {
+    return res.status(400).json({
+      message: `Page with id: ${id} does not exist`,
+    });
+  }
+
+  //check if metrics doucment with id exists in sanity
   const metrics = await client.fetch(`*[_id == "metrics-${id}"][0]`);
 
   if (!metrics) {
