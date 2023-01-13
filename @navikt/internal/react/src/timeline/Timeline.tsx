@@ -1,6 +1,6 @@
 import { BodyShort } from "@navikt/ds-react";
 import { endOfDay, isSameDay, startOfDay } from "date-fns";
-import React, { forwardRef, useMemo, useState } from "react";
+import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { AxisLabels } from "./AxisLabels";
 import { RowContext } from "./hooks/useRowContext";
 import { TimelineContext } from "./hooks/useTimelineContext";
@@ -55,6 +55,11 @@ interface TimelineComponent
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, direction = "left", ...rest }, ref) => {
     const isMultipleRows = Array.isArray(children);
+
+    const firstFocusabled = useRef<
+      { ref: HTMLButtonElement | null; id: number }[]
+    >([]);
+
     if (!isMultipleRows) {
       children = [children];
     }
@@ -118,6 +123,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           const row = processedRows[i];
           if (row.periods.find((p) => !!p.children || !!p.onSelectPeriod)) {
             setActiveRow(i);
+            firstFocusabled.current.find((x) => x.id === i)?.ref?.focus();
             break;
           }
         }
@@ -128,11 +134,19 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           const row = processedRows[i];
           if (row.periods.find((p) => !!p.children || !!p.onSelectPeriod)) {
             setActiveRow(i);
+            firstFocusabled.current.find((x) => x.id === i)?.ref?.focus();
             break;
           }
         }
         return;
       }
+    };
+
+    const addFocusable = (ref: HTMLButtonElement | null, id: number) => {
+      let items = firstFocusabled.current;
+      items = items.filter((x) => x.id !== id);
+      items.push({ ref, id });
+      firstFocusabled.current = items;
     };
 
     return (
@@ -146,6 +160,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           activeRow: activeRow,
           setActiveRow: (key) => handleActiveRowChange(key),
           initiate: (i) => setActiveRow(i),
+          addFocusable,
         }}
       >
         <div {...rest} ref={ref}>

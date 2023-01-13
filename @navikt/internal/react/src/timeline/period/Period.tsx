@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode, RefObject, useRef } from "react";
+import React, { forwardRef, ReactNode } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import ClickablePeriod from "./ClickablePeriod";
@@ -63,7 +63,6 @@ export interface PeriodType
 
 export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
   ({ end, icon, ...rest }, ref) => {
-    const periodRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
     const { periods } = useRowContext();
     const { periodId } = usePeriodContext();
 
@@ -88,7 +87,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
 
     return onSelectPeriod || children ? (
       <ClickablePeriod
-        buttonRef={periodRef as RefObject<HTMLButtonElement>}
         start={start}
         end={endInclusive}
         status={status}
@@ -104,7 +102,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       />
     ) : (
       <NonClickablePeriod
-        divRef={periodRef as RefObject<HTMLDivElement>}
         start={start}
         end={endInclusive}
         status={status}

@@ -1,6 +1,6 @@
 import { Popover } from "@navikt/ds-react";
 import cl from "clsx";
-import React, { RefObject, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -8,14 +8,12 @@ import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./Period";
 
 interface ClickablePeriodProps extends PeriodProps {
-  buttonRef: RefObject<HTMLButtonElement>;
   onSelectPeriod?: () => void;
   isActive?: boolean;
 }
 
 const ClickablePeriod = React.memo(
   ({
-    buttonRef,
     onSelectPeriod,
     start,
     end,
@@ -29,19 +27,19 @@ const ClickablePeriod = React.memo(
     isActive,
     statusLabel,
   }: ClickablePeriodProps) => {
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
     const [selected, setSelected] = useState(false);
-    const { active, index } = useRowContext();
+    const { index } = useRowContext();
     const { firstFocus } = usePeriodContext();
-    const { activeRow, initiate } = useTimelineContext();
-
-    useEffect(() => {
-      active && firstFocus && buttonRef.current?.focus();
-    }, [active, buttonRef, firstFocus]);
+    const { initiate, addFocusable } = useTimelineContext();
 
     return (
       <>
         <button
-          ref={buttonRef}
+          ref={(r) => {
+            firstFocus && addFocusable(r, index);
+            buttonRef.current = r;
+          }}
           onClick={() => {
             children && setSelected((x) => !x);
             onSelectPeriod?.();
@@ -60,7 +58,7 @@ const ClickablePeriod = React.memo(
           }}
           aria-expanded={children ? selected : undefined}
           onFocus={() => {
-            !activeRow && initiate(index);
+            initiate(index);
           }}
         >
           <div className="navdsi-timeline__period--inner">{icon}</div>
