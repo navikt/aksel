@@ -358,5 +358,3 @@ export const getStaticProps = async ({
 };
 
 export default Page;
-
-<div>lorem</div>;
