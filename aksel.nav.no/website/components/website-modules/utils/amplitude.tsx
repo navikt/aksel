@@ -48,10 +48,14 @@ const isPreview = () => !!document.getElementById("exit-preview-id");
 const isDevelopment = process.env.NODE_ENV === "development";
 const isTest = process.env.NEXT_PUBLIC_TEST === "true";
 
+const isProduction = () => {
+  return !(isDevelopment || isTest || isPreview());
+};
+
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
   return new Promise(function (resolve: any) {
     const eventData = data ? { ...data } : {};
-    if (amplitude && !(isDevelopment || isTest || isPreview())) {
+    if (amplitude && isProduction()) {
       amplitude.getInstance().logEvent(eventName, eventData, resolve);
     }
   });
@@ -74,7 +78,7 @@ export const usePageView = (router: Router, pageProps: any) => {
       }
       logPageView(e, data, first);
       try {
-        if (!(isDevelopment || isTest || isPreview()) && isForside) {
+        if (isProduction && isForside) {
           fetch(`/api/log-page-view?id=${pageId}`);
         }
       } catch (error) {
@@ -111,7 +115,7 @@ export const usePageView = (router: Router, pageProps: any) => {
     });
 
     try {
-      if (!(isDevelopment || isTest || isPreview()) && isForside) {
+      if (isProduction() && isForside) {
         fetch(`/api/log-scroll?id=${pageId}&length=${scrollD}`);
       }
     } catch (error) {
@@ -122,7 +126,7 @@ export const usePageView = (router: Router, pageProps: any) => {
   const logTimeSpent = useCallback(
     (timeSpent: number) => {
       try {
-        if (!(isDevelopment || isTest || isPreview()) && isForside) {
+        if (isProduction() && isForside) {
           const { metrics } = pageProps.page;
 
           fetch(
