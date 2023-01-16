@@ -34,6 +34,7 @@ export default async function logPageView(
     await client.create({
       _id: `metrics-${id}`,
       _type: "metrics",
+      reference: { _ref: id, _type: "reference" },
       referenceId: id,
       pageviews: {
         summary: 1,

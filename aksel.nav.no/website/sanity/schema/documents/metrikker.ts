@@ -93,12 +93,14 @@ export const Metrikker = defineType({
   ],
   preview: {
     select: {
+      reference: "reference.title",
       referenceId: "referenceId",
     },
     prepare(selection) {
-      const { referenceId } = selection;
+      const { reference, referenceId } = selection;
       return {
-        title: referenceId,
+        title: reference || "Mangler tittel",
+        subtitle: `ID: ${referenceId}`,
       };
     },
   },

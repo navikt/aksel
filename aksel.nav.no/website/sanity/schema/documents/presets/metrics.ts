@@ -32,7 +32,7 @@ export const metrics = defineField({
     defineField({
       type: "object",
       name: "pageviews",
-      ...configCollapsed,
+      ...config,
       fields: [
         {
           name: "summary",
