@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { allDocsRef } from "../../config";
 import { Metrics } from "../custom-components";
 
 const config = {
@@ -20,6 +21,11 @@ export const Metrikker = defineType({
   name: "metrics",
   type: "document",
   fields: [
+    defineField({
+      type: "reference",
+      name: "reference",
+      to: allDocsRef,
+    }),
     defineField({
       type: "string",
       name: "referenceId",
