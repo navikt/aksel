@@ -121,12 +121,12 @@
 }
 
 .navdsi-timeline__period--neutral {
-  background: var(--a-surface-neutral-subtle);
+  background: var(--a-bg-subtle);
   box-shadow: inset 0 0 0 1px var(--a-border-default);
 }
 
 .navdsi-timeline__period--neutral.navdsi-timeline__period--clickable:hover {
-  background: var(--a-surface-neutral-subtle);
+  background: var(--a-gray-200);
 }
 
 .navdsi-timeline__period--connected-both {
