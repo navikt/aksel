@@ -52,7 +52,7 @@
 }
 
 .navdsi-timeline__row-periods > li {
-  all: unset;
+  list-style-type: none;
 }
 
 .navdsi-timeline__period {
