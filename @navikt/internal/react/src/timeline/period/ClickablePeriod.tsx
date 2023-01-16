@@ -44,6 +44,7 @@ const ClickablePeriod = React.memo(
     return (
       <>
         <button
+          {...restProps}
           ref={(r) => {
             firstFocus && addFocusable(r, index);
             mergedRef(r);
