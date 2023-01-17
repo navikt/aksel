@@ -77,6 +77,22 @@
   align-self: flex-end;
 }
 
+.navds-chat--top-text-left .navds-chat__top-text {
+  align-self: flex-start;
+}
+
+.navds-chat--top-text-right .navds-chat__top-text {
+  align-self: flex-end;
+}
+
+.navds-chat--left .navds-chat__top-text--right {
+  align-self: flex-end;
+}
+
+.navds-chat--right .navds-chat__top-text--left {
+  align-self: flex-start;
+}
+
 .navds-chat__name {
   font-weight: var(--a-font-weight-bold);
 }
