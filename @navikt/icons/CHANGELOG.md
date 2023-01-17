@@ -1,5 +1,11 @@
 # @navikt/ds-icons
 
+## 2.0.16
+
+### Patch Changes
+
+- [`54f8b0795`](https://github.com/navikt/Designsystemet/commit/54f8b07956bbfb7de51f6682a5fc64903bfd1bdf) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner med feile farger
+
 ## 2.0.15
 
 ## 2.0.14
