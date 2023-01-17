@@ -21,6 +21,7 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   backgroundColor?: string;
   /**
    * Flips hoizontal position of toptext
+   * @default false
    */
   flipToptext?: boolean;
 }

@@ -35,6 +35,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   position?: "left" | "right";
   /**
    * Flips hoizontal position of toptext
+   * @default false
    */
   flipToptext?: boolean;
 }
