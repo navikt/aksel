@@ -88,7 +88,6 @@ export default async function logPageView(
     const lastWeek = weeks[weeks.length - 1].week;
     if (isSameWeek(new Date(lastWeek), new Date())) {
       // If last week is same as current week, increment views
-      console.log(metrics);
       await client
         .patch(metrics._id)
         .inc({ "weeksObj.weeks[0].views": 1 })
