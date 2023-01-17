@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 2.0.14
+
+### Patch Changes
+
+- [`8e5c55443`](https://github.com/navikt/Designsystemet/commit/8e5c554431c98b1b658c5054c0b3cf08b8a65e52) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bumpet @floating-ui/react
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.14
+
+## 2.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`a6c339123`](https://github.com/navikt/Designsystemet/commit/a6c3391237f13394063e4c004ac9efb1875fc944)]:
+  - @navikt/ds-icons@2.0.13
+
 ## 2.0.12
 
 ### Patch Changes
