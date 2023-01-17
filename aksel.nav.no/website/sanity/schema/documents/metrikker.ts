@@ -1,6 +1,5 @@
 import { defineField, defineType } from "sanity";
 import { allDocsRef } from "../../config";
-import { Metrics } from "../custom-components";
 
 const config = {
   description: "Bare synlig for utviklere",
@@ -24,34 +23,31 @@ export const Metrikker = defineType({
     defineField({
       type: "reference",
       name: "reference",
+      title: "Referanse",
       to: allDocsRef,
     }),
     defineField({
-      type: "string",
-      name: "referenceId",
-      title: "ID",
-      readOnly: true,
+      type: "number",
+      name: "avgScrollLength",
+      title: "Gjennomsnittlig scrolldybde",
+      ...config,
     }),
     defineField({
-      type: "string",
-      name: "dataVis",
-      title: " ",
-      components: {
-        input: Metrics,
-      },
+      type: "number",
+      name: "avgTime",
+      title: "Gjennomsnittlig tid på siden",
+      ...config,
     }),
     defineField({
       type: "object",
-      name: "pageviews",
+      name: "weeksObj",
+      title: "Uker",
       ...configCollapsed,
       fields: [
-        {
-          name: "summary",
-          type: "number",
-        },
-        {
+        defineField({
           name: "weeks",
           type: "array",
+          title: " ",
           of: [
             {
               type: "object",
@@ -72,29 +68,14 @@ export const Metrikker = defineType({
               ],
             },
           ],
-        },
+        }),
       ],
-    }),
-    defineField({
-      type: "number",
-      name: "avgScrollLength",
-      ...config,
-    }),
-    defineField({
-      type: "number",
-      name: "avgTime",
-      ...config,
-    }),
-    defineField({
-      type: "number",
-      name: "inactiveCount",
-      ...config,
     }),
   ],
   preview: {
     select: {
       reference: "reference.title",
-      referenceId: "referenceId",
+      referenceId: "reference._id",
     },
     prepare(selection) {
       const { reference, referenceId } = selection;
