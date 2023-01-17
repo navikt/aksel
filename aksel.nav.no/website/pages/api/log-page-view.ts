@@ -46,7 +46,7 @@ export default async function logPageView(
           },
         ],
       },
-      avgScrollLength: 0,
+      totalScrollLength: 0,
       avgTime: 0,
     });
 

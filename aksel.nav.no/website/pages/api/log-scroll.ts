@@ -11,9 +11,9 @@ export default async function logPageScroll(
 ) {
   const { id, length } = req.query;
 
-  if (!id) {
+  if (!id || !length) {
     return res.status(400).json({
-      message: "Missing required parameter(s). id",
+      message: "Missing required parameter(s). id or length",
     });
   }
 
@@ -27,29 +27,25 @@ export default async function logPageScroll(
   }
 
   //check if metrics doucment with id exists in sanity
-  const metrics = await client
-    .fetch(`*[_id == "metrics-${id}"][0]`)
-    .catch((err) => {
-      console.error("Error:", err);
-      return res.status(500).json({ message: "Error fetching metrics" });
-    });
-
-  const { avgScrollLength, pageviews } = metrics;
-
-  const newAverage = Math.round(
-    (Number(length) + Number(avgScrollLength || 0)) /
-      Number(pageviews.summary || 1)
+  const metrics = await client.fetch(
+    `*[_type=="metrics" && references("${id}")][0]`
   );
 
+  if (!metrics) {
+    return res.status(400).json({
+      message: `Metrics document with id: ${id} does not exist`,
+    });
+  }
+
   await client
-    .patch(`metrics-${id}`)
-    .setIfMissing({ avgScrollLength: 0 })
-    .set({ avgScrollLength: newAverage })
+    .patch(metrics._id)
+    .setIfMissing({ totalScrollLength: 0 })
+    .inc({ totalScrollLength: Number(length) })
     .commit()
     .catch((err) => {
       console.error("Error:", err);
       return res.status(500).json({ message: "Error updating metrics" });
     });
 
-  return res.status(200).json({ message: `Page with id: ${id} updated.` });
+  return res.status(200).json({ message: `Metrics with id: ${id} updated.` });
 }

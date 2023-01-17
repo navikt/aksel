@@ -115,7 +115,7 @@ export const usePageView = (router: Router, pageProps: any) => {
     });
 
     try {
-      if (isProduction() && isForside) {
+      if (isForside) {
         fetch(`/api/log-scroll?id=${pageId}&length=${scrollD}`);
       }
     } catch (error) {
