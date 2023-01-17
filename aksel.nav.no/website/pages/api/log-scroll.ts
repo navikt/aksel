@@ -39,16 +39,27 @@ export default async function logPageScroll(
     });
   }
 
-  const { avgScrollLength, pageviews } = metrics;
+  const { avgScrollLength, pageviews, weeksObj } = metrics;
 
-  //calculate new average scroll length for each pageview based on previous average scroll length and new length
-  const newAvgScrollLength =
-    (avgScrollLength * (pageviews - 1) + Number(length)) / pageviews;
+  const currrentWeek = weeksObj.weeks[0];
 
   await client
     .patch(metrics._id)
     .setIfMissing({ avgScrollLength: 0 })
-    .set({ avgScrollLength: Math.round(newAvgScrollLength) })
+    .set({
+      avgScrollLength: calcNewAverage(
+        avgScrollLength,
+        pageviews,
+        Number(length)
+      ),
+    })
+    .set({
+      "weeksObj.weeks[0].scrollLength": calcNewAverage(
+        currrentWeek.scrollLength,
+        currrentWeek.views,
+        Number(length)
+      ),
+    })
     .commit()
     .catch((err) => {
       console.error("Error:", err);
@@ -57,3 +68,14 @@ export default async function logPageScroll(
 
   return res.status(200).json({ message: `Metrics with id: ${id} updated.` });
 }
+
+const calcNewAverage = (
+  oldAverage: number,
+  occurances: number,
+  newValue: number
+): number => {
+  if (oldAverage === 0 || oldAverage === null) {
+    return Math.round(newValue / occurances);
+  }
+  return Math.round((oldAverage * (occurances - 1) + newValue) / occurances);
+};

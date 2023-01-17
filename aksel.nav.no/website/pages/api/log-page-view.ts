@@ -43,6 +43,7 @@ export default async function logPageView(
             week: format(new Date(), "yyyy-MM-dd"),
             views: 1,
             _key: new Date().getTime().toString(),
+            scrollLength: 0,
           },
         ],
       },
@@ -66,14 +67,27 @@ export default async function logPageView(
 
   const { weeks } = metrics.weeksObj;
 
-  if (weeks.length === 0) {
-    // If weeks array is empty, add first week
+  // If weeks array is not empty, compare last week
+  const lastWeek = weeks[weeks.length - 1].week;
+  if (isSameWeek(new Date(lastWeek), new Date())) {
+    // If last week is same as current week, increment views
+    await client
+      .patch(metrics._id)
+      .inc({ "weeksObj.weeks[0].views": 1 })
+      .commit()
+      .catch((err) => {
+        console.error("Error:", err);
+        return res.status(500).json({ message: "Error updating current week" });
+      });
+  } else {
+    // If last week is not same as current week, add new week
     await client
       .patch(metrics._id)
       .prepend("weekObj.weeks", [
         {
           week: format(new Date(), "yyyy-MM-dd"),
           views: 1,
+          scrollLength: 0,
         },
       ])
       .commit({
@@ -81,41 +95,8 @@ export default async function logPageView(
       })
       .catch((err) => {
         console.error("Error:", err);
-        return res.status(500).json({ message: "Error updating page" });
+        return res.status(500).json({ message: "Error creating new week" });
       });
-  } else {
-    // If weeks array is not empty, compare last week
-    const lastWeek = weeks[weeks.length - 1].week;
-    if (isSameWeek(new Date(lastWeek), new Date())) {
-      // If last week is same as current week, increment views
-      await client
-        .patch(metrics._id)
-        .inc({ "weeksObj.weeks[0].views": 1 })
-        .commit()
-        .catch((err) => {
-          console.error("Error:", err);
-          return res
-            .status(500)
-            .json({ message: "Error updating current week" });
-        });
-    } else {
-      // If last week is not same as current week, add new week
-      await client
-        .patch(metrics._id)
-        .prepend("weekObj.weeks", [
-          {
-            week: format(new Date(), "yyyy-MM-dd"),
-            views: 1,
-          },
-        ])
-        .commit({
-          autoGenerateArrayKeys: true,
-        })
-        .catch((err) => {
-          console.error("Error:", err);
-          return res.status(500).json({ message: "Error creating new week" });
-        });
-    }
   }
 
   return res.status(200).json({ message: `Metrics with id: ${id} updated.` });
