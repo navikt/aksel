@@ -34,8 +34,8 @@ export const Metrikker = defineType({
     }),
     defineField({
       type: "number",
-      name: "totalScrollLength",
-      title: "Total scrolldybde",
+      name: "avgScrollLength",
+      title: "Gjennomsnittlig scrolldybde %",
       ...config,
     }),
     defineField({

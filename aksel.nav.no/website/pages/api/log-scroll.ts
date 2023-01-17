@@ -11,6 +11,8 @@ export default async function logPageScroll(
 ) {
   const { id, length } = req.query;
 
+  console.log(length);
+
   if (!id || !length) {
     return res.status(400).json({
       message: "Missing required parameter(s). id or length",
@@ -37,10 +39,16 @@ export default async function logPageScroll(
     });
   }
 
+  const { avgScrollLength, pageviews } = metrics;
+
+  //calculate new average scroll length for each pageview based on previous average scroll length and new length
+  const newAvgScrollLength =
+    (avgScrollLength * (pageviews - 1) + Number(length)) / pageviews;
+
   await client
     .patch(metrics._id)
-    .setIfMissing({ totalScrollLength: 0 })
-    .inc({ totalScrollLength: Number(length) })
+    .setIfMissing({ avgScrollLength: 0 })
+    .set({ avgScrollLength: Math.round(newAvgScrollLength) })
     .commit()
     .catch((err) => {
       console.error("Error:", err);
