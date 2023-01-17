@@ -116,7 +116,7 @@ export const Position = () => {
   );
 };
 
-export const FlipToptext = () => {
+export const ToptextPosition = () => {
   return (
     <div className="colgap">
       <Chat
@@ -125,7 +125,7 @@ export const FlipToptext = () => {
         timestamp="01.01.21 14:00"
         backgroundColor="rgba(255, 249, 240, 1)"
         avatarBgColor="rgba(255, 236, 204, 1)"
-        flipToptext
+        toptextPosition="right"
       >
         <Chat.Bubble>
           Adipisicing laborum est eu laborum est sit in commodo enim sint
@@ -139,7 +139,7 @@ export const FlipToptext = () => {
         position="right"
         backgroundColor="rgba(230, 240, 255, 1)"
         avatarBgColor="rgba(204, 225, 255, 1)"
-        flipToptext
+        toptextPosition="left"
       >
         <Chat.Bubble>
           Reprehenderit pariatur officia exercitation laboris.
@@ -156,7 +156,7 @@ export const FlipToptext = () => {
         backgroundColor="rgba(255, 249, 240, 1)"
         avatarBgColor="rgba(255, 236, 204, 1)"
       >
-        <Chat.Bubble flipToptext>
+        <Chat.Bubble toptextPosition="right">
           Exercitation irure Lorem cupidatat culpa anim cillum esse ullamco qui
           dolore laborum et Lorem. Labore sunt duis id Lorem voluptate commodo
           ea esse. Dolore esse aliqua proident ea ad commodo ut dolore voluptate

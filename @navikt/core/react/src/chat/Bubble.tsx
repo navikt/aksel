@@ -20,10 +20,9 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
    */
   backgroundColor?: string;
   /**
-   * Flips hoizontal position of toptext
-   * @default false
+   * Overrides hoizontal position of toptext
    */
-  flipToptext?: boolean;
+  toptextPosition?: "left" | "right";
 }
 
 export type BubbleType = React.ForwardRefExoticComponent<
@@ -38,7 +37,7 @@ const Bubble: BubbleType = forwardRef(
       name,
       timestamp,
       backgroundColor,
-      flipToptext = false,
+      toptextPosition,
       ...rest
     },
     ref
@@ -52,9 +51,10 @@ const Bubble: BubbleType = forwardRef(
       >
         {(timestamp || name) && (
           <div
-            className={cl("navds-chat__top-text", {
-              "navds-chat__top-text--flipped": flipToptext,
-            })}
+            className={cl(
+              `navds-chat__top-text`,
+              toptextPosition && `navds-chat__top-text--${toptextPosition}`
+            )}
           >
             {name && <Detail className="navds-chat__name">{name}</Detail>}
             {timestamp && (

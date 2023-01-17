@@ -3,4 +3,4 @@
 "@navikt/ds-react": patch
 ---
 
-flipToptext prop i Chat
+toptextPosition prop i Chat for horisontal plassering av navn og dato.
