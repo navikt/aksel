@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.0.15
+
+### Patch Changes
+
+- [#1748](https://github.com/navikt/Designsystemet/pull/1748) [`22dfd8e60`](https://github.com/navikt/Designsystemet/commit/22dfd8e60315c421749394d35e41f412a00a7593) Thanks [@KenAJoh](https://github.com/KenAJoh)! - toptextPosition prop i Chat for horisontal plassering av navn og dato.
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.15
+
 ## 2.0.14
 
 ### Patch Changes
