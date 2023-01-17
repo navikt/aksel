@@ -28,6 +28,12 @@ export const Metrikker = defineType({
     }),
     defineField({
       type: "number",
+      name: "pageviews",
+      title: "Sidevisninger",
+      ...config,
+    }),
+    defineField({
+      type: "number",
       name: "avgScrollLength",
       title: "Gjennomsnittlig scrolldybde",
       ...config,

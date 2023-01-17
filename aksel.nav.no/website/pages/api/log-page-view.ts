@@ -36,9 +36,8 @@ export default async function logPageView(
     await client.create({
       _type: "metrics",
       reference: { _ref: id, _type: "reference" },
-      referenceId: id,
-      pageviews: {
-        summary: 1,
+      pageviews: 1,
+      weeksObj: {
         weeks: [
           {
             week: format(new Date(), "yyyy-MM-dd"),
@@ -55,36 +54,23 @@ export default async function logPageView(
   }
 
   await client
-    .patch(`metrics-${id}`)
-    .setIfMissing({ "pageviews.weeks": [] })
-    .setIfMissing({ "pageviews.summary": 0 })
-    .inc({ "pageviews.summary": 1 })
+    .patch(metrics._id)
+    .setIfMissing({ "weeksObj.weeks": [] })
+    .setIfMissing({ pageviews: 0 })
+    .inc({ pageviews: 1 })
     .commit()
     .catch((err) => {
       console.error("Error:", err);
       return res.status(500).json({ message: "Error updating page" });
     });
 
-  const query = `*[_id == "metrics-${id}"][0]{
-    "weeks": pageviews.weeks,
-  }`;
-
-  // Fetch page weeks array to compare
-  const { weeks } = await client
-    .fetch(query)
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      console.error(err);
-      return res.status(500).json({ message: "Error fetching weeks" });
-    });
+  const { weeks } = metrics.weeksObj;
 
   if (weeks.length === 0) {
     // If weeks array is empty, add first week
     await client
-      .patch(`metrics-${id}`)
-      .prepend("pageviews.weeks", [
+      .patch(metrics._id)
+      .prepend("weekObj.weeks", [
         {
           week: format(new Date(), "yyyy-MM-dd"),
           views: 1,
@@ -102,9 +88,10 @@ export default async function logPageView(
     const lastWeek = weeks[weeks.length - 1].week;
     if (isSameWeek(new Date(lastWeek), new Date())) {
       // If last week is same as current week, increment views
+      console.log(metrics);
       await client
-        .patch(`metrics-${id}`)
-        .inc({ "pageviews.weeks[0].views": 1 })
+        .patch(metrics._id)
+        .inc({ "weeksObj.weeks[0].views": 1 })
         .commit()
         .catch((err) => {
           console.error("Error:", err);
@@ -115,8 +102,8 @@ export default async function logPageView(
     } else {
       // If last week is not same as current week, add new week
       await client
-        .patch(`metrics-${id}`)
-        .prepend("pageviews.weeks", [
+        .patch(metrics._id)
+        .prepend("weekObj.weeks", [
           {
             week: format(new Date(), "yyyy-MM-dd"),
             views: 1,
@@ -132,5 +119,5 @@ export default async function logPageView(
     }
   }
 
-  return res.status(200).json({ message: `Page with id: ${id} updated.` });
+  return res.status(200).json({ message: `Metrics with id: ${id} updated.` });
 }
