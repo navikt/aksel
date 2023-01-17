@@ -116,6 +116,57 @@ export const Position = () => {
   );
 };
 
+export const FlipToptext = () => {
+  return (
+    <div className="colgap">
+      <Chat
+        avatar="ON"
+        name="Ola Normann"
+        timestamp="01.01.21 14:00"
+        backgroundColor="rgba(255, 249, 240, 1)"
+        avatarBgColor="rgba(255, 236, 204, 1)"
+        flipToptext
+      >
+        <Chat.Bubble>
+          Adipisicing laborum est eu laborum est sit in commodo enim sint
+          laboris labore nisi ut.
+        </Chat.Bubble>
+      </Chat>
+      <Chat
+        avatar="KH"
+        name="Kari Høyli"
+        timestamp="01.01.21 14:32"
+        position="right"
+        backgroundColor="rgba(230, 240, 255, 1)"
+        avatarBgColor="rgba(204, 225, 255, 1)"
+        flipToptext
+      >
+        <Chat.Bubble>
+          Reprehenderit pariatur officia exercitation laboris.
+        </Chat.Bubble>
+        <Chat.Bubble>
+          Enim velit deserunt do quis. Eu fugiat magna esse dolore ad sunt sit
+          est dolore incididunt. Occaecat cupidatat magna.
+        </Chat.Bubble>
+      </Chat>
+      <Chat
+        avatar="ON"
+        name="Ola Normann"
+        timestamp="01.01.21 15:00"
+        backgroundColor="rgba(255, 249, 240, 1)"
+        avatarBgColor="rgba(255, 236, 204, 1)"
+      >
+        <Chat.Bubble flipToptext>
+          Exercitation irure Lorem cupidatat culpa anim cillum esse ullamco qui
+          dolore laborum et Lorem. Labore sunt duis id Lorem voluptate commodo
+          ea esse. Dolore esse aliqua proident ea ad commodo ut dolore voluptate
+          labore sunt aute.
+        </Chat.Bubble>
+      </Chat>
+    </div>
+  );
+};
+
 export const Avatar = () => {
   return (
     <Chat avatar={<Illustration />} timestamp="01.01.21 14:00">

@@ -77,6 +77,22 @@
   align-self: flex-end;
 }
 
+.navds-chat--left.navds-chat--flipped .navds-chat__top-text {
+  align-self: flex-end;
+}
+
+.navds-chat--right.navds-chat--flipped .navds-chat__top-text {
+  align-self: flex-start;
+}
+
+.navds-chat--left .navds-chat__top-text--flipped {
+  align-self: flex-end;
+}
+
+.navds-chat--right .navds-chat__top-text--flipped {
+  align-self: flex-start;
+}
+
 .navds-chat__name {
   font-weight: var(--a-font-weight-bold);
 }

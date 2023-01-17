@@ -33,6 +33,10 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    * @default "left"
    */
   position?: "left" | "right";
+  /**
+   * Flips hoizontal position of toptext
+   */
+  flipToptext?: boolean;
 }
 
 interface ChatComponent
@@ -53,6 +57,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       position = "left",
       avatarBgColor,
       backgroundColor,
+      flipToptext = false,
       ...rest
     },
     ref
@@ -60,7 +65,9 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
     return (
       <div
         ref={ref}
-        className={cl("navds-chat", className, `navds-chat--${position}`)}
+        className={cl("navds-chat", className, `navds-chat--${position}`, {
+          "navds-chat--flipped": flipToptext,
+        })}
         {...rest}
       >
         <BodyShort
