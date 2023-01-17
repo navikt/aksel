@@ -28,11 +28,12 @@ export default async function logPageView(
   }
 
   //check if metrics doucment with id exists in sanity
-  const metrics = await client.fetch(`*[_id == "metrics-${id}"][0]`);
+  const metrics = await client.fetch(
+    `*[_type=="metrics" && references("${id}")][0]`
+  );
 
   if (!metrics) {
     await client.create({
-      _id: `metrics-${id}`,
       _type: "metrics",
       reference: { _ref: id, _type: "reference" },
       referenceId: id,

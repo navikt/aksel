@@ -78,7 +78,7 @@ export const usePageView = (router: Router, pageProps: any) => {
       }
       logPageView(e, data, first);
       try {
-        if (isProduction && isForside) {
+        if (isForside) {
           fetch(`/api/log-page-view?id=${pageId}`);
         }
       } catch (error) {
