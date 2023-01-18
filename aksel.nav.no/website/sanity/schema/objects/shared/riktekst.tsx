@@ -1,4 +1,5 @@
 import { ExternalLink, FileContent, Link } from "@navikt/ds-icons";
+import { BoldIcon, CodeIcon, ItalicIcon, OlistIcon } from "@sanity/icons";
 import { KBD } from "@sanity/ui";
 import React from "react";
 import { allArticleDocsRef } from "../../../config";
@@ -18,16 +19,33 @@ export const block = {
   type: "block",
   styles: [...styles],
   lists: [
-    { title: "Bullet-liste", value: "bullet" },
-    { title: "Nummerert-liste", value: "number" },
+    {
+      title: "Bullet-liste",
+      value: "bullet",
+      blockEditor: { icon: () => <OlistIcon aria-label="Ul-liste" /> },
+    },
+    {
+      title: "Nummerert-liste",
+      value: "number",
+      blockEditor: { icon: () => <OlistIcon aria-label="Ol-liste" /> },
+    },
   ],
   marks: {
     decorators: [
-      { title: "Strong", value: "strong" },
-      { title: "Italic", value: "em" },
+      {
+        title: "Strong",
+        value: "strong",
+        blockEditor: { icon: () => <BoldIcon aria-label="Bold" /> },
+      },
+      {
+        title: "Italic",
+        value: "em",
+        blockEditor: { icon: () => <ItalicIcon aria-label="Italic" /> },
+      },
       {
         title: "Inline-Kode",
         value: "code",
+        blockEditor: { icon: () => <CodeIcon aria-label="Kode" /> },
       },
       {
         title: "KBD",
