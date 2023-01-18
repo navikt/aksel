@@ -1,19 +1,6 @@
+import { getWeek } from "date-fns";
 import { defineField, defineType } from "sanity";
 import { allDocsRef } from "../../config";
-
-const config = {
-  description: "Bare synlig for utviklere",
-  readOnly: true,
-  hidden: ({ currentUser }) => isDeveloper(currentUser),
-};
-
-const configCollapsed = {
-  ...config,
-  options: {
-    collapsible: true,
-    collapsed: true,
-  },
-};
 
 export const Metrikker = defineType({
   title: "Metrikker",
@@ -25,30 +12,35 @@ export const Metrikker = defineType({
       name: "reference",
       title: "Referanse",
       to: allDocsRef,
+      readOnly: true,
     }),
     defineField({
       type: "number",
       name: "pageviews",
       title: "Sidevisninger",
-      ...config,
+      readOnly: true,
     }),
     defineField({
       type: "number",
       name: "avgScrollLength",
       title: "Gjennomsnittlig scrolldybde %",
-      ...config,
+      readOnly: true,
     }),
     defineField({
       type: "number",
       name: "avgTime",
       title: "Gjennomsnittlig tid på siden",
-      ...config,
+      readOnly: true,
     }),
     defineField({
       type: "object",
       name: "weeksObj",
       title: "Uker",
-      ...configCollapsed,
+      readOnly: true,
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
       fields: [
         defineField({
           name: "weeks",
@@ -86,8 +78,10 @@ export const Metrikker = defineType({
                 prepare(selection) {
                   const { week, views, scrollLength, time } = selection;
                   return {
-                    title: `Week: ${week}`,
-                    subtitle: `Views: ${views} | Scroll: ${scrollLength}% | Time: ${time}s`,
+                    title: `Uke: ${getWeek(new Date(week))} | År: ${new Date(
+                      week
+                    ).getFullYear()}`,
+                    subtitle: `Visninger: ${views} | Scroll: ${scrollLength}% | Tid: ${time}s`,
                   };
                 },
               },
