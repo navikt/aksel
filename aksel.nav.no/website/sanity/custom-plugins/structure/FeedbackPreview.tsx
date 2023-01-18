@@ -15,7 +15,6 @@ export function FeedbackView(props) {
   const schema = useSchema();
 
   const schemaType = schema.get("aksel_feedback");
-  console.log(schemaType);
 
   const client = useClient({ apiVersion: "2021-06-07" });
   const { data, error, isValidating } = useSWR(
@@ -68,17 +67,23 @@ export function FeedbackView(props) {
               <li key={x._id}>
                 <Card flex={1}>
                   <IntentButton
+                    key={x._id}
                     intent="edit"
-                    mode="bleed"
+                    mode="ghost"
                     padding={1}
-                    radius={2}
+                    radius={0}
                     params={{
                       type: "aksel_feedback",
                       id: getPublishedId(x._id),
                     }}
                     style={{ width: "100%" }}
                   >
-                    <Preview schemaType={schemaType} value={x} key={x._id} />
+                    <Preview
+                      schemaType={schemaType}
+                      value={x}
+                      key={x._id}
+                      layout="default"
+                    />
                   </IntentButton>
                 </Card>
               </li>
@@ -96,12 +101,12 @@ export function FeedbackView(props) {
                       <li key={x._id}>
                         <Card flex={1}>
                           <IntentButton
-                            intent=""
+                            intent="edit"
                             mode="bleed"
                             padding={1}
                             radius={2}
                             params={{
-                              type: schemaType,
+                              type: "aksel_feedback",
                               id: getPublishedId(x._id),
                             }}
                             style={{ width: "100%" }}

@@ -343,6 +343,7 @@ export const getStaticProps = async ({
       komigang,
       slug: "/",
       preview,
+      id: page?._id ?? "",
     },
     revalidate: 60,
   };
