@@ -72,6 +72,20 @@ export const Metrikker = defineType({
                   type: "number",
                 },
               ],
+              preview: {
+                select: {
+                  week: "week",
+                  views: "views",
+                  scrollLength: "scrollLength",
+                },
+                prepare(selection) {
+                  const { week, views, scrollLength } = selection;
+                  return {
+                    title: `Week: ${week}`,
+                    subtitle: `Views: ${views} | Scroll: ${scrollLength}%`,
+                  };
+                },
+              },
             },
           ],
         }),
