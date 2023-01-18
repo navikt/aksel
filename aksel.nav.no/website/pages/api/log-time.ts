@@ -9,39 +9,37 @@ export default async function logTime(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id, current, views, time } = req.query;
+  const { id, time } = req.query;
 
-  if (!(id && current && views && time)) {
+  if (!(id && time)) {
     return res.status(400).json({
-      message: "Missing required parameter(s). id, current, length or views",
+      message: "Missing required parameter(s). id or time",
     });
   }
 
-  if (Number(time) <= 420) {
-    const newAverage = Math.round(
-      (Number(time) + Number(current)) / Number(views)
-    );
+  const metrics = await client.fetch(
+    `*[_type=="metrics" && references("${id}")][0]`
+  );
 
-    await client
-      .patch(id as string)
-      .setIfMissing({ "metrics.avgTime": 0 })
-      .set({ "metrics.avgTime": newAverage })
-      .commit()
-      .catch((err) => {
-        console.error("Error:", err);
-        return res.status(500).json({ message: "Error updating page" });
-      });
-  } else {
-    await client
-      .patch(id as string)
-      .setIfMissing({ "metrics.inactiveCount": 0 })
-      .inc({ "metrics.inactiveCount": 1 })
-      .commit()
-      .catch((err) => {
-        console.error("Error:", err);
-        return res.status(500).json({ message: "Error updating page" });
-      });
+  if (!metrics) {
+    return res.status(400).json({
+      message: `Metrics document with id: ${id} does not exist`,
+    });
   }
+
+  //const { avgTime, pageviews } = metrics;
+
+  const newAverage = 5;
+
+  await client
+    .patch(metrics._id)
+    .setIfMissing({ "metrics.avgTime": 0 })
+    .set({ "metrics.avgTime": newAverage })
+    .commit()
+    .catch((err) => {
+      console.error("Error:", err);
+      return res.status(500).json({ message: "Error updating page" });
+    });
 
   return res.status(200).json({ message: `Page with id: ${id} updated.` });
 }

@@ -126,7 +126,7 @@ export const usePageView = (router: Router, pageProps: any) => {
   const logTimeSpent = useCallback(
     (timeSpent: number) => {
       try {
-        if (isProduction() && isForside) {
+        if (isProduction() && isForside && timeSpent <= 420) {
           const { metrics } = pageProps.page;
 
           fetch(
