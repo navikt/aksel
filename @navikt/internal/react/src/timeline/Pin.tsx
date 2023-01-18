@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import React, { forwardRef, ReactNode, useMemo, useRef, useState } from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
+import { TimelineComponentTypes } from "./utils/types.internal";
 
 export interface PinProps {
   /**
@@ -19,7 +20,7 @@ export interface PinType
   extends React.ForwardRefExoticComponent<
     PinProps & React.RefAttributes<HTMLButtonElement>
   > {
-  componentType: string;
+  componentType: TimelineComponentTypes;
 }
 
 export const Pin = forwardRef<HTMLButtonElement, PinProps>(

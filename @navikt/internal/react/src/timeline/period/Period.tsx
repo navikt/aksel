@@ -1,6 +1,7 @@
 import React, { forwardRef, ReactNode } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
+import { TimelineComponentTypes } from "../utils/types.internal";
 import ClickablePeriod from "./ClickablePeriod";
 import NonClickablePeriod from "./NonClickablePeriod";
 
@@ -59,7 +60,7 @@ export interface PeriodType
   extends React.ForwardRefExoticComponent<
     PeriodPropsWrapper & React.RefAttributes<HTMLDivElement | HTMLButtonElement>
   > {
-  componentType: string;
+  componentType: TimelineComponentTypes;
 }
 
 export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(

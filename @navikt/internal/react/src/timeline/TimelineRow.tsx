@@ -5,7 +5,10 @@ import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import Period from "./period/Period";
-import { PositionedPeriod } from "./utils/types.internal";
+import {
+  PositionedPeriod,
+  TimelineComponentTypes,
+} from "./utils/types.internal";
 
 export interface TimelineRowProps
   extends React.HTMLAttributes<HTMLOListElement> {
@@ -28,7 +31,7 @@ export interface TimelineRowType
   extends React.ForwardRefExoticComponent<
     TimelineRowProps & React.RefAttributes<HTMLOListElement>
   > {
-  componentType: string;
+  componentType: TimelineComponentTypes;
 }
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(

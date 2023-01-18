@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+export type TimelineComponentTypes = "row" | "pin" | "period";
+
 export type PeriodStatus =
   | "success"
   | "warning"
