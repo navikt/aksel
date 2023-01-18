@@ -10,23 +10,24 @@ import {
 import React, { forwardRef } from "react";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 
-export interface ZoomButtonProps {
+export interface TimelineZoomButtonProps {
   /**
-   * Button text
+   * e.g 3mnd, 6mnd etc
    */
   label: string;
   /**
-   * If the zoom value should be in months or years
+   * Zoom interval in months or years
    */
   interval: "month" | "year";
   /**
    * How many units of the interval that will be applied
+   * e.g interval="month" + count={3} equals 3 months
    */
   count: number;
 }
 
 export type ZoomButtonType = React.ForwardRefExoticComponent<
-  ZoomButtonProps & React.RefAttributes<HTMLButtonElement>
+  TimelineZoomButtonProps & React.RefAttributes<HTMLButtonElement>
 >;
 
 export const ZoomButton: ZoomButtonType = forwardRef(

@@ -5,25 +5,25 @@ import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";
 
-export interface PinProps {
+export interface TimelinePinProps {
   /**
    * Date position for the pin.
    */
   date: Date;
   /**
-   * The content for Pin Popover.
+   * Content in Pin Popover.
    */
   children?: ReactNode;
 }
 
 export interface PinType
   extends React.ForwardRefExoticComponent<
-    PinProps & React.RefAttributes<HTMLButtonElement>
+    TimelinePinProps & React.RefAttributes<HTMLButtonElement>
   > {
   componentType: TimelineComponentTypes;
 }
 
-export const Pin = forwardRef<HTMLButtonElement, PinProps>(
+export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
   ({ date, children, ...rest }, ref) => {
     const { startDate, endDate, direction } = useTimelineContext();
     const [open, setOpen] = useState(false);

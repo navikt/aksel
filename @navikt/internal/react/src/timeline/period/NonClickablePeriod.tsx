@@ -1,9 +1,9 @@
 import React from "react";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
-import { PeriodProps } from "./Period";
+import { PeriodProps } from "./index";
 import cl from "clsx";
 
-interface NonClickablePeriodProps extends PeriodProps {
+interface TimelineNonClickablePeriodProps extends PeriodProps {
   periodRef?: React.ForwardedRef<HTMLDivElement>;
 }
 
@@ -19,7 +19,7 @@ const NonClickablePeriod = ({
   statusLabel,
   restProps,
   periodRef,
-}: NonClickablePeriodProps) => {
+}: TimelineNonClickablePeriodProps) => {
   return (
     <div
       ref={periodRef}

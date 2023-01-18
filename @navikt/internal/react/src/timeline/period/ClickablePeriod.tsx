@@ -5,9 +5,9 @@ import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
-import { PeriodProps } from "./Period";
+import { PeriodProps } from "./index";
 
-interface ClickablePeriodProps extends PeriodProps {
+interface TimelineClickablePeriodProps extends PeriodProps {
   onSelectPeriod?: () => void;
   isActive?: boolean;
   periodRef: React.ForwardedRef<HTMLButtonElement>;
@@ -29,7 +29,7 @@ const ClickablePeriod = React.memo(
     statusLabel,
     restProps,
     periodRef,
-  }: ClickablePeriodProps) => {
+  }: TimelineClickablePeriodProps) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const [selected, setSelected] = useState(false);
     const { index } = useRowContext();

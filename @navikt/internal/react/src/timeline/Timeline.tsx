@@ -8,24 +8,26 @@ import {
   useLatestDate,
   useTimelineRows,
 } from "./hooks/useTimelineRows";
-import Period, { PeriodType } from "./period/Period";
+import Period, { PeriodType } from "./period";
 import Pin, { PinType } from "./Pin";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { parseRows } from "./utils/timeline";
 import Zoom, { ZoomType } from "./zoom";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode | React.ReactNode[];
+  children: React.ReactNode;
   /**
-   * Decides the startingpoint for the timeline. Defaults to the earliest date among the timeline periods.
+   * Decides startingpoint in timeline.
+   * Defaults to earliest date among the timeline periods.
    */
   startDate?: Date;
   /**
-   Decides the end-date for the timeline. Defaults to the latest date among the timeline periods.
+   * Decides end-date for timeline.
+   * Defaults to the latest date among the timeline periods.
    */
   endDate?: Date;
   /**
-   * Decides the direction which the periods are sorted. "Left" equals ascending fro left.
+   * Decides direction which periods are sorted/displayed. "left" ascends from earliest date on left.
    * @default "left"
    */
   direction?: "left" | "right";

@@ -5,7 +5,7 @@ import { TimelineComponentTypes } from "../utils/types.internal";
 import ClickablePeriod from "./ClickablePeriod";
 import NonClickablePeriod from "./NonClickablePeriod";
 
-export interface PeriodPropsWrapper
+export interface TimelinePeriodProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Period start date.
@@ -16,16 +16,17 @@ export interface PeriodPropsWrapper
    */
   end: Date;
   /**
-   * Icon displayed in the left side of the period.
+   * Icon for easier visual identification.
    */
-  icon?: ReactNode;
+  icon?: React.ReactNode;
   /**
    * Period status.
    * @default "neutral"
    */
   status?: "success" | "warning" | "danger" | "info" | "neutral";
   /**
-   * Status label
+   * Status label for screen-readers
+   * e.g "Sykemeldt", "foreldrepermisjon"
    */
   statusLabel?: string;
   /**
@@ -33,11 +34,12 @@ export interface PeriodPropsWrapper
    */
   onSelectPeriod?: () => void;
   /**
-   * Popover content when clicking on the period.
+   * Content displayed in Popover on click.
    */
   children?: ReactNode;
   /**
-   * Period is active
+   * Visual active inidcation on period
+   * @note Make sure only one period is active at a time
    */
   isActive?: boolean;
 }
@@ -58,13 +60,14 @@ export interface PeriodProps {
 
 export interface PeriodType
   extends React.ForwardRefExoticComponent<
-    PeriodPropsWrapper & React.RefAttributes<HTMLDivElement | HTMLButtonElement>
+    TimelinePeriodProps &
+      React.RefAttributes<HTMLDivElement | HTMLButtonElement>
   > {
   componentType: TimelineComponentTypes;
 }
 
-export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
-  ({ end, icon }, ref) => {
+export const Period = forwardRef<HTMLDivElement, TimelinePeriodProps>(
+  ({ icon }, ref) => {
     const { periods } = useRowContext();
     const { periodId, restProps } = usePeriodContext();
 

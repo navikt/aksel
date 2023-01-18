@@ -4,7 +4,7 @@ import React, { forwardRef, ReactNode } from "react";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";
-import Period from "./period/Period";
+import Period from "./period";
 import {
   PositionedPeriod,
   TimelineComponentTypes,
@@ -17,12 +17,12 @@ export interface TimelineRowProps
    */
   label: string;
   /**
-   * Heading level for the label e.g h1, h2, h3...
+   * Heading level for the label e.g h2, h3...
    * @default "h3"
    */
   headingTag?: "h2" | "h3" | "h4" | "h5" | "h6";
   /**
-   * Icon which will be displayed next to label
+   * Icon next to label
    */
   icon?: ReactNode;
 }
