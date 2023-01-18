@@ -1,5 +1,6 @@
 import { noCdnClient } from "@/sanity-client";
 import { NextApiRequest, NextApiResponse } from "next";
+import { calcNewAverage } from "./log-scroll";
 
 const token = process.env.SANITY_WRITE_KEY;
 
@@ -27,14 +28,23 @@ export default async function logTime(
     });
   }
 
-  //const { avgTime, pageviews } = metrics;
+  const { avgTime, pageviews, weeksObj } = metrics;
 
-  const newAverage = 5;
+  const currrentWeek = weeksObj.weeks[0];
+
+  const newAverage = calcNewAverage(avgTime, pageviews, Number(time));
 
   await client
     .patch(metrics._id)
-    .setIfMissing({ "metrics.avgTime": 0 })
-    .set({ "metrics.avgTime": newAverage })
+    .setIfMissing({ avgTime: 0 })
+    .set({ avgTime: newAverage })
+    .set({
+      "weeksObj.weeks[0].time": calcNewAverage(
+        currrentWeek.time,
+        currrentWeek.views,
+        Number(time)
+      ),
+    })
     .commit()
     .catch((err) => {
       console.error("Error:", err);

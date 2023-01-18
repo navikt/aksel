@@ -44,6 +44,7 @@ export default async function logPageView(
             views: 1,
             _key: new Date().getTime().toString(),
             scrollLength: 0,
+            time: 0,
           },
         ],
       },
@@ -88,6 +89,7 @@ export default async function logPageView(
           week: format(new Date(), "yyyy-MM-dd"),
           views: 1,
           scrollLength: 0,
+          time: 0,
         },
       ])
       .commit({

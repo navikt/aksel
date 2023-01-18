@@ -69,7 +69,7 @@ export default async function logPageScroll(
   return res.status(200).json({ message: `Metrics with id: ${id} updated.` });
 }
 
-const calcNewAverage = (
+export const calcNewAverage = (
   oldAverage: number,
   occurances: number,
   newValue: number

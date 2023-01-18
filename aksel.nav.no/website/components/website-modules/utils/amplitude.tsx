@@ -126,20 +126,14 @@ export const usePageView = (router: Router, pageProps: any) => {
   const logTimeSpent = useCallback(
     (timeSpent: number) => {
       try {
-        if (isProduction() && isForside && timeSpent <= 420) {
-          const { metrics } = pageProps.page;
-
-          fetch(
-            `/api/log-time?id=${pageId}&current=${
-              metrics?.avgTime || 0
-            }&views=${metrics?.pageviews?.summary || 1}&time=${timeSpent}`
-          );
+        if (isForside && timeSpent <= 420) {
+          fetch(`/api/log-time?id=${pageId}&time=${timeSpent}`);
         }
       } catch (error) {
         isDevelopment && console.error(error);
       }
     },
-    [pageProps, pageId, isForside]
+    [pageId, isForside]
   );
 
   useEffect(() => {
