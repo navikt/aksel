@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from "react";
+import React, { forwardRef } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { TimelineComponentTypes } from "../utils/types.internal";
@@ -36,7 +36,7 @@ export interface TimelinePeriodProps
   /**
    * Content displayed in Popover on click.
    */
-  children?: ReactNode;
+  children?: React.ReactNode;
   /**
    * Visual active inidcation on period
    * @note Make sure only one period is active at a time
@@ -52,8 +52,8 @@ export interface PeriodProps {
   direction: string;
   width: Number;
   left: Number;
-  icon?: ReactNode;
-  children?: ReactNode;
+  icon?: React.ReactNode;
+  children?: React.ReactNode;
   statusLabel?: string;
   restProps?: any;
 }

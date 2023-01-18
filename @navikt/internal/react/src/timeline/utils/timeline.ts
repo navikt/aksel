@@ -4,7 +4,7 @@ import { Period } from "./types.external";
 
 type ParsedChild = {
   label?: string;
-  icon?: ReactNode;
+  icon?: React.ReactNode;
   headingTag: string;
   periods: Omit<Period, "id" | "endInclusive">[];
   restProps: any;
@@ -13,7 +13,7 @@ type ParsedChild = {
 
 export const parseRows = (rowChildren: ReactNode[]) => {
   let parsedChildren: ParsedChild[] = [];
-  rowChildren?.forEach((r: ReactNode) => {
+  rowChildren?.forEach((r: React.ReactNode) => {
     let periods = [];
     if (React.isValidElement(r) && r?.props?.children) {
       if (Array.isArray(r.props.children)) {

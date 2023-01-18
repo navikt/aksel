@@ -1,6 +1,6 @@
 import { mergeRefs, Popover } from "@navikt/ds-react";
 import { format } from "date-fns";
-import React, { forwardRef, ReactNode, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";
@@ -13,7 +13,7 @@ export interface TimelinePinProps {
   /**
    * Content in Pin Popover.
    */
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
 export interface PinType

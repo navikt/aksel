@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React from "react";
 
 export type PeriodStatus =
   | "success"
@@ -21,8 +21,8 @@ export interface Period {
   endInclusive: Date;
   status?: PeriodStatus;
   onSelectPeriod?: () => void;
-  icon?: ReactNode;
-  children?: ReactNode;
+  icon?: React.ReactNode;
+  children?: React.ReactNode;
   end: Date;
   isActive?: boolean;
   statusLabel?: string;
@@ -34,7 +34,7 @@ export interface PositionedPeriod extends Period, Positioned {
   cropped?: "left" | "right" | "both";
   disabled?: boolean;
   className?: string;
-  hoverLabel?: ReactNode;
+  hoverLabel?: React.ReactNode;
   infoPin?: boolean;
   start: Date;
 }

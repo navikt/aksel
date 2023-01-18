@@ -1,6 +1,6 @@
 import { BodyShort } from "@navikt/ds-react";
 import { format } from "date-fns";
-import React, { forwardRef, ReactNode } from "react";
+import React, { forwardRef } from "react";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";
@@ -24,7 +24,7 @@ export interface TimelineRowProps
   /**
    * Icon next to label
    */
-  icon?: ReactNode;
+  icon?: React.ReactNode;
 }
 
 export interface TimelineRowType

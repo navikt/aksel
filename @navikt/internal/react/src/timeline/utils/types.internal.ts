@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React from "react";
 
 export type TimelineComponentTypes = "row" | "pin" | "period";
 
@@ -22,8 +22,8 @@ export interface Period {
   endInclusive: Date;
   status?: PeriodStatus;
   onSelectPeriod?: () => void;
-  icon?: ReactNode;
-  children?: ReactNode;
+  icon?: React.ReactNode;
+  children?: React.ReactNode;
   isActive?: boolean;
 }
 
@@ -33,7 +33,7 @@ export interface PositionedPeriod extends Period, Positioned {
   cropped?: "left" | "right" | "both";
   disabled?: boolean;
   className?: string;
-  hoverLabel?: ReactNode;
+  hoverLabel?: React.ReactNode;
   infoPin?: boolean;
   end: Date;
   statusLabel?: string;
@@ -54,7 +54,7 @@ export interface InternalSimpleTimeline {
   label: string;
   id: string;
   periods: PositionedPeriod[];
-  icon?: ReactNode;
+  icon?: React.ReactNode;
   headingTag: "h2" | "h3" | "h4" | "h5" | "h6";
   restProps: any;
   ref: any;
