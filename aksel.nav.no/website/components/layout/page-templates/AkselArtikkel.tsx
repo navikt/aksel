@@ -54,14 +54,17 @@ const AkselArtikkelTemplate = ({
               : `Relevante artikler`}
           </Heading>
           <div className="card-grid-3-1 mt-6 px-4">
-            {data.relevante_artikler.map((x: any) => (
-              <ArtikkelCard {...x} key={x._id} />
-            ))}
+            {data.relevante_artikler.map((x: any) =>
+              x && x?._id ? <ArtikkelCard {...x} key={x._id} /> : null
+            )}
           </div>
         </div>
       </div>
     </aside>
   );
+
+  const filteredTema =
+    hasTema && data?.tema?.filter((x: any) => x?.title && x?.slug);
 
   return (
     <>
@@ -136,7 +139,7 @@ const AkselArtikkelTemplate = ({
           </div>
           {hasTema && (
             <div className="mt-8 flex flex-wrap gap-2">
-              {data.tema.map(({ title, slug }: any) => (
+              {filteredTema.map(({ title, slug }: any) => (
                 <span key={title}>
                   <NextLink
                     key={title}
