@@ -45,7 +45,9 @@ interface UseMonthPickerValue {
   /**
    * Use: <MonthPicker.Input {...inputProps} />
    */
-  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value">;
+  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value"> & {
+    ref: React.RefObject<HTMLInputElement>;
+  };
   /**
    * Currently selected Date
    * Up to user to validate value and extract month
@@ -101,7 +103,7 @@ export const useMonthpicker = (
   const today = new Date();
   const locale = getLocaleFromString(_locale);
 
-  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const monthpickerRef = useRef<HTMLDivElement>(null);
 
   // Initialize states

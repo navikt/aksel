@@ -1,6 +1,6 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import isWeekend from "date-fns/isWeekend";
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { DateRange, isMatch } from "react-day-picker";
 import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
@@ -71,14 +71,14 @@ interface UseRangeDatepickerValue {
   fromInputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
-  >;
+  > & { ref: React.RefObject<HTMLInputElement> };
   /**
    * Use: <DatePicker.Input label="to" {...toInputProps}/>
    */
   toInputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
-  >;
+  > & { ref: React.RefObject<HTMLInputElement> };
   /**
    * Resets all states (callback)
    */
@@ -206,8 +206,8 @@ export const useRangeDatepicker = (
 
   const locale = getLocaleFromString(_locale);
 
-  const inputRefTo = useRef<HTMLDivElement>(null);
-  const inputRefFrom = useRef<HTMLDivElement>(null);
+  const inputRefTo = useRef<HTMLInputElement>(null);
+  const inputRefFrom = useRef<HTMLInputElement>(null);
   const datePickerRef = useRef<HTMLDivElement | null>(null);
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);

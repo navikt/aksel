@@ -59,7 +59,10 @@ interface UseDatepickerValue {
   /**
    * Use: <DatePicker.Input {...inputProps}/>
    */
-  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "onBlur" | "value">;
+  inputProps: Pick<
+    DateInputProps,
+    "onChange" | "onFocus" | "onBlur" | "value"
+  > & { ref: React.RefObject<HTMLInputElement> };
   /**
    * Resets all states (callback)
    */
