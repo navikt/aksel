@@ -366,8 +366,11 @@ export const defaultDocumentNode = (
       S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
     ]);
   }
-  return S.document().views([
-    S.view.form(),
-    S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
-  ]);
+  if (schemaType === "aksel_forside") {
+    return S.document().views([
+      S.view.form(),
+      S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
+    ]);
+  }
+  return S.document().views([S.view.form()]);
 };

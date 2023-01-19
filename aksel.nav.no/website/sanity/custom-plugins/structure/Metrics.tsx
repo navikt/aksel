@@ -62,7 +62,9 @@ export const Metrics = ({ documentId }) => {
   const parsedWeeks = weeksObj?.weeks?.map((week: any) => {
     return {
       ...week,
-      weekNumber: getWeek(new Date(week.week)),
+      weekNumber: `${getWeek(new Date(week.week))}/${new Date(
+        week.week
+      ).toLocaleDateString("no", { year: "2-digit" })}`,
       Sidevisninger: week.views,
       Scroll: week.scrollLength,
     };
