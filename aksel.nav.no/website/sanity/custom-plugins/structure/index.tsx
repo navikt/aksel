@@ -23,6 +23,7 @@ import {
 import { FeedbackPanes } from "./feedback";
 import { FeedbackView } from "./FeedbackPreview";
 import { GodPraksisPanes } from "./god-praksis";
+import Metrics from "./Metrics";
 import { PanesWithCount } from "./with-count";
 
 /* import { WebPreview, JsonView } from './previews' */
@@ -362,15 +363,11 @@ export const defaultDocumentNode = (
         .component(FeedbackView)
         .icon(CommentIcon)
         .title("Tilbakemeldinger"),
-      S.view.component(Test).icon(ChartUpwardIcon).title("Metrikker"),
+      S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
     ]);
   }
   return S.document().views([
     S.view.form(),
-    S.view.component(Test).icon(ChartUpwardIcon).title("Metrikker"),
+    S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
   ]);
-};
-
-const Test = () => {
-  return <div>test</div>;
 };

@@ -36,7 +36,7 @@ export const Metrikker = defineType({
       type: "object",
       name: "weeksObj",
       title: "Uker",
-      readOnly: true,
+
       options: {
         collapsible: true,
         collapsed: true,

@@ -1,5 +1,5 @@
 import { Down, Eye } from "@navikt/ds-icons";
-import { Table, ToggleGroup } from "@navikt/ds-react";
+import { Loader, Table, ToggleGroup } from "@navikt/ds-react";
 import { Stack } from "@sanity/ui";
 import { getWeek, getYear } from "date-fns";
 import { useRef, useState } from "react";
@@ -12,17 +12,56 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useFormValue } from "sanity";
+import { useClient } from "sanity";
+import useSWR from "swr";
 
-export const Metrics = () => {
-  const totalViews: any = useFormValue(["metrics", "pageviews", "summary"]);
-  const weeks: any = useFormValue(["metrics", "pageviews", "weeks"]);
-  const avgScrollLength = useFormValue(["metrics", "avgScrollLength"]);
-  const avgTime = useFormValue(["metrics", "avgTime"]);
-  const [selected, setSelected] = useState("Sidevisninger");
+export const Metrics = ({ documentId }) => {
+  const client = useClient({ apiVersion: "2021-06-07" });
   const toggleRef = useRef(null);
+  const [selected, setSelected] = useState("Sidevisninger");
+  const { data, error, isValidating } = useSWR(
+    `*[_type == "metrics" && references($id)]`,
+    (query) =>
+      client.fetch(query, {
+        id: documentId,
+      })
+  );
 
-  const parsedWeeks = weeks?.map((week: any) => {
+  if (isValidating) {
+    return (
+      <div className="grid place-items-center px-6">
+        <div className="mx-auto mt-24">
+          <Loader size="xlarge" variant="neutral" />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="grid place-items-center">
+        <div className="mx-auto mt-24 px-6">
+          En feil oppstod, prøv å laste side på nytt eller kontakt utvikler.
+        </div>
+      </div>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <div className="grid place-items-center">
+        <div className="mx-auto mt-24 px-6">
+          Denne siden har ingen metrikker.
+        </div>
+      </div>
+    );
+  }
+
+  const { pageviews, weeksObj, avgScrollLength, avgTime } = data[0];
+
+  console.log(data);
+
+  const parsedWeeks = weeksObj?.weeks?.map((week: any) => {
     return {
       ...week,
       weekNumber: getWeek(new Date(week.week)),
@@ -38,12 +77,15 @@ export const Metrics = () => {
   return (
     <Stack>
       <dl className="mb-8 flex flex-wrap justify-center gap-y-4">
-        {totalViews && (
-          <Metric description="Totale sidevisninger" value={totalViews} />
+        {pageviews && (
+          <Metric description="Totale sidevisninger" value={pageviews} />
         )}
 
-        {weeks && (
-          <Metric description="Antall uker målt" value={weeks.length} />
+        {weeksObj?.weeks && (
+          <Metric
+            description="Antall uker målt"
+            value={weeksObj.weeks.length}
+          />
         )}
 
         {avgScrollLength && (

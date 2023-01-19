@@ -24,8 +24,4 @@ export const groups = [
     name: "seo",
     title: "SEO",
   },
-  {
-    name: "metrics",
-    title: "Statistikk",
-  },
 ];

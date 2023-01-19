@@ -1,7 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { groups } from "./presets";
 import { artikkelPreview } from "./presets/artikkel-preview";
-import { metrics } from "./presets/metrics";
 import { oppdateringsvarsel } from "./presets/oppdateringsvarsel";
 import { SEOFields } from "./presets/seo";
 import { skrivehjelp } from "./presets/skrivehjelp";
@@ -33,6 +32,5 @@ export const TestDoc = defineType({
     defineField({ type: "riktekst_standard", name: "content" }),
     SEOFields,
     skrivehjelp,
-    metrics,
   ],
 });
