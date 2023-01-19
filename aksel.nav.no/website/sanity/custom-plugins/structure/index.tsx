@@ -3,6 +3,7 @@ import {
   AccessDeniedIcon,
   BookIcon,
   BulbOutlineIcon,
+  ChartUpwardIcon,
   CommentIcon,
   JoystickIcon,
   OkHandIcon,
@@ -335,7 +336,11 @@ export const resolveProductionUrl = (doc) => {
   }
 };
 
-export const defaultDocumentNode = (S, { schemaType, getClient }) => {
+export const defaultDocumentNode = (
+  S,
+  { schemaType, documentId, getClient }
+) => {
+  console.log("S", documentId);
   if (
     [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
       schemaType
@@ -358,7 +363,15 @@ export const defaultDocumentNode = (S, { schemaType, getClient }) => {
         .component(FeedbackView)
         .icon(CommentIcon)
         .title("Tilbakemeldinger"),
+      S.view.component(Test).icon(ChartUpwardIcon).title("Metrikker"),
     ]);
   }
-  return S.document().views([S.view.form()]);
+  return S.document().views([
+    S.view.form(),
+    S.view.component(Test).icon(ChartUpwardIcon).title("Metrikker"),
+  ]);
+};
+
+const Test = () => {
+  return <div>test</div>;
 };
