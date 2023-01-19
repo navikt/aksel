@@ -78,7 +78,7 @@ export const usePageView = (router: Router, pageProps: any) => {
       }
       logPageView(e, data, first);
       try {
-        if (isForside) {
+        if (isForside && isProduction()) {
           fetch(`/api/log-page-view?id=${pageId}`);
         }
       } catch (error) {
@@ -88,45 +88,39 @@ export const usePageView = (router: Router, pageProps: any) => {
     [pageProps, pageId, isForside]
   );
 
-  /* https://stackoverflow.com/questions/2387136/cross-browser-method-to-determine-vertical-scroll-percentage-in-javascript */
-  const logScroll = useCallback(() => {
-    function getScrollPercent() {
-      const h = document.documentElement,
-        b = document.body,
-        st = "scrollTop",
-        sh = "scrollHeight";
-      return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
-    }
-    if (
-      document === undefined ||
-      window?.location?.pathname?.startsWith?.("/eksempler")
-    ) {
-      return;
-    }
-
-    const scrollD = Math.round(getScrollPercent() / 10) * 10;
-    if (isNaN(scrollD)) {
-      return;
-    }
-
-    logAmplitudeEvent(AmplitudeEvents.scroll, {
-      side: window.location.pathname,
-      prosent: scrollD,
-    });
-
-    try {
-      if (isForside) {
-        fetch(`/api/log-scroll?id=${pageId}&length=${scrollD}`);
+  const logScroll = useCallback(
+    (highestPercent: number) => {
+      if (
+        document === undefined ||
+        window?.location?.pathname?.startsWith?.("/eksempler")
+      ) {
+        return;
       }
-    } catch (error) {
-      isDevelopment && console.error(error);
-    }
-  }, [pageId, isForside]);
+
+      if (isNaN(highestPercent)) {
+        return;
+      }
+
+      logAmplitudeEvent(AmplitudeEvents.scroll, {
+        side: window.location.pathname,
+        prosent: highestPercent,
+      });
+
+      try {
+        if (isForside && isProduction()) {
+          fetch(`/api/log-scroll?id=${pageId}&length=${highestPercent}`);
+        }
+      } catch (error) {
+        isDevelopment && console.error(error);
+      }
+    },
+    [pageId, isForside]
+  );
 
   const logTimeSpent = useCallback(
     (timeSpent: number) => {
       try {
-        if (isForside && timeSpent <= 420) {
+        if (isForside && timeSpent <= 420 && isProduction()) {
           fetch(`/api/log-time?id=${pageId}&time=${timeSpent}`);
         }
       } catch (error) {
@@ -139,16 +133,39 @@ export const usePageView = (router: Router, pageProps: any) => {
   useEffect(() => {
     const startTime = new Date().getTime();
 
+    let highestPercent = 0;
+    let timeoutId = null;
+
+    //get highest scroll percent
+    function scrollListener() {
+      timeoutId = setTimeout(() => {
+        const currentPercent = Math.round(
+          (window.pageYOffset /
+            (document.body.scrollHeight - window.innerHeight)) *
+            100
+        );
+        if (currentPercent > highestPercent) {
+          highestPercent = currentPercent;
+          console.log("highestPercent", highestPercent);
+          clearTimeout(timeoutId);
+        }
+      }, 500);
+    }
+
+    window.addEventListener("scroll", scrollListener);
+
     router.events.on("routeChangeComplete", logView);
     router.events.on("routeChangeStart", logScroll);
     window.onload = () => logView(window.location.pathname, true);
-    window.onbeforeunload = () => logScroll();
 
     return () => {
       router.events.off("routeChangeComplete", logView);
       router.events.off("routeChangeStart", logScroll);
+      window.removeEventListener("scroll", scrollListener);
+
       if (isForside) {
         logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
+        logScroll(highestPercent);
       }
     };
   }, [router.events, logView, logScroll, logTimeSpent, isForside]);
