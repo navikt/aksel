@@ -340,7 +340,6 @@ export const defaultDocumentNode = (
   S,
   { schemaType, documentId, getClient }
 ) => {
-  console.log("S", documentId);
   if (
     [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
       schemaType
