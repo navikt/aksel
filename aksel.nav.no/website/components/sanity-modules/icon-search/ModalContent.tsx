@@ -12,6 +12,7 @@ import {
 } from "@/components";
 import { SanityT } from "@/lib";
 import { downloadSvg } from "./downloads";
+import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
 
 const ModalContent = ({ icon }: { icon: string }) => {
   const [doc, setDoc] = useState<{
@@ -118,6 +119,11 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
           <Icon />
         </div>
       </div>
+      {isNew(doc?.created_at) ? (
+        <SuggestionBlock variant="ikon-ny" />
+      ) : (
+        <SuggestionBlock variant="ikon" />
+      )}
     </div>
   );
 };

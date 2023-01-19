@@ -9,6 +9,7 @@ import Head from "next/head";
 import { lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
 import cl from "classnames";
+import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
 
 const Page = ({
   page,
@@ -57,6 +58,7 @@ const Page = ({
         intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
         pageProps={page}
       >
+        <SuggestionBlock variant="komponenter" />
         {komponentKategorier
           .filter(
             (kat) => links?.filter((x) => x.kategori === kat.value).length > 0
