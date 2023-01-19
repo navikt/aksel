@@ -42,8 +42,6 @@ export const parseDate = (
         isValidDate(parsed) &&
         !isTwoDigitYear(date, today, locale, ALLOWED_FORMATS)
       ) {
-        console.log("OK 4-digit:", new Date(parsed).getFullYear());
-
         return parsed;
       }
     }
@@ -58,7 +56,6 @@ export const parseDate = (
         const convertedDate = assignCenturyToDate(date, format, today, locale);
 
         if (isValidDate(new Date(convertedDate))) {
-          console.log("OK 2-digit:", new Date(convertedDate).getFullYear());
           return new Date(convertedDate);
         } else {
           return new Date("Invalid date");
