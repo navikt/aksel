@@ -59,8 +59,6 @@ export const Metrics = ({ documentId }) => {
 
   const { pageviews, weeksObj, avgScrollLength, avgTime } = data[0];
 
-  console.log(data);
-
   const parsedWeeks = weeksObj?.weeks?.map((week: any) => {
     return {
       ...week,
@@ -75,94 +73,99 @@ export const Metrics = ({ documentId }) => {
   };
 
   return (
-    <Stack>
-      <dl className="mb-8 flex flex-wrap justify-center gap-y-4">
-        {pageviews && (
-          <Metric description="Totale sidevisninger" value={pageviews} />
-        )}
+    <div className="mx-auto mt-8 w-full px-6">
+      <Stack>
+        <dl className="mb-8 flex flex-wrap justify-center gap-y-4">
+          {pageviews && (
+            <Metric description="Totale sidevisninger" value={pageviews} />
+          )}
 
-        {weeksObj?.weeks && (
-          <Metric
-            description="Antall uker målt"
-            value={weeksObj.weeks.length}
-          />
-        )}
+          {weeksObj?.weeks && (
+            <Metric
+              description="Antall uker målt"
+              value={weeksObj.weeks.length}
+            />
+          )}
 
-        {avgScrollLength && (
-          <Metric
-            description="Gjennomsnittlig scrollldybde"
-            value={avgScrollLength + "%"}
-          />
+          {avgScrollLength && (
+            <Metric
+              description="Gjennomsnittlig scrollldybde"
+              value={avgScrollLength + "%"}
+            />
+          )}
+          {avgTime && (
+            <Metric
+              description="Gjennomsnittlig tid på siden"
+              value={parseTime(Number(avgTime))}
+            />
+          )}
+        </dl>
+        {parsedWeeks && (
+          <>
+            <ToggleGroup
+              aria-hidden
+              defaultValue={selected}
+              onChange={setSelected}
+              size="small"
+              className="mx-auto mb-8"
+              ref={toggleRef}
+            >
+              <ToggleGroup.Item value="Sidevisninger">
+                <Eye aria-hidden />
+                Sidevisninger
+              </ToggleGroup.Item>
+              <ToggleGroup.Item value="Scroll">
+                <Down aria-hidden />
+                Scrolldybde
+              </ToggleGroup.Item>
+            </ToggleGroup>
+            <ResponsiveContainer aria-hidden width="100%" height={300}>
+              <LineChart width={500} height={300} data={parsedWeeks}>
+                <XAxis dataKey="weekNumber" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey={selected}
+                  stroke="#004367"
+                  activeDot={{ r: 8 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+            <Table className="sr-only">
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell scope="col">Uke/år</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Sidevisninger</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Scrolldybde</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {parsedWeeks.map(
+                  ({ views, scrollLength, weekNumber, week }, i) => {
+                    return (
+                      <Table.Row key={`${i}-${week}`}>
+                        <Table.HeaderCell scope="row">
+                          {weekNumber}/{getYear(new Date(week))}
+                        </Table.HeaderCell>
+                        <Table.DataCell>
+                          {views || "Mangler data"}
+                        </Table.DataCell>
+                        <Table.DataCell>
+                          {(scrollLength && scrollLength + "%") ||
+                            "Mangler data"}
+                        </Table.DataCell>
+                      </Table.Row>
+                    );
+                  }
+                )}
+              </Table.Body>
+            </Table>
+          </>
         )}
-        {avgTime && (
-          <Metric
-            description="Gjennomsnittlig tid på siden"
-            value={parseTime(Number(avgTime))}
-          />
-        )}
-      </dl>
-      {parsedWeeks && (
-        <>
-          <ToggleGroup
-            aria-hidden
-            defaultValue={selected}
-            onChange={setSelected}
-            size="small"
-            className="mx-auto mb-8"
-            ref={toggleRef}
-          >
-            <ToggleGroup.Item value="Sidevisninger">
-              <Eye aria-hidden />
-              Sidevisninger
-            </ToggleGroup.Item>
-            <ToggleGroup.Item value="Scroll">
-              <Down aria-hidden />
-              Scrolldybde
-            </ToggleGroup.Item>
-          </ToggleGroup>
-          <ResponsiveContainer aria-hidden width="100%" height={300}>
-            <LineChart width={500} height={300} data={parsedWeeks}>
-              <XAxis dataKey="weekNumber" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey={selected}
-                stroke="#004367"
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-          <Table className="sr-only">
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell scope="col">Uke/år</Table.HeaderCell>
-                <Table.HeaderCell scope="col">Sidevisninger</Table.HeaderCell>
-                <Table.HeaderCell scope="col">Scrolldybde</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {parsedWeeks.map(
-                ({ views, scrollLength, weekNumber, week }, i) => {
-                  return (
-                    <Table.Row key={`${i}-${week}`}>
-                      <Table.HeaderCell scope="row">
-                        {weekNumber}/{getYear(new Date(week))}
-                      </Table.HeaderCell>
-                      <Table.DataCell>{views || "Mangler data"}</Table.DataCell>
-                      <Table.DataCell>
-                        {(scrollLength && scrollLength + "%") || "Mangler data"}
-                      </Table.DataCell>
-                    </Table.Row>
-                  );
-                }
-              )}
-            </Table.Body>
-          </Table>
-        </>
-      )}
-    </Stack>
+      </Stack>
+    </div>
   );
 };
 
