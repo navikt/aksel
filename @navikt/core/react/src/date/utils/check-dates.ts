@@ -10,7 +10,7 @@ export const dateIsInCurrentMonth = (
 
 /** @private */
 export function isValidDate(day: Date): boolean {
-  return !isNaN(day.getTime());
+  return day && !isNaN(day?.getTime()) && day.getFullYear() > 999;
 }
 
 export const hasNextYear = (year: Date, years: Date[], val: any): boolean => {
