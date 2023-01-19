@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.0.18
+
+### Patch Changes
+
+- [`98177d0cd`](https://github.com/navikt/Designsystemet/commit/98177d0cd3802029dcf398ce93c1767d3b0860c5) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bedre typer for ref i datepicker
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.18
+
 ## 2.0.17
 
 ### Patch Changes
