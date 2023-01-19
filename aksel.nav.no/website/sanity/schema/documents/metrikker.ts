@@ -95,19 +95,14 @@ export const Metrikker = defineType({
     select: {
       reference: "reference.title",
       referenceId: "reference._id",
+      slug: "reference.slug.current",
     },
     prepare(selection) {
-      const { reference, referenceId } = selection;
+      const { reference, referenceId, slug } = selection;
       return {
-        title: reference || "Mangler tittel",
+        title: reference || slug || referenceId || `ID: ${referenceId}`,
         subtitle: `ID: ${referenceId}`,
       };
     },
   },
 });
-
-const isDeveloper = (currentUser: any) => {
-  const { roles } = currentUser;
-
-  return !roles.some(({ name }) => name === "developer");
-};
