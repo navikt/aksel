@@ -4,9 +4,9 @@ import nb from "date-fns/locale/nb";
 import getMonth from "date-fns/getMonth";
 
 const check = (inp: string) =>
-  expect(isValidDate(parseDate(inp, new Date(), nb, "date")));
+  expect(isValidDate(parseDate(inp, new Date(), nb, "date", false)));
 
-const parse = (inp: string) => parseDate(inp, new Date(), nb, "date");
+const parse = (inp: string) => parseDate(inp, new Date(), nb, "date", false);
 
 describe("Parse date-inputs", () => {
   test("No spaces", () => {

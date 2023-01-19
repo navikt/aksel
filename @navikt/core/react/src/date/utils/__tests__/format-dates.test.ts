@@ -2,7 +2,7 @@ import { parseDate } from "../parse-date";
 import nb from "date-fns/locale/nb";
 import { formatDateForInput } from "../format-date";
 
-const parse = (inp: string) => parseDate(inp, new Date(), nb, "date");
+const parse = (inp: string) => parseDate(inp, new Date(), nb, "date", false);
 
 describe("Format date to correct output", () => {
   test("formatDateForInput", () => {

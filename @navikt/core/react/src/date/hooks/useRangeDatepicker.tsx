@@ -202,6 +202,7 @@ export const useRangeDatepicker = (
     inputFormat,
     onValidate,
     defaultMonth,
+    allowTwoDigitYear = false,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -322,7 +323,13 @@ export const useRangeDatepicker = (
 
   const handleFocus = (e, src: RangeT) => {
     !open && setOpen(true);
-    let day = parseDate(e.target.value, today, locale, "date");
+    let day = parseDate(
+      e.target.value,
+      today,
+      locale,
+      "date",
+      allowTwoDigitYear
+    );
     if (isValidDate(day)) {
       setMonth(day);
       src === RANGE.FROM
@@ -334,7 +341,13 @@ export const useRangeDatepicker = (
   };
 
   const handleBlur = (e, src: RangeT) => {
-    let day = parseDate(e.target.value, today, locale, "date");
+    let day = parseDate(
+      e.target.value,
+      today,
+      locale,
+      "date",
+      allowTwoDigitYear
+    );
     if (!isValidDate(day)) {
       return;
     }
@@ -426,7 +439,13 @@ export const useRangeDatepicker = (
     }
 
     if (toInputValue && !selectedRange?.to) {
-      const toDay = parseDate(toInputValue, today, locale, "date");
+      const toDay = parseDate(
+        toInputValue,
+        today,
+        locale,
+        "date",
+        allowTwoDigitYear
+      );
       if (validateDay(toDay)) {
         updateRange({ from: day, to: toDay });
         setMonth(day);
@@ -489,7 +508,13 @@ export const useRangeDatepicker = (
 
   /* live-update datepicker based on changes in inputfields */
   const handleChange = (e, src: RangeT) => {
-    const day = parseDate(e.target.value, today, locale, "date");
+    const day = parseDate(
+      e.target.value,
+      today,
+      locale,
+      "date",
+      allowTwoDigitYear
+    );
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
 

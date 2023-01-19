@@ -28,14 +28,14 @@ export const parseDate = (
   date: string,
   today: Date,
   locale: Locale,
-  type: "date" | "month"
+  type: "date" | "month",
+  allowTwoDigitYear: boolean
 ): Date => {
   let parsed;
   const ALLOWED_FORMATS =
     type === "date" ? ALLOWED_INPUT_FORMATS_DATE : ALLOWED_INPUT_FORMATS_MONTH;
 
-  const allowTwoDigit = true;
-  if (allowTwoDigit) {
+  if (allowTwoDigitYear) {
     for (const format of ALLOWED_FORMATS) {
       parsed = parse(date, format, today, { locale });
       if (
