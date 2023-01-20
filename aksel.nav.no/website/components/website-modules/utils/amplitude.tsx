@@ -146,7 +146,6 @@ export const usePageView = (router: Router, pageProps: any) => {
         );
         if (currentPercent > highestPercent) {
           highestPercent = currentPercent;
-          console.log("highestPercent", highestPercent);
           clearTimeout(timeoutId);
         }
       }, 500);
