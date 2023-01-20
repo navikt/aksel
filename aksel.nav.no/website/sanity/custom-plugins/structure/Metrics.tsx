@@ -1,5 +1,5 @@
 import { Down, Eye } from "@navikt/ds-icons";
-import { Loader, Table, ToggleGroup } from "@navikt/ds-react";
+import { Heading, Loader, Table, ToggleGroup } from "@navikt/ds-react";
 import { Stack } from "@sanity/ui";
 import { getWeek, getYear } from "date-fns";
 import { useRef, useState } from "react";
@@ -57,7 +57,7 @@ export const Metrics = ({ documentId }) => {
     );
   }
 
-  const { pageviews, weeksObj, avgScrollLength, avgTime } = data[0];
+  const { pageviews, weeksObj, avgScrollLength, avgTime, logStart } = data[0];
 
   const parsedWeeks = weeksObj?.weeks?.map((week: any) => {
     return {
@@ -76,6 +76,14 @@ export const Metrics = ({ documentId }) => {
 
   return (
     <div className="mx-auto mt-8 w-full px-6">
+      <Heading as="h2" size="large" className="mb-8 text-center">
+        Statistikk siden{" "}
+        {new Date(logStart).toLocaleDateString("no", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </Heading>
       <Stack>
         <dl className="mb-8 flex flex-wrap justify-center gap-y-4">
           {pageviews && (
