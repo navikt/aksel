@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 2.1.0
+
+### Minor Changes
+
+- [`0873fe652`](https://github.com/navikt/Designsystemet/commit/0873fe6520e817e462197c162b49c05826da4838) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Datepicker/Monthpicker støtter nå år med 2 siffer i input
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.0
+
 ## 2.0.18
 
 ### Patch Changes
