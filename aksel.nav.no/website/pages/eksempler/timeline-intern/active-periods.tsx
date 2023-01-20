@@ -8,8 +8,11 @@ import {
 } from "@navikt/ds-icons";
 import { Timeline } from "@navikt/ds-react-internal";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { useState } from "react";
 
 const Example = () => {
+  const [activePeriod, setActivePeriod] = useState();
+
   return (
     <div className="min-w-[800px] overflow-x-auto">
       <Timeline>
@@ -22,9 +25,12 @@ const Example = () => {
                 end={p.end}
                 status={p.status}
                 icon={p.icon}
-              >
-                {p?.children ?? null}
-              </Timeline.Period>
+                onSelectPeriod={() => {
+                  setActivePeriod(p.id);
+                  p?.onSelectPeriod?.();
+                }}
+                isActive={activePeriod && activePeriod === p.id}
+              />
             );
           })}
         </Timeline.Row>
@@ -37,40 +43,36 @@ const Example = () => {
                 end={p.end}
                 status={p.status}
                 icon={p.icon}
-              >
-                {p?.children ?? null}
-              </Timeline.Period>
-            );
-          })}
-        </Timeline.Row>
-        <Timeline.Row label="Sykehus B" icon={<Hospital aria-hidden />}>
-          {jobb.map((p: any, i) => {
-            return (
-              <Timeline.Period
-                key={i}
-                start={p.start}
-                end={p.end}
-                status={p.status}
-                icon={p.icon}
+                onSelectPeriod={() => {
+                  setActivePeriod(p.id);
+                  p?.onSelectPeriod?.();
+                }}
+                isActive={activePeriod && activePeriod === p.id}
               />
             );
           })}
         </Timeline.Row>
       </Timeline>
+      {activePeriod && (
+        <div className="mt-8">{`${activePeriod}: ${
+          [...person, ...jobb].find((x) => x.id === activePeriod).start
+        }`}</div>
+      )}
     </div>
   );
 };
 
 const person = [
   {
+    id: 1,
     start: new Date("Jan 1 2022"),
     end: new Date("Jan 31 2022"),
     status: "warning",
     icon: <Edit aria-hidden />,
     statusLabel: "Sykemeldt",
-    children: <div>50% sykemeldt</div>,
   },
   {
+    id: 2,
     start: new Date("Apr 1 2022"),
     end: new Date("Apr 30 2022"),
     status: "neutral",
@@ -79,6 +81,7 @@ const person = [
     statusLabel: "Ferie",
   },
   {
+    id: 3,
     start: new Date("Jul 1 2022"),
     end: new Date("Jul 31 2022"),
     status: "warning",
@@ -86,6 +89,7 @@ const person = [
     statusLabel: "Sykemeldt",
   },
   {
+    id: 4,
     start: new Date("Aug 1 2022"),
     end: new Date("Aug 30 2022"),
     status: "warning",
@@ -96,30 +100,31 @@ const person = [
 
 const jobb = [
   {
+    id: 5,
     start: new Date("Feb 2 2022"),
     end: new Date("Mar 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
     icon: <Money aria-hidden />,
-    children: <div>100% utbetaling</div>,
   },
   {
+    id: 6,
     start: new Date("Mar 2 2022"),
     end: new Date("Apr 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
     icon: <Money aria-hidden />,
-    children: <div>100% utbetaling</div>,
   },
   {
+    id: 7,
     start: new Date("May 2 2022"),
     end: new Date("June 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
     icon: <Money aria-hidden />,
-    children: <div>100% utbetaling</div>,
   },
   {
+    id: 8,
     start: new Date("June 2 2022"),
     end: new Date("July 1 2022"),
     status: "success",
@@ -131,5 +136,5 @@ const jobb = [
 export default withDsExample(Example);
 
 export const args = {
-  index: 0,
+  index: 2,
 };

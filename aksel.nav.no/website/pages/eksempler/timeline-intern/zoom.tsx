@@ -22,9 +22,7 @@ const Example = () => {
                 end={p.end}
                 status={p.status}
                 icon={p.icon}
-              >
-                {p?.children ?? null}
-              </Timeline.Period>
+              />
             );
           })}
         </Timeline.Row>
@@ -37,9 +35,7 @@ const Example = () => {
                 end={p.end}
                 status={p.status}
                 icon={p.icon}
-              >
-                {p?.children ?? null}
-              </Timeline.Period>
+              />
             );
           })}
         </Timeline.Row>
@@ -56,6 +52,12 @@ const Example = () => {
             );
           })}
         </Timeline.Row>
+        <Timeline.Zoom>
+          <Timeline.Zoom.Button label="3 mnd" interval="month" count={3} />
+          <Timeline.Zoom.Button label="7 mnd" interval="month" count={7} />
+          <Timeline.Zoom.Button label="9 mnd" interval="month" count={9} />
+          <Timeline.Zoom.Button label="1.5 år" interval="year" count={1.5} />
+        </Timeline.Zoom>
       </Timeline>
     </div>
   );
@@ -68,7 +70,6 @@ const person = [
     status: "warning",
     icon: <Edit aria-hidden />,
     statusLabel: "Sykemeldt",
-    children: <div>50% sykemeldt</div>,
   },
   {
     start: new Date("Apr 1 2022"),
@@ -101,7 +102,6 @@ const jobb = [
     status: "success",
     statusLabel: "Utbetaling",
     icon: <Money aria-hidden />,
-    children: <div>100% utbetaling</div>,
   },
   {
     start: new Date("Mar 2 2022"),
@@ -109,7 +109,6 @@ const jobb = [
     status: "success",
     statusLabel: "Utbetaling",
     icon: <Money aria-hidden />,
-    children: <div>100% utbetaling</div>,
   },
   {
     start: new Date("May 2 2022"),
@@ -117,7 +116,6 @@ const jobb = [
     status: "success",
     statusLabel: "Utbetaling",
     icon: <Money aria-hidden />,
-    children: <div>100% utbetaling</div>,
   },
   {
     start: new Date("June 2 2022"),
@@ -131,5 +129,6 @@ const jobb = [
 export default withDsExample(Example);
 
 export const args = {
-  index: 0,
+  index: 3,
+  desc: "Lar deg 'zoome' til predefinerte tidsperioder. Bruk 'startDate/endDate'-prop i Timeline for å justere hvilken tidsperiode som blir vist.",
 };

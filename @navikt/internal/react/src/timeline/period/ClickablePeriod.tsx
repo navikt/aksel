@@ -78,6 +78,7 @@ const ClickablePeriod = React.memo(
             open={selected}
             onClose={() => setSelected(false)}
             anchorEl={buttonRef.current}
+            strategy="fixed"
           >
             <Popover.Content>{children}</Popover.Content>
           </Popover>
