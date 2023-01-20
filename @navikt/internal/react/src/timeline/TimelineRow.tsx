@@ -9,6 +9,7 @@ import {
   PositionedPeriod,
   TimelineComponentTypes,
 } from "./utils/types.internal";
+import cl from "clsx";
 
 export interface TimelineRowProps
   extends React.HTMLAttributes<HTMLOListElement> {
@@ -36,7 +37,7 @@ export interface TimelineRowType
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, headingTag = "h3", icon, ...rest }, ref) => {
-    const { periods, id } = useRowContext();
+    const { periods, id, active } = useRowContext();
     const { setActiveRow } = useTimelineContext();
 
     const latest = periods.reduce((a, b) => {
@@ -64,7 +65,11 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
             {label}
           </BodyShort>
         )}
-        <div className="navdsi-timeline__row">
+        <div
+          className={cl("navdsi-timeline__row", {
+            "navdsi-timeline__row--active": active,
+          })}
+        >
           <ol
             {...rest}
             ref={ref}

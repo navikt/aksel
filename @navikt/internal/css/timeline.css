@@ -28,16 +28,20 @@
 
 .navdsi-timeline__axislabels-label {
   position: absolute;
-  color: var(--a-text-subtle);
+  color: var(--ac-timeline-axislabel-text, var(--a-text-subtle));
   white-space: nowrap;
 }
 
 .navdsi-timeline__row {
   display: flex;
-  background: var(--a-surface-subtle);
+  background: var(--ac-timeline-row-bg, var(--a-surface-subtle));
   margin: 0 0 var(--a-spacing-8);
   padding-left: var(--a-spacing-8);
   grid-column: 2;
+}
+
+.navdsi-timeline__row--active {
+  background: var(--ac-timeline-row-active-bg, var(--a-surface-selected));
 }
 
 .navdsi-timeline__row:last-of-type {
@@ -85,48 +89,49 @@
 }
 
 .navdsi-timeline__period--success {
-  background: var(--a-surface-success-subtle);
-  box-shadow: inset 0 0 0 1px var(--a-border-success);
+  background: var(--ac-timeline-period-success-bg, var(--a-surface-success-subtle));
+  box-shadow: inset 0 0 0 1px var(--ac-timeline-period-success-border, var(--a-border-success));
 }
 
 .navdsi-timeline__period--success.navdsi-timeline__period--clickable:hover {
   background: var(--a-surface-success-subtle-hover);
+  background: var(--ac-timeline-period-success-bg-hover, var(--a-surface-success-subtle-hover));
 }
 
 .navdsi-timeline__period--warning {
-  background: var(--a-surface-warning-subtle);
-  box-shadow: inset 0 0 0 1px var(--a-border-warning);
+  background: var(--ac-timeline-period-warning-bg, var(--a-surface-warning-subtle));
+  box-shadow: inset 0 0 0 1px var(--ac-timeline-period-warning-border, var(--a-border-warning));
 }
 
 .navdsi-timeline__period--warning.navdsi-timeline__period--clickable:hover {
-  background: var(--a-surface-warning-subtle-hover);
+  background: var(--ac-timeline-period-warning-bg-hover, var(--a-surface-warning-subtle-hover));
 }
 
 .navdsi-timeline__period--danger {
-  background: var(--a-surface-danger-subtle);
-  box-shadow: inset 0 0 0 1px var(--a-border-danger);
+  background: var(--ac-timeline-period-danger-bg, var(--a-surface-danger-subtle));
+  box-shadow: inset 0 0 0 1px var(--ac-timeline-period-danger-border, var(--a-border-danger));
 }
 
 .navdsi-timeline__period--danger.navdsi-timeline__period--clickable:hover {
-  background: var(--a-surface-danger-subtle-hover);
+  background: var(--ac-timeline-period-danger-bg-hover, var(--a-surface-danger-subtle-hover));
 }
 
 .navdsi-timeline__period--info {
-  background: var(--a-surface-info-subtle);
-  box-shadow: inset 0 0 0 1px var(--a-border-info);
+  background: var(--ac-timeline-period-info-bg, var(--a-surface-info-subtle));
+  box-shadow: inset 0 0 0 1px var(--ac-timeline-period-info-border, var(--a-border-info));
 }
 
 .navdsi-timeline__period--info.navdsi-timeline__period--clickable:hover {
-  background: var(--a-surface-info-subtle-hover);
+  background: var(--ac-timeline-period-info-bg-hover, var(--a-surface-info-subtle-hover));
 }
 
 .navdsi-timeline__period--neutral {
-  background: var(--a-bg-subtle);
-  box-shadow: inset 0 0 0 1px var(--a-border-default);
+  background: var(--ac-timeline-period-neutral-bg, var(--a-bg-subtle));
+  box-shadow: inset 0 0 0 1px var(--ac-timeline-period-neutral-border, var(--a-border-default));
 }
 
 .navdsi-timeline__period--neutral.navdsi-timeline__period--clickable:hover {
-  background: var(--a-gray-200);
+  background: var(--ac-timeline-period-neutral-bg-hover, var(--a-gray-200));
 }
 
 .navdsi-timeline__period--connected-both {
@@ -144,7 +149,7 @@
 }
 
 .navdsi-timeline__period--selected {
-  box-shadow: inset 0 0 0 2px var(--a-border-action-selected);
+  box-shadow: inset 0 0 0 2px var(--ac-timeline-period-selected-border, var(--a-border-action-selected));
   z-index: 3;
 }
 
@@ -165,7 +170,8 @@
   border: none;
   cursor: pointer;
   background: var(--a-surface-default);
-  box-shadow: inset 0 0 0 1px var(--a-surface-danger), 0 0 0 4px var(--a-surface-danger), 0 0 0 5px var(--a-surface-default);
+  box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
+    0 0 0 4px var(--ac-timeline-pin-bg, var(--a-surface-danger)), 0 0 0 5px var(--a-surface-default);
   z-index: 2;
   border-radius: var(--a-border-radius-full);
   padding: 3.5px;
@@ -184,19 +190,21 @@
 }
 
 .navdsi-timeline__pin-button:focus {
-  box-shadow: inset 0 0 0 1px var(--a-surface-danger), 0 0 0 3px var(--a-surface-danger), 0 0 0 4px var(--a-surface-default),
+  box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
+    0 0 0 3px var(--ac-timeline-pin-bg, var(--a-surface-danger)), 0 0 0 4px var(--a-surface-default),
     0 0 0 6px var(--a-border-focus);
   outline: none;
 }
 
 .navdsi-timeline__pin-button:hover {
-  box-shadow: inset 0 0 0 1px var(--a-surface-danger-hover), 0 0 0 4px var(--a-surface-danger-hover),
-    0 0 0 5px var(--a-surface-default);
+  box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
+    0 0 0 4px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)), 0 0 0 5px var(--a-surface-default);
 }
 
 .navdsi-timeline__pin-button:hover:focus {
-  box-shadow: inset 0 0 0 1px var(--a-surface-danger-hover), 0 0 0 3px var(--a-surface-danger-hover),
-    0 0 0 4px var(--a-surface-default), 0 0 0 6px var(--a-border-focus);
+  box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
+    0 0 0 3px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)), 0 0 0 4px var(--a-surface-default),
+    0 0 0 6px var(--a-border-focus);
 }
 
 .navdsi-timeline__pin-wrapper::before {
@@ -219,9 +227,9 @@
   all: unset;
   cursor: pointer;
   padding: 6px 9px 6px 8px;
-  border: 1px solid var(--a-border-default);
+  border: 1px solid var(--ac-timeline-zoom-border, var(--a-border-default));
   border-width: 1px 0 1px 1px;
-  background: var(--a-surface-default);
+  background: var(--ac-timeline-zoom-bg, var(--a-surface-default));
 }
 
 .navdsi-timeline__zoom li:first-child .navdsi-timeline__zoom-button {
@@ -238,12 +246,12 @@
 }
 
 .navdsi-timeline__zoom-button:not([aria-pressed="true"]):hover {
-  background: var(--a-surface-action-subtle-hover);
+  background: var(--ac-timeline-zoom-hover, var(--a-surface-action-subtle-hover));
 }
 
 .navdsi-timeline__zoom-button[aria-pressed="true"] {
-  background: var(--a-surface-inverted);
-  color: var(--a-text-on-inverted);
+  background: var(--ac-timeline-zoom-selected-bg, var(--a-surface-inverted));
+  color: var(--ac-timeline-zoom-selected-text, var(--a-text-on-inverted));
 }
 
 .navdsi-timeline__period:focus {
@@ -253,7 +261,8 @@
 }
 
 .navdsi-timeline__period--selected:focus {
-  box-shadow: inset 0 0 0 2px var(--a-border-action-selected), 0 0 0 2px var(--a-border-focus);
+  box-shadow: inset 0 0 0 2px var(--ac-timeline-period-selected-border, var(--a-border-action-selected)),
+    0 0 0 2px var(--a-border-focus);
   z-index: 3;
 }
 
@@ -262,7 +271,7 @@
 }
 
 .navdsi-timeline__zoom-button:focus {
-  box-shadow: 0 0 0 1px var(--a-surface-action-subtle), 0 0 0 3px var(--a-border-focus);
+  box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 3px var(--a-border-focus);
   border-width: 1px;
 }
 
