@@ -184,7 +184,11 @@ export const Editors = defineType({
         },
         slugify: (input) => input,
       },
-      readOnly: true,
+      initialValue: (_, { currentUser }) => {
+        return { current: currentUser.id };
+      },
+      readOnly: ({ currentUser }) =>
+        !currentUser.roles.find((x) => x.name === "developer"),
       hidden: ({ currentUser }) =>
         !currentUser.roles.find((x) => x.name === "developer"),
     }),
