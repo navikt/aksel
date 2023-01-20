@@ -4,6 +4,7 @@ import copy from "copy-to-clipboard";
 import React from "react";
 import cl from "classnames";
 import style from "./index.module.css";
+import { CopyIcon } from "@sanity/icons";
 
 const copyCode = (content: string) =>
   copy(content, {
@@ -23,15 +24,14 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
     const timeoutRef = useRef<NodeJS.Timeout>();
 
     useEffect(() => {
-      if (active) {
-        timeoutRef.current = setTimeout(() => setActive(false), 3000);
-        return () => timeoutRef.current && clearTimeout(timeoutRef.current);
-      }
-    }, [active]);
+      return () => timeoutRef.current && clearTimeout(timeoutRef.current);
+    }, []);
 
     const handleCopy = () => {
       copyCode(content);
       setActive(true);
+      timeoutRef.current && clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => setActive(false), 3000);
     };
 
     return (
@@ -55,8 +55,8 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
             aria-label="Kopierte kodesnutt"
           />
         ) : (
-          <Copy
-            className="text-[1.5rem] opacity-75 group-hover:opacity-100"
+          <CopyIcon
+            className="text-[2rem] opacity-90 group-hover:opacity-100"
             aria-label="Kopier kodesnutt"
           />
         )}
