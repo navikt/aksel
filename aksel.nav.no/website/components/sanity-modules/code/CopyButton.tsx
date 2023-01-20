@@ -1,4 +1,4 @@
-import { Copy, SuccessStroke } from "@navikt/ds-icons";
+import { SuccessStroke } from "@navikt/ds-icons";
 import { useRef, useState, useEffect } from "react";
 import copy from "copy-to-clipboard";
 import React from "react";
