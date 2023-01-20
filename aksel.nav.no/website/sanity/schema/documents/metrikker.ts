@@ -15,6 +15,12 @@ export const Metrikker = defineType({
       readOnly: true,
     }),
     defineField({
+      type: "date",
+      name: "logStart",
+      title: "Første måling",
+      readOnly: true,
+    }),
+    defineField({
       type: "number",
       name: "pageviews",
       title: "Sidevisninger",

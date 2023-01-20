@@ -36,6 +36,7 @@ export default async function logPageView(
     await client.create({
       _type: "metrics",
       reference: { _ref: id, _type: "reference" },
+      logStart: format(new Date(), "yyyy-MM-dd"),
       pageviews: 1,
       weeksObj: {
         weeks: [
