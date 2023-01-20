@@ -37,7 +37,7 @@ export interface UseMonthPickerOptions
   defaultYear?: Date;
   /**
    * Allows input of with 'yy' year format.
-   * @default false
+   * @default true
    * @Note Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
    * In 2023 this equals to 1943 - 2042
    */
@@ -103,7 +103,7 @@ export const useMonthpicker = (
     inputFormat,
     onValidate,
     defaultYear,
-    allowTwoDigitYear = false,
+    allowTwoDigitYear = true,
   } = opt;
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);

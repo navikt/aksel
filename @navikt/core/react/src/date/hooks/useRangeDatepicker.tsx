@@ -202,7 +202,7 @@ export const useRangeDatepicker = (
     inputFormat,
     onValidate,
     defaultMonth,
-    allowTwoDigitYear = false,
+    allowTwoDigitYear = true,
   } = opt;
 
   const locale = getLocaleFromString(_locale);

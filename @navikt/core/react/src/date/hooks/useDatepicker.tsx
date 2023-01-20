@@ -51,7 +51,7 @@ export interface UseDatepickerOptions
   onValidate?: (val: DateValidationT) => void;
   /**
    * Allows input of with 'yy' year format.
-   * @default false
+   * @default true
    * @Note Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
    * In 2023 this equals to 1943 - 2042
    */
