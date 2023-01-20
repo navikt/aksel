@@ -66,7 +66,7 @@ export const block = {
         name: "internalLink",
         type: "object",
         blockEditor: {
-          icon: Link,
+          icon: () => <Link title="Lenke til sanity-side" />,
         },
         options: {
           modal: {
@@ -88,7 +88,7 @@ export const block = {
         name: "link",
         type: "object",
         blockEditor: {
-          icon: ExternalLink,
+          icon: () => <ExternalLink title="Lenke til ekstern-side" />,
         },
         fields: [
           {
