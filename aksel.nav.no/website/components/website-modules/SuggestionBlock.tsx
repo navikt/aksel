@@ -9,23 +9,6 @@ const SuggestionBlockComponent = ({
 }: {
   variant: "komponent-beta" | "komponent-ny";
 }) => {
-  let text = "";
-  let heading = "";
-  switch (variant) {
-    case "komponent-ny":
-      text =
-        "Denne komponenten er helt ny i biblioteket. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!";
-      heading = "Ny";
-      break;
-    case "komponent-beta":
-      text =
-        "Komponenten er under utvikling. Dette kan medføre bugs slik at teamet ditt må ta stilling til om dere ønsker å bruke denne i produksjon. Hvis komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i patch/minor versjon av kodepakker og i Figma. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!";
-      heading = "Beta";
-      break;
-    default:
-      return null;
-  }
-
   return (
     <div
       className={cl("mb-12 flex gap-3 rounded-lg px-6 py-4 ring-1 ring-inset", {
@@ -33,20 +16,14 @@ const SuggestionBlockComponent = ({
         "bg-violet-50 ring-violet-300": variant === "komponent-beta",
       })}
     >
-      <span className="shrink-0 text-2xl">
-        {variant === "komponent-beta" ? (
-          <RobotIcon aria-hidden />
-        ) : (
-          <ChangelogIcon />
-        )}
-      </span>
+      <span className="shrink-0 text-2xl">{options[variant]?.icon}</span>
       <div className="grid">
         <Heading size="small" level="2">
-          {heading}
+          {options[variant]?.heading}
         </Heading>
-        <BodyLong className="mt-2">{text}</BodyLong>
+        <BodyLong className="mt-2">{options[variant].text}</BodyLong>
         <a
-          href="#"
+          href={options[variant].link}
           className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus mt-4 w-fit rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
         >
           Send innspill
@@ -65,35 +42,11 @@ export const SuggestionBlock = ({
     | "komponent"
     | "komponent-ny"
     | "komponent-beta"
-    | "grunnleggende"
     | "ikon-ny"
     | "ikon";
 }) => {
   if (variant === "komponent-ny" || variant === "komponent-beta") {
     return <SuggestionBlockComponent variant={variant} />;
-  }
-  let text = "";
-  switch (variant) {
-    case "ikoner":
-      text = "Har du forslag til nye ikoner, eller endringer?";
-      break;
-    case "ikon":
-      text = "Har du innspill til ikonet?";
-      break;
-    case "ikon-ny":
-      text = "Har du innspill til ikonet?";
-      break;
-    case "komponenter":
-      text = "Har du forslag til nye komponenter, eller endringer?";
-      break;
-    case "komponent":
-      text = "Har du innspill til komponenten?";
-      break;
-    /* case "grunnleggende":
-      text = "Har du forslag til grunnleggende, eller endringer?";
-      break; */
-    default:
-      return null;
   }
 
   return (
@@ -109,14 +62,47 @@ export const SuggestionBlock = ({
     >
       <BodyShort className="flex items-center gap-2">
         <LightBulb aria-hidden className="shrink-0 text-2xl" />
-        {text}
+        {options[variant].text}
       </BodyShort>
       <a
-        href="#"
+        href={options[variant].link}
         className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
       >
         Send forslag
       </a>
     </div>
   );
+};
+
+const options: {
+  [key: string]: {
+    text: string;
+    link: string;
+    heading?: string;
+    icon?: React.ReactNode;
+  };
+} = {
+  ikoner: {
+    text: "Har du forslag til nye ikoner, eller endringer?",
+    link: "",
+  },
+  komponenter: {
+    text: "Har du forslag til nye komponenter, eller endringer?",
+    link: "",
+  },
+  komponent: { text: "Har du innspill til komponenten?", link: "" },
+  "ikon-ny": { text: "Har du innspill til ikonet?", link: "" },
+  ikon: { text: "Har du innspill til ikonet?", link: "" },
+  "komponent-ny": {
+    text: "Denne komponenten er helt ny i biblioteket. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
+    heading: "Ny",
+    link: "",
+    icon: <ChangelogIcon aria-hidden />,
+  },
+  "komponent-beta": {
+    text: "Komponenten er under utvikling. Dette kan medføre bugs slik at teamet ditt må ta stilling til om dere ønsker å bruke denne i produksjon. Hvis komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i patch/minor versjon av kodepakker og i Figma. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
+    heading: "Beta",
+    link: "",
+    icon: <RobotIcon aria-hidden />,
+  },
 };
