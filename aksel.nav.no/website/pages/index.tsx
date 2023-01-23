@@ -20,7 +20,6 @@ import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
-import Snowfall from "react-snowfall";
 import { lazy, useEffect, useState } from "react";
 import cl from "classnames";
 
@@ -110,14 +109,6 @@ const GetStarted = ({
           </li>
         ))}
       </ul>
-      <div aria-hidden>
-        <Snowfall
-          color="rgba(230, 241, 248, 0.3)"
-          speed={reducedMotion || pause ? [0, 0] : [0.1, 0.2]}
-          wind={reducedMotion || pause ? [0, 0] : [-0.2, 0.2]}
-          snowflakeCount={60}
-        />
-      </div>
       {!reducedMotion && (
         <button
           className="focus-visible:ring-border-focus-on-inverted absolute top-2 right-2 grid h-11 w-11 place-items-center rounded text-2xl focus:outline-none focus-visible:ring-2"
@@ -352,11 +343,10 @@ export const getStaticProps = async ({
       komigang,
       slug: "/",
       preview,
+      id: page?._id ?? "",
     },
     revalidate: 60,
   };
 };
 
 export default Page;
-
-<div>lorem</div>;

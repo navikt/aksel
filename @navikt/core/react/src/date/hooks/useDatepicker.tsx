@@ -49,6 +49,13 @@ export interface UseDatepickerOptions
    * validation-callback
    */
   onValidate?: (val: DateValidationT) => void;
+  /**
+   * Allows input of with 'yy' year format.
+   * @default true
+   * @Note Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
+   * In 2023 this equals to 1943 - 2042
+   */
+  allowTwoDigitYear?: boolean;
 }
 
 interface UseDatepickerValue {
@@ -59,7 +66,10 @@ interface UseDatepickerValue {
   /**
    * Use: <DatePicker.Input {...inputProps}/>
    */
-  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "onBlur" | "value">;
+  inputProps: Pick<
+    DateInputProps,
+    "onChange" | "onFocus" | "onBlur" | "value"
+  > & { ref: React.RefObject<HTMLInputElement> };
   /**
    * Resets all states (callback)
    */
@@ -112,6 +122,7 @@ export const useDatepicker = (
     inputFormat,
     onValidate,
     defaultMonth,
+    allowTwoDigitYear = true,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -188,7 +199,13 @@ export const useDatepicker = (
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
     !open && setOpen(true);
-    let day = parseDate(e.target.value, today, locale, "date");
+    let day = parseDate(
+      e.target.value,
+      today,
+      locale,
+      "date",
+      allowTwoDigitYear
+    );
     if (isValidDate(day)) {
       setMonth(day);
       setInputValue(formatDateForInput(day, locale, "date", inputFormat));
@@ -196,7 +213,13 @@ export const useDatepicker = (
   };
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    let day = parseDate(e.target.value, today, locale, "date");
+    let day = parseDate(
+      e.target.value,
+      today,
+      locale,
+      "date",
+      allowTwoDigitYear
+    );
     isValidDate(day) &&
       setInputValue(formatDateForInput(day, locale, "date", inputFormat));
   };
@@ -227,7 +250,13 @@ export const useDatepicker = (
   // the calendar’s month.
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.target.value);
-    const day = parseDate(e.target.value, today, locale, "date");
+    const day = parseDate(
+      e.target.value,
+      today,
+      locale,
+      "date",
+      allowTwoDigitYear
+    );
 
     const isBefore =
       fromDate && day && differenceInCalendarDays(fromDate, day) > 0;

@@ -52,6 +52,6 @@ const Example = () => {
 export default withDsExample(Example);
 
 export const args = {
-  index: 10,
+  index: 11,
   desc: "Ved bruk av datepicker i Modal er det viktig at 'Escape' ikke lukker selve modalen hvis datepicker er åpen. Bruk 'shouldCloseOnEsc' for å toggle dette når datepicker er åpen.",
 };

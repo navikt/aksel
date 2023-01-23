@@ -16,15 +16,12 @@ const navn = [
   "Blissbukk",
   "Borneoorangutang",
   "Damfrosk",
-  "Dvergsilkeape",
   "Dåhjort",
-  "Edderkoppape",
   "Elandantilope",
   "Elg",
   "Esel",
   "Oter",
   "Fjellrev",
-  "Flodsvin",
   "Fugler",
   "Gaupe",
   "Gepard",
@@ -46,7 +43,6 @@ const navn = [
   "Ringhalelemur",
   "Rødpanda",
   "Sau",
-  "Sjimpanse",
   "Sjiraff",
   "Stråleskilpadde",
   "Slanger",
@@ -57,7 +53,6 @@ const navn = [
   "Surikat",
   "Tiger",
   "Ulv",
-  "Fjordfe",
   "Ekorn",
   "Bever",
   "Lemen",
@@ -67,7 +62,6 @@ const navn = [
   "Småskogmus",
   "Steinkobbe",
   "Røyskatt",
-  "Moskusfe",
 ];
 
 const adjektiv = [
@@ -190,7 +184,11 @@ export const Editors = defineType({
         },
         slugify: (input) => input,
       },
-      readOnly: true,
+      initialValue: (_, { currentUser }) => {
+        return { current: currentUser.id };
+      },
+      readOnly: ({ currentUser }) =>
+        !currentUser.roles.find((x) => x.name === "developer"),
       hidden: ({ currentUser }) =>
         !currentUser.roles.find((x) => x.name === "developer"),
     }),

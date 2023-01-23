@@ -2,14 +2,38 @@ import { SanityT } from "@/lib";
 import { withErrorBoundary } from "@/error-boundary";
 import core from "@navikt/ds-css/tokens.json";
 import internal from "@navikt/ds-css-internal/tokens.json";
-import { useState } from "react";
-import { Expand } from "@navikt/ds-icons";
+import { useEffect, useRef, useState } from "react";
+import { Expand, SuccessStroke } from "@navikt/ds-icons";
 import cl from "classnames";
 import { Link, BodyLong, Label } from "@navikt/ds-react";
 import NextLink from "next/link";
+import copy from "copy-to-clipboard";
+import { CopyIcon } from "@sanity/icons";
 
 const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(false);
+
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const handleCopy = () => {
+    setActive(true);
+    timeoutRef.current && clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setActive(false), 2000);
+    const str = Object.entries(tokens).reduce(
+      (prev, cur) =>
+        prev +
+        `${cur[0]}: ${
+          cur[1].startsWith("--") ? `var(${cur[1]})` : `${cur[1]}`
+        };\n`,
+      ""
+    );
+    copy(str);
+  };
+
+  useEffect(() => {
+    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
+  }, []);
 
   const tokens: { [key: string]: string } | null =
     node.title in core
@@ -52,7 +76,23 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
           </tbody>
         </table>
         {(open || !showMore) && (
-          <div className="border-border-divider bg-surface-neutral-subtle w-full rounded-b border border-t-0 p-2">
+          <div className="border-border-divider bg-surface-neutral-subtle relative w-full rounded-b border border-t-0 p-2">
+            <button
+              onClick={handleCopy}
+              className="text-text-default hover:bg-surface-neutral-subtle-hover focus-visible:shadow-focus absolute top-2 right-2 rounded px-1 py-1 text-2xl focus:outline-none"
+            >
+              {active ? (
+                <>
+                  <SuccessStroke className="text-[1.5rem]" aria-hidden />
+                  <span className="sr-only">Kopier formarterte tokens</span>
+                </>
+              ) : (
+                <>
+                  <CopyIcon aria-hidden />
+                  <span className="sr-only">Kopier formarterte tokens</span>
+                </>
+              )}
+            </button>
             <Label size="small" as="span" spacing>
               Hva er dette?
             </Label>
@@ -73,7 +113,7 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
       {!open && showMore && (
         <button
           onClick={() => setOpen(true)}
-          className="text-medium  group mx-auto flex shrink-0 -translate-y-3/4 flex-col items-center focus:outline-none"
+          className="text-medium group mx-auto flex shrink-0 -translate-y-3/4 flex-col items-center focus:outline-none"
         >
           <span className="group-focus-visible:bg-border-focus group-focus-visible:text-text-on-action group-focus-visible:shadow-focus">
             Se alle tokens

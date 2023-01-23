@@ -159,7 +159,7 @@
 
       "danger": {
         "subtle": {
-          "hover": { "value": "{a.red.50.value}" },
+          "hover": { "value": "{a.red.100.value}" },
           "@": { "value": "{a.red.50.value}" }
         },
         "hover": {

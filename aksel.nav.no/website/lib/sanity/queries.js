@@ -167,7 +167,7 @@ export const akselTema = `*[_type == "godpraksis_landingsside"][0]{
       ${deRefs}
     }
   },
-  "temaer": *[_type == "aksel_tema"]{
+  "temaer": *[_type == "aksel_tema" && defined(seksjoner[].sider[])]{
     ...,
     "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
   },
@@ -233,8 +233,6 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
   }
 }`;
 
-export const akselDocumentsByType = `*[_type in $types]{ _type, _id, 'slug': slug.current }`;
-
 export const akselPrinsippBySlug = `{
   "prinsipp": *[slug.current == $slug] | order(_updatedAt desc)[0]
   {
@@ -281,8 +279,6 @@ export const akselEditorById = `*[_id == $id][0]
 {
   ${contributorsAll}
 }`;
-
-export const dsDocuments = `*[_type in ["komponent_artikkel", "ds_artikkel"]]{ ..., 'slug': slug.current }`;
 
 const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   heading,
@@ -344,8 +340,6 @@ export const grunnleggendeQuery = `{
   "seo": *[_type == "komponenter_landingsside"][0].seo.image,
   ${sidebarQuery}
 }`;
-
-export const akselTemaNames = `*[_type == "aksel_tema" && count(*[references(^._id)]) > 0].slug`;
 
 export const akselTemaDocs = `{
   "tema": *[_type == "aksel_tema" && slug.current == $slug] | order(_updatedAt desc)[0]{
