@@ -1,7 +1,7 @@
 export * from "./accordion";
 export * from "./alert";
-export * from "./provider";
 export * from "./button";
+export * from "./combo-box";
 export * from "./date";
 export * from "./form";
 export * from "./grid";
@@ -14,6 +14,7 @@ export * from "./modal";
 export * from "./pagination";
 export * from "./panel";
 export * from "./popover";
+export * from "./provider";
 export * from "./read-more";
 export * from "./chat";
 export * from "./chips";
