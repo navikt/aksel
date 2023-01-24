@@ -1,57 +1,53 @@
-import { useEffect } from "react";
-import config from "config:sanity";
-
-const BUNDLE_CHECK_INTERVAL = 60 * 5000;
-const BUNDLE_CHECK_INTERVAL_DECLINED = 60 * 20000;
-const CHANGES_AVAILABLE_MESSAGE =
-  "Studioet er har nye endringer! For å ta i bruk disse vil siden nå oppdateres for den nyeste versjonen.";
-
-async function getCurrentHash() {
-  const basePath = (config.project && config.project.basePath) || "/";
-  const html = await window.fetch(basePath).then((res) => res.text());
-  const [, hash] = html.match(/app\.bundle\.js\?(\w+)/) || [];
-  return hash;
-}
-
-let hash = null;
-let interval = null;
+import { Send } from "@navikt/ds-icons";
+import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
+import React, { useRef, useState } from "react";
 
 const BundleChecker = () => {
-  useEffect(() => {
-    getCurrentHash().then((newHash) => {
-      hash = newHash;
-    });
+  const [inc, setInc] = useState(0);
+  const interval = useRef(null);
 
-    interval = createInterval();
+  const start = () => {
+    interval.current = setInterval(() => {
+      setInc((x) => x + 0.4);
+    }, 10);
+  };
+  if (inc > 99) {
+    clearInterval(interval.current);
+    window.location.replace("https://aksel.nav.no/admin");
+  }
 
-    return () => clearInterval(interval);
+  document.body.style.opacity = `${100 - inc}%`;
+  document.body.style.scale = `${1 - inc / 150}`;
+  document.body.style.rotate = `${inc ** 1.3}deg`;
 
-    /*
-    TODO: @release uncomment for redirecting to new studio
-    */
-    /* window.location.replace(`http://aksel.nav.no/admin`); */
-  }, []);
+  return (
+    <Modal
+      aria-labelledby="modal-heading"
+      closeButton={false}
+      open
+      onClose={() => null}
+    >
+      <Modal.Content style={{ minWidth: "20rem", maxWidth: "40rem" }}>
+        <Heading spacing id="modal-heading" size="medium" level="1">
+          Studioet er flyttet!
+        </Heading>
 
-  // We're a react component, in theory, so return null to not render anything
-  return null;
+        <BodyLong spacing>
+          Vi har oppdatert studioet og flyttet det til ny url:
+          aksel.nav.no/admin. Hvis noe ikke fungerer, ta kontakt på slack
+          #aksel-redaksjonen! Husk å logge inn med samme login-provider. For de
+          fleste vil dette være NAV SSO.
+        </BodyLong>
+        <Button
+          onClick={() => start()}
+          icon={<Send aria-hidden />}
+          iconPosition="right"
+        >
+          Gå til nytt studio
+        </Button>
+      </Modal.Content>
+    </Modal>
+  );
 };
 
 export default BundleChecker;
-
-const createInterval = (declined?: boolean) =>
-  setInterval(
-    async () => {
-      const newHash = await getCurrentHash();
-
-      if (hash && newHash !== hash) {
-        clearInterval(interval);
-
-        if (window.confirm(CHANGES_AVAILABLE_MESSAGE)) {
-          window.location.reload();
-        } else {
-          interval = createInterval(true);
-        }
-      }
-    },
-    declined ? BUNDLE_CHECK_INTERVAL_DECLINED : BUNDLE_CHECK_INTERVAL
-  );

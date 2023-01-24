@@ -119,7 +119,6 @@ const adjektiv = [
 const client = sanityClient.withConfig({ apiVersion: "2020-06-19" });
 
 const generateName = async () => {
-  console.log("ran");
   const names = await client.fetch(`*[_type == "editor"].anon_navn.current`);
 
   let c = 0;
@@ -131,7 +130,6 @@ const generateName = async () => {
     c += 1;
   }
 
-  console.log(res);
   return res;
 };
 

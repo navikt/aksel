@@ -63,7 +63,10 @@ export const usePageView = (router: Router, pageProps: any) => {
       const data = {};
       try {
         if (pageProps?.page && pageProps.page?._type === "aksel_artikkel") {
-          data["tema"] = pageProps.page.tema.map((x) => x?.slug?.current);
+          const tema = pageProps.page.tema.map((x) => x?.slug?.current) ?? null;
+          if (tema && tema.length > 0) {
+            data["tema"] = tema;
+          }
         }
       } catch (error) {
         isDevelopment && console.error(error);

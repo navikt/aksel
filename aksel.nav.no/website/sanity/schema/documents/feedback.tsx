@@ -81,13 +81,20 @@ export const Feedback = defineType({
       url: "url",
       feedback_type: "feedback_type",
       artikkel_feedback: "artikkel_feedback",
+      title: "doc_ref.heading",
     },
     prepare(selection) {
-      const { melding, url, behandlet, feedback_type, artikkel_feedback } =
-        selection;
+      const {
+        melding,
+        url,
+        behandlet,
+        feedback_type,
+        artikkel_feedback,
+        title,
+      } = selection;
 
       return {
-        title: melding ? melding : url ? url : "",
+        title: melding ? melding : title ? title : url ? url : "",
         subtitle: `${behandlet ? "Ferdig behandlet" : "Ubehandlet"} | ${
           feedback_type === "footer" ? "footer" : artikkel_feedback
         }`,

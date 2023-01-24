@@ -143,27 +143,21 @@
 .navds-checkbox--error
   > .navds-checkbox__input:not(:hover):not(:disabled):not(:checked):not(:indeterminate)
   + .navds-checkbox__label::before,
-.navds-radio--error
-  > .navds-radio__input:not(:hover):not(:disabled):not(:checked):not(:indeterminate)
-  + .navds-radio__label::before {
+.navds-radio--error > .navds-radio__input:not(:hover):not(:disabled):not(:checked) + .navds-radio__label::before {
   box-shadow: inset 0 0 0 2px var(--ac-radio-checkbox-error-border, var(--a-border-danger));
 }
 
 .navds-checkbox--error
   > .navds-checkbox__input:focus:not(:hover):not(:disabled):not(:checked):not(:indeterminate)
   + .navds-checkbox__label::before,
-.navds-radio--error
-  > .navds-radio__input:focus:not(:hover):not(:disabled):not(:checked):not(:indeterminate)
-  + .navds-radio__label::before {
+.navds-radio--error > .navds-radio__input:focus:not(:hover):not(:disabled):not(:checked) + .navds-radio__label::before {
   box-shadow: inset 0 0 0 2px var(--ac-radio-checkbox-error-border, var(--a-border-danger)), var(--a-shadow-focus);
 }
 
 .navds-checkbox--error
   > .navds-checkbox__input:hover:not(:disabled):not(:checked):not(:indeterminate):not(:focus)
   + .navds-checkbox__label::before,
-.navds-radio--error
-  > .navds-radio__input:hover:not(:disabled):not(:checked):not(:indeterminate):not(:focus)
-  + .navds-radio__label::before {
+.navds-radio--error > .navds-radio__input:hover:not(:disabled):not(:checked):not(:focus) + .navds-radio__label::before {
   background-color: var(--ac-radio-checkbox-error-hover-bg, var(--a-surface-danger-subtle));
   box-shadow: inset 0 0 0 2px var(--ac-radio-checkbox-error-border, var(--a-border-danger));
 }
@@ -171,9 +165,7 @@
 .navds-checkbox--error
   > .navds-checkbox__input:focus:hover:not(:disabled):not(:checked):not(:indeterminate)
   + .navds-checkbox__label::before,
-.navds-radio--error
-  > .navds-radio__input:focus:hover:not(:disabled):not(:checked):not(:indeterminate)
-  + .navds-radio__label::before {
+.navds-radio--error > .navds-radio__input:focus:hover:not(:disabled):not(:checked) + .navds-radio__label::before {
   background-color: var(--ac-radio-checkbox-error-hover-bg, var(--a-surface-danger-subtle));
   box-shadow: inset 0 0 0 2px var(--ac-radio-checkbox-error-border, var(--a-border-danger)), var(--a-shadow-focus);
 }

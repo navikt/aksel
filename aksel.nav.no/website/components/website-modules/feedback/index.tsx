@@ -220,6 +220,7 @@ const Feedback = ({
                 x === HelpfulArticleEnum.MISC ? null : HelpfulArticleEnum.MISC
               )
             }
+            id="feedback-forbedringer-button"
           >
             <Label as="span">Foreslå forbedring</Label>
           </Button>

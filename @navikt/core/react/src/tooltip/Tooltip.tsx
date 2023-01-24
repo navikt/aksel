@@ -11,7 +11,7 @@ import {
   useFocus,
   useHover,
   useInteractions,
-} from "@floating-ui/react-dom-interactions";
+} from "@floating-ui/react";
 import cl from "clsx";
 import React, {
   cloneElement,

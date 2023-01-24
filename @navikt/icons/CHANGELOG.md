@@ -1,5 +1,39 @@
 # @navikt/ds-icons
 
+## 2.1.1
+
+### Patch Changes
+
+- [#1759](https://github.com/navikt/Designsystemet/pull/1759) [`dcf5cfc06`](https://github.com/navikt/Designsystemet/commit/dcf5cfc06b751341559ef30085bd974820531e57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset @types/react v18 feil introdusert i v2.0.6
+
+## 2.1.0
+
+## 2.0.18
+
+## 2.0.17
+
+### Patch Changes
+
+- [`27e3dfee0`](https://github.com/navikt/Designsystemet/commit/27e3dfee07e135893e9f62cd32f80ed83a3510de) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Translate og Paragraph ikon
+
+## 2.0.16
+
+### Patch Changes
+
+- [`54f8b0795`](https://github.com/navikt/Designsystemet/commit/54f8b07956bbfb7de51f6682a5fc64903bfd1bdf) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner med feile farger
+
+## 2.0.15
+
+## 2.0.14
+
+## 2.0.13
+
+### Patch Changes
+
+- [`a6c339123`](https://github.com/navikt/Designsystemet/commit/a6c3391237f13394063e4c004ac9efb1875fc944) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Ikonjusteringer sirkleikoner
+
+## 2.0.12
+
 ## 2.0.11
 
 ### Patch Changes

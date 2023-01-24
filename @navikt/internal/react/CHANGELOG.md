@@ -1,5 +1,82 @@
 # @navikt/ds-react-internal
 
+## 2.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`dcf5cfc06`](https://github.com/navikt/Designsystemet/commit/dcf5cfc06b751341559ef30085bd974820531e57)]:
+  - @navikt/ds-react@2.1.1
+  - @navikt/ds-icons@2.1.1
+
+## 2.1.0
+
+### Minor Changes
+
+- [#1665](https://github.com/navikt/Designsystemet/pull/1665) [`6ab84e581`](https://github.com/navikt/Designsystemet/commit/6ab84e581f8d3e850bcec340608354335506a051) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Ny Timeline-komponent for interne-flater
+  :bug: Fikset feil danger-hover token
+
+### Patch Changes
+
+- Updated dependencies [[`0873fe652`](https://github.com/navikt/Designsystemet/commit/0873fe6520e817e462197c162b49c05826da4838)]:
+  - @navikt/ds-react@2.1.0
+  - @navikt/ds-icons@2.1.0
+
+## 2.0.18
+
+### Patch Changes
+
+- Updated dependencies [[`98177d0cd`](https://github.com/navikt/Designsystemet/commit/98177d0cd3802029dcf398ce93c1767d3b0860c5)]:
+  - @navikt/ds-react@2.0.18
+  - @navikt/ds-icons@2.0.18
+
+## 2.0.17
+
+### Patch Changes
+
+- Updated dependencies [[`27e3dfee0`](https://github.com/navikt/Designsystemet/commit/27e3dfee07e135893e9f62cd32f80ed83a3510de)]:
+  - @navikt/ds-icons@2.0.17
+  - @navikt/ds-react@2.0.17
+
+## 2.0.16
+
+### Patch Changes
+
+- Updated dependencies [[`54f8b0795`](https://github.com/navikt/Designsystemet/commit/54f8b07956bbfb7de51f6682a5fc64903bfd1bdf)]:
+  - @navikt/ds-icons@2.0.16
+  - @navikt/ds-react@2.0.16
+
+## 2.0.15
+
+### Patch Changes
+
+- Updated dependencies [[`22dfd8e60`](https://github.com/navikt/Designsystemet/commit/22dfd8e60315c421749394d35e41f412a00a7593)]:
+  - @navikt/ds-react@2.0.15
+  - @navikt/ds-icons@2.0.15
+
+## 2.0.14
+
+### Patch Changes
+
+- Updated dependencies [[`8e5c55443`](https://github.com/navikt/Designsystemet/commit/8e5c554431c98b1b658c5054c0b3cf08b8a65e52)]:
+  - @navikt/ds-react@2.0.14
+  - @navikt/ds-icons@2.0.14
+
+## 2.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`a6c339123`](https://github.com/navikt/Designsystemet/commit/a6c3391237f13394063e4c004ac9efb1875fc944)]:
+  - @navikt/ds-icons@2.0.13
+  - @navikt/ds-react@2.0.13
+
+## 2.0.12
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.0.12
+  - @navikt/ds-icons@2.0.12
+
 ## 2.0.11
 
 ### Patch Changes

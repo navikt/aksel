@@ -1,5 +1,31 @@
 # @navikt/ds-css
 
+## 2.1.1
+
+## 2.1.0
+
+## 2.0.18
+
+## 2.0.17
+
+## 2.0.16
+
+## 2.0.15
+
+### Patch Changes
+
+- [#1748](https://github.com/navikt/Designsystemet/pull/1748) [`22dfd8e60`](https://github.com/navikt/Designsystemet/commit/22dfd8e60315c421749394d35e41f412a00a7593) Thanks [@KenAJoh](https://github.com/KenAJoh)! - toptextPosition prop i Chat for horisontal plassering av navn og dato.
+
+## 2.0.14
+
+## 2.0.13
+
+## 2.0.12
+
+### Patch Changes
+
+- [#1737](https://github.com/navikt/Designsystemet/pull/1737) [`8a1ef5e7e`](https://github.com/navikt/Designsystemet/commit/8a1ef5e7e2c066cb80c13e14329e1585e2c427f8) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset default visuell error-state for radio
+
 ## 2.0.11
 
 ## 2.0.10
