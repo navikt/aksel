@@ -18,8 +18,6 @@ const searchSanity = async (query: string, doctype: string[]) => {
     return [];
   }
 
-  console.log(query);
-
   const words = query
     .split(" ")
     .map(
@@ -83,7 +81,6 @@ export default async function initialSearch(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.query);
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed" });
   }
