@@ -1,5 +1,11 @@
 # @navikt/ds-icons
 
+## 2.1.1
+
+### Patch Changes
+
+- [#1759](https://github.com/navikt/Designsystemet/pull/1759) [`dcf5cfc06`](https://github.com/navikt/Designsystemet/commit/dcf5cfc06b751341559ef30085bd974820531e57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset @types/react v18 feil introdusert i v2.0.6
+
 ## 2.1.0
 
 ## 2.0.18
