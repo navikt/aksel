@@ -1,7 +1,6 @@
-import { useDebounce } from "@/utils";
+import { useThrottle } from "@/utils";
 import { Chips, Heading, Search } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
 
 const options = [
   { key: "alle", display: "Alle" },
@@ -14,34 +13,23 @@ const options = [
 
 export const GlobalSearch = () => {
   const [newest, setNewest] = useState([]);
-  const [q, setQ] = useState("");
-  const [filter, setFilter] = useState({ toggled: options[0].key, query: "" });
-
-  const debouncedSearch = useDebounce(q);
-
-  const {
-    data: queryData,
-    error: queryError,
-    isValidating: queryValidating,
-  } = useSWR(
-    debouncedSearch !== ""
-      ? `/api/search/v1?q=${encodeURIComponent(debouncedSearch)}&doc=${filter}`
-      : null,
-    (query) =>
-      fetch(query).then((res) => {
-        console.count("called");
-        return res.json();
-      }),
-    { revalidateOnFocus: false }
-  );
-
-  const showQueryData = queryData && !queryValidating && q !== "";
+  const [results, setResults] = useState([]);
+  const [tag, setTag] = useState(options[0].key);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
-    fetch(`/api/search/v1/initial?doc=${filter.toggled}`)
+    fetch(`/api/search/v1/initial?doc=${tag}`)
       .then((x) => x.json())
       .then(setNewest);
-  }, [filter.toggled]);
+  }, [tag]);
+
+  const throttledSearch = useThrottle(() => {
+    fetch(`/api/search/v1?q=${encodeURIComponent(query)}&doc=${"alle"}`)
+      .then((x) => x.json())
+      .then(setResults);
+  }, 400);
+
+  useEffect(throttledSearch, [query, throttledSearch]);
 
   return (
     <div>
@@ -49,16 +37,16 @@ export const GlobalSearch = () => {
         <Search
           label="søk"
           variant="simple"
-          value={q}
-          onChange={setQ}
-          onClear={() => setQ("")}
+          value={query}
+          onChange={setQuery}
+          onClear={() => setQuery("")}
         />
         <Chips className="mt-5">
           {options.map((x) => (
             <Chips.Toggle
               key={x.key}
-              selected={filter.toggled === x.key}
-              onClick={() => setFilter((y) => ({ ...y, toggled: x.key }))}
+              selected={tag === x.key}
+              onClick={() => setTag(x.key)}
             >
               {x.display}
             </Chips.Toggle>
@@ -66,19 +54,19 @@ export const GlobalSearch = () => {
         </Chips>
       </div>
       <div className="mt-8">
-        {showQueryData && (
+        {results && query && (
           <>
             <Heading level="2" size="small">
-              Søkte artikler
+              {`${results.length} treff på "${query}"`}
             </Heading>
             <ul>
-              {!queryError &&
-                queryData &&
-                queryData?.map((x, xi) => <li key={xi}>{x.heading}</li>)}
+              {results?.map((x, xi) => (
+                <li key={xi}>{x.heading}</li>
+              ))}
             </ul>
           </>
         )}
-        {newest && (
+        {newest && !(results && query) && (
           <>
             <Heading level="2" size="small">
               Nyeste artikler
