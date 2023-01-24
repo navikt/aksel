@@ -1,7 +1,7 @@
-import { useThrottle } from "@/utils";
+import { useDebounce } from "@/utils";
 import { Chips, Heading, Label, Link, Search } from "@navikt/ds-react";
-import { useEffect, useState } from "react";
 import NextLink from "next/link";
+import { useEffect, useState } from "react";
 
 const options = [
   { key: "alle", display: "Alle" },
@@ -29,12 +29,15 @@ type SearchHit = {
   _updatedAt: string;
 };
 
+type GroupedHits = { [key: string]: SearchHit[] };
+
 export const GlobalSearch = () => {
   const [newest, setNewest] = useState<SearchHit[]>([]);
   const [results, setResults] = useState<SearchHit[]>([]);
   const [tag, setTag] = useState(options[0].key);
 
   const [query, setQuery] = useState("");
+  const debouncedSearchTerm = useDebounce(query);
 
   useEffect(() => {
     fetch(`/api/search/v1/initial?doc=${tag}`)
@@ -42,15 +45,29 @@ export const GlobalSearch = () => {
       .then(setNewest);
   }, [tag]);
 
-  const throttledSearch = useThrottle(() => {
-    fetch(`/api/search/v1?q=${encodeURIComponent(query)}&doc=${"alle"}`)
-      .then((x) => x.json())
-      .then(setResults);
-  }, 400);
+  useEffect(() => {
+    debouncedSearchTerm
+      ? fetch(
+          `/api/search/v1?q=${encodeURIComponent(
+            debouncedSearchTerm
+          )}&doc=${"alle"}`
+        )
+          .then((x) => x.json())
+          .then(setResults)
+      : setResults([]);
+  }, [debouncedSearchTerm]);
 
-  useEffect(throttledSearch, [query, throttledSearch]);
+  const groups: { [key: string]: SearchHit[] } = results?.reduce(
+    (prev, cur) => {
+      if (cur._type in prev) {
+        return { ...prev, [cur._type]: [...prev[cur._type], cur] };
+      } else {
+        return { ...prev, [cur._type]: [cur] };
+      }
+    },
+    {}
+  );
 
-  console.log(results);
   return (
     <div>
       <div>
@@ -62,15 +79,27 @@ export const GlobalSearch = () => {
           onClear={() => setQuery("")}
         />
         <Chips className="mt-5">
-          {options.map((x) => (
-            <Chips.Toggle
-              key={x.key}
-              selected={tag === x.key}
-              onClick={() => setTag(x.key)}
-            >
-              {x.display}
-            </Chips.Toggle>
-          ))}
+          {options.map((x) => {
+            const grp = Object.keys(groups).find((k) => k === x.type);
+            const length = groups[grp]?.length ?? 0;
+            if (
+              length === 0 &&
+              x.key !== "alle" &&
+              query &&
+              results.length > 0
+            ) {
+              return null;
+            }
+            return (
+              <Chips.Toggle
+                key={x.key}
+                selected={tag === x.key}
+                onClick={() => setTag(x.key)}
+              >
+                {`${x.display} ${length ? `(${length})` : ""}`}
+              </Chips.Toggle>
+            );
+          })}
         </Chips>
       </div>
       <div className="mt-8">
@@ -79,7 +108,7 @@ export const GlobalSearch = () => {
             <Heading level="2" size="small">
               {`${results.length} treff på "${query}"`}
             </Heading>
-            <Group hits={results} />
+            <Group groups={groups} tag={tag} />
           </>
         )}
         {newest && !(results && query) && (
@@ -99,39 +128,35 @@ export const GlobalSearch = () => {
   );
 };
 
-function Group({ hits }: { hits: SearchHit[] }) {
-  if (hits.length === 0) {
+function Group({ groups, tag }: { groups: GroupedHits; tag: string }) {
+  if (Object.keys(groups).length === 0) {
     return null;
   }
 
-  const groups: { [key: string]: SearchHit[] } = hits.reduce((prev, cur) => {
-    if (cur._type in prev) {
-      return { ...prev, [cur._type]: [...prev[cur._type], cur] };
-    } else {
-      return { ...prev, [cur._type]: [cur] };
-    }
-  }, {});
-
-  console.log(groups);
+  const hideGroup = (type: string) => {
+    return options.find((x) => x.key === tag).type !== type && tag !== "alle";
+  };
 
   return (
     <>
-      {Object.entries(groups).map(([key, val]) => {
-        return (
-          <div key={key}>
-            <div className="bg-border-alt-3 mt-4 rounded p-2">
-              <Label className="text-text-on-alt-3" as="h2">{`${
-                options.find((x) => x.type === key).display
-              } (${val.length})`}</Label>
+      {Object.entries(groups)
+        .filter(([key]) => !hideGroup(key))
+        .map(([key, val]) => {
+          return (
+            <div key={key}>
+              <div className="bg-border-alt-3 mt-4 rounded p-2">
+                <Label className="text-text-on-alt-3" as="h2">{`${
+                  options.find((x) => x.type === key).display
+                } (${val.length})`}</Label>
+              </div>
+              <div>
+                {val.map((x) => (
+                  <Hit key={x._id} hit={x} />
+                ))}
+              </div>
             </div>
-            <div>
-              {val.map((x) => (
-                <Hit key={x._id} hit={x} />
-              ))}
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </>
   );
 }
