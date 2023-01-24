@@ -442,6 +442,7 @@ export const akselArticleFields = `
     "tema": tema[]->title,
     ingress,
     status,
+    _type,
 `;
 
 export const akselArticleAll = (boundry = "") => {

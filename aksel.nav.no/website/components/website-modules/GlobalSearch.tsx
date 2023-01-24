@@ -1,20 +1,39 @@
 import { useThrottle } from "@/utils";
-import { Chips, Heading, Search } from "@navikt/ds-react";
+import { Chips, Heading, Label, Link, Search } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
+import NextLink from "next/link";
 
 const options = [
   { key: "alle", display: "Alle" },
-  { key: "gp", display: "God praksis" },
-  { key: "komponenter", display: "Komponenter" },
-  { key: "prinsipper", display: "Prinsipper" },
-  { key: "grunnleggende", display: "Grunnleggende" },
-  { key: "blogg", display: "Blogg" },
+  { key: "gp", display: "God praksis", type: "aksel_artikkel" },
+  { key: "komponenter", display: "Komponenter", type: "komponent_artikkel" },
+  { key: "prinsipper", display: "Prinsipper", type: "aksel_prinsipp" },
+  { key: "grunnleggende", display: "Grunnleggende", type: "ds_artikkel" },
+  { key: "blogg", display: "Blogg", type: "aksel_blogg" },
 ];
 
+type SearchHit = {
+  content: string;
+  heading: string;
+  ingress?: string;
+  intro?: string;
+  publishedAt?: string;
+  slug: string;
+  status?: { bilde: any; tag: string };
+  tema?: string[];
+  updateInfo?: { lastVerified: string };
+  _createdAt: string;
+  _id: string;
+  _score: number;
+  _type: string;
+  _updatedAt: string;
+};
+
 export const GlobalSearch = () => {
-  const [newest, setNewest] = useState([]);
-  const [results, setResults] = useState([]);
+  const [newest, setNewest] = useState<SearchHit[]>([]);
+  const [results, setResults] = useState<SearchHit[]>([]);
   const [tag, setTag] = useState(options[0].key);
+
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -31,6 +50,7 @@ export const GlobalSearch = () => {
 
   useEffect(throttledSearch, [query, throttledSearch]);
 
+  console.log(results);
   return (
     <div>
       <div>
@@ -59,11 +79,7 @@ export const GlobalSearch = () => {
             <Heading level="2" size="small">
               {`${results.length} treff på "${query}"`}
             </Heading>
-            <ul>
-              {results?.map((x, xi) => (
-                <li key={xi}>{x.heading}</li>
-              ))}
-            </ul>
+            <Group hits={results} />
           </>
         )}
         {newest && !(results && query) && (
@@ -82,3 +98,50 @@ export const GlobalSearch = () => {
     </div>
   );
 };
+
+function Group({ hits }: { hits: SearchHit[] }) {
+  if (hits.length === 0) {
+    return null;
+  }
+
+  const groups: { [key: string]: SearchHit[] } = hits.reduce((prev, cur) => {
+    if (cur._type in prev) {
+      return { ...prev, [cur._type]: [...prev[cur._type], cur] };
+    } else {
+      return { ...prev, [cur._type]: [cur] };
+    }
+  }, {});
+
+  console.log(groups);
+
+  return (
+    <>
+      {Object.entries(groups).map(([key, val]) => {
+        return (
+          <div key={key}>
+            <div className="bg-border-alt-3 mt-4 rounded p-2">
+              <Label className="text-text-on-alt-3" as="h2">{`${
+                options.find((x) => x.type === key).display
+              } (${val.length})`}</Label>
+            </div>
+            <div>
+              {val.map((x) => (
+                <Hit key={x._id} hit={x} />
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
+function Hit({ hit }: { hit: SearchHit }) {
+  return (
+    <div>
+      <NextLink href={hit.slug} passHref>
+        <Link className="mt-6">{hit.heading}</Link>
+      </NextLink>
+    </div>
+  );
+}

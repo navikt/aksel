@@ -6,7 +6,6 @@ import { allArticleDocuments } from "../../../../sanity/config";
 
 /*
 TODO: nyeste artikler basert på kategori (alle, god praksis, komponenter etc)
-
 */
 export default async function initialSearch(
   req: NextApiRequest,
