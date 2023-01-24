@@ -1,10 +1,10 @@
 const exportDataset = require("@sanity/export");
 const sanityClient = require("@sanity/client");
-const sanityToken = process.env.SANITY_TOKEN;
+const sanityToken = process.env.SANITY_PREVIEW_TOKEN;
 const SanityConfig = require("../sanity.json");
 
 if (!sanityToken) {
-  throw new Error("Could not find token from SANITY_TOKEN");
+  throw new Error("Could not find token from SANITY_PREVIEW_TOKEN");
 }
 
 const client = sanityClient({
