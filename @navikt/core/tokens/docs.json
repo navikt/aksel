@@ -240,7 +240,7 @@
     { "name": "--a-surface-danger-subtle", "value": "rgba(255, 230, 230, 1)" },
     {
       "name": "--a-surface-danger-subtle-hover",
-      "value": "rgba(255, 230, 230, 1)"
+      "value": "rgba(255, 184, 184, 1)"
     },
     { "name": "--a-surface-danger", "value": "rgba(195, 0, 0, 1)" },
     { "name": "--a-surface-danger-hover", "value": "rgba(173, 0, 0, 1)" },
