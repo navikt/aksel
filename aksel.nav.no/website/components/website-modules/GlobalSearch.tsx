@@ -1,6 +1,6 @@
 import { useDebounce } from "@/utils";
 import { Chips, Heading, Search } from "@navikt/ds-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 const options = [
@@ -13,20 +13,11 @@ const options = [
 ];
 
 export const GlobalSearch = () => {
+  const [newest, setNewest] = useState([]);
   const [q, setQ] = useState("");
-  const [toggled, setToggled] = useState(options[0].key);
+  const [filter, setFilter] = useState({ toggled: options[0].key, query: "" });
 
   const debouncedSearch = useDebounce(q);
-
-  const {
-    data: initialData,
-    error: initialError,
-    isValidating: initialValidating,
-  } = useSWR(
-    `/api/search/v1/initial?doc=${toggled}`,
-    (query) => fetch(query).then((res) => res.json()),
-    { revalidateOnFocus: false }
-  );
 
   const {
     data: queryData,
@@ -34,7 +25,7 @@ export const GlobalSearch = () => {
     isValidating: queryValidating,
   } = useSWR(
     debouncedSearch !== ""
-      ? `/api/search/v1?q=${encodeURIComponent(debouncedSearch)}&doc=${toggled}`
+      ? `/api/search/v1?q=${encodeURIComponent(debouncedSearch)}&doc=${filter}`
       : null,
     (query) =>
       fetch(query).then((res) => {
@@ -46,7 +37,11 @@ export const GlobalSearch = () => {
 
   const showQueryData = queryData && !queryValidating && q !== "";
 
-  const showNewest = initialData && !initialValidating && !q;
+  useEffect(() => {
+    fetch(`/api/search/v1/initial?doc=${filter.toggled}`)
+      .then((x) => x.json())
+      .then(setNewest);
+  }, [filter.toggled]);
 
   return (
     <div>
@@ -62,8 +57,8 @@ export const GlobalSearch = () => {
           {options.map((x) => (
             <Chips.Toggle
               key={x.key}
-              selected={toggled === x.key}
-              onClick={() => setToggled(x.key)}
+              selected={filter.toggled === x.key}
+              onClick={() => setFilter((y) => ({ ...y, toggled: x.key }))}
             >
               {x.display}
             </Chips.Toggle>
@@ -83,13 +78,13 @@ export const GlobalSearch = () => {
             </ul>
           </>
         )}
-        {showNewest && (
+        {newest && (
           <>
             <Heading level="2" size="small">
               Nyeste artikler
             </Heading>
             <ul>
-              {initialData?.map((x, xi) => (
+              {newest?.map((x, xi) => (
                 <li key={xi}>{x.heading}</li>
               ))}
             </ul>
