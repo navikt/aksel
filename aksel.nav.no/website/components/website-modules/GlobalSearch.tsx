@@ -7,31 +7,33 @@ import cl from "classnames";
 import { allArticleDocuments } from "../../sanity/config";
 
 const options: {
-  [K in typeof allArticleDocuments[number]]: { display: string };
+  [K in typeof allArticleDocuments[number]]: { display: string; index: number };
 } = {
-  aksel_artikkel: { display: "God praksis" },
-  komponent_artikkel: { display: "Komponenter" },
-  aksel_prinsipp: { display: "Prinsipper" },
-  ds_artikkel: { display: "Grunnleggende " },
-  aksel_blogg: { display: "Blogg" },
+  komponent_artikkel: { display: "Komponenter", index: 0 },
+  aksel_artikkel: { display: "God praksis", index: 1 },
+  ds_artikkel: { display: "Grunnleggende ", index: 2 },
+  aksel_blogg: { display: "Blogg", index: 3 },
+  aksel_prinsipp: { display: "Prinsipper", index: 4 },
 };
 
 type SearchHit = {
-  content: string;
-  heading: string;
-  ingress?: string;
-  intro?: string;
-  publishedAt?: string;
-  slug: string;
-  status?: { bilde: any; tag: string };
-  tema?: string[];
-  updateInfo?: { lastVerified: string };
-  _createdAt: string;
-  _id: string;
-  _score: number;
-  _type: string;
-  _updatedAt: string;
-  _matches: Fuse.FuseResultMatch[];
+  item: {
+    content: string;
+    heading: string;
+    ingress?: string;
+    intro?: string;
+    publishedAt?: string;
+    slug: string;
+    status?: { bilde: any; tag: string };
+    tema?: string[];
+    updateInfo?: { lastVerified: string };
+    _createdAt: string;
+    _id: string;
+    _type: string;
+    _updatedAt: string;
+  };
+  score: number;
+  matches: Fuse.FuseResultMatch[];
 };
 
 type GroupedHits = { [key: string]: SearchHit[] };
@@ -60,10 +62,10 @@ export const GlobalSearch = () => {
 
   const groups: { [key: string]: SearchHit[] } = results?.reduce(
     (prev, cur) => {
-      if (cur._type in prev) {
-        return { ...prev, [cur._type]: [...prev[cur._type], cur] };
+      if (cur.item._type in prev) {
+        return { ...prev, [cur.item._type]: [...prev[cur.item._type], cur] };
       } else {
-        return { ...prev, [cur._type]: [cur] };
+        return { ...prev, [cur.item._type]: [cur] };
       }
     },
     {}
@@ -79,29 +81,6 @@ export const GlobalSearch = () => {
           onChange={setQuery}
           onClear={() => setQuery("")}
         />
-        {/* <Chips className="mt-5">
-          {options.map((x) => {
-            const grp = Object.keys(groups).find((k) => k === x.type);
-            const length = groups[grp]?.length ?? 0;
-            if (
-              length === 0 &&
-              x.key !== "alle" &&
-              query &&
-              results.length > 0
-            ) {
-              return null;
-            }
-            return (
-              <Chips.Toggle
-                key={x.key}
-                selected={tag === x.key}
-                onClick={() => setTag(x.key)}
-              >
-                {`${x.display} ${length ? `(${length})` : ""}`}
-              </Chips.Toggle>
-            );
-          })}
-        </Chips> */}
       </div>
       <div className="mt-8">
         {results && query && (
@@ -109,7 +88,7 @@ export const GlobalSearch = () => {
             <Heading level="2" size="small">
               {`${results.length} treff på "${query}"`}
             </Heading>
-            <Group groups={groups} tag="alle" query={debouncedSearchTerm} />
+            <Group groups={groups} query={debouncedSearchTerm} />
           </>
         )}
       </div>
@@ -117,27 +96,16 @@ export const GlobalSearch = () => {
   );
 };
 
-function Group({
-  groups,
-  tag,
-  query,
-}: {
-  groups: GroupedHits;
-  tag: string;
-  query: string;
-}) {
+function Group({ groups, query }: { groups: GroupedHits; query: string }) {
   if (Object.keys(groups).length === 0) {
+    // TODO: Empty-state?
     return null;
   }
-
-  /*const hideGroup = (type: string) => {
-    return options.find((x) => x.key === tag).type !== type && tag !== "alle";
-  };*/
 
   return (
     <>
       {Object.entries(groups)
-        //.filter(([key]) => !hideGroup(key))
+        .sort((a, b) => options[a[0]].index - options[b[0]].index)
         .map(([key, val]) => {
           return (
             <div key={key}>
@@ -149,7 +117,7 @@ function Group({
               </div>
               <div>
                 {val.map((x) => (
-                  <Hit key={x._id} hit={x} query={query} />
+                  <Hit key={x.item._id} hit={x} query={query} />
                 ))}
               </div>
             </div>
@@ -160,16 +128,16 @@ function Group({
 }
 
 function Hit({ hit, query }: { hit: SearchHit; query: string }) {
-  const hightlight = hit._matches[0].indices
-    .map((y) => hit._matches[0].value.slice(y[0], y[1] + 1))
+  const hightlight = hit.matches[0].indices
+    .map((y) => hit.matches[0].value.slice(y[0], y[1] + 1))
     .filter((x) => x.includes(query));
 
   const getHightlight = (q: string) => {
-    if (hit._matches[0].key === "heading") {
-      return <span>{hit?.intro ?? hit.ingress}</span>;
+    if (hit.matches[0].key === "heading") {
+      return <span>{hit?.item.intro ?? hit.item.ingress}</span>;
     }
 
-    const value = hit._matches[0].value;
+    const value = hit.matches[0].value;
     const idx = value.indexOf(q);
     const clampBefore = Math.max(idx - 20, 0) === 0;
     const clampAfter = Math.min(idx + 20, value.length) === value.length;
@@ -203,8 +171,8 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
 
   return (
     <div>
-      <NextLink href={hit.slug} passHref>
-        <Link className="mt-6">{hit.heading}</Link>
+      <NextLink href={hit.item.slug} passHref>
+        <Link className="mt-6">{hit.item.heading}</Link>
       </NextLink>
       {hightlight.length > 0 && <div>{getHightlight(query)}</div>}
     </div>

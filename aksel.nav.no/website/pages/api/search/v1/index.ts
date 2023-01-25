@@ -36,9 +36,9 @@ export default async function initialSearch(
 
   return res.status(200).json(
     result.map((x) => ({
-      ...(x.item as any),
-      _score: x.score,
-      _matches: x.matches,
+      item: x.item,
+      score: x.score,
+      matches: x.matches,
     }))
   );
 }
@@ -70,7 +70,6 @@ function getSearchResults(results, query) {
       { name: "ingress", weight: 50 },
       { name: "intro", weight: 50 },
       { name: "content", weight: 10 },
-      { name: "status.tag", weight: 10 },
       { name: "tema", weight: 20 },
     ],
     includeScore: true,
