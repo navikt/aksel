@@ -138,7 +138,7 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
 function Hit({ hit, query }: { hit: SearchHit; query: string }) {
   const hightlightDesc = hit.matches[0].indices
     .map((y) => hit.matches[0].value.slice(y[0], y[1] + 1))
-    .filter((x) => x.includes(query));
+    .filter((x) => x.toLowerCase().includes(query.toLowerCase()));
 
   const getHightlight = (q: string) => {
     if (hit.matches[0].key === "heading") {
@@ -146,7 +146,7 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
     }
 
     const value = hit.matches[0].value;
-    const idx = value.indexOf(q);
+    const idx = value.toLowerCase().indexOf(q.toLowerCase());
     const clampBefore = Math.max(idx - 20, 0) === 0;
     const clampAfter = Math.min(idx + 20, value.length) === value.length;
     const slice = value.slice(
