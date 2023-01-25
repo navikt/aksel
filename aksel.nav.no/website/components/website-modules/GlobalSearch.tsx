@@ -123,9 +123,12 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
                   as="h2"
                 >{`${options[key].display} (${val.length})`}</Label>
               </div>
-              <div>
+              <div className="mt-2">
                 {val.map((x) => (
-                  <Hit key={x.item._id} hit={x} query={query} />
+                  <>
+                    <Hit key={x.item._id} hit={x} query={query} />
+                    <hr className="border-border-subtle" />
+                  </>
                 ))}
               </div>
             </div>
@@ -163,24 +166,22 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
 
   /* TODO: Heading utenfor eller innenfor a-tag? */
   return (
-    <div className="border-b-border-divider border-b py-1">
+    <div className="focus-within:shadow-focus hover:bg-surface-hover group relative cursor-pointer rounded py-6 px-4">
       <Heading level="3" size="small">
         <NextLink href={hit.item.slug} passHref>
-          <a className="focus-visible:shadow-focus hover:bg-surface-hover group inline-block w-full rounded py-6 px-4 focus:outline-none">
-            <span className="group-hover:underline">
-              {highlightStr(hit.item.heading, query)}
-            </span>
-            {/* TODO: aria-hidden vs after-element med inset-0? Høre med uu */}
-            <span className="font-regular text-text-subtle text-lg" aria-hidden>
-              {hightlightDesc.length > 0 ? (
-                <div>{getHightlight(query)}</div>
-              ) : (
-                <div>{hit.item?.ingress ?? hit.item?.intro}</div>
-              )}
-            </span>
+          <a className="after:absolute after:inset-0 focus:outline-none group-hover:underline">
+            <span>{highlightStr(hit.item.heading, query)}</span>
           </a>
         </NextLink>
       </Heading>
+      {/* TODO: aria-hidden vs after-element med inset-0? Høre med uu */}
+      <span className="font-regular text-text-subtle text-lg" aria-hidden>
+        {hightlightDesc.length > 0 ? (
+          <div>{getHightlight(query)}</div>
+        ) : (
+          <div>{hit.item?.ingress ?? hit.item?.intro}</div>
+        )}
+      </span>
     </div>
   );
 }
