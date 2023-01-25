@@ -21,7 +21,7 @@ const SuggestionBlockComponent = ({
         <Heading size="small" level="2">
           {options[variant]?.heading}
         </Heading>
-        <BodyLong className="mt-2">{options[variant].text}</BodyLong>
+        <BodyLong className="mt-2">{options[variant]?.text}</BodyLong>
         <a
           href={options[variant].link}
           className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus mt-4 w-fit rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
@@ -62,10 +62,10 @@ export const SuggestionBlock = ({
     >
       <BodyShort className="flex items-center gap-2">
         <LightBulb aria-hidden className="shrink-0 text-2xl" />
-        {options[variant].text}
+        {options[variant]?.text}
       </BodyShort>
       <a
-        href={options[variant].link}
+        href={options[variant]?.link}
         className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
       >
         Send forslag
