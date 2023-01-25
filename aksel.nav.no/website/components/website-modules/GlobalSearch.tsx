@@ -1,5 +1,5 @@
 import { useDebounce } from "@/utils";
-import { Heading, Label, Link, Search } from "@navikt/ds-react";
+import { Heading, Label, Search } from "@navikt/ds-react";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import Fuse from "fuse.js";
@@ -90,6 +90,7 @@ export const GlobalSearch = () => {
         />
       </div>
       <div className="mt-8 max-w-3xl">
+        {/* TODO: Loading state når ingen resultater er vist. Står nå: 0 treff på {query} i ~1 sekund */}
         {results && query && (
           <>
             <Heading level="2" size="small">
@@ -160,12 +161,15 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
     return highlightStr(str, query);
   };
 
+  /* TODO: Heading utenfor eller innenfor a-tag? */
   return (
     <div className="border-b-border-divider border-b py-1">
       <Heading level="3" size="small">
         <NextLink href={hit.item.slug} passHref>
-          <a className="focus-visible:shadow-focus hover:bg-surface-hover inline-block w-full rounded py-6 px-4 focus:outline-none">
-            {highlightStr(hit.item.heading, query)}
+          <a className="focus-visible:shadow-focus hover:bg-surface-hover group inline-block w-full rounded py-6 px-4 focus:outline-none">
+            <span className="group-hover:underline">
+              {highlightStr(hit.item.heading, query)}
+            </span>
             {/* TODO: aria-hidden vs after-element med inset-0? Høre med uu */}
             <span className="font-regular text-text-subtle text-lg" aria-hidden>
               {hightlightDesc.length > 0 ? (
