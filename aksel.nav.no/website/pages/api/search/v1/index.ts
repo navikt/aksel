@@ -4,51 +4,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { allArticleDocuments } from "../../../../sanity/config";
 import Fuse from "fuse.js";
 
-const searchSanity = async (query: string, doctype: string[]) => {
-  if (!query || !doctype) {
-    return [];
-  }
-
-  const sanityQuery = `*[_type in $types ]{
-    ${akselArticleFields}
-    "intro": pt::text(intro.body),
-    "content": pt::text(content),
-  }`;
-
-  return await getClient()
-    .fetch(sanityQuery, { types: doctype, q: query })
-    .then((data) => {
-      return data.filter((x) => x._score !== 0);
-    })
-    .catch((err) => {
-      console.log("Error message: ", err.message);
-      return [];
-    });
-};
-
-const getSearchResults = (results, query) => {
-  /* https://fusejs.io/api/options.html */
-  const fuse = new Fuse(results, {
-    keys: [
-      { name: "heading", weight: 100 },
-      { name: "ingress", weight: 50 },
-      { name: "intro", weight: 50 },
-      { name: "content", weight: 10 },
-      { name: "status.tag", weight: 10 },
-      { name: "tema", weight: 20 },
-    ],
-    includeScore: true,
-    shouldSort: true,
-    minMatchCharLength: 3,
-    useExtendedSearch: false,
-    includeMatches: true,
-    ignoreLocation: false,
-    threshold: 0.2,
-    distance: 4000,
-  });
-  return fuse.search(query);
-};
-
 export default async function initialSearch(
   req: NextApiRequest,
   res: NextApiResponse
@@ -71,7 +26,7 @@ export default async function initialSearch(
     ? req.query.q.join(" ")
     : req.query.q;
 
-  const hits = await searchSanity(query, doc);
+  const hits = await searchSanity(doc);
 
   if (hits.length === 0) {
     return res.status(200).json([]);
@@ -86,4 +41,46 @@ export default async function initialSearch(
       _matches: x.matches,
     }))
   );
+}
+
+async function searchSanity(doctype: string[]) {
+  if (!doctype) {
+    return [];
+  }
+
+  const sanityQuery = `*[_type in $types ]{
+    ${akselArticleFields}
+    "intro": pt::text(intro.body),
+    "content": pt::text(content),
+  }`;
+
+  return await getClient()
+    .fetch(sanityQuery, { types: doctype })
+    .catch((err) => {
+      console.log("Error message: ", err.message);
+      return [];
+    });
+}
+
+function getSearchResults(results, query) {
+  /* https://fusejs.io/api/options.html */
+  const fuse = new Fuse(results, {
+    keys: [
+      { name: "heading", weight: 100 },
+      { name: "ingress", weight: 50 },
+      { name: "intro", weight: 50 },
+      { name: "content", weight: 10 },
+      { name: "status.tag", weight: 10 },
+      { name: "tema", weight: 20 },
+    ],
+    includeScore: true,
+    shouldSort: true,
+    minMatchCharLength: 3,
+    useExtendedSearch: false,
+    includeMatches: true,
+    ignoreLocation: false,
+    threshold: 0.2,
+    distance: 4000,
+  });
+  return fuse.search(query);
 }
