@@ -18,35 +18,14 @@ const searchSanity = async (query: string, doctype: string[]) => {
     return [];
   }
 
-  const words = query
-    .split(" ")
-    .map(
-      (x) => `heading match "*${x}*",
-  heading match "${x}",
-  pt::text(content) match "${x}",
-  ingress match "*${x}*",
-  pt::text(intro_komponent.body) match "*${x}*"`
-    )
-    .join(",");
-
-  const catchAllQuery = `*${query}*`;
-
-  const sanityQuery = `*[_type in $types ] | score(
-    heading match $qAll,
-    heading match $q,
-    pt::text(content) match $q,
-    ingress match $qAll,
-    pt::text(intro_komponent.body) match $qAll,
-    ${words}
-  ){
-     _score,
+  const sanityQuery = `*[_type in $types ]{
     ${akselArticleFields}
-    "intro": pt::text(intro_komponent.body),
+    "intro": pt::text(intro.body),
     "content": pt::text(content),
   }`;
 
   return await getClient()
-    .fetch(sanityQuery, { types: doctype, q: query, qAll: catchAllQuery })
+    .fetch(sanityQuery, { types: doctype, q: query })
     .then((data) => {
       return data.filter((x) => x._score !== 0);
     })
@@ -63,16 +42,18 @@ const getSearchResults = (results, query) => {
       { name: "heading", weight: 100 },
       { name: "ingress", weight: 50 },
       { name: "intro", weight: 50 },
-      { name: "content", weight: 20 },
+      { name: "content", weight: 10 },
       { name: "status.tag", weight: 10 },
       { name: "tema", weight: 20 },
     ],
     includeScore: true,
-    threshold: 0.5,
     shouldSort: true,
-    ignoreLocation: true,
     minMatchCharLength: 3,
-    useExtendedSearch: true,
+    useExtendedSearch: false,
+    includeMatches: true,
+    ignoreLocation: false,
+    threshold: 0.2,
+    distance: 4000,
   });
   return fuse.search(query);
 };
@@ -104,5 +85,11 @@ export default async function initialSearch(
 
   return res
     .status(200)
-    .json(result.map((x) => ({ ...(x.item as any), _score: x.score })));
+    .json(
+      result.map((x) => ({
+        ...(x.item as any),
+        _score: x.score,
+        _matches: x.matches,
+      }))
+    );
 }

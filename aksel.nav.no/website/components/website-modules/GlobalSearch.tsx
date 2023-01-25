@@ -2,6 +2,8 @@ import { useDebounce } from "@/utils";
 import { Chips, Heading, Label, Link, Search } from "@navikt/ds-react";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
+import Fuse from "fuse.js";
+import cl from "classnames";
 
 const options = [
   { key: "alle", display: "Alle" },
@@ -27,34 +29,30 @@ type SearchHit = {
   _score: number;
   _type: string;
   _updatedAt: string;
+  _matches: Fuse.FuseResultMatch[];
 };
 
 type GroupedHits = { [key: string]: SearchHit[] };
 
 export const GlobalSearch = () => {
-  const [newest, setNewest] = useState<SearchHit[]>([]);
   const [results, setResults] = useState<SearchHit[]>([]);
-  const [tag, setTag] = useState(options[0].key);
+  /* const [tag, setTag] = useState(options[0].key); */
 
   const [query, setQuery] = useState("");
   const debouncedSearchTerm = useDebounce(query);
 
   useEffect(() => {
-    fetch(`/api/search/v1/initial?doc=${tag}`)
-      .then((x) => x.json())
-      .then(setNewest);
-  }, [tag]);
-
-  useEffect(() => {
-    debouncedSearchTerm
-      ? fetch(
-          `/api/search/v1?q=${encodeURIComponent(
-            debouncedSearchTerm
-          )}&doc=${"alle"}`
-        )
-          .then((x) => x.json())
-          .then(setResults)
-      : setResults([]);
+    if (debouncedSearchTerm) {
+      fetch(
+        `/api/search/v1?q=${encodeURIComponent(
+          debouncedSearchTerm
+        )}&doc=${"alle"}`
+      )
+        .then((x) => x.json())
+        .then(setResults);
+    } else {
+      setResults([]);
+    }
   }, [debouncedSearchTerm]);
 
   const groups: { [key: string]: SearchHit[] } = results?.reduce(
@@ -78,7 +76,7 @@ export const GlobalSearch = () => {
           onChange={setQuery}
           onClear={() => setQuery("")}
         />
-        <Chips className="mt-5">
+        {/* <Chips className="mt-5">
           {options.map((x) => {
             const grp = Object.keys(groups).find((k) => k === x.type);
             const length = groups[grp]?.length ?? 0;
@@ -100,7 +98,7 @@ export const GlobalSearch = () => {
               </Chips.Toggle>
             );
           })}
-        </Chips>
+        </Chips> */}
       </div>
       <div className="mt-8">
         {results && query && (
@@ -108,19 +106,7 @@ export const GlobalSearch = () => {
             <Heading level="2" size="small">
               {`${results.length} treff på "${query}"`}
             </Heading>
-            <Group groups={groups} tag={tag} />
-          </>
-        )}
-        {newest && !(results && query) && (
-          <>
-            <Heading level="2" size="small">
-              Nyeste artikler
-            </Heading>
-            <ul>
-              {newest?.map((x, xi) => (
-                <li key={xi}>{x.heading}</li>
-              ))}
-            </ul>
+            <Group groups={groups} tag="alle" query={debouncedSearchTerm} />
           </>
         )}
       </div>
@@ -128,7 +114,15 @@ export const GlobalSearch = () => {
   );
 };
 
-function Group({ groups, tag }: { groups: GroupedHits; tag: string }) {
+function Group({
+  groups,
+  tag,
+  query,
+}: {
+  groups: GroupedHits;
+  tag: string;
+  query: string;
+}) {
   if (Object.keys(groups).length === 0) {
     return null;
   }
@@ -151,7 +145,7 @@ function Group({ groups, tag }: { groups: GroupedHits; tag: string }) {
               </div>
               <div>
                 {val.map((x) => (
-                  <Hit key={x._id} hit={x} />
+                  <Hit key={x._id} hit={x} query={query} />
                 ))}
               </div>
             </div>
@@ -161,12 +155,53 @@ function Group({ groups, tag }: { groups: GroupedHits; tag: string }) {
   );
 }
 
-function Hit({ hit }: { hit: SearchHit }) {
+function Hit({ hit, query }: { hit: SearchHit; query: string }) {
+  const hightlight = hit._matches[0].indices
+    .map((y) => hit._matches[0].value.slice(y[0], y[1] + 1))
+    .filter((x) => x.includes(query));
+
+  const getHightlight = (q: string) => {
+    if (hit._matches[0].key === "heading") {
+      return <span>{hit?.intro ?? hit.ingress}</span>;
+    }
+    const value = hit._matches[0].value;
+    const idx = value.indexOf(q);
+    const clampBefore = Math.max(idx - 20, 0) === 0;
+    const clampAfter = Math.min(idx + 20, value.length) === value.length;
+    const slice = value.slice(
+      Math.max(idx - 20, 0),
+      Math.min(idx + 20, value.length)
+    );
+    let str = "";
+    !clampBefore && (str += "...");
+    str += slice;
+    !clampAfter && (str += "...");
+
+    const parts = str.split(new RegExp(`(${query})`, "gi"));
+    return (
+      <span>
+        {parts.map((part, i) => (
+          <span
+            key={i}
+            className={cl({
+              "bg-lightblue-400 font-semibold":
+                part.toLowerCase() === query.toLowerCase(),
+            })}
+          >
+            {part}
+          </span>
+        ))}
+      </span>
+    );
+    /* return str.split(query).map(x => <span key={x}></span>); */
+  };
+
   return (
     <div>
       <NextLink href={hit.slug} passHref>
         <Link className="mt-6">{hit.heading}</Link>
       </NextLink>
+      {hightlight.length > 0 && <div>{getHightlight(query)}</div>}
     </div>
   );
 }
