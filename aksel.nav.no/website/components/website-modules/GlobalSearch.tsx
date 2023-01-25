@@ -164,6 +164,7 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
     if (hit._matches[0].key === "heading") {
       return <span>{hit?.intro ?? hit.ingress}</span>;
     }
+
     const value = hit._matches[0].value;
     const idx = value.indexOf(q);
     const clampBefore = Math.max(idx - 20, 0) === 0;
