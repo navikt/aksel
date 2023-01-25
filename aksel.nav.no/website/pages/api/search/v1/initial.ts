@@ -1,5 +1,4 @@
 import { akselArticleFields } from "@/lib";
-import { DocMap } from "./index";
 import { getClient } from "@/sanity-client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { allArticleDocuments } from "../../../../sanity/config";
@@ -19,10 +18,15 @@ export default async function initialSearch(
     ${akselArticleFields}
   }`;
 
-  const doc =
-    DocMap[
-      Array.isArray(req.query.doc) ? req.query.doc.join("") : req.query.doc
-    ] ?? allArticleDocuments;
+  let doc;
+  if (req.query?.doc) {
+    const queryDoc = Array.isArray(req.query.doc)
+      ? req.query.doc.join("")
+      : req.query.doc;
+    doc = queryDoc.split(",");
+  } else {
+    doc = allArticleDocuments;
+  }
 
   const payload = [];
 

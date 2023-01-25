@@ -4,8 +4,11 @@ import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import Fuse from "fuse.js";
 import cl from "classnames";
+import { allArticleDocuments } from "../../sanity/config";
 
-const options = {
+const options: {
+  [K in typeof allArticleDocuments[number]]: { display: string };
+} = {
   aksel_artikkel: { display: "God praksis" },
   komponent_artikkel: { display: "Komponenter" },
   aksel_prinsipp: { display: "Prinsipper" },

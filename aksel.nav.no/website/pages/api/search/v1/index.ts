@@ -4,15 +4,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { allArticleDocuments } from "../../../../sanity/config";
 import Fuse from "fuse.js";
 
-export const DocMap = {
-  alle: allArticleDocuments,
-  gp: ["aksel_artikkel"],
-  komponenter: ["komponent_artikkel"],
-  prinsipper: ["aksel_prinsipp"],
-  grunnleggende: ["ds_artikkel"],
-  blogg: ["aksel_blogg"],
-};
-
 const searchSanity = async (query: string, doctype: string[]) => {
   if (!query || !doctype) {
     return [];
@@ -66,10 +57,15 @@ export default async function initialSearch(
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const doc =
-    DocMap[
-      Array.isArray(req.query.doc) ? req.query.doc.join("") : req.query.doc
-    ];
+  let doc;
+  if (req.query?.doc) {
+    const queryDoc = Array.isArray(req.query.doc)
+      ? req.query.doc.join("")
+      : req.query.doc;
+    doc = queryDoc.split(",");
+  } else {
+    doc = allArticleDocuments;
+  }
 
   const query = Array.isArray(req.query.q)
     ? req.query.q.join(" ")
@@ -83,13 +79,11 @@ export default async function initialSearch(
 
   const result = getSearchResults(hits, query);
 
-  return res
-    .status(200)
-    .json(
-      result.map((x) => ({
-        ...(x.item as any),
-        _score: x.score,
-        _matches: x.matches,
-      }))
-    );
+  return res.status(200).json(
+    result.map((x) => ({
+      ...(x.item as any),
+      _score: x.score,
+      _matches: x.matches,
+    }))
+  );
 }
