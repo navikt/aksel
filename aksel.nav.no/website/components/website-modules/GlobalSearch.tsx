@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Fuse from "fuse.js";
 import cl from "classnames";
 import { allArticleDocuments } from "../../sanity/config";
+import Image from "next/image";
+import { urlFor } from "@/lib";
 
 const options: {
   [K in typeof allArticleDocuments[number]]: { display: string; index: number };
@@ -116,7 +118,7 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
         .sort((a, b) => options[a[0]].index - options[b[0]].index)
         .map(([key, val]) => {
           return (
-            <div key={key} className="mt-8 first-of-type:mt-4">
+            <div key={key} className="first-of-type:mt-8 first-of-type:mt-4">
               <div className="bg-bg-subtle  mt-4 rounded p-2">
                 <Label
                   className="text-text-default"
@@ -127,7 +129,7 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
                 {val.map((x) => (
                   <>
                     <Hit key={x.item._id} hit={x} query={query} />
-                    <hr className="border-border-subtle" />
+                    <hr className="border-border-subtle last-of-type:hidden" />
                   </>
                 ))}
               </div>
@@ -166,22 +168,38 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
 
   /* TODO: Heading utenfor eller innenfor a-tag? */
   return (
-    <div className="focus-within:shadow-focus hover:bg-surface-hover group relative cursor-pointer rounded py-6 px-4">
-      <Heading level="3" size="small">
-        <NextLink href={hit.item.slug} passHref>
-          <a className="after:absolute after:inset-0 focus:outline-none group-hover:underline">
-            <span>{highlightStr(hit.item.heading, query)}</span>
-          </a>
-        </NextLink>
-      </Heading>
-      {/* TODO: aria-hidden vs after-element med inset-0? Høre med uu */}
-      <span className="font-regular text-text-subtle text-lg" aria-hidden>
-        {hightlightDesc.length > 0 ? (
-          <div>{getHightlight(query)}</div>
-        ) : (
-          <div>{hit.item?.ingress ?? hit.item?.intro}</div>
+    <div className="focus-within:shadow-focus hover:bg-surface-hover group relative flex cursor-pointer items-center justify-between gap-4 rounded px-2">
+      <div className="px-2 py-6">
+        <Heading level="3" size="small">
+          <NextLink href={hit.item.slug} passHref>
+            <a className="after:absolute after:inset-0 focus:outline-none group-hover:underline">
+              <span>{highlightStr(hit.item.heading, query)}</span>
+            </a>
+          </NextLink>
+        </Heading>
+        {/* TODO: aria-hidden vs after-element med inset-0? Høre med uu */}
+        <span className="font-regular text-text-subtle text-lg" aria-hidden>
+          {hightlightDesc.length > 0 ? (
+            <div>{getHightlight(query)}</div>
+          ) : (
+            <div>{hit.item?.ingress ?? hit.item?.intro}</div>
+          )}
+        </span>
+      </div>
+      <div className="aspect-square w-24">
+        {hit.item?.status?.bilde && (
+          <Image
+            src={urlFor(hit.item.status.bilde).auto("format").url()}
+            decoding="sync"
+            width="96px"
+            height="96px"
+            layout="fixed"
+            objectFit="contain"
+            alt={hit.item?.heading + " thumbnail"}
+            aria-hidden
+          />
         )}
-      </span>
+      </div>
     </div>
   );
 }
