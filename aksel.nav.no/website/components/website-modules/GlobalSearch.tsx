@@ -1,18 +1,17 @@
 import { useDebounce } from "@/utils";
-import { Chips, Heading, Label, Link, Search } from "@navikt/ds-react";
+import { Heading, Label, Link, Search } from "@navikt/ds-react";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import Fuse from "fuse.js";
 import cl from "classnames";
 
-const options = [
-  { key: "alle", display: "Alle" },
-  { key: "gp", display: "God praksis", type: "aksel_artikkel" },
-  { key: "komponenter", display: "Komponenter", type: "komponent_artikkel" },
-  { key: "prinsipper", display: "Prinsipper", type: "aksel_prinsipp" },
-  { key: "grunnleggende", display: "Grunnleggende", type: "ds_artikkel" },
-  { key: "blogg", display: "Blogg", type: "aksel_blogg" },
-];
+const options = {
+  aksel_artikkel: { display: "God praksis" },
+  komponent_artikkel: { display: "Komponenter" },
+  aksel_prinsipp: { display: "Prinsipper" },
+  ds_artikkel: { display: "Grunnleggende " },
+  aksel_blogg: { display: "Blogg" },
+};
 
 type SearchHit = {
   content: string;
@@ -36,7 +35,8 @@ type GroupedHits = { [key: string]: SearchHit[] };
 
 export const GlobalSearch = () => {
   const [results, setResults] = useState<SearchHit[]>([]);
-  /* const [tag, setTag] = useState(options[0].key); */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [tag, setTag] = useState<Array<keyof typeof options>>([]);
 
   const [query, setQuery] = useState("");
   const debouncedSearchTerm = useDebounce(query);
@@ -44,16 +44,16 @@ export const GlobalSearch = () => {
   useEffect(() => {
     if (debouncedSearchTerm) {
       fetch(
-        `/api/search/v1?q=${encodeURIComponent(
-          debouncedSearchTerm
-        )}&doc=${"alle"}`
+        `/api/search/v1?q=${encodeURIComponent(debouncedSearchTerm)}${
+          tag && `&doc=${tag.join(",")}`
+        }`
       )
         .then((x) => x.json())
         .then(setResults);
     } else {
       setResults([]);
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, tag]);
 
   const groups: { [key: string]: SearchHit[] } = results?.reduce(
     (prev, cur) => {
@@ -127,21 +127,22 @@ function Group({
     return null;
   }
 
-  const hideGroup = (type: string) => {
+  /*const hideGroup = (type: string) => {
     return options.find((x) => x.key === tag).type !== type && tag !== "alle";
-  };
+  };*/
 
   return (
     <>
       {Object.entries(groups)
-        .filter(([key]) => !hideGroup(key))
+        //.filter(([key]) => !hideGroup(key))
         .map(([key, val]) => {
           return (
             <div key={key}>
               <div className="bg-border-alt-3 mt-4 rounded p-2">
-                <Label className="text-text-on-alt-3" as="h2">{`${
-                  options.find((x) => x.type === key).display
-                } (${val.length})`}</Label>
+                <Label
+                  className="text-text-on-alt-3"
+                  as="h2"
+                >{`${options[key].display} (${val.length})`}</Label>
               </div>
               <div>
                 {val.map((x) => (
