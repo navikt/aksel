@@ -28,32 +28,10 @@ const main = async () => {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const newData = [];
 
   docs.forEach((data) => {
-    if (data?.slug_v2?.current) {
-      newData.push({
-        _id: data._id,
-        slug: data.slug_v2,
-      });
-      if (!data._id.includes("draft")) {
-        transactionClient.create({
-          _type: "redirect",
-          source: `/${data.slug.current}`,
-          destination: `/${data.slug_v2.current}`,
-          permanent: true,
-        });
-      }
-    } else {
-      console.log(data.heading);
-    }
+    transactionClient.patch(data._id, (p) => p.unset(["slug_v2"]));
   });
-
-  for (const data of newData) {
-    const id = data._id;
-    delete data._id;
-    transactionClient.patch(id, (p) => p.set({ ...data }));
-  }
 
   /* transactionClient.create({
     _type: "redirect",
