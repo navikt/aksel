@@ -17,7 +17,7 @@ body:
       placeholder: eks. send
     validations:
       required: true
-  - type: input
+  - type: textarea
     id: examples
     attributes:
       label: Eksempel på ikonet
