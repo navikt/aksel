@@ -1,1 +1,1 @@
-//import { Search } from "@navikt/ds-core";
+// import { Search } from "@navikt/ds-react";
