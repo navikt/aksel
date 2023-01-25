@@ -74,6 +74,9 @@ export const SuggestionBlock = ({
   );
 };
 
+const issueUrl =
+  "https://github.com/navikt/Designsystemet/issues/new?assignees=olejorgenbakken";
+
 const options: {
   [key: string]: {
     text: string;
@@ -84,7 +87,9 @@ const options: {
 } = {
   ikoner: {
     text: "Har du forslag til nye ikoner, eller endringer?",
-    link: "",
+    link:
+      issueUrl +
+      "&labels=icon%2Cnew&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
   },
   komponenter: {
     text: "Har du forslag til nye komponenter, eller endringer?",
