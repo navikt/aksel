@@ -55,7 +55,7 @@ const AkselArtikkelTemplate = ({
           </Heading>
           <div className="card-grid-3-1 mt-6 px-4">
             {data.relevante_artikler.map((x: any) =>
-              x && x?._id ? <ArtikkelCard {...x} key={x._id} /> : null
+              x && x?._id ? <ArtikkelCard level="3" {...x} key={x._id} /> : null
             )}
           </div>
         </div>
