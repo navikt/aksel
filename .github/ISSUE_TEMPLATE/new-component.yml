@@ -1,7 +1,7 @@
 name: Ny komponent
 description: Send et ønske om en eller flere nye komponenter
 title: "[Ny komponent]: "
-labels: ["component", "new"]
+labels: ["nytt ✨", "forespørsel 🥰"]
 assignees:
   - olejorgenbakken
 body:
