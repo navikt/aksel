@@ -41,11 +41,23 @@ type SearchHit = {
 type GroupedHits = { [key: string]: SearchHit[] };
 
 /**
- *
+ * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
  * TODO:
- * - Suggestionbox med logging av querystring
- * - Logge index for valgt søk med aplitude, eg 20/26
+ * - Implementere filter basert på kategori
+ * - Keyboard-navigering på arrowUp/Down. Kanskje left/right for å hoppe til filter <-> søketreff?
+ * - Escape: lukker søk, cmd/ctrl + k åpner søk
+ * - Oppdatere url-query basert på query + filter: ?search=abcd&filter=god_praksis
+ * - Oppdatere søkefelt og filter basert på url.
+ * - Søkeindeksering av ikoner: Må lazy-loades. Mye av logikk kan hentes fra sanity-modules/icon-search
+ * - - Kan vi unngå lazyloading hvis Api sender med SVG i result-body?
+ * - Wrappe søket i en fullside-modal.
+ * - Åpne søk via en knapp i Header?
+ * - - Usikker på hvilken komponent som skal "eie" søket, men tror header
  *
+ * Logging
+ * - SuggestionBox med logging av querystring ved klikk
+ * - Logge alle søk
+ * - Logge index for valgt søk med aplitude, eg 20/26
  */
 export const GlobalSearch = () => {
   const [results, setResults] = useState<SearchHit[]>([]);
@@ -92,7 +104,7 @@ export const GlobalSearch = () => {
         />
       </div>
       <div className="mt-8 max-w-3xl">
-        {/* TODO: Loading state når ingen resultater er vist. Står nå: 0 treff på {query} i ~1 sekund */}
+        {/* TODO: Loading state når ingen resultater er vist/hentet enda. Står nå: 0 treff på {query} i ~1 sekund.*/}
         {results && query && (
           <>
             <Heading level="2" size="small">
@@ -118,7 +130,7 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
         .sort((a, b) => options[a[0]].index - options[b[0]].index)
         .map(([key, val]) => {
           return (
-            <div key={key} className="first-of-type:mt-8 first-of-type:mt-4">
+            <div key={key} className="first-of-type:mt-8">
               <div className="bg-bg-subtle  mt-4 rounded p-2">
                 <Label
                   className="text-text-default"
