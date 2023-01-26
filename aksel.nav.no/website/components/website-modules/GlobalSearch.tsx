@@ -52,7 +52,7 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * - - Kan vi unngå lazyloading hvis Api sender med SVG i result-body?
  * - Wrappe søket i en fullside-modal.
  * - Åpne søk via en knapp i Header?
- * - - Usikker på hvilken komponent som skal "eie" søket, men tror header
+ * - - Usikker på hvilken komponent som skal "eie" søket, men tror Header
  *
  * Logging
  * - SuggestionBox med logging av querystring ved klikk
