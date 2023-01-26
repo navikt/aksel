@@ -234,10 +234,15 @@ const Page = ({
             </>
           )}
         </BodyShort>
-        {tag && <SuggestionBlock variant={tag} />}
+        {tag && (
+          <SuggestionBlock variant={tag} reference={`<${page?.heading} />`} />
+        )}
         <IntroSeksjon node={page?.intro} />
         {page?.status?.tag === "ready" && (
-          <SuggestionBlock variant="komponent" />
+          <SuggestionBlock
+            variant="komponent"
+            reference={`<${page?.heading} />`}
+          />
         )}
         <SanityBlockContent blocks={page["content"]} />
       </WithSidebar>

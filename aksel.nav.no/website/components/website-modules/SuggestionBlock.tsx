@@ -6,8 +6,10 @@ import { ChangelogIcon } from "components/assets";
 
 const SuggestionBlockComponent = ({
   variant,
+  reference = "",
 }: {
   variant: "komponent-beta" | "komponent-ny";
+  reference?: string;
 }) => {
   return (
     <div
@@ -23,7 +25,7 @@ const SuggestionBlockComponent = ({
         </Heading>
         <BodyLong className="mt-2">{options[variant]?.text}</BodyLong>
         <a
-          href={options[variant].link}
+          href={options[variant].link + reference}
           className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus mt-4 w-fit rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
         >
           Send innspill
@@ -35,6 +37,7 @@ const SuggestionBlockComponent = ({
 
 export const SuggestionBlock = ({
   variant,
+  reference = "",
 }: {
   variant:
     | "ikoner"
@@ -44,6 +47,7 @@ export const SuggestionBlock = ({
     | "komponent-beta"
     | "ikon-ny"
     | "ikon";
+  reference?: string;
 }) => {
   if (variant === "komponent-ny" || variant === "komponent-beta") {
     return <SuggestionBlockComponent variant={variant} />;
@@ -65,7 +69,7 @@ export const SuggestionBlock = ({
         {options[variant]?.text}
       </BodyShort>
       <a
-        href={options[variant]?.link}
+        href={options[variant]?.link + reference}
         className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
       >
         Send forslag
@@ -93,11 +97,21 @@ const options: {
   },
   komponenter: {
     text: "Har du forslag til nye komponenter, eller endringer?",
-    link: "",
+    link:
+      issueUrl +
+      "&labels=component%2Cnew&template=new-component.yml&title=%5BNy+komponent%5D%3A+",
   },
-  komponent: { text: "Har du innspill til komponenten?", link: "" },
+  komponent: {
+    text: "Har du innspill til komponenten?",
+    link: `${issueUrl}&labels=component%2Cupdate&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+  },
+  ikon: {
+    text: "Har du innspill til ikonet?",
+    link:
+      issueUrl +
+      "&labels=ikoner%2Cupdate&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
+  },
   "ikon-ny": { text: "Har du innspill til ikonet?", link: "" },
-  ikon: { text: "Har du innspill til ikonet?", link: "" },
   "komponent-ny": {
     text: "Denne komponenten er helt ny i biblioteket. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
     heading: "Ny",
