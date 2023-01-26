@@ -98,6 +98,7 @@ export const GlobalSearch = () => {
     },
     {}
   );
+  console.log(query, results);
 
   return (
     <div>

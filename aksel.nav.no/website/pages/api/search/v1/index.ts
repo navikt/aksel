@@ -32,7 +32,10 @@ export default async function initialSearch(
     return res.status(200).json([]);
   }
 
-  const result = getSearchResults(hits, query);
+  const result = getSearchResults(
+    hits.map((x) => ({ ...x, content: x.content.replace(/\n|\r/g, " ") })),
+    query
+  );
 
   return res.status(200).json(
     result.map((x) => ({
@@ -74,12 +77,12 @@ function getSearchResults(results, query) {
     ],
     includeScore: true,
     shouldSort: true,
-    minMatchCharLength: 3,
-    useExtendedSearch: false,
+    minMatchCharLength: 4,
+    useExtendedSearch: true,
     includeMatches: true,
-    ignoreLocation: false,
-    threshold: 0.2,
-    distance: 4000,
+    ignoreLocation: true,
+    /* threshold: 0.2,
+    distance: 1000, */
   });
-  return fuse.search(query);
+  return fuse.search(query).filter((x) => x.score < 0.3);
 }
