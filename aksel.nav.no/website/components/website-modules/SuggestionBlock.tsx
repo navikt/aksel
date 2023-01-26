@@ -93,23 +93,23 @@ const options: {
     text: "Har du forslag til nye ikoner, eller endringer?",
     link:
       issueUrl +
-      "&labels=icon%2Cnew&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
+      "&labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
   },
   komponenter: {
     text: "Har du forslag til nye komponenter, eller endringer?",
     link:
       issueUrl +
-      "&labels=component%2Cnew&template=new-component.yml&title=%5BNy+komponent%5D%3A+",
+      "&labels=nytt+✨%2Cforespørsel+🥰&template=new-component.yml&title=%5BNy+komponent%5D%3A+",
   },
   komponent: {
     text: "Har du innspill til komponenten?",
-    link: `${issueUrl}&labels=component%2Cupdate&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+    link: `${issueUrl}&labels=forespørsel+🥰&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
   },
   ikon: {
     text: "Har du innspill til ikonet?",
     link:
       issueUrl +
-      "&labels=ikoner%2Cupdate&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
+      "&labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
   },
   "ikon-ny": { text: "Har du innspill til ikonet?", link: "" },
   "komponent-ny": {
