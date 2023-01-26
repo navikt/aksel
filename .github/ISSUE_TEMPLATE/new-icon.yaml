@@ -1,7 +1,7 @@
 name: Nytt ikon
 description: Send et ønske om et eller flere nye ikoner
 title: "[Nytt ikon]: "
-labels: ["icon", "new"]
+labels: ["nytt ✨", "ikoner 🖼", "forespørsel 🥰"]
 assignees:
   - olejorgenbakken
 body:
