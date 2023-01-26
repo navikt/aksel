@@ -99,11 +99,11 @@ const options: {
     text: "Har du forslag til nye komponenter, eller endringer?",
     link:
       issueUrl +
-      "&labels=nytt+✨%2Cforespørsel+🥰&template=new-component.yml&title=%5BNy+komponent%5D%3A+",
+      "&labels=nytt+✨%2Cforespørsel+🥰%2Ckomponenter+🧩&template=new-component.yml&title=%5BNy+komponent%5D%3A+",
   },
   komponent: {
     text: "Har du innspill til komponenten?",
-    link: `${issueUrl}&labels=forespørsel+🥰&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+    link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
   },
   ikon: {
     text: "Har du innspill til ikonet?",
