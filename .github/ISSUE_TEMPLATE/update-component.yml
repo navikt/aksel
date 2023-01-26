@@ -1,7 +1,7 @@
 name: Innspill til komponent
 description: Send inn innspill til komponent
 title: "[Innspill til komponent]: "
-labels: ["forespørsel 🥰"]
+labels: ["forespørsel 🥰", "komponenter 🧩"]
 assignees:
   - olejorgenbakken
 body:
