@@ -49,7 +49,7 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * - Oppdatere url-query basert på query + filter: ?search=abcd&filter=god_praksis
  * - Oppdatere søkefelt og filter basert på url.
  * - Søkeindeksering av ikoner: Må lazy-loades. Mye av logikk kan hentes fra sanity-modules/icon-search
- * - - Kan vi unngå lazyloading hvis Api sender med SVG i result-body?
+ * - - Kan vi unngå lazyloading hvis Api sender med SVG i result-body? Risk for XSS da?
  * - Wrappe søket i en fullside-modal.
  * - Åpne søk via en knapp i Header?
  * - - Usikker på hvilken komponent som skal "eie" søket, men tror Header
@@ -57,7 +57,6 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * uu
  * - Bruke riktig form-semantikk og attributter for søkefelt + filter
  * - Sette opp riktig semantikk for søkegruppering/treff
- * - - Vil ul > li være best her?
  * - Skal søkefelt ha role="combobox" + aria-controls?
  *
  *
@@ -145,14 +144,14 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
                   as="h2"
                 >{`${options[key].display} (${val.length})`}</Label>
               </div>
-              <div className="mt-2">
+              <ul className="mt-2">
                 {val.map((x) => (
                   <>
                     <Hit key={x.item._id} hit={x} query={query} />
                     <hr className="border-border-subtle last-of-type:hidden" />
                   </>
                 ))}
-              </div>
+              </ul>
             </div>
           );
         })}
@@ -188,7 +187,7 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
 
   /* TODO: Heading utenfor eller innenfor a-tag? */
   return (
-    <div className="focus-within:shadow-focus hover:bg-surface-hover group relative flex cursor-pointer items-center justify-between gap-4 rounded px-2">
+    <li className="focus-within:shadow-focus hover:bg-surface-hover group relative flex cursor-pointer items-center justify-between gap-4 rounded px-2">
       <div className="px-2 py-6">
         <Heading level="3" size="small">
           <NextLink href={hit.item.slug} passHref>
@@ -206,7 +205,7 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
           )}
         </span>
       </div>
-      <div className="aspect-square w-24">
+      <div className="hidden aspect-square w-24 sm:block">
         {hit.item?.status?.bilde && (
           <Image
             src={urlFor(hit.item.status.bilde).auto("format").url()}
@@ -220,7 +219,7 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
           />
         )}
       </div>
-    </div>
+    </li>
   );
 }
 
