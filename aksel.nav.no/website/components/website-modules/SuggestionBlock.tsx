@@ -111,17 +111,20 @@ const options: {
       issueUrl +
       "&labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
   },
-  "ikon-ny": { text: "Har du innspill til ikonet?", link: "" },
+  "ikon-ny": {
+    text: "Har du innspill til ikonet?",
+    link:
+      issueUrl +
+      "&labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
+  },
   "komponent-ny": {
     text: "Denne komponenten er helt ny i biblioteket. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
-    heading: "Ny",
-    link: "",
+    link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
     icon: <ChangelogIcon aria-hidden />,
   },
   "komponent-beta": {
     text: "Komponenten er under utvikling. Dette kan medføre bugs slik at teamet ditt må ta stilling til om dere ønsker å bruke denne i produksjon. Hvis komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i patch/minor versjon av kodepakker og i Figma. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
-    heading: "Beta",
-    link: "",
+    link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
     icon: <RobotIcon aria-hidden />,
   },
 };
