@@ -50,7 +50,7 @@ export const SuggestionBlock = ({
   reference?: string;
 }) => {
   if (variant === "komponent-ny" || variant === "komponent-beta") {
-    return <SuggestionBlockComponent variant={variant} />;
+    return <SuggestionBlockComponent variant={variant} reference={reference} />;
   }
 
   return (
