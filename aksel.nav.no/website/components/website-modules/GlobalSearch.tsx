@@ -1,7 +1,7 @@
 import { useDebounce } from "@/utils";
 import { Heading, Label, Search } from "@navikt/ds-react";
 import NextLink from "next/link";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Fuse from "fuse.js";
 import cl from "classnames";
 import { allArticleDocuments } from "../../sanity/config";
@@ -87,6 +87,7 @@ export const GlobalSearch = () => {
     }
   }, [debouncedSearchTerm, tag]);
 
+  console.log(results.length);
   const groups: { [key: string]: SearchHit[] } = results?.reduce(
     (prev, cur) => {
       if (cur.item._type in prev) {
@@ -97,7 +98,6 @@ export const GlobalSearch = () => {
     },
     {}
   );
-  console.log(query, results);
 
   return (
     <div>
@@ -108,6 +108,7 @@ export const GlobalSearch = () => {
           value={query}
           onChange={setQuery}
           onClear={() => setQuery("")}
+          autoComplete="off"
         />
       </div>
       <div className="mt-8 max-w-3xl">
@@ -146,10 +147,10 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
               </div>
               <ul className="mt-2">
                 {val.map((x) => (
-                  <>
+                  <React.Fragment key={x.item._id}>
                     <Hit key={x.item._id} hit={x} query={query} />
                     <hr className="border-border-subtle last-of-type:hidden" />
-                  </>
+                  </React.Fragment>
                 ))}
               </ul>
             </div>

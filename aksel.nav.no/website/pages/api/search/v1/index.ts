@@ -4,6 +4,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { allArticleDocuments } from "../../../../sanity/config";
 import Fuse from "fuse.js";
 
+/**
+ * TODO:
+ * - Returnere sliced matches/redusere størrelse på item.content sendt med. Kan bli 20+kB per side
+ */
+
 export default async function initialSearch(
   req: NextApiRequest,
   res: NextApiResponse
@@ -54,11 +59,12 @@ async function searchSanity(doctype: string[]) {
   const sanityQuery = `*[_type in $types ]{
     ${akselArticleFields}
     "intro": pt::text(intro.body),
-    "content": pt::text(content),
+    "content": content,
   }`;
 
   return await getClient()
     .fetch(sanityQuery, { types: doctype })
+    .then((res) => res.map((x) => ({ ...x, content: toPlainText(x?.content) })))
     .catch((err) => {
       console.log("Error message: ", err.message);
       return [];
@@ -81,8 +87,24 @@ function getSearchResults(results, query) {
     useExtendedSearch: true,
     includeMatches: true,
     ignoreLocation: true,
-    /* threshold: 0.2,
-    distance: 1000, */
+    threshold: 0.2,
+    distance: 6000,
   });
   return fuse.search(query).filter((x) => x.score < 0.3);
+}
+
+function toPlainText(blocks: any[]) {
+  if (!blocks || blocks.length === 0) {
+    return "";
+  }
+
+  return blocks
+    .map((block) => {
+      if (block._type !== "block" || !block.children) {
+        return "";
+      }
+
+      return block.children.map((child) => child.text).join("");
+    })
+    .join("\n\n");
 }
