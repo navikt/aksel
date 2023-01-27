@@ -1,14 +1,8 @@
-import { BodyShort, Button, Heading, Label, Textarea } from "@navikt/ds-react";
+import { FeedbackT, HelpfulArticleEnum } from "@/lib";
+import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import cl from "clsx";
 import { useRouter } from "next/router";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { FeedbackT, HelpfulArticleEnum } from "@/lib";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { AmplitudeEvents, IdContext, logAmplitudeEvent } from "../utils";
 
 const Feedback = ({
@@ -99,7 +93,7 @@ const Feedback = ({
     setThanksFeedback(true);
     timeoutTimer.current = window.setTimeout(() => {
       setThanksFeedback(false);
-    }, 3000);
+    }, 6000);
 
     return () => {
       if (timeoutTimer.current) {
@@ -246,9 +240,13 @@ const Feedback = ({
             </Button>
           </form>
         )}
-        {thanksFeedback && (
-          <BodyShort size="small">Takk for tilbakemeldingen!</BodyShort>
-        )}
+        <div aria-live="polite">
+          {thanksFeedback && (
+            <Heading size="small" as="p" className="mt-8">
+              Takk for tilbakemeldingen!
+            </Heading>
+          )}
+        </div>
       </div>
     </div>
   );

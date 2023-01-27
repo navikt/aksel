@@ -166,6 +166,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                           (x: ArtiklerT) => (
                             <ArtikkelCard
                               {...x}
+                              level="3"
                               source={page?.slug?.current}
                               key={x._id}
                               variant="god-praksis"

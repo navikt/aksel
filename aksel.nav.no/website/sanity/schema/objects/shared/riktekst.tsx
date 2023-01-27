@@ -8,9 +8,7 @@ export const styles = [
   {
     title: "Avsnitt",
     value: "normal",
-    blockEditor: {
-      render: (props) => <p className="text-lg">{props.children}</p>,
-    },
+    component: (props) => <p className="text-lg">{props.children}</p>,
   },
 ];
 
@@ -22,12 +20,12 @@ export const block = {
     {
       title: "Bullet-liste",
       value: "bullet",
-      blockEditor: { icon: () => <OlistIcon aria-label="Ul-liste" /> },
+      icon: () => <OlistIcon aria-label="Ul-liste" />,
     },
     {
       title: "Nummerert-liste",
       value: "number",
-      blockEditor: { icon: () => <OlistIcon aria-label="Ol-liste" /> },
+      icon: () => <OlistIcon aria-label="Ol-liste" />,
     },
   ],
   marks: {
@@ -35,29 +33,28 @@ export const block = {
       {
         title: "Strong",
         value: "strong",
-        blockEditor: { icon: () => <BoldIcon aria-label="Bold" /> },
+        icon: () => <BoldIcon aria-label="Bold" />,
       },
       {
         title: "Italic",
         value: "em",
-        blockEditor: { icon: () => <ItalicIcon aria-label="Italic" /> },
+        icon: () => <ItalicIcon aria-label="Italic" />,
       },
       {
         title: "Inline-Kode",
         value: "code",
-        blockEditor: { icon: () => <CodeIcon aria-label="Kode" /> },
+        icon: () => <CodeIcon aria-label="Kode" />,
       },
       {
         title: "KBD",
         value: "kbd",
-        blockEditor: {
-          icon: () => <div>KBD</div>,
-          render: (props) => (
-            <KBD padding={[1, 1, 2]} style={{ verticalAlign: "super" }}>
-              {props.children}
-            </KBD>
-          ),
-        },
+        icon: () => <div>KBD</div>,
+
+        component: (props) => (
+          <KBD padding={[1, 1, 2]} style={{ verticalAlign: "super" }}>
+            {props.children}
+          </KBD>
+        ),
       },
     ],
     annotations: [
@@ -65,9 +62,7 @@ export const block = {
         title: "Link til sanity-side",
         name: "internalLink",
         type: "object",
-        blockEditor: {
-          icon: () => <Link title="Lenke til sanity-side" />,
-        },
+        icon: () => <Link title="Lenke til sanity-side" />,
         options: {
           modal: {
             type: "dialog",
@@ -87,9 +82,7 @@ export const block = {
         title: "Lenke",
         name: "link",
         type: "object",
-        blockEditor: {
-          icon: () => <ExternalLink title="Lenke til ekstern-side" />,
-        },
+        icon: () => <ExternalLink title="Lenke til ekstern-side" />,
         fields: [
           {
             title: "URL",
