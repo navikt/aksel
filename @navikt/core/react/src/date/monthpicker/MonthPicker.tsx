@@ -134,7 +134,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     );
 
     const handleSelect = (month?: Date) => {
-      setSelectedMonth(month);
+      !onMonthSelect && setSelectedMonth(month);
       onMonthSelect?.(month);
       month && (onClose?.() ?? setOpen(false));
     };
@@ -175,7 +175,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
             >
               <RootProvider
                 locale={getLocaleFromString(locale)}
-                selected={selected}
+                selected={selected ?? selectedMonth}
                 toDate={toDate}
                 fromDate={fromDate}
                 month={selected ?? selectedMonth}
