@@ -191,6 +191,8 @@ export const useMonthpicker = (
     if (isValidDate(day)) {
       setYear(day);
       setInputValue(formatDateForInput(day, locale, "month", inputFormat));
+    } else {
+      setYear(defaultSelected ?? defaultYear ?? today);
     }
   };
 
@@ -211,12 +213,14 @@ export const useMonthpicker = (
     if (month) {
       setOpen(false);
       inputRef.current && inputRef.current.focus();
+      setYear(month);
     }
 
     if (!required && !month) {
       updateMonth(undefined);
       updateValidation({ isValidMonth: false, isEmpty: true });
       setInputValue("");
+      setYear(defaultYear ?? today);
       return;
     }
     updateMonth(month);
