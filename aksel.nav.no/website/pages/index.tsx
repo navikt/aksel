@@ -21,7 +21,7 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
 import { lazy, useEffect, useState } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
 function getPrefersReducedMotion() {
   const QUERY = "(prefers-reduced-motion: no-preference)";
@@ -143,6 +143,7 @@ const Forside = ({
   bloggs,
   resent,
   komigang,
+  temaCount,
 }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
 
@@ -230,7 +231,9 @@ const Forside = ({
                 ))}
               </ul>
               <div className="mx-auto mt-8">
-                <AkselLink href="/god-praksis">Utforsk god praksis</AkselLink>
+                <AkselLink href="/god-praksis">
+                  {`Utforsk alle ${temaCount} god praksis tema`}
+                </AkselLink>
               </div>
               <div className="mt-20">
                 <Heading level="3" size="medium">
@@ -315,6 +318,7 @@ interface PageProps {
     title: string;
     slug: string;
   }[];
+  temaCount: number;
   slug: string;
   preview: boolean;
 }
@@ -332,6 +336,7 @@ export const getStaticProps = async ({
     tema = null,
     resent = null,
     komigang = null,
+    temaCount = 0,
   } = await client.fetch(akselForsideQuery);
 
   return {
@@ -341,6 +346,7 @@ export const getStaticProps = async ({
       page,
       resent,
       komigang,
+      temaCount,
       slug: "/",
       preview,
       id: page?._id ?? "",

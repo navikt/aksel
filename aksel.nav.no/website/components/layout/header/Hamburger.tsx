@@ -1,6 +1,6 @@
 import { Close, Hamburger as HamburgerIcon } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

@@ -2,7 +2,7 @@ import { SidebarT } from "@/lib";
 import { logNav } from "@/utils";
 import { Expand } from "@navikt/ds-icons";
 import { BodyShort, Detail, Tag } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";

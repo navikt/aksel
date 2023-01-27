@@ -1,5 +1,26 @@
 # @navikt/ds-react-internal
 
+## 2.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`dcf5cfc06`](https://github.com/navikt/Designsystemet/commit/dcf5cfc06b751341559ef30085bd974820531e57)]:
+  - @navikt/ds-react@2.1.1
+  - @navikt/ds-icons@2.1.1
+
+## 2.1.0
+
+### Minor Changes
+
+- [#1665](https://github.com/navikt/Designsystemet/pull/1665) [`6ab84e581`](https://github.com/navikt/Designsystemet/commit/6ab84e581f8d3e850bcec340608354335506a051) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Ny Timeline-komponent for interne-flater
+  :bug: Fikset feil danger-hover token
+
+### Patch Changes
+
+- Updated dependencies [[`0873fe652`](https://github.com/navikt/Designsystemet/commit/0873fe6520e817e462197c162b49c05826da4838)]:
+  - @navikt/ds-react@2.1.0
+  - @navikt/ds-icons@2.1.0
+
 ## 2.0.18
 
 ### Patch Changes

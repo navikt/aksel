@@ -1,0 +1,24 @@
+name: Nytt ikon
+description: Send et ønske om et eller flere nye ikoner
+title: "[Nytt ikon]: "
+labels: ["icon", "new"]
+assignees:
+  - olejorgenbakken
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Takk for at du bidrar inn i Aksel!
+  - type: input
+    id: title
+    attributes:
+      label: Navn på ikonet
+      description: Hva er navnet på ikonet du ønsker deg?
+      placeholder: eks. send
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Eksempel på ikonet
+      description: Send en lenke til eksempler på ikonet

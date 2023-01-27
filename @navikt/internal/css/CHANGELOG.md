@@ -1,5 +1,14 @@
 # @navikt/ds-css-internal
 
+## 2.1.1
+
+## 2.1.0
+
+### Minor Changes
+
+- [#1665](https://github.com/navikt/Designsystemet/pull/1665) [`6ab84e581`](https://github.com/navikt/Designsystemet/commit/6ab84e581f8d3e850bcec340608354335506a051) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Ny Timeline-komponent for interne-flater
+  :bug: Fikset feil danger-hover token
+
 ## 2.0.18
 
 ## 2.0.17

@@ -2,7 +2,7 @@ import { grunnleggendeLandingQuery, SidebarT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading, Ingress } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview";
 import { SuggestionBlock } from "components/website-modules/SuggestionBlock";

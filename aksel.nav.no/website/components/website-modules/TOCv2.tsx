@@ -1,6 +1,6 @@
 import { removeEmojies } from "@/utils";
 import { BodyShort, Link } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import throttle from "lodash/throttle";
 import * as React from "react";
 import { useEffect, useState } from "react";

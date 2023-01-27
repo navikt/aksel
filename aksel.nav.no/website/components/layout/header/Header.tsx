@@ -1,7 +1,7 @@
 import Logo from "components/assets/Logo";
 import Link from "next/link";
 import { logNav } from "../..";
-import cl from "classnames";
+import cl from "clsx";
 import { useRouter } from "next/router";
 import { Hamburger } from "components/layout/header/Hamburger";
 

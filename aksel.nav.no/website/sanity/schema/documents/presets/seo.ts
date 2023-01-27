@@ -39,7 +39,9 @@ export const SEOFields = {
           const { dimensions } = decodeAssetId(image.asset._ref);
           const aspectR = dimensions.width / dimensions.height;
           if (aspectR < 1.5 || aspectR > 2.4) {
-            return `Forventet aspect-ration rundt 1.91:1. Er nå: ${aspectR}:1.`;
+            return `Forventet aspect-ration rundt 1.91:1. Er nå: ${aspectR.toFixed(
+              2
+            )}:1. (${dimensions.width}px/${dimensions.height}px)`;
           }
           return true;
         }),
