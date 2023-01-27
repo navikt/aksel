@@ -93,6 +93,11 @@ export const GlobalSearch = () => {
     }
   }, [debouncedSearchTerm, tag]);
 
+  const handleQueryChange = (v: string) => {
+    setQuery(v);
+    v && setLoading(true);
+  };
+
   const groups: { [key: string]: SearchHit[] } = results?.reduce(
     (prev, cur) => {
       if (cur.item._type in prev) {
@@ -111,13 +116,12 @@ export const GlobalSearch = () => {
           label="søk"
           variant="simple"
           value={query}
-          onChange={setQuery}
+          onChange={(v) => handleQueryChange(v)}
           onClear={() => setQuery("")}
           autoComplete="off"
         />
       </div>
       <div className="mt-8 max-w-3xl">
-        {/* TODO: Loading state når ingen resultater er vist/hentet enda. Står nå: 0 treff på {query} i ~1 sekund.*/}
         {loading && (
           <div className="flex w-full justify-center p-4">
             <Loader size="2xlarge" />

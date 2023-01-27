@@ -1,4 +1,4 @@
-import { akselArticleFields } from "@/lib";
+import { akselArticleFields } from "../../../../lib/sanity/queries";
 import { getClient } from "@/sanity-client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { allArticleDocuments } from "../../../../sanity/config";
@@ -51,9 +51,15 @@ export default async function initialSearch(
   );
 }
 
+let data = null;
+
 async function searchSanity(doctype: string[]) {
   if (!doctype) {
     return [];
+  }
+
+  if (data) {
+    return data;
   }
 
   const sanityQuery = `*[_type in $types ]{
@@ -62,13 +68,15 @@ async function searchSanity(doctype: string[]) {
     "content": content,
   }`;
 
-  return await getClient()
+  data = await getClient()
     .fetch(sanityQuery, { types: doctype })
     .then((res) => res.map((x) => ({ ...x, content: toPlainText(x?.content) })))
     .catch((err) => {
       console.log("Error message: ", err.message);
       return [];
     });
+
+  return data;
 }
 
 function getSearchResults(results, query) {
