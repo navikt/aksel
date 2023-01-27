@@ -124,7 +124,7 @@ export const GlobalSearch = () => {
       <div className="mt-8 max-w-3xl">
         {loading && (
           <div className="flex w-full justify-center p-4">
-            <Loader size="2xlarge" />
+            <Loader size="xlarge" variant="neutral" />
           </div>
         )}
         {results && query && (
