@@ -1,14 +1,8 @@
-import { BodyShort, Button, Heading, Label, Textarea } from "@navikt/ds-react";
+import { FeedbackT, HelpfulArticleEnum } from "@/lib";
+import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import cl from "clsx";
 import { useRouter } from "next/router";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { FeedbackT, HelpfulArticleEnum } from "@/lib";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { AmplitudeEvents, IdContext, logAmplitudeEvent } from "../utils";
 
 const Feedback = ({
