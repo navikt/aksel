@@ -5,10 +5,9 @@ export const ScrollTop = () => {
     <button
       onClick={() => {
         window.scrollTo(0, 0);
+        document.getElementById("hovedinnhold")?.focus?.();
       }}
       className="text-xlarge text-text-on-inverted focus-visible:shadow-focus-inverted group -mt-[10px] flex h-[48px] w-fit items-center justify-center gap-2 rounded p-2 font-semibold hover:underline focus:outline-none"
-      aria-hidden
-      id="scroll-top-button"
     >
       <svg
         fill="none"
