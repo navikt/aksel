@@ -1,5 +1,5 @@
 import { useDebounce } from "@/utils";
-import { Heading, Label, Search } from "@navikt/ds-react";
+import { Heading, Label, Loader, Search } from "@navikt/ds-react";
 import NextLink from "next/link";
 import React, { useEffect, useState } from "react";
 import Fuse from "fuse.js";
@@ -66,7 +66,8 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * - Logge index for valgt søk med aplitude, eg 20/26
  */
 export const GlobalSearch = () => {
-  const [results, setResults] = useState<SearchHit[]>([]);
+  const [results, setResults] = useState<SearchHit[]>(null);
+  const [loading, setLoading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tag, setTag] = useState<Array<keyof typeof options>>([]);
 
@@ -75,19 +76,23 @@ export const GlobalSearch = () => {
 
   useEffect(() => {
     if (debouncedSearchTerm) {
+      setLoading(true);
       fetch(
         `/api/search/v1?q=${encodeURIComponent(debouncedSearchTerm)}${
           tag && `&doc=${tag.join(",")}`
         }`
       )
         .then((x) => x.json())
-        .then(setResults);
+        .then((res) => {
+          setResults(res);
+          setLoading(false);
+        });
     } else {
-      setResults([]);
+      setLoading(false);
+      setResults(null);
     }
   }, [debouncedSearchTerm, tag]);
 
-  console.log(results.length);
   const groups: { [key: string]: SearchHit[] } = results?.reduce(
     (prev, cur) => {
       if (cur.item._type in prev) {
@@ -113,12 +118,21 @@ export const GlobalSearch = () => {
       </div>
       <div className="mt-8 max-w-3xl">
         {/* TODO: Loading state når ingen resultater er vist/hentet enda. Står nå: 0 treff på {query} i ~1 sekund.*/}
+        {loading && (
+          <div className="flex w-full justify-center p-4">
+            <Loader size="2xlarge" />
+          </div>
+        )}
         {results && query && (
           <>
-            <Heading level="2" size="small">
-              {`${results.length} treff på "${query}"`}
-            </Heading>
-            <Group groups={groups} query={debouncedSearchTerm} />
+            {results && !loading && (
+              <>
+                <Heading level="2" size="small">
+                  {`${results.length} treff på "${query}"`}
+                </Heading>
+                <Group groups={groups} query={debouncedSearchTerm} />
+              </>
+            )}
           </>
         )}
       </div>
@@ -235,7 +249,7 @@ function highlightStr(str: string, query: string) {
         <span
           key={i}
           className={cl({
-            "text-text-default bg-teal-300/30":
+            "text-text-default bg-teal-300/40":
               part.toLowerCase() === query.toLowerCase(),
           })}
         >
