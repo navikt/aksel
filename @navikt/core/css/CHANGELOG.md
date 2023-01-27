@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.1.2
+
+### Patch Changes
+
+- [`62f36da5e`](https://github.com/navikt/Designsystemet/commit/62f36da5e74fc7f53414d42b310c3b57597795bc) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Small textfield har nå 8px horisontal padding (4px før)
+
 ## 2.1.1
 
 ## 2.1.0
