@@ -6,7 +6,15 @@ const StudioPage = () => {
   const [scheme, setScheme] = useState("dark");
   useEffect(() => {
     const theme = localStorage.getItem("sanityStudio:ui:colorScheme");
-    theme && setScheme(theme);
+    if (theme) {
+      setScheme(theme);
+    } else {
+      /* Assume user using system-theme */
+      window?.matchMedia &&
+      window?.matchMedia("(prefers-color-scheme: dark)").matches
+        ? setScheme("dark")
+        : setScheme("light");
+    }
   }, []);
 
   return (
