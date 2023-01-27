@@ -4,6 +4,7 @@ import { logNav } from "../..";
 import cl from "clsx";
 import { useRouter } from "next/router";
 import { Hamburger } from "components/layout/header/Hamburger";
+import { GlobaSearch } from "components/layout/header/GlobaSearch";
 
 const LinkElement = ({ name, href }) => {
   const { asPath } = useRouter();
@@ -77,9 +78,11 @@ export const Header = ({
               <LinkElement name="Bloggen" href="/produktbloggen" />
             </ul>
           </nav>
+
           <div className="h-full md:hidden">
             <Hamburger />
           </div>
+          <GlobaSearch />
         </div>
       </header>
     </>

@@ -1,12 +1,21 @@
 import { useDebounce } from "@/utils";
-import { Heading, Label, Loader, Search } from "@navikt/ds-react";
+import {
+  Button,
+  Detail,
+  Heading,
+  Label,
+  Loader,
+  Search,
+} from "@navikt/ds-react";
+import { Search as SearchIcon } from "@navikt/ds-icons";
 import NextLink from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Fuse from "fuse.js";
 import cl from "classnames";
-import { allArticleDocuments } from "../../sanity/config";
+import { allArticleDocuments } from "../../../sanity/config";
 import Image from "next/image";
 import { urlFor } from "@/lib";
+import ReactModal from "react-modal";
 
 const options: {
   [K in typeof allArticleDocuments[number]]: { display: string; index: number };
@@ -65,14 +74,20 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * - Logge alle søk
  * - Logge index for valgt søk med aplitude, eg 20/26
  */
-export const GlobalSearch = () => {
+export const GlobaSearch = () => {
   const [results, setResults] = useState<SearchHit[]>(null);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tag, setTag] = useState<Array<keyof typeof options>>([]);
+  const inputRef = useRef(null);
 
   const [query, setQuery] = useState("");
   const debouncedSearchTerm = useDebounce(query);
+
+  useEffect(() => {
+    ReactModal.setAppElement("#__next");
+  }, []);
 
   useEffect(() => {
     if (debouncedSearchTerm) {
@@ -110,39 +125,86 @@ export const GlobalSearch = () => {
   );
 
   return (
-    <div>
-      <div>
-        <Search
-          label="søk"
-          variant="simple"
-          value={query}
-          onChange={(v) => handleQueryChange(v)}
-          onClear={() => setQuery("")}
-          autoComplete="off"
-        />
-      </div>
-      <div className="mt-8 max-w-3xl">
-        {loading && (
-          <div className="flex w-full justify-center p-4">
-            <Loader size="xlarge" variant="neutral" />
+    <div className="z-[1050] mr-0 flex h-full justify-center">
+      <Button
+        variant="tertiary"
+        aria-haspopup="false"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        className="aksel-tertiary-button"
+        icon={
+          <SearchIcon
+            className="pointer-events-none text-2xl"
+            aria-label="Åpne meny"
+          />
+        }
+      />
+      <ReactModal
+        isOpen={open}
+        onRequestClose={() => setOpen(false)}
+        aria={{ modal: true }}
+        /* contentLabel="Meny" */
+        className="bg-surface-default absolute inset-0 block h-screen w-screen overflow-x-auto"
+      >
+        <div className="relative mx-auto max-w-3xl py-24">
+          <button
+            className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover absolute top-8 right-4 flex items-center justify-center rounded py-3 px-2 text-lg focus:outline-none"
+            onClick={() => setOpen(false)}
+          >
+            Lukk søk <KBD>ESC</KBD>
+          </button>
+          <div>
+            <Search
+              label={
+                <span>
+                  Søk i hele Aksel <KBD>CMD + K</KBD>
+                </span>
+              }
+              variant="simple"
+              value={query}
+              hideLabel={false}
+              onChange={(v) => handleQueryChange(v)}
+              onClear={() => setQuery("")}
+              autoComplete="off"
+              ref={inputRef}
+              onLoad={() => console.log("test")}
+            />
           </div>
-        )}
-        {results && query && (
-          <>
-            {results && !loading && (
+          <div className="mt-8 max-w-3xl">
+            {loading && (
+              <div className="flex w-full justify-center p-4">
+                <Loader size="xlarge" variant="neutral" />
+              </div>
+            )}
+            {results && query && (
               <>
-                <Heading level="2" size="small">
-                  {`${results.length} treff på "${query}"`}
-                </Heading>
-                <Group groups={groups} query={debouncedSearchTerm} />
+                {results && !loading && (
+                  <>
+                    <Heading level="2" size="small">
+                      {`${results.length} treff på "${query}"`}
+                    </Heading>
+                    <Group groups={groups} query={debouncedSearchTerm} />
+                  </>
+                )}
               </>
             )}
-          </>
-        )}
-      </div>
+          </div>
+        </div>
+      </ReactModal>
     </div>
   );
 };
+
+function KBD({ children }: { children: React.ReactNode }) {
+  return (
+    <Detail
+      as="kbd"
+      className="bg-surface-neutral-subtle-hover ml-2 rounded px-2 font-sans font-semibold uppercase"
+    >
+      {children}
+    </Detail>
+  );
+}
 
 function Group({ groups, query }: { groups: GroupedHits; query: string }) {
   if (Object.keys(groups).length === 0) {
