@@ -29,7 +29,7 @@ export const artikkelPreview = (_type: string) => {
           ); */
           return {
             title: heading,
-            subtitle: `${isAfter(updateInfo) ? "UTDATERT" : ""} | ${_type} ${
+            subtitle: `${isAfter(updateInfo) ? "UTDATERT |" : ""}  ${_type} ${
               tema ?? kategori
                 ? `${(tema ?? kategori) && "/ "}${tema ?? kategori ?? ``}`
                 : ""
