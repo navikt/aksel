@@ -1,5 +1,13 @@
 # @navikt/ds-react-internal
 
+## 2.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`494566e60`](https://github.com/navikt/Designsystemet/commit/494566e604e958363f75ebfa2adbc1669397636a)]:
+  - @navikt/ds-react@2.1.3
+  - @navikt/ds-icons@2.1.3
+
 ## 2.1.2
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.1.3
+
+### Patch Changes
+
+- [#1771](https://github.com/navikt/Designsystemet/pull/1771) [`494566e60`](https://github.com/navikt/Designsystemet/commit/494566e604e958363f75ebfa2adbc1669397636a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Monthpicker håndterer nå visning av År riktig
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.3
+
 ## 2.1.2
 
 ### Patch Changes
