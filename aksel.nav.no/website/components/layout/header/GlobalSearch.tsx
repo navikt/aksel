@@ -1,7 +1,15 @@
 import { urlFor } from "@/lib";
 import { useDebounce } from "@/utils";
 import { Search as SearchIcon } from "@navikt/ds-icons";
-import { Detail, Heading, Label, Loader, Search } from "@navikt/ds-react";
+import {
+  Checkbox,
+  CheckboxGroup,
+  Detail,
+  Heading,
+  Label,
+  Loader,
+  Search,
+} from "@navikt/ds-react";
 import cl from "classnames";
 import Fuse from "fuse.js";
 import Image from "next/image";
@@ -86,7 +94,7 @@ export const GlobalSearch = () => {
       setLoading(true);
       fetch(
         `/api/search/v1?q=${encodeURIComponent(debouncedSearchTerm)}${
-          tag && `&doc=${tag.join(",")}`
+          tag.length > 0 ? `&doc=${tag.join(",")}` : ""
         }`
       )
         .then((x) => x.json())
@@ -172,14 +180,23 @@ export const GlobalSearch = () => {
         className="bg-surface-default absolute inset-0 block w-screen overflow-x-auto px-4 md:px-6"
         overlayClassName="header-modal__overlay-search"
       >
-        <div className="relative mx-auto max-w-3xl py-24">
+        <div className="search-grid-wrapper relative mx-auto max-w-4xl gap-4 gap-x-8 py-24">
           <button
             className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover absolute top-8 right-4 flex items-center justify-center rounded py-3 px-2 text-lg focus:outline-none"
             onClick={() => setOpen(false)}
           >
             Lukk søk <KBD>ESC</KBD>
           </button>
-          <div className="">
+          <div className="search-grid-filter mt-8">
+            <CheckboxGroup legend="Filter" onChange={setTag}>
+              {Object.entries(options).map(([key, val]) => (
+                <Checkbox key={key} value={key} className="whitespace-nowrap">
+                  {val.display}
+                </Checkbox>
+              ))}
+            </CheckboxGroup>
+          </div>
+          <div className="search-grid-input w-full">
             <Search
               label={
                 <span className="flex items-center">
@@ -204,7 +221,7 @@ export const GlobalSearch = () => {
               id="aksel-search-input"
             />
           </div>
-          <div className="mt-8 max-w-3xl">
+          <div className="search-grid-results mt-8 w-full max-w-3xl">
             {loading && (
               <div className="flex w-full justify-center p-4">
                 <Loader size="xlarge" variant="neutral" />
@@ -217,7 +234,13 @@ export const GlobalSearch = () => {
                 aria-label="Søkeresultater"
               >
                 <Heading level="2" size="small">
-                  {`${results?.length} treff på "${query}"`}
+                  {`${results?.length} treff på "${query}"${
+                    tag.length > 0
+                      ? ` i ${tag
+                          .map((x) => options[x].display.toLowerCase())
+                          .join(", ")}`
+                      : ""
+                  }`}
                 </Heading>
                 <div className="mt-4 pb-16">
                   <Group groups={groups} query={debouncedSearchTerm} />
@@ -226,6 +249,27 @@ export const GlobalSearch = () => {
             )}
           </div>
         </div>
+        <style jsx>{`
+          .search-grid-wrapper {
+            display: grid;
+            grid-template-columns: 12rem auto;
+            grid-template-areas:
+              "empty input"
+              "filter results";
+          }
+
+          .search-grid-wrapper .search-grid-filter {
+            grid-area: filter;
+          }
+
+          .search-grid-wrapper .search-grid-input {
+            grid-area: input;
+          }
+
+          .search-grid-wrapper .search-grid-results {
+            grid-area: results;
+          }
+        `}</style>
       </ReactModal>
     </div>
   );

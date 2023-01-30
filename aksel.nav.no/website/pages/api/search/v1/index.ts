@@ -59,7 +59,7 @@ async function searchSanity(doctype: string[]) {
   }
 
   if (data) {
-    return data;
+    return data.filter((x) => doctype.includes(x._type));
   }
 
   const sanityQuery = `*[_type in $types ]{
@@ -69,14 +69,14 @@ async function searchSanity(doctype: string[]) {
   }`;
 
   data = await getClient()
-    .fetch(sanityQuery, { types: doctype })
+    .fetch(sanityQuery, { types: allArticleDocuments })
     .then((res) => res.map((x) => ({ ...x, content: toPlainText(x?.content) })))
     .catch((err) => {
       console.log("Error message: ", err.message);
       return [];
     });
 
-  return data;
+  return data.filter((x) => doctype.includes(x._type));
 }
 
 function getSearchResults(results, query) {
