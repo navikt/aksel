@@ -58,6 +58,7 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
           <CopyIcon
             className="text-[2rem] opacity-90 group-hover:opacity-100"
             aria-label="Kopier kodesnutt"
+            role="img"
           />
         )}
       </button>

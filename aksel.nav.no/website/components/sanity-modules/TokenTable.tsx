@@ -88,7 +88,7 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
                 </>
               ) : (
                 <>
-                  <CopyIcon aria-hidden />
+                  <CopyIcon aria-hidden role="img" />
                   <span className="sr-only">Kopier formarterte tokens</span>
                 </>
               )}

@@ -59,7 +59,7 @@ const IntroCards = () => {
           <Link href={href} passHref>
             <a className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none">
               <span className="xs:flex items-center gap-2">
-                <Icon aria-hidden className="shrink-0 text-2xl" />
+                <Icon aria-hidden className="shrink-0 text-2xl" role="img" />
                 <span className="text-xl font-semibold group-hover:underline">
                   {title}
                 </span>
@@ -120,12 +120,12 @@ const GetStarted = ({
         >
           {pause ? (
             <>
-              <PlayIcon aria-hidden />
+              <PlayIcon aria-hidden role="img" />
               <span className="sr-only">Start animasjon</span>
             </>
           ) : (
             <>
-              <PauseIcon aria-hidden />
+              <PauseIcon aria-hidden role="img" />
               <span className="sr-only">Stopp animasjon</span>
             </>
           )}
