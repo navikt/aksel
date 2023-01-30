@@ -163,8 +163,9 @@ export const GlobalSearch = () => {
         isOpen={open}
         onRequestClose={() => setOpen(false)}
         aria={{ modal: true }}
-        /* contentLabel="Meny" */
-        className="bg-surface-default absolute inset-0 block h-screen w-screen overflow-x-auto"
+        contentLabel="Søk"
+        className="bg-surface-default absolute inset-0 block h-screen w-screen overflow-x-auto px-4 md:px-6"
+        overlayClassName="header-modal__overlay"
       >
         <div className="relative mx-auto max-w-3xl py-24">
           <button

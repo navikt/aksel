@@ -82,7 +82,9 @@ export const Header = ({
             </ul>
           </nav>
 
-          <Hamburger />
+          <div className="ml-auto h-full md:hidden">
+            <Hamburger />
+          </div>
           <GlobalSearch />
         </div>
       </header>
