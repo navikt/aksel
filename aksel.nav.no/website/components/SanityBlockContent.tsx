@@ -182,6 +182,9 @@ const serializers = {
       mark: any;
       children: any;
     }) => {
+      if (!href) {
+        return children;
+      }
       if (href && href.startsWith("mailto:")) {
         return (
           <NextLink href={href} passHref>
