@@ -5,7 +5,6 @@ import { getClient } from "@/sanity-client";
 import { Detail } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
-import { BetaWarning } from "components/website-modules/BetaWarning";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
@@ -74,7 +73,6 @@ const Page = ({
         pageProps={page}
         variant="page"
       >
-        {page?.status?.tag === "beta" && <BetaWarning />}
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
       </WithSidebar>
