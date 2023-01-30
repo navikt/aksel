@@ -64,10 +64,10 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * - Logge alle søk
  * - Logge index for valgt søk med aplitude, eg 20/26
  */
-export const GlobaSearch = () => {
+export const GlobalSearch = () => {
   const [results, setResults] = useState<SearchHit[]>(null);
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tag, setTag] = useState<Array<keyof typeof options>>([]);
   const inputRef = useRef(null);
@@ -155,7 +155,7 @@ export const GlobaSearch = () => {
         className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ml-2 flex aspect-square items-center justify-center rounded px-2 py-2 focus:outline-none"
       >
         <SearchIcon
-          className="pointer-events-none text-2xl"
+          className="pointer-events-none text-xl"
           aria-label="Åpne meny"
         />
       </button>
@@ -176,7 +176,7 @@ export const GlobaSearch = () => {
           <div>
             <Search
               label={
-                <span>
+                <span className="flex items-center">
                   Søk i hele Aksel <KBD>CMD + K</KBD>
                 </span>
               }

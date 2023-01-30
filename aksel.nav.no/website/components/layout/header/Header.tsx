@@ -4,7 +4,7 @@ import { logNav } from "../..";
 import cl from "clsx";
 import { useRouter } from "next/router";
 import { Hamburger } from "components/layout/header/Hamburger";
-import { GlobaSearch } from "components/layout/header/GlobaSearch";
+import { GlobalSearch } from "components/layout/header/GlobalSearch";
 
 const LinkElement = ({ name, href }) => {
   const { asPath } = useRouter();
@@ -85,7 +85,7 @@ export const Header = ({
           <div className="ml-auto h-full md:hidden">
             <Hamburger />
           </div>
-          <GlobaSearch />
+          <GlobalSearch />
         </div>
       </header>
     </>
