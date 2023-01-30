@@ -30,3 +30,8 @@
   z-index: var(--a-z-index-modal);
   @apply bg-surface-backdrop fixed inset-0 grid place-items-center md:hidden;
 }
+
+.header-modal__overlay-search {
+  z-index: var(--a-z-index-modal);
+  @apply bg-surface-backdrop fixed inset-0 grid place-items-center;
+}

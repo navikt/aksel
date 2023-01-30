@@ -1,21 +1,15 @@
-import { useDebounce } from "@/utils";
-import { Detail, Heading, Label, Loader, Search } from "@navikt/ds-react";
-import { Search as SearchIcon } from "@navikt/ds-icons";
-import NextLink from "next/link";
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import Fuse from "fuse.js";
-import cl from "classnames";
-import { allArticleDocuments } from "../../../sanity/config";
-import Image from "next/image";
 import { urlFor } from "@/lib";
-import ReactModal from "react-modal";
+import { useDebounce } from "@/utils";
+import { Search as SearchIcon } from "@navikt/ds-icons";
+import { Detail, Heading, Label, Loader, Search } from "@navikt/ds-react";
+import cl from "classnames";
+import Fuse from "fuse.js";
+import Image from "next/image";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
+import ReactModal from "react-modal";
+import { allArticleDocuments } from "../../../sanity/config";
 
 const options: {
   [K in typeof allArticleDocuments[number]]: { display: string; index: number };
@@ -49,8 +43,6 @@ type SearchHit = {
 
 type GroupedHits = { [key: string]: SearchHit[] };
 
-const SearchContext = createContext({ currentId: "" });
-
 /**
  * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
  * TODO:
@@ -79,7 +71,6 @@ export const GlobalSearch = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tag, setTag] = useState<Array<keyof typeof options>>([]);
   const inputRef = useRef(null);
-  const [currentId, setCurrentId] = useState("");
 
   const router = useRouter();
 
@@ -102,13 +93,11 @@ export const GlobalSearch = () => {
         .then((res) => {
           setResults(res);
           setLoading(false);
-          setCurrentId("");
         });
       scrollToTop();
     } else {
       setLoading(false);
       setResults(null);
-      setCurrentId("");
     }
   }, [debouncedSearchTerm, tag]);
 
@@ -146,11 +135,6 @@ export const GlobalSearch = () => {
     setLoading(!!v);
   };
 
-  useEffect(() => {
-    const highlightedEl = document.querySelector('[data-highlighted="true"]');
-    highlightedEl && highlightedEl?.scrollIntoView();
-  }, [currentId]);
-
   function scrollToTop() {
     const overflowEl = document.getElementById(`aksel-search-results`);
     overflowEl?.scrollTo({ top: 0, behavior: "smooth" });
@@ -166,44 +150,6 @@ export const GlobalSearch = () => {
     },
     {}
   );
-
-  const handleKeyboardNavigation: React.KeyboardEventHandler<HTMLDivElement> = (
-    e
-  ) => {
-    if (!results?.length) {
-      return;
-    }
-    const ids = Object.entries(groups)
-      .sort((a, b) => options[a[0]].index - options[b[0]].index)
-      .reduce((prev, cur) => [...prev, ...cur[1]], [])
-      .map((x) => x?.item?._id);
-
-    const currentIndex = ids.findIndex((x) => x === currentId);
-
-    switch (e.code) {
-      case "ArrowDown":
-        if (currentIndex < ids.length - 1) {
-          setCurrentId(ids[currentIndex + 1]);
-          e.preventDefault();
-        }
-        break;
-
-      case "ArrowUp":
-        if (currentIndex > 0) {
-          setCurrentId(ids[currentIndex - 1]);
-          e.preventDefault();
-        }
-        break;
-
-      /* case 'Enter':
-        if (resultsInRenderedOrder.length > 0) {
-          setIsOpen(false);
-          const url = resultsInRenderedOrder[currentId].url;
-          router.push(url);
-        }
-        break; */
-    }
-  };
 
   return (
     <div className="z-[1050] mr-0 flex h-full justify-center">
@@ -224,7 +170,7 @@ export const GlobalSearch = () => {
         aria={{ modal: true }}
         contentLabel="Søk"
         className="bg-surface-default absolute inset-0 block w-screen overflow-x-auto px-4 md:px-6"
-        overlayClassName="header-modal__overlay"
+        overlayClassName="header-modal__overlay-search"
       >
         <div className="relative mx-auto max-w-3xl py-24">
           <button
@@ -255,7 +201,7 @@ export const GlobalSearch = () => {
               spellCheck={false}
               placeholder="Search"
               autoFocus
-              onKeyDown={handleKeyboardNavigation}
+              id="aksel-search-input"
             />
           </div>
           <div className="mt-8 max-w-3xl">
@@ -274,9 +220,7 @@ export const GlobalSearch = () => {
                   {`${results?.length} treff på "${query}"`}
                 </Heading>
                 <div className="mt-4 pb-16">
-                  <SearchContext.Provider value={{ currentId: currentId }}>
-                    <Group groups={groups} query={debouncedSearchTerm} />
-                  </SearchContext.Provider>
+                  <Group groups={groups} query={debouncedSearchTerm} />
                 </div>
               </div>
             )}
@@ -333,9 +277,6 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
 }
 
 function Hit({ hit, query }: { hit: SearchHit; query: string }) {
-  const { currentId } = useContext(SearchContext);
-  currentId === hit.item._id && console.log(hit.item.heading);
-
   const hightlightDesc = hit.matches[0].indices
     .map((y) => hit.matches[0].value.slice(y[0], y[1] + 1))
     .filter((x) => x.toLowerCase().includes(query.toLowerCase()));
@@ -365,10 +306,8 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
   return (
     <li
       className={cl(
-        "focus-within:shadow-focus hover:bg-surface-hover group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded px-2",
-        { "bg-surface-active": currentId === hit.item._id }
+        "focus-within:shadow-focus hover:bg-surface-hover group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded px-2"
       )}
-      data-highlighted={currentId === hit.item._id}
     >
       <div className="px-2 py-6">
         <Heading level="3" size="small">
