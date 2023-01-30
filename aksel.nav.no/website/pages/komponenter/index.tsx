@@ -1,14 +1,15 @@
-import { komponentLandingQuery, SidebarT, SanityT, urlFor } from "@/lib";
+import { komponentLandingQuery, SanityT, SidebarT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading, Ingress } from "@navikt/ds-react";
+import cl from "clsx";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview";
+import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
-import cl from "clsx";
 
 const Page = ({
   page,
@@ -57,6 +58,7 @@ const Page = ({
         intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
         pageProps={page}
       >
+        <SuggestionBlock variant="komponenter" />
         {komponentKategorier
           .filter(
             (kat) => links?.filter((x) => x.kategori === kat.value).length > 0
