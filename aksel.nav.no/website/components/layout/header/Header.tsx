@@ -54,7 +54,7 @@ export const Header = ({
           "bg-surface-transparent": variant === "transparent",
         })}
       >
-        <div className="xs:pr-6 xs:pl-4 mx-auto flex h-11 w-full max-w-screen-2xl items-center justify-between pr-4 pl-4">
+        <div className="xs:pr-6 xs:pl-4 mx-auto flex h-11 w-full max-w-screen-2xl items-center pr-4 pl-4">
           <Link href="/" passHref>
             <a
               onClick={(e) =>
@@ -70,7 +70,10 @@ export const Header = ({
               <span className="sr-only">Aksel</span>
             </a>
           </Link>
-          <nav className="hidden h-full md:block" aria-label="Hovedmeny">
+          <nav
+            className="ml-auto hidden h-full md:block"
+            aria-label="Hovedmeny"
+          >
             <ul className="hidden h-full gap-2 md:flex">
               <LinkElement name="God praksis" href="/god-praksis" />
               <LinkElement name="Grunnleggende" href="/grunnleggende" />
@@ -79,7 +82,7 @@ export const Header = ({
             </ul>
           </nav>
 
-          <div className="h-full md:hidden">
+          <div className="ml-auto h-full md:hidden">
             <Hamburger />
           </div>
           <GlobaSearch />

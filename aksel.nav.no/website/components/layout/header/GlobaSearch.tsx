@@ -1,12 +1,5 @@
 import { useDebounce } from "@/utils";
-import {
-  Button,
-  Detail,
-  Heading,
-  Label,
-  Loader,
-  Search,
-} from "@navikt/ds-react";
+import { Detail, Heading, Label, Loader, Search } from "@navikt/ds-react";
 import { Search as SearchIcon } from "@navikt/ds-icons";
 import NextLink from "next/link";
 import React, { useEffect, useRef, useState } from "react";
@@ -16,6 +9,7 @@ import { allArticleDocuments } from "../../../sanity/config";
 import Image from "next/image";
 import { urlFor } from "@/lib";
 import ReactModal from "react-modal";
+import { useRouter } from "next/router";
 
 const options: {
   [K in typeof allArticleDocuments[number]]: { display: string; index: number };
@@ -54,14 +48,10 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * TODO:
  * - Implementere filter basert på kategori
  * - Keyboard-navigering på arrowUp/Down. Kanskje left/right for å hoppe til filter <-> søketreff?
- * - Escape: lukker søk, cmd/ctrl + k åpner søk
  * - Oppdatere url-query basert på query + filter: ?search=abcd&filter=god_praksis
  * - Oppdatere søkefelt og filter basert på url.
  * - Søkeindeksering av ikoner: Må lazy-loades. Mye av logikk kan hentes fra sanity-modules/icon-search
  * - - Kan vi unngå lazyloading hvis Api sender med SVG i result-body? Risk for XSS da?
- * - Wrappe søket i en fullside-modal.
- * - Åpne søk via en knapp i Header?
- * - - Usikker på hvilken komponent som skal "eie" søket, men tror Header
  *
  * uu
  * - Bruke riktig form-semantikk og attributter for søkefelt + filter
@@ -81,6 +71,8 @@ export const GlobaSearch = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tag, setTag] = useState<Array<keyof typeof options>>([]);
   const inputRef = useRef(null);
+
+  const router = useRouter();
 
   const [query, setQuery] = useState("");
   const debouncedSearchTerm = useDebounce(query);
@@ -108,9 +100,39 @@ export const GlobaSearch = () => {
     }
   }, [debouncedSearchTerm, tag]);
 
+  useEffect(() => {
+    const listener = (event: KeyboardEvent) => {
+      console.log(event);
+      if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        setOpen((x) => !x);
+      }
+    };
+
+    document.addEventListener("keydown", listener);
+
+    return () => document.removeEventListener("keydown", listener);
+  }, []);
+
+  useEffect(() => {
+    const handler = () => setOpen(false);
+
+    router.events.on("beforeHistoryChange", handler);
+    router.events.on("hashChangeComplete", handler);
+
+    return () => {
+      router.events.off("beforeHistoryChange", handler);
+      router.events.off("hashChangeComplete", handler);
+    };
+  }, [router.events]);
+
+  useEffect(() => {
+    !open && setQuery("");
+  }, [open]);
+
   const handleQueryChange = (v: string) => {
     setQuery(v);
-    v && setLoading(true);
+    setLoading(!!v);
   };
 
   const groups: { [key: string]: SearchHit[] } = results?.reduce(
@@ -126,19 +148,17 @@ export const GlobaSearch = () => {
 
   return (
     <div className="z-[1050] mr-0 flex h-full justify-center">
-      <Button
-        variant="tertiary"
+      <button
         aria-haspopup="false"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="aksel-tertiary-button"
-        icon={
-          <SearchIcon
-            className="pointer-events-none text-2xl"
-            aria-label="Åpne meny"
-          />
-        }
-      />
+        className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ml-2 flex aspect-square items-center justify-center rounded px-2 py-2 focus:outline-none"
+      >
+        <SearchIcon
+          className="pointer-events-none text-2xl"
+          aria-label="Åpne meny"
+        />
+      </button>
       <ReactModal
         isOpen={open}
         onRequestClose={() => setOpen(false)}
@@ -165,9 +185,16 @@ export const GlobaSearch = () => {
               hideLabel={false}
               onChange={(v) => handleQueryChange(v)}
               onClear={() => setQuery("")}
-              autoComplete="off"
               ref={inputRef}
-              onLoad={() => console.log("test")}
+              autoComplete="off"
+              role="combobox"
+              aria-controls="aksel-search-results"
+              aria-expanded={results?.length > 0}
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck={false}
+              placeholder="Search"
+              autoFocus
             />
           </div>
           <div className="mt-8 max-w-3xl">
@@ -176,17 +203,17 @@ export const GlobaSearch = () => {
                 <Loader size="xlarge" variant="neutral" />
               </div>
             )}
-            {results && query && (
-              <>
-                {results && !loading && (
-                  <>
-                    <Heading level="2" size="small">
-                      {`${results.length} treff på "${query}"`}
-                    </Heading>
-                    <Group groups={groups} query={debouncedSearchTerm} />
-                  </>
-                )}
-              </>
+            {results && query && !loading && (
+              <div
+                id="aksel-search-results"
+                role="listbox"
+                aria-label="Søkeresultater"
+              >
+                <Heading level="2" size="small">
+                  {`${results.length} treff på "${query}"`}
+                </Heading>
+                <Group groups={groups} query={debouncedSearchTerm} />
+              </div>
             )}
           </div>
         </div>
