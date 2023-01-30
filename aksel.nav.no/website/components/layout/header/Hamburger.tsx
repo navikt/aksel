@@ -46,7 +46,7 @@ export const Hamburger = () => {
 
   return (
     <>
-      <div className={cl("z-[1050] mr-0 flex h-full justify-center")}>
+      <div className="z-[1050] mr-0 ml-auto flex h-full justify-center md:hidden">
         <Button
           variant="tertiary"
           aria-haspopup="false"
