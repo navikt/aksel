@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.1.4
+
+### Patch Changes
+
+- [`87f194c1d`](https://github.com/navikt/Designsystemet/commit/87f194c1dc29b10a604de676b358d117e2dbf52f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset edgecase i useRangepicker der valg av startdato etter sluttdato ga feil output
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.4
+
 ## 2.1.3
 
 ### Patch Changes
