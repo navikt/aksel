@@ -9,6 +9,7 @@ import {
   Label,
   Loader,
   Search,
+  Tag,
 } from "@navikt/ds-react";
 import cl from "classnames";
 import Fuse from "fuse.js";
@@ -54,7 +55,6 @@ type GroupedHits = { [key: string]: SearchHit[] };
 /**
  * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
  * TODO:
- * - Implementere filter basert på kategori
  * - Keyboard-navigering på arrowUp/Down. Kanskje left/right for å hoppe til filter <-> søketreff?
  * - Oppdatere url-query basert på query + filter: ?search=abcd&filter=god_praksis
  * - Oppdatere søkefelt og filter basert på url.
@@ -242,7 +242,7 @@ export const GlobalSearch = () => {
                       : ""
                   }`}
                 </Heading>
-                <div className="mt-4 pb-16">
+                <div className="mt-4 pb-16 md:block">
                   <Group groups={groups} query={debouncedSearchTerm} />
                 </div>
               </div>
@@ -254,12 +254,12 @@ export const GlobalSearch = () => {
             display: grid;
             grid-template-columns: 12rem auto;
             grid-template-areas:
-              "empty input"
-              "filter results";
+              "input input"
+              "results results";
           }
 
           .search-grid-wrapper .search-grid-filter {
-            grid-area: filter;
+            display: none;
           }
 
           .search-grid-wrapper .search-grid-input {
@@ -268,6 +268,21 @@ export const GlobalSearch = () => {
 
           .search-grid-wrapper .search-grid-results {
             grid-area: results;
+          }
+
+          @media (min-width: 768px) {
+            .search-grid-wrapper {
+              display: grid;
+              grid-template-columns: 12rem auto;
+              grid-template-areas:
+                "empty input"
+                "filter results";
+            }
+
+            .search-grid-wrapper .search-grid-filter {
+              display: block;
+              grid-area: filter;
+            }
           }
         `}</style>
       </ReactModal>
@@ -298,8 +313,8 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
         .sort((a, b) => options[a[0]].index - options[b[0]].index)
         .map(([key, val]) => {
           return (
-            <div key={key} className="group">
-              <div className="sticky z-10 mt-4 rounded bg-gray-100 p-2 group-first-of-type:mt-0">
+            <div key={key}>
+              <div className="z-10 mt-4 rounded bg-gray-100 p-2">
                 <Label
                   className="text-text-default"
                   as="h2"
@@ -369,7 +384,16 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
             <div>{hit.item?.ingress ?? hit.item?.intro}</div>
           )}
         </span>
+        <span className="mt-4 flex gap-2">
+          {hit.item?.tema &&
+            hit.item?.tema.map((x) => (
+              <Tag variant="alt3" size="xsmall" key={x}>
+                {x}
+              </Tag>
+            ))}
+        </span>
       </div>
+
       <div className="hidden aspect-square w-24 sm:block">
         {hit.item?.status?.bilde && (
           <Image
