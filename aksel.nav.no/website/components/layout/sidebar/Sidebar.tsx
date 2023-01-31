@@ -62,6 +62,9 @@ const NavItem = ({
                     ? "neutral"
                     : "info"
                 }
+                className={cl({
+                  "border-violet-300 bg-violet-50": link.tag === "beta",
+                })}
               >
                 {link.tag === "new"
                   ? "ny"

@@ -1,7 +1,7 @@
 import * as Icons from "@navikt/ds-icons";
 import meta from "@navikt/ds-icons/meta.json";
 import { BodyShort, Button, Detail, Heading } from "@navikt/ds-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { renderToString } from "react-dom/server";
 
 import {
@@ -11,6 +11,7 @@ import {
   Snippet,
 } from "@/components";
 import { SanityT } from "@/lib";
+import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
 import { downloadSvg } from "./downloads";
 
 const ModalContent = ({ icon }: { icon: string }) => {
@@ -118,6 +119,11 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
           <Icon />
         </div>
       </div>
+      {isNew(doc?.created_at) ? (
+        <SuggestionBlock variant="ikon-ny" reference={`<${icon} />`} />
+      ) : (
+        <SuggestionBlock variant="ikon" reference={`<${icon} />`} />
+      )}
     </div>
   );
 };

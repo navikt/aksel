@@ -164,6 +164,7 @@ export const UseRangedDatepicker = () => {
     UNSAFE_useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
       onRangeChange: console.log,
+      onValidate: console.log,
     });
 
   return (
