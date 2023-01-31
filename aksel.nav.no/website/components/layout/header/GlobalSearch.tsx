@@ -103,7 +103,7 @@ export const GlobalSearch = () => {
           setResults(res);
           setLoading(false);
         });
-      scrollToTop();
+      window.scrollTo(0, 0);
     } else {
       setLoading(false);
       setResults(null);
@@ -143,11 +143,6 @@ export const GlobalSearch = () => {
     setQuery(v);
     setLoading(!!v);
   };
-
-  function scrollToTop() {
-    const overflowEl = document.getElementById(`aksel-search-results`);
-    overflowEl?.scrollTo({ top: 0, behavior: "smooth" });
-  }
 
   const groups: { [key: string]: SearchHit[] } = results?.reduce(
     (prev, cur) => {
