@@ -29,17 +29,18 @@ export const workspaceConfig = defineConfig([
     dataset: "production",
     basePath: "/admin/prod",
     icon: DatabaseIcon,
-    auth: authStore(),
+    auth: authStore("production"),
   },
-  {
+  /* https://github.com/sanity-io/sanity/issues/3992 */
+  /* {
     ...defaultConfig(),
     title: "Aksel Dev-miljø",
     name: "dev",
     dataset: "development",
     basePath: "/admin/dev",
     icon: RemoveCircleIcon,
-    auth: authStore(),
-  },
+    auth: authStore("development"),
+  }, */
 ]);
 
 function defaultConfig() {
@@ -97,12 +98,12 @@ function defaultConfig() {
   };
 }
 
-function authStore() {
+function authStore(dataset: string) {
   return createAuthStore({
     redirectOnSingle: false,
     mode: "replace",
     projectId,
-    dataset: "production",
+    dataset,
     providers: [
       {
         name: "saml",
