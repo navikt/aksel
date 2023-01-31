@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.1.5
+
+### Patch Changes
+
+- Hotfix: ESM import fra date-fns feilet
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.5
+
 ## 2.1.4
 
 ### Patch Changes
