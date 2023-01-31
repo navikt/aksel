@@ -2,6 +2,7 @@ import { urlFor } from "@/lib";
 import { useDebounce } from "@/utils";
 import { Search as SearchIcon } from "@navikt/ds-icons";
 import {
+  Button,
   Checkbox,
   CheckboxGroup,
   Detail,
@@ -160,18 +161,21 @@ export const GlobalSearch = () => {
   );
 
   return (
-    <div className="z-[1050] mr-0 flex h-full justify-center">
-      <button
-        aria-haspopup="false"
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-        className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ml-2 flex aspect-square items-center justify-center rounded px-2 py-2 focus:outline-none"
+    <div className="z-[1050] mr-0 flex justify-center">
+      <Button
+        variant="primary"
+        className="hover:bg-deepblue-600  bg-deepblue-500 ml-4"
+        icon={
+          <SearchIcon
+            className="pointer-events-none -mt-[1px] shrink-0 text-xl"
+            aria-label="Åpne meny"
+          />
+        }
+        iconPosition="left"
+        onClick={() => setOpen(true)}
       >
-        <SearchIcon
-          className="pointer-events-none text-xl"
-          aria-label="Åpne meny"
-        />
-      </button>
+        Søk
+      </Button>
       <ReactModal
         isOpen={open}
         onRequestClose={() => setOpen(false)}
