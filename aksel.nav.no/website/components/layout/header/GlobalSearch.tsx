@@ -314,7 +314,7 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
         .map(([key, val]) => {
           return (
             <div key={key}>
-              <div className="z-10 mt-4 rounded bg-gray-100 p-2">
+              <div className="z-10 mt-4 rounded bg-teal-100 p-2">
                 <Label
                   className="text-text-default"
                   as="h2"
@@ -365,7 +365,7 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
   return (
     <li
       className={cl(
-        "focus-within:shadow-focus hover:bg-surface-hover group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded px-2"
+        "focus-within:shadow-focus group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded px-2 hover:bg-gray-100"
       )}
     >
       <div className="px-2 py-6">
@@ -423,7 +423,7 @@ function highlightStr(str: string, query: string) {
         <span
           key={i}
           className={cl({
-            "text-text-default bg-teal-300/40":
+            "text-text-default bg-teal-200/80":
               part.toLowerCase() === query.toLowerCase(),
           })}
         >
