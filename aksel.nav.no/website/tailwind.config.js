@@ -18,6 +18,21 @@ module.exports = {
       "2xl": "1440px",
     },
     extend: {
+      /* https://www.figma.com/file/KNxjfHdXUvlx1LVWpp3iJj/Aksel-UI-kit?node-id=1705%3A49825 */
+      colors: {
+        violet: {
+          50: "#F5EDFF",
+          100: "#E9DEF8",
+          200: "#D6C3EE",
+          300: "#BD9FE4",
+          400: "#A575E1",
+          500: "#9862DB",
+          600: "#7B42C2",
+          700: "#642BAB",
+          800: "#471487",
+          900: "#2C0162",
+        },
+      },
       fontFamily: {
         sans: ["Source Sans Pro", "Arial", "sans-serif"],
       },

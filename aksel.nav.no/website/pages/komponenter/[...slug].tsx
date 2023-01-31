@@ -13,8 +13,8 @@ import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
-import { BetaWarning } from "components/website-modules/BetaWarning";
 import { StatusTag } from "components/website-modules/StatusTag";
+import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
@@ -89,6 +89,13 @@ const Page = ({
     : page?.publishedAt
     ? page.publishedAt
     : page._updatedAt;
+
+  const tag =
+    page?.status?.tag === "beta"
+      ? "komponent-beta"
+      : page?.status?.tag === "new"
+      ? "komponent-ny"
+      : null;
 
   return (
     <>
@@ -227,8 +234,16 @@ const Page = ({
             </>
           )}
         </BodyShort>
-        {page?.status?.tag === "beta" && <BetaWarning />}
+        {tag && (
+          <SuggestionBlock variant={tag} reference={`<${page?.heading} />`} />
+        )}
         <IntroSeksjon node={page?.intro} />
+        {page?.status?.tag === "ready" && (
+          <SuggestionBlock
+            variant="komponent"
+            reference={`<${page?.heading} />`}
+          />
+        )}
         <SanityBlockContent blocks={page["content"]} />
       </WithSidebar>
     </>
