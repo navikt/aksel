@@ -74,11 +74,14 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * - Logge index for valgt søk med aplitude, eg 20/26
  */
 export const GlobalSearch = () => {
-  const [results, setResults] = useState<SearchHit[]>(null);
+  const [results, setResults] = useState<{
+    filteredResults: SearchHit[];
+    hits: Record<keyof typeof options, number>;
+  }>(null);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [tag, setTag] = useState<Array<keyof typeof options>>([]);
+  const [activeTags, setTags] = useState<Array<keyof typeof options>>([]);
   const inputRef = useRef(null);
 
   const router = useRouter();
@@ -95,7 +98,7 @@ export const GlobalSearch = () => {
       setLoading(true);
       fetch(
         `/api/search/v1?q=${encodeURIComponent(debouncedSearchTerm)}${
-          tag.length > 0 ? `&doc=${tag.join(",")}` : ""
+          activeTags.length > 0 ? `&doc=${activeTags.join(",")}` : ""
         }`
       )
         .then((x) => x.json())
@@ -108,7 +111,7 @@ export const GlobalSearch = () => {
       setLoading(false);
       setResults(null);
     }
-  }, [debouncedSearchTerm, tag]);
+  }, [debouncedSearchTerm, activeTags]);
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -144,16 +147,22 @@ export const GlobalSearch = () => {
     setLoading(!!v);
   };
 
-  const groups: { [key: string]: SearchHit[] } = results?.reduce(
-    (prev, cur) => {
+  const groups: { [key: string]: SearchHit[] } =
+    results?.filteredResults?.reduce((prev, cur) => {
       if (cur.item._type in prev) {
         return { ...prev, [cur.item._type]: [...prev[cur.item._type], cur] };
       } else {
         return { ...prev, [cur.item._type]: [cur] };
       }
-    },
-    {}
-  );
+    }, {});
+
+  const noHits = (key: string) => {
+    return !Object.hasOwn(groups ?? {}, key);
+  };
+
+  const noHitsAndQuery = (key: string) => {
+    return debouncedSearchTerm.length > 0 && !activeTags.find((x) => x === key);
+  };
 
   return (
     <div className="z-[1050] mr-0 flex justify-center">
@@ -187,10 +196,21 @@ export const GlobalSearch = () => {
             Lukk søk <KBD>ESC</KBD>
           </button>
           <div className="search-grid-filter mt-8">
-            <CheckboxGroup legend="Filter" onChange={setTag}>
+            <CheckboxGroup legend="Filter" onChange={setTags}>
               {Object.entries(options).map(([key, val]) => (
-                <Checkbox key={key} value={key} className="whitespace-nowrap">
-                  {val.display}
+                <Checkbox
+                  disabled={
+                    noHitsAndQuery(key) &&
+                    noHits(key) &&
+                    results?.hits[key] === 0
+                  }
+                  key={key}
+                  value={key}
+                  className="whitespace-nowrap"
+                >
+                  {`${val.display} ${
+                    results?.hits[key] > 0 ? `(${results?.hits[key]})` : ""
+                  }`}
                 </Checkbox>
               ))}
             </CheckboxGroup>
@@ -211,7 +231,7 @@ export const GlobalSearch = () => {
               autoComplete="off"
               role="combobox"
               aria-controls="aksel-search-results"
-              aria-expanded={results?.length > 0}
+              aria-expanded={results?.filteredResults?.length > 0}
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck={false}
@@ -233,9 +253,9 @@ export const GlobalSearch = () => {
                 aria-label="Søkeresultater"
               >
                 <Heading level="2" size="small">
-                  {`${results?.length} treff på "${query}"${
-                    tag.length > 0
-                      ? ` i ${tag
+                  {`${results?.filteredResults?.length} treff på "${query}"${
+                    activeTags.length > 0
+                      ? ` i ${activeTags
                           .map((x) => options[x].display.toLowerCase())
                           .join(", ")}`
                       : ""

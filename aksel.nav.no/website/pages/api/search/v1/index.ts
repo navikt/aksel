@@ -1,8 +1,8 @@
-import { akselArticleFields } from "../../../../lib/sanity/queries";
 import { getClient } from "@/sanity-client";
-import { NextApiRequest, NextApiResponse } from "next";
-import { allArticleDocuments } from "../../../../sanity/config";
 import Fuse from "fuse.js";
+import { NextApiRequest, NextApiResponse } from "next";
+import { akselArticleFields } from "../../../../lib/sanity/queries";
+import { allArticleDocuments } from "../../../../sanity/config";
 
 /**
  * TODO:
@@ -42,13 +42,35 @@ export default async function initialSearch(
     query
   );
 
-  return res.status(200).json(
-    result.map((x) => ({
+  const filteredResult = getSearchResults(
+    hits
+      .filter((x) => doc.includes(x._type))
+      .map((x) => ({ ...x, content: x.content.replace(/\n|\r/g, " ") })),
+    query
+  );
+
+  return res.status(200).json({
+    filteredResults: filteredResult.map((x) => ({
       item: x.item,
       score: x.score,
       matches: x.matches,
-    }))
-  );
+    })),
+    hits: {
+      komponent_artikkel: result.filter(
+        (x: any) => x.item._type === "komponent_artikkel"
+      ).length,
+      aksel_artikkel: result.filter(
+        (x: any) => x.item._type === "aksel_artikkel"
+      ).length,
+      ds_artikkel: result.filter((x: any) => x.item._type === "ds_artikkel")
+        .length,
+      aksel_blogg: result.filter((x: any) => x.item._type === "aksel_blogg")
+        .length,
+      aksel_prinsipp: result.filter(
+        (x: any) => x.item._type === "aksel_prinsipp"
+      ).length,
+    },
+  });
 }
 
 let data = null;
@@ -59,7 +81,8 @@ async function searchSanity(doctype: string[]) {
   }
 
   if (data) {
-    return data.filter((x) => doctype.includes(x._type));
+    //return data.filter((x) => doctype.includes(x._type));
+    return data;
   }
 
   const sanityQuery = `*[_type in $types ]{
@@ -76,7 +99,9 @@ async function searchSanity(doctype: string[]) {
       return [];
     });
 
-  return data.filter((x) => doctype.includes(x._type));
+  return data;
+
+  // return data.filter((x) => doctype.includes(x._type));
 }
 
 function getSearchResults(results, query) {
