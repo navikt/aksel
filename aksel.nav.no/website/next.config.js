@@ -154,7 +154,7 @@ const config = () =>
         return config;
       },
       images: {
-        domains: ["cdn.sanity.io"],
+        domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
         dangerouslyAllowSVG: true,
       },
       /* swcMinify: true,
