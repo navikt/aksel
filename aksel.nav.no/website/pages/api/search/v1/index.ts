@@ -1,5 +1,12 @@
-import { GroupedHits, SearchHit, SearchResults } from "@/lib";
+import {
+  FuseHits,
+  FuseItemT,
+  GroupedHits,
+  SearchHit,
+  SearchResults,
+} from "@/lib";
 import { getClient } from "@/sanity-client";
+import { omit } from "@navikt/ds-react";
 import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
 import { akselArticleFields } from "../../../../lib/sanity/queries";
@@ -38,19 +45,21 @@ export default async function initialSearch(
     return res.status(200).json([]);
   }
 
-  const result: SearchHit[] = getSearchResults(
+  const result: FuseHits[] = getSearchResults(
     hits.map((x) => ({ ...x, content: x.content.replace(/\n|\r/g, " ") })),
     query
-  ) as unknown as SearchHit[];
+  ) as unknown as FuseHits[];
 
-  const filteredResult: SearchHit[] = getSearchResults(
+  const filteredResult: FuseHits[] = getSearchResults(
     hits
       .filter((x) => doc.includes(x._type))
       .map((x) => ({ ...x, content: x.content.replace(/\n|\r/g, " ") })),
     query
-  ) as unknown as SearchHit[];
+  ) as unknown as FuseHits[];
 
-  const groupedHits: GroupedHits = filteredResult?.reduce(
+  const formatedResults = formatResults(filteredResult, query);
+
+  const groupedHits: GroupedHits = formatedResults?.reduce(
     (prev, cur: SearchHit) => {
       if (cur.item._type in prev) {
         return { ...prev, [cur.item._type]: [...prev[cur.item._type], cur] };
@@ -61,7 +70,10 @@ export default async function initialSearch(
     {}
   );
 
-  const topResults = filteredResult.slice(0, 3).filter((x) => x.score < 0.1);
+  const topResults = formatResults(
+    filteredResult.slice(0, 3).filter((x) => x.score < 0.1),
+    query
+  );
 
   const response: SearchResults = {
     groupedHits,
@@ -85,6 +97,47 @@ export default async function initialSearch(
   };
 
   return res.status(200).json(response);
+}
+
+function formatResults(res: FuseHits[], query: string): SearchHit[] {
+  return res.map((x) => {
+    let hightlightDesc = !!x.matches[0].indices
+      .map((y) => x.matches[0].value.slice(y[0], y[1] + 1))
+      .filter((x) => x.toLowerCase().includes(query.toLowerCase()));
+
+    let description = "";
+
+    if (x.matches[0].key === "heading") {
+      hightlightDesc = false;
+      description = x?.item.intro ?? x.item.ingress;
+    } else {
+      const value = x.matches[0].value;
+      const idx = value.toLowerCase().indexOf(query.toLowerCase());
+      const clampBefore = Math.max(idx - 20, 0) === 0;
+      const clampAfter = Math.min(idx + 20, value.length) === value.length;
+      const slice = value.slice(
+        Math.max(idx - 50, 0),
+        Math.min(idx + 50, value.length)
+      );
+      let str = "";
+      !clampBefore && (str += "...");
+      str += slice;
+      !clampAfter && (str += "...");
+      description = str;
+    }
+
+    return omit(
+      {
+        ...x,
+        item: omit(x.item, ["content", "intro", "ingress"]) as Omit<
+          FuseItemT,
+          "content" | "ingress" | "intro"
+        >,
+        highlight: { shouldHightlight: hightlightDesc, description },
+      },
+      ["matches"]
+    ) as SearchHit;
+  });
 }
 
 let data = null;

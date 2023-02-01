@@ -17,22 +17,24 @@ export type SearchResults = {
   totalHits: number;
 };
 
-export type SearchHit = {
-  item: {
-    content: string;
-    heading: string;
-    ingress?: string;
-    intro?: string;
-    publishedAt?: string;
-    slug: string;
-    status?: { bilde: any; tag: string };
-    tema?: string[];
-    updateInfo?: { lastVerified: string };
-    _createdAt: string;
-    _id: string;
-    _type: string;
-    _updatedAt: string;
-  };
+export type FuseItemT = {
+  content: string;
+  heading: string;
+  ingress?: string;
+  intro?: string;
+  publishedAt?: string;
+  slug: string;
+  status?: { bilde: any; tag: string };
+  tema?: string[];
+  updateInfo?: { lastVerified: string };
+  _createdAt: string;
+  _id: string;
+  _type: string;
+  _updatedAt: string;
+};
+
+export type FuseHits = {
+  item: FuseItemT;
   score: number;
 
   /* Inlined Fuse.FuseResultMatch */
@@ -42,6 +44,16 @@ export type SearchHit = {
     refIndex?: number;
     value?: string;
   }[];
+};
+
+export type SearchHit = {
+  item: Omit<FuseItemT, "content" | "ingress" | "intro">;
+  score: number;
+
+  highlight: {
+    shouldHightlight: boolean;
+    description: string;
+  };
 };
 
 export type GroupedHits = Partial<Record<keyof typeof options, SearchHit[]>>;

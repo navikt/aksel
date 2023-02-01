@@ -6,32 +6,6 @@ import NextLink from "next/link";
 import { SearchHit } from "lib/types/search";
 
 export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
-  const hightlightDesc = hit.matches[0].indices
-    .map((y) => hit.matches[0].value.slice(y[0], y[1] + 1))
-    .filter((x) => x.toLowerCase().includes(query.toLowerCase()));
-
-  const getHightlight = (q: string) => {
-    if (hit.matches[0].key === "heading") {
-      return <span>{hit?.item.intro ?? hit.item.ingress}</span>;
-    }
-
-    const value = hit.matches[0].value;
-    const idx = value.toLowerCase().indexOf(q.toLowerCase());
-    const clampBefore = Math.max(idx - 20, 0) === 0;
-    const clampAfter = Math.min(idx + 20, value.length) === value.length;
-    const slice = value.slice(
-      Math.max(idx - 50, 0),
-      Math.min(idx + 50, value.length)
-    );
-    let str = "";
-    !clampBefore && (str += "...");
-    str += slice;
-    !clampAfter && (str += "...");
-
-    return highlightStr(str, query);
-  };
-
-  /* TODO: Heading utenfor eller innenfor a-tag? */
   return (
     <li
       className={cl(
@@ -44,12 +18,11 @@ export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
             <span>{highlightStr(hit.item.heading, query)}</span>
           </a>
         </NextLink>
-        {/* TODO: aria-hidden vs after-element med inset-0? Høre med uu */}
         <span className="font-regular text-text-subtle text-lg" aria-hidden>
-          {hightlightDesc.length > 0 ? (
-            <div>{getHightlight(query)}</div>
+          {hit.highlight.shouldHightlight ? (
+            <div>{highlightStr(hit.highlight.description, query)}</div>
           ) : (
-            <div>{hit.item?.ingress ?? hit.item?.intro}</div>
+            <div>{hit.highlight.description}</div>
           )}
         </span>
         <span className="mt-4 flex gap-2">
