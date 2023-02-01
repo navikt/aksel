@@ -55,9 +55,10 @@ type GroupedHits = { [key: string]: SearchHit[] };
 /**
  * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
  * TODO:
- * - Keyboard-navigering på arrowUp/Down. Kanskje left/right for å hoppe til filter <-> søketreff?
  * - Oppdatere url-query basert på query + filter: ?search=abcd&filter=god_praksis
  * - Oppdatere søkefelt og filter basert på url.
+ * - Fremheving av de beste treffene
+ * - Optimalisere data sendt til client
  * - Søkeindeksering av ikoner: Må lazy-loades. Mye av logikk kan hentes fra sanity-modules/icon-search
  * - - Kan vi unngå lazyloading hvis Api sender med SVG i result-body? Risk for XSS da?
  *
