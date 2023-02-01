@@ -15,7 +15,7 @@ import {
 
 import { getTemplates } from "./util";
 
-import { DatabaseIcon, RemoveCircleIcon } from "@sanity/icons";
+import { DatabaseIcon } from "@sanity/icons";
 import { allArticleDocuments } from "./config";
 import { schema } from "./schema";
 
