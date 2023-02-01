@@ -168,7 +168,7 @@ export const GlobalSearch = () => {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  /* useEffect(() => {
+  useEffect(() => {
     const handler = () => setOpen(false);
 
     router.events.on("beforeHistoryChange", handler);
@@ -178,7 +178,7 @@ export const GlobalSearch = () => {
       router.events.off("beforeHistoryChange", handler);
       router.events.off("hashChangeComplete", handler);
     };
-  }, [router.events]); */
+  }, [router.events]);
 
   const setQueryParams = (v: string, tags: string[]) => {
     const hasQuery = !!v;
