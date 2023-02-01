@@ -148,6 +148,7 @@ export const UseDatepicker = () => {
     fromDate: new Date("Aug 23 2019"),
     onDateChange: console.log,
     locale: "en",
+    openOnFocus: false,
   });
 
   return (
@@ -174,6 +175,21 @@ export const UseRangedDatepicker = () => {
           <DatePicker.Input {...fromInputProps} label="Fra" />
           <DatePicker.Input {...toInputProps} label="Til" />
         </div>
+      </DatePicker>
+    </div>
+  );
+};
+
+export const OpenOnFocus = () => {
+  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+    onDateChange: console.log,
+    openOnFocus: false,
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps}>
+        <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
     </div>
   );
