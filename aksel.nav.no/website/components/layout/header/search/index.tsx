@@ -114,9 +114,7 @@ export const GlobalSearch = () => {
 
   const handleQueryChange = (v: string) => {
     setQuery(v);
-
-    // TODO: Søk på samme query fører ikke til state-update og blir stuck i loading
-    setLoading(!!v);
+    v !== debouncedSearchTerm && setLoading(!!v);
   };
 
   const noHits = (key: string) => {
@@ -295,7 +293,7 @@ function KBD({ children }: { children: React.ReactNode }) {
   return (
     <Detail
       as="kbd"
-      className="bg-surface-neutral-subtle-hover ml-2 rounded px-2 font-sans font-semibold uppercase"
+      className="bg-surface-neutral-subtle-hover ml-2 hidden rounded px-2 font-sans font-semibold uppercase md:inline-block"
     >
       {children}
     </Detail>

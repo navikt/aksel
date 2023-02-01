@@ -12,11 +12,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { akselArticleFields } from "../../../../lib/sanity/queries";
 import { allArticleDocuments } from "../../../../sanity/config";
 
-/**
- * TODO:
- * - Returnere sliced matches/redusere størrelse på item.content sendt med. Kan bli 20+kB per side
- */
-
 export default async function initialSearch(
   req: NextApiRequest,
   res: NextApiResponse
@@ -116,8 +111,8 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
       const clampBefore = Math.max(idx - 20, 0) === 0;
       const clampAfter = Math.min(idx + 20, value.length) === value.length;
       const slice = value.slice(
-        Math.max(idx - 50, 0),
-        Math.min(idx + 50, value.length)
+        Math.max(idx - 45, 0),
+        Math.min(idx + 45, value.length)
       );
       let str = "";
       !clampBefore && (str += "...");
