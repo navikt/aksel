@@ -25,7 +25,7 @@ const options: {
 } = {
   komponent_artikkel: { display: "Komponenter", index: 0 },
   aksel_artikkel: { display: "God praksis", index: 1 },
-  ds_artikkel: { display: "Grunnleggende ", index: 2 },
+  ds_artikkel: { display: "Grunnleggende", index: 2 },
   aksel_blogg: { display: "Blogg", index: 3 },
   aksel_prinsipp: { display: "Prinsipper", index: 4 },
 };
