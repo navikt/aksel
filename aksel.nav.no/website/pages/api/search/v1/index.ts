@@ -105,6 +105,9 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
     if (x.matches[0].key === "heading") {
       hightlightDesc = false;
       description = x?.item.intro ?? x.item.ingress;
+      const clampDesc = description?.length > 120;
+      description &&= description.slice(0, 120);
+      clampDesc && (description += "...");
     } else {
       const value = x.matches[0].value;
       const idx = value.toLowerCase().indexOf(query.toLowerCase());
