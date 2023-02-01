@@ -6,7 +6,6 @@ import {
   Checkbox,
   CheckboxGroup,
   Detail,
-  Heading,
   Label,
   Loader,
   Search,
@@ -63,9 +62,7 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * - - Kan vi unngå lazyloading hvis Api sender med SVG i result-body? Risk for XSS da?
  *
  * uu
- * - Bruke riktig form-semantikk og attributter for søkefelt + filter
- * - Sette opp riktig semantikk for søkegruppering/treff
- * - Skal søkefelt ha role="combobox" + aria-controls?
+ * - Bør keyboard-shortcuts prefikses med en gjemt "shortcut"/"hurtigtast"-tekst?
  *
  *
  * Logging
@@ -83,6 +80,7 @@ export const GlobalSearch = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeTags, setTags] = useState<Array<keyof typeof options>>([]);
   const inputRef = useRef(null);
+  const [os, setOs] = useState<"mac" | "windows">("windows");
 
   const router = useRouter();
 
@@ -91,6 +89,9 @@ export const GlobalSearch = () => {
 
   useEffect(() => {
     ReactModal.setAppElement("#__next");
+    navigator.userAgent?.indexOf("Mac OS X") !== -1
+      ? setOs("mac")
+      : setOs("windows");
   }, []);
 
   useEffect(() => {
@@ -105,6 +106,10 @@ export const GlobalSearch = () => {
         .then((res) => {
           setResults(res);
           setLoading(false);
+        })
+        .catch(() => {
+          setResults(null);
+          setLoading(false);
         });
       window.scrollTo(0, 0);
     } else {
@@ -117,14 +122,18 @@ export const GlobalSearch = () => {
     const listener = (event: KeyboardEvent) => {
       if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
-        setOpen((x) => !x);
+        if (open) {
+          inputRef.current?.focus();
+        } else {
+          setOpen(true);
+        }
       }
     };
 
     document.addEventListener("keydown", listener);
 
     return () => document.removeEventListener("keydown", listener);
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     const handler = () => setOpen(false);
@@ -144,6 +153,8 @@ export const GlobalSearch = () => {
 
   const handleQueryChange = (v: string) => {
     setQuery(v);
+
+    // TODO: Søk på samme query fører ikke til state-update og blir stuck i loading
     setLoading(!!v);
   };
 
@@ -216,43 +227,47 @@ export const GlobalSearch = () => {
             </CheckboxGroup>
           </div>
           <div className="search-grid-input w-full">
-            <Search
-              label={
-                <span className="flex items-center">
-                  Søk i hele Aksel <KBD>CMD + K</KBD>
-                </span>
-              }
-              variant="simple"
-              value={query}
-              hideLabel={false}
-              onChange={(v) => handleQueryChange(v)}
-              onClear={() => setQuery("")}
-              ref={inputRef}
-              autoComplete="off"
-              role="combobox"
-              aria-controls="aksel-search-results"
-              aria-expanded={results?.filteredResults?.length > 0}
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck={false}
-              placeholder="Search"
-              autoFocus
-              id="aksel-search-input"
-            />
+            <form role="search" onSubmit={(e) => e.preventDefault()}>
+              <Search
+                label={
+                  <span className="flex items-center">
+                    Søk i hele Aksel{" "}
+                    {os === "mac" ? <KBD>CMD + K</KBD> : <KBD>CTRL + K</KBD>}
+                  </span>
+                }
+                variant="simple"
+                value={query}
+                hideLabel={false}
+                onChange={(v) => handleQueryChange(v)}
+                onClear={() => setQuery("")}
+                ref={inputRef}
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck={false}
+                placeholder="Search"
+                autoFocus
+                id="aksel-search-input"
+                clearButton={false}
+              />
+            </form>
           </div>
-          <div className="search-grid-results mt-8 w-full max-w-3xl">
+          <div
+            className="search-grid-results mt-8 w-full max-w-3xl"
+            aria-busy={loading}
+          >
             {loading && (
               <div className="flex w-full justify-center p-4">
                 <Loader size="xlarge" variant="neutral" />
               </div>
             )}
             {results && query && !loading && (
-              <div
-                id="aksel-search-results"
-                role="listbox"
-                aria-label="Søkeresultater"
-              >
-                <Heading level="2" size="small">
+              <div id="aksel-search-results" aria-label="Søkeresultater">
+                <p
+                  className="text-xl font-semibold"
+                  /* aria-live="polite" */
+                  role="status"
+                >
                   {`${results?.filteredResults?.length} treff på "${query}"${
                     activeTags.length > 0
                       ? ` i ${activeTags
@@ -260,7 +275,7 @@ export const GlobalSearch = () => {
                           .join(", ")}`
                       : ""
                   }`}
-                </Heading>
+                </p>
                 <div className="mt-4 pb-16 md:block">
                   <Group groups={groups} query={debouncedSearchTerm} />
                 </div>
@@ -336,14 +351,13 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
               <div className="z-10 mt-4 rounded bg-teal-100 p-2">
                 <Label
                   className="text-text-default"
-                  as="h2"
+                  as="h3"
                 >{`${options[key].display} (${val.length})`}</Label>
               </div>
               <ul className="mt-2">
                 {val.map((x) => (
                   <React.Fragment key={x.item._id}>
                     <Hit key={x.item._id} hit={x} query={query} />
-                    <hr className="border-border-subtle last-of-type:hidden" />
                   </React.Fragment>
                 ))}
               </ul>
@@ -384,17 +398,15 @@ function Hit({ hit, query }: { hit: SearchHit; query: string }) {
   return (
     <li
       className={cl(
-        "focus-within:shadow-focus group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded px-2 hover:bg-gray-100"
+        "focus-within:shadow-focus border-border-subtle group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0 hover:bg-gray-100"
       )}
     >
       <div className="px-2 py-6">
-        <Heading level="3" size="small">
-          <NextLink href={hit.item.slug} passHref>
-            <a className="after:absolute after:inset-0 focus:outline-none group-hover:underline">
-              <span>{highlightStr(hit.item.heading, query)}</span>
-            </a>
-          </NextLink>
-        </Heading>
+        <NextLink href={hit.item.slug} passHref>
+          <a className="text-xl font-semibold after:absolute after:inset-0 focus:outline-none group-hover:underline">
+            <span>{highlightStr(hit.item.heading, query)}</span>
+          </a>
+        </NextLink>
         {/* TODO: aria-hidden vs after-element med inset-0? Høre med uu */}
         <span className="font-regular text-text-subtle text-lg" aria-hidden>
           {hightlightDesc.length > 0 ? (
