@@ -3,7 +3,7 @@ import { Tag } from "@navikt/ds-react";
 import cl from "classnames";
 import Image from "next/image";
 import NextLink from "next/link";
-import { SearchHit } from "./types";
+import { SearchHit } from "lib/types/search";
 
 export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
   const hightlightDesc = hit.matches[0].indices

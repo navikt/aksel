@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import { Group, GroupComponent } from "./Group";
-import { options, SearchHit } from "./types";
+import { SearchHit, options } from "lib/types/search";
 
 /**
  * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0

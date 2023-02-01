@@ -1,5 +1,4 @@
-import Fuse from "fuse.js";
-import { allArticleDocuments } from "../../../../sanity/config";
+import { allArticleDocuments } from "../../sanity/config";
 
 export const options: {
   [K in typeof allArticleDocuments[number]]: { display: string; index: number };
@@ -9,6 +8,11 @@ export const options: {
   ds_artikkel: { display: "Grunnleggende", index: 2 },
   aksel_blogg: { display: "Blogg", index: 3 },
   aksel_prinsipp: { display: "Prinsipper", index: 4 },
+};
+
+export type SearchResults = {
+  filteredResults: SearchHit[];
+  hits: Record<keyof typeof options, number>;
 };
 
 export type SearchHit = {
@@ -28,7 +32,14 @@ export type SearchHit = {
     _updatedAt: string;
   };
   score: number;
-  matches: Fuse.FuseResultMatch[];
+
+  /* Inlined Fuse.FuseResultMatch */
+  matches: {
+    indices: readonly [number, number];
+    key?: string;
+    refIndex?: number;
+    value?: string;
+  }[];
 };
 
-export type GroupedHits = { [key: string]: SearchHit[] };
+export type GroupedHits = Record<keyof typeof options, SearchHit[]>;

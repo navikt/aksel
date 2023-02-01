@@ -1,5 +1,5 @@
 import { Label } from "@navikt/ds-react";
-import { GroupedHits, SearchHit, options } from "./types";
+import { GroupedHits, SearchHit, options } from "lib/types/search";
 import { Hit } from "./Hit";
 import React from "react";
 
