@@ -32,6 +32,6 @@
 }
 
 .header-modal__overlay-search {
-  z-index: var(--a-z-index-modal);
+  z-index: 3000;
   @apply bg-surface-backdrop fixed inset-0 grid place-items-center;
 }

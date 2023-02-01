@@ -20,8 +20,6 @@ import { Group, GroupComponent } from "./Group";
  * TODO:
  * - Oppdatere url-query basert på query + filter: ?search=abcd&filter=god_praksis
  * - Oppdatere søkefelt og filter basert på url.
- * - Fremheving av de beste treffene
- * - Optimalisere data sendt til client
  * - Søkeindeksering av ikoner: Må lazy-loades. Mye av logikk kan hentes fra sanity-modules/icon-search
  * - - Kan vi unngå lazyloading hvis Api sender med SVG i result-body? Risk for XSS da?
  *
@@ -38,10 +36,9 @@ export const GlobalSearch = () => {
   const [results, setResults] = useState<SearchResults>(null);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeTags, setTags] = useState<Array<keyof typeof options>>([]);
-  const inputRef = useRef(null);
   const [os, setOs] = useState<"mac" | "windows">("windows");
+  const inputRef = useRef(null);
 
   const router = useRouter();
 
