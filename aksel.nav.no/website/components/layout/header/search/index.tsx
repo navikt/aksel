@@ -1,4 +1,3 @@
-import { urlFor } from "@/lib";
 import { useDebounce } from "@/utils";
 import { Search as SearchIcon } from "@navikt/ds-icons";
 import {
@@ -6,52 +5,15 @@ import {
   Checkbox,
   CheckboxGroup,
   Detail,
-  Label,
   Loader,
   Search,
-  Tag,
 } from "@navikt/ds-react";
-import cl from "classnames";
 import { ChangeLogIconOutline } from "components/assets";
-import Fuse from "fuse.js";
-import Image from "next/image";
-import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
-import { allArticleDocuments } from "../../../sanity/config";
-
-const options: {
-  [K in typeof allArticleDocuments[number]]: { display: string; index: number };
-} = {
-  komponent_artikkel: { display: "Komponenter", index: 0 },
-  aksel_artikkel: { display: "God praksis", index: 1 },
-  ds_artikkel: { display: "Grunnleggende", index: 2 },
-  aksel_blogg: { display: "Blogg", index: 3 },
-  aksel_prinsipp: { display: "Prinsipper", index: 4 },
-};
-
-type SearchHit = {
-  item: {
-    content: string;
-    heading: string;
-    ingress?: string;
-    intro?: string;
-    publishedAt?: string;
-    slug: string;
-    status?: { bilde: any; tag: string };
-    tema?: string[];
-    updateInfo?: { lastVerified: string };
-    _createdAt: string;
-    _id: string;
-    _type: string;
-    _updatedAt: string;
-  };
-  score: number;
-  matches: Fuse.FuseResultMatch[];
-};
-
-type GroupedHits = { [key: string]: SearchHit[] };
+import { Group, GroupComponent } from "./Group";
+import { options, SearchHit } from "./types";
 
 /**
  * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
@@ -351,153 +313,5 @@ function KBD({ children }: { children: React.ReactNode }) {
     >
       {children}
     </Detail>
-  );
-}
-
-function Group({ groups, query }: { groups: GroupedHits; query: string }) {
-  if (Object.keys(groups).length === 0) {
-    // TODO: Empty-state?
-    return null;
-  }
-
-  return (
-    <>
-      {Object.entries(groups)
-        .sort((a, b) => options[a[0]].index - options[b[0]].index)
-        .map(([key, val]) => {
-          return (
-            <GroupComponent
-              key={key}
-              heading={`${options[key].display} (${val.length})`}
-              hits={val}
-              query={query}
-            />
-          );
-        })}
-    </>
-  );
-}
-
-function GroupComponent({
-  heading,
-  hits,
-  query,
-}: {
-  heading: React.ReactNode;
-  hits: SearchHit[];
-  query: string;
-}) {
-  return (
-    <div>
-      <div className="z-10 mt-4 rounded bg-teal-100 p-2">
-        <Label className="text-text-default" as="h3">
-          {heading}
-        </Label>
-      </div>
-      <ul className="mt-2">
-        {hits.map((x) => (
-          <React.Fragment key={x.item._id}>
-            <Hit key={x.item._id} hit={x} query={query} />
-          </React.Fragment>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Hit({ hit, query }: { hit: SearchHit; query: string }) {
-  const hightlightDesc = hit.matches[0].indices
-    .map((y) => hit.matches[0].value.slice(y[0], y[1] + 1))
-    .filter((x) => x.toLowerCase().includes(query.toLowerCase()));
-
-  const getHightlight = (q: string) => {
-    if (hit.matches[0].key === "heading") {
-      return <span>{hit?.item.intro ?? hit.item.ingress}</span>;
-    }
-
-    const value = hit.matches[0].value;
-    const idx = value.toLowerCase().indexOf(q.toLowerCase());
-    const clampBefore = Math.max(idx - 20, 0) === 0;
-    const clampAfter = Math.min(idx + 20, value.length) === value.length;
-    const slice = value.slice(
-      Math.max(idx - 50, 0),
-      Math.min(idx + 50, value.length)
-    );
-    let str = "";
-    !clampBefore && (str += "...");
-    str += slice;
-    !clampAfter && (str += "...");
-
-    return highlightStr(str, query);
-  };
-
-  /* TODO: Heading utenfor eller innenfor a-tag? */
-  return (
-    <li
-      className={cl(
-        "focus-within:shadow-focus border-border-subtle group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0 hover:bg-gray-100"
-      )}
-    >
-      <div className="px-2 py-6">
-        <NextLink href={hit.item.slug} passHref>
-          <a className="text-xl font-semibold after:absolute after:inset-0 focus:outline-none group-hover:underline">
-            <span>{highlightStr(hit.item.heading, query)}</span>
-          </a>
-        </NextLink>
-        {/* TODO: aria-hidden vs after-element med inset-0? Høre med uu */}
-        <span className="font-regular text-text-subtle text-lg" aria-hidden>
-          {hightlightDesc.length > 0 ? (
-            <div>{getHightlight(query)}</div>
-          ) : (
-            <div>{hit.item?.ingress ?? hit.item?.intro}</div>
-          )}
-        </span>
-        <span className="mt-4 flex gap-2">
-          {hit.item?.tema &&
-            hit.item?.tema.map((x) => (
-              <Tag variant="alt3" size="xsmall" key={x}>
-                {x}
-              </Tag>
-            ))}
-        </span>
-      </div>
-
-      <div className="hidden aspect-square w-24 sm:block">
-        {hit.item?.status?.bilde && (
-          <Image
-            src={urlFor(hit.item.status.bilde).auto("format").url()}
-            decoding="sync"
-            width="96px"
-            height="96px"
-            layout="fixed"
-            objectFit="contain"
-            alt={hit.item?.heading + " thumbnail"}
-            aria-hidden
-          />
-        )}
-      </div>
-    </li>
-  );
-}
-
-function splitStr(str: string, query: string) {
-  return str.split(new RegExp(`(${query})`, "gi"));
-}
-
-function highlightStr(str: string, query: string) {
-  return (
-    <span>
-      {splitStr(str, query).map((part, i) => (
-        <span
-          key={i}
-          className={cl({
-            "text-text-default bg-teal-200/80":
-              part.toLowerCase() === query.toLowerCase(),
-          })}
-        >
-          {part}
-        </span>
-      ))}
-    </span>
   );
 }
