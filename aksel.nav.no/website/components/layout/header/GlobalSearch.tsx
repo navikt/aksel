@@ -12,11 +12,12 @@ import {
   Tag,
 } from "@navikt/ds-react";
 import cl from "classnames";
+import { ChangeLogIconOutline } from "components/assets";
 import Fuse from "fuse.js";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import { allArticleDocuments } from "../../../sanity/config";
 
@@ -136,21 +137,21 @@ export const GlobalSearch = () => {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  useEffect(() => {
-    const handler = () => setOpen(false);
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    setQuery("");
+    setTags([]);
+  }, []);
 
-    router.events.on("beforeHistoryChange", handler);
-    router.events.on("hashChangeComplete", handler);
+  useEffect(() => {
+    router.events.on("beforeHistoryChange", handleClose);
+    router.events.on("hashChangeComplete", handleClose);
 
     return () => {
-      router.events.off("beforeHistoryChange", handler);
-      router.events.off("hashChangeComplete", handler);
+      router.events.off("beforeHistoryChange", handleClose);
+      router.events.off("hashChangeComplete", handleClose);
     };
-  }, [router.events]);
-
-  useEffect(() => {
-    !open && setQuery("");
-  }, [open]);
+  }, [handleClose, router.events]);
 
   const handleQueryChange = (v: string) => {
     setQuery(v);
@@ -176,6 +177,10 @@ export const GlobalSearch = () => {
     return debouncedSearchTerm.length > 0 && !activeTags.find((x) => x === key);
   };
 
+  const topResults = results?.filteredResults
+    .slice(0, 3)
+    .filter((x) => x.score < 0.1);
+
   return (
     <div className="z-[1050] mr-0 flex justify-center">
       <Button
@@ -194,7 +199,7 @@ export const GlobalSearch = () => {
       </Button>
       <ReactModal
         isOpen={open}
-        onRequestClose={() => setOpen(false)}
+        onRequestClose={() => handleClose()}
         aria={{ modal: true }}
         contentLabel="Søk"
         className="bg-surface-default absolute inset-0 block w-screen overflow-x-auto px-4 md:px-6"
@@ -203,7 +208,7 @@ export const GlobalSearch = () => {
         <div className="search-grid-wrapper relative mx-auto max-w-4xl gap-4 gap-x-8 py-24">
           <button
             className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover absolute top-8 right-4 flex items-center justify-center rounded py-3 px-2 text-lg focus:outline-none"
-            onClick={() => setOpen(false)}
+            onClick={() => handleClose()}
           >
             Lukk søk <KBD>ESC</KBD>
           </button>
@@ -278,6 +283,19 @@ export const GlobalSearch = () => {
                   }`}
                 </p>
                 <div className="mt-4 pb-16 md:block">
+                  {topResults.length > 0 &&
+                    results?.filteredResults.length > 8 && (
+                      <GroupComponent
+                        heading={
+                          <span className="flex items-center gap-2">
+                            Beste treff
+                            <ChangeLogIconOutline className="shrink-0" />
+                          </span>
+                        }
+                        hits={topResults}
+                        query={query}
+                      />
+                    )}
                   <Group groups={groups} query={debouncedSearchTerm} />
                 </div>
               </div>
@@ -348,24 +366,42 @@ function Group({ groups, query }: { groups: GroupedHits; query: string }) {
         .sort((a, b) => options[a[0]].index - options[b[0]].index)
         .map(([key, val]) => {
           return (
-            <div key={key}>
-              <div className="z-10 mt-4 rounded bg-teal-100 p-2">
-                <Label
-                  className="text-text-default"
-                  as="h3"
-                >{`${options[key].display} (${val.length})`}</Label>
-              </div>
-              <ul className="mt-2">
-                {val.map((x) => (
-                  <React.Fragment key={x.item._id}>
-                    <Hit key={x.item._id} hit={x} query={query} />
-                  </React.Fragment>
-                ))}
-              </ul>
-            </div>
+            <GroupComponent
+              key={key}
+              heading={`${options[key].display} (${val.length})`}
+              hits={val}
+              query={query}
+            />
           );
         })}
     </>
+  );
+}
+
+function GroupComponent({
+  heading,
+  hits,
+  query,
+}: {
+  heading: React.ReactNode;
+  hits: SearchHit[];
+  query: string;
+}) {
+  return (
+    <div>
+      <div className="z-10 mt-4 rounded bg-teal-100 p-2">
+        <Label className="text-text-default" as="h3">
+          {heading}
+        </Label>
+      </div>
+      <ul className="mt-2">
+        {hits.map((x) => (
+          <React.Fragment key={x.item._id}>
+            <Hit key={x.item._id} hit={x} query={query} />
+          </React.Fragment>
+        ))}
+      </ul>
+    </div>
   );
 }
 
