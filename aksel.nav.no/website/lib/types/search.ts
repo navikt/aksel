@@ -11,8 +11,10 @@ export const options: {
 };
 
 export type SearchResults = {
-  filteredResults: SearchHit[];
+  groupedHits: GroupedHits;
+  topResults: SearchHit[];
   hits: Record<keyof typeof options, number>;
+  totalHits: number;
 };
 
 export type SearchHit = {
@@ -42,4 +44,4 @@ export type SearchHit = {
   }[];
 };
 
-export type GroupedHits = Record<keyof typeof options, SearchHit[]>;
+export type GroupedHits = Partial<Record<keyof typeof options, SearchHit[]>>;

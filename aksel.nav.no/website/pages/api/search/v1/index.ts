@@ -1,3 +1,4 @@
+import { GroupedHits, SearchHit, SearchResults } from "@/lib";
 import { getClient } from "@/sanity-client";
 import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -37,24 +38,35 @@ export default async function initialSearch(
     return res.status(200).json([]);
   }
 
-  const result = getSearchResults(
+  const result: SearchHit[] = getSearchResults(
     hits.map((x) => ({ ...x, content: x.content.replace(/\n|\r/g, " ") })),
     query
-  );
+  ) as unknown as SearchHit[];
 
-  const filteredResult = getSearchResults(
+  const filteredResult: SearchHit[] = getSearchResults(
     hits
       .filter((x) => doc.includes(x._type))
       .map((x) => ({ ...x, content: x.content.replace(/\n|\r/g, " ") })),
     query
+  ) as unknown as SearchHit[];
+
+  const groupedHits: GroupedHits = filteredResult?.reduce(
+    (prev, cur: SearchHit) => {
+      if (cur.item._type in prev) {
+        return { ...prev, [cur.item._type]: [...prev[cur.item._type], cur] };
+      } else {
+        return { ...prev, [cur.item._type]: [cur] };
+      }
+    },
+    {}
   );
 
-  return res.status(200).json({
-    filteredResults: filteredResult.map((x) => ({
-      item: x.item,
-      score: x.score,
-      matches: x.matches,
-    })),
+  const topResults = filteredResult.slice(0, 3).filter((x) => x.score < 0.1);
+
+  const response: SearchResults = {
+    groupedHits,
+    topResults: filteredResult?.length > 8 ? topResults : [],
+    totalHits: filteredResult?.length ?? 0,
     hits: {
       komponent_artikkel: result.filter(
         (x: any) => x.item._type === "komponent_artikkel"
@@ -70,7 +82,9 @@ export default async function initialSearch(
         (x: any) => x.item._type === "aksel_prinsipp"
       ).length,
     },
-  });
+  };
+
+  return res.status(200).json(response);
 }
 
 let data = null;
@@ -81,7 +95,6 @@ async function searchSanity(doctype: string[]) {
   }
 
   if (data) {
-    //return data.filter((x) => doctype.includes(x._type));
     return data;
   }
 
@@ -100,13 +113,11 @@ async function searchSanity(doctype: string[]) {
     });
 
   return data;
-
-  // return data.filter((x) => doctype.includes(x._type));
 }
 
 function getSearchResults(results, query) {
   /* https://fusejs.io/api/options.html */
-  const fuse = new Fuse(results, {
+  const fuse = new Fuse<SearchHit>(results, {
     keys: [
       { name: "heading", weight: 100 },
       { name: "ingress", weight: 50 },

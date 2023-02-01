@@ -4,7 +4,7 @@ import { logNav } from "../..";
 import cl from "clsx";
 import { useRouter } from "next/router";
 import { Hamburger } from "components/layout/header/Hamburger";
-import { GlobalSearch } from "components/layout/header/GlobalSearch";
+import { GlobalSearch } from "./search";
 
 const LinkElement = ({ name, href }) => {
   const { asPath } = useRouter();

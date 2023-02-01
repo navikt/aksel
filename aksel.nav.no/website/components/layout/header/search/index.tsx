@@ -9,11 +9,11 @@ import {
   Search,
 } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "components/assets";
+import { options, SearchResults } from "lib/types/search";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import { Group, GroupComponent } from "./Group";
-import { SearchHit, options } from "lib/types/search";
 
 /**
  * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
@@ -35,10 +35,7 @@ import { SearchHit, options } from "lib/types/search";
  * - Logge index for valgt søk med aplitude, eg 20/26
  */
 export const GlobalSearch = () => {
-  const [results, setResults] = useState<{
-    filteredResults: SearchHit[];
-    hits: Record<keyof typeof options, number>;
-  }>(null);
+  const [results, setResults] = useState<SearchResults>(null);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -122,26 +119,13 @@ export const GlobalSearch = () => {
     setLoading(!!v);
   };
 
-  const groups: { [key: string]: SearchHit[] } =
-    results?.filteredResults?.reduce((prev, cur) => {
-      if (cur.item._type in prev) {
-        return { ...prev, [cur.item._type]: [...prev[cur.item._type], cur] };
-      } else {
-        return { ...prev, [cur.item._type]: [cur] };
-      }
-    }, {});
-
   const noHits = (key: string) => {
-    return !Object.hasOwn(groups ?? {}, key);
+    return !Object.hasOwn(results?.groupedHits ?? {}, key);
   };
 
   const noHitsAndQuery = (key: string) => {
     return debouncedSearchTerm.length > 0 && !activeTags.find((x) => x === key);
   };
-
-  const topResults = results?.filteredResults
-    .slice(0, 3)
-    .filter((x) => x.score < 0.1);
 
   return (
     <div className="z-[1050] mr-0 flex justify-center">
@@ -236,7 +220,7 @@ export const GlobalSearch = () => {
                   /* aria-live="polite" */
                   role="status"
                 >
-                  {`${results?.filteredResults?.length} treff på "${query}"${
+                  {`${results?.totalHits} treff på "${query}"${
                     activeTags.length > 0
                       ? ` i ${activeTags
                           .map((x) => options[x].display.toLowerCase())
@@ -245,20 +229,22 @@ export const GlobalSearch = () => {
                   }`}
                 </p>
                 <div className="mt-4 pb-16 md:block">
-                  {topResults.length > 0 &&
-                    results?.filteredResults.length > 8 && (
-                      <GroupComponent
-                        heading={
-                          <span className="flex items-center gap-2">
-                            Beste treff
-                            <ChangeLogIconOutline className="shrink-0" />
-                          </span>
-                        }
-                        hits={topResults}
-                        query={query}
-                      />
-                    )}
-                  <Group groups={groups} query={debouncedSearchTerm} />
+                  {results?.topResults.length > 0 && (
+                    <GroupComponent
+                      heading={
+                        <span className="flex items-center gap-2">
+                          Beste treff
+                          <ChangeLogIconOutline className="shrink-0" />
+                        </span>
+                      }
+                      hits={results?.topResults}
+                      query={query}
+                    />
+                  )}
+                  <Group
+                    groups={results?.groupedHits}
+                    query={debouncedSearchTerm}
+                  />
                 </div>
               </div>
             )}
