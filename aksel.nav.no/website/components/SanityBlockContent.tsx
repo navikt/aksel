@@ -13,6 +13,7 @@ import {
   DoDont,
   Kode,
   LevelTwoHeading,
+  logNav,
   PropsSeksjon,
   RelatertInnhold,
   SideModul,
@@ -187,17 +188,48 @@ const serializers = {
       }
       if (href && href.startsWith("mailto:")) {
         return (
-          <NextLink href={href} passHref>
+          <NextLink
+            href={href}
+            passHref
+            onClick={(e) =>
+              logNav(
+                "link",
+                window.location.pathname,
+                e.currentTarget.getAttribute("href")
+              )
+            }
+          >
             <Link className="inline">{children}</Link>
           </NextLink>
         );
       }
       return blank ? (
-        <Link href={href} target="_blank" rel="noreferrer noopener">
+        <Link
+          href={href}
+          target="_blank"
+          rel="noreferrer noopener"
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+        >
           {children} <ExternalLink title="åpner lenken i ny fane" />
         </Link>
       ) : (
-        <NextLink href={href} passHref>
+        <NextLink
+          href={href}
+          passHref
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+        >
           <Link className="inline">{children}</Link>
         </NextLink>
       );
@@ -209,7 +241,17 @@ const serializers = {
       const href = `/${slug?.current}`;
       return (
         <NextLink href={href} passHref>
-          <Link>{children}</Link>
+          <Link
+            onClick={(e) =>
+              logNav(
+                "link",
+                window.location.pathname,
+                e.currentTarget.getAttribute("href")
+              )
+            }
+          >
+            {children}
+          </Link>
         </NextLink>
       );
     },

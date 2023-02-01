@@ -1,5 +1,7 @@
 import { Link } from "@navikt/ds-react";
 import NextLink from "next/link";
+import { logNav } from "../";
+
 const tools = [
   {
     title: "Identitet",
@@ -76,7 +78,16 @@ export const ToolCard = () => {
           </div>
           <div>
             <NextLink href={t.href} passHref>
-              <Link className="text-text-default mb-1 font-semibold">
+              <Link
+                className="text-text-default mb-1 font-semibold"
+                onClick={(e) =>
+                  logNav(
+                    "verktøy",
+                    window.location.pathname,
+                    e.currentTarget.getAttribute("href")
+                  )
+                }
+              >
                 {t.title}
               </Link>
             </NextLink>
