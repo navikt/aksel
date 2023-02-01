@@ -25,7 +25,7 @@ const options: {
 } = {
   komponent_artikkel: { display: "Komponenter", index: 0 },
   aksel_artikkel: { display: "God praksis", index: 1 },
-  ds_artikkel: { display: "Grunnleggende ", index: 2 },
+  ds_artikkel: { display: "Grunnleggende", index: 2 },
   aksel_blogg: { display: "Blogg", index: 3 },
   aksel_prinsipp: { display: "Prinsipper", index: 4 },
 };
@@ -72,21 +72,53 @@ type GroupedHits = { [key: string]: SearchHit[] };
  * - Logge index for valgt søk med aplitude, eg 20/26
  */
 export const GlobalSearch = () => {
+  const router = useRouter();
+
   const [results, setResults] = useState<{
     filteredResults: SearchHit[];
     hits: Record<keyof typeof options, number>;
   }>(null);
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeTags, setTags] = useState<Array<keyof typeof options>>([]);
   const inputRef = useRef(null);
   const [os, setOs] = useState<"mac" | "windows">("windows");
 
-  const router = useRouter();
+  const [open, setOpen] = useState(false);
+
+  /* console.log(open, router, new URL(window.location.href)); */
 
   const [query, setQuery] = useState("");
   const debouncedSearchTerm = useDebounce(query);
+
+  useEffect(() => {
+    ("search" in router.query || "searchFor" in router.query) && setOpen(true);
+    if ("search" in router.query) {
+      setQuery(
+        Array.isArray(router.query["search"])
+          ? router.query["search"].join("")
+          : router.query["search"]
+      );
+    }
+    if ("searchFor" in router.query) {
+      let tags = Array.isArray(router.query["searchFor"])
+        ? router.query["searchFor"]
+        : [router.query["searchFor"]];
+
+      tags = tags
+        .filter((x) =>
+          Object.values(options).find((val) => val.display.toLowerCase() === x)
+        )
+        .map((x) => {
+          const obj = Object.entries(options).find(
+            ([_, val]) => val.display.toLowerCase() === x
+          );
+          return obj[0];
+        });
+
+      setTags(tags as Array<keyof typeof options>);
+    }
+  }, [router]);
 
   useEffect(() => {
     ReactModal.setAppElement("#__next");
@@ -136,7 +168,7 @@ export const GlobalSearch = () => {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const handler = () => setOpen(false);
 
     router.events.on("beforeHistoryChange", handler);
@@ -146,7 +178,36 @@ export const GlobalSearch = () => {
       router.events.off("beforeHistoryChange", handler);
       router.events.off("hashChangeComplete", handler);
     };
-  }, [router.events]);
+  }, [router.events]); */
+
+  const setQueryParams = (v: string, tags: string[]) => {
+    const hasQuery = !!v;
+    const hasTags = tags.length > 0;
+    const currentQueries = { ...router.query };
+
+    if (hasQuery) {
+      currentQueries["search"] = v;
+    } else {
+      delete currentQueries["search"];
+    }
+
+    if (hasTags) {
+      currentQueries["searchFor"] = tags.map((x) =>
+        options[x].display.toLowerCase()
+      );
+    } else {
+      delete currentQueries["searchFor"];
+    }
+
+    router.replace(
+      {
+        pathname: router.pathname,
+        query: { ...currentQueries },
+      },
+      undefined,
+      { shallow: true }
+    );
+  };
 
   useEffect(() => {
     !open && setQuery("");
@@ -154,9 +215,14 @@ export const GlobalSearch = () => {
 
   const handleQueryChange = (v: string) => {
     setQuery(v);
-
+    setQueryParams(v, activeTags);
     // TODO: Søk på samme query fører ikke til state-update og blir stuck i loading
     setLoading(!!v);
+  };
+
+  const handleTagChange = (v: Array<keyof typeof options>) => {
+    setQueryParams(query, v);
+    setTags(v);
   };
 
   const groups: { [key: string]: SearchHit[] } =
@@ -208,7 +274,11 @@ export const GlobalSearch = () => {
             Lukk søk <KBD>ESC</KBD>
           </button>
           <div className="search-grid-filter mt-8">
-            <CheckboxGroup legend="Filter" onChange={setTags}>
+            <CheckboxGroup
+              legend="Filter"
+              onChange={(v) => handleTagChange(v)}
+              value={activeTags}
+            >
               {Object.entries(options).map(([key, val]) => (
                 <Checkbox
                   disabled={
