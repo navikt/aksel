@@ -11,7 +11,6 @@ export default async function logPageScroll(
 ) {
   const { id, length } = req.query;
 
-  console.log(length);
 
   if (!id || !length) {
     return res.status(400).json({
