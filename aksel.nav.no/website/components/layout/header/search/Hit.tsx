@@ -6,6 +6,10 @@ import NextLink from "next/link";
 import { SearchHit } from "lib/types/search";
 
 export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
+  if (hit.item._type === "icon") {
+    return;
+  }
+
   return (
     <li
       className={cl(
@@ -48,6 +52,44 @@ export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
             aria-hidden
           />
         )}
+      </div>
+    </li>
+  );
+}
+
+export function IconHit({ hit, query }: { hit: SearchHit; query: string }) {
+  if (hit.item._type !== "icon") {
+    return;
+  }
+
+  return (
+    <li
+      className={cl(
+        "focus-within:shadow-focus border-border-subtle group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0 hover:bg-gray-100"
+      )}
+    >
+      <div className="px-2 py-6">
+        <NextLink
+          href={`/grunnleggende/staesj/ikoner?icon=${hit.item.name}`}
+          passHref
+        >
+          <a className="text-xl font-semibold after:absolute after:inset-0 focus:outline-none group-hover:underline">
+            <span>{highlightStr(hit.item.name, query)}</span>
+          </a>
+        </NextLink>
+      </div>
+
+      <div className="hidden aspect-square w-24 sm:block">
+        <Image
+          src={`https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${hit.item.name}.svg`}
+          decoding="sync"
+          width="96px"
+          height="96px"
+          layout="fixed"
+          objectFit="contain"
+          alt={hit.item.name + " thumbnail"}
+          aria-hidden
+        />
       </div>
     </li>
   );

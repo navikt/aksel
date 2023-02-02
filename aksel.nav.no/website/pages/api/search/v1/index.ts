@@ -41,14 +41,20 @@ export default async function initialSearch(
   }
 
   const result: FuseHits[] = getSearchResults(
-    hits.map((x) => ({ ...x, content: x.content.replace(/\n|\r/g, " ") })),
+    hits.map((x) => ({
+      ...x,
+      ...(x?.content ? { content: x.content.replace(/\n|\r/g, " ") } : {}),
+    })),
     query
   ) as unknown as FuseHits[];
 
   const filteredResult: FuseHits[] = getSearchResults(
     hits
       .filter((x) => doc.includes(x._type))
-      .map((x) => ({ ...x, content: x.content.replace(/\n|\r/g, " ") })),
+      .map((x) => ({
+        ...x,
+        ...(x?.content ? { content: x.content.replace(/\n|\r/g, " ") } : {}),
+      })),
     query
   ) as unknown as FuseHits[];
 
@@ -75,6 +81,7 @@ export default async function initialSearch(
     topResults: filteredResult?.length > 8 ? topResults : [],
     totalHits: filteredResult?.length ?? 0,
     hits: {
+      icon: result.filter((x: any) => x.item._type === "icon").length,
       komponent_artikkel: result.filter(
         (x: any) => x.item._type === "komponent_artikkel"
       ).length,
@@ -106,7 +113,7 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
 
     let description = "";
 
-    if (x.matches[0].key === "heading") {
+    if (x.matches[0].key === "heading" && x.item._type !== "icon") {
       hightlightDesc = false;
       description = x?.item.intro ?? x.item.ingress;
       const clampDesc = description?.length > 120;

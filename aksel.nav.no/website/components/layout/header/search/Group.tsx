@@ -1,6 +1,6 @@
 import { Label } from "@navikt/ds-react";
 import { GroupedHits, SearchHit, options } from "lib/types/search";
-import { Hit } from "./Hit";
+import { Hit, IconHit } from "./Hit";
 import React from "react";
 
 export function Group({
@@ -50,11 +50,17 @@ export function GroupComponent({
         </Label>
       </div>
       <ul className="mt-2">
-        {hits.map((x) => (
-          <React.Fragment key={x.item._id}>
-            <Hit key={x.item._id} hit={x} query={query} />
-          </React.Fragment>
-        ))}
+        {hits.map((x) =>
+          x.item._type === "icon" ? (
+            <React.Fragment key={x.item.name}>
+              <IconHit key={x.item.name} hit={x} query={query} />
+            </React.Fragment>
+          ) : (
+            <React.Fragment key={x.item._id}>
+              <Hit key={x.item._id} hit={x} query={query} />
+            </React.Fragment>
+          )
+        )}
       </ul>
     </div>
   );

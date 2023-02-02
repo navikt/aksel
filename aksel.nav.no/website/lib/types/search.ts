@@ -1,13 +1,17 @@
 import { allArticleDocuments } from "../../sanity/config";
 
 export const options: {
-  [K in typeof allArticleDocuments[number]]: { display: string; index: number };
+  [K in typeof allArticleDocuments[number] | "icon"]: {
+    display: string;
+    index: number;
+  };
 } = {
   komponent_artikkel: { display: "Komponenter", index: 0 },
   aksel_artikkel: { display: "God praksis", index: 1 },
   ds_artikkel: { display: "Grunnleggende", index: 2 },
   aksel_blogg: { display: "Blogg", index: 3 },
-  aksel_prinsipp: { display: "Prinsipper", index: 4 },
+  icon: { display: "Ikon", index: 4 },
+  aksel_prinsipp: { display: "Prinsipper", index: 5 },
 };
 
 export type SearchResults = {
@@ -17,7 +21,12 @@ export type SearchResults = {
   totalHits: number;
 };
 
-export type FuseItemT = {
+/* type BaseItemT = {
+  _type: keyof typeof options;
+}; */
+
+interface PageItemT {
+  _type: keyof Omit<keyof typeof options, "icon">;
   content: string;
   heading: string;
   ingress?: string;
@@ -29,9 +38,18 @@ export type FuseItemT = {
   updateInfo?: { lastVerified: string };
   _createdAt: string;
   _id: string;
-  _type: string;
   _updatedAt: string;
-};
+}
+
+interface IconItemT {
+  _type: "icon";
+  name: string;
+  description: string;
+  created_at: string;
+  pageName: string;
+}
+
+export type FuseItemT = PageItemT | IconItemT;
 
 export type FuseHits = {
   item: FuseItemT;
@@ -47,7 +65,7 @@ export type FuseHits = {
 };
 
 export type SearchHit = {
-  item: Omit<FuseItemT, "content" | "ingress" | "intro">;
+  item: FuseItemT;
   score: number;
 
   highlight: {
