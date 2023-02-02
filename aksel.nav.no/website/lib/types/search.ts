@@ -10,7 +10,7 @@ export const options: {
   aksel_artikkel: { display: "God praksis", index: 1 },
   ds_artikkel: { display: "Grunnleggende", index: 2 },
   aksel_blogg: { display: "Blogg", index: 3 },
-  icon: { display: "Ikon", index: 4 },
+  icon: { display: "Ikoner", index: 4 },
   aksel_prinsipp: { display: "Prinsipper", index: 5 },
 };
 
@@ -20,10 +20,6 @@ export type SearchResults = {
   hits: Record<keyof typeof options, number>;
   totalHits: number;
 };
-
-/* type BaseItemT = {
-  _type: keyof typeof options;
-}; */
 
 interface PageItemT {
   _type: keyof Omit<keyof typeof options, "icon">;

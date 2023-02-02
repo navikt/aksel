@@ -50,9 +50,9 @@ export function GroupComponent({
         </Label>
       </div>
       <ul className="mt-2">
-        {hits.map((x) =>
+        {hits.map((x, xi) =>
           x.item._type === "icon" ? (
-            <React.Fragment key={x.item.name}>
+            <React.Fragment key={x.item.name + xi}>
               <IconHit key={x.item.name} hit={x} query={query} />
             </React.Fragment>
           ) : (

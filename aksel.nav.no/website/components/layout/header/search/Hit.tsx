@@ -68,7 +68,7 @@ export function IconHit({ hit, query }: { hit: SearchHit; query: string }) {
         "focus-within:shadow-focus border-border-subtle group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0 hover:bg-gray-100"
       )}
     >
-      <div className="px-2 py-6">
+      <div className="px-2 py-2">
         <NextLink
           href={`/grunnleggende/staesj/ikoner?icon=${hit.item.name}`}
           passHref
@@ -79,12 +79,12 @@ export function IconHit({ hit, query }: { hit: SearchHit; query: string }) {
         </NextLink>
       </div>
 
-      <div className="hidden aspect-square w-24 sm:block">
+      <div className="hidden aspect-square w-16 place-items-center sm:grid">
         <Image
           src={`https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${hit.item.name}.svg`}
           decoding="sync"
-          width="96px"
-          height="96px"
+          width="24px"
+          height="24px"
           layout="fixed"
           objectFit="contain"
           alt={hit.item.name + " thumbnail"}
