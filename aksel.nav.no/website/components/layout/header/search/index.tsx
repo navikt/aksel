@@ -126,7 +126,7 @@ export const GlobalSearch = () => {
     <div className="z-[1050] mr-0 flex justify-center">
       <Button
         variant="primary"
-        className="hover:bg-deepblue-600  bg-deepblue-500 ml-4"
+        className="hover:bg-deepblue-600 bg-deepblue-500  focus-visible:shadow-focus-gap ml-4 h-11 focus:shadow-none"
         icon={
           <SearchIcon
             className="pointer-events-none -mt-[1px] shrink-0 text-xl"
