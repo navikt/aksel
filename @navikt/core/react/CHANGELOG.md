@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.1.6
+
+### Patch Changes
+
+- [#1777](https://github.com/navikt/Designsystemet/pull/1777) [`cd1c93f9d`](https://github.com/navikt/Designsystemet/commit/cd1c93f9d471fbbc38215d788a73f21b5b216c5b) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Datepicker og monthpicker kan nå bestemme om popover skal dukke opp ved fokus
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.6
+
 ## 2.1.5
 
 ### Patch Changes
