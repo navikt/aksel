@@ -1,5 +1,114 @@
 # @navikt/ds-react
 
+## 2.1.5
+
+### Patch Changes
+
+- Hotfix: ESM import fra date-fns feilet
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.5
+
+## 2.1.4
+
+### Patch Changes
+
+- [`87f194c1d`](https://github.com/navikt/Designsystemet/commit/87f194c1dc29b10a604de676b358d117e2dbf52f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset edgecase i useRangepicker der valg av startdato etter sluttdato ga feil output
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.4
+
+## 2.1.3
+
+### Patch Changes
+
+- [#1771](https://github.com/navikt/Designsystemet/pull/1771) [`494566e60`](https://github.com/navikt/Designsystemet/commit/494566e604e958363f75ebfa2adbc1669397636a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Monthpicker håndterer nå visning av År riktig
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.3
+
+## 2.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.2
+
+## 2.1.1
+
+### Patch Changes
+
+- [#1759](https://github.com/navikt/Designsystemet/pull/1759) [`dcf5cfc06`](https://github.com/navikt/Designsystemet/commit/dcf5cfc06b751341559ef30085bd974820531e57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset @types/react v18 feil introdusert i v2.0.6
+
+- Updated dependencies [[`dcf5cfc06`](https://github.com/navikt/Designsystemet/commit/dcf5cfc06b751341559ef30085bd974820531e57)]:
+  - @navikt/ds-icons@2.1.1
+
+## 2.1.0
+
+### Minor Changes
+
+- [`0873fe652`](https://github.com/navikt/Designsystemet/commit/0873fe6520e817e462197c162b49c05826da4838) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Datepicker/Monthpicker støtter nå år med 2 siffer i input
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.0
+
+## 2.0.18
+
+### Patch Changes
+
+- [`98177d0cd`](https://github.com/navikt/Designsystemet/commit/98177d0cd3802029dcf398ce93c1767d3b0860c5) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bedre typer for ref i datepicker
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.18
+
+## 2.0.17
+
+### Patch Changes
+
+- Updated dependencies [[`27e3dfee0`](https://github.com/navikt/Designsystemet/commit/27e3dfee07e135893e9f62cd32f80ed83a3510de)]:
+  - @navikt/ds-icons@2.0.17
+
+## 2.0.16
+
+### Patch Changes
+
+- Updated dependencies [[`54f8b0795`](https://github.com/navikt/Designsystemet/commit/54f8b07956bbfb7de51f6682a5fc64903bfd1bdf)]:
+  - @navikt/ds-icons@2.0.16
+
+## 2.0.15
+
+### Patch Changes
+
+- [#1748](https://github.com/navikt/Designsystemet/pull/1748) [`22dfd8e60`](https://github.com/navikt/Designsystemet/commit/22dfd8e60315c421749394d35e41f412a00a7593) Thanks [@KenAJoh](https://github.com/KenAJoh)! - toptextPosition prop i Chat for horisontal plassering av navn og dato.
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.15
+
+## 2.0.14
+
+### Patch Changes
+
+- [`8e5c55443`](https://github.com/navikt/Designsystemet/commit/8e5c554431c98b1b658c5054c0b3cf08b8a65e52) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bumpet @floating-ui/react
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.14
+
+## 2.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`a6c339123`](https://github.com/navikt/Designsystemet/commit/a6c3391237f13394063e4c004ac9efb1875fc944)]:
+  - @navikt/ds-icons@2.0.13
+
+## 2.0.12
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.12
+
 ## 2.0.11
 
 ### Patch Changes

@@ -264,7 +264,7 @@ export const EditorPage = () => {
       {!fbError && !fbValidating && (
         <div className="mt-7">
           <Heading level="2" size="small" spacing>
-            Tilbakemeldinger på artikler du er forfatter i (
+            Tilbakemeldinger på artikler du er satt som forfatter (
             {fbData?.length ?? 0})
           </Heading>
           {fbData?.length > 0 && (
@@ -277,11 +277,8 @@ export const EditorPage = () => {
       )}
       <div className="mt-7">
         <Heading level="2" size="small" spacing>
-          Innhold du jobber med
+          Under arbeid / må re-valideres
         </Heading>
-        <BodyShort spacing>
-          Dette er alle artikler du jobber med eller må godkjenne asap.
-        </BodyShort>
         <Accordion>
           <DraftList data={data} />
           <OutDatedList data={data} />

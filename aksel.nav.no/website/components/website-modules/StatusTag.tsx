@@ -10,7 +10,11 @@ export const StatusTag = ({
   switch (status) {
     case "beta":
       return (
-        <Tag variant="alt1" size="small">
+        <Tag
+          variant="alt1"
+          size="small"
+          className="border-violet-300 bg-violet-50"
+        >
           Beta
         </Tag>
       );

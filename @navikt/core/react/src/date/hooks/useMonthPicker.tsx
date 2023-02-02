@@ -35,6 +35,13 @@ export interface UseMonthPickerOptions
    * Default shown year
    */
   defaultYear?: Date;
+  /**
+   * Allows input of with 'yy' year format.
+   * @default true
+   * @Note Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
+   * In 2023 this equals to 1943 - 2042
+   */
+  allowTwoDigitYear?: boolean;
 }
 
 interface UseMonthPickerValue {
@@ -45,7 +52,9 @@ interface UseMonthPickerValue {
   /**
    * Use: <MonthPicker.Input {...inputProps} />
    */
-  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value">;
+  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value"> & {
+    ref: React.RefObject<HTMLInputElement>;
+  };
   /**
    * Currently selected Date
    * Up to user to validate value and extract month
@@ -94,6 +103,7 @@ export const useMonthpicker = (
     inputFormat,
     onValidate,
     defaultYear,
+    allowTwoDigitYear = true,
   } = opt;
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
@@ -101,7 +111,7 @@ export const useMonthpicker = (
   const today = new Date();
   const locale = getLocaleFromString(_locale);
 
-  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const monthpickerRef = useRef<HTMLDivElement>(null);
 
   // Initialize states
@@ -171,15 +181,29 @@ export const useMonthpicker = (
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
     !open && setOpen(true);
-    let day = parseDate(e.target.value, today, locale, "month");
+    let day = parseDate(
+      e.target.value,
+      today,
+      locale,
+      "month",
+      allowTwoDigitYear
+    );
     if (isValidDate(day)) {
       setYear(day);
       setInputValue(formatDateForInput(day, locale, "month", inputFormat));
+    } else {
+      setYear(defaultSelected ?? defaultYear ?? today);
     }
   };
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    let day = parseDate(e.target.value, today, locale, "month");
+    let day = parseDate(
+      e.target.value,
+      today,
+      locale,
+      "month",
+      allowTwoDigitYear
+    );
     isValidDate(day) &&
       setInputValue(formatDateForInput(day, locale, "month", inputFormat));
   };
@@ -189,12 +213,14 @@ export const useMonthpicker = (
     if (month) {
       setOpen(false);
       inputRef.current && inputRef.current.focus();
+      setYear(month);
     }
 
     if (!required && !month) {
       updateMonth(undefined);
       updateValidation({ isValidMonth: false, isEmpty: true });
       setInputValue("");
+      setYear(defaultYear ?? today);
       return;
     }
     updateMonth(month);
@@ -209,7 +235,13 @@ export const useMonthpicker = (
   // the calendar’s month.
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.target.value);
-    const month = parseDate(e.target.value, today, locale, "month");
+    const month = parseDate(
+      e.target.value,
+      today,
+      locale,
+      "month",
+      allowTwoDigitYear
+    );
 
     const isBefore =
       fromDate &&

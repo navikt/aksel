@@ -1,7 +1,13 @@
-import { Stack, Heading, Card, Text } from "@sanity/ui";
+import { Card, Heading, Stack } from "@sanity/ui";
 import { useEffect, useState } from "react";
-import { IntentButton, Preview } from "sanity";
-import { getPublishedId, useClient, useSchema, useFormValue } from "sanity";
+import {
+  getPublishedId,
+  IntentButton,
+  Preview,
+  useClient,
+  useFormValue,
+  useSchema,
+} from "sanity";
 
 export function TemaView(props) {
   const client = useClient({ apiVersion: "2021-06-07" });
@@ -13,14 +19,14 @@ export function TemaView(props) {
   const type = schema.get("aksel_artikkel");
 
   useEffect(() => {
-    const query = `*[_type == "aksel_tema" && defined(seksjoner) && !(_id in path("drafts.**"))]{_id,title,seksjoner, "artikler":*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && ^._id in tema[]._ref]{_id}}`;
+    const query = `*[_type == "aksel_tema" && !(_id in path("drafts.**"))]{_id,title,seksjoner, "artikler":*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && ^._id in tema[]._ref]{_id}}`;
     client.fetch(query).then(setTema);
   }, [client]);
 
   const sider = tema
     .find((x) => x.title === title)
     ?.["seksjoner"]?.reduce(
-      (b, n) => [...b, ...(n?.sider.map((x) => x._ref) ?? [])],
+      (b, n) => [...b, ...(n?.sider?.map((x) => x._ref) ?? [])],
       []
     );
   const artikler = tema.find((x) => x.title === title)?.["artikler"];
@@ -36,12 +42,6 @@ export function TemaView(props) {
       <Heading size={1}>
         {`Artikler ikke i seksjoner (${notFound.length})`}
       </Heading>
-      {notFound.length ? (
-        <Text>
-          Disse artiklene vil man ikke kunne finne i navigasjonen før dette er
-          fikset.
-        </Text>
-      ) : null}
       {notFound.map((x) => (
         <Card flex={1}>
           <IntentButton

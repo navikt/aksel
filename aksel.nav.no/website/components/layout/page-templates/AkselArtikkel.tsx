@@ -1,7 +1,7 @@
 import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { Next } from "@navikt/ds-icons";
-import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
+import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import Head from "next/head";
 import NextLink from "next/link";
@@ -54,14 +54,17 @@ const AkselArtikkelTemplate = ({
               : `Relevante artikler`}
           </Heading>
           <div className="card-grid-3-1 mt-6 px-4">
-            {data.relevante_artikler.map((x: any) => (
-              <ArtikkelCard {...x} key={x._id} />
-            ))}
+            {data.relevante_artikler.map((x: any) =>
+              x && x?._id ? <ArtikkelCard level="3" {...x} key={x._id} /> : null
+            )}
           </div>
         </div>
       </div>
     </aside>
   );
+
+  const filteredTema =
+    hasTema && data?.tema?.filter((x: any) => x?.title && x?.slug);
 
   return (
     <>
@@ -120,23 +123,27 @@ const AkselArtikkelTemplate = ({
               {data?.ingress}
             </Ingress>
           )}
-          <div className="mt-6 flex gap-3 text-base">
-            <BodyShort
-              size="small"
-              as="span"
-              className="text-text-subtle whitespace-nowrap"
-            >
+
+          <div className="mt-6 inline-flex flex-wrap items-center gap-2 text-base">
+            <Detail uppercase as="span">
               {dateStr(date)}
-            </BodyShort>
+            </Detail>
             {authors?.length > 0 && (
-              <BodyShort size="small" as="div" className="flex flex-wrap gap-1">
-                <address className="not-italic">{authors[0]}</address>
-              </BodyShort>
+              <>
+                <span className="bg-deepblue-700 h-2 w-2 rotate-45 rounded-[1px] opacity-25" />
+                <BodyShort
+                  size="small"
+                  as="div"
+                  className="flex flex-wrap gap-1"
+                >
+                  <address className="not-italic">{authors?.[0]}</address>
+                </BodyShort>
+              </>
             )}
           </div>
           {hasTema && (
             <div className="mt-8 flex flex-wrap gap-2">
-              {data.tema.map(({ title, slug }: any) => (
+              {filteredTema.map(({ title, slug }: any) => (
                 <span key={title}>
                   <NextLink
                     key={title}

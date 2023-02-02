@@ -1,4 +1,5 @@
 import { ExternalLink, FileContent, Link } from "@navikt/ds-icons";
+import { BoldIcon, CodeIcon, ItalicIcon, OlistIcon } from "@sanity/icons";
 import { KBD } from "@sanity/ui";
 import React from "react";
 import { allArticleDocsRef } from "../../../config";
@@ -7,9 +8,7 @@ export const styles = [
   {
     title: "Avsnitt",
     value: "normal",
-    blockEditor: {
-      render: (props) => <p className="text-lg">{props.children}</p>,
-    },
+    component: (props) => <p className="text-lg">{props.children}</p>,
   },
 ];
 
@@ -18,28 +17,44 @@ export const block = {
   type: "block",
   styles: [...styles],
   lists: [
-    { title: "Bullet-liste", value: "bullet" },
-    { title: "Nummerert-liste", value: "number" },
+    {
+      title: "Bullet-liste",
+      value: "bullet",
+      icon: () => <OlistIcon aria-label="Ul-liste" />,
+    },
+    {
+      title: "Nummerert-liste",
+      value: "number",
+      icon: () => <OlistIcon aria-label="Ol-liste" />,
+    },
   ],
   marks: {
     decorators: [
-      { title: "Strong", value: "strong" },
-      { title: "Italic", value: "em" },
+      {
+        title: "Strong",
+        value: "strong",
+        icon: () => <BoldIcon aria-label="Bold" />,
+      },
+      {
+        title: "Italic",
+        value: "em",
+        icon: () => <ItalicIcon aria-label="Italic" />,
+      },
       {
         title: "Inline-Kode",
         value: "code",
+        icon: () => <CodeIcon aria-label="Kode" />,
       },
       {
         title: "KBD",
         value: "kbd",
-        blockEditor: {
-          icon: () => <div>KBD</div>,
-          render: (props) => (
-            <KBD padding={[1, 1, 2]} style={{ verticalAlign: "super" }}>
-              {props.children}
-            </KBD>
-          ),
-        },
+        icon: () => <div>KBD</div>,
+
+        component: (props) => (
+          <KBD padding={[1, 1, 2]} style={{ verticalAlign: "super" }}>
+            {props.children}
+          </KBD>
+        ),
       },
     ],
     annotations: [
@@ -47,9 +62,7 @@ export const block = {
         title: "Link til sanity-side",
         name: "internalLink",
         type: "object",
-        blockEditor: {
-          icon: Link,
-        },
+        icon: () => <Link title="Lenke til sanity-side" />,
         options: {
           modal: {
             type: "dialog",
@@ -69,9 +82,7 @@ export const block = {
         title: "Lenke",
         name: "link",
         type: "object",
-        blockEditor: {
-          icon: ExternalLink,
-        },
+        icon: () => <ExternalLink title="Lenke til ekstern-side" />,
         fields: [
           {
             title: "URL",

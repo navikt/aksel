@@ -3,6 +3,7 @@ import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
+import { logNav } from "../components";
 import {
   ComponentIcon,
   DownloadIcon,
@@ -20,7 +21,6 @@ import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
-import Snowfall from "react-snowfall";
 import { lazy, useEffect, useState } from "react";
 import cl from "clsx";
 
@@ -58,9 +58,18 @@ const IntroCards = () => {
       {introcards.map(({ icon: Icon, title, desc, href }) => (
         <li key={title} className="grid">
           <Link href={href} passHref>
-            <a className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none">
+            <a
+              className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none"
+              onClick={(e) =>
+                logNav(
+                  "intro-kort",
+                  window.location.pathname,
+                  e.currentTarget.getAttribute("href")
+                )
+              }
+            >
               <span className="xs:flex items-center gap-2">
-                <Icon aria-hidden className="shrink-0 text-2xl" />
+                <Icon aria-hidden className="shrink-0 text-2xl" role="img" />
                 <span className="text-xl font-semibold group-hover:underline">
                   {title}
                 </span>
@@ -110,14 +119,6 @@ const GetStarted = ({
           </li>
         ))}
       </ul>
-      <div aria-hidden>
-        <Snowfall
-          color="rgba(230, 241, 248, 0.3)"
-          speed={reducedMotion || pause ? [0, 0] : [0.1, 0.2]}
-          wind={reducedMotion || pause ? [0, 0] : [-0.2, 0.2]}
-          snowflakeCount={60}
-        />
-      </div>
       {!reducedMotion && (
         <button
           className="focus-visible:ring-border-focus-on-inverted absolute top-2 right-2 grid h-11 w-11 place-items-center rounded text-2xl focus:outline-none focus-visible:ring-2"
@@ -129,12 +130,12 @@ const GetStarted = ({
         >
           {pause ? (
             <>
-              <PlayIcon aria-hidden />
+              <PlayIcon aria-hidden role="img" />
               <span className="sr-only">Start animasjon</span>
             </>
           ) : (
             <>
-              <PauseIcon aria-hidden />
+              <PauseIcon aria-hidden role="img" />
               <span className="sr-only">Stopp animasjon</span>
             </>
           )}
@@ -152,6 +153,7 @@ const Forside = ({
   bloggs,
   resent,
   komigang,
+  temaCount,
 }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
 
@@ -239,7 +241,9 @@ const Forside = ({
                 ))}
               </ul>
               <div className="mx-auto mt-8">
-                <AkselLink href="/god-praksis">Utforsk god praksis</AkselLink>
+                <AkselLink href="/god-praksis">
+                  {`Utforsk alle ${temaCount} god praksis tema`}
+                </AkselLink>
               </div>
               <div className="mt-20">
                 <Heading level="3" size="medium">
@@ -324,6 +328,7 @@ interface PageProps {
     title: string;
     slug: string;
   }[];
+  temaCount: number;
   slug: string;
   preview: boolean;
 }
@@ -341,6 +346,7 @@ export const getStaticProps = async ({
     tema = null,
     resent = null,
     komigang = null,
+    temaCount = 0,
   } = await client.fetch(akselForsideQuery);
 
   return {
@@ -350,13 +356,13 @@ export const getStaticProps = async ({
       page,
       resent,
       komigang,
+      temaCount,
       slug: "/",
       preview,
+      id: page?._id ?? "",
     },
     revalidate: 60,
   };
 };
 
 export default Page;
-
-<div>lorem</div>;

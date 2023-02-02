@@ -56,13 +56,14 @@ const FooterForm = () => {
   return (
     <>
       <div className="flex w-full max-w-md flex-col gap-8" data-theme="dark">
-        {sent.status ? (
-          <div>
+        <div aria-live="polite">
+          {sent.status && (
             <Label spacing as="p">
               Meldingen er sendt til Aksel, takk for tilbakemeldingen!
             </Label>
-          </div>
-        ) : (
+          )}
+        </div>
+        {!sent.status && (
           <form onSubmit={(e) => handleSubmit(e)} className="w-full">
             <div className="mb-4 flex flex-col gap-4">
               <Heading level="2" size="small">

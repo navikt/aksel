@@ -11,7 +11,12 @@ interface AkselTemaT extends SanityT.Schema.aksel_tema {
 }
 
 const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
-  if (!node?.pictogram || !node?.slug?.current || !node?.title) {
+  if (
+    !node?.pictogram ||
+    !node?.slug?.current ||
+    !node?.title ||
+    !node?.refCount
+  ) {
     return null;
   }
 
@@ -43,7 +48,7 @@ const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
       </NextLink>
       <BodyShort className={cl("mb-2 lg:mb-6")}>{node.oppsummering}</BodyShort>
       <BodyShort size="small" className="text-text-subtle">
-        {node.refCount} ARTIKLER
+        {node.refCount === 1 ? "1 ARTIKKEL" : `${node.refCount} ARTIKLER`}
       </BodyShort>
     </li>
   );

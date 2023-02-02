@@ -42,7 +42,7 @@ export const Header = ({
 }) => {
   return (
     <>
-      <a className="skiplink" href="#hovedinnhold" tabIndex={-1}>
+      <a className="skiplink" href="#hovedinnhold">
         Hopp til innhold
       </a>
       <header

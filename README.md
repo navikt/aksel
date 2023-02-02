@@ -39,7 +39,8 @@
 
 aksel.nav.no/
 ├── website        # NEXT.JS app (v12)
-└── sanity         # Sanity CMS-app (v2)
+├── website/sanity # Sanity CMS-app (v3)
+└── sanity         # Sanity CMS-app (deprecated v2)
 ```
 
 ## Commands
@@ -71,7 +72,7 @@ Vi tar gjerne i mot PR-er [CONTRIBUTING.md](https://github.com/navikt/Designsyst
 
 ## Codeowners
 
-Løsningen forvaltes av team Aksel/Designsystemet
+Løsningen forvaltes av team Aksel
 
 [Slack](https://nav-it.slack.com/archives/C7NE7A8UF)
 

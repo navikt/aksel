@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { SitemapStream, streamToPromise } from "sitemap";
-import { getAllPages } from "@/lib";
+import { sitemapPages } from "@/lib";
 
 /* https://linguinecode.com/post/add-robots-txt-file-sitemaps-nextjs */
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -9,14 +9,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       hostname: `https://${req.headers.host}`,
     });
 
-    const pages = await getAllPages();
+    const pages = await sitemapPages();
 
     // Create each URL row
     pages.forEach((post) => {
       smStream.write({
-        url: `/${post}`,
-        changefreq: "weekly",
-        priority: 0.5,
+        url: `/${post.path}`,
+        changefreq: "monthly",
+        lastmod: post.lastmod,
       });
     });
 

@@ -3,7 +3,6 @@ import { SanityBlockContent } from "@/sanity-block";
 import { ExternalLink } from "@navikt/ds-icons";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
-import { BetaWarning } from "components/website-modules/BetaWarning";
 import Head from "next/head";
 import { dateStr, Feedback, TableOfContents } from "../..";
 
@@ -126,7 +125,6 @@ const KomponentArtikkelTemplate = ({
         <TableOfContents changedState={data["content"]} hideToc={false} />
         <div className="content-box">
           <div className="mt-12">
-            {data?.status && data.status?.tag === "beta" && <BetaWarning />}
             <IntroSeksjon node={data.intro} />
             <SanityBlockContent blocks={data["content"]} />
           </div>

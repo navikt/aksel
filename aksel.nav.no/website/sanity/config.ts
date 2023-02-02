@@ -34,6 +34,9 @@ export const grunnleggendeKategorier = [
   { title: "Styling", value: "styling" },
   { title: "Guider", value: "guider" },
   { title: "Stæsj", value: "staesj" },
+  { title: "Design", value: "design" },
+  { title: "Kode", value: "kode" },
+  { title: "Nedlastbart", value: "nedlastbart" },
 ];
 
 export const monsterKategorier = [];

@@ -6,11 +6,15 @@ interface SVGRProps {
   titleId?: string;
 }
 
-export const DefaultIllustration = ({
+export type DefaultIllustrationType = React.FunctionComponent<
+  SVGProps<SVGSVGElement> & SVGRProps
+>;
+
+export const DefaultIllustration: DefaultIllustrationType = ({
   title,
   titleId: _titleId,
   ...props
-}: SVGProps<SVGSVGElement> & SVGRProps) => {
+}) => {
   let titleId: string | undefined = useId();
   titleId = title ? (_titleId ? _titleId : "title-" + titleId) : undefined;
 
