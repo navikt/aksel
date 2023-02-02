@@ -56,6 +56,11 @@ export interface UseDatepickerOptions
    * In 2023 this equals to 1943 - 2042
    */
   allowTwoDigitYear?: boolean;
+  /**
+   * Opens datepicker on input-focus
+   * @default true
+   */
+  openOnFocus?: boolean;
 }
 
 interface UseDatepickerValue {
@@ -123,6 +128,7 @@ export const useDatepicker = (
     onValidate,
     defaultMonth,
     allowTwoDigitYear = true,
+    openOnFocus = true,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -198,7 +204,7 @@ export const useDatepicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    !open && setOpen(true);
+    !open && openOnFocus && setOpen(true);
     let day = parseDate(
       e.target.value,
       today,

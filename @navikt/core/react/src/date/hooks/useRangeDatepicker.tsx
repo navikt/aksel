@@ -204,6 +204,7 @@ export const useRangeDatepicker = (
     onValidate,
     defaultMonth,
     allowTwoDigitYear = true,
+    openOnFocus = true,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -323,7 +324,7 @@ export const useRangeDatepicker = (
   };
 
   const handleFocus = (e, src: RangeT) => {
-    !open && setOpen(true);
+    !open && openOnFocus && setOpen(true);
     let day = parseDate(
       e.target.value,
       today,
