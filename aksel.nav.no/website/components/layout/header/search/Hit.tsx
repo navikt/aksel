@@ -4,6 +4,8 @@ import cl from "classnames";
 import Image from "next/image";
 import NextLink from "next/link";
 import { SearchHit } from "lib/types/search";
+import { StatusTag } from "components/website-modules/StatusTag";
+import { isNew } from "@/utils";
 
 export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
   if (hit.item._type === "icon") {
@@ -13,13 +15,16 @@ export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
   return (
     <li
       className={cl(
-        "focus-within:shadow-focus border-border-subtle group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0 hover:bg-gray-100"
+        "focus-within:shadow-focus border-border-subtle group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0 focus-within:z-10 hover:bg-gray-100"
       )}
     >
       <div className="px-2 py-6">
-        <NextLink href={hit.item.slug} passHref>
-          <a className="text-xl font-semibold after:absolute after:inset-0 focus:outline-none group-hover:underline">
-            <span>{highlightStr(hit.item.heading, query)}</span>
+        <NextLink href={`/${hit.item.slug}`} passHref>
+          <a className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none">
+            <span className="group-hover:underline">
+              {highlightStr(hit.item.heading, query)}
+            </span>
+            <StatusTag status={hit?.item?.status?.tag} aria-hidden />
           </a>
         </NextLink>
         <span className="font-regular text-text-subtle text-lg" aria-hidden>
@@ -29,7 +34,7 @@ export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
             <div>{hit.highlight.description}</div>
           )}
         </span>
-        <span className="mt-4 flex gap-2">
+        <span className="mt-4 flex gap-2 empty:mt-0">
           {hit.item?.tema &&
             hit.item?.tema.map((x) => (
               <Tag variant="alt3" size="xsmall" key={x}>
@@ -65,7 +70,7 @@ export function IconHit({ hit, query }: { hit: SearchHit; query: string }) {
   return (
     <li
       className={cl(
-        "focus-within:shadow-focus border-border-subtle group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0 hover:bg-gray-100"
+        "focus-within:shadow-focus border-border-subtle group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0 focus-within:z-10 hover:bg-gray-100"
       )}
     >
       <div className="px-2 py-2">
@@ -73,8 +78,15 @@ export function IconHit({ hit, query }: { hit: SearchHit; query: string }) {
           href={`/grunnleggende/staesj/ikoner?icon=${hit.item.name}`}
           passHref
         >
-          <a className="text-xl font-semibold after:absolute after:inset-0 focus:outline-none group-hover:underline">
-            <span>{highlightStr(hit.item.name, query)}</span>
+          <a className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none">
+            <span className="group-hover:underline">
+              {highlightStr(hit.item.name, query)}
+            </span>
+            {isNew(hit.item?.created_at ?? "") && (
+              <Tag variant="info" size="small" aria-hidden>
+                Ny
+              </Tag>
+            )}
           </a>
         </NextLink>
       </div>

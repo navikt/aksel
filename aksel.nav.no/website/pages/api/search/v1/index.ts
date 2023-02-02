@@ -36,7 +36,7 @@ export default async function initialSearch(
     : req.query.q;
 
   const hits = [
-    ...(await searchSanity(doc)),
+    ...(await searchSanity()),
     ...IconMetadata.map((icon) => ({ ...icon, _type: "icon" })),
   ];
 
@@ -151,11 +151,7 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
 
 let data = null;
 
-async function searchSanity(doctype: string[]) {
-  if (!doctype) {
-    return [];
-  }
-
+async function searchSanity() {
   if (data) {
     return data;
   }

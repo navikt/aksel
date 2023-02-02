@@ -123,14 +123,15 @@ export const GlobalSearch = () => {
   };
 
   return (
-    <div className="z-[1050] mr-0 flex justify-center">
+    <div className="z-[1050] mr-4 ml-auto flex justify-center md:mr-0 md:ml-0">
       <Button
         variant="primary"
-        className="hover:bg-deepblue-600  bg-deepblue-500 ml-4"
+        className="hover:bg-deepblue-600 bg-deepblue-500 focus-visible:shadow-focus-gap h-11 focus:shadow-none"
         icon={
           <SearchIcon
             className="pointer-events-none -mt-[1px] shrink-0 text-xl"
             aria-label="Åpne meny"
+            aria-hidden
           />
         }
         iconPosition="left"
