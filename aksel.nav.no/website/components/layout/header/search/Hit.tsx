@@ -17,7 +17,7 @@ export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
       )}
     >
       <div className="px-2 py-6">
-        <NextLink href={hit.item.slug} passHref>
+        <NextLink href={`/${hit.item.slug}`} passHref>
           <a className="text-xl font-semibold after:absolute after:inset-0 focus:outline-none group-hover:underline">
             <span>{highlightStr(hit.item.heading, query)}</span>
           </a>
