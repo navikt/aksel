@@ -131,6 +131,7 @@ export const GlobalSearch = () => {
           <SearchIcon
             className="pointer-events-none -mt-[1px] shrink-0 text-xl"
             aria-label="Åpne meny"
+            aria-hidden
           />
         }
         iconPosition="left"
