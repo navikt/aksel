@@ -1,6 +1,6 @@
 import amplitude from "amplitude-js";
 import { Router } from "next/router";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 export enum AmplitudeEvents {
   "sidevisning" = "sidevisning",
@@ -62,9 +62,14 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
 }
 
 export const usePageView = (router: Router, pageProps: any) => {
-  const pageId = pageProps?.id || pageProps?.page?._id;
-
-  const isForside = pageProps?.page?._type === "aksel_forside";
+  const pageId = useMemo(
+    () => pageProps?.id || pageProps?.page?._id,
+    [pageProps]
+  );
+  const isForside = useMemo(
+    () => pageProps?.page?._type === "aksel_forside",
+    [pageProps]
+  );
 
   const logView = useCallback(
     (e, first = false) => {
