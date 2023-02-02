@@ -397,10 +397,7 @@ export const resolveProductionUrl = (doc) => {
   }
 };
 
-export const defaultDocumentNode = (
-  S,
-  { schemaType, documentId, getClient }
-) => {
+export const defaultDocumentNode = (S, { schemaType }) => {
   if (
     [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
       schemaType
