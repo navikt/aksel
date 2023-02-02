@@ -84,7 +84,7 @@ function defaultConfig() {
           "ds_artikkel",
           "aksel_artikkel",
         ],
-        hasPublishedAt: allArticleDocuments,
+        hasPublishedAt: [...allArticleDocuments],
       }),
 
       /* 3rd-party */
