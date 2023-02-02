@@ -29,7 +29,7 @@ export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
             <div>{hit.highlight.description}</div>
           )}
         </span>
-        <span className="mt-4 flex gap-2">
+        <span className="mt-4 flex gap-2 empty:mt-0">
           {hit.item?.tema &&
             hit.item?.tema.map((x) => (
               <Tag variant="alt3" size="xsmall" key={x}>
