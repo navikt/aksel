@@ -192,7 +192,6 @@ export const GlobalSearch = () => {
                 autoCorrect="off"
                 autoCapitalize="off"
                 spellCheck={false}
-                placeholder="Search"
                 autoFocus
                 id="aksel-search-input"
                 clearButton={false}

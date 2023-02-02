@@ -54,7 +54,8 @@ export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
 }
 
 function splitStr(str: string, query: string) {
-  return str.split(new RegExp(`(${query})`, "gi"));
+  const regexStr = query.split(" ").join("|");
+  return str.split(new RegExp(`(${regexStr})`, "gi"));
 }
 
 function highlightStr(str: string, query: string) {
@@ -64,8 +65,10 @@ function highlightStr(str: string, query: string) {
         <span
           key={i}
           className={cl({
-            "text-text-default bg-teal-200/80":
-              part.toLowerCase() === query.toLowerCase(),
+            "text-text-default bg-teal-200/80": query
+              .split(" ")
+              .map((x) => x.toLowerCase())
+              .includes(part.toLowerCase()),
           })}
         >
           {part}

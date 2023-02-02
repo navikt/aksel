@@ -94,11 +94,15 @@ export default async function initialSearch(
   return res.status(200).json(response);
 }
 
+function findRelevantQuery(q: string) {
+  return q.split(" ")[0].toLowerCase();
+}
+
 function formatResults(res: FuseHits[], query: string): SearchHit[] {
   return res.map((x) => {
     let hightlightDesc = !!x.matches[0].indices
       .map((y) => x.matches[0].value.slice(y[0], y[1] + 1))
-      .filter((x) => x.toLowerCase().includes(query.toLowerCase()));
+      .filter((x) => x.toLowerCase().includes(findRelevantQuery(query)));
 
     let description = "";
 
@@ -110,7 +114,7 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
       clampDesc && (description += "...");
     } else {
       const value = x.matches[0].value;
-      const idx = value.toLowerCase().indexOf(query.toLowerCase());
+      const idx = value.toLowerCase().indexOf(findRelevantQuery(query));
       const clampBefore = Math.max(idx - 20, 0) === 0;
       const clampAfter = Math.min(idx + 20, value.length) === value.length;
       const slice = value.slice(
