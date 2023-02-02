@@ -1,8 +1,7 @@
-import * as Icons from "@navikt/ds-icons";
 import meta from "@navikt/ds-icons/meta.json";
 import { BodyShort, Button, Detail, Heading } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
-import { renderToString } from "react-dom/server";
+import Image from "next/image";
 
 import {
   AmplitudeEvents,
@@ -12,9 +11,11 @@ import {
 } from "@/components";
 import { SanityT } from "@/lib";
 import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
-import { downloadSvg } from "./downloads";
+import { Download } from "@navikt/ds-icons";
 
 const ModalContent = ({ icon }: { icon: string }) => {
+  const [blob, setBlob]: any = useState();
+  const [iconText, setIconText] = useState<string>();
   const [doc, setDoc] = useState<{
     name: string;
     pageName: string;
@@ -26,6 +27,23 @@ const ModalContent = ({ icon }: { icon: string }) => {
     const doc = meta.find((x) => x.name === icon);
     setDoc(doc ?? null);
   }, [icon]);
+
+  useEffect(() => {
+    if (!icon) return;
+    getBlob(icon);
+  }, [icon]);
+
+  async function getBlob(icon: string) {
+    const iconUrl = `https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${icon}.svg`;
+    fetch(iconUrl)
+      .then((r) => {
+        return r.text();
+      })
+      .then((r) => {
+        setIconText(r);
+        setBlob(new Blob([r], { type: "image/svg+xml" }));
+      });
+  }
 
   const logDownload = (icon, format) => {
     logAmplitudeEvent(AmplitudeEvents.ikonnedlastning, {
@@ -46,13 +64,11 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
     },
   };
 
-  const Icon = Icons[icon];
-
   const svgSnippet: SanityT.Schema.kode = {
     _type: "kode",
     code: {
       language: "jsx",
-      code: `${renderToString(<Icon />)}`,
+      code: `${iconText?.trim()}`,
     },
   };
 
@@ -90,16 +106,20 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
             Last ned
           </Heading>
           <div className="mb-8 flex gap-4">
-            <Button
-              variant="tertiary"
-              onClick={() => {
-                downloadSvg(icon);
-                logDownload(icon, "svg");
-              }}
-              icon={<Icons.Download title="last ned" />}
-            >
-              SVG
-            </Button>
+            {blob && (
+              <Button
+                variant="tertiary"
+                as="a"
+                onClick={() => {
+                  logDownload(icon, "svg");
+                }}
+                icon={<Download title="last ned" />}
+                href={URL.createObjectURL(blob)}
+                download={icon}
+              >
+                SVG
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -113,10 +133,29 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
       <Snippet node={svgSnippet} />
       <div className="mt-auto flex">
         <div className="text-text-default flex h-36 flex-1 items-center justify-center bg-white text-[6rem]">
-          <Icon />
+          <Image
+            src={`https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${icon}.svg`}
+            decoding="sync"
+            width="96px"
+            height="96px"
+            layout="fixed"
+            objectFit="contain"
+            alt={icon + "eksempel lyst"}
+            aria-hidden
+          />
         </div>
         <div className="text-text-on-inverted flex h-36 flex-1 items-center justify-center bg-gray-900 text-[6rem]">
-          <Icon />
+          <Image
+            src={`https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${icon}.svg`}
+            decoding="sync"
+            className="invert"
+            width="96px"
+            height="96px"
+            layout="fixed"
+            objectFit="contain"
+            alt={icon + " eksempel mørk bakgrunn"}
+            aria-hidden
+          />
         </div>
       </div>
       {isNew(doc?.created_at) ? (

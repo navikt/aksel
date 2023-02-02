@@ -8,6 +8,7 @@ import {
 } from "@/components";
 import meta from "@navikt/ds-icons/meta.json";
 import { BodyLong, BodyShort, Heading, Link, Modal } from "@navikt/ds-react";
+import ModalContent from "./ModalContent";
 import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -34,11 +35,6 @@ const IconView = dynamic(() => import("./IconView"), {
       </div>
     </div>
   ),
-  ssr: false,
-});
-
-const ModalContent = dynamic(() => import("./ModalContent"), {
-  loading: () => <ModalPlaceholder />,
   ssr: false,
 });
 
