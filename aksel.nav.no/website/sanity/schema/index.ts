@@ -60,6 +60,7 @@ export const schema: SchemaPluginOptions = {
     object.RiktekstGrunnleggende,
     object.RiktekstStandard,
     object.RiktekstPrinsipp,
+    object.RiktekstStandalone,
 
     /* Komponentsider */
     object.PropsSeksjon,
@@ -71,5 +72,8 @@ export const schema: SchemaPluginOptions = {
     /* Prinsipper */
     object.HeroBilde,
     object.InnholdsKort,
+
+    /* Standalone */
+    object.UuFeedback,
   ],
 };

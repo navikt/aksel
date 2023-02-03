@@ -116,7 +116,13 @@ export const headingStyles = [
 ];
 
 const Riktekst = (
-  type: "god-praksis" | "grunnleggende" | "komponent" | "prinsipp" | "standard"
+  type:
+    | "god-praksis"
+    | "grunnleggende"
+    | "komponent"
+    | "prinsipp"
+    | "standard"
+    | "standalone"
 ) => {
   const fields: string[] = [];
   const standard = [
@@ -151,6 +157,9 @@ const Riktekst = (
       break;
     case "prinsipp":
       fields.push("innholdskort");
+      break;
+    case "standalone":
+      fields.push("uufeedback");
       break;
     default:
       break;
@@ -204,5 +213,13 @@ export const RiktekstEnkel = {
   name: "riktekst_enkel",
   type: "array",
   of: [block],
+  icon: FileContent,
+};
+
+export const RiktekstStandalone = {
+  title: "Riktekst",
+  name: "riktekst_standalone",
+  type: "array",
+  of: Riktekst("standalone"),
   icon: FileContent,
 };
