@@ -133,6 +133,10 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
       str += slice;
       !clampAfter && (str += "...");
       description = str;
+
+      if (x.matches[0].key === "codeExamples") {
+        description = `Kodedemo ${description}`;
+      }
     }
 
     return omit(
@@ -159,12 +163,21 @@ async function searchSanity() {
   const sanityQuery = `*[_type in $types ]{
     ${akselArticleFields}
     "intro": pt::text(intro.body),
-    "content": content,
+    "content": content[]{...,
+      _type == "kode_eksempler" => {
+        ...dir->{"eksempler": filer[].navn},
+      }},
   }`;
 
   data = await getClient()
     .fetch(sanityQuery, { types: allArticleDocuments })
-    .then((res) => res.map((x) => ({ ...x, content: toPlainText(x?.content) })))
+    .then((res) =>
+      res.map((x) => ({
+        ...x,
+        content: toPlainText(x?.content),
+        codeExamples: getCodeExamples(x?.content),
+      }))
+    )
     .catch((err) => {
       console.log("Error message: ", err.message);
       return [];
@@ -182,6 +195,7 @@ function getSearchResults(results, query) {
       { name: "intro", weight: 50 },
       { name: "content", weight: 10 },
       { name: "tema", weight: 20 },
+      { name: "codeExamples", weight: 40 },
 
       // Icons
       { name: "name", weight: 70 },
@@ -214,4 +228,18 @@ function toPlainText(blocks: any[]) {
       return block.children.map((child) => child.text).join("");
     })
     .join("\n\n");
+}
+
+function getCodeExamples(blocks: any[]): string[] {
+  if (!blocks || blocks.length === 0) {
+    return [];
+  }
+
+  const examples = [];
+
+  blocks
+    .filter((block) => block._type === "kode_eksempler")
+    .map((x) => examples.push(...x.eksempler));
+
+  return examples;
 }

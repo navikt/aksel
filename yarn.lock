@@ -17844,13 +17844,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-file-download@npm:^0.4.12":
-  version: 0.4.12
-  resolution: "js-file-download@npm:0.4.12"
-  checksum: a03847eef0184fbf34a7b7fd365ea6aa1a6cc142efeac52c4baa0cdde845dc93718eb66808dfcffd6c91b37ddc9d058d352ac9698b4280744bad3587240c93b6
-  languageName: node
-  linkType: hard
-
 "js-sdsl@npm:^4.1.4":
   version: 4.2.0
   resolution: "js-sdsl@npm:4.2.0"
@@ -27843,7 +27836,6 @@ __metadata:
     jest: ^29.0.0
     jest-environment-jsdom: ^29.0.0
     jose: 4.10.0
-    js-file-download: ^0.4.12
     json5: 2.2.1
     jwt-decode: 3.1.2
     lodash: ^4.17.21
