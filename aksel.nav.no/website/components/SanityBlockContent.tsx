@@ -21,6 +21,7 @@ import {
   TastaturModul,
   Tips,
   TokenTable,
+  UuFeedback,
   Video,
 } from ".";
 
@@ -51,6 +52,7 @@ const serializers = {
     video: ({ node }) => <Video node={node} />,
     tips: ({ node }) => <Tips node={node} />,
     kode_eksempler: ({ node }) => <CodeExamples node={node} />,
+    uufeedback: ({ node }) => <UuFeedback node={node} />,
 
     block: ({ node, children }) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks

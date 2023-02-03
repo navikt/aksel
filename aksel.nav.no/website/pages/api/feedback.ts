@@ -36,24 +36,25 @@ export default async function handler(
         const transactionClient = noCdnClient(token).transaction();
         const data: FeedbackT = JSON.parse(req.body);
 
-        if (!data?.docId) {
-          console.log("No docId! api/feedback");
-          return;
-        }
         const doc = {
           _id: `feedback.${randKey()}`,
           _type: "aksel_feedback",
-          feedback_type:
-            data.type === "footer" ? "footer" : "artikkel_feedback",
-          ...(data.type === "footer" ? {} : { artikkel_feedback: data.type }),
+          feedback_type: getType(data?.type),
+          ...(["footer", "uu"].includes(data?.type)
+            ? {}
+            : { artikkel_feedback: data.type }),
           melding: data.message,
           behandlet: false,
           url: data.url,
-          doc_ref: {
-            _ref: data.docId,
-            _type: "reference",
-            _weak: true,
-          },
+          ...(data?.docId
+            ? {
+                doc_ref: {
+                  _ref: data.docId,
+                  _type: "reference",
+                  _weak: true,
+                },
+              }
+            : {}),
         };
 
         transactionClient.create(doc);
@@ -69,5 +70,16 @@ export default async function handler(
         res.status(500).json({ msg: "Error, check console" });
       }
       break;
+  }
+}
+
+function getType(str: string) {
+  switch (str) {
+    case "footer":
+      return "footer";
+    case "uu":
+      return "uu_feedback";
+    default:
+      return "artikkel_feedback";
   }
 }

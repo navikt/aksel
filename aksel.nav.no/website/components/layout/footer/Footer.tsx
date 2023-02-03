@@ -49,6 +49,14 @@ const Footer = () => {
                   Prinsipper for brukeropplevelse
                 </Link>
               </li>
+              <li>
+                <Link
+                  className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
+                  href="/side/aksel-og-universell-utforming"
+                >
+                  Tilgjengelighet
+                </Link>
+              </li>
               {/* <li>
                   <Link
                     className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
