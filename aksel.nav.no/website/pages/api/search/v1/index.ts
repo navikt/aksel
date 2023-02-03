@@ -29,7 +29,7 @@ export default async function initialSearch(
       : req.query.doc;
     doc = queryDoc.split(",");
   } else {
-    doc = [...allArticleDocuments, "icon"];
+    doc = [...allArticleDocuments, "icon", "aksel_standalone"];
   }
 
   const query = Array.isArray(req.query.q)
@@ -96,6 +96,9 @@ export default async function initialSearch(
       aksel_prinsipp: result.filter(
         (x: any) => x.item._type === "aksel_prinsipp"
       ).length,
+      aksel_standalone: result.filter(
+        (x: any) => x.item._type === "aksel_prinsipp"
+      ).length,
     },
   };
 
@@ -157,9 +160,10 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
 let data = null;
 
 async function searchSanity() {
-  const sanityQueryHttp = `*[_type in [${allArticleDocuments.map(
-    (x) => `"${x}"`
-  )}] ]{
+  const sanityQueryHttp = `*[_type in [${[
+    ...allArticleDocuments,
+    "aksel_standalone",
+  ].map((x) => `"${x}"`)}] ]{
     ${akselArticleFields}
     "intro": pt::text(intro.body),
     "content": content[]{...,

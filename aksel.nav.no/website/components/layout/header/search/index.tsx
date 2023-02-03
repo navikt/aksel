@@ -217,22 +217,24 @@ export const GlobalSearch = () => {
           </button>
           <div className="search-grid-filter mt-8">
             <CheckboxGroup legend="Filter" onChange={setTags}>
-              {Object.entries(options).map(([key, val]) => (
-                <Checkbox
-                  disabled={
-                    noHitsAndQuery(key) &&
-                    noHits(key) &&
-                    results?.hits[key] === 0
-                  }
-                  key={key}
-                  value={key}
-                  className="whitespace-nowrap"
-                >
-                  {`${val.display} ${
-                    results?.hits[key] > 0 ? `(${results?.hits[key]})` : ""
-                  }`}
-                </Checkbox>
-              ))}
+              {Object.entries(options)
+                .filter((x) => !x[1].hidden)
+                .map(([key, val]) => (
+                  <Checkbox
+                    disabled={
+                      noHitsAndQuery(key) &&
+                      noHits(key) &&
+                      results?.hits[key] === 0
+                    }
+                    key={key}
+                    value={key}
+                    className="whitespace-nowrap"
+                  >
+                    {`${val.display} ${
+                      results?.hits[key] > 0 ? `(${results?.hits[key]})` : ""
+                    }`}
+                  </Checkbox>
+                ))}
             </CheckboxGroup>
           </div>
           <div className="search-grid-input w-full">

@@ -1,9 +1,10 @@
 import { allArticleDocuments } from "../../sanity/config";
 
 export const options: {
-  [K in typeof allArticleDocuments[number] | "icon"]: {
+  [K in typeof allArticleDocuments[number] | "icon" | "aksel_standalone"]: {
     display: string;
     index: number;
+    hidden?: boolean;
   };
 } = {
   komponent_artikkel: { display: "Komponenter", index: 0 },
@@ -12,6 +13,7 @@ export const options: {
   aksel_blogg: { display: "Blogg", index: 3 },
   icon: { display: "Ikoner", index: 4 },
   aksel_prinsipp: { display: "Prinsipper", index: 5 },
+  aksel_standalone: { display: "Unike sider", index: 6, hidden: true },
 };
 
 export type SearchResults = {
