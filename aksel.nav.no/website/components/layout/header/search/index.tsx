@@ -202,6 +202,7 @@ export const GlobalSearch = () => {
           <div
             className="search-grid-results mt-8 w-full max-w-3xl"
             aria-busy={loading}
+            role="status"
           >
             {loading && (
               <div className="flex w-full justify-center p-4">
@@ -210,11 +211,7 @@ export const GlobalSearch = () => {
             )}
             {results && query && !loading && (
               <div id="aksel-search-results" aria-label="Søkeresultater">
-                <p
-                  className="text-xl font-semibold"
-                  /* aria-live="polite" */
-                  role="status"
-                >
+                <p className="text-xl font-semibold">
                   {`${results?.totalHits} treff på "${query}"${
                     activeTags.length > 0
                       ? ` i ${activeTags
