@@ -86,7 +86,7 @@ export const usePageView = (router: Router, pageProps: any) => {
       }
       logPageView(e, data, first);
       try {
-        if (isForside && isProduction()) {
+        if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-page-view?id=${pageId}`);
         }
       } catch (error) {
@@ -115,7 +115,7 @@ export const usePageView = (router: Router, pageProps: any) => {
       });
 
       try {
-        if (isForside && isProduction()) {
+        if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-scroll?id=${pageId}&length=${highestPercent}`);
         }
       } catch (error) {
@@ -128,7 +128,7 @@ export const usePageView = (router: Router, pageProps: any) => {
   const logTimeSpent = useCallback(
     (timeSpent: number) => {
       try {
-        if (isForside && timeSpent <= 420 && isProduction()) {
+        if (isForside && timeSpent <= 420 && isProduction() && !!pageId) {
           fetch(`/api/log-time?id=${pageId}&time=${timeSpent}`);
         }
       } catch (error) {
