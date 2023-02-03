@@ -1,8 +1,8 @@
 export * from "./blogg/artikkel";
 export * from "./blogg/landingsside";
 export * from "./editors";
-export * from "./forside";
 export * from "./feedback";
+export * from "./forside";
 export * from "./god-praksis/artikkel";
 export * from "./god-praksis/landingsside";
 export * from "./god-praksis/tema";
@@ -13,6 +13,7 @@ export * from "./komponenter/kode-eksempler";
 export * from "./komponenter/landingsside";
 export * from "./komponenter/props";
 export * from "./komponenter/tokens";
+export * from "./metrikker";
 export * from "./prinsipper/artikkel";
 export * from "./prinsipper/landingsside";
 export * from "./publiseringsflyt";

@@ -20,7 +20,7 @@ export const Standalone = defineType({
     defineField({
       title: "Innhold",
       name: "content",
-      type: "riktekst_standard",
+      type: "riktekst_standalone",
       group: "innhold",
     }),
   ],

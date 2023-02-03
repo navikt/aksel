@@ -17,3 +17,4 @@ export * from "./shared/tabell";
 export * from "./shared/tips";
 export * from "./shared/unik-sidemodul";
 export * from "./shared/video";
+export * from "./standalone/uu-feedback";

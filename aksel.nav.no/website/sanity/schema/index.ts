@@ -1,6 +1,6 @@
+import { SchemaPluginOptions } from "sanity";
 import * as document from "./documents";
 import * as object from "./objects";
-import { SchemaPluginOptions } from "sanity";
 
 export const schema: SchemaPluginOptions = {
   types: [
@@ -12,6 +12,7 @@ export const schema: SchemaPluginOptions = {
     document.Skrivehjelp,
     document.Publiseringsflyt,
     document.Feedback,
+    document.Metrikker,
 
     /* Komponentsider */
     document.KodeEksempelDoc,
@@ -60,6 +61,7 @@ export const schema: SchemaPluginOptions = {
     object.RiktekstGrunnleggende,
     object.RiktekstStandard,
     object.RiktekstPrinsipp,
+    object.RiktekstStandalone,
 
     /* Komponentsider */
     object.PropsSeksjon,
@@ -71,5 +73,8 @@ export const schema: SchemaPluginOptions = {
     /* Prinsipper */
     object.HeroBilde,
     object.InnholdsKort,
+
+    /* Standalone */
+    object.UuFeedback,
   ],
 };

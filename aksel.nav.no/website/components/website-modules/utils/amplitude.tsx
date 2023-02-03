@@ -1,6 +1,6 @@
 import amplitude from "amplitude-js";
 import { Router } from "next/router";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 export enum AmplitudeEvents {
   "sidevisning" = "sidevisning",
@@ -13,6 +13,7 @@ export enum AmplitudeEvents {
   "ikonnedlastning" = "ikonnedlastning",
   "feedbackinteraksjon" = "feedbackinteraksjon",
   "scroll" = "scroll",
+  "søk" = "søk",
 }
 
 export const initAmplitude = () => {
@@ -25,6 +26,27 @@ export const initAmplitude = () => {
       platform: window.location.toString(),
     });
   }
+};
+
+export type SearchLogT = {
+  type: "suksess" | "feilet" | "standard";
+  retries: number;
+  retriedQueries: string[];
+  query: string;
+  filter: string[];
+  hits: number;
+  searchedFromUrl: string;
+
+  index?: number;
+  accuracy?: string;
+  topResult?: boolean;
+  url?: string;
+};
+
+export const logSearch = (data: SearchLogT) => {
+  logAmplitudeEvent(AmplitudeEvents.søk, {
+    ...data,
+  });
 };
 
 const logPageView = (s: string, data: any = {}, firstLoad?: boolean) => {
@@ -48,16 +70,29 @@ const isPreview = () => !!document.getElementById("exit-preview-id");
 const isDevelopment = process.env.NODE_ENV === "development";
 const isTest = process.env.NEXT_PUBLIC_TEST === "true";
 
+const isProduction = () => {
+  return !(isDevelopment || isTest || isPreview());
+};
+
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
   return new Promise(function (resolve: any) {
     const eventData = data ? { ...data } : {};
-    if (amplitude && !(isDevelopment || isTest || isPreview())) {
+    if (amplitude && isProduction()) {
       amplitude.getInstance().logEvent(eventName, eventData, resolve);
     }
   });
 }
 
 export const usePageView = (router: Router, pageProps: any) => {
+  const pageId = useMemo(
+    () => pageProps?.id || pageProps?.page?._id,
+    [pageProps]
+  );
+  const isForside = useMemo(
+    () => pageProps?.page?._type === "aksel_forside",
+    [pageProps]
+  );
+
   const logView = useCallback(
     (e, first = false) => {
       const data = {};
@@ -72,46 +107,98 @@ export const usePageView = (router: Router, pageProps: any) => {
         isDevelopment && console.error(error);
       }
       logPageView(e, data, first);
+      try {
+        if (isForside && isProduction() && !!pageId) {
+          fetch(`/api/log-page-view?id=${pageId}`);
+        }
+      } catch (error) {
+        isDevelopment && console.error(error);
+      }
     },
-    [pageProps]
+    [pageProps, pageId, isForside]
   );
 
-  /* https://stackoverflow.com/questions/2387136/cross-browser-method-to-determine-vertical-scroll-percentage-in-javascript */
-  const logScroll = useCallback(() => {
-    function getScrollPercent() {
-      const h = document.documentElement,
-        b = document.body,
-        st = "scrollTop",
-        sh = "scrollHeight";
-      return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
-    }
-    if (
-      document === undefined ||
-      window?.location?.pathname?.startsWith?.("/eksempler")
-    ) {
-      return;
-    }
+  const logScroll = useCallback(
+    (highestPercent: number) => {
+      highestPercent > 100 && (highestPercent = 100);
+      if (
+        document === undefined ||
+        window?.location?.pathname?.startsWith?.("/eksempler")
+      ) {
+        return;
+      }
 
-    const scrollD = Math.round(getScrollPercent() / 10) * 10;
-    if (isNaN(scrollD)) {
-      return;
-    }
+      if (isNaN(highestPercent)) {
+        return;
+      }
 
-    logAmplitudeEvent(AmplitudeEvents.scroll, {
-      side: window.location.pathname,
-      prosent: scrollD,
-    });
-  }, []);
+      logAmplitudeEvent(AmplitudeEvents.scroll, {
+        side: window.location.pathname,
+        prosent: highestPercent,
+      });
+      try {
+        if (isForside && isProduction() && !!pageId) {
+          fetch(`/api/log-scroll?id=${pageId}&length=${highestPercent}`);
+        }
+      } catch (error) {
+        isDevelopment && console.error(error);
+      }
+    },
+    [pageId, isForside]
+  );
+
+  const logTimeSpent = useCallback(
+    (timeSpent: number) => {
+      try {
+        if (isForside && timeSpent <= 420 && isProduction() && !!pageId) {
+          fetch(`/api/log-time?id=${pageId}&time=${timeSpent}`);
+        }
+      } catch (error) {
+        isDevelopment && console.error(error);
+      }
+    },
+    [pageId, isForside]
+  );
 
   useEffect(() => {
+    const startTime = new Date().getTime();
+
+    let highestPercent = 0;
+    let timeoutId = null;
+    const footer = document.querySelector("#aksel-footer") as HTMLElement;
+
+    //get highest scroll percent
+    function scrollListener() {
+      timeoutId = setTimeout(() => {
+        const currentPercent = Math.round(
+          (window.pageYOffset /
+            (document.body.scrollHeight -
+              window.innerHeight -
+              (footer ? footer.offsetHeight : 0))) *
+            100
+        );
+        if (currentPercent > highestPercent) {
+          highestPercent = currentPercent;
+          clearTimeout(timeoutId);
+        }
+      }, 500);
+    }
+
+    window.addEventListener("scroll", scrollListener);
+
     router.events.on("routeChangeComplete", logView);
     router.events.on("routeChangeStart", logScroll);
     window.onload = () => logView(window.location.pathname, true);
-    window.onbeforeunload = () => logScroll();
 
     return () => {
       router.events.off("routeChangeComplete", logView);
       router.events.off("routeChangeStart", logScroll);
+      window.removeEventListener("scroll", scrollListener);
+
+      if (isForside) {
+        logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
+        logScroll(highestPercent);
+      }
     };
-  }, [router.events, logView, logScroll]);
+  }, [router.events, logView, logScroll, logTimeSpent, isForside]);
 };

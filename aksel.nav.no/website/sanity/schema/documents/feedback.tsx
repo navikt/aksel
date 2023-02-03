@@ -18,6 +18,7 @@ export const Feedback = defineType({
         list: [
           { title: "Generell (footer)", value: "footer" },
           { title: "Fant du det du lette etter?", value: "artikkel_feedback" },
+          { title: "uu-feedback", value: "uu_feedback" },
         ],
       },
     }),
@@ -47,7 +48,6 @@ export const Feedback = defineType({
       name: "behandlet",
       type: "boolean",
       initialValue: false,
-      /* readOnly: true, */
     }),
     defineField({
       title: "URL",
@@ -84,19 +84,16 @@ export const Feedback = defineType({
       title: "doc_ref.heading",
     },
     prepare(selection) {
-      const {
-        melding,
-        url,
-        behandlet,
-        feedback_type,
-        artikkel_feedback,
-        title,
-      } = selection;
+      const { melding, url, behandlet, feedback_type, title } = selection;
 
       return {
         title: melding ? melding : title ? title : url ? url : "",
         subtitle: `${behandlet ? "Ferdig behandlet" : "Ubehandlet"} | ${
-          feedback_type === "footer" ? "footer" : artikkel_feedback
+          feedback_type === "footer"
+            ? "footer"
+            : feedback_type === "artikkel_feedback"
+            ? "Innhold"
+            : "uu-feedback"
         }`,
         media: CommentIcon,
       };

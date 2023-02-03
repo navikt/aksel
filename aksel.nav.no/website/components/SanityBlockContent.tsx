@@ -21,6 +21,7 @@ import {
   TastaturModul,
   Tips,
   TokenTable,
+  UuFeedback,
   Video,
 } from ".";
 
@@ -51,6 +52,7 @@ const serializers = {
     video: ({ node }) => <Video node={node} />,
     tips: ({ node }) => <Tips node={node} />,
     kode_eksempler: ({ node }) => <CodeExamples node={node} />,
+    uufeedback: ({ node }) => <UuFeedback node={node} />,
 
     block: ({ node, children }) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -188,18 +190,19 @@ const serializers = {
       }
       if (href && href.startsWith("mailto:")) {
         return (
-          <NextLink
-            href={href}
-            passHref
-            onClick={(e) =>
-              logNav(
-                "link",
-                window.location.pathname,
-                e.currentTarget.getAttribute("href")
-              )
-            }
-          >
-            <Link className="inline">{children}</Link>
+          <NextLink href={href} passHref>
+            <Link
+              onClick={(e) =>
+                logNav(
+                  "link",
+                  window.location.pathname,
+                  e.currentTarget.getAttribute("href")
+                )
+              }
+              className="inline"
+            >
+              {children}
+            </Link>
           </NextLink>
         );
       }
@@ -219,18 +222,19 @@ const serializers = {
           {children} <ExternalLink title="åpner lenken i ny fane" />
         </Link>
       ) : (
-        <NextLink
-          href={href}
-          passHref
-          onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
-          }
-        >
-          <Link className="inline">{children}</Link>
+        <NextLink href={href} passHref>
+          <Link
+            onClick={(e) =>
+              logNav(
+                "link",
+                window.location.pathname,
+                e.currentTarget.getAttribute("href")
+              )
+            }
+            className="inline"
+          >
+            {children}
+          </Link>
         </NextLink>
       );
     },

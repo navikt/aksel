@@ -7,6 +7,7 @@ import FooterForm from "./FooterForm";
 const Footer = () => {
   return (
     <footer
+      id="aksel-footer"
       data-hj-suppress
       data-theme="dark"
       className="algolia-ignore-index text-text-on-inverted bg-deepblue-800 relative flex w-full justify-center"
@@ -47,6 +48,14 @@ const Footer = () => {
                   href="/prinsipper/brukeropplevelse"
                 >
                   Prinsipper for brukeropplevelse
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
+                  href="/side/aksel-og-universell-utforming"
+                >
+                  Tilgjengelighet
                 </Link>
               </li>
               {/* <li>
