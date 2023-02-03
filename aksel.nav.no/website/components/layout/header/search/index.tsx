@@ -78,7 +78,7 @@ export const GlobalSearch = () => {
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
-      if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
+      if (event.key === "b" && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         if (open) {
           inputRef.current?.focus();
@@ -180,7 +180,7 @@ export const GlobalSearch = () => {
                 label={
                   <span className="flex items-center">
                     Søk i hele Aksel{" "}
-                    {os === "mac" ? <KBD>CMD + K</KBD> : <KBD>CTRL + K</KBD>}
+                    {os === "mac" ? <KBD>CMD + B</KBD> : <KBD>CTRL + B</KBD>}
                   </span>
                 }
                 variant="simple"
