@@ -98,6 +98,7 @@ export const usePageView = (router: Router, pageProps: any) => {
 
   const logScroll = useCallback(
     (highestPercent: number) => {
+      highestPercent > 100 && (highestPercent = 100);
       if (
         document === undefined ||
         window?.location?.pathname?.startsWith?.("/eksempler")
@@ -113,7 +114,6 @@ export const usePageView = (router: Router, pageProps: any) => {
         side: window.location.pathname,
         prosent: highestPercent,
       });
-
       try {
         if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-scroll?id=${pageId}&length=${highestPercent}`);
@@ -143,13 +143,16 @@ export const usePageView = (router: Router, pageProps: any) => {
 
     let highestPercent = 0;
     let timeoutId = null;
+    const footer = document.querySelector("#aksel-footer") as HTMLElement;
 
     //get highest scroll percent
     function scrollListener() {
       timeoutId = setTimeout(() => {
         const currentPercent = Math.round(
           (window.pageYOffset /
-            (document.body.scrollHeight - window.innerHeight)) *
+            (document.body.scrollHeight -
+              window.innerHeight -
+              (footer ? footer.offsetHeight : 0))) *
             100
         );
         if (currentPercent > highestPercent) {

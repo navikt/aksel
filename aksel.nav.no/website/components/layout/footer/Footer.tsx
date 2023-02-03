@@ -7,6 +7,7 @@ import FooterForm from "./FooterForm";
 const Footer = () => {
   return (
     <footer
+      id="aksel-footer"
       data-hj-suppress
       data-theme="dark"
       className="algolia-ignore-index text-text-on-inverted bg-deepblue-800 relative flex w-full justify-center"
