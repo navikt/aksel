@@ -86,22 +86,21 @@ p.override-text-no-max {
 
 .component-checkered-bg {
   background-color: var(--a-white);
-  opacity: 0.8;
   background-image: repeating-linear-gradient(
       45deg,
-      var(--a-gray-100) 25%,
+      rgb(241 241 241/ 0.8) 25%,
       transparent 25%,
       transparent 75%,
-      var(--a-gray-100) 75%,
-      var(--a-gray-100)
+      rgb(241 241 241/ 0.8) 75%,
+      rgb(241 241 241/ 0.8)
     ),
     repeating-linear-gradient(
       45deg,
-      var(--a-gray-100) 25%,
+      rgb(241 241 241/ 0.8) 25%,
       var(--a-white) 25%,
       var(--a-white) 75%,
-      var(--a-gray-100) 75%,
-      var(--a-gray-100)
+      rgb(241 241 241/ 0.8) 75%,
+      rgb(241 241 241/ 0.8)
     );
   background-position: 0 0, 10px 10px;
   background-size: 20px 20px;
