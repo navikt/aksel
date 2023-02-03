@@ -1,4 +1,4 @@
-import { useDebounce } from "@/utils";
+import { SearchLogT, useDebounce, logSearch } from "@/utils";
 import { Search as SearchIcon } from "@navikt/ds-icons";
 import {
   Button,
@@ -40,6 +40,13 @@ export const GlobalSearch = () => {
   const [os, setOs] = useState<"mac" | "windows">("windows");
   const inputRef = useRef(null);
 
+  const session = useRef<{ retires: number; queries: string[] }>({
+    retires: 0,
+    queries: [],
+  });
+  const firstSearch = useRef<boolean>(true);
+  const prevSearch = useRef<string>("");
+
   const router = useRouter();
 
   const [query, setQuery] = useState("");
@@ -52,8 +59,26 @@ export const GlobalSearch = () => {
       : setOs("windows");
   }, []);
 
+  const logSearchAttempt = useCallback(
+    (hits: number, type: SearchLogT["type"]) => {
+      const data: SearchLogT = {
+        type,
+        searchedFromUrl: router.asPath,
+        hits: hits ?? 0,
+        retries: session.current.retires,
+        retriedQueries: session.current.queries,
+        query: debouncedSearchTerm,
+        filter: activeTags,
+      };
+
+      logSearch(data);
+    },
+    [router.asPath, debouncedSearchTerm, activeTags]
+  );
+
   useEffect(() => {
-    if (debouncedSearchTerm) {
+    if (debouncedSearchTerm && open) {
+      console.count("searched");
       setLoading(true);
       fetch(
         `/api/search/v1?q=${encodeURIComponent(debouncedSearchTerm)}${
@@ -63,6 +88,7 @@ export const GlobalSearch = () => {
         .then((x) => x.json())
         .then((res) => {
           setResults(res);
+          logSearchAttempt(res?.hits?.totalHits ?? 0, "standard");
           setLoading(false);
         })
         .catch(() => {
@@ -74,7 +100,20 @@ export const GlobalSearch = () => {
       setLoading(false);
       setResults(null);
     }
-  }, [debouncedSearchTerm, activeTags]);
+  }, [debouncedSearchTerm, activeTags, open, logSearchAttempt]);
+
+  useEffect(() => {
+    if (debouncedSearchTerm && open && !firstSearch.current) {
+      session.current = {
+        queries: [...session.current.queries, prevSearch.current],
+        retires: session.current.retires + 1,
+      };
+      prevSearch.current = debouncedSearchTerm;
+    } else if (debouncedSearchTerm && open) {
+      firstSearch.current = false;
+      prevSearch.current = debouncedSearchTerm;
+    }
+  }, [debouncedSearchTerm, activeTags, open]);
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -94,10 +133,16 @@ export const GlobalSearch = () => {
   }, [open]);
 
   const handleClose = useCallback(() => {
+    if (session.current.retires > 0 || prevSearch.current !== "") {
+      logSearchAttempt(results?.totalHits, "feilet");
+    }
+
     setOpen(false);
     setQuery("");
     setTags([]);
-  }, []);
+    session.current = { queries: [], retires: 0 };
+    firstSearch.current = true;
+  }, [logSearchAttempt, results?.totalHits]);
 
   useEffect(() => {
     router.events.on("beforeHistoryChange", handleClose);

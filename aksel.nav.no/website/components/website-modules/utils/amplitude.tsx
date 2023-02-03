@@ -13,6 +13,7 @@ export enum AmplitudeEvents {
   "ikonnedlastning" = "ikonnedlastning",
   "feedbackinteraksjon" = "feedbackinteraksjon",
   "scroll" = "scroll",
+  "søk" = "søk",
 }
 
 export const initAmplitude = () => {
@@ -25,6 +26,27 @@ export const initAmplitude = () => {
       platform: window.location.toString(),
     });
   }
+};
+
+export type SearchLogT = {
+  type: "sukksess" | "feilet" | "standard";
+  retries: number;
+  retriedQueries: string[];
+  query: string;
+  filter: string[];
+  hits: number;
+  searchedFromUrl: string;
+
+  index?: number;
+  accuracy?: number;
+  topResult?: boolean;
+  url?: string;
+};
+
+export const logSearch = (data: SearchLogT) => {
+  logAmplitudeEvent(AmplitudeEvents.søk, {
+    ...data,
+  });
 };
 
 const logPageView = (s: string, data: any = {}, firstLoad?: boolean) => {
