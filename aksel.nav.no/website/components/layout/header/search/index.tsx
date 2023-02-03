@@ -20,17 +20,7 @@ import { Group, GroupComponent } from "./Group";
  * TODO:
  * - Oppdatere url-query basert på query + filter: ?search=abcd&filter=god_praksis
  * - Oppdatere søkefelt og filter basert på url.
- * - Søkeindeksering av ikoner: Må lazy-loades. Mye av logikk kan hentes fra sanity-modules/icon-search
- * - - Kan vi unngå lazyloading hvis Api sender med SVG i result-body? Risk for XSS da?
- *
- * uu
- * - Bør keyboard-shortcuts prefikses med en gjemt "shortcut"/"hurtigtast"-tekst?
- *
- *
- * Logging
- * - SuggestionBox med logging av querystring ved klikk
- * - Logge alle søk
- * - Logge index for valgt søk med aplitude, eg 20/26
+
  */
 export const GlobalSearch = () => {
   const [results, setResults] = useState<SearchResults>(null);
@@ -74,6 +64,33 @@ export const GlobalSearch = () => {
       logSearch(data);
     },
     [router.asPath, debouncedSearchTerm, activeTags]
+  );
+
+  const logSuccessSearchAttempt = useCallback(
+    (index: number, url: string) => {
+      const data: SearchLogT = {
+        type: "suksess",
+        searchedFromUrl: router.asPath,
+        hits: results?.totalHits ?? 0,
+        retries: session.current.retires,
+        retriedQueries: session.current.queries,
+        query: debouncedSearchTerm,
+        filter: activeTags,
+
+        index,
+        url,
+        accuracy: (100 - index / results?.totalHits).toFixed(0),
+        topResult: index <= results?.topResults?.length,
+      };
+      logSearch(data);
+    },
+    [
+      router.asPath,
+      results?.totalHits,
+      results?.topResults,
+      debouncedSearchTerm,
+      activeTags,
+    ]
   );
 
   useEffect(() => {
@@ -267,17 +284,25 @@ export const GlobalSearch = () => {
                 <div className="mt-4 pb-16 md:block">
                   {results?.topResults.length > 0 && (
                     <GroupComponent
+                      startIndex={1}
                       heading={
                         <span className="flex items-center gap-2">
                           Beste treff
                           <ChangeLogIconOutline className="shrink-0" />
                         </span>
                       }
+                      logSuccess={logSuccessSearchAttempt}
                       hits={results?.topResults}
                       query={query}
                     />
                   )}
                   <Group
+                    startIndex={
+                      results?.topResults.length > 0
+                        ? results?.topResults.length + 1
+                        : 1
+                    }
+                    logSuccess={logSuccessSearchAttempt}
                     groups={results?.groupedHits}
                     query={debouncedSearchTerm}
                   />

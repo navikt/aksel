@@ -7,7 +7,17 @@ import { SearchHit } from "lib/types/search";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { isNew } from "@/utils";
 
-export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
+export function Hit({
+  hit,
+  query,
+  index,
+  logSuccess,
+}: {
+  hit: SearchHit;
+  query: string;
+  index: number;
+  logSuccess: (index: number, url: string) => void;
+}) {
   if (hit.item._type === "icon") {
     return;
   }
@@ -20,7 +30,10 @@ export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
     >
       <div className="px-2 py-6">
         <NextLink href={`/${hit.item.slug}`} passHref>
-          <a className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none">
+          <a
+            onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
+            className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none"
+          >
             <span className="group-hover:underline">
               {highlightStr(hit.item.heading, query)}
             </span>
@@ -62,7 +75,17 @@ export function Hit({ hit, query }: { hit: SearchHit; query: string }) {
   );
 }
 
-export function IconHit({ hit, query }: { hit: SearchHit; query: string }) {
+export function IconHit({
+  hit,
+  query,
+  index,
+  logSuccess,
+}: {
+  hit: SearchHit;
+  query: string;
+  index: number;
+  logSuccess: (index: number, url: string) => void;
+}) {
   if (hit.item._type !== "icon") {
     return;
   }
@@ -78,7 +101,10 @@ export function IconHit({ hit, query }: { hit: SearchHit; query: string }) {
           href={`/grunnleggende/staesj/ikoner?icon=${hit.item.name}`}
           passHref
         >
-          <a className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none">
+          <a
+            onClick={() => logSuccess(index, `/${(hit.item as any).name}`)}
+            className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none"
+          >
             <span className="group-hover:underline">
               {highlightStr(hit.item.name, query)}
             </span>

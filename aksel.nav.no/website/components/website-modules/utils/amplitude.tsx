@@ -29,7 +29,7 @@ export const initAmplitude = () => {
 };
 
 export type SearchLogT = {
-  type: "sukksess" | "feilet" | "standard";
+  type: "suksess" | "feilet" | "standard";
   retries: number;
   retriedQueries: string[];
   query: string;
@@ -38,7 +38,7 @@ export type SearchLogT = {
   searchedFromUrl: string;
 
   index?: number;
-  accuracy?: number;
+  accuracy?: string;
   topResult?: boolean;
   url?: string;
 };
