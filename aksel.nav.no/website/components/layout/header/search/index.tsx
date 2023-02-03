@@ -78,7 +78,6 @@ export const GlobalSearch = () => {
 
   useEffect(() => {
     if (debouncedSearchTerm && open) {
-      console.count("searched");
       setLoading(true);
       fetch(
         `/api/search/v1?q=${encodeURIComponent(debouncedSearchTerm)}${
