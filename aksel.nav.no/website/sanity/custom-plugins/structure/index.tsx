@@ -3,6 +3,7 @@ import {
   AccessDeniedIcon,
   BookIcon,
   BulbOutlineIcon,
+  ChartUpwardIcon,
   CommentIcon,
   JoystickIcon,
   OkHandIcon,
@@ -20,9 +21,10 @@ import {
 } from "../../config";
 
 import { FeedbackPanes } from "./feedback";
-import { GodPraksisPanes } from "./god-praksis";
-import { PanesWithCount } from "./with-count";
 import { FeedbackView } from "./FeedbackPreview";
+import { GodPraksisPanes } from "./god-praksis";
+import Metrics from "./Metrics";
+import { PanesWithCount } from "./with-count";
 
 /* import { WebPreview, JsonView } from './previews' */
 const filtered = [
@@ -48,6 +50,7 @@ const filtered = [
   "skrivehjelp",
   "publication_flow",
   "aksel_feedback",
+  "metrics",
 ];
 
 export const structure = async (
@@ -336,6 +339,13 @@ export const structure = async (
                       .schemaType(`publication_flow`)
                       .icon(FileContent)
                       .id(`publication_flow`),
+                    S.listItem()
+                      .title("Metrikker")
+                      .child(
+                        S.documentList()
+                          .title("Metrikker")
+                          .filter(`_type == 'metrics'`)
+                      ),
                   ])
               ),
           ]
@@ -387,7 +397,7 @@ export const resolveProductionUrl = (doc) => {
   }
 };
 
-export const defaultDocumentNode = (S, { schemaType, getClient }) => {
+export const defaultDocumentNode = (S, { schemaType }) => {
   if (
     [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
       schemaType
@@ -410,6 +420,13 @@ export const defaultDocumentNode = (S, { schemaType, getClient }) => {
         .component(FeedbackView)
         .icon(CommentIcon)
         .title("Tilbakemeldinger"),
+      S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
+    ]);
+  }
+  if (schemaType === "aksel_forside") {
+    return S.document().views([
+      S.view.form(),
+      S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
     ]);
   }
   return S.document().views([S.view.form()]);

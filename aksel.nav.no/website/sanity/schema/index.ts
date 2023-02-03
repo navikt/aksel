@@ -1,6 +1,6 @@
+import { SchemaPluginOptions } from "sanity";
 import * as document from "./documents";
 import * as object from "./objects";
-import { SchemaPluginOptions } from "sanity";
 
 export const schema: SchemaPluginOptions = {
   types: [
@@ -12,6 +12,7 @@ export const schema: SchemaPluginOptions = {
     document.Skrivehjelp,
     document.Publiseringsflyt,
     document.Feedback,
+    document.Metrikker,
 
     /* Komponentsider */
     document.KodeEksempelDoc,

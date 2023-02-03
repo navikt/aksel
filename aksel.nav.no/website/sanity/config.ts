@@ -50,3 +50,20 @@ export const bloggKategorier = [
 export const prinsippKategorier = [
   { title: "Brukeropplevelse", value: "brukeropplevelse" },
 ];
+
+const allDocumentTypes = [
+  "aksel_artikkel",
+  "aksel_blogg",
+  "aksel_prinsipp",
+  "aksel_standalone",
+  "blogg_landingsside",
+  "ds_artikkel",
+  "godpraksis_landingsside",
+  "grunnleggende_landingsside",
+  "komponent_artikkel",
+  "komponenter_landingsside",
+  "prinsipper_landingsside",
+  "aksel_forside",
+];
+
+export const allDocsRef = allDocumentTypes.map((x) => ({ type: x }));
