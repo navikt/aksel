@@ -5,13 +5,14 @@ import {
   SearchHit,
   SearchResults,
 } from "@/lib";
-import { getClient } from "@/sanity-client";
 import { omit } from "@navikt/ds-react";
 import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
 import { akselArticleFields } from "../../../../lib/sanity/queries";
 import { allArticleDocuments } from "../../../../sanity/config";
 import IconMetadata from "@navikt/ds-icons/meta.json";
+
+const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
 
 export default async function initialSearch(
   req: NextApiRequest,
@@ -156,11 +157,9 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
 let data = null;
 
 async function searchSanity() {
-  if (data) {
-    return data;
-  }
-
-  const sanityQuery = `*[_type in $types ]{
+  const sanityQueryHttp = `*[_type in [${allArticleDocuments.map(
+    (x) => `"${x}"`
+  )}] ]{
     ${akselArticleFields}
     "intro": pt::text(intro.body),
     "content": content[]{...,
@@ -169,15 +168,27 @@ async function searchSanity() {
       }},
   }`;
 
-  data = await getClient()
-    .fetch(sanityQuery, { types: allArticleDocuments })
-    .then((res) =>
-      res.map((x) => ({
-        ...x,
-        content: toPlainText(x?.content),
-        codeExamples: getCodeExamples(x?.content),
-      }))
-    )
+  data = await fetch(
+    `https://hnbe3yhs.apicdn.sanity.io/v2021-06-07/data/query/production?query=${encodeURIComponent(
+      sanityQueryHttp
+    )}`,
+    {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+    .then((r) => r.json())
+    .then((res) => {
+      return (
+        res?.result?.map((x) => ({
+          ...x,
+          content: toPlainText(x?.content),
+          codeExamples: getCodeExamples(x?.content),
+        })) ?? []
+      );
+    })
     .catch((err) => {
       console.log("Error message: ", err.message);
       return [];
