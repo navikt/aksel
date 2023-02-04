@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 
 const withTM = require("next-transpile-modules")(["@navikt/ds-tokens"]);
-const oldRedirects = require("./redirects.json");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -51,40 +50,6 @@ const securityHeaders = [
   },
 ];
 
-const manualRedirects = [
-  ["/designsystem/side/farge-tokens/:slug*", "/designsystem/side/color"],
-  [
-    "/designsystem/side/innholdsstrategi-person",
-    "/artikkel/innholdsstrategi-for-nav-no",
-  ],
-  [
-    "/designsystem/side/beredskapsplan-navno",
-    "/artikkel/beredskapsplan-for-nav-no",
-  ],
-  ["/designsystem/side/produktsider", "/artikkel/produktside-sidetype"],
-  [
-    "/designsystem/side/livssituasjonssider",
-    "/artikkel/situasjonsside-sidetype",
-  ],
-  ["/designsystem/side/omrade", "/artikkel/omradeside-sidetype"],
-  ["/designsystem/side/temaartikkel", "/artikkel/temaartikkel-sidetype"],
-  [
-    "/designsystem/side/slik-gjor-du",
-    "/artikkel/slik-gjor-du-det-innholdstype",
-  ],
-  ["/designsystem/side/kalkulator", "/artikkel/kalkulator-sidetype"],
-  ["/designsystem/side/veiviser", "/artikkel/veiviser-innholdstype"],
-  ["/designsystem/side/oversikt", "/artikkel/oversikt-innholdstype"],
-  [
-    "/designsystem/side/forside-til-personbrukere",
-    "/artikkel/forside-til-personbrukere-pa-nav-no",
-  ],
-  [
-    "/designsystem/side/prinsipper-for-interne-flater",
-    "/artikkel/prinsipper-for-brukeropplevelse-pa-interne-flater",
-  ],
-];
-
 const config = () =>
   withBundleAnalyzer(
     withTM({
@@ -127,21 +92,6 @@ const config = () =>
             destination: "/api/preview?slug=:slug*",
             permanent: true,
           },
-          ...manualRedirects.map((x) => ({
-            source: x[0],
-            destination: x[1],
-            permanent: false,
-          })),
-          ...Object.values(oldRedirects).reduce((old, value) => {
-            return [
-              ...old,
-              ...value.sources.map((source) => ({
-                source,
-                destination: value.destitation,
-                permanent: false,
-              })),
-            ];
-          }, []),
         ];
       },
 
