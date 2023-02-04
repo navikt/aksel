@@ -1,8 +1,13 @@
 import { defineCliConfig } from "sanity/cli";
 
 /**
- * Use for sanity cli commands
- * Use: cd aksel.nav.no/website -> `sanity <command>`
+ * Used for sanity cli commands
+ * CMD: cd aksel.nav.no/website -> `sanity <command>` or yarn sanity <command>
+ *
+ * Often used commands
+ * - sanity dataset list
+ * - sanity users list
+ * - sanity dataset export production
  */
 export default defineCliConfig({
   api: {
