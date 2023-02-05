@@ -8,7 +8,6 @@ COPY aksel.nav.no/website/package.json .
 COPY aksel.nav.no/website/.next/ .next/
 COPY aksel.nav.no/website/public/ public
 COPY aksel.nav.no/website/.env .
-COPY aksel.nav.no/website/redirects.json .
 COPY aksel.nav.no/website/next.config.js .
 COPY node_modules/ node_modules/
 COPY @navikt/ @navikt/

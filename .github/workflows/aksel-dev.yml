@@ -38,7 +38,6 @@ jobs:
       - name: Build application
         run: |
           yarn boot
-          yarn docgen
           yarn workspace aksel.nav.no build:next
 
       - name: Login to GitHub Container Registry
