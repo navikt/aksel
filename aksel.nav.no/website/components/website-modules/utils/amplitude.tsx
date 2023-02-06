@@ -68,24 +68,28 @@ export const logNav = (kilde: string, fra: string, til: string) => {
 };
 
 const isPreview = () => !!document.getElementById("exit-preview-id");
-const getloc = () => window.location.host === "aksel.dev.nav.no/";
+const isProdUrl = () => window.location.host === "aksel.nav.no";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const isTest = process.env.NEXT_PUBLIC_TEST !== undefined;
 
 const isProduction = () => {
   console.log(
-    `isprod: ${!(isDevelopment || isTest || isPreview()) || getloc()}`
+    `isprod: ${!(isDevelopment || isTest || isPreview()) && isProdUrl()}`
   );
-  console.log(getloc());
-  return !(isDevelopment || isTest || isPreview());
+  console.log(isProdUrl());
+  return !(isDevelopment || isTest || isPreview()) && isProdUrl();
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
   return new Promise(function (resolve: any) {
     const eventData = data ? { ...data } : {};
+    if (isProduction()) {
+      console.log("Logged event");
+    } else {
+      console.log("Skipped event");
+    }
     if (amplitude && isProduction()) {
-      console.count("Logged event");
       amplitude.getInstance().logEvent(eventName, eventData, resolve);
     }
   });
