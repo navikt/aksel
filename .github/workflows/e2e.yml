@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: build packages
+      - name: Build packages
         run: |
           yarn boot
 
@@ -46,7 +46,7 @@ jobs:
         run: yarn workspace aksel.nav.no build:next
 
       - name: Run Playwright tests
-        run: yarn workspace website e2e:full
+        run: yarn workspace website e2e:ci-full
       - uses: actions/upload-artifact@v3
         if: always()
         with:
