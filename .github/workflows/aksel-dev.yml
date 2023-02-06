@@ -21,7 +21,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: monitor
-          args: --org=aksel --severity-threshold=high
+          args: --org=aksel --severity-threshold=high --all-projects
   snyk-test:
     name: analyze dependencies
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: test
-          args: --org=aksel --severity-threshold=high
+          args: --org=aksel --severity-threshold=high --all-projects
   build_and_deploy:
     name: Build and deploy to dev-gcp
     runs-on: ubuntu-20.04
