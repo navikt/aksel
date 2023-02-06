@@ -13,8 +13,6 @@ jobs:
   build_and_deploy:
     name: Build and deploy to prod-gcp
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.30.0-focal
     steps:
       - uses: actions/setup-node@v1
         with:
@@ -49,9 +47,6 @@ jobs:
       - name: Build application
         run: yarn workspace aksel.nav.no build:next
 
-      - name: E2E smoketest
-        run: yarn workspace website e2e:ci
-
       - name: Update sanity sync
         run: yarn workspace aksel.nav.no sanity:update
 
@@ -67,6 +62,13 @@ jobs:
         run: echo "DOCKER_TAG=${{ env.IMAGE }}:${{ env.TAG }}" >> $GITHUB_ENV
       - name: Build docker image
         run: docker build -t ${{ env.DOCKER_TAG }} . -f aksel.nav.no/Dockerfile
+      - name: Wait for e2e-tests to succeed
+        uses: lewagon/wait-on-check-action@v1.2.0
+        with:
+          ref: ${{ github.ref }}
+          check-name: "Smoketest Aksel"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
       - name: Push docker image
         run: |
           docker push ${{ env.DOCKER_TAG }}
