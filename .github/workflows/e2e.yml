@@ -39,10 +39,10 @@ jobs:
       - name: build packages
         run: |
           yarn boot
-          yarn docgen
 
       - name: Build application
         run: yarn workspace aksel.nav.no build:next
+
       - name: Run Playwright tests
         run: yarn workspace website e2e:full
       - uses: actions/upload-artifact@v3
