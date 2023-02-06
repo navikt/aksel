@@ -1,6 +1,8 @@
 import amplitude from "amplitude-js";
+import getConfig from "next/config";
 import { Router } from "next/router";
 import { useCallback, useEffect, useMemo } from "react";
+const { publicRuntimeConfig } = getConfig();
 
 export enum AmplitudeEvents {
   "sidevisning" = "sidevisning",
@@ -66,12 +68,13 @@ export const logNav = (kilde: string, fra: string, til: string) => {
 };
 
 const isPreview = () => !!document.getElementById("exit-preview-id");
+const isProdUrl = () => window.location.host === "aksel.nav.no";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const isTest = process.env.NEXT_PUBLIC_TEST === "true";
+const isTest = publicRuntimeConfig?.NEXT_PUBLIC_TEST !== undefined;
 
 const isProduction = () => {
-  return !(isDevelopment || isTest || isPreview());
+  return !(isDevelopment || isTest || isPreview()) && isProdUrl();
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {

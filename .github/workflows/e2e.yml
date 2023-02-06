@@ -12,6 +12,8 @@ on:
 jobs:
   playwright:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.30.0-focal
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -39,10 +41,10 @@ jobs:
       - name: build packages
         run: |
           yarn boot
-          yarn docgen
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Build application
+        run: yarn workspace aksel.nav.no build:next
+
       - name: Run Playwright tests
         run: yarn workspace website e2e:full
       - uses: actions/upload-artifact@v3
