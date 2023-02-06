@@ -61,6 +61,9 @@ const config = () =>
         azureAppWellKnownUrl: process.env.AZURE_APP_WELL_KNOWN_URL,
         azureAppJWK: process.env.AZURE_APP_JWK,
       },
+      publicRuntimeConfig: {
+        NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
+      },
       async headers() {
         return [
           {

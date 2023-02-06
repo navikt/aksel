@@ -1,6 +1,8 @@
 import amplitude from "amplitude-js";
+import getConfig from "next/config";
 import { Router } from "next/router";
 import { useCallback, useEffect, useMemo } from "react";
+const { publicRuntimeConfig } = getConfig();
 
 export enum AmplitudeEvents {
   "sidevisning" = "sidevisning",
@@ -66,11 +68,16 @@ export const logNav = (kilde: string, fra: string, til: string) => {
 };
 
 const isPreview = () => !!document.getElementById("exit-preview-id");
+const getloc = () => window.location.host === "aksel.dev.nav.no/";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const isTest = process.env.NEXT_PUBLIC_TEST === "true";
+const isTest = process.env.NEXT_PUBLIC_TEST !== undefined;
 
 const isProduction = () => {
+  console.log(
+    `isprod: ${!(isDevelopment || isTest || isPreview()) || getloc()}`
+  );
+  console.log(getloc());
   return !(isDevelopment || isTest || isPreview());
 };
 
@@ -78,6 +85,7 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
   return new Promise(function (resolve: any) {
     const eventData = data ? { ...data } : {};
     if (amplitude && isProduction()) {
+      console.count("Logged event");
       amplitude.getInstance().logEvent(eventName, eventData, resolve);
     }
   });
@@ -139,6 +147,7 @@ export const usePageView = (router: Router, pageProps: any) => {
       try {
         if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-scroll?id=${pageId}&length=${highestPercent}`);
+          console.count("Logged scroll");
         }
       } catch (error) {
         isDevelopment && console.error(error);
@@ -152,6 +161,7 @@ export const usePageView = (router: Router, pageProps: any) => {
       try {
         if (isForside && timeSpent <= 420 && isProduction() && !!pageId) {
           fetch(`/api/log-time?id=${pageId}&time=${timeSpent}`);
+          console.count("Logged time");
         }
       } catch (error) {
         isDevelopment && console.error(error);
