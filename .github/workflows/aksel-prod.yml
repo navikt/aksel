@@ -10,8 +10,8 @@ env:
   IMAGE: ghcr.io/navikt/designsystemet
 
 jobs:
-  build_and_deploy:
-    name: Build and deploy to prod-gcp
+  sync_data_with_sanity:
+    name: Update component data
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v1
@@ -36,19 +36,45 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: build packages
+      - name: Run docgen
         run: |
           yarn boot
           yarn docgen
+
+      - name: Update sanity sync
+        run: yarn workspace aksel.nav.no sanity:update
+
+  build_and_deploy:
+    name: Build and deploy to prod-gcp
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - uses: actions/checkout@v2
+      - name: add tokens to .env
+        run: |
+          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-prod-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-prod-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn boot
 
       - name: Tests
         run: yarn workspace aksel.nav.no test
 
       - name: Build application
         run: yarn workspace aksel.nav.no build:next
-
-      - name: Update sanity sync
-        run: yarn workspace aksel.nav.no sanity:update
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # Use commit-sha1 instead of tag for security concerns
