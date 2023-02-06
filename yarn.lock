@@ -3841,7 +3841,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:^1.27.0":
+"@playwright/test@npm:^1.30.0":
   version: 1.30.0
   resolution: "@playwright/test@npm:1.30.0"
   dependencies:
@@ -27757,7 +27757,7 @@ __metadata:
     "@babel/core": ^7.19.0
     "@next/bundle-analyzer": ^12.1.0
     "@next/eslint-plugin-next": ^12.2.0
-    "@playwright/test": ^1.27.0
+    "@playwright/test": ^1.30.0
     "@sanity-codegen/types": 1.0.0-alpha.13
     "@sanity/block-content-to-react": ^3.0.0
     "@sanity/client": ^4.0.1
