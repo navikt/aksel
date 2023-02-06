@@ -1,9 +1,9 @@
-// import { ComboBox } from "@navikt/ds-react";
+// import { Combobox } from "@navikt/ds-react";
 // import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 // const Example = () => {
 //   return (
-//     <ComboBox
+//     <Combobox
 //       label="Søk alle NAV sine sider"
 //       variant="simple"
 //       error="Søket må starte med xyz"
@@ -12,7 +12,7 @@
 //     >
 //       For å komme videre må du gi oss lov til å hente inn og bruke opplysninger
 //       om deg.
-//     </ComboBox>
+//     </Combobox>
 //   );
 // };
 

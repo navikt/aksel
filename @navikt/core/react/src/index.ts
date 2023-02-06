@@ -1,7 +1,6 @@
 export * from "./accordion";
 export * from "./alert";
 export * from "./button";
-export * from "./form/combobox";
 export * from "./date";
 export * from "./form";
 export * from "./grid";

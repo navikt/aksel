@@ -9,16 +9,15 @@ import React, {
 } from "react";
 import {
   BodyShort,
-  Combobox,
   ErrorMessage,
   Label,
   mergeRefs,
   omit,
   useEventListener,
-} from "../../";
+} from "../..";
 import { SearchProps } from "../search/Search";
 import { useFormField } from "../useFormField";
-import SearchButton, { SearchButtonType } from "../search/SearchButton";
+//import SearchButton, { SearchButtonType } from "../search/SearchButton";
 
 export type ComboboxClearEvent =
   | {
@@ -27,13 +26,15 @@ export type ComboboxClearEvent =
     }
   | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
 
-export interface ComboboxProps extends SearchProps {}
+export interface ComboboxProps extends SearchProps {
+  isListOpen: boolean;
+}
 
 interface ComboboxComponent
   extends React.ForwardRefExoticComponent<
     ComboboxProps & React.RefAttributes<HTMLDivElement>
   > {
-  Button: SearchButtonType;
+  //Button: SearchButtonType;
   //Tag: ComboboxTagType;
 }
 
@@ -43,11 +44,7 @@ export interface ComboboxContextProps {
   variant: "primary" | "secondary" | "simple";
 }
 
-export const SearchContext = React.createContext<ComboboxContextProps | null>(
-  null
-);
-
-export const Search = forwardRef<HTMLInputElement, ComboboxProps>(
+export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
     const {
       inputProps,
@@ -71,11 +68,13 @@ export const Search = forwardRef<HTMLInputElement, ComboboxProps>(
       clearButton = true,
       variant = "primary",
       defaultValue,
+      isListOpen,
+      id,
       ...rest
     } = props;
 
-    const searchRef = useRef<HTMLInputElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([searchRef, ref]), [ref]);
+    const comboboxRef = useRef<HTMLInputElement | null>(null);
+    const mergedRef = useMemo(() => mergeRefs([comboboxRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
@@ -92,7 +91,7 @@ export const Search = forwardRef<HTMLInputElement, ComboboxProps>(
       (event: ComboboxClearEvent) => {
         onClear?.(event);
         handleChange("");
-        searchRef.current && searchRef.current?.focus?.();
+        comboboxRef.current && comboboxRef.current?.focus?.();
       },
       [handleChange, onClear]
     );
@@ -146,8 +145,8 @@ export const Search = forwardRef<HTMLInputElement, ComboboxProps>(
             {description}
           </BodyShort>
         )}
-        <div className="navds-search__wrapper">
-          <div className="navds-search__wrapper-inner">
+        <div className="navds-combobox__wrapper">
+          <div className="navds-combobox__wrapper-inner">
             {variant === "simple" && (
               <SearchIcon aria-hidden className="navds-search__search-icon" />
             )}
@@ -158,7 +157,9 @@ export const Search = forwardRef<HTMLInputElement, ComboboxProps>(
               value={value ?? internalValue}
               onChange={(e) => handleChange(e.target.value)}
               type="search"
-              role="searchbox"
+              role="combobox"
+              aria-controls={isListOpen ? id : ""}
+              aria-expanded={isListOpen}
               className={cl(
                 className,
                 "navds-search__input",
@@ -181,15 +182,7 @@ export const Search = forwardRef<HTMLInputElement, ComboboxProps>(
               </button>
             )}
           </div>
-          <SearchContext.Provider
-            value={{
-              size,
-              disabled: inputProps.disabled,
-              variant,
-            }}
-          >
-            {children ? children : variant !== "simple" && <SearchButton />}
-          </SearchContext.Provider>
+          {/* {children ? children : variant !== "simple" && <SearchButton />} */}
         </div>
         <div
           className="navds-form-field__error"
@@ -206,6 +199,4 @@ export const Search = forwardRef<HTMLInputElement, ComboboxProps>(
   }
 ) as ComboboxComponent;
 
-Combobox.Button = SearchButton;
-
-export default Search;
+export default Combobox;
