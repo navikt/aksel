@@ -17,7 +17,6 @@ import {
 } from "../..";
 import { SearchProps } from "../search/Search";
 import { useFormField } from "../useFormField";
-//import SearchButton, { SearchButtonType } from "../search/SearchButton";
 
 export type ComboboxClearEvent =
   | {
@@ -34,7 +33,7 @@ interface ComboboxComponent
   extends React.ForwardRefExoticComponent<
     ComboboxProps & React.RefAttributes<HTMLDivElement>
   > {
-  //Button: SearchButtonType;
+  // dropdown: DropdownType;
   //Tag: ComboboxTagType;
 }
 
@@ -182,7 +181,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               </button>
             )}
           </div>
-          {/* {children ? children : variant !== "simple" && <SearchButton />} */}
         </div>
         <div
           className="navds-form-field__error"
