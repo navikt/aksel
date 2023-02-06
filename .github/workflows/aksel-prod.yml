@@ -44,14 +44,14 @@ jobs:
       - name: Tests
         run: yarn workspace aksel.nav.no test
 
-      - name: E2E
-        run: NEXT_PUBLIC_TEST=true yarn workspace website e2e
+      - name: Build application
+        run: yarn workspace aksel.nav.no build:next
+
+      - name: E2E smoketest
+        run: NEXT_PUBLIC_TEST=true yarn workspace website e2e:ci
 
       - name: Update sanity sync
         run: yarn workspace aksel.nav.no sanity:update
-
-      - name: Build application
-        run: yarn workspace aksel.nav.no build:next
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns

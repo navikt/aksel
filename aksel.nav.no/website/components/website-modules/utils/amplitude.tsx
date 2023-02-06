@@ -71,24 +71,15 @@ const isPreview = () => !!document.getElementById("exit-preview-id");
 const isProdUrl = () => window.location.host === "aksel.nav.no";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-const isTest = process.env.NEXT_PUBLIC_TEST !== undefined;
+const isTest = publicRuntimeConfig?.NEXT_PUBLIC_TEST !== undefined;
 
 const isProduction = () => {
-  console.log(
-    `isprod: ${!(isDevelopment || isTest || isPreview()) && isProdUrl()}`
-  );
-  console.log(isProdUrl());
   return !(isDevelopment || isTest || isPreview()) && isProdUrl();
 };
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
   return new Promise(function (resolve: any) {
     const eventData = data ? { ...data } : {};
-    if (isProduction()) {
-      console.log("Logged event");
-    } else {
-      console.log("Skipped event");
-    }
     if (amplitude && isProduction()) {
       amplitude.getInstance().logEvent(eventName, eventData, resolve);
     }
@@ -151,7 +142,6 @@ export const usePageView = (router: Router, pageProps: any) => {
       try {
         if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-scroll?id=${pageId}&length=${highestPercent}`);
-          console.count("Logged scroll");
         }
       } catch (error) {
         isDevelopment && console.error(error);
@@ -165,7 +155,6 @@ export const usePageView = (router: Router, pageProps: any) => {
       try {
         if (isForside && timeSpent <= 420 && isProduction() && !!pageId) {
           fetch(`/api/log-time?id=${pageId}&time=${timeSpent}`);
-          console.count("Logged time");
         }
       } catch (error) {
         isDevelopment && console.error(error);

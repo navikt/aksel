@@ -11,6 +11,8 @@
     "start": "next start",
     "e2e": "yarn build && NEXT_PUBLIC_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "e2e:full": "yarn build && ts-node ./e2e/genUrls.ts && NEXT_PUBLIC_TEST=true FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
+    "e2e:ci": "NEXT_PUBLIC_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
+    "e2e:ci-full": "ts-node ./e2e/genUrls.ts && NEXT_PUBLIC_TEST=true FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "update:props": "ts-node --project tsconfig.tsnode.json ./scripts/update-props",
     "update:tokens": "ts-node --project tsconfig.tsnode.json ./scripts/update-tokens",
     "update:eksempler": "ts-node --project tsconfig.tsnode.json ./scripts/examples/update-sanity",

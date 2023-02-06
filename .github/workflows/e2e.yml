@@ -41,8 +41,8 @@ jobs:
           yarn boot
           yarn docgen
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Build application
+        run: yarn workspace aksel.nav.no build:next
       - name: Run Playwright tests
         run: yarn workspace website e2e:full
       - uses: actions/upload-artifact@v3
