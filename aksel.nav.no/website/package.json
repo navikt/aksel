@@ -5,7 +5,7 @@
   "description": "Aksel.nav.no website",
   "author": "Aksel | NAV designsystem team",
   "scripts": {
-    "postinstall": "npx playwright install --with-deps",
+    "postinstall": "playwright install",
     "dev": "next",
     "build": "next build",
     "start": "next start",
