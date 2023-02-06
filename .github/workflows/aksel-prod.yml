@@ -12,7 +12,9 @@ env:
 jobs:
   build_and_deploy:
     name: Build and deploy to prod-gcp
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.30.0-focal
     steps:
       - uses: actions/setup-node@v1
         with:
