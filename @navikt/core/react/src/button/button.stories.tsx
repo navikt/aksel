@@ -12,7 +12,15 @@ export default {
     variant: {
       control: {
         type: "radio",
-        options: ["primary", "secondary", "tertiary", "danger"],
+        options: [
+          "primary",
+          "secondary",
+          "tertiary",
+          "danger",
+          "primary-neutral",
+          "secondary-neutral",
+          "tertiary-neutral",
+        ],
       },
     },
     size: {
