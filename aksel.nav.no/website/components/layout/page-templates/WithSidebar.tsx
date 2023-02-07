@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 import cl from "clsx";
 import NextLink from "next/link";
 import { capitalize } from "@/utils";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { TableOfContentsv2 } from "components/website-modules/TOCv2";
 
 const HeaderCube = ({ ...props }) => (

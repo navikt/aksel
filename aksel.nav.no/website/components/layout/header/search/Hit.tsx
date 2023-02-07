@@ -1,7 +1,7 @@
 import { urlFor } from "@/lib";
 import { Tag } from "@navikt/ds-react";
 import cl from "classnames";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { SearchHit } from "lib/types/search";
 import { StatusTag } from "components/website-modules/StatusTag";

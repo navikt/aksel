@@ -3,7 +3,7 @@ import { SanityT, urlFor } from "@/lib";
 import { Heading } from "@navikt/ds-react";
 import Nextlink from "next/link";
 import cl from "clsx";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { StatusTag } from "components/website-modules/StatusTag";
 
 const ComponentOverview = ({

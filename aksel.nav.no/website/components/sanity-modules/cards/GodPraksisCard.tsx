@@ -2,7 +2,7 @@ import { withErrorBoundary } from "@/error-boundary";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
 import NextLink from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { logNav } from "@/utils";
 import { SanityT, urlFor } from "@/lib";
 
