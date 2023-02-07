@@ -19,7 +19,7 @@ export const Default = (props) => {
         label="komboboks"
         size="medium"
         clearButton={true}
-        variant="primary"
+        variant="simple"
         hideLabel={true}
         error={props.error && "error here"}
         isListOpen={false}

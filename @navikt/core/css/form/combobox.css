@@ -1,0 +1,13 @@
+.navds-combobox__wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.navds-combobox__wrapper-inner {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: 1px solid black;
+  padding: 4px;
+}

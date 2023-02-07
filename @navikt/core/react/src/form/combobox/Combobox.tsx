@@ -1,4 +1,4 @@
-import { Close, Search as SearchIcon } from "@navikt/ds-icons";
+import { Close } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, {
   forwardRef,
@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import {
   BodyShort,
+  Chips,
   ErrorMessage,
   Label,
   mergeRefs,
@@ -146,9 +147,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         )}
         <div className="navds-combobox__wrapper">
           <div className="navds-combobox__wrapper-inner">
-            {variant === "simple" && (
-              <SearchIcon aria-hidden className="navds-search__search-icon" />
-            )}
+            {Array.from(Array(3)).map((e, i) => {
+              return (
+                <Chips>
+                  <Chips.Removable>{`test${i + 1}`}</Chips.Removable>
+                </Chips>
+              );
+            })}
             <input
               ref={mergedRef}
               {...omit(rest, ["error", "errorId", "size"])}
