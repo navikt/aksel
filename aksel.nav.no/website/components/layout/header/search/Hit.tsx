@@ -29,16 +29,16 @@ export function Hit({
       )}
     >
       <div className="px-2 py-6">
-        <NextLink href={`/${hit.item.slug}`} passHref>
-          <a
-            onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
-            className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none"
-          >
-            <span className="group-hover:underline">
-              {highlightStr(hit.item.heading, query)}
-            </span>
-            <StatusTag status={hit?.item?.status?.tag} aria-hidden />
-          </a>
+        <NextLink
+          href={`/${hit.item.slug}`}
+          passHref
+          onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
+          className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none"
+        >
+          <span className="group-hover:underline">
+            {highlightStr(hit.item.heading, query)}
+          </span>
+          <StatusTag status={hit?.item?.status?.tag} aria-hidden />
         </NextLink>
         <span className="font-regular text-text-subtle text-lg" aria-hidden>
           {hit.highlight.shouldHightlight ? (
@@ -100,20 +100,17 @@ export function IconHit({
         <NextLink
           href={`/grunnleggende/staesj/ikoner?icon=${hit.item.name}`}
           passHref
+          onClick={() => logSuccess(index, `/${(hit.item as any).name}`)}
+          className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none"
         >
-          <a
-            onClick={() => logSuccess(index, `/${(hit.item as any).name}`)}
-            className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none"
-          >
-            <span className="group-hover:underline">
-              {highlightStr(hit.item.name, query)}
-            </span>
-            {isNew(hit.item?.created_at ?? "") && (
-              <Tag variant="info" size="small" aria-hidden>
-                Ny
-              </Tag>
-            )}
-          </a>
+          <span className="group-hover:underline">
+            {highlightStr(hit.item.name, query)}
+          </span>
+          {isNew(hit.item?.created_at ?? "") && (
+            <Tag variant="info" size="small" aria-hidden>
+              Ny
+            </Tag>
+          )}
         </NextLink>
       </div>
 

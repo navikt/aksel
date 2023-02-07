@@ -32,19 +32,19 @@ const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
           priority
         />
       </div>
-      <NextLink href={`/god-praksis/${node.slug.current}`} passHref>
-        <a
-          onClick={(e) =>
-            logNav(
-              "card",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
-          }
-          className="navds-heading--medium text-deepblue-700 navds-heading  mb-4 no-underline after:absolute after:inset-0 after:rounded-lg focus:outline-none group-hover:underline"
-        >
-          {node.title}
-        </a>
+      <NextLink
+        href={`/god-praksis/${node.slug.current}`}
+        passHref
+        onClick={(e) =>
+          logNav(
+            "card",
+            window.location.pathname,
+            e.currentTarget.getAttribute("href")
+          )
+        }
+        className="navds-heading--medium text-deepblue-700 navds-heading  mb-4 no-underline after:absolute after:inset-0 after:rounded-lg focus:outline-none group-hover:underline"
+      >
+        {node.title}
       </NextLink>
       <BodyShort className={cl("mb-2 lg:mb-6")}>{node.oppsummering}</BodyShort>
       <BodyShort size="small" className="text-text-subtle">

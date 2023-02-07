@@ -190,7 +190,7 @@ const serializers = {
       }
       if (href && href.startsWith("mailto:")) {
         return (
-          <NextLink href={href} passHref>
+          <NextLink href={href} passHref legacyBehavior>
             <Link
               onClick={(e) =>
                 logNav(
@@ -222,7 +222,7 @@ const serializers = {
           {children} <ExternalLink title="åpner lenken i ny fane" />
         </Link>
       ) : (
-        <NextLink href={href} passHref>
+        <NextLink href={href} passHref legacyBehavior>
           <Link
             onClick={(e) =>
               logNav(
@@ -244,7 +244,7 @@ const serializers = {
 
       const href = `/${slug?.current}`;
       return (
-        <NextLink href={href} passHref>
+        <NextLink href={href} passHref legacyBehavior>
           <Link
             onClick={(e) =>
               logNav(

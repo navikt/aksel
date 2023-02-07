@@ -149,6 +149,7 @@ const AkselArtikkelTemplate = ({
                     key={title}
                     href={`/god-praksis/${slug.current}`}
                     passHref
+                    legacyBehavior
                   >
                     <BodyShort
                       size="small"

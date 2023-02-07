@@ -106,7 +106,11 @@ const ComponentOverview = ({
 
               <div className="grid p-6 pt-0">
                 <span className="flex items-center justify-between">
-                  <Nextlink href={`/${x?.slug.current}`} passHref>
+                  <Nextlink
+                    href={`/${x?.slug.current}`}
+                    passHref
+                    legacyBehavior
+                  >
                     <Heading
                       as="a"
                       size="small"

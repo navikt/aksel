@@ -187,7 +187,7 @@ export const serializers = {
     }) => {
       if (href && href.startsWith("mailto:")) {
         return (
-          <NextLink href={href} passHref>
+          <NextLink href={href} passHref legacyBehavior>
             <Link className="inline">{children}</Link>
           </NextLink>
         );
@@ -197,7 +197,7 @@ export const serializers = {
           {children} <ExternalLink title="åpner lenken i ny fane" />
         </Link>
       ) : (
-        <NextLink href={href} passHref>
+        <NextLink href={href} passHref legacyBehavior>
           <Link className="inline">{children}</Link>
         </NextLink>
       );
@@ -209,7 +209,7 @@ export const serializers = {
 
       const href = `/${slug?.current}`;
       return (
-        <NextLink href={href} passHref>
+        <NextLink href={href} passHref legacyBehavior>
           <Link>{children}</Link>
         </NextLink>
       );

@@ -96,6 +96,7 @@ export const WithSidebar = ({
                       <NextLink
                         href={`/${pageType.type.toLowerCase()}`}
                         passHref
+                        legacyBehavior
                       >
                         <Link className="text-text-default">
                           {capitalize(pageType.type)}

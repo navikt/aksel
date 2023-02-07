@@ -98,7 +98,7 @@ export const LatestBloggposts = ({
               />
             )}
           </div>
-          <NextLink href={`/${bloggs[0].slug}`} passHref>
+          <NextLink href={`/${bloggs[0].slug}`} passHref legacyBehavior>
             <Link className="text-deepblue-500 no-underline hover:underline">
               <Heading
                 size="large"
@@ -163,7 +163,7 @@ export const LatestBloggposts = ({
                   </div>
                 )}
                 <div>
-                  <NextLink href={`/${blog.slug}`} passHref>
+                  <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
                     <Link className="text-deepblue-500 no-underline hover:underline">
                       <Heading
                         size="small"
@@ -236,7 +236,7 @@ export const LatestBloggposts = ({
               />
             )}
           </div>
-          <NextLink href={`/${bloggs[0].slug}`} passHref>
+          <NextLink href={`/${bloggs[0].slug}`} passHref legacyBehavior>
             <Link className="text-deepblue-500 no-underline hover:underline">
               <Heading
                 size="large"
@@ -295,7 +295,7 @@ export const LatestBloggposts = ({
                 </div>
               )}
               <div>
-                <NextLink href={`/${blog.slug}`} passHref>
+                <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
                   <Link className="text-deepblue-500 no-underline hover:underline">
                     <Heading
                       size="small"
