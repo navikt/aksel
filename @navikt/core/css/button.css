@@ -144,7 +144,6 @@
 
 .navds-button--secondary {
   color: var(--ac-button-secondary-text, var(--a-text-action));
-  background-color: var(--ac-button-secondary-bg, var(--a-surface-default));
   box-shadow: inset 0 0 0 2px var(--ac-button-secondary-border, var(--a-border-action));
 }
 
@@ -172,6 +171,43 @@
   color: var(--ac-button-secondary-text, var(--a-text-action));
   background-color: var(--ac-button-secondary-bg, var(--a-surface-default));
   box-shadow: inset 0 0 0 2px var(--ac-button-secondary-border, var(--a-border-action));
+}
+
+/**************************
+* .navds-button--secondary-neutral *
+ **************************/
+
+.navds-button--secondary-neutral {
+  color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+  background-color: var(--ac-button-secondary-neutral-bg, var(--a-surface-transparent));
+  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-border, var(--a-border-strong));
+}
+
+.navds-button--secondary-neutral:hover {
+  background-color: var(--ac-button-secondary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+}
+
+.navds-button--secondary-neutral:focus {
+  color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
+}
+
+.navds-button--secondary-neutral:active {
+  color: var(--ac-button-secondary-neutral-active-text, var(--a-text-on-neutral));
+  background-color: var(--ac-button-secondary-neutral-active-bg, var(--a-surface-neutral-active));
+  box-shadow: none;
+}
+
+.navds-button--secondary-neutral:focus:active {
+  box-shadow: inset 0 0 0 1px var(--ac-button-secondary-neutral-active-focus-border, var(--a-surface-default)),
+    var(--a-shadow-focus);
+}
+
+.navds-button--secondary-neutral:where(:disabled, .navds-button--disabled),
+.navds-button--secondary-neutral:hover:where(:disabled, .navds-button--disabled) {
+  color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+  background-color: var(--ac-button-secondary-neutral-bg, var(--a-surface-transparent));
+  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-border, var(--a-border-strong));
 }
 
 /****************************
