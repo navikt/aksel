@@ -12,6 +12,12 @@ export default {
         options: ["medium", "small"],
       },
     },
+    variant: {
+      control: {
+        type: "radio",
+        options: ["action", "neutral"],
+      },
+    },
   },
 } as Meta;
 
@@ -80,6 +86,29 @@ export const Compositions = () => {
       </ToggleGroup>
       <ToggleGroup value={activeValue} onChange={setActiveValue}>
         {Items(true)}
+      </ToggleGroup>
+    </div>
+  );
+};
+
+export const Variants = () => {
+  const [activeValue, setActiveValue] = useState("ulest");
+
+  return (
+    <div className="colgap">
+      <ToggleGroup
+        variant="action"
+        value={activeValue}
+        onChange={setActiveValue}
+      >
+        {Items(true, true)}
+      </ToggleGroup>
+      <ToggleGroup
+        variant="neutral"
+        value={activeValue}
+        onChange={setActiveValue}
+      >
+        {Items(true, true)}
       </ToggleGroup>
     </div>
   );
