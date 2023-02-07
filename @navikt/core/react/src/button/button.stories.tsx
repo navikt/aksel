@@ -53,9 +53,9 @@ const varSwitch = {
   secondary: "Secondary",
   tertiary: "Tertiary",
   danger: "Danger",
-  "primary-neutral": "Primary neutral",
-  "secondary-neutral": "Secondary neutral",
-  "tertiary-neutral": "Tertiary neutral",
+  "primary-neutral": "Primary",
+  "secondary-neutral": "Secondary",
+  "tertiary-neutral": "Tertiary",
 };
 
 export const Default = (props) => {

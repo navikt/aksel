@@ -112,6 +112,32 @@
   background-color: var(--ac-button-primary-bg, var(--a-surface-action));
 }
 
+/*************************
+ * .navds-button--primary-neutral *
+ *************************/
+
+.navds-button--primary-neutral {
+  background-color: var(--ac-button-primary-neutral-bg, var(--a-surface-neutral));
+  color: var(--ac-button-primary-neutral-text, var(--a-text-on-neutral));
+}
+
+.navds-button--primary-neutral:hover {
+  background-color: var(--ac-button-primary-neutral-hover-bg, var(--a-surface-neutral-hover));
+}
+
+.navds-button--primary-neutral:active {
+  background-color: var(--ac-button-primary-neutral-active-bg, var(--a-surface-neutral-active));
+}
+
+.navds-button--primary-neutral:focus {
+  box-shadow: inset 0 0 0 1px var(--ac-button-primary-neutral-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
+}
+
+.navds-button--primary-neutral:hover:where(:disabled, .navds-button--disabled),
+.navds-button--primary-neutral:active:where(:disabled, .navds-button--disabled) {
+  background-color: var(--ac-button-primary-neutral-bg, var(--a-surface-neutral));
+}
+
 /**************************
 * .navds-button--secondary *
  **************************/
