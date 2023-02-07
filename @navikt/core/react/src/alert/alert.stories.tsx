@@ -1,6 +1,6 @@
 import React from "react";
 import { Alert } from ".";
-import { BodyLong, Heading as DsHeading } from "..";
+import { BodyLong, Heading as DsHeading, Link } from "..";
 
 export default {
   title: "ds-react/Alert",
@@ -124,6 +124,18 @@ export const Heading = () => {
           sint commodo consequat eu aute.
         </BodyLong>
       </Alert>
+    </div>
+  );
+};
+
+export const Links = () => {
+  return (
+    <div className="colgap">
+      {variants.map((variant, i) => (
+        <Alert key={variant} variant={variant}>
+          <Link href="#">Id elit esse enim reprehenderit</Link>
+        </Alert>
+      ))}
     </div>
   );
 };
