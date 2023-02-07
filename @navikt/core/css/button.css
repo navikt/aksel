@@ -250,6 +250,46 @@
   box-shadow: none;
 }
 
+/****************************
+ * .navds-button--tertiary-neutral *
+ ****************************/
+
+.navds-button--tertiary-neutral {
+  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+}
+
+.navds-button--tertiary-neutral:hover {
+  color: var(--ac-button-tertiary-neutral-hover-text, var(--a-text-default));
+  background-color: var(--ac-button-tertiary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+}
+
+.navds-button--tertiary-neutral:focus {
+  box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
+}
+
+.navds-button--tertiary-neutral:active {
+  color: var(--ac-button-tertiary-neutral-active-text, var(--a-text-on-neutral));
+  background-color: var(--ac-button-tertiary-neutral-active-bg, var(--a-surface-neutral-active));
+  box-shadow: inset 0 0 0 1px var(--a-surface-default);
+}
+
+.navds-button--tertiary-neutral:active:hover {
+  background-color: var(--ac-button-tertiary-neutral-active-hover-bg, var(--a-surface-neutral-active));
+}
+
+.navds-button--tertiary-neutral:active:focus {
+  box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+}
+
+.navds-button--tertiary-neutral:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary-neutral:hover:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary-neutral:active:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary-neutral:active:hover:where(:disabled, .navds-button--disabled) {
+  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+  background: none;
+  box-shadow: none;
+}
+
 /*************************
  * .navds-button--danger *
  *************************/
