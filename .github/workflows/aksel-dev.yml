@@ -9,6 +9,34 @@ env:
   IMAGE: ghcr.io/navikt/designsystemet
 
 jobs:
+  snyk-monitor:
+    name: monitor dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Snyk to check for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
+          args: --org=designsystemet --severity-threshold=high
+  snyk-test:
+    name: analyze dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+          args: --org=designsystemet --severity-threshold=high
   build_and_deploy:
     name: Build and deploy to dev-gcp
     runs-on: ubuntu-20.04
