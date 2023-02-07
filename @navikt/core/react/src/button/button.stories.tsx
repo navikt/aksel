@@ -30,11 +30,22 @@ export default {
   },
 };
 
-const variants: Array<"primary" | "secondary" | "tertiary" | "danger"> = [
+const variants: Array<
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "primary-neutral"
+  | "secondary-neutral"
+  | "tertiary-neutral"
+  | "danger"
+> = [
   "primary",
   "secondary",
   "tertiary",
   "danger",
+  "primary-neutral",
+  "secondary-neutral",
+  "tertiary-neutral",
 ];
 
 const varSwitch = {
@@ -42,6 +53,9 @@ const varSwitch = {
   secondary: "Secondary",
   tertiary: "Tertiary",
   danger: "Danger",
+  "primary-neutral": "Primary neutral",
+  "secondary-neutral": "Secondary neutral",
+  "tertiary-neutral": "Tertiary neutral",
 };
 
 export const Default = (props) => {
