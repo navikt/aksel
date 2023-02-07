@@ -138,13 +138,16 @@
           }
         },
         "hover": {
-          "value": "{a.gray.700.value}"
+          "value": "{a.gray.800.value}"
         },
         "selected": {
-          "value": "{a.gray.700.value}"
+          "value": "{a.gray.900.value}"
+        },
+        "active": {
+          "value": "{a.gray.900.value}"
         },
         "@": {
-          "value": "{a.gray.600.value}"
+          "value": "{a.gray.700.value}"
         }
       },
 
