@@ -58,8 +58,8 @@ const ComponentOverview = ({
                   <Image
                     src={urlFor(x.status?.bilde).auto("format").url()}
                     decoding="async"
-                    width="200px"
-                    height="200px"
+                    width="200"
+                    height="200"
                     layout="fixed"
                     objectFit="contain"
                     alt={x?.heading + " thumbnail"}

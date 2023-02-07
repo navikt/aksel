@@ -84,8 +84,8 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
               <Image
                 src={urlFor(page.pictogram.url).auto("format").url()}
                 decoding="sync"
-                width="72px"
-                height="72px"
+                width="72"
+                height="72"
                 layout="fixed"
                 priority
                 aria-hidden

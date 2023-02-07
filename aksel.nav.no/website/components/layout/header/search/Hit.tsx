@@ -62,8 +62,8 @@ export function Hit({
           <Image
             src={urlFor(hit.item.status.bilde).auto("format").url()}
             decoding="sync"
-            width="96px"
-            height="96px"
+            width="96"
+            height="96"
             layout="fixed"
             objectFit="contain"
             alt={hit.item?.heading + " thumbnail"}
@@ -121,8 +121,8 @@ export function IconHit({
         <Image
           src={`https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${hit.item.name}.svg`}
           decoding="sync"
-          width="24px"
-          height="24px"
+          width="24"
+          height="24"
           layout="fixed"
           objectFit="contain"
           alt={hit.item.name + " thumbnail"}
