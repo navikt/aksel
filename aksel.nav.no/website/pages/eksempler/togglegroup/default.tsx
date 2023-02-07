@@ -4,20 +4,36 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <ToggleGroup defaultValue="lest" onChange={console.log}>
-      <ToggleGroup.Item value="ulest">
-        <Email aria-hidden />
-        Ulest
-      </ToggleGroup.Item>
-      <ToggleGroup.Item value="lest">
-        <EmailOpened aria-hidden />
-        Leste
-      </ToggleGroup.Item>
-      <ToggleGroup.Item value="sendt">
-        <Send aria-hidden />
-        Sendt
-      </ToggleGroup.Item>
-    </ToggleGroup>
+    <div className="grid gap-4">
+      <ToggleGroup defaultValue="lest" onChange={console.log}>
+        <ToggleGroup.Item value="ulest">
+          <Email aria-hidden />
+          Ulest
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="lest">
+          <EmailOpened aria-hidden />
+          Leste
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="sendt">
+          <Send aria-hidden />
+          Sendt
+        </ToggleGroup.Item>
+      </ToggleGroup>
+      <ToggleGroup defaultValue="lest" onChange={console.log} variant="neutral">
+        <ToggleGroup.Item value="ulest">
+          <Email aria-hidden />
+          Ulest
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="lest">
+          <EmailOpened aria-hidden />
+          Leste
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="sendt">
+          <Send aria-hidden />
+          Sendt
+        </ToggleGroup.Item>
+      </ToggleGroup>
+    </div>
   );
 };
 
