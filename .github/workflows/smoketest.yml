@@ -1,25 +1,25 @@
-name: E2E / Playwright Tests
+name: Smoketest aksel.nav.no
 on:
   push:
-    branches: [master, next]
-    paths:
-      - "aksel.nav.no/**"
-  pull_request:
-    branches: [master, next]
+    branches:
+      - master
     paths:
       - "aksel.nav.no/**"
 
+env:
+  IMAGE: ghcr.io/navikt/designsystemet
+
 jobs:
-  playwright:
+  smoketest:
+    name: Smoketest Aksel
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.30.0-focal
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v1
         with:
-          node-version: 16
-
+          node-version: "14"
+      - uses: actions/checkout@v2
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
@@ -31,25 +31,19 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-e2e-${{ github.sha }}
+          key: ${{ runner.os }}-prod-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-e2e-
+            ${{ runner.os }}-prod-
 
       - name: Install dependencies
         run: yarn
 
-      - name: Build packages
+      - name: build packages
         run: |
           yarn boot
 
       - name: Build application
         run: yarn workspace aksel.nav.no build:next
 
-      - name: Run Playwright tests
-        run: yarn workspace website e2e:ci-full
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report
-          path: aksel.nav.no/website/playwright-report/
-          retention-days: 10
+      - name: E2E smoketest
+        run: yarn workspace website e2e:ci

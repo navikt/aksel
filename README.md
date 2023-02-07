@@ -39,8 +39,7 @@
 
 aksel.nav.no/
 ├── website        # NEXT.JS app (v12)
-├── website/sanity # Sanity CMS-app (v3)
-└── sanity         # Sanity CMS-app (deprecated v2)
+└── website/sanity # Sanity CMS-app (v3)
 ```
 
 ## Commands

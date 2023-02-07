@@ -22,6 +22,11 @@ const AkselPrinsippTemplate = ({
   title: string;
 }): JSX.Element => {
   if (!data.content || !data.heading) {
+    console.warn(
+      `Artikkelen har ikke ${
+        !data.content ? "innhold" : "overskrift"
+      }, så den kan ikke vises.`
+    );
     return null;
   }
 

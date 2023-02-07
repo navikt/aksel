@@ -94,8 +94,17 @@ const GetStarted = ({
   const [pause, setPause] = useState(false);
 
   useEffect(() => {
-    setReducedMotion(getPrefersReducedMotion());
+    const disableAnimations =
+      navigator.userAgent.indexOf("Safari") !== -1 &&
+      navigator.userAgent.indexOf("Chrome") === -1;
+
+    setReducedMotion(getPrefersReducedMotion() || disableAnimations);
     const data = localStorage.getItem("pause-animations");
+    if (disableAnimations) {
+      setPause(true);
+      togglePause(true);
+      return;
+    }
     setPause(JSON.parse(data) ?? false);
     togglePause(JSON.parse(data) ?? false);
   }, [togglePause]);

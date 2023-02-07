@@ -133,7 +133,11 @@ export const GlobalSearch = () => {
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
-      if (event.key === "b" && (event.metaKey || event.ctrlKey)) {
+      if (
+        event.key === "b" &&
+        (event.metaKey || event.ctrlKey) &&
+        !event.shiftKey
+      ) {
         event.preventDefault();
         if (open) {
           inputRef.current?.focus();
@@ -188,6 +192,7 @@ export const GlobalSearch = () => {
       <Button
         variant="primary"
         className="hover:bg-deepblue-600 bg-deepblue-500 focus-visible:shadow-focus-gap h-11 focus:shadow-none"
+        aria-keyshortcuts="Control+b"
         icon={
           <SearchIcon
             className="pointer-events-none -mt-[1px] shrink-0 text-xl"
