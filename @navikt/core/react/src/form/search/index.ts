@@ -1,1 +1,5 @@
-export { default as Search, SearchProps, SearchClearEvent } from "./Search";
+export {
+  default as Search,
+  type SearchProps,
+  type SearchClearEvent,
+} from "./Search";

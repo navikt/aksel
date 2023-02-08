@@ -1,8 +1,8 @@
-export { BodyProps } from "./Body";
-export { ColumnHeaderProps } from "./ColumnHeader";
-export { DataCellProps } from "./DataCell";
-export { ExpandableRowProps } from "./ExpandableRow";
-export { HeaderProps } from "./Header";
-export { HeaderCellProps } from "./HeaderCell";
-export { RowProps } from "./Row";
-export { default as Table, TableProps, SortState } from "./Table";
+export { default as Table, type TableProps, type SortState } from "./Table";
+export { type BodyProps } from "./Body";
+export { type ColumnHeaderProps } from "./ColumnHeader";
+export { type DataCellProps } from "./DataCell";
+export { type ExpandableRowProps } from "./ExpandableRow";
+export { type HeaderProps } from "./Header";
+export { type HeaderCellProps } from "./HeaderCell";
+export { type RowProps } from "./Row";
