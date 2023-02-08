@@ -19,5 +19,4 @@ export default create({
   barSelectedColor: "rgba(0, 36, 58, 1)",
 
   brandTitle: "Aksel",
-  appBorderRadius: 16,
 });
