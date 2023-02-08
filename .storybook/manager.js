@@ -1,6 +1,6 @@
 import { addons } from "@storybook/addons";
-import NavTheme from "./theme.js";
+import AkselTheme from "./theme.js";
 
 addons.setConfig({
-  theme: NavTheme,
+  theme: AkselTheme,
 });
