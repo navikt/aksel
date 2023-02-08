@@ -19,53 +19,7 @@ export default {
     DsIngress,
     DsLabel,
   },
-  argTypes: {
-    size: {
-      defaultValue: "large",
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    },
-    component: {
-      defaultValue: "BodyLong",
-      control: {
-        type: "radio",
-        options: [
-          "BodyLong",
-          "BodyShort",
-          "Detail",
-          "Ingress",
-          "Label",
-          "ErrorMessage",
-        ],
-      },
-    },
-  },
 } as Meta;
-
-const lorem =
-  "Velit quis in laborum occaecat laborum magna id nisi veniam aliqua velit amet non. In quis sit proident dolore reprehenderit laborum aliquip";
-
-const compMap = {
-  BodyLong: DsBodyLong,
-  BodyShort: DsBodyShort,
-  Detail: DsDetail,
-  Ingress: DsIngress,
-  Label: DsLabel,
-  ErrorMessage: DsErrorMessage,
-};
-
-export const Default = {
-  render: (props) => {
-    const Comp = compMap[props.component];
-    return <Comp {...props}>{lorem}</Comp>;
-  },
-
-  args: {
-    spacing: false,
-  },
-};
 
 export const Ingress = () => (
   <>

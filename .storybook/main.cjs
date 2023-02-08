@@ -1,15 +1,13 @@
-const getStories = () => {
-  return process.env.stories
-    ? [`../@navikt/**/${process.env.stories}.stories.@(js|jsx|ts|tsx|mdx)`]
-    : ["../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)"];
-};
 module.exports = {
   devServer: {
     stats: "errors-only",
   },
   staticDirs: ["./public"],
 
-  stories: () => [...getStories(), "./*.stories.mdx"],
+  stories: () => [
+    "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "./*.stories.mdx",
+  ],
   addons: [
     "@storybook/addon-a11y",
     "@whitespace/storybook-addon-html",
