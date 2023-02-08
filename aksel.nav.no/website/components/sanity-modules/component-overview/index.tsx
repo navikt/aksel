@@ -3,7 +3,7 @@ import { SanityT, urlFor } from "@/lib";
 import { Heading } from "@navikt/ds-react";
 import Nextlink from "next/link";
 import cl from "clsx";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { StatusTag } from "components/website-modules/StatusTag";
 
 const ComponentOverview = ({
@@ -58,8 +58,8 @@ const ComponentOverview = ({
                   <Image
                     src={urlFor(x.status?.bilde).auto("format").url()}
                     decoding="async"
-                    width="200px"
-                    height="200px"
+                    width="200"
+                    height="200"
                     layout="fixed"
                     objectFit="contain"
                     alt={x?.heading + " thumbnail"}
@@ -106,7 +106,11 @@ const ComponentOverview = ({
 
               <div className="grid p-6 pt-0">
                 <span className="flex items-center justify-between">
-                  <Nextlink href={`/${x?.slug.current}`} passHref>
+                  <Nextlink
+                    href={`/${x?.slug.current}`}
+                    passHref
+                    legacyBehavior
+                  >
                     <Heading
                       as="a"
                       size="small"
