@@ -1,5 +1,5 @@
-export { default as Header, HeaderProps } from "./Header";
-export { HeaderButtonProps } from "./HeaderButton";
-export { HeaderTitleProps } from "./HeaderTitle";
-export { HeaderUserProps } from "./HeaderUser";
-export { HeaderUserButtonProps } from "./HeaderUserButton";
+export { default as Header, type HeaderProps } from "./Header";
+export { type HeaderButtonProps } from "./HeaderButton";
+export { type HeaderTitleProps } from "./HeaderTitle";
+export { type HeaderUserProps } from "./HeaderUser";
+export { type HeaderUserButtonProps } from "./HeaderUserButton";

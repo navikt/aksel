@@ -3,7 +3,6 @@ import "@navikt/ds-css-internal/index.css";
 import "./layout.css";
 
 export const parameters = {
-  /* actions: { argTypesRegex: "^on[A-Z].*" }, */
   options: {
     storySort: {
       method: "",
@@ -45,7 +44,10 @@ export const globalTypes = {
 };
 
 export const withTheme = (StoryFn, context) => (
-  <div data-theme={context.parameters.theme || context.globals.theme} lang="no">
+  <div
+    /* data-theme={context.parameters.theme || context.globals.theme || "light"} */
+    lang="no"
+  >
     <StoryFn />
   </div>
 );
