@@ -56,13 +56,15 @@ const compMap = {
   ErrorMessage: DsErrorMessage,
 };
 
-export const Default = (props) => {
-  const Comp = compMap[props.component];
-  return <Comp {...props}>{lorem}</Comp>;
-};
+export const Default = {
+  render: (props) => {
+    const Comp = compMap[props.component];
+    return <Comp {...props}>{lorem}</Comp>;
+  },
 
-Default.args = {
-  spacing: false,
+  args: {
+    spacing: false,
+  },
 };
 
 export const Ingress = () => (

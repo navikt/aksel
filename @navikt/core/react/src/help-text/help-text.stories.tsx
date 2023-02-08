@@ -36,16 +36,18 @@ export default {
   },
 };
 
-export const Default = (props: any) => {
-  return (
-    <HelpText title="show tooltip" strategy="fixed" {...props}>
-      Id ullamco excepteur elit fugiat labore.
-    </HelpText>
-  );
-};
+export const Default = {
+  render: (props: any) => {
+    return (
+      <HelpText title="show tooltip" strategy="fixed" {...props}>
+        Id ullamco excepteur elit fugiat labore.
+      </HelpText>
+    );
+  },
 
-Default.args = {
-  title: "show tooltip",
+  args: {
+    title: "show tooltip",
+  },
 };
 
 export const Open = () => {

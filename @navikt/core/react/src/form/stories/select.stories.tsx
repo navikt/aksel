@@ -34,15 +34,17 @@ const content = (
   </>
 );
 
-export const Default = (props) => {
-  return (
-    <Select {...props} label="Ipsum enim quis culpa">
-      {content}
-    </Select>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <Select {...props} label="Ipsum enim quis culpa">
+        {content}
+      </Select>
+    );
+  },
 
-Default.args = {};
+  args: {},
+};
 
 export const Small = () => {
   return (

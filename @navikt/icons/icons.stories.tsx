@@ -15,11 +15,13 @@ export default {
   },
 };
 
-const Template = ({ Icon, color, size, ...args }) => {
-  const Iconname = Icons[Icon];
-  return <Iconname style={{ fontSize: size, color }} {...args} />;
-};
-export const Default = Template.bind({});
-Default.args = {
-  size: "24px",
+export const Default = {
+  render: ({ Icon, color, size, ...args }) => {
+    const Iconname = Icons[Icon];
+    return <Iconname style={{ fontSize: size, color }} {...args} />;
+  },
+
+  args: {
+    size: "24px",
+  },
 };

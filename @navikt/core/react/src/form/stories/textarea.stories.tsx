@@ -32,19 +32,21 @@ export default {
   },
 } as Meta;
 
-export const Default = (props) => {
-  return (
-    <Textarea
-      {...props}
-      maxLength={props?.maxLength ?? 100}
-      label="Ipsum enim quis culpa"
-    />
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <Textarea
+        {...props}
+        maxLength={props?.maxLength ?? 100}
+        label="Ipsum enim quis culpa"
+      />
+    );
+  },
 
-Default.args = {
-  maxLength: 100,
-  resize: false,
+  args: {
+    maxLength: 100,
+    resize: false,
+  },
 };
 
 export const Small = () => {

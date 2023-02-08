@@ -28,12 +28,14 @@ export default {
   },
 } as Meta;
 
-export const Default = (props: any) => {
-  return <Loader {...props} />;
-};
+export const Default = {
+  render: (props: any) => {
+    return <Loader {...props} />;
+  },
 
-Default.args = {
-  transparent: false,
+  args: {
+    transparent: false,
+  },
 };
 
 export const Size = () => (

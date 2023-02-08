@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { Chips } from ".";
 
@@ -22,44 +23,46 @@ export default {
 
 const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
 
-export const Default = (props) => {
-  const [selected, setSelected] = useState(["Dansk", "Svensk"]);
-  const [filter, setFilter] = useState(options);
+export const Default = {
+  render: (props) => {
+    const [selected, setSelected] = useState(["Dansk", "Svensk"]);
+    const [filter, setFilter] = useState(options);
 
-  if (props.type === "toggle") {
+    if (props.type === "toggle") {
+      return (
+        <Chips size={props.size ?? "medium"}>
+          {options.map((c) => (
+            <Chips.Toggle
+              selected={selected.includes(c)}
+              key={c}
+              onClick={() =>
+                setSelected(
+                  selected.includes(c)
+                    ? selected.filter((x) => x !== c)
+                    : [...selected, c]
+                )
+              }
+            >
+              {c}
+            </Chips.Toggle>
+          ))}
+        </Chips>
+      );
+    }
+
     return (
       <Chips size={props.size ?? "medium"}>
-        {options.map((c) => (
-          <Chips.Toggle
-            selected={selected.includes(c)}
+        {filter.map((c) => (
+          <Chips.Removable
             key={c}
-            onClick={() =>
-              setSelected(
-                selected.includes(c)
-                  ? selected.filter((x) => x !== c)
-                  : [...selected, c]
-              )
-            }
+            onClick={() => setFilter((x) => x.filter((y) => y !== c))}
           >
             {c}
-          </Chips.Toggle>
+          </Chips.Removable>
         ))}
       </Chips>
     );
-  }
-
-  return (
-    <Chips size={props.size ?? "medium"}>
-      {filter.map((c) => (
-        <Chips.Removable
-          key={c}
-          onClick={() => setFilter((x) => x.filter((y) => y !== c))}
-        >
-          {c}
-        </Chips.Removable>
-      ))}
-    </Chips>
-  );
+  },
 };
 
 export const Toggle = () => {

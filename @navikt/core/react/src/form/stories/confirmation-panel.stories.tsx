@@ -25,22 +25,24 @@ const content = (
   </>
 );
 
-export const Default = (props) => {
-  return (
-    <ConfirmationPanel
-      error={props?.error}
-      size={props?.size}
-      checked={props?.checked ?? undefined}
-      label={props?.label ?? "Checkbox label text"}
-    >
-      {content}
-    </ConfirmationPanel>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <ConfirmationPanel
+        error={props?.error}
+        size={props?.size}
+        checked={props?.checked ?? undefined}
+        label={props?.label ?? "Checkbox label text"}
+      >
+        {content}
+      </ConfirmationPanel>
+    );
+  },
 
-Default.args = {
-  label: "Checkbox label text",
-  checked: false,
+  args: {
+    label: "Checkbox label text",
+    checked: false,
+  },
 };
 
 export const Small = () => {

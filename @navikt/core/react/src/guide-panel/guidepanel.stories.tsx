@@ -11,26 +11,28 @@ adipisicing proident. Tempor ipsum ea cupidatat qui esse do veniam
 cupidatat. Excepteur irure reprehenderit esse tempor nisi duis qui ea
 enim id.`;
 
-export const Default = (props) => {
-  const newProps = props?.colorOverride
-    ? {
-        style: {
-          ["--ac-guide-panel-illustration-bg" as any]: "var(--a-purple-200)",
-          ["--ac-guide-panel-border" as any]: "var(--a-purple-400)",
-        },
-      }
-    : {};
+export const Default = {
+  render: (props) => {
+    const newProps = props?.colorOverride
+      ? {
+          style: {
+            ["--ac-guide-panel-illustration-bg" as any]: "var(--a-purple-200)",
+            ["--ac-guide-panel-border" as any]: "var(--a-purple-400)",
+          },
+        }
+      : {};
 
-  return (
-    <GuidePanel {...newProps} poster={props?.poster}>
-      {panelText}
-    </GuidePanel>
-  );
-};
+    return (
+      <GuidePanel {...newProps} poster={props?.poster}>
+        {panelText}
+      </GuidePanel>
+    );
+  },
 
-Default.args = {
-  poster: false,
-  colorOverride: false,
+  args: {
+    poster: false,
+    colorOverride: false,
+  },
 };
 
 export const Poster = () => <GuidePanel poster>{panelText}</GuidePanel>;

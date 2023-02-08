@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Email, EmailOpened, Send } from "@navikt/ds-icons";
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
@@ -47,24 +48,26 @@ const Items = (icon?: boolean, both?: boolean) => (
   </>
 );
 
-export const Default = (props) => {
-  const [activeValue, setActiveValue] = useState("ulest");
-  return (
-    <ToggleGroup
-      size={props?.size}
-      value={activeValue}
-      onChange={setActiveValue}
-      label={props.label ? "Proident minim dolor pariatur." : undefined}
-    >
-      {Items(!!props?.icon, !!props?.text && props.icon)}
-    </ToggleGroup>
-  );
-};
+export const Default = {
+  render: (props) => {
+    const [activeValue, setActiveValue] = useState("ulest");
+    return (
+      <ToggleGroup
+        size={props?.size}
+        value={activeValue}
+        onChange={setActiveValue}
+        label={props.label ? "Proident minim dolor pariatur." : undefined}
+      >
+        {Items(!!props?.icon, !!props?.text && props.icon)}
+      </ToggleGroup>
+    );
+  },
 
-Default.args = {
-  icon: true,
-  text: true,
-  label: false,
+  args: {
+    icon: true,
+    text: true,
+    label: false,
+  },
 };
 
 export const Compositions = () => {

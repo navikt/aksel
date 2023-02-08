@@ -33,12 +33,14 @@ export default {
   },
 } as Meta;
 
-export const Default = (props) => {
-  return <Switch {...props}>Label text</Switch>;
-};
+export const Default = {
+  render: (props) => {
+    return <Switch {...props}>Label text</Switch>;
+  },
 
-Default.args = {
-  position: "right",
+  args: {
+    position: "right",
+  },
 };
 
 export const Small = () => {

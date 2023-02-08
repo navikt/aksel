@@ -34,16 +34,18 @@ const content = (
   </>
 );
 
-export const Default = (props) => {
-  return (
-    <Fieldset legend="Mollit eiusmod" {...props}>
-      {content}
-    </Fieldset>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <Fieldset legend="Mollit eiusmod" {...props}>
+        {content}
+      </Fieldset>
+    );
+  },
 
-Default.args = {
-  errorPropagation: true,
+  args: {
+    errorPropagation: true,
+  },
 };
 
 export const Small = () => (

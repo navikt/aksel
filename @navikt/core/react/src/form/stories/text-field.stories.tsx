@@ -26,11 +26,13 @@ export default {
   },
 } as Meta;
 
-export const Default = (props) => {
-  return <TextField {...props} label="Ipsum enim quis culpa" />;
-};
+export const Default = {
+  render: (props) => {
+    return <TextField {...props} label="Ipsum enim quis culpa" />;
+  },
 
-Default.args = {};
+  args: {},
+};
 
 export const Small = () => {
   return <TextField size="small" label="Ipsum enim quis culpa" />;
