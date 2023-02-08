@@ -121,6 +121,8 @@ export const Loading = () => (
   </div>
 );
 
+Loading.args = { chromatic: { delay: 300 } };
+
 export const Icon = () => (
   <div className="colgap">
     <div className="rowgap">
@@ -242,3 +244,5 @@ export const LoadingWithAs = () => (
     </div>
   </div>
 );
+
+LoadingWithAs.args = { chromatic: { delay: 300 } };
