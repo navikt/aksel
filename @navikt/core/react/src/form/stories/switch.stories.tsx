@@ -3,7 +3,7 @@ import React from "react";
 import { Switch } from "../index";
 
 export default {
-  title: "ds-react/form/Switch",
+  title: "ds-react/Switch",
   component: Switch,
   argTypes: {
     size: {

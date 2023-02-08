@@ -39,7 +39,7 @@ module.exports = {
     storyStoreV7: true,
   },
   docs: {
-    autodocs: true,
+    autodocs: "tag",
   },
   typescript: {
     check: false,

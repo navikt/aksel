@@ -2,7 +2,7 @@ import React from "react";
 import { Meta } from "@storybook/react";
 import { ErrorSummary } from "..";
 export default {
-  title: "ds-react/Form/Errorsummary",
+  title: "ds-react/Errorsummary",
   component: ErrorSummary,
   argTypes: {
     headingTag: {

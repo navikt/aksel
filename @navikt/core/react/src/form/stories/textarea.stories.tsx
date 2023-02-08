@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import React from "react";
 import { Textarea } from "../index";
 export default {
-  title: "ds-react/form/Textarea",
+  title: "ds-react/Textarea",
   component: Textarea,
   argTypes: {
     size: {

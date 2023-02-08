@@ -2,7 +2,7 @@ import React from "react";
 import { Select } from "../index";
 import { Meta } from "@storybook/react";
 export default {
-  title: "ds-react/form/Select",
+  title: "ds-react/Select",
   component: Select,
   argTypes: {
     size: {

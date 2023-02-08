@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Radio, RadioGroup } from "../../index";
 
 export default {
-  title: "ds-react/Form/Radio",
+  title: "ds-react/Radio",
   component: Radio,
   subcomponents: {
     RadioGroup,

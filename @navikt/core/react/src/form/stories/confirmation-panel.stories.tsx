@@ -3,7 +3,7 @@ import { ConfirmationPanel } from "../index";
 import { Meta } from "@storybook/react";
 import { Link } from "../..";
 export default {
-  title: "ds-react/form/ConfirmationPanel",
+  title: "ds-react/ConfirmationPanel",
   component: ConfirmationPanel,
   argTypes: {
     size: {

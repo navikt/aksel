@@ -4,7 +4,7 @@ import { Checkbox, CheckboxGroup } from "../../index";
 import { Meta } from "@storybook/react";
 
 export default {
-  title: "ds-react/Form/Checkbox",
+  title: "ds-react/Checkbox",
   component: Checkbox,
   subcomponents: {
     CheckboxGroup,

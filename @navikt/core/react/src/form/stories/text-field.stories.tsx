@@ -2,7 +2,7 @@ import React from "react";
 import { TextField } from "../index";
 import { Meta } from "@storybook/react";
 export default {
-  title: "ds-react/form/TextField",
+  title: "ds-react/TextField",
   component: TextField,
   argTypes: {
     size: {
