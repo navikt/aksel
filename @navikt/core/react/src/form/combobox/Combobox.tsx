@@ -106,12 +106,29 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             handleClear({ trigger: "Escape", event: e });
           } else if (e.key === "Enter") {
             setChips([...chips, e.target.value]);
+            handleClear({ trigger: "Escape", event: e });
           }
         },
         [chips, handleClear]
       ),
       wrapperRef
     );
+
+    useEventListener(
+      "keydown",
+      useCallback(
+        (e) => {
+          if (e.key === "Backspace" && internalValue === "") {
+            setChips(chips.slice(0, -1));
+          }
+        },
+        [chips, internalValue]
+      )
+    );
+
+    function onRemoveChip(value) {
+      setChips(chips.filter((chip) => chip !== value));
+    }
 
     return (
       <div
@@ -153,7 +170,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             {chips.length > 0 && (
               <Chips>
                 {chips.map((chip, i) => {
-                  return <Chips.Removable key={chip}>{chip}</Chips.Removable>;
+                  return (
+                    <Chips.Removable
+                      onDelete={() => onRemoveChip(chip)}
+                      key={chip}
+                    >
+                      {chip}
+                    </Chips.Removable>
+                  );
                 })}
               </Chips>
             )}
