@@ -1,6 +1,6 @@
 import React from "react";
 import { BodyLong, GuidePanel } from "../index";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 export default {
   title: "ds-react/GuidePanel",
   component: GuidePanel,

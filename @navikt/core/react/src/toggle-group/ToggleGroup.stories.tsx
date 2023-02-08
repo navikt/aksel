@@ -1,5 +1,5 @@
 import { Email, EmailOpened, Send } from "@navikt/ds-icons";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { ToggleGroup } from "../index";
 export default {

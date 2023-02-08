@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import { ErrorSummary } from "..";
 export default {
   title: "ds-react/Form/Errorsummary",

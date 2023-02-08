@@ -1,5 +1,5 @@
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Tabs } from ".";
 

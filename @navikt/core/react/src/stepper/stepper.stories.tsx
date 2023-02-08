@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { BodyLong } from "..";
 import Stepper from "./Stepper";

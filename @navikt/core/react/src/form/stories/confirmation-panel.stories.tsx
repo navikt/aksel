@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ConfirmationPanel } from "../index";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import { Link } from "../..";
 export default {
   title: "ds-react/form/ConfirmationPanel",

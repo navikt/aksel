@@ -3,15 +3,7 @@ const getStories = () => {
     ? [`../@navikt/**/${process.env.stories}.stories.@(js|jsx|ts|tsx|mdx)`]
     : ["../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)"];
 };
-
 module.exports = {
-  webpackFinal: async (config, { configType }) => {
-    config.devServer = {
-      stats: "errors-only",
-    };
-    return config;
-  },
-  staticDirs: ["./public"],
   devServer: {
     stats: "errors-only",
   },
@@ -37,19 +29,16 @@ module.exports = {
       },
     },
   ],
+  framework: {
+    name: "@storybook/react-vite",
+    options: {},
+  },
   features: {
     storyStoreV7: true,
   },
-  core: {
-    builder: {
-      name: "webpack5",
-      options: {
-        lazyCompilation: false,
-        fsCache: true,
-      },
-    },
+  docs: {
+    autodocs: false,
   },
-  framework: "@storybook/react",
   typescript: {
     check: false,
     checkOptions: {},
