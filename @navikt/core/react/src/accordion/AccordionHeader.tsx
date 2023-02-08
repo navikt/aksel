@@ -1,7 +1,7 @@
 import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { Heading } from "..";
+import { Heading } from "../typography/Heading";
 import { AccordionItemContext } from "./AccordionItem";
 
 export interface AccordionHeaderProps
