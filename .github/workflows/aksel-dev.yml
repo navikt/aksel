@@ -6,7 +6,7 @@ on:
       - next
 
 env:
-  IMAGE: ghcr.io/navikt/designsystemet
+  IMAGE: ghcr.io/navikt/aksel
 
 jobs:
   snyk-monitor:

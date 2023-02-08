@@ -12,7 +12,7 @@ on:
         default: "false"
 
 env:
-  IMAGE: ghcr.io/navikt/designsystemet
+  IMAGE: ghcr.io/navikt/aksel
 
 jobs:
   redeploy:

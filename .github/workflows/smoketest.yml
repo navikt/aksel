@@ -7,7 +7,7 @@ on:
       - "aksel.nav.no/**"
 
 env:
-  IMAGE: ghcr.io/navikt/designsystemet
+  IMAGE: ghcr.io/navikt/aksel
 
 jobs:
   smoketest:
