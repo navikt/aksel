@@ -28,8 +28,8 @@ backgroundcolor: var(--a-surface-default);
 
 ## Learn more
 
-- [Designsystem documentation](https://aksel.nav.no/designsystem)
-- [Storybook](https://main--5f801fb2aea7820022de2936.chromatic.com/)
+- [Docs](https://aksel.nav.no/komponenter)
+- [Storybook](https://aksel.nav.no/storybook/)
 
 ## License
 

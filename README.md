@@ -8,14 +8,11 @@
         NAVs designsystem + Aksel.nav.no
     </p>
     <div align="center">
-      <a href="https://main--5f801fb2aea7820022de2936.chromatic.com/">
+      <a href="https://aksel.nav.no/storybook/">
           <img src="https://shields.io/badge/storybook-white?logo=storybook&style=flat"" />
       </a>
       <a href="https://github.com/navikt/aksel/pulls">
           <img src="https://img.shields.io/badge/PRs-welcome-green.svg?color=%23262626"" />
-      </a>
-      <a href="https://github.com/navikt/aksel/actions/workflows/ci.yml">
-          <img src="https://github.com/navikt/aksel/actions/workflows/ci.yml/badge.svg "" />
       </a>
     </div>
     <div><a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=%40navikt%2Fds-*"></a></div>

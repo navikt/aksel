@@ -25,9 +25,9 @@ function App() {
 
 ## Learn more
 
-- [Designsystem documentation](https://aksel.nav.no/designsystem)
-- [Storybook](https://main--5f801fb2aea7820022de2936.chromatic.com/)
-- [Icon-search](https://aksel.nav.no/designsystem/side/ikoner)
+- [Docs](https://aksel.nav.no/komponenter)
+- [Storybook](https://aksel.nav.no/storybook/)
+- [Icon-search](https://aksel.nav.no/grunnleggende/staesj/ikoner)
 
 ## License
 
