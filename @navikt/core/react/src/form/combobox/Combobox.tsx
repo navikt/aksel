@@ -76,6 +76,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const comboboxRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([comboboxRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
+    const [chips, setChips] = useState<string[]>([]);
 
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
 
@@ -97,15 +98,17 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     useEventListener(
-      "keydown",
+      "keypress",
       useCallback(
         (e) => {
           if (e.key === "Escape") {
             e.preventDefault();
             handleClear({ trigger: "Escape", event: e });
+          } else if (e.key === "Enter") {
+            setChips([...chips, e.target.value]);
           }
         },
-        [handleClear]
+        [chips, handleClear]
       ),
       wrapperRef
     );
@@ -147,13 +150,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         )}
         <div className="navds-combobox__wrapper">
           <div className="navds-combobox__wrapper-inner">
-            {Array.from(Array(3)).map((e, i) => {
-              return (
-                <Chips>
-                  <Chips.Removable>{`test${i + 1}`}</Chips.Removable>
-                </Chips>
-              );
-            })}
+            {chips.length > 0 && (
+              <Chips>
+                {chips.map((chip, i) => {
+                  return <Chips.Removable key={chip}>{chip}</Chips.Removable>;
+                })}
+              </Chips>
+            )}
             <input
               ref={mergedRef}
               {...omit(rest, ["error", "errorId", "size"])}
