@@ -1,4 +1,4 @@
-FROM node:16.4-alpine3.14
+FROM node:16.15.0-alpine3.14
 RUN apk add --no-cache libc6-compat
 
 ENV NODE_ENV production

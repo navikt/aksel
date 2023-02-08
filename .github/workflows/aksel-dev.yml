@@ -41,10 +41,10 @@ jobs:
     name: Build and deploy to dev-gcp
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: "14"
-      - uses: actions/checkout@v2
+          node-version: "16"
+      - uses: actions/checkout@v3
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
