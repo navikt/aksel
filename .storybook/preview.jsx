@@ -45,8 +45,9 @@ export const globalTypes = {
 
 export const withTheme = (StoryFn, context) => (
   <div
-    /* data-theme={context.parameters.theme || context.globals.theme || "light"} */
+    data-theme={context.parameters.theme || context.globals.theme || "light"}
     lang="no"
+    id="root"
   >
     <StoryFn />
   </div>

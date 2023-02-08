@@ -1,3 +1,4 @@
+import { Meta } from "@storybook/react";
 import React from "react";
 import { Alert } from ".";
 import { BodyLong, Heading as DsHeading } from "..";
@@ -20,7 +21,7 @@ export default {
       },
     },
   },
-};
+} as Meta<typeof Alert>;
 
 const variants: Array<"error" | "warning" | "info" | "success"> = [
   "error",
