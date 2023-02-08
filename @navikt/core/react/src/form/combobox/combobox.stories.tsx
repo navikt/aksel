@@ -16,11 +16,10 @@ export const Default = (props) => {
       <Combobox
         value={props.controlled ? value : undefined}
         onChange={props.controlled ? setValue : undefined}
-        label="komboboks"
+        label="Komboboks"
         size="medium"
         clearButton={true}
         variant="simple"
-        hideLabel={true}
         error={props.error && "error here"}
         isListOpen={false}
         aria-controls={id}

@@ -60,7 +60,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       onChange,
       onClear,
       className,
-      hideLabel = true,
+      hideLabel = false,
       description,
       label,
       children,
