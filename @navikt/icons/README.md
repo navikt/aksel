@@ -31,4 +31,4 @@ function App() {
 
 ## License
 
-[MIT](https://github.com/navikt/Designsystemet/blob/main/LICENCE)
+[MIT](https://github.com/navikt/aksel/blob/main/LICENCE)

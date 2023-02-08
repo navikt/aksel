@@ -197,7 +197,7 @@ function Links() {
         <a
           target="_blank"
           rel="noreferrer noopener"
-          href="https://github.com/navikt/Designsystemet/tree/main/%40navikt/icons"
+          href="https://github.com/navikt/aksel/tree/main/%40navikt/icons"
           className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
           onClick={() =>
             logAmplitudeEvent("link", {

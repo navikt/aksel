@@ -34,7 +34,7 @@ const ModalContent = ({ icon }: { icon: string }) => {
   }, [icon]);
 
   async function getBlob(icon: string) {
-    const iconUrl = `https://raw.githubusercontent.com/navikt/Designsystemet/main/%40navikt/icons/svg/${icon}.svg`;
+    const iconUrl = `https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${icon}.svg`;
     fetch(iconUrl)
       .then((r) => {
         return r.text();
@@ -134,7 +134,7 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
       <div className="mt-auto flex">
         <div className="text-text-default flex h-36 flex-1 items-center justify-center bg-white text-[6rem]">
           <Image
-            src={`https://raw.githubusercontent.com/navikt/Designsystemet/main/%40navikt/icons/svg/${icon}.svg`}
+            src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${icon}.svg`}
             decoding="sync"
             width="96px"
             height="96px"
@@ -146,7 +146,7 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
         </div>
         <div className="text-text-on-inverted flex h-36 flex-1 items-center justify-center bg-gray-900 text-[6rem]">
           <Image
-            src={`https://raw.githubusercontent.com/navikt/Designsystemet/main/%40navikt/icons/svg/${icon}.svg`}
+            src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${icon}.svg`}
             decoding="sync"
             className="invert"
             width="96px"

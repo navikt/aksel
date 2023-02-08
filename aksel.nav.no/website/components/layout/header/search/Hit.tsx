@@ -119,7 +119,7 @@ export function IconHit({
 
       <div className="hidden aspect-square w-16 place-items-center sm:grid">
         <Image
-          src={`https://raw.githubusercontent.com/navikt/Designsystemet/main/%40navikt/icons/svg/${hit.item.name}.svg`}
+          src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${hit.item.name}.svg`}
           decoding="sync"
           width="24px"
           height="24px"

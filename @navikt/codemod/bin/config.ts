@@ -6,7 +6,7 @@ export const cliConfig = createCLIConfig({
     {
       name: "migration",
       description:
-        "One of the choices from https://github.com/navikt/Designsystemet/blob/main/%40navikt/codemod/README.md",
+        "One of the choices from https://github.com/navikt/aksel/blob/main/%40navikt/codemod/README.md",
     },
     {
       name: "path",
