@@ -10,10 +10,8 @@ export const parameters = {
       locales: "",
     },
   },
-  viewMode: "docs",
   layout: "centered",
   backgrounds: {
-    default: "Canvas",
     values: [
       {
         name: "Canvas",
@@ -31,7 +29,6 @@ export const globalTypes = {
   theme: {
     name: "Theme",
     description: "Global theme for components",
-    defaultValue: "light",
     toolbar: {
       icon: "circlehollow",
       items: [

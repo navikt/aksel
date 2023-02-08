@@ -7,6 +7,8 @@ module.exports = {
   devServer: {
     stats: "errors-only",
   },
+  staticDirs: ["./public"],
+
   stories: () => [...getStories(), "./*.stories.mdx"],
   addons: [
     "@storybook/addon-a11y",
