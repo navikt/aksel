@@ -8,7 +8,7 @@
         NAVs designsystem + Aksel.nav.no
     </p>
     <div align="center">
-      <a href="https://master--5f801fb2aea7820022de2936.chromatic.com/">
+      <a href="https://main--5f801fb2aea7820022de2936.chromatic.com/">
           <img src="https://shields.io/badge/storybook-white?logo=storybook&style=flat"" />
       </a>
       <a href="https://github.com/navikt/Designsystemet/pulls">
@@ -50,24 +50,24 @@ Installer dependencies og bygg workspace
 yarn && yarn boot
 ```
 
-| Command                   | Script                                                                                                            |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `yarn boot`               | Bygger alle pakker                                                                                                |
-| `yarn storybook`          | Starter storybook                                                                                                 |
-| `yarn dev`                | Starter aksel-nettsiden [(Mer info)](https://github.com/navikt/Designsystemet/blob/master/aksel.nav.no/README.md) |
-| `yarn example:shadow-dom` | Starter demo-app med shadow-dom                                                                                   |
-| `yarn lint`               | Lints react and css workspaces                                                                                    |
-| `yarn test`               | Runs tests                                                                                                        |
-| `yarn clean`              | Fjerner genererte filer                                                                                           |
-| `yarn changeset`          | Ny versjon-entry [(how-to)](https://github.com/navikt/Designsystemet/blob/master/.changeset/README.md)            |
+| Command                   | Script                                                                                                          |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `yarn boot`               | Bygger alle pakker                                                                                              |
+| `yarn storybook`          | Starter storybook                                                                                               |
+| `yarn dev`                | Starter aksel-nettsiden [(Mer info)](https://github.com/navikt/Designsystemet/blob/main/aksel.nav.no/README.md) |
+| `yarn example:shadow-dom` | Starter demo-app med shadow-dom                                                                                 |
+| `yarn lint`               | Lints react and css workspaces                                                                                  |
+| `yarn test`               | Runs tests                                                                                                      |
+| `yarn clean`              | Fjerner genererte filer                                                                                         |
+| `yarn changeset`          | Ny versjon-entry [(how-to)](https://github.com/navikt/Designsystemet/blob/main/.changeset/README.md)            |
 
 ## Bidra
 
-Vi tar gjerne i mot PR-er [CONTRIBUTING.md](https://github.com/navikt/Designsystemet/blob/master/CONTRIBUTING.md)
+Vi tar gjerne i mot PR-er [CONTRIBUTING.md](https://github.com/navikt/Designsystemet/blob/main/CONTRIBUTING.md)
 
 ## Lisenser
 
-[MIT](https://github.com/navikt/Designsystemet/blob/master/LICENCE)
+[MIT](https://github.com/navikt/Designsystemet/blob/main/LICENCE)
 
 ## Codeowners
 

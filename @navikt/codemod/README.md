@@ -160,7 +160,7 @@ This codemod should only be ran once, since the size-scale will keep decreasing 
 
 ## License
 
-[MIT](https://github.com/navikt/Designsystemet/blob/master/LICENCE)
+[MIT](https://github.com/navikt/Designsystemet/blob/main/LICENCE)
 
 #
 

@@ -19,7 +19,7 @@
   ],
   "linked": [],
   "access": "public",
-  "baseBranch": "master",
+  "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": ["shadow-dom", "aksel.nav.no", "@navikt/ds-navno"],
 

@@ -1,11 +1,11 @@
 import { urlFor } from "@/lib";
+import { isNew } from "@/utils";
 import { Tag } from "@navikt/ds-react";
 import cl from "classnames";
+import { StatusTag } from "components/website-modules/StatusTag";
+import { SearchHit } from "lib/types/search";
 import Image from "next/image";
 import NextLink from "next/link";
-import { SearchHit } from "lib/types/search";
-import { StatusTag } from "components/website-modules/StatusTag";
-import { isNew } from "@/utils";
 
 export function Hit({
   hit,
@@ -119,7 +119,7 @@ export function IconHit({
 
       <div className="hidden aspect-square w-16 place-items-center sm:grid">
         <Image
-          src={`https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${hit.item.name}.svg`}
+          src={`https://raw.githubusercontent.com/navikt/Designsystemet/main/%40navikt/icons/svg/${hit.item.name}.svg`}
           decoding="sync"
           width="24px"
           height="24px"

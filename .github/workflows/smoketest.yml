@@ -2,7 +2,7 @@ name: Smoketest aksel.nav.no
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "aksel.nav.no/**"
 

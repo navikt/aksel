@@ -3,11 +3,11 @@ name: Visual Regression Tests
 on:
   push:
     branches:
-      - "master"
+      - "main"
     paths:
       - "@navikt/**"
   pull_request:
-    branches: [master, next]
+    branches: [main, next]
     paths:
       - "@navikt/**"
 
@@ -44,7 +44,7 @@ jobs:
         id: chromatic_tests
         continue-on-error: true
         with:
-          autoAcceptChanges: "master"
+          autoAcceptChanges: "main"
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
           exitZeroOnChanges: false

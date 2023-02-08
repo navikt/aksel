@@ -29,9 +29,9 @@ function App() {
 
 - [Designsystem documentation](https://aksel.nav.no/designsystem)
 - [Component-docs](https://aksel.nav.no/designsystem/side/oversikt-komponenter)
-- [Storybook](https://master--5f801fb2aea7820022de2936.chromatic.com/)
-- [ds-css README](https://github.com/navikt/Designsystemet/blob/master/%40navikt/core/css/README.md)
+- [Storybook](https://main--5f801fb2aea7820022de2936.chromatic.com/)
+- [ds-css README](https://github.com/navikt/Designsystemet/blob/main/%40navikt/core/css/README.md)
 
 ## License
 
-[MIT](https://github.com/navikt/Designsystemet/blob/master/LICENCE)
+[MIT](https://github.com/navikt/Designsystemet/blob/main/LICENCE)
