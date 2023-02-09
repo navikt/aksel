@@ -86,7 +86,7 @@ jobs:
           body: |
             ### [<img src="https://raw.githubusercontent.com/storybookjs/brand/main/logo/logo-storybook-inverse.svg" height="32"/>](${{steps.storybook_url.outputs.replaced}})
 
-            [${{ steps.vars.outputs.sha_short }}`](https://github.com/navikt/aksel/commit/de1a8e1e1) | ${{steps.chromatic_tests.outputs.componentCount}} stories
+            [${{ steps.vars.outputs.sha_short }}](https://github.com/navikt/aksel/commit/${{ steps.vars.outputs.sha_short }}) | ${{steps.chromatic_tests.outputs.componentCount}} komponenter | ${{steps.chromatic_tests.outputs.specCount}} stories
           edit-mode: replace
 
       - name: Create or update failed comment
@@ -100,5 +100,5 @@ jobs:
 
             ### [Endringer til review](${{steps.chromatic_tests.outputs.url}}): ${{steps.chromatic_tests.outputs.changeCount}}
 
-            [${{ steps.vars.outputs.sha_short }}`](https://github.com/navikt/aksel/commit/de1a8e1e1) | ${{steps.chromatic_tests.outputs.componentCount}} stories
+            [${{ steps.vars.outputs.sha_short }}](https://github.com/navikt/aksel/commit/${{ steps.vars.outputs.sha_short }}) | ${{steps.chromatic_tests.outputs.componentCount}} komponenter | ${{steps.chromatic_tests.outputs.specCount}} stories
           edit-mode: replace
