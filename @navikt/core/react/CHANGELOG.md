@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.1.7
+
+### Patch Changes
+
+- [`6ac97aeb3`](https://github.com/navikt/aksel/commit/6ac97aeb34735020e5a2083e51e836877abaefa3) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset rekkefølge på onValidate og onRangeChange i useRangepicker-hook
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.1.7
+
 ## 2.1.6
 
 ### Patch Changes
