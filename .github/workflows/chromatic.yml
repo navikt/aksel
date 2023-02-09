@@ -48,6 +48,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
           exitZeroOnChanges: false
+          buildScriptName: "build:storybook"
         env:
           STORYBOOK_GITHUB_SHA: ${{ github.sha }}
 
