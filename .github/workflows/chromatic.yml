@@ -84,13 +84,9 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            Chromatic build-output:
+            ### [<img src="https://raw.githubusercontent.com/storybookjs/brand/main/logo/logo-storybook-inverse.svg" height="32"/>](${{steps.storybook_url.outputs.replaced}})
 
-            - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
-            - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - :white_check_mark: No changes detected :white_check_mark:
-
-            commit: `${{ steps.vars.outputs.sha_short }}`
+            [${{ steps.vars.outputs.sha_short }}`](https://github.com/navikt/aksel/commit/de1a8e1e1) | ${{steps.chromatic_tests.outputs.componentCount}} stories
           edit-mode: replace
 
       - name: Create or update failed comment
@@ -100,11 +96,9 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            **Chromatic build-output**:
+            ### [<img src="https://raw.githubusercontent.com/storybookjs/brand/main/logo/logo-storybook-inverse.svg" height="32"/>](${{steps.storybook_url.outputs.replaced}})
 
-            - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
-            - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - :no_entry_sign: Changes detected :no_entry_sign:, review endringer.
+            ### [Endringer til review](${{steps.chromatic_tests.outputs.url}}): ${{steps.chromatic_tests.outputs.changeCount}}
 
-            commit: `${{ steps.vars.outputs.sha_short }}`
+            [${{ steps.vars.outputs.sha_short }}`](https://github.com/navikt/aksel/commit/de1a8e1e1) | ${{steps.chromatic_tests.outputs.componentCount}} stories
           edit-mode: replace
