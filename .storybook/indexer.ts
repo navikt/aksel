@@ -9,14 +9,13 @@ module.exports = (indexers) => {
 
   const exampleIndexer = async (fileName: string, opts) => {
     let code = readFileSync(fileName, "utf-8").toString();
-    code = code.replace("export default withDsExample(Example);", "");
+
     code = code.replace("export const args =", "const args =");
-    code = code.replace("const Example = ()", "export const Example = ()");
+
     code += `\nexport default { title: "Eksempler/${fileName
       .split("pages/eksempler/")[1]
       .replace(".tsx", "")}"  };\n`;
 
-    console.log(fileName);
     return loadCsf(code, { ...opts, fileName }).parse();
   };
 

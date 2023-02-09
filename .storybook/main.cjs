@@ -13,13 +13,12 @@ module.exports = {
   stories: () => [
     "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "./*.stories.mdx",
-    process.env.STORYBOOK_STORIES === "all"
-      ? "../aksel.nav.no/website/components/**/*.stories.tsx"
-      : "",
-
-    process.env.STORYBOOK_STORIES === "all"
-      ? "../aksel.nav.no/website/pages/eksempler/**/*.tsx"
-      : "",
+    ...(process.env.STORYBOOK_STORIES === "all"
+      ? [
+          "../aksel.nav.no/website/components/**/*.stories.tsx",
+          "../aksel.nav.no/website/pages/eksempler/**/*.tsx",
+        ]
+      : {}),
   ],
   addons: [
     "@storybook/addon-a11y",
