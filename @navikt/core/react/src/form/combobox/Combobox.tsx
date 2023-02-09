@@ -86,7 +86,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
     const [internalOptionsIndex, setInternalOptionsIndex] = useState(0);
     const filteredOptions = useMemo(
-      () => options?.filter((option) => option.includes(internalValue)),
+      () => options?.filter((option) => option.includes(internalValue)) || [],
       [internalValue, options]
     );
 
@@ -119,11 +119,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             e.preventDefault();
             handleClear({ trigger: "Escape", event: e });
           } else if (e.key === "Enter") {
-            setChips([...chips, e.target.value]);
-            handleClear({ trigger: "Escape", event: e });
+            setChips([...chips, filteredOptions[internalOptionsIndex]]);
           }
         },
-        [chips, handleClear]
+        [chips, filteredOptions, handleClear, internalOptionsIndex]
       ),
       wrapperRef
     );
@@ -247,6 +246,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                       i === internalOptionsIndex,
                   })}
                   key={o}
+                  onClick={() => setChips([...chips, o])}
                 >
                   <BodyShort size="medium">{o}</BodyShort>
                 </li>
