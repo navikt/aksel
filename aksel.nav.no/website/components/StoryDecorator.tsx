@@ -1,8 +1,8 @@
 import "../dist/tw.css";
-import "tailwindcss/tailwind.css";
 import { Provider } from "@navikt/ds-react";
 import { IdContext } from "components/website-modules/utils/contexts";
 
+/* console.log(css); */
 export const NextDecorator = ({ children }: { children: React.ReactNode }) => (
   <Provider>
     <IdContext.Provider value={{ id: "storybook-testid" }}>
