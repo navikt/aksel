@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
 import Bubble, { BubbleType } from "./Bubble";
-import { BodyLong, BodyShort } from "..";
+import { BodyLong, BodyShort } from "../typography";
 
 export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**

@@ -1,9 +1,9 @@
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { Switch } from "../index";
 
 export default {
-  title: "ds-react/form/Switch",
+  title: "ds-react/Switch",
   component: Switch,
   argTypes: {
     size: {
@@ -33,12 +33,14 @@ export default {
   },
 } as Meta;
 
-export const Default = (props) => {
-  return <Switch {...props}>Label text</Switch>;
-};
+export const Default = {
+  render: (props) => {
+    return <Switch {...props}>Label text</Switch>;
+  },
 
-Default.args = {
-  position: "right",
+  args: {
+    position: "right",
+  },
 };
 
 export const Small = () => {

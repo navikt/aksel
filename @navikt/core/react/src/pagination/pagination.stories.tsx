@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { Link, HashRouter as Router } from "react-router-dom";
 import Pagination from "./Pagination";
@@ -15,17 +16,19 @@ export default {
   },
 };
 
-export const Default = (props: any) => {
-  const [page, setPage] = useState(props.page);
-  return <Pagination {...props} page={page} onPageChange={setPage} />;
-};
+export const Default = {
+  render: (props: any) => {
+    const [page, setPage] = useState(props.page);
+    return <Pagination {...props} page={page} onPageChange={setPage} />;
+  },
 
-Default.args = {
-  page: 2,
-  count: 8,
-  siblingCount: 1,
-  boundaryCount: 1,
-  prevNextTexts: false,
+  args: {
+    page: 2,
+    count: 8,
+    siblingCount: 1,
+    boundaryCount: 1,
+    prevNextTexts: false,
+  },
 };
 
 export const PrevNextText = () => {
@@ -83,30 +86,32 @@ export const XSmall = () => {
   );
 };
 
-export const AsLink = () => {
-  const [page, setPage] = useState(1);
-  const props = {
-    page: 1,
-    count: 8,
-    siblingCount: 1,
-    boundaryCount: 1,
-  };
-  return (
-    <Pagination
-      {...props}
-      page={page}
-      onPageChange={setPage}
-      renderItem={(item) => (
-        <Pagination.Item {...item} as={Link} to={`?page=${item.page}`} />
-      )}
-    />
-  );
-};
+export const AsLink = {
+  render: () => {
+    const [page, setPage] = useState(1);
+    const props = {
+      page: 1,
+      count: 8,
+      siblingCount: 1,
+      boundaryCount: 1,
+    };
+    return (
+      <Pagination
+        {...props}
+        page={page}
+        onPageChange={setPage}
+        renderItem={(item) => (
+          <Pagination.Item {...item} as={Link} to={`?page=${item.page}`} />
+        )}
+      />
+    );
+  },
 
-AsLink.decorators = [
-  (Story) => (
-    <Router>
-      <Story />
-    </Router>
-  ),
-];
+  decorators: [
+    (Story) => (
+      <Router>
+        <Story />
+      </Router>
+    ),
+  ],
+};

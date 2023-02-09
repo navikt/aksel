@@ -1,7 +1,7 @@
 import { Close } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "..";
+import { OverridableComponent } from "../util/OverridableComponent";
 
 export interface RemovableChipsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

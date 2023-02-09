@@ -1,2 +1,2 @@
-export { default as ToggleGroup, ToggleGroupProps } from "./ToggleGroup";
-export { ToggleItemProps } from "./ToggleItem";
+export { default as ToggleGroup, type ToggleGroupProps } from "./ToggleGroup";
+export { type ToggleItemProps } from "./ToggleItem";
