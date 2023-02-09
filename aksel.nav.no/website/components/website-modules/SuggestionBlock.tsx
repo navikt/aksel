@@ -114,7 +114,7 @@ const options: {
     text: "Har du innspill til ikonet?",
     link:
       issueUrl +
-      "&labels=forespørsel+🥰%2Cnytt+✨&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
+      "&labels=forespørsel+🥰%2Cnytt+✨%2Cikoner+🖼&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
   },
   "komponent-ny": {
     text: "Denne komponenten er ny eller oppdatert. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
