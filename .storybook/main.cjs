@@ -7,6 +7,9 @@ module.exports = {
   stories: () => [
     "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "./*.stories.mdx",
+    process.env.STORYBOOK_STORIES === "all"
+      ? "../aksel.nav.no/website/components/**/*.stories.tsx"
+      : "",
   ],
   addons: [
     "@storybook/addon-a11y",
