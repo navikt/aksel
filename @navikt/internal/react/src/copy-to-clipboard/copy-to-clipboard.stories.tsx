@@ -33,23 +33,25 @@ export default {
   },
 } as Meta;
 
-export const Default = (props) => {
-  return (
-    <CopyToClipboard
-      popoverText={props.popoverText}
-      copyText={props?.copyText}
-      iconPosition={props?.iconPosition}
-      size={props?.size}
-      popoverPlacement={props?.popoverPlacement}
-    >
-      {props.text}
-    </CopyToClipboard>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <CopyToClipboard
+        popoverText={props.popoverText}
+        copyText={props?.copyText}
+        iconPosition={props?.iconPosition}
+        size={props?.size}
+        popoverPlacement={props?.popoverPlacement}
+      >
+        {props.text}
+      </CopyToClipboard>
+    );
+  },
 
-Default.args = {
-  popoverText: "Kopierte PI til clipboard",
-  copyText: "3.14",
+  args: {
+    popoverText: "Kopierte PI til clipboard",
+    copyText: "3.14",
+  },
 };
 
 export const WithText = () => (

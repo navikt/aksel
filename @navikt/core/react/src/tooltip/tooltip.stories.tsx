@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { Tooltip, Alert, Button, Search } from "..";
 
@@ -42,26 +42,28 @@ export const Demo = () => (
   </div>
 );
 
-export const Default = (props) => {
-  return (
-    <Tooltip
-      content="Tooltip example"
-      open={props?.open}
-      keys={props?.keys ? ["Cmd", "K"] : undefined}
-      placement={props?.placement}
-      arrow={props?.arrow}
-      delay={props?.delay}
-      offset={props?.offset}
-    >
-      <Button aria-describedby="test123">Tooltip</Button>
-    </Tooltip>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <Tooltip
+        content="Tooltip example"
+        open={props?.open}
+        keys={props?.keys ? ["Cmd", "K"] : undefined}
+        placement={props?.placement}
+        arrow={props?.arrow}
+        delay={props?.delay}
+        offset={props?.offset}
+      >
+        <Button aria-describedby="test123">Tooltip</Button>
+      </Tooltip>
+    );
+  },
 
-Default.args = {
-  keys: false,
-  arrow: true,
-  delay: 150,
+  args: {
+    keys: false,
+    arrow: true,
+    delay: 150,
+  },
 };
 
 export const Placement = () => {

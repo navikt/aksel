@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/Designsystemet.git"
+    "url": "git+https://github.com/navikt/aksel.git"
   },
   "sideEffects": false,
   "main": "./cjs/index.js",

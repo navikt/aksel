@@ -1,11 +1,11 @@
 name: E2E / Playwright Tests
 on:
   push:
-    branches: [master, next]
+    branches: [main, next]
     paths:
       - "aksel.nav.no/**"
   pull_request:
-    branches: [master, next]
+    branches: [main, next]
     paths:
       - "aksel.nav.no/**"
 

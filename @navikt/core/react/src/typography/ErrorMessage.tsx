@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
-import { OverridableComponent } from "..";
+import { OverridableComponent } from "../util/OverridableComponent";
 
 export interface ErrorMessageProps
   extends React.HTMLAttributes<HTMLParagraphElement> {

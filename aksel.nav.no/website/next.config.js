@@ -82,7 +82,7 @@ const config = () =>
           {
             source: "/storybook",
             destination:
-              "https://master--5f801fb2aea7820022de2936.chromatic.com/",
+              "https://main--5f801fb2aea7820022de2936.chromatic.com/",
             permanent: true,
           },
           {

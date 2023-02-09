@@ -5,7 +5,7 @@
   "author": "Aksel | NAV designsystem team",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/Designsystemet.git"
+    "url": "git+https://github.com/navikt/aksel.git"
   },
   "keywords": [
     "Icons",

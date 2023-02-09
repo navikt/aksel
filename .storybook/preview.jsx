@@ -3,18 +3,15 @@ import "@navikt/ds-css-internal/index.css";
 import "./layout.css";
 
 export const parameters = {
-  /* actions: { argTypesRegex: "^on[A-Z].*" }, */
   options: {
     storySort: {
       method: "",
-      order: ["Intro", "ds-icons", "ds-react", ["form"], ["Default"]],
+      order: ["Intro", "ds-react", ["form"], ["Default"], "ds-icons"],
       locales: "",
     },
   },
-  viewMode: "docs",
   layout: "centered",
   backgrounds: {
-    default: "Canvas",
     values: [
       {
         name: "Canvas",
@@ -32,7 +29,6 @@ export const globalTypes = {
   theme: {
     name: "Theme",
     description: "Global theme for components",
-    defaultValue: "light",
     toolbar: {
       icon: "circlehollow",
       items: [
@@ -45,7 +41,11 @@ export const globalTypes = {
 };
 
 export const withTheme = (StoryFn, context) => (
-  <div data-theme={context.parameters.theme || context.globals.theme} lang="no">
+  <div
+    data-theme={context.parameters.theme || context.globals.theme || "light"}
+    lang="no"
+    id="root"
+  >
     <StoryFn />
   </div>
 );
