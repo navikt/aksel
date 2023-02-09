@@ -1,3 +1,6 @@
+const path = require("path");
+const { mergeConfig } = require("vite");
+
 module.exports = {
   devServer: {
     stats: "errors-only",
@@ -46,5 +49,33 @@ module.exports = {
     check: false,
     checkOptions: {},
     reactDocgen: false,
+  },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      define: { "process.env": {} },
+      resolve: {
+        alias: [
+          /* {
+            find: "@",
+            replacement: path.resolve(__dirname, "./src"),
+          },
+          {
+            find: "@assets",
+            replacement: path.resolve(__dirname, "./src/assets"),
+          },
+          {
+            find: "@components",
+            replacement: path.resolve(__dirname, "./src/components"),
+          }, */
+          {
+            find: "components",
+            replacement: path.resolve(
+              __dirname,
+              "../aksel.nav.no/website/components"
+            ),
+          },
+        ],
+      },
+    });
   },
 };
