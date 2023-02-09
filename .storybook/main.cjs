@@ -1,7 +1,10 @@
+const storyIndexers = require("./indexer");
+
 const path = require("path");
 const { mergeConfig } = require("vite");
 
 module.exports = {
+  storyIndexers,
   devServer: {
     stats: "errors-only",
   },
@@ -12,6 +15,10 @@ module.exports = {
     "./*.stories.mdx",
     process.env.STORYBOOK_STORIES === "all"
       ? "../aksel.nav.no/website/components/**/*.stories.tsx"
+      : "",
+
+    process.env.STORYBOOK_STORIES === "all"
+      ? "../aksel.nav.no/website/pages/eksempler/**/*.tsx"
       : "",
   ],
   addons: [
@@ -41,6 +48,7 @@ module.exports = {
   },
   features: {
     storyStoreV7: true,
+    buildStoriesJson: true,
   },
   docs: {
     autodocs: "tag",
