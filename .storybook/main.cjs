@@ -55,14 +55,8 @@ module.exports = {
       define: { "process.env": {} },
       resolve: {
         alias: [
-          /* {
-            find: "@",
-            replacement: path.resolve(__dirname, "./src"),
-          },
-          {
-            find: "@assets",
-            replacement: path.resolve(__dirname, "./src/assets"),
-          },
+          /*
+          // Example
           {
             find: "@components",
             replacement: path.resolve(__dirname, "./src/components"),
