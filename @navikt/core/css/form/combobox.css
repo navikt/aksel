@@ -8,6 +8,50 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  border: 1px solid black;
-  padding: 4px;
+}
+
+.navds-combobox__list {
+  list-style: none;
+  margin: 0;
+  border: var(--a-border-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1px;
+  box-shadow: var(--a-shadow-large);
+  border-radius: 4px;
+}
+
+.navds-combobox__list--closed {
+  display: none;
+}
+
+.navds-combobox__list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  width: 100%;
+}
+
+.navds-combobox__list-item:hover,
+.navds-combobox__list-item--selected {
+  background-color: var(--a-surface-selected);
+}
+
+.navds-combobox__list-item::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--a-border-default);
+  border-radius: var(--a-border-radius-medium);
+}
+
+.navds-combobox__list-item-selected::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--a-border-default);
+  border-radius: var(--a-border-radius-medium);
 }

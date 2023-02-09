@@ -3,6 +3,15 @@ import React, { useState, useId } from "react";
 
 import { Combobox } from "../../index";
 
+const options = [
+  "Apples",
+  "Bananas",
+  "Grapes",
+  "Oranges",
+  "Pears",
+  "Pineapples",
+];
+
 export default {
   title: "ds-react/Combobox",
   component: Combobox,
@@ -22,7 +31,8 @@ export const Default = (props) => {
         variant="simple"
         error={props.error && "error here"}
         isListOpen={false}
-        aria-controls={id}
+        options={options}
+        id={id}
       />
     </div>
   );

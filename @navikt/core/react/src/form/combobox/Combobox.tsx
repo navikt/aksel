@@ -28,6 +28,7 @@ export type ComboboxClearEvent =
 
 export interface ComboboxProps extends SearchProps {
   isListOpen: boolean;
+  options?: string[];
 }
 
 interface ComboboxComponent
@@ -70,6 +71,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultValue,
       isListOpen,
       id,
+      options,
       ...rest
     } = props;
 
@@ -77,13 +79,22 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const mergedRef = useMemo(() => mergeRefs([comboboxRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
     const [chips, setChips] = useState<string[]>([]);
+    const [isInternalListOpen, setInternalListOpen] =
+      useState<boolean>(isListOpen);
 
-    const [internalValue, setInternalValue] = useState(defaultValue ?? "");
+    const [internalValue, setInternalValue] = useState<string>(
+      defaultValue ? String(defaultValue) : ""
+    );
+    const filteredOptions = useMemo(
+      () => options?.filter((option) => option.includes(internalValue)),
+      [internalValue, options]
+    );
 
     const handleChange = useCallback(
       (v: string) => {
         value === undefined && setInternalValue(v);
         onChange?.(v);
+        setInternalListOpen(!!v);
       },
       [onChange, value]
     );
@@ -189,7 +200,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               onChange={(e) => handleChange(e.target.value)}
               type="search"
               role="combobox"
-              aria-controls={isListOpen ? id : ""}
+              aria-controls={`${id}-options`}
               aria-expanded={isListOpen}
               className={cl(
                 className,
@@ -213,6 +224,20 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               </button>
             )}
           </div>
+          {filteredOptions && (
+            <ul
+              className={cl("navds-combobox__list", {
+                "navds-combobox__list--closed": !isInternalListOpen,
+              })}
+              id={`${id}-options`}
+            >
+              {filteredOptions.map((o) => (
+                <li className="navds-combobox__list-item" key={o}>
+                  <BodyShort size="medium">{o}</BodyShort>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <div
           className="navds-form-field__error"
