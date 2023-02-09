@@ -20,7 +20,8 @@
     "test": "jest",
     "playwright": "playwright test",
     "test:watch": "jest --watch",
-    "backup": "ts-node scripts/backup.js"
+    "backup": "ts-node scripts/backup.js",
+    "watch:tw": "yarn tailwindcss -i ./styles/index.css -o ./dist/tw.css --watch"
   },
   "dependencies": {
     "@sanity/block-content-to-react": "^3.0.0",
