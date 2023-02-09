@@ -2,6 +2,7 @@ import { Close } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, {
   forwardRef,
+  InputHTMLAttributes,
   useCallback,
   useMemo,
   useRef,
@@ -17,22 +18,32 @@ import {
   omit,
   useEventListener,
 } from "../..";
-import { SearchProps } from "../search/Search";
-import { useFormField } from "../useFormField";
+import { FormFieldProps, useFormField } from "../useFormField";
 
 export type ComboboxClearEvent =
   | {
       trigger: "Click";
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
     }
-  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
+  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> }
+  | { trigger: "Enter"; event: React.KeyboardEvent<HTMLDivElement> };
 
-export interface ComboboxProps extends SearchProps {
+export interface ComboboxProps
+  extends FormFieldProps,
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
   isListOpen: boolean;
   options: any[];
   selectedOptions: string[];
   setOptions: React.Dispatch<React.SetStateAction<any[]>>;
   setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
+  onClear?: (e: ComboboxClearEvent) => void;
+  variant?: "primary" | "secondary" | "simple";
+  clearButton?: boolean;
+  clearButtonLabel?: string;
+  onChange?: (value: string) => void;
+  hideLabel?: boolean;
+  label: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 interface ComboboxComponent
