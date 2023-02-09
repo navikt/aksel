@@ -4,7 +4,7 @@ import { akselTemaDocs, getAkselTema, SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Detail, Heading, Label } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
@@ -166,6 +166,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                           (x: ArtiklerT) => (
                             <ArtikkelCard
                               {...x}
+                              level="3"
                               source={page?.slug?.current}
                               key={x._id}
                               variant="god-praksis"

@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 
 const withTM = require("next-transpile-modules")(["@navikt/ds-tokens"]);
-const oldRedirects = require("./redirects.json");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -14,7 +13,7 @@ const ContentSecurityPolicy = `
   script-src 'self' https://in2.taskanalytics.com/tm.js 'nonce-4e1aa203a32e' 'unsafe-eval';
   style-src 'self' 'unsafe-inline';
   report-uri https://sentry.gc.nav.no/api/113/envelope/?sentry_key=d35bd60e413c489ca0f2fd389b4e6e5e&sentry_version=7;
-  connect-src 'self' wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://sentry.gc.nav.no https://*.algolia.net https://*.algolianet.com https://in2.taskanalytics.com/03346;
+  connect-src 'self' https://raw.githubusercontent.com/navikt/ wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://sentry.gc.nav.no https://*.algolia.net https://*.algolianet.com https://in2.taskanalytics.com/03346;
   frame-ancestors localhost:3333 'self' localhost:3000 https://verktoykasse.sanity.studio/;
   media-src 'self' cdn.sanity.io;
   frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.dev.nav.no/;
@@ -51,40 +50,6 @@ const securityHeaders = [
   },
 ];
 
-const manualRedirects = [
-  ["/designsystem/side/farge-tokens/:slug*", "/designsystem/side/color"],
-  [
-    "/designsystem/side/innholdsstrategi-person",
-    "/artikkel/innholdsstrategi-for-nav-no",
-  ],
-  [
-    "/designsystem/side/beredskapsplan-navno",
-    "/artikkel/beredskapsplan-for-nav-no",
-  ],
-  ["/designsystem/side/produktsider", "/artikkel/produktside-sidetype"],
-  [
-    "/designsystem/side/livssituasjonssider",
-    "/artikkel/situasjonsside-sidetype",
-  ],
-  ["/designsystem/side/omrade", "/artikkel/omradeside-sidetype"],
-  ["/designsystem/side/temaartikkel", "/artikkel/temaartikkel-sidetype"],
-  [
-    "/designsystem/side/slik-gjor-du",
-    "/artikkel/slik-gjor-du-det-innholdstype",
-  ],
-  ["/designsystem/side/kalkulator", "/artikkel/kalkulator-sidetype"],
-  ["/designsystem/side/veiviser", "/artikkel/veiviser-innholdstype"],
-  ["/designsystem/side/oversikt", "/artikkel/oversikt-innholdstype"],
-  [
-    "/designsystem/side/forside-til-personbrukere",
-    "/artikkel/forside-til-personbrukere-pa-nav-no",
-  ],
-  [
-    "/designsystem/side/prinsipper-for-interne-flater",
-    "/artikkel/prinsipper-for-brukeropplevelse-pa-interne-flater",
-  ],
-];
-
 const config = () =>
   withBundleAnalyzer(
     withTM({
@@ -95,6 +60,9 @@ const config = () =>
         azureAppIssuer: process.env.AZURE_OPENID_CONFIG_ISSUER,
         azureAppWellKnownUrl: process.env.AZURE_APP_WELL_KNOWN_URL,
         azureAppJWK: process.env.AZURE_APP_JWK,
+      },
+      publicRuntimeConfig: {
+        NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
       },
       async headers() {
         return [
@@ -114,7 +82,7 @@ const config = () =>
           {
             source: "/storybook",
             destination:
-              "https://master--5f801fb2aea7820022de2936.chromatic.com/",
+              "https://main--5f801fb2aea7820022de2936.chromatic.com/",
             permanent: true,
           },
           {
@@ -127,21 +95,6 @@ const config = () =>
             destination: "/api/preview?slug=:slug*",
             permanent: true,
           },
-          ...manualRedirects.map((x) => ({
-            source: x[0],
-            destination: x[1],
-            permanent: false,
-          })),
-          ...Object.values(oldRedirects).reduce((old, value) => {
-            return [
-              ...old,
-              ...value.sources.map((source) => ({
-                source,
-                destination: value.destitation,
-                permanent: false,
-              })),
-            ];
-          }, []),
         ];
       },
 
@@ -154,7 +107,7 @@ const config = () =>
         return config;
       },
       images: {
-        domains: ["cdn.sanity.io"],
+        domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
         dangerouslyAllowSVG: true,
       },
       /* swcMinify: true,

@@ -1,6 +1,6 @@
-import { groups } from "./presets";
 import { defineField, defineType } from "sanity";
 import { allArticleDocsRef } from "../../config";
+import { groups } from "./presets";
 import { SEOFields } from "./presets/seo";
 
 export const Forside = defineType({
@@ -74,6 +74,20 @@ export const Forside = defineType({
               },
             },
           ],
+          preview: {
+            select: {
+              ref: "ref.title",
+              intro: "intro",
+              pictogram: "ref.pictogram",
+            },
+            prepare({ ...props }) {
+              return {
+                title: props?.ref,
+                subtitle: props?.intro,
+                media: props?.pictogram,
+              };
+            },
+          },
         },
       ],
     }),

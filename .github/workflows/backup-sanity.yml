@@ -8,10 +8,10 @@ jobs:
   execute:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to retrieve git history
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 14
 
@@ -26,7 +26,7 @@ jobs:
         run: cd aksel.nav.no/website && yarn
 
       - name: Export dataset
-        run: cd aksel.nav.no/website && SANITY_TOKEN=${{secrets.SANITY_DATASET_EDITOR_TOKEN}} yarn backup
+        run: cd aksel.nav.no/website && SANITY_PREVIEW_TOKEN=${{secrets.SANITY_DATASET_EDITOR_TOKEN}} yarn backup
       - name: Upload GCP bucket
         uses: "google-github-actions/auth@v0"
         with:

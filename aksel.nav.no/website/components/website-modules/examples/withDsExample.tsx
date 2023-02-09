@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
 import styles from "./examples.module.css";
-import cl from "classnames";
+import cl from "clsx";
 
 export const withDsExample = (
   Component: ComponentType,

@@ -3,6 +3,7 @@ import {
   AccessDeniedIcon,
   BookIcon,
   BulbOutlineIcon,
+  ChartUpwardIcon,
   CommentIcon,
   JoystickIcon,
   OkHandIcon,
@@ -20,9 +21,10 @@ import {
 } from "../../config";
 
 import { FeedbackPanes } from "./feedback";
-import { GodPraksisPanes } from "./god-praksis";
-import { PanesWithCount } from "./with-count";
 import { FeedbackView } from "./FeedbackPreview";
+import { GodPraksisPanes } from "./god-praksis";
+import Metrics from "./Metrics";
+import { PanesWithCount } from "./with-count";
 
 /* import { WebPreview, JsonView } from './previews' */
 const filtered = [
@@ -48,6 +50,7 @@ const filtered = [
   "skrivehjelp",
   "publication_flow",
   "aksel_feedback",
+  "metrics",
 ];
 
 export const structure = async (
@@ -81,15 +84,75 @@ export const structure = async (
     (x: Role) => x.name === "god-praksis-forfatter"
   ); */
 
+  const feedback = await getClient({ apiVersion: "2021-06-07" }).fetch(
+    `*[_type == "aksel_feedback" && $id in doc_ref->contributors[]->user_id.current]{_id, behandlet}`,
+    { id: currentUser?.id }
+  );
+
   return S.list()
     .title("Innholdstyper")
     .items([
       ...(editor
+        ? [S.documentListItem().schemaType(`editor`).id(editor._id)]
+        : []),
+      ...(feedback.length > 0
         ? [
-            S.documentListItem().schemaType(`editor`).id(editor._id),
+            S.listItem()
+              .title(
+                `Nye tilbakemeldinger (${
+                  feedback.filter(
+                    (x) => !x._id.includes("draft") && x.behandlet === false
+                  ).length
+                })`
+              )
+              .icon(CommentIcon)
+              .child(
+                S.list()
+                  .title("Tilbakemeldinger")
+                  .items([
+                    S.listItem()
+                      .title(
+                        `Nye tilbakemeldinger (${
+                          feedback.filter(
+                            (x) =>
+                              !x._id.includes("draft") && x.behandlet === false
+                          ).length
+                        })`
+                      )
+                      .child(
+                        S.documentList()
+                          .title(`Nye tilbakemeldinger`)
+                          .filter(
+                            `_type == 'aksel_feedback' && behandlet == false && _id in $ids`
+                          )
+                          .params({
+                            ids: feedback.map((x) => x?._id),
+                          })
+                      ),
+                    S.listItem()
+                      .title(
+                        `Ferdig behandlet (${
+                          feedback.filter(
+                            (x) =>
+                              !x._id.includes("draft") && x.behandlet === true
+                          ).length
+                        })`
+                      )
+                      .child(
+                        S.documentList()
+                          .title("Ferdig")
+                          .filter(
+                            `_type == 'aksel_feedback' && behandlet == true && _id in $ids`
+                          )
+                          .params({
+                            ids: feedback.map((x) => x?._id),
+                          })
+                      ),
+                  ])
+              ),
             S.divider(),
           ]
-        : []),
+        : [S.divider()]),
       S.listItem()
         .title("God Praksis")
         .icon(OkHandIcon)
@@ -276,6 +339,13 @@ export const structure = async (
                       .schemaType(`publication_flow`)
                       .icon(FileContent)
                       .id(`publication_flow`),
+                    S.listItem()
+                      .title("Metrikker")
+                      .child(
+                        S.documentList()
+                          .title("Metrikker")
+                          .filter(`_type == 'metrics'`)
+                      ),
                   ])
               ),
           ]
@@ -327,7 +397,7 @@ export const resolveProductionUrl = (doc) => {
   }
 };
 
-export const defaultDocumentNode = (S, { schemaType, getClient }) => {
+export const defaultDocumentNode = (S, { schemaType }) => {
   if (
     [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
       schemaType
@@ -350,6 +420,13 @@ export const defaultDocumentNode = (S, { schemaType, getClient }) => {
         .component(FeedbackView)
         .icon(CommentIcon)
         .title("Tilbakemeldinger"),
+      S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
+    ]);
+  }
+  if (schemaType === "aksel_forside") {
+    return S.document().views([
+      S.view.form(),
+      S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
     ]);
   }
   return S.document().views([S.view.form()]);

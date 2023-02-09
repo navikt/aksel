@@ -1,0 +1,16 @@
+name: Innspill til komponent
+description: Send inn innspill til komponent
+title: "[Innspill til komponent]: "
+labels: ["forespørsel 🥰", "komponenter 🧩", "nytt ✨", "beta 🧪"]
+assignees:
+  - olejorgenbakken
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Takk for at du bidrar inn i Aksel!
+  - type: textarea
+    id: feeback
+    attributes:
+      label: Tilbakemelding
+      description: Beskriv hvilke tilbakemeldinger du har til komponenten

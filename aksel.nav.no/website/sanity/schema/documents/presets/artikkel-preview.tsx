@@ -1,5 +1,5 @@
 import differenceInMonths from "date-fns/differenceInMonths";
-import differenceInDays from "date-fns/differenceInDays";
+/* import differenceInDays from "date-fns/differenceInDays"; */
 
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
@@ -24,18 +24,12 @@ export const artikkelPreview = (_type: string) => {
           ].includes(type) &&
           updateInfo
         ) {
-          const diff = Math.abs(
+          /* const diff = Math.abs(
             differenceInDays(new Date(updateInfo), new Date())
-          );
+          ); */
           return {
             title: heading,
-            subtitle: `${
-              isAfter(updateInfo)
-                ? "UTDATERT"
-                : diff === 0
-                ? "I dag"
-                : `${diff} dager`
-            } | ${_type} ${
+            subtitle: `${isAfter(updateInfo) ? "UTDATERT |" : ""}  ${_type} ${
               tema ?? kategori
                 ? `${(tema ?? kategori) && "/ "}${tema ?? kategori ?? ``}`
                 : ""

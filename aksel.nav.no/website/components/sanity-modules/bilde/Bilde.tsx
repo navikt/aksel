@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { BodyLong, Link } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import React from "react";
 import { urlFor, SanityT } from "@/lib";
 import { withErrorBoundary } from "@/error-boundary";

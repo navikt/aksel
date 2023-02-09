@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import { _checkAuth } from "@sanity/preview-kit";
+import { useEffect, useState } from "react";
 import { config } from "../../../lib/sanity/config";
 
 export const useDebounce = (value: any) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
-    const timeOut = setTimeout(() => setDebouncedValue(value), 200);
+    const timeOut = setTimeout(() => setDebouncedValue(value), 300);
 
     return () => clearTimeout(timeOut);
   }, [value]);

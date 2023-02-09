@@ -1,0 +1,16 @@
+name: Innspill til ikon
+description: Send inn innspill til ikon
+title: "[Tilbakemelding på ikon]: "
+labels: ["forespørsel 🥰", "ikoner 🖼️"]
+assignees:
+  - olejorgenbakken
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Takk for at du bidrar inn i Aksel!
+  - type: textarea
+    id: feeback
+    attributes:
+      label: Tilbakemelding
+      description: Beskriv hvilke tilbakemeldinger du har til ikonet

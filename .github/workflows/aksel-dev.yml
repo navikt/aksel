@@ -6,19 +6,45 @@ on:
       - next
 
 env:
-  IMAGE: ghcr.io/navikt/designsystemet
+  IMAGE: ghcr.io/navikt/aksel
 
 jobs:
+  snyk-monitor:
+    name: monitor dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Snyk to check for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
+          args: --org=designsystemet --severity-threshold=high
+  snyk-test:
+    name: analyze dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+          args: --org=designsystemet --severity-threshold=high
   build_and_deploy:
     name: Build and deploy to dev-gcp
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: "14"
-      - uses: actions/checkout@v2
-        with:
-          ref: "next"
+          node-version: "16"
+      - uses: actions/checkout@v3
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
@@ -40,11 +66,10 @@ jobs:
       - name: Build application
         run: |
           yarn boot
-          yarn docgen
           yarn workspace aksel.nav.no build:next
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # Use commit-sha1 instead of tag for security concerns
         with:
           registry: ghcr.io
           username: ${{ github.actor }}

@@ -3,7 +3,7 @@ import { withErrorBoundary } from "@/error-boundary";
 import { SanityT, urlFor } from "@/lib";
 import { ErrorFilled, SuccessFilled, WarningFilled } from "@navikt/ds-icons";
 import { BodyShort } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import React from "react";
 
 const GetIcon = (s: string) => {

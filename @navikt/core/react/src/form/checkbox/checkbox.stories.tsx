@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { Checkbox, CheckboxGroup } from "../../index";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 
 export default {
-  title: "ds-react/Form/Checkbox",
+  title: "ds-react/Checkbox",
   component: Checkbox,
   subcomponents: {
     CheckboxGroup,
@@ -13,69 +14,73 @@ export default {
   },
 } as Meta;
 
-export const Default = (props) => {
-  const [state, setState] = useState(["checkbox1"]);
+export const Default = {
+  render: (props) => {
+    const [state, setState] = useState(["checkbox1"]);
 
-  return (
-    <div>
-      <CheckboxGroup
-        legend={props.legend}
-        description={props.description}
-        value={props.controlled ? state : undefined}
-        onChange={props.controlled ? setState : undefined}
-        hideLegend={props.hideLegend}
-        error={props.errorGroup ? "Errormelding for checkboxgruppe" : undefined}
-        size={props?.size}
-      >
-        <Checkbox
-          value="checkbox1"
-          indeterminate={props.indeterminate}
-          hideLabel={props.hideLabel}
-        >
-          {props.children || "Apple"}
-        </Checkbox>
-        <Checkbox
-          value="checkbox2"
-          error={props.errorSingle}
-          description={
-            props.checkboxDescription
-              ? "Quis laborum culpa enim amet cillum veniam."
-              : undefined
+    return (
+      <div>
+        <CheckboxGroup
+          legend={props.legend}
+          description={props.description}
+          value={props.controlled ? state : undefined}
+          onChange={props.controlled ? setState : undefined}
+          hideLegend={props.hideLegend}
+          error={
+            props.errorGroup ? "Errormelding for checkboxgruppe" : undefined
           }
-          indeterminate={props.indeterminate}
-          hideLabel={props.hideLabel}
+          size={props?.size}
         >
-          {props.children || "Orange"}
-        </Checkbox>
-        <Checkbox
-          value="checkbox3"
-          indeterminate={props.indeterminate}
-          hideLabel={props.hideLabel}
-        >
-          {props.children || "Banana"}
-        </Checkbox>
-        <Checkbox
-          value="checkbox4"
-          indeterminate={props.indeterminate}
-          hideLabel={props.hideLabel}
-        >
-          {props.children || "Melon"}
-        </Checkbox>
-      </CheckboxGroup>
-    </div>
-  );
-};
+          <Checkbox
+            value="checkbox1"
+            indeterminate={props.indeterminate}
+            hideLabel={props.hideLabel}
+          >
+            {props.children || "Apple"}
+          </Checkbox>
+          <Checkbox
+            value="checkbox2"
+            error={props.errorSingle}
+            description={
+              props.checkboxDescription
+                ? "Quis laborum culpa enim amet cillum veniam."
+                : undefined
+            }
+            indeterminate={props.indeterminate}
+            hideLabel={props.hideLabel}
+          >
+            {props.children || "Orange"}
+          </Checkbox>
+          <Checkbox
+            value="checkbox3"
+            indeterminate={props.indeterminate}
+            hideLabel={props.hideLabel}
+          >
+            {props.children || "Banana"}
+          </Checkbox>
+          <Checkbox
+            value="checkbox4"
+            indeterminate={props.indeterminate}
+            hideLabel={props.hideLabel}
+          >
+            {props.children || "Melon"}
+          </Checkbox>
+        </CheckboxGroup>
+      </div>
+    );
+  },
 
-Default.args = {
-  controlled: false,
-  legend: "Legend-tekst",
-  checkboxDescription: false,
-  hideLabel: false,
-  hideLegend: false,
-  errorSingle: false,
-  errorGroup: false,
-  children: "",
-  description: "",
+  args: {
+    controlled: false,
+    legend: "Legend-tekst",
+    checkboxDescription: false,
+    hideLabel: false,
+    hideLegend: false,
+    errorSingle: false,
+    errorGroup: false,
+    children: "",
+    description: "",
+  },
 };
 
 export const Group = () => (

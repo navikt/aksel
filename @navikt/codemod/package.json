@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-codemod",
-  "version": "2.1.0",
+  "version": "2.1.7",
   "description": "Aksel codemods for NAVs designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -28,10 +28,10 @@
   "bin": "./bin/ds-codemod.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/Designsystemet.git",
+    "url": "git+https://github.com/navikt/aksel.git",
     "directory": "@navikt/codemod"
   },
-  "homepage": "https://github.com/navikt/Designsystemet/tree/master/@navikt/codemod",
+  "homepage": "https://github.com/navikt/aksel/tree/main/@navikt/codemod",
   "dependencies": {
     "chalk": "4.1.0",
     "cheerio": "1.0.0-rc.9",

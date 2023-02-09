@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { dateStr } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { SanityT, urlFor } from "@/lib";
-import cl from "classnames";
+import cl from "clsx";
 import { getImage } from "components/website-modules/utils/get-image";
 import { SanityBlockContent } from "@/sanity-block";
 

@@ -1,7 +1,7 @@
 import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import Head from "next/head";
 import { Footer } from "..";
@@ -22,6 +22,11 @@ const AkselPrinsippTemplate = ({
   title: string;
 }): JSX.Element => {
   if (!data.content || !data.heading) {
+    console.warn(
+      `Artikkelen har ikke ${
+        !data.content ? "innhold" : "overskrift"
+      }, så den kan ikke vises.`
+    );
     return null;
   }
 

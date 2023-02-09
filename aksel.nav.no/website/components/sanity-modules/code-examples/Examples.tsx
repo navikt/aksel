@@ -2,7 +2,7 @@ import { capitalize, Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
 import { BodyLong, Link, Chips } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import { useEffect, useState } from "react";
 import { CodeSandbox } from "./CodeSandbox";
 

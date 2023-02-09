@@ -1,8 +1,8 @@
 import React from "react";
 import { Select } from "../index";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 export default {
-  title: "ds-react/form/Select",
+  title: "ds-react/Select",
   component: Select,
   argTypes: {
     size: {
@@ -34,15 +34,17 @@ const content = (
   </>
 );
 
-export const Default = (props) => {
-  return (
-    <Select {...props} label="Ipsum enim quis culpa">
-      {content}
-    </Select>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <Select {...props} label="Ipsum enim quis culpa">
+        {content}
+      </Select>
+    );
+  },
 
-Default.args = {};
+  args: {},
+};
 
 export const Small = () => {
   return (

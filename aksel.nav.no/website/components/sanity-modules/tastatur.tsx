@@ -1,6 +1,6 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
-import cl from "classnames";
+import cl from "clsx";
 import React from "react";
 
 const KBD = (props: React.HTMLAttributes<HTMLElement>) => (

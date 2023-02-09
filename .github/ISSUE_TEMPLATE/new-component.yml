@@ -1,0 +1,24 @@
+name: Ny komponent
+description: Send et ønske om en eller flere nye komponenter
+title: "[Ny komponent]: "
+labels: ["nytt ✨", "forespørsel 🥰", "komponenter 🧩"]
+assignees:
+  - olejorgenbakken
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Takk for at du bidrar inn i Aksel!
+  - type: input
+    id: title
+    attributes:
+      label: Navn på komponent
+      description: Hva er navnet på komponenten du ønsker deg?
+      placeholder: eks. datepicker
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Eksempel på komponenten
+      description: Send en lenke til eksempler på komponenten

@@ -13,8 +13,8 @@ import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
-import { BetaWarning } from "components/website-modules/BetaWarning";
 import { StatusTag } from "components/website-modules/StatusTag";
+import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
@@ -23,45 +23,45 @@ import NotFotfund from "../404";
 const kodepakker = {
   "ds-react": {
     title: "@navikt/ds-react",
-    git: "https://github.com/navikt/Designsystemet/tree/master/%40navikt/core/react",
+    git: "https://github.com/navikt/aksel/tree/main/%40navikt/core/react",
     changelog:
-      "https://github.com/navikt/Designsystemet/blob/master/%40navikt/core/react/CHANGELOG.md",
+      "https://github.com/navikt/aksel/blob/main/%40navikt/core/react/CHANGELOG.md",
   },
   "ds-css": {
     title: "@navikt/ds-css",
-    git: "https://github.com/navikt/Designsystemet/tree/master/%40navikt/core/css",
+    git: "https://github.com/navikt/aksel/tree/main/%40navikt/core/css",
     changelog:
-      "https://github.com/navikt/Designsystemet/blob/master/%40navikt/core/css/CHANGELOG.md",
+      "https://github.com/navikt/aksel/blob/main/%40navikt/core/css/CHANGELOG.md",
   },
   "ds-react-internal": {
     title: "@navikt/ds-react-internal",
-    git: "https://github.com/navikt/Designsystemet/tree/master/%40navikt/internal/react",
+    git: "https://github.com/navikt/aksel/tree/main/%40navikt/internal/react",
     changelog:
-      "https://github.com/navikt/Designsystemet/blob/master/%40navikt/internal/react/CHANGELOG.md",
+      "https://github.com/navikt/aksel/blob/main/%40navikt/internal/react/CHANGELOG.md",
   },
   "ds-css-internal": {
     title: "@navikt/ds-css-internal",
-    git: "https://github.com/navikt/Designsystemet/tree/master/%40navikt/internal/css",
+    git: "https://github.com/navikt/aksel/tree/main/%40navikt/internal/css",
     changelog:
-      "https://github.com/navikt/Designsystemet/blob/master/%40navikt/internal/css/CHANGELOG.md",
+      "https://github.com/navikt/aksel/blob/main/%40navikt/internal/css/CHANGELOG.md",
   },
   "ds-icons": {
     title: "@navikt/ds-reaciconst",
-    git: "https://github.com/navikt/Designsystemet/tree/master/%40navikt/icons",
+    git: "https://github.com/navikt/aksel/tree/main/%40navikt/icons",
     changelog:
-      "https://github.com/navikt/Designsystemet/blob/master/%40navikt/icons/CHANGELOG.md",
+      "https://github.com/navikt/aksel/blob/main/%40navikt/icons/CHANGELOG.md",
   },
   "ds-tokens": {
     title: "@navikt/ds-tokens",
-    git: "https://github.com/navikt/Designsystemet/tree/master/%40navikt/core/tokens",
+    git: "https://github.com/navikt/aksel/tree/main/%40navikt/core/tokens",
     changelog:
-      "https://github.com/navikt/Designsystemet/blob/master/%40navikt/core/tokens/CHANGELOG.md",
+      "https://github.com/navikt/aksel/blob/main/%40navikt/core/tokens/CHANGELOG.md",
   },
   "ds-tailwind": {
     title: "@navikt/ds-tailwind",
-    git: "https://github.com/navikt/Designsystemet/tree/master/%40navikt/core/tailwind",
+    git: "https://github.com/navikt/aksel/tree/main/%40navikt/core/tailwind",
     changelog:
-      "https://github.com/navikt/Designsystemet/blob/master/%40navikt/core/tailwind/CHANGELOG.md",
+      "https://github.com/navikt/aksel/blob/main/%40navikt/core/tailwind/CHANGELOG.md",
   },
 };
 
@@ -89,6 +89,13 @@ const Page = ({
     : page?.publishedAt
     ? page.publishedAt
     : page._updatedAt;
+
+  const tag =
+    page?.status?.tag === "beta"
+      ? "komponent-beta"
+      : page?.status?.tag === "new"
+      ? "komponent-ny"
+      : null;
 
   return (
     <>
@@ -227,8 +234,16 @@ const Page = ({
             </>
           )}
         </BodyShort>
-        {page?.status?.tag === "beta" && <BetaWarning />}
+        {tag && (
+          <SuggestionBlock variant={tag} reference={`<${page?.heading} />`} />
+        )}
         <IntroSeksjon node={page?.intro} />
+        {page?.status?.tag === "ready" && (
+          <SuggestionBlock
+            variant="komponent"
+            reference={`<${page?.heading} />`}
+          />
+        )}
         <SanityBlockContent blocks={page["content"]} />
       </WithSidebar>
     </>

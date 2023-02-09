@@ -1,4 +1,5 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
+import isBefore from "date-fns/isBefore";
 import isWeekend from "date-fns/isWeekend";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { DateRange, isMatch } from "react-day-picker";
@@ -203,6 +204,7 @@ export const useRangeDatepicker = (
     onValidate,
     defaultMonth,
     allowTwoDigitYear = true,
+    openOnFocus = true,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -322,7 +324,7 @@ export const useRangeDatepicker = (
   };
 
   const handleFocus = (e, src: RangeT) => {
-    !open && setOpen(true);
+    !open && openOnFocus && setOpen(true);
     let day = parseDate(
       e.target.value,
       today,
@@ -371,24 +373,26 @@ export const useRangeDatepicker = (
     if (range?.from && range?.to) {
       setOpen(false);
     }
-    const prevToRange =
+    let prevToRange =
       !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;
+
+    const resetTo = isBefore(prevToRange, range?.from);
 
     range?.from
       ? setFromInputValue(
           formatDateForInput(range?.from, locale, "date", inputFormat)
         )
       : setFromInputValue("");
-    prevToRange
+    prevToRange && !resetTo
       ? setToInputValue(
           formatDateForInput(prevToRange, locale, "date", inputFormat)
         )
       : setToInputValue("");
+    updateRange({ from: range?.from, to: resetTo ? undefined : prevToRange });
     updateValidation(
       { isValidDate: !!range?.from, isEmpty: !range?.from },
-      { isValidDate: !!range?.to, isEmpty: !prevToRange }
+      { isValidDate: !!range?.to, isEmpty: !prevToRange || resetTo }
     );
-    updateRange({ from: range?.from, to: prevToRange });
   };
 
   const fromChange = (

@@ -1,17 +1,19 @@
 name: E2E / Playwright Tests
 on:
   push:
-    branches: [master, next]
+    branches: [main, next]
     paths:
       - "aksel.nav.no/**"
   pull_request:
-    branches: [master, next]
+    branches: [main, next]
     paths:
       - "aksel.nav.no/**"
 
 jobs:
   playwright:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.30.0-focal
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -36,15 +38,15 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: build packages
+      - name: Build packages
         run: |
           yarn boot
-          yarn docgen
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Build application
+        run: yarn workspace aksel.nav.no build:next
+
       - name: Run Playwright tests
-        run: yarn workspace website e2e:full
+        run: yarn workspace website e2e:ci-full
       - uses: actions/upload-artifact@v3
         if: always()
         with:

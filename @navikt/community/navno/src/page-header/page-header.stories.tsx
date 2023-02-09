@@ -15,8 +15,10 @@ export default {
   },
 };
 
-export const Default = (props) => <PageHeader>{props.children}</PageHeader>;
+export const Default = {
+  render: (props) => <PageHeader>{props.children}</PageHeader>,
 
-Default.args = {
-  children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
+  args: {
+    children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
+  },
 };

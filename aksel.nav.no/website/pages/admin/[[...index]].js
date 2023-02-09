@@ -1,9 +1,21 @@
 import { NextStudio } from "next-sanity/studio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { workspaceConfig } from "../../sanity/sanity.config";
 
 const StudioPage = () => {
-  const [scheme, setScheme] = useState("light");
+  const [scheme, setScheme] = useState("dark");
+  useEffect(() => {
+    const theme = localStorage.getItem("sanityStudio:ui:colorScheme");
+    if (theme) {
+      setScheme(theme);
+    } else {
+      /* Assume user using system-theme */
+      window?.matchMedia &&
+      window?.matchMedia("(prefers-color-scheme: dark)").matches
+        ? setScheme("dark")
+        : setScheme("light");
+    }
+  }, []);
 
   return (
     <div

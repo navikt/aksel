@@ -1,5 +1,5 @@
 export {
   default as Fieldset,
-  FieldsetProps,
+  type FieldsetProps,
   FieldsetContext,
 } from "./Fieldset";

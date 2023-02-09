@@ -1,11 +1,11 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "2.1.0",
+  "version": "2.1.7",
   "description": "Aksel icons for NAV",
   "author": "Aksel | NAV designsystem team",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/Designsystemet.git"
+    "url": "git+https://github.com/navikt/aksel.git"
   },
   "keywords": [
     "Icons",
@@ -32,7 +32,7 @@
     "create-package-json-pointers-to-esm": "node ../../scripts/createPackageJsonsWithESMPointers.js",
     "create-icons": "svgr --silent --out-dir src svg",
     "clean": "rimraf src cjs esm",
-    "build": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "build": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node cleanTypes.js && yarn create-package-json-pointers-to-esm",
     "update": "ts-node figma/index.ts dotenv/config",
     "test": "jest"
   },

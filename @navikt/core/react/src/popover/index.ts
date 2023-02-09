@@ -1,2 +1,2 @@
-export { default as Popover, PopoverProps } from "./Popover";
-export { PopoverContentProps } from "./PopoverContent";
+export { default as Popover, type PopoverProps } from "./Popover";
+export { type PopoverContentProps } from "./PopoverContent";

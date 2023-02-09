@@ -16,7 +16,7 @@ export default function Document() {
           href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2"
           as="font"
           type="font/woff2"
-          crossOrigin="true"
+          crossOrigin="anonymous"
         />
       </Head>
       <body data-theme="light" className="aksel antialiased">

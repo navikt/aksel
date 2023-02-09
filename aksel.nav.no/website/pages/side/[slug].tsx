@@ -110,6 +110,7 @@ export const getServerSideProps: GetServerSideProps = async (
   const { page } = await getClient().fetch(akselStandaloneBySlug, {
     slug: `side/${context.params.slug}`,
   });
+  console.log(page);
 
   return {
     props: {
