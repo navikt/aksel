@@ -81,10 +81,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const [chips, setChips] = useState<string[]>([]);
     const [isInternalListOpen, setInternalListOpen] =
       useState<boolean>(isListOpen);
-
     const [internalValue, setInternalValue] = useState<string>(
       defaultValue ? String(defaultValue) : ""
     );
+    const [internalOptionsIndex, setInternalOptionsIndex] = useState(0);
     const filteredOptions = useMemo(
       () => options?.filter((option) => option.includes(internalValue)),
       [internalValue, options]
@@ -94,9 +94,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (v: string) => {
         value === undefined && setInternalValue(v);
         onChange?.(v);
-        setInternalListOpen(!!v);
+        if (!!v !== isInternalListOpen) {
+          setInternalListOpen(!!v);
+        }
+        setInternalOptionsIndex(0);
       },
-      [onChange, value]
+      [isInternalListOpen, onChange, value]
     );
 
     const handleClear = useCallback(
@@ -131,9 +134,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         (e) => {
           if (e.key === "Backspace" && internalValue === "") {
             setChips(chips.slice(0, -1));
+          } else if (e.key === "ArrowDown") {
+            setInternalOptionsIndex(
+              Math.min(internalOptionsIndex + 1, filteredOptions.length - 1)
+            );
+          } else if (e.key === "ArrowUp") {
+            setInternalOptionsIndex(Math.max(0, internalOptionsIndex - 1));
           }
         },
-        [chips, internalValue]
+        [chips, internalValue, internalOptionsIndex, filteredOptions]
       )
     );
 
@@ -231,8 +240,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               })}
               id={`${id}-options`}
             >
-              {filteredOptions.map((o) => (
-                <li className="navds-combobox__list-item" key={o}>
+              {filteredOptions.map((o, i) => (
+                <li
+                  className={cl("navds-combobox__list-item", {
+                    "navds-combobox__list-item--selected":
+                      i === internalOptionsIndex,
+                  })}
+                  key={o}
+                >
                   <BodyShort size="medium">{o}</BodyShort>
                 </li>
               ))}
