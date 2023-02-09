@@ -36,8 +36,8 @@ export const Default = (props) => {
         value={props.controlled ? value : undefined}
         onChange={props.controlled ? setValue : undefined}
         label="komboboks"
+        /* everything under here is optional? */
         size="medium"
-        clearButton={true}
         variant="simple"
         hideLabel={true}
         error={props.error && "error here"}

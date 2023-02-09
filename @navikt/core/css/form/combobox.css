@@ -11,3 +11,18 @@
   border: 1px solid black;
   padding: 4px;
 }
+
+.navds-combobox__input {
+  z-index: 1;
+  flex: 1;
+  border: none;
+  padding: 0;
+  padding-right: var(--a-spacing-10);
+  margin: 0;
+}
+
+.navds-combobox__input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}

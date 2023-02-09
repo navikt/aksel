@@ -10,6 +10,7 @@ import React, {
 import {
   BodyShort,
   Chips,
+  /* Dropdown, */
   ErrorMessage,
   Label,
   mergeRefs,
@@ -38,8 +39,8 @@ interface ComboboxComponent
   extends React.ForwardRefExoticComponent<
     ComboboxProps & React.RefAttributes<HTMLDivElement>
   > {
-  // dropdown: DropdownType;
-  //Tag: ComboboxTagType;
+  // Dropdown: DropdownType;
+  // Chips: ComboboxChipsType;
 }
 
 export interface ComboboxContextProps {
@@ -70,7 +71,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       children,
       clearButtonLabel,
       clearButton = true,
-      variant = "primary",
+      /* variant = "primary", */
       defaultValue,
       isListOpen,
       id,
@@ -188,8 +189,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               aria-expanded={isListOpen}
               className={cl(
                 className,
-                "navds-search__input",
-                `navds-search__input--${variant}`,
+                "navds-combobox__input",
                 "navds-text-field__input",
                 "navds-body-short",
                 `navds-body-${size}`
