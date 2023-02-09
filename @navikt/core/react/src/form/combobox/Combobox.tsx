@@ -111,6 +111,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [handleChange, onClear]
     );
 
+    const toggleChip = useCallback(() => {
+      const activeChip = filteredOptions[internalOptionsIndex];
+      if (chips.includes(activeChip)) {
+        setChips(chips.filter((chip) => chip !== activeChip));
+      } else {
+        setChips([...chips, activeChip]);
+      }
+    }, [chips, filteredOptions, internalOptionsIndex]);
+
     useEventListener(
       "keypress",
       useCallback(
@@ -119,10 +128,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             e.preventDefault();
             handleClear({ trigger: "Escape", event: e });
           } else if (e.key === "Enter") {
-            setChips([...chips, filteredOptions[internalOptionsIndex]]);
+            toggleChip();
           }
         },
-        [chips, filteredOptions, handleClear, internalOptionsIndex]
+        [handleClear, toggleChip]
       ),
       wrapperRef
     );
