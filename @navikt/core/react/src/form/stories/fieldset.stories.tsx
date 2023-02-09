@@ -1,9 +1,9 @@
 import React from "react";
 import { Fieldset } from "../index";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import { TextField } from "../../index";
 export default {
-  title: "ds-react/form/Fieldset",
+  title: "ds-react/Fieldset",
   component: Fieldset,
   argTypes: {
     size: {
@@ -34,16 +34,18 @@ const content = (
   </>
 );
 
-export const Default = (props) => {
-  return (
-    <Fieldset legend="Mollit eiusmod" {...props}>
-      {content}
-    </Fieldset>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <Fieldset legend="Mollit eiusmod" {...props}>
+        {content}
+      </Fieldset>
+    );
+  },
 
-Default.args = {
-  errorPropagation: true,
+  args: {
+    errorPropagation: true,
+  },
 };
 
 export const Small = () => (

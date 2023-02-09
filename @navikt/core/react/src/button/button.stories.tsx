@@ -8,34 +8,6 @@ export default {
   parameters: {
     chromatic: { delay: 600 },
   },
-  argTypes: {
-    variant: {
-      control: {
-        type: "radio",
-        options: [
-          "primary",
-          "secondary",
-          "tertiary",
-          "danger",
-          "primary-neutral",
-          "secondary-neutral",
-          "tertiary-neutral",
-        ],
-      },
-    },
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small", "xsmall"],
-      },
-    },
-    iconPosition: {
-      control: {
-        type: "radio",
-        options: ["left", "right"],
-      },
-    },
-  },
 };
 
 const variants: Array<
@@ -66,25 +38,57 @@ const varSwitch = {
   "tertiary-neutral": "Tertiary",
 };
 
-export const Default = (props) => {
-  return (
-    <Button
-      variant={props.variant}
-      size={props.size}
-      loading={props.loading}
-      icon={props.icon ? <Star /> : undefined}
-      iconPosition={props.iconPosition}
-    >
-      {props.children}
-    </Button>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <Button
+        variant={props.variant}
+        size={props.size}
+        loading={props.loading}
+        icon={props.icon ? <Star /> : undefined}
+        iconPosition={props.iconPosition}
+      >
+        {props.children}
+      </Button>
+    );
+  },
 
-Default.args = {
-  icon: false,
-  loading: false,
-  iconPosition: "left",
-  children: "Knapp",
+  args: {
+    icon: false,
+    loading: false,
+    iconPosition: "left",
+    children: "Knapp",
+    variant: "primary",
+    size: "medium",
+  },
+  argTypes: {
+    variant: {
+      control: {
+        type: "radio",
+        options: [
+          "primary",
+          "secondary",
+          "tertiary",
+          "danger",
+          "primary-neutral",
+          "secondary-neutral",
+          "tertiary-neutral",
+        ],
+      },
+    },
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small", "xsmall"],
+      },
+    },
+    iconPosition: {
+      control: {
+        type: "radio",
+        options: ["left", "right"],
+      },
+    },
+  },
 };
 
 export const Small = () => (
@@ -117,31 +121,35 @@ export const Link = () => (
   </div>
 );
 
-export const Loading = () => (
-  <div className="colgap">
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button key={variant} variant={variant} loading>
-          {varSwitch[variant]}
-        </Button>
-      ))}
+export const Loading = {
+  render: () => (
+    <div className="colgap">
+      <div className="rowgap">
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} loading>
+            {varSwitch[variant]}
+          </Button>
+        ))}
+      </div>
+      <div className="rowgap">
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} loading size="small">
+            {varSwitch[variant]}
+          </Button>
+        ))}
+      </div>
+      <div className="rowgap">
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} loading size="xsmall">
+            {varSwitch[variant]}
+          </Button>
+        ))}
+      </div>
     </div>
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button key={variant} variant={variant} loading size="small">
-          {varSwitch[variant]}
-        </Button>
-      ))}
-    </div>
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button key={variant} variant={variant} loading size="xsmall">
-          {varSwitch[variant]}
-        </Button>
-      ))}
-    </div>
-  </div>
-);
+  ),
+
+  args: { chromatic: { delay: 300 } },
+};
 
 export const Icon = () => (
   <div className="colgap">
@@ -239,28 +247,32 @@ export const Disabled = () => (
   </div>
 );
 
-export const LoadingWithAs = () => (
-  <div className="colgap">
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button key={variant} variant={variant} loading size="small">
-          {varSwitch[variant]}
-        </Button>
-      ))}
+export const LoadingWithAs = {
+  render: () => (
+    <div className="colgap">
+      <div className="rowgap">
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} loading size="small">
+            {varSwitch[variant]}
+          </Button>
+        ))}
+      </div>
+      <div className="rowgap">
+        {variants.map((variant) => (
+          <Button
+            key={variant}
+            variant={variant}
+            loading
+            size="small"
+            as="a"
+            href="#"
+          >
+            {varSwitch[variant]}
+          </Button>
+        ))}
+      </div>
     </div>
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button
-          key={variant}
-          variant={variant}
-          loading
-          size="small"
-          as="a"
-          href="#"
-        >
-          {varSwitch[variant]}
-        </Button>
-      ))}
-    </div>
-  </div>
-);
+  ),
+
+  args: { chromatic: { delay: 300 } },
+};

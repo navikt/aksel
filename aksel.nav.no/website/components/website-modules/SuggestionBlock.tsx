@@ -78,7 +78,7 @@ export const SuggestionBlock = ({
 };
 
 const issueUrl =
-  "https://github.com/navikt/Designsystemet/issues/new?assignees=olejorgenbakken";
+  "https://github.com/navikt/aksel/issues/new?assignees=olejorgenbakken";
 
 const options: {
   [key: string]: {

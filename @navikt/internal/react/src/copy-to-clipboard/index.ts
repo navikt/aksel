@@ -1,4 +1,4 @@
 export {
-  CopyToClipboardProps,
+  type CopyToClipboardProps,
   default as CopyToClipboard,
 } from "./CopyToClipboard";

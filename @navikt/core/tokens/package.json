@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/Designsystemet.git",
+    "url": "git+https://github.com/navikt/aksel.git",
     "directory": "@navikt/core/tokens"
   },
   "devDependencies": {

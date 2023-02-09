@@ -1,5 +1,5 @@
 /**
- * Fikser https://github.com/navikt/Designsystemet/issues/1758
+ * Fikser https://github.com/navikt/aksel/issues/1758
  */
 
 const fs = require("fs");

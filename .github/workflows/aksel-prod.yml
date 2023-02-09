@@ -2,22 +2,50 @@ name: Deploy aksel.nav.no
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "aksel.nav.no/**"
 
 env:
-  IMAGE: ghcr.io/navikt/designsystemet
+  IMAGE: ghcr.io/navikt/aksel
 
 jobs:
+  snyk-monitor:
+    name: monitor dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Snyk to check for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
+          args: --org=designsystemet --severity-threshold=high
+  snyk-test:
+    name: analyze dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+          args: --org=designsystemet --severity-threshold=high
   sync_data_with_sanity:
     name: Update component data
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: "14"
-      - uses: actions/checkout@v2
+          node-version: "16"
+      - uses: actions/checkout@v3
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
@@ -45,10 +73,10 @@ jobs:
     name: Build and deploy to prod-gcp
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: "14"
-      - uses: actions/checkout@v2
+          node-version: "16"
+      - uses: actions/checkout@v3
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env

@@ -50,21 +50,23 @@ const Item = (props) => {
   );
 };
 
-export const Default = (props) => {
-  return (
-    <div style={{ width: 500 }}>
-      <Accordion>
-        {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
-          <Item key={y} {...props} />
-        ))}
-      </Accordion>
-    </div>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <div style={{ width: 500 }}>
+        <Accordion>
+          {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
+            <Item key={y} {...props} />
+          ))}
+        </Accordion>
+      </div>
+    );
+  },
 
-Default.args = {
-  controlled: false,
-  nItems: 2,
+  args: {
+    controlled: false,
+    nItems: 2,
+  },
 };
 
 export const Controlled = () => {

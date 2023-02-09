@@ -25,10 +25,12 @@ export default {
 
 const lorem = "Veniam consequat cillum";
 
-export const Default = (props) => <Heading {...props}>{lorem}</Heading>;
+export const Default = {
+  render: (props) => <Heading {...props}>{lorem}</Heading>,
 
-Default.args = {
-  spacing: false,
+  args: {
+    spacing: false,
+  },
 };
 
 export const Sizes = () => (
