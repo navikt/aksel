@@ -28,6 +28,10 @@ export type ComboboxClearEvent =
 
 export interface ComboboxProps extends SearchProps {
   isListOpen: boolean;
+  options: any[];
+  selectedOptions: string[];
+  setOptions: React.Dispatch<React.SetStateAction<any[]>>;
+  setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 interface ComboboxComponent
@@ -70,6 +74,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultValue,
       isListOpen,
       id,
+      setOptions,
+      options,
+      selectedOptions,
+      setSelectedOptions,
       ...rest
     } = props;
 
@@ -110,6 +118,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       wrapperRef
     );
 
+    const handleDeleteChip = (clickedOption) => {
+      setSelectedOptions(
+        selectedOptions.filter((option) => option !== clickedOption)
+      );
+      console.log("DEBUG - tet:", selectedOptions, clickedOption);
+    };
+
     return (
       <div
         ref={setWrapperRef}
@@ -147,13 +162,20 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         )}
         <div className="navds-combobox__wrapper">
           <div className="navds-combobox__wrapper-inner">
-            {Array.from(Array(3)).map((e, i) => {
-              return (
-                <Chips>
-                  <Chips.Removable>{`test${i + 1}`}</Chips.Removable>
-                </Chips>
-              );
-            })}
+            <Chips>
+              {selectedOptions.length
+                ? selectedOptions.map((option) => {
+                    return (
+                      <Chips.Removable
+                        key={option}
+                        onClick={() => handleDeleteChip(option)}
+                      >
+                        {option}
+                      </Chips.Removable>
+                    );
+                  })
+                : []}
+            </Chips>
             <input
               ref={mergedRef}
               {...omit(rest, ["error", "errorId", "size"])}
