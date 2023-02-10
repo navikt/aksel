@@ -1,6 +1,6 @@
 import React from "react";
 import { Loader } from "..";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 export default {
   title: "ds-react/Loader",
   component: Loader,
@@ -28,12 +28,14 @@ export default {
   },
 } as Meta;
 
-export const Default = (props: any) => {
-  return <Loader {...props} />;
-};
+export const Default = {
+  render: (props: any) => {
+    return <Loader {...props} />;
+  },
 
-Default.args = {
-  transparent: false,
+  args: {
+    transparent: false,
+  },
 };
 
 export const Size = () => (

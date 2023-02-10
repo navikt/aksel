@@ -28,9 +28,9 @@ backgroundcolor: var(--a-surface-default);
 
 ## Learn more
 
-- [Designsystem documentation](https://aksel.nav.no/designsystem)
-- [Storybook](https://master--5f801fb2aea7820022de2936.chromatic.com/)
+- [Docs](https://aksel.nav.no/komponenter)
+- [Storybook](https://aksel.nav.no/storybook/)
 
 ## License
 
-[MIT](https://github.com/navikt/Designsystemet/blob/master/LICENCE)
+[MIT](https://github.com/navikt/aksel/blob/main/LICENCE)

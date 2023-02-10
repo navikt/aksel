@@ -218,8 +218,6 @@ export const EditorPage = () => {
     (query) => client.fetch(query)
   );
 
-  console.log(data);
-
   const {
     data: fbData,
     error: fbError,

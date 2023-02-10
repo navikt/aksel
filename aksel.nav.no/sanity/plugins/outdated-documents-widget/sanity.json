@@ -1,9 +1,0 @@
-{
-  "parts": [
-    {
-      "name": "part:@sanity/dashboard/widget/outdated-documents-widget",
-      "implements": "part:@sanity/dashboard/widget",
-      "path": "index.js"
-    }
-  ]
-}

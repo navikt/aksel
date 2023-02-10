@@ -42,9 +42,9 @@ export const Accordion = defineType({
   ],
   components: {
     preview: (val: any) => {
-      return val.value?.list ? (
+      return val?.list ? (
         <div>
-          {val.value.list.map((x) => (
+          {val.list.map((x) => (
             <div
               key={x._key}
               className="border-b-border flex w-full justify-between border-b py-2 px-4 "
@@ -63,8 +63,8 @@ export const Accordion = defineType({
     select: {
       list: "list",
     },
-    prepare() {
-      return { title: "Accordion", media: StackCompactIcon };
+    prepare({ ...props }) {
+      return { title: "Accordion", media: StackCompactIcon, list: props?.list };
     },
   },
 });

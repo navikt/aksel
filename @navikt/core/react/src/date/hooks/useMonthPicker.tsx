@@ -42,6 +42,11 @@ export interface UseMonthPickerOptions
    * In 2023 this equals to 1943 - 2042
    */
   allowTwoDigitYear?: boolean;
+  /**
+   * Opens datepicker on input-focus
+   * @default true
+   */
+  openOnFocus?: boolean;
 }
 
 interface UseMonthPickerValue {
@@ -104,6 +109,7 @@ export const useMonthpicker = (
     onValidate,
     defaultYear,
     allowTwoDigitYear = true,
+    openOnFocus = true,
   } = opt;
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
@@ -180,7 +186,7 @@ export const useMonthpicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    !open && setOpen(true);
+    !open && openOnFocus && setOpen(true);
     let day = parseDate(
       e.target.value,
       today,
@@ -191,6 +197,8 @@ export const useMonthpicker = (
     if (isValidDate(day)) {
       setYear(day);
       setInputValue(formatDateForInput(day, locale, "month", inputFormat));
+    } else {
+      setYear(defaultSelected ?? defaultYear ?? today);
     }
   };
 
@@ -211,12 +219,14 @@ export const useMonthpicker = (
     if (month) {
       setOpen(false);
       inputRef.current && inputRef.current.focus();
+      setYear(month);
     }
 
     if (!required && !month) {
       updateMonth(undefined);
       updateValidation({ isValidMonth: false, isEmpty: true });
       setInputValue("");
+      setYear(defaultYear ?? today);
       return;
     }
     updateMonth(month);

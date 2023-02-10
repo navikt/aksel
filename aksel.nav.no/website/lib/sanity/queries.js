@@ -221,6 +221,7 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
     "oppsummering": intro,
     ...ref->{"refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])},
   },
+  "temaCount": count(*[_type == "aksel_tema" && defined(seksjoner) && count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)]) > 0]),
   "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
     _id,
     heading,
@@ -440,6 +441,8 @@ export const akselArticleFields = `
     "slug": slug.current,
     "tema": tema[]->title,
     ingress,
+    status,
+    _type,
 `;
 
 export const akselArticleAll = (boundry = "") => {

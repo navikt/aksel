@@ -2,6 +2,7 @@ import { Close } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, {
   forwardRef,
+  InputHTMLAttributes,
   useCallback,
   useMemo,
   useRef,
@@ -10,33 +11,45 @@ import React, {
 import {
   BodyShort,
   Chips,
-  ErrorMessage,
   Label,
   mergeRefs,
   omit,
   useEventListener,
 } from "../..";
-import { SearchProps } from "../search/Search";
-import { useFormField } from "../useFormField";
+import { FormFieldProps, useFormField } from "../useFormField";
 
 export type ComboboxClearEvent =
   | {
       trigger: "Click";
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
     }
-  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
+  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> }
+  | { trigger: "Enter"; event: React.KeyboardEvent<HTMLDivElement> };
 
-export interface ComboboxProps extends SearchProps {
+export interface ComboboxProps
+  extends FormFieldProps,
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
   isListOpen: boolean;
   options?: string[];
+  selectedOptions: string[];
+  setOptions: React.Dispatch<React.SetStateAction<any[]>>;
+  setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
+  onClear?: (e: ComboboxClearEvent) => void;
+  variant?: "primary" | "secondary" | "simple";
+  clearButton?: boolean;
+  clearButtonLabel?: string;
+  onChange?: (value: string) => void;
+  hideLabel?: boolean;
+  label: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 interface ComboboxComponent
   extends React.ForwardRefExoticComponent<
     ComboboxProps & React.RefAttributes<HTMLDivElement>
   > {
-  // dropdown: DropdownType;
-  //Tag: ComboboxTagType;
+  // Dropdown: DropdownType;
+  // Chips: ComboboxChipsType;
 }
 
 export interface ComboboxContextProps {
@@ -53,8 +66,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       inputProps,
       size = "medium",
       inputDescriptionId,
-      errorId,
-      showErrorMsg,
       hasError,
     } = useFormField(props, "comboboxfield");
 
@@ -69,16 +80,19 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       children,
       clearButtonLabel,
       clearButton = true,
-      variant = "primary",
+      /* variant = "primary", */
       defaultValue,
       isListOpen,
       id,
-      options,
+      setOptions,
+      options = [],
+      selectedOptions,
+      setSelectedOptions,
       ...rest
     } = props;
 
-    const comboboxRef = useRef<HTMLInputElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([comboboxRef, ref]), [ref]);
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
     const [chips, setChips] = useState<string[]>([]);
     const [isInternalListOpen, setInternalListOpen] =
@@ -86,7 +100,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const [internalValue, setInternalValue] = useState<string>(
       defaultValue ? String(defaultValue) : ""
     );
-    const [internalOptionsIndex, setInternalOptionsIndex] = useState(0);
+    const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
     const filteredOptions = useMemo(() => {
       if (internalValue) {
         return (
@@ -106,28 +120,40 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         if (!!v !== isInternalListOpen) {
           setInternalListOpen(!!v);
         }
-        setInternalOptionsIndex(0);
+        setFilteredOptionsIndex(0);
       },
       [isInternalListOpen, onChange, value]
     );
+
+    const focusInput = useCallback(() => {
+      inputRef.current && inputRef.current?.focus?.();
+    }, []);
 
     const handleClear = useCallback(
       (event: ComboboxClearEvent) => {
         onClear?.(event);
         handleChange("");
-        comboboxRef.current && comboboxRef.current?.focus?.();
+        focusInput();
       },
-      [handleChange, onClear]
+      [handleChange, onClear, focusInput]
     );
 
-    const toggleChip = useCallback(() => {
-      const activeChip = filteredOptions[internalOptionsIndex];
+    const toggleOption = useCallback(() => {
+      const activeChip = filteredOptions[filteredOptionsIndex];
       if (chips.includes(activeChip)) {
-        setChips(chips.filter((chip) => chip !== activeChip));
+        setSelectedOptions(
+          selectedOptions.filter((option) => option !== activeChip)
+        );
       } else {
-        setChips([...chips, activeChip]);
+        setSelectedOptions([...selectedOptions, activeChip]);
       }
-    }, [chips, filteredOptions, internalOptionsIndex]);
+    }, [
+      chips,
+      filteredOptions,
+      filteredOptionsIndex,
+      selectedOptions,
+      setSelectedOptions,
+    ]);
 
     useEventListener(
       "keypress",
@@ -135,12 +161,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         (e) => {
           if (e.key === "Escape") {
             e.preventDefault();
-            handleClear({ trigger: "Escape", event: e });
+            handleClear({ trigger: e.key, event: e });
           } else if (e.key === "Enter") {
-            toggleChip();
+            e.preventDefault();
+            toggleOption();
+            handleClear({ trigger: e.key, event: e });
           }
         },
-        [handleClear, toggleChip]
+        [handleClear, toggleOption]
       ),
       wrapperRef
     );
@@ -152,20 +180,22 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           if (e.key === "Backspace" && internalValue === "") {
             setChips(chips.slice(0, -1));
           } else if (e.key === "ArrowDown") {
-            setInternalOptionsIndex(
-              Math.min(internalOptionsIndex + 1, filteredOptions.length - 1)
+            setFilteredOptionsIndex(
+              Math.min(filteredOptionsIndex + 1, filteredOptions.length - 1)
             );
           } else if (e.key === "ArrowUp") {
-            setInternalOptionsIndex(Math.max(0, internalOptionsIndex - 1));
+            setFilteredOptionsIndex(Math.max(0, filteredOptionsIndex - 1));
           }
         },
-        [chips, internalValue, internalOptionsIndex, filteredOptions]
+        [chips, internalValue, filteredOptionsIndex, filteredOptions]
       )
     );
 
-    function onRemoveChip(value) {
-      setChips(chips.filter((chip) => chip !== value));
-    }
+    const handleDeleteChip = (clickedOption) => {
+      setSelectedOptions(
+        selectedOptions.filter((option) => option !== clickedOption)
+      );
+    };
 
     return (
       <div
@@ -203,40 +233,42 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           </BodyShort>
         )}
         <div className="navds-combobox__wrapper">
-          <div className="navds-combobox__wrapper-inner">
-            {chips.length > 0 && (
-              <Chips>
-                {chips.map((chip, i) => {
-                  return (
-                    <Chips.Removable
-                      onDelete={() => onRemoveChip(chip)}
-                      key={chip}
-                    >
-                      {chip}
-                    </Chips.Removable>
-                  );
-                })}
-              </Chips>
-            )}
-            <input
-              ref={mergedRef}
-              {...omit(rest, ["error", "errorId", "size"])}
-              {...inputProps}
-              value={value ?? internalValue}
-              onChange={(e) => handleChange(e.target.value)}
-              type="search"
-              role="combobox"
-              aria-controls={`${id}-options`}
-              aria-expanded={isListOpen}
-              className={cl(
-                className,
-                "navds-search__input",
-                `navds-search__input--${variant}`,
-                "navds-text-field__input",
-                "navds-body-short",
-                `navds-body-${size}`
-              )}
-            />
+          <div className="navds-combobox__wrapper-inner" onClick={focusInput}>
+            <Chips className="navds-combobox__selected-options">
+              {selectedOptions.length
+                ? selectedOptions.map((option, i) => {
+                    return (
+                      <Chips.Removable
+                        className="navds-combobox__selected-option"
+                        key={option + i}
+                        onClick={() => handleDeleteChip(option)}
+                      >
+                        {option}
+                      </Chips.Removable>
+                    );
+                  })
+                : []}
+
+              <input
+                key="combobox-input"
+                ref={mergedRef}
+                {...omit(rest, ["error", "errorId", "size"])}
+                {...inputProps}
+                value={value ?? internalValue}
+                onChange={(e) => handleChange(e.target.value)}
+                type="search"
+                role="combobox"
+                aria-controls={isListOpen ? id : ""}
+                aria-expanded={isListOpen}
+                className={cl(
+                  className,
+                  "navds-combobox__input",
+                  "navds-text-field__input",
+                  "navds-body-short",
+                  `navds-body-${size}`
+                )}
+              />
+            </Chips>
             {(value ?? internalValue) && clearButton && (
               <button
                 type="button"
@@ -261,7 +293,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 <li
                   className={cl("navds-combobox__list-item", {
                     "navds-combobox__list-item--focus":
-                      i === internalOptionsIndex,
+                      i === filteredOptionsIndex,
                     "navds-combobox__list-item--selected": chips.includes(o),
                   })}
                   key={o}
@@ -271,16 +303,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 </li>
               ))}
             </ul>
-          )}
-        </div>
-        <div
-          className="navds-form-field__error"
-          id={errorId}
-          aria-relevant="additions removals"
-          aria-live="polite"
-        >
-          {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
           )}
         </div>
       </div>

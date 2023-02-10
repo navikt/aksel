@@ -10,7 +10,6 @@ test.describe("Axe a11y", () => {
       const accessibilityScanResults = await new AxeBuilder({ page })
         .disableRules(["definition-list", "scrollable-region-focusable"])
         .exclude("iframe")
-        .exclude("#scroll-top-button")
         .analyze();
       expect(accessibilityScanResults.violations).toEqual([]);
     });
@@ -21,5 +20,4 @@ test.describe("Axe a11y", () => {
 Disabled rules:
 - definition-list: 'div' as a direct child of 'dl' should be valid. Ignoring failed test.
 - scrollable-region-focusable: Up for discussion. Should code-block be focusable fot easier access and allowing scroll with keyboard?
-- Excluded "Til toppen" button to avoid error around focusable items with aria-hidden
 */

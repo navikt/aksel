@@ -32,7 +32,8 @@ const Filter = ({
       >
         <Search
           variant="simple"
-          label="Søk i alle NAV-ikoner"
+          hideLabel={false}
+          label="Søk"
           value={value}
           onChange={(e) => {
             setValue(e);

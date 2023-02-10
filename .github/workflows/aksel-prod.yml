@@ -2,22 +2,81 @@ name: Deploy aksel.nav.no
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "aksel.nav.no/**"
 
 env:
-  IMAGE: ghcr.io/navikt/designsystemet
+  IMAGE: ghcr.io/navikt/aksel
 
 jobs:
+  snyk-monitor:
+    name: monitor dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Snyk to check for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
+          args: --org=designsystemet --severity-threshold=high
+  snyk-test:
+    name: analyze dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+          args: --org=designsystemet --severity-threshold=high
+  sync_data_with_sanity:
+    name: Update component data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - uses: actions/checkout@v3
+      - name: add tokens to .env
+        run: |
+          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-prod-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-prod-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run docgen
+        run: |
+          yarn boot
+          yarn docgen
+
+      - name: Update sanity sync
+        run: yarn workspace aksel.nav.no sanity:update
+
   build_and_deploy:
     name: Build and deploy to prod-gcp
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: "14"
-      - uses: actions/checkout@v2
+          node-version: "16"
+      - uses: actions/checkout@v3
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
@@ -36,25 +95,17 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: build packages
-        run: |
-          yarn boot
-          yarn docgen
+      - name: Build packages
+        run: yarn boot
 
       - name: Tests
         run: yarn workspace aksel.nav.no test
-
-      - name: E2E
-        run: NEXT_PUBLIC_TEST=true yarn workspace website e2e
-
-      - name: Update sanity sync
-        run: yarn workspace aksel.nav.no sanity:update
 
       - name: Build application
         run: yarn workspace aksel.nav.no build:next
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # Use commit-sha1 instead of tag for security concerns
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -65,6 +116,13 @@ jobs:
         run: echo "DOCKER_TAG=${{ env.IMAGE }}:${{ env.TAG }}" >> $GITHUB_ENV
       - name: Build docker image
         run: docker build -t ${{ env.DOCKER_TAG }} . -f aksel.nav.no/Dockerfile
+      - name: Wait for e2e-tests to succeed
+        uses: lewagon/wait-on-check-action@v1.2.0
+        with:
+          ref: ${{ github.ref }}
+          check-name: "Smoketest Aksel"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
       - name: Push docker image
         run: |
           docker push ${{ env.DOCKER_TAG }}

@@ -8,19 +8,16 @@
         NAVs designsystem + Aksel.nav.no
     </p>
     <div align="center">
-      <a href="https://master--5f801fb2aea7820022de2936.chromatic.com/">
+      <a href="https://aksel.nav.no/storybook/">
           <img src="https://shields.io/badge/storybook-white?logo=storybook&style=flat"" />
       </a>
-      <a href="https://github.com/navikt/Designsystemet/pulls">
+      <a href="https://github.com/navikt/aksel/pulls">
           <img src="https://img.shields.io/badge/PRs-welcome-green.svg?color=%23262626"" />
-      </a>
-      <a href="https://github.com/navikt/Designsystemet/actions/workflows/ci.yml">
-          <img src="https://github.com/navikt/Designsystemet/actions/workflows/ci.yml/badge.svg "" />
       </a>
     </div>
     <div><a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=%40navikt%2Fds-*"></a></div>
     <br/>
-    <a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/Designsystemet/issues">Issues</a>
+    <a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/aksel/issues">Issues</a>
 <br/>
 </div>
 
@@ -39,7 +36,7 @@
 
 aksel.nav.no/
 ├── website        # NEXT.JS app (v12)
-└── sanity         # Sanity CMS-app (v2)
+└── website/sanity # Sanity CMS-app (v3)
 ```
 
 ## Commands
@@ -50,33 +47,33 @@ Installer dependencies og bygg workspace
 yarn && yarn boot
 ```
 
-| Command                   | Script                                                                                                            |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `yarn boot`               | Bygger alle pakker                                                                                                |
-| `yarn storybook`          | Starter storybook                                                                                                 |
-| `yarn dev`                | Starter aksel-nettsiden [(Mer info)](https://github.com/navikt/Designsystemet/blob/master/aksel.nav.no/README.md) |
-| `yarn example:shadow-dom` | Starter demo-app med shadow-dom                                                                                   |
-| `yarn lint`               | Lints react and css workspaces                                                                                    |
-| `yarn test`               | Runs tests                                                                                                        |
-| `yarn clean`              | Fjerner genererte filer                                                                                           |
-| `yarn changeset`          | Ny versjon-entry [(how-to)](https://github.com/navikt/Designsystemet/blob/master/.changeset/README.md)            |
+| Command                   | Script                                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `yarn boot`               | Bygger alle pakker                                                                                     |
+| `yarn storybook`          | Starter storybook                                                                                      |
+| `yarn dev`                | Starter aksel-nettsiden [(Mer info)](https://github.com/navikt/aksel/blob/main/aksel.nav.no/README.md) |
+| `yarn example:shadow-dom` | Starter demo-app med shadow-dom                                                                        |
+| `yarn lint`               | Lints react and css workspaces                                                                         |
+| `yarn test`               | Runs tests                                                                                             |
+| `yarn clean`              | Fjerner genererte filer                                                                                |
+| `yarn changeset`          | Ny versjon-entry [(how-to)](https://github.com/navikt/aksel/blob/main/.changeset/README.md)            |
 
 ## Bidra
 
-Vi tar gjerne i mot PR-er [CONTRIBUTING.md](https://github.com/navikt/Designsystemet/blob/master/CONTRIBUTING.md)
+Vi tar gjerne i mot PR-er [CONTRIBUTING.md](https://github.com/navikt/aksel/blob/main/CONTRIBUTING.md)
 
 ## Lisenser
 
-[MIT](https://github.com/navikt/Designsystemet/blob/master/LICENCE)
+[MIT](https://github.com/navikt/aksel/blob/main/LICENCE)
 
 ## Codeowners
 
-Løsningen forvaltes av team Aksel/Designsystemet
+Løsningen forvaltes av team Aksel
 
 [Slack](https://nav-it.slack.com/archives/C7NE7A8UF)
 
 ## Contributors
 
-<a href="https://github.com/navikt/Designsystemet/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=navikt/Designsystemet" />
+<a href="https://github.com/navikt/aksel/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=navikt/aksel" />
 </a>

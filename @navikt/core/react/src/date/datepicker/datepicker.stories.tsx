@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useId, useState } from "react";
 import { UNSAFE_useDatepicker, UNSAFE_useRangeDatepicker } from "..";
 import { Button } from "../..";
@@ -34,93 +35,95 @@ export default {
   },
 };
 
-export const Default = (props) => {
-  const [open, setOpen] = useState(false);
+export const Default = {
+  render: (props) => {
+    const [open, setOpen] = useState(false);
 
-  const rangeCtx = UNSAFE_useRangeDatepicker({
-    fromDate: new Date("Aug 23 2020"),
-    toDate: new Date("Aug 23 2023"),
-  });
+    const rangeCtx = UNSAFE_useRangeDatepicker({
+      fromDate: new Date("Aug 23 2020"),
+      toDate: new Date("Aug 23 2023"),
+    });
 
-  const singleCtx = UNSAFE_useDatepicker({
-    fromDate: new Date("Aug 23 2020"),
-    toDate: new Date("Aug 23 2023"),
-  });
+    const singleCtx = UNSAFE_useDatepicker({
+      fromDate: new Date("Aug 23 2020"),
+      toDate: new Date("Aug 23 2023"),
+    });
 
-  const newProps = {
-    ...(!props.inputfield || props.mode === "multiple"
-      ? {
-          open,
-          onClose: () => setOpen(false),
-          fromDate: new Date("Aug 23 2020"),
-          toDate: new Date("Aug 23 2023"),
-        }
-      : {}),
-  };
+    const newProps = {
+      ...(!props.inputfield || props.mode === "multiple"
+        ? {
+            open,
+            onClose: () => setOpen(false),
+            fromDate: new Date("Aug 23 2020"),
+            toDate: new Date("Aug 23 2023"),
+          }
+        : {}),
+    };
 
-  const Comp = !props.standalone ? DatePicker : DatePicker.Standalone;
+    const Comp = !props.standalone ? DatePicker : DatePicker.Standalone;
 
-  return (
-    <div>
-      <Comp
-        locale={props?.locale}
-        dropdownCaption={props?.dropdownCaption}
-        disableWeekends={props?.disableWeekends}
-        showWeekNumber={props.showWeekNumber}
-        mode={props.mode}
-        {...(props.mode === "single"
-          ? singleCtx.datepickerProps
-          : props.mode === "range"
-          ? rangeCtx.datepickerProps
-          : {})}
-        {...newProps}
-      >
-        {!props.standalone && (
-          <>
-            {props.inputfield && props.mode !== "multiple" ? (
-              <>
-                {props.mode === "range" ? (
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <DatePicker.Input
-                      label="Fra"
-                      size={props?.size}
-                      {...rangeCtx.fromInputProps}
-                    />
-                    <DatePicker.Input
-                      label="Til"
-                      size={props?.size}
-                      {...rangeCtx.toInputProps}
-                    />
-                  </div>
-                ) : (
-                  <>
-                    <DatePicker.Input
-                      label="Velg dato"
-                      size={props?.size}
-                      {...singleCtx.inputProps}
-                    />
-                  </>
-                )}
-              </>
-            ) : (
-              <Button onClick={() => setOpen((x) => !x)}>
-                Åpne datovelger
-              </Button>
-            )}
-          </>
-        )}
-      </Comp>
-    </div>
-  );
-};
+    return (
+      <div>
+        <Comp
+          locale={props?.locale}
+          dropdownCaption={props?.dropdownCaption}
+          disableWeekends={props?.disableWeekends}
+          showWeekNumber={props.showWeekNumber}
+          mode={props.mode}
+          {...(props.mode === "single"
+            ? singleCtx.datepickerProps
+            : props.mode === "range"
+            ? rangeCtx.datepickerProps
+            : {})}
+          {...newProps}
+        >
+          {!props.standalone && (
+            <>
+              {props.inputfield && props.mode !== "multiple" ? (
+                <>
+                  {props.mode === "range" ? (
+                    <div style={{ display: "flex", gap: "1rem" }}>
+                      <DatePicker.Input
+                        label="Fra"
+                        size={props?.size}
+                        {...rangeCtx.fromInputProps}
+                      />
+                      <DatePicker.Input
+                        label="Til"
+                        size={props?.size}
+                        {...rangeCtx.toInputProps}
+                      />
+                    </div>
+                  ) : (
+                    <>
+                      <DatePicker.Input
+                        label="Velg dato"
+                        size={props?.size}
+                        {...singleCtx.inputProps}
+                      />
+                    </>
+                  )}
+                </>
+              ) : (
+                <Button onClick={() => setOpen((x) => !x)}>
+                  Åpne datovelger
+                </Button>
+              )}
+            </>
+          )}
+        </Comp>
+      </div>
+    );
+  },
 
-Default.args = {
-  dropdownCaption: false,
-  disableWeekends: false,
-  showWeekNumber: false,
-  inputfield: true,
-  standalone: false,
-  openOnFocus: true,
+  args: {
+    dropdownCaption: false,
+    disableWeekends: false,
+    showWeekNumber: false,
+    inputfield: true,
+    standalone: false,
+    openOnFocus: true,
+  },
 };
 
 export const DropdownCaption = () => (
@@ -148,6 +151,7 @@ export const UseDatepicker = () => {
     fromDate: new Date("Aug 23 2019"),
     onDateChange: console.log,
     locale: "en",
+    openOnFocus: false,
   });
 
   return (
@@ -164,6 +168,7 @@ export const UseRangedDatepicker = () => {
     UNSAFE_useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
       onRangeChange: console.log,
+      onValidate: console.log,
     });
 
   return (
@@ -178,12 +183,29 @@ export const UseRangedDatepicker = () => {
   );
 };
 
+export const OpenOnFocus = () => {
+  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+    onDateChange: console.log,
+    openOnFocus: false,
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps}>
+        <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};
+
 export const NB = () => (
   <DatePicker.Standalone locale="nb" today={new Date("2006-07-01")} />
 );
+
 export const NN = () => (
   <DatePicker.Standalone locale="nn" today={new Date("2006-07-01")} />
 );
+
 export const EN = () => (
   <DatePicker.Standalone locale="en" today={new Date("2006-07-01")} />
 );
@@ -195,6 +217,7 @@ export const Standalone = () => (
 export const StandaloneRange = () => (
   <DatePicker.Standalone mode="range" today={new Date("2006-07-01")} />
 );
+
 export const StandaloneMultiple = () => (
   <DatePicker.Standalone mode="multiple" today={new Date("2006-07-01")} />
 );

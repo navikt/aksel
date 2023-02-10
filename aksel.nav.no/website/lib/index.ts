@@ -1,6 +1,7 @@
 export * from "./sanity/queries";
 export * from "./sanity/santiy";
 export * from "./types/types";
+export * from "./types/search";
 export * from "./auth/auth";
 export type { default as SanityT } from "./types/schema";
 

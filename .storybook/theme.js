@@ -1,8 +1,8 @@
 import { create } from "@storybook/theming";
-/* import logoUrl from "./public/logo.svg"; */
+import logoUrl from "./public/logo.svg";
 
 export default create({
-  /* brandImage: process.env.NODE_ENV === "production" ? logoUrl : "/logo.svg", */
+  brandImage: logoUrl,
   base: "light",
   // Typography
   fontBase: '"Source Sans Pro", sans-serif',

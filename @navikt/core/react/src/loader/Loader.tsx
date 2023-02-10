@@ -33,7 +33,12 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
   variant?: "neutral" | "interaction" | "inverted";
 }
 
-export const Loader = forwardRef<SVGSVGElement, LoaderProps>(
+/* Workaround for @types/react v17/v18 feil */
+export type LoaderType = React.ForwardRefExoticComponent<
+  LoaderProps & React.RefAttributes<SVGSVGElement>
+>;
+
+export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
   (
     {
       children,

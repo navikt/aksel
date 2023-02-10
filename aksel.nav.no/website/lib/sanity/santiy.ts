@@ -16,8 +16,8 @@ export async function sitemapPages(
   token?: string
 ): Promise<{ path: string; lastmod: string }[]> {
   const client = token ? noCdnClient(token) : getClient();
-  const artikler = await getDocuments("all");
-  const temaer = await getAkselTema();
+  const artikler = await getDocuments("all", token);
+  const temaer = await getAkselTema(token);
 
   const pages = await client.fetch(
     `{

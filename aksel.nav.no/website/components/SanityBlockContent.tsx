@@ -1,7 +1,7 @@
 import { ExternalLink } from "@navikt/ds-icons";
 import { BodyLong, Detail, Heading, Ingress, Link } from "@navikt/ds-react";
 import BlockContent from "@sanity/block-content-to-react";
-import cl from "classnames";
+import cl from "clsx";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
 import NextLink from "next/link";
 import React, { createContext, useContext } from "react";
@@ -13,6 +13,7 @@ import {
   DoDont,
   Kode,
   LevelTwoHeading,
+  logNav,
   PropsSeksjon,
   RelatertInnhold,
   SideModul,
@@ -20,6 +21,7 @@ import {
   TastaturModul,
   Tips,
   TokenTable,
+  UuFeedback,
   Video,
 } from ".";
 
@@ -50,6 +52,7 @@ const serializers = {
     video: ({ node }) => <Video node={node} />,
     tips: ({ node }) => <Tips node={node} />,
     kode_eksempler: ({ node }) => <CodeExamples node={node} />,
+    uufeedback: ({ node }) => <UuFeedback node={node} />,
 
     block: ({ node, children }) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -182,20 +185,56 @@ const serializers = {
       mark: any;
       children: any;
     }) => {
+      if (!href) {
+        return children;
+      }
       if (href && href.startsWith("mailto:")) {
         return (
           <NextLink href={href} passHref>
-            <Link className="inline">{children}</Link>
+            <Link
+              onClick={(e) =>
+                logNav(
+                  "link",
+                  window.location.pathname,
+                  e.currentTarget.getAttribute("href")
+                )
+              }
+              className="inline"
+            >
+              {children}
+            </Link>
           </NextLink>
         );
       }
       return blank ? (
-        <Link href={href} target="_blank" rel="noreferrer noopener">
+        <Link
+          href={href}
+          target="_blank"
+          rel="noreferrer noopener"
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+        >
           {children} <ExternalLink title="åpner lenken i ny fane" />
         </Link>
       ) : (
         <NextLink href={href} passHref>
-          <Link className="inline">{children}</Link>
+          <Link
+            onClick={(e) =>
+              logNav(
+                "link",
+                window.location.pathname,
+                e.currentTarget.getAttribute("href")
+              )
+            }
+            className="inline"
+          >
+            {children}
+          </Link>
         </NextLink>
       );
     },
@@ -206,7 +245,17 @@ const serializers = {
       const href = `/${slug?.current}`;
       return (
         <NextLink href={href} passHref>
-          <Link>{children}</Link>
+          <Link
+            onClick={(e) =>
+              logNav(
+                "link",
+                window.location.pathname,
+                e.currentTarget.getAttribute("href")
+              )
+            }
+          >
+            {children}
+          </Link>
         </NextLink>
       );
     },

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { Popover } from "../index";
 import { Button } from "../button";
@@ -55,28 +56,33 @@ export default {
   },
 };
 
-export const Default = (props: any) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState<boolean>(false);
-  return (
-    <div>
-      <Button ref={(el) => setAnchorEl(el)} onClick={() => setOpen((x) => !x)}>
-        Open
-      </Button>
-      <Popover
-        {...props}
-        open={props.open ?? open}
-        anchorEl={anchorEl}
-        onClose={(e) => setOpen(e)}
-      >
-        <Popover.Content>Velit in consequat</Popover.Content>
-      </Popover>
-    </div>
-  );
+export const Default = {
+  render: (props: any) => {
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>();
+    const [open, setOpen] = useState<boolean>(false);
+    return (
+      <div>
+        <Button
+          ref={(el) => setAnchorEl(el)}
+          onClick={() => setOpen((x) => !x)}
+        >
+          Open
+        </Button>
+        <Popover
+          {...props}
+          open={props.open ?? open}
+          anchorEl={anchorEl}
+          onClose={(e) => setOpen(e)}
+        >
+          <Popover.Content>Velit in consequat</Popover.Content>
+        </Popover>
+      </div>
+    );
+  },
 };
 
 const Template = (props) => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   return (
     <>

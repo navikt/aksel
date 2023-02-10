@@ -1,5 +1,5 @@
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Tabs } from ".";
 
@@ -54,28 +54,30 @@ const Panel = () => {
   );
 };
 
-export const Default = (props) => {
-  return (
-    <Tabs
-      defaultValue="test2"
-      size={props?.size}
-      selectionFollowsFocus={props?.selectionFollowsFocus}
-      loop={props?.loop}
-      iconPosition={props?.iconPosition}
-    >
-      <Tabs.List>
-        <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
-        <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
-        <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
-      </Tabs.List>
-      <Panel />
-    </Tabs>
-  );
-};
+export const Default = {
+  render: (props) => {
+    return (
+      <Tabs
+        defaultValue="test2"
+        size={props?.size}
+        selectionFollowsFocus={props?.selectionFollowsFocus}
+        loop={props?.loop}
+        iconPosition={props?.iconPosition}
+      >
+        <Tabs.List>
+          <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
+          <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
+          <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
+        </Tabs.List>
+        <Panel />
+      </Tabs>
+    );
+  },
 
-Default.args = {
-  selectionFollowsFocus: false,
-  loop: false,
+  args: {
+    selectionFollowsFocus: false,
+    loop: false,
+  },
 };
 
 export const Small = () => {

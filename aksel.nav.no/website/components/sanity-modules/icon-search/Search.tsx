@@ -1,11 +1,20 @@
-import { AmplitudeEvents, isNew, logAmplitudeEvent } from "@/components";
+import {
+  AmplitudeEvents,
+  FigmaIcon,
+  GithubIcon,
+  isNew,
+  logAmplitudeEvent,
+  YarnIcon,
+} from "@/components";
 import meta from "@navikt/ds-icons/meta.json";
-import { BodyLong, Heading, Link, Modal } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Heading, Link, Modal } from "@navikt/ds-react";
+import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Filter, { FilterT } from "./Filter";
 import { categorizeIcons, CategoryT, IconMetaT } from "./iconCategories";
+import ModalContent from "./ModalContent";
 
 const SkeletonElement = () => (
   <div className="vk-icon_button bg-surface-subtle h-32 w-48 shrink rounded" />
@@ -26,11 +35,6 @@ const IconView = dynamic(() => import("./IconView"), {
       </div>
     </div>
   ),
-  ssr: false,
-});
-
-const ModalContent = dynamic(() => import("./ModalContent"), {
-  loading: () => <ModalPlaceholder />,
   ssr: false,
 });
 
@@ -148,6 +152,8 @@ const IconSearch = () => {
 
   return (
     <div className="relative flex w-full max-w-full flex-col md:w-[1000px] md:max-w-[62vw]">
+      <Links />
+      <SuggestionBlock variant="ikoner" />
       <div className="flex w-full flex-wrap justify-between gap-x-8 gap-y-4">
         <Filter onFilterChange={handleFilterChange} />
       </div>
@@ -177,4 +183,62 @@ const IconSearch = () => {
     </div>
   );
 };
+
 export default IconSearch;
+
+function Links() {
+  return (
+    <BodyShort
+      as="span"
+      size="small"
+      className="text-text-subtle mb-6 flex flex-wrap gap-4"
+    >
+      <>
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://github.com/navikt/aksel/tree/main/%40navikt/icons"
+          className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+          onClick={() =>
+            logAmplitudeEvent("link", {
+              kilde: "intro-lenker ikonside",
+              til: "github",
+            })
+          }
+        >
+          <GithubIcon /> Github
+        </a>
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://yarnpkg.com/package/@navikt/ds-icons"
+          className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+          onClick={() =>
+            logAmplitudeEvent("link", {
+              kilde: "intro-lenker ikonside",
+              til: "yarn",
+            })
+          }
+        >
+          <YarnIcon />
+          Yarn
+        </a>
+      </>
+
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://www.figma.com/@nav_aksel"
+        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker ikonside",
+            til: "figma",
+          })
+        }
+      >
+        <FigmaIcon /> Figma
+      </a>
+    </BodyShort>
+  );
+}

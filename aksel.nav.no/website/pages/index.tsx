@@ -3,6 +3,7 @@ import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
+import { logNav } from "../components";
 import {
   ComponentIcon,
   DownloadIcon,
@@ -21,7 +22,7 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
 import { lazy, useEffect, useState } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
 function getPrefersReducedMotion() {
   const QUERY = "(prefers-reduced-motion: no-preference)";
@@ -57,9 +58,18 @@ const IntroCards = () => {
       {introcards.map(({ icon: Icon, title, desc, href }) => (
         <li key={title} className="grid">
           <Link href={href} passHref>
-            <a className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none">
+            <a
+              className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none"
+              onClick={(e) =>
+                logNav(
+                  "intro-kort",
+                  window.location.pathname,
+                  e.currentTarget.getAttribute("href")
+                )
+              }
+            >
               <span className="xs:flex items-center gap-2">
-                <Icon aria-hidden className="shrink-0 text-2xl" />
+                <Icon aria-hidden className="shrink-0 text-2xl" role="img" />
                 <span className="text-xl font-semibold group-hover:underline">
                   {title}
                 </span>
@@ -84,8 +94,17 @@ const GetStarted = ({
   const [pause, setPause] = useState(false);
 
   useEffect(() => {
-    setReducedMotion(getPrefersReducedMotion());
+    const disableAnimations =
+      navigator.userAgent.indexOf("Safari") !== -1 &&
+      navigator.userAgent.indexOf("Chrome") === -1;
+
+    setReducedMotion(getPrefersReducedMotion() || disableAnimations);
     const data = localStorage.getItem("pause-animations");
+    if (disableAnimations) {
+      setPause(true);
+      togglePause(true);
+      return;
+    }
     setPause(JSON.parse(data) ?? false);
     togglePause(JSON.parse(data) ?? false);
   }, [togglePause]);
@@ -120,12 +139,12 @@ const GetStarted = ({
         >
           {pause ? (
             <>
-              <PlayIcon aria-hidden />
+              <PlayIcon aria-hidden role="img" />
               <span className="sr-only">Start animasjon</span>
             </>
           ) : (
             <>
-              <PauseIcon aria-hidden />
+              <PauseIcon aria-hidden role="img" />
               <span className="sr-only">Stopp animasjon</span>
             </>
           )}
@@ -143,6 +162,7 @@ const Forside = ({
   bloggs,
   resent,
   komigang,
+  temaCount,
 }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
 
@@ -230,7 +250,9 @@ const Forside = ({
                 ))}
               </ul>
               <div className="mx-auto mt-8">
-                <AkselLink href="/god-praksis">Utforsk god praksis</AkselLink>
+                <AkselLink href="/god-praksis">
+                  {`Utforsk alle ${temaCount} god praksis tema`}
+                </AkselLink>
               </div>
               <div className="mt-20">
                 <Heading level="3" size="medium">
@@ -315,6 +337,7 @@ interface PageProps {
     title: string;
     slug: string;
   }[];
+  temaCount: number;
   slug: string;
   preview: boolean;
 }
@@ -332,6 +355,7 @@ export const getStaticProps = async ({
     tema = null,
     resent = null,
     komigang = null,
+    temaCount = 0,
   } = await client.fetch(akselForsideQuery);
 
   return {
@@ -341,6 +365,7 @@ export const getStaticProps = async ({
       page,
       resent,
       komigang,
+      temaCount,
       slug: "/",
       preview,
       id: page?._id ?? "",

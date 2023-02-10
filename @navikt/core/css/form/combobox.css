@@ -5,9 +5,49 @@
 }
 
 .navds-combobox__wrapper-inner {
+  position: relative;
   display: flex;
   flex-direction: row;
   width: 100%;
+  border: 1px solid black;
+  padding: 4px;
+  padding-right: calc(32px + 1rem);
+}
+
+.navds-combobox__wrapper-inner:hover {
+  cursor: text;
+}
+
+.navds-combobox__selected-options {
+  gap: var(--a-spacing-1);
+}
+
+.navds-combobox__selected-options > li {
+  margin: auto 0;
+}
+
+.navds-combobox__input-wrapper {
+  width: 100%;
+}
+
+.navds-combobox__input {
+  z-index: 1;
+  flex: 1;
+  border: none;
+  padding: 0;
+  padding-right: var(--a-spacing-10);
+  margin: 0;
+}
+
+.navds-combobox__input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.navds-combobox__wrapper-inner:has(.navds-combobox__input:focus) {
+  box-shadow: 0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset, var(--a-shadow-focus);
+  box-shadow: var(--a-shadow-focus);
 }
 
 .navds-combobox__list {

@@ -1,9 +1,10 @@
-import { Meta } from "@storybook/react/types-6-0";
+/* eslint-disable react-hooks/rules-of-hooks */
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 
 import { Search } from "../index";
 export default {
-  title: "ds-react/Form/Search",
+  title: "ds-react/Search",
   component: Search,
   argTypes: {
     clearButton: {
@@ -31,28 +32,30 @@ export default {
   },
 } as Meta;
 
-export const Default = (props) => {
-  const [state, setState] = useState("");
-  return (
-    <div data-theme={props.darkmode ? "dark" : "light"}>
-      <Search
-        value={props.controlled ? state : undefined}
-        onChange={props.controlled ? setState : null}
-        label="Søk"
-        size={props.size}
-        clearButton={props.clearButton}
-        variant={props.variant}
-        hideLabel={props.hideLabel}
-        error={props.error}
-      />
-    </div>
-  );
-};
+export const Default = {
+  render: (props) => {
+    const [state, setState] = useState("");
+    return (
+      <div data-theme={props.darkmode ? "dark" : "light"}>
+        <Search
+          value={props.controlled ? state : undefined}
+          onChange={props.controlled ? setState : undefined}
+          label="Søk"
+          size={props.size}
+          clearButton={props.clearButton}
+          variant={props.variant}
+          hideLabel={props.hideLabel}
+          error={props.error}
+        />
+      </div>
+    );
+  },
 
-Default.args = {
-  controlled: false,
-  darkmode: false,
-  hideLabel: true,
+  args: {
+    controlled: false,
+    darkmode: false,
+    hideLabel: true,
+  },
 };
 
 export const Small = () => (

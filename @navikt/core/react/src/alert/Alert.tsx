@@ -6,7 +6,7 @@ import {
 } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BodyLong } from "..";
+import { BodyLong } from "../typography/BodyLong";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

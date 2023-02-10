@@ -1,6 +1,6 @@
 import { Close, Hamburger as HamburgerIcon } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -46,27 +46,24 @@ export const Hamburger = () => {
 
   return (
     <>
-      <div className={cl("z-[1050] mr-0 flex h-full justify-center")}>
-        <Button
-          variant="tertiary"
-          aria-haspopup="false"
+      <div className="z-[1050] mr-0 flex h-full justify-center">
+        <button
           onClick={() => setOpen(!open)}
           aria-expanded={open}
-          className="aksel-tertiary-button"
-          icon={
-            <HamburgerIcon
-              className="pointer-events-none text-2xl"
-              aria-label="Åpne meny"
-            />
-          }
-        />
+          className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ml-2 flex aspect-square items-center justify-center rounded px-2 py-2 focus:outline-none"
+        >
+          <HamburgerIcon
+            className="pointer-events-none text-2xl"
+            aria-label="Åpne meny"
+          />
+        </button>
         <ReactModal
           isOpen={open}
           onRequestClose={() => setOpen(false)}
           aria={{ modal: true }}
           overlayClassName="header-modal__overlay"
           contentLabel="Meny"
-          className="bg-surface-default xs:max-w-[90%] xs:right-6 xs:left-auto xs:w-96 absolute left-4 top-0 right-4 block  rounded py-14 px-11 md:hidden"
+          className="bg-surface-default xs:max-w-[90%] xs:right-6 xs:left-auto xs:w-96 absolute left-4 top-0 right-4 block rounded py-14 px-11 md:hidden"
         >
           <nav aria-label="hovedmeny">
             <ul>

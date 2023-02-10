@@ -5,8 +5,8 @@
 Vi bruker yarn for pakkeversjonering. Har du ikke yarn? `npm i -g yarn`
 
 ```sh
-git clone git@github.com:navikt/Designsystemet.git
-cd Designsystemet
+git clone git@github.com:navikt/aksel.git
+cd aksel
 yarn install
 yarn boot
 
@@ -46,7 +46,7 @@ Dokumentasjon ang komponentter finner man på [aksel.nav.no](https://design.nav.
 
 ## Versjonering av pakker
 
-Vi bruker `changeset` for versionering av pakker. Se [README](https://github.com/navikt/Designsystemet/blob/master/.changeset/README.md) for mer informasjon.
+Vi bruker `changeset` for versionering av pakker. Se [README](https://github.com/navikt/aksel/blob/main/.changeset/README.md) for mer informasjon.
 
 ## Kodekvalitet og testing
 
@@ -57,6 +57,6 @@ Noen komponenter og løsninger blir testet med jest + react-testing-library.
 
 ## Oppdatere Aksel.nav.no
 
-Push til `master` pusher endringer til prod
+Push til `main` pusher endringer til prod
 
 Push til `next` pusher endringer til aksel.dev.nav.no
