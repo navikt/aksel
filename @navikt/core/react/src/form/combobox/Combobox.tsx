@@ -251,8 +251,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               {filteredOptions.map((o, i) => (
                 <li
                   className={cl("navds-combobox__list-item", {
-                    "navds-combobox__list-item--selected":
+                    "navds-combobox__list-item--focus":
                       i === internalOptionsIndex,
+                    "navds-combobox__list-item--selected": chips.includes(o),
                   })}
                   key={o}
                   onClick={() => setChips([...chips, o])}
