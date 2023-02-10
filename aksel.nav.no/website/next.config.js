@@ -95,6 +95,18 @@ const config = () =>
         },
       ];
     },
+    webpack(config) {
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ["@svgr/webpack"],
+      });
+
+      return config;
+    },
+    images: {
+      domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
+      dangerouslyAllowSVG: true,
+    },
   });
 
 if (process.env.NODE_ENV === "production") {
