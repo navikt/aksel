@@ -11,7 +11,6 @@ import React, {
 import {
   BodyShort,
   Chips,
-  /* Dropdown, */
   Label,
   mergeRefs,
   omit,
@@ -140,9 +139,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setSelectedOptions(
         selectedOptions.filter((option) => option !== clickedOption)
       );
-      console.log("DEBUG - tet:", selectedOptions, clickedOption);
     };
-    console.log("DEBUG - selectedOptions:", selectedOptions);
     return (
       <div
         ref={setWrapperRef}
