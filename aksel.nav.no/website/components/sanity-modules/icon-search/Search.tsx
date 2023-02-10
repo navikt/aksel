@@ -8,7 +8,7 @@ import {
 } from "@/components";
 import meta from "@navikt/ds-icons/meta.json";
 import { BodyLong, BodyShort, Heading, Link, Modal } from "@navikt/ds-react";
-import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
+import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";

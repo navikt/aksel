@@ -7295,6 +7295,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.41.0
     "@whitespace/storybook-addon-html": ^5.0.3
     chromatic: 6.5.4
+    concurrently: 7.2.1
     eslint: ^8.16.0
     eslint-config-react-app: ^7.0.1
     eslint-plugin-import: ^2.26.0
