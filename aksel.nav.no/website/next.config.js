@@ -80,9 +80,8 @@ const config = () =>
         },
         {
           source: "/storybook",
-          destination:
-            "https://master--5f801fb2aea7820022de2936.chromatic.com/",
-          permanent: true,
+          destination: "https://main--5f801fb2aea7820022de2936.chromatic.com/",
+          permanent: false,
         },
         {
           source: "/prinsipper",
@@ -95,19 +94,6 @@ const config = () =>
           permanent: true,
         },
       ];
-    },
-
-    webpack(config) {
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
-      });
-
-      return config;
-    },
-    images: {
-      domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
-      dangerouslyAllowSVG: true,
     },
   });
 

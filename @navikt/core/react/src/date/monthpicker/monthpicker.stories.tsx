@@ -54,17 +54,19 @@ export const NB = () => <MonthPicker.Standalone locale="nb" />;
 export const NN = () => <MonthPicker.Standalone locale="nn" />;
 export const EN = () => <MonthPicker.Standalone locale="en" />;
 
-export const DisabledMonths = (props) => {
-  return (
-    <MonthPicker.Standalone
-      disabled={[
-        { from: new Date("Jan 1 2022"), to: new Date("Jul  6 2022") },
-        { from: new Date("Apr 2 2023"), to: new Date("Dec 4 2023") },
-        new Date("Sep 5 2022"),
-        new Date("Jan 5 2023"),
-      ]}
-    />
-  );
+export const DisabledMonths = {
+  render: (props) => {
+    return (
+      <MonthPicker.Standalone
+        disabled={[
+          { from: new Date("Jan 1 2022"), to: new Date("Jul  6 2022") },
+          { from: new Date("Apr 2 2023"), to: new Date("Dec 4 2023") },
+          new Date("Sep 5 2022"),
+          new Date("Jan 5 2023"),
+        ]}
+      />
+    );
+  },
 };
 
 export const Standalone = () => {

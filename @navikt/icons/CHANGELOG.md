@@ -1,5 +1,7 @@
 # @navikt/ds-icons
 
+## 2.1.7
+
 ## 2.1.6
 
 ## 2.1.5
@@ -14,7 +16,7 @@
 
 ### Patch Changes
 
-- [#1759](https://github.com/navikt/Designsystemet/pull/1759) [`dcf5cfc06`](https://github.com/navikt/Designsystemet/commit/dcf5cfc06b751341559ef30085bd974820531e57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset @types/react v18 feil introdusert i v2.0.6
+- [#1759](https://github.com/navikt/aksel/pull/1759) [`dcf5cfc06`](https://github.com/navikt/aksel/commit/dcf5cfc06b751341559ef30085bd974820531e57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset @types/react v18 feil introdusert i v2.0.6
 
 ## 2.1.0
 
@@ -24,13 +26,13 @@
 
 ### Patch Changes
 
-- [`27e3dfee0`](https://github.com/navikt/Designsystemet/commit/27e3dfee07e135893e9f62cd32f80ed83a3510de) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Translate og Paragraph ikon
+- [`27e3dfee0`](https://github.com/navikt/aksel/commit/27e3dfee07e135893e9f62cd32f80ed83a3510de) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Translate og Paragraph ikon
 
 ## 2.0.16
 
 ### Patch Changes
 
-- [`54f8b0795`](https://github.com/navikt/Designsystemet/commit/54f8b07956bbfb7de51f6682a5fc64903bfd1bdf) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner med feile farger
+- [`54f8b0795`](https://github.com/navikt/aksel/commit/54f8b07956bbfb7de51f6682a5fc64903bfd1bdf) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner med feile farger
 
 ## 2.0.15
 
@@ -40,7 +42,7 @@
 
 ### Patch Changes
 
-- [`a6c339123`](https://github.com/navikt/Designsystemet/commit/a6c3391237f13394063e4c004ac9efb1875fc944) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Ikonjusteringer sirkleikoner
+- [`a6c339123`](https://github.com/navikt/aksel/commit/a6c3391237f13394063e4c004ac9efb1875fc944) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Ikonjusteringer sirkleikoner
 
 ## 2.0.12
 
@@ -66,7 +68,7 @@
 
 ### Patch Changes
 
-- [#1719](https://github.com/navikt/Designsystemet/pull/1719) [`e4b6237e1`](https://github.com/navikt/Designsystemet/commit/e4b6237e1bbf13b1ce5415845d558831b47caf7c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner
+- [#1719](https://github.com/navikt/aksel/pull/1719) [`e4b6237e1`](https://github.com/navikt/aksel/commit/e4b6237e1bbf13b1ce5415845d558831b47caf7c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner
 
 ## 2.0.3
 
@@ -96,7 +98,7 @@
 
 ### Patch Changes
 
-- [#1709](https://github.com/navikt/Designsystemet/pull/1709) [`77302a30b`](https://github.com/navikt/Designsystemet/commit/77302a30b8eef8dc00b2d2e9c904a3f57da81a11) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner
+- [#1709](https://github.com/navikt/aksel/pull/1709) [`77302a30b`](https://github.com/navikt/aksel/commit/77302a30b8eef8dc00b2d2e9c904a3f57da81a11) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner
 
 ## 1.5.3
 
@@ -120,10 +122,10 @@
 
 ### Patch Changes
 
-- [`40f0b3340`](https://github.com/navikt/Designsystemet/commit/40f0b3340d01bf85fecc04f2f3a8e8b2acf996f1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bump for latest-tag
+- [`40f0b3340`](https://github.com/navikt/aksel/commit/40f0b3340d01bf85fecc04f2f3a8e8b2acf996f1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bump for latest-tag
 
 ## 1.3.38
 
 ### Patch Changes
 
-- [#1692](https://github.com/navikt/Designsystemet/pull/1692) [`aa506975b`](https://github.com/navikt/Designsystemet/commit/aa506975b4466d4daa79c75f5f9faa255b7fae42) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdaterte kateogorisering for ikoner i Figma
+- [#1692](https://github.com/navikt/aksel/pull/1692) [`aa506975b`](https://github.com/navikt/aksel/commit/aa506975b4466d4daa79c75f5f9faa255b7fae42) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdaterte kateogorisering for ikoner i Figma

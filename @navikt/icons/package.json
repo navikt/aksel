@@ -1,11 +1,11 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Aksel icons for NAV",
   "author": "Aksel | NAV designsystem team",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/Designsystemet.git"
+    "url": "git+https://github.com/navikt/aksel.git"
   },
   "keywords": [
     "Icons",

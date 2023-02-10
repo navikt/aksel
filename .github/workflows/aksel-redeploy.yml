@@ -12,17 +12,17 @@ on:
         default: "false"
 
 env:
-  IMAGE: ghcr.io/navikt/designsystemet
+  IMAGE: ghcr.io/navikt/aksel
 
 jobs:
   redeploy:
     name: Redeploy image
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: "14"
-      - uses: actions/checkout@v2
+          node-version: "16"
+      - uses: actions/checkout@v3
       - name: Login to GitHub Container Registry
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # Use commit-sha1 instead of tag for security concerns
         with:

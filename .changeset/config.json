@@ -1,9 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
-  "changelog": [
-    "@changesets/changelog-github",
-    { "repo": "navikt/Designsystemet" }
-  ],
+  "changelog": ["@changesets/changelog-github", { "repo": "navikt/aksel" }],
   "commit": false,
   "fixed": [
     [
@@ -19,7 +16,7 @@
   ],
   "linked": [],
   "access": "public",
-  "baseBranch": "master",
+  "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": ["shadow-dom", "aksel.nav.no", "@navikt/ds-navno"],
 

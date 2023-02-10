@@ -10,8 +10,8 @@ import {
   Snippet,
 } from "@/components";
 import { SanityT } from "@/lib";
-import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
 import { Download } from "@navikt/ds-icons";
+import { SuggestionBlock } from "components/website-modules/suggestionblock";
 
 const ModalContent = ({ icon }: { icon: string }) => {
   const [blob, setBlob]: any = useState();
@@ -34,7 +34,7 @@ const ModalContent = ({ icon }: { icon: string }) => {
   }, [icon]);
 
   async function getBlob(icon: string) {
-    const iconUrl = `https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${icon}.svg`;
+    const iconUrl = `https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${icon}.svg`;
     fetch(iconUrl)
       .then((r) => {
         return r.text();
@@ -134,7 +134,7 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
       <div className="mt-auto flex">
         <div className="text-text-default flex h-36 flex-1 items-center justify-center bg-white text-[6rem]">
           <Image
-            src={`https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${icon}.svg`}
+            src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${icon}.svg`}
             decoding="sync"
             width="96"
             height="96"
@@ -146,7 +146,7 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
         </div>
         <div className="text-text-on-inverted flex h-36 flex-1 items-center justify-center bg-gray-900 text-[6rem]">
           <Image
-            src={`https://raw.githubusercontent.com/navikt/Designsystemet/master/%40navikt/icons/svg/${icon}.svg`}
+            src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${icon}.svg`}
             decoding="sync"
             className="invert"
             width="96"

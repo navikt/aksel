@@ -1,5 +1,7 @@
 # @navikt/ds-css-internal
 
+## 2.1.7
+
 ## 2.1.6
 
 ## 2.1.5
@@ -16,7 +18,7 @@
 
 ### Minor Changes
 
-- [#1665](https://github.com/navikt/Designsystemet/pull/1665) [`6ab84e581`](https://github.com/navikt/Designsystemet/commit/6ab84e581f8d3e850bcec340608354335506a051) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Ny Timeline-komponent for interne-flater
+- [#1665](https://github.com/navikt/aksel/pull/1665) [`6ab84e581`](https://github.com/navikt/aksel/commit/6ab84e581f8d3e850bcec340608354335506a051) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Ny Timeline-komponent for interne-flater
   :bug: Fikset feil danger-hover token
 
 ## 2.0.18
@@ -59,7 +61,7 @@
 
 ### Major Changes
 
-- [`6b96e4833`](https://github.com/navikt/Designsystemet/commit/6b96e48330c2e013a1acee85cefccd9ccc1aece4) Thanks [@KenAJoh](https://github.com/KenAJoh)! - v2: Tokens update and font-loading
+- [`6b96e4833`](https://github.com/navikt/aksel/commit/6b96e48330c2e013a1acee85cefccd9ccc1aece4) Thanks [@KenAJoh](https://github.com/KenAJoh)! - v2: Tokens update and font-loading
 
 ## 1.5.10
 
@@ -101,6 +103,6 @@
 
 ### Patch Changes
 
-- [`40f0b3340`](https://github.com/navikt/Designsystemet/commit/40f0b3340d01bf85fecc04f2f3a8e8b2acf996f1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bump for latest-tag
+- [`40f0b3340`](https://github.com/navikt/aksel/commit/40f0b3340d01bf85fecc04f2f3a8e8b2acf996f1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bump for latest-tag
 
 ## 1.3.38

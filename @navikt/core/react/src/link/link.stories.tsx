@@ -11,30 +11,32 @@ export default {
   component: Link,
 };
 
-export const Default = (props) => {
-  const LinkD = () => (
-    <Link href="#">
-      {props.icon && <Add />}Ex aliqua incididunt {props.icon && <Add />}
-    </Link>
-  );
-
-  if (props.inline) {
-    return (
-      <BodyLong>
-        Incididunt laborum nisi nisi Lorem <LinkD /> in. Laborum aute fugiat
-        officia adipisicing non veniam dolor nulla non ex consectetur fugiat
-        eiusmod aute. Culpa sit aute est duis minim in in voluptate velit
-        fugiat. Laboris est id deserunt ut ea Lorem eu. Esse elit laboris aute
-        commodo sint laborum fugiat aliqua.
-      </BodyLong>
+export const Default = {
+  render: (props) => {
+    const LinkD = () => (
+      <Link href="#">
+        {props.icon && <Add />}Ex aliqua incididunt {props.icon && <Add />}
+      </Link>
     );
-  }
-  return <LinkD />;
-};
 
-Default.args = {
-  icon: false,
-  inline: false,
+    if (props.inline) {
+      return (
+        <BodyLong>
+          Incididunt laborum nisi nisi Lorem <LinkD /> in. Laborum aute fugiat
+          officia adipisicing non veniam dolor nulla non ex consectetur fugiat
+          eiusmod aute. Culpa sit aute est duis minim in in voluptate velit
+          fugiat. Laboris est id deserunt ut ea Lorem eu. Esse elit laboris aute
+          commodo sint laborum fugiat aliqua.
+        </BodyLong>
+      );
+    }
+    return <LinkD />;
+  },
+
+  args: {
+    icon: false,
+    inline: false,
+  },
 };
 
 const DemoLink = () => (
