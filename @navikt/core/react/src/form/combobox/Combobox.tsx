@@ -93,7 +93,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
-    const [isInputFocused, setIsInputFocused] = useState(false);
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
 
     const handleChange = useCallback(
@@ -106,8 +105,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const focusInput = useCallback(() => {
       inputRef.current && inputRef.current?.focus?.();
-      setIsInputFocused(true);
-    }, [setIsInputFocused]);
+    }, []);
 
     const handleClear = useCallback(
       (event: ComboboxClearEvent) => {
@@ -184,11 +182,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           <div className="navds-combobox__wrapper-inner" onClick={focusInput}>
             <Chips className="navds-combobox__selected-options">
               {selectedOptions.length
-                ? selectedOptions.map((option) => {
+                ? selectedOptions.map((option, i) => {
                     return (
                       <Chips.Removable
                         className="navds-combobox__selected-option"
-                        key={option}
+                        key={option + i}
                         onClick={() => handleDeleteChip(option)}
                       >
                         {option}
@@ -198,8 +196,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 : []}
 
               <input
+                key="combobox-input"
                 ref={mergedRef}
-                onBlur={() => setIsInputFocused(false)}
                 {...omit(rest, ["error", "errorId", "size"])}
                 {...inputProps}
                 value={value ?? internalValue}
@@ -229,28 +227,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 <Close aria-hidden />
               </button>
             )}
-          </div>
-          <div className="navds-combobox__wrapper-dropdown">
-            <select
-              className={cl("navds-combobox__dropdown", {
-                "navds-combobox__dropdown--open": isInputFocused,
-              })}
-              onChange={(e) => {
-                setSelectedOptions([...selectedOptions, e.target.value]);
-                //selectedValue = first value in array
-              }}
-            >
-              {options
-                ?.filter(
-                  (opt) =>
-                    !selectedOptions.some(
-                      (selected) => selected.toLowerCase() === opt.toLowerCase()
-                    )
-                )
-                ?.map((opt) => (
-                  <option value={opt?.toLowerCase()}>{opt}</option>
-                ))}
-            </select>
           </div>
         </div>
       </div>
