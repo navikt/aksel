@@ -45,6 +45,8 @@ export interface ComboboxContextProps {
   variant: "primary" | "secondary" | "simple";
 }
 
+const normalizeText = (text) => (text ? text.toLowerCase().trim() : "");
+
 export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
     const {
@@ -85,10 +87,17 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultValue ? String(defaultValue) : ""
     );
     const [internalOptionsIndex, setInternalOptionsIndex] = useState(0);
-    const filteredOptions = useMemo(
-      () => options?.filter((option) => option.includes(internalValue)) || [],
-      [internalValue, options]
-    );
+    const filteredOptions = useMemo(() => {
+      if (internalValue) {
+        return (
+          options?.filter((option) =>
+            normalizeText(option).includes(normalizeText(internalValue))
+          ) || []
+        );
+      } else {
+        return options;
+      }
+    }, [internalValue, options]);
 
     const handleChange = useCallback(
       (v: string) => {
