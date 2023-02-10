@@ -28,6 +28,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 1,
   desc: "Vi anbefaler å ikke bruke horisontal stepper, spesielt på eksterne flater. Dette er for å bedre støtte mobilenheter.",

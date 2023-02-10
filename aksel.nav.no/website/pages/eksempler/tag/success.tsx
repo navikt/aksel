@@ -12,6 +12,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 2,
   desc: "Beskriver noe som er positivt, gjennomført, vellykket, etc.",

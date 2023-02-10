@@ -24,6 +24,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 3,
   desc: "Vi anbefaler å bruke UNSAFE_useMonthpicker-hook hvis man har et input-felt",
