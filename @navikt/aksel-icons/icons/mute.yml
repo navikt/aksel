@@ -1,5 +1,5 @@
 name: Mute
-set: media
+category: media
 description: Indikerer mutet mikrofon
 keywords:
   - mikrofon
