@@ -4,10 +4,12 @@
 
 const fs = require("fs");
 
-const files = fs.readdirSync(`./esm`).filter((x) => x.endsWith(".d.ts"));
+const basePath = "./dist/esm";
+
+const files = fs.readdirSync(basePath).filter((x) => x.endsWith(".d.ts"));
 
 files.forEach((file) => {
-  let data = fs.readFileSync(`./esm/${file}`).toString().split("\n");
+  let data = fs.readFileSync(`${basePath}/${file}`).toString().split("\n");
 
   data = data.map((x) => {
     return x.includes("React.ForwardRefExoticComponent")
@@ -16,5 +18,5 @@ files.forEach((file) => {
       : x;
   });
 
-  fs.writeFileSync(`./esm/${file}`, data.join("\n"));
+  fs.writeFileSync(`${basePath}/${file}`, data.join("\n"));
 });

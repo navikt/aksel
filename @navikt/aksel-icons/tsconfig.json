@@ -1,9 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./cjs",
+    "outDir": "./dist/cjs",
     "module": "commonjs"
   },
-  "exclude": ["./figma", "./util", "./tests", "./scripts", "**/*.stories.*"],
+  "exclude": ["./util", "./__tests__", "**/*.stories.*"],
   "include": ["./src"]
 }

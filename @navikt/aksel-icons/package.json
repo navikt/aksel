@@ -20,21 +20,25 @@
     "*.svg"
   ],
   "license": "MIT",
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
-  "typings": "./esm/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "typings": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./svg/*.svg": "./dist/svg/*.svg"
+  },
   "files": [
-    "/cjs",
-    "/esm",
-    "/src",
-    "/svg",
-    "/meta.json",
-    "!**/*.tsbuildinfo"
+    "dist/*"
   ],
   "scripts": {
     "create-icons": "svgr --silent --out-dir src icons",
     "copy-util": "copyfiles util/* src",
-    "build": "yarn copy-util && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node cleanTypes.js",
+    "copy-svg": "copyfiles -f icons/*.svg dist/svg/",
+    "build": "yarn copy-util && yarn copy-svg && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node cleanTypes.js",
     "build:old": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node cleanTypes.js && yarn create-package-json-pointers-to-esm",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
