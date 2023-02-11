@@ -1,0 +1,53 @@
+{
+  "name": "@navikt/aksel-icons",
+  "version": "2.1.7",
+  "author": "Aksel | NAV",
+  "homepage": "https://aksel.nav.no/ikoner",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/aksel-icons"
+  },
+  "keywords": [
+    "Icons",
+    "NAV",
+    "Aksel",
+    "designsystem",
+    "react",
+    "svg"
+  ],
+  "sideEffects": [
+    "*.svg"
+  ],
+  "license": "MIT",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "typings": "./esm/index.d.ts",
+  "files": [
+    "/cjs",
+    "/esm",
+    "/src",
+    "/svg",
+    "/meta.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "scripts": {
+    "create-icons": "svgr --silent --out-dir src svg",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "@types/react": "^17.0.30 || ^18.0.0",
+    "react": "^17.0.0 || ^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@svgr/cli": "6.2.1",
+    "js-yaml": "^4.1.0",
+    "react": "^18.0.0",
+    "typescript": "^4.8.0"
+  }
+}
