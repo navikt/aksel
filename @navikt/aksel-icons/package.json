@@ -32,7 +32,10 @@
     "!**/*.tsbuildinfo"
   ],
   "scripts": {
-    "create-icons": "svgr --silent --out-dir src svg",
+    "create-icons": "svgr --silent --out-dir src icons",
+    "copy-util": "copyfiles util/* src",
+    "build": "yarn copy-util && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node cleanTypes.js",
+    "build:old": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node cleanTypes.js && yarn create-package-json-pointers-to-esm",
     "test": "jest"
   },
   "peerDependencies": {
@@ -46,8 +49,10 @@
   },
   "devDependencies": {
     "@svgr/cli": "6.2.1",
+    "concurrently": "7.2.1",
     "js-yaml": "^4.1.0",
     "react": "^18.0.0",
-    "typescript": "^4.8.0"
+    "typescript": "^4.8.0",
+    "copyfiles": "^2.4.1"
   }
 }
