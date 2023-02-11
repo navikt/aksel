@@ -1,4 +1,4 @@
-const template = require("./template");
+const template = require("./config/template");
 
 module.exports = {
   typescript: true,
