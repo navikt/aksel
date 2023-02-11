@@ -94,7 +94,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
-    const [chips, setChips] = useState<string[]>([]);
     const [isInternalListOpen, setInternalListOpen] =
       useState<boolean>(isListOpen);
     const [internalValue, setInternalValue] = useState<string>(
@@ -140,7 +139,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const toggleOption = useCallback(() => {
       const activeChip = filteredOptions[filteredOptionsIndex];
-      if (chips.includes(activeChip)) {
+      if (selectedOptions.includes(activeChip)) {
         setSelectedOptions(
           selectedOptions.filter((option) => option !== activeChip)
         );
@@ -148,7 +147,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         setSelectedOptions([...selectedOptions, activeChip]);
       }
     }, [
-      chips,
+      selectedOptions,
       filteredOptions,
       filteredOptionsIndex,
       selectedOptions,
@@ -177,17 +176,22 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       "keydown",
       useCallback(
         (e) => {
-          if (e.key === "Backspace" && internalValue === "") {
-            setChips(chips.slice(0, -1));
-          } else if (e.key === "ArrowDown") {
+          if (e.key === "Backspace" && internalValue === "")
+            setSelectedOptions(selectedOptions.slice(0, -1));
+          else if (e.key === "ArrowDown")
             setFilteredOptionsIndex(
               Math.min(filteredOptionsIndex + 1, filteredOptions.length - 1)
             );
-          } else if (e.key === "ArrowUp") {
+          else if (e.key === "ArrowUp")
             setFilteredOptionsIndex(Math.max(0, filteredOptionsIndex - 1));
-          }
         },
-        [chips, internalValue, filteredOptionsIndex, filteredOptions]
+        [
+          selectedOptions,
+          internalValue,
+          filteredOptionsIndex,
+          filteredOptions,
+          setSelectedOptions,
+        ]
       )
     );
 
@@ -294,10 +298,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   className={cl("navds-combobox__list-item", {
                     "navds-combobox__list-item--focus":
                       i === filteredOptionsIndex,
-                    "navds-combobox__list-item--selected": chips.includes(o),
+                    "navds-combobox__list-item--selected":
+                      selectedOptions.includes(o),
                   })}
                   key={o}
-                  onClick={() => setChips([...chips, o])}
+                  onClick={() => setSelectedOptions([...selectedOptions, o])}
                 >
                   <BodyShort size="medium">{o}</BodyShort>
                 </li>
