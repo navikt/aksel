@@ -83,7 +83,7 @@ const config = () =>
             source: "/storybook",
             destination:
               "https://main--5f801fb2aea7820022de2936.chromatic.com/",
-            permanent: true,
+            permanent: false,
           },
           {
             source: "/prinsipper",

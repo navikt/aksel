@@ -128,6 +128,11 @@ const jobb = [
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 3,
   desc: "Lar deg 'zoome' til predefinerte tidsperioder. Bruk 'startDate/endDate'-prop i Timeline for å justere hvilken tidsperiode som blir vist.",

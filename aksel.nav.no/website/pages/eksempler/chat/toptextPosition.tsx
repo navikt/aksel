@@ -26,6 +26,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 3,
   desc: "Noen ganger ønsker man mer fleksibilitet for plassering av navn + tid i chatboblen.",
