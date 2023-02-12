@@ -15,6 +15,7 @@
     "website"
   ],
   "dependencies": {
+    "@navikt/aksel-icons": "^2.1.7",
     "@navikt/ds-codemod": "^2.1.7",
     "@navikt/ds-css": "^2.1.7",
     "@navikt/ds-css-internal": "^2.1.7",

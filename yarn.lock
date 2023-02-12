@@ -3323,7 +3323,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^2.1.7, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -7291,6 +7291,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
+    "@navikt/aksel-icons": ^2.1.7
     "@navikt/ds-codemod": ^2.1.7
     "@navikt/ds-css": ^2.1.7
     "@navikt/ds-css-internal": ^2.1.7
