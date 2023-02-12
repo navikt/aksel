@@ -35,6 +35,13 @@
       "default": "./dist/metadata.js"
     }
   },
+  "typesVersions": {
+    "*": {
+      "metadata": [
+        "./dist/metadata.d.ts"
+      ]
+    }
+  },
   "files": [
     "dist/*",
     "!**/*.tsbuildinfo"
