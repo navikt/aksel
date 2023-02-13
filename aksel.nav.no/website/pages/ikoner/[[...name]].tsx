@@ -11,7 +11,8 @@ import metadata from "@navikt/aksel-icons/metadata";
 import { Header } from "components/layout/header/Header";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Footer from "components/layout/footer/Footer";
-import { SearchIcon } from "@sanity/icons";
+import { CopyIcon, SearchIcon } from "@sanity/icons";
+import Highlight, { defaultProps } from "prism-react-renderer";
 
 const categorizeIcons = (icons) => {
   const categories = [];
@@ -84,8 +85,11 @@ const Page = ({ name }: { name: string }) => {
             <div className="flex ">
               <div
                 className={cl(
-                  "animate-fadeIn grid w-full basis-2/3 gap-9 gap-y-12 px-6 py-8 transition-all",
-                  { "border-r-border-subtle border-r": !!name }
+                  "animate-fadeIn transition-width grid  w-full gap-9 gap-y-12 px-6 py-8",
+                  {
+                    "border-r-border-subtle border-r": !!name,
+                    "basis-2/3": name,
+                  }
                 )}
               >
                 {categories.map((cat) => {
@@ -136,17 +140,103 @@ const Page = ({ name }: { name: string }) => {
                     elementer
                   </p>
                   <p className="mt-6">Kategorinavn</p>
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    <li>Tag1</li>
-                    <li>Tag2</li>
-                    <li>Tag3</li>
-                    <li>Tag4</li>
+                  <ul className="mt-3 flex flex-wrap gap-3 text-sm">
+                    <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
+                      Tag1
+                    </li>
+                    <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
+                      Tag2
+                    </li>
+                    <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
+                      Tag3
+                    </li>
+                    <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
+                      Tag4
+                    </li>
                   </ul>
                   <Link href="/ikoner" passHref>
                     <a className="min-h-11 hover:bg-surface-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl">
                       <Icons.Close title="lukk ikonvisning" />
                     </a>
                   </Link>
+                  <button className="ring-border-subtle bg-deepblue-500 text-text-on-action mt-8 w-full rounded px-3 py-2 ring-1">
+                    Last ned
+                  </button>
+                  <div>
+                    <Heading level="3" size="small" className="mt-8 mb-4">
+                      Kode
+                    </Heading>
+                    <div className="ring-border-subtle rounded-lg ring-1">
+                      <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
+                        <span>Import</span>
+                        <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
+                          <CopyIcon />
+                        </button>
+                      </div>
+                      <Highlight
+                        code={`import {
+  ${name}
+} from '@navikt/ds-icons';`}
+                        language="tsx"
+                        theme={undefined}
+                        {...defaultProps}
+                      >
+                        {({ tokens, getLineProps, getTokenProps }) => (
+                          <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
+                            {tokens.map((line, i) => (
+                              <div
+                                key={i}
+                                {...getLineProps({ line, key: i })}
+                                className="text-medium whitespace-pre break-words"
+                              >
+                                {line.map((token, key) => (
+                                  <span
+                                    key={key}
+                                    {...getTokenProps({ token, key })}
+                                  />
+                                ))}
+                              </div>
+                            ))}
+                          </pre>
+                        )}
+                      </Highlight>
+                    </div>
+                    <div className="ring-border-subtle mt-4 rounded-lg ring-1">
+                      <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
+                        <span>React</span>
+                        <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
+                          <CopyIcon />
+                        </button>
+                      </div>
+                      <Highlight
+                        code={`<${name}
+  title="a11y-title"
+/>`}
+                        language="tsx"
+                        theme={undefined}
+                        {...defaultProps}
+                      >
+                        {({ tokens, getLineProps, getTokenProps }) => (
+                          <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
+                            {tokens.map((line, i) => (
+                              <div
+                                key={i}
+                                {...getLineProps({ line, key: i })}
+                                className="text-medium whitespace-pre break-words"
+                              >
+                                {line.map((token, key) => (
+                                  <span
+                                    key={key}
+                                    {...getTokenProps({ token, key })}
+                                  />
+                                ))}
+                              </div>
+                            ))}
+                          </pre>
+                        )}
+                      </Highlight>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
