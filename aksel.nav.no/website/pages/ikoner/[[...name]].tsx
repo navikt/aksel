@@ -216,7 +216,7 @@ const Page = ({ name }: { name: string }) => {
                     <div className="text-4xl">
                       <SelectedIcon aria-hidden />
                     </div>
-                    <Heading level="2" size="medium" className="mt-6">
+                    <Heading level="2" size="medium" className="mt-3">
                       {name}
                     </Heading>
                     <p className="mt-4">
@@ -252,14 +252,14 @@ const Page = ({ name }: { name: string }) => {
                       Last ned
                     </button>
                     <div>
-                      <Heading level="3" size="small" className="mt-8 mb-4">
+                      <Heading level="3" size="small" className="mt-6 mb-2">
                         Kode
                       </Heading>
                       <div className="ring-border-subtle rounded-lg ring-1">
-                        <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
+                        <div className="border-b-border-subtle flex items-center justify-between border-b px-3 py-1 text-sm">
                           <span>Import</span>
                           <Tooltip content="Kopier">
-                            <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
+                            <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl">
                               <CopyIcon />
                             </button>
                           </Tooltip>
@@ -292,11 +292,11 @@ const Page = ({ name }: { name: string }) => {
                           )}
                         </Highlight>
                       </div>
-                      <div className="ring-border-subtle mt-4 rounded-lg ring-1">
-                        <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
+                      <div className="ring-border-subtle mt-3 rounded-lg ring-1">
+                        <div className="border-b-border-subtle flex items-center justify-between border-b px-3 py-1 text-sm">
                           <span>React</span>
                           <Tooltip content="Kopier">
-                            <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
+                            <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl">
                               <CopyIcon />
                             </button>
                           </Tooltip>
@@ -327,11 +327,11 @@ const Page = ({ name }: { name: string }) => {
                           )}
                         </Highlight>
                       </div>
-                      <div className="ring-border-subtle mt-4 rounded-lg ring-1">
-                        <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
+                      <div className="ring-border-subtle mt-3 rounded-lg ring-1">
+                        <div className="border-b-border-subtle flex items-center justify-between border-b px-3 py-1 text-sm">
                           <span>SVG</span>
                           <Tooltip content="Kopier">
-                            <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
+                            <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl">
                               <CopyIcon />
                             </button>
                           </Tooltip>
