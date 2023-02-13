@@ -6,9 +6,13 @@ import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IconSidebar } from "./IconSidebar";
 import { TitleLinks } from "./TitleLinks";
+import ReactModal from "react-modal";
+import { useRouter } from "next/router";
+import styles from "./styles.module.css";
+import { useMedia } from "@/utils";
 
 const categorizeIcons = (icons) => {
   const categories = [];
@@ -29,6 +33,8 @@ export const IconPage = ({ name }: { name: string }) => {
 
   const [visibleIcons] = useState<any>(meta);
 
+  const hideModal = useMedia("screen and (min-width: 1024px)");
+
   const categories = useMemo(
     () =>
       categorizeIcons(
@@ -42,6 +48,12 @@ export const IconPage = ({ name }: { name: string }) => {
       ),
     [visibleIcons, query]
   );
+
+  const router = useRouter();
+
+  useEffect(() => {
+    ReactModal.setAppElement("#__next");
+  }, []);
 
   return (
     <div className="bg-surface-subtle relative overflow-clip">
@@ -134,7 +146,22 @@ export const IconPage = ({ name }: { name: string }) => {
                     );
                   })}
                 </div>
-                {name && <IconSidebar name={name} />}
+                {name && hideModal && <IconSidebar name={name} />}
+
+                {!hideModal && (
+                  <ReactModal
+                    isOpen={!!name}
+                    onRequestClose={() =>
+                      router.push("/ikoner", undefined, { shallow: true })
+                    }
+                    aria={{ modal: true }}
+                    overlayClassName={styles.ModalOverlay}
+                    contentLabel={`${name} ikon`}
+                    className="bg-surface-default z-modal absolute block rounded py-6 px-6"
+                  >
+                    {name && <IconSidebar name={name} />}
+                  </ReactModal>
+                )}
               </div>
             </div>
           </div>
