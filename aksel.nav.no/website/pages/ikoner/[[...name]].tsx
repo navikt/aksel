@@ -4,6 +4,7 @@ import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import meta from "@navikt/ds-icons/meta.json";
 import cl from "classnames";
+import ReactDOMServer from "react-dom/server";
 
 import * as Icons from "@navikt/ds-icons";
 
@@ -103,218 +104,264 @@ const Page = ({ name }: { name: string }) => {
               </ul>
             </div> */}
           </div>
-          <div className="bg-surface-default z-10 mt-16 mb-8 w-full rounded-2xl shadow-md">
-            <div className="border-b-border-subtle grid items-center border-b">
-              <div className="flex w-full items-center gap-3 px-4 pt-6 pb-2">
-                <ul className="flex w-full justify-evenly gap-3">
-                  <li className="flex items-center gap-2">
-                    <NextLink
-                      href="https://www.figma.com/community/file/1167474127194981809"
-                      passHref
-                    >
-                      <DsLink className="text-text-default no-underline hover:underline">
-                        <FigmaIcon />{" "}
-                        <span className="ml-1">Figma community</span>
-                      </DsLink>
-                    </NextLink>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <DownloadIcon className="text-2xl" /> Last ned SVG-pakke
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <NextLink
-                      href="https://www.npmjs.com/package/@navikt/ds-icons"
-                      passHref
-                    >
-                      <DsLink className="text-text-default no-underline hover:underline">
-                        <PackageIcon className="text-2xl" /> Installer med NPM
-                      </DsLink>
-                    </NextLink>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <NextLink
-                      href="https://github.com/navikt/Designsystemet/tree/master/%40navikt/icons"
-                      passHref
-                    >
-                      <DsLink className="text-text-default no-underline hover:underline">
-                        <GithubIcon /> Github
-                      </DsLink>
-                    </NextLink>
-                  </li>
-                </ul>
-              </div>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="w-full py-2 px-4"
-              >
-                <div className="flex items-center gap-2">
-                  <SearchIcon aria-hidden className="text-3xl" />
-                  <input
-                    type="search"
-                    role="searchbox"
-                    className="focus-visible:ring-deepblue-800 h-full w-full max-w-md rounded py-3 px-2 focus:outline-none focus-visible:ring-2"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Søk"
-                  />
-                </div>
-              </form>
-            </div>
-            <div className="flex ">
-              <div
-                className={cl(
-                  "animate-fadeIn transition-width grid  w-full gap-9 gap-y-12 px-6 py-8",
-                  {
-                    "border-r-border-subtle border-r": !!name,
-                    "basis-2/3": name,
-                  }
-                )}
-              >
-                {categories.map((cat) => {
-                  return (
-                    <div key={cat.category}>
-                      <Heading
-                        level="2"
-                        size="xsmall"
-                        className="text-text-subtle"
-                        spacing
+          <div className="z-10 mt-16 mb-8 rounded-2xl bg-gradient-to-br from-violet-300/30 to-teal-400/30 p-[2px]">
+            <div className="bg-surface-default shadow-medium  h-full w-full rounded-[14px]">
+              <div className="border-b-border-subtle grid items-center border-b">
+                <div className="flex w-full items-center gap-3 px-4 pt-6 pb-2">
+                  <ul className="flex w-full flex-wrap justify-evenly gap-3">
+                    <li className="flex items-center gap-2">
+                      <NextLink
+                        href="https://www.figma.com/community/file/1167474127194981809"
+                        passHref
                       >
-                        {cat.category}
-                      </Heading>
-                      <div className="flex flex-wrap gap-2">
-                        {cat.icons.map((i) => {
-                          const T = Icons[i.name];
-                          return (
-                            <Link
-                              href={`/ikoner/${i.name}`}
-                              passHref
-                              scroll={false}
-                              prefetch={false}
-                              key={i.name}
-                            >
-                              <a className="group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors hover:bg-violet-100 hover:bg-gradient-to-tr hover:from-violet-200 hover:via-teal-100 hover:to-teal-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200">
-                                <T className="text-2xl" aria-hidden />
-                              </a>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              {name && (
-                <div className="animate-fadeIn min-h-96 sticky top-0 h-fit w-full basis-1/3 px-6 py-8">
-                  <div className="text-4xl">
-                    <SelectedIcon aria-hidden />
-                  </div>
-                  <Heading level="2" size="medium" className="mt-6">
-                    {name}
-                  </Heading>
-                  <p className="mt-4">
-                    Brukt for å indikere xyz og passer best på interaktive
-                    elementer
-                  </p>
-                  <p className="mt-6">Kategorinavn</p>
-                  <ul className="mt-3 flex flex-wrap gap-3 text-sm">
-                    <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
-                      Tag1
+                        <DsLink className="text-text-default no-underline hover:underline">
+                          <FigmaIcon />{" "}
+                          <span className="ml-1">Figma community</span>
+                        </DsLink>
+                      </NextLink>
                     </li>
-                    <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
-                      Tag2
+                    <li className="flex items-center gap-2">
+                      <DownloadIcon className="text-2xl" /> Last ned SVG-pakke
                     </li>
-                    <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
-                      Tag3
+                    <li className="flex items-center gap-2">
+                      <NextLink
+                        href="https://www.npmjs.com/package/@navikt/ds-icons"
+                        passHref
+                      >
+                        <DsLink className="text-text-default no-underline hover:underline">
+                          <PackageIcon className="text-2xl" /> Installer med NPM
+                        </DsLink>
+                      </NextLink>
                     </li>
-                    <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
-                      Tag4
+                    <li className="flex items-center gap-2">
+                      <NextLink
+                        href="https://github.com/navikt/Designsystemet/tree/master/%40navikt/icons"
+                        passHref
+                      >
+                        <DsLink className="text-text-default no-underline hover:underline">
+                          <GithubIcon /> Github
+                        </DsLink>
+                      </NextLink>
                     </li>
                   </ul>
-                  <Link href="/ikoner" passHref scroll={false} prefetch={false}>
-                    <a className="min-h-11 hover:bg-surface-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl">
-                      <Icons.Close title="lukk ikonvisning" />
-                    </a>
-                  </Link>
-                  <button className="ring-border-subtle bg-deepblue-500 text-text-on-action mt-8 w-full rounded px-3 py-2 ring-1">
-                    Last ned
-                  </button>
-                  <div>
-                    <Heading level="3" size="small" className="mt-8 mb-4">
-                      Kode
-                    </Heading>
-                    <div className="ring-border-subtle rounded-lg ring-1">
-                      <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
-                        <span>Import</span>
-                        <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
-                          <CopyIcon />
-                        </button>
+                </div>
+                <form
+                  onSubmit={(e) => e.preventDefault()}
+                  className="w-full py-2 px-4"
+                >
+                  <div className="flex items-center gap-2">
+                    <SearchIcon aria-hidden className="text-3xl" />
+                    <input
+                      type="search"
+                      role="searchbox"
+                      className="focus-visible:ring-deepblue-800 h-full w-full max-w-md rounded py-3 px-2 focus:outline-none focus-visible:ring-2"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      placeholder="Søk"
+                    />
+                  </div>
+                </form>
+              </div>
+              <div className="flex ">
+                <div
+                  className={cl(
+                    "animate-fadeIn transition-width grid  w-full gap-9 gap-y-12 px-6 py-8",
+                    {
+                      "border-r-border-subtle border-r": !!name,
+                      "basis-2/3": name,
+                    }
+                  )}
+                >
+                  {categories.map((cat) => {
+                    return (
+                      <div key={cat.category}>
+                        <Heading
+                          level="2"
+                          size="xsmall"
+                          className="text-text-subtle"
+                          spacing
+                        >
+                          {cat.category}
+                        </Heading>
+                        <div className="flex flex-wrap gap-2">
+                          {cat.icons.map((i) => {
+                            const T = Icons[i.name];
+                            return (
+                              <Link
+                                href={`/ikoner/${i.name}`}
+                                passHref
+                                scroll={false}
+                                prefetch={false}
+                                key={i.name}
+                              >
+                                <a className="hover:bg-surface-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200">
+                                  <T className="text-2xl" aria-hidden />
+                                </a>
+                              </Link>
+                            );
+                          })}
+                        </div>
                       </div>
-                      <Highlight
-                        code={`import {
+                    );
+                  })}
+                </div>
+                {name && (
+                  <div className="animate-fadeIn min-h-96 sticky top-0 h-fit w-full basis-1/3 px-6 py-8">
+                    <div className="text-4xl">
+                      <SelectedIcon aria-hidden />
+                    </div>
+                    <Heading level="2" size="medium" className="mt-6">
+                      {name}
+                    </Heading>
+                    <p className="mt-4">
+                      Brukt for å indikere xyz og passer best på interaktive
+                      elementer
+                    </p>
+                    <p className="mt-6">Kategorinavn</p>
+                    <ul className="mt-3 flex flex-wrap gap-3 text-sm">
+                      <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
+                        Tag1
+                      </li>
+                      <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
+                        Tag2
+                      </li>
+                      <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
+                        Tag3
+                      </li>
+                      <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
+                        Tag4
+                      </li>
+                    </ul>
+                    <Link
+                      href="/ikoner"
+                      passHref
+                      scroll={false}
+                      prefetch={false}
+                    >
+                      <a className="min-h-11 hover:bg-surface-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl">
+                        <Icons.Close title="lukk ikonvisning" />
+                      </a>
+                    </Link>
+                    <button className="ring-border-subtle bg-deepblue-500 text-text-on-action mt-8 w-full rounded px-3 py-2 ring-1">
+                      Last ned
+                    </button>
+                    <div>
+                      <Heading level="3" size="small" className="mt-8 mb-4">
+                        Kode
+                      </Heading>
+                      <div className="ring-border-subtle rounded-lg ring-1">
+                        <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
+                          <span>Import</span>
+                          <Tooltip content="Kopier">
+                            <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
+                              <CopyIcon />
+                            </button>
+                          </Tooltip>
+                        </div>
+                        <Highlight
+                          code={`import {
   ${name}
 } from '@navikt/ds-icons';`}
-                        language="tsx"
-                        theme={undefined}
-                        {...defaultProps}
-                      >
-                        {({ tokens, getLineProps, getTokenProps }) => (
-                          <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
-                            {tokens.map((line, i) => (
-                              <div
-                                key={i}
-                                {...getLineProps({ line, key: i })}
-                                className="text-medium whitespace-pre break-words"
-                              >
-                                {line.map((token, key) => (
-                                  <span
-                                    key={key}
-                                    {...getTokenProps({ token, key })}
-                                  />
-                                ))}
-                              </div>
-                            ))}
-                          </pre>
-                        )}
-                      </Highlight>
-                    </div>
-                    <div className="ring-border-subtle mt-4 rounded-lg ring-1">
-                      <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
-                        <span>React</span>
-                        <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
-                          <CopyIcon />
-                        </button>
+                          language="tsx"
+                          theme={undefined}
+                          {...defaultProps}
+                        >
+                          {({ tokens, getLineProps, getTokenProps }) => (
+                            <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
+                              {tokens.map((line, i) => (
+                                <div
+                                  key={i}
+                                  {...getLineProps({ line, key: i })}
+                                  className="text-medium whitespace-pre break-words"
+                                >
+                                  {line.map((token, key) => (
+                                    <span
+                                      key={key}
+                                      {...getTokenProps({ token, key })}
+                                    />
+                                  ))}
+                                </div>
+                              ))}
+                            </pre>
+                          )}
+                        </Highlight>
                       </div>
-                      <Highlight
-                        code={`<${name}
+                      <div className="ring-border-subtle mt-4 rounded-lg ring-1">
+                        <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
+                          <span>React</span>
+                          <Tooltip content="Kopier">
+                            <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
+                              <CopyIcon />
+                            </button>
+                          </Tooltip>
+                        </div>
+                        <Highlight
+                          code={`<${name}
   title="a11y-title"
 />`}
-                        language="tsx"
-                        theme={undefined}
-                        {...defaultProps}
-                      >
-                        {({ tokens, getLineProps, getTokenProps }) => (
-                          <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
-                            {tokens.map((line, i) => (
-                              <div
-                                key={i}
-                                {...getLineProps({ line, key: i })}
-                                className="text-medium whitespace-pre break-words"
-                              >
-                                {line.map((token, key) => (
-                                  <span
-                                    key={key}
-                                    {...getTokenProps({ token, key })}
-                                  />
-                                ))}
-                              </div>
-                            ))}
-                          </pre>
-                        )}
-                      </Highlight>
+                          language="tsx"
+                          theme={undefined}
+                          {...defaultProps}
+                        >
+                          {({ tokens, getLineProps, getTokenProps }) => (
+                            <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
+                              {tokens.map((line, i) => (
+                                <div
+                                  key={i}
+                                  {...getLineProps({ line, key: i })}
+                                  className="text-medium whitespace-pre break-words"
+                                >
+                                  {line.map((token, key) => (
+                                    <span
+                                      key={key}
+                                      {...getTokenProps({ token, key })}
+                                    />
+                                  ))}
+                                </div>
+                              ))}
+                            </pre>
+                          )}
+                        </Highlight>
+                      </div>
+                      <div className="ring-border-subtle mt-4 rounded-lg ring-1">
+                        <div className="border-b-border-subtle text-md flex items-center justify-between border-b px-3 py-1">
+                          <span>SVG</span>
+                          <Tooltip content="Kopier">
+                            <button className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded">
+                              <CopyIcon />
+                            </button>
+                          </Tooltip>
+                        </div>
+                        <Highlight
+                          code={ReactDOMServer.renderToString(<SelectedIcon />)}
+                          language="tsx"
+                          theme={undefined}
+                          {...defaultProps}
+                        >
+                          {({ tokens, getLineProps, getTokenProps }) => (
+                            <pre className="relative m-0 max-w-[16rem] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
+                              {tokens.map((line, i) => (
+                                <div
+                                  key={i}
+                                  {...getLineProps({ line, key: i })}
+                                  className="text-medium whitespace-pre break-words"
+                                >
+                                  {line.map((token, key) => (
+                                    <span
+                                      key={key}
+                                      {...getTokenProps({ token, key })}
+                                    />
+                                  ))}
+                                </div>
+                              ))}
+                            </pre>
+                          )}
+                        </Highlight>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>
