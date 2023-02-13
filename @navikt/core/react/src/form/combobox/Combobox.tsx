@@ -132,14 +132,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const toggleOption = useCallback(() => {
-      const currentFilteredOption = filteredOptions[filteredOptionsIndex];
-      if (selectedOptions.includes(currentFilteredOption)) {
+      const curFilteredOption = filteredOptions[filteredOptionsIndex];
+      if (selectedOptions.includes(curFilteredOption))
         setSelectedOptions(
-          selectedOptions.filter((option) => option !== currentFilteredOption)
+          selectedOptions.filter((o) => o !== curFilteredOption)
         );
-      } else {
-        setSelectedOptions([...selectedOptions, currentFilteredOption]);
-      }
+      else setSelectedOptions([...selectedOptions, curFilteredOption]);
     }, [
       selectedOptions,
       filteredOptions,
@@ -295,7 +293,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                       selectedOptions.includes(o),
                   })}
                   key={o}
-                  onClick={() => setSelectedOptions([...selectedOptions, o])}
+                  onClick={() => toggleOption()}
                 >
                   <BodyShort size="medium">{o}</BodyShort>
                 </li>
