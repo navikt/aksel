@@ -26,7 +26,7 @@ fs.writeFileSync(
 
 fs.writeFileSync(
   path.resolve(__dirname, "../dist/metadata.d.ts"),
-  `export type AkselIcon {
+  `export type AkselIcon = {
     id: string;
     name: string;
     category: 'major' | 'minor';
