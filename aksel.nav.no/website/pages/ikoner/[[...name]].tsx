@@ -165,7 +165,7 @@ const Page = ({ name }: { name: string }) => {
               <div className="flex ">
                 <div
                   className={cl(
-                    "animate-fadeIn transition-width grid  w-full gap-9 gap-y-12 px-6 py-8",
+                    "animate-fadeIn transition-width grid w-full place-content-start gap-9 gap-y-12 px-6 py-8",
                     {
                       "border-r-border-subtle border-r": !!name,
                       "basis-2/3": name,
@@ -195,6 +195,7 @@ const Page = ({ name }: { name: string }) => {
                                 key={i.name}
                               >
                                 <a
+                                  href="#"
                                   className={cl(
                                     "hover:bg-surface-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200",
                                     { "bg-surface-selected": i.name === name }
