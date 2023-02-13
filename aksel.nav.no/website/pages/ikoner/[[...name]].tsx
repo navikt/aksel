@@ -49,7 +49,7 @@ const Page = ({ name }: { name: string }) => {
   const SelectedIcon = name && Icons[name];
 
   return (
-    <div className="bg-surface-subtle relative">
+    <div className="bg-surface-subtle relative overflow-clip">
       <Header variant="transparent" />
       <main
         tabIndex={-1}
@@ -64,7 +64,7 @@ const Page = ({ name }: { name: string }) => {
             <p className="override-text-no-max mt-6 text-2xl">
               En samling open-source ikoner designet og utviklet for NAV
             </p>
-            {/* <AkselCubeStatic className="text-deepblue-300 opacity-5 " /> */}
+            <AkselCubeStatic className="text-violet-400 opacity-5 " />
             {/* <div className="shadow-xsmall my-8  rounded bg-teal-50 px-4 py-4">
               <ul className="flex  gap-3">
                 <li className="flex items-center gap-2">
