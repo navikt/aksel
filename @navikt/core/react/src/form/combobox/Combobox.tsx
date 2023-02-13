@@ -150,7 +150,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       selectedOptions,
       filteredOptions,
       filteredOptionsIndex,
-      selectedOptions,
       setSelectedOptions,
     ]);
 
