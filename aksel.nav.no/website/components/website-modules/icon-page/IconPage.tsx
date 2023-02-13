@@ -157,7 +157,7 @@ export const IconPage = ({ name }: { name: string }) => {
                     aria={{ modal: true }}
                     overlayClassName={styles.ModalOverlay}
                     contentLabel={`${name} ikon`}
-                    className="bg-surface-default z-modal absolute block rounded py-6 px-6"
+                    className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-6 focus:outline-none"
                   >
                     {name && <IconSidebar name={name} />}
                   </ReactModal>

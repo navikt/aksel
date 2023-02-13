@@ -26,7 +26,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
   }, []);
 
   return (
-    <div className="animate-fadeIn min-h-96 sticky top-0 h-fit w-full basis-1/3 px-6 py-8">
+    <div className="animate-fadeIn min-h-96 h-fit w-full basis-1/3 px-6 py-8 lg:sticky lg:top-0">
       <div className="text-5xl">
         <SelectedIcon aria-hidden />
       </div>
@@ -134,7 +134,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
             {...defaultProps}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="relative m-0 max-w-[16rem] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
+              <pre className="relative m-0 max-w-[80vw]  overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert lg:max-w-[16rem]">
                 {tokens.map((line, i) => (
                   <div
                     key={i}
@@ -177,7 +177,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
             {...defaultProps}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="relative m-0 max-w-[16rem] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
+              <pre className="w-text relative m-0 max-w-[80vw] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert lg:w-auto lg:max-w-[16rem]">
                 {tokens.map((line, i) => (
                   <div
                     key={i}
