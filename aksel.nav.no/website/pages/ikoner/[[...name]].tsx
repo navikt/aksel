@@ -55,7 +55,7 @@ const Page = ({ name }: { name: string }) => {
       >
         <div className="centered-layout mb-40 grid  max-w-screen-lg pt-20">
           <div className="mx-auto w-full max-w-screen-md">
-            <h1 className="text-deepblue-800 my-0 text-7xl font-bold">
+            <h1 className="from-deepblue-800 my-0 w-fit bg-gradient-to-tr via-violet-500 to-violet-700 bg-clip-text text-7xl font-bold text-transparent">
               Aksel icons
             </h1>
             <p className="override-text-no-max mt-8 text-2xl">
@@ -63,7 +63,7 @@ const Page = ({ name }: { name: string }) => {
             </p>
             {/* <AkselCubeStatic className="text-deepblue-300 opacity-5 " /> */}
           </div>
-          <div className="bg-surface-default z-10 mt-16 mb-8  w-full rounded-2xl shadow-md">
+          <div className="bg-surface-default z-10 mt-16 mb-8 w-full rounded-2xl shadow-md">
             <div className="border-b-border-subtle flex items-center justify-between border-b">
               <form
                 onSubmit={(e) => e.preventDefault()}
@@ -114,7 +114,12 @@ const Page = ({ name }: { name: string }) => {
                               className="animate-none"
                               arrow={false}
                             >
-                              <Link href={`/ikoner/${i.name}`} passHref>
+                              <Link
+                                href={`/ikoner/${i.name}`}
+                                passHref
+                                scroll={false}
+                                prefetch={false}
+                              >
                                 <a className="group relative grid aspect-square w-11 shrink-0 place-items-center rounded hover:bg-teal-100 focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200">
                                   <T className="text-2xl" aria-hidden />
                                 </a>
@@ -154,7 +159,7 @@ const Page = ({ name }: { name: string }) => {
                       Tag4
                     </li>
                   </ul>
-                  <Link href="/ikoner" passHref>
+                  <Link href="/ikoner" passHref scroll={false} prefetch={false}>
                     <a className="min-h-11 hover:bg-surface-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl">
                       <Icons.Close title="lukk ikonvisning" />
                     </a>
