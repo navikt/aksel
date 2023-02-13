@@ -302,15 +302,13 @@ const Page = ({ name }: { name: string }) => {
                           </Tooltip>
                         </div>
                         <Highlight
-                          code={`<${name}
-  title="a11y-title"
-/>`}
+                          code={`<${name} title="a11y-title" />`}
                           language="tsx"
                           theme={undefined}
                           {...defaultProps}
                         >
                           {({ tokens, getLineProps, getTokenProps }) => (
-                            <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
+                            <pre className="relative m-0 max-w-[16rem] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
                               {tokens.map((line, i) => (
                                 <div
                                   key={i}
