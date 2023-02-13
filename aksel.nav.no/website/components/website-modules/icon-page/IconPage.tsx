@@ -62,12 +62,13 @@ export const IconPage = ({ name }: { name: string }) => {
             <AkselCubeStatic className="text-violet-400 opacity-5 " />
           </div>
           <div className="z-10 mt-16 mb-8 rounded-2xl bg-gradient-to-br from-violet-300/30 to-teal-400/30 p-[2px]">
-            <div className="bg-surface-default shadow-medium  h-full w-full rounded-[14px]">
+            <div className="bg-surface-default shadow-medium h-full w-full rounded-[14px]">
               <div className="border-b-border-subtle grid items-center border-b">
                 <TitleLinks />
                 <form
                   onSubmit={(e) => e.preventDefault()}
                   className="w-full py-2 px-4"
+                  role="search"
                 >
                   <div className="flex items-center gap-2">
                     <Search
