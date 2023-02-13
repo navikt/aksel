@@ -44,13 +44,6 @@ export interface ComboboxProps
   children?: React.ReactNode;
 }
 
-interface ComboboxComponent
-  extends React.ForwardRefExoticComponent<
-    ComboboxProps & React.RefAttributes<HTMLDivElement>
-  > {
-  // Dropdown: DropdownType;
-}
-
 export interface ComboboxContextProps {
   disabled?: boolean;
   size: "medium" | "small";
@@ -311,6 +304,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       </div>
     );
   }
-) as ComboboxComponent;
+);
 
 export default Combobox;
