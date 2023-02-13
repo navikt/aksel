@@ -86,12 +86,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
+
     const [isInternalListOpen, setInternalListOpen] =
       useState<boolean>(isListOpen);
     const [internalValue, setInternalValue] = useState<string>(
       defaultValue ? String(defaultValue) : ""
     );
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
+
     const filteredOptions = useMemo(() => {
       if (internalValue) {
         return (
@@ -145,6 +147,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setSelectedOptions,
     ]);
 
+    const handleDeleteSelectedOption = (clickedOption) => {
+      setSelectedOptions(
+        selectedOptions.filter((option) => option !== clickedOption)
+      );
+    };
+
     useEventListener(
       "keypress",
       useCallback(
@@ -185,12 +193,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         ]
       )
     );
-
-    const handleDeleteSelectedOption = (clickedOption) => {
-      setSelectedOptions(
-        selectedOptions.filter((option) => option !== clickedOption)
-      );
-    };
 
     return (
       <div
