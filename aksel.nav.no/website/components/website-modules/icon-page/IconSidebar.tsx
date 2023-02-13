@@ -33,9 +33,6 @@ export const IconSidebar = ({ name }: { name: string }) => {
       <Heading level="2" size="medium" className="mt-3">
         {name}
       </Heading>
-      <p className="mt-4">
-        Brukt for å indikere xyz og passer best på interaktive elementer
-      </p>
       <p className="mt-6">Kategorinavn</p>
       <ul className="mt-3 flex flex-wrap gap-3 text-sm">
         <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
