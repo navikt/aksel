@@ -1,26 +1,32 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 
-export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
-  /**
-   * Panel content
-   */
+interface ListProps<T extends keyof HTMLElementTagNameMap>
+  extends React.HTMLAttributes<HTMLElementTagNameMap[T]> {
   children: React.ReactNode;
+  as?: T;
 }
 
-interface ListComponent
+interface ListComponent<T extends keyof HTMLElementTagNameMap>
   extends React.ForwardRefExoticComponent<
-    ListProps & React.RefAttributes<HTMLUListElement>
+    ListProps<T> & React.RefAttributes<HTMLElementTagNameMap[T]>
   > {}
 
-export const List: ListComponent = forwardRef(
-  ({ children, className, ...rest }, ref) => {
-    return (
-      <ul ref={ref} className={cl("navds-list", className)} {...rest}>
-        {children}
-      </ul>
-    );
-  }
-) as ListComponent;
+type HTMLElementTagNameMap = {
+  ul: HTMLUListElement;
+  ol: HTMLOListElement;
+};
+
+export const List = forwardRef<
+  HTMLUListElement | HTMLOListElement,
+  ListProps<"ul" | "ol">
+>(({ children, className, as = "ul", ...rest }, ref) => {
+  const Component = React.createElement(
+    as,
+    { ref, className: cl("navds-list", className), ...rest },
+    children
+  );
+  return Component;
+}) as ListComponent<"ul" | "ol">;
 
 export default List;
