@@ -57,10 +57,10 @@ const Page = ({ name }: { name: string }) => {
       >
         <div className="centered-layout mb-40 grid  max-w-screen-lg pt-20">
           <div className="mx-auto w-full max-w-screen-md">
-            <h1 className="from-deepblue-800 my-0 w-fit bg-gradient-to-tr via-violet-500 to-violet-700 bg-clip-text text-7xl font-bold text-transparent">
+            <h1 className="from-deepblue-800 via-deepblue-400 my-0 w-fit bg-gradient-to-tr to-violet-500 bg-clip-text text-7xl font-bold text-transparent">
               Aksel icons
             </h1>
-            <p className="override-text-no-max mt-8 text-2xl">
+            <p className="override-text-no-max mt-6 text-2xl">
               En samling open-source ikoner designet og utviklet for NAV
             </p>
             {/* <AkselCubeStatic className="text-deepblue-300 opacity-5 " /> */}
