@@ -117,8 +117,11 @@ export const IconPage = ({ name }: { name: string }) => {
                                 <a
                                   href="#"
                                   className={cl(
-                                    "hover:bg-surface-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200",
-                                    { "bg-surface-selected": i.name === name }
+                                    "hover:bg-surface-hover bg-surface-default group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200",
+                                    {
+                                      "bg-surface-selected ring-border-alt-3 ring-1":
+                                        i.name === name,
+                                    }
                                   )}
                                 >
                                   <T className="text-2xl" aria-hidden />

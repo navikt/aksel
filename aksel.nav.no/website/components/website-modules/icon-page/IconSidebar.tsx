@@ -27,7 +27,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
 
   return (
     <div className="animate-fadeIn min-h-96 sticky top-0 h-fit w-full basis-1/3 px-6 py-8">
-      <div className="text-4xl">
+      <div className="text-5xl">
         <SelectedIcon aria-hidden />
       </div>
       <Heading level="2" size="medium" className="mt-3">
