@@ -190,6 +190,7 @@ const Page = ({ name }: { name: string }) => {
                               passHref
                               scroll={false}
                               prefetch={false}
+                              key={i.name}
                             >
                               <a className="group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors hover:bg-violet-100 hover:bg-gradient-to-tr hover:from-violet-200 hover:via-teal-100 hover:to-teal-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200">
                                 <T className="text-2xl" aria-hidden />
