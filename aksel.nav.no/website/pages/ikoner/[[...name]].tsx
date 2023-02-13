@@ -185,24 +185,16 @@ const Page = ({ name }: { name: string }) => {
                         {cat.icons.map((i) => {
                           const T = Icons[i.name];
                           return (
-                            <Tooltip
-                              key={i.created_at}
-                              content={i.name}
-                              delay={0}
-                              className="animate-none"
-                              arrow={false}
+                            <Link
+                              href={`/ikoner/${i.name}`}
+                              passHref
+                              scroll={false}
+                              prefetch={false}
                             >
-                              <Link
-                                href={`/ikoner/${i.name}`}
-                                passHref
-                                scroll={false}
-                                prefetch={false}
-                              >
-                                <a className="group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors hover:bg-violet-100 hover:bg-gradient-to-tr hover:from-violet-200 hover:via-teal-100 hover:to-teal-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200">
-                                  <T className="text-2xl" aria-hidden />
-                                </a>
-                              </Link>
-                            </Tooltip>
+                              <a className="group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors hover:bg-violet-100 hover:bg-gradient-to-tr hover:from-violet-200 hover:via-teal-100 hover:to-teal-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200">
+                                <T className="text-2xl" aria-hidden />
+                              </a>
+                            </Link>
                           );
                         })}
                       </div>
