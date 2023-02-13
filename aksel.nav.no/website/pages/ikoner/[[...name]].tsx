@@ -1,5 +1,6 @@
-import { Heading, Search, Tooltip } from "@navikt/ds-react";
+import { Heading, Search, Tooltip, Link as DsLink } from "@navikt/ds-react";
 import Link from "next/link";
+import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import meta from "@navikt/ds-icons/meta.json";
 import cl from "classnames";
@@ -11,8 +12,9 @@ import metadata from "@navikt/aksel-icons/metadata";
 import { Header } from "components/layout/header/Header";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Footer from "components/layout/footer/Footer";
-import { CopyIcon, SearchIcon } from "@sanity/icons";
+import { CopyIcon, DownloadIcon, PackageIcon, SearchIcon } from "@sanity/icons";
 import Highlight, { defaultProps } from "prism-react-renderer";
+import { FigmaIcon, GithubIcon } from "components/assets";
 
 const categorizeIcons = (icons) => {
   const categories = [];
@@ -62,15 +64,91 @@ const Page = ({ name }: { name: string }) => {
               En samling open-source ikoner designet og utviklet for NAV
             </p>
             {/* <AkselCubeStatic className="text-deepblue-300 opacity-5 " /> */}
+            {/* <div className="shadow-xsmall my-8  rounded bg-teal-50 px-4 py-4">
+              <ul className="flex  gap-3">
+                <li className="flex items-center gap-2">
+                  <NextLink
+                    href="https://www.figma.com/community/file/1167474127194981809"
+                    passHref
+                  >
+                    <DsLink className="text-text-default no-underline hover:underline">
+                      <FigmaIcon />{" "}
+                      <span className="ml-1">Figma community</span>
+                    </DsLink>
+                  </NextLink>
+                </li>
+                <li className="flex items-center gap-2">
+                  <DownloadIcon className="text-2xl" /> Last ned SVG-pakke
+                </li>
+                <li className="flex items-center gap-2">
+                  <NextLink
+                    href="https://www.npmjs.com/package/@navikt/ds-icons"
+                    passHref
+                  >
+                    <DsLink className="text-text-default no-underline hover:underline">
+                      <PackageIcon className="text-2xl" /> Installer med NPM
+                    </DsLink>
+                  </NextLink>
+                </li>
+                <li className="flex items-center gap-2">
+                  <NextLink
+                    href="https://github.com/navikt/Designsystemet/tree/master/%40navikt/icons"
+                    passHref
+                  >
+                    <DsLink className="text-text-default no-underline hover:underline">
+                      <GithubIcon /> Github
+                    </DsLink>
+                  </NextLink>
+                </li>
+              </ul>
+            </div> */}
           </div>
           <div className="bg-surface-default z-10 mt-16 mb-8 w-full rounded-2xl shadow-md">
-            <div className="border-b-border-subtle flex items-center justify-between border-b">
+            <div className="border-b-border-subtle grid items-center border-b">
+              <div className="flex w-full items-center gap-3 px-4 pt-6 pb-2">
+                <ul className="flex w-full justify-evenly gap-3">
+                  <li className="flex items-center gap-2">
+                    <NextLink
+                      href="https://www.figma.com/community/file/1167474127194981809"
+                      passHref
+                    >
+                      <DsLink className="text-text-default no-underline hover:underline">
+                        <FigmaIcon />{" "}
+                        <span className="ml-1">Figma community</span>
+                      </DsLink>
+                    </NextLink>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <DownloadIcon className="text-2xl" /> Last ned SVG-pakke
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <NextLink
+                      href="https://www.npmjs.com/package/@navikt/ds-icons"
+                      passHref
+                    >
+                      <DsLink className="text-text-default no-underline hover:underline">
+                        <PackageIcon className="text-2xl" /> Installer med NPM
+                      </DsLink>
+                    </NextLink>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <NextLink
+                      href="https://github.com/navikt/Designsystemet/tree/master/%40navikt/icons"
+                      passHref
+                    >
+                      <DsLink className="text-text-default no-underline hover:underline">
+                        <GithubIcon /> Github
+                      </DsLink>
+                    </NextLink>
+                  </li>
+                </ul>
+              </div>
               <form
                 onSubmit={(e) => e.preventDefault()}
                 className="w-full py-2 px-4"
               >
                 <div className="flex items-center gap-2">
-                  <SearchIcon aria-hidden className="text-xl" />
+                  <SearchIcon aria-hidden className="text-3xl" />
                   <input
                     type="search"
                     role="searchbox"
@@ -120,7 +198,7 @@ const Page = ({ name }: { name: string }) => {
                                 scroll={false}
                                 prefetch={false}
                               >
-                                <a className="group relative grid aspect-square w-11 shrink-0 place-items-center rounded hover:bg-teal-100 focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200">
+                                <a className="group relative grid aspect-square w-11 shrink-0 place-items-center rounded hover:bg-violet-100 hover:bg-gradient-to-tr hover:from-violet-200 hover:via-teal-100 hover:to-teal-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200">
                                   <T className="text-2xl" aria-hidden />
                                 </a>
                               </Link>
