@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import {
   BodyShort,
-  Chips,
+  Chips as SelectedOptions,
   Label,
   mergeRefs,
   omit,
@@ -49,7 +49,6 @@ interface ComboboxComponent
     ComboboxProps & React.RefAttributes<HTMLDivElement>
   > {
   // Dropdown: DropdownType;
-  // Chips: ComboboxChipsType;
 }
 
 export interface ComboboxContextProps {
@@ -138,13 +137,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const toggleOption = useCallback(() => {
-      const activeChip = filteredOptions[filteredOptionsIndex];
-      if (selectedOptions.includes(activeChip)) {
+      const currentFilteredOption = filteredOptions[filteredOptionsIndex];
+      if (selectedOptions.includes(currentFilteredOption)) {
         setSelectedOptions(
-          selectedOptions.filter((option) => option !== activeChip)
+          selectedOptions.filter((option) => option !== currentFilteredOption)
         );
       } else {
-        setSelectedOptions([...selectedOptions, activeChip]);
+        setSelectedOptions([...selectedOptions, currentFilteredOption]);
       }
     }, [
       selectedOptions,
@@ -194,7 +193,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       )
     );
 
-    const handleDeleteChip = (clickedOption) => {
+    const handleDeleteSelectedOption = (clickedOption) => {
       setSelectedOptions(
         selectedOptions.filter((option) => option !== clickedOption)
       );
@@ -237,17 +236,17 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         )}
         <div className="navds-combobox__wrapper">
           <div className="navds-combobox__wrapper-inner" onClick={focusInput}>
-            <Chips className="navds-combobox__selected-options">
+            <SelectedOptions className="navds-combobox__selected-options">
               {selectedOptions.length
                 ? selectedOptions.map((option, i) => {
                     return (
-                      <Chips.Removable
+                      <SelectedOptions.Removable
                         className="navds-combobox__selected-option"
                         key={option + i}
-                        onClick={() => handleDeleteChip(option)}
+                        onClick={() => handleDeleteSelectedOption(option)}
                       >
                         {option}
-                      </Chips.Removable>
+                      </SelectedOptions.Removable>
                     );
                   })
                 : []}
@@ -271,7 +270,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   `navds-body-${size}`
                 )}
               />
-            </Chips>
+            </SelectedOptions>
             {(value ?? internalValue) && clearButton && (
               <button
                 type="button"
