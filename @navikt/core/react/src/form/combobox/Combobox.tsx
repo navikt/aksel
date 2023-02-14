@@ -23,8 +23,7 @@ export type ComboboxClearEvent =
       trigger: "Click";
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
     }
-  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> }
-  | { trigger: "Enter"; event: React.KeyboardEvent<HTMLDivElement> };
+  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
 
 export interface ComboboxProps
   extends FormFieldProps,
@@ -72,7 +71,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       children,
       clearButtonLabel,
       clearButton = true,
-      /* variant = "primary", */
       defaultValue,
       isListOpen,
       id,
@@ -93,6 +91,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultValue ? String(defaultValue) : ""
     );
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
+
+    //TODO: onFocus in input should open list
 
     const filteredOptions = useMemo(() => {
       if (internalValue) {
@@ -132,12 +132,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const toggleOption = useCallback(() => {
-      const curFilteredOption = filteredOptions[filteredOptionsIndex];
-      if (selectedOptions.includes(curFilteredOption))
-        setSelectedOptions(
-          selectedOptions.filter((o) => o !== curFilteredOption)
-        );
-      else setSelectedOptions([...selectedOptions, curFilteredOption]);
+      const curFilteredOpt = filteredOptions[filteredOptionsIndex];
+      if (selectedOptions.includes(curFilteredOpt))
+        setSelectedOptions(selectedOptions.filter((o) => o !== curFilteredOpt));
+      else setSelectedOptions([...selectedOptions, curFilteredOpt]);
     }, [
       selectedOptions,
       filteredOptions,
@@ -161,7 +159,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           } else if (e.key === "Enter") {
             e.preventDefault();
             toggleOption();
-            handleClear({ trigger: e.key, event: e });
+            //handleClear({ trigger: e.key, event: e });
           }
         },
         [handleClear, toggleOption]
@@ -190,6 +188,42 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setSelectedOptions,
         ]
       )
+    );
+
+    const Input = useMemo(
+      () => (
+        <input
+          key="combobox-input"
+          ref={mergedRef}
+          {...omit(rest, ["error", "errorId", "size"])}
+          {...inputProps}
+          value={value ?? internalValue}
+          onChange={(e) => handleChange(e.target.value)}
+          type="search"
+          role="combobox"
+          aria-controls={isListOpen ? id : ""}
+          aria-expanded={isListOpen}
+          className={cl(
+            className,
+            "navds-combobox__input",
+            "navds-text-field__input",
+            "navds-body-short",
+            `navds-body-${size}`
+          )}
+        />
+      ),
+      [
+        className,
+        handleChange,
+        id,
+        inputProps,
+        internalValue,
+        isListOpen,
+        mergedRef,
+        rest,
+        size,
+        value,
+      ]
     );
 
     return (
@@ -244,25 +278,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   })
                 : []}
 
-              <input
-                key="combobox-input"
-                ref={mergedRef}
-                {...omit(rest, ["error", "errorId", "size"])}
-                {...inputProps}
-                value={value ?? internalValue}
-                onChange={(e) => handleChange(e.target.value)}
-                type="search"
-                role="combobox"
-                aria-controls={isListOpen ? id : ""}
-                aria-expanded={isListOpen}
-                className={cl(
-                  className,
-                  "navds-combobox__input",
-                  "navds-text-field__input",
-                  "navds-body-short",
-                  `navds-body-${size}`
-                )}
-              />
+              {Input}
             </SelectedOptions>
             {(value ?? internalValue) && clearButton && (
               <button
