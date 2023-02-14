@@ -1,3 +1,8 @@
 .navds-list {
   margin: 0;
 }
+
+.navds-list__item__title {
+  font-weight: var(--a-font-weight-bold);
+  display: block;
+}
