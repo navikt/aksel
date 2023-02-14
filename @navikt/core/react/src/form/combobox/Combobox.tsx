@@ -83,7 +83,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ...rest
     } = props;
     //TODO: fix bug where if virtual focus is on an option and you click on another option, the virtually focused option is selected
-    //TODO: dont inputFocus on load, only after element immediately after render
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
