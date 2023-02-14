@@ -17,6 +17,7 @@ import {
   omit,
   useEventListener,
 } from "../..";
+import usePrevious from "../../util/usePrevious";
 import { FormFieldProps, useFormField } from "../useFormField";
 
 export type ComboboxClearEvent =
@@ -81,21 +82,19 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setSelectedOptions,
       ...rest
     } = props;
+    //TODO: fix bug where if virtual focus is on an option and you click on another option, the virtually focused option is selected
+    //TODO: dont inputFocus on load, only after element immediately after render
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
-
     const [isInternalListOpen, setInternalListOpen] =
       useState<boolean>(isListOpen);
+    const prevSelectedOptions = usePrevious(selectedOptions);
     const [internalValue, setInternalValue] = useState<string>(
       defaultValue ? String(defaultValue) : ""
     );
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
-
-    //TODO: onFocus in input should open list
-    //TODO: onBlur in input should close list
-    //TODO: fix bug where if virtual focus is on an option and you click on another option, the virtually focused option is selected
 
     const filteredOptions = useMemo(() => {
       if (internalValue) {
@@ -110,11 +109,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     }, [internalValue, options]);
 
     const handleChange = useCallback(
-      (v: string) => {
-        value === undefined && setInternalValue(v);
-        onChange?.(v);
-        if (!!v !== isInternalListOpen) {
-          setInternalListOpen(!!v);
+      (val: string) => {
+        value === undefined && setInternalValue(val);
+        onChange?.(val);
+        if (!!val !== isInternalListOpen) {
+          setInternalListOpen(!!val);
         }
         setFilteredOptionsIndex(0);
       },
@@ -130,7 +129,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (event: ComboboxClearEvent) => {
         onClear?.(event);
         handleChange("");
-        //focusInput();
       },
       [handleChange, onClear]
     );
@@ -193,10 +191,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       )
     );
 
+    //focus on input whenever selectedOptions changes
     useEffect(() => {
       console.log("useEffect");
-      focusInput();
-    }, [focusInput, selectedOptions]);
+      if (prevSelectedOptions !== selectedOptions) focusInput();
+    }, [focusInput, selectedOptions, prevSelectedOptions]);
 
     return (
       <div
@@ -260,6 +259,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 {...inputProps}
                 value={value ?? internalValue}
                 onChange={(e) => handleChange(e.target.value)}
+                onFocus={() => setInternalListOpen(true)}
+                onBlur={() => setInternalListOpen(false)}
                 type="search"
                 role="combobox"
                 aria-controls={isListOpen ? id : ""}
