@@ -2,35 +2,41 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ListItem, ListItemType } from "./ListItem";
 
-interface ListProps<T extends keyof HTMLElementTagNameMap>
-  extends React.HTMLAttributes<HTMLElementTagNameMap[T]> {
+interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  as?: T;
+  /**
+   * HTML list element to render
+   * @default "ul"
+   */
+  as?: "ul" | "ol";
+  /**
+   * List heading title
+   */
+  title?: string;
+  /**
+   * List heading description
+   */
+  description?: string;
 }
 
-interface ListComponent<T extends keyof HTMLElementTagNameMap>
-  extends React.ForwardRefExoticComponent<
-    ListProps<T> & React.RefAttributes<HTMLElementTagNameMap[T]>
-  > {
+interface ListComponent extends React.ForwardRefExoticComponent<ListProps> {
   Item: ListItemType;
 }
 
-type HTMLElementTagNameMap = {
-  ul: HTMLUListElement;
-  ol: HTMLOListElement;
-};
-
-export const List = forwardRef<
-  HTMLUListElement | HTMLOListElement,
-  ListProps<"ul" | "ol">
->(({ children, className, as = "ul", ...rest }, ref) => {
-  const Component = React.createElement(
-    as,
-    { ref, className: cl("navds-list", className), ...rest },
-    children
-  );
-  return Component;
-}) as ListComponent<"ul" | "ol">;
+export const List = forwardRef<HTMLDivElement, ListProps>(
+  ({ children, className, as = "ul", title, description, ...rest }, ref) => {
+    const ListTag = as;
+    return (
+      <div {...rest} ref={ref} className={cl("navds-list", className)}>
+        {title && <h3 className="navds-list__title">{title}</h3>}
+        {description && (
+          <p className="navds-list__description">{description}</p>
+        )}
+        <ListTag>{children}</ListTag>
+      </div>
+    );
+  }
+) as unknown as ListComponent;
 
 List.Item = ListItem;
 
