@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { BodyShort, Heading } from "../typography";
 import { ListItem, ListItemType } from "./ListItem";
 
 interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -28,10 +29,12 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
     const ListTag = as;
     return (
       <div {...rest} ref={ref} className={cl("navds-list", className)}>
-        {title && <h3 className="navds-list__title">{title}</h3>}
-        {description && (
-          <p className="navds-list__description">{description}</p>
+        {title && (
+          <Heading size="small" level="3">
+            {title}
+          </Heading>
         )}
+        {description && <BodyShort>{description}</BodyShort>}
         <ListTag>{children}</ListTag>
       </div>
     );

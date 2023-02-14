@@ -12,7 +12,7 @@ export const Default = {
     return (
       <List
         title="Tittel på listen"
-        description="Dette er en bexkrivelse på hva denne listen inneholder :)"
+        description="Dette er en beskrivelse på hva denne listen inneholder :)"
       >
         <List.Item>Item 1</List.Item>
         <List.Item>Item 2</List.Item>
