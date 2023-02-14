@@ -93,6 +93,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
 
     //TODO: onFocus in input should open list
+    //TODO: onBlur in input should close list
+    //TODO: fix bug where if virtual focus is on an option and you click on another option, the virtually focused option is selected
+
+    //TODO: make useEffect that triggers focusInput
+    // it changes cus <input> is inside <li> which has no key
+    // OR use a ref to the input and keep it mounted
+    // const [inputKey, setInputKey] = useState(0);
 
     const filteredOptions = useMemo(() => {
       if (internalValue) {
@@ -147,6 +154,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setSelectedOptions(
         selectedOptions.filter((option) => option !== clickedOption)
       );
+      focusInput();
     };
 
     useEventListener(
