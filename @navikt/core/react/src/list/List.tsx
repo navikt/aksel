@@ -19,6 +19,11 @@ interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
    * List heading description
    */
   description?: string;
+  /**
+   * Allows setting a different HTML h-tag
+   * @default "h3"
+   */
+  headingTag?: React.ElementType<any>;
 }
 
 interface ListComponent extends React.ForwardRefExoticComponent<ListProps> {
@@ -26,14 +31,25 @@ interface ListComponent extends React.ForwardRefExoticComponent<ListProps> {
 }
 
 export const List = forwardRef<HTMLDivElement, ListProps>(
-  ({ children, className, as = "ul", title, description, ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      as = "ul",
+      title,
+      description,
+      headingTag = "h3",
+      ...rest
+    },
+    ref
+  ) => {
     const headingId = useId();
     const descriptionId = useId();
     const ListTag = as;
     return (
       <div {...rest} ref={ref} className={cl("navds-list", className)}>
         {title && (
-          <Heading id={`tittel-${headingId}`} size="small" level="3">
+          <Heading id={`tittel-${headingId}`} size="small" as={headingTag}>
             {title}
           </Heading>
         )}
