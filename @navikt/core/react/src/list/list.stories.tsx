@@ -35,8 +35,8 @@ export const WithHeading = {
   render: () => {
     return (
       <List
-        title="Tittel på listen"
-        description="Dette er en beskrivelse på hva denne listen inneholder :)"
+        title="Tittel på listen 🚀"
+        description="Dette er en beskrivelse på hva denne listen inneholder"
       >
         <List.Item title="Tittel på punktet">
           <p style={{ margin: "0" }}>
