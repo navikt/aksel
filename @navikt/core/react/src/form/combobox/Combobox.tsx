@@ -190,42 +190,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       )
     );
 
-    const Input = useMemo(
-      () => (
-        <input
-          key="combobox-input"
-          ref={mergedRef}
-          {...omit(rest, ["error", "errorId", "size"])}
-          {...inputProps}
-          value={value ?? internalValue}
-          onChange={(e) => handleChange(e.target.value)}
-          type="search"
-          role="combobox"
-          aria-controls={isListOpen ? id : ""}
-          aria-expanded={isListOpen}
-          className={cl(
-            className,
-            "navds-combobox__input",
-            "navds-text-field__input",
-            "navds-body-short",
-            `navds-body-${size}`
-          )}
-        />
-      ),
-      [
-        className,
-        handleChange,
-        id,
-        inputProps,
-        internalValue,
-        isListOpen,
-        mergedRef,
-        rest,
-        size,
-        value,
-      ]
-    );
-
     return (
       <div
         ref={setWrapperRef}
@@ -278,7 +242,25 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   })
                 : []}
 
-              {Input}
+              <input
+                key="combobox-input"
+                ref={mergedRef}
+                {...omit(rest, ["error", "errorId", "size"])}
+                {...inputProps}
+                value={value ?? internalValue}
+                onChange={(e) => handleChange(e.target.value)}
+                type="search"
+                role="combobox"
+                aria-controls={isListOpen ? id : ""}
+                aria-expanded={isListOpen}
+                className={cl(
+                  className,
+                  "navds-combobox__input",
+                  "navds-text-field__input",
+                  "navds-body-short",
+                  `navds-body-${size}`
+                )}
+              />
             </SelectedOptions>
             {(value ?? internalValue) && clearButton && (
               <button
