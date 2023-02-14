@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import React, { useState, useId } from "react";
 
 import { Combobox } from "../../index";
