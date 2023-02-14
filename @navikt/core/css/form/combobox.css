@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 }
 
 .navds-combobox__wrapper-inner {
@@ -51,6 +52,10 @@
 }
 
 .navds-combobox__list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + var(--a-spacing-1));
   list-style: none;
   margin: 0;
   border: var(--a-border-subtle);
@@ -81,6 +86,7 @@
   background-color: var(--a-surface-selected);
 }
 
+/* tick box */
 .navds-combobox__list-item::after {
   content: "";
   width: 20px;
