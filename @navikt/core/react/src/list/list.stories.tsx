@@ -8,12 +8,12 @@ export default {
 } as Meta;
 
 export const Default = {
-  render: (props: any) => {
+  render: () => {
     return (
       <List>
-        <li>En</li>
-        <li>To</li>
-        <li>Tre</li>
+        <List.Item>Item 1</List.Item>
+        <List.Item>Item 2</List.Item>
+        <List.Item>Item 3</List.Item>
       </List>
     );
   },

@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { ListItem, ListItemType } from "./ListItem";
 
 interface ListProps<T extends keyof HTMLElementTagNameMap>
   extends React.HTMLAttributes<HTMLElementTagNameMap[T]> {
@@ -10,7 +11,9 @@ interface ListProps<T extends keyof HTMLElementTagNameMap>
 interface ListComponent<T extends keyof HTMLElementTagNameMap>
   extends React.ForwardRefExoticComponent<
     ListProps<T> & React.RefAttributes<HTMLElementTagNameMap[T]>
-  > {}
+  > {
+  Item: ListItemType;
+}
 
 type HTMLElementTagNameMap = {
   ul: HTMLUListElement;
@@ -28,5 +31,7 @@ export const List = forwardRef<
   );
   return Component;
 }) as ListComponent<"ul" | "ol">;
+
+List.Item = ListItem;
 
 export default List;
