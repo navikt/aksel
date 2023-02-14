@@ -4,6 +4,7 @@ import React, {
   forwardRef,
   InputHTMLAttributes,
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -96,11 +97,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     //TODO: onBlur in input should close list
     //TODO: fix bug where if virtual focus is on an option and you click on another option, the virtually focused option is selected
 
-    //TODO: make useEffect that triggers focusInput
-    // it changes cus <input> is inside <li> which has no key
-    // OR use a ref to the input and keep it mounted
-    // const [inputKey, setInputKey] = useState(0);
-
     const filteredOptions = useMemo(() => {
       if (internalValue) {
         return (
@@ -126,6 +122,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const focusInput = useCallback(() => {
+      console.log("focusInput");
       inputRef.current && inputRef.current?.focus?.();
     }, []);
 
@@ -133,9 +130,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (event: ComboboxClearEvent) => {
         onClear?.(event);
         handleChange("");
-        focusInput();
+        //focusInput();
       },
-      [handleChange, onClear, focusInput]
+      [handleChange, onClear]
     );
 
     const toggleOption = useCallback(() => {
@@ -154,7 +151,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setSelectedOptions(
         selectedOptions.filter((option) => option !== clickedOption)
       );
-      focusInput();
     };
 
     useEventListener(
@@ -167,7 +163,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           } else if (e.key === "Enter") {
             e.preventDefault();
             toggleOption();
-            //handleClear({ trigger: e.key, event: e });
           }
         },
         [handleClear, toggleOption]
@@ -197,6 +192,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         ]
       )
     );
+
+    useEffect(() => {
+      console.log("useEffect");
+      focusInput();
+    }, [focusInput, selectedOptions]);
 
     return (
       <div
@@ -242,7 +242,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                       <SelectedOptions.Removable
                         className="navds-combobox__selected-option"
                         key={option + i}
-                        onClick={() => handleDeleteSelectedOption(option)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteSelectedOption(option);
+                        }}
                       >
                         {option}
                       </SelectedOptions.Removable>
