@@ -10,7 +10,7 @@ const Example = () => {
   );
 
   return (
-    <>
+    <div className="py-32">
       <Select
         ref={setAnchor}
         label="Velg placement"
@@ -38,7 +38,7 @@ const Example = () => {
           </BodyLong>
         </Popover.Content>
       </Popover>
-    </>
+    </div>
   );
 };
 
