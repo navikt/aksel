@@ -11,7 +11,7 @@ import {
 } from "@/components";
 import { SanityT } from "@/lib";
 import { Download } from "@navikt/ds-icons";
-import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
+import { SuggestionBlock } from "components/website-modules/suggestionblock";
 
 const ModalContent = ({ icon }: { icon: string }) => {
   const [blob, setBlob]: any = useState();

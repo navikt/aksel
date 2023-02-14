@@ -55,7 +55,7 @@ export const SuggestionBlock = ({
   return (
     <div
       className={cl(
-        "ring-border-subtle flex justify-between rounded-lg px-6 py-4 ring-1",
+        "ring-border-subtle flex justify-between gap-3 rounded-lg px-6 py-4 ring-1",
         {
           "mb-0 mt-5": variant === "ikon" || variant === "ikon-ny",
           "mb-12": variant !== "ikon" && variant !== "ikon-ny",
@@ -114,7 +114,7 @@ const options: {
     text: "Har du innspill til ikonet?",
     link:
       issueUrl +
-      "&labels=forespørsel+🥰%2Cnytt+✨&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
+      "&labels=forespørsel+🥰%2Cnytt+✨%2Cikoner+🖼&template=update-icon.yml&title=%5BTilbakemelding%20p%C3%A5%20ikon%5D%3A+",
   },
   "komponent-ny": {
     text: "Denne komponenten er ny eller oppdatert. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",

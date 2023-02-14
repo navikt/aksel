@@ -30,6 +30,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 5,
   desc: "Bruk onValidate-callback for å håndtere validering.",
