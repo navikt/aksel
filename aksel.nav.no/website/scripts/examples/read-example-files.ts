@@ -20,6 +20,13 @@ export const filterCode = (code: string) => {
     (x) => x === "/* Storybook story */"
   );
 
+  if (storyIndex === -1) {
+    return exampleList
+      .filter((line) => !line.includes("withDsExample"))
+      .join("\n")
+      .trim();
+  }
+
   return exampleList
     .filter((_, idx) => idx < storyIndex || idx > storyIndex + 3)
     .filter((line) => !line.includes("withDsExample"))
