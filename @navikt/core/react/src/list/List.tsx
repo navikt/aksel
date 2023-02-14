@@ -67,7 +67,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
       </div>
     );
   }
-) as unknown as ListComponent;
+) as ListComponent;
 
 List.Item = ListItem;
 

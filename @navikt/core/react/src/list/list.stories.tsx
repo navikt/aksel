@@ -10,6 +10,30 @@ export default {
 export const Default = {
   render: () => {
     return (
+      <List>
+        <List.Item>Item 1</List.Item>
+        <List.Item>Item 2</List.Item>
+        <List.Item>Item 3</List.Item>
+      </List>
+    );
+  },
+};
+
+export const Ordered = {
+  render: () => {
+    return (
+      <List as="ol">
+        <List.Item>Item 1</List.Item>
+        <List.Item>Item 2</List.Item>
+        <List.Item>Item 3</List.Item>
+      </List>
+    );
+  },
+};
+
+export const WithHeading = {
+  render: () => {
+    return (
       <List
         title="Tittel på listen"
         description="Dette er en beskrivelse på hva denne listen inneholder :)"
