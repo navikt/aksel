@@ -3331,10 +3331,12 @@ __metadata:
     concurrently: 7.2.1
     copyfiles: ^2.4.1
     cross-zip-cli: 1.0.0
+    dotenv: ^10.0.0
     fast-glob: 3.2.11
     hast-util-select: 5.0.5
     jest: ^29.0.0
     js-yaml: ^4.1.0
+    lodash.startcase: 4.4.0
     react: ^18.0.0
     rehype-parse: 8.0.4
     typescript: ^4.8.0
