@@ -55,16 +55,16 @@ const ExpansionPanelHeader: ExpansionPanelHeaderType = forwardRef(
         aria-expanded={panelContext.open}
       >
         {avatar && (
-          <div className="navds-expansionpanel__header-avatar">{avatar}</div>
+          <span className="navds-expansionpanel__header-avatar">{avatar}</span>
         )}
-        <div className="navds-expansionpanel__header-content">
+        <span className="navds-expansionpanel__header-content">
           <Heading size="small" as="span">
             {children}
           </Heading>
-          <BodyShort>{description}</BodyShort>
-        </div>
+          <BodyShort as="span">{description}</BodyShort>
+        </span>
 
-        <div className="navds-expansionpanel__header-icon">
+        <span className="navds-expansionpanel__header-icon">
           <svg
             width="24"
             height="24"
@@ -109,7 +109,7 @@ const ExpansionPanelHeader: ExpansionPanelHeaderType = forwardRef(
               strokeLinecap="round"
             />
           </svg>
-        </div>
+        </span>
       </button>
     );
   }

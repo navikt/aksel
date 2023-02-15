@@ -87,6 +87,7 @@
 
 .navds-expansionpanel__header-content {
   width: 100%;
+  display: grid;
 }
 
 @keyframes closeButtonAnimation {
