@@ -28,12 +28,15 @@
 .navds-expansionpanel__header--open + * .navds-expansionpanel__content {
   box-shadow: inset 1px 0 0 0 var(--a-border-subtle), inset -1px 0 0 0 var(--a-border-subtle),
     inset 0 -1px 0 0 var(--a-border-subtle);
+  opacity: 1;
 }
 
 .navds-expansionpanel__content {
   border-end-end-radius: var(--a-border-radius-large);
   border-end-start-radius: var(--a-border-radius-large);
   padding: var(--a-spacing-3) var(--a-spacing-4);
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
 }
 
 .navds-expansionpanel__header:hover .navds-expansionpanel__open-icon {
