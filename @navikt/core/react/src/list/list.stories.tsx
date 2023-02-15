@@ -1,3 +1,4 @@
+import { Cognition } from "@navikt/ds-icons";
 import { Meta } from "@storybook/react";
 import React from "react";
 import { List } from "..";
@@ -43,12 +44,12 @@ export const WithHeading = {
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
-        <List.Item title="Tittel på punktet">
+        <List.Item title="Tittel på punktet" icon={<Cognition />}>
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
-        <List.Item title="Tittel på punktet">
+        <List.Item>
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
