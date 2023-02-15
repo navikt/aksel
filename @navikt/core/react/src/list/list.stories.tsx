@@ -28,8 +28,12 @@ export const Default = {
 export const Ordered = {
   render: () => {
     return (
-      <List as="ol">
-        <List.Item title="Item 1">Beskrivelse 1</List.Item>
+      <List
+        as="ol"
+        title="Tittel på listen 🚀"
+        description="Dette er en beskrivelse på hva denne listen inneholder"
+      >
+        <List.Item title="Tittel på punktet">Beskrivelse 1</List.Item>
         <List.Item title="Item 2">Beskrivelse 2</List.Item>
         <List.Item title="Item 2">Beskrivelse 3</List.Item>
       </List>
@@ -67,10 +71,7 @@ export const WithHeading = {
 export const Icons = {
   render: () => {
     return (
-      <List
-        title="Tittel på listen 🚀"
-        description="Dette er en beskrivelse på hva denne listen inneholder"
-      >
+      <List>
         <List.Item title="Tittel på punktet" icon={<Braille />}>
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
