@@ -72,6 +72,12 @@ const config = () =>
           },
         ];
       },
+      rewrites: async () => [
+        {
+          source: "/sitemap.xml",
+          destination: "/api/sitemap",
+        },
+      ],
       async redirects() {
         return [
           {
