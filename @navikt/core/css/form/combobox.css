@@ -20,7 +20,7 @@
 }
 
 .navds-combobox__selected-options {
-  gap: var(--a-spacing-1);
+  gap: var(--a-spacing-2);
 }
 
 .navds-combobox__selected-options > li {
@@ -47,15 +47,67 @@
 }
 
 .navds-combobox__wrapper-inner:has(.navds-combobox__input:focus) {
-  box-shadow: 0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset, var(--a-shadow-focus);
+  box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
   box-shadow: var(--a-shadow-focus);
 }
 
+.navds-combobox__button-clear {
+  position: absolute;
+  right: 2.25rem;
+  border-radius: var(--a-border-radius-medium);
+  color: var(--a-text-subtle);
+  height: 32px;
+  width: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0;
+}
+
+.navds-combobox__button-toggle-list {
+  position: absolute;
+  right: 0.5rem;
+  border-radius: var(--a-border-radius-medium);
+  color: var(--a-text-default);
+  height: 32px;
+  width: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0;
+}
+
+.navds-combobox__button-clear:active:hover,
+.navds-combobox__button-toggle-list:active:hover {
+  color: var(--a-text-action);
+}
+
+.navds-combobox__button-clear:hover,
+.navds-combobox__button-toggle-list:hover {
+  color: var(--a-text-action-selected);
+}
+
+/* dropdown list */
+
 .navds-combobox__list {
+  max-height: 290px;
+  overflow-y: auto;
   position: absolute;
   left: 0;
   right: 0;
-  top: calc(100% + var(--a-spacing-1));
+  top: calc(100% + var(--a-spacing-2));
   list-style: none;
   margin: 0;
   border: var(--a-border-subtle);
@@ -76,7 +128,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: var(--a-spacing-5);
   width: 100%;
 }
 
@@ -86,7 +138,7 @@
   background-color: var(--a-surface-selected);
 }
 
-/* tick box */
+/* tick box inside list item */
 .navds-combobox__list-item::after {
   content: "";
   width: 20px;

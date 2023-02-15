@@ -1,4 +1,4 @@
-import { Close } from "@navikt/ds-icons";
+import { Close, Collapse, Expand } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, {
   forwardRef,
@@ -25,7 +25,8 @@ export type ComboboxClearEvent =
       trigger: "Click";
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
     }
-  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
+  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> }
+  | { trigger: "Enter"; event: React.KeyboardEvent<HTMLButtonElement> };
 
 export interface ComboboxProps
   extends FormFieldProps,
@@ -39,6 +40,8 @@ export interface ComboboxProps
   variant?: "primary" | "secondary" | "simple";
   clearButton?: boolean;
   clearButtonLabel?: string;
+  toggleListButton?: boolean;
+  toggleListButtonLabel?: string;
   onChange?: (value: string) => void;
   hideLabel?: boolean;
   label: React.ReactNode;
@@ -71,8 +74,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       description,
       label,
       children,
-      clearButtonLabel,
       clearButton = true,
+      clearButtonLabel,
+      toggleListButton = true,
+      toggleListButtonLabel,
       defaultValue,
       isListOpen,
       id,
@@ -82,11 +87,21 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setSelectedOptions,
       ...rest
     } = props;
+
     //TODO: fix bug where if virtual focus is on an option and you click on another option, the virtually focused option is selected
+    //TODO: fix bug where if you add empty string or non-existing option, it adds an empty chip
+    //TODO: make list have a max-height and scroll
+    //TODO: pre-selected options
+    //TODO: add option to add new option
+    //TODO: add caret icon with onClick to open list
+    //TODO: allow user to add isListOpen as a prop to control list open/close
+    //TODO: make it so that clicking Collapse/Expand closes list if list is open,
+    /////// BUT leave it open if user tabs to it. AKA isListOpen cant be based on focus, but on state
 
     const inputRef = useRef<HTMLInputElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
+    const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
+    const [comboboxRef, setComboboxRef] = useState<HTMLDivElement | null>(null);
     const [isInternalListOpen, setInternalListOpen] =
       useState<boolean>(isListOpen);
     const prevSelectedOptions = usePrevious(selectedOptions);
@@ -94,6 +109,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultValue ? String(defaultValue) : ""
     );
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
+    const [isComboboxFocused, setIsComboboxFocused] = useState(false);
+
+    useEffect(() => {
+      //manually set depending on whether focus is outside or inside combobox
+      //check if comboboxRef-state contains activeElement
+      //because of weird focusing rules, focus lands on body after tabbing, then moves to the next element
+      //With state, we can avoid a "one step behind" issue we might get with refs
+    }, [comboboxRef, isComboboxFocused]);
 
     const filteredOptions = useMemo(() => {
       if (internalValue) {
@@ -120,8 +143,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const focusInput = useCallback(() => {
-      console.log("focusInput");
       inputRef.current && inputRef.current?.focus?.();
+      setIsComboboxFocused(true);
     }, []);
 
     const handleClear = useCallback(
@@ -190,11 +213,21 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       )
     );
 
+    const handleBlur = useCallback(
+      (e) => {
+        console.log("blur", e.target, document.activeElement);
+        if (!e?.target?.contains(document.activeElement))
+          setInternalListOpen(false);
+      },
+      [setInternalListOpen]
+    );
+
     //focus on input whenever selectedOptions changes
     useEffect(() => {
-      console.log("useEffect");
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
+
+    console.log("activelement bf render", document.activeElement);
 
     return (
       <div
@@ -231,7 +264,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             {description}
           </BodyShort>
         )}
-        <div className="navds-combobox__wrapper">
+        <div
+          className="navds-combobox__wrapper"
+          ref={setComboboxRef}
+          onBlur={(e) => handleBlur(e)}
+        >
           <div className="navds-combobox__wrapper-inner" onClick={focusInput}>
             <SelectedOptions className="navds-combobox__selected-options">
               {selectedOptions.length
@@ -240,6 +277,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                       <SelectedOptions.Removable
                         className="navds-combobox__selected-option"
                         key={option + i}
+                        onFocus={() => setInternalListOpen(true)}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteSelectedOption(option);
@@ -253,17 +291,16 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
               <input
                 key="combobox-input"
-                ref={mergedRef}
+                ref={mergedInputRef}
                 {...omit(rest, ["error", "errorId", "size"])}
                 {...inputProps}
                 value={value ?? internalValue}
                 onChange={(e) => handleChange(e.target.value)}
                 onFocus={() => setInternalListOpen(true)}
-                onBlur={() => setInternalListOpen(false)}
                 type="search"
                 role="combobox"
-                aria-controls={isListOpen ? id : ""}
-                aria-expanded={isListOpen}
+                aria-controls={isInternalListOpen ? id : ""}
+                aria-expanded={isInternalListOpen}
                 className={cl(
                   className,
                   "navds-combobox__input",
@@ -276,13 +313,45 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             {(value ?? internalValue) && clearButton && (
               <button
                 type="button"
-                onClick={(e) => handleClear({ trigger: "Click", event: e })}
-                className="navds-search__button-clear"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleClear({ trigger: e.key, event: e });
+                  }
+                }}
+                onClick={(event) => handleClear({ trigger: "Click", event })}
+                className="navds-combobox__button-clear"
               >
                 <span className="navds-sr-only">
                   {clearButtonLabel ? clearButtonLabel : "Tøm"}
                 </span>
-                <Close aria-hidden />
+                <Close aria-hidden width="20" height="20" />
+              </button>
+            )}
+            {toggleListButton && (
+              <button
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    setInternalListOpen((state) => !state);
+                  }
+                }}
+                type="button"
+                onClick={() => setInternalListOpen((state) => !state)}
+                className="navds-combobox__button-toggle-list"
+              >
+                <span className="navds-sr-only">
+                  {toggleListButtonLabel
+                    ? toggleListButtonLabel
+                    : isInternalListOpen
+                    ? "Lukk"
+                    : "Åpne"}
+                </span>
+                {isInternalListOpen ? (
+                  <Collapse aria-hidden width="20" height="20" />
+                ) : (
+                  <Expand aria-hidden width="20" height="20" />
+                )}
               </button>
             )}
           </div>
