@@ -1,5 +1,6 @@
 import { config } from "dotenv";
 import { fetchIcons, fetchDownloadUrls, fetchIcon } from "./fetch-icons.mjs";
+import { makeConfig } from "./make-configs.mjs";
 import { existsSync, writeFileSync, mkdirSync, rmSync } from "fs";
 import { resolve } from "path";
 import startCase from "lodash.startcase";
@@ -45,6 +46,10 @@ async function main() {
         }
       );
   }
+
+  makeConfig(icons);
+
+  console.log(`Success! ${Object.keys(images).length} ikoner lastet ned`);
 }
 
 main();
