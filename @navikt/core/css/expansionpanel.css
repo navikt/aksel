@@ -56,7 +56,8 @@
 }
 
 .navds-expansionpanel__header--closed {
-  animation: animateBoxShadow 0.2s ease-in-out;
+  /* animation: animateBoxShadow 0.2s ease-in-out; */
+  transition: box-shadow 150ms ease-in-out;
 }
 
 .navds-expansionpanel__header--open .navds-expansionpanel__close-icon {
