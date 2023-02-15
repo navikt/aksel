@@ -16,6 +16,9 @@ export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
    * @default "h4"
    */
   headingTag?: React.ElementType<any>;
+  /*
+   * Icon to be used as list marker
+   */
   icon?: React.ReactNode;
 }
 
@@ -57,6 +60,9 @@ const ListMarker = () => {
       viewBox="0 0 6 6"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+      focusable={false}
+      role="img"
     >
       <rect width="6" height="6" rx="3" fill="#262626" />
     </svg>
