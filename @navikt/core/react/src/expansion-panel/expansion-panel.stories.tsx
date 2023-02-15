@@ -24,9 +24,10 @@ export const Default = {
         }}
       >
         <ExpansionPanel>
-          <ExpansionPanel.Header description="odit quaerat exercitationem fugit veritatis">
-            Tittel
-          </ExpansionPanel.Header>
+          <ExpansionPanel.Header
+            description="odit quaerat exercitationem fugit veritatis"
+            title="Tittel"
+          />
           <ExpansionPanel.Content>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             cum soluta consequatur tempora sint alias non nostrum, delectus,
@@ -35,7 +36,7 @@ export const Default = {
           </ExpansionPanel.Content>
         </ExpansionPanel>
         <ExpansionPanel>
-          <ExpansionPanel.Header>Tittel</ExpansionPanel.Header>
+          <ExpansionPanel.Header title="Tittel" />
           <ExpansionPanel.Content>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             cum soluta consequatur tempora sint alias non nostrum, delectus,
@@ -46,10 +47,9 @@ export const Default = {
         <ExpansionPanel>
           <ExpansionPanel.Header
             avatar={<Star aria-hidden />}
+            title="Tittel"
             description="odit quaerat exercitationem fugit veritatis"
-          >
-            Tittel
-          </ExpansionPanel.Header>
+          />
           <ExpansionPanel.Content>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             cum soluta consequatur tempora sint alias non nostrum, delectus,
@@ -58,9 +58,7 @@ export const Default = {
           </ExpansionPanel.Content>
         </ExpansionPanel>
         <ExpansionPanel>
-          <ExpansionPanel.Header avatar={<Star aria-hidden />}>
-            Tittel
-          </ExpansionPanel.Header>
+          <ExpansionPanel.Header avatar={<Star aria-hidden />} title="Tittel" />
           <ExpansionPanel.Content>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             cum soluta consequatur tempora sint alias non nostrum, delectus,

@@ -45,7 +45,9 @@ export const ExpansionPanel = forwardRef<HTMLDivElement, ExpansionPanelProps>(
       <ExpansionPanelContext.Provider value={{ open, toggleOpen: handleOpen }}>
         <div
           {...rest}
-          className={cl("navds-expansionpanel", className)}
+          className={cl("navds-expansionpanel", className, {
+            "navds-expansionpanel--open": open,
+          })}
           ref={ref}
         />
       </ExpansionPanelContext.Provider>
