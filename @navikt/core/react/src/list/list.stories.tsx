@@ -1,4 +1,9 @@
-import { Cognition } from "@navikt/ds-icons";
+import {
+  BabyChangingRoom,
+  Braille,
+  Cognition,
+  Refresh,
+} from "@navikt/ds-icons";
 import { Meta } from "@storybook/react";
 import React from "react";
 import { List } from "..";
@@ -44,12 +49,44 @@ export const WithHeading = {
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
-        <List.Item title="Tittel på punktet" icon={<Cognition />}>
+        <List.Item title="Tittel på punktet">
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
         <List.Item>
+          <p style={{ margin: "0" }}>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </p>
+        </List.Item>
+      </List>
+    );
+  },
+};
+
+export const Icons = {
+  render: () => {
+    return (
+      <List
+        title="Tittel på listen 🚀"
+        description="Dette er en beskrivelse på hva denne listen inneholder"
+      >
+        <List.Item title="Tittel på punktet" icon={<Braille />}>
+          <p style={{ margin: "0" }}>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </p>
+        </List.Item>
+        <List.Item title="Tittel på punktet" icon={<Cognition />}>
+          <p style={{ margin: "0" }}>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </p>
+        </List.Item>
+        <List.Item icon={<BabyChangingRoom />}>
+          <p style={{ margin: "0" }}>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </p>
+        </List.Item>
+        <List.Item icon={<Refresh />}>
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
