@@ -138,13 +138,16 @@
           }
         },
         "hover": {
-          "value": "{a.gray.700.value}"
+          "value": "{a.gray.800.value}"
         },
         "selected": {
-          "value": "{a.gray.700.value}"
+          "value": "{a.gray.900.value}"
+        },
+        "active": {
+          "value": "{a.gray.900.value}"
         },
         "@": {
-          "value": "{a.gray.600.value}"
+          "value": "{a.gray.700.value}"
         }
       },
 
@@ -206,7 +209,7 @@
         "value": "{a.grayalpha.500.value}"
       },
       "strong": {
-        "value": "{a.grayalpha.600.value}"
+        "value": "{a.grayalpha.700.value}"
       },
       "divider": {
         "value": "{a.grayalpha.300.value}"
