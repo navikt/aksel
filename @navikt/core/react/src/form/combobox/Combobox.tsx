@@ -95,6 +95,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     //TODO: add option to add new option
     //TODO: add caret icon with onClick to open list
     //TODO: allow user to add isListOpen as a prop to control list open/close
+    //TODO: scroll dropdown when navigating with keyboard
     //TODO: make it so that clicking Collapse/Expand closes list if list is open,
     /////// BUT leave it open if user tabs to it. AKA isListOpen cant be based on focus, but on state
 
@@ -102,21 +103,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
     const [comboboxRef, setComboboxRef] = useState<HTMLDivElement | null>(null);
-    const [isInternalListOpen, setInternalListOpen] =
-      useState<boolean>(isListOpen);
+    const [isInternalListOpen, setInternalListOpen] = useState<boolean | null>(
+      isListOpen
+    );
     const prevSelectedOptions = usePrevious(selectedOptions);
     const [internalValue, setInternalValue] = useState<string>(
       defaultValue ? String(defaultValue) : ""
     );
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
-    const [isComboboxFocused, setIsComboboxFocused] = useState(false);
-
-    useEffect(() => {
-      //manually set depending on whether focus is outside or inside combobox
-      //check if comboboxRef-state contains activeElement
-      //because of weird focusing rules, focus lands on body after tabbing, then moves to the next element
-      //With state, we can avoid a "one step behind" issue we might get with refs
-    }, [comboboxRef, isComboboxFocused]);
 
     const filteredOptions = useMemo(() => {
       if (internalValue) {
@@ -144,7 +138,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const focusInput = useCallback(() => {
       inputRef.current && inputRef.current?.focus?.();
-      setIsComboboxFocused(true);
     }, []);
 
     const handleClear = useCallback(
@@ -213,21 +206,24 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       )
     );
 
+    const handleToggleListOpen = () => {
+      if (isInternalListOpen == null || isInternalListOpen)
+        setInternalListOpen(true);
+      else if (!isInternalListOpen) setInternalListOpen(false);
+    };
+
     const handleBlur = useCallback(
       (e) => {
-        console.log("blur", e.target, document.activeElement);
-        if (!e?.target?.contains(document.activeElement))
-          setInternalListOpen(false);
+        if (!comboboxRef?.contains(document.activeElement))
+          setInternalListOpen(null);
       },
-      [setInternalListOpen]
+      [setInternalListOpen, comboboxRef]
     );
 
     //focus on input whenever selectedOptions changes
     useEffect(() => {
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
-
-    console.log("activelement bf render", document.activeElement);
 
     return (
       <div
@@ -268,8 +264,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           className="navds-combobox__wrapper"
           ref={setComboboxRef}
           onBlur={(e) => handleBlur(e)}
+          onClick={focusInput}
         >
-          <div className="navds-combobox__wrapper-inner" onClick={focusInput}>
+          <div className="navds-combobox__wrapper-inner">
             <SelectedOptions className="navds-combobox__selected-options">
               {selectedOptions.length
                 ? selectedOptions.map((option, i) => {
@@ -277,7 +274,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                       <SelectedOptions.Removable
                         className="navds-combobox__selected-option"
                         key={option + i}
-                        onFocus={() => setInternalListOpen(true)}
+                        onFocus={handleToggleListOpen}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteSelectedOption(option);
@@ -296,11 +293,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 {...inputProps}
                 value={value ?? internalValue}
                 onChange={(e) => handleChange(e.target.value)}
-                onFocus={() => setInternalListOpen(true)}
+                onFocus={handleToggleListOpen}
                 type="search"
                 role="combobox"
                 aria-controls={isInternalListOpen ? id : ""}
-                aria-expanded={isInternalListOpen}
+                aria-expanded={!!isInternalListOpen}
                 className={cl(
                   className,
                   "navds-combobox__input",
@@ -331,11 +328,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             {toggleListButton && (
               <button
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
+                  if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     setInternalListOpen((state) => !state);
                   }
                 }}
+                onFocus={handleToggleListOpen}
                 type="button"
                 onClick={() => setInternalListOpen((state) => !state)}
                 className="navds-combobox__button-toggle-list"
