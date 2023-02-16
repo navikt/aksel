@@ -21,6 +21,10 @@ export interface ExpansionCardProps
    * Instances of ExpansionCard.Item
    */
   children: React.ReactNode;
+  /**
+   *
+   */
+  onToggle?: (open: boolean) => void;
 }
 
 export type ExpansionCardContextProps = {
@@ -34,11 +38,12 @@ export const ExpansionCardContext = createContext<ExpansionCardContextProps>({
 });
 
 export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
-  ({ className, ...rest }, ref) => {
+  ({ className, onToggle, ...rest }, ref) => {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
-      setOpen((x) => !x);
+      setOpen(!open);
+      onToggle?.(open);
     };
 
     return (

@@ -5,7 +5,7 @@ import { Heading } from "../typography/Heading";
 import { ExpansionCardContext } from "./ExpansionCard";
 
 export interface ExpansionCardHeaderProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
   /**
    * Title text
    */
@@ -25,14 +25,11 @@ export interface ExpansionCardHeaderProps
 }
 
 export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
-  ExpansionCardHeaderProps & React.RefAttributes<HTMLButtonElement>
+  ExpansionCardHeaderProps & React.RefAttributes<HTMLDivElement>
 >;
 
 const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
-  (
-    { title, className, onClick, description, avatar, avatarVariant, ...rest },
-    ref
-  ) => {
+  ({ title, className, description, avatar, avatarVariant, ...rest }, ref) => {
     const panelContext = useContext(ExpansionCardContext);
 
     if (panelContext === null) {
@@ -42,23 +39,14 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
       return null;
     }
 
-    const handleClick = (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      panelContext.toggleOpen();
-      onClick && onClick(e);
-    };
-
     return (
-      <button
+      <div
         ref={ref}
         {...rest}
         className={cl("navds-expansioncard__header", className, {
           "navds-expansioncard__header--open": panelContext.open,
           "navds-expansioncard__header--closed": !panelContext.open,
         })}
-        type="button"
-        onClick={handleClick}
         aria-expanded={panelContext.open}
         aria-label={`${title}${description ? ` , ${description}` : ""}`}
       >
@@ -80,7 +68,11 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           <BodyShort as="span">{description}</BodyShort>
         </span>
 
-        <span className="navds-expansioncard__header-icon" aria-hidden>
+        <button
+          className="navds-expansioncard__header-button"
+          onClick={() => panelContext.toggleOpen()}
+          type="button"
+        >
           <svg
             width="24"
             height="24"
@@ -125,8 +117,8 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
               strokeLinecap="round"
             />
           </svg>
-        </span>
-      </button>
+        </button>
+      </div>
     );
   }
 );
