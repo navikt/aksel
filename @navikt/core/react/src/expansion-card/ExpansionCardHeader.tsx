@@ -15,7 +15,15 @@ export interface ExpansionCardHeaderProps
   /**
    * @default "neutral"
    */
-  avatarVariant?: "warning" | "success" | "danger" | "info" | "neutral";
+  avatarVariant?:
+    | "warning"
+    | "success"
+    | "danger"
+    | "info"
+    | "neutral"
+    | "alt1"
+    | "alt2"
+    | "alt3";
 }
 
 export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<

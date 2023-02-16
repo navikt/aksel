@@ -136,3 +136,18 @@
   background-color: var(--a-surface-info-subtle);
   color: var(--a-icon-info);
 }
+
+.navds-expansioncard__header-avatar--alt1 {
+  background-color: var(--a-surface-alt-1-subtle);
+  color: var(--a-icon-alt-1);
+}
+
+.navds-expansioncard__header-avatar--alt2 {
+  background-color: var(--a-surface-alt-2-subtle);
+  color: var(--a-icon-alt-2);
+}
+
+.navds-expansioncard__header-avatar--alt3 {
+  background-color: var(--a-surface-alt-3-subtle);
+  color: var(--a-icon-alt-3);
+}

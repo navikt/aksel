@@ -122,6 +122,45 @@ export const Default = {
           </ExpansionCard.Header>
           <Content />
         </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            avatarVariant="alt1"
+          >
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </ExpansionCard.Header>
+          <Content />
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            avatarVariant="alt2"
+          >
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </ExpansionCard.Header>
+          <Content />
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            avatarVariant="alt3"
+          >
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </ExpansionCard.Header>
+          <Content />
+        </ExpansionCard>
       </div>
     );
   },
