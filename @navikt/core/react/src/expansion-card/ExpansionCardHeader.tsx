@@ -1,19 +1,13 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { BodyShort } from "../typography";
-import { Heading } from "../typography/Heading";
 import { ExpansionCardContext } from "./ExpansionCard";
 
 export interface ExpansionCardHeaderProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
   /**
-   * Title text
+   *
    */
-  title: string;
-  /**
-   * Description text
-   */
-  description?: string;
+  children: React.ReactNode;
   /**
    *
    */
@@ -29,7 +23,7 @@ export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
 >;
 
 const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
-  ({ title, className, description, avatar, avatarVariant, ...rest }, ref) => {
+  ({ children, className, avatar, avatarVariant, ...rest }, ref) => {
     const panelContext = useContext(ExpansionCardContext);
 
     if (panelContext === null) {
@@ -47,8 +41,6 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           "navds-expansioncard__header--open": panelContext.open,
           "navds-expansioncard__header--closed": !panelContext.open,
         })}
-        aria-expanded={panelContext.open}
-        aria-label={`${title}${description ? ` , ${description}` : ""}`}
       >
         {avatar && (
           <span
@@ -61,17 +53,13 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
             {avatar}
           </span>
         )}
-        <span className="navds-expansioncard__header-content">
-          <Heading size="small" as="span">
-            {title}
-          </Heading>
-          <BodyShort as="span">{description}</BodyShort>
-        </span>
+        <span className="navds-expansioncard__header-content">{children}</span>
 
         <button
           className="navds-expansioncard__header-button"
           onClick={() => panelContext.toggleOpen()}
           type="button"
+          aria-expanded={panelContext.open}
         >
           <svg
             width="24"

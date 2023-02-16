@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: var(--a-spacing-2);
+  gap: var(--a-spacing-4);
   padding: var(--a-spacing-3) var(--a-spacing-4);
   text-align: left;
   margin: 0;

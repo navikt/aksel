@@ -3,12 +3,27 @@ import { ExpansionCard } from ".";
 import ExpansionCardContent from "./ExpansionCardContent";
 import ExpansionCardHeader from "./ExpansionCardHeader";
 import { Star } from "@navikt/ds-icons";
+import { BodyLong } from "../typography";
 
 export default {
   title: "ds-react/ExpansionCard",
   component: ExpansionCard,
   subcomponents: [ExpansionCardHeader, ExpansionCardContent],
 };
+
+const Content = () => (
+  <ExpansionCard.Content>
+    <BodyLong spacing>
+      På ditt faste arbeidssted vil du ha yrkesskadedekning også i hvilepauser,
+      lunsjpauser, trimaktiviteter og lignende i arbeidstiden.
+    </BodyLong>
+    <BodyLong>
+      Som hovedregel er du som arbeidstaker ikke yrkesskadedekket på veien til
+      og fra arbeid eller første og siste oppdragssted. Du er heller ikke
+      yrkesskadedekket på fritiden eller under private gjøremål i arbeidstiden.
+    </BodyLong>
+  </ExpansionCard.Content>
+);
 
 export const Default = {
   render: () => {
@@ -24,112 +39,88 @@ export const Default = {
         }}
       >
         <ExpansionCard>
-          <ExpansionCard.Header
-            description="odit quaerat exercitationem fugit veritatis"
-            title="Tittel"
-          />
-          <ExpansionCard.Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            cum soluta consequatur tempora sint alias non nostrum, delectus,
-            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
-            molestiae porro placeat? Non.
-          </ExpansionCard.Content>
+          <ExpansionCard.Header>
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </ExpansionCard.Header>
+          <Content />
         </ExpansionCard>
         <ExpansionCard>
-          <ExpansionCard.Header title="Tittel" />
-          <ExpansionCard.Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            cum soluta consequatur tempora sint alias non nostrum, delectus,
-            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
-            molestiae porro placeat? Non.
-          </ExpansionCard.Content>
+          <ExpansionCard.Header>
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          </ExpansionCard.Header>
+          <Content />
         </ExpansionCard>
         <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            title="Tittel"
-            description="odit quaerat exercitationem fugit veritatis"
-          />
-          <ExpansionCard.Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            cum soluta consequatur tempora sint alias non nostrum, delectus,
-            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
-            molestiae porro placeat? Non.
-          </ExpansionCard.Content>
+          <ExpansionCard.Header avatar={<Star aria-hidden />}>
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </ExpansionCard.Header>
+          <Content />
         </ExpansionCard>
         <ExpansionCard>
-          <ExpansionCard.Header avatar={<Star aria-hidden />} title="Tittel" />
-          <ExpansionCard.Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            cum soluta consequatur tempora sint alias non nostrum, delectus,
-            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
-            molestiae porro placeat? Non.
-          </ExpansionCard.Content>
+          <ExpansionCard.Header avatar={<Star aria-hidden />}>
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          </ExpansionCard.Header>
+          <Content />
         </ExpansionCard>
         <ExpansionCard>
           <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            title="Tittel"
-            avatarVariant="neutral"
-          />
-          <ExpansionCard.Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            cum soluta consequatur tempora sint alias non nostrum, delectus,
-            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
-            molestiae porro placeat? Non.
-          </ExpansionCard.Content>
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            title="Tittel"
-            avatarVariant="success"
-          />
-          <ExpansionCard.Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            cum soluta consequatur tempora sint alias non nostrum, delectus,
-            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
-            molestiae porro placeat? Non.
-          </ExpansionCard.Content>
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            title="Tittel"
-            avatarVariant="warning"
-          />
-          <ExpansionCard.Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            cum soluta consequatur tempora sint alias non nostrum, delectus,
-            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
-            molestiae porro placeat? Non.
-          </ExpansionCard.Content>
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            title="Tittel"
-            avatarVariant="danger"
-          />
-          <ExpansionCard.Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            cum soluta consequatur tempora sint alias non nostrum, delectus,
-            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
-            molestiae porro placeat? Non.
-          </ExpansionCard.Content>
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            title="Tittel"
             avatarVariant="info"
-          />
-          <ExpansionCard.Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            cum soluta consequatur tempora sint alias non nostrum, delectus,
-            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
-            molestiae porro placeat? Non.
-          </ExpansionCard.Content>
+            avatar={<Star aria-hidden />}
+          >
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </ExpansionCard.Header>
+          <Content />
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            avatarVariant="success"
+          >
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </ExpansionCard.Header>
+          <Content />
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            avatarVariant="warning"
+          >
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </ExpansionCard.Header>
+          <Content />
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            avatarVariant="danger"
+          >
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </ExpansionCard.Header>
+          <Content />
         </ExpansionCard>
       </div>
     );
