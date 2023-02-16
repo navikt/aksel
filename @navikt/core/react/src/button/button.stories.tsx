@@ -10,11 +10,22 @@ export default {
   },
 };
 
-const variants: Array<"primary" | "secondary" | "tertiary" | "danger"> = [
+const variants: Array<
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "primary-neutral"
+  | "secondary-neutral"
+  | "tertiary-neutral"
+  | "danger"
+> = [
   "primary",
   "secondary",
   "tertiary",
   "danger",
+  "primary-neutral",
+  "secondary-neutral",
+  "tertiary-neutral",
 ];
 
 const varSwitch = {
@@ -22,6 +33,9 @@ const varSwitch = {
   secondary: "Secondary",
   tertiary: "Tertiary",
   danger: "Danger",
+  "primary-neutral": "Primary",
+  "secondary-neutral": "Secondary",
+  "tertiary-neutral": "Tertiary",
 };
 
 export const Default = {
@@ -51,7 +65,15 @@ export const Default = {
     variant: {
       control: {
         type: "radio",
-        options: ["primary", "secondary", "tertiary", "danger"],
+        options: [
+          "primary",
+          "secondary",
+          "tertiary",
+          "danger",
+          "primary-neutral",
+          "secondary-neutral",
+          "tertiary-neutral",
+        ],
       },
     },
     size: {

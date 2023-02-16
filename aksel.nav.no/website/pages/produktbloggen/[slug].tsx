@@ -185,7 +185,7 @@ const Page = ({
             )}
             <BodyShort
               as="span"
-              className="text-text-subtle flex justify-center whitespace-nowrap"
+              className="text-text-subtle flex justify-center"
             >
               Publisert: {dateStr(blogg?.publishedAt ?? blogg?._updatedAt)}
             </BodyShort>
