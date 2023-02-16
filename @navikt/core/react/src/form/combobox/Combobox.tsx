@@ -301,6 +301,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 role="combobox"
                 aria-controls={isInternalListOpen ? id : ""}
                 aria-expanded={!!isInternalListOpen}
+                autoComplete="off"
+                aria-autocomplete="list"
+                aria-owns={`${id}-options`}
+                aria-activedescendant={`${id}-option-${filteredOptions[filteredOptionsIndex]}`}
                 className={cl(
                   className,
                   "navds-combobox__input",
@@ -362,6 +366,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 "navds-combobox__list--closed": !isInternalListOpen,
               })}
               id={`${id}-options`}
+              role="listbox"
             >
               {filteredOptions.map((o, i) => (
                 <li
@@ -371,8 +376,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                     "navds-combobox__list-item--selected":
                       selectedOptions.includes(o),
                   })}
+                  id={`${id}-option-${o}`}
                   key={o}
                   onClick={() => toggleOption()}
+                  role="option"
+                  aria-selected={selectedOptions.includes(o)}
                 >
                   <BodyShort size="medium">{o}</BodyShort>
                 </li>
