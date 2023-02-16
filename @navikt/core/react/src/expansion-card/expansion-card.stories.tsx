@@ -1,13 +1,13 @@
 import React from "react";
-import { ExpansionPanel } from ".";
-import ExpansionPanelContent from "./ExpansionPanelContent";
-import ExpansionPanelHeader from "./ExpansionPanelHeader";
+import { ExpansionCard } from ".";
+import ExpansionCardContent from "./ExpansionCardContent";
+import ExpansionCardHeader from "./ExpansionCardHeader";
 import { Star } from "@navikt/ds-icons";
 
 export default {
-  title: "ds-react/ExpansionPanel",
-  component: ExpansionPanel,
-  subcomponents: [ExpansionPanelHeader, ExpansionPanelContent],
+  title: "ds-react/ExpansionCard",
+  component: ExpansionCard,
+  subcomponents: [ExpansionCardHeader, ExpansionCardContent],
 };
 
 export const Default = {
@@ -23,49 +23,49 @@ export const Default = {
           gap: "1rem",
         }}
       >
-        <ExpansionPanel>
-          <ExpansionPanel.Header
+        <ExpansionCard>
+          <ExpansionCard.Header
             description="odit quaerat exercitationem fugit veritatis"
             title="Tittel"
           />
-          <ExpansionPanel.Content>
+          <ExpansionCard.Content>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             cum soluta consequatur tempora sint alias non nostrum, delectus,
             eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
             molestiae porro placeat? Non.
-          </ExpansionPanel.Content>
-        </ExpansionPanel>
-        <ExpansionPanel>
-          <ExpansionPanel.Header title="Tittel" />
-          <ExpansionPanel.Content>
+          </ExpansionCard.Content>
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header title="Tittel" />
+          <ExpansionCard.Content>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             cum soluta consequatur tempora sint alias non nostrum, delectus,
             eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
             molestiae porro placeat? Non.
-          </ExpansionPanel.Content>
-        </ExpansionPanel>
-        <ExpansionPanel>
-          <ExpansionPanel.Header
+          </ExpansionCard.Content>
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
             avatar={<Star aria-hidden />}
             title="Tittel"
             description="odit quaerat exercitationem fugit veritatis"
           />
-          <ExpansionPanel.Content>
+          <ExpansionCard.Content>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             cum soluta consequatur tempora sint alias non nostrum, delectus,
             eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
             molestiae porro placeat? Non.
-          </ExpansionPanel.Content>
-        </ExpansionPanel>
-        <ExpansionPanel>
-          <ExpansionPanel.Header avatar={<Star aria-hidden />} title="Tittel" />
-          <ExpansionPanel.Content>
+          </ExpansionCard.Content>
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header avatar={<Star aria-hidden />} title="Tittel" />
+          <ExpansionCard.Content>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             cum soluta consequatur tempora sint alias non nostrum, delectus,
             eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
             molestiae porro placeat? Non.
-          </ExpansionPanel.Content>
-        </ExpansionPanel>
+          </ExpansionCard.Content>
+        </ExpansionCard>
       </div>
     );
   },

@@ -2,9 +2,9 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { BodyShort } from "../typography";
 import { Heading } from "../typography/Heading";
-import { ExpansionPanelContext } from "./ExpansionPanel";
+import { ExpansionCardContext } from "./ExpansionCard";
 
-export interface ExpansionPanelHeaderProps
+export interface ExpansionCardHeaderProps
   extends Omit<React.HTMLAttributes<HTMLHeadingElement>, "onClick"> {
   /**
    * Title text
@@ -28,11 +28,11 @@ export interface ExpansionPanelHeaderProps
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export type ExpansionPanelHeaderType = React.ForwardRefExoticComponent<
-  ExpansionPanelHeaderProps & React.RefAttributes<HTMLHeadingElement>
+export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
+  ExpansionCardHeaderProps & React.RefAttributes<HTMLHeadingElement>
 >;
 
-const ExpansionPanelHeader: ExpansionPanelHeaderType = forwardRef(
+const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
   (
     {
       title,
@@ -45,11 +45,11 @@ const ExpansionPanelHeader: ExpansionPanelHeaderType = forwardRef(
     },
     ref
   ) => {
-    const panelContext = useContext(ExpansionPanelContext);
+    const panelContext = useContext(ExpansionCardContext);
 
     if (panelContext === null) {
       console.error(
-        "<ExpansionPanel.Header> has to be used within an <ExpansionPanel>"
+        "<ExpansionCard.Header> has to be used within an <ExpansionCard>"
       );
       return null;
     }
@@ -66,9 +66,9 @@ const ExpansionPanelHeader: ExpansionPanelHeaderType = forwardRef(
     return (
       <HeadingTag {...rest} ref={ref} style={{ margin: 0 }}>
         <button
-          className={cl("navds-expansionpanel__header", className, {
-            "navds-expansionpanel__header--open": panelContext.open,
-            "navds-expansionpanel__header--closed": !panelContext.open,
+          className={cl("navds-expansioncard__header", className, {
+            "navds-expansioncard__header--open": panelContext.open,
+            "navds-expansioncard__header--closed": !panelContext.open,
           })}
           type="button"
           onClick={handleClick}
@@ -76,18 +76,18 @@ const ExpansionPanelHeader: ExpansionPanelHeaderType = forwardRef(
           aria-label={`${title}${description ? ` , ${description}` : ""}`}
         >
           {avatar && (
-            <span className="navds-expansionpanel__header-avatar" aria-hidden>
+            <span className="navds-expansioncard__header-avatar" aria-hidden>
               {avatar}
             </span>
           )}
-          <span className="navds-expansionpanel__header-content">
+          <span className="navds-expansioncard__header-content">
             <Heading size="small" as="span">
               {title}
             </Heading>
             <BodyShort as="span">{description}</BodyShort>
           </span>
 
-          <span className="navds-expansionpanel__header-icon" aria-hidden>
+          <span className="navds-expansioncard__header-icon" aria-hidden>
             <svg
               width="24"
               height="24"
@@ -96,7 +96,7 @@ const ExpansionPanelHeader: ExpansionPanelHeaderType = forwardRef(
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden
               focusable={false}
-              className="navds-expansionpanel__open-icon"
+              className="navds-expansioncard__open-icon"
             >
               <path
                 d="M17.5 9.5L12 15L6.5 9.5"
@@ -115,7 +115,7 @@ const ExpansionPanelHeader: ExpansionPanelHeaderType = forwardRef(
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden
               focusable={false}
-              className="navds-expansionpanel__close-icon"
+              className="navds-expansioncard__close-icon"
             >
               <path
                 d="M17.5 6.5L6.5 17.5"
@@ -139,4 +139,4 @@ const ExpansionPanelHeader: ExpansionPanelHeaderType = forwardRef(
   }
 );
 
-export default ExpansionPanelHeader;
+export default ExpansionCardHeader;

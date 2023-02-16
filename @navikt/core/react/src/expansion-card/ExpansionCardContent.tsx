@@ -2,27 +2,27 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import AnimateHeight from "../util/AnimateHeight";
 import { BodyLong } from "../typography/BodyLong";
-import { ExpansionPanelContext } from "./ExpansionPanel";
+import { ExpansionCardContext } from "./ExpansionCard";
 
-export interface ExpansionPanelContentProps
+export interface ExpansionCardContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Content inside ExpansionPanel.Content
+   * Content inside ExpansionCard.Content
    */
   children: React.ReactNode;
 }
 
-export type ExpansionPanelContentType = React.ForwardRefExoticComponent<
-  ExpansionPanelContentProps & React.RefAttributes<HTMLDivElement>
+export type ExpansionCardContentType = React.ForwardRefExoticComponent<
+  ExpansionCardContentProps & React.RefAttributes<HTMLDivElement>
 >;
 
-const ExpansionPanelContent: ExpansionPanelContentType = forwardRef(
+const ExpansionCardContent: ExpansionCardContentType = forwardRef(
   ({ children, className, ...rest }, ref) => {
-    const panelContext = useContext(ExpansionPanelContext);
+    const panelContext = useContext(ExpansionCardContext);
 
     if (panelContext === null) {
       console.error(
-        "<ExpansionPanel.Content> has to be used within an <ExpansionPanel>"
+        "<ExpansionCard.Content> has to be used within an <ExpansionCard>"
       );
       return null;
     }
@@ -37,7 +37,7 @@ const ExpansionPanelContent: ExpansionPanelContentType = forwardRef(
           {...rest}
           as="div"
           ref={ref}
-          className={cl("navds-expansionpanel__content", className)}
+          className={cl("navds-expansioncard__content", className)}
         >
           {children}
         </BodyLong>
@@ -46,4 +46,4 @@ const ExpansionPanelContent: ExpansionPanelContentType = forwardRef(
   }
 );
 
-export default ExpansionPanelContent;
+export default ExpansionCardContent;
