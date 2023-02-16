@@ -3,15 +3,25 @@ import React, { createContext, forwardRef, useState } from "react";
 import ExpansionCardContent, {
   ExpansionCardContentType,
 } from "./ExpansionCardContent";
+import {
+  ExpansionCardDescription,
+  ExpansionCardDescriptionType,
+} from "./ExpansionCardDescription";
 import ExpansionCardHeader, {
   ExpansionCardHeaderType,
 } from "./ExpansionCardHeader";
+import {
+  ExpansionCardTitle,
+  ExpansionCardTitleType,
+} from "./ExpansionCardTitle";
 
 interface ExpansionCardComponent
   extends React.ForwardRefExoticComponent<
     ExpansionCardProps & React.RefAttributes<HTMLDivElement>
   > {
   Header: ExpansionCardHeaderType;
+  Title: ExpansionCardTitleType;
+  Description: ExpansionCardDescriptionType;
   Content: ExpansionCardContentType;
 }
 
@@ -62,5 +72,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
 
 ExpansionCard.Header = ExpansionCardHeader;
 ExpansionCard.Content = ExpansionCardContent;
+ExpansionCard.Title = ExpansionCardTitle;
+ExpansionCard.Description = ExpansionCardDescription;
 
 export default ExpansionCard;
