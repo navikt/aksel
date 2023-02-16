@@ -9,20 +9,12 @@
   background: transparent;
   border: none;
   border-radius: var(--a-border-radius-large);
-  box-shadow: inset 0 0 0 1px var(--a-border-subtle);
-}
-
-.navds-expansioncard__header:focus {
-  outline: none;
-}
-
-.navds-expansioncard__header:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--a-border-focus);
+  box-shadow: inset 0 0 0 1px var(--a-border-default);
 }
 
 .navds-expansioncard--open .navds-expansioncard__content {
-  box-shadow: inset 1px 0 0 0 var(--a-border-subtle), inset -1px 0 0 0 var(--a-border-subtle),
-    inset 0 -1px 0 0 var(--a-border-subtle);
+  box-shadow: inset 1px 0 0 0 var(--a-border-default), inset -1px 0 0 0 var(--a-border-default),
+    inset 0 -1px 0 0 var(--a-border-default);
   opacity: 1;
 }
 
@@ -41,12 +33,11 @@
 .navds-expansioncard__header--open {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  box-shadow: inset 1px 0 0 0 var(--a-border-subtle), inset -1px 0 0 0 var(--a-border-subtle),
-    inset 0 1px 0 0 var(--a-border-subtle);
+  box-shadow: inset 1px 0 0 0 var(--a-border-default), inset -1px 0 0 0 var(--a-border-default),
+    inset 0 1px 0 0 var(--a-border-default);
 }
 
 .navds-expansioncard__header--closed {
-  /* animation: animateBoxShadow 0.2s ease-in-out; */
   transition: box-shadow 150ms ease-in-out;
 }
 
@@ -78,7 +69,7 @@
   margin: 0;
   background: transparent;
   border: none;
-  border-radius: var(--a-border-radius-full);
+  border-radius: var(--a-border-radius-medium);
   min-height: 48px;
   aspect-ratio: 1/1;
 }
@@ -90,6 +81,14 @@
 .navds-expansioncard__header-button:hover .navds-expansioncard__open-icon {
   transform: translateY(2px);
   transition: transform 150ms ease-in-out;
+}
+
+.navds-expansioncard__header-button:focus {
+  outline: none;
+}
+
+.navds-expansioncard__header-button:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--a-border-focus);
 }
 
 .navds-expansioncard__header-content {
@@ -133,14 +132,3 @@
   background-color: var(--a-surface-info-subtle);
   color: var(--a-icon-info);
 }
-
-/* @keyframes animateBoxShadow {
-  from {
-    box-shadow: inset 1px 0 0 0 var(--a-border-subtle), inset -1px 0 0 0 var(--a-border-subtle),
-      inset 0 1px 0 0 var(--a-border-subtle);
-  }
-
-  to {
-    box-shadow: inset 0 0 0 1px var(--a-border-subtle);
-  }
-} */
