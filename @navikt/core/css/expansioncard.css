@@ -1,3 +1,7 @@
+.navds-expansioncard {
+  border-radius: var(--a-border-radius-large);
+}
+
 .navds-expansioncard__header {
   width: 100%;
   display: flex;
