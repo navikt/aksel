@@ -19,4 +19,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "De fleste knapper i løsninger vil bruke denne varianten.",
 };

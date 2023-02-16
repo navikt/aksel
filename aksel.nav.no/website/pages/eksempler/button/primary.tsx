@@ -19,4 +19,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  desc: "Brukes som primærhandling i løsningen. Som regel ønsker man å ha kun én primærknapp per side.",
 };
