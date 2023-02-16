@@ -194,14 +194,17 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       "keydown",
       useCallback(
         (e) => {
-          if (e.key === "Backspace" && internalValue === "")
+          if (e.key === "Backspace" && internalValue === "") {
             setSelectedOptions(selectedOptions.slice(0, -1));
-          else if (e.key === "ArrowDown")
+          } else if (e.key === "ArrowDown") {
+            e.preventDefault();
             setFilteredOptionsIndex(
               Math.min(filteredOptionsIndex + 1, filteredOptions.length - 1)
             );
-          else if (e.key === "ArrowUp")
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
             setFilteredOptionsIndex(Math.max(0, filteredOptionsIndex - 1));
+          }
         },
         [
           selectedOptions,
