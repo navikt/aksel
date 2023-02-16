@@ -26,6 +26,10 @@ export interface ExpansionCardHeaderProps
    *
    */
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  /**
+   * @default "neutral"
+   */
+  avatarVariant?: "warning" | "success" | "danger" | "info" | "neutral";
 }
 
 export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
@@ -41,6 +45,7 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
       description,
       avatar,
       headingTag = "h3",
+      avatarVariant,
       ...rest
     },
     ref
@@ -76,7 +81,13 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           aria-label={`${title}${description ? ` , ${description}` : ""}`}
         >
           {avatar && (
-            <span className="navds-expansioncard__header-avatar" aria-hidden>
+            <span
+              className={cl(
+                "navds-expansioncard__header-avatar",
+                `navds-expansioncard__header-avatar--${avatarVariant}`
+              )}
+              aria-hidden
+            >
               {avatar}
             </span>
           )}

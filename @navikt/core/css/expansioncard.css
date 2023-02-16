@@ -103,6 +103,31 @@
   }
 }
 
+.navds-expansioncard__header-avatar--neutral {
+  background-color: var(--a-surface-neutral-subtle);
+  color: var(--a-icon-default);
+}
+
+.navds-expansioncard__header-avatar--success {
+  background-color: var(--a-surface-success-subtle);
+  color: var(--a-icon-success);
+}
+
+.navds-expansioncard__header-avatar--warning {
+  background-color: var(--a-surface-warning-subtle);
+  color: var(--a-icon-warning);
+}
+
+.navds-expansioncard__header-avatar--danger {
+  background-color: var(--a-surface-danger-subtle);
+  color: var(--a-icon-danger);
+}
+
+.navds-expansioncard__header-avatar--info {
+  background-color: var(--a-surface-info-subtle);
+  color: var(--a-icon-info);
+}
+
 /* @keyframes animateBoxShadow {
   from {
     box-shadow: inset 1px 0 0 0 var(--a-border-subtle), inset -1px 0 0 0 var(--a-border-subtle),

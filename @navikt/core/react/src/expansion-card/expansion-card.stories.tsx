@@ -16,7 +16,7 @@ export const Default = {
       <div
         style={{
           width: "600px",
-          height: "100vh",
+          minHeight: "100vh",
           padding: "10rem 0",
           display: "flex",
           flexDirection: "column",
@@ -59,6 +59,71 @@ export const Default = {
         </ExpansionCard>
         <ExpansionCard>
           <ExpansionCard.Header avatar={<Star aria-hidden />} title="Tittel" />
+          <ExpansionCard.Content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+            cum soluta consequatur tempora sint alias non nostrum, delectus,
+            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
+            molestiae porro placeat? Non.
+          </ExpansionCard.Content>
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            title="Tittel"
+            avatarVariant="neutral"
+          />
+          <ExpansionCard.Content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+            cum soluta consequatur tempora sint alias non nostrum, delectus,
+            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
+            molestiae porro placeat? Non.
+          </ExpansionCard.Content>
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            title="Tittel"
+            avatarVariant="success"
+          />
+          <ExpansionCard.Content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+            cum soluta consequatur tempora sint alias non nostrum, delectus,
+            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
+            molestiae porro placeat? Non.
+          </ExpansionCard.Content>
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            title="Tittel"
+            avatarVariant="warning"
+          />
+          <ExpansionCard.Content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+            cum soluta consequatur tempora sint alias non nostrum, delectus,
+            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
+            molestiae porro placeat? Non.
+          </ExpansionCard.Content>
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            title="Tittel"
+            avatarVariant="danger"
+          />
+          <ExpansionCard.Content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+            cum soluta consequatur tempora sint alias non nostrum, delectus,
+            eveniet, odit quaerat exercitationem fugit veritatis! Alias qui
+            molestiae porro placeat? Non.
+          </ExpansionCard.Content>
+        </ExpansionCard>
+        <ExpansionCard>
+          <ExpansionCard.Header
+            avatar={<Star aria-hidden />}
+            title="Tittel"
+            avatarVariant="info"
+          />
           <ExpansionCard.Content>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             cum soluta consequatur tempora sint alias non nostrum, delectus,
