@@ -6,12 +6,8 @@
   gap: var(--a-spacing-1);
 }
 
-.navds-alert--info .navds-link {
-  color: var(--a-text-default);
-}
-
-.navds-alert--error .navds-link,
-.navds-confirmation-panel--error .navds-link {
+.navds-alert .navds-link,
+.navds-confirmation-panel .navds-link {
   color: var(--a-text-default);
 }
 

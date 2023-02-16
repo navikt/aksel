@@ -74,10 +74,10 @@
         "value": "{a.white.value}"
       },
       "hover": {
-        "value": "{a.grayalpha.50.value}"
+        "value": "{a.grayalpha.100.value}"
       },
       "active": {
-        "value": "{a.grayalpha.100.value}"
+        "value": "{a.grayalpha.200.value}"
       },
       "selected": {
         "value": "{a.blue.50.value}"
@@ -153,8 +153,8 @@
 
       "success": {
         "subtle": {
-          "hover": { "value": "{a.green.100.value}" },
-          "@": { "value": "{a.green.50.value}" }
+          "hover": { "value": "{a.green.200.value}" },
+          "@": { "value": "{a.green.100.value}" }
         },
         "@": { "value": "{a.green.500.value}" },
         "hover": { "value": "{a.green.600.value}" }
@@ -162,8 +162,8 @@
 
       "danger": {
         "subtle": {
-          "hover": { "value": "{a.red.100.value}" },
-          "@": { "value": "{a.red.50.value}" }
+          "hover": { "value": "{a.red.200.value}" },
+          "@": { "value": "{a.red.100.value}" }
         },
         "hover": {
           "value": "{a.red.600.value}"
@@ -176,30 +176,30 @@
 
       "warning": {
         "subtle": {
-          "hover": { "value": "{a.orange.100.value}" },
-          "@": { "value": "{a.orange.50.value}" }
+          "hover": { "value": "{a.orange.200.value}" },
+          "@": { "value": "{a.orange.100.value}" }
         },
         "@": { "value": "{a.orange.500.value}" }
       },
 
       "info": {
         "subtle": {
-          "hover": { "value": "{a.lightblue.100.value}" },
-          "@": { "value": "{a.lightblue.50.value}" }
+          "hover": { "value": "{a.lightblue.200.value}" },
+          "@": { "value": "{a.lightblue.100.value}" }
         },
         "@": { "value": "{a.lightblue.500.value}" }
       },
 
       "alt1": {
-        "subtle": { "value": "{a.purple.50.value}" },
+        "subtle": { "value": "{a.purple.100.value}" },
         "@": { "value": "{a.purple.400.value}" }
       },
       "alt2": {
-        "subtle": { "value": "{a.limegreen.50.value}" },
+        "subtle": { "value": "{a.limegreen.100.value}" },
         "@": { "value": "{a.limegreen.400.value}" }
       },
       "alt3": {
-        "subtle": { "value": "{a.deepblue.50.value}" },
+        "subtle": { "value": "{a.deepblue.100.value}" },
         "strong": { "value": "{a.deepblue.800.value}" },
         "@": { "value": "{a.deepblue.500.value}" }
       }
@@ -255,7 +255,7 @@
         "value": "{a.purple.400.value}"
       },
       "alt2": {
-        "value": "{a.limegreen.400.value}"
+        "value": "{a.limegreen.700.value}"
       },
       "alt3": {
         "value": "{a.deepblue.500.value}"
@@ -289,10 +289,16 @@
         "value": "{a.orange.600.value}"
       },
       "info": {
-        "value": "{a.lightblue.700.value}"
+        "value": "{a.lightblue.800.value}"
       },
       "alt1": {
-        "value": "{a.purple.400.value}"
+        "value": "{a.purple.500.value}"
+      },
+      "alt2": {
+        "value": "{a.limegreen.700.value}"
+      },
+      "alt3": {
+        "value": "{a.deepblue.400.value}"
       },
       "on": {
         "neutral": {
