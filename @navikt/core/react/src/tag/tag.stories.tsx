@@ -84,6 +84,7 @@ export const Default = {
 
   args: {
     children: "Id elit esse",
+    variant: "info",
   },
 };
 
