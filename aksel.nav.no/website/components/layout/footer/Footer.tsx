@@ -102,7 +102,7 @@ const Footer = () => {
             Redaktør: Eidar Grande Vollan
           </BodyShort> */}
           <div className="hidden self-end xl:block">
-            <p>&copy; 2022 NAV</p>
+            <p>&copy; {new Date().getFullYear()} NAV</p>
             <NextLink href="/side/personvernerklaering" passHref>
               <a className="focus:bg-border-focus-on-inverted focus:text-text-default focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring">
                 Personvernerklæring og informasjonskapsler

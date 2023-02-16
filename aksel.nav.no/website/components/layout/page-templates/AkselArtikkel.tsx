@@ -196,10 +196,7 @@ const AkselArtikkelTemplate = ({
                   ))}
                 </BodyShort>
               )}
-              <BodyShort
-                as="span"
-                className="text-text-subtle whitespace-nowrap"
-              >
+              <BodyShort as="span" className="text-text-subtle">
                 Publisert: {dateStr(data?.publishedAt ?? data?._updatedAt)}
               </BodyShort>
             </div>

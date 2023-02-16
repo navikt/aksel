@@ -388,11 +388,11 @@ export const useRangeDatepicker = (
           formatDateForInput(prevToRange, locale, "date", inputFormat)
         )
       : setToInputValue("");
+    updateRange({ from: range?.from, to: resetTo ? undefined : prevToRange });
     updateValidation(
       { isValidDate: !!range?.from, isEmpty: !range?.from },
       { isValidDate: !!range?.to, isEmpty: !prevToRange || resetTo }
     );
-    updateRange({ from: range?.from, to: resetTo ? undefined : prevToRange });
   };
 
   const fromChange = (

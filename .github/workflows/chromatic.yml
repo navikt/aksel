@@ -75,7 +75,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: "github-actions[bot]"
-          body-includes: Chromatic build-output
+          body-includes: github-comment-finder
 
       - name: Create or update comment
         if: steps.chromatic_tests.outcome == 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'
@@ -84,7 +84,7 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ### [<img src="https://raw.githubusercontent.com/storybookjs/brand/main/logo/logo-storybook-inverse.svg" height="32"/>](${{steps.storybook_url.outputs.replaced}})
+            ### [<img id="github-comment-finder" src="https://raw.githubusercontent.com/storybookjs/brand/main/logo/logo-storybook-inverse.svg" height="32"/>](${{steps.storybook_url.outputs.replaced}})
 
             [${{ steps.vars.outputs.sha_short }}](https://github.com/navikt/aksel/commit/${{ steps.vars.outputs.sha_short }}) | ${{steps.chromatic_tests.outputs.componentCount}} komponenter | ${{steps.chromatic_tests.outputs.specCount}} stories
           edit-mode: replace
@@ -96,7 +96,7 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ### [<img src="https://raw.githubusercontent.com/storybookjs/brand/main/logo/logo-storybook-inverse.svg" height="32"/>](${{steps.storybook_url.outputs.replaced}})
+            ### [<img id="github-comment-finder" src="https://raw.githubusercontent.com/storybookjs/brand/main/logo/logo-storybook-inverse.svg" height="32"/>](${{steps.storybook_url.outputs.replaced}})
 
             ### [Endringer til review](${{steps.chromatic_tests.outputs.url}}): ${{steps.chromatic_tests.outputs.changeCount}}
 

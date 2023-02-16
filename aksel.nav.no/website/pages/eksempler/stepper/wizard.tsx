@@ -28,6 +28,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 3,
   desc: "Med hjelp av interactive og completed kan man bygge opp wizard-lignende løsninger.",
