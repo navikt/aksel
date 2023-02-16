@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.2.0
+
+### Minor Changes
+
+- [#1789](https://github.com/navikt/aksel/pull/1789) [`c0929a534`](https://github.com/navikt/aksel/commit/c0929a534dc8effece5435f8be550cb7931a52b1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Button og ToggleGroup har nå en neutral-variant, oppdatert neutral-tokens
+
 ## 2.1.7
 
 ## 2.1.6
