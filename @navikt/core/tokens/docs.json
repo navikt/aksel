@@ -154,7 +154,7 @@
 
   "semantic-border": [
     { "name": "--a-border-default", "value": "rgba(0, 0, 0, 0.44)" },
-    { "name": "--a-border-strong", "value": "rgba(0, 0, 0, 0.56)" },
+    { "name": "--a-border-strong", "value": "rgba(0, 0, 0, 0.65)" },
     { "name": "--a-border-divider", "value": "rgba(0, 0, 0, 0.19)" },
     { "name": "--a-border-subtle", "value": "rgba(0, 0, 0, 0.1)" },
     { "name": "--a-border-subtle-hover", "value": "rgba(0, 0, 0, 0.19)" },

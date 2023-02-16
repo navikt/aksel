@@ -81,7 +81,7 @@
 
 .navds-toggle-group--neutral > .navds-toggle-group__button[aria-pressed="true"],
 .navds-toggle-group--neutral > .navds-toggle-group__button[aria-checked="true"] {
-  background-color: var(--ac-toggle-group-neutral-selected-bg, var(--a-surface-neutral-selected));
+  background-color: var(--ac-toggle-group-neutral-selected-bg, var(--a-surface-neutral));
   color: var(--ac-toggle-group-neutral-selected-text, var(--a-text-on-neutral));
 }
 
