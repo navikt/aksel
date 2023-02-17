@@ -1,5 +1,5 @@
 import { LightBulb } from "@navikt/ds-icons";
-import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Button, Heading } from "@navikt/ds-react";
 import cl from "classnames";
 import { ChangeLogIconOutline } from "components/assets";
 
@@ -23,12 +23,14 @@ const SuggestionBlockComponent = ({
           {options[variant]?.heading}
         </Heading>
         <BodyLong className="mt-2">{options[variant]?.text}</BodyLong>
-        <a
+        <Button
+          variant="secondary-neutral"
+          as="a"
           href={options[variant].link + reference}
-          className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus mt-4 w-fit rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
+          className="mt-4 w-fit"
         >
           Send innspill
-        </a>
+        </Button>
       </div>
     </div>
   );
@@ -67,12 +69,13 @@ export const SuggestionBlock = ({
         <LightBulb aria-hidden className="shrink-0 text-2xl" />
         {options[variant]?.text}
       </BodyShort>
-      <a
+      <Button
+        variant="secondary-neutral"
+        as="a"
         href={options[variant]?.link + reference}
-        className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
       >
         Send forslag
-      </a>
+      </Button>
     </div>
   );
 };

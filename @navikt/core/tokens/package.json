@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "2.1.7",
+  "version": "2.2.0",
   "description": "Design-tokens for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "keywords": [
@@ -18,11 +18,10 @@
     "docs.json"
   ],
   "scripts": {
-    "build": "node ./config/build.js > /dev/null && yarn validate-docs",
+    "build": "node ./config/build.js > /dev/null",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "token": "cd config && style-dictionary build",
-    "test": "jest",
-    "validate-docs": "node config/validate-docs.js"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
