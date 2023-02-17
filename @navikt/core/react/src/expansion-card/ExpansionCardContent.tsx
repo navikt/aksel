@@ -35,8 +35,8 @@ const ExpansionCardContent: ExpansionCardContentType = forwardRef(
       >
         <BodyLong
           {...rest}
-          as="div"
           ref={ref}
+          as="div"
           className={cl("navds-expansioncard__content", className)}
         >
           {children}

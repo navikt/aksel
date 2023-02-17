@@ -27,12 +27,9 @@ interface ExpansionCardComponent
 
 export interface ExpansionCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Instances of ExpansionCard.Item
-   */
   children: React.ReactNode;
   /**
-   *
+   * Callback function for when the expansion card is toggled open or closed
    */
   onToggle?: (open: boolean) => void;
 }

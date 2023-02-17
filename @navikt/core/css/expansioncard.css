@@ -32,10 +32,6 @@
   transition: opacity 150ms ease-in-out;
 }
 
-/* .navds-expansioncard__close-icon {
-  display: none;
-} */
-
 .navds-expansioncard__header--open {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -58,10 +54,6 @@
 .navds-expansioncard__header--open .navds-expansioncard__header-button:hover .navds-expansioncard__icon {
   transform: translateY(-2px) rotate(180deg);
 }
-
-/* .navds-expansioncard__header--open .navds-expansioncard__open-icon {
-  display: none;
-} */
 
 .navds-expansioncard__header-avatar {
   display: grid;

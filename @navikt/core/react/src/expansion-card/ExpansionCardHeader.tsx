@@ -3,10 +3,7 @@ import React, { forwardRef, useContext } from "react";
 import { ExpansionCardContext } from "./ExpansionCard";
 
 export interface ExpansionCardHeaderProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
-  /**
-   *
-   */
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    *
@@ -68,6 +65,7 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           onClick={() => panelContext.toggleOpen()}
           type="button"
           aria-expanded={panelContext.open}
+          aria-label={panelContext.open ? "Lukk" : "Åpne"}
         >
           <svg
             width="24"
@@ -81,38 +79,12 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           >
             <path
               d="M17.5 9.5L12 15L6.5 9.5"
-              stroke="#262626"
+              stroke="vart(--a-text-default)"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
           </svg>
-
-          {/* <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden
-            focusable={false}
-            className="navds-expansioncard__close-icon"
-          >
-            <path
-              d="M17.5 6.5L6.5 17.5"
-              stroke="#262626"
-              strokeWidth="1.5"
-              strokeMiterlimit="3.99933"
-              strokeLinecap="round"
-            />
-            <path
-              d="M6.5 6.5L17.5 17.5"
-              stroke="#262626"
-              strokeWidth="1.5"
-              strokeMiterlimit="3.99933"
-              strokeLinecap="round"
-            />
-          </svg> */}
         </button>
       </div>
     );
