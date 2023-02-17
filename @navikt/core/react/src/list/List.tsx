@@ -35,7 +35,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
     {
       children,
       className,
-      as = "ul",
+      as: ListTag = "ul",
       title,
       description,
       headingTag = "h3",
@@ -45,7 +45,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
   ) => {
     const headingId = useId();
     const descriptionId = useId();
-    const ListTag = as;
+
     return (
       <div {...rest} ref={ref} className={cl("navds-list", className)}>
         {title && (
