@@ -14,12 +14,12 @@
   padding-left: 0;
 }
 
-.navds-list ol .navds-list__item__icon {
+.navds-list ol .navds-list__item-marker--icon {
   grid-column: 1 / 2;
   display: flex;
 }
 
-.navds-list ul .navds-list__item__icon--default {
+.navds-list ul .navds-list__item-marker {
   display: flex;
   margin-top: 6px;
   grid-column: 1 / 2;
@@ -34,8 +34,8 @@
   display: block;
 }
 
-.navds-list ol .navds-list__item__icon,
-ol .navds-list__item__icon--default {
+.navds-list ol .navds-list__item-marker,
+.navds-list ol .navds-list__item-marker--icon {
   display: none;
 }
 

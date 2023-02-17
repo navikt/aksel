@@ -31,7 +31,7 @@ export const ListItem: ListItemType = forwardRef(
   ({ className, children, title, headingTag = "h4", icon, ...rest }, ref) => {
     return (
       <li {...rest} ref={ref} className={cl("navds-list__item", className)}>
-        <div className={`navds-list__item__icon${!icon && "--default"}`}>
+        <div className={`navds-list__item-marker${icon ? "--icon" : ""}`}>
           {icon ? icon : <ListMarker />}
         </div>
 
