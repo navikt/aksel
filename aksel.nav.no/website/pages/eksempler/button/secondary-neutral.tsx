@@ -2,7 +2,7 @@ import { Button } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <Button variant="secondary">Secondary</Button>;
+  return <Button variant="secondary-neutral">Secondary</Button>;
 };
 
 export default withDsExample(Example);
@@ -13,6 +13,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  desc: "De fleste knapper i løsninger vil bruke denne varianten.",
+  index: 12,
 };

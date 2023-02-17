@@ -13,7 +13,14 @@ export interface ButtonProps
    * Changes design and interaction-visuals
    * @default "primary"
    */
-  variant?: "primary" | "secondary" | "tertiary" | "danger";
+  variant?:
+    | "primary"
+    | "primary-neutral"
+    | "secondary"
+    | "secondary-neutral"
+    | "tertiary"
+    | "tertiary-neutral"
+    | "danger";
   /**
    * Changes padding, height and font-size
    * @default medium
