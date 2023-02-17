@@ -17,10 +17,28 @@ const Content = () => (
       På ditt faste arbeidssted vil du ha yrkesskadedekning også i hvilepauser,
       lunsjpauser, trimaktiviteter og lignende i arbeidstiden.
     </BodyLong>
-    <BodyLong>
+    <BodyLong spacing>
       Som hovedregel er du som arbeidstaker ikke yrkesskadedekket på veien til
       og fra arbeid eller første og siste oppdragssted. Du er heller ikke
       yrkesskadedekket på fritiden eller under private gjøremål i arbeidstiden.
+    </BodyLong>
+    <BodyLong spacing>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga suscipit
+      voluptatum expedita earum id, aperiam deleniti molestiae eveniet
+      doloremque explicabo perspiciatis quasi repellendus! Est dolore a nemo
+      aspernatur obcaecati dicta.
+    </BodyLong>
+    <BodyLong spacing>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga suscipit
+      voluptatum expedita earum id, aperiam deleniti molestiae eveniet
+      doloremque explicabo perspiciatis quasi repellendus! Est dolore a nemo
+      aspernatur obcaecati dicta.
+    </BodyLong>
+    <BodyLong>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga suscipit
+      voluptatum expedita earum id, aperiam deleniti molestiae eveniet
+      doloremque explicabo perspiciatis quasi repellendus! Est dolore a nemo
+      aspernatur obcaecati dicta.
     </BodyLong>
   </ExpansionCard.Content>
 );

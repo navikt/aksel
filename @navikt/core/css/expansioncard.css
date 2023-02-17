@@ -1,5 +1,6 @@
 .navds-expansioncard {
   border-radius: var(--a-border-radius-large);
+  background-color: var(--a-surface-default);
 }
 
 .navds-expansioncard__header {
@@ -13,7 +14,8 @@
   background: transparent;
   border: none;
   border-radius: var(--a-border-radius-large);
-  box-shadow: inset 0 0 0 1px var(--a-border-default);
+  box-shadow: inset 1px 0 0 0 var(--a-border-default), inset -1px 0 0 0 var(--a-border-default),
+    inset 0 -1px 0 0 var(--a-border-default), inset 0 1px 0 0 var(--a-border-default);
 }
 
 .navds-expansioncard--open .navds-expansioncard__content {
@@ -37,12 +39,12 @@
 .navds-expansioncard__header--open {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  box-shadow: inset 1px 0 0 0 var(--a-border-default), inset -1px 0 0 0 var(--a-border-default),
+  box-shadow: inset 1px 0 0 0 var(--a-border-default), inset -1px 0 0 0 var(--a-border-default), inset 0 -1px 0 0 transparent,
     inset 0 1px 0 0 var(--a-border-default);
 }
 
 .navds-expansioncard__header--closed {
-  transition: box-shadow 150ms ease-in-out;
+  transition: box-shadow 150ms ease-out;
 }
 
 .navds-expansioncard__icon {
