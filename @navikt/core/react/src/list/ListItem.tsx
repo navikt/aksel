@@ -40,7 +40,7 @@ export const ListItem: ListItemType = forwardRef(
             <BodyShort
               as={headingTag}
               size="small"
-              className="navds-list__item__title"
+              className="navds-list__item-title"
             >
               {title}
             </BodyShort>

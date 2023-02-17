@@ -29,7 +29,7 @@
   grid-column: 2 / 3;
 }
 
-.navds-list__item__title {
+.navds-list__item-title {
   font-weight: var(--a-font-weight-bold);
   display: block;
 }
