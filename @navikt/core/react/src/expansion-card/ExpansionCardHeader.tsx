@@ -79,7 +79,7 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           >
             <path
               d="M17.5 9.5L12 15L6.5 9.5"
-              stroke="vart(--a-text-default)"
+              stroke="var(--a-text-default)"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
