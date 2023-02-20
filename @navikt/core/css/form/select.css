@@ -25,7 +25,6 @@
   position: relative;
   display: flex;
   width: 100%;
-  align-items: center;
   color: var(--a-text-default);
 }
 
@@ -34,6 +33,7 @@
   font-size: 1rem;
   right: 0.5rem;
   pointer-events: none;
+  align-self: center;
 }
 
 .navds-form-field--small .navds-select__input {
