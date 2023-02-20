@@ -44,7 +44,6 @@
 }
 
 .navds-list ol li::marker {
-  content: counter(list-item) "";
   font-weight: var(--a-font-weight-bold);
   font-size: var(--a-font-size-medium);
 }
