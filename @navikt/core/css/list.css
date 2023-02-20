@@ -34,11 +34,6 @@
   display: block;
 }
 
-.navds-list ol .navds-list__item-marker,
-.navds-list ol .navds-list__item-marker--icon {
-  display: none;
-}
-
 .navds-list ol {
   padding-left: var(--a-spacing-2);
 }

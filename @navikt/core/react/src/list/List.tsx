@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef } from "react";
+import React, { createContext, forwardRef } from "react";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util/useId";
 import { ListItem, ListItemType } from "./ListItem";
@@ -30,6 +30,14 @@ interface ListComponent extends React.ForwardRefExoticComponent<ListProps> {
   Item: ListItemType;
 }
 
+interface ListContextProps {
+  listType: "ul" | "ol";
+}
+
+export const ListContext = createContext<ListContextProps>({
+  listType: "ul",
+});
+
 export const List = forwardRef<HTMLDivElement, ListProps>(
   (
     {
@@ -47,24 +55,30 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
     const descriptionId = useId();
 
     return (
-      <div {...rest} ref={ref} className={cl("navds-list", className)}>
-        {title && (
-          <Heading id={`tittel-${headingId}`} size="small" as={headingTag}>
-            {title}
-          </Heading>
-        )}
-        {description && (
-          <BodyShort id={`description-${descriptionId}`}>
-            {description}
-          </BodyShort>
-        )}
-        <ListTag
-          aria-labelledby={title && `tittel-${headingId}`}
-          aria-describedby={description && `description-${descriptionId}`}
-        >
-          {children}
-        </ListTag>
-      </div>
+      <ListContext.Provider
+        value={{
+          listType: ListTag,
+        }}
+      >
+        <div {...rest} ref={ref} className={cl("navds-list", className)}>
+          {title && (
+            <Heading id={`tittel-${headingId}`} size="small" as={headingTag}>
+              {title}
+            </Heading>
+          )}
+          {description && (
+            <BodyShort id={`description-${descriptionId}`}>
+              {description}
+            </BodyShort>
+          )}
+          <ListTag
+            aria-labelledby={title && `tittel-${headingId}`}
+            aria-describedby={description && `description-${descriptionId}`}
+          >
+            {children}
+          </ListTag>
+        </div>
+      </ListContext.Provider>
     );
   }
 ) as ListComponent;
