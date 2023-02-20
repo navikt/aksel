@@ -80,22 +80,22 @@ export const Icons = {
   render: () => {
     return (
       <List>
-        <List.Item title="Tittel på punktet" icon={<Braille />}>
+        <List.Item title="Tittel på punktet" icon={<Braille aria-hidden />}>
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
-        <List.Item title="Tittel på punktet" icon={<Cognition />}>
+        <List.Item title="Tittel på punktet" icon={<Cognition aria-hidden />}>
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
-        <List.Item icon={<BabyChangingRoom />}>
+        <List.Item icon={<BabyChangingRoom aria-hidden />}>
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
-        <List.Item icon={<Refresh />}>
+        <List.Item icon={<Refresh aria-hidden />}>
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
