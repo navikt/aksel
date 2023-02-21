@@ -43,7 +43,7 @@ export const ListItem: ListItemType = forwardRef(
         <div className="navds-list__item__content">
           {title && (
             <BodyShort
-              as={headingTag}
+              as="span"
               size="small"
               className="navds-list__item-title"
             >
