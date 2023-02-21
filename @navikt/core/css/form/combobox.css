@@ -137,21 +137,3 @@
 .navds-combobox__list-item--selected {
   background-color: var(--a-surface-selected);
 }
-
-/* tick box inside list item */
-.navds-combobox__list-item::after {
-  content: "";
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--a-border-default);
-  border-radius: var(--a-border-radius-medium);
-}
-
-.navds-combobox__list-item--selected::after {
-  content: "\2713";
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  border: 2px solid var(--a-border-default);
-  border-radius: var(--a-border-radius-medium);
-}
