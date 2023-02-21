@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 2.3.0
+
+### Minor Changes
+
+- [#1813](https://github.com/navikt/aksel/pull/1813) [`7702c6527`](https://github.com/navikt/aksel/commit/7702c65275a4d86a8260852d091e6dd4cfe9217c) Thanks [@ingfo](https://github.com/ingfo)! - Fiksa sentrering av tekst i Select i Firefox
+
+### Patch Changes
+
+- [`51b62cca7`](https://github.com/navikt/aksel/commit/51b62cca7b857e92669cd0b09e620b131faf80e5) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Select small 34px høyde -> 32px
+
 ## 2.2.0
 
 ### Minor Changes
