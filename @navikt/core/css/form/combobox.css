@@ -132,8 +132,11 @@
   width: 100%;
 }
 
-.navds-combobox__list-item:hover,
-.navds-combobox__list-item--focus,
 .navds-combobox__list-item--selected {
   background-color: var(--a-surface-selected);
+}
+
+.navds-combobox__list-item:hover,
+.navds-combobox__list-item--focus {
+  background-color: var(--a-surface-hover);
 }
