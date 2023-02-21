@@ -38,8 +38,7 @@
 
 .navds-form-field--small .navds-select__input {
   min-height: 32px;
-  padding: 0.25rem;
-  padding-right: 2rem;
+  padding: 0 2rem 0 0.25rem;
 }
 
 /**
