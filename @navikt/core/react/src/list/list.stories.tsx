@@ -17,13 +17,13 @@ export const Default = {
   render: () => {
     return (
       <List>
-        <List.Item title="Tittel på punktet">
+        <List.Item title="Lorem Ipsum Dolor Sit Amet">
+          Lorem Ipsum Dolor Sit Amet
+        </List.Item>
+        <List.Item title="Consectetur Adipiscing Elit">
           Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
         </List.Item>
-        <List.Item title="Enda en tittel på punktet">
-          Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
-        </List.Item>
-        <List.Item title="Siste tittel på punktet">
+        <List.Item title="Sed Do Eiusmod Tempor Incididunt">
           Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
         </List.Item>
       </List>
@@ -35,13 +35,34 @@ export const Ordered = {
   render: () => {
     return (
       <List as="ol">
-        <List.Item title="Tittel på punktet">
+        <List.Item title="Lorem Ipsum Dolor Sit Amet">
+          Lorem Ipsum Dolor Sit Amet
+        </List.Item>
+        <List.Item title="Consectetur Adipiscing Elit">
           Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
         </List.Item>
-        <List.Item title="Enda en tittel på punktet">
+        <List.Item title="Sed Do Eiusmod Tempor Incididunt">
           Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
         </List.Item>
-        <List.Item title="Siste tittel på punktet">
+        <List.Item title="Ut Labore Et Dolore Magna Aliqua">
+          Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
+        </List.Item>
+        <List.Item title="Enim Ad Minim Veniam">
+          Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
+        </List.Item>
+        <List.Item title="Quis Nostrud Exercitation Ullamco">
+          Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
+        </List.Item>
+        <List.Item title="Laboris Nisi Ut Aliquip Ex Ea Commodo">
+          Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
+        </List.Item>
+        <List.Item title="Duis Aute Irure Dolor In Reprehenderit">
+          Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
+        </List.Item>
+        <List.Item title="Voluptate Velit Esse Cillum Dolore">
+          Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
+        </List.Item>
+        <List.Item title="Eu Fugiat Nulla Pariatur">
           Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
         </List.Item>
       </List>
@@ -53,20 +74,20 @@ export const WithHeading = {
   render: () => {
     return (
       <List
-        title="Tittel på listen 🚀"
-        description="Dette er en beskrivelse på hva denne listen inneholder"
+        title="Lorem Ipsum Dolor Sit Amet"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
       >
-        <List.Item title="Tittel på punktet">
+        <List.Item title="Lorem Ipsum Dolor Sit Amet">
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
-        <List.Item title="Tittel på punktet">
+        <List.Item title="Consectetur Adipiscing Elit">
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
-        <List.Item title="Tittel på punktet">
+        <List.Item title="Sed Do Eiusmod Tempor Incididunt">
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
@@ -80,12 +101,18 @@ export const Icons = {
   render: () => {
     return (
       <List>
-        <List.Item title="Tittel på punktet" icon={<Braille aria-hidden />}>
+        <List.Item
+          title="Lorem Ipsum Dolor Sit Amet"
+          icon={<Braille aria-hidden />}
+        >
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
         </List.Item>
-        <List.Item title="Tittel på punktet" icon={<Cognition aria-hidden />}>
+        <List.Item
+          title="Consectetur Adipiscing Elit"
+          icon={<Cognition aria-hidden />}
+        >
           <p style={{ margin: "0" }}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </p>
