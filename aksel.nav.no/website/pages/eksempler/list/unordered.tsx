@@ -3,7 +3,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <List>
+    <List as="ul" title="Vi bør fikse uu-issues i følgende rekkefølge:">
       <List.Item>
         Rammeverket, inkludert navigasjon, påloggings- og søkefunksjoner
       </List.Item>

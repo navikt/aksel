@@ -42,7 +42,8 @@
 
 .navds-list ol li {
   counter-increment: list-item;
-  padding-left: var(--a-spacing-3);
+  padding-left: var(--a-spacing-1);
+  margin-left: var(--a-spacing-2);
 }
 
 .navds-list ol li::marker {
