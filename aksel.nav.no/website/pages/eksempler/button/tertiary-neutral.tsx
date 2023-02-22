@@ -1,16 +1,8 @@
-import { Search } from "@navikt/ds-react";
+import { Button } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return (
-    <form>
-      <Search
-        label="Søk alle NAV sine sider"
-        variant="secondary"
-        hideLabel={false}
-      />
-    </form>
-  );
+  return <Button variant="tertiary-neutral">Tertiary</Button>;
 };
 
 export default withDsExample(Example);
@@ -21,5 +13,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 13,
 };

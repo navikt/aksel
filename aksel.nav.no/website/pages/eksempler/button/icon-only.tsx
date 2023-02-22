@@ -1,8 +1,9 @@
+import { Edit } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <Button variant="tertiary">Tertiary</Button>;
+  return <Button icon={<Edit aria-hidden />} />;
 };
 
 export default withDsExample(Example);
@@ -13,5 +14,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 9,
 };

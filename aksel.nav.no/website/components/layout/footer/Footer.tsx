@@ -110,7 +110,7 @@ const Footer = () => {
             </NextLink>
           </div>
           <div className="block self-end xl:hidden">
-            &copy; 2022 NAV |{" "}
+            &copy; {new Date().getFullYear()} NAV |{" "}
             <NextLink href="/side/personvernerklaering" passHref>
               <a className="focus:bg-border-focus-on-inverted focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring">
                 Personvernerklæring og informasjonskapsler
