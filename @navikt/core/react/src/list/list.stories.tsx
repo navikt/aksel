@@ -78,19 +78,13 @@ export const WithHeading = {
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
       >
         <List.Item title="Lorem Ipsum Dolor Sit Amet">
-          <p style={{ margin: "0" }}>
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </p>
+          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
         <List.Item title="Consectetur Adipiscing Elit">
-          <p style={{ margin: "0" }}>
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </p>
+          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
         <List.Item title="Sed Do Eiusmod Tempor Incididunt">
-          <p style={{ margin: "0" }}>
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </p>
+          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
       </List>
     );
@@ -105,27 +99,19 @@ export const Icons = {
           title="Lorem Ipsum Dolor Sit Amet"
           icon={<Braille aria-hidden />}
         >
-          <p style={{ margin: "0" }}>
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </p>
+          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
         <List.Item
           title="Consectetur Adipiscing Elit"
           icon={<Cognition aria-hidden />}
         >
-          <p style={{ margin: "0" }}>
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </p>
+          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
         <List.Item icon={<BabyChangingRoom aria-hidden />}>
-          <p style={{ margin: "0" }}>
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </p>
+          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
         <List.Item icon={<Refresh aria-hidden />}>
-          <p style={{ margin: "0" }}>
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </p>
+          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
       </List>
     );

@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { BodyShort } from "../typography";
+import { BodyShort, Label } from "../typography";
 import { ListContext } from "./List";
 
 export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
@@ -12,11 +12,6 @@ export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
    * Title for the list item
    */
   title?: string;
-  /**
-   * Allows setting a different HTML h-tag
-   * @default "h4"
-   */
-  headingTag?: React.ElementType<any>;
   /*
    * Icon to be used as list marker
    */
@@ -29,7 +24,7 @@ export interface ListItemType
   > {}
 
 export const ListItem: ListItemType = forwardRef(
-  ({ className, children, title, headingTag = "h4", icon, ...rest }, ref) => {
+  ({ className, children, title, icon, ...rest }, ref) => {
     const { listType } = useContext(ListContext);
 
     return (
@@ -40,14 +35,14 @@ export const ListItem: ListItemType = forwardRef(
           </div>
         )}
 
-        <div className="navds-list__item__content">
+        <BodyShort as="div" size="small" className="navds-list__item__content">
           {title && (
-            <BodyShort size="small" className="navds-list__item-title">
+            <Label as="p" size="small">
               {title}
-            </BodyShort>
+            </Label>
           )}
           {children}
-        </div>
+        </BodyShort>
       </li>
     );
   }
