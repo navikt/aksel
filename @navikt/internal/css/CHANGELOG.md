@@ -1,5 +1,11 @@
 # @navikt/ds-css-internal
 
+## 2.3.1
+
+### Patch Changes
+
+- [`241b2e678`](https://github.com/navikt/aksel/commit/241b2e678f1f40909e2d36fe095dcbce8673f174) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset feil bruk av fallback-tokens i textarea, timeline
+
 ## 2.3.0
 
 ## 2.2.0
