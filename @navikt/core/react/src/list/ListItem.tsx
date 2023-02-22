@@ -36,11 +36,26 @@ export const ListItem: ListItemType = forwardRef(
               "navds-list__item-marker--bullet": !icon,
             })}
           >
-            {icon ? icon : <ListMarker />}
+            {icon ? (
+              icon
+            ) : (
+              <svg
+                width="6"
+                height="6"
+                viewBox="0 0 6 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden
+                focusable={false}
+                role="img"
+              >
+                <rect width="6" height="6" rx="3" fill="currentColor" />
+              </svg>
+            )}
           </div>
         )}
 
-        <BodyShort as="div" size="small" className="navds-list__item__content">
+        <BodyShort as="div" size="small" className="navds-list__item-content">
           {title && (
             <Label as="p" size="small">
               {title}
@@ -52,22 +67,5 @@ export const ListItem: ListItemType = forwardRef(
     );
   }
 );
-
-const ListMarker = () => {
-  return (
-    <svg
-      width="6"
-      height="6"
-      viewBox="0 0 6 6"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      focusable={false}
-      role="img"
-    >
-      <rect width="6" height="6" rx="3" fill="currentColor" />
-    </svg>
-  );
-};
 
 export default ListItem;

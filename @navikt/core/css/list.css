@@ -10,7 +10,7 @@
 .navds-list ul .navds-list__item {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-gap: 0.875rem;
+  gap: var(--a-spacing-3);
   padding-left: 0;
 }
 
@@ -32,7 +32,7 @@
   color: var(--ac-list-marker-icon-color, var(--ac-list-marker-color, var(--a-icon-default)));
 }
 
-.navds-list ul .navds-list__item__content {
+.navds-list ul .navds-list__item-content {
   grid-column: 2 / 3;
 }
 

@@ -117,34 +117,3 @@ export const Icons = {
     );
   },
 };
-
-export const Tokens = {
-  render: () => {
-    return (
-      <div style={{ "--ac-list-marker-color": "red" }}>
-        <List>
-          <List.Item
-            title="Lorem Ipsum Dolor Sit Amet"
-            icon={<Braille aria-hidden />}
-          >
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </List.Item>
-          <List.Item title="Consectetur Adipiscing Elit">
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </List.Item>
-        </List>
-        <List as="ol">
-          <List.Item
-            title="Lorem Ipsum Dolor Sit Amet"
-            icon={<Braille aria-hidden />}
-          >
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </List.Item>
-          <List.Item title="Consectetur Adipiscing Elit">
-            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-          </List.Item>
-        </List>
-      </div>
-    );
-  },
-};
