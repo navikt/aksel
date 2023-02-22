@@ -3,14 +3,8 @@ import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
-import { logNav } from "../components";
-import {
-  ComponentIcon,
-  DownloadIcon,
-  PauseIcon,
-  PlayIcon,
-  TokenIcon,
-} from "@sanity/icons";
+import { ComponentIcon, PauseIcon, PlayIcon } from "@sanity/icons";
+import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
@@ -22,7 +16,7 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
 import { lazy, useEffect, useState } from "react";
-import cl from "clsx";
+import { logNav } from "../components";
 
 function getPrefersReducedMotion() {
   const QUERY = "(prefers-reduced-motion: no-preference)";
