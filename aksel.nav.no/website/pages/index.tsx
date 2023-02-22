@@ -308,7 +308,7 @@ const Forside = ({
               </ul>
               <div className="mx-auto mt-8">
                 <AkselLink href="/god-praksis">
-                  {`Utforsk alle ${temaCount} god praksis tema`}
+                  {`Utforsk alle ${temaCount} tema i god praksis`}
                 </AkselLink>
               </div>
               <div className="mt-20">
@@ -326,7 +326,7 @@ const Forside = ({
                   ))}
                 </div>
                 <AkselLink href="/god-praksis/artikler">
-                  Se alle artikler i god praksis
+                  Utforsk alle artikler i god praksis
                 </AkselLink>
               </div>
             </div>
