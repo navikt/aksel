@@ -19,7 +19,7 @@
   display: flex;
 }
 
-.navds-list ul .navds-list__item-marker--bullet {
+.navds-list .navds-list__item-marker--bullet {
   display: flex;
   margin-top: 6px;
   grid-column: 1 / 2;

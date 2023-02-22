@@ -51,8 +51,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
     },
     ref
   ) => {
-    const headingId = useId();
-    const descriptionId = useId();
+    const ariaId = useId();
 
     return (
       <ListContext.Provider
@@ -62,18 +61,16 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
       >
         <div {...rest} ref={ref} className={cl("navds-list", className)}>
           {title && (
-            <Heading id={`tittel-${headingId}`} size="small" as={headingTag}>
+            <Heading id={`tittel-${ariaId}`} size="small" as={headingTag}>
               {title}
             </Heading>
           )}
           {description && (
-            <BodyShort id={`description-${descriptionId}`}>
-              {description}
-            </BodyShort>
+            <BodyShort id={`description-${ariaId}`}>{description}</BodyShort>
           )}
           <ListTag
-            aria-labelledby={title && `tittel-${headingId}`}
-            aria-describedby={description && `description-${descriptionId}`}
+            aria-labelledby={title && `tittel-${ariaId}`}
+            aria-describedby={description && `description-${ariaId}`}
           >
             {children}
           </ListTag>
