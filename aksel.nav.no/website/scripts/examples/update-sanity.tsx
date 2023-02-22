@@ -8,9 +8,9 @@ dotenv.config();
 const createId = (s: string) =>
   `kode_eksempelid_${s
     .match(/\w/g)
-    .join("")
-    .match(/\D/g)
-    .join("")}`.toLowerCase();
+    ?.join("")
+    ?.match(/\D/g)
+    ?.join("")}`.toLowerCase();
 
 const main = async () => {
   const token = process.env.SANITY_WRITE_KEY;

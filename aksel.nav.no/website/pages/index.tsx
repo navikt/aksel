@@ -3,14 +3,8 @@ import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
-import { logNav } from "../components";
-import {
-  ComponentIcon,
-  DownloadIcon,
-  PauseIcon,
-  PlayIcon,
-  TokenIcon,
-} from "@sanity/icons";
+import { ComponentIcon, PauseIcon, PlayIcon } from "@sanity/icons";
+import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
@@ -22,7 +16,7 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
 import { lazy, useEffect, useState } from "react";
-import cl from "clsx";
+import { logNav } from "../components";
 
 function getPrefersReducedMotion() {
   const QUERY = "(prefers-reduced-motion: no-preference)";
@@ -34,21 +28,84 @@ function getPrefersReducedMotion() {
 const introcards = [
   {
     title: "Komponenter",
-    desc: "Bibliotekene Core, NAV.no, Interne flater",
+    desc: "Bibliotekene Core og Interne flater",
     icon: ComponentIcon,
     href: "/komponenter",
   },
   {
-    title: "Styling",
-    desc: "Tokens for farger, spacing, shadows, etc.",
-    icon: TokenIcon,
-    href: "/grunnleggende#styling",
+    title: "Design Tokens",
+    desc: "Farger, spacing, shadows, etc.",
+    icon: (props) => (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        <path
+          d="M12 3L19.7942 7.5V16.5L12 21L4.20576 16.5V7.5L12 3Z"
+          stroke="#262626"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M12 15L12 21"
+          stroke="#262626"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M19.7942 7.5L14.598 10.5"
+          stroke="#262626"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9.40196 10.5L4.2058 7.50001"
+          stroke="#262626"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <circle
+          cx="12.0001"
+          cy="11.9999"
+          r="3"
+          stroke="#262626"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+    href: "/grunnleggende/styling/design-tokens",
   },
   {
-    title: "Stæsj",
-    desc: "Last ned font og ikoner",
-    icon: DownloadIcon,
-    href: "/grunnleggende#staesj",
+    title: "Ikoner",
+    desc: "Alle ikonene våre",
+    icon: (props) => (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        <circle cx="12" cy="12" r="9" stroke="#262626" strokeWidth="1.5" />
+        <path
+          d="M10.5793 10.2254L15.8339 9.59481L13.4206 13.7748L8.16602 14.4054L10.5793 10.2254Z"
+          stroke="#262626"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+    href: "/grunnleggende/staesj/ikoner",
   },
 ];
 
@@ -251,7 +308,7 @@ const Forside = ({
               </ul>
               <div className="mx-auto mt-8">
                 <AkselLink href="/god-praksis">
-                  {`Utforsk alle ${temaCount} god praksis tema`}
+                  {`Utforsk alle ${temaCount} tema i god praksis`}
                 </AkselLink>
               </div>
               <div className="mt-20">
@@ -269,7 +326,7 @@ const Forside = ({
                   ))}
                 </div>
                 <AkselLink href="/god-praksis/artikler">
-                  Se alle artikler i god praksis
+                  Utforsk alle artikler i god praksis
                 </AkselLink>
               </div>
             </div>

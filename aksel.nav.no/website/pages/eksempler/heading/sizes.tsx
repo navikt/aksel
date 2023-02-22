@@ -25,6 +25,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 1,
   desc: "Du må selv velge hvilken h-tag Heading rendres som ved hjelp av level-prop.",

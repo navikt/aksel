@@ -12,6 +12,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 5,
   desc: "Har ingen global betydning. Tjenesten/produktet kan bestemme hva de symboliserer.",

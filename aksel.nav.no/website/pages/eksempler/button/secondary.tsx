@@ -7,6 +7,12 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 1,
+  desc: "De fleste knapper i løsninger vil bruke denne varianten.",
 };

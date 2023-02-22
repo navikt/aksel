@@ -107,7 +107,7 @@ const Footer = () => {
           </div>
           <span className="mb-1 self-end xl:mb-0" />
           <div className="hidden self-end xl:block">
-            <p>&copy; 2022 NAV</p>
+            <p>&copy; {new Date().getFullYear()} NAV</p>
             <NextLink
               href="/side/personvernerklaering"
               className="focus:bg-border-focus-on-inverted focus:text-text-default focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring"
@@ -116,7 +116,7 @@ const Footer = () => {
             </NextLink>
           </div>
           <div className="block self-end xl:hidden">
-            &copy; 2022 NAV |{" "}
+            &copy; {new Date().getFullYear()} NAV |{" "}
             <NextLink
               href="/side/personvernerklaering"
               className="focus:bg-border-focus-on-inverted focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring"

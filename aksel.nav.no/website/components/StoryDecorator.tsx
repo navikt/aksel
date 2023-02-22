@@ -1,5 +1,4 @@
 import "../dist/tw.css";
-import "tailwindcss/tailwind.css";
 import { Provider } from "@navikt/ds-react";
 import { IdContext } from "components/website-modules/utils/contexts";
 

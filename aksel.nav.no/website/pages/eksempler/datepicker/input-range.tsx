@@ -28,6 +28,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 7,
   desc: "Vi anbefaler å bruke UNSAFE_useRangeDatepicker-hook hvis man har input-felter",

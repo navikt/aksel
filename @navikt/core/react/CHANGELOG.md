@@ -1,5 +1,30 @@
 # @navikt/ds-react
 
+## 2.3.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.3.1
+
+## 2.3.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.3.0
+
+## 2.2.0
+
+### Minor Changes
+
+- [#1789](https://github.com/navikt/aksel/pull/1789) [`c0929a534`](https://github.com/navikt/aksel/commit/c0929a534dc8effece5435f8be550cb7931a52b1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Button og ToggleGroup har nå en neutral-variant, oppdatert neutral-tokens
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.2.0
+
 ## 2.1.7
 
 ### Patch Changes

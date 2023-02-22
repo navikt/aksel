@@ -1,5 +1,27 @@
 # @navikt/ds-css
 
+## 2.3.1
+
+### Patch Changes
+
+- [`241b2e678`](https://github.com/navikt/aksel/commit/241b2e678f1f40909e2d36fe095dcbce8673f174) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset feil bruk av fallback-tokens i textarea, timeline
+
+## 2.3.0
+
+### Minor Changes
+
+- [#1813](https://github.com/navikt/aksel/pull/1813) [`7702c6527`](https://github.com/navikt/aksel/commit/7702c65275a4d86a8260852d091e6dd4cfe9217c) Thanks [@ingfo](https://github.com/ingfo)! - Fiksa sentrering av tekst i Select i Firefox
+
+### Patch Changes
+
+- [`51b62cca7`](https://github.com/navikt/aksel/commit/51b62cca7b857e92669cd0b09e620b131faf80e5) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Select small 34px høyde -> 32px
+
+## 2.2.0
+
+### Minor Changes
+
+- [#1789](https://github.com/navikt/aksel/pull/1789) [`c0929a534`](https://github.com/navikt/aksel/commit/c0929a534dc8effece5435f8be550cb7931a52b1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Button og ToggleGroup har nå en neutral-variant, oppdatert neutral-tokens
+
 ## 2.1.7
 
 ## 2.1.6

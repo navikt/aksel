@@ -71,6 +71,12 @@ const config = () =>
         },
       ];
     },
+    rewrites: async () => [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap",
+      },
+    ],
     async redirects() {
       return [
         {
@@ -110,8 +116,6 @@ const config = () =>
   });
 
 if (process.env.NODE_ENV === "production") {
-  /* console.log("sentry is enabled");
-  module.exports = withSentryConfig(config(), { silent: true }); */
   module.exports = config();
 } else {
   module.exports = config();
