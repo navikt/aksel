@@ -30,7 +30,12 @@ export const ListItem: ListItemType = forwardRef(
     return (
       <li {...rest} ref={ref} className={cl("navds-list__item", className)}>
         {listType === "ul" && (
-          <div className={`navds-list__item-marker${icon ? "--icon" : ""}`}>
+          <div
+            className={cl({
+              "navds-list__item-marker--icon": icon,
+              "navds-list__item-marker--bullet": !icon,
+            })}
+          >
             {icon ? icon : <ListMarker />}
           </div>
         )}
@@ -60,7 +65,7 @@ const ListMarker = () => {
       focusable={false}
       role="img"
     >
-      <rect width="6" height="6" rx="3" fill="#262626" />
+      <rect width="6" height="6" rx="3" fill="currentColor" />
     </svg>
   );
 };
