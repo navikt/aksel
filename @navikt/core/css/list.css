@@ -14,6 +14,10 @@
   padding-left: 0;
 }
 
+.navds-list ul .navds-list__item::marker {
+  content: none;
+}
+
 .navds-list ol .navds-list__item-marker--icon {
   grid-column: 1 / 2;
   display: flex;
