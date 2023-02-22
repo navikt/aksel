@@ -4,7 +4,7 @@ import { BodyShort, Heading } from "../typography";
 import { useId } from "../util/useId";
 import { ListItem, ListItemType } from "./ListItem";
 
-interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * HTML list element to render
