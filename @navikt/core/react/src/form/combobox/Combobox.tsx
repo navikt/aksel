@@ -128,8 +128,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         value === undefined && setInternalValue(val);
         onChange?.(val);
         setFilteredOptionsIndex(0);
+        if (!isInternalListOpen && !!val) {
+          setInternalListOpen(true);
+        }
       },
-      [onChange, value]
+      [isInternalListOpen, onChange, value]
     );
 
     const focusInput = useCallback(() => {
@@ -162,21 +165,18 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       );
     };
 
-    useEventListener(
-      "keypress",
-      useCallback(
-        (e) => {
-          if (e.key === "Escape") {
-            e.preventDefault();
-            handleClear({ trigger: e.key, event: e });
-          } else if (e.key === "Enter") {
-            e.preventDefault();
-            toggleOption();
-          }
-        },
-        [handleClear, toggleOption]
-      ),
-      wrapperRef
+    const onKeyDown = useCallback(
+      (e) => {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          handleClear({ trigger: e.key, event: e });
+          setInternalListOpen(false);
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          toggleOption();
+        }
+      },
+      [handleClear, toggleOption]
     );
 
     useEventListener(
@@ -290,6 +290,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 {...inputProps}
                 value={value ?? internalValue}
                 onChange={(e) => handleChange(e.target.value)}
+                onKeyDown={onKeyDown}
                 type="search"
                 role="combobox"
                 aria-controls={isInternalListOpen ? id : ""}
@@ -310,12 +311,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             {(value ?? internalValue) && clearButton && (
               <button
                 type="button"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    handleClear({ trigger: e.key, event: e });
-                  }
-                }}
                 onClick={(event) => handleClear({ trigger: "Click", event })}
                 className="navds-combobox__button-clear"
               >
@@ -327,12 +322,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             )}
             {toggleListButton && (
               <button
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setInternalListOpen((state) => !state);
-                  }
-                }}
                 type="button"
                 onClick={() => setInternalListOpen(!isInternalListOpen)}
                 className="navds-combobox__button-toggle-list"
