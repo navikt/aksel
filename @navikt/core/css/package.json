@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "2.2.0",
+  "version": "2.3.1",
   "description": "CSS for NAV Designsystem",
   "author": "Aksel | NAV designsystem team",
   "keywords": [
@@ -20,7 +20,7 @@
     "watch": "postcss --watch --use postcss-import -o dist/index.css index.css"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^2.2.0",
+    "@navikt/ds-tokens": "^2.3.1",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.0",
     "postcss-cli": "^9.0.0",
