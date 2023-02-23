@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 2.4.0
+
+### Minor Changes
+
+- [#1807](https://github.com/navikt/aksel/pull/1807) [`70eeb24b3`](https://github.com/navikt/aksel/commit/70eeb24b38ac871c7f2e31e1621b949669c401b6) Thanks [@kschieren](https://github.com/kschieren)! - Added List component
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.4.0
+
 ## 2.3.1
 
 ### Patch Changes
