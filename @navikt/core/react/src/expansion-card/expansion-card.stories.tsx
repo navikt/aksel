@@ -163,7 +163,7 @@ export const AvatarVariants = {
             avatarVariant={x}
             key={x}
           >
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Title>{x}</ExpansionCard.Title>
             <ExpansionCard.Description>
               For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
               til tid, sted og arbeidsoppgaver
