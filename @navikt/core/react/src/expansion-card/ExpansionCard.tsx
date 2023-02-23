@@ -75,7 +75,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
         <div
           {...rest}
           className={cl("navds-expansioncard", className, {
-            "navds-expansioncard--open": open,
+            "navds-expansioncard--open": open ?? _open,
           })}
           ref={ref}
         />

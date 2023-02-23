@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ExpansionCard } from ".";
 import ExpansionCardContent from "./ExpansionCardContent";
 import ExpansionCardHeader from "./ExpansionCardHeader";
@@ -9,7 +9,34 @@ export default {
   title: "ds-react/ExpansionCard",
   component: ExpansionCard,
   subcomponents: [ExpansionCardHeader, ExpansionCardContent],
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: "600px",
+          minHeight: "100vh",
+          padding: "10rem 0",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
+
+const variants = [
+  "warning",
+  "success",
+  "danger",
+  "info",
+  "neutral",
+  "alt1",
+  "alt2",
+  "alt3",
+] as const;
 
 const Content = () => (
   <ExpansionCard.Content>
@@ -44,54 +71,97 @@ const Content = () => (
 );
 
 export const Default = {
-  render: () => {
+  render: (props) => {
     return (
-      <div
-        style={{
-          width: "600px",
-          minHeight: "100vh",
-          padding: "10rem 0",
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-        }}
-      >
-        <ExpansionCard>
-          <ExpansionCard.Header>
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header>
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header avatar={<Star aria-hidden />}>
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header avatar={<Star aria-hidden />}>
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
+      <ExpansionCard open={props?.open || undefined}>
+        <ExpansionCard.Header
+          {...props}
+          avatar={props?.avatar ? <Star aria-hidden /> : undefined}
+        >
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+    );
+  },
+  args: { avatar: false, open: false },
+  argTypes: {
+    avatarVariant: { control: "select", options: variants },
+  },
+};
+
+export const Description = {
+  render: () => (
+    <>
+      <ExpansionCard>
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+      <ExpansionCard>
+        <ExpansionCard.Header
+          avatar={<Star aria-hidden />}
+          avatarVariant="alt3"
+        >
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+    </>
+  ),
+};
+
+export const Avatar = {
+  render: () => (
+    <>
+      <ExpansionCard>
+        <ExpansionCard.Header
+          avatar={<Star aria-hidden />}
+          avatarVariant="alt3"
+        >
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+      <ExpansionCard>
+        <ExpansionCard.Header
+          avatar={<Star aria-hidden />}
+          avatarVariant="alt3"
+        >
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+    </>
+  ),
+};
+
+export const AvatarVariants = {
+  render: () => (
+    <>
+      {variants.map((x) => (
         <ExpansionCard>
           <ExpansionCard.Header
-            avatarVariant="info"
             avatar={<Star aria-hidden />}
+            avatarVariant={x}
+            key={x}
           >
             <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
             <ExpansionCard.Description>
@@ -101,85 +171,44 @@ export const Default = {
           </ExpansionCard.Header>
           <Content />
         </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            avatarVariant="success"
-          >
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            avatarVariant="warning"
-          >
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            avatarVariant="danger"
-          >
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            avatarVariant="alt1"
-          >
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            avatarVariant="alt2"
-          >
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            avatarVariant="alt3"
-          >
-            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-      </div>
+      ))}
+    </>
+  ),
+};
+
+export const DefaultOpen = {
+  render: () => (
+    <ExpansionCard defaultOpen>
+      <ExpansionCard.Header avatar={<Star aria-hidden />} avatarVariant="alt3">
+        <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+        <ExpansionCard.Description>
+          For at yrkesskadedekningen skal gjelde, er det som hovedregel krav til
+          tid, sted og arbeidsoppgaver
+        </ExpansionCard.Description>
+      </ExpansionCard.Header>
+      <Content />
+    </ExpansionCard>
+  ),
+};
+
+export const ControlledState = {
+  render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [open, setOpen] = useState(false);
+    return (
+      <ExpansionCard open={open} onToggle={setOpen}>
+        <ExpansionCard.Header
+          avatar={<Star aria-hidden />}
+          avatarVariant="alt3"
+        >
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
     );
   },
 };
