@@ -32,7 +32,7 @@ export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
         })}
       >
         {React.Children.map(children, (chip, index) => {
-          return <li key={index + (chip?.toString() ?? "")}>{chip}</li>;
+          return <li key={chip?.toString() || index}>{chip}</li>;
         })}
       </ul>
     );
