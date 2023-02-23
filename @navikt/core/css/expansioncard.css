@@ -100,18 +100,6 @@
   display: grid;
 }
 
-/* @keyframes closeButtonAnimation {
-  from {
-    opacity: 0.3;
-    transform: translateY(3px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-} */
-
 .navds-expansioncard__header-avatar--neutral {
   background-color: var(--a-surface-neutral-subtle);
   color: var(--a-icon-default);

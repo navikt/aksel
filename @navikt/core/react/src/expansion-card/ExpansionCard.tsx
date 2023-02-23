@@ -32,6 +32,16 @@ export interface ExpansionCardProps
    * Callback function for when the expansion card is toggled open or closed
    */
   onToggle?: (open: boolean) => void;
+  /**
+   * Controlled open-state
+   * Using this removes automatic control of open-state
+   */
+  open?: boolean;
+  /**
+   * Defaults to open if not controlled
+   * @default false
+   */
+  defaultOpen?: boolean;
 }
 
 export type ExpansionCardContextProps = {
@@ -45,16 +55,23 @@ export const ExpansionCardContext = createContext<ExpansionCardContextProps>({
 });
 
 export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
-  ({ className, onToggle, ...rest }, ref) => {
-    const [open, setOpen] = useState(false);
+  ({ className, onToggle, open, defaultOpen = false, ...rest }, ref) => {
+    const [_open, _setOpen] = useState(defaultOpen);
 
     const handleOpen = () => {
-      setOpen(!open);
-      onToggle?.(open);
+      if (open === undefined) {
+        const newOpen = !_open;
+        _setOpen(newOpen);
+        onToggle?.(newOpen);
+      } else {
+        onToggle?.(!open);
+      }
     };
 
     return (
-      <ExpansionCardContext.Provider value={{ open, toggleOpen: handleOpen }}>
+      <ExpansionCardContext.Provider
+        value={{ open: open ?? _open, toggleOpen: handleOpen }}
+      >
         <div
           {...rest}
           className={cl("navds-expansioncard", className, {
