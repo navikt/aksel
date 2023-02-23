@@ -101,8 +101,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
-    const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
-    const [comboboxRef, setComboboxRef] = useState<HTMLDivElement | null>(null);
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
     const [isInternalListOpen, setInternalListOpen] = useState<boolean | null>(
       isListOpen
     );
@@ -128,10 +127,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (val: string) => {
         value === undefined && setInternalValue(val);
         onChange?.(val);
-        if (!!val !== isInternalListOpen) {
-          setInternalListOpen(!!val);
-        }
         setFilteredOptionsIndex(0);
+        if (!isInternalListOpen && !!val) {
+          setInternalListOpen(true);
+        }
       },
       [isInternalListOpen, onChange, value]
     );
@@ -166,21 +165,18 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       );
     };
 
-    useEventListener(
-      "keypress",
-      useCallback(
-        (e) => {
-          if (e.key === "Escape") {
-            e.preventDefault();
-            handleClear({ trigger: e.key, event: e });
-          } else if (e.key === "Enter") {
-            e.preventDefault();
-            toggleOption();
-          }
-        },
-        [handleClear, toggleOption]
-      ),
-      wrapperRef
+    const onKeyDown = useCallback(
+      (e) => {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          handleClear({ trigger: e.key, event: e });
+          setInternalListOpen(false);
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          toggleOption();
+        }
+      },
+      [handleClear, toggleOption]
     );
 
     useEventListener(
@@ -209,28 +205,30 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       )
     );
 
-    const handleToggleListOpen = () => {
-      if (isInternalListOpen == null || isInternalListOpen)
-        setInternalListOpen(true);
-      else if (!isInternalListOpen) setInternalListOpen(false);
-    };
-
-    const handleBlur = useCallback(
-      (e) => {
-        if (!comboboxRef?.contains(document.activeElement))
-          setInternalListOpen(null);
-      },
-      [setInternalListOpen, comboboxRef]
-    );
-
     //focus on input whenever selectedOptions changes
+    // TODO: Seems like a band-aid. Why does focus disappear?
     useEffect(() => {
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
 
+    function onFocusWrapper(e) {
+      if (
+        wrapperRef.current?.contains(e.target) &&
+        !wrapperRef.current?.contains(e.relatedTarget)
+      ) {
+        setInternalListOpen(true);
+      }
+    }
+
+    function onBlurWrapper(e) {
+      if (!wrapperRef.current?.contains(e.relatedTarget)) {
+        setInternalListOpen(false);
+      }
+    }
+
     return (
       <div
-        ref={setWrapperRef}
+        ref={wrapperRef}
         className={cl(
           className,
           "navds-form-field",
@@ -241,6 +239,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             "navds-search--disabled": !!inputProps.disabled,
           }
         )}
+        onBlur={onBlurWrapper}
+        onFocus={onFocusWrapper}
       >
         <Label
           htmlFor={inputProps.id}
@@ -263,12 +263,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             {description}
           </BodyShort>
         )}
-        <div
-          className="navds-combobox__wrapper"
-          ref={setComboboxRef}
-          onBlur={(e) => handleBlur(e)}
-          onClick={focusInput}
-        >
+        <div className="navds-combobox__wrapper">
           <div className="navds-combobox__wrapper-inner">
             <SelectedOptions className="navds-combobox__selected-options">
               {selectedOptions.length
@@ -277,7 +272,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                       <SelectedOptions.Removable
                         className="navds-combobox__selected-option"
                         key={option + i}
-                        onFocus={handleToggleListOpen}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteSelectedOption(option);
@@ -296,7 +290,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 {...inputProps}
                 value={value ?? internalValue}
                 onChange={(e) => handleChange(e.target.value)}
-                onFocus={handleToggleListOpen}
+                onKeyDown={onKeyDown}
                 type="search"
                 role="combobox"
                 aria-controls={isInternalListOpen ? id : ""}
@@ -317,12 +311,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             {(value ?? internalValue) && clearButton && (
               <button
                 type="button"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    handleClear({ trigger: e.key, event: e });
-                  }
-                }}
                 onClick={(event) => handleClear({ trigger: "Click", event })}
                 className="navds-combobox__button-clear"
               >
@@ -334,15 +322,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             )}
             {toggleListButton && (
               <button
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setInternalListOpen((state) => !state);
-                  }
-                }}
-                onFocus={handleToggleListOpen}
                 type="button"
-                onClick={() => setInternalListOpen((state) => !state)}
+                onClick={() => setInternalListOpen(!isInternalListOpen)}
                 className="navds-combobox__button-toggle-list"
               >
                 <span className="navds-sr-only">
@@ -383,6 +364,23 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   aria-selected={selectedOptions.includes(o)}
                 >
                   <BodyShort size="medium">{o}</BodyShort>
+                  {selectedOptions.includes(o) && (
+                    <svg
+                      width="16"
+                      height="13"
+                      viewBox="0 0 16 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        fill="#005B82"
+                        d="M14.2014 0L16 1.89047L4.77943 13L0 8.39552L1.79361 6.5L4.77418 9.3019L14.2014 0Z"
+                      />
+                    </svg>
+                  )}
                 </li>
               ))}
             </ul>
