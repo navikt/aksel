@@ -3,8 +3,13 @@
   padding: 0;
 }
 
-.navds-list li:not(:first-child) {
+.navds-list li {
   margin-top: var(--a-spacing-5);
+}
+
+.navds-list:first-child > ul > li:first-child,
+.navds-list:first-child > ol > li:first-child {
+  margin-top: 0;
 }
 
 .navds-list ul .navds-list__item {
