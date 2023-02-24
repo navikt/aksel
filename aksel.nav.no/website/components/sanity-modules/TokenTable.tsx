@@ -102,6 +102,7 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
               <NextLink
                 href="https://aksel.nav.no/grunnleggende/styling/design-tokens#hec62d38bc813"
                 passHref
+                legacyBehavior
               >
                 <Link>guiden vår</Link>
               </NextLink>{" "}

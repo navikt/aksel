@@ -13,7 +13,7 @@ import TableOfContents from "components/website-modules/TOC";
 import { getImage } from "components/website-modules/utils/get-image";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
 import { lazy } from "react";
 import NotFotfund from "../404";

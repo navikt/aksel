@@ -42,7 +42,13 @@ function showContent(element: HTMLDivElement | null, height: Height) {
 // ------------------ Component
 
 interface AnimateHeightProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * @default 250ms
+   */
   duration?: number;
+  /**
+   * @default ease
+   */
   easing?: string;
   height: Height;
   innerClassName?: string;

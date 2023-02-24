@@ -23,19 +23,19 @@ const InnholdsKort = ({
         id={node._key}
         className="algolia-index-lvl3 text-deepblue-500 scroll-mt-28 focus:outline-none group-hover:underline"
       >
-        <NextLink href={`/${node?.lenke}`} passHref>
-          <a
-            onClick={(e) =>
-              logNav(
-                "prinsipp-kort",
-                window.location.pathname,
-                e.currentTarget.getAttribute("href")
-              )
-            }
-            className="z-10 before:absolute before:inset-0 focus:outline-none"
-          >
-            {node.title}
-          </a>
+        <NextLink
+          href={`/${node?.lenke}`}
+          passHref
+          onClick={(e) =>
+            logNav(
+              "prinsipp-kort",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+          className="z-10 before:absolute before:inset-0 focus:outline-none"
+        >
+          {node.title}
         </NextLink>
       </Heading>
       <SanityBlockContent blocks={node.body} noLastMargin />

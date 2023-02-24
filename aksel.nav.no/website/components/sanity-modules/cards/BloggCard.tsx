@@ -20,7 +20,7 @@ const BloggCard = ({
   return (
     <li key={blog._id} className="border-b-border-subtle h-fit border-b pb-8">
       <Heading size="medium" as="div">
-        <NextLink href={`/${blog.slug}`} passHref>
+        <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
           <Link
             className="text-deepblue-500 no-underline hover:underline"
             onClick={(e) =>

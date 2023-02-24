@@ -69,7 +69,11 @@ export const BloggAd = () => {
         </BodyLong>
         <BodyLong>
           Ta kontakt med{" "}
-          <NextLink href="https://nav-it.slack.com/archives/C7NE7A8UF" passHref>
+          <NextLink
+            href="https://nav-it.slack.com/archives/C7NE7A8UF"
+            passHref
+            legacyBehavior
+          >
             <Link className="font-semibold text-[#831843]">
               #Aksel-designsystemet
             </Link>

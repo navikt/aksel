@@ -31,32 +31,33 @@ const RelatertInnhold = ({
       )}
     >
       {node.lenker.map((x) => (
-        <NextLink href={getHref(x)} passHref key={x._key}>
-          <a
-            onClick={(e) =>
-              logNav(
-                "relatert-innhold",
-                window.location.pathname,
-                e.currentTarget.getAttribute("href")
-              )
-            }
-            className="algolia-ignore-index shadow-small focus-visible:shadow-focus bg-surface-default ring-border-subtle group grid rounded border-2 border-transparent px-4 py-3 ring-1 focus:outline-none"
+        <NextLink
+          href={getHref(x)}
+          passHref
+          key={x._key}
+          onClick={(e) =>
+            logNav(
+              "relatert-innhold",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+          className="algolia-ignore-index shadow-small focus-visible:shadow-focus bg-surface-default ring-border-subtle group grid rounded border-2 border-transparent px-4 py-3 ring-1 focus:outline-none"
+        >
+          <Heading
+            as="span"
+            size="xsmall"
+            className="underline group-hover:no-underline"
           >
-            <Heading
-              as="span"
-              size="xsmall"
-              className="underline group-hover:no-underline"
-            >
-              {x.title}
-            </Heading>
-            <BodyShort
-              size="small"
-              className="text-text-subtle mt-1 self-end break-words"
-              as="span"
-            >
-              {x.ekstern_domene ? <>{getTag(x)}</> : `aksel.nav.no`}
-            </BodyShort>
-          </a>
+            {x.title}
+          </Heading>
+          <BodyShort
+            size="small"
+            className="text-text-subtle mt-1 self-end break-words"
+            as="span"
+          >
+            {x.ekstern_domene ? <>{getTag(x)}</> : `aksel.nav.no`}
+          </BodyShort>
         </NextLink>
       ))}
     </div>
