@@ -13,7 +13,7 @@ export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
    */
   title?: string;
   /*
-   * Icon to be used as list marker
+   * Icon to be used as list marker for unordered lists.
    */
   icon?: React.ReactNode;
 }
@@ -26,6 +26,12 @@ export interface ListItemType
 export const ListItem: ListItemType = forwardRef(
   ({ className, children, title, icon, ...rest }, ref) => {
     const { listType } = useContext(ListContext);
+
+    if (listType === "ol" && icon) {
+      console.warn(
+        "<List />: Icon prop is not supported for ordered lists. Please remove the icon prop."
+      );
+    }
 
     return (
       <li {...rest} ref={ref} className={cl("navds-list__item", className)}>
