@@ -117,3 +117,32 @@ export const Icons = {
     );
   },
 };
+
+export const Nested = {
+  render: () => {
+    return (
+      <List>
+        <List.Item title="Sed Do Eiusmod Tempor Incididunt">
+          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          <List>
+            <List.Item title="Lorem Ipsum Dolor Sit Amet">
+              Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+            </List.Item>
+            <List.Item title="Consectetur Adipiscing Elit">
+              Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+            </List.Item>
+            <List.Item>
+              Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+            </List.Item>
+            <List.Item>
+              Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+            </List.Item>
+          </List>
+        </List.Item>
+        <List.Item>
+          Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+        </List.Item>
+      </List>
+    );
+  },
+};
