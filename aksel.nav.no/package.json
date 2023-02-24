@@ -25,6 +25,6 @@
     "@navikt/ds-tokens": "^2.4.0"
   },
   "devDependencies": {
-    "prettier-plugin-tailwindcss": "^0.1.13"
+    "prettier-plugin-tailwindcss": "^0.2.3"
   }
 }
