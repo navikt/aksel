@@ -304,6 +304,12 @@
   background-color: var(--a-surface-transparent);
 }
 
+.navds-expansioncard--clickarea-full.navds-expansioncard--filled
+  .navds-expansioncard__header:hover
+  .navds-expansioncard__header-button {
+  background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-hover));
+}
+
 @keyframes fadeExpansionCard {
   0% {
     opacity: 0;
