@@ -37,7 +37,7 @@
 }
 
 .navds-expansioncard__icon {
-  transition: transform 200ms ease-in-out;
+  transition: transform 150ms ease-in-out;
 }
 
 .navds-expansioncard__header--open .navds-expansioncard__icon {
@@ -157,10 +157,6 @@
   background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-gray-100));
 }
 
-.navds-expansioncard--neutral.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-gray-100));
-}
-
 /* SUCCESS */
 .navds-expansioncard--success .navds-expansioncard__header-avatar {
   background-color: var(--ac-expansioncard-avatar-bg-success, var(--a-surface-success-subtle));
@@ -172,10 +168,6 @@
 }
 
 .navds-expansioncard--success-filled .navds-expansioncard__content-wrapper {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-green-100));
-}
-
-.navds-expansioncard--success.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover {
   background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-green-100));
 }
 
@@ -193,10 +185,6 @@
   background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-orange-100));
 }
 
-.navds-expansioncard--warning.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-orange-100));
-}
-
 /* DANGER */
 .navds-expansioncard--danger .navds-expansioncard__header-avatar {
   background-color: var(--ac-expansioncard-avatar-bg-danger, var(--a-surface-danger-subtle));
@@ -208,10 +196,6 @@
 }
 
 .navds-expansioncard--danger-filled .navds-expansioncard__content-wrapper {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-red-100));
-}
-
-.navds-expansioncard--danger.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover {
   background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-red-100));
 }
 
@@ -229,10 +213,6 @@
   background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-lightblue-100));
 }
 
-.navds-expansioncard--info.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-lightblue-100));
-}
-
 /* ALT1 */
 .navds-expansioncard--alt1 .navds-expansioncard__header-avatar {
   background-color: var(--ac-expansioncard-avatar-bg-alt-1, var(--a-surface-alt-1-subtle));
@@ -244,10 +224,6 @@
 }
 
 .navds-expansioncard--alt1-filled .navds-expansioncard__content-wrapper {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-purple-100));
-}
-
-.navds-expansioncard--alt1.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover {
   background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-purple-100));
 }
 
@@ -265,10 +241,6 @@
   background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-limegreen-100));
 }
 
-.navds-expansioncard--alt2.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-limegreen-100));
-}
-
 /* ALT3 */
 .navds-expansioncard--alt3 .navds-expansioncard__header-avatar {
   background-color: var(--ac-expansioncard-avatar-bg-alt-3, var(--a-surface-alt-3-subtle));
@@ -283,10 +255,6 @@
   background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-deepblue-100));
 }
 
-.navds-expansioncard--alt3.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-deepblue-100));
-}
-
 .navds-expansioncard--transparent .navds-expansioncard__header-avatar {
   background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-surface-transparent));
 }
@@ -298,14 +266,12 @@
 }
 
 /* Filled */
-
-.navds-expansioncard--filled .navds-expansioncard__header-avatar {
+.navds-expansioncard--filled .navds-expansioncard__header-avatar,
+.navds-expansioncard__header--no-avatar-bg > .navds-expansioncard__header-avatar {
   background-color: var(--a-surface-transparent);
 }
 
-.navds-expansioncard--clickarea-full.navds-expansioncard--filled
-  .navds-expansioncard__header:hover
-  .navds-expansioncard__header-button {
+.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover .navds-expansioncard__header-button {
   background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-hover));
 }
 

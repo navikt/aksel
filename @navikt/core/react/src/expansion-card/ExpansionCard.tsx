@@ -61,8 +61,7 @@ export interface ExpansionCardProps
     | "alt2"
     | "alt2-filled"
     | "alt3"
-    | "alt3-filled"
-    | "transparent";
+    | "alt3-filled";
 
   /**
    * @defualt "medium"

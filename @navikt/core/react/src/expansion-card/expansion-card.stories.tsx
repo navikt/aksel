@@ -44,7 +44,6 @@ const variants = [
   "alt2-filled",
   "alt3",
   "alt3-filled",
-  "transparent",
 ] as const;
 
 const Content = () => (
@@ -150,8 +149,9 @@ export const Avatar = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard variant="transparent">
+      <ExpansionCard>
         <ExpansionCard.Header
+          hideAvatarBg
           avatar={
             <svg
               width="64"

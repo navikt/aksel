@@ -2,13 +2,6 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { ExpansionCardContext } from "./ExpansionCard";
 
-/**
- * TODO:
- * - Prop for header-size
- * - Prop for hele klikkbar vs bare knapp (default hele)
- * - Undersøke flere varianter
- * TODO: Small variant 48px høy, 32px knapp
- */
 export interface ExpansionCardHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -16,6 +9,10 @@ export interface ExpansionCardHeaderProps
    *
    */
   avatar?: React.ReactNode;
+  /**
+   * @default false
+   */
+  hideAvatarBg?: boolean;
 }
 
 export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
@@ -23,7 +20,7 @@ export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
 >;
 
 const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
-  ({ children, className, avatar, ...rest }, ref) => {
+  ({ children, className, avatar, hideAvatarBg = false, ...rest }, ref) => {
     const panelContext = useContext(ExpansionCardContext);
 
     if (panelContext === null) {
@@ -39,6 +36,7 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
         {...rest}
         className={cl("navds-expansioncard__header", className, {
           "navds-expansioncard__header--open": panelContext.open,
+          "navds-expansioncard__header--no-avatar-bg": hideAvatarBg,
         })}
       >
         {avatar && (
