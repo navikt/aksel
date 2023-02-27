@@ -33,9 +33,14 @@ const variants = [
   "danger",
   "info",
   "neutral",
+  "neutral-filled",
   "alt1",
   "alt2",
   "alt3",
+  "transparent",
+  "alt3-filled",
+  "warning-filled",
+  "success-filled",
 ] as const;
 
 const Content = () => (
@@ -90,7 +95,7 @@ export const Default = {
   },
   args: { avatar: false, open: false },
   argTypes: {
-    avatarVariant: { control: "select", options: variants },
+    variant: { control: "select", options: variants },
   },
 };
 
@@ -107,11 +112,8 @@ export const Description = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard>
-        <ExpansionCard.Header
-          avatar={<Star aria-hidden />}
-          avatarVariant="alt3"
-        >
+      <ExpansionCard variant="alt3">
+        <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -127,20 +129,14 @@ export const Description = {
 export const Avatar = {
   render: () => (
     <>
-      <ExpansionCard>
-        <ExpansionCard.Header
-          avatar={<Star aria-hidden />}
-          avatarVariant="alt3"
-        >
+      <ExpansionCard variant="alt3">
+        <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard>
-        <ExpansionCard.Header
-          avatar={<Star aria-hidden />}
-          avatarVariant="alt3"
-        >
+      <ExpansionCard variant="alt3">
+        <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -157,12 +153,8 @@ export const AvatarVariants = {
   render: () => (
     <>
       {variants.map((x) => (
-        <ExpansionCard>
-          <ExpansionCard.Header
-            avatar={<Star aria-hidden />}
-            avatarVariant={x}
-            key={x}
-          >
+        <ExpansionCard variant={x}>
+          <ExpansionCard.Header avatar={<Star aria-hidden />} key={x}>
             <ExpansionCard.Title>{x}</ExpansionCard.Title>
             <ExpansionCard.Description>
               For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -178,8 +170,8 @@ export const AvatarVariants = {
 
 export const DefaultOpen = {
   render: () => (
-    <ExpansionCard defaultOpen>
-      <ExpansionCard.Header avatar={<Star aria-hidden />} avatarVariant="alt3">
+    <ExpansionCard defaultOpen variant="alt3">
+      <ExpansionCard.Header avatar={<Star aria-hidden />}>
         <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         <ExpansionCard.Description>
           For at yrkesskadedekningen skal gjelde, er det som hovedregel krav til
@@ -196,10 +188,11 @@ export const ControlledState = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open, setOpen] = useState(false);
     return (
-      <ExpansionCard open={open} onToggle={setOpen}>
+      <ExpansionCard open={open} onToggle={setOpen} variant="alt3">
         <ExpansionCard.Header
-          avatar={<Star aria-hidden />}
-          avatarVariant="alt3"
+          avatar={
+            <Star aria-hidden style={{ width: "5rem", height: "5rem" }} />
+          }
         >
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>

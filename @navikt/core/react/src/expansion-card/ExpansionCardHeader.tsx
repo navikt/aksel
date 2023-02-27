@@ -7,6 +7,7 @@ import { ExpansionCardContext } from "./ExpansionCard";
  * - Prop for header-size
  * - Prop for hele klikkbar vs bare knapp (default hele)
  * - Undersøke flere varianter
+ * TODO: Small variant 48px høy, 32px knapp
  */
 export interface ExpansionCardHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,18 +16,6 @@ export interface ExpansionCardHeaderProps
    *
    */
   avatar?: React.ReactNode;
-  /**
-   * @default "neutral"
-   */
-  avatarVariant?:
-    | "warning"
-    | "success"
-    | "danger"
-    | "info"
-    | "neutral"
-    | "alt1"
-    | "alt2"
-    | "alt3";
 }
 
 export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
@@ -34,7 +23,7 @@ export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
 >;
 
 const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
-  ({ children, className, avatar, avatarVariant, ...rest }, ref) => {
+  ({ children, className, avatar, ...rest }, ref) => {
     const panelContext = useContext(ExpansionCardContext);
 
     if (panelContext === null) {
@@ -55,10 +44,7 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
       >
         {avatar && (
           <span
-            className={cl(
-              "navds-expansioncard__header-avatar",
-              `navds-expansioncard__header-avatar--${avatarVariant}`
-            )}
+            className={cl("navds-expansioncard__header-avatar")}
             aria-hidden
           >
             {avatar}
