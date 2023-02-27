@@ -2,6 +2,12 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { ExpansionCardContext } from "./ExpansionCard";
 
+/**
+ * TODO:
+ * - Prop for header-size
+ * - Prop for hele klikkbar vs bare knapp (default hele)
+ * - Undersøke flere varianter
+ */
 export interface ExpansionCardHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -65,8 +71,8 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           onClick={() => panelContext.toggleOpen()}
           type="button"
           aria-expanded={panelContext.open}
-          aria-label={panelContext.open ? "Lukk" : "Åpne"}
         >
+          <span className="navds-sr-only">Vis mer</span>
           <svg
             width="24"
             height="24"

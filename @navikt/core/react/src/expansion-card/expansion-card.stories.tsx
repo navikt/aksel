@@ -215,7 +215,7 @@ export const ControlledState = {
 
 export const UUDemo = {
   render: () => (
-    <ExpansionCard defaultOpen>
+    <ExpansionCard>
       <ExpansionCard.Header
         avatar={<Money aria-hidden />}
         avatarVariant="success"
