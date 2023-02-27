@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { createContext, forwardRef, useState } from "react";
+import React, { createContext, forwardRef, useRef, useState } from "react";
 import ExpansionCardContent, {
   ExpansionCardContentType,
 } from "./ExpansionCardContent";
@@ -58,6 +58,8 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
   ({ className, onToggle, open, defaultOpen = false, ...rest }, ref) => {
     const [_open, _setOpen] = useState(defaultOpen);
 
+    const shouldFade = useRef<boolean>(!open || !defaultOpen);
+
     const handleOpen = () => {
       if (open === undefined) {
         const newOpen = !_open;
@@ -66,6 +68,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       } else {
         onToggle?.(!open);
       }
+      shouldFade.current = true;
     };
 
     return (
@@ -76,6 +79,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
           {...rest}
           className={cl("navds-expansioncard", className, {
             "navds-expansioncard--open": open ?? _open,
+            "navds-expansioncard--fade": shouldFade.current,
           })}
           ref={ref}
         />

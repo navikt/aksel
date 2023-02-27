@@ -1,6 +1,5 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import AnimateHeight from "../util/AnimateHeight";
 import { BodyLong } from "../typography/BodyLong";
 import { ExpansionCardContext } from "./ExpansionCard";
 
@@ -28,10 +27,11 @@ const ExpansionCardContent: ExpansionCardContentType = forwardRef(
     }
 
     return (
-      <AnimateHeight
-        height={panelContext.open ? "auto" : 0}
-        duration={200}
-        easing="ease"
+      <div
+        className={cl({
+          "navds-expansioncard__content--closed": !panelContext.open,
+        })}
+        aria-hidden={!panelContext.open}
       >
         <BodyLong
           {...rest}
@@ -41,7 +41,7 @@ const ExpansionCardContent: ExpansionCardContentType = forwardRef(
         >
           {children}
         </BodyLong>
-      </AnimateHeight>
+      </div>
     );
   }
 );
