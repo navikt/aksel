@@ -4,7 +4,7 @@
 }
 
 .navds-list--nested {
-  margin: var(--a-spacing-8) 0 var(--a-spacing-11) 0;
+  margin: var(--a-spacing-4) 0 var(--a-spacing-8) 0;
 }
 
 .navds-list li:not(.navds-list__item--noMargin) {
