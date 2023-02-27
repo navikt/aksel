@@ -2,6 +2,9 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { ExpansionCardContext } from "./ExpansionCard";
 
+/**
+ * TODO: Small variant 48px høy, 32px knapp
+ */
 export interface ExpansionCardHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -9,18 +12,6 @@ export interface ExpansionCardHeaderProps
    *
    */
   avatar?: React.ReactNode;
-  /**
-   * @default "neutral"
-   */
-  avatarVariant?:
-    | "warning"
-    | "success"
-    | "danger"
-    | "info"
-    | "neutral"
-    | "alt1"
-    | "alt2"
-    | "alt3";
 }
 
 export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
@@ -28,7 +19,7 @@ export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
 >;
 
 const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
-  ({ children, className, avatar, avatarVariant, ...rest }, ref) => {
+  ({ children, className, avatar, ...rest }, ref) => {
     const panelContext = useContext(ExpansionCardContext);
 
     if (panelContext === null) {
@@ -49,10 +40,7 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
       >
         {avatar && (
           <span
-            className={cl(
-              "navds-expansioncard__header-avatar",
-              `navds-expansioncard__header-avatar--${avatarVariant}`
-            )}
+            className={cl("navds-expansioncard__header-avatar")}
             aria-hidden
           >
             {avatar}

@@ -42,6 +42,23 @@ export interface ExpansionCardProps
    * @default false
    */
   defaultOpen?: boolean;
+  /**
+   * @default "neutral"
+   */
+  variant?:
+    | "warning"
+    | "warning-filled"
+    | "success"
+    | "success-filled"
+    | "danger"
+    | "info"
+    | "neutral"
+    | "neutral-filled"
+    | "alt1"
+    | "alt2"
+    | "alt3"
+    | "alt3-filled"
+    | "transparent";
 }
 
 export type ExpansionCardContextProps = {
@@ -55,7 +72,17 @@ export const ExpansionCardContext = createContext<ExpansionCardContextProps>({
 });
 
 export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
-  ({ className, onToggle, open, defaultOpen = false, ...rest }, ref) => {
+  (
+    {
+      className,
+      onToggle,
+      open,
+      defaultOpen = false,
+      variant = "neutral",
+      ...rest
+    },
+    ref
+  ) => {
     const [_open, _setOpen] = useState(defaultOpen);
 
     const shouldFade = useRef<boolean>(!open || !defaultOpen);
@@ -77,10 +104,15 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       >
         <div
           {...rest}
-          className={cl("navds-expansioncard", className, {
-            "navds-expansioncard--open": open ?? _open,
-            "navds-expansioncard--fade": shouldFade.current,
-          })}
+          className={cl(
+            "navds-expansioncard",
+            className,
+            `navds-expansioncard--${variant}`,
+            {
+              "navds-expansioncard--open": open ?? _open,
+              "navds-expansioncard--fade": shouldFade.current,
+            }
+          )}
           ref={ref}
         />
       </ExpansionCardContext.Provider>
