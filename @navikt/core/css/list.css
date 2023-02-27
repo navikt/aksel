@@ -3,13 +3,17 @@
   padding: 0;
 }
 
-.navds-list li {
-  margin-top: var(--a-spacing-5);
+.navds-list--nested {
+  margin: var(--a-spacing-8) 0 var(--a-spacing-11) 0;
 }
 
-.navds-list:first-child > ul > li:first-child,
-.navds-list:first-child > ol > li:first-child {
-  margin-top: 0;
+.navds-list li:not(.navds-list__item--noMargin) {
+  margin-bottom: var(--a-spacing-5);
+}
+
+.navds-list:last-child > ul > li:last-child,
+.navds-list:last-child > ol > li:last-child {
+  margin-bottom: 0;
 }
 
 .navds-list ul .navds-list__item {

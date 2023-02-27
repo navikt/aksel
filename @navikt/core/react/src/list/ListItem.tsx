@@ -47,7 +47,13 @@ export const ListItem: ListItemType = forwardRef(
 
     return (
       <ListItemContext.Provider value={{ isNested: hasNestedList }}>
-        <li {...rest} ref={ref} className={cl("navds-list__item", className)}>
+        <li
+          {...rest}
+          ref={ref}
+          className={cl("navds-list__item", className, {
+            "navds-list__item--noMargin": hasNestedList,
+          })}
+        >
           {listType === "ul" && (
             <div
               className={cl({

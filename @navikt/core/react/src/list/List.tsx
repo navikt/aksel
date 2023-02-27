@@ -65,7 +65,13 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
           listType: ListTag,
         }}
       >
-        <div {...rest} ref={ref} className={cl("navds-list", className)}>
+        <div
+          {...rest}
+          ref={ref}
+          className={cl("navds-list", className, {
+            "navds-list--nested": isNested,
+          })}
+        >
           {title && (
             <Heading id={`tittel-${ariaId}`} size="small" as={headingTag}>
               {title}
