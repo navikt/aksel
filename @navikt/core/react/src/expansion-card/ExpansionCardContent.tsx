@@ -31,7 +31,7 @@ const ExpansionCardContent: ExpansionCardContentType = forwardRef(
       <AnimateHeight
         height={panelContext.open ? "auto" : 0}
         duration={200}
-        easing="linear"
+        easing="ease"
       >
         <BodyLong
           {...rest}

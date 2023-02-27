@@ -1,6 +1,5 @@
 .navds-expansioncard {
   border-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
-  background-color: var(--ac-expansioncard-bg, var(--a-surface-default));
 
   --__ac-expansioncard-border-color: var(--ac-expansioncard-border-color, var(--a-border-default));
 }
@@ -18,6 +17,7 @@
   border-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
   box-shadow: inset 1px 0 0 0 var(--__ac-expansioncard-border-color), inset -1px 0 0 0 var(--__ac-expansioncard-border-color),
     inset 0 -1px 0 0 var(--__ac-expansioncard-border-color), inset 0 1px 0 0 var(--__ac-expansioncard-border-color);
+  background-color: var(--ac-expansioncard-bg, var(--a-surface-default));
 }
 
 .navds-expansioncard--open .navds-expansioncard__content {
@@ -30,8 +30,9 @@
   border-end-end-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
   border-end-start-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
   padding: var(--a-spacing-3) var(--a-spacing-4);
-  opacity: 0;
+  opacity: 0.2;
   transition: opacity 150ms ease-in-out;
+  background-color: var(--ac-expansioncard-bg, var(--a-surface-default));
 }
 
 .navds-expansioncard__header--open {
