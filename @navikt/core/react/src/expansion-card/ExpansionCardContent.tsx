@@ -28,7 +28,7 @@ const ExpansionCardContent: ExpansionCardContentType = forwardRef(
 
     return (
       <div
-        className={cl({
+        className={cl("navds-expansioncard__content-wrapper", {
           "navds-expansioncard__content--closed": !panelContext.open,
         })}
         aria-hidden={!panelContext.open}

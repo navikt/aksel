@@ -20,17 +20,20 @@
     inset 0 -1px 0 0 var(--__ac-expansioncard-border-color), inset 0 1px 0 0 var(--__ac-expansioncard-border-color);
 }
 
-.navds-expansioncard--open .navds-expansioncard__content {
+.navds-expansioncard__content-wrapper {
   box-shadow: inset 1px 0 0 0 var(--__ac-expansioncard-border-color), inset -1px 0 0 0 var(--__ac-expansioncard-border-color),
     inset 0 -1px 0 0 var(--__ac-expansioncard-border-color);
+  border-end-end-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
+  border-end-start-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
+  padding: var(--a-spacing-3) var(--a-spacing-4);
+}
+
+.navds-expansioncard--open .navds-expansioncard__content {
   opacity: 1;
   transition: opacity 150ms ease-in-out;
 }
 
 .navds-expansioncard__content {
-  border-end-end-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
-  border-end-start-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
-  padding: var(--a-spacing-3) var(--a-spacing-4);
   opacity: 0.2;
 }
 
