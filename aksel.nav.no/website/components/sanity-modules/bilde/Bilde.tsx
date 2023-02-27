@@ -58,7 +58,7 @@ const Bilde = ({
                 {node?.kilde?.link ? (
                   <>
                     {`${node?.kilde?.prefix}: `}
-                    <NextLink href={node.kilde.link} passHref>
+                    <NextLink href={node.kilde.link} passHref legacyBehavior>
                       <Link className="break-normal">{node?.kilde?.tekst}</Link>
                     </NextLink>
                   </>

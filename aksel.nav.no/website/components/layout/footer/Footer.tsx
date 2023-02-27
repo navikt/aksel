@@ -21,14 +21,22 @@ const Footer = () => {
             </Heading>
             <BodyShort as="ul" className="mt-5 grid gap-2">
               <li>
-                <NextLink href="/god-praksis/artikler/om-aksel" passHref>
+                <NextLink
+                  href="/god-praksis/artikler/om-aksel"
+                  passHref
+                  legacyBehavior
+                >
                   <Link className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200">
                     Om Aksel
                   </Link>
                 </NextLink>
               </li>
               <li>
-                <NextLink href="/god-praksis/artikler/skriv-for-aksel" passHref>
+                <NextLink
+                  href="/god-praksis/artikler/skriv-for-aksel"
+                  passHref
+                  legacyBehavior
+                >
                   <Link className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200">
                     Skriv for Aksel
                   </Link>
@@ -98,23 +106,22 @@ const Footer = () => {
             Arbeids- og velferdsetaten
           </div>
           <span className="mb-1 self-end xl:mb-0" />
-          {/* <BodyShort className="mb-1 self-end xl:mb-0">
-            Redaktør: Eidar Grande Vollan
-          </BodyShort> */}
           <div className="hidden self-end xl:block">
             <p>&copy; {new Date().getFullYear()} NAV</p>
-            <NextLink href="/side/personvernerklaering" passHref>
-              <a className="focus:bg-border-focus-on-inverted focus:text-text-default focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring">
-                Personvernerklæring og informasjonskapsler
-              </a>
+            <NextLink
+              href="/side/personvernerklaering"
+              className="focus:bg-border-focus-on-inverted focus:text-text-default focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring"
+            >
+              Personvernerklæring og informasjonskapsler
             </NextLink>
           </div>
           <div className="block self-end xl:hidden">
             &copy; {new Date().getFullYear()} NAV |{" "}
-            <NextLink href="/side/personvernerklaering" passHref>
-              <a className="focus:bg-border-focus-on-inverted focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring">
-                Personvernerklæring og informasjonskapsler
-              </a>
+            <NextLink
+              href="/side/personvernerklaering"
+              className="focus:bg-border-focus-on-inverted focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring"
+            >
+              Personvernerklæring og informasjonskapsler
             </NextLink>
           </div>
         </div>
