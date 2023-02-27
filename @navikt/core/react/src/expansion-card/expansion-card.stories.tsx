@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { ExpansionCard } from ".";
 import ExpansionCardContent from "./ExpansionCardContent";
 import ExpansionCardHeader from "./ExpansionCardHeader";
-import { Star } from "@navikt/ds-icons";
-import { BodyLong } from "../typography";
+import { Money, Star } from "@navikt/ds-icons";
+import { BodyLong, BodyShort } from "../typography";
 
 export default {
   title: "ds-react/ExpansionCard",
@@ -211,4 +211,23 @@ export const ControlledState = {
       </ExpansionCard>
     );
   },
+};
+
+export const UUDemo = {
+  render: () => (
+    <ExpansionCard defaultOpen>
+      <ExpansionCard.Header
+        avatar={<Money aria-hidden />}
+        avatarVariant="success"
+      >
+        <ExpansionCard.Title>3000 kr</ExpansionCard.Title>
+        <ExpansionCard.Description>
+          <BodyShort spacing>Utbetales til Posten Norge AS, Bærum</BodyShort>
+          <BodyShort>Gjelder sykefravær fra Posten Norge AS, Bærum</BodyShort>
+          <BodyShort>Periode: 4. – 23. oktober 2021</BodyShort>
+        </ExpansionCard.Description>
+      </ExpansionCard.Header>
+      <Content />
+    </ExpansionCard>
+  ),
 };
