@@ -56,9 +56,7 @@
 }
 
 .navds-expansioncard--small .navds-expansioncard__header-avatar {
-  min-width: 2rem;
-  height: 2rem;
-  font-size: 1rem;
+  min-height: 2rem;
 }
 
 /* Button */
