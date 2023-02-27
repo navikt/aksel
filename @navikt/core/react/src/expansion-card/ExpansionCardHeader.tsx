@@ -39,7 +39,6 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
         {...rest}
         className={cl("navds-expansioncard__header", className, {
           "navds-expansioncard__header--open": panelContext.open,
-          "navds-expansioncard__header--closed": !panelContext.open,
         })}
       >
         {avatar && (

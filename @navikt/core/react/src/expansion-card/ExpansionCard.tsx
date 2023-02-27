@@ -51,14 +51,27 @@ export interface ExpansionCardProps
     | "success"
     | "success-filled"
     | "danger"
+    | "danger-filled"
     | "info"
+    | "info-filled"
     | "neutral"
     | "neutral-filled"
     | "alt1"
+    | "alt1-filled"
     | "alt2"
+    | "alt2-filled"
     | "alt3"
     | "alt3-filled"
     | "transparent";
+
+  /**
+   * @defualt "medium"
+   */
+  size?: "medium" | "small";
+  /**
+   *
+   */
+  clickArea?: "full" | "button";
 }
 
 export type ExpansionCardContextProps = {
@@ -79,6 +92,8 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       open,
       defaultOpen = false,
       variant = "neutral",
+      size = "medium",
+      clickArea = "full",
       ...rest
     },
     ref
@@ -108,7 +123,11 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
             "navds-expansioncard",
             className,
             `navds-expansioncard--${variant}`,
+            `navds-expansioncard--${size}`,
+            `navds-expansioncard--clickarea-${clickArea}`,
             {
+              "navds-expansioncard--filled":
+                variant && variant.includes("-filled"),
               "navds-expansioncard--open": open ?? _open,
               "navds-expansioncard--fade": shouldFade.current,
             }

@@ -5,6 +5,11 @@ import { OverridableComponent } from "../util/OverridableComponent";
 interface ExpansionCardTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
+  /**
+   * Changes text-sizing
+   * @default small
+   */
+  size?: "xlarge" | "large" | "medium" | "small" | "xsmall";
 }
 
 export type ExpansionCardTitleType = OverridableComponent<
@@ -13,14 +18,14 @@ export type ExpansionCardTitleType = OverridableComponent<
 >;
 
 export const ExpansionCardTitle: ExpansionCardTitleType = forwardRef(
-  ({ className, as: Component = "h3", ...rest }, ref) => (
+  ({ className, as: Component = "h3", size = "small", ...rest }, ref) => (
     <Component
       {...rest}
       ref={ref}
       className={cl(
         "navds-expansioncard__title",
         "navds-heading",
-        "navds-heading--small",
+        `navds-heading--${size}`,
         className
       )}
     />
