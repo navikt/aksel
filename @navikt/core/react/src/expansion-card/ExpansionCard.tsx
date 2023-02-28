@@ -45,23 +45,7 @@ export interface ExpansionCardProps
   /**
    * @default "neutral"
    */
-  variant?:
-    | "warning"
-    | "warning-filled"
-    | "success"
-    | "success-filled"
-    | "danger"
-    | "danger-filled"
-    | "info"
-    | "info-filled"
-    | "neutral"
-    | "neutral-filled"
-    | "alt1"
-    | "alt1-filled"
-    | "alt2"
-    | "alt2-filled"
-    | "alt3"
-    | "alt3-filled";
+  variant?: "neutral" | "neutral-filled";
 
   /**
    * @defualt "medium"

@@ -1,7 +1,8 @@
 import { Star } from "@navikt/ds-icons";
 import React, { useState } from "react";
 import { ExpansionCard } from ".";
-import { BodyLong } from "../typography";
+import { BodyLong, BodyShort } from "../typography";
+import { Link } from "../link";
 import ExpansionCardContent from "./ExpansionCardContent";
 import ExpansionCardHeader from "./ExpansionCardHeader";
 
@@ -27,24 +28,7 @@ export default {
   ],
 };
 
-const variants = [
-  "warning",
-  "warning-filled",
-  "success",
-  "success-filled",
-  "danger",
-  "danger-filled",
-  "info",
-  "info-filled",
-  "neutral",
-  "neutral-filled",
-  "alt1",
-  "alt1-filled",
-  "alt2",
-  "alt2-filled",
-  "alt3",
-  "alt3-filled",
-] as const;
+const variants = ["neutral", "neutral-filled"] as const;
 
 const Content = () => (
   <ExpansionCard.Content>
@@ -397,7 +381,7 @@ export const Variants = {
             <ExpansionCard.Title>{x}</ExpansionCard.Title>
             <ExpansionCard.Description>
               For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
+              til tid, sted og arbeidsoppgaver.
             </ExpansionCard.Description>
           </ExpansionCard.Header>
           <Content />
@@ -483,7 +467,7 @@ export const Sizes = {
 export const HeadingSizing = {
   render: () => (
     <>
-      {(["xlarge", "large", "medium", "small", "xsmall"] as const).map((x) => (
+      {(["large", "medium", "small"] as const).map((x) => (
         <ExpansionCard>
           <ExpansionCard.Header avatar={<Star aria-hidden />} key={x}>
             <ExpansionCard.Title size={x}>{x}</ExpansionCard.Title>
@@ -517,8 +501,11 @@ export const ClickArea = {
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Only button</ExpansionCard.Title>
           <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
+            <BodyShort spacing as="span">
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid.
+            </BodyShort>{" "}
+            <Link href="#">Lenke til forside</Link>
           </ExpansionCard.Description>
         </ExpansionCard.Header>
         <Content />

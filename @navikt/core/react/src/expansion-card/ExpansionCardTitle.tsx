@@ -9,7 +9,7 @@ interface ExpansionCardTitleProps
    * Changes text-sizing
    * @default small
    */
-  size?: "xlarge" | "large" | "medium" | "small" | "xsmall";
+  size?: "large" | "medium" | "small";
 }
 
 export type ExpansionCardTitleType = OverridableComponent<
