@@ -71,16 +71,18 @@ export const Default = {
           avatar={props?.avatar ? <Star aria-hidden /> : undefined}
         >
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-          <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
-          </ExpansionCard.Description>
+          {props.description && (
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          )}
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
     );
   },
-  args: { avatar: false, open: false, size: "medium" },
+  args: { avatar: false, open: false, size: "medium", description: false },
   argTypes: {
     variant: { control: "select", options: variants },
     size: { control: "select", options: ["medium", "small"] },
@@ -532,11 +534,7 @@ export const ControlledState = {
     const [open, setOpen] = useState(false);
     return (
       <ExpansionCard open={open} onToggle={setOpen}>
-        <ExpansionCard.Header
-          avatar={
-            <Star aria-hidden style={{ width: "5rem", height: "5rem" }} />
-          }
-        >
+        <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
