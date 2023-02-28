@@ -66,9 +66,9 @@ export const Default = {
   render: (props) => {
     return (
       <ExpansionCard
+        {...props}
         open={props?.open || undefined}
         size={props.size}
-        {...props}
       >
         <ExpansionCard.Header
           avatar={props?.avatar ? <Star aria-hidden /> : undefined}
