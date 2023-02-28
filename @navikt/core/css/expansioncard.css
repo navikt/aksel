@@ -146,12 +146,12 @@
  *************************/
 
 .navds-expansioncard--neutral .navds-expansioncard__header-avatar {
-  background-color: var(--ac-expansioncard-avatar-bg-neutral, var(--a-surface-neutral-subtle));
-  color: var(--ac-expansioncard-avatar-icon-neutral, var(--a-icon-default));
+  background-color: var(--ac-expansioncard-neutral-avatar-bg, var(--a-surface-neutral-subtle));
+  color: var(--ac-expansioncard-neutral-avatar-icon, var(--a-icon-default));
 }
 
 .navds-expansioncard--neutral-filled {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-bg-subtle));
+  background-color: var(--ac-expansioncard-neutral-bg, var(--a-bg-subtle));
 }
 
 /*************************
@@ -185,5 +185,5 @@
 }
 
 .navds-expansioncard--clickarea-full.navds-expansioncard:hover:where(:not(.navds-expansioncard--open)) {
-  --__ac-expansioncard-border-color: var(--__ac-expansioncard-border-hover-color, var(--a-border-subtle-hover));
+  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-subtle-hover));
 }
