@@ -116,6 +116,10 @@
   --__ac-expansioncard-open-border-color: var(--ac-expansioncard-open-border-color, var(--a-border-subtle));
 }
 
+.navds-expansioncard__content--closed {
+  display: none;
+}
+
 .navds-expansioncard--fade .navds-expansioncard__content {
   animation: fadeExpansionCard 250ms ease;
 }
@@ -136,24 +140,18 @@
   }
 }
 
-.navds-expansioncard__content--closed {
-  display: none;
-}
-
 /*************************
- * Variants *
- *************************/
-
-/*************************
+ * Variants         *
  * Variants/Neutral *
  *************************/
+
 .navds-expansioncard--neutral .navds-expansioncard__header-avatar {
   background-color: var(--ac-expansioncard-avatar-bg-neutral, var(--a-surface-neutral-subtle));
   color: var(--ac-expansioncard-avatar-icon-neutral, var(--a-icon-default));
 }
 
 .navds-expansioncard--neutral-filled {
-  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-gray-100));
+  background-color: var(--ac-expansioncard-avatar-bg-transparent, var(--a-bg-subtle));
 }
 
 /*************************
