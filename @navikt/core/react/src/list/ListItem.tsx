@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, useContext } from "react";
+import React, { createContext, forwardRef, useContext } from "react";
 import { BodyShort, Label } from "../typography";
 import { ListContext } from "./List";
 
@@ -13,7 +13,7 @@ export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
    */
   title?: string;
   /*
-   * Icon to be used as list marker
+   * Icon to be used as list marker for unordered lists.
    */
   icon?: React.ReactNode;
 }
@@ -23,47 +23,73 @@ export interface ListItemType
     ListItemProps & React.RefAttributes<HTMLLIElement>
   > {}
 
+interface ListItemContextProps {
+  isNested: boolean;
+}
+
+export const ListItemContext = createContext<ListItemContextProps>({
+  isNested: false,
+});
+
 export const ListItem: ListItemType = forwardRef(
   ({ className, children, title, icon, ...rest }, ref) => {
     const { listType } = useContext(ListContext);
 
-    return (
-      <li {...rest} ref={ref} className={cl("navds-list__item", className)}>
-        {listType === "ul" && (
-          <div
-            className={cl({
-              "navds-list__item-marker--icon": icon,
-              "navds-list__item-marker--bullet": !icon,
-            })}
-          >
-            {icon ? (
-              icon
-            ) : (
-              <svg
-                width="6"
-                height="6"
-                viewBox="0 0 6 6"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden
-                focusable={false}
-                role="img"
-              >
-                <rect width="6" height="6" rx="3" fill="currentColor" />
-              </svg>
-            )}
-          </div>
-        )}
+    if (listType === "ol" && icon) {
+      console.warn(
+        "<List />: Icon prop is not supported for ordered lists. Please remove the icon prop."
+      );
+    }
 
-        <BodyShort as="div" size="small" className="navds-list__item-content">
-          {title && (
-            <Label as="p" size="small">
-              {title}
-            </Label>
+    const hasNestedList = React.Children.toArray(children)?.some(
+      (child: any) => child?.type?.componentType === "list"
+    );
+
+    return (
+      <ListItemContext.Provider value={{ isNested: hasNestedList }}>
+        <li
+          {...rest}
+          ref={ref}
+          className={cl("navds-list__item", className, {
+            "navds-list__item--noMargin": hasNestedList,
+          })}
+        >
+          {listType === "ul" && (
+            <div
+              className={cl({
+                "navds-list__item-marker--icon": icon,
+                "navds-list__item-marker--bullet": !icon,
+              })}
+            >
+              {icon ? (
+                icon
+              ) : (
+                <svg
+                  width="6"
+                  height="6"
+                  viewBox="0 0 6 6"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden
+                  focusable={false}
+                  role="img"
+                >
+                  <rect width="6" height="6" rx="3" fill="currentColor" />
+                </svg>
+              )}
+            </div>
           )}
-          {children}
-        </BodyShort>
-      </li>
+
+          <BodyShort as="div" size="small" className="navds-list__item-content">
+            {title && (
+              <Label as="p" size="small">
+                {title}
+              </Label>
+            )}
+            {children}
+          </BodyShort>
+        </li>
+      </ListItemContext.Provider>
     );
   }
 );

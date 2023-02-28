@@ -1,8 +1,8 @@
 import cl from "clsx";
-import React, { createContext, forwardRef } from "react";
+import React, { createContext, forwardRef, useContext } from "react";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util/useId";
-import { ListItem, ListItemType } from "./ListItem";
+import { ListItem, ListItemContext, ListItemType } from "./ListItem";
 
 export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -26,8 +26,10 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   headingTag?: React.ElementType<any>;
 }
 
-interface ListComponent extends React.ForwardRefExoticComponent<ListProps> {
+export interface ListComponent
+  extends React.ForwardRefExoticComponent<ListProps> {
   Item: ListItemType;
+  componentType: string;
 }
 
 interface ListContextProps {
@@ -53,13 +55,22 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
   ) => {
     const ariaId = useId();
 
+    const { isNested } = useContext(ListItemContext);
+
+
     return (
       <ListContext.Provider
         value={{
           listType: ListTag,
         }}
       >
-        <div {...rest} ref={ref} className={cl("navds-list", className)}>
+        <div
+          {...rest}
+          ref={ref}
+          className={cl("navds-list", className, {
+            "navds-list--nested": isNested,
+          })}
+        >
           {title && (
             <Heading id={`tittel-${ariaId}`} size="small" as={headingTag}>
               {title}
@@ -81,5 +92,6 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
 ) as ListComponent;
 
 List.Item = ListItem;
+List.componentType = "list";
 
 export default List;
