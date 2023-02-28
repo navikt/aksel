@@ -1,5 +1,11 @@
 # @navikt/ds-tailwind
 
+## 2.4.2
+
+### Patch Changes
+
+- [#1823](https://github.com/navikt/aksel/pull/1823) [`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8) Thanks [@kschieren](https://github.com/kschieren)! - added support for nested lists
+
 ## 2.4.1
 
 ## 2.4.0
