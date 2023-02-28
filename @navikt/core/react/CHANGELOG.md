@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.4.1
+
+### Patch Changes
+
+- [#1827](https://github.com/navikt/aksel/pull/1827) [`98c06b0be`](https://github.com/navikt/aksel/commit/98c06b0be20debff9969af874d5239ec920fa401) Thanks [@kschieren](https://github.com/kschieren)! - Added fixedWeeks prop to standalone datepicker
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.4.1
+
 ## 2.4.0
 
 ### Minor Changes
