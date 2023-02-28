@@ -57,7 +57,6 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
 
     const { isNested } = useContext(ListItemContext);
 
-    console.log(isNested);
 
     return (
       <ListContext.Provider
