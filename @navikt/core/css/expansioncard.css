@@ -7,6 +7,12 @@
   box-shadow: inset 0 0 0 1px var(--__ac-expansioncard-border-color);
 }
 
+.navds-expansioncard--open {
+  --__ac-expansioncard-open-border-color: var(--ac-expansioncard-open-border-color, var(--a-border-subtle));
+
+  box-shadow: inset 0 0 0 2px var(--__ac-expansioncard-open-border-color);
+}
+
 /*************************
  * Header *
  *************************/
@@ -110,10 +116,6 @@
   border-end-end-radius: var(--__ac-expansioncard-border-radus);
   border-end-start-radius: var(--__ac-expansioncard-border-radus);
   padding: var(--a-spacing-3) var(--a-spacing-4);
-}
-
-.navds-expansioncard--open {
-  --__ac-expansioncard-open-border-color: var(--ac-expansioncard-open-border-color, var(--a-border-subtle));
 }
 
 .navds-expansioncard__content--closed {
