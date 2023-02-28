@@ -1,4 +1,4 @@
-export { TabProps } from "./Tab";
-export { TabListProps } from "./TabList";
-export { TabPanelProps } from "./TabPanel";
-export { default as Tabs, TabsProps } from "./Tabs";
+export { default as Tabs, type TabsProps } from "./Tabs";
+export { type TabProps } from "./Tab";
+export { type TabListProps } from "./TabList";
+export { type TabPanelProps } from "./TabPanel";

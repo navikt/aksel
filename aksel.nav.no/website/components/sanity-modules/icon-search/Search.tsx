@@ -8,13 +8,13 @@ import {
 } from "@/components";
 import meta from "@navikt/ds-icons/meta.json";
 import { BodyLong, BodyShort, Heading, Link, Modal } from "@navikt/ds-react";
-import ModalContent from "./ModalContent";
-import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
+import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Filter, { FilterT } from "./Filter";
 import { categorizeIcons, CategoryT, IconMetaT } from "./iconCategories";
+import ModalContent from "./ModalContent";
 
 const SkeletonElement = () => (
   <div className="vk-icon_button bg-surface-subtle h-32 w-48 shrink rounded" />
@@ -197,7 +197,7 @@ function Links() {
         <a
           target="_blank"
           rel="noreferrer noopener"
-          href="https://github.com/navikt/Designsystemet/tree/master/%40navikt/icons"
+          href="https://github.com/navikt/aksel/tree/main/%40navikt/icons"
           className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
           onClick={() =>
             logAmplitudeEvent("link", {

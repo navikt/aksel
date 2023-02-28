@@ -11,7 +11,7 @@ CMS og nettside for [aksel.nav.no](https://aksel.nav.no/)
 
 ### /website/sanity
 
-Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no/admin)(krever NAV SSO eller invite).
+Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no/admin)(krever NAV SSO).
 
 `production`-datasettet er privat, så man må ha riktige tilganger for å kunne lese/jobbe med dataen der.
 
@@ -19,7 +19,11 @@ Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no
 
 ### Bidrag
 
-Branch `master` blir pusher rett til prod -> aksel.nav.no. For å utvikle nye features brukes branch `next` som ved push publiseres til devmiljø aksel.dev.nav.no (krever naisdevice). Kan også publisere andre branches til dev ved bruk av workflow-dispatch.
+Branch `main` blir pusher rett til prod -> aksel.nav.no. For å utvikle nye features brukes branch `next` som ved push publiseres til devmiljø aksel.dev.nav.no (krever naisdevice). Kan også publisere andre branches til dev ved bruk av workflow-dispatch.
+
+## Kode-eksempler
+
+Alle eksemplene våre ligger under /website/pages/eksempler. For å se endringene live kan man starte opp storybook med `yarn storybook`. Du trenger da ikke tilgang til sanity for å se endringene.
 
 ### Nettside (localhost:3000)
 

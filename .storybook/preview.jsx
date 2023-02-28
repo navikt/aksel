@@ -3,18 +3,15 @@ import "@navikt/ds-css-internal/index.css";
 import "./layout.css";
 
 export const parameters = {
-  /* actions: { argTypesRegex: "^on[A-Z].*" }, */
   options: {
     storySort: {
       method: "",
-      order: ["Intro", "ds-icons", "ds-react", ["form"], ["Default"]],
+      order: ["Intro", "ds-react", ["form"], ["Default"], "ds-icons"],
       locales: "",
     },
   },
-  viewMode: "docs",
   layout: "centered",
   backgrounds: {
-    default: "Canvas",
     values: [
       {
         name: "Canvas",
@@ -32,7 +29,6 @@ export const globalTypes = {
   theme: {
     name: "Theme",
     description: "Global theme for components",
-    defaultValue: "light",
     toolbar: {
       icon: "circlehollow",
       items: [
@@ -44,10 +40,24 @@ export const globalTypes = {
   },
 };
 
-export const withTheme = (StoryFn, context) => (
-  <div data-theme={context.parameters.theme || context.globals.theme} lang="no">
-    <StoryFn />
-  </div>
-);
+export const withTheme = (StoryFn, context) => {
+  const foundCss =
+    context.parameters.fileName.startsWith("./@navikt") &&
+    document.querySelector('[data-vite-dev-id$="dist/tw.css"]');
+  return (
+    <div
+      data-theme={context.parameters.theme || context.globals.theme || "light"}
+      lang="no"
+      id="root"
+    >
+      {foundCss && (
+        <div className="css-warning">
+          OBS! Ser ut som CSS fra aksel.nav.no er lastet. Refresh siden!
+        </div>
+      )}
+      <StoryFn />
+    </div>
+  );
+};
 
 export const decorators = [withTheme];

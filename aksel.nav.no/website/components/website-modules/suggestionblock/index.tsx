@@ -1,5 +1,5 @@
 import { LightBulb } from "@navikt/ds-icons";
-import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Button, Heading } from "@navikt/ds-react";
 import cl from "classnames";
 import { ChangeLogIconOutline } from "components/assets";
 
@@ -23,12 +23,14 @@ const SuggestionBlockComponent = ({
           {options[variant]?.heading}
         </Heading>
         <BodyLong className="mt-2">{options[variant]?.text}</BodyLong>
-        <a
+        <Button
+          variant="secondary-neutral"
+          as="a"
           href={options[variant].link + reference}
-          className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus mt-4 w-fit rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
+          className="mt-4 w-fit"
         >
           Send innspill
-        </a>
+        </Button>
       </div>
     </div>
   );
@@ -55,7 +57,7 @@ export const SuggestionBlock = ({
   return (
     <div
       className={cl(
-        "ring-border-subtle flex justify-between rounded-lg px-6 py-4 ring-1",
+        "ring-border-subtle flex justify-between gap-3 rounded-lg px-6 py-4 ring-1",
         {
           "mb-0 mt-5": variant === "ikon" || variant === "ikon-ny",
           "mb-12": variant !== "ikon" && variant !== "ikon-ny",
@@ -67,18 +69,19 @@ export const SuggestionBlock = ({
         <LightBulb aria-hidden className="shrink-0 text-2xl" />
         {options[variant]?.text}
       </BodyShort>
-      <a
+      <Button
+        variant="secondary-neutral"
+        as="a"
         href={options[variant]?.link + reference}
-        className="border-border-strong active:bg-surface-active hover:bg-surface-hover focus-visible:shadow-focus rounded border-[2px] px-3 py-[6px] font-semibold focus:outline-none"
       >
         Send forslag
-      </a>
+      </Button>
     </div>
   );
 };
 
 const issueUrl =
-  "https://github.com/navikt/Designsystemet/issues/new?assignees=olejorgenbakken";
+  "https://github.com/navikt/aksel/issues/new?assignees=olejorgenbakken";
 
 const options: {
   [key: string]: {
@@ -114,7 +117,7 @@ const options: {
     text: "Har du innspill til ikonet?",
     link:
       issueUrl +
-      "&labels=forespørsel+🥰%2Cnytt+✨&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
+      "&labels=forespørsel+🥰%2Cnytt+✨%2Cikoner+🖼&template=update-icon.yml&title=%5BTilbakemelding%20p%C3%A5%20ikon%5D%3A+",
   },
   "komponent-ny": {
     text: "Denne komponenten er ny eller oppdatert. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",

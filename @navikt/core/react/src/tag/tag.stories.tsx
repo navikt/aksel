@@ -75,14 +75,17 @@ const variants: Array<
   "alt3-filled",
 ];
 
-export const Default = (props) => (
-  <Tag variant={props.variant} size={props.size}>
-    {props.children}
-  </Tag>
-);
+export const Default = {
+  render: (props) => (
+    <Tag variant={props.variant} size={props.size}>
+      {props.children}
+    </Tag>
+  ),
 
-Default.args = {
-  children: "Id elit esse",
+  args: {
+    children: "Id elit esse",
+    variant: "info",
+  },
 };
 
 export const Small = () => {

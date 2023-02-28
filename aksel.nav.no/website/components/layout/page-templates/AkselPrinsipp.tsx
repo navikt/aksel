@@ -101,7 +101,7 @@ const AkselPrinsippTemplate = ({
                   <BodyShort
                     size="small"
                     as="span"
-                    className="text-text-subtle whitespace-nowrap"
+                    className="text-text-subtle "
                   >
                     {dateStr(data?._updatedAt)}
                   </BodyShort>
@@ -161,10 +161,7 @@ const AkselPrinsippTemplate = ({
                           ))}
                         </BodyShort>
                       )}
-                      <BodyShort
-                        as="span"
-                        className="text-text-subtle whitespace-nowrap"
-                      >
+                      <BodyShort as="span" className="text-text-subtle ">
                         Publisert:{" "}
                         {dateStr(data?.publishedAt ?? data?._updatedAt)}
                       </BodyShort>

@@ -10,7 +10,7 @@ import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { lazy } from "react";
 import NotFotfund from "../404";
 
@@ -84,8 +84,8 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
               <Image
                 src={urlFor(page.pictogram.url).auto("format").url()}
                 decoding="sync"
-                width="72px"
-                height="72px"
+                width="72"
+                height="72"
                 layout="fixed"
                 priority
                 aria-hidden

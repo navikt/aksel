@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "2.1.6",
+  "version": "2.4.0",
   "description": "Aksel react-components for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/Designsystemet.git"
+    "url": "git+https://github.com/navikt/aksel.git"
   },
   "sideEffects": false,
   "main": "./cjs/index.js",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.17.0",
-    "@navikt/ds-icons": "^2.1.6",
+    "@navikt/ds-icons": "^2.4.0",
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^1.2.1",

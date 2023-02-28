@@ -12,6 +12,11 @@ const Example = () => {
 
 export default withDsExample(Example);
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 4,
   desc: "Beskriver noe som er farlig, tjenestebrudd, irreversibelt, etc.",

@@ -246,7 +246,7 @@
 }
 
 .navdsi-timeline__zoom-button:not([aria-pressed="true"]):hover {
-  background: var(--ac-timeline-zoom-hover, var(--a-surface-action-subtle-hover));
+  background: var(--ac-timeline-zoom-bg-hover, var(--a-surface-action-subtle-hover));
 }
 
 .navdsi-timeline__zoom-button[aria-pressed="true"] {

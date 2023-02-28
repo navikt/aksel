@@ -41,8 +41,9 @@ function PreviewBanner(): JSX.Element {
           <Link
             href="https://aksel.nav.no/god-praksis/artikler/ny-redaktor-i-aksel"
             passHref
+            className="underline"
           >
-            <a className="underline">Les mer om hvordan du får tilgang</a>
+            Les mer om hvordan du får tilgang
           </Link>
         </div>
       </>

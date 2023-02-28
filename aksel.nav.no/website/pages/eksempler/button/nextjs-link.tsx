@@ -4,13 +4,18 @@ import Link from "next/link";
 
 const Example = () => {
   return (
-    <Link href="#" passHref>
+    <Link href="#" passHref legacyBehavior>
       <Button as="a">Lenke</Button>
     </Link>
   );
 };
 
 export default withDsExample(Example);
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
 
 export const args = {
   index: 10,

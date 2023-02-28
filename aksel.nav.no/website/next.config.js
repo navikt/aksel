@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 
-const withTM = require("next-transpile-modules")(["@navikt/ds-tokens"]);
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -51,75 +50,72 @@ const securityHeaders = [
 ];
 
 const config = () =>
-  withBundleAnalyzer(
-    withTM({
-      serverRuntimeConfig: {
-        // Will only be available on the server side
-        azureAppClientId: process.env.AZURE_APP_CLIENT_ID,
-        azureJwksUri: process.env.AZURE_OPENID_CONFIG_JWKS_URI,
-        azureAppIssuer: process.env.AZURE_OPENID_CONFIG_ISSUER,
-        azureAppWellKnownUrl: process.env.AZURE_APP_WELL_KNOWN_URL,
-        azureAppJWK: process.env.AZURE_APP_JWK,
+  withBundleAnalyzer({
+    transpilePackages: ["@navikt/ds-tokens"],
+    serverRuntimeConfig: {
+      // Will only be available on the server side
+      azureAppClientId: process.env.AZURE_APP_CLIENT_ID,
+      azureJwksUri: process.env.AZURE_OPENID_CONFIG_JWKS_URI,
+      azureAppIssuer: process.env.AZURE_OPENID_CONFIG_ISSUER,
+      azureAppWellKnownUrl: process.env.AZURE_APP_WELL_KNOWN_URL,
+      azureAppJWK: process.env.AZURE_APP_JWK,
+    },
+    publicRuntimeConfig: {
+      NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
+    },
+    async headers() {
+      return [
+        {
+          source: "/:path*",
+          headers: securityHeaders,
+        },
+      ];
+    },
+    rewrites: async () => [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap",
       },
-      publicRuntimeConfig: {
-        NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
-      },
-      async headers() {
-        return [
-          {
-            source: "/:path*",
-            headers: securityHeaders,
-          },
-        ];
-      },
-      async redirects() {
-        return [
-          {
-            source: "/studio",
-            destination: "/admin",
-            permanent: true,
-          },
-          {
-            source: "/storybook",
-            destination:
-              "https://master--5f801fb2aea7820022de2936.chromatic.com/",
-            permanent: true,
-          },
-          {
-            source: "/prinsipper",
-            destination: "/",
-            permanent: false,
-          },
-          {
-            source: "/preview/:slug*",
-            destination: "/api/preview?slug=:slug*",
-            permanent: true,
-          },
-        ];
-      },
+    ],
+    async redirects() {
+      return [
+        {
+          source: "/studio",
+          destination: "/admin",
+          permanent: true,
+        },
+        {
+          source: "/storybook",
+          destination: "https://main--5f801fb2aea7820022de2936.chromatic.com/",
+          permanent: false,
+        },
+        {
+          source: "/prinsipper",
+          destination: "/",
+          permanent: false,
+        },
+        {
+          source: "/preview/:slug*",
+          destination: "/api/preview?slug=:slug*",
+          permanent: true,
+        },
+      ];
+    },
+    webpack(config) {
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ["@svgr/webpack"],
+      });
 
-      webpack(config) {
-        config.module.rules.push({
-          test: /\.svg$/,
-          use: ["@svgr/webpack"],
-        });
-
-        return config;
-      },
-      images: {
-        domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
-        dangerouslyAllowSVG: true,
-      },
-      /* swcMinify: true,
-      httpAgentOptions: {
-        keepAlive: false,
-      }, */
-    })
-  );
+      return config;
+    },
+    images: {
+      domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
+      dangerouslyAllowSVG: true,
+    },
+  });
 
 if (process.env.NODE_ENV === "production") {
-  /* console.log("sentry is enabled");
-  module.exports = withSentryConfig(config(), { silent: true }); */
   module.exports = config();
 } else {
   module.exports = config();

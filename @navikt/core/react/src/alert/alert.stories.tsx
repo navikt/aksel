@@ -1,26 +1,16 @@
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Alert } from ".";
-import { BodyLong, Heading as DsHeading } from "..";
+import { BodyLong, Heading as DsHeading, Link } from "..";
 
-export default {
+const meta: Meta<typeof Alert> = {
   title: "ds-react/Alert",
   component: Alert,
-  argTypes: {
-    variant: {
-      defaultValue: "info",
-      control: {
-        type: "radio",
-        options: ["error", "warning", "info", "success"],
-      },
-    },
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    },
-  },
 };
+
+export default meta;
+
+type Story = StoryObj<typeof Alert>;
 
 const variants: Array<"error" | "warning" | "info" | "success"> = [
   "error",
@@ -29,20 +19,38 @@ const variants: Array<"error" | "warning" | "info" | "success"> = [
   "success",
 ];
 
-export const Default = (props) => (
-  <Alert
-    variant={props.variant}
-    size={props.size}
-    fullWidth={props.fullWidth}
-    inline={props.inline}
-  >
-    {props.children}
-  </Alert>
-);
+export const Default: Story = {
+  render: (props) => (
+    <Alert
+      variant={props.variant}
+      size={props.size}
+      fullWidth={props.fullWidth}
+      inline={props.inline}
+    >
+      {props.children}
+    </Alert>
+  ),
 
-Default.args = {
-  children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
-  fullWidth: false,
+  args: {
+    children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
+    fullWidth: false,
+    variant: "info",
+    size: "medium",
+  },
+  argTypes: {
+    variant: {
+      control: {
+        type: "radio",
+      },
+      options: ["info", "error", "warning", "success"],
+    },
+    size: {
+      control: {
+        type: "radio",
+      },
+      options: ["medium", "small"],
+    },
+  },
 };
 
 export const Small = () => {
@@ -124,6 +132,18 @@ export const Heading = () => {
           sint commodo consequat eu aute.
         </BodyLong>
       </Alert>
+    </div>
+  );
+};
+
+export const Links = () => {
+  return (
+    <div className="colgap">
+      {variants.map((variant, i) => (
+        <Alert key={variant} variant={variant}>
+          <Link href="#">Id elit esse enim reprehenderit</Link>
+        </Alert>
+      ))}
     </div>
   );
 };

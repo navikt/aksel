@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { ReadMore } from ".";
 
@@ -14,25 +15,27 @@ export default {
   },
 };
 
-export const Default = (props) => {
-  const [state, setState] = useState(false);
+export const Default = {
+  render: (props) => {
+    const [state, setState] = useState(false);
 
-  return (
-    <ReadMore
-      open={props.controlled ? state : undefined}
-      onClick={() => setState((x) => !x)}
-      header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
-      size={props.size}
-    >
-      Command station, this is ST 321. Code Clearance Blue. We're starting our
-      approach. Deactivate the security shield.
-    </ReadMore>
-  );
-};
+    return (
+      <ReadMore
+        open={props.controlled ? state : undefined}
+        onClick={() => setState((x) => !x)}
+        header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
+        size={props.size}
+      >
+        Command station, this is ST 321. Code Clearance Blue. We're starting our
+        approach. Deactivate the security shield.
+      </ReadMore>
+    );
+  },
 
-Default.args = {
-  controlled: false,
-  size: "medium",
+  args: {
+    controlled: false,
+    size: "medium",
+  },
 };
 
 export const Small = () => (

@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { LinkPanel } from "..";
 
@@ -14,23 +14,25 @@ export default {
   },
 } as Meta;
 
-export const Default = (props: any) => {
-  return (
-    <LinkPanel href="#" border={props?.border}>
-      <LinkPanel.Title>
-        Consectetur eu duis aliqua eu irure fugiat fugiat eu.
-      </LinkPanel.Title>
-      {props.description && (
-        <LinkPanel.Description>
-          Aliqua id aliquip Lorem esse
-        </LinkPanel.Description>
-      )}
-    </LinkPanel>
-  );
-};
+export const Default = {
+  render: (props: any) => {
+    return (
+      <LinkPanel href="#" border={props?.border}>
+        <LinkPanel.Title>
+          Consectetur eu duis aliqua eu irure fugiat fugiat eu.
+        </LinkPanel.Title>
+        {props.description && (
+          <LinkPanel.Description>
+            Aliqua id aliquip Lorem esse
+          </LinkPanel.Description>
+        )}
+      </LinkPanel>
+    );
+  },
 
-Default.args = {
-  description: false,
+  args: {
+    description: false,
+  },
 };
 
 export const Description = () => {

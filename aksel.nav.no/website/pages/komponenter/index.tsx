@@ -1,15 +1,92 @@
 import { komponentLandingQuery, SanityT, SidebarT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
-import { Heading, Ingress } from "@navikt/ds-react";
+import { logAmplitudeEvent } from "@/utils";
+import { BodyShort, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
+import {
+  GithubIcon,
+  YarnIcon,
+  FigmaIcon,
+  ChangelogIcon,
+} from "components/assets";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview";
-import { SuggestionBlock } from "components/website-modules/SuggestionBlock";
+import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
+
+function Links() {
+  return (
+    <BodyShort
+      as="span"
+      size="small"
+      className="text-text-subtle mb-6 flex flex-wrap gap-4"
+    >
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://github.com/navikt/aksel/tree/main/%40navikt"
+        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker ikonside",
+            til: "github",
+          })
+        }
+      >
+        <GithubIcon /> Github
+      </a>
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://yarnpkg.com/package/@navikt/ds-react"
+        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker ikonside",
+            til: "yarn",
+          })
+        }
+      >
+        <YarnIcon />
+        Yarn
+      </a>
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="/grunnleggende/kode/endringslogg"
+        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker komponenter",
+            til: "endringslogg",
+          })
+        }
+      >
+        <ChangelogIcon />
+        Endringslogg
+      </a>
+
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://www.figma.com/@nav_aksel"
+        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker ikonside",
+            til: "figma",
+          })
+        }
+      >
+        <FigmaIcon /> Figma
+      </a>
+    </BodyShort>
+  );
+}
 
 const Page = ({
   page,
@@ -58,6 +135,7 @@ const Page = ({
         intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
         pageProps={page}
       >
+        <Links />
         <SuggestionBlock variant="komponenter" />
         {komponentKategorier
           .filter(
