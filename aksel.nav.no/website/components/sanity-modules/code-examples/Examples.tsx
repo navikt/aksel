@@ -109,7 +109,7 @@ const ComponentExamples = ({
                     height={frameState}
                     onLoad={() => handleExampleLoad()}
                     id={iframeId}
-                    aria-label="Komponent eksempler"
+                    aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
                     className={cl(
                       "min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]"
                     )}
@@ -123,7 +123,7 @@ const ComponentExamples = ({
                       ".tsx",
                       ""
                     )}`}
-                    className="text-gray-900"
+                    className="si-ignore text-gray-900"
                     target="_blank"
                   >
                     Åpne i nytt vindu
