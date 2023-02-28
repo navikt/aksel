@@ -90,6 +90,10 @@
   transform: translateY(2px);
 }
 
+.navds-expansioncard--small .navds-expansioncard__header-button:hover .navds-expansioncard__icon {
+  transform: translateY(1px);
+}
+
 .navds-expansioncard__header-button:focus {
   outline: none;
 }
@@ -100,6 +104,13 @@
 
 .navds-expansioncard__header--open .navds-expansioncard__header-button:hover .navds-expansioncard__icon {
   transform: translateY(-2px) rotate(180deg);
+}
+
+.navds-expansioncard--small
+  .navds-expansioncard__header--open
+  .navds-expansioncard__header-button:hover
+  .navds-expansioncard__icon {
+  transform: translateY(-1px) rotate(180deg);
 }
 
 /*************************
