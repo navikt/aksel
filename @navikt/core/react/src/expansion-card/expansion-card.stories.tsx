@@ -85,7 +85,13 @@ export const Default = {
       </ExpansionCard>
     );
   },
-  args: { avatar: false, open: false, size: "medium", description: false },
+  args: {
+    avatar: false,
+    open: false,
+    size: "medium",
+    description: false,
+    variant: "neutral",
+  },
   argTypes: {
     variant: { control: "select", options: variants },
     size: { control: "select", options: ["medium", "small"] },
