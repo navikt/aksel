@@ -65,9 +65,12 @@ const Content = () => (
 export const Default = {
   render: (props) => {
     return (
-      <ExpansionCard open={props?.open || undefined} size={props.size}>
+      <ExpansionCard
+        open={props?.open || undefined}
+        size={props.size}
+        {...props}
+      >
         <ExpansionCard.Header
-          {...props}
           avatar={props?.avatar ? <Star aria-hidden /> : undefined}
         >
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
