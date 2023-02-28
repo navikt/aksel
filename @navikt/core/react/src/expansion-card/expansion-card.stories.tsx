@@ -359,12 +359,9 @@ export const Avatar = {
               </defs>
             </svg>
           }
+          hideAvatarBg
         >
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-          <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
-          </ExpansionCard.Description>
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
