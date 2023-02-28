@@ -27,21 +27,17 @@ const ExpansionCardContent: ExpansionCardContentType = forwardRef(
     }
 
     return (
-      <div
-        className={cl("navds-expansioncard__content-wrapper", {
+      <BodyLong
+        {...rest}
+        ref={ref}
+        as="div"
+        className={cl("navds-expansioncard__content", {
           "navds-expansioncard__content--closed": !panelContext.open,
         })}
         aria-hidden={!panelContext.open}
       >
-        <BodyLong
-          {...rest}
-          ref={ref}
-          as="div"
-          className={cl("navds-expansioncard__content", className)}
-        >
-          {children}
-        </BodyLong>
-      </div>
+        {children}
+      </BodyLong>
     );
   }
 );
