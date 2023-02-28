@@ -100,7 +100,7 @@ export const Description = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard variant="alt3">
+      <ExpansionCard>
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -117,13 +117,13 @@ export const Description = {
 export const Avatar = {
   render: () => (
     <>
-      <ExpansionCard variant="alt3">
+      <ExpansionCard>
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard variant="alt3">
+      <ExpansionCard>
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -245,7 +245,7 @@ export const Avatar = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard variant="alt3-filled">
+      <ExpansionCard>
         <ExpansionCard.Header
           avatar={
             <svg
@@ -405,7 +405,7 @@ export const Sizes = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard variant="alt3">
+      <ExpansionCard>
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -421,7 +421,7 @@ export const Sizes = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard variant="alt3">
+      <ExpansionCard>
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
@@ -438,7 +438,7 @@ export const Sizes = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard size="small" variant="alt3">
+      <ExpansionCard size="small">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -454,7 +454,7 @@ export const Sizes = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard size="small" variant="alt3">
+      <ExpansionCard size="small">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
@@ -486,7 +486,7 @@ export const HeadingSizing = {
 export const ClickArea = {
   render: () => (
     <>
-      <ExpansionCard variant="alt3" clickArea="full">
+      <ExpansionCard clickArea="full">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Full clickarea</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -497,7 +497,7 @@ export const ClickArea = {
         <Content />
       </ExpansionCard>
 
-      <ExpansionCard variant="alt3" clickArea="button">
+      <ExpansionCard clickArea="button">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Only button</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -516,7 +516,7 @@ export const ClickArea = {
 
 export const DefaultOpen = {
   render: () => (
-    <ExpansionCard defaultOpen variant="alt3">
+    <ExpansionCard defaultOpen>
       <ExpansionCard.Header avatar={<Star aria-hidden />}>
         <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         <ExpansionCard.Description>
@@ -534,7 +534,7 @@ export const ControlledState = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open, setOpen] = useState(false);
     return (
-      <ExpansionCard open={open} onToggle={setOpen} variant="alt3">
+      <ExpansionCard open={open} onToggle={setOpen}>
         <ExpansionCard.Header
           avatar={
             <Star aria-hidden style={{ width: "5rem", height: "5rem" }} />

@@ -83,7 +83,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
   ) => {
     const [_open, _setOpen] = useState(defaultOpen);
 
-    const shouldFade = useRef<boolean>(!open || !defaultOpen);
+    const shouldFade = useRef<boolean>(!(Boolean(open) || defaultOpen));
 
     const handleOpen = () => {
       if (open === undefined) {
