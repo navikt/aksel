@@ -24,6 +24,11 @@ interface DatePickerStandaloneDefaultProps
    * Datepicker classname
    */
   className?: string;
+  /**
+   * If datepicker should be fixed to 6 weeks, regardless of actual weeks in month
+   * @default true
+   */
+  fixedWeeks?: boolean;
 }
 
 export type DatePickerStandaloneProps = DatePickerStandaloneDefaultProps &
@@ -50,6 +55,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       id,
       defaultSelected,
       onSelect,
+      fixedWeeks = true,
       ...rest
     },
     ref
@@ -113,7 +119,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             weekend: "rdp-day__weekend",
           }}
           showWeekNumber={showWeekNumber}
-          fixedWeeks
+          fixedWeeks={fixedWeeks}
           showOutsideDays
           {...omit(rest, ["onSelect"])}
         />
