@@ -31,7 +31,7 @@ const NavItem = ({
         }
       )}
     >
-      <Link href={`/${link.slug}`} passHref>
+      <Link href={`/${link.slug}`} passHref legacyBehavior>
         <BodyShort
           as="a"
           size="small"

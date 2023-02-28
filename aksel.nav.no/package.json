@@ -15,16 +15,16 @@
     "website"
   ],
   "dependencies": {
-    "@navikt/ds-codemod": "^2.4.0",
-    "@navikt/ds-css": "^2.4.0",
-    "@navikt/ds-css-internal": "^2.4.0",
-    "@navikt/ds-icons": "^2.4.0",
-    "@navikt/ds-react": "^2.4.0",
-    "@navikt/ds-react-internal": "^2.4.0",
-    "@navikt/ds-tailwind": "^2.4.0",
-    "@navikt/ds-tokens": "^2.4.0"
+    "@navikt/ds-codemod": "^2.4.2",
+    "@navikt/ds-css": "^2.4.2",
+    "@navikt/ds-css-internal": "^2.4.2",
+    "@navikt/ds-icons": "^2.4.2",
+    "@navikt/ds-react": "^2.4.2",
+    "@navikt/ds-react-internal": "^2.4.2",
+    "@navikt/ds-tailwind": "^2.4.2",
+    "@navikt/ds-tokens": "^2.4.2"
   },
   "devDependencies": {
-    "prettier-plugin-tailwindcss": "^0.1.13"
+    "prettier-plugin-tailwindcss": "^0.2.3"
   }
 }

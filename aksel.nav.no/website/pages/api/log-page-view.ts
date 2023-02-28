@@ -85,7 +85,7 @@ export default async function logPageView(
     // If last week is not same as current week, add new week
     await client
       .patch(metrics._id)
-      .prepend("weekObj.weeks", [
+      .prepend("weeksObj.weeks", [
         {
           week: format(new Date(), "yyyy-MM-dd"),
           views: 1,
