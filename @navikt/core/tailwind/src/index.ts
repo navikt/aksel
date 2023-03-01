@@ -2,6 +2,7 @@
 import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import { writeFileSync } from "fs";
 import { getColors } from "./colors";
+import { getBreakpoints } from "./getBreakpoints";
 import kebabCase from "./kebabCase";
 import Reducer from "./reducer";
 
@@ -16,6 +17,7 @@ const tokens = Object.entries(TokensBuild).reduce(
 const config = {
   theme: {
     colors: getColors(tokens),
+    screen: getBreakpoints(tokens),
     extend: {
       spacing: Reducer(tokens, ["spacing"]),
       zIndex: Reducer(tokens, ["z-index"]),
