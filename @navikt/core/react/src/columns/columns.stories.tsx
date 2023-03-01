@@ -68,6 +68,60 @@ export const CardsStacking = {
   ),
 };
 
+export const PageLayout = {
+  render: () => (
+    <div
+      style={{
+        maxWidth: 900,
+        margin: "0 auto",
+        background: "rgba(0 0 0 / 0.2)",
+        padding: "2rem 1rem",
+      }}
+    >
+      <Columns
+        gap={{ xs: "4", sm: "6", lg: "8" }}
+        columns={{ sm: 1, md: "1fr auto" }}
+      >
+        <Content text="Content" />
+        <Sidebar text="Sidebar" />
+      </Columns>
+    </div>
+  ),
+};
+
+function Content({ text }) {
+  return (
+    <div
+      style={{
+        background: "var(--a-deepblue-900)",
+        height: "40rem",
+        width: "100%",
+        maxWidth: "600px",
+        color: "white",
+      }}
+    >
+      {text}
+    </div>
+  );
+}
+
+function Sidebar({ text }) {
+  return (
+    <div
+      style={{
+        background: "var(--a-deepblue-900)",
+        height: "40rem",
+        width: "250px",
+        color: "white",
+      }}
+      className="hideOnMd"
+    >
+      {text}
+      <style>{`@media (max-width: 779px){.hideOnMd{display: none;}}`}</style>
+    </div>
+  );
+}
+
 function Placeholder({ text }) {
   return (
     <div
