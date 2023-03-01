@@ -15,23 +15,23 @@ p.override-text-no-max {
 }
 
 .dynamic-wrapper {
-  @apply max-w-aksel xs:w-[90%] mx-auto;
+  @apply max-w-aksel mx-auto sm:w-[90%];
 }
 
 .dynamic-wrapper-prose {
-  @apply xs:w-[90%] mx-auto max-w-prose;
+  @apply mx-auto max-w-prose sm:w-[90%];
 }
 
 .dynamic-wrapper-left {
-  @apply xs:w-[90%] max-w-prose;
+  @apply max-w-prose sm:w-[90%];
 }
 
 .dynamic-wrapper-2xl {
-  @apply xs:w-[90%] mx-auto max-w-2xl;
+  @apply mx-auto max-w-2xl sm:w-[90%];
 }
 
 .card-grid-3-1 {
-  @apply grid gap-3 sm:grid-cols-2 md:gap-6 lg:grid-cols-3;
+  @apply grid gap-3 md:grid-cols-2 md:gap-6 lg:grid-cols-3;
 }
 
 .card-grid-2-1 {

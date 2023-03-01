@@ -27,7 +27,7 @@ const RelatertInnhold = ({
       className={cl(
         "relatedCard",
         "mb-8 max-w-4xl gap-4",
-        "xs:grid-cols-2 grid w-full"
+        "grid w-full sm:grid-cols-2"
       )}
     >
       {node.lenker.map((x) => (

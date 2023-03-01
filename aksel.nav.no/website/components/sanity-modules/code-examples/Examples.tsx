@@ -116,7 +116,7 @@ const ComponentExamples = ({
                     title="Kode-eksempler"
                   />
                 </div>
-                <div className="xs:justify-end mb-2 flex justify-center gap-2 rounded-b border border-gray-300 px-2 py-1 text-base ">
+                <div className="mb-2 flex justify-center gap-2 rounded-b border border-gray-300 px-2 py-1 text-base sm:justify-end ">
                   <CodeSandbox code={fil.innhold.trim()} />
                   <Link
                     href={`/eksempler/${node.dir.title}/${fil.navn.replace(
