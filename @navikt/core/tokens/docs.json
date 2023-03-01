@@ -1,4 +1,15 @@
 {
+  "breakpoints": [
+    { "name": "--a-breakpoint-xs", "value": "0" },
+    { "name": "--a-breakpoint-sm", "value": "480px" },
+    { "name": "--a-breakpoint-sm-down", "value": "479px" },
+    { "name": "--a-breakpoint-md", "value": "768px" },
+    { "name": "--a-breakpoint-md-down", "value": "767px" },
+    { "name": "--a-breakpoint-lg", "value": "1024px" },
+    { "name": "--a-breakpoint-lg-down", "value": "1023px" },
+    { "name": "--a-breakpoint-xl", "value": "1280px" },
+    { "name": "--a-breakpoint-xl-down", "value": "1279px" }
+  ],
   "font": [
     {
       "name": "--a-font-family",
