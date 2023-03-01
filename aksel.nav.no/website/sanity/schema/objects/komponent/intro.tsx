@@ -17,14 +17,14 @@ export const KomponentIntro = defineType({
     defineField({
       type: "array",
       name: "brukes_til",
-      title: "Egnet til å:",
+      title: "Egnet til:",
       of: [{ type: "string" }],
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       type: "array",
       name: "brukes_ikke_til",
-      title: "Vurder noe annet: (optional)",
+      title: "Uegnet til: (optional)",
       of: [{ type: "string" }],
     }),
   ],
