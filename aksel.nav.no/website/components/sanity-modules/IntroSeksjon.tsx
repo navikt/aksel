@@ -23,7 +23,7 @@ const Intro = ({
       <div>
         <>
           <Label as="p" className="mb-3">
-            Egnet til å:
+            Egnet til:
           </Label>
           <ul className="mb-7 list-disc">
             {node.brukes_til.map((x) => (
@@ -39,7 +39,7 @@ const Intro = ({
         {node?.brukes_ikke_til && (
           <>
             <Label as="p" className="mb-3">
-              Vurder noe annet:
+              Uegnet til:
             </Label>
             <ul className="list-disc">
               {node.brukes_ikke_til.map((x) => (
