@@ -1,5 +1,11 @@
 # @navikt/ds-tailwind
 
+## 2.5.0
+
+### Minor Changes
+
+- [#1832](https://github.com/navikt/aksel/pull/1832) [`8893b5c82`](https://github.com/navikt/aksel/commit/8893b5c82daf7c23897019fda912e702a1f05eaa) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Breakpoint-tokens for ds-tokens og ds-tailwind
+
 ## 2.4.3
 
 ## 2.4.2
