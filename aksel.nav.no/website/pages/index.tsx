@@ -111,7 +111,7 @@ const introcards = [
 
 const IntroCards = () => {
   return (
-    <ul className="centered-layout xs:mb-36 mb-40 grid w-full max-w-screen-md grid-cols-2 gap-4 md:gap-6">
+    <ul className="centered-layout mb-40 grid w-full max-w-screen-md grid-cols-2 gap-4 sm:mb-36 md:gap-6">
       {introcards.map(({ icon: Icon, title, desc, href }) => (
         <li key={title} className="grid">
           <Link
@@ -126,7 +126,7 @@ const IntroCards = () => {
               )
             }
           >
-            <span className="xs:flex items-center gap-2">
+            <span className="items-center gap-2 sm:flex">
               <Icon aria-hidden className="shrink-0 text-2xl" role="img" />
               <span className="text-xl font-semibold group-hover:underline">
                 {title}
@@ -175,7 +175,7 @@ const GetStarted = ({
         style={{
           gridTemplateColumns: `repeat(${links.length}, minmax(0, 1fr))`,
         }}
-        className="xs:grid mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 md:gap-8"
+        className="mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 sm:grid md:gap-8"
       >
         {links.map((x) => (
           <li key={x.title}>
@@ -270,11 +270,11 @@ const Forside = ({
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-8">
-            <div className="centered-layout xs:mt-36 xs:mb-18 xs:max-w-screen-xs relative mb-16 mt-20 grid max-w-xs place-items-center text-center">
+            <div className="centered-layout sm:mb-18 sm:max-w-screen-xs relative mb-16 mt-20 grid max-w-xs place-items-center text-center sm:mt-36">
               <Heading
                 level="1"
                 size="xlarge"
-                className="text-deepblue-800 xs:text-[3.5rem] leading-[1.2]"
+                className="text-deepblue-800 leading-[1.2] sm:text-[3.5rem]"
               >
                 {page.title}
               </Heading>
@@ -291,7 +291,7 @@ const Forside = ({
                 <Heading
                   level="2"
                   size="xlarge"
-                  className="text-deepblue-800 xs:text-[3.25rem] mb-8 text-center"
+                  className="text-deepblue-800 mb-8 text-center sm:text-[3.25rem]"
                 >
                   God praksis
                 </Heading>

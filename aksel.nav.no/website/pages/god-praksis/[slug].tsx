@@ -115,7 +115,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                 />
                 <div
                   className={cl(
-                    "max-w xs:w-96 relative z-10 mb-2 h-fit xl:mt-[10px]",
+                    "max-w relative z-10 mb-2 h-fit sm:w-96 xl:mt-[10px]",
                     { invisible: !hasAnsvarlig }
                   )}
                   aria-hidden={!hasAnsvarlig}

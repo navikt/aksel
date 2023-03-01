@@ -3,6 +3,17 @@ const getFontSize = (size) => `${size / baseFontSize}rem`;
 
 module.exports = {
   a: {
+    breakpoint: {
+      xs: { value: "0" },
+      sm: { value: "480px" },
+      "sm-down": { value: "479px" },
+      md: { value: "768px" },
+      "md-down": { value: "767px" },
+      lg: { value: "1024px" },
+      "lg-down": { value: "1023px" },
+      xl: { value: "1280px" },
+      "xl-down": { value: "1279px" },
+    },
     font: {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },
       line: {

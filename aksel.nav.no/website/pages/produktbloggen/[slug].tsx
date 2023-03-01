@@ -88,7 +88,7 @@ const Page = ({
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel xs:pb-32 #FEFCE9 overflow-hidden bg-[#FEFCE9] pt-[8vw] pb-16 focus:outline-none"
+        className="aksel-artikkel #FEFCE9 overflow-hidden bg-[#FEFCE9] pt-[8vw] pb-16 focus:outline-none sm:pb-32"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose text-center">
@@ -195,7 +195,7 @@ const Page = ({
               <Heading level="2" size="large">
                 Flere blogginnlegg
               </Heading>
-              <ul className="mt-12 grid gap-x-6 gap-y-6 sm:grid-cols-2 sm:gap-y-10 md:gap-x-6 lg:grid-cols-3">
+              <ul className="mt-12 grid gap-x-6 gap-y-6 md:grid-cols-2 md:gap-y-10 md:gap-x-6 lg:grid-cols-3">
                 {morePosts.map((post) => (
                   <BloggCard key={post._id} blog={post} />
                 ))}
