@@ -89,7 +89,7 @@
 }
 
 .navds-expansioncard--clickarea-button .navds-expansioncard__header-button:hover {
-  background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-hover));
+  background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-neutral-subtle-hover));
 }
 
 .navds-expansioncard__header-button:hover .navds-expansioncard__icon {
@@ -160,7 +160,6 @@
  * Variants/Filled *
  *************************/
 
-.navds-expansioncard--filled .navds-expansioncard__header-avatar,
 .navds-expansioncard__header--no-avatar-bg > .navds-expansioncard__header-avatar {
   background-color: var(--a-surface-transparent);
 }
@@ -183,7 +182,7 @@
 }
 
 .navds-expansioncard--clickarea-full .navds-expansioncard__header:hover .navds-expansioncard__header-button {
-  background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-hover));
+  background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-neutral-subtle-hover));
 }
 
 .navds-expansioncard--clickarea-full.navds-expansioncard:hover:where(:not(.navds-expansioncard--open)) {
