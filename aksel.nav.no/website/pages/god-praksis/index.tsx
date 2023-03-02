@@ -66,7 +66,7 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
             <Heading
               level="1"
               size="xlarge"
-              className="algolia-index-lvl1 text-deepblue-800 text-5xl"
+              className="text-deepblue-800 text-5xl"
             >
               God praksis
             </Heading>

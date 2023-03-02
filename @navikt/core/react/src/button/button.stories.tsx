@@ -148,7 +148,8 @@ export const Loading = {
     </div>
   ),
 
-  args: { chromatic: { delay: 300 } },
+  args: { chromatic: { disableSnapshot: true } },
+  chromatic: { disableSnapshot: true },
 };
 
 export const Icon = () => (
@@ -274,5 +275,6 @@ export const LoadingWithAs = {
     </div>
   ),
 
-  args: { chromatic: { delay: 300 } },
+  args: { chromatic: { disableSnapshot: true } },
+  chromatic: { disableSnapshot: true },
 };

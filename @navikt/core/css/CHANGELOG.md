@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 2.5.1
+
+## 2.5.0
+
+## 2.4.3
+
+### Patch Changes
+
+- [`f962bc781`](https://github.com/navikt/aksel/commit/f962bc7816027c24e334d9754c3e07cda951cf56) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset disabled-opacity bug i select for Chrome
+
 ## 2.4.2
 
 ### Patch Changes

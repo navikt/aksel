@@ -11,6 +11,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       <Frame
         tokens={colors}
         styles="color"
+        showHex
         element={({ token }: { token: string }) => {
           const c = color(token);
           const isLigth = c.luminosity() > 0.9;
@@ -38,6 +39,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       <Frame
         tokens={colors}
         styles="color"
+        showHex
         element={({ token }: { token: string }) => {
           const c = color(token);
           const isLigth = c.luminosity() > 0.9;
@@ -66,6 +68,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       <Frame
         tokens={colors}
         styles="color"
+        showHex
         element={({ token }: { token: string }) => {
           const c = color(token);
           const isLigth = c.luminosity() > 0.9;
@@ -92,5 +95,5 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       />
     );
   }
-  return <Frame tokens={colors} styles="background" />;
+  return <Frame tokens={colors} styles="background" showHex />;
 };
