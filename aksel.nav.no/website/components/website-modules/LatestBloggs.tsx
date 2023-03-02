@@ -44,7 +44,7 @@ export const LatestBloggposts = ({
         level={level}
         size="xlarge"
         className={cl(
-          "algolia-index-lvl1 text-deepblue-800 mx-auto w-full md:mx-0 md:max-w-none",
+          "text-deepblue-800 mx-auto w-full md:mx-0 md:max-w-none",
           { "text-5xl": variant === "blogg" }
         )}
       >

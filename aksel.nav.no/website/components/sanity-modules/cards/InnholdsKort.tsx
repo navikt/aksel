@@ -21,7 +21,7 @@ const InnholdsKort = ({
         size="small"
         level="3"
         id={node._key}
-        className="algolia-index-lvl3 text-deepblue-500 scroll-mt-28 focus:outline-none group-hover:underline"
+        className="text-deepblue-500 scroll-mt-28 focus:outline-none group-hover:underline"
       >
         <NextLink
           href={`/${node?.lenke}`}

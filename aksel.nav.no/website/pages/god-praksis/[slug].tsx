@@ -94,15 +94,11 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
               <Heading
                 level="1"
                 size="xlarge"
-                className="algolia-index-lvl1 mt-8 hidden md:block md:text-5xl"
+                className="mt-8 hidden md:block md:text-5xl"
               >
                 {page.title}
               </Heading>
-              <Heading
-                level="1"
-                size="large"
-                className="algolia-index-lvl1 mt-8 block md:hidden"
-              >
+              <Heading level="1" size="large" className="mt-8 block md:hidden">
                 {page.title}
               </Heading>
 

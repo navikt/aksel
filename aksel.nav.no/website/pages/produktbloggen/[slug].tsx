@@ -95,7 +95,7 @@ const Page = ({
             <Heading
               level="1"
               size="xlarge"
-              className="algolia-index-lvl1 hyphen text-deepblue-800 mt-1 break-words text-5xl leading-[1.2]"
+              className="hyphen text-deepblue-800 mt-1 break-words text-5xl leading-[1.2]"
             >
               {blogg.heading}
             </Heading>
