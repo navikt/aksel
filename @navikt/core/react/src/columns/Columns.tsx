@@ -121,13 +121,13 @@ function columnsProps(
 
   if (typeof columns === "string" || typeof columns === "number") {
     return {
-      [`--ac-columns-grid-template-columns-xs`]: formatColumns(columns),
+      [`--ac-columns-template-xs`]: formatColumns(columns),
     };
   }
 
   return Object.fromEntries(
     Object.entries(columns).map(([breakpoint, value]) => [
-      `--ac-columns-grid-template-columns-${breakpoint}`,
+      `--ac-columns-template-${breakpoint}`,
       formatColumns(value),
     ])
   );
