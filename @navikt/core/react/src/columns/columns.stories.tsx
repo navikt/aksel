@@ -89,6 +89,25 @@ export const PageLayout = {
   ),
 };
 
+export const StaticSidebar = {
+  render: () => (
+    <div
+      style={{
+        background: "rgba(0 0 0 / 0.2)",
+        padding: "2rem 0rem",
+      }}
+    >
+      <Columns
+        gap={{ xs: "4", sm: "6", lg: "8" }}
+        columns={{ sm: 1, md: "250px auto" }}
+      >
+        <Sidebar text="Sidebar" />
+        <ContentStatic text="Content" />
+      </Columns>
+    </div>
+  ),
+};
+
 function Content({ text }) {
   return (
     <div
@@ -97,6 +116,21 @@ function Content({ text }) {
         height: "40rem",
         width: "100%",
         maxWidth: "600px",
+        color: "white",
+      }}
+    >
+      {text}
+    </div>
+  );
+}
+
+function ContentStatic({ text }) {
+  return (
+    <div
+      style={{
+        background: "var(--a-deepblue-900)",
+        height: "40rem",
+        width: "100%",
         color: "white",
       }}
     >
@@ -117,7 +151,7 @@ function Sidebar({ text }) {
       className="hideOnMd"
     >
       {text}
-      <style>{`@media (max-width: 779px){.hideOnMd{display: none;}}`}</style>
+      <style>{`@media (max-width: 767px){.hideOnMd{display: none;}}`}</style>
     </div>
   );
 }
