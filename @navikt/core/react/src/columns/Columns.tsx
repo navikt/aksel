@@ -26,7 +26,7 @@ export interface ColumnsProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Number of columns to display. Can be a number, a string with a unit or tokens for spesific breakpoints.
    * @example
-   * columns={{ sm: 1, md: 2, lg: 4, xl: 4}}
+   * columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}
    * columns={4}
    */
   columns?:

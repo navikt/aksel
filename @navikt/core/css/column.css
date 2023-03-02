@@ -5,10 +5,10 @@
   --ac-columns-grid-template-columns-lg: var(--ac-columns-grid-template-columns-md);
   --ac-columns-grid-template-columns-xl: var(--ac-columns-grid-template-columns-lg);
   --ac-columns-gap-xs: initial;
-  --ac-columns-gap-sm: initial;
-  --ac-columns-gap-md: initial;
-  --ac-columns-gap-lg: initial;
-  --ac-columns-gap-xl: initial;
+  --ac-columns-gap-sm: var(--ac-columns-gap-xs);
+  --ac-columns-gap-md: var(--ac-columns-gap-sm);
+  --ac-columns-gap-lg: var(--ac-columns-gap-md);
+  --ac-columns-gap-xl: var(--ac-columns-gap-lg);
 
   display: grid;
   grid-template-columns: var(--ac-columns-grid-template-columns-xs);
@@ -18,30 +18,27 @@
 @media (min-width: 480px) {
   .navds-columns {
     grid-template-columns: var(--ac-columns-grid-template-columns-sm);
-    gap: var(--ac-columns-gap-sm, var(--ac-columns-gap-xs));
+    gap: var(--ac-columns-gap-sm);
   }
 }
 
 @media (min-width: 768px) {
   .navds-columns {
     grid-template-columns: var(--ac-columns-grid-template-columns-md);
-    gap: var(--ac-columns-gap-md, var(--ac-columns-gap-sm, var(--ac-columns-gap-xs)));
+    gap: var(--ac-columns-gap-md);
   }
 }
 
 @media (min-width: 1024px) {
   .navds-columns {
     grid-template-columns: var(--ac-columns-grid-template-columns-lg);
-    gap: var(--ac-columns-gap-lg, var(--ac-columns-gap-md, var(--ac-columns-gap-sm, var(--ac-columns-gap-xs))));
+    gap: var(--ac-columns-gap-lg);
   }
 }
 
 @media (min-width: 1280px) {
   .navds-columns {
     grid-template-columns: var(--ac-columns-grid-template-columns-xl);
-    gap: var(
-      --ac-columns-gap-xl,
-      var(--ac-columns-gap-lg, var(--ac-columns-gap-md, var(--ac-columns-gap-sm, var(--ac-columns-gap-xs))))
-    );
+    gap: var(--ac-columns-gap-xl);
   }
 }
