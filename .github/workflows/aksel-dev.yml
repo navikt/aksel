@@ -40,6 +40,10 @@ jobs:
   build_and_deploy:
     name: Build and deploy to dev-gcp
     runs-on: ubuntu-20.04
+    permissions:
+      packages: "write"
+      contents: "read"
+      id-token: "write"
     steps:
       - uses: actions/setup-node@v3
         with:
@@ -51,6 +55,7 @@ jobs:
           echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> aksel.nav.no/website/.env
+          echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
 
       - name: Restore cache
         uses: actions/cache@v3
@@ -67,6 +72,13 @@ jobs:
         run: |
           yarn boot
           yarn workspace aksel.nav.no build:next
+
+      - name: Upload static files to NAV CDN
+        uses: navikt/frontend/actions/cdn-upload/v1@main
+        with:
+          cdn-team-name: aksel
+          source: ./aksel.nav.no/website/.next/static
+          destination: "/website/_next"
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # Use commit-sha1 instead of tag for security concerns
