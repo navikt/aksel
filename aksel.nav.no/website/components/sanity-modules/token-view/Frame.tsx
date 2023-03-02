@@ -7,7 +7,7 @@ export const Frame = ({
   element: Element,
 }: {
   tokens: { name: string; value: string; description?: string }[];
-  styles: string;
+  styles?: string;
   element?: ({ token, name }: { token: string; name?: string }) => JSX.Element;
 }) => {
   const hasDescription = !!tokens.find((x) => x?.description);

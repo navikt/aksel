@@ -55,7 +55,7 @@ export const Header = ({
         })}
       >
         <div className="mx-auto flex h-full max-w-screen-2xl items-center  pr-4 pt-3 lg:pr-6">
-          <div className="xs:pr-6 xs:pl-4 flex h-11 items-center pr-4 pl-4">
+          <div className="flex h-11 items-center pr-4 pl-4 sm:pr-6 sm:pl-4">
             <Link
               href="/"
               passHref

@@ -1,5 +1,39 @@
 # @navikt/ds-react-internal
 
+## 2.5.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.5.0
+  - @navikt/ds-icons@2.5.0
+
+## 2.4.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.4.3
+  - @navikt/ds-icons@2.4.3
+
+## 2.4.2
+
+### Patch Changes
+
+- [#1823](https://github.com/navikt/aksel/pull/1823) [`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8) Thanks [@kschieren](https://github.com/kschieren)! - added support for nested lists
+
+- Updated dependencies [[`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8)]:
+  - @navikt/ds-react@2.4.2
+  - @navikt/ds-icons@2.4.2
+
+## 2.4.1
+
+### Patch Changes
+
+- Updated dependencies [[`98c06b0be`](https://github.com/navikt/aksel/commit/98c06b0be20debff9969af874d5239ec920fa401)]:
+  - @navikt/ds-react@2.4.1
+  - @navikt/ds-icons@2.4.1
+
 ## 2.4.0
 
 ### Patch Changes

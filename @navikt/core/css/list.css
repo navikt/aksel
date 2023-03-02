@@ -3,8 +3,17 @@
   padding: 0;
 }
 
-.navds-list li:not(:first-child) {
-  margin-top: var(--a-spacing-5);
+.navds-list--nested {
+  margin: var(--a-spacing-4) 0 var(--a-spacing-8) 0;
+}
+
+.navds-list li:not(.navds-list__item--noMargin) {
+  margin-bottom: var(--a-spacing-5);
+}
+
+.navds-list:last-child > ul > li:last-child,
+.navds-list:last-child > ol > li:last-child {
+  margin-bottom: 0;
 }
 
 .navds-list ul .navds-list__item {

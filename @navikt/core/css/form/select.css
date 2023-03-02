@@ -49,9 +49,21 @@
   border-color: var(--ac-select-error-border, var(--a-surface-danger));
 }
 
+/**
+  Disabled
+*/
 .navds-select__input:disabled {
   background-color: var(--ac-select-bg, var(--a-surface-default));
   border: 1px solid var(--ac-select-border, var(--a-border-default));
   box-shadow: none;
   cursor: not-allowed;
+
+  /* Chrome-fix */
+  opacity: 1;
+  color: var(--a-text-default);
+}
+
+/* Chrome-fix */
+.navds-select__input:disabled > option {
+  color: var(--a-text-default);
 }

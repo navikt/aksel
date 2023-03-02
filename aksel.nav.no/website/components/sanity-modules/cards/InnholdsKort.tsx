@@ -15,13 +15,13 @@ const InnholdsKort = ({
   }
 
   return (
-    <article className="shadow-small last-of-type:mb-18 focus-within:ring-border-focus hover:shadow-medium xs:p-8 group relative mb-7 rounded-lg bg-white p-4 ring-1 ring-gray-900/10 focus-within:ring">
+    <article className="shadow-small last-of-type:mb-18 focus-within:ring-border-focus hover:shadow-medium group relative mb-7 rounded-lg bg-white p-4 ring-1 ring-gray-900/10 focus-within:ring sm:p-8">
       <Heading
         spacing
         size="small"
         level="3"
         id={node._key}
-        className="algolia-index-lvl3 text-deepblue-500 scroll-mt-28 focus:outline-none group-hover:underline"
+        className="text-deepblue-500 scroll-mt-28 focus:outline-none group-hover:underline"
       >
         <NextLink
           href={`/${node?.lenke}`}
