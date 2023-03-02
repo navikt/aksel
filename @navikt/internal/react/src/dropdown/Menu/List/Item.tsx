@@ -18,6 +18,7 @@ export type ListItemType = OverridableComponent<
 export const ListItem: ListItemType = forwardRef(
   ({ as: Component = "button", className, ...rest }, ref) => {
     const context = useContext(DropdownContext);
+
     return (
       <li className="navdsi-dropdown__list-item">
         <Component
