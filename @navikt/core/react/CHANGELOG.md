@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.5.1
+
+### Patch Changes
+
+- [`ac1e69b34`](https://github.com/navikt/aksel/commit/ac1e69b342ae207db2e80e3058555c56902e5832) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :recycle: Refaktorert nested-list logikk
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.5.1
+
 ## 2.5.0
 
 ### Patch Changes
