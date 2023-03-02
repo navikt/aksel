@@ -62,7 +62,7 @@ const KomponentArtikkelTemplate = ({
             size="xlarge"
             level="1"
             spacing
-            className="algolia-index-lvl1 text-deepblue-800 flex flex-wrap items-center gap-4"
+            className="text-deepblue-800 flex flex-wrap items-center gap-4"
           >
             {data.heading}
           </Heading>

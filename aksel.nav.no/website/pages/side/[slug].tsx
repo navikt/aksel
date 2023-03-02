@@ -45,11 +45,7 @@ const Page = ({
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose">
-            <Heading
-              level="1"
-              size="xlarge"
-              className="algolia-index-lvl1 mt-1"
-            >
+            <Heading level="1" size="xlarge" className="mt-1">
               {page.heading}
             </Heading>
           </div>

@@ -10,7 +10,7 @@ const Footer = () => {
       id="aksel-footer"
       data-hj-suppress
       data-theme="dark"
-      className="algolia-ignore-index text-text-on-inverted bg-deepblue-800 relative flex w-full justify-center"
+      className="toc-ignore text-text-on-inverted bg-deepblue-800 relative flex w-full justify-center"
     >
       <div className="relative z-10 mx-auto grid w-full max-w-screen-2xl gap-16 px-4 pt-12 pb-16 md:px-6">
         <div className="grid gap-12 xl:grid-cols-3 xl:gap-6">
