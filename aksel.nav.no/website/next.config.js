@@ -67,7 +67,7 @@ const config = () =>
     publicRuntimeConfig: {
       NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
     },
-    assetPrefix: useCdn ? "https://cdn.nav.no/aksel/website/_next" : undefined,
+    assetPrefix: useCdn ? "https://cdn.nav.no/aksel/website" : undefined,
     async headers() {
       return [
         {
