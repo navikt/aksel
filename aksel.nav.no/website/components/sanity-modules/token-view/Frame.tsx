@@ -5,10 +5,12 @@ export const Frame = ({
   tokens,
   styles,
   element: Element,
+  showHex,
 }: {
   tokens: { name: string; value: string; description?: string }[];
   styles?: string;
   element?: ({ token, name }: { token: string; name?: string }) => JSX.Element;
+  showHex?: boolean;
 }) => {
   const hasDescription = !!tokens.find((x) => x?.description);
   return (
@@ -45,7 +47,7 @@ export const Frame = ({
               {c.value}
             </td>
             <Detail as="td" className="mt-1">
-              {c.description}
+              {showHex ? getHex(c.value) : c.description}
             </Detail>
           </tr>
         ))}
@@ -53,3 +55,23 @@ export const Frame = ({
     </table>
   );
 };
+
+function getHex(value: string) {
+  return RGBAToHexA(value.replace(", 1)", ""));
+}
+
+/* https://stackoverflow.com/a/73401564 */
+function RGBAToHexA(rgba, forceRemoveAlpha = false) {
+  return (
+    "#" +
+    rgba
+      .replace(/^rgba?\(|\s+|\)$/g, "") // Get's rgba / rgb string values
+      .split(",") // splits them at ","
+      .filter((string, index) => !forceRemoveAlpha || index !== 3)
+      .map((string) => parseFloat(string)) // Converts them to numbers
+      .map((number, index) => (index === 3 ? Math.round(number * 255) : number)) // Converts alpha to 255 number
+      .map((number) => number.toString(16)) // Converts numbers to hex
+      .map((string) => (string.length === 1 ? "0" + string : string)) // Adds 0 when length of one number is 1
+      .join("")
+  ); // Puts the array to togehter to a string
+}

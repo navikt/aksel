@@ -1,10 +1,10 @@
-import React, { forwardRef, useContext } from "react";
-import cl from "clsx";
 import { Popover } from "@navikt/ds-react";
-import List, { ListType } from "./List";
-import GroupedList, { GroupedListType } from "./GroupedList";
-import Divider, { DividerType } from "./Divider";
+import cl from "clsx";
+import React, { forwardRef, useContext } from "react";
 import { DropdownContext } from "../Dropdown";
+import Divider, { DividerType } from "./Divider";
+import GroupedList, { GroupedListType } from "./GroupedList";
+import List, { ListType } from "./List";
 
 interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -57,7 +57,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
       return null;
     }
 
-    const { isOpen, anchorEl, setIsOpen } = context;
+    const { isOpen, anchorEl, handleToggle } = context;
 
     return (
       <Popover
@@ -70,7 +70,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
         anchorEl={anchorEl}
         open={isOpen}
         onClose={() => {
-          setIsOpen(false);
+          handleToggle(false);
           onClose && onClose();
         }}
       />
