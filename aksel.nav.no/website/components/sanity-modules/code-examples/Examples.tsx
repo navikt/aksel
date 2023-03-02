@@ -123,7 +123,10 @@ const ComponentExamples = ({
                     onLoad={() => handleExampleLoad()}
                     id={iframeId}
                     aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
-                    className="min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]"
+                    className={cl(
+                      "min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                      { invisible: unloaded }
+                    )}
                     title="Kode-eksempler"
                   />
                   {unloaded && (
