@@ -41,6 +41,7 @@ jobs:
     name: Build and deploy to dev-gcp
     runs-on: ubuntu-20.04
     permissions:
+      packages: "write"
       contents: "read"
       id-token: "write"
     steps:
