@@ -23287,7 +23287,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinycolor2@npm:^1.4.1":
+"tinycolor2@npm:^1.4.1, tinycolor2@npm:^1.6.0":
   version: 1.6.0
   resolution: "tinycolor2@npm:1.6.0"
   checksum: 6df4d07fceeedc0a878d7bac47e2cd47c1ceeb1078340a9eb8a295bc0651e17c750f73d47b3028d829f30b85c15e0572c0fd4142083e4c21a30a597e47f47230
@@ -24538,7 +24538,6 @@ __metadata:
     boring-avatars: 1.7.0
     clsx: ^1.2.1
     codesandbox: ^2.2.3
-    color: 4.2.3
     copy-to-clipboard: ^3.3.1
     cross-env: ^7.0.0
     date-fns: 2.29.3
@@ -24569,6 +24568,7 @@ __metadata:
     styled-components: ^5.2
     swr: ^1.1.2
     tailwindcss: ^3.2.0
+    tinycolor2: ^1.6.0
     ts-jest: ^29.0.0
     ts-node: 10.9.0
     typescript: ^4.8.0
