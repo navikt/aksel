@@ -54,7 +54,7 @@ jobs:
           echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> aksel.nav.no/website/.env
-          echo "USE_CDN_ASSETS=true >> aksel.nav.no/website/.env
+          echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
 
       - name: Restore cache
         uses: actions/cache@v3
