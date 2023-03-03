@@ -151,7 +151,6 @@ function Sidebar({ text }) {
       className="hideOnMd"
     >
       {text}
-      <style>{`@media (max-width: 767px){.hideOnMd{display: none;}}`}</style>
     </div>
   );
 }
