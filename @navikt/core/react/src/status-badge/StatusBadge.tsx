@@ -8,11 +8,19 @@ export interface StatusBadgeProps {
    * Changes visuals of status
    * @default neutral
    */
-  variant?: "warning" | "error" | "info" | "success" | "neutral";
+  variant?:
+    | "warning"
+    | "error"
+    | "info"
+    | "success"
+    | "neutral"
+    | "alt1"
+    | "alt2"
+    | "alt3";
   /**
    * @default "marker"
    */
-  shape?: "marker" | "count" | "label";
+  shape?: "marker" | "count";
   /**
    *
    */
@@ -51,7 +59,7 @@ export const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
             "navds-statusbadge--pulse": pulse,
           }
         )}
-        children={shape === "label" || shape === "count" ? children : null}
+        children={shape === "count" ? children : null}
       />
     );
   }

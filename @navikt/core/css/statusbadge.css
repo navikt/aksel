@@ -8,7 +8,8 @@
   user-select: none;
   white-space: nowrap;
   z-index: 10;
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 0;
   font-weight: 600;
 }
 
@@ -19,24 +20,10 @@
   padding: var(--a-spacing-1);
 }
 
-.navds-statusbadge--dot {
-  border-radius: var(--a-border-radius-full);
-  min-height: 1.5rem;
-  min-width: 1.5rem;
-  padding: var(--a-spacing-1);
-}
-
-.navds-statusbadge--label {
-  min-height: 1.5rem;
-  min-width: 1.5rem;
-  padding: var(--a-spacing-1) var(--a-spacing-05);
-  border-radius: 4px;
-}
-
 .navds-statusbadge--marker {
   border-radius: 100%;
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
 }
 
 .navds-statusbadge--top-left {
@@ -72,7 +59,7 @@
   color: var(--a-text-on-neutral);
 }
 
-.navds-statusbadge--neutral:where(.navds-statusbadge--count, .navds-statusbadge--label) {
+.navds-statusbadge--neutral:where(.navds-statusbadge--count) {
   box-shadow: 0 0 0 1px var(--a-gray-400);
 }
 
@@ -81,7 +68,7 @@
   color: var(--a-text-on-success);
 }
 
-.navds-statusbadge--success:where(.navds-statusbadge--count, .navds-statusbadge--label) {
+.navds-statusbadge--success:where(.navds-statusbadge--count) {
   box-shadow: 0 0 0 1px var(--a-green-400);
 }
 
@@ -90,8 +77,35 @@
   color: var(--a-text-on-danger);
 }
 
-.navds-statusbadge--error:where(.navds-statusbadge--count, .navds-statusbadge--label) {
+.navds-statusbadge--error:where(.navds-statusbadge--count) {
   box-shadow: 0 0 0 1px var(--a-red-400);
+}
+
+.navds-statusbadge--alt1 {
+  background-color: var(--a-surface-alt-1);
+  color: var(--a-text-on-alt-1);
+}
+
+.navds-statusbadge--alt1:where(.navds-statusbadge--count) {
+  box-shadow: 0 0 0 1px var(--a-purple-400);
+}
+
+.navds-statusbadge--alt2 {
+  background-color: var(--a-surface-alt-2);
+  color: var(--a-text-on-alt-2);
+}
+
+.navds-statusbadge--alt2:where(.navds-statusbadge--count) {
+  box-shadow: 0 0 0 1px var(--a-limegreen-400);
+}
+
+.navds-statusbadge--alt3 {
+  background-color: var(--a-surface-alt-3);
+  color: var(--a-text-on-alt-3);
+}
+
+.navds-statusbadge--alt3:where(.navds-statusbadge--count) {
+  box-shadow: 0 0 0 1px var(--a-deepblue-400);
 }
 
 .navds-statusbadge--warning {
@@ -99,7 +113,7 @@
   color: var(--a-text-on-warning);
 }
 
-.navds-statusbadge--warning:where(.navds-statusbadge--count, .navds-statusbadge--label) {
+.navds-statusbadge--warning:where(.navds-statusbadge--count) {
   box-shadow: 0 0 0 1px var(--a-orange-400);
 }
 
@@ -108,7 +122,7 @@
   color: var(--a-text-on-info);
 }
 
-.navds-statusbadge--info:where(.navds-statusbadge--count, .navds-statusbadge--label) {
+.navds-statusbadge--info:where(.navds-statusbadge--count) {
   box-shadow: 0 0 0 1px var(--a-lightblue-400);
 }
 
@@ -124,7 +138,7 @@
   z-index: -1;
 }
 
-.navds-statusbadge--pulse:where(.navds-statusbadge--count, .navds-statusbadge--label)::before {
+.navds-statusbadge--pulse:where(.navds-statusbadge--count)::before {
   animation: statusBadgePulseSmall cubic-bezier(0, 0, 0.2, 1) 2s infinite;
 }
 
