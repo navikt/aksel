@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 
-export interface StatusBadgeProps {
+export interface NotificationBadgeProps {
   children?: React.ReactNode;
   className?: string;
   /**
@@ -32,7 +32,10 @@ export interface StatusBadgeProps {
   pulse?: boolean;
 }
 
-export const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
+export const NotificationBadge = forwardRef<
+  HTMLSpanElement,
+  NotificationBadgeProps
+>(
   (
     {
       className,
@@ -50,13 +53,13 @@ export const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
         {...rest}
         ref={ref}
         className={cl(
-          "navds-statusbadge",
+          "navds-notificationbadge",
           className,
-          `navds-statusbadge--${variant}`,
-          `navds-statusbadge--${shape}`,
+          `navds-notificationbadge--${variant}`,
+          `navds-notificationbadge--${shape}`,
           {
-            [`navds-statusbadge--${position}`]: !!position,
-            "navds-statusbadge--pulse": pulse,
+            [`navds-notificationbadge--${position}`]: !!position,
+            "navds-notificationbadge--pulse": pulse,
           }
         )}
         children={shape === "count" ? children : null}
@@ -65,4 +68,4 @@ export const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
   }
 );
 
-export default StatusBadge;
+export default NotificationBadge;

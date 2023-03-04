@@ -14,6 +14,7 @@
 @import "link.css";
 @import "loader.css";
 @import "modal.css";
+@import "notificationbadge.css";
 @import "pagination.css";
 @import "popover.css";
 @import "date.css";
@@ -23,7 +24,6 @@
 @import "panel.css";
 @import "link-panel.css";
 @import "read-more.css";
-@import "statusbadge.css";
 @import "stepper.css";
 @import "table.css";
 @import "tabs.css";

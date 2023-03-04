@@ -1,4 +1,4 @@
-.navds-statusbadge {
+.navds-notificationbadge {
   display: grid;
   place-content: center;
   position: relative;
@@ -13,120 +13,120 @@
   font-weight: 600;
 }
 
-.navds-statusbadge--count {
+.navds-notificationbadge--count {
   border-radius: var(--a-border-radius-full);
   min-height: 1.5rem;
   min-width: 1.5rem;
   padding: var(--a-spacing-1);
 }
 
-.navds-statusbadge--marker {
+.navds-notificationbadge--marker {
   border-radius: 100%;
   width: 12px;
   height: 12px;
 }
 
-.navds-statusbadge--top-left {
+.navds-notificationbadge--top-left {
   position: absolute;
   left: 0;
   top: 0;
   transform: translate(-40%, -40%);
 }
 
-.navds-statusbadge--top-right {
+.navds-notificationbadge--top-right {
   position: absolute;
   right: 0;
   top: 0;
   transform: translate(40%, -40%);
 }
 
-.navds-statusbadge--bottom-left {
+.navds-notificationbadge--bottom-left {
   position: absolute;
   left: 0;
   bottom: 0;
   transform: translate(-40%, 40%);
 }
 
-.navds-statusbadge--bottom-right {
+.navds-notificationbadge--bottom-right {
   position: absolute;
   right: 0;
   bottom: 0;
   transform: translate(50%, 50%);
 }
 
-.navds-statusbadge--neutral {
+.navds-notificationbadge--neutral {
   background-color: var(--a-surface-neutral);
   color: var(--a-text-on-neutral);
 }
 
-.navds-statusbadge--neutral:where(.navds-statusbadge--count) {
+.navds-notificationbadge--neutral:where(.navds-notificationbadge--count) {
   box-shadow: 0 0 0 1px var(--a-gray-400);
 }
 
-.navds-statusbadge--success {
+.navds-notificationbadge--success {
   background-color: var(--a-surface-success);
   color: var(--a-text-on-success);
 }
 
-.navds-statusbadge--success:where(.navds-statusbadge--count) {
+.navds-notificationbadge--success:where(.navds-notificationbadge--count) {
   box-shadow: 0 0 0 1px var(--a-green-400);
 }
 
-.navds-statusbadge--error {
+.navds-notificationbadge--error {
   background-color: var(--a-surface-danger);
   color: var(--a-text-on-danger);
 }
 
-.navds-statusbadge--error:where(.navds-statusbadge--count) {
+.navds-notificationbadge--error:where(.navds-notificationbadge--count) {
   box-shadow: 0 0 0 1px var(--a-red-400);
 }
 
-.navds-statusbadge--alt1 {
+.navds-notificationbadge--alt1 {
   background-color: var(--a-surface-alt-1);
   color: var(--a-text-on-alt-1);
 }
 
-.navds-statusbadge--alt1:where(.navds-statusbadge--count) {
+.navds-notificationbadge--alt1:where(.navds-notificationbadge--count) {
   box-shadow: 0 0 0 1px var(--a-purple-400);
 }
 
-.navds-statusbadge--alt2 {
+.navds-notificationbadge--alt2 {
   background-color: var(--a-surface-alt-2);
   color: var(--a-text-on-alt-2);
 }
 
-.navds-statusbadge--alt2:where(.navds-statusbadge--count) {
+.navds-notificationbadge--alt2:where(.navds-notificationbadge--count) {
   box-shadow: 0 0 0 1px var(--a-limegreen-400);
 }
 
-.navds-statusbadge--alt3 {
+.navds-notificationbadge--alt3 {
   background-color: var(--a-surface-alt-3);
   color: var(--a-text-on-alt-3);
 }
 
-.navds-statusbadge--alt3:where(.navds-statusbadge--count) {
+.navds-notificationbadge--alt3:where(.navds-notificationbadge--count) {
   box-shadow: 0 0 0 1px var(--a-deepblue-400);
 }
 
-.navds-statusbadge--warning {
+.navds-notificationbadge--warning {
   background-color: var(--a-surface-warning);
   color: var(--a-text-on-warning);
 }
 
-.navds-statusbadge--warning:where(.navds-statusbadge--count) {
+.navds-notificationbadge--warning:where(.navds-notificationbadge--count) {
   box-shadow: 0 0 0 1px var(--a-orange-400);
 }
 
-.navds-statusbadge--info {
+.navds-notificationbadge--info {
   background-color: var(--a-surface-info);
   color: var(--a-text-on-info);
 }
 
-.navds-statusbadge--info:where(.navds-statusbadge--count) {
+.navds-notificationbadge--info:where(.navds-notificationbadge--count) {
   box-shadow: 0 0 0 1px var(--a-lightblue-400);
 }
 
-.navds-statusbadge--pulse::before {
+.navds-notificationbadge--pulse::before {
   background-color: inherit;
   position: absolute;
   content: "";
@@ -134,15 +134,15 @@
   pointer-events: none;
   border-radius: inherit;
   transform: scale(1);
-  animation: statusBadgePulseLarge cubic-bezier(0, 0, 0.2, 1) 2s infinite;
+  animation: notificationBadgePulseLarge cubic-bezier(0, 0, 0.2, 1) 2s infinite;
   z-index: -1;
 }
 
-.navds-statusbadge--pulse:where(.navds-statusbadge--count)::before {
-  animation: statusBadgePulseSmall cubic-bezier(0, 0, 0.2, 1) 2s infinite;
+.navds-notificationbadge--pulse:where(.navds-notificationbadge--count)::before {
+  animation: notificationBadgePulseSmall cubic-bezier(0, 0, 0.2, 1) 2s infinite;
 }
 
-@keyframes statusBadgePulseSmall {
+@keyframes notificationBadgePulseSmall {
   75%,
   100% {
     transform: scale(1.6);
@@ -150,7 +150,7 @@
   }
 }
 
-@keyframes statusBadgePulseLarge {
+@keyframes notificationBadgePulseLarge {
   75%,
   100% {
     transform: scale(2.2);
