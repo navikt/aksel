@@ -1,0 +1,23 @@
+.navds-progressbar {
+  height: 1rem;
+  width: 100%;
+  background-color: var(--a-deepblue-100);
+  display: flex;
+  border-radius: var(--a-border-radius-full);
+  overflow: hidden;
+}
+
+.navds-progressbar__indicator {
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  width: var(--ac-progressbar-width);
+  position: relative;
+  border-radius: var(--a-border-radius-full);
+}
+
+.navds-progressbar__indicator::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background-color: var(--a-deepblue-300);
+}
