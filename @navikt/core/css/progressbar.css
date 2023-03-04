@@ -1,23 +1,88 @@
 .navds-progressbar {
-  height: 1rem;
+  display: grid;
+  gap: 0.5rem;
   width: 100%;
-  background-color: var(--a-deepblue-100);
+}
+
+.navds-progressbar__bar {
+  width: 100%;
   display: flex;
-  border-radius: var(--a-border-radius-full);
   overflow: hidden;
-}
-
-.navds-progressbar__indicator {
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  width: var(--ac-progressbar-width);
+  min-width: 3rem;
   position: relative;
-  border-radius: var(--a-border-radius-full);
 }
 
-.navds-progressbar__indicator::before {
-  content: "";
+.navds-progressbar__bar-indicator {
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 center;
+  transform: scaleX(0);
+  transition: transform 110ms ease-out;
+}
+
+.navds-progressbar__bar--finished > .navds-progressbar__bar-indicator {
+  background-color: var(--a-green-400);
+  transform: scaleX(1);
+}
+
+.navds-progressbar__bar--neutral {
+  background-color: var(--a-surface-neutral-subtle);
+  border-radius: var(--a-border-radius-small);
+  height: 0.5rem;
+}
+
+.navds-progressbar__bar--neutral.navds-progressbar__bar--active > .navds-progressbar__bar-indicator {
+  background-color: var(--a-surface-neutral-selected);
+}
+
+.navds-progressbar__bar--steps {
+  background-color: var(--a-deepblue-100);
+  border-radius: var(--a-border-radius-full);
+  height: 1rem;
+}
+
+.navds-progressbar__bar--steps.navds-progressbar__bar--active > .navds-progressbar__bar-indicator {
+  background-color: var(--a-deepblue-300);
+}
+
+.navds-progressbar__bar--error > .navds-progressbar__bar-indicator {
+  background-color: var(--a-red-400);
+}
+
+/* .navds-progressbar__label {
+} */
+
+.navds-progressbar__status {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navds-progressbar__bar--indeterminate::after {
   position: absolute;
   inset: 0;
-  width: 100%;
-  background-color: var(--a-deepblue-300);
+  animation: progressBarIndeterminate 1.5s infinite;
+  background-position-x: 0%;
+  background-size: 200% 100%;
+  content: "";
+}
+
+.navds-progressbar__bar--neutral.navds-progressbar__bar--indeterminate::after {
+  background-image: linear-gradient(90deg, var(--a-surface-neutral-selected) 12.5%, transparent 12.5%);
+}
+
+.navds-progressbar__bar--steps.navds-progressbar__bar--indeterminate::after {
+  background-image: linear-gradient(90deg, var(--a-deepblue-300) 12.5%, transparent 12.5%);
+}
+
+@keyframes progressBarIndeterminate {
+  0% {
+    background-position-x: 25%;
+  }
+
+  80%,
+  100% {
+    background-position-x: -105%;
+  }
 }
