@@ -3,7 +3,7 @@ import { fetchIcons, fetchDownloadUrls, fetchIcon } from "./fetch-icons.mjs";
 import { makeConfig } from "./make-configs.mjs";
 import { existsSync, writeFileSync, mkdirSync, rmSync } from "fs";
 import { resolve } from "path";
-import startCase from "lodash.startcase";
+import { resolveName } from "./icon-name.mjs";
 config();
 /* https://www.figma.com/file/wEdyFjCQSBR3U7FvrMbPXa/Core-Icons-Next?node-id=277%3A1221&t=mUJzFvnsceYYXNL5-0 */
 
@@ -16,7 +16,7 @@ if (!process.env.FIGMA_TOKEN) {
 async function main() {
   const icons = await fetchIcons();
 
-  console.log(icons);
+  console.log(JSON.stringify(icons, null, 2));
 
   const { images } = await fetchDownloadUrls(
     icons.map((x) => x.node_id).join(",")
@@ -25,6 +25,7 @@ async function main() {
   if (existsSync(iconFolder)) {
     rmSync(iconFolder, { recursive: true, force: true });
   }
+
   mkdirSync(iconFolder);
 
   console.log(`Laster ned ${Object.keys(images).length} ikoner`);
@@ -33,13 +34,7 @@ async function main() {
     const icon = await fetchIcon(value);
     icon &&
       writeFileSync(
-        resolve(
-          iconFolder,
-          `${startCase(icons.find((x) => x.node_id === key).name).replace(
-            /\s/g,
-            ""
-          )}.svg`
-        ),
+        resolve(iconFolder, resolveName(icons.find((x) => x.node_id === key))),
         icon,
         {
           encoding: "utf8",

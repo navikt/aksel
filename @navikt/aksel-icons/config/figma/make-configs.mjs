@@ -1,17 +1,16 @@
 import { writeFileSync } from "fs";
 import jsYaml from "js-yaml";
-import startCase from "lodash.startcase";
 import { resolve } from "path";
+import { resolveName } from "./icon-name.mjs";
 const iconFolder = "./svgtest";
 
 export const makeConfig = (icons) => {
-  console.log(icons);
-
   icons.forEach((icon) => {
     const config = {
-      name: `${startCase(icon.name).replace(/\s/g, "")}`,
-      category: icon.containing_frame.pageName,
+      name: resolveName(icon).replace(".svg", ""),
+      category: icon.containing_frame.name,
       keywords: [...icon.description.split(",").map((x) => x.trim())],
+      variant: icon.name.replace("Variant=", ""),
       updated_at: new Date(icon.updated_at)
         .toISOString()
         .split("T")[0]
