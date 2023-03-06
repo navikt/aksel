@@ -13,70 +13,36 @@ import ReactModal from "react-modal";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import { useMedia } from "@/utils";
+import { categorizeIcons } from "./icon-utils";
+import Fuse from "fuse.js";
 
-const subCategorizeIcons = (
-  icons: typeof meta[1][]
-): { sub_category: string; icons: typeof meta[1][] }[] => {
-  const categories: { sub_category: string; icons: typeof meta[1][] }[] = [];
-
-  for (const icon of icons) {
-    const i = categories.findIndex(
-      ({ sub_category }) => icon.sub_category === sub_category
-    );
-    i !== -1
-      ? categories[i].icons.push(icon)
-      : categories.push({ sub_category: icon.sub_category, icons: [icon] });
-  }
-  return categories.sort((a, b) =>
-    a.sub_category.localeCompare(b.sub_category)
-  );
-};
-
-const categorizeIcons = (
-  icons: typeof meta
-): {
-  category: string;
-  sub_categories: { sub_category: string; icons: typeof meta[1][] }[];
-}[] => {
-  const categories: {
-    category: string;
-    icons: typeof meta[1][];
-  }[] = [];
-
-  for (const icon of Object.values(icons)) {
-    const i = categories.findIndex(
-      ({ category }) => icon.category === category
-    );
-    i !== -1
-      ? categories[i].icons.push(icon)
-      : categories.push({ category: icon.category, icons: [icon] });
-  }
-  return categories
-    .sort((a, b) => a.category.localeCompare(b.category))
-    .map((x) => ({ ...x, sub_categories: subCategorizeIcons(x.icons) }));
-};
+const fuse = new Fuse(Object.values(meta), {
+  threshold: 0.2,
+  keys: [
+    { name: "name", weight: 3 },
+    { name: "category", weight: 2 },
+    { name: "sub_category", weight: 2 },
+    { name: "keywords", weight: 3 },
+    { name: "variant", weight: 1 },
+  ],
+  shouldSort: false,
+});
 
 export const IconPage = ({ name }: { name: string }) => {
   const [query, setQuery] = useState("");
 
-  const [visibleIcons] = useState(meta);
+  const [visibleIcons] = useState(Object.values(meta));
 
   const hideModal = useMedia("screen and (min-width: 1024px)");
 
   const categories = useMemo(
     () =>
       categorizeIcons(
-        visibleIcons
-        /*     visibleIcons.filter((x) => {
-          return query === ""
-            ? true
-            : x?.name.toLowerCase().includes(query) ||
-                x?.pageName.toLowerCase().includes(query) ||
-                x?.description.toLowerCase().includes(query);
-        }) */
-        /* .filter((x) => !x?.name?.includes("fill")) */
+        query
+          ? fuse.search(query).map((result) => result.item as any)
+          : visibleIcons
       ),
-    [visibleIcons]
+    [visibleIcons, query]
   );
 
   const router = useRouter();
