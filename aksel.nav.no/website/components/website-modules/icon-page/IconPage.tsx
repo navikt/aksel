@@ -14,8 +14,34 @@ import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import { useMedia } from "@/utils";
 
-const categorizeIcons = (icons: typeof meta) => {
-  const categories = [];
+const subCategorizeIcons = (
+  icons: typeof meta[1][]
+): { sub_category: string; icons: typeof meta[1][] }[] => {
+  const categories: { sub_category: string; icons: typeof meta[1][] }[] = [];
+
+  for (const icon of icons) {
+    const i = categories.findIndex(
+      ({ sub_category }) => icon.sub_category === sub_category
+    );
+    i !== -1
+      ? categories[i].icons.push(icon)
+      : categories.push({ sub_category: icon.sub_category, icons: [icon] });
+  }
+  return categories.sort((a, b) =>
+    a.sub_category.localeCompare(b.sub_category)
+  );
+};
+
+const categorizeIcons = (
+  icons: typeof meta
+): {
+  category: string;
+  sub_categories: { sub_category: string; icons: typeof meta[1][] }[];
+}[] => {
+  const categories: {
+    category: string;
+    icons: typeof meta[1][];
+  }[] = [];
 
   for (const icon of Object.values(icons)) {
     const i = categories.findIndex(
@@ -25,7 +51,9 @@ const categorizeIcons = (icons: typeof meta) => {
       ? categories[i].icons.push(icon)
       : categories.push({ category: icon.category, icons: [icon] });
   }
-  return categories.sort((a, b) => a.category.localeCompare(b.category));
+  return categories
+    .sort((a, b) => a.category.localeCompare(b.category))
+    .map((x) => ({ ...x, sub_categories: subCategorizeIcons(x.icons) }));
 };
 
 export const IconPage = ({ name }: { name: string }) => {
@@ -48,7 +76,7 @@ export const IconPage = ({ name }: { name: string }) => {
         }) */
         /* .filter((x) => !x?.name?.includes("fill")) */
       ),
-    [visibleIcons, query]
+    [visibleIcons]
   );
 
   const router = useRouter();
@@ -99,7 +127,7 @@ export const IconPage = ({ name }: { name: string }) => {
               <div className="flex">
                 <div
                   className={cl(
-                    "animate-fadeIn transition-width grid w-full place-content-start gap-9 gap-y-12 px-6 py-8",
+                    "animate-fadeIn transition-width grid w-full gap-9 gap-y-12 px-6 py-8",
                     {
                       "border-r-border-subtle border-r": !!name,
                       "basis-2/3": name,
@@ -111,34 +139,50 @@ export const IconPage = ({ name }: { name: string }) => {
                       <div key={cat.category}>
                         <Heading
                           level="2"
-                          size="xsmall"
-                          className="text-text-subtle"
+                          size="small"
+                          className="text-text-default"
                           spacing
                         >
                           {cat.category}
                         </Heading>
-                        <div className="flex flex-wrap gap-2">
-                          {cat.icons.map((i) => {
-                            const T = Icons[`${i.id}Icon`];
-                            if (T === undefined) {
-                              return null;
-                            }
+                        <div className="grid w-full  gap-2">
+                          {cat.sub_categories.map((sub) => {
                             return (
-                              <Link
-                                href={`/ikoner/${i.id}`}
-                                scroll={false}
-                                prefetch={false}
-                                key={i.id}
-                                className={cl(
-                                  "hover:bg-surface-hover bg-surface-default group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200",
-                                  {
-                                    "bg-surface-selected ring-border-alt-3 ring-1":
-                                      i.id === name,
-                                  }
-                                )}
-                              >
-                                <T className="text-2xl" aria-hidden />
-                              </Link>
+                              <div key={sub.sub_category}>
+                                <Heading
+                                  level="3"
+                                  size="xsmall"
+                                  className="text-text-subtle"
+                                  spacing
+                                >
+                                  {sub.sub_category}
+                                </Heading>
+                                <div className="flex flex-wrap">
+                                  {sub.icons.map((i) => {
+                                    const T = Icons[`${i.id}Icon`];
+                                    if (T === undefined) {
+                                      return null;
+                                    }
+                                    return (
+                                      <Link
+                                        href={`/ikoner/${i.id}`}
+                                        scroll={false}
+                                        prefetch={false}
+                                        key={i.id}
+                                        className={cl(
+                                          "hover:bg-surface-hover bg-surface-default group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200",
+                                          {
+                                            "bg-surface-selected ring-border-alt-3 ring-1":
+                                              i.id === name,
+                                          }
+                                        )}
+                                      >
+                                        <T className="text-2xl" aria-hidden />
+                                      </Link>
+                                    );
+                                  })}
+                                </div>
+                              </div>
                             );
                           })}
                         </div>

@@ -29,9 +29,10 @@ fs.writeFileSync(
   `export type AkselIcon = {
     id: string;
     name: string;
-    category: 'major' | 'minor';
-    description: string;
+    category: string;
+    sub_category: "Time",
     keywords: string[];
+    variant: "stroke" | "fill";
     date_added: Date;
     date_modified: Date;
   }
