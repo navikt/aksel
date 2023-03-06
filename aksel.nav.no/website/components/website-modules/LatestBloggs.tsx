@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { dateStr } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
@@ -44,7 +44,7 @@ export const LatestBloggposts = ({
         level={level}
         size="xlarge"
         className={cl(
-          "algolia-index-lvl1 text-deepblue-800 mx-auto w-full md:mx-0 md:max-w-none",
+          "text-deepblue-800 mx-auto w-full md:mx-0 md:max-w-none",
           { "text-5xl": variant === "blogg" }
         )}
       >
@@ -98,7 +98,7 @@ export const LatestBloggposts = ({
               />
             )}
           </div>
-          <NextLink href={`/${bloggs[0].slug}`} passHref>
+          <NextLink href={`/${bloggs[0].slug}`} passHref legacyBehavior>
             <Link className="text-deepblue-500 no-underline hover:underline">
               <Heading
                 size="large"
@@ -163,7 +163,7 @@ export const LatestBloggposts = ({
                   </div>
                 )}
                 <div>
-                  <NextLink href={`/${blog.slug}`} passHref>
+                  <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
                     <Link className="text-deepblue-500 no-underline hover:underline">
                       <Heading
                         size="small"
@@ -236,7 +236,7 @@ export const LatestBloggposts = ({
               />
             )}
           </div>
-          <NextLink href={`/${bloggs[0].slug}`} passHref>
+          <NextLink href={`/${bloggs[0].slug}`} passHref legacyBehavior>
             <Link className="text-deepblue-500 no-underline hover:underline">
               <Heading
                 size="large"
@@ -295,7 +295,7 @@ export const LatestBloggposts = ({
                 </div>
               )}
               <div>
-                <NextLink href={`/${blog.slug}`} passHref>
+                <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
                   <Link className="text-deepblue-500 no-underline hover:underline">
                     <Heading
                       size="small"

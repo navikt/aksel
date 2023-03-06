@@ -36,6 +36,11 @@ export interface ToggleGroupProps
    * Label describing ToggleGroup
    */
   label?: React.ReactNode;
+  /**
+   * Changes design and interaction-visuals
+   * @default "action"
+   */
+  variant?: "action" | "neutral";
 }
 
 interface ToggleGroupComponent
@@ -65,6 +70,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       defaultValue,
       id,
       "aria-describedby": desc,
+      variant = "action",
       ...rest
     },
     ref
@@ -114,7 +120,11 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
             value={value ?? groupValue}
             defaultValue={defaultValue}
             ref={ref}
-            className={cl("navds-toggle-group", `navds-toggle-group--${size}`)}
+            className={cl(
+              "navds-toggle-group",
+              `navds-toggle-group--${size}`,
+              `navds-toggle-group--${variant}`
+            )}
             {...(describeBy && { "aria-describedby": describeBy })}
             role="radiogroup"
             type="single"

@@ -2,7 +2,7 @@
   appearance: none;
   background-color: var(--ac-select-bg, var(--a-surface-default));
   border-radius: var(--a-border-radius-medium);
-  border: 1px solid var(--ac-select-border, var(--a-border-strong));
+  border: 1px solid var(--ac-select-border, var(--a-border-default));
   width: 100%;
   box-sizing: border-box;
   min-height: 48px;
@@ -25,7 +25,6 @@
   position: relative;
   display: flex;
   width: 100%;
-  align-items: center;
   color: var(--a-text-default);
 }
 
@@ -34,12 +33,12 @@
   font-size: 1rem;
   right: 0.5rem;
   pointer-events: none;
+  align-self: center;
 }
 
 .navds-form-field--small .navds-select__input {
   min-height: 32px;
-  padding: 0.25rem;
-  padding-right: 2rem;
+  padding: 0 2rem 0 0.25rem;
 }
 
 /**
@@ -50,9 +49,21 @@
   border-color: var(--ac-select-error-border, var(--a-surface-danger));
 }
 
+/**
+  Disabled
+*/
 .navds-select__input:disabled {
   background-color: var(--ac-select-bg, var(--a-surface-default));
-  border: 1px solid var(--ac-select-border, var(--a-border-strong));
+  border: 1px solid var(--ac-select-border, var(--a-border-default));
   box-shadow: none;
   cursor: not-allowed;
+
+  /* Chrome-fix */
+  opacity: 1;
+  color: var(--a-text-default);
+}
+
+/* Chrome-fix */
+.navds-select__input:disabled > option {
+  color: var(--a-text-default);
 }

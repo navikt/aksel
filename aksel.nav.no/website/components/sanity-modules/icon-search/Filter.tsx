@@ -62,6 +62,7 @@ const Filter = ({
         }}
         size="small"
         defaultValue="outline"
+        variant="neutral"
       >
         <ToggleGroup.Item value="outline">Outline</ToggleGroup.Item>
         <ToggleGroup.Item value="filled">Filled</ToggleGroup.Item>

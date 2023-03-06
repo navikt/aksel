@@ -18,7 +18,7 @@ module.exports = {
           "../aksel.nav.no/website/components/**/*.stories.tsx",
           "../aksel.nav.no/website/pages/eksempler/**/*.tsx",
         ]
-      : {}),
+      : []),
   ],
   addons: [
     "@storybook/addon-a11y",

@@ -24,6 +24,7 @@
   font-size: 1.5rem;
   align-self: flex-start;
   height: var(--a-font-line-height-xlarge);
+  background: radial-gradient(circle, var(--a-surface-default) 50%, 0, transparent);
 }
 
 .navds-alert--small > .navds-alert__icon {
@@ -39,6 +40,10 @@
 .navds-alert--warning {
   border-color: var(--ac-alert-warning-border, var(--a-border-warning));
   background-color: var(--ac-alert-warning-bg, var(--a-surface-warning-subtle));
+}
+
+.navds-alert--warning > .navds-alert__icon {
+  background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
 }
 
 .navds-alert--info {

@@ -10,27 +10,27 @@ const LinkElement = ({ name, href }) => {
   const { asPath } = useRouter();
   return (
     <li>
-      <Link href={href} passHref>
-        <a
-          className={cl(
-            "text-deepblue-800 focus-visible:shadow-focus relative grid h-full place-items-center rounded px-2 focus:outline-none",
-            {
-              "before:bg-border-action-selected font-semibold before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
-                asPath.startsWith(href),
-              "hover:before:bg-border-subtle-hover before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
-                !asPath.startsWith(href),
-            }
-          )}
-          onClick={(e) =>
-            logNav(
-              "header",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+      <Link
+        href={href}
+        passHref
+        className={cl(
+          "text-deepblue-800 focus-visible:shadow-focus relative grid h-full place-items-center rounded px-2 focus:outline-none",
+          {
+            "before:bg-border-action-selected font-semibold before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
+              asPath.startsWith(href),
+            "hover:before:bg-border-subtle-hover before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
+              !asPath.startsWith(href),
           }
-        >
-          {name}
-        </a>
+        )}
+        onClick={(e) =>
+          logNav(
+            "header",
+            window.location.pathname,
+            e.currentTarget.getAttribute("href")
+          )
+        }
+      >
+        {name}
       </Link>
     </li>
   );
@@ -55,21 +55,21 @@ export const Header = ({
         })}
       >
         <div className="mx-auto flex h-full max-w-screen-2xl items-center  pr-4 pt-3 lg:pr-6">
-          <div className="xs:pr-6 xs:pl-4 flex h-11 items-center pr-4 pl-4">
-            <Link href="/" passHref>
-              <a
-                onClick={(e) =>
-                  logNav(
-                    "header",
-                    window.location.pathname,
-                    e.currentTarget.getAttribute("href")
-                  )
-                }
-                className="focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
-              >
-                <Logo />
-                <span className="sr-only">Aksel</span>
-              </a>
+          <div className="flex h-11 items-center pr-4 pl-4 sm:pr-6 sm:pl-4">
+            <Link
+              href="/"
+              passHref
+              onClick={(e) =>
+                logNav(
+                  "header",
+                  window.location.pathname,
+                  e.currentTarget.getAttribute("href")
+                )
+              }
+              className="focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
+            >
+              <Logo />
+              <span className="sr-only">Aksel</span>
             </Link>
           </div>
           <nav

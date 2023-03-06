@@ -67,7 +67,7 @@ const serializers = {
             <Ingress
               spacing
               {...textProps}
-              className={cl("algolia-index-body", {
+              className={cl({
                 "last:mb-0": context.noLastMargin,
               })}
             />
@@ -76,27 +76,20 @@ const serializers = {
               size={context.size}
               spacing
               {...textProps}
-              className={cl("algolia-index-body", {
+              className={cl({
                 "last:mb-0": context.noLastMargin,
               })}
             />
           );
 
         case "detail":
-          return (
-            <Detail
-              spacing
-              size="small"
-              {...textProps}
-              className="algolia-index-detail"
-            />
-          );
+          return <Detail spacing {...textProps} />;
         case "h2":
           return <LevelTwoHeading {...textProps} id={`h${node._key}`} />;
         case "h3":
           return (
             <Heading
-              className="algolia-index-lvl3 max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
+              className="max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
               spacing
               level="3"
               size="medium"
@@ -108,7 +101,7 @@ const serializers = {
         case "h4":
           return (
             <Heading
-              className="algolia-index-lvl4 max-w-text text-deepblue-800 mt-6"
+              className="max-w-text text-deepblue-800 mt-6"
               spacing
               level="4"
               size="small"
@@ -117,7 +110,7 @@ const serializers = {
           );
         case "ingress":
           return (
-            <Ingress spacing className="algolia-index-ingress max-w-text">
+            <Ingress spacing className="max-w-text">
               {children}
             </Ingress>
           );
@@ -127,7 +120,7 @@ const serializers = {
               size={context.size}
               spacing
               {...textProps}
-              className="algolia-index-body max-w-text"
+              className="max-w-text"
             />
           );
       }
@@ -190,7 +183,7 @@ const serializers = {
       }
       if (href && href.startsWith("mailto:")) {
         return (
-          <NextLink href={href} passHref>
+          <NextLink href={href} passHref legacyBehavior>
             <Link
               onClick={(e) =>
                 logNav(
@@ -222,7 +215,7 @@ const serializers = {
           {children} <ExternalLink title="åpner lenken i ny fane" />
         </Link>
       ) : (
-        <NextLink href={href} passHref>
+        <NextLink href={href} passHref legacyBehavior>
           <Link
             onClick={(e) =>
               logNav(
@@ -244,7 +237,7 @@ const serializers = {
 
       const href = `/${slug?.current}`;
       return (
-        <NextLink href={href} passHref>
+        <NextLink href={href} passHref legacyBehavior>
           <Link
             onClick={(e) =>
               logNav(

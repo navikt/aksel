@@ -1,0 +1,66 @@
+.navds-list ul,
+.navds-list ol {
+  padding: 0;
+}
+
+.navds-list--nested {
+  margin: var(--a-spacing-4) 0 var(--a-spacing-8) 0;
+}
+
+.navds-list li:not(.navds-list__item--noMargin) {
+  margin-bottom: var(--a-spacing-5);
+}
+
+.navds-list:last-child > ul > li:last-child,
+.navds-list:last-child > ol > li:last-child {
+  margin-bottom: 0;
+}
+
+.navds-list ul .navds-list__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--a-spacing-3);
+  padding-left: 0;
+}
+
+.navds-list ul .navds-list__item::marker {
+  content: none;
+}
+
+.navds-list ol .navds-list__item-marker--icon {
+  grid-column: 1 / 2;
+  display: flex;
+}
+
+.navds-list .navds-list__item-marker--bullet {
+  display: flex;
+  margin-top: 6px;
+  grid-column: 1 / 2;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  color: var(--ac-list-marker-ul-color, var(--ac-list-marker-color, var(--a-icon-default)));
+}
+
+.navds-list__item-marker--icon {
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  color: var(--ac-list-marker-icon-color, var(--ac-list-marker-color, var(--a-icon-default)));
+}
+
+.navds-list ul .navds-list__item-content {
+  grid-column: 2 / 3;
+}
+
+.navds-list ol {
+  padding-left: var(--a-spacing-2);
+}
+
+.navds-list ol li {
+  padding-left: var(--a-spacing-1);
+  margin-left: var(--a-spacing-2);
+}
+
+.navds-list ol li::marker {
+  font-weight: var(--a-font-weight-bold);
+  font-size: var(--a-font-size-medium);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  color: var(--ac-list-marker-ol-color, var(--ac-list-marker-color, var(--a-icon-default)));
+}

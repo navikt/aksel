@@ -1,5 +1,33 @@
 # @navikt/ds-css-internal
 
+## 2.6.0
+
+## 2.5.1
+
+## 2.5.0
+
+## 2.4.3
+
+## 2.4.2
+
+### Patch Changes
+
+- [#1823](https://github.com/navikt/aksel/pull/1823) [`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8) Thanks [@kschieren](https://github.com/kschieren)! - added support for nested lists
+
+## 2.4.1
+
+## 2.4.0
+
+## 2.3.1
+
+### Patch Changes
+
+- [`241b2e678`](https://github.com/navikt/aksel/commit/241b2e678f1f40909e2d36fe095dcbce8673f174) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset feil bruk av fallback-tokens i textarea, timeline
+
+## 2.3.0
+
+## 2.2.0
+
 ## 2.1.7
 
 ## 2.1.6

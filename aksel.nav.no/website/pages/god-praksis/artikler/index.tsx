@@ -61,7 +61,7 @@ const Artikler = ({ articles }: ArtiklerProps) => {
               <Heading
                 level="1"
                 size="xlarge"
-                className="algolia-index-lvl1 text-deepblue-800 my-20 md:text-[3rem]"
+                className="text-deepblue-800 my-20 md:text-[3rem]"
               >
                 Artikler
               </Heading>

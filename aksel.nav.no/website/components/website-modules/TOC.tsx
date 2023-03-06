@@ -42,9 +42,9 @@ export function TableOfContents({
 
       const filtered = Array.from(newTree)?.filter(
         (x) =>
-          !Array.from(
-            main.getElementsByClassName("algolia-ignore-index")
-          )?.some((y) => y.contains(x))
+          !Array.from(main.getElementsByClassName("toc-ignore"))?.some((y) =>
+            y.contains(x)
+          )
       );
       const toc: {
         heading: string;
@@ -132,7 +132,7 @@ export function TableOfContents({
     <aside
       aria-labelledby="toc-heading"
       className={cl(
-        "algolia-ignore-index sticky top-20 z-[1] order-1 my-0 mb-16 hidden w-72 flex-col items-start pl-4",
+        "toc-ignore sticky top-20 z-[1] order-1 my-0 mb-16 hidden w-72 flex-col items-start pl-4",
         {
           hidden: !renderToc,
           "col-start-3 max-w-prose md:sticky md:top-20 lg:flex":
