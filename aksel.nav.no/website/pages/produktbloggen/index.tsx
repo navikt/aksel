@@ -72,7 +72,7 @@ const Page = (props: PageProps): JSX.Element => {
                 <Heading level="2" size="xlarge" className="text-deepblue-800">
                   Flere blogginnlegg
                 </Heading>
-                <ul className="mt-12 grid gap-x-3 gap-y-6 sm:grid-cols-2 sm:gap-y-10 md:gap-x-6 lg:grid-cols-3">
+                <ul className="mt-12 grid gap-x-3 gap-y-6 md:grid-cols-2 md:gap-y-10 md:gap-x-6 lg:grid-cols-3">
                   {remainingPosts.map((blog) => (
                     <BloggCard key={blog._id} blog={blog} />
                   ))}

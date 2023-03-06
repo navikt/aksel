@@ -100,12 +100,21 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
               Komponent-tokens gir deg muligheten til å sette opp theming eller
               justere styling uten å måtte overskrive css-klasser. Les gjennom{" "}
               <NextLink
-                href="https://aksel.nav.no/grunnleggende/styling/design-tokens#hec62d38bc813"
+                href="/grunnleggende/styling/design-tokens#hec62d38bc813"
                 passHref
+                legacyBehavior
               >
                 <Link>guiden vår</Link>
               </NextLink>{" "}
-              for mer info.
+              eller utforsk alle{" "}
+              <NextLink
+                href="/grunnleggende/styling/design-tokens"
+                passHref
+                legacyBehavior
+              >
+                <Link>design tokens</Link>
+              </NextLink>
+              .
             </BodyLong>
           </div>
         )}

@@ -1,7 +1,7 @@
 import meta from "@navikt/ds-icons/meta.json";
 import { BodyShort, Button, Detail, Heading } from "@navikt/ds-react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import Image from "next/legacy/image";
 
 import {
   AmplitudeEvents,
@@ -74,7 +74,7 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
 
   return (
     <div className="flex min-w-[300px] max-w-xl shrink flex-col">
-      <div className="xs:flex-row mr-16 inline-flex flex-col justify-between gap-4">
+      <div className="mr-16 inline-flex flex-col justify-between gap-4 sm:flex-row">
         <div>
           <Heading
             spacing
@@ -136,8 +136,8 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
           <Image
             src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${icon}.svg`}
             decoding="sync"
-            width="96px"
-            height="96px"
+            width="96"
+            height="96"
             layout="fixed"
             objectFit="contain"
             alt={icon + "eksempel lyst"}
@@ -149,8 +149,8 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
             src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${icon}.svg`}
             decoding="sync"
             className="invert"
-            width="96px"
-            height="96px"
+            width="96"
+            height="96"
             layout="fixed"
             objectFit="contain"
             alt={icon + " eksempel mørk bakgrunn"}

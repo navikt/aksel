@@ -1,6 +1,6 @@
 import { PeopleInCircle } from "@navikt/ds-icons";
 import docs from "@navikt/ds-tokens/docs.json";
-import color from "color";
+import color from "tinycolor2";
 import { Frame } from "../Frame";
 
 export const SemanticView = ({ cat }: { cat: string }) => {
@@ -11,9 +11,10 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       <Frame
         tokens={colors}
         styles="color"
+        showHex
         element={({ token }: { token: string }) => {
           const c = color(token);
-          const isLigth = c.luminosity() > 0.9;
+          const isLigth = c.getLuminance() > 0.9;
 
           return (
             <div
@@ -38,9 +39,10 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       <Frame
         tokens={colors}
         styles="color"
+        showHex
         element={({ token }: { token: string }) => {
           const c = color(token);
-          const isLigth = c.luminosity() > 0.9;
+          const isLigth = c.getLuminance() > 0.9;
 
           return (
             <div
@@ -66,9 +68,10 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       <Frame
         tokens={colors}
         styles="color"
+        showHex
         element={({ token }: { token: string }) => {
           const c = color(token);
-          const isLigth = c.luminosity() > 0.9;
+          const isLigth = c.getLuminance() > 0.7;
 
           return (
             <div
@@ -92,5 +95,5 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       />
     );
   }
-  return <Frame tokens={colors} styles="background" />;
+  return <Frame tokens={colors} styles="background" showHex />;
 };

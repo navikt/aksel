@@ -1,4 +1,5 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { BreakpointsView } from "components/sanity-modules/token-view/categories/Breakpoints";
 import { FontView } from "./categories/Font";
 import { GlobalView } from "./categories/Global";
 import { SemanticView } from "./categories/Semantic";
@@ -27,6 +28,8 @@ const TokenView = ({
       return <SpacingView cat={token.title} />;
     case token.title === "z-index":
       return <ZindexView cat={token.title} />;
+    case token.title === "breakpoints":
+      return <BreakpointsView cat={token.title} />;
     default:
       return null;
   }

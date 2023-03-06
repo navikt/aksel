@@ -104,7 +104,7 @@ export const serializers = {
         case "h2":
           return (
             <Heading
-              className="algolia-index-lvl3 max-w-text mt-8 scroll-mt-20 focus:outline-none"
+              className="max-w-text mt-8 scroll-mt-20 focus:outline-none"
               spacing
               level="2"
               size="medium"
@@ -116,7 +116,7 @@ export const serializers = {
         case "h3":
           return (
             <Heading
-              className="algolia-index-lvl3 max-w-text mt-8 scroll-mt-20 first:mt-0 focus:outline-none group-first:mt-0"
+              className="max-w-text mt-8 scroll-mt-20 first:mt-0 focus:outline-none group-first:mt-0"
               spacing
               level="3"
               size="small"
@@ -128,7 +128,7 @@ export const serializers = {
         case "h4":
           return (
             <Heading
-              className="algolia-index-lvl4 max-w-text mt-6"
+              className="max-w-text mt-6"
               spacing
               level="4"
               size="xsmall"
@@ -141,7 +141,7 @@ export const serializers = {
               size="medium"
               spacing
               {...textProps}
-              className="algolia-index-body max-w-text"
+              className="max-w-text"
             />
           );
       }
@@ -187,7 +187,7 @@ export const serializers = {
     }) => {
       if (href && href.startsWith("mailto:")) {
         return (
-          <NextLink href={href} passHref>
+          <NextLink href={href} passHref legacyBehavior>
             <Link className="inline">{children}</Link>
           </NextLink>
         );
@@ -197,7 +197,7 @@ export const serializers = {
           {children} <ExternalLink title="åpner lenken i ny fane" />
         </Link>
       ) : (
-        <NextLink href={href} passHref>
+        <NextLink href={href} passHref legacyBehavior>
           <Link className="inline">{children}</Link>
         </NextLink>
       );
@@ -209,7 +209,7 @@ export const serializers = {
 
       const href = `/${slug?.current}`;
       return (
-        <NextLink href={href} passHref>
+        <NextLink href={href} passHref legacyBehavior>
           <Link>{children}</Link>
         </NextLink>
       );

@@ -119,7 +119,7 @@ const AkselArtikkelTemplate = ({
           <Heading
             level="1"
             size="large"
-            className="algolia-index-lvl1 text-deepblue-800 mt-4 md:text-5xl"
+            className="text-deepblue-800 mt-4 md:text-5xl"
           >
             {data.heading}
           </Heading>
@@ -154,11 +154,12 @@ const AkselArtikkelTemplate = ({
                     key={title}
                     href={`/god-praksis/${slug.current}`}
                     passHref
+                    legacyBehavior
                   >
                     <BodyShort
                       size="small"
                       as="a"
-                      className="algolia-index-lvl5 min-h-8 text-deepblue-800 focus-visible:shadow-focus flex items-center justify-center gap-[2px] rounded-full bg-gray-200 pl-4 pr-1 capitalize no-underline hover:underline focus:outline-none"
+                      className="min-h-8 text-deepblue-800 focus-visible:shadow-focus flex items-center justify-center gap-[2px] rounded-full bg-gray-200 pl-4 pr-1 capitalize no-underline hover:underline focus:outline-none"
                     >
                       {title}
                       <Next aria-hidden />
@@ -196,10 +197,7 @@ const AkselArtikkelTemplate = ({
                   ))}
                 </BodyShort>
               )}
-              <BodyShort
-                as="span"
-                className="text-text-subtle whitespace-nowrap"
-              >
+              <BodyShort as="span" className="text-text-subtle">
                 Publisert: {dateStr(data?.publishedAt ?? data?._updatedAt)}
               </BodyShort>
             </div>

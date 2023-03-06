@@ -20,10 +20,7 @@ const Accordion = ({
           <DsAccordion.Item key={el._key}>
             <DsAccordion.Header>{el.title}</DsAccordion.Header>
             <DsAccordion.Content>
-              <SanityBlockContent
-                blocks={el.content}
-                className="algolia-ignore-index"
-              />
+              <SanityBlockContent blocks={el.content} className="toc-ignore" />
             </DsAccordion.Content>
           </DsAccordion.Item>
         ))}

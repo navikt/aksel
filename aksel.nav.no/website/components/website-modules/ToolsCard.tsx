@@ -77,7 +77,7 @@ export const ToolCard = () => {
             <div className="-rotate-45">{t.icon}</div>
           </div>
           <div>
-            <NextLink href={t.href} passHref>
+            <NextLink href={t.href} passHref legacyBehavior>
               <Link
                 className="text-text-default mb-1 font-semibold"
                 onClick={(e) =>

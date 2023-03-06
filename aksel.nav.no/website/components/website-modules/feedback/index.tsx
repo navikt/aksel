@@ -149,8 +149,8 @@ const Feedback = ({
   if (!docId || !docType) return null;
 
   const classes = akselFeedback
-    ? "algolia-ignore-index scroll-my-[30vh]"
-    : cl("scroll-my-[30vh] algolia-ignore-index mt-44 mb-28", {
+    ? "toc-ignore scroll-my-[30vh]"
+    : cl("scroll-my-[30vh] toc-ignore mt-44 mb-28", {
         "mx-auto": center,
       });
 

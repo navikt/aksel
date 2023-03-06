@@ -24,7 +24,7 @@ function Page() {
         <BodyLong className="mb-2">
           Vi fant ikke siden du var ute etter{" "}
         </BodyLong>
-        <NextLink href="/" passHref>
+        <NextLink href="/" passHref legacyBehavior>
           <Link>Tilbake til forsiden</Link>
         </NextLink>
       </div>

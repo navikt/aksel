@@ -63,7 +63,7 @@
 }
 
 .navds-textarea__counter--error {
-  color: var(--ac-textarea-counter-error-text, var(--a-surface-danger));
+  color: var(--ac-textarea-counter-error-text, var(--a-text-danger));
 }
 
 .navds-textarea--resize .navds-textarea__input {

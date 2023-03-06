@@ -11,13 +11,28 @@ export const getDesc = (str: string) => {
   return null;
 };
 
-export const filterCode = (code: string) =>
-  code
+export const filterCode = (code: string) => {
+  const exampleList = code
     .substring(0, code.indexOf("export const args ="))
-    .split("\n")
+    .split("\n");
+
+  const storyIndex = exampleList.findIndex(
+    (x) => x === "/* Storybook story */"
+  );
+
+  if (storyIndex === -1) {
+    return exampleList
+      .filter((line) => !line.includes("withDsExample"))
+      .join("\n")
+      .trim();
+  }
+
+  return exampleList
+    .filter((_, idx) => idx < storyIndex || idx > storyIndex + 3)
     .filter((line) => !line.includes("withDsExample"))
     .join("\n")
     .trim();
+};
 
 export const getIndex = (str: string) => {
   const args = str.match(/export const args = {([^}]+)}/)?.[1];
@@ -64,7 +79,7 @@ export const readExampleFiles = (dirName: string): FileT => {
       innhold: filterCode(x.innhold),
     }));
   }
-  return null;
+  return [];
 };
 
 /**
@@ -79,13 +94,11 @@ export const readExampleFile = (
     process.cwd(),
     `pages/eksempler/${fileName}`
   );
-  if (fs.existsSync(examplePath)) {
-    let code = "";
-    code = fs.readFileSync(examplePath, "utf-8");
-    return {
-      innhold: filterCode(code),
-      navn: fileName.replace(".tsx", ""),
-    };
-  }
-  return null;
+
+  let code = "";
+  code = fs.readFileSync(examplePath, "utf-8");
+  return {
+    innhold: filterCode(code),
+    navn: fileName.replace(".tsx", ""),
+  };
 };
