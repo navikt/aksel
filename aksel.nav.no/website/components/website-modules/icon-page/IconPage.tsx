@@ -1,5 +1,5 @@
-import * as Icons from "@navikt/ds-icons";
-import meta from "@navikt/ds-icons/meta.json";
+import * as Icons from "@navikt/aksel-icons";
+import meta from "@navikt/aksel-icons/metadata";
 import { Heading, Search } from "@navikt/ds-react";
 import cl from "classnames";
 import Footer from "components/layout/footer/Footer";
@@ -14,16 +14,16 @@ import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import { useMedia } from "@/utils";
 
-const categorizeIcons = (icons) => {
+const categorizeIcons = (icons: typeof meta) => {
   const categories = [];
 
-  for (const icon of icons) {
+  for (const icon of Object.values(icons)) {
     const i = categories.findIndex(
-      ({ category }) => icon.pageName === category
+      ({ category }) => icon.category === category
     );
     i !== -1
       ? categories[i].icons.push(icon)
-      : categories.push({ category: icon.pageName, icons: [icon] });
+      : categories.push({ category: icon.category, icons: [icon] });
   }
   return categories.sort((a, b) => a.category.localeCompare(b.category));
 };
@@ -31,7 +31,7 @@ const categorizeIcons = (icons) => {
 export const IconPage = ({ name }: { name: string }) => {
   const [query, setQuery] = useState("");
 
-  const [visibleIcons] = useState<any>(meta);
+  const [visibleIcons] = useState(meta);
 
   const hideModal = useMedia("screen and (min-width: 1024px)");
 
@@ -39,14 +39,14 @@ export const IconPage = ({ name }: { name: string }) => {
     () =>
       categorizeIcons(
         visibleIcons
-          .filter((x) => {
-            return query === ""
-              ? true
-              : x?.name.toLowerCase().includes(query) ||
-                  x?.pageName.toLowerCase().includes(query) ||
-                  x?.description.toLowerCase().includes(query);
-          })
-          .filter((x) => !x?.name?.includes("fill"))
+        /*     visibleIcons.filter((x) => {
+          return query === ""
+            ? true
+            : x?.name.toLowerCase().includes(query) ||
+                x?.pageName.toLowerCase().includes(query) ||
+                x?.description.toLowerCase().includes(query);
+        }) */
+        /* .filter((x) => !x?.name?.includes("fill")) */
       ),
     [visibleIcons, query]
   );
@@ -119,18 +119,21 @@ export const IconPage = ({ name }: { name: string }) => {
                         </Heading>
                         <div className="flex flex-wrap gap-2">
                           {cat.icons.map((i) => {
-                            const T = Icons[i.name];
+                            const T = Icons[`${i.id}Icon`];
+                            if (T === undefined) {
+                              return null;
+                            }
                             return (
                               <Link
-                                href={`/ikoner/${i.name}`}
+                                href={`/ikoner/${i.id}`}
                                 scroll={false}
                                 prefetch={false}
-                                key={i.name}
+                                key={i.id}
                                 className={cl(
                                   "hover:bg-surface-hover bg-surface-default group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200",
                                   {
                                     "bg-surface-selected ring-border-alt-3 ring-1":
-                                      i.name === name,
+                                      i.id === name,
                                   }
                                 )}
                               >
