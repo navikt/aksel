@@ -1,7 +1,7 @@
 import { useMedia } from "@/utils";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
-import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
+import { Chips, Heading, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "classnames";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
@@ -10,7 +10,7 @@ import Fuse from "fuse.js";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import { categorizeIcons, getFillIcon } from "./icon-utils";
 import { IconSidebar } from "./IconSidebar";
@@ -52,6 +52,9 @@ export const IconPage = ({ name }: { name: string }) => {
     Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke")
   );
   const [fillIcons] = useState(getFillIcon(Object.values(meta)));
+  const [allCategories] = useState(
+    categorizeIcons(Object.values(meta)).map((x) => x.category)
+  );
 
   const hideModal = useMedia("screen and (min-width: 1024px)");
 
@@ -180,6 +183,60 @@ export const IconPage = ({ name }: { name: string }) => {
                       }
                     )}
                   >
+                    <div className="flex w-full flex-wrap gap-2">
+                      <Chips size="small">
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                        {allCategories.map((x) => (
+                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
+                            {x}
+                          </Chips.Toggle>
+                        ))}
+                      </Chips>
+                    </div>
                     {categories.length === 0 && (
                       <div>
                         <SuggestionBlock variant="ikon-not-found" />
