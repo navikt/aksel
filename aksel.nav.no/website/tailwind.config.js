@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screen: {
+        "2xl": "1440px",
+      },
       colors: {
         pink: {
           50: "#fdf2f8",
