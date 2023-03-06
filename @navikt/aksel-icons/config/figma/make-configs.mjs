@@ -13,7 +13,6 @@ export const makeConfig = (icons) => {
       variant: icon.name.includes("Variant=")
         ? icon.name.replace("Variant=", "")
         : "Stroke",
-      has_filled: icon.name.includes("Variant="),
       updated_at: new Date(icon.updated_at)
         .toISOString()
         .split("T")[0]
