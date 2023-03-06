@@ -1,21 +1,20 @@
+import { useMedia } from "@/utils";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "classnames";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import { AkselCubeStatic } from "components/website-modules/cube";
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { IconSidebar } from "./IconSidebar";
-import { TitleLinks } from "./TitleLinks";
-import ReactModal from "react-modal";
-import { useRouter } from "next/router";
-import styles from "./styles.module.css";
-import { useMedia } from "@/utils";
-import { categorizeIcons, getFillIcon } from "./icon-utils";
-import Fuse from "fuse.js";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
+import Fuse from "fuse.js";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useMemo, useState } from "react";
+import ReactModal from "react-modal";
+import { categorizeIcons, getFillIcon } from "./icon-utils";
+import { IconSidebar } from "./IconSidebar";
+import styles from "./styles.module.css";
+import { TitleLinks } from "./TitleLinks";
 
 const fuseStroke = new Fuse(
   Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),
@@ -89,13 +88,14 @@ export const IconPage = ({ name }: { name: string }) => {
             <h1 className="from-deepblue-800 via-deepblue-400 my-0 w-fit bg-gradient-to-tr to-violet-500 bg-clip-text text-7xl font-bold text-transparent">
               Aksel icons
             </h1>
-            <p className="override-text-no-max mt-6 text-2xl">
-              En samling open-source ikoner designet og utviklet for NAV
-            </p>
-            <AkselCubeStatic className="text-violet-400 opacity-5" />
+            <div className="override-text-no-max mt-4 inline-flex flex-wrap items-center gap-4 text-xl">
+              <span>{`${
+                Object.values(meta).length
+              } Open source-ikoner designet og utviklet for NAV`}</span>
+            </div>
           </div>
-          <div className="z-10 mt-16 mb-8 rounded-2xl bg-gradient-to-br from-violet-300/30 to-teal-400/30 p-[2px]">
-            <div className="bg-surface-default shadow-medium h-full w-full rounded-[15px]">
+          <div className="shadow-medium z-10 mt-16 mb-8 rounded-2xl bg-gradient-to-br from-teal-300/30 to-violet-400/30 p-[2px]">
+            <div className="bg-surface-default  h-full w-full rounded-[15px]">
               <div className="border-b-border-subtle grid items-center border-b">
                 <TitleLinks />
                 <form
@@ -111,6 +111,7 @@ export const IconPage = ({ name }: { name: string }) => {
                       placeholder="Søk etter ikon..."
                       onChange={setQuery}
                       value={query}
+                      clearButton={false}
                     />
                   </div>
                   <div className="justify-self-end">
@@ -121,8 +122,18 @@ export const IconPage = ({ name }: { name: string }) => {
                       onChange={(v) => setToggle(v as any)}
                       className="w-full"
                     >
-                      <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
-                      <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className="transition-colors duration-100"
+                        value="stroke"
+                      >
+                        Stroke
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className="transition-colors duration-100"
+                        value="fill"
+                      >
+                        Fill
+                      </ToggleGroup.Item>
                     </ToggleGroup>
                   </div>
                 </form>
@@ -138,7 +149,9 @@ export const IconPage = ({ name }: { name: string }) => {
                   )}
                 >
                   {categories.length === 0 && (
-                    <SuggestionBlock variant="ikon-not-found" />
+                    <div>
+                      <SuggestionBlock variant="ikon-not-found" />
+                    </div>
                   )}
                   {categories.map((cat) => {
                     return (
