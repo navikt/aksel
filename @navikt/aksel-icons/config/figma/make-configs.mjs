@@ -10,7 +10,10 @@ export const makeConfig = (icons) => {
       name: resolveName(icon).replace(".svg", ""),
       category: icon.containing_frame.name,
       keywords: [...icon.description.split(",").map((x) => x.trim())],
-      variant: icon.name.replace("Variant=", ""),
+      variant: icon.name.includes("Variant=")
+        ? icon.name.replace("Variant=", "")
+        : "Stroke",
+      has_filled: icon.name.includes("Variant="),
       updated_at: new Date(icon.updated_at)
         .toISOString()
         .split("T")[0]
