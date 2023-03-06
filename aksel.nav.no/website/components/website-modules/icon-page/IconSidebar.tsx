@@ -76,10 +76,10 @@ export const IconSidebar = ({ name }: { name: string }) => {
           <Highlight
             code={`import {
   ${name}
-} from '@navikt/ds-icons';`}
+} from '@navikt/aksel-icons';`}
             language="tsx"
-            theme={undefined}
             {...defaultProps}
+            theme={undefined}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
               <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono">
@@ -118,8 +118,8 @@ export const IconSidebar = ({ name }: { name: string }) => {
           <Highlight
             code={`<${name} title="a11y-title" />`}
             language="tsx"
-            theme={undefined}
             {...defaultProps}
+            theme={undefined}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
               <pre className="relative m-0 max-w-[80vw]  overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:max-w-[16rem]">
@@ -161,8 +161,8 @@ export const IconSidebar = ({ name }: { name: string }) => {
           <Highlight
             code={ReactDOMServer.renderToString(<SelectedIcon />)}
             language="tsx"
-            theme={undefined}
             {...defaultProps}
+            theme={undefined}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
               <pre className="w-text relative m-0 max-w-[80vw] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:w-auto lg:max-w-[16rem]">
