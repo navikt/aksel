@@ -1,6 +1,6 @@
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
-import { Heading, Search } from "@navikt/ds-react";
+import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "classnames";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
@@ -13,10 +13,25 @@ import ReactModal from "react-modal";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import { useMedia } from "@/utils";
-import { categorizeIcons } from "./icon-utils";
+import { categorizeIcons, getFillIcon } from "./icon-utils";
 import Fuse from "fuse.js";
 
-const fuse = new Fuse(Object.values(meta), {
+const fuseStroke = new Fuse(
+  Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),
+  {
+    threshold: 0.2,
+    keys: [
+      { name: "name", weight: 3 },
+      { name: "category", weight: 2 },
+      { name: "sub_category", weight: 2 },
+      { name: "keywords", weight: 3 },
+      { name: "variant", weight: 1 },
+    ],
+    shouldSort: false,
+  }
+);
+
+const fuseFill = new Fuse(getFillIcon(Object.values(meta)), {
   threshold: 0.2,
   keys: [
     { name: "name", weight: 3 },
@@ -30,20 +45,29 @@ const fuse = new Fuse(Object.values(meta), {
 
 export const IconPage = ({ name }: { name: string }) => {
   const [query, setQuery] = useState("");
+  const [toggle, setToggle] = useState<"stroke" | "fill">("stroke");
 
-  const [visibleIcons] = useState(Object.values(meta));
+  const [strokeIcons] = useState(
+    Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke")
+  );
+  const [fillIcons] = useState(getFillIcon(Object.values(meta)));
 
   const hideModal = useMedia("screen and (min-width: 1024px)");
 
-  const categories = useMemo(
-    () =>
-      categorizeIcons(
+  const categories = useMemo(() => {
+    if (toggle === "fill") {
+      return categorizeIcons(
         query
-          ? fuse.search(query).map((result) => result.item as any)
-          : visibleIcons
-      ),
-    [visibleIcons, query]
-  );
+          ? fuseFill.search(query).map((result) => result.item as any)
+          : fillIcons
+      );
+    }
+    return categorizeIcons(
+      query
+        ? fuseStroke.search(query).map((result) => result.item as any)
+        : strokeIcons
+    );
+  }, [toggle, query, strokeIcons, fillIcons]);
 
   const router = useRouter();
 
@@ -75,7 +99,7 @@ export const IconPage = ({ name }: { name: string }) => {
                 <TitleLinks />
                 <form
                   onSubmit={(e) => e.preventDefault()}
-                  className="w-full py-2 px-4"
+                  className="grid w-full grid-cols-2 items-center gap-4 py-2 px-4"
                   role="search"
                 >
                   <div className="flex items-center gap-2">
@@ -87,6 +111,18 @@ export const IconPage = ({ name }: { name: string }) => {
                       onChange={setQuery}
                       value={query}
                     />
+                  </div>
+                  <div className="justify-self-end">
+                    <ToggleGroup
+                      size="small"
+                      value={toggle}
+                      variant="neutral"
+                      onChange={(v) => setToggle(v as any)}
+                      className="w-full"
+                    >
+                      <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
+                      <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
+                    </ToggleGroup>
                   </div>
                 </form>
               </div>

@@ -41,3 +41,16 @@ export const categorizeIcons = (
     .sort((a, b) => a.category.localeCompare(b.category))
     .map((x) => ({ ...x, sub_categories: subCategorizeIcons(x.icons) }));
 };
+
+const noFill = (icon: typeof meta[1], icons: typeof meta[1][]) => {
+  const foundFill = icons.find(
+    (x) => x.name.endsWith("Fill") && x.name.replace("Fill", "") === icon.name
+  );
+  return !foundFill;
+};
+
+export const getFillIcon = (icons: typeof meta[1][]) => {
+  return icons.filter(
+    (x, _, z) => x.variant.toLowerCase() === "fill" || noFill(x, z)
+  );
+};
