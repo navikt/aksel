@@ -82,8 +82,8 @@ export const IconPage = ({ name }: { name: string }) => {
   const router = useRouter();
 
   useEffect(() => {
-    ReactModal.setAppElement("#__next");
-  }, []);
+    hideModal && ReactModal.setAppElement("#__next");
+  }, [hideModal]);
 
   return (
     <div className="bg-surface-subtle relative overflow-clip">
@@ -145,19 +145,18 @@ export const IconPage = ({ name }: { name: string }) => {
                         >
                           {cat.category}
                         </Heading>
-                        <div className="grid w-full  gap-2">
+                        <div className="grid w-full gap-2">
                           {cat.sub_categories.map((sub) => {
                             return (
                               <div key={sub.sub_category}>
                                 <Heading
                                   level="3"
                                   size="xsmall"
-                                  className="text-text-subtle"
-                                  spacing
+                                  className="text-text-subtle mb-1"
                                 >
                                   {sub.sub_category}
                                 </Heading>
-                                <div className="flex flex-wrap">
+                                <div className="gap-05 flex flex-wrap">
                                   {sub.icons.map((i) => {
                                     const T = Icons[`${i.id}Icon`];
                                     if (T === undefined) {
@@ -170,9 +169,9 @@ export const IconPage = ({ name }: { name: string }) => {
                                         prefetch={false}
                                         key={i.id}
                                         className={cl(
-                                          "hover:bg-surface-hover bg-surface-default group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200",
+                                          "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
                                           {
-                                            "bg-surface-selected ring-border-alt-3 ring-1":
+                                            "bg-surface-selected ring-border-alt-3 z-10 ring-1":
                                               i.id === name,
                                           }
                                         )}

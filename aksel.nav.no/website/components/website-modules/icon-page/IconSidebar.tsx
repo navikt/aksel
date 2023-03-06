@@ -1,14 +1,15 @@
 import { Heading, Tooltip } from "@navikt/ds-react";
 import Link from "next/link";
 import ReactDOMServer from "react-dom/server";
-import * as Icons from "@navikt/ds-icons";
+import * as Icons from "@navikt/aksel-icons";
 import { CopyIcon } from "@sanity/icons";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import copy from "copy-to-clipboard";
 import { useEffect, useRef, useState } from "react";
+import { Close } from "@navikt/ds-icons";
 
 export const IconSidebar = ({ name }: { name: string }) => {
-  const SelectedIcon = Icons[name];
+  const SelectedIcon = Icons[`${name}Icon`];
   const [resentCopy, setResentCopy] = useState<"svg" | "react" | "import">();
   const timeoutRef = useRef<NodeJS.Timeout>();
 
@@ -41,12 +42,12 @@ export const IconSidebar = ({ name }: { name: string }) => {
         prefetch={false}
         className="min-h-11 hover:bg-surface-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl"
       >
-        <Icons.Close title="lukk ikonvisning" />
+        <Close title="lukk ikonvisning" />
       </Link>
       <button className="ring-border-subtle bg-deepblue-500 text-text-on-action mt-8 w-full rounded px-3 py-2 ring-1">
         Last ned
       </button>
-      <div>
+      <div data-prism-theme="light">
         <Heading level="3" size="small" className="mt-6 mb-2">
           Kode
         </Heading>
@@ -62,7 +63,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
                   handleCopy(
                     `import {
   ${name}
-} from '@navikt/ds-icons';`,
+} from '@navikt/aksel-icons';`,
                     "import"
                   )
                 }
@@ -81,7 +82,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
             {...defaultProps}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert">
+              <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono">
                 {tokens.map((line, i) => (
                   <div
                     key={i}
@@ -121,7 +122,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
             {...defaultProps}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="relative m-0 max-w-[80vw]  overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert lg:max-w-[16rem]">
+              <pre className="relative m-0 max-w-[80vw]  overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:max-w-[16rem]">
                 {tokens.map((line, i) => (
                   <div
                     key={i}
@@ -164,7 +165,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
             {...defaultProps}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="w-text relative m-0 max-w-[80vw] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono invert lg:w-auto lg:max-w-[16rem]">
+              <pre className="w-text relative m-0 max-w-[80vw] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:w-auto lg:max-w-[16rem]">
                 {tokens.map((line, i) => (
                   <div
                     key={i}
