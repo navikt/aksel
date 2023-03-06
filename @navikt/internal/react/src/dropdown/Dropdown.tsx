@@ -5,7 +5,7 @@ import Menu, { MenuType } from "./Menu";
 export interface DropdownProps {
   children: React.ReactNode;
   /**
-   * Handler that is called when an item is selected.
+   * Handler called when an item is selected.
    */
   onSelect?: (element: React.MouseEvent) => void;
   /**
@@ -13,6 +13,14 @@ export interface DropdownProps {
    * @default true
    */
   closeOnSelect?: boolean;
+  /**
+   * @default false
+   */
+  defaultOpen?: boolean;
+  /**
+   * Controlled state of the dropdown. When set, you will need to handle onClose and onSelect manually.
+   */
+  open?: boolean;
 }
 
 export interface DropdownType extends React.FC<DropdownProps> {
@@ -22,7 +30,7 @@ export interface DropdownType extends React.FC<DropdownProps> {
 
 export interface DropdownContextType {
   readonly isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleToggle: (v: boolean) => void;
   readonly anchorEl: Element | null;
   setAnchorEl: React.Dispatch<React.SetStateAction<Element | null>>;
   onSelect: (element: React.MouseEvent) => void;
@@ -30,20 +38,34 @@ export interface DropdownContextType {
 
 export const DropdownContext = createContext<DropdownContextType | null>(null);
 
-export const Dropdown = (({ children, onSelect, closeOnSelect = true }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+export const Dropdown = (({
+  children,
+  onSelect,
+  closeOnSelect = true,
+  defaultOpen = false,
+  open,
+}) => {
+  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+
+  const handleToggle = (v: boolean) => {
+    if (open === undefined) {
+      setIsOpen(v);
+    }
+  };
 
   return (
     <DropdownContext.Provider
       value={{
-        isOpen,
-        setIsOpen,
+        isOpen: open ?? isOpen,
+        handleToggle,
         anchorEl,
         setAnchorEl,
         onSelect: (event) => {
           onSelect?.(event);
-          closeOnSelect && setIsOpen(false);
+          if (closeOnSelect) {
+            open === undefined && setIsOpen(false);
+          }
         },
       }}
     >

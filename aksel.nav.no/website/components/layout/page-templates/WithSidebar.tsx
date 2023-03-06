@@ -77,7 +77,7 @@ export const WithSidebar = ({
             <main
               tabIndex={-1}
               id="hovedinnhold"
-              className="min-h-screen-header md:max-w-screen-sidebar xs:pl-6 xs:pr-6 relative w-full px-4 focus:outline-none md:pl-0"
+              className="min-h-screen-header md:max-w-screen-sidebar relative w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
             >
               <div
                 className={cl(
@@ -145,12 +145,12 @@ export const WithSidebar = ({
                   </div>
                 )}
                 {variant === "landingPage" && (
-                  <div className="xs:block pointer-events-none absolute top-0 right-0 hidden">
+                  <div className="pointer-events-none absolute top-0 right-0 hidden sm:block">
                     <HeaderCube className="text-deepblue-300 z-0 max-h-full" />
                   </div>
                 )}
               </div>
-              <div className={cl("xs:px-6 md:px-10", { flex: withToc })}>
+              <div className={cl("sm:px-6 md:px-10", { flex: withToc })}>
                 {withToc && (
                   <TableOfContentsv2
                     changedState={pageProps["content"]}

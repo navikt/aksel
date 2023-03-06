@@ -19,6 +19,7 @@ const ComponentExamples = ({
 }): JSX.Element => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
+  const [unloaded, setUnloaded] = useState(true);
 
   const handleExampleLoad = () => {
     let attempts = 0;
@@ -32,6 +33,7 @@ const ComponentExamples = ({
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
         clearInterval(waitForExampleContentToRender);
         setFrameState(newHeight < 300 ? 300 : newHeight);
+        setUnloaded(false);
       }
 
       attempts++;
@@ -77,7 +79,10 @@ const ComponentExamples = ({
                 key={fil._key}
                 value={fil.navn}
                 selected={active === fil.navn}
-                onClick={() => setActiveExample(fil.navn)}
+                onClick={() => {
+                  setActiveExample(fil.navn);
+                  setUnloaded(true);
+                }}
               >
                 {fixName(fil.navn)}
               </Chips.Toggle>
@@ -100,7 +105,15 @@ const ComponentExamples = ({
 
             {active === fil.navn && (
               <>
-                <div className="overflow-hidden rounded-t border border-b-0 border-gray-300 bg-gray-50">
+                <div
+                  className={cl(
+                    "overflow-hidden rounded-t border border-b-0 border-gray-300 ",
+                    {
+                      "relative animate-pulse": unloaded,
+                      "bg-gray-50": !unloaded,
+                    }
+                  )}
+                >
                   <iframe
                     src={`/eksempler/${node.dir.title}/${fil.navn.replace(
                       ".tsx",
@@ -109,21 +122,30 @@ const ComponentExamples = ({
                     height={frameState}
                     onLoad={() => handleExampleLoad()}
                     id={iframeId}
-                    aria-label="Komponent eksempler"
+                    aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
                     className={cl(
-                      "min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]"
+                      "min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                      { invisible: unloaded }
                     )}
                     title="Kode-eksempler"
                   />
+                  {unloaded && (
+                    <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
+                      <div className="grid w-3/5 gap-2">
+                        <div className="bg-surface-neutral-subtle h-6 w-2/3 rounded-xl" />
+                        <div className="bg-surface-neutral-subtle h-16 w-full rounded-xl" />
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div className="xs:justify-end mb-2 flex justify-center gap-2 rounded-b border border-gray-300 px-2 py-1 text-base ">
+                <div className="mb-2 flex justify-center gap-2 rounded-b border border-gray-300 px-2 py-1 text-base sm:justify-end ">
                   <CodeSandbox code={fil.innhold.trim()} />
                   <Link
                     href={`/eksempler/${node.dir.title}/${fil.navn.replace(
                       ".tsx",
                       ""
                     )}`}
-                    className="text-gray-900"
+                    className="si-ignore text-gray-900"
                     target="_blank"
                   >
                     Åpne i nytt vindu

@@ -1,5 +1,25 @@
 # @navikt/ds-css
 
+## 2.6.0
+
+## 2.5.1
+
+## 2.5.0
+
+## 2.4.3
+
+### Patch Changes
+
+- [`f962bc781`](https://github.com/navikt/aksel/commit/f962bc7816027c24e334d9754c3e07cda951cf56) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset disabled-opacity bug i select for Chrome
+
+## 2.4.2
+
+### Patch Changes
+
+- [#1823](https://github.com/navikt/aksel/pull/1823) [`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8) Thanks [@kschieren](https://github.com/kschieren)! - added support for nested lists
+
+## 2.4.1
+
 ## 2.4.0
 
 ### Minor Changes

@@ -42,9 +42,9 @@ export function TableOfContentsv2({
 
       const filtered = Array.from(newTree)?.filter(
         (x) =>
-          !Array.from(
-            main.getElementsByClassName("algolia-ignore-index")
-          )?.some((y) => y.contains(x))
+          !Array.from(main.getElementsByClassName("toc-ignore"))?.some((y) =>
+            y.contains(x)
+          )
       );
       const toc: {
         heading: string;
@@ -131,7 +131,7 @@ export function TableOfContentsv2({
   return (
     <aside
       className={cl(
-        "algolia-ignore-index xs:-mr-6 sticky top-20 z-[1] order-1 my-0 ml-6 mb-16 mr-auto h-full w-full max-w-[160px] flex-col items-start md:-mr-10",
+        "toc-ignore sticky top-20 z-[1] order-1 my-0 ml-6 mb-16 mr-auto h-full w-full max-w-[160px] flex-col items-start sm:-mr-6 md:-mr-10",
         {
           hidden: !renderToc,
           "hidden xl:flex": renderToc,

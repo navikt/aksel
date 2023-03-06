@@ -35,8 +35,7 @@
 └── codemod         # @navikt/ds-codemod, migrerings-scripts
 
 aksel.nav.no/
-├── website        # NEXT.JS app (v12)
-└── website/sanity # Sanity CMS-app (v3)
+└── website        # NEXT.JS app (v12) website/sanity # Sanity CMS-app (v3)
 ```
 
 ## Commands

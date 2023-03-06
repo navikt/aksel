@@ -1,5 +1,25 @@
 # @navikt/ds-tailwind
 
+## 2.6.0
+
+## 2.5.1
+
+## 2.5.0
+
+### Minor Changes
+
+- [#1832](https://github.com/navikt/aksel/pull/1832) [`8893b5c82`](https://github.com/navikt/aksel/commit/8893b5c82daf7c23897019fda912e702a1f05eaa) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Breakpoint-tokens for ds-tokens og ds-tailwind
+
+## 2.4.3
+
+## 2.4.2
+
+### Patch Changes
+
+- [#1823](https://github.com/navikt/aksel/pull/1823) [`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8) Thanks [@kschieren](https://github.com/kschieren)! - added support for nested lists
+
+## 2.4.1
+
 ## 2.4.0
 
 ## 2.3.1

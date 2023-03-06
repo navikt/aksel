@@ -19,7 +19,7 @@ export const NoSidebarLayout = ({
         id="hovedinnhold"
         className="aksel-artikkel bg-gray-50 pt-4 focus:outline-none"
       >
-        <div className="max-w-aksel xs:w-[90%] mx-auto px-4">
+        <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
           <article className="pt-12 pb-16 md:pb-32">{children}</article>
         </div>
         {aside}
