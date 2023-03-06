@@ -15,6 +15,7 @@ import styles from "./styles.module.css";
 import { useMedia } from "@/utils";
 import { categorizeIcons, getFillIcon } from "./icon-utils";
 import Fuse from "fuse.js";
+import { SuggestionBlock } from "components/website-modules/suggestionblock";
 
 const fuseStroke = new Fuse(
   Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),
@@ -136,6 +137,9 @@ export const IconPage = ({ name }: { name: string }) => {
                     }
                   )}
                 >
+                  {categories.length === 0 && (
+                    <SuggestionBlock variant="ikon-not-found" />
+                  )}
                   {categories.map((cat) => {
                     return (
                       <div key={cat.category}>
@@ -178,7 +182,7 @@ export const IconPage = ({ name }: { name: string }) => {
                                           }
                                         )}
                                       >
-                                        <T className="text-2xl" aria-hidden />
+                                        <T className="text-3xl" aria-hidden />
                                       </Link>
                                     );
                                   })}

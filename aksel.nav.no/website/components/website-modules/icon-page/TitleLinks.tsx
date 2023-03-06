@@ -21,7 +21,7 @@ export const TitleLinks = () => (
     </li>
     <li className="flex items-center gap-2">
       <NextLink
-        href="https://www.npmjs.com/package/@navikt/ds-icons"
+        href="https://www.npmjs.com/package/@navikt/aksel-icons"
         passHref
         legacyBehavior
       >
