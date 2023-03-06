@@ -99,14 +99,14 @@ export const IconPage = ({ name }: { name: string }) => {
                 <TitleLinks />
                 <form
                   onSubmit={(e) => e.preventDefault()}
-                  className="grid w-full grid-cols-2 items-center gap-4 py-2 px-4"
+                  className="flex w-full items-center gap-4 py-2 px-4"
                   role="search"
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex w-full items-center gap-2 ">
                     <Search
                       variant="simple"
                       label="Ikonsøk"
-                      className="max-w-md border-none"
+                      className="border-none"
                       placeholder="Søk etter ikon..."
                       onChange={setQuery}
                       value={query}

@@ -1,17 +1,23 @@
-import { Heading, Tooltip } from "@navikt/ds-react";
+import { Button, Heading, Tooltip } from "@navikt/ds-react";
 import Link from "next/link";
+import meta from "@navikt/aksel-icons/metadata";
 import ReactDOMServer from "react-dom/server";
 import * as Icons from "@navikt/aksel-icons";
 import { CopyIcon } from "@sanity/icons";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import copy from "copy-to-clipboard";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Close } from "@navikt/ds-icons";
 
 export const IconSidebar = ({ name }: { name: string }) => {
   const SelectedIcon = Icons[`${name}Icon`];
   const [resentCopy, setResentCopy] = useState<"svg" | "react" | "import">();
   const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const currentIcon = useMemo(
+    () => Object.values(meta).find((x) => x.name === name),
+    [name]
+  );
 
   const handleCopy = (copyStr: string, src: "svg" | "react" | "import") => {
     copy(copyStr);
@@ -34,19 +40,22 @@ export const IconSidebar = ({ name }: { name: string }) => {
       <Heading level="2" size="medium" className="mt-3">
         {name}
       </Heading>
-      <p className="mt-6">Kategorinavn</p>
+      <p className="mt-1">{currentIcon.category}</p>
+      <p className="">
+        <span aria-hidden>└ </span>
+        {`${currentIcon.sub_category}`}
+      </p>
       <Link
         href="/ikoner"
-        passHref
         scroll={false}
         prefetch={false}
-        className="min-h-11 hover:bg-surface-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl"
+        className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus aactive:bg-surface-neutral-subtle-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl focus:outline-none"
       >
         <Close title="lukk ikonvisning" />
       </Link>
-      <button className="ring-border-subtle bg-deepblue-500 text-text-on-action mt-8 w-full rounded px-3 py-2 ring-1">
+      <Button variant="secondary-neutral" className="mt-8 w-full">
         Last ned
-      </button>
+      </Button>
       <div data-prism-theme="light">
         <Heading level="3" size="small" className="mt-6 mb-2">
           Kode
