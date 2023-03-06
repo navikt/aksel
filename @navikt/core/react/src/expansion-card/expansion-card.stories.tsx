@@ -555,3 +555,27 @@ export const ControlledState = {
     );
   },
 };
+
+export const Customization = {
+  render: () => (
+    <div className="subtle-card">
+      <ExpansionCard>
+        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+
+      <style>{`
+        .subtle-card {
+          --ac-expansioncard-bg: var(--a-surface-alt-3-subtle);
+          --ac-expansioncard-avatar-bg: var(--a-deepblue-200);
+          --ac-expansioncard-open-border-color: var(--a-border-alt-3);
+        }`}</style>
+    </div>
+  ),
+};

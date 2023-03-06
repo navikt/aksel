@@ -51,7 +51,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle));
   border-radius: var(--ac-expansioncard-avatar-border-radius, var(--a-border-radius-full));
   min-height: 3rem;
   aspect-ratio: 1/1;
@@ -148,12 +147,20 @@
  *************************/
 
 .navds-expansioncard--neutral .navds-expansioncard__header-avatar {
-  background-color: var(--ac-expansioncard-neutral-avatar-bg, var(--a-surface-neutral-subtle));
-  color: var(--ac-expansioncard-neutral-avatar-icon, var(--a-icon-default));
+  background-color: var(--ac-expansioncard-neutral-avatar-bg, var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle)));
+  color: var(--ac-expansioncard-neutral-avatar-icon, var(--ac-expansioncard-avatar-icon, var(--a-icon-default)));
 }
 
 .navds-expansioncard--neutral-filled {
   background-color: var(--ac-expansioncard-neutral-bg, var(--a-bg-subtle));
+}
+
+.navds-expansioncard--neutral-filled .navds-expansioncard__header-avatar {
+  background-color: var(
+    --ac-expansioncard-neutral-filled-avatar-bg,
+    var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle))
+  );
+  color: var(--ac-expansioncard-neutral-filled-avatar-icon, var(--ac-expansioncard-avatar-icon, var(--a-icon-default)));
 }
 
 /*************************
