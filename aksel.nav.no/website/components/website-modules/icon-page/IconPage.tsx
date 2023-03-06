@@ -217,7 +217,6 @@ export const IconPage = ({ name }: { name: string }) => {
                                         <Link
                                           href={`/ikoner/${i.id}`}
                                           scroll={false}
-                                          prefetch={false}
                                           key={i.id}
                                           className={cl(
                                             "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",

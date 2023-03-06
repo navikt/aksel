@@ -1,14 +1,14 @@
-import { Button, Heading, Tooltip } from "@navikt/ds-react";
-import Link from "next/link";
-import meta from "@navikt/aksel-icons/metadata";
-import ReactDOMServer from "react-dom/server";
 import * as Icons from "@navikt/aksel-icons";
-import { CopyIcon } from "@sanity/icons";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import copy from "copy-to-clipboard";
-import { useEffect, useMemo, useRef, useState } from "react";
+import meta from "@navikt/aksel-icons/metadata";
 import { Close } from "@navikt/ds-icons";
-import { Router, useRouter } from "next/router";
+import { Button, Heading, Tooltip } from "@navikt/ds-react";
+import { CopyIcon } from "@sanity/icons";
+import copy from "copy-to-clipboard";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Highlight, { defaultProps } from "prism-react-renderer";
+import { useEffect, useMemo, useRef, useState } from "react";
+import ReactDOMServer from "react-dom/server";
 
 export const IconSidebar = ({ name }: { name: string }) => {
   const SelectedIcon = Icons[`${name}Icon`];
