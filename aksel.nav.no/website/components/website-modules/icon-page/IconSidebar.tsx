@@ -8,11 +8,14 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 import copy from "copy-to-clipboard";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Close } from "@navikt/ds-icons";
+import { Router, useRouter } from "next/router";
 
 export const IconSidebar = ({ name }: { name: string }) => {
   const SelectedIcon = Icons[`${name}Icon`];
   const [resentCopy, setResentCopy] = useState<"svg" | "react" | "import">();
   const timeoutRef = useRef<NodeJS.Timeout>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const currentIcon = useMemo(
     () => Object.values(meta).find((x) => x.name === name),
@@ -32,19 +35,18 @@ export const IconSidebar = ({ name }: { name: string }) => {
     return () => timeoutRef.current && clearTimeout(timeoutRef.current);
   }, []);
 
+  useEffect(() => {
+    if (wrapperRef.current) {
+      wrapperRef.current.focus();
+    }
+  }, [name]);
+
   return (
-    <div className="animate-fadeIn min-h-96 h-fit w-full basis-1/3 px-6 py-8 lg:sticky lg:top-0">
-      <div className="text-5xl">
-        <SelectedIcon aria-hidden />
-      </div>
-      <Heading level="2" size="medium" className="mt-3">
-        {name}
-      </Heading>
-      <p className="mt-1">{currentIcon.category}</p>
-      <p className="">
-        <span aria-hidden>└ </span>
-        {`${currentIcon.sub_category}`}
-      </p>
+    <div
+      ref={wrapperRef}
+      className="animate-fadeIn min-h-96 h-fit w-full basis-1/3 px-6 py-8 focus:outline-none lg:sticky lg:top-0"
+      tabIndex={-1}
+    >
       <Link
         href="/ikoner"
         scroll={false}
@@ -53,6 +55,17 @@ export const IconSidebar = ({ name }: { name: string }) => {
       >
         <Close title="lukk ikonvisning" />
       </Link>
+      <div className="text-5xl">
+        <SelectedIcon aria-hidden />
+      </div>
+      <Heading level="2" size="medium" className="mt-3 scroll-m-20">
+        {name}
+      </Heading>
+      <p className="mt-1">{currentIcon.category}</p>
+      <p className="">
+        <span aria-hidden>└ </span>
+        {`${currentIcon.sub_category}`}
+      </p>
       <Button variant="secondary-neutral" className="mt-8 w-full">
         Last ned
       </Button>

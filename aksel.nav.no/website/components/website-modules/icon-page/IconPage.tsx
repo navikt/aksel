@@ -7,6 +7,7 @@ import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import Fuse from "fuse.js";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
@@ -76,160 +77,199 @@ export const IconPage = ({ name }: { name: string }) => {
   }, [hideModal]);
 
   return (
-    <div className="bg-surface-subtle relative overflow-clip">
-      <Header variant="transparent" />
-      <main
-        tabIndex={-1}
-        id="hovedinnhold"
-        className=" min-h-[80vh] focus:outline-none"
-      >
-        <div className="centered-layout mb-40 grid max-w-screen-lg pt-20">
-          <div className="mx-auto w-full max-w-screen-md">
-            <h1 className="from-deepblue-800 via-deepblue-400 my-0 w-fit bg-gradient-to-tr to-violet-500 bg-clip-text text-7xl font-bold text-transparent">
-              Aksel icons
-            </h1>
-            <div className="override-text-no-max mt-4 inline-flex flex-wrap items-center gap-4 text-xl">
-              <span>{`${
-                Object.values(meta).length
-              } Open source-ikoner designet og utviklet for NAV`}</span>
-            </div>
-          </div>
-          <div className="shadow-medium z-10 mt-16 mb-8 rounded-2xl bg-gradient-to-br from-teal-300/30 to-violet-400/30 p-[2px]">
-            <div className="bg-surface-default  h-full w-full rounded-[15px]">
-              <div className="border-b-border-subtle grid items-center border-b">
-                <TitleLinks />
-                <form
-                  onSubmit={(e) => e.preventDefault()}
-                  className="flex w-full items-center gap-4 py-2 px-4"
-                  role="search"
-                >
-                  <div className="flex w-full items-center gap-2 ">
-                    <Search
-                      variant="simple"
-                      label="Ikonsøk"
-                      className="border-none"
-                      placeholder="Søk etter ikon..."
-                      onChange={setQuery}
-                      value={query}
-                      clearButton={false}
-                    />
-                  </div>
-                  <div className="justify-self-end">
-                    <ToggleGroup
-                      size="small"
-                      value={toggle}
-                      variant="neutral"
-                      onChange={(v) => setToggle(v as any)}
-                      className="w-full"
-                    >
-                      <ToggleGroup.Item
-                        className="transition-colors duration-100"
-                        value="stroke"
-                      >
-                        Stroke
-                      </ToggleGroup.Item>
-                      <ToggleGroup.Item
-                        className="transition-colors duration-100"
-                        value="fill"
-                      >
-                        Fill
-                      </ToggleGroup.Item>
-                    </ToggleGroup>
-                  </div>
-                </form>
-              </div>
-              <div className="flex">
-                <div
-                  className={cl(
-                    "animate-fadeIn transition-width grid w-full gap-9 gap-y-12 px-6 py-8",
-                    {
-                      "border-r-border-subtle border-r": !!name,
-                      "basis-2/3": name,
-                    }
-                  )}
-                >
-                  {categories.length === 0 && (
-                    <div>
-                      <SuggestionBlock variant="ikon-not-found" />
-                    </div>
-                  )}
-                  {categories.map((cat) => {
-                    return (
-                      <div key={cat.category}>
-                        <Heading
-                          level="2"
-                          size="small"
-                          className="text-text-default"
-                          spacing
-                        >
-                          {cat.category}
-                        </Heading>
-                        <div className="grid w-full gap-2">
-                          {cat.sub_categories.map((sub) => {
-                            return (
-                              <div key={sub.sub_category}>
-                                <Heading
-                                  level="3"
-                                  size="xsmall"
-                                  className="text-text-subtle mb-1"
-                                >
-                                  {sub.sub_category}
-                                </Heading>
-                                <div className="gap-05 flex flex-wrap">
-                                  {sub.icons.map((i) => {
-                                    const T = Icons[`${i.id}Icon`];
-                                    if (T === undefined) {
-                                      return null;
-                                    }
-                                    return (
-                                      <Link
-                                        href={`/ikoner/${i.id}`}
-                                        scroll={false}
-                                        prefetch={false}
-                                        key={i.id}
-                                        className={cl(
-                                          "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
-                                          {
-                                            "bg-surface-selected ring-border-alt-3 z-10 ring-1":
-                                              i.id === name,
-                                          }
-                                        )}
-                                      >
-                                        <T className="text-3xl" aria-hidden />
-                                      </Link>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                {name && hideModal && <IconSidebar name={name} />}
+    <>
+      <Head>
+        <title>Ikoner</title>
+        <meta property="og:title" content="Aksel ikoner" />
+        <meta
+          name="description"
+          content="En samling 400+ open source-ikoner designet og utviklet for NAV"
+          key="desc"
+        />
+        <meta
+          property="og:description"
+          content="En samling 400+ open source-ikoner designet og utviklet for NAV"
+          key="ogdesc"
+        />
+        {/* <meta
+          property="og:image"
+          content={
+            page?.seo?.image
+              ? urlFor(page?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .quality(100)
+                  .url()
+              : ""
+          }
+          key="ogimage"
+        /> */}
+      </Head>
 
-                {!hideModal && (
-                  <ReactModal
-                    isOpen={!!name}
-                    onRequestClose={() =>
-                      router.push("/ikoner", undefined, { shallow: true })
-                    }
-                    aria={{ modal: true }}
-                    overlayClassName={styles.ModalOverlay}
-                    contentLabel={`${name} ikon`}
-                    className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-6 focus:outline-none"
+      <div className="bg-surface-subtle relative overflow-clip">
+        <Header variant="transparent" />
+        <main
+          tabIndex={-1}
+          id="hovedinnhold"
+          className=" min-h-[80vh] focus:outline-none"
+        >
+          <div className="centered-layout mb-40 grid max-w-screen-lg pt-20">
+            <div className="mx-auto w-full max-w-screen-md">
+              <h1 className="from-deepblue-800 via-deepblue-400 my-0 w-fit bg-gradient-to-tr to-violet-500 bg-clip-text text-7xl font-bold text-transparent">
+                Aksel icons
+              </h1>
+              <div className="override-text-no-max mt-4 inline-flex flex-wrap items-center gap-4 text-xl">
+                <span>{`${
+                  Object.values(meta).length
+                } Open source-ikoner designet og utviklet for NAV`}</span>
+              </div>
+            </div>
+            <div className="shadow-medium z-10 mt-16 mb-8 rounded-2xl bg-gradient-to-br from-teal-300/30 to-violet-400/30 p-[2px]">
+              <div className="bg-surface-default  h-full w-full rounded-[15px]">
+                <div className="border-b-border-subtle grid items-center border-b">
+                  <TitleLinks />
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    className="flex w-full items-center gap-4 py-2 px-4"
+                    role="search"
                   >
-                    {name && <IconSidebar name={name} />}
-                  </ReactModal>
-                )}
+                    <div className="flex w-full items-center gap-2 ">
+                      <Search
+                        variant="simple"
+                        label="Ikonsøk"
+                        className="border-none"
+                        placeholder="Søk etter ikon..."
+                        autoComplete="off"
+                        onChange={setQuery}
+                        value={query}
+                        clearButton={false}
+                      />
+                    </div>
+                    <div className="justify-self-end">
+                      <ToggleGroup
+                        size="small"
+                        value={toggle}
+                        variant="neutral"
+                        onChange={(v) => setToggle(v as any)}
+                        className="w-full"
+                      >
+                        <ToggleGroup.Item
+                          className="transition-colors duration-100"
+                          value="stroke"
+                        >
+                          Stroke
+                        </ToggleGroup.Item>
+                        <ToggleGroup.Item
+                          className="transition-colors duration-100"
+                          value="fill"
+                        >
+                          Fill
+                        </ToggleGroup.Item>
+                      </ToggleGroup>
+                    </div>
+                  </form>
+                </div>
+                <div className="flex">
+                  <div
+                    className={cl(
+                      "animate-fadeIn transition-width grid w-full gap-9 gap-y-12 px-6 py-8",
+                      {
+                        "border-r-border-subtle border-r": !!name,
+                        "basis-2/3": name,
+                      }
+                    )}
+                  >
+                    {categories.length === 0 && (
+                      <div>
+                        <SuggestionBlock variant="ikon-not-found" />
+                      </div>
+                    )}
+                    {categories.map((cat) => {
+                      return (
+                        <div key={cat.category}>
+                          <Heading
+                            level="2"
+                            size="small"
+                            className="text-text-default"
+                            spacing
+                          >
+                            {cat.category}
+                          </Heading>
+                          <div className="grid w-full gap-2">
+                            {cat.sub_categories.map((sub) => {
+                              return (
+                                <div key={sub.sub_category}>
+                                  <Heading
+                                    level="3"
+                                    size="xsmall"
+                                    className="text-text-subtle mb-1"
+                                  >
+                                    {sub.sub_category}
+                                  </Heading>
+                                  <div className="gap-05 flex flex-wrap">
+                                    {sub.icons.map((i) => {
+                                      const T = Icons[`${i.id}Icon`];
+                                      if (T === undefined) {
+                                        return null;
+                                      }
+                                      return (
+                                        <Link
+                                          href={`/ikoner/${i.id}`}
+                                          scroll={false}
+                                          prefetch={false}
+                                          key={i.id}
+                                          className={cl(
+                                            "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
+                                            {
+                                              "bg-surface-selected ring-border-alt-3 z-10 ring-1":
+                                                i.id === name,
+                                            }
+                                          )}
+                                        >
+                                          <span className="navds-sr-only">
+                                            {i.name}
+                                          </span>
+                                          <T
+                                            className="text-3xl"
+                                            aria-hidden
+                                            alt=""
+                                          />
+                                        </Link>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {name && hideModal && <IconSidebar name={name} />}
+
+                  {!hideModal && (
+                    <ReactModal
+                      isOpen={!!name}
+                      onRequestClose={() =>
+                        router.push("/ikoner", undefined, { shallow: true })
+                      }
+                      aria={{ modal: true }}
+                      overlayClassName={styles.ModalOverlay}
+                      contentLabel={`${name} ikon`}
+                      className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-6 focus:outline-none"
+                    >
+                      {name && <IconSidebar name={name} />}
+                    </ReactModal>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-      <Footer />
-    </div>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
