@@ -122,10 +122,10 @@ export const IconPage = ({ name }: { name: string }) => {
               <div className="override-text-no-max mt-4 inline-flex flex-wrap items-center gap-4 text-xl">
                 <span>{`${
                   Object.values(meta).length
-                } Open source-ikoner designet og utviklet for NAV`}</span>
+                } open source-ikoner designet og utviklet for NAV`}</span>
               </div>
             </div>
-            <div className="shadow-medium z-10 mt-16 mb-8 rounded-2xl bg-gradient-to-br from-teal-300/30 to-violet-400/30 p-[2px]">
+            <div className="shadow-medium z-10 mt-16 mb-8 rounded-2xl p-[2px]">
               <div className="bg-surface-default  h-full w-full rounded-[15px]">
                 <div className="border-b-border-subtle grid items-center border-b">
                   <TitleLinks />
@@ -146,7 +146,7 @@ export const IconPage = ({ name }: { name: string }) => {
                         clearButton={false}
                       />
                     </div>
-                    <div className="justify-self-end">
+                    <div className="min-w-fit justify-self-end">
                       <ToggleGroup
                         size="small"
                         value={toggle}

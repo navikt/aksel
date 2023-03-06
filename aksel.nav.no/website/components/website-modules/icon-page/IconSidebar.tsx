@@ -5,7 +5,6 @@ import { Button, Heading, Tooltip } from "@navikt/ds-react";
 import { CopyIcon } from "@sanity/icons";
 import copy from "copy-to-clipboard";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
@@ -15,7 +14,6 @@ export const IconSidebar = ({ name }: { name: string }) => {
   const [resentCopy, setResentCopy] = useState<"svg" | "react" | "import">();
   const timeoutRef = useRef<NodeJS.Timeout>();
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
   const currentIcon = useMemo(
     () => Object.values(meta).find((x) => x.name === name),
