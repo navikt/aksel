@@ -14,9 +14,10 @@ if (!process.env.FIGMA_TOKEN) {
 }
 
 async function main() {
-  const icons = await fetchIcons();
-
-  console.log(JSON.stringify(icons, null, 2));
+  let icons = await fetchIcons();
+  icons = icons.filter(
+    (x) => x.containing_frame.pageName === "Files and application"
+  );
 
   const { images } = await fetchDownloadUrls(
     icons.map((x) => x.node_id).join(",")
