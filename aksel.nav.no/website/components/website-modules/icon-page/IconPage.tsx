@@ -38,13 +38,15 @@ export const IconPage = ({ name }: { name: string }) => {
   const categories = useMemo(
     () =>
       categorizeIcons(
-        visibleIcons.filter((x) => {
-          return query === ""
-            ? true
-            : x?.name.toLowerCase().includes(query) ||
-                x?.pageName.toLowerCase().includes(query) ||
-                x?.description.toLowerCase().includes(query);
-        })
+        visibleIcons
+          .filter((x) => {
+            return query === ""
+              ? true
+              : x?.name.toLowerCase().includes(query) ||
+                  x?.pageName.toLowerCase().includes(query) ||
+                  x?.description.toLowerCase().includes(query);
+          })
+          .filter((x) => !x?.name?.includes("fill"))
       ),
     [visibleIcons, query]
   );
@@ -121,23 +123,18 @@ export const IconPage = ({ name }: { name: string }) => {
                             return (
                               <Link
                                 href={`/ikoner/${i.name}`}
-                                passHref
                                 scroll={false}
                                 prefetch={false}
                                 key={i.name}
+                                className={cl(
+                                  "hover:bg-surface-hover bg-surface-default group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200",
+                                  {
+                                    "bg-surface-selected ring-border-alt-3 ring-1":
+                                      i.name === name,
+                                  }
+                                )}
                               >
-                                <a
-                                  href="#"
-                                  className={cl(
-                                    "hover:bg-surface-hover bg-surface-default group relative grid aspect-square w-11 shrink-0 place-items-center rounded transition-colors focus:outline-none focus-visible:ring-2  focus-visible:ring-blue-800 active:bg-teal-200",
-                                    {
-                                      "bg-surface-selected ring-border-alt-3 ring-1":
-                                        i.name === name,
-                                    }
-                                  )}
-                                >
-                                  <T className="text-2xl" aria-hidden />
-                                </a>
+                                <T className="text-2xl" aria-hidden />
                               </Link>
                             );
                           })}

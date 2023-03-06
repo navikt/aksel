@@ -31,7 +31,7 @@ export const TitleLinks = () => (
         passHref
       >
         <DsLink className="text-text-default no-underline hover:underline">
-          <GithubIcon /> <span className="ml-1">Github</span>
+          <GithubIcon /> <span className="ml-1">Bidra</span>
         </DsLink>
       </NextLink>
     </li>

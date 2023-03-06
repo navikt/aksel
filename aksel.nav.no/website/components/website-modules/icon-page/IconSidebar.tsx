@@ -34,24 +34,14 @@ export const IconSidebar = ({ name }: { name: string }) => {
         {name}
       </Heading>
       <p className="mt-6">Kategorinavn</p>
-      <ul className="mt-3 flex flex-wrap gap-3 text-sm">
-        <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
-          Tag1
-        </li>
-        <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
-          Tag2
-        </li>
-        <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
-          Tag3
-        </li>
-        <li className="rounded-sm bg-violet-50 px-2 ring-1 ring-violet-300">
-          Tag4
-        </li>
-      </ul>
-      <Link href="/ikoner" passHref scroll={false} prefetch={false}>
-        <a className="min-h-11 hover:bg-surface-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl">
-          <Icons.Close title="lukk ikonvisning" />
-        </a>
+      <Link
+        href="/ikoner"
+        passHref
+        scroll={false}
+        prefetch={false}
+        className="min-h-11 hover:bg-surface-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl"
+      >
+        <Icons.Close title="lukk ikonvisning" />
       </Link>
       <button className="ring-border-subtle bg-deepblue-500 text-text-on-action mt-8 w-full rounded px-3 py-2 ring-1">
         Last ned
