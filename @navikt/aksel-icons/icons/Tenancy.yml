@@ -1,0 +1,17 @@
+name: Tenancy
+category: Development
+sub_category: Development
+keywords:
+  - fler-instans
+  - skyarkitektur
+  - skalerbarhet
+  - isolering
+  - separation of concerns
+  - cloud architecture
+  - scalability
+  - isolation
+  - data security
+  - datasikkerhet
+variant: Stroke
+updated_at: 07.03.2023
+created_at: 07.03.2023
