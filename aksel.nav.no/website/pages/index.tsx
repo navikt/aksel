@@ -240,7 +240,7 @@ const Forside = ({
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-8">
-            <div className="centered-layout sm:mb-18 sm:max-w-screen-xs relative mb-16 mt-20 grid max-w-xs place-items-center text-center sm:mt-36">
+            <div className="centered-layout sm:mb-18 relative mb-16 mt-20 grid max-w-xs place-items-center text-center sm:mt-36 sm:max-w-[648px]">
               <Heading
                 level="1"
                 size="xlarge"

@@ -9,6 +9,7 @@ import {
   YarnIcon,
   FigmaIcon,
   ChangelogIcon,
+  StorybookIcon,
 } from "components/assets";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview";
@@ -83,6 +84,20 @@ function Links() {
         }
       >
         <FigmaIcon /> Figma
+      </a>
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="/storybook"
+        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus group flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker ikonside",
+            til: "storybook",
+          })
+        }
+      >
+        <StorybookIcon className="mr-1 group-focus:invert" /> Storybook
       </a>
     </BodyShort>
   );
