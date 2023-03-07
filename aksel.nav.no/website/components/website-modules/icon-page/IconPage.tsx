@@ -134,14 +134,13 @@ export const IconPage = ({ name }: { name: string }) => {
                   <form
                     onSubmit={(e) => e.preventDefault()}
                     className="flex h-fit w-full items-center gap-4 py-2 px-4"
-                    role="search"
                   >
                     <div className="flex w-full items-center gap-2 ">
                       <Search
                         variant="simple"
                         label="Ikonsøk"
                         className="border-none"
-                        placeholder="Søk etter ikon..."
+                        placeholder="Søk"
                         autoComplete="off"
                         onChange={setQuery}
                         value={query}
@@ -221,8 +220,9 @@ export const IconPage = ({ name }: { name: string }) => {
                                           scroll={false}
                                           key={i.id}
                                           prefetch={false}
+                                          id={i.id}
                                           className={cl(
-                                            "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
+                                            "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 scroll-m-20 place-items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
                                             {
                                               "bg-surface-selected ring-border-alt-3 z-10 ring-1":
                                                 i.id === name,

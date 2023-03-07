@@ -1,6 +1,5 @@
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
-import { Close } from "@navikt/ds-icons";
 import { Button, Heading, Tooltip } from "@navikt/ds-react";
 import {
   AmplitudeEvents,
@@ -67,30 +66,43 @@ export const IconSidebar = ({ name }: { name: string }) => {
   };
 
   return (
-    <div
+    <section
       ref={wrapperRef}
       className="animate-fadeIn min-h-96 h-fit w-full basis-1/3 px-6 py-8 focus:outline-none lg:sticky lg:top-16"
       tabIndex={-1}
+      aria-labelledby="icon-details"
     >
       <Link
-        href="/ikoner"
+        href={`/ikoner#${name}`}
         scroll={false}
         prefetch={false}
         className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus aactive:bg-surface-neutral-subtle-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl focus:outline-none"
       >
-        <Close title="lukk ikonvisning" />
+        <Icons.XMarkIcon fontSize="1.5rem" title="lukk ikondetaljer" />
       </Link>
+
       <div className="text-5xl">
         <SelectedIcon aria-hidden />
       </div>
-      <Heading level="2" size="medium" className="mt-3 scroll-m-20">
+      <Heading
+        level="2"
+        size="medium"
+        className="mt-3 scroll-m-20"
+        id="icon-details"
+      >
         {name}
       </Heading>
-      <p className="mt-1">{currentIcon.category}</p>
-      <p className="">
-        <span aria-hidden>└ </span>
-        {`${currentIcon.sub_category}`}
-      </p>
+      <div
+        aria-label={`kategorier: ${currentIcon.category}, ${currentIcon.sub_category}`}
+      >
+        <p className="mt-1" aria-hidden>
+          {currentIcon.category}
+        </p>
+        <p aria-hidden>
+          <span>└ </span>
+          {`${currentIcon.sub_category}`}
+        </p>
+      </div>
       <Button
         variant="secondary-neutral"
         className="mt-8 w-full"
@@ -125,7 +137,9 @@ export const IconSidebar = ({ name }: { name: string }) => {
                 }
                 className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
               >
-                <Icons.ClipboardIcon aria-hidden />
+                <Icons.ClipboardIcon
+                  title={resentCopy === "import" ? "Kopiert!" : "Kopier"}
+                />
               </button>
             </Tooltip>
           </div>
@@ -167,7 +181,9 @@ export const IconSidebar = ({ name }: { name: string }) => {
                 }
                 className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
               >
-                <Icons.ClipboardIcon aria-hidden />
+                <Icons.ClipboardIcon
+                  title={resentCopy === "import" ? "Kopiert!" : "Kopier"}
+                />
               </button>
             </Tooltip>
           </div>
@@ -210,7 +226,9 @@ export const IconSidebar = ({ name }: { name: string }) => {
                 }
                 className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
               >
-                <Icons.ClipboardIcon aria-hidden />
+                <Icons.ClipboardIcon
+                  title={resentCopy === "import" ? "Kopiert!" : "Kopier"}
+                />
               </button>
             </Tooltip>
           </div>
@@ -238,6 +256,6 @@ export const IconSidebar = ({ name }: { name: string }) => {
           </Highlight>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
