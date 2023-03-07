@@ -2,8 +2,8 @@
 import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
+import { ComponentIcon, PauseIcon, PlayIcon } from "@navikt/aksel-icons";
 import { BodyLong, Heading } from "@navikt/ds-react";
-import { ComponentIcon, PauseIcon, PlayIcon } from "@sanity/icons";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
@@ -166,12 +166,12 @@ const GetStarted = ({
         >
           {pause ? (
             <>
-              <PlayIcon aria-hidden role="img" />
+              <PlayIcon aria-hidden />
               <span className="sr-only">Start animasjon</span>
             </>
           ) : (
             <>
-              <PauseIcon aria-hidden role="img" />
+              <PauseIcon aria-hidden />
               <span className="sr-only">Stopp animasjon</span>
             </>
           )}

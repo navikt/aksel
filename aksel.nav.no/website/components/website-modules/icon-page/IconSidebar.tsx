@@ -2,7 +2,6 @@ import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Close } from "@navikt/ds-icons";
 import { Button, Heading, Tooltip } from "@navikt/ds-react";
-import { CopyIcon } from "@sanity/icons";
 import {
   AmplitudeEvents,
   logAmplitudeEvent,
@@ -109,7 +108,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
           Kode
         </Heading>
         <div className="ring-border-subtle rounded-lg ring-1">
-          <div className="border-b-border-subtle flex items-center justify-between border-b px-3 py-1 text-sm">
+          <div className="border-b-border-subtle text-medium flex items-center justify-between border-b px-3 py-1">
             <span>Import</span>
             <Tooltip
               open={resentCopy === "import" || undefined}
@@ -126,7 +125,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
                 }
                 className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
               >
-                <CopyIcon aria-hidden />
+                <Icons.ClipboardIcon aria-hidden />
               </button>
             </Tooltip>
           </div>
@@ -156,7 +155,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
           </Highlight>
         </div>
         <div className="ring-border-subtle mt-3 rounded-lg ring-1">
-          <div className="border-b-border-subtle flex items-center justify-between border-b px-3 py-1 text-sm">
+          <div className="border-b-border-subtle text-medium flex items-center justify-between border-b px-3 py-1">
             <span>React</span>
             <Tooltip
               content={resentCopy === "react" ? "Kopiert!" : "Kopier"}
@@ -168,7 +167,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
                 }
                 className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
               >
-                <CopyIcon aria-hidden />
+                <Icons.ClipboardIcon aria-hidden />
               </button>
             </Tooltip>
           </div>
@@ -196,7 +195,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
           </Highlight>
         </div>
         <div className="ring-border-subtle mt-3 rounded-lg ring-1">
-          <div className="border-b-border-subtle flex items-center justify-between border-b px-3 py-1 text-sm">
+          <div className="border-b-border-subtle text-medium flex items-center justify-between border-b px-3 py-1">
             <span>SVG</span>
             <Tooltip
               content={resentCopy === "svg" ? "Kopiert!" : "Kopier"}
@@ -211,7 +210,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
                 }
                 className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
               >
-                <CopyIcon aria-hidden />
+                <Icons.ClipboardIcon aria-hidden />
               </button>
             </Tooltip>
           </div>
