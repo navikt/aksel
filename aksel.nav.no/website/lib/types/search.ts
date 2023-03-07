@@ -42,9 +42,10 @@ interface PageItemT {
 interface IconItemT {
   _type: "icon";
   name: string;
-  description: string;
+  category: string;
+  sub_category: string;
+  keywords: string;
   created_at: string;
-  pageName: string;
 }
 
 export type FuseItemT = PageItemT | IconItemT;

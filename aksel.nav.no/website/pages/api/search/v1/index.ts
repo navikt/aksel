@@ -10,7 +10,7 @@ import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
 import { akselArticleFields } from "../../../../lib/sanity/queries";
 import { allArticleDocuments } from "../../../../sanity/config";
-import IconMetadata from "@navikt/ds-icons/meta.json";
+import IconMetadata from "@navikt/aksel-icons/metadata";
 
 const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
 
@@ -38,7 +38,7 @@ export default async function initialSearch(
 
   const hits = [
     ...(await searchSanity()),
-    ...IconMetadata.map((icon) => ({ ...icon, _type: "icon" })),
+    ...Object.entries(IconMetadata).map((icon) => ({ ...icon, _type: "icon" })),
   ];
 
   const result: FuseHits[] = getSearchResults(
@@ -214,8 +214,9 @@ function getSearchResults(results, query) {
 
       // Icons
       { name: "name", weight: 70 },
-      { name: "description", weight: 40 },
-      { name: "pageName", weight: 10 },
+      { name: "category", weight: 40 },
+      { name: "sub_category", weight: 30 },
+      { name: "keywords", weight: 10 },
     ],
     includeScore: true,
     shouldSort: true,

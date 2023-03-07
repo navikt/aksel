@@ -98,7 +98,7 @@ export function IconHit({
     >
       <div className="px-2 py-2">
         <NextLink
-          href={`/grunnleggende/staesj/ikoner?icon=${hit.item.name}`}
+          href={`/ikoner/${hit.item.name}`}
           passHref
           onClick={() => logSuccess(index, `/${(hit.item as any).name}`)}
           className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none"
@@ -116,7 +116,7 @@ export function IconHit({
 
       <div className="hidden aspect-square w-16 place-items-center sm:grid">
         <Image
-          src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/icons/svg/${hit.item.name}.svg`}
+          src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/aksel-icons/icons/${hit.item.name}.svg`}
           decoding="sync"
           width="24"
           height="24"
