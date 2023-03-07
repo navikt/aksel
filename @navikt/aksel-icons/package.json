@@ -55,7 +55,8 @@
     "build": "yarn copy-util && yarn copy-svg && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node config/cleanTypes.js && yarn zip-svg && yarn update-metadata",
     "build:old": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node cleanTypes.js && yarn create-package-json-pointers-to-esm",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "fetch-new:icons": "node config/figma/index.mjs"
+    "fetch-new:icons": "node config/figma/index.mjs",
+    "zip:icons": "node config/zip.js"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",
