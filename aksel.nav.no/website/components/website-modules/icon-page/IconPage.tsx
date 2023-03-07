@@ -114,7 +114,7 @@ export const IconPage = ({ name }: { name: string }) => {
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div className="centered-layout relative mb-40 grid  max-w-screen-lg pt-20">
+          <div className="centered-layout mb-40 grid max-w-screen-lg pt-20">
             <div className="mx-auto flex w-full flex-col sm:max-w-[80%] md:max-w-screen-md">
               <div>
                 <h1 className="from-deepblue-800 via-deepblue-400 my-0 w-fit bg-gradient-to-tr to-violet-500 bg-clip-text text-7xl font-bold text-transparent">
@@ -129,8 +129,8 @@ export const IconPage = ({ name }: { name: string }) => {
               <TitleLinks />
             </div>
             <div className="shadow-medium z-10 mt-16 mb-8 rounded-2xl p-[2px]">
-              <div className="bg-surface-default h-full w-full rounded-[15px]">
-                <div className="border-b-border-subtle grid items-center border-b">
+              <div className="bg-surface-default  h-full w-full rounded-[15px]">
+                <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center border-b">
                   <form
                     onSubmit={(e) => e.preventDefault()}
                     className="flex h-fit w-full items-center gap-4 py-2 px-4"
