@@ -18,7 +18,7 @@ export function Hit({
   index: number;
   logSuccess: (index: number, url: string) => void;
 }) {
-  if (hit.item._type === "icon") {
+  if (hit.item._type === "icon" || hit.item._type === "icon_page") {
     return;
   }
 
@@ -104,7 +104,7 @@ export function IconHit({
           className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none"
         >
           <span className="group-hover:underline">
-            {highlightStr(hit.item.name, query)}
+            {highlightStr(`${hit.item.name}Icon`, query)}
           </span>
           {isNew(hit.item?.created_at ?? "") && (
             <Tag variant="info" size="small" aria-hidden>
@@ -112,6 +112,9 @@ export function IconHit({
             </Tag>
           )}
         </NextLink>
+        <span className="font-regular text-text-subtle text-lg" aria-hidden>
+          <div>{highlightStr(hit.item.sub_category, query)}</div>
+        </span>
       </div>
 
       <div className="hidden aspect-square w-16 place-items-center sm:grid">
@@ -123,6 +126,59 @@ export function IconHit({
           layout="fixed"
           objectFit="contain"
           alt={hit.item.name + " thumbnail"}
+          aria-hidden
+        />
+      </div>
+    </li>
+  );
+}
+
+export function IconPageHit({
+  hit,
+  query,
+  index,
+  logSuccess,
+}: {
+  hit: SearchHit;
+  query: string;
+  index: number;
+  logSuccess: (index: number, url: string) => void;
+}) {
+  if (hit.item._type !== "icon_page") {
+    return;
+  }
+
+  return (
+    <li
+      className={cl(
+        "focus-within:shadow-focus border-border-subtle group relative flex cursor-pointer scroll-mt-12 items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0 focus-within:z-10 hover:bg-gray-100"
+      )}
+    >
+      <div className="px-2 py-2">
+        <NextLink
+          href="/ikoner"
+          passHref
+          onClick={() => logSuccess(index, `/ikoner`)}
+          className="flex items-center gap-2 text-xl font-semibold after:absolute after:inset-0 focus:outline-none"
+        >
+          <span className="group-hover:underline">
+            {highlightStr(`Ikoner`, query)}
+          </span>
+        </NextLink>
+        <span className="font-regular text-text-subtle text-lg" aria-hidden>
+          <div>{highlightStr(hit.item.description, query)}</div>
+        </span>
+      </div>
+
+      <div className="hidden aspect-square w-16 place-items-center sm:grid">
+        <Image
+          src="https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/aksel-icons/icons/.svg"
+          decoding="sync"
+          width="24"
+          height="24"
+          layout="fixed"
+          objectFit="contain"
+          alt=""
           aria-hidden
         />
       </div>

@@ -2,6 +2,7 @@ import {
   FuseHits,
   FuseItemT,
   GroupedHits,
+  IconPageItemT,
   SearchHit,
   SearchResults,
 } from "@/lib";
@@ -13,6 +14,21 @@ import { allArticleDocuments } from "../../../../sanity/config";
 import IconMetadata from "@navikt/aksel-icons/metadata";
 
 const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
+
+const iconPageData: IconPageItemT = {
+  _type: "icon_page",
+  heading: "Ikoner",
+  description: "800+ open source ikoner laget av Aksel.",
+  keywords: [
+    "ikoner",
+    "ikon",
+    "icon",
+    "icons",
+    "Aksel icons",
+    "ikonpakke",
+    "svg",
+  ],
+};
 
 export default async function initialSearch(
   req: NextApiRequest,
@@ -29,7 +45,7 @@ export default async function initialSearch(
       : req.query.doc;
     doc = queryDoc.split(",");
   } else {
-    doc = [...allArticleDocuments, "icon", "aksel_standalone"];
+    doc = [...allArticleDocuments, "icon", "aksel_standalone", "icon_page"];
   }
 
   const query = Array.isArray(req.query.q)
@@ -38,7 +54,8 @@ export default async function initialSearch(
 
   const hits = [
     ...(await searchSanity()),
-    ...Object.entries(IconMetadata).map((icon) => ({ ...icon, _type: "icon" })),
+    ...Object.values(IconMetadata).map((icon) => ({ ...icon, _type: "icon" })),
+    iconPageData,
   ];
 
   const result: FuseHits[] = getSearchResults(
@@ -82,6 +99,7 @@ export default async function initialSearch(
     topResults: filteredResult?.length > 8 ? topResults : [],
     totalHits: filteredResult?.length ?? 0,
     hits: {
+      icon_page: result.filter((x: any) => x.item._type === "icon_page").length,
       icon: result.filter((x: any) => x.item._type === "icon").length,
       komponent_artikkel: result.filter(
         (x: any) => x.item._type === "komponent_artikkel"
@@ -117,7 +135,11 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
 
     let description = "";
 
-    if (x.matches[0].key === "heading" && x.item._type !== "icon") {
+    if (
+      x.matches[0].key === "heading" &&
+      x.item._type !== "icon" &&
+      x.item._type !== "icon_page"
+    ) {
       hightlightDesc = false;
       description = x?.item.intro ?? x.item.ingress;
       const clampDesc = description?.length > 120;
@@ -217,6 +239,9 @@ function getSearchResults(results, query) {
       { name: "category", weight: 40 },
       { name: "sub_category", weight: 30 },
       { name: "keywords", weight: 10 },
+
+      // Icon page
+      { name: "description", weight: 50 },
     ],
     includeScore: true,
     shouldSort: true,
