@@ -68,6 +68,7 @@
   },
   "devDependencies": {
     "@svgr/cli": "6.2.1",
+    "adm-zip": "^0.5.10",
     "concurrently": "7.2.1",
     "copyfiles": "^2.4.1",
     "cross-zip-cli": "1.0.0",

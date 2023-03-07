@@ -3356,6 +3356,7 @@ __metadata:
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
     "@svgr/cli": 6.2.1
+    adm-zip: ^0.5.10
     concurrently: 7.2.1
     copyfiles: ^2.4.1
     cross-zip-cli: 1.0.0
@@ -7312,6 +7313,13 @@ __metadata:
   version: 1.2.2
   resolution: "address@npm:1.2.2"
   checksum: ace439960c1e3564d8f523aff23a841904bf33a2a7c2e064f7f60a064194075758b9690e65bd9785692a4ef698a998c57eb74d145881a1cecab8ba658ddb1607
+  languageName: node
+  linkType: hard
+
+"adm-zip@npm:^0.5.10":
+  version: 0.5.10
+  resolution: "adm-zip@npm:0.5.10"
+  checksum: 07ed91cf6423bf5dca4ee63977bc7635e91b8d21829c00829d48dce4c6932e1b19e6cfcbe44f1931c956e68795ae97183fc775913883fa48ce88a1ac11fb2034
   languageName: node
   linkType: hard
 
