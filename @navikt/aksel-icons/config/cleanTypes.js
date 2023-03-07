@@ -4,7 +4,7 @@
 
 const fs = require("fs");
 
-const basePath = "./dist/esm";
+const basePath = "./dist/react/esm";
 
 const files = fs.readdirSync(basePath).filter((x) => x.endsWith(".d.ts"));
 

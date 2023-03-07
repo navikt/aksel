@@ -20,16 +20,16 @@
     "*.svg"
   ],
   "license": "MIT",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "typings": "./dist/esm/index.d.ts",
+  "main": "./dist/react/cjs/index.js",
+  "module": "./dist/react/esm/index.js",
+  "typings": "./dist/react/esm/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/esm/index.d.ts",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "types": "./dist/react/esm/index.d.ts",
+      "import": "./dist/react/esm/index.js",
+      "require": "./dist/react/cjs/index.js"
     },
-    "./svg/*.svg": "./dist/svg/*.svg",
+    "./svg/*.svg": "./dist/react/svg/*.svg",
     "./metadata": {
       "types": "./dist/metadata.d.ts",
       "default": "./dist/metadata.js"
@@ -56,15 +56,6 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "fetch-new:icons": "node config/figma/index.mjs",
     "zip:icons": "node config/zip.js"
-  },
-  "peerDependencies": {
-    "@types/react": "^17.0.30 || ^18.0.0",
-    "react": "^17.0.0 || ^18.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@types/react": {
-      "optional": true
-    }
   },
   "devDependencies": {
     "@svgr/cli": "6.2.1",

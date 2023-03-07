@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist/cjs",
+    "outDir": "./dist/react/cjs",
     "module": "commonjs"
   },
   "exclude": ["./util", "./__tests__", "**/*.stories.*"],
