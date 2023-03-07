@@ -173,7 +173,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
             </Tooltip>
           </div>
           <Highlight
-            code={`<${name}Icon title="a11y-title" />`}
+            code={`<${name}Icon title="a11y-title" fontSize="1.5rem" />`}
             language="tsx"
             {...defaultProps}
             theme={undefined}

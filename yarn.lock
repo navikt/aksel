@@ -3365,6 +3365,7 @@ __metadata:
     hast-util-select: 5.0.5
     jest: ^29.0.0
     js-yaml: ^4.1.0
+    lodash.camelcase: 4.3.0
     lodash.startcase: 4.4.0
     react: ^18.0.0
     rehype-parse: 8.0.4
@@ -16695,7 +16696,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.camelcase@npm:^4.3.0":
+"lodash.camelcase@npm:4.3.0, lodash.camelcase@npm:^4.3.0":
   version: 4.3.0
   resolution: "lodash.camelcase@npm:4.3.0"
   checksum: cb9227612f71b83e42de93eccf1232feeb25e705bdb19ba26c04f91e885bfd3dd5c517c4a97137658190581d3493ea3973072ca010aab7e301046d90740393d1

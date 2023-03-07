@@ -130,7 +130,7 @@ export const IconPage = ({ name }: { name: string }) => {
             </div>
             <div className="shadow-medium z-10 mt-16 mb-8 rounded-2xl p-[2px]">
               <div className="bg-surface-default  h-full w-full rounded-[15px]">
-                <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center border-b">
+                <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center rounded-t-2xl border-b">
                   <form
                     onSubmit={(e) => e.preventDefault()}
                     className="flex h-fit w-full items-center gap-4 py-2 px-4"
@@ -212,6 +212,7 @@ export const IconPage = ({ name }: { name: string }) => {
                                     {sub.icons.map((i) => {
                                       const T = Icons[`${i.id}Icon`];
                                       if (T === undefined) {
+                                        console.log(i);
                                         return null;
                                       }
                                       return (
