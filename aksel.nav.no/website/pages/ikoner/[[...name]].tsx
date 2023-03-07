@@ -1,25 +1,16 @@
 import { IconPage } from "components/website-modules/icon-page/IconPage";
-
+import { useRouter } from "next/router";
 import meta from "@navikt/aksel-icons/metadata";
+import NotFound from "../404";
 
-const Page = (props: { name: string }) => {
-  return <IconPage name={props.name} />;
+const Page = () => {
+  const { query } = useRouter();
+
+  if ((query?.name?.[0] && !meta[query.name[0]]) || query?.name?.length > 1) {
+    return <NotFound />;
+  }
+
+  return <IconPage name={query?.name?.[0] ?? ""} />;
 };
 
 export default Page;
-
-export async function getServerSideProps(context) {
-  if (
-    (context?.query?.name?.[0] && !meta[context.query.name[0]]) ||
-    context?.query?.name?.length > 1
-  ) {
-    return {
-      props: {},
-      notFound: true,
-    };
-  }
-
-  return {
-    props: { name: context?.query?.name?.[0] ?? "" },
-  };
-}
