@@ -1,43 +1,83 @@
+import { AmplitudeEvents, logAmplitudeEvent } from "@/utils";
+import { BrailleIcon, DownloadIcon, PackageIcon } from "@navikt/aksel-icons";
 import { Link as DsLink } from "@navikt/ds-react";
-import { DownloadIcon, PackageIcon } from "@sanity/icons";
+
 import { FigmaIcon, GithubIcon } from "components/assets";
 import NextLink from "next/link";
 
+const Divider = () => (
+  <div
+    aria-hidden
+    className="bg-border-divider hidden h-2/3 w-[1px] rounded-md md:block"
+  />
+);
+
 export const TitleLinks = () => (
-  <ul className="flex w-full flex-wrap items-center justify-between gap-3 px-8 pt-6 pb-2">
-    <li className="flex items-center gap-2">
+  <ul className="text-medium item-start mt-12 flex flex-col gap-4 md:flex-row md:items-center">
+    <li className="flex items-center gap-2 leading-none">
       <NextLink
         href="https://www.figma.com/community/file/1167474127194981809"
         passHref
         legacyBehavior
       >
         <DsLink className="text-text-default no-underline hover:underline">
-          <FigmaIcon /> <span className="ml-1">Figma community</span>
+          <FigmaIcon className="ml-1" /> <span className="">Figma</span>
         </DsLink>
       </NextLink>
     </li>
-    <li className="flex items-center gap-2">
-      <DownloadIcon className="text-2xl" /> Last ned SVG-pakke
+    <Divider />
+    <li className="flex items-center gap-1 leading-none">
+      <DsLink
+        className="text-text-default no-underline hover:underline"
+        href="https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/aksel-icons/ikoner.zip"
+        download="Ikonpakke"
+        onClick={() => {
+          logAmplitudeEvent(AmplitudeEvents.ikonnedlastning, {
+            icon: "Ikonpakke",
+            format: "zip",
+          });
+        }}
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <DownloadIcon className="text-2xl" aria-hidden /> Last ned ikonpakke
+      </DsLink>
     </li>
-    <li className="flex items-center gap-2">
+    <Divider />
+    <li className="flex items-center gap-2 leading-none">
       <NextLink
         href="https://www.npmjs.com/package/@navikt/aksel-icons"
         passHref
         legacyBehavior
       >
         <DsLink className="text-text-default no-underline hover:underline">
-          <PackageIcon className="text-2xl" /> Installer med NPM
+          <PackageIcon className="text-2xl" aria-hidden /> Installer med NPM
         </DsLink>
       </NextLink>
     </li>
-    <li className="flex items-center gap-2">
+    <Divider />
+    <li className="flex items-center gap-2 leading-none">
       <NextLink
-        href="https://github.com/navikt/Designsystemet/tree/master/%40navikt/icons"
+        href="https://github.com/navikt/aksel/tree/main/%40navikt/aksel-icons/CONTRIBUTING.md"
         passHref
         legacyBehavior
       >
         <DsLink className="text-text-default no-underline hover:underline">
-          <GithubIcon /> <span className="ml-1">Bidra</span>
+          <GithubIcon className="ml-[3px] h-[18px] w-[18px]" />{" "}
+          <span className="ml-1">Bidra</span>
+        </DsLink>
+      </NextLink>
+    </li>
+    <Divider />
+    <li className="flex items-center gap-2 leading-none">
+      <NextLink
+        href="https://github.com/navikt/aksel/tree/main/%40navikt/aksel-icons/CONTRIBUTING.md"
+        passHref
+        legacyBehavior
+      >
+        <DsLink className="text-text-default no-underline hover:underline">
+          <BrailleIcon aria-hidden className="text-2xl" />{" "}
+          <span>Tilgjengelighet</span>
         </DsLink>
       </NextLink>
     </li>

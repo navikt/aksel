@@ -3,6 +3,10 @@ import meta from "@navikt/aksel-icons/metadata";
 import { Close } from "@navikt/ds-icons";
 import { Button, Heading, Tooltip } from "@navikt/ds-react";
 import { CopyIcon } from "@sanity/icons";
+import {
+  AmplitudeEvents,
+  logAmplitudeEvent,
+} from "components/website-modules/utils/amplitude";
 import copy from "copy-to-clipboard";
 import Link from "next/link";
 import Highlight, { defaultProps } from "prism-react-renderer";
@@ -14,11 +18,28 @@ export const IconSidebar = ({ name }: { name: string }) => {
   const [resentCopy, setResentCopy] = useState<"svg" | "react" | "import">();
   const timeoutRef = useRef<NodeJS.Timeout>();
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const [blob, setBlob]: any = useState();
 
   const currentIcon = useMemo(
     () => Object.values(meta).find((x) => x.name === name),
     [name]
   );
+
+  useEffect(() => {
+    if (!name) return;
+    getBlob(name);
+  }, [name]);
+
+  async function getBlob(icon: string) {
+    const iconUrl = `https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/aksel-icons/icons/${icon}.svg`;
+    fetch(iconUrl)
+      .then((r) => {
+        return r.text();
+      })
+      .then((r) => {
+        setBlob(new Blob([r], { type: "image/svg+xml" }));
+      });
+  }
 
   const handleCopy = (copyStr: string, src: "svg" | "react" | "import") => {
     copy(copyStr);
@@ -38,6 +59,13 @@ export const IconSidebar = ({ name }: { name: string }) => {
       wrapperRef.current.focus();
     }
   }, [name]);
+
+  const logDownload = (icon, format) => {
+    logAmplitudeEvent(AmplitudeEvents.ikonnedlastning, {
+      icon,
+      format,
+    });
+  };
 
   return (
     <div
@@ -64,7 +92,16 @@ export const IconSidebar = ({ name }: { name: string }) => {
         <span aria-hidden>└ </span>
         {`${currentIcon.sub_category}`}
       </p>
-      <Button variant="secondary-neutral" className="mt-8 w-full">
+      <Button
+        variant="secondary-neutral"
+        className="mt-8 w-full"
+        as="a"
+        onClick={() => {
+          logDownload(name, "svg");
+        }}
+        href={blob ? URL.createObjectURL(blob) : "#"}
+        download={name}
+      >
         Last ned
       </Button>
       <div data-prism-theme="light">
