@@ -23,6 +23,7 @@
     "@navikt/internal/*",
     "@navikt/codemod",
     "@navikt/icons",
+    "@navikt/aksel-icons",
     "@navikt/community/*",
     "examples/*",
     "aksel.nav.no"

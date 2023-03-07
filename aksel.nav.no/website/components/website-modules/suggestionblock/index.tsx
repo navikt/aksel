@@ -47,6 +47,7 @@ export const SuggestionBlock = ({
     | "komponent-ny"
     | "komponent-beta"
     | "ikon-ny"
+    | "ikon-not-found"
     | "ikon";
   reference?: string;
 }) => {
@@ -60,8 +61,12 @@ export const SuggestionBlock = ({
         "ring-border-subtle flex justify-between gap-3 rounded-lg px-6 py-4 ring-1",
         {
           "mb-0 mt-5": variant === "ikon" || variant === "ikon-ny",
-          "mb-12": variant !== "ikon" && variant !== "ikon-ny",
+          "mb-12":
+            variant !== "ikon" &&
+            variant !== "ikon-ny" &&
+            variant !== "ikon-not-found",
           "bg-surface-info-subtle": variant === "ikon-ny",
+          "m-0 bg-teal-100 ring-teal-300": variant === "ikon-not-found",
         }
       )}
     >
@@ -118,6 +123,12 @@ const options: {
     link:
       issueUrl +
       "&labels=forespørsel+🥰%2Cnytt+✨%2Cikoner+🖼&template=update-icon.yml&title=%5BTilbakemelding%20p%C3%A5%20ikon%5D%3A+",
+  },
+  "ikon-not-found": {
+    text: "Har du forslag til nye ikoner? Trykk på bidra eller send inn et nytt forslag!",
+    link:
+      issueUrl +
+      "&labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
   },
   "komponent-ny": {
     text: "Denne komponenten er ny eller oppdatert. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
