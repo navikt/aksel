@@ -82,7 +82,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
                 onClick={() =>
                   handleCopy(
                     `import {
-  ${name}
+  ${name}Icon
 } from '@navikt/aksel-icons';`,
                     "import"
                   )
@@ -95,7 +95,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
           </div>
           <Highlight
             code={`import {
-  ${name}
+  ${name}Icon
 } from '@navikt/aksel-icons';`}
             language="tsx"
             {...defaultProps}
@@ -127,7 +127,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
             >
               <button
                 onClick={() =>
-                  handleCopy(`<${name} title="a11y-title" />`, "react")
+                  handleCopy(`<${name}Icon title="a11y-title" />`, "react")
                 }
                 className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
               >
@@ -136,7 +136,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
             </Tooltip>
           </div>
           <Highlight
-            code={`<${name} title="a11y-title" />`}
+            code={`<${name}Icon title="a11y-title" />`}
             language="tsx"
             {...defaultProps}
             theme={undefined}

@@ -10,7 +10,7 @@ import Fuse from "fuse.js";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ReactModal from "react-modal";
 import { categorizeIcons, getFillIcon } from "./icon-utils";
 import { IconSidebar } from "./IconSidebar";
