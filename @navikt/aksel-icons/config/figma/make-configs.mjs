@@ -8,9 +8,12 @@ export const makeConfig = (icons) => {
   icons.forEach((icon) => {
     const config = {
       name: resolveName(icon).replace(".svg", ""),
-      category: icon.containing_frame.name,
+      category: icon.containing_frame.pageName,
+      sub_catrgory: icon.containing_frame.name,
       keywords: [...icon.description.split(",").map((x) => x.trim())],
-      variant: icon.name.replace("Variant=", ""),
+      variant: icon.name.includes("Variant=")
+        ? icon.name.replace("Variant=", "")
+        : "Stroke",
       updated_at: new Date(icon.updated_at)
         .toISOString()
         .split("T")[0]
