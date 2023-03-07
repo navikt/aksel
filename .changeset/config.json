@@ -6,7 +6,6 @@
     [
       "@navikt/ds-react",
       "@navikt/ds-css",
-      "@navikt/ds-icons",
       "@navikt/ds-tokens",
       "@navikt/ds-tailwind",
       "@navikt/ds-css-internal",
