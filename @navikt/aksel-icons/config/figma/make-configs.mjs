@@ -2,9 +2,8 @@ import { writeFileSync } from "fs";
 import jsYaml from "js-yaml";
 import { resolve } from "path";
 import { resolveName } from "./icon-name.mjs";
-const iconFolder = "./svgtest";
 
-export const makeConfig = (icons) => {
+export const makeConfig = (icons, folder) => {
   icons.forEach((icon) => {
     const config = {
       name: resolveName(icon).replace(".svg", ""),
@@ -30,7 +29,7 @@ export const makeConfig = (icons) => {
 
     const yml = jsYaml.dump(config, { noRefs: true, skipInvalid: false });
 
-    writeFileSync(resolve(iconFolder, `${config.name}.yml`), yml, {
+    writeFileSync(resolve(folder, `${config.name}.yml`), yml, {
       encoding: "utf8",
     });
   });

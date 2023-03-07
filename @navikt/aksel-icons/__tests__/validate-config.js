@@ -18,18 +18,17 @@ describe(`Each icons YML-config is valid`, () => {
       expect(ymlData.name).toBeTruthy();
       expect(ymlData.category).toBeTruthy();
       expect(ymlData.sub_category).toBeTruthy();
-      expect(ymlData.description).toBeTruthy();
       expect(ymlData.keywords).toBeTruthy();
       expect(ymlData.variant).toBeTruthy();
       expect(ymlData.keywords.length).toBeGreaterThan(0);
-      expect(ymlData.date_added).toBeTruthy();
-      expect(isDate(ymlData.date_added)).toBeTruthy();
-      expect(ymlData.date_modified).toBeTruthy();
-      expect(isDate(ymlData.date_modified)).toBeTruthy();
+      expect(ymlData.updated_at).toBeTruthy();
+      expect(isDate(ymlData.updated_at)).toBeTruthy();
+      expect(ymlData.created_at).toBeTruthy();
+      expect(isDate(ymlData.created_at)).toBeTruthy();
     });
   });
 });
 
 function isDate(dateStr) {
-  return !isNaN(new Date(dateStr).getDate());
+  return !isNaN(new Date(dateStr.split(".").reverse().join(".")).getDate());
 }

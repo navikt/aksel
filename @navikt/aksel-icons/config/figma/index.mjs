@@ -45,7 +45,7 @@ async function main() {
       );
   }
 
-  makeConfig(icons);
+  makeConfig(icons, iconFolder);
 
   readdirSync(iconFolder, (_, files) => {
     if (files.length * 2 !== totalIcons) {
