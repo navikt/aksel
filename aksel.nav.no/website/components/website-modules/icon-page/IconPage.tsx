@@ -1,7 +1,7 @@
 import { useMedia } from "@/utils";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
-import { Chips, Heading, Search, ToggleGroup } from "@navikt/ds-react";
+import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "classnames";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
@@ -52,9 +52,6 @@ export const IconPage = ({ name }: { name: string }) => {
     Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke")
   );
   const [fillIcons] = useState(getFillIcon(Object.values(meta)));
-  const [allCategories] = useState(
-    categorizeIcons(Object.values(meta)).map((x) => x.category)
-  );
 
   const hideModal = useMedia("screen and (min-width: 1024px)");
 
@@ -110,12 +107,12 @@ export const IconPage = ({ name }: { name: string }) => {
         /> */}
       </Head>
 
-      <div className="bg-surface-subtle relative overflow-clip">
+      <div className="bg-surface-subtle">
         <Header variant="transparent" />
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className=" min-h-[80vh] focus:outline-none"
+          className="min-h-[80vh] focus:outline-none"
         >
           <div className="centered-layout mb-40 grid max-w-screen-lg pt-20">
             <div className="mx-auto w-full max-w-screen-md">
@@ -129,12 +126,12 @@ export const IconPage = ({ name }: { name: string }) => {
               </div>
             </div>
             <div className="shadow-medium z-10 mt-16 mb-8 rounded-2xl p-[2px]">
-              <div className="bg-surface-default  h-full w-full rounded-[15px]">
+              <div className="bg-surface-default h-full w-full rounded-[15px]">
                 <div className="border-b-border-subtle grid items-center border-b">
                   <TitleLinks />
                   <form
                     onSubmit={(e) => e.preventDefault()}
-                    className="flex w-full items-center gap-4 py-2 px-4"
+                    className="flex h-fit w-full items-center gap-4 py-2 px-4"
                     role="search"
                   >
                     <div className="flex w-full items-center gap-2 ">
@@ -153,7 +150,6 @@ export const IconPage = ({ name }: { name: string }) => {
                       <ToggleGroup
                         size="small"
                         value={toggle}
-                        variant="neutral"
                         onChange={(v) => setToggle(v as any)}
                         className="w-full"
                       >
@@ -183,60 +179,6 @@ export const IconPage = ({ name }: { name: string }) => {
                       }
                     )}
                   >
-                    <div className="flex w-full flex-wrap gap-2">
-                      <Chips size="small">
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                        {allCategories.map((x) => (
-                          <Chips.Toggle onClick={() => setQuery(x)} key={x}>
-                            {x}
-                          </Chips.Toggle>
-                        ))}
-                      </Chips>
-                    </div>
                     {categories.length === 0 && (
                       <div>
                         <SuggestionBlock variant="ikon-not-found" />
