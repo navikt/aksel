@@ -33,7 +33,10 @@ export const InlineCode = (props: React.HTMLAttributes<HTMLElement>) => (
 );
 
 export const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
-  <kbd className="inline-kbd" {...props} />
+  <kbd
+    className="text-text-default bg-surface-default py-05 text-medium whitespace-nowrap rounded px-1 leading-normal shadow-[0_0_0_1px_var(--a-border-strong)]"
+    {...props}
+  />
 );
 
 const serializers = {
