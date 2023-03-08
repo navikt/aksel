@@ -25,7 +25,7 @@ export const TitleLinks = () => (
         </DsLink>
       </NextLink>
     </li>
-    <Divider />
+    {/* <Divider />
     <li className="flex items-center gap-1 leading-none">
       <DsLink
         className="text-text-default no-underline hover:underline"
@@ -42,7 +42,7 @@ export const TitleLinks = () => (
       >
         <DownloadIcon className="text-2xl" aria-hidden /> Last ned ikonpakke
       </DsLink>
-    </li>
+    </li> */}
     <Divider />
     <li className="flex items-center gap-2 leading-none">
       <NextLink
@@ -68,7 +68,7 @@ export const TitleLinks = () => (
         </DsLink>
       </NextLink>
     </li>
-    <Divider />
+    {/* <Divider />
     <li className="flex items-center gap-2 leading-none">
       <NextLink
         href="https://github.com/navikt/aksel/tree/main/%40navikt/aksel-icons/CONTRIBUTING.md"
@@ -80,6 +80,6 @@ export const TitleLinks = () => (
           <span>Tilgjengelighet</span>
         </DsLink>
       </NextLink>
-    </li>
+    </li> */}
   </ul>
 );
