@@ -6,13 +6,13 @@ import { useRouter } from "next/router";
 import { Hamburger } from "components/layout/header/Hamburger";
 import { GlobalSearch } from "./search";
 
-const LinkElement = ({ name, href }) => {
+const LinkElement = ({ name, href, prefetch = true }) => {
   const { asPath } = useRouter();
   return (
     <li>
       <Link
         href={href}
-        passHref
+        prefetch={prefetch}
         className={cl(
           "text-deepblue-800 focus-visible:shadow-focus relative grid h-11 place-items-center rounded px-2 focus:outline-none",
           {
@@ -83,7 +83,7 @@ export const Header = ({
             <ul className="hidden h-full items-center gap-2 md:flex">
               <LinkElement name="God praksis" href="/god-praksis" />
               <LinkElement name="Grunnleggende" href="/grunnleggende" />
-              <LinkElement name="Ikoner" href="/ikoner" />
+              <LinkElement name="Ikoner" href="/ikoner" prefetch={false} />
               <LinkElement name="Komponenter" href="/komponenter" />
               <LinkElement name="Bloggen" href="/produktbloggen" />
             </ul>
