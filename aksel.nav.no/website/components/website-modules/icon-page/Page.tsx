@@ -93,7 +93,7 @@ export const IconPage = ({ name }: { name: string }) => {
         />
         <meta
           property="og:image"
-          content="https://aksel.nav.no/images/og/og-ikoner.png"
+          content="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
           key="ogimage"
         />
       </Head>
