@@ -2,4 +2,4 @@
 "@navikt/aksel-icons": minor
 ---
 
-Ny ikonpakke med core icons 3!
+Ny ikonpakke med for core icons 3! `@navikt/aksel-icons`
