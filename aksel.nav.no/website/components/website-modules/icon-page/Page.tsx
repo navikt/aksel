@@ -126,6 +126,18 @@ export const IconPage = ({ name }: { name: string }) => {
                     onSubmit={(e) => e.preventDefault()}
                     className="flex h-fit w-full items-center gap-4 py-2 px-4"
                   >
+                    <div className="min-w-fit">
+                      <ToggleGroup
+                        size="small"
+                        value={toggle}
+                        onChange={(v) => setToggle(v as any)}
+                      >
+                        <ToggleGroup.Item value="stroke">
+                          Stroke
+                        </ToggleGroup.Item>
+                        <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
+                      </ToggleGroup>
+                    </div>
                     <div className="flex w-full items-center gap-2 ">
                       <Search
                         variant="simple"
@@ -137,19 +149,6 @@ export const IconPage = ({ name }: { name: string }) => {
                         value={query}
                         clearButton={false}
                       />
-                    </div>
-                    <div className="min-w-fit justify-self-end">
-                      <ToggleGroup
-                        size="small"
-                        value={toggle}
-                        onChange={(v) => setToggle(v as any)}
-                        className="w-full"
-                      >
-                        <ToggleGroup.Item value="stroke">
-                          Stroke
-                        </ToggleGroup.Item>
-                        <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
-                      </ToggleGroup>
                     </div>
                   </form>
                 </div>

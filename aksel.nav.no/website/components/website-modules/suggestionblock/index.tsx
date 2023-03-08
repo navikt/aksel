@@ -36,6 +36,34 @@ const SuggestionBlockComponent = ({
   );
 };
 
+const SuggestionBlockIcon = ({
+  variant,
+  reference = "",
+}: {
+  variant: "ikon" | "ikon-ny";
+  reference?: string;
+}) => {
+  return (
+    <div className={cl("mb-12 mt-6 flex gap-3 rounded-lg  py-4 ")}>
+      <span className="shrink-0 text-2xl">{options[variant]?.icon}</span>
+      <div className="grid">
+        <Heading size="small" level="2">
+          {options[variant]?.heading}
+        </Heading>
+        <BodyLong className="mt-2">{options[variant]?.text}</BodyLong>
+        <Button
+          variant="secondary"
+          as="a"
+          href={options[variant].link + reference}
+          className="mt-4 w-fit"
+        >
+          Send innspill
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 export const SuggestionBlock = ({
   variant,
   reference = "",
@@ -55,18 +83,18 @@ export const SuggestionBlock = ({
     return <SuggestionBlockComponent variant={variant} reference={reference} />;
   }
 
+  if (variant === "ikon-ny" || variant === "ikon") {
+    return <SuggestionBlockIcon variant={variant} reference={reference} />;
+  }
+
   return (
     <div
       className={cl(
-        "ring-border-subtle flex justify-between gap-3 rounded-lg px-6 py-4 ring-1",
+        "ring-border-subtle flex justify-between gap-3 rounded-lg ",
         {
-          "mb-0 mt-5": variant === "ikon" || variant === "ikon-ny",
-          "mb-12":
-            variant !== "ikon" &&
-            variant !== "ikon-ny" &&
-            variant !== "ikon-not-found",
-          "bg-surface-info-subtle": variant === "ikon-ny",
-          "m-0 bg-teal-100 ring-teal-300": variant === "ikon-not-found",
+          "mb-12 px-6 py-4 ring-1": variant !== "ikon-not-found",
+          "m-0 bg-teal-100 px-6 py-4 ring-1 ring-teal-300":
+            variant === "ikon-not-found",
         }
       )}
     >

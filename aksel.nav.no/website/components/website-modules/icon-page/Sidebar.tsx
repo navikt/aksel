@@ -1,14 +1,16 @@
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Button, Heading, Tooltip } from "@navikt/ds-react";
+import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import {
   AmplitudeEvents,
   logAmplitudeEvent,
 } from "components/website-modules/utils/amplitude";
 import copy from "copy-to-clipboard";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Highlight, { defaultProps } from "prism-react-renderer";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 
 export const IconSidebar = ({
@@ -23,6 +25,7 @@ export const IconSidebar = ({
   const timeoutRef = useRef<NodeJS.Timeout>();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [blob, setBlob]: any = useState();
+  const router = useRouter();
 
   const currentIcon = useMemo(
     () => Object.values(meta).find((x) => x.name === name),
@@ -71,6 +74,24 @@ export const IconSidebar = ({
     });
   };
 
+  const escape = useCallback(
+    (e) => {
+      if (e.key === "Escape") {
+        router.push("/ikoner", undefined, { shallow: true });
+        focusRef?.current?.focus?.();
+      }
+    },
+    [focusRef, router]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", escape, false);
+
+    return () => {
+      window.removeEventListener("keydown", escape, false);
+    };
+  }, [escape]);
+
   return (
     <section
       ref={wrapperRef}
@@ -110,7 +131,7 @@ export const IconSidebar = ({
         </p>
       </div>
       <Button
-        variant="secondary-neutral"
+        variant="primary"
         className="mt-8 w-full"
         as="a"
         onClick={() => {
@@ -260,6 +281,9 @@ export const IconSidebar = ({
               </pre>
             )}
           </Highlight>
+        </div>
+        <div>
+          <SuggestionBlock variant="ikon" reference={name} />
         </div>
       </div>
     </section>
