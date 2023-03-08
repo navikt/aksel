@@ -82,28 +82,19 @@ export const IconPage = ({ name }: { name: string }) => {
         <meta property="og:title" content="Aksel ikoner" />
         <meta
           name="description"
-          content="En samling 400+ open source-ikoner designet og utviklet for NAV"
+          content="800+ open source-ikoner designet og utviklet for NAV"
           key="desc"
         />
         <meta
           property="og:description"
-          content="En samling 400+ open source-ikoner designet og utviklet for NAV"
+          content="800+ open source-ikoner designet og utviklet for NAV"
           key="ogdesc"
         />
-        {/* <meta
+        <meta
           property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
+          content="https://aksel.nav.no/images/og/og-ikoner.png"
           key="ogimage"
-        /> */}
+        />
       </Head>
 
       <div className="bg-surface-subtle">

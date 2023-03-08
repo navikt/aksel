@@ -57,9 +57,7 @@ declare module "*.svg" {
 }
 ```
 
-## Learn more
-
-- [Docs](https://aksel.nav.no/ikoner)
+## [Learn more](https://aksel.nav.no/ikoner)
 
 ## License
 
