@@ -75,7 +75,7 @@ const introcards = [
         />
       </svg>
     ),
-    href: "/grunnleggende/staesj/ikoner",
+    href: "/ikoner",
   },
 ];
 
