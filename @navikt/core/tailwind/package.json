@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tailwind",
-  "version": "2.6.1",
+  "version": "2.6.2",
   "description": "Tailwind config based on @navikt/ds-tokens",
   "author": "Aksel | NAV designsystem team",
   "keywords": [
@@ -22,7 +22,7 @@
     "directory": "@navikt/core/tailwind"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^2.6.1",
+    "@navikt/ds-tokens": "^2.6.2",
     "@types/jest": "^29.0.0",
     "color": "4.2.3",
     "jest": "^29.0.0",
