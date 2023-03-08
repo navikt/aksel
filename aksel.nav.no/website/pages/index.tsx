@@ -18,18 +18,12 @@ import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { ToolCard } from "components/website-modules/ToolsCard";
+import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
 import { lazy, useEffect, useState } from "react";
 import { logNav } from "../components";
-
-function getPrefersReducedMotion() {
-  const QUERY = "(prefers-reduced-motion: no-preference)";
-  const mediaQueryList = window.matchMedia(QUERY);
-  const prefersReducedMotion = !mediaQueryList.matches;
-  return prefersReducedMotion;
-}
 
 const introcards = [
   {
@@ -98,7 +92,7 @@ const GetStarted = ({
       navigator.userAgent.indexOf("Safari") !== -1 &&
       navigator.userAgent.indexOf("Chrome") === -1;
 
-    setReducedMotion(getPrefersReducedMotion() || disableAnimations);
+    setReducedMotion(PrefersReducedMotion() || disableAnimations);
     const data = localStorage.getItem("pause-animations");
     if (disableAnimations) {
       setPause(true);
