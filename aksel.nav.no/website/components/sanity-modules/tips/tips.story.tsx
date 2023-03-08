@@ -36,7 +36,7 @@ const mockData: SanityT.Schema.tips & { _key: string } = {
 
 export const TipsDemo = () => <Tips node={mockData as any} />;
 export const TipsDemoAksel = () => (
-  <div className="aksel-artikkel">
+  <div className="aksel-artikkel bg-surface-subtle">
     <Tips node={mockData as any} />
   </div>
 );
