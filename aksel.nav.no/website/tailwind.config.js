@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screen: {
+        "2xl": "1440px",
+      },
       colors: {
         pink: {
           50: "#fdf2f8",
@@ -68,7 +71,7 @@ module.exports = {
       },
       spacing: {
         0: 0,
-        header: "3.5rem",
+        header: "4rem",
         sidebar: "16rem",
         text: "600px",
       },

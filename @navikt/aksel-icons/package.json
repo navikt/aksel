@@ -1,0 +1,90 @@
+{
+  "name": "@navikt/aksel-icons",
+  "version": "2.7.1",
+  "author": "Aksel | NAV",
+  "homepage": "https://aksel.nav.no/ikoner",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/aksel-icons"
+  },
+  "keywords": [
+    "Icons",
+    "NAV",
+    "Aksel",
+    "designsystem",
+    "react",
+    "svg"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": [
+    "*.svg"
+  ],
+  "license": "MIT",
+  "main": "./dist/react/cjs/index.js",
+  "module": "./dist/react/esm/index.js",
+  "typings": "./dist/react/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/react/esm/index.d.ts",
+      "import": "./dist/react/esm/index.js",
+      "require": "./dist/react/cjs/index.js"
+    },
+    "./svg/*.svg": "./dist/react/svg/*.svg",
+    "./metadata": {
+      "types": "./dist/metadata.d.ts",
+      "default": "./dist/metadata.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "metadata": [
+        "./dist/metadata.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist/*",
+    "!**/*.tsbuildinfo"
+  ],
+  "scripts": {
+    "create-icons": "svgr --silent --index-template config/index-template.js --out-dir src icons",
+    "copy-util": "copyfiles util/* src",
+    "copy-svg": "copyfiles -f icons/*.svg dist/svg/",
+    "update-metadata": "node config/metadata.js",
+    "build": "yarn copy-util && yarn copy-svg && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node config/cleanTypes.js && yarn update-metadata",
+    "build:old": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node cleanTypes.js && yarn create-package-json-pointers-to-esm",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "fetch-new:icons": "node config/figma/index.mjs",
+    "zip:icons": "node config/zip.js"
+  },
+  "devDependencies": {
+    "@svgr/cli": "6.2.1",
+    "adm-zip": "^0.5.10",
+    "concurrently": "7.2.1",
+    "copyfiles": "^2.4.1",
+    "cross-zip-cli": "1.0.0",
+    "dotenv": "^10.0.0",
+    "fast-glob": "3.2.11",
+    "hast-util-select": "5.0.5",
+    "jest": "^29.0.0",
+    "js-yaml": "^4.1.0",
+    "lodash.camelcase": "4.3.0",
+    "lodash.startcase": "4.4.0",
+    "react": "^18.0.0",
+    "rehype-parse": "8.0.4",
+    "typescript": "^4.8.0",
+    "unified": "10.1.2"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/unified/*"
+    ],
+    "testMatch": [
+      "**/__tests__/*.js",
+      "**/__tests__/*.mjs"
+    ]
+  }
+}

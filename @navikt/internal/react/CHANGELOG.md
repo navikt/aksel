@@ -1,5 +1,39 @@
 # @navikt/ds-react-internal
 
+## 2.7.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.7.1
+  - @navikt/ds-icons@2.7.1
+
+## 2.7.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.7.0
+  - @navikt/ds-icons@2.7.0
+
+## 2.6.2
+
+### Patch Changes
+
+- Updated dependencies [[`59d32e52c`](https://github.com/navikt/aksel/commit/59d32e52c437759e66aa50d200b4264a6ba53069)]:
+  - @navikt/ds-react@2.6.2
+  - @navikt/ds-icons@2.6.2
+
+## 2.6.1
+
+### Patch Changes
+
+- [`e8b5b44f2`](https://github.com/navikt/aksel/commit/e8b5b44f28fbce79e2b17afb14c0978c2708f9ab) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Sender med onClick-event i onSelectPeriod
+
+- Updated dependencies [[`1c5e06438`](https://github.com/navikt/aksel/commit/1c5e06438ce9ff8225d5b2b2bf1f94348dfefe9c)]:
+  - @navikt/ds-react@2.6.1
+  - @navikt/ds-icons@2.6.1
+
 ## 2.6.0
 
 ### Minor Changes

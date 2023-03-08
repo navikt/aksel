@@ -46,6 +46,7 @@ export const Default = {
           variant={props.variant}
           hideLabel={props.hideLabel}
           error={props.error}
+          onSearchClick={console.log}
         />
       </div>
     );

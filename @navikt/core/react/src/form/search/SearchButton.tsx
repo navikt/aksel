@@ -17,7 +17,7 @@ export type SearchButtonType = React.ForwardRefExoticComponent<
 >;
 
 const SearchButton: SearchButtonType = forwardRef(
-  ({ className, children, disabled, ...rest }, ref) => {
+  ({ className, children, disabled, onClick, ...rest }, ref) => {
     const context = useContext(SearchContext);
 
     if (context === null) {
@@ -25,7 +25,7 @@ const SearchButton: SearchButtonType = forwardRef(
       return null;
     }
 
-    const { size, variant } = context;
+    const { size, variant, handleClick } = context;
 
     return (
       <Button
@@ -36,6 +36,10 @@ const SearchButton: SearchButtonType = forwardRef(
         variant={variant === "secondary" ? "secondary" : "primary"}
         className={cl("navds-search__button-search", className)}
         disabled={context?.disabled ?? disabled}
+        onClick={(e) => {
+          handleClick();
+          onClick?.(e);
+        }}
         icon={
           <Search
             {...(children ? { "aria-hidden": true } : { title: "Søk" })}

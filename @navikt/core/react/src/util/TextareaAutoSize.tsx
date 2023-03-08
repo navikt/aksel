@@ -1,12 +1,6 @@
 /* https://github.com/mui/material-ui/blob/master/packages/mui-base/src/TextareaAutosize/TextareaAutosize.js */
-import React, {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 import { debounce, mergeRefs, useClientLayoutEffect } from "..";
 
 /**
@@ -50,7 +44,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
     const renders = useRef(0);
     const [state, setState] = useState<any>({});
 
-    const syncHeight = useCallback(() => {
+    const getUpdatedState = React.useCallback(() => {
       if (!inputRef.current || !shadowRef.current) return;
       const input = inputRef.current;
       const containerWindow = ownerWindow(input);
@@ -102,50 +96,85 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         outerHeight + (boxSizing === "border-box" ? padding + border : 0);
       const overflow = Math.abs(outerHeight - innerHeight) <= 1;
 
-      setState((prevState) => {
-        // Need a large enough difference to update the height.
-        // This prevents infinite rendering loop.
-        if (
-          renders.current < 20 &&
-          ((outerHeightStyle > 0 &&
-            Math.abs((prevState.outerHeightStyle || 0) - outerHeightStyle) >
-              1) ||
-            prevState.overflow !== overflow)
-        ) {
-          renders.current += 1;
-          return {
-            overflow,
-            outerHeightStyle,
-          };
-        }
-
-        if (process.env.NODE_ENV !== "production") {
-          if (renders.current === 20) {
-            console.error(
-              [
-                "Textarea: Too many re-renders. The layout is unstable.",
-                "TextareaAutosize limits the number of renders to prevent an infinite loop.",
-              ].join("\n")
-            );
-          }
-        }
-
-        return prevState;
-      });
+      return { outerHeightStyle, overflow };
     }, [maxRows, minRows, other?.placeholder]);
 
-    useEffect(() => {
+    const syncHeight = React.useCallback(() => {
+      const newState = getUpdatedState();
+
+      if (isEmpty(newState)) {
+        return;
+      }
+
+      setState((prevState) => {
+        return updateState(prevState, newState);
+      });
+    }, [getUpdatedState]);
+
+    const updateState = (prevState, newState) => {
+      const { outerHeightStyle, overflow } = newState;
+      // Need a large enough difference to update the height.
+      // This prevents infinite rendering loop.
+      if (
+        renders.current < 20 &&
+        ((outerHeightStyle > 0 &&
+          Math.abs((prevState.outerHeightStyle || 0) - outerHeightStyle) > 1) ||
+          prevState.overflow !== overflow)
+      ) {
+        renders.current += 1;
+        return {
+          overflow,
+          outerHeightStyle,
+        };
+      }
+      if (process.env.NODE_ENV !== "production") {
+        if (renders.current === 20) {
+          console.error(
+            [
+              "Textarea: Too many re-renders. The layout is unstable.",
+              "TextareaAutosize limits the number of renders to prevent an infinite loop.",
+            ].join("\n")
+          );
+        }
+      }
+      return prevState;
+    };
+
+    const withFlushSync = () => {
+      const newState = getUpdatedState();
+
+      if (isEmpty(newState)) {
+        return;
+      }
+
+      // In React 18, state updates in a ResizeObserver's callback are happening after the paint which causes flickering
+      // when doing some visual updates in it. Using flushSync ensures that the dom will be painted after the states updates happen
+      // Related issue - https://github.com/facebook/react/issues/24331
+      ReactDOM.flushSync(() => {
+        setState((prevState) => {
+          return updateState(prevState, newState);
+        });
+      });
+    };
+
+    React.useEffect(() => {
       const handleResize = debounce(() => {
         renders.current = 0;
-        syncHeight();
+
+        if (inputRef.current) {
+          withFlushSync();
+        }
       });
-      const containerWindow = ownerWindow(inputRef.current);
+      let resizeObserver: ResizeObserver;
+
+      const input = inputRef.current!;
+      const containerWindow = ownerWindow(input);
+
       containerWindow.addEventListener("resize", handleResize);
-      let resizeObserver;
 
       if (typeof ResizeObserver !== "undefined") {
         resizeObserver = new ResizeObserver(handleResize);
-        resizeObserver.observe(inputRef.current);
+        resizeObserver.observe(input);
       }
 
       return () => {
@@ -155,7 +184,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
           resizeObserver.disconnect();
         }
       };
-    }, [syncHeight]);
+    });
 
     useClientLayoutEffect(() => {
       syncHeight();
@@ -220,5 +249,14 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
     );
   }
 );
+
+function isEmpty(obj: any) {
+  return (
+    obj === undefined ||
+    obj === null ||
+    Object.keys(obj).length === 0 ||
+    (obj?.outerHeightStyle === 0 && !obj?.overflow)
+  );
+}
 
 export default TextareaAutosize;

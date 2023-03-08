@@ -89,7 +89,7 @@ function Links() {
         target="_blank"
         rel="noreferrer noopener"
         href="/storybook"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus group flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
         onClick={() =>
           logAmplitudeEvent("link", {
             kilde: "intro-lenker ikonside",
@@ -97,7 +97,7 @@ function Links() {
           })
         }
       >
-        <StorybookIcon /> Storybook
+        <StorybookIcon className="mr-1 group-focus:invert" /> Storybook
       </a>
     </BodyShort>
   );
