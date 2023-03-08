@@ -49,6 +49,10 @@ export interface SearchProps
    */
   onClear?: (e: SearchClearEvent) => void;
   /**
+   * Callback for Search-button submit
+   */
+  onSearchClick?: (value: string) => void;
+  /**
    * aria-label on clear button
    * @default "Tøm"
    */
@@ -76,6 +80,7 @@ export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
   variant: "primary" | "secondary" | "simple";
+  handleClick: () => void;
 }
 
 export const SearchContext = React.createContext<SearchContextProps | null>(
@@ -106,6 +111,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       variant = "primary",
       defaultValue,
       onChange,
+      onSearchClick,
       ...rest
     } = props;
 
@@ -145,6 +151,10 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       ),
       wrapperRef
     );
+
+    const handleClick = () => {
+      onSearchClick?.(`${value ?? internalValue}`);
+    };
 
     return (
       <div
@@ -221,6 +231,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               size,
               disabled: inputProps.disabled,
               variant,
+              handleClick,
             }}
           >
             {children ? children : variant !== "simple" && <SearchButton />}
