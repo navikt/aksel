@@ -10,7 +10,7 @@ import Fuse from "fuse.js";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { categorizeIcons, getFillIcon } from "./utils";
 import { IconSidebar } from "./Sidebar";
 import { TitleLinks } from "./TitleLinks";
@@ -45,6 +45,7 @@ const fuseFill = new Fuse(getFillIcon(Object.values(meta)), {
 export const IconPage = ({ name }: { name: string }) => {
   const [query, setQuery] = useState("");
   const [toggle, setToggle] = useState<"stroke" | "fill">("stroke");
+  const focusRef = useRef(null);
 
   const [strokeIcons] = useState(
     Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke")
@@ -203,8 +204,14 @@ export const IconPage = ({ name }: { name: string }) => {
                                           key={i.id}
                                           prefetch={false}
                                           id={i.id}
+                                          tabIndex={0}
+                                          ref={(el) => {
+                                            if (name === i.id) {
+                                              focusRef.current = el;
+                                            }
+                                          }}
                                           className={cl(
-                                            "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 scroll-m-20 place-items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
+                                            "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-2 focus:ring-blue-800",
                                             {
                                               "bg-surface-selected ring-border-alt-3 z-10 ring-1":
                                                 i.id === name,
@@ -231,7 +238,9 @@ export const IconPage = ({ name }: { name: string }) => {
                       );
                     })}
                   </div>
-                  {name && hideModal && <IconSidebar name={name} />}
+                  {name && hideModal && (
+                    <IconSidebar name={name} focusRef={focusRef} />
+                  )}
 
                   {!hideModal && (
                     <Modal
@@ -246,7 +255,7 @@ export const IconPage = ({ name }: { name: string }) => {
                       aria-label={`${name} ikon`}
                       className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-6 focus:outline-none"
                     >
-                      {name && <IconSidebar name={name} />}
+                      {name && <IconSidebar name={name} focusRef={focusRef} />}
                     </Modal>
                   )}
                 </div>

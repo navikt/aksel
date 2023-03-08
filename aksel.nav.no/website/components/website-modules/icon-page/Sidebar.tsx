@@ -11,7 +11,13 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 
-export const IconSidebar = ({ name }: { name: string }) => {
+export const IconSidebar = ({
+  name,
+  focusRef,
+}: {
+  name: string;
+  focusRef: any;
+}) => {
   const SelectedIcon = Icons[`${name}Icon`];
   const [resentCopy, setResentCopy] = useState<"svg" | "react" | "import">();
   const timeoutRef = useRef<NodeJS.Timeout>();
@@ -73,10 +79,13 @@ export const IconSidebar = ({ name }: { name: string }) => {
       aria-labelledby="icon-details"
     >
       <Link
-        href={`/ikoner#${name}`}
+        href="/ikoner"
         scroll={false}
         prefetch={false}
         className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus active:bg-surface-neutral-subtle-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl focus:outline-none"
+        onClick={() => {
+          focusRef?.current?.focus?.();
+        }}
       >
         <Icons.XMarkIcon fontSize="1.5rem" title="lukk ikondetaljer" />
       </Link>
