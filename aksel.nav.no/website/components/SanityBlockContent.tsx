@@ -26,7 +26,10 @@ import {
 } from ".";
 
 export const InlineCode = (props: React.HTMLAttributes<HTMLElement>) => (
-  <code className="inline-code" {...props} />
+  <code
+    className="bg-surface-alt-3-subtle/50 py-05 rounded px-1 leading-normal [font-size:_calc(16em_/_18)]"
+    {...props}
+  />
 );
 
 export const KBD = (props: React.HTMLAttributes<HTMLElement>) => (

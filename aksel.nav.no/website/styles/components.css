@@ -2,14 +2,6 @@
   @apply z-modal bg-border-focus text-text-on-inverted absolute left-0 -translate-y-full p-4 no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
 }
 
-.inline-code {
-  border-radius: 0.25rem;
-  background-color: rgb(226 232 240);
-  padding: 0.125em 0.25em;
-  font-size: calc(16em / 18); /* scale font-size with parent */
-  line-height: 1.5;
-}
-
 .inline-kbd {
   white-space: nowrap;
   border-radius: 0.25rem;
