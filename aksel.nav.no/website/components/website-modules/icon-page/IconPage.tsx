@@ -173,7 +173,7 @@ export const IconPage = ({ name }: { name: string }) => {
                 <div className="flex">
                   <div
                     className={cl(
-                      "animate-fadeIn transition-width grid w-full place-content-start gap-9 gap-y-12 px-6 py-8",
+                      "animate-fadeIn transition-width grid w-full place-content-start gap-8 px-6 py-8",
                       {
                         "border-r-border-subtle border-r": !!name,
                         "basis-2/3": name,
