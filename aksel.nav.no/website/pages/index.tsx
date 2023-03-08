@@ -203,7 +203,7 @@ const Forside = ({
           { "animation-stop": pause }
         )}
       >
-        <Header variant="transparent" />
+        <Header />
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-8">
