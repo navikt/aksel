@@ -16,7 +16,7 @@ export const TitleLinks = () => (
   <ul className="text-medium item-start mt-12 flex flex-col gap-4 md:flex-row md:items-center">
     <li className="flex items-center gap-2 leading-none">
       <NextLink
-        href="https://www.figma.com/community/file/1167474127194981809"
+        href="https://www.figma.com/community/file/1214869602572392330"
         passHref
         legacyBehavior
       >
