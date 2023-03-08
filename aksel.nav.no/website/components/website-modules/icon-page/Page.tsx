@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useMedia } from "@/utils";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
@@ -261,6 +262,14 @@ export const IconPage = ({ name }: { name: string }) => {
               </div>
             </div>
           </div>
+          {/* Hack for lasting av OG-bilder for public-mappe lastest opp til CDN */}
+          <img
+            src="/images/og/ikoner/og-ikoner.png"
+            alt=""
+            aria-hidden
+            loading="lazy"
+            style={{ display: "none" }}
+          />
         </main>
         <Footer />
       </div>
