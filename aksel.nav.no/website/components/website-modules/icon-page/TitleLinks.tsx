@@ -34,7 +34,7 @@ export const TitleLinks = () => (
         </DsLink>
       </NextLink>
     </li>
-    {/* <Divider />
+    <Divider />
     <li className="flex items-center gap-1 leading-none">
       <DsLink
         className="text-text-default no-underline hover:underline"
@@ -51,7 +51,7 @@ export const TitleLinks = () => (
       >
         <DownloadIcon className="text-2xl" aria-hidden /> Last ned ikonpakke
       </DsLink>
-    </li> */}
+    </li>
     <Divider />
     <li className="flex items-center gap-2 leading-none">
       <NextLink
