@@ -68,10 +68,10 @@ export const TitleLinks = () => (
         </DsLink>
       </NextLink>
     </li>
-    {/* <Divider />
+    <Divider />
     <li className="flex items-center gap-2 leading-none">
       <NextLink
-        href="https://github.com/navikt/aksel/tree/main/%40navikt/aksel-icons/CONTRIBUTING.md"
+        href="/god-praksis/artikler/tilgjengelig-ikonbruk"
         passHref
         legacyBehavior
       >
@@ -80,6 +80,6 @@ export const TitleLinks = () => (
           <span>Tilgjengelighet</span>
         </DsLink>
       </NextLink>
-    </li> */}
+    </li>
   </ul>
 );
