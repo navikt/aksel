@@ -92,14 +92,11 @@ export const IconSidebar = ({ name }: { name: string }) => {
       >
         {name}
       </Heading>
-      <div
-        aria-label={`kategorier: ${currentIcon.category}, ${currentIcon.sub_category}`}
-      >
-        <p className="mt-1" aria-hidden>
-          {currentIcon.category}
-        </p>
-        <p aria-hidden>
-          <span>└ </span>
+      <div>
+        <span className="navds-sr-only">kategorier</span>
+        <p className="mt-1">{currentIcon.category}</p>
+        <p>
+          <span aria-hidden>└ </span>
           {`${currentIcon.sub_category}`}
         </p>
       </div>

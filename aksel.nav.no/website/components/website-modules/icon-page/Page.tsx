@@ -117,7 +117,7 @@ export const IconPage = ({ name }: { name: string }) => {
             <div className="mx-auto flex w-full flex-col sm:max-w-[80%] md:max-w-screen-md">
               <div>
                 <h1 className="from-deepblue-800 via-deepblue-400 my-0 w-fit bg-gradient-to-tr to-violet-500 bg-clip-text text-7xl font-bold text-transparent">
-                  Aksel icons
+                  Aksel ikoner
                 </h1>
                 <div className="override-text-no-max mt-4 text-xl">
                   <p>{`${
