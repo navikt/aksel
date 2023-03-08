@@ -1,4 +1,4 @@
-import { AmplitudeEvents, logAmplitudeEvent } from "@/utils";
+import { AmplitudeEvents, logAmplitudeEvent, logNav } from "@/utils";
 import { BrailleIcon, DownloadIcon, PackageIcon } from "@navikt/aksel-icons";
 import { Link as DsLink } from "@navikt/ds-react";
 
@@ -20,7 +20,16 @@ export const TitleLinks = () => (
         passHref
         legacyBehavior
       >
-        <DsLink className="text-text-default no-underline hover:underline">
+        <DsLink
+          className="text-text-default no-underline hover:underline"
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+        >
           <FigmaIcon className="ml-1" /> <span className="">Figma</span>
         </DsLink>
       </NextLink>
@@ -50,7 +59,16 @@ export const TitleLinks = () => (
         passHref
         legacyBehavior
       >
-        <DsLink className="text-text-default no-underline hover:underline">
+        <DsLink
+          className="text-text-default no-underline hover:underline"
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+        >
           <PackageIcon className="text-2xl" aria-hidden /> Installer med NPM
         </DsLink>
       </NextLink>
@@ -62,7 +80,16 @@ export const TitleLinks = () => (
         passHref
         legacyBehavior
       >
-        <DsLink className="text-text-default no-underline hover:underline">
+        <DsLink
+          className="text-text-default no-underline hover:underline"
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+        >
           <GithubIcon className="ml-[3px] h-[18px] w-[18px]" />{" "}
           <span className="ml-1">Bidra</span>
         </DsLink>
@@ -75,7 +102,16 @@ export const TitleLinks = () => (
         passHref
         legacyBehavior
       >
-        <DsLink className="text-text-default no-underline hover:underline">
+        <DsLink
+          className="text-text-default no-underline hover:underline"
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+        >
           <BrailleIcon aria-hidden className="text-2xl" />{" "}
           <span>Tilgjengelighet</span>
         </DsLink>
