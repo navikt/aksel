@@ -36,7 +36,7 @@ Each icons `width` and `height` is default `1em`. This allows you to use the nat
 
 ### Direct svg-import
 
-All icons are available in raw SVG-format behind `/svg`. Note that svg-files don`t have the suffix `Icon`.
+All icons are available in raw SVG-format behind `/svg`. Note that svg-files do not have the suffix `Icon`.
 
 ```js
 import StarIcon from "@navikt/aksel-icons/svg/Star.svg";
