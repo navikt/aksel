@@ -1,7 +1,7 @@
 import { useMedia } from "@/utils";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
-import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
+import { Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "classnames";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
@@ -11,10 +11,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
-import ReactModal from "react-modal";
-import { categorizeIcons, getFillIcon } from "./icon-utils";
-import { IconSidebar } from "./IconSidebar";
-import styles from "./styles.module.css";
+import { categorizeIcons, getFillIcon } from "./utils";
+import { IconSidebar } from "./Sidebar";
 import { TitleLinks } from "./TitleLinks";
 
 const fuseStroke = new Fuse(
@@ -73,7 +71,7 @@ export const IconPage = ({ name }: { name: string }) => {
   const router = useRouter();
 
   useEffect(() => {
-    hideModal && ReactModal.setAppElement("#__next");
+    hideModal && Modal.setAppElement("#__next");
   }, [hideModal]);
 
   return (
@@ -252,18 +250,19 @@ export const IconPage = ({ name }: { name: string }) => {
                   {name && hideModal && <IconSidebar name={name} />}
 
                   {!hideModal && (
-                    <ReactModal
-                      isOpen={!!name}
-                      onRequestClose={() =>
-                        router.push("/ikoner", undefined, { shallow: true })
+                    <Modal
+                      open={!!name}
+                      onClose={() =>
+                        router.push(`/ikoner#${name}`, undefined, {
+                          shallow: true,
+                        })
                       }
-                      aria={{ modal: true }}
-                      overlayClassName={styles.ModalOverlay}
-                      contentLabel={`${name} ikon`}
+                      aria-modal
+                      aria-label={`${name} ikon`}
                       className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-6 focus:outline-none"
                     >
                       {name && <IconSidebar name={name} />}
-                    </ReactModal>
+                    </Modal>
                   )}
                 </div>
               </div>

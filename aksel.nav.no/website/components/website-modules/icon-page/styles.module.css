@@ -1,4 +1,0 @@
-.ModalOverlay {
-  z-index: var(--a-z-index-modal);
-  @apply bg-surface-backdrop fixed inset-0 grid place-items-center backdrop-blur-sm lg:hidden;
-}

@@ -1,4 +1,4 @@
-import { IconPage } from "components/website-modules/icon-page/IconPage";
+import { IconPage } from "components/website-modules/icon-page/Page";
 import { useRouter } from "next/router";
 import meta from "@navikt/aksel-icons/metadata";
 import NotFound from "../404";
