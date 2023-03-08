@@ -8,7 +8,7 @@ import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./index";
 
 interface TimelineClickablePeriodProps extends PeriodProps {
-  onSelectPeriod?: () => void;
+  onSelectPeriod?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   isActive?: boolean;
   periodRef: React.ForwardedRef<HTMLButtonElement>;
 }
@@ -49,9 +49,9 @@ const ClickablePeriod = React.memo(
             firstFocus && addFocusable(r, index);
             mergedRef(r);
           }}
-          onClick={() => {
+          onClick={(e) => {
             children && setSelected((x) => !x);
-            onSelectPeriod?.();
+            onSelectPeriod?.(e);
           }}
           aria-label={ariaLabel(start, end, status, statusLabel)}
           className={cl(
