@@ -109,3 +109,7 @@ p.override-text-no-max {
 .full-bleed {
   @apply relative left-1/2 right-1/2 -mx-[50vw] w-screen md:left-auto md:right-auto md:mx-auto md:w-full md:max-w-[85%];
 }
+
+.centered-layout {
+  @apply mx-auto w-full px-4 sm:px-6;
+}

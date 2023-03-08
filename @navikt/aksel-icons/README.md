@@ -16,15 +16,17 @@
 
 ## Use
 
+For previous users of `@navikt/ds-icons`, this package utilizes the same API. The only difference is that the icons are suffixed with `Icon` to avoid naming conflicts and visual changes to the icons themselves.
+
 ```jsx
-import { StarIcon } from "@navikt/ds-icons";
+import { StarIcon } from "@navikt/aksel-icons";
 
 function App() {
-  return <StarIcon title="star" fontSize="1.5rem"/>;
+  return <StarIcon title="star" fontSize="1.5rem" />;
 }
+```
 
 Tip: Use the `title` prop for accessible icons.
-```
 
 ### Sizing
 

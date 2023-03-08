@@ -63,7 +63,7 @@ export const IconSidebar = ({
 
   useEffect(() => {
     if (wrapperRef.current) {
-      wrapperRef.current.focus();
+      wrapperRef.current.focus({ preventScroll: true });
     }
   }, [name]);
 

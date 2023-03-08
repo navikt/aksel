@@ -69,6 +69,7 @@ const AkselPrinsippTemplate = ({
         id="hovedinnhold"
         className={cl("aksel-artikkel pt-4 focus:outline-none", {
           "bg-white": mainPage,
+          "bg-surface-subtle": !mainPage,
         })}
       >
         <article className="overflow-x-clip">
