@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.6.2
+
+### Patch Changes
+
+- [`59d32e52c`](https://github.com/navikt/aksel/commit/59d32e52c437759e66aa50d200b4264a6ba53069) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset React18 problem med TextareaAutosize
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.6.2
+
 ## 2.6.1
 
 ### Patch Changes
