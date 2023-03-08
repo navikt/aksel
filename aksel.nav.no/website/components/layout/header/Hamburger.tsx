@@ -71,7 +71,10 @@ export const Hamburger = () => {
               <Button
                 variant="tertiary"
                 onClick={() => setOpen(false)}
-                className="aksel-tertiary-button absolute top-2 right-2"
+                className={cl(
+                  styles.akselTertiaryButton,
+                  "absolute top-2 right-2"
+                )}
                 icon={<Close title="lukk meny" className="h-5 w-5" />}
               />
               <LinkElement

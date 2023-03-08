@@ -1,7 +1,0 @@
-.content-box {
-  @apply max-w-content-w-padding w-full px-4 pb-4 sm:mx-auto sm:px-6 md:mx-0 md:mr-auto md:px-12;
-}
-
-.centered-layout {
-  @apply mx-auto w-full px-4 sm:px-6;
-}

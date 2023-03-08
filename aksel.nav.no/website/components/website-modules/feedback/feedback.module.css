@@ -1,8 +1,4 @@
-html.overflow-hidden > body.ReactModal__Body--open {
-  overflow: unset;
-}
-
-.override-secondary-button {
+.overrideSecondaryButton {
   --ac-button-secondary-text: var(--a-deepblue-500);
   --ac-button-secondary-bg: var(--a-surface-default);
   --ac-button-secondary-border: var(--a-deepblue-500);
@@ -11,13 +7,8 @@ html.overflow-hidden > body.ReactModal__Body--open {
   --ac-button-secondary-focus-border: var(--a-deepblue-500);
 }
 
-.override-secondary-button-active {
+.overrideSecondaryButtonActive {
   --ac-button-secondary-text: var(--a-text-on-action);
   --ac-button-secondary-hover-bg: var(--a-deepblue-700);
   --ac-button-secondary-hover-text: var(--a-text-on-action);
-}
-
-.aksel-tertiary-button {
-  --a-text-action: var(--a-deepblue-800);
-  --a-text-action-on-action-subtle: var(--a-deepblue-800);
 }
