@@ -76,7 +76,7 @@ export const IconSidebar = ({ name }: { name: string }) => {
         href={`/ikoner#${name}`}
         scroll={false}
         prefetch={false}
-        className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus aactive:bg-surface-neutral-subtle-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl focus:outline-none"
+        className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus active:bg-surface-neutral-subtle-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl focus:outline-none"
       >
         <Icons.XMarkIcon fontSize="1.5rem" title="lukk ikondetaljer" />
       </Link>

@@ -50,7 +50,7 @@ async function generateFile() {
 
 async function createZipArchive() {
   const zip = new AdmZip();
-  const outputFile = "Aksel-icons.zip";
+  const outputFile = "aksel-icons.zip";
 
   await generateFile();
 

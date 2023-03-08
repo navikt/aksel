@@ -29,7 +29,7 @@ export const TitleLinks = () => (
     <li className="flex items-center gap-1 leading-none">
       <DsLink
         className="text-text-default no-underline hover:underline"
-        href="https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/aksel-icons/ikoner.zip"
+        href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
         download="Ikonpakke"
         onClick={() => {
           logAmplitudeEvent(AmplitudeEvents.ikonnedlastning, {

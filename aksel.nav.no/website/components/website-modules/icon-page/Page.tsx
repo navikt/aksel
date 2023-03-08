@@ -49,6 +49,7 @@ export const IconPage = ({ name }: { name: string }) => {
   const [strokeIcons] = useState(
     Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke")
   );
+
   const [fillIcons] = useState(getFillIcon(Object.values(meta)));
 
   const hideModal = useMedia("screen and (min-width: 1024px)");
@@ -152,18 +153,10 @@ export const IconPage = ({ name }: { name: string }) => {
                         onChange={(v) => setToggle(v as any)}
                         className="w-full"
                       >
-                        <ToggleGroup.Item
-                          className="transition-colors duration-100"
-                          value="stroke"
-                        >
+                        <ToggleGroup.Item value="stroke">
                           Stroke
                         </ToggleGroup.Item>
-                        <ToggleGroup.Item
-                          className="transition-colors duration-100"
-                          value="fill"
-                        >
-                          Fill
-                        </ToggleGroup.Item>
+                        <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
                       </ToggleGroup>
                     </div>
                   </form>
@@ -257,6 +250,7 @@ export const IconPage = ({ name }: { name: string }) => {
                           shallow: true,
                         })
                       }
+                      closeButton={false}
                       aria-modal
                       aria-label={`${name} ikon`}
                       className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-6 focus:outline-none"
