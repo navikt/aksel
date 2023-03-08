@@ -13,6 +13,10 @@ jobs:
     name: "Release packages"
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
+    permissions:
+      packages: "write"
+      contents: "read"
+      id-token: "write"
     steps:
       - uses: actions/checkout@v3
         with:

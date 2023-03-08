@@ -16,6 +16,9 @@
     "react",
     "svg"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": [
     "*.svg"
   ],
