@@ -140,3 +140,12 @@
 .navds-combobox__list-item--focus {
   background-color: var(--a-surface-hover);
 }
+
+.navds-combobox__list-item__new-option {
+  border: 1px solid var(--a-border-divider);
+  border-radius: 4px 4px 0 0;
+  background-color: var(--a-bg-subtle);
+  padding: 12px 17.5px;
+  justify-content: flex-start;
+  gap: 1rem;
+}
