@@ -23,7 +23,7 @@
     "@navikt/ds-react-internal": "^2.6.1",
     "@navikt/ds-tailwind": "^2.6.1",
     "@navikt/ds-tokens": "^2.6.1",
-    "@navikt/aksel-tokens": "^2.6.1"
+    "@navikt/aksel-icons": "^2.6.1"
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.2.3"
