@@ -1,12 +1,12 @@
-import { ExternalLinkIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, StarIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="min-h-[40rem] max-w-lg">
-      <ExpansionCard>
-        <ExpansionCard.Header>
+    <div className="min-h-[40rem] w-full max-w-lg">
+      <ExpansionCard clickArea="button">
+        <ExpansionCard.Header avatar={<StarIcon aria-hidden />}>
           <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
@@ -25,7 +25,8 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 6,
+  desc: "Hvis man ønsker andre interaktive elementer i header, f.eks. Lenker må man sette clickArea til 'button'.",
 };
 
 const Innhold = () => (

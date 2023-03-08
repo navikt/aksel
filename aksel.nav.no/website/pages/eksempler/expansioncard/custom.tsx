@@ -1,18 +1,30 @@
-import { ExternalLinkIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, StarIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="min-h-[40rem] max-w-lg">
+    <div className="subtle-card min-h-[40rem] max-w-lg">
       <ExpansionCard>
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
+        <ExpansionCard.Header avatar={<StarIcon aria-hidden />}>
+          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
+
+      <style>{`
+        .subtle-card {
+          --ac-expansioncard-bg: var(--a-deepblue-50);
+          --ac-expansioncard-avatar-bg: var(--a-surface-alt-3-subtle);
+          --ac-expansioncard-avatar-icon: var(--a-icon-alt-3);
+          --ac-expansioncard-open-border-color: var(--a-border-alt-3);
+        }`}</style>
     </div>
   );
 };
@@ -22,6 +34,7 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
+  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser.",
 };
 
 export const args = {

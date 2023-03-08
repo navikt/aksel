@@ -8,6 +8,9 @@ const Example = () => {
       <ExpansionCard>
         <ExpansionCard.Header>
           <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            Du er registerert som mottaker av sykepenger fra NAV
+          </ExpansionCard.Description>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
           <Innhold />
@@ -25,7 +28,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 1,
 };
 
 const Innhold = () => (

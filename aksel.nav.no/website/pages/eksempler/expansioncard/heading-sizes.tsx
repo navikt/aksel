@@ -4,10 +4,32 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="min-h-[40rem] max-w-lg">
+    <div className="grid min-h-[40rem] max-w-lg place-content-start gap-6">
       <ExpansionCard>
         <ExpansionCard.Header>
-          <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
+          <ExpansionCard.Title as="h2" size="large">
+            Sykepenger
+          </ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
+      <ExpansionCard>
+        <ExpansionCard.Header>
+          <ExpansionCard.Title as="h3" size="medium">
+            Sykepenger
+          </ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
+      <ExpansionCard>
+        <ExpansionCard.Header>
+          <ExpansionCard.Title as="h4" size="small">
+            Sykepenger
+          </ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
           <Innhold />
@@ -25,7 +47,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 5,
 };
 
 const Innhold = () => (
