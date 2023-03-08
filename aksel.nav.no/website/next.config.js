@@ -56,14 +56,6 @@ const useCdn = process.env.USE_CDN_ASSETS === "true";
 const config = () =>
   withBundleAnalyzer({
     transpilePackages: ["@navikt/ds-tokens"],
-    serverRuntimeConfig: {
-      // Will only be available on the server side
-      azureAppClientId: process.env.AZURE_APP_CLIENT_ID,
-      azureJwksUri: process.env.AZURE_OPENID_CONFIG_JWKS_URI,
-      azureAppIssuer: process.env.AZURE_OPENID_CONFIG_ISSUER,
-      azureAppWellKnownUrl: process.env.AZURE_APP_WELL_KNOWN_URL,
-      azureAppJWK: process.env.AZURE_APP_JWK,
-    },
     publicRuntimeConfig: {
       NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
     },
