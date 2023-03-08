@@ -252,7 +252,7 @@ export const IconPage = ({ name }: { name: string }) => {
                       closeButton={false}
                       aria-modal
                       aria-label={`${name} ikon`}
-                      className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-6 focus:outline-none"
+                      className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-2 focus:outline-none sm:px-6"
                     >
                       {name && <IconSidebar name={name} focusRef={focusRef} />}
                     </Modal>
