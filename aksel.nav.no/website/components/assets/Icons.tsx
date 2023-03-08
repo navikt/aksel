@@ -43,7 +43,7 @@ export const ChangeLogIconOutline = ({ ...props }) => (
   </svg>
 );
 
-export const FigmaIcon = () => (
+export const FigmaIcon = ({ ...props }) => (
   <svg
     width="20"
     height="20"
@@ -52,6 +52,7 @@ export const FigmaIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     focusable={false}
     aria-hidden
+    {...props}
   >
     <path
       fillRule="evenodd"
@@ -62,7 +63,7 @@ export const FigmaIcon = () => (
   </svg>
 );
 
-export const GithubIcon = () => (
+export const GithubIcon = ({ ...props }) => (
   <svg
     width="20"
     height="20"
@@ -71,6 +72,7 @@ export const GithubIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     focusable={false}
     aria-hidden
+    {...props}
   >
     <path
       fillRule="evenodd"

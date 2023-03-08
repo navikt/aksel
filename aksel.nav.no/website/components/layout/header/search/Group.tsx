@@ -1,6 +1,6 @@
 import { Label } from "@navikt/ds-react";
 import { GroupedHits, SearchHit, options } from "lib/types/search";
-import { Hit, IconHit } from "./Hit";
+import { Hit, IconHit, IconPageHit } from "./Hit";
 import React from "react";
 
 export function Group({
@@ -63,29 +63,46 @@ export function GroupComponent({
         </Label>
       </div>
       <ul className="mt-2">
-        {hits.map((x, xi) =>
-          x.item._type === "icon" ? (
-            <React.Fragment key={x.item.name + xi}>
-              <IconHit
-                key={x.item.name}
-                hit={x}
-                query={query}
-                index={startIndex + xi}
-                logSuccess={logSuccess}
-              />
-            </React.Fragment>
-          ) : (
-            <React.Fragment key={x.item._id}>
-              <Hit
-                key={x.item._id}
-                hit={x}
-                query={query}
-                index={startIndex + xi}
-                logSuccess={logSuccess}
-              />
-            </React.Fragment>
-          )
-        )}
+        {hits.map((x, xi) => {
+          switch (x.item._type) {
+            case "icon":
+              return (
+                <React.Fragment key={x.item.name + xi}>
+                  <IconHit
+                    key={x.item.name}
+                    hit={x}
+                    query={query}
+                    index={startIndex + xi}
+                    logSuccess={logSuccess}
+                  />
+                </React.Fragment>
+              );
+            case "icon_page":
+              return (
+                <React.Fragment key={x.item.heading + xi}>
+                  <IconPageHit
+                    key={x.item.heading}
+                    hit={x}
+                    query={query}
+                    index={startIndex + xi}
+                    logSuccess={logSuccess}
+                  />
+                </React.Fragment>
+              );
+            default:
+              return (
+                <React.Fragment key={x.item._id}>
+                  <Hit
+                    key={x.item._id}
+                    hit={x}
+                    query={query}
+                    index={startIndex + xi}
+                    logSuccess={logSuccess}
+                  />
+                </React.Fragment>
+              );
+          }
+        })}
       </ul>
     </div>
   );

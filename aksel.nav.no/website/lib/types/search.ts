@@ -1,7 +1,11 @@
 import { allArticleDocuments } from "../../sanity/config";
 
 export const options: {
-  [K in typeof allArticleDocuments[number] | "icon" | "aksel_standalone"]: {
+  [K in
+    | typeof allArticleDocuments[number]
+    | "icon"
+    | "aksel_standalone"
+    | "icon_page"]: {
     display: string;
     index: number;
     hidden?: boolean;
@@ -14,6 +18,7 @@ export const options: {
   icon: { display: "Ikoner", index: 4 },
   aksel_prinsipp: { display: "Prinsipper", index: 5 },
   aksel_standalone: { display: "Unike sider", index: 6, hidden: true },
+  icon_page: { display: "Ikonsøk", index: 7, hidden: true },
 };
 
 export type SearchResults = {
@@ -42,12 +47,20 @@ interface PageItemT {
 interface IconItemT {
   _type: "icon";
   name: string;
-  description: string;
+  category: string;
+  sub_category: string;
+  keywords: string;
   created_at: string;
-  pageName: string;
 }
 
-export type FuseItemT = PageItemT | IconItemT;
+export interface IconPageItemT {
+  _type: "icon_page";
+  heading: string;
+  description: string;
+  keywords: string[];
+}
+
+export type FuseItemT = PageItemT | IconItemT | IconPageItemT;
 
 export type FuseHits = {
   item: FuseItemT;

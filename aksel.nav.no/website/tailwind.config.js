@@ -71,7 +71,7 @@ module.exports = {
       },
       spacing: {
         0: 0,
-        header: "3.5rem",
+        header: "4rem",
         sidebar: "16rem",
         text: "600px",
       },

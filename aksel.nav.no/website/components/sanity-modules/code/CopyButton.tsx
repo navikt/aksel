@@ -4,7 +4,7 @@ import copy from "copy-to-clipboard";
 import React from "react";
 import cl from "clsx";
 import style from "./index.module.css";
-import { CopyIcon } from "@sanity/icons";
+import { ClipboardIcon } from "@navikt/aksel-icons";
 
 const copyCode = (content: string) =>
   copy(content, {
@@ -50,15 +50,12 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
         onClick={handleCopy}
       >
         {active ? (
-          <SuccessStroke
-            className="text-[1.5rem]"
-            aria-label="Kopierte kodesnutt"
-          />
+          <SuccessStroke className="text-[1.5rem]" title="Kopierte kodesnutt" />
         ) : (
-          <CopyIcon
-            className="text-[2rem] opacity-90 group-hover:opacity-100"
-            aria-label="Kopier kodesnutt"
-            role="img"
+          <ClipboardIcon
+            fontSize="2rem"
+            className="opacity-90 group-hover:opacity-100"
+            title="Kopier kodesnutt"
           />
         )}
       </button>

@@ -1,14 +1,14 @@
-import { SanityT } from "@/lib";
 import { withErrorBoundary } from "@/error-boundary";
-import core from "@navikt/ds-css/tokens.json";
+import { SanityT } from "@/lib";
+import { ClipboardIcon } from "@navikt/aksel-icons";
 import internal from "@navikt/ds-css-internal/tokens.json";
-import { useEffect, useRef, useState } from "react";
+import core from "@navikt/ds-css/tokens.json";
 import { Expand, SuccessStroke } from "@navikt/ds-icons";
+import { BodyLong, Label, Link } from "@navikt/ds-react";
 import cl from "classnames";
-import { Link, BodyLong, Label } from "@navikt/ds-react";
-import NextLink from "next/link";
 import copy from "copy-to-clipboard";
-import { CopyIcon } from "@sanity/icons";
+import NextLink from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
   const [open, setOpen] = useState(false);
@@ -88,7 +88,7 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
                 </>
               ) : (
                 <>
-                  <CopyIcon aria-hidden role="img" />
+                  <ClipboardIcon aria-hidden />
                   <span className="sr-only">Kopier formarterte tokens</span>
                 </>
               )}

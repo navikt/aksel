@@ -103,6 +103,7 @@ export const GlobalSearch = () => {
       )
         .then((x) => x.json())
         .then((res) => {
+          console.log(res);
           setResults(res);
           logSearchAttempt(res?.hits?.totalHits ?? 0, "standard");
           setLoading(false);
@@ -188,7 +189,7 @@ export const GlobalSearch = () => {
   };
 
   return (
-    <div className="z-[1050] mr-4 ml-auto flex justify-center md:mr-0 md:ml-0">
+    <div className="z-[1050] mr-4 ml-auto flex justify-center lg:mr-0 lg:ml-0">
       <Button
         variant="primary"
         className="hover:bg-deepblue-600 bg-deepblue-500 focus-visible:shadow-focus-gap h-11 focus:shadow-none"
