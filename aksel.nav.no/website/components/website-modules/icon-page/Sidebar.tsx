@@ -95,7 +95,7 @@ export const IconSidebar = ({
   return (
     <section
       ref={wrapperRef}
-      className="animate-fadeIn min-h-96 h-fit w-full basis-1/3 px-6 py-8 focus:outline-none lg:sticky lg:top-16"
+      className="animate-fadeIn min-h-96 h-fit w-full basis-1/3 py-8 focus:outline-none sm:px-6 lg:sticky lg:top-16"
       tabIndex={-1}
       aria-labelledby="icon-details"
     >
