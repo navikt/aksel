@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { Hamburger } from "components/layout/header/Hamburger";
 import { GlobalSearch } from "./search";
 
-const LinkElement = ({ name, href, prefetch = true }) => {
+const LinkElement = ({ name, href, prefetch = undefined }) => {
   const { asPath } = useRouter();
   return (
     <li>
