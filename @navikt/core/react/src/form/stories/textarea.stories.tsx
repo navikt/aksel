@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/react";
-import React from "react";
+import React, { useState } from "react";
 import { Textarea } from "../index";
 export default {
   title: "ds-react/Textarea",
@@ -119,4 +119,16 @@ export const MaxRows = () => {
 
 export const Resize = () => {
   return <Textarea resize label="Ipsum enim quis culpa" />;
+};
+
+export const ResizeBug = () => {
+  const [hidden, setHidden] = useState(false);
+  return (
+    <div>
+      <button onClick={() => setHidden((x) => !x)}>toggle</button>
+      <div hidden={hidden}>
+        <Textarea resize label="Ipsum enim quis culpa" />
+      </div>
+    </div>
+  );
 };
