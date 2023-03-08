@@ -4,7 +4,7 @@ import { getClient } from "@/sanity-client";
 import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
-import ComponentOverview from "components/sanity-modules/component-overview";
+import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";

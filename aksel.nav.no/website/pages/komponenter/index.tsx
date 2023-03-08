@@ -12,7 +12,7 @@ import {
   StorybookIcon,
 } from "components/assets";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
-import ComponentOverview from "components/sanity-modules/component-overview";
+import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";

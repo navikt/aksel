@@ -6,7 +6,7 @@ import React from "react";
 const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
   <kbd
     className={cl(
-      "my-0 mx-1 inline-block min-w-[2rem] rounded-md border border-gray-300 bg-gray-100 py-[1px] px-2 text-center font-mono text-sm text-gray-900"
+      "mx-05 my-0 inline-block min-w-[2rem] rounded-md border border-gray-300 bg-gray-100 py-[1px] px-2 text-center font-mono text-sm text-gray-900"
     )}
     {...props}
   />
@@ -26,8 +26,11 @@ const UuSeksjon = ({
       {s
         .trim()
         .split(" ")
-        .map((x) => (
-          <KBD key={x}>{x}</KBD>
+        .map((x, i, arr) => (
+          <React.Fragment key={x}>
+            <KBD>{x}</KBD>
+            {i !== arr.length - 1 && <span>+</span>}
+          </React.Fragment>
         ))}
     </span>
   );

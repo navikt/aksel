@@ -11,7 +11,7 @@ import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
-import ComponentOverview from "components/sanity-modules/component-overview";
+import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
