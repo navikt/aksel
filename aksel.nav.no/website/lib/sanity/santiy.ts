@@ -31,6 +31,7 @@ export async function sitemapPages(
   return [
     { path: "", lastmod: pages.frontpage._updatedAt },
     { path: "god-praksis", lastmod: pages.godpraksis._updatedAt },
+    { path: "ikoner", lastmod: "monthly" },
     { path: "grunnleggende", lastmod: pages.grunnleggende._updatedAt },
     { path: "komponenter", lastmod: pages.komponenter._updatedAt },
     { path: "produktbloggen", lastmod: pages.blogg._updatedAt },

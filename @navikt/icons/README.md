@@ -27,7 +27,7 @@ function App() {
 
 - [Docs](https://aksel.nav.no/komponenter)
 - [Storybook](https://aksel.nav.no/storybook/)
-- [Icon-search](https://aksel.nav.no/grunnleggende/staesj/ikoner)
+- [Icon-search](https://aksel.nav.no/ikoner)
 
 ## License
 
