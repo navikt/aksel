@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.6.1
+
+### Patch Changes
+
+- [`1c5e06438`](https://github.com/navikt/aksel/commit/1c5e06438ce9ff8225d5b2b2bf1f94348dfefe9c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Ny onSearchClick-prop i Search for lettere submit-handling
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.6.1
+
 ## 2.6.0
 
 ### Patch Changes
