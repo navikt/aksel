@@ -12,8 +12,8 @@ COPY aksel.nav.no/website/.next/standalone ./
 # COPY aksel.nav.no/website/next.config.js .
 # COPY node_modules/ node_modules/
 # COPY @navikt/ @navikt/
+# CMD yarn start
 
 EXPOSE 3000
-# CMD yarn start
-CMD node aksel.nav.no/website/server.js
+CMD ["node", "aksel.nav.no/website/server.js"]
 

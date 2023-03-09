@@ -18,7 +18,7 @@ const ContentSecurityPolicy = `
   connect-src 'self' ${cdnUrl} https://raw.githubusercontent.com/navikt/ wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://sentry.gc.nav.no https://in2.taskanalytics.com/03346;
   frame-ancestors localhost:3333 'self' localhost:3000 https://verktoykasse.sanity.studio/;
   media-src 'self' ${cdnUrl} cdn.sanity.io;
-  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.dev.nav.no/;
+  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.dev.nav.no/ https://aksel.ekstern.dev.nav.no;
 `;
 
 const securityHeaders = [

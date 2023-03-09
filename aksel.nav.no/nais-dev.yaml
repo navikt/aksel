@@ -10,10 +10,22 @@ spec:
   port: 3000
   ingresses:
     - "https://aksel.dev.nav.no"
+    - "https://aksel.ekstern.dev.nav.no"
   liveness:
     path: /api/isAlive
+    initialDelay: 10
   readiness:
     path: /api/isAlive
+    initialDelay: 10
+
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 2048Mi
+    requests:
+      cpu: 500m
+      memory: 1024Mi
+
   accessPolicy:
     outbound:
       external:
