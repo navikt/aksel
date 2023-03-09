@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import { logNav } from "../..";
+import styles from "./header.module.css";
 
 const LinkElement = ({ name, href, onClick }) => {
   const { asPath } = useRouter();
@@ -61,7 +62,7 @@ export const Hamburger = () => {
           isOpen={open}
           onRequestClose={() => setOpen(false)}
           aria={{ modal: true }}
-          overlayClassName="header-modal__overlay"
+          overlayClassName={styles.modalOverlay}
           contentLabel="Meny"
           className="bg-surface-default absolute left-4 top-0 right-4 block rounded py-14 px-11 sm:right-6 sm:left-auto sm:w-96 sm:max-w-[90%] lg:hidden"
         >
@@ -70,7 +71,10 @@ export const Hamburger = () => {
               <Button
                 variant="tertiary"
                 onClick={() => setOpen(false)}
-                className="aksel-tertiary-button absolute top-2 right-2"
+                className={cl(
+                  styles.akselTertiaryButton,
+                  "absolute top-2 right-2"
+                )}
                 icon={<Close title="lukk meny" className="h-5 w-5" />}
               />
               <LinkElement

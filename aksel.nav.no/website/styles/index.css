@@ -5,9 +5,6 @@
 
 @import "tailwindcss/components";
 @import "./prismjs.css";
-@import "./layout.css";
-@import "./components.css";
-@import "./overrides.css";
 
 @import "tailwindcss/utilities";
 @import "./utilities.css";

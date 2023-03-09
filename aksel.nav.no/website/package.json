@@ -42,7 +42,6 @@
     "copy-to-clipboard": "^3.3.1",
     "date-fns": "2.29.3",
     "fuse.js": "^6.6.2",
-    "jose": "4.10.0",
     "lodash": "^4.17.21",
     "next": "^13.2.1",
     "next-sanity": "^4.1.5",

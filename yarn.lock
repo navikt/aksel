@@ -16073,13 +16073,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:4.10.0":
-  version: 4.10.0
-  resolution: "jose@npm:4.10.0"
-  checksum: c575bf2519b758592b3037cac0da34ff2641e56a050b156fe6ab18c03cd6c22e5338d28d1fe3dd997c9b3c0cc7deda72faca4a93ff41274a587850c6519852d0
-  languageName: node
-  linkType: hard
-
 "js-sdsl@npm:^4.1.4":
   version: 4.3.0
   resolution: "js-sdsl@npm:4.3.0"
@@ -24858,7 +24851,6 @@ __metadata:
     fuse.js: ^6.6.2
     jest: ^29.0.0
     jest-environment-jsdom: ^29.0.0
-    jose: 4.10.0
     json5: 2.2.1
     lodash: ^4.17.21
     next: ^13.2.1

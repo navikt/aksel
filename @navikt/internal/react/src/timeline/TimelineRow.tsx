@@ -36,7 +36,7 @@ export interface TimelineRowType
 }
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
-  ({ label, headingTag = "h3", icon, ...rest }, ref) => {
+  ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
     const { periods, id, active } = useRowContext();
     const { setActiveRow } = useTimelineContext();
 
@@ -51,6 +51,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
     const firstFocusable = periods.find(
       (p) => !!p.children || !!p.onSelectPeriod
     );
+    console.log(rest);
 
     return (
       <>
@@ -81,7 +82,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                     "dd.MM.yyyy"
                   )}`
             }
-            className="navdsi-timeline__row-periods"
+            className={cl("navdsi-timeline__row-periods", className)}
             onKeyDown={(e) => {
               if (e.key === "ArrowDown" || e.key === "ArrowUp") {
                 e.preventDefault();
