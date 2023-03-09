@@ -51,7 +51,6 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
     const firstFocusable = periods.find(
       (p) => !!p.children || !!p.onSelectPeriod
     );
-    console.log(rest);
 
     return (
       <>
