@@ -9,7 +9,6 @@ spec:
   image: {{ image }}
   port: 3000
   ingresses:
-    - "https://aksel.dev.nav.no"
     - "https://aksel.ekstern.dev.nav.no"
   liveness:
     path: /api/isAlive

@@ -117,7 +117,7 @@ export function IconHit({
         </span>
       </div>
 
-      <div className="hidden aspect-square w-24 sm:block">
+      <div className="hidden aspect-square w-24 place-content-center sm:grid">
         <Image
           src={`https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/aksel-icons/icons/${hit.item.name}.svg`}
           decoding="sync"
