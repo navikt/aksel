@@ -20,7 +20,7 @@ export enum AmplitudeEvents {
 
 export const initAmplitude = () => {
   if (amplitude && !(typeof window === "undefined")) {
-    amplitude.getInstance().init("default", "", {
+    amplitude.getInstance().init("1a9a84a5e557ac9635a250bc27d75030", "", {
       apiEndpoint: "amplitude.nav.no/collect-auto",
       saveEvents: false,
       includeUtm: true,
