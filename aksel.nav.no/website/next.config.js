@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
-const path = require("path");
+/* const path = require("path"); */
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -111,10 +111,10 @@ const config = () =>
       domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
       dangerouslyAllowSVG: true,
     },
-    output: "standalone",
+    /* output: "standalone",
     experimental: {
       outputFileTracingRoot: path.join(__dirname, "../../"),
-    },
+    }, */
   });
 
 if (process.env.NODE_ENV === "production") {
