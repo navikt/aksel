@@ -46,8 +46,6 @@ export const TitleLinks = () => (
             format: "zip",
           });
         }}
-        target="_blank"
-        rel="noreferrer noopener"
       >
         <DownloadIcon className="text-2xl" aria-hidden /> Last ned ikonpakke
       </DsLink>

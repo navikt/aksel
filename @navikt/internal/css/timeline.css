@@ -4,6 +4,7 @@
   grid-template-columns: auto minmax(0, 1fr);
   width: 100%;
   min-width: fit-content;
+  align-items: center;
 }
 
 .navdsi-timeline__axislabels {
@@ -11,7 +12,6 @@
   height: 1rem;
   box-sizing: content-box;
   grid-column: 2;
-  margin-bottom: var(--a-spacing-4);
   margin-left: var(--a-spacing-8);
 }
 
@@ -20,10 +20,14 @@
   width: auto;
   margin-right: var(--a-spacing-4);
   grid-column: 1;
-  height: 1.5rem;
+  min-height: 1.5rem;
   display: flex;
   align-items: center;
   gap: var(--a-spacing-2);
+}
+
+.navdsi-timeline__row-label:where(:nth-last-child(2)) {
+  align-self: flex-end;
 }
 
 .navdsi-timeline__axislabels-label {
@@ -35,7 +39,7 @@
 .navdsi-timeline__row {
   display: flex;
   background: var(--ac-timeline-row-bg, var(--a-surface-subtle));
-  margin: 0 0 var(--a-spacing-8);
+  margin: var(--a-spacing-4) 0;
   padding-left: var(--a-spacing-8);
   grid-column: 2;
 }
