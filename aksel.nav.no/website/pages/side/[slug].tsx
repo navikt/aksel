@@ -41,15 +41,11 @@ const Page = ({
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel xs:pb-32 bg-gray-50 pt-[8vw] pb-16 focus:outline-none"
+        className="aksel-artikkel bg-surface-subtle pt-[8vw] pb-16 focus:outline-none sm:pb-32"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose">
-            <Heading
-              level="1"
-              size="xlarge"
-              className="algolia-index-lvl1 mt-1"
-            >
+            <Heading level="1" size="xlarge" className="mt-1">
               {page.heading}
             </Heading>
           </div>
@@ -110,7 +106,6 @@ export const getServerSideProps: GetServerSideProps = async (
   const { page } = await getClient().fetch(akselStandaloneBySlug, {
     slug: `side/${context.params.slug}`,
   });
-  console.log(page);
 
   return {
     props: {

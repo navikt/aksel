@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { createContext, forwardRef } from "react";
+import React, { createContext, forwardRef, useContext } from "react";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util/useId";
 import { ListItem, ListItemType } from "./ListItem";
@@ -26,16 +26,19 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   headingTag?: React.ElementType<any>;
 }
 
-interface ListComponent extends React.ForwardRefExoticComponent<ListProps> {
+export interface ListComponent
+  extends React.ForwardRefExoticComponent<ListProps> {
   Item: ListItemType;
 }
 
 interface ListContextProps {
   listType: "ul" | "ol";
+  isNested: boolean | null;
 }
 
 export const ListContext = createContext<ListContextProps>({
   listType: "ul",
+  isNested: null,
 });
 
 export const List = forwardRef<HTMLDivElement, ListProps>(
@@ -53,13 +56,22 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
   ) => {
     const ariaId = useId();
 
+    const { isNested } = useContext(ListContext);
+
     return (
       <ListContext.Provider
         value={{
           listType: ListTag,
+          isNested: isNested === null ? false : true,
         }}
       >
-        <div {...rest} ref={ref} className={cl("navds-list", className)}>
+        <div
+          {...rest}
+          ref={ref}
+          className={cl("navds-list", className, {
+            "navds-list--nested": isNested === null ? false : true,
+          })}
+        >
           {title && (
             <Heading id={`tittel-${ariaId}`} size="small" as={headingTag}>
               {title}

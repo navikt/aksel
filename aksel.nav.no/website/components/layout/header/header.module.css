@@ -1,0 +1,14 @@
+.modalOverlay {
+  z-index: var(--a-z-index-modal);
+  @apply bg-surface-backdrop fixed inset-0 grid place-items-center lg:hidden;
+}
+
+.modalOverlaySearch {
+  z-index: 3000;
+  @apply bg-surface-backdrop fixed inset-0 grid place-items-center;
+}
+
+.akselTertiaryButton {
+  --a-text-action: var(--a-deepblue-800);
+  --a-text-action-on-action-subtle: var(--a-deepblue-800);
+}

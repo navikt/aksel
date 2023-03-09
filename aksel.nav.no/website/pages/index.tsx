@@ -2,8 +2,14 @@
 import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
+import {
+  CompassIcon,
+  ComponentIcon,
+  PaletteIcon,
+  PauseIcon,
+  PlayIcon,
+} from "@navikt/aksel-icons";
 import { BodyLong, Heading } from "@navikt/ds-react";
-import { ComponentIcon, PauseIcon, PlayIcon } from "@sanity/icons";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
@@ -12,18 +18,12 @@ import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { ToolCard } from "components/website-modules/ToolsCard";
+import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Link from "next/link";
 import { lazy, useEffect, useState } from "react";
 import { logNav } from "../components";
-
-function getPrefersReducedMotion() {
-  const QUERY = "(prefers-reduced-motion: no-preference)";
-  const mediaQueryList = window.matchMedia(QUERY);
-  const prefersReducedMotion = !mediaQueryList.matches;
-  return prefersReducedMotion;
-}
 
 const introcards = [
   {
@@ -35,104 +35,41 @@ const introcards = [
   {
     title: "Design Tokens",
     desc: "Farger, spacing, shadows, etc.",
-    icon: (props) => (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-      >
-        <path
-          d="M12 3L19.7942 7.5V16.5L12 21L4.20576 16.5V7.5L12 3Z"
-          stroke="#262626"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12 15L12 21"
-          stroke="#262626"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M19.7942 7.5L14.598 10.5"
-          stroke="#262626"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M9.40196 10.5L4.2058 7.50001"
-          stroke="#262626"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle
-          cx="12.0001"
-          cy="11.9999"
-          r="3"
-          stroke="#262626"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    icon: PaletteIcon,
     href: "/grunnleggende/styling/design-tokens",
   },
   {
     title: "Ikoner",
     desc: "Alle ikonene våre",
-    icon: (props) => (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-      >
-        <circle cx="12" cy="12" r="9" stroke="#262626" strokeWidth="1.5" />
-        <path
-          d="M10.5793 10.2254L15.8339 9.59481L13.4206 13.7748L8.16602 14.4054L10.5793 10.2254Z"
-          stroke="#262626"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    href: "/grunnleggende/staesj/ikoner",
+    icon: CompassIcon,
+    href: "/ikoner",
   },
 ];
 
 const IntroCards = () => {
   return (
-    <ul className="centered-layout xs:mb-36 mb-40 grid w-full max-w-screen-md grid-cols-2 gap-4 md:gap-6">
+    <ul className="centered-layout mb-40 grid w-full max-w-screen-md grid-cols-2 gap-4 sm:mb-36 md:gap-6">
       {introcards.map(({ icon: Icon, title, desc, href }) => (
         <li key={title} className="grid">
-          <Link href={href} passHref>
-            <a
-              className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none"
-              onClick={(e) =>
-                logNav(
-                  "intro-kort",
-                  window.location.pathname,
-                  e.currentTarget.getAttribute("href")
-                )
-              }
-            >
-              <span className="xs:flex items-center gap-2">
-                <Icon aria-hidden className="shrink-0 text-2xl" role="img" />
-                <span className="text-xl font-semibold group-hover:underline">
-                  {title}
-                </span>
+          <Link
+            href={href}
+            passHref
+            className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none"
+            onClick={(e) =>
+              logNav(
+                "intro-kort",
+                window.location.pathname,
+                e.currentTarget.getAttribute("href")
+              )
+            }
+          >
+            <span className="items-center gap-2 sm:flex">
+              <Icon aria-hidden className="shrink-0 text-2xl" role="img" />
+              <span className="text-xl font-semibold group-hover:underline">
+                {title}
               </span>
-              <div className="text-text-subtle mt-2">{desc}</div>
-            </a>
+            </span>
+            <div className="text-text-subtle mt-2">{desc}</div>
           </Link>
         </li>
       ))}
@@ -155,7 +92,7 @@ const GetStarted = ({
       navigator.userAgent.indexOf("Safari") !== -1 &&
       navigator.userAgent.indexOf("Chrome") === -1;
 
-    setReducedMotion(getPrefersReducedMotion() || disableAnimations);
+    setReducedMotion(PrefersReducedMotion() || disableAnimations);
     const data = localStorage.getItem("pause-animations");
     if (disableAnimations) {
       setPause(true);
@@ -175,7 +112,7 @@ const GetStarted = ({
         style={{
           gridTemplateColumns: `repeat(${links.length}, minmax(0, 1fr))`,
         }}
-        className="xs:grid mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 md:gap-8"
+        className="mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 sm:grid md:gap-8"
       >
         {links.map((x) => (
           <li key={x.title}>
@@ -196,12 +133,12 @@ const GetStarted = ({
         >
           {pause ? (
             <>
-              <PlayIcon aria-hidden role="img" />
+              <PlayIcon aria-hidden />
               <span className="sr-only">Start animasjon</span>
             </>
           ) : (
             <>
-              <PauseIcon aria-hidden role="img" />
+              <PauseIcon aria-hidden />
               <span className="sr-only">Stopp animasjon</span>
             </>
           )}
@@ -266,15 +203,15 @@ const Forside = ({
           { "animation-stop": pause }
         )}
       >
-        <Header variant="transparent" />
+        <Header />
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-8">
-            <div className="centered-layout xs:mt-36 xs:mb-18 xs:max-w-screen-xs relative mb-16 mt-20 grid max-w-xs place-items-center text-center">
+            <div className="centered-layout sm:mb-18 relative mb-16 mt-20 grid max-w-xs place-items-center text-center sm:mt-36 sm:max-w-[648px]">
               <Heading
                 level="1"
                 size="xlarge"
-                className="text-deepblue-800 xs:text-[3.5rem] leading-[1.2]"
+                className="text-deepblue-800 leading-[1.2] sm:text-[3.5rem]"
               >
                 {page.title}
               </Heading>
@@ -291,7 +228,7 @@ const Forside = ({
                 <Heading
                   level="2"
                   size="xlarge"
-                  className="text-deepblue-800 xs:text-[3.25rem] mb-8 text-center"
+                  className="text-deepblue-800 mb-8 text-center sm:text-[3.25rem]"
                 >
                   God praksis
                 </Heading>

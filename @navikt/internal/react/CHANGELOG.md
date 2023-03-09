@@ -1,5 +1,113 @@
 # @navikt/ds-react-internal
 
+## 2.7.3
+
+### Patch Changes
+
+- :fire: Fjernet unødvendig logging
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.7.3
+  - @navikt/ds-icons@2.7.3
+
+## 2.7.2
+
+### Patch Changes
+
+- [`4d24fa2c0`](https://github.com/navikt/aksel/commit/4d24fa2c07e6c7fe56abf76b939e34b3529e73c1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Timeline.Row støtter nå className, fikset css alignment ved høyde-endring i Timeline
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.7.2
+  - @navikt/ds-icons@2.7.2
+
+## 2.7.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.7.1
+  - @navikt/ds-icons@2.7.1
+
+## 2.7.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.7.0
+  - @navikt/ds-icons@2.7.0
+
+## 2.6.2
+
+### Patch Changes
+
+- Updated dependencies [[`59d32e52c`](https://github.com/navikt/aksel/commit/59d32e52c437759e66aa50d200b4264a6ba53069)]:
+  - @navikt/ds-react@2.6.2
+  - @navikt/ds-icons@2.6.2
+
+## 2.6.1
+
+### Patch Changes
+
+- [`e8b5b44f2`](https://github.com/navikt/aksel/commit/e8b5b44f28fbce79e2b17afb14c0978c2708f9ab) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Sender med onClick-event i onSelectPeriod
+
+- Updated dependencies [[`1c5e06438`](https://github.com/navikt/aksel/commit/1c5e06438ce9ff8225d5b2b2bf1f94348dfefe9c)]:
+  - @navikt/ds-react@2.6.1
+  - @navikt/ds-icons@2.6.1
+
+## 2.6.0
+
+### Minor Changes
+
+- [#1835](https://github.com/navikt/aksel/pull/1835) [`b575816e7`](https://github.com/navikt/aksel/commit/b575816e736d440f224e1e70abf851262a976981) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Controlled og defaultOpen-states for Dropdown
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.6.0
+  - @navikt/ds-icons@2.6.0
+
+## 2.5.1
+
+### Patch Changes
+
+- Updated dependencies [[`ac1e69b34`](https://github.com/navikt/aksel/commit/ac1e69b342ae207db2e80e3058555c56902e5832)]:
+  - @navikt/ds-react@2.5.1
+  - @navikt/ds-icons@2.5.1
+
+## 2.5.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.5.0
+  - @navikt/ds-icons@2.5.0
+
+## 2.4.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.4.3
+  - @navikt/ds-icons@2.4.3
+
+## 2.4.2
+
+### Patch Changes
+
+- [#1823](https://github.com/navikt/aksel/pull/1823) [`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8) Thanks [@kschieren](https://github.com/kschieren)! - added support for nested lists
+
+- Updated dependencies [[`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8)]:
+  - @navikt/ds-react@2.4.2
+  - @navikt/ds-icons@2.4.2
+
+## 2.4.1
+
+### Patch Changes
+
+- Updated dependencies [[`98c06b0be`](https://github.com/navikt/aksel/commit/98c06b0be20debff9969af874d5239ec920fa401)]:
+  - @navikt/ds-react@2.4.1
+  - @navikt/ds-icons@2.4.1
+
 ## 2.4.0
 
 ### Patch Changes

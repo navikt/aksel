@@ -15,23 +15,23 @@ p.override-text-no-max {
 }
 
 .dynamic-wrapper {
-  @apply max-w-aksel xs:w-[90%] mx-auto;
+  @apply max-w-aksel mx-auto sm:w-[90%];
 }
 
 .dynamic-wrapper-prose {
-  @apply xs:w-[90%] mx-auto max-w-prose;
+  @apply mx-auto max-w-prose sm:w-[90%];
 }
 
 .dynamic-wrapper-left {
-  @apply xs:w-[90%] max-w-prose;
+  @apply max-w-prose sm:w-[90%];
 }
 
 .dynamic-wrapper-2xl {
-  @apply xs:w-[90%] mx-auto max-w-2xl;
+  @apply mx-auto max-w-2xl sm:w-[90%];
 }
 
 .card-grid-3-1 {
-  @apply grid gap-3 sm:grid-cols-2 md:gap-6 lg:grid-cols-3;
+  @apply grid gap-3 md:grid-cols-2 md:gap-6 lg:grid-cols-3;
 }
 
 .card-grid-2-1 {
@@ -39,7 +39,7 @@ p.override-text-no-max {
 }
 
 .aksel-artikkel .aksel-list-ul li::before {
-  content: url("/images/list-dot.svg");
+  content: url("data:image/svg+xml;base64,PHN2ZwogIHdpZHRoPSIxMSIKICBoZWlnaHQ9IjEwIgogIHZpZXdCb3g9IjAgMCAxMSAxMCIKICBmaWxsPSJub25lIgogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKPgogIDxyZWN0CiAgICB5PSI1IgogICAgd2lkdGg9IjgiCiAgICBoZWlnaHQ9IjgiCiAgICByeD0iMiIKICAgIHRyYW5zZm9ybT0icm90YXRlKC00NSAwIDUpIgogICAgZmlsbD0iIzAwNUI4MiIKICAvPgo8L3N2Zz4K");
   position: absolute;
   left: 0;
 }
@@ -108,4 +108,8 @@ p.override-text-no-max {
 
 .full-bleed {
   @apply relative left-1/2 right-1/2 -mx-[50vw] w-screen md:left-auto md:right-auto md:mx-auto md:w-full md:max-w-[85%];
+}
+
+.centered-layout {
+  @apply mx-auto w-full px-4 sm:px-6;
 }

@@ -20,7 +20,7 @@ export enum AmplitudeEvents {
 
 export const initAmplitude = () => {
   if (amplitude && !(typeof window === "undefined")) {
-    amplitude.getInstance().init("default", "", {
+    amplitude.getInstance().init("1a9a84a5e557ac9635a250bc27d75030", "", {
       apiEndpoint: "amplitude.nav.no/collect-auto",
       saveEvents: false,
       includeUtm: true,
@@ -109,7 +109,8 @@ export const usePageView = (router: Router, pageProps: any) => {
       } catch (error) {
         isDevelopment && console.error(error);
       }
-      logPageView(e, data, first);
+      /* First might be an object */
+      logPageView(e, data, first === true);
       try {
         if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-page-view?id=${pageId}`);

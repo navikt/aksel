@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import { Group, GroupComponent } from "./Group";
+import styles from "../header.module.css";
 
 /**
  * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
@@ -103,6 +104,7 @@ export const GlobalSearch = () => {
       )
         .then((x) => x.json())
         .then((res) => {
+          console.log(res);
           setResults(res);
           logSearchAttempt(res?.hits?.totalHits ?? 0, "standard");
           setLoading(false);
@@ -188,7 +190,7 @@ export const GlobalSearch = () => {
   };
 
   return (
-    <div className="z-[1050] mr-4 ml-auto flex justify-center md:mr-0 md:ml-0">
+    <div className="z-[1050] mr-4 ml-auto flex justify-center lg:mr-0 lg:ml-0">
       <Button
         variant="primary"
         className="hover:bg-deepblue-600 bg-deepblue-500 focus-visible:shadow-focus-gap h-11 focus:shadow-none"
@@ -211,7 +213,7 @@ export const GlobalSearch = () => {
         aria={{ modal: true }}
         contentLabel="Søk"
         className="bg-surface-default absolute inset-0 block w-screen overflow-x-auto px-4 md:px-6"
-        overlayClassName="header-modal__overlay-search"
+        overlayClassName={styles.modalOverlaySearch}
       >
         <div className="search-grid-wrapper relative mx-auto max-w-4xl gap-4 gap-x-8 py-24">
           <button

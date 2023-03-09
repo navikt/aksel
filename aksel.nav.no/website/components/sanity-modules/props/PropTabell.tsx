@@ -63,7 +63,7 @@ const PropTable = ({ komponent }: { komponent: PropT }): JSX.Element => {
         {komponent?.title ? komponent.title : "Props"}
       </Heading>
 
-      <div className="algolia-ignore-index relative mb-8">
+      <div className="toc-ignore relative mb-8">
         {komponent?.propref?.proplist?.length === 0 && (
           <div className="mb-8 rounded-b border border-gray-300 p-2">
             <BodyShort>Fant ingen props for denne komponenten.</BodyShort>

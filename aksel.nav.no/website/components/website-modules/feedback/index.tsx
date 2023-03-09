@@ -4,6 +4,7 @@ import cl from "clsx";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { AmplitudeEvents, IdContext, logAmplitudeEvent } from "../utils";
+import styles from "./feedback.module.css";
 
 const Feedback = ({
   docId,
@@ -149,8 +150,8 @@ const Feedback = ({
   if (!docId || !docType) return null;
 
   const classes = akselFeedback
-    ? "algolia-ignore-index scroll-my-[30vh]"
-    : cl("scroll-my-[30vh] algolia-ignore-index mt-44 mb-28", {
+    ? "toc-ignore scroll-my-[30vh]"
+    : cl("scroll-my-[30vh] toc-ignore mt-44 mb-28", {
         "mx-auto": center,
       });
 
@@ -171,14 +172,17 @@ const Feedback = ({
         </Heading>
         <div
           className={cl("flex w-full gap-4", {
-            "override-secondary-button justify-start": akselFeedback,
+            "justify-start": akselFeedback,
+            [styles.overrideSecondaryButton]: akselFeedback,
             "justify-center": center,
           })}
         >
           <Button
             variant="secondary"
             className={cl({
-              "override-secondary-button-active bg-deepblue-800 text-text-on-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
+              "bg-deepblue-800 text-text-on-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
+                activeState === HelpfulArticleEnum.JA,
+              [styles.overrideSecondaryButtonActive]:
                 activeState === HelpfulArticleEnum.JA,
             })}
             onClick={() =>
@@ -192,7 +196,9 @@ const Feedback = ({
           <Button
             variant="secondary"
             className={cl({
-              "override-secondary-button-active bg-deepblue-800 text-text-on-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
+              "bg-deepblue-800 text-text-on-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
+                activeState === HelpfulArticleEnum.NEI,
+              [styles.overrideSecondaryButtonActive]:
                 activeState === HelpfulArticleEnum.NEI,
             })}
             onClick={() =>
@@ -206,7 +212,9 @@ const Feedback = ({
           <Button
             variant="secondary"
             className={cl({
-              "override-secondary-button-active bg-deepblue-800 text-text-on-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
+              "bg-deepblue-800 text-text-on-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
+                activeState === HelpfulArticleEnum.MISC,
+              [styles.overrideSecondaryButtonActive]:
                 activeState === HelpfulArticleEnum.MISC,
             })}
             onClick={() =>

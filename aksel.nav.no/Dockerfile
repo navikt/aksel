@@ -1,9 +1,10 @@
-FROM node:16.15.0-alpine3.14
+FROM node:18.1-alpine3.14
 RUN apk add --no-cache libc6-compat
 
 ENV NODE_ENV production
 
 WORKDIR /app
+# COPY aksel.nav.no/website/.next/standalone ./
 COPY aksel.nav.no/website/package.json .
 COPY aksel.nav.no/website/.next/ .next/
 COPY aksel.nav.no/website/public/ public
@@ -14,3 +15,5 @@ COPY @navikt/ @navikt/
 
 EXPOSE 3000
 CMD yarn start
+#CMD cd aksel.nav.no/website && node server.js
+

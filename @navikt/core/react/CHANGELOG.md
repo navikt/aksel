@@ -1,5 +1,99 @@
 # @navikt/ds-react
 
+## 2.7.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.3
+
+## 2.7.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.2
+
+## 2.7.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.1
+
+## 2.7.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.0
+
+## 2.6.2
+
+### Patch Changes
+
+- [`59d32e52c`](https://github.com/navikt/aksel/commit/59d32e52c437759e66aa50d200b4264a6ba53069) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset React18 problem med TextareaAutosize
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.6.2
+
+## 2.6.1
+
+### Patch Changes
+
+- [`1c5e06438`](https://github.com/navikt/aksel/commit/1c5e06438ce9ff8225d5b2b2bf1f94348dfefe9c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Ny onSearchClick-prop i Search for lettere submit-handling
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.6.1
+
+## 2.6.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.6.0
+
+## 2.5.1
+
+### Patch Changes
+
+- [`ac1e69b34`](https://github.com/navikt/aksel/commit/ac1e69b342ae207db2e80e3058555c56902e5832) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :recycle: Refaktorert nested-list logikk
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.5.1
+
+## 2.5.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.5.0
+
+## 2.4.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.4.3
+
+## 2.4.2
+
+### Patch Changes
+
+- [#1823](https://github.com/navikt/aksel/pull/1823) [`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8) Thanks [@kschieren](https://github.com/kschieren)! - added support for nested lists
+
+- Updated dependencies [[`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8)]:
+  - @navikt/ds-icons@2.4.2
+
+## 2.4.1
+
+### Patch Changes
+
+- [#1827](https://github.com/navikt/aksel/pull/1827) [`98c06b0be`](https://github.com/navikt/aksel/commit/98c06b0be20debff9969af874d5239ec920fa401) Thanks [@kschieren](https://github.com/kschieren)! - Added fixedWeeks prop to standalone datepicker
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.4.1
+
 ## 2.4.0
 
 ### Minor Changes

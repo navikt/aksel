@@ -69,11 +69,12 @@ const AkselPrinsippTemplate = ({
         id="hovedinnhold"
         className={cl("aksel-artikkel pt-4 focus:outline-none", {
           "bg-white": mainPage,
+          "bg-surface-subtle": !mainPage,
         })}
       >
         <article className="overflow-x-clip">
           <div
-            className={cl("max-w-aksel xs:w-[90%] mx-auto px-4", {
+            className={cl("max-w-aksel mx-auto px-4 sm:w-[90%]", {
               "pb-32": mainPage,
             })}
           >
@@ -88,7 +89,7 @@ const AkselPrinsippTemplate = ({
                 <Heading
                   level="1"
                   size="large"
-                  className="algolia-index-lvl1 text-deepblue-700 mt-4 md:text-5xl"
+                  className="text-deepblue-700 mt-4 md:text-5xl"
                 >
                   {data.heading}
                 </Heading>
@@ -123,7 +124,7 @@ const AkselPrinsippTemplate = ({
               "bg-gray-100": mainPage,
             })}
           >
-            <div className="max-w-aksel xs:w-[90%] mx-auto px-4">
+            <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
               <div className="pb-16 md:pb-32">
                 <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
                   <TableOfContents
@@ -135,7 +136,7 @@ const AkselPrinsippTemplate = ({
                     {data?.hero_bilde && (
                       <Bilde
                         node={data.hero_bilde as any}
-                        className="xs:-mt-72 -mt-36 mb-10"
+                        className="-mt-36 mb-10 sm:-mt-72"
                       />
                     )}
                     <SanityBlockContent

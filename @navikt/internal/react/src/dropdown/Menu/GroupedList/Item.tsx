@@ -1,6 +1,6 @@
-import React, { forwardRef, useContext } from "react";
-import cl from "clsx";
 import { OverridableComponent } from "@navikt/ds-react";
+import cl from "clsx";
+import React, { forwardRef, useContext } from "react";
 import { DropdownContext } from "../../Dropdown";
 
 export interface GroupedItemProps
@@ -19,6 +19,7 @@ export type GroupedItemType = OverridableComponent<
 export const GroupedItem: GroupedItemType = forwardRef(
   ({ as: Component = "button", className, ...rest }, ref) => {
     const context = useContext(DropdownContext);
+
     return (
       <dd className="navdsi-dropdown__list-item">
         <Component

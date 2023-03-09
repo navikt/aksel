@@ -28,7 +28,7 @@ const Bilde = ({
     <>
       <figure
         className={cl("m-0 mb-8 flex flex-col", style.figure, className, {
-          "sm:max-w-text": node?.small,
+          "md:max-w-text": node?.small,
         })}
       >
         <div
@@ -58,7 +58,7 @@ const Bilde = ({
                 {node?.kilde?.link ? (
                   <>
                     {`${node?.kilde?.prefix}: `}
-                    <NextLink href={node.kilde.link} passHref>
+                    <NextLink href={node.kilde.link} passHref legacyBehavior>
                       <Link className="break-normal">{node?.kilde?.tekst}</Link>
                     </NextLink>
                   </>

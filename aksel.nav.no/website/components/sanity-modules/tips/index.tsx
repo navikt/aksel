@@ -17,7 +17,7 @@ const Tips = ({ node }: { node: SanityT.Schema.tips }): JSX.Element => {
       <div
         className={cl(
           style.tips,
-          "linear xs:px-8 my-8 max-w-2xl rounded-r border-l-[6px] border-l-green-200 bg-white px-4 py-4"
+          "linear my-8 max-w-2xl rounded-r border-l-[6px] border-l-green-200 bg-white px-4 py-4 sm:px-8"
         )}
       >
         <Detail
@@ -71,7 +71,7 @@ const Tips = ({ node }: { node: SanityT.Schema.tips }): JSX.Element => {
     <div
       className={cl(
         style.tips,
-        "xs:px-6 my-7 max-w-2xl px-4 py-3 shadow-[inset_5px_0_0_0_var(--a-gray-500),inset_0_0_0_1px_var(--a-gray-200)]"
+        "my-7 max-w-2xl px-4 py-3 shadow-[inset_5px_0_0_0_var(--a-gray-500),inset_0_0_0_1px_var(--a-gray-200)] sm:px-6"
       )}
     >
       <Detail

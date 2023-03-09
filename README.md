@@ -31,11 +31,12 @@
 ├── core/tailwind   # @navikt/ds-tailwind, tailwind-config
 ├── internal/react  # @navikt/ds-react-internal, komponenter interne flater
 ├── internal/css    # @navikt/ds-css-internal, css interne flater
-├── icons           # @navikt/ds-icons, ikonpakke
+├── aksel-icons     # @navikt/aksel-icons, ikonpakke
+├── icons           # @navikt/ds-icons (ikke lengre i bruk)
 └── codemod         # @navikt/ds-codemod, migrerings-scripts
 
 aksel.nav.no/
-├── website        # NEXT.JS app (v12)
+├── website        # NEXT.JS app (v13)
 └── website/sanity # Sanity CMS-app (v3)
 ```
 
@@ -53,14 +54,14 @@ yarn && yarn boot
 | `yarn storybook`          | Starter storybook                                                                                      |
 | `yarn dev`                | Starter aksel-nettsiden [(Mer info)](https://github.com/navikt/aksel/blob/main/aksel.nav.no/README.md) |
 | `yarn example:shadow-dom` | Starter demo-app med shadow-dom                                                                        |
-| `yarn lint`               | Lints react and css workspaces                                                                         |
-| `yarn test`               | Runs tests                                                                                             |
+| `yarn lint`               | Linter react and css workspaces                                                                        |
+| `yarn test`               | Kjører tester                                                                                          |
 | `yarn clean`              | Fjerner genererte filer                                                                                |
 | `yarn changeset`          | Ny versjon-entry [(how-to)](https://github.com/navikt/aksel/blob/main/.changeset/README.md)            |
 
 ## Bidra
 
-Vi tar gjerne i mot PR-er [CONTRIBUTING.md](https://github.com/navikt/aksel/blob/main/CONTRIBUTING.md)
+Vi tar gjerne i mot PR-er! [CONTRIBUTING.md](https://github.com/navikt/aksel/blob/main/CONTRIBUTING.md)
 
 ## Lisenser
 

@@ -42,25 +42,22 @@ const ArtikkelCard = ({
           },
         }}
         passHref
+        className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
+        onClick={(e) =>
+          logNav(
+            "artikkel-kort",
+            window.location.pathname,
+            e.currentTarget.getAttribute("href")
+          )
+        }
       >
-        <a
-          className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
-          onClick={(e) =>
-            logNav(
-              "artikkel-kort",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
-          }
+        <Heading
+          level={level}
+          size="small"
+          className="text-deepblue-700 group-hover:underline"
         >
-          <Heading
-            level={level}
-            size="small"
-            className="text-deepblue-700 group-hover:underline"
-          >
-            {heading}
-          </Heading>
-        </a>
+          {heading}
+        </Heading>
       </NextLink>
       {ingress && <BodyShort className="mt-2">{ingress}</BodyShort>}
       {variant === "god-praksis" ? (

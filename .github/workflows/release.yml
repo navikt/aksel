@@ -13,6 +13,11 @@ jobs:
     name: "Release packages"
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
+    permissions:
+      id-token: "write"
+      contents: "write"
+      packages: "write"
+      pull-requests: "write"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -65,3 +70,15 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
           GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+
+      - name: Generate icon.zip
+        if: steps.changesets.outputs.published == 'true'
+        run: yarn zip:icons
+
+      - name: Upload updated icon.zip to NAV CDN
+        if: steps.changesets.outputs.published == 'true'
+        uses: navikt/frontend/actions/cdn-upload/v1@main
+        with:
+          cdn-team-name: aksel
+          source: ./@navikt/aksel-icons/aksel-icons.zip
+          destination: "/icons/zip"
