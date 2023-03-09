@@ -4,7 +4,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="min-h-[40rem] max-w-lg">
+    <div className="min-h-[50rem] max-w-md">
       <ExpansionCard>
         <ExpansionCard.Header>
           <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
