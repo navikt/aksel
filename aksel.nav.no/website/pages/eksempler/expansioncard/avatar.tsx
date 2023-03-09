@@ -1,21 +1,21 @@
-import { ExternalLinkIcon, StarIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, SackKronerIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid min-h-[40rem] max-w-lg place-content-start gap-6">
+    <div className="grid gap-6">
       <ExpansionCard>
-        <ExpansionCard.Header avatar={<StarIcon aria-hidden />}>
-          <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
+        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
+          <ExpansionCard.Title>Utbetaling av Sykepenger</ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
       <ExpansionCard>
-        <ExpansionCard.Header avatar={<StarIcon aria-hidden />}>
-          <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
+        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
+          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
             Du er registerert som mottaker av sykepenger fra NAV
           </ExpansionCard.Description>
@@ -28,7 +28,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {

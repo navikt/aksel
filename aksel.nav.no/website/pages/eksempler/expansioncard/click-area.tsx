@@ -4,20 +4,22 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="min-h-[40rem] w-full max-w-lg">
-      <ExpansionCard clickArea="button">
-        <ExpansionCard.Header avatar={<StarIcon aria-hidden />}>
-          <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-    </div>
+    <ExpansionCard clickArea="button">
+      <ExpansionCard.Header avatar={<StarIcon aria-hidden />}>
+        <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+        <ExpansionCard.Description>
+          Du er registerert som mottaker av sykepenger fra NAV
+        </ExpansionCard.Description>
+      </ExpansionCard.Header>
+
+      <ExpansionCard.Content>
+        <Innhold />
+      </ExpansionCard.Content>
+    </ExpansionCard>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {
@@ -26,7 +28,7 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Hvis man ønsker andre interaktive elementer i header, f.eks. Lenker må man sette clickArea til 'button'.",
+  desc: "Hvis man ønsker andre interaktive elementer i header, f.eks. lenker må man sette 'clickArea' til 'button'.",
 };
 
 const Innhold = () => (

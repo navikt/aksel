@@ -4,20 +4,18 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="min-h-[40rem] max-w-lg">
-      <ExpansionCard>
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-    </div>
+    <ExpansionCard>
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+      </ExpansionCard.Header>
+      <ExpansionCard.Content>
+        <Innhold />
+      </ExpansionCard.Content>
+    </ExpansionCard>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {

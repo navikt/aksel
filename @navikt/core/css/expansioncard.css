@@ -1,16 +1,17 @@
 .navds-expansioncard {
-  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-color, var(--a-border-subtle));
+  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-color, var(--a-border-default));
   --__ac-expansioncard-border-radus: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
 
   border-radius: var(--__ac-expansioncard-border-radus);
   background-color: var(--ac-expansioncard-bg, var(--a-surface-default));
   box-shadow: inset 0 0 0 1px var(--__ac-expansioncard-border-color);
+  height: fit-content;
 }
 
 .navds-expansioncard--open {
-  --__ac-expansioncard-open-border-color: var(--ac-expansioncard-open-border-color, var(--a-border-subtle));
+  --__ac-expansioncard-open-border-color: var(--ac-expansioncard-open-border-color, var(--a-border-default));
 
-  box-shadow: inset 0 0 0 2px var(--__ac-expansioncard-open-border-color);
+  box-shadow: inset 0 0 0 1px var(--__ac-expansioncard-open-border-color);
 }
 
 /*************************
@@ -54,11 +55,12 @@
   border-radius: var(--ac-expansioncard-avatar-border-radius, var(--a-border-radius-full));
   min-height: 3rem;
   aspect-ratio: 1/1;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .navds-expansioncard--small .navds-expansioncard__header-avatar {
   min-height: 2rem;
+  font-size: 1.5rem;
 }
 
 .navds-expansioncard__header-content {
@@ -88,7 +90,7 @@
 }
 
 .navds-expansioncard--clickarea-button .navds-expansioncard__header-button:hover {
-  background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-neutral-subtle-hover));
+  background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-hover));
 }
 
 .navds-expansioncard__header-button:hover .navds-expansioncard__icon {
@@ -189,9 +191,9 @@
 }
 
 .navds-expansioncard--clickarea-full .navds-expansioncard__header:hover .navds-expansioncard__header-button {
-  background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-neutral-subtle-hover));
+  background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-hover));
 }
 
 .navds-expansioncard--clickarea-full.navds-expansioncard:hover:where(:not(.navds-expansioncard--open)) {
-  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-subtle-hover));
+  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
 }

@@ -1,13 +1,13 @@
-import { ExternalLinkIcon, StarIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, SackKronerIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="subtle-card min-h-[40rem] max-w-lg">
+    <div className="subtle-card">
       <ExpansionCard>
-        <ExpansionCard.Header avatar={<StarIcon aria-hidden />}>
-          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
+          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
             til tid, sted og arbeidsoppgaver
@@ -29,7 +29,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {

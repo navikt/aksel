@@ -4,11 +4,11 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="grid min-h-[40rem] max-w-lg place-content-start gap-6">
+    <div className="grid gap-6">
       <ExpansionCard>
         <ExpansionCard.Header>
           <ExpansionCard.Title as="h2" size="large">
-            Sykepenger
+            Utbetaling av sykepenger
           </ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
@@ -18,7 +18,7 @@ const Example = () => {
       <ExpansionCard>
         <ExpansionCard.Header>
           <ExpansionCard.Title as="h3" size="medium">
-            Sykepenger
+            Utbetaling av sykepenger
           </ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
@@ -28,7 +28,7 @@ const Example = () => {
       <ExpansionCard>
         <ExpansionCard.Header>
           <ExpansionCard.Title as="h4" size="small">
-            Sykepenger
+            Utbetaling av sykepenger
           </ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
@@ -39,7 +39,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {

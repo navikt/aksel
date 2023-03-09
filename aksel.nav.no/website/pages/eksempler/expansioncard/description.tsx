@@ -4,23 +4,21 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="min-h-[50rem] max-w-md">
-      <ExpansionCard>
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Sykepenger</ExpansionCard.Title>
-          <ExpansionCard.Description>
-            Du er registerert som mottaker av sykepenger fra NAV
-          </ExpansionCard.Description>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-    </div>
+    <ExpansionCard>
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+        <ExpansionCard.Description>
+          Du er registerert som mottaker av sykepenger fra NAV
+        </ExpansionCard.Description>
+      </ExpansionCard.Header>
+      <ExpansionCard.Content>
+        <Innhold />
+      </ExpansionCard.Content>
+    </ExpansionCard>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {
