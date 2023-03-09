@@ -25,10 +25,7 @@ const Example = () => {
                 end={p.end}
                 status={p.status}
                 icon={p.icon}
-                onSelectPeriod={() => {
-                  setActivePeriod(p.id);
-                  p?.onSelectPeriod?.();
-                }}
+                onSelectPeriod={() => setActivePeriod(p.id)}
                 isActive={activePeriod && activePeriod === p.id}
               />
             );
@@ -43,10 +40,7 @@ const Example = () => {
                 end={p.end}
                 status={p.status}
                 icon={p.icon}
-                onSelectPeriod={() => {
-                  setActivePeriod(p.id);
-                  p?.onSelectPeriod?.();
-                }}
+                onSelectPeriod={() => setActivePeriod(p.id)}
                 isActive={activePeriod && activePeriod === p.id}
               />
             );
@@ -138,6 +132,7 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
+  desc: "'onSelectPeriod' og 'isActive' lar deg velge aktive perioder for visning av ekstra informasjon en annen plass i UI.",
 };
 
 export const args = {
