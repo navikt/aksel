@@ -106,9 +106,9 @@ export const IconPage = ({ name }: { name: string }) => {
           className="min-h-[80vh] focus:outline-none"
         >
           <div className="centered-layout mb-40 grid max-w-screen-lg pt-20">
-            <div className="mx-auto flex w-full flex-col sm:max-w-[80%] md:max-w-screen-md">
+            <div>
               <div>
-                <h1 className="from-deepblue-800 via-deepblue-400 my-0 w-fit bg-gradient-to-tr to-violet-500 bg-clip-text text-7xl font-bold text-transparent">
+                <h1 className="text-deepblue-700 my-0 w-fit text-7xl font-bold">
                   Aksel ikoner
                 </h1>
                 <div className="override-text-no-max mt-4 text-xl">
@@ -119,145 +119,142 @@ export const IconPage = ({ name }: { name: string }) => {
               </div>
               <TitleLinks />
             </div>
-            <div className="shadow-medium z-10 mt-16 mb-8 rounded-2xl p-[2px]">
-              <div className="bg-surface-default  h-full w-full rounded-[15px]">
-                <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center rounded-t-2xl border-b">
-                  <form
-                    onSubmit={(e) => e.preventDefault()}
-                    className="flex h-fit w-full items-center gap-4 py-2 px-4"
-                  >
-                    <div className="min-w-fit">
-                      <ToggleGroup
-                        size="small"
-                        value={toggle}
-                        onChange={(v) => setToggle(v as any)}
-                      >
-                        <ToggleGroup.Item value="stroke">
-                          Stroke
-                        </ToggleGroup.Item>
-                        <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
-                      </ToggleGroup>
-                    </div>
-                    <div className="flex w-full items-center gap-2 ">
-                      <Search
-                        variant="simple"
-                        label="Ikonsøk"
-                        className="border-none"
-                        placeholder="Søk"
-                        autoComplete="off"
-                        onChange={setQuery}
-                        value={query}
-                        clearButton={false}
-                      />
-                    </div>
-                  </form>
-                </div>
-                <div className="flex">
-                  <div
-                    className={cl(
-                      "animate-fadeIn transition-width grid w-full place-content-start gap-8 px-6 py-8",
-                      {
-                        "border-r-border-subtle border-r": !!name,
-                        "basis-2/3": name,
-                      }
-                    )}
-                  >
-                    {categories.length === 0 && (
-                      <div>
-                        <SuggestionBlock variant="ikon-not-found" />
-                      </div>
-                    )}
-                    {categories.map((cat) => {
-                      return (
-                        <div key={cat.category}>
-                          <Heading
-                            level="2"
-                            size="small"
-                            className="text-text-default"
-                            spacing
-                          >
-                            {cat.category}
-                          </Heading>
-                          <div className="grid w-full gap-2">
-                            {cat.sub_categories.map((sub) => {
-                              return (
-                                <div key={sub.sub_category}>
-                                  <Heading
-                                    level="3"
-                                    size="xsmall"
-                                    className="text-text-subtle mb-1"
-                                  >
-                                    {sub.sub_category}
-                                  </Heading>
-                                  <div className="gap-05 flex flex-wrap">
-                                    {sub.icons.map((i) => {
-                                      const T = Icons[`${i.id}Icon`];
-                                      if (T === undefined) {
-                                        console.log(i);
-                                        return null;
-                                      }
-                                      return (
-                                        <Link
-                                          href={`/ikoner/${i.id}`}
-                                          scroll={false}
-                                          key={i.id}
-                                          prefetch={false}
-                                          id={i.id}
-                                          tabIndex={0}
-                                          ref={(el) => {
-                                            if (name === i.id) {
-                                              focusRef.current = el;
-                                            }
-                                          }}
-                                          className={cl(
-                                            "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-2 focus:ring-blue-800",
-                                            {
-                                              "bg-surface-selected ring-border-alt-3 z-10 ring-1":
-                                                i.id === name,
-                                            }
-                                          )}
-                                        >
-                                          <span className="navds-sr-only">
-                                            {i.name}
-                                          </span>
-                                          <T
-                                            className="text-3xl"
-                                            aria-hidden
-                                            alt=""
-                                          />
-                                        </Link>
-                                      );
-                                    })}
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  {name && hideModal && (
-                    <IconSidebar name={name} focusRef={focusRef} />
-                  )}
 
-                  {!hideModal && (
-                    <Modal
-                      open={!!name}
-                      onClose={() =>
-                        router.push(`/ikoner#${name}`, undefined, {
-                          shallow: true,
-                        })
-                      }
-                      closeButton={false}
-                      aria-modal
-                      aria-label={`${name} ikon`}
-                      className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-2 focus:outline-none sm:px-6"
+            <div className="bg-surface-default shadow-small ring-border-subtle z-10 mt-16 mb-8 h-full w-full rounded-2xl ring-1">
+              <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center rounded-t-2xl border-b p-1">
+                <form
+                  onSubmit={(e) => e.preventDefault()}
+                  className="flex h-fit w-full items-center gap-4 py-2 px-4"
+                >
+                  <div className="min-w-fit">
+                    <ToggleGroup
+                      size="small"
+                      value={toggle}
+                      onChange={(v) => setToggle(v as any)}
                     >
-                      {name && <IconSidebar name={name} focusRef={focusRef} />}
-                    </Modal>
+                      <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
+                      <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
+                    </ToggleGroup>
+                  </div>
+                  <div className="flex w-full items-center gap-2 ">
+                    <Search
+                      variant="simple"
+                      label="Ikonsøk"
+                      className="border-none"
+                      placeholder="Søk"
+                      autoComplete="off"
+                      onChange={setQuery}
+                      value={query}
+                      clearButton={false}
+                    />
+                  </div>
+                </form>
+              </div>
+              <div className="flex">
+                <div
+                  className={cl(
+                    "animate-fadeIn transition-width grid w-full place-content-start gap-8 px-6 py-8",
+                    {
+                      "border-r-border-subtle border-r": !!name,
+                      "basis-2/3": name,
+                    }
                   )}
+                >
+                  {categories.length === 0 && (
+                    <div>
+                      <SuggestionBlock variant="ikon-not-found" />
+                    </div>
+                  )}
+                  {categories.map((cat) => {
+                    return (
+                      <div key={cat.category}>
+                        <Heading
+                          level="2"
+                          size="small"
+                          className="text-text-default"
+                          spacing
+                        >
+                          {cat.category}
+                        </Heading>
+                        <div className="grid w-full gap-2">
+                          {cat.sub_categories.map((sub) => {
+                            return (
+                              <div key={sub.sub_category}>
+                                <Heading
+                                  level="3"
+                                  size="xsmall"
+                                  className="text-text-subtle mb-1"
+                                >
+                                  {sub.sub_category}
+                                </Heading>
+                                <div className="gap-05 flex flex-wrap">
+                                  {sub.icons.map((i) => {
+                                    const T = Icons[`${i.id}Icon`];
+                                    if (T === undefined) {
+                                      console.log(i);
+                                      return null;
+                                    }
+                                    return (
+                                      <Link
+                                        href={`/ikoner/${i.id}`}
+                                        scroll={false}
+                                        key={i.id}
+                                        prefetch={false}
+                                        id={i.id}
+                                        tabIndex={0}
+                                        ref={(el) => {
+                                          if (name === i.id) {
+                                            focusRef.current = el;
+                                          }
+                                        }}
+                                        className={cl(
+                                          "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-2 focus:ring-blue-800",
+                                          {
+                                            "bg-surface-selected ring-border-alt-3 z-10 ring-1":
+                                              i.id === name,
+                                          }
+                                        )}
+                                      >
+                                        <span className="navds-sr-only">
+                                          {i.name}
+                                        </span>
+                                        <T
+                                          className="text-3xl"
+                                          aria-hidden
+                                          alt=""
+                                        />
+                                      </Link>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
+                {name && hideModal && (
+                  <IconSidebar name={name} focusRef={focusRef} />
+                )}
+
+                {!hideModal && (
+                  <Modal
+                    open={!!name}
+                    onClose={() =>
+                      router.push(`/ikoner#${name}`, undefined, {
+                        shallow: true,
+                      })
+                    }
+                    closeButton={false}
+                    aria-modal
+                    aria-label={`${name} ikon`}
+                    className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-2 focus:outline-none sm:px-6"
+                  >
+                    {name && <IconSidebar name={name} focusRef={focusRef} />}
+                  </Modal>
+                )}
               </div>
             </div>
           </div>
