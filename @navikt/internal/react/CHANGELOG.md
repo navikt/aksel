@@ -1,5 +1,15 @@
 # @navikt/ds-react-internal
 
+## 2.7.3
+
+### Patch Changes
+
+- :fire: Fjernet unødvendig logging
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.7.3
+  - @navikt/ds-icons@2.7.3
+
 ## 2.7.2
 
 ### Patch Changes

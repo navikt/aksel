@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-codemod",
-  "version": "2.7.2",
+  "version": "2.7.3",
   "description": "Aksel codemods for NAVs designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
