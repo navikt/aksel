@@ -1,4 +1,4 @@
-name: CaretUpDown
+name: CaretUpDownFill
 category: Arrows
 sub_category: Caret
 keywords:
@@ -8,6 +8,6 @@ keywords:
   - Utvide/skjule
   - vise/skjule
   - bytte
-variant: Stroke
+variant: Fill
 updated_at: 10.03.2023
-created_at: 07.03.2023
+created_at: 10.03.2023

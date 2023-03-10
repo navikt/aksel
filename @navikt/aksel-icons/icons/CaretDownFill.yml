@@ -1,4 +1,4 @@
-name: CaretLeft
+name: CaretDownFill
 category: Arrows
 sub_category: Caret
 keywords:
@@ -9,6 +9,6 @@ keywords:
   - åpne
   - åpner
   - mer
-variant: Stroke
+variant: Fill
 updated_at: 10.03.2023
 created_at: 10.03.2023
