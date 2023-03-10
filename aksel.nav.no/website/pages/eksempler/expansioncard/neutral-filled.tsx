@@ -4,27 +4,29 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="subtle-card">
-      <ExpansionCard>
-        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
-          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+    <div className="grid gap-6">
+      <ExpansionCard variant="neutral-filled">
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>Utbetaling av Sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
+            Du er registerert som mottaker av sykepenger fra NAV
           </ExpansionCard.Description>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
-
-      <style>{`
-        .subtle-card {
-          --ac-expansioncard-bg: var(--a-deepblue-50);
-          --ac-expansioncard-avatar-bg: var(--a-surface-alt-3-subtle);
-          --ac-expansioncard-avatar-icon: var(--a-icon-alt-3);
-          --ac-expansioncard-open-border-color: var(--a-border-alt-3);
-        }`}</style>
+      <ExpansionCard variant="neutral-filled">
+        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
+          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            Du er registerert som mottaker av sykepenger fra NAV
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
     </div>
   );
 };
@@ -34,11 +36,10 @@ export default withDsExample(Example, "static");
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser.",
 };
 
 export const args = {
-  index: 8,
+  index: 7,
 };
 
 const Innhold = () => (
