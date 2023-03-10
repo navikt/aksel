@@ -1,4 +1,4 @@
-name: CaretUpDown
+name: CaretLeftRight
 category: Arrows
 sub_category: Caret
 keywords:
@@ -10,4 +10,4 @@ keywords:
   - bytte
 variant: Stroke
 updated_at: 10.03.2023
-created_at: 07.03.2023
+created_at: 10.03.2023
