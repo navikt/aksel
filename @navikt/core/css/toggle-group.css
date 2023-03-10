@@ -36,7 +36,7 @@
 
 .navds-toggle-group--neutral > .navds-toggle-group__button {
   background-color: var(--ac-toggle-group-button-neutral-bg, var(--a-surface-transparent));
-  color: var(--ac-toggle-group-button-neutral-text, var(c));
+  color: var(--ac-toggle-group-button-neutral-text, var(--a-text-default));
 }
 
 .navds-toggle-group__button:hover {
