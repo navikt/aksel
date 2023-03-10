@@ -96,4 +96,4 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: aksel.nav.no/nais-dev.yaml
           CLUSTER: dev-gcp
-          VAR: image=${{steps.docker-build-push.outputs.image}}
+          IMAGE: ${{steps.docker-build-push.outputs.image}}
