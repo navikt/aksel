@@ -105,10 +105,10 @@ export const IconPage = ({ name }: { name: string }) => {
           id="hovedinnhold"
           className="min-h-[80vh] focus:outline-none"
         >
-          <div className="centered-layout mb-40 grid max-w-screen-lg pt-20">
+          <div className="centered-layout mb-40 grid max-w-screen-2xl pt-20">
             <div>
               <div>
-                <h1 className="text-deepblue-700 my-0 w-fit text-7xl font-bold">
+                <h1 className="text-deepblue-700 my-0 w-fit text-5xl font-bold">
                   Aksel ikoner
                 </h1>
                 <div className="override-text-no-max mt-4 text-xl">
