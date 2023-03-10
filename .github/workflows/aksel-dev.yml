@@ -84,7 +84,6 @@ jobs:
         id: docker-push
         with:
           team: designsystem
-          tag: ${{ env.TAG }}
           push_image: true
           dockerfile: aksel.nav.no/Dockerfile
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
@@ -96,4 +95,4 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: aksel.nav.no/nais-dev.yaml
           CLUSTER: dev-gcp
-          IMAGE: ${{ steps.docker-build-push.outputs.image }}
+          IMAGE: ${{ steps.docker-push.outputs.image }}
