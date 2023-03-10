@@ -5,9 +5,6 @@ on:
     branches:
       - next
 
-env:
-  IMAGE: ghcr.io/navikt/aksel
-
 jobs:
   snyk-monitor:
     name: monitor dependencies
@@ -82,14 +79,12 @@ jobs:
 
       - name: Get complete tag
         run: echo "TAG=DEV-$( date +%s )" >> $GITHUB_ENV
-      - name: Create docker image tags
-        run: echo "DOCKER_TAG=${{ env.IMAGE }}:${{ env.TAG }}" >> $GITHUB_ENV
 
       - uses: nais/docker-build-push@v0
         id: docker-push
         with:
           team: designsystem
-          tag: ${{ env.DOCKER_TAG }}
+          tag: ${{ env.TAG }}
           push_image: true
           dockerfile: aksel.nav.no/Dockerfile
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
