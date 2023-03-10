@@ -1,4 +1,4 @@
-name: CaretUp
+name: CaretUpFill
 category: Arrows
 sub_category: Caret
 keywords:
@@ -9,6 +9,6 @@ keywords:
   - kollaps
   - lukk
   - lukke
-variant: Stroke
+variant: Fill
 updated_at: 10.03.2023
-created_at: 07.03.2023
+created_at: 10.03.2023
