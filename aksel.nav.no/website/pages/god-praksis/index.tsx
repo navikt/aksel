@@ -73,7 +73,7 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
             {page.intro && (
               <SanityBlockContent
                 isIngress
-                className="mt-8"
+                className="mt-4"
                 noLastMargin
                 blocks={page.intro}
               />

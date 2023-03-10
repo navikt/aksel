@@ -37,7 +37,7 @@ export const LatestBloggposts = ({
   return (
     <div
       className={cl({
-        "mt-14": variant === "blogg",
+        "mt-20": variant === "blogg",
       })}
     >
       <Heading
@@ -55,7 +55,7 @@ export const LatestBloggposts = ({
           blocks={intro}
           isIngress
           noLastMargin
-          className="mt-6"
+          className="mt-4"
         />
       )}
       {/* Desktop-view */}

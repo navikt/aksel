@@ -124,7 +124,7 @@ const AkselArtikkelTemplate = ({
             {data.heading}
           </Heading>
           {data?.ingress && (
-            <Ingress className="override-text-700 mt-5 text-2xl">
+            <Ingress className="override-text-700 mt-4 text-2xl">
               {data?.ingress}
             </Ingress>
           )}
