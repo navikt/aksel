@@ -53,7 +53,7 @@
 }
 
 .navdsi-timeline__row-periods {
-  height: 1.5rem;
+  min-height: 1.5rem;
   position: relative;
   width: 100%;
   margin: 0;
@@ -81,12 +81,9 @@
   white-space: nowrap;
   text-overflow: clip;
   text-align: left;
-  height: 1rem;
+  display: flex;
+  align-items: center;
 }
-
-/* .navdsi-timeline__period > * {
-  flex-shrink: 0;
-} */
 
 .navdsi-timeline__period--clickable {
   cursor: pointer;
