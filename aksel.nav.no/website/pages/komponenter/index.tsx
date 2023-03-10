@@ -232,6 +232,7 @@ export const getStaticProps = async ({
       links,
       slug: "/komponenter",
       preview,
+      title: "",
     },
     revalidate: 60,
   };

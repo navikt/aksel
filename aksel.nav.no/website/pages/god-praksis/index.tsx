@@ -147,6 +147,7 @@ export const getStaticProps = async ({
       resent,
       slug: "/god-praksis",
       preview,
+      title: "Forside God praksis",
     },
     notFound: !temaer,
     revalidate: 60,

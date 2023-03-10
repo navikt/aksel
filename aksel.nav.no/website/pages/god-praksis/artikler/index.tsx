@@ -110,6 +110,7 @@ export const getStaticProps = async () => {
     props: {
       articles,
       id: "godpraksis_landingsside_id1",
+      title: "Alle God praksis artikler",
     },
     revalidate: 60,
   };

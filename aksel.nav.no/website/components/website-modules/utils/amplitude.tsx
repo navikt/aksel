@@ -109,8 +109,17 @@ export const usePageView = (router: Router, pageProps: any) => {
       } catch (error) {
         isDevelopment && console.error(error);
       }
-      /* First might be an object */
-      logPageView(e, data, first === true);
+      /* first-prop might be an object */
+      logPageView(
+        e,
+        {
+          ...data,
+          ...(pageProps?.title && pageProps?.title.length > 0
+            ? { sidetittel: pageProps.title }
+            : {}),
+        },
+        first === true
+      );
       try {
         if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-page-view?id=${pageId}`);
