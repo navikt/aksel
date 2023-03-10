@@ -18,11 +18,24 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * Instances of Accordion.Item
    */
   children: React.ReactNode;
+
+  /**
+   * @default neutral
+   */
+  variant?: "neutral" | "action";
 }
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
-  ({ className, ...rest }, ref) => (
-    <div {...rest} className={cl("navds-accordion", className)} ref={ref} />
+  ({ className, variant = "neutral", ...rest }, ref) => (
+    <div
+      {...rest}
+      className={cl(
+        "navds-accordion",
+        className,
+        `navds-accordion--${variant}`
+      )}
+      ref={ref}
+    />
   )
 ) as AccordionComponent;
 

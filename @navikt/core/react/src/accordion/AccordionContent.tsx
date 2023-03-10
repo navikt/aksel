@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import AnimateHeight from "../util/AnimateHeight";
+
 import { BodyLong } from "../typography/BodyLong";
 import { AccordionItemContext } from "./AccordionItem";
 
@@ -28,16 +28,14 @@ const AccordionContent: AccordionContentType = forwardRef(
     }
 
     return (
-      <AnimateHeight height={context.open ? "auto" : 0} duration={250}>
-        <BodyLong
-          {...rest}
-          as="div"
-          ref={ref}
-          className={cl("navds-accordion__content", className)}
-        >
-          {children}
-        </BodyLong>
-      </AnimateHeight>
+      <BodyLong
+        {...rest}
+        as="div"
+        ref={ref}
+        className={cl("navds-accordion__content", className)}
+      >
+        {children}
+      </BodyLong>
     );
   }
 );

@@ -53,8 +53,14 @@ const Item = (props) => {
 export const Default = {
   render: (props) => {
     return (
-      <div style={{ width: 500 }}>
+      <div style={{ width: 500, height: "100vh" }}>
         <Accordion>
+          {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
+            <Item key={y} {...props} />
+          ))}
+        </Accordion>
+        <br />
+        <Accordion variant="action">
           {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
             <Item key={y} {...props} />
           ))}
