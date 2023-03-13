@@ -154,7 +154,7 @@ const Forside = ({
         <Header />
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-          <div className="z-20 pb-8">
+          <div className="z-20 pb-28">
             <div className="centered-layout relative mb-12 mt-20 grid max-w-xs place-items-center text-center sm:mt-36 sm:max-w-[648px]">
               <Heading
                 level="1"
@@ -214,7 +214,7 @@ const Forside = ({
                 </ul>
               </div>
 
-              <div className="mt-20">
+              <div className="-mt-12">
                 <Heading level="3" size="medium">
                   Nylige artikler
                 </Heading>
