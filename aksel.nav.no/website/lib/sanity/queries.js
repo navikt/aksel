@@ -216,17 +216,7 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
     "slug": slug.current,
     ${contributorsAll}
   },
-  komigang[]{
-    ...,
-    "slug": reference->slug.current
-  },
-  tema[]{
-    ...,
-    ...ref->,
-    "oppsummering": intro,
-    ...ref->{"refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])},
-  },
-  "temaCount": count(*[_type == "aksel_tema" && defined(seksjoner) && count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)]) > 0]),
+  "tema": *[_type == "aksel_tema" && defined(seksjoner[].sider[])],
   "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
     _id,
     heading,

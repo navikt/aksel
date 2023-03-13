@@ -13,7 +13,6 @@ import { BodyLong, Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
 import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
@@ -98,14 +97,7 @@ const GetStarted = ({
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({
-  page,
-  tema,
-  bloggs,
-  resent,
-  komigang,
-  temaCount,
-}: PageProps): JSX.Element => {
+const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
 
   return (
@@ -270,12 +262,8 @@ const Page = (props: PageProps): JSX.Element => {
   return <Forside {...props} />;
 };
 
-export interface AkselTemaT extends SanityT.Schema.aksel_tema {
-  refCount: number;
-}
-
 interface PageProps {
-  tema: AkselTemaT[];
+  tema: SanityT.Schema.aksel_tema[];
   bloggs: Partial<
     SanityT.Schema.aksel_blogg & {
       slug: string;
@@ -293,11 +281,6 @@ interface PageProps {
       tema: string[];
       contributors?: { title?: string }[];
     }[];
-  komigang: {
-    title: string;
-    slug: string;
-  }[];
-  temaCount: number;
   slug: string;
   preview: boolean;
 }
@@ -314,8 +297,6 @@ export const getStaticProps = async ({
     bloggs = null,
     tema = null,
     resent = null,
-    komigang = null,
-    temaCount = 0,
   } = await client.fetch(akselForsideQuery);
 
   return {
@@ -324,8 +305,6 @@ export const getStaticProps = async ({
       bloggs,
       page,
       resent,
-      komigang,
-      temaCount,
       slug: "/",
       preview,
       id: page?._id ?? "",
