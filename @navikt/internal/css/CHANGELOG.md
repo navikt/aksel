@@ -1,5 +1,17 @@
 # @navikt/ds-css-internal
 
+## 2.7.6
+
+### Patch Changes
+
+- Justert Timeline Period sentrering
+
+## 2.7.5
+
+## 2.7.4
+
+## 2.7.3
+
 ## 2.7.2
 
 ### Patch Changes

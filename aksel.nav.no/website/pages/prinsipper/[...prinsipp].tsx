@@ -60,6 +60,7 @@ export const getServerSideProps: GetServerSideProps = async (
       slug: context.params.prinsipp,
       preview: context.preview ?? false,
       id: prinsipp?._id,
+      title: prinsipp?.heading ?? "",
     },
     notFound: !prinsipp && !context.preview,
   };

@@ -2,7 +2,6 @@ name: BellDot
 category: Status
 sub_category: Notification
 keywords:
-  - "English: alert"
   - message
   - update
   - reminder

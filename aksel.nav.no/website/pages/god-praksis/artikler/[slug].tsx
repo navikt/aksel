@@ -62,6 +62,7 @@ interface StaticProps {
     slug: string;
     preview: boolean;
     id?: string;
+    title: string;
   };
   notFound: boolean;
   revalidate: number;
@@ -84,6 +85,7 @@ export const getStaticProps = async ({
       slug,
       preview,
       id: page?._id ?? "",
+      title: page?.heading ?? "",
     },
     notFound: !page && !preview,
     revalidate: 60,

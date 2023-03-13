@@ -242,6 +242,7 @@ export const getStaticProps = async ({
       slug,
       preview,
       id: tema?._id ?? null,
+      title: tema?.title ?? "",
     },
     notFound: !tema && !preview,
     revalidate: 60,
