@@ -14,6 +14,7 @@ import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
+import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
 import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
@@ -146,7 +147,7 @@ const Forside = ({
 
       <div
         className={cl(
-          "header-animated-bg relative max-w-[100vw] overflow-hidden bg-[#DCCAF3]",
+          "header-animated-bg relative max-w-[100vw] overflow-hidden bg-violet-200",
           { "animation-stop": pause }
         )}
       >
@@ -190,33 +191,29 @@ const Forside = ({
             />
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
-            <div className="centered-layout grid max-w-screen-2xl">
-              <GetStarted links={komigang} togglePause={setPause} />
+            <div className="centered-layout grid max-w-screen-xl">
+              {/* <GetStarted links={komigang} togglePause={setPause} /> */}
               {/* God praksis */}
-              <div className="mx-auto">
-                <Heading
-                  level="2"
-                  size="xlarge"
-                  className="text-deepblue-800 mb-8 text-center sm:text-[3.25rem]"
-                >
-                  God praksis
-                </Heading>
-                {page?.god_praksis_intro && (
-                  <BodyLong className="text-center">
-                    {page.god_praksis_intro}
-                  </BodyLong>
-                )}
+              <div className="bg-surface-default mx-auto w-full -translate-y-32 rounded-2xl px-12 py-20">
+                <div>
+                  <Heading
+                    level="2"
+                    size="xlarge"
+                    className="text-deepblue-800 mb-6 sm:text-[3.25rem]"
+                  >
+                    God praksis
+                  </Heading>
+                  {page?.god_praksis_intro && (
+                    <BodyLong>{page.god_praksis_intro}</BodyLong>
+                  )}
+                </div>
+                <ul className="mt-12 grid grid-cols-3 gap-x-8">
+                  {tema.map((t) => (
+                    <GodPraksisCardSimple key={t._id} node={t} />
+                  ))}
+                </ul>
               </div>
-              <ul className="card-grid-2-1 mx-auto mt-16 max-w-5xl">
-                {tema.map((t) => (
-                  <GodPraksisCard key={t._id} node={t} />
-                ))}
-              </ul>
-              <div className="mx-auto mt-8">
-                <AkselLink href="/god-praksis">
-                  {`Utforsk alle ${temaCount} tema i god praksis`}
-                </AkselLink>
-              </div>
+
               <div className="mt-20">
                 <Heading level="3" size="medium">
                   Nylige artikler
@@ -241,7 +238,7 @@ const Forside = ({
             <div className="centered-layout -translate-y-1/2">
               <ToolCard />
             </div>
-            <div className="centered-layout -mt-16 grid max-w-screen-2xl md:mt-8 ">
+            <div className="centered-layout -mt-16 grid max-w-screen-xl md:mt-8 ">
               <LatestBloggposts
                 bloggs={bloggs}
                 title="Siste fra bloggen"
