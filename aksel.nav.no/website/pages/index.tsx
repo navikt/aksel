@@ -9,7 +9,7 @@ import {
   PauseIcon,
   PlayIcon,
 } from "@navikt/aksel-icons";
-import { BodyLong, Heading, Ingress } from "@navikt/ds-react";
+import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
@@ -23,77 +23,6 @@ import { PrefersReducedMotion } from "components/website-modules/utils/prefers-r
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy, useEffect, useState } from "react";
-
-const GetStarted = ({
-  links,
-  togglePause,
-}: {
-  links: { title: string; slug: string }[];
-  togglePause: (x: boolean) => void;
-}) => {
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const [pause, setPause] = useState(false);
-
-  useEffect(() => {
-    const disableAnimations =
-      navigator.userAgent.indexOf("Safari") !== -1 &&
-      navigator.userAgent.indexOf("Chrome") === -1;
-
-    setReducedMotion(PrefersReducedMotion() || disableAnimations);
-    const data = localStorage.getItem("pause-animations");
-    if (disableAnimations) {
-      setPause(true);
-      togglePause(true);
-      return;
-    }
-    setPause(JSON.parse(data) ?? false);
-    togglePause(JSON.parse(data) ?? false);
-  }, [togglePause]);
-
-  return (
-    <div className="bg-deepblue-700 text-text-on-action relative mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
-      <Heading size="xlarge" level="2" className="text-center">
-        Kom i gang
-      </Heading>
-      <ul
-        style={{
-          gridTemplateColumns: `repeat(${links.length}, minmax(0, 1fr))`,
-        }}
-        className="mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 sm:grid md:gap-8"
-      >
-        {links.map((x) => (
-          <li key={x.title}>
-            <AkselLink href={`/${x.slug}`} inverted>
-              {x.title}
-            </AkselLink>
-          </li>
-        ))}
-      </ul>
-      {!reducedMotion && (
-        <button
-          className="focus-visible:ring-border-focus-on-inverted absolute top-2 right-2 grid h-11 w-11 place-items-center rounded text-2xl focus:outline-none focus-visible:ring-2"
-          onClick={() => {
-            setPause(!pause);
-            togglePause(!pause);
-            localStorage.setItem("pause-animations", JSON.stringify(!pause));
-          }}
-        >
-          {pause ? (
-            <>
-              <PlayIcon aria-hidden />
-              <span className="sr-only">Start animasjon</span>
-            </>
-          ) : (
-            <>
-              <PauseIcon aria-hidden />
-              <span className="sr-only">Stopp animasjon</span>
-            </>
-          )}
-        </button>
-      )}
-    </div>
-  );
-};
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
@@ -202,7 +131,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
             <div className="centered-layout grid max-w-screen-xl">
               {/* <GetStarted links={komigang} togglePause={setPause} /> */}
               {/* God praksis */}
-              <div className="bg-surface-default mx-auto w-full -translate-y-32 rounded-2xl px-12 py-20">
+              <div className="bg-surface-default mx-auto w-full -translate-y-32 rounded-2xl px-4 py-12 sm:px-12 sm:py-20">
                 {!reducedMotion && (
                   <button
                     className="focus-visible:shadow-focus absolute top-2 right-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
@@ -241,7 +170,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                     </Ingress>
                   )}
                 </div>
-                <ul className="mt-12 grid grid-cols-3 gap-x-8">
+                <ul className="mt-12 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
                   {tema.map((t) => (
                     <GodPraksisCardSimple key={t._id} node={t} />
                   ))}
