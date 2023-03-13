@@ -39,8 +39,8 @@
     "build-pict": "svgr --silent --index-template index-template.js --out-dir src/pictograms pictograms"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^2.7.6",
-    "@navikt/ds-react": "^2.7.6",
+    "@navikt/ds-icons": "^2.7.7",
+    "@navikt/ds-react": "^2.7.7",
     "clsx": "^1.1.1"
   },
   "devDependencies": {
