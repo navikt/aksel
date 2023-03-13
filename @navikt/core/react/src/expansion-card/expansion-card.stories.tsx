@@ -407,6 +407,12 @@ export const Variants = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
+      <ExpansionCard size="small">
+        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+          <ExpansionCard.Title>Yrkesskadedekningen</ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
       <ExpansionCard defaultOpen>
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Yrkesskadedekningen</ExpansionCard.Title>
@@ -596,7 +602,7 @@ export const Customization = {
         .subtle-card {
           --ac-expansioncard-bg: var(--a-surface-alt-3-subtle);
           --ac-expansioncard-avatar-bg: var(--a-deepblue-200);
-          --ac-expansioncard-open-border-color: var(--a-border-alt-3);
+          --ac-expansioncard-border-open-color: var(--a-border-alt-3);
         }`}</style>
     </div>
   ),

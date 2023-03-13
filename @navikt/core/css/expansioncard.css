@@ -1,15 +1,12 @@
 .navds-expansioncard {
   --__ac-expansioncard-border-color: var(--ac-expansioncard-border-color, var(--a-border-default));
-  --__ac-expansioncard-border-radus: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
-  --__ac-expansioncard-open-border-color: var(--ac-expansioncard-open-border-color, var(--a-border-default));
+  --__ac-expansioncard-border-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
+  --__ac-expansioncard-border-open-color: var(--ac-expansioncard-border-open-color, var(--a-border-default));
 
-  border-radius: var(--__ac-expansioncard-border-radus);
+  border-radius: var(--__ac-expansioncard-border-radius);
   background-color: var(--ac-expansioncard-bg, var(--a-surface-default));
   height: fit-content;
 }
-
-/* .navds-expansioncard--open {
-} */
 
 /*************************
  * Header *
@@ -21,30 +18,20 @@
   align-items: center;
   gap: var(--a-spacing-4);
   padding: var(--a-spacing-3) var(--a-spacing-4);
-  text-align: left;
-  margin: 0;
-  border-radius: var(--__ac-expansioncard-border-radus);
+  border-radius: var(--__ac-expansioncard-border-radius);
   position: relative;
   border: 1px solid var(--__ac-expansioncard-border-color);
 }
 
-.navds-expansioncard--small .navds-expansioncard__header {
+.navds-expansioncard--small > :where(.navds-expansioncard__header) {
   padding: var(--a-spacing-2) var(--a-spacing-4);
 }
 
-.navds-expansioncard__header--open {
+.navds-expansioncard--open > :where(.navds-expansioncard__header) {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border: 1px solid var(--__ac-expansioncard-open-border-color);
+  border: 1px solid var(--__ac-expansioncard-border-open-color);
   border-bottom: none;
-}
-
-.navds-expansioncard__icon {
-  transition: transform 150ms ease-in-out;
-}
-
-.navds-expansioncard__header--open .navds-expansioncard__icon {
-  transform: translateY(0) rotate(180deg);
 }
 
 .navds-expansioncard__header-avatar {
@@ -57,7 +44,7 @@
   font-size: 2rem;
 }
 
-.navds-expansioncard--small .navds-expansioncard__header-avatar {
+.navds-expansioncard--small > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-avatar) {
   min-height: 2rem;
   font-size: 1.5rem;
 }
@@ -83,16 +70,26 @@
   min-width: 48px;
 }
 
-.navds-expansioncard--small .navds-expansioncard__header-button {
+.navds-expansioncard--small > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-button) {
   min-height: 32px;
   min-width: 32px;
 }
 
-.navds-expansioncard--clickarea-button .navds-expansioncard__header-button:hover {
+.navds-expansioncard--clickarea-button
+  > :where(.navds-expansioncard__header)
+  > :where(.navds-expansioncard__header-button):hover {
   background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-hover));
 }
 
-.navds-expansioncard__header-button:hover .navds-expansioncard__icon {
+.navds-expansioncard__header-chevron {
+  transition: transform 150ms ease-in-out;
+}
+
+.navds-expansioncard--open :where(.navds-expansioncard__header-chevron) {
+  transform: translateY(0) rotate(180deg);
+}
+
+.navds-expansioncard__header-button:hover > :where(.navds-expansioncard__header-chevron) {
   transform: translateY(1px);
 }
 
@@ -104,7 +101,7 @@
   box-shadow: inset 0 0 0 2px var(--a-border-focus);
 }
 
-.navds-expansioncard__header--open .navds-expansioncard__header-button:hover .navds-expansioncard__icon {
+.navds-expansioncard--open :where(.navds-expansioncard__header-button):hover :where(.navds-expansioncard__header-chevron) {
   transform: translateY(-1px) rotate(180deg);
 }
 
@@ -113,10 +110,10 @@
  *************************/
 
 .navds-expansioncard__content {
-  border-end-end-radius: var(--__ac-expansioncard-border-radus);
-  border-end-start-radius: var(--__ac-expansioncard-border-radus);
+  border-end-end-radius: var(--__ac-expansioncard-border-radius);
+  border-end-start-radius: var(--__ac-expansioncard-border-radius);
   padding: var(--a-spacing-3) var(--a-spacing-4);
-  border: 1px solid var(--__ac-expansioncard-open-border-color);
+  border: 1px solid var(--__ac-expansioncard-border-open-color);
   border-top: none;
 }
 
@@ -124,7 +121,7 @@
   display: none;
 }
 
-.navds-expansioncard--fade .navds-expansioncard__content {
+.navds-expansioncard--fade :where(.navds-expansioncard__content-inner) {
   animation: fadeExpansionCard 250ms ease;
 }
 
@@ -149,16 +146,16 @@
  * Variants/Neutral *
  *************************/
 
-.navds-expansioncard--neutral .navds-expansioncard__header-avatar {
+.navds-expansioncard--neutral > :where(.navds-expansioncard__header) > .navds-expansioncard__header-avatar {
   background-color: var(--ac-expansioncard-neutral-avatar-bg, var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle)));
   color: var(--ac-expansioncard-neutral-avatar-icon, var(--ac-expansioncard-avatar-icon, var(--a-icon-default)));
 }
 
-.navds-expansioncard--neutral-filled {
+:where(.navds-expansioncard--neutral-filled) {
   background-color: var(--ac-expansioncard-neutral-bg, var(--a-bg-subtle));
 }
 
-.navds-expansioncard--neutral-filled .navds-expansioncard__header-avatar {
+:where(.navds-expansioncard--neutral-filled) > :where(.navds-expansioncard__header) > .navds-expansioncard__header-avatar {
   background-color: var(
     --ac-expansioncard-neutral-filled-avatar-bg,
     var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle))
@@ -170,7 +167,7 @@
  * Variants/Filled *
  *************************/
 
-.navds-expansioncard__header--no-avatar-bg > .navds-expansioncard__header-avatar {
+.navds-expansioncard__header--no-avatar-bg > :where(.navds-expansioncard__header-avatar) {
   background-color: var(--a-surface-transparent);
 }
 
@@ -178,11 +175,11 @@
  * Clickarea *
  *************************/
 
-.navds-expansioncard--clickarea-full .navds-expansioncard__header {
+:where(.navds-expansioncard--clickarea-full) > :where(.navds-expansioncard__header) {
   cursor: pointer;
 }
 
-.navds-expansioncard--clickarea-full .navds-expansioncard__header-button::after {
+:where(.navds-expansioncard--clickarea-full) > :where(.navds-expansioncard__header) > .navds-expansioncard__header-button::after {
   inset: 0;
   z-index: 1;
   position: absolute;
@@ -191,14 +188,14 @@
   width: 100%;
 }
 
-.navds-expansioncard--clickarea-full .navds-expansioncard__header:hover .navds-expansioncard__header-button {
+:where(.navds-expansioncard--clickarea-full) > :where(.navds-expansioncard__header):hover > .navds-expansioncard__header-button {
   background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-hover));
 }
 
-.navds-expansioncard--clickarea-full.navds-expansioncard:hover {
+:where(.navds-expansioncard--clickarea-full.navds-expansioncard):hover {
   --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
 }
 
-.navds-expansioncard--clickarea-full.navds-expansioncard:hover:where(.navds-expansioncard--open) {
-  --__ac-expansioncard-open-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
+:where(.navds-expansioncard--clickarea-full.navds-expansioncard.navds-expansioncard--open):hover {
+  --__ac-expansioncard-border-open-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
 }

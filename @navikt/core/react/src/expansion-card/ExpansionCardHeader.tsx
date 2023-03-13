@@ -35,7 +35,6 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
         ref={ref}
         {...rest}
         className={cl("navds-expansioncard__header", className, {
-          "navds-expansioncard__header--open": panelContext.open,
           "navds-expansioncard__header--no-avatar-bg": hideAvatarBg,
         })}
       >
@@ -64,7 +63,7 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
             focusable={false}
-            className="navds-expansioncard__icon"
+            className="navds-expansioncard__header-chevron"
           >
             <path
               d="M17.5 9.5L12 15L6.5 9.5"

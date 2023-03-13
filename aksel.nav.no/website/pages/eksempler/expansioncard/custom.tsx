@@ -23,7 +23,7 @@ const Example = () => {
           --ac-expansioncard-bg: var(--a-deepblue-50);
           --ac-expansioncard-avatar-bg: var(--a-surface-alt-3-subtle);
           --ac-expansioncard-avatar-icon: var(--a-icon-alt-3);
-          --ac-expansioncard-open-border-color: var(--a-border-alt-3);
+          --ac-expansioncard-border-open-color: var(--a-border-alt-3);
         }`}</style>
     </div>
   );
