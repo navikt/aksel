@@ -16,66 +16,13 @@ import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
+import { IntroCards } from "components/website-modules/IntroCards";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { ToolCard } from "components/website-modules/ToolsCard";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import Link from "next/link";
 import { lazy, useEffect, useState } from "react";
-import { logNav } from "../components";
-
-const introcards = [
-  {
-    title: "Komponenter",
-    desc: "Bibliotekene Core og Interne flater",
-    icon: ComponentIcon,
-    href: "/komponenter",
-  },
-  {
-    title: "Design Tokens",
-    desc: "Farger, spacing, shadows, etc.",
-    icon: PaletteIcon,
-    href: "/grunnleggende/styling/design-tokens",
-  },
-  {
-    title: "Ikoner",
-    desc: "Alle ikonene våre",
-    icon: CompassIcon,
-    href: "/ikoner",
-  },
-];
-
-const IntroCards = () => {
-  return (
-    <ul className="centered-layout mb-40 grid w-full max-w-screen-md grid-cols-2 gap-4 sm:mb-36 md:gap-6">
-      {introcards.map(({ icon: Icon, title, desc, href }) => (
-        <li key={title} className="grid">
-          <Link
-            href={href}
-            passHref
-            className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none"
-            onClick={(e) =>
-              logNav(
-                "intro-kort",
-                window.location.pathname,
-                e.currentTarget.getAttribute("href")
-              )
-            }
-          >
-            <span className="items-center gap-2 sm:flex">
-              <Icon aria-hidden className="shrink-0 text-2xl" role="img" />
-              <span className="text-xl font-semibold group-hover:underline">
-                {title}
-              </span>
-            </span>
-            <div className="text-text-subtle mt-2">{desc}</div>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-};
 
 const GetStarted = ({
   links,
@@ -218,7 +165,29 @@ const Forside = ({
               <AkselCube />
             </div>
 
-            <IntroCards />
+            <IntroCards
+              links={[
+                {
+                  title: "Komponenter",
+                  desc: "Bibliotekene Core og Interne flater",
+                  icon: ComponentIcon,
+                  href: "/komponenter",
+                },
+                {
+                  title: "Design Tokens",
+                  desc: "Farger, spacing, shadows, etc.",
+                  icon: PaletteIcon,
+                  href: "/grunnleggende/styling/design-tokens",
+                },
+                {
+                  title: "Ikoner",
+                  desc: "Alle ikonene våre",
+                  icon: CompassIcon,
+                  href: "/ikoner",
+                },
+              ]}
+              className="centered-layout mb-40 max-w-screen-md sm:mb-36"
+            />
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
             <div className="centered-layout grid max-w-screen-2xl">

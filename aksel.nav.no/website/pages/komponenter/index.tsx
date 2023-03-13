@@ -2,6 +2,7 @@ import { komponentLandingQuery, SanityT, SidebarT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { logAmplitudeEvent } from "@/utils";
+import { CodeIcon } from "@navikt/aksel-icons";
 import { BodyShort, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import {
@@ -13,6 +14,7 @@ import {
 } from "components/assets";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
+import { IntroCards } from "components/website-modules/IntroCards";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
@@ -24,13 +26,13 @@ function Links() {
     <BodyShort
       as="span"
       size="small"
-      className="text-text-subtle mb-6 flex flex-wrap gap-4"
+      className="text-text-on-inverted mt-2 flex flex-wrap gap-4"
     >
       <a
         target="_blank"
         rel="noreferrer noopener"
         href="https://github.com/navikt/aksel/tree/main/%40navikt"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
           logAmplitudeEvent("link", {
             kilde: "intro-lenker ikonside",
@@ -44,7 +46,7 @@ function Links() {
         target="_blank"
         rel="noreferrer noopener"
         href="https://yarnpkg.com/package/@navikt/ds-react"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
           logAmplitudeEvent("link", {
             kilde: "intro-lenker ikonside",
@@ -59,7 +61,7 @@ function Links() {
         target="_blank"
         rel="noreferrer noopener"
         href="/grunnleggende/kode/endringslogg"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
           logAmplitudeEvent("link", {
             kilde: "intro-lenker komponenter",
@@ -75,7 +77,7 @@ function Links() {
         target="_blank"
         rel="noreferrer noopener"
         href="https://www.figma.com/@nav_aksel"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
           logAmplitudeEvent("link", {
             kilde: "intro-lenker ikonside",
@@ -83,13 +85,13 @@ function Links() {
           })
         }
       >
-        <FigmaIcon /> Figma
+        <FigmaIcon /> Figma-community
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
         href="/storybook"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus group flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted group flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
           logAmplitudeEvent("link", {
             kilde: "intro-lenker ikonside",
@@ -97,7 +99,7 @@ function Links() {
           })
         }
       >
-        <StorybookIcon className="mr-1 group-focus:invert" /> Storybook
+        <StorybookIcon className="mr-1 " /> Storybook
       </a>
     </BodyShort>
   );
@@ -147,11 +149,39 @@ const Page = ({
       <WithSidebar
         sidebar={sidebar}
         pageType={{ type: "Komponenter", title: "Komponenter" }}
-        intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
+        intro={
+          <Ingress className="text-text-on-action">
+            {page?.intro}
+            <Links />
+          </Ingress>
+        }
         pageProps={page}
       >
-        <Links />
-        <SuggestionBlock variant="komponenter" />
+        {/* <SuggestionBlock variant="komponenter" /> */}
+        <IntroCards
+          links={[
+            {
+              title: "Kom i gang med Kode",
+              desc: "Intro til alle kodepakkene våre",
+              icon: CodeIcon,
+              href: "/komponenter",
+            },
+            {
+              title: "Kom i gang med Figma",
+              desc: "Hvordan bruke Figma-bibliotekene våre",
+              icon: FigmaIcon,
+              href: "/grunnleggende/styling/design-tokens",
+            },
+            {
+              title: "Forslag til nye komponenter",
+              desc: "Opprett et github-issue",
+              icon: GithubIcon,
+              href: `https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰%2Ckomponenter+🧩&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+            },
+          ]}
+          className="pb-8 xl:grid-cols-3"
+          variant="komponentside"
+        />
         {komponentKategorier
           .filter(
             (kat) => links?.filter((x) => x.kategori === kat.value).length > 0
