@@ -9,7 +9,7 @@ import {
   PauseIcon,
   PlayIcon,
 } from "@navikt/aksel-icons";
-import { BodyLong, Heading } from "@navikt/ds-react";
+import { BodyLong, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
@@ -99,6 +99,22 @@ const WithPreview = lazy(() => import("../components/WithPreview"));
 
 const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const disableAnimations =
+      navigator.userAgent.indexOf("Safari") !== -1 &&
+      navigator.userAgent.indexOf("Chrome") === -1;
+
+    setReducedMotion(PrefersReducedMotion() || disableAnimations);
+    const data = localStorage.getItem("pause-animations");
+    if (disableAnimations) {
+      setPause(true);
+      setPause(true);
+      return;
+    }
+    setPause(JSON.parse(data) ?? false);
+  }, []);
 
   return (
     <>
@@ -147,13 +163,13 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-28">
-            <div className="centered-layout relative mb-12 mt-20 grid max-w-xs place-items-center text-center sm:mt-36 sm:max-w-[648px]">
+            <div className="centered-layout relative mb-12 mt-20 grid max-w-xs place-items-center text-center sm:mt-36 sm:max-w-[600px]">
               <Heading
                 level="1"
                 size="xlarge"
                 className="text-deepblue-800 leading-[1.2] sm:text-[3.5rem]"
               >
-                {page.title}
+                Aksel hjelper team å lage digitale produkter
               </Heading>
               <AkselCube />
             </div>
@@ -187,16 +203,42 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
               {/* <GetStarted links={komigang} togglePause={setPause} /> */}
               {/* God praksis */}
               <div className="bg-surface-default mx-auto w-full -translate-y-32 rounded-2xl px-12 py-20">
+                {!reducedMotion && (
+                  <button
+                    className="focus-visible:shadow-focus absolute top-2 right-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
+                    onClick={() => {
+                      setPause(!pause);
+                      localStorage.setItem(
+                        "pause-animations",
+                        JSON.stringify(!pause)
+                      );
+                    }}
+                  >
+                    {pause ? (
+                      <>
+                        <PlayIcon aria-hidden />
+                        <span className="sr-only">Start animasjon</span>
+                      </>
+                    ) : (
+                      <>
+                        <PauseIcon aria-hidden />
+                        <span className="sr-only">Stopp animasjon</span>
+                      </>
+                    )}
+                  </button>
+                )}
                 <div>
                   <Heading
                     level="2"
                     size="xlarge"
-                    className="text-deepblue-800 mb-6 sm:text-[3.25rem]"
+                    className="text-deepblue-800 mb-6"
                   >
                     God praksis
                   </Heading>
                   {page?.god_praksis_intro && (
-                    <BodyLong>{page.god_praksis_intro}</BodyLong>
+                    <Ingress className="max-w-3xl">
+                      {page.god_praksis_intro}
+                    </Ingress>
                   )}
                 </div>
                 <ul className="mt-12 grid grid-cols-3 gap-x-8">
