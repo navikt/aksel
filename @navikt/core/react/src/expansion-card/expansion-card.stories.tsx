@@ -395,6 +395,28 @@ export const Variants = {
           <Content />
         </ExpansionCard>
       ))}
+      <ExpansionCard>
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>Yrkesskadedekningen</ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+      <ExpansionCard>
+        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+          <ExpansionCard.Title>Yrkesskadedekningen</ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
+      <ExpansionCard defaultOpen>
+        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+          <ExpansionCard.Title>Yrkesskadedekningen</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver.
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <Content />
+      </ExpansionCard>
     </>
   ),
 };
