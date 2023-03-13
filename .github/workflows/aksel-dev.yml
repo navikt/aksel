@@ -54,6 +54,10 @@ jobs:
           echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> aksel.nav.no/website/.env
           echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
 
+      - name: Hide page from search engines
+        run: |
+          echo "User-agent: *\nDisallow: /" >> aksel.nav.no/website/public/robots.txt
+
       - name: Restore cache
         uses: actions/cache@v3
         with:
