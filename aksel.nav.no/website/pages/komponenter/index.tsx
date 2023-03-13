@@ -6,16 +6,15 @@ import { CodeIcon } from "@navikt/aksel-icons";
 import { BodyShort, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import {
-  GithubIcon,
-  YarnIcon,
-  FigmaIcon,
   ChangelogIcon,
+  FigmaIcon,
+  GithubIcon,
   StorybookIcon,
+  YarnIcon,
 } from "components/assets";
 import { WithSidebar } from "components/layout/page-templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
-import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
