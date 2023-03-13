@@ -2,6 +2,8 @@
   --__ac-expansioncard-border-color: var(--ac-expansioncard-border-color, var(--a-border-default));
   --__ac-expansioncard-border-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
   --__ac-expansioncard-border-open-color: var(--ac-expansioncard-border-open-color, var(--a-border-default));
+  --__ac-expansioncard-border-width: var(--ac-expansioncard-border-width, 1px);
+  --__ac-expansioncard-border-open-width: var(--ac-expansioncard-border-open-width, 1px);
 
   border-radius: var(--__ac-expansioncard-border-radius);
   background-color: var(--ac-expansioncard-bg, var(--a-surface-default));
@@ -11,7 +13,6 @@
 /*************************
  * Header *
  *************************/
-
 .navds-expansioncard__header {
   width: 100%;
   display: flex;
@@ -20,7 +21,7 @@
   padding: var(--a-spacing-3) var(--a-spacing-4);
   border-radius: var(--__ac-expansioncard-border-radius);
   position: relative;
-  border: 1px solid var(--__ac-expansioncard-border-color);
+  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
 }
 
 .navds-expansioncard--small > :where(.navds-expansioncard__header) {
@@ -30,7 +31,7 @@
 .navds-expansioncard--open > :where(.navds-expansioncard__header) {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border: 1px solid var(--__ac-expansioncard-border-open-color);
+  border: var(--__ac-expansioncard-border-open-width) solid var(--__ac-expansioncard-border-open-color);
   border-bottom: none;
 }
 
@@ -42,6 +43,7 @@
   min-height: 3rem;
   aspect-ratio: 1/1;
   font-size: 2rem;
+  background-color: var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle));
 }
 
 .navds-expansioncard--small > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-avatar) {
@@ -60,19 +62,19 @@
 .navds-expansioncard__header-button {
   display: grid;
   place-content: center;
-  font-size: 1.5rem;
   cursor: pointer;
   margin: 0;
   background: transparent;
   border: none;
   border-radius: var(--ac-expansioncard-button-border-radius, var(--a-border-radius-medium));
-  min-height: 48px;
-  min-width: 48px;
+  min-height: 3rem;
+  min-width: 3rem;
+  font-size: 1.5rem;
 }
 
 .navds-expansioncard--small > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-button) {
-  min-height: 32px;
-  min-width: 32px;
+  min-height: 2rem;
+  min-width: 2rem;
 }
 
 .navds-expansioncard--clickarea-button
@@ -98,7 +100,7 @@
 }
 
 .navds-expansioncard__header-button:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--a-border-focus);
+  box-shadow: var(--a-shadow-focus);
 }
 
 .navds-expansioncard--open :where(.navds-expansioncard__header-button):hover :where(.navds-expansioncard__header-chevron) {
@@ -108,12 +110,11 @@
 /*************************
  * Content *
  *************************/
-
 .navds-expansioncard__content {
   border-end-end-radius: var(--__ac-expansioncard-border-radius);
   border-end-start-radius: var(--__ac-expansioncard-border-radius);
   padding: var(--a-spacing-3) var(--a-spacing-4);
-  border: 1px solid var(--__ac-expansioncard-border-open-color);
+  border: var(--__ac-expansioncard-border-open-width) solid var(--__ac-expansioncard-border-open-color);
   border-top: none;
 }
 
@@ -145,6 +146,9 @@
  * Variants         *
  * Variants/Neutral *
  *************************/
+.navds-expansioncard--neutral {
+  background-color: var(--ac-expansioncard-neutral-bg, var(--ac-expansioncard-bg, var(--a-surface-default)));
+}
 
 .navds-expansioncard--neutral > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-avatar) {
   background-color: var(--ac-expansioncard-neutral-avatar-bg, var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle)));
@@ -152,7 +156,7 @@
 }
 
 .navds-expansioncard--neutral-filled {
-  background-color: var(--ac-expansioncard-neutral-bg, var(--a-bg-subtle));
+  background-color: var(--ac-expansioncard-neutral-filled-bg, var(--a-bg-subtle));
 }
 
 .navds-expansioncard--neutral-filled > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-avatar) {
@@ -166,7 +170,6 @@
 /*************************
  * Variants/Filled *
  *************************/
-
 .navds-expansioncard__header--no-avatar-bg > :where(.navds-expansioncard__header-avatar) {
   background-color: var(--a-surface-transparent);
 }
@@ -175,11 +178,11 @@
  * Clickarea *
  *************************/
 
-:where(.navds-expansioncard--clickarea-full) > :where(.navds-expansioncard__header) {
+.navds-expansioncard--clickarea-full > :where(.navds-expansioncard__header) {
   cursor: pointer;
 }
 
-:where(.navds-expansioncard--clickarea-full) > :where(.navds-expansioncard__header) > .navds-expansioncard__header-button::after {
+.navds-expansioncard--clickarea-full > :where(.navds-expansioncard__header) > .navds-expansioncard__header-button::after {
   inset: 0;
   z-index: 1;
   position: absolute;
@@ -188,9 +191,7 @@
   width: 100%;
 }
 
-:where(.navds-expansioncard--clickarea-full)
-  > :where(.navds-expansioncard__header):hover
-  > :where(.navds-expansioncard__header-button) {
+.navds-expansioncard--clickarea-full > :where(.navds-expansioncard__header):hover > :where(.navds-expansioncard__header-button) {
   background-color: var(--ac-expansioncard-button-bg-hover, var(--a-surface-hover));
 }
 
