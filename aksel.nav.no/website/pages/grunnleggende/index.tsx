@@ -139,6 +139,7 @@ export const getStaticProps = async ({
       links,
       slug: "/grunnleggende",
       preview,
+      title: "Forside Grunnleggende",
     },
     revalidate: 60,
   };

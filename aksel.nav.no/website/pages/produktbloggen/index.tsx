@@ -114,6 +114,7 @@ interface PageProps {
   bloggposts: AkselBloggPage[];
   page: any;
   preview: boolean;
+  title: string;
 }
 
 interface StaticProps {
@@ -134,6 +135,7 @@ export const getStaticProps = async ({
       page,
       bloggposts,
       preview,
+      title: "Forside Blogg",
     },
     notFound: !bloggposts && !preview,
     revalidate: 60,

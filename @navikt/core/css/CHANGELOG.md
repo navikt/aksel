@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 2.7.6
+
+## 2.7.5
+
+### Patch Changes
+
+- :bug: Fikset token-bug i togglegroup
+
+## 2.7.4
+
 ## 2.7.3
 
 ## 2.7.2

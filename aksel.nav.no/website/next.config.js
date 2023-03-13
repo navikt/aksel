@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
-/* const path = require("path"); */
+const path = require("path");
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -18,7 +18,7 @@ const ContentSecurityPolicy = `
   connect-src 'self' ${cdnUrl} https://raw.githubusercontent.com/navikt/ wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://sentry.gc.nav.no https://in2.taskanalytics.com/03346;
   frame-ancestors localhost:3333 'self' localhost:3000 https://verktoykasse.sanity.studio/;
   media-src 'self' ${cdnUrl} cdn.sanity.io;
-  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.dev.nav.no/;
+  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.dev.nav.no/ https://aksel.ekstern.dev.nav.no;
 `;
 
 const securityHeaders = [
@@ -111,10 +111,10 @@ const config = () =>
       domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
       dangerouslyAllowSVG: true,
     },
-    /* output: "standalone",
+    output: "standalone",
     experimental: {
       outputFileTracingRoot: path.join(__dirname, "../../"),
-    }, */
+    },
   });
 
 if (process.env.NODE_ENV === "production") {

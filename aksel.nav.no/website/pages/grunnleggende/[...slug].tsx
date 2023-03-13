@@ -139,6 +139,7 @@ export const getStaticProps = async ({
       seo,
       sidebar,
       preview,
+      title: page?.heading ?? "",
     },
     notFound: !page && !preview,
     revalidate: 60,

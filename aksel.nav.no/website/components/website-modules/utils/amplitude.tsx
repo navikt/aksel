@@ -21,7 +21,7 @@ export enum AmplitudeEvents {
 export const initAmplitude = () => {
   if (amplitude && !(typeof window === "undefined")) {
     amplitude.getInstance().init("1a9a84a5e557ac9635a250bc27d75030", "", {
-      apiEndpoint: "amplitude.nav.no/collect-auto",
+      apiEndpoint: "amplitude.nav.no/collect",
       saveEvents: false,
       includeUtm: true,
       includeReferrer: true,
@@ -109,8 +109,17 @@ export const usePageView = (router: Router, pageProps: any) => {
       } catch (error) {
         isDevelopment && console.error(error);
       }
-      /* First might be an object */
-      logPageView(e, data, first === true);
+      /* first-prop might be an object */
+      logPageView(
+        e,
+        {
+          ...data,
+          ...(pageProps?.title && pageProps?.title.length > 0
+            ? { sidetittel: pageProps.title }
+            : {}),
+        },
+        first === true
+      );
       try {
         if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-page-view?id=${pageId}`);
