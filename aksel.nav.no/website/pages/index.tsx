@@ -136,10 +136,10 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
               className="centered-layout mb-40 max-w-md grid-cols-1 sm:mb-36 md:max-w-screen-lg md:grid-cols-3"
             />
           </div>
-          <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
+          <div className="bg-surface-subtle min-h-96  relative pb-72  md:pb-40">
             <div className="centered-layout grid max-w-screen-xl">
               {/* God praksis */}
-              <div className="bg-surface-default mx-auto w-full -translate-y-32 rounded-2xl px-4 py-12 sm:px-12 sm:py-20">
+              <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-32 rounded-2xl px-4 py-12 ring-1 sm:px-12 sm:py-20">
                 {!reducedMotion && (
                   <button
                     className="focus-visible:shadow-focus absolute top-2 right-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
