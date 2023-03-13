@@ -45,6 +45,15 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
     setPause(JSON.parse(data) ?? false);
   }, []);
 
+  const validatedTema = tema.filter((t) => {
+    return (
+      t?.title &&
+      t?.slug &&
+      t?.pictogram &&
+      t?.seksjoner.find((s) => !!s?.sider.find((s) => s?._ref))
+    );
+  });
+
   return (
     <>
       <Head>
@@ -129,7 +138,6 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
             <div className="centered-layout grid max-w-screen-xl">
-              {/* <GetStarted links={komigang} togglePause={setPause} /> */}
               {/* God praksis */}
               <div className="bg-surface-default mx-auto w-full -translate-y-32 rounded-2xl px-4 py-12 sm:px-12 sm:py-20">
                 {!reducedMotion && (
@@ -171,7 +179,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                   )}
                 </div>
                 <ul className="mt-12 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
-                  {tema.map((t) => (
+                  {validatedTema.map((t) => (
                     <GodPraksisCardSimple key={t._id} node={t} />
                   ))}
                 </ul>
