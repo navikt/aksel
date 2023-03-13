@@ -154,7 +154,7 @@ const Forside = ({
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-8">
-            <div className="centered-layout sm:mb-18 relative mb-16 mt-20 grid max-w-xs place-items-center text-center sm:mt-36 sm:max-w-[648px]">
+            <div className="centered-layout relative mb-12 mt-20 grid max-w-xs place-items-center text-center sm:mt-36 sm:max-w-[648px]">
               <Heading
                 level="1"
                 size="xlarge"
@@ -186,7 +186,7 @@ const Forside = ({
                   href: "/ikoner",
                 },
               ]}
-              className="centered-layout mb-40 max-w-screen-md sm:mb-36"
+              className="centered-layout mb-40 max-w-md grid-cols-1 sm:mb-36 md:max-w-screen-lg md:grid-cols-3"
             />
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">

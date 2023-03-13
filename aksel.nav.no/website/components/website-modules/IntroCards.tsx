@@ -17,14 +17,14 @@ export const IntroCards = ({
   variant?: "forside" | "komponentside";
 }) => {
   return (
-    <ul className={cl("grid w-full grid-cols-2 gap-4 md:gap-6", className)}>
+    <ul className={cl("grid w-full gap-4 md:gap-6", className)}>
       {links.map(({ icon: Icon, title, desc, href }) => (
         <li key={title} className="grid">
           <Link
             href={href}
             passHref
             className={cl(
-              "focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none",
+              "focus-visible:shadow-focus text-deepblue-700 bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 max-w-md rounded-lg p-4 hover:ring-1 focus:outline-none",
               { "ring-border-subtle ring-1": variant === "komponentside" }
             )}
             onClick={(e) =>
@@ -35,13 +35,17 @@ export const IntroCards = ({
               )
             }
           >
-            <span className="items-center gap-2 sm:flex">
-              <Icon aria-hidden className="shrink-0 text-2xl" role="img" />
+            <span className="flex items-center gap-2">
+              <Icon
+                aria-hidden
+                className="text-deepblue-500 shrink-0 text-2xl"
+                role="img"
+              />
               <span className="text-xl font-semibold group-hover:underline">
                 {title}
               </span>
             </span>
-            <div className="text-text-subtle mt-2">{desc}</div>
+            <div className="text-text-default mt-2">{desc}</div>
           </Link>
         </li>
       ))}

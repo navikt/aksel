@@ -178,7 +178,7 @@ const Page = ({
               href: `https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰%2Ckomponenter+🧩&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
             },
           ]}
-          className="pb-8 xl:grid-cols-3"
+          className="grid-cols-1 pb-8 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3"
           variant="komponentside"
         />
         {komponentKategorier
