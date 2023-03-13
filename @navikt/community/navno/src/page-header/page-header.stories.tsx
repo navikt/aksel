@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { PageHeader } from ".";
 
 export default {
@@ -21,4 +21,4 @@ export const Default = {
   args: {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
   },
-};
+}; */
