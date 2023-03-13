@@ -34,7 +34,11 @@ async function main() {
   console.log(`Laster ned ${Object.keys(images).length} ikoner`);
 
   for (const [key, value] of Object.entries(images)) {
-    const icon = await fetchIcon(value);
+    const icon = await fetchIcon(value).catch((e) => {
+      throw e;
+    });
+    await new Promise((r) => setTimeout(r, 20));
+
     icon &&
       writeFileSync(
         resolve(iconFolder, resolveName(icons.find((x) => x.node_id === key))),
