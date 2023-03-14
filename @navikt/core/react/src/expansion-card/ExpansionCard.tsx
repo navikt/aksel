@@ -42,10 +42,6 @@ export interface ExpansionCardProps
    * @default false
    */
   defaultOpen?: boolean;
-  /**
-   * @default "neutral"
-   */
-  variant?: "neutral" | "neutral-filled";
 
   /**
    * @defualt "medium"
@@ -74,7 +70,6 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       onToggle,
       open,
       defaultOpen = false,
-      variant = "neutral",
       size = "medium",
       clickArea = "full",
       ...rest
@@ -105,12 +100,9 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
           className={cl(
             "navds-expansioncard",
             className,
-            `navds-expansioncard--${variant}`,
             `navds-expansioncard--${size}`,
             `navds-expansioncard--clickarea-${clickArea}`,
             {
-              "navds-expansioncard--filled":
-                variant && variant.includes("-filled"),
               "navds-expansioncard--open": open ?? _open,
               "navds-expansioncard--fade": shouldFade.current,
             }

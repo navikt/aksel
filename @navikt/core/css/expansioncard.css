@@ -107,6 +107,10 @@
   transform: translateY(-1px) rotate(180deg);
 }
 
+.navds-expansioncard__header--no-avatar-bg > :where(.navds-expansioncard__header-avatar) {
+  background-color: var(--a-surface-transparent);
+}
+
 /*************************
  * Content *
  *************************/
@@ -140,38 +144,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/*************************
- * Variants         *
- * Variants/Neutral *
- *************************/
-.navds-expansioncard--neutral {
-  background-color: var(--ac-expansioncard-neutral-bg, var(--ac-expansioncard-bg, var(--a-surface-default)));
-}
-
-.navds-expansioncard--neutral > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-avatar) {
-  background-color: var(--ac-expansioncard-neutral-avatar-bg, var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle)));
-  color: var(--ac-expansioncard-neutral-avatar-icon, var(--ac-expansioncard-avatar-icon, var(--a-icon-default)));
-}
-
-.navds-expansioncard--neutral-filled {
-  background-color: var(--ac-expansioncard-neutral-filled-bg, var(--a-bg-subtle));
-}
-
-.navds-expansioncard--neutral-filled > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-avatar) {
-  background-color: var(
-    --ac-expansioncard-neutral-filled-avatar-bg,
-    var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle))
-  );
-  color: var(--ac-expansioncard-neutral-filled-avatar-icon, var(--ac-expansioncard-avatar-icon, var(--a-icon-default)));
-}
-
-/*************************
- * Variants/Filled *
- *************************/
-.navds-expansioncard__header--no-avatar-bg > :where(.navds-expansioncard__header-avatar) {
-  background-color: var(--a-surface-transparent);
 }
 
 /*************************

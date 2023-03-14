@@ -28,8 +28,6 @@ export default {
   ],
 };
 
-const variants = ["neutral", "neutral-filled"] as const;
-
 const Content = () => (
   <ExpansionCard.Content>
     <BodyLong spacing>
@@ -93,7 +91,6 @@ export const Default = {
     variant: "neutral",
   },
   argTypes: {
-    variant: { control: "select", options: variants },
     size: { control: "select", options: ["medium", "small"] },
   },
 };
@@ -376,25 +373,6 @@ export const Avatar = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-    </>
-  ),
-};
-
-export const Variants = {
-  render: () => (
-    <>
-      {variants.map((x) => (
-        <ExpansionCard variant={x}>
-          <ExpansionCard.Header avatar={<Star aria-hidden />} key={x}>
-            <ExpansionCard.Title>{x}</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver.
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-      ))}
     </>
   ),
 };
