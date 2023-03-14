@@ -1,4 +1,3 @@
-/* import React from "react";
 import { PageHeader } from ".";
 
 export default {
@@ -14,11 +13,3 @@ export default {
     },
   },
 };
-
-export const Default = {
-  render: (props) => <PageHeader>{props.children}</PageHeader>,
-
-  args: {
-    children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
-  },
-}; */
