@@ -163,7 +163,7 @@ const Page = ({
               title: "Kom i gang med Kode",
               desc: "Intro til alle kodepakkene våre",
               icon: CodeIcon,
-              href: "/komponenter",
+              href: "/grunnleggende/kode/kom-i-gang-med-kodepakkene",
             },
             {
               title: "Kom i gang med Figma",
