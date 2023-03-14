@@ -23,7 +23,7 @@ const OriginalOptions = [
 
 export const Default = (props) => {
   const [options, setOptions] = useState(OriginalOptions);
-  const [selectedOptions, setSelectedOptions] = useState(["value1", "value2"]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [value, setValue] = useState("");
   const id = useId();
   return (
