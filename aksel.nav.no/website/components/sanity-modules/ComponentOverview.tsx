@@ -57,7 +57,6 @@ const ComponentOverview = ({
                 {x.status?.bilde ? (
                   <Image
                     src={urlFor(x.status?.bilde).auto("format").url()}
-                    decoding="async"
                     width="200"
                     height="200"
                     layout="fixed"
