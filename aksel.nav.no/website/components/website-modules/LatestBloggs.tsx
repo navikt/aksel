@@ -114,9 +114,9 @@ export const LatestBloggposts = ({
             </BodyShort>
           )}
         </div>
-        <div className="col-span-1 grid gap-12">
+        <div className="col-span-1 grid place-content-start gap-12">
           {bloggs.slice(1, 3).map((blog) => (
-            <div key={blog._id} className={cl("flex gap-6")}>
+            <div key={blog._id} className="flex gap-6">
               <div className="relative hidden aspect-square h-[11.75rem] lg:block">
                 {blog?.seo?.image ? (
                   <Image
