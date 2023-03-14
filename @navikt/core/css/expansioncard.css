@@ -126,8 +126,12 @@
   display: none;
 }
 
-.navds-expansioncard--fade :where(.navds-expansioncard__content-inner) {
+.navds-expansioncard__content-inner {
   animation: fadeExpansionCard 250ms ease;
+}
+
+.navds-expansioncard--no-fade :where(.navds-expansioncard__content-inner) {
+  animation: none;
 }
 
 @keyframes fadeExpansionCard {

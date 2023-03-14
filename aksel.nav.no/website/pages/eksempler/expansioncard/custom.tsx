@@ -20,10 +20,11 @@ const Example = () => {
 
       <style>{`
         .subtle-card {
-          --ac-expansioncard-bg: var(--a-deepblue-50);
-          --ac-expansioncard-avatar-bg: var(--a-surface-alt-3-subtle);
-          --ac-expansioncard-avatar-icon: var(--a-icon-alt-3);
+          --ac-expansioncard-bg: var(--a-surface-subtle);
           --ac-expansioncard-border-open-color: var(--a-border-alt-3);
+          --ac-expansioncard-border-hover-color: var(--a-border-alt-3);
+          --ac-expansioncard-border-width: 2px;
+          --ac-expansioncard-border-open-width: 2px;
         }`}</style>
     </div>
   );
@@ -39,6 +40,7 @@ export const Demo = {
 
 export const args = {
   index: 8,
+  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser. Hvis du ønsker egne varianter av ExpansionCard anbefaler vi at du bruker tokens for å gjøre de nødvendige stilendringe. Vi ønsker gjerne å høre mer om hvordan dette fungerer for dere! Hvis dere har laget et 'eget' panel ønsker vi gjerne å lære mer.",
 };
 
 const Innhold = () => (

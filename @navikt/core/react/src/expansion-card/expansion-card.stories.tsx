@@ -550,9 +550,11 @@ export const Customization = {
 
       <style>{`
         .subtle-card {
-          --ac-expansioncard-bg: var(--a-surface-alt-3-subtle);
-          --ac-expansioncard-avatar-bg: var(--a-deepblue-200);
+          --ac-expansioncard-bg: var(--a-surface-subtle);
           --ac-expansioncard-border-open-color: var(--a-border-alt-3);
+          --ac-expansioncard-border-hover-color: var(--a-border-alt-3);
+          --ac-expansioncard-border-width: 2px;
+          --ac-expansioncard-border-open-width: 2px;
         }`}</style>
     </div>
   ),
