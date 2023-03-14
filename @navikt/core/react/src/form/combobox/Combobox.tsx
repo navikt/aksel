@@ -89,14 +89,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ...rest
     } = props;
 
-    //TODO: fix bug where if virtual focus is on an option and you click on another option, the virtually focused option is selected
+    //TODO: add logic for new option on enter
+    //TODO: add different list for "just added" options that shows up on top of list
     //TODO: pre-selected options
     //TODO: add option to add new option
     //TODO: add caret icon with onClick to open list
     //TODO: allow user to add isListOpen as a prop to control list open/close
     //TODO: scroll dropdown when navigating with keyboard
-    //TODO: make it so that clicking Collapse/Expand closes list if list is open,
-    /////// BUT leave it open if user tabs to it. AKA isListOpen cant be based on focus, but on state
+    //TODO: make it so that clicking Collapse/Expand closes list if list is open, BUT leave it open if user tabs to it. AKA isListOpen cant be based on focus, but on state
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
@@ -155,24 +155,43 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [handleChange, onClear]
     );
 
-    const toggleOption = useCallback(() => {
-      const curFilteredOpt = filteredOptions[filteredOptionsIndex];
-      if (curFilteredOpt && selectedOptions.includes(curFilteredOpt))
-        setSelectedOptions(selectedOptions.filter((o) => o !== curFilteredOpt));
-      else if (
-        isInternalListOpen &&
-        curFilteredOpt &&
-        (filteredOptions?.includes?.(String(value)) || !value)
-      )
-        setSelectedOptions([...selectedOptions, curFilteredOpt]);
-    }, [
-      value,
-      selectedOptions,
-      filteredOptions,
-      filteredOptionsIndex,
-      setSelectedOptions,
-      isInternalListOpen,
-    ]);
+    const toggleOption = useCallback(
+      (textContent, isNew = false) => {
+        const curFilteredOpt = filteredOptions[filteredOptionsIndex];
+        if (isNew) {
+          setSelectedOptions([...selectedOptions, textContent]);
+          setSelectedOptions([...selectedOptions, textContent]);
+          setInternalValue("");
+          setInternalListOpen(false);
+          focusInput();
+        } else if (textContent) {
+          console.log("textContent", textContent);
+          if (selectedOptions.includes(textContent))
+            setSelectedOptions(
+              selectedOptions.filter((o) => o !== textContent)
+            );
+          else if (filteredOptions.includes(textContent))
+            setSelectedOptions([...selectedOptions, textContent]);
+        } else if (curFilteredOpt && selectedOptions.includes(curFilteredOpt))
+          setSelectedOptions(
+            selectedOptions.filter((o) => o !== curFilteredOpt)
+          );
+        else if (
+          isInternalListOpen &&
+          curFilteredOpt &&
+          (filteredOptions?.includes?.(String(value)) || !value)
+        )
+          setSelectedOptions([...selectedOptions, curFilteredOpt]);
+      },
+      [
+        value,
+        selectedOptions,
+        filteredOptions,
+        filteredOptionsIndex,
+        setSelectedOptions,
+        isInternalListOpen,
+      ]
+    );
 
     const handleDeleteSelectedOption = (clickedOption) => {
       setSelectedOptions(
@@ -339,6 +358,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             >
               {isInternalValueNew && (
                 <li
+                  tabIndex={-1}
+                  onClick={(e) => {
+                    toggleOption(internalValue, true);
+                    focusInput();
+                  }}
                   id={`${id}-combobox-new-option`}
                   className="navds-combobox__list-item navds-combobox__list-item__new-option"
                   role="option"
@@ -361,7 +385,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   })}
                   id={`${id}-option-${o}`}
                   key={o}
-                  onClick={() => toggleOption()}
+                  tabIndex={-1}
+                  onClick={(e) => {
+                    const target = e.target as HTMLLIElement;
+                    toggleOption(target.textContent);
+                    focusInput();
+                  }}
                   role="option"
                   aria-selected={selectedOptions.includes(o)}
                 >
