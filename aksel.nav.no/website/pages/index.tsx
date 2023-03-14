@@ -137,7 +137,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
             />
           </div>
           <div className="bg-surface-subtle min-h-96  relative pb-72  md:pb-40">
-            <div className="centered-layout grid max-w-screen-xl">
+            <div className="centered-layout grid max-w-screen-2xl">
               {/* God praksis */}
               <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-32 rounded-2xl px-4 py-12 ring-1 sm:px-12 sm:py-20">
                 {!reducedMotion && (
@@ -209,7 +209,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
             <div className="centered-layout -translate-y-1/2">
               <ToolCard />
             </div>
-            <div className="centered-layout -mt-16 grid max-w-screen-xl md:mt-8 ">
+            <div className="centered-layout -mt-16 grid max-w-screen-2xl md:mt-8 ">
               <LatestBloggposts
                 bloggs={bloggs}
                 title="Siste fra bloggen"
