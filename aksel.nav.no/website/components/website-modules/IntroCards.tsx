@@ -24,8 +24,11 @@ export const IntroCards = ({
             href={href}
             passHref
             className={cl(
-              "focus-visible:shadow-focus ring-border-subtle text-deepblue-700 bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 max-w-md rounded-lg p-4 ring-1 hover:ring-1 focus:outline-none",
-              { "ring-border-subtle ring-1": variant === "komponentside" }
+              "focus-visible:shadow-focus ring-border-subtle text-deepblue-700 bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 ring-1 hover:ring-1 focus:outline-none",
+              {
+                "ring-border-subtle ring-1": variant === "komponentside",
+                "max-w-md": variant === "forside",
+              }
             )}
             onClick={(e) =>
               logNav(
