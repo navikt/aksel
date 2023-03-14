@@ -18,4 +18,11 @@ export default MetaData;
 
 export const FooterDemo = {
   render: () => <Footer />,
+  nextRouter: {
+    path: "/profile/[id]",
+    asPath: "/profile/lifeiscontent",
+    query: {
+      id: "lifeiscontent",
+    },
+  },
 };
