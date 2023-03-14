@@ -1,4 +1,4 @@
-import { Close, Collapse, Expand } from "@navikt/ds-icons";
+import { Add, Close, Collapse, Expand } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, {
   forwardRef,
@@ -121,6 +121,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       } else {
         return options;
       }
+    }, [internalValue, options]);
+
+    const isInternalValueNew = useMemo(() => {
+      return (
+        internalValue &&
+        !options?.find(
+          (option) => normalizeText(option) === normalizeText(internalValue)
+        )
+      );
     }, [internalValue, options]);
 
     const handleChange = useCallback(
@@ -349,6 +358,20 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               id={`${id}-options`}
               role="listbox"
             >
+              {isInternalValueNew && (
+                <li
+                  id={`${id}-combobox-new-option`}
+                  className="navds-combobox__list-item navds-combobox__list-item__new-option"
+                  role="option"
+                  aria-selected={!selectedOptions.includes(internalValue)}
+                >
+                  <Add />
+                  <BodyShort size="medium">
+                    Legg til{" "}
+                    <Label as="span">&#8220;{internalValue}&#8221;</Label>
+                  </BodyShort>
+                </li>
+              )}
               {filteredOptions.map((o, i) => (
                 <li
                   className={cl("navds-combobox__list-item", {
