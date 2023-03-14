@@ -105,7 +105,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
               <Heading
                 level="1"
                 size="xlarge"
-                className="text-deepblue-800 leading-[1.2] sm:text-[3.5rem]"
+                className="text-deepblue-700 leading-[1.2] sm:text-[3.5rem]"
               >
                 Aksel hjelper team å lage digitale produkter
               </Heading>
@@ -168,7 +168,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                   <Heading
                     level="2"
                     size="xlarge"
-                    className="text-deepblue-800 mb-6"
+                    className="text-deepblue-700 mb-6"
                   >
                     God praksis
                   </Heading>
@@ -186,7 +186,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
               </div>
 
               <div className="-mt-12">
-                <Heading level="3" size="medium">
+                <Heading level="3" size="medium" className="text-deepblue-800">
                   Nylige artikler
                 </Heading>
                 <div className="card-grid-3-1 my-6">
