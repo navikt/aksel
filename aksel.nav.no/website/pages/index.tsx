@@ -136,6 +136,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                 },
               ]}
               className="centered-layout mb-40 max-w-md grid-cols-1 sm:mb-36 md:max-w-screen-lg md:grid-cols-3"
+              variant="forside"
             />
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
