@@ -1,7 +1,7 @@
 import { BodyShort, Heading, Link } from "@navikt/ds-react";
 
 import NextLink from "next/link";
-import { EditButton, ScrollTop } from "../..";
+/* import { EditButton, ScrollTop } from "../.."; */
 import FooterForm from "./FooterForm";
 
 const Footer = () => {
@@ -14,7 +14,7 @@ const Footer = () => {
     >
       <div className="relative z-10 mx-auto grid w-full max-w-screen-2xl gap-16 px-4 pt-12 pb-16 md:px-6">
         <div className="grid gap-12 xl:grid-cols-3 xl:gap-6">
-          <ScrollTop />
+          {/* <ScrollTop /> */}
           <div>
             <Heading level="2" size="small">
               Aksel
@@ -126,7 +126,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <EditButton />
+      {/* <EditButton /> */}
       <svg
         width="548"
         height="422"

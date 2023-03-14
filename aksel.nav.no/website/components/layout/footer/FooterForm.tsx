@@ -1,6 +1,6 @@
-import { FeedbackT } from "@/lib";
-import { IdContext } from "@/utils";
 import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
+import { IdContext } from "components/website-modules/utils/contexts/id-context";
+import { FeedbackT } from "lib/types/types";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
