@@ -12,6 +12,9 @@ const MetaData: Meta = {
       </NextDecorator>
     ),
   ],
+  parameters: {
+    layout: "fullscreen",
+  },
 };
 
 export default MetaData;

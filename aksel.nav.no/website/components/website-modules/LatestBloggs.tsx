@@ -6,6 +6,7 @@ import { SanityT, urlFor } from "@/lib";
 import cl from "clsx";
 import { getImage } from "components/website-modules/utils/get-image";
 import { SanityBlockContent } from "@/sanity-block";
+import AkselLink from "components/website-modules/AkselLink";
 
 export type BloggPageT = Partial<
   SanityT.Schema.aksel_blogg & {
@@ -59,18 +60,8 @@ export const LatestBloggposts = ({
         />
       )}
       {/* Desktop-view */}
-      <div
-        className={cl("hidden gap-12", {
-          "my-10 md:flex": variant === "forside",
-          "my-20 grid-cols-2 md:grid": variant === "blogg",
-        })}
-      >
-        <div
-          className={cl({
-            "flex-auto grow-[4]": variant === "forside",
-            "col-span-1": variant === "blogg",
-          })}
-        >
+      <div className="my-12 hidden grid-cols-2 gap-12 md:grid">
+        <div className="col-span-1">
           <div className="relative mb-10 block aspect-video">
             {bloggs[0]?.seo?.image ? (
               <Image
@@ -123,90 +114,72 @@ export const LatestBloggposts = ({
             </BodyShort>
           )}
         </div>
-        <div
-          className={cl("gap-12", {
-            "flex flex-auto grow-[1] place-items-start": variant === "forside",
-            "col-span-1 grid": variant === "blogg",
-          })}
-        >
-          <div className={cl("grid gap-12")}>
-            {bloggs.slice(1, 4).map((blog) => (
-              <div
-                key={blog._id}
-                className={cl("flex gap-6", {
-                  "border-b-border-subtle border-b pb-8": variant === "forside",
-                })}
-              >
-                {variant === "blogg" && (
-                  <div className="relative hidden aspect-square h-[11.75rem] lg:block">
-                    {blog?.seo?.image ? (
-                      <Image
-                        src={urlFor(blog.seo.image).auto("format").url()}
-                        layout="fill"
-                        objectFit="cover"
-                        aria-hidden
-                        priority
-                        className="rounded-lg"
-                      />
-                    ) : (
-                      <Image
-                        src={getImage(blog?.heading ?? "", "thumbnail")}
-                        layout="fill"
-                        objectFit="cover"
-                        aria-hidden
-                        priority
-                        className="rounded-lg"
-                      />
-                    )}
-                  </div>
+        <div className="col-span-1 grid gap-12">
+          {bloggs.slice(1, 3).map((blog) => (
+            <div key={blog._id} className={cl("flex gap-6")}>
+              <div className="relative hidden aspect-square h-[11.75rem] lg:block">
+                {blog?.seo?.image ? (
+                  <Image
+                    src={urlFor(blog.seo.image).auto("format").url()}
+                    layout="fill"
+                    objectFit="cover"
+                    aria-hidden
+                    priority
+                    className="rounded-lg"
+                  />
+                ) : (
+                  <Image
+                    src={getImage(blog?.heading ?? "", "thumbnail")}
+                    layout="fill"
+                    objectFit="cover"
+                    aria-hidden
+                    priority
+                    className="rounded-lg"
+                  />
                 )}
-                <div>
-                  <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
-                    <Link className="text-deepblue-500 no-underline hover:underline">
-                      <Heading
-                        size="small"
-                        level={(Number(level) + 1).toString() as any}
-                      >
-                        {blog.heading}
-                      </Heading>
-                    </Link>
-                  </NextLink>
-                  <BodyLong className="mt-4" size="small">
-                    {blog?.ingress}
-                  </BodyLong>
-                  {getAuthors(blog).length > 0 ? (
-                    <BodyShort
-                      size="small"
-                      className="text-text-subtle mt-4 flex gap-2"
-                    >
-                      <span className="font-semibold">
-                        {getAuthors(blog)[0]}
-                      </span>
-                      <span>
-                        {dateStr(blog?.publishedAt ?? blog._createdAt)}
-                      </span>
-                    </BodyShort>
-                  ) : (
-                    <BodyShort size="small" className="text-text-subtle mt-4">
-                      <span>
-                        {dateStr(blog?.publishedAt ?? blog._createdAt)}
-                      </span>
-                    </BodyShort>
-                  )}
-                </div>
               </div>
-            ))}
-          </div>
+
+              <div>
+                <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
+                  <Link className="text-deepblue-500 no-underline hover:underline">
+                    <Heading
+                      size="small"
+                      level={(Number(level) + 1).toString() as any}
+                    >
+                      {blog.heading}
+                    </Heading>
+                  </Link>
+                </NextLink>
+                <BodyLong className="mt-4" size="small">
+                  {blog?.ingress}
+                </BodyLong>
+                {getAuthors(blog).length > 0 ? (
+                  <BodyShort
+                    size="small"
+                    className="text-text-subtle mt-4 flex gap-2"
+                  >
+                    <span className="font-semibold">{getAuthors(blog)[0]}</span>
+                    <span>{dateStr(blog?.publishedAt ?? blog._createdAt)}</span>
+                  </BodyShort>
+                ) : (
+                  <BodyShort size="small" className="text-text-subtle mt-4">
+                    <span>{dateStr(blog?.publishedAt ?? blog._createdAt)}</span>
+                  </BodyShort>
+                )}
+              </div>
+            </div>
+          ))}
+          {variant === "forside" && (
+            <AkselLink href="/produktbloggen" className="h-fit self-end">
+              Les flere blogginnlegg
+            </AkselLink>
+          )}
         </div>
       </div>
 
       {/* Mobile view */}
       <div className="my-10 mx-auto grid gap-12 md:hidden">
-        <div
-          className={cl("w-full", {
-            "border-b-border-subtle border-b pb-8": variant === "forside",
-          })}
-        >
+        <div className="w-full">
           <div className="relative mb-10 block aspect-video">
             {bloggs[0]?.seo?.image ? (
               <Image
@@ -258,36 +231,29 @@ export const LatestBloggposts = ({
           )}
         </div>
         <div className="grid w-full gap-12">
-          {bloggs.slice(1, 4).map((blog) => (
-            <div
-              key={blog._id}
-              className={cl({
-                "border-b-border-subtle border-b pb-8": variant === "forside",
-              })}
-            >
-              {variant === "blogg" && (
-                <div className="relative mb-6 block aspect-video">
-                  {blog?.seo?.image ? (
-                    <Image
-                      src={urlFor(blog.seo.image).auto("format").url()}
-                      layout="fill"
-                      objectFit="cover"
-                      aria-hidden
-                      priority
-                      className="rounded-lg"
-                    />
-                  ) : (
-                    <Image
-                      src={getImage(blog?.heading ?? "", "thumbnail")}
-                      layout="fill"
-                      objectFit="cover"
-                      aria-hidden
-                      priority
-                      className="rounded-lg"
-                    />
-                  )}
-                </div>
-              )}
+          {bloggs.slice(1, 3).map((blog) => (
+            <div key={blog._id}>
+              <div className="relative mb-6 block aspect-video">
+                {blog?.seo?.image ? (
+                  <Image
+                    src={urlFor(blog.seo.image).auto("format").url()}
+                    layout="fill"
+                    objectFit="cover"
+                    aria-hidden
+                    priority
+                    className="rounded-lg"
+                  />
+                ) : (
+                  <Image
+                    src={getImage(blog?.heading ?? "", "thumbnail")}
+                    layout="fill"
+                    objectFit="cover"
+                    aria-hidden
+                    priority
+                    className="rounded-lg"
+                  />
+                )}
+              </div>
               <div>
                 <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
                   <Link className="text-deepblue-500 no-underline hover:underline">
@@ -318,6 +284,11 @@ export const LatestBloggposts = ({
               </div>
             </div>
           ))}
+          {variant === "forside" && (
+            <AkselLink href="/produktbloggen" className="self-end">
+              Les flere blogginnlegg
+            </AkselLink>
+          )}
         </div>
       </div>
     </div>

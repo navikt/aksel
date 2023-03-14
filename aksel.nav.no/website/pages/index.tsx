@@ -6,8 +6,8 @@ import {
   CompassIcon,
   ComponentIcon,
   PaletteIcon,
-  PauseIcon,
-  PlayIcon,
+  PauseFillIcon,
+  PlayFillIcon,
 } from "@navikt/aksel-icons";
 import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
@@ -45,14 +45,16 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
     setPause(JSON.parse(data) ?? false);
   }, []);
 
-  const validatedTema = tema.filter((t) => {
-    return (
-      t?.title &&
-      t?.slug &&
-      t?.pictogram &&
-      t?.seksjoner.find((s) => !!s?.sider.find((s) => s?._ref))
-    );
-  });
+  const validatedTema = tema
+    .filter((t) => {
+      return (
+        t?.title &&
+        t?.slug &&
+        t?.pictogram &&
+        t?.seksjoner.find((s) => !!s?.sider.find((s) => s?._ref))
+      );
+    })
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <>
@@ -101,13 +103,13 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-28">
-            <div className="centered-layout relative mb-12 mt-20 grid max-w-xs place-items-center text-center sm:mt-36 sm:max-w-[600px]">
+            <div className="centered-layout relative mb-12 mt-20 grid place-items-center text-center sm:mt-36 sm:max-w-[632px]">
               <Heading
                 level="1"
                 size="xlarge"
                 className="text-deepblue-700 leading-[1.2] sm:text-[3.5rem]"
               >
-                Aksel hjelper team å lage digitale produkter
+                Aksel gjør det enklere å lage digitale produkter
               </Heading>
               <AkselCube />
             </div>
@@ -136,13 +138,13 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
               className="centered-layout mb-40 max-w-md grid-cols-1 sm:mb-36 md:max-w-screen-lg md:grid-cols-3"
             />
           </div>
-          <div className="bg-surface-subtle min-h-96  relative pb-72  md:pb-40">
+          <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
             <div className="centered-layout grid max-w-screen-2xl">
               {/* God praksis */}
               <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-32 rounded-2xl px-4 py-12 ring-1 sm:px-12 sm:py-20">
                 {!reducedMotion && (
                   <button
-                    className="focus-visible:shadow-focus absolute top-2 right-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
+                    className="focus-visible:shadow-focus text-text-subtle hover:text-text-default absolute top-2 right-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
                     onClick={() => {
                       setPause(!pause);
                       localStorage.setItem(
@@ -153,12 +155,12 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                   >
                     {pause ? (
                       <>
-                        <PlayIcon aria-hidden />
+                        <PlayFillIcon aria-hidden />
                         <span className="sr-only">Start animasjon</span>
                       </>
                     ) : (
                       <>
-                        <PauseIcon aria-hidden />
+                        <PauseFillIcon aria-hidden />
                         <span className="sr-only">Stopp animasjon</span>
                       </>
                     )}
@@ -187,7 +189,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
 
               <div className="-mt-12">
                 <Heading level="3" size="medium" className="text-deepblue-800">
-                  Nylige artikler
+                  Siste fra God praksis
                 </Heading>
                 <div className="card-grid-3-1 my-6">
                   {resent.map((art: any) => (
@@ -200,7 +202,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                   ))}
                 </div>
                 <AkselLink href="/god-praksis/artikler">
-                  Utforsk alle artikler i god praksis
+                  Utforsk alle artikler i God praksis
                 </AkselLink>
               </div>
             </div>
@@ -216,9 +218,6 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                 variant="forside"
                 level="2"
               />
-              <AkselLink href="/produktbloggen">
-                Les flere blogginnlegg
-              </AkselLink>
             </div>
           </div>
         </main>

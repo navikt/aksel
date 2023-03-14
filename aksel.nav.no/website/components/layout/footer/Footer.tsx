@@ -14,7 +14,6 @@ const Footer = () => {
     >
       <div className="relative z-10 mx-auto grid w-full max-w-screen-2xl gap-16 px-4 pt-12 pb-16 md:px-6">
         <div className="grid gap-12 xl:grid-cols-3 xl:gap-6">
-          {/* <ScrollTop /> */}
           <div>
             <Heading level="2" size="small">
               Aksel
