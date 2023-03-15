@@ -2,11 +2,9 @@ import { Add, Close, Collapse, Expand } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, {
   forwardRef,
-  InputHTMLAttributes,
   useCallback,
   useEffect,
   useMemo,
-  // useReducer,
   useRef,
   useState,
 } from "react";
@@ -19,43 +17,10 @@ import {
   useEventListener,
 } from "../..";
 import usePrevious from "../../util/usePrevious";
-import { FormFieldProps, useFormField } from "../useFormField";
+import { useFormField } from "../useFormField";
+import CheckIcon from "./CheckIcon";
 import { keyDownHandler } from "./events";
-// import { eventReducer } from "./reducer";
-
-export type ComboboxClearEvent =
-  | {
-      trigger: "Click";
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
-    }
-  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> }
-  | { trigger: "Enter"; event: React.KeyboardEvent<HTMLButtonElement> };
-
-export interface ComboboxProps
-  extends FormFieldProps,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
-  isListOpen: boolean;
-  options?: string[];
-  selectedOptions: string[];
-  setOptions: React.Dispatch<React.SetStateAction<any[]>>;
-  setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
-  onClear?: (e: ComboboxClearEvent) => void;
-  variant?: "primary" | "secondary" | "simple";
-  clearButton?: boolean;
-  clearButtonLabel?: string;
-  toggleListButton?: boolean;
-  toggleListButtonLabel?: string;
-  onChange?: (value: string) => void;
-  hideLabel?: boolean;
-  label: React.ReactNode;
-  children?: React.ReactNode;
-}
-
-export interface ComboboxContextProps {
-  disabled?: boolean;
-  size: "medium" | "small";
-  variant: "primary" | "secondary" | "simple";
-}
+import { ComboboxClearEvent, ComboboxProps } from "./types";
 
 const normalizeText = (text) => (text ? text.toLowerCase().trim() : "");
 
@@ -99,16 +64,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     //TODO: allow user to add isListOpen as a prop to control list open/close
     //TODO: scroll dropdown when navigating with keyboard
     //TODO: make it so that clicking Collapse/Expand closes list if list is open, BUT leave it open if user tabs to it. AKA isListOpen cant be based on focus, but on state
-
-    // const initialState = {
-    //   isInternalListOpen: isListOpen ?? false,
-    //   selectedOptions: selectedOptions ?? [],
-    //   internalValue: "",
-    //   filteredOptionsIndex: null,
-    //   filteredOptions: options ?? [],
-    // };
-
-    // const [state, dispatch] = useReducer(eventReducer, initialState);
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
@@ -402,23 +357,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   aria-selected={selectedOptions.includes(o)}
                 >
                   <BodyShort size="medium">{o}</BodyShort>
-                  {selectedOptions.includes(o) && (
-                    <svg
-                      width="16"
-                      height="13"
-                      viewBox="0 0 16 13"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        fill="#005B82"
-                        d="M14.2014 0L16 1.89047L4.77943 13L0 8.39552L1.79361 6.5L4.77418 9.3019L14.2014 0Z"
-                      />
-                    </svg>
-                  )}
+                  {selectedOptions.includes(o) && <CheckIcon />}
                 </li>
               ))}
             </ul>
