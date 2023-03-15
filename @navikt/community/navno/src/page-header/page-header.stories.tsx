@@ -1,4 +1,3 @@
-import React from "react";
 import { PageHeader } from ".";
 
 export default {
@@ -12,13 +11,5 @@ export default {
         options: ["var1", "var1"],
       },
     },
-  },
-};
-
-export const Default = {
-  render: (props) => <PageHeader>{props.children}</PageHeader>,
-
-  args: {
-    children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
   },
 };

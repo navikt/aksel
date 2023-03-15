@@ -1,5 +1,30 @@
 # @navikt/aksel-icons
 
+## 2.7.7
+
+### Patch Changes
+
+- [`a22ac3eb7`](https://github.com/navikt/aksel/commit/a22ac3eb78135bf93d4771802475396849809c03) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :Sparkles: Nye ikoner
+
+  - :tada: CaretUpDownFilledDown
+  - :tada: CaretUpDownFilledUp
+  - :tada: CloudDown
+  - :tada: CloudDownFill
+  - :tada: CloudUp
+  - :tada: CloudUpFill
+  - :tada: HddDown
+  - :tada: HddDownFill
+  - :tada: HddUp
+  - :tada: HddUpFill
+  - :tada: Inbox
+  - :tada: InboxDown
+  - :tada: InboxDownFill
+  - :tada: InboxFill
+  - :tada: InboxUp
+  - :tada: InboxUpFill
+  - :tada: ShoppingBasket
+  - :tada: ShoppingBasketFill
+
 ## 2.7.6
 
 ## 2.7.5
