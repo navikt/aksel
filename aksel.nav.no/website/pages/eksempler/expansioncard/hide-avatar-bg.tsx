@@ -4,26 +4,18 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="subtle-card">
+    <div className="grid gap-6">
       <ExpansionCard>
-        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
-          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
-          <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
-          </ExpansionCard.Description>
+        <ExpansionCard.Header
+          hideAvatarBg
+          avatar={<SackKronerIcon aria-hidden />}
+        >
+          <ExpansionCard.Title>Utbetaling av Sykepenger</ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
-
-      <style>{`
-        .subtle-card {
-          --ac-expansioncard-bg: var(--a-surface-subtle);
-          --ac-expansioncard-border-open-color: var(--a-border-alt-3);
-          --ac-expansioncard-border-hover-color: var(--a-border-alt-3);
-        }`}</style>
     </div>
   );
 };
@@ -37,7 +29,7 @@ export const Demo = {
 
 export const args = {
   index: 8,
-  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser. Hvis du ønsker egne varianter av ExpansionCard anbefaler vi at du bruker tokens for å gjøre de nødvendige stilendringe. Vi ønsker gjerne å høre mer om hvordan dette fungerer for dere! Hvis dere har laget et 'eget' panel ønsker vi gjerne å lære mer.",
+  desc: "'hideAvatarBg' gir deg muligheten til å gjemme backgrunnen til avataren.",
 };
 
 const Innhold = () => (
