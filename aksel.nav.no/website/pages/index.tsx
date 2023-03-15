@@ -142,7 +142,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
             <div className="centered-layout grid max-w-screen-2xl">
               {/* God praksis */}
-              <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-32 rounded-2xl px-4 py-12 ring-1 sm:px-12 sm:py-20">
+              <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-48 rounded-2xl px-4 py-12 ring-1 sm:-translate-y-32 sm:px-12 sm:py-20">
                 {!reducedMotion && (
                   <button
                     className="focus-visible:shadow-focus text-text-subtle hover:text-text-default absolute top-2 right-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
@@ -188,7 +188,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                 </ul>
               </div>
 
-              <div className="-mt-12">
+              <div className="-mt-24 sm:-mt-12">
                 <Heading level="3" size="medium" className="text-deepblue-800">
                   Siste fra God praksis
                 </Heading>
