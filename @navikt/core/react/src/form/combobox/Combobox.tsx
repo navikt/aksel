@@ -6,6 +6,7 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
+  // useReducer,
   useRef,
   useState,
 } from "react";
@@ -20,6 +21,7 @@ import {
 import usePrevious from "../../util/usePrevious";
 import { FormFieldProps, useFormField } from "../useFormField";
 import { keyDownHandler } from "./events";
+// import { eventReducer } from "./reducer";
 
 export type ComboboxClearEvent =
   | {
@@ -98,6 +100,16 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     //TODO: scroll dropdown when navigating with keyboard
     //TODO: make it so that clicking Collapse/Expand closes list if list is open, BUT leave it open if user tabs to it. AKA isListOpen cant be based on focus, but on state
 
+    // const initialState = {
+    //   isInternalListOpen: isListOpen ?? false,
+    //   selectedOptions: selectedOptions ?? [],
+    //   internalValue: "",
+    //   filteredOptionsIndex: null,
+    //   filteredOptions: options ?? [],
+    // };
+
+    // const [state, dispatch] = useReducer(eventReducer, initialState);
+
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -160,7 +172,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         const curFilteredOpt = filteredOptions[filteredOptionsIndex];
         if (isNew) {
           setSelectedOptions([...selectedOptions, textContent]);
-          setSelectedOptions([...selectedOptions, textContent]);
           setInternalValue("");
           setInternalListOpen(false);
           focusInput();
@@ -220,18 +231,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     }, [focusInput, selectedOptions, prevSelectedOptions]);
 
     function onFocusWrapper(e) {
-      if (
-        wrapperRef.current?.contains(e.target) &&
-        !wrapperRef.current?.contains(e.relatedTarget)
-      ) {
+      const ref = wrapperRef.current;
+      if (ref?.contains(e.target) && !ref?.contains(e.relatedTarget))
         setInternalListOpen(true);
-      }
     }
 
     function onBlurWrapper(e) {
-      if (!wrapperRef.current?.contains(e.relatedTarget)) {
+      if (!wrapperRef.current?.contains(e.relatedTarget))
         setInternalListOpen(false);
-      }
     }
 
     return (
