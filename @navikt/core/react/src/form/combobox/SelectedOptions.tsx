@@ -12,7 +12,6 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
   handleDeleteSelectedOption,
   children,
 }) => {
-  console.log("DEBUG - HELLO:");
   return (
     <Chips className="navds-combobox__selected-options">
       {selectedOptions.length

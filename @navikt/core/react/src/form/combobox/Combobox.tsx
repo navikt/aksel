@@ -1,4 +1,3 @@
-import { Close, Collapse, Expand } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, {
   forwardRef,
@@ -11,9 +10,11 @@ import React, {
 import { BodyShort, Label, mergeRefs, omit, useEventListener } from "../..";
 import usePrevious from "../../util/usePrevious";
 import { useFormField } from "../useFormField";
+import ClearButton from "./ClearButton";
 import { keyDownHandler } from "./events";
 import Options from "./Options";
 import SelectedOptions from "./SelectedOptions";
+import ToggleListButton from "./ToggleListButton";
 
 import { ComboboxClearEvent, ComboboxProps } from "./types";
 
@@ -259,36 +260,19 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               />
             </SelectedOptions>
             {(value ?? internalValue) && clearButton && (
-              <button
-                type="button"
-                onClick={(event) => handleClear({ trigger: "Click", event })}
-                className="navds-combobox__button-clear"
-              >
-                <span className="navds-sr-only">
-                  {clearButtonLabel ? clearButtonLabel : "Tøm"}
-                </span>
-                <Close aria-hidden width="20" height="20" />
-              </button>
+              <ClearButton
+                handleClear={(event) =>
+                  handleClear({ trigger: "Click", event })
+                }
+                clearButtonLabel={clearButtonLabel}
+              />
             )}
             {toggleListButton && (
-              <button
-                type="button"
-                onClick={() => setInternalListOpen(!isInternalListOpen)}
-                className="navds-combobox__button-toggle-list"
-              >
-                <span className="navds-sr-only">
-                  {toggleListButtonLabel
-                    ? toggleListButtonLabel
-                    : isInternalListOpen
-                    ? "Lukk"
-                    : "Åpne"}
-                </span>
-                {isInternalListOpen ? (
-                  <Collapse aria-hidden width="20" height="20" />
-                ) : (
-                  <Expand aria-hidden width="20" height="20" />
-                )}
-              </button>
+              <ToggleListButton
+                isInternalListOpen={isInternalListOpen}
+                setInternalListOpen={setInternalListOpen}
+                toggleListButtonLabel={toggleListButtonLabel}
+              />
             )}
           </div>
           <Options
