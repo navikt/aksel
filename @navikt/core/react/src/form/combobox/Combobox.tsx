@@ -165,7 +165,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setInternalListOpen(false);
           focusInput();
         } else if (textContent) {
-          console.log("textContent", textContent);
           if (selectedOptions.includes(textContent))
             setSelectedOptions(
               selectedOptions.filter((o) => o !== textContent)
@@ -184,12 +183,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setSelectedOptions([...selectedOptions, curFilteredOpt]);
       },
       [
-        value,
-        selectedOptions,
         filteredOptions,
         filteredOptionsIndex,
+        selectedOptions,
         setSelectedOptions,
         isInternalListOpen,
+        value,
+        focusInput,
       ]
     );
 
