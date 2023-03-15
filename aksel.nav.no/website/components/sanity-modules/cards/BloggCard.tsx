@@ -18,7 +18,10 @@ const BloggCard = ({
   >;
 }) => {
   return (
-    <li key={blog._id} className="border-b-border-subtle h-fit border-b pb-8">
+    <li
+      key={blog._id}
+      className="border-b-border-subtle flex h-full flex-col place-content-start border-b pb-8"
+    >
       <Heading size="medium" as="div">
         <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
           <Link
@@ -35,9 +38,12 @@ const BloggCard = ({
           </Link>
         </NextLink>
       </Heading>
-      <BodyLong className="mt-2">{blog?.ingress}</BodyLong>
+      <BodyLong className="my-2">{blog?.ingress}</BodyLong>
       {getAuthors(blog).length > 0 && (
-        <BodyShort size="small" className="text-text-subtle mt-6 flex gap-2">
+        <BodyShort
+          size="small"
+          className="text-text-subtle mt-auto flex gap-2 justify-self-end"
+        >
           <span className="font-semibold">{getAuthors(blog)[0]}</span>
           <span>{dateStr(blog?.publishedAt ?? blog._createdAt)}</span>
         </BodyShort>

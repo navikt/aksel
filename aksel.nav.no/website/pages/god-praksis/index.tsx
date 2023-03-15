@@ -12,7 +12,10 @@ import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import React, { lazy } from "react";
-import { AkselTemaT } from "..";
+
+interface AkselTemaT extends SanityT.Schema.aksel_tema {
+  refCount: number;
+}
 
 interface PageProps {
   temaer: AkselTemaT[];

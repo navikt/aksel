@@ -42,16 +42,13 @@ const Element = ({
   if (!block.picture) return null;
   return (
     <figure
-      className={cl(
-        "flex min-w-full flex-1 flex-col rounded-t sm:min-w-[320px]",
-        {
-          "basis-full": block?.fullwidth,
-          "max-w-sm": !block?.fullwidth,
-        }
-      )}
+      className={cl("sm:min-w-80 flex min-w-full flex-1 flex-col rounded-t", {
+        "basis-full": block?.fullwidth,
+        "max-w-sm": !block?.fullwidth,
+      })}
     >
       <img
-        className="rounded-t bg-gray-50 shadow-[0_0_0_1px_var(--a-border-divider)]"
+        className="ring-border-subtle rounded-t bg-gray-50 ring-1"
         alt={block.alt}
         loading="lazy"
         decoding="async"
@@ -61,9 +58,9 @@ const Element = ({
         className={cl(
           "z-10 -ml-[1px] w-[calc(100%_+_2px)] rounded-b border-t-8",
           {
-            "border-t-green-400": block.variant === "do",
-            "border-t-red-400": block.variant === "dont",
-            "border-t-orange-500": block.variant === "warning",
+            "border-t-border-success": block.variant === "do",
+            "border-t-border-danger": block.variant === "dont",
+            "border-t-border-warning": block.variant === "warning",
           }
         )}
       />
@@ -87,7 +84,7 @@ const DoDont = ({ node }: { node: SanityT.Schema.do_dont }) => {
   return (
     <div className="mb-8 last:mb-0">
       {node?.blokker?.length > 0 && (
-        <div className="last flex flex-wrap justify-start gap-8">
+        <div className="last flex flex-wrap justify-start gap-6">
           {node.blokker.map((x) => (
             <Element key={x._key} block={x} />
           ))}

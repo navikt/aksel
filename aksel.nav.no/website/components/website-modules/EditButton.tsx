@@ -12,7 +12,7 @@ function EditButton(): JSX.Element {
     <>
       <div className="overflow-hidden">
         <Tooltip
-          content="Bare tilgjengelig for innloggede redaktører"
+          content="Vises bare for innloggede redaktører"
           placement="left"
           delay={500}
         >

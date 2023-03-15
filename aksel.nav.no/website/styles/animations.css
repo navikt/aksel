@@ -1,5 +1,5 @@
 .header-animated-bg {
-  animation: animated-bg 30s ease infinite;
+  animation: animated-bg 60s ease infinite;
   z-index: 0;
 }
 

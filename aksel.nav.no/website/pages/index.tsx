@@ -6,86 +6,29 @@ import {
   CompassIcon,
   ComponentIcon,
   PaletteIcon,
-  PauseIcon,
-  PlayIcon,
+  PauseFillIcon,
+  PlayFillIcon,
 } from "@navikt/aksel-icons";
-import { BodyLong, Heading } from "@navikt/ds-react";
+import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
+import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
 import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
+import { IntroCards } from "components/website-modules/IntroCards";
 import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { ToolCard } from "components/website-modules/ToolsCard";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import Link from "next/link";
 import { lazy, useEffect, useState } from "react";
-import { logNav } from "../components";
 
-const introcards = [
-  {
-    title: "Komponenter",
-    desc: "Bibliotekene Core og Interne flater",
-    icon: ComponentIcon,
-    href: "/komponenter",
-  },
-  {
-    title: "Design Tokens",
-    desc: "Farger, spacing, shadows, etc.",
-    icon: PaletteIcon,
-    href: "/grunnleggende/styling/design-tokens",
-  },
-  {
-    title: "Ikoner",
-    desc: "Alle ikonene våre",
-    icon: CompassIcon,
-    href: "/ikoner",
-  },
-];
+const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const IntroCards = () => {
-  return (
-    <ul className="centered-layout mb-40 grid w-full max-w-screen-md grid-cols-2 gap-4 sm:mb-36 md:gap-6">
-      {introcards.map(({ icon: Icon, title, desc, href }) => (
-        <li key={title} className="grid">
-          <Link
-            href={href}
-            passHref
-            className="focus-visible:shadow-focus bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 hover:ring-1 focus:outline-none"
-            onClick={(e) =>
-              logNav(
-                "intro-kort",
-                window.location.pathname,
-                e.currentTarget.getAttribute("href")
-              )
-            }
-          >
-            <span className="items-center gap-2 sm:flex">
-              <Icon aria-hidden className="shrink-0 text-2xl" role="img" />
-              <span className="text-xl font-semibold group-hover:underline">
-                {title}
-              </span>
-            </span>
-            <div className="text-text-subtle mt-2">{desc}</div>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-const GetStarted = ({
-  links,
-  togglePause,
-}: {
-  links: { title: string; slug: string }[];
-  togglePause: (x: boolean) => void;
-}) => {
-  const [reducedMotion, setReducedMotion] = useState(false);
+const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     const disableAnimations =
@@ -96,69 +39,22 @@ const GetStarted = ({
     const data = localStorage.getItem("pause-animations");
     if (disableAnimations) {
       setPause(true);
-      togglePause(true);
+      setPause(true);
       return;
     }
     setPause(JSON.parse(data) ?? false);
-    togglePause(JSON.parse(data) ?? false);
-  }, [togglePause]);
+  }, []);
 
-  return (
-    <div className="bg-deepblue-700 text-text-on-action relative mx-auto w-full max-w-screen-lg -translate-y-1/2 rounded-2xl py-12 px-2">
-      <Heading size="xlarge" level="2" className="text-center">
-        Kom i gang
-      </Heading>
-      <ul
-        style={{
-          gridTemplateColumns: `repeat(${links.length}, minmax(0, 1fr))`,
-        }}
-        className="mx-auto mt-6 flex w-fit flex-col place-items-center justify-evenly gap-4 sm:grid md:gap-8"
-      >
-        {links.map((x) => (
-          <li key={x.title}>
-            <AkselLink href={`/${x.slug}`} inverted>
-              {x.title}
-            </AkselLink>
-          </li>
-        ))}
-      </ul>
-      {!reducedMotion && (
-        <button
-          className="focus-visible:ring-border-focus-on-inverted absolute top-2 right-2 grid h-11 w-11 place-items-center rounded text-2xl focus:outline-none focus-visible:ring-2"
-          onClick={() => {
-            setPause(!pause);
-            togglePause(!pause);
-            localStorage.setItem("pause-animations", JSON.stringify(!pause));
-          }}
-        >
-          {pause ? (
-            <>
-              <PlayIcon aria-hidden />
-              <span className="sr-only">Start animasjon</span>
-            </>
-          ) : (
-            <>
-              <PauseIcon aria-hidden />
-              <span className="sr-only">Stopp animasjon</span>
-            </>
-          )}
-        </button>
-      )}
-    </div>
-  );
-};
-
-const WithPreview = lazy(() => import("../components/WithPreview"));
-
-const Forside = ({
-  page,
-  tema,
-  bloggs,
-  resent,
-  komigang,
-  temaCount,
-}: PageProps): JSX.Element => {
-  const [pause, setPause] = useState(false);
+  const validatedTema = tema
+    .filter((t) => {
+      return (
+        t?.title &&
+        t?.slug &&
+        t?.pictogram &&
+        t?.seksjoner.find((s) => !!s?.sider.find((s) => s?._ref))
+      );
+    })
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <>
@@ -199,58 +95,102 @@ const Forside = ({
 
       <div
         className={cl(
-          "header-animated-bg relative max-w-[100vw] overflow-hidden bg-[#DCCAF3]",
+          "header-animated-bg relative max-w-[100vw] overflow-hidden bg-violet-200",
           { "animation-stop": pause }
         )}
       >
         <Header />
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-          <div className="z-20 pb-8">
-            <div className="centered-layout sm:mb-18 relative mb-16 mt-20 grid max-w-xs place-items-center text-center sm:mt-36 sm:max-w-[648px]">
+          <div className="z-20 pb-28">
+            <div className="centered-layout relative mb-12 mt-20 grid place-items-center text-center sm:mt-36 sm:max-w-[632px]">
               <Heading
                 level="1"
                 size="xlarge"
-                className="text-deepblue-800 leading-[1.2] sm:text-[3.5rem]"
+                className="text-deepblue-700 leading-[1.2] sm:text-[3.5rem]"
               >
-                {page.title}
+                Aksel gjør det enklere å lage digitale produkter
               </Heading>
               <AkselCube />
             </div>
 
-            <IntroCards />
+            <IntroCards
+              links={[
+                {
+                  title: "Komponenter",
+                  desc: "Bibliotekene Core og Interne flater",
+                  icon: ComponentIcon,
+                  href: "/komponenter",
+                },
+                {
+                  title: "Design Tokens",
+                  desc: "Farger, spacing, shadows, etc.",
+                  icon: PaletteIcon,
+                  href: "/grunnleggende/styling/design-tokens",
+                },
+                {
+                  title: "Ikoner",
+                  desc: "Alle ikonene våre",
+                  icon: CompassIcon,
+                  href: "/ikoner",
+                },
+              ]}
+              className="centered-layout mb-40 max-w-md grid-cols-1 sm:mb-36 md:max-w-screen-lg md:grid-cols-3"
+              variant="forside"
+            />
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
             <div className="centered-layout grid max-w-screen-2xl">
-              <GetStarted links={komigang} togglePause={setPause} />
               {/* God praksis */}
-              <div className="mx-auto">
-                <Heading
-                  level="2"
-                  size="xlarge"
-                  className="text-deepblue-800 mb-8 text-center sm:text-[3.25rem]"
-                >
-                  God praksis
-                </Heading>
-                {page?.god_praksis_intro && (
-                  <BodyLong className="text-center">
-                    {page.god_praksis_intro}
-                  </BodyLong>
+              <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-48 rounded-2xl px-4 py-12 ring-1 sm:-translate-y-32 sm:px-12 sm:py-20">
+                {!reducedMotion && (
+                  <button
+                    className="focus-visible:shadow-focus text-text-subtle hover:text-text-default absolute top-2 right-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
+                    onClick={() => {
+                      setPause(!pause);
+                      localStorage.setItem(
+                        "pause-animations",
+                        JSON.stringify(!pause)
+                      );
+                    }}
+                  >
+                    {pause ? (
+                      <>
+                        <PlayFillIcon aria-hidden />
+                        <span className="sr-only">Start animasjon</span>
+                      </>
+                    ) : (
+                      <>
+                        <PauseFillIcon aria-hidden />
+                        <span className="sr-only">Stopp animasjon</span>
+                      </>
+                    )}
+                  </button>
                 )}
+                <div>
+                  <Heading
+                    level="2"
+                    size="xlarge"
+                    className="text-deepblue-700 mb-6"
+                  >
+                    God praksis
+                  </Heading>
+                  {page?.god_praksis_intro && (
+                    <Ingress className="max-w-3xl">
+                      {page.god_praksis_intro}
+                    </Ingress>
+                  )}
+                </div>
+                <ul className="mt-12 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
+                  {validatedTema.map((t) => (
+                    <GodPraksisCardSimple key={t._id} node={t} />
+                  ))}
+                </ul>
               </div>
-              <ul className="card-grid-2-1 mx-auto mt-16 max-w-5xl">
-                {tema.map((t) => (
-                  <GodPraksisCard key={t._id} node={t} />
-                ))}
-              </ul>
-              <div className="mx-auto mt-8">
-                <AkselLink href="/god-praksis">
-                  {`Utforsk alle ${temaCount} tema i god praksis`}
-                </AkselLink>
-              </div>
-              <div className="mt-20">
-                <Heading level="3" size="medium">
-                  Nylige artikler
+
+              <div className="-mt-24 sm:-mt-12">
+                <Heading level="3" size="medium" className="text-deepblue-800">
+                  Siste fra God praksis
                 </Heading>
                 <div className="card-grid-3-1 my-6">
                   {resent.map((art: any) => (
@@ -263,7 +203,7 @@ const Forside = ({
                   ))}
                 </div>
                 <AkselLink href="/god-praksis/artikler">
-                  Utforsk alle artikler i god praksis
+                  Utforsk alle artikler i God praksis
                 </AkselLink>
               </div>
             </div>
@@ -279,9 +219,6 @@ const Forside = ({
                 variant="forside"
                 level="2"
               />
-              <AkselLink href="/produktbloggen">
-                Les flere blogginnlegg
-              </AkselLink>
             </div>
           </div>
         </main>
@@ -304,12 +241,8 @@ const Page = (props: PageProps): JSX.Element => {
   return <Forside {...props} />;
 };
 
-export interface AkselTemaT extends SanityT.Schema.aksel_tema {
-  refCount: number;
-}
-
 interface PageProps {
-  tema: AkselTemaT[];
+  tema: SanityT.Schema.aksel_tema[];
   bloggs: Partial<
     SanityT.Schema.aksel_blogg & {
       slug: string;
@@ -327,11 +260,6 @@ interface PageProps {
       tema: string[];
       contributors?: { title?: string }[];
     }[];
-  komigang: {
-    title: string;
-    slug: string;
-  }[];
-  temaCount: number;
   slug: string;
   preview: boolean;
 }
@@ -348,8 +276,6 @@ export const getStaticProps = async ({
     bloggs = null,
     tema = null,
     resent = null,
-    komigang = null,
-    temaCount = 0,
   } = await client.fetch(akselForsideQuery);
 
   return {
@@ -358,8 +284,6 @@ export const getStaticProps = async ({
       bloggs,
       page,
       resent,
-      komigang,
-      temaCount,
       slug: "/",
       preview,
       id: page?._id ?? "",
