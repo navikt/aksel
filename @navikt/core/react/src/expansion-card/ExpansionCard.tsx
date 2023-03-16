@@ -95,7 +95,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       <ExpansionCardContext.Provider
         value={{ open: open ?? _open, toggleOpen: handleOpen }}
       >
-        <div
+        <section
           {...rest}
           className={cl(
             "navds-expansioncard",
@@ -107,6 +107,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
               "navds-expansioncard--no-fade": !shouldFade.current,
             }
           )}
+          aria-label="Innholdskort"
           ref={ref}
         />
       </ExpansionCardContext.Provider>
