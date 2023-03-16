@@ -20,7 +20,7 @@ const Example = () => {
 
       <style>{`
         .subtle-card {
-          --ac-expansioncard-bg: var(--a-surface-subtle);
+          --ac-expansioncard-bg: var(--a-deepblue-50);
           --ac-expansioncard-border-open-color: var(--a-border-alt-3);
           --ac-expansioncard-border-hover-color: var(--a-border-alt-3);
         }`}</style>

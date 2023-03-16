@@ -28,7 +28,7 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Hvis man ønsker andre interaktive elementer i header, f.eks. lenker må man sette 'clickArea' til 'button'.",
+  desc: "Hvis man har andre interaktive elementer i header, f.eks. lenker må man sette 'clickArea' til 'button'. Det finnes alltids unntak, men vi anbefaler å helst unngå andre interaktive elementer i Header.",
 };
 
 const Innhold = () => (
