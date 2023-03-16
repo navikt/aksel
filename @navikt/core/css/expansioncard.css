@@ -1,0 +1,201 @@
+.navds-expansioncard {
+  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-color, var(--a-border-default));
+  --__ac-expansioncard-border-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
+  --__ac-expansioncard-border-width: 1px;
+
+  border-radius: var(--__ac-expansioncard-border-radius);
+  background-color: var(--ac-expansioncard-bg, var(--a-surface-default));
+  height: fit-content;
+}
+
+/*************************
+ * Header *
+ *************************/
+.navds-expansioncard__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--a-spacing-4);
+  padding: var(--a-spacing-3) var(--a-spacing-4);
+  border-radius: var(--__ac-expansioncard-border-radius);
+  position: relative;
+  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
+}
+
+.navds-expansioncard--small > :where(.navds-expansioncard__header) {
+  padding: var(--a-spacing-2) var(--a-spacing-4);
+}
+
+.navds-expansioncard--open > :where(.navds-expansioncard__header) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
+  border-bottom: none;
+}
+
+.navds-expansioncard__header-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--ac-expansioncard-avatar-border-radius, var(--a-border-radius-full));
+  min-height: 3rem;
+  aspect-ratio: 1/1;
+  font-size: 2rem;
+  background-color: var(--ac-expansioncard-avatar-bg, var(--a-surface-neutral-subtle));
+}
+
+.navds-expansioncard--small > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-avatar) {
+  min-height: 2rem;
+  font-size: 1.5rem;
+}
+
+.navds-expansioncard__header-content {
+  width: 100%;
+  display: grid;
+}
+
+/*************************
+ * Header/Button *
+ *************************/
+.navds-expansioncard__header-button {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--ac-expansioncard-button-border-radius, var(--a-border-radius-medium));
+  min-height: 3rem;
+  min-width: 3rem;
+  font-size: 1.5rem;
+}
+
+.navds-expansioncard--small > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-button) {
+  min-height: 2rem;
+  min-width: 2rem;
+}
+
+.navds-expansioncard--clickarea-button
+  > :where(.navds-expansioncard__header)
+  > :where(.navds-expansioncard__header-button):hover {
+  background-color: var(--a-surface-hover);
+}
+
+.navds-expansioncard__header-chevron {
+  transition: transform 150ms ease-in-out;
+}
+
+.navds-expansioncard--open :where(.navds-expansioncard__header-chevron) {
+  transform: translateY(0) rotate(180deg);
+}
+
+.navds-expansioncard__header-button:hover > :where(.navds-expansioncard__header-chevron) {
+  transform: translateY(1px);
+}
+
+.navds-expansioncard__header-button:focus {
+  outline: none;
+}
+
+.navds-expansioncard__header-button:focus-visible {
+  box-shadow: var(--a-shadow-focus);
+}
+
+.navds-expansioncard--open :where(.navds-expansioncard__header-button):hover :where(.navds-expansioncard__header-chevron) {
+  transform: translateY(-1px) rotate(180deg);
+}
+
+.navds-expansioncard__header--no-avatar-bg > :where(.navds-expansioncard__header-avatar) {
+  background-color: var(--a-surface-transparent);
+}
+
+/*************************
+ * Content *
+ *************************/
+.navds-expansioncard__content {
+  border-end-end-radius: var(--__ac-expansioncard-border-radius);
+  border-end-start-radius: var(--__ac-expansioncard-border-radius);
+  padding: var(--a-spacing-3) var(--a-spacing-4);
+  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
+  border-top: none;
+}
+
+.navds-expansioncard__content--closed {
+  display: none;
+}
+
+.navds-expansioncard__content-inner {
+  animation: fadeExpansionCard 250ms ease;
+}
+
+.navds-expansioncard--no-fade :where(.navds-expansioncard__content-inner) {
+  animation: none;
+}
+
+@keyframes fadeExpansionCard {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  40% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*************************
+ * Clickarea *
+ *************************/
+
+.navds-expansioncard--clickarea-full > :where(.navds-expansioncard__header) {
+  cursor: pointer;
+}
+
+.navds-expansioncard--clickarea-full > :where(.navds-expansioncard__header) > .navds-expansioncard__header-button::after {
+  inset: 0;
+  z-index: 1;
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+}
+
+.navds-expansioncard--clickarea-full > :where(.navds-expansioncard__header):hover {
+  background-color: var(--ac-expansioncard-header-bg-hover, var(--a-surface-hover));
+  box-shadow: 0 0 0 1px var(--__ac-expansioncard-border-color);
+}
+
+.navds-expansioncard--open {
+  --__ac-expansioncard-border-color: var(
+    --ac-expansioncard-border-open-color,
+    var(--ac-expansioncard-border-color, var(--a-border-default))
+  );
+}
+
+.navds-expansioncard--open.navds-expansioncard--clickarea-full > :where(.navds-expansioncard__header):hover {
+  background-color: var(--ac-expansioncard-header-bg-hover, var(--a-surface-hover));
+  box-shadow: 1px 0 0 0 var(--__ac-expansioncard-border-color), -1px 0 0 0 var(--__ac-expansioncard-border-color),
+    0 -1px 0 0 var(--__ac-expansioncard-border-color);
+}
+
+.navds-expansioncard--clickarea-full > :where(.navds-expansioncard__header):hover + .navds-expansioncard__content {
+  box-shadow: 1px 0 0 0 var(--__ac-expansioncard-border-color), -1px 0 0 0 var(--__ac-expansioncard-border-color),
+    0 1px 0 0 var(--__ac-expansioncard-border-color);
+}
+
+.navds-expansioncard--clickarea-full > :where(.navds-expansioncard__header):hover > :where(.navds-expansioncard__header-button) {
+  background-color: var(--a-surface-hover);
+}
+
+:where(.navds-expansioncard--clickarea-full.navds-expansioncard):hover {
+  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
+}
+
+:where(.navds-expansioncard--clickarea-full.navds-expansioncard.navds-expansioncard--open):hover {
+  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
+}

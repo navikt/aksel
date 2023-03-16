@@ -3,7 +3,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <Accordion style={{ width: "100%", maxWidth: "65ch" }}>
+    <Accordion>
       <Accordion.Item>
         <Accordion.Header>Til deg som er mellom 62 og 67 år</Accordion.Header>
         <Accordion.Content>
@@ -26,7 +26,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {
