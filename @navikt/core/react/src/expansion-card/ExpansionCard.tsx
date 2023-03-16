@@ -29,7 +29,7 @@ export interface ExpansionCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * Callback function for when the expansion card is toggled open or closed
+   * Callback for when Card is toggled open/closed
    */
   onToggle?: (open: boolean) => void;
   /**
@@ -42,15 +42,24 @@ export interface ExpansionCardProps
    * @default false
    */
   defaultOpen?: boolean;
-
   /**
-   * @defualt "medium"
+   * @default "medium"
    */
   size?: "medium" | "small";
   /**
-   *
+   * If using other interactive elements inside <ExpansionCard.Header />,
+   * set to "button" to avoid issues with interactive elements.
+   * Note: we recommend not having other interactive elements inside the header.
+   * @default "full"
    */
   clickArea?: "full" | "button";
+  /**
+   * Override default wrapper-element.
+   * Using section or article is recommended for accessibility,
+   * but note that each card will need its own unique aria-label describing the card if used.
+   * @default "div"
+   */
+  as?: "div" | "section" | "article";
 }
 
 export type ExpansionCardContextProps = {
@@ -72,6 +81,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       defaultOpen = false,
       size = "medium",
       clickArea = "full",
+      as: As = "div",
       ...rest
     },
     ref
@@ -95,7 +105,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       <ExpansionCardContext.Provider
         value={{ open: open ?? _open, toggleOpen: handleOpen }}
       >
-        <section
+        <As
           {...rest}
           className={cl(
             "navds-expansioncard",
@@ -107,7 +117,6 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
               "navds-expansioncard--no-fade": !shouldFade.current,
             }
           )}
-          aria-label="Innholdskort"
           ref={ref}
         />
       </ExpansionCardContext.Provider>
