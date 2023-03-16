@@ -5,9 +5,6 @@ import { ExpansionCardContext } from "./ExpansionCard";
 
 export interface ExpansionCardContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Content inside ExpansionCard.Content
-   */
   children: React.ReactNode;
 }
 

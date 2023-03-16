@@ -6,10 +6,11 @@ export interface ExpansionCardHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   *
+   *  Illustration or icon to be displayed
    */
   avatar?: React.ReactNode;
   /**
+   * removes gray circle behind avatar
    * @default false
    */
   hideAvatarBg?: boolean;
