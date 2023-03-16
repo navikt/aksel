@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, SackKronerIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -6,7 +6,7 @@ const Example = () => {
   return (
     <div className="grid gap-6">
       <ExpansionCard aria-label="Demo med avatar">
-        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av Sykepenger</ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
@@ -15,7 +15,7 @@ const Example = () => {
       </ExpansionCard>
       <ExpansionCard>
         <ExpansionCard.Header
-          avatar={<SackKronerIcon aria-hidden />}
+          avatar={<PlantIcon aria-hidden />}
           aria-label="Demo med avatar og description"
         >
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>

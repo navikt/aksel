@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, SackKronerIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -6,10 +6,7 @@ const Example = () => {
   return (
     <div className="grid gap-6">
       <ExpansionCard aria-label="Demo uten avatar-bakgrunn">
-        <ExpansionCard.Header
-          hideAvatarBg
-          avatar={<SackKronerIcon aria-hidden />}
-        >
+        <ExpansionCard.Header hideAvatarBg avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av Sykepenger</ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>

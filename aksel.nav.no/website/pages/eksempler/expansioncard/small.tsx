@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, SackKronerIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -14,7 +14,7 @@ const Example = () => {
         </ExpansionCard.Content>
       </ExpansionCard>
       <ExpansionCard size="small" aria-label="Small-variant med avatar">
-        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
@@ -22,7 +22,7 @@ const Example = () => {
         </ExpansionCard.Content>
       </ExpansionCard>
       <ExpansionCard size="small" aria-label="Small-variant med description">
-        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
             Du er registerert som mottaker av sykepenger fra NAV

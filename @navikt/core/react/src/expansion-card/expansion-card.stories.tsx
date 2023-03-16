@@ -1,4 +1,4 @@
-import { Star } from "@navikt/ds-icons";
+import { PlantIcon } from "@navikt/aksel-icons";
 import React, { useState } from "react";
 import { ExpansionCard } from ".";
 import { BodyLong, BodyShort } from "../typography";
@@ -70,7 +70,7 @@ export const Default = {
         aria-label="default-demo"
       >
         <ExpansionCard.Header
-          avatar={props?.avatar ? <Star aria-hidden /> : undefined}
+          avatar={props?.avatar ? <PlantIcon aria-hidden /> : undefined}
         >
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           {props.description && (
@@ -110,7 +110,7 @@ export const Description = {
         <Content />
       </ExpansionCard>
       <ExpansionCard aria-label="description og avatar">
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -127,13 +127,13 @@ export const Avatar = {
   render: () => (
     <>
       <ExpansionCard aria-label="Arbeidstakere">
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
       <ExpansionCard aria-label="Innholdspanel arbeidstakere med beskrivelse">
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -393,7 +393,7 @@ export const Sizes = {
         <Content />
       </ExpansionCard>
       <ExpansionCard aria-label="Demo med avatar">
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -409,7 +409,7 @@ export const Sizes = {
         <Content />
       </ExpansionCard>
       <ExpansionCard aria-label="Demo med avatar uten desc">
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
@@ -426,7 +426,7 @@ export const Sizes = {
         <Content />
       </ExpansionCard>
       <ExpansionCard size="small" aria-label="small-demo og avatar">
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -445,7 +445,7 @@ export const Sizes = {
         size="small"
         aria-label="small-demo med avatar uten description"
       >
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
@@ -459,7 +459,7 @@ export const HeadingSizing = {
     <>
       {(["large", "medium", "small"] as const).map((x) => (
         <ExpansionCard aria-label={`demo-${x}`}>
-          <ExpansionCard.Header avatar={<Star aria-hidden />} key={x}>
+          <ExpansionCard.Header avatar={<PlantIcon aria-hidden />} key={x}>
             <ExpansionCard.Title size={x}>{x}</ExpansionCard.Title>
             <ExpansionCard.Description>
               For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -477,7 +477,7 @@ export const ClickArea = {
   render: () => (
     <>
       <ExpansionCard clickArea="full" aria-label="clickarea-full demo">
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Full clickarea</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -488,7 +488,7 @@ export const ClickArea = {
       </ExpansionCard>
 
       <ExpansionCard clickArea="button" aria-label="clickarea-button demo">
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Only button</ExpansionCard.Title>
           <ExpansionCard.Description>
             <BodyShort spacing as="span">
@@ -507,7 +507,7 @@ export const ClickArea = {
 export const DefaultOpen = {
   render: () => (
     <ExpansionCard defaultOpen aria-label="defaultOpen demo">
-      <ExpansionCard.Header avatar={<Star aria-hidden />}>
+      <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
         <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         <ExpansionCard.Description>
           For at yrkesskadedekningen skal gjelde, er det som hovedregel krav til
@@ -529,7 +529,7 @@ export const ControlledState = {
         onToggle={setOpen}
         aria-label="Controlled-state demo"
       >
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -546,7 +546,7 @@ export const Customization = {
   render: () => (
     <div className="subtle-card">
       <ExpansionCard aria-label="custom-styling demo">
-        <ExpansionCard.Header avatar={<Star aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav

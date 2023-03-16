@@ -1,11 +1,11 @@
-import { ExternalLinkIcon, StarIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
     <ExpansionCard clickArea="button" aria-label="Demo med clickArea button">
-      <ExpansionCard.Header avatar={<StarIcon aria-hidden />}>
+      <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
         <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
         <ExpansionCard.Description>
           Du er registerert som mottaker av sykepenger fra NAV

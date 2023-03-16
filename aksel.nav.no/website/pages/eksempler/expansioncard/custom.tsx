@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, SackKronerIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -6,7 +6,7 @@ const Example = () => {
   return (
     <div className="subtle-card">
       <ExpansionCard aria-label="Demo med custom-styling">
-        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
