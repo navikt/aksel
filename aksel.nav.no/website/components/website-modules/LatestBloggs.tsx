@@ -1,12 +1,10 @@
-import Image from "next/legacy/image";
-import NextLink from "next/link";
+import { SanityT, urlFor } from "@/lib";
+import { SanityBlockContent } from "@/sanity-block";
 import { dateStr } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import { SanityT, urlFor } from "@/lib";
-import cl from "clsx";
 import { getImage } from "components/website-modules/utils/get-image";
-import { SanityBlockContent } from "@/sanity-block";
-import AkselLink from "components/website-modules/AkselLink";
+import Image from "next/legacy/image";
+import NextLink from "next/link";
 
 export type BloggPageT = Partial<
   SanityT.Schema.aksel_blogg & {
@@ -21,13 +19,11 @@ export const getAuthors = (blog: BloggPageT) =>
 export const LatestBloggposts = ({
   bloggs,
   title,
-  variant = "blogg",
   level = "1",
   intro,
 }: {
   bloggs: BloggPageT[];
   title: string;
-  variant?: "blogg" | "forside";
   level?: "1" | "2";
   intro?: any[];
 }) => {
@@ -36,18 +32,11 @@ export const LatestBloggposts = ({
   }
 
   return (
-    <div
-      className={cl({
-        "mt-20": variant === "blogg",
-      })}
-    >
+    <div className="mt-20">
       <Heading
         level={level}
         size="xlarge"
-        className={cl(
-          "text-deepblue-700 mx-auto w-full md:mx-0 md:max-w-none",
-          { "text-5xl": variant === "blogg" }
-        )}
+        className="text-deepblue-700 mx-auto w-full text-5xl md:mx-0 md:max-w-none"
       >
         {title}
       </Heading>
@@ -169,11 +158,6 @@ export const LatestBloggposts = ({
               </div>
             </div>
           ))}
-          {variant === "forside" && (
-            <AkselLink href="/produktbloggen" className="h-fit self-end">
-              Les flere blogginnlegg
-            </AkselLink>
-          )}
         </div>
       </div>
 
@@ -284,11 +268,6 @@ export const LatestBloggposts = ({
               </div>
             </div>
           ))}
-          {variant === "forside" && (
-            <AkselLink href="/produktbloggen" className="self-end">
-              Les flere blogginnlegg
-            </AkselLink>
-          )}
         </div>
       </div>
     </div>
