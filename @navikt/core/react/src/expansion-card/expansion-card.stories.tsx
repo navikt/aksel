@@ -125,13 +125,16 @@ export const Description = {
 export const Avatar = {
   render: () => (
     <>
-      <ExpansionCard>
+      <ExpansionCard as="section" aria-label="Innholdspanel arbeidstakere">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard>
+      <ExpansionCard
+        as="section"
+        aria-label="Innholdspanel arbeidstakere med beskrivelse"
+      >
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
