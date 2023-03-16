@@ -33,7 +33,7 @@ const ArtikkelCard = ({
     : _updatedAt;
 
   return (
-    <div className="hover:shadow-small focus-within:ring-border-focus bg-surface-default ring-border-subtle group relative rounded-lg p-5 pb-16 ring-1 focus-within:ring-[3px]">
+    <div className="hover:shadow-small focus-within:ring-border-focus bg-surface-default ring-border-subtle group relative rounded-lg p-3 pb-16 ring-1 focus-within:ring-[3px] sm:p-5 sm:pb-16">
       <NextLink
         href={{
           pathname: `/${slug}`,

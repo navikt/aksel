@@ -1,6 +1,6 @@
-import { FeedbackT } from "@/lib";
-import { IdContext } from "@/utils";
-import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
+import { Button, Label, Textarea } from "@navikt/ds-react";
+import { IdContext } from "components/website-modules/utils/contexts/id-context";
+import { FeedbackT } from "lib/types/types";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
@@ -55,7 +55,7 @@ const FooterForm = () => {
 
   return (
     <>
-      <div className="flex w-full max-w-md flex-col gap-8" data-theme="dark">
+      <div className="flex w-full max-w-md flex-col" data-theme="dark">
         <div aria-live="polite">
           {sent.status && (
             <Label spacing as="p">
@@ -65,15 +65,12 @@ const FooterForm = () => {
         </div>
         {!sent.status && (
           <form onSubmit={(e) => handleSubmit(e)} className="w-full">
-            <div className="mb-4 flex flex-col gap-4">
-              <Heading level="2" size="small">
-                Gi en tilbakemelding
-              </Heading>
+            <div className="mb-3 flex flex-col gap-4">
               <Textarea
                 className="textarea-override"
                 error={contentError.content}
                 autoComplete="off"
-                label="Melding"
+                label="Gi oss en tilbakemelding"
                 value={contactForm.content}
                 onChange={(e) => {
                   setContactForm({
@@ -85,13 +82,14 @@ const FooterForm = () => {
                     e.target.value.trim().length !== 0 &&
                     setContentError({ ...contentError, content: "" });
                 }}
-                description="Ikke skriv inn navn eller andre personopplysninger"
+                description="Ikke skriv inn personopplysninger"
                 minRows={2}
               />
             </div>
-            {contactForm.hasWritten && <Button>Send melding</Button>}
+            <Button size="small">Send melding</Button>
             <style>{`.textarea-override {
-              --ac-textarea-bg: var(--a-deepblue-800);
+              --ac-textarea-bg: var(--a-surface-default);
+              --ac-textarea-text: var(--a-text-default);
             }`}</style>
           </form>
         )}

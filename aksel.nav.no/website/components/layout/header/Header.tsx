@@ -72,7 +72,7 @@ export const Header = ({
               }
               className="focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
             >
-              <Logo />
+              <Logo className="text-deepblue-800" />
               <span className="sr-only">Aksel</span>
             </Link>
           </div>
