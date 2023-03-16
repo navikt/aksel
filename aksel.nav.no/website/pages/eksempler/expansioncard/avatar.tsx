@@ -13,11 +13,8 @@ const Example = () => {
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
-      <ExpansionCard>
-        <ExpansionCard.Header
-          avatar={<PlantIcon aria-hidden />}
-          aria-label="Demo med avatar og description"
-        >
+      <ExpansionCard aria-label="Demo med avatar og description">
+        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
             Du er registerert som mottaker av sykepenger fra NAV
