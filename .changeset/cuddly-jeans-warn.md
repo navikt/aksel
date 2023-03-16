@@ -3,4 +3,4 @@
 "@navikt/ds-react": minor
 ---
 
-Ny komponent: ExpansionCard. Oppfølger fra gammel Ekspanderbartpanel
+:tada: Ny komponent! ExpansionCard. Oppfølger fra gammel Ekspanderbartpanel.
