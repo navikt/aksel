@@ -17,7 +17,6 @@ import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCard
 import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
-import { LatestBloggposts } from "components/website-modules/LatestBloggs";
 import { ToolCard } from "components/website-modules/ToolsCard";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { PreviewSuspense } from "next-sanity/preview";
@@ -26,7 +25,7 @@ import { lazy, useEffect, useState } from "react";
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
+const Forside = ({ page, tema, resent }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -212,14 +211,6 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
             <div className="centered-layout -translate-y-1/2">
               <ToolCard />
             </div>
-            <div className="centered-layout -mt-16 grid max-w-screen-2xl md:mt-8 ">
-              <LatestBloggposts
-                bloggs={bloggs}
-                title="Siste fra bloggen"
-                variant="forside"
-                level="2"
-              />
-            </div>
           </div>
         </main>
 
@@ -243,12 +234,6 @@ const Page = (props: PageProps): JSX.Element => {
 
 interface PageProps {
   tema: SanityT.Schema.aksel_tema[];
-  bloggs: Partial<
-    SanityT.Schema.aksel_blogg & {
-      slug: string;
-      contributors?: { title?: string }[];
-    }
-  >[];
   page: {
     title: string;
     god_praksis_intro: string;
@@ -273,7 +258,6 @@ export const getStaticProps = async ({
 
   const {
     page = null,
-    bloggs = null,
     tema = null,
     resent = null,
   } = await client.fetch(akselForsideQuery);
@@ -281,7 +265,6 @@ export const getStaticProps = async ({
   return {
     props: {
       tema,
-      bloggs,
       page,
       resent,
       slug: "/",

@@ -211,11 +211,6 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
   "page": {
     ...,
   },
-  "bloggs": *[_type == "aksel_blogg"] | order(_createdAt desc)[0...4]{
-    ...,
-    "slug": slug.current,
-    ${contributorsAll}
-  },
   "tema": *[_type == "aksel_tema" && defined(seksjoner[].sider[])],
   "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
     _id,
