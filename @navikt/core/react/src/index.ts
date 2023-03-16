@@ -5,6 +5,7 @@ export * from "./chat";
 export * from "./chips";
 export * from "./date";
 export * from "./form";
+export * from "./expansion-card";
 export * from "./grid";
 export * from "./guide-panel";
 export * from "./help-text";

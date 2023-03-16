@@ -28,6 +28,8 @@ const SuggestionBlockComponent = ({
           as="a"
           href={options[variant].link + reference}
           className="mt-4 w-fit"
+          target="_blank"
+          rel="noreferrer noopener"
         >
           Send innspill
         </Button>
@@ -56,6 +58,8 @@ const SuggestionBlockIcon = ({
           as="a"
           href={options[variant].link + reference}
           className="mt-4 w-fit"
+          target="_blank"
+          rel="noreferrer noopener"
         >
           Send innspill
         </Button>
@@ -106,6 +110,8 @@ export const SuggestionBlock = ({
         variant="secondary-neutral"
         as="a"
         href={options[variant]?.link + reference}
+        target="_blank"
+        rel="noreferrer noopener"
       >
         Send forslag
       </Button>

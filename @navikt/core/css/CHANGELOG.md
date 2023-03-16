@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.7.8
+
+### Patch Changes
+
+- [#1863](https://github.com/navikt/aksel/pull/1863) [`7ace69f21`](https://github.com/navikt/aksel/commit/7ace69f215760bbb5bf997670c897403d8ee558d) Thanks [@it-vegard](https://github.com/it-vegard)! - Added focus indicator for tabpanel
+
 ## 2.7.7
 
 ## 2.7.6

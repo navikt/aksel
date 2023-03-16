@@ -35,5 +35,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "Vi anbefaler å bruke UNSAFE_useRangeDatepicker-hook hvis man har input-felter",
+  desc: "Før du belger å bruke range, vurder om to enkelte datepickere for start/slutt-dato ville vært bedre. Range fungerer bedre for korte perioder innenfor en månede.",
 };
