@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { ExpansionCardContext } from "./ExpansionCard";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 
 export interface ExpansionCardHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -56,24 +57,7 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           aria-expanded={panelContext.open}
         >
           <span className="navds-sr-only">Vis mer</span>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden
-            focusable={false}
-            className="navds-expansioncard__header-chevron"
-          >
-            <path
-              d="M17.5 9.5L12 15L6.5 9.5"
-              stroke="var(--a-text-default)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ChevronDownIcon className="navds-expansioncard__header-chevron" />
         </button>
       </div>
     );
