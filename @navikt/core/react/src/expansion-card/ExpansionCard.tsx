@@ -56,7 +56,7 @@ export interface ExpansionCardProps
   /**
    * Override default wrapper-element.
    * Using section or article is recommended for accessibility,
-   * but note that each card will need its own unique aria-label describing the card if used.
+   * but note that each card will need its own unique aria-label describing the card when section is used.
    * @default "div"
    */
   as?: "div" | "section" | "article";
