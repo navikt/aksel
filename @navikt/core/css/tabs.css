@@ -108,6 +108,7 @@
   font-size: 1.5rem;
 }
 
-.navds-tabs__tabpanel:focus {
+.navds-tabs__tabpanel:focus-visible {
   outline: none;
+  box-shadow: var(--a-shadow-focus);
 }
