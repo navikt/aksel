@@ -110,5 +110,5 @@
 
 .navds-tabs__tabpanel:focus-visible {
   outline: none;
-  box-shadow: var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 2px var(--a-border-focus);
 }
