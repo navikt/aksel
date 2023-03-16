@@ -104,7 +104,6 @@ export const GlobalSearch = () => {
       )
         .then((x) => x.json())
         .then((res) => {
-          console.log(res);
           setResults(res);
           logSearchAttempt(res?.hits?.totalHits ?? 0, "standard");
           setLoading(false);
