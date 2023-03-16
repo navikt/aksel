@@ -5,7 +5,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="subtle-card">
-      <ExpansionCard>
+      <ExpansionCard aria-label="Demo med custom-styling">
         <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -37,7 +37,7 @@ export const Demo = {
 
 export const args = {
   index: 8,
-  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser. Hvis du ønsker egne varianter av ExpansionCard anbefaler vi at du bruker tokens for å gjøre de nødvendige stilendringe. Vi ønsker gjerne å høre mer om hvordan dette fungerer for dere! Hvis dere har laget et 'eget' panel ønsker vi gjerne å lære mer.",
+  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser.",
 };
 
 const Innhold = () => (

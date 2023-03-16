@@ -5,7 +5,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="grid gap-6">
-      <ExpansionCard size="small">
+      <ExpansionCard size="small" aria-label="Small-variant">
         <ExpansionCard.Header>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
         </ExpansionCard.Header>
@@ -13,7 +13,7 @@ const Example = () => {
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
-      <ExpansionCard size="small">
+      <ExpansionCard size="small" aria-label="Small-variant med avatar">
         <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
         </ExpansionCard.Header>
@@ -21,7 +21,7 @@ const Example = () => {
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
-      <ExpansionCard size="small">
+      <ExpansionCard size="small" aria-label="Small-variant med description">
         <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>

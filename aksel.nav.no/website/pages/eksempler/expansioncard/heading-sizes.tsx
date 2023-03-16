@@ -5,7 +5,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="grid gap-6">
-      <ExpansionCard>
+      <ExpansionCard aria-label="Heading-size large demo">
         <ExpansionCard.Header>
           <ExpansionCard.Title as="h2" size="large">
             Utbetaling av sykepenger
@@ -15,7 +15,7 @@ const Example = () => {
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
-      <ExpansionCard>
+      <ExpansionCard aria-label="Heading-size medium demo">
         <ExpansionCard.Header>
           <ExpansionCard.Title as="h3" size="medium">
             Utbetaling av sykepenger
@@ -25,7 +25,7 @@ const Example = () => {
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
-      <ExpansionCard>
+      <ExpansionCard aria-label="Heading-size small demo">
         <ExpansionCard.Header>
           <ExpansionCard.Title as="h4" size="small">
             Utbetaling av sykepenger

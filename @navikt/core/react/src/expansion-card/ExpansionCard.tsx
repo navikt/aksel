@@ -54,12 +54,9 @@ export interface ExpansionCardProps
    */
   clickArea?: "full" | "button";
   /**
-   * Override default wrapper-element.
-   * Using section is recommended for accessibility,
-   * but note that each card will need its own unique aria-label describing the card when section is used.
-   * @default "div"
+   * Since ExpansionCard is a section-element, accessible name is required.
    */
-  as?: "div" | "section";
+  ["aria-label"]: string;
 }
 
 export type ExpansionCardContextProps = {
@@ -81,7 +78,6 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       defaultOpen = false,
       size = "medium",
       clickArea = "full",
-      as: As = "div",
       ...rest
     },
     ref
@@ -105,7 +101,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       <ExpansionCardContext.Provider
         value={{ open: open ?? _open, toggleOpen: handleOpen }}
       >
-        <As
+        <section
           {...rest}
           className={cl(
             "navds-expansioncard",

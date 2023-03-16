@@ -5,7 +5,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="grid gap-6">
-      <ExpansionCard>
+      <ExpansionCard aria-label="Demo med avatar">
         <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
           <ExpansionCard.Title>Utbetaling av Sykepenger</ExpansionCard.Title>
         </ExpansionCard.Header>
@@ -14,7 +14,10 @@ const Example = () => {
         </ExpansionCard.Content>
       </ExpansionCard>
       <ExpansionCard>
-        <ExpansionCard.Header avatar={<SackKronerIcon aria-hidden />}>
+        <ExpansionCard.Header
+          avatar={<SackKronerIcon aria-hidden />}
+          aria-label="Demo med avatar og description"
+        >
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
             Du er registerert som mottaker av sykepenger fra NAV

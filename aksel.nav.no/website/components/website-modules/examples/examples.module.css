@@ -10,7 +10,7 @@
 .containerStatic {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   padding: 1.5rem 1rem;
 }
 

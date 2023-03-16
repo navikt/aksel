@@ -5,7 +5,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="grid gap-6">
-      <ExpansionCard>
+      <ExpansionCard aria-label="Demo uten avatar-bakgrunn">
         <ExpansionCard.Header
           hideAvatarBg
           avatar={<SackKronerIcon aria-hidden />}

@@ -67,6 +67,7 @@ export const Default = {
         {...props}
         open={props?.open || undefined}
         size={props.size}
+        aria-label="default-demo"
       >
         <ExpansionCard.Header
           avatar={props?.avatar ? <Star aria-hidden /> : undefined}
@@ -98,7 +99,7 @@ export const Default = {
 export const Description = {
   render: () => (
     <>
-      <ExpansionCard>
+      <ExpansionCard aria-label="bare description">
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -108,7 +109,7 @@ export const Description = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard>
+      <ExpansionCard aria-label="description og avatar">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -125,16 +126,13 @@ export const Description = {
 export const Avatar = {
   render: () => (
     <>
-      <ExpansionCard as="section" aria-label="Innholdspanel arbeidstakere">
+      <ExpansionCard aria-label="Arbeidstakere">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard
-        as="section"
-        aria-label="Innholdspanel arbeidstakere med beskrivelse"
-      >
+      <ExpansionCard aria-label="Innholdspanel arbeidstakere med beskrivelse">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -144,7 +142,7 @@ export const Avatar = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard>
+      <ExpansionCard aria-label="Arbeidstakere">
         <ExpansionCard.Header
           hideAvatarBg
           avatar={
@@ -256,7 +254,7 @@ export const Avatar = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard>
+      <ExpansionCard aria-label="Arbeidstakere">
         <ExpansionCard.Header
           avatar={
             <svg
@@ -384,7 +382,7 @@ export const Sizes = {
   render: () => (
     <>
       <h2>Medium</h2>
-      <ExpansionCard>
+      <ExpansionCard aria-label="Demo med description">
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -394,7 +392,7 @@ export const Sizes = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard>
+      <ExpansionCard aria-label="Demo med avatar">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -404,20 +402,20 @@ export const Sizes = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard>
+      <ExpansionCard aria-label="Demo">
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard>
+      <ExpansionCard aria-label="Demo med avatar uten desc">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
       <h2>Small</h2>
-      <ExpansionCard size="small">
+      <ExpansionCard size="small" aria-label="small-demo">
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -427,7 +425,7 @@ export const Sizes = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard size="small">
+      <ExpansionCard size="small" aria-label="small-demo og avatar">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -437,13 +435,16 @@ export const Sizes = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard size="small">
+      <ExpansionCard size="small" aria-label="small-demo uten description">
         <ExpansionCard.Header>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-      <ExpansionCard size="small">
+      <ExpansionCard
+        size="small"
+        aria-label="small-demo med avatar uten description"
+      >
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         </ExpansionCard.Header>
@@ -457,7 +458,7 @@ export const HeadingSizing = {
   render: () => (
     <>
       {(["large", "medium", "small"] as const).map((x) => (
-        <ExpansionCard>
+        <ExpansionCard aria-label={`demo-${x}`}>
           <ExpansionCard.Header avatar={<Star aria-hidden />} key={x}>
             <ExpansionCard.Title size={x}>{x}</ExpansionCard.Title>
             <ExpansionCard.Description>
@@ -475,7 +476,7 @@ export const HeadingSizing = {
 export const ClickArea = {
   render: () => (
     <>
-      <ExpansionCard clickArea="full">
+      <ExpansionCard clickArea="full" aria-label="clickarea-full demo">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Full clickarea</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -486,7 +487,7 @@ export const ClickArea = {
         <Content />
       </ExpansionCard>
 
-      <ExpansionCard clickArea="button">
+      <ExpansionCard clickArea="button" aria-label="clickarea-button demo">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Only button</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -505,7 +506,7 @@ export const ClickArea = {
 
 export const DefaultOpen = {
   render: () => (
-    <ExpansionCard defaultOpen>
+    <ExpansionCard defaultOpen aria-label="defaultOpen demo">
       <ExpansionCard.Header avatar={<Star aria-hidden />}>
         <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         <ExpansionCard.Description>
@@ -523,7 +524,11 @@ export const ControlledState = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open, setOpen] = useState(false);
     return (
-      <ExpansionCard open={open} onToggle={setOpen}>
+      <ExpansionCard
+        open={open}
+        onToggle={setOpen}
+        aria-label="Controlled-state demo"
+      >
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
@@ -540,7 +545,7 @@ export const ControlledState = {
 export const Customization = {
   render: () => (
     <div className="subtle-card">
-      <ExpansionCard>
+      <ExpansionCard aria-label="custom-styling demo">
         <ExpansionCard.Header avatar={<Star aria-hidden />}>
           <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
           <ExpansionCard.Description>
