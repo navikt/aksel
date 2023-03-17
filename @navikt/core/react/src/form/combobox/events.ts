@@ -12,6 +12,7 @@ export const keyDownHandler = (
     handleClear,
     toggleOption,
     filteredOptionsIndex,
+    filteredOptionsRef,
   }
 ) => {
   switch (e.key) {
@@ -27,17 +28,32 @@ export const keyDownHandler = (
       e.preventDefault();
       toggleOption();
       break;
-    case "ArrowDown":
+    case "ArrowDown": {
       e.preventDefault();
-      setFilteredOptionsIndex(
-        Math.min(filteredOptionsIndex + 1, filteredOptions.length - 1)
+      const newIndex = Math.min(
+        filteredOptionsIndex + 1,
+        filteredOptions.length - 1
       );
+      setFilteredOptionsIndex(newIndex);
+      scrollToOption(newIndex, filteredOptionsRef);
       break;
-    case "ArrowUp":
+    }
+    case "ArrowUp": {
       e.preventDefault();
-      setFilteredOptionsIndex(Math.max(0, filteredOptionsIndex - 1));
+      const newIndex = Math.max(0, filteredOptionsIndex - 1);
+      setFilteredOptionsIndex(newIndex);
+      scrollToOption(newIndex, filteredOptionsRef);
       break;
+    }
     default:
       break;
   }
+};
+
+const scrollToOption = (newIndex: number, filteredOptionsRef: any) => {
+  const child = filteredOptionsRef.current.children[newIndex];
+  const { top, bottom } = child.getBoundingClientRect();
+  const parentRect = filteredOptionsRef.current.getBoundingClientRect();
+  if (top < parentRect.top || bottom > parentRect.bottom)
+    child.scrollIntoView({ block: "nearest" });
 };

@@ -12,13 +12,14 @@ import usePrevious from "../../util/usePrevious";
 import { useFormField } from "../useFormField";
 import ClearButton from "./ClearButton";
 import { keyDownHandler } from "./events";
-import Options from "./Options";
+import Options from "./FilteredOptions";
 import SelectedOptions from "./SelectedOptions";
 import ToggleListButton from "./ToggleListButton";
 
 import { ComboboxClearEvent, ComboboxProps } from "./types";
 
-const normalizeText = (text) => (text ? text.toLowerCase().trim() : "");
+const normalizeText = (text: string) =>
+  typeof text === "string" ? text.toLowerCase().trim() : "";
 
 export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
@@ -42,7 +43,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       clearButtonLabel,
       toggleListButton = true,
       toggleListButtonLabel,
-      defaultValue,
       isListOpen,
       id = "",
       setOptions,
@@ -64,13 +64,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
     const [isInternalListOpen, setInternalListOpen] = useState<boolean | null>(
       isListOpen
     );
     const prevSelectedOptions = usePrevious(selectedOptions);
-    const [internalValue, setInternalValue] = useState<string>(
-      defaultValue ? String(defaultValue) : ""
-    );
+    const [internalValue, setInternalValue] = useState<string>("");
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
 
     const filteredOptions = useMemo(() => {
@@ -83,15 +82,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       } else {
         return options;
       }
-    }, [internalValue, options]);
-
-    const isInternalValueNew = useMemo(() => {
-      return (
-        Boolean(internalValue) &&
-        !options?.find(
-          (option) => normalizeText(option) === normalizeText(internalValue)
-        )
-      );
     }, [internalValue, options]);
 
     const handleChange = useCallback(
@@ -172,6 +162,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         handleClear,
         toggleOption,
         filteredOptionsIndex,
+        filteredOptionsRef,
       })
     );
 
@@ -240,7 +231,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 ref={mergedInputRef}
                 {...omit(rest, ["error", "errorId", "size"])}
                 {...inputProps}
-                value={value ?? internalValue}
+                value={value}
                 onChange={(e) => handleChange(e.target.value)}
                 type="search"
                 role="combobox"
@@ -259,7 +250,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 )}
               />
             </SelectedOptions>
-            {(value ?? internalValue) && clearButton && (
+            {value && clearButton && (
               <ClearButton
                 handleClear={(event) =>
                   handleClear({ trigger: "Click", event })
@@ -277,8 +268,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           </div>
           <Options
             id={id}
+            ref={filteredOptionsRef}
             internalValue={internalValue}
-            isInternalValueNew={isInternalValueNew}
             filteredOptions={filteredOptions}
             filteredOptionsIndex={filteredOptionsIndex}
             selectedOptions={selectedOptions}
