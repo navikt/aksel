@@ -1,5 +1,13 @@
 # @navikt/ds-react-internal
 
+## 2.8.1
+
+### Patch Changes
+
+- Updated dependencies [[`1276b4d7e`](https://github.com/navikt/aksel/commit/1276b4d7efd831d20345292dbb21a11d100a0ddd)]:
+  - @navikt/ds-react@2.8.1
+  - @navikt/ds-icons@2.8.1
+
 ## 2.8.0
 
 ### Patch Changes
