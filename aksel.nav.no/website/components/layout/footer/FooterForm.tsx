@@ -55,7 +55,10 @@ const FooterForm = () => {
 
   return (
     <>
-      <div className="flex w-full max-w-md flex-col" data-theme="dark">
+      <div
+        className="flex w-full max-w-md flex-col lg:col-span-2 xl:col-span-1"
+        data-theme="dark"
+      >
         <div aria-live="polite">
           {sent.status && (
             <Label spacing as="p">
