@@ -24,6 +24,7 @@ export const ExpansionCardTitle: ExpansionCardTitleType = forwardRef(
       ref={ref}
       className={cl(
         "navds-expansioncard__title",
+        `navds-expansioncard__title--${size}`,
         "navds-heading",
         `navds-heading--${size}`,
         className

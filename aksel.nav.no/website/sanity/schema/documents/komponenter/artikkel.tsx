@@ -59,11 +59,18 @@ export const KomponentArtikkel = defineType({
           },
           validation: (Rule) => Rule.required(),
         },
-        {
+        defineField({
+          name: "unsafe",
+          title: "Unsafe",
+          description: "Er komponenten Beta + UNSAFE-prefikset?",
+          type: "boolean",
+          hidden: ({ parent }) => !(parent?.tag === "beta"),
+        }),
+        defineField({
           name: "bilde",
           title: "Thumbnail",
           type: "image",
-        },
+        }),
       ],
       options: {
         collapsible: true,

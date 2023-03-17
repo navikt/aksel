@@ -174,7 +174,7 @@ const Forside = ({
                     )}
                   </button>
                 )}
-                <div>
+                <div className="px-2 sm:px-6">
                   <Heading
                     level="2"
                     size="xlarge"

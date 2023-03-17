@@ -6,15 +6,6 @@ import { ChevronDownIcon } from "@navikt/aksel-icons";
 export interface ExpansionCardHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  /**
-   *  Illustration or icon to be displayed
-   */
-  avatar?: React.ReactNode;
-  /**
-   * removes gray circle behind avatar
-   * @default false
-   */
-  hideAvatarBg?: boolean;
 }
 
 export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
@@ -22,7 +13,7 @@ export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
 >;
 
 const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
-  ({ children, className, avatar, hideAvatarBg = false, ...rest }, ref) => {
+  ({ children, className, ...rest }, ref) => {
     const panelContext = useContext(ExpansionCardContext);
 
     if (panelContext === null) {
@@ -36,19 +27,9 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
       <div
         ref={ref}
         {...rest}
-        className={cl("navds-expansioncard__header", className, {
-          "navds-expansioncard__header--no-avatar-bg": hideAvatarBg,
-        })}
+        className={cl("navds-expansioncard__header", className)}
       >
-        {avatar && (
-          <span
-            className={cl("navds-expansioncard__header-avatar")}
-            aria-hidden
-          >
-            {avatar}
-          </span>
-        )}
-        <span className="navds-expansioncard__header-content">{children}</span>
+        <div className="navds-expansioncard__header-content">{children}</div>
 
         <button
           className="navds-expansioncard__header-button"
@@ -56,8 +37,10 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           type="button"
           aria-expanded={panelContext.open}
         >
-          <span className="navds-sr-only">Vis mer</span>
-          <ChevronDownIcon className="navds-expansioncard__header-chevron" />
+          <ChevronDownIcon
+            className="navds-expansioncard__header-chevron"
+            title="Vis mer"
+          />
         </button>
       </div>
     );

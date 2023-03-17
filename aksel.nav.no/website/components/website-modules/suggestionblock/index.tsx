@@ -6,9 +6,11 @@ import { ChangeLogIconOutline } from "components/assets";
 const SuggestionBlockComponent = ({
   variant,
   reference = "",
+  unsafe = false,
 }: {
   variant: "komponent-beta" | "komponent-ny";
   reference?: string;
+  unsafe?: boolean;
 }) => {
   return (
     <div
@@ -22,7 +24,11 @@ const SuggestionBlockComponent = ({
         <Heading size="small" level="2">
           {options[variant]?.heading}
         </Heading>
-        <BodyLong className="mt-2">{options[variant]?.text}</BodyLong>
+        <BodyLong className="mt-2">
+          {variant === "komponent-beta" && unsafe
+            ? options["komponent-beta-unsafe"].text
+            : options[variant]?.text}
+        </BodyLong>
         <Button
           variant="secondary-neutral"
           as="a"
@@ -71,6 +77,7 @@ const SuggestionBlockIcon = ({
 export const SuggestionBlock = ({
   variant,
   reference = "",
+  unsafe,
 }: {
   variant:
     | "ikoner"
@@ -82,9 +89,16 @@ export const SuggestionBlock = ({
     | "ikon-not-found"
     | "ikon";
   reference?: string;
+  unsafe?: boolean;
 }) => {
   if (variant === "komponent-ny" || variant === "komponent-beta") {
-    return <SuggestionBlockComponent variant={variant} reference={reference} />;
+    return (
+      <SuggestionBlockComponent
+        variant={variant}
+        unsafe={unsafe}
+        reference={reference}
+      />
+    );
   }
 
   if (variant === "ikon-ny" || variant === "ikon") {
@@ -171,7 +185,45 @@ const options: {
     icon: <ChangeLogIconOutline />,
   },
   "komponent-beta": {
-    text: "Komponenten er under utvikling. Dette kan medføre bugs slik at teamet ditt må ta stilling til om dere ønsker å bruke denne i produksjon. Hvis komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i patch/minor versjon av kodepakker og i Figma. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
+    text: "Komponenten er under utvikling, men klar for adopsjon. Vi er ønsker gjerne innspill på hvordan den fungerer og hvilken forbedringer vi kan gjøre.",
+    link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩%2Cbeta+🧪&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+    heading: "Beta",
+    icon: (
+      <svg
+        width="25"
+        height="24"
+        viewBox="0 0 25 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        focusable={false}
+        aria-hidden
+      >
+        <path
+          d="M14.5471 3.99994H10.4528V9.48408L4.83594 17.1731C3.94768 18.3891 4.92474 19.9999 6.55053 19.9999H18.4495C20.0753 19.9999 21.0523 18.3891 20.1641 17.1731L14.5471 9.48408V3.99994Z"
+          stroke="#262626"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9.5 4H15.5"
+          stroke="#262626"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M8.75 12L16.25 12"
+          stroke="#262626"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  "komponent-beta-unsafe": {
+    text: "Komponenten er under utvikling. Så lenge komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i minor versjon av kodepakker og i Figma. Teamet ditt må ta selv ta stilling til om dere ønsker å bruke denne i produksjon.",
     link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩%2Cbeta+🧪&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
     heading: "Beta",
     icon: (

@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -6,7 +6,7 @@ const Example = () => {
   return (
     <div className="subtle-card">
       <ExpansionCard aria-label="Demo med custom-styling">
-        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
+        <ExpansionCard.Header>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
@@ -36,7 +36,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 8,
+  index: 4,
   desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser.",
 };
 

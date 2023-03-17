@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
-import { BodyShort } from "../typography/BodyShort";
+import { BodyLong } from "../typography/BodyLong";
 
 interface ExpansionCardDescriptionProps
   extends React.HTMLAttributes<HTMLParagraphElement> {
@@ -13,7 +13,7 @@ export type ExpansionCardDescriptionType = React.ForwardRefExoticComponent<
 
 export const ExpansionCardDescription: ExpansionCardDescriptionType =
   forwardRef(({ className, ...rest }, ref) => (
-    <BodyShort
+    <BodyLong
       {...rest}
       as="p"
       ref={ref}
