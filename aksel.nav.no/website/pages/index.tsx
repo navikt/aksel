@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Footer } from "@/layout";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import {
@@ -14,7 +16,6 @@ import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
-import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { ToolCard } from "components/website-modules/ToolsCard";
@@ -25,7 +26,12 @@ import { lazy, useEffect, useState } from "react";
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({ page, tema, resent }: PageProps): JSX.Element => {
+const Forside = ({
+  page,
+  tema,
+  resent,
+  curatedResent,
+}: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -54,6 +60,8 @@ const Forside = ({ page, tema, resent }: PageProps): JSX.Element => {
       );
     })
     .sort((a, b) => a.title.localeCompare(b.title));
+
+  console.log(curatedResent);
 
   return (
     <>
@@ -187,23 +195,28 @@ const Forside = ({ page, tema, resent }: PageProps): JSX.Element => {
                 </ul>
               </div>
 
+              {/* Siste fra aksel */}
               <div className="-mt-24 sm:-mt-12">
                 <Heading level="3" size="medium" className="text-deepblue-800">
-                  Siste fra God praksis
+                  Siste fra Aksel
                 </Heading>
-                <div className="card-grid-3-1 my-6">
-                  {resent.map((art: any) => (
-                    <ArtikkelCard
-                      level="4"
-                      variant="tema"
-                      {...art}
-                      key={art._id}
-                    />
-                  ))}
-                </div>
-                <AkselLink href="/god-praksis/artikler">
-                  Utforsk alle artikler i God praksis
-                </AkselLink>
+                {/* Featured */}
+                <div></div>
+                {/* Masonary-cloud */}
+                <ResponsiveMasonry
+                  columnsCountBreakPoints={{ 480: 1, 768: 2, 1024: 3 }}
+                >
+                  <Masonry gutter="1.5rem">
+                    {resent.map((art: any) => (
+                      <ArtikkelCard
+                        level="4"
+                        variant="tema"
+                        {...art}
+                        key={art._id}
+                      />
+                    ))}
+                  </Masonry>
+                </ResponsiveMasonry>
               </div>
             </div>
           </div>
@@ -245,6 +258,7 @@ interface PageProps {
       tema: string[];
       contributors?: { title?: string }[];
     }[];
+  curatedResent: any;
   slug: string;
   preview: boolean;
 }
@@ -260,6 +274,7 @@ export const getStaticProps = async ({
     page = null,
     tema = null,
     resent = null,
+    curatedResent = null,
   } = await client.fetch(akselForsideQuery);
 
   return {
@@ -267,6 +282,7 @@ export const getStaticProps = async ({
       tema,
       page,
       resent,
+      curatedResent,
       slug: "/",
       preview,
       id: page?._id ?? "",

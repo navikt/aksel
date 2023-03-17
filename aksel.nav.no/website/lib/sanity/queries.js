@@ -212,7 +212,7 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
     ...,
   },
   "tema": *[_type == "aksel_tema" && defined(seksjoner[].sider[])],
-  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
+  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...9]{
     _id,
     heading,
     _createdAt,
@@ -221,6 +221,40 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
     "slug": slug.current,
     "tema": tema[]->title,
     ingress,
+  },
+  "curatedResent": {
+    "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc)[0...2]{
+      _id,
+      heading,
+      _createdAt,
+      _updatedAt,
+      publishedAt,
+      "slug": slug.current,
+      ingress,
+      seo
+    },
+    "artikler": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
+      _id,
+      heading,
+      _createdAt,
+      _updatedAt,
+      publishedAt,
+      "slug": slug.current,
+      "tema": tema[]->title,
+      ingress,
+      seo
+    },
+    "komponenter": *[_type == "komponent_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...2]{
+      _id,
+      heading,
+      "slug": slug.current,
+      status,
+      kategori,
+      _createdAt,
+      _updatedAt,
+      publishedAt,
+      seo
+    },
   }
 }`;
 
