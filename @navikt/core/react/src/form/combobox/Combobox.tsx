@@ -54,12 +54,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     //TODO: add logic for new option on enter
     //TODO: add different list for "just added" options that shows up on top of list
-    //TODO: pre-selected options
-    //TODO: add option to add new option
-    //TODO: add caret icon with onClick to open list
-    //TODO: allow user to add isListOpen as a prop to control list open/close
-    //TODO: scroll dropdown when navigating with keyboard
-    //TODO: make it so that clicking Collapse/Expand closes list if list is open, BUT leave it open if user tabs to it. AKA isListOpen cant be based on focus, but on state
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
