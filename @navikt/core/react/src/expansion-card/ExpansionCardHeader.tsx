@@ -37,8 +37,10 @@ const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
           type="button"
           aria-expanded={panelContext.open}
         >
-          <span className="navds-sr-only">Vis mer</span>
-          <ChevronDownIcon className="navds-expansioncard__header-chevron" />
+          <ChevronDownIcon
+            className="navds-expansioncard__header-chevron"
+            title="Vis mer"
+          />
         </button>
       </div>
     );
