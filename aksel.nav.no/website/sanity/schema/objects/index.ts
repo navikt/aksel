@@ -9,6 +9,7 @@ export * from "./shared/accordion";
 export * from "./shared/alert";
 export * from "./shared/bilde";
 export * from "./shared/dodont";
+export * from "./shared/expansion-card";
 export * from "./shared/kode";
 export * from "./shared/relatert-innhold";
 export * from "./shared/riktekst";

@@ -52,6 +52,7 @@ export const schema: SchemaPluginOptions = {
     object.Video,
     object.Accordion,
     object.Alert,
+    object.ExpansionCard,
     object.Tips,
     object.UnikSidemodul,
 

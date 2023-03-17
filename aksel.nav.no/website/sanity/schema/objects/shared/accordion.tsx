@@ -6,6 +6,8 @@ import { defineField, defineType } from "sanity";
 export const Accordion = defineType({
   name: "accordion",
   title: "Accordion",
+  description:
+    "Accordion brukes hvis man har flere seksjoner man ønsker å skjule. Bruke ExpansionCard om du bare skal vise en seksjon",
   type: "object",
   icon: StackCompactIcon,
   fields: [
@@ -37,7 +39,11 @@ export const Accordion = defineType({
         },
       ],
       validation: (Rule) =>
-        Rule.required().min(1).error("Accordion modul må ha minst 1 element"),
+        Rule.required()
+          .min(2)
+          .error(
+            "Accordion modul må ha minst 2 elementer. Bruk ExpansionCard om du bare trenger 1"
+          ),
     }),
   ],
   components: {
