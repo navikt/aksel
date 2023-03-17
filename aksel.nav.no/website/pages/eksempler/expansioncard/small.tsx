@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -13,16 +13,8 @@ const Example = () => {
           <Innhold />
         </ExpansionCard.Content>
       </ExpansionCard>
-      <ExpansionCard size="small" aria-label="Small-variant med avatar">
-        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
-          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
       <ExpansionCard size="small" aria-label="Small-variant med description">
-        <ExpansionCard.Header avatar={<PlantIcon aria-hidden />}>
+        <ExpansionCard.Header>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
             Du er registerert som mottaker av sykepenger fra NAV
@@ -44,7 +36,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 2,
 };
 
 const Innhold = () => (

@@ -47,13 +47,6 @@ export interface ExpansionCardProps
    */
   size?: "medium" | "small";
   /**
-   * If using other interactive elements inside <ExpansionCard.Header />,
-   * set to "button" to avoid issues with interactive elements.
-   * Note: we recommend not having other interactive elements inside the header.
-   * @default "full"
-   */
-  clickArea?: "full" | "button";
-  /**
    * Since ExpansionCard is a section-element, accessible name is required.
    */
   ["aria-label"]: string;
@@ -77,7 +70,6 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       open,
       defaultOpen = false,
       size = "medium",
-      clickArea = "full",
       ...rest
     },
     ref
@@ -107,7 +99,6 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
             "navds-expansioncard",
             className,
             `navds-expansioncard--${size}`,
-            `navds-expansioncard--clickarea-${clickArea}`,
             {
               "navds-expansioncard--open": open ?? _open,
               "navds-expansioncard--no-fade": !shouldFade.current,
