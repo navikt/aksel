@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 2.8.0
+
+### Minor Changes
+
+- [#1820](https://github.com/navikt/aksel/pull/1820) [`c6d51a019`](https://github.com/navikt/aksel/commit/c6d51a01902e4fd7916a422e17ed175f39acd458) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Ny komponent! ExpansionCard. Oppfølger fra gammel Ekspanderbartpanel.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.0
+  - @navikt/ds-icons@2.8.0
+
 ## 2.7.8
 
 ### Patch Changes
