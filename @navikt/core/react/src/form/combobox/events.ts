@@ -10,7 +10,6 @@ export const keyDownHandler = (
     filteredOptions,
     setSelectedOptions,
     handleClear,
-    toggleOption,
     filteredOptionsIndex,
     filteredOptionsRef,
   }
@@ -23,10 +22,6 @@ export const keyDownHandler = (
       e.preventDefault();
       handleClear({ trigger: e.key, event: e });
       setInternalListOpen(false);
-      break;
-    case "Enter":
-      e.preventDefault();
-      toggleOption();
       break;
     case "ArrowDown": {
       e.preventDefault();

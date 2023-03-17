@@ -12,7 +12,7 @@ import usePrevious from "../../util/usePrevious";
 import { useFormField } from "../useFormField";
 import ClearButton from "./ClearButton";
 import { keyDownHandler } from "./events";
-import Options from "./FilteredOptions";
+import FilteredOptions from "./FilteredOptions";
 import SelectedOptions from "./SelectedOptions";
 import ToggleListButton from "./ToggleListButton";
 
@@ -103,9 +103,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const toggleOption = useCallback(
-      (textContent, isNew = false) => {
+      (textContent?: string, isNew?: boolean) => {
         const curFilteredOpt = filteredOptions[filteredOptionsIndex];
-        if (isNew) {
+        if (isNew && textContent) {
           setSelectedOptions([...selectedOptions, textContent]);
           setInternalValue("");
           setInternalListOpen(false);
@@ -154,7 +154,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         filteredOptions,
         setSelectedOptions,
         handleClear,
-        toggleOption,
         filteredOptionsIndex,
         filteredOptionsRef,
       })
@@ -229,6 +228,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 onChange={(e) => handleChange(e.target.value)}
                 type="search"
                 role="combobox"
+                onKeyUp={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    toggleOption();
+                  }
+                }}
                 aria-controls={isInternalListOpen ? id : ""}
                 aria-expanded={!!isInternalListOpen}
                 autoComplete="off"
@@ -260,7 +265,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               />
             )}
           </div>
-          <Options
+          <FilteredOptions
             id={id}
             ref={filteredOptionsRef}
             internalValue={internalValue}
