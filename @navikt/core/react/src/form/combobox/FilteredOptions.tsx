@@ -9,7 +9,6 @@ const normalizeText = (text: string) =>
 
 interface FilteredOptionsProps {
   id: string;
-  internalValue: string;
   filteredOptions: string[];
   filteredOptionsIndex: number;
   selectedOptions: string[];
@@ -17,30 +16,31 @@ interface FilteredOptionsProps {
   focusInput: () => void;
   isInternalListOpen: boolean | null;
   ref: React.RefObject<HTMLUListElement>;
+  value: string;
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
   (
     {
       id,
-      internalValue,
       filteredOptions,
       filteredOptionsIndex,
       selectedOptions,
       toggleOption,
       focusInput,
       isInternalListOpen,
+      value,
     },
     ref
   ) => {
-    const isInternalValueNew = useMemo(() => {
+    const isValueNew = useMemo(() => {
       return (
-        Boolean(internalValue) &&
+        Boolean(value) &&
         !filteredOptions?.find(
-          (option) => normalizeText(option) === normalizeText(internalValue)
+          (option) => normalizeText(option) === normalizeText(value)
         )
       );
-    }, [internalValue, filteredOptions]);
+    }, [value, filteredOptions]);
 
     return (
       <ul
@@ -51,21 +51,21 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
         id={`${id}-filtered-options`}
         role="listbox"
       >
-        {isInternalValueNew && (
+        {isValueNew && (
           <li
             tabIndex={-1}
             onClick={(e) => {
-              toggleOption(internalValue, true);
+              toggleOption(value, true);
               focusInput();
             }}
             id={`${id}-combobox-new-option`}
             className="navds-combobox__list-item navds-combobox__list-item__new-option"
             role="option"
-            aria-selected={!selectedOptions.includes(internalValue)}
+            aria-selected={!selectedOptions.includes(value)}
           >
             <Add />
             <BodyShort size="medium">
-              Legg til <Label as="span">&#8220;{internalValue}&#8221;</Label>
+              Legg til <Label as="span">&#8220;{value}&#8221;</Label>
             </BodyShort>
           </li>
         )}
