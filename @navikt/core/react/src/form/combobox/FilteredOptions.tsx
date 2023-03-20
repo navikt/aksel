@@ -18,7 +18,6 @@ interface FilteredOptionsProps {
   ref: React.RefObject<HTMLUListElement>;
   value: string;
   addNewOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
-  justAddedOptions: string[];
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
@@ -32,7 +31,6 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
       isInternalListOpen,
       value,
       addNewOption,
-      justAddedOptions,
     },
     ref
   ) => {
@@ -44,10 +42,6 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
         )
       );
     }, [value, filteredOptions]);
-
-    const options = useMemo(() => {
-      return [...justAddedOptions, ...filteredOptions];
-    }, [justAddedOptions, filteredOptions]);
 
     return (
       <ul
@@ -75,7 +69,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
             </BodyShort>
           </li>
         )}
-        {options.map((o, i) => (
+        {filteredOptions.map((o, i) => (
           <li
             className={cl("navds-combobox__list-item", {
               "navds-combobox__list-item--focus": i === filteredOptionsIndex,

@@ -72,16 +72,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const filteredOptions = useMemo(() => {
-      if (value) {
-        return (
-          options?.filter((option) =>
-            normalizeText(option).includes(normalizeText(value))
-          ) || []
-        );
-      } else {
-        return options;
-      }
-    }, [value, options]);
+      const opts = [...justAddedOptions, ...options];
+
+      return opts?.filter((option) =>
+        normalizeText(option).includes(normalizeText(value ?? ""))
+      );
+    }, [value, options, justAddedOptions]);
 
     const handleChange = useCallback(
       (val: string) => {
@@ -109,23 +105,31 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const toggleOption = useCallback(
       (e) => {
-        const textContent = e?.target?.textContent;
+        const clickedOption = e?.target?.textContent;
         const curFilteredOpt = filteredOptions[filteredOptionsIndex];
         // toggle selected option on click
-        if (textContent) {
-          if (selectedOptions.includes(textContent))
+        if (clickedOption) {
+          if (selectedOptions.includes(clickedOption)) {
             setSelectedOptions(
-              selectedOptions.filter((o) => o !== textContent)
+              selectedOptions.filter((o) => o !== clickedOption)
             );
-          else if (filteredOptions.includes(textContent))
-            setSelectedOptions([...selectedOptions, textContent]);
+            if (justAddedOptions.includes(clickedOption))
+              setJustAddedOptions(
+                justAddedOptions.filter((o) => o !== clickedOption)
+              );
+          } else if (filteredOptions.includes(clickedOption))
+            setSelectedOptions([...selectedOptions, clickedOption]);
         }
-        // remove selected option on Enter
-        else if (curFilteredOpt && selectedOptions.includes(curFilteredOpt))
+        // remove selected filteredOption on Enter
+        else if (curFilteredOpt && selectedOptions.includes(curFilteredOpt)) {
           setSelectedOptions(
             selectedOptions.filter((o) => o !== curFilteredOpt)
           );
-        else if (
+          if (justAddedOptions.includes(curFilteredOpt))
+            setJustAddedOptions(
+              justAddedOptions.filter((o) => o !== curFilteredOpt)
+            );
+        } else if (
           // add new option on Enter input value if in filteredOptions OR if input value is empty
           isInternalListOpen &&
           curFilteredOpt &&
@@ -137,9 +141,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         filteredOptions,
         filteredOptionsIndex,
         selectedOptions,
-        setSelectedOptions,
         isInternalListOpen,
         value,
+        setSelectedOptions,
+        justAddedOptions,
+        setJustAddedOptions,
       ]
     );
 
@@ -149,7 +155,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         setSelectedOptions([...selectedOptions, value.trim()]);
         setJustAddedOptions((prevOptions) => [...prevOptions, value.trim()]);
         handleClear(e);
-        //setInternalListOpen(false);
         focusInput();
       },
       [
@@ -166,6 +171,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setSelectedOptions(
         selectedOptions.filter((option) => option !== clickedOption)
       );
+      if (justAddedOptions.includes(clickedOption))
+        setJustAddedOptions(
+          justAddedOptions.filter((o) => o !== clickedOption)
+        );
     };
 
     const handleKeyUp = (e) => {
@@ -213,10 +222,23 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const handleKeyDown = useCallback(
       (e) => {
         if (e.key === "Backspace" && value === "") {
+          const lastSelectedOption =
+            selectedOptions[selectedOptions.length - 1];
+          if (justAddedOptions.includes(lastSelectedOption))
+            setJustAddedOptions(
+              justAddedOptions.filter((o) => o !== lastSelectedOption)
+            );
+          // remove just added option on backspace
           setSelectedOptions(selectedOptions.slice(0, -1));
         }
       },
-      [value, selectedOptions, setSelectedOptions]
+      [
+        value,
+        selectedOptions,
+        setSelectedOptions,
+        justAddedOptions,
+        setJustAddedOptions,
+      ]
     );
 
     //focus on input whenever selectedOptions changes
@@ -325,7 +347,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             id={id}
             ref={filteredOptionsRef}
             filteredOptions={filteredOptions}
-            justAddedOptions={justAddedOptions}
             filteredOptionsIndex={filteredOptionsIndex}
             selectedOptions={selectedOptions}
             toggleOption={toggleOption}
