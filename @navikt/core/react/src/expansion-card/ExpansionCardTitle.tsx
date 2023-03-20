@@ -7,7 +7,7 @@ interface ExpansionCardTitleProps
   children: React.ReactNode;
   /**
    * Changes text-sizing
-   * @default small
+   * @default medium
    */
   size?: "large" | "medium" | "small";
 }
@@ -18,7 +18,7 @@ export type ExpansionCardTitleType = OverridableComponent<
 >;
 
 export const ExpansionCardTitle: ExpansionCardTitleType = forwardRef(
-  ({ className, as: Component = "h3", size = "small", ...rest }, ref) => (
+  ({ className, as: Component = "h3", size = "medium", ...rest }, ref) => (
     <Component
       {...rest}
       ref={ref}

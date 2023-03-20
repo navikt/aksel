@@ -133,6 +133,7 @@ const Riktekst = (
     "do_dont",
     "alert",
     "accordion",
+    "expansioncard",
     "tabell_v2",
     "video",
   ];

@@ -90,6 +90,13 @@ const defaultBlock = `
       ${markDef}
     }
  },
+ _type == "expansioncard" =>{
+    ...,
+    body[]{
+      ...,
+      ${markDef}
+    }
+ },
  _type == "kode" =>{
     ...,
     "ref": ref->{...},

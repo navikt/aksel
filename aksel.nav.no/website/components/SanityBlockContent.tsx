@@ -3,6 +3,7 @@ import { BodyLong, Detail, Heading, Ingress, Link } from "@navikt/ds-react";
 import BlockContent from "@sanity/block-content-to-react";
 import cl from "clsx";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
+import ExpansionCard from "components/sanity-modules/ExpansionCard";
 import NextLink from "next/link";
 import React, { createContext, useContext } from "react";
 import {
@@ -49,6 +50,7 @@ const serializers = {
     do_dont: ({ node }) => <DoDont node={node} />,
     bilde: ({ node }) => <Bilde node={node} />,
     alert: ({ node }) => <Alert node={node} />,
+    expansioncard: ({ node }) => <ExpansionCard node={node} />,
     kode: ({ node }) => <Kode node={node} />,
     tabell_v2: ({ node }) => <Tabell node={node} />,
     accordion: ({ node }) => <Accordion node={node} />,
