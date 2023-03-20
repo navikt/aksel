@@ -7,11 +7,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { BodyShort, Label, mergeRefs, omit, useEventListener } from "../..";
+import { BodyShort, Label, mergeRefs, omit } from "../..";
 import usePrevious from "../../util/usePrevious";
 import { useFormField } from "../useFormField";
 import ClearButton from "./ClearButton";
-import { keyDownHandler } from "./events";
 import FilteredOptions from "./FilteredOptions";
 import SelectedOptions from "./SelectedOptions";
 import ToggleListButton from "./ToggleListButton";
@@ -91,7 +90,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const focusInput = useCallback(() => {
-      inputRef.current && inputRef.current?.focus?.();
+      inputRef.current?.focus?.();
     }, []);
 
     const handleClear = useCallback(
@@ -103,14 +102,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const toggleOption = useCallback(
-      (textContent?: string, isNew?: boolean) => {
+      (e) => {
+        const textContent = e?.target?.textContent;
         const curFilteredOpt = filteredOptions[filteredOptionsIndex];
-        if (isNew && textContent) {
-          setSelectedOptions([...selectedOptions, textContent]);
-          setInternalValue("");
-          setInternalListOpen(false);
-          focusInput();
-        } else if (textContent) {
+        if (textContent) {
           if (selectedOptions.includes(textContent))
             setSelectedOptions(
               selectedOptions.filter((o) => o !== textContent)
@@ -135,8 +130,18 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         setSelectedOptions,
         isInternalListOpen,
         value,
-        focusInput,
       ]
+    );
+
+    const addNewOption = useCallback(
+      (e) => {
+        const textContent = e?.target?.textContent;
+        setSelectedOptions([...selectedOptions, textContent]);
+        handleClear(e);
+        setInternalListOpen(false);
+        focusInput();
+      },
+      [setSelectedOptions, selectedOptions, handleClear, focusInput]
     );
 
     const handleDeleteSelectedOption = (clickedOption) => {
@@ -145,18 +150,56 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       );
     };
 
-    useEventListener("keydown", (e) =>
-      keyDownHandler(e, {
-        internalValue,
-        selectedOptions,
-        setInternalListOpen,
-        setFilteredOptionsIndex,
-        filteredOptions,
-        setSelectedOptions,
-        handleClear,
-        filteredOptionsIndex,
-        filteredOptionsRef,
-      })
+    const handleKeyUp = (e) => {
+      const scrollToOption = (newIndex: number) => {
+        if (filteredOptionsRef.current) {
+          const child = filteredOptionsRef.current.children[newIndex];
+          const { top, bottom } = child.getBoundingClientRect();
+          const parentRect = filteredOptionsRef.current.getBoundingClientRect();
+          if (top < parentRect.top || bottom > parentRect.bottom)
+            child.scrollIntoView({ block: "nearest" });
+        }
+      };
+      switch (e.key) {
+        case "Escape":
+          handleClear({ trigger: e.key, event: e });
+          setInternalListOpen(false);
+          break;
+        case "ArrowDown": {
+          e.preventDefault();
+          const newIndex = Math.min(
+            filteredOptionsIndex + 1,
+            filteredOptions.length - 1
+          );
+          setFilteredOptionsIndex(newIndex);
+          scrollToOption(newIndex);
+          break;
+        }
+        case "ArrowUp": {
+          e.preventDefault();
+          const newIndex = Math.max(0, filteredOptionsIndex - 1);
+          setFilteredOptionsIndex(newIndex);
+          scrollToOption(newIndex);
+          break;
+        }
+        case "Enter":
+          e.preventDefault();
+          toggleOption(e);
+          if (internalValue && !filteredOptions.includes(internalValue))
+            addNewOption(internalValue);
+          break;
+        default:
+          break;
+      }
+    };
+
+    const handleKeyDown = useCallback(
+      (e) => {
+        if (e.key === "Backspace" && internalValue === "") {
+          setSelectedOptions(selectedOptions.slice(0, -1));
+        }
+      },
+      [internalValue, selectedOptions, setSelectedOptions]
     );
 
     //focus on input whenever selectedOptions changes
@@ -228,12 +271,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 onChange={(e) => handleChange(e.target.value)}
                 type="search"
                 role="combobox"
-                onKeyUp={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    toggleOption();
-                  }
-                }}
+                onKeyUp={handleKeyUp}
+                onKeyDown={handleKeyDown}
                 aria-controls={isInternalListOpen ? id : ""}
                 aria-expanded={!!isInternalListOpen}
                 autoComplete="off"

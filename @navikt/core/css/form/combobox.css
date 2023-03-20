@@ -27,6 +27,10 @@
   margin: auto 0;
 }
 
+.navds-combobox__selected-options > li:last-of-type {
+  flex: 1;
+}
+
 .navds-combobox__input-wrapper {
   width: 100%;
 }
