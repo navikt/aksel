@@ -307,13 +307,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           <FilteredOptions
             id={id}
             ref={filteredOptionsRef}
-            internalValue={internalValue}
             filteredOptions={filteredOptions}
             filteredOptionsIndex={filteredOptionsIndex}
             selectedOptions={selectedOptions}
             toggleOption={toggleOption}
             focusInput={focusInput}
             isInternalListOpen={isInternalListOpen}
+            value={internalValue}
           />
         </div>
       </div>
