@@ -257,7 +257,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           </BodyShort>
         )}
         <div className="navds-combobox__wrapper">
-          <div className="navds-combobox__wrapper-inner">
+          <div className="navds-combobox__wrapper-inner navds-text-field__input">
             <SelectedOptions
               selectedOptions={selectedOptions}
               handleDeleteSelectedOption={handleDeleteSelectedOption}
@@ -282,7 +282,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 className={cl(
                   className,
                   "navds-combobox__input",
-                  "navds-text-field__input",
                   "navds-body-short",
                   `navds-body-${size}`
                 )}

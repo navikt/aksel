@@ -114,7 +114,7 @@
   top: calc(100% + var(--a-spacing-2));
   list-style: none;
   margin: 0;
-  border: var(--a-border-subtle);
+  border: 1px solid var(--a-border-divider);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
