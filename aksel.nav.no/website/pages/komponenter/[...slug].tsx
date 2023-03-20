@@ -97,6 +97,8 @@ const Page = ({
       ? "komponent-ny"
       : null;
 
+  const unsafe = page?.status?.unsafe;
+
   return (
     <>
       <Head>
@@ -235,7 +237,11 @@ const Page = ({
           )}
         </BodyShort>
         {tag && (
-          <SuggestionBlock variant={tag} reference={`<${page?.heading} />`} />
+          <SuggestionBlock
+            variant={tag}
+            unsafe={unsafe}
+            reference={`<${page?.heading} />`}
+          />
         )}
         <IntroSeksjon node={page?.intro} />
         {page?.status?.tag === "ready" && (

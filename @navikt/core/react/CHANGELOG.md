@@ -1,5 +1,34 @@
 # @navikt/ds-react
 
+## 2.8.1
+
+### Patch Changes
+
+- [`1276b4d7e`](https://github.com/navikt/aksel/commit/1276b4d7efd831d20345292dbb21a11d100a0ddd) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Endret default title-size til medium for ExpansionCard
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.1
+  - @navikt/ds-icons@2.8.1
+
+## 2.8.0
+
+### Minor Changes
+
+- [#1820](https://github.com/navikt/aksel/pull/1820) [`c6d51a019`](https://github.com/navikt/aksel/commit/c6d51a01902e4fd7916a422e17ed175f39acd458) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Ny komponent! ExpansionCard. Oppfølger fra gammel Ekspanderbartpanel.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.0
+  - @navikt/ds-icons@2.8.0
+
+## 2.7.8
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.8
+
 ## 2.7.7
 
 ### Patch Changes

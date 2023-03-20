@@ -1,5 +1,19 @@
 # @navikt/ds-css
 
+## 2.8.1
+
+## 2.8.0
+
+### Minor Changes
+
+- [#1820](https://github.com/navikt/aksel/pull/1820) [`c6d51a019`](https://github.com/navikt/aksel/commit/c6d51a01902e4fd7916a422e17ed175f39acd458) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Ny komponent! ExpansionCard. Oppfølger fra gammel Ekspanderbartpanel.
+
+## 2.7.8
+
+### Patch Changes
+
+- [#1863](https://github.com/navikt/aksel/pull/1863) [`7ace69f21`](https://github.com/navikt/aksel/commit/7ace69f215760bbb5bf997670c897403d8ee558d) Thanks [@it-vegard](https://github.com/it-vegard)! - Added focus indicator for tabpanel
+
 ## 2.7.7
 
 ## 2.7.6
