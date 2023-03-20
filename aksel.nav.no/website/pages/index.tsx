@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { Footer } from "@/layout";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
@@ -14,7 +13,6 @@ import {
 import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
@@ -23,15 +21,14 @@ import { PrefersReducedMotion } from "components/website-modules/utils/prefers-r
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy, useEffect, useState } from "react";
+import {
+  BlocksT,
+  FrontpageBlock,
+} from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({
-  page,
-  tema,
-  resent,
-  curatedResent,
-}: PageProps): JSX.Element => {
+const Forside = ({ page, tema, blocks }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -60,8 +57,6 @@ const Forside = ({
       );
     })
     .sort((a, b) => a.title.localeCompare(b.title));
-
-  console.log(curatedResent);
 
   return (
     <>
@@ -195,28 +190,8 @@ const Forside = ({
                 </ul>
               </div>
 
-              {/* Siste fra aksel */}
               <div className="-mt-24 sm:-mt-12">
-                <Heading level="3" size="medium" className="text-deepblue-800">
-                  Siste fra Aksel
-                </Heading>
-                {/* Featured */}
-                <div></div>
-                {/* Masonary-cloud */}
-                <ResponsiveMasonry
-                  columnsCountBreakPoints={{ 480: 1, 768: 2, 1024: 3 }}
-                >
-                  <Masonry gutter="1.5rem">
-                    {resent.map((art: any) => (
-                      <ArtikkelCard
-                        level="4"
-                        variant="tema"
-                        {...art}
-                        key={art._id}
-                      />
-                    ))}
-                  </Masonry>
-                </ResponsiveMasonry>
+                <FrontpageBlock blocks={blocks} />
               </div>
             </div>
           </div>
@@ -258,7 +233,7 @@ interface PageProps {
       tema: string[];
       contributors?: { title?: string }[];
     }[];
-  curatedResent: any;
+  blocks?: BlocksT[];
   slug: string;
   preview: boolean;
 }
@@ -274,7 +249,7 @@ export const getStaticProps = async ({
     page = null,
     tema = null,
     resent = null,
-    curatedResent = null,
+    blocks = null,
   } = await client.fetch(akselForsideQuery);
 
   return {
@@ -282,7 +257,7 @@ export const getStaticProps = async ({
       tema,
       page,
       resent,
-      curatedResent,
+      blocks,
       slug: "/",
       preview,
       id: page?._id ?? "",
