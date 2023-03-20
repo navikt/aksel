@@ -235,7 +235,8 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
       highlights[]->{
         ...,
         "content": null,
-        ${contributorsAll}
+        ${contributorsAll},
+        "tema": tema[]->title,
       },
       "curatedResent": {
         "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc)[0...2]{

@@ -44,61 +44,64 @@ export const Latest = ({ block }: { block: LatestT }) => {
 
 const Highlights = ({ highlights }: { highlights: any[] }) => {
   return (
-    <div className="grid gap-8 md:grid-cols-2">
-      <div className="relative block aspect-video md:aspect-auto lg:aspect-video">
-        {highlights[0]?.seo?.image ? (
-          <Image
-            src={urlFor(highlights[0].seo.image)
-              .quality(100)
-              .auto("format")
-              .url()}
-            quality={100}
-            layout="fill"
-            objectFit="cover"
-            aria-hidden
-            priority
-            className="rounded-lg"
-            decoding="sync"
-          />
-        ) : (
-          <Image
-            src={getImage(highlights[0]?.heading ?? "", "thumbnail")}
-            layout="fill"
-            objectFit="contain"
-            aria-hidden
-            priority
-            className="rounded-lg"
-            decoding="sync"
-          />
-        )}
-      </div>
-      <div>
-        <Tag type={highlights[0]._type} />
-        <NextLink
-          href={`/${highlights[0].slug.current}`}
-          passHref
-          legacyBehavior
+    <div
+      className={cl({ "grid gap-8 md:grid-cols-2": highlights?.length === 2 })}
+    >
+      {highlights.map((x, idx) => (
+        <div
+          key={idx}
+          className={cl({
+            "grid content-start gap-8 md:grid-cols-2": highlights?.length === 1,
+            "grid content-start gap-6": highlights?.length === 2,
+          })}
         >
-          <Link className="text-text-default mb-5 mt-3 no-underline hover:underline">
-            <Heading size="large" level="3">
-              {highlights[0]?.heading}
-            </Heading>
-          </Link>
-        </NextLink>
-        <BodyLong className="mb-5" size="small">
-          {highlights[0]?.ingress}
-        </BodyLong>
-        {getAuthors(highlights[0]).length > 0 && (
-          <BodyShort size="small" className="text-text-subtle flex gap-2">
-            <span className="font-semibold">
-              {getAuthors(highlights[0])[0]}
-            </span>
-            <span>
-              {dateStr(highlights[0]?.publishedAt ?? highlights[0]._createdAt)}
-            </span>
-          </BodyShort>
-        )}
-      </div>
+          <div className="relative block aspect-video">
+            {x?.seo?.image ? (
+              <Image
+                src={urlFor(x.seo.image).quality(100).auto("format").url()}
+                quality={100}
+                layout="fill"
+                objectFit="cover"
+                aria-hidden
+                priority
+                className={cl("rounded-lg", {
+                  "hue-rotate-[65deg]": x?.status?.tag === "beta",
+                })}
+                decoding="sync"
+              />
+            ) : (
+              <Image
+                src={getImage(x?.heading ?? "", "thumbnail")}
+                layout="fill"
+                objectFit="contain"
+                aria-hidden
+                priority
+                className="rounded-lg"
+                decoding="sync"
+              />
+            )}
+          </div>
+          <div>
+            <Tag type={x._type} text={x.tema ? x.tema[0] : undefined} />
+            <NextLink href={`/${x.slug.current}`} passHref legacyBehavior>
+              <Link className="text-text-default mb-5 mt-3 no-underline hover:underline">
+                <Heading size="large" level="3">
+                  {x?.heading}
+                </Heading>
+              </Link>
+            </NextLink>
+            <BodyLong className="mb-5" size="small">
+              {x?.ingress ?? x.seo?.meta}
+            </BodyLong>
+            {getAuthors(x).length > 0 && (
+              <BodyShort size="small" className="text-text-subtle flex gap-2">
+                <span className="font-semibold">{getAuthors(x)[0]}</span>
+                <span>{dateStr(x?.publishedAt ?? x._createdAt)}</span>
+              </BodyShort>
+            )}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
