@@ -16,6 +16,7 @@ import SelectedOptions from "./SelectedOptions";
 import ToggleListButton from "./ToggleListButton";
 
 import { ComboboxClearEvent, ComboboxProps } from "./types";
+import useJustAddedOptions from "./useJustAddedOptions";
 
 const normalizeText = (text: string) =>
   typeof text === "string" ? text.toLowerCase().trim() : "";
@@ -30,7 +31,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     } = useFormField(props, "comboboxfield");
 
     const {
-      value,
+      value: externalValue,
       onChange,
       onClear,
       className,
@@ -51,8 +52,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ...rest
     } = props;
 
-    //TODO: add logic for new option on enter
-    //TODO: add different list for "just added" options that shows up on top of list
+    // TODO: in the dropdown, show a temporary list for "just added" options that shows up on top. When the component is unmounted, the list is merged with filteredOptions
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
@@ -64,29 +64,35 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const prevSelectedOptions = usePrevious(selectedOptions);
     const [internalValue, setInternalValue] = useState<string>("");
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
+    const [justAddedOptions, setJustAddedOptions] = useJustAddedOptions();
+
+    const value = useMemo(
+      () => String(externalValue ?? internalValue),
+      [externalValue, internalValue]
+    );
 
     const filteredOptions = useMemo(() => {
-      if (internalValue) {
+      if (value) {
         return (
           options?.filter((option) =>
-            normalizeText(option).includes(normalizeText(internalValue))
+            normalizeText(option).includes(normalizeText(value))
           ) || []
         );
       } else {
         return options;
       }
-    }, [internalValue, options]);
+    }, [value, options]);
 
     const handleChange = useCallback(
       (val: string) => {
-        value === undefined && setInternalValue(val);
+        externalValue ?? setInternalValue(val);
         onChange?.(val);
         setFilteredOptionsIndex(0);
         if (!isInternalListOpen && !!val) {
           setInternalListOpen(true);
         }
       },
-      [isInternalListOpen, onChange, value]
+      [isInternalListOpen, onChange, externalValue]
     );
 
     const focusInput = useCallback(() => {
@@ -105,6 +111,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (e) => {
         const textContent = e?.target?.textContent;
         const curFilteredOpt = filteredOptions[filteredOptionsIndex];
+        // toggle selected option on click
         if (textContent) {
           if (selectedOptions.includes(textContent))
             setSelectedOptions(
@@ -112,11 +119,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             );
           else if (filteredOptions.includes(textContent))
             setSelectedOptions([...selectedOptions, textContent]);
-        } else if (curFilteredOpt && selectedOptions.includes(curFilteredOpt))
+        }
+        // remove selected option on Enter
+        else if (curFilteredOpt && selectedOptions.includes(curFilteredOpt))
           setSelectedOptions(
             selectedOptions.filter((o) => o !== curFilteredOpt)
           );
         else if (
+          // add new option on Enter input value if in filteredOptions OR if input value is empty
           isInternalListOpen &&
           curFilteredOpt &&
           (filteredOptions?.includes?.(String(value)) || !value)
@@ -135,13 +145,21 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const addNewOption = useCallback(
       (e) => {
-        const textContent = e?.target?.textContent;
-        setSelectedOptions([...selectedOptions, textContent]);
+        if (selectedOptions.includes(value.trim())) return;
+        setSelectedOptions([...selectedOptions, value.trim()]);
+        setJustAddedOptions((prevOptions) => [...prevOptions, value.trim()]);
         handleClear(e);
-        setInternalListOpen(false);
+        //setInternalListOpen(false);
         focusInput();
       },
-      [setSelectedOptions, selectedOptions, handleClear, focusInput]
+      [
+        selectedOptions,
+        value,
+        setSelectedOptions,
+        setJustAddedOptions,
+        handleClear,
+        focusInput,
+      ]
     );
 
     const handleDeleteSelectedOption = (clickedOption) => {
@@ -185,8 +203,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         case "Enter":
           e.preventDefault();
           toggleOption(e);
-          if (internalValue && !filteredOptions.includes(internalValue))
-            addNewOption(internalValue);
+          if (value && !filteredOptions.includes(value)) addNewOption(e);
           break;
         default:
           break;
@@ -195,15 +212,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const handleKeyDown = useCallback(
       (e) => {
-        if (e.key === "Backspace" && internalValue === "") {
+        if (e.key === "Backspace" && value === "") {
           setSelectedOptions(selectedOptions.slice(0, -1));
         }
       },
-      [internalValue, selectedOptions, setSelectedOptions]
+      [value, selectedOptions, setSelectedOptions]
     );
 
     //focus on input whenever selectedOptions changes
-    // TODO: Seems like a band-aid. Why does focus disappear?
+    //Seems like a band-aid. Why does focus disappear?
     useEffect(() => {
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
@@ -308,12 +325,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             id={id}
             ref={filteredOptionsRef}
             filteredOptions={filteredOptions}
+            justAddedOptions={justAddedOptions}
             filteredOptionsIndex={filteredOptionsIndex}
             selectedOptions={selectedOptions}
             toggleOption={toggleOption}
             focusInput={focusInput}
             isInternalListOpen={isInternalListOpen}
-            value={internalValue}
+            value={value}
+            addNewOption={addNewOption}
           />
         </div>
       </div>

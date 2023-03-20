@@ -12,11 +12,13 @@ interface FilteredOptionsProps {
   filteredOptions: string[];
   filteredOptionsIndex: number;
   selectedOptions: string[];
-  toggleOption: (textContent: string, isNew?: boolean) => void;
+  toggleOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   focusInput: () => void;
   isInternalListOpen: boolean | null;
   ref: React.RefObject<HTMLUListElement>;
   value: string;
+  addNewOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  justAddedOptions: string[];
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
@@ -27,9 +29,10 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
       filteredOptionsIndex,
       selectedOptions,
       toggleOption,
-      focusInput,
       isInternalListOpen,
       value,
+      addNewOption,
+      justAddedOptions,
     },
     ref
   ) => {
@@ -41,6 +44,10 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
         )
       );
     }, [value, filteredOptions]);
+
+    const options = useMemo(() => {
+      return [...justAddedOptions, ...filteredOptions];
+    }, [justAddedOptions, filteredOptions]);
 
     return (
       <ul
@@ -55,8 +62,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
           <li
             tabIndex={-1}
             onClick={(e) => {
-              toggleOption(value, true);
-              focusInput();
+              addNewOption(e);
             }}
             id={`${id}-combobox-new-option`}
             className="navds-combobox__list-item navds-combobox__list-item__new-option"
@@ -69,7 +75,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
             </BodyShort>
           </li>
         )}
-        {filteredOptions.map((o, i) => (
+        {options.map((o, i) => (
           <li
             className={cl("navds-combobox__list-item", {
               "navds-combobox__list-item--focus": i === filteredOptionsIndex,
@@ -80,9 +86,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
             key={o}
             tabIndex={-1}
             onClick={(e) => {
-              const target = e.target as HTMLLIElement;
-              toggleOption(target.textContent ?? "");
-              focusInput();
+              toggleOption(e);
             }}
             role="option"
             aria-selected={selectedOptions.includes(o)}
