@@ -1,5 +1,5 @@
-import { Latest, LatestT } from "./Latest";
-
+import Latest, { LatestT } from "./Latest";
+import { withErrorBoundary } from "@/error-boundary";
 export type BlocksT = LatestT;
 
 export const FrontpageBlock = ({ blocks }: { blocks: BlocksT[] }) => {
@@ -20,3 +20,5 @@ export const FrontpageBlock = ({ blocks }: { blocks: BlocksT[] }) => {
     </div>
   );
 };
+
+export default withErrorBoundary(FrontpageBlock, "FrontpageBlock");

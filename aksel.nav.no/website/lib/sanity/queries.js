@@ -240,6 +240,7 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
       },
       "curatedResent": {
         "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc)[0...2]{
+          _type,
           _id,
           heading,
           _createdAt,
@@ -247,9 +248,11 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
           publishedAt,
           "slug": slug.current,
           ingress,
-          seo
+          seo,
+          ${contributorsAll}
         },
         "artikler": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
+          _type,
           _id,
           heading,
           _createdAt,
@@ -258,9 +261,11 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
           "slug": slug.current,
           "tema": tema[]->title,
           ingress,
-          seo
+          seo,
+          ${contributorsAll}
         },
         "komponenter": *[_type == "komponent_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...2]{
+          _type,
           _id,
           heading,
           "slug": slug.current,
@@ -269,7 +274,8 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
           _createdAt,
           _updatedAt,
           publishedAt,
-          seo
+          seo,
+          ${contributorsAll}
         },
       },
     }

@@ -21,9 +21,8 @@ import { PrefersReducedMotion } from "components/website-modules/utils/prefers-r
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy, useEffect, useState } from "react";
-import {
+import FrontpageBlock, {
   BlocksT,
-  FrontpageBlock,
 } from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
 
 const WithPreview = lazy(() => import("../components/WithPreview"));

@@ -1,5 +1,6 @@
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { withErrorBoundary } from "@/error-boundary";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { urlFor } from "lib/sanity/santiy";
@@ -7,17 +8,29 @@ import { getImage } from "components/website-modules/utils/get-image";
 import { getAuthors } from "components/website-modules/LatestBloggs";
 import { dateStr } from "@/utils";
 import { Tag } from "./Tag";
+import { Card, ArticleT } from "./Card";
 import cl from "clsx";
 
 export type LatestT = {
   _type: "nytt_fra_aksel";
   _key: string;
-  highlights: any[];
-  curatedResent: any;
+  highlights: ArticleT[];
+  curatedResent: {
+    artikler: ArticleT[];
+    bloggposts: ArticleT[];
+    komponenter: ArticleT[];
+  };
 };
 
-export const Latest = ({ block }: { block: LatestT }) => {
+const Latest = ({ block }: { block: LatestT }) => {
   const highlights = block.highlights?.length;
+
+  const articles = [
+    ...block.curatedResent.artikler,
+    ...block.curatedResent.bloggposts,
+    ...block.curatedResent.komponenter,
+  ].sort((a, b) => a.publishedAt.localeCompare(b.publishedAt));
+
   return (
     <>
       <Heading level="3" size="xlarge" className="text-deepblue-800 mb-12">
@@ -25,24 +38,22 @@ export const Latest = ({ block }: { block: LatestT }) => {
       </Heading>
 
       {highlights && <Highlights highlights={block.highlights} />}
-      {/* Masonary-cloud */}
-      <ResponsiveMasonry columnsCountBreakPoints={{ 480: 1, 768: 2, 1024: 3 }}>
-        <Masonry gutter="1.5rem">
-          {/* {resent.map((art: any) => (
-      <ArtikkelCard
-        level="4"
-        variant="tema"
-        {...art}
-        key={art._id}
-      />
-    ))} */}
-        </Masonry>
-      </ResponsiveMasonry>
+      <div className="mt-12">
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 480: 1, 768: 2, 1024: 3 }}
+        >
+          <Masonry gutter="1.5rem">
+            {articles.map((x) => (
+              <Card article={x} />
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      </div>
     </>
   );
 };
 
-const Highlights = ({ highlights }: { highlights: any[] }) => {
+function Highlights({ highlights }: { highlights: any[] }) {
   return (
     <div
       className={cl({ "grid gap-8 md:grid-cols-2": highlights?.length === 2 })}
@@ -104,4 +115,6 @@ const Highlights = ({ highlights }: { highlights: any[] }) => {
       ))}
     </div>
   );
-};
+}
+
+export default withErrorBoundary(Latest, "Latest");
