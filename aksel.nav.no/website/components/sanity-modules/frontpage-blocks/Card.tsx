@@ -2,6 +2,8 @@ import { abbrName, dateStr } from "@/utils";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { logNav } from "components/website-modules/utils/amplitude";
 import NextLink from "next/link";
+import { Tag } from "./Tag";
+import cl from "clsx";
 
 export type ArticleT = {
   _key: string;
@@ -29,7 +31,18 @@ export const Card = ({ article }: { article: ArticleT }) => {
   const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
   console.log(showFooter);
   return (
-    <div className="hover:shadow-small focus-within:ring-border-focus bg-surface-default ring-border-subtle group relative rounded-lg p-3 pb-16 ring-1 focus-within:ring-[3px] sm:p-5 sm:pb-16">
+    <div
+      className={cl(
+        "bg-surface-default group relative rounded-lg p-3 sm:p-5",
+        "focus-within:ring-border-focus ring-border-subtle hover:shadow-small ring-1 focus-within:ring-[3px]",
+        showFooter && "pb-16 sm:pb-16"
+      )}
+    >
+      <Tag
+        type={article._type}
+        text={article.tema ? article.tema[0] : undefined}
+        size="small"
+      />
       <NextLink
         href={`/${article.slug.current}`}
         passHref
@@ -54,20 +67,13 @@ export const Card = ({ article }: { article: ArticleT }) => {
         <BodyShort className="mt-2">{article.ingress}</BodyShort>
       )}
       {showFooter && (
-        <span className="absolute bottom-5 flex gap-2">
+        <span className="text-text-subtle absolute bottom-5 flex gap-2">
           {article?.contributors && (
-            <Detail as="span">
+            <Detail as="span" className="font-semibold">
               {abbrName(article?.contributors[0]?.title)}
             </Detail>
           )}
-          {article?.contributors && (
-            <Detail as="span" className="text-text-subtle">
-              —
-            </Detail>
-          )}
-          <Detail as="span" className="text-text-subtle">
-            {dateStr(date)}
-          </Detail>
+          <Detail as="span">{dateStr(date)}</Detail>
         </span>
       )}
     </div>
