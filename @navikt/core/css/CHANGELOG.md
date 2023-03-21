@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.8.2
+
+### Patch Changes
+
+- [#1870](https://github.com/navikt/aksel/pull/1870) [`9c495cf50`](https://github.com/navikt/aksel/commit/9c495cf5037a7453e51e273ab93e4232576f4958) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert typografi for ExpansioCard
+
 ## 2.8.1
 
 ## 2.8.0
