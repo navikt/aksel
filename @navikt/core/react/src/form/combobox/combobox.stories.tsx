@@ -11,19 +11,25 @@ export default {
 const OriginalOptions = [
   "banana",
   "apple",
-  "orange",
+  "tangerine",
   "pear",
   "grape",
   "kiwi",
   "mango",
+  "passion fruit",
   "pineapple",
   "strawberry",
   "watermelon",
+  "grape fruit",
 ];
+
+const initialSelectedOptions = ["passion fruit", "grape fruit"];
 
 export const Default = (props) => {
   const [options, setOptions] = useState(OriginalOptions);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(
+    initialSelectedOptions
+  );
   const [value, setValue] = useState("");
   const id = useId();
   return (
