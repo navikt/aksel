@@ -53,66 +53,87 @@ const Latest = ({ block }: { block: LatestT }) => {
   );
 };
 
-function Highlights({ highlights }: { highlights: any[] }) {
+function Highlights({ highlights }: { highlights: ArticleT[] }) {
   return (
     <div
       className={cl({ "grid gap-8 md:grid-cols-2": highlights?.length === 2 })}
     >
-      {highlights.map((x, idx) => (
-        <div
-          key={idx}
-          className={cl({
-            "grid content-start gap-8 md:grid-cols-2": highlights?.length === 1,
-            "grid content-start gap-6": highlights?.length === 2,
-          })}
-        >
-          <div className="relative block aspect-video">
-            {x?.seo?.image ? (
-              <Image
-                src={urlFor(x.seo.image).quality(100).auto("format").url()}
-                quality={100}
-                layout="fill"
-                objectFit="cover"
-                aria-hidden
-                priority
-                className={cl("rounded-lg", {
-                  "hue-rotate-[65deg]": x?.status?.tag === "beta",
-                })}
-                decoding="sync"
-              />
-            ) : (
-              <Image
-                src={getImage(x?.heading ?? "", "thumbnail")}
-                layout="fill"
-                objectFit="contain"
-                aria-hidden
-                priority
-                className="rounded-lg"
-                decoding="sync"
-              />
-            )}
+      {highlights.map((x, idx) => {
+        const useStatusImage =
+          ["ds_artikkel", "komponent_artikkel"].includes(x._type) &&
+          x.status?.bilde;
+        return (
+          <div
+            key={idx}
+            className={cl({
+              "grid content-start gap-8 md:grid-cols-2":
+                highlights?.length === 1,
+              "grid content-start gap-6": highlights?.length === 2,
+            })}
+          >
+            <div className="relative block aspect-video">
+              {useStatusImage ? (
+                <Image
+                  src={urlFor(x.status.bilde).quality(100).auto("format").url()}
+                  quality={100}
+                  layout="fill"
+                  objectFit="cover"
+                  aria-hidden
+                  priority
+                  className={cl("bg-deepblue-200 rounded-lg", {
+                    "hue-rotate-[65deg]": x?.status?.tag === "beta",
+                  })}
+                  decoding="sync"
+                />
+              ) : x?.seo?.image ? (
+                <Image
+                  src={urlFor(x.seo.image).quality(100).auto("format").url()}
+                  quality={100}
+                  layout="fill"
+                  objectFit="cover"
+                  aria-hidden
+                  priority
+                  className={cl("rounded-lg", {
+                    "hue-rotate-[65deg]": x?.status?.tag === "beta",
+                  })}
+                  decoding="sync"
+                />
+              ) : (
+                <Image
+                  src={getImage(x?.heading ?? "", "thumbnail")}
+                  layout="fill"
+                  objectFit="contain"
+                  aria-hidden
+                  priority
+                  className="rounded-lg"
+                  decoding="sync"
+                />
+              )}
+            </div>
+            <div>
+              <Tag type={x._type} text={x.tema ? x.tema[0] : undefined} />
+              <NextLink href={`/${x.slug.current}`} passHref legacyBehavior>
+                <Link className="text-text-default mb-5 mt-3 no-underline hover:underline">
+                  <Heading size="large" level="3">
+                    {x?.heading}
+                  </Heading>
+                </Link>
+              </NextLink>
+              <BodyLong className="mb-5" size="small">
+                {x?.ingress ?? x.seo?.meta}
+              </BodyLong>
+              {getAuthors(x as any).length > 0 && (
+                <BodyShort size="small" className="text-text-subtle flex gap-2">
+                  <span className="font-semibold">
+                    {getAuthors(x as any)[0]}
+                  </span>
+                  <span>{dateStr(x?.publishedAt ?? x._createdAt)}</span>
+                </BodyShort>
+              )}
+            </div>
           </div>
-          <div>
-            <Tag type={x._type} text={x.tema ? x.tema[0] : undefined} />
-            <NextLink href={`/${x.slug.current}`} passHref legacyBehavior>
-              <Link className="text-text-default mb-5 mt-3 no-underline hover:underline">
-                <Heading size="large" level="3">
-                  {x?.heading}
-                </Heading>
-              </Link>
-            </NextLink>
-            <BodyLong className="mb-5" size="small">
-              {x?.ingress ?? x.seo?.meta}
-            </BodyLong>
-            {getAuthors(x).length > 0 && (
-              <BodyShort size="small" className="text-text-subtle flex gap-2">
-                <span className="font-semibold">{getAuthors(x)[0]}</span>
-                <span>{dateStr(x?.publishedAt ?? x._createdAt)}</span>
-              </BodyShort>
-            )}
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

@@ -140,7 +140,7 @@ const Forside = ({ page, tema, blocks }: PageProps): JSX.Element => {
               variant="forside"
             />
           </div>
-          <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
+          <div className="bg-surface-subtle min-h-96 relative pb-20">
             <div className="centered-layout grid max-w-screen-2xl">
               {/* God praksis */}
               <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-48 rounded-2xl px-4 py-12 ring-1 sm:-translate-y-32 sm:px-12 sm:py-20">
@@ -193,9 +193,7 @@ const Forside = ({ page, tema, blocks }: PageProps): JSX.Element => {
                 <FrontpageBlock blocks={blocks} />
               </div>
             </div>
-          </div>
-          <div className="bg-surface-default relative pb-36">
-            <div className="centered-layout -translate-y-1/2">
+            <div className="centered-layout bg-surface-subtle mt-24">
               <ToolCard />
             </div>
           </div>
