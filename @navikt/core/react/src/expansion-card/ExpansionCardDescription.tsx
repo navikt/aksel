@@ -1,6 +1,7 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useContext } from "react";
 import cl from "clsx";
 import { BodyLong } from "../typography/BodyLong";
+import { ExpansionCardContext } from "./ExpansionCard";
 
 interface ExpansionCardDescriptionProps
   extends React.HTMLAttributes<HTMLParagraphElement> {
@@ -12,11 +13,23 @@ export type ExpansionCardDescriptionType = React.ForwardRefExoticComponent<
 >;
 
 export const ExpansionCardDescription: ExpansionCardDescriptionType =
-  forwardRef(({ className, ...rest }, ref) => (
-    <BodyLong
-      {...rest}
-      as="p"
-      ref={ref}
-      className={cl("navds-link-panel__description", className)}
-    />
-  ));
+  forwardRef(({ className, ...rest }, ref) => {
+    const panelContext = useContext(ExpansionCardContext);
+
+    if (panelContext === null) {
+      console.error(
+        "<ExpansionCard.Header> has to be used within an <ExpansionCard>"
+      );
+      return null;
+    }
+
+    return (
+      <BodyLong
+        {...rest}
+        as="p"
+        ref={ref}
+        className={cl("navds-link-panel__description", className)}
+        size={panelContext.size}
+      />
+    );
+  });
