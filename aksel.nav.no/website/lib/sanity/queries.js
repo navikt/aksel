@@ -219,16 +219,6 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
     ...,
   },
   "tema": *[_type == "aksel_tema" && defined(seksjoner[].sider[])],
-  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...9]{
-    _id,
-    heading,
-    _createdAt,
-    _updatedAt,
-    publishedAt,
-    "slug": slug.current,
-    "tema": tema[]->title,
-    ingress,
-  },
   blocks[]{
     ...,
     _type == "nytt_fra_aksel"=>{
@@ -239,7 +229,7 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
         "tema": tema[]->title,
       },
       "curatedResent": {
-        "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc)[0...2]{
+        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...2]{
           _type,
           _id,
           heading,
@@ -251,7 +241,7 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
+        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
           _type,
           _id,
           heading,
@@ -264,7 +254,7 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "komponenter": *[_type == "komponent_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...2]{
+        "komponenter": *[_type == "komponent_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...2]{
           _type,
           _id,
           heading,

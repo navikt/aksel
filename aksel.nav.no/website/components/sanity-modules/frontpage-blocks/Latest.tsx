@@ -77,12 +77,14 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
                   src={urlFor(x.status.bilde).quality(100).auto("format").url()}
                   quality={100}
                   layout="fill"
-                  objectFit="cover"
                   aria-hidden
                   priority
-                  className={cl("bg-deepblue-200 rounded-lg", {
-                    "hue-rotate-[65deg]": x?.status?.tag === "beta",
-                  })}
+                  className={cl(
+                    "bg-deepblue-200 rounded-lg object-cover sm:object-contain",
+                    {
+                      "hue-rotate-[65deg]": x?.status?.tag === "beta",
+                    }
+                  )}
                   decoding="sync"
                 />
               ) : x?.seo?.image ? (

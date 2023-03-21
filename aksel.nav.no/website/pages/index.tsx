@@ -245,7 +245,6 @@ export const getStaticProps = async ({
   const {
     page = null,
     tema = null,
-    resent = null,
     blocks = null,
   } = await client.fetch(akselForsideQuery);
 
@@ -253,7 +252,6 @@ export const getStaticProps = async ({
     props: {
       tema,
       page,
-      resent,
       blocks,
       slug: "/",
       preview,
