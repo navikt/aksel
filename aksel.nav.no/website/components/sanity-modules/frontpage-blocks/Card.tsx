@@ -19,7 +19,7 @@ export type ArticleT = {
   tema?: string[];
   status?: { tag: string };
   publishedAt: string;
-  contributors?: string[];
+  contributors?: { title: string }[];
 };
 
 export const Card = ({ article }: { article: ArticleT }) => {
