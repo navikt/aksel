@@ -35,7 +35,8 @@ export const Card = ({ article }: { article: ArticleT }) => {
     article.status?.bilde;
 
   return (
-    <div
+    <section
+      aria-label={article?.heading}
       className={cl(
         "bg-surface-default group relative rounded-lg",
         "focus-within:ring-border-focus ring-border-subtle-hover focus-within:ring-[3px]",
@@ -99,6 +100,6 @@ export const Card = ({ article }: { article: ArticleT }) => {
           </span>
         )}
       </div>
-    </div>
+    </section>
   );
 };

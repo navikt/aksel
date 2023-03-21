@@ -33,7 +33,7 @@ const Latest = ({ block }: { block: LatestT }) => {
 
   return (
     <>
-      <Heading level="3" size="xlarge" className="text-deepblue-800 mb-12">
+      <Heading level="2" size="xlarge" className="text-deepblue-800 mb-12">
         Siste fra Aksel
       </Heading>
 
@@ -63,7 +63,8 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
           ["ds_artikkel", "komponent_artikkel"].includes(x._type) &&
           x.status?.bilde;
         return (
-          <div
+          <section
+            aria-label={`Fremhevet artikkel: ${x?.heading}`}
             key={idx}
             className={cl({
               "grid content-start gap-8 md:grid-cols-2":
@@ -133,7 +134,7 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
                 </BodyShort>
               )}
             </div>
-          </div>
+          </section>
         );
       })}
     </div>
