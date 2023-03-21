@@ -29,7 +29,7 @@ const Latest = ({ block }: { block: LatestT }) => {
     ...block.curatedResent.artikler,
     ...block.curatedResent.bloggposts,
     ...block.curatedResent.komponenter,
-  ].sort((a, b) => a.publishedAt.localeCompare(b.publishedAt));
+  ].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
   return (
     <>
@@ -44,7 +44,7 @@ const Latest = ({ block }: { block: LatestT }) => {
         >
           <Masonry gutter="1.5rem">
             {articles.map((x) => (
-              <Card article={x} />
+              <Card key={x._id} article={x} />
             ))}
           </Masonry>
         </ResponsiveMasonry>

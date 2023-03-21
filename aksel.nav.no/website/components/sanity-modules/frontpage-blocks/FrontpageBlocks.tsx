@@ -3,7 +3,6 @@ import { withErrorBoundary } from "@/error-boundary";
 export type BlocksT = LatestT;
 
 export const FrontpageBlock = ({ blocks }: { blocks: BlocksT[] }) => {
-  console.log(blocks);
   if (!blocks || !blocks.length) {
     return null;
   }
