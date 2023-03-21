@@ -33,7 +33,7 @@ const Latest = ({ block }: { block: LatestT }) => {
 
   return (
     <>
-      <Heading level="2" size="xlarge" className="text-deepblue-800 mb-12">
+      <Heading level="2" size="xlarge" className="text-deepblue-800 mb-10">
         Siste fra Aksel
       </Heading>
 
@@ -114,15 +114,19 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
               )}
             </div>
             <div>
-              <Tag type={x._type} text={x.tema ? x.tema[0] : undefined} />
+              <Tag
+                type={x._type}
+                text={x.tema ? x.tema[0] : undefined}
+                beta={x?.status?.tag === "beta"}
+              />
               <NextLink href={`/${x.slug.current}`} passHref legacyBehavior>
-                <Link className="text-text-default mb-5 mt-3 no-underline hover:underline">
+                <Link className="text-text-default mb-5 mt-2 no-underline hover:underline">
                   <Heading size="large" level="3">
                     {x?.heading}
                   </Heading>
                 </Link>
               </NextLink>
-              <BodyLong className="mb-5" size="small">
+              <BodyLong className="mb-4" size="small">
                 {x?.ingress ?? x.seo?.meta}
               </BodyLong>
               {getAuthors(x as any).length > 0 && (

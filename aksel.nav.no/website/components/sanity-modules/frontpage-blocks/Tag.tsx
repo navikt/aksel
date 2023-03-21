@@ -1,14 +1,16 @@
-import { Heading, Label } from "@navikt/ds-react";
+import { Heading, Label, Tag as DsTag } from "@navikt/ds-react";
 import cl from "clsx";
 
 export const Tag = ({
   type,
   text,
   size = "medium",
+  beta = false,
 }: {
   type: string;
   text?: string;
   size?: "medium" | "small";
+  beta?: boolean;
 }) => {
   const Comp = ({ ...props }: any) =>
     size === "medium" ? (
@@ -28,11 +30,29 @@ export const Tag = ({
         <Comp className="text-teal-600">{text ? text : "God praksis"}</Comp>
       );
     case "aksel_blogg":
-      return <Comp className="text-violet-600">Blogg</Comp>;
+      return <Comp className="text-pink-600">Blogg</Comp>;
     case "komponent_artikkel":
-      return <Comp className="text-deepblue-600">Komponent</Comp>;
+      return (
+        <Comp className="text-deepblue-600 flex items-center gap-3">
+          Komponent
+          {beta && (
+            <DsTag variant="alt1" size="small">
+              Beta
+            </DsTag>
+          )}
+        </Comp>
+      );
     case "ds_artikkel":
-      return <Comp className="text-deepblue-600">Grunnleggende</Comp>;
+      return (
+        <Comp className="text-deepblue-600 flex items-center gap-3">
+          Grunnleggende
+          {beta && (
+            <DsTag variant="alt1" size="small">
+              Beta
+            </DsTag>
+          )}
+        </Comp>
+      );
 
     default:
       return null;

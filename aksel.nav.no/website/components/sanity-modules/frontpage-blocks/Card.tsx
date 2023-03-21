@@ -96,6 +96,7 @@ export const Card = ({ article }: { article: ArticleT }) => {
           type={article._type}
           text={article.tema ? article.tema[0] : undefined}
           size="small"
+          beta={article.status?.tag === "beta"}
         />
         <NextLink
           href={`/${article.slug.current}`}

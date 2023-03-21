@@ -254,7 +254,7 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "komponenter": *[_type == "komponent_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...2]{
+        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
           _type,
           _id,
           heading,
