@@ -2,10 +2,11 @@ import { abbrName, dateStr } from "@/utils";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { logNav } from "components/website-modules/utils/amplitude";
 import NextLink from "next/link";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import { Tag } from "./Tag";
 import cl from "clsx";
 import { urlFor } from "lib/sanity/santiy";
+import { getImage } from "components/website-modules/utils/get-image";
 
 export type ArticleT = {
   _key: string;
@@ -30,9 +31,11 @@ export const Card = ({ article }: { article: ArticleT }) => {
   const date = article.publishedAt ? article.publishedAt : article._updatedAt;
 
   const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
-  const showImage =
-    ["ds_artikkel", "komponent_artikkel"].includes(article._type) &&
-    article.status?.bilde;
+  const showImage = [
+    "ds_artikkel",
+    "komponent_artikkel",
+    "aksel_blogg",
+  ].includes(article._type);
 
   return (
     <section
@@ -53,13 +56,39 @@ export const Card = ({ article }: { article: ArticleT }) => {
             }
           )}
         >
-          <NextImage
-            src={urlFor(article.status?.bilde).auto("format").url()}
-            width="200"
-            height="200"
-            alt={article.heading + " thumbnail"}
-            aria-hidden
-          />
+          {article.status?.bilde ?? article.seo?.image ? (
+            article.status?.bilde ? (
+              <NextImage
+                src={urlFor(article.status?.bilde).auto("format").url()}
+                width="200"
+                height="200"
+                alt={article.heading + " thumbnail"}
+                aria-hidden
+              />
+            ) : (
+              <div className="relative h-[200px] w-full">
+                <NextImage
+                  src={urlFor(article.seo?.image).auto("format").url()}
+                  layout="fill"
+                  objectFit="cover"
+                  alt={article.heading + " thumbnail"}
+                  aria-hidden
+                  className="rounded-t-lg"
+                />
+              </div>
+            )
+          ) : (
+            <div className="relative h-[200px] w-full">
+              <NextImage
+                layout="fill"
+                objectFit="cover"
+                src={getImage(article?.heading ?? "", "thumbnail")}
+                alt={article.heading + " thumbnail"}
+                aria-hidden
+                className="rounded-t-lg"
+              />
+            </div>
+          )}
         </div>
       )}
       <div className={cl("p-3 sm:p-5", showFooter && "pb-16 sm:pb-16")}>
