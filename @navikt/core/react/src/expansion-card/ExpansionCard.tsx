@@ -55,11 +55,13 @@ export interface ExpansionCardProps
 export type ExpansionCardContextProps = {
   open: boolean;
   toggleOpen: () => void;
+  size: "medium" | "small";
 };
 
 export const ExpansionCardContext = createContext<ExpansionCardContextProps>({
   open: false,
   toggleOpen: () => {},
+  size: "medium",
 });
 
 export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
@@ -91,7 +93,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
 
     return (
       <ExpansionCardContext.Provider
-        value={{ open: open ?? _open, toggleOpen: handleOpen }}
+        value={{ open: open ?? _open, toggleOpen: handleOpen, size }}
       >
         <section
           {...rest}
