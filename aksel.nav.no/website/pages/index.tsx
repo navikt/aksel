@@ -16,7 +16,6 @@ import { Header } from "components/layout/header/Header";
 import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
-import { ToolCard } from "components/website-modules/ToolsCard";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
@@ -192,9 +191,6 @@ const Forside = ({ page, tema, blocks }: PageProps): JSX.Element => {
               <div className="-mt-24 sm:-mt-12">
                 <FrontpageBlock blocks={blocks} />
               </div>
-            </div>
-            <div className="centered-layout bg-surface-subtle mt-24">
-              <ToolCard />
             </div>
           </div>
         </main>

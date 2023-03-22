@@ -8,7 +8,6 @@ import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import React, { lazy } from "react";
@@ -108,9 +107,6 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
                   />
                 ))}
               </div>
-            </div>
-            <div className="mt-20">
-              <ToolCard />
             </div>
           </div>
         </main>
