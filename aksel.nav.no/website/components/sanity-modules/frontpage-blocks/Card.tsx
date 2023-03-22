@@ -99,7 +99,7 @@ export const Card = ({ article }: { article: ArticleT }) => {
           beta={article.status?.tag === "beta"}
         />
         <NextLink
-          href={`/${article.slug.current}`}
+          href={`/${article.slug}`}
           passHref
           className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
           onClick={(e) =>
