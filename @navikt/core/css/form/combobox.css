@@ -103,6 +103,12 @@
   color: var(--a-text-action-selected);
 }
 
+.navds-combobox__button-toggle-list svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  pointer-events: none;
+}
+
 /* dropdown list */
 
 .navds-combobox__list {

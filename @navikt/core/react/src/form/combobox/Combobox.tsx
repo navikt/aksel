@@ -53,6 +53,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     } = props;
 
     // TODO: in the dropdown, show a temporary list for "just added" options that shows up on top. When the component is unmounted, the list is merged with filteredOptions
+    // TODO: bug fix, when click toggleListButton, the list opens and then closes immediately because of race conditions with focusInHandler
+    // TODO: mousein and arrow up/down shares virtual focus, mouseout does NOT remove focus
+    // TODO: remove native clear button
+    // TODO: if no results and no "add" option, s how "no results" message
+    // TODO: if text is long, new line
+    // TODO: mobile, should fewer options be shown at a time?
+    // TODO: mobile, should press area for input be taller?
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
@@ -249,8 +256,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     function onFocusWrapper(e) {
       const ref = wrapperRef.current;
-      if (ref?.contains(e.target) && !ref?.contains(e.relatedTarget))
+      if (ref?.contains(e.target) && !ref?.contains(e.relatedTarget)) {
+        console.log("focus");
         setInternalListOpen(true);
+      }
     }
 
     function onBlurWrapper(e) {

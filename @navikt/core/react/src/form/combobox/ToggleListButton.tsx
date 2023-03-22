@@ -15,7 +15,10 @@ export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
   return (
     <button
       type="button"
-      onClick={() => setInternalListOpen(!isInternalListOpen)}
+      onMouseDown={() => {
+        setInternalListOpen(!isInternalListOpen);
+        console.log("toggleListButton mousedown");
+      }}
       className="navds-combobox__button-toggle-list"
     >
       <span className="navds-sr-only">
@@ -25,11 +28,7 @@ export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
           ? "Lukk"
           : "Åpne"}
       </span>
-      {isInternalListOpen ? (
-        <Collapse aria-hidden width="20" height="20" />
-      ) : (
-        <Expand aria-hidden width="20" height="20" />
-      )}
+      {isInternalListOpen ? <Collapse aria-hidden /> : <Expand aria-hidden />}
     </button>
   );
 };
