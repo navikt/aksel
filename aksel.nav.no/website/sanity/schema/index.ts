@@ -63,6 +63,7 @@ export const schema: SchemaPluginOptions = {
     object.RiktekstStandard,
     object.RiktekstPrinsipp,
     object.RiktekstStandalone,
+    object.RiktekstAccordion,
 
     /* Komponentsider */
     object.PropsSeksjon,

@@ -90,13 +90,6 @@ const defaultBlock = `
       ${markDef}
     }
  },
- _type == "expansioncard" =>{
-    ...,
-    body[]{
-      ...,
-      ${markDef}
-    }
- },
  _type == "kode" =>{
     ...,
     "ref": ref->{...},
@@ -119,6 +112,16 @@ const accordionBlock = `_type == "accordion"=>{
       ...,
       ${defaultBlock}
     }
+  }
+}
+`;
+
+const expansionCardBlock = `_type == "expansioncard"=>{
+  ...,
+  body[]{
+    ...,
+    ${markDef},
+    ${defaultBlock}
   }
 }`;
 
@@ -161,6 +164,7 @@ ${propsSeksjon},
 ${installSeksjon},
 ${spesialSeksjon},
 ${accordionBlock},
+${expansionCardBlock},
 ${defaultBlock},
 `;
 
