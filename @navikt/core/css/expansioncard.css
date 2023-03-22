@@ -52,6 +52,7 @@
   border-bottom-right-radius: 0;
   border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
   border-bottom: none;
+  background-color: var(--ac-expansioncard-header-open-bg, var(--a-surface-transparent));
 }
 
 .navds-expansioncard--open > :where(.navds-expansioncard__header):hover {

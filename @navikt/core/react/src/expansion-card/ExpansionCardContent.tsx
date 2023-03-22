@@ -32,6 +32,7 @@ const ExpansionCardContent: ExpansionCardContentType = forwardRef(
           "navds-expansioncard__content--closed": !panelContext.open,
         })}
         aria-hidden={!panelContext.open}
+        size={panelContext.size}
       >
         <div className="navds-expansioncard__content-inner">{children}</div>
       </BodyLong>
