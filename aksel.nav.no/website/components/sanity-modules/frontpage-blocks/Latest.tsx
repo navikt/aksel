@@ -38,7 +38,7 @@ const Latest = ({ block }: { block: LatestT }) => {
       </Heading>
 
       {highlights && <Highlights highlights={block.highlights} />}
-      <div className="mt-12">
+      <section aria-label="Nyeste artikler fra Aksel" className="mt-12">
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 480: 1, 768: 2, 1024: 3 }}
         >
@@ -48,7 +48,7 @@ const Latest = ({ block }: { block: LatestT }) => {
             ))}
           </Masonry>
         </ResponsiveMasonry>
-      </div>
+      </section>
     </>
   );
 };

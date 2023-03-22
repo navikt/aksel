@@ -38,8 +38,7 @@ export const Card = ({ article }: { article: ArticleT }) => {
   ].includes(article._type);
 
   return (
-    <section
-      aria-label={article?.heading}
+    <div
       className={cl(
         "bg-surface-default group relative rounded-lg",
         "focus-within:ring-border-focus ring-border-subtle-hover focus-within:ring-[3px]",
@@ -92,28 +91,30 @@ export const Card = ({ article }: { article: ArticleT }) => {
         </div>
       )}
       <div className={cl("p-3 sm:p-5", showFooter && "pb-16 sm:pb-16")}>
-        <Tag
-          type={article._type}
-          text={article.tema ? article.tema[0] : undefined}
-          size="small"
-          beta={article.status?.tag === "beta"}
-        />
-        <NextLink
-          href={`/${article.slug}`}
-          passHref
-          className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
-          onClick={(e) =>
-            logNav(
-              "forside-masonary",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
-          }
-        >
-          <Heading level="3" size="small" className="group-hover:underline">
-            {article.heading}
-          </Heading>
-        </NextLink>
+        <div className="flex flex-col-reverse">
+          <NextLink
+            href={`/${article.slug}`}
+            passHref
+            className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
+            onClick={(e) =>
+              logNav(
+                "forside-masonary",
+                window.location.pathname,
+                e.currentTarget.getAttribute("href")
+              )
+            }
+          >
+            <Heading level="3" size="small" className="group-hover:underline">
+              {article.heading}
+            </Heading>
+          </NextLink>
+          <Tag
+            type={article._type}
+            text={article.tema ? article.tema[0] : undefined}
+            size="small"
+            beta={article.status?.tag === "beta"}
+          />
+        </div>
         {article.ingress ? (
           <BodyShort className="mt-2">{article.ingress}</BodyShort>
         ) : article.seo.meta ? (
@@ -130,6 +131,6 @@ export const Card = ({ article }: { article: ArticleT }) => {
           </span>
         )}
       </div>
-    </section>
+    </div>
   );
 };
