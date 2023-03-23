@@ -25,11 +25,7 @@ export type LatestT = {
 const Latest = ({ block }: { block: LatestT }) => {
   const highlights = block.highlights?.length;
 
-  const articles = [
-    ...block.curatedResent.artikler,
-    ...block.curatedResent.bloggposts,
-    ...block.curatedResent.komponenter,
-  ].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  const articles = getList(block);
 
   return (
     <>
@@ -143,6 +139,14 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
       })}
     </div>
   );
+}
+
+function getList(block: LatestT) {
+  return [
+    ...block.curatedResent.artikler,
+    ...block.curatedResent.bloggposts,
+    ...block.curatedResent.komponenter,
+  ].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 
 export default withErrorBoundary(Latest, "Latest");
