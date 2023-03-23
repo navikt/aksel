@@ -45,6 +45,15 @@ export interface TextareaProps
    * Enables resizing of field
    */
   resize?: boolean;
+  /**
+   * i18n-translations for counter-text
+   */
+  i18n?: {
+    /** @default Antall tegn igjen */
+    couterLeft?: string;
+    /** @default tegn for mye */
+    counterTooMuch?: string;
+  };
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -65,6 +74,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       maxLength,
       hideLabel = false,
       resize,
+      i18n,
       ...rest
     } = props;
 
@@ -166,6 +176,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 maxLength={maxLength}
                 currentLength={props.value?.length ?? controlledValue?.length}
                 size={size}
+                i18n={i18n}
               />
             </>
           )}
@@ -185,7 +196,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   }
 );
 
-export const Counter = ({ maxLength, currentLength, size }) => {
+export const Counter = ({ maxLength, currentLength, size, i18n }) => {
   const difference = maxLength - currentLength;
 
   return (
@@ -197,8 +208,8 @@ export const Counter = ({ maxLength, currentLength, size }) => {
       size={size}
     >
       {difference < 0
-        ? `Antall tegn for mye ${Math.abs(difference)}`
-        : `Antall tegn igjen ${difference}`}
+        ? `${Math.abs(difference)} ${i18n?.couterLeft ?? "tegn igjen"}`
+        : `${difference} ${i18n?.counterTooMuch ?? "tegn for mye"}}`}
     </BodyShort>
   );
 };
