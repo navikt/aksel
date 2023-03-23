@@ -1,11 +1,7 @@
 import { allArticleDocuments } from "../../sanity/config";
 
 export const options: {
-  [K in
-    | typeof allArticleDocuments[number]
-    | "icon"
-    | "aksel_standalone"
-    | "icon_page"]: {
+  [K in typeof allArticleDocuments[number] | "icon" | "icon_page"]: {
     display: string;
     index: number;
     hidden?: boolean;

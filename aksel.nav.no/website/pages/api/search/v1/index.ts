@@ -45,7 +45,7 @@ export default async function initialSearch(
       : req.query.doc;
     doc = queryDoc.split(",");
   } else {
-    doc = [...allArticleDocuments, "icon", "aksel_standalone", "icon_page"];
+    doc = [...allArticleDocuments, "icon", "icon_page"];
   }
 
   const query = Array.isArray(req.query.q)
@@ -182,10 +182,9 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
 let data = null;
 
 async function searchSanity() {
-  const sanityQueryHttp = `*[_type in [${[
-    ...allArticleDocuments,
-    "aksel_standalone",
-  ].map((x) => `"${x}"`)}] ]{
+  const sanityQueryHttp = `*[_type in [${allArticleDocuments.map(
+    (x) => `"${x}"`
+  )}] ]{
     ${akselArticleFields}
     "intro": pt::text(intro.body),
     "content": content[]{...,

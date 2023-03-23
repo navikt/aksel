@@ -1,5 +1,5 @@
 import { TableOfContents } from "@/components";
-import { akselStandaloneBySlug, SanityT } from "@/lib";
+import { akselStandaloneBySlug } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading } from "@navikt/ds-react";
@@ -9,13 +9,15 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { GetServerSideProps } from "next/types";
 import React, { lazy } from "react";
+import { AkselStandaloneDocT, ResolveSlugT } from "../../sanity/schema-types";
 import NotFotfund from "../404";
 
+/* Standalone-sider */
 const Page = ({
   page,
 }: {
   slug?: string;
-  page: SanityT.Schema.aksel_standalone;
+  page: ResolveSlugT<AkselStandaloneDocT>;
   preview: boolean;
 }): JSX.Element => {
   if (!page) {
@@ -91,10 +93,9 @@ export default Wrapper;
 
 interface StaticProps {
   props: {
-    page: SanityT.Schema.aksel_standalone;
+    page: ResolveSlugT<AkselStandaloneDocT>;
     slug: string;
     preview: boolean;
-    validUser?: boolean;
     id: string;
     title: string;
   };

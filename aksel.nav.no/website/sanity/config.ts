@@ -4,6 +4,7 @@ export const allArticleDocuments = [
   "aksel_artikkel",
   "aksel_blogg",
   "aksel_prinsipp",
+  "aksel_standalone",
 ] as const;
 
 export const previews = [
