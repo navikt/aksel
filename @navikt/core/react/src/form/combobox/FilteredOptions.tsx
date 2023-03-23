@@ -20,6 +20,36 @@ interface FilteredOptionsProps {
   addNewOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 }
 
+export const useFilteredOptions = () => {
+  const [filteredOptionsIndex, setFilteredOptionsIndex] = React.useState(0);
+  const [isInternalListOpen, setInternalListOpen] = React.useState(false);
+  const [filteredOptions, setFilteredOptions] = React.useState<string[]>([]);
+
+  const toggleList = () => {
+    setInternalListOpen(!isInternalListOpen);
+  };
+
+  const currentOption = useMemo(() => {
+    return filteredOptions[filteredOptionsIndex];
+  }, [filteredOptions, filteredOptionsIndex]);
+
+  const resetFilteredOptionsIndex = () => {
+    setFilteredOptionsIndex(0);
+  };
+
+  return {
+    filteredOptionsIndex,
+    setFilteredOptionsIndex,
+    isInternalListOpen,
+    setInternalListOpen,
+    filteredOptions,
+    setFilteredOptions,
+    toggleList,
+    currentOption,
+    resetFilteredOptionsIndex,
+  };
+};
+
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
   (
     {

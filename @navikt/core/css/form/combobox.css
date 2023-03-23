@@ -74,6 +74,10 @@
   padding: 0;
 }
 
+.navds-combobox__input::-webkit-search-cancel-button {
+  display: none;
+}
+
 .navds-combobox__button-toggle-list {
   position: absolute;
   right: 0.5rem;

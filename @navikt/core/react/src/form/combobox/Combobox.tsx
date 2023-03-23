@@ -52,10 +52,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ...rest
     } = props;
 
-    // TODO: in the dropdown, show a temporary list for "custom" options that shows up on top. When the component is unmounted, the list is merged with filteredOptions
+    // TODO: in the dropdown, show a temporary list for "custom" options that shows up on top. On blur, add to filteredOptions
     // TODO: bug fix, when click toggleListButton, the list opens and then closes immediately because of race conditions with focusInHandler
     // TODO: mousein and arrow up/down shares virtual focus, mouseout does NOT remove focus
-    // TODO: remove native clear button
     // TODO: if no results and no "add" option, s how "no results" message
     // TODO: if text is long, new line
     // TODO: mobile, should fewer options be shown at a time?
