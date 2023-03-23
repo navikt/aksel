@@ -103,7 +103,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-28">
-            <div className="centered-layout relative mb-12 mt-20 grid place-items-center text-center sm:mt-36 sm:max-w-[632px]">
+            <div className="relative mx-auto mb-12 mt-20 grid w-full place-items-center px-4 text-center sm:mt-36 sm:max-w-[632px] sm:px-6">
               <Heading
                 level="1"
                 size="xlarge"
@@ -135,12 +135,12 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                   href: "/ikoner",
                 },
               ]}
-              className="centered-layout mb-40 max-w-md grid-cols-1 sm:mb-36 md:max-w-screen-lg md:grid-cols-3"
+              className="mx-auto mb-40 w-full max-w-md grid-cols-1 px-4 sm:mb-36 sm:px-6 md:max-w-screen-lg md:grid-cols-3"
               variant="forside"
             />
           </div>
           <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
-            <div className="centered-layout grid max-w-screen-2xl">
+            <div className="mx-auto grid w-full max-w-screen-2xl px-4 sm:px-6">
               {/* God praksis */}
               <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-48 rounded-2xl px-4 py-12 ring-1 sm:-translate-y-32 sm:px-12 sm:py-20">
                 {!reducedMotion && (
@@ -209,10 +209,10 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
             </div>
           </div>
           <div className="bg-surface-default relative pb-36">
-            <div className="centered-layout -translate-y-1/2">
+            <div className="mx-auto w-full -translate-y-1/2 px-4 sm:px-6">
               <ToolCard />
             </div>
-            <div className="centered-layout -mt-16 grid max-w-screen-2xl md:mt-8 ">
+            <div className="mx-auto -mt-16 grid w-full max-w-screen-2xl px-4 sm:px-6 md:mt-8 ">
               <LatestBloggposts
                 bloggs={bloggs}
                 title="Siste fra bloggen"

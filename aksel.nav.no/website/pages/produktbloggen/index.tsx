@@ -57,7 +57,7 @@ const Page = (props: PageProps): JSX.Element => {
           className="relative min-h-[80vh] overflow-hidden focus:outline-none"
         >
           <AkselCubeStatic className="text-[#FFE78A] opacity-10" />
-          <div className="centered-layout mb-40 grid max-w-screen-2xl">
+          <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 sm:px-6">
             <LatestBloggposts
               bloggs={props?.bloggposts}
               title="Blogg"

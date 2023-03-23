@@ -40,7 +40,7 @@ const ComponentOverview = ({
 
   return (
     <div className="mb-8">
-      <ul className="component-card-grid">
+      <ul className="grid grid-cols-[repeat(auto-fill,_minmax(min(17rem,_100%),_1fr))] gap-6">
         {sorted.map((x) => (
           <li key={x._id}>
             <div className="bg-surface-subtle focus-within:ring-border-focus ring-border-subtle hover:shadow-medium min-h-56 group relative rounded-2xl focus-within:ring-[3px] hover:ring-1">

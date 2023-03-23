@@ -22,20 +22,8 @@ p.override-text-no-max {
   @apply mx-auto max-w-prose sm:w-[90%];
 }
 
-.dynamic-wrapper-left {
-  @apply max-w-prose sm:w-[90%];
-}
-
-.dynamic-wrapper-2xl {
-  @apply mx-auto max-w-2xl sm:w-[90%];
-}
-
 .card-grid-3-1 {
   @apply grid gap-3 md:grid-cols-2 md:gap-6 lg:grid-cols-3;
-}
-
-.card-grid-2-1 {
-  @apply grid gap-3 md:grid-cols-2 md:gap-6;
 }
 
 .aksel-artikkel .aksel-list-ul li::before {
@@ -70,23 +58,6 @@ p.override-text-no-max {
   direction: rtl;
 }
 
-.component-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr));
-  gap: 1.5rem;
-}
-
-.hyphen {
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-
-.component-token-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
-  gap: 1rem;
-}
-
 .component-checkered-bg {
   background-color: var(--a-white);
   background-image: repeating-linear-gradient(
@@ -107,12 +78,4 @@ p.override-text-no-max {
     );
   background-position: 0 0, 10px 10px;
   background-size: 20px 20px;
-}
-
-.full-bleed {
-  @apply relative left-1/2 right-1/2 -mx-[50vw] w-screen md:left-auto md:right-auto md:mx-auto md:w-full md:max-w-[85%];
-}
-
-.centered-layout {
-  @apply mx-auto w-full px-4 sm:px-6;
 }

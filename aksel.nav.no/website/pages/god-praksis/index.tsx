@@ -65,7 +65,7 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
           id="hovedinnhold"
           className=" min-h-[80vh]  focus:outline-none"
         >
-          <div className="centered-layout mb-40 grid max-w-screen-2xl pt-20">
+          <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 pt-20 sm:px-6">
             <Heading
               level="1"
               size="xlarge"
