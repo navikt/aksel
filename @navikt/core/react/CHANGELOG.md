@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 2.8.3
+
+### Patch Changes
+
+- [#1875](https://github.com/navikt/aksel/pull/1875) [`f862aa9c2`](https://github.com/navikt/aksel/commit/f862aa9c2ec71ffdb295708dc6dad6b77af9519e) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Textarea har oppdatert counter-tekst + mulighet for lokalisering
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.3
+  - @navikt/ds-icons@2.8.3
+
 ## 2.8.2
 
 ### Patch Changes
