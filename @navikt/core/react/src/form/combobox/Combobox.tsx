@@ -16,7 +16,7 @@ import SelectedOptions from "./SelectedOptions";
 import ToggleListButton from "./ToggleListButton";
 
 import { ComboboxClearEvent, ComboboxProps } from "./types";
-import useJustAddedOptions from "./useJustAddedOptions";
+import useCustomOptions from "./useCustomOptions";
 
 const normalizeText = (text: string) =>
   typeof text === "string" ? text.toLowerCase().trim() : "";
@@ -52,7 +52,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ...rest
     } = props;
 
-    // TODO: in the dropdown, show a temporary list for "just added" options that shows up on top. When the component is unmounted, the list is merged with filteredOptions
+    // TODO: in the dropdown, show a temporary list for "custom" options that shows up on top. When the component is unmounted, the list is merged with filteredOptions
     // TODO: bug fix, when click toggleListButton, the list opens and then closes immediately because of race conditions with focusInHandler
     // TODO: mousein and arrow up/down shares virtual focus, mouseout does NOT remove focus
     // TODO: remove native clear button
@@ -71,7 +71,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const prevSelectedOptions = usePrevious(selectedOptions);
     const [internalValue, setInternalValue] = useState<string>("");
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
-    const [justAddedOptions, setJustAddedOptions] = useJustAddedOptions();
+    const {
+      customOptions,
+      setCustomOptions,
+      removeCustomOption,
+      addCustomOption,
+    } = useCustomOptions(setSelectedOptions);
 
     const value = useMemo(
       () => String(externalValue ?? internalValue),
@@ -79,12 +84,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const filteredOptions = useMemo(() => {
-      const opts = [...justAddedOptions, ...options];
+      const opts = [...customOptions, ...options];
 
       return opts?.filter((option) =>
         normalizeText(option).includes(normalizeText(value ?? ""))
       );
-    }, [value, options, justAddedOptions]);
+    }, [value, options, customOptions]);
 
     const handleChange = useCallback(
       (val: string) => {
@@ -111,8 +116,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const toggleOption = useCallback(
-      (e) => {
-        const clickedOption = e?.target?.textContent;
+      (event) => {
+        const clickedOption = event?.target?.textContent;
         const curFilteredOpt = filteredOptions[filteredOptionsIndex];
         // toggle selected option on click
         if (clickedOption) {
@@ -120,10 +125,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             setSelectedOptions(
               selectedOptions.filter((o) => o !== clickedOption)
             );
-            if (justAddedOptions.includes(clickedOption))
-              setJustAddedOptions(
-                justAddedOptions.filter((o) => o !== clickedOption)
-              );
+            if (customOptions.includes(clickedOption))
+              removeCustomOption({ event });
           } else if (filteredOptions.includes(clickedOption))
             setSelectedOptions([...selectedOptions, clickedOption]);
         }
@@ -132,10 +135,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setSelectedOptions(
             selectedOptions.filter((o) => o !== curFilteredOpt)
           );
-          if (justAddedOptions.includes(curFilteredOpt))
-            setJustAddedOptions(
-              justAddedOptions.filter((o) => o !== curFilteredOpt)
-            );
+          if (customOptions.includes(curFilteredOpt))
+            removeCustomOption({ value: curFilteredOpt });
         } else if (
           // add new option on Enter input value if in filteredOptions OR if input value is empty
           isInternalListOpen &&
@@ -151,37 +152,27 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         isInternalListOpen,
         value,
         setSelectedOptions,
-        justAddedOptions,
-        setJustAddedOptions,
+        customOptions,
+        removeCustomOption,
       ]
     );
 
-    const addNewOption = useCallback(
-      (e) => {
+    const handleAddCustomOption = useCallback(
+      (event) => {
         if (selectedOptions.includes(value.trim())) return;
-        setSelectedOptions([...selectedOptions, value.trim()]);
-        setJustAddedOptions((prevOptions) => [...prevOptions, value.trim()]);
-        handleClear(e);
+        addCustomOption({ value });
+        handleClear(event);
         focusInput();
       },
-      [
-        selectedOptions,
-        value,
-        setSelectedOptions,
-        setJustAddedOptions,
-        handleClear,
-        focusInput,
-      ]
+      [selectedOptions, value, addCustomOption, handleClear, focusInput]
     );
 
     const handleDeleteSelectedOption = (clickedOption) => {
       setSelectedOptions(
         selectedOptions.filter((option) => option !== clickedOption)
       );
-      if (justAddedOptions.includes(clickedOption))
-        setJustAddedOptions(
-          justAddedOptions.filter((o) => o !== clickedOption)
-        );
+      if (customOptions.includes(clickedOption))
+        setCustomOptions(customOptions.filter((o) => o !== clickedOption));
     };
 
     const handleKeyUp = (e) => {
@@ -219,7 +210,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         case "Enter":
           e.preventDefault();
           toggleOption(e);
-          if (value && !filteredOptions.includes(value)) addNewOption(e);
+          if (value && !filteredOptions.includes(value))
+            handleAddCustomOption(e);
           break;
         default:
           break;
@@ -231,11 +223,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         if (e.key === "Backspace" && value === "") {
           const lastSelectedOption =
             selectedOptions[selectedOptions.length - 1];
-          if (justAddedOptions.includes(lastSelectedOption))
-            setJustAddedOptions(
-              justAddedOptions.filter((o) => o !== lastSelectedOption)
+          if (customOptions.includes(lastSelectedOption))
+            // todo remove custom option on backspace
+            setCustomOptions(
+              customOptions.filter((o) => o !== lastSelectedOption)
             );
-          // remove just added option on backspace
           setSelectedOptions(selectedOptions.slice(0, -1));
         }
       },
@@ -243,8 +235,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         value,
         selectedOptions,
         setSelectedOptions,
-        justAddedOptions,
-        setJustAddedOptions,
+        customOptions,
+        setCustomOptions,
       ]
     );
 
@@ -257,7 +249,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     function onFocusWrapper(e) {
       const ref = wrapperRef.current;
       if (ref?.contains(e.target) && !ref?.contains(e.relatedTarget)) {
-        console.log("focus");
         setInternalListOpen(true);
       }
     }
@@ -361,7 +352,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             focusInput={focusInput}
             isInternalListOpen={isInternalListOpen}
             value={value}
-            addNewOption={addNewOption}
+            addNewOption={handleAddCustomOption}
           />
         </div>
       </div>
