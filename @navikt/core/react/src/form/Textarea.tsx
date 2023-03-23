@@ -208,8 +208,8 @@ export const Counter = ({ maxLength, currentLength, size, i18n }) => {
       size={size}
     >
       {difference < 0
-        ? `${Math.abs(difference)} ${i18n?.counterLeft ?? "tegn igjen"}`
-        : `${difference} ${i18n?.counterTooMuch ?? "tegn for mye"}}`}
+        ? `${Math.abs(difference)} ${i18n?.counterLeft ?? "tegn for mye"}`
+        : `${difference} ${i18n?.counterTooMuch ?? "tegn igjen"}`}
     </BodyShort>
   );
 };
