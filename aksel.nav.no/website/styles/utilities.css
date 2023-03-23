@@ -60,11 +60,14 @@ p.override-text-no-max {
 
 .aksel-artikkel .aksel-list-ol li::before {
   counter-increment: li;
-  content: counter(li) ". ";
+  content: " ." counter(li);
   color: var(--a-deepblue-800);
   display: inline-block;
   width: 1em;
   margin-left: -1em;
+  margin-right: 0.5em;
+  text-align: right;
+  direction: rtl;
 }
 
 .component-card-grid {
