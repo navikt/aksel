@@ -50,7 +50,7 @@ export interface TextareaProps
    */
   i18n?: {
     /** @default Antall tegn igjen */
-    couterLeft?: string;
+    counterLeft?: string;
     /** @default tegn for mye */
     counterTooMuch?: string;
   };
@@ -208,7 +208,7 @@ export const Counter = ({ maxLength, currentLength, size, i18n }) => {
       size={size}
     >
       {difference < 0
-        ? `${Math.abs(difference)} ${i18n?.couterLeft ?? "tegn igjen"}`
+        ? `${Math.abs(difference)} ${i18n?.counterLeft ?? "tegn igjen"}`
         : `${difference} ${i18n?.counterTooMuch ?? "tegn for mye"}}`}
     </BodyShort>
   );
