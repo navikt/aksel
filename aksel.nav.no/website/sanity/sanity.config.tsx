@@ -7,11 +7,7 @@ import { createAuthStore, defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
-import {
-  defaultDocumentNode,
-  publicationFlow,
-  structure,
-} from "./custom-plugins";
+import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
 
 import { getTemplates } from "./util";
 
