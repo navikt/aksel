@@ -37,30 +37,19 @@ p.override-text-no-max {
   content: "";
 }
 
-.aksel-artikkel .aksel-list-ul li::marker,
-.aksel-artikkel .aksel-list-ol li::marker {
+.aksel-artikkel .aksel-list-ul li::marker
+/* .aksel-artikkel .aksel-list-ol li::marker  */ {
   content: none;
 }
 
+/*
 .aksel-artikkel .aksel-list-ol {
   counter-reset: li;
   list-style: none;
-}
+} */
 
 .aksel-artikkel .aksel-list-ul {
   list-style: none;
-}
-
-.aksel-artikkel .aksel-list-ol li::before {
-  counter-increment: li;
-  content: " ." counter(li);
-  color: var(--a-deepblue-800);
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-  margin-right: 0.5em;
-  text-align: right;
-  direction: rtl;
 }
 
 .component-checkered-bg {
