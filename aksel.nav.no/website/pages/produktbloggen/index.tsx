@@ -53,7 +53,7 @@ export const getStaticProps = async ({
       title: "Forside Blogg",
       id: page?._id ?? "",
     },
-    notFound: !bloggposts && !preview,
+    notFound: false,
     revalidate: 60,
   };
 };

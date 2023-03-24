@@ -1,21 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { SanityT, urlFor } from "@/lib";
+import { urlFor } from "@/lib";
 import { Heading } from "@navikt/ds-react";
 import Nextlink from "next/link";
 import cl from "clsx";
 import Image from "next/legacy/image";
 import { StatusTag } from "components/website-modules/StatusTag";
+import { ArticleListT } from "@/types";
 
-const ComponentOverview = ({
-  node,
-}: {
-  node: {
-    _id: string;
-    heading: string;
-    slug: { current: string };
-    status?: SanityT.Schema.komponent_artikkel["status"];
-  }[];
-}): JSX.Element => {
+const ComponentOverview = ({ node }: { node: ArticleListT }): JSX.Element => {
   if (!node || node.length === 0) {
     return null;
   }

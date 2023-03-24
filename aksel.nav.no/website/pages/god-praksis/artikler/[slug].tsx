@@ -1,44 +1,70 @@
-import { LayoutPicker } from "@/components";
-import { SanityT, akselDocumentBySlug, getAkselDocuments } from "@/lib";
+import {
+  contributorsAll,
+  contributorsSingle,
+  destructureBlocks,
+  getAkselDocuments,
+  urlFor,
+} from "@/lib";
+import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
+import {
+  AkselGodPraksisDocT,
+  NextPageT,
+  ResolveContributorsT,
+  ResolveRelatedArticlesT,
+  ResolveSlugT,
+  ResolveTemaT,
+} from "@/types";
+import { Next } from "@navikt/ds-icons";
+import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
+import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { PreviewSuspense } from "next-sanity/preview";
-import React, { lazy } from "react";
+import Head from "next/head";
+import NextLink from "next/link";
+import { lazy } from "react";
 import NotFotfund from "../../404";
 
-const Page = (props: {
-  slug?: string;
-  page: SanityT.Schema.aksel_artikkel;
-  preview: boolean;
-}): JSX.Element => {
-  if (!props?.page) {
-    return <NotFotfund />;
+import {
+  abbrName,
+  BreadCrumbs,
+  dateStr,
+  Feedback,
+  TableOfContents,
+} from "@/components";
+import { Footer } from "@/layout";
+import { Header } from "components/layout/header/Header";
+
+type PageProps = NextPageT<{
+  page: ResolveContributorsT<
+    ResolveTemaT<ResolveSlugT<ResolveRelatedArticlesT<AkselGodPraksisDocT>>>
+  >;
+}>;
+
+export const query = `{
+  "page": *[slug.current == $slug] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+    tema[]->{title, slug, seo},
+    ${contributorsAll},
+    relevante_artikler[]->{
+      _id,
+      heading,
+      _createdAt,
+      _updatedAt,
+      publishedAt,
+      updateInfo,
+      "slug": slug.current,
+      "tema": tema[]->tag,
+      ingress,
+      "contributor": ${contributorsSingle},
+    }
   }
-
-  return <LayoutPicker title="Aksel" data={props.page} />;
-};
-
-const WithPreview = lazy(() => import("../../../components/WithPreview"));
-
-const Wrapper = (props: any): JSX.Element => {
-  if (props?.preview) {
-    return (
-      <PreviewSuspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={akselDocumentBySlug}
-          props={props}
-          params={{
-            slug: `god-praksis/artikler/${props?.slug}`,
-          }}
-        />
-      </PreviewSuspense>
-    );
-  }
-
-  return <Page {...props} />;
-};
-
-export default Wrapper;
+}`;
 
 export const getStaticPaths = async (): Promise<{
   fallback: string;
@@ -56,26 +82,14 @@ export const getStaticPaths = async (): Promise<{
   };
 };
 
-interface StaticProps {
-  props: {
-    page: SanityT.Schema.aksel_artikkel;
-    slug: string;
-    preview: boolean;
-    id?: string;
-    title: string;
-  };
-  notFound: boolean;
-  revalidate: number;
-}
-
 export const getStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
   params: { slug: string };
   preview?: boolean;
-}): Promise<StaticProps | { notFound: true }> => {
-  const { page } = await getClient().fetch(akselDocumentBySlug, {
+}): Promise<PageProps> => {
+  const { page } = await getClient().fetch(query, {
     slug: `god-praksis/artikler/${slug}`,
   });
 
@@ -91,3 +105,239 @@ export const getStaticProps = async ({
     revalidate: 60,
   };
 };
+
+const Page = ({ page: data }: PageProps["props"]) => {
+  if (!data) {
+    return <NotFotfund />;
+  }
+
+  if (!data.content || !data.heading) {
+    console.warn(
+      `Artikkelen har ikke ${
+        !data.content ? "innhold" : "overskrift"
+      }, så den kan ikke vises.`
+    );
+    return null;
+  }
+
+  const date = data?.updateInfo?.lastVerified
+    ? data?.updateInfo?.lastVerified
+    : data?.publishedAt
+    ? data.publishedAt
+    : data._updatedAt;
+
+  const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
+
+  const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
+
+  const aside = data?.relevante_artikler?.length > 0 && (
+    <aside
+      className="overflow-x-clip py-8"
+      aria-labelledby="relevante-artikler-aside"
+    >
+      <div className="relativept-12 pb-16">
+        <div className="dynamic-wrapper">
+          <Heading
+            level="2"
+            size="medium"
+            className="text-deepblue-700 px-4"
+            id="relevante-artikler-aside"
+          >
+            {data?.relevante_artikler?.length === 1
+              ? `Les også`
+              : `Relevante artikler`}
+          </Heading>
+          <div className="card-grid-3-1 mt-6 px-4">
+            {data.relevante_artikler.map((x: any) =>
+              x && x?._id ? <ArtikkelCard level="3" {...x} key={x._id} /> : null
+            )}
+          </div>
+        </div>
+      </div>
+    </aside>
+  );
+
+  const filteredTema =
+    hasTema && data?.tema?.filter((x: any) => x?.title && x?.slug);
+
+  return (
+    <>
+      <Head>
+        <title>{`${data?.heading} - Aksel`}</title>
+        <meta
+          property="og:title"
+          content={`${data?.heading} - Aksel`}
+          key="ogtitle"
+        />
+        <meta
+          name="description"
+          content={data?.seo?.meta ?? data?.ingress}
+          key="desc"
+        />
+        <meta
+          property="og:description"
+          content={data?.seo?.meta ?? data?.ingress}
+          key="ogdesc"
+        />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:image"
+          content={
+            data?.seo?.image
+              ? urlFor(data?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .quality(100)
+                  .url()
+              : hasTema && (data.tema[0] as any)?.seo?.image
+              ? urlFor((data.tema[0] as any)?.seo?.image)
+                  .width(1200)
+                  .height(630)
+                  .fit("crop")
+                  .quality(100)
+                  .url()
+              : ""
+          }
+          key="ogimage"
+        />
+      </Head>
+
+      <Header variant="subtle" />
+      <main
+        tabIndex={-1}
+        id="hovedinnhold"
+        className="aksel-artikkel bg-surface-subtle pt-4 focus:outline-none"
+      >
+        <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
+          <article className="pt-12 pb-16 md:pb-32">
+            <div className="mx-auto mb-16 max-w-prose lg:ml-0">
+              <BreadCrumbs auto />
+              <Heading
+                level="1"
+                size="large"
+                className="text-deepblue-800 mt-4 md:text-5xl"
+              >
+                {data.heading}
+              </Heading>
+              {data?.ingress && (
+                <Ingress className="override-text-700 mt-4 text-2xl">
+                  {data?.ingress}
+                </Ingress>
+              )}
+
+              <div className="mt-6 inline-flex flex-wrap items-center gap-2 text-base">
+                <Detail uppercase as="span">
+                  {dateStr(date)}
+                </Detail>
+                {authors?.length > 0 && (
+                  <>
+                    <span className="bg-deepblue-700 h-2 w-2 rotate-45 rounded-[1px] opacity-25" />
+                    <BodyShort
+                      size="small"
+                      as="div"
+                      className="flex flex-wrap gap-1"
+                    >
+                      <address className="not-italic">{authors?.[0]}</address>
+                    </BodyShort>
+                  </>
+                )}
+              </div>
+              {hasTema && (
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {filteredTema.map(({ title, slug }: any) => (
+                    <span key={title}>
+                      <NextLink
+                        key={title}
+                        href={`/god-praksis/${slug.current}`}
+                        passHref
+                        legacyBehavior
+                      >
+                        <BodyShort
+                          size="small"
+                          as="a"
+                          className="min-h-8 text-deepblue-800 focus-visible:shadow-focus flex items-center justify-center gap-[2px] rounded-full bg-gray-200 pl-4 pr-1 capitalize no-underline hover:underline focus:outline-none"
+                        >
+                          {title}
+                          <Next aria-hidden />
+                        </BodyShort>
+                      </NextLink>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
+              <TableOfContents
+                changedState={data?.content ?? []}
+                hideToc={false}
+                aksel
+              />
+              <div className="max-w-prose lg:col-span-2 lg:col-start-1">
+                <SanityBlockContent
+                  blocks={data?.content ?? []}
+                  variant="aksel"
+                />
+                <div className="mt-12">
+                  {authors?.length > 0 && (
+                    <Label className="text-deepblue-700 mb-2" as="p">
+                      Bidragsytere
+                    </Label>
+                  )}
+                  {authors?.length > 0 && (
+                    <BodyShort
+                      as="div"
+                      className="text-text-subtle mb-1 flex flex-wrap gap-1"
+                    >
+                      {authors.map(abbrName).map((x, y) => (
+                        <address className="not-italic" key={x}>
+                          {x}
+                          {y !== authors.length - 1 && ", "}
+                        </address>
+                      ))}
+                    </BodyShort>
+                  )}
+                  <BodyShort as="span" className="text-text-subtle">
+                    Publisert: {dateStr(data?.publishedAt ?? data?._updatedAt)}
+                  </BodyShort>
+                </div>
+                <div className="mt-12 md:mt-16">
+                  <Feedback
+                    akselFeedback
+                    docId={data?._id}
+                    docType={data?._type}
+                  />
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        {aside}
+      </main>
+      <Footer />
+    </>
+  );
+};
+
+const WithPreview = lazy(() => import("../../../components/WithPreview"));
+
+const Wrapper = (props: any): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Page {...props} />}>
+        <WithPreview
+          comp={Page}
+          query={query}
+          props={props}
+          params={{
+            slug: `god-praksis/artikler/${props?.slug}`,
+          }}
+        />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Page {...props} />;
+};
+
+export default Wrapper;

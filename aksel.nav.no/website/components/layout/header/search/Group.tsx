@@ -1,5 +1,5 @@
 import { Label } from "@navikt/ds-react";
-import { GroupedHits, SearchHit, options } from "lib/types/search";
+import { GroupedHitsT, SearchHitT, searchOptions } from "@/types";
 import { Hit, IconHit, IconPageHit } from "./Hit";
 import React from "react";
 
@@ -9,7 +9,7 @@ export function Group({
   startIndex,
   logSuccess,
 }: {
-  groups: GroupedHits;
+  groups: GroupedHitsT;
   query: string;
   startIndex: number;
   logSuccess: (index: number, url: string) => void;
@@ -21,7 +21,7 @@ export function Group({
   return (
     <>
       {Object.entries(groups)
-        .sort((a, b) => options[a[0]].index - options[b[0]].index)
+        .sort((a, b) => searchOptions[a[0]].index - searchOptions[b[0]].index)
         .map(([key, val], index, arr) => {
           const prev = arr.slice(0, index);
           const total =
@@ -32,7 +32,7 @@ export function Group({
               logSuccess={logSuccess}
               startIndex={total}
               key={key}
-              heading={`${options[key].display} (${val.length})`}
+              heading={`${searchOptions[key].display} (${val.length})`}
               hits={val}
               query={query}
             />
@@ -50,7 +50,7 @@ export function GroupComponent({
   logSuccess,
 }: {
   heading: React.ReactNode;
-  hits: SearchHit[];
+  hits: SearchHitT[];
   query: string;
   startIndex: number;
   logSuccess: (index: number, url: string) => void;

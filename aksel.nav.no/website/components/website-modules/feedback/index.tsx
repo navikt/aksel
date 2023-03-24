@@ -1,4 +1,4 @@
-import { FeedbackT, HelpfulArticleEnum } from "@/lib";
+import { FeedbackT, HelpfulArticleEnum } from "@/types";
 import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import cl from "clsx";
 import { useRouter } from "next/router";

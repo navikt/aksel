@@ -1,4 +1,4 @@
-import { PageTypeT, SidebarT, urlFor } from "@/lib";
+import { urlFor } from "@/lib";
 import { Detail, Heading, Link } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
@@ -10,6 +10,7 @@ import NextLink from "next/link";
 import { capitalize } from "@/utils";
 import Image from "next/legacy/image";
 import { TableOfContentsv2 } from "components/website-modules/TOCv2";
+import { AkselSidebarT } from "@/types";
 
 const HeaderCube = ({ ...props }) => (
   <svg
@@ -59,8 +60,11 @@ export const WithSidebar = ({
   footer,
 }: {
   children: ReactNode;
-  sidebar: SidebarT;
-  pageType: PageTypeT;
+  sidebar: AkselSidebarT;
+  pageType: {
+    type: "Komponenter" | "Grunnleggende";
+    title: string;
+  };
   pageProps: any;
   intro?: ReactNode;
   footer?: ReactNode;

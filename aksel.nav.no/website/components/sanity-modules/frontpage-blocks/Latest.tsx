@@ -6,7 +6,7 @@ import NextLink from "next/link";
 import { urlFor } from "lib/sanity/santiy";
 import { getImage } from "components/website-modules/utils/get-image";
 import { getAuthors } from "components/website-modules/LatestBloggs";
-import { dateStr } from "@/utils";
+import { dateStr, logNav } from "@/utils";
 import { Tag } from "./Tag";
 import { Card, ArticleT } from "./Card";
 import cl from "clsx";
@@ -117,7 +117,16 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
                 beta={x?.status?.tag === "beta"}
               />
               <NextLink href={`/${x.slug.current}`} passHref legacyBehavior>
-                <Link className="text-text-default mb-5 mt-2 no-underline hover:underline">
+                <Link
+                  onClick={(e) =>
+                    logNav(
+                      "artikkel-kort",
+                      window.location.pathname,
+                      e.currentTarget.getAttribute("href")
+                    )
+                  }
+                  className="text-text-default mb-5 mt-2 no-underline hover:underline"
+                >
                   <Heading size="large" level="3">
                     {x?.heading}
                   </Heading>

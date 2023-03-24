@@ -1,15 +1,3 @@
-export type SidebarT = {
-  heading: string;
-  slug: string;
-  kategori: string;
-  tag?: string;
-}[];
-
-export type PageTypeT = {
-  type: "Komponenter" | "Grunnleggende";
-  title: string;
-};
-
 export enum HelpfulArticleEnum {
   "JA" = "ja",
   "DELVIS" = "delvis",

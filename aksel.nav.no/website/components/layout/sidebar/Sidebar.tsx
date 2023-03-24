@@ -1,4 +1,4 @@
-import { SidebarT } from "@/lib";
+import { AkselSidebarT } from "@/types";
 import { logNav } from "@/utils";
 import { Expand } from "@navikt/ds-icons";
 import { BodyShort, Detail, Tag } from "@navikt/ds-react";
@@ -80,7 +80,13 @@ const NavItem = ({
   );
 };
 
-const Dropdown = ({ title, links }: { title: string; links: SidebarT }) => {
+const Dropdown = ({
+  title,
+  links,
+}: {
+  title: string;
+  links: AkselSidebarT;
+}) => {
   const [open, setOpen] = useState(true);
   const { asPath } = useRouter();
 
@@ -125,7 +131,7 @@ export const Sidebar = ({
   links,
 }: {
   kategori: "Komponenter" | "Grunnleggende";
-  links: SidebarT;
+  links: AkselSidebarT;
 }) => {
   const sections = useMemo(
     () =>

@@ -4,7 +4,7 @@ import { Tag } from "@navikt/ds-react";
 import cl from "classnames";
 import Image from "next/legacy/image";
 import { StatusTag } from "components/website-modules/StatusTag";
-import { SearchHit } from "lib/types/search";
+import { SearchHitT } from "@/types";
 import NextLink from "next/link";
 
 export function Hit({
@@ -13,7 +13,7 @@ export function Hit({
   index,
   logSuccess,
 }: {
-  hit: SearchHit;
+  hit: SearchHitT;
   query: string;
   index: number;
   logSuccess: (index: number, url: string) => void;
@@ -81,7 +81,7 @@ export function IconHit({
   index,
   logSuccess,
 }: {
-  hit: SearchHit;
+  hit: SearchHitT;
   query: string;
   index: number;
   logSuccess: (index: number, url: string) => void;
@@ -139,7 +139,7 @@ export function IconPageHit({
   index,
   logSuccess,
 }: {
-  hit: SearchHit;
+  hit: SearchHitT;
   query: string;
   index: number;
   logSuccess: (index: number, url: string) => void;

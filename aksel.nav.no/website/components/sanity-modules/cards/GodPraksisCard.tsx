@@ -1,14 +1,11 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { urlFor } from "@/lib";
+import { AkselTemaT } from "@/types";
+import { logNav } from "@/utils";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
-import NextLink from "next/link";
 import Image from "next/legacy/image";
-import { logNav } from "@/utils";
-import { SanityT, urlFor } from "@/lib";
-
-interface AkselTemaT extends SanityT.Schema.aksel_tema {
-  refCount: number;
-}
+import NextLink from "next/link";
 
 const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
   if (
