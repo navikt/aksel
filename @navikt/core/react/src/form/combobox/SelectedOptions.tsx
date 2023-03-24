@@ -23,9 +23,7 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
                 handleDeleteSelectedOption(option);
               }}
               onKeyUp={(e) => {
-                if (e.key === "Enter") {
-                  handleDeleteSelectedOption(option);
-                }
+                if (e.key === "Enter") handleDeleteSelectedOption(option);
               }}
             >
               {option}
