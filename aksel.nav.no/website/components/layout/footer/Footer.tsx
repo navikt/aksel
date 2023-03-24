@@ -52,9 +52,6 @@ function Snarveier() {
         <FooterLink href="/prinsipper/brukeropplevelse">
           Prinsipper for brukeropplevelse
         </FooterLink>
-        <FooterLink href="/prinsipper/brukeropplevelse">
-          Prinsipper for brukeropplevelse
-        </FooterLink>
         <FooterLink href="https://identitet.nav.no/">Identitet</FooterLink>
         <FooterLink href="https://sikkerhet.nav.no/">
           Security Playbook
