@@ -3,7 +3,7 @@ description: Send et ønske om en eller flere nye komponenter
 title: "[Ny komponent]: "
 labels: ["nytt ✨", "forespørsel 🥰", "komponenter 🧩"]
 assignees:
-  - olejorgenbakken
+  - KenAJoh
 body:
   - type: markdown
     attributes:

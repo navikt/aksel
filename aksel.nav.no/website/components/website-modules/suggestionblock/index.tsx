@@ -133,8 +133,7 @@ export const SuggestionBlock = ({
   );
 };
 
-const issueUrl =
-  "https://github.com/navikt/aksel/issues/new?assignees=olejorgenbakken";
+const issueUrl = "https://github.com/navikt/aksel/issues/new?assignees=KenAJoh";
 
 const options: {
   [key: string]: {
