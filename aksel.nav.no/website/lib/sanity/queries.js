@@ -148,7 +148,7 @@ const propsSeksjon = `_type == "props_seksjon" =>{
 
 const tokenRef = `_type == "token_ref"=>@->`;
 
-const deRefs = `
+export const destructureBlocks = `
 ${alert},
 ${tips},
 ${tokenRef},
@@ -171,7 +171,7 @@ export const akselTema = `*[_type == "godpraksis_landingsside"][0]{
     ...,
     intro[]{
       ...,
-      ${deRefs}
+      ${destructureBlocks}
     }
   },
   "temaer": *[_type == "aksel_tema" && defined(seksjoner[].sider[])]{
@@ -201,7 +201,7 @@ const contributorsSingle = `contributors[0]->{
 }`;
 
 export const akselBloggPosts = `*[_type == "blogg_landingsside"][0]{
-  "page": {..., intro[]{...,${deRefs}}},
+  "page": {..., intro[]{...,${destructureBlocks}}},
   "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
     seo,
     heading,
@@ -244,7 +244,7 @@ export const akselPrinsippBySlug = `{
     "content": select(
       $valid == "true" => content[]{
         ...,
-        ${deRefs}
+        ${destructureBlocks}
       },
       $valid != "true" => []
     ),
@@ -259,7 +259,7 @@ export const akselDocumentBySlug = `{
     "slug": slug.current,
     content[]{
       ...,
-      ${deRefs}
+      ${destructureBlocks}
     },
     tema[]->{title, slug, seo},
     ${contributorsAll},
@@ -309,12 +309,12 @@ export const komponentQuery = `{
         ...,
         body[]{
           ...,
-        ${deRefs}
+        ${destructureBlocks}
         }
       },
       content[]{
         ...,
-        ${deRefs}
+        ${destructureBlocks}
       },
   },
   "refs": select(
@@ -337,7 +337,7 @@ export const grunnleggendeQuery = `{
       "slug": slug.current,
       content[]{
         ...,
-        ${deRefs}
+        ${destructureBlocks}
       },
   },
   "seo": *[_type == "komponenter_landingsside"][0].seo.image,
@@ -352,7 +352,7 @@ export const akselTemaDocs = `{
       ...,
       beskrivelse[]{
         ...,
-        ${deRefs}
+        ${destructureBlocks}
       },
       sider[]->{
         _id,
@@ -382,7 +382,7 @@ export const akselBloggBySlug = `{
     "content": select(
       $valid == "true" => content[]{
         ...,
-        ${deRefs}
+        ${destructureBlocks}
       },
       $valid != "true" => []
     ),
@@ -409,7 +409,7 @@ const landingsSideQuery = (t) => {
 
   return `"page": *[_type == "${t}_landingsside"][0]{
     ...,
-    ${kat.map((x) => `intro_${x.value}[]{...,${deRefs}}`).join(",")}
+    ${kat.map((x) => `intro_${x.value}[]{...,${destructureBlocks}}`).join(",")}
   }`;
 };
 
@@ -420,18 +420,6 @@ export const komponentLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
 export const grunnleggendeLandingQuery = `{${sidebarQuery}, ${landingsSideQuery(
   "grunnleggende"
 )}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
-
-export const akselStandaloneBySlug = `{
-  "page": *[slug.current == $slug && _type == "aksel_standalone"] | order(_updatedAt desc)[0]
-  {
-    ...,
-    "slug": slug.current,
-    content[]{
-      ...,
-      ${deRefs}
-    }
-  }
-}`;
 
 export const akselArticleFields = `
     _id,

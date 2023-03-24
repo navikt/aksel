@@ -24,6 +24,7 @@
     "baseUrl": ".",
     "paths": {
       "@/components": ["components/index.ts"],
+      "@/types": ["lib/ts/index.ts"],
       "@/lib": ["lib/index.ts"],
       "@/pages/*": ["pages/*"],
       "@/sanity-block": ["components/SanityBlockContent.tsx"],
