@@ -56,6 +56,9 @@ function Snarveier() {
         <FooterLink href="https://sikkerhet.nav.no/">
           Security Playbook
         </FooterLink>
+        <FooterLink href="https://etterlevelse.intern.nav.no/">
+          Etterlevelse
+        </FooterLink>
       </BodyShort>
     </div>
   );
