@@ -27,9 +27,14 @@ p.override-text-no-max {
 }
 
 .aksel-artikkel .aksel-list-ul li::before {
-  content: url("data:image/svg+xml;base64,PHN2ZwogIHdpZHRoPSIxMSIKICBoZWlnaHQ9IjEwIgogIHZpZXdCb3g9IjAgMCAxMSAxMCIKICBmaWxsPSJub25lIgogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKPgogIDxyZWN0CiAgICB5PSI1IgogICAgd2lkdGg9IjgiCiAgICBoZWlnaHQ9IjgiCiAgICByeD0iMiIKICAgIHRyYW5zZm9ybT0icm90YXRlKC00NSAwIDUpIgogICAgZmlsbD0iIzAwNUI4MiIKICAvPgo8L3N2Zz4K");
   position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background-color: var(--a-deepblue-500);
+  transform: translateY(10px) translateX(2px) rotate(45deg);
   left: 0;
+  content: "";
 }
 
 .aksel-artikkel .aksel-list-ul li::marker,
