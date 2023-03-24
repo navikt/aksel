@@ -38,8 +38,10 @@ export const ExpansionCard = defineType({
     }),
     defineField({
       title: "Innhold",
+      description:
+        "Hvis du bruker Heading, husk å dobbelsjekke heading-nivået.",
       name: "body",
-      type: "riktekst_enkel",
+      type: "riktekst_accordion",
       validation: (Rule) =>
         Rule.required().error("ExpansionCard må ha innhold"),
     }),

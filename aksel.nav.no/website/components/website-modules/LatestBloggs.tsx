@@ -3,8 +3,6 @@ import { SanityBlockContent } from "@/sanity-block";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import { dateStr } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import cl from "clsx";
-import AkselLink from "components/website-modules/AkselLink";
 import { getImage } from "components/website-modules/utils/get-image";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
@@ -16,13 +14,11 @@ export const getAuthors = (
 export const LatestBloggposts = ({
   bloggs,
   title,
-  variant = "blogg",
   level = "1",
   intro,
 }: {
   bloggs: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
   title: string;
-  variant?: "blogg" | "forside";
   level?: "1" | "2";
   intro?: any[];
 }) => {
@@ -31,18 +27,11 @@ export const LatestBloggposts = ({
   }
 
   return (
-    <div
-      className={cl({
-        "mt-20": variant === "blogg",
-      })}
-    >
+    <div className="mt-20">
       <Heading
         level={level}
         size="xlarge"
-        className={cl(
-          "text-deepblue-700 mx-auto w-full md:mx-0 md:max-w-none",
-          { "text-5xl": variant === "blogg" }
-        )}
+        className="text-deepblue-700 mx-auto w-full text-5xl md:mx-0 md:max-w-none"
       >
         {title}
       </Heading>
@@ -164,11 +153,6 @@ export const LatestBloggposts = ({
               </div>
             </div>
           ))}
-          {variant === "forside" && (
-            <AkselLink href="/produktbloggen" className="h-fit self-end">
-              Les flere blogginnlegg
-            </AkselLink>
-          )}
         </div>
       </div>
 
@@ -279,11 +263,6 @@ export const LatestBloggposts = ({
               </div>
             </div>
           ))}
-          {variant === "forside" && (
-            <AkselLink href="/produktbloggen" className="self-end">
-              Les flere blogginnlegg
-            </AkselLink>
-          )}
         </div>
       </div>
     </div>

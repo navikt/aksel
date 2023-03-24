@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Footer } from "@/layout";
+
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
@@ -13,21 +14,20 @@ import {
 import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
-import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
-import { LatestBloggposts } from "components/website-modules/LatestBloggs";
-import { ToolCard } from "components/website-modules/ToolsCard";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy, useEffect, useState } from "react";
+import FrontpageBlock, {
+  BlocksT,
+} from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
+const Forside = ({ page, tema, blocks }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -140,7 +140,8 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
               variant="forside"
             />
           </div>
-          <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
+
+          <div className="bg-surface-subtle min-h-96 relative pb-20">
             <div className="mx-auto grid w-full max-w-screen-2xl px-4 sm:px-6">
               {/* God praksis */}
               <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-48 rounded-2xl px-4 py-12 ring-1 sm:-translate-y-32 sm:px-12 sm:py-20">
@@ -190,40 +191,11 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
               </div>
 
               <div className="-mt-24 sm:-mt-12">
-                <Heading level="3" size="medium" className="text-deepblue-800">
-                  Siste fra God praksis
-                </Heading>
-                <div className="card-grid-3-1 my-6">
-                  {resent.map((art: any) => (
-                    <ArtikkelCard
-                      level="4"
-                      variant="tema"
-                      {...art}
-                      key={art._id}
-                    />
-                  ))}
-                </div>
-                <AkselLink href="/god-praksis/artikler">
-                  Utforsk alle artikler i God praksis
-                </AkselLink>
+                <FrontpageBlock blocks={blocks} />
               </div>
             </div>
           </div>
-          <div className="bg-surface-default relative pb-36">
-            <div className="mx-auto w-full -translate-y-1/2 px-4 sm:px-6">
-              <ToolCard />
-            </div>
-            <div className="mx-auto -mt-16 grid w-full max-w-screen-2xl px-4 sm:px-6 md:mt-8 ">
-              <LatestBloggposts
-                bloggs={bloggs}
-                title="Siste fra bloggen"
-                variant="forside"
-                level="2"
-              />
-            </div>
-          </div>
         </main>
-
         <Footer />
       </div>
     </>
@@ -256,6 +228,7 @@ interface PageProps {
       tema: string[];
       contributors?: { title?: string }[];
     }[];
+  blocks?: BlocksT[];
   slug: string;
   preview: boolean;
 }
@@ -269,17 +242,15 @@ export const getStaticProps = async ({
 
   const {
     page = null,
-    bloggs = null,
     tema = null,
-    resent = null,
+    blocks = null,
   } = await client.fetch(akselForsideQuery);
 
   return {
     props: {
       tema,
-      bloggs,
       page,
-      resent,
+      blocks,
       slug: "/",
       preview,
       id: page?._id ?? "",

@@ -90,13 +90,6 @@ const defaultBlock = `
       ${markDef}
     }
  },
- _type == "expansioncard" =>{
-    ...,
-    body[]{
-      ...,
-      ${markDef}
-    }
- },
  _type == "kode" =>{
     ...,
     "ref": ref->{...},
@@ -119,6 +112,16 @@ const accordionBlock = `_type == "accordion"=>{
       ...,
       ${defaultBlock}
     }
+  }
+}
+`;
+
+const expansionCardBlock = `_type == "expansioncard"=>{
+  ...,
+  body[]{
+    ...,
+    ${markDef},
+    ${defaultBlock}
   }
 }`;
 
@@ -161,6 +164,7 @@ ${propsSeksjon},
 ${installSeksjon},
 ${spesialSeksjon},
 ${accordionBlock},
+${expansionCardBlock},
 ${defaultBlock},
 `;
 
@@ -204,21 +208,57 @@ export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
   "page": {
     ...,
   },
-  "bloggs": *[_type == "aksel_blogg"] | order(_createdAt desc)[0...4]{
-    ...,
-    "slug": slug.current,
-    ${contributorsAll}
-  },
   "tema": *[_type == "aksel_tema" && defined(seksjoner[].sider[])],
-  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...3]{
-    _id,
-    heading,
-    _createdAt,
-    _updatedAt,
-    publishedAt,
-    "slug": slug.current,
-    "tema": tema[]->title,
-    ingress,
+  blocks[]{
+    ...,
+    _type == "nytt_fra_aksel"=>{
+      highlights[]->{
+        ...,
+        "content": null,
+        ${contributorsAll},
+        "tema": tema[]->title,
+      },
+      "curatedResent": {
+        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...2]{
+          _type,
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          "slug": slug.current,
+          ingress,
+          seo,
+          ${contributorsAll}
+        },
+        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+          _type,
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          "slug": slug.current,
+          "tema": tema[]->title,
+          ingress,
+          seo,
+          ${contributorsAll}
+        },
+        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+          _type,
+          _id,
+          heading,
+          "slug": slug.current,
+          status,
+          kategori,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          seo,
+          ${contributorsAll}
+        },
+      },
+    }
   }
 }`;
 
