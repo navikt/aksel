@@ -55,6 +55,7 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
       className={cl({ "grid gap-8 md:grid-cols-2": highlights?.length === 2 })}
     >
       {highlights.map((x, idx) => {
+        const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(x._type);
         const useStatusImage =
           ["ds_artikkel", "komponent_artikkel"].includes(x._type) &&
           x.status?.bilde;
@@ -125,7 +126,7 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
               <BodyLong className="mb-4" size="small">
                 {x?.ingress ?? x.seo?.meta}
               </BodyLong>
-              {getAuthors(x as any).length > 0 && (
+              {showFooter && getAuthors(x as any).length > 0 && (
                 <BodyShort size="small" className="text-text-subtle flex gap-2">
                   <span className="font-semibold">
                     {getAuthors(x as any)[0]}
@@ -146,7 +147,11 @@ function getList(block: LatestT) {
     ...block.curatedResent.artikler,
     ...block.curatedResent.bloggposts,
     ...block.curatedResent.komponenter,
-  ].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  ].sort((a, b) => {
+    return (
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    );
+  });
 }
 
 export default withErrorBoundary(Latest, "Latest");
