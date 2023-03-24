@@ -95,7 +95,7 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
                 size="medium"
                 className="text-deepblue-800 flex items-center gap-4"
               >
-                <Clock aria-hidden className="shrink-0" /> Nylige artikler
+                <Clock aria-hidden className="shrink-0" /> Nyeste artikler
               </Heading>
               <div className="card-grid-3-1 my-6">
                 {resent.map((art: any) => (
