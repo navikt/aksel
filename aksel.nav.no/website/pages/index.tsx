@@ -2,6 +2,7 @@
 import { Footer } from "@/layout";
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
+import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import {
   CompassIcon,
   ComponentIcon,
@@ -243,12 +244,7 @@ const Page = (props: PageProps): JSX.Element => {
 
 interface PageProps {
   tema: SanityT.Schema.aksel_tema[];
-  bloggs: Partial<
-    SanityT.Schema.aksel_blogg & {
-      slug: string;
-      contributors?: { title?: string }[];
-    }
-  >[];
+  bloggs: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
   page: {
     title: string;
     god_praksis_intro: string;

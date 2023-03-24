@@ -190,7 +190,7 @@ export const akselTema = `*[_type == "godpraksis_landingsside"][0]{
   }
 }`;
 
-const contributorsAll = `contributors[]->{
+export const contributorsAll = `contributors[]->{
   anonym == true => {"title":@.anon_navn.current},
   anonym != true => {"title":@.title}
 }`;
@@ -198,20 +198,6 @@ const contributorsAll = `contributors[]->{
 const contributorsSingle = `contributors[0]->{
   anonym == true => {"title":@.anon_navn.current},
   anonym != true => {"title":@.title}
-}`;
-
-export const akselBloggPosts = `*[_type == "blogg_landingsside"][0]{
-  "page": {..., intro[]{...,${destructureBlocks}}},
-  "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
-    seo,
-    heading,
-    ingress,
-    publishedAt,
-    _createdAt,
-    _id,
-    "slug": slug.current,
-    ${contributorsAll}
-  }
 }`;
 
 export const akselForsideQuery = `*[_type == "aksel_forside"][0]{
@@ -371,31 +357,6 @@ export const akselTemaDocs = `{
         url,
         altText,
     },
-  }
-}`;
-
-export const akselBloggBySlug = `{
-  "blogg": *[slug.current == $slug && _type == "aksel_blogg"] | order(_updatedAt desc)[0]
-  {
-    ...,
-    "slug": slug.current,
-    "content": select(
-      $valid == "true" => content[]{
-        ...,
-        ${destructureBlocks}
-      },
-      $valid != "true" => []
-    ),
-    ${contributorsAll}
-  },
-  "morePosts": *[_type == "aksel_blogg" && slug.current != $slug] | order(publishedAt desc, _updatedAt desc)[0...3] {
-    "slug": slug.current,
-    heading,
-    _createdAt,
-    _id,
-    ingress,
-    ${contributorsAll},
-
   }
 }`;
 

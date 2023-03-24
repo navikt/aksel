@@ -252,7 +252,7 @@ export const structure = async (
               S.divider(),
               ...(await PanesWithCount(
                 "aksel_blogg",
-                bloggKategorier,
+                [...bloggKategorier],
                 getClient,
                 S
               )),

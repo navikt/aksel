@@ -45,7 +45,7 @@ export const bloggKategorier = [
   { title: "Nytt fra teamene", value: "nytt-fra-teamene" },
   { title: "Da vi gjorde dette", value: "da-vi-gjorde-dette" },
   { title: "På reise", value: "pa-reise" },
-];
+] as const;
 
 export const prinsippKategorier = [
   { title: "Brukeropplevelse", value: "brukeropplevelse" },

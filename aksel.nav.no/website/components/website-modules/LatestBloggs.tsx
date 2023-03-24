@@ -1,22 +1,17 @@
-import Image from "next/legacy/image";
-import NextLink from "next/link";
+import { urlFor } from "@/lib";
+import { SanityBlockContent } from "@/sanity-block";
+import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import { dateStr } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import { SanityT, urlFor } from "@/lib";
 import cl from "clsx";
-import { getImage } from "components/website-modules/utils/get-image";
-import { SanityBlockContent } from "@/sanity-block";
 import AkselLink from "components/website-modules/AkselLink";
+import { getImage } from "components/website-modules/utils/get-image";
+import Image from "next/legacy/image";
+import NextLink from "next/link";
 
-export type BloggPageT = Partial<
-  SanityT.Schema.aksel_blogg & {
-    slug: string;
-    contributors?: { title?: string }[];
-  }
->;
-
-export const getAuthors = (blog: BloggPageT) =>
-  (blog?.contributors as any)?.map((x) => x?.title) ?? [];
+export const getAuthors = (
+  blog: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>
+) => (blog?.contributors as any)?.map((x) => x?.title) ?? [];
 
 export const LatestBloggposts = ({
   bloggs,
@@ -25,7 +20,7 @@ export const LatestBloggposts = ({
   level = "1",
   intro,
 }: {
-  bloggs: BloggPageT[];
+  bloggs: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
   title: string;
   variant?: "blogg" | "forside";
   level?: "1" | "2";

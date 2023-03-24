@@ -1,9 +1,10 @@
 export type NextPageT<T> = {
   props: T & {
-    slug: string;
+    slug?: string;
     preview: boolean;
     id: string;
     title: string;
   };
   notFound: boolean;
+  revalidate?: number;
 };
