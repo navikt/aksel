@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "./dist/react/esm",
     "module": "esnext",
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": true
   }
 }

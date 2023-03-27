@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 2.8.4
+
+### Patch Changes
+
+- Fikset Sourcemap-bug i Aksel-icons
+
 ## 2.8.3
 
 ## 2.8.2

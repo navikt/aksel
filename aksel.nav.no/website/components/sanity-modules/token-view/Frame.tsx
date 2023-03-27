@@ -23,7 +23,7 @@ export const Frame = ({
           {hasDescription && <th>Beskrivelse</th>}
         </tr>
       </thead>
-      <tbody className="component-token-grid">
+      <tbody className="component-token-grid grid grid-cols-[repeat(auto-fill,_minmax(min(20rem,_100%),_1fr))] gap-4">
         {tokens.map((c) => (
           <tr
             key={c.name}

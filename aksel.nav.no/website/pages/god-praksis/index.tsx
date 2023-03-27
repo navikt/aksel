@@ -8,7 +8,6 @@ import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import { ToolCard } from "components/website-modules/ToolsCard";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import React, { lazy } from "react";
@@ -65,7 +64,7 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
           id="hovedinnhold"
           className=" min-h-[80vh]  focus:outline-none"
         >
-          <div className="centered-layout mb-40 grid max-w-screen-2xl pt-20">
+          <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 pt-20 sm:px-6">
             <Heading
               level="1"
               size="xlarge"
@@ -96,7 +95,7 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
                 size="medium"
                 className="text-deepblue-800 flex items-center gap-4"
               >
-                <Clock aria-hidden className="shrink-0" /> Nylige artikler
+                <Clock aria-hidden className="shrink-0" /> Nyeste artikler
               </Heading>
               <div className="card-grid-3-1 my-6">
                 {resent.map((art: any) => (
@@ -108,9 +107,6 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
                   />
                 ))}
               </div>
-            </div>
-            <div className="mt-20">
-              <ToolCard />
             </div>
           </div>
         </main>

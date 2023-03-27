@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { Footer } from "@/layout";
+
 import { akselForsideQuery, SanityT, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
+import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import {
   CompassIcon,
   ComponentIcon,
@@ -12,21 +14,20 @@ import {
 import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
-import AkselLink from "components/website-modules/AkselLink";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
-import { LatestBloggposts } from "components/website-modules/LatestBloggs";
-import { ToolCard } from "components/website-modules/ToolsCard";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy, useEffect, useState } from "react";
+import FrontpageBlock, {
+  BlocksT,
+} from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
+const Forside = ({ page, tema, blocks }: PageProps): JSX.Element => {
   const [pause, setPause] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -103,7 +104,7 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
 
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="z-20 pb-28">
-            <div className="centered-layout relative mb-12 mt-20 grid place-items-center text-center sm:mt-36 sm:max-w-[632px]">
+            <div className="relative mx-auto mb-12 mt-20 grid w-full place-items-center px-4 text-center sm:mt-36 sm:max-w-[632px] sm:px-6">
               <Heading
                 level="1"
                 size="xlarge"
@@ -135,12 +136,13 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
                   href: "/ikoner",
                 },
               ]}
-              className="centered-layout mb-40 max-w-md grid-cols-1 sm:mb-36 md:max-w-screen-lg md:grid-cols-3"
+              className="mx-auto mb-40 w-full max-w-md grid-cols-1 px-4 sm:mb-36 sm:px-6 md:max-w-screen-lg md:grid-cols-3"
               variant="forside"
             />
           </div>
-          <div className="bg-surface-subtle min-h-96 relative pb-72 md:pb-40">
-            <div className="centered-layout grid max-w-screen-2xl">
+
+          <div className="bg-surface-subtle min-h-96 relative pb-20">
+            <div className="mx-auto grid w-full max-w-screen-2xl px-4 sm:px-6">
               {/* God praksis */}
               <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-48 rounded-2xl px-4 py-12 ring-1 sm:-translate-y-32 sm:px-12 sm:py-20">
                 {!reducedMotion && (
@@ -189,40 +191,11 @@ const Forside = ({ page, tema, bloggs, resent }: PageProps): JSX.Element => {
               </div>
 
               <div className="-mt-24 sm:-mt-12">
-                <Heading level="3" size="medium" className="text-deepblue-800">
-                  Siste fra God praksis
-                </Heading>
-                <div className="card-grid-3-1 my-6">
-                  {resent.map((art: any) => (
-                    <ArtikkelCard
-                      level="4"
-                      variant="tema"
-                      {...art}
-                      key={art._id}
-                    />
-                  ))}
-                </div>
-                <AkselLink href="/god-praksis/artikler">
-                  Utforsk alle artikler i God praksis
-                </AkselLink>
+                <FrontpageBlock blocks={blocks} />
               </div>
             </div>
           </div>
-          <div className="bg-surface-default relative pb-36">
-            <div className="centered-layout -translate-y-1/2">
-              <ToolCard />
-            </div>
-            <div className="centered-layout -mt-16 grid max-w-screen-2xl md:mt-8 ">
-              <LatestBloggposts
-                bloggs={bloggs}
-                title="Siste fra bloggen"
-                variant="forside"
-                level="2"
-              />
-            </div>
-          </div>
         </main>
-
         <Footer />
       </div>
     </>
@@ -243,12 +216,7 @@ const Page = (props: PageProps): JSX.Element => {
 
 interface PageProps {
   tema: SanityT.Schema.aksel_tema[];
-  bloggs: Partial<
-    SanityT.Schema.aksel_blogg & {
-      slug: string;
-      contributors?: { title?: string }[];
-    }
-  >[];
+  bloggs: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
   page: {
     title: string;
     god_praksis_intro: string;
@@ -260,6 +228,7 @@ interface PageProps {
       tema: string[];
       contributors?: { title?: string }[];
     }[];
+  blocks?: BlocksT[];
   slug: string;
   preview: boolean;
 }
@@ -273,17 +242,15 @@ export const getStaticProps = async ({
 
   const {
     page = null,
-    bloggs = null,
     tema = null,
-    resent = null,
+    blocks = null,
   } = await client.fetch(akselForsideQuery);
 
   return {
     props: {
       tema,
-      bloggs,
       page,
-      resent,
+      blocks,
       slug: "/",
       preview,
       id: page?._id ?? "",

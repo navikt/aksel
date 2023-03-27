@@ -1,5 +1,5 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
+import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { getAuthors } from "components/website-modules/LatestBloggs";
 import NextLink from "next/link";
@@ -8,14 +8,7 @@ import { dateStr, logNav } from "../..";
 const BloggCard = ({
   blog,
 }: {
-  blog: Partial<
-    SanityT.Schema.aksel_blogg & {
-      slug: string;
-      contributors?: {
-        title?: string;
-      }[];
-    }
-  >;
+  blog: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
 }) => {
   return (
     <li

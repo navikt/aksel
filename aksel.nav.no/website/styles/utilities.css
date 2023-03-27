@@ -22,69 +22,34 @@ p.override-text-no-max {
   @apply mx-auto max-w-prose sm:w-[90%];
 }
 
-.dynamic-wrapper-left {
-  @apply max-w-prose sm:w-[90%];
-}
-
-.dynamic-wrapper-2xl {
-  @apply mx-auto max-w-2xl sm:w-[90%];
-}
-
 .card-grid-3-1 {
   @apply grid gap-3 md:grid-cols-2 md:gap-6 lg:grid-cols-3;
 }
 
-.card-grid-2-1 {
-  @apply grid gap-3 md:grid-cols-2 md:gap-6;
-}
-
 .aksel-artikkel .aksel-list-ul li::before {
-  content: url("data:image/svg+xml;base64,PHN2ZwogIHdpZHRoPSIxMSIKICBoZWlnaHQ9IjEwIgogIHZpZXdCb3g9IjAgMCAxMSAxMCIKICBmaWxsPSJub25lIgogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKPgogIDxyZWN0CiAgICB5PSI1IgogICAgd2lkdGg9IjgiCiAgICBoZWlnaHQ9IjgiCiAgICByeD0iMiIKICAgIHRyYW5zZm9ybT0icm90YXRlKC00NSAwIDUpIgogICAgZmlsbD0iIzAwNUI4MiIKICAvPgo8L3N2Zz4K");
   position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background-color: var(--a-deepblue-500);
+  transform: translateY(10px) translateX(2px) rotate(45deg);
   left: 0;
+  content: "";
 }
 
-.aksel-artikkel .aksel-list-ul li::marker,
-.aksel-artikkel .aksel-list-ol li::marker {
+.aksel-artikkel .aksel-list-ul li::marker
+/* .aksel-artikkel .aksel-list-ol li::marker  */ {
   content: none;
 }
 
+/*
 .aksel-artikkel .aksel-list-ol {
   counter-reset: li;
   list-style: none;
-}
+} */
 
 .aksel-artikkel .aksel-list-ul {
   list-style: none;
-}
-
-.aksel-artikkel .aksel-list-ol li::before {
-  counter-increment: li;
-  content: " ." counter(li);
-  color: var(--a-deepblue-800);
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-  margin-right: 0.5em;
-  text-align: right;
-  direction: rtl;
-}
-
-.component-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr));
-  gap: 1.5rem;
-}
-
-.hyphen {
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-
-.component-token-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
-  gap: 1rem;
 }
 
 .component-checkered-bg {
@@ -107,12 +72,4 @@ p.override-text-no-max {
     );
   background-position: 0 0, 10px 10px;
   background-size: 20px 20px;
-}
-
-.full-bleed {
-  @apply relative left-1/2 right-1/2 -mx-[50vw] w-screen md:left-auto md:right-auto md:mx-auto md:w-full md:max-w-[85%];
-}
-
-.centered-layout {
-  @apply mx-auto w-full px-4 sm:px-6;
 }

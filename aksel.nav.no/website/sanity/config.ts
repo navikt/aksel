@@ -4,6 +4,7 @@ export const allArticleDocuments = [
   "aksel_artikkel",
   "aksel_blogg",
   "aksel_prinsipp",
+  "aksel_standalone",
 ] as const;
 
 export const previews = [
@@ -33,7 +34,6 @@ export const komponentKategorier = [
 export const grunnleggendeKategorier = [
   { title: "Styling", value: "styling" },
   { title: "Guider", value: "guider" },
-  { title: "Stæsj", value: "staesj" },
   { title: "Design", value: "design" },
   { title: "Kode", value: "kode" },
   { title: "Nedlastbart", value: "nedlastbart" },
@@ -45,7 +45,7 @@ export const bloggKategorier = [
   { title: "Nytt fra teamene", value: "nytt-fra-teamene" },
   { title: "Da vi gjorde dette", value: "da-vi-gjorde-dette" },
   { title: "På reise", value: "pa-reise" },
-];
+] as const;
 
 export const prinsippKategorier = [
   { title: "Brukeropplevelse", value: "brukeropplevelse" },

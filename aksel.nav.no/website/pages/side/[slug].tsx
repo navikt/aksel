@@ -1,5 +1,4 @@
 import { TableOfContents } from "@/components";
-import { akselStandaloneBySlug, SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading } from "@navikt/ds-react";
@@ -9,15 +8,45 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { GetServerSideProps } from "next/types";
 import React, { lazy } from "react";
+import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
 import NotFotfund from "../404";
+import { destructureBlocks } from "lib/sanity/queries";
 
-const Page = ({
-  page,
-}: {
-  slug?: string;
-  page: SanityT.Schema.aksel_standalone;
-  preview: boolean;
-}): JSX.Element => {
+type PageProps = NextPageT<{ page: ResolveSlugT<AkselStandaloneDocT> }>;
+
+export const query = `{
+  "page": *[slug.current == $slug && _type == "aksel_standalone"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }
+}`;
+
+export const getServerSideProps: GetServerSideProps = async (
+  context
+): Promise<PageProps> => {
+  const { page } = await getClient().fetch(query, {
+    slug: `side/${context.params.slug}`,
+  });
+
+  return {
+    props: {
+      page,
+      slug: context.params.slug as string,
+      preview: context.preview ?? false,
+      id: page?._id ?? "",
+      title: page?.heading ?? "",
+    },
+    notFound: !page && !context.preview,
+  };
+};
+
+/* Standalone-sider */
+const Page = ({ page }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
@@ -74,7 +103,7 @@ const Wrapper = (props: any): JSX.Element => {
       <PreviewSuspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
-          query={akselStandaloneBySlug}
+          query={query}
           props={props}
           params={{
             slug: `side/${props.slug}`,
@@ -88,34 +117,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-interface StaticProps {
-  props: {
-    page: SanityT.Schema.aksel_standalone;
-    slug: string;
-    preview: boolean;
-    validUser?: boolean;
-    id: string;
-    title: string;
-  };
-  notFound: boolean;
-}
-
-export const getServerSideProps: GetServerSideProps = async (
-  context
-): Promise<StaticProps | { notFound: true }> => {
-  const { page } = await getClient().fetch(akselStandaloneBySlug, {
-    slug: `side/${context.params.slug}`,
-  });
-
-  return {
-    props: {
-      page,
-      slug: context.params.slug as string,
-      preview: context.preview ?? false,
-      id: page?._id ?? "",
-      title: page?.heading ?? "",
-    },
-    notFound: !page && !context.preview,
-  };
-};

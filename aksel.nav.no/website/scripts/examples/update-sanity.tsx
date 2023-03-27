@@ -21,6 +21,7 @@ const main = async () => {
     token
   ).fetch(`*[_type == "kode_eksempler_fil"]`);
 
+  /* Delete fremoved examples */
   for (const doc of docs) {
     if (!examples.some((x) => doc._id === createId(x.path))) {
       transactionClient.delete(doc._id);
