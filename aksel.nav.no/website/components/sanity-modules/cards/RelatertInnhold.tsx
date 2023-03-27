@@ -10,7 +10,7 @@ const RelatertInnhold = ({
   node,
 }: {
   node: SanityT.Schema.relatert_innhold;
-}): JSX.Element => {
+}) => {
   if (!node || node?.lenker?.length === 0) {
     return null;
   }

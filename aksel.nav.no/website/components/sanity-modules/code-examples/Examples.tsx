@@ -16,7 +16,7 @@ const ComponentExamples = ({
     dir?: SanityT.Schema.kode_eksempler_fil;
     filnavn?: SanityT.Schema.kode_eksempler_fil;
   };
-}): JSX.Element => {
+}) => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);

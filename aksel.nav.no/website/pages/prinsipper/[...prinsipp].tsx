@@ -238,7 +238,7 @@ const Page = ({ prinsipp: data }: PageProps["props"]) => {
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>

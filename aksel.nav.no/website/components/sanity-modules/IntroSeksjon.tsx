@@ -9,7 +9,7 @@ const Intro = ({
   node,
 }: {
   node: AkselKomponentDocT["intro"] | AkselGrunnleggendeDocT["intro"];
-}): JSX.Element => {
+}) => {
   if (!node || !node.body || !node.brukes_til) {
     return null;
   }

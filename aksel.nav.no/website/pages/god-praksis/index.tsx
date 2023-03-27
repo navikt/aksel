@@ -75,7 +75,7 @@ export const getStaticProps = async ({
   };
 };
 
-const Page = ({ temaer, page, resent }: PageProps["props"]): JSX.Element => {
+const Page = ({ temaer, page, resent }: PageProps["props"]) => {
   const filteredTemas = temaer.filter((x) => x.refCount > 0);
   return (
     <>
@@ -164,7 +164,7 @@ const Page = ({ temaer, page, resent }: PageProps["props"]): JSX.Element => {
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>

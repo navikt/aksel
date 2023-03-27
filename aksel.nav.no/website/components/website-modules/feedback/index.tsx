@@ -18,7 +18,7 @@ const Feedback = ({
   center?: boolean;
   akselFeedback?: boolean;
   text?: string;
-}): JSX.Element => {
+}) => {
   const idCtx = useContext(IdContext);
   const { asPath, basePath } = useRouter();
   const [textValue, setTextValue] = useState("");

@@ -13,7 +13,7 @@ export function TableOfContentsv2({
   changedState: any;
   hideToc?: boolean;
   aksel?: boolean;
-}): JSX.Element {
+}) {
   const [toc, setToc] = useState<
     { heading: string; id: string; lvl3: { heading: string; id: string }[] }[]
   >([]);

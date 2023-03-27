@@ -58,7 +58,7 @@ export const getStaticProps = async ({
   };
 };
 
-const Page = (props: PageProps["props"]): JSX.Element => {
+const Page = (props: PageProps["props"]) => {
   if (!props.bloggposts) {
     return <NotFotfund />;
   }
@@ -135,7 +135,7 @@ const Page = (props: PageProps["props"]): JSX.Element => {
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>

@@ -3,7 +3,6 @@ import {
   AccessDeniedIcon,
   BookIcon,
   BulbOutlineIcon,
-  ChartUpwardIcon,
   CommentIcon,
   JoystickIcon,
   OkHandIcon,
@@ -23,7 +22,7 @@ import {
 import { FeedbackPanes } from "./feedback";
 import { FeedbackView } from "./FeedbackPreview";
 import { GodPraksisPanes } from "./god-praksis";
-import Metrics from "./Metrics";
+/* import Metrics from "./Metrics"; */
 import { PanesWithCount } from "./with-count";
 
 /* import { WebPreview, JsonView } from './previews' */
@@ -415,18 +414,18 @@ export const defaultDocumentNode = (S, { schemaType }) => {
             revision: true,
           },
         })
-        .title("Preview"),
+        .title("Forhåndsvinsing"),
       S.view
         .component(FeedbackView)
         .icon(CommentIcon)
         .title("Tilbakemeldinger"),
-      S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
+      /* S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"), */
     ]);
   }
   if (schemaType === "aksel_forside") {
     return S.document().views([
       S.view.form(),
-      S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"),
+      /* S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"), */
     ]);
   }
   return S.document().views([S.view.form()]);

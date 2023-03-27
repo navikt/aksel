@@ -117,7 +117,7 @@ export const query = `*[_type == "aksel_forside"][0]{
   }
 }`;
 
-const Forside = ({ page, tema, blocks }: PageProps["props"]): JSX.Element => {
+const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
   const [pause, setPause] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -294,7 +294,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]): JSX.Element => {
 
 const WithPreview = lazy(() => import("../components/WithPreview"));
 
-const Page = (props: PageProps["props"]): JSX.Element => {
+const Page = (props: PageProps["props"]) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Forside {...props} />}>

@@ -1,7 +1,7 @@
 import React from "react";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const Logo = (props): JSX.Element => (
+const Logo = (props) => (
   <svg
     width="119"
     height="26"

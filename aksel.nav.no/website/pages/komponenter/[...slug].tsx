@@ -158,7 +158,7 @@ export const getStaticProps = async ({
     props: {
       page: page,
       refs,
-      slug: slug.join("/"),
+      slug: slug.slice(0, 2).join("/"),
       seo,
       sidebar,
       preview,
@@ -170,12 +170,7 @@ export const getStaticProps = async ({
   };
 };
 
-const Page = ({
-  page,
-  sidebar,
-  refs,
-  seo,
-}: PageProps["props"]): JSX.Element => {
+const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
@@ -356,7 +351,7 @@ const Page = ({
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>
@@ -364,7 +359,7 @@ const Wrapper = (props: any): JSX.Element => {
           comp={Page}
           query={query}
           params={{
-            slug: `komponenter/${props.slug.slice(0, 2).join("/")}`,
+            slug: `komponenter/${props.slug}`,
             type: "komponent_artikkel",
             preview: "true",
           }}

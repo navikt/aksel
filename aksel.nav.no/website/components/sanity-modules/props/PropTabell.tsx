@@ -51,7 +51,7 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
   );
 };
 
-const PropTable = ({ komponent }: { komponent: PropT }): JSX.Element => {
+const PropTable = ({ komponent }: { komponent: PropT }) => {
   return (
     <div>
       <Heading

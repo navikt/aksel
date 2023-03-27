@@ -7,7 +7,7 @@ import Image from "next/legacy/image";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { ArticleListT } from "@/types";
 
-const ComponentOverview = ({ node }: { node: ArticleListT }): JSX.Element => {
+const ComponentOverview = ({ node }: { node: ArticleListT }) => {
   if (!node || node.length === 0) {
     return null;
   }

@@ -19,7 +19,7 @@ const Bilde = ({
     dekorativt?: boolean;
   };
   className?: string;
-}): JSX.Element => {
+}) => {
   if (!node || !node.asset) {
     return null;
   }

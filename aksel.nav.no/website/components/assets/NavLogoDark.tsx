@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const NAVLogoDark = (props): JSX.Element => (
+const NAVLogoDark = (props) => (
   <svg
     width="3.25em"
     height="3.25em"

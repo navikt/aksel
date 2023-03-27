@@ -13,7 +13,7 @@ const CodeSnippet = ({
   node: SanityT.Schema.kode;
   className?: string;
   style?: any;
-}): JSX.Element => {
+}) => {
   if (!code || !code.code) {
     return null;
   }

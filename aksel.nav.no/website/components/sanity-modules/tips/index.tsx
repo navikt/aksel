@@ -7,7 +7,7 @@ import cl from "clsx";
 import React from "react";
 import style from "./tips.module.css";
 
-const Tips = ({ node }: { node: SanityT.Schema.tips }): JSX.Element => {
+const Tips = ({ node }: { node: SanityT.Schema.tips }) => {
   if (!node || !node.body) {
     return null;
   }

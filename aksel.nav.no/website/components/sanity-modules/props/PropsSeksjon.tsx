@@ -2,7 +2,7 @@ import React from "react";
 import { withErrorBoundary } from "@/error-boundary";
 import PropTableV2, { PropT } from "./PropTabell";
 
-const PropsSeksjon = ({ node }: { node: any }): JSX.Element => {
+const PropsSeksjon = ({ node }: { node: any }) => {
   if (
     !node ||
     (node?.elementer?.length === 0 && node?.komponenter?.length === 0)
