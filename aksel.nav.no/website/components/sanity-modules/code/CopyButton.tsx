@@ -1,10 +1,9 @@
-import { SuccessStroke } from "@navikt/ds-icons";
 import { useRef, useState, useEffect } from "react";
 import copy from "copy-to-clipboard";
 import React from "react";
 import cl from "clsx";
 import style from "./index.module.css";
-import { ClipboardIcon } from "@navikt/aksel-icons";
+import { CheckmarkIcon, ClipboardIcon } from "@navikt/aksel-icons";
 
 const copyCode = (content: string) =>
   copy(content, {
@@ -13,12 +12,11 @@ const copyCode = (content: string) =>
 
 interface CopyButtonProps {
   content: string;
-  inTabs?: boolean;
-  inverted?: boolean;
+  variant?: "tokentable" | "codeblock";
 }
 
 const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
-  ({ content, inTabs, inverted = false }, ref) => {
+  ({ content, variant = "codeblock" }, ref) => {
     const [active, setActive] = useState(false);
 
     const timeoutRef = useRef<NodeJS.Timeout>();
@@ -31,7 +29,7 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
       copyCode(content);
       setActive(true);
       timeoutRef.current && clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(() => setActive(false), 3000);
+      timeoutRef.current = setTimeout(() => setActive(false), 1000);
     };
 
     return (
@@ -39,25 +37,39 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
         ref={ref}
         aria-live={active ? "polite" : "off"}
         role={active ? "alert" : undefined}
-        className={cl(style.copybutton, "navds-body-short group z-10", {
-          "flex w-16 items-center justify-center hover:bg-blue-50 focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--a-border-focus)]":
-            inTabs,
-          "text-text-default focus-visible:outline-focus absolute top-2 right-2 rounded bg-gray-100 px-2 py-1 hover:bg-gray-900/10 hover:underline focus-visible:outline-2":
-            !inTabs && inverted,
-          "text-text-on-inverted focus-visible:shadow-focus-inverted absolute top-2 right-2 flex h-10 w-10 items-center justify-center rounded bg-gray-900 hover:bg-gray-800 focus:outline-none":
-            !inTabs && !inverted,
-        })}
+        className={cl(
+          style.copybutton,
+          "navds-body-short group/button absolute top-2 right-2 z-10 flex h-10 w-10 items-center justify-center overflow-hidden rounded backdrop-blur transition duration-75 focus:outline-none",
+          {
+            "hover:text-text-on-inverted focus-visible:shadow-focus-inverted text-3xl  text-gray-100 hover:bg-white/20 ":
+              variant === "codeblock",
+            "hover:text-deepblue-800 focus-visible:shadow-focus text-text-subtle  hover:bg-surface-hover text-2xl":
+              variant === "tokentable",
+          }
+        )}
         onClick={handleCopy}
       >
-        {active ? (
-          <SuccessStroke className="text-[1.5rem]" title="Kopierte kodesnutt" />
-        ) : (
-          <ClipboardIcon
-            fontSize="2rem"
-            className="opacity-90 group-hover:opacity-100"
-            title="Kopier kodesnutt"
-          />
-        )}
+        <span
+          aria-hidden={!active}
+          className={cl(
+            "absolute inset-0 grid place-content-center transition duration-300",
+            {
+              "pointer-events-none translate-y-1.5 opacity-0": !active,
+            }
+          )}
+        >
+          <CheckmarkIcon title="Kopierte kodesnutt" />
+        </span>
+
+        <span
+          aria-hidden={active}
+          className={cl("flex items-center transition duration-300", {
+            "pointer-events-none -translate-y-1.5 opacity-0": active,
+            "group-hover/button:opacity-100": !active,
+          })}
+        >
+          <ClipboardIcon title="Kopier kodesnutt" />
+        </span>
       </button>
     );
   }
