@@ -17,14 +17,17 @@
   "main": "./dist/index.css",
   "scripts": {
     "build": "postcss --use postcss-import postcss-combine-duplicated-selectors -o dist/index.css index.css",
-    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css"
+    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css",
+    "build:modules": "postcss --config postcss.modules.config.js --dir dist/modules **/*.css",
+    "watch:modules": "postcss --config postcss.modules.config.js --dir dist/modules --watch src/@navikt/core/css/**/*.css"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^2.8.4",
     "normalize.css": "^8.0.1",
-    "postcss": "^8.4.0",
-    "postcss-cli": "^9.0.0",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^9.1.0",
     "postcss-combine-duplicated-selectors": "10.0.3",
-    "postcss-import": "^14.1.0"
+    "postcss-import": "^14.1.0",
+    "postcss-modules": "^6.0.0"
   }
 }
