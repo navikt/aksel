@@ -1,19 +1,19 @@
 import { Checkbox, CheckboxGroup } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
-import { useState } from "react";
 
 const Example = () => {
-  const [state, setState] = useState(["Midterst"]);
+  const handleChange = (val: any[]) => console.log(val);
 
   return (
     <CheckboxGroup
       legend="Hvor vil du sitte?"
-      onChange={(v) => setState(v)}
-      value={state}
+      onChange={(val: any[]) => handleChange(val)}
     >
       <Checkbox value="Bakerst">Bakerst</Checkbox>
       <Checkbox value="Midterst">Midterst</Checkbox>
-      <Checkbox value="Fremst">Fremst</Checkbox>
+      <Checkbox value="Fremst" description="Tilgjengelig med rullestol">
+        Fremst
+      </Checkbox>
     </CheckboxGroup>
   );
 };
@@ -26,5 +26,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 10,
+  index: 9,
 };
