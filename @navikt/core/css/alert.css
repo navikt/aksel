@@ -37,6 +37,10 @@
   background-color: var(--ac-alert-error-bg, var(--a-surface-danger-subtle));
 }
 
+.navds-alert--error > .navds-alert__icon {
+  color: var(--ac-alert-icon-error-color, var(--a-icon-danger));
+}
+
 .navds-alert--warning {
   border-color: var(--ac-alert-warning-border, var(--a-border-warning));
   background-color: var(--ac-alert-warning-bg, var(--a-surface-warning-subtle));
@@ -44,6 +48,7 @@
 
 .navds-alert--warning > .navds-alert__icon {
   background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
+  color: var(--ac-alert-icon-warning-color, var(--a-icon-warning));
 }
 
 .navds-alert--info {
@@ -51,9 +56,17 @@
   background-color: var(--ac-alert-info-bg, var(--a-surface-info-subtle));
 }
 
+.navds-alert--info > .navds-alert__icon {
+  color: var(--ac-alert-icon-info-color, var(--a-icon-info));
+}
+
 .navds-alert--success {
   border-color: var(--ac-alert-success-border, var(--a-border-success));
   background-color: var(--ac-alert-success-bg, var(--a-surface-success-subtle));
+}
+
+.navds-alert--success > .navds-alert__icon {
+  color: var(--ac-alert-icon-success-color, var(--a-icon-success));
 }
 
 .navds-alert--inline {
