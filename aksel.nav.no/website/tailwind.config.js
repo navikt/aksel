@@ -115,6 +115,10 @@ module.exports = {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
         },
+        toc: {
+          "0%": { opacity: 0.2 },
+          "100%": { opacity: 1 },
+        },
         expand: {
           "0%": {
             opacity: 0.2,
@@ -191,6 +195,7 @@ module.exports = {
         shimmerBg: "shimmerBg 15s ease infinite",
         fadeInRight: "fadeInRight 0.30s ease-in-out forwards",
         fadeIn: "fadeIn 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
+        toc: "toc 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
         expand: "expand 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
         expandLg: "expandLg 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
         popup: "popup 2s cubic-bezier(0.215, 0.61, 0.355, 1)",

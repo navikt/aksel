@@ -1,39 +1,16 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
-import { ClipboardIcon } from "@navikt/aksel-icons";
 import internal from "@navikt/ds-css-internal/tokens.json";
 import core from "@navikt/ds-css/tokens.json";
-import { Expand, SuccessStroke } from "@navikt/ds-icons";
+import { Expand } from "@navikt/ds-icons";
 import { BodyLong, Label, Link } from "@navikt/ds-react";
 import cl from "classnames";
-import copy from "copy-to-clipboard";
+import CopyButton from "components/sanity-modules/code/CopyButton";
 import NextLink from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(false);
-
-  const timeoutRef = useRef<NodeJS.Timeout>();
-
-  const handleCopy = () => {
-    setActive(true);
-    timeoutRef.current && clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setActive(false), 2000);
-    const str = Object.entries(tokens).reduce(
-      (prev, cur) =>
-        prev +
-        `${cur[0]}: ${
-          cur[1].startsWith("--") ? `var(${cur[1]})` : `${cur[1]}`
-        };\n`,
-      ""
-    );
-    copy(str);
-  };
-
-  useEffect(() => {
-    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
-  }, []);
 
   const tokens: { [key: string]: string } | null =
     node.title in core
@@ -77,22 +54,17 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
         </table>
         {(open || !showMore) && (
           <div className="border-border-divider bg-surface-neutral-subtle relative w-full rounded-b border border-t-0 p-2">
-            <button
-              onClick={handleCopy}
-              className="text-text-default hover:bg-surface-neutral-subtle-hover focus-visible:shadow-focus absolute top-2 right-2 rounded px-1 py-1 text-2xl focus:outline-none"
-            >
-              {active ? (
-                <>
-                  <SuccessStroke className="text-[1.5rem]" aria-hidden />
-                  <span className="sr-only">Kopier formarterte tokens</span>
-                </>
-              ) : (
-                <>
-                  <ClipboardIcon aria-hidden />
-                  <span className="sr-only">Kopier formarterte tokens</span>
-                </>
+            <CopyButton
+              variant="tokentable"
+              content={Object.entries(tokens).reduce(
+                (prev, cur) =>
+                  prev +
+                  `${cur[0]}: ${
+                    cur[1].startsWith("--") ? `var(${cur[1]})` : `${cur[1]}`
+                  };\n`,
+                ""
               )}
-            </button>
+            />
             <Label size="small" as="span" spacing>
               Hva er dette?
             </Label>
