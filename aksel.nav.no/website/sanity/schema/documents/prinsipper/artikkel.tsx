@@ -10,7 +10,7 @@ import { prinsippKategorier } from "../../../config";
 const prefix = "prinsipper/";
 
 export const Prinsipp = defineType({
-  title: "Aksel Prinsipp",
+  title: "Prinsipp artikkel",
   name: "aksel_prinsipp",
   type: "document",
   groups,
