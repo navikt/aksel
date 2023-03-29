@@ -34,8 +34,12 @@
 }
 
 .navds-accordion__item--open > .navds-accordion__header {
-  background-color: var(--ac-accordion-item-bg-open, var(--a-surface-action-subtle));
+  background-color: var(--ac-accordion-header-bg-open, var(--ac-accordion-item-bg-open, var(--a-surface-action-subtle)));
   border-color: var(--ac-accordion-item-border-open, var(--a-surface-action-subtle));
+}
+
+.navds-accordion__item--open > :where(.navds-accordion__header:hover) {
+  background-color: var(--ac-accordion-header-bg-open-hover, var(--a-surface-action-subtle));
 }
 
 .navds-accordion__content {
