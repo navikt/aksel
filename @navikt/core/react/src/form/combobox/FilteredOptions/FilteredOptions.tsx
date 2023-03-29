@@ -1,8 +1,9 @@
 import React, { forwardRef, useMemo } from "react";
 import cl from "clsx";
-import { BodyShort, Label } from "../..";
+import { BodyShort, Label } from "../../..";
 import { Add } from "@navikt/ds-icons";
-import CheckIcon from "./CheckIcon";
+import CheckIcon from "../CheckIcon";
+import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const normalizeText = (text: string) =>
   typeof text === "string" ? text.toLowerCase().trim() : "";
@@ -14,41 +15,10 @@ interface FilteredOptionsProps {
   selectedOptions: string[];
   toggleOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   focusInput: () => void;
-  isInternalListOpen: boolean | null;
   ref: React.RefObject<HTMLUListElement>;
   value: string;
   addNewOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 }
-
-export const useFilteredOptions = () => {
-  const [filteredOptionsIndex, setFilteredOptionsIndex] = React.useState(0);
-  const [isInternalListOpen, setInternalListOpen] = React.useState(false);
-  const [filteredOptions, setFilteredOptions] = React.useState<string[]>([]);
-
-  const toggleList = () => {
-    setInternalListOpen(!isInternalListOpen);
-  };
-
-  const currentOption = useMemo(() => {
-    return filteredOptions[filteredOptionsIndex];
-  }, [filteredOptions, filteredOptionsIndex]);
-
-  const resetFilteredOptionsIndex = () => {
-    setFilteredOptionsIndex(0);
-  };
-
-  return {
-    filteredOptionsIndex,
-    setFilteredOptionsIndex,
-    isInternalListOpen,
-    setInternalListOpen,
-    filteredOptions,
-    setFilteredOptions,
-    toggleList,
-    currentOption,
-    resetFilteredOptionsIndex,
-  };
-};
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
   (
@@ -58,12 +28,13 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
       filteredOptionsIndex,
       selectedOptions,
       toggleOption,
-      isInternalListOpen,
       value,
       addNewOption,
     },
     ref
   ) => {
+    const { isListOpen } = useFilteredOptionsContext();
+
     const isValueNew = useMemo(() => {
       return (
         Boolean(value) &&
@@ -77,7 +48,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
       <ul
         ref={ref}
         className={cl("navds-combobox__list", {
-          "navds-combobox__list--closed": !isInternalListOpen,
+          "navds-combobox__list--closed": !isListOpen,
         })}
         id={`${id}-filtered-options`}
         role="listbox"

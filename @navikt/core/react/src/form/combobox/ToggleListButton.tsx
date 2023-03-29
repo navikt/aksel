@@ -1,34 +1,31 @@
 import React from "react";
 import { Collapse, Expand } from "@navikt/ds-icons";
 
+import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
+
 interface ToggleListButtonProps {
-  isInternalListOpen: boolean | null;
-  setInternalListOpen: React.Dispatch<React.SetStateAction<boolean | null>>;
   toggleListButtonLabel?: string;
 }
 
 export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
-  isInternalListOpen,
-  setInternalListOpen,
   toggleListButtonLabel,
 }) => {
+  const { isListOpen, toggleIsListOpen } = useFilteredOptionsContext();
   return (
     <button
       type="button"
-      onMouseDown={() => {
-        setInternalListOpen(!isInternalListOpen);
-        console.log("toggleListButton mousedown");
-      }}
+      onMouseDown={() => toggleIsListOpen()}
+      onKeyDown={({ key }) => key === "Enter" && toggleIsListOpen()}
       className="navds-combobox__button-toggle-list"
     >
       <span className="navds-sr-only">
         {toggleListButtonLabel
           ? toggleListButtonLabel
-          : isInternalListOpen
+          : isListOpen
           ? "Lukk"
           : "Åpne"}
       </span>
-      {isInternalListOpen ? <Collapse aria-hidden /> : <Expand aria-hidden />}
+      {isListOpen ? <Collapse aria-hidden /> : <Expand aria-hidden />}
     </button>
   );
 };

@@ -11,10 +11,10 @@ import { BodyShort, Label, mergeRefs, omit } from "../..";
 import usePrevious from "../../util/usePrevious";
 import { useFormField } from "../useFormField";
 import ClearButton from "./ClearButton";
-import FilteredOptions from "./FilteredOptions";
+import FilteredOptions from "./FilteredOptions/FilteredOptions";
+import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "./SelectedOptions";
 import ToggleListButton from "./ToggleListButton";
-
 import { ComboboxClearEvent, ComboboxProps } from "./types";
 import useCustomOptions from "./useCustomOptions";
 
@@ -43,7 +43,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       clearButtonLabel,
       toggleListButton = true,
       toggleListButtonLabel,
-      isListOpen,
+      isListOpen: isExternalListOpen,
       id = "",
       setOptions,
       options = [],
@@ -64,12 +64,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
-    const [isInternalListOpen, setInternalListOpen] = useState<boolean | null>(
-      isListOpen
-    );
     const prevSelectedOptions = usePrevious(selectedOptions);
     const [internalValue, setInternalValue] = useState<string>("");
     const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
+    const { toggleIsListOpen, isListOpen } = useFilteredOptionsContext();
+
     const {
       customOptions,
       setCustomOptions,
@@ -95,11 +94,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         externalValue ?? setInternalValue(val);
         onChange?.(val);
         setFilteredOptionsIndex(0);
-        if (!isInternalListOpen && !!val) {
-          setInternalListOpen(true);
-        }
+        if (!isListOpen && !!val) toggleIsListOpen(true);
       },
-      [isInternalListOpen, onChange, externalValue]
+      [externalValue, onChange, isListOpen, toggleIsListOpen]
     );
 
     const focusInput = useCallback(() => {
@@ -138,7 +135,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             removeCustomOption({ value: curFilteredOpt });
         } else if (
           // add new option on Enter input value if in filteredOptions OR if input value is empty
-          isInternalListOpen &&
+          isListOpen &&
           curFilteredOpt &&
           (filteredOptions?.includes?.(String(value)) || !value)
         )
@@ -148,7 +145,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         filteredOptions,
         filteredOptionsIndex,
         selectedOptions,
-        isInternalListOpen,
+        isListOpen,
         value,
         setSelectedOptions,
         customOptions,
@@ -187,7 +184,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       switch (e.key) {
         case "Escape":
           handleClear({ trigger: e.key, event: e });
-          setInternalListOpen(false);
+          toggleIsListOpen(false);
           break;
         case "ArrowDown": {
           e.preventDefault();
@@ -247,14 +244,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     function onFocusWrapper(e) {
       const ref = wrapperRef.current;
-      if (ref?.contains(e.target) && !ref?.contains(e.relatedTarget)) {
-        setInternalListOpen(true);
-      }
+      if (ref?.contains(e.target) && !ref?.contains(e.relatedTarget))
+        toggleIsListOpen(true);
     }
 
     function onBlurWrapper(e) {
       if (!wrapperRef.current?.contains(e.relatedTarget))
-        setInternalListOpen(false);
+        toggleIsListOpen(false);
     }
 
     return (
@@ -311,8 +307,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 role="combobox"
                 onKeyUp={handleKeyUp}
                 onKeyDown={handleKeyDown}
-                aria-controls={isInternalListOpen ? id : ""}
-                aria-expanded={!!isInternalListOpen}
+                aria-controls={isListOpen ? id : ""}
+                aria-expanded={!!isListOpen}
                 autoComplete="off"
                 aria-autocomplete="list"
                 aria-owns={`${id}-options`}
@@ -334,11 +330,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               />
             )}
             {toggleListButton && (
-              <ToggleListButton
-                isInternalListOpen={isInternalListOpen}
-                setInternalListOpen={setInternalListOpen}
-                toggleListButtonLabel={toggleListButtonLabel}
-              />
+              <ToggleListButton toggleListButtonLabel={toggleListButtonLabel} />
             )}
           </div>
           <FilteredOptions
@@ -349,7 +341,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             selectedOptions={selectedOptions}
             toggleOption={toggleOption}
             focusInput={focusInput}
-            isInternalListOpen={isInternalListOpen}
             value={value}
             addNewOption={handleAddCustomOption}
           />

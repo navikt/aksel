@@ -1,2 +1,2 @@
-export { default as Combobox } from "./Combobox";
+export { default as Combobox } from "./ComboboxProvider";
 export { type ComboboxProps } from "./types";

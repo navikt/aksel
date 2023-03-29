@@ -1,10 +1,5 @@
 import React, { useCallback, useState } from "react";
 
-//make three methods for custom options
-//1. add custom option
-//2. remove custom option
-//3. set custom options, for special cases
-
 export interface CustomOptionProps {
   value?: string;
   event?: React.MouseEvent<HTMLElement>;
@@ -13,8 +8,6 @@ export interface CustomOptionProps {
 const useCustomOptions = (setSelectedOptions) => {
   const [customOptions, setCustomOptions] = useState<string[]>([]);
 
-  //handle clicking
-  //handle enter
   const removeCustomOption = useCallback(
     ({ value, event }: CustomOptionProps) => {
       const newValue =
