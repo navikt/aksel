@@ -1,5 +1,7 @@
 # @navikt/aksel-icons
 
+## 2.8.5
+
 ## 2.8.4
 
 ### Patch Changes
