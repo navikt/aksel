@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.8.6
+
+### Patch Changes
+
+- [`2eb358ad8`](https://github.com/navikt/aksel/commit/2eb358ad888979d21c385b3900973946f3f466be) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alert, Chips og ErrorSummary har nå bedre utvalg av tokens
+
 ## 2.8.5
 
 ### Patch Changes
