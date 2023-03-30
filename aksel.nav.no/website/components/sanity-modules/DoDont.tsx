@@ -1,7 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityT, urlFor } from "@/lib";
-import { ErrorFilled, SuccessFilled, WarningFilled } from "@navikt/ds-icons";
+import {
+  CheckmarkCircleFillIcon,
+  ExclamationmarkTriangleFillIcon,
+  XMarkOctagonFillIcon,
+} from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
 import React from "react";
@@ -10,23 +14,26 @@ const GetIcon = (s: string) => {
   switch (s) {
     case "do":
       return (
-        <SuccessFilled
+        <CheckmarkCircleFillIcon
           aria-hidden
-          className="text-large mt-[1px] flex-shrink-0 text-green-500"
+          fontSize="1.5rem"
+          className="flex-shrink-0 text-green-500"
         />
       );
     case "dont":
       return (
-        <ErrorFilled
+        <XMarkOctagonFillIcon
           aria-hidden
-          className="text-large mt-[1px] flex-shrink-0 text-red-500"
+          fontSize="1.5rem"
+          className="flex-shrink-0 text-red-500"
         />
       );
     case "warning":
       return (
-        <WarningFilled
+        <ExclamationmarkTriangleFillIcon
           aria-hidden
-          className="text-large mt-[1px] flex-shrink-0 text-orange-500"
+          fontSize="1.5rem"
+          className="flex-shrink-0 text-orange-500"
         />
       );
     default:
@@ -60,14 +67,18 @@ const Element = ({
           {
             "border-t-border-success": block.variant === "do",
             "border-t-border-danger": block.variant === "dont",
-            "border-t-border-warning": block.variant === "warning",
+            "border-t-surface-warning": block.variant === "warning",
           }
         )}
       />
       <figcaption data-variant={block.variant}>
         <div className="mt-3">
           {block.description && (
-            <BodyShort size="small" as="span" className="inline-flex gap-2">
+            <BodyShort
+              size="small"
+              as="span"
+              className="inline-flex items-center gap-2"
+            >
               {GetIcon(block.variant)}
               {block.description}
             </BodyShort>

@@ -1,4 +1,4 @@
-import { ExternalLink } from "@navikt/ds-icons";
+import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading, Ingress, Link } from "@navikt/ds-react";
 import BlockContent from "@sanity/block-content-to-react";
 import cl from "clsx";
@@ -220,7 +220,7 @@ const serializers = {
             )
           }
         >
-          {children} <ExternalLink title="åpner lenken i ny fane" />
+          {children} <ExternalLinkIcon title="åpner lenken i ny fane" />
         </Link>
       ) : (
         <NextLink href={href} passHref legacyBehavior>
