@@ -1,5 +1,14 @@
 # @navikt/aksel-icons
 
+## 2.8.8
+
+### Patch Changes
+
+- [`ed8e28454`](https://github.com/navikt/aksel/commit/ed8e284540a9e3a5be7d1d5e393f31db86962613) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Nye ikoner
+
+  - :tada: VideoSlash
+  - :tada: VideoSlashFill
+
 ## 2.8.7
 
 ## 2.8.6
