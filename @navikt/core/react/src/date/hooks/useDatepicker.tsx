@@ -1,6 +1,6 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import isWeekend from "date-fns/isWeekend";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { DayClickEventHandler, isMatch } from "react-day-picker";
 import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
@@ -10,6 +10,7 @@ import {
   isValidDate,
   parseDate,
 } from "../utils";
+import { useEscape } from "./useEscape";
 import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export interface UseDatepickerOptions
@@ -135,7 +136,7 @@ export const useDatepicker = (
   const locale = getLocaleFromString(_locale);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const daypickerRef = useRef<HTMLDivElement>(null);
+  const [daypickerRef, setDaypickerRef] = useState<HTMLDivElement>();
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
@@ -150,10 +151,12 @@ export const useDatepicker = (
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
   useOutsideClickHandler(open, setOpen, [
-    daypickerRef.current,
+    daypickerRef,
     inputRef.current,
     inputRef.current?.nextSibling,
   ]);
+
+  useEscape(open, setOpen, inputRef);
 
   const updateDate = (date?: Date) => {
     onDateChange?.(date);
@@ -275,24 +278,6 @@ export const useDatepicker = (
     setMonth(defaultMonth ?? day);
   };
 
-  const handleClose = useCallback(() => {
-    setOpen(false);
-    inputRef.current && inputRef.current.focus();
-  }, []);
-
-  const escape = useCallback(
-    (e) => open && e.key === "Escape" && handleClose(),
-    [handleClose, open]
-  );
-
-  useEffect(() => {
-    window.addEventListener("keydown", escape, false);
-
-    return () => {
-      window.removeEventListener("keydown", escape, false);
-    };
-  }, [escape]);
-
   const datepickerProps = {
     month,
     onMonthChange: (month) => setMonth(month),
@@ -306,7 +291,7 @@ export const useDatepicker = (
     onOpenToggle: () => setOpen((x) => !x),
     disabled,
     disableWeekends,
-    ref: daypickerRef,
+    ref: setDaypickerRef,
   };
 
   const inputProps = {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { DateInputProps } from "../DateInput";
 import { MonthPickerProps } from "../monthpicker/MonthPicker";
 import {
@@ -8,6 +8,7 @@ import {
   isValidDate,
   parseDate,
 } from "../utils";
+import { useEscape } from "./useEscape";
 import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export interface UseMonthPickerOptions
@@ -119,7 +120,7 @@ export const useMonthpicker = (
   const locale = getLocaleFromString(_locale);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const monthpickerRef = useRef<HTMLDivElement>(null);
+  const [monthpickerRef, setMonthpickerRef] = useState<HTMLDivElement>();
 
   // Initialize states
   const [year, setYear] = useState(defaultSelected ?? defaultYear ?? today);
@@ -133,10 +134,12 @@ export const useMonthpicker = (
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
   useOutsideClickHandler(open, setOpen, [
-    monthpickerRef.current,
+    monthpickerRef,
     inputRef.current,
     inputRef.current?.nextSibling,
   ]);
+
+  useEscape(open, setOpen, inputRef);
 
   const updateMonth = (date?: Date) => {
     onMonthChange?.(date);
@@ -270,24 +273,6 @@ export const useMonthpicker = (
     setYear(month);
   };
 
-  const handleClose = useCallback(() => {
-    setOpen(false);
-    inputRef.current && inputRef.current.focus();
-  }, []);
-
-  const escape = useCallback(
-    (e) => open && e.key === "Escape" && handleClose(),
-    [handleClose, open]
-  );
-
-  useEffect(() => {
-    window.addEventListener("keydown", escape, false);
-
-    return () => {
-      window.removeEventListener("keydown", escape, false);
-    };
-  }, [escape]);
-
   const monthpickerProps = {
     year,
     onYearChange: (y?: Date) => setYear(y ?? today),
@@ -299,7 +284,7 @@ export const useMonthpicker = (
     open,
     onOpenToggle: () => setOpen((x) => !x),
     disabled,
-    ref: monthpickerRef,
+    ref: setMonthpickerRef,
   };
 
   const inputProps = {

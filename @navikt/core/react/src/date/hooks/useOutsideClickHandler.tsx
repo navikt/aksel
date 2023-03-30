@@ -11,11 +11,14 @@ export const useOutsideClickHandler = (
       if (!e?.target || !e?.target?.nodeType || !composed) {
         return;
       }
-      !refs.some(
-        (element) => element?.contains(e.target) || element?.contains(composed)
-      ) &&
-        open &&
-        setOpen(false);
+      if (
+        !refs.some(
+          (element) =>
+            element?.contains(e.target) || element?.contains(composed)
+        )
+      ) {
+        open && setOpen(false);
+      }
     },
     [open, refs, setOpen]
   );
