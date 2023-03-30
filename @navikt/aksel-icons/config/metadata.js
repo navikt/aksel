@@ -33,8 +33,8 @@ fs.writeFileSync(
     sub_category: "Time",
     keywords: string[];
     variant: "stroke" | "fill";
-    date_added: Date;
-    date_modified: Date;
+    updated_at: Date;
+    created_at: Date;
   }
 
   declare const metadata: {
