@@ -3,7 +3,7 @@ import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
 import { Popover, useId } from "../..";
 import { DateInputType, MonthPickerInput } from "../DateInput";
-import { DateContext, SharedMonthProvider } from "../hooks";
+import { DateContext, SharedMonthProvider } from "../context";
 import { getLocaleFromString, Matcher } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthPickerStandalone, {

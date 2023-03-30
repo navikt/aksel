@@ -13,7 +13,7 @@ import {
 } from "react-day-picker";
 import { omit, Popover, useId } from "../..";
 import { DateInputType, DatePickerInput } from "../DateInput";
-import { DateContext } from "../hooks";
+import { DateContext } from "../context";
 import { getLocaleFromString, labels } from "../utils";
 import { Caption, DropdownCaption } from "./caption";
 import DatePickerStandalone, {
