@@ -242,6 +242,14 @@ export const useRangeDatepicker = (
 
   const [open, setOpen] = useState(false);
 
+  useOutsideClickHandler(open, setOpen, [
+    datePickerRef.current,
+    inputRefTo.current,
+    inputRefFrom.current,
+    inputRefTo.current?.nextSibling,
+    inputRefFrom.current?.nextSibling,
+  ]);
+
   const updateRange = (range?: DateRange) => {
     onRangeChange?.(range);
     setSelectedRange(range);
@@ -255,14 +263,6 @@ export const useRangeDatepicker = (
     setValidation(msg);
     onValidate?.(msg);
   };
-
-  useOutsideClickHandler(open, setOpen, [
-    datePickerRef.current,
-    inputRefTo.current,
-    inputRefFrom.current,
-    inputRefTo.current?.nextSibling,
-    inputRefFrom.current?.nextSibling,
-  ]);
 
   const reset = () => {
     updateRange(defaultSelected ?? { from: undefined, to: undefined });

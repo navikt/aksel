@@ -149,6 +149,12 @@ export const useDatepicker = (
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
+  useOutsideClickHandler(open, setOpen, [
+    daypickerRef.current,
+    inputRef.current,
+    inputRef.current?.nextSibling,
+  ]);
+
   const updateDate = (date?: Date) => {
     onDateChange?.(date);
     setSelectedDay(date);
@@ -156,12 +162,6 @@ export const useDatepicker = (
 
   const updateValidation = (val: Partial<DateValidationT> = {}) =>
     onValidate?.(getValidationMessage(val));
-
-  useOutsideClickHandler(open, setOpen, [
-    daypickerRef.current,
-    inputRef.current,
-    inputRef.current?.nextSibling,
-  ]);
 
   const reset = () => {
     updateDate(defaultSelected);

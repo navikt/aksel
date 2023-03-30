@@ -132,6 +132,12 @@ export const useMonthpicker = (
 
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
+  useOutsideClickHandler(open, setOpen, [
+    monthpickerRef.current,
+    inputRef.current,
+    inputRef.current?.nextSibling,
+  ]);
+
   const updateMonth = (date?: Date) => {
     onMonthChange?.(date);
     setSelectedMonth(date);
@@ -139,12 +145,6 @@ export const useMonthpicker = (
 
   const updateValidation = (val: Partial<MonthValidationT> = {}) =>
     onValidate?.(getValidationMessage(val));
-
-  useOutsideClickHandler(open, setOpen, [
-    monthpickerRef.current,
-    inputRef.current,
-    inputRef.current?.nextSibling,
-  ]);
 
   const reset = () => {
     updateMonth(defaultSelected);
