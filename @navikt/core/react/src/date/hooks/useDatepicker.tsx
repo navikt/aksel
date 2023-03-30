@@ -10,6 +10,7 @@ import {
   isValidDate,
   parseDate,
 } from "../utils";
+import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export interface UseDatepickerOptions
   extends Pick<
@@ -153,40 +154,14 @@ export const useDatepicker = (
     setSelectedDay(date);
   };
 
-  const updateValidation = (val: Partial<DateValidationT> = {}) => {
-    const msg = getValidationMessage(val);
-    onValidate?.(msg);
-  };
+  const updateValidation = (val: Partial<DateValidationT> = {}) =>
+    onValidate?.(getValidationMessage(val));
 
-  const handleFocusIn = useCallback(
-    (e) => {
-      /* Workaround for shadow-dom users (open) */
-      const composed = e.composedPath?.()?.[0];
-      if (!e?.target || !e?.target?.nodeType || !composed) {
-        return;
-      }
-
-      ![
-        daypickerRef.current,
-        inputRef.current,
-        inputRef.current?.nextSibling,
-      ].some(
-        (element) => element?.contains(e.target) || element?.contains(composed)
-      ) &&
-        open &&
-        setOpen(false);
-    },
-    [open]
-  );
-
-  useEffect(() => {
-    window.addEventListener("focusin", handleFocusIn);
-    window.addEventListener("pointerdown", handleFocusIn);
-    return () => {
-      window?.removeEventListener?.("focusin", handleFocusIn);
-      window?.removeEventListener?.("pointerdown", handleFocusIn);
-    };
-  }, [handleFocusIn]);
+  useOutsideClickHandler(open, setOpen, [
+    daypickerRef.current,
+    inputRef.current,
+    inputRef.current?.nextSibling,
+  ]);
 
   const reset = () => {
     updateDate(defaultSelected);

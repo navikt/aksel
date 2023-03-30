@@ -12,6 +12,7 @@ import {
   parseDate,
 } from "../utils";
 import { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
+import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export type RangeValidationT = {
   from: DateValidationT;
@@ -255,36 +256,13 @@ export const useRangeDatepicker = (
     onValidate?.(msg);
   };
 
-  const handleFocusIn = useCallback(
-    (e) => {
-      /* Workaround for shadow-dom users (open) */
-      const composed = e.composedPath?.()?.[0];
-      if (!e?.target || !e?.target?.nodeType || !composed) {
-        return;
-      }
-      ![
-        datePickerRef.current,
-        inputRefTo.current,
-        inputRefFrom.current,
-        inputRefTo.current?.nextSibling,
-        inputRefFrom.current?.nextSibling,
-      ].some(
-        (element) => element?.contains(e.target) || element?.contains(composed)
-      ) &&
-        open &&
-        setOpen(false);
-    },
-    [open]
-  );
-
-  useEffect(() => {
-    window.addEventListener("focusin", handleFocusIn);
-    window.addEventListener("pointerdown", handleFocusIn);
-    return () => {
-      window?.removeEventListener?.("focusin", handleFocusIn);
-      window?.removeEventListener?.("pointerdown", handleFocusIn);
-    };
-  }, [handleFocusIn]);
+  useOutsideClickHandler(open, setOpen, [
+    datePickerRef.current,
+    inputRefTo.current,
+    inputRefFrom.current,
+    inputRefTo.current?.nextSibling,
+    inputRefFrom.current?.nextSibling,
+  ]);
 
   const reset = () => {
     updateRange(defaultSelected ?? { from: undefined, to: undefined });
