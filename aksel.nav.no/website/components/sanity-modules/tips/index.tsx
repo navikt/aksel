@@ -60,7 +60,7 @@ const Tips = ({ node }: { node: SanityT.Schema.tips }) => {
   }
 
   return (
-    <div className="border-l-deepblue-500 my-7 max-w-2xl border-l-4 px-4 py-3 sm:px-6">
+    <div className="border-l-deepblue-500 bg-deepblue-50 my-7 max-w-2xl border-l-4 px-4 py-3 sm:px-6">
       <BodyShort
         className="override-text-no-max text-deepblue-800 -ml-[2px] flex items-center gap-1 font-semibold"
         spacing
