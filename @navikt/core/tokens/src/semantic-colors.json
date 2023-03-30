@@ -5,7 +5,14 @@
         "value": "{a.gray.900.value}"
       },
       "subtle": {
-        "value": "{a.grayalpha.600.value}"
+        "on": {
+          "inverted": {
+            "value": "{a.grayalpha.200.value}"
+          }
+        },
+        "@": {
+          "value": "{a.grayalpha.600.value}"
+        }
       },
       "visited": {
         "value": "{a.purple.500.value}"
@@ -121,13 +128,14 @@
           "hover": {
             "value": "{a.deepblue.600.value}"
           },
-          "@": { "value": "{a.deepblue.500.value}" }
+          "@": {
+            "value": "{a.deepblue.500.value}"
+          }
         },
         "@": {
           "value": "{a.blue.500.value}"
         }
       },
-
       "neutral": {
         "subtle": {
           "hover": {
@@ -150,20 +158,30 @@
           "value": "{a.gray.700.value}"
         }
       },
-
       "success": {
         "subtle": {
-          "hover": { "value": "{a.green.200.value}" },
-          "@": { "value": "{a.green.100.value}" }
+          "hover": {
+            "value": "{a.green.200.value}"
+          },
+          "@": {
+            "value": "{a.green.100.value}"
+          }
         },
-        "@": { "value": "{a.green.500.value}" },
-        "hover": { "value": "{a.green.600.value}" }
+        "@": {
+          "value": "{a.green.500.value}"
+        },
+        "hover": {
+          "value": "{a.green.600.value}"
+        }
       },
-
       "danger": {
         "subtle": {
-          "hover": { "value": "{a.red.200.value}" },
-          "@": { "value": "{a.red.100.value}" }
+          "hover": {
+            "value": "{a.red.200.value}"
+          },
+          "@": {
+            "value": "{a.red.100.value}"
+          }
         },
         "hover": {
           "value": "{a.red.600.value}"
@@ -171,37 +189,62 @@
         "active": {
           "value": "{a.red.700.value}"
         },
-        "@": { "value": "{a.red.500.value}" }
+        "@": {
+          "value": "{a.red.500.value}"
+        }
       },
-
       "warning": {
         "subtle": {
-          "hover": { "value": "{a.orange.200.value}" },
-          "@": { "value": "{a.orange.100.value}" }
+          "hover": {
+            "value": "{a.orange.200.value}"
+          },
+          "@": {
+            "value": "{a.orange.100.value}"
+          }
         },
-        "@": { "value": "{a.orange.500.value}" }
+        "@": {
+          "value": "{a.orange.500.value}"
+        }
       },
-
       "info": {
         "subtle": {
-          "hover": { "value": "{a.lightblue.200.value}" },
-          "@": { "value": "{a.lightblue.100.value}" }
+          "hover": {
+            "value": "{a.lightblue.200.value}"
+          },
+          "@": {
+            "value": "{a.lightblue.100.value}"
+          }
         },
-        "@": { "value": "{a.lightblue.500.value}" }
+        "@": {
+          "value": "{a.lightblue.500.value}"
+        }
       },
-
       "alt1": {
-        "subtle": { "value": "{a.purple.100.value}" },
-        "@": { "value": "{a.purple.400.value}" }
+        "subtle": {
+          "value": "{a.purple.100.value}"
+        },
+        "@": {
+          "value": "{a.purple.400.value}"
+        }
       },
       "alt2": {
-        "subtle": { "value": "{a.limegreen.100.value}" },
-        "@": { "value": "{a.limegreen.400.value}" }
+        "subtle": {
+          "value": "{a.limegreen.100.value}"
+        },
+        "@": {
+          "value": "{a.limegreen.400.value}"
+        }
       },
       "alt3": {
-        "subtle": { "value": "{a.deepblue.100.value}" },
-        "strong": { "value": "{a.deepblue.800.value}" },
-        "@": { "value": "{a.deepblue.500.value}" }
+        "subtle": {
+          "value": "{a.deepblue.100.value}"
+        },
+        "strong": {
+          "value": "{a.deepblue.800.value}"
+        },
+        "@": {
+          "value": "{a.deepblue.500.value}"
+        }
       }
     },
     "border": {
@@ -215,12 +258,20 @@
         "value": "{a.grayalpha.300.value}"
       },
       "subtle": {
-        "hover": { "value": "{a.grayalpha.300.value}" },
-        "@": { "value": "{a.grayalpha.200.value}" }
+        "hover": {
+          "value": "{a.grayalpha.300.value}"
+        },
+        "@": {
+          "value": "{a.grayalpha.200.value}"
+        }
       },
       "action": {
-        "selected": { "value": "{a.deepblue.500.value}" },
-        "@": { "value": "{a.blue.500.value}" }
+        "selected": {
+          "value": "{a.deepblue.500.value}"
+        },
+        "@": {
+          "value": "{a.blue.500.value}"
+        }
       },
       "selected": {
         "value": "{a.blue.500.value}"
@@ -243,12 +294,18 @@
             "value": "{a.blue.200.value}"
           }
         },
-        "@": { "value": "{a.blue.800.value}" }
+        "@": {
+          "value": "{a.blue.800.value}"
+        }
       },
       "on": {
         "inverted": {
-          "@": { "value": "{a.gray.200.value}" },
-          "subtle": { "value": "{a.gray.700.value}" }
+          "@": {
+            "value": "{a.gray.200.value}"
+          },
+          "subtle": {
+            "value": "{a.gray.700.value}"
+          }
         }
       },
       "alt1": {
@@ -269,7 +326,9 @@
         "value": "{a.gray.600.value}"
       },
       "action": {
-        "selected": { "value": "{a.deepblue.500.value}" },
+        "selected": {
+          "value": "{a.deepblue.500.value}"
+        },
         "on": {
           "action": {
             "subtle": {
@@ -277,7 +336,9 @@
             }
           }
         },
-        "@": { "value": "{a.blue.500.value}" }
+        "@": {
+          "value": "{a.blue.500.value}"
+        }
       },
       "success": {
         "value": "{a.green.500.value}"
