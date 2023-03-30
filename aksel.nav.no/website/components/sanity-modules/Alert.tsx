@@ -3,11 +3,7 @@ import React from "react";
 import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 
-const Alert = ({
-  node,
-}: {
-  node: SanityT.Schema.alert & { _key: string };
-}): JSX.Element => {
+const Alert = ({ node }: { node: SanityT.Schema.alert & { _key: string } }) => {
   return (
     <div className="mb-7 max-w-2xl">
       <DsAlert variant={node.variant}>

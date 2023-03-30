@@ -1,5 +1,25 @@
 # @navikt/ds-css
 
+## 2.8.7
+
+### Patch Changes
+
+- [`7f3f025db`](https://github.com/navikt/aksel/commit/7f3f025db2ad605df4240605a733d10d08db753a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset typografi for radio, checkbox. Button token for tertiary
+
+## 2.8.6
+
+### Patch Changes
+
+- [`2eb358ad8`](https://github.com/navikt/aksel/commit/2eb358ad888979d21c385b3900973946f3f466be) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alert, Chips og ErrorSummary har nå bedre utvalg av tokens
+
+## 2.8.5
+
+### Patch Changes
+
+- [`f66437082`](https://github.com/navikt/aksel/commit/f664370826ed51bda7ad681e1f1799c26d2c1f0a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :art: Accordion-tokens for header bakgrunn
+
+- [#1879](https://github.com/navikt/aksel/pull/1879) [`55b585618`](https://github.com/navikt/aksel/commit/55b585618341a4d8bf26ed9b9e129d897b1600dc) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset tekstfarge i select på iphone
+
 ## 2.8.4
 
 ## 2.8.3

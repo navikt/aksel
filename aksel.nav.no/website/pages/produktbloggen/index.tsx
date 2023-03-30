@@ -53,12 +53,12 @@ export const getStaticProps = async ({
       title: "Forside Blogg",
       id: page?._id ?? "",
     },
-    notFound: !bloggposts && !preview,
+    notFound: false,
     revalidate: 60,
   };
 };
 
-const Page = (props: PageProps["props"]): JSX.Element => {
+const Page = (props: PageProps["props"]) => {
   if (!props.bloggposts) {
     return <NotFotfund />;
   }
@@ -135,7 +135,7 @@ const Page = (props: PageProps["props"]): JSX.Element => {
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>

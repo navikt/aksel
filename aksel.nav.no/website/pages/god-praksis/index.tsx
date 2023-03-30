@@ -1,7 +1,16 @@
 import { Footer } from "@/layout";
-import { akselTema, urlFor, SanityT } from "@/lib";
+import { urlFor, destructureBlocks } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
+import {
+  AkselGodPraksisDocT,
+  AkselGodPraksisLandingPageDocT,
+  AkselTemaT,
+  NextPageT,
+  ResolveContributorsT,
+  ResolveSlugT,
+  ResolveTemaT,
+} from "@/types";
 import { Clock } from "@navikt/ds-icons";
 import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
@@ -12,24 +21,61 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import React, { lazy } from "react";
 
-interface AkselTemaT extends SanityT.Schema.aksel_tema {
-  refCount: number;
-}
+type PageProps = NextPageT<{
+  page: AkselGodPraksisLandingPageDocT;
+  temaer: Array<AkselTemaT>;
+  resent: Array<
+    ResolveTemaT<ResolveContributorsT<ResolveSlugT<AkselGodPraksisDocT>>>
+  >;
+}>;
 
-interface PageProps {
-  temaer: AkselTemaT[];
-  resent: SanityT.Schema.aksel_artikkel &
-    {
-      slug: string;
-      tema: string[];
-      contributors?: { title?: string }[];
-    }[];
-  page: any;
-  slug: string;
-  preview: boolean;
-}
+export const query = `*[_type == "godpraksis_landingsside"][0]{
+  "page": {
+    ...,
+    intro[]{
+      ...,
+      ${destructureBlocks}
+    }
+  },
+  "temaer": *[_type == "aksel_tema" && defined(seksjoner[].sider[])]{
+    ...,
+    "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
+  },
+  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...9]{
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
+  }
+}`;
 
-const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
+export const getStaticProps = async ({
+  preview = false,
+}: {
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const { temaer, page, resent } = await getClient().fetch(query);
+
+  return {
+    props: {
+      page,
+      temaer,
+      resent,
+      slug: "/god-praksis",
+      preview,
+      title: "Forside God praksis",
+      id: page?._id ?? "",
+    },
+    notFound: !temaer,
+    revalidate: 60,
+  };
+};
+
+const Page = ({ temaer, page, resent }: PageProps["props"]) => {
   const filteredTemas = temaer.filter((x) => x.refCount > 0);
   return (
     <>
@@ -118,11 +164,11 @@ const Page = ({ temaer, page, resent }: PageProps): JSX.Element => {
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>
-        <WithPreview comp={Page} query={akselTema} props={props} />
+        <WithPreview comp={Page} query={query} props={props} />
       </PreviewSuspense>
     );
   }
@@ -131,24 +177,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-export const getStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}) => {
-  const { temaer, page, resent } = await getClient().fetch(akselTema);
-
-  return {
-    props: {
-      page,
-      temaer,
-      resent,
-      slug: "/god-praksis",
-      preview,
-      title: "Forside God praksis",
-    },
-    notFound: !temaer,
-    revalidate: 60,
-  };
-};

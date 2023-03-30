@@ -9,7 +9,7 @@ import {
   Search,
 } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "components/assets";
-import { options, SearchResults } from "lib/types/search";
+import { searchOptions, SearchResultsT } from "@/types";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
@@ -24,10 +24,10 @@ import styles from "../header.module.css";
 
  */
 export const GlobalSearch = () => {
-  const [results, setResults] = useState<SearchResults>(null);
+  const [results, setResults] = useState<SearchResultsT>(null);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [activeTags, setTags] = useState<Array<keyof typeof options>>([]);
+  const [activeTags, setTags] = useState<Array<keyof typeof searchOptions>>([]);
   const [os, setOs] = useState<"mac" | "windows">("windows");
   const inputRef = useRef(null);
 
@@ -223,7 +223,7 @@ export const GlobalSearch = () => {
           </button>
           <div className="search-grid-filter mt-8">
             <CheckboxGroup legend="Filter" onChange={setTags}>
-              {Object.entries(options)
+              {Object.entries(searchOptions)
                 .filter((x) => !x[1].hidden)
                 .map(([key, val]) => (
                   <Checkbox
@@ -284,7 +284,7 @@ export const GlobalSearch = () => {
                   {`${results?.totalHits} treff på "${query}"${
                     activeTags.length > 0
                       ? ` i ${activeTags
-                          .map((x) => options[x].display.toLowerCase())
+                          .map((x) => searchOptions[x].display.toLowerCase())
                           .join(", ")}`
                       : ""
                   }`}

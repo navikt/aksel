@@ -11,7 +11,7 @@ const ExpansionCard = ({
     description?: string;
     body: any[];
   };
-}): JSX.Element => {
+}) => {
   if (!node.heading || !node.body || !node.heading_level) {
     return null;
   }

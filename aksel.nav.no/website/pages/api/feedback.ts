@@ -1,6 +1,6 @@
+import { FeedbackT } from "@/types";
 import dotenv from "dotenv";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { FeedbackT } from "@/lib";
 import { noCdnClient } from "../../lib/sanity/sanity.server";
 
 dotenv.config();

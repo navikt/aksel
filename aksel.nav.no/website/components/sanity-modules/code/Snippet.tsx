@@ -13,7 +13,7 @@ const CodeSnippet = ({
   node: SanityT.Schema.kode;
   className?: string;
   style?: any;
-}): JSX.Element => {
+}) => {
   if (!code || !code.code) {
     return null;
   }
@@ -27,7 +27,7 @@ const CodeSnippet = ({
       <div
         className={cl(
           className,
-          "relative mb-8 grid max-h-96 overflow-x-auto rounded bg-gray-900"
+          "relative mb-8 grid max-h-96 overflow-x-auto rounded bg-[#0f172a]"
         )}
         {...props}
       >
@@ -39,7 +39,7 @@ const CodeSnippet = ({
           theme={undefined}
         >
           {({ tokens, getLineProps, getTokenProps }) => (
-            <pre className="text-text-on-inverted relative m-0 overflow-x-auto overflow-y-auto rounded-lg bg-gray-900 p-4 pr-16 font-mono">
+            <pre className="text-text-on-inverted relative m-0 overflow-x-auto overflow-y-auto rounded-lg bg-[#0f172a] p-4 pr-16 font-mono">
               {tokens.map((line, i) => (
                 <div
                   key={i}

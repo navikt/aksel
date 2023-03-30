@@ -217,6 +217,7 @@
 
 .navds-button--tertiary {
   color: var(--ac-button-tertiary-text, var(--a-text-action));
+  background-color: var(--ac-button-tertiary-bg, var(--a-surface-transparent));
 }
 
 .navds-button--tertiary:hover {

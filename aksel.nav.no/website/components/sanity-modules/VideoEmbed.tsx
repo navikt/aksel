@@ -16,7 +16,7 @@ const Video = ({
     transkripsjon?: string;
     caption?: string;
   };
-}): JSX.Element => {
+}) => {
   const [open, setOpen] = useState(false);
 
   if (

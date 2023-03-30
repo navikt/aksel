@@ -11,7 +11,7 @@
   padding: 14px var(--a-spacing-3) var(--a-spacing-3);
   margin: 0;
   text-align: left;
-  background: transparent;
+  background: var(--ac-accordion-header-bg, var(--a-surface-transparent));
   cursor: pointer;
   border: none;
   border-bottom: 2px solid var(--ac-accordion-header-border, var(--a-border-divider));
@@ -25,6 +25,7 @@
 .navds-accordion__header:hover {
   color: var(--ac-accordion-header-text-hover, var(--a-text-action-on-action-subtle));
   border-color: var(--ac-accordion-header-border-hover, var(--a-border-default));
+  background: var(--ac-accordion-header-bg-hover, var(--a-surface-transparent));
 }
 
 .navds-accordion__header-content {
@@ -33,8 +34,12 @@
 }
 
 .navds-accordion__item--open > .navds-accordion__header {
-  background-color: var(--ac-accordion-item-bg-open, var(--a-surface-action-subtle));
+  background-color: var(--ac-accordion-header-bg-open, var(--ac-accordion-item-bg-open, var(--a-surface-action-subtle)));
   border-color: var(--ac-accordion-item-border-open, var(--a-surface-action-subtle));
+}
+
+.navds-accordion__item--open > :where(.navds-accordion__header:hover) {
+  background-color: var(--ac-accordion-header-bg-open-hover, var(--a-surface-action-subtle));
 }
 
 .navds-accordion__content {

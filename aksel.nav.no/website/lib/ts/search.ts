@@ -1,6 +1,6 @@
 import { allArticleDocuments } from "../../sanity/config";
 
-export const options: {
+export const searchOptions: {
   [K in typeof allArticleDocuments[number] | "icon" | "icon_page"]: {
     display: string;
     index: number;
@@ -17,15 +17,15 @@ export const options: {
   icon_page: { display: "Ikonsøk", index: 7, hidden: true },
 };
 
-export type SearchResults = {
-  groupedHits: GroupedHits;
-  topResults: SearchHit[];
-  hits: Record<keyof typeof options, number>;
+export type SearchResultsT = {
+  groupedHits: GroupedHitsT;
+  topResults: SearchHitT[];
+  hits: Record<keyof typeof searchOptions, number>;
   totalHits: number;
 };
 
 interface PageItemT {
-  _type: keyof Omit<keyof typeof options, "icon">;
+  _type: keyof Omit<keyof typeof searchOptions, "icon">;
   content: string;
   heading: string;
   ingress?: string;
@@ -58,7 +58,7 @@ export interface IconPageItemT {
 
 export type FuseItemT = PageItemT | IconItemT | IconPageItemT;
 
-export type FuseHits = {
+export type FuseHitsT = {
   item: FuseItemT;
   score: number;
 
@@ -71,7 +71,7 @@ export type FuseHits = {
   }[];
 };
 
-export type SearchHit = {
+export type SearchHitT = {
   item: FuseItemT;
   score: number;
 
@@ -81,4 +81,6 @@ export type SearchHit = {
   };
 };
 
-export type GroupedHits = Partial<Record<keyof typeof options, SearchHit[]>>;
+export type GroupedHitsT = Partial<
+  Record<keyof typeof searchOptions, SearchHitT[]>
+>;

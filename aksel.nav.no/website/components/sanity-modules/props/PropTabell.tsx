@@ -27,7 +27,11 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
             prop?.required ? "" : "?"
           } `}</span>
         ) : (
-          <Tooltip content={`${prop.defaultValue}`} arrow={false} delay={0}>
+          <Tooltip
+            content={`default: ${prop.defaultValue}`}
+            arrow={false}
+            delay={0}
+          >
             <span className="mr-2 cursor-pointer border-b border-dashed border-gray-600 font-semibold">{`${
               prop.name
             }${prop?.required ? "" : "?"}`}</span>
@@ -51,7 +55,7 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
   );
 };
 
-const PropTable = ({ komponent }: { komponent: PropT }): JSX.Element => {
+const PropTable = ({ komponent }: { komponent: PropT }) => {
   return (
     <div>
       <Heading

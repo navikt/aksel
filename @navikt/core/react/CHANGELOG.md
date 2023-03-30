@@ -1,5 +1,33 @@
 # @navikt/ds-react
 
+## 2.8.7
+
+### Patch Changes
+
+- [`7f3f025db`](https://github.com/navikt/aksel/commit/7f3f025db2ad605df4240605a733d10d08db753a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset typografi for radio, checkbox. Button token for tertiary
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.7
+  - @navikt/ds-icons@2.8.7
+
+## 2.8.6
+
+### Patch Changes
+
+- [`2eb358ad8`](https://github.com/navikt/aksel/commit/2eb358ad888979d21c385b3900973946f3f466be) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alert, Chips og ErrorSummary har nå bedre utvalg av tokens
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.6
+  - @navikt/ds-icons@2.8.6
+
+## 2.8.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.5
+  - @navikt/ds-icons@2.8.5
+
 ## 2.8.4
 
 ### Patch Changes

@@ -1,12 +1,9 @@
 import { withErrorBoundary } from "@/error-boundary";
-import NextLink from "next/link";
-import Image from "next/legacy/image";
+import { urlFor } from "@/lib";
+import { AkselTemaT } from "@/types";
 import { logNav } from "@/utils";
-import { SanityT, urlFor } from "@/lib";
-
-interface AkselTemaT extends SanityT.Schema.aksel_tema {
-  refCount: number;
-}
+import Image from "next/legacy/image";
+import NextLink from "next/link";
 
 const GodPraksisCardSimple = ({ node }: { node: Partial<AkselTemaT> }) => {
   if (!node?.pictogram || !node?.slug?.current || !node?.title) {

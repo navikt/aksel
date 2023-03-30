@@ -13,7 +13,7 @@ export function TableOfContentsv2({
   changedState: any;
   hideToc?: boolean;
   aksel?: boolean;
-}): JSX.Element {
+}) {
   const [toc, setToc] = useState<
     { heading: string; id: string; lvl3: { heading: string; id: string }[] }[]
   >([]);
@@ -157,7 +157,7 @@ export function TableOfContentsv2({
                 <BodyShort
                   as="li"
                   size="small"
-                  className={cl("py-1", {
+                  className={cl("relative py-1", {
                     "font-semibold": link.id === activeId,
                     "": link.id !== activeId,
                   })}
@@ -166,7 +166,7 @@ export function TableOfContentsv2({
                     href={`#${link.id}`}
                     onClick={() => handleFocus(`${link.id}`)}
                     className={cl(
-                      "block max-w-full no-underline hover:underline",
+                      "z-10 block  max-w-full no-underline hover:underline",
                       {
                         "text-deepblue-800":
                           link.id === activeId &&
@@ -179,7 +179,7 @@ export function TableOfContentsv2({
                   </Link>
                   {link?.lvl3?.length > 0 && (
                     <ul
-                      className={cl("animate-fadeIn pt-1", {
+                      className={cl("animate-toc z-10 pt-1 ", {
                         hidden: link.id !== activeId,
                       })}
                     >

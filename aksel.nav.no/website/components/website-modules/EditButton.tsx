@@ -3,7 +3,7 @@ import { Tooltip } from "@navikt/ds-react";
 import { useContext } from "react";
 import { IdContext, useCheckAuth } from "./utils";
 
-function EditButton(): JSX.Element {
+function EditButton() {
   const idCtx = useContext(IdContext);
 
   const validUser = useCheckAuth();

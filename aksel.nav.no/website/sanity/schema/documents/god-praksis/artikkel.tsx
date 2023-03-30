@@ -14,7 +14,7 @@ import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 const prefix = "god-praksis/artikler/";
 
 export const GodPraksisArtikkel = defineType({
-  title: "Aksel Artikkel",
+  title: "God praksis artikkel",
   name: "aksel_artikkel",
   type: "document",
   groups,

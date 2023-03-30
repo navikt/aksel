@@ -2,11 +2,7 @@ import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
 import { Table } from "@navikt/ds-react";
 
-const TableComponent = ({
-  node,
-}: {
-  node: SanityT.Schema.tabell_v2;
-}): JSX.Element => {
+const TableComponent = ({ node }: { node: SanityT.Schema.tabell_v2 }) => {
   if (!node || !node.rows || node.rows.length < 2) {
     return null;
   }

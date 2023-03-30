@@ -1,5 +1,11 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
+
+import {
+  ResolveContributorsSingleT,
+  ResolveTemaT,
+  ResolveSlugT,
+  AkselGodPraksisDocT,
+} from "@/types";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import NextLink from "next/link";
 import { abbrName, dateStr, logNav } from "../..";
@@ -16,16 +22,9 @@ const ArtikkelCard = ({
   tema,
   level = "2",
   ...rest
-}: Partial<
-  (SanityT.Schema.aksel_artikkel | SanityT.Schema.aksel_blogg) & {
-    slug: string;
-    tema: string[];
-    source?: string;
-    contributor: { title: string } | null;
-    variant?: "god-praksis" | "tema";
-    level?: "2" | "3" | "4";
-  }
->) => {
+}: ResolveContributorsSingleT<
+  ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
+> & { source: string; variant: string; level?: "2" | "3" }) => {
   const date = (rest as any)?.updateInfo?.lastVerified
     ? (rest as any)?.updateInfo?.lastVerified
     : publishedAt

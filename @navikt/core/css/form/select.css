@@ -3,6 +3,7 @@
   background-color: var(--ac-select-bg, var(--a-surface-default));
   border-radius: var(--a-border-radius-medium);
   border: 1px solid var(--ac-select-border, var(--a-border-default));
+  color: var(--ac-select-text, var(--a-text-default));
   width: 100%;
   box-sizing: border-box;
   min-height: 48px;

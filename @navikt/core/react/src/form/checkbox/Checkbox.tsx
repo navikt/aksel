@@ -1,8 +1,9 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "clsx";
-import useCheckbox from "./useCheckbox";
+import React, { forwardRef, InputHTMLAttributes } from "react";
+import { BodyLong, BodyShort, Detail } from "../../typography";
+import { omit } from "../../util";
 import { FormFieldProps } from "../useFormField";
-import { BodyShort, Detail, omit } from "../..";
+import useCheckbox from "./useCheckbox";
 
 export interface CheckboxProps
   extends FormFieldProps,
@@ -43,7 +44,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const { inputProps, hasError, size } = useCheckbox(props);
 
-    const Description = size === "medium" ? BodyShort : Detail;
+    const Description = size === "medium" ? BodyLong : Detail;
 
     return (
       <div
@@ -93,11 +94,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               {props.children}
             </BodyShort>
             {props.description && (
-              <Description
-                as="span"
-                size="small"
-                className="navds-checkbox__description"
-              >
+              <Description as="span" className="navds-checkbox__description">
                 {props.description}
               </Description>
             )}

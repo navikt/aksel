@@ -12,7 +12,7 @@ import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 const prefix = "grunnleggende/";
 
 export const GrunnleggendeArtikkel = defineType({
-  title: "Ds-Artikkel",
+  title: "Grunnleggende artikkel",
   name: "ds_artikkel",
   type: "document",
   groups,

@@ -12,11 +12,7 @@ const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
   />
 );
 
-const UuSeksjon = ({
-  node,
-}: {
-  node: SanityT.Schema.tastatur_modul;
-}): JSX.Element => {
+const UuSeksjon = ({ node }: { node: SanityT.Schema.tastatur_modul }) => {
   if (!node || !node?.tastatur) {
     return null;
   }

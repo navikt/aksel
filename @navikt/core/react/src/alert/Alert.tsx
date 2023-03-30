@@ -1,8 +1,8 @@
 import {
-  ErrorColored,
-  InformationColored,
-  SuccessColored,
-  WarningColored,
+  ErrorFilled,
+  InformationFilled,
+  SuccessFilled,
+  WarningFilled,
 } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
@@ -37,13 +37,13 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 const Icon = ({ variant, ...props }) => {
   switch (variant) {
     case "error":
-      return <ErrorColored title="Feil" {...props} />;
+      return <ErrorFilled title="Feil" {...props} />;
     case "warning":
-      return <WarningColored title="Advarsel" {...props} />;
+      return <WarningFilled title="Advarsel" {...props} />;
     case "info":
-      return <InformationColored title="Informasjon" {...props} />;
+      return <InformationFilled title="Informasjon" {...props} />;
     case "success":
-      return <SuccessColored title="Suksess" {...props} />;
+      return <SuccessFilled title="Suksess" {...props} />;
     default:
       return null;
   }

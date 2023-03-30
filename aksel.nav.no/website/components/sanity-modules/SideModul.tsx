@@ -12,7 +12,7 @@ type SpesialT = {
   token?: { title: string; kategori: string };
 };
 
-const SideModul = ({ node }: { node: SpesialT }): JSX.Element => {
+const SideModul = ({ node }: { node: SpesialT }) => {
   if (!node || !node.modul) {
     return null;
   }

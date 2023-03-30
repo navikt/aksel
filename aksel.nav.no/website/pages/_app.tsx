@@ -21,7 +21,7 @@ function App({
   Component: any;
   pageProps: any;
   router: Router;
-}): JSX.Element {
+}) {
   useScrollToHashOnPageLoad();
   usePageView(router, pageProps);
 

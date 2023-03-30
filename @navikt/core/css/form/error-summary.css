@@ -23,7 +23,7 @@
 }
 
 .navds-error-summary__list > * {
-  color: var(--a-blue-500);
+  color: var(--ac-error-summary-list-dot, var(--a-text-action));
 }
 
 .navds-error-summary--small > .navds-error-summary__list {

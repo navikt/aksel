@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { Footer } from "@/layout";
 
-import { akselForsideQuery, SanityT, urlFor } from "@/lib";
+import { contributorsAll, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
-import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
+import { AkselTemaT, NextPageT } from "@/types";
 import {
   CompassIcon,
   ComponentIcon,
@@ -15,19 +15,109 @@ import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
+import FrontpageBlock, {
+  BlocksT,
+} from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy, useEffect, useState } from "react";
-import FrontpageBlock, {
-  BlocksT,
-} from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
 
-const WithPreview = lazy(() => import("../components/WithPreview"));
+type PageProps = NextPageT<{
+  tema: Array<AkselTemaT>;
+  page: {
+    title: string;
+    god_praksis_intro: string;
+    seo: { meta: string; image: string };
+  };
+  blocks?: BlocksT[];
+}>;
 
-const Forside = ({ page, tema, blocks }: PageProps): JSX.Element => {
+export const getStaticProps = async ({
+  preview = false,
+}: {
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const client = getClient();
+
+  const { page = null, tema = null, blocks = null } = await client.fetch(query);
+
+  return {
+    props: {
+      tema,
+      page,
+      blocks,
+      slug: "/",
+      preview,
+      id: page?._id ?? "",
+      title: "Forsiden",
+    },
+    revalidate: 600,
+    notFound: false,
+  };
+};
+
+export const query = `*[_type == "aksel_forside"][0]{
+  "page": {
+    ...,
+  },
+  "tema": *[_type == "aksel_tema" && defined(seksjoner[].sider[])],
+  blocks[]{
+    ...,
+    _type == "nytt_fra_aksel"=>{
+      highlights[]->{
+        ...,
+        "content": null,
+        ${contributorsAll},
+        "tema": tema[]->title,
+      },
+      "curatedResent": {
+        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...2]{
+          _type,
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          "slug": slug.current,
+          ingress,
+          seo,
+          ${contributorsAll}
+        },
+        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+          _type,
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          "slug": slug.current,
+          "tema": tema[]->title,
+          ingress,
+          seo,
+          ${contributorsAll}
+        },
+        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+          _type,
+          _id,
+          heading,
+          "slug": slug.current,
+          status,
+          kategori,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          seo,
+          ${contributorsAll}
+        },
+      },
+    }
+  }
+}`;
+
+const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
   const [pause, setPause] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -52,7 +142,7 @@ const Forside = ({ page, tema, blocks }: PageProps): JSX.Element => {
         t?.title &&
         t?.slug &&
         t?.pictogram &&
-        t?.seksjoner.find((s) => !!s?.sider.find((s) => s?._ref))
+        t?.seksjoner.find((s) => !!s?.sider.find((s: any) => s?._ref))
       );
     })
     .sort((a, b) => a.title.localeCompare(b.title));
@@ -202,61 +292,18 @@ const Forside = ({ page, tema, blocks }: PageProps): JSX.Element => {
   );
 };
 
-const Page = (props: PageProps): JSX.Element => {
+const WithPreview = lazy(() => import("../components/WithPreview"));
+
+const Page = (props: PageProps["props"]) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Forside {...props} />}>
-        <WithPreview comp={Forside} query={akselForsideQuery} props={props} />
+        <WithPreview comp={Forside} query={query} props={props} />
       </PreviewSuspense>
     );
   }
 
   return <Forside {...props} />;
-};
-
-interface PageProps {
-  tema: SanityT.Schema.aksel_tema[];
-  bloggs: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
-  page: {
-    title: string;
-    god_praksis_intro: string;
-    seo: { meta: string; image: string };
-  };
-  resent: SanityT.Schema.aksel_artikkel &
-    {
-      slug: string;
-      tema: string[];
-      contributors?: { title?: string }[];
-    }[];
-  blocks?: BlocksT[];
-  slug: string;
-  preview: boolean;
-}
-
-export const getStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}) => {
-  const client = getClient();
-
-  const {
-    page = null,
-    tema = null,
-    blocks = null,
-  } = await client.fetch(akselForsideQuery);
-
-  return {
-    props: {
-      tema,
-      page,
-      blocks,
-      slug: "/",
-      preview,
-      id: page?._id ?? "",
-    },
-    revalidate: 60,
-  };
 };
 
 export default Page;

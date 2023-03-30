@@ -10,7 +10,7 @@ export const LevelTwoHeading = ({
   children: [React.ReactNode | string];
   hidden?: boolean;
   id: string;
-}): JSX.Element => {
+}) => {
   return (
     <>
       {hidden && <div id={id} className="scroll-m-18" />}

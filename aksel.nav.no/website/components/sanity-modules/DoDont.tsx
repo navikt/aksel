@@ -38,7 +38,7 @@ const Element = ({
   block,
 }: {
   block: Sanity.Keyed<SanityT.Schema.do_dont_block>;
-}): JSX.Element => {
+}) => {
   if (!block.picture) return null;
   return (
     <figure

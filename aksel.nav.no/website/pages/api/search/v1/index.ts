@@ -1,15 +1,14 @@
 import {
-  FuseHits,
+  FuseHitsT,
   FuseItemT,
-  GroupedHits,
+  GroupedHitsT,
   IconPageItemT,
-  SearchHit,
-  SearchResults,
-} from "@/lib";
+  SearchHitT,
+  SearchResultsT,
+} from "@/types";
 import { omit } from "@navikt/ds-react";
 import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
-import { akselArticleFields } from "../../../../lib/sanity/queries";
 import { allArticleDocuments } from "../../../../sanity/config";
 import IconMetadata from "@navikt/aksel-icons/metadata";
 
@@ -58,15 +57,15 @@ export default async function initialSearch(
     iconPageData,
   ];
 
-  const result: FuseHits[] = getSearchResults(
+  const result: FuseHitsT[] = getSearchResults(
     hits.map((x) => ({
       ...x,
       ...(x?.content ? { content: x.content.replace(/\n|\r/g, " ") } : {}),
     })),
     query
-  ) as unknown as FuseHits[];
+  ) as unknown as FuseHitsT[];
 
-  const filteredResult: FuseHits[] = getSearchResults(
+  const filteredResult: FuseHitsT[] = getSearchResults(
     hits
       .filter((x) => doc.includes(x._type))
       .map((x) => ({
@@ -74,12 +73,12 @@ export default async function initialSearch(
         ...(x?.content ? { content: x.content.replace(/\n|\r/g, " ") } : {}),
       })),
     query
-  ) as unknown as FuseHits[];
+  ) as unknown as FuseHitsT[];
 
   const formatedResults = formatResults(filteredResult, query);
 
-  const groupedHits: GroupedHits = formatedResults?.reduce(
-    (prev, cur: SearchHit) => {
+  const groupedHits: GroupedHitsT = formatedResults?.reduce(
+    (prev, cur: SearchHitT) => {
       if (cur.item._type in prev) {
         return { ...prev, [cur.item._type]: [...prev[cur.item._type], cur] };
       } else {
@@ -94,7 +93,7 @@ export default async function initialSearch(
     query
   );
 
-  const response: SearchResults = {
+  const response: SearchResultsT = {
     groupedHits,
     topResults: filteredResult?.length > 8 ? topResults : [],
     totalHits: filteredResult?.length ?? 0,
@@ -127,7 +126,7 @@ function findRelevantQuery(q: string) {
   return q.split(" ")[0].toLowerCase();
 }
 
-function formatResults(res: FuseHits[], query: string): SearchHit[] {
+function formatResults(res: FuseHitsT[], query: string): SearchHitT[] {
   return res.map((x) => {
     let hightlightDesc = !!x.matches[0].indices
       .map((y) => x.matches[0].value.slice(y[0], y[1] + 1))
@@ -175,7 +174,7 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
         highlight: { shouldHightlight: hightlightDesc, description },
       },
       ["matches"]
-    ) as SearchHit;
+    ) as SearchHitT;
   });
 }
 
@@ -185,7 +184,17 @@ async function searchSanity() {
   const sanityQueryHttp = `*[_type in [${allArticleDocuments.map(
     (x) => `"${x}"`
   )}] ]{
-    ${akselArticleFields}
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    updateInfo,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
+    status,
+    _type,
     "intro": pt::text(intro.body),
     "content": content[]{...,
       _type == "kode_eksempler" => {
@@ -224,7 +233,7 @@ async function searchSanity() {
 
 function getSearchResults(results, query) {
   /* https://fusejs.io/api/options.html */
-  const fuse = new Fuse<SearchHit>(results, {
+  const fuse = new Fuse<SearchHitT>(results, {
     keys: [
       { name: "heading", weight: 100 },
       { name: "ingress", weight: 50 },

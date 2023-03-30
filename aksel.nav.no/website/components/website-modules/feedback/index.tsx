@@ -1,4 +1,4 @@
-import { FeedbackT, HelpfulArticleEnum } from "@/lib";
+import { FeedbackT, HelpfulArticleEnum } from "@/types";
 import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import cl from "clsx";
 import { useRouter } from "next/router";
@@ -18,7 +18,7 @@ const Feedback = ({
   center?: boolean;
   akselFeedback?: boolean;
   text?: string;
-}): JSX.Element => {
+}) => {
   const idCtx = useContext(IdContext);
   const { asPath, basePath } = useRouter();
   const [textValue, setTextValue] = useState("");

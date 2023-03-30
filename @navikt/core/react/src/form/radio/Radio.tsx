@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import { BodyShort, Detail, omit } from "../..";
+import { BodyLong, BodyShort, Detail } from "../../typography";
+import { omit } from "../../util";
 import { FormFieldProps } from "../useFormField";
 import { useRadio } from "./useRadio";
 
@@ -24,7 +25,7 @@ export interface RadioProps
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const { inputProps, size, hasError } = useRadio(props);
 
-  const Description = size === "medium" ? BodyShort : Detail;
+  const Description = size === "medium" ? BodyLong : Detail;
 
   return (
     <div
@@ -45,11 +46,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
             {props.children}
           </BodyShort>
           {props.description && (
-            <Description
-              as="span"
-              size="small"
-              className="navds-radio__description"
-            >
+            <Description as="span" className="navds-radio__description">
               {props.description}
             </Description>
           )}
