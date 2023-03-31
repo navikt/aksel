@@ -13,7 +13,7 @@ import { omit } from "../..";
 import { getLocaleFromString, labels } from "../utils";
 import { Caption, DropdownCaption } from "./caption";
 import { ConditionalModeProps, DatePickerDefaultProps } from "./DatePicker";
-import { Head } from "./Head";
+import { TableHead } from "./TableHead";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<
@@ -100,7 +100,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
           selected={selected ?? selectedDates}
           components={{
             Caption: dropdownCaption ? DropdownCaption : Caption,
-            Head: Head,
+            Head: TableHead,
           }}
           className="navds-date"
           classNames={{ vhidden: "navds-sr-only" }}

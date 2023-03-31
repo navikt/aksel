@@ -1,7 +1,7 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import isBefore from "date-fns/isBefore";
 import isWeekend from "date-fns/isWeekend";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { DateRange, isMatch } from "react-day-picker";
 import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
@@ -12,6 +12,8 @@ import {
   parseDate,
 } from "../utils";
 import { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
+import { useEscape } from "./useEscape";
+import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export type RangeValidationT = {
   from: DateValidationT;
@@ -211,7 +213,7 @@ export const useRangeDatepicker = (
 
   const inputRefTo = useRef<HTMLInputElement>(null);
   const inputRefFrom = useRef<HTMLInputElement>(null);
-  const datePickerRef = useRef<HTMLDivElement | null>(null);
+  const [daypickerRef, setDaypickerRef] = useState<HTMLDivElement>();
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
@@ -241,6 +243,20 @@ export const useRangeDatepicker = (
 
   const [open, setOpen] = useState(false);
 
+  useOutsideClickHandler(open, setOpen, [
+    daypickerRef,
+    inputRefTo.current,
+    inputRefFrom.current,
+    inputRefTo.current?.nextSibling,
+    inputRefFrom.current?.nextSibling,
+  ]);
+
+  useEscape(
+    open,
+    setOpen,
+    selectedRange?.from && !selectedRange?.to ? inputRefTo : inputRefFrom
+  );
+
   const updateRange = (range?: DateRange) => {
     onRangeChange?.(range);
     setSelectedRange(range);
@@ -254,37 +270,6 @@ export const useRangeDatepicker = (
     setValidation(msg);
     onValidate?.(msg);
   };
-
-  const handleFocusIn = useCallback(
-    (e) => {
-      /* Workaround for shadow-dom users (open) */
-      const composed = e.composedPath?.()?.[0];
-      if (!e?.target || !e?.target?.nodeType || !composed) {
-        return;
-      }
-      ![
-        datePickerRef.current,
-        inputRefTo.current,
-        inputRefFrom.current,
-        inputRefTo.current?.nextSibling,
-        inputRefFrom.current?.nextSibling,
-      ].some(
-        (element) => element?.contains(e.target) || element?.contains(composed)
-      ) &&
-        open &&
-        setOpen(false);
-    },
-    [open]
-  );
-
-  useEffect(() => {
-    window.addEventListener("focusin", handleFocusIn);
-    window.addEventListener("pointerdown", handleFocusIn);
-    return () => {
-      window?.removeEventListener?.("focusin", handleFocusIn);
-      window?.removeEventListener?.("pointerdown", handleFocusIn);
-    };
-  }, [handleFocusIn]);
 
   const reset = () => {
     updateRange(defaultSelected ?? { from: undefined, to: undefined });
@@ -527,28 +512,6 @@ export const useRangeDatepicker = (
       : toChange(e.target.value, day, isBefore, isAfter);
   };
 
-  const handleClose = useCallback(() => {
-    setOpen(false);
-    if (selectedRange?.from && !selectedRange?.to) {
-      inputRefTo?.current?.focus();
-    } else {
-      inputRefFrom?.current?.focus();
-    }
-  }, [selectedRange]);
-
-  const escape = useCallback(
-    (e) => open && e.key === "Escape" && handleClose(),
-    [handleClose, open]
-  );
-
-  useEffect(() => {
-    window.addEventListener("keydown", escape, false);
-
-    return () => {
-      window.removeEventListener("keydown", escape, false);
-    };
-  }, [escape]);
-
   const datepickerProps = {
     month: month,
     onMonthChange: (month) => setMonth(month),
@@ -563,7 +526,7 @@ export const useRangeDatepicker = (
     onOpenToggle: () => setOpen((x) => !x),
     disabled,
     disableWeekends,
-    ref: datePickerRef,
+    ref: setDaypickerRef,
   };
 
   const fromInputProps = {

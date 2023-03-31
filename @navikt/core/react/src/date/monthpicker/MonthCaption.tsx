@@ -6,7 +6,7 @@ import startOfYear from "date-fns/startOfYear";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Button, Select } from "../..";
-import { useSharedMonthContext } from "../hooks";
+import { useSharedMonthContext } from "../context";
 import { hasNextYear, labelNextYear, labelPrevYear } from "../utils";
 
 export const MonthCaption = () => {

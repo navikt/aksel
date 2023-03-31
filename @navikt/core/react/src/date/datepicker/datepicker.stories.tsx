@@ -12,27 +12,6 @@ const disabledDays = [
 export default {
   title: "ds-react/Datepicker",
   component: DatePicker,
-  argTypes: {
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    },
-    locale: {
-      control: {
-        type: "radio",
-        options: ["nb", "nn", "en"],
-      },
-    },
-    mode: {
-      defaultValue: "single",
-      control: {
-        type: "radio",
-        options: ["single", "multiple", "range"],
-      },
-    },
-  },
 };
 
 export const Default = {
@@ -123,6 +102,27 @@ export const Default = {
     inputfield: true,
     standalone: false,
     openOnFocus: true,
+    mode: "single",
+  },
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+    locale: {
+      control: {
+        type: "radio",
+        options: ["nb", "nn", "en"],
+      },
+    },
+    mode: {
+      control: {
+        type: "radio",
+        options: ["single", "multiple", "range"],
+      },
+    },
   },
 };
 
