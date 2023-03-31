@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.8.9
+
+### Patch Changes
+
+- [#1905](https://github.com/navikt/aksel/pull/1905) [`212194964`](https://github.com/navikt/aksel/commit/212194964c4dd576e1ffc031316dff8cbe5016a2) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Padding/border-radius tokens for button.css
+
 ## 2.8.8
 
 ## 2.8.7
