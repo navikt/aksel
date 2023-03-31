@@ -16,7 +16,7 @@ import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsCont
 import SelectedOptions from "./SelectedOptions";
 import ToggleListButton from "./ToggleListButton";
 import { ComboboxClearEvent, ComboboxProps } from "./types";
-import useCustomOptions from "./useCustomOptions";
+import { useCustomOptionsContext } from "./customOptionsContext";
 
 const normalizeText = (text: string) =>
   typeof text === "string" ? text.toLowerCase().trim() : "";
@@ -74,7 +74,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setCustomOptions,
       removeCustomOption,
       addCustomOption,
-    } = useCustomOptions(setSelectedOptions);
+    } = useCustomOptionsContext(setSelectedOptions);
 
     const value = useMemo(
       () => String(externalValue ?? internalValue),

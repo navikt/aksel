@@ -1,11 +1,28 @@
-import React, { useCallback, useState } from "react";
+import React, {
+  useState,
+  useCallback,
+  createContext,
+  useContext,
+  MouseEvent,
+} from "react";
 
 export interface CustomOptionProps {
   value?: string;
-  event?: React.MouseEvent<HTMLElement>;
+  event?: MouseEvent<HTMLElement>;
 }
 
-const useCustomOptions = (setSelectedOptions) => {
+type CustomOptionsContextType = {
+  customOptions: string[];
+  setCustomOptions: (options: string[]) => void;
+  removeCustomOption: ({ value, event }: CustomOptionProps) => void;
+  addCustomOption: ({ value, event }: CustomOptionProps) => void;
+};
+
+const CustomOptionsContext = createContext<CustomOptionsContextType>(
+  {} as CustomOptionsContextType
+);
+
+export const CustomOptionsProvider = ({ children, setSelectedOptions }) => {
   const [customOptions, setCustomOptions] = useState<string[]>([]);
 
   const removeCustomOption = useCallback(
@@ -33,12 +50,26 @@ const useCustomOptions = (setSelectedOptions) => {
     [setCustomOptions, setSelectedOptions]
   );
 
-  return {
+  const customOptionsState = {
     customOptions,
     setCustomOptions,
     removeCustomOption,
     addCustomOption,
   };
+
+  return (
+    <CustomOptionsContext.Provider value={customOptionsState}>
+      {children}
+    </CustomOptionsContext.Provider>
+  );
 };
 
-export default useCustomOptions;
+export const useCustomOptionsContext = () => {
+  const context = useContext(CustomOptionsContext);
+  if (!context) {
+    throw new Error(
+      "useCustomOptionsContext must be used within a CustomOptionsProvider"
+    );
+  }
+  return context;
+};
