@@ -3,7 +3,7 @@ import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import { BodyShort, Button, ErrorMessage, Label, omit } from "..";
 import { FormFieldProps, useFormField } from "../form/useFormField";
-import { useDateInputContext } from "./hooks";
+import { useDateInputContext } from "./context";
 
 export interface DateInputProps
   extends FormFieldProps,

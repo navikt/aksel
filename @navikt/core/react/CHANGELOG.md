@@ -1,5 +1,23 @@
 # @navikt/ds-react
 
+## 2.8.10
+
+### Patch Changes
+
+- [#1907](https://github.com/navikt/aksel/pull/1907) [`63fdacf0f`](https://github.com/navikt/aksel/commit/63fdacf0f8fa09593c64b35b49381d6c8a1befd1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :recycle: Refactor event-handling i datepicker-hooks
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.10
+  - @navikt/ds-icons@2.8.10
+
+## 2.8.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.9
+  - @navikt/ds-icons@2.8.9
+
 ## 2.8.8
 
 ### Patch Changes
