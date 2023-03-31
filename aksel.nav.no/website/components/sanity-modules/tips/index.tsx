@@ -1,11 +1,8 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { Edit, LightBulb } from "@navikt/ds-icons";
-import { Detail, Link } from "@navikt/ds-react";
-import cl from "clsx";
-import React from "react";
-import style from "./tips.module.css";
+import { LightBulbIcon, PencilIcon } from "@navikt/aksel-icons";
+import { BodyShort, Detail, Link } from "@navikt/ds-react";
 
 const Tips = ({ node }: { node: SanityT.Schema.tips }) => {
   if (!node || !node.body) {
@@ -14,12 +11,7 @@ const Tips = ({ node }: { node: SanityT.Schema.tips }) => {
 
   if (node.eksperiment) {
     return (
-      <div
-        className={cl(
-          style.tips,
-          "linear my-8 max-w-2xl rounded-r border-l-[6px] border-l-green-200 bg-white px-4 py-4 sm:px-8"
-        )}
-      >
+      <div className="linear my-8 max-w-2xl rounded-r border-l-[6px] border-l-green-200 bg-white px-4 py-4 sm:px-8">
         <Detail
           className="text-text-subtle flex items-center gap-1 font-semibold uppercase"
           spacing
@@ -57,10 +49,10 @@ const Tips = ({ node }: { node: SanityT.Schema.tips }) => {
           }}
         >
           Send feedback
-          <Edit
+          <PencilIcon
             aria-hidden
             aria-label="send inn feedback"
-            className="text-base"
+            fontSize="1.5rem"
           />
         </Link>
       </div>
@@ -68,19 +60,15 @@ const Tips = ({ node }: { node: SanityT.Schema.tips }) => {
   }
 
   return (
-    <div
-      className={cl(
-        style.tips,
-        "my-7 max-w-2xl px-4 py-3 shadow-[inset_5px_0_0_0_var(--a-gray-500),inset_0_0_0_1px_var(--a-gray-200)] sm:px-6"
-      )}
-    >
-      <Detail
-        className="override-text-no-max text-text-subtle -ml-[2px] flex items-center gap-1 font-semibold"
+    <div className="border-l-deepblue-500 bg-deepblue-50 my-7 max-w-2xl border-l-4 px-4 py-3 sm:px-6">
+      <BodyShort
+        className="override-text-no-max text-deepblue-800 -ml-[2px] flex items-center gap-1 font-semibold"
         spacing
+        size="small"
       >
-        <LightBulb className="text-large" title="tips" aria-hidden />
+        <LightBulbIcon fontSize="1.5rem" title="tips" aria-hidden />
         Tips
-      </Detail>
+      </BodyShort>
       <SanityBlockContent blocks={node.body} noLastMargin size="small" />
     </div>
   );

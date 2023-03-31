@@ -1,4 +1,5 @@
-import { Close, Hamburger as HamburgerIcon } from "@navikt/ds-icons";
+import { MenuHamburgerIcon, XMarkIcon } from "@navikt/aksel-icons";
+
 import { Button } from "@navikt/ds-react";
 import cl from "clsx";
 import Link from "next/link";
@@ -53,8 +54,9 @@ export const Hamburger = () => {
           aria-expanded={open}
           className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ml-2 flex aspect-square items-center justify-center rounded px-3 py-3 focus:outline-none"
         >
-          <HamburgerIcon
-            className="pointer-events-none text-2xl"
+          <MenuHamburgerIcon
+            fontSize="2rem"
+            className="pointer-events-none"
             aria-label="Åpne meny"
           />
         </button>
@@ -75,7 +77,7 @@ export const Hamburger = () => {
                   styles.akselTertiaryButton,
                   "absolute top-2 right-2"
                 )}
-                icon={<Close title="lukk meny" className="h-5 w-5" />}
+                icon={<XMarkIcon title="lukk meny" fontSize="1.5rem" />}
               />
               <LinkElement
                 onClick={() => setOpen(false)}

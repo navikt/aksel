@@ -1,5 +1,4 @@
 import { SearchLogT, useDebounce, logSearch } from "@/utils";
-import { Search as SearchIcon } from "@navikt/ds-icons";
 import {
   Button,
   Checkbox,
@@ -15,6 +14,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import { Group, GroupComponent } from "./Group";
 import styles from "../header.module.css";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 
 /**
  * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
@@ -195,8 +195,8 @@ export const GlobalSearch = () => {
         className="hover:bg-deepblue-700 bg-deepblue-600 focus-visible:shadow-focus-gap h-11 focus:shadow-none"
         aria-keyshortcuts="Control+b"
         icon={
-          <SearchIcon
-            className="pointer-events-none -mt-[1px] shrink-0 text-xl"
+          <MagnifyingGlassIcon
+            className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
             aria-label="Åpne meny"
             aria-hidden
           />

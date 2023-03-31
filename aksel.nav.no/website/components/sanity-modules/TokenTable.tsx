@@ -1,8 +1,8 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
+import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import internal from "@navikt/ds-css-internal/tokens.json";
 import core from "@navikt/ds-css/tokens.json";
-import { Expand } from "@navikt/ds-icons";
 import { BodyLong, Label, Link } from "@navikt/ds-react";
 import cl from "classnames";
 import CopyButton from "components/sanity-modules/code/CopyButton";
@@ -94,14 +94,15 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
       {!open && showMore && (
         <button
           onClick={() => setOpen(true)}
-          className="text-medium group mx-auto flex shrink-0 -translate-y-3/4 flex-col items-center focus:outline-none"
+          className="text-medium group mx-auto flex shrink-0 -translate-y-3/4 flex-col items-center gap-1 focus:outline-none"
         >
           <span className="group-focus-visible:bg-border-focus group-focus-visible:text-text-on-action group-focus-visible:shadow-focus">
             Se alle tokens
           </span>
-          <Expand
-            className="h-4 w-4 transition-all group-hover:translate-y-1"
+          <ChevronDownCircleIcon
+            className="transition-all group-hover:translate-y-1"
             aria-hidden
+            fontSize="1.5rem"
           />
         </button>
       )}
