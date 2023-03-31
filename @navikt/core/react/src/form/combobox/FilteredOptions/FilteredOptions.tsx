@@ -2,7 +2,7 @@ import React, { forwardRef, useMemo } from "react";
 import cl from "clsx";
 import { BodyShort, Label } from "../../..";
 import { Add } from "@navikt/ds-icons";
-import CheckIcon from "../CheckIcon";
+import CheckIcon from "./CheckIcon";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const normalizeText = (text: string) =>

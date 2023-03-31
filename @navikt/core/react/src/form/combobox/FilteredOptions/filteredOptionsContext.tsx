@@ -5,6 +5,7 @@ import React, {
   createContext,
   useContext,
 } from "react";
+
 type FilteredOptionsContextType = {
   filteredOptionsIndex: number;
   setFilteredOptionsIndex: (index: number) => void;
