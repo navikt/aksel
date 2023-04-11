@@ -1,5 +1,5 @@
 import React from "react";
-import { Chips } from "../..";
+import { Chips } from "../../..";
 
 interface SelectedOptionsProps {
   selectedOptions: string[];

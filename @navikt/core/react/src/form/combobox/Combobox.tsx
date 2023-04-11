@@ -8,18 +8,15 @@ import React, {
   useState,
 } from "react";
 import { BodyShort, Label, mergeRefs, omit } from "../..";
-import usePrevious from "../../util/usePrevious";
 import { useFormField } from "../useFormField";
 import ClearButton from "./ClearButton";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
-import SelectedOptions from "./SelectedOptions";
+import SelectedOptions from "./SelectedOptions/SelectedOptions";
 import ToggleListButton from "./ToggleListButton";
 import { ComboboxClearEvent, ComboboxProps } from "./types";
 import { useCustomOptionsContext } from "./customOptionsContext";
-
-const normalizeText = (text: string) =>
-  typeof text === "string" ? text.toLowerCase().trim() : "";
+import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 
 export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
@@ -46,9 +43,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       isListOpen: isExternalListOpen,
       id = "",
       setOptions,
-      options = [],
-      selectedOptions,
-      setSelectedOptions,
       ...rest
     } = props;
 
@@ -60,34 +54,48 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     // TODO: mobile, should fewer options be shown at a time?
     // TODO: mobile, should press area for input be taller?
 
+    /* Splitte opp logikken i kontekster/subkomponenter
+      - Options / FilteredOptions
+      - SelectedOptions
+      - Input
+
+      Context
+      - Root
+      - Options / MatchingOptions
+      - SelectedOptions
+      - Input / Label / Clearbutton / Togglebutton
+
+      onCreateOption / onCreateCustomOption
+      —> sende med prop for dette
+
+
+      Async */
+
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
-    const prevSelectedOptions = usePrevious(selectedOptions);
     const [internalValue, setInternalValue] = useState<string>("");
-    const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
-    const { toggleIsListOpen, isListOpen } = useFilteredOptionsContext();
-
     const {
-      customOptions,
-      setCustomOptions,
-      removeCustomOption,
-      addCustomOption,
-    } = useCustomOptionsContext(setSelectedOptions);
+      toggleIsListOpen,
+      isListOpen,
+      filteredOptions,
+      filteredOptionsIndex,
+      setFilteredOptionsIndex,
+    } = useFilteredOptionsContext();
+    const { customOptions, removeCustomOption, addCustomOption } =
+      useCustomOptionsContext();
+    const {
+      selectedOptions,
+      prevSelectedOptions,
+      removeSelectedOption,
+      addSelectedOption,
+    } = useSelectedOptionsContext();
 
     const value = useMemo(
       () => String(externalValue ?? internalValue),
       [externalValue, internalValue]
     );
-
-    const filteredOptions = useMemo(() => {
-      const opts = [...customOptions, ...options];
-
-      return opts?.filter((option) =>
-        normalizeText(option).includes(normalizeText(value ?? ""))
-      );
-    }, [value, options, customOptions]);
 
     const handleChange = useCallback(
       (val: string) => {
@@ -96,7 +104,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         setFilteredOptionsIndex(0);
         if (!isListOpen && !!val) toggleIsListOpen(true);
       },
-      [externalValue, onChange, isListOpen, toggleIsListOpen]
+      [
+        externalValue,
+        onChange,
+        setFilteredOptionsIndex,
+        isListOpen,
+        toggleIsListOpen,
+      ]
     );
 
     const focusInput = useCallback(() => {
@@ -111,6 +125,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [handleChange, onClear]
     );
 
+    const handleDeleteSelectedOption = useCallback(
+      (clickedOption) => {
+        removeSelectedOption(clickedOption);
+        if (customOptions.includes(clickedOption))
+          removeCustomOption({ value: clickedOption });
+      },
+      [customOptions, removeCustomOption, removeSelectedOption]
+    );
+
     const toggleOption = useCallback(
       (event) => {
         const clickedOption = event?.target?.textContent;
@@ -118,19 +141,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         // toggle selected option on click
         if (clickedOption) {
           if (selectedOptions.includes(clickedOption)) {
-            setSelectedOptions(
-              selectedOptions.filter((o) => o !== clickedOption)
-            );
-            if (customOptions.includes(clickedOption))
-              removeCustomOption({ event });
+            handleDeleteSelectedOption(clickedOption);
           } else if (filteredOptions.includes(clickedOption))
-            setSelectedOptions([...selectedOptions, clickedOption]);
+            addSelectedOption(clickedOption);
         }
         // remove selected filteredOption on Enter
         else if (curFilteredOpt && selectedOptions.includes(curFilteredOpt)) {
-          setSelectedOptions(
-            selectedOptions.filter((o) => o !== curFilteredOpt)
-          );
+          removeSelectedOption(curFilteredOpt);
           if (customOptions.includes(curFilteredOpt))
             removeCustomOption({ value: curFilteredOpt });
         } else if (
@@ -139,7 +156,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           curFilteredOpt &&
           (filteredOptions?.includes?.(String(value)) || !value)
         )
-          setSelectedOptions([...selectedOptions, curFilteredOpt]);
+          addSelectedOption(curFilteredOpt);
       },
       [
         filteredOptions,
@@ -147,7 +164,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         selectedOptions,
         isListOpen,
         value,
-        setSelectedOptions,
+        addSelectedOption,
+        handleDeleteSelectedOption,
+        removeSelectedOption,
         customOptions,
         removeCustomOption,
       ]
@@ -162,14 +181,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       },
       [selectedOptions, value, addCustomOption, handleClear, focusInput]
     );
-
-    const handleDeleteSelectedOption = (clickedOption) => {
-      setSelectedOptions(
-        selectedOptions.filter((option) => option !== clickedOption)
-      );
-      if (customOptions.includes(clickedOption))
-        setCustomOptions(customOptions.filter((o) => o !== clickedOption));
-    };
 
     const handleKeyUp = (e) => {
       const scrollToOption = (newIndex: number) => {
@@ -220,19 +231,16 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           const lastSelectedOption =
             selectedOptions[selectedOptions.length - 1];
           if (customOptions.includes(lastSelectedOption))
-            // todo remove custom option on backspace
-            setCustomOptions(
-              customOptions.filter((o) => o !== lastSelectedOption)
-            );
-          setSelectedOptions(selectedOptions.slice(0, -1));
+            removeCustomOption({ value: lastSelectedOption });
+          removeSelectedOption(lastSelectedOption);
         }
       },
       [
         value,
         selectedOptions,
-        setSelectedOptions,
         customOptions,
-        setCustomOptions,
+        removeCustomOption,
+        removeSelectedOption,
       ]
     );
 
@@ -336,13 +344,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           <FilteredOptions
             id={id}
             ref={filteredOptionsRef}
-            filteredOptions={filteredOptions}
-            filteredOptionsIndex={filteredOptionsIndex}
-            selectedOptions={selectedOptions}
             toggleOption={toggleOption}
             focusInput={focusInput}
             value={value}
-            addNewOption={handleAddCustomOption}
+            addCustomOption={handleAddCustomOption}
           />
         </div>
       </div>

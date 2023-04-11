@@ -5,6 +5,10 @@ import React, {
   createContext,
   useContext,
 } from "react";
+import { useCustomOptionsContext } from "../customOptionsContext";
+
+const normalizeText = (text: string) =>
+  typeof text === "string" ? text.toLowerCase().trim() : "";
 
 type FilteredOptionsContextType = {
   filteredOptionsIndex: number;
@@ -22,10 +26,19 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
 );
 
 export const FilteredOptionsProvider = ({ children, value }) => {
-  const { isExternalListOpen } = value;
+  const { isExternalListOpen, options } = value;
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
   const [isInternalListOpen, setInternalListOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
+  const { customOptions } = useCustomOptionsContext();
+
+  const filteredOptionsMemo = useMemo(() => {
+    const opts = [...customOptions, ...options];
+
+    return opts?.filter((option) =>
+      normalizeText(option).includes(normalizeText(value ?? ""))
+    );
+  }, [value, options, customOptions]);
 
   useEffect(() => {
     if (isExternalListOpen !== undefined)
@@ -53,7 +66,7 @@ export const FilteredOptionsProvider = ({ children, value }) => {
     setFilteredOptionsIndex,
     isListOpen,
     setInternalListOpen,
-    filteredOptions,
+    filteredOptions: filteredOptionsMemo,
     setFilteredOptions,
     toggleIsListOpen,
     currentOption,

@@ -5,6 +5,7 @@ import React, {
   useContext,
   MouseEvent,
 } from "react";
+import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 
 export interface CustomOptionProps {
   value?: string;
@@ -22,8 +23,9 @@ const CustomOptionsContext = createContext<CustomOptionsContextType>(
   {} as CustomOptionsContextType
 );
 
-export const CustomOptionsProvider = ({ children, setSelectedOptions }) => {
+export const CustomOptionsProvider = ({ children }) => {
   const [customOptions, setCustomOptions] = useState<string[]>([]);
+  const { setSelectedOptions } = useSelectedOptionsContext();
 
   const removeCustomOption = useCallback(
     ({ value, event }: CustomOptionProps) => {

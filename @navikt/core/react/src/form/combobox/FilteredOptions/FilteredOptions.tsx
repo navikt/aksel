@@ -4,36 +4,25 @@ import { BodyShort, Label } from "../../..";
 import { Add } from "@navikt/ds-icons";
 import CheckIcon from "./CheckIcon";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
+import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 
 const normalizeText = (text: string) =>
   typeof text === "string" ? text.toLowerCase().trim() : "";
 
 interface FilteredOptionsProps {
   id: string;
-  filteredOptions: string[];
-  filteredOptionsIndex: number;
-  selectedOptions: string[];
   toggleOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   focusInput: () => void;
   ref: React.RefObject<HTMLUListElement>;
   value: string;
-  addNewOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  addCustomOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
-  (
-    {
-      id,
-      filteredOptions,
-      filteredOptionsIndex,
-      selectedOptions,
-      toggleOption,
-      value,
-      addNewOption,
-    },
-    ref
-  ) => {
-    const { isListOpen } = useFilteredOptionsContext();
+  ({ id, toggleOption, value, addCustomOption }, ref) => {
+    const { isListOpen, filteredOptions, filteredOptionsIndex } =
+      useFilteredOptionsContext();
+    const { selectedOptions } = useSelectedOptionsContext();
 
     const isValueNew = useMemo(() => {
       return (
@@ -57,7 +46,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
           <li
             tabIndex={-1}
             onClick={(e) => {
-              addNewOption(e);
+              addCustomOption(e);
             }}
             id={`${id}-combobox-new-option`}
             className="navds-combobox__list-item navds-combobox__list-item__new-option"
