@@ -1,5 +1,15 @@
 # @navikt/ds-react-internal
 
+## 2.8.12
+
+### Patch Changes
+
+- [#1915](https://github.com/navikt/aksel/pull/1915) [`85353d2c4`](https://github.com/navikt/aksel/commit/85353d2c4fb24ab59656f8094ca685d70acd46f1) Thanks [@it-vegard](https://github.com/it-vegard)! - Fixed TS conficts and added onClick callback to CopyToClipboard
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.8.12
+  - @navikt/ds-icons@2.8.12
+
 ## 2.8.11
 
 ### Patch Changes
