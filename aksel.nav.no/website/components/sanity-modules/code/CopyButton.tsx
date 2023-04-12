@@ -12,11 +12,12 @@ const copyCode = (content: string) =>
 
 interface CopyButtonProps {
   content: string;
+  onClick?: (event: MouseEvent) => void;
   variant?: "tokentable" | "codeblock";
 }
 
 const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
-  ({ content, variant = "codeblock" }, ref) => {
+  ({ content, onClick, variant = "codeblock" }, ref) => {
     const [active, setActive] = useState(false);
 
     const timeoutRef = useRef<NodeJS.Timeout>();
@@ -25,11 +26,14 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
       return () => timeoutRef.current && clearTimeout(timeoutRef.current);
     }, []);
 
-    const handleCopy = () => {
+    const handleCopy = (event: MouseEvent) => {
       copyCode(content);
       setActive(true);
       timeoutRef.current && clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => setActive(false), 1000);
+      if (onClick) {
+        onClick(event);
+      }
     };
 
     return (
