@@ -12,7 +12,7 @@ const copyCode = (content: string) =>
 
 interface CopyButtonProps {
   content: string;
-  onClick?: (event: MouseEvent) => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   variant?: "tokentable" | "codeblock";
 }
 
@@ -26,7 +26,9 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
       return () => timeoutRef.current && clearTimeout(timeoutRef.current);
     }, []);
 
-    const handleCopy = (event: MouseEvent) => {
+    const handleCopy = (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
       copyCode(content);
       setActive(true);
       timeoutRef.current && clearTimeout(timeoutRef.current);
