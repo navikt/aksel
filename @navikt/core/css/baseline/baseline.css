@@ -1,9 +1,3 @@
-@import "@navikt/ds-tokens";
-@import "normalize.css";
-@import "fonts.css";
-@import "print.css";
-@import "utility.css";
-
 html,
 :host {
   box-sizing: border-box;
@@ -57,4 +51,51 @@ button {
     transition-duration: 0s !important;
     transition-delay: 0s !important;
   }
+}
+
+/*
+ * From https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/style.css
+ *
+ * Hide only visually, but have it available for screen readers:
+ * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+
+.sr-only,
+.navds-sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+
+  /* 1 */
+}
+
+/*
+   * From https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/style.css
+   *
+   * Extends the .sr-only class to allow the element
+   * to be focusable when navigated to via the keyboard:
+   * https://www.drupal.org/node/897638
+   */
+
+.sr-only.focusable:active,
+.sr-only.focusable:focus,
+.navds-sr-only.focusable:active,
+.navds-sr-only.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  white-space: inherit;
+  width: auto;
 }
