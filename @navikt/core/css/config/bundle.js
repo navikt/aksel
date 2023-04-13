@@ -1,5 +1,7 @@
 const fs = require("fs");
 const path = require("path");
+const fastglob = require("fast-glob");
+const { camelCase, startCase } = require("lodash");
 const postcss = require("postcss");
 const autoprefixer = require("autoprefixer");
 const combineSelectors = require("postcss-combine-duplicated-selectors");
@@ -17,6 +19,12 @@ if (!fs.existsSync(path.resolve(__dirname, "../dist/module"))) {
 bundleMonolith();
 bundleFragments();
 
+/**
+ * Postcss-plugins
+ * - cssImports: Handle inline of imports from other css files
+ * - combineSelectors: Combine selectors with the same properties
+ * Expect user to handle autoprefixing and minification inside their own build process
+ */
 function bundleMonolith() {
   const indexSrc = path.resolve(__dirname, "../index.css");
   const indexDist = path.resolve(__dirname, "../dist/index.css");
@@ -30,16 +38,41 @@ function bundleMonolith() {
   });
 }
 
+/**
+ * Postcss-plugins
+ * - cssImports: Handle inline of imports from other css files
+ * - combineSelectors: Combine selectors with the same properties
+ * - autoprefixer: Add vendor prefixes, uses browserlist in package.json
+ * - cssnano: Simple minification of css
+ */
 function bundleFragments() {
-  const indexSrc = path.resolve(__dirname, "../grid.css");
-  const indexDist = path.resolve(__dirname, "../dist/module/grid.css");
+  const files = fastglob
+    .sync("*.css", { cwd: "." })
+    .map((fileN) => path.basename(fileN))
+    .filter((x) => x !== "index.css")
+    .map((x) => ({
+      input: path.resolve(__dirname, `../${x}`),
+      output: path.resolve(
+        __dirname,
+        `../dist/module/${startCase(camelCase(x.replace("css", ""))).replace(
+          / /g,
+          ""
+        )}.css`
+      ),
+    }));
 
-  fs.readFile(indexSrc, (_, css) => {
+  /* Bundle forms together for easier cascading */
+  files.push({ input: "form/index.css", output: "dist/module/Forms.css" });
+
+  /* Distribute a autprefixed and minified version of the complete stylesheet */
+  files.push({ input: "index.css", output: "dist/module/index.css" });
+
+  files.forEach((file) => {
+    const css = fs.readFileSync(file.input, { encoding: "utf-8" });
     postcss([cssImports, combineSelectors, autoprefixer, cssnano])
-      .process(css, { from: indexSrc, to: indexDist })
+      .process(css, { from: file.input, to: file.output })
       .then((result) => {
-        console.log(result);
-        fs.writeFileSync(indexDist, result.css, () => true);
+        fs.writeFileSync(file.output, result.css, () => true);
       });
   });
 }
