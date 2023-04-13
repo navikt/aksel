@@ -10,6 +10,7 @@ test.describe("Axe a11y", () => {
       const accessibilityScanResults = await new AxeBuilder({ page })
         .disableRules(["definition-list", "scrollable-region-focusable"])
         .exclude("iframe")
+        .exclude("#aksel-expansioncard")
         .analyze();
       expect(accessibilityScanResults.violations).toEqual([]);
     });

@@ -27,7 +27,7 @@ export const Tag = ({
   switch (type) {
     case "aksel_artikkel":
       return (
-        <Comp className="text-teal-600">{text ? text : "God praksis"}</Comp>
+        <Comp className="text-teal-700">{text ? text : "God praksis"}</Comp>
       );
     case "aksel_blogg":
       return <Comp className="text-pink-600">Blogg</Comp>;
