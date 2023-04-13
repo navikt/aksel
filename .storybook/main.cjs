@@ -23,7 +23,6 @@ module.exports = {
   addons: [
     "@storybook/addon-a11y",
     "@whitespace/storybook-addon-html",
-    "storybook-addon-next-router",
 
     {
       name: "@storybook/addon-storysource",
