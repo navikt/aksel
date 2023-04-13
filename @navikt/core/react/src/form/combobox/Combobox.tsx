@@ -137,7 +137,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const toggleOption = useCallback(
       (event) => {
         const clickedOption = event?.target?.textContent;
-        const curFilteredOpt = filteredOptions[filteredOptionsIndex];
+        const focusedOption = filteredOptions[filteredOptionsIndex];
         // toggle selected option on click
         if (clickedOption) {
           if (selectedOptions.includes(clickedOption)) {
@@ -146,17 +146,17 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             addSelectedOption(clickedOption);
         }
         // remove selected filteredOption on Enter
-        else if (curFilteredOpt && selectedOptions.includes(curFilteredOpt)) {
-          removeSelectedOption(curFilteredOpt);
-          if (customOptions.includes(curFilteredOpt))
-            removeCustomOption({ value: curFilteredOpt });
+        else if (focusedOption && selectedOptions.includes(focusedOption)) {
+          removeSelectedOption(focusedOption);
+          if (customOptions.includes(focusedOption))
+            removeCustomOption({ value: focusedOption });
         } else if (
           // add new option on Enter input value if in filteredOptions OR if input value is empty
           isListOpen &&
-          curFilteredOpt &&
+          focusedOption &&
           (filteredOptions?.includes?.(String(value)) || !value)
         )
-          addSelectedOption(curFilteredOpt);
+          addSelectedOption(focusedOption);
       },
       [
         filteredOptions,
