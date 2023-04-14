@@ -3892,6 +3892,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/aksel-cli@workspace:@navikt/aksel-cli":
+  version: 0.0.0-use.local
+  resolution: "@navikt/aksel-cli@workspace:@navikt/aksel-cli"
+  dependencies:
+    typescript: ^4.8.0
+  bin:
+    migrate: ./bin/ds-codemod.js
+  languageName: unknown
+  linkType: soft
+
 "@navikt/aksel-icons@^2.8.12, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"

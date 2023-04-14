@@ -1,0 +1,41 @@
+{
+  "name": "@navikt/aksel-cli",
+  "version": "2.8.12",
+  "description": "Aksel client-tool for codemods and more",
+  "author": "Aksel | NAV designsystem team",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "codemod",
+    "jscodeshift",
+    "cli"
+  ],
+  "files": [],
+  "scripts": {
+    "build": "yarn clean && tsc -p tsconfig.json",
+    "dev": "yarn clean && tsc --watch -p tsconfig.json",
+    "start": "./bin/cli.js",
+    "test": "yarn build && jest",
+    "test:watch": "jest --watch",
+    "clean": "node clean.mjs"
+  },
+  "bin": {
+    "migrate": "./bin/ds-codemod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/aksel-cli"
+  },
+  "homepage": "https://github.com/navikt/aksel/tree/main/@navikt/aksel-cli",
+  "devDependencies": {
+    "typescript": "^4.8.0"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -25,6 +25,7 @@
     "@navikt/codemod",
     "@navikt/icons",
     "@navikt/aksel-icons",
+    "@navikt/aksel-cli",
     "@navikt/community/*",
     "examples/*",
     "aksel.nav.no"
