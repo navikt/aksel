@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "target": "es2015",
+    "downlevelIteration": true,
+    "preserveWatchOutput": true,
+    "declaration": false,
+    "types": ["node", "jest"],
+    "outDir": "dist"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist", "jest.config.js"]
+}

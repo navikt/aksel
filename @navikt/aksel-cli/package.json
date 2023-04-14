@@ -12,15 +12,16 @@
   ],
   "files": [],
   "scripts": {
-    "build": "yarn clean && tsc -p tsconfig.json",
-    "dev": "yarn clean && tsc --watch -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc --watch -p tsconfig.json",
     "start": "./bin/cli.js",
     "test": "yarn build && jest",
     "test:watch": "jest --watch",
     "clean": "node clean.mjs"
   },
   "bin": {
-    "migrate": "./bin/ds-codemod.js"
+    "migrate": "./dist/migrations/index.js",
+    "css-imports": "./dist/css-imports/index.js"
   },
   "repository": {
     "type": "git",
