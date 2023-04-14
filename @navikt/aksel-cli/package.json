@@ -20,16 +20,21 @@
     "clean": "node clean.mjs"
   },
   "bin": {
-    "migrate": "./dist/migrations/index.js",
-    "css-imports": "./dist/css-imports/index.js"
+    "css-imports": "./dist/css-imports/index.js",
+    "migrate": "./dist/migrations/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git",
     "directory": "@navikt/aksel-cli"
   },
+  "type": "module",
   "homepage": "https://github.com/navikt/aksel/tree/main/@navikt/aksel-cli",
+  "dependencies": {
+    "inquirer": "^9.1.5"
+  },
   "devDependencies": {
+    "@types/inquirer": "^9.0.3",
     "typescript": "^4.8.0"
   },
   "sideEffects": false,
