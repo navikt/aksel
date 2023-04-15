@@ -1,4 +1,4 @@
-import { previewClient } from "@/sanity-client";
+import { previewClient } from "@/sanity/client.server";
 
 function redirectToPreview(res, Location) {
   // Enable preview mode by setting the cookies

@@ -5,14 +5,14 @@
     "baseUrl": ".",
     "paths": {
       "@/components": ["components/index.ts"],
-      "@/types": ["lib/ts/index.ts"],
-      "@/lib": ["lib/index.ts"],
+      "@/types": ["types/index.ts"],
       "@/pages/*": ["pages/*"],
       "@/sanity-block": ["components/SanityBlockContent.tsx"],
       "@/utils": ["components/website-modules/utils/index.ts"],
       "@/layout": ["components/layout/index.ts"],
       "@/error-boundary": ["components/website-modules/ErrorBoundary.tsx"],
-      "@/sanity-client": ["lib/sanity/sanity.server"]
+      "@/sanity/*": ["sanity/interface/*"],
+      "@/sanity/config": ["sanity/config.ts"]
     }
   }
 }

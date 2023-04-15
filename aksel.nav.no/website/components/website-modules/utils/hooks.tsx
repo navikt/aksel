@@ -1,6 +1,6 @@
 import { _checkAuth } from "@sanity/preview-kit";
 import { useEffect, useState } from "react";
-import { config } from "../../../lib/sanity/config";
+import { clientConfig } from "@/sanity/config";
 
 export const useDebounce = (value: any) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -18,7 +18,7 @@ export const useCheckAuth = () => {
   const [user, setUser] = useState<boolean>(true);
 
   useEffect(() => {
-    _checkAuth(config.projectId, null).then(setUser);
+    _checkAuth(clientConfig.projectId, null).then(setUser);
   }, []);
 
   return user;

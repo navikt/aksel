@@ -24,14 +24,14 @@
     "baseUrl": ".",
     "paths": {
       "@/components": ["components/index.ts"],
-      "@/types": ["lib/ts/index.ts"],
-      "@/lib": ["lib/index.ts"],
+      "@/types": ["types/index.ts"],
       "@/pages/*": ["pages/*"],
       "@/sanity-block": ["components/SanityBlockContent.tsx"],
       "@/utils": ["components/website-modules/utils/index.ts"],
       "@/layout": ["components/layout/index.ts"],
       "@/error-boundary": ["components/website-modules/ErrorBoundary.tsx"],
-      "@/sanity-client": ["lib/sanity/sanity.server"]
+      "@/sanity/*": ["sanity/interface/*"],
+      "@/sanity/config": ["sanity/config.ts"]
     }
   },
   "ts-node": {
@@ -40,6 +40,6 @@
       "lib": ["dom", "dom.iterable", "esnext", "ES2021.String"]
     }
   },
-  "include": ["next-env.d.ts", "lib/types/schema.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "e2e", "./scripts/**"]
 }

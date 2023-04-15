@@ -2,7 +2,7 @@ import {
   bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
-} from "../../sanity/config";
+} from "../sanity/config";
 
 export type ResolveSlugT<T> = Omit<T, "slug"> & {
   slug: string;
@@ -43,7 +43,7 @@ type DocumentT<T> = {
   _type: T;
 };
 
-type ObjectT<T> = T & {
+type ArrayObjectT<T> = T & {
   _key: string;
 };
 
@@ -178,7 +178,7 @@ export interface AkselTemaT extends DocumentT<"aksel_tema"> {
   slug: { current: string };
   ansvarlig?: { _ref: string };
   seksjoner: Array<
-    ObjectT<{
+    ArrayObjectT<{
       title: string;
       beskrivelse: any;
       sider: Array<
@@ -191,3 +191,123 @@ export interface AkselTemaT extends DocumentT<"aksel_tema"> {
   pictogram: any;
   seo?: ArticleT["seo"];
 }
+
+export interface AccordionT {
+  list: Array<
+    ArrayObjectT<{
+      title: string;
+      content: any[];
+    }>
+  >;
+}
+
+export interface AlertT {
+  variant: "success" | "info" | "warning" | "error";
+  heading?: string;
+  heading_level?: "h2" | "h3" | "h4";
+  body: any[];
+}
+
+export interface DoDontT {
+  blokker: Array<
+    ArrayObjectT<{
+      fullwidth: boolean;
+      picture: any;
+      alt: string;
+      description?: string;
+      variant: "do" | "dont" | "warning";
+    }>
+  >;
+}
+
+export interface CodeSnippetT {
+  code: {
+    language: string;
+    code: string;
+  };
+}
+
+export interface TableT {
+  rows?: Array<ArrayObjectT<{ cells: Array<string> }>>;
+}
+
+export interface UUTableT {
+  tastatur?: Array<ArrayObjectT<{ key: string; action: string }>>;
+}
+
+export interface TokenTableT {
+  title: string;
+  kategori: string;
+}
+
+export interface BildeT {
+  asset: any;
+  alt: string;
+  caption?: string;
+  small: boolean;
+  kilde?: {
+    har_kilde?: boolean;
+    prefix?: "FOTO" | "Kilde";
+    tekst?: string;
+    link?: string;
+  };
+  dekorativt?: boolean;
+  background?: {
+    rgb: { a: number; b: number; g: number; r: number };
+    alpha: number;
+  };
+}
+
+export type InnholdsKortPrinsipperT = ArrayObjectT<{
+  title: string;
+  lenke: string;
+  body: any[];
+}>;
+
+export interface RelatertInnholdT {
+  lenker: Array<
+    ArrayObjectT<{
+      title: string;
+      intern: boolean;
+      intern_lenke?: string;
+      ekstern_link?: string;
+      ekstern_domene?: boolean;
+    }>
+  >;
+}
+
+export interface CodeExapmplesT {
+  title: string;
+  dir: {
+    title: string;
+    filer: Array<
+      ArrayObjectT<{ navn: string; innhold: string; description?: string }>
+    >;
+  };
+}
+
+export type PropTableT = ArrayObjectT<{
+  title?: string;
+  overridable?: boolean;
+  propref?: {
+    title?: string;
+    displayname?: string;
+    filepath?: string;
+    proplist?: Array<
+      ArrayObjectT<{
+        _type: "prop";
+        name?: string;
+        defaultValue?: string;
+        description?: string;
+        required?: boolean;
+        type?: string;
+        ref?: boolean;
+      }>
+    >;
+  };
+}>;
+
+export type TipsT = ArrayObjectT<{
+  eksperiment?: boolean;
+  body: any[];
+}>;

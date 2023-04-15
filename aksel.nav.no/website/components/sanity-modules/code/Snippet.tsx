@@ -1,16 +1,16 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
 import cl from "clsx";
-import Highlight, { defaultProps } from "prism-react-renderer";
+import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import React from "react";
 import CopyButton from "./CopyButton";
+import { CodeSnippetT } from "@/types";
 
 const CodeSnippet = ({
   node: { code },
   className,
   ...props
 }: {
-  node: SanityT.Schema.kode;
+  node: CodeSnippetT;
   className?: string;
   style?: any;
 }) => {
@@ -18,9 +18,22 @@ const CodeSnippet = ({
     return null;
   }
 
-  let language = code.language ?? "javascript";
-  language =
-    language === "terminal" || language === "default" ? "bash" : language;
+  let language = code?.language as Language;
+
+  switch (code?.language) {
+    case "js":
+      language = "javascript";
+      break;
+    case "html":
+      language = "markup";
+      break;
+    case "terminal":
+      language = "bash";
+      break;
+    default:
+      language = "bash";
+      break;
+  }
 
   return (
     <>

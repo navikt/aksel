@@ -1,4 +1,4 @@
-import { noCdnClient } from "@/sanity-client";
+import { noCdnClient } from "@/sanity/client.server";
 import { NextApiRequest, NextApiResponse } from "next";
 import { calcNewAverage } from "./log-scroll";
 

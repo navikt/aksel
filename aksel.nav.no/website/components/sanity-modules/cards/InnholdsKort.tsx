@@ -1,15 +1,11 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
+import { InnholdsKortPrinsipperT } from "@/types";
 import { logNav } from "@/utils";
 import { Heading } from "@navikt/ds-react";
 import NextLink from "next/link";
 
-const InnholdsKort = ({
-  node,
-}: {
-  node: SanityT.Schema.innholdskort & { _key: string; lenke: string };
-}) => {
+const InnholdsKort = ({ node }: { node: InnholdsKortPrinsipperT }) => {
   if (!node.title || !node.body || !node.lenke) {
     return null;
   }

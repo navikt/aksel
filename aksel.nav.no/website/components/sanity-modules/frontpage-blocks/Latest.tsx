@@ -3,13 +3,13 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { withErrorBoundary } from "@/error-boundary";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
-import { urlFor } from "lib/sanity/santiy";
 import { getImage } from "components/website-modules/utils/get-image";
 import { getAuthors } from "components/website-modules/LatestBloggs";
 import { dateStr, logNav } from "@/utils";
 import { Tag } from "./Tag";
 import { Card, ArticleT } from "./Card";
 import cl from "clsx";
+import { urlFor } from "@/sanity/interface";
 
 export type LatestT = {
   _type: "nytt_fra_aksel";

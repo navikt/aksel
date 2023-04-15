@@ -1,6 +1,5 @@
 import { Footer } from "@/layout";
-import { contributorsAll, destructureBlocks, urlFor } from "@/lib";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
 import {
   AkselBloggDocT,
   AkselBloggFrontpageT,
@@ -18,6 +17,8 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
 import NotFotfund from "../404";
+import { urlFor } from "@/sanity/interface";
+import { destructureBlocks, contributorsAll } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   page: AkselBloggFrontpageT;

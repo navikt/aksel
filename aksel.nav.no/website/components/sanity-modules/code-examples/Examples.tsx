@@ -1,7 +1,7 @@
 import { capitalize, Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
-import { BodyLong, Link, Chips } from "@navikt/ds-react";
+import { CodeExapmplesT } from "@/types";
+import { BodyLong, Chips, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import { useEffect, useState } from "react";
 import { CodeSandbox } from "./CodeSandbox";
@@ -9,14 +9,7 @@ import { CodeSandbox } from "./CodeSandbox";
 const iframePadding = 192;
 const iframeId = "example-iframe";
 
-const ComponentExamples = ({
-  node,
-}: {
-  node: Omit<SanityT.Schema.kode_eksempler, "dir" | "filnavn"> & {
-    dir?: SanityT.Schema.kode_eksempler_fil;
-    filnavn?: SanityT.Schema.kode_eksempler_fil;
-  };
-}) => {
+const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
@@ -58,12 +51,7 @@ const ComponentExamples = ({
         .trim()
     ) ?? str;
 
-  if (
-    !node.dir?.filer ||
-    node.dir.filer.length === 0 ||
-    (!node.standalone && !node.dir) ||
-    (node.standalone && !node.filnavn)
-  ) {
+  if (!node.dir?.filer || node.dir.filer.length === 0) {
     return null;
   }
 
@@ -154,7 +142,6 @@ const ComponentExamples = ({
 
                 <Snippet
                   node={{
-                    _type: "kode" as const,
                     code: { code: fil.innhold.trim(), language: "jsx" },
                   }}
                 />
