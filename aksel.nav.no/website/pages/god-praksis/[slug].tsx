@@ -1,13 +1,7 @@
 import { abbrName } from "@/components";
 import { Footer } from "@/layout";
-import {
-  contributorsSingle,
-  destructureBlocks,
-  getAkselTema,
-  urlFor,
-} from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
 import { AkselTemaT, NextPageT } from "@/types";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
@@ -19,6 +13,8 @@ import Head from "next/head";
 import Image from "next/legacy/image";
 import { lazy } from "react";
 import NotFotfund from "../404";
+import { getAkselTema, urlFor } from "@/sanity/interface";
+import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   tema: Omit<AkselTemaT, "ansvarlig"> & {

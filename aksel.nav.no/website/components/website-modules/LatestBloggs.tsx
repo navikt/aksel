@@ -1,5 +1,5 @@
-import { urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
+import { urlFor } from "@/sanity/interface";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import { dateStr } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";

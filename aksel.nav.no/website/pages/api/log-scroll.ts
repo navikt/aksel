@@ -1,4 +1,4 @@
-import { noCdnClient } from "@/sanity-client";
+import { noCdnClient } from "@/sanity/client.server";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const token = process.env.SANITY_WRITE_KEY;

@@ -1,4 +1,4 @@
-import { allArticleDocuments } from "../../sanity/config";
+import { allArticleDocuments } from "../sanity/config";
 
 export const searchOptions: {
   [K in typeof allArticleDocuments[number] | "icon" | "icon_page"]: {
@@ -84,3 +84,18 @@ export type SearchHitT = {
 export type GroupedHitsT = Partial<
   Record<keyof typeof searchOptions, SearchHitT[]>
 >;
+
+export type SearchLogT = {
+  type: "suksess" | "feilet" | "standard";
+  retries: number;
+  retriedQueries: string[];
+  query: string;
+  filter: string[];
+  hits: number;
+  searchedFromUrl: string;
+
+  index?: number;
+  accuracy?: string;
+  topResult?: boolean;
+  url?: string;
+};

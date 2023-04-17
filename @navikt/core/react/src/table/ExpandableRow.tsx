@@ -6,7 +6,7 @@ import AnimateHeight from "../util/AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
 
-export interface ExpandableRowProps extends RowProps {
+export interface ExpandableRowProps extends Omit<RowProps, "content"> {
   /**
    * Content of the expanded row
    */

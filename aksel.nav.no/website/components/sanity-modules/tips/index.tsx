@@ -1,10 +1,10 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
+import { TipsT } from "@/types";
 import { LightBulbIcon, PencilIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail, Link } from "@navikt/ds-react";
 
-const Tips = ({ node }: { node: SanityT.Schema.tips }) => {
+const Tips = ({ node }: { node: TipsT }) => {
   if (!node || !node.body) {
     return null;
   }

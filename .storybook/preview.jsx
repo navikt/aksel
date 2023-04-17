@@ -24,9 +24,6 @@ export const parameters = {
       },
     ],
   },
-  nextRouter: {
-    Provider: RouterContext.Provider,
-  },
 };
 
 export const globalTypes = {

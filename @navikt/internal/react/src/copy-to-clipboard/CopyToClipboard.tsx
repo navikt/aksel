@@ -11,7 +11,7 @@ import {
 } from "@navikt/ds-react";
 
 export interface CopyToClipboardProps
-  extends Omit<ButtonProps, "children" | "variant" | "loading"> {
+  extends Omit<ButtonProps, "children" | "onClick" | "variant" | "loading"> {
   /**
    * Button text
    */
@@ -20,6 +20,10 @@ export interface CopyToClipboardProps
    * Text to be copied to clipboard
    */
   copyText: string;
+  /**
+   * Callback function triggered when clicking the button
+   */
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   /**
    * Description of text. Example: "Kopierte personnummer til clipboard"
    */
@@ -63,6 +67,7 @@ export const CopyToClipboard = forwardRef<
       copyText,
       popoverText,
       className,
+      onClick,
       size = "medium",
       popoverPlacement = "bottom",
       iconPosition = "left",
@@ -85,9 +90,12 @@ export const CopyToClipboard = forwardRef<
       };
     }, [openPopover]);
 
-    const handleClick = () => {
+    const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       copy(copyText);
       setOpenPopover(true);
+      if (onClick) {
+        onClick(event);
+      }
     };
 
     const copyTitle = title ?? (children ? undefined : `Kopier ${copyText}`);

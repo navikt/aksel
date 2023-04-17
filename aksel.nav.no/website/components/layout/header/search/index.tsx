@@ -1,4 +1,4 @@
-import { SearchLogT, useDebounce, logSearch } from "@/utils";
+import { useDebounce, logSearch } from "@/utils";
 import {
   Button,
   Checkbox,
@@ -8,7 +8,7 @@ import {
   Search,
 } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "components/assets";
-import { searchOptions, SearchResultsT } from "@/types";
+import { SearchLogT, searchOptions, SearchResultsT } from "@/types";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
