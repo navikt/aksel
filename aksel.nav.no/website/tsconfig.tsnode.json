@@ -11,8 +11,10 @@
       "@/utils": ["components/website-modules/utils/index.ts"],
       "@/layout": ["components/layout/index.ts"],
       "@/error-boundary": ["components/website-modules/ErrorBoundary.tsx"],
-      "@/sanity/*": ["sanity/interface/*"],
-      "@/sanity/config": ["sanity/config.ts"]
+      "@/sanity/config": ["sanity/config.ts"],
+      "@/sanity/client.server": ["sanity/interface/client.server.js"],
+      "@/sanity/interface": ["sanity/interface/interface.ts"],
+      "@/sanity/queries": ["sanity/interface/queries.js"]
     }
   }
 }
