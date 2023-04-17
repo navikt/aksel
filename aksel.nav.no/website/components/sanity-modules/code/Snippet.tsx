@@ -18,7 +18,7 @@ const CodeSnippet = ({
     return null;
   }
 
-  let language = code?.language as Language;
+  let language = (code?.language as Language) ?? "bash";
 
   switch (code?.language) {
     case "js":
@@ -31,7 +31,6 @@ const CodeSnippet = ({
       language = "bash";
       break;
     default:
-      language = "bash";
       break;
   }
 
