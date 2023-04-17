@@ -7,6 +7,7 @@ const autoprefixer = require("autoprefixer");
 const combineSelectors = require("postcss-combine-duplicated-selectors");
 const cssImports = require("postcss-import");
 const cssnano = require("cssnano");
+const version = require("../package.json").version;
 
 if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
   fs.mkdirSync(path.resolve(__dirname, "../dist"));
@@ -14,6 +15,12 @@ if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
 
 if (!fs.existsSync(path.resolve(__dirname, "../dist/module"))) {
   fs.mkdirSync(path.resolve(__dirname, "../dist/module"));
+}
+
+if (!fs.existsSync(path.resolve(__dirname, `../dist/versioned/${version}`))) {
+  fs.mkdirSync(path.resolve(__dirname, `../dist/versioned/${version}`), {
+    recursive: true,
+  });
 }
 
 bundleMonolith();
@@ -85,6 +92,11 @@ function bundleFragments() {
       .process(css, { from: file.input, to: file.output })
       .then((result) => {
         fs.writeFileSync(file.output, result.css, () => true);
+        fs.writeFileSync(
+          file.output.replace("module", `versioned/${version}`),
+          result.css,
+          () => true
+        );
       });
   });
 }
