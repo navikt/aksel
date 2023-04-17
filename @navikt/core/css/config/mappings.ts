@@ -13,7 +13,7 @@ export const StyleMappings: StyleMap[] = [
     main: "accordion.css",
     dependencies: [typoCss],
   },
-  { component: "Alert", main: "", dependencies: [typoCss] },
+  { component: "Alert", main: "alert.css", dependencies: [typoCss] },
   {
     component: "BodyLong",
     main: typoCss,
