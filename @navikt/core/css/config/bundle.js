@@ -67,6 +67,18 @@ function bundleFragments() {
   /* Distribute a autprefixed and minified version of the complete stylesheet */
   files.push({ input: "index.css", output: "dist/module/index.css" });
 
+  files.push({ input: "baseline/reset.css", output: "dist/module/reset.css" });
+  files.push({ input: "baseline/fonts.css", output: "dist/module/fonts.css" });
+  files.push({ input: "baseline/print.css", output: "dist/module/print.css" });
+  files.push({
+    input: "baseline/baseline.css",
+    output: "dist/module/baseline.css",
+  });
+  files.push({
+    input: "baseline/tokens.css",
+    output: "dist/module/tokens.css",
+  });
+
   files.forEach((file) => {
     const css = fs.readFileSync(file.input, { encoding: "utf-8" });
     postcss([cssImports, combineSelectors, autoprefixer, cssnano])
