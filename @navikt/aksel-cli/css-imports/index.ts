@@ -2,9 +2,12 @@ import inquirer from "inquirer";
 import { StyleMappings } from "@navikt/ds-css/config/mappings.mjs";
 import path from "path";
 import scanner from "react-scanner";
+import { generateImportOutput } from "./generate-output.js";
+import { AnswersT } from "./config.js";
+import { componentPrefix } from "./config.js";
 
 async function main() {
-  let answers = {};
+  let answers: AnswersT = null;
 
   await inquirer
     .prompt([
@@ -35,6 +38,8 @@ async function main() {
         console.log(
           "Oops, something went wrong! Looks like aksel-cli can't run in this terminal. Contact Aksel"
         );
+      } else {
+        console.error(error);
       }
     });
 
@@ -55,7 +60,7 @@ async function main() {
   }
 
   if ("simple" === answers["config-type"]) {
-    generateImportOutput(answers);
+    await generateImportOutput(answers);
     return;
   }
 
@@ -90,15 +95,15 @@ async function main() {
         message: "Imports",
         choices: [
           new inquirer.Separator("Defaults"),
-          { name: "baseline (required)", value: "baseline", checked: true },
-          { name: "tokens (required)", value: "tokens", checked: true },
           { name: "fonts", value: "fonts", checked: true },
+          { name: "tokens (required)", value: "tokens", checked: true },
+          { name: "baseline (required)", value: "baseline", checked: true },
           { name: "reset", value: "reset", checked: true },
           { name: "print", value: "print", checked: true },
           new inquirer.Separator("Components"),
           ...StyleMappings.map((x) => ({
             name: x.component,
-            value: x.component,
+            value: `${componentPrefix}${x.component}`,
             checked: foundComponents.includes(x.component),
           })),
         ],
@@ -109,7 +114,7 @@ async function main() {
     })
     .catch(console.error);
 
-  generateImportOutput(answers);
+  await generateImportOutput(answers);
 }
 
 async function scanCode() {
@@ -141,21 +146,6 @@ async function scanCode() {
   });
 
   return Object.keys(result);
-}
-
-function generateImportOutput(answers: { [key: string]: string | boolean }) {
-  console.log(answers);
-  /* console.log(
-    `\nAdd these imports to your project:\n
-@import "@navikt/ds-css/module/Fonts.css";
-@import "@navikt/ds-css/module/Reset.css";
-@import "@navikt/ds-css/module/Baseline.css";
-@import "@navikt/ds-css/module/Tokens.css";
-@import "@navikt/ds-css/module/Typography.css";
-@import "@navikt/ds-css/module/Alert.css";
-@import "@navikt/ds-css/module/Button.css";
-`
-  ); */
 }
 
 main();

@@ -9,7 +9,8 @@
     "declaration": false,
     "types": ["node", "jest"],
     "outDir": "dist",
-    "rootDir": "./"
+    "rootDir": "./",
+    "resolveJsonModule": true
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist", "jest.config.js"]

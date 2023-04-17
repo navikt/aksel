@@ -1,5 +1,5 @@
-const typoCss = "typography.css";
-const formCss = "form.css";
+export const typoCss = "typography.css";
+export const formCss = "Forms.css";
 
 export const StyleMappings = [
   {
