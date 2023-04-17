@@ -11,7 +11,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   build:
     name: "Release packages"
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    if: ${{!contains(github.event.head_commit.message, '[ci skip]')}}
     runs-on: ubuntu-latest
     permissions:
       id-token: "write"
@@ -82,3 +82,11 @@ jobs:
           cdn-team-name: aksel
           source: ./@navikt/aksel-icons/aksel-icons.zip
           destination: "/icons/zip"
+
+      - name: Upload CSS to NAV CDN
+        if: steps.changesets.outputs.published == 'true'
+        uses: navikt/frontend/actions/cdn-upload/v1@main
+        with:
+          cdn-team-name: aksel
+          source: ./@navikt/core/css/dist/module
+          destination: "/ds-css"
