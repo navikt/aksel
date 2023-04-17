@@ -14,10 +14,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsc --watch -p tsconfig.json",
-    "start": "./bin/cli.js",
     "test": "yarn build && jest",
-    "test:watch": "jest --watch",
-    "clean": "node clean.mjs"
+    "test:watch": "jest --watch"
   },
   "bin": {
     "css-imports": "./dist/css-imports/index.js",
@@ -31,7 +29,9 @@
   "type": "module",
   "homepage": "https://github.com/navikt/aksel/tree/main/@navikt/aksel-cli",
   "dependencies": {
-    "inquirer": "^9.1.5"
+    "@navikt/ds-css": "^2.8.12",
+    "inquirer": "^9.1.5",
+    "react-scanner": "^1.1.0"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.3",

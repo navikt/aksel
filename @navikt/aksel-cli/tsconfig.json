@@ -8,7 +8,8 @@
     "preserveWatchOutput": true,
     "declaration": false,
     "types": ["node", "jest"],
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "./"
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist", "jest.config.js"]

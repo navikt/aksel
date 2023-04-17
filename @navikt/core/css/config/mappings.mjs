@@ -1,13 +1,7 @@
-type StyleMap = {
-  component: string;
-  main: string;
-  dependencies?: string[];
-};
-
 const typoCss = "typography.css";
 const formCss = "form.css";
 
-export const StyleMappings: StyleMap[] = [
+export const StyleMappings = [
   {
     component: "Accordion",
     main: "accordion.css",
