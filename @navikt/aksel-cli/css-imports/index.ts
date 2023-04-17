@@ -26,12 +26,6 @@ async function main() {
           { name: "CDN import (not recommended)", value: true },
         ],
       },
-      {
-        type: "confirm",
-        name: "tailwind",
-        message: "Add tailwind support?",
-        default: false,
-      },
     ])
     .then((a) => {
       answers = { ...answers, ...a };
@@ -43,6 +37,22 @@ async function main() {
         );
       }
     });
+
+  if (!answers["cdn"]) {
+    await inquirer
+      .prompt([
+        {
+          type: "confirm",
+          name: "tailwind",
+          message: "Add tailwind support?",
+          default: false,
+        },
+      ])
+      .then((a) => {
+        answers = { ...answers, ...a };
+      })
+      .catch(console.error);
+  }
 
   if ("simple" === answers["config-type"]) {
     generateImportOutput(answers);
