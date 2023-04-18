@@ -35,7 +35,7 @@ bundleFragments();
  */
 function bundleMonolith() {
   const indexSrc = path.resolve(__dirname, "../index.css");
-  const indexDist = path.resolve(__dirname, "../dist/index.css");
+  const indexDist = path.resolve(__dirname, "../dist/module/index.css");
 
   fs.readFile(indexSrc, (_, css) => {
     postcss([cssImports, combineSelectors])
@@ -54,7 +54,7 @@ function bundleMonolith() {
  */
 function bundleComponents() {
   const indexSrc = path.resolve(__dirname, "../index.css");
-  const indexDist = path.resolve(__dirname, "../dist/Components.css");
+  const indexDist = path.resolve(__dirname, "../dist/module/Components.css");
 
   fs.readFile(indexSrc, (_, css) => {
     const cssString = css.toString().split("\n").slice(2).join("\n");
@@ -62,6 +62,26 @@ function bundleComponents() {
       .process(cssString, { from: indexSrc, to: indexDist })
       .then((result) => {
         fs.writeFileSync(indexDist, result.css, () => true);
+        fs.writeFileSync(
+          indexDist.replace("module", `versioned/${version}`),
+          result.css,
+          () => true
+        );
+      });
+
+    postcss([cssImports, combineSelectors, autoprefixer, cssnano])
+      .process(cssString, {
+        from: indexSrc,
+        to: indexDist.replace(".css", ".min.css"),
+      })
+      .then((result) => {
+        fs.writeFileSync(
+          indexDist
+            .replace(".css", ".min.css")
+            .replace("module", `versioned/${version}`),
+          result.css,
+          () => true
+        );
       });
   });
 }
@@ -109,12 +129,29 @@ function bundleFragments() {
 
   files.forEach((file) => {
     const css = fs.readFileSync(file.input, { encoding: "utf-8" });
-    postcss([cssImports, combineSelectors, autoprefixer, cssnano])
+    postcss([cssImports, combineSelectors])
       .process(css, { from: file.input, to: file.output })
       .then((result) => {
         fs.writeFileSync(file.output, result.css, () => true);
         fs.writeFileSync(
           file.output.replace("module", `versioned/${version}`),
+          result.css,
+          () => true
+        );
+      });
+
+    postcss([cssImports, combineSelectors, autoprefixer, cssnano])
+      .process(css, { from: file.input, to: file.output })
+      .then((result) => {
+        fs.writeFileSync(
+          file.output.replace(".css", ".min.css"),
+          result.css,
+          () => true
+        );
+        fs.writeFileSync(
+          file.output
+            .replace("module", `versioned/${version}`)
+            .replace(".css", ".min.css"),
           result.css,
           () => true
         );
