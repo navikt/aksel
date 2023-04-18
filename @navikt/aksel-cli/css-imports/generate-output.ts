@@ -19,12 +19,12 @@ export async function generateImportOutput(answers: AnswersT) {
     {
       type: "select",
       name: "output",
-      message: "Output-format",
+      message: "Output format",
       initial: "print-clipboard",
       choices: [
+        { message: "Clipboard & Print", name: "clipboard-print" },
         { message: "Clipboard", name: "clipboard" },
         { message: "Print", name: "print" },
-        { message: "Clipboard & Print", name: "print-clipboard" },
       ],
     },
   ]);
