@@ -3,6 +3,8 @@ export type AnswersT = {
   cdn: "static" | "cdn";
   tailwind?: boolean;
   autoscan?: boolean;
-  imports?: { default: string[]; components: string[] };
+  imports?: string[];
   output: "print" | "clipboard" | "print-clipboard";
 };
+
+export const ComponentPrefix = "C_";

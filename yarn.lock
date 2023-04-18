@@ -3900,6 +3900,7 @@ __metadata:
     "@types/inquirer": ^9.0.3
     clipboardy: ^3.0.0
     enquirer: ^2.3.6
+    lodash: 4.17.21
     react-scanner: ^1.1.0
     typescript: ^4.8.0
   bin:

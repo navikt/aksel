@@ -32,6 +32,7 @@
     "@navikt/ds-css": "^2.8.12",
     "clipboardy": "^3.0.0",
     "enquirer": "^2.3.6",
+    "lodash": "4.17.21",
     "react-scanner": "^1.1.0"
   },
   "devDependencies": {

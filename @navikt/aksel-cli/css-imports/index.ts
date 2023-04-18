@@ -1,6 +1,6 @@
 import { StyleMappings } from "@navikt/ds-css/config/mappings.mjs";
 import { generateImportOutput } from "./generate-output.js";
-import { AnswersT } from "./config.js";
+import { AnswersT, ComponentPrefix } from "./config.js";
 
 import { inquiry } from "./inquiry.js";
 import { scanCode } from "./scan-code.js";
@@ -77,21 +77,39 @@ async function main() {
 
   answers["autoscan"] && (foundComponents = await scanCode());
 
+  console.log([
+    "fonts",
+    "tokens",
+    "reset",
+    "print",
+    "baseline",
+    ...StyleMappings.filter((x) => foundComponents.includes(x.component)),
+  ]);
   await inquiry(answers, [
     {
       type: "multiselect",
       name: "imports",
       message: "Imports",
+      initial: [
+        "fonts",
+        "tokens",
+        "baseline",
+        "reset",
+        "print",
+        ...StyleMappings.filter((x) =>
+          foundComponents.includes(x.component)
+        ).map((x) => `${ComponentPrefix}${x.component}`),
+      ],
       choices: [
         {
           message: "Default-imports",
           name: "default",
           choices: [
-            { message: "fonts", name: "fonts", enabled: true },
-            { message: "tokens (required)", name: "tokens", enabled: true },
-            { message: "baseline (required)", name: "baseline", enabled: true },
-            { message: "reset", name: "reset", enabled: true },
-            { message: "print", name: "print", enabled: true },
+            { message: "fonts", name: "fonts" },
+            { message: "tokens (required)", name: "tokens" },
+            { message: "baseline (required)", name: "baseline" },
+            { message: "reset", name: "reset" },
+            { message: "print", name: "print" },
           ],
         },
         ...(answers["config-type"] === "advanced"
@@ -102,8 +120,7 @@ async function main() {
                 choices: [
                   ...StyleMappings.map((x) => ({
                     message: x.component,
-                    name: x.component,
-                    checked: foundComponents.includes(x.component),
+                    name: `${ComponentPrefix}${x.component}`,
                   })),
                 ],
               },

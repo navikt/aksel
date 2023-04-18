@@ -1,5 +1,6 @@
 export const typoCss = "typography.css";
 export const formCss = "Forms.css";
+export const componentsCss = "components.css";
 
 export const StyleMappings = [
   {
