@@ -47,7 +47,16 @@ ${imports.join("\n")}
     importStr = imports.join("\n");
   }
 
-  console.log(importStr);
+  let notes = "";
+  answers.cdn === "cdn" &&
+    (notes +=
+      "We recommend using Static imports, then uploading the files + application-css to your own CDN.\n\n");
+
+  answers.tailwind &&
+    (notes +=
+      "When using tailwind with Aksel, you will also need to add the postcss-plugin 'postcss-import'. Read more here: https://aksel.nav.no/grunnleggende/kode/tailwind .\n\n");
+
+  answers.output.includes("print") && console.log(`\n${importStr}\n`);
   answers.output.includes("clipboard") && clipboard.writeSync(importStr);
 }
 
