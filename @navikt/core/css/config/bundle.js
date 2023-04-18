@@ -24,6 +24,7 @@ if (!fs.existsSync(path.resolve(__dirname, `../dist/versioned/${version}`))) {
 }
 
 bundleMonolith();
+bundleComponents();
 bundleFragments();
 
 /**
@@ -39,6 +40,26 @@ function bundleMonolith() {
   fs.readFile(indexSrc, (_, css) => {
     postcss([cssImports, combineSelectors])
       .process(css, { from: indexSrc, to: indexDist })
+      .then((result) => {
+        fs.writeFileSync(indexDist, result.css, () => true);
+      });
+  });
+}
+
+/**
+ * Postcss-plugins
+ * - cssImports: Handle inline of imports from other css files
+ * - combineSelectors: Combine selectors with the same properties
+ * Expect user to handle autoprefixing and minification inside their own build process
+ */
+function bundleComponents() {
+  const indexSrc = path.resolve(__dirname, "../index.css");
+  const indexDist = path.resolve(__dirname, "../dist/Components.css");
+
+  fs.readFile(indexSrc, (_, css) => {
+    const cssString = css.toString().split("\n").slice(2).join("\n");
+    postcss([cssImports, combineSelectors])
+      .process(cssString, { from: indexSrc, to: indexDist })
       .then((result) => {
         fs.writeFileSync(indexDist, result.css, () => true);
       });
