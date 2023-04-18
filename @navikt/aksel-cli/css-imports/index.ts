@@ -23,7 +23,8 @@ async function main() {
       name: "config-type",
       message: "Config:",
       choices: [
-        { name: "Simple import (recommended)", value: "simple" },
+        { name: "Regular import", value: "regular" },
+        { name: "Optional defaults + components", value: "easy" },
         { name: "Fine-graind CSS-imports (advanced)", value: "advanced" },
       ],
     },

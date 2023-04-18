@@ -1,5 +1,5 @@
 export type AnswersT = {
-  "config-type": "simple" | "advanced";
+  "config-type": "simple" | "easy" | "advanced";
   cdn: boolean;
   tailwind?: boolean;
   autoscan?: boolean;
