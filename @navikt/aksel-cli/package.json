@@ -30,6 +30,7 @@
   "homepage": "https://github.com/navikt/aksel/tree/main/@navikt/aksel-cli",
   "dependencies": {
     "@navikt/ds-css": "^2.8.12",
+    "clipboardy": "^3.0.0",
     "enquirer": "^2.3.6",
     "react-scanner": "^1.1.0"
   },

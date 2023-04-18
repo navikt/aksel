@@ -1,6 +1,6 @@
 export type AnswersT = {
-  "config-type": "simple" | "easy" | "advanced";
-  cdn: boolean;
+  "config-type": "regular" | "easy" | "advanced";
+  cdn: "static" | "cdn";
   tailwind?: boolean;
   autoscan?: boolean;
   imports?: { default: string[]; components: string[] };

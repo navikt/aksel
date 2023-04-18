@@ -6,6 +6,7 @@ import {
   StyleMappings,
 } from "@navikt/ds-css/config/mappings.mjs";
 import { inquiry } from "./inquiry.js";
+import clipboard from "clipboardy";
 
 const version = JSON.parse(fs.readFileSync("./package.json", "utf8")).version;
 
@@ -29,8 +30,8 @@ export async function generateImportOutput(answers: AnswersT) {
     },
   ]);
 
-  answers["config-type"] === "simple" &&
-    imports.push(simpleOutput(answers["cdn"]));
+  answers["config-type"] === "regular" &&
+    imports.push(simpleOutput(answers.cdn === "cdn"));
 
   answers["config-type"] === "advanced" &&
     imports.push(...advancedOutput(answers));
@@ -47,6 +48,7 @@ ${imports.join("\n")}
   }
 
   console.log(importStr);
+  answers.output.includes("clipboard") && clipboard.writeSync(importStr);
 }
 
 function simpleOutput(cdn: boolean) {

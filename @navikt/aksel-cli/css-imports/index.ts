@@ -9,8 +9,8 @@ main();
 
 async function main() {
   let answers: AnswersT = {
-    "config-type": "simple",
-    cdn: false,
+    "config-type": "regular",
+    cdn: "static",
     autoscan: false,
     tailwind: false,
     imports: null,
@@ -22,7 +22,7 @@ async function main() {
       type: "select",
       name: "config-type",
       message: "Import variants:",
-      initial: "regular",
+      initial: 0,
       choices: [
         { message: "Regular (recommended)", name: "regular" },
         { message: "Optional defaults + components", name: "easy" },
@@ -33,15 +33,15 @@ async function main() {
       type: "select",
       name: "cdn",
       message: "Import format",
-      initial: false,
+      initial: 0,
       choices: [
-        { message: "Static import (default)", name: false },
-        { message: "CDN import (not recommended)", name: true },
+        { message: "Static import (default)", name: "static" },
+        { message: "CDN import (not recommended)", name: "cdn" },
       ],
     },
   ]);
 
-  if (!answers?.cdn) {
+  if (answers?.cdn !== "cdn") {
     await inquiry(answers, [
       {
         type: "confirm",
@@ -58,7 +58,7 @@ async function main() {
     ]);
   }
 
-  if (answers["config-type"] === "simple") {
+  if (answers["config-type"] === "regular") {
     await generateImportOutput(answers);
     return;
   }
