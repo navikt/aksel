@@ -5,12 +5,14 @@ import scanner from "react-scanner";
 import { generateImportOutput } from "./generate-output.js";
 import { AnswersT } from "./config.js";
 import { componentPrefix } from "./config.js";
+import { inquiry } from "./inquiry.js";
 
 async function main() {
   let answers: AnswersT = null;
 
-  await inquirer
-    .prompt([
+  Object.assign(
+    answers,
+    inquiry([
       {
         type: "list",
         name: "config-type",
@@ -30,33 +32,26 @@ async function main() {
         ],
       },
     ])
-    .then((a) => {
-      answers = { ...answers, ...a };
-    })
-    .catch((error) => {
-      if (error.isTtyError) {
-        console.log(
-          "Oops, something went wrong! Looks like aksel-cli can't run in this terminal. Contact Aksel"
-        );
-      } else {
-        console.error(error);
-      }
-    });
+  );
 
   if (!answers["cdn"]) {
-    await inquirer
-      .prompt([
+    Object.assign(
+      answers,
+      inquiry([
         {
           type: "confirm",
           name: "tailwind",
           message: "Add tailwind support?",
           default: false,
         },
+        {
+          type: "confirm",
+          name: "layers",
+          message: "Add styling to custom @layer rule?",
+          default: false,
+        },
       ])
-      .then((a) => {
-        answers = { ...answers, ...a };
-      })
-      .catch(console.error);
+    );
   }
 
   if ("simple" === answers["config-type"]) {
@@ -64,8 +59,9 @@ async function main() {
     return;
   }
 
-  await inquirer
-    .prompt([
+  Object.assign(
+    answers,
+    inquiry([
       {
         type: "confirm",
         name: "autoscan",
@@ -73,10 +69,7 @@ async function main() {
         default: false,
       },
     ])
-    .then((a) => {
-      answers = { ...answers, ...a };
-    })
-    .catch(console.error);
+  );
 
   let foundComponents: string[] = [];
 
@@ -87,8 +80,9 @@ async function main() {
       : console.log(`\nNo components found!\n`);
   }
 
-  await inquirer
-    .prompt([
+  Object.assign(
+    answers,
+    inquiry([
       {
         type: "checkbox",
         name: "imports",
@@ -109,10 +103,7 @@ async function main() {
         ],
       },
     ])
-    .then((a) => {
-      answers = { ...answers, ...a };
-    })
-    .catch(console.error);
+  );
 
   await generateImportOutput(answers);
 }

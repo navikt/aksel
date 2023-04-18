@@ -1,5 +1,4 @@
 import fs from "fs";
-import inquirer from "inquirer";
 import { AnswersT } from "./config.js";
 import { componentPrefix } from "./config.js";
 import {
@@ -7,6 +6,7 @@ import {
   typoCss,
   StyleMappings,
 } from "@navikt/ds-css/config/mappings.mjs";
+import { inquiry } from "./inquiry.js";
 
 const version = JSON.parse(fs.readFileSync("./package.json", "utf8")).version;
 
@@ -16,8 +16,9 @@ export async function generateImportOutput(answers: AnswersT) {
   const imports = [];
   let importStr = "";
 
-  await inquirer
-    .prompt([
+  Object.assign(
+    answers,
+    inquiry([
       {
         type: "list",
         name: "output",
@@ -29,10 +30,7 @@ export async function generateImportOutput(answers: AnswersT) {
         ],
       },
     ])
-    .then((a) => {
-      answers = { ...answers, ...a };
-    })
-    .catch(console.error);
+  );
 
   answers["config-type"] === "simple" &&
     imports.push(simpleOutput(answers["cdn"]));
