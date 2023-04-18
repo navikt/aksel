@@ -1,18 +1,25 @@
-import inquirer from "inquirer";
 import { StyleMappings } from "@navikt/ds-css/config/mappings.mjs";
-import path from "path";
-import scanner from "react-scanner";
 import { generateImportOutput } from "./generate-output.js";
 import { AnswersT } from "./config.js";
-import { componentPrefix } from "./config.js";
+
 import { inquiry } from "./inquiry.js";
+import { scanCode } from "./scan-code.js";
+
+main();
 
 async function main() {
-  let answers: AnswersT = null;
+  let answers: AnswersT = {
+    "config-type": "simple",
+    cdn: false,
+    autoscan: false,
+    tailwind: false,
+    imports: null,
+    output: "print-clipboard",
+  };
 
-  inquiry(answers, [
+  await inquiry(answers, [
     {
-      type: "list",
+      type: "select",
       name: "config-type",
       message: "Config:",
       choices: [
@@ -21,7 +28,7 @@ async function main() {
       ],
     },
     {
-      type: "list",
+      type: "select",
       name: "cdn",
       message: "Import variant:",
       choices: [
@@ -31,8 +38,8 @@ async function main() {
     },
   ]);
 
-  if (!answers["cdn"]) {
-    inquiry(answers, [
+  if (!answers?.cdn) {
+    await inquiry(answers, [
       {
         type: "confirm",
         name: "tailwind",
@@ -53,7 +60,7 @@ async function main() {
     return;
   }
 
-  inquiry(answers, [
+  await inquiry(answers, [
     {
       type: "confirm",
       name: "autoscan",
@@ -71,60 +78,37 @@ async function main() {
       : console.log(`\nNo components found!\n`);
   }
 
-  inquiry(answers, [
+  await inquiry(answers, [
     {
-      type: "checkbox",
+      type: "multiselect",
       name: "imports",
       message: "Imports",
       choices: [
-        new inquirer.Separator("Defaults"),
-        { name: "fonts", value: "fonts", checked: true },
-        { name: "tokens (required)", value: "tokens", checked: true },
-        { name: "baseline (required)", value: "baseline", checked: true },
-        { name: "reset", value: "reset", checked: true },
-        { name: "print", value: "print", checked: true },
-        new inquirer.Separator("Components"),
-        ...StyleMappings.map((x) => ({
-          name: x.component,
-          value: `${componentPrefix}${x.component}`,
-          checked: foundComponents.includes(x.component),
-        })),
+        {
+          name: "Default-imports",
+          value: "default",
+          choices: [
+            { name: "fonts", value: "fonts", enabled: true },
+            { name: "tokens (required)", value: "tokens", enabled: true },
+            { name: "baseline (required)", value: "baseline", enabled: true },
+            { name: "reset", value: "reset", enabled: true },
+            { name: "print", value: "print", enabled: true },
+          ],
+        },
+        {
+          name: "Components",
+          value: "components",
+          choices: [
+            ...StyleMappings.map((x) => ({
+              name: x.component,
+              value: x.component,
+              checked: foundComponents.includes(x.component),
+            })),
+          ],
+        },
       ],
     },
   ]);
 
   await generateImportOutput(answers);
 }
-
-async function scanCode() {
-  const config = {
-    rootDir: ".",
-    crawlFrom: "../",
-    globs: ["**/!(*.test|*.spec|*.stories|*.story).@(jsx|tsx)"],
-    exclude: (dirname: string) => dirname === "node_modules",
-    getComponentName: ({
-      imported,
-      moduleName,
-    }: {
-      imported: string;
-      moduleName: string;
-    }) => imported || path.basename(moduleName),
-  };
-
-  let result: any | null = null;
-
-  await scanner.run({
-    ...config,
-    importedFrom: /@navikt\/ds-react/,
-    processors: [
-      "count-components",
-      ({ report }) => {
-        result = report;
-      },
-    ],
-  });
-
-  return Object.keys(result);
-}
-
-main();

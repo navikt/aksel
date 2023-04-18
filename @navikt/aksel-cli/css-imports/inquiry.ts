@@ -1,13 +1,13 @@
-import inquirer, { QuestionCollection } from "inquirer";
+import Enquirer from "enquirer";
 import { AnswersT } from "./config.js";
 
-export async function inquiry(
-  answers: AnswersT,
-  questions: QuestionCollection
-) {
-  return await inquirer
-    .prompt(questions)
-    .then((a) => Object.assign(answers, a))
+export async function inquiry(answers: AnswersT, questions: any[]) {
+  return await Enquirer.prompt(questions)
+    .then((a) => {
+      Object.entries(a).forEach(([key, value]) => {
+        answers[key] = value;
+      });
+    })
     .catch((error) => {
       if (error.isTtyError) {
         console.log(

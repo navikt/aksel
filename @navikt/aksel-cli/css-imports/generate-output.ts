@@ -1,6 +1,5 @@
 import fs from "fs";
 import { AnswersT } from "./config.js";
-import { componentPrefix } from "./config.js";
 import {
   formCss,
   typoCss,
@@ -16,9 +15,9 @@ export async function generateImportOutput(answers: AnswersT) {
   const imports = [];
   let importStr = "";
 
-  inquiry(answers, [
+  await inquiry(answers, [
     {
-      type: "list",
+      type: "select",
       name: "output",
       message: "Output-format",
       choices: [
@@ -60,13 +59,9 @@ function simpleOutput(cdn: boolean) {
 
 function advancedOutput(answers: AnswersT) {
   const imports = ["/* Defaults */"];
-  const baselineImports = answers.imports.filter(
-    (x) => !x.startsWith(componentPrefix)
-  );
+  const baselineImports = answers.imports.default;
 
-  const componentImports = answers.imports
-    .filter((x) => x.startsWith(componentPrefix))
-    .map((x) => x.replace(componentPrefix, ""));
+  const componentImports = answers.imports.components;
 
   baselineImports.forEach((x) => {
     answers.cdn

@@ -3,8 +3,6 @@ export type AnswersT = {
   cdn: boolean;
   tailwind?: boolean;
   autoscan?: boolean;
-  imports?: string[];
+  imports?: { default: string[]; components: string[] };
   output: "print" | "clipboard" | "print-clipboard";
 };
-
-export const componentPrefix = "COMPONENT-";
