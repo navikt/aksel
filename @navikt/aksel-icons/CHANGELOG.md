@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 2.8.13
+
+### Patch Changes
+
+- [#1921](https://github.com/navikt/aksel/pull/1921) [`ecd6241e5`](https://github.com/navikt/aksel/commit/ecd6241e5751519fbda800a5f41a613957dbf77c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner :tada:
+
 ## 2.8.12
 
 ## 2.8.11
