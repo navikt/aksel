@@ -10,66 +10,57 @@ import { inquiry } from "./inquiry.js";
 async function main() {
   let answers: AnswersT = null;
 
-  Object.assign(
-    answers,
-    inquiry([
-      {
-        type: "list",
-        name: "config-type",
-        message: "Config:",
-        choices: [
-          { name: "Simple import (recommended)", value: "simple" },
-          { name: "Fine-graind CSS-imports (advanced)", value: "advanced" },
-        ],
-      },
-      {
-        type: "list",
-        name: "cdn",
-        message: "Import variant:",
-        choices: [
-          { name: "Static import (default)", value: false },
-          { name: "CDN import (not recommended)", value: true },
-        ],
-      },
-    ])
-  );
+  inquiry(answers, [
+    {
+      type: "list",
+      name: "config-type",
+      message: "Config:",
+      choices: [
+        { name: "Simple import (recommended)", value: "simple" },
+        { name: "Fine-graind CSS-imports (advanced)", value: "advanced" },
+      ],
+    },
+    {
+      type: "list",
+      name: "cdn",
+      message: "Import variant:",
+      choices: [
+        { name: "Static import (default)", value: false },
+        { name: "CDN import (not recommended)", value: true },
+      ],
+    },
+  ]);
 
   if (!answers["cdn"]) {
-    Object.assign(
-      answers,
-      inquiry([
-        {
-          type: "confirm",
-          name: "tailwind",
-          message: "Add tailwind support?",
-          default: false,
-        },
-        {
-          type: "confirm",
-          name: "layers",
-          message: "Add styling to custom @layer rule?",
-          default: false,
-        },
-      ])
-    );
+    inquiry(answers, [
+      {
+        type: "confirm",
+        name: "tailwind",
+        message: "Add tailwind support?",
+        default: false,
+      },
+      {
+        type: "confirm",
+        name: "layers",
+        message: "Add styling to custom @layer rule?",
+        default: false,
+      },
+    ]);
   }
 
-  if ("simple" === answers["config-type"]) {
+  if (answers["config-type"] === "simple") {
     await generateImportOutput(answers);
     return;
   }
 
-  Object.assign(
-    answers,
-    inquiry([
-      {
-        type: "confirm",
-        name: "autoscan",
-        message: "Scan current directory for used @navikt/ds-react components?",
-        default: false,
-      },
-    ])
-  );
+  inquiry(answers, [
+    {
+      type: "confirm",
+      name: "autoscan",
+      message: "Scan current directory for used @navikt/ds-react components?",
+      default: false,
+    },
+  ]);
 
   let foundComponents: string[] = [];
 
@@ -80,30 +71,27 @@ async function main() {
       : console.log(`\nNo components found!\n`);
   }
 
-  Object.assign(
-    answers,
-    inquiry([
-      {
-        type: "checkbox",
-        name: "imports",
-        message: "Imports",
-        choices: [
-          new inquirer.Separator("Defaults"),
-          { name: "fonts", value: "fonts", checked: true },
-          { name: "tokens (required)", value: "tokens", checked: true },
-          { name: "baseline (required)", value: "baseline", checked: true },
-          { name: "reset", value: "reset", checked: true },
-          { name: "print", value: "print", checked: true },
-          new inquirer.Separator("Components"),
-          ...StyleMappings.map((x) => ({
-            name: x.component,
-            value: `${componentPrefix}${x.component}`,
-            checked: foundComponents.includes(x.component),
-          })),
-        ],
-      },
-    ])
-  );
+  inquiry(answers, [
+    {
+      type: "checkbox",
+      name: "imports",
+      message: "Imports",
+      choices: [
+        new inquirer.Separator("Defaults"),
+        { name: "fonts", value: "fonts", checked: true },
+        { name: "tokens (required)", value: "tokens", checked: true },
+        { name: "baseline (required)", value: "baseline", checked: true },
+        { name: "reset", value: "reset", checked: true },
+        { name: "print", value: "print", checked: true },
+        new inquirer.Separator("Components"),
+        ...StyleMappings.map((x) => ({
+          name: x.component,
+          value: `${componentPrefix}${x.component}`,
+          checked: foundComponents.includes(x.component),
+        })),
+      ],
+    },
+  ]);
 
   await generateImportOutput(answers);
 }

@@ -16,21 +16,18 @@ export async function generateImportOutput(answers: AnswersT) {
   const imports = [];
   let importStr = "";
 
-  Object.assign(
-    answers,
-    inquiry([
-      {
-        type: "list",
-        name: "output",
-        message: "Output-format",
-        choices: [
-          { name: "Clipboard", value: "clipboard" },
-          { name: "Print", value: "print" },
-          { name: "Clipboard & Print", value: "print-clipboard" },
-        ],
-      },
-    ])
-  );
+  inquiry(answers, [
+    {
+      type: "list",
+      name: "output",
+      message: "Output-format",
+      choices: [
+        { name: "Clipboard", value: "clipboard" },
+        { name: "Print", value: "print" },
+        { name: "Clipboard & Print", value: "print-clipboard" },
+      ],
+    },
+  ]);
 
   answers["config-type"] === "simple" &&
     imports.push(simpleOutput(answers["cdn"]));
