@@ -22,6 +22,7 @@ async function main() {
       type: "select",
       name: "config-type",
       message: "Import variants:",
+      initial: "regular",
       choices: [
         { message: "Regular (recommended)", name: "regular" },
         { message: "Optional defaults + components", name: "easy" },
@@ -32,6 +33,7 @@ async function main() {
       type: "select",
       name: "cdn",
       message: "Import format",
+      initial: false,
       choices: [
         { message: "Static import (default)", name: false },
         { message: "CDN import (not recommended)", name: true },
@@ -45,13 +47,13 @@ async function main() {
         type: "confirm",
         name: "tailwind",
         message: "Add tailwind support?",
-        default: false,
+        initial: false,
       },
       {
         type: "confirm",
         name: "layers",
         message: "Add styling to custom @layer rule?",
-        default: false,
+        initial: false,
       },
     ]);
   }
@@ -67,7 +69,7 @@ async function main() {
         type: "confirm",
         name: "autoscan",
         message: "Scan current directory for '@navikt/ds-react' components?",
-        default: false,
+        initial: false,
       },
     ]));
 

@@ -20,6 +20,7 @@ export async function generateImportOutput(answers: AnswersT) {
       type: "select",
       name: "output",
       message: "Output-format",
+      initial: "print-clipboard",
       choices: [
         { message: "Clipboard", name: "clipboard" },
         { message: "Print", name: "print" },
