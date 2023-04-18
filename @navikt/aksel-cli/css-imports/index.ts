@@ -21,20 +21,20 @@ async function main() {
     {
       type: "select",
       name: "config-type",
-      message: "Config:",
+      message: "Import variants:",
       choices: [
-        { name: "Regular import", value: "regular" },
-        { name: "Optional defaults + components", value: "easy" },
-        { name: "Fine-graind CSS-imports (advanced)", value: "advanced" },
+        { message: "Regular (recommended)", name: "regular" },
+        { message: "Optional defaults + components", name: "easy" },
+        { message: "Fine-grained (advanced)", name: "advanced" },
       ],
     },
     {
       type: "select",
       name: "cdn",
-      message: "Import variant:",
+      message: "Import format",
       choices: [
-        { name: "Static import (default)", value: false },
-        { name: "CDN import (not recommended)", value: true },
+        { message: "Static import (default)", name: false },
+        { message: "CDN import (not recommended)", name: true },
       ],
     },
   ]);
@@ -61,23 +61,19 @@ async function main() {
     return;
   }
 
-  await inquiry(answers, [
-    {
-      type: "confirm",
-      name: "autoscan",
-      message: "Scan current directory for used @navikt/ds-react components?",
-      default: false,
-    },
-  ]);
+  answers["config-type"] === "advanced" &&
+    (await inquiry(answers, [
+      {
+        type: "confirm",
+        name: "autoscan",
+        message: "Scan current directory for '@navikt/ds-react' components?",
+        default: false,
+      },
+    ]));
 
   let foundComponents: string[] = [];
 
-  if (answers["autoscan"]) {
-    foundComponents = await scanCode();
-    foundComponents.length > 0
-      ? console.log(`\nFound components!\n${foundComponents.join(", ")}\n`)
-      : console.log(`\nNo components found!\n`);
-  }
+  answers["autoscan"] && (foundComponents = await scanCode());
 
   await inquiry(answers, [
     {
@@ -86,27 +82,31 @@ async function main() {
       message: "Imports",
       choices: [
         {
-          name: "Default-imports",
-          value: "default",
+          message: "Default-imports",
+          name: "default",
           choices: [
-            { name: "fonts", value: "fonts", enabled: true },
-            { name: "tokens (required)", value: "tokens", enabled: true },
-            { name: "baseline (required)", value: "baseline", enabled: true },
-            { name: "reset", value: "reset", enabled: true },
-            { name: "print", value: "print", enabled: true },
+            { message: "fonts", name: "fonts", enabled: true },
+            { message: "tokens (required)", name: "tokens", enabled: true },
+            { message: "baseline (required)", name: "baseline", enabled: true },
+            { message: "reset", name: "reset", enabled: true },
+            { message: "print", name: "print", enabled: true },
           ],
         },
-        {
-          name: "Components",
-          value: "components",
-          choices: [
-            ...StyleMappings.map((x) => ({
-              name: x.component,
-              value: x.component,
-              checked: foundComponents.includes(x.component),
-            })),
-          ],
-        },
+        ...(answers["config-type"] === "advanced"
+          ? [
+              {
+                message: "Components",
+                name: "components",
+                choices: [
+                  ...StyleMappings.map((x) => ({
+                    message: x.component,
+                    name: x.component,
+                    checked: foundComponents.includes(x.component),
+                  })),
+                ],
+              },
+            ]
+          : []),
       ],
     },
   ]);

@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "Node16",
     "sourceMap": false,
     "esModuleInterop": true,
-    "target": "ES2022",
+    "target": "es2015",
     "preserveWatchOutput": true,
     "declaration": false,
     "types": ["node", "jest"],

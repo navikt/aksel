@@ -29,5 +29,9 @@ export async function scanCode() {
     ],
   });
 
+  Object.keys(result).length > 0
+    ? console.log(`\nFound components!\n${Object.keys(result).join(", ")}\n`)
+    : console.log(`\nNo components found!\n`);
+
   return Object.keys(result);
 }

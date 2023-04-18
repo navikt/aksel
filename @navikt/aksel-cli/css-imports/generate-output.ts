@@ -21,9 +21,9 @@ export async function generateImportOutput(answers: AnswersT) {
       name: "output",
       message: "Output-format",
       choices: [
-        { name: "Clipboard", value: "clipboard" },
-        { name: "Print", value: "print" },
-        { name: "Clipboard & Print", value: "print-clipboard" },
+        { message: "Clipboard", name: "clipboard" },
+        { message: "Print", name: "print" },
+        { message: "Clipboard & Print", name: "print-clipboard" },
       ],
     },
   ]);
