@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export const useOutsideClickHandler = (
   open: boolean,
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  setOpen: (openState: boolean) => void,
   refs: Array<any>
 ) => {
   const handleFocusIn = useCallback(
