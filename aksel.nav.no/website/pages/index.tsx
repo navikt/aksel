@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Footer } from "@/layout";
-
+import * as Test from "@navikt/ds-react";
 import { contributorsAll, urlFor } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { AkselTemaT, NextPageT } from "@/types";
@@ -147,6 +147,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
     })
     .sort((a, b) => a.title.localeCompare(b.title));
 
+  console.log(Test);
   return (
     <>
       <Head>

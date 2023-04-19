@@ -83,7 +83,9 @@ async function main() {
     "reset",
     "print",
     "baseline",
-    ...StyleMappings.filter((x) => foundComponents.includes(x.component)),
+    ...StyleMappings.components.filter((x) =>
+      foundComponents.includes(x.component)
+    ),
   ]);
   await inquiry(answers, [
     {
@@ -96,9 +98,9 @@ async function main() {
         "baseline",
         "reset",
         "print",
-        ...StyleMappings.filter((x) =>
-          foundComponents.includes(x.component)
-        ).map((x) => `${ComponentPrefix}${x.component}`),
+        ...StyleMappings.components
+          .filter((x) => foundComponents.includes(x.component))
+          .map((x) => `${ComponentPrefix}${x.component}`),
       ],
       choices: [
         {
@@ -118,7 +120,7 @@ async function main() {
                 message: "Components",
                 name: "components",
                 choices: [
-                  ...StyleMappings.map((x) => ({
+                  ...StyleMappings.components.map((x) => ({
                     message: x.component,
                     name: `${ComponentPrefix}${x.component}`,
                   })),

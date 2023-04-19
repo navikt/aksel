@@ -97,7 +97,7 @@ function advancedOutput(answers: AnswersT, cdn: boolean) {
   const components = new Set();
 
   componentImports.forEach((x) => {
-    const styleRef = StyleMappings.find((y) => y.component === x);
+    const styleRef = StyleMappings.components.find((y) => y.component === x);
     if (styleRef) {
       components.add(styleRef.main);
       styleRef?.dependencies?.forEach((dep) => components.add(dep));
