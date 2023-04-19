@@ -9,34 +9,37 @@ const cssImports = require("postcss-import");
 const cssnano = require("cssnano");
 const version = require("../package.json").version;
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist"));
-}
+run();
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist/module"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist/module"));
-}
+async function run() {
+  if (!fs.existsSync(path.resolve(__dirname, "../dist/module"))) {
+    fs.mkdirSync(path.resolve(__dirname, "../dist/module"), {
+      recursive: true,
+    });
+  }
 
-if (!fs.existsSync(path.resolve(__dirname, `../dist/versioned/${version}`))) {
-  fs.mkdirSync(path.resolve(__dirname, `../dist/versioned/${version}`), {
-    recursive: true,
-  });
-}
+  if (!fs.existsSync(path.resolve(__dirname, `../dist/version/${version}`))) {
+    fs.mkdirSync(path.resolve(__dirname, `../dist/version/${version}`), {
+      recursive: true,
+    });
+  }
 
-bundleMonolith();
-bundleFragments();
+  await bundleMonolith();
+  await bundleComponents();
+  await bundleFragments();
+  await bundleMinified();
+}
 
 /**
  * Postcss-plugins
  * - cssImports: Handle inline of imports from other css files
  * - combineSelectors: Combine selectors with the same properties
- * Expect user to handle autoprefixing and minification inside their own build process
  */
-function bundleMonolith() {
+async function bundleMonolith() {
   const indexSrc = path.resolve(__dirname, "../index.css");
-  const indexDist = path.resolve(__dirname, "../dist/index.css");
+  const indexDist = path.resolve(__dirname, "../dist/module/index.css");
 
-  fs.readFile(indexSrc, (_, css) => {
+  return fs.readFile(indexSrc, (_, css) => {
     postcss([cssImports, combineSelectors])
       .process(css, { from: indexSrc, to: indexDist })
       .then((result) => {
@@ -46,13 +49,34 @@ function bundleMonolith() {
 }
 
 /**
+ * Bundle Components together for flexible import-options
+ */
+async function bundleComponents() {
+  const indexSrc = path.resolve(__dirname, "../index.css");
+  const indexDist = path.resolve(__dirname, "../dist/module/Components.css");
+
+  return fs.readFile(indexSrc, (_, css) => {
+    /* Remove @charset, baseline */
+    const cssString = css.toString().split("\n").slice(2).join("\n");
+    postcss([cssImports, combineSelectors])
+      .process(cssString, { from: indexSrc, to: indexDist })
+      .then((result) => {
+        fs.writeFileSync(indexDist, result.css, () => true);
+        fs.writeFileSync(
+          indexDist.replace("module", `version/${version}`),
+          result.css,
+          () => true
+        );
+      });
+  });
+}
+
+/**
  * Postcss-plugins
  * - cssImports: Handle inline of imports from other css files
  * - combineSelectors: Combine selectors with the same properties
- * - autoprefixer: Add vendor prefixes, uses browserlist in package.json
- * - cssnano: Simple minification of css
  */
-function bundleFragments() {
+async function bundleFragments() {
   const files = fastglob
     .sync("*.css", { cwd: "." })
     .map((fileN) => path.basename(fileN))
@@ -86,17 +110,39 @@ function bundleFragments() {
     output: "dist/module/tokens.css",
   });
 
-  files.forEach((file) => {
+  for (let file of files) {
     const css = fs.readFileSync(file.input, { encoding: "utf-8" });
-    postcss([cssImports, combineSelectors, autoprefixer, cssnano])
+    await postcss([cssImports, combineSelectors])
       .process(css, { from: file.input, to: file.output })
       .then((result) => {
         fs.writeFileSync(file.output, result.css, () => true);
         fs.writeFileSync(
-          file.output.replace("module", `versioned/${version}`),
+          file.output.replace("module", `version/${version}`),
           result.css,
           () => true
         );
       });
-  });
+  }
+}
+
+/**
+ * Give a minified version of of CSS for CDN and static imports
+ * Postcss-plugins
+ * - autoprefixer: Add vendor prefixes, uses browserlist in package.json
+ * - cssnano: css-minification
+ */
+async function bundleMinified() {
+  const files = fastglob.sync("**/*.css", { cwd: "./dist" }).map((x) => ({
+    input: `dist/${x}`,
+    output: `dist/${x}`.replace("css", "min.css"),
+  }));
+
+  for (let file of files) {
+    const css = fs.readFileSync(file.input, { encoding: "utf-8" });
+    await postcss([autoprefixer, cssnano])
+      .process(css, { from: file.input, to: file.output })
+      .then((result) => {
+        fs.writeFileSync(file.output, result.css, () => true);
+      });
+  }
 }
