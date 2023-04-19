@@ -77,11 +77,13 @@ export const UseMonthpicker = () => {
   const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
     onMonthChange: console.log,
+    fromDate: new Date("Jan 1 2000"),
+    toDate: new Date("Sep 27 2005"),
   });
 
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker {...monthpickerProps}>
+      <MonthPicker {...monthpickerProps} dropdownCaption>
         <MonthPicker.Input
           {...inputProps}
           label="Velg måned"

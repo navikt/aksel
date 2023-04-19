@@ -64,16 +64,39 @@ describe("Extracts correct years", () => {
     const t = {
       start: new Date(2019, 2, 22),
       end: new Date(2019, 9, 22),
+      current: 2019,
       res: 1,
     };
-    expect(getYears(t.start, t.end).length).toEqual(t.res);
+    expect(getYears(t.start, t.end, t.current).length).toEqual(t.res);
   });
+
   test("Multiple years (11)", () => {
     const t = {
       start: new Date(2019, 2, 22),
       end: new Date(2029, 9, 22),
+      current: 2022,
       res: 11,
     };
-    expect(getYears(t.start, t.end).length).toEqual(t.res);
+    expect(getYears(t.start, t.end, t.current).length).toEqual(t.res);
+  });
+
+  test("Displaymonth outside range: after (11)", () => {
+    const t = {
+      start: new Date(2019, 2, 22),
+      end: new Date(2029, 9, 22),
+      current: 2040,
+      res: 12,
+    };
+    expect(getYears(t.start, t.end, t.current).length).toEqual(t.res);
+  });
+
+  test("Displaymonth outside range: before (11)", () => {
+    const t = {
+      start: new Date(2019, 2, 22),
+      end: new Date(2029, 9, 22),
+      current: 2001,
+      res: 12,
+    };
+    expect(getYears(t.start, t.end, t.current).length).toEqual(t.res);
   });
 });

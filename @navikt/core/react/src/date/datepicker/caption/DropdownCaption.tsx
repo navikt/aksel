@@ -29,7 +29,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const handleMonthChange: React.ChangeEventHandler<HTMLSelectElement> = (e) =>
     goToMonth(setMonth(startOfMonth(displayMonth), Number(e.target.value)));
 
-  const years = getYears(fromDate, toDate);
+  const years = getYears(fromDate, toDate, displayMonth.getFullYear());
   const months = getMonths(fromDate, toDate, displayMonth);
 
   const previousLabel = labelPrevious(previousMonth, { locale });
