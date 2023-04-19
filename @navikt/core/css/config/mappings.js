@@ -1,8 +1,8 @@
-export const typoCss = "Typography.css";
-export const formCss = "Form.css";
-export const componentsCss = "Components.css";
+const typoCss = "typography.css";
+const formCss = "form.css";
+const componentsCss = "components.css";
 
-export const StyleMappings = {
+const StyleMappings = {
   prioritzedCss: [typoCss, formCss],
   baseline: [
     {
@@ -135,3 +135,5 @@ export const StyleMappings = {
     },
   ],
 };
+
+module.exports = { StyleMappings, typoCss, formCss, componentsCss };

@@ -1,19 +1,15 @@
 const fs = require("fs");
 const path = require("path");
 const fastglob = require("fast-glob");
-const { camelCase, startCase } = require("lodash");
+const { camelCase } = require("lodash");
 const postcss = require("postcss");
 const autoprefixer = require("autoprefixer");
 const combineSelectors = require("postcss-combine-duplicated-selectors");
 const cssImports = require("postcss-import");
 const cssnano = require("cssnano");
 const version = require("../package.json").version;
+const { StyleMappings } = require("./mappings.js");
 
-/**
- * TODO:
- * - Lowercase everything
- * - Bruk config for basline rekkefølge
- */
 run();
 
 async function run() {
@@ -87,30 +83,17 @@ async function bundleFragments() {
       input: path.resolve(__dirname, `../${x}`),
       output: path.resolve(
         __dirname,
-        `../dist/${startCase(camelCase(x.replace("css", ""))).replace(
-          / /g,
-          ""
-        )}.css`
+        `../dist/${camelCase(x.replace("css", ""))
+          .toLowerCase()
+          .replace(/ /g, "")}.css`
       ),
     }));
 
-  /* Bundle forms together for easier cascading */
-  files.push({ input: "form/index.css", output: "dist/Forms.css" });
-
-  /* Distribute a autprefixed and minified version of the complete stylesheet */
-  files.push({ input: "index.css", output: "dist/index.css" });
-
-  files.push({ input: "baseline/reset.css", output: "dist/reset.css" });
-  files.push({ input: "baseline/fonts.css", output: "dist/fonts.css" });
-  files.push({ input: "baseline/print.css", output: "dist/print.css" });
-  files.push({
-    input: "baseline/baseline.css",
-    output: "dist/baseline.css",
+  StyleMappings.baseline.forEach(({ main }) => {
+    files.push({ input: `baseline/${main}`, output: `dist/${main}` });
   });
-  files.push({
-    input: "baseline/tokens.css",
-    output: "dist/tokens.css",
-  });
+
+  files.push({ input: "form/index.css", output: "dist/forms.css" });
 
   for (let file of files) {
     const css = fs.readFileSync(file.input, { encoding: "utf-8" });

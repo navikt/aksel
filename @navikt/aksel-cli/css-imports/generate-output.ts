@@ -5,12 +5,14 @@ import {
   typoCss,
   componentsCss,
   StyleMappings,
-} from "@navikt/ds-css/config/mappings.mjs";
+} from "@navikt/ds-css/config/mappings.js";
 import { inquiry } from "./inquiry.js";
 import clipboard from "clipboardy";
 import lodash from "lodash";
 
 const version = JSON.parse(fs.readFileSync("./package.json", "utf8")).version;
+
+const layer = " layer(aksel)";
 
 export async function generateImportOutput(answers: AnswersT) {
   const useCdn = answers.cdn === "cdn";
@@ -33,8 +35,8 @@ export async function generateImportOutput(answers: AnswersT) {
   ]);
 
   answers["config-type"] === "regular"
-    ? imports.push(simpleOutput(useCdn))
-    : imports.push(...advancedOutput(answers, useCdn));
+    ? imports.push(simpleOutput(useCdn, answers.layers))
+    : imports.push(...advancedOutput(answers, useCdn, answers.layers));
 
   if (answers.tailwind) {
     importStr = `@import "tailwindcss/base";
@@ -56,22 +58,23 @@ ${imports.join("\n")}
     (notes +=
       "When using tailwind with Aksel, you will need to add the postcss plugin 'postcss-import'. Read more here: https://aksel.nav.no/grunnleggende/kode/tailwind .\n\n");
 
-  answers.output.includes("print") && console.log(`\nImport:\n${importStr}\n`);
+  answers.output.includes("print") &&
+    console.log(`\n🚀 Imports 🚀 \n${importStr}\n`);
   console.log(notes.trim());
 
   answers.output.includes("clipboard") && clipboard.writeSync(importStr);
 }
 
-function simpleOutput(cdn: boolean) {
+function simpleOutput(cdn: boolean, layers: boolean) {
   const options = {
-    static: `@import "@navikt/ds-css"`,
+    static: `@import "@navikt/ds-css"${layers ? layer : ""};`,
     cdn: toCdn("index.css"),
   };
 
   return cdn ? options.cdn : options.static;
 }
 
-function advancedOutput(answers: AnswersT, cdn: boolean) {
+function advancedOutput(answers: AnswersT, cdn: boolean, layers: boolean) {
   const imports = ["/* Defaults */"];
   const baselineImports = answers.imports.filter(
     (x) => !x.startsWith(ComponentPrefix) && x !== "default"
@@ -84,13 +87,13 @@ function advancedOutput(answers: AnswersT, cdn: boolean) {
   baselineImports.forEach((x) => {
     cdn
       ? imports.push(toCdn(`${x}.css`))
-      : imports.push(toCssImport(`module/${x}.css`));
+      : imports.push(toCssImport(`dist/${x}.css`, layers));
   });
 
   if (answers["config-type"] === "easy") {
     cdn
       ? imports.push(toCdn(componentsCss))
-      : imports.push(toCssImport(`module/${componentsCss}`));
+      : imports.push(toCssImport(`dist/${componentsCss}`, layers));
     return imports;
   }
 
@@ -125,12 +128,10 @@ function advancedOutput(answers: AnswersT, cdn: boolean) {
   imports.push(`/* Components */`);
 
   componentImportsList.forEach((x) => {
-    const pascalCase = lodash
-      .startCase(lodash.camelCase(x.replace("css", "")))
-      .replace(/ /g, "");
+    const pascalCase = lodash.camelCase(x.replace("css", "")).toLowerCase();
     cdn
       ? imports.push(toCdn(pascalCase))
-      : imports.push(toCssImport(`module/${pascalCase}`));
+      : imports.push(toCssImport(`dist/${pascalCase}`, layers));
   });
 
   return imports;
@@ -140,6 +141,6 @@ function toCdn(str: string): string {
   return `<link rel="preload" href="https://cdn.nav.no/aksel/@navikt/ds-css/${version}/${str}" as="style"></link>`;
 }
 
-function toCssImport(str: string): string {
-  return `@import "@navikt/ds-css/${str}";`;
+function toCssImport(str: string, layers: boolean): string {
+  return `@import "@navikt/ds-css/${str}"${layers ? layer : ""};`;
 }

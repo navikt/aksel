@@ -1,4 +1,4 @@
-import { StyleMappings } from "@navikt/ds-css/config/mappings.mjs";
+import { StyleMappings } from "@navikt/ds-css/config/mappings.js";
 import { generateImportOutput } from "./generate-output.js";
 import { AnswersT, ComponentPrefix } from "./config.js";
 
@@ -13,6 +13,7 @@ async function main() {
     cdn: "static",
     autoscan: false,
     tailwind: false,
+    layers: false,
     imports: null,
     output: "print-clipboard",
   };
@@ -83,11 +84,7 @@ async function main() {
       name: "imports",
       message: "Imports",
       initial: [
-        "fonts",
-        "tokens",
-        "baseline",
-        "reset",
-        "print",
+        ...StyleMappings.baseline.map((x) => x.main.replace(".css", "")),
         ...StyleMappings.components
           .filter((x) => foundComponents.includes(x.component))
           .map((x) => `${ComponentPrefix}${x.component}`),
@@ -97,11 +94,12 @@ async function main() {
           message: "Default-imports",
           name: "default",
           choices: [
-            { message: "fonts", name: "fonts" },
-            { message: "tokens (required)", name: "tokens" },
-            { message: "baseline (required)", name: "baseline" },
-            { message: "reset", name: "reset" },
-            { message: "print", name: "print" },
+            ...StyleMappings.baseline.map((x) => ({
+              message: `${x.main.replace(".css", "")}${
+                x.optional ? "" : " (required)"
+              }`,
+              name: x.main.replace(".css", ""),
+            })),
           ],
         },
         ...(answers["config-type"] === "advanced"
