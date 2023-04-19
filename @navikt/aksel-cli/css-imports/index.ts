@@ -25,7 +25,7 @@ async function main() {
       initial: 0,
       choices: [
         { message: "Regular (recommended)", name: "regular" },
-        { message: "Optional defaults + components", name: "easy" },
+        { message: "Optional defaults + bundled components", name: "easy" },
         { message: "Fine-grained (advanced)", name: "advanced" },
       ],
     },
@@ -77,16 +77,6 @@ async function main() {
 
   answers["autoscan"] && (foundComponents = await scanCode());
 
-  console.log([
-    "fonts",
-    "tokens",
-    "reset",
-    "print",
-    "baseline",
-    ...StyleMappings.components.filter((x) =>
-      foundComponents.includes(x.component)
-    ),
-  ]);
   await inquiry(answers, [
     {
       type: "multiselect",
