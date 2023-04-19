@@ -149,9 +149,8 @@ export const ShowWeekNumber = () => (
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Aug 23 2022"),
     onDateChange: console.log,
-    locale: "en",
-    openOnFocus: false,
   });
 
   return (

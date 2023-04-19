@@ -1,6 +1,6 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import isWeekend from "date-fns/isWeekend";
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { DayClickEventHandler, isMatch } from "react-day-picker";
 import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
@@ -155,7 +155,7 @@ export const useDatepicker = (
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
-  const handleOpen = React.useCallback(
+  const handleOpen = useCallback(
     (open: boolean) => {
       setOpen(open);
       !open &&
