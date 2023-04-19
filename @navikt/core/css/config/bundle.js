@@ -26,6 +26,7 @@ if (!fs.existsSync(path.resolve(__dirname, `../dist/versioned/${version}`))) {
 bundleMonolith();
 bundleComponents();
 bundleFragments();
+bundleMinified();
 
 /**
  * Postcss-plugins
@@ -46,17 +47,12 @@ function bundleMonolith() {
   });
 }
 
-/**
- * Postcss-plugins
- * - cssImports: Handle inline of imports from other css files
- * - combineSelectors: Combine selectors with the same properties
- * Expect user to handle autoprefixing and minification inside their own build process
- */
 function bundleComponents() {
   const indexSrc = path.resolve(__dirname, "../index.css");
   const indexDist = path.resolve(__dirname, "../dist/module/Components.css");
 
   fs.readFile(indexSrc, (_, css) => {
+    /* Remove @charset, baseline */
     const cssString = css.toString().split("\n").slice(2).join("\n");
     postcss([cssImports, combineSelectors])
       .process(cssString, { from: indexSrc, to: indexDist })
@@ -64,21 +60,6 @@ function bundleComponents() {
         fs.writeFileSync(indexDist, result.css, () => true);
         fs.writeFileSync(
           indexDist.replace("module", `versioned/${version}`),
-          result.css,
-          () => true
-        );
-      });
-
-    postcss([cssImports, combineSelectors, autoprefixer, cssnano])
-      .process(cssString, {
-        from: indexSrc,
-        to: indexDist.replace(".css", ".min.css"),
-      })
-      .then((result) => {
-        fs.writeFileSync(
-          indexDist
-            .replace(".css", ".min.css")
-            .replace("module", `versioned/${version}`),
           result.css,
           () => true
         );
@@ -139,22 +120,21 @@ function bundleFragments() {
           () => true
         );
       });
+  });
+}
 
-    postcss([cssImports, combineSelectors, autoprefixer, cssnano])
+function bundleMinified() {
+  const files = fastglob.sync("**/*.css", { cwd: "./dist" }).map((x) => ({
+    input: `dist/${x}`,
+    output: `dist/${x}`.replace("css", "min.css"),
+  }));
+
+  files.forEach((file) => {
+    const css = fs.readFileSync(file.input, { encoding: "utf-8" });
+    postcss([autoprefixer, cssnano])
       .process(css, { from: file.input, to: file.output })
       .then((result) => {
-        fs.writeFileSync(
-          file.output.replace(".css", ".min.css"),
-          result.css,
-          () => true
-        );
-        fs.writeFileSync(
-          file.output
-            .replace("module", `versioned/${version}`)
-            .replace(".css", ".min.css"),
-          result.css,
-          () => true
-        );
+        fs.writeFileSync(file.output, result.css, () => true);
       });
   });
 }
