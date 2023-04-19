@@ -9,23 +9,21 @@ const cssImports = require("postcss-import");
 const cssnano = require("cssnano");
 const version = require("../package.json").version;
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist"));
-}
+run();
 
-if (!fs.existsSync(path.resolve(__dirname, "../dist/module"))) {
-  fs.mkdirSync(path.resolve(__dirname, "../dist/module"));
-}
+async function run() {
+  if (!fs.existsSync(path.resolve(__dirname, "../dist/module"))) {
+    fs.mkdirSync(path.resolve(__dirname, "../dist/module"), {
+      recursive: true,
+    });
+  }
 
-if (!fs.existsSync(path.resolve(__dirname, `../dist/version/${version}`))) {
-  fs.mkdirSync(path.resolve(__dirname, `../dist/version/${version}`), {
-    recursive: true,
-  });
-}
+  if (!fs.existsSync(path.resolve(__dirname, `../dist/version/${version}`))) {
+    fs.mkdirSync(path.resolve(__dirname, `../dist/version/${version}`), {
+      recursive: true,
+    });
+  }
 
-main();
-
-async function main() {
   await bundleMonolith();
   await bundleComponents();
   await bundleFragments();
@@ -36,7 +34,6 @@ async function main() {
  * Postcss-plugins
  * - cssImports: Handle inline of imports from other css files
  * - combineSelectors: Combine selectors with the same properties
- * Expect user to handle autoprefixing and minification inside their own build process
  */
 async function bundleMonolith() {
   const indexSrc = path.resolve(__dirname, "../index.css");
@@ -51,6 +48,9 @@ async function bundleMonolith() {
   });
 }
 
+/**
+ * Bundle Components together for flexible import-options
+ */
 async function bundleComponents() {
   const indexSrc = path.resolve(__dirname, "../index.css");
   const indexDist = path.resolve(__dirname, "../dist/module/Components.css");
@@ -75,8 +75,6 @@ async function bundleComponents() {
  * Postcss-plugins
  * - cssImports: Handle inline of imports from other css files
  * - combineSelectors: Combine selectors with the same properties
- * - autoprefixer: Add vendor prefixes, uses browserlist in package.json
- * - cssnano: Simple minification of css
  */
 async function bundleFragments() {
   const files = fastglob
@@ -127,6 +125,12 @@ async function bundleFragments() {
   }
 }
 
+/**
+ * Give a minified version of of CSS for CDN and static imports
+ * Postcss-plugins
+ * - autoprefixer: Add vendor prefixes, uses browserlist in package.json
+ * - cssnano: css-minification
+ */
 async function bundleMinified() {
   const files = fastglob.sync("**/*.css", { cwd: "./dist" }).map((x) => ({
     input: `dist/${x}`,
