@@ -28,6 +28,12 @@ export const getMonths = (start: Date, end: Date, current: Date): Date[] => {
       dropdownMonths.push(setMonth(date, month));
     }
   }
+
+  if (!dropdownMonths.map((d) => d.getMonth()).includes(current.getMonth())) {
+    dropdownMonths.push(current);
+  }
+  dropdownMonths.sort((a, b) => a.getMonth() - b.getMonth());
+
   return dropdownMonths;
 };
 
