@@ -1,20 +1,8 @@
-type StyleMap = {
-  baseline: {
-    main: string;
-    optional: boolean;
-  }[];
-  prioritzedCss: string[];
-  components: {
-    component: string;
-    main: string;
-    dependencies?: string[];
-  }[];
-};
+export const typoCss = "Typography.css";
+export const formCss = "Form.css";
+export const componentsCss = "Components.css";
 
-const typoCss = "typography.css";
-const formCss = "form.css";
-
-export const StyleMappings: StyleMap = {
+export const StyleMappings = {
   prioritzedCss: [typoCss, formCss],
   baseline: [
     {
