@@ -1,6 +1,6 @@
-export const typoCss = "Typography.css";
-export const formCss = "Form.css";
-export const componentsCss = "Components.css";
+export const typoCss = "typography.css";
+export const formCss = "form.css";
+export const componentsCss = "components.css";
 
 export const StyleMappings = {
   prioritzedCss: [typoCss, formCss],

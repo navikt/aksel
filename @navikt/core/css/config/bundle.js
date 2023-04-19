@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const fastglob = require("fast-glob");
-const { camelCase, startCase } = require("lodash");
+const { camelCase } = require("lodash");
 const postcss = require("postcss");
 const autoprefixer = require("autoprefixer");
 const combineSelectors = require("postcss-combine-duplicated-selectors");
@@ -87,10 +87,9 @@ async function bundleFragments() {
       input: path.resolve(__dirname, `../${x}`),
       output: path.resolve(
         __dirname,
-        `../dist/${startCase(camelCase(x.replace("css", ""))).replace(
-          / /g,
-          ""
-        )}.css`
+        `../dist/${camelCase(x.replace("css", ""))
+          .toLowerCase()
+          .replace(/ /g, "")}.css`
       ),
     }));
 
