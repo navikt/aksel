@@ -8,7 +8,7 @@ const combineSelectors = require("postcss-combine-duplicated-selectors");
 const cssImports = require("postcss-import");
 const cssnano = require("cssnano");
 const version = require("../package.json").version;
-const { StyleMappings } = require("./mappings.js");
+const { StyleMappings, componentsCss, formCss } = require("./mappings.js");
 
 run();
 
@@ -52,7 +52,7 @@ async function bundleMonolith() {
  */
 async function bundleComponents() {
   const indexSrc = path.resolve(__dirname, "../index.css");
-  const indexDist = path.resolve(__dirname, "../dist/Components.css");
+  const indexDist = path.resolve(__dirname, `../dist/${componentsCss}`);
 
   return fs.readFile(indexSrc, (_, css) => {
     /* Remove @charset, baseline */
@@ -78,7 +78,6 @@ async function bundleFragments() {
   const files = fastglob
     .sync("*.css", { cwd: ".", ignore: "**/*.min.css" })
     .map((fileN) => path.basename(fileN))
-    .filter((x) => x !== "index.css")
     .map((x) => ({
       input: path.resolve(__dirname, `../${x}`),
       output: path.resolve(
@@ -93,7 +92,7 @@ async function bundleFragments() {
     files.push({ input: `baseline/${main}`, output: `dist/${main}` });
   });
 
-  files.push({ input: "form/index.css", output: "dist/forms.css" });
+  files.push({ input: "form/index.css", output: `dist/${formCss}` });
 
   for (let file of files) {
     const css = fs.readFileSync(file.input, { encoding: "utf-8" });
