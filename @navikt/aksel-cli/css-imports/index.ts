@@ -98,7 +98,6 @@ async function main() {
   if (answers["autoscan"]) {
     foundComponents = await new Promise((resolve) => {
       exec(`node ${__dirname}/scan-code.js ${answers.scandir}`, (_, stdout) => {
-        console.log({ stdout: stdout.trim().split("\n").slice(1).join("") });
         resolve(
           stdout ? JSON.parse(stdout.trim().split("\n").slice(1).join("")) : []
         );

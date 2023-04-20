@@ -1,4 +1,4 @@
-/* import fs from "fs"; */
+import fs from "fs";
 import { AnswersT, ComponentPrefix } from "./config.js";
 import {
   formCss,
@@ -9,9 +9,18 @@ import {
 import { inquiry } from "./inquiry.js";
 import clipboard from "clipboardy";
 import lodash from "lodash";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
-/* const version = JSON.parse(fs.readFileSync("./package.json", "utf8")).version; */
-const version = "2.8.2";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const version = JSON.parse(
+  fs.readFileSync(
+    `${__dirname.replace("/dist/css-imports", "")}/package.json`,
+    "utf8"
+  )
+).version;
 
 const layer = " layer(aksel)";
 
