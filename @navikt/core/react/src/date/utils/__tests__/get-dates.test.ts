@@ -57,13 +57,23 @@ describe("Extracts correct months", () => {
     };
     expect(getMonths(t.start, t.end, t.current).length).toEqual(t.res);
   });
+  test("End part of 2022, including starting month (12)", () => {
+    const t = {
+      start: new Date(2019, 5, 22),
+      end: new Date(2022, 7, 22),
+      current: new Date(2022, 7, 22),
+      res: 8,
+    };
+    expect(getMonths(t.start, t.end, t.current).length).toEqual(t.res);
+  });
   test("Adds out of range month to list (13)", () => {
     const t = {
       start: new Date(2019, 5, 22),
       end: new Date(2022, 7, 22),
       current: new Date(2022, 9, 22),
-      res: 7,
+      res: 9,
     };
+    console.log(getMonths(t.start, t.end, t.current));
     expect(getMonths(t.start, t.end, t.current).length).toEqual(t.res);
   });
 });
