@@ -1,6 +1,6 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import isWeekend from "date-fns/isWeekend";
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { DayClickEventHandler, isMatch } from "react-day-picker";
 import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
@@ -150,13 +150,22 @@ export const useDatepicker = (
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
-  useOutsideClickHandler(open, setOpen, [
+  const handleOpen = useCallback(
+    (open: boolean) => {
+      setOpen(open);
+      !open &&
+        setMonth(selectedDay ?? defaultSelected ?? defaultMonth ?? today);
+    },
+    [defaultMonth, defaultSelected, selectedDay, today]
+  );
+
+  useOutsideClickHandler(open, handleOpen, [
     daypickerRef,
     inputRef.current,
     inputRef.current?.nextSibling,
   ]);
 
-  useEscape(open, setOpen, inputRef);
+  useEscape(open, handleOpen, inputRef);
 
   const updateDate = (date?: Date) => {
     onDateChange?.(date);
@@ -182,7 +191,7 @@ export const useDatepicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    !open && openOnFocus && setOpen(true);
+    !open && openOnFocus && handleOpen(true);
     let day = parseDate(
       e.target.value,
       today,
@@ -211,7 +220,7 @@ export const useDatepicker = (
   /* Only allow de-selecting if not required */
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
     if (day && !selected) {
-      setOpen(false);
+      handleOpen(false);
       inputRef.current && inputRef.current.focus();
     }
 
@@ -288,7 +297,7 @@ export const useDatepicker = (
     toDate,
     today,
     open,
-    onOpenToggle: () => setOpen((x) => !x),
+    onOpenToggle: () => handleOpen(!open),
     disabled,
     disableWeekends,
     ref: setDaypickerRef,

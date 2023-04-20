@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { DateInputProps } from "../DateInput";
 import { MonthPickerProps } from "../monthpicker/MonthPicker";
 import {
@@ -116,7 +116,7 @@ export const useMonthpicker = (
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
-  const today = new Date();
+  const today = useMemo(() => new Date(), []);
   const locale = getLocaleFromString(_locale);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -133,13 +133,22 @@ export const useMonthpicker = (
 
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
-  useOutsideClickHandler(open, setOpen, [
+  const handleOpen = useCallback(
+    (open: boolean) => {
+      setOpen(open);
+      !open &&
+        setYear(selectedMonth ?? defaultSelected ?? defaultYear ?? today);
+    },
+    [defaultSelected, defaultYear, selectedMonth, today]
+  );
+
+  useOutsideClickHandler(open, handleOpen, [
     monthpickerRef,
     inputRef.current,
     inputRef.current?.nextSibling,
   ]);
 
-  useEscape(open, setOpen, inputRef);
+  useEscape(open, handleOpen, inputRef);
 
   const updateMonth = (date?: Date) => {
     onMonthChange?.(date);
@@ -165,7 +174,7 @@ export const useMonthpicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    !open && openOnFocus && setOpen(true);
+    !open && openOnFocus && handleOpen(true);
     let day = parseDate(
       e.target.value,
       today,
@@ -196,7 +205,7 @@ export const useMonthpicker = (
   /* Only allow de-selecting if not required */
   const handleMonthClick = (month?: Date) => {
     if (month) {
-      setOpen(false);
+      handleOpen(false);
       inputRef.current && inputRef.current.focus();
       setYear(month);
     }
@@ -282,7 +291,7 @@ export const useMonthpicker = (
     fromDate,
     toDate,
     open,
-    onOpenToggle: () => setOpen((x) => !x),
+    onOpenToggle: () => handleOpen(!open),
     disabled,
     ref: setMonthpickerRef,
   };

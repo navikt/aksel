@@ -149,14 +149,13 @@ export const ShowWeekNumber = () => (
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2023"),
     onDateChange: console.log,
-    locale: "en",
-    openOnFocus: false,
   });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...datepickerProps}>
+      <DatePicker {...datepickerProps} dropdownCaption>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
     </div>
