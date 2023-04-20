@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { StyleMappings } from "@navikt/ds-css/config/mappings.js";
 import { generateImportOutput } from "./generate-output.js";
 import { AnswersT, ComponentPrefix } from "./config.js";

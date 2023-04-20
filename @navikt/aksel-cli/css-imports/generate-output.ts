@@ -52,7 +52,7 @@ ${imports.join("\n")}
   let notes = "";
   useCdn &&
     (notes +=
-      "We recommend using Static imports, then uploading the files + application-CSS to your own CDN.\nRemember to add 'https://cdn.nav.no' to your applications CSP!\n\n");
+      "We recommend using Static imports, then uploading the files + application-CSS to your own CDN-bundle.\nRemember to add 'https://cdn.nav.no' to your applications CSP!\n\n");
 
   answers.tailwind &&
     (notes +=
@@ -130,15 +130,18 @@ function advancedOutput(answers: AnswersT, cdn: boolean, layers: boolean) {
   componentImportsList.forEach((x) => {
     const pascalCase = lodash.camelCase(x.replace("css", "")).toLowerCase();
     cdn
-      ? imports.push(toCdn(pascalCase))
-      : imports.push(toCssImport(`dist/${pascalCase}`, layers));
+      ? imports.push(toCdn(`${pascalCase}.css`))
+      : imports.push(toCssImport(`dist/${pascalCase}.css`, layers));
   });
 
   return imports;
 }
 
 function toCdn(str: string): string {
-  return `<link rel="preload" href="https://cdn.nav.no/aksel/@navikt/ds-css/${version}/${str}" as="style"></link>`;
+  return `<link rel="preload" href="https://cdn.nav.no/aksel/@navikt/ds-css/${version}/${str.replace(
+    ".css",
+    ".min.css"
+  )}" as="style"></link>`;
 }
 
 function toCssImport(str: string, layers: boolean): string {
