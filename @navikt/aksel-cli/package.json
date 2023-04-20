@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-cli",
-  "version": "2.8.12-beta.5",
+  "version": "2.8.12-beta.8",
   "description": "Aksel client-tool for codemods and more",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",

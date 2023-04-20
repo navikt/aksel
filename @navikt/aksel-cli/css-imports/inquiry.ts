@@ -2,7 +2,9 @@ import Enquirer from "enquirer";
 import { AnswersT } from "./config.js";
 
 export async function inquiry(answers: AnswersT, questions: any[]) {
-  return await Enquirer.prompt(questions)
+  return await Enquirer.prompt(
+    questions.map((x) => ({ ...x, cancel: () => process.exit(1) }))
+  )
     .then((a) => {
       Object.entries(a).forEach(([key, value]) => {
         answers[key] = value;

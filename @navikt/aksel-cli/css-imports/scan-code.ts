@@ -1,11 +1,18 @@
 import path from "path";
 import scanner from "react-scanner";
 
-export async function scanCode() {
+run();
+async function run() {
+  await scanCode();
+}
+
+async function scanCode() {
   const cwd = process.cwd();
+
   const config = {
     rootDir: cwd,
-    crawlFrom: cwd,
+    crawlFrom: `${process.argv[2] ?? ""}`,
+
     globs: ["**/!(*.test|*.spec|*.stories|*.story).@(jsx|tsx)"],
     exclude: (dirname: string) => dirname === "node_modules",
     getComponentName: ({
@@ -19,20 +26,18 @@ export async function scanCode() {
 
   let result: any | null = null;
 
-  await scanner.run({
-    ...config,
-    importedFrom: /@navikt\/ds-react/,
-    processors: [
-      "count-components",
-      ({ report }) => {
-        result = report;
-      },
-    ],
-  });
+  await scanner
+    .run({
+      ...config,
+      importedFrom: /@navikt\/ds-react/,
+      processors: [
+        "count-components",
+        ({ report }) => {
+          result = report;
+        },
+      ],
+    })
+    .catch(() => null);
 
-  Object.keys(result).length > 0
-    ? console.log(`\nFound components!\n${Object.keys(result).join(", ")}\n`)
-    : console.log(`\nNo components found!\n`);
-
-  return Object.keys(result);
+  console.log(JSON.stringify(Object.keys(result)));
 }

@@ -4,7 +4,14 @@ import { generateImportOutput } from "./generate-output.js";
 import { AnswersT, ComponentPrefix } from "./config.js";
 
 import { inquiry } from "./inquiry.js";
-import { scanCode } from "./scan-code.js";
+/* import { scanCode } from "./scan-code.js"; */
+import { exec } from "child_process";
+
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 main();
 
@@ -13,6 +20,7 @@ async function main() {
     "config-type": "regular",
     cdn: "static",
     autoscan: false,
+    scandir: "",
     tailwind: false,
     layers: false,
     imports: null,
@@ -75,9 +83,28 @@ async function main() {
       },
     ]));
 
+  answers.autoscan &&
+    (await inquiry(answers, [
+      {
+        type: "input",
+        name: "scandir",
+        message: `Directory to scan (leave empty for current dir):\n ${process.cwd()}/`,
+        initial: "",
+      },
+    ]));
+
   let foundComponents: string[] = [];
 
-  answers["autoscan"] && (foundComponents = await scanCode());
+  if (answers["autoscan"]) {
+    foundComponents = await new Promise((resolve) => {
+      exec(`node ${__dirname}/scan-code.js ${answers.scandir}`, (_, stdout) => {
+        console.log({ stdout: stdout.trim().split("\n").slice(1).join("") });
+        resolve(
+          stdout ? JSON.parse(stdout.trim().split("\n").slice(1).join("")) : []
+        );
+      });
+    });
+  }
 
   await inquiry(answers, [
     {

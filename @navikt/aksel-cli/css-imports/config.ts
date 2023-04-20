@@ -4,6 +4,7 @@ export type AnswersT = {
   tailwind?: boolean;
   layers?: boolean;
   autoscan?: boolean;
+  scandir?: string;
   imports?: string[];
   output: "print" | "clipboard" | "print-clipboard";
 };
