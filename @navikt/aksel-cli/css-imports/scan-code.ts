@@ -2,9 +2,10 @@ import path from "path";
 import scanner from "react-scanner";
 
 export async function scanCode() {
+  const cwd = process.cwd();
   const config = {
-    rootDir: ".",
-    crawlFrom: "../",
+    rootDir: cwd,
+    crawlFrom: cwd,
     globs: ["**/!(*.test|*.spec|*.stories|*.story).@(jsx|tsx)"],
     exclude: (dirname: string) => dirname === "node_modules",
     getComponentName: ({
