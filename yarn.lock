@@ -3896,7 +3896,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-cli@workspace:@navikt/aksel-cli"
   dependencies:
-    "@navikt/ds-css": ^2.8.12
+    "@navikt/ds-css": 2.8.12-beta.0
     "@types/inquirer": ^9.0.3
     clipboardy: ^3.0.0
     enquirer: ^2.3.6
@@ -3904,8 +3904,7 @@ __metadata:
     react-scanner: ^1.1.0
     typescript: ^4.8.0
   bin:
-    css-imports: ./dist/css-imports/index.js
-    migrate: ./dist/migrations/index.js
+    aksel-cli: ./dist/css-imports/index.js
   languageName: unknown
   linkType: soft
 
@@ -3970,7 +3969,28 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@2.8.12, @navikt/ds-css@^2.8.12, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:2.8.12":
+  version: 2.8.12
+  resolution: "@navikt/ds-css@npm:2.8.12"
+  checksum: 9e477392c2a62016bea2fa49336e4fe257ad75f1ae14e7a1198b3e27a45a5228b70bb7a3db7d9dec190bc5b2989947dd39c2c74b0139ace8ad536062d1d75e53
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-css@npm:2.8.12-beta.0":
+  version: 2.8.12-beta.0
+  resolution: "@navikt/ds-css@npm:2.8.12-beta.0"
+  checksum: e115500c749b229e1544b91b3e0cf279833d8e1ae536a533baa39031361cd21bbab3b8ab2a3d8052afe2f703c23a4c9939218c59ab59f4e38b15b7adbca5fa88
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-css@npm:^2.8.12":
+  version: 2.8.13
+  resolution: "@navikt/ds-css@npm:2.8.13"
+  checksum: 8e021c79481e3e9a4eff9ca8329127c9131591b37c2ca8a419c393c20d7a1112e04203ea583f1e3ccd532c789e1731bda48f74e071596153402c0b48ed1c30db
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-cli",
-  "version": "2.8.12-beta.9",
+  "version": "2.8.12-beta.10",
   "description": "Aksel client-tool for codemods and more",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -19,7 +19,10 @@
     "test": "yarn build && jest",
     "test:watch": "jest --watch"
   },
-  "bin": "./dist/css-imports/index.js",
+  "bin": {
+    "aksel-cli": "./dist/css-imports/index.js",
+    "css-imports": "./dist/css-imports/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git",
