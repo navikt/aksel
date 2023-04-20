@@ -126,7 +126,10 @@ async function bundleMinified() {
   for (let file of files) {
     const css = fs.readFileSync(file.input, { encoding: "utf-8" });
     await postcss([autoprefixer, cssnano])
-      .process(css, { from: file.input, to: file.output })
+      .process(css, {
+        from: file.input,
+        to: file.output,
+      })
       .then((result) => {
         fs.writeFileSync(file.output, result.css, () => true);
       });
