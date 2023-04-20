@@ -13,11 +13,6 @@ import {
 import { useEscape } from "./useEscape";
 import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
-/**
- * TODO:
- * - Go to nearest valid date today is out of range
- * - Hover-effect on disabled dropdown-caption button
- */
 export interface UseDatepickerOptions
   extends Pick<
     DatePickerProps,
