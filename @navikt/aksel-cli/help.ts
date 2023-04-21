@@ -2,6 +2,7 @@ import chalk from "chalk";
 
 console.log(`
 ✨ Aksel client-tool
+
 📝 Documentation
    - ${chalk.blueBright(
      "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-client/README.md"
