@@ -1,7 +1,8 @@
 import { Footer } from "@/layout";
-import { urlFor, destructureBlocks } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import { urlFor } from "@/sanity/interface";
+import { destructureBlocks } from "@/sanity/queries";
 import {
   AkselGodPraksisDocT,
   AkselGodPraksisLandingPageDocT,

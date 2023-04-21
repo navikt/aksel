@@ -1,7 +1,4 @@
-import {
-  grunnleggendeKategorier,
-  komponentKategorier,
-} from "../../sanity/config";
+import { grunnleggendeKategorier, komponentKategorier } from "../config";
 
 const markDef = `
 markDefs[]{

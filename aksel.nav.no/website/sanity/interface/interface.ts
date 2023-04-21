@@ -1,5 +1,5 @@
 import imageUrlBuilder from "@sanity/image-url";
-import { getClient, noCdnClient, sanityClient } from "./sanity.server";
+import { getClient, noCdnClient, sanityClient } from "./client.server";
 
 const imageBuilder = imageUrlBuilder(sanityClient);
 

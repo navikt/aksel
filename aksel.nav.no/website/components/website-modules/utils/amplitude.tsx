@@ -1,3 +1,4 @@
+import { SearchLogT } from "@/types";
 import amplitude from "amplitude-js";
 import getConfig from "next/config";
 import { Router } from "next/router";
@@ -28,21 +29,6 @@ export const initAmplitude = () => {
       platform: window.location.toString(),
     });
   }
-};
-
-export type SearchLogT = {
-  type: "suksess" | "feilet" | "standard";
-  retries: number;
-  retriedQueries: string[];
-  query: string;
-  filter: string[];
-  hits: number;
-  searchedFromUrl: string;
-
-  index?: number;
-  accuracy?: string;
-  topResult?: boolean;
-  url?: string;
 };
 
 export const logSearch = (data: SearchLogT) => {

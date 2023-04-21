@@ -163,7 +163,8 @@
   gap: var(--a-spacing-2);
 }
 
-.navds-date__caption-button {
+.navds-date__caption-button,
+.navds-date__caption-button:disabled {
   color: var(--ac-date-caption-text, var(--a-text-default));
 }
 

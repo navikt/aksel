@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "2.8.12",
+  "version": "2.8.14",
   "author": "Aksel | NAV",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -17,7 +17,8 @@
     "svg"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "sideEffects": [
     "*.svg"

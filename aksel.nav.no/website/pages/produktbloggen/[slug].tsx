@@ -1,6 +1,5 @@
-import { contributorsAll, destructureBlocks, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
 import {
   AkselBloggDocT,
   NextPageT,
@@ -23,6 +22,8 @@ import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
 import { lazy } from "react";
 import NotFotfund from "../404";
+import { urlFor } from "@/sanity/interface";
+import { destructureBlocks, contributorsAll } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   blogg: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;

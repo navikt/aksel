@@ -1,12 +1,6 @@
 import { dateStr } from "@/components";
-import {
-  destructureBlocks,
-  getDocumentsTmp,
-  sidebarQuery,
-  urlFor,
-} from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
 import {
   AkselGrunnleggendeDocT,
   AkselSidebarT,
@@ -23,6 +17,8 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
 import NotFotfund from "../404";
+import { getDocumentsTmp, urlFor } from "@/sanity/interface";
+import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;

@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 2.8.14
+
+### Patch Changes
+
+- [`f0d9a8853`](https://github.com/navikt/aksel/commit/f0d9a8853f56854a4049bd3f6cc34968e9d6c380) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fixes shown month on open in Datepicker/MonthPicker, better handling of out-of-range 'today'
+
+## 2.8.13
+
 ## 2.8.12
 
 ## 2.8.11

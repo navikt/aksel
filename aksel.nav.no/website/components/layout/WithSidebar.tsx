@@ -1,4 +1,3 @@
-import { urlFor } from "@/lib";
 import { Detail, Heading, Link } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
@@ -11,6 +10,7 @@ import { capitalize } from "@/utils";
 import Image from "next/legacy/image";
 import { TableOfContentsv2 } from "components/website-modules/TOCv2";
 import { AkselSidebarT } from "@/types";
+import { urlFor } from "@/sanity/interface";
 
 const HeaderCube = ({ ...props }) => (
   <svg
