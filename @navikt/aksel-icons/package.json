@@ -17,7 +17,8 @@
     "svg"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "sideEffects": [
     "*.svg"

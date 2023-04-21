@@ -19,7 +19,8 @@
   "module": "./esm/index.js",
   "typings": "./esm/index.d.ts",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "files": [
     "/css",
