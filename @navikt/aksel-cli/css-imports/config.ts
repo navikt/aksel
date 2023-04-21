@@ -1,6 +1,7 @@
 export type AnswersT = {
   "config-type": "regular" | "easy" | "advanced";
   cdn: "static" | "cdn";
+  version: string;
   tailwind?: boolean;
   layers?: boolean;
   autoscan?: boolean;

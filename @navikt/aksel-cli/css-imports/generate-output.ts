@@ -1,4 +1,3 @@
-import fs from "fs";
 import { AnswersT, ComponentPrefix } from "./config.js";
 import {
   formCss,
@@ -9,23 +8,13 @@ import {
 import { inquiry } from "./inquiry.js";
 import clipboard from "clipboardy";
 import lodash from "lodash";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const version = JSON.parse(
-  fs.readFileSync(
-    `${__dirname.replace("/dist/css-imports", "")}/package.json`,
-    "utf8"
-  )
-).version;
+import chalk from "chalk";
 
 const layer = " layer(aksel)";
 
 export async function generateImportOutput(answers: AnswersT) {
   const useCdn = answers.cdn === "cdn";
+  const version = answers.version;
 
   const imports = [];
   let importStr = "";
@@ -45,8 +34,8 @@ export async function generateImportOutput(answers: AnswersT) {
   ]);
 
   answers["config-type"] === "regular"
-    ? imports.push(simpleOutput(useCdn, answers.layers))
-    : imports.push(...advancedOutput(answers, useCdn, answers.layers));
+    ? imports.push(simpleOutput(useCdn, answers.layers, version))
+    : imports.push(...advancedOutput(answers, useCdn, answers.layers, version));
 
   if (answers.tailwind) {
     importStr = `@import "tailwindcss/base";
@@ -59,32 +48,47 @@ ${imports.join("\n")}
     importStr = imports.join("\n");
   }
 
-  let notes = "";
-  useCdn &&
-    (notes +=
-      "We recommend using Static imports, then uploading the files + application-CSS to your own CDN-bundle.\nRemember to add 'https://cdn.nav.no' to your applications CSP!\n\n");
+  if (answers.output.includes("print")) {
+    console.log(chalk.bold.cyan(`\nImports 🚀 \n`));
+    console.log(chalk.green(`${importStr}`));
+  }
 
-  answers.tailwind &&
-    (notes +=
-      "When using tailwind with Aksel, you will need to add the postcss plugin 'postcss-import'. Read more here: https://aksel.nav.no/grunnleggende/kode/tailwind .\n\n");
+  if (useCdn) {
+    console.log(chalk.bold.underline.cyan(`\nNotes on CDN-usage 📝`));
+    console.log(
+      `We recommend using Static imports, then uploading the files + application-CSS to your own CDN-bundle.
+✔︎ This allows you to control the version of the CSS-files with package.json, and avoid desync between ds-react/ds-css.
+✔︎ Remember to add 'https://cdn.nav.no' to your applications CSP!`
+    );
+  }
 
-  answers.output.includes("print") &&
-    console.log(`\n🚀 Imports 🚀 \n${importStr}\n`);
-  console.log(notes.trim());
+  if (answers.tailwind) {
+    console.log(chalk.bold.underline.cyan(`\nNotes on Tailwind-use 📝`));
+    console.log(
+      `When using tailwind with Aksel, you will need to add the postcss plugin 'postcss-import'."
+✔︎ NPM: https://www.npmjs.com/package/postcss-import
+✔︎ Read more here: https://aksel.nav.no/grunnleggende/kode/tailwind.`
+    );
+  }
 
   answers.output.includes("clipboard") && clipboard.writeSync(importStr);
 }
 
-function simpleOutput(cdn: boolean, layers: boolean) {
+function simpleOutput(cdn: boolean, layers: boolean, version: string) {
   const options = {
     static: `@import "@navikt/ds-css"${layers ? layer : ""};`,
-    cdn: toCdn("index.css"),
+    cdn: toCdn("index.css", version),
   };
 
   return cdn ? options.cdn : options.static;
 }
 
-function advancedOutput(answers: AnswersT, cdn: boolean, layers: boolean) {
+function advancedOutput(
+  answers: AnswersT,
+  cdn: boolean,
+  layers: boolean,
+  version: string
+) {
   const imports = ["/* Defaults */"];
   const baselineImports = answers.imports.filter(
     (x) => !x.startsWith(ComponentPrefix) && x !== "default"
@@ -96,13 +100,13 @@ function advancedOutput(answers: AnswersT, cdn: boolean, layers: boolean) {
 
   baselineImports.forEach((x) => {
     cdn
-      ? imports.push(toCdn(`${x}.css`))
+      ? imports.push(toCdn(`${x}.css`, version))
       : imports.push(toCssImport(`dist/${x}.css`, layers));
   });
 
   if (answers["config-type"] === "easy") {
     cdn
-      ? imports.push(toCdn(componentsCss))
+      ? imports.push(toCdn(componentsCss, version))
       : imports.push(toCssImport(`dist/${componentsCss}`, layers));
     return imports;
   }
@@ -140,14 +144,14 @@ function advancedOutput(answers: AnswersT, cdn: boolean, layers: boolean) {
   componentImportsList.forEach((x) => {
     const pascalCase = lodash.camelCase(x.replace("css", "")).toLowerCase();
     cdn
-      ? imports.push(toCdn(`${pascalCase}.css`))
+      ? imports.push(toCdn(`${pascalCase}.css`, version))
       : imports.push(toCssImport(`dist/${pascalCase}.css`, layers));
   });
 
   return imports;
 }
 
-function toCdn(str: string): string {
+function toCdn(str: string, version: string): string {
   return `<link rel="preload" href="https://cdn.nav.no/aksel/@navikt/ds-css/${version}/${str.replace(
     ".css",
     ".min.css"

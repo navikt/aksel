@@ -19,6 +19,7 @@ async function main() {
   let answers: AnswersT = {
     "config-type": "regular",
     cdn: "static",
+    version: "",
     autoscan: false,
     scandir: "",
     tailwind: false,
@@ -64,6 +65,15 @@ async function main() {
         name: "layers",
         message: "Add styling to custom @layer rule?",
         initial: false,
+      },
+    ]);
+  } else {
+    await inquiry(answers, [
+      {
+        type: "input",
+        name: "version",
+        message: `@navikt/ds-css version from CDN:\n https://cdn.nav.no/aksel/@navikt/ds-css/<version>`,
+        initial: "",
       },
     ]);
   }
