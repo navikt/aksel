@@ -20,12 +20,12 @@ main();
 async function main() {
   let answers: AnswersT = {
     "config-type": "regular",
-    cdn: "static",
+    cdn: "no",
     version: "0.0.0",
-    autoscan: false,
+    autoscan: "no",
     scandir: "",
-    tailwind: false,
-    layers: false,
+    tailwind: "no",
+    layers: "no",
     imports: null,
     output: "print-clipboard",
   };
@@ -48,25 +48,33 @@ async function main() {
       message: "Import format",
       initial: 0,
       choices: [
-        { message: "Static import (default)", name: "static" },
-        { message: "CDN import (not recommended)", name: "cdn" },
+        { message: "Static import (default)", name: "no" },
+        { message: "CDN import (not recommended)", name: "yes" },
       ],
     },
   ]);
 
-  if (answers?.cdn !== "cdn") {
+  if (answers?.cdn === "no") {
     await inquiry(answers, [
       {
-        type: "confirm",
+        type: "select",
         name: "tailwind",
         message: "Add tailwind support?",
-        initial: false,
+        initial: 0,
+        choices: [
+          { message: "No", name: "no" },
+          { message: "Yes", name: "yes" },
+        ],
       },
       {
-        type: "confirm",
+        type: "select",
         name: "layers",
         message: "Add styling to custom @layer rule?",
-        initial: false,
+        initial: 0,
+        choices: [
+          { message: "No", name: "no" },
+          { message: "Yes", name: "yes" },
+        ],
       },
     ]);
   } else {
@@ -104,7 +112,11 @@ async function main() {
         type: "confirm",
         name: "autoscan",
         message: "Scan current directory for '@navikt/ds-react' components?",
-        initial: false,
+        initial: 0,
+        choices: [
+          { message: "No", name: "no" },
+          { message: "Yes", name: "yes" },
+        ],
       },
     ]));
 

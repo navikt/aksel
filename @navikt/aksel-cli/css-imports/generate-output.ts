@@ -13,7 +13,7 @@ import chalk from "chalk";
 const layer = " layer(aksel)";
 
 export async function generateImportOutput(answers: AnswersT) {
-  const useCdn = answers.cdn === "cdn";
+  const useCdn = answers.cdn === "yes";
   const version = answers.version;
 
   const imports = [];
@@ -34,8 +34,10 @@ export async function generateImportOutput(answers: AnswersT) {
   ]);
 
   answers["config-type"] === "regular"
-    ? imports.push(simpleOutput(useCdn, answers.layers, version))
-    : imports.push(...advancedOutput(answers, useCdn, answers.layers, version));
+    ? imports.push(simpleOutput(useCdn, answers.layers === "yes", version))
+    : imports.push(
+        ...advancedOutput(answers, useCdn, answers.layers === "yes", version)
+      );
 
   if (answers.tailwind) {
     importStr = `@import "tailwindcss/base";
@@ -65,9 +67,11 @@ ${imports.join("\n")}
   if (answers.tailwind) {
     console.log(chalk.bold.underline.cyan(`\nNotes on Tailwind-use 📝`));
     console.log(
-      `When using tailwind with Aksel, you will need to add the postcss plugin 'postcss-import'."
+      `When using tailwind with Aksel, you will need to add the postcss plugin ${chalk.cyan(
+        "postcss-import"
+      )}
 ✔︎ NPM: https://www.npmjs.com/package/postcss-import
-✔︎ Read more here: https://aksel.nav.no/grunnleggende/kode/tailwind.`
+✔︎ Read more here: https://aksel.nav.no/grunnleggende/kode/tailwind`
     );
   }
 

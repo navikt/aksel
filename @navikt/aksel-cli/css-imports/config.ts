@@ -1,10 +1,10 @@
 export type AnswersT = {
   "config-type": "regular" | "easy" | "advanced";
-  cdn: "static" | "cdn";
+  cdn: "yes" | "no";
   version: string;
-  tailwind?: boolean;
-  layers?: boolean;
-  autoscan?: boolean;
+  tailwind?: "yes" | "no";
+  layers?: "yes" | "no";
+  autoscan?: "yes" | "no";
   scandir?: string;
   imports?: string[];
   output: "print" | "clipboard" | "print-clipboard";
