@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+- [#1929](https://github.com/navikt/aksel/pull/1929) [`284534246`](https://github.com/navikt/aksel/commit/28453424684e00d65fd8d204f1405f7ed6a82fbf) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bedre håndtering av visning for out-of-range dates i datepickers
+
+- Updated dependencies [[`dfe923582`](https://github.com/navikt/aksel/commit/dfe923582a57b41c77cfb4fbfa7c56be047ef2b0), [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865)]:
+  - @navikt/aksel-icons@2.8.15
+  - @navikt/ds-icons@2.8.15
+
 ## 2.8.14
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @navikt/aksel-icons
 
+## 2.8.15
+
+### Patch Changes
+
+- [#1928](https://github.com/navikt/aksel/pull/1928) [`dfe923582`](https://github.com/navikt/aksel/commit/dfe923582a57b41c77cfb4fbfa7c56be047ef2b0) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Lagt til nye ikoner :tada:
+
+  - HandKnot.svg
+  - HandKnotFilled.svg
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
 ## 2.8.14
 
 ## 2.8.13
