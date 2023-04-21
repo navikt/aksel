@@ -10,10 +10,6 @@ const cssnano = require("cssnano");
 const version = require("../package.json").version;
 const { StyleMappings } = require("./mappings.js");
 
-/**
- * TODO:
- * - Bruk config for basline rekkefølge
- */
 run();
 
 async function run() {
