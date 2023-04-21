@@ -11,6 +11,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { getAllVersions } from "./get-version.js";
 import chalk from "chalk";
+import { getDirectories } from "./get-directories.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -109,7 +110,7 @@ async function main() {
   answers["config-type"] === "advanced" &&
     (await inquiry(answers, [
       {
-        type: "confirm",
+        type: "select",
         name: "autoscan",
         message: "Scan current directory for '@navikt/ds-react' components?",
         initial: 0,
@@ -120,19 +121,26 @@ async function main() {
       },
     ]));
 
-  answers.autoscan &&
+  answers.autoscan === "yes" &&
     (await inquiry(answers, [
       {
-        type: "input",
+        type: "autocomplete",
         name: "scandir",
-        message: `Directory to scan (leave empty for current dir):\n ${process.cwd()}/`,
-        initial: "",
+        message: `Directory to scan`,
+        limit: 6,
+        initial: 0,
+        choices: getDirectories(),
+        footer() {
+          return chalk.grey(
+            "filtered out: node_moduels, dist, build, lib, .* (dotfiles)"
+          );
+        },
       },
     ]));
 
   let foundComponents: string[] = [];
 
-  if (answers["autoscan"]) {
+  if (answers["autoscan"] === "yes") {
     foundComponents = await new Promise((resolve) => {
       exec(`node ${__dirname}/scan-code.js ${answers.scandir}`, (_, stdout) => {
         resolve(

@@ -39,7 +39,7 @@ export async function generateImportOutput(answers: AnswersT) {
         ...advancedOutput(answers, useCdn, answers.layers === "yes", version)
       );
 
-  if (answers.tailwind) {
+  if (answers.tailwind === "yes") {
     importStr = `@import "tailwindcss/base";
 ${imports.join("\n")}
 
@@ -64,7 +64,7 @@ ${imports.join("\n")}
     );
   }
 
-  if (answers.tailwind) {
+  if (answers.tailwind === "yes") {
     console.log(chalk.bold.underline.cyan(`\nNotes on Tailwind-use 📝`));
     console.log(
       `When using tailwind with Aksel, you will need to add the postcss plugin ${chalk.cyan(

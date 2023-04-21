@@ -11,7 +11,7 @@ async function scanCode() {
 
   const config = {
     rootDir: cwd,
-    crawlFrom: `${process.argv[2] ?? ""}`,
+    crawlFrom: `${process.argv[2] ?? ""}`.replace(path.basename(cwd), "."),
 
     globs: ["**/!(*.test|*.spec|*.stories|*.story).@(jsx|tsx)"],
     exclude: (dirname: string) => dirname === "node_modules",

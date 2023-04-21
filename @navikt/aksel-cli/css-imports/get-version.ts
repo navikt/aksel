@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getAllVersions = async () => {
+export async function getAllVersions() {
   try {
     const npmPackageData = await axios.get(
       `https://registry.npmjs.org/@navikt/ds-css`
@@ -10,4 +10,4 @@ export const getAllVersions = async () => {
     console.log(e);
     return [];
   }
-};
+}
