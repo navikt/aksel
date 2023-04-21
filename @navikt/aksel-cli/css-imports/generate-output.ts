@@ -56,8 +56,8 @@ ${imports.join("\n")}
   if (useCdn) {
     console.log(chalk.bold.underline.cyan(`\nNotes on CDN-usage 📝`));
     console.log(
-      `We recommend using Static imports, then uploading the files + application-CSS to your own CDN-bundle.
-✔︎ This allows you to control the version of the CSS-files with package.json, and avoid desync between ds-react/ds-css.
+      `We recommend using Static imports, then uploading the your bundled static-files to your own CDN-instance.
+✔︎ This allows you to control the version of the CSS-files with package.json, and avoids desync between ds-react/ds-css.
 ✔︎ Remember to add 'https://cdn.nav.no' to your applications CSP!`
     );
   }

@@ -9,6 +9,8 @@ import { exec } from "child_process";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { getAllVersions } from "./get-version.js";
+import chalk from "chalk";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,7 +21,7 @@ async function main() {
   let answers: AnswersT = {
     "config-type": "regular",
     cdn: "static",
-    version: "",
+    version: "0.0.0",
     autoscan: false,
     scandir: "",
     tailwind: false,
@@ -68,12 +70,25 @@ async function main() {
       },
     ]);
   } else {
+    let versions = (await getAllVersions()).filter((x) => !x.includes("-"));
+
+    // TODO: Change when released to actual first release (probably 2.9.0)
+    const index = versions.findIndex((x) => x.startsWith("2.8."));
+    versions = versions.slice(index).reverse();
+
     await inquiry(answers, [
       {
-        type: "input",
+        type: "autocomplete",
         name: "version",
-        message: `@navikt/ds-css version from CDN:\n https://cdn.nav.no/aksel/@navikt/ds-css/<version>`,
-        initial: "",
+        message: `@navikt/ds-css version from CDN:`,
+        limit: 6,
+        initial: 0,
+        choices: versions,
+        footer() {
+          return chalk.grey(
+            'Remember to match version with @navikt/ds-react!\nNote: CDN was introduced in v2.9.0, older versions not available.\nUse "static" import instead.'
+          );
+        },
       },
     ]);
   }
