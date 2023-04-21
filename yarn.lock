@@ -3898,6 +3898,7 @@ __metadata:
   dependencies:
     "@navikt/ds-css": 2.8.12-beta.0
     "@types/inquirer": ^9.0.3
+    chalk: 4.1.0
     clipboardy: ^3.0.0
     enquirer: ^2.3.6
     lodash: 4.17.21
@@ -3905,6 +3906,7 @@ __metadata:
     typescript: ^4.8.0
   bin:
     aksel-cli: ./dist/css-imports/index.js
+    css-imports: ./dist/css-imports/index.js
   languageName: unknown
   linkType: soft
 

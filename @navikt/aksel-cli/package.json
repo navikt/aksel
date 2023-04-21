@@ -20,7 +20,7 @@
     "test:watch": "jest --watch"
   },
   "bin": {
-    "aksel-cli": "./dist/css-imports/index.js",
+    "aksel-cli": "./dist/help.js",
     "css-imports": "./dist/css-imports/index.js"
   },
   "repository": {
@@ -32,6 +32,7 @@
   "homepage": "https://github.com/navikt/aksel/tree/main/@navikt/aksel-cli",
   "dependencies": {
     "@navikt/ds-css": "2.8.12-beta.0",
+    "chalk": "4.1.0",
     "clipboardy": "^3.0.0",
     "enquirer": "^2.3.6",
     "lodash": "4.17.21",
