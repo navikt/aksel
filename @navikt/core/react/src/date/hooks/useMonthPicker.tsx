@@ -96,6 +96,20 @@ const getValidationMessage = (val = {}): MonthValidationT => ({
   ...val,
 });
 
+const getIsBefore = (opt: { fromDate?: Date; date?: Date }) =>
+  opt.fromDate &&
+  opt.date &&
+  (opt.fromDate.getFullYear() > opt.date.getFullYear() ||
+    (opt.fromDate.getFullYear() === opt.date.getFullYear() &&
+      opt.fromDate.getMonth() > opt.date.getMonth()));
+
+const getIsAfter = (opt: { toDate?: Date; date?: Date }) =>
+  opt.toDate &&
+  opt.date &&
+  (opt.toDate.getFullYear() < opt.date.getFullYear() ||
+    (opt.toDate.getFullYear() === opt.date.getFullYear() &&
+      opt.toDate.getMonth() < opt.date.getMonth()));
+
 export const useMonthpicker = (
   opt: UseMonthPickerOptions = {}
 ): UseMonthPickerValue => {
@@ -182,8 +196,11 @@ export const useMonthpicker = (
       "month",
       allowTwoDigitYear
     );
+    const isBefore = getIsBefore({ fromDate, date: day });
+    const isAfter = getIsAfter({ toDate, date: day });
+
     if (isValidDate(day)) {
-      setYear(day);
+      !isBefore && !isAfter && setYear(day);
       setInputValue(formatDateForInput(day, locale, "month", inputFormat));
     } else {
       setYear(defaultSelected ?? defaultYear ?? today);
@@ -237,19 +254,8 @@ export const useMonthpicker = (
       allowTwoDigitYear
     );
 
-    const isBefore =
-      fromDate &&
-      month &&
-      (fromDate.getFullYear() > month.getFullYear() ||
-        (fromDate.getFullYear() === month.getFullYear() &&
-          fromDate.getMonth() > month.getMonth()));
-
-    const isAfter =
-      toDate &&
-      month &&
-      (toDate.getFullYear() < month.getFullYear() ||
-        (toDate.getFullYear() === month.getFullYear() &&
-          toDate.getMonth() < month.getMonth()));
+    const isBefore = getIsBefore({ fromDate, date: month });
+    const isAfter = getIsAfter({ toDate, date: month });
 
     if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
       updateMonth(undefined);

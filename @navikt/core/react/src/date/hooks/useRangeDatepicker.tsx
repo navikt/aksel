@@ -318,12 +318,18 @@ export const useRangeDatepicker = (
       allowTwoDigitYear
     );
     if (isValidDate(day)) {
-      setMonth(day);
       src === RANGE.FROM
         ? setFromInputValue(
             formatDateForInput(day, locale, "date", inputFormat)
           )
         : setToInputValue(formatDateForInput(day, locale, "date", inputFormat));
+
+      const isBefore =
+        fromDate && day && differenceInCalendarDays(fromDate, day) > 0;
+      const isAfter =
+        toDate && day && differenceInCalendarDays(day, toDate) > 0;
+
+      !isBefore && !isAfter && setMonth(day);
     }
   };
 

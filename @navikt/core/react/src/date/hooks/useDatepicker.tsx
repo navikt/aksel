@@ -200,8 +200,14 @@ export const useDatepicker = (
       allowTwoDigitYear
     );
     if (isValidDate(day)) {
-      setMonth(day);
       setInputValue(formatDateForInput(day, locale, "date", inputFormat));
+
+      const isBefore =
+        fromDate && day && differenceInCalendarDays(fromDate, day) > 0;
+      const isAfter =
+        toDate && day && differenceInCalendarDays(day, toDate) > 0;
+
+      !isBefore && !isAfter && setMonth(day);
     }
   };
 
