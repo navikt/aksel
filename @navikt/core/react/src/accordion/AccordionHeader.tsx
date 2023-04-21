@@ -1,4 +1,4 @@
-import { Expand, ExpandFilled } from "@navikt/ds-icons";
+import { Expand } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Heading } from "../typography/Heading";
@@ -43,6 +43,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         onClick={handleClick}
         aria-expanded={context.open}
       >
+        <Expand aria-hidden className="navds-accordion__expand-icon" />
         <Heading
           size="small"
           as="span"
@@ -50,11 +51,6 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         >
           {children}
         </Heading>
-        <Expand aria-hidden className="navds-accordion__expand-icon" />
-        <ExpandFilled
-          aria-hidden
-          className="navds-accordion__expand-icon navds-accordion__expand-icon--filled"
-        />
       </button>
     );
   }
