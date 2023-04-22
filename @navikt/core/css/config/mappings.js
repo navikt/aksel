@@ -1,3 +1,7 @@
+const rootDir = "dist";
+const globalDir = "dist/global";
+const componentDir = "dist/component";
+
 const typoCss = "typography.css";
 const formCss = "form.css";
 const componentsCss = "components.css";
@@ -136,4 +140,12 @@ const StyleMappings = {
   ],
 };
 
-module.exports = { StyleMappings, typoCss, formCss, componentsCss };
+module.exports = {
+  StyleMappings,
+  typoCss,
+  formCss,
+  componentsCss,
+  rootDir,
+  globalDir,
+  componentDir,
+};
