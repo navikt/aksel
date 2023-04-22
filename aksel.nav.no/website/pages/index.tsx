@@ -148,7 +148,6 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
     })
     .sort((a, b) => a.title.localeCompare(b.title));
 
-  console.log(Test);
   return (
     <>
       <Head>
