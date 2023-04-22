@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { urlFor } from "@/lib";
 import { Heading } from "@navikt/ds-react";
 import Nextlink from "next/link";
 import cl from "clsx";
 import Image from "next/legacy/image";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { ArticleListT } from "@/types";
+import { urlFor } from "@/sanity/interface";
 
 const ComponentOverview = ({ node }: { node: ArticleListT }) => {
   if (!node || node.length === 0) {

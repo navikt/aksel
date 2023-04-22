@@ -1,5 +1,5 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { urlFor } from "@/lib";
+import { urlFor } from "@/sanity/interface";
 import { AkselTemaT } from "@/types";
 import { logNav } from "@/utils";
 import Image from "next/legacy/image";

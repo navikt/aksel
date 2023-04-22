@@ -1,16 +1,11 @@
+import { logNav } from "@/components";
+import { withErrorBoundary } from "@/error-boundary";
+import { RelatertInnholdT } from "@/types";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import NextLink from "next/link";
-import React from "react";
-import { logNav } from "@/components";
-import { SanityT } from "@/lib";
-import { withErrorBoundary } from "@/error-boundary";
 
-const RelatertInnhold = ({
-  node,
-}: {
-  node: SanityT.Schema.relatert_innhold;
-}) => {
+const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
   if (!node || node?.lenker?.length === 0) {
     return null;
   }

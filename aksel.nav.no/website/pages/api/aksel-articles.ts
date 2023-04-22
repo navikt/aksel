@@ -1,4 +1,4 @@
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
 import { format } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "2.8.12",
+  "version": "2.8.14",
   "description": "Aksel icons for NAV",
   "author": "Aksel | NAV designsystem team",
   "repository": {
@@ -62,5 +62,9 @@
     "ts-jest": "^29.0.0",
     "ts-node": "10.9.0",
     "typescript": "^4.8.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

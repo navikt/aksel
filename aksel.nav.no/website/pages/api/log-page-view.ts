@@ -1,4 +1,4 @@
-import { noCdnClient } from "@/sanity-client";
+import { noCdnClient } from "@/sanity/client.server";
 import { format, isSameWeek } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 

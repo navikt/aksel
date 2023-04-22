@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { DateInputProps } from "../DateInput";
 import { MonthPickerProps } from "../monthpicker/MonthPicker";
 import {
@@ -96,6 +96,20 @@ const getValidationMessage = (val = {}): MonthValidationT => ({
   ...val,
 });
 
+const getIsBefore = (opt: { fromDate?: Date; date?: Date }) =>
+  opt.fromDate &&
+  opt.date &&
+  (opt.fromDate.getFullYear() > opt.date.getFullYear() ||
+    (opt.fromDate.getFullYear() === opt.date.getFullYear() &&
+      opt.fromDate.getMonth() > opt.date.getMonth()));
+
+const getIsAfter = (opt: { toDate?: Date; date?: Date }) =>
+  opt.toDate &&
+  opt.date &&
+  (opt.toDate.getFullYear() < opt.date.getFullYear() ||
+    (opt.toDate.getFullYear() === opt.date.getFullYear() &&
+      opt.toDate.getMonth() < opt.date.getMonth()));
+
 export const useMonthpicker = (
   opt: UseMonthPickerOptions = {}
 ): UseMonthPickerValue => {
@@ -116,7 +130,7 @@ export const useMonthpicker = (
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
-  const today = new Date();
+  const today = useMemo(() => new Date(), []);
   const locale = getLocaleFromString(_locale);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -133,13 +147,22 @@ export const useMonthpicker = (
 
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
-  useOutsideClickHandler(open, setOpen, [
+  const handleOpen = useCallback(
+    (open: boolean) => {
+      setOpen(open);
+      !open &&
+        setYear(selectedMonth ?? defaultSelected ?? defaultYear ?? today);
+    },
+    [defaultSelected, defaultYear, selectedMonth, today]
+  );
+
+  useOutsideClickHandler(open, handleOpen, [
     monthpickerRef,
     inputRef.current,
     inputRef.current?.nextSibling,
   ]);
 
-  useEscape(open, setOpen, inputRef);
+  useEscape(open, handleOpen, inputRef);
 
   const updateMonth = (date?: Date) => {
     onMonthChange?.(date);
@@ -165,7 +188,7 @@ export const useMonthpicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    !open && openOnFocus && setOpen(true);
+    !open && openOnFocus && handleOpen(true);
     let day = parseDate(
       e.target.value,
       today,
@@ -173,8 +196,11 @@ export const useMonthpicker = (
       "month",
       allowTwoDigitYear
     );
+    const isBefore = getIsBefore({ fromDate, date: day });
+    const isAfter = getIsAfter({ toDate, date: day });
+
     if (isValidDate(day)) {
-      setYear(day);
+      !isBefore && !isAfter && setYear(day);
       setInputValue(formatDateForInput(day, locale, "month", inputFormat));
     } else {
       setYear(defaultSelected ?? defaultYear ?? today);
@@ -196,7 +222,7 @@ export const useMonthpicker = (
   /* Only allow de-selecting if not required */
   const handleMonthClick = (month?: Date) => {
     if (month) {
-      setOpen(false);
+      handleOpen(false);
       inputRef.current && inputRef.current.focus();
       setYear(month);
     }
@@ -228,19 +254,8 @@ export const useMonthpicker = (
       allowTwoDigitYear
     );
 
-    const isBefore =
-      fromDate &&
-      month &&
-      (fromDate.getFullYear() > month.getFullYear() ||
-        (fromDate.getFullYear() === month.getFullYear() &&
-          fromDate.getMonth() > month.getMonth()));
-
-    const isAfter =
-      toDate &&
-      month &&
-      (toDate.getFullYear() < month.getFullYear() ||
-        (toDate.getFullYear() === month.getFullYear() &&
-          toDate.getMonth() < month.getMonth()));
+    const isBefore = getIsBefore({ fromDate, date: month });
+    const isAfter = getIsAfter({ toDate, date: month });
 
     if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
       updateMonth(undefined);
@@ -282,7 +297,7 @@ export const useMonthpicker = (
     fromDate,
     toDate,
     open,
-    onOpenToggle: () => setOpen((x) => !x),
+    onOpenToggle: () => handleOpen(!open),
     disabled,
     ref: setMonthpickerRef,
   };

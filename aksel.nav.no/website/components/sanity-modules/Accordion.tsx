@@ -1,10 +1,10 @@
 import { Accordion as DsAccordion } from "@navikt/ds-react";
 import React from "react";
-import { SanityT } from "@/lib";
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
+import { AccordionT } from "@/types";
 
-const Accordion = ({ node }: { node: SanityT.Schema.accordion }) => {
+const Accordion = ({ node }: { node: AccordionT }) => {
   if (!node || node.list.length === 0) {
     return null;
   }

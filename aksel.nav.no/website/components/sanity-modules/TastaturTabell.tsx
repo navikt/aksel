@@ -1,5 +1,5 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
+import { UUTableT } from "@/types";
 import cl from "clsx";
 import React from "react";
 
@@ -12,7 +12,7 @@ const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
   />
 );
 
-const UuSeksjon = ({ node }: { node: SanityT.Schema.tastatur_modul }) => {
+const UuSeksjon = ({ node }: { node: UUTableT }) => {
   if (!node || !node?.tastatur) {
     return null;
   }

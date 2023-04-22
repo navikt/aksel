@@ -7,9 +7,8 @@ import {
   TableOfContents,
 } from "@/components";
 import { Footer } from "@/layout";
-import { contributorsAll, destructureBlocks, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
 import {
   AkselPrinsippDocT,
   NextPageT,
@@ -24,6 +23,8 @@ import Head from "next/head";
 import { GetServerSideProps } from "next/types";
 import { lazy } from "react";
 import NotFotfund from "../404";
+import { urlFor } from "@/sanity/interface";
+import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   prinsipp: ResolveContributorsT<ResolveSlugT<AkselPrinsippDocT>>;

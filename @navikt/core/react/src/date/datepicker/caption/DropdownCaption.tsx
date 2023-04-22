@@ -7,6 +7,7 @@ import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { Button, Select } from "../../..";
 import { getMonths, getYears } from "../../utils/get-dates";
 import { labelMonthDropdown, labelYearDropdown } from "../../utils/labels";
+import { max, min } from "date-fns";
 
 export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
@@ -23,13 +24,18 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
     return null;
   }
 
-  const handleYearChange: React.ChangeEventHandler<HTMLSelectElement> = (e) =>
-    goToMonth(setYear(startOfMonth(displayMonth), Number(e.target.value)));
+  const handleYearChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    const newMonth = setYear(
+      startOfMonth(displayMonth),
+      Number(e.target.value)
+    );
+    goToMonth(startOfMonth(min([max([newMonth, fromDate]), toDate])));
+  };
 
   const handleMonthChange: React.ChangeEventHandler<HTMLSelectElement> = (e) =>
     goToMonth(setMonth(startOfMonth(displayMonth), Number(e.target.value)));
 
-  const years = getYears(fromDate, toDate);
+  const years = getYears(fromDate, toDate, displayMonth.getFullYear());
   const months = getMonths(fromDate, toDate, displayMonth);
 
   const previousLabel = labelPrevious(previousMonth, { locale });

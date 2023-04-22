@@ -1,5 +1,4 @@
 import { Left, Right } from "@navikt/ds-icons";
-import isSameYear from "date-fns/isSameYear";
 import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
 import startOfYear from "date-fns/startOfYear";
@@ -7,7 +6,8 @@ import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Button, Select } from "../..";
 import { useSharedMonthContext } from "../context";
-import { hasNextYear, labelNextYear, labelPrevYear } from "../utils";
+import { labelNextYear, labelPrevYear } from "../utils";
+import { isAfter, isBefore } from "date-fns";
 
 export const MonthCaption = () => {
   const {
@@ -27,34 +27,38 @@ export const MonthCaption = () => {
     for (let year = fromYear; year <= toYear; year++) {
       years.push(setYear(startOfYear(new Date()), year));
     }
+
+    if (!years.map((x) => x.getFullYear()).includes(year.getFullYear())) {
+      years.push(setYear(startOfYear(new Date()), year.getFullYear()));
+    }
+    years.sort((a, b) => a.getFullYear() - b.getFullYear());
   }
 
   const handleYearChange = (e) =>
     toYear(setYear(startOfMonth(new Date()), Number(e.target.value)));
 
   const handleButtonClick = (val: number) => {
-    let newMonth: Date;
-    if (hasDropdown && hasNextYear(year, years, val)) {
-      newMonth = setYear(new Date(), year.getFullYear() + val);
-      toYear(newMonth);
-    } else if (!hasDropdown) {
-      const newYear = Number(year.getFullYear() + val);
-      newMonth = setYear(year, newYear);
-      toYear(newMonth);
-    }
+    const newYear = Number(year.getFullYear() + val);
+    toYear(setYear(year, newYear));
   };
 
-  const hasFollowingYear = (value: number) => {
-    return years.some((y) =>
-      isSameYear(y, setYear(year, Number(year.getFullYear() + value)))
-    );
+  const hasPrevYear = () => {
+    return fromDate
+      ? isBefore(year?.getFullYear() - 1, fromDate?.getFullYear())
+      : true;
+  };
+
+  const hasNextYear = () => {
+    return toDate
+      ? isAfter(year?.getFullYear() + 1, toDate?.getFullYear())
+      : true;
   };
 
   return (
     <div className="navds-date__caption">
       <Button
         className="navds-date__caption-button"
-        disabled={!hasDropdown ? false : !hasFollowingYear(-1)}
+        disabled={hasPrevYear()}
         onClick={() => handleButtonClick(-1)}
         aria-label={labelPrevYear(locale?.code)}
         icon={<Left aria-hidden />}
@@ -83,7 +87,7 @@ export const MonthCaption = () => {
       )}
       <Button
         className="navds-date__caption-button"
-        disabled={!hasDropdown ? false : !hasFollowingYear(1)}
+        disabled={hasNextYear()}
         onClick={() => handleButtonClick(1)}
         aria-label={labelNextYear(locale?.code)}
         icon={<Right aria-hidden />}
