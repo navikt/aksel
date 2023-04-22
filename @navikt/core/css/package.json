@@ -17,7 +17,8 @@
   },
   "main": "./dist/index.css",
   "scripts": {
-    "build": "node config/bundle.js",
+    "clean": "rimraf dist",
+    "build": "yarn clean && node config/bundle.js",
     "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\""
   },
   "devDependencies": {
@@ -30,7 +31,8 @@
     "postcss": "^8.4.0",
     "postcss-cli": "^9.0.0",
     "postcss-combine-duplicated-selectors": "10.0.3",
-    "postcss-import": "^14.1.0"
+    "postcss-import": "^14.1.0",
+    "rimraf": "3.0.2"
   },
   "browserslist": [
     ">0.2%",

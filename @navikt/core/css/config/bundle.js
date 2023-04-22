@@ -7,26 +7,31 @@ const autoprefixer = require("autoprefixer");
 const combineSelectors = require("postcss-combine-duplicated-selectors");
 const cssImports = require("postcss-import");
 const cssnano = require("cssnano");
+const getDirName = require("path").dirname;
 const version = require("../package.json").version;
-const { StyleMappings, componentsCss, formCss } = require("./mappings.js");
+const {
+  StyleMappings,
+  componentsCss,
+  formCss,
+  rootDir,
+  globalDir,
+  componentDir,
+} = require("./mappings.js");
 
 run();
 
 async function run() {
-  if (!fs.existsSync(path.resolve(__dirname, "../dist"))) {
-    fs.mkdirSync(path.resolve(__dirname, "../dist"));
-  }
-
-  if (!fs.existsSync(path.resolve(__dirname, `../dist/version/${version}`))) {
-    fs.mkdirSync(path.resolve(__dirname, `../dist/version/${version}`), {
-      recursive: true,
-    });
-  }
+  [`${rootDir}/version/${version}`, globalDir, componentDir].forEach((dir) => {
+    if (!fs.existsSync(path.resolve(__dirname, `../${dir}`))) {
+      fs.mkdirSync(path.resolve(__dirname, `../${dir}`), { recursive: true });
+    }
+  });
 
   await bundleMonolith();
   await bundleComponents();
   await bundleFragments();
   await bundleMinified();
+  copyToVersionFolder();
 }
 
 /**
@@ -36,7 +41,7 @@ async function run() {
  */
 async function bundleMonolith() {
   const indexSrc = path.resolve(__dirname, "../index.css");
-  const indexDist = path.resolve(__dirname, "../dist/index.css");
+  const indexDist = path.resolve(__dirname, `../${rootDir}/index.css`);
 
   return fs.readFile(indexSrc, (_, css) => {
     postcss([cssImports, combineSelectors])
@@ -52,7 +57,7 @@ async function bundleMonolith() {
  */
 async function bundleComponents() {
   const indexSrc = path.resolve(__dirname, "../index.css");
-  const indexDist = path.resolve(__dirname, `../dist/${componentsCss}`);
+  const indexDist = path.resolve(__dirname, `../${rootDir}/${componentsCss}`);
 
   return fs.readFile(indexSrc, (_, css) => {
     /* Remove @charset, baseline */
@@ -60,11 +65,7 @@ async function bundleComponents() {
     postcss([cssImports, combineSelectors])
       .process(cssString, { from: indexSrc, to: indexDist })
       .then((result) => {
-        fs.writeFileSync(
-          indexDist.replace("dist", `dist/version/${version}`),
-          result.css,
-          () => true
-        );
+        fs.writeFileSync(indexDist, result.css, () => true);
       });
   });
 }
@@ -82,17 +83,23 @@ async function bundleFragments() {
       input: path.resolve(__dirname, `../${x}`),
       output: path.resolve(
         __dirname,
-        `../dist/${camelCase(x.replace("css", ""))
+        `../${componentDir}/${camelCase(x.replace("css", ""))
           .toLowerCase()
           .replace(/ /g, "")}.css`
       ),
     }));
 
   StyleMappings.baseline.forEach(({ main }) => {
-    files.push({ input: `baseline/${main}`, output: `dist/${main}` });
+    files.push({
+      input: `baseline/${main}`,
+      output: `${globalDir}/${main}`,
+    });
   });
 
-  files.push({ input: "form/index.css", output: `dist/${formCss}` });
+  files.push({
+    input: "form/index.css",
+    output: `${componentDir}/${formCss}`,
+  });
 
   for (let file of files) {
     const css = fs.readFileSync(file.input, { encoding: "utf-8" });
@@ -100,11 +107,11 @@ async function bundleFragments() {
       .process(css, { from: file.input, to: file.output })
       .then((result) => {
         fs.writeFileSync(file.output, result.css, () => true);
-        fs.writeFileSync(
-          file.output.replace("dist", `dist/version/${version}`),
+        /* fs.writeFileSync(
+          file.output.replace(rootDir, `${rootDir}/version/${version}`),
           result.css,
           () => true
-        );
+        ); */
       });
   }
 }
@@ -117,10 +124,10 @@ async function bundleFragments() {
  */
 async function bundleMinified() {
   const files = fastglob
-    .sync("**/*.css", { cwd: "./dist", ignore: "**/*.min.css" })
+    .sync("**/*.css", { cwd: `./${rootDir}`, ignore: "**/*.min.css" })
     .map((x) => ({
-      input: `dist/${x}`,
-      output: `dist/${x}`.replace("css", "min.css"),
+      input: `${rootDir}/${x}`,
+      output: `${rootDir}/${x}`.replace("css", "min.css"),
     }));
 
   for (let file of files) {
@@ -133,5 +140,18 @@ async function bundleMinified() {
       .then((result) => {
         fs.writeFileSync(file.output, result.css, () => true);
       });
+  }
+}
+
+function copyToVersionFolder() {
+  const files = fastglob.sync("**/*.css", { cwd: `./${rootDir}` });
+
+  for (let file of files) {
+    const css = fs.readFileSync(`${rootDir}/${file}`, { encoding: "utf-8" });
+
+    const filename = `${rootDir}/version/${version}/${file}`;
+    fs.mkdirSync(getDirName(filename), { recursive: true });
+
+    fs.writeFileSync(filename, css);
   }
 }
