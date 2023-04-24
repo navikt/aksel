@@ -4,7 +4,7 @@ import {
   typoCss,
   componentsCss,
   StyleMappings,
-} from "@navikt/ds-css/config/mappings.js";
+} from "@navikt/ds-css/config/_mappings.js";
 import { inquiry } from "./inquiry.js";
 import clipboard from "clipboardy";
 import lodash from "lodash";
