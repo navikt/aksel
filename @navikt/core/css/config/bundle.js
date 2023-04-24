@@ -16,7 +16,7 @@ const {
   rootDir,
   globalDir,
   componentDir,
-} = require("./mappings.js");
+} = require("./_mappings.js");
 
 run();
 
