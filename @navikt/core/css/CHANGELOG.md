@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
 ## 2.8.14
 
 ### Patch Changes

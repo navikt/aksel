@@ -45,6 +45,7 @@ jobs:
         with:
           version: yarn version
           publish: yarn release
+          createGithubReleases: false
         env:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
