@@ -11,6 +11,11 @@
     "access": "public",
     "provenance": true
   },
+  "files": [
+    "*",
+    "!dist/version",
+    "!config/bundle.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git"
