@@ -1,12 +1,5 @@
-import {
-  contributorsAll,
-  contributorsSingle,
-  destructureBlocks,
-  getAkselDocuments,
-  urlFor,
-} from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
 import {
   AkselGodPraksisDocT,
   NextPageT,
@@ -33,6 +26,12 @@ import {
 } from "@/components";
 import { Footer } from "@/layout";
 import { Header } from "components/layout/header/Header";
+import {
+  contributorsAll,
+  contributorsSingle,
+  destructureBlocks,
+} from "@/sanity/queries";
+import { getAkselDocuments, urlFor } from "@/sanity/interface";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<

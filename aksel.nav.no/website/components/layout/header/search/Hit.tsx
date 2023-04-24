@@ -1,4 +1,3 @@
-import { urlFor } from "@/lib";
 import { isNew } from "@/utils";
 import { Tag } from "@navikt/ds-react";
 import cl from "classnames";
@@ -6,6 +5,7 @@ import Image from "next/legacy/image";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SearchHitT } from "@/types";
 import NextLink from "next/link";
+import { urlFor } from "@/sanity/interface";
 
 export function Hit({
   hit,

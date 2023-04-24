@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { Footer } from "@/layout";
 
-import { contributorsAll, urlFor } from "@/lib";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import { urlFor } from "@/sanity/interface";
+import { contributorsAll } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
 import {
   CompassIcon,

@@ -23,7 +23,6 @@ module.exports = {
   addons: [
     "@storybook/addon-a11y",
     "@whitespace/storybook-addon-html",
-    "storybook-addon-next-router",
 
     {
       name: "@storybook/addon-storysource",
@@ -83,24 +82,8 @@ module.exports = {
               "../aksel.nav.no/website/components/website-modules/utils/index.ts"
             ),
           },
-          {
-            find: "@lib",
-            replacement: path.resolve(
-              __dirname,
-              "../aksel.nav.no/website/lib/index.ts"
-            ),
-          },
         ],
       },
     });
   },
 };
-
-/* "@/components": ["components/index.ts"],
-      "@/lib": ["lib/index.ts"],
-      "@/pages/*": ["pages/*"],
-      "@/sanity-block": ["components/SanityBlockContent.tsx"],
-      "@/utils": ["components/website-modules/utils/index.ts"],
-      "@/layout": ["components/layout/index.ts"],
-      "@/error-boundary": ["components/website-modules/ErrorBoundary.tsx"],
-      "@/sanity-client": ["lib/sanity/sanity.server"] */

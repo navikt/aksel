@@ -17,6 +17,7 @@ import ToggleListButton from "./ToggleListButton";
 import { ComboboxClearEvent, ComboboxProps } from "./types";
 import { useCustomOptionsContext } from "./customOptionsContext";
 import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
+import ComboboxWrapper from "./ComboboxWrapper";
 
 export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
@@ -73,7 +74,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
     const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
     const [internalValue, setInternalValue] = useState<string>("");
     const {
@@ -250,32 +250,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
 
-    function onFocusWrapper(e) {
-      const ref = wrapperRef.current;
-      if (ref?.contains(e.target) && !ref?.contains(e.relatedTarget))
-        toggleIsListOpen(true);
-    }
-
-    function onBlurWrapper(e) {
-      if (!wrapperRef.current?.contains(e.relatedTarget))
-        toggleIsListOpen(false);
-    }
-
     return (
-      <div
-        ref={wrapperRef}
-        className={cl(
-          className,
-          "navds-form-field",
-          `navds-form-field--${size}`,
-          "navds-search",
-          {
-            "navds-search--error": hasError,
-            "navds-search--disabled": !!inputProps.disabled,
-          }
-        )}
-        onBlur={onBlurWrapper}
-        onFocus={onFocusWrapper}
+      <ComboboxWrapper
+        className={className}
+        hasError={hasError}
+        inputProps={inputProps}
+        inputSize={size}
+        toggleIsListOpen={toggleIsListOpen}
       >
         <Label
           htmlFor={inputProps.id}
@@ -350,7 +331,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             addCustomOption={handleAddCustomOption}
           />
         </div>
-      </div>
+      </ComboboxWrapper>
     );
   }
 );

@@ -17,7 +17,11 @@ const ExpansionCard = ({
   }
 
   return (
-    <DsExpansionCard className="mb-7 max-w-2xl" aria-label={node.heading}>
+    <DsExpansionCard
+      id="aksel-expansioncard"
+      className="mb-7 max-w-2xl"
+      aria-label={node.heading}
+    >
       <DsExpansionCard.Header>
         <DsExpansionCard.Title
           as={node.heading_level}

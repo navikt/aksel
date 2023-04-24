@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT, urlFor } from "@/lib";
+import { urlFor } from "@/sanity/interface";
+import { DoDontT } from "@/types";
 import {
   CheckmarkCircleFillIcon,
   ExclamationmarkTriangleFillIcon,
@@ -41,11 +42,7 @@ const GetIcon = (s: string) => {
   }
 };
 
-const Element = ({
-  block,
-}: {
-  block: Sanity.Keyed<SanityT.Schema.do_dont_block>;
-}) => {
+const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
   if (!block.picture) return null;
   return (
     <figure
@@ -89,7 +86,7 @@ const Element = ({
   );
 };
 
-const DoDont = ({ node }: { node: SanityT.Schema.do_dont }) => {
+const DoDont = ({ node }: { node: DoDontT }) => {
   if (!node) return null;
 
   return (

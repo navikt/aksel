@@ -1,8 +1,8 @@
 import { definePreview } from "next-sanity/preview";
 import { ComponentType } from "react";
-import { config } from "../lib/sanity/config";
+import { clientConfig } from "@/sanity/config";
 
-const usePreview = definePreview(config);
+const usePreview = definePreview(clientConfig);
 
 const WithPreview = ({
   comp: Comp,

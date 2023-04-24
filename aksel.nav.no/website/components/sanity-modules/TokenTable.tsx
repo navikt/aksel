@@ -1,5 +1,5 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
+import { TokenTableT } from "@/types";
 import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import internal from "@navikt/ds-css-internal/tokens.json";
 import core from "@navikt/ds-css/tokens.json";
@@ -9,7 +9,7 @@ import CopyButton from "components/sanity-modules/code/CopyButton";
 import NextLink from "next/link";
 import { useState } from "react";
 
-const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
+const TokenTable = ({ node }: { node: TokenTableT }) => {
   const [open, setOpen] = useState(false);
 
   const tokens: { [key: string]: string } | null =

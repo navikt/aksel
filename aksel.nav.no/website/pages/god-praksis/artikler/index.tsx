@@ -1,5 +1,5 @@
-import { contributorsSingle } from "@/lib";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import { contributorsSingle } from "@/sanity/queries";
 import {
   NextPageT,
   ResolveTemaT,

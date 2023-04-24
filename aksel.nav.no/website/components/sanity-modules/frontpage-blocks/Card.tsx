@@ -5,8 +5,8 @@ import NextLink from "next/link";
 import NextImage from "next/legacy/image";
 import { Tag } from "./Tag";
 import cl from "clsx";
-import { urlFor } from "lib/sanity/santiy";
 import { getImage } from "components/website-modules/utils/get-image";
+import { urlFor } from "@/sanity/interface";
 
 export type ArticleT = {
   _key: string;

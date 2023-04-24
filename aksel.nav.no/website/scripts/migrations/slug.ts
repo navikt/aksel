@@ -3,7 +3,7 @@
  */
 
 import dotenv from "dotenv";
-import { noCdnClient } from "../../lib/sanity/sanity.server";
+import { noCdnClient } from "../../sanity/interface/client.server";
 
 dotenv.config();
 const token = process.env.SANITY_WRITE_KEY;
