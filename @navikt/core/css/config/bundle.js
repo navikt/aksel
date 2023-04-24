@@ -20,6 +20,14 @@ const {
 
 run();
 
+/**
+ * Postcss-plugins
+ * - cssImports: Inline of imports from other css files
+ * - combineSelectors: Combine selectors with the same properties, removes duplicates
+ * Minified-versions:
+ * - autoprefixer: Add vendor prefixes, uses browserlist in package.json
+ * - cssnano: css-minification
+ */
 async function run() {
   [`${rootDir}/version/${version}`, globalDir, componentDir].forEach((dir) => {
     if (!fs.existsSync(path.resolve(__dirname, `../${dir}`))) {
@@ -34,11 +42,6 @@ async function run() {
   copyToVersionFolder();
 }
 
-/**
- * Postcss-plugins
- * - cssImports: Handle inline of imports from other css files
- * - combineSelectors: Combine selectors with the same properties
- */
 async function bundleMonolith() {
   const indexSrc = path.resolve(__dirname, "../index.css");
   const indexDist = path.resolve(__dirname, `../${rootDir}/index.css`);
@@ -123,12 +126,6 @@ function buildFragmentFiles() {
   return files;
 }
 
-/**
- * Give a minified version of of CSS for CDN and static imports
- * Postcss-plugins
- * - autoprefixer: Add vendor prefixes, uses browserlist in package.json
- * - cssnano: css-minification
- */
 async function bundleMinified() {
   const files = fastglob
     .sync("**/*.css", { cwd: `./${rootDir}`, ignore: "**/*.min.css" })
