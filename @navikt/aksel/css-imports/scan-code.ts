@@ -2,6 +2,7 @@ import path from "path";
 import scanner from "react-scanner";
 
 run();
+
 async function run() {
   await scanCode();
 }
