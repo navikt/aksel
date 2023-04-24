@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 2.8.16
+
+### Patch Changes
+
+- [`ff001f2bc`](https://github.com/navikt/aksel/commit/ff001f2bcf5a1ff0580660a1680f4f8342e7fdff) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: ExpansionCard.Content sendte ikke className videre
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.16
+  - @navikt/ds-icons@2.8.16
+
 ## 2.8.15
 
 ### Patch Changes
