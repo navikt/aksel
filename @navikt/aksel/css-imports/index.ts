@@ -4,9 +4,7 @@ import { generateImportOutput } from "./generate-output.js";
 import { AnswersT, ComponentPrefix } from "./config.js";
 
 import { inquiry } from "./inquiry.js";
-/* import { scanCode } from "./scan-code.js"; */
 import { exec } from "child_process";
-
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { getAllVersions } from "./get-version.js";

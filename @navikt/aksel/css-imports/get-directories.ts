@@ -2,7 +2,7 @@ import fg from "fast-glob";
 import path from "path";
 
 export async function getDirectories() {
-  const baseDir = process.cwd(); // Replace this with the path to the directory you want to search
+  const baseDir = process.cwd();
   const ignoreNodeModules = [
     "**/node_modules/**",
     "**/dist/**",
