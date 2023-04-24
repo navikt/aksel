@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
 } from "react";
 import { BodyShort, Label, mergeRefs, omit } from "../..";
 import { useFormField } from "../useFormField";
@@ -18,6 +17,7 @@ import { ComboboxClearEvent, ComboboxProps } from "./types";
 import { useCustomOptionsContext } from "./customOptionsContext";
 import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 import ComboboxWrapper from "./ComboboxWrapper";
+import { useInputValue } from "./comboboxHooks";
 
 export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
@@ -30,7 +30,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const {
       value: externalValue,
-      onChange,
+      onChange: externalOnChange,
       onClear,
       className,
       hideLabel = false,
@@ -75,7 +75,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
-    const [internalValue, setInternalValue] = useState<string>("");
     const {
       toggleIsListOpen,
       isListOpen,
@@ -91,26 +90,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       removeSelectedOption,
       addSelectedOption,
     } = useSelectedOptionsContext();
-
-    const value = useMemo(
-      () => String(externalValue ?? internalValue),
-      [externalValue, internalValue]
-    );
-
-    const handleChange = useCallback(
-      (val: string) => {
-        externalValue ?? setInternalValue(val);
-        onChange?.(val);
-        setFilteredOptionsIndex(0);
-        if (!isListOpen && !!val) toggleIsListOpen(true);
-      },
-      [
-        externalValue,
-        onChange,
-        setFilteredOptionsIndex,
-        isListOpen,
-        toggleIsListOpen,
-      ]
+    const { value, onChange } = useInputValue(
+      setFilteredOptionsIndex,
+      isListOpen,
+      toggleIsListOpen,
+      externalValue,
+      externalOnChange
     );
 
     const focusInput = useCallback(() => {
@@ -120,9 +105,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const handleClear = useCallback(
       (event: ComboboxClearEvent) => {
         onClear?.(event);
-        handleChange("");
+        onChange("");
       },
-      [handleChange, onClear]
+      [onChange, onClear]
     );
 
     const handleDeleteSelectedOption = useCallback(
@@ -291,7 +276,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 {...omit(rest, ["error", "errorId", "size"])}
                 {...inputProps}
                 value={value}
-                onChange={(e) => handleChange(e.target.value)}
+                onChange={(e) => onChange(e.target.value)}
                 type="search"
                 role="combobox"
                 onKeyUp={handleKeyUp}
