@@ -11,7 +11,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   build:
     name: "Release packages"
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    if: ${{!contains(github.event.head_commit.message, '[ci skip]')}}
     runs-on: ubuntu-latest
     permissions:
       id-token: "write"
@@ -45,6 +45,7 @@ jobs:
         with:
           version: yarn version
           publish: yarn release
+          createGithubReleases: false
         env:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
