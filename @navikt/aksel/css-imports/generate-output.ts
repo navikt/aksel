@@ -1,4 +1,4 @@
-import { AnswersT, ComponentPrefix } from "./config.js";
+import { AnswersT, ComponentPrefix, layerSuffix } from "./config.js";
 import {
   formCss,
   typoCss,
@@ -10,10 +10,9 @@ import clipboard from "clipboardy";
 import lodash from "lodash";
 import chalk from "chalk";
 
-const layer = " layer(aksel)";
-
 export async function generateImportOutput(answers: AnswersT) {
   const useCdn = answers.cdn === "yes";
+  const useTailwind = answers.tailwind === "yes";
   const version = answers.version;
 
   const imports = [];
@@ -39,7 +38,7 @@ export async function generateImportOutput(answers: AnswersT) {
         ...advancedOutput(answers, useCdn, answers.layers === "yes", version)
       );
 
-  if (answers.tailwind === "yes") {
+  if (useTailwind) {
     importStr = `@import "tailwindcss/base";
 ${imports.join("\n")}
 
@@ -64,7 +63,7 @@ ${imports.join("\n")}
     );
   }
 
-  if (answers.tailwind === "yes") {
+  if (useTailwind) {
     console.log(chalk.bold.underline.cyan(`\nNotes on Tailwind-use 📝`));
     console.log(
       `When using tailwind with Aksel, you will need to add the postcss plugin ${chalk.cyan(
@@ -80,7 +79,7 @@ ${imports.join("\n")}
 
 function simpleOutput(cdn: boolean, layers: boolean, version: string) {
   const options = {
-    static: `@import "@navikt/ds-css"${layers ? layer : ""};`,
+    static: `@import "@navikt/ds-css"${layers ? layerSuffix : ""};`,
     cdn: toCdn("index.css", version),
   };
 
@@ -163,5 +162,5 @@ function toCdn(str: string, version: string): string {
 }
 
 function toCssImport(str: string, layers: boolean): string {
-  return `@import "@navikt/ds-css/${str}"${layers ? layer : ""};`;
+  return `@import "@navikt/ds-css/${str}"${layers ? layerSuffix : ""};`;
 }

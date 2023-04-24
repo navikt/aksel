@@ -11,3 +11,4 @@ export type AnswersT = {
 };
 
 export const ComponentPrefix = "C_";
+export const layerSuffix = " layer(aksel)";
