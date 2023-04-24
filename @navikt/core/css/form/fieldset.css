@@ -18,6 +18,15 @@
   margin-top: 0;
 }
 
+.navds-fieldset__legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+
 .navds-fieldset:disabled > .navds-fieldset__legend,
 .navds-fieldset:disabled > .navds-fieldset__description {
   opacity: 0.3;
