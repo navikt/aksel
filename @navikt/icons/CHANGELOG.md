@@ -1,5 +1,7 @@
 # @navikt/ds-icons
 
+## 2.8.16
+
 ## 2.8.15
 
 ### Patch Changes
