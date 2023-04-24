@@ -15,9 +15,10 @@
   cursor: pointer;
   border: none;
   border-bottom: 2px solid var(--ac-accordion-header-border, var(--a-border-divider));
+  position: relative;
 }
 
-.navds-accordion__header:focus {
+.navds-accordion__header-button:focus {
   outline: none;
   box-shadow: var(--a-shadow-focus);
 }
@@ -27,11 +28,39 @@
   text-decoration: underline;
 }
 
-.navds-accordion__header:hover > .navds-accordion__expand-icon {
+.navds-accordion__header:hover > .navds-accordion__header-chevron {
   background-color: var(--ac-accordion-header-bg-hover, var(--a-grayalpha-200));
   border-radius: 4px;
   height: 24px;
   align-self: center;
+}
+
+.navds-accordion__header-button {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--ac-expansioncard-button-border-radius, var(--a-border-radius-medium));
+  height: var(--a-spacing-6);
+  width: var(--a-spacing-6);
+  font-size: 1.5rem;
+  align-self: flex-start;
+}
+
+.navds-accordion__header-button::after {
+  inset: 0;
+  z-index: 1;
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+:where(.navds-accordion__header):hover > :where(.navds-accordion__header-button) {
+  background-color: var(--ac-accordion-header-bg-hover, var(--a-surface-hover));
 }
 
 .navds-accordion__header-content {
@@ -50,18 +79,52 @@
 .navds-accordion__content {
   padding: 0 var(--a-spacing-3) var(--a-spacing-5) var(--a-spacing-11);
   border-bottom: 2px solid var(--ac-accordion-content-border, var(--a-border-divider));
+  animation: fadeAccordionContent 250ms ease;
 }
 
 .navds-accordion__item--open > .navds-accordion__header:hover + * .navds-accordion__content {
   border-color: var(--ac-accordion-content-border-open, var(--a-border-default));
 }
 
-.navds-accordion__expand-icon {
+.navds-accordion__header-chevron {
   font-size: 1.5rem;
   height: 1.75rem;
   flex-shrink: 0;
+  transition: transform 150ms ease-in-out;
 }
 
-.navds-accordion__item--open > .navds-accordion__header > .navds-accordion__expand-icon {
-  transform: rotateZ(180deg);
+.navds-accordion__header-button:hover > :where(.navds-accordion__header-chevron) {
+  transform: translateY(1px);
+}
+
+.navds-accordion__item--open :where(.navds-accordion__header-chevron) {
+  transform: translateY(0) rotate(180deg);
+}
+
+.navds-accordion__item--open :where(.navds-accordion__header-button):hover :where(.navds-accordion__header-chevron) {
+  transform: translateY(-1px) rotate(180deg);
+}
+
+.navds-accordion__content--closed {
+  display: none;
+}
+
+.navds-accordion--no-fade :where(.navds-accordion__content) {
+  animation: none;
+}
+
+@keyframes fadeAccordionContent {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  40% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -33,7 +33,13 @@ const AccordionContent: AccordionContentType = forwardRef(
           {...rest}
           as="div"
           ref={ref}
-          className={cl("navds-accordion__content", className)}
+          className={cl(
+            "navds-accordion__content",
+            {
+              "navds-accordion__content--closed": !context.open,
+            },
+            className
+          )}
         >
           {children}
         </BodyLong>

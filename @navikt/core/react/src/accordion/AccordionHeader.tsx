@@ -1,11 +1,11 @@
-import { Expand } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Heading } from "../typography/Heading";
 import { AccordionItemContext } from "./AccordionItem";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 
 export interface AccordionHeaderProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Text inside Accordion.Header
    */
@@ -13,7 +13,7 @@ export interface AccordionHeaderProps
 }
 
 export type AccordionHeaderType = React.ForwardRefExoticComponent<
-  AccordionHeaderProps & React.RefAttributes<HTMLButtonElement>
+  AccordionHeaderProps & React.RefAttributes<HTMLDivElement>
 >;
 
 const AccordionHeader: AccordionHeaderType = forwardRef(
@@ -27,23 +27,27 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
       return null;
     }
 
-    const handleClick = (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      context.toggleOpen();
-      onClick && onClick(e);
-    };
-
     return (
-      <button
-        {...rest}
+      <div
         ref={ref}
+        {...rest}
         className={cl("navds-accordion__header", className)}
-        type="button"
-        onClick={handleClick}
         aria-expanded={context.open}
       >
-        <Expand aria-hidden className="navds-accordion__expand-icon" />
+        <button
+          className="navds-accordion__header-button"
+          onClick={() => {
+            context.toggleOpen();
+          }}
+          type="button"
+          aria-expanded={context.open}
+        >
+          <ChevronDownIcon
+            className="navds-accordion__header-chevron"
+            title="Vis mer"
+          />
+        </button>
+        {/* <Expand aria-hidden className="navds-accordion__expand-icon" /> */}
         <Heading
           size="small"
           as="span"
@@ -51,7 +55,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         >
           {children}
         </Heading>
-      </button>
+      </div>
     );
   }
 );
