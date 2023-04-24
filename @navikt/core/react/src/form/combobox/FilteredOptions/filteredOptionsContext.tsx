@@ -6,6 +6,7 @@ import React, {
   useContext,
 } from "react";
 import { useCustomOptionsContext } from "../customOptionsContext";
+import { useInputContext } from "../inputContext";
 
 const normalizeText = (text: string) =>
   typeof text === "string" ? text.toLowerCase().trim() : "";
@@ -25,8 +26,9 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
   {} as FilteredOptionsContextType
 );
 
-export const FilteredOptionsProvider = ({ children, value }) => {
-  const { isExternalListOpen, options } = value;
+export const FilteredOptionsProvider = ({ children, value: props }) => {
+  const { isExternalListOpen, options } = props;
+  const { value } = useInputContext();
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
   const [isInternalListOpen, setInternalListOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
@@ -34,7 +36,7 @@ export const FilteredOptionsProvider = ({ children, value }) => {
 
   const filteredOptionsMemo = useMemo(() => {
     const opts = [...customOptions, ...options];
-
+    setFilteredOptionsIndex(0); // TODO: Krasjer dette med noe annet? Kanskje index når vi legger til custom options må sees på?
     return opts?.filter((option) =>
       normalizeText(option).includes(normalizeText(value ?? ""))
     );

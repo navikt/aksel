@@ -17,7 +17,7 @@ import { ComboboxClearEvent, ComboboxProps } from "./types";
 import { useCustomOptionsContext } from "./customOptionsContext";
 import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 import ComboboxWrapper from "./ComboboxWrapper";
-import { useInputValue } from "./comboboxHooks";
+import { useInputContext } from "./inputContext";
 
 export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
@@ -90,13 +90,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       removeSelectedOption,
       addSelectedOption,
     } = useSelectedOptionsContext();
-    const { value, onChange } = useInputValue(
-      setFilteredOptionsIndex,
-      isListOpen,
-      toggleIsListOpen,
-      externalValue,
-      externalOnChange
-    );
+    const { value, onChange } = useInputContext();
 
     const focusInput = useCallback(() => {
       inputRef.current?.focus?.();
