@@ -133,6 +133,7 @@
       "examples",
       "esm",
       "cjs",
+      "dist",
       "**/codemod/**/*.js"
     ]
   },
