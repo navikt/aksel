@@ -12,6 +12,7 @@
       "@navikt/ds-react-internal",
       "@navikt/ds-codemod",
       "@navikt/aksel-icons",
+      "@navikt/aksel",
       "@navikt/ds-icons"
     ]
   ],

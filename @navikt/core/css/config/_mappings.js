@@ -7,7 +7,6 @@ const formCss = "form.css";
 const componentsCss = "components.css";
 
 const StyleMappings = {
-  prioritzedCss: [typoCss, formCss],
   baseline: [
     {
       main: "fonts.css",
@@ -44,7 +43,6 @@ const StyleMappings = {
     {
       component: "BodyShort",
       main: typoCss,
-      dependencies: [typoCss],
     },
     {
       component: "Button",
