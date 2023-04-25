@@ -5,7 +5,7 @@ import { AccordionItemContext } from "./AccordionItem";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 
 export interface AccordionHeaderProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Text inside Accordion.Header
    */
@@ -13,11 +13,11 @@ export interface AccordionHeaderProps
 }
 
 export type AccordionHeaderType = React.ForwardRefExoticComponent<
-  AccordionHeaderProps & React.RefAttributes<HTMLDivElement>
+  AccordionHeaderProps & React.RefAttributes<HTMLButtonElement>
 >;
 
 const AccordionHeader: AccordionHeaderType = forwardRef(
-  ({ children, className, onClick, ...rest }, ref) => {
+  ({ children, className, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
     if (context === null) {
@@ -28,24 +28,20 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
     }
 
     return (
-      <div
+      <button
         ref={ref}
         {...rest}
         className={cl("navds-accordion__header", className)}
+        onClick={() => {
+          context.toggleOpen();
+        }}
       >
-        <button
-          className="navds-accordion__header-button"
-          onClick={() => {
-            context.toggleOpen();
-          }}
-          type="button"
-        >
+        <div className="navds-accordion__icon-wrapper">
           <ChevronDownIcon
             className="navds-accordion__header-chevron"
             title="Vis mer"
           />
-        </button>
-        {/* <Expand aria-hidden className="navds-accordion__expand-icon" /> */}
+        </div>
         <Heading
           size="small"
           as="span"
@@ -53,7 +49,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         >
           {children}
         </Heading>
-      </div>
+      </button>
     );
   }
 );
