@@ -11,21 +11,36 @@
     "access": "public",
     "provenance": true
   },
+  "files": [
+    "*",
+    "!dist/version",
+    "!config/bundle.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git"
   },
   "main": "./dist/index.css",
   "scripts": {
-    "build": "postcss --use postcss-import postcss-combine-duplicated-selectors -o dist/index.css index.css",
-    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css"
+    "build": "node config/bundle.js",
+    "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\""
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^2.8.15",
+    "cssnano": "6.0.0",
+    "fast-glob": "3.2.11",
+    "lodash": "4.17.21",
+    "nodemon": "^2.0.12",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.0",
     "postcss-cli": "^9.0.0",
     "postcss-combine-duplicated-selectors": "10.0.3",
     "postcss-import": "^14.1.0"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

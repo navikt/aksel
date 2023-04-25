@@ -83,3 +83,11 @@ jobs:
           cdn-team-name: aksel
           source: ./@navikt/aksel-icons/aksel-icons.zip
           destination: "/icons/zip"
+
+      - name: Upload CSS to NAV CDN
+        if: steps.changesets.outputs.published == 'true'
+        uses: navikt/frontend/actions/cdn-upload/v1@main
+        with:
+          cdn-team-name: aksel
+          source: ./@navikt/core/css/dist/version
+          destination: "@navikt/ds-css"
