@@ -23,6 +23,13 @@
   box-shadow: var(--a-shadow-focus);
 }
 
+@supports not selector(:focus-visible) {
+  .navds-accordion__header:focus-visible {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
+}
+
 .navds-accordion__header:hover {
   background: var(--ac-accordion-header-bg-hover, var(--a-grayalpha-200));
   text-decoration: underline;
