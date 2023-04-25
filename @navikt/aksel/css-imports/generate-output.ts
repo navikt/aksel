@@ -4,6 +4,9 @@ import {
   typoCss,
   componentsCss,
   StyleMappings,
+  componentDir,
+  rootDir,
+  globalDir,
 } from "@navikt/ds-css/config/_mappings.js";
 import { inquiry } from "./inquiry.js";
 import clipboard from "clipboardy";
@@ -103,14 +106,14 @@ function advancedOutput(
 
   baselineImports.forEach((x) => {
     cdn
-      ? imports.push(toCdn(`${x}.css`, version))
-      : imports.push(toCssImport(`dist/${x}.css`, layers));
+      ? imports.push(toCdn(`${globalDir}/${x}.css`, version))
+      : imports.push(toCssImport(`${globalDir}/${x}.css`, layers));
   });
 
   if (answers["config-type"] === "easy") {
     cdn
       ? imports.push(toCdn(componentsCss, version))
-      : imports.push(toCssImport(`dist/${componentsCss}`, layers));
+      : imports.push(toCssImport(`${rootDir}/${componentsCss}`, layers));
     return imports;
   }
 
@@ -147,18 +150,17 @@ function advancedOutput(
   componentImportsList.forEach((x) => {
     const pascalCase = lodash.camelCase(x.replace("css", "")).toLowerCase();
     cdn
-      ? imports.push(toCdn(`${pascalCase}.css`, version))
-      : imports.push(toCssImport(`dist/${pascalCase}.css`, layers));
+      ? imports.push(toCdn(`${componentDir}/${pascalCase}.css`, version))
+      : imports.push(toCssImport(`${componentDir}/${pascalCase}.css`, layers));
   });
 
   return imports;
 }
 
 function toCdn(str: string, version: string): string {
-  return `<link rel="preload" href="https://cdn.nav.no/aksel/@navikt/ds-css/${version}/${str.replace(
-    ".css",
-    ".min.css"
-  )}" as="style"></link>`;
+  return `<link rel="preload" href="https://cdn.nav.no/aksel/@navikt/ds-css/${version}/${str
+    .replace(".css", ".min.css")
+    .replace(`${rootDir}/`, "")}" as="style"></link>`;
 }
 
 function toCssImport(str: string, layers: boolean): string {

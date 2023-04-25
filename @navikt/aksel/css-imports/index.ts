@@ -79,8 +79,7 @@ async function main() {
   } else {
     let versions = (await getAllVersions()).filter((x) => !x.includes("-"));
 
-    // TODO: Change when released to actual first release (probably 2.9.0)
-    const index = versions.findIndex((x) => x.startsWith("2.8."));
+    const index = versions.findIndex((x) => x.startsWith("2.9.0"));
     versions = versions.slice(index).reverse();
 
     await inquiry(answers, [
