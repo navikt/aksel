@@ -5,7 +5,6 @@ export declare const typoCss = "typography.css";
 export declare const formCss = "form.css";
 export declare const componentsCss = "components.css";
 export declare const StyleMappings: {
-  prioritzedCss: string[];
   baseline: {
     main: string;
     optional: boolean;
