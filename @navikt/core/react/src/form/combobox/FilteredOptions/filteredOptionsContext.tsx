@@ -11,6 +11,11 @@ import { useInputContext } from "../inputContext";
 const normalizeText = (text: string) =>
   typeof text === "string" ? text.toLowerCase().trim() : "";
 
+const isValueInList = (value, list) =>
+  list?.filter((listItem) =>
+    normalizeText(listItem).includes(normalizeText(value ?? ""))
+  );
+
 type FilteredOptionsContextType = {
   filteredOptionsIndex: number;
   setFilteredOptionsIndex: (index: number) => void;
@@ -18,6 +23,7 @@ type FilteredOptionsContextType = {
   setInternalListOpen: (open: boolean) => void;
   filteredOptions: string[];
   setFilteredOptions: (options: string[]) => void;
+  isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
   currentOption: string;
   resetFilteredOptionsIndex: () => void;
@@ -37,9 +43,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const filteredOptionsMemo = useMemo(() => {
     const opts = [...customOptions, ...options];
     setFilteredOptionsIndex(0); // TODO: Krasjer dette med noe annet? Kanskje index når vi legger til custom options må sees på?
-    return opts?.filter((option) =>
-      normalizeText(option).includes(normalizeText(value ?? ""))
-    );
+    return isValueInList(value, opts);
   }, [value, options, customOptions]);
 
   useEffect(() => {
@@ -54,6 +58,14 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const currentOption = useMemo(() => {
     return filteredOptions[filteredOptionsIndex];
   }, [filteredOptions, filteredOptionsIndex]);
+
+  const isValueNew = useMemo(() => {
+    const isNew = Boolean(value) && isValueInList(value, filteredOptions);
+    if (isNew) {
+      setFilteredOptionsIndex(-1); // No item in list should have focus
+    }
+    return isNew;
+  }, [value, filteredOptions]);
 
   const toggleIsListOpen = (newState?: boolean) => {
     setInternalListOpen((oldState) => newState ?? !oldState);
@@ -70,6 +82,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setInternalListOpen,
     filteredOptions: filteredOptionsMemo,
     setFilteredOptions,
+    isValueNew,
     toggleIsListOpen,
     currentOption,
     resetFilteredOptionsIndex,

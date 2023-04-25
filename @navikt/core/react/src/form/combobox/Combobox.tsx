@@ -229,6 +229,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
 
+    function getActiveDescendantId() {
+      if (filteredOptionsIndex === -1) {
+        return `${id}-combobox-new-option`;
+      } else {
+        return `${id}-option-${filteredOptions[filteredOptionsIndex]}`;
+      }
+    }
+
     return (
       <ComboboxWrapper
         className={className}
@@ -280,7 +288,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 autoComplete="off"
                 aria-autocomplete="list"
                 aria-owns={`${id}-options`}
-                aria-activedescendant={`${id}-option-${filteredOptions[filteredOptionsIndex]}`}
+                aria-activedescendant={getActiveDescendantId()}
                 className={cl(
                   className,
                   "navds-combobox__input",

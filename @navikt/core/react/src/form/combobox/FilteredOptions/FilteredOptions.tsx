@@ -1,13 +1,10 @@
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef } from "react";
 import cl from "clsx";
 import { BodyShort, Label } from "../../..";
 import { Add } from "@navikt/ds-icons";
 import CheckIcon from "./CheckIcon";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-
-const normalizeText = (text: string) =>
-  typeof text === "string" ? text.toLowerCase().trim() : "";
 
 interface FilteredOptionsProps {
   id: string;
@@ -20,18 +17,9 @@ interface FilteredOptionsProps {
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
   ({ id, toggleOption, value, addCustomOption }, ref) => {
-    const { isListOpen, filteredOptions, filteredOptionsIndex } =
+    const { isListOpen, filteredOptions, filteredOptionsIndex, isValueNew } =
       useFilteredOptionsContext();
     const { selectedOptions } = useSelectedOptionsContext();
-
-    const isValueNew = useMemo(() => {
-      return (
-        Boolean(value) &&
-        !filteredOptions?.find(
-          (option) => normalizeText(option) === normalizeText(value)
-        )
-      );
-    }, [value, filteredOptions]);
 
     return (
       <ul
@@ -51,7 +39,9 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
             id={`${id}-combobox-new-option`}
             className="navds-combobox__list-item navds-combobox__list-item__new-option"
             role="option"
-            aria-selected={!selectedOptions.includes(value)}
+            aria-selected={
+              !selectedOptions.includes(value)
+            } /* TODO: Should this attribute ever be true? Can the add-button have the selected state? */
           >
             <Add />
             <BodyShort size="medium">
