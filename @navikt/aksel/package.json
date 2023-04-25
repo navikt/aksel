@@ -1,12 +1,13 @@
 {
   "name": "@navikt/aksel",
-  "version": "2.8.15",
+  "version": "2.8.16",
   "description": "Aksel command line interface. Handles css-imports, codemods (planned) and more",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
   "keywords": [
     "react",
-    "cli",
+    "command-line",
+    "CLI",
     "css",
     "CDN"
   ],
