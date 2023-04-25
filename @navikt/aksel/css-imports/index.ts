@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { StyleMappings } from "@navikt/ds-css/config/_mappings.js";
 import { generateImportOutput } from "./generate-output.js";
 import { AnswersT, ComponentPrefix } from "./config.js";
@@ -14,9 +13,7 @@ import { getDirectories } from "./get-directories.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-main();
-
-async function main() {
+export async function cssImportsCommand() {
   let answers: AnswersT = {
     "config-type": "regular",
     cdn: "no",

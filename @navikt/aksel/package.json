@@ -19,11 +19,7 @@
     "build": "yarn clean && tsc -p tsconfig.json",
     "dev": "tsc --watch -p tsconfig.json"
   },
-  "bin": {
-    "aksel": "./dist/help.js",
-    "css-imports": "./dist/css-imports/index.js",
-    "help": "./dist/help.js"
-  },
+  "bin": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git",
