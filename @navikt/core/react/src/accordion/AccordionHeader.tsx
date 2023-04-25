@@ -17,7 +17,7 @@ export type AccordionHeaderType = React.ForwardRefExoticComponent<
 >;
 
 const AccordionHeader: AccordionHeaderType = forwardRef(
-  ({ children, className, ...rest }, ref) => {
+  ({ children, className, onClick, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
     if (context === null) {
@@ -32,8 +32,9 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         ref={ref}
         {...rest}
         className={cl("navds-accordion__header", className)}
-        onClick={() => {
+        onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           context.toggleOpen();
+          onClick && onClick(e);
         }}
       >
         <div className="navds-accordion__icon-wrapper">
