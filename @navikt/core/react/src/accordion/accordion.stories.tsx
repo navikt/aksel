@@ -12,6 +12,22 @@ export default {
     AccordionContent,
     AccordionHeader,
   },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: "600px",
+          minHeight: "100vh",
+          padding: "10rem 0",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const Content = () => (

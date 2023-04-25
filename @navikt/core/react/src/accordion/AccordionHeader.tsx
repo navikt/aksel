@@ -32,7 +32,6 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         ref={ref}
         {...rest}
         className={cl("navds-accordion__header", className)}
-        aria-expanded={context.open}
       >
         <button
           className="navds-accordion__header-button"
@@ -40,7 +39,6 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
             context.toggleOpen();
           }}
           type="button"
-          aria-expanded={context.open}
         >
           <ChevronDownIcon
             className="navds-accordion__header-chevron"
