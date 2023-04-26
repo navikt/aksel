@@ -1,3 +1,18 @@
+/* https://web.dev/prefers-reduced-motion/ */
+@media (prefers-reduced-motion: reduce) {
+  *:not(.navds-loader *):not(.navds-loader),
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
+
 /*
  * From https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/style.css
  *
@@ -20,17 +35,15 @@
   position: absolute;
   white-space: nowrap;
   width: 1px;
-
-  /* 1 */
 }
 
 /*
- * From https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/style.css
- *
- * Extends the .sr-only class to allow the element
- * to be focusable when navigated to via the keyboard:
- * https://www.drupal.org/node/897638
- */
+* From https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/style.css
+*
+* Extends the .sr-only class to allow the element
+* to be focusable when navigated to via the keyboard:
+* https://www.drupal.org/node/897638
+*/
 
 .sr-only.focusable:active,
 .sr-only.focusable:focus,

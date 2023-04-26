@@ -1,7 +1,3 @@
-[data-theme="dark"] {
-  --ac-typo-error-text: var(--a-red-300);
-}
-
 /* Heading */
 .navds-heading {
   font-weight: var(--a-font-weight-bold);
@@ -184,6 +180,11 @@
 
 .navds-detail--small.navds-typo--spacing {
   margin-bottom: var(--a-spacing-2);
+}
+
+[data-theme="dark"].navds-error-message,
+[data-theme="dark"] .navds-error-message {
+  --a-text-danger: var(--a-red-300);
 }
 
 .navds-error-message {

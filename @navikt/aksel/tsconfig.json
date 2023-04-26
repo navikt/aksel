@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "Node16",
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "target": "es2015",
+    "preserveWatchOutput": true,
+    "declaration": false,
+    "types": ["node", "jest"],
+    "outDir": "dist",
+    "rootDir": "./",
+    "resolveJsonModule": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist", "jest.config.js", "__tests__"]
+}
