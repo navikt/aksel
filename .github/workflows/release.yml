@@ -89,5 +89,5 @@ jobs:
         uses: navikt/frontend/actions/cdn-upload/v1@main
         with:
           cdn-team-name: aksel
-          source: ./@navikt/core/css/dist/version
+          source: ./@navikt/core/css/dist/version/*
           destination: "@navikt/ds-css"
