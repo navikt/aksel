@@ -33,9 +33,9 @@ export async function cssImportsCommand() {
       message: "Import variants:",
       initial: 0,
       choices: [
-        { message: "Regular (recommended)", name: "regular" },
-        { message: "Optional defaults + bundled components", name: "easy" },
-        { message: "Fine-grained (advanced)", name: "advanced" },
+        { message: "Regular import (recommended)", name: "regular" },
+        { message: "Partial control (global)", name: "easy" },
+        { message: "Full control (global + components)", name: "advanced" },
       ],
     },
     {

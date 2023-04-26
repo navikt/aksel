@@ -77,6 +77,13 @@ ${imports.join("\n")}
     );
   }
 
+  if (answers.layers === "yes") {
+    console.log(chalk.bold.underline.cyan(`\nNotes on Layers 📝`));
+    console.log(
+      `Layers is not yet supported in Safari <= 15.3. (https://caniuse.com/css-cascade-layers)`
+    );
+  }
+
   answers.output.includes("clipboard") && clipboard.writeSync(importStr);
 }
 
