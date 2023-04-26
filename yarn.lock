@@ -3919,7 +3919,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 2.8.15
+    "@navikt/ds-css": 2.8.16
     "@types/inquirer": ^9.0.3
     axios: 1.3.6
     chalk: 4.1.0
@@ -3989,13 +3989,6 @@ __metadata:
     postcss-import: ^14.1.0
   languageName: unknown
   linkType: soft
-
-"@navikt/ds-css@npm:2.8.15":
-  version: 2.8.15
-  resolution: "@navikt/ds-css@npm:2.8.15"
-  checksum: 47a912a79b56dc6f9e749e8c81d1e634cb29ada92835daecc6d85defab0e7a26613d9e163b6ccfe3300e30deacc926267d854370c5de1ea51481279b77e2b179
-  languageName: node
-  linkType: hard
 
 "@navikt/ds-icons@^2.8.16, @navikt/ds-icons@workspace:@navikt/icons":
   version: 0.0.0-use.local
