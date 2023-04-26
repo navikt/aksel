@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 2.9.0
+
+### Minor Changes
+
+- [#1941](https://github.com/navikt/aksel/pull/1941) [`657b7f3f3`](https://github.com/navikt/aksel/commit/657b7f3f3e62c5ce3173e6c95a29fcd237ce7343) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: CSS nå tilgjengelig som separate filer
+
+  - Kan lastest fra CDN
+  - Tilbys nå i minified-versjoner
+  - Kommandoline: `npx @navikt/aksel css-imports` for å raskt komme i gang med CSS-optimalisering
+
 ## 2.8.16
 
 ## 2.8.15
