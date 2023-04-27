@@ -37,6 +37,15 @@ export async function cssImportsCommand() {
         { message: "Partial control (global)", name: "easy" },
         { message: "Full control (global + components)", name: "advanced" },
       ],
+      footer() {
+        return chalk.grey(
+          `${chalk.cyan(
+            `\n  Documentation:`
+          )}\n  Regular: https://aksel.nav.no/grunnleggende/kode/css-import
+  Partial: https://aksel.nav.no/grunnleggende/kode/css-import#h64650b1a4ad6
+  Full: https://aksel.nav.no/grunnleggende/kode/css-import#h4037598416ef\n`
+        );
+      },
     },
     {
       type: "select",
