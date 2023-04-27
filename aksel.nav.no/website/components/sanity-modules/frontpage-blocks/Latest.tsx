@@ -7,7 +7,7 @@ import { getImage } from "components/website-modules/utils/get-image";
 import { getAuthors } from "components/website-modules/LatestBloggs";
 import { dateStr, logNav } from "@/utils";
 import { Tag } from "./Tag";
-import { Card, ArticleT } from "./Card";
+import Card, { ArticleT } from "./Card";
 import cl from "clsx";
 import { urlFor } from "@/sanity/interface";
 
