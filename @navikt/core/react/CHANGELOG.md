@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 2.9.1
+
+### Patch Changes
+
+- [#1944](https://github.com/navikt/aksel/pull/1944) [`1afdee453`](https://github.com/navikt/aksel/commit/1afdee453fbba20ec280dc868c8aa1ae2a92132d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - ExpansionCard støtter nå aria-labelledby
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.1
+  - @navikt/ds-icons@2.9.1
+
 ## 2.9.0
 
 ### Patch Changes
