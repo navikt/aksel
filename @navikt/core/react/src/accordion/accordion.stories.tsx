@@ -3,6 +3,7 @@ import AccordionContent from "./AccordionContent";
 import AccordionHeader from "./AccordionHeader";
 import AccordionItem from "./AccordionItem";
 import { Accordion } from ".";
+import { Table } from "..";
 
 export default {
   title: "ds-react/Accordion",
@@ -28,6 +29,16 @@ export default {
       </div>
     ),
   ],
+  argTypes: {
+    variant: {
+      options: ["default", "neutral"],
+      control: { type: "select" },
+    },
+    headingSize: {
+      options: ["large", "medium", "small", "xsmall"],
+      control: { type: "radio" },
+    },
+  },
 };
 
 const Content = () => (
@@ -70,7 +81,7 @@ export const Default = {
   render: (props) => {
     return (
       <div style={{ width: 500 }}>
-        <Accordion>
+        <Accordion variant={props.variant} headingsize={props.headingSize}>
           {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
             <Item key={y} {...props} />
           ))}
@@ -82,6 +93,8 @@ export const Default = {
   args: {
     controlled: false,
     nItems: 2,
+    variant: "primary",
+    headingSize: "large",
   },
 };
 
@@ -123,3 +136,70 @@ export const Uncontrolled = () => (
     </Accordion>
   </div>
 );
+
+export const WithTable = {
+  render: (props) => {
+    const ExampleTable = () => {
+      return (
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>ID</Table.HeaderCell>
+              <Table.HeaderCell>Fornavn</Table.HeaderCell>
+              <Table.HeaderCell>Etternavn</Table.HeaderCell>
+              <Table.HeaderCell>Rolle</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row>
+              <Table.HeaderCell>1</Table.HeaderCell>
+              <Table.DataCell>Jean-Luc</Table.DataCell>
+              <Table.DataCell>Picard</Table.DataCell>
+              <Table.DataCell>Kaptein</Table.DataCell>
+            </Table.Row>
+            <Table.Row>
+              <Table.HeaderCell>2</Table.HeaderCell>
+              <Table.DataCell>William</Table.DataCell>
+              <Table.DataCell>Riker</Table.DataCell>
+              <Table.DataCell>Kommandør</Table.DataCell>
+            </Table.Row>
+            <Table.Row>
+              <Table.HeaderCell>3</Table.HeaderCell>
+              <Table.DataCell>Geordi</Table.DataCell>
+              <Table.DataCell>La Forge</Table.DataCell>
+              <Table.DataCell>Sjefsingeniør</Table.DataCell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      );
+    };
+
+    const ContentWithTable = () => {
+      return (
+        <Accordion.Content>
+          <ExampleTable />
+        </Accordion.Content>
+      );
+    };
+
+    return (
+      <div style={{ width: 500 }}>
+        <Accordion variant={props.variant} headingsize={props.headingSize}>
+          <Accordion.Item>
+            <Accordion.Header>Table of people</Accordion.Header>
+            <ContentWithTable />
+          </Accordion.Item>
+          <Accordion.Item>
+            <Accordion.Header>Table of people</Accordion.Header>
+            <ContentWithTable />
+          </Accordion.Item>
+        </Accordion>
+      </div>
+    );
+  },
+
+  args: {
+    variant: "default",
+    headingSize: "large",
+  },
+};

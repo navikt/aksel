@@ -38,7 +38,6 @@ const AccordionContent: AccordionContentType = forwardRef(
           },
           className
         )}
-        aria-hidden={!context.open}
       >
         {children}
       </BodyLong>

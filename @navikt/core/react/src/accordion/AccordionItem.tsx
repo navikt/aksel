@@ -1,5 +1,6 @@
 import cl from "clsx";
-import React, { createContext, forwardRef, useState } from "react";
+import React, { createContext, forwardRef, useContext, useState } from "react";
+import { AccordionContext } from "./AccordionContext";
 
 export interface AccordionItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -38,11 +39,13 @@ const AccordionItem: AccordionItemType = forwardRef(
     ref
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
+    const context = useContext(AccordionContext);
 
     return (
       <div
         className={cl("navds-accordion__item", className, {
           "navds-accordion__item--open": open ?? internalOpen,
+          "navds-accordion__item--neutral": context?.variant === "neutral",
         })}
         ref={ref}
         {...rest}
@@ -57,7 +60,7 @@ const AccordionItem: AccordionItemType = forwardRef(
             },
           }}
         >
-          {children}
+          <div className="navds-accordion__header-outer">{children}</div>
         </AccordionItemContext.Provider>
       </div>
     );

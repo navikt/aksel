@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Heading } from "../typography/Heading";
+import { AccordionContext } from "./AccordionContext";
 import { AccordionItemContext } from "./AccordionItem";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 
@@ -18,11 +19,12 @@ export type AccordionHeaderType = React.ForwardRefExoticComponent<
 
 const AccordionHeader: AccordionHeaderType = forwardRef(
   ({ children, className, onClick, ...rest }, ref) => {
-    const context = useContext(AccordionItemContext);
+    const itemContext = useContext(AccordionItemContext);
+    const accordionContext = useContext(AccordionContext);
 
-    if (context === null) {
+    if (accordionContext === null || itemContext === null) {
       console.error(
-        "<Accordion.Header> has to be used within an <Accordion.Item>"
+        "<Accordion.Header> has to be used within an <Accordion.Item>, which in turn must be within an <Accordion>"
       );
       return null;
     }
@@ -33,9 +35,10 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         {...rest}
         className={cl("navds-accordion__header", className)}
         onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-          context.toggleOpen();
+          itemContext.toggleOpen();
           onClick && onClick(e);
         }}
+        aria-expanded={itemContext.open}
       >
         <div className="navds-accordion__icon-wrapper">
           <ChevronDownIcon
@@ -44,7 +47,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           />
         </div>
         <Heading
-          size="small"
+          size={accordionContext.headingsize ?? "small"}
           as="span"
           className="navds-accordion__header-content"
         >
