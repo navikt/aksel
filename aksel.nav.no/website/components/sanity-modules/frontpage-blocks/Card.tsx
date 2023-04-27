@@ -7,6 +7,7 @@ import { Tag } from "./Tag";
 import cl from "clsx";
 import { getImage } from "components/website-modules/utils/get-image";
 import { urlFor } from "@/sanity/interface";
+import { withErrorBoundary } from "@/error-boundary";
 
 export type ArticleT = {
   _key: string;
@@ -27,7 +28,7 @@ export type ArticleT = {
   contributors?: { title: string }[];
 };
 
-export const Card = ({ article }: { article: ArticleT }) => {
+const Card = ({ article }: { article: ArticleT }) => {
   const date = article.publishedAt ? article.publishedAt : article._updatedAt;
 
   const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
@@ -117,7 +118,7 @@ export const Card = ({ article }: { article: ArticleT }) => {
         </div>
         {article.ingress ? (
           <BodyShort className="mt-2">{article.ingress}</BodyShort>
-        ) : article.seo.meta ? (
+        ) : article.seo?.meta ? (
           <BodyShort className="mt-2">{article.seo.meta}</BodyShort>
         ) : null}
         {showFooter && (
@@ -134,3 +135,5 @@ export const Card = ({ article }: { article: ArticleT }) => {
     </div>
   );
 };
+
+export default withErrorBoundary(Card, "FrontpageBlockCard");
