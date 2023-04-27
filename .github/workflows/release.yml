@@ -84,10 +84,16 @@ jobs:
           source: ./@navikt/aksel-icons/aksel-icons.zip
           destination: "/icons/zip"
 
+      - name: Get @navikt/ds-css version
+        run: |
+          VERSION=$(yarn css:get-version)
+          echo "version=$VERSION" >> $GITHUB_ENV
+          echo "Version of @navikt/ds-css: ${{ env.version }}"
+
       - name: Upload CSS to NAV CDN
         if: steps.changesets.outputs.published == 'true'
         uses: navikt/frontend/actions/cdn-upload/v1@main
         with:
           cdn-team-name: aksel
-          source: ./@navikt/core/css/dist/version/*
+          source: ./@navikt/core/css/dist/version/${{env.version}}
           destination: "@navikt/ds-css"

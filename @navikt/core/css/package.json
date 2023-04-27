@@ -23,7 +23,8 @@
   "main": "./dist/index.css",
   "scripts": {
     "build": "node config/bundle.js",
-    "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\""
+    "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\"",
+    "css:get-version": "node config/get-version.js"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^2.9.0",
