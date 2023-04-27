@@ -34,6 +34,7 @@
     "clipboardy": "^3.0.0",
     "enquirer": "^2.3.6",
     "fast-glob": "3.2.11",
+    "figlet": "1.6.0",
     "lodash": "4.17.21",
     "react-scanner": "^1.1.0"
   },
