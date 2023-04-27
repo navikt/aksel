@@ -25,7 +25,7 @@ interface ExpansionCardComponent
   Content: ExpansionCardContentType;
 }
 
-export interface ExpansionCardProps
+interface ExpansionCardCommonProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
@@ -49,8 +49,15 @@ export interface ExpansionCardProps
   /**
    * Since ExpansionCard is a section-element, accessible name is required.
    */
-  ["aria-label"]: string;
 }
+
+type ExpansionCardConditionalProps =
+  | {
+      ["aria-label"]: string;
+    }
+  | {
+      ["aria-labelledby"]: string;
+    };
 
 export type ExpansionCardContextProps = {
   open: boolean;
@@ -63,6 +70,9 @@ export const ExpansionCardContext = createContext<ExpansionCardContextProps>({
   toggleOpen: () => {},
   size: "medium",
 });
+
+export type ExpansionCardProps = ExpansionCardCommonProps &
+  ExpansionCardConditionalProps;
 
 export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
   (
