@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react-internal",
-  "version": "2.9.2",
+  "version": "2.9.3",
   "description": "Aksel react components for internal UIs in NAV",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -36,8 +36,8 @@
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^2.9.2",
-    "@navikt/ds-react": "^2.9.2",
+    "@navikt/ds-icons": "^2.9.3",
+    "@navikt/ds-react": "^2.9.3",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1"
   },
