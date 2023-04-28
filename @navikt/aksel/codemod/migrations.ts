@@ -7,23 +7,23 @@ export const migrations: {
     {
       description: "Runs all codemods for beta -> v1 migration",
       value: "v1-preset",
-      path: "v1.0.0/preset",
+      path: "v1.0.0/preset/preset",
     },
     {
       description: "Fixes breaking API-changes in <Pagination /> component",
       value: "v1-pagination",
-      path: "v1.0.0/pagination",
+      path: "v1.0.0/pagination/pagination",
     },
     {
       description: "Fixes breaking API-changes in <Tabs /> component",
       value: "v1-tabs",
-      path: "v1.0.0/tabs",
+      path: "v1.0.0/tabs/tabs",
     },
     {
       description:
         "Fixes breaking API-changes in <SpeechBubble /> (now <Chat/>) component",
       value: "v1-chat",
-      path: "v1.0.0/chat",
+      path: "v1.0.0/chat/chat",
     },
   ],
   "2.0.0": [
@@ -59,7 +59,7 @@ export function getMigrationPath(str: string) {
 export function getMigrationNames() {
   return Object.values(migrations).reduce(
     (acc, val) => [...val.map((x) => x.value), ...acc],
-    []
+    [] as string[]
   );
 }
 
