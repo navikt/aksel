@@ -28,12 +28,6 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: "large" | "medium" | "small";
   /**
-   * A list of indices for which items in the accordion should be
-   * open as the initial state (state is set without user intent).
-   * @default []
-   */
-  openitems?: number[];
-  /**
    * Instances of Accordion.Item
    */
   children: React.ReactNode;
@@ -46,7 +40,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       variant = "default",
       headingsize = "medium",
       size = "medium",
-      openitems = [],
       ...rest
     },
     ref
@@ -57,7 +50,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           variant,
           headingsize,
           size,
-          openitems,
         }}
       >
         <section

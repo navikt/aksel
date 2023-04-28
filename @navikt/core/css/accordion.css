@@ -125,7 +125,7 @@
   display: none;
 }
 
-.navds-accordion--no-fade :where(.navds-accordion__content) {
+.navds-accordion__item--no-anim :where(.navds-accordion__content) {
   animation: none;
 }
 

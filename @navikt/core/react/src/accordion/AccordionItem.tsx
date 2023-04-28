@@ -46,6 +46,7 @@ const AccordionItem: AccordionItemType = forwardRef(
         className={cl("navds-accordion__item", className, {
           "navds-accordion__item--open": open ?? internalOpen,
           "navds-accordion__item--neutral": context?.variant === "neutral",
+          "navds-accordion__item--no-anim": defaultOpen,
         })}
         ref={ref}
         {...rest}
@@ -60,7 +61,7 @@ const AccordionItem: AccordionItemType = forwardRef(
             },
           }}
         >
-          <div className="navds-accordion__header-outer">{children}</div>
+          <div>{children}</div>
         </AccordionItemContext.Provider>
       </div>
     );

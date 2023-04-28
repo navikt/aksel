@@ -63,8 +63,24 @@ const Content = () => (
   </Accordion.Content>
 );
 
+const SmallContent = () => (
+  <Accordion.Content>
+    Magna aliquip aliquip fugiat nostrud <a href="#Lorem">Lorem est</a> pariatur
+    veniam officia laboris voluptate officia pariatur.ex anim
+  </Accordion.Content>
+);
+
 const Item = (props) => {
   const [open, setOpen] = useState(false);
+
+  if (props.defaultOpen) {
+    return (
+      <Accordion.Item defaultOpen={props.defaultOpen}>
+        <Accordion.Header>Accordion header text</Accordion.Header>
+        <SmallContent />
+      </Accordion.Item>
+    );
+  }
 
   return props.controlled ? (
     <Accordion.Item open={open}>
@@ -98,7 +114,8 @@ export const Default = {
     controlled: false,
     nItems: 2,
     variant: "default",
-    headingsize: "large",
+    headingsize: "medium",
+    size: "medium",
   },
 };
 
@@ -108,7 +125,11 @@ export const DefaultOpen = {
       <div style={{ width: 500 }}>
         <Accordion {...props}>
           {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
-            <Item key={y} {...props} />
+            <Item
+              key={y}
+              defaultOpen={props.openitems.includes(y)}
+              {...props}
+            />
           ))}
         </Accordion>
       </div>
@@ -116,10 +137,10 @@ export const DefaultOpen = {
   },
 
   args: {
-    openItems: [1, 3, 4],
+    openitems: [1, 2],
     controlled: false,
-    nItems: 6,
-    variant: "default",
+    nItems: 5,
+    variant: "neutral",
     headingsize: "large",
   },
 };
