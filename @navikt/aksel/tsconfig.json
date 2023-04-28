@@ -8,10 +8,10 @@
     "declaration": false,
     "types": ["node", "jest"],
     "outDir": "dist",
-    "rootDir": "./",
+    "rootDir": "./src",
     "resolveJsonModule": true,
     "allowJs": true
   },
-  "include": ["**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "jest.config.js", "**/tests/**"]
 }

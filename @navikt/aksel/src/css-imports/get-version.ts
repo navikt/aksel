@@ -7,7 +7,7 @@ export async function getAllVersions() {
     );
     return Object.keys(npmPackageData.data["versions"]);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return [];
   }
 }

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import chalk from "chalk";
-import { helpCommand } from "./help.js";
-import { cssImportsCommand } from "./css-imports/index.js";
-import { codemodCommand } from "./codemod/index.js";
+import { helpCommand } from "./help";
+import { cssImportsCommand } from "./css-imports/index";
+import { codemodCommand } from "./codemod/index";
 import fs from "fs";
 
 run();
