@@ -6,26 +6,28 @@ import { getMigrationString } from "./migrations.js";
 const program = new Command();
 
 export function codemodCommand() {
+  program.name(`${chalk.blueBright(`npx @navikt/aksel`)}`);
+
   program
-    .name(`${chalk.blueBright(`npx @navikt/aksel codemod`)}`)
-    .addHelpText("beforeAll", figlet.textSync("Aksel Codemods"))
+    .command("codemod")
+    .addHelpText("beforeAll", figlet.textSync("Codemods"))
     .addHelpText(
       "afterAll",
       chalk.gray(`\nAvailable migrations:\n${getMigrationString()}`)
     )
     .description("Migrations for Aksel components and more")
-    .option(
-      "-p, --path [name]",
-      "Files or directory to transform. Can be a globby: '**/*.css'"
-    )
-    .option("-m, --migration [name]", "Migration to run")
+    .argument("<migration>", "Migration name")
+
+    .option("-g, --glob [glob]", "Files to transform. Can be a globby!")
     .option("-d, --dry-run", "Dry run, no changes will be made")
     .option("-p, --print", "Print transformed files")
     .option(
       "-f, --force",
       "Forcibly run migrations without checking git-changes"
     )
-    .parse(process.argv);
+    .action((str, options) => {
+      console.log({ str, options });
+    });
 
-  program.opts();
+  program.parse();
 }
