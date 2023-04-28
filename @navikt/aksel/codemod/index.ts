@@ -2,6 +2,7 @@ import { Command } from "commander";
 import figlet from "figlet";
 import chalk from "chalk";
 import { getMigrationString } from "./migrations.js";
+import { validateGit, validateMigration } from "./validation.js";
 
 const program = new Command();
 
@@ -26,7 +27,10 @@ export function codemodCommand() {
       "Forcibly run migrations without checking git-changes"
     )
     .action((str, options) => {
-      console.log({ str, options });
+      validateMigration(str, program);
+      validateGit(options, program);
+
+      /* console.log({ str, options }); */
     });
 
   program.parse();

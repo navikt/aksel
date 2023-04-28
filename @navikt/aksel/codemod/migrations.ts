@@ -47,6 +47,13 @@ export const migrations = {
   ],
 };
 
+export function getMigrations() {
+  return Object.values(migrations).reduce(
+    (acc, val) => [...val.map((x) => x.value), ...acc],
+    []
+  );
+}
+
 export function getMigrationString() {
   let str = "";
 
