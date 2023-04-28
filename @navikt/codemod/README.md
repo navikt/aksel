@@ -1,6 +1,7 @@
-# Aksel Codemods
+# Deperecated!
 
-Collection of Codemods for easier migration between breaking changes in NAVs designsystem-packages.
+This package has been deprecated in favor of [@navikt/aksel](...)
+Run `npx @navikt/aksel codemod --help` to get started
 
 ## Usage
 
