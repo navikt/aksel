@@ -1,10 +1,11 @@
-name: ListFill
+name: NumberList
 category: Statistics and math
 sub_category: Tabular
 keywords:
   - liste
   - rekkefølge
   - order
-variant: Fill
-updated_at: 08.03.2023
-created_at: 07.03.2023
+  - nummerliste
+variant: Stroke
+updated_at: 28.04.2023
+created_at: 28.04.2023
