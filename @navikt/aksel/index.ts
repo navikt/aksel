@@ -3,6 +3,7 @@ import chalk from "chalk";
 import { helpCommand } from "./help.js";
 import { cssImportsCommand } from "./css-imports/index.js";
 import { codemodCommand } from "./codemod/index.js";
+import fs from "fs";
 
 run();
 
@@ -14,7 +15,13 @@ async function run() {
     await cssImportsCommand();
     return;
   } else if (process.argv[2] === "codemod") {
-    await codemodCommand();
+    codemodCommand();
+    return;
+  } else if (process.argv[2] === "-v" || process.argv[2] === "--version") {
+    const pkg = JSON.parse(
+      fs.readFileSync("./package.json").toString()
+    ).version;
+    console.log(pkg);
     return;
   } else {
     console.log(
