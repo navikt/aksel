@@ -2,6 +2,7 @@
 import chalk from "chalk";
 import { helpCommand } from "./help.js";
 import { cssImportsCommand } from "./css-imports/index.js";
+import { codemodCommand } from "./codemod/index.js";
 
 run();
 
@@ -11,6 +12,9 @@ async function run() {
     return;
   } else if (process.argv[2] === "css-imports") {
     await cssImportsCommand();
+    return;
+  } else if (process.argv[2] === "codemod") {
+    await codemodCommand();
     return;
   } else {
     console.log(
