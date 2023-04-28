@@ -34,9 +34,13 @@ export default {
       options: ["default", "neutral"],
       control: { type: "select" },
     },
-    headingSize: {
-      options: ["large", "medium", "small", "xsmall"],
-      control: { type: "radio" },
+    headingsize: {
+      options: ["large", "medium", "small"],
+      control: { type: "select" },
+    },
+    size: {
+      options: ["large", "medium", "small"],
+      control: { type: "select" },
     },
   },
 };
@@ -81,7 +85,7 @@ export const Default = {
   render: (props) => {
     return (
       <div style={{ width: 500 }}>
-        <Accordion variant={props.variant} headingsize={props.headingSize}>
+        <Accordion {...props}>
           {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
             <Item key={y} {...props} />
           ))}
@@ -93,18 +97,40 @@ export const Default = {
   args: {
     controlled: false,
     nItems: 2,
-    variant: "primary",
-    headingSize: "large",
+    variant: "default",
+    headingsize: "large",
   },
 };
 
-export const Controlled = () => {
+export const DefaultOpen = {
+  render: (props) => {
+    return (
+      <div style={{ width: 500 }}>
+        <Accordion {...props}>
+          {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
+            <Item key={y} {...props} />
+          ))}
+        </Accordion>
+      </div>
+    );
+  },
+
+  args: {
+    openItems: [1, 3, 4],
+    controlled: false,
+    nItems: 6,
+    variant: "default",
+    headingsize: "large",
+  },
+};
+
+export const Controlled = (props) => {
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
 
   return (
     <div style={{ width: 500 }}>
-      <Accordion>
+      <Accordion {...props}>
         <Accordion.Item open={open}>
           <Accordion.Header onClick={() => setOpen(!open)}>
             Accordion header text
@@ -184,7 +210,7 @@ export const WithTable = {
 
     return (
       <div style={{ width: 500 }}>
-        <Accordion variant={props.variant} headingsize={props.headingSize}>
+        <Accordion {...props}>
           <Accordion.Item>
             <Accordion.Header>Table of people</Accordion.Header>
             <ContentWithTable />
@@ -200,6 +226,6 @@ export const WithTable = {
 
   args: {
     variant: "default",
-    headingSize: "large",
+    headingsize: "large",
   },
 };

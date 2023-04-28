@@ -8,7 +8,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: var(--a-spacing-2);
-  padding: 14px var(--a-spacing-3) var(--a-spacing-3);
+  padding: var(--a-spacing-3) var(--a-spacing-3);
   margin: 0;
   text-align: left;
   background: var(--ac-accordion-header-bg, var(--a-surface-transparent));
@@ -16,6 +16,18 @@
   border: none;
   border-bottom: 2px solid var(--ac-accordion-header-border, var(--a-border-divider));
   position: relative;
+}
+
+.navds-accordion--small .navds-accordion__header {
+  padding: var(--a-spacing-2) var(--a-spacing-3);
+}
+
+.navds-accordion--medium .navds-accordion__header {
+  padding: var(--a-spacing-3) var(--a-spacing-3);
+}
+
+.navds-accordion--large .navds-accordion__header {
+  padding: var(--a-spacing-4) var(--a-spacing-3);
 }
 
 .navds-accordion__item:first-child .navds-accordion__header {
