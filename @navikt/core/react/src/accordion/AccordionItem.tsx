@@ -1,5 +1,11 @@
 import cl from "clsx";
-import React, { createContext, forwardRef, useContext, useState } from "react";
+import React, {
+  createContext,
+  forwardRef,
+  useContext,
+  useRef,
+  useState,
+} from "react";
 import { AccordionContext } from "./AccordionContext";
 
 export interface AccordionItemProps
@@ -41,12 +47,25 @@ const AccordionItem: AccordionItemType = forwardRef(
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
     const context = useContext(AccordionContext);
 
+    const [_open, _setOpen] = useState(defaultOpen);
+    const shouldAnimate = useRef<boolean>(!(Boolean(open) || defaultOpen));
+    const handleOpen = () => {
+      if (open === undefined) {
+        const newOpen = !_open;
+        _setOpen(newOpen);
+        setInternalOpen(newOpen);
+      } else {
+        setInternalOpen(!open);
+      }
+      shouldAnimate.current = true;
+    };
+
     return (
       <div
         className={cl("navds-accordion__item", className, {
           "navds-accordion__item--open": open ?? internalOpen,
           "navds-accordion__item--neutral": context?.variant === "neutral",
-          "navds-accordion__item--no-anim": defaultOpen,
+          "navds-accordion__item--no-anim": !shouldAnimate.current,
         })}
         ref={ref}
         {...rest}
@@ -54,11 +73,7 @@ const AccordionItem: AccordionItemType = forwardRef(
         <AccordionItemContext.Provider
           value={{
             open: open ?? internalOpen,
-            toggleOpen: () => {
-              if (open === undefined) {
-                setInternalOpen((iOpen) => !iOpen);
-              }
-            },
+            toggleOpen: handleOpen,
           }}
         >
           <div>{children}</div>

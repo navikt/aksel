@@ -35,7 +35,7 @@ export default {
       control: { type: "select" },
     },
     headingsize: {
-      options: ["large", "medium", "small"],
+      options: ["large", "medium", "small", "xsmall"],
       control: { type: "select" },
     },
     size: {
