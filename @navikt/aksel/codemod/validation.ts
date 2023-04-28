@@ -1,10 +1,14 @@
 import chalk from "chalk";
 import { Command } from "commander";
 import isGitClean from "is-git-clean";
-import { getMigrationString, getMigrations } from "./migrations.js";
+import {
+  getMigrationString,
+  getMigrationNames,
+  getMigrationPath,
+} from "./migrations.js";
 
 export function validateMigration(str: string, program: Command) {
-  if (!getMigrations().includes(str)) {
+  if (!getMigrationNames().includes(str)) {
     program.error(
       chalk.red(
         `Migration <${str}> not found!\n${chalk.gray(
@@ -13,9 +17,22 @@ export function validateMigration(str: string, program: Command) {
       )
     );
   }
+  const path = getMigrationPath(str);
+  if (!path) {
+    program.error(
+      chalk.red(
+        `Code for migration <${str}> not found!\n${chalk.gray(
+          `\nContact creator (Aksel) to get it fixed!\n`
+        )}`
+      )
+    );
+  }
 }
 
 export function validateGit(options: any, program: Command) {
+  if (options.dryRun) {
+    return;
+  }
   if (options.force) {
     console.log(chalk.yellow("Forcing migration without git check"));
     return;

@@ -26,6 +26,11 @@ export function codemodCommand() {
       "-f, --force",
       "Forcibly run migrations without checking git-changes"
     )
+    .addHelpText(
+      "after",
+      `\nExample:
+  $ npx @navikt/aksel --dry-run v2-css`
+    )
     .action((str, options) => {
       validateMigration(str, program);
       validateGit(options, program);
