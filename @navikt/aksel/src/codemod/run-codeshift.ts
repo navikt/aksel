@@ -23,19 +23,14 @@ export async function runCodeshift(
     `./transforms/${getMigrationPath(input)}.js`
   );
 
-  console.log({
-    paths: codemodPath,
-    options,
-  });
-
-  const filepaths = fg.sync(getDefaultGlob(options?.ext), {
+  const filepaths = fg.sync([options.glob ?? getDefaultGlob(options?.ext)], {
     cwd: process.cwd(),
     ignore: ignoreNodeModules,
   });
 
-  console.log(filepaths);
+  console.log("\nRunning migration:", chalk.green("input"));
 
-  console.log("Running migration:", chalk.green("input"));
+  options?.glob && console.log(`Using glob: ${chalk.green(options.glob)}\n`);
 
   try {
     await jscodeshift.run(codemodPath, filepaths, {

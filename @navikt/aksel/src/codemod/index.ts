@@ -21,6 +21,10 @@ export function codemodCommand() {
     .argument("<migration>", "Migration name")
 
     .option("-e, --ext [extension]", "default: js,ts,jsx,tsx,css,scss,less")
+    .option(
+      "-g, --glob [glob]",
+      "Globbing pattern, overrides --ext! Run with 'noglob' if using zsh-terminal. "
+    )
     .option("-d, --dry-run", "Dry run, no changes will be made")
     .option("-p, --print", "Print transformed files")
     .option(
