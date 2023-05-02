@@ -1,5 +1,23 @@
 # @navikt/ds-react-internal
 
+## 2.9.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.9.3
+  - @navikt/ds-icons@2.9.3
+
+## 2.9.2
+
+### Patch Changes
+
+- [#1948](https://github.com/navikt/aksel/pull/1948) [`b1e18fd72`](https://github.com/navikt/aksel/commit/b1e18fd7249105f18354952b8f64d37108b4d730) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Timeline bruker nå norsk locale for Labels
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.9.2
+  - @navikt/ds-icons@2.9.2
+
 ## 2.9.1
 
 ### Patch Changes

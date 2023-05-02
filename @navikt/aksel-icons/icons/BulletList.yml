@@ -1,10 +1,11 @@
-name: List
+name: BulletList
 category: Statistics and math
 sub_category: Tabular
 keywords:
   - liste
   - rekkefølge
   - order
+  - punktliste
 variant: Stroke
-updated_at: 08.03.2023
+updated_at: 28.04.2023
 created_at: 07.03.2023

@@ -1,5 +1,16 @@
 # @navikt/aksel-icons
 
+## 2.9.3
+
+### Patch Changes
+
+- [#1950](https://github.com/navikt/aksel/pull/1950) [`c03d53d5a`](https://github.com/navikt/aksel/commit/c03d53d5aa2dc7f06a223d48069fa21ee39bb396) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Nye ikoner
+
+  - :tada: BulletList
+  - :tada: NumberList
+
+## 2.9.2
+
 ## 2.9.1
 
 ## 2.9.0
