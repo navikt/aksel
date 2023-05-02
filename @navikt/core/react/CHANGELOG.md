@@ -1,5 +1,79 @@
 # @navikt/ds-react
 
+## 2.9.3
+
+### Patch Changes
+
+- Updated dependencies [[`c03d53d5a`](https://github.com/navikt/aksel/commit/c03d53d5aa2dc7f06a223d48069fa21ee39bb396)]:
+  - @navikt/aksel-icons@2.9.3
+  - @navikt/ds-icons@2.9.3
+
+## 2.9.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.2
+  - @navikt/ds-icons@2.9.2
+
+## 2.9.1
+
+### Patch Changes
+
+- [#1944](https://github.com/navikt/aksel/pull/1944) [`1afdee453`](https://github.com/navikt/aksel/commit/1afdee453fbba20ec280dc868c8aa1ae2a92132d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - ExpansionCard støtter nå aria-labelledby
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.1
+  - @navikt/ds-icons@2.9.1
+
+## 2.9.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.0
+  - @navikt/ds-icons@2.9.0
+
+## 2.8.16
+
+### Patch Changes
+
+- [`ff001f2bc`](https://github.com/navikt/aksel/commit/ff001f2bcf5a1ff0580660a1680f4f8342e7fdff) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: ExpansionCard.Content sendte ikke className videre
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.16
+  - @navikt/ds-icons@2.8.16
+
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+- [#1929](https://github.com/navikt/aksel/pull/1929) [`284534246`](https://github.com/navikt/aksel/commit/28453424684e00d65fd8d204f1405f7ed6a82fbf) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bedre håndtering av visning for out-of-range dates i datepickers
+
+- Updated dependencies [[`dfe923582`](https://github.com/navikt/aksel/commit/dfe923582a57b41c77cfb4fbfa7c56be047ef2b0), [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865)]:
+  - @navikt/aksel-icons@2.8.15
+  - @navikt/ds-icons@2.8.15
+
+## 2.8.14
+
+### Patch Changes
+
+- [`f0d9a8853`](https://github.com/navikt/aksel/commit/f0d9a8853f56854a4049bd3f6cc34968e9d6c380) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fixes shown month on open in Datepicker/MonthPicker, better handling of out-of-range 'today'
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.14
+  - @navikt/ds-icons@2.8.14
+
+## 2.8.13
+
+### Patch Changes
+
+- Updated dependencies [[`ecd6241e5`](https://github.com/navikt/aksel/commit/ecd6241e5751519fbda800a5f41a613957dbf77c)]:
+  - @navikt/aksel-icons@2.8.13
+  - @navikt/ds-icons@2.8.13
+
 ## 2.8.12
 
 ### Patch Changes

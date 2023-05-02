@@ -1,5 +1,73 @@
 # @navikt/ds-react-internal
 
+## 2.9.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.9.3
+  - @navikt/ds-icons@2.9.3
+
+## 2.9.2
+
+### Patch Changes
+
+- [#1948](https://github.com/navikt/aksel/pull/1948) [`b1e18fd72`](https://github.com/navikt/aksel/commit/b1e18fd7249105f18354952b8f64d37108b4d730) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Timeline bruker nå norsk locale for Labels
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.9.2
+  - @navikt/ds-icons@2.9.2
+
+## 2.9.1
+
+### Patch Changes
+
+- Updated dependencies [[`1afdee453`](https://github.com/navikt/aksel/commit/1afdee453fbba20ec280dc868c8aa1ae2a92132d)]:
+  - @navikt/ds-react@2.9.1
+  - @navikt/ds-icons@2.9.1
+
+## 2.9.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.9.0
+  - @navikt/ds-icons@2.9.0
+
+## 2.8.16
+
+### Patch Changes
+
+- Updated dependencies [[`ff001f2bc`](https://github.com/navikt/aksel/commit/ff001f2bcf5a1ff0580660a1680f4f8342e7fdff)]:
+  - @navikt/ds-react@2.8.16
+  - @navikt/ds-icons@2.8.16
+
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+- Updated dependencies [[`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865), [`284534246`](https://github.com/navikt/aksel/commit/28453424684e00d65fd8d204f1405f7ed6a82fbf)]:
+  - @navikt/ds-react@2.8.15
+  - @navikt/ds-icons@2.8.15
+
+## 2.8.14
+
+### Patch Changes
+
+- Updated dependencies [[`f0d9a8853`](https://github.com/navikt/aksel/commit/f0d9a8853f56854a4049bd3f6cc34968e9d6c380)]:
+  - @navikt/ds-react@2.8.14
+  - @navikt/ds-icons@2.8.14
+
+## 2.8.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.8.13
+  - @navikt/ds-icons@2.8.13
+
 ## 2.8.12
 
 ### Patch Changes

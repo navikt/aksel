@@ -18,6 +18,10 @@
   margin-top: 0;
 }
 
+.navds-fieldset__legend {
+  padding: 0;
+}
+
 .navds-fieldset:disabled > .navds-fieldset__legend,
 .navds-fieldset:disabled > .navds-fieldset__description {
   opacity: 0.3;

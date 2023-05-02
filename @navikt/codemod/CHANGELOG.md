@@ -1,5 +1,25 @@
 # @navikt/ds-codemod
 
+## 2.9.3
+
+## 2.9.2
+
+## 2.9.1
+
+## 2.9.0
+
+## 2.8.16
+
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+## 2.8.14
+
+## 2.8.13
+
 ## 2.8.12
 
 ## 2.8.11

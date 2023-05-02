@@ -13,7 +13,7 @@ export interface TextareaProps
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Allowed character-count for content
-   * @note This is just a visual validator, you need to set actual character-limits if needed
+   * @note This is just a visual indicator! You will need to handle actual character-limits/validation if needed
    */
   maxLength?: number;
   /**

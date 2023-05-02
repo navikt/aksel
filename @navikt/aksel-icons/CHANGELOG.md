@@ -1,5 +1,41 @@
 # @navikt/aksel-icons
 
+## 2.9.3
+
+### Patch Changes
+
+- [#1950](https://github.com/navikt/aksel/pull/1950) [`c03d53d5a`](https://github.com/navikt/aksel/commit/c03d53d5aa2dc7f06a223d48069fa21ee39bb396) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Nye ikoner
+
+  - :tada: BulletList
+  - :tada: NumberList
+
+## 2.9.2
+
+## 2.9.1
+
+## 2.9.0
+
+## 2.8.16
+
+## 2.8.15
+
+### Patch Changes
+
+- [#1928](https://github.com/navikt/aksel/pull/1928) [`dfe923582`](https://github.com/navikt/aksel/commit/dfe923582a57b41c77cfb4fbfa7c56be047ef2b0) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Lagt til nye ikoner :tada:
+
+  - HandKnot.svg
+  - HandKnotFilled.svg
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+## 2.8.14
+
+## 2.8.13
+
+### Patch Changes
+
+- [#1921](https://github.com/navikt/aksel/pull/1921) [`ecd6241e5`](https://github.com/navikt/aksel/commit/ecd6241e5751519fbda800a5f41a613957dbf77c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner :tada:
+
 ## 2.8.12
 
 ## 2.8.11

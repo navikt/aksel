@@ -25,6 +25,7 @@
     "@navikt/codemod",
     "@navikt/icons",
     "@navikt/aksel-icons",
+    "@navikt/aksel",
     "@navikt/community/*",
     "examples/*",
     "aksel.nav.no"
@@ -132,6 +133,7 @@
       "examples",
       "esm",
       "cjs",
+      "dist",
       "**/codemod/**/*.js"
     ]
   },

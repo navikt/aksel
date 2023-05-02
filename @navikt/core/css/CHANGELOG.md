@@ -1,5 +1,37 @@
 # @navikt/ds-css
 
+## 2.9.3
+
+## 2.9.2
+
+## 2.9.1
+
+## 2.9.0
+
+### Minor Changes
+
+- [#1941](https://github.com/navikt/aksel/pull/1941) [`657b7f3f3`](https://github.com/navikt/aksel/commit/657b7f3f3e62c5ce3173e6c95a29fcd237ce7343) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: CSS nå tilgjengelig som separate filer
+
+  - Kan lastest fra CDN
+  - Tilbys nå i minified-versjoner
+  - Kommandoline: `npx @navikt/aksel css-imports` for å raskt komme i gang med CSS-optimalisering
+
+## 2.8.16
+
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+## 2.8.14
+
+### Patch Changes
+
+- [`f0d9a8853`](https://github.com/navikt/aksel/commit/f0d9a8853f56854a4049bd3f6cc34968e9d6c380) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fixes shown month on open in Datepicker/MonthPicker, better handling of out-of-range 'today'
+
+## 2.8.13
+
 ## 2.8.12
 
 ## 2.8.11

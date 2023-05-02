@@ -19,7 +19,8 @@
   "module": "./esm/index.js",
   "typings": "./esm/index.d.ts",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "files": [
     "/css",
@@ -39,8 +40,8 @@
     "build-pict": "svgr --silent --index-template index-template.js --out-dir src/pictograms pictograms"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^2.8.12",
-    "@navikt/ds-react": "^2.8.12",
+    "@navikt/ds-icons": "^2.9.3",
+    "@navikt/ds-react": "^2.9.3",
     "clsx": "^1.1.1"
   },
   "devDependencies": {
