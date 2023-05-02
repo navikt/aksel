@@ -1,6 +1,6 @@
 # Aksel command line interface
 
-CLI tool for managing CSS-imports and more when consuming Aksel-packages.
+CLI tool for managing CSS-imports and Codemods when consuming Aksel-packages.
 
 [Documentation](https://aksel.nav.no/preview/grunnleggende/kode/kommandolinje)
 
