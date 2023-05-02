@@ -173,7 +173,7 @@
   animation: fadeExpansionCard 250ms ease;
 }
 
-.navds-expansioncard--no-anim :where(.navds-expansioncard__content-inner) {
+.navds-expansioncard--no-animation :where(.navds-expansioncard__content-inner) {
   animation: none;
 }
 

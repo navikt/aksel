@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AccordionContent from "./AccordionContent";
 import AccordionHeader from "./AccordionHeader";
 import AccordionItem from "./AccordionItem";
-import { Accordion } from ".";
+import { Accordion, AccordionProps } from ".";
 import { Table } from "..";
 
 export default {
@@ -34,13 +34,16 @@ export default {
       options: ["default", "neutral"],
       control: { type: "select" },
     },
-    headingsize: {
+    headingSize: {
       options: ["large", "medium", "small", "xsmall"],
       control: { type: "select" },
     },
     size: {
       options: ["large", "medium", "small"],
       control: { type: "select" },
+    },
+    nItems: {
+      control: { type: "number" },
     },
   },
 };
@@ -98,11 +101,11 @@ const Item = (props) => {
 };
 
 export const Default = {
-  render: (props) => {
+  render: ({ nItems, ...props }) => {
     return (
       <div style={{ width: 500 }}>
         <Accordion {...props}>
-          {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
+          {[...Array(nItems ? nItems : 2)].map((_, y) => (
             <Item key={y} {...props} />
           ))}
         </Accordion>
@@ -111,25 +114,21 @@ export const Default = {
   },
 
   args: {
-    controlled: false,
+    controlled: "false",
     nItems: 2,
     variant: "default",
-    headingsize: "medium",
+    headingSize: "medium",
     size: "medium",
   },
 };
 
 export const DefaultOpen = {
-  render: (props) => {
+  render: ({ nItems, openItems, ...props }) => {
     return (
       <div style={{ width: 500 }}>
         <Accordion {...props}>
-          {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
-            <Item
-              key={y}
-              defaultOpen={props.openitems.includes(y)}
-              {...props}
-            />
+          {[...Array(nItems ? nItems : 2)].map((_, y) => (
+            <Item key={y} defaultOpen={openItems.includes(y)} {...props} />
           ))}
         </Accordion>
       </div>
@@ -137,11 +136,11 @@ export const DefaultOpen = {
   },
 
   args: {
-    openitems: [1, 2],
-    controlled: false,
+    openItems: [1, 2],
+    controlled: "false",
     nItems: 5,
     variant: "neutral",
-    headingsize: "large",
+    headingSize: "large",
   },
 };
 
@@ -247,6 +246,43 @@ export const WithTable = {
 
   args: {
     variant: "default",
-    headingsize: "large",
+    headingSize: "large",
+  },
+};
+
+const SingleHeaderAccordion = ({
+  size = "medium",
+  headingSize = "medium",
+}: Partial<AccordionProps>) => {
+  return (
+    <Accordion size={size} headingSize={headingSize}>
+      <Accordion.Item>
+        <Accordion.Header>{`${size} size + ${headingSize} heading`}</Accordion.Header>
+      </Accordion.Item>
+    </Accordion>
+  );
+};
+
+type sizesType = "large" | "medium" | "small";
+type headingSizesType = "large" | "medium" | "small" | "xsmall";
+const sizes: sizesType[] = ["large", "medium", "small"];
+const headingSizes: headingSizesType[] = ["large", "medium", "small", "xsmall"]; // enum this?!
+
+export const SizeAndHeadingSize = {
+  render: ({ ...props }) => {
+    return (
+      <div style={{ width: 500 }}>
+        {sizes.map((element) => (
+          <SingleHeaderAccordion size={element} {...props} />
+        ))}
+        {headingSizes.map((element) => (
+          <SingleHeaderAccordion headingSize={element} {...props} />
+        ))}
+      </div>
+    );
+  },
+
+  args: {
+    variant: "neutral",
   },
 };

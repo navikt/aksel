@@ -113,7 +113,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
             `navds-expansioncard--${size}`,
             {
               "navds-expansioncard--open": open ?? _open,
-              "navds-expansioncard--no-anim": !shouldFade.current,
+              "navds-expansioncard--no-animation": !shouldFade.current,
             }
           )}
           ref={ref}
