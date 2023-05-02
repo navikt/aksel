@@ -3,6 +3,7 @@ import figlet from "figlet";
 import chalk from "chalk";
 import { getMigrationString } from "./migrations.js";
 import { validateGit, validateMigration } from "./validation.js";
+import { runCodeshift } from "./run-codeshift.js";
 
 const program = new Command();
 
@@ -19,7 +20,7 @@ export function codemodCommand() {
     .description("Migrations for Aksel components and more")
     .argument("<migration>", "Migration name")
 
-    .option("-g, --glob [glob]", "Files to transform. Can be a globby!")
+    .option("-e, --ext [extension]", "default: js,ts,jsx,tsx,css,scss,less")
     .option("-d, --dry-run", "Dry run, no changes will be made")
     .option("-p, --print", "Print transformed files")
     .option(
@@ -34,8 +35,7 @@ export function codemodCommand() {
     .action((str, options) => {
       validateMigration(str, program);
       validateGit(options, program);
-
-      /* console.log({ str, options }); */
+      runCodeshift(str, options, program);
     });
 
   program.parse();
