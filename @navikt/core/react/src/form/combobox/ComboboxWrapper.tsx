@@ -22,13 +22,6 @@ const ComboboxWrapper = ({
 }: ComboboxWrapperProps) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-  function onFocusWrapper(e) {
-    const ref = wrapperRef.current;
-    if (ref?.contains(e.target) && !ref?.contains(e.relatedTarget)) {
-      toggleIsListOpen(true);
-    }
-  }
-
   function onBlurWrapper(e) {
     if (!wrapperRef.current?.contains(e.relatedTarget)) {
       toggleIsListOpen(false);
@@ -49,7 +42,6 @@ const ComboboxWrapper = ({
         }
       )}
       onBlur={onBlurWrapper}
-      onFocus={onFocusWrapper}
     >
       {children}
     </div>

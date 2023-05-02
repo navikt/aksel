@@ -42,7 +42,12 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
               addCustomOption(e);
             }}
             id={`${id}-combobox-new-option`}
-            className="navds-combobox__list-item navds-combobox__list-item__new-option"
+            className={cl(
+              "navds-combobox__list-item navds-combobox__list-item__new-option",
+              {
+                "navds-combobox__list-item--focus": filteredOptionsIndex === -1,
+              }
+            )}
             role="option"
             aria-selected={
               !selectedOptions.includes(value)
