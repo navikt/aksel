@@ -10,18 +10,18 @@ export const migrations: {
       path: "v1.0.0/preset/preset",
     },
     {
-      description: "Fixes breaking API-changes in <Pagination /> component",
+      description: "Fixes breaking API-changes for <Pagination /> component",
       value: "v1-pagination",
       path: "v1.0.0/pagination/pagination",
     },
     {
-      description: "Fixes breaking API-changes in <Tabs /> component",
+      description: "Fixes breaking API-changes for <Tabs /> component",
       value: "v1-tabs",
       path: "v1.0.0/tabs/tabs",
     },
     {
       description:
-        "Fixes breaking API-changes in <SpeechBubble /> (now <Chat/>) component",
+        "Fixes breaking API-changes for <SpeechBubble /> (now <Chat/>) component",
       value: "v1-chat",
       path: "v1.0.0/chat/chat",
     },
