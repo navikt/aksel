@@ -19,8 +19,6 @@ export function helpCommand() {
      `npx @navikt/aksel ${chalk.green("codemod")} ${chalk.gray("<migration>")}`
    )}
    ✔︎ Code-transformations for breaking changes when updating Aksel
-   ✔︎ Run ${chalk.cyan(
-     `npx @navikt/aksel ${chalk.green("codemod")} --help`
-   )} to get started!
+   ✔︎ Run with ${chalk.cyan(`${chalk.green("--help")}`)} to get started!
 `);
 }
