@@ -74,13 +74,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
-    const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
     const {
       toggleIsListOpen,
       isListOpen,
       filteredOptions,
       filteredOptionsIndex,
-      setFilteredOptionsIndex,
+      moveFocusUp,
+      moveFocusDown,
     } = useFilteredOptionsContext();
     const { customOptions, removeCustomOption, addCustomOption } =
       useCustomOptionsContext();
@@ -162,15 +162,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const handleKeyUp = (e) => {
-      const scrollToOption = (newIndex: number) => {
-        if (filteredOptionsRef.current) {
-          const child = filteredOptionsRef.current.children[newIndex];
-          const { top, bottom } = child.getBoundingClientRect();
-          const parentRect = filteredOptionsRef.current.getBoundingClientRect();
-          if (top < parentRect.top || bottom > parentRect.bottom)
-            child.scrollIntoView({ block: "nearest" });
-        }
-      };
       switch (e.key) {
         case "Escape":
           handleClear({ trigger: e.key, event: e });
@@ -178,19 +169,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           break;
         case "ArrowDown": {
           e.preventDefault();
-          const newIndex = Math.min(
-            filteredOptionsIndex + 1,
-            filteredOptions.length - 1
-          );
-          setFilteredOptionsIndex(newIndex);
-          scrollToOption(newIndex);
+          moveFocusDown();
           break;
         }
         case "ArrowUp": {
           e.preventDefault();
-          const newIndex = Math.max(0, filteredOptionsIndex - 1);
-          setFilteredOptionsIndex(newIndex);
-          scrollToOption(newIndex);
+          moveFocusUp();
           break;
         }
         case "Enter":
@@ -311,7 +295,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           </div>
           <FilteredOptions
             id={id}
-            ref={filteredOptionsRef}
             toggleOption={toggleOption}
             focusInput={focusInput}
             value={value}

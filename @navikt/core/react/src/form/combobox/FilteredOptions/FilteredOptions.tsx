@@ -17,13 +17,18 @@ interface FilteredOptionsProps {
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
   ({ id, toggleOption, value, addCustomOption }, ref) => {
-    const { isListOpen, filteredOptions, filteredOptionsIndex, isValueNew } =
-      useFilteredOptionsContext();
+    const {
+      isListOpen,
+      filteredOptions,
+      filteredOptionsIndex,
+      filteredOptionsRef,
+      isValueNew,
+    } = useFilteredOptionsContext();
     const { selectedOptions } = useSelectedOptionsContext();
 
     return (
       <ul
-        ref={ref}
+        ref={filteredOptionsRef}
         className={cl("navds-combobox__list", {
           "navds-combobox__list--closed": !isListOpen,
         })}

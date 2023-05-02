@@ -4,6 +4,8 @@ import React, {
   useMemo,
   createContext,
   useContext,
+  useCallback,
+  useRef,
 } from "react";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../inputContext";
@@ -17,6 +19,7 @@ const isValueInList = (value, list) =>
   );
 
 type FilteredOptionsContextType = {
+  filteredOptionsRef: React.RefObject<HTMLUListElement>;
   filteredOptionsIndex: number;
   setFilteredOptionsIndex: (index: number) => void;
   isListOpen: boolean;
@@ -27,6 +30,8 @@ type FilteredOptionsContextType = {
   toggleIsListOpen: (newState?: boolean) => void;
   currentOption: string;
   resetFilteredOptionsIndex: () => void;
+  moveFocusUp: () => void;
+  moveFocusDown: () => void;
 };
 const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
   {} as FilteredOptionsContextType
@@ -34,6 +39,7 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
 
 export const FilteredOptionsProvider = ({ children, value: props }) => {
   const { isExternalListOpen, options } = props;
+  const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
   const { value } = useInputContext();
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState(0);
   const [isInternalListOpen, setInternalListOpen] = useState(false);
@@ -75,7 +81,33 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setFilteredOptionsIndex(0);
   };
 
+  const scrollToOption = useCallback((newIndex: number) => {
+    if (filteredOptionsRef.current) {
+      const child = filteredOptionsRef.current.children[newIndex + 1];
+      const { top, bottom } = child.getBoundingClientRect();
+      const parentRect = filteredOptionsRef.current.getBoundingClientRect();
+      if (top < parentRect.top || bottom > parentRect.bottom)
+        child.scrollIntoView({ block: "nearest" });
+    }
+  }, []);
+
+  const moveFocusUp = useCallback(() => {
+    const newIndex = Math.max(0, filteredOptionsIndex - 1);
+    setFilteredOptionsIndex(newIndex);
+    scrollToOption(newIndex);
+  }, [filteredOptionsIndex, scrollToOption])
+
+  const moveFocusDown = useCallback(() => {
+    const newIndex = Math.min(
+      filteredOptionsIndex + 1,
+      filteredOptionsMemo.length - 1
+    );
+    setFilteredOptionsIndex(newIndex);
+    scrollToOption(newIndex);
+  }, [filteredOptionsMemo, filteredOptionsIndex, scrollToOption])
+
   const filteredOptionsState = {
+    filteredOptionsRef,
     filteredOptionsIndex,
     setFilteredOptionsIndex,
     isListOpen,
@@ -86,6 +118,8 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     toggleIsListOpen,
     currentOption,
     resetFilteredOptionsIndex,
+    moveFocusUp,
+    moveFocusDown,
   };
 
   return (
