@@ -18,10 +18,13 @@ export async function runCodeshift(
   options: any,
   program: Command
 ) {
-  const codemodPath = getMigrationPath(input);
+  const codemodPath = path.join(
+    __dirname,
+    `./transforms/${getMigrationPath(input)}.js`
+  );
 
   console.log({
-    paths: path.join(__dirname, `./transforms/${codemodPath}.js`),
+    paths: codemodPath,
     options,
   });
 
