@@ -19,11 +19,13 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Decides startingpoint in timeline.
    * Defaults to earliest date among the timeline periods.
+   * @note Using this disables use of ZoomButtons. You will need to control zooming yourself.
    */
   startDate?: Date;
   /**
    * Decides end-date for timeline.
    * Defaults to the latest date among the timeline periods.
+   * @note Using this disables use of ZoomButtons. You will need to control zooming yourself.
    */
   endDate?: Date;
   /**
@@ -97,12 +99,20 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     const initialEndDate = endOfDay(useLatestDate({ endDate, rows }));
     const processedRows = useTimelineRows(
       rowsRaw,
-      start,
-      endInclusive,
+      startDate ?? start,
+      endDate ?? endInclusive,
       direction
     );
 
     const handleZoomChange = (zoomStart: Date) => {
+      if (startDate || endDate) {
+        if (process.env.NODE_ENV !== "production") {
+          console.warn(
+            "Zooming is not supported when startDate or endDate is set"
+          );
+        }
+        return;
+      }
       if (direction === "left") {
         if (isSameDay(zoomStart, start)) {
           setStart(initialStartDate);
@@ -153,8 +163,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     return (
       <TimelineContext.Provider
         value={{
-          startDate: start,
-          endDate: endInclusive,
+          startDate: startDate ?? start,
+          endDate: endDate ?? endInclusive,
           direction: direction,
           setStart: (d) => handleZoomChange(d),
           setEndInclusive: (d) => setEndInclusive(d),

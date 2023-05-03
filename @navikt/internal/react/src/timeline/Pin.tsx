@@ -44,6 +44,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             onClick={() => setOpen(!open)}
             aria-label={`pin:${format(date, "dd.MM.yyyy")}`}
             aria-expanded={open}
+            type="button"
           />
         </div>
         {children && (
