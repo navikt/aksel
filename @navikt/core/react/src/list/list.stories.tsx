@@ -1,9 +1,9 @@
 import {
-  BabyChangingRoom,
-  Braille,
-  Cognition,
-  Refresh,
-} from "@navikt/ds-icons";
+  BabyWrappedIcon,
+  BrailleIcon,
+  HeadHeartIcon,
+  RecycleIcon,
+} from "@navikt/aksel-icons";
 import { Meta } from "@storybook/react";
 import React from "react";
 import { List } from "..";
@@ -97,20 +97,20 @@ export const Icons = {
       <List>
         <List.Item
           title="Lorem Ipsum Dolor Sit Amet"
-          icon={<Braille aria-hidden />}
+          icon={<BrailleIcon aria-hidden />}
         >
           Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
         <List.Item
           title="Consectetur Adipiscing Elit"
-          icon={<Cognition aria-hidden />}
+          icon={<HeadHeartIcon aria-hidden />}
         >
           Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
-        <List.Item icon={<BabyChangingRoom aria-hidden />}>
+        <List.Item icon={<BabyWrappedIcon aria-hidden />}>
           Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
-        <List.Item icon={<Refresh aria-hidden />}>
+        <List.Item icon={<RecycleIcon aria-hidden />}>
           Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
       </List>
