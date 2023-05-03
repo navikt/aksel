@@ -18,7 +18,7 @@ import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   tema: Omit<AkselTemaT, "ansvarlig"> & {
-    ansvarlig: { title: string; roller: string[] };
+    ansvarlig?: { title: string; roller: string[] };
   };
 }>;
 
@@ -169,7 +169,7 @@ const Page = ({ tema: page }: PageProps["props"]) => {
                   )}
                   aria-hidden={!hasAnsvarlig}
                 >
-                  <Detail as="div" size="small" className="mb-2" uppercase>
+                  <Detail as="div" className="mb-2" uppercase>
                     Ansvarlig for tema
                   </Detail>
                   <div className="grid">

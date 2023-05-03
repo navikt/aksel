@@ -56,6 +56,7 @@ export const ZoomButton: ZoomButtonType = forwardRef(
     return (
       <Detail as="li">
         <button
+          type="button"
           aria-label={
             !currentZoom
               ? `Zoom tidslinjen ${format(
