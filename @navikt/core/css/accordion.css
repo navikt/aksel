@@ -14,9 +14,9 @@
   background: var(--ac-accordion-header-bg, var(--a-surface-transparent));
   cursor: pointer;
   border: none;
+  position: relative;
   box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent),
     inset 0 -2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider)), inset 0 2px 0 0 var(--a-transparent);
-  position: relative;
 }
 
 .navds-accordion--small .navds-accordion__header {
@@ -37,7 +37,7 @@
     inset 0 -2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider));
 }
 
-.navds-accordion__item:first-child.navds-accordion__item--open :where(.navds-accordion__header) {
+.navds-accordion__item:first-child:where(.navds-accordion__item--open) :where(.navds-accordion__header) {
   box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent), inset 0 -2px 0 0 var(--a-transparent),
     inset 0 2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider));
 }
@@ -98,9 +98,7 @@
 }
 
 .navds-accordion__item--open :where(.navds-accordion__header) {
-  border: none;
-  box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent),
-    inset 0 -2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider)), inset -2px 0 0 0 var(--a-transparent);
+  box-shadow: none;
 }
 
 .navds-accordion__content {
