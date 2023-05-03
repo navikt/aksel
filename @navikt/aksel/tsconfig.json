@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "Node16",
+    "module": "CommonJS",
     "sourceMap": false,
     "esModuleInterop": true,
     "target": "es2015",
@@ -8,9 +8,10 @@
     "declaration": false,
     "types": ["node", "jest"],
     "outDir": "dist",
-    "rootDir": "./",
-    "resolveJsonModule": true
+    "rootDir": "./src",
+    "resolveJsonModule": true,
+    "allowJs": true
   },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules", "dist", "jest.config.js", "__tests__"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "jest.config.js", "**/tests/**"]
 }
