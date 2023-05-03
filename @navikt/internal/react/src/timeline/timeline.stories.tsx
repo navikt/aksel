@@ -103,15 +103,9 @@ const row2 = [
 ];
 
 export const Default = () => {
-  const [start, setStart] = useState(new Date("Jan 1 2022"));
-  const [end, setEnd] = useState(new Date("Jan 1 2023"));
   return (
     <div style={{ width: "80vw" }}>
-      <button onClick={() => setStart(new Date("Jan 1 2022"))}>as</button>
-      <button onClick={() => setStart(new Date("Jan 1 2021"))}>as</button>
-      <button onClick={() => setEnd(new Date("Jan 1 2026"))}>as</button>
-      <button onClick={() => setEnd(new Date("Jan 1 2027"))}>as</button>
-      <Timeline startDate={start} endDate={end}>
+      <Timeline>
         <Timeline.Row label="Row 1" icon={<SuccessFilled aria-hidden />}>
           {row1.map((p: any, i) => {
             return (
