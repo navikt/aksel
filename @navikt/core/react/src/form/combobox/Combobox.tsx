@@ -215,7 +215,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     }, [focusInput, selectedOptions, prevSelectedOptions]);
 
     function getActiveDescendantId() {
-      if (filteredOptionsIndex === -1) {
+      if (filteredOptionsIndex === null) {
+        return undefined;
+      } else if (filteredOptionsIndex === -1) {
         return `${id}-combobox-new-option`;
       } else {
         return `${id}-option-${filteredOptions[filteredOptionsIndex]}`;
