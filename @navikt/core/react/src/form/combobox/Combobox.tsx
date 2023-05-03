@@ -116,7 +116,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const toggleOption = useCallback(
       (event) => {
         const clickedOption = event?.target?.textContent;
-        const focusedOption = filteredOptions[filteredOptionsIndex];
+        const focusedOption =
+          filteredOptionsIndex && filteredOptions[filteredOptionsIndex];
         // toggle selected option on click
         if (clickedOption) {
           if (selectedOptions.includes(clickedOption)) {

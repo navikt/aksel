@@ -20,7 +20,7 @@ const isValueInList = (value, list) =>
 
 type FilteredOptionsContextType = {
   filteredOptionsRef: React.RefObject<HTMLUListElement>;
-  filteredOptionsIndex: number;
+  filteredOptionsIndex: number | null;
   setFilteredOptionsIndex: (index: number) => void;
   isListOpen: boolean;
   setInternalListOpen: (open: boolean) => void;
@@ -28,7 +28,7 @@ type FilteredOptionsContextType = {
   setFilteredOptions: (options: string[]) => void;
   isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
-  currentOption: string;
+  currentOption: string | null;
   resetFilteredOptionsIndex: () => void;
   moveFocusUp: () => void;
   moveFocusDown: () => void;
@@ -124,7 +124,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     const newIndex = Math.max(getMinimumIndex(), filteredOptionsIndex - 1);
     setFilteredOptionsIndex(newIndex);
     scrollToOption(newIndex);
-  }, [filteredOptionsIndex, getMinimumIndex, scrollToOption]);
+  }, [filteredOptionsIndex, getMinimumIndex, scrollToOption, toggleIsListOpen]);
 
   const moveFocusDown = useCallback(() => {
     if (filteredOptionsIndex === null || !isListOpen) {
@@ -144,6 +144,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     getMinimumIndex,
     isListOpen,
     scrollToOption,
+    toggleIsListOpen,
   ]);
 
   const filteredOptionsState = {
