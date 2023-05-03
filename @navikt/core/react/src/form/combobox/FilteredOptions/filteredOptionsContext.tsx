@@ -48,18 +48,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
   const { customOptions } = useCustomOptionsContext();
 
-  useEffect(() => {
-    return () => setFilteredOptionsIndex(null);
-  }, [setFilteredOptionsIndex]);
-
-  useEffect(() => {
-    if (value) {
-      toggleIsListOpen(true);
-    } else {
-      toggleIsListOpen(false);
-    }
-  }, [value]);
-
   const filteredOptionsMemo = useMemo(() => {
     const opts = [...customOptions, ...options];
     setFilteredOptionsIndex(null);
@@ -74,6 +62,19 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const isListOpen = useMemo(() => {
     return isExternalListOpen ?? isInternalListOpen;
   }, [isExternalListOpen, isInternalListOpen]);
+
+  const toggleIsListOpen = useCallback((newState?: boolean) => {
+    setFilteredOptionsIndex(null);
+    setInternalListOpen((oldState) => newState ?? !oldState);
+  }, []);
+
+  useEffect(() => {
+    if (value) {
+      toggleIsListOpen(true);
+    } else {
+      toggleIsListOpen(false);
+    }
+  }, [value, toggleIsListOpen]);
 
   const currentOption = useMemo(() => {
     if (!filteredOptionsIndex) {
@@ -94,10 +95,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     () => (isValueNew ? -1 : 0),
     [isValueNew]
   );
-
-  const toggleIsListOpen = (newState?: boolean) => {
-    setInternalListOpen((oldState) => newState ?? !oldState);
-  };
 
   const resetFilteredOptionsIndex = () => {
     setFilteredOptionsIndex(getMinimumIndex());
