@@ -1,5 +1,17 @@
 # @navikt/ds-react-internal
 
+## 2.9.5
+
+### Patch Changes
+
+- [#1953](https://github.com/navikt/aksel/pull/1953) [`7019898c0`](https://github.com/navikt/aksel/commit/7019898c0948cf18e788800c5b2d1d547958cde9) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Timeline håndterte ikke startDate/endDate-endringer riktig
+
+  - All bruk av `<button>` i Timeline har nå `type="button"`
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.9.5
+  - @navikt/ds-icons@2.9.5
+
 ## 2.9.4
 
 ### Patch Changes

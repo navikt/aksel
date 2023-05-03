@@ -1,5 +1,7 @@
 # @navikt/ds-codemod
 
+## 2.9.5
+
 ## 2.9.4
 
 ### Patch Changes
