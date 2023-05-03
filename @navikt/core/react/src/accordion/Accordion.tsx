@@ -52,7 +52,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           size,
         }}
       >
-        <section
+        <div
           {...rest}
           className={cl(
             "navds-accordion",
