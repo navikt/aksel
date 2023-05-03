@@ -16,7 +16,7 @@
   border: none;
   position: relative;
   box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent),
-    inset 0 2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider)), inset 0 -2px 0 0 var(--a-transparent);
+    inset 0 2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider));
 }
 
 .navds-accordion--small .navds-accordion__header {
@@ -99,12 +99,12 @@
 }
 
 .navds-accordion__item--open :where(.navds-accordion__header) {
-  box-shadow: none;
+  box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent),
+    inset 0 2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider));
 }
 
 .navds-accordion__content {
   padding: 0 var(--a-spacing-3) var(--a-spacing-5) var(--a-spacing-11);
-  border-bottom: 2px solid var(--ac-accordion-content-border, var(--a-border-divider));
   animation: fadeAccordionContent 250ms ease;
 }
 
