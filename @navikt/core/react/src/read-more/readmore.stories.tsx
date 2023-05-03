@@ -26,8 +26,11 @@ export const Default = {
         header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
         size={props.size}
       >
-        Command station, this is ST 321. Code Clearance Blue. We're starting our
-        approach. Deactivate the security shield.
+        <div style={{ maxWidth: 300 }}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia,
+          tempore corporis exercitationem minus dignissimos eius aspernatur
+          fugiat iusto.
+        </div>
       </ReadMore>
     );
   },
