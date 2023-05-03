@@ -1,4 +1,4 @@
-import { SuccessFilled } from "@navikt/ds-icons";
+import { CheckmarkIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Label, OverridableComponent } from "..";
@@ -74,10 +74,9 @@ export const StepComponent: OverridableComponent<
         }}
       >
         {completed ? (
-          <SuccessFilled
-            aria-hidden
-            className="navds-stepper__circle navds-stepper__circle--success"
-          />
+          <span className="navds-stepper__circle navds-stepper__circle--success">
+            <CheckmarkIcon aria-hidden />
+          </span>
         ) : (
           <Label className="navds-stepper__circle" as="span" aria-hidden="true">
             {unsafe_index + 1}
