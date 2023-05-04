@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 2.9.7
+
+### Patch Changes
+
+- :bug: CheckmarkIcon
+
 ## 2.9.6
 
 ### Patch Changes

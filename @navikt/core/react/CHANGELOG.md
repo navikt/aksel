@@ -1,5 +1,13 @@
 # @navikt/ds-react
 
+## 2.9.7
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.7
+  - @navikt/ds-icons@2.9.7
+
 ## 2.9.6
 
 ### Patch Changes
