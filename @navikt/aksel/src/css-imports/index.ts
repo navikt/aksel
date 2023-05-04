@@ -1,17 +1,13 @@
-import { StyleMappings } from "@navikt/ds-css/config/_mappings.js";
-import { generateImportOutput } from "./generate-output.js";
-import { AnswersT, ComponentPrefix } from "./config.js";
+import { StyleMappings } from "@navikt/ds-css/config/_mappings";
+import { generateImportOutput } from "./generate-output";
+import { AnswersT, ComponentPrefix } from "./config";
 
-import { inquiry } from "./inquiry.js";
+import { inquiry } from "./inquiry";
 import { exec } from "child_process";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-import { getAllVersions } from "./get-version.js";
-import chalk from "chalk";
-import { getDirectories } from "./get-directories.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import chalk from "chalk";
+import { getDirectories } from "./get-directories";
+import { getAllVersions } from "./get-version";
 
 export async function cssImportsCommand() {
   let answers: AnswersT = {
