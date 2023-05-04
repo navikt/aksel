@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 2.9.6
+
+### Patch Changes
+
+- [#1956](https://github.com/navikt/aksel/pull/1956) [`8c8559009`](https://github.com/navikt/aksel/commit/8c8559009982911bc4402913656ba4cc6a223dd1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset CheckmarkCircleIcon
+
 ## 2.9.5
 
 ## 2.9.4
