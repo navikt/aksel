@@ -144,6 +144,25 @@ export const DefaultOpen = {
   },
 };
 
+export const Variants = {
+  render: () => {
+    return (
+      <div style={{ width: 500 }} className="colgap">
+        <Accordion>
+          {[...Array(2)].map((_, y) => (
+            <Item key={y} defaultOpen />
+          ))}
+        </Accordion>
+        <Accordion variant="neutral">
+          {[...Array(2)].map((_, y) => (
+            <Item key={y} defaultOpen />
+          ))}
+        </Accordion>
+      </div>
+    );
+  },
+};
+
 export const Controlled = (props) => {
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -167,21 +186,6 @@ export const Controlled = (props) => {
     </div>
   );
 };
-
-export const Uncontrolled = () => (
-  <div style={{ width: 500 }}>
-    <Accordion>
-      <Accordion.Item>
-        <Accordion.Header>Accordion header text</Accordion.Header>
-        <Content />
-      </Accordion.Item>
-      <Accordion.Item>
-        <Accordion.Header>Accordion header text</Accordion.Header>
-        <Content />
-      </Accordion.Item>
-    </Accordion>
-  </div>
-);
 
 export const WithTable = {
   render: (props) => {
@@ -258,6 +262,11 @@ const SingleHeaderAccordion = ({
     <Accordion size={size} headingSize={headingSize}>
       <Accordion.Item>
         <Accordion.Header>{`${size} size + ${headingSize} heading`}</Accordion.Header>
+        <Accordion.Content>a</Accordion.Content>
+      </Accordion.Item>
+      <Accordion.Item>
+        <Accordion.Header>{`${size} size + ${headingSize} heading`}</Accordion.Header>
+        <Accordion.Content>a</Accordion.Content>
       </Accordion.Item>
     </Accordion>
   );
@@ -268,13 +277,26 @@ type headingSizesType = "large" | "medium" | "small" | "xsmall";
 const sizes: sizesType[] = ["large", "medium", "small"];
 const headingSizes: headingSizesType[] = ["large", "medium", "small", "xsmall"]; // enum this?!
 
-export const SizeAndHeadingSize = {
+export const Size = {
   render: ({ ...props }) => {
     return (
-      <div style={{ width: 500 }}>
+      <div style={{ width: 500 }} className="colgap">
         {sizes.map((element) => (
           <SingleHeaderAccordion size={element} {...props} />
         ))}
+      </div>
+    );
+  },
+
+  args: {
+    variant: "neutral",
+  },
+};
+
+export const HeadingSize = {
+  render: ({ ...props }) => {
+    return (
+      <div style={{ width: 500 }} className="colgap">
         {headingSizes.map((element) => (
           <SingleHeaderAccordion headingSize={element} {...props} />
         ))}
