@@ -47,13 +47,13 @@ const Items = (icon?: boolean, both?: boolean) => (
         <>{icon ? <EnvelopeOpenIcon /> : "Leste"}</>
       )}
     </ToggleGroup.Item>
-    <ToggleGroup.Item value="InboxUpIcont">
+    <ToggleGroup.Item value="sendt">
       {both ? (
         <>
-          <InboxUpIcon /> InboxUpIconte
+          <InboxUpIcon /> Sendt
         </>
       ) : (
-        <>{icon ? <InboxUpIcon /> : "InboxUpIconte"}</>
+        <>{icon ? <InboxUpIcon /> : "Sendt"}</>
       )}
     </ToggleGroup.Item>
   </>
