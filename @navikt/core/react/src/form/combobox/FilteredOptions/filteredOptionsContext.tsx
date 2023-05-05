@@ -79,7 +79,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, [value, toggleIsListOpen]);
 
   const currentOption = useMemo(() => {
-    if (!filteredOptionsIndex) {
+    if (filteredOptionsIndex === null) {
       return null;
     }
     if (filteredOptionsIndex === -1) {

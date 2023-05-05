@@ -75,6 +75,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const {
+      currentOption,
       toggleIsListOpen,
       isListOpen,
       filteredOptions,
@@ -116,8 +117,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const toggleOption = useCallback(
       (event) => {
         const clickedOption = event?.target?.textContent;
-        const focusedOption =
-          filteredOptionsIndex && filteredOptions[filteredOptionsIndex];
+        const focusedOption = currentOption;
         // toggle selected option on click
         if (clickedOption) {
           if (selectedOptions.includes(clickedOption)) {
@@ -139,8 +139,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           addSelectedOption(focusedOption);
       },
       [
+        currentOption,
         filteredOptions,
-        filteredOptionsIndex,
         selectedOptions,
         isListOpen,
         value,
