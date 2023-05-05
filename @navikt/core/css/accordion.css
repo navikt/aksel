@@ -69,7 +69,7 @@
 .navds-accordion__header:hover > .navds-accordion__header-chevron {
   background-color: var(--ac-accordion-header-bg-hover, var(--a-surface-hover));
   border-radius: var(--a-border-radius-medium);
-  height: 24px;
+  height: 1.5rem;
   align-self: center;
 }
 
