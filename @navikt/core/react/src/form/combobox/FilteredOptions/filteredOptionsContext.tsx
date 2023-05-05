@@ -88,13 +88,10 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     return filteredOptions[filteredOptionsIndex];
   }, [filteredOptions, filteredOptionsIndex, value]);
 
-  const isValueNew = useMemo(() => {
-    const isNew = Boolean(value) && !isValueInList(value, filteredOptions);
-    if (isNew) {
-      setFilteredOptionsIndex(-1); // -1 indicates the "add new"-option should have focus
-    }
-    return isNew;
-  }, [value, filteredOptions]);
+  const isValueNew = useMemo(
+    () => Boolean(value) && !isValueInList(value, filteredOptions),
+    [value, filteredOptions]
+  );
 
   const getMinimumIndex = useCallback(
     () => (isValueNew ? -1 : 0),
