@@ -2,9 +2,13 @@
   position: relative;
 }
 
+/*************************
+ * Header *
+ *************************/
 .navds-accordion__header {
+  --__ac-accordion-header-shadow-color: var(--ac-accordion-header-border, var(--a-border-divider));
   --__ac-accordion-header-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent),
-    inset 0 2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider));
+    inset 0 2px 0 0 var(--__ac-accordion-header-shadow-color);
 
   width: 100%;
   display: flex;
@@ -21,6 +25,12 @@
   box-shadow: var(--__ac-accordion-header-shadow);
 }
 
+.navds-accordion__header:hover {
+  background-color: var(--ac-accordion-header-bg-hover, var(--a-surface-hover));
+  text-decoration: underline;
+  color: var(--ac-accordion-header-text-hover, inherit);
+}
+
 .navds-accordion--small .navds-accordion__header {
   padding: var(--a-spacing-2) var(--a-spacing-3);
 }
@@ -33,18 +43,22 @@
   padding: var(--a-spacing-4) var(--a-spacing-3);
 }
 
-.navds-accordion__item:last-child :where(.navds-accordion__header) {
-  box-shadow: var(--__ac-accordion-header-shadow), inset 0 -2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider));
+.navds-accordion__item:last-child > :where(.navds-accordion__header) {
+  box-shadow: var(--__ac-accordion-header-shadow), inset 0 -2px 0 0 var(--__ac-accordion-header-shadow-color);
 }
 
 .navds-accordion__item:last-child:where(.navds-accordion__item--open) :where(.navds-accordion__header) {
   box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent), inset 0 2px 0 0 var(--a-transparent),
-    inset 0 2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider));
+    inset 0 2px 0 0 var(--__ac-accordion-header-shadow-color);
 }
 
 .navds-accordion__item:last-child:where(.navds-accordion__item--open) {
   box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent), inset 0 2px 0 0 var(--a-transparent),
-    inset 0 -2px 0 0 var(--ac-accordion-header-border, var(--a-border-divider));
+    inset 0 -2px 0 0 var(--__ac-accordion-header-shadow-color);
+}
+
+.navds-accordion__item--open > :where(.navds-accordion__header) {
+  box-shadow: var(--__ac-accordion-header-shadow);
 }
 
 .navds-accordion__header:focus-visible {
@@ -61,76 +75,74 @@
   }
 }
 
-.navds-accordion__header:hover {
-  color: var(--ac-accordion-header-text-hover, inherit);
-  background: var(--ac-accordion-header-bg-hover, var(--a-surface-neutral-subtle-hover));
-  text-decoration: underline;
-}
-
-.navds-accordion__header:hover > .navds-accordion__header-chevron {
-  background-color: var(--ac-accordion-header-bg-hover, var(--a-surface-hover));
-  border-radius: var(--a-border-radius-medium);
-  height: 1.5rem;
-  align-self: center;
-}
-
-.navds-accordion__header > .navds-accordion__icon-wrapper {
-  display: grid;
-  place-content: center;
-  border-radius: var(--ac-expansioncard-button-border-radius, var(--a-border-radius-medium));
-  height: var(--a-spacing-6);
-  width: var(--a-spacing-6);
-  font-size: var(--a-font-size-heading-medium);
-  align-self: center;
-}
-
-.navds-accordion__header:hover > .navds-accordion__icon-wrapper {
-  background-color: var(--ac-accordion-header-bg-hover, var(--a-surface-neutral-subtle-hover));
-}
-
-:where(.navds-accordion__header):hover {
-  background-color: var(--ac-accordion-header-bg-hover, var(--a-surface-hover));
-}
-
 .navds-accordion__header-content {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.navds-accordion__item--open.navds-accordion__item--neutral {
-  background-color: var(--ac-accordion-header-bg-open, var(--ac-accordion-item-bg-open, var(--a-surface-neutral-subtle-hover)));
+/*************************
+ * Icon *
+ *************************/
+.navds-accordion__icon-wrapper {
+  display: grid;
+  place-content: center;
+  border-radius: var(--a-border-radius-medium);
+  height: var(--a-spacing-6);
+  width: var(--a-spacing-6);
+  align-self: center;
 }
 
-.navds-accordion__item--open :where(.navds-accordion__header) {
-  box-shadow: var(--__ac-accordion-header-shadow);
-}
-
-.navds-accordion__content {
-  padding: 0 var(--a-spacing-3) var(--a-spacing-5) var(--a-spacing-11);
-  animation: fadeAccordionContent 250ms ease;
-}
-
-.navds-accordion__item--open .navds-accordion__header:hover + .navds-accordion__content {
-  border-color: var(--ac-accordion-content-border-open, var(--a-border-default));
+.navds-accordion__header:hover > .navds-accordion__icon-wrapper {
+  background-color: var(--ac-accordion-header-icon-bg-hover, var(--a-surface-neutral-subtle-hover));
 }
 
 .navds-accordion__header-chevron {
+  border-radius: var(--a-border-radius-medium);
   font-size: 1.5rem;
   height: 1.75rem;
   flex-shrink: 0;
   transition: transform 150ms ease-in-out;
+  align-self: center;
 }
 
-:where(.navds-accordion__header):hover :where(.navds-accordion__header-chevron) {
+:where(.navds-accordion__header):hover > :where(.navds-accordion__icon-wrapper) > :where(.navds-accordion__header-chevron) {
   transform: translateY(1px);
 }
 
-.navds-accordion__item--open :where(.navds-accordion__header-chevron) {
+.navds-accordion__item--open
+  > :where(.navds-accordion__header)
+  > :where(.navds-accordion__icon-wrapper)
+  > :where(.navds-accordion__header-chevron) {
   transform: translateY(0) rotate(-180deg);
 }
 
-.navds-accordion__item--open :where(.navds-accordion__header):hover :where(.navds-accordion__header-chevron) {
+.navds-accordion__item--open
+  > :where(.navds-accordion__header):hover
+  > :where(.navds-accordion__icon-wrapper)
+  > :where(.navds-accordion__header-chevron) {
   transform: translateY(-1px) rotate(-180deg);
+}
+
+/*************************
+ * Variant/Default *
+ *************************/
+.navds-accordion__item--open {
+  background-color: var(--ac-accordion-item-bg-open, var(--a-transparent));
+}
+
+/*************************
+ * Variant/Neutral *
+ *************************/
+.navds-accordion__item--open.navds-accordion__item--neutral {
+  background-color: var(--ac-accordion-neutral-item-bg-open, var(--a-surface-neutral-subtle));
+}
+
+/*************************
+ * Content *
+ *************************/
+.navds-accordion__content {
+  padding: 0 var(--a-spacing-3) var(--a-spacing-5) var(--a-spacing-11);
+  animation: fadeAccordionContent 250ms ease;
 }
 
 .navds-accordion__content--closed {
