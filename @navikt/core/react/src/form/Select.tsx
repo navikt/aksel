@@ -1,6 +1,7 @@
 import React, { forwardRef, SelectHTMLAttributes } from "react";
 import cl from "clsx";
-import { Expand } from "@navikt/ds-icons";
+
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong, Label, ErrorMessage, omit, Detail } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
@@ -113,7 +114,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           >
             {children}
           </select>
-          <Expand className="navds-select__chevron" aria-hidden />
+          <ChevronDownIcon className="navds-select__chevron" aria-hidden />
         </div>
         <div
           className="navds-form-field__error"

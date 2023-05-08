@@ -1,4 +1,4 @@
-import { Copy } from "@navikt/ds-icons";
+import { FilesIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import copy from "copy-to-clipboard";
 import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
@@ -108,7 +108,7 @@ export const CopyToClipboard = forwardRef<
           className={cl("navdsi-copy-to-clipboard", className)}
           onClick={handleClick}
           size={size}
-          icon={<Copy title={copyTitle} aria-hidden={!copyTitle} />}
+          icon={<FilesIcon title={copyTitle} aria-hidden={!copyTitle} />}
           iconPosition={iconPosition}
           {...rest}
         >

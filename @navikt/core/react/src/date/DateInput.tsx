@@ -1,4 +1,4 @@
-import { Calender } from "@navikt/ds-icons";
+import { CalendarIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import { BodyShort, Button, ErrorMessage, Label, omit } from "..";
@@ -124,7 +124,7 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
             tabIndex={open ? -1 : 0}
             disabled={inputProps.disabled}
             icon={
-              <Calender
+              <CalendarIcon
                 title={
                   open
                     ? conditionalVariables.iconTitle.close

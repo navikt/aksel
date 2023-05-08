@@ -175,9 +175,7 @@ export const CompletedSteps = () => {
         onStepChange={(step) => setActiveStep(step)}
       >
         <Stepper.Step completed={activeStep > 1}>Start søknad</Stepper.Step>
-        <Stepper.Step completed={activeStep > 2}>
-          Personopplysninger
-        </Stepper.Step>
+        <Stepper.Step completed>Personopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep >= 4}>
           Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst

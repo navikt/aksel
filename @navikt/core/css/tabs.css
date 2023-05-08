@@ -49,7 +49,7 @@
   align-items: center;
   background: none;
   border: none;
-  color: var(--ac-tabs-text, var(--a-text-subtle));
+  color: var(--ac-tabs-text, var(--a-text-default));
   cursor: pointer;
 }
 

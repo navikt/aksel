@@ -36,7 +36,7 @@
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^2.9.8",
+    "@navikt/aksel-icons": "^2.9.8",
     "@navikt/ds-react": "^2.9.8",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1"

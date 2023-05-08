@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "@navikt/ds-react";
 import { BodyShort, Detail } from "@navikt/ds-react";
-import { Expand } from "@navikt/ds-icons";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import HeaderButton from "./HeaderButton";
 
 export interface HeaderUserButtonProps
@@ -33,14 +33,11 @@ export const HeaderUserButton: HeaderUserButtonType = forwardRef(
       <div>
         <BodyShort size="small" as="div">
           {name}
+          ass
         </BodyShort>
-        {description && (
-          <Detail size="small" as="div">
-            {description}
-          </Detail>
-        )}
+        {description && <Detail as="div">{description}</Detail>}
       </div>
-      <Expand />
+      <ChevronDownIcon title="vis meny" />
     </HeaderButton>
   )
 );

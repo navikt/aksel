@@ -39,7 +39,6 @@
   "dependencies": {
     "@floating-ui/react": "0.17.0",
     "@navikt/aksel-icons": "^2.9.8",
-    "@navikt/ds-icons": "^2.9.8",
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^1.2.1",

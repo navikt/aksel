@@ -1,10 +1,10 @@
-import { Add } from "@navikt/ds-icons";
+import { PlusCircleFillIcon } from "@navikt/aksel-icons";
 import React from "react";
 import {
+  BodyLong,
+  Alert as DsAlert,
   ConfirmationPanel as DsConfirmationPanel,
   Link,
-  Alert as DsAlert,
-  BodyLong,
 } from "..";
 export default {
   title: "ds-react/Link",
@@ -15,7 +15,8 @@ export const Default = {
   render: (props) => {
     const LinkD = () => (
       <Link href="#">
-        {props.icon && <Add />}Ex aliqua incididunt {props.icon && <Add />}
+        {props.icon && <PlusCircleFillIcon />}Ex aliqua incididunt{" "}
+        {props.icon && <PlusCircleFillIcon />}
       </Link>
     );
 
@@ -41,7 +42,8 @@ export const Default = {
 
 const DemoLink = () => (
   <Link href="#">
-    <Add aria-hidden /> Ex aliqua incididunt <Add aria-hidden />
+    <PlusCircleFillIcon aria-hidden /> Ex aliqua incididunt{" "}
+    <PlusCircleFillIcon aria-hidden />
   </Link>
 );
 

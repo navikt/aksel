@@ -193,17 +193,16 @@
   font-size: 1.25rem;
 }
 
-.navds-table__toggle-expand-button:hover .navds-table__expandable-icon,
-.navds-table__expandable-icon--filled {
-  display: none;
-}
-
-.navds-table__toggle-expand-button:hover .navds-table__expandable-icon--filled {
-  display: block;
+.navds-table__toggle-expand-button:hover .navds-table__expandable-icon {
+  transform: translateY(1px);
 }
 
 .navds-table__toggle-expand-cell--open .navds-table__expandable-icon {
   transform: rotate(180deg);
+}
+
+.navds-table__toggle-expand-cell--open .navds-table__toggle-expand-button:hover .navds-table__expandable-icon {
+  transform: translateY(-1px) rotate(180deg);
 }
 
 .navds-table__expanded-row-cell {

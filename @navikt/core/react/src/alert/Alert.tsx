@@ -1,9 +1,9 @@
 import {
-  ErrorFilled,
-  InformationFilled,
-  SuccessFilled,
-  WarningFilled,
-} from "@navikt/ds-icons";
+  InformationSquareFillIcon,
+  CheckmarkCircleFillIcon,
+  ExclamationmarkTriangleFillIcon,
+  XMarkOctagonFillIcon,
+} from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong } from "../typography/BodyLong";
@@ -37,13 +37,13 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 const Icon = ({ variant, ...props }) => {
   switch (variant) {
     case "error":
-      return <ErrorFilled title="Feil" {...props} />;
+      return <XMarkOctagonFillIcon title="Feil" {...props} />;
     case "warning":
-      return <WarningFilled title="Advarsel" {...props} />;
+      return <ExclamationmarkTriangleFillIcon title="Advarsel" {...props} />;
     case "info":
-      return <InformationFilled title="Informasjon" {...props} />;
+      return <InformationSquareFillIcon title="Informasjon" {...props} />;
     case "success":
-      return <SuccessFilled title="Suksess" {...props} />;
+      return <CheckmarkCircleFillIcon title="Suksess" {...props} />;
     default:
       return null;
   }
