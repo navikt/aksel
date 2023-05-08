@@ -18,7 +18,7 @@ export const ExpansionCardDescription: ExpansionCardDescriptionType =
 
     if (panelContext === null) {
       console.error(
-        "<ExpansionCard.Header> has to be used within an <ExpansionCard>"
+        "<ExpansionCard.Description> has to be used within an <ExpansionCard>"
       );
       return null;
     }

@@ -3,7 +3,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <Accordion>
+    <Accordion variant="neutral">
       <Accordion.Item>
         <Accordion.Header>Til deg som er mellom 62 og 67 år</Accordion.Header>
         <Accordion.Content>
@@ -12,7 +12,7 @@ const Example = () => {
           nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
         </Accordion.Content>
       </Accordion.Item>
-      <Accordion.Item>
+      <Accordion.Item defaultOpen>
         <Accordion.Header>
           Til deg som har yrkesskade eller yrkessykdom
         </Accordion.Header>
