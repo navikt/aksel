@@ -1,10 +1,10 @@
-import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { useId } from "..";
 import AnimateHeight from "../util/AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 
 export interface ExpandableRowProps extends Omit<RowProps, "content"> {
   /**
@@ -96,12 +96,8 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
                   }
                 }}
               >
-                <Expand
+                <ChevronDownIcon
                   className="navds-table__expandable-icon"
-                  title={isOpen ? "Vis mindre" : "Vis mer"}
-                />
-                <ExpandFilled
-                  className="navds-table__expandable-icon navds-table__expandable-icon--filled"
                   title={isOpen ? "Vis mindre" : "Vis mer"}
                 />
               </button>

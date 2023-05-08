@@ -1,4 +1,4 @@
-import { Close, Search as SearchIcon } from "@navikt/ds-icons";
+import { XMarkIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, {
   forwardRef,
@@ -194,7 +194,10 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         <div className="navds-search__wrapper">
           <div className="navds-search__wrapper-inner">
             {variant === "simple" && (
-              <SearchIcon aria-hidden className="navds-search__search-icon" />
+              <MagnifyingGlassIcon
+                aria-hidden
+                className="navds-search__search-icon"
+              />
             )}
             <input
               ref={mergedRef}
@@ -222,7 +225,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
                 <span className="navds-sr-only">
                   {clearButtonLabel ? clearButtonLabel : "Tøm"}
                 </span>
-                <Close aria-hidden />
+                <XMarkIcon aria-hidden />
               </button>
             )}
           </div>

@@ -28,7 +28,6 @@
 }
 
 .navds-alert--small > .navds-alert__icon {
-  font-size: 1.25rem;
   height: var(--a-font-line-height-large);
 }
 

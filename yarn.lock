@@ -4057,7 +4057,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react-internal@workspace:@navikt/internal/react"
   dependencies:
-    "@navikt/ds-icons": ^2.9.8
+    "@navikt/aksel-icons": ^2.9.8
     "@navikt/ds-react": ^2.9.8
     clsx: ^1.1.1
     concurrently: 7.2.1
