@@ -23,6 +23,7 @@
   border: none;
   position: relative;
   box-shadow: var(--__ac-accordion-header-shadow);
+  z-index: 1;
 }
 
 .navds-accordion__header:hover {
