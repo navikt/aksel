@@ -1,5 +1,27 @@
 # @navikt/aksel-icons
 
+## 2.9.8
+
+### Patch Changes
+
+- [#1959](https://github.com/navikt/aksel/pull/1959) [`8790c5997`](https://github.com/navikt/aksel/commit/8790c5997e0d647419bdb5080c86781d08c196b8) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Statusikoner er nå tydeligere og mer konsistente.
+
+## 2.9.7
+
+### Patch Changes
+
+- :bug: CheckmarkIcon
+
+## 2.9.6
+
+### Patch Changes
+
+- [#1956](https://github.com/navikt/aksel/pull/1956) [`8c8559009`](https://github.com/navikt/aksel/commit/8c8559009982911bc4402913656ba4cc6a223dd1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset CheckmarkCircleIcon
+
+## 2.9.5
+
+## 2.9.4
+
 ## 2.9.3
 
 ### Patch Changes

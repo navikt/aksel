@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import chalk from "chalk";
-import { helpCommand } from "./help.js";
-import { cssImportsCommand } from "./css-imports/index.js";
+import { helpCommand } from "./help";
+import { cssImportsCommand } from "./css-imports/index";
+import { codemodCommand } from "./codemod/index";
+import fs from "fs";
 
 run();
 
@@ -11,6 +13,15 @@ async function run() {
     return;
   } else if (process.argv[2] === "css-imports") {
     await cssImportsCommand();
+    return;
+  } else if (process.argv[2] === "codemod") {
+    codemodCommand();
+    return;
+  } else if (process.argv[2] === "-v" || process.argv[2] === "--version") {
+    const pkg = JSON.parse(
+      fs.readFileSync("./package.json").toString()
+    ).version;
+    console.log(pkg);
     return;
   } else {
     console.log(

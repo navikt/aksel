@@ -7,8 +7,8 @@ import {
   componentDir,
   rootDir,
   globalDir,
-} from "@navikt/ds-css/config/_mappings.js";
-import { inquiry } from "./inquiry.js";
+} from "@navikt/ds-css/config/_mappings";
+import { inquiry } from "./inquiry";
 import clipboard from "clipboardy";
 import lodash from "lodash";
 import chalk from "chalk";

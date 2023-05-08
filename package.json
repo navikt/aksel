@@ -184,7 +184,8 @@
     },
     "ignoreFiles": [
       "**/dist/**",
-      "**/@navikt/codemod/**"
+      "**/@navikt/codemod/**",
+      "**/@navikt/aksel/**"
     ]
   },
   "repository": {

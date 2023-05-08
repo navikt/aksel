@@ -1,5 +1,5 @@
 import Enquirer from "enquirer";
-import { AnswersT } from "./config.js";
+import { AnswersT } from "./config";
 import chalk from "chalk";
 
 export async function inquiry(answers: AnswersT, questions: any[]) {

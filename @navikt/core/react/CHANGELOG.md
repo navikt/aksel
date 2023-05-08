@@ -1,5 +1,45 @@
 # @navikt/ds-react
 
+## 2.9.8
+
+### Patch Changes
+
+- Updated dependencies [[`8790c5997`](https://github.com/navikt/aksel/commit/8790c5997e0d647419bdb5080c86781d08c196b8)]:
+  - @navikt/aksel-icons@2.9.8
+  - @navikt/ds-icons@2.9.8
+
+## 2.9.7
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.7
+  - @navikt/ds-icons@2.9.7
+
+## 2.9.6
+
+### Patch Changes
+
+- Updated dependencies [[`8c8559009`](https://github.com/navikt/aksel/commit/8c8559009982911bc4402913656ba4cc6a223dd1)]:
+  - @navikt/aksel-icons@2.9.6
+  - @navikt/ds-icons@2.9.6
+
+## 2.9.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.5
+  - @navikt/ds-icons@2.9.5
+
+## 2.9.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.4
+  - @navikt/ds-icons@2.9.4
+
 ## 2.9.3
 
 ### Patch Changes
