@@ -108,6 +108,12 @@
   color: var(--a-text-action-selected);
 }
 
+.navds-combobox__button-toggle-list:focus {
+  box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
+  box-shadow: var(--a-shadow-focus);
+  outline: none;
+}
+
 .navds-combobox__button-toggle-list svg {
   width: 1.5rem;
   height: 1.5rem;
@@ -152,6 +158,11 @@
   background-color: var(--a-bg-subtle);
   justify-content: flex-start;
   gap: 1rem;
+}
+
+.navds-combobox__list-item--loading {
+  justify-content: center;
+  padding: var(--a-spacing-5);
 }
 
 .navds-combobox__list-item--focus,
