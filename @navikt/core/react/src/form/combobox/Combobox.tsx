@@ -53,24 +53,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     // TODO: if no results and no "add" option, s how "no results" message
     // TODO: if text is long, new line
     // TODO: mobile, should fewer options be shown at a time?
-    // TODO: mobile, should press area for input be taller?
-
-    /* Splitte opp logikken i kontekster/subkomponenter
-      - Options / FilteredOptions
-      - SelectedOptions
-      - Input
-
-      Context
-      - Root
-      - Options / MatchingOptions
-      - SelectedOptions
-      - Input / Label / Clearbutton / Togglebutton
-
-      onCreateOption / onCreateCustomOption
-      —> sende med prop for dette
-
-
-      Async */
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
