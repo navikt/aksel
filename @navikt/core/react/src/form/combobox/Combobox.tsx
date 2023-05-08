@@ -57,6 +57,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const {
+      currentOption,
       toggleIsListOpen,
       isListOpen,
       filteredOptions,
@@ -98,7 +99,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const toggleOption = useCallback(
       (event) => {
         const clickedOption = event?.target?.textContent;
-        const focusedOption = filteredOptions[filteredOptionsIndex];
+        const focusedOption = currentOption;
         // toggle selected option on click
         if (clickedOption) {
           if (selectedOptions.includes(clickedOption)) {
@@ -120,8 +121,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           addSelectedOption(focusedOption);
       },
       [
+        currentOption,
         filteredOptions,
-        filteredOptionsIndex,
         selectedOptions,
         isListOpen,
         value,
@@ -144,21 +145,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const handleKeyUp = (e) => {
+      e.preventDefault();
       switch (e.key) {
         case "Escape":
           handleClear({ trigger: e.key, event: e });
           toggleIsListOpen(false);
           break;
-        case "ArrowDown": {
-          e.preventDefault();
-          moveFocusDown();
-          break;
-        }
-        case "ArrowUp": {
-          e.preventDefault();
-          moveFocusUp();
-          break;
-        }
         case "Enter":
           e.preventDefault();
           toggleOption(e);
@@ -178,14 +170,32 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           if (customOptions.includes(lastSelectedOption))
             removeCustomOption({ value: lastSelectedOption });
           removeSelectedOption(lastSelectedOption);
+        } else if (e.key === "ArrowDown") {
+          // Check that cursor position is at the end of the input field,
+          // so we don't interfere with text editing
+          if (e.target.selectionStart === value.length) {
+            e.preventDefault();
+            moveFocusDown();
+          }
+        } else if (e.key === "ArrowUp") {
+          // Check that the FilteredOptions list is open and has virtual focus.
+          // Otherwise ignore keystrokes, so it doesn't interfere with text editing
+          if (isListOpen && filteredOptionsIndex !== null) {
+            e.preventDefault();
+            moveFocusUp();
+          }
         }
       },
       [
         value,
         selectedOptions,
         customOptions,
+        filteredOptionsIndex,
+        isListOpen,
         removeCustomOption,
         removeSelectedOption,
+        moveFocusDown,
+        moveFocusUp,
       ]
     );
 
@@ -196,7 +206,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     }, [focusInput, selectedOptions, prevSelectedOptions]);
 
     function getActiveDescendantId() {
-      if (filteredOptionsIndex === -1) {
+      if (filteredOptionsIndex === null) {
+        return undefined;
+      } else if (filteredOptionsIndex === -1) {
         return `${id}-combobox-new-option`;
       } else {
         return `${id}-option-${filteredOptions[filteredOptionsIndex]}`;
