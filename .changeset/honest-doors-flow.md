@@ -3,10 +3,9 @@
 "@navikt/ds-react": major
 ---
 
-Update Accordion
+**Accordion**
 
-WHAT: Css changes break backwards compatability, so this update is marked as a major change
-
-WHY: New and improved design was desired.
-
-HOW to update: Update application dependencies (no codemods)
+- Accordion oppdatet til å ha chevron left-aligned.
+- Neutral-variant lagt til
+- Diverse nye size-options for heading og paddinger.
+- Deler av Accordion-CSS er refaktorert. Dette vil kunne brekke overskrevne stiler.
