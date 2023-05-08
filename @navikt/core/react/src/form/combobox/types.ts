@@ -18,11 +18,11 @@ export interface ComboboxProps
   setOptions: React.Dispatch<React.SetStateAction<any[]>>;
   setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
   onClear?: (e: ComboboxClearEvent) => void;
-  variant?: "primary" | "secondary" | "simple";
   clearButton?: boolean;
   clearButtonLabel?: string;
   toggleListButton?: boolean;
   toggleListButtonLabel?: string;
+  loading?: boolean;
   onChange?: (value: string) => void;
   hideLabel?: boolean;
   label: React.ReactNode;
@@ -33,5 +33,4 @@ export interface ComboboxProps
 export interface ComboboxContextProps {
   disabled?: boolean;
   size: "medium" | "small";
-  variant: "primary" | "secondary" | "simple";
 }

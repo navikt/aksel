@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
-import { BodyShort, Label } from "../../..";
+import { BodyShort, Label, Loader } from "../../..";
 import { Add } from "@navikt/ds-icons";
 import CheckIcon from "./CheckIcon";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
@@ -13,10 +13,11 @@ interface FilteredOptionsProps {
   ref: React.RefObject<HTMLUListElement>;
   value: string;
   addCustomOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  loading?: boolean;
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
-  ({ id, toggleOption, value, addCustomOption }, ref) => {
+  ({ id, toggleOption, value, addCustomOption, loading }, ref) => {
     const {
       isListOpen,
       filteredOptions,
@@ -35,6 +36,15 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
         id={`${id}-filtered-options`}
         role="listbox"
       >
+        {loading && (
+          <li
+            className="navds-combobox__list-item navds-combobox__list-item--loading"
+            role="option"
+            aria-selected={false}
+          >
+            <Loader />
+          </li>
+        )}
         {isValueNew && (
           <li
             tabIndex={-1}

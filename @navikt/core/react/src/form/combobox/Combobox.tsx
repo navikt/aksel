@@ -36,6 +36,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       hideLabel = false,
       description,
       label,
+      loading,
       children,
       clearButton = true,
       clearButtonLabel,
@@ -293,6 +294,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             focusInput={focusInput}
             value={value}
             addCustomOption={handleAddCustomOption}
+            loading={loading}
           />
         </div>
       </ComboboxWrapper>

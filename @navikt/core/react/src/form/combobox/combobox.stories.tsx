@@ -6,9 +6,21 @@ import { Combobox } from "../../index";
 export default {
   title: "ds-react/Combobox",
   component: Combobox,
+  argTypes: {
+    loading: {
+      control: {
+        type: "boolean",
+      },
+    },
+    error: {
+      control: {
+        type: "text",
+      },
+    },
+  },
 } as Meta;
 
-const OriginalOptions = [
+const originalOptions = [
   "banana",
   "apple",
   "tangerine",
@@ -26,7 +38,7 @@ const OriginalOptions = [
 const initialSelectedOptions = ["passion fruit", "grape fruit"];
 
 export const Default = (props) => {
-  const [options, setOptions] = useState(OriginalOptions);
+  const [options, setOptions] = useState(originalOptions);
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     initialSelectedOptions
   );
@@ -39,14 +51,15 @@ export const Default = (props) => {
         setOptions={setOptions}
         selectedOptions={selectedOptions}
         setSelectedOptions={setSelectedOptions}
+        isListOpen={false}
+        /* everything under here is optional? */
         value={props.controlled ? value : undefined}
         onChange={props.controlled ? setValue : undefined}
         label="Komboboks"
-        /* everything under here is optional? */
+        loading={props.loading}
         size="medium"
-        variant="simple"
         error={props.error && "error here"}
-        isListOpen={false}
+        hasError={props.error && true}
         id={id}
       />
     </div>
