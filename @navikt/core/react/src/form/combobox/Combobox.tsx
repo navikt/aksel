@@ -48,10 +48,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ...rest
     } = props;
 
-    // TODO: in the dropdown, show a temporary list for "custom" options that shows up on top. On blur, add to filteredOptions
-    // TODO: bug fix, when click toggleListButton, the list opens and then closes immediately because of race conditions with focusInHandler
-    // TODO: mousein and arrow up/down shares virtual focus, mouseout does NOT remove focus
-    // TODO: if no results and no "add" option, s how "no results" message
+    // we have the code for error handling, and dont do anythign with it
     // TODO: if text is long, new line
     // TODO: mobile, should fewer options be shown at a time?
 
