@@ -21,7 +21,7 @@ export default {
   },
 } as Meta;
 
-const originalOptions = [
+const options = [
   "banana",
   "apple",
   "tangerine",
@@ -39,7 +39,6 @@ const originalOptions = [
 const initialSelectedOptions = ["passion fruit", "grape fruit"];
 
 export const Default = (props) => {
-  const [options, setOptions] = useState(originalOptions);
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     initialSelectedOptions
   );
@@ -49,7 +48,6 @@ export const Default = (props) => {
     <div data-theme={props.darkmode ? "dark" : "light"}>
       <Combobox
         options={options}
-        setOptions={setOptions}
         selectedOptions={selectedOptions}
         setSelectedOptions={setSelectedOptions}
         isListOpen={props.isListOpen}

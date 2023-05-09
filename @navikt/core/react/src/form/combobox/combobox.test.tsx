@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-pascal-case */
 import { fireEvent, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import React, { useId, useState } from "react";
+import React, { useId } from "react";
 import { Combobox } from "..";
 import { act } from "react-dom/test-utils";
 
-const OriginalOptions = [
+const options = [
   "banana",
   "apple",
   "tangerine",
@@ -21,17 +21,12 @@ const OriginalOptions = [
 ];
 
 const App = () => {
-  const [options] = useState(OriginalOptions);
   const id = useId();
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   return (
     <div data-theme="light">
       <Combobox
         options={options}
         label="Hva er dine favorittfrukter?"
-        selectedOptions={selectedOptions}
-        setSelectedOptions={setSelectedOptions}
-        /* everything under here is optional? */
         size="medium"
         variant="simple"
         id={id}

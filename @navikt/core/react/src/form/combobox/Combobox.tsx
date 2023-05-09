@@ -44,7 +44,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       toggleListButtonLabel,
       isListOpen: isExternalListOpen,
       id = "",
-      setOptions,
       ...rest
     } = props;
 
