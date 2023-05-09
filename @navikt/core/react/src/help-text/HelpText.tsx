@@ -1,7 +1,7 @@
-import { Helptext as HelpTextIcon, HelptextFilled } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { Popover, PopoverProps, mergeRefs } from "..";
+import { HelpTextIcon } from "./HelpTextIcon";
 
 export interface HelpTextProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -61,11 +61,8 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           type="button"
           aria-expanded={open}
         >
-          <HelpTextIcon className="navds-help-text__icon" title={title} />
-          <HelptextFilled
-            className="navds-help-text__icon navds-help-text__icon--filled"
-            title={title}
-          />
+          <HelpTextIcon title={title} />
+          <HelpTextIcon filled title={title} />
         </button>
         <Popover
           onClose={() => setOpen(false)}

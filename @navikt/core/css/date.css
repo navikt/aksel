@@ -164,7 +164,8 @@
 }
 
 .navds-date__caption-button,
-.navds-date__caption-button:disabled {
+.navds-date__caption-button:disabled,
+.navds-date__caption-button:disabled:hover {
   color: var(--ac-date-caption-text, var(--a-text-default));
 }
 

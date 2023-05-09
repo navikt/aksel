@@ -1,4 +1,4 @@
-import { SuccessStroke } from "@navikt/ds-icons";
+import { CheckmarkIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
@@ -30,7 +30,7 @@ export const ToggleChips: ToggleChipsType = forwardRef(
         aria-pressed={selected}
       >
         {selected && (
-          <SuccessStroke aria-hidden className="navds-chips__toggle-icon" />
+          <CheckmarkIcon aria-hidden className="navds-chips__toggle-icon" />
         )}
         <span className="navds-chips__chip-text">{children}</span>
       </Component>

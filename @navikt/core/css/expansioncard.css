@@ -173,13 +173,13 @@
   animation: fadeExpansionCard 250ms ease;
 }
 
-.navds-expansioncard--no-fade :where(.navds-expansioncard__content-inner) {
+.navds-expansioncard--no-animation :where(.navds-expansioncard__content-inner) {
   animation: none;
 }
 
 @keyframes fadeExpansionCard {
   0% {
-    opacity: 0;
+    opacity: 0.25;
     transform: translateY(-8px);
   }
 
