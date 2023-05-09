@@ -229,8 +229,12 @@ button.navds-stepper__step {
   background-color: var(--ac-stepper-active-completed, var(--a-surface-action-selected));
 }
 
-:where(.navds-stepper__step--non-interactive, .navds-stepper__step--non-interactive:hover, .navds-stepper__step--non-interactive.navds-stepper__step--active)
-  .navds-stepper__circle--success {
+:where(.navds-stepper__step--non-interactive, .navds-stepper__step--non-interactive:hover) .navds-stepper__circle--success {
+  color: var(--a-text-on-inverted);
+  background-color: var(--ac-stepper-non-interactive-completed-bg, var(--a-surface-neutral));
+}
+
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active) .navds-stepper__circle--success {
   color: var(--a-text-on-inverted);
   background-color: var(--ac-stepper-non-interactive-active-completed, var(--a-surface-inverted));
 }
