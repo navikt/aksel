@@ -41,7 +41,7 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
 );
 
 export const FilteredOptionsProvider = ({ children, value: props }) => {
-  const { isExternalListOpen, options } = props;
+  const { isListOpen: isExternalListOpen, options } = props;
   const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
   const { value } = useInputContext();
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState<
@@ -57,6 +57,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, [value, options, customOptions]);
 
   useEffect(() => {
+    console.log("DEBUG - isExternalListOpen:", isExternalListOpen);
     if (isExternalListOpen !== undefined)
       setInternalListOpen(isExternalListOpen);
   }, [isExternalListOpen]);

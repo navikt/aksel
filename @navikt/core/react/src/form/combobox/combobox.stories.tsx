@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
 import React, { useState, useId } from "react";
 
@@ -12,9 +13,9 @@ export default {
         type: "boolean",
       },
     },
-    error: {
+    isListOpen: {
       control: {
-        type: "text",
+        type: "boolean",
       },
     },
   },
@@ -51,8 +52,8 @@ export const Default = (props) => {
         setOptions={setOptions}
         selectedOptions={selectedOptions}
         setSelectedOptions={setSelectedOptions}
-        isListOpen={false}
-        /* everything under here is optional? */
+        isListOpen={props.isListOpen}
+        /* everything under here is optional */
         value={props.controlled ? value : undefined}
         onChange={props.controlled ? setValue : undefined}
         label="Komboboks"
@@ -64,4 +65,33 @@ export const Default = (props) => {
       />
     </div>
   );
+};
+
+Default.args = {
+  controlled: false,
+  isListOpen: false,
+  loading: false,
+  error: "",
+};
+
+export const Loading = () => {
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  return (
+    <div>
+      <Combobox
+        options={options}
+        setOptions={setOptions}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
+        isListOpen={true}
+        loading={true}
+      />
+    </div>
+  );
+};
+
+Loading.args = {
+  loading: true,
+  isListOpen: true,
 };
