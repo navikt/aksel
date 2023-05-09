@@ -3,7 +3,7 @@ import Combobox from "./Combobox";
 import { FilteredOptionsProvider } from "./FilteredOptions/filteredOptionsContext";
 import { CustomOptionsProvider } from "./customOptionsContext";
 import { SelectedOptionsProvider } from "./SelectedOptions/selectedOptionsContext";
-import { InputContextProvider } from "./inputContext";
+import { InputContextProvider } from "./Input/inputContext";
 
 export default function ComboboxProvider(props) {
   const {

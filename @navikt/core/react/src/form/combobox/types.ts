@@ -28,6 +28,7 @@ export interface ComboboxProps
   label: React.ReactNode;
   children?: React.ReactNode;
   value?: string;
+  inputClassName?: string | undefined;
 }
 
 export interface ComboboxContextProps {

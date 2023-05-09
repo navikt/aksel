@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-import { BodyShort, Label, mergeRefs, omit } from "../..";
+import { BodyShort, Label, mergeRefs } from "../..";
 import { useFormField } from "../useFormField";
 import ClearButton from "./ClearButton";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
@@ -17,7 +17,8 @@ import { ComboboxClearEvent, ComboboxProps } from "./types";
 import { useCustomOptionsContext } from "./customOptionsContext";
 import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 import ComboboxWrapper from "./ComboboxWrapper";
-import { useInputContext } from "./inputContext";
+import { useInputContext } from "./Input/inputContext";
+import Input from "./Input/Input";
 
 export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
@@ -43,6 +44,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       toggleListButton = true,
       toggleListButtonLabel,
       isListOpen: isExternalListOpen,
+      inputClassName,
       id = "",
       setOptions,
       ...rest
@@ -54,15 +56,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
-    const {
-      currentOption,
-      toggleIsListOpen,
-      isListOpen,
-      filteredOptions,
-      filteredOptionsIndex,
-      moveFocusUp,
-      moveFocusDown,
-    } = useFilteredOptionsContext();
+
+    const { currentOption, toggleIsListOpen, isListOpen, filteredOptions } =
+      useFilteredOptionsContext();
     const { customOptions, removeCustomOption, addCustomOption } =
       useCustomOptionsContext();
     const {
@@ -142,76 +138,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [selectedOptions, value, addCustomOption, handleClear, focusInput]
     );
 
-    const handleKeyUp = (e) => {
-      e.preventDefault();
-      switch (e.key) {
-        case "Escape":
-          handleClear({ trigger: e.key, event: e });
-          toggleIsListOpen(false);
-          break;
-        case "Enter":
-          e.preventDefault();
-          toggleOption(e);
-          if (value && !filteredOptions.includes(value))
-            handleAddCustomOption(e);
-          break;
-        default:
-          break;
-      }
-    };
-
-    const handleKeyDown = useCallback(
-      (e) => {
-        if (e.key === "Backspace" && value === "") {
-          const lastSelectedOption =
-            selectedOptions[selectedOptions.length - 1];
-          if (customOptions.includes(lastSelectedOption))
-            removeCustomOption({ value: lastSelectedOption });
-          removeSelectedOption(lastSelectedOption);
-        } else if (e.key === "ArrowDown") {
-          // Check that cursor position is at the end of the input field,
-          // so we don't interfere with text editing
-          if (e.target.selectionStart === value.length) {
-            e.preventDefault();
-            moveFocusDown();
-          }
-        } else if (e.key === "ArrowUp") {
-          // Check that the FilteredOptions list is open and has virtual focus.
-          // Otherwise ignore keystrokes, so it doesn't interfere with text editing
-          if (isListOpen && filteredOptionsIndex !== null) {
-            e.preventDefault();
-            moveFocusUp();
-          }
-        }
-      },
-      [
-        value,
-        selectedOptions,
-        customOptions,
-        filteredOptionsIndex,
-        isListOpen,
-        removeCustomOption,
-        removeSelectedOption,
-        moveFocusDown,
-        moveFocusUp,
-      ]
-    );
-
     //focus on input whenever selectedOptions changes
-    //Seems like a band-aid. Why does focus disappear?
     useEffect(() => {
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
-
-    function getActiveDescendantId() {
-      if (filteredOptionsIndex === null) {
-        return undefined;
-      } else if (filteredOptionsIndex === -1) {
-        return `${id}-combobox-new-option`;
-      } else {
-        return `${id}-option-${filteredOptions[filteredOptionsIndex]}`;
-      }
-    }
 
     return (
       <ComboboxWrapper
@@ -248,29 +178,16 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               selectedOptions={selectedOptions}
               handleDeleteSelectedOption={handleDeleteSelectedOption}
             >
-              <input
+              <Input
                 key="combobox-input"
                 ref={mergedInputRef}
-                {...omit(rest, ["error", "errorId", "size"])}
-                {...inputProps}
+                {...rest}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                type="search"
-                role="combobox"
-                onKeyUp={handleKeyUp}
-                onKeyDown={handleKeyDown}
-                aria-controls={isListOpen ? id : ""}
-                aria-expanded={!!isListOpen}
-                autoComplete="off"
-                aria-autocomplete="list"
-                aria-owns={`${id}-options`}
-                aria-activedescendant={getActiveDescendantId()}
-                className={cl(
-                  className,
-                  "navds-combobox__input",
-                  "navds-body-short",
-                  `navds-body-${size}`
-                )}
+                inputClassName={inputClassName}
+                handleClear={handleClear}
+                toggleOption={toggleOption}
+                handleAddCustomOption={handleAddCustomOption}
               />
             </SelectedOptions>
             {value && clearButton && (

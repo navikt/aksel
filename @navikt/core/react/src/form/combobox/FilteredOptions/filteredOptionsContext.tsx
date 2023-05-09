@@ -8,7 +8,7 @@ import React, {
   useRef,
 } from "react";
 import { useCustomOptionsContext } from "../customOptionsContext";
-import { useInputContext } from "../inputContext";
+import { useInputContext } from "../Input/inputContext";
 
 const normalizeText = (text: string) =>
   typeof text === "string" ? text.toLowerCase().trim() : "";

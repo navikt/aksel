@@ -69,27 +69,22 @@ export const Default = (props) => {
 
 Default.args = {
   controlled: false,
-  isListOpen: false,
   loading: false,
   error: "",
 };
 
-export const Loading = () => {
-  const [options, setOptions] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+export function Loading({ isListOpen, loading }) {
   return (
     <div>
       <Combobox
-        options={options}
-        setOptions={setOptions}
-        selectedOptions={selectedOptions}
-        setSelectedOptions={setSelectedOptions}
-        isListOpen={true}
-        loading={true}
+        options={[]}
+        selectedOptions={[]}
+        isListOpen={isListOpen}
+        loading={loading}
       />
     </div>
   );
-};
+}
 
 Loading.args = {
   loading: true,
