@@ -17,9 +17,16 @@
   border-color: var(--ac-link-panel-hover-border, var(--a-border-action));
 }
 
-.navds-link-panel:focus {
+.navds-link-panel:focus-visible {
   box-shadow: var(--a-shadow-focus);
   outline: none;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-link-panel:focus {
+    box-shadow: var(--a-shadow-focus);
+    outline: none;
+  }
 }
 
 .navds-link-panel__chevron {

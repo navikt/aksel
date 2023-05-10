@@ -86,9 +86,16 @@
   color: var(--ac-search-clear-icon-hover, var(--a-text-action));
 }
 
-.navds-search__button-clear:focus {
+.navds-search__button-clear:focus-visible {
   box-shadow: var(--a-shadow-focus);
   outline: none;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-search__button-clear:focus {
+    box-shadow: var(--a-shadow-focus);
+    outline: none;
+  }
 }
 
 .navds-search__button-search {
@@ -126,16 +133,30 @@
   z-index: auto;
 }
 
-.navds-search__button-search.navds-button--secondary:focus {
+.navds-search__button-search.navds-button--secondary:focus-visible {
   box-shadow: 0 0 0 1px var(--ac-search-button-border, var(--a-border-default)) inset, var(--a-shadow-focus);
 }
 
-.navds-search__button-search.navds-button--secondary:focus:hover {
+.navds-search__button-search.navds-button--secondary:focus-visible:hover {
   box-shadow: 0 0 0 1px var(--ac-search-button-border-hover, var(--a-border-action)) inset, var(--a-shadow-focus);
 }
 
-.navds-search__button-search.navds-button--secondary:focus:active {
+.navds-search__button-search.navds-button--secondary:focus-visible:active {
   box-shadow: 0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset, var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-search__button-search.navds-button--secondary:focus {
+    box-shadow: 0 0 0 1px var(--ac-search-button-border, var(--a-border-default)) inset, var(--a-shadow-focus);
+  }
+
+  .navds-search__button-search.navds-button--secondary:focus:hover {
+    box-shadow: 0 0 0 1px var(--ac-search-button-border-hover, var(--a-border-action)) inset, var(--a-shadow-focus);
+  }
+
+  .navds-search__button-search.navds-button--secondary:focus:active {
+    box-shadow: 0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset, var(--a-shadow-focus);
+  }
 }
 
 /* Error-handling */
@@ -144,13 +165,24 @@
   box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--a-border-danger));
 }
 
-.navds-search--error .navds-search__input:focus:not(:hover):not(:disabled) {
+.navds-search--error .navds-search__input:focus-visible:not(:hover):not(:disabled) {
   box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--a-border-danger)), var(--a-shadow-focus);
 }
 
 /* Focus layering */
-.navds-search__input:focus,
+.navds-search__input:focus-visible,
 .navds-search__button-clear,
-.navds-search__button-search:focus {
+.navds-search__button-search:focus-visible {
   z-index: 1;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-search--error .navds-search__input:focus:not(:hover):not(:disabled) {
+    box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--a-border-danger)), var(--a-shadow-focus);
+  }
+
+  .navds-search__input:focus,
+  .navds-search__button-search:focus {
+    z-index: 1;
+  }
 }

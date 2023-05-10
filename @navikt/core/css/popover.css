@@ -15,9 +15,16 @@
   display: none;
 }
 
-.navds-popover:focus {
+.navds-popover:focus-visible {
   outline: none;
   box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-popover:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 .navds-popover__arrow {
