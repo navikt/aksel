@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 3.1.0
+
+### Patch Changes
+
+- [#1967](https://github.com/navikt/aksel/pull/1967) [`9d2cd9e7f`](https://github.com/navikt/aksel/commit/9d2cd9e7fffb3cf6310c88229ee39ea85db19bca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Oppdatert Label og Description spacing for skjemakomponenter
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.1.0
+
 ## 3.0.1
 
 ### Patch Changes

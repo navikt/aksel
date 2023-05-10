@@ -1,5 +1,13 @@
 # @navikt/ds-react-internal
 
+## 3.1.0
+
+### Patch Changes
+
+- Updated dependencies [[`9d2cd9e7f`](https://github.com/navikt/aksel/commit/9d2cd9e7fffb3cf6310c88229ee39ea85db19bca)]:
+  - @navikt/ds-react@3.1.0
+  - @navikt/aksel-icons@3.1.0
+
 ## 3.0.1
 
 ### Patch Changes
