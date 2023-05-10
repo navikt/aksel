@@ -1,5 +1,16 @@
 # @navikt/ds-css
 
+## 3.1.0
+
+### Minor Changes
+
+- [#1966](https://github.com/navikt/aksel/pull/1966) [`f1c4c46eb`](https://github.com/navikt/aksel/commit/f1c4c46ebb0522561483f18e3b86b190cf9cc372) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Alle komponenter bruker nå default `:focus-visible` for fokusmarkering.
+  (Alle komponenter som bruker `:focus-visible` har også en fallback for `:focus`)
+
+### Patch Changes
+
+- [#1967](https://github.com/navikt/aksel/pull/1967) [`9d2cd9e7f`](https://github.com/navikt/aksel/commit/9d2cd9e7fffb3cf6310c88229ee39ea85db19bca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Oppdatert Label og Description spacing for skjemakomponenter
+
 ## 3.0.1
 
 ## 3.0.0
