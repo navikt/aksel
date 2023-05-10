@@ -123,10 +123,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         } else if (
           // add new option on Enter input value if in filteredOptions OR if input value is empty
           focusedOption &&
-          (filteredOptions?.includes?.(String(value)) || !value)
+          filteredOptions?.includes?.(focusedOption)
         ) {
           addSelectedOption(focusedOption);
-        } else if (value && !filteredOptions.includes(value)) {
+        } else if (focusedOption && !filteredOptions.includes(focusedOption)) {
           handleAddCustomOption(event);
         }
       },
@@ -135,7 +135,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         filteredOptions,
         handleAddCustomOption,
         selectedOptions,
-        value,
         addSelectedOption,
         handleDeleteSelectedOption,
         removeSelectedOption,
