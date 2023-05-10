@@ -15,6 +15,7 @@
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -p run test",
     "lint": "yarn eslint . && yarn stylelint @navikt/**/*.css",
+    "lint:css": "yarn stylelint @navikt/**/*.css",
     "changeset": "changeset",
     "version": "changeset version",
     "release": "yarn boot && yarn docgen && changeset publish"
@@ -26,6 +27,7 @@
     "@navikt/icons",
     "@navikt/aksel-icons",
     "@navikt/aksel-icons/figma-plugin",
+    "@navikt/aksel-stylelint",
     "@navikt/aksel",
     "@navikt/community/*",
     "examples/*",
@@ -141,11 +143,13 @@
   "stylelint": {
     "extends": [
       "stylelint-config-standard",
-      "stylelint-config-prettier"
+      "stylelint-config-prettier",
+      "@navikt/aksel-stylelint"
     ],
     "plugins": [
       "stylelint-value-no-unknown-custom-properties",
-      "stylelint-declaration-block-no-ignored-properties"
+      "stylelint-declaration-block-no-ignored-properties",
+      "@navikt/aksel-stylelint"
     ],
     "rules": {
       "plugin/declaration-block-no-ignored-properties": true,
@@ -181,7 +185,8 @@
             "@navikt/core/tokens/dist/tokens.css"
           ]
         }
-      ]
+      ],
+      "plugin/aksel-all-rules": true
     },
     "ignoreFiles": [
       "**/dist/**",

@@ -1,0 +1,44 @@
+{
+  "name": "@navikt/aksel-stylelint",
+  "version": "1.0.0",
+  "author": "Aksel | NAV",
+  "homepage": "https://aksel.nav.no/lint",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/aksel.git",
+    "directory": "@navikt/aksel-icons"
+  },
+  "keywords": [
+    "aksel",
+    "stylelint"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "license": "MIT",
+  "main": "./index.js",
+  "exports": "./index.js",
+  "files": [
+    "./index.js"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "tsc -p .",
+    "watch:lint": "tsc --watch -p ."
+  },
+  "devDependencies": {
+    "postcss-media-query-parser": "^0.2.3",
+    "postcss-value-parser": "^4.2.0",
+    "stylelint": "^14.8.5"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/unified/*"
+    ],
+    "testMatch": [
+      "**/__tests__/*.js",
+      "**/__tests__/*.mjs"
+    ]
+  }
+}
