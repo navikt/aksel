@@ -17,9 +17,16 @@
   border-color: var(--ac-select-hover-bg, var(--a-border-action));
 }
 
-.navds-select__input:focus {
+.navds-select__input:focus-visible {
   outline: none;
   box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-select__input:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 .navds-select__container {

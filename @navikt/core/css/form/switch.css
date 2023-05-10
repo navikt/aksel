@@ -110,8 +110,14 @@
   background-color: var(--ac-switch-checked-bg, var(--a-border-success));
 }
 
-.navds-switch__input:focus ~ .navds-switch__track {
+.navds-switch__input:focus-visible ~ .navds-switch__track {
   box-shadow: 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-switch__input:focus ~ .navds-switch__track {
+    box-shadow: 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+  }
 }
 
 /* Thumb */
