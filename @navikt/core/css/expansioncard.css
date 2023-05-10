@@ -124,6 +124,7 @@
 }
 
 .navds-expansioncard__header-button:focus-visible {
+  outline: none;
   box-shadow: var(--a-shadow-focus);
 }
 
