@@ -20,7 +20,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   variant?: "default" | "neutral";
   /**
-   * @default 'large'
+   * @default 'small'
    */
   headingSize?: "large" | "medium" | "small" | "xsmall";
   /**
@@ -38,7 +38,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     {
       className,
       variant = "default",
-      headingSize = "medium",
+      headingSize = "small",
       size = "medium",
       ...rest
     },
