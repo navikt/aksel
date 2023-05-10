@@ -38,7 +38,7 @@
 .navds-switch__content {
   display: flex;
   flex-direction: column;
-  gap: var(--a-spacing-1);
+  gap: 0.125rem;
   padding: 0.75rem 0 0.75rem 3.25rem;
 }
 
@@ -76,7 +76,7 @@
   position: absolute;
   top: var(--a-spacing-3);
   left: 0;
-  border-radius: var(--a-border-radius-medium);
+  border-radius: var(--a-border-radius-full);
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -110,15 +110,21 @@
   background-color: var(--ac-switch-checked-bg, var(--a-border-success));
 }
 
-.navds-switch__input:focus ~ .navds-switch__track {
+.navds-switch__input:focus-visible ~ .navds-switch__track {
   box-shadow: 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-switch__input:focus ~ .navds-switch__track {
+    box-shadow: 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+  }
 }
 
 /* Thumb */
 .navds-switch__thumb {
   background-color: var(--ac-switch-thumb-bg, var(--a-surface-default));
   color: var(--ac-switch-thumb-icon, var(--a-icon-subtle));
-  border-radius: var(--a-border-radius-small);
+  border-radius: var(--a-border-radius-full);
   width: 20px;
   height: 20px;
   position: absolute;

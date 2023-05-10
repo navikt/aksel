@@ -123,15 +123,21 @@
   transform: translateY(1px);
 }
 
-.navds-expansioncard__header-button:focus {
-  outline: none;
-}
-
 .navds-expansioncard__header-button:focus-visible {
+  outline: none;
   box-shadow: var(--a-shadow-focus);
 }
 
-.navds-expansioncard--open :where(.navds-expansioncard__header-button):hover :where(.navds-expansioncard__header-chevron) {
+@supports not selector(:focus-visible) {
+  .navds-expansioncard__header-button:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
+}
+
+.navds-expansioncard--open
+  :where(.navds-expansioncard__header-button):hover
+  :where(.navds-expansioncard__header-chevron) {
   transform: translateY(-1px) rotate(180deg);
 }
 
@@ -173,13 +179,13 @@
   animation: fadeExpansionCard 250ms ease;
 }
 
-.navds-expansioncard--no-fade :where(.navds-expansioncard__content-inner) {
+.navds-expansioncard--no-animation :where(.navds-expansioncard__content-inner) {
   animation: none;
 }
 
 @keyframes fadeExpansionCard {
   0% {
-    opacity: 0;
+    opacity: 0.25;
     transform: translateY(-8px);
   }
 

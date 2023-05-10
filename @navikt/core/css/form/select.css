@@ -17,9 +17,16 @@
   border-color: var(--ac-select-hover-bg, var(--a-border-action));
 }
 
-.navds-select__input:focus {
+.navds-select__input:focus-visible {
   outline: none;
   box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-select__input:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 .navds-select__container {
@@ -31,8 +38,8 @@
 
 .navds-select__chevron {
   position: absolute;
-  font-size: 1rem;
-  right: 0.5rem;
+  font-size: 1.5rem;
+  right: var(--a-spacing-2);
   pointer-events: none;
   align-self: center;
 }
@@ -40,6 +47,10 @@
 .navds-form-field--small .navds-select__input {
   min-height: 32px;
   padding: 0 2rem 0 0.25rem;
+}
+
+.navds-form-field--small .navds-select__chevron {
+  right: 0.375rem;
 }
 
 /**

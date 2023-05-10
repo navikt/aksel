@@ -1,5 +1,56 @@
 # @navikt/ds-react-internal
 
+## 3.1.1
+
+### Patch Changes
+
+- [`14379a02c`](https://github.com/navikt/aksel/commit/14379a02c3d32091a8c33061464160d7de9f3f2e) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Timeline håndterte ikke SVG ikoner riktig
+
+- Updated dependencies []:
+  - @navikt/ds-react@3.1.1
+  - @navikt/aksel-icons@3.1.1
+
+## 3.1.0
+
+### Patch Changes
+
+- Updated dependencies [[`9d2cd9e7f`](https://github.com/navikt/aksel/commit/9d2cd9e7fffb3cf6310c88229ee39ea85db19bca)]:
+  - @navikt/ds-react@3.1.0
+  - @navikt/aksel-icons@3.1.0
+
+## 3.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`fa2ead912`](https://github.com/navikt/aksel/commit/fa2ead912a4db15d1fa7e2c3efccbe69a64dc9a7), [`db3846f5c`](https://github.com/navikt/aksel/commit/db3846f5cd483ad0ca24bc5938cfcdb64260f89d)]:
+  - @navikt/ds-react@3.0.1
+  - @navikt/aksel-icons@3.0.1
+
+## 3.0.0
+
+### Major Changes
+
+- [#1964](https://github.com/navikt/aksel/pull/1964) [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Aksels løsninger bruker nå `@navikt/aksel-icons`
+
+  **Sideeffects av ikonendringer**
+
+  - Komponenter som tidligere brukte Expand-ikon har fått oppdatert animasjon (table, readmore og accordion)
+  - Alert bruker samme ikonstørrelse for alle størrelser
+  - Chips har justert padding/ikonstørrelser
+  - Datepicker hover-bug på knapper er fikset
+  - Helptekst bruker nå et custom-ikon.
+  - Select har fått justert padding rundt ikon
+  - Switch bruker samme checkmark som checkbox, er nå avrundet
+  - ReadMore har justert margin for alignment med ikon, fjernet content-animasjon
+  - Tabs bruker default text-default nå
+  - Stepper har endret hvordan den styler checkmark-ikon.
+
+### Patch Changes
+
+- Updated dependencies [[`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f), [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f)]:
+  - @navikt/ds-react@3.0.0
+  - @navikt/aksel-icons@3.0.0
+
 ## 2.9.8
 
 ### Patch Changes

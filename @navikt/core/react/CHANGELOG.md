@@ -1,5 +1,64 @@
 # @navikt/ds-react
 
+## 3.1.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.1.1
+
+## 3.1.0
+
+### Patch Changes
+
+- [#1967](https://github.com/navikt/aksel/pull/1967) [`9d2cd9e7f`](https://github.com/navikt/aksel/commit/9d2cd9e7fffb3cf6310c88229ee39ea85db19bca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Oppdatert Label og Description spacing for skjemakomponenter
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.1.0
+
+## 3.0.1
+
+### Patch Changes
+
+- [`fa2ead912`](https://github.com/navikt/aksel/commit/fa2ead912a4db15d1fa7e2c3efccbe69a64dc9a7) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :fire: Fjernet ds-icons fra dependencies
+
+- [`db3846f5c`](https://github.com/navikt/aksel/commit/db3846f5cd483ad0ca24bc5938cfcdb64260f89d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset default headingSize for Accordion
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.0.1
+
+## 3.0.0
+
+### Major Changes
+
+- [#1964](https://github.com/navikt/aksel/pull/1964) [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - **Accordion**
+
+  - Accordion oppdatet til å ha chevron left-aligned.
+  - Neutral-variant lagt til
+  - Diverse nye size-options for heading og paddinger.
+  - Deler av Accordion-CSS er refaktorert. Dette vil kunne brekke overskrevne stiler.
+
+- [#1964](https://github.com/navikt/aksel/pull/1964) [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Aksels løsninger bruker nå `@navikt/aksel-icons`
+
+  **Sideeffects av ikonendringer**
+
+  - Komponenter som tidligere brukte Expand-ikon har fått oppdatert animasjon (table, readmore og accordion)
+  - Alert bruker samme ikonstørrelse for alle størrelser
+  - Chips har justert padding/ikonstørrelser
+  - Datepicker hover-bug på knapper er fikset
+  - Helptekst bruker nå et custom-ikon.
+  - Select har fått justert padding rundt ikon
+  - Switch bruker samme checkmark som checkbox, er nå avrundet
+  - ReadMore har justert margin for alignment med ikon, fjernet content-animasjon
+  - Tabs bruker default text-default nå
+  - Stepper har endret hvordan den styler checkmark-ikon.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.0.0
+  - @navikt/ds-icons@3.0.0
+
 ## 2.9.8
 
 ### Patch Changes

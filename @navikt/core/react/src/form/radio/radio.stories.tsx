@@ -86,7 +86,9 @@ export const GroupDescription = () => (
     defaultValue="tekst2"
     description="Group description"
   >
-    <Radio value="tekst">Radiotekst</Radio>
+    <Radio value="tekst" description="textdesc">
+      Radiotekst
+    </Radio>
     <Radio value="tekst2">Radiotekst</Radio>
   </RadioGroup>
 );

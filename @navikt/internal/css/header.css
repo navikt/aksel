@@ -59,10 +59,18 @@ button.navdsi-header__title:hover,
   background-color: var(--ac-header-hover-bg, var(--a-surface-inverted-hover));
 }
 
-.navdsi-header__title:focus,
-.navdsi-header__button:focus {
+.navdsi-header__title:focus-visible,
+.navdsi-header__button:focus-visible {
   box-shadow: var(--navdsi-header-focus);
   outline: none;
+}
+
+@supports not selector(:focus-visible) {
+  .navdsi-header__title:focus,
+  .navdsi-header__button:focus {
+    box-shadow: var(--navdsi-header-focus);
+    outline: none;
+  }
 }
 
 a.navdsi-header__title:active,

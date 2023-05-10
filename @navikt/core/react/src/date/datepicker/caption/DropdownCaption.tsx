@@ -1,4 +1,4 @@
-import { Left, Right } from "@navikt/ds-icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import setMonth from "date-fns/setMonth";
 import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
@@ -58,7 +58,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         variant="tertiary"
         disabled={!previousMonth}
         onClick={() => previousMonth && goToMonth(previousMonth)}
-        icon={<Left title="velg forrige måned" />}
+        icon={<ArrowLeftIcon title="velg forrige måned" />}
         className="navds-date__caption-button"
         type="button"
       />
@@ -94,7 +94,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
 
       <Button
         aria-label={nextLabel}
-        icon={<Right title="velg neste måned" />}
+        icon={<ArrowRightIcon title="velg neste måned" />}
         onClick={() => nextMonth && goToMonth(nextMonth)}
         disabled={!nextMonth}
         variant="tertiary"

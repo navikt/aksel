@@ -1,5 +1,22 @@
 # @navikt/ds-css-internal
 
+## 3.1.1
+
+### Patch Changes
+
+- [`14379a02c`](https://github.com/navikt/aksel/commit/14379a02c3d32091a8c33061464160d7de9f3f2e) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Timeline håndterte ikke SVG ikoner riktig
+
+## 3.1.0
+
+### Minor Changes
+
+- [#1966](https://github.com/navikt/aksel/pull/1966) [`f1c4c46eb`](https://github.com/navikt/aksel/commit/f1c4c46ebb0522561483f18e3b86b190cf9cc372) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Alle komponenter bruker nå default `:focus-visible` for fokusmarkering.
+  (Alle komponenter som bruker `:focus-visible` har også en fallback for `:focus`)
+
+## 3.0.1
+
+## 3.0.0
+
 ## 2.9.8
 
 ## 2.9.7

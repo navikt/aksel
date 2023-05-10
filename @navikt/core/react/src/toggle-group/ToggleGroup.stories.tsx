@@ -1,5 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Email, EmailOpened, Send } from "@navikt/ds-icons";
+
+import {
+  EnvelopeClosedIcon,
+  EnvelopeOpenIcon,
+  InboxUpIcon,
+} from "@navikt/aksel-icons";
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { ToggleGroup } from "../index";
@@ -27,28 +32,28 @@ const Items = (icon?: boolean, both?: boolean) => (
     <ToggleGroup.Item value="ulest">
       {both ? (
         <>
-          <Email /> Uleste
+          <EnvelopeClosedIcon /> Uleste
         </>
       ) : (
-        <>{icon ? <Email /> : "Uleste"}</>
+        <>{icon ? <EnvelopeClosedIcon /> : "Uleste"}</>
       )}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="lest">
       {both ? (
         <>
-          <EmailOpened /> Leste
+          <EnvelopeOpenIcon /> Leste
         </>
       ) : (
-        <>{icon ? <EmailOpened /> : "Leste"}</>
+        <>{icon ? <EnvelopeOpenIcon /> : "Leste"}</>
       )}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="sendt">
       {both ? (
         <>
-          <Send /> Sendte
+          <InboxUpIcon /> Sendt
         </>
       ) : (
-        <>{icon ? <Send /> : "Sendte"}</>
+        <>{icon ? <InboxUpIcon /> : "Sendt"}</>
       )}
     </ToggleGroup.Item>
   </>

@@ -72,7 +72,7 @@ const ClickablePeriod = React.memo(
             initiate(index);
           }}
         >
-          <div className="navdsi-timeline__period--inner">{icon}</div>
+          <span className="navdsi-timeline__period--inner">{icon}</span>
         </button>
         {children && (
           <Popover

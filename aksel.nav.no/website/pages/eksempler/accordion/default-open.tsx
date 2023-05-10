@@ -12,7 +12,7 @@ const Example = () => {
           nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
         </Accordion.Content>
       </Accordion.Item>
-      <Accordion.Item>
+      <Accordion.Item defaultOpen>
         <Accordion.Header>
           Til deg som har yrkesskade eller yrkessykdom
         </Accordion.Header>

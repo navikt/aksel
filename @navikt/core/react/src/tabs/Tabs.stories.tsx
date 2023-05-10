@@ -1,7 +1,7 @@
-import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Tabs } from ".";
+import { FreezerIcon, MugIcon, DishwasherIcon } from "@navikt/aksel-icons";
 
 export default {
   title: "ds-react/Tabs",
@@ -65,9 +65,13 @@ export const Default = {
         iconPosition={props?.iconPosition}
       >
         <Tabs.List>
-          <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
-          <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
-          <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
+          <Tabs.Tab value="test1" icon={<MugIcon />} label="Skap" />
+          <Tabs.Tab
+            value="test2"
+            label="Oppvaskmaskin"
+            icon={<DishwasherIcon />}
+          />
+          <Tabs.Tab value="test3" icon={<FreezerIcon />} label="Fryser" />
         </Tabs.List>
         <Panel />
       </Tabs>
@@ -84,9 +88,13 @@ export const Small = () => {
   return (
     <Tabs defaultValue="test2" size="small">
       <Tabs.List>
-        <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
-        <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
-        <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
+        <Tabs.Tab value="test1" icon={<MugIcon />} label="Skap" />
+        <Tabs.Tab
+          value="test2"
+          label="Oppvaskmaskin"
+          icon={<DishwasherIcon />}
+        />
+        <Tabs.Tab value="test3" icon={<FreezerIcon />} label="Fryser" />
       </Tabs.List>
       <Panel />
     </Tabs>
@@ -98,9 +106,13 @@ export const Controlled = () => {
   return (
     <Tabs value={activeValue} onChange={setActiveValue}>
       <Tabs.List>
-        <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
-        <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
-        <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
+        <Tabs.Tab value="test1" icon={<MugIcon />} label="Skap" />
+        <Tabs.Tab
+          value="test2"
+          label="Oppvaskmaskin"
+          icon={<DishwasherIcon />}
+        />
+        <Tabs.Tab value="test3" icon={<FreezerIcon />} label="Fryser" />
       </Tabs.List>
       <Panel />
     </Tabs>
@@ -112,17 +124,25 @@ export const IconPosition = () => {
     <div className="colgap">
       <Tabs defaultValue="test2" size="small">
         <Tabs.List>
-          <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
-          <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
-          <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
+          <Tabs.Tab value="test1" icon={<MugIcon />} label="Skap" />
+          <Tabs.Tab
+            value="test2"
+            label="Oppvaskmaskin"
+            icon={<DishwasherIcon />}
+          />
+          <Tabs.Tab value="test3" icon={<FreezerIcon />} label="Fryser" />
         </Tabs.List>
         <Panel />
       </Tabs>
       <Tabs defaultValue="test2" size="small" iconPosition="top">
         <Tabs.List style={{ margin: "0 auto" }}>
-          <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
-          <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
-          <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
+          <Tabs.Tab value="test1" icon={<MugIcon />} label="Skap" />
+          <Tabs.Tab
+            value="test2"
+            label="Oppvaskmaskin"
+            icon={<DishwasherIcon />}
+          />
+          <Tabs.Tab value="test3" icon={<FreezerIcon />} label="Fryser" />
         </Tabs.List>
         <Panel />
       </Tabs>
@@ -135,17 +155,17 @@ export const Icon = () => {
     <div className="colgap">
       <Tabs defaultValue="test2">
         <Tabs.List style={{ margin: "0 auto" }}>
-          <Tabs.Tab value="test1" icon={<Cup />} />
-          <Tabs.Tab value="test2" icon={<Dishwasher />} />
-          <Tabs.Tab value="test3" icon={<Freezer />} />
+          <Tabs.Tab value="test1" icon={<MugIcon />} />
+          <Tabs.Tab value="test2" icon={<DishwasherIcon />} />
+          <Tabs.Tab value="test3" icon={<FreezerIcon />} />
         </Tabs.List>
         <Panel />
       </Tabs>
       <Tabs defaultValue="test2" size="small" iconPosition="top">
         <Tabs.List style={{ margin: "0 auto" }}>
-          <Tabs.Tab value="test1" icon={<Cup />} />
-          <Tabs.Tab value="test2" icon={<Dishwasher />} />
-          <Tabs.Tab value="test3" icon={<Freezer />} />
+          <Tabs.Tab value="test1" icon={<MugIcon />} />
+          <Tabs.Tab value="test2" icon={<DishwasherIcon />} />
+          <Tabs.Tab value="test3" icon={<FreezerIcon />} />
         </Tabs.List>
         <Panel />
       </Tabs>
@@ -157,9 +177,13 @@ export const Overflow = () => {
   return (
     <Tabs defaultValue="test2" style={{ maxWidth: 300 }}>
       <Tabs.List>
-        <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
-        <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
-        <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
+        <Tabs.Tab value="test1" icon={<MugIcon />} label="Skap" />
+        <Tabs.Tab
+          value="test2"
+          label="Oppvaskmaskin"
+          icon={<DishwasherIcon />}
+        />
+        <Tabs.Tab value="test3" icon={<FreezerIcon />} label="Fryser" />
       </Tabs.List>
       <Panel />
     </Tabs>

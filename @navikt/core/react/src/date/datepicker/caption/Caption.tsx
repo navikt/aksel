@@ -1,4 +1,4 @@
-import { Left, Right } from "@navikt/ds-icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { Button, Label } from "../../..";
@@ -32,13 +32,13 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
           variant="tertiary"
           disabled={!previousMonth}
           onClick={() => previousMonth && goToMonth(previousMonth)}
-          icon={<Left title="velg forrige måned" />}
+          icon={<ArrowLeftIcon title="velg forrige måned" />}
           className="navds-date__caption-button"
           type="button"
         />
         <Button
           aria-label={nextLabel}
-          icon={<Right title="velg neste måned" />}
+          icon={<ArrowRightIcon title="velg neste måned" />}
           onClick={() => nextMonth && goToMonth(nextMonth)}
           disabled={!nextMonth}
           variant="tertiary"

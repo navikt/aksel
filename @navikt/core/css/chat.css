@@ -56,11 +56,6 @@
   gap: var(--a-spacing-2);
 }
 
-.navds-chat__bubble:focus {
-  box-shadow: var(--a-shadow-focus);
-  outline: none;
-}
-
 .navds-chat--right .navds-chat__bubble {
   border-radius: var(--a-border-radius-xlarge);
   border-bottom-right-radius: 2px;

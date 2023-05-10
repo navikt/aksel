@@ -1,5 +1,13 @@
 # @navikt/aksel-icons
 
+## 3.1.1
+
+## 3.1.0
+
+## 3.0.1
+
+## 3.0.0
+
 ## 2.9.8
 
 ### Patch Changes
