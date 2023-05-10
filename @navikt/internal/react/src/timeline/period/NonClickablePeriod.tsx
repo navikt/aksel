@@ -33,10 +33,12 @@ const NonClickablePeriod = ({
         [direction]: `${left}%`,
       }}
     >
-      <div className="navdsi-timeline__period--inner">
+      <span className="navdsi-timeline__period--inner">
         {icon}
-        <p className="sr-only">{ariaLabel(start, end, status, statusLabel)}</p>
-      </div>
+        <span className="sr-only">
+          {ariaLabel(start, end, status, statusLabel)}
+        </span>
+      </span>
     </div>
   );
 };

@@ -85,6 +85,10 @@
   align-items: center;
 }
 
+.navdsi-timeline__period--inner svg {
+  flex-shrink: 0;
+}
+
 .navdsi-timeline__period--clickable {
   cursor: pointer;
 }
