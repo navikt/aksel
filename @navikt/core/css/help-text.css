@@ -12,9 +12,15 @@
   font-size: 1.5rem;
 }
 
-.navds-help-text__button:focus {
-  outline: none;
+.navds-help-text__button:focus-visible {
   box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 4px var(--a-border-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-help-text__button:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 4px var(--a-border-focus);
+  }
 }
 
 .navds-help-text__icon {
@@ -36,10 +42,20 @@
   display: none;
 }
 
-.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"]) > .navds-help-text__icon {
+.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon {
   display: none;
 }
 
-.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"]) > .navds-help-text__icon--filled {
+.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon--filled {
   display: inherit;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-help-text__button:where(:focus) > .navds-help-text__icon {
+    display: none;
+  }
+
+  .navds-help-text__button:where(:focus) > .navds-help-text__icon--filled {
+    display: inherit;
+  }
 }

@@ -46,7 +46,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       isListOpen: isExternalListOpen,
       inputClassName,
       id = "",
-      setOptions,
+      shouldShowSelectedOptions = true,
       singleSelect = false,
       ...rest
     } = props;
@@ -58,7 +58,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
 
-    const { currentOption, toggleIsListOpen, isListOpen, filteredOptions } =
+    const { currentOption, toggleIsListOpen, filteredOptions } =
       useFilteredOptionsContext();
     const { customOptions, removeCustomOption, addCustomOption } =
       useCustomOptionsContext();
@@ -91,6 +91,16 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [customOptions, removeCustomOption, removeSelectedOption]
     );
 
+    const handleAddCustomOption = useCallback(
+      (event) => {
+        if (selectedOptions.includes(value.trim())) return;
+        addCustomOption({ value });
+        handleClear(event);
+        focusInput();
+      },
+      [selectedOptions, value, addCustomOption, handleClear, focusInput]
+    );
+
     const toggleOption = useCallback(
       (event) => {
         const clickedOption = event?.target?.textContent;
@@ -110,17 +120,19 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             removeCustomOption({ value: focusedOption });
         } else if (
           // add new option on Enter input value if in filteredOptions OR if input value is empty
-          isListOpen &&
           focusedOption &&
           (filteredOptions?.includes?.(String(value)) || !value)
-        )
+        ) {
           addSelectedOption(focusedOption);
+        } else if (value && !filteredOptions.includes(value)) {
+          handleAddCustomOption(event);
+        }
       },
       [
         currentOption,
         selectedOptions,
-        isListOpen,
         filteredOptions,
+        handleAddCustomOption,
         value,
         addSelectedOption,
         singleSelect,
@@ -130,16 +142,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         customOptions,
         removeCustomOption,
       ]
-    );
-
-    const handleAddCustomOption = useCallback(
-      (event) => {
-        if (selectedOptions.includes(value.trim())) return;
-        addCustomOption({ value });
-        handleClear(event);
-        focusInput();
-      },
-      [selectedOptions, value, addCustomOption, handleClear, focusInput]
     );
 
     //focus on input whenever selectedOptions changes
@@ -192,7 +194,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               />
             ) : (
               <SelectedOptions
-                selectedOptions={selectedOptions}
+                selectedOptions={
+                  shouldShowSelectedOptions ? selectedOptions : undefined
+                }
                 handleDeleteSelectedOption={handleDeleteSelectedOption}
               >
                 <Input

@@ -1,5 +1,46 @@
 # @navikt/ds-css
 
+## 3.1.1
+
+## 3.1.0
+
+### Minor Changes
+
+- [#1966](https://github.com/navikt/aksel/pull/1966) [`f1c4c46eb`](https://github.com/navikt/aksel/commit/f1c4c46ebb0522561483f18e3b86b190cf9cc372) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Alle komponenter bruker nå default `:focus-visible` for fokusmarkering.
+  (Alle komponenter som bruker `:focus-visible` har også en fallback for `:focus`)
+
+### Patch Changes
+
+- [#1967](https://github.com/navikt/aksel/pull/1967) [`9d2cd9e7f`](https://github.com/navikt/aksel/commit/9d2cd9e7fffb3cf6310c88229ee39ea85db19bca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Oppdatert Label og Description spacing for skjemakomponenter
+
+## 3.0.1
+
+## 3.0.0
+
+### Major Changes
+
+- [#1964](https://github.com/navikt/aksel/pull/1964) [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - **Accordion**
+
+  - Accordion oppdatet til å ha chevron left-aligned.
+  - Neutral-variant lagt til
+  - Diverse nye size-options for heading og paddinger.
+  - Deler av Accordion-CSS er refaktorert. Dette vil kunne brekke overskrevne stiler.
+
+- [#1964](https://github.com/navikt/aksel/pull/1964) [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Aksels løsninger bruker nå `@navikt/aksel-icons`
+
+  **Sideeffects av ikonendringer**
+
+  - Komponenter som tidligere brukte Expand-ikon har fått oppdatert animasjon (table, readmore og accordion)
+  - Alert bruker samme ikonstørrelse for alle størrelser
+  - Chips har justert padding/ikonstørrelser
+  - Datepicker hover-bug på knapper er fikset
+  - Helptekst bruker nå et custom-ikon.
+  - Select har fått justert padding rundt ikon
+  - Switch bruker samme checkmark som checkbox, er nå avrundet
+  - ReadMore har justert margin for alignment med ikon, fjernet content-animasjon
+  - Tabs bruker default text-default nå
+  - Stepper har endret hvordan den styler checkmark-ikon.
+
 ## 2.9.8
 
 ## 2.9.7

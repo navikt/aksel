@@ -49,18 +49,40 @@
   color: var(--ac-toggle-group-button-neutral-hover-text, var(--a-text-default));
 }
 
-.navds-toggle-group__button:focus {
+.navds-toggle-group__button:focus-visible {
   outline: none;
   box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 4px var(--a-border-focus);
 }
 
-.navds-toggle-group__button:focus:hover[aria-pressed="false"] {
-  box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)), 0 0 0 4px var(--a-border-focus);
+@supports not selector(:focus-visible) {
+  .navds-toggle-group__button:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 4px var(--a-border-focus);
+  }
+}
+
+.navds-toggle-group__button:focus-visible:hover[aria-pressed="false"] {
+  box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)),
+    0 0 0 4px var(--a-border-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-toggle-group__button:focus:hover[aria-pressed="false"] {
+    box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)),
+      0 0 0 4px var(--a-border-focus);
+  }
 }
 
 .navds-toggle-group--neutral > .navds-toggle-group__button:focus:hover[aria-pressed="false"] {
   box-shadow: 0 0 0 1px var(--ac-toggle-group-button-neutral-hover-bg, var(--a-surface-neutral-subtle-hover)),
     0 0 0 4px var(--a-border-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-toggle-group--neutral > .navds-toggle-group__button:focus-visible:hover[aria-pressed="false"] {
+    box-shadow: 0 0 0 1px var(--ac-toggle-group-button-neutral-hover-bg, var(--a-surface-neutral-subtle-hover)),
+      0 0 0 4px var(--a-border-focus);
+  }
 }
 
 .navds-toggle-group__button-inner {

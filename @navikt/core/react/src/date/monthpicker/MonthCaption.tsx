@@ -1,4 +1,4 @@
-import { Left, Right } from "@navikt/ds-icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
 import startOfYear from "date-fns/startOfYear";
@@ -61,7 +61,7 @@ export const MonthCaption = () => {
         disabled={hasPrevYear()}
         onClick={() => handleButtonClick(-1)}
         aria-label={labelPrevYear(locale?.code)}
-        icon={<Left aria-hidden />}
+        icon={<ArrowLeftIcon aria-hidden />}
         variant="tertiary"
         type="button"
       />
@@ -90,7 +90,7 @@ export const MonthCaption = () => {
         disabled={hasNextYear()}
         onClick={() => handleButtonClick(1)}
         aria-label={labelNextYear(locale?.code)}
-        icon={<Right aria-hidden />}
+        icon={<ArrowRightIcon aria-hidden />}
         variant="tertiary"
         type="button"
       />
