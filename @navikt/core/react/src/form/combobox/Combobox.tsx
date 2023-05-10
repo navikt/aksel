@@ -94,6 +94,16 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [customOptions, removeCustomOption, removeSelectedOption]
     );
 
+    const handleAddCustomOption = useCallback(
+      (event) => {
+        if (selectedOptions.includes(value.trim())) return;
+        addCustomOption({ value });
+        handleClear(event);
+        focusInput();
+      },
+      [selectedOptions, value, addCustomOption, handleClear, focusInput]
+    );
+
     const toggleOption = useCallback(
       (event) => {
         const clickedOption = event?.target?.textContent;
@@ -112,17 +122,19 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             removeCustomOption({ value: focusedOption });
         } else if (
           // add new option on Enter input value if in filteredOptions OR if input value is empty
-          isListOpen &&
           focusedOption &&
           (filteredOptions?.includes?.(String(value)) || !value)
-        )
+        ) {
           addSelectedOption(focusedOption);
+        } else if (value && !filteredOptions.includes(value)) {
+          handleAddCustomOption(event);
+        }
       },
       [
         currentOption,
         filteredOptions,
+        handleAddCustomOption,
         selectedOptions,
-        isListOpen,
         value,
         addSelectedOption,
         handleDeleteSelectedOption,
@@ -132,28 +144,20 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ]
     );
 
-    const handleAddCustomOption = useCallback(
-      (event) => {
-        if (selectedOptions.includes(value.trim())) return;
-        addCustomOption({ value });
-        handleClear(event);
-        focusInput();
-      },
-      [selectedOptions, value, addCustomOption, handleClear, focusInput]
-    );
-
     const handleKeyUp = (e) => {
       e.preventDefault();
       switch (e.key) {
         case "Escape":
-          handleClear({ trigger: e.key, event: e });
-          toggleIsListOpen(false);
+          if (filteredOptionsIndex !== null) {
+            handleClear({ trigger: e.key, event: e });
+          } else {
+            e.preventDefault();
+            toggleIsListOpen(false);
+          }
           break;
         case "Enter":
           e.preventDefault();
           toggleOption(e);
-          if (value && !filteredOptions.includes(value))
-            handleAddCustomOption(e);
           break;
         default:
           break;
