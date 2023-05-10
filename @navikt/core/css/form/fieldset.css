@@ -10,7 +10,7 @@
 }
 
 .navds-fieldset > .navds-fieldset__description:not(:empty) {
-  margin-top: var(--a-spacing-1);
+  margin-top: 0.125rem;
 }
 
 /* Applied when hideLegend is applied to fieldset */

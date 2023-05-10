@@ -1,9 +1,8 @@
-import React, { forwardRef, useState } from "react";
 import cl from "clsx";
-import { BodyShort, BodyLong, Label, ErrorMessage, omit, Detail } from "..";
-import { FormFieldProps, useFormField } from "./useFormField";
-import { useId } from "..";
+import React, { forwardRef, useState } from "react";
+import { BodyShort, ErrorMessage, Label, omit, useId } from "..";
 import TextareaAutosize from "../util/TextareaAutoSize";
+import { FormFieldProps, useFormField } from "./useFormField";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -120,31 +119,16 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {label}
         </Label>
         {!!description && (
-          <>
-            {size === "medium" ? (
-              <BodyLong
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </BodyLong>
-            ) : (
-              <Detail
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </Detail>
-            )}
-          </>
+          <BodyShort
+            className={cl("navds-form-field__description", {
+              "navds-sr-only": hideLabel,
+            })}
+            id={inputDescriptionId}
+            size={size}
+            as="div"
+          >
+            {description}
+          </BodyShort>
         )}
         <div className="navds-textarea__wrapper">
           <TextareaAutosize

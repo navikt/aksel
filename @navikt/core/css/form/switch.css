@@ -38,7 +38,7 @@
 .navds-switch__content {
   display: flex;
   flex-direction: column;
-  gap: var(--a-spacing-1);
+  gap: 0.125rem;
   padding: 0.75rem 0 0.75rem 3.25rem;
 }
 

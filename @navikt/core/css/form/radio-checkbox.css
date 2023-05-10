@@ -43,7 +43,7 @@
 .navds-radio__content {
   display: flex;
   flex-direction: column;
-  gap: var(--a-spacing-1);
+  gap: 0.125rem;
 }
 
 .navds-checkbox--small > .navds-checkbox__input,
