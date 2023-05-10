@@ -15,7 +15,6 @@ export interface ComboboxProps
   isListOpen: boolean;
   options?: string[];
   selectedOptions: string[];
-  setOptions: React.Dispatch<React.SetStateAction<any[]>>;
   setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
   onClear?: (e: ComboboxClearEvent) => void;
   clearButton?: boolean;
@@ -27,6 +26,7 @@ export interface ComboboxProps
   hideLabel?: boolean;
   label: React.ReactNode;
   children?: React.ReactNode;
+  shouldShowSelectedOptions?: boolean;
   value?: string;
 }
 

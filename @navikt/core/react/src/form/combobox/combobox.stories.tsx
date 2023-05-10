@@ -2,7 +2,7 @@
 import { Meta } from "@storybook/react";
 import React, { useState, useId } from "react";
 
-import { Combobox } from "../../index";
+import { Chips, Combobox } from "../../index";
 
 export default {
   title: "ds-react/Combobox",
@@ -39,17 +39,52 @@ const options = [
 const initialSelectedOptions = ["passion fruit", "grape fruit"];
 
 export const Default = (props) => {
+  const id = useId();
+  return (
+    <div data-theme="light">
+      <Combobox
+        options={options}
+        selectedOptions={initialSelectedOptions}
+        label="Hva er dine favorittfrukter?"
+        /* everything under here is optional? */
+        size="medium"
+        variant="simple"
+        id={id}
+      />
+    </div>
+  );
+};
+
+export const WithExternalChips = (props) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     initialSelectedOptions
   );
   const [value, setValue] = useState("");
   const id = useId();
+
+  const toggleSelected = (option) =>
+    selectedOptions.includes(option)
+      ? setSelectedOptions(selectedOptions.filter((opt) => opt !== option))
+      : setSelectedOptions([...selectedOptions, option]);
   return (
     <div data-theme={props.darkmode ? "dark" : "light"}>
+      {selectedOptions && (
+        <Chips>
+          {selectedOptions.map((option) => (
+            <Chips.Removable
+              key={option}
+              onMouseUp={() => toggleSelected(option)}
+              onKeyUp={(e) => e.key === "Enter" && toggleSelected(option)}
+            >
+              {option}
+            </Chips.Removable>
+          ))}
+        </Chips>
+      )}
       <Combobox
         options={options}
         selectedOptions={selectedOptions}
-        setSelectedOptions={setSelectedOptions}
+        onToggleSelected={(option: string) => toggleSelected(option)}
         isListOpen={props.isListOpen}
         /* everything under here is optional */
         value={props.controlled ? value : undefined}
@@ -60,6 +95,7 @@ export const Default = (props) => {
         error={props.error && "error here"}
         hasError={props.error && true}
         id={id}
+        shouldShowSelectedOptions={false}
       />
     </div>
   );
@@ -73,15 +109,15 @@ Default.args = {
 };
 
 export const Loading = () => {
-  const [options, setOptions] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const id = useId();
   return (
     <div>
       <Combobox
-        options={options}
-        setOptions={setOptions}
-        selectedOptions={selectedOptions}
-        setSelectedOptions={setSelectedOptions}
+        label="Hva er dine favorittfrukter?"
+        size="medium"
+        variant="simple"
+        id={id}
+        options={[]}
         isListOpen={true}
         loading={true}
       />

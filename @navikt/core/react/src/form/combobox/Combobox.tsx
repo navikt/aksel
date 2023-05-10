@@ -44,6 +44,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       toggleListButtonLabel,
       isListOpen: isExternalListOpen,
       id = "",
+      shouldShowSelectedOptions = true,
       ...rest
     } = props;
 
@@ -244,7 +245,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         <div className="navds-combobox__wrapper">
           <div className="navds-combobox__wrapper-inner navds-text-field__input">
             <SelectedOptions
-              selectedOptions={selectedOptions}
+              selectedOptions={
+                shouldShowSelectedOptions ? selectedOptions : undefined
+              }
               handleDeleteSelectedOption={handleDeleteSelectedOption}
             >
               <input

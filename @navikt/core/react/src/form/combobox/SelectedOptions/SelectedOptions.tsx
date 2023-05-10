@@ -2,13 +2,13 @@ import React from "react";
 import { Chips } from "../../..";
 
 interface SelectedOptionsProps {
-  selectedOptions: string[];
+  selectedOptions?: string[];
   handleDeleteSelectedOption: (option: string) => void;
   children: React.ReactNode;
 }
 
 const SelectedOptions: React.FC<SelectedOptionsProps> = ({
-  selectedOptions,
+  selectedOptions = [],
   handleDeleteSelectedOption,
   children,
 }) => {

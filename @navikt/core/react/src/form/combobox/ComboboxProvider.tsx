@@ -9,8 +9,8 @@ export default function ComboboxProvider(props) {
   const {
     children,
     isListOpen,
+    onToggleSelected,
     selectedOptions,
-    setSelectedOptions,
     options,
     value,
     onChange,
@@ -18,7 +18,7 @@ export default function ComboboxProvider(props) {
   } = props;
   return (
     <InputContextProvider value={{ value, onChange }}>
-      <SelectedOptionsProvider value={{ selectedOptions, setSelectedOptions }}>
+      <SelectedOptionsProvider value={{ selectedOptions, onToggleSelected }}>
         <CustomOptionsProvider>
           <FilteredOptionsProvider value={{ isListOpen, options }}>
             <Combobox {...rest}>{children}</Combobox>
