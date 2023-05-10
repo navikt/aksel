@@ -63,9 +63,16 @@
   padding: var(--ac-button-padding-icon-only-xsmall, var(--__ac-button-padding));
 }
 
-.navds-button:focus {
+.navds-button:focus-visible {
   outline: none;
   box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 .navds-button__icon {
@@ -114,8 +121,14 @@
   background-color: var(--ac-button-primary-active-bg, var(--a-surface-action-active));
 }
 
-.navds-button--primary:focus {
+.navds-button--primary:focus-visible {
   box-shadow: inset 0 0 0 1px var(--ac-button-primary-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--primary:focus {
+    box-shadow: inset 0 0 0 1px var(--ac-button-primary-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--primary:hover:where(:disabled, .navds-button--disabled),
@@ -140,8 +153,14 @@
   background-color: var(--ac-button-primary-neutral-active-bg, var(--a-surface-neutral-active));
 }
 
-.navds-button--primary-neutral:focus {
+.navds-button--primary-neutral:focus-visible {
   box-shadow: inset 0 0 0 1px var(--ac-button-primary-neutral-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--primary-neutral:focus {
+    box-shadow: inset 0 0 0 1px var(--ac-button-primary-neutral-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--primary-neutral:hover:where(:disabled, .navds-button--disabled),
@@ -164,8 +183,14 @@
   background-color: var(--ac-button-secondary-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-button--secondary:focus {
+.navds-button--secondary:focus-visible {
   box-shadow: inset 0 0 0 2px var(--ac-button-secondary-focus-border, var(--a-border-action)), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--secondary:focus {
+    box-shadow: inset 0 0 0 2px var(--ac-button-secondary-focus-border, var(--a-border-action)), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--secondary:active {
@@ -174,8 +199,14 @@
   box-shadow: none;
 }
 
-.navds-button--secondary:focus:active {
+.navds-button--secondary:focus-visible:active {
   box-shadow: inset 0 0 0 1px var(--ac-button-secondary-active-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--secondary:focus:active {
+    box-shadow: inset 0 0 0 1px var(--ac-button-secondary-active-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--secondary:where(:disabled, .navds-button--disabled),
@@ -199,9 +230,16 @@
   background-color: var(--ac-button-secondary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
 }
 
-.navds-button--secondary-neutral:focus {
+.navds-button--secondary-neutral:focus-visible {
   color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
   box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--secondary-neutral:focus {
+    color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+    box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--secondary-neutral:active {
@@ -210,9 +248,16 @@
   box-shadow: none;
 }
 
-.navds-button--secondary-neutral:focus:active {
+.navds-button--secondary-neutral:focus-visible:active {
   box-shadow: inset 0 0 0 1px var(--ac-button-secondary-neutral-active-focus-border, var(--a-surface-default)),
     var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--secondary-neutral:focus:active {
+    box-shadow: inset 0 0 0 1px var(--ac-button-secondary-neutral-active-focus-border, var(--a-surface-default)),
+      var(--a-shadow-focus);
+  }
 }
 
 .navds-button--secondary-neutral:where(:disabled, .navds-button--disabled),
@@ -236,8 +281,14 @@
   background-color: var(--ac-button-tertiary-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-button--tertiary:focus {
+.navds-button--tertiary:focus-visible {
   box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-focus-border, var(--a-border-action)), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--tertiary:focus {
+    box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-focus-border, var(--a-border-action)), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--tertiary:active {
@@ -250,8 +301,14 @@
   background-color: var(--ac-button-tertiary-active-hover-bg, var(--a-surface-action-active));
 }
 
-.navds-button--tertiary:active:focus {
+.navds-button--tertiary:focus-visible:active {
   box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--tertiary:focus:active {
+    box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--tertiary:where(:disabled, .navds-button--disabled),
@@ -276,8 +333,14 @@
   background-color: var(--ac-button-tertiary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
 }
 
-.navds-button--tertiary-neutral:focus {
+.navds-button--tertiary-neutral:focus-visible {
   box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--tertiary-neutral:focus {
+    box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--tertiary-neutral:active {
@@ -290,8 +353,14 @@
   background-color: var(--ac-button-tertiary-neutral-active-hover-bg, var(--a-surface-neutral-active));
 }
 
-.navds-button--tertiary-neutral:active:focus {
+.navds-button--tertiary-neutral:focus-visible:active {
   box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--tertiary-neutral:focus:active {
+    box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--tertiary-neutral:where(:disabled, .navds-button--disabled),
@@ -320,8 +389,14 @@
   background-color: var(--ac-button-danger-active-bg, var(--a-surface-danger-active));
 }
 
-.navds-button--danger:focus {
+.navds-button--danger:focus-visible {
   box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--danger:focus {
+    box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+  }
 }
 
 .navds-button--danger:active:where(:disabled, .navds-button--disabled),
