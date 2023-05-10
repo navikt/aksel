@@ -47,7 +47,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
             <BodyShort
               as="span"
               size={size}
-              className="navds-radio__description"
+              className="navds-form-field__subdescription navds-radio__description"
             >
               {props.description}
             </BodyShort>

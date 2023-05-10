@@ -46,11 +46,6 @@
   gap: 0.125rem;
 }
 
-.navds-checkbox__description,
-.navds-radio__description {
-  color: var(--a-text-subtle);
-}
-
 .navds-checkbox--small > .navds-checkbox__input,
 .navds-radio--small > .navds-radio__input {
   width: 32px;

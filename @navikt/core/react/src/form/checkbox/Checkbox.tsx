@@ -95,7 +95,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               <BodyShort
                 as="span"
                 size={size}
-                className="navds-checkbox__description"
+                className="navds-form-field__subdescription navds-checkbox__description"
               >
                 {props.description}
               </BodyShort>

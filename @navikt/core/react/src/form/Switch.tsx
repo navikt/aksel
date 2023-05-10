@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { BodyShort, Detail, Loader, omit } from "..";
+import { BodyShort, Loader, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 const SelectedIcon = () => (
@@ -71,8 +71,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       ...rest
     } = props;
 
-    const Description = size === "medium" ? BodyShort : Detail;
-
     const [checked, setChecked] = useState(
       defaultChecked ?? checkedProp ?? false
     );
@@ -130,13 +128,13 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
               {children}
             </BodyShort>
             {description && (
-              <Description
+              <BodyShort
+                size={size}
                 as="div"
-                size="small"
-                className="navds-switch__description"
+                className="navds-form-field__subdescription navds-switch__description"
               >
                 {description}
-              </Description>
+              </BodyShort>
             )}
           </div>
         </label>

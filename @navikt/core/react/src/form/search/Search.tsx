@@ -181,12 +181,12 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         </Label>
         {!!description && (
           <BodyShort
-            as="div"
             className={cl("navds-form-field__description", {
               "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
+            as="div"
           >
             {description}
           </BodyShort>
