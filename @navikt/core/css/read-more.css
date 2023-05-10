@@ -24,9 +24,16 @@
   background-color: var(--ac-read-more-active-bg, var(--a-surface-active));
 }
 
-.navds-read-more__button:focus {
+.navds-read-more__button:focus-visible {
   outline: none;
   box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-read-more__button:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 .navds-read-more__content {

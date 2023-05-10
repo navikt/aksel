@@ -80,10 +80,18 @@ button.navds-stepper__step {
   cursor: default;
 }
 
-:where(.navds-stepper__step):focus {
+:where(.navds-stepper__step):focus-visible {
   outline: none;
   box-shadow: var(--a-shadow-focus);
   isolation: isolate;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-stepper__step:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+    isolation: isolate;
+  }
 }
 
 .navds-stepper__circle {
