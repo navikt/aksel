@@ -1,5 +1,5 @@
 import React from "react";
-import { Collapse, Expand } from "@navikt/ds-icons";
+import { ChevronUpIcon, ChevronDownIcon } from "@navikt/aksel-icons";
 
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
 
@@ -25,7 +25,11 @@ export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
           ? "Lukk"
           : "Åpne"}
       </span>
-      {isListOpen ? <Collapse aria-hidden /> : <Expand aria-hidden />}
+      {isListOpen ? (
+        <ChevronUpIcon aria-hidden />
+      ) : (
+        <ChevronDownIcon aria-hidden />
+      )}
     </button>
   );
 };

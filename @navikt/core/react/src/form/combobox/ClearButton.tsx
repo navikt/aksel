@@ -1,5 +1,5 @@
 import React from "react";
-import { Close } from "@navikt/ds-icons";
+import { XMarkIcon } from "@navikt/aksel-icons";
 
 interface ClearButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   handleClear: (event: any) => void;
@@ -19,7 +19,7 @@ export const ClearButton: React.FC<ClearButtonProps> = ({
       <span className="navds-sr-only">
         {clearButtonLabel ? clearButtonLabel : "Tøm"}
       </span>
-      <Close aria-hidden width="20" height="20" />
+      <XMarkIcon aria-hidden width="20" height="20" />
     </button>
   );
 };
