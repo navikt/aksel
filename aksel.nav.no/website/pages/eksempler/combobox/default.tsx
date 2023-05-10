@@ -1,23 +1,43 @@
-// import { Combobox } from "@navikt/ds-react";
-// import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { Combobox } from "@navikt/ds-react";
+import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { useState } from "react";
 
-// const Example = () => {
-//   return (
-//     <Combobox
-//       label="Søk alle NAV sine sider"
-//       variant="simple"
-//       error="Søket må starte med xyz"
-//       size="small"
-//       hideLabel={false}
-//     >
-//       For å komme videre må du gi oss lov til å hente inn og bruke opplysninger
-//       om deg.
-//     </Combobox>
-//   );
-// };
+const initialOptions = [
+  "banana",
+  "apple",
+  "tangerine",
+  "pear",
+  "grape",
+  "kiwi",
+  "mango",
+  "passion fruit",
+  "pineapple",
+  "strawberry",
+  "watermelon",
+  "grape fruit",
+];
 
-// export default withDsExample(Example);
+const initialSelectedOptions = ["passion fruit", "grape fruit"];
 
-// export const args = {
-//   index: 0,
-// };
+export const Example = () => {
+  const [options, setOptions] = useState(initialOptions);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(
+    initialSelectedOptions
+  );
+  return (
+    <div>
+      <Combobox
+        options={options}
+        setOptions={setOptions}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
+      />
+    </div>
+  );
+};
+
+export default withDsExample(Example);
+
+export const args = {
+  index: 0,
+};
