@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
-import { BodyLong, Detail, Label, ErrorMessage, omit } from "../..";
+import { BodyShort, ErrorMessage, Label, omit } from "../..";
 import { FormFieldProps } from "../useFormField";
 import { useFieldset } from "./useFieldset";
 
@@ -104,30 +104,18 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           >
             {legend}
           </Label>
-          {!!description &&
-            (size === "medium" ? (
-              <BodyLong
-                className={cl("navds-fieldset__description", {
-                  "navds-sr-only": !!hideLegend,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {props.description}
-              </BodyLong>
-            ) : (
-              <Detail
-                className={cl("navds-fieldset__description", {
-                  "navds-sr-only": !!hideLegend,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {props.description}
-              </Detail>
-            ))}
+          {!!description && (
+            <BodyShort
+              className={cl("navds-fieldset__description", {
+                "navds-sr-only": !!hideLegend,
+              })}
+              id={inputDescriptionId}
+              size={size ?? "medium"}
+              as="div"
+            >
+              {props.description}
+            </BodyShort>
+          )}
           {children}
           <div
             id={errorId}

@@ -5,7 +5,7 @@
 }
 
 .navds-form-field__description {
-  margin-top: -4px;
+  margin-top: -6px;
 }
 
 .navds-form-field .navds-error-message,
@@ -26,4 +26,8 @@
 
 .navds-form-field__error:empty {
   display: none;
+}
+
+.navds-form-field__subdescription {
+  color: var(--ac-form-subdescription, var(--a-text-subtle));
 }

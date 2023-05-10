@@ -1,8 +1,8 @@
-import React, { forwardRef, SelectHTMLAttributes } from "react";
 import cl from "clsx";
+import React, { forwardRef, SelectHTMLAttributes } from "react";
 
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { BodyLong, Label, ErrorMessage, omit, Detail } from "..";
+import { BodyShort, ErrorMessage, Label, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface SelectProps
@@ -74,31 +74,16 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {label}
         </Label>
         {!!description && (
-          <>
-            {size === "medium" ? (
-              <BodyLong
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </BodyLong>
-            ) : (
-              <Detail
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </Detail>
-            )}
-          </>
+          <BodyShort
+            className={cl("navds-form-field__description", {
+              "navds-sr-only": hideLabel,
+            })}
+            id={inputDescriptionId}
+            size={size}
+            as="div"
+          >
+            {description}
+          </BodyShort>
         )}
         <div className="navds-select__container" style={style}>
           <select
