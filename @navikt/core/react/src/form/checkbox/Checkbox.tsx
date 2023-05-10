@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import { BodyLong, BodyShort, Detail } from "../../typography";
+import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { FormFieldProps } from "../useFormField";
 import useCheckbox from "./useCheckbox";
@@ -43,8 +43,6 @@ export interface CheckboxProps
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const { inputProps, hasError, size } = useCheckbox(props);
-
-    const Description = size === "medium" ? BodyLong : Detail;
 
     return (
       <div
@@ -94,9 +92,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               {props.children}
             </BodyShort>
             {props.description && (
-              <Description as="span" className="navds-checkbox__description">
+              <BodyShort
+                as="span"
+                size={size}
+                className="navds-checkbox__description"
+              >
                 {props.description}
-              </Description>
+              </BodyShort>
             )}
           </span>
         </label>
