@@ -47,6 +47,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       inputClassName,
       id = "",
       setOptions,
+      singleSelect = false,
       ...rest
     } = props;
 
@@ -99,7 +100,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           if (selectedOptions.includes(clickedOption)) {
             handleDeleteSelectedOption(clickedOption);
           } else if (filteredOptions.includes(clickedOption))
-            addSelectedOption(clickedOption);
+            if (singleSelect) onChange(clickedOption);
+            else addSelectedOption(clickedOption);
         }
         // remove selected filteredOption on Enter
         else if (focusedOption && selectedOptions.includes(focusedOption)) {
@@ -174,10 +176,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         )}
         <div className="navds-combobox__wrapper">
           <div className="navds-combobox__wrapper-inner navds-text-field__input">
-            <SelectedOptions
-              selectedOptions={selectedOptions}
-              handleDeleteSelectedOption={handleDeleteSelectedOption}
-            >
+            {singleSelect ? (
               <Input
                 key="combobox-input"
                 ref={mergedInputRef}
@@ -189,7 +188,24 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 toggleOption={toggleOption}
                 handleAddCustomOption={handleAddCustomOption}
               />
-            </SelectedOptions>
+            ) : (
+              <SelectedOptions
+                selectedOptions={selectedOptions}
+                handleDeleteSelectedOption={handleDeleteSelectedOption}
+              >
+                <Input
+                  key="combobox-input"
+                  ref={mergedInputRef}
+                  {...rest}
+                  value={value}
+                  onChange={(e) => onChange(e.target.value)}
+                  inputClassName={inputClassName}
+                  handleClear={handleClear}
+                  toggleOption={toggleOption}
+                  handleAddCustomOption={handleAddCustomOption}
+                />
+              </SelectedOptions>
+            )}
             {value && clearButton && (
               <ClearButton
                 handleClear={(event) =>

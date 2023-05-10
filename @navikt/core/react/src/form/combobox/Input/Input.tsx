@@ -39,12 +39,6 @@ const Input = ({
         toggleIsListOpen(false);
         break;
       case "Enter":
-        console.log(
-          "bool v, filtops",
-          Boolean(value),
-          filteredOptions.includes(value),
-          `value ${value}`
-        );
         e.preventDefault();
         toggleOption(e);
         if (value && !filteredOptions.includes(value)) handleAddCustomOption(e);

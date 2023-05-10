@@ -21,7 +21,7 @@ export default {
   },
 } as Meta;
 
-const originalOptions = [
+const options = [
   "banana",
   "apple",
   "tangerine",
@@ -36,12 +36,12 @@ const originalOptions = [
   "grape fruit",
 ];
 
-const initialSelectedOptions = ["passion fruit", "grape fruit"];
+const selectedOptions = ["passion fruit", "grape fruit"];
 
 export const Default = (props) => {
-  const [options, setOptions] = useState(originalOptions);
+  const [options, setOptions] = useState(props.options);
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    initialSelectedOptions
+    props.selectedOptions
   );
   const [value, setValue] = useState("");
   const id = useId();
@@ -70,7 +70,8 @@ export const Default = (props) => {
 Default.args = {
   controlled: false,
   loading: false,
-  error: "",
+  options,
+  selectedOptions,
 };
 
 export function Loading({ isListOpen, loading }) {
@@ -89,4 +90,28 @@ export function Loading({ isListOpen, loading }) {
 Loading.args = {
   loading: true,
   isListOpen: true,
+};
+
+export function SingleSelect(props) {
+  const [options, setOptions] = useState(props.options);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(
+    props.selectedOptions
+  );
+  return (
+    <div>
+      <Combobox
+        singleSelect={props.singleSelect}
+        options={options}
+        selectedOptions={selectedOptions}
+        setOptions={setOptions}
+        setSelectedOptions={setSelectedOptions}
+      />
+    </div>
+  );
+}
+
+SingleSelect.args = {
+  singleSelect: true,
+  options,
+  selectedOptions,
 };

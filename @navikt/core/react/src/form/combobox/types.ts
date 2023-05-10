@@ -29,6 +29,7 @@ export interface ComboboxProps
   children?: React.ReactNode;
   value?: string;
   inputClassName?: string | undefined;
+  singleSelect?: boolean;
 }
 
 export interface ComboboxContextProps {
