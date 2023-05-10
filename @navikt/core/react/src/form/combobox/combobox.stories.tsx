@@ -129,3 +129,35 @@ Loading.args = {
   loading: true,
   isListOpen: true,
 };
+
+export const WithCallbacks = () => {
+  const id = useId();
+  const [lastSelected, setLastSelected] = useState<{
+    option: string;
+    isSelected: boolean;
+  }>();
+  return (
+    <div>
+      {lastSelected && (
+        <p>
+          Sist valgt: {lastSelected.option} (
+          {lastSelected.isSelected ? "valgt" : "ikke valgt"})
+        </p>
+      )}
+      <Combobox
+        label="Hva er dine favorittfrukter?"
+        size="medium"
+        variant="simple"
+        id={id}
+        options={options}
+        onToggleSelected={(option, isSelected) =>
+          setLastSelected({ option, isSelected })
+        }
+      />
+    </div>
+  );
+};
+
+WithCallbacks.args = {
+  options: [],
+};
