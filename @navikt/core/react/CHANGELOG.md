@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 3.0.1
+
+### Patch Changes
+
+- [`fa2ead912`](https://github.com/navikt/aksel/commit/fa2ead912a4db15d1fa7e2c3efccbe69a64dc9a7) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :fire: Fjernet ds-icons fra dependencies
+
+- [`db3846f5c`](https://github.com/navikt/aksel/commit/db3846f5cd483ad0ca24bc5938cfcdb64260f89d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset default headingSize for Accordion
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.0.1
+
 ## 3.0.0
 
 ### Major Changes
