@@ -68,12 +68,7 @@ export const Variants = {
           />
         </div>
         <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-          <CopyButton
-            size="small"
-            clipboardText="3.14"
-            variant="tertiary-neutral"
-          />{" "}
-          Kopier dette feltet
+          <CopyButton size="small" clipboardText="3.14" /> Kopier dette feltet
         </div>
         <div>
           <Tooltip
@@ -81,10 +76,12 @@ export const Variants = {
           >
             <CopyButton
               clipboardText="3.14"
-              variant="tertiary"
               onActiveChange={(v) => setActive(v)}
             />
           </Tooltip>
+        </div>
+        <div>
+          <CopyButton clipboardText="3.14" activeDuration={300} />
         </div>
       </div>
     );

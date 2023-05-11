@@ -40,6 +40,11 @@ export interface CopyButtonProps
    *
    */
   icon?: React.ReactNode;
+  /**
+   * Timeout duration in milliseconds
+   * @default 2000
+   */
+  activeDuration?: number;
 }
 
 export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
@@ -49,10 +54,11 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       clipboardText,
       text,
       activeText = "Kopiert!",
-      variant = "tertiary",
+      variant = "tertiary-neutral",
       size = "medium",
       onActiveChange,
       icon,
+      activeDuration = 2000,
       ...rest
     },
     ref
@@ -78,7 +84,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       timeoutRef.current = window.setTimeout(() => {
         setActive(false);
         onActiveChange?.(false);
-      }, 2000);
+      }, activeDuration);
     };
 
     return (

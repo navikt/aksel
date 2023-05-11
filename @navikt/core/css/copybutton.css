@@ -103,21 +103,15 @@
 }
 
 .navds-copybutton--active > .navds-copybutton__content {
-  animation: akselCopyButtonAnimation 0.5s ease;
+  animation: akselCopyButtonAnimation 0.4s linear;
 }
 
 @keyframes akselCopyButtonAnimation {
   0% {
-    opacity: 0.7;
-    scale: 0.98;
-  }
-
-  80% {
-    scale: 1;
+    opacity: 0.4;
   }
 
   100% {
     opacity: 1;
-    scale: 1;
   }
 }
