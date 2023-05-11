@@ -256,8 +256,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
               <input
                 key="combobox-input"
                 ref={mergedInputRef}
-                {...omit(rest, ["error", "errorId", "size"])}
-                {...inputProps}
+                {...omit(rest, ["error", "errorId", "size", "variant"])}
+                {...omit(inputProps, ["aria-invalid"])}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 type="text"
