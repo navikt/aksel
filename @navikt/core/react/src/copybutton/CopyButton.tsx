@@ -17,31 +17,34 @@ export interface CopyButtonProps
    */
   size?: "medium" | "small";
   /**
-   *
+   * @default "tertiary-neutral"
    */
   variant?: "tertiary" | "tertiary-neutral";
   /**
-   *
+   *  Text to copy to clipboard
    */
   clipboardText: string;
   /**
-   *
+   *  Optional text in button
    */
   text?: string;
   /**
+   * Text shown when button is clicked
    * @default "Kopiert!"
    */
   activeText?: string;
   /**
-   *
+   *  Callback when 'copied'-state is active
    */
   onActiveChange?: (state: boolean) => void;
   /**
-   *
+   *  Icon shown when button is not clicked
+   * @default <FilesIcon />
    */
   icon?: React.ReactNode;
   /**
-   *
+   * Icon shown when button is clicked
+   * @default <CheckmarkIcon />
    */
   activeIcon?: React.ReactNode;
   /**
@@ -70,7 +73,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
   ) => {
     const [active, setActive] = useState(false);
     const [activated, setActivated] = useState(false);
-    const timeoutRef = useRef<number | null>();
+    const timeoutRef = useRef<number>();
 
     useEffect(() => {
       return () => {
