@@ -206,7 +206,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
 
-    /*function getActiveDescendantId() {
+    function getActiveDescendantId() {
       if (filteredOptionsIndex === null) {
         return undefined;
       } else if (filteredOptionsIndex === -1) {
@@ -214,7 +214,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       } else {
         return `${id}-option-${filteredOptions[filteredOptionsIndex]}`;
       }
-    }*/
+    }
 
     return (
       <ComboboxWrapper
@@ -260,10 +260,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 {...inputProps}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                type="search"
+                type="text"
+                role="combobox"
                 onKeyUp={handleKeyUp}
                 onKeyDown={handleKeyDown}
+                aria-controls={`${id}-filteredOptions`}
+                aria-expanded={!!isListOpen}
                 autoComplete="off"
+                aria-autocomplete="list"
+                aria-activedescendant={getActiveDescendantId()}
                 className={cl(
                   className,
                   "navds-combobox__input",
