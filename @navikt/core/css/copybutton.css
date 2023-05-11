@@ -1,3 +1,123 @@
-/* .navds-copybutton {
+.navds-copybutton {
+  --__ac-button-padding: var(--a-spacing-3) var(--a-spacing-5);
+
+  cursor: pointer;
+  margin: 0;
+  text-decoration: none;
+  border: none;
+  background: none;
+  border-radius: var(--ac-button-border-radius, var(--a-border-radius-medium));
+  padding: var(--ac-button-padding, var(--__ac-button-padding));
+  display: grid;
+  place-content: center;
 }
- */
+
+.navds-copybutton--small {
+  --__ac-button-padding: var(--a-spacing-1) var(--a-spacing-3);
+
+  padding: var(--ac-button-padding-small, var(--__ac-button-padding));
+  min-height: 2rem;
+}
+
+.navds-copybutton--icon-only {
+  --__ac-button-padding: var(--a-spacing-3);
+
+  padding: var(--ac-button-padding-icon-only, var(--__ac-button-padding));
+}
+
+.navds-copybutton--small.navds-copybutton--icon-only {
+  --__ac-button-padding: var(--a-spacing-1);
+
+  padding: var(--ac-button-padding-icon-only-small, var(--__ac-button-padding));
+}
+
+.navds-copybutton__icon {
+  --ac-button-icon-margin: -4px;
+
+  font-size: 1.5rem;
+  display: flex;
+}
+
+.navds-copybutton__icon:first-child {
+  margin-left: var(--ac-button-icon-margin);
+}
+
+.navds-copybutton__icon:only-child {
+  margin: 0;
+}
+
+.navds-copybutton--tertiary {
+  color: var(--ac-button-tertiary-text, var(--a-text-action));
+  background-color: var(--ac-button-tertiary-bg, var(--a-surface-transparent));
+}
+
+.navds-copybutton--tertiary:hover {
+  color: var(--ac-button-tertiary-hover-text, var(--a-text-action-on-action-subtle));
+  background-color: var(--ac-button-tertiary-hover-bg, var(--a-surface-action-subtle-hover));
+}
+
+.navds-copybutton:focus-visible {
+  outline: none;
+  box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-copybutton:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
+}
+
+.navds-copybutton--tertiary:where(:disabled, .navds-copybutton--disabled),
+.navds-copybutton--tertiary:hover:where(:disabled, .navds-copybutton--disabled) {
+  color: var(--ac-button-tertiary-text, var(--a-text-action));
+  background: none;
+  box-shadow: none;
+}
+
+.navds-copybutton--tertiary-neutral {
+  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+}
+
+.navds-copybutton--tertiary-neutral:hover {
+  color: var(--ac-button-tertiary-neutral-hover-text, var(--a-text-default));
+  background-color: var(--ac-button-tertiary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+}
+
+.navds-copybutton--tertiary-neutral:where(:disabled, .navds-copybutton--disabled),
+.navds-copybutton--tertiary-neutral:hover:where(:disabled, .navds-copybutton--disabled) {
+  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+  background: none;
+  box-shadow: none;
+}
+
+.navds-copybutton--active.navds-copybutton--tertiary {
+  color: var(--a-surface-success);
+}
+
+.navds-copybutton__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--a-spacing-2);
+}
+
+.navds-copybutton--active > .navds-copybutton__content {
+  animation: akselCopyButtonAnimation 0.5s ease;
+}
+
+@keyframes akselCopyButtonAnimation {
+  0% {
+    opacity: 0.7;
+    scale: 0.98;
+  }
+
+  80% {
+    scale: 1;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}

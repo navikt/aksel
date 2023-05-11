@@ -1,3 +1,5 @@
+import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
+import cl from "clsx";
 import React, {
   ButtonHTMLAttributes,
   forwardRef,
@@ -5,10 +7,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import cl from "clsx";
 import copy from "../util/copy";
-import { Button } from "../button";
-import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
+import Label from "../typography/Label";
 
 export interface CopyButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,10 +20,43 @@ export interface CopyButtonProps
    *
    */
   variant?: "tertiary" | "tertiary-neutral";
+  /**
+   *
+   */
+  clipboardText: string;
+  /**
+   *
+   */
+  text?: string;
+  /**
+   * @default "Kopiert!"
+   */
+  activeText?: string;
+  /**
+   *
+   */
+  onActiveChange?: (state: boolean) => void;
+  /**
+   *
+   */
+  icon?: React.ReactNode;
 }
 
 export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
-  ({ className, variant = "tertiary", size = "medium", ...rest }, ref) => {
+  (
+    {
+      className,
+      clipboardText,
+      text,
+      activeText = "Kopiert!",
+      variant = "tertiary",
+      size = "medium",
+      onActiveChange,
+      icon,
+      ...rest
+    },
+    ref
+  ) => {
     const [active, setActive] = useState(false);
     const timeoutRef = useRef<number | null>();
 
@@ -36,30 +69,65 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     const handleClick = (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
-      copy("test");
+      timeoutRef.current && clearTimeout(timeoutRef.current);
+      copy(clipboardText);
       setActive(true);
       rest.onClick?.(event);
+      onActiveChange?.(true);
 
-      timeoutRef.current = window.setTimeout(() => setActive(false), 2000);
+      timeoutRef.current = window.setTimeout(() => {
+        setActive(false);
+        onActiveChange?.(false);
+      }, 2000);
     };
 
     return (
-      <Button
+      <button
         {...rest}
         ref={ref}
         className={cl(
           "navds-copybutton",
           className,
-          `navds-copybutton--${size}`
+          `navds-copybutton--${size}`,
+          `navds-copybutton--${variant}`,
+          {
+            "navds-copybutton--icon-only": !text,
+            "navds-copybutton--active": active,
+          }
         )}
         onClick={handleClick}
-        variant={variant}
-        icon={
-          active ? <CheckmarkIcon aria-hidden /> : <FilesIcon aria-hidden />
-        }
       >
-        {active ? <span>Kopiert!</span> : <span>Kopier!</span>}
-      </Button>
+        <span className="navds-copybutton__content">
+          {active ? (
+            <span className="navds-copybutton__icon">
+              <CheckmarkIcon aria-hidden />
+            </span>
+          ) : (
+            <span className="navds-copybutton__icon">
+              {icon ?? <FilesIcon aria-hidden />}
+            </span>
+          )}
+
+          {text &&
+            (active ? (
+              <Label
+                as="span"
+                size={size === "medium" ? "medium" : "small"}
+                aria-live="polite"
+              >
+                {activeText}
+              </Label>
+            ) : (
+              <Label
+                as="span"
+                size={size === "medium" ? "medium" : "small"}
+                aria-live="polite"
+              >
+                {text}
+              </Label>
+            ))}
+        </span>
+      </button>
     );
   }
 );
