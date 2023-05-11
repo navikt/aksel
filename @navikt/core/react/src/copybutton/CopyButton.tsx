@@ -41,6 +41,10 @@ export interface CopyButtonProps
    */
   icon?: React.ReactNode;
   /**
+   *
+   */
+  activeIcon?: React.ReactNode;
+  /**
    * Timeout duration in milliseconds
    * @default 2000
    */
@@ -58,12 +62,14 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       size = "medium",
       onActiveChange,
       icon,
+      activeIcon,
       activeDuration = 2000,
       ...rest
     },
     ref
   ) => {
     const [active, setActive] = useState(false);
+    const [activated, setActivated] = useState(false);
     const timeoutRef = useRef<number | null>();
 
     useEffect(() => {
@@ -80,8 +86,10 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       setActive(true);
       rest.onClick?.(event);
       onActiveChange?.(true);
+      setActivated(false);
 
       timeoutRef.current = window.setTimeout(() => {
+        setActivated(true);
         setActive(false);
         onActiveChange?.(false);
       }, activeDuration);
@@ -102,15 +110,27 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           }
         )}
         onClick={handleClick}
+        aria-label={activated ? activeText : undefined}
+        onBlur={() => setActivated(false)}
       >
         <span className="navds-copybutton__content">
           {active ? (
             <span className="navds-copybutton__icon">
-              <CheckmarkIcon aria-hidden />
+              {activeIcon ?? (
+                <CheckmarkIcon
+                  aria-hidden={!!text}
+                  title={text ? undefined : "Kopiert"}
+                />
+              )}
             </span>
           ) : (
             <span className="navds-copybutton__icon">
-              {icon ?? <FilesIcon aria-hidden />}
+              {icon ?? (
+                <FilesIcon
+                  aria-hidden={!!text}
+                  title={text ? undefined : "Kopier"}
+                />
+              )}
             </span>
           )}
 
