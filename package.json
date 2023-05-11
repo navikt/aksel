@@ -144,7 +144,7 @@
     "extends": [
       "stylelint-config-standard",
       "stylelint-config-prettier",
-      "@navikt/aksel-stylelint"
+      "./@navikt/aksel-stylelint/recommended"
     ],
     "plugins": [
       "stylelint-value-no-unknown-custom-properties",
