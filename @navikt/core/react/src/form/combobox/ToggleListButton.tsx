@@ -17,13 +17,11 @@ export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
       onMouseDown={() => toggleIsListOpen()}
       onKeyDown={({ key }) => key === "Enter" && toggleIsListOpen()}
       className="navds-combobox__button-toggle-list"
+      aria-expanded={isListOpen}
+      tabIndex={-1}
     >
       <span className="navds-sr-only">
-        {toggleListButtonLabel
-          ? toggleListButtonLabel
-          : isListOpen
-          ? "Lukk"
-          : "Åpne"}
+        {toggleListButtonLabel ?? "Alternativer"}
       </span>
       {isListOpen ? (
         <ChevronUpIcon aria-hidden />
