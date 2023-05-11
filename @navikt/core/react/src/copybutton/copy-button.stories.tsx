@@ -21,3 +21,12 @@ export const Default = {
     size: "medium",
   },
 };
+
+export const Variants = {
+  render: () => (
+    <div className="colgap">
+      <CopyButton variant="tertiary" />
+      <CopyButton variant="tertiary-neutral" />
+    </div>
+  ),
+};

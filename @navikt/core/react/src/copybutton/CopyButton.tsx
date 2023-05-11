@@ -1,6 +1,14 @@
-import React, { ButtonHTMLAttributes, forwardRef } from "react";
+import React, {
+  ButtonHTMLAttributes,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import cl from "clsx";
 import copy from "../util/copy";
+import { Button } from "../button";
+import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 
 export interface CopyButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,12 +16,35 @@ export interface CopyButtonProps
    * @default "medium"
    */
   size?: "medium" | "small";
+  /**
+   *
+   */
+  variant?: "tertiary" | "tertiary-neutral";
 }
 
 export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
-  ({ className, size = "medium", ...rest }, ref) => {
+  ({ className, variant = "tertiary", size = "medium", ...rest }, ref) => {
+    const [active, setActive] = useState(false);
+    const timeoutRef = useRef<number | null>();
+
+    useEffect(() => {
+      return () => {
+        timeoutRef.current && clearTimeout(timeoutRef.current);
+      };
+    }, []);
+
+    const handleClick = (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      copy("test");
+      setActive(true);
+      rest.onClick?.(event);
+
+      timeoutRef.current = window.setTimeout(() => setActive(false), 2000);
+    };
+
     return (
-      <button
+      <Button
         {...rest}
         ref={ref}
         className={cl(
@@ -21,13 +52,14 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           className,
           `navds-copybutton--${size}`
         )}
-        onClick={(e) => {
-          copy("test123");
-          rest.onClick?.(e);
-        }}
+        onClick={handleClick}
+        variant={variant}
+        icon={
+          active ? <CheckmarkIcon aria-hidden /> : <FilesIcon aria-hidden />
+        }
       >
-        Copy!
-      </button>
+        {active ? <span>Kopiert!</span> : <span>Kopier!</span>}
+      </Button>
     );
   }
 );
