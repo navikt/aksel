@@ -46,17 +46,20 @@ interface ExpansionCardCommonProps
    * @default "medium"
    */
   size?: "medium" | "small";
-  /**
-   * Since ExpansionCard is a section-element, accessible name is required.
-   */
 }
 
 type ExpansionCardConditionalProps =
   | {
-      ["aria-label"]: string;
+      /**
+       * Should be set if not using 'aria-labelledby'
+       */
+      "aria-label": string;
     }
   | {
-      ["aria-labelledby"]: string;
+      /**
+       * Should be set if not using 'aria-label'
+       */
+      "aria-labelledby": string;
     };
 
 export type ExpansionCardContextProps = {
