@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 3.1.3
+
+### Patch Changes
+
+- [#1976](https://github.com/navikt/aksel/pull/1976) [`e8ecf309a`](https://github.com/navikt/aksel/commit/e8ecf309a910e47fd3cea6c54cd993ab1196910f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Oppdatert utseende for ToggleGroup
+
+  - Medium og Small er begge 10px lavere
+  - Mindre border-radius
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.1.3
+
 ## 3.1.2
 
 ### Patch Changes
