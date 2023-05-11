@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "clsx";
-import { Label } from "..";
+import { BodyShort } from "../typography/BodyShort";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import { ToggleGroupContext } from "./ToggleGroup";
 
@@ -30,13 +30,13 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
         ref={ref}
         className={cl("navds-toggle-group__button", className)}
       >
-        <Label
+        <BodyShort
           as="span"
           className="navds-toggle-group__button-inner"
           size={context?.size}
         >
           {children}
-        </Label>
+        </BodyShort>
       </RadixToggleGroup.Item>
     );
   }
