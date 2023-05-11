@@ -1,12 +1,13 @@
 import React, { ButtonHTMLAttributes, forwardRef } from "react";
 import cl from "clsx";
+import copy from "../util/copy";
 
 export interface CopyButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * @default "medium"
    */
-  size?: "medium" | "small" | "xsmall";
+  size?: "medium" | "small";
 }
 
 export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
@@ -20,7 +21,13 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           className,
           `navds-copybutton--${size}`
         )}
-      />
+        onClick={(e) => {
+          copy("test123");
+          rest.onClick?.(e);
+        }}
+      >
+        Copy!
+      </button>
     );
   }
 );
