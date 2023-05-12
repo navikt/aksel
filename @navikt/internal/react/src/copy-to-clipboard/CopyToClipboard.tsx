@@ -10,6 +10,9 @@ import {
   mergeRefs,
 } from "@navikt/ds-react";
 
+/**
+ * @deprecated Use import { CopyButton } from "@navikt/ds-react" instead
+ */
 export interface CopyToClipboardProps
   extends Omit<ButtonProps, "children" | "onClick" | "variant" | "loading"> {
   /**
@@ -57,6 +60,9 @@ export interface CopyToClipboardProps
   variant?: "tertiary";
 }
 
+/**
+ * @deprecated Use import { CopyButton } from "@navikt/ds-react" instead
+ */
 export const CopyToClipboard = forwardRef<
   HTMLButtonElement,
   CopyToClipboardProps
