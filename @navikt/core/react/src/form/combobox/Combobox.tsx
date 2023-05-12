@@ -246,7 +246,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           </BodyShort>
         )}
         <div className="navds-combobox__wrapper">
-          <div className="navds-combobox__wrapper-inner navds-text-field__input">
+          <div
+            className={cl(
+              "navds-combobox__wrapper-inner navds-text-field__input",
+              {
+                "navds-combobox__wrapper-inner--virtually-unfocused":
+                  currentOption,
+              }
+            )}
+          >
             <SelectedOptions
               selectedOptions={
                 shouldShowSelectedOptions ? selectedOptions : undefined

@@ -56,6 +56,10 @@
   box-shadow: var(--a-shadow-focus);
 }
 
+.navds-combobox__wrapper-inner:has(.navds-combobox__input:focus).navds-combobox__wrapper-inner--virtually-unfocused {
+  box-shadow: none;
+}
+
 .navds-combobox__button-clear {
   position: absolute;
   right: 2.25rem;
