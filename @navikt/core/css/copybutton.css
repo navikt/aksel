@@ -115,3 +115,8 @@
     opacity: 1;
   }
 }
+
+.navds-copybutton:where(:disabled) {
+  cursor: not-allowed;
+  opacity: 0.3;
+}

@@ -155,3 +155,12 @@ export const WithTooltip = {
 export const Duration = {
   render: () => <CopyButton clipboardText="3.14" activeDuration={300} />,
 };
+
+export const Disabled = {
+  render: () => (
+    <div className="colgap">
+      <CopyButton clipboardText="3.14" disabled />
+      <CopyButton clipboardText="3.14" size="small" disabled />
+    </div>
+  ),
+};
