@@ -1,45 +1,45 @@
 .navds-copybutton {
-  --__ac-button-padding: var(--a-spacing-3) var(--a-spacing-5);
+  --__ac-copybutton-padding: var(--a-spacing-3) var(--a-spacing-5);
 
   cursor: pointer;
   margin: 0;
   text-decoration: none;
   border: none;
   background: none;
-  border-radius: var(--ac-button-border-radius, var(--a-border-radius-medium));
-  padding: var(--ac-button-padding, var(--__ac-button-padding));
+  border-radius: var(--ac-copybutton-border-radius, var(--a-border-radius-medium));
+  padding: var(--ac-copybutton-padding, var(--__ac-copybutton-padding));
   display: grid;
   place-content: center;
 }
 
 .navds-copybutton--small {
-  --__ac-button-padding: var(--a-spacing-1) var(--a-spacing-3);
+  --__ac-copybutton-padding: var(--a-spacing-1) var(--a-spacing-3);
 
-  padding: var(--ac-button-padding-small, var(--__ac-button-padding));
+  padding: var(--ac-copybutton-padding-small, var(--__ac-copybutton-padding));
   min-height: 2rem;
 }
 
 .navds-copybutton--icon-only {
-  --__ac-button-padding: var(--a-spacing-3);
+  --__ac-copybutton-padding: var(--a-spacing-3);
 
-  padding: var(--ac-button-padding-icon-only, var(--__ac-button-padding));
+  padding: var(--ac-copybutton-padding-icon-only, var(--__ac-copybutton-padding));
 }
 
 .navds-copybutton--small.navds-copybutton--icon-only {
-  --__ac-button-padding: var(--a-spacing-1);
+  --__ac-copybutton-padding: var(--a-spacing-1);
 
-  padding: var(--ac-button-padding-icon-only-small, var(--__ac-button-padding));
+  padding: var(--ac-copybutton-padding-icon-only-small, var(--__ac-copybutton-padding));
 }
 
 .navds-copybutton__icon {
-  --ac-button-icon-margin: -4px;
+  --ac-copybutton-icon-margin: -4px;
 
   font-size: 1.5rem;
   display: flex;
 }
 
 .navds-copybutton__icon:first-child {
-  margin-left: var(--ac-button-icon-margin);
+  margin-left: var(--ac-copybutton-icon-margin);
 }
 
 .navds-copybutton__icon:only-child {
@@ -47,13 +47,13 @@
 }
 
 .navds-copybutton--action {
-  color: var(--ac-button-action-text, var(--a-text-action));
-  background-color: var(--ac-button-action-bg, var(--a-surface-transparent));
+  color: var(--ac-copybutton-action-text, var(--a-text-action));
+  background-color: var(--ac-copybutton-action-bg, var(--a-surface-transparent));
 }
 
 .navds-copybutton--action:hover {
-  color: var(--ac-button-action-hover-text, var(--a-text-action-on-action-subtle));
-  background-color: var(--ac-button-action-hover-bg, var(--a-surface-action-subtle-hover));
+  color: var(--ac-copybutton-action-hover-text, var(--a-text-action-on-action-subtle));
+  background-color: var(--ac-copybutton-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-copybutton:focus-visible {
@@ -70,23 +70,23 @@
 
 .navds-copybutton--action:where(:disabled, .navds-copybutton--disabled),
 .navds-copybutton--action:hover:where(:disabled, .navds-copybutton--disabled) {
-  color: var(--ac-button-action-text, var(--a-text-action));
+  color: var(--ac-copybutton-action-text, var(--a-text-action));
   background: none;
   box-shadow: none;
 }
 
 .navds-copybutton--neutral {
-  color: var(--ac-button-neutral-text, var(--a-text-default));
+  color: var(--ac-copybutton-neutral-text, var(--a-text-default));
 }
 
 .navds-copybutton--neutral:hover {
-  color: var(--ac-button-neutral-hover-text, var(--a-text-default));
-  background-color: var(--ac-button-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+  color: var(--ac-copybutton-neutral-hover-text, var(--a-text-default));
+  background-color: var(--ac-copybutton-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
 }
 
 .navds-copybutton--neutral:where(:disabled, .navds-copybutton--disabled),
 .navds-copybutton--neutral:hover:where(:disabled, .navds-copybutton--disabled) {
-  color: var(--ac-button-neutral-text, var(--a-text-default));
+  color: var(--ac-copybutton-neutral-text, var(--a-text-default));
   background: none;
   box-shadow: none;
 }
