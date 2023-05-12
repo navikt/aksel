@@ -1,8 +1,8 @@
 import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
-import React, { useState } from "react";
+import { userEvent, within } from "@storybook/testing-library";
+import React from "react";
 import { CopyButton } from ".";
 import { Tooltip } from "../tooltip";
-import { userEvent, within } from "@storybook/testing-library";
 
 export default {
   title: "ds-react/CopyButton",
@@ -143,16 +143,11 @@ export const InlineDemo = {
 export const WithTooltip = {
   render: () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [active, setActive] = useState(false);
+
     return (
       <div>
-        <Tooltip
-          content={active ? "Kopierte fødselsnummer" : "Kopier fødselsnummer"}
-        >
-          <CopyButton
-            clipboardText="3.14"
-            onActiveChange={(v) => setActive(v)}
-          />
+        <Tooltip content="Kopier fødselsnummer">
+          <CopyButton clipboardText="3.14" />
         </Tooltip>
       </div>
     );

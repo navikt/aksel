@@ -1,18 +1,10 @@
 import { CopyButton, Tooltip } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
-import { useState } from "react";
 
 const Example = () => {
-  const [active, setActive] = useState(false);
-
   return (
-    <Tooltip
-      content={active ? "Kopierte fødselsnummer" : "Kopier fødselsnummer"}
-    >
-      <CopyButton
-        clipboardText="12003045000"
-        onActiveChange={(v) => setActive(v)}
-      />
+    <Tooltip content="Kopier fødselsnummer">
+      <CopyButton clipboardText="12003045000" />
     </Tooltip>
   );
 };
