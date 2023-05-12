@@ -30,7 +30,7 @@ export interface CopyButtonProps
   text?: string;
   /**
    * Text shown when button is clicked
-   * @default "Kopiert!"
+   * Only set if used with 'text'-prop
    */
   activeText?: string;
   /**
@@ -43,7 +43,7 @@ export interface CopyButtonProps
    */
   icon?: React.ReactNode;
   /**
-   * Icon shown when button is clicked
+   * Icon shown when active
    * @default <CheckmarkIcon />
    */
   activeIcon?: React.ReactNode;
