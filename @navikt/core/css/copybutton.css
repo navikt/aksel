@@ -7,7 +7,7 @@
   border: none;
   background: none;
   border-radius: var(--ac-copybutton-border-radius, var(--a-border-radius-medium));
-  padding: var(--ac-copybutton-padding, var(--__ac-copybutton-padding));
+  padding: var(--__ac-copybutton-padding);
   display: grid;
   place-content: center;
 }
@@ -15,45 +15,25 @@
 .navds-copybutton--small {
   --__ac-copybutton-padding: var(--a-spacing-1) var(--a-spacing-3);
 
-  padding: var(--ac-copybutton-padding-small, var(--__ac-copybutton-padding));
   min-height: 2rem;
 }
 
 .navds-copybutton--icon-only {
   --__ac-copybutton-padding: var(--a-spacing-3);
-
-  padding: var(--ac-copybutton-padding-icon-only, var(--__ac-copybutton-padding));
 }
 
 .navds-copybutton--small.navds-copybutton--icon-only {
   --__ac-copybutton-padding: var(--a-spacing-1);
-
-  padding: var(--ac-copybutton-padding-icon-only-small, var(--__ac-copybutton-padding));
 }
 
 .navds-copybutton__icon {
-  --ac-copybutton-icon-margin: -4px;
-
   font-size: 1.5rem;
   display: flex;
-}
-
-.navds-copybutton__icon:first-child {
-  margin-left: var(--ac-copybutton-icon-margin);
+  margin-left: -4px;
 }
 
 .navds-copybutton__icon:only-child {
   margin: 0;
-}
-
-.navds-copybutton--action {
-  color: var(--ac-copybutton-action-text, var(--a-text-action));
-  background-color: var(--ac-copybutton-action-bg, var(--a-surface-transparent));
-}
-
-.navds-copybutton--action:hover {
-  color: var(--ac-copybutton-action-hover-text, var(--a-text-action-on-action-subtle));
-  background-color: var(--ac-copybutton-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-copybutton:focus-visible {
@@ -68,15 +48,32 @@
   }
 }
 
-.navds-copybutton--action:where(:disabled, .navds-copybutton--disabled),
-.navds-copybutton--action:hover:where(:disabled, .navds-copybutton--disabled) {
+/* Variant/action */
+.navds-copybutton--action {
   color: var(--ac-copybutton-action-text, var(--a-text-action));
-  background: none;
+  background-color: var(--ac-copybutton-action-bg, var(--a-surface-transparent));
+}
+
+.navds-copybutton--action:hover {
+  color: var(--ac-copybutton-action-hover-text, var(--a-text-action-on-action-subtle));
+  background-color: var(--ac-copybutton-action-hover-bg, var(--a-surface-action-subtle-hover));
+}
+
+.navds-copybutton--action:where(:disabled),
+.navds-copybutton--action:hover:where(:disabled) {
+  color: var(--ac-copybutton-action-text, var(--a-text-action));
+  background-color: var(--ac-copybutton-action-bg, var(--a-surface-transparent));
   box-shadow: none;
 }
 
+.navds-copybutton--active.navds-copybutton--action {
+  color: var(--ac-copybutton-action-active-text, var(--a-icon-success));
+}
+
+/* Variant/neutral */
 .navds-copybutton--neutral {
   color: var(--ac-copybutton-neutral-text, var(--a-text-default));
+  background-color: var(--ac-copybutton-neutral-bg, var(--a-surface-transparent));
 }
 
 .navds-copybutton--neutral:hover {
@@ -87,12 +84,12 @@
 .navds-copybutton--neutral:where(:disabled, .navds-copybutton--disabled),
 .navds-copybutton--neutral:hover:where(:disabled, .navds-copybutton--disabled) {
   color: var(--ac-copybutton-neutral-text, var(--a-text-default));
-  background: none;
+  background-color: var(--ac-copybutton-neutral-bg, var(--a-surface-transparent));
   box-shadow: none;
 }
 
-.navds-copybutton--active.navds-copybutton--action {
-  color: var(--a-surface-success);
+.navds-copybutton--active.navds-copybutton--neutral {
+  color: var(--ac-copybutton-neutral-active-text, var(--a-text-default));
 }
 
 .navds-copybutton__content {
@@ -103,12 +100,12 @@
 }
 
 .navds-copybutton--active > .navds-copybutton__content {
-  animation: akselCopyButtonAnimation 0.4s linear;
+  animation: var(--ac-copybutton-animation, akselCopyButtonAnimation 0.4s linear);
 }
 
 @keyframes akselCopyButtonAnimation {
   0% {
-    opacity: 0.4;
+    opacity: 0.3;
   }
 
   100% {
@@ -116,6 +113,7 @@
   }
 }
 
+/* Disabled */
 .navds-copybutton:where(:disabled) {
   cursor: not-allowed;
   opacity: 0.3;
