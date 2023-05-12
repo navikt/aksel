@@ -61,7 +61,7 @@ export interface CopyToClipboardProps
 }
 
 /**
- * @deprecated Use import { CopyButton } from "@navikt/ds-react" instead
+ * @deprecated Use <CopyButton /> instead: import { CopyButton } from "@navikt/ds-react";
  */
 export const CopyToClipboard = forwardRef<
   HTMLButtonElement,
