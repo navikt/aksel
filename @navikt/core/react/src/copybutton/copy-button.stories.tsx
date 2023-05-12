@@ -2,6 +2,7 @@ import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import React, { useState } from "react";
 import { CopyButton } from ".";
 import { Tooltip } from "../tooltip";
+import { userEvent, within } from "@storybook/testing-library";
 
 export default {
   title: "ds-react/CopyButton",
@@ -28,6 +29,24 @@ export const Default = {
     clipboardText: "3.14",
     text: "",
     activeText: "",
+  },
+};
+
+export const Interaction = {
+  render: () => (
+    <CopyButton
+      clipboardText="3.14"
+      variant="tertiary"
+      text="Kopier"
+      data-testid="copy-button"
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button = canvas.getByTestId("copy-button");
+
+    userEvent.click(button);
   },
 };
 
