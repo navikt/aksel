@@ -46,14 +46,14 @@
   margin: 0;
 }
 
-.navds-copybutton--tertiary {
-  color: var(--ac-button-tertiary-text, var(--a-text-action));
-  background-color: var(--ac-button-tertiary-bg, var(--a-surface-transparent));
+.navds-copybutton--action {
+  color: var(--ac-button-action-text, var(--a-text-action));
+  background-color: var(--ac-button-action-bg, var(--a-surface-transparent));
 }
 
-.navds-copybutton--tertiary:hover {
-  color: var(--ac-button-tertiary-hover-text, var(--a-text-action-on-action-subtle));
-  background-color: var(--ac-button-tertiary-hover-bg, var(--a-surface-action-subtle-hover));
+.navds-copybutton--action:hover {
+  color: var(--ac-button-action-hover-text, var(--a-text-action-on-action-subtle));
+  background-color: var(--ac-button-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-copybutton:focus-visible {
@@ -68,30 +68,30 @@
   }
 }
 
-.navds-copybutton--tertiary:where(:disabled, .navds-copybutton--disabled),
-.navds-copybutton--tertiary:hover:where(:disabled, .navds-copybutton--disabled) {
-  color: var(--ac-button-tertiary-text, var(--a-text-action));
+.navds-copybutton--action:where(:disabled, .navds-copybutton--disabled),
+.navds-copybutton--action:hover:where(:disabled, .navds-copybutton--disabled) {
+  color: var(--ac-button-action-text, var(--a-text-action));
   background: none;
   box-shadow: none;
 }
 
-.navds-copybutton--tertiary-neutral {
-  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+.navds-copybutton--neutral {
+  color: var(--ac-button-neutral-text, var(--a-text-default));
 }
 
-.navds-copybutton--tertiary-neutral:hover {
-  color: var(--ac-button-tertiary-neutral-hover-text, var(--a-text-default));
-  background-color: var(--ac-button-tertiary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+.navds-copybutton--neutral:hover {
+  color: var(--ac-button-neutral-hover-text, var(--a-text-default));
+  background-color: var(--ac-button-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
 }
 
-.navds-copybutton--tertiary-neutral:where(:disabled, .navds-copybutton--disabled),
-.navds-copybutton--tertiary-neutral:hover:where(:disabled, .navds-copybutton--disabled) {
-  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+.navds-copybutton--neutral:where(:disabled, .navds-copybutton--disabled),
+.navds-copybutton--neutral:hover:where(:disabled, .navds-copybutton--disabled) {
+  color: var(--ac-button-neutral-text, var(--a-text-default));
   background: none;
   box-shadow: none;
 }
 
-.navds-copybutton--active.navds-copybutton--tertiary {
+.navds-copybutton--active.navds-copybutton--action {
   color: var(--a-surface-success);
 }
 

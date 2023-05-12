@@ -16,7 +16,7 @@ export default {
     variant: {
       defaultValue: undefined,
       control: { type: "radio" },
-      options: ["tertiary", "tertiary-neutral"],
+      options: ["neutral", "action"],
     },
   },
 };
@@ -36,7 +36,7 @@ export const Interaction = {
   render: () => (
     <CopyButton
       clipboardText="3.14"
-      variant="tertiary"
+      variant="action"
       text="Kopier"
       data-testid="copy-button"
     />
@@ -53,12 +53,8 @@ export const Interaction = {
 export const Variants = {
   render: () => (
     <div className="colgap">
-      <CopyButton clipboardText="3.14" variant="tertiary" text="Kopier" />
-      <CopyButton
-        clipboardText="3.14"
-        variant="tertiary-neutral"
-        text="Kopier"
-      />
+      <CopyButton clipboardText="3.14" variant="action" text="Kopier" />
+      <CopyButton clipboardText="3.14" variant="neutral" text="Kopier" />
     </div>
   ),
 };
@@ -67,32 +63,24 @@ export const Sizes = {
   render: () => (
     <div className="colgap">
       <div className="rowgap">
-        <CopyButton clipboardText="3.14" variant="tertiary" />
-        <CopyButton clipboardText="3.14" variant="tertiary-neutral" />
-        <CopyButton clipboardText="3.14" variant="tertiary" text="Kopier" />
-        <CopyButton
-          clipboardText="3.14"
-          variant="tertiary-neutral"
-          text="Kopier"
-        />
+        <CopyButton clipboardText="3.14" variant="action" />
+        <CopyButton clipboardText="3.14" variant="neutral" />
+        <CopyButton clipboardText="3.14" variant="action" text="Kopier" />
+        <CopyButton clipboardText="3.14" variant="neutral" text="Kopier" />
       </div>
       <div className="rowgap">
-        <CopyButton size="small" clipboardText="3.14" variant="tertiary" />
+        <CopyButton size="small" clipboardText="3.14" variant="action" />
+        <CopyButton size="small" clipboardText="3.14" variant="neutral" />
         <CopyButton
           size="small"
           clipboardText="3.14"
-          variant="tertiary-neutral"
-        />
-        <CopyButton
-          size="small"
-          clipboardText="3.14"
-          variant="tertiary"
+          variant="action"
           text="Kopier"
         />
         <CopyButton
           size="small"
           clipboardText="3.14"
-          variant="tertiary-neutral"
+          variant="neutral"
           text="Kopier"
         />
       </div>

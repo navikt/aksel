@@ -17,9 +17,9 @@ export interface CopyButtonProps
    */
   size?: "medium" | "small";
   /**
-   * @default "tertiary-neutral"
+   * @default "neutral"
    */
-  variant?: "tertiary" | "tertiary-neutral";
+  variant?: "action" | "neutral";
   /**
    *  Text to copy to clipboard
    */
@@ -61,7 +61,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       clipboardText,
       text,
       activeText = "Kopiert!",
-      variant = "tertiary-neutral",
+      variant = "neutral",
       size = "medium",
       onActiveChange,
       icon,
