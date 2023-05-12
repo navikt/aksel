@@ -142,8 +142,6 @@ export const InlineDemo = {
 
 export const WithTooltip = {
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-
     return (
       <div>
         <Tooltip content="Kopier fødselsnummer">
