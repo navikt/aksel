@@ -3,7 +3,6 @@ import { useFormField } from "../../useFormField";
 import React, { useCallback, forwardRef, InputHTMLAttributes } from "react";
 import cl from "clsx";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { useInputContext } from "./inputContext";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 
@@ -19,8 +18,9 @@ interface InputProps
   size?: "small" | "medium";
   errorId?: string;
   value?: string;
-  onChange?: (value: any) => void;
+  onChange: (value: any) => void;
   error?: React.ReactNode;
+  singleSelect?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -32,6 +32,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       error,
       errorId,
       size: _size,
+      value,
+      onChange,
+      singleSelect,
       ...rest
     },
     ref
@@ -43,18 +46,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const { selectedOptions, removeSelectedOption } =
       useSelectedOptionsContext();
     const { customOptions, removeCustomOption } = useCustomOptionsContext();
-    const { value, onChange } = useInputContext();
     const {
       toggleIsListOpen,
       isListOpen,
-      filteredOptions,
       filteredOptionsIndex,
       moveFocusUp,
       moveFocusDown,
+      currentOption,
     } = useFilteredOptionsContext();
 
     const handleKeyUp = (e) => {
-      //console.log("handleKeyUp", e.key);
       e.preventDefault();
       switch (e.key) {
         case "Escape":
@@ -81,9 +82,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
           // so we don't interfere with text editing
-          if (e.target.selectionStart === value.length) {
+          if (e.target.selectionStart === value?.length) {
             e.preventDefault();
             moveFocusDown();
+            if (singleSelect) {
+              //onChange(currentOption);
+            }
           }
         } else if (e.key === "ArrowUp") {
           // Check that the FilteredOptions list is open and has virtual focus.
@@ -91,6 +95,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (isListOpen && filteredOptionsIndex !== null) {
             e.preventDefault();
             moveFocusUp();
+          }
+          if (singleSelect) {
+            //onChange(currentOption);
           }
         }
       },
@@ -100,6 +107,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         customOptions,
         removeCustomOption,
         removeSelectedOption,
+        singleSelect,
         moveFocusDown,
         isListOpen,
         filteredOptionsIndex,
@@ -113,7 +121,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       } else if (filteredOptionsIndex === -1) {
         return `${id}-combobox-new-option`;
       } else {
-        return `${id}-option-${filteredOptions[filteredOptionsIndex]}`;
+        return `${id}-option-${currentOption}`;
       }
     }
 
@@ -129,7 +137,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         ])}
         {...omit(inputProps, ["aria-invalid"])}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
         type="text"
         role="combobox"
         onKeyUp={handleKeyUp}

@@ -68,7 +68,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       removeSelectedOption,
       addSelectedOption,
       singleSelectedValue,
-      setSingleSelectValue,
     } = useSelectedOptionsContext();
 
     const { value, onChange } = useInputContext();
@@ -108,14 +107,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (event) => {
         const clickedOption = event?.target?.textContent;
         const focusedOption = currentOption;
-        console.log("DEBUG - toggleoption:");
         // onClick: toggle selected option
         if (clickedOption) {
           if (selectedOptions.includes(clickedOption)) {
             handleDeleteSelectedOption(clickedOption);
           } else if (filteredOptions.includes(clickedOption))
-            if (singleSelect) setSingleSelectValue(clickedOption);
-            else addSelectedOption(clickedOption);
+            //if (singleSelect) setSingleSelectValue(clickedOption);
+            addSelectedOption(clickedOption);
         }
         // onEnter: remove selected filteredOption
         else if (focusedOption && selectedOptions.includes(focusedOption)) {
@@ -125,8 +123,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         }
         // onEnter: add focused option
         else if (focusedOption && filteredOptions?.includes?.(focusedOption)) {
-          if (singleSelect) setSingleSelectValue(focusedOption);
-          else addSelectedOption(focusedOption);
+          // if (singleSelect) setSingleSelectValue(focusedOption);
+          addSelectedOption(focusedOption);
         }
         //onEnter: add custom option
         else if (focusedOption && !filteredOptions.includes(focusedOption)) {
@@ -137,8 +135,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         currentOption,
         selectedOptions,
         filteredOptions,
-        singleSelect,
-        setSingleSelectValue,
         addSelectedOption,
         handleDeleteSelectedOption,
         removeSelectedOption,
@@ -152,7 +148,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     useEffect(() => {
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
-    console.log("DEBUG - singleSelect", singleSelect);
+
     return (
       <ComboboxWrapper
         className={className}
@@ -201,10 +197,19 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   key="combobox-input"
                   ref={mergedInputRef}
                   value={value}
-                  onChange={(e) => onChange(e?.target?.value)}
+                  onChange={(e) => {
+                    onChange(e?.target?.value);
+                    //change selectionStart to the end of the input and selectionEnd to the end of the suggestion
+
+                    // e?.target?.setSelectionRange(
+                    //   e?.target?.value?.length,
+                    //   currentOption?.length || filteredOptions[0]?.length
+                    // );
+                  }}
                   inputClassName={inputClassName}
                   handleClear={handleClear}
                   toggleOption={toggleOption}
+                  singleSelect
                   {...rest}
                 />
               </>

@@ -34,6 +34,8 @@ const options = [
   "strawberry",
   "watermelon",
   "grape fruit",
+  "undefined",
+  "undefinedagain",
 ];
 
 const initialSelectedOptions = ["passion fruit", "grape fruit"];

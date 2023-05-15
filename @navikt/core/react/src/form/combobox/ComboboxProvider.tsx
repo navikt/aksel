@@ -14,14 +14,19 @@ export default function ComboboxProvider(props) {
     options,
     value,
     onChange,
+    singleSelect,
     ...rest
   } = props;
   return (
     <InputContextProvider value={{ value, onChange }}>
       <SelectedOptionsProvider value={{ selectedOptions, onToggleSelected }}>
         <CustomOptionsProvider>
-          <FilteredOptionsProvider value={{ isListOpen, options }}>
-            <Combobox {...rest}>{children}</Combobox>
+          <FilteredOptionsProvider
+            value={{ isListOpen, options, singleSelect }}
+          >
+            <Combobox singleSelect={singleSelect} {...rest}>
+              {children}
+            </Combobox>
           </FilteredOptionsProvider>
         </CustomOptionsProvider>
       </SelectedOptionsProvider>

@@ -41,9 +41,10 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
 );
 
 export const FilteredOptionsProvider = ({ children, value: props }) => {
-  const { isListOpen: isExternalListOpen, options } = props;
+  const { isListOpen: isExternalListOpen, options, singleSelect } = props;
   const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
-  const { value } = useInputContext();
+  const { value, setSearchTerm, onChange, searchTerm } = useInputContext();
+
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState<
     number | null
   >(null);
@@ -53,11 +54,10 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const filteredOptions = useMemo(() => {
     const opts = [...customOptions, ...options];
     setFilteredOptionsIndex(null);
-    return getMatchingValuesFromList(value, opts);
-  }, [value, options, customOptions]);
+    return getMatchingValuesFromList(singleSelect ? searchTerm : value, opts);
+  }, [customOptions, options, singleSelect, searchTerm, value]);
 
   useEffect(() => {
-    console.log("DEBUG - isExternalListOpen:", isExternalListOpen);
     if (isExternalListOpen !== undefined)
       setInternalListOpen(isExternalListOpen);
   }, [isExternalListOpen]);
@@ -75,30 +75,40 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     if (value) {
       toggleIsListOpen(true);
     } else {
-      console.log("Closing list because value is cleared");
       toggleIsListOpen(false);
     }
   }, [value, toggleIsListOpen]);
 
   const currentOption = useMemo(() => {
-    if (filteredOptionsIndex === null) {
+    if (filteredOptionsIndex == null) {
       return null;
     }
     if (filteredOptionsIndex === -1) {
       return value;
     }
+    if (singleSelect) {
+      onChange(filteredOptions[filteredOptionsIndex]);
+      setSearchTerm(searchTerm);
+    }
     return filteredOptions[filteredOptionsIndex];
-  }, [filteredOptions, filteredOptionsIndex, value]);
+  }, [
+    filteredOptionsIndex,
+    singleSelect,
+    filteredOptions,
+    value,
+    onChange,
+    setSearchTerm,
+    searchTerm,
+  ]);
 
   const isValueNew = useMemo(
     () => Boolean(value) && !isValueInList(value, filteredOptions),
     [value, filteredOptions]
   );
 
-  const getMinimumIndex = useCallback(
-    () => (isValueNew ? -1 : 0),
-    [isValueNew]
-  );
+  const getMinimumIndex = useCallback(() => {
+    return isValueNew && !singleSelect ? -1 : 0;
+  }, [isValueNew, singleSelect]);
 
   const resetFilteredOptionsIndex = () => {
     setFilteredOptionsIndex(getMinimumIndex());
@@ -127,6 +137,11 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     scrollToOption(newIndex);
   }, [filteredOptionsIndex, getMinimumIndex, scrollToOption, toggleIsListOpen]);
 
+  // useEffect(() => {
+  //   console.log("searchTerm, value", searchTerm, value);
+  //   console.log("filteredOptionsIndex", filteredOptionsIndex);
+  // }, [filteredOptionsIndex, searchTerm, value]);
+
   const moveFocusDown = useCallback(() => {
     if (filteredOptionsIndex === null || !isListOpen) {
       toggleIsListOpen(true);
@@ -140,7 +155,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setFilteredOptionsIndex(newIndex);
     scrollToOption(newIndex);
   }, [
-    filteredOptions,
+    filteredOptions.length,
     filteredOptionsIndex,
     getMinimumIndex,
     isListOpen,
