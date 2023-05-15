@@ -1,4 +1,4 @@
-import renameProps from "../../../utils/rename-props";
+import moveAndRenameImport from "../../../utils/moveAndRenameImport";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
@@ -6,63 +6,58 @@ import renameProps from "../../../utils/rename-props";
  */
 export default function transformer(file, api, options) {
   const j = api.jscodeshift;
-  let localName = "SpeechBubble";
+  /*   let localName = "CopyToClipboard"; */
 
   const root = j(file.source);
 
-  /* Finds and replaces import from SpeechBubble -> Chat */
-  root
+  moveAndRenameImport(j, root, {
+    fromImport: "@navikt/ds-react-internal",
+    toImport: "@navikt/ds-react",
+    fromName: "CopyToClipboard",
+    toName: "CopyButton",
+  });
+
+  /* Finds and replaces import from CopyToClipboard -> CopyButton */
+  /* root
     .find(j.ImportDeclaration)
-    .filter((path) => path.node.source.value === "@navikt/ds-react")
+    .filter((path) => path.node.source.value === "@navikt/ds-react-internal")
     .forEach((imp) => {
       imp.value.specifiers.forEach((x) => {
-        if (x.imported.name === "SpeechBubble") {
+        if (x.imported.name === "CopyToClipboard") {
           if (x.local.name !== x.imported.name) {
             localName = x.local.name;
-            x.imported.name = "Chat";
+            x.imported.name = "CopyButton";
           } else {
-            x.imported.name = "Chat";
-            x.local.name = "Chat";
+            x.imported.name = "CopyButton";
+            x.local.name = "CopyButton";
           }
         }
       });
-    });
+    }); */
 
-  if (j(file.source).findJSXElements(localName)) {
-    renameProps({
-      root,
-      componentName: localName,
-      props: {
-        illustrationBgColor: "avatarBgColor",
-        illustration: "avatar",
-        topText: "name",
-      },
-    });
-
-    /* Find and replace name of all <SpeechBubble />*/
+  /* if (j(file.source).findJSXElements(localName)) {
     const compRoot = root.find(j.JSXElement, {
       openingElement: { name: { name: localName } },
     });
 
     compRoot.forEach((x) => {
-      if (localName !== "SpeechBubble") return;
-      x.node.openingElement.name.name = "Chat";
-      x.node.closingElement.name.name = "Chat";
+      if (localName !== "CopyToClipboard") return;
+      x.node.openingElement.name.name = "CopyButton";
+      x.node.closingElement.name.name = "CopyButton";
     });
 
-    /* Need to handle dot-notations differently */
     const child = root.find(j.JSXElement);
 
     child.forEach((x) => {
       if (
         x.value.openingElement.name.type === "JSXMemberExpression" &&
-        x.value.openingElement.name.object.name === "SpeechBubble"
+        x.value.openingElement.name.object.name === "CopyToClipboard"
       ) {
-        x.value.openingElement.name.object.name = "Chat";
-        x.value.closingElement.name.object.name = "Chat";
+        x.value.openingElement.name.object.name = "CopyButton";
+        x.value.closingElement.name.object.name = "CopyButton";
       }
     });
-  }
+  } */
 
   return root.toSource(options.printOptions);
 }
