@@ -2,7 +2,7 @@ import { CopyButton } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <CopyButton clipboardText="3.14" />;
+  return <CopyButton copyText="3.14" />;
 };
 
 export default withDsExample(Example);

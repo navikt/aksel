@@ -26,7 +26,7 @@ export const Default = {
   args: {
     size: "medium",
     duration: 2000,
-    clipboardText: "3.14",
+    copyText: "3.14",
     text: "",
     activeText: "",
   },
@@ -35,7 +35,7 @@ export const Default = {
 export const Interaction = {
   render: () => (
     <CopyButton
-      clipboardText="3.14"
+      copyText="3.14"
       variant="action"
       text="Kopier"
       data-testid="copy-button"
@@ -53,8 +53,8 @@ export const Interaction = {
 export const Variants = {
   render: () => (
     <div className="colgap">
-      <CopyButton clipboardText="3.14" variant="action" text="Kopier" />
-      <CopyButton clipboardText="3.14" variant="neutral" text="Kopier" />
+      <CopyButton copyText="3.14" variant="action" text="Kopier" />
+      <CopyButton copyText="3.14" variant="neutral" text="Kopier" />
     </div>
   ),
 };
@@ -63,23 +63,23 @@ export const Sizes = {
   render: () => (
     <div className="colgap">
       <div className="rowgap">
-        <CopyButton clipboardText="3.14" variant="action" />
-        <CopyButton clipboardText="3.14" variant="neutral" />
-        <CopyButton clipboardText="3.14" variant="action" text="Kopier" />
-        <CopyButton clipboardText="3.14" variant="neutral" text="Kopier" />
+        <CopyButton copyText="3.14" variant="action" />
+        <CopyButton copyText="3.14" variant="neutral" />
+        <CopyButton copyText="3.14" variant="action" text="Kopier" />
+        <CopyButton copyText="3.14" variant="neutral" text="Kopier" />
       </div>
       <div className="rowgap">
-        <CopyButton size="small" clipboardText="3.14" variant="action" />
-        <CopyButton size="small" clipboardText="3.14" variant="neutral" />
+        <CopyButton size="small" copyText="3.14" variant="action" />
+        <CopyButton size="small" copyText="3.14" variant="neutral" />
         <CopyButton
           size="small"
-          clipboardText="3.14"
+          copyText="3.14"
           variant="action"
           text="Kopier"
         />
         <CopyButton
           size="small"
-          clipboardText="3.14"
+          copyText="3.14"
           variant="neutral"
           text="Kopier"
         />
@@ -93,14 +93,14 @@ export const Texts = {
     <div className="colgap">
       <div>
         <CopyButton
-          clipboardText="3.14"
+          copyText="3.14"
           text="Kopier XYZ"
           activeText="Kopierte XYZ"
         />
       </div>
       <div>
         <CopyButton
-          clipboardText="3.14"
+          copyText="3.14"
           size="small"
           text="Kopier XYZ"
           activeText="Kopierte XYZ"
@@ -115,14 +115,14 @@ export const Icons = {
     <div className="rowgap">
       <div>
         <CopyButton
-          clipboardText="3.14"
+          copyText="3.14"
           icon={<LinkIcon title="Kopier" />}
           activeIcon={<ThumbUpIcon title="Kopiert" />}
         />
       </div>
       <div>
         <CopyButton
-          clipboardText="3.14"
+          copyText="3.14"
           size="small"
           icon={<LinkIcon title="Kopier" />}
           activeIcon={<ThumbUpIcon title="Kopiert" />}
@@ -135,7 +135,7 @@ export const Icons = {
 export const InlineDemo = {
   render: () => (
     <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-      <CopyButton size="small" clipboardText="3.14" /> Kopier dette feltet
+      <CopyButton size="small" copyText="3.14" /> Kopier dette feltet
     </div>
   ),
 };
@@ -145,7 +145,7 @@ export const WithTooltip = {
     return (
       <div>
         <Tooltip content="Kopier fødselsnummer">
-          <CopyButton clipboardText="3.14" />
+          <CopyButton copyText="3.14" />
         </Tooltip>
       </div>
     );
@@ -153,14 +153,14 @@ export const WithTooltip = {
 };
 
 export const Duration = {
-  render: () => <CopyButton clipboardText="3.14" activeDuration={300} />,
+  render: () => <CopyButton copyText="3.14" activeDuration={300} />,
 };
 
 export const Disabled = {
   render: () => (
     <div className="colgap">
-      <CopyButton clipboardText="3.14" disabled />
-      <CopyButton clipboardText="3.14" size="small" disabled />
+      <CopyButton copyText="3.14" disabled />
+      <CopyButton copyText="3.14" size="small" disabled />
     </div>
   ),
 };

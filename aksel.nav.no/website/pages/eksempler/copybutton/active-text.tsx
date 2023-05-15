@@ -3,11 +3,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <CopyButton
-      clipboardText="3.14"
-      text="Kopier XYZ"
-      activeText="Kopierte XYZ"
-    />
+    <CopyButton copyText="3.14" text="Kopier XYZ" activeText="Kopierte XYZ" />
   );
 };
 

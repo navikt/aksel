@@ -34,7 +34,7 @@ const Row = ({ children, text }: any) => (
     <div className="grid grid-cols-[1fr_4fr_auto] items-center gap-2">
       <span>{text}</span>
       <span>{children}</span>
-      <CopyButton size="small" clipboardText={children} />
+      <CopyButton size="small" copyText={children} />
     </div>
     <Hr />
   </>

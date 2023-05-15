@@ -4,8 +4,8 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="flex items-center gap-2">
-      <CopyButton size="small" clipboardText="3.14" />
-      <CopyButton size="small" clipboardText="3.14" text="Kopier" />
+      <CopyButton size="small" copyText="3.14" />
+      <CopyButton size="small" copyText="3.14" text="Kopier" />
     </div>
   );
 };

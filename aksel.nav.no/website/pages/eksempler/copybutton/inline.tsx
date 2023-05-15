@@ -4,10 +4,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="flex items-center gap-2">
-      <CopyButton
-        size="small"
-        clipboardText="Maguer Gorge 14b, 56430 Tatooine"
-      />{" "}
+      <CopyButton size="small" copyText="Maguer Gorge 14b, 56430 Tatooine" />{" "}
       Adresse: Maguer Gorge 14b, 56430 Tatooine
     </div>
   );

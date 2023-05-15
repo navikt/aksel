@@ -21,9 +21,9 @@ export interface CopyButtonProps
    */
   variant?: "action" | "neutral";
   /**
-   *  Text to copy to clipboard
+   * Text to copy to clipboard
    */
-  clipboardText: string;
+  copyText: string;
   /**
    *  Optional text in button
    */
@@ -58,7 +58,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
   (
     {
       className,
-      clipboardText,
+      copyText,
       text,
       activeText = "Kopiert!",
       variant = "neutral",
@@ -85,7 +85,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
       timeoutRef.current && clearTimeout(timeoutRef.current);
-      copy(clipboardText);
+      copy(copyText);
       setActive(true);
       rest.onClick?.(event);
       onActiveChange?.(true);

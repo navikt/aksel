@@ -4,7 +4,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <CopyButton clipboardText="3.14" icon={<LinkIcon title="Kopier lenke" />} />
+    <CopyButton copyText="3.14" icon={<LinkIcon title="Kopier lenke" />} />
   );
 };
 

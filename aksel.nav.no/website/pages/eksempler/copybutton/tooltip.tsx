@@ -4,7 +4,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <Tooltip content="Kopier fødselsnummer">
-      <CopyButton clipboardText="12003045000" />
+      <CopyButton copyText="12003045000" />
     </Tooltip>
   );
 };
