@@ -54,6 +54,7 @@ export const Variants = {
   render: () => (
     <div className="colgap">
       <CopyButton copyText="3.14" variant="action" text="Kopier" />
+
       <CopyButton copyText="3.14" variant="neutral" text="Kopier" />
     </div>
   ),
