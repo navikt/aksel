@@ -128,14 +128,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             removeCustomOption({ value: focusedOption });
         }
         // onEnter: add focused option
-        else if (
-          focusedOption &&
-          (filteredOptions?.includes?.(String(value)) || !value)
-        ) {
+        else if (focusedOption && filteredOptions?.includes?.(focusedOption)) {
           addSelectedOption(focusedOption);
         }
         //onEnter: add custom option
-        else if (value && !filteredOptions.includes(value)) {
+        else if (focusedOption && !filteredOptions.includes(focusedOption)) {
           handleAddCustomOption(event);
         }
       },
@@ -143,7 +140,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         currentOption,
         selectedOptions,
         filteredOptions,
-        value,
         singleSelect,
         setSingleSelectValue,
         addSelectedOption,
@@ -190,7 +186,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           </BodyShort>
         )}
         <div className="navds-combobox__wrapper">
-          <div className="navds-combobox__wrapper-inner navds-text-field__input">
+          <div
+            className={cl(
+              "navds-combobox__wrapper-inner navds-text-field__input",
+              {
+                "navds-combobox__wrapper-inner--virtually-unfocused":
+                  currentOption,
+              }
+            )}
+          >
             {singleSelect ? (
               <>
                 <span className="navds-combobox__single-select">
@@ -199,12 +203,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 <Input
                   key="combobox-input"
                   ref={mergedInputRef}
-                  {...rest}
                   value={value}
                   onChange={(e) => onChange(e?.target?.value)}
                   inputClassName={inputClassName}
                   handleClear={handleClear}
                   toggleOption={toggleOption}
+                  {...rest}
                 />
               </>
             ) : (
@@ -250,5 +254,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
   }
 );
+
+// TODO: Remove this line. Only added to trigger build
 
 export default Combobox;

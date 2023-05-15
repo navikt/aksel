@@ -1,5 +1,5 @@
 import React from "react";
-import { Collapse, Expand } from "@navikt/ds-icons";
+import { ChevronUpIcon, ChevronDownIcon } from "@navikt/aksel-icons";
 
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
 
@@ -17,15 +17,17 @@ export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
       onMouseDown={() => toggleIsListOpen()}
       onKeyDown={({ key }) => key === "Enter" && toggleIsListOpen()}
       className="navds-combobox__button-toggle-list"
+      aria-expanded={isListOpen}
+      tabIndex={-1}
     >
       <span className="navds-sr-only">
-        {toggleListButtonLabel
-          ? toggleListButtonLabel
-          : isListOpen
-          ? "Lukk"
-          : "Åpne"}
+        {toggleListButtonLabel ?? "Alternativer"}
       </span>
-      {isListOpen ? <Collapse aria-hidden /> : <Expand aria-hidden />}
+      {isListOpen ? (
+        <ChevronUpIcon aria-hidden />
+      ) : (
+        <ChevronDownIcon aria-hidden />
+      )}
     </button>
   );
 };

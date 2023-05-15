@@ -75,6 +75,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     if (value) {
       toggleIsListOpen(true);
     } else {
+      console.log("Closing list because value is cleared");
       toggleIsListOpen(false);
     }
   }, [value, toggleIsListOpen]);

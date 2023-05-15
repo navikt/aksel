@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { BodyShort, Label, Loader } from "../../..";
-import { Add } from "@navikt/ds-icons";
+import { PlusIcon } from "@navikt/aksel-icons";
 import CheckIcon from "./CheckIcon";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -51,18 +51,16 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
               toggleOption(e);
             }}
             id={`${id}-combobox-new-option`}
-            className={cl(
-              "navds-combobox__list-item navds-combobox__list-item__new-option",
-              {
-                "navds-combobox__list-item--focus": filteredOptionsIndex === -1,
-              }
-            )}
+            className={cl("navds-combobox__list-item__new-option", {
+              "navds-combobox__list-item__new-option--focus":
+                filteredOptionsIndex === -1,
+            })}
             role="option"
             aria-selected={
               !selectedOptions.includes(value)
             } /* TODO: Should this attribute ever be true? Can the add-button have the selected state? */
           >
-            <Add />
+            <PlusIcon />
             <BodyShort size="medium">
               Legg til <Label as="span">&#8220;{value}&#8221;</Label>
             </BodyShort>
