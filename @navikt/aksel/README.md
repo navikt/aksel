@@ -22,6 +22,39 @@ To get started:
 npx @navikt/aksel codemod --help
 ```
 
+### v3
+
+There is no general codemods for migrating from v2 -> v3.
+
+#### CopyButton
+
+`npx @navikt/aksel codemod v3-copybutton ...`
+
+`<CopyToClipboard />` has been renamed to `<CopyButton />` and refactored.
+
+- Namechange
+- removed props `popoverText`, `iconPosition`, `popoverPlacement`
+- changed variants
+- refactored CSS and React-code. ⚠️ Overwritten CSS will not be migrated!
+
+```diff
+-import { CopyToClipboard } from "@navikt/ds-react-internal";
++import { CopyButton } from "@navikt/ds-react";
+
+-<CopyToClipboard
++<CopyButton
+- popoverText="popoverText"
+- iconPosition="left"
+- popoverPlacement="bottom-end"
+  copyText="Text to copy"
+  size="medium"
+>
+- text
++</CopyButton>
+-</CopyToClipboard>
+
+```
+
 ### v1 -> v2
 
 [Documentation](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112)
