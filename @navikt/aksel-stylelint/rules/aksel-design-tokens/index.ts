@@ -11,7 +11,7 @@ let allowedTokenNames = [];
 const errorMessage = (
   type: "prop" | "value",
   node,
-  controlledPrefixes,
+  controlledPrefixes: PrimaryOptions["controlledPrefixes"],
   invalidValues?: string[]
 ) => {
   if (type === "value") {
@@ -31,14 +31,16 @@ const errorMessage = (
 
 const isValidToken = (
   tokenDefinitionsFile: string,
-  controlledPrefixes,
+  overrideableTokenDefinitionsJSONFile: string,
+  controlledPrefixes: PrimaryOptions["controlledPrefixes"],
   inputToken: string
 ) => {
+  // "singleton" if statement (attempt at caching file parsing)
   if (!allowedTokenNames.length) {
-    const fileBuffer = readFileSync(tokenDefinitionsFile);
-    const fileString = fileBuffer.toString();
+    const cssFileBuffer = readFileSync(tokenDefinitionsFile);
+    const cssFileString = cssFileBuffer.toString();
 
-    valueParser(fileString).walk((node) => {
+    valueParser(cssFileString).walk((node) => {
       if (
         node.type === "word" &&
         isCustomProperty(node.value) &&
@@ -47,6 +49,16 @@ const isValidToken = (
         allowedTokenNames.push(node.value);
       }
     });
+
+    const jsonFileBuffer = readFileSync(overrideableTokenDefinitionsJSONFile);
+    const fileString = jsonFileBuffer.toString();
+
+    const jsonObject = JSON.parse(fileString);
+    for (const value of Object.values(jsonObject)) {
+      for (const tokenName of Object.keys(value)) {
+        allowedTokenNames.push(tokenName);
+      }
+    }
   }
 
   return allowedTokenNames.some((element) => element === inputToken);
@@ -54,7 +66,8 @@ const isValidToken = (
 
 const getInvalidPropName = (
   tokenDefinitionsFile: string,
-  controlledPrefixes,
+  overrideableTokenDefinitionsJSONFile: string,
+  controlledPrefixes: PrimaryOptions["controlledPrefixes"],
   prop: string
 ) => {
   const invalidValues: string[] = [];
@@ -62,7 +75,12 @@ const getInvalidPropName = (
   if (
     isCustomProperty(prop) &&
     controlledPrefixes.some((prefix) => prop.match(prefix) !== null) &&
-    !isValidToken(tokenDefinitionsFile, controlledPrefixes, prop)
+    !isValidToken(
+      tokenDefinitionsFile,
+      overrideableTokenDefinitionsJSONFile,
+      controlledPrefixes,
+      prop
+    )
   ) {
     invalidValues.push(prop);
   }
@@ -72,6 +90,7 @@ const getInvalidPropName = (
 
 const getInvalidVariableNames = (
   tokenDefinitionsFile: string,
+  overrideableTokenDefinitionsJSONFile: string,
   controlledPrefixes,
   value
 ): string[] => {
@@ -82,7 +101,12 @@ const getInvalidVariableNames = (
       node.type === "word" &&
       isCustomProperty(node.value) &&
       controlledPrefixes.some((prefix) => node.value.match(prefix) !== null) &&
-      !isValidToken(tokenDefinitionsFile, controlledPrefixes, node.value)
+      !isValidToken(
+        tokenDefinitionsFile,
+        overrideableTokenDefinitionsJSONFile,
+        controlledPrefixes,
+        node.value
+      )
     ) {
       invalidValues.push(node.value);
     }
@@ -94,6 +118,7 @@ const getInvalidVariableNames = (
 type PrimaryOptions = {
   controlledPrefixes?: (string | RegExp)[];
   tokenDefinitionsFile: string;
+  overrideableTokenDefinitionsJSONFile: string;
 };
 
 const ruleFunction: stylelint.Rule<PrimaryOptions, object> = (
@@ -101,7 +126,11 @@ const ruleFunction: stylelint.Rule<PrimaryOptions, object> = (
   _secondaryOptionObject
 ) => {
   return (postcssRoot, postcssResult) => {
-    const { controlledPrefixes = [], tokenDefinitionsFile } = primaryOption;
+    const {
+      controlledPrefixes = [],
+      tokenDefinitionsFile,
+      overrideableTokenDefinitionsJSONFile,
+    } = primaryOption;
 
     postcssRoot.walkDecls((node) => {
       const prop = node.prop;
@@ -109,12 +138,14 @@ const ruleFunction: stylelint.Rule<PrimaryOptions, object> = (
 
       const invalidPropNames = getInvalidPropName(
         tokenDefinitionsFile,
+        overrideableTokenDefinitionsJSONFile,
         controlledPrefixes,
         prop
       );
 
       const invalidCustomProperties = getInvalidVariableNames(
         tokenDefinitionsFile,
+        overrideableTokenDefinitionsJSONFile,
         controlledPrefixes,
         value
       );
