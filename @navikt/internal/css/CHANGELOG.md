@@ -1,5 +1,13 @@
 # @navikt/ds-css-internal
 
+## 3.1.3
+
+## 3.1.2
+
+### Patch Changes
+
+- [`5e79234ef`](https://github.com/navikt/aksel/commit/5e79234effb8c8fc73c9bb0c34737e99fab1510b) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset pin alignment for Timeline
+
 ## 3.1.1
 
 ### Patch Changes
