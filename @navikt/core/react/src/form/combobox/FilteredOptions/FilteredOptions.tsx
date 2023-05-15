@@ -12,12 +12,11 @@ interface FilteredOptionsProps {
   focusInput: () => void;
   ref: React.RefObject<HTMLUListElement>;
   value: string;
-  addCustomOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   loading?: boolean;
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
-  ({ id, toggleOption, value, addCustomOption, loading }, ref) => {
+  ({ id, toggleOption, value, loading }, ref) => {
     const {
       isListOpen,
       filteredOptions,
@@ -49,7 +48,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
           <li
             tabIndex={-1}
             onClick={(e) => {
-              addCustomOption(e);
+              toggleOption(e);
             }}
             id={`${id}-combobox-new-option`}
             className={cl(

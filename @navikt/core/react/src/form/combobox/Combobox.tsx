@@ -67,8 +67,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       prevSelectedOptions,
       removeSelectedOption,
       addSelectedOption,
+      setSingleSelectValue,
     } = useSelectedOptionsContext();
+
     const { value, onChange } = useInputContext();
+
+    const singleSelectValue = useMemo(
+      () => (singleSelect ? selectedOptions[0] : null),
+      [selectedOptions, singleSelect]
+    );
 
     const focusInput = useCallback(() => {
       inputRef.current?.focus?.();
@@ -105,26 +112,30 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (event) => {
         const clickedOption = event?.target?.textContent;
         const focusedOption = currentOption;
-        // toggle selected option on click
+        console.log("DEBUG - toggleoption:");
+        // onClick: toggle selected option
         if (clickedOption) {
           if (selectedOptions.includes(clickedOption)) {
             handleDeleteSelectedOption(clickedOption);
           } else if (filteredOptions.includes(clickedOption))
-            if (singleSelect) onChange(clickedOption);
+            if (singleSelect) setSingleSelectValue(clickedOption);
             else addSelectedOption(clickedOption);
         }
-        // remove selected filteredOption on Enter
+        // onEnter: remove selected filteredOption
         else if (focusedOption && selectedOptions.includes(focusedOption)) {
           removeSelectedOption(focusedOption);
           if (customOptions.includes(focusedOption))
             removeCustomOption({ value: focusedOption });
-        } else if (
-          // add new option on Enter input value if in filteredOptions OR if input value is empty
+        }
+        // onEnter: add focused option
+        else if (
           focusedOption &&
           (filteredOptions?.includes?.(String(value)) || !value)
         ) {
           addSelectedOption(focusedOption);
-        } else if (value && !filteredOptions.includes(value)) {
+        }
+        //onEnter: add custom option
+        else if (value && !filteredOptions.includes(value)) {
           handleAddCustomOption(event);
         }
       },
@@ -132,15 +143,15 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         currentOption,
         selectedOptions,
         filteredOptions,
-        handleAddCustomOption,
         value,
-        addSelectedOption,
         singleSelect,
-        onChange,
+        setSingleSelectValue,
+        addSelectedOption,
         handleDeleteSelectedOption,
         removeSelectedOption,
         customOptions,
         removeCustomOption,
+        handleAddCustomOption,
       ]
     );
 
@@ -181,17 +192,21 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         <div className="navds-combobox__wrapper">
           <div className="navds-combobox__wrapper-inner navds-text-field__input">
             {singleSelect ? (
-              <Input
-                key="combobox-input"
-                ref={mergedInputRef}
-                {...rest}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                inputClassName={inputClassName}
-                handleClear={handleClear}
-                toggleOption={toggleOption}
-                handleAddCustomOption={handleAddCustomOption}
-              />
+              <>
+                <span className="navds-combobox__single-select">
+                  {singleSelectValue}
+                </span>
+                <Input
+                  key="combobox-input"
+                  ref={mergedInputRef}
+                  {...rest}
+                  value={value}
+                  onChange={(e) => onChange(e?.target?.value)}
+                  inputClassName={inputClassName}
+                  handleClear={handleClear}
+                  toggleOption={toggleOption}
+                />
+              </>
             ) : (
               <SelectedOptions
                 selectedOptions={
@@ -202,13 +217,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 <Input
                   key="combobox-input"
                   ref={mergedInputRef}
-                  {...rest}
                   value={value}
-                  onChange={(e) => onChange(e.target.value)}
+                  onChange={(e) => onChange(e?.target?.value)}
                   inputClassName={inputClassName}
                   handleClear={handleClear}
                   toggleOption={toggleOption}
-                  handleAddCustomOption={handleAddCustomOption}
+                  {...rest}
                 />
               </SelectedOptions>
             )}
@@ -229,7 +243,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             toggleOption={toggleOption}
             focusInput={focusInput}
             value={value}
-            addCustomOption={handleAddCustomOption}
             loading={loading}
           />
         </div>

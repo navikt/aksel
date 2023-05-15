@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import usePrevious from "../../../util/usePrevious";
 
 type SelectedOptionsContextType = {
@@ -7,6 +13,8 @@ type SelectedOptionsContextType = {
   removeSelectedOption: (option: string) => void;
   setSelectedOptions: (any) => void;
   prevSelectedOptions?: string[];
+  singleSelectedValue: string;
+  setSingleSelectValue: (value: string) => void;
 };
 
 const SelectedOptionsContext = createContext<SelectedOptionsContextType>(
@@ -25,12 +33,11 @@ export const SelectedOptionsProvider = ({
 }) => {
   const { selectedOptions: externalSelectedOptions, onToggleSelected } = value;
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+
   useEffect(
     () => setSelectedOptions(externalSelectedOptions || []),
     [externalSelectedOptions]
   );
-
-  const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
 
   const addSelectedOption = (option: string) => {
     setSelectedOptions((prevSelectedOptions) => [
@@ -47,12 +54,24 @@ export const SelectedOptionsProvider = ({
     onToggleSelected?.(option, false);
   };
 
+  const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
+
+  const singleSelectedValue = useMemo(() => {
+    return selectedOptions.length === 1 ? selectedOptions[0] : "";
+  }, [selectedOptions]);
+
+  const setSingleSelectValue = (value: string) => {
+    setSelectedOptions([value]);
+  };
+
   const selectedOptionsState = {
     selectedOptions,
     addSelectedOption,
     removeSelectedOption,
     setSelectedOptions,
     prevSelectedOptions,
+    singleSelectedValue,
+    setSingleSelectValue,
   };
 
   return (
