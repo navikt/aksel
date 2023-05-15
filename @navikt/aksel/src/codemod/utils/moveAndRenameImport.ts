@@ -16,10 +16,6 @@ export default function moveAndRenameImport(
     },
   });
 
-  if (!existingImport.length) {
-    return;
-  }
-
   const existingImportSpecifier = existingImport.find(j.ImportSpecifier, {
     imported: {
       name: toName,
@@ -57,12 +53,14 @@ export default function moveAndRenameImport(
     return;
   }
 
+  let localname = fromName;
   const existingFromImportSpecifier = existingFromImport?.find(
     j.ImportSpecifier,
-    {
-      imported: {
-        name: fromName,
-      },
+    (node) => {
+      if (node.imported.name === fromName) {
+        localname = node.local.name;
+      }
+      return node.imported.name === fromName;
     }
   );
 
@@ -70,7 +68,29 @@ export default function moveAndRenameImport(
     existingFromImportSpecifier.remove();
   }
 
-  if (existingFromImport.get("specifiers").length === 0) {
+  if (
+    !existingFromImport.get("specifiers").value?.length ||
+    existingFromImport.get("specifiers").value?.length === 0
+  ) {
     existingFromImport.remove();
   }
+
+  return localname;
 }
+
+/* root
+    .find(j.ImportDeclaration)
+    .filter((path) => path.node.source.value === "@navikt/ds-react-internal")
+    .forEach((imp) => {
+      imp.value.specifiers.forEach((x) => {
+        if (x.imported.name === "CopyToClipboard") {
+          if (x.local.name !== x.imported.name) {
+            localName = x.local.name;
+            x.imported.name = "CopyButton";
+          } else {
+            x.imported.name = "CopyButton";
+            x.local.name = "CopyButton";
+          }
+        }
+      });
+    }); */

@@ -11,7 +11,7 @@ import copy from "../util/copy";
 import Label from "../typography/Label";
 
 export interface CopyButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   /**
    * @default "medium"
    */

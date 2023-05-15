@@ -10,7 +10,7 @@ export const Page = () => {
       size="medium"
       popoverPlacement="bottom-end"
     >
-      text
+      {text}
     </CopyToClipboard>
   );
 };
