@@ -13,10 +13,11 @@ interface FilteredOptionsProps {
   ref: React.RefObject<HTMLUListElement>;
   value: string;
   loading?: boolean;
+  singleSelect?: boolean;
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
-  ({ id, toggleOption, value, loading }, ref) => {
+  ({ id, toggleOption, value, loading, singleSelect }, ref) => {
     const {
       isListOpen,
       filteredOptions,
@@ -44,7 +45,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
             <Loader />
           </li>
         )}
-        {isValueNew && (
+        {isValueNew && !singleSelect && (
           <li
             tabIndex={-1}
             onClick={(e) => {

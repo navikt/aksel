@@ -47,7 +47,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       inputClassName,
       id = "",
       shouldShowSelectedOptions = true,
-      singleSelect = false,
+      singleSelect,
       ...rest
     } = props;
 
@@ -67,15 +67,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       prevSelectedOptions,
       removeSelectedOption,
       addSelectedOption,
+      singleSelectedValue,
       setSingleSelectValue,
     } = useSelectedOptionsContext();
 
     const { value, onChange } = useInputContext();
-
-    const singleSelectValue = useMemo(
-      () => (singleSelect ? selectedOptions[0] : null),
-      [selectedOptions, singleSelect]
-    );
 
     const focusInput = useCallback(() => {
       inputRef.current?.focus?.();
@@ -129,7 +125,8 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         }
         // onEnter: add focused option
         else if (focusedOption && filteredOptions?.includes?.(focusedOption)) {
-          addSelectedOption(focusedOption);
+          if (singleSelect) setSingleSelectValue(focusedOption);
+          else addSelectedOption(focusedOption);
         }
         //onEnter: add custom option
         else if (focusedOption && !filteredOptions.includes(focusedOption)) {
@@ -155,7 +152,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     useEffect(() => {
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
-
+    console.log("DEBUG - singleSelect", singleSelect);
     return (
       <ComboboxWrapper
         className={className}
@@ -198,7 +195,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             {singleSelect ? (
               <>
                 <span className="navds-combobox__single-select">
-                  {singleSelectValue}
+                  {singleSelectedValue}
                 </span>
                 <Input
                   key="combobox-input"
@@ -243,6 +240,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             )}
           </div>
           <FilteredOptions
+            singleSelect={singleSelect}
             id={id}
             toggleOption={toggleOption}
             focusInput={focusInput}

@@ -57,7 +57,7 @@ export const SelectedOptionsProvider = ({
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
 
   const singleSelectedValue = useMemo(() => {
-    return selectedOptions.length === 1 ? selectedOptions[0] : "";
+    return selectedOptions.length > 0 ? selectedOptions[0] : "";
   }, [selectedOptions]);
 
   const setSingleSelectValue = (value: string) => {

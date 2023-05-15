@@ -134,7 +134,7 @@ export function SingleSelect(props) {
   return (
     <div>
       <Combobox
-        singleSelect={props.singleSelect}
+        singleSelect={props.singleSelect || true}
         options={options}
         selectedOptions={selectedOptions}
         setOptions={setOptions}

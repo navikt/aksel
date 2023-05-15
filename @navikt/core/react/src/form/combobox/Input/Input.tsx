@@ -120,8 +120,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <input
         ref={ref}
-        {...omit(rest, ["error", "errorId", "size"])}
-        {...inputProps}
+        {...omit(rest, [
+          "error",
+          "errorId",
+          "size",
+          "setSelectedOptions",
+          "setOptions",
+        ])}
+        {...omit(inputProps, ["aria-invalid"])}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         type="text"
