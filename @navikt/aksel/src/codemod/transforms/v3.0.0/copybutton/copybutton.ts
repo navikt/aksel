@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import moveAndRenameImport from "../../../utils/moveAndRenameImport";
 import removePropsFromComponent from "../../../utils/removeProps";
 
@@ -7,9 +8,13 @@ import removePropsFromComponent from "../../../utils/removeProps";
  */
 export default function transformer(file, api, options, ...rest) {
   const j = api.jscodeshift;
-  /*   let localName = "CopyToClipboard"; */
 
-  const root = j(file.source);
+  let root: any;
+  try {
+    root = j(file.source);
+  } catch {
+    return file.source;
+  }
 
   const toName = "CopyButton";
   const localName = moveAndRenameImport(j, root, {
@@ -18,6 +23,10 @@ export default function transformer(file, api, options, ...rest) {
     fromName: "CopyToClipboard",
     toName,
   });
+
+  if (localName === null) {
+    return root.toSource(options.printOptions);
+  }
 
   /* Finds and replaces import from CopyToClipboard -> CopyButton */
 
@@ -50,7 +59,9 @@ export default function transformer(file, api, options, ...rest) {
         } else {
           flagged = true;
           console.log(
-            `Warning: 'copybutton'-codemod can't convert advanced children-variants into "text" prop.`
+            chalk.yellow(
+              `\n\nWarning: Detected advanced children-type!\nCodemod can't convert into "text" prop so you will need to update this manually.`
+            )
           );
         }
       }
@@ -59,8 +70,6 @@ export default function transformer(file, api, options, ...rest) {
         node.node.children = [];
         node.node.openingElement.selfClosing = true;
         node.node.closingElement = null;
-      } else {
-        node.node.closingElement.name.name = "CopyButton";
       }
     });
 
@@ -70,6 +79,9 @@ export default function transformer(file, api, options, ...rest) {
 
     compRoot.forEach((x) => {
       x.node.openingElement.name.name = "CopyButton";
+      if (x.node.children.length > 0) {
+        x.node.closingElement.name.name = "CopyButton";
+      }
     });
   }
 

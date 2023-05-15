@@ -10,6 +10,42 @@ export default function moveAndRenameImport(
     toName,
   }: { fromImport: string; toImport: string; fromName: string; toName: string }
 ) {
+  const existingFromImport = root.find(j.ImportDeclaration, {
+    source: {
+      value: fromImport,
+    },
+  });
+
+  if (!existingFromImport.length) {
+    return null;
+  }
+
+  let localname = fromName;
+  const existingFromImportSpecifier = existingFromImport?.find(
+    j.ImportSpecifier,
+    (node) => {
+      if (node.imported.name === fromName) {
+        localname = node.local.name;
+      }
+      return node.imported.name === fromName;
+    }
+  );
+
+  if (!existingFromImport.length || !existingFromImportSpecifier?.length) {
+    return null;
+  }
+
+  if (existingFromImportSpecifier?.length > 0) {
+    existingFromImportSpecifier.remove();
+  }
+
+  if (
+    !existingFromImport.get("specifiers").value?.length ||
+    existingFromImport.get("specifiers").value?.length === 0
+  ) {
+    existingFromImport.remove();
+  }
+
   const existingImport = root.find(j.ImportDeclaration, {
     source: {
       value: toImport,
@@ -41,38 +77,6 @@ export default function moveAndRenameImport(
         root.get().node.program.body.unshift(newImport);
       }
     }
-  }
-
-  const existingFromImport = root.find(j.ImportDeclaration, {
-    source: {
-      value: fromImport,
-    },
-  });
-
-  if (!existingFromImport.length) {
-    return;
-  }
-
-  let localname = fromName;
-  const existingFromImportSpecifier = existingFromImport?.find(
-    j.ImportSpecifier,
-    (node) => {
-      if (node.imported.name === fromName) {
-        localname = node.local.name;
-      }
-      return node.imported.name === fromName;
-    }
-  );
-
-  if (existingFromImportSpecifier?.length > 0) {
-    existingFromImportSpecifier.remove();
-  }
-
-  if (
-    !existingFromImport.get("specifiers").value?.length ||
-    existingFromImport.get("specifiers").value?.length === 0
-  ) {
-    existingFromImport.remove();
   }
 
   return localname;
