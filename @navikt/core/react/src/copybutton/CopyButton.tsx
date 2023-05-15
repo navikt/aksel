@@ -52,6 +52,16 @@ export interface CopyButtonProps
    * @default 2000
    */
   activeDuration?: number;
+  /**
+   * * accessible label for icon (ignored if text is set)
+   * @default 'Kopier'
+   */
+  title?: string;
+  /**
+   * accessible label for icon in active-state (ignored if text is set)
+   * @default 'Kopiert'
+   */
+  activeTitle?: string;
 }
 
 export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
@@ -67,12 +77,13 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       icon,
       activeIcon,
       activeDuration = 2000,
+      title = "Kopier",
+      activeTitle = "Kopiert",
       ...rest
     },
     ref
   ) => {
     const [active, setActive] = useState(false);
-    const [activated, setActivated] = useState(false);
     const timeoutRef = useRef<number>();
 
     useEffect(() => {
@@ -89,10 +100,8 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       setActive(true);
       rest.onClick?.(event);
       onActiveChange?.(true);
-      setActivated(false);
 
       timeoutRef.current = window.setTimeout(() => {
-        setActivated(true);
         setActive(false);
         onActiveChange?.(false);
       }, activeDuration);
@@ -113,8 +122,6 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           }
         )}
         onClick={handleClick}
-        aria-label={activated ? activeText : undefined}
-        onBlur={() => setActivated(false)}
       >
         <span className="navds-copybutton__content">
           {active ? (
@@ -122,7 +129,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
               {activeIcon ?? (
                 <CheckmarkIcon
                   aria-hidden={!!text}
-                  title={text ? undefined : "Kopiert"}
+                  title={text ? undefined : activeTitle}
                 />
               )}
             </span>
@@ -131,7 +138,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
               {icon ?? (
                 <FilesIcon
                   aria-hidden={!!text}
-                  title={text ? undefined : "Kopier"}
+                  title={text ? undefined : title}
                 />
               )}
             </span>

@@ -53,7 +53,17 @@ export const Interaction = {
 export const Variants = {
   render: () => (
     <div className="colgap">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quo, a
+        optio veniam impedit totam possimus culpa ex nemo fuga, beatae, ipsa
+        dolorum ab ipsam perspiciatis sunt deserunt cum nulla!
+      </p>
       <CopyButton copyText="3.14" variant="action" text="Kopier" />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quo, a
+        optio veniam impedit totam possimus culpa ex nemo fuga, beatae, ipsa
+        dolorum ab ipsam perspiciatis sunt deserunt cum nulla!
+      </p>
       <CopyButton copyText="3.14" variant="neutral" text="Kopier" />
     </div>
   ),
