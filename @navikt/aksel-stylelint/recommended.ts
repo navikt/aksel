@@ -1,6 +1,9 @@
 module.exports = {
   plugins: ["."],
   rules: {
-    "@navikt/aksel-test-rule": true,
+    "@navikt/aksel-design-tokens": {
+      tokenDefinitionsFile: "@navikt/core/css/dist/index.css",
+      controlledPrefixes: [/--ac-.+/, /--a-.+/],
+    },
   },
 };

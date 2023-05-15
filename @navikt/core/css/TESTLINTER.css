@@ -1,0 +1,14 @@
+.navds-accordion__header:hover {
+  background-color: var(--ac-accordion-header-bg-hover, var(--a-surface-action));
+  text-decoration: underline;
+  color: var(--legal-token, inherit);
+}
+
+* {
+  color: var(--a-illegal-token, inherit);
+
+  --ac-illegal-token: 4px;
+  --a-illegal-token: 5px;
+  --aca-legal-token: 6px;
+  --b-legal-token: 6px;
+}

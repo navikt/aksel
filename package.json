@@ -16,6 +16,7 @@
     "test": "yarn workspaces foreach -p run test",
     "lint": "yarn eslint . && yarn stylelint @navikt/**/*.css",
     "lint:css": "yarn stylelint @navikt/**/*.css",
+    "lint:csstest": "yarn stylelint @navikt/core/css/TESTLINTER.css",
     "changeset": "changeset",
     "version": "changeset version",
     "release": "yarn boot && yarn docgen && changeset publish"
