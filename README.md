@@ -33,13 +33,12 @@
 ├── internal/css    # @navikt/ds-css-internal, css interne flater
 ├── aksel-icons     # @navikt/aksel-icons, ikonpakke
 └── aksel           # @navikt/aksel, kommandolinje-verktøy
-```
 
 aksel.nav.no/
 ├── website # NEXT.JS app (v13)
 └── website/sanity # Sanity CMS-app (v3)
 
-````
+```
 
 ## Commands
 
@@ -47,7 +46,7 @@ Installer dependencies og bygg workspace
 
 ```sh
 yarn && yarn boot
-````
+```
 
 | Command                   | Script                                                                                                 |
 | ------------------------- | ------------------------------------------------------------------------------------------------------ |
