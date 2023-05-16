@@ -33,7 +33,6 @@ export async function runCodeshift(
   options?.glob && console.log(`Using glob: ${chalk.green(options.glob)}\n`);
 
   const warning = getWarning(input);
-  warning && console.log(`\n${chalk.yellow(warning)}\n`);
 
   try {
     await jscodeshift.run(codemodPath, filepaths, {
@@ -49,6 +48,8 @@ export async function runCodeshift(
       force: options?.force,
       print: options?.print,
     });
+
+    warning && console.log(`\n${chalk.yellow(warning)}\n`);
   } catch (error) {
     program.error(chalk.red("Error:", error.message));
   }
