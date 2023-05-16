@@ -26,7 +26,7 @@ export const args = {
 };
 
 const Hr = () => (
-  <span className="border-t-1 border-t-border-divider my-1 w-full" />
+  <div className="border-t-border-divider my-1 h-[1px] w-full border-t" />
 );
 
 const Row = ({ children, text }: any) => (

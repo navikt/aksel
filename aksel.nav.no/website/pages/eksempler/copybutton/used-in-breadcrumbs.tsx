@@ -7,7 +7,7 @@ const Example = () => {
       <span>Flere statsborgerskap: Norge, Danmark, Finland</span>
       <span>/</span>
       <span className="flex items-center gap-1">
-        17029645183 <CopyButton size="small" copyText="17029645183" />
+        1709230141 <CopyButton size="small" copyText="1709230141" />
       </span>
       <span>/</span>
       <span>Gift</span>
