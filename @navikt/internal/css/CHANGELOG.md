@@ -1,5 +1,7 @@
 # @navikt/ds-css-internal
 
+## 3.2.0
+
 ## 3.1.3
 
 ## 3.1.2
