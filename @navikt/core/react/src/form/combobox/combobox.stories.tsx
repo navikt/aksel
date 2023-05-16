@@ -111,9 +111,12 @@ Default.args = {
 };
 
 export function Loading({ isListOpen, loading }) {
+  const id = useId();
   return (
     <div>
       <Combobox
+        id={id}
+        label="Komboboks (laster)"
         options={[]}
         selectedOptions={[]}
         isListOpen={isListOpen}
@@ -129,6 +132,7 @@ Loading.args = {
 };
 
 export function SingleSelect(props) {
+  const id = useId();
   const [options, setOptions] = useState(props.options);
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     props.selectedOptions
@@ -136,6 +140,8 @@ export function SingleSelect(props) {
   return (
     <div>
       <Combobox
+        id={id}
+        label="Komboboks (single select)"
         singleSelect={props.singleSelect || true}
         options={options}
         selectedOptions={selectedOptions}
