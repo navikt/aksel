@@ -43,7 +43,14 @@ export const UseRangedDatepicker = () => {
 };
 
 export const UseMonthpicker = () => {
-  const { inputProps, monthpickerProps } = useMonthpicker({
+  const { inputProps, monthpickerProps } = DsUnsafeUseMonthpicker({
+    disabled: [new Date("Apr 1 2022")],
+    onMonthChange: console.log,
+    fromDate: new Date("Jan 1 2022"),
+    toDate: new Date("Sep 27 2025"),
+  });
+
+  const {} = UNSAFE_useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
     onMonthChange: console.log,
     fromDate: new Date("Jan 1 2022"),
