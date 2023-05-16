@@ -76,7 +76,7 @@
 }
 
 .navds-button__icon {
-  --__ac-button-icon-margin: var(--ac-button-icon-margin, -4px);
+  --ac-button-icon-margin: -4px;
 
   font-size: 1.5rem;
   display: flex;
