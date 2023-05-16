@@ -1,5 +1,15 @@
 # @navikt/ds-react-internal
 
+## 3.2.1
+
+### Patch Changes
+
+- :bug: Fikset tekst i Internal-header
+
+- Updated dependencies []:
+  - @navikt/ds-react@3.2.1
+  - @navikt/aksel-icons@3.2.1
+
 ## 3.2.0
 
 ### Minor Changes

@@ -15,15 +15,15 @@
     "website"
   ],
   "dependencies": {
-    "@navikt/aksel-icons": "^3.2.0",
-    "@navikt/ds-codemod": "^3.2.0",
-    "@navikt/ds-css": "^3.2.0",
-    "@navikt/ds-css-internal": "^3.2.0",
-    "@navikt/ds-icons": "^3.2.0",
-    "@navikt/ds-react": "^3.2.0",
-    "@navikt/ds-react-internal": "^3.2.0",
-    "@navikt/ds-tailwind": "^3.2.0",
-    "@navikt/ds-tokens": "^3.2.0"
+    "@navikt/aksel-icons": "^3.2.1",
+    "@navikt/ds-codemod": "^3.2.1",
+    "@navikt/ds-css": "^3.2.1",
+    "@navikt/ds-css-internal": "^3.2.1",
+    "@navikt/ds-icons": "^3.2.1",
+    "@navikt/ds-react": "^3.2.1",
+    "@navikt/ds-react-internal": "^3.2.1",
+    "@navikt/ds-tailwind": "^3.2.1",
+    "@navikt/ds-tokens": "^3.2.1"
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.2.3"
