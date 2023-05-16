@@ -2,7 +2,7 @@ import { Command } from "commander";
 import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "path";
-import { getMigrationPath } from "./migrations";
+import { getMigrationPath, getWarning } from "./migrations";
 import chalk from "chalk";
 
 const ignoreNodeModules = [
@@ -32,6 +32,8 @@ export async function runCodeshift(
 
   options?.glob && console.log(`Using glob: ${chalk.green(options.glob)}\n`);
 
+  const warning = getWarning(input);
+
   try {
     await jscodeshift.run(codemodPath, filepaths, {
       babel: true,
@@ -46,6 +48,8 @@ export async function runCodeshift(
       force: options?.force,
       print: options?.print,
     });
+
+    warning && console.log(`\n${chalk.yellow(warning)}\n`);
   } catch (error) {
     program.error(chalk.red("Error:", error.message));
   }

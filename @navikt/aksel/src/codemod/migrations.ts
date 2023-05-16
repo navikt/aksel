@@ -1,7 +1,12 @@
 import chalk from "chalk";
 
 export const migrations: {
-  [key: string]: { description: string; value: string; path: string }[];
+  [key: string]: {
+    description: string;
+    value: string;
+    path: string;
+    warning?: string;
+  }[];
 } = {
   "1.0.0": [
     {
@@ -48,12 +53,28 @@ export const migrations: {
       path: "v2.0.0/update-less-tokens/update-less-tokens",
     },
   ],
+  "v3.0.0": [
+    {
+      description:
+        "Replaces deprecated <CopyToClipboard /> with <CopyButton />",
+      value: "v3-copybutton",
+      path: "v3.0.0/copybutton/copybutton",
+      warning:
+        "Remember to clean css-import from '@navikt/ds-css-internal' if no longer needed\nIf non-text was used as children, or different locales were handled, you need to manually fix this",
+    },
+  ],
 };
 
 export function getMigrationPath(str: string) {
   return Object.values(migrations)
     .reduce((acc, val) => [...val, ...acc], [])
     .find((x) => x.value === str)?.path;
+}
+
+export function getWarning(str: string) {
+  return Object.values(migrations)
+    .reduce((acc, val) => [...val, ...acc], [])
+    .find((x) => x.value === str)?.warning;
 }
 
 export function getMigrationNames() {

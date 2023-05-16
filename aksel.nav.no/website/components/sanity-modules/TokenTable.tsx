@@ -3,9 +3,8 @@ import { TokenTableT } from "@/types";
 import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import internal from "@navikt/ds-css-internal/tokens.json";
 import core from "@navikt/ds-css/tokens.json";
-import { BodyLong, Label, Link } from "@navikt/ds-react";
+import { BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
 import cl from "classnames";
-import CopyButton from "components/sanity-modules/code/CopyButton";
 import NextLink from "next/link";
 import { useState } from "react";
 
@@ -53,10 +52,9 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
           </tbody>
         </table>
         {(open || !showMore) && (
-          <div className="border-border-divider bg-surface-neutral-subtle relative w-full rounded-b border border-t-0 p-2">
+          <div className="border-border-divider bg-surface-neutral-subtle relative w-full rounded-b border border-t-0 p-2 pr-14">
             <CopyButton
-              variant="tokentable"
-              content={Object.entries(tokens).reduce(
+              copyText={Object.entries(tokens).reduce(
                 (prev, cur) =>
                   prev +
                   `${cur[0]}: ${
@@ -64,6 +62,7 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
                   };\n`,
                 ""
               )}
+              className="absolute top-2 right-2 z-10"
             />
             <Label size="small" as="span" spacing>
               Hva er dette?

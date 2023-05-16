@@ -32,12 +32,12 @@
 ├── internal/react  # @navikt/ds-react-internal, komponenter interne flater
 ├── internal/css    # @navikt/ds-css-internal, css interne flater
 ├── aksel-icons     # @navikt/aksel-icons, ikonpakke
-├── icons           # @navikt/ds-icons (ikke lengre i bruk)
-└── codemod         # @navikt/ds-codemod, migrerings-scripts
+└── aksel           # @navikt/aksel, kommandolinje-verktøy
 
 aksel.nav.no/
-├── website        # NEXT.JS app (v13)
+├── website # NEXT.JS app (v13)
 └── website/sanity # Sanity CMS-app (v3)
+
 ```
 
 ## Commands
