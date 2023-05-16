@@ -72,7 +72,6 @@ export const vendorUnprefixed = (prop) => {
   return prop.replace(/^-\w+-/, "");
 };
 
-// write a function that flattens the object to an array of keys 
 export const flattenObject = (obj) => {
   const flattened = Object.keys(obj).reduce((acc, key) => {
     if (typeof obj[key] === 'string') {

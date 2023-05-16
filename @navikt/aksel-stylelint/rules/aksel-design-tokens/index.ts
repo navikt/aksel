@@ -157,8 +157,6 @@ const ruleFunction: stylelint.Rule<PrimaryOptions, object> = (
           node,
           result: postcssResult,
           ruleName,
-          // start: node.source.start,
-          // end: { column: node.source.end.column + node.prop.length, line: node.source.end.line}
         });
       }
 
@@ -168,8 +166,6 @@ const ruleFunction: stylelint.Rule<PrimaryOptions, object> = (
           node,
           result: postcssResult,
           ruleName,
-          // start: node.source.start,
-          // end: { column: node.source.end.column + node.prop.length, line: node.source.end.line}
         });
       }
     });
