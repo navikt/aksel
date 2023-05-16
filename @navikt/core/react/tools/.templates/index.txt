@@ -1,0 +1,1 @@
+export { default as <COMPONENT_NAME>, type <COMPONENT_NAME>Props } from "./<COMPONENT_NAME>";

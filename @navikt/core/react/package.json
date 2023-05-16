@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
+    "new-component": "./tools/new-component.sh",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
     "build": "concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",

@@ -1,0 +1,19 @@
+import { Meta } from "@storybook/react";
+import React from "react";
+
+import { <COMPONENT_NAME> } from "..";
+
+export default {
+  title: "ds-react/<COMPONENT_NAME>",
+  component: <COMPONENT_NAME>,
+} as Meta;
+
+export const Default = {
+  render: () => {
+    return (
+      <<COMPONENT_NAME>>
+			{/* Write your story */}
+      </<COMPONENT_NAME>>
+    );
+  },
+};

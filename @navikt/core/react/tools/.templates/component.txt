@@ -1,0 +1,24 @@
+import React, { forwardRef, SVGProps } from "react";
+import cl from "clsx";
+
+export interface <COMPONENT_NAME>Props extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+
+export const <COMPONENT_NAME> = forwardRef<HTMLDivElement, <COMPONENT_NAME>Props>(
+  (
+    {
+      children,
+      ...rest
+    },
+    ref
+  ) => {
+    return (
+    <div {...rest}>
+    </div>
+    );
+  }
+);
+
+export default <COMPONENT_NAME>;
