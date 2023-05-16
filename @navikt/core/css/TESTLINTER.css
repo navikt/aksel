@@ -2,6 +2,7 @@
   background-color: var(--ac-accordion-header-bg-hover, var(--a-surface-action));
   text-decoration: underline;
   color: var(--legal-token, inherit);
+  background-image: var(--a-illegal-image);
 }
 
 * {
@@ -11,4 +12,5 @@
   --a-illegal-token: 5px;
   --aca-legal-token: 6px;
   --b-legal-token: 6px;
+  --a-tokenthing: 42;
 }
