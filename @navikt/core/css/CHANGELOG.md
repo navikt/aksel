@@ -1,5 +1,14 @@
 # @navikt/ds-css
 
+## 3.2.0
+
+### Minor Changes
+
+- [#1982](https://github.com/navikt/aksel/pull/1982) [`affcab14c`](https://github.com/navikt/aksel/commit/affcab14c3d536929dfa64a36f5b43f9d0e8c3b7) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Ny komponent `<CopyButton />`!
+
+  - Erstatter `<CopyToClipboard />` fra `@navikt/ds-react-internal`
+  - CopyToClipboard er markert som deprecated. Den vil fortsatt fungere, men noen lintere vil kunne ende opp med å klage på den.
+
 ## 3.1.3
 
 ### Patch Changes
