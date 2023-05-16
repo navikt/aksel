@@ -7,7 +7,6 @@
 
 * {
   color: var(--a-illegal-token, inherit);
-
   --ac-illegal-token: 4px;
   --a-illegal-token: 5px;
   --aca-legal-token: 6px;

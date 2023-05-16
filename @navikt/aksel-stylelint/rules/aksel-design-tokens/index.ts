@@ -19,15 +19,13 @@ const errorMessage = (
       `property "${node.prop}" has offending value(s) "${invalidValues}", ` +
       `and the value seems like it intends to reference a design token by ` +
       `using one of the following prefixes [${controlledPrefixes}]. ` +
-      `However, that token doesn't seem to exist in the design system. ` +
-      `https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-design-tokens`
+      `However, that token doesn't seem to exist in the design system. `
     );
   }
   return (
     `property "${node.prop}" has a name that seems like it intends to override a design token by ` +
     `using one of the following prefixes [${controlledPrefixes}]. ` +
-    `However, that token doesn't seem to exist in the design system. ` +
-    `https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-design-tokens`
+    `However, that token doesn't seem to exist in the design system. `
   );
 };
 
@@ -184,5 +182,8 @@ const ruleFunction: stylelint.Rule<PrimaryOptions, object> = (
 
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = {};
+ruleFunction.meta = {
+	url: 'https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-design-tokens',
+};
 
 export default ruleFunction;
