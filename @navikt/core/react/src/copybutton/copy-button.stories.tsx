@@ -162,6 +162,7 @@ export const Disabled = {
     <div className="colgap">
       <CopyButton copyText="3.14" disabled />
       <CopyButton copyText="3.14" size="small" disabled />
+      <CopyButton copyText="3.14" disabled variant="action" />
     </div>
   ),
 };

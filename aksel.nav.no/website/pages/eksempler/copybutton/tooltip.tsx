@@ -18,5 +18,5 @@ export const Demo = {
 
 export const args = {
   index: 8,
-  desc: "Man kan bruke Tooltip for å gi en mer beskrivende tekst til CopyButton. Dette er mest relevant når CopyButton er plassert utenfor context og med bare ikon.",
+  desc: "Tooltip kan hjelpe med å gi mer kontekst om hva man kopierer. Vi har testet dette med skjermleser og funnet ut at statisk tekst som 'kopier ...' fungerer bedre enn dynamisk tekst ved klikk i tooltip.",
 };
