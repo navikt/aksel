@@ -194,6 +194,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   {singleSelectedValue}
                 </span>
                 <Input
+                  id={id}
                   key="combobox-input"
                   ref={mergedInputRef}
                   value={value}
@@ -221,6 +222,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 handleDeleteSelectedOption={handleDeleteSelectedOption}
               >
                 <Input
+                  id={id}
                   key="combobox-input"
                   ref={mergedInputRef}
                   value={value}
