@@ -81,20 +81,3 @@ export default function moveAndRenameImport(
 
   return localname;
 }
-
-/* root
-    .find(j.ImportDeclaration)
-    .filter((path) => path.node.source.value === "@navikt/ds-react-internal")
-    .forEach((imp) => {
-      imp.value.specifiers.forEach((x) => {
-        if (x.imported.name === "CopyToClipboard") {
-          if (x.local.name !== x.imported.name) {
-            localName = x.local.name;
-            x.imported.name = "CopyButton";
-          } else {
-            x.imported.name = "CopyButton";
-            x.local.name = "CopyButton";
-          }
-        }
-      });
-    }); */
