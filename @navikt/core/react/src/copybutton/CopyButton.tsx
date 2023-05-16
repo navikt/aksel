@@ -109,8 +109,9 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
     return (
       <button
-        {...rest}
         ref={ref}
+        type="button"
+        {...rest}
         aria-live="polite"
         className={cl(
           "navds-copybutton",
