@@ -1,6 +1,6 @@
 import stylelint from "stylelint";
 import valueParser from "postcss-value-parser";
-import { isCustomProperty } from "./utils";
+import { flattenObject, isCustomProperty } from "./utils";
 
 import { readFileSync } from "node:fs";
 
@@ -53,12 +53,8 @@ const isValidToken = (
     const jsonFileBuffer = readFileSync(overrideableTokenDefinitionsJSONFile);
     const fileString = jsonFileBuffer.toString();
 
-    const jsonObject = JSON.parse(fileString);
-    for (const value of Object.values(jsonObject)) {
-      for (const tokenName of Object.keys(value)) {
-        allowedTokenNames.push(tokenName);
-      }
-    }
+    const flattened = flattenObject(JSON.parse(fileString));
+    flattened.forEach(token => allowedTokenNames.push(token));
   }
 
   return allowedTokenNames.some((element) => element === inputToken);
