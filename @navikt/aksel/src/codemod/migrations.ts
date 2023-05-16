@@ -63,6 +63,13 @@ export const migrations: {
         "Remember to clean css-import from '@navikt/ds-css-internal' if no longer needed\nIf non-text was used as children, or different locales were handled, you need to manually fix this",
     },
   ],
+  "v4.0.0": [
+    {
+      description: "",
+      value: "v4-date",
+      path: "v4.0.0/date/date",
+    },
+  ],
 };
 
 export function getMigrationPath(str: string) {
