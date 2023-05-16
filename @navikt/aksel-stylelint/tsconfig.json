@@ -3,7 +3,7 @@
     "module": "CommonJS",
     "sourceMap": false,
     "esModuleInterop": true,
-    "target": "es2015",
+    "target": "es2020",
     "preserveWatchOutput": true,
     "declaration": false,
     "types": ["node", "jest", "@types/jest"],

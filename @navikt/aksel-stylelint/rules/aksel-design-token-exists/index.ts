@@ -1,12 +1,15 @@
 import stylelint from "stylelint";
 import valueParser from "postcss-value-parser";
-import { flattenObject, isCustomProperty } from "./utils";
-
 import { readFileSync } from "node:fs";
 
-const ruleName = "@navikt/aksel-design-tokens";
+import { flattenObject, isCustomProperty } from "./utils";
+
+const ruleName = "@navikt/aksel-design-token-exists";
 
 let allowedTokenNames = [];
+
+const packageJson = JSON.parse(readFileSync(`${__dirname}/../../../package.json`).toString());
+const packageVersion = packageJson.version;
 
 const errorMessage = (
   type: "prop" | "value",
@@ -19,13 +22,15 @@ const errorMessage = (
       `property "${node.prop}" has offending value(s) "${invalidValues}", ` +
       `and the value seems like it intends to reference a design token by ` +
       `using one of the following prefixes [${controlledPrefixes}]. ` +
-      `However, that token doesn't seem to exist in the design system. `
+      `However, that token doesn't seem to exist in the design system. ` + 
+      `\n\nVersion: ${packageVersion}`
     );
   }
   return (
     `property "${node.prop}" has a name that seems like it intends to override a design token by ` +
     `using one of the following prefixes [${controlledPrefixes}]. ` +
-    `However, that token doesn't seem to exist in the design system. `
+    `However, that token doesn't seem to exist in the design system. ` + 
+    `\n\nVersion: ${packageVersion}`
   );
 };
 
@@ -37,7 +42,7 @@ const isValidToken = (
 ) => {
   // "singleton" if statement (attempt at caching file parsing)
   if (!allowedTokenNames.length) {
-    const cssFileBuffer = readFileSync(tokenDefinitionsFile);
+    const cssFileBuffer = readFileSync(`${__dirname}/../../${tokenDefinitionsFile}`);
     const cssFileString = cssFileBuffer.toString();
 
     valueParser(cssFileString).walk((node) => {
@@ -50,7 +55,7 @@ const isValidToken = (
       }
     });
 
-    const jsonFileBuffer = readFileSync(overrideableTokenDefinitionsJSONFile);
+    const jsonFileBuffer = readFileSync(`${__dirname}/../../${overrideableTokenDefinitionsJSONFile}`);
     const fileString = jsonFileBuffer.toString();
 
     const flattened = flattenObject(JSON.parse(fileString));
@@ -175,7 +180,7 @@ const ruleFunction: stylelint.Rule<PrimaryOptions, object> = (
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = {};
 ruleFunction.meta = {
-	url: 'https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-design-tokens',
+	url: 'https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-design-token-exists',
 };
 
 export default ruleFunction;

@@ -1,6 +1,6 @@
 import { Rule } from "stylelint";
-import designTokens from "./aksel-design-tokens";
+import designTokenExists from "./aksel-design-token-exists";
 
 export const rules: Record<string, Rule> = {
-  "aksel-design-tokens": designTokens,
+  "aksel-design-token-exists": designTokenExists,
 };

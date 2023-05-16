@@ -1,6 +1,6 @@
 # Aksel stylelint rules & plugins
 
-## aksel-design-tokens
+## aksel-design-token-exists
 
 This stylelint rule will help you referrence or override a design token in the Aksel design system by making sure that it exists.
 
@@ -42,7 +42,7 @@ If you want to configure it further, or tweak the behaviour of the rule, you can
 ```js
 const stylelintConfig = {
   rules: {
-    "@navikt/aksel-design-tokens": {
+    "@navikt/aksel-design-token-exists": {
       tokenDefinitionsFile: "@navikt/core/css/dist/index.css",
       overrideableTokenDefinitionsJSONFile: "@navikt/core/css/tokens.json",
       controlledPrefixes: [/--ac-.+/, /--a-.+/],
