@@ -7,4 +7,4 @@
 :sparkles: Ny komponent `<CopyButton />`!
 
 - Erstatter `<CopyToClipboard />` fra `@navikt/ds-react-internal`
-- CopyToClipboard er markert som deprecated. Den vil fortsatt fungere, men noen lintere vil kunne på den.
+- CopyToClipboard er markert som deprecated. Den vil fortsatt fungere, men noen lintere vil kunne ende opp med å klage på den.
