@@ -98,8 +98,8 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       timeoutRef.current && clearTimeout(timeoutRef.current);
       copy(copyText);
       setActive(true);
-      rest.onClick?.(event);
       onActiveChange?.(true);
+      rest.onClick?.(event);
 
       timeoutRef.current = window.setTimeout(() => {
         setActive(false);
@@ -111,6 +111,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       <button
         {...rest}
         ref={ref}
+        aria-live="polite"
         className={cl(
           "navds-copybutton",
           className,
