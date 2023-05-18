@@ -54,9 +54,6 @@ const ClickablePeriod = React.memo(
     });
 
     const {
-      x,
-      y,
-      strategy,
       context,
       placement,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
@@ -158,14 +155,11 @@ const ClickablePeriod = React.memo(
             ref={refs.setFloating}
             {...getFloatingProps({
               tabIndex: -1,
-              style: {
-                position: strategy,
-                top: y ?? 0,
-                left: x ?? 0,
-                display: !selected ? "none" : undefined,
-              },
             })}
-            style={floatingStyles}
+            style={{
+              ...floatingStyles,
+              display: selected ? undefined : "none",
+            }}
           >
             <div className="navds-timeline__popover-content">{children}</div>
             <div
