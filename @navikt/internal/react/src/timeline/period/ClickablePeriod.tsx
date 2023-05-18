@@ -48,7 +48,10 @@ const ClickablePeriod = React.memo(
     const { firstFocus } = usePeriodContext();
     const { initiate, addFocusable } = useTimelineContext();
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const [clicked, setClicked] = useState(false);
+    const [clickState, setClickState] = useState({
+      clicked: false,
+      manualSelect: false,
+    });
 
     const {
       x,
@@ -64,7 +67,7 @@ const ClickablePeriod = React.memo(
       open: selected,
       onOpenChange: (open) => {
         setSelected(open);
-        setClicked(false);
+        setClickState({ manualSelect: false, clicked: false });
       },
       middleware: [
         offset(10),
@@ -80,7 +83,7 @@ const ClickablePeriod = React.memo(
         handleClose: safePolygon(),
         restMs: 25,
         delay: { open: 1000 },
-        enabled: !clicked,
+        enabled: !clickState.clicked,
       }),
       useFocus(context),
       useDismiss(context),
@@ -126,8 +129,19 @@ const ClickablePeriod = React.memo(
               [direction]: `${left}%`,
             },
             onClick: (e) => {
-              children && setClicked(true);
-              children && setSelected((x) => !x);
+              if (children) {
+                if (selected) {
+                  !clickState.manualSelect &&
+                    setClickState({ manualSelect: true, clicked: true });
+
+                  if (clickState.manualSelect) {
+                    setSelected(false);
+                    setClickState({ manualSelect: false, clicked: false });
+                  }
+                } else {
+                  setSelected(true);
+                }
+              }
               onSelectPeriod?.(
                 e as React.MouseEvent<HTMLButtonElement, MouseEvent>
               );
