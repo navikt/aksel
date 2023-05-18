@@ -11,7 +11,7 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import { Popover, mergeRefs } from "@navikt/ds-react";
+import { mergeRefs } from "@navikt/ds-react";
 import cl from "clsx";
 import React, { useMemo, useRef, useState } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
@@ -70,7 +70,7 @@ const ClickablePeriod = React.memo(
         setClickState({ manualSelect: false, clicked: false });
       },
       middleware: [
-        offset(10),
+        offset(16),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
@@ -152,9 +152,7 @@ const ClickablePeriod = React.memo(
         </button>
         {children && (
           <div
-            className={cl("navds-popover", {
-              "navds-popover--hidden": !selected,
-            })}
+            className="navds-timeline__popover"
             data-placement={placement}
             aria-hidden={selected}
             ref={refs.setFloating}
@@ -164,11 +162,12 @@ const ClickablePeriod = React.memo(
                 position: strategy,
                 top: y ?? 0,
                 left: x ?? 0,
+                display: !selected ? "none" : undefined,
               },
             })}
             style={floatingStyles}
           >
-            <Popover.Content>{children}</Popover.Content>
+            <div className="navds-timeline__popover-content">{children}</div>
             <div
               ref={(node) => {
                 arrowRef.current = node;
@@ -178,20 +177,10 @@ const ClickablePeriod = React.memo(
                 ...(arrowY != null ? { top: arrowY } : {}),
                 ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
               }}
-              className="navds-popover__arrow"
+              className="navds-timeline__popover-arrow"
             />
           </div>
         )}
-        {/* {children && (
-          <Popover
-            open={selected}
-            onClose={() => setSelected(false)}
-            anchorEl={buttonRef.current}
-            strategy="fixed"
-          >
-            <Popover.Content>{children}</Popover.Content>
-          </Popover>
-        )} */}
       </>
     );
   }
