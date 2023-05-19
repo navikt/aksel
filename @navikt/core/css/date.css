@@ -198,11 +198,11 @@
 }
 
 .navds-date__field-input {
-  padding-right: var(--a-spacing-12);
+  padding-right: var(--a-spacing-14);
 }
 
 .navds-form-field--small .navds-date__field-input {
-  padding-right: var(--a-spacing-8);
+  padding-right: var(--a-spacing-10);
 }
 
 /* Error-handling */
@@ -223,24 +223,50 @@
 
 .navds-date__field-button {
   position: absolute;
-  right: var(--a-spacing-2);
+  right: 1px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--ac-date-input-button-text, var(--a-text-default));
+  display: inline-flex;
+  cursor: pointer;
+  margin: 0;
+  text-decoration: none;
+  border: none;
+  background: none;
+  border-radius: 3px;
+  padding: var(--a-spacing-3);
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  height: calc(100% - 2px);
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
 }
 
 .navds-form-field--small .navds-date__field-button {
-  right: var(--a-spacing-2);
-  height: 1.5rem;
-  width: 1.5rem;
+  padding: var(--a-spacing-1);
 }
 
-.navds-form-field--small .navds-date__field-button svg {
-  font-size: var(--a-font-size-medium);
+.navds-date__field-button:hover {
+  color: var(--ac-date-input-button-hover-text, var(--a-text-action-on-action-subtle));
+  background-color: var(--ac-date-input-button-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-form-field--disabled .navds-date__field-button {
   opacity: 1;
+}
+
+.navds-date__field-button:focus-visible {
+  outline: none;
+  box-shadow: var(--a-shadow-focus);
+  border-radius: var(--a-border-radius-medium);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-date__field-button:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 .navds-date__caption__year {
