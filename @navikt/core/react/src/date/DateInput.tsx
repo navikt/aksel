@@ -117,7 +117,7 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
           />
           <button
             disabled={inputProps.disabled}
-            /* tabIndex={open ? -1 : 0} */
+            tabIndex={open ? -1 : 0}
             onClick={() => onOpen()}
             type="button"
             className="navds-date__field-button"
