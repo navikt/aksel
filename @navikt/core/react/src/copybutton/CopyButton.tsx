@@ -1,4 +1,3 @@
-"use client";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, {
