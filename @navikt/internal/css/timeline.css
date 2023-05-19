@@ -335,6 +335,10 @@
   border-radius: var(--a-border-radius-medium);
 }
 
+.navds-timeline__popover:focus {
+  outline: none;
+}
+
 .navds-timeline__popover-content {
   padding: var(--a-spacing-3);
 }
