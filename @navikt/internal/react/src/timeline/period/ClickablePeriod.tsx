@@ -43,15 +43,11 @@ const ClickablePeriod = React.memo(
     restProps,
     periodRef,
   }: TimelineClickablePeriodProps) => {
-    const [selected, setSelected] = useState(false);
+    const [open, setOpen] = useState(false);
     const { index } = useRowContext();
     const { firstFocus } = usePeriodContext();
     const { initiate, addFocusable } = useTimelineContext();
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const [clickState, setClickState] = useState({
-      clicked: false,
-      manualSelect: false,
-    });
 
     const {
       context,
@@ -61,11 +57,8 @@ const ClickablePeriod = React.memo(
       floatingStyles,
     } = useFloating({
       placement: "top",
-      open: selected,
-      onOpenChange: (open) => {
-        setSelected(open);
-        setClickState({ manualSelect: false, clicked: false });
-      },
+      open: open,
+      onOpenChange: setOpen,
       middleware: [
         offset(16),
         shift(),
@@ -80,7 +73,6 @@ const ClickablePeriod = React.memo(
         handleClose: safePolygon(),
         restMs: 25,
         delay: { open: 1000 },
-        enabled: !clickState.clicked,
       }),
       useFocus(context),
       useDismiss(context),
@@ -116,7 +108,7 @@ const ClickablePeriod = React.memo(
               "navdsi-timeline__period--selected": isActive,
             }
           )}
-          aria-expanded={children ? selected : undefined}
+          aria-expanded={children ? open : undefined}
           {...getReferenceProps({
             onFocus: () => {
               initiate(index);
@@ -125,24 +117,10 @@ const ClickablePeriod = React.memo(
               width: `${width}%`,
               [direction]: `${left}%`,
             },
-            onClick: (e) => {
-              if (children) {
-                if (selected) {
-                  !clickState.manualSelect &&
-                    setClickState({ manualSelect: true, clicked: true });
-
-                  if (clickState.manualSelect) {
-                    setSelected(false);
-                    setClickState({ manualSelect: false, clicked: false });
-                  }
-                } else {
-                  setSelected(true);
-                }
-              }
+            onClick: (e) =>
               onSelectPeriod?.(
                 e as React.MouseEvent<HTMLButtonElement, MouseEvent>
-              );
-            },
+              ),
           })}
         >
           <span className="navdsi-timeline__period--inner">{icon}</span>
@@ -151,14 +129,14 @@ const ClickablePeriod = React.memo(
           <div
             className="navds-timeline__popover"
             data-placement={placement}
-            aria-hidden={selected}
+            aria-hidden={!open}
             ref={refs.setFloating}
             {...getFloatingProps({
               tabIndex: -1,
             })}
             style={{
               ...floatingStyles,
-              display: selected ? undefined : "none",
+              display: open ? undefined : "none",
             }}
           >
             <div className="navds-timeline__popover-content">{children}</div>
