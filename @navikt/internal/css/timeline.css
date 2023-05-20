@@ -74,7 +74,7 @@
 }
 
 .navdsi-timeline__period--inner {
-  margin: 0 var(--a-spacing-1) 0 var(--a-spacing-2);
+  margin: 0 var(--a-spacing-1);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: clip;
