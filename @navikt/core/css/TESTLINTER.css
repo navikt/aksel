@@ -13,3 +13,11 @@
   --b-legal-token: 6px;
   --a-tokenthing: 42;
 }
+
+.navds-button {
+  --__ac-button-padding: 23px;
+  --__ac-custom-token: 10px;
+  --foo--__ac-legal: 20px;
+
+  padding: var(--__ac-button-padding) var(--__ac-custom-token);
+}
