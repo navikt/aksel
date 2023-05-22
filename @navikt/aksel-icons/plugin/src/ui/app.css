@@ -1,0 +1,53 @@
+@import "@navikt/ds-css";
+
+.wrapper {
+  background-color: var(--a-bg-default);
+}
+
+.form {
+  border-bottom: 1px solid var(--a-border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  width: 100%;
+  gap: 1rem;
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+  background-color: var(--a-bg-default);
+}
+
+.form-search {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+.categories {
+  display: grid;
+  width: 100%;
+  place-content: start;
+  gap: 2rem;
+  padding: 1.5rem;
+  padding-top: 2rem;
+}
+
+.sub-categories {
+  display: grid;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.sub-heading {
+  color: var(--a-text-subtle);
+  margin-bottom: 0.25rem;
+}
+
+.icons-wrapper {
+  gap: 0.125rem;
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -14,10 +14,4 @@ export default defineConfig({
     emptyOutDir: false,
     outDir: path.resolve(__dirname, "./dist"),
   },
-  resolve: {
-    alias: {
-      "@common": path.resolve(__dirname, "./src/common"),
-      "@plugin": path.resolve(__dirname, "./src/plugin"),
-    },
-  },
 });

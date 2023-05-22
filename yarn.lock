@@ -4148,7 +4148,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@3.2.2, @navikt/ds-css@^3.2.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@3.2.2, @navikt/ds-css@^3.2.2, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
@@ -4248,7 +4248,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@3.2.2, @navikt/ds-react@^3.2.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@3.2.2, @navikt/ds-react@^3.2.2, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
@@ -10980,15 +10980,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-os@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "cross-os@npm:1.5.0"
-  bin:
-    cross-os: source/index.js
-  checksum: ed37057ce634c299639c28edb821781eb3a13f830e8cb2f94b91284981d13e95f9b81d8d08d676c202b0ca50fd1e1ac87cd40d3dde47869832f7d9b7528e1a51
-  languageName: node
-  linkType: hard
-
 "cross-spawn-async@npm:^2.1.1":
   version: 2.2.5
   resolution: "cross-spawn-async@npm:2.2.5"
@@ -12340,17 +12331,6 @@ __metadata:
   version: 1.1.1
   resolution: "ee-first@npm:1.1.1"
   checksum: 1b4cac778d64ce3b582a7e26b218afe07e207a0f9bfe13cc7395a6d307849cfe361e65033c3251e00c27dd060cab43014c2d6b2647676135e18b77d2d05b3f4f
-  languageName: node
-  linkType: hard
-
-"ejs@npm:^3.1.6":
-  version: 3.1.9
-  resolution: "ejs@npm:3.1.9"
-  dependencies:
-    jake: ^10.8.5
-  bin:
-    ejs: bin/cli.js
-  checksum: af6f10eb815885ff8a8cfacc42c6b6cf87daf97a4884f87a30e0c3271fedd85d76a3a297d9c33a70e735b97ee632887f85e32854b9cdd3a2d97edf931519a35f
   languageName: node
   linkType: hard
 
@@ -14013,13 +13993,16 @@ __metadata:
   resolution: "figma-plugin@workspace:@navikt/aksel-icons/plugin"
   dependencies:
     "@figma/plugin-typings": ^1.62.0
+    "@navikt/ds-css": "*"
+    "@navikt/ds-react": "*"
     "@svgr/core": ^6.5.1
     "@types/node": ^18.15.11
     "@types/postcss-url": ^10.0.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": ^3.1.0
-    cross-os: ^1.5.0
+    clsx: ^1.2.1
+    fuse.js: ^6.6.2
     monorepo-networker: ^1.5.2
     postcss: ^8.4.0
     postcss-url: ^10.1.3
@@ -14028,7 +14011,6 @@ __metadata:
     sass: ^1.60.0
     typescript: ^4.8.0
     vite: ^4.2.0
-    vite-plugin-generate-file: ^0.0.4
     vite-plugin-singlefile: ^0.13.3
     vite-plugin-svgr: ^2.4.0
   languageName: unknown
@@ -18698,7 +18680,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.12, mime-types@npm:^2.1.25, mime-types@npm:^2.1.35, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
+"mime-types@npm:^2.1.12, mime-types@npm:^2.1.25, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
@@ -26440,18 +26422,6 @@ __metadata:
     d3-time: ^3.0.0
     d3-timer: ^3.0.1
   checksum: 6411f7c19a776cef3919946d429293cfe33c93a6e4dcfdfa2ba1edecad3a28ed2cd6b0d117169b8917ab6a7679e2bade5e7bfc1fed3fc8b464b842f21dac5f49
-  languageName: node
-  linkType: hard
-
-"vite-plugin-generate-file@npm:^0.0.4":
-  version: 0.0.4
-  resolution: "vite-plugin-generate-file@npm:0.0.4"
-  dependencies:
-    chalk: ^4.1.2
-    ejs: ^3.1.6
-    js-yaml: ^4.1.0
-    mime-types: ^2.1.35
-  checksum: b5de81789a4832b29eb9f618724746a53ee051fe72f62dcadd2d4bbe3a5abbb5b20debd9310bf22003a3eafe45cfbdf166c27ce2fe115718e2d2c5d270eeaa07
   languageName: node
   linkType: hard
 
