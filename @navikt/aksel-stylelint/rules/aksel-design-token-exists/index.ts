@@ -3,6 +3,7 @@ import valueParser from "postcss-value-parser";
 import { readFileSync } from "node:fs";
 
 import { flattenObject, isCustomProperty } from "./utils";
+import { Node as PostCSSNode } from "postcss";
 
 const ruleName = "@navikt/aksel-design-token-exists";
 
@@ -21,11 +22,11 @@ const errorMessage = (
   type: "prop" | "value",
   node,
   controlledPrefixes: RegExp[],
-  invalidValues?: string[]
+  invalidValues?: string
 ) => {
   if (type === "value") {
     return (
-      `property "${node.prop}" has offending value(s) "${invalidValues}", ` +
+      `property "${node.prop}" has offending value "${invalidValues}", ` +
       `and the value seems like it intends to reference a design token by ` +
       `using one of the following prefixes [${controlledPrefixes}]. ` +
       `However, that token doesn't seem to exist in the design system. ` +
@@ -99,11 +100,13 @@ const getInvalidPropName = (
   if (invalidValues.length > 0) return invalidValues;
 };
 
-const getInvalidVariableNames = (
+const checkInvalidVariableNames = (
   tokenDefinitionsFile: string,
   overrideableTokenDefinitionsJSONFile: string,
   controlledPrefixes: RegExp[],
-  value: string
+  value: string,
+  postcssResult: stylelint.PostcssResult,
+  rootNode: PostCSSNode
 ): string[] => {
   const invalidValues: string[] = [];
 
@@ -119,7 +122,18 @@ const getInvalidVariableNames = (
         node.value
       )
     ) {
-      invalidValues.push(node.value);
+      stylelint.utils.report({
+        message: errorMessage(
+          "value",
+          rootNode,
+          controlledPrefixes,
+          node.value
+        ),
+        node: rootNode,
+        result: postcssResult,
+        ruleName,
+        word: node.value,
+      });
     }
   });
 
@@ -139,26 +153,14 @@ const ruleFunction: stylelint.Rule = () => {
         prop
       );
 
-      const invalidCustomProperties = getInvalidVariableNames(
+      checkInvalidVariableNames(
         tokenDefinitionsFile,
         overrideableTokenDefinitionsJSONFile,
         controlledPrefixes,
-        value
+        value,
+        postcssResult,
+        node
       );
-
-      if (invalidCustomProperties) {
-        stylelint.utils.report({
-          message: errorMessage(
-            "value",
-            node,
-            controlledPrefixes,
-            invalidCustomProperties
-          ),
-          node,
-          result: postcssResult,
-          ruleName,
-        });
-      }
 
       if (invalidPropNames) {
         stylelint.utils.report({
