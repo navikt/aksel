@@ -14,8 +14,9 @@ export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   /**
    * @default "medium"
+   * xsmall should only be used in tables/
    */
-  size?: "medium" | "small";
+  size?: "medium" | "small" | "xsmall";
   /**
    * @default "neutral"
    */

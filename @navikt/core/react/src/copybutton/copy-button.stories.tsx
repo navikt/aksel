@@ -11,7 +11,7 @@ export default {
     size: {
       defaultValue: "medium",
       control: { type: "radio" },
-      options: ["small", "medium"],
+      options: ["small", "medium", "xsmall"],
     },
     variant: {
       defaultValue: undefined,
@@ -85,6 +85,22 @@ export const Sizes = {
           text="Kopier"
         />
       </div>
+      <div className="rowgap">
+        <CopyButton size="xsmall" copyText="3.14" variant="action" />
+        <CopyButton size="xsmall" copyText="3.14" variant="neutral" />
+        <CopyButton
+          size="xsmall"
+          copyText="3.14"
+          variant="action"
+          text="Kopier"
+        />
+        <CopyButton
+          size="xsmall"
+          copyText="3.14"
+          variant="neutral"
+          text="Kopier"
+        />
+      </div>
     </div>
   ),
 };
@@ -107,6 +123,14 @@ export const Texts = {
           activeText="Kopierte XYZ"
         />
       </div>
+      <div>
+        <CopyButton
+          copyText="3.14"
+          size="xsmall"
+          text="Kopier XYZ"
+          activeText="Kopierte XYZ"
+        />
+      </div>
     </div>
   ),
 };
@@ -125,6 +149,14 @@ export const Icons = {
         <CopyButton
           copyText="3.14"
           size="small"
+          icon={<LinkIcon title="Kopier" />}
+          activeIcon={<ThumbUpIcon title="Kopiert" />}
+        />
+      </div>
+      <div>
+        <CopyButton
+          copyText="3.14"
+          size="xsmall"
           icon={<LinkIcon title="Kopier" />}
           activeIcon={<ThumbUpIcon title="Kopiert" />}
         />
