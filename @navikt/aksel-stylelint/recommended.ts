@@ -12,5 +12,6 @@ module.exports = {
         controlledPrefixes: [/^--__ac-.+/],
       },
     ],
+    "@navikt/aksel-no-class-override": [true, { severity: "warning" }],
   },
 };

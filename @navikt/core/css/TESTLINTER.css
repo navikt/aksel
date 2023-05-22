@@ -21,3 +21,24 @@
 
   padding: var(--__ac-button-padding) var(--__ac-custom-token);
 }
+
+.navds-illegal a {
+  color: red;
+}
+
+.foo .navdsi-illegal {
+  color: red;
+}
+
+.foo .navds-illegal a {
+  color: red;
+}
+
+.foo .navds-illegal a,
+.navdsi-illegal {
+  color: red;
+}
+
+.allowed-navds-foo {
+  color: red;
+}
