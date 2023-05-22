@@ -247,13 +247,14 @@
   padding: var(--a-spacing-1);
 }
 
-.navds-date__field-button:hover {
+.navds-date__field-button:hover:where(:not([disabled])) {
   color: var(--ac-date-input-button-hover-text, var(--a-text-action-on-action-subtle));
   background-color: var(--ac-date-input-button-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-form-field--disabled .navds-date__field-button {
   opacity: 1;
+  cursor: not-allowed;
 }
 
 .navds-date__field-button:focus-visible {
