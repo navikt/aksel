@@ -15,7 +15,8 @@
     "baseUrl": ".",
     "outDir": "dist/",
     "sourceMap": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "types": ["@figma/plugin-typings"]
   },
   "include": [
     "src/**/*.d.ts",

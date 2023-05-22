@@ -8476,6 +8476,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/plugin":
+  version: 0.0.0-use.local
+  resolution: "aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/plugin"
+  dependencies:
+    "@figma/plugin-typings": ^1.62.0
+    "@navikt/ds-css": "*"
+    "@navikt/ds-react": "*"
+    "@svgr/core": ^6.5.1
+    "@types/node": ^18.15.11
+    "@types/postcss-url": ^10.0.0
+    "@types/react": ^18.0.0
+    "@types/react-dom": ^18.0.0
+    "@vitejs/plugin-react": ^3.1.0
+    fuse.js: ^6.6.2
+    postcss: ^8.4.0
+    postcss-url: ^10.1.3
+    react: ^18.0.0
+    react-dom: ^18.0.0
+    typescript: ^4.8.0
+    vite: ^4.2.0
+    vite-plugin-singlefile: ^0.13.3
+    vite-plugin-svgr: ^2.4.0
+  languageName: unknown
+  linkType: soft
+
 "aksel.nav.no@workspace:aksel.nav.no":
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
@@ -10086,7 +10111,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.3.0, chokidar@npm:^3.5.2, chokidar@npm:^3.5.3":
+"chokidar@npm:^3.3.0, chokidar@npm:^3.5.2, chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -13988,34 +14013,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figma-plugin@workspace:@navikt/aksel-icons/plugin":
-  version: 0.0.0-use.local
-  resolution: "figma-plugin@workspace:@navikt/aksel-icons/plugin"
-  dependencies:
-    "@figma/plugin-typings": ^1.62.0
-    "@navikt/ds-css": "*"
-    "@navikt/ds-react": "*"
-    "@svgr/core": ^6.5.1
-    "@types/node": ^18.15.11
-    "@types/postcss-url": ^10.0.0
-    "@types/react": ^18.0.0
-    "@types/react-dom": ^18.0.0
-    "@vitejs/plugin-react": ^3.1.0
-    clsx: ^1.2.1
-    fuse.js: ^6.6.2
-    monorepo-networker: ^1.5.2
-    postcss: ^8.4.0
-    postcss-url: ^10.1.3
-    react: ^18.0.0
-    react-dom: ^18.0.0
-    sass: ^1.60.0
-    typescript: ^4.8.0
-    vite: ^4.2.0
-    vite-plugin-singlefile: ^0.13.3
-    vite-plugin-svgr: ^2.4.0
-  languageName: unknown
-  linkType: soft
-
 "figures@npm:^2.0.0":
   version: 2.0.0
   resolution: "figures@npm:2.0.0"
@@ -15869,13 +15866,6 @@ __metadata:
   version: 9.0.19
   resolution: "immer@npm:9.0.19"
   checksum: f02ee53989989c287cd548a3d817fccf0bfe56db919755ee94a72ea3ae78a00363fba93ee6c010fe54a664380c29c53d44ed4091c6a86cae60957ad2cfabc010
-  languageName: node
-  linkType: hard
-
-"immutable@npm:^4.0.0":
-  version: 4.3.0
-  resolution: "immutable@npm:4.3.0"
-  checksum: bbd7ea99e2752e053323543d6ff1cc71a4b4614fa6121f321ca766db2bd2092f3f1e0a90784c5431350b7344a4f792fa002eac227062d59b9377b6c09063b58b
   languageName: node
   linkType: hard
 
@@ -19007,13 +18997,6 @@ __metadata:
   version: 2.29.4
   resolution: "moment@npm:2.29.4"
   checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
-  languageName: node
-  linkType: hard
-
-"monorepo-networker@npm:^1.5.2":
-  version: 1.5.2
-  resolution: "monorepo-networker@npm:1.5.2"
-  checksum: 77950d4f2ad1e58d8665367a54acc3dbf59c4a2fd458e14d20bba0c5f91189c5e5fea802bfa3c2a6567dcdab98192269bd5ce2ade339ab75bc253a925db6f8fc
   languageName: node
   linkType: hard
 
@@ -23533,19 +23516,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.60.0":
-  version: 1.62.1
-  resolution: "sass@npm:1.62.1"
-  dependencies:
-    chokidar: ">=3.0.0 <4.0.0"
-    immutable: ^4.0.0
-    source-map-js: ">=0.6.2 <2.0.0"
-  bin:
-    sass: sass.js
-  checksum: 1b1b3584b38a63dd94156b65f13b90e3f84b170a38c3d5e3fa578b7a32a37aeb349b4926b0eaf9448d48e955e86b1ee01b13993f19611dad8068af07a607c13b
-  languageName: node
-  linkType: hard
-
 "sax@npm:^1.2.4, sax@npm:~1.2.4":
   version: 1.2.4
   resolution: "sax@npm:1.2.4"
@@ -24123,7 +24093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.1, source-map-js@npm:^1.0.2":
+"source-map-js@npm:^1.0.1, source-map-js@npm:^1.0.2":
   version: 1.0.2
   resolution: "source-map-js@npm:1.0.2"
   checksum: c049a7fc4deb9a7e9b481ae3d424cc793cb4845daa690bc5a05d428bf41bf231ced49b4cf0c9e77f9d42fdb3d20d6187619fc586605f5eabe995a316da8d377c

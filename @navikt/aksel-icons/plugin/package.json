@@ -1,12 +1,11 @@
 {
-  "name": "figma-plugin",
+  "name": "aksel-icons-figma-plugin",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite -c ./vite.config.ui.ts",
-    "build": "tsc && npm run build:ui && npm run build:plugin ",
-    "build:icon-plugin": "yarn build",
+    "build:icon-plugin": "tsc && npm run build:ui && npm run build:plugin",
     "build:ui": "vite build -c ./vite.config.ui.ts --emptyOutDir",
     "build:plugin": "vite build -c ./vite.config.plugin.ts",
     "preview": "vite preview"
@@ -14,9 +13,7 @@
   "dependencies": {
     "@navikt/ds-css": "*",
     "@navikt/ds-react": "*",
-    "clsx": "^1.2.1",
     "fuse.js": "^6.6.2",
-    "monorepo-networker": "^1.5.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
@@ -30,7 +27,6 @@
     "@vitejs/plugin-react": "^3.1.0",
     "postcss": "^8.4.0",
     "postcss-url": "^10.1.3",
-    "sass": "^1.60.0",
     "typescript": "^4.8.0",
     "vite": "^4.2.0",
     "vite-plugin-singlefile": "^0.13.3",
