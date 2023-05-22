@@ -4,15 +4,13 @@ import valueParser from "postcss-value-parser";
 const ruleName = "@navikt/aksel-no-internal-tokens";
 const url =
   "https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-no-internal-tokens";
+const prefixRegex = new RegExp(/^--__ac-.+/);
 
-const getInternalTokensUsed = (controlledPrefixes: RegExp[], value: string) => {
+const getInternalTokensUsed = (value: string) => {
   const invalidValues: string[] = [];
 
   valueParser(value).walk((node) => {
-    if (
-      node.type === "word" &&
-      controlledPrefixes.some((prefix) => node.value.match(prefix))
-    ) {
+    if (node.type === "word" && prefixRegex.test(node.value)) {
       invalidValues.push(node.value);
     }
   });
@@ -20,16 +18,10 @@ const getInternalTokensUsed = (controlledPrefixes: RegExp[], value: string) => {
   return invalidValues;
 };
 
-const ruleFunction: stylelint.Rule = (primaryOption, secondaryOptionObject) => {
+const ruleFunction: stylelint.Rule = () => {
   return (postcssRoot, postcssResult) => {
-    const options = Object.assign(
-      { controlledPrefixes: [/^--__ac-.+/] },
-      secondaryOptionObject
-    );
-    const { controlledPrefixes } = options;
-
     postcssRoot.walkDecls((node) => {
-      getInternalTokensUsed(controlledPrefixes, node.value).forEach((token) => {
+      getInternalTokensUsed(node.value).forEach((token) => {
         stylelint.utils.report({
           message: `Unexpected internal Aksel design token "${token}" inside decleration "${node.prop}".`,
           node,
@@ -39,9 +31,7 @@ const ruleFunction: stylelint.Rule = (primaryOption, secondaryOptionObject) => {
         });
       });
 
-      const isTokenOverride = controlledPrefixes.some(
-        (prefix) => node.prop.match(prefix) !== null
-      );
+      const isTokenOverride = prefixRegex.test(node.prop);
       if (isTokenOverride) {
         stylelint.utils.report({
           message: `Unexpected internal Aksel design token "${node.prop}".`,

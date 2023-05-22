@@ -6,15 +6,21 @@ import { flattenObject, isCustomProperty } from "./utils";
 
 const ruleName = "@navikt/aksel-design-token-exists";
 
+const tokenDefinitionsFile = "./index.css";
+const overrideableTokenDefinitionsJSONFile = "./tokens.json";
+const controlledPrefixes = [/^--ac-.+/, /^--a-.+/];
+
 let allowedTokenNames = [];
 
-const packageJson = JSON.parse(readFileSync(`${__dirname}/../../../package.json`).toString());
+const packageJson = JSON.parse(
+  readFileSync(`${__dirname}/../../../package.json`).toString()
+);
 const packageVersion = packageJson.version;
 
 const errorMessage = (
   type: "prop" | "value",
   node,
-  controlledPrefixes: PrimaryOptions["controlledPrefixes"],
+  controlledPrefixes: RegExp[],
   invalidValues?: string[]
 ) => {
   if (type === "value") {
@@ -22,14 +28,14 @@ const errorMessage = (
       `property "${node.prop}" has offending value(s) "${invalidValues}", ` +
       `and the value seems like it intends to reference a design token by ` +
       `using one of the following prefixes [${controlledPrefixes}]. ` +
-      `However, that token doesn't seem to exist in the design system. ` + 
+      `However, that token doesn't seem to exist in the design system. ` +
       `\n\nVersion: ${packageVersion}`
     );
   }
   return (
     `property "${node.prop}" has a name that seems like it intends to override a design token by ` +
     `using one of the following prefixes [${controlledPrefixes}]. ` +
-    `However, that token doesn't seem to exist in the design system. ` + 
+    `However, that token doesn't seem to exist in the design system. ` +
     `\n\nVersion: ${packageVersion}`
   );
 };
@@ -37,12 +43,14 @@ const errorMessage = (
 const isValidToken = (
   tokenDefinitionsFile: string,
   overrideableTokenDefinitionsJSONFile: string,
-  controlledPrefixes: PrimaryOptions["controlledPrefixes"],
+  controlledPrefixes: RegExp[],
   inputToken: string
 ) => {
   // "singleton" if statement (attempt at caching file parsing)
   if (!allowedTokenNames.length) {
-    const cssFileBuffer = readFileSync(`${__dirname}/../../${tokenDefinitionsFile}`);
+    const cssFileBuffer = readFileSync(
+      `${__dirname}/../../${tokenDefinitionsFile}`
+    );
     const cssFileString = cssFileBuffer.toString();
 
     valueParser(cssFileString).walk((node) => {
@@ -55,11 +63,13 @@ const isValidToken = (
       }
     });
 
-    const jsonFileBuffer = readFileSync(`${__dirname}/../../${overrideableTokenDefinitionsJSONFile}`);
+    const jsonFileBuffer = readFileSync(
+      `${__dirname}/../../${overrideableTokenDefinitionsJSONFile}`
+    );
     const fileString = jsonFileBuffer.toString();
 
     const flattened = flattenObject(JSON.parse(fileString));
-    flattened.forEach(token => allowedTokenNames.push(token));
+    flattened.forEach((token) => allowedTokenNames.push(token));
   }
 
   return allowedTokenNames.some((element) => element === inputToken);
@@ -68,7 +78,7 @@ const isValidToken = (
 const getInvalidPropName = (
   tokenDefinitionsFile: string,
   overrideableTokenDefinitionsJSONFile: string,
-  controlledPrefixes: PrimaryOptions["controlledPrefixes"],
+  controlledPrefixes: RegExp[],
   prop: string
 ) => {
   const invalidValues: string[] = [];
@@ -92,8 +102,8 @@ const getInvalidPropName = (
 const getInvalidVariableNames = (
   tokenDefinitionsFile: string,
   overrideableTokenDefinitionsJSONFile: string,
-  controlledPrefixes,
-  value
+  controlledPrefixes: RegExp[],
+  value: string
 ): string[] => {
   const invalidValues: string[] = [];
 
@@ -116,23 +126,8 @@ const getInvalidVariableNames = (
   if (invalidValues.length > 0) return invalidValues;
 };
 
-type PrimaryOptions = {
-  controlledPrefixes?: (string | RegExp)[];
-  tokenDefinitionsFile: string;
-  overrideableTokenDefinitionsJSONFile: string;
-};
-
-const ruleFunction: stylelint.Rule<PrimaryOptions, object> = (
-  primaryOption,
-  _secondaryOptionObject
-) => {
+const ruleFunction: stylelint.Rule = () => {
   return (postcssRoot, postcssResult) => {
-    const {
-      controlledPrefixes = [],
-      tokenDefinitionsFile,
-      overrideableTokenDefinitionsJSONFile,
-    } = primaryOption;
-
     postcssRoot.walkDecls((node) => {
       const prop = node.prop;
       const value = node.value;
@@ -180,7 +175,7 @@ const ruleFunction: stylelint.Rule<PrimaryOptions, object> = (
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = {};
 ruleFunction.meta = {
-	url: 'https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-design-token-exists',
+  url: "https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-design-token-exists",
 };
 
 export default ruleFunction;

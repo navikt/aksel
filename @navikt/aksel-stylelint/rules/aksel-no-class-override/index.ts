@@ -7,7 +7,7 @@ const url =
 const classnameRegex = new RegExp(/^navdsi?-.+/);
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
-  unexpected: (value) => `Unexpected class name "${value}"`,
+  unexpected: (value) => `Unexpected design system class name "${value}"`,
 });
 
 const ruleFunction: stylelint.Rule = () => {
