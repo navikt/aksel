@@ -6,6 +6,7 @@ export const sanityClient = createClient({
   ...clientConfig,
   token: process.env.SANITY_PRIVATE_NO_DRAFTS,
   ignoreBrowserTokenWarning: process.env.NODE_ENV === "test",
+  useCdn: true,
 });
 
 // Set up a preview client with serverless authentication for drafts
