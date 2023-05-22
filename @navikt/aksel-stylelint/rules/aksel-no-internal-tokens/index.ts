@@ -4,7 +4,8 @@ import valueParser from "postcss-value-parser";
 const ruleName = "@navikt/aksel-no-internal-tokens";
 const url =
   "https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-no-internal-tokens";
-const prefixRegex = new RegExp(/^--__ac-.+/);
+const prefix = "--__ac-";
+const prefixRegex = new RegExp(`^${prefix}.+`);
 
 const getInternalTokensUsed = (value: string) => {
   const invalidValues: string[] = [];
@@ -23,7 +24,9 @@ const ruleFunction: stylelint.Rule = () => {
     postcssRoot.walkDecls((node) => {
       getInternalTokensUsed(node.value).forEach((token) => {
         stylelint.utils.report({
-          message: `Unexpected internal Aksel design token "${token}" inside decleration "${node.prop}".`,
+          message:
+            `"${token}" (inside decleration "${node.prop}") looks like an internal design token, ` +
+            `because it starts with "${prefix}". Internal tokens should not be used outside the design system.`,
           node,
           result: postcssResult,
           ruleName,
@@ -34,7 +37,9 @@ const ruleFunction: stylelint.Rule = () => {
       const isTokenOverride = prefixRegex.test(node.prop);
       if (isTokenOverride) {
         stylelint.utils.report({
-          message: `Unexpected internal Aksel design token "${node.prop}".`,
+          message:
+            `"${node.prop}" looks like an internal design token, because it starts with "${prefix}". ` +
+            `Internal tokens should not be overridden.`,
           node,
           result: postcssResult,
           ruleName,
