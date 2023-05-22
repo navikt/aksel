@@ -43,9 +43,6 @@ function Snarveier() {
         Snarveier
       </Heading>
       <BodyShort as="ul" className="mt-3 grid gap-3">
-        <FooterLink href="/god-praksis/artikler/om-aksel">
-          Hva er Aksel?
-        </FooterLink>
         <FooterLink href="/god-praksis/artikler/skriv-for-aksel">
           Skriv for Aksel
         </FooterLink>
@@ -94,6 +91,9 @@ function SideLenker() {
         Om nettstedet
       </Heading>
       <BodyShort as="ul" className="mt-3 grid gap-3">
+        <FooterLink href="/god-praksis/artikler/om-aksel">
+          Hva er Aksel?
+        </FooterLink>
         <FooterLink href="/side/personvernerklaering">
           Personvernserklæring
         </FooterLink>
