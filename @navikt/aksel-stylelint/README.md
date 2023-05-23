@@ -4,7 +4,6 @@
 
 This rule checks that if you use one of the reserved token prefixes `--a-` or `--ac-` then the token itself _must_ be provided by design system itself.
 
-
 ❌ Incorrect:
 
 ```css
@@ -20,7 +19,7 @@ html h1 {
 
 ```css
 html h1 {
-    background-color: var(--ac-accordion-header-bg-hover, #ffffff);
+  background-color: var(--ac-accordion-header-bg-hover, #ffffff);
 }
 ```
 
@@ -31,13 +30,15 @@ Disallows use or override of internal Aksel design tokens. Internal tokens are n
 ❌ Incorrect:
 
 ```css
-a { --__ac-some-property: pink; }
-    ^^^^^^^
+a { 
+  --__ac-some-property: pink;
+} ^^^^^^^^^^^^^^^^^^^^
 ```
 
 ```css
-a { color: var(--__ac-some-property); }
-               ^^^^^^^
+a { 
+  color: var(--__ac-some-property);
+}            ^^^^^^^^^^^^^^^^^^^^
 ```
 
 ✅ Correct:
@@ -61,13 +62,14 @@ Warns when trying to override design system styling by using class selectors tha
 ❌ Incorrect:
 
 ```css
-.navds-button {}
- ^^^^^^
+.navds-button {
+^^^^^^^^^^^^^
+}
 ```
 
 ```css
-.some-class .navdsi-header {}
-             ^^^^^^^
+.some-class .navdsi-header {
+}           ^^^^^^^^^^^^^^
 ```
 
 ✅ Correct:
@@ -80,20 +82,8 @@ Warns when trying to override design system styling by using class selectors tha
 # Install
 
 ```bash
-yarn add @navikt/aksel-stylelint
+yarn add -D @navikt/aksel-stylelint
 npm install -D @navikt/aksel-stylelint
-```
-
-### Options
-
-```ts
-interface PrimaryOptions {
-  type PrimaryOptions = {
-    controlledPrefixes?: (string | RegExp)[];
-    tokenDefinitionsFile: string;
-    overrideableTokenDefinitionsJSONFile: string;
-  };
-}
 ```
 
 ### How to configure
@@ -104,22 +94,8 @@ It should be sufficient for most cases to extend the recommended defaults.
   "stylelint": {
     "extends": [
         ...
-        "./@navikt/aksel-stylelint/dist/recommended"
+        "@navikt/aksel-stylelint/recommended"
     ],
     ...
   }
 ```
-
-If you want to configure it further, or tweak the behaviour of the rule, you can look inside `@navikt/aksel-stylelint/recommended.ts`
-
-```js
-const stylelintConfig = {
-  rules: {
-    "@navikt/aksel-design-token-exists": {
-      tokenDefinitionsFile: "@navikt/core/css/dist/index.css",
-      overrideableTokenDefinitionsJSONFile: "@navikt/core/css/tokens.json",
-    },
-  },
-};
-```
-
