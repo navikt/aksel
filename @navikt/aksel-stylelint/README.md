@@ -2,7 +2,30 @@
 
 ## aksel-design-token-exists
 
-This stylelint rule will help you referrence or override a design token in the Aksel design system by making sure that it exists.
+This rule checks that if you use one of the reserved token prefixes `--a-` or `--ac-` then the token itself _must_ be provided by design system itself.
+
+
+❌ Incorrect:
+
+```css
+html h1 {
+    --a-my-own-color-bg-hover: #f2f2f2;
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    background-color: var(--a-my-own-color-bg-hover, #ffffff);
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+}
+```
+
+✅ Correct:
+
+```css
+html h1 {
+    background-color: var(--ac-accordion-header-bg-hover, #ffffff);
+}
+```
+
+## aksel-design-token-exists
+
 
 ## aksel-no-internal-tokens
 
@@ -102,3 +125,4 @@ const stylelintConfig = {
   },
 };
 ```
+
