@@ -24,9 +24,6 @@ html h1 {
 }
 ```
 
-## aksel-design-token-exists
-
-
 ## aksel-no-internal-tokens
 
 Disallows use or override of internal Aksel design tokens. Internal tokens are not supposed to be used outside the design system, and they may be changed or removed without warning. Be aware that the rule simply checks the prefix of the token, and not if it actually exists in the design system. Even if it doesn't exist, using design system prefixes should be avoided.
@@ -80,7 +77,7 @@ Warns when trying to override design system styling by using class selectors tha
 }
 ```
 
-### Install
+# Install
 
 ```bash
 yarn add @navikt/aksel-stylelint
