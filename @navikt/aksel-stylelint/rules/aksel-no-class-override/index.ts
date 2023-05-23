@@ -4,11 +4,12 @@ import selectorParser from "postcss-selector-parser";
 const ruleName = "@navikt/aksel-no-class-override";
 const url =
   "https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-no-class-override";
-const classnameRegex = new RegExp(/^navdsi?-.+/);
+const prefixes = ["navds-", "navdsi-"];
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   unexpected: (value) =>
-    `"${value}" looks like a class name used in the design system, because it starts with "navds-" or "navdsi-". ` +
+    `"${value}" looks like a class name used in the design system, ` +
+    `because it starts with "${prefixes.join('" or "')}". ` +
     "It is not recommended to override the styling in the design system.",
 });
 
@@ -17,8 +18,9 @@ const ruleFunction: stylelint.Rule = () => {
     postcssRoot.walkRules((node) => {
       selectorParser((selectors) => {
         selectors.walkClasses((className) => {
-          if (!classnameRegex.test(className.value)) return;
-
+          if (!prefixes.some((prefix) => className.value.startsWith(prefix))) {
+            return;
+          }
           stylelint.utils.report({
             message: messages.unexpected(className.value),
             node,

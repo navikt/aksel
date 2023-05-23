@@ -10,7 +10,7 @@ const ruleName = "@navikt/aksel-design-token-exists";
 
 const tokenDefinitionsFile = "./index.css";
 const overrideableTokenDefinitionsJSONFile = "./tokens.json";
-export const controlledPrefixes = [/^--ac-.+/, /^--a-.+/];
+export const controlledPrefixes = ["--ac-", "--a-"];
 
 let allowedTokenNames = [];
 
@@ -19,7 +19,7 @@ const packageVersion = packageJson.version;
 export const errorMessage = (
   type: "prop" | "value",
   node,
-  controlledPrefixes: RegExp[],
+  controlledPrefixes: string[],
   invalidValues?: string
 ) => {
   if (type === "value") {
@@ -42,7 +42,7 @@ export const errorMessage = (
 const isValidToken = (
   tokenDefinitionsFile: string,
   overrideableTokenDefinitionsJSONFile: string,
-  controlledPrefixes: RegExp[],
+  controlledPrefixes: string[],
   inputToken: string
 ) => {
   // "singleton" if statement (attempt at caching file parsing)
@@ -56,7 +56,7 @@ const isValidToken = (
       if (
         node.type === "word" &&
         isCustomProperty(node.value) &&
-        controlledPrefixes.some((prefix) => node.value.match(prefix) !== null)
+        controlledPrefixes.some((prefix) => node.value.startsWith(prefix))
       ) {
         allowedTokenNames.push(node.value);
       }
@@ -77,14 +77,14 @@ const isValidToken = (
 const getInvalidPropName = (
   tokenDefinitionsFile: string,
   overrideableTokenDefinitionsJSONFile: string,
-  controlledPrefixes: RegExp[],
+  controlledPrefixes: string[],
   prop: string
 ) => {
   const invalidValues: string[] = [];
 
   if (
     isCustomProperty(prop) &&
-    controlledPrefixes.some((prefix) => prop.match(prefix) !== null) &&
+    controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
     !isValidToken(
       tokenDefinitionsFile,
       overrideableTokenDefinitionsJSONFile,
@@ -101,7 +101,7 @@ const getInvalidPropName = (
 const checkInvalidVariableNames = (
   tokenDefinitionsFile: string,
   overrideableTokenDefinitionsJSONFile: string,
-  controlledPrefixes: RegExp[],
+  controlledPrefixes: string[],
   value: string,
   postcssResult: stylelint.PostcssResult,
   rootNode: PostCSSNode
@@ -112,7 +112,7 @@ const checkInvalidVariableNames = (
     if (
       node.type === "word" &&
       isCustomProperty(node.value) &&
-      controlledPrefixes.some((prefix) => node.value.match(prefix) !== null) &&
+      controlledPrefixes.some((prefix) => node.value.startsWith(prefix)) &&
       !isValidToken(
         tokenDefinitionsFile,
         overrideableTokenDefinitionsJSONFile,

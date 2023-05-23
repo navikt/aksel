@@ -5,7 +5,6 @@ const ruleName = "@navikt/aksel-no-internal-tokens";
 const url =
   "https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-no-internal-tokens";
 const prefix = "--__ac-";
-const prefixRegex = new RegExp(`^${prefix}.+`);
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   tokenUsed: (token, prop) =>
@@ -20,7 +19,7 @@ const getInternalTokensUsed = (value: string) => {
   const invalidValues: string[] = [];
 
   valueParser(value).walk((node) => {
-    if (node.type === "word" && prefixRegex.test(node.value)) {
+    if (node.type === "word" && node.value.startsWith(prefix)) {
       invalidValues.push(node.value);
     }
   });
@@ -41,7 +40,7 @@ const ruleFunction: stylelint.Rule = () => {
         });
       });
 
-      const isTokenOverride = prefixRegex.test(node.prop);
+      const isTokenOverride = node.prop.startsWith(prefix);
       if (isTokenOverride) {
         stylelint.utils.report({
           message: messages.tokenOverridden(node.prop),
