@@ -15,7 +15,7 @@
           <img src="https://img.shields.io/badge/PRs-welcome-green.svg?color=%23262626"" />
       </a>
     </div>
-    <div><a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=%40navikt%2Fds-*"></a></div>
+    <div><a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=version"></a></div>
     <br/>
     <a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/aksel/issues">Issues</a>
 <br/>
