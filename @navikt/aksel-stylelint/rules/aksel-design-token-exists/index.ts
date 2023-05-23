@@ -2,6 +2,7 @@ import stylelint from "stylelint";
 import valueParser from "postcss-value-parser";
 import { readFileSync } from "node:fs";
 
+import packageJson from "../../package.json";
 import { flattenObject, isCustomProperty } from "./utils";
 import { Node as PostCSSNode } from "postcss";
 
@@ -9,16 +10,13 @@ const ruleName = "@navikt/aksel-design-token-exists";
 
 const tokenDefinitionsFile = "./index.css";
 const overrideableTokenDefinitionsJSONFile = "./tokens.json";
-const controlledPrefixes = [/^--ac-.+/, /^--a-.+/];
+export const controlledPrefixes = [/^--ac-.+/, /^--a-.+/];
 
 let allowedTokenNames = [];
 
-const packageJson = JSON.parse(
-  readFileSync(`${__dirname}/../../../package.json`).toString()
-);
 const packageVersion = packageJson.version;
 
-const errorMessage = (
+export const errorMessage = (
   type: "prop" | "value",
   node,
   controlledPrefixes: RegExp[],

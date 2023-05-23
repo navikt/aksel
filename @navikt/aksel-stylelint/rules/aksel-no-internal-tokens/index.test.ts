@@ -38,7 +38,7 @@ getTestRule()({
     },
     {
       code: ".foo { width: var(--__ac-bar, --__ac-baz) }",
-      description: "two internal token used in one var()",
+      description: "two internal tokens used in one var()",
       warnings: [
         {
           message: messages.tokenUsed("--__ac-bar", "width"),
@@ -58,7 +58,7 @@ getTestRule()({
     },
     {
       code: ".foo { padding: var(--__ac-bar) var(--__ac-baz); }",
-      description: "two internal token used as separate vars",
+      description: "two internal tokens used as separate vars",
       warnings: [
         {
           message: messages.tokenUsed("--__ac-bar", "padding"),
