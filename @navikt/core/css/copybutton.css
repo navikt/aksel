@@ -27,12 +27,26 @@
   min-height: 2rem;
 }
 
+.navds-copybutton--xsmall {
+  --__ac-copybutton-padding: var(--a-spacing-05) var(--a-spacing-2);
+
+  min-height: 1.5rem;
+}
+
 .navds-copybutton--icon-only {
   --__ac-copybutton-padding: var(--a-spacing-3);
 }
 
 .navds-copybutton--small.navds-copybutton--icon-only {
   --__ac-copybutton-padding: var(--a-spacing-1);
+}
+
+.navds-copybutton--xsmall.navds-copybutton--icon-only {
+  --__ac-copybutton-padding: var(--a-spacing-05);
+}
+
+.navds-copybutton--xsmall .navds-copybutton__icon {
+  font-size: 1.25rem;
 }
 
 .navds-copybutton__icon {
@@ -43,6 +57,10 @@
 
 .navds-copybutton__icon:only-child {
   margin: 0;
+}
+
+:where(.navds-copybutton--small, .navds-copybutton--xsmall):where(:not(:only-child)) {
+  margin: -2px;
 }
 
 .navds-copybutton:focus-visible {
@@ -106,6 +124,10 @@
   align-items: center;
   justify-content: center;
   gap: var(--a-spacing-2);
+}
+
+.navds-copybutton--xsmall > .navds-copybutton__content {
+  gap: var(--a-spacing-1);
 }
 
 .navds-copybutton--active > .navds-copybutton__content {
