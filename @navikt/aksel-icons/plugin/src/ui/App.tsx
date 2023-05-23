@@ -1,6 +1,6 @@
-import { Button, Heading, Search, ToggleGroup } from "@navikt/ds-react";
+import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
 import Fuse from "fuse.js";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import * as Icons from "../../../";
 import meta from "../../../dist/metadata";
 import "./app.css";
@@ -75,10 +75,46 @@ const App = () => {
     );
   };
 
+  useEffect(() => {
+    const dragEvent = (e) => {
+      // Don't proceed if the item was dropped inside the plugin window.
+      if (e.view.length === 0) {
+        return;
+      }
+
+      const file = new File([e.target.innerHTML], `${e.target.id}.svg`, {
+        type: "image/svg+xml",
+      });
+
+      window.parent.postMessage(
+        {
+          pluginDrop: {
+            clientX: e.clientX,
+            clientY: e.clientY,
+            files: [file],
+            name: e.target.id,
+          },
+        },
+        "*"
+      );
+    };
+
+    const icons = document.getElementsByClassName("icon-classname");
+    for (const icon of icons) {
+      icon.addEventListener("dragend", dragEvent);
+    }
+
+    return () => {
+      for (const icon of icons) {
+        icon.removeEventListener("dragend", dragEvent);
+      }
+    };
+  }, [categories]);
+
   return (
     <main tabIndex={-1} className="wrapper">
       <form onSubmit={(e) => e.preventDefault()} className="form">
-        <div className="min-w-40">
+        <div className="form-togglegroup">
           <ToggleGroup
             value={toggle}
             onChange={(v) => setToggle(v as any)}
@@ -101,6 +137,7 @@ const App = () => {
           />
         </div>
       </form>
+
       <div className="categories">
         {categories.map((cat) => {
           return (
@@ -123,21 +160,21 @@ const App = () => {
                             return null;
                           }
                           return (
-                            <Button
+                            <button
                               key={i.id}
-                              variant="tertiary-neutral"
-                              icon={
-                                <T
-                                  font-size="2rem"
-                                  aria-hidden
-                                  title={i.id}
-                                  id={`icon-id-${i.id}`}
-                                />
-                              }
+                              id={i.id}
                               onClick={() => {
                                 onCreate(`icon-id-${i.id}`, `${i.id}Icon`);
                               }}
-                            />
+                              draggable="true"
+                              className="icon-classname icon-button"
+                            >
+                              <T
+                                font-size="2rem"
+                                title={i.id}
+                                id={`icon-id-${i.id}`}
+                              />
+                            </button>
                           );
                         })}
                       </div>

@@ -19,6 +19,10 @@
   background-color: var(--a-bg-default);
 }
 
+.form-togglegroup {
+  min-width: 10rem;
+}
+
 .form-search {
   display: flex;
   gap: 0.5rem;
@@ -32,7 +36,6 @@
   place-content: start;
   gap: 2rem;
   padding: 1.5rem;
-  padding-top: 2rem;
 }
 
 .sub-categories {
@@ -50,4 +53,27 @@
   gap: 0.125rem;
   display: flex;
   flex-wrap: wrap;
+}
+
+.icon-button {
+  min-height: 3rem;
+  min-width: 3rem;
+  border-radius: 2px;
+  display: grid;
+  place-content: center;
+  background-color: var(--a-surface-default);
+  cursor: pointer;
+  border: none;
+}
+
+.icon-button:hover {
+  background-color: var(--a-surface-hover);
+}
+
+.icon-button:active {
+  background-color: var(--a-surface-neutral-subtle-hover);
+}
+
+.icon-button:focus-visible {
+  outline: 2px solid var(--a-border-focus);
 }

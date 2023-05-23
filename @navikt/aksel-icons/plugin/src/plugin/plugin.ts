@@ -20,6 +20,29 @@ figma.ui.onmessage = (msg) => {
       message: `Created ${msg.name} icon}`,
     });
   }
-
-  figma.closePlugin();
 };
+
+// https://github.com/figma/plugin-samples#icon-drag-and-drop
+figma.on("drop", (event) => {
+  const { files, node } = event;
+
+  if (files.length > 0 && files[0].type === "image/svg+xml") {
+    files[0].getTextAsync().then((text) => {
+      const newNode = figma.createNodeFromSvg(text);
+      newNode.name = `${files[0].name.replace(".svg", "")}Icon`;
+      newNode.resize(24, 24);
+
+      // We can only append page nodes to documents
+      if ("appendChild" in node && node.type !== "DOCUMENT") {
+        node.appendChild(newNode);
+      }
+
+      newNode.x = event.x;
+      newNode.y = event.y;
+
+      figma.currentPage.selection = [newNode];
+    });
+
+    return false;
+  }
+});
