@@ -71,7 +71,7 @@ const isValidToken = (
     flattened.forEach((token) => allowedTokenNames.push(token));
   }
 
-  return allowedTokenNames.some((element) => element === inputToken);
+  return allowedTokenNames.includes(inputToken);
 };
 
 const getInvalidPropName = (
