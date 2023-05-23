@@ -4,6 +4,59 @@
 
 This stylelint rule will help you referrence or override a design token in the Aksel design system by making sure that it exists.
 
+## aksel-no-internal-tokens
+
+Disallows use or override of internal Aksel design tokens. Internal tokens are not supposed to be used outside the design system, and they may be changed or removed without warning. Be aware that the rule simply checks the prefix of the token, and not if it actually exists in the design system. Even if it doesn't exist, using design system prefixes should be avoided.
+
+❌ Incorrect:
+
+```css
+a { --__ac-some-property: pink; }
+    ^^^^^^^
+```
+
+```css
+a { color: var(--__ac-some-property); }
+               ^^^^^^^
+```
+
+✅ Correct:
+
+```css
+a {
+  --some-property: pink;
+}
+```
+
+```css
+a {
+  color: var(--some-property);
+}
+```
+
+## aksel-no-class-override
+
+Warns when trying to override design system styling by using class selectors that starts with "navds-" or "navdsi-". Overriding styles in the design system is discouraged. We want to have consistent look and feel across applications. Even if it seems to work fine now, it might break on subsequent updates in the design system.
+
+❌ Incorrect:
+
+```css
+.navds-button {}
+ ^^^^^^
+```
+
+```css
+.some-class .navdsi-header {}
+             ^^^^^^^
+```
+
+✅ Correct:
+
+```css
+.some-class {
+}
+```
+
 ### Install
 
 ```bash
