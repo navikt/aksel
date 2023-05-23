@@ -45,7 +45,7 @@ const stylelintConfig = {
     "@navikt/aksel-design-token-exists": {
       tokenDefinitionsFile: "@navikt/core/css/dist/index.css",
       overrideableTokenDefinitionsJSONFile: "@navikt/core/css/tokens.json",
-      controlledPrefixes: [/--ac-.+/, /--a-.+/],
+      controlledPrefixes: ["--ac-", "--a-"],
     },
   },
 };
