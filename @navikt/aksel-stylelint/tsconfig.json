@@ -8,7 +8,7 @@
     "declaration": false,
     "types": ["node", "jest", "@types/jest"],
     "outDir": "dist",
-    "rootDir": ".",
+    "rootDir": "./src",
     "resolveJsonModule": true,
     "allowJs": true,
     "skipLibCheck": true

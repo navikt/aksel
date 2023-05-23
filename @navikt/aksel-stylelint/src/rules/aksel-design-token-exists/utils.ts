@@ -74,12 +74,12 @@ export const vendorUnprefixed = (prop) => {
 
 export const flattenObject = (obj) => {
   const flattened = Object.keys(obj).reduce((acc, key) => {
-    if (typeof obj[key] === 'string') {
-      acc.push(key)
+    if (typeof obj[key] === "string") {
+      acc.push(key);
     } else {
-      acc.push(flattenObject(obj[key]))
+      acc.push(flattenObject(obj[key]));
     }
-    return acc
-  }, [])
-  return flattened.flat()
-}
+    return acc;
+  }, []);
+  return flattened.flat();
+};

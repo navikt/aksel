@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-stylelint",
-  "version": "3.0.0",
+  "version": "3.0.0-beta.1",
   "author": "Aksel | NAV",
   "homepage": "https://aksel.nav.no/lint",
   "repository": {
@@ -13,11 +13,10 @@
     "stylelint"
   ],
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "license": "MIT",
-  "main": "./index.js",
+  "main": "./dist/index.js",
   "exports": "./dist/index.js",
   "files": [
     "./dist"

@@ -2,9 +2,12 @@ import stylelint from "stylelint";
 import valueParser from "postcss-value-parser";
 import { readFileSync } from "node:fs";
 
-import packageJson from "../../package.json";
 import { flattenObject, isCustomProperty } from "./utils";
 import { Node as PostCSSNode } from "postcss";
+
+const packageJson = JSON.parse(
+  readFileSync(`${__dirname}/../../../package.json`).toString()
+);
 
 const ruleName = "@navikt/aksel-design-token-exists";
 
