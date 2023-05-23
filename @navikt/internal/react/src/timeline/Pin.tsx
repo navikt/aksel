@@ -11,9 +11,15 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import { mergeRefs } from "@navikt/ds-react";
+import { mergeRefs, useEventListener } from "@navikt/ds-react";
 import { format } from "date-fns";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";
@@ -76,6 +82,22 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
       [ref, refs.setReference]
     );
 
+    useEventListener(
+      "focusin",
+      useCallback(
+        (e: FocusEvent) => {
+          if (
+            ![refs.domReference.current, refs?.floating?.current].some(
+              (element) => element?.contains(e.target as Node)
+            )
+          ) {
+            open && setOpen(false);
+          }
+        },
+        [open, refs.domReference, refs?.floating]
+      )
+    );
+
     const staticSide = {
       top: "bottom",
       right: "left",
@@ -96,7 +118,13 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             aria-label={`pin:${format(date, "dd.MM.yyyy")}`}
             type="button"
             aria-expanded={children ? open : undefined}
-            {...getReferenceProps()}
+            {...getReferenceProps({
+              onKeyDown: (e) => {
+                if (e.key === "Enter") {
+                  setOpen((prev) => !prev);
+                }
+              },
+            })}
           />
         </div>
         {children && (

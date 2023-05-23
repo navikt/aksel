@@ -11,9 +11,9 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import { mergeRefs } from "@navikt/ds-react";
+import { mergeRefs, useEventListener } from "@navikt/ds-react";
 import cl from "clsx";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -21,7 +21,9 @@ import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./index";
 
 interface TimelineClickablePeriodProps extends PeriodProps {
-  onSelectPeriod?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onSelectPeriod?: (
+    e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
+  ) => void;
   isActive?: boolean;
   periodRef: React.ForwardedRef<HTMLButtonElement>;
 }
@@ -83,6 +85,22 @@ const ClickablePeriod = React.memo(
       [periodRef, refs.setReference]
     );
 
+    useEventListener(
+      "focusin",
+      useCallback(
+        (e: FocusEvent) => {
+          if (
+            ![refs.domReference.current, refs?.floating?.current].some(
+              (element) => element?.contains(e.target as Node)
+            )
+          ) {
+            open && setOpen(false);
+          }
+        },
+        [open, refs.domReference, refs?.floating]
+      )
+    );
+
     const staticSide = {
       top: "bottom",
       right: "left",
@@ -109,18 +127,29 @@ const ClickablePeriod = React.memo(
             }
           )}
           aria-expanded={children ? open : undefined}
+          aria-current={isActive || undefined}
           {...getReferenceProps({
             onFocus: () => {
               initiate(index);
+            },
+            onKeyDown: (e) => {
+              if (e.key === "Enter") {
+                setOpen((prev) => !prev);
+              }
+              if (e.key === " ") {
+                onSelectPeriod?.(e);
+              }
             },
             style: {
               width: `${width}%`,
               [direction]: `${left}%`,
             },
-            onClick: (e) =>
-              onSelectPeriod?.(
-                e as React.MouseEvent<HTMLButtonElement, MouseEvent>
-              ),
+            onClick: (e) => {
+              if (e.detail === 0) {
+                return;
+              }
+              onSelectPeriod?.(e);
+            },
           })}
         >
           <span className="navdsi-timeline__period--inner">{icon}</span>
