@@ -7,6 +7,15 @@ const url =
 const prefix = "--__ac-";
 const prefixRegex = new RegExp(`^${prefix}.+`);
 
+export const messages = stylelint.utils.ruleMessages(ruleName, {
+  tokenUsed: (token, prop) =>
+    `"${token}" (inside decleration "${prop}") looks like an internal design token, ` +
+    `because it starts with "${prefix}". Internal tokens should not be used outside the design system.`,
+  tokenOverridden: (token) =>
+    `"${token}" looks like an internal design token, because it starts with "${prefix}". ` +
+    `Internal tokens should not be overridden.`,
+});
+
 const getInternalTokensUsed = (value: string) => {
   const invalidValues: string[] = [];
 
@@ -24,9 +33,7 @@ const ruleFunction: stylelint.Rule = () => {
     postcssRoot.walkDecls((node) => {
       getInternalTokensUsed(node.value).forEach((token) => {
         stylelint.utils.report({
-          message:
-            `"${token}" (inside decleration "${node.prop}") looks like an internal design token, ` +
-            `because it starts with "${prefix}". Internal tokens should not be used outside the design system.`,
+          message: messages.tokenUsed(token, node.prop),
           node,
           result: postcssResult,
           ruleName,
@@ -37,9 +44,7 @@ const ruleFunction: stylelint.Rule = () => {
       const isTokenOverride = prefixRegex.test(node.prop);
       if (isTokenOverride) {
         stylelint.utils.report({
-          message:
-            `"${node.prop}" looks like an internal design token, because it starts with "${prefix}". ` +
-            `Internal tokens should not be overridden.`,
+          message: messages.tokenOverridden(node.prop),
           node,
           result: postcssResult,
           ruleName,

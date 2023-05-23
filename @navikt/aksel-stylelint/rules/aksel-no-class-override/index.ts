@@ -8,7 +8,7 @@ const classnameRegex = new RegExp(/^navdsi?-.+/);
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   unexpected: (value) =>
-    `"${value}" looks like a class name used in the design system, because it starts with "navds-" or "navdsi-".` +
+    `"${value}" looks like a class name used in the design system, because it starts with "navds-" or "navdsi-". ` +
     "It is not recommended to override the styling in the design system.",
 });
 
