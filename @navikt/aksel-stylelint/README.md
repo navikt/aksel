@@ -1,8 +1,18 @@
 # Aksel stylelint rules & plugins
 
+This stylelint plugin is useful when working with the [Aksel design system](https://aksel.nav.no/).
+
+It is designed to be useful for both _internal_ and _external_ developers.
+
+🐛 Found a bug? https://github.com/navikt/aksel/issues
+
+> **Warning**
+> The version of this plugin should **_match_** the version of the design system packages used in your project for best results!
+> Otherwise you might get incorrect errors that tell you to use the wrong token names.
+
 ## aksel-design-token-exists
 
-This rule checks that if you use one of the reserved token prefixes `--a-` or `--ac-` then the token itself _must_ be provided by design system itself.
+This rule checks that if you use one of the reserved token prefixes `--a-` or `--ac-` then the token itself _must_ be provided by design system.
 
 ❌ Incorrect:
 
@@ -30,13 +40,13 @@ Disallows use or override of internal Aksel design tokens. Internal tokens are n
 ❌ Incorrect:
 
 ```css
-a { 
+a {
   --__ac-some-property: pink;
 } ^^^^^^^^^^^^^^^^^^^^
 ```
 
 ```css
-a { 
+a {
   color: var(--__ac-some-property);
 }            ^^^^^^^^^^^^^^^^^^^^
 ```
