@@ -2,13 +2,13 @@
 
 This stylelint plugin is useful when working with the [Aksel design system](https://aksel.nav.no/).
 
-It is designed to be useful for both _internal_ and _external_ developers.
-
-🐛 Found a bug? https://github.com/navikt/aksel/issues
+It is designed to be useful for both _internal_ and _external_ developers, so _everyone_ should install this 🙌.
 
 > **Warning**
-> The version of this plugin should **_match_** the version of the design system packages used in your project for best results!
-> Otherwise you might get incorrect errors that tell you to use the wrong token names.
+> The version of this plugin **_MUST MATCH_** the version of the other design system packages used in your project for the linting to make sense!
+> Otherwise you are very likely to get _incorrect_ errors that tell you to use the wrong token names.
+
+🐛 Found a bug? https://github.com/navikt/aksel/issues
 
 ## aksel-design-token-exists
 
