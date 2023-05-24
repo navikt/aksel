@@ -164,3 +164,28 @@ export const NoClearButton = () => (
     />
   </div>
 );
+
+export const HtmlSize = () => (
+  <div className="colgap">
+    <Search
+      label="Lorem ipsum dolor sit amet"
+      description="Saepe laborum delectus officia perferendis quaerat excepturi possimus hic enim dicta assumenda."
+      hideLabel={false}
+      htmlSize="20"
+    />
+    <Search
+      label="Lorem ipsum dolor sit amet"
+      description="Saepe laborum delectus officia perferendis quaerat excepturi possimus hic enim dicta assumenda."
+      hideLabel={false}
+      htmlSize="20"
+      variant="secondary"
+    />
+    <Search
+      label="Lorem ipsum dolor sit amet"
+      description="Saepe laborum delectus officia perferendis quaerat excepturi possimus hic enim dicta assumenda."
+      hideLabel={false}
+      htmlSize="20"
+      variant="simple"
+    />
+  </div>
+);
