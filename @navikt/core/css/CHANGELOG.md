@@ -1,5 +1,23 @@
 # @navikt/ds-css
 
+## 3.2.4
+
+### Patch Changes
+
+- [#2000](https://github.com/navikt/aksel/pull/2000) [`30eee0dac`](https://github.com/navikt/aksel/commit/30eee0dac4e3e5a1379033283a6885e646e80458) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Search støtter nå htmlSize-prop
+
+## 3.2.3
+
+### Patch Changes
+
+- [#1993](https://github.com/navikt/aksel/pull/1993) [`475e994f4`](https://github.com/navikt/aksel/commit/475e994f494b2080ffc05eb1684b6a244e3e2969) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset small-variant av datepicker-input
+
+  - :recycle: Refactored Datepicker.Input-button for bugfix
+
+- [#1994](https://github.com/navikt/aksel/pull/1994) [`444e905e0`](https://github.com/navikt/aksel/commit/444e905e01965fd5cac40ff20c5225b072e67221) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: CopyButton har nå en `xsmall`-variant
+
+  - Kan nå lettere brukes i tabeller
+
 ## 3.2.2
 
 ## 3.2.1

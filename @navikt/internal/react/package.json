@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react-internal",
-  "version": "3.2.2",
+  "version": "3.2.4",
   "description": "Aksel react components for internal UIs in NAV",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -37,8 +37,8 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.24.1",
-    "@navikt/aksel-icons": "^3.2.2",
-    "@navikt/ds-react": "^3.2.2",
+    "@navikt/aksel-icons": "^3.2.4",
+    "@navikt/ds-react": "^3.2.4",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1"
   },
