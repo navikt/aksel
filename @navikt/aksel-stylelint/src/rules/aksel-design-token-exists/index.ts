@@ -146,7 +146,7 @@ const ruleFunction: stylelint.Rule = () => {
 ruleFunction.ruleName = ruleName;
 ruleFunction.messages = {};
 ruleFunction.meta = {
-  url: "https://github.com/navikt/aksel/@navikt/aksel-stylelint/README.md#aksel-design-token-exists",
+  url: "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel-design-token-exists",
 };
 
 export default ruleFunction;
