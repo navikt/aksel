@@ -69,6 +69,14 @@ export const GrunnleggendeArtikkel = defineType({
       },
     }),
     defineField({
+      title: "Sidebar-index",
+      description:
+        "Overstyrer sortering av artikler i sidebar. Hvis feltet er tomt, sorteres den alfabetisk.",
+      name: "sidebarindex",
+      type: "number",
+      group: "settings",
+    }),
+    defineField({
       title: "Innhold",
       description:
         "Innholdet i artikkelen er riktekst. Tips: klikk på ikon i høyre hjørne for å skrive i fullskjerm.",

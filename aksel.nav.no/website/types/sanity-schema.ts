@@ -141,6 +141,7 @@ export type AkselSidebarT = Array<{
   slug: string;
   kategori: typeof komponentKategorier[number]["value"];
   tag: "beta" | "new" | "ready" | "deprecated";
+  sidebarindex: number | null;
 }>;
 
 export type ArticleListT = Array<{
