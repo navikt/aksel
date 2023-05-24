@@ -5,9 +5,10 @@ const Example = () => {
   return (
     <form>
       <Search
-        label="Søk alle NAV sine sider"
-        variant="secondary"
-        error="Søket må starte med xyz"
+        label="Hva er artikkelnummeret til denne varen?"
+        description="Art.nr. finner du på varens produktside eller i katalogen."
+        hideLabel={false}
+        htmlSize="12"
       />
     </form>
   );
@@ -21,5 +22,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 6,
+  index: 5,
 };
