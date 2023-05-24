@@ -1,5 +1,33 @@
 # @navikt/aksel
 
+## 3.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`475e994f4`](https://github.com/navikt/aksel/commit/475e994f494b2080ffc05eb1684b6a244e3e2969), [`444e905e0`](https://github.com/navikt/aksel/commit/444e905e01965fd5cac40ff20c5225b072e67221)]:
+  - @navikt/ds-css@3.2.3
+
+## 3.2.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@3.2.2
+
+## 3.2.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@3.2.1
+
+## 3.2.0
+
+### Patch Changes
+
+- Updated dependencies [[`affcab14c`](https://github.com/navikt/aksel/commit/affcab14c3d536929dfa64a36f5b43f9d0e8c3b7)]:
+  - @navikt/ds-css@3.2.0
+
 ## 3.1.3
 
 ### Patch Changes

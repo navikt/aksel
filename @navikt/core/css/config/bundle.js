@@ -146,7 +146,10 @@ async function bundleMinified() {
 }
 
 function copyToVersionFolder() {
-  const files = fastglob.sync("**/*.css", { cwd: `./${rootDir}` });
+  const files = fastglob.sync("**/*.css", {
+    cwd: `./${rootDir}`,
+    ignore: "**/version/**",
+  });
 
   for (let file of files) {
     const css = fs.readFileSync(`${rootDir}/${file}`, { encoding: "utf-8" });

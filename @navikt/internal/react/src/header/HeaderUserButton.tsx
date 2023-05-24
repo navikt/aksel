@@ -33,7 +33,6 @@ export const HeaderUserButton: HeaderUserButtonType = forwardRef(
       <div>
         <BodyShort size="small" as="div">
           {name}
-          ass
         </BodyShort>
         {description && <Detail as="div">{description}</Detail>}
       </div>

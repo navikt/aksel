@@ -63,6 +63,11 @@ const StyleMappings = {
       component: "ContentContainer",
       main: "content-container.css",
     },
+    {
+      component: "CopyButton",
+      main: "copybutton.css",
+      dependencies: [typoCss],
+    },
     { component: "Detail", main: typoCss },
     { component: "ErrorMessage", main: typoCss },
     { component: "ErrorSummary", main: formCss, dependencies: [typoCss] },
