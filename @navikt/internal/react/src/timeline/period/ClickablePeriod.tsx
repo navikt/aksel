@@ -73,7 +73,7 @@ const ClickablePeriod = React.memo(
     const { getFloatingProps, getReferenceProps } = useInteractions([
       useHover(context, {
         handleClose: safePolygon(),
-        restMs: 200,
+        restMs: 25,
         delay: { open: 1000 },
       }),
       useFocus(context),
