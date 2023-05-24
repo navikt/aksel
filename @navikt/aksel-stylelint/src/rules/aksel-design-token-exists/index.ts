@@ -16,33 +16,37 @@ const tokenJsonFile = "./tokens.json";
 const internalTokensJSONFile = "./internal-tokens.json";
 
 export const controlledPrefixes = ["--ac-", "--a-"];
+const prefix_a = "--a-";
+const prefix_ac = "--ac-";
 
 let allowedTokenNames = [];
 
 const packageVersion = packageJson.version;
 
-export const errorMessage = (
-  type: "prop" | "value",
-  node,
-  controlledPrefixes: string[],
-  invalidValues?: string
-) => {
-  if (type === "value") {
-    return (
-      `property "${node.prop}" has offending value "${invalidValues}", ` +
-      `and the value seems like it intends to reference a design token by ` +
-      `using one of the following prefixes [${controlledPrefixes}]. ` +
-      `However, that token doesn't seem to exist in the design system. ` +
-      `\n\nVersion: ${packageVersion}`
-    );
-  }
-  return (
+export const messages = stylelint.utils.ruleMessages(ruleName, {
+  propNotExist: (node: any) =>
     `property "${node.prop}" has a name that seems like it intends to override a design token by ` +
     `using one of the following prefixes [${controlledPrefixes}]. ` +
     `However, that token doesn't seem to exist in the design system. ` +
-    `\n\nVersion: ${packageVersion}`
-  );
-};
+    `\n\nVersion: ${packageVersion}`,
+  propOverride: (node: any) =>
+    `property "${node.prop}" tries to override a global design token, this is highly discouraged. ` +
+    `\n\nVersion: ${packageVersion}`,
+  propOverrideNotExist: (node: any) =>
+    `property "${node.prop}" tries to override a global design token, this is highly discouraged. ` +
+    `Also, that token doesn't exist. ` +
+    `\n\nVersion: ${packageVersion}`,
+  valueWrong: (node: any, invalidValues: string) =>
+    `property "${node.prop}" has offending value "${invalidValues}". ` +
+    `The value references a component level token. It is better to reference a global level token instead. ` +
+    `\n\nVersion: ${packageVersion}`,
+  valueNotExist: (node: any, invalidValues: string) =>
+    `property "${node.prop}" has offending value "${invalidValues}", ` +
+    `and the value seems like it intends to reference a design token by ` +
+    `using one of the following prefixes [${prefix_ac}]. ` +
+    `However, that token doesn't seem to exist in the design system. ` +
+    `\n\nVersion: ${packageVersion}`,
+});
 
 const addTokens = (tokenJSONFile: string, allowedTokenNames: string[]) => {
   const jsonFileBuffer = readFileSync(`${__dirname}/../../${tokenJSONFile}`);
@@ -51,7 +55,7 @@ const addTokens = (tokenJSONFile: string, allowedTokenNames: string[]) => {
   flattened.forEach((token) => allowedTokenNames.push(token));
 };
 
-const isValidToken = (controlledPrefixes: string[], inputToken: string) => {
+const tokenExists = (controlledPrefixes: string[], inputToken: string) => {
   // "singleton" if statement (attempt at caching file parsing)
   if (!allowedTokenNames.length) {
     const cssFileBuffer = readFileSync(`${__dirname}/../../${tokenCSSFile}`);
@@ -74,20 +78,6 @@ const isValidToken = (controlledPrefixes: string[], inputToken: string) => {
   return allowedTokenNames.includes(inputToken);
 };
 
-const getInvalidPropName = (controlledPrefixes: string[], prop: string) => {
-  const invalidValues: string[] = [];
-
-  if (
-    isCustomProperty(prop) &&
-    controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
-    !isValidToken(controlledPrefixes, prop)
-  ) {
-    invalidValues.push(prop);
-  }
-
-  if (invalidValues.length > 0) return invalidValues;
-};
-
 const checkInvalidVariableNames = (
   controlledPrefixes: string[],
   value: string,
@@ -100,25 +90,91 @@ const checkInvalidVariableNames = (
     if (
       node.type === "word" &&
       isCustomProperty(node.value) &&
-      controlledPrefixes.some((prefix) => node.value.startsWith(prefix)) &&
-      !isValidToken(controlledPrefixes, node.value)
+      node.value.startsWith(prefix_ac)
     ) {
-      stylelint.utils.report({
-        message: errorMessage(
-          "value",
-          rootNode,
-          controlledPrefixes,
-          node.value
-        ),
-        node: rootNode,
-        result: postcssResult,
-        ruleName,
-        word: node.value,
-      });
+      if (tokenExists(controlledPrefixes, node.value)) {
+        stylelint.utils.report({
+          message: messages.valueWrong(rootNode, node.value),
+          node: rootNode,
+          result: postcssResult,
+          ruleName,
+          word: node.value,
+        });
+      }
+      if (!tokenExists(controlledPrefixes, node.value))
+        stylelint.utils.report({
+          message: messages.valueNotExist(rootNode, node.value),
+          node: rootNode,
+          result: postcssResult,
+          ruleName,
+          word: node.value,
+        });
+    } else if (
+      node.type === "word" &&
+      isCustomProperty(node.value) &&
+      node.value.startsWith(prefix_a)
+    ) {
+      if (!tokenExists(controlledPrefixes, node.value)) {
+        stylelint.utils.report({
+          message: messages.valueNotExist(rootNode, node.value),
+          node: rootNode,
+          result: postcssResult,
+          ruleName,
+          word: node.value,
+        });
+      } else if (tokenExists(controlledPrefixes, node.value)) {
+        stylelint.utils.report({
+          message: messages.valueWrong(rootNode, node.value),
+          node: rootNode,
+          result: postcssResult,
+          ruleName,
+          word: node.value,
+        });
+      }
     }
   });
 
   if (invalidValues.length > 0) return invalidValues;
+};
+
+const checkInvalidPropNames = (
+  controlledPrefixes: string[],
+  prop: string,
+  postcssResult: stylelint.PostcssResult,
+  rootNode: PostCSSNode
+) => {
+  if (isCustomProperty(prop)) {
+    if (prop.startsWith(prefix_a)) {
+      if (tokenExists(controlledPrefixes, prop)) {
+        stylelint.utils.report({
+          message: messages.propOverride(rootNode),
+          node: rootNode,
+          result: postcssResult,
+          ruleName,
+          word: prop,
+        });
+      } else {
+        stylelint.utils.report({
+          message: messages.propOverrideNotExist(rootNode),
+          node: rootNode,
+          result: postcssResult,
+          ruleName,
+          word: prop,
+        });
+      }
+    } else if (
+      controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
+      !tokenExists(controlledPrefixes, prop)
+    ) {
+      stylelint.utils.report({
+        message: messages.propNotExist(rootNode),
+        node: rootNode,
+        result: postcssResult,
+        ruleName,
+        word: prop,
+      });
+    }
+  }
 };
 
 const ruleFunction: stylelint.Rule = () => {
@@ -127,18 +183,8 @@ const ruleFunction: stylelint.Rule = () => {
       const prop = node.prop;
       const value = node.value;
 
-      const invalidPropNames = getInvalidPropName(controlledPrefixes, prop);
-
       checkInvalidVariableNames(controlledPrefixes, value, postcssResult, node);
-
-      if (invalidPropNames) {
-        stylelint.utils.report({
-          message: errorMessage("prop", node, controlledPrefixes),
-          node,
-          result: postcssResult,
-          ruleName,
-        });
-      }
+      checkInvalidPropNames(controlledPrefixes, prop, postcssResult, node);
     });
   };
 };

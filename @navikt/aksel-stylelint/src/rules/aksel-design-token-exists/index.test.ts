@@ -1,5 +1,5 @@
 import { getTestRule } from "jest-preset-stylelint";
-import rule, { errorMessage, controlledPrefixes } from ".";
+import rule, { messages } from ".";
 
 getTestRule()({
   plugins: ["./dist/index.js"],
@@ -21,11 +21,7 @@ getTestRule()({
     {
       code: ".foo { --a-does-not-exist: 1px }",
       description: "attempt to override nonexisting '--a' token",
-      message: errorMessage(
-        "prop",
-        { prop: "--a-does-not-exist" },
-        controlledPrefixes
-      ),
+      message: messages.propNotExist({ prop: "--a-does-not-exist" }),
       line: 1,
       endLine: 1,
       column: 8,
@@ -34,11 +30,7 @@ getTestRule()({
     {
       code: ".foo \n { \n --ac-does-not-exist: 1px; \n }",
       description: "attempt to override nonexisting '--ac' token",
-      message: errorMessage(
-        "prop",
-        { prop: "--ac-does-not-exist" },
-        controlledPrefixes
-      ),
+      message: messages.propNotExist({ prop: "--ac-does-not-exist" }),
       line: 3,
       endLine: 3,
       column: 2,
@@ -48,12 +40,7 @@ getTestRule()({
     {
       code: ".foo { color: var(--a-bar) }",
       description: "attempt to use nonexsiting token",
-      message: errorMessage(
-        "value",
-        { prop: "color" },
-        controlledPrefixes,
-        "--a-bar"
-      ),
+      message: messages.valueWrong({ prop: "color" }, "--a-bar"),
       line: 1,
       endLine: 1,
       column: 19,
@@ -64,24 +51,14 @@ getTestRule()({
       description: "attempt to use two nonexsiting tokens in one var()",
       warnings: [
         {
-          message: errorMessage(
-            "value",
-            { prop: "width" },
-            controlledPrefixes,
-            "--ac-bar"
-          ),
+          message: messages.valueWrong({ prop: "width" }, "--ac-bar"),
           line: 1,
           endLine: 1,
           column: 19,
           endColumn: 27,
         },
         {
-          message: errorMessage(
-            "value",
-            { prop: "width" },
-            controlledPrefixes,
-            "--a-baz"
-          ),
+          message: messages.valueWrong({ prop: "width" }, "--a-baz"),
           line: 1,
           endLine: 1,
           column: 29,
@@ -94,24 +71,14 @@ getTestRule()({
       description: "attempt to use two tokens as separate vars",
       warnings: [
         {
-          message: errorMessage(
-            "value",
-            { prop: "padding" },
-            controlledPrefixes,
-            "--a-bar"
-          ),
+          message: messages.valueWrong({ prop: "padding" }, "--a-bar"),
           line: 1,
           endLine: 1,
           column: 21,
           endColumn: 28,
         },
         {
-          message: errorMessage(
-            "value",
-            { prop: "padding" },
-            controlledPrefixes,
-            "--a-baz"
-          ),
+          message: messages.valueWrong({ prop: "padding" }, "--a-baz"),
           line: 1,
           endLine: 1,
           column: 34,
