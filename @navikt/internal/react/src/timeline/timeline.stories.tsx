@@ -392,6 +392,7 @@ export const ContentDemo = () => {
                 aria-controls={
                   activePeriod?.id === p.id ? "timeline-data" : undefined
                 }
+                id={p.id}
               >
                 {p.children}
               </Timeline.Period>
@@ -416,6 +417,7 @@ export const ContentDemo = () => {
                 aria-controls={
                   activePeriod?.id === p.id ? "timeline-data" : undefined
                 }
+                id={p.id}
               >
                 {p.children}
               </Timeline.Period>
@@ -432,7 +434,7 @@ export const ContentDemo = () => {
         </Timeline.Row>
       </Timeline>
       {activePeriod && (
-        <div id="timeline-data">
+        <div id="timeline-data" aria-controls={activePeriod.id}>
           <h2>Period-data</h2>
           <p>{`Periode:${activePeriod.id}, dato:${activePeriod.start}`}</p>
         </div>

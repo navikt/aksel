@@ -138,6 +138,7 @@ const ClickablePeriod = React.memo(
               }
               if (e.key === " ") {
                 onSelectPeriod?.(e);
+                setOpen(false);
               }
             },
             style: {

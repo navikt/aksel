@@ -122,6 +122,8 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
               onKeyDown: (e) => {
                 if (e.key === "Enter") {
                   setOpen((prev) => !prev);
+                } else if (e.key === " ") {
+                  setOpen(false);
                 }
               },
             })}
