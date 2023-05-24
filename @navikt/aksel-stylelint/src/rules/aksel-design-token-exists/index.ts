@@ -11,8 +11,10 @@ const packageJson = JSON.parse(
 
 const ruleName = "@navikt/aksel-design-token-exists";
 
-const tokenDefinitionsFile = "./index.css";
-const overrideableTokenDefinitionsJSONFile = "./tokens.json";
+const tokenCSSFile = "./index.css";
+const tokenJsonFile = "./tokens.json";
+const internalTokensJSONFile = "./internal-tokens.json";
+
 export const controlledPrefixes = ["--ac-", "--a-"];
 
 let allowedTokenNames = [];
@@ -42,17 +44,17 @@ export const errorMessage = (
   );
 };
 
-const isValidToken = (
-  tokenDefinitionsFile: string,
-  overrideableTokenDefinitionsJSONFile: string,
-  controlledPrefixes: string[],
-  inputToken: string
-) => {
+const addTokens = (tokenJSONFile: string, allowedTokenNames: string[]) => {
+  const jsonFileBuffer = readFileSync(`${__dirname}/../../${tokenJSONFile}`);
+  const fileString = jsonFileBuffer.toString();
+  const flattened = flattenObject(JSON.parse(fileString));
+  flattened.forEach((token) => allowedTokenNames.push(token));
+};
+
+const isValidToken = (controlledPrefixes: string[], inputToken: string) => {
   // "singleton" if statement (attempt at caching file parsing)
   if (!allowedTokenNames.length) {
-    const cssFileBuffer = readFileSync(
-      `${__dirname}/../../${tokenDefinitionsFile}`
-    );
+    const cssFileBuffer = readFileSync(`${__dirname}/../../${tokenCSSFile}`);
     const cssFileString = cssFileBuffer.toString();
 
     valueParser(cssFileString).walk((node) => {
@@ -65,35 +67,20 @@ const isValidToken = (
       }
     });
 
-    const jsonFileBuffer = readFileSync(
-      `${__dirname}/../../${overrideableTokenDefinitionsJSONFile}`
-    );
-    const fileString = jsonFileBuffer.toString();
-
-    const flattened = flattenObject(JSON.parse(fileString));
-    flattened.forEach((token) => allowedTokenNames.push(token));
+    addTokens(tokenJsonFile, allowedTokenNames);
+    addTokens(internalTokensJSONFile, allowedTokenNames);
   }
 
   return allowedTokenNames.includes(inputToken);
 };
 
-const getInvalidPropName = (
-  tokenDefinitionsFile: string,
-  overrideableTokenDefinitionsJSONFile: string,
-  controlledPrefixes: string[],
-  prop: string
-) => {
+const getInvalidPropName = (controlledPrefixes: string[], prop: string) => {
   const invalidValues: string[] = [];
 
   if (
     isCustomProperty(prop) &&
     controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
-    !isValidToken(
-      tokenDefinitionsFile,
-      overrideableTokenDefinitionsJSONFile,
-      controlledPrefixes,
-      prop
-    )
+    !isValidToken(controlledPrefixes, prop)
   ) {
     invalidValues.push(prop);
   }
@@ -102,8 +89,6 @@ const getInvalidPropName = (
 };
 
 const checkInvalidVariableNames = (
-  tokenDefinitionsFile: string,
-  overrideableTokenDefinitionsJSONFile: string,
   controlledPrefixes: string[],
   value: string,
   postcssResult: stylelint.PostcssResult,
@@ -116,12 +101,7 @@ const checkInvalidVariableNames = (
       node.type === "word" &&
       isCustomProperty(node.value) &&
       controlledPrefixes.some((prefix) => node.value.startsWith(prefix)) &&
-      !isValidToken(
-        tokenDefinitionsFile,
-        overrideableTokenDefinitionsJSONFile,
-        controlledPrefixes,
-        node.value
-      )
+      !isValidToken(controlledPrefixes, node.value)
     ) {
       stylelint.utils.report({
         message: errorMessage(
@@ -147,21 +127,9 @@ const ruleFunction: stylelint.Rule = () => {
       const prop = node.prop;
       const value = node.value;
 
-      const invalidPropNames = getInvalidPropName(
-        tokenDefinitionsFile,
-        overrideableTokenDefinitionsJSONFile,
-        controlledPrefixes,
-        prop
-      );
+      const invalidPropNames = getInvalidPropName(controlledPrefixes, prop);
 
-      checkInvalidVariableNames(
-        tokenDefinitionsFile,
-        overrideableTokenDefinitionsJSONFile,
-        controlledPrefixes,
-        value,
-        postcssResult,
-        node
-      );
+      checkInvalidVariableNames(controlledPrefixes, value, postcssResult, node);
 
       if (invalidPropNames) {
         stylelint.utils.report({
