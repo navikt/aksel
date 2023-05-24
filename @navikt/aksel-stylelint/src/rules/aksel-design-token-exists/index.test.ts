@@ -12,8 +12,8 @@ getTestRule()({
       description: "existing '--a' token overridden",
     },
     {
-      code: ".foo { --ac-accordion-header-bg-hover: 1px }",
-      description: "existing '--ac' token overridden",
+      code: ".foo { --ac-accordion-header-bg-hover: 1px; --ac-header-bg: red; }",
+      description: "existing '--ac' tokens overridden",
     },
   ],
 
