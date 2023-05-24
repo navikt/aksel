@@ -73,7 +73,7 @@ const ClickablePeriod = React.memo(
     const { getFloatingProps, getReferenceProps } = useInteractions([
       useHover(context, {
         handleClose: safePolygon(),
-        restMs: 25,
+        restMs: 200,
         delay: { open: 1000 },
       }),
       useFocus(context),
@@ -133,6 +133,7 @@ const ClickablePeriod = React.memo(
               initiate(index);
             },
             onKeyDown: (e) => {
+              restProps?.onKeydown?.(e);
               if (e.key === "Enter") {
                 setOpen((prev) => !prev);
               }
@@ -146,6 +147,7 @@ const ClickablePeriod = React.memo(
               [direction]: `${left}%`,
             },
             onClick: (e) => {
+              restProps?.onClick?.(e);
               if (e.detail === 0) {
                 return;
               }

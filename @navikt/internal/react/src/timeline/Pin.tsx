@@ -24,7 +24,8 @@ import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";
 
-export interface TimelinePinProps {
+export interface TimelinePinProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Date position for the pin.
    */
@@ -120,6 +121,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             aria-expanded={children ? open : undefined}
             {...getReferenceProps({
               onKeyDown: (e) => {
+                rest?.onKeyDown?.(e as React.KeyboardEvent<HTMLButtonElement>);
                 if (e.key === "Enter") {
                   setOpen((prev) => !prev);
                 } else if (e.key === " ") {
