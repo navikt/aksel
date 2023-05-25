@@ -14,6 +14,7 @@ import {
   startOfYear,
   subDays,
 } from "date-fns";
+import nbLocale from "date-fns/locale/nb";
 import React from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { isVisible } from "./utils";
@@ -42,7 +43,7 @@ export const dayLabels = (
       return {
         direction: direction,
         horizontalPosition: horizontalPosition,
-        label: format(day, "MM.dd"),
+        label: format(day, "dd.MM", { locale: nbLocale }),
         date: day,
         width: width,
       };
@@ -69,7 +70,7 @@ export const monthLabels = (
     return {
       direction: direction,
       horizontalPosition: horizontalPosition,
-      label: format(month, "MMM yy"),
+      label: format(month, "MMM yy", { locale: nbLocale }),
       date: month,
       width: width,
     };

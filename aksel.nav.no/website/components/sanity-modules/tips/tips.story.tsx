@@ -1,14 +1,13 @@
+import { TipsT } from "@/types";
 import Tips from "./index";
-import { SanityT } from "@/lib";
 
 export default {
   title: "Components/Tips",
   component: Tips,
 };
 
-const mockData: SanityT.Schema.tips & { _key: string } = {
+const mockData: TipsT = {
   _key: "eb522d23896b",
-  _type: "tips",
   body: [
     {
       _key: "86a3e733e9bb",
@@ -36,7 +35,7 @@ const mockData: SanityT.Schema.tips & { _key: string } = {
 
 export const TipsDemo = () => <Tips node={mockData as any} />;
 export const TipsDemoAksel = () => (
-  <div className="aksel-artikkel">
+  <div className="aksel-artikkel bg-surface-subtle">
     <Tips node={mockData as any} />
   </div>
 );

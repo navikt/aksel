@@ -1,4 +1,4 @@
-import { FeedbackT } from "@/lib";
+import { FeedbackT } from "@/types";
 import { IdContext } from "@/utils";
 import { Button, Heading, Textarea } from "@navikt/ds-react";
 import cl from "classnames";

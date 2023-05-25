@@ -1,8 +1,9 @@
-import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Heading } from "../typography/Heading";
+import { AccordionContext } from "./AccordionContext";
 import { AccordionItemContext } from "./AccordionItem";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 
 export interface AccordionHeaderProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,43 +19,42 @@ export type AccordionHeaderType = React.ForwardRefExoticComponent<
 
 const AccordionHeader: AccordionHeaderType = forwardRef(
   ({ children, className, onClick, ...rest }, ref) => {
-    const context = useContext(AccordionItemContext);
+    const itemContext = useContext(AccordionItemContext);
+    const accordionContext = useContext(AccordionContext);
 
-    if (context === null) {
+    if (accordionContext === null || itemContext === null) {
       console.error(
-        "<Accordion.Header> has to be used within an <Accordion.Item>"
+        "<Accordion.Header> has to be used within an <Accordion.Item>, which in turn must be within an <Accordion>"
       );
       return null;
     }
 
-    const handleClick = (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      context.toggleOpen();
-      onClick && onClick(e);
-    };
-
     return (
       <button
-        {...rest}
         ref={ref}
+        {...rest}
         className={cl("navds-accordion__header", className)}
+        onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+          itemContext.toggleOpen();
+          onClick && onClick(e);
+        }}
+        aria-expanded={itemContext.open}
         type="button"
-        onClick={handleClick}
-        aria-expanded={context.open}
       >
+        <div className="navds-accordion__icon-wrapper">
+          <ChevronDownIcon
+            className="navds-accordion__header-chevron"
+            title="Vis mer"
+            aria-hidden
+          />
+        </div>
         <Heading
-          size="small"
+          size={accordionContext.headingSize ?? "small"}
           as="span"
           className="navds-accordion__header-content"
         >
           {children}
         </Heading>
-        <Expand aria-hidden className="navds-accordion__expand-icon" />
-        <ExpandFilled
-          aria-hidden
-          className="navds-accordion__expand-icon navds-accordion__expand-icon--filled"
-        />
       </button>
     );
   }

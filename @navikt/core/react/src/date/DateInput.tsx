@@ -1,9 +1,9 @@
-import { Calender } from "@navikt/ds-icons";
+import { CalendarIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import { BodyShort, Button, ErrorMessage, Label, omit } from "..";
+import { BodyShort, ErrorMessage, Label, omit } from "..";
 import { FormFieldProps, useFormField } from "../form/useFormField";
-import { useDateInputContext } from "./hooks";
+import { useDateInputContext } from "./context";
 
 export interface DateInputProps
   extends FormFieldProps,
@@ -115,24 +115,22 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
             )}
             size={14}
           />
-          <Button
-            variant="tertiary"
-            type="button"
-            size="small"
-            onClick={() => onOpen()}
-            className="navds-date__field-button"
-            tabIndex={open ? -1 : 0}
+          <button
             disabled={inputProps.disabled}
-            icon={
-              <Calender
-                title={
-                  open
-                    ? conditionalVariables.iconTitle.close
-                    : conditionalVariables.iconTitle.open
-                }
-              />
-            }
-          />
+            tabIndex={open ? -1 : 0}
+            onClick={() => onOpen()}
+            type="button"
+            className="navds-date__field-button"
+          >
+            <CalendarIcon
+              pointerEvents="none"
+              title={
+                open
+                  ? conditionalVariables.iconTitle.close
+                  : conditionalVariables.iconTitle.open
+              }
+            />
+          </button>
         </div>
         <div
           className="navds-form-field__error"

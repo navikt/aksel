@@ -1,4 +1,4 @@
-import { Copy } from "@navikt/ds-icons";
+import { FilesIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import copy from "copy-to-clipboard";
 import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
@@ -10,8 +10,11 @@ import {
   mergeRefs,
 } from "@navikt/ds-react";
 
+/**
+ * @deprecated Use import { CopyButton } from "@navikt/ds-react" instead
+ */
 export interface CopyToClipboardProps
-  extends Omit<ButtonProps, "children" | "variant" | "loading"> {
+  extends Omit<ButtonProps, "children" | "onClick" | "variant" | "loading"> {
   /**
    * Button text
    */
@@ -20,6 +23,10 @@ export interface CopyToClipboardProps
    * Text to be copied to clipboard
    */
   copyText: string;
+  /**
+   * Callback function triggered when clicking the button
+   */
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   /**
    * Description of text. Example: "Kopierte personnummer til clipboard"
    */
@@ -53,6 +60,9 @@ export interface CopyToClipboardProps
   variant?: "tertiary";
 }
 
+/**
+ * @deprecated Use <CopyButton /> instead: import { CopyButton } from "@navikt/ds-react";
+ */
 export const CopyToClipboard = forwardRef<
   HTMLButtonElement,
   CopyToClipboardProps
@@ -63,6 +73,7 @@ export const CopyToClipboard = forwardRef<
       copyText,
       popoverText,
       className,
+      onClick,
       size = "medium",
       popoverPlacement = "bottom",
       iconPosition = "left",
@@ -85,9 +96,12 @@ export const CopyToClipboard = forwardRef<
       };
     }, [openPopover]);
 
-    const handleClick = () => {
+    const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       copy(copyText);
       setOpenPopover(true);
+      if (onClick) {
+        onClick(event);
+      }
     };
 
     const copyTitle = title ?? (children ? undefined : `Kopier ${copyText}`);
@@ -100,7 +114,7 @@ export const CopyToClipboard = forwardRef<
           className={cl("navdsi-copy-to-clipboard", className)}
           onClick={handleClick}
           size={size}
-          icon={<Copy title={copyTitle} aria-hidden={!copyTitle} />}
+          icon={<FilesIcon title={copyTitle} aria-hidden={!copyTitle} />}
           iconPosition={iconPosition}
           {...rest}
         >

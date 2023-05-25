@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import * as React from "react";
-import { Link } from "@navikt/ds-icons";
+import { LinkIcon } from "@navikt/aksel-icons";
 
 import { CopyToClipboard } from "../index";
 
@@ -104,13 +104,13 @@ export const Ikon = () => (
       iconPosition="right"
       popoverText="Kopierte lenke"
       copyText="3.14"
-      icon={<Link />}
+      icon={<LinkIcon />}
     />
     <CopyToClipboard
       iconPosition="left"
       popoverText="Kopierte lenke"
       copyText="3.14"
-      icon={<Link />}
+      icon={<LinkIcon />}
     >
       Kopier lenke
     </CopyToClipboard>

@@ -38,9 +38,16 @@
   border-color: var(--ac-textarea-hover-border, var(--a-border-action));
 }
 
-.navds-textarea__input:focus {
+.navds-textarea__input:focus-visible {
   outline: none;
   box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-textarea__input:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 .navds-form-field--small .navds-textarea__input {
@@ -73,9 +80,16 @@
 /**
   Error handling
 */
-.navds-textarea--error .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
+.navds-textarea--error .navds-textarea__input:not(:hover):not(:focus-visible):not(:disabled) {
   box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--a-border-danger));
   border-color: var(--ac-textarea-error-border, var(--a-border-danger));
+}
+
+@supports not selector(:focus-visible) {
+  .navds-textarea--error .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
+    box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--a-border-danger));
+    border-color: var(--ac-textarea-error-border, var(--a-border-danger));
+  }
 }
 
 .navds-textarea__input:disabled {

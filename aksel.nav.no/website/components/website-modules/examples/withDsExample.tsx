@@ -4,15 +4,25 @@ import cl from "clsx";
 
 export const withDsExample = (
   Component: ComponentType,
-  variant?: "full" | "inverted"
+  /**
+   * Static: Used for dynamic-height examples like ExpansionCard
+   */
+  variant?: "full" | "inverted" | "static"
 ) => {
   const DsHOC = (props: any) => (
     <div
-      className={cl(styles.container, {
+      className={cl({
         "bg-gray-900": variant === "inverted",
+        [styles.containerStatic]: variant === "static",
+        [styles.container]: variant !== "static",
       })}
     >
-      <div id="ds-example" className={cl({ "w-full": variant === "full" })}>
+      <div
+        id="ds-example"
+        className={cl({
+          "w-full": variant === "full",
+        })}
+      >
         <Component {...props} />
       </div>
     </div>

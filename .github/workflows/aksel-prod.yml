@@ -10,34 +10,6 @@ env:
   IMAGE: ghcr.io/navikt/aksel
 
 jobs:
-  snyk-monitor:
-    name: monitor dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Run Snyk to check for vulnerabilities
-        continue-on-error: true
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: monitor
-          args: --org=designsystemet --severity-threshold=high
-  snyk-test:
-    name: analyze dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: test
-          args: --org=designsystemet --severity-threshold=high
   sync_data_with_sanity:
     name: Update component data
     runs-on: ubuntu-latest
@@ -72,6 +44,10 @@ jobs:
   build_and_deploy:
     name: Build and deploy to prod-gcp
     runs-on: ubuntu-latest
+    permissions:
+      packages: "write"
+      contents: "read"
+      id-token: "write"
     steps:
       - uses: actions/setup-node@v3
         with:
@@ -80,9 +56,9 @@ jobs:
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
-          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> aksel.nav.no/website/.env
+          echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
 
       - name: Restore cache
         uses: actions/cache@v3
@@ -104,18 +80,25 @@ jobs:
       - name: Build application
         run: yarn workspace aksel.nav.no build:next
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # Use commit-sha1 instead of tag for security concerns
+      - name: Upload static files to NAV CDN
+        uses: navikt/frontend/actions/cdn-upload/v1@main
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          cdn-team-name: aksel
+          source: ./aksel.nav.no/website/.next/static
+          destination: "/website/_next"
+
       - name: Get complete tag
-        run: echo "TAG=$( date +%s )" >> $GITHUB_ENV
-      - name: Create docker image tags
-        run: echo "DOCKER_TAG=${{ env.IMAGE }}:${{ env.TAG }}" >> $GITHUB_ENV
-      - name: Build docker image
-        run: docker build -t ${{ env.DOCKER_TAG }} . -f aksel.nav.no/Dockerfile
+        run: echo "TAG=PROD-$( date +%s )" >> $GITHUB_ENV
+
+      - uses: nais/docker-build-push@v0
+        id: docker-push
+        with:
+          team: designsystem
+          push_image: true
+          dockerfile: aksel.nav.no/Dockerfile
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+
       - name: Wait for e2e-tests to succeed
         uses: lewagon/wait-on-check-action@v1.2.0
         with:
@@ -123,9 +106,6 @@ jobs:
           check-name: "Smoketest Aksel"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
-      - name: Push docker image
-        run: |
-          docker push ${{ env.DOCKER_TAG }}
 
       - name: Deploy to prod-gcp
         uses: nais/deploy/actions/deploy@master
@@ -133,4 +113,4 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: aksel.nav.no/nais-prod.yaml
           CLUSTER: prod-gcp
-          IMAGE: ${{ env.DOCKER_TAG }}
+          IMAGE: ${{ steps.docker-push.outputs.image }}

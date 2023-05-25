@@ -1,12 +1,8 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
+import { TableT } from "@/types";
 import { Table } from "@navikt/ds-react";
 
-const TableComponent = ({
-  node,
-}: {
-  node: SanityT.Schema.tabell_v2;
-}): JSX.Element => {
+const TableComponent = ({ node }: { node: TableT }) => {
   if (!node || !node.rows || node.rows.length < 2) {
     return null;
   }
@@ -38,8 +34,7 @@ const TableComponent = ({
         </Table.Body>
       </Table>
       <style global jsx>{`
-        .algolia-index-body.navds-body-long.navds-typo--spacing
-          + .table-heading-margin {
+        .navds-body-long.navds-typo--spacing + .table-heading-margin {
           margin-top: -1rem;
         }
         .table-heading-margin + .navds-heading {

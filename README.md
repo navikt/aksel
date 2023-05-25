@@ -15,7 +15,7 @@
           <img src="https://img.shields.io/badge/PRs-welcome-green.svg?color=%23262626"" />
       </a>
     </div>
-    <div><a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=%40navikt%2Fds-*"></a></div>
+    <div><a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=version"></a></div>
     <br/>
     <a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/aksel/issues">Issues</a>
 <br/>
@@ -31,12 +31,13 @@
 ├── core/tailwind   # @navikt/ds-tailwind, tailwind-config
 ├── internal/react  # @navikt/ds-react-internal, komponenter interne flater
 ├── internal/css    # @navikt/ds-css-internal, css interne flater
-├── icons           # @navikt/ds-icons, ikonpakke
-└── codemod         # @navikt/ds-codemod, migrerings-scripts
+├── aksel-icons     # @navikt/aksel-icons, ikonpakke
+└── aksel           # @navikt/aksel, kommandolinje-verktøy
 
 aksel.nav.no/
-├── website        # NEXT.JS app (v12)
+├── website # NEXT.JS app (v13)
 └── website/sanity # Sanity CMS-app (v3)
+
 ```
 
 ## Commands
@@ -53,14 +54,14 @@ yarn && yarn boot
 | `yarn storybook`          | Starter storybook                                                                                      |
 | `yarn dev`                | Starter aksel-nettsiden [(Mer info)](https://github.com/navikt/aksel/blob/main/aksel.nav.no/README.md) |
 | `yarn example:shadow-dom` | Starter demo-app med shadow-dom                                                                        |
-| `yarn lint`               | Lints react and css workspaces                                                                         |
-| `yarn test`               | Runs tests                                                                                             |
+| `yarn lint`               | Linter react and css workspaces                                                                        |
+| `yarn test`               | Kjører tester                                                                                          |
 | `yarn clean`              | Fjerner genererte filer                                                                                |
 | `yarn changeset`          | Ny versjon-entry [(how-to)](https://github.com/navikt/aksel/blob/main/.changeset/README.md)            |
 
 ## Bidra
 
-Vi tar gjerne i mot PR-er [CONTRIBUTING.md](https://github.com/navikt/aksel/blob/main/CONTRIBUTING.md)
+Vi tar gjerne i mot PR-er! [CONTRIBUTING.md](https://github.com/navikt/aksel/blob/main/CONTRIBUTING.md)
 
 ## Lisenser
 

@@ -1,4 +1,4 @@
-import { Close, Search as SearchIcon } from "@navikt/ds-icons";
+import { XMarkIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, {
   forwardRef,
@@ -49,6 +49,10 @@ export interface SearchProps
    */
   onClear?: (e: SearchClearEvent) => void;
   /**
+   * Callback for Search-button submit
+   */
+  onSearchClick?: (value: string) => void;
+  /**
    * aria-label on clear button
    * @default "Tøm"
    */
@@ -63,6 +67,10 @@ export interface SearchProps
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "simple";
+  /**
+   * Exposes the HTML size attribute
+   */
+  htmlSize?: number | string;
 }
 
 interface SearchComponent
@@ -76,6 +84,7 @@ export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
   variant: "primary" | "secondary" | "simple";
+  handleClick: () => void;
 }
 
 export const SearchContext = React.createContext<SearchContextProps | null>(
@@ -106,6 +115,8 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       variant = "primary",
       defaultValue,
       onChange,
+      onSearchClick,
+      htmlSize,
       ...rest
     } = props;
 
@@ -146,6 +157,10 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       wrapperRef
     );
 
+    const handleClick = () => {
+      onSearchClick?.(`${value ?? internalValue}`);
+    };
+
     return (
       <div
         ref={setWrapperRef}
@@ -154,9 +169,11 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           "navds-form-field",
           `navds-form-field--${size}`,
           "navds-search",
+
           {
             "navds-search--error": hasError,
             "navds-search--disabled": !!inputProps.disabled,
+            "navds-search--with-size": !!htmlSize,
           }
         )}
       >
@@ -171,12 +188,12 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         </Label>
         {!!description && (
           <BodyShort
-            as="div"
             className={cl("navds-form-field__description", {
               "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
+            as="div"
           >
             {description}
           </BodyShort>
@@ -184,7 +201,10 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         <div className="navds-search__wrapper">
           <div className="navds-search__wrapper-inner">
             {variant === "simple" && (
-              <SearchIcon aria-hidden className="navds-search__search-icon" />
+              <MagnifyingGlassIcon
+                aria-hidden
+                className="navds-search__search-icon"
+              />
             )}
             <input
               ref={mergedRef}
@@ -202,6 +222,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
                 "navds-body-short",
                 `navds-body-${size}`
               )}
+              {...(htmlSize ? { size: Number(htmlSize) } : {})}
             />
             {(value ?? internalValue) && clearButton && (
               <button
@@ -212,7 +233,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
                 <span className="navds-sr-only">
                   {clearButtonLabel ? clearButtonLabel : "Tøm"}
                 </span>
-                <Close aria-hidden />
+                <XMarkIcon aria-hidden />
               </button>
             )}
           </div>
@@ -221,6 +242,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               size,
               disabled: inputProps.disabled,
               variant,
+              handleClick,
             }}
           >
             {children ? children : variant !== "simple" && <SearchButton />}

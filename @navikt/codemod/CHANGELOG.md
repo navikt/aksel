@@ -1,5 +1,123 @@
 # @navikt/ds-codemod
 
+## 3.3.1
+
+## 3.3.0
+
+## 3.2.4
+
+## 3.2.3
+
+## 3.2.2
+
+## 3.2.1
+
+## 3.2.0
+
+## 3.1.3
+
+## 3.1.2
+
+## 3.1.1
+
+## 3.1.0
+
+## 3.0.1
+
+## 3.0.0
+
+## 2.9.8
+
+## 2.9.7
+
+## 2.9.6
+
+## 2.9.5
+
+## 2.9.4
+
+### Patch Changes
+
+- [#1952](https://github.com/navikt/aksel/pull/1952) [`27b2b4a11`](https://github.com/navikt/aksel/commit/27b2b4a11caf5ca05c96c686c453653d8a900e5f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :truck: Flyttet Codemods from `@navikt/ds-codemods` -> `@navikt/aksel`.
+
+  - `@navikt/ds-codemods` vil bli deprecated ettehvert.
+
+## 2.9.3
+
+## 2.9.2
+
+## 2.9.1
+
+## 2.9.0
+
+## 2.8.16
+
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+## 2.8.14
+
+## 2.8.13
+
+## 2.8.12
+
+## 2.8.11
+
+## 2.8.10
+
+## 2.8.9
+
+## 2.8.8
+
+## 2.8.7
+
+## 2.8.6
+
+## 2.8.5
+
+## 2.8.4
+
+## 2.8.3
+
+## 2.8.2
+
+## 2.8.1
+
+## 2.8.0
+
+## 2.7.8
+
+## 2.7.7
+
+## 2.7.6
+
+## 2.7.5
+
+## 2.7.4
+
+## 2.7.3
+
+## 2.7.2
+
+## 2.7.1
+
+## 2.7.0
+
+## 2.6.2
+
+## 2.6.1
+
+## 2.6.0
+
+## 2.5.1
+
+## 2.5.0
+
+## 2.4.3
+
 ## 2.4.2
 
 ### Patch Changes

@@ -1,5 +1,5 @@
-import { getClient } from "@/sanity-client";
 import { NextResponse } from "next/server";
+import { getClient } from "@/sanity/client.server";
 
 export async function middleware(req) {
   try {

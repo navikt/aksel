@@ -1,15 +1,15 @@
 import { LevelTwoHeading } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
+import { AkselGrunnleggendeDocT, AkselKomponentDocT } from "@/types";
 import { Label } from "@navikt/ds-react";
 import React from "react";
 
 const Intro = ({
   node,
 }: {
-  node: SanityT.Schema.intro_komponent;
-}): JSX.Element => {
+  node: AkselKomponentDocT["intro"] | AkselGrunnleggendeDocT["intro"];
+}) => {
   if (!node || !node.body || !node.brukes_til) {
     return null;
   }
@@ -23,7 +23,7 @@ const Intro = ({
       <div>
         <>
           <Label as="p" className="mb-3">
-            Egnet til å:
+            Egnet til:
           </Label>
           <ul className="mb-7 list-disc">
             {node.brukes_til.map((x) => (
@@ -39,7 +39,7 @@ const Intro = ({
         {node?.brukes_ikke_til && (
           <>
             <Label as="p" className="mb-3">
-              Vurder noe annet:
+              Uegnet til:
             </Label>
             <ul className="list-disc">
               {node.brukes_ikke_til.map((x) => (

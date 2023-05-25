@@ -73,7 +73,6 @@ export const Tema = defineType({
       name: "ansvarlig",
       type: "reference",
       to: [{ type: "editor" }],
-      validation: (Rule) => Rule.required(),
       group: "innhold",
     }),
     defineField({

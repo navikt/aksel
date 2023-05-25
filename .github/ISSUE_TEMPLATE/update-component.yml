@@ -3,7 +3,7 @@ description: Send inn innspill til komponent
 title: "[Innspill til komponent]: "
 labels: ["forespørsel 🥰", "komponenter 🧩", "nytt ✨", "beta 🧪"]
 assignees:
-  - olejorgenbakken
+  - KenAJoh
 body:
   - type: markdown
     attributes:

@@ -1,27 +1,23 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
+import { InnholdsKortPrinsipperT } from "@/types";
 import { logNav } from "@/utils";
 import { Heading } from "@navikt/ds-react";
 import NextLink from "next/link";
 
-const InnholdsKort = ({
-  node,
-}: {
-  node: SanityT.Schema.innholdskort & { _key: string; lenke: string };
-}) => {
+const InnholdsKort = ({ node }: { node: InnholdsKortPrinsipperT }) => {
   if (!node.title || !node.body || !node.lenke) {
     return null;
   }
 
   return (
-    <article className="shadow-small last-of-type:mb-18 focus-within:ring-border-focus hover:shadow-medium xs:p-8 group relative mb-7 rounded-lg bg-white p-4 ring-1 ring-gray-900/10 focus-within:ring">
+    <article className="shadow-small last-of-type:mb-18 focus-within:ring-border-focus hover:shadow-medium group relative mb-7 rounded-lg bg-white p-4 ring-1 ring-gray-900/10 focus-within:ring sm:p-8">
       <Heading
         spacing
         size="small"
         level="3"
         id={node._key}
-        className="algolia-index-lvl3 text-deepblue-500 scroll-mt-28 focus:outline-none group-hover:underline"
+        className="text-deepblue-500 scroll-mt-28 focus:outline-none group-hover:underline"
       >
         <NextLink
           href={`/${node?.lenke}`}

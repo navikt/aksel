@@ -4,7 +4,7 @@ import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
 import React, { useState } from "react";
 import { BodyShort } from "../..";
-import { useSharedMonthContext } from "../hooks";
+import { useSharedMonthContext } from "../context";
 import { isMatch } from "../utils";
 import MonthButton from "./MonthButton";
 

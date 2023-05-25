@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
-import { noCdnClient } from "../lib/sanity/sanity.server";
+
 import tokens from "@navikt/ds-tokens/docs.json";
 import core from "@navikt/ds-css/tokens.json";
 import internal from "@navikt/ds-css-internal/tokens.json";
+import { noCdnClient } from "../sanity/interface/client.server";
 
 dotenv.config();
 

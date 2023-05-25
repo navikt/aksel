@@ -1,9 +1,17 @@
+export const clientConfig = {
+  projectId: "hnbe3yhs",
+  dataset: "production",
+  useCdn: false,
+  apiVersion: "2021-05-31",
+};
+
 export const allArticleDocuments = [
   "komponent_artikkel",
   "ds_artikkel",
   "aksel_artikkel",
   "aksel_blogg",
   "aksel_prinsipp",
+  "aksel_standalone",
 ] as const;
 
 export const previews = [
@@ -33,7 +41,6 @@ export const komponentKategorier = [
 export const grunnleggendeKategorier = [
   { title: "Styling", value: "styling" },
   { title: "Guider", value: "guider" },
-  { title: "Stæsj", value: "staesj" },
   { title: "Design", value: "design" },
   { title: "Kode", value: "kode" },
   { title: "Nedlastbart", value: "nedlastbart" },
@@ -45,7 +52,7 @@ export const bloggKategorier = [
   { title: "Nytt fra teamene", value: "nytt-fra-teamene" },
   { title: "Da vi gjorde dette", value: "da-vi-gjorde-dette" },
   { title: "På reise", value: "pa-reise" },
-];
+] as const;
 
 export const prinsippKategorier = [
   { title: "Brukeropplevelse", value: "brukeropplevelse" },

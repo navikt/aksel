@@ -1,3 +1,4 @@
+import { SearchLogT } from "@/types";
 import amplitude from "amplitude-js";
 import getConfig from "next/config";
 import { Router } from "next/router";
@@ -20,29 +21,14 @@ export enum AmplitudeEvents {
 
 export const initAmplitude = () => {
   if (amplitude && !(typeof window === "undefined")) {
-    amplitude.getInstance().init("default", "", {
-      apiEndpoint: "amplitude.nav.no/collect-auto",
+    amplitude.getInstance().init("1a9a84a5e557ac9635a250bc27d75030", "", {
+      apiEndpoint: "amplitude.nav.no/collect",
       saveEvents: false,
       includeUtm: true,
       includeReferrer: true,
       platform: window.location.toString(),
     });
   }
-};
-
-export type SearchLogT = {
-  type: "suksess" | "feilet" | "standard";
-  retries: number;
-  retriedQueries: string[];
-  query: string;
-  filter: string[];
-  hits: number;
-  searchedFromUrl: string;
-
-  index?: number;
-  accuracy?: string;
-  topResult?: boolean;
-  url?: string;
 };
 
 export const logSearch = (data: SearchLogT) => {
@@ -109,7 +95,17 @@ export const usePageView = (router: Router, pageProps: any) => {
       } catch (error) {
         isDevelopment && console.error(error);
       }
-      logPageView(e, data, first);
+      /* first-prop might be an object */
+      logPageView(
+        e,
+        {
+          ...data,
+          ...(pageProps?.title && pageProps?.title.length > 0
+            ? { sidetittel: pageProps.title }
+            : {}),
+        },
+        first === true
+      );
       try {
         if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-page-view?id=${pageId}`);

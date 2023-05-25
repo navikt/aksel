@@ -6,12 +6,19 @@ import {
   logAmplitudeEvent,
   YarnIcon,
 } from "@/components";
-import { getDocumentsTmp, komponentQuery, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import {
+  AkselKomponentDocT,
+  AkselSidebarT,
+  ArticleListT,
+  NextPageT,
+  ResolveContributorsT,
+  ResolveSlugT,
+} from "@/types";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import { WithSidebar } from "components/layout/page-templates/WithSidebar";
-import ComponentOverview from "components/sanity-modules/component-overview";
+import { WithSidebar } from "components/layout/WithSidebar";
+import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
@@ -19,6 +26,8 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
 import NotFotfund from "../404";
+import { getDocumentsTmp, urlFor } from "@/sanity/interface";
+import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 
 const kodepakker = {
   "ds-react": {
@@ -65,19 +74,99 @@ const kodepakker = {
   },
 };
 
-const Page = ({
-  page,
-  sidebar,
-  refs,
-  seo,
-}: {
-  slug?: string[];
-  page: any;
-  refs: any[];
-  sidebar: any;
+type PageProps = NextPageT<{
+  page: ResolveContributorsT<ResolveSlugT<AkselKomponentDocT>>;
+  sidebar: AkselSidebarT;
   seo: any;
-  preview: boolean;
-}): JSX.Element => {
+  refs: ArticleListT;
+}>;
+
+/**
+ * "refs" må disables i preview da next-sanity sin
+ * preview-funksjonalitet fører til en infinite loop som låser applikasjonen.
+ * Dette er på grunn av av hele datasettet blir lastet inn i preview flere ganger som til slutt låser vinduet.
+ */
+export const query = `{
+  "page": *[_type == "komponent_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
+    {
+      ...,
+      "slug": slug.current,
+      linked_package {
+        "title": @->title,
+        "github_link": @->github_link,
+        "status": @->status
+      },
+      intro{
+        ...,
+        body[]{
+          ...,
+        ${destructureBlocks}
+        }
+      },
+      content[]{
+        ...,
+        ${destructureBlocks}
+      },
+  },
+  "refs": select(
+    $preview == "true" => [],
+    $preview != "true" => *[_type == "komponent_artikkel" && count(*[references(^._id)][slug.current == $slug]) > 0][0...3]{
+      _id,
+      heading,
+      "slug": slug,
+      status
+    }
+  ),
+  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
+  ${sidebarQuery}
+}`;
+
+export const getStaticPaths = async (): Promise<{
+  fallback: string;
+  paths: { params: { slug: string[] } }[];
+}> => {
+  return {
+    paths: await getDocumentsTmp("komponent_artikkel").then((paths) =>
+      paths.map((slug) => ({
+        params: {
+          slug: slug.split("/").filter((x) => x !== "komponenter"),
+        },
+      }))
+    ),
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps = async ({
+  params: { slug },
+  preview = false,
+}: {
+  params: { slug: string[] };
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const { page, sidebar, refs, seo } = await getClient().fetch(query, {
+    slug: `komponenter/${slug.slice(0, 2).join("/")}`,
+    type: "komponent_artikkel",
+    preview: "false",
+  });
+
+  return {
+    props: {
+      page: page,
+      refs,
+      slug: slug.slice(0, 2).join("/"),
+      seo,
+      sidebar,
+      preview,
+      title: page?.heading ?? "",
+      id: page?._id ?? "",
+    },
+    notFound: !page && !preview,
+    revalidate: 60,
+  };
+};
+
+const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
@@ -96,6 +185,8 @@ const Page = ({
       : page?.status?.tag === "new"
       ? "komponent-ny"
       : null;
+
+  const unsafe = page?.status?.unsafe;
 
   return (
     <>
@@ -235,7 +326,11 @@ const Page = ({
           )}
         </BodyShort>
         {tag && (
-          <SuggestionBlock variant={tag} reference={`<${page?.heading} />`} />
+          <SuggestionBlock
+            variant={tag}
+            unsafe={unsafe}
+            reference={`<${page?.heading} />`}
+          />
         )}
         <IntroSeksjon node={page?.intro} />
         {page?.status?.tag === "ready" && (
@@ -252,15 +347,15 @@ const Page = ({
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
-          query={komponentQuery}
+          query={query}
           params={{
-            slug: `komponenter/${props.slug.slice(0, 2).join("/")}`,
+            slug: `komponenter/${props.slug}`,
             type: "komponent_artikkel",
             preview: "true",
           }}
@@ -274,46 +369,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-export const getStaticPaths = async (): Promise<{
-  fallback: string;
-  paths: { params: { slug: string[] } }[];
-}> => {
-  return {
-    paths: await getDocumentsTmp("komponent_artikkel").then((paths) =>
-      paths.map((slug) => ({
-        params: {
-          slug: slug.split("/").filter((x) => x !== "komponenter"),
-        },
-      }))
-    ),
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string[] };
-  preview?: boolean;
-}) => {
-  const { page, sidebar, refs, seo } = await getClient().fetch(komponentQuery, {
-    slug: `komponenter/${slug.slice(0, 2).join("/")}`,
-    type: "komponent_artikkel",
-    preview: "false",
-  });
-
-  return {
-    props: {
-      page: page,
-      refs,
-      slug,
-      seo,
-      sidebar,
-      preview,
-    },
-    notFound: !page && !preview,
-    revalidate: 60,
-  };
-};

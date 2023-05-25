@@ -1,4 +1,8 @@
-import { Expand, ExternalLink, System } from "@navikt/ds-icons";
+import {
+  ChevronDownIcon,
+  ExternalLinkIcon,
+  MenuGridIcon,
+} from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail } from "@navikt/ds-react";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -35,24 +39,24 @@ export const Default = {
         {props.systemMenu && (
           <Dropdown>
             <Header.Button as={Dropdown.Toggle} style={{ marginLeft: "auto" }}>
-              <System
+              <MenuGridIcon
                 style={{ fontSize: "1.5rem" }}
-                title="Systemer og oppslagsverk"
+                title="MenuGridIconer og oppslagsverk"
               />
             </Header.Button>
             <Dropdown.Menu strategy="fixed">
               <Dropdown.Menu.List>
                 <Dropdown.Menu.List.Item>
                   <span>A.Inntekt</span>
-                  <ExternalLink style={{ fontSize: "0.875rem" }} />
+                  <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
                 </Dropdown.Menu.List.Item>
                 <Dropdown.Menu.List.Item>
                   <span>Aa-registeret</span>
-                  <ExternalLink style={{ fontSize: "0.875rem" }} />
+                  <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
                 </Dropdown.Menu.List.Item>
                 <Dropdown.Menu.List.Item>
                   <span>Gosys</span>
-                  <ExternalLink style={{ fontSize: "0.875rem" }} />
+                  <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
                 </Dropdown.Menu.List.Item>
               </Dropdown.Menu.List>
             </Dropdown.Menu>
@@ -83,7 +87,7 @@ export const Default = {
               }}
             >
               <BodyShort title="Ola Normann">KH</BodyShort>
-              <Expand />
+              <ChevronDownIcon />
             </Header.Button>
             <Dropdown.Menu strategy="fixed">
               <div>
@@ -161,7 +165,7 @@ export const UserWithMenu = () => (
         }}
       >
         <BodyShort title="Ola Normann">KH</BodyShort>
-        <Expand />
+        <ChevronDownIcon />
       </Header.Button>
       <Dropdown.Menu strategy="fixed">
         <div>
@@ -187,29 +191,29 @@ export const UserWithMenu = () => (
   </Header>
 );
 
-export const UserWithSystemMenu = () => (
+export const UserWithMenuGridIconMenu = () => (
   <Header style={{ width: 600 }}>
     <Header.Title href="/#home">Tittel med lenke</Header.Title>
     <Dropdown>
       <Header.Button as={Dropdown.Toggle} style={{ marginLeft: "auto" }}>
-        <System
+        <MenuGridIcon
           style={{ fontSize: "1.5rem" }}
-          title="Systemer og oppslagsverk"
+          title="MenuGridIconer og oppslagsverk"
         />
       </Header.Button>
       <Dropdown.Menu strategy="fixed">
         <Dropdown.Menu.List>
           <Dropdown.Menu.List.Item>
             <span>A.Inntekt</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
+            <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
           </Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item>
             <span>Aa-registeret</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
+            <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
           </Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item>
             <span>Gosys</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
+            <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
           </Dropdown.Menu.List.Item>
         </Dropdown.Menu.List>
       </Dropdown.Menu>

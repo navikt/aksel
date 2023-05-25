@@ -12,27 +12,6 @@ const disabledDays = [
 export default {
   title: "ds-react/Datepicker",
   component: DatePicker,
-  argTypes: {
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    },
-    locale: {
-      control: {
-        type: "radio",
-        options: ["nb", "nn", "en"],
-      },
-    },
-    mode: {
-      defaultValue: "single",
-      control: {
-        type: "radio",
-        options: ["single", "multiple", "range"],
-      },
-    },
-  },
 };
 
 export const Default = {
@@ -123,6 +102,27 @@ export const Default = {
     inputfield: true,
     standalone: false,
     openOnFocus: true,
+    mode: "single",
+  },
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+    locale: {
+      control: {
+        type: "radio",
+        options: ["nb", "nn", "en"],
+      },
+    },
+    mode: {
+      control: {
+        type: "radio",
+        options: ["single", "multiple", "range"],
+      },
+    },
   },
 };
 
@@ -149,14 +149,13 @@ export const ShowWeekNumber = () => (
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
     onDateChange: console.log,
-    locale: "en",
-    openOnFocus: false,
   });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...datepickerProps}>
+      <DatePicker {...datepickerProps} dropdownCaption>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
     </div>
@@ -321,6 +320,25 @@ export const defaultShownMonth = () => {
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...datepickerProps}>
         <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};
+
+export const Size = () => {
+  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps} dropdownCaption>
+        <DatePicker.Input size="medium" {...inputProps} label="Velg dato" />
+      </DatePicker>
+      <DatePicker {...datepickerProps} dropdownCaption>
+        <DatePicker.Input size="small" {...inputProps} label="Velg dato" />
       </DatePicker>
     </div>
   );

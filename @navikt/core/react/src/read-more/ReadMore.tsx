@@ -1,9 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import cl from "clsx";
-import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";
-import { ExpandFilled } from "@navikt/ds-icons";
-import AnimateHeight from "../util/AnimateHeight";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -74,18 +72,23 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           }}
           aria-expanded={isOpened}
         >
-          <Expand className="navds-read-more__expand-icon" aria-hidden />
-          <ExpandFilled
-            className="navds-read-more__expand-icon navds-read-more__expand-icon--filled"
+          <ChevronDownIcon
+            className="navds-read-more__expand-icon"
             aria-hidden
           />
           <span>{header}</span>
         </button>
-        <AnimateHeight height={isOpened ? "auto" : 0} duration={250}>
-          <BodyLong as="div" className="navds-read-more__content" size={size}>
-            {children}
-          </BodyLong>
-        </AnimateHeight>
+
+        <BodyLong
+          as="div"
+          aria-hidden={!isOpened}
+          className={cl("navds-read-more__content", {
+            "navds-read-more__content--closed": !isOpened,
+          })}
+          size={size}
+        >
+          {children}
+        </BodyLong>
       </div>
     );
   }

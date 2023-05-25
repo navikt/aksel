@@ -1,4 +1,5 @@
-import { Close, Hamburger as HamburgerIcon } from "@navikt/ds-icons";
+import { MenuHamburgerIcon, XMarkIcon } from "@navikt/aksel-icons";
+
 import { Button } from "@navikt/ds-react";
 import cl from "clsx";
 import Link from "next/link";
@@ -6,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import { logNav } from "../..";
+import styles from "./header.module.css";
 
 const LinkElement = ({ name, href, onClick }) => {
   const { asPath } = useRouter();
@@ -46,14 +48,15 @@ export const Hamburger = () => {
 
   return (
     <>
-      <div className="z-[1050] mr-0 flex h-full justify-center">
+      <div className="z-[1050] mr-0 grid h-full place-content-center">
         <button
           onClick={() => setOpen(!open)}
           aria-expanded={open}
-          className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ml-2 flex aspect-square items-center justify-center rounded px-2 py-2 focus:outline-none"
+          className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ml-2 flex aspect-square items-center justify-center rounded px-3 py-3 focus:outline-none"
         >
-          <HamburgerIcon
-            className="pointer-events-none text-2xl"
+          <MenuHamburgerIcon
+            fontSize="2rem"
+            className="pointer-events-none"
             aria-label="Åpne meny"
           />
         </button>
@@ -61,17 +64,20 @@ export const Hamburger = () => {
           isOpen={open}
           onRequestClose={() => setOpen(false)}
           aria={{ modal: true }}
-          overlayClassName="header-modal__overlay"
+          overlayClassName={styles.modalOverlay}
           contentLabel="Meny"
-          className="bg-surface-default xs:max-w-[90%] xs:right-6 xs:left-auto xs:w-96 absolute left-4 top-0 right-4 block rounded py-14 px-11 md:hidden"
+          className="bg-surface-default absolute left-4 top-0 right-4 block rounded py-14 px-11 sm:right-6 sm:left-auto sm:w-96 sm:max-w-[90%] lg:hidden"
         >
           <nav aria-label="hovedmeny">
             <ul>
               <Button
                 variant="tertiary"
                 onClick={() => setOpen(false)}
-                className="aksel-tertiary-button absolute top-2 right-2"
-                icon={<Close title="lukk meny" className="h-5 w-5" />}
+                className={cl(
+                  styles.akselTertiaryButton,
+                  "absolute top-2 right-2"
+                )}
+                icon={<XMarkIcon title="lukk meny" fontSize="1.5rem" />}
               />
               <LinkElement
                 onClick={() => setOpen(false)}
@@ -82,6 +88,11 @@ export const Hamburger = () => {
                 onClick={() => setOpen(false)}
                 name="Grunnleggende"
                 href="/grunnleggende"
+              />
+              <LinkElement
+                onClick={() => setOpen(false)}
+                name="Ikoner"
+                href="/ikoner"
               />
               <LinkElement
                 onClick={() => setOpen(false)}

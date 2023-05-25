@@ -23,15 +23,23 @@ export const Toggle: ToggleType = forwardRef(
       return null;
     }
 
-    const { setAnchorEl, setIsOpen, isOpen } = context;
+    const { setAnchorEl, handleToggle, isOpen } = context;
 
     return (
       <button
         {...rest}
-        ref={ref}
+        ref={(el) => {
+          setAnchorEl(el);
+
+          if (typeof ref === "function") {
+            ref(el);
+          } else if (ref != null) {
+            ref.current = el;
+          }
+        }}
         onClick={(e) => {
           setAnchorEl(e.currentTarget);
-          setIsOpen((isOpen) => !isOpen);
+          handleToggle(!isOpen);
           onClick && onClick(e);
         }}
         aria-expanded={isOpen}

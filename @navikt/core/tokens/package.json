@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "2.4.2",
+  "version": "3.3.1",
   "description": "Design-tokens for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "keywords": [
@@ -38,5 +38,9 @@
     "ts-jest": "^29.0.0",
     "ts-node": "10.9.0",
     "typescript": "^4.8.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

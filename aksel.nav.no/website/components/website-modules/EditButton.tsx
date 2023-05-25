@@ -3,7 +3,7 @@ import { Tooltip } from "@navikt/ds-react";
 import { useContext } from "react";
 import { IdContext, useCheckAuth } from "./utils";
 
-function EditButton(): JSX.Element {
+function EditButton() {
   const idCtx = useContext(IdContext);
 
   const validUser = useCheckAuth();
@@ -12,7 +12,7 @@ function EditButton(): JSX.Element {
     <>
       <div className="overflow-hidden">
         <Tooltip
-          content="Bare tilgjengelig for innloggede redaktører"
+          content="Vises bare for innloggede redaktører"
           placement="left"
           delay={500}
         >

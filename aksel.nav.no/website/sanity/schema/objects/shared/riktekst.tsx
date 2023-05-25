@@ -123,8 +123,9 @@ const Riktekst = (
     | "prinsipp"
     | "standard"
     | "standalone"
+    | "accordion"
 ) => {
-  const fields: string[] = [];
+  let fields: string[] = [];
   const standard = [
     "relatert_innhold",
     "bilde",
@@ -133,8 +134,20 @@ const Riktekst = (
     "do_dont",
     "alert",
     "accordion",
+    "expansioncard",
     "tabell_v2",
     "video",
+  ];
+
+  const accordion = [
+    "relatert_innhold",
+    "video",
+    "bilde",
+    "kode",
+    "tips",
+    "do_dont",
+    "alert",
+    "tabell_v2",
   ];
 
   const komponent = [
@@ -160,6 +173,9 @@ const Riktekst = (
       break;
     case "standalone":
       fields.push("uufeedback");
+      break;
+    case "accordion":
+      fields = [...accordion];
       break;
     default:
       break;
@@ -213,6 +229,14 @@ export const RiktekstEnkel = {
   name: "riktekst_enkel",
   type: "array",
   of: [block],
+  icon: FileContent,
+};
+
+export const RiktekstAccordion = {
+  title: "Riktekst",
+  name: "riktekst_accordion",
+  type: "array",
+  of: Riktekst("accordion"),
   icon: FileContent,
 };
 

@@ -1,6 +1,11 @@
-import { akselBloggBySlug, SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import {
+  AkselBloggDocT,
+  NextPageT,
+  ResolveContributorsT,
+  ResolveSlugT,
+} from "@/types";
 import { abbrName, dateStr } from "@/utils";
 import { BodyShort, Detail, Heading, Ingress } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
@@ -17,23 +22,56 @@ import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
 import { lazy } from "react";
 import NotFotfund from "../404";
+import { urlFor } from "@/sanity/interface";
+import { destructureBlocks, contributorsAll } from "@/sanity/queries";
 
-const Page = ({
-  blogg,
-  morePosts,
-}: {
-  slug?: string;
-  blogg: SanityT.Schema.aksel_blogg;
-  morePosts: Partial<
-    SanityT.Schema.aksel_blogg & {
-      slug: string;
-      contributors?: {
-        title?: string;
-      }[];
-    }
-  >[];
-  preview: boolean;
-}): JSX.Element => {
+type PageProps = NextPageT<{
+  blogg: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
+  morePosts: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
+}>;
+
+export const query = `{
+  "blogg": *[slug.current == $slug && _type == "aksel_blogg"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+    ${contributorsAll}
+  },
+  "morePosts": *[_type == "aksel_blogg" && slug.current != $slug] | order(publishedAt desc, _updatedAt desc)[0...3] {
+    "slug": slug.current,
+    heading,
+    _createdAt,
+    _id,
+    ingress,
+    ${contributorsAll},
+  }
+}`;
+
+export const getServerSideProps: GetServerSideProps = async (
+  context
+): Promise<PageProps> => {
+  const { blogg, morePosts } = await getClient().fetch(query, {
+    slug: `produktbloggen/${context.params.slug}`,
+  });
+
+  return {
+    props: {
+      blogg,
+      morePosts,
+      slug: context.params.slug as string,
+      preview: context.preview ?? false,
+      id: blogg?._id ?? "",
+      title: blogg?.heading ?? "",
+    },
+    notFound: !blogg && !context.preview,
+  };
+};
+
+const Page = ({ blogg, morePosts }: PageProps["props"]) => {
   if (!blogg) {
     return <NotFotfund />;
   }
@@ -88,14 +126,14 @@ const Page = ({
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel xs:pb-32 #FEFCE9 overflow-hidden bg-[#FEFCE9] pt-[8vw] pb-16 focus:outline-none"
+        className="aksel-artikkel overflow-hidden bg-[#FEFCE9] pt-[8vw] pb-16 focus:outline-none sm:pb-32"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose text-center">
             <Heading
               level="1"
               size="xlarge"
-              className="algolia-index-lvl1 hyphen text-deepblue-800 mt-1 break-words text-5xl leading-[1.2]"
+              className="text-deepblue-800 mt-1 break-words text-5xl leading-[1.2] [hyphens:_auto]"
             >
               {blogg.heading}
             </Heading>
@@ -195,7 +233,7 @@ const Page = ({
               <Heading level="2" size="large">
                 Flere blogginnlegg
               </Heading>
-              <ul className="mt-12 grid gap-x-6 gap-y-6 sm:grid-cols-2 sm:gap-y-10 md:gap-x-6 lg:grid-cols-3">
+              <ul className="mt-12 grid gap-x-6 gap-y-6 md:grid-cols-2 md:gap-y-10 md:gap-x-6 lg:grid-cols-3">
                 {morePosts.map((post) => (
                   <BloggCard key={post._id} blog={post} />
                 ))}
@@ -218,15 +256,15 @@ const Page = ({
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
-          query={akselBloggBySlug}
+          query={query}
           props={props}
-          params={{ slug: `produktbloggen/${props.slug}`, valid: "true" }}
+          params={{ slug: `produktbloggen/${props.slug}` }}
         />
       </PreviewSuspense>
     );
@@ -236,42 +274,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-interface StaticProps {
-  props: {
-    blogg: SanityT.Schema.aksel_blogg;
-    morePosts: Partial<
-      SanityT.Schema.aksel_blogg & {
-        slug: string;
-        contributors?: {
-          title?: string;
-        }[];
-      }
-    >[];
-    slug: string;
-    preview: boolean;
-    validUser?: boolean;
-    id?: string;
-  };
-  notFound: boolean;
-}
-
-export const getServerSideProps: GetServerSideProps = async (
-  context
-): Promise<StaticProps | { notFound: true }> => {
-  const { blogg, morePosts } = await getClient().fetch(akselBloggBySlug, {
-    slug: `produktbloggen/${context.params.slug}`,
-    valid: "true",
-  });
-
-  return {
-    props: {
-      blogg,
-      morePosts,
-      slug: context.params.slug as string,
-      preview: context.preview ?? false,
-      id: blogg?._id ?? "",
-    },
-    notFound: !blogg && !context.preview,
-  };
-};

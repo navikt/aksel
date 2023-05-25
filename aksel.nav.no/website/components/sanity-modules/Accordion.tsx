@@ -1,14 +1,10 @@
 import { Accordion as DsAccordion } from "@navikt/ds-react";
 import React from "react";
-import { SanityT } from "@/lib";
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
+import { AccordionT } from "@/types";
 
-const Accordion = ({
-  node,
-}: {
-  node: SanityT.Schema.accordion;
-}): JSX.Element => {
+const Accordion = ({ node }: { node: AccordionT }) => {
   if (!node || node.list.length === 0) {
     return null;
   }
@@ -20,10 +16,7 @@ const Accordion = ({
           <DsAccordion.Item key={el._key}>
             <DsAccordion.Header>{el.title}</DsAccordion.Header>
             <DsAccordion.Content>
-              <SanityBlockContent
-                blocks={el.content}
-                className="algolia-ignore-index"
-              />
+              <SanityBlockContent blocks={el.content} className="toc-ignore" />
             </DsAccordion.Content>
           </DsAccordion.Item>
         ))}

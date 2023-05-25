@@ -1,22 +1,70 @@
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import { contributorsSingle } from "@/sanity/queries";
+import {
+  NextPageT,
+  ResolveTemaT,
+  ResolveSlugT,
+  AkselGodPraksisDocT,
+  ResolveContributorsSingleT,
+} from "@/types";
 import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import { akselArticleAll } from "lib/sanity/queries";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { ArtiklerT } from "../[slug]";
 
-interface ArtiklerProps {
-  articles: ArtiklerT[];
-}
+type ArticleT = ResolveContributorsSingleT<
+  ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
+>;
 
-const Artikler = ({ articles }: ArtiklerProps) => {
-  const [allArticles, setAllArticles] = useState<ArtiklerT[]>(articles);
+type PageProps = NextPageT<{
+  articles: Array<ArticleT>;
+}>;
+
+export const query = (boundry = "") => {
+  return `{
+    "articles": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)${boundry} {
+      _id,
+      heading,
+      _createdAt,
+      _updatedAt,
+      publishedAt,
+      updateInfo,
+      "slug": slug.current,
+      "tema": tema[]->title,
+      ingress,
+      status,
+      _type,
+    "contributor": ${contributorsSingle}
+    }
+  }`;
+};
+
+export const getStaticProps = async ({
+  preview = false,
+}: {
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const { articles } = await getClient().fetch(query("[0..21]"));
+
+  return {
+    props: {
+      articles,
+      id: "godpraksis_landingsside_id1",
+      title: "Alle God praksis artikler",
+      preview,
+    },
+    revalidate: 60,
+    notFound: false,
+  };
+};
+
+const Artikler = ({ articles }: PageProps["props"]) => {
+  const [allArticles, setAllArticles] = useState<Array<ArticleT>>(articles);
   const [hasFetched, setHasFetched] = useState<boolean>(false);
   const { alleArtikler } = useRouter().query;
 
@@ -57,22 +105,22 @@ const Artikler = ({ articles }: ArtiklerProps) => {
         >
           <div className="relative grid overflow-x-clip pb-40">
             <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
-            <div className="dynamic-wrapper centered-layout">
+            <div className="dynamic-wrapper mx-auto w-full px-4 sm:px-6">
               <Heading
                 level="1"
                 size="xlarge"
-                className="algolia-index-lvl1 text-deepblue-800 my-20 md:text-[3rem]"
+                className="text-deepblue-800 my-20 md:text-[3rem]"
               >
                 Artikler
               </Heading>
               <div className="card-grid-3-1 mt-6">
                 {allArticles
-                  .filter((a: ArtiklerT) => a.tema)
+                  .filter((a) => a.tema)
                   .map((x) => {
                     return (
                       <ArtikkelCard
                         {...x}
-                        source={x?.slug?.current}
+                        source={x?.slug}
                         key={x._id}
                         variant="tema"
                       />
@@ -101,18 +149,6 @@ const Artikler = ({ articles }: ArtiklerProps) => {
       </div>
     </>
   );
-};
-
-export const getStaticProps = async () => {
-  const { articles } = await getClient().fetch(akselArticleAll("[0..21]"));
-
-  return {
-    props: {
-      articles,
-      id: "godpraksis_landingsside_id1",
-    },
-    revalidate: 60,
-  };
 };
 
 export default Artikler;

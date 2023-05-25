@@ -73,14 +73,28 @@
   border-radius: var(--a-border-radius-xlarge);
 }
 
-.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus,
-.navds-date .navds-date__month-button:not(.rdp-day_selected):not([disabled]):focus {
+.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus-visible,
+.navds-date .navds-date__month-button:not(.rdp-day_selected):not([disabled]):focus-visible {
   box-shadow: var(--a-shadow-focus);
 }
 
-.navds-date .rdp-button.rdp-day_selected:not([disabled]):focus,
-.navds-date .navds-date__month-button.rdp-day_selected:not([disabled]):focus {
+@supports not selector(:focus-visible) {
+  .navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus,
+  .navds-date .navds-date__month-button:not(.rdp-day_selected):not([disabled]):focus {
+    box-shadow: var(--a-shadow-focus);
+  }
+}
+
+.navds-date .rdp-button.rdp-day_selected:not([disabled]):focus-visible,
+.navds-date .navds-date__month-button.rdp-day_selected:not([disabled]):focus-visible {
   box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-date .rdp-button.rdp-day_selected:not([disabled]):focus,
+  .navds-date .navds-date__month-button.rdp-day_selected:not([disabled]):focus {
+    box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+  }
 }
 
 /* Monthpicker */
@@ -94,10 +108,18 @@
   cursor: pointer;
 }
 
-.navds-date__month-button:focus,
-.navds-monthpicker__caption-button:focus {
+.navds-date__month-button:focus-visible,
+.navds-monthpicker__caption-button:focus-visible {
   box-shadow: var(--a-shadow-focus);
   z-index: 1;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-date__month-button:focus,
+  .navds-monthpicker__caption-button:focus {
+    box-shadow: var(--a-shadow-focus);
+    z-index: 1;
+  }
 }
 
 .navds-date__year-label {
@@ -126,9 +148,15 @@
 }
 
 /* Focus layering */
-.navds-date__field-input:focus,
+.navds-date__field-input:focus-visible,
 .navds-date__field-button {
   z-index: 1;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-date__field-input:focus {
+    z-index: 1;
+  }
 }
 
 .navds-date .rdp-day_selected,
@@ -163,16 +191,18 @@
   gap: var(--a-spacing-2);
 }
 
-.navds-date__caption-button {
+.navds-date__caption-button,
+.navds-date__caption-button:disabled,
+.navds-date__caption-button:disabled:hover {
   color: var(--ac-date-caption-text, var(--a-text-default));
 }
 
 .navds-date__field-input {
-  padding-right: var(--a-spacing-12);
+  padding-right: var(--a-spacing-14);
 }
 
 .navds-form-field--small .navds-date__field-input {
-  padding-right: var(--a-spacing-8);
+  padding-right: var(--a-spacing-10);
 }
 
 /* Error-handling */
@@ -181,30 +211,63 @@
   box-shadow: inset 0 0 0 1px var(--ac-date-input-error-border, var(--a-border-danger));
 }
 
-.navds-date__field--error .navds-date__field-input:focus:not(:hover):not(:disabled) {
+.navds-date__field--error .navds-date__field-input:focus-visible:not(:hover):not(:disabled) {
   box-shadow: inset 0 0 0 1px var(--ac-date-input-error-border, var(--a-border-danger)), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-date__field--error .navds-date__field-input:focus:not(:hover):not(:disabled) {
+    box-shadow: inset 0 0 0 1px var(--ac-date-input-error-border, var(--a-border-danger)), var(--a-shadow-focus);
+  }
 }
 
 .navds-date__field-button {
   position: absolute;
-  right: var(--a-spacing-2);
+  right: 1px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--ac-date-input-button-text, var(--a-text-default));
+  display: inline-flex;
+  cursor: pointer;
+  margin: 0;
+  text-decoration: none;
+  border: none;
+  background: none;
+  border-radius: 3px;
+  padding: var(--a-spacing-3);
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  height: calc(100% - 2px);
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
 }
 
 .navds-form-field--small .navds-date__field-button {
-  right: var(--a-spacing-2);
-  height: 1.5rem;
-  width: 1.5rem;
+  padding: var(--a-spacing-1);
 }
 
-.navds-form-field--small .navds-date__field-button svg {
-  font-size: var(--a-font-size-medium);
+.navds-date__field-button:hover:where(:not([disabled])) {
+  color: var(--ac-date-input-button-hover-text, var(--a-text-action-on-action-subtle));
+  background-color: var(--ac-date-input-button-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-form-field--disabled .navds-date__field-button {
   opacity: 1;
+  cursor: not-allowed;
+}
+
+.navds-date__field-button:focus-visible {
+  outline: none;
+  box-shadow: var(--a-shadow-focus);
+  border-radius: var(--a-border-radius-medium);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-date__field-button:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 .navds-date__caption__year {

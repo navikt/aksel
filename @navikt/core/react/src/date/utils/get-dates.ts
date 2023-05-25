@@ -28,15 +28,31 @@ export const getMonths = (start: Date, end: Date, current: Date): Date[] => {
       dropdownMonths.push(setMonth(date, month));
     }
   }
+
+  if (!dropdownMonths.map((d) => d.getMonth()).includes(current.getMonth())) {
+    dropdownMonths.push(current);
+  }
+  dropdownMonths.sort((a, b) => a.getMonth() - b.getMonth());
+
   return dropdownMonths;
 };
 
-export const getYears = (start: Date, end: Date): Date[] => {
+export const getYears = (
+  start: Date,
+  end: Date,
+  currentYear: number
+): Date[] => {
   const years: Date[] = [];
   const fromYear = start.getFullYear();
   const toYear = end.getFullYear();
   for (let year = fromYear; year <= toYear; year++) {
     years.push(setYear(startOfYear(new Date()), year));
   }
+
+  if (fromYear > currentYear || toYear < currentYear) {
+    years.push(setYear(startOfYear(new Date()), currentYear));
+  }
+
+  years.sort((a, b) => a.getFullYear() - b.getFullYear());
   return years;
 };

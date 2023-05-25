@@ -3,13 +3,13 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <Accordion style={{ width: "100%", maxWidth: "65ch" }}>
+    <Accordion>
       <Accordion.Item>
         <Accordion.Header>Til deg som er mellom 62 og 67 år</Accordion.Header>
         <Accordion.Content>
           Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha
           hatt en pensjonsgivende inntekt som tilsvarer x G, året før du fikk
-          nedsatt arbeidsevnen. NAV kan gjøre unntak.
+          nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
         </Accordion.Content>
       </Accordion.Item>
       <Accordion.Item>
@@ -22,11 +22,17 @@ const Example = () => {
           kommer av skadelig påvirkning fra arbeidsmiljøet.
         </Accordion.Content>
       </Accordion.Item>
+      <Accordion.Item>
+        <Accordion.Header>Til deg som er helt frisk</Accordion.Header>
+        <Accordion.Content>
+          Da er det lite som trengs å gjøres.
+        </Accordion.Content>
+      </Accordion.Item>
     </Accordion>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {

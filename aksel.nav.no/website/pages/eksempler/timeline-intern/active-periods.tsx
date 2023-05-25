@@ -11,7 +11,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 import { useState } from "react";
 
 const Example = () => {
-  const [activePeriod, setActivePeriod] = useState();
+  const [activePeriod, setActivePeriod] = useState<any>();
 
   return (
     <div className="min-w-[800px] overflow-x-auto">
@@ -25,11 +25,10 @@ const Example = () => {
                 end={p.end}
                 status={p.status}
                 icon={p.icon}
-                onSelectPeriod={() => {
-                  setActivePeriod(p.id);
-                  p?.onSelectPeriod?.();
-                }}
+                onSelectPeriod={() => setActivePeriod(p.id)}
                 isActive={activePeriod && activePeriod === p.id}
+                aria-controls="timeline-panel"
+                id={p.id}
               />
             );
           })}
@@ -43,18 +42,21 @@ const Example = () => {
                 end={p.end}
                 status={p.status}
                 icon={p.icon}
-                onSelectPeriod={() => {
-                  setActivePeriod(p.id);
-                  p?.onSelectPeriod?.();
-                }}
+                onSelectPeriod={() => setActivePeriod(p.id)}
                 isActive={activePeriod && activePeriod === p.id}
+                aria-controls="timeline-panel"
+                id={p.id}
               />
             );
           })}
         </Timeline.Row>
       </Timeline>
       {activePeriod && (
-        <div className="mt-8">{`${activePeriod}: ${
+        <div
+          aria-controls={activePeriod.id}
+          id="timeline-panel"
+          className="mt-8"
+        >{`${activePeriod}: ${
           [...person, ...jobb].find((x) => x.id === activePeriod).start
         }`}</div>
       )}
@@ -138,6 +140,7 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
+  desc: "'onSelectPeriod' og 'isActive' lar deg velge aktive perioder for visning av ekstra informasjon en annen plass i UI.",
 };
 
 export const args = {

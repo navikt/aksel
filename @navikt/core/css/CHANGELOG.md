@@ -1,5 +1,228 @@
 # @navikt/ds-css
 
+## 3.3.1
+
+## 3.3.0
+
+## 3.2.4
+
+### Patch Changes
+
+- [#2000](https://github.com/navikt/aksel/pull/2000) [`30eee0dac`](https://github.com/navikt/aksel/commit/30eee0dac4e3e5a1379033283a6885e646e80458) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Search støtter nå htmlSize-prop
+
+## 3.2.3
+
+### Patch Changes
+
+- [#1993](https://github.com/navikt/aksel/pull/1993) [`475e994f4`](https://github.com/navikt/aksel/commit/475e994f494b2080ffc05eb1684b6a244e3e2969) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset small-variant av datepicker-input
+
+  - :recycle: Refactored Datepicker.Input-button for bugfix
+
+- [#1994](https://github.com/navikt/aksel/pull/1994) [`444e905e0`](https://github.com/navikt/aksel/commit/444e905e01965fd5cac40ff20c5225b072e67221) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: CopyButton har nå en `xsmall`-variant
+
+  - Kan nå lettere brukes i tabeller
+
+## 3.2.2
+
+## 3.2.1
+
+## 3.2.0
+
+### Minor Changes
+
+- [#1982](https://github.com/navikt/aksel/pull/1982) [`affcab14c`](https://github.com/navikt/aksel/commit/affcab14c3d536929dfa64a36f5b43f9d0e8c3b7) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Ny komponent `<CopyButton />`!
+
+  - Erstatter `<CopyToClipboard />` fra `@navikt/ds-react-internal`
+  - CopyToClipboard er markert som deprecated. Den vil fortsatt fungere, men noen lintere vil kunne ende opp med å klage på den.
+
+## 3.1.3
+
+### Patch Changes
+
+- [#1976](https://github.com/navikt/aksel/pull/1976) [`e8ecf309a`](https://github.com/navikt/aksel/commit/e8ecf309a910e47fd3cea6c54cd993ab1196910f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Oppdatert utseende for ToggleGroup
+
+  - Medium og Small er begge 10px lavere
+  - Mindre border-radius
+
+## 3.1.2
+
+## 3.1.1
+
+## 3.1.0
+
+### Minor Changes
+
+- [#1966](https://github.com/navikt/aksel/pull/1966) [`f1c4c46eb`](https://github.com/navikt/aksel/commit/f1c4c46ebb0522561483f18e3b86b190cf9cc372) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Alle komponenter bruker nå default `:focus-visible` for fokusmarkering.
+  (Alle komponenter som bruker `:focus-visible` har også en fallback for `:focus`)
+
+### Patch Changes
+
+- [#1967](https://github.com/navikt/aksel/pull/1967) [`9d2cd9e7f`](https://github.com/navikt/aksel/commit/9d2cd9e7fffb3cf6310c88229ee39ea85db19bca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Oppdatert Label og Description spacing for skjemakomponenter
+
+## 3.0.1
+
+## 3.0.0
+
+### Major Changes
+
+- [#1964](https://github.com/navikt/aksel/pull/1964) [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - **Accordion**
+
+  - Accordion oppdatet til å ha chevron left-aligned.
+  - Neutral-variant lagt til
+  - Diverse nye size-options for heading og paddinger.
+  - Deler av Accordion-CSS er refaktorert. Dette vil kunne brekke overskrevne stiler.
+
+- [#1964](https://github.com/navikt/aksel/pull/1964) [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Aksels løsninger bruker nå `@navikt/aksel-icons`
+
+  **Sideeffects av ikonendringer**
+
+  - Komponenter som tidligere brukte Expand-ikon har fått oppdatert animasjon (table, readmore og accordion)
+  - Alert bruker samme ikonstørrelse for alle størrelser
+  - Chips har justert padding/ikonstørrelser
+  - Datepicker hover-bug på knapper er fikset
+  - Helptekst bruker nå et custom-ikon.
+  - Select har fått justert padding rundt ikon
+  - Switch bruker samme checkmark som checkbox, er nå avrundet
+  - ReadMore har justert margin for alignment med ikon, fjernet content-animasjon
+  - Tabs bruker default text-default nå
+  - Stepper har endret hvordan den styler checkmark-ikon.
+
+## 2.9.8
+
+## 2.9.7
+
+## 2.9.6
+
+## 2.9.5
+
+## 2.9.4
+
+## 2.9.3
+
+## 2.9.2
+
+## 2.9.1
+
+## 2.9.0
+
+### Minor Changes
+
+- [#1941](https://github.com/navikt/aksel/pull/1941) [`657b7f3f3`](https://github.com/navikt/aksel/commit/657b7f3f3e62c5ce3173e6c95a29fcd237ce7343) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: CSS nå tilgjengelig som separate filer
+
+  - Kan lastest fra CDN
+  - Tilbys nå i minified-versjoner
+  - Kommandoline: `npx @navikt/aksel css-imports` for å raskt komme i gang med CSS-optimalisering
+
+## 2.8.16
+
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+## 2.8.14
+
+### Patch Changes
+
+- [`f0d9a8853`](https://github.com/navikt/aksel/commit/f0d9a8853f56854a4049bd3f6cc34968e9d6c380) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fixes shown month on open in Datepicker/MonthPicker, better handling of out-of-range 'today'
+
+## 2.8.13
+
+## 2.8.12
+
+## 2.8.11
+
+## 2.8.10
+
+## 2.8.9
+
+### Patch Changes
+
+- [#1905](https://github.com/navikt/aksel/pull/1905) [`212194964`](https://github.com/navikt/aksel/commit/212194964c4dd576e1ffc031316dff8cbe5016a2) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Padding/border-radius tokens for button.css
+
+## 2.8.8
+
+## 2.8.7
+
+### Patch Changes
+
+- [`7f3f025db`](https://github.com/navikt/aksel/commit/7f3f025db2ad605df4240605a733d10d08db753a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset typografi for radio, checkbox. Button token for tertiary
+
+## 2.8.6
+
+### Patch Changes
+
+- [`2eb358ad8`](https://github.com/navikt/aksel/commit/2eb358ad888979d21c385b3900973946f3f466be) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alert, Chips og ErrorSummary har nå bedre utvalg av tokens
+
+## 2.8.5
+
+### Patch Changes
+
+- [`f66437082`](https://github.com/navikt/aksel/commit/f664370826ed51bda7ad681e1f1799c26d2c1f0a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :art: Accordion-tokens for header bakgrunn
+
+- [#1879](https://github.com/navikt/aksel/pull/1879) [`55b585618`](https://github.com/navikt/aksel/commit/55b585618341a4d8bf26ed9b9e129d897b1600dc) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset tekstfarge i select på iphone
+
+## 2.8.4
+
+## 2.8.3
+
+## 2.8.2
+
+### Patch Changes
+
+- [#1870](https://github.com/navikt/aksel/pull/1870) [`9c495cf50`](https://github.com/navikt/aksel/commit/9c495cf5037a7453e51e273ab93e4232576f4958) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert typografi for ExpansioCard
+
+## 2.8.1
+
+## 2.8.0
+
+### Minor Changes
+
+- [#1820](https://github.com/navikt/aksel/pull/1820) [`c6d51a019`](https://github.com/navikt/aksel/commit/c6d51a01902e4fd7916a422e17ed175f39acd458) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Ny komponent! ExpansionCard. Oppfølger fra gammel Ekspanderbartpanel.
+
+## 2.7.8
+
+### Patch Changes
+
+- [#1863](https://github.com/navikt/aksel/pull/1863) [`7ace69f21`](https://github.com/navikt/aksel/commit/7ace69f215760bbb5bf997670c897403d8ee558d) Thanks [@it-vegard](https://github.com/it-vegard)! - Added focus indicator for tabpanel
+
+## 2.7.7
+
+## 2.7.6
+
+## 2.7.5
+
+### Patch Changes
+
+- :bug: Fikset token-bug i togglegroup
+
+## 2.7.4
+
+## 2.7.3
+
+## 2.7.2
+
+## 2.7.1
+
+## 2.7.0
+
+## 2.6.2
+
+## 2.6.1
+
+## 2.6.0
+
+## 2.5.1
+
+## 2.5.0
+
+## 2.4.3
+
+### Patch Changes
+
+- [`f962bc781`](https://github.com/navikt/aksel/commit/f962bc7816027c24e334d9754c3e07cda951cf56) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset disabled-opacity bug i select for Chrome
+
 ## 2.4.2
 
 ### Patch Changes

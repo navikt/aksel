@@ -12,7 +12,7 @@ import { bloggKategorier } from "../../../config";
 const prefix = "produktbloggen/";
 
 export const Blogg = defineType({
-  title: "Blogg",
+  title: "Bloggpost",
   name: "aksel_blogg",
   type: "document",
   groups,

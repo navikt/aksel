@@ -4,7 +4,7 @@ export const Highlighter = ({
 }: {
   type: string;
   prev?: string;
-}): JSX.Element => {
+}) => {
   const isString = type === "string" || type.match(/^["][^"]+"$/) !== null;
 
   const isType =

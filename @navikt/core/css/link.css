@@ -15,12 +15,22 @@
   text-decoration: none;
 }
 
-.navds-link:focus {
+.navds-link:focus-visible {
   outline: none;
   color: var(--ac-link-focus-text, var(--a-text-on-action));
   text-decoration: none;
   background-color: var(--ac-link-focus-bg, var(--a-border-focus));
   box-shadow: 0 0 0 2px var(--ac-link-focus-border, var(--a-border-focus));
+}
+
+@supports not selector(:focus-visible) {
+  .navds-link:focus {
+    outline: none;
+    color: var(--ac-link-focus-text, var(--a-text-on-action));
+    text-decoration: none;
+    background-color: var(--ac-link-focus-bg, var(--a-border-focus));
+    box-shadow: 0 0 0 2px var(--ac-link-focus-border, var(--a-border-focus));
+  }
 }
 
 .navds-link:active {

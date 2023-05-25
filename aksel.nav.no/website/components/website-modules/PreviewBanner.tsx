@@ -6,7 +6,7 @@ import { BodyShort, Button } from "@navikt/ds-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-function PreviewBanner(): JSX.Element {
+function PreviewBanner() {
   const { asPath } = useRouter();
   const validUser = useCheckAuth();
 

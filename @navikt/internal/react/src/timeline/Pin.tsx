@@ -1,11 +1,31 @@
-import { mergeRefs, Popover } from "@navikt/ds-react";
+import {
+  autoUpdate,
+  arrow as flArrow,
+  flip,
+  offset,
+  safePolygon,
+  shift,
+  useDismiss,
+  useFloating,
+  useFocus,
+  useHover,
+  useInteractions,
+} from "@floating-ui/react";
+import { mergeRefs, useEventListener } from "@navikt/ds-react";
 import { format } from "date-fns";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";
 
-export interface TimelinePinProps {
+export interface TimelinePinProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Date position for the pin.
    */
@@ -27,9 +47,64 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
   ({ date, children, ...rest }, ref) => {
     const { startDate, endDate, direction } = useTimelineContext();
     const [open, setOpen] = useState(false);
+    const arrowRef = useRef<HTMLDivElement | null>(null);
 
-    const buttonRef = useRef<HTMLButtonElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
+    const {
+      context,
+      placement,
+      middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+      refs,
+      floatingStyles,
+    } = useFloating({
+      placement: "top",
+      open: open,
+      onOpenChange: setOpen,
+      middleware: [
+        offset(16),
+        shift(),
+        flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        flArrow({ element: arrowRef, padding: 5 }),
+      ],
+      whileElementsMounted: autoUpdate,
+    });
+
+    const { getFloatingProps, getReferenceProps } = useInteractions([
+      useHover(context, {
+        handleClose: safePolygon(),
+        restMs: 25,
+        delay: { open: 1000 },
+      }),
+      useFocus(context),
+      useDismiss(context),
+    ]);
+
+    const mergedRef = useMemo(
+      () => mergeRefs([refs.setReference, ref]),
+      [ref, refs.setReference]
+    );
+
+    useEventListener(
+      "focusin",
+      useCallback(
+        (e: FocusEvent) => {
+          if (
+            ![refs.domReference.current, refs?.floating?.current].some(
+              (element) => element?.contains(e.target as Node)
+            )
+          ) {
+            open && setOpen(false);
+          }
+        },
+        [open, refs.domReference, refs?.floating]
+      )
+    );
+
+    const staticSide = {
+      top: "bottom",
+      right: "left",
+      bottom: "top",
+      left: "right",
+    }[placement.split("-")[0]];
 
     return (
       <>
@@ -41,20 +116,48 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             {...rest}
             ref={mergedRef}
             className="navdsi-timeline__pin-button"
-            onClick={() => setOpen(!open)}
             aria-label={`pin:${format(date, "dd.MM.yyyy")}`}
-            aria-expanded={open}
+            type="button"
+            aria-expanded={children ? open : undefined}
+            {...getReferenceProps({
+              onKeyDown: (e) => {
+                rest?.onKeyDown?.(e as React.KeyboardEvent<HTMLButtonElement>);
+                if (e.key === "Enter") {
+                  setOpen((prev) => !prev);
+                } else if (e.key === " ") {
+                  setOpen(false);
+                }
+              },
+            })}
           />
         </div>
         {children && (
-          <Popover
-            open={open}
-            onClose={() => setOpen(false)}
-            anchorEl={buttonRef.current}
-            offset={18}
+          <div
+            className="navds-timeline__popover"
+            data-placement={placement}
+            aria-hidden={!open}
+            ref={refs.setFloating}
+            {...getFloatingProps({
+              tabIndex: -1,
+            })}
+            style={{
+              ...floatingStyles,
+              display: open ? undefined : "none",
+            }}
           >
-            <Popover.Content>{children}</Popover.Content>
-          </Popover>
+            <div className="navds-timeline__popover-content">{children}</div>
+            <div
+              ref={(node) => {
+                arrowRef.current = node;
+              }}
+              style={{
+                ...(arrowX != null ? { left: arrowX } : {}),
+                ...(arrowY != null ? { top: arrowY } : {}),
+                ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
+              }}
+              className="navds-timeline__popover-arrow"
+            />
+          </div>
         )}
       </>
     );

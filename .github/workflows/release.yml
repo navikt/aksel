@@ -11,8 +11,13 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   build:
     name: "Release packages"
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    if: ${{!contains(github.event.head_commit.message, '[ci skip]')}}
     runs-on: ubuntu-latest
+    permissions:
+      id-token: "write"
+      contents: "write"
+      packages: "write"
+      pull-requests: "write"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -40,6 +45,7 @@ jobs:
         with:
           version: yarn version
           publish: yarn release
+          createGithubReleases: false
         env:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -65,3 +71,29 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
           GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+
+      - name: Generate icon.zip
+        if: steps.changesets.outputs.published == 'true'
+        run: yarn zip:icons
+
+      - name: Upload updated icon.zip to NAV CDN
+        if: steps.changesets.outputs.published == 'true'
+        uses: navikt/frontend/actions/cdn-upload/v1@main
+        with:
+          cdn-team-name: aksel
+          source: ./@navikt/aksel-icons/aksel-icons.zip
+          destination: "/icons/zip"
+
+      - name: Get @navikt/ds-css version
+        run: |
+          VERSION=$(yarn css:get-version)
+          echo "version=$VERSION" >> $GITHUB_ENV
+          echo "Version of @navikt/ds-css: ${{ env.version }}"
+
+      - name: Upload CSS to NAV CDN
+        if: steps.changesets.outputs.published == 'true'
+        uses: navikt/frontend/actions/cdn-upload/v1@main
+        with:
+          cdn-team-name: aksel
+          source: ./@navikt/core/css/dist/version/${{env.version}}
+          destination: "@navikt/ds-css"

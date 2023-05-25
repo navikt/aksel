@@ -1,19 +1,5 @@
-@import "@navikt/ds-tokens";
-@import "normalize.css";
-@import "fonts.css";
-@import "print.css";
-@import "utility.css";
-
-html,
-:host {
-  box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
+@import "./_inline-reset.css";
+@import "./_utilities.css";
 
 :root,
 :host,
@@ -38,23 +24,4 @@ body,
 
 a {
   color: var(--a-text-action);
-}
-
-button {
-  color: inherit;
-}
-
-/* https://web.dev/prefers-reduced-motion/ */
-@media (prefers-reduced-motion: reduce) {
-  *:not(.navds-loader *):not(.navds-loader),
-  ::before,
-  ::after {
-    animation-delay: -1ms !important;
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
-    background-attachment: initial !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0s !important;
-    transition-delay: 0s !important;
-  }
 }

@@ -1,17 +1,34 @@
-import dotenv from "dotenv";
-import { noCdnClient } from "../lib/sanity/sanity.server";
-import CoreDocs from "@navikt/ds-react/_docs.json";
-import InternalDocs from "@navikt/ds-react-internal/_docs.json";
 import NavnoDocs from "@navikt/ds-navno/_docs.json";
-import { SanityT } from "../lib";
+import InternalDocs from "@navikt/ds-react-internal/_docs.json";
+import CoreDocs from "@navikt/ds-react/_docs.json";
+import dotenv from "dotenv";
+
+import { noCdnClient } from "../sanity/interface/client.server";
 
 dotenv.config();
 
-const ids = [];
+const ids: string[] = [];
 
-const propList = (src: any, name: string): SanityT.Schema.ds_props[] =>
+const propList = (
+  src: {
+    displayName: string;
+    filePath: string;
+    props: {
+      [key: string]: {
+        defaultValue: any;
+        description?: string;
+        name: string;
+        parent: any;
+        declarations: any;
+        required?: boolean;
+        type?: any;
+      };
+    };
+  }[],
+  name: string
+) =>
   src.map((prop) => {
-    if (ids.includes(`${prop.displayName.toLowerCase()}_${name}_ds_props`)) {
+    if (ids.includes(`${prop?.displayName?.toLowerCase()}_${name}_ds_props`)) {
       console.error(
         `Found duplicate id: ${`${prop.displayName.toLowerCase()}_${name}_ds_props`}`
       );
@@ -24,7 +41,7 @@ const propList = (src: any, name: string): SanityT.Schema.ds_props[] =>
       title: prop.displayName,
       displayname: prop.displayName,
       filepath: prop.filePath,
-      proplist: Object.values(prop.props as unknown).map((val, y) => {
+      proplist: Object.values(prop.props).map((val, y) => {
         return {
           _type: "prop",
           _key: val.name + y,
@@ -45,13 +62,13 @@ const updateProps = async () => {
   // this is our transactional client, it won't push anything until we say .commit() later
   const transactionClient = noCdnClient(token).transaction();
 
-  propList(CoreDocs, "core").forEach((x) =>
+  propList(CoreDocs as any, "core").forEach((x) =>
     transactionClient.createOrReplace(x)
   );
-  propList(InternalDocs, "internal").forEach((x) =>
+  propList(InternalDocs as any, "internal").forEach((x) =>
     transactionClient.createOrReplace(x)
   );
-  propList(NavnoDocs, "navno").forEach((x) =>
+  propList(NavnoDocs as any, "navno").forEach((x) =>
     transactionClient.createOrReplace(x)
   );
 

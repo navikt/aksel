@@ -1,18 +1,33 @@
 import {
-  FuseHits,
+  FuseHitsT,
   FuseItemT,
-  GroupedHits,
-  SearchHit,
-  SearchResults,
-} from "@/lib";
+  GroupedHitsT,
+  IconPageItemT,
+  SearchHitT,
+  SearchResultsT,
+} from "@/types";
 import { omit } from "@navikt/ds-react";
 import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
-import { akselArticleFields } from "../../../../lib/sanity/queries";
 import { allArticleDocuments } from "../../../../sanity/config";
-import IconMetadata from "@navikt/ds-icons/meta.json";
+import IconMetadata from "@navikt/aksel-icons/metadata";
 
 const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
+
+const iconPageData: IconPageItemT = {
+  _type: "icon_page",
+  heading: "Ikoner",
+  description: "800+ open source ikoner laget av Aksel.",
+  keywords: [
+    "ikoner",
+    "ikon",
+    "icon",
+    "icons",
+    "Aksel icons",
+    "ikonpakke",
+    "svg",
+  ],
+};
 
 export default async function initialSearch(
   req: NextApiRequest,
@@ -29,7 +44,7 @@ export default async function initialSearch(
       : req.query.doc;
     doc = queryDoc.split(",");
   } else {
-    doc = [...allArticleDocuments, "icon", "aksel_standalone"];
+    doc = [...allArticleDocuments, "icon", "icon_page"];
   }
 
   const query = Array.isArray(req.query.q)
@@ -38,18 +53,19 @@ export default async function initialSearch(
 
   const hits = [
     ...(await searchSanity()),
-    ...IconMetadata.map((icon) => ({ ...icon, _type: "icon" })),
+    ...Object.values(IconMetadata).map((icon) => ({ ...icon, _type: "icon" })),
+    iconPageData,
   ];
 
-  const result: FuseHits[] = getSearchResults(
+  const result: FuseHitsT[] = getSearchResults(
     hits.map((x) => ({
       ...x,
       ...(x?.content ? { content: x.content.replace(/\n|\r/g, " ") } : {}),
     })),
     query
-  ) as unknown as FuseHits[];
+  ) as unknown as FuseHitsT[];
 
-  const filteredResult: FuseHits[] = getSearchResults(
+  const filteredResult: FuseHitsT[] = getSearchResults(
     hits
       .filter((x) => doc.includes(x._type))
       .map((x) => ({
@@ -57,12 +73,12 @@ export default async function initialSearch(
         ...(x?.content ? { content: x.content.replace(/\n|\r/g, " ") } : {}),
       })),
     query
-  ) as unknown as FuseHits[];
+  ) as unknown as FuseHitsT[];
 
   const formatedResults = formatResults(filteredResult, query);
 
-  const groupedHits: GroupedHits = formatedResults?.reduce(
-    (prev, cur: SearchHit) => {
+  const groupedHits: GroupedHitsT = formatedResults?.reduce(
+    (prev, cur: SearchHitT) => {
       if (cur.item._type in prev) {
         return { ...prev, [cur.item._type]: [...prev[cur.item._type], cur] };
       } else {
@@ -77,11 +93,12 @@ export default async function initialSearch(
     query
   );
 
-  const response: SearchResults = {
+  const response: SearchResultsT = {
     groupedHits,
     topResults: filteredResult?.length > 8 ? topResults : [],
     totalHits: filteredResult?.length ?? 0,
     hits: {
+      icon_page: result.filter((x: any) => x.item._type === "icon_page").length,
       icon: result.filter((x: any) => x.item._type === "icon").length,
       komponent_artikkel: result.filter(
         (x: any) => x.item._type === "komponent_artikkel"
@@ -109,7 +126,7 @@ function findRelevantQuery(q: string) {
   return q.split(" ")[0].toLowerCase();
 }
 
-function formatResults(res: FuseHits[], query: string): SearchHit[] {
+function formatResults(res: FuseHitsT[], query: string): SearchHitT[] {
   return res.map((x) => {
     let hightlightDesc = !!x.matches[0].indices
       .map((y) => x.matches[0].value.slice(y[0], y[1] + 1))
@@ -117,7 +134,11 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
 
     let description = "";
 
-    if (x.matches[0].key === "heading" && x.item._type !== "icon") {
+    if (
+      x.matches[0].key === "heading" &&
+      x.item._type !== "icon" &&
+      x.item._type !== "icon_page"
+    ) {
       hightlightDesc = false;
       description = x?.item.intro ?? x.item.ingress;
       const clampDesc = description?.length > 120;
@@ -153,18 +174,27 @@ function formatResults(res: FuseHits[], query: string): SearchHit[] {
         highlight: { shouldHightlight: hightlightDesc, description },
       },
       ["matches"]
-    ) as SearchHit;
+    ) as SearchHitT;
   });
 }
 
 let data = null;
 
 async function searchSanity() {
-  const sanityQueryHttp = `*[_type in [${[
-    ...allArticleDocuments,
-    "aksel_standalone",
-  ].map((x) => `"${x}"`)}] ]{
-    ${akselArticleFields}
+  const sanityQueryHttp = `*[_type in [${allArticleDocuments.map(
+    (x) => `"${x}"`
+  )}] ]{
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    updateInfo,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
+    status,
+    _type,
     "intro": pt::text(intro.body),
     "content": content[]{...,
       _type == "kode_eksempler" => {
@@ -203,7 +233,7 @@ async function searchSanity() {
 
 function getSearchResults(results, query) {
   /* https://fusejs.io/api/options.html */
-  const fuse = new Fuse<SearchHit>(results, {
+  const fuse = new Fuse<SearchHitT>(results, {
     keys: [
       { name: "heading", weight: 100 },
       { name: "ingress", weight: 50 },
@@ -214,8 +244,12 @@ function getSearchResults(results, query) {
 
       // Icons
       { name: "name", weight: 70 },
-      { name: "description", weight: 40 },
-      { name: "pageName", weight: 10 },
+      { name: "category", weight: 40 },
+      { name: "sub_category", weight: 30 },
+      { name: "keywords", weight: 10 },
+
+      // Icon page
+      { name: "description", weight: 50 },
     ],
     includeScore: true,
     shouldSort: true,

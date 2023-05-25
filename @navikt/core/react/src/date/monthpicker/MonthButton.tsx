@@ -6,7 +6,7 @@ import isSameMonth from "date-fns/isSameMonth";
 import setYear from "date-fns/setYear";
 import React, { useEffect, useRef } from "react";
 import { useDayPicker } from "react-day-picker";
-import { useSharedMonthContext } from "../hooks";
+import { useSharedMonthContext } from "../context";
 import { dateIsInCurrentMonth, isMatch, nextEnabled } from "../utils";
 
 interface MonthType {

@@ -10,7 +10,7 @@ export const LevelTwoHeading = ({
   children: [React.ReactNode | string];
   hidden?: boolean;
   id: string;
-}): JSX.Element => {
+}) => {
   return (
     <>
       {hidden && <div id={id} className="scroll-m-18" />}
@@ -20,7 +20,7 @@ export const LevelTwoHeading = ({
         level="2"
         size="large"
         className={cl(
-          "algolia-index-lvl2 max-w-text text-deepblue-800 group mb-4 mt-12 scroll-mt-20 first-of-type:mt-0 focus:outline-none",
+          "max-w-text text-deepblue-800 group mb-4 mt-12 scroll-mt-20 first-of-type:mt-0 focus:outline-none",
           {
             hidden: hidden,
             block: !hidden,

@@ -7,15 +7,11 @@ import { createAuthStore, defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
-import {
-  defaultDocumentNode,
-  publicationFlow,
-  structure,
-} from "./custom-plugins";
+import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
 
 import { getTemplates } from "./util";
 
-import { DatabaseIcon } from "@sanity/icons";
+import { DatabaseIcon, RemoveCircleIcon } from "@sanity/icons";
 import { allArticleDocuments } from "./config";
 import { schema } from "./schema";
 
@@ -31,8 +27,7 @@ export const workspaceConfig = defineConfig([
     icon: DatabaseIcon,
     auth: authStore("production"),
   },
-  /* https://github.com/sanity-io/sanity/issues/3992 */
-  /* {
+  {
     ...defaultConfig(),
     title: "Aksel Dev-miljø",
     name: "dev",
@@ -40,7 +35,7 @@ export const workspaceConfig = defineConfig([
     basePath: "/admin/dev",
     icon: RemoveCircleIcon,
     auth: authStore("development"),
-  }, */
+  },
 ]);
 
 function defaultConfig() {
@@ -109,17 +104,11 @@ function authStore(dataset: string) {
         name: "saml",
         title: "NAV SSO",
         url: "https://api.sanity.io/v2021-10-01/auth/saml/login/f3270b37",
-        logo: "/images/navlogo.svg",
       },
       {
         name: "github",
         title: "GitHub",
         url: "https://api.sanity.io/v1/auth/login/github",
-      },
-      {
-        name: "google",
-        title: "Google",
-        url: "https://api.sanity.io/v1/auth/login/google",
       },
     ],
   });

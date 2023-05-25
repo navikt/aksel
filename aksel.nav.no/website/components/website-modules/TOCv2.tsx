@@ -13,7 +13,7 @@ export function TableOfContentsv2({
   changedState: any;
   hideToc?: boolean;
   aksel?: boolean;
-}): JSX.Element {
+}) {
   const [toc, setToc] = useState<
     { heading: string; id: string; lvl3: { heading: string; id: string }[] }[]
   >([]);
@@ -42,9 +42,9 @@ export function TableOfContentsv2({
 
       const filtered = Array.from(newTree)?.filter(
         (x) =>
-          !Array.from(
-            main.getElementsByClassName("algolia-ignore-index")
-          )?.some((y) => y.contains(x))
+          !Array.from(main.getElementsByClassName("toc-ignore"))?.some((y) =>
+            y.contains(x)
+          )
       );
       const toc: {
         heading: string;
@@ -131,7 +131,7 @@ export function TableOfContentsv2({
   return (
     <aside
       className={cl(
-        "algolia-ignore-index xs:-mr-6 sticky top-20 z-[1] order-1 my-0 ml-6 mb-16 mr-auto h-full w-full max-w-[160px] flex-col items-start md:-mr-10",
+        "toc-ignore sticky top-20 z-[1] order-1 my-0 ml-6 mb-16 mr-auto h-full w-full max-w-[160px] flex-col items-start sm:-mr-6 md:-mr-10",
         {
           hidden: !renderToc,
           "hidden xl:flex": renderToc,
@@ -157,7 +157,7 @@ export function TableOfContentsv2({
                 <BodyShort
                   as="li"
                   size="small"
-                  className={cl("py-1", {
+                  className={cl("relative py-1", {
                     "font-semibold": link.id === activeId,
                     "": link.id !== activeId,
                   })}
@@ -166,7 +166,7 @@ export function TableOfContentsv2({
                     href={`#${link.id}`}
                     onClick={() => handleFocus(`${link.id}`)}
                     className={cl(
-                      "block max-w-full no-underline hover:underline",
+                      "z-10 block  max-w-full no-underline hover:underline",
                       {
                         "text-deepblue-800":
                           link.id === activeId &&
@@ -179,7 +179,7 @@ export function TableOfContentsv2({
                   </Link>
                   {link?.lvl3?.length > 0 && (
                     <ul
-                      className={cl("animate-fadeIn pt-1", {
+                      className={cl("animate-toc z-10 pt-1 ", {
                         hidden: link.id !== activeId,
                       })}
                     >

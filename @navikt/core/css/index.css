@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import "baseline/baseline.css";
+@import "baseline/index.css";
 @import "typography.css";
 @import "grid.css";
 @import "accordion.css";
@@ -8,6 +8,8 @@
 @import "content-container.css";
 @import "chat.css";
 @import "chips.css";
+@import "copybutton.css";
+@import "expansioncard.css";
 @import "guide-panel.css";
 @import "form/index.css";
 @import "help-text.css";

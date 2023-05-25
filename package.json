@@ -7,7 +7,8 @@
     "postinstall": "husky install",
     "boot": "yarn workspaces foreach -v -pA --topological-dev --no-private run build",
     "clean": "node scripts/clean.js && yarn workspace @navikt/ds-codemod clean",
-    "storybook": "concurrently \"yarn watch:tw\" \"cross-env STORYBOOK_STORIES=all storybook dev -p 6006\"",
+    "storybook": "storybook dev -p 6006",
+    "storybook:aksel": "concurrently \"yarn watch:tw\" \"cross-env STORYBOOK_STORIES=all storybook dev -p 6006\"",
     "dev": "yarn workspace aksel.nav.no dev",
     "docgen": "yarn workspaces foreach -p run docgen",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg --build-script-name build:storybook",
@@ -23,6 +24,9 @@
     "@navikt/internal/*",
     "@navikt/codemod",
     "@navikt/icons",
+    "@navikt/aksel-icons",
+    "@navikt/aksel-icons/figma-plugin",
+    "@navikt/aksel",
     "@navikt/community/*",
     "examples/*",
     "aksel.nav.no"
@@ -130,6 +134,7 @@
       "examples",
       "esm",
       "cjs",
+      "dist",
       "**/codemod/**/*.js"
     ]
   },
@@ -180,7 +185,8 @@
     },
     "ignoreFiles": [
       "**/dist/**",
-      "**/@navikt/codemod/**"
+      "**/@navikt/codemod/**",
+      "**/@navikt/aksel/**"
     ]
   },
   "repository": {
@@ -188,17 +194,20 @@
     "url": "https://github.com/navikt/aksel.git"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "0.4.7",
+    "@changesets/changelog-github": "0.4.8",
     "@changesets/cli": "2.25.0",
-    "@storybook/addon-a11y": "7.0.0-beta.54",
-    "@storybook/addon-actions": "7.0.0-beta.54",
-    "@storybook/addon-essentials": "7.0.0-beta.54",
-    "@storybook/addon-storysource": "7.0.0-beta.54",
-    "@storybook/addons": "7.0.0-beta.54",
-    "@storybook/csf-tools": "7.0.0-beta.54",
-    "@storybook/react": "7.0.0-beta.54",
-    "@storybook/react-vite": "7.0.0-beta.54",
-    "@storybook/theming": "7.0.0-beta.54",
+    "@storybook/addon-a11y": "7.0.4",
+    "@storybook/addon-actions": "7.0.4",
+    "@storybook/addon-essentials": "7.0.4",
+    "@storybook/addon-interactions": "7.0.4",
+    "@storybook/addon-storysource": "7.0.4",
+    "@storybook/addons": "7.0.4",
+    "@storybook/csf-tools": "7.0.4",
+    "@storybook/jest": "^0.1.0",
+    "@storybook/react": "7.0.4",
+    "@storybook/react-vite": "7.0.4",
+    "@storybook/testing-library": "^0.1.0",
+    "@storybook/theming": "7.0.4",
     "@typescript-eslint/parser": "^5.41.0",
     "@whitespace/storybook-addon-html": "^5.0.3",
     "chromatic": "6.5.4",
@@ -219,7 +228,7 @@
     "react": "^18.0.0",
     "react-docgen-typescript": "2.2.2",
     "react-dom": "^18.0.0",
-    "storybook": "7.0.0-beta.54",
+    "storybook": "7.0.4",
     "stylelint": "^14.8.5",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",

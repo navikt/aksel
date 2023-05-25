@@ -1,5 +1,146 @@
 # @navikt/ds-css-internal
 
+## 3.3.1
+
+## 3.3.0
+
+### Minor Changes
+
+- [#1995](https://github.com/navikt/aksel/pull/1995) [`288cef591`](https://github.com/navikt/aksel/commit/288cef591abb0557295e50cf6e696d7a51607c32) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Timeline viser nå popover/tooltip på hover.
+
+  - Popover vises nå ikke lengre ved klikk.
+  - Period og Pin bruker nå begge ny popover.
+  - Kode og styling for Popover er nå inlinet i Timeline, og bruker ikke `@navikt/ds-react` sin versjon.
+
+## 3.2.4
+
+## 3.2.3
+
+## 3.2.2
+
+## 3.2.1
+
+## 3.2.0
+
+## 3.1.3
+
+## 3.1.2
+
+### Patch Changes
+
+- [`5e79234ef`](https://github.com/navikt/aksel/commit/5e79234effb8c8fc73c9bb0c34737e99fab1510b) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset pin alignment for Timeline
+
+## 3.1.1
+
+### Patch Changes
+
+- [`14379a02c`](https://github.com/navikt/aksel/commit/14379a02c3d32091a8c33061464160d7de9f3f2e) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Timeline håndterte ikke SVG ikoner riktig
+
+## 3.1.0
+
+### Minor Changes
+
+- [#1966](https://github.com/navikt/aksel/pull/1966) [`f1c4c46eb`](https://github.com/navikt/aksel/commit/f1c4c46ebb0522561483f18e3b86b190cf9cc372) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Alle komponenter bruker nå default `:focus-visible` for fokusmarkering.
+  (Alle komponenter som bruker `:focus-visible` har også en fallback for `:focus`)
+
+## 3.0.1
+
+## 3.0.0
+
+## 2.9.8
+
+## 2.9.7
+
+## 2.9.6
+
+## 2.9.5
+
+## 2.9.4
+
+## 2.9.3
+
+## 2.9.2
+
+## 2.9.1
+
+## 2.9.0
+
+## 2.8.16
+
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+## 2.8.14
+
+## 2.8.13
+
+## 2.8.12
+
+## 2.8.11
+
+## 2.8.10
+
+## 2.8.9
+
+## 2.8.8
+
+## 2.8.7
+
+## 2.8.6
+
+## 2.8.5
+
+## 2.8.4
+
+## 2.8.3
+
+## 2.8.2
+
+## 2.8.1
+
+## 2.8.0
+
+## 2.7.8
+
+## 2.7.7
+
+## 2.7.6
+
+### Patch Changes
+
+- Justert Timeline Period sentrering
+
+## 2.7.5
+
+## 2.7.4
+
+## 2.7.3
+
+## 2.7.2
+
+### Patch Changes
+
+- [`4d24fa2c0`](https://github.com/navikt/aksel/commit/4d24fa2c07e6c7fe56abf76b939e34b3529e73c1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Timeline.Row støtter nå className, fikset css alignment ved høyde-endring i Timeline
+
+## 2.7.1
+
+## 2.7.0
+
+## 2.6.2
+
+## 2.6.1
+
+## 2.6.0
+
+## 2.5.1
+
+## 2.5.0
+
+## 2.4.3
+
 ## 2.4.2
 
 ### Patch Changes

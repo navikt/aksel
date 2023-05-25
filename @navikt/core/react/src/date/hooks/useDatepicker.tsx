@@ -1,6 +1,6 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import isWeekend from "date-fns/isWeekend";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { DayClickEventHandler, isMatch } from "react-day-picker";
 import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
@@ -10,6 +10,8 @@ import {
   isValidDate,
   parseDate,
 } from "../utils";
+import { useEscape } from "./useEscape";
+import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export interface UseDatepickerOptions
   extends Pick<
@@ -134,7 +136,7 @@ export const useDatepicker = (
   const locale = getLocaleFromString(_locale);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const daypickerRef = useRef<HTMLDivElement>(null);
+  const [daypickerRef, setDaypickerRef] = useState<HTMLDivElement>();
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
@@ -148,45 +150,30 @@ export const useDatepicker = (
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
+  const handleOpen = useCallback(
+    (open: boolean) => {
+      setOpen(open);
+      !open &&
+        setMonth(selectedDay ?? defaultSelected ?? defaultMonth ?? today);
+    },
+    [defaultMonth, defaultSelected, selectedDay, today]
+  );
+
+  useOutsideClickHandler(open, handleOpen, [
+    daypickerRef,
+    inputRef.current,
+    inputRef.current?.nextSibling,
+  ]);
+
+  useEscape(open, handleOpen, inputRef);
+
   const updateDate = (date?: Date) => {
     onDateChange?.(date);
     setSelectedDay(date);
   };
 
-  const updateValidation = (val: Partial<DateValidationT> = {}) => {
-    const msg = getValidationMessage(val);
-    onValidate?.(msg);
-  };
-
-  const handleFocusIn = useCallback(
-    (e) => {
-      /* Workaround for shadow-dom users (open) */
-      const composed = e.composedPath?.()?.[0];
-      if (!e?.target || !e?.target?.nodeType || !composed) {
-        return;
-      }
-
-      ![
-        daypickerRef.current,
-        inputRef.current,
-        inputRef.current?.nextSibling,
-      ].some(
-        (element) => element?.contains(e.target) || element?.contains(composed)
-      ) &&
-        open &&
-        setOpen(false);
-    },
-    [open]
-  );
-
-  useEffect(() => {
-    window.addEventListener("focusin", handleFocusIn);
-    window.addEventListener("pointerdown", handleFocusIn);
-    return () => {
-      window?.removeEventListener?.("focusin", handleFocusIn);
-      window?.removeEventListener?.("pointerdown", handleFocusIn);
-    };
-  }, [handleFocusIn]);
+  const updateValidation = (val: Partial<DateValidationT> = {}) =>
+    onValidate?.(getValidationMessage(val));
 
   const reset = () => {
     updateDate(defaultSelected);
@@ -204,7 +191,7 @@ export const useDatepicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    !open && openOnFocus && setOpen(true);
+    !open && openOnFocus && handleOpen(true);
     let day = parseDate(
       e.target.value,
       today,
@@ -213,8 +200,14 @@ export const useDatepicker = (
       allowTwoDigitYear
     );
     if (isValidDate(day)) {
-      setMonth(day);
       setInputValue(formatDateForInput(day, locale, "date", inputFormat));
+
+      const isBefore =
+        fromDate && day && differenceInCalendarDays(fromDate, day) > 0;
+      const isAfter =
+        toDate && day && differenceInCalendarDays(day, toDate) > 0;
+
+      !isBefore && !isAfter && setMonth(day);
     }
   };
 
@@ -233,7 +226,7 @@ export const useDatepicker = (
   /* Only allow de-selecting if not required */
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
     if (day && !selected) {
-      setOpen(false);
+      handleOpen(false);
       inputRef.current && inputRef.current.focus();
     }
 
@@ -300,24 +293,6 @@ export const useDatepicker = (
     setMonth(defaultMonth ?? day);
   };
 
-  const handleClose = useCallback(() => {
-    setOpen(false);
-    inputRef.current && inputRef.current.focus();
-  }, []);
-
-  const escape = useCallback(
-    (e) => open && e.key === "Escape" && handleClose(),
-    [handleClose, open]
-  );
-
-  useEffect(() => {
-    window.addEventListener("keydown", escape, false);
-
-    return () => {
-      window.removeEventListener("keydown", escape, false);
-    };
-  }, [escape]);
-
   const datepickerProps = {
     month,
     onMonthChange: (month) => setMonth(month),
@@ -328,10 +303,10 @@ export const useDatepicker = (
     toDate,
     today,
     open,
-    onOpenToggle: () => setOpen((x) => !x),
+    onOpenToggle: () => handleOpen(!open),
     disabled,
     disableWeekends,
-    ref: daypickerRef,
+    ref: setDaypickerRef,
   };
 
   const inputProps = {

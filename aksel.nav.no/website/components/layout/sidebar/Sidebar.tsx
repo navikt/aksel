@@ -1,6 +1,6 @@
-import { SidebarT } from "@/lib";
+import { AkselSidebarT } from "@/types";
 import { logNav } from "@/utils";
-import { Expand } from "@navikt/ds-icons";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail, Tag } from "@navikt/ds-react";
 import cl from "clsx";
 import Link from "next/link";
@@ -26,7 +26,7 @@ const NavItem = ({
         {
           "before:border-l-border-action-selected  before:top-1/2 before:h-6 before:-translate-y-1/2 before:rounded-full before:border-l-[4px]":
             isActive,
-          "before:h-full before:rounded-full before:border-l before:border-l-gray-200 hover:before:top-1/2 hover:before:h-6 hover:before:-translate-y-1/2 hover:before:border-l-2 hover:before:border-l-gray-400":
+          "before:h-full before:rounded-full before:border-l before:border-l-gray-200  hover:before:top-1/2 hover:before:h-6 hover:before:-translate-y-1/2 hover:before:border-l-2 hover:before:border-l-gray-400":
             !isActive,
         }
       )}
@@ -80,7 +80,13 @@ const NavItem = ({
   );
 };
 
-const Dropdown = ({ title, links }: { title: string; links: SidebarT }) => {
+const Dropdown = ({
+  title,
+  links,
+}: {
+  title: string;
+  links: AkselSidebarT;
+}) => {
   const [open, setOpen] = useState(true);
   const { asPath } = useRouter();
 
@@ -93,11 +99,11 @@ const Dropdown = ({ title, links }: { title: string; links: SidebarT }) => {
       >
         <Detail
           as="span"
-          className="group-focus-visible:shadow-focus group-hover:bg-surface-neutral-subtle group-active:bg-bg-surface-neutral-subtle-hover mt-6 flex w-full items-center justify-between rounded-sm pl-2 font-semibold first:mt-0"
+          className="group-focus-visible:shadow-focus group-hover:bg-surface-neutral-subtle group-active:bg-bg-surface-neutral-subtle-hover mt-6 flex w-full items-center justify-between rounded-sm pl-2 font-semibold transition first:mt-0"
         >
           {title}
-          <span className="flex h-6 w-6 items-center justify-center rounded">
-            <Expand
+          <span className="flex h-6 w-6  items-center justify-center rounded">
+            <ChevronDownIcon
               className={cl("text-base", { "rotate-180": open })}
               aria-hidden
               title={!open ? `åpne ${title}` : `lukk ${title}`}
@@ -125,7 +131,7 @@ export const Sidebar = ({
   links,
 }: {
   kategori: "Komponenter" | "Grunnleggende";
-  links: SidebarT;
+  links: AkselSidebarT;
 }) => {
   const sections = useMemo(
     () =>
@@ -146,6 +152,16 @@ export const Sidebar = ({
                 return -1;
               }
 
+              if (a.sidebarindex !== null || b.sidebarindex !== null) {
+                if (a.sidebarindex !== null && b.sidebarindex !== null) {
+                  return a.sidebarindex - b.sidebarindex;
+                } else if (a.sidebarindex !== null) {
+                  return -1;
+                } else {
+                  return 1;
+                }
+              }
+
               return a?.heading.localeCompare(b?.heading);
             }),
         }))
@@ -156,7 +172,7 @@ export const Sidebar = ({
   return (
     <div
       data-testid="ds-sidebar"
-      className="algolia-ignore-index w-sidebar bg-surface-default z-[1002] hidden shrink-0 self-start pb-4 md:block"
+      className="toc-ignore w-sidebar bg-surface-default z-[1002] hidden shrink-0 self-start pb-4 md:block"
     >
       <nav aria-label={kategori} className={cl("overflow-x-auto")}>
         <ul className="pb-4 pl-6">

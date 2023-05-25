@@ -1,5 +1,508 @@
 # @navikt/ds-react
 
+## 3.3.1
+
+### Patch Changes
+
+- [#2005](https://github.com/navikt/aksel/pull/2005) [`5533fbd5a`](https://github.com/navikt/aksel/commit/5533fbd5a3a2b3e08f3c818e2669daccafb6212a) Thanks [@cskrov](https://github.com/cskrov)! - Migrert `CopyButton` til `Clipboard API`
+
+  - `CopyButton` bruker nå [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API).
+  - `execCommand()` er fjernet fordi den [er deprecated](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand).
+  - Nettlesere som ikke støtter `Clipboard API` vil falle tilbake på `window.prompt()`.
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.3.1
+
+## 3.3.0
+
+### Patch Changes
+
+- [#1995](https://github.com/navikt/aksel/pull/1995) [`288cef591`](https://github.com/navikt/aksel/commit/288cef591abb0557295e50cf6e696d7a51607c32) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Timeline viser nå popover/tooltip på hover.
+
+  - Popover vises nå ikke lengre ved klikk.
+  - Period og Pin bruker nå begge ny popover.
+  - Kode og styling for Popover er nå inlinet i Timeline, og bruker ikke `@navikt/ds-react` sin versjon.
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.3.0
+
+## 3.2.4
+
+### Patch Changes
+
+- [#2000](https://github.com/navikt/aksel/pull/2000) [`30eee0dac`](https://github.com/navikt/aksel/commit/30eee0dac4e3e5a1379033283a6885e646e80458) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Search støtter nå htmlSize-prop
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.2.4
+
+## 3.2.3
+
+### Patch Changes
+
+- [#1993](https://github.com/navikt/aksel/pull/1993) [`475e994f4`](https://github.com/navikt/aksel/commit/475e994f494b2080ffc05eb1684b6a244e3e2969) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset small-variant av datepicker-input
+
+  - :recycle: Refactored Datepicker.Input-button for bugfix
+
+- [#1994](https://github.com/navikt/aksel/pull/1994) [`444e905e0`](https://github.com/navikt/aksel/commit/444e905e01965fd5cac40ff20c5225b072e67221) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: CopyButton har nå en `xsmall`-variant
+
+  - Kan nå lettere brukes i tabeller
+
+- Updated dependencies [[`53c98181c`](https://github.com/navikt/aksel/commit/53c98181c327ead3406bec3487c10232af7d463a)]:
+  - @navikt/aksel-icons@3.2.3
+
+## 3.2.2
+
+### Patch Changes
+
+- [`6d6267fe0`](https://github.com/navikt/aksel/commit/6d6267fe01f438f3bd67e1b4266ca3e82709561c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :fire: Fjernet use-client directive fra copybutton
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.2.2
+
+## 3.2.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.2.1
+
+## 3.2.0
+
+### Minor Changes
+
+- [#1982](https://github.com/navikt/aksel/pull/1982) [`affcab14c`](https://github.com/navikt/aksel/commit/affcab14c3d536929dfa64a36f5b43f9d0e8c3b7) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Ny komponent `<CopyButton />`!
+
+  - Erstatter `<CopyToClipboard />` fra `@navikt/ds-react-internal`
+  - CopyToClipboard er markert som deprecated. Den vil fortsatt fungere, men noen lintere vil kunne ende opp med å klage på den.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.2.0
+
+## 3.1.3
+
+### Patch Changes
+
+- [#1976](https://github.com/navikt/aksel/pull/1976) [`e8ecf309a`](https://github.com/navikt/aksel/commit/e8ecf309a910e47fd3cea6c54cd993ab1196910f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Oppdatert utseende for ToggleGroup
+
+  - Medium og Small er begge 10px lavere
+  - Mindre border-radius
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.1.3
+
+## 3.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.1.2
+
+## 3.1.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.1.1
+
+## 3.1.0
+
+### Patch Changes
+
+- [#1967](https://github.com/navikt/aksel/pull/1967) [`9d2cd9e7f`](https://github.com/navikt/aksel/commit/9d2cd9e7fffb3cf6310c88229ee39ea85db19bca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :lipstick: Oppdatert Label og Description spacing for skjemakomponenter
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.1.0
+
+## 3.0.1
+
+### Patch Changes
+
+- [`fa2ead912`](https://github.com/navikt/aksel/commit/fa2ead912a4db15d1fa7e2c3efccbe69a64dc9a7) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :fire: Fjernet ds-icons fra dependencies
+
+- [`db3846f5c`](https://github.com/navikt/aksel/commit/db3846f5cd483ad0ca24bc5938cfcdb64260f89d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset default headingSize for Accordion
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.0.1
+
+## 3.0.0
+
+### Major Changes
+
+- [#1964](https://github.com/navikt/aksel/pull/1964) [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - **Accordion**
+
+  - Accordion oppdatet til å ha chevron left-aligned.
+  - Neutral-variant lagt til
+  - Diverse nye size-options for heading og paddinger.
+  - Deler av Accordion-CSS er refaktorert. Dette vil kunne brekke overskrevne stiler.
+
+- [#1964](https://github.com/navikt/aksel/pull/1964) [`166ee5feb`](https://github.com/navikt/aksel/commit/166ee5feb3c987c4e633eb449812116bfd865d3f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Aksels løsninger bruker nå `@navikt/aksel-icons`
+
+  **Sideeffects av ikonendringer**
+
+  - Komponenter som tidligere brukte Expand-ikon har fått oppdatert animasjon (table, readmore og accordion)
+  - Alert bruker samme ikonstørrelse for alle størrelser
+  - Chips har justert padding/ikonstørrelser
+  - Datepicker hover-bug på knapper er fikset
+  - Helptekst bruker nå et custom-ikon.
+  - Select har fått justert padding rundt ikon
+  - Switch bruker samme checkmark som checkbox, er nå avrundet
+  - ReadMore har justert margin for alignment med ikon, fjernet content-animasjon
+  - Tabs bruker default text-default nå
+  - Stepper har endret hvordan den styler checkmark-ikon.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.0.0
+  - @navikt/ds-icons@3.0.0
+
+## 2.9.8
+
+### Patch Changes
+
+- Updated dependencies [[`8790c5997`](https://github.com/navikt/aksel/commit/8790c5997e0d647419bdb5080c86781d08c196b8)]:
+  - @navikt/aksel-icons@2.9.8
+  - @navikt/ds-icons@2.9.8
+
+## 2.9.7
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.7
+  - @navikt/ds-icons@2.9.7
+
+## 2.9.6
+
+### Patch Changes
+
+- Updated dependencies [[`8c8559009`](https://github.com/navikt/aksel/commit/8c8559009982911bc4402913656ba4cc6a223dd1)]:
+  - @navikt/aksel-icons@2.9.6
+  - @navikt/ds-icons@2.9.6
+
+## 2.9.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.5
+  - @navikt/ds-icons@2.9.5
+
+## 2.9.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.4
+  - @navikt/ds-icons@2.9.4
+
+## 2.9.3
+
+### Patch Changes
+
+- Updated dependencies [[`c03d53d5a`](https://github.com/navikt/aksel/commit/c03d53d5aa2dc7f06a223d48069fa21ee39bb396)]:
+  - @navikt/aksel-icons@2.9.3
+  - @navikt/ds-icons@2.9.3
+
+## 2.9.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.2
+  - @navikt/ds-icons@2.9.2
+
+## 2.9.1
+
+### Patch Changes
+
+- [#1944](https://github.com/navikt/aksel/pull/1944) [`1afdee453`](https://github.com/navikt/aksel/commit/1afdee453fbba20ec280dc868c8aa1ae2a92132d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - ExpansionCard støtter nå aria-labelledby
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.1
+  - @navikt/ds-icons@2.9.1
+
+## 2.9.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.9.0
+  - @navikt/ds-icons@2.9.0
+
+## 2.8.16
+
+### Patch Changes
+
+- [`ff001f2bc`](https://github.com/navikt/aksel/commit/ff001f2bcf5a1ff0580660a1680f4f8342e7fdff) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: ExpansionCard.Content sendte ikke className videre
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.16
+  - @navikt/ds-icons@2.8.16
+
+## 2.8.15
+
+### Patch Changes
+
+- [#1930](https://github.com/navikt/aksel/pull/1930) [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alle pakker implementerer nå npm provenance (beta)
+
+- [#1929](https://github.com/navikt/aksel/pull/1929) [`284534246`](https://github.com/navikt/aksel/commit/28453424684e00d65fd8d204f1405f7ed6a82fbf) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bedre håndtering av visning for out-of-range dates i datepickers
+
+- Updated dependencies [[`dfe923582`](https://github.com/navikt/aksel/commit/dfe923582a57b41c77cfb4fbfa7c56be047ef2b0), [`6682be1c8`](https://github.com/navikt/aksel/commit/6682be1c8e6562213c64e5be4bed70fef54ab865)]:
+  - @navikt/aksel-icons@2.8.15
+  - @navikt/ds-icons@2.8.15
+
+## 2.8.14
+
+### Patch Changes
+
+- [`f0d9a8853`](https://github.com/navikt/aksel/commit/f0d9a8853f56854a4049bd3f6cc34968e9d6c380) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fixes shown month on open in Datepicker/MonthPicker, better handling of out-of-range 'today'
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.14
+  - @navikt/ds-icons@2.8.14
+
+## 2.8.13
+
+### Patch Changes
+
+- Updated dependencies [[`ecd6241e5`](https://github.com/navikt/aksel/commit/ecd6241e5751519fbda800a5f41a613957dbf77c)]:
+  - @navikt/aksel-icons@2.8.13
+  - @navikt/ds-icons@2.8.13
+
+## 2.8.12
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.12
+  - @navikt/ds-icons@2.8.12
+
+## 2.8.11
+
+### Patch Changes
+
+- Updated dependencies [[`270427910`](https://github.com/navikt/aksel/commit/2704279107a5fbf93048de37d014e78f6721438f)]:
+  - @navikt/aksel-icons@2.8.11
+  - @navikt/ds-icons@2.8.11
+
+## 2.8.10
+
+### Patch Changes
+
+- [#1907](https://github.com/navikt/aksel/pull/1907) [`63fdacf0f`](https://github.com/navikt/aksel/commit/63fdacf0f8fa09593c64b35b49381d6c8a1befd1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :recycle: Refactor event-handling i datepicker-hooks
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.10
+  - @navikt/ds-icons@2.8.10
+
+## 2.8.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.9
+  - @navikt/ds-icons@2.8.9
+
+## 2.8.8
+
+### Patch Changes
+
+- Updated dependencies [[`ed8e28454`](https://github.com/navikt/aksel/commit/ed8e284540a9e3a5be7d1d5e393f31db86962613)]:
+  - @navikt/aksel-icons@2.8.8
+  - @navikt/ds-icons@2.8.8
+
+## 2.8.7
+
+### Patch Changes
+
+- [`7f3f025db`](https://github.com/navikt/aksel/commit/7f3f025db2ad605df4240605a733d10d08db753a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset typografi for radio, checkbox. Button token for tertiary
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.7
+  - @navikt/ds-icons@2.8.7
+
+## 2.8.6
+
+### Patch Changes
+
+- [`2eb358ad8`](https://github.com/navikt/aksel/commit/2eb358ad888979d21c385b3900973946f3f466be) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Alert, Chips og ErrorSummary har nå bedre utvalg av tokens
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.6
+  - @navikt/ds-icons@2.8.6
+
+## 2.8.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.5
+  - @navikt/ds-icons@2.8.5
+
+## 2.8.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.4
+  - @navikt/ds-icons@2.8.4
+
+## 2.8.3
+
+### Patch Changes
+
+- [#1875](https://github.com/navikt/aksel/pull/1875) [`f862aa9c2`](https://github.com/navikt/aksel/commit/f862aa9c2ec71ffdb295708dc6dad6b77af9519e) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Textarea har oppdatert counter-tekst + mulighet for lokalisering
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.3
+  - @navikt/ds-icons@2.8.3
+
+## 2.8.2
+
+### Patch Changes
+
+- [#1870](https://github.com/navikt/aksel/pull/1870) [`9c495cf50`](https://github.com/navikt/aksel/commit/9c495cf5037a7453e51e273ab93e4232576f4958) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert typografi for ExpansioCard
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.2
+  - @navikt/ds-icons@2.8.2
+
+## 2.8.1
+
+### Patch Changes
+
+- [`1276b4d7e`](https://github.com/navikt/aksel/commit/1276b4d7efd831d20345292dbb21a11d100a0ddd) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Endret default title-size til medium for ExpansionCard
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.1
+  - @navikt/ds-icons@2.8.1
+
+## 2.8.0
+
+### Minor Changes
+
+- [#1820](https://github.com/navikt/aksel/pull/1820) [`c6d51a019`](https://github.com/navikt/aksel/commit/c6d51a01902e4fd7916a422e17ed175f39acd458) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Ny komponent! ExpansionCard. Oppfølger fra gammel Ekspanderbartpanel.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@2.8.0
+  - @navikt/ds-icons@2.8.0
+
+## 2.7.8
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.8
+
+## 2.7.7
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.7
+
+## 2.7.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.6
+
+## 2.7.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.5
+
+## 2.7.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.4
+
+## 2.7.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.3
+
+## 2.7.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.2
+
+## 2.7.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.1
+
+## 2.7.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.7.0
+
+## 2.6.2
+
+### Patch Changes
+
+- [`59d32e52c`](https://github.com/navikt/aksel/commit/59d32e52c437759e66aa50d200b4264a6ba53069) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset React18 problem med TextareaAutosize
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.6.2
+
+## 2.6.1
+
+### Patch Changes
+
+- [`1c5e06438`](https://github.com/navikt/aksel/commit/1c5e06438ce9ff8225d5b2b2bf1f94348dfefe9c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Ny onSearchClick-prop i Search for lettere submit-handling
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.6.1
+
+## 2.6.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.6.0
+
+## 2.5.1
+
+### Patch Changes
+
+- [`ac1e69b34`](https://github.com/navikt/aksel/commit/ac1e69b342ae207db2e80e3058555c56902e5832) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :recycle: Refaktorert nested-list logikk
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.5.1
+
+## 2.5.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.5.0
+
+## 2.4.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.4.3
+
 ## 2.4.2
 
 ### Patch Changes

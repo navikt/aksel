@@ -8,16 +8,10 @@ module.exports = {
     "./stories/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    /* Flytt ut fra extend og refactor bruk av screen */
-    screens: {
-      xs: "480px",
-      sm: "648px",
-      md: "768px",
-      lg: "1024px",
-      xl: "1280px",
-      "2xl": "1440px",
-    },
     extend: {
+      screens: {
+        "2xl": "1440px",
+      },
       colors: {
         pink: {
           50: "#fdf2f8",
@@ -77,7 +71,7 @@ module.exports = {
       },
       spacing: {
         0: 0,
-        header: "3.5rem",
+        header: "4rem",
         sidebar: "16rem",
         text: "600px",
       },
@@ -119,6 +113,10 @@ module.exports = {
         },
         fadeIn: {
           "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+        toc: {
+          "0%": { opacity: 0.2 },
           "100%": { opacity: 1 },
         },
         expand: {
@@ -197,6 +195,7 @@ module.exports = {
         shimmerBg: "shimmerBg 15s ease infinite",
         fadeInRight: "fadeInRight 0.30s ease-in-out forwards",
         fadeIn: "fadeIn 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
+        toc: "toc 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
         expand: "expand 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
         expandLg: "expandLg 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
         popup: "popup 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
