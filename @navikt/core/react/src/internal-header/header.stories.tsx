@@ -9,7 +9,7 @@ import React from "react";
 import { InternalHeader, Dropdown } from "..";
 
 export default {
-  title: "ds-react-internal/InternalHeader",
+  title: "ds-react/InternalHeader",
   component: InternalHeader,
   argTypes: {
     user: {

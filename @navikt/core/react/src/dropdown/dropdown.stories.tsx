@@ -4,7 +4,7 @@ import { Meta } from "@storybook/react";
 import { Button } from "@navikt/ds-react";
 
 export default {
-  title: "ds-react-internal/Dropdown",
+  title: "ds-react/Dropdown",
   component: Dropdown,
 } as Meta;
 
