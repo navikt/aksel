@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { omit } from "../util";
 
-export interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   /**
    * @default text
@@ -18,10 +18,10 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {
   width?: number | string;
 }
 
-export const Skeleton = forwardRef<HTMLSpanElement, SkeletonProps>(
+export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
   ({ className, variant = "text", ...rest }, ref) => {
     return (
-      <span
+      <div
         {...omit(rest, ["width", "height"])}
         ref={ref}
         className={cl(
