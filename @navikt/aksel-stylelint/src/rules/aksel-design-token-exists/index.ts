@@ -30,15 +30,13 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
     `However, that token doesn't seem to exist in the design system. ` +
     `\n\nVersion: ${packageVersion}`,
   propOverride: (node: any) =>
-    `property "${node.prop}" tries to override a global design token, this is highly discouraged. ` +
-    `\n\nVersion: ${packageVersion}`,
-  propOverrideNotExist: (node: any) =>
-    `property "${node.prop}" tries to override a global design token, this is highly discouraged. ` +
-    `Also, that token doesn't exist. ` +
+    `property "${node.prop}" tries to override a global level token, this is highly discouraged. ` +
+    `It is better to override a component level token ('--ac-') or create a custom token instead. ` +
     `\n\nVersion: ${packageVersion}`,
   valueWrong: (node: any, invalidValues: string) =>
     `property "${node.prop}" has offending value "${invalidValues}". ` +
-    `The value references a component level token. It is better to reference a global level token instead. ` +
+    `The value references a component level token. It is better to either reference a global level token ('--a-') or ` +
+    `create a custom token instead. ` +
     `\n\nVersion: ${packageVersion}`,
   valueNotExist: (node: any, invalidValues: string) =>
     `property "${node.prop}" has offending value "${invalidValues}", ` +
@@ -144,8 +142,8 @@ const checkInvalidPropNames = (
   rootNode: PostCSSNode
 ) => {
   if (isCustomProperty(prop)) {
-    if (prop.startsWith(prefix_a)) {
-      if (tokenExists(controlledPrefixes, prop)) {
+    if (controlledPrefixes.some((prefix) => prop.startsWith(prefix))) {
+      if (prop.startsWith(prefix_a) && tokenExists(controlledPrefixes, prop)) {
         stylelint.utils.report({
           message: messages.propOverride(rootNode),
           node: rootNode,
@@ -153,26 +151,27 @@ const checkInvalidPropNames = (
           ruleName,
           word: prop,
         });
-      } else {
+        if (!tokenExists(controlledPrefixes, prop)) {
+          stylelint.utils.report({
+            message: messages.propNotExist(rootNode),
+            node: rootNode,
+            result: postcssResult,
+            ruleName,
+            word: prop,
+          });
+        }
+      } else if (
+        controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
+        !tokenExists(controlledPrefixes, prop)
+      ) {
         stylelint.utils.report({
-          message: messages.propOverrideNotExist(rootNode),
+          message: messages.propNotExist(rootNode),
           node: rootNode,
           result: postcssResult,
           ruleName,
           word: prop,
         });
       }
-    } else if (
-      controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
-      !tokenExists(controlledPrefixes, prop)
-    ) {
-      stylelint.utils.report({
-        message: messages.propNotExist(rootNode),
-        node: rootNode,
-        result: postcssResult,
-        ruleName,
-        word: prop,
-      });
     }
   }
 };
