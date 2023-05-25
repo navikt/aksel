@@ -15,9 +15,9 @@ const tokenCSSFile = "./index.css";
 const tokenJsonFile = "./tokens.json";
 const internalTokensJSONFile = "./internal-tokens.json";
 
-export const controlledPrefixes = ["--ac-", "--a-"];
 const prefix_a = "--a-";
 const prefix_ac = "--ac-";
+export const controlledPrefixes = [prefix_a, prefix_ac];
 
 let allowedTokenNames = [];
 
@@ -98,8 +98,7 @@ const checkDeclValue = (
           ruleName,
           word: node.value,
         });
-      }
-      if (!tokenExists(controlledPrefixes, node.value))
+      } else {
         stylelint.utils.report({
           message: messages.valueNotExist(rootNode, node.value),
           node: rootNode,
@@ -107,6 +106,7 @@ const checkDeclValue = (
           ruleName,
           word: node.value,
         });
+      }
     } else if (
       node.type === "word" &&
       isCustomProperty(node.value) &&
@@ -133,26 +133,27 @@ const checkDeclProp = (
   postcssResult: stylelint.PostcssResult,
   rootNode: PostCSSNode
 ) => {
-  if (isCustomProperty(prop)) {
-    if (controlledPrefixes.some((prefix) => prop.startsWith(prefix))) {
-      if (prop.startsWith(prefix_a)) {
-        stylelint.utils.report({
-          message: messages.propOverrideGlobal(rootNode),
-          node: rootNode,
-          result: postcssResult,
-          ruleName,
-          word: prop,
-        });
-      }
-      if (!tokenExists(controlledPrefixes, prop)) {
-        stylelint.utils.report({
-          message: messages.propNotExist(rootNode),
-          node: rootNode,
-          result: postcssResult,
-          ruleName,
-          word: prop,
-        });
-      }
+  if (
+    isCustomProperty(prop) &&
+    controlledPrefixes.some((prefix) => prop.startsWith(prefix))
+  ) {
+    if (prop.startsWith(prefix_a)) {
+      stylelint.utils.report({
+        message: messages.propOverrideGlobal(rootNode),
+        node: rootNode,
+        result: postcssResult,
+        ruleName,
+        word: prop,
+      });
+    }
+    if (!tokenExists(controlledPrefixes, prop)) {
+      stylelint.utils.report({
+        message: messages.propNotExist(rootNode),
+        node: rootNode,
+        result: postcssResult,
+        ruleName,
+        word: prop,
+      });
     }
   }
 };
