@@ -20,6 +20,7 @@ export * from "./panel";
 export * from "./popover";
 export * from "./provider";
 export * from "./read-more";
+export * from "./skeleton";
 export * from "./stepper";
 export * from "./table";
 export * from "./tabs";

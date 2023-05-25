@@ -4,8 +4,17 @@ import { omit } from "../util";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {
   children?: React.ReactNode;
+  /**
+   * @default text
+   */
   variant?: "circle" | "rectangle" | "rounded" | "text";
+  /**
+   * When not infering height from children, you must specify height
+   */
   height?: number | string;
+  /**
+   * When not infering width from children, you must specify width
+   */
   width?: number | string;
 }
 
