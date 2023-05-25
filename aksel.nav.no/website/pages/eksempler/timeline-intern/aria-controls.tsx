@@ -154,6 +154,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 4,
   desc: "Vi anbefaler å bruke 'aria-controls' begge veier mellom aktive perioder og panelet det refererer til. Dette gir brukere av enkelte skjermlesere keyboard-shortcuts for å hoppe mellom perioder og panelet.",
 };
