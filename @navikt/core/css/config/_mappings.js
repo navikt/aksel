@@ -117,6 +117,7 @@ const StyleMappings = {
     { component: "ReadMore", main: "read-more.css", dependencies: [typoCss] },
     { component: "Search", main: formCss, dependencies: [typoCss] },
     { component: "Select", main: formCss, dependencies: [typoCss] },
+    { component: "Skeleton", main: "skeleton.css", dependencies: [] },
     { component: "Stepper", main: "stepper.css", dependencies: [typoCss] },
     { component: "Switch", main: formCss, dependencies: [typoCss] },
     { component: "Table", main: "table.css", dependencies: [typoCss] },

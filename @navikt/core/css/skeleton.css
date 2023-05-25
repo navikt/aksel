@@ -1,8 +1,8 @@
 .navds-skeleton {
   display: block;
-  background-color: var(--a-surface-neutral-subtle);
+  background-color: var(--ac-skeleton-bg, var(--a-border-divider));
   height: 1.3em;
-  animation: pulseAnimation 1.5s ease-in-out 0.5s infinite;
+  animation: akselSkeletonAnimation 0.8s linear infinite alternate;
 }
 
 .navds-skeleton--has-children {
@@ -46,16 +46,12 @@
   border-radius: var(--a-border-radius-xlarge);
 }
 
-@keyframes pulseAnimation {
+@keyframes akselSkeletonAnimation {
   0% {
     opacity: 1;
   }
 
-  50% {
-    opacity: 0.4;
-  }
-
   100% {
-    opacity: 1;
+    opacity: 0.6;
   }
 }
