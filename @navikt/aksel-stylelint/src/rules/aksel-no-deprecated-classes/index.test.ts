@@ -7,12 +7,18 @@ getTestRule()({
   ruleName: rule.ruleName,
   config: true,
 
-  accept: [{ code: ".foo-navds-bar {}", description: "allowed class name" }],
+  accept: [
+    {
+      code: ".navds-foo, navdsi-bar, .baz {}",
+      description: "allowed class names",
+      // Allowed because this rule only checks deprecated class names. See also aksel-no-class-override.
+    },
+  ],
 
   reject: [
     {
       code: ".foo, \n .navdsi-deprecated-example \n .bar {}",
-      description: "selector with disallowed class name .navds-*",
+      description: "selector with deprecated class name 1",
       message: messages.unexpected(
         "navdsi-deprecated-example",
         deprecations[0].message
@@ -24,7 +30,7 @@ getTestRule()({
     },
     {
       code: ".foo .navdsi-other-deprecated-example \n .bar {}",
-      description: "selector with disallowed class name .navdsi-*",
+      description: "selector with deprecated class name 2",
       message: messages.unexpected(
         "navdsi-other-deprecated-example",
         deprecations[0].message
