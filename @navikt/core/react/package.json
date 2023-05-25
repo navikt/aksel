@@ -37,7 +37,7 @@
     "test": "TZ=UTC jest"
   },
   "dependencies": {
-    "@floating-ui/react": "0.17.0",
+    "@floating-ui/react": "0.24.1",
     "@navikt/aksel-icons": "^3.2.4",
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",

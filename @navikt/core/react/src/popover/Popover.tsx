@@ -102,8 +102,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const {
       x,
       y,
-      reference,
-      floating,
       strategy,
       context,
       update,
@@ -129,12 +127,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     ]);
 
     useClientLayoutEffect(() => {
-      reference(anchorEl);
+      refs.setReference(anchorEl);
     }, [anchorEl]);
 
     const floatingRef = useMemo(
-      () => mergeRefs([floating, ref]),
-      [floating, ref]
+      () => mergeRefs([refs.setFloating, ref]),
+      [refs.setFloating, ref]
     );
 
     useClientLayoutEffect(() => {
