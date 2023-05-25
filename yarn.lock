@@ -4110,6 +4110,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint":
+  version: 0.0.0-use.local
+  resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
+  dependencies:
+    "@types/jest": ^29.0.0
+    jest: ^29.0.0
+    stylelint: ^14.8.5
+  languageName: unknown
+  linkType: soft
+
 "@navikt/aksel@workspace:@navikt/aksel":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"

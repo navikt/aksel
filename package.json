@@ -148,8 +148,7 @@
     ],
     "plugins": [
       "stylelint-value-no-unknown-custom-properties",
-      "stylelint-declaration-block-no-ignored-properties",
-      "@navikt/aksel-stylelint"
+      "stylelint-declaration-block-no-ignored-properties"
     ],
     "rules": {
       "plugin/declaration-block-no-ignored-properties": true,
@@ -185,8 +184,7 @@
             "@navikt/core/tokens/dist/tokens.css"
           ]
         }
-      ],
-      "plugin/aksel-all-rules": true
+      ]
     },
     "ignoreFiles": [
       "**/dist/**",
