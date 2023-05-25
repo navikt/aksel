@@ -1,6 +1,19 @@
-import { mergeRefs, Popover } from "@navikt/ds-react";
+import {
+  autoUpdate,
+  arrow as flArrow,
+  flip,
+  offset,
+  safePolygon,
+  shift,
+  useDismiss,
+  useFloating,
+  useFocus,
+  useHover,
+  useInteractions,
+} from "@floating-ui/react";
+import { mergeRefs, useEventListener } from "@navikt/ds-react";
 import cl from "clsx";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -8,7 +21,9 @@ import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./index";
 
 interface TimelineClickablePeriodProps extends PeriodProps {
-  onSelectPeriod?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onSelectPeriod?: (
+    e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
+  ) => void;
   isActive?: boolean;
   periodRef: React.ForwardedRef<HTMLButtonElement>;
 }
@@ -30,16 +45,68 @@ const ClickablePeriod = React.memo(
     restProps,
     periodRef,
   }: TimelineClickablePeriodProps) => {
-    const buttonRef = useRef<HTMLButtonElement | null>(null);
-    const [selected, setSelected] = useState(false);
+    const [open, setOpen] = useState(false);
     const { index } = useRowContext();
     const { firstFocus } = usePeriodContext();
     const { initiate, addFocusable } = useTimelineContext();
+    const arrowRef = useRef<HTMLDivElement | null>(null);
+
+    const {
+      context,
+      placement,
+      middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+      refs,
+      floatingStyles,
+    } = useFloating({
+      placement: "top",
+      open: open,
+      onOpenChange: setOpen,
+      middleware: [
+        offset(16),
+        shift(),
+        flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        flArrow({ element: arrowRef, padding: 5 }),
+      ],
+      whileElementsMounted: autoUpdate,
+    });
+
+    const { getFloatingProps, getReferenceProps } = useInteractions([
+      useHover(context, {
+        handleClose: safePolygon(),
+        restMs: 25,
+        delay: { open: 1000 },
+      }),
+      useFocus(context),
+      useDismiss(context),
+    ]);
 
     const mergedRef = useMemo(
-      () => mergeRefs([buttonRef, periodRef]),
-      [periodRef]
+      () => mergeRefs([refs.setReference, periodRef]),
+      [periodRef, refs.setReference]
     );
+
+    useEventListener(
+      "focusin",
+      useCallback(
+        (e: FocusEvent) => {
+          if (
+            ![refs.domReference.current, refs?.floating?.current].some(
+              (element) => element?.contains(e.target as Node)
+            )
+          ) {
+            open && setOpen(false);
+          }
+        },
+        [open, refs.domReference, refs?.floating]
+      )
+    );
+
+    const staticSide = {
+      top: "bottom",
+      right: "left",
+      bottom: "top",
+      left: "right",
+    }[placement.split("-")[0]];
 
     return (
       <>
@@ -50,10 +117,6 @@ const ClickablePeriod = React.memo(
             firstFocus && addFocusable(r, index);
             mergedRef(r);
           }}
-          onClick={(e) => {
-            children && setSelected((x) => !x);
-            onSelectPeriod?.(e);
-          }}
           aria-label={ariaLabel(start, end, status, statusLabel)}
           className={cl(
             "navdsi-timeline__period--clickable",
@@ -63,26 +126,64 @@ const ClickablePeriod = React.memo(
               "navdsi-timeline__period--selected": isActive,
             }
           )}
-          style={{
-            width: `${width}%`,
-            [direction]: `${left}%`,
-          }}
-          aria-expanded={children ? selected : undefined}
-          onFocus={() => {
-            initiate(index);
-          }}
+          aria-expanded={children ? open : undefined}
+          aria-current={isActive || undefined}
+          {...getReferenceProps({
+            onFocus: () => {
+              initiate(index);
+            },
+            onKeyDown: (e) => {
+              restProps?.onKeydown?.(e);
+              if (e.key === "Enter") {
+                setOpen((prev) => !prev);
+              }
+              if (e.key === " ") {
+                onSelectPeriod?.(e);
+                setOpen(false);
+              }
+            },
+            style: {
+              width: `${width}%`,
+              [direction]: `${left}%`,
+            },
+            onClick: (e) => {
+              restProps?.onClick?.(e);
+              if (e.detail === 0) {
+                return;
+              }
+              onSelectPeriod?.(e);
+            },
+          })}
         >
           <span className="navdsi-timeline__period--inner">{icon}</span>
         </button>
         {children && (
-          <Popover
-            open={selected}
-            onClose={() => setSelected(false)}
-            anchorEl={buttonRef.current}
-            strategy="fixed"
+          <div
+            className="navds-timeline__popover"
+            data-placement={placement}
+            aria-hidden={!open}
+            ref={refs.setFloating}
+            {...getFloatingProps({
+              tabIndex: -1,
+            })}
+            style={{
+              ...floatingStyles,
+              display: open ? undefined : "none",
+            }}
           >
-            <Popover.Content>{children}</Popover.Content>
-          </Popover>
+            <div className="navds-timeline__popover-content">{children}</div>
+            <div
+              ref={(node) => {
+                arrowRef.current = node;
+              }}
+              style={{
+                ...(arrowX != null ? { left: arrowX } : {}),
+                ...(arrowY != null ? { top: arrowY } : {}),
+                ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
+              }}
+              className="navds-timeline__popover-arrow"
+            />
+          </div>
         )}
       </>
     );

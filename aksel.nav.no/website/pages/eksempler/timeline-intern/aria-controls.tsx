@@ -1,11 +1,11 @@
 import {
-  Coronavirus,
-  Edit,
-  Hospital,
-  Money,
-  People,
-  Vacation,
-} from "@navikt/ds-icons";
+  VirusIcon,
+  PencilIcon,
+  HospitalIcon,
+  PiggybankIcon,
+  PersonGroupIcon,
+  ParasolBeachIcon,
+} from "@navikt/aksel-icons";
 import { Timeline } from "@navikt/ds-react-internal";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
@@ -16,7 +16,10 @@ const Example = () => {
   return (
     <div className="min-w-[800px] overflow-x-auto">
       <Timeline>
-        <Timeline.Row label="Person" icon={<People aria-hidden />}>
+        <Timeline.Pin date={new Date("Mar 15 2022")}>
+          <p>Utbetalt: 12 345 kr</p>
+        </Timeline.Pin>
+        <Timeline.Row label="Person" icon={<PersonGroupIcon aria-hidden />}>
           {person.map((p: any, i) => {
             return (
               <Timeline.Period
@@ -29,11 +32,13 @@ const Example = () => {
                 isActive={activePeriod && activePeriod === p.id}
                 aria-controls="timeline-panel"
                 id={p.id}
-              />
+              >
+                {p?.children ?? null}
+              </Timeline.Period>
             );
           })}
         </Timeline.Row>
-        <Timeline.Row label="Sykehus A" icon={<Hospital aria-hidden />}>
+        <Timeline.Row label="Sykehus A" icon={<HospitalIcon aria-hidden />}>
           {jobb.map((p: any, i) => {
             return (
               <Timeline.Period
@@ -46,7 +51,9 @@ const Example = () => {
                 isActive={activePeriod && activePeriod === p.id}
                 aria-controls="timeline-panel"
                 id={p.id}
-              />
+              >
+                {p?.children ?? null}
+              </Timeline.Period>
             );
           })}
         </Timeline.Row>
@@ -66,72 +73,76 @@ const Example = () => {
 
 const person = [
   {
-    id: 1,
     start: new Date("Jan 1 2022"),
     end: new Date("Jan 31 2022"),
     status: "warning",
-    icon: <Edit aria-hidden />,
+    icon: <PencilIcon aria-hidden />,
     statusLabel: "Sykemeldt",
+    children: <div>50% sykemeldt</div>,
+    id: 1,
   },
   {
-    id: 2,
     start: new Date("Apr 1 2022"),
     end: new Date("Apr 30 2022"),
     status: "neutral",
-    icon: <Vacation aria-hidden />,
+    icon: <ParasolBeachIcon aria-hidden />,
     label: "test",
     statusLabel: "Ferie",
+    id: 2,
   },
   {
-    id: 3,
     start: new Date("Jul 1 2022"),
     end: new Date("Jul 31 2022"),
     status: "warning",
-    icon: <Edit aria-hidden />,
+    icon: <PencilIcon aria-hidden />,
     statusLabel: "Sykemeldt",
+    id: 3,
   },
   {
-    id: 4,
     start: new Date("Aug 1 2022"),
     end: new Date("Aug 30 2022"),
     status: "warning",
-    icon: <Coronavirus aria-hidden />,
+    icon: <VirusIcon aria-hidden />,
     statusLabel: "Stønad korona",
+    id: 4,
   },
 ];
 
 const jobb = [
   {
-    id: 5,
     start: new Date("Feb 2 2022"),
     end: new Date("Mar 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
-    icon: <Money aria-hidden />,
+    icon: <PiggybankIcon aria-hidden />,
+    children: <div>100% utbetaling</div>,
+    id: 11,
   },
   {
-    id: 6,
     start: new Date("Mar 2 2022"),
     end: new Date("Apr 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
-    icon: <Money aria-hidden />,
+    icon: <PiggybankIcon aria-hidden />,
+    children: <div>100% utbetaling</div>,
+    id: 22,
   },
   {
-    id: 7,
     start: new Date("May 2 2022"),
     end: new Date("June 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
-    icon: <Money aria-hidden />,
+    icon: <PiggybankIcon aria-hidden />,
+    children: <div>100% utbetaling</div>,
+    id: 33,
   },
   {
-    id: 8,
     start: new Date("June 2 2022"),
     end: new Date("July 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
-    icon: <Money aria-hidden />,
+    icon: <PiggybankIcon aria-hidden />,
+    id: 44,
   },
 ];
 
@@ -140,9 +151,9 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "'onSelectPeriod' og 'isActive' lar deg velge aktive perioder for visning av ekstra informasjon en annen plass i UI.",
 };
 
 export const args = {
-  index: 2,
+  index: 4,
+  desc: "Vi anbefaler å bruke 'aria-controls' begge veier mellom aktive perioder og panelet det refererer til. Dette gir brukere av enkelte skjermlesere keyboard-shortcuts for å hoppe mellom perioder og panelet.",
 };
