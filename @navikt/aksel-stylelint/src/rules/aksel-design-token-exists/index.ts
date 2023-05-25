@@ -135,7 +135,7 @@ const checkDeclProp = (
 ) => {
   if (isCustomProperty(prop)) {
     if (controlledPrefixes.some((prefix) => prop.startsWith(prefix))) {
-      if (prop.startsWith(prefix_a) && tokenExists(controlledPrefixes, prop)) {
+      if (prop.startsWith(prefix_a)) {
         stylelint.utils.report({
           message: messages.propOverrideGlobal(rootNode),
           node: rootNode,
@@ -143,19 +143,8 @@ const checkDeclProp = (
           ruleName,
           word: prop,
         });
-        if (!tokenExists(controlledPrefixes, prop)) {
-          stylelint.utils.report({
-            message: messages.propNotExist(rootNode),
-            node: rootNode,
-            result: postcssResult,
-            ruleName,
-            word: prop,
-          });
-        }
-      } else if (
-        controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
-        !tokenExists(controlledPrefixes, prop)
-      ) {
+      }
+      if (!tokenExists(controlledPrefixes, prop)) {
         stylelint.utils.report({
           message: messages.propNotExist(rootNode),
           node: rootNode,
