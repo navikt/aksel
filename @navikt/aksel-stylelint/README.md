@@ -89,6 +89,25 @@ Warns when trying to override design system styling by using class selectors tha
 }
 ```
 
+## aksel-no-deprecated-classes
+
+Warns when you try to use deprecated class names.
+
+❌ Incorrect:
+
+```css
+.navdsi-deprecated-example {
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+}
+```
+
+✅ Correct:
+
+```css
+.guaranteed-not-deprecated {
+}
+```
+
 # Install
 
 ```bash
