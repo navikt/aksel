@@ -29,11 +29,11 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
     `using one of the following prefixes [${controlledPrefixes}]. ` +
     `However, that token doesn't seem to exist in the design system. ` +
     `\n\nVersion: ${packageVersion}`,
-  propOverride: (node: any) =>
+  propOverrideGlobal: (node: any) =>
     `property "${node.prop}" tries to override a global level token, this is highly discouraged. ` +
     `It is better to override a component level token ('--ac-') or create a custom token instead. ` +
     `\n\nVersion: ${packageVersion}`,
-  valueWrong: (node: any, invalidValues: string) =>
+  valueRefComponent: (node: any, invalidValues: string) =>
     `property "${node.prop}" has offending value "${invalidValues}". ` +
     `The value references a component level token. It is better to either reference a global level token ('--a-') or ` +
     `create a custom token instead. ` +
@@ -41,7 +41,7 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
   valueNotExist: (node: any, invalidValues: string) =>
     `property "${node.prop}" has offending value "${invalidValues}", ` +
     `and the value seems like it intends to reference a design token by ` +
-    `using one of the following prefixes [${prefix_ac}]. ` +
+    `using one of the following prefixes [${controlledPrefixes}]. ` +
     `However, that token doesn't seem to exist in the design system. ` +
     `\n\nVersion: ${packageVersion}`,
 });
@@ -76,7 +76,7 @@ const tokenExists = (controlledPrefixes: string[], inputToken: string) => {
   return allowedTokenNames.includes(inputToken);
 };
 
-const checkInvalidVariableNames = (
+const checkDeclValue = (
   controlledPrefixes: string[],
   value: string,
   postcssResult: stylelint.PostcssResult,
@@ -92,7 +92,7 @@ const checkInvalidVariableNames = (
     ) {
       if (tokenExists(controlledPrefixes, node.value)) {
         stylelint.utils.report({
-          message: messages.valueWrong(rootNode, node.value),
+          message: messages.valueRefComponent(rootNode, node.value),
           node: rootNode,
           result: postcssResult,
           ruleName,
@@ -120,14 +120,6 @@ const checkInvalidVariableNames = (
           ruleName,
           word: node.value,
         });
-      } else if (tokenExists(controlledPrefixes, node.value)) {
-        stylelint.utils.report({
-          message: messages.valueWrong(rootNode, node.value),
-          node: rootNode,
-          result: postcssResult,
-          ruleName,
-          word: node.value,
-        });
       }
     }
   });
@@ -135,7 +127,7 @@ const checkInvalidVariableNames = (
   if (invalidValues.length > 0) return invalidValues;
 };
 
-const checkInvalidPropNames = (
+const checkDeclProp = (
   controlledPrefixes: string[],
   prop: string,
   postcssResult: stylelint.PostcssResult,
@@ -145,7 +137,7 @@ const checkInvalidPropNames = (
     if (controlledPrefixes.some((prefix) => prop.startsWith(prefix))) {
       if (prop.startsWith(prefix_a) && tokenExists(controlledPrefixes, prop)) {
         stylelint.utils.report({
-          message: messages.propOverride(rootNode),
+          message: messages.propOverrideGlobal(rootNode),
           node: rootNode,
           result: postcssResult,
           ruleName,
@@ -182,8 +174,8 @@ const ruleFunction: stylelint.Rule = () => {
       const prop = node.prop;
       const value = node.value;
 
-      checkInvalidVariableNames(controlledPrefixes, value, postcssResult, node);
-      checkInvalidPropNames(controlledPrefixes, prop, postcssResult, node);
+      checkDeclValue(controlledPrefixes, value, postcssResult, node);
+      checkDeclProp(controlledPrefixes, prop, postcssResult, node);
     });
   };
 };
