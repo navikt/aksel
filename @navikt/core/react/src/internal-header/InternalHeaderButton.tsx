@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "@navikt/ds-react";
 
-export interface HeaderButtonProps
+export interface InternalHeaderButtonProps
   extends React.AnchorHTMLAttributes<HTMLButtonElement> {
   /**
    * Application Button
@@ -10,12 +10,12 @@ export interface HeaderButtonProps
   children: React.ReactNode;
 }
 
-export type HeaderButtonType = OverridableComponent<
-  HeaderButtonProps,
+export type InternalHeaderButtonType = OverridableComponent<
+  InternalHeaderButtonProps,
   HTMLButtonElement
 >;
 
-export const HeaderButton: HeaderButtonType = forwardRef(
+export const InternalHeaderButton: InternalHeaderButtonType = forwardRef(
   ({ as: Component = "button", className, ...rest }, ref) => (
     <Component
       {...rest}
@@ -25,4 +25,4 @@ export const HeaderButton: HeaderButtonType = forwardRef(
   )
 );
 
-export default HeaderButton;
+export default InternalHeaderButton;

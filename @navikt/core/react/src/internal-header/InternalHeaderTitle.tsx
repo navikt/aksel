@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "@navikt/ds-react";
 
-export interface HeaderTitleProps
+export interface InternalHeaderTitleProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Application title
@@ -10,12 +10,12 @@ export interface HeaderTitleProps
   children: React.ReactNode;
 }
 
-export type HeaderTitleType = OverridableComponent<
-  HeaderTitleProps,
+export type InternalHeaderTitleType = OverridableComponent<
+  InternalHeaderTitleProps,
   HTMLAnchorElement
 >;
 
-export const HeaderTitle: HeaderTitleType = forwardRef(
+export const InternalHeaderTitle: InternalHeaderTitleType = forwardRef(
   ({ as: Component = "a", children, className, ...rest }, ref) => (
     <Component
       {...rest}
@@ -28,4 +28,4 @@ export const HeaderTitle: HeaderTitleType = forwardRef(
   )
 );
 
-export default HeaderTitle;
+export default InternalHeaderTitle;

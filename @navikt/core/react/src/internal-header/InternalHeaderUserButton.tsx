@@ -3,9 +3,9 @@ import cl from "clsx";
 import { OverridableComponent } from "@navikt/ds-react";
 import { BodyShort, Detail } from "@navikt/ds-react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import HeaderButton from "./HeaderButton";
+import InternalHeaderButton from "./InternalHeaderButton";
 
-export interface HeaderUserButtonProps
+export interface InternalHeaderUserButtonProps
   extends React.AnchorHTMLAttributes<HTMLButtonElement> {
   /**
    * User name
@@ -17,14 +17,14 @@ export interface HeaderUserButtonProps
   description?: string;
 }
 
-export type HeaderUserButtonType = OverridableComponent<
-  HeaderUserButtonProps,
+export type InternalHeaderUserButtonType = OverridableComponent<
+  InternalHeaderUserButtonProps,
   HTMLButtonElement
 >;
 
-export const HeaderUserButton: HeaderUserButtonType = forwardRef(
-  ({ as, name, description, className, ...rest }, ref) => (
-    <HeaderButton
+export const InternalHeaderUserButton: InternalHeaderUserButtonType =
+  forwardRef(({ as, name, description, className, ...rest }, ref) => (
+    <InternalHeaderButton
       {...rest}
       as={as}
       ref={ref}
@@ -37,8 +37,7 @@ export const HeaderUserButton: HeaderUserButtonType = forwardRef(
         {description && <Detail as="div">{description}</Detail>}
       </div>
       <ChevronDownIcon title="vis meny" />
-    </HeaderButton>
-  )
-);
+    </InternalHeaderButton>
+  ));
 
-export default HeaderUserButton;
+export default InternalHeaderUserButton;
