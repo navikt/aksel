@@ -11,7 +11,7 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import { mergeRefs, useEventListener } from "@navikt/ds-react";
+import { useEventListener, mergeRefs } from "../../util";
 import cl from "clsx";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";

@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
-import cl from "clsx";
-import { OverridableComponent } from "@navikt/ds-react";
-import { BodyShort, Detail } from "@navikt/ds-react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import cl from "clsx";
+import React, { forwardRef } from "react";
+import { BodyShort, Detail } from "../typography";
+import { OverridableComponent } from "../util/OverridableComponent";
 import InternalHeaderButton from "./InternalHeaderButton";
 
 export interface InternalHeaderUserButtonProps

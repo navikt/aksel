@@ -1,4 +1,4 @@
-import { OverridableComponent } from "@navikt/ds-react";
+import { OverridableComponent } from "../../../util/OverridableComponent";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { DropdownContext } from "../../Dropdown";

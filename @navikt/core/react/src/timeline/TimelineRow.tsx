@@ -1,4 +1,4 @@
-import { BodyShort } from "@navikt/ds-react";
+import { BodyShort } from "../typography/BodyShort";
 import { format } from "date-fns";
 import React, { forwardRef } from "react";
 import { PeriodContext } from "./hooks/usePeriodContext";

@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
-import { OverridableComponent } from "@navikt/ds-react";
+import { OverridableComponent } from "../util/OverridableComponent";
 
 export interface InternalHeaderTitleProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

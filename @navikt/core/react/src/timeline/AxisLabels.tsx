@@ -1,4 +1,4 @@
-import { Detail } from "@navikt/ds-react";
+import { Detail } from "../typography/Detail";
 import {
   addDays,
   addMonths,

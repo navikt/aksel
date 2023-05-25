@@ -11,7 +11,7 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import { mergeRefs, useEventListener } from "@navikt/ds-react";
+import { useEventListener, mergeRefs } from "../util";
 import { format } from "date-fns";
 import React, {
   forwardRef,

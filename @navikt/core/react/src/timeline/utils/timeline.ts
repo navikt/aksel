@@ -1,4 +1,4 @@
-import { omit } from "@navikt/ds-react";
+import { omit } from "../../util";
 import React, { ReactNode } from "react";
 import { Period } from "./types.external";
 
@@ -14,7 +14,7 @@ type ParsedChild = {
 export const parseRows = (rowChildren: ReactNode[]) => {
   let parsedChildren: ParsedChild[] = [];
   rowChildren?.forEach((r: React.ReactNode) => {
-    let periods = [];
+    let periods: ParsedChild["periods"] = [];
     if (React.isValidElement(r) && r?.props?.children) {
       if (Array.isArray(r.props.children)) {
         for (let i = 0; i < r.props.children.length; i++) {

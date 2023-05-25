@@ -1,4 +1,4 @@
-import { Popover } from "@navikt/ds-react";
+import { Popover } from "../../popover";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { DropdownContext } from "../Dropdown";

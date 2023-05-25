@@ -26,6 +26,8 @@ export interface Period {
   end: Date;
   isActive?: boolean;
   statusLabel?: string;
+  restProps?: any;
+  ref?: Element;
 }
 
 export interface PositionedPeriod extends Period, Positioned {
