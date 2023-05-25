@@ -8505,9 +8505,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/plugin":
+"aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/figma-plugin":
   version: 0.0.0-use.local
-  resolution: "aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/plugin"
+  resolution: "aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/figma-plugin"
   dependencies:
     "@figma/plugin-typings": ^1.62.0
     "@navikt/ds-css": "*"
