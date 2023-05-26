@@ -25,6 +25,11 @@ fs.writeFileSync(
 );
 
 fs.writeFileSync(
+  path.resolve(__dirname, "../dist/metadata.mjs"),
+  `const metadata = ${JSON.stringify(metadata)};\n\n export default metadata;`
+);
+
+fs.writeFileSync(
   path.resolve(__dirname, "../dist/metadata.d.ts"),
   `export type AkselIcon = {
     id: string;

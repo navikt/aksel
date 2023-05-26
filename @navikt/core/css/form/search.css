@@ -17,6 +17,10 @@
   width: 100%;
 }
 
+.navds-search--with-size :where(.navds-search__wrapper-inner) {
+  width: inherit;
+}
+
 .navds-search__wrapper {
   display: inline-flex;
   align-items: center;

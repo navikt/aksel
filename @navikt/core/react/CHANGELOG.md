@@ -1,5 +1,40 @@
 # @navikt/ds-react
 
+## 3.3.1
+
+### Patch Changes
+
+- [#2005](https://github.com/navikt/aksel/pull/2005) [`5533fbd5a`](https://github.com/navikt/aksel/commit/5533fbd5a3a2b3e08f3c818e2669daccafb6212a) Thanks [@cskrov](https://github.com/cskrov)! - Migrert `CopyButton` til `Clipboard API`
+
+  - `CopyButton` bruker nå [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API).
+  - `execCommand()` er fjernet fordi den [er deprecated](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand).
+  - Nettlesere som ikke støtter `Clipboard API` vil falle tilbake på `window.prompt()`.
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.3.1
+
+## 3.3.0
+
+### Patch Changes
+
+- [#1995](https://github.com/navikt/aksel/pull/1995) [`288cef591`](https://github.com/navikt/aksel/commit/288cef591abb0557295e50cf6e696d7a51607c32) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Timeline viser nå popover/tooltip på hover.
+
+  - Popover vises nå ikke lengre ved klikk.
+  - Period og Pin bruker nå begge ny popover.
+  - Kode og styling for Popover er nå inlinet i Timeline, og bruker ikke `@navikt/ds-react` sin versjon.
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.3.0
+
+## 3.2.4
+
+### Patch Changes
+
+- [#2000](https://github.com/navikt/aksel/pull/2000) [`30eee0dac`](https://github.com/navikt/aksel/commit/30eee0dac4e3e5a1379033283a6885e646e80458) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Search støtter nå htmlSize-prop
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.2.4
+
 ## 3.2.3
 
 ### Patch Changes

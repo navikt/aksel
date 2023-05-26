@@ -67,6 +67,10 @@ export interface SearchProps
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "simple";
+  /**
+   * Exposes the HTML size attribute
+   */
+  htmlSize?: number | string;
 }
 
 interface SearchComponent
@@ -112,6 +116,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       defaultValue,
       onChange,
       onSearchClick,
+      htmlSize,
       ...rest
     } = props;
 
@@ -164,9 +169,11 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           "navds-form-field",
           `navds-form-field--${size}`,
           "navds-search",
+
           {
             "navds-search--error": hasError,
             "navds-search--disabled": !!inputProps.disabled,
+            "navds-search--with-size": !!htmlSize,
           }
         )}
       >
@@ -215,6 +222,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
                 "navds-body-short",
                 `navds-body-${size}`
               )}
+              {...(htmlSize ? { size: Number(htmlSize) } : {})}
             />
             {(value ?? internalValue) && clearButton && (
               <button

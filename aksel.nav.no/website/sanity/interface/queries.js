@@ -180,6 +180,7 @@ export const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   "slug": slug.current,
   kategori,
   "tag": status.tag,
+  "sidebarindex": sidebarindex,
 }`;
 
 export const landingPageQuery = (t) => {
