@@ -7,7 +7,7 @@ const Example = () => {
       {loaded ? (
         <span>Loaded</span>
       ) : (
-        <div className="grid w-48 gap-2">
+        <div className="w-48">
           <Skeleton variant="circle" width={80} height={80} />
           <Heading as={Skeleton} size="large">
             Card-title
