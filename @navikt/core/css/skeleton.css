@@ -1,6 +1,8 @@
 .navds-skeleton {
   display: block;
-  background-color: var(--ac-skeleton-bg, var(--a-border-divider));
+
+  /* TODO: Endre til moderate når det er publisert */
+  background-color: var(--ac-skeleton-bg, var(--a-grayalpha-200));
   height: 1.3em;
   animation: akselSkeletonAnimation 0.8s linear infinite alternate;
 }
@@ -52,6 +54,6 @@
   }
 
   100% {
-    opacity: 0.6;
+    opacity: 0.4;
   }
 }
