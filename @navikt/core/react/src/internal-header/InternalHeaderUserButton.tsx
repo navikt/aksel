@@ -28,7 +28,7 @@ export const InternalHeaderUserButton: InternalHeaderUserButtonType =
       {...rest}
       as={as}
       ref={ref}
-      className={cl("navdsi-header__user-button", className)}
+      className={cl("navds-internalheader__user-button", className)}
     >
       <div>
         <BodyShort size="small" as="div">

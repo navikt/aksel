@@ -20,7 +20,7 @@ export const ListItem: ListItemType = forwardRef(
     const context = useContext(DropdownContext);
 
     return (
-      <li className="navdsi-dropdown__list-item">
+      <li className="navds-dropdown__list-item">
         <Component
           {...rest}
           value={rest.children}
@@ -30,7 +30,7 @@ export const ListItem: ListItemType = forwardRef(
           }}
           ref={ref}
           className={cl(
-            "navdsi-dropdown__item",
+            "navds-dropdown__item",
             "navds-body-short",
             "navds-body-short--small",
             className

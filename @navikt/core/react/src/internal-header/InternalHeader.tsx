@@ -32,7 +32,7 @@ export const InternalHeader = forwardRef(({ className, ...rest }, ref) => (
     data-theme="dark"
     {...rest}
     ref={ref}
-    className={cl("navdsi-header", className)}
+    className={cl("navds-internalheader", className)}
   />
 )) as InternalHeaderComponent;
 

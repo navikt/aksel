@@ -175,7 +175,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         }}
       >
         <div {...rest} ref={ref}>
-          <div className="navdsi-timeline">
+          <div className="navds-timeline">
             <AxisLabels />
 
             {pins.map((pin) => {

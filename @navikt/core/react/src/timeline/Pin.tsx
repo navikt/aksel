@@ -109,13 +109,13 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     return (
       <>
         <div
-          className="navdsi-timeline__pin-wrapper"
+          className="navds-timeline__pin-wrapper"
           style={{ [direction]: `${position(date, startDate, endDate)}%` }}
         >
           <button
             {...rest}
             ref={mergedRef}
-            className="navdsi-timeline__pin-button"
+            className="navds-timeline__pin-button"
             aria-label={`pin:${format(date, "dd.MM.yyyy")}`}
             type="button"
             aria-expanded={children ? open : undefined}

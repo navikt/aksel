@@ -21,7 +21,11 @@ export const InternalHeaderTitle: InternalHeaderTitleType = forwardRef(
       {...rest}
       ref={ref}
       size="xsmall"
-      className={cl("navdsi-header__title", "navds-body-short", className)}
+      className={cl(
+        "navds-internalheader__title",
+        "navds-body-short",
+        className
+      )}
     >
       <span>{children}</span>
     </Component>

@@ -21,7 +21,7 @@ export const GroupedItem: GroupedItemType = forwardRef(
     const context = useContext(DropdownContext);
 
     return (
-      <dd className="navdsi-dropdown__list-item">
+      <dd className="navds-dropdown__list-item">
         <Component
           {...rest}
           value={rest.children}
@@ -31,7 +31,7 @@ export const GroupedItem: GroupedItemType = forwardRef(
           }}
           ref={ref}
           className={cl(
-            "navdsi-dropdown__item",
+            "navds-dropdown__item",
             "navds-body-short",
             "navds-body-short--small",
             className

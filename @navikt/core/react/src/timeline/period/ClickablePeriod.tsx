@@ -119,11 +119,11 @@ const ClickablePeriod = React.memo(
           }}
           aria-label={ariaLabel(start, end, status, statusLabel)}
           className={cl(
-            "navdsi-timeline__period--clickable",
+            "navds-timeline__period--clickable",
             getConditionalClasses(cropped, direction, status),
             restProps?.className,
             {
-              "navdsi-timeline__period--selected": isActive,
+              "navds-timeline__period--selected": isActive,
             }
           )}
           aria-expanded={children ? open : undefined}
@@ -155,7 +155,7 @@ const ClickablePeriod = React.memo(
             },
           })}
         >
-          <span className="navdsi-timeline__period--inner">{icon}</span>
+          <span className="navds-timeline__period--inner">{icon}</span>
         </button>
         {children && (
           <div

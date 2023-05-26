@@ -19,7 +19,7 @@ export const GroupedHeading: GroupedHeadingType = forwardRef(
       {...rest}
       ref={ref}
       className={cl(
-        "navdsi-dropdown__list-heading",
+        "navds-dropdown__list-heading",
         "navds-heading",
         "navds-heading--xsmall",
         className

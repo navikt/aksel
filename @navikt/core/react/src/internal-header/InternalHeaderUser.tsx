@@ -22,7 +22,11 @@ export const InternalHeaderUser = forwardRef<
   HTMLDivElement,
   InternalHeaderUserProps
 >(({ className, name, description, ...rest }, ref) => (
-  <div {...rest} ref={ref} className={cl("navdsi-header__user", className)}>
+  <div
+    {...rest}
+    ref={ref}
+    className={cl("navds-internalheader__user", className)}
+  >
     <span>
       <BodyShort size="small" as="div">
         {name}

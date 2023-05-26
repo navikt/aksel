@@ -17,11 +17,7 @@ export interface ZoomType<Props = ZoomProps>
 export const Zoom = forwardRef<HTMLUListElement, ZoomProps>(
   ({ className, children, ...rest }, ref) => {
     return (
-      <ul
-        ref={ref}
-        className={cl(className, "navdsi-timeline__zoom")}
-        {...rest}
-      >
+      <ul ref={ref} className={cl(className, "navds-timeline__zoom")} {...rest}>
         {children}
       </ul>
     );

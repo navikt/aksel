@@ -20,7 +20,7 @@ export const InternalHeaderButton: InternalHeaderButtonType = forwardRef(
     <Component
       {...rest}
       ref={ref}
-      className={cl("navdsi-header__button", className)}
+      className={cl("navds-internalheader__button", className)}
     />
   )
 );

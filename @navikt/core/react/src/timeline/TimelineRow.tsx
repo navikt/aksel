@@ -58,7 +58,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           <BodyShort
             as={headingTag}
             id={`timeline-row-${id}`}
-            className="navdsi-timeline__row-label"
+            className="navds-timeline__row-label"
             size="small"
           >
             {icon}
@@ -66,8 +66,8 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           </BodyShort>
         )}
         <div
-          className={cl("navdsi-timeline__row", {
-            "navdsi-timeline__row--active": active,
+          className={cl("navds-timeline__row", {
+            "navds-timeline__row--active": active,
           })}
         >
           <ol
@@ -81,7 +81,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                     "dd.MM.yyyy"
                   )}`
             }
-            className={cl("navdsi-timeline__row-periods", className)}
+            className={cl("navds-timeline__row-periods", className)}
             onKeyDown={(e) => {
               if (e.key === "ArrowDown" || e.key === "ArrowUp") {
                 e.preventDefault();

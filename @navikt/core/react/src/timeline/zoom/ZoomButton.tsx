@@ -67,7 +67,7 @@ export const ZoomButton: ZoomButtonType = forwardRef(
           }
           ref={ref}
           {...rest}
-          className="navdsi-timeline__zoom-button"
+          className="navds-timeline__zoom-button"
           onClick={() => {
             setStart(startOfRange);
           }}

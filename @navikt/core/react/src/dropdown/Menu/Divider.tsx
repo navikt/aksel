@@ -10,7 +10,7 @@ export const Divider: DividerType = forwardRef(
     <hr
       {...rest}
       ref={ref}
-      className={cl("navdsi-dropdown__divider", className)}
+      className={cl("navds-dropdown__divider", className)}
     />
   )
 );

@@ -123,10 +123,10 @@ export const AxisLabels = () => {
   const labels = axisLabels(startDate, endDate, direction).filter(isVisible);
 
   return (
-    <div className="navdsi-timeline__axislabels" aria-hidden="true">
+    <div className="navds-timeline__axislabels" aria-hidden="true">
       {labels.map((etikett) => (
         <Detail
-          className="navdsi-timeline__axislabels-label"
+          className="navds-timeline__axislabels-label"
           as="div"
           key={etikett.label}
           style={{

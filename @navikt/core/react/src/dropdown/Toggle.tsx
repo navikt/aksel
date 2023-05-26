@@ -43,7 +43,7 @@ export const Toggle: ToggleType = forwardRef(
           onClick && onClick(e);
         }}
         aria-expanded={isOpen}
-        className={cl("navdsi-dropdown__toggle", className)}
+        className={cl("navds-dropdown__toggle", className)}
       />
     );
   }

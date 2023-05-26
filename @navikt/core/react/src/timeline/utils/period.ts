@@ -6,12 +6,12 @@ export const getConditionalClasses = (
   direction: string,
   status: string
 ) => {
-  return cl(`navdsi-timeline__period navdsi-timeline__period--${status}`, {
-    "navdsi-timeline__period--connected-both": cropped === "both",
-    "navdsi-timeline__period--connected-right":
+  return cl(`navds-timeline__period navds-timeline__period--${status}`, {
+    "navds-timeline__period--connected-both": cropped === "both",
+    "navds-timeline__period--connected-right":
       (cropped === "right" && direction === "left") ||
       (cropped === "left" && direction === "right"),
-    "navdsi-timeline__period--connected-left":
+    "navds-timeline__period--connected-left":
       (cropped === "left" && direction === "left") ||
       (cropped === "right" && direction === "right"),
   });
