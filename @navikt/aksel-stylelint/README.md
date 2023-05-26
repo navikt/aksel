@@ -33,6 +33,11 @@ It should be sufficient for most cases to extend the recommended defaults.
 
 This rule checks that if you use one of the reserved token prefixes `--a-` or `--ac-` then the token itself _must_ be provided by design system.
 
+In addition it checks that you:
+
+- don't **_reference_** a component level token. As they are only supposed to be overridden.
+- don't **_override_** a global level token. As they are only supposed to be referenced.
+
 ❌ Incorrect:
 
 ```css
@@ -41,6 +46,8 @@ html h1 {
     ^^^^^^^^^^^^^^^^^^^^^^^^^
     background-color: var(--a-my-own-color-bg-hover, #ffffff);
                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+    stroke: var(--ac-button-loader-stroke));
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 ```
 
@@ -48,7 +55,8 @@ html h1 {
 
 ```css
 html h1 {
-  background-color: var(--ac-accordion-header-bg-hover, #ffffff);
+  background-color: var(--a-surface-default, #ffffff);
+  --ac-button-loader-stroke: lawngreen;
 }
 ```
 
