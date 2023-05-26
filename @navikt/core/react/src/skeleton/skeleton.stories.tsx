@@ -3,7 +3,7 @@ import { Skeleton } from ".";
 import { Alert } from "../alert";
 import { Button } from "../button";
 import { Checkbox } from "../form";
-import { BodyLong, Detail, Heading } from "../typography";
+import { BodyLong, Heading } from "../typography";
 
 export default {
   title: "ds-react/Skeleton",
@@ -81,18 +81,15 @@ export const WrappingComponents = {
 export const TextSizing = {
   render: () => (
     <div style={{ display: "grid", width: 300 }}>
-      <Heading level="1" size="xlarge">
-        <Skeleton />
-      </Heading>
-      <Heading level="1" size="medium">
-        <Skeleton />
-      </Heading>
-      <BodyLong>
-        <Skeleton />
-      </BodyLong>
-      <Detail>
-        <Skeleton />
-      </Detail>
+      <Skeleton>
+        <Heading level="1" size="xlarge">
+          Placeholder
+        </Heading>
+      </Skeleton>
+      <Skeleton>
+        <BodyLong>Placeholder</BodyLong>
+      </Skeleton>
+      <BodyLong as={Skeleton}>Placeholder</BodyLong>
     </div>
   ),
 };
