@@ -8,7 +8,26 @@ It is designed to be useful for both _internal_ and _external_ developers, so _e
 > The version of this plugin **_MUST MATCH_** the version of the other design system packages used in your project for the linting to make sense!
 > Otherwise you are very likely to get _incorrect_ errors that tell you to use the wrong token names.
 
-🐛 Found a bug? https://github.com/navikt/aksel/issues
+# Install
+
+```bash
+yarn add -D @navikt/aksel-stylelint
+npm install -D @navikt/aksel-stylelint
+```
+
+### How to configure
+
+It should be sufficient for most cases to extend the recommended defaults.
+
+```js
+  "stylelint": {
+    "extends": [
+        ...
+        "@navikt/aksel-stylelint/recommended"
+    ],
+    ...
+  }
+```
 
 ## aksel-design-token-exists
 
@@ -108,23 +127,4 @@ Warns when you try to use deprecated class names.
 }
 ```
 
-# Install
-
-```bash
-yarn add -D @navikt/aksel-stylelint
-npm install -D @navikt/aksel-stylelint
-```
-
-### How to configure
-
-It should be sufficient for most cases to extend the recommended defaults.
-
-```js
-  "stylelint": {
-    "extends": [
-        ...
-        "@navikt/aksel-stylelint/recommended"
-    ],
-    ...
-  }
-```
+🐛 Found a bug? https://github.com/navikt/aksel/issues
