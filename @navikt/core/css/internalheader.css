@@ -1,13 +1,13 @@
-.navdsi-header {
+.navds-internalheader {
   display: flex;
   align-self: stretch;
-  background: var(--ac-header-bg, var(--a-surface-inverted));
+  background: var(--ac-internalheader-bg, var(--a-surface-inverted));
   min-height: var(--a-spacing-12);
 
-  --navdsi-header-focus: inset 0 0 0 2px var(--a-border-focus-on-inverted);
+  --navds-internalheader-focus: inset 0 0 0 2px var(--a-border-focus-on-inverted);
 }
 
-.navdsi-header__title {
+.navds-internalheader__title {
   border: none;
   overflow: visible;
   background: transparent;
@@ -16,26 +16,26 @@
   line-height: normal;
   text-align: left;
   padding: 0 var(--a-spacing-5) 0 var(--a-spacing-6);
-  border-right: 1px solid var(--ac-header-divider, var(--a-gray-600));
+  border-right: 1px solid var(--ac-internalheader-divider, var(--a-gray-600));
   display: flex;
   align-items: center;
   text-decoration: none;
   margin: 0;
-  color: var(--ac-header-text, var(--a-text-on-inverted));
+  color: var(--ac-internalheader-text, var(--a-text-on-inverted));
 }
 
-button.navdsi-header__title {
+button.navds-internalheader__title {
   cursor: pointer;
 }
 
-.navdsi-header__user {
+.navds-internalheader__user {
   padding: 0 var(--a-spacing-5);
-  border-left: 1px solid var(--ac-header-divider, var(--a-gray-600));
+  border-left: 1px solid var(--ac-internalheader-divider, var(--a-gray-600));
   display: flex;
   align-items: center;
 }
 
-.navdsi-header__button {
+.navds-internalheader__button {
   border: none;
   margin: 0;
   padding: 0 var(--a-spacing-3);
@@ -49,37 +49,37 @@ button.navdsi-header__title {
   align-items: center;
   justify-self: center;
   gap: var(--a-spacing-2);
-  border-left: 1px solid var(--ac-header-divider, var(--a-gray-600));
-  color: var(--ac-header-text, var(--a-text-on-inverted));
+  border-left: 1px solid var(--ac-internalheader-divider, var(--a-gray-600));
+  color: var(--ac-internalheader-text, var(--a-text-on-inverted));
 }
 
-a.navdsi-header__title:hover,
-button.navdsi-header__title:hover,
-.navdsi-header__button:hover {
-  background-color: var(--ac-header-hover-bg, var(--a-surface-inverted-hover));
+a.navds-internalheader__title:hover,
+button.navds-internalheader__title:hover,
+.navds-internalheader__button:hover {
+  background-color: var(--ac-internalheader-hover-bg, var(--a-surface-inverted-hover));
 }
 
-.navdsi-header__title:focus-visible,
-.navdsi-header__button:focus-visible {
-  box-shadow: var(--navdsi-header-focus);
+.navds-internalheader__title:focus-visible,
+.navds-internalheader__button:focus-visible {
+  box-shadow: var(--navds-internalheader-focus);
   outline: none;
 }
 
 @supports not selector(:focus-visible) {
-  .navdsi-header__title:focus,
-  .navdsi-header__button:focus {
-    box-shadow: var(--navdsi-header-focus);
+  .navds-internalheader__title:focus,
+  .navds-internalheader__button:focus {
+    box-shadow: var(--navds-internalheader-focus);
     outline: none;
   }
 }
 
-a.navdsi-header__title:active,
-button.navdsi-header__title:active,
-.navdsi-header__button:active {
-  background-color: var(--ac-header-active-bg, var(--a-surface-inverted-active));
+a.navds-internalheader__title:active,
+button.navds-internalheader__title:active,
+.navds-internalheader__button:active {
+  background-color: var(--ac-internalheader-active-bg, var(--a-surface-inverted-active));
 }
 
-.navdsi-header__user-button {
+.navds-internalheader__user-button {
   padding-left: var(--a-spacing-5);
   gap: var(--a-spacing-4);
 }
