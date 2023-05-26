@@ -29,3 +29,8 @@
 @import "table.css";
 @import "tabs.css";
 @import "list.css";
+
+/* TODO: Fikse cascading av brukte komponenter */
+@import "dropdown.css";
+@import "timeline.css";
+@import "internalheader.css";
