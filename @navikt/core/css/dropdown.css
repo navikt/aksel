@@ -5,7 +5,6 @@
   width: 27ch;
   max-height: 616px;
   overflow-y: auto;
-  border-color: var(--ac-dropdown-border, var(--a-border-default));
 }
 
 .navdsi-dropdown__divider {
