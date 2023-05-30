@@ -1,11 +1,11 @@
 import { Search } from "@navikt/ds-react";
-import { Header } from "@navikt/ds-react-internal";
+import { InternalHeader } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Header>
-      <Header.Title as="h1">Sykepenger</Header.Title>
+    <InternalHeader>
+      <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
       <form
         className="self-center px-5"
         onSubmit={(e) => {
@@ -14,14 +14,14 @@ const Example = () => {
         }}
       >
         <Search
-          label="header søk"
+          label="InternalHeader søk"
           size="small"
           variant="simple"
           placeholder="Søk"
         />
       </form>
-      <Header.User name="Ola Normann" className="ml-auto" />
-    </Header>
+      <InternalHeader.User name="Ola Normann" className="ml-auto" />
+    </InternalHeader>
   );
 };
 

@@ -6,7 +6,7 @@ import {
   People,
   Vacation,
 } from "@navikt/ds-icons";
-import { Timeline } from "@navikt/ds-react-internal";
+import { Timeline } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
