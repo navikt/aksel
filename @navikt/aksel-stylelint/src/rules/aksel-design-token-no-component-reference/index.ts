@@ -10,7 +10,7 @@ const packageVersion = getPackageVersion();
 
 const prefix_ac = "--ac-";
 
-export const messages = stylelint.utils.ruleMessages(ruleName, {
+export const messages = stylelint.utils.ruleMessages(ruleNamePackage, {
   valueRefComponent: (node: any, invalidValue: string) =>
     `property "${node.prop}" has offending value "${invalidValue}". ` +
     `The value references a component level token ('${prefix_ac}'). ` +
@@ -36,7 +36,7 @@ const checkDeclValue = (
         message: messages.valueRefComponent(rootNode, node.value),
         node: rootNode,
         result: postcssResult,
-        ruleName,
+        ruleName: ruleNamePackage,
         word: node.value,
       });
     }

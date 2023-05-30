@@ -9,7 +9,8 @@ const packageJson = JSON.parse(
   readFileSync(`${__dirname}/../../../package.json`).toString()
 );
 
-const ruleName = "@navikt/aksel-design-token-exists";
+const ruleName = "aksel-design-token-exists";
+const ruleNamePackage = `@navikt/${ruleName}`;
 
 const prefix_a = "--a-";
 const prefix_ac = "--ac-";
@@ -17,7 +18,7 @@ export const controlledPrefixes = [prefix_a, prefix_ac];
 
 const packageVersion = packageJson.version;
 
-export const messages = stylelint.utils.ruleMessages(ruleName, {
+export const messages = stylelint.utils.ruleMessages(ruleNamePackage, {
   propNotExist: (node: any) =>
     `property "${node.prop}" has a name that seems like it intends to override a design token by ` +
     `using one of the following prefixes [${controlledPrefixes}]. ` +
@@ -48,7 +49,7 @@ const checkDeclValue = (
         message: messages.valueNotExist(rootNode, node.value),
         node: rootNode,
         result: postcssResult,
-        ruleName,
+        ruleName: ruleNamePackage,
         word: node.value,
       });
     }
@@ -70,7 +71,7 @@ const checkDeclProp = (
       message: messages.propNotExist(rootNode),
       node: rootNode,
       result: postcssResult,
-      ruleName,
+      ruleName: ruleNamePackage,
       word: prop,
     });
   }
@@ -85,10 +86,10 @@ const ruleFunction: stylelint.Rule = () => {
   };
 };
 
-ruleFunction.ruleName = ruleName;
+ruleFunction.ruleName = ruleNamePackage;
 ruleFunction.messages = {};
 ruleFunction.meta = {
-  url: "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel-design-token-exists",
+  url: `https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#${ruleName}`,
 };
 
 export default ruleFunction;
