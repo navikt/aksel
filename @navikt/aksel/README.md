@@ -22,6 +22,45 @@ To get started:
 npx @navikt/aksel codemod --help
 ```
 
+### v4
+
+In v4, we moved all the components from `@navikt/ds-react-internal` to `@navikt/ds-react`. This means that you will need to update all your imports to the new package. As a part of this, Header was renamed to `InternalHeader` and all the CSS-classes was renamed to use `navds` as a prefix instead of `navdsi`.
+
+#### react
+
+`npx @navikt/aksel codemod v4-internal-react ...`
+
+Rewrites all imports from `@navikt/ds-react-internal` to `@navikt/ds-react`. Remember to remove `@navikt/ds-react-internal` as a dependency after migration.
+
+```diff
+- import { Dropdown, Timeline, Header } from "@navikt/ds-react-internal";
+- import { Button, CopyButton } from "@navikt/ds-react";
++ import { Button, CopyButton, Dropdown, Timeline, InternalHeader as Header } from "@navikt/ds-react";
+```
+
+#### css
+
+`npx @navikt/aksel codemod v4-internal-css ...`
+
+Rewrites all css with `navdsi`-prefix to `navds`-prefix. Rewrites all `.navdsi-header` classes to `.navds-internalheader`.
+
+Remember to remove `@navikt/ds-css-internal` as a dependency after migration + remove it from you lists of imports in the CSS-bundle.
+
+```diff
+- .navdsi-dropdown
++ .navds-dropdown
+- .navdsi-header
++ .navds-internalheader
+- .navdsi-timeline
++ .navds-timeline
+```
+
+Note: This is a "dumb" codemod that uses a simple regex to find and replace. This can lead to unknown sideeffects, so its reccomended to scope the codemod to spesific files.
+
+```bash
+`npx @navikt/aksel codemod v4-internal-css **/*.css`
+```
+
 ### v3
 
 There is no general codemods for migrating from v2 -> v3.
