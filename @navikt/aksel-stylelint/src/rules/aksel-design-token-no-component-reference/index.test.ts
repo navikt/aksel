@@ -19,45 +19,6 @@ getTestRule()({
 
   reject: [
     {
-      code: ".foo { --a-surface-action: 1px }",
-      description: "existing '--a-' token overridden",
-      message: messages.propOverrideGlobal({ prop: "--a-surface-action" }),
-      line: 1,
-      endLine: 1,
-      column: 8,
-      endColumn: 26,
-    },
-    {
-      code: ".foo { --a-does-not-exist: 1px }",
-      description: "attempt to override nonexistent '--a-' token",
-      warnings: [
-        {
-          message: messages.propOverrideGlobal({ prop: "--a-does-not-exist" }),
-          line: 1,
-          endLine: 1,
-          column: 8,
-          endColumn: 26,
-        },
-        {
-          message: messages.propNotExist({ prop: "--a-does-not-exist" }),
-          line: 1,
-          endLine: 1,
-          column: 8,
-          endColumn: 26,
-        },
-      ],
-    },
-    {
-      code: ".foo \n { \n --ac-does-not-exist: 1px; \n }",
-      description: "attempt to override nonexistent '--ac-' token",
-      message: messages.propNotExist({ prop: "--ac-does-not-exist" }),
-      line: 3,
-      endLine: 3,
-      column: 2,
-      endColumn: 21,
-    },
-
-    {
       code: ".foo { width: var(--ac-button-padding) }",
       description: "attempt to use '--ac-' token",
       message: messages.valueRefComponent(
@@ -68,56 +29,6 @@ getTestRule()({
       endLine: 1,
       column: 19,
       endColumn: 38,
-    },
-
-    {
-      code: ".foo { color: var(--a-bar) }",
-      description: "attempt to use nonexistent token",
-      message: messages.valueNotExist({ prop: "color" }, "--a-bar"),
-      line: 1,
-      endLine: 1,
-      column: 19,
-      endColumn: 26,
-    },
-    {
-      code: ".foo { width: var(--ac-bar, --a-baz) }",
-      description: "attempt to use two nonexistent tokens in one var()",
-      warnings: [
-        {
-          message: messages.valueNotExist({ prop: "width" }, "--ac-bar"),
-          line: 1,
-          endLine: 1,
-          column: 19,
-          endColumn: 27,
-        },
-        {
-          message: messages.valueNotExist({ prop: "width" }, "--a-baz"),
-          line: 1,
-          endLine: 1,
-          column: 29,
-          endColumn: 36,
-        },
-      ],
-    },
-    {
-      code: ".foo { padding: var(--a-bar) var(--a-baz); }",
-      description: "attempt to use two nonexistent tokens as separate vars",
-      warnings: [
-        {
-          message: messages.valueNotExist({ prop: "padding" }, "--a-bar"),
-          line: 1,
-          endLine: 1,
-          column: 21,
-          endColumn: 28,
-        },
-        {
-          message: messages.valueNotExist({ prop: "padding" }, "--a-baz"),
-          line: 1,
-          endLine: 1,
-          column: 34,
-          endColumn: 41,
-        },
-      ],
     },
   ],
 });

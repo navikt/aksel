@@ -97,7 +97,7 @@ export const addTokens = (
   tokenJSONFile: string,
   allowedTokenNames: string[]
 ) => {
-  const jsonFileBuffer = readFileSync(`${__dirname}/../../${tokenJSONFile}`);
+  const jsonFileBuffer = readFileSync(`${__dirname}/${tokenJSONFile}`);
   const fileString = jsonFileBuffer.toString();
   const flattened = flattenObject(JSON.parse(fileString));
   flattened.forEach((token) => allowedTokenNames.push(token));
@@ -109,7 +109,7 @@ export const tokenExists = (
 ) => {
   // "singleton" if statement (attempt at caching file parsing)
   if (!allowedTokenNames.length) {
-    const cssFileBuffer = readFileSync(`${__dirname}/../../${tokenCSSFile}`);
+    const cssFileBuffer = readFileSync(`${__dirname}/${tokenCSSFile}`);
     const cssFileString = cssFileBuffer.toString();
 
     valueParser(cssFileString).walk((node) => {
