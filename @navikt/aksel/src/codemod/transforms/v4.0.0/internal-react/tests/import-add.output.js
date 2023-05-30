@@ -1,7 +1,7 @@
 import {
   Button,
   CopyButton,
+  InternalHeader as Header,
   Dropdown,
   Timeline,
-  Header,
 } from "@navikt/ds-react";

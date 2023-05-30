@@ -1,1 +1,1 @@
-import { Dropdown, Timeline, Header } from "@navikt/ds-react";
+import { InternalHeader as Header, Dropdown, Timeline } from "@navikt/ds-react";
