@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 
 import tokens from "@navikt/ds-tokens/docs.json";
 import core from "@navikt/ds-css/tokens.json";
-import internal from "@navikt/ds-css-internal/tokens.json";
 import { noCdnClient } from "../sanity/interface/client.server";
 
 dotenv.config();
@@ -10,7 +9,6 @@ dotenv.config();
 const allTokens: { title: string; kategori: string }[] = [
   ...Object.keys(tokens).map((x) => ({ title: x, kategori: "core" })),
   ...Object.keys(core).map((x) => ({ title: x, kategori: "comp" })),
-  ...Object.keys(internal).map((x) => ({ title: x, kategori: "comp" })),
 ];
 
 export const updateTokens = async () => {

@@ -1,5 +1,3 @@
-import NavnoDocs from "@navikt/ds-navno/_docs.json";
-import InternalDocs from "@navikt/ds-react-internal/_docs.json";
 import CoreDocs from "@navikt/ds-react/_docs.json";
 import dotenv from "dotenv";
 
@@ -63,12 +61,6 @@ const updateProps = async () => {
   const transactionClient = noCdnClient(token).transaction();
 
   propList(CoreDocs as any, "core").forEach((x) =>
-    transactionClient.createOrReplace(x)
-  );
-  propList(InternalDocs as any, "internal").forEach((x) =>
-    transactionClient.createOrReplace(x)
-  );
-  propList(NavnoDocs as any, "navno").forEach((x) =>
     transactionClient.createOrReplace(x)
   );
 
