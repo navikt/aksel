@@ -8,7 +8,14 @@ export default function moveAndRenameImport(
     toImport,
     fromName,
     toName,
-  }: { fromImport: string; toImport: string; fromName: string; toName: string }
+    ignoreAlias = false,
+  }: {
+    fromImport: string;
+    toImport: string;
+    fromName: string;
+    toName: string;
+    ignoreAlias?: boolean;
+  }
 ) {
   /* Does package-name exist */
   const existingFromImport = root.find(j.ImportDeclaration, {
@@ -63,10 +70,9 @@ export default function moveAndRenameImport(
   });
 
   if (existingImportSpecifier.length <= 0) {
-    const newImportSpecifier = j.importSpecifier(
-      j.identifier(toName),
-      j.identifier(localname)
-    );
+    const newImportSpecifier = ignoreAlias
+      ? j.importSpecifier(j.identifier(toName))
+      : j.importSpecifier(j.identifier(toName), j.identifier(localname));
 
     if (existingImport.length > 0) {
       existingImport.get("specifiers").push(newImportSpecifier);
