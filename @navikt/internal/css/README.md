@@ -1,5 +1,7 @@
 # Aksel styling for "internal"-components
 
+NOTICE: Package is deprecated. Use `@navikt/ds-css` instead.
+
 CSS-package with styling for `@navikt/ds-react-internal`.
 
 Remember to use with `@navikt/ds-css`!
