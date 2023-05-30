@@ -1,6 +1,6 @@
 import { check } from "../../../../utils/check";
 
-const migration = "copybutton";
+const migration = "internal-react";
 const fixtures = ["complete"];
 
 for (const fixture of fixtures) {
