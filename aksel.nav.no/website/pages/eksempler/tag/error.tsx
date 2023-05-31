@@ -6,6 +6,7 @@ const Example = () => {
     <div className="flex gap-2">
       <Tag variant="error">Error</Tag>
       <Tag variant="error-filled">Error</Tag>
+      <Tag variant="error-moderate">Error</Tag>
     </div>
   );
 };
