@@ -1,12 +1,11 @@
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
-import { Button, Heading, Tooltip } from "@navikt/ds-react";
+import { Button, CopyButton, Heading, Tooltip } from "@navikt/ds-react";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import {
   AmplitudeEvents,
   logAmplitudeEvent,
 } from "components/website-modules/utils/amplitude";
-import copy from "copy-to-clipboard";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Highlight, { defaultProps } from "prism-react-renderer";
@@ -21,8 +20,6 @@ export const IconSidebar = ({
   focusRef: any;
 }) => {
   const SelectedIcon = Icons[`${name}Icon`];
-  const [resentCopy, setResentCopy] = useState<"svg" | "react" | "import">();
-  const timeoutRef = useRef<NodeJS.Timeout>();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [blob, setBlob]: any = useState();
   const router = useRouter();
@@ -47,19 +44,6 @@ export const IconSidebar = ({
         setBlob(new Blob([r], { type: "image/svg+xml" }));
       });
   }
-
-  const handleCopy = (copyStr: string, src: "svg" | "react" | "import") => {
-    copy(copyStr);
-    timeoutRef.current && clearTimeout(timeoutRef.current);
-    setResentCopy(src);
-    timeoutRef.current = setTimeout(() => {
-      setResentCopy(undefined);
-    }, 2000);
-  };
-
-  useEffect(() => {
-    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
-  }, []);
 
   useEffect(() => {
     if (wrapperRef.current) {
@@ -149,25 +133,13 @@ export const IconSidebar = ({
         <div className="ring-border-subtle rounded-lg ring-1">
           <div className="border-b-border-subtle text-medium flex items-center justify-between border-b px-3 py-1">
             <span>Import</span>
-            <Tooltip
-              open={resentCopy === "import" || undefined}
-              content={resentCopy === "import" ? "Kopiert!" : "Kopier"}
-            >
-              <button
-                onClick={() =>
-                  handleCopy(
-                    `import {
+            <Tooltip content="Kopier React-import">
+              <CopyButton
+                size="small"
+                copyText={`import {
   ${name}Icon
-} from '@navikt/aksel-icons';`,
-                    "import"
-                  )
-                }
-                className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
-              >
-                <Icons.ClipboardIcon
-                  title={resentCopy === "import" ? "Kopiert!" : "Kopier"}
-                />
-              </button>
+} from '@navikt/aksel-icons';`}
+              />
             </Tooltip>
           </div>
           <Highlight
@@ -198,20 +170,11 @@ export const IconSidebar = ({
         <div className="ring-border-subtle mt-3 rounded-lg ring-1">
           <div className="border-b-border-subtle text-medium flex items-center justify-between border-b px-3 py-1">
             <span>React</span>
-            <Tooltip
-              content={resentCopy === "react" ? "Kopiert!" : "Kopier"}
-              open={resentCopy === "react" || undefined}
-            >
-              <button
-                onClick={() =>
-                  handleCopy(`<${name}Icon title="a11y-title" />`, "react")
-                }
-                className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
-              >
-                <Icons.ClipboardIcon
-                  title={resentCopy === "import" ? "Kopiert!" : "Kopier"}
-                />
-              </button>
+            <Tooltip content="Kopier React-snippet">
+              <CopyButton
+                size="small"
+                copyText={`<${name}Icon title="a11y-title" />`}
+              />
             </Tooltip>
           </div>
           <Highlight
@@ -240,23 +203,11 @@ export const IconSidebar = ({
         <div className="ring-border-subtle mt-3 rounded-lg ring-1">
           <div className="border-b-border-subtle text-medium flex items-center justify-between border-b px-3 py-1">
             <span>SVG</span>
-            <Tooltip
-              content={resentCopy === "svg" ? "Kopiert!" : "Kopier"}
-              open={resentCopy === "svg" || undefined}
-            >
-              <button
-                onClick={() =>
-                  handleCopy(
-                    ReactDOMServer.renderToString(<SelectedIcon />),
-                    "svg"
-                  )
-                }
-                className="hover:bg-surface-hover grid aspect-square w-8 place-content-center rounded text-xl"
-              >
-                <Icons.ClipboardIcon
-                  title={resentCopy === "import" ? "Kopiert!" : "Kopier"}
-                />
-              </button>
+            <Tooltip content="Kopier SVG-kode">
+              <CopyButton
+                size="small"
+                copyText={ReactDOMServer.renderToString(<SelectedIcon />)}
+              />
             </Tooltip>
           </div>
           <Highlight
