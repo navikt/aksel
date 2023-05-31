@@ -2,7 +2,7 @@ import stylelint from "stylelint";
 import selectorParser from "postcss-selector-parser";
 import { deprecations } from "../../deprecations";
 
-const ruleName = "/aksel-no-deprecated-classes";
+const ruleName = "aksel-no-deprecated-classes";
 const url =
   "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel-no-deprecated-classes";
 
