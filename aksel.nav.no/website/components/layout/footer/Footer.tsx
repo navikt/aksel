@@ -13,7 +13,7 @@ const Footer = () => {
       data-theme="dark"
       className="toc-ignore text-text-on-inverted bg-deepblue-800 relative flex w-full justify-center"
     >
-      <div className="relative z-10 mx-auto grid w-full max-w-screen-2xl gap-12 px-4 pt-12 pb-16 md:grid-cols-2 md:px-6 lg:grid-cols-4 xl:grid-cols-5 xl:gap-6">
+      <div className="relative z-10 mx-auto grid w-full max-w-screen-2xl gap-12 px-4 pb-16 pt-12 md:grid-cols-2 md:px-6 lg:grid-cols-4 xl:grid-cols-5 xl:gap-6">
         <LogoBlock />
         <Snarveier />
         <SideLenker />
@@ -43,9 +43,6 @@ function Snarveier() {
         Snarveier
       </Heading>
       <BodyShort as="ul" className="mt-3 grid gap-3">
-        <FooterLink href="/god-praksis/artikler/om-aksel">
-          Hva er Aksel?
-        </FooterLink>
         <FooterLink href="/god-praksis/artikler/skriv-for-aksel">
           Skriv for Aksel
         </FooterLink>
@@ -94,6 +91,9 @@ function SideLenker() {
         Om nettstedet
       </Heading>
       <BodyShort as="ul" className="mt-3 grid gap-3">
+        <FooterLink href="/god-praksis/artikler/om-aksel">
+          Hva er Aksel?
+        </FooterLink>
         <FooterLink href="/side/personvernerklaering">
           Personvernserklæring
         </FooterLink>

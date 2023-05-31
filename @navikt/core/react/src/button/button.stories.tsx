@@ -123,7 +123,7 @@ export const Link = () => (
 
 export const Loading = {
   render: () => (
-    <div className="colgap">
+    <div className="colgap chromatic-ignore">
       <div className="rowgap">
         {variants.map((variant) => (
           <Button key={variant} variant={variant} loading>
@@ -153,7 +153,7 @@ export const Loading = {
 };
 
 export const Icon = () => (
-  <div className="colgap">
+  <div className="colgap ">
     <div className="rowgap">
       {variants.map((variant) => (
         <Button
@@ -250,7 +250,7 @@ export const Disabled = () => (
 
 export const LoadingWithAs = {
   render: () => (
-    <div className="colgap">
+    <div className="colgap chromatic-ignore">
       <div className="rowgap">
         {variants.map((variant) => (
           <Button key={variant} variant={variant} loading size="small">

@@ -1,5 +1,21 @@
 # @navikt/ds-css-internal
 
+## 3.3.1
+
+## 3.3.0
+
+### Minor Changes
+
+- [#1995](https://github.com/navikt/aksel/pull/1995) [`288cef591`](https://github.com/navikt/aksel/commit/288cef591abb0557295e50cf6e696d7a51607c32) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Timeline viser nå popover/tooltip på hover.
+
+  - Popover vises nå ikke lengre ved klikk.
+  - Period og Pin bruker nå begge ny popover.
+  - Kode og styling for Popover er nå inlinet i Timeline, og bruker ikke `@navikt/ds-react` sin versjon.
+
+## 3.2.4
+
+## 3.2.3
+
 ## 3.2.2
 
 ## 3.2.1

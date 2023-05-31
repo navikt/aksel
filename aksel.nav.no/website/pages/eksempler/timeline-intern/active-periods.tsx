@@ -11,7 +11,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 import { useState } from "react";
 
 const Example = () => {
-  const [activePeriod, setActivePeriod] = useState();
+  const [activePeriod, setActivePeriod] = useState<any>();
 
   return (
     <div className="min-w-[800px] overflow-x-auto">
@@ -27,6 +27,8 @@ const Example = () => {
                 icon={p.icon}
                 onSelectPeriod={() => setActivePeriod(p.id)}
                 isActive={activePeriod && activePeriod === p.id}
+                aria-controls="timeline-panel"
+                id={p.id}
               />
             );
           })}
@@ -42,13 +44,19 @@ const Example = () => {
                 icon={p.icon}
                 onSelectPeriod={() => setActivePeriod(p.id)}
                 isActive={activePeriod && activePeriod === p.id}
+                aria-controls="timeline-panel"
+                id={p.id}
               />
             );
           })}
         </Timeline.Row>
       </Timeline>
       {activePeriod && (
-        <div className="mt-8">{`${activePeriod}: ${
+        <div
+          aria-controls={activePeriod.id}
+          id="timeline-panel"
+          className="mt-8"
+        >{`${activePeriod}: ${
           [...person, ...jobb].find((x) => x.id === activePeriod).start
         }`}</div>
       )}

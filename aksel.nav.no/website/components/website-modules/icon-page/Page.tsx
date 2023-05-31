@@ -120,17 +120,18 @@ export const IconPage = ({ name }: { name: string }) => {
               <TitleLinks />
             </div>
 
-            <div className="bg-surface-default shadow-small ring-border-subtle z-10 mt-16 mb-8 h-full w-full rounded-2xl ring-1">
+            <div className="bg-surface-default shadow-small ring-border-subtle z-10 mb-8 mt-16 h-full w-full rounded-2xl ring-1">
               <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center rounded-t-2xl border-b p-1">
                 <form
                   onSubmit={(e) => e.preventDefault()}
-                  className="flex h-fit w-full items-center gap-4 py-2 px-4"
+                  className="flex h-fit w-full items-center gap-4 px-4 py-2"
                 >
                   <div className="min-w-40">
                     <ToggleGroup
                       value={toggle}
                       onChange={(v) => setToggle(v as any)}
                       variant="neutral"
+                      aria-label="Velg ikonvariant"
                     >
                       <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
                       <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
@@ -250,7 +251,7 @@ export const IconPage = ({ name }: { name: string }) => {
                     closeButton={false}
                     aria-modal
                     aria-label={`${name} ikon`}
-                    className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded py-6 px-2 focus:outline-none sm:px-6"
+                    className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded px-2 py-6 focus:outline-none sm:px-6"
                   >
                     {name && <IconSidebar name={name} focusRef={focusRef} />}
                   </Modal>

@@ -55,9 +55,11 @@ const SuggestionBlockIcon = ({
     <div className={cl("mb-12 mt-6 flex gap-3 rounded-lg  py-4 ")}>
       <span className="shrink-0 text-2xl">{options[variant]?.icon}</span>
       <div className="grid">
-        <Heading size="small" level="2">
-          {options[variant]?.heading}
-        </Heading>
+        {options[variant]?.heading && (
+          <Heading size="small" level="2">
+            {options[variant]?.heading}
+          </Heading>
+        )}
         <BodyLong className="mt-2">{options[variant]?.text}</BodyLong>
         <Button
           variant="secondary"
