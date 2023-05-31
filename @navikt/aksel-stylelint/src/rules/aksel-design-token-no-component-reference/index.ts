@@ -12,9 +12,10 @@ const prefix_ac = "--ac-";
 
 export const messages = stylelint.utils.ruleMessages(ruleNamePackage, {
   valueRefComponent: (node: any, invalidValue: string) =>
-    `property "${node.prop}" has offending value "${invalidValue}". ` +
-    `The value references a component level token ('${prefix_ac}'). ` +
-    `It is better to either reference a global level token ('--a-') or ` +
+    `Referencing ("${prefix_ac}*") not allowed.\n\n` +
+    `Property "${node.prop}" has offending value "${invalidValue}". ` +
+    `The value references a component level token ("${prefix_ac}"). ` +
+    `It is better to either reference a global level token ("--a-") or ` +
     `create a custom token instead. ` +
     `\n\nVersion: ${packageVersion}`,
 });

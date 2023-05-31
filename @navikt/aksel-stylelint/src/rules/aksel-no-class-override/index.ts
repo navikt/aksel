@@ -8,6 +8,7 @@ const prefixes = ["navds-", "navdsi-"];
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   unexpected: (value) =>
+    `("${value}") not allowed.\n\n` +
     `"${value}" looks like a class name used in the design system, ` +
     `because it starts with "${prefixes.join('" or "')}". ` +
     "It is not recommended to override the styling in the design system.",
