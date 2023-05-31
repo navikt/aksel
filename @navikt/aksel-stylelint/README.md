@@ -127,7 +127,7 @@ a {
 }
 ```
 
-## aksel-no-class-override
+## @navikt/aksel-no-class-override
 
 Warns when trying to override design system styling by using class selectors that starts with "navds-" or "navdsi-". Overriding styles in the design system is discouraged. We want to have consistent look and feel across applications. Even if it seems to work fine now, it might break on subsequent updates in the design system.
 
@@ -151,7 +151,7 @@ Warns when trying to override design system styling by using class selectors tha
 }
 ```
 
-## aksel-no-deprecated-classes
+## @navikt/aksel-no-deprecated-classes
 
 Warns when you try to use deprecated class names.
 
