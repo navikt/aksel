@@ -26,7 +26,7 @@ export default function transformer(file, api, options, ...rest) {
   });
 
   if (localName === null) {
-    return root.toSource(options.printOptions);
+    return root.toSource(getLineTerminator(file.source));
   }
 
   /* Finds and replaces import from CopyToClipboard -> CopyButton */

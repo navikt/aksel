@@ -56,7 +56,7 @@ export default function transformer(file: JSCodeshift, api) {
         "@navikt/ds-tokens/dist/tokens"
       );
 
-      let code = root.toSource();
+      let code = root.toSource(getLineTerminator(file.source));
 
       const rgx = new RegExp("(" + localName + ")", "gm");
       code = code.replace(rgx, out);
