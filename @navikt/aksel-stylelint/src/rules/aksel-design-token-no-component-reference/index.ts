@@ -4,7 +4,7 @@ import valueParser from "postcss-value-parser";
 
 import { getPackageVersion, isCustomProperty, tokenExists } from "../../utils";
 
-const ruleName = "aksel-design-token-exists";
+const ruleName = "aksel-design-token-no-component-reference";
 const ruleNamePackage = `@navikt/${ruleName}`;
 const packageVersion = getPackageVersion();
 
