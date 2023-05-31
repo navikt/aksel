@@ -82,7 +82,7 @@ This is since they are by default not defined, leading to unknown side-effects w
 
 ```css
 html {
-    stroke: var(--ac-button-loader-stroke));
+    stroke: var(--ac-button-loader-stroke);
                 ^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 ```
