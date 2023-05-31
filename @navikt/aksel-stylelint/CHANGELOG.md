@@ -1,5 +1,11 @@
 # @navikt/aksel-stylelint
 
+## 3.4.1
+
+### Patch Changes
+
+- :bug: Stylelint hotfix, inkluderer nå dist-mappe (kanskje..)
+
 ## 3.4.0
 
 ### Minor Changes
