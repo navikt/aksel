@@ -1,3 +1,5 @@
+import { getLineTerminator } from "../../../utils/lineterminator";
+
 /**
  * @param {import('jscodeshift').FileInfo} file
  * @param {import('jscodeshift').API} api
@@ -79,5 +81,5 @@ export default function transformer(file, api, options) {
     });
   }
 
-  return root.toSource(options.printOptions);
+  return root.toSource(getLineTerminator(file.source));
 }
