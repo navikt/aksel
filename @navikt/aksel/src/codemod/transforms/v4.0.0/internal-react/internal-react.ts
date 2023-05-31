@@ -1,3 +1,4 @@
+import { getLineTerminator } from "../../../utils/lineterminator";
 import moveAndRenameImport from "../../../utils/moveAndRenameImport";
 
 /**
@@ -33,5 +34,5 @@ export default function transformer(file, api, options, ...rest) {
     toName: "Timeline",
   });
 
-  return root.toSource(options.printOptions);
+  return root.toSource(getLineTerminator(file.source));
 }
