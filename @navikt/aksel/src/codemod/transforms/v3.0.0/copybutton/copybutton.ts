@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import moveAndRenameImport from "../../../utils/moveAndRenameImport";
 import removePropsFromComponent from "../../../utils/removeProps";
+import { getLineTerminator } from "../../../utils/lineterminator";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
@@ -85,5 +86,5 @@ export default function transformer(file, api, options, ...rest) {
     });
   }
 
-  return root.toSource(options.printOptions);
+  return root.toSource(getLineTerminator(file.source));
 }
