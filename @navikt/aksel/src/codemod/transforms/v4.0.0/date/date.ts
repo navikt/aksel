@@ -2,7 +2,7 @@
  * @param {import('jscodeshift').FileInfo} file
  * @param {import('jscodeshift').API} api
  */
-export default function transformer(file, api, options) {
+export default function transformer(file) {
   const names = [
     "UNSAFE_useDatepicker",
     "UNSAFE_DatePicker",
@@ -14,8 +14,7 @@ export default function transformer(file, api, options) {
   let src = file.source;
 
   names.forEach((name) => {
-    const rgx = new RegExp(`${name}`, "gm");
-    src = src.replace(rgx, name.replace("UNSAFE_", ""));
+    src = src.replaceAll(name, name.replace("UNSAFE_", ""));
   });
 
   return src;
