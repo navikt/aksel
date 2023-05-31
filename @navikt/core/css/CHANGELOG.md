@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 3.4.0
+
+### Minor Changes
+
+- [#2010](https://github.com/navikt/aksel/pull/2010) [`b958d41a2`](https://github.com/navikt/aksel/commit/b958d41a20c66327658514fcf24ae20893c9531a) Thanks [@HalvorHaugan](https://github.com/HalvorHaugan)! - Ny variant "moderate" i Tag
+
 ## 3.3.1
 
 ## 3.3.0
