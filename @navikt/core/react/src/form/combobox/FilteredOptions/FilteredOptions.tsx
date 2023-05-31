@@ -5,6 +5,7 @@ import { PlusIcon } from "@navikt/aksel-icons";
 import CheckIcon from "./CheckIcon";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { useInputContext } from "../Input/inputContext";
 
 interface FilteredOptionsProps {
   id: string;
@@ -17,7 +18,10 @@ interface FilteredOptionsProps {
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
-  ({ id, toggleOption, value, loading, singleSelect }, ref) => {
+  ({ toggleOption, value, loading, singleSelect }, ref) => {
+    const {
+      inputProps: { id },
+    } = useInputContext();
     const {
       isListOpen,
       filteredOptions,

@@ -8,6 +8,7 @@ import { InputContextProvider } from "./Input/inputContext";
 export default function ComboboxProvider(props) {
   const {
     children,
+    id,
     isListOpen,
     onToggleSelected,
     selectedOptions,
@@ -18,7 +19,7 @@ export default function ComboboxProvider(props) {
     ...rest
   } = props;
   return (
-    <InputContextProvider value={{ value, onChange }}>
+    <InputContextProvider value={{ id, value, onChange }}>
       <SelectedOptionsProvider value={{ selectedOptions, onToggleSelected }}>
         <CustomOptionsProvider>
           <FilteredOptionsProvider

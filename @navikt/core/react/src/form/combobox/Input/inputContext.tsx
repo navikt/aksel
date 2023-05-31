@@ -5,18 +5,41 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { useFormField } from "../../useFormField";
 
 type InputContextType = {
+  inputProps: any;
   value: string;
   onChange: (value: string) => void;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  size: "small" | "medium";
 };
 
 const InputContext = createContext<InputContextType>({} as InputContextType);
 
 export const InputContextProvider = ({ children, value: props }) => {
-  const { value: externalValue, onChange: externalOnChange } = props;
+  const {
+    description,
+    disabled,
+    error,
+    errorId,
+    id: externalId,
+    value: externalValue,
+    onChange: externalOnChange,
+    size: _size,
+  } = props;
+  const formFieldProps = useFormField(
+    {
+      description,
+      disabled,
+      error,
+      errorId,
+      id: externalId,
+      size: _size,
+    },
+    "comboboxfield"
+  );
   const [internalValue, setInternalValue] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -36,7 +59,7 @@ export const InputContextProvider = ({ children, value: props }) => {
 
   return (
     <InputContext.Provider
-      value={{ value, onChange, searchTerm, setSearchTerm }}
+      value={{ ...formFieldProps, value, onChange, searchTerm, setSearchTerm }}
     >
       {children}
     </InputContext.Provider>

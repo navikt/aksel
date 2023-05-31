@@ -23,6 +23,7 @@ const getMatchingValuesFromList = (value, list) =>
   list?.filter((listItem) => isPartOfText(value, listItem));
 
 type FilteredOptionsContextType = {
+  activeDecendantId?: string;
   filteredOptionsRef: React.RefObject<HTMLUListElement>;
   filteredOptionsIndex: number | null;
   setFilteredOptionsIndex: (index: number) => void;
@@ -43,7 +44,13 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
 export const FilteredOptionsProvider = ({ children, value: props }) => {
   const { isListOpen: isExternalListOpen, options, singleSelect } = props;
   const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
-  const { value, setSearchTerm, onChange, searchTerm } = useInputContext();
+  const {
+    inputProps: { id },
+    value,
+    setSearchTerm,
+    onChange,
+    searchTerm,
+  } = useInputContext();
 
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState<
     number | null
@@ -163,7 +170,18 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     toggleIsListOpen,
   ]);
 
+  const activeDecendantId = useMemo(() => {
+    if (filteredOptionsIndex === null) {
+      return undefined;
+    } else if (filteredOptionsIndex === -1) {
+      return `${id}-combobox-new-option`;
+    } else {
+      return `${id}-option-${currentOption}`;
+    }
+  }, [filteredOptionsIndex, currentOption, id]);
+
   const filteredOptionsState = {
+    activeDecendantId,
     filteredOptionsRef,
     filteredOptionsIndex,
     setFilteredOptionsIndex,

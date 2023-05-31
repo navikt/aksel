@@ -1,10 +1,10 @@
 import { omit } from "../../..";
-import { useFormField } from "../../useFormField";
 import React, { useCallback, forwardRef, InputHTMLAttributes } from "react";
 import cl from "clsx";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
+import { useInputContext } from "./inputContext";
 
 interface InputProps
   extends Omit<
@@ -39,20 +39,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
-    const {
-      inputProps: { id, ...inputProps },
-      size = "medium",
-    } = useFormField({ size: _size, error, errorId }, "comboboxfield");
+    const { inputProps, size } = useInputContext();
     const { selectedOptions, removeSelectedOption } =
       useSelectedOptionsContext();
     const { customOptions, removeCustomOption } = useCustomOptionsContext();
     const {
+      activeDecendantId,
       toggleIsListOpen,
       isListOpen,
       filteredOptionsIndex,
       moveFocusUp,
       moveFocusDown,
-      currentOption,
     } = useFilteredOptionsContext();
 
     const handleKeyUp = (e) => {
@@ -115,16 +112,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       ]
     );
 
-    function getActiveDescendantId() {
-      if (filteredOptionsIndex === null) {
-        return undefined;
-      } else if (filteredOptionsIndex === -1) {
-        return `${id}-combobox-new-option`;
-      } else {
-        return `${id}-option-${currentOption}`;
-      }
-    }
-
     return (
       <input
         ref={ref}
@@ -142,11 +129,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         role="combobox"
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
-        aria-controls={`${id}-filteredOptions`}
+        aria-controls={`${inputProps.id}-filteredOptions`}
         aria-expanded={!!isListOpen}
         autoComplete="off"
         aria-autocomplete="list"
-        aria-activedescendant={getActiveDescendantId()}
+        aria-activedescendant={activeDecendantId}
         className={cl(
           inputClassName,
           "navds-combobox__input",

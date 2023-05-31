@@ -7,7 +7,6 @@ import React, {
   useRef,
 } from "react";
 import { BodyShort, Label, mergeRefs } from "../..";
-import { useFormField } from "../useFormField";
 import ClearButton from "./ClearButton";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
@@ -22,13 +21,6 @@ import Input from "./Input/Input";
 
 export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
-    const {
-      inputProps,
-      size = "medium",
-      inputDescriptionId,
-      hasError,
-    } = useFormField(props, "comboboxfield");
-
     const {
       value: externalValue,
       onChange: externalOnChange,
@@ -45,7 +37,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       toggleListButtonLabel,
       isListOpen: isExternalListOpen,
       inputClassName,
-      id = "",
       shouldShowSelectedOptions = true,
       singleSelect,
       ...rest
@@ -70,7 +61,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       singleSelectedValue,
     } = useSelectedOptionsContext();
 
-    const { value, onChange } = useInputContext();
+    const {
+      hasError,
+      inputDescriptionId,
+      inputProps,
+      value,
+      onChange,
+      size = "medium",
+    } = useInputContext();
 
     const focusInput = useCallback(() => {
       inputRef.current?.focus?.();
@@ -194,7 +192,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   {singleSelectedValue}
                 </span>
                 <Input
-                  id={id}
+                  id={inputProps.id}
                   key="combobox-input"
                   ref={mergedInputRef}
                   value={value}
@@ -222,7 +220,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 handleDeleteSelectedOption={handleDeleteSelectedOption}
               >
                 <Input
-                  id={id}
+                  id={inputProps.id}
                   key="combobox-input"
                   ref={mergedInputRef}
                   value={value}
@@ -248,7 +246,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           </div>
           <FilteredOptions
             singleSelect={singleSelect}
-            id={id}
+            id={inputProps.id}
             toggleOption={toggleOption}
             focusInput={focusInput}
             value={value}
