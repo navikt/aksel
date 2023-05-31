@@ -20,12 +20,14 @@ const packageVersion = packageJson.version;
 
 export const messages = stylelint.utils.ruleMessages(ruleNamePackage, {
   propNotExist: (node: any) =>
-    `property "${node.prop}" has a name that seems like it intends to override a design token by ` +
+    `("${node.prop}") does not exist in the design system.\n\n` +
+    `Property "${node.prop}" has a name that seems like it intends to override a design token by ` +
     `using one of the following prefixes [${controlledPrefixes}]. ` +
-    `However, that token doesn't seem to exist in the design system. ` +
+    `However, that token doesn"t seem to exist in the design system. ` +
     `\n\nVersion: ${packageVersion}`,
   valueNotExist: (node: any, invalidValues: string) =>
-    `property "${node.prop}" has offending value "${invalidValues}", ` +
+    `("${invalidValues}") does not exist in the design system.\n\n` +
+    `Property "${node.prop}" has offending value "${invalidValues}", ` +
     `and the value seems like it intends to reference a design token by ` +
     `using one of the following prefixes [${controlledPrefixes}]. ` +
     `However, that token doesn't seem to exist in the design system. ` +

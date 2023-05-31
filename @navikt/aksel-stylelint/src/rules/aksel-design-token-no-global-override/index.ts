@@ -17,8 +17,9 @@ const packageVersion = packageJson.version;
 
 export const messages = stylelint.utils.ruleMessages(ruleNamePackage, {
   propOverrideGlobal: (node: any) =>
-    `property "${node.prop}" tries to override a global level token ('${prefix_a}'), this is highly discouraged. ` +
-    `It is better to override a component level token ('--ac-') or create a custom token instead. ` +
+    `Overriding ("${node.prop}*") not allowed.\n\n` +
+    `Property "${node.prop}" tries to override a global level token ("${prefix_a}"), this is highly discouraged. ` +
+    `It is better to override a component level token ("--ac-") or create a custom token instead. ` +
     `Overriding global tokens should only be done when creating custom global themes.` +
     `\n\nVersion: ${packageVersion}`,
 });
