@@ -65,7 +65,8 @@ export const migrations: {
   ],
   "v4.0.0": [
     {
-      description: "",
+      description:
+        "Removes all instances of UNSAFE_ for datepicker/monthpicker.",
       value: "v4-date",
       path: "v4.0.0/date/date",
     },
