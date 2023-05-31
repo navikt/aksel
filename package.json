@@ -149,6 +149,8 @@
         ],
         "rules": {
           "@navikt/aksel-design-token-exists": true,
+          "@navikt/aksel-design-token-no-component-reference": null,
+          "@navikt/aksel-design-token-no-global-override": null,
           "@navikt/aksel-no-internal-tokens": null,
           "@navikt/aksel-no-class-override": null
         }
