@@ -9,13 +9,12 @@ const packageJson = JSON.parse(
 );
 
 const ruleName = "aksel-design-token-no-global-override";
-const ruleNamePackage = `@navikt/${ruleName}`;
 
 const prefix_a = "--a-";
 
 const packageVersion = packageJson.version;
 
-export const messages = stylelint.utils.ruleMessages(ruleNamePackage, {
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   propOverrideGlobal: (node: any) =>
     `Overriding ("${node.prop}*") not allowed.\n\n` +
     `Property "${node.prop}" tries to override a global level token ("${prefix_a}"), this is highly discouraged. ` +
@@ -39,7 +38,7 @@ const checkDeclProp = (
         message: messages.propOverrideGlobal(rootNode),
         node: rootNode,
         result: postcssResult,
-        ruleName: ruleNamePackage,
+        ruleName,
         word: prop,
       });
     }
@@ -54,7 +53,7 @@ const ruleFunction: stylelint.Rule = () => {
   };
 };
 
-ruleFunction.ruleName = ruleNamePackage;
+ruleFunction.ruleName = ruleName;
 ruleFunction.messages = {};
 ruleFunction.meta = {
   url: `https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#${ruleName}`,

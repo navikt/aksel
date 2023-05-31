@@ -10,7 +10,6 @@ const packageJson = JSON.parse(
 );
 
 const ruleName = "aksel-design-token-exists";
-const ruleNamePackage = `@navikt/${ruleName}`;
 
 const prefix_a = "--a-";
 const prefix_ac = "--ac-";
@@ -18,7 +17,7 @@ export const controlledPrefixes = [prefix_a, prefix_ac];
 
 const packageVersion = packageJson.version;
 
-export const messages = stylelint.utils.ruleMessages(ruleNamePackage, {
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   propNotExist: (node: any) =>
     `("${node.prop}") does not exist in the design system.\n\n` +
     `Property "${node.prop}" has a name that seems like it intends to override a design token by ` +
@@ -51,7 +50,7 @@ const checkDeclValue = (
         message: messages.valueNotExist(rootNode, node.value),
         node: rootNode,
         result: postcssResult,
-        ruleName: ruleNamePackage,
+        ruleName,
         word: node.value,
       });
     }
@@ -73,7 +72,7 @@ const checkDeclProp = (
       message: messages.propNotExist(rootNode),
       node: rootNode,
       result: postcssResult,
-      ruleName: ruleNamePackage,
+      ruleName,
       word: prop,
     });
   }
@@ -88,7 +87,7 @@ const ruleFunction: stylelint.Rule = () => {
   };
 };
 
-ruleFunction.ruleName = ruleNamePackage;
+ruleFunction.ruleName = ruleName;
 ruleFunction.messages = {};
 ruleFunction.meta = {
   url: `https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#${ruleName}`,

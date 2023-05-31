@@ -5,12 +5,11 @@ import valueParser from "postcss-value-parser";
 import { getPackageVersion, isCustomProperty, tokenExists } from "../../utils";
 
 const ruleName = "aksel-design-token-no-component-reference";
-const ruleNamePackage = `@navikt/${ruleName}`;
 const packageVersion = getPackageVersion();
 
 const prefix_ac = "--ac-";
 
-export const messages = stylelint.utils.ruleMessages(ruleNamePackage, {
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   valueRefComponent: (node: any, invalidValue: string) =>
     `Referencing ("${prefix_ac}*") not allowed.\n\n` +
     `Property "${node.prop}" has offending value "${invalidValue}". ` +
@@ -37,7 +36,7 @@ const checkDeclValue = (
         message: messages.valueRefComponent(rootNode, node.value),
         node: rootNode,
         result: postcssResult,
-        ruleName: ruleNamePackage,
+        ruleName,
         word: node.value,
       });
     }
@@ -52,7 +51,7 @@ const ruleFunction: stylelint.Rule = () => {
   };
 };
 
-ruleFunction.ruleName = ruleNamePackage;
+ruleFunction.ruleName = ruleName;
 ruleFunction.messages = {};
 ruleFunction.meta = {
   url: `https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#${ruleName}`,

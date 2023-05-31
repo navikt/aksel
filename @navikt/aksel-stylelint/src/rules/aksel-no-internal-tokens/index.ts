@@ -1,7 +1,7 @@
 import stylelint from "stylelint";
 import valueParser from "postcss-value-parser";
 
-const ruleName = "@navikt/aksel-no-internal-tokens";
+const ruleName = "aksel-no-internal-tokens";
 const url =
   "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel-no-internal-tokens";
 const prefix = "--__ac-";

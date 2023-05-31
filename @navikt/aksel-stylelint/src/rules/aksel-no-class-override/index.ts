@@ -1,7 +1,7 @@
 import stylelint from "stylelint";
 import selectorParser from "postcss-selector-parser";
 
-const ruleName = "@navikt/aksel-no-class-override";
+const ruleName = "aksel-no-class-override";
 const url =
   "https://github.com/navikt/aksel/blob/main/%40navikt/aksel-stylelint/README.md#aksel-no-class-override";
 const prefixes = ["navds-", "navdsi-"];
