@@ -9,7 +9,7 @@ const packageJson = JSON.parse(
   readFileSync(`${__dirname}/../../../package.json`).toString()
 );
 
-const ruleName = "aksel-design-token-exists";
+const ruleName = "aksel/design-token-exists";
 
 const prefix_a = "--a-";
 const prefix_ac = "--ac-";

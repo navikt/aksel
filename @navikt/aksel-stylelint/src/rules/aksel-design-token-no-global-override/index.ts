@@ -8,7 +8,7 @@ const packageJson = JSON.parse(
   readFileSync(`${__dirname}/../../../package.json`).toString()
 );
 
-const ruleName = "aksel-design-token-no-global-override";
+const ruleName = "aksel/design-token-no-global-override";
 
 const prefix_a = "--a-";
 

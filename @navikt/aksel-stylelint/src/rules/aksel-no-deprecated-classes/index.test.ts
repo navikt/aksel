@@ -11,7 +11,7 @@ getTestRule()({
     {
       code: ".navds-foo, navdsi-bar, .baz {}",
       description: "allowed class names",
-      // Allowed because this rule only checks deprecated class names. See also aksel-no-class-override.
+      // Allowed because this rule only checks deprecated class names. See also aksel/no-class-override.
     },
   ],
 

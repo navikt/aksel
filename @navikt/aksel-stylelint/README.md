@@ -29,7 +29,7 @@ It should be sufficient for most cases to extend the recommended defaults.
   }
 ```
 
-## aksel-design-token-exists
+## aksel/design-token-exists
 
 Makes sure all referenced CSS-variables with prefix `--a-` or `--ac-` exists in Aksels token-collection. As a side-effect Aksel reserves these prefixes for its design-tokens.
 
@@ -52,7 +52,7 @@ html {
 }
 ```
 
-## aksel-design-token-no-global-override
+## aksel/design-token-no-global-override
 
 Makes sure you don't override global level tokens with `--a-`-prefix. Global/Semantic tokens are supposed to be used as is, and not overridden. That is unless you are theming your solution to match a different sub-brands or brands. In those cases we encourage to make all the changes in a single 'config'-file, then disable the rule for that file only.
 
@@ -73,7 +73,7 @@ div {
 }
 ```
 
-## aksel-design-token-no-component-reference
+## aksel/design-token-no-component-reference
 
 Makes sure you don't reference component level tokens with `--ac-`-prefix. Component level tokens are only supposed to be overridden, not referenced.
 This is since they are by default not defined, leading to unknown side-effects when referenced incorrectly.
@@ -95,7 +95,7 @@ html {
 }
 ```
 
-## aksel-no-internal-tokens
+## aksel/no-internal-tokens
 
 Disallows use or override of internal Aksel design tokens. Internal tokens are not supposed to be used outside the design system, and may be changed or removed without warning. Be aware that the rule simply checks the prefix of the token, and not if it actually exists in the design system. Even if it doesn't exist, using design system prefixes should be avoided.
 
@@ -127,7 +127,7 @@ a {
 }
 ```
 
-## aksel-no-class-override
+## aksel/no-class-override
 
 Warns when trying to override design system styling by using class selectors that starts with "navds-" or "navdsi-". Overriding styles in the design system is discouraged. We want to have consistent look and feel across applications. Even if it seems to work fine now, it might break on subsequent updates in the design system.
 
@@ -151,7 +151,7 @@ Warns when trying to override design system styling by using class selectors tha
 }
 ```
 
-## aksel-no-deprecated-classes
+## aksel/no-deprecated-classes
 
 Warns when you try to use deprecated class names.
 
