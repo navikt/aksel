@@ -148,11 +148,11 @@
           "@navikt/internal/css/**/*"
         ],
         "rules": {
-          "@navikt/aksel-design-token-exists": true,
-          "@navikt/aksel-design-token-no-component-reference": null,
-          "@navikt/aksel-design-token-no-global-override": null,
-          "@navikt/aksel-no-internal-tokens": null,
-          "@navikt/aksel-no-class-override": null
+          "aksel/design-token-exists": true,
+          "aksel/design-token-no-component-reference": null,
+          "aksel/design-token-no-global-override": null,
+          "aksel/no-internal-tokens": null,
+          "aksel/no-class-override": null
         }
       }
     ],
