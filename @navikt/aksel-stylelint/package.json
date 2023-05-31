@@ -1,16 +1,18 @@
 {
   "name": "@navikt/aksel-stylelint",
-  "version": "3.0.0-beta.11",
+  "version": "3.3.1",
   "author": "Aksel | NAV",
-  "homepage": "https://aksel.nav.no/lint",
+  "homepage": "https://aksel.nav.no/grunnleggende/kode/stylelint",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git",
-    "directory": "@navikt/aksel-icons"
+    "directory": "@navikt/aksel-stylelint"
   },
   "keywords": [
     "aksel",
-    "stylelint"
+    "stylelint",
+    "config",
+    "linting"
   ],
   "publishConfig": {
     "access": "public"
@@ -34,8 +36,8 @@
     "dev": "yarn watch:lint"
   },
   "devDependencies": {
-    "@navikt/ds-css": "*",
-    "@navikt/ds-tokens": "*",
+    "@navikt/ds-css": "^3.3.1",
+    "@navikt/ds-tokens": "^3.3.1",
     "@types/jest": "^29.0.0",
     "concurrently": "7.2.1",
     "copyfiles": "2.4.1",
