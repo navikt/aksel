@@ -1,5 +1,11 @@
 # @navikt/aksel-stylelint
 
+## 3.4.2
+
+### Patch Changes
+
+- [#2017](https://github.com/navikt/aksel/pull/2017) [`7615dbbb5`](https://github.com/navikt/aksel/commit/7615dbbb54c7c96e2252366188547b27b2ac1142) Thanks [@JulianNymark](https://github.com/JulianNymark)! - add missing dependency
+
 ## 3.4.1
 
 ### Patch Changes
