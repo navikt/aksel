@@ -7,13 +7,17 @@ import { TracingInstrumentation } from "@grafana/faro-web-tracing";
 
 let faro: Faro | null = null;
 export function initObserver(): void {
-  if (typeof window === "undefined" || faro !== null) return;
+  if (typeof window === "undefined" || faro !== null) {
+    return;
+  }
 
   getFaro();
 }
 
-export function getFaro(): Faro {
-  if (faro != null) return faro;
+function getFaro(): Faro {
+  if (faro !== null) {
+    return faro;
+  }
   faro = initializeFaro({
     url: "https://telemetry.ekstern.dev.nav.no/collect",
     app: {
