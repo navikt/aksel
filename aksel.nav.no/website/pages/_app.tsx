@@ -10,6 +10,7 @@ import { Router } from "next/router";
 import { useEffect } from "react";
 import { IdContext } from "../components/website-modules/utils/contexts/id-context";
 import "../styles/index.css";
+import { initObserver } from "components/website-modules/utils/initObserver";
 
 initAmplitude();
 
@@ -24,6 +25,7 @@ function App({
 }) {
   useScrollToHashOnPageLoad();
   usePageView(router, pageProps);
+  initObserver();
 
   useEffect(() => {
     if (window.location.host === "design.nav.no") {

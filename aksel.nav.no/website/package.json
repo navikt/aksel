@@ -26,6 +26,8 @@
     "watch:tw": "yarn tailwindcss -i ./styles/index.css -o ./dist/tw.css --watch"
   },
   "dependencies": {
+    "@grafana/faro-web-sdk": "1.0.5",
+    "@grafana/faro-web-tracing": "1.0.5",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^6.1.1",
     "@sanity/code-input": "4.1.1",
