@@ -131,12 +131,12 @@ const StyleMappings = {
     },
     { component: "Tooltip", main: "tooltip.css", dependencies: [typoCss] },
     {
-      component: "UNSAFE_DatePicker",
+      component: "DatePicker",
       main: "date.css",
       dependencies: [typoCss, "button.css", "popover.css"],
     },
     {
-      component: "UNSAFE_MonthPicker",
+      component: "MonthPicker",
       main: "date.css",
       dependencies: [typoCss, "button.css", "popover.css"],
     },
