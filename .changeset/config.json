@@ -11,7 +11,8 @@
       "@navikt/ds-codemod",
       "@navikt/aksel-icons",
       "@navikt/aksel",
-      "@navikt/ds-icons"
+      "@navikt/ds-icons",
+      "@navikt/aksel-stylelint"
     ]
   ],
   "linked": [],

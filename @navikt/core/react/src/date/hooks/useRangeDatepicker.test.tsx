@@ -2,20 +2,20 @@
 import { act, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
-import { UNSAFE_DatePicker, UNSAFE_useRangeDatepicker } from "..";
+import { DatePicker, useRangeDatepicker } from "..";
 
 const RangeDemo = () => {
   const { datepickerProps, fromInputProps, selectedRange, toInputProps } =
-    UNSAFE_useRangeDatepicker({
+    useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
     });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <UNSAFE_DatePicker {...datepickerProps}>
-        <UNSAFE_DatePicker.Input {...fromInputProps} label="Fra" />
-        <UNSAFE_DatePicker.Input {...toInputProps} label="Til" />
-      </UNSAFE_DatePicker>
+      <DatePicker {...datepickerProps}>
+        <DatePicker.Input {...fromInputProps} label="Fra" />
+        <DatePicker.Input {...toInputProps} label="Til" />
+      </DatePicker>
       <div title="res">{JSON.stringify(selectedRange)}</div>
     </div>
   );

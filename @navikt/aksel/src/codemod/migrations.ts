@@ -80,6 +80,12 @@ export const migrations: {
       warning:
         "Remember to remove '@navikt/ds-css-internal' imports if no longer needed! Also run 'v4-internal-react' to convert internal-react imports to core-imports",
     },
+    {
+      description:
+        "Removes all instances of UNSAFE_ for datepicker/monthpicker.",
+      value: "v4-date",
+      path: "v4.0.0/date/date",
+    },
   ],
 };
 
