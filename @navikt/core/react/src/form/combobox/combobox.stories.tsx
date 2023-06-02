@@ -57,6 +57,14 @@ export const Default = (props) => {
   );
 };
 
+Default.args = {
+  controlled: false,
+  loading: false,
+  options,
+  initialSelectedOptions,
+  selectedOptions: [],
+};
+
 export const WithExternalChips = (props) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     props.selectedOptions
@@ -103,11 +111,11 @@ export const WithExternalChips = (props) => {
   );
 };
 
-Default.args = {
+WithExternalChips.args = {
   controlled: false,
   loading: false,
   options,
-  initialSelectedOptions,
+  selectedOptions: [],
 };
 
 export function Loading({ isListOpen, loading }) {
