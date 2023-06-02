@@ -5,16 +5,14 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { useFormField } from "../../useFormField";
+import { useFormField, FormFieldType } from "../../useFormField";
 
-type InputContextType = {
-  inputProps: any;
+interface InputContextType extends FormFieldType {
   value: string;
   onChange: (value: string) => void;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-  size: "small" | "medium";
-};
+}
 
 const InputContext = createContext<InputContextType>({} as InputContextType);
 
