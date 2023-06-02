@@ -1,4 +1,4 @@
-import { Expand } from "@navikt/ds-icons";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Label } from "@navikt/ds-react";
 import { StackCompactIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
@@ -53,10 +53,10 @@ export const Accordion = defineType({
           {val.list.map((x) => (
             <div
               key={x._key}
-              className="border-b-border flex w-full justify-between border-b py-2 px-4 "
+              className="border-b-border flex w-full justify-between border-b px-4 py-2 "
             >
               <span>{x.title}</span>
-              <Expand aria-hidden />
+              <ChevronDownIcon aria-hidden />
             </div>
           ))}
         </div>

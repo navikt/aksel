@@ -1,4 +1,4 @@
-import { FileError } from "@navikt/ds-icons";
+import { FileXMarkIcon } from "@navikt/aksel-icons";
 
 /* documentStore is in Alpha, so avoid using for now */
 export const PanesWithCount = async (
@@ -29,7 +29,7 @@ export const PanesWithCount = async (
     ),
     S.listItem()
       .title(`Uten kategori (${ids.filter((x) => !x?.kategori).length ?? 0})`)
-      .icon(FileError)
+      .icon(FileXMarkIcon)
       .child(
         S.documentList()
           .title("Uten kategori")
