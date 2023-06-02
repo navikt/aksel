@@ -1,4 +1,3 @@
-import { FileContent, Picture } from "@navikt/ds-icons";
 import {
   AccessDeniedIcon,
   BookIcon,
@@ -23,6 +22,7 @@ import { FeedbackPanes } from "./feedback";
 import { FeedbackView } from "./FeedbackPreview";
 import { GodPraksisPanes } from "./god-praksis";
 /* import Metrics from "./Metrics"; */
+import { FileTextIcon, ImageIcon } from "@navikt/aksel-icons";
 import { PanesWithCount } from "./with-count";
 
 /* import { WebPreview, JsonView } from './previews' */
@@ -270,7 +270,7 @@ export const structure = async (
                     S.documentListItem()
                       .title(`Forside`)
                       .schemaType(`aksel_forside`)
-                      .icon(Picture)
+                      .icon(ImageIcon)
                       .id(`aksel_forside_dokument`),
                     S.listItem()
                       .title("Feedback")
@@ -331,12 +331,12 @@ export const structure = async (
                     S.documentListItem()
                       .title(`Skrivehjelp`)
                       .schemaType(`skrivehjelp`)
-                      .icon(FileContent)
+                      .icon(FileTextIcon)
                       .id(`skrivehjelp`),
                     S.documentListItem()
                       .title(`Publiseringsflyt`)
                       .schemaType(`publication_flow`)
-                      .icon(FileContent)
+                      .icon(FileTextIcon)
                       .id(`publication_flow`),
                     S.listItem()
                       .title("Metrikker")

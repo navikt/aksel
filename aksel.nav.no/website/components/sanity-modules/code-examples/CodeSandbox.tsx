@@ -28,7 +28,6 @@ export const CodeSandbox = ({ code }: { code: string }) => {
             "@navikt/ds-css": "latest",
             "@navikt/ds-react-internal": "latest",
             "@navikt/ds-css-internal": "latest",
-            "@navikt/ds-icons": "latest",
             "@navikt/aksel-icons": "latest",
           },
         } as any,
