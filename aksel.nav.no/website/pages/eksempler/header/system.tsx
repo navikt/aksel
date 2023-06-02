@@ -1,4 +1,4 @@
-import { System } from "@navikt/ds-icons";
+import { MenuGridIcon } from "@navikt/aksel-icons";
 import { Dropdown, Header } from "@navikt/ds-react-internal";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -8,7 +8,7 @@ const Example = () => {
       <Header.Title as="h1">Sykepenger</Header.Title>
       <Dropdown>
         <Header.Button as={Dropdown.Toggle} className="ml-auto">
-          <System
+          <MenuGridIcon
             style={{ fontSize: "1.5rem" }}
             title="Systemer og oppslagsverk"
           />

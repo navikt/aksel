@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { logNav } from "../";
 
 const tools = [
-  {
+  /*   {
     title: "Identitet",
     description: "Åpen for alle",
     href: "https://identitet.nav.no/",
@@ -23,7 +23,7 @@ const tools = [
         />
       </svg>
     ),
-  },
+  }, */
   {
     title: "Security Playbook",
     description: "Åpen for alle",
@@ -70,7 +70,7 @@ const tools = [
 
 export const ToolCard = () => {
   return (
-    <ul className="mx-auto flex w-full max-w-screen-lg flex-col items-center justify-center gap-16 rounded-2xl bg-[#99F6E4] py-12 px-2 md:flex-row md:justify-evenly md:gap-4">
+    <ul className="mx-auto flex w-full max-w-screen-lg flex-col items-center justify-center gap-16 rounded-2xl bg-[#99F6E4] px-2 py-12 md:flex-row md:justify-evenly md:gap-4">
       {tools.map((t) => (
         <li key={t.title} className="flex w-56 items-center gap-4 md:w-fit">
           <div className="rotate-45 rounded-lg bg-[#5EEAD4] p-3">
