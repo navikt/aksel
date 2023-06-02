@@ -1,26 +1,26 @@
 import {
-  BabyChangingRoom,
-  Braille,
-  Cognition,
-  Refresh,
-} from "@navikt/ds-icons";
+  ArrowCirclepathIcon,
+  BrailleIcon,
+  ChangingRoomIcon,
+  HeadHeartIcon,
+} from "@navikt/aksel-icons";
 import { List } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
     <List>
-      <List.Item icon={<Braille aria-hidden />}>
+      <List.Item icon={<BrailleIcon aria-hidden />}>
         Blinkende innhold. Vi vil ikke gi brukerne våre anfall.
       </List.Item>
-      <List.Item icon={<Cognition aria-hidden />}>
+      <List.Item icon={<HeadHeartIcon aria-hidden />}>
         Kritiske problemer og problemer med høye barrierer på innhold med høy
         effekt.
       </List.Item>
-      <List.Item icon={<BabyChangingRoom aria-hidden />}>
+      <List.Item icon={<ChangingRoomIcon aria-hidden />}>
         Middels barrierer på innhold med høy effekt.
       </List.Item>
-      <List.Item icon={<Refresh aria-hidden />}>
+      <List.Item icon={<ArrowCirclepathIcon aria-hidden />}>
         Middels barrierer på innhold med middels effekt.
       </List.Item>
     </List>
