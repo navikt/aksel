@@ -8223,7 +8223,6 @@ __metadata:
     "@navikt/ds-codemod": ^3.4.2
     "@navikt/ds-css": ^3.4.2
     "@navikt/ds-css-internal": ^3.4.2
-    "@navikt/ds-icons": ^3.4.2
     "@navikt/ds-react": ^3.4.2
     "@navikt/ds-react-internal": ^3.4.2
     "@navikt/ds-tailwind": ^3.4.2
@@ -22904,22 +22903,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanity-plugin-iframe-pane@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "sanity-plugin-iframe-pane@npm:2.3.1"
-  dependencies:
-    "@sanity/icons": ^2.2.2
-    "@sanity/incompatible-plugin": ^1.0.0
-    "@sanity/ui": ^1.0.0
-    usehooks-ts: 2.9.1
-  peerDependencies:
-    react: ^18
-    sanity: ^3
-    styled-components: ^5.2
-  checksum: 86d8dcb3c4cbc7cb207dd385b0345b43c9a1ec17623e1d7fb44dde5c5db16fb47d90f50dfef66ebbc2016f2c7af665f6558e84f0449de87943d57ea3f862ebd0
-  languageName: node
-  linkType: hard
-
 "sanity-plugin-media@npm:^2.0.5":
   version: 2.0.5
   resolution: "sanity-plugin-media@npm:2.0.5"
@@ -25843,16 +25826,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"usehooks-ts@npm:2.9.1":
-  version: 2.9.1
-  resolution: "usehooks-ts@npm:2.9.1"
-  peerDependencies:
-    react: ^16.8.0  || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0  || ^17.0.0 || ^18.0.0
-  checksum: 36f1e4142ce23bc019b81d2e93aefd7f2c350abcf255598c21627114a69a2f2f116b35dc3a353375f09c6e4c9b704a04f104e3d10e98280545c097feca66c30a
-  languageName: node
-  linkType: hard
-
 "util-deprecate@npm:^1.0.1, util-deprecate@npm:^1.0.2, util-deprecate@npm:~1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -26326,7 +26299,6 @@ __metadata:
     recharts: ^2.2.0
     sanity: 3.11.5
     sanity-plugin-asset-source-unsplash: ^1.1.0
-    sanity-plugin-iframe-pane: ^2.3.1
     sanity-plugin-media: ^2.0.5
     sharp: 0.31.3
     sitemap: ^7.0.0
