@@ -1,6 +1,6 @@
 import { SanityDocumentLike } from "sanity";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Box, Card, Flex, Spinner, Text, ThemeProvider } from "@sanity/ui";
+import { Box, Card, Flex, Spinner, ThemeProvider } from "@sanity/ui";
 import {
   ArrowsCirclepathIcon,
   LeaveIcon,
@@ -35,6 +35,7 @@ export const Iframe = (props: IframeProps) => {
   const [displayUrl, setDisplayUrl] = useState("");
   const [iframeSize, setIframeSize] = useState("desktop");
   const iframe = useRef<HTMLIFrameElement>(null);
+  const initialLoad = useRef(true);
   const [loading, setLoading] = useState(true);
 
   const reload = useCallback(() => {
@@ -49,9 +50,11 @@ export const Iframe = (props: IframeProps) => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      reload();
-    }, 0);
+    const timeout = setTimeout(() => {
+      !initialLoad.current && reload();
+    }, 1500);
+
+    return () => clearTimeout(timeout);
   }, [displayed.slug, reload]);
 
   useEffect(() => {
@@ -64,13 +67,14 @@ export const Iframe = (props: IframeProps) => {
         resolveUrl &&
         typeof resolveUrl === "string"
       ) {
+        initialLoad.current = false;
         setDisplayUrl(resolveUrl);
       }
     };
 
     getUrl();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [displayed?.slug, reload]);
+  }, [displayed._rev]);
 
   return (
     <ThemeProvider>
@@ -79,10 +83,11 @@ export const Iframe = (props: IframeProps) => {
           <Flex align="center" gap={2}>
             <Box flex={1}>
               <Flex align="center" gap={1}>
-                <CopyButton copyText={displayUrl} size="small" />
-                <Text size={1} textOverflow="ellipsis">
-                  {displayUrl}
-                </Text>
+                <CopyButton
+                  copyText={displayUrl}
+                  size="small"
+                  text="Kopier url"
+                />
               </Flex>
             </Box>
             <Flex align="center" gap={1}>
@@ -155,7 +160,6 @@ export const Iframe = (props: IframeProps) => {
               ref={iframe}
               title="preview"
               style={sizes[iframeSize]}
-              frameBorder="0"
               src={displayUrl}
               onLoad={() => setLoading(false)}
             />
