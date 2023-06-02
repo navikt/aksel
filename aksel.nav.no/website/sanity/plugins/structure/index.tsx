@@ -8,7 +8,7 @@ import {
   OkHandIcon,
   TokenIcon,
 } from "@sanity/icons";
-import Iframe from "sanity-plugin-iframe-pane";
+import { Iframe } from "./IFrame";
 import { StructureBuilder } from "sanity/desk";
 import {
   bloggKategorier,
@@ -409,10 +409,6 @@ export const defaultDocumentNode = (S, { schemaType }) => {
         .component(Iframe)
         .options({
           url: (doc) => resolveProductionUrl(doc),
-          reload: {
-            button: true,
-            revision: true,
-          },
         })
         .title("Forhåndsvinsing"),
       S.view
