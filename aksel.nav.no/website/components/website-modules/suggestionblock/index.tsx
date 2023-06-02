@@ -1,4 +1,4 @@
-import { LightBulb } from "@navikt/ds-icons";
+import { LightBulbIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Button, Heading } from "@navikt/ds-react";
 import cl from "classnames";
 import { ChangeLogIconOutline } from "components/assets";
@@ -119,7 +119,7 @@ export const SuggestionBlock = ({
       )}
     >
       <BodyShort className="flex items-center gap-2">
-        <LightBulb aria-hidden className="shrink-0 text-2xl" />
+        <LightBulbIcon aria-hidden className="shrink-0" fontSize="1.75rem" />
         {options[variant]?.text}
       </BodyShort>
       <Button

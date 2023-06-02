@@ -8,7 +8,6 @@ import {
   ResolveSlugT,
   ResolveTemaT,
 } from "@/types";
-import { Next } from "@navikt/ds-icons";
 import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { PreviewSuspense } from "next-sanity/preview";
@@ -32,6 +31,7 @@ import {
   destructureBlocks,
 } from "@/sanity/queries";
 import { getAkselDocuments, urlFor } from "@/sanity/interface";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
@@ -209,7 +209,7 @@ const Page = ({ page: data }: PageProps["props"]) => {
         className="aksel-artikkel bg-surface-subtle pt-4 focus:outline-none"
       >
         <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
-          <article className="pt-12 pb-16 md:pb-32">
+          <article className="pb-16 pt-12 md:pb-32">
             <div className="mx-auto mb-16 max-w-prose lg:ml-0">
               <BreadCrumbs auto />
               <Heading
@@ -258,7 +258,7 @@ const Page = ({ page: data }: PageProps["props"]) => {
                           className="min-h-8 text-deepblue-800 focus-visible:shadow-focus flex items-center justify-center gap-[2px] rounded-full bg-gray-200 pl-4 pr-1 capitalize no-underline hover:underline focus:outline-none"
                         >
                           {title}
-                          <Next aria-hidden />
+                          <ChevronRightIcon aria-hidden fontSize="1.25rem" />
                         </BodyShort>
                       </NextLink>
                     </span>

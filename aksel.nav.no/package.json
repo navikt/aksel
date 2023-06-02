@@ -19,7 +19,6 @@
     "@navikt/ds-codemod": "^3.4.2",
     "@navikt/ds-css": "^3.4.2",
     "@navikt/ds-css-internal": "^3.4.2",
-    "@navikt/ds-icons": "^3.4.2",
     "@navikt/ds-react": "^3.4.2",
     "@navikt/ds-react-internal": "^3.4.2",
     "@navikt/ds-tailwind": "^3.4.2",
