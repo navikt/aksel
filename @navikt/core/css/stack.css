@@ -1,0 +1,39 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+/* stylelint-disable aksel/design-token-exists */
+.navds-stack {
+  --ac-stack-gap-xs: initial;
+  --ac-stack-gap-sm: initial;
+  --ac-stack-gap-md: initial;
+  --ac-stack-gap-lg: initial;
+  --ac-stack-gap-xl: initial;
+
+  gap: var(--ac-stack-gap-xs);
+  display: flex;
+  align-items: var(--ac-stack-align);
+  justify-content: var(--ac-stack-justify);
+  flex-flow: var(--ac-stack-direction) var(--ac-stack-wrap);
+}
+
+@media (min-width: 480px) {
+  .navds-stack {
+    gap: var(--ac-stack-gap-sm, var(--ac-stack-gap-xs));
+  }
+}
+
+@media (min-width: 768px) {
+  .navds-stack {
+    gap: var(--ac-stack-gap-md, var(--ac-stack-gap-sm, var(--ac-stack-gap-xs)));
+  }
+}
+
+@media (min-width: 1024px) {
+  .navds-stack {
+    gap: var(--ac-stack-gap-lg, var(--ac-stack-gap-md, var(--ac-stack-gap-sm, var(--ac-stack-gap-xs))));
+  }
+}
+
+@media (min-width: 1280px) {
+  .navds-stack {
+    gap: var(--ac-stack-gap-xl, var(--ac-stack-gap-lg, var(--ac-stack-gap-md, var(--ac-stack-gap-sm, var(--ac-stack-gap-xs)))));
+  }
+}
