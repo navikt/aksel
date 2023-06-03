@@ -15,6 +15,25 @@ export const Horizontal = {
   ),
 };
 
+export const Spacer = {
+  render: () => (
+    <VStack gap="8" align="stretch">
+      <HStack gap="4">
+        <Placeholders count={1} />
+        <HStack.Spacer />
+        <Placeholders count={1} />
+      </HStack>
+      <HStack gap="4">
+        <Placeholders count={1} />
+        <Placeholders count={1} />
+      </HStack>
+    </VStack>
+  ),
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 export const Vertical = {
   render: () => (
     <VStack gap="4">

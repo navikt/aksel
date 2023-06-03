@@ -77,10 +77,23 @@ const Stack: OverridableComponent<StackProps, HTMLDivElement> = forwardRef(
 
 export type HStackProps = Omit<StackProps, "direction">;
 
-export const HStack: OverridableComponent<HStackProps, HTMLDivElement> =
-  forwardRef((props, ref) => {
-    return <Stack {...props} ref={ref} direction="row" />;
-  });
+interface HStackComponentType
+  extends OverridableComponent<HStackProps, HTMLDivElement> {
+  Spacer: () => React.JSX.Element;
+}
+
+export const HStackComponent: OverridableComponent<
+  HStackProps,
+  HTMLDivElement
+> = forwardRef((props, ref) => {
+  return <Stack {...props} ref={ref} direction="row" />;
+});
+
+export const HStack = HStackComponent as HStackComponentType;
+
+export const Spacer = () => <div className="navds-stack__spacer" />;
+
+HStack.Spacer = Spacer;
 
 export type VStackProps = Omit<StackProps, "direction" | "wrap">;
 
