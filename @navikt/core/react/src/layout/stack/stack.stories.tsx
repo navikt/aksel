@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta } from "@storybook/react";
-import { HStack, VStack } from ".";
+import { HStack, VStack, Spacer } from ".";
 
 export default {
   title: "ds-react/Stack",
@@ -15,19 +15,25 @@ export const Horizontal = {
   ),
 };
 
-export const Spacer = {
+export const Spacing = {
   render: () => (
-    <VStack gap="8" align="stretch">
-      <HStack gap="4">
-        <Placeholders count={1} />
-        <HStack.Spacer />
-        <Placeholders count={1} />
-      </HStack>
-      <HStack gap="4">
-        <Placeholders count={1} />
-        <Placeholders count={1} />
-      </HStack>
-    </VStack>
+    <div style={{ height: "80vh" }}>
+      <VStack gap="8">
+        <HStack gap="4">
+          <Placeholders count={1} />
+          <Spacer />
+          <Placeholders count={1} />
+        </HStack>
+        <HStack gap="4">
+          <Placeholders count={1} />
+          <Placeholders count={1} />
+        </HStack>
+        <Spacer />
+        <HStack gap="4">
+          <Placeholders count={2} />
+        </HStack>
+      </VStack>
+    </div>
   ),
   parameters: {
     layout: "fullscreen",
@@ -40,6 +46,25 @@ export const Vertical = {
       <Placeholders count={4} />
     </VStack>
   ),
+};
+
+export const VerticalAlign = {
+  render: () => (
+    <VStack gap="4">
+      <VStack align="start">
+        <Placeholders count={2} />
+      </VStack>
+      <VStack align="center">
+        <Placeholders count={2} />
+      </VStack>
+      <VStack align="end">
+        <Placeholders count={2} />
+      </VStack>
+    </VStack>
+  ),
+  parameters: {
+    layout: "fullscreen",
+  },
 };
 
 export const OverrideComponent = {

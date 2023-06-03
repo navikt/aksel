@@ -1,11 +1,11 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
+import React, { forwardRef, HTMLAttributes } from "react";
+import { OverridableComponent } from "../../util/OverridableComponent";
 import {
   getResponsiveProps,
   ResponsiveProp,
   SpacingScale,
 } from "../utilities/css";
-import { OverridableComponent } from "../../util/OverridableComponent";
 
 type Justify =
   | "start"
@@ -16,8 +16,7 @@ type Justify =
   | "space-evenly";
 
 type Align = "start" | "center" | "end" | "baseline" | "stretch";
-
-interface StackProps extends HTMLAttributes<HTMLDivElement> {
+export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Justify-content
@@ -40,64 +39,38 @@ interface StackProps extends HTMLAttributes<HTMLDivElement> {
   direction: "row" | "column";
 }
 
-const Stack: OverridableComponent<StackProps, HTMLDivElement> = forwardRef(
-  (
-    {
-      as: Component = "div",
-      className,
-      align = "center",
-      justify,
-      wrap = true,
-      gap,
-      style: _style,
-      direction,
-      ...rest
-    },
-    ref
-  ) => {
-    const style = {
-      "--ac-stack-direction": direction,
-      "--ac-stack-align": align,
-      "--ac-stack-justify": justify,
-      "--ac-stack-wrap": wrap ? "wrap" : "nowrap",
-      ...getResponsiveProps("stack", "gap", "spacing", gap),
-      ..._style,
-    } as React.CSSProperties;
+export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
+  forwardRef(
+    (
+      {
+        as: Component = "div",
+        className,
+        align,
+        justify,
+        wrap = true,
+        gap,
+        style: _style,
+        direction,
+        ...rest
+      },
+      ref
+    ) => {
+      const style = {
+        "--ac-stack-direction": direction,
+        "--ac-stack-align": align,
+        "--ac-stack-justify": justify,
+        "--ac-stack-wrap": wrap ? "wrap" : "nowrap",
+        ...getResponsiveProps("stack", "gap", "spacing", gap),
+        ..._style,
+      } as React.CSSProperties;
 
-    return (
-      <Component
-        {...rest}
-        ref={ref}
-        style={style}
-        className={cl("navds-stack", className)}
-      />
-    );
-  }
-);
-
-export type HStackProps = Omit<StackProps, "direction">;
-
-interface HStackComponentType
-  extends OverridableComponent<HStackProps, HTMLDivElement> {
-  Spacer: () => React.JSX.Element;
-}
-
-export const HStackComponent: OverridableComponent<
-  HStackProps,
-  HTMLDivElement
-> = forwardRef((props, ref) => {
-  return <Stack {...props} ref={ref} direction="row" />;
-});
-
-export const HStack = HStackComponent as HStackComponentType;
-
-export const Spacer = () => <div className="navds-stack__spacer" />;
-
-HStack.Spacer = Spacer;
-
-export type VStackProps = Omit<StackProps, "direction" | "wrap">;
-
-export const VStack: OverridableComponent<VStackProps, HTMLDivElement> =
-  forwardRef((props, ref) => {
-    return <Stack {...props} ref={ref} direction="column" wrap={false} />;
-  });
+      return (
+        <Component
+          {...rest}
+          ref={ref}
+          style={style}
+          className={cl("navds-stack", `navds-stack--${direction}`, className)}
+        />
+      );
+    }
+  );
