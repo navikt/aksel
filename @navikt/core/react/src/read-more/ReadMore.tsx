@@ -30,6 +30,23 @@ export interface ReadMoreProps
   size?: "medium" | "small";
 }
 
+/**
+ * ReadMore
+ * @see https://aksel.nav.no/komponenter/core/radio
+ * @see {@link ReadMoreProps}
+ *
+ * @example
+ * // Default
+ * <ReadMore header="Dette regnes som helsemessige begrensninger">
+ *  Med helsemessige begrensninger mener vi funksjonshemming, sykdom...
+ * </ReadMore>
+ *
+ * @example
+ * // Litt mindre versjon
+ * <ReadMore size="small" header="Dette regnes som helsemessige begrensninger">
+ *   Med helsemessige begrensninger mener vi funksjonshemming, sykdom...
+ * </ReadMore>
+ */
 export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
   (
     {
@@ -62,7 +79,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           ref={ref}
           type="button"
           className={cl("navds-read-more__button", "navds-body-short", {
-            "navds-body-short--small": size === "small",
+            "navds-body-sh ort--small": size === "small",
           })}
           onClick={(e) => {
             if (open === undefined) {
