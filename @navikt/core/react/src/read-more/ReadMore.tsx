@@ -79,7 +79,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           ref={ref}
           type="button"
           className={cl("navds-read-more__button", "navds-body-short", {
-            "navds-body-sh ort--small": size === "small",
+            "navds-body-short--small": size === "small",
           })}
           onClick={(e) => {
             if (open === undefined) {
