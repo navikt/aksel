@@ -32,7 +32,7 @@ export interface ReadMoreProps
 
 /**
  * ReadMore
- * @see https://aksel.nav.no/komponenter/core/radio
+ * @see https://aksel.nav.no/komponenter/core/read-more
  * @see {@link ReadMoreProps}
  *
  * @example
