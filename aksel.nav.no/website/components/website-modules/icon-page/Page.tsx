@@ -137,7 +137,7 @@ export const IconPage = ({ name }: { name: string }) => {
                       <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
                     </ToggleGroup>
                   </div>
-                  <div className="flex w-full items-center gap-2 ">
+                  <div className="border-border-default flex  w-fit items-center gap-2 border-b">
                     <Search
                       variant="simple"
                       label="Ikonsøk"
@@ -147,6 +147,7 @@ export const IconPage = ({ name }: { name: string }) => {
                       onChange={setQuery}
                       value={query}
                       clearButton={false}
+                      htmlSize="30"
                     />
                   </div>
                 </form>

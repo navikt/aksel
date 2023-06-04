@@ -5,6 +5,7 @@ import { BodyLong, Chips, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import { useEffect, useState } from "react";
 import { CodeSandbox } from "./CodeSandbox";
+import { useRouter } from "next/router";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";
@@ -13,6 +14,7 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
+  const router = useRouter();
 
   const handleExampleLoad = () => {
     let attempts = 0;
@@ -43,6 +45,17 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
     node?.dir?.filer?.[0]?.navn && setActiveExample(node.dir.filer[0].navn);
   }, [node]);
 
+  useEffect(() => {
+    const hash = router.asPath.split("#")[1];
+    if (
+      hash &&
+      hash.startsWith("demo-") &&
+      node.dir.filer.some((f) => f.navn === hash.replace("demo-", ""))
+    ) {
+      setActiveExample(hash.replace("demo-", "") as string);
+    }
+  }, [router, node]);
+
   const fixName = (str: string) =>
     capitalize(
       str
@@ -67,9 +80,13 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
                 key={fil._key}
                 value={fil.navn}
                 selected={active === fil.navn}
+                id={`demo-${fil.navn}`}
                 onClick={() => {
                   setActiveExample(fil.navn);
                   setUnloaded(true);
+                  router.replace(`#demo-${fil.navn}`, undefined, {
+                    shallow: true,
+                  });
                 }}
               >
                 {fixName(fil.navn)}
