@@ -22,6 +22,11 @@ export interface RadioProps
   description?: string;
 }
 
+/**
+ * Form radio, typically used inside a RadioGroup.
+ * @example
+ * <Radio value="Nei">Nei</Radio>
+ */
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const { inputProps, size, hasError } = useRadio(props);
 
