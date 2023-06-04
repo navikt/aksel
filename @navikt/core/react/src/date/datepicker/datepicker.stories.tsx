@@ -324,3 +324,22 @@ export const defaultShownMonth = () => {
     </div>
   );
 };
+
+export const Size = () => {
+  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps} dropdownCaption>
+        <DatePicker.Input size="medium" {...inputProps} label="Velg dato" />
+      </DatePicker>
+      <DatePicker {...datepickerProps} dropdownCaption>
+        <DatePicker.Input size="small" {...inputProps} label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-codemod",
-  "version": "3.2.1",
+  "version": "3.4.2",
   "description": "Aksel codemods for NAVs designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -44,7 +44,7 @@
     "jscodeshift-add-imports": "1.0.10",
     "lodash": "4.17.21",
     "meow": "7.0.1",
-    "prettier": "2.7.1"
+    "prettier": "2.8.8"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.0.0",

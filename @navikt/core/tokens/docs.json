@@ -270,6 +270,7 @@
       "name": "--a-surface-neutral-subtle-hover",
       "value": "rgba(0, 0, 0, 0.1)"
     },
+    { "name": "--a-surface-neutral-moderate", "value": "rgba(0, 0, 0, 0.1)" },
     { "name": "--a-surface-neutral", "value": "rgba(89, 89, 89, 1)" },
     { "name": "--a-surface-neutral-hover", "value": "rgba(64, 64, 64, 1)" },
     { "name": "--a-surface-neutral-selected", "value": "rgba(38, 38, 38, 1)" },
@@ -279,6 +280,10 @@
       "name": "--a-surface-success-subtle-hover",
       "value": "rgba(153, 222, 173, 1)"
     },
+    {
+      "name": "--a-surface-success-moderate",
+      "value": "rgba(153, 222, 173, 1)"
+    },
     { "name": "--a-surface-success", "value": "rgba(6, 137, 58, 1)" },
     { "name": "--a-surface-success-hover", "value": "rgba(0, 124, 46, 1)" },
     { "name": "--a-surface-danger-subtle", "value": "rgba(255, 194, 194, 1)" },
@@ -286,10 +291,18 @@
       "name": "--a-surface-danger-subtle-hover",
       "value": "rgba(246, 130, 130, 1)"
     },
+    {
+      "name": "--a-surface-danger-moderate",
+      "value": "rgba(246, 130, 130, 1)"
+    },
     { "name": "--a-surface-danger", "value": "rgba(195, 0, 0, 1)" },
     { "name": "--a-surface-danger-hover", "value": "rgba(173, 0, 0, 1)" },
     { "name": "--a-surface-danger-active", "value": "rgba(140, 0, 0, 1)" },
     { "name": "--a-surface-warning-subtle", "value": "rgba(255, 236, 204, 1)" },
+    {
+      "name": "--a-surface-warning-moderate",
+      "value": "rgba(255, 215, 153, 1)"
+    },
     { "name": "--a-surface-warning", "value": "rgba(255, 145, 0, 1)" },
     {
       "name": "--a-surface-warning-subtle-hover",
@@ -300,13 +313,17 @@
       "name": "--a-surface-info-subtle-hover",
       "value": "rgba(181, 241, 255, 1)"
     },
+    { "name": "--a-surface-info-moderate", "value": "rgba(181, 241, 255, 1)" },
     { "name": "--a-surface-info", "value": "rgba(102, 203, 236, 1)" },
     { "name": "--a-surface-alt-1", "value": "rgba(130, 105, 162, 1)" },
     { "name": "--a-surface-alt-1-subtle", "value": "rgba(224, 216, 233, 1)" },
+    { "name": "--a-surface-alt-1-moderate", "value": "rgba(192, 178, 210, 1)" },
     { "name": "--a-surface-alt-2", "value": "rgba(193, 203, 51, 1)" },
     { "name": "--a-surface-alt-2-subtle", "value": "rgba(249, 252, 204, 1)" },
+    { "name": "--a-surface-alt-2-moderate", "value": "rgba(236, 243, 153, 1)" },
     { "name": "--a-surface-alt-3", "value": "rgba(0, 91, 130, 1)" },
     { "name": "--a-surface-alt-3-subtle", "value": "rgba(204, 226, 240, 1)" },
+    { "name": "--a-surface-alt-3-moderate", "value": "rgba(153, 196, 221, 1)" },
     { "name": "--a-surface-alt-3-strong", "value": "rgba(0, 52, 83, 1)" }
   ],
   "semantic-bg": [

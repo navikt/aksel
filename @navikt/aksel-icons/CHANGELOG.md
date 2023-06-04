@@ -1,5 +1,28 @@
 # @navikt/aksel-icons
 
+## 3.4.2
+
+## 3.4.1
+
+## 3.4.0
+
+## 3.3.1
+
+## 3.3.0
+
+## 3.2.4
+
+## 3.2.3
+
+### Patch Changes
+
+- [#1998](https://github.com/navikt/aksel/pull/1998) [`53c98181c`](https://github.com/navikt/aksel/commit/53c98181c327ead3406bec3487c10232af7d463a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Nye ikoner!
+
+  - :sparkles: FileParagraph
+  - :sparkles: FilePlus
+
+## 3.2.2
+
 ## 3.2.1
 
 ## 3.2.0

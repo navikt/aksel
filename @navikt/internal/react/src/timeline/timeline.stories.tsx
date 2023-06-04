@@ -256,6 +256,7 @@ export const ActivePeriod = () => {
                 onSelectPeriod={() => {
                   setActivePeriod(p);
                   p?.onSelectPeriod?.();
+                  console.log("PERIOD SELECTED!");
                 }}
                 icon={p.icon}
                 isActive={activePeriod.id === p.id}
@@ -354,6 +355,90 @@ export const WithYearLabels = () => {
           />
         </Timeline.Row>
       </Timeline>
+    </div>
+  );
+};
+
+export const ContentDemo = () => {
+  const [activePeriod, setActivePeriod] = useState<any>(undefined);
+
+  return (
+    <div style={{ width: "80vw" }}>
+      <Timeline>
+        <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
+        <Timeline.Pin date={new Date("Jun 12 2022")}>
+          Pin 2 <button>test</button>
+        </Timeline.Pin>
+        <Timeline.Pin date={new Date("Jul 28 2022")}>Pin 3</Timeline.Pin>
+        <Timeline.Row
+          label="Rad 1"
+          icon={<CheckmarkCircleFillIcon aria-hidden />}
+        >
+          {row1.map((p: any, i) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                onSelectPeriod={() => {
+                  setActivePeriod(p);
+                  p?.onSelectPeriod?.();
+                  console.log("PERIOD SELECTED!");
+                }}
+                icon={p.icon}
+                isActive={activePeriod?.id === p.id}
+                statusLabel={p.statusLabel}
+                aria-controls={
+                  activePeriod?.id === p.id ? "timeline-data" : undefined
+                }
+                id={p.id}
+              >
+                {p.children}
+              </Timeline.Period>
+            );
+          })}
+        </Timeline.Row>
+        <Timeline.Row label="Rad 2">
+          {row2.map((p: any, i) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                onSelectPeriod={() => {
+                  setActivePeriod(p);
+                  p?.onSelectPeriod?.();
+                }}
+                icon={p.icon}
+                isActive={activePeriod?.id === p.id}
+                statusLabel={p.statusLabel}
+                aria-controls={
+                  activePeriod?.id === p.id ? "timeline-data" : undefined
+                }
+                id={p.id}
+              >
+                {p.children}
+              </Timeline.Period>
+            );
+          })}
+        </Timeline.Row>
+        <Timeline.Row label="Rad 3">
+          <Timeline.Period
+            start={new Date("Jan 1 2022")}
+            end={new Date("Aug 20 2022")}
+            status="info"
+            icon={<CheckmarkCircleFillIcon aria-hidden />}
+          />
+        </Timeline.Row>
+      </Timeline>
+      {activePeriod && (
+        <div id="timeline-data" aria-controls={activePeriod.id}>
+          <h2>Period-data</h2>
+          <p>{`Periode:${activePeriod.id}, dato:${activePeriod.start}`}</p>
+        </div>
+      )}
     </div>
   );
 };

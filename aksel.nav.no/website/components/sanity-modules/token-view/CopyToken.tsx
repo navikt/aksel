@@ -1,4 +1,4 @@
-import { Copy, SuccessStroke } from "@navikt/ds-icons";
+import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import copystring from "copy-to-clipboard";
 import { useEffect, useRef, useState } from "react";
@@ -42,14 +42,13 @@ export const CopyToken = ({ val }: { val: string }) => {
       >
         <span aria-hidden>{val}</span>
 
-        <span className="text-text-subtle bg-surface-subtle group-hover:text-text-default absolute right-2 flex h-7 translate-x-3/4 items-center gap-1 px-1 text-sm shadow-[-7px_0_8px_0px_var(--a-surface-subbg-surface-subtle)] transition-transform duration-200 group-hover:translate-x-0">
-          <Copy aria-hidden className="h-4 w-4 flex-shrink-0" />
+        <span className="text-text-subtle bg-surface-subtle group-hover:text-text-default text-md absolute right-2 flex h-7 translate-x-3/4 items-center gap-1 px-1 shadow-[-7px_0_8px_0px_var(--a-surface-subbg-surface-subtle)] transition-transform duration-200 group-hover:translate-x-0">
+          <FilesIcon aria-hidden className="h-4 w-4 flex-shrink-0" />
           <span className="opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             Kopier
           </span>
         </span>
       </span>
-
       <span
         className={cl(
           "bg-surface-action-selected text-md text-text-on-action flex h-7 w-full px-2 font-sans text-sm",
@@ -62,7 +61,7 @@ export const CopyToken = ({ val }: { val: string }) => {
             "animate-textbounce": copyTimer,
           })}
         >
-          <SuccessStroke aria-hidden className="h-5 w-5 flex-shrink-0" />
+          <CheckmarkIcon aria-hidden className="h-5 w-5 flex-shrink-0" />
           Kopiert
         </span>
       </span>

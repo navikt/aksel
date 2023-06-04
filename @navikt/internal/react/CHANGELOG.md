@@ -1,5 +1,77 @@
 # @navikt/ds-react-internal
 
+## 3.4.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@3.4.2
+  - @navikt/aksel-icons@3.4.2
+
+## 3.4.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@3.4.1
+  - @navikt/aksel-icons@3.4.1
+
+## 3.4.0
+
+### Patch Changes
+
+- Updated dependencies [[`b958d41a2`](https://github.com/navikt/aksel/commit/b958d41a20c66327658514fcf24ae20893c9531a)]:
+  - @navikt/ds-react@3.4.0
+  - @navikt/aksel-icons@3.4.0
+
+## 3.3.1
+
+### Patch Changes
+
+- Updated dependencies [[`5533fbd5a`](https://github.com/navikt/aksel/commit/5533fbd5a3a2b3e08f3c818e2669daccafb6212a)]:
+  - @navikt/ds-react@3.3.1
+  - @navikt/aksel-icons@3.3.1
+
+## 3.3.0
+
+### Minor Changes
+
+- [#1995](https://github.com/navikt/aksel/pull/1995) [`288cef591`](https://github.com/navikt/aksel/commit/288cef591abb0557295e50cf6e696d7a51607c32) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Timeline viser nå popover/tooltip på hover.
+
+  - Popover vises nå ikke lengre ved klikk.
+  - Period og Pin bruker nå begge ny popover.
+  - Kode og styling for Popover er nå inlinet i Timeline, og bruker ikke `@navikt/ds-react` sin versjon.
+
+### Patch Changes
+
+- Updated dependencies [[`288cef591`](https://github.com/navikt/aksel/commit/288cef591abb0557295e50cf6e696d7a51607c32)]:
+  - @navikt/ds-react@3.3.0
+  - @navikt/aksel-icons@3.3.0
+
+## 3.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`30eee0dac`](https://github.com/navikt/aksel/commit/30eee0dac4e3e5a1379033283a6885e646e80458)]:
+  - @navikt/ds-react@3.2.4
+  - @navikt/aksel-icons@3.2.4
+
+## 3.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`475e994f4`](https://github.com/navikt/aksel/commit/475e994f494b2080ffc05eb1684b6a244e3e2969), [`53c98181c`](https://github.com/navikt/aksel/commit/53c98181c327ead3406bec3487c10232af7d463a), [`444e905e0`](https://github.com/navikt/aksel/commit/444e905e01965fd5cac40ff20c5225b072e67221)]:
+  - @navikt/ds-react@3.2.3
+  - @navikt/aksel-icons@3.2.3
+
+## 3.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`6d6267fe0`](https://github.com/navikt/aksel/commit/6d6267fe01f438f3bd67e1b4266ca3e82709561c)]:
+  - @navikt/ds-react@3.2.2
+  - @navikt/aksel-icons@3.2.2
+
 ## 3.2.1
 
 ### Patch Changes

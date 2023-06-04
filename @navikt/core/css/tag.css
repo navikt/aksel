@@ -31,6 +31,12 @@
   color: var(--ac-tag-error-filled-text, var(--a-text-on-danger));
 }
 
+.navds-tag--error-moderate {
+  border-color: transparent;
+  background-color: var(--ac-tag-error-moderate-bg, var(--a-surface-danger-moderate));
+  color: var(--ac-tag-error-moderate-text, var(--a-text-default));
+}
+
 .navds-tag--success {
   border-color: var(--ac-tag-success-border, var(--a-border-success));
   background-color: var(--ac-tag-success-bg, var(--a-surface-success-subtle));
@@ -41,6 +47,12 @@
   border-color: transparent;
   background-color: var(--ac-tag-success-filled-bg, var(--a-surface-success));
   color: var(--ac-tag-success-filled-text, var(--a-text-on-success));
+}
+
+.navds-tag--success-moderate {
+  border-color: transparent;
+  background-color: var(--ac-tag-success-moderate-bg, var(--a-surface-success-moderate));
+  color: var(--ac-tag-success-moderate-text, var(--a-text-default));
 }
 
 .navds-tag--warning {
@@ -55,6 +67,12 @@
   color: var(--ac-tag-warning-filled-text, var(--a-text-on-warning));
 }
 
+.navds-tag--warning-moderate {
+  border-color: transparent;
+  background-color: var(--ac-tag-warning-moderate-bg, var(--a-surface-warning-moderate));
+  color: var(--ac-tag-warning-moderate-text, var(--a-text-default));
+}
+
 .navds-tag--info {
   border-color: var(--ac-tag-info-border, var(--a-border-info));
   background-color: var(--ac-tag-info-bg, var(--a-surface-info-subtle));
@@ -65,6 +83,12 @@
   border-color: transparent;
   background-color: var(--ac-tag-info-filled-bg, var(--a-surface-info));
   color: var(--ac-tag-info-filled-text, var(--a-text-on-info));
+}
+
+.navds-tag--info-moderate {
+  border-color: transparent;
+  background-color: var(--ac-tag-info-moderate-bg, var(--a-surface-info-moderate));
+  color: var(--ac-tag-info-moderate-text, var(--a-text-default));
 }
 
 .navds-tag--neutral {
@@ -79,6 +103,12 @@
   color: var(--ac-tag-neutral-filled-text, var(--a-text-on-neutral));
 }
 
+.navds-tag--neutral-moderate {
+  border-color: transparent;
+  background-color: var(--ac-tag-neutral-moderate-bg, var(--a-surface-neutral-moderate));
+  color: var(--ac-tag-neutral-moderate-text, var(--a-text-default));
+}
+
 .navds-tag--alt1 {
   border-color: var(--ac-tag-alt-1-border, var(--a-border-alt-1));
   background-color: var(--ac-tag-alt-1-bg, var(--a-surface-alt-1-subtle));
@@ -89,6 +119,12 @@
   border-color: transparent;
   background-color: var(--ac-tag-alt-1-filled-bg, var(--a-surface-alt-1));
   color: var(--ac-tag-alt-1-filled-text, var(--a-text-on-alt-1));
+}
+
+.navds-tag--alt1-moderate {
+  border-color: transparent;
+  background-color: var(--ac-tag-alt-1-moderate-bg, var(--a-surface-alt-1-moderate));
+  color: var(--ac-tag-alt-1-moderate-text, var(--a-text-default));
 }
 
 .navds-tag--alt2 {
@@ -103,6 +139,12 @@
   color: var(--ac-tag-alt-2-filled-text, var(--a-text-on-alt-2));
 }
 
+.navds-tag--alt2-moderate {
+  border-color: transparent;
+  background-color: var(--ac-tag-alt-2-moderate-bg, var(--a-surface-alt-2-moderate));
+  color: var(--ac-tag-alt-2-moderate-text, var(--a-text-default));
+}
+
 .navds-tag--alt3 {
   border-color: var(--ac-tag-alt-3-border, var(--a-border-alt-3));
   background-color: var(--ac-tag-alt-3-bg, var(--a-surface-alt-3-subtle));
@@ -113,4 +155,10 @@
   border-color: transparent;
   background-color: var(--ac-tag-alt-3-filled-bg, var(--a-surface-alt-3));
   color: var(--ac-tag-alt-3-filled-text, var(--a-text-on-alt-3));
+}
+
+.navds-tag--alt3-moderate {
+  border-color: transparent;
+  background-color: var(--ac-tag-alt-3-moderate-bg, var(--a-surface-alt-3-moderate));
+  color: var(--ac-tag-alt-3-moderate-text, var(--a-text-default));
 }

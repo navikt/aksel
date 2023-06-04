@@ -1,4 +1,3 @@
-"use client";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, {
@@ -15,8 +14,9 @@ export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   /**
    * @default "medium"
+   * xsmall should only be used in tables/
    */
-  size?: "medium" | "small";
+  size?: "medium" | "small" | "xsmall";
   /**
    * @default "neutral"
    */

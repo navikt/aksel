@@ -13,14 +13,20 @@
       "@navikt/ds-codemod",
       "@navikt/aksel-icons",
       "@navikt/aksel",
-      "@navikt/ds-icons"
+      "@navikt/ds-icons",
+      "@navikt/aksel-stylelint"
     ]
   ],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["shadow-dom", "aksel.nav.no", "@navikt/ds-navno"],
+  "ignore": [
+    "shadow-dom",
+    "aksel.nav.no",
+    "@navikt/ds-navno",
+    "aksel-icons-figma-plugin"
+  ],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"

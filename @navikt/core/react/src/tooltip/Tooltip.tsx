@@ -101,8 +101,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const {
       x,
       y,
-      reference,
-      floating,
       strategy,
       context,
       placement,
@@ -110,6 +108,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         arrow: { x: arrowX, y: arrowY } = {},
         hide: { referenceHidden } = {},
       },
+      refs,
     } = useFloating({
       placement: _placement,
       open: userOpen ?? open,
@@ -132,12 +131,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const ariaId = useId(id);
 
     const mergedRef = useMemo(
-      () => mergeRefs([ref, floating]),
-      [floating, ref]
+      () => mergeRefs([ref, refs.setFloating]),
+      [refs.setFloating, ref]
     );
     const childMergedRef = useMemo(
-      () => mergeRefs([(children as any).ref, reference]),
-      [children, reference]
+      () => mergeRefs([(children as any).ref, refs.setReference]),
+      [children, refs.setReference]
     );
 
     if (

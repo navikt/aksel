@@ -1,4 +1,4 @@
-import { Down, Eye } from "@navikt/ds-icons";
+import { ArrowDownIcon, EyeIcon } from "@navikt/aksel-icons";
 import { Heading, Loader, Table, ToggleGroup } from "@navikt/ds-react";
 import { Stack } from "@sanity/ui";
 import { getWeek, getYear } from "date-fns";
@@ -121,11 +121,11 @@ export const Metrics = ({ documentId }) => {
               ref={toggleRef}
             >
               <ToggleGroup.Item value="Sidevisninger">
-                <Eye aria-hidden />
+                <EyeIcon aria-hidden />
                 Sidevisninger
               </ToggleGroup.Item>
               <ToggleGroup.Item value="Scroll">
-                <Down aria-hidden />
+                <ArrowDownIcon aria-hidden />
                 Scrolldybde
               </ToggleGroup.Item>
             </ToggleGroup>

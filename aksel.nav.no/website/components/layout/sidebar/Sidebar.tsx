@@ -152,6 +152,16 @@ export const Sidebar = ({
                 return -1;
               }
 
+              if (a.sidebarindex !== null || b.sidebarindex !== null) {
+                if (a.sidebarindex !== null && b.sidebarindex !== null) {
+                  return a.sidebarindex - b.sidebarindex;
+                } else if (a.sidebarindex !== null) {
+                  return -1;
+                } else {
+                  return 1;
+                }
+              }
+
               return a?.heading.localeCompare(b?.heading);
             }),
         }))

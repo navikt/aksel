@@ -15,6 +15,7 @@
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -p run test",
     "lint": "yarn eslint . && yarn stylelint @navikt/**/*.css",
+    "lint:css": "yarn stylelint @navikt/**/*.css",
     "changeset": "changeset",
     "version": "changeset version",
     "release": "yarn boot && yarn docgen && changeset publish"
@@ -25,6 +26,8 @@
     "@navikt/codemod",
     "@navikt/icons",
     "@navikt/aksel-icons",
+    "@navikt/aksel-icons/figma-plugin",
+    "@navikt/aksel-stylelint",
     "@navikt/aksel",
     "@navikt/community/*",
     "examples/*",
@@ -138,9 +141,25 @@
     ]
   },
   "stylelint": {
+    "overrides": [
+      {
+        "files": [
+          "@navikt/core/css/**/*",
+          "@navikt/internal/css/**/*"
+        ],
+        "rules": {
+          "aksel/design-token-exists": true,
+          "aksel/design-token-no-component-reference": null,
+          "aksel/design-token-no-global-override": null,
+          "aksel/no-internal-tokens": null,
+          "aksel/no-class-override": null
+        }
+      }
+    ],
     "extends": [
       "stylelint-config-standard",
-      "stylelint-config-prettier"
+      "stylelint-config-prettier",
+      "./@navikt/aksel-stylelint/dist/recommended"
     ],
     "plugins": [
       "stylelint-value-no-unknown-custom-properties",
@@ -222,7 +241,7 @@
     "glob": "^7.1.6",
     "husky": "^8.0.0",
     "lint-staged": "13.0.3",
-    "prettier": "2.7.1",
+    "prettier": "2.8.8",
     "pretty-quick": "^3.1.3",
     "react": "^18.0.0",
     "react-docgen-typescript": "2.2.2",
