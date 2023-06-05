@@ -27,10 +27,9 @@
   ],
   "scripts": {
     "test": "jest",
-    "copy-internal-tokens": "node -e \"require('fs').copyFileSync('../internal/css/tokens.json','dist/internal-tokens.json')\"",
     "copy-css": "node -e \"require('fs').copyFileSync('../core/css/dist/index.css','dist/index.css')\"",
     "copy-tokens": "node -e \"require('fs').copyFileSync('../core/css/tokens.json','dist/tokens.json')\"",
-    "copy": "yarn copy-internal-tokens && yarn copy-css && yarn copy-tokens",
+    "copy": "yarn copy-css && yarn copy-tokens",
     "build": "tsc -p . && concurrently \"yarn:copy-*\"",
     "watch:lint": "tsc --watch -p .",
     "dev": "yarn watch:lint"
