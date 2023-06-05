@@ -87,7 +87,7 @@ export const IconSidebar = ({
         href="/ikoner"
         scroll={false}
         prefetch={false}
-        className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus active:bg-surface-neutral-subtle-hover absolute top-2 right-2 grid aspect-square place-content-center rounded text-xl focus:outline-none"
+        className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus active:bg-surface-neutral-subtle-hover absolute right-2 top-2 grid aspect-square place-content-center rounded text-xl focus:outline-none"
         onClick={() => {
           focusRef?.current?.focus?.();
         }}
@@ -104,7 +104,7 @@ export const IconSidebar = ({
         className="mt-3 scroll-m-20"
         id="icon-details"
       >
-        {name}
+        {`${name}Icon`}
       </Heading>
       <div>
         <span className="navds-sr-only">kategorier</span>
@@ -127,7 +127,7 @@ export const IconSidebar = ({
         Last ned
       </Button>
       <div data-prism-theme="light">
-        <Heading level="3" size="small" className="mt-6 mb-2">
+        <Heading level="3" size="small" className="mb-2 mt-6">
           Kode
         </Heading>
         <div className="ring-border-subtle rounded-lg ring-1">
