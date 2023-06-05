@@ -47,6 +47,22 @@ interface ChatComponent
   Bubble: BubbleType;
 }
 
+/**
+ * A component for displaying chat messages.
+ *
+ * @see https://aksel.nav.no/komponenter/core/chat
+ * @see {@link ChatProps}
+ *
+ * @example
+ * ```jsx
+ * <Chat>
+ *   <Chat.Bubble avatar="A" name="Alice">Hello!</Chat.Bubble>
+ * </Chat>
+ * <Chat>
+ *   <Chat.Bubble avatar="B" name="Bob">Hi there!</Chat.Bubble>
+ * </Chat>
+ * ```
+ */
 export const Chat = forwardRef<HTMLDivElement, ChatProps>(
   (
     {

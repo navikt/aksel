@@ -19,6 +19,19 @@ export interface BodyLongProps
   spacing?: boolean;
 }
 
+/**
+ * Part of a set of components for displaying text with consistent typography.
+ *
+ * @see https://aksel.nav.no/komponenter/core/typography
+ * @see {@link BodyLongProps}
+ *
+ * @example
+ * ```jsx
+ *     <BodyLong level="1" size="xlarge">
+ *       Pengestøtte når du er syk
+ *     </BodyLong>
+ * ```
+ */
 export const BodyLong: OverridableComponent<
   BodyLongProps,
   HTMLParagraphElement

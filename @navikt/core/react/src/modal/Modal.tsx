@@ -71,6 +71,33 @@ type ModalLifecycle = {
   setAppElement: (element: any) => void;
 };
 
+/**
+ * A component that displays a modal dialog.
+ *
+ * @see https://aksel.nav.no/komponenter/core/modal
+ * @see {@link ModalProps}
+ *
+ * @example
+ * ```jsx
+ * const [open, setOpen] = useState(false);
+ *
+ * <Modal
+ *   open={open}
+ *   aria-label="Modal demo"
+ *   onClose={() => setOpen((x) => !x)}
+ *   aria-labelledby="modal-heading"
+ * >
+ *   <Modal.Content>
+ *     <Heading spacing level="1" size="large" id="modal-heading">
+ *       Viktig info
+ *     </Heading>
+ *     <BodyLong spacing>
+ *       Hallo!
+ *     </BodyLong>
+ *   </Modal.Content>
+ * </Modal>
+ * ```
+ */
 export const Modal = forwardRef<ReactModal, ModalProps>(
   (
     {

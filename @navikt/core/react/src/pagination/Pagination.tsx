@@ -89,6 +89,23 @@ export const getSteps = ({
   ];
 };
 
+/**
+ * A component that displays pagination controls.
+ *
+ * @see https://aksel.nav.no/komponenter/core/pagination
+ * @see {@link PaginationProps}
+ *
+ * @example
+ * ```jsx
+ * <Pagination
+ *   page={pageState}
+ *   onPageChange={(x) => setPageState(x)}
+ *   count={9}
+ *   boundaryCount={1}
+ *   siblingCount={1}
+ * />
+ * ```
+ */
 export const Pagination = forwardRef<HTMLElement, PaginationProps>(
   (
     {

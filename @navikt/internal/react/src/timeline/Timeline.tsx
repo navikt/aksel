@@ -55,6 +55,23 @@ interface TimelineComponent
   Zoom: ZoomType;
 }
 
+/**
+ * A component that displays a timeline of events.
+ *
+ * @see https://aksel.nav.no/komponenter/core/timeline
+ * @see {@link TimelineProps}
+ *
+ * @example
+ * ```jsx
+ * <Timeline>
+ *   <Timeline.Row>
+ *    <Timeline.Period start={new Date("2020-01-01")} end={new Date("2020-01-31")}>
+ *    <p>Period 1</p>
+ *   </Timeline.Period>
+ *  <Timeline.Row>
+ * </Timeline>
+ * ```
+ */
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, direction = "left", ...rest }, ref) => {
     const isMultipleRows = Array.isArray(children);

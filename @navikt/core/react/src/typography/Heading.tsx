@@ -23,6 +23,19 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   spacing?: boolean;
 }
 
+/**
+ * Part of a set of components for displaying text with consistent typography.
+ *
+ * @see https://aksel.nav.no/komponenter/core/typography
+ * @see {@link HeadingProps}
+ *
+ * @example
+ * ```jsx
+ *     <Heading level="1" size="xlarge">
+ *       Pengestøtte når du er syk
+ *     </Heading>
+ * ```
+ */
 export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
   forwardRef(
     ({ level = "1", size, spacing = false, className, as, ...rest }, ref) => {

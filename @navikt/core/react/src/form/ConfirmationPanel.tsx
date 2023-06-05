@@ -26,6 +26,24 @@ export interface ConfirmationPanelProps
   errorId?: string;
 }
 
+/**
+ * A component that displays a confirmation checkbox with a label.
+ *
+ * @see https://aksel.nav.no/komponenter/core/confirmationpanel
+ * @see {@link ConfirmationPanelProps}
+ *
+ * @example
+ * ```jsx
+      <ConfirmationPanel
+        checked={state}
+        label="Ja, jeg samtykker."
+        onChange={() => setState((x) => !x)}
+      >
+        For å komme videre må du gi oss lov til å hente inn og bruke opplysninger
+        om deg.
+      </ConfirmationPanel>
+ * ```
+ */
 export const ConfirmationPanel = forwardRef<
   HTMLInputElement,
   ConfirmationPanelProps

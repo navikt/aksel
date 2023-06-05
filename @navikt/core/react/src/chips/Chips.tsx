@@ -20,6 +20,33 @@ interface ChipsComponent
   Removable: RemovableChipsType;
 }
 
+/**
+ * A component that displays a list of items as chips.
+ *
+ * @see https://aksel.nav.no/komponenter/core/chips
+ * @see {@link ChipsProps}
+ *
+ * @example
+ * ```jsx
+      <Chips size="small">
+        {options.map((c) => (
+          <Chips.Toggle
+            selected={selected.includes(c)}
+            key={c}
+            onClick={() =>
+              setSelected(
+                selected.includes(c)
+                  ? selected.filter((x) => x !== c)
+                  : [...selected, c]
+              )
+            }
+          >
+            {c}
+          </Chips.Toggle>
+        ))}
+      </Chips>
+ * ```
+ */
 export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
   ({ className, size = "medium", children, ...rest }, ref) => {
     return (

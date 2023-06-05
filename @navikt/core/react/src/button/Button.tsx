@@ -47,6 +47,15 @@ export interface ButtonProps
   iconPosition?: "left" | "right";
 }
 
+/**
+ * A button component
+ * @see https://aksel.nav.no/komponenter/core/button
+ * @see {@link ButtonProps}
+ * @example
+ * ```jsx
+ * <Button>Klikk meg</Button>
+ * ```
+ */
 export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
   forwardRef(
     (

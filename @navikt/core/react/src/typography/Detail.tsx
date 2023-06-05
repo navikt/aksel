@@ -22,6 +22,19 @@ export interface DetailProps
   uppercase?: boolean;
 }
 
+/**
+ * Part of a set of components for displaying text with consistent typography.
+ *
+ * @see https://aksel.nav.no/komponenter/core/typography
+ * @see {@link DetailProps}
+ *
+ * @example
+ * ```jsx
+ *     <Detail level="1" size="xlarge">
+ *       Pengestøtte når du er syk
+ *     </Detail>
+ * ```
+ */
 export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
   forwardRef(
     (

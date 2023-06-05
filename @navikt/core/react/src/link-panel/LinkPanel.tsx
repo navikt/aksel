@@ -28,6 +28,22 @@ interface LinkPanelComponentType
   Description: LinkPanelDescriptionType;
 }
 
+/**
+ * A component that displays a link panel.
+ *
+ * @see https://aksel.nav.no/komponenter/core/linkpanel
+ * @see {@link LinkPanelProps}
+ *
+ * @example
+ * ```jsx
+ * <LinkPanel href="#" border>
+ *   <LinkPanel.Title>Arbeidssøker eller permittert</LinkPanel.Title>
+ *   <LinkPanel.Description>
+ *     Om jobb, registrering, CV, dagpenger og feriepenger av dagpenger
+ *   </LinkPanel.Description>
+ * </LinkPanel>
+ * ```
+ */
 export const LinkPanelComponent: OverridableComponent<
   LinkPanelProps,
   HTMLAnchorElement

@@ -22,6 +22,20 @@ interface HeaderComponent
   UserButton: HeaderUserButtonType;
 }
 
+/**
+ * A component that displays a header with a title and user information.
+ *
+ * @see https://aksel.nav.no/komponenter/core/header
+ * @see {@link HeaderProps}
+ *
+ * @example
+ * ```jsx
+ * <Header>
+ *   <Header.Title as="h1">Sykepenger</Header.Title>
+ *   <Header.User name="Ola Normann" className="ml-auto" />
+ * </Header>
+ * ```
+ */
 export const Header = forwardRef(({ className, ...rest }, ref) => (
   <header
     data-theme="dark"

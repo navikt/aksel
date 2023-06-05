@@ -19,6 +19,19 @@ export interface LabelProps
   spacing?: boolean;
 }
 
+/**
+ * Part of a set of components for displaying text with consistent typography.
+ *
+ * @see https://aksel.nav.no/komponenter/core/typography
+ * @see {@link LabelProps}
+ *
+ * @example
+ * ```jsx
+ *     <Label level="1" size="xlarge">
+ *       Pengestøtte når du er syk
+ *     </Label>
+ * ```
+ */
 export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
   forwardRef(
     (

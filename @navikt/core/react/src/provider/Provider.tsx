@@ -23,6 +23,19 @@ export interface ProviderProps {
 
 export const useProvider = () => useContext(ProviderContext);
 
+/**
+ * A component that provides a context to its children.
+ *
+ * @see https://aksel.nav.no/komponenter/core/provider
+ * @see {@link ProviderProps}
+ *
+ * @example
+ * ```jsx
+ * <Provider rootElement={rootElement}>
+ *   {app}
+ * </Provider>
+ * ```
+ */
 export const Provider = ({ children, ...rest }: ProviderProps) => {
   return (
     <ProviderContext.Provider value={rest}>{children}</ProviderContext.Provider>

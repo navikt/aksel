@@ -81,6 +81,26 @@ interface PopoverComponent
   Content: PopoverContentType;
 }
 
+/**
+ * A component that displays a popover.
+ *
+ * @see https://aksel.nav.no/komponenter/core/popover
+ * @see {@link PopoverProps}
+ *
+ * @example
+ * ```jsx
+ * <Button ref={buttonRef} onClick={() => setOpenState(true)}>
+ *   Åpne popover
+ * </Button>
+ * <Popover
+ *   open={openState}
+ *   onClose={() => setOpenState(false)}
+ *   anchorEl={buttonRef.current}
+ * >
+ *   <Popover.Content>Innhold her!</Popover.Content>
+ * </Popover>
+ * ```
+ */
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
