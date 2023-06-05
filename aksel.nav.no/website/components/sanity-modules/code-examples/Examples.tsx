@@ -49,10 +49,15 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
     const hash = router.asPath.split("#")[1];
     if (
       hash &&
-      hash.startsWith("demo-") &&
-      node.dir.filer.some((f) => f.navn === hash.replace("demo-", ""))
+      hash.startsWith(`${node.dir.title.toLowerCase()}demo-`) &&
+      node.dir.filer.some(
+        (f) =>
+          f.navn === hash.replace(`${node.dir.title.toLowerCase()}demo-`, "")
+      )
     ) {
-      setActiveExample(hash.replace("demo-", "") as string);
+      setActiveExample(
+        hash.replace(`${node.dir.title.toLowerCase()}demo-`, "") as string
+      );
     }
   }, [router, node]);
 
@@ -80,13 +85,17 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
                 key={fil._key}
                 value={fil.navn}
                 selected={active === fil.navn}
-                id={`demo-${fil.navn}`}
+                id={`${node.dir.title.toLowerCase()}demo-${fil.navn}`}
                 onClick={() => {
                   setActiveExample(fil.navn);
                   setUnloaded(true);
-                  router.replace(`#demo-${fil.navn}`, undefined, {
-                    shallow: true,
-                  });
+                  router.replace(
+                    `#${node.dir.title.toLowerCase()}demo-${fil.navn}`,
+                    undefined,
+                    {
+                      shallow: true,
+                    }
+                  );
                 }}
               >
                 {fixName(fil.navn)}
