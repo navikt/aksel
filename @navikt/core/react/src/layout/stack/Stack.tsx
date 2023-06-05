@@ -7,25 +7,22 @@ import {
   SpacingScale,
 } from "../utilities/css";
 
-type Justify =
-  | "start"
-  | "center"
-  | "end"
-  | "space-around"
-  | "space-between"
-  | "space-evenly";
-
-type Align = "start" | "center" | "end" | "baseline" | "stretch";
 export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Justify-content
    */
-  justify?: Justify;
+  justify?:
+    | "start"
+    | "center"
+    | "end"
+    | "space-around"
+    | "space-between"
+    | "space-evenly";
   /**
    * Align-items
    */
-  align?: Align;
+  align?: "start" | "center" | "end" | "baseline" | "stretch";
   /**
    * flex-wrap
    */
