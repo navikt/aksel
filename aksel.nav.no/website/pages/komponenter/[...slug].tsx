@@ -18,7 +18,6 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
-import { PersonHeadsetIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
@@ -219,6 +218,7 @@ const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
         variant="page"
         intro={
           <Detail as="div" className="mt-2 flex items-center gap-3">
+            {internal && <StatusTag status="internal" />}
             <StatusTag showStable status={page?.status?.tag} />
             {`OPPDATERT ${dateStr(date)}`}
           </Detail>
@@ -315,18 +315,6 @@ const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
             </>
           )}
         </BodyShort>
-        {internal && (
-          <div className="mb-8 flex gap-3 rounded-lg bg-amber-50 px-6 py-4 ring-1 ring-inset ring-amber-400">
-            <span className="shrink-0 text-2xl">
-              <PersonHeadsetIcon aria-hidden />
-            </span>
-            <div>
-              <Heading size="xsmall" level="2">
-                Komponenten er ment for bruk på interne flater
-              </Heading>
-            </div>
-          </div>
-        )}
         {tag && (
           <SuggestionBlock
             variant={tag}
@@ -334,7 +322,7 @@ const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
             reference={`<${page?.heading} />`}
           />
         )}
-        <IntroSeksjon node={page?.intro} />
+        <IntroSeksjon node={page?.intro} internal={internal} />
         {page?.status?.tag === "ready" && (
           <SuggestionBlock
             variant="komponent"
