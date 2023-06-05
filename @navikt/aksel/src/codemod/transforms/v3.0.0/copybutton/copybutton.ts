@@ -23,6 +23,7 @@ export default function transformer(file, api, options, ...rest) {
     toImport: "@navikt/ds-react",
     fromName: "CopyToClipboard",
     toName,
+    ignoreAlias: true,
   });
 
   if (localName === null) {

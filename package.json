@@ -148,6 +148,7 @@
           "@navikt/internal/css/**/*"
         ],
         "rules": {
+          "aksel/no-deprecated-classes": true,
           "aksel/design-token-exists": true,
           "aksel/design-token-no-component-reference": null,
           "aksel/design-token-no-global-override": null,

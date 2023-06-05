@@ -63,6 +63,30 @@ export const migrations: {
         "Remember to clean css-import from '@navikt/ds-css-internal' if no longer needed\nIf non-text was used as children, or different locales were handled, you need to manually fix this",
     },
   ],
+  "v4.0.0": [
+    {
+      description:
+        "Replaced deprecated 'internal'-component import to 'core'-imports",
+      value: "v4-internal-react",
+      path: "v4.0.0/internal-react/internal-react",
+      warning:
+        "Remember to also run 'v4-internal-css' if you have overwritten any css-classes!",
+    },
+    {
+      description:
+        "Replaced 'navdsi'-prefixes used to overwrite internal-css to 'navds'-prefixes",
+      value: "v4-internal-css",
+      path: "v4.0.0/internal-css/internal-css",
+      warning:
+        "Remember to remove '@navikt/ds-css-internal' imports if no longer needed! Also run 'v4-internal-react' to convert internal-react imports to core-imports",
+    },
+    {
+      description:
+        "Removes all instances of UNSAFE_ for datepicker/monthpicker.",
+      value: "v4-date",
+      path: "v4.0.0/date/date",
+    },
+  ],
 };
 
 export function getMigrationPath(str: string) {

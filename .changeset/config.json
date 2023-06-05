@@ -8,12 +8,8 @@
       "@navikt/ds-css",
       "@navikt/ds-tokens",
       "@navikt/ds-tailwind",
-      "@navikt/ds-css-internal",
-      "@navikt/ds-react-internal",
-      "@navikt/ds-codemod",
       "@navikt/aksel-icons",
       "@navikt/aksel",
-      "@navikt/ds-icons",
       "@navikt/aksel-stylelint"
     ]
   ],
@@ -25,7 +21,11 @@
     "shadow-dom",
     "aksel.nav.no",
     "@navikt/ds-navno",
-    "aksel-icons-figma-plugin"
+    "aksel-icons-figma-plugin",
+    "@navikt/ds-css-internal",
+    "@navikt/ds-react-internal",
+    "@navikt/ds-icons",
+    "@navikt/ds-codemod"
   ],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {

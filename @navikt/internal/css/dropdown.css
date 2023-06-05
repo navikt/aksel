@@ -1,3 +1,4 @@
+/* stylelint-disable aksel/no-deprecated-classes */
 .navdsi-dropdown__menu {
   overflow: hidden;
   padding: var(--a-spacing-2) 0;
