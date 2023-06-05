@@ -18,7 +18,6 @@ interface InputProps
   size?: "small" | "medium";
   errorId?: string;
   value?: string;
-  onChange: (value: any) => void;
   error?: React.ReactNode;
   singleSelect?: boolean;
 }
@@ -31,15 +30,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       inputClassName,
       error,
       errorId,
-      size: _size,
-      value,
-      onChange,
       singleSelect,
       ...rest
     },
     ref
   ) => {
-    const { inputProps, size } = useInputContext();
+    const { inputProps, onChange, size, value } = useInputContext();
     const { selectedOptions, removeSelectedOption } =
       useSelectedOptionsContext();
     const { customOptions, removeCustomOption } = useCustomOptionsContext();
@@ -70,12 +66,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const handleKeyDown = useCallback(
       (e) => {
-        if (e.key === "Backspace" && value === "") {
-          const lastSelectedOption =
-            selectedOptions[selectedOptions.length - 1];
-          if (customOptions.includes(lastSelectedOption))
-            removeCustomOption({ value: lastSelectedOption });
-          removeSelectedOption(lastSelectedOption);
+        if (e.key === "Backspace") {
+          if (value === "") {
+            const lastSelectedOption =
+              selectedOptions[selectedOptions.length - 1];
+            if (customOptions.includes(lastSelectedOption)) {
+              removeCustomOption({ value: lastSelectedOption });
+            }
+            removeSelectedOption(lastSelectedOption);
+          }
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
           // so we don't interfere with text editing

@@ -20,7 +20,9 @@ export default function ComboboxProvider(props) {
   } = props;
   return (
     <InputContextProvider value={{ id, value, onChange }}>
-      <SelectedOptionsProvider value={{ selectedOptions, onToggleSelected }}>
+      <SelectedOptionsProvider
+        value={{ selectedOptions, singleSelect, onToggleSelected }}
+      >
         <CustomOptionsProvider>
           <FilteredOptionsProvider
             value={{ isListOpen, options, singleSelect }}

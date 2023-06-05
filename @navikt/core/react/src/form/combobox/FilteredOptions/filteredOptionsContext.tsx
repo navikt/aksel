@@ -9,15 +9,16 @@ import React, {
 } from "react";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../Input/inputContext";
+import usePrevious from "../../../util/usePrevious";
 
-const normalizeText = (text: string) =>
-  typeof text === "string" ? text.toLowerCase().trim() : "";
+const normalizeText = (text: string): string =>
+  typeof text === "string" ? `${text}`.toLowerCase().trim() : "";
 
 const isPartOfText = (value, text) =>
-  normalizeText(text).includes(normalizeText(value ?? ""));
+  normalizeText(text).startsWith(normalizeText(value ?? ""));
 
 const isValueInList = (value, list) =>
-  list?.find((listItem) => value === listItem);
+  list?.find((listItem) => normalizeText(value) === normalizeText(listItem));
 
 const getMatchingValuesFromList = (value, list) =>
   list?.filter((listItem) => isPartOfText(value, listItem));
@@ -47,9 +48,9 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const {
     inputProps: { id },
     value,
-    setSearchTerm,
-    onChange,
     searchTerm,
+    setValue,
+    setSearchTerm,
   } = useInputContext();
 
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState<
@@ -61,13 +62,35 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const filteredOptions = useMemo(() => {
     const opts = [...customOptions, ...options];
     setFilteredOptionsIndex(null);
-    return getMatchingValuesFromList(singleSelect ? searchTerm : value, opts);
-  }, [customOptions, options, singleSelect, searchTerm, value]);
+    return getMatchingValuesFromList(searchTerm, opts);
+  }, [customOptions, options, searchTerm]);
 
   useEffect(() => {
     if (isExternalListOpen !== undefined)
       setInternalListOpen(isExternalListOpen);
   }, [isExternalListOpen]);
+
+  const previousSearchTerm = usePrevious(searchTerm);
+
+  useEffect(() => {
+    if (
+      searchTerm !== "" &&
+      (previousSearchTerm?.length || 0) < searchTerm.length &&
+      filteredOptions.length > 0 &&
+      !isValueInList(searchTerm, filteredOptions)
+    ) {
+      setValue(
+        `${searchTerm}${filteredOptions[0].substring(searchTerm.length)}`
+      );
+      setSearchTerm(searchTerm);
+    }
+  }, [
+    filteredOptions,
+    previousSearchTerm,
+    searchTerm,
+    setSearchTerm,
+    setValue,
+  ]);
 
   const isListOpen = useMemo(() => {
     return isExternalListOpen ?? isInternalListOpen;
@@ -93,20 +116,8 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     if (filteredOptionsIndex === -1) {
       return value;
     }
-    if (singleSelect) {
-      onChange(filteredOptions[filteredOptionsIndex]);
-      setSearchTerm(searchTerm);
-    }
     return filteredOptions[filteredOptionsIndex];
-  }, [
-    filteredOptionsIndex,
-    singleSelect,
-    filteredOptions,
-    value,
-    onChange,
-    setSearchTerm,
-    searchTerm,
-  ]);
+  }, [filteredOptionsIndex, filteredOptions, value]);
 
   const isValueNew = useMemo(
     () => Boolean(value) && !isValueInList(value, filteredOptions),
@@ -143,11 +154,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setFilteredOptionsIndex(newIndex);
     scrollToOption(newIndex);
   }, [filteredOptionsIndex, getMinimumIndex, scrollToOption, toggleIsListOpen]);
-
-  // useEffect(() => {
-  //   console.log("searchTerm, value", searchTerm, value);
-  //   console.log("filteredOptionsIndex", filteredOptionsIndex);
-  // }, [filteredOptionsIndex, searchTerm, value]);
 
   const moveFocusDown = useCallback(() => {
     if (filteredOptionsIndex === null || !isListOpen) {

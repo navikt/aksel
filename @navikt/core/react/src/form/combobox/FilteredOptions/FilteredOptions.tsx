@@ -12,15 +12,15 @@ interface FilteredOptionsProps {
   toggleOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   focusInput: () => void;
   ref: React.RefObject<HTMLUListElement>;
-  value: string;
   loading?: boolean;
   singleSelect?: boolean;
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
-  ({ toggleOption, value, loading, singleSelect }, ref) => {
+  ({ toggleOption, loading, singleSelect }, ref) => {
     const {
       inputProps: { id },
+      value,
     } = useInputContext();
     const {
       isListOpen,

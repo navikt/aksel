@@ -58,7 +58,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       prevSelectedOptions,
       removeSelectedOption,
       addSelectedOption,
-      singleSelectedValue,
     } = useSelectedOptionsContext();
 
     const {
@@ -68,6 +67,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       value,
       onChange,
       size = "medium",
+      searchTerm,
     } = useInputContext();
 
     const focusInput = useCallback(() => {
@@ -110,7 +110,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           if (selectedOptions.includes(clickedOption)) {
             handleDeleteSelectedOption(clickedOption);
           } else if (filteredOptions.includes(clickedOption))
-            //if (singleSelect) setSingleSelectValue(clickedOption);
             addSelectedOption(clickedOption);
         }
         // onEnter: remove selected filteredOption
@@ -121,7 +120,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         }
         // onEnter: add focused option
         else if (focusedOption && filteredOptions?.includes?.(focusedOption)) {
-          // if (singleSelect) setSingleSelectValue(focusedOption);
           addSelectedOption(focusedOption);
         }
         //onEnter: add custom option
@@ -146,6 +144,12 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     useEffect(() => {
       if (prevSelectedOptions !== selectedOptions) focusInput();
     }, [focusInput, selectedOptions, prevSelectedOptions]);
+
+    useEffect(() => {
+      if (inputRef && value !== searchTerm) {
+        inputRef.current?.setSelectionRange?.(searchTerm.length, value.length);
+      }
+    }, [value, inputRef, searchTerm]);
 
     return (
       <ComboboxWrapper
@@ -188,23 +192,10 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           >
             {singleSelect ? (
               <>
-                <span className="navds-combobox__single-select">
-                  {singleSelectedValue}
-                </span>
                 <Input
                   id={inputProps.id}
                   key="combobox-input"
                   ref={mergedInputRef}
-                  value={value}
-                  onChange={(e) => {
-                    onChange(e?.target?.value);
-                    //change selectionStart to the end of the input and selectionEnd to the end of the suggestion
-
-                    // e?.target?.setSelectionRange(
-                    //   e?.target?.value?.length,
-                    //   currentOption?.length || filteredOptions[0]?.length
-                    // );
-                  }}
                   inputClassName={inputClassName}
                   handleClear={handleClear}
                   toggleOption={toggleOption}
@@ -223,8 +214,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   id={inputProps.id}
                   key="combobox-input"
                   ref={mergedInputRef}
-                  value={value}
-                  onChange={(e) => onChange(e?.target?.value)}
                   inputClassName={inputClassName}
                   handleClear={handleClear}
                   toggleOption={toggleOption}
@@ -249,7 +238,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             id={inputProps.id}
             toggleOption={toggleOption}
             focusInput={focusInput}
-            value={value}
             loading={loading}
           />
         </div>

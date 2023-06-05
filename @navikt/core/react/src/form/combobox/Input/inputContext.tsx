@@ -1,4 +1,6 @@
 import React, {
+  ChangeEvent,
+  ChangeEventHandler,
   createContext,
   useCallback,
   useContext,
@@ -9,7 +11,8 @@ import { useFormField, FormFieldType } from "../../useFormField";
 
 interface InputContextType extends FormFieldType {
   value: string;
-  onChange: (value: string) => void;
+  setValue: (text: string) => void;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -47,17 +50,32 @@ export const InputContextProvider = ({ children, value: props }) => {
   );
 
   const onChange = useCallback(
-    (val: string) => {
-      externalValue ?? setInternalValue(val);
-      externalOnChange?.(val);
-      setSearchTerm(val);
+    (event: ChangeEvent) => {
+      const value = event.target?.value;
+      externalValue ?? setInternalValue(value);
+      externalOnChange?.(value);
+      setSearchTerm(value);
     },
     [externalValue, externalOnChange]
   );
 
+  const setValue = useCallback(
+    (text) => {
+      setInternalValue(text);
+    },
+    [setInternalValue]
+  );
+
   return (
     <InputContext.Provider
-      value={{ ...formFieldProps, value, onChange, searchTerm, setSearchTerm }}
+      value={{
+        ...formFieldProps,
+        value,
+        setValue,
+        onChange,
+        searchTerm,
+        setSearchTerm,
+      }}
     >
       {children}
     </InputContext.Provider>

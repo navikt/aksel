@@ -1,11 +1,12 @@
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 import usePrevious from "../../../util/usePrevious";
+import { useInputContext } from "../Input/inputContext";
 
 type SelectedOptionsContextType = {
   selectedOptions: string[];
@@ -13,8 +14,6 @@ type SelectedOptionsContextType = {
   removeSelectedOption: (option: string) => void;
   setSelectedOptions: (any) => void;
   prevSelectedOptions?: string[];
-  singleSelectedValue: string;
-  setSingleSelectValue: (value: string) => void;
 };
 
 const SelectedOptionsContext = createContext<SelectedOptionsContextType>(
@@ -28,10 +27,16 @@ export const SelectedOptionsProvider = ({
   children: any;
   value: {
     selectedOptions: string[];
+    singleSelect: boolean;
     onToggleSelected: (option: string, isSelected: boolean) => void;
   };
 }) => {
-  const { selectedOptions: externalSelectedOptions, onToggleSelected } = value;
+  const { setSearchTerm, setValue } = useInputContext();
+  const {
+    selectedOptions: externalSelectedOptions,
+    singleSelect,
+    onToggleSelected,
+  } = value;
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   useEffect(
@@ -39,30 +44,36 @@ export const SelectedOptionsProvider = ({
     [externalSelectedOptions]
   );
 
-  const addSelectedOption = (option: string) => {
-    setSelectedOptions((prevSelectedOptions) => [
-      ...prevSelectedOptions,
-      option,
-    ]);
-    onToggleSelected?.(option, true);
-  };
+  const addSelectedOption = useCallback(
+    (option: string) => {
+      if (singleSelect) {
+        setSelectedOptions([option]);
+        setValue(option);
+        setSearchTerm(option);
+      } else {
+        setSelectedOptions((prevSelectedOptions) => [
+          ...prevSelectedOptions,
+          option,
+        ]);
+      }
+      onToggleSelected?.(option, true);
+    },
+    [onToggleSelected, setSearchTerm, setValue, singleSelect]
+  );
 
-  const removeSelectedOption = (option: string) => {
-    setSelectedOptions((prevSelectedOptions) =>
-      prevSelectedOptions.filter((selectedOption) => selectedOption !== option)
-    );
-    onToggleSelected?.(option, false);
-  };
+  const removeSelectedOption = useCallback(
+    (option: string) => {
+      setSelectedOptions((prevSelectedOptions) =>
+        prevSelectedOptions.filter(
+          (selectedOption) => selectedOption !== option
+        )
+      );
+      onToggleSelected?.(option, false);
+    },
+    [onToggleSelected]
+  );
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
-
-  const singleSelectedValue = useMemo(() => {
-    return selectedOptions.length > 0 ? selectedOptions[0] : "";
-  }, [selectedOptions]);
-
-  const setSingleSelectValue = (value: string) => {
-    setSelectedOptions([value]);
-  };
 
   const selectedOptionsState = {
     selectedOptions,
@@ -70,8 +81,6 @@ export const SelectedOptionsProvider = ({
     removeSelectedOption,
     setSelectedOptions,
     prevSelectedOptions,
-    singleSelectedValue,
-    setSingleSelectValue,
   };
 
   return (

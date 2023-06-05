@@ -24,6 +24,7 @@ export default {
 const options = [
   "banana",
   "apple",
+  "apple pie",
   "tangerine",
   "pear",
   "grape",
