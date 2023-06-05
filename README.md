@@ -30,6 +30,7 @@
 ├── core/tokens     # @navikt/ds-tokens, tokens
 ├── core/tailwind   # @navikt/ds-tailwind, tailwind-config
 ├── aksel-icons     # @navikt/aksel-icons, ikonpakke
+├── aksel-stylelint # @navikt/aksel-stylelint, stylelint-config
 └── aksel           # @navikt/aksel, kommandolinje-verktøy
 
 aksel.nav.no/
