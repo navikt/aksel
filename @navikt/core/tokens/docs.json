@@ -361,6 +361,82 @@
     { "name": "--a-icon-alt-2", "value": "rgba(127, 137, 0, 1)" },
     { "name": "--a-icon-alt-3", "value": "rgba(51, 128, 165, 1)" }
   ],
+  "semantic-data-surface": [
+    {
+      "name": "--a-data-surface-1",
+      "value": "rgba(51, 134, 224, 1)"
+    },
+    {
+      "name": "--a-data-surface-1-subtle",
+      "value": "rgba(204, 225, 255, 1)"
+    },
+    {
+      "name": "--a-data-surface-2",
+      "value": "rgba(0, 91, 130, 1)"
+    },
+    {
+      "name": "--a-data-surface-2-subtle",
+      "value": "rgba(153, 196, 221, 1)"
+    },
+    {
+      "name": "--a-data-surface-3",
+      "value": "rgba(199, 115, 0, 1)"
+    },
+    {
+      "name": "--a-data-surface-3-subtle",
+      "value": "rgba(255, 193, 102, 1)"
+    },
+    {
+      "name": "--a-data-surface-4",
+      "value": "rgba(76, 173, 205, 1)"
+    },
+    {
+      "name": "--a-data-surface-4-subtle",
+      "value": "rgba(102, 203, 236, 1)"
+    },
+    {
+      "name": "--a-data-surface-5",
+      "value": "rgba(51, 170, 95, 1)"
+    },
+    {
+      "name": "--a-data-surface-5-subtle",
+      "value": "rgba(153, 222, 173, 1)"
+    },
+    {
+      "name": "--a-data-surface-6",
+      "value": "rgba(130, 105, 162, 1)"
+    },
+    {
+      "name": "--a-data-surface-6-subtle",
+      "value": "rgba(192, 178, 210, 1)"
+    }
+  ],
+  "semantic-data-border": [
+    {
+      "name": "--a-data-border-1",
+      "value": "rgba(51, 134, 224, 1)"
+    },
+    {
+      "name": "--a-data-border-2",
+      "value": "rgba(0, 91, 130, 1)"
+    },
+    {
+      "name": "--a-data-border-3",
+      "value": "rgba(199, 115, 0, 1)"
+    },
+    {
+      "name": "--a-data-border-4",
+      "value": "rgba(76, 173, 205, 1)"
+    },
+    {
+      "name": "--a-data-border-5",
+      "value": "rgba(51, 170, 95, 1)"
+    },
+    {
+      "name": "--a-data-border-6",
+      "value": "rgba(130, 105, 162, 1)"
+    }
+  ],
   "radius": [
     { "name": "--a-border-radius-small", "value": "2px" },
     { "name": "--a-border-radius-medium", "value": "4px" },
