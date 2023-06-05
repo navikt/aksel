@@ -58,6 +58,21 @@ export const ToggleGroupContext = createContext<ToggleContextProps | null>(
   null
 );
 
+/**
+ * A component that displays a group of toggle buttons.
+ *
+ * @see https://aksel.nav.no/komponenter/core/toggle-group
+ * @see {@link ToggleGroupProps}
+ *
+ * @example
+ * ```jsx
+ * <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
+ *   <ToggleGroup.Item value="ulest">Ulest</ToggleGroup.Item>
+ *   <ToggleGroup.Item value="lest">Leste</ToggleGroup.Item>
+ *   <ToggleGroup.Item value="sendt">Sendt</ToggleGroup.Item>
+ * </ToggleGroup>
+ * ```
+ */
 export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
   (
     {

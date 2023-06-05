@@ -27,6 +27,20 @@ interface InternalHeaderComponent
   UserButton: InternalHeaderUserButtonType;
 }
 
+/**
+ * A component that displays a header with a title and user information.
+ *
+ * @see https://aksel.nav.no/komponenter/core/i-header
+ * @see {@link InternalHeaderProps}
+ *
+ * @example
+ * ```jsx
+ * <InternalHeader>
+ *   <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
+ *   <InternalHeader.User name="Ola Normann" className="ml-auto" />
+ * </InternalHeader>
+ * ```
+ */
 export const InternalHeader = forwardRef(({ className, ...rest }, ref) => (
   <header
     data-theme="dark"

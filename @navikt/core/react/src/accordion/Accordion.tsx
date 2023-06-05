@@ -38,6 +38,26 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+/**
+ * A component that displays collapsible content sections.
+ *
+ * @see https://aksel.nav.no/komponenter/core/accordion
+ * @see {@link AccordionProps}
+ *
+ * @example
+ * ```jsx
+ * <Accordion>
+ *   <Accordion.Item>
+ *     <Accordion.Header>Section 1</Accordion.Header>
+ *     <Accordion.Content>Content 1</Accordion.Content>
+ *   </Accordion.Item>
+ *   <Accordion.Item>
+ *     <Accordion.Header>Section 2</Accordion.Header>
+ *     <Accordion.Content>Content 2</Accordion.Content>
+ *   </Accordion.Item>
+ * </Accordion>
+ * ```
+ */
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {

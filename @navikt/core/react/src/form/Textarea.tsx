@@ -55,6 +55,17 @@ export interface TextareaProps
   };
 }
 
+/**
+ * A component that displays a textarea input field with a label.
+ *
+ * @see https://aksel.nav.no/komponenter/core/textarea
+ * @see {@link TextareaProps}
+ *
+ * @example
+ * ```jsx
+ * <Textarea label="Har du noen tilbakemeldinger?" />
+ * ```
+ */
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
     const {

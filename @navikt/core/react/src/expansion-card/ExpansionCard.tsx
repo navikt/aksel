@@ -77,6 +77,24 @@ export const ExpansionCardContext = createContext<ExpansionCardContextProps>({
 export type ExpansionCardProps = ExpansionCardCommonProps &
   ExpansionCardConditionalProps;
 
+/**
+ * A component that displays an expandable card.
+ *
+ * @see https://aksel.nav.no/komponenter/core/expansioncard
+ * @see {@link ExpansionCardProps}
+ *
+ * @example
+ * ```jsx
+ * <ExpansionCard aria-label="default-demo">
+ *   <ExpansionCard.Header>
+ *     <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+ *   </ExpansionCard.Header>
+ *   <ExpansionCard.Content>
+ *     <Innhold />
+ *   </ExpansionCard.Content>
+ * </ExpansionCard>
+ * ```
+ */
 export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
   (
     {

@@ -65,6 +65,17 @@ export interface CopyButtonProps
   activeTitle?: string;
 }
 
+/**
+ * A button component that copies text to the clipboard when clicked.
+ *
+ * @see https://aksel.nav.no/komponenter/core/copybutton
+ * @see {@link CopyButtonProps}
+ *
+ * @example
+ * ```jsx
+      <CopyButton copyText="3.14" />
+ * ```
+ */
 export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
   (
     {

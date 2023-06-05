@@ -31,6 +31,19 @@ export interface HelpTextProps
     | "left-end";
 }
 
+/**
+ * A component that displays a help text button with a popover.
+ *
+ * @see https://aksel.nav.no/komponenter/core/helptext
+ * @see {@link HelpTextProps}
+ *
+ * @example
+ * ```jsx
+ * <HelpText title="Hvor kommer dette fra?">
+ *   Informasjonen er hentet fra X sin statistikk fra 2021
+ * </HelpText>
+ * ```
+ */
 export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
   (
     {

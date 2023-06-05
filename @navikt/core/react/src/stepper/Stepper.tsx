@@ -46,6 +46,30 @@ interface StepperContextProps {
 
 export const StepperContext = createContext<StepperContextProps | null>(null);
 
+/**
+ * A component that displays a stepper with clickable steps.
+ *
+ * @see https://aksel.nav.no/komponenter/core/stepper
+ * @see {@link StepperProps}
+ *
+ * @example
+ * ```jsx
+ * <>
+ *   <Heading size="medium" spacing level="2" id="stepper-heading">
+ *     Søknadssteg
+ *   </Heading>
+ *   <Stepper
+ *     aria-labelledby="stepper-heading"
+ *     activeStep={activeStep}
+ *     onStepChange={(x) => setActiveStep(x)}
+ *   >
+ *     <Stepper.Step href="#">Start søknad</Stepper.Step>
+ *     <Stepper.Step href="#">Saksopplysninger</Stepper.Step>
+ *     <Stepper.Step href="#">Vedlegg</Stepper.Step>
+ *   </Stepper>
+ * </>
+ * ```
+ */
 export const Stepper: StepperComponent = forwardRef<
   HTMLOListElement,
   StepperProps

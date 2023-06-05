@@ -38,6 +38,37 @@ export interface DropdownContextType {
 
 export const DropdownContext = createContext<DropdownContextType | null>(null);
 
+/**
+ * A component that displays a dropdown menu when the user clicks on its toggle button.
+ *
+ * @see https://aksel.nav.no/komponenter/core/dropdown
+ * @see {@link DropdownProps}
+ *
+ * @example
+ * ```jsx
+ * <Dropdown>
+ *   <Button as={Dropdown.Toggle}>Toggle</Button>
+ *   <Dropdown.Menu>
+ *     <Dropdown.Menu.GroupedList>
+ *       <Dropdown.Menu.GroupedList.Heading>
+ *         Systemer og oppslagsverk
+ *       </Dropdown.Menu.GroupedList.Heading>
+ *       <Dropdown.Menu.GroupedList.Item>
+ *         Gosys
+ *       </Dropdown.Menu.GroupedList.Item>
+ *       <Dropdown.Menu.GroupedList.Item>
+ *         Infotrygd
+ *       </Dropdown.Menu.GroupedList.Item>
+ *     </Dropdown.Menu.GroupedList>
+ *     <Dropdown.Menu.Divider />
+ *     <Dropdown.Menu.List>
+ *       <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
+ *       <Dropdown.Menu.List.Item>Infotrygd</Dropdown.Menu.List.Item>
+ *     </Dropdown.Menu.List>
+ *   </Dropdown.Menu>
+ * </Dropdown>
+ * ```
+ */
 export const Dropdown = (({
   children,
   onSelect,

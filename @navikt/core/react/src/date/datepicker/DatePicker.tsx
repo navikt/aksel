@@ -124,6 +124,21 @@ interface DatePickerComponent
   Input: DateInputType;
 }
 
+/**
+ * A component that allows users to select a date from a calendar.
+ *
+ * @see https://aksel.nav.no/komponenter/core/datepicker
+ * @see {@link DatePickerProps}
+ *
+ * @example
+ * ```jsx
+ * <DatePicker.Standalone
+ *   dropdownCaption
+ *   fromDate={new Date("2020-10-01")}
+ *   toDate={new Date("2024-10-01")}
+ * />
+ * ```
+ */
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   (
     {

@@ -100,6 +100,21 @@ interface MonthPickerComponent
   Input: DateInputType;
 }
 
+/**
+ * A component that displays a month picker.
+ *
+ * @see https://aksel.nav.no/komponenter/core/monthpicker
+ * @see {@link MonthPickerProps}
+ *
+ * @example
+ * ```jsx
+ * <UNSAFE_MonthPicker.Standalone
+ *   dropdownCaption
+ *   fromDate={new Date("1 Oct 2020")}
+ *   toDate={new Date("1 Oct 2024")}
+ * />
+ * ```
+ */
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   (
     {

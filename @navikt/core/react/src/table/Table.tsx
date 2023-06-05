@@ -56,6 +56,38 @@ export interface TableContextProps {
 
 export const TableContext = createContext<TableContextProps | null>(null);
 
+/**
+ * A component that displays a table with headers and rows.
+ *
+ * @see https://aksel.nav.no/komponenter/core/table
+ * @see {@link TableProps}
+ *
+ * @example
+ * ```jsx
+ * <Table>
+ *   <Table.Header>
+ *     <Table.Row>
+ *       <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+ *       <Table.HeaderCell scope="col">Fødseslnr.</Table.HeaderCell>
+ *       <Table.HeaderCell scope="col">Start</Table.HeaderCell>
+ *     </Table.Row>
+ *   </Table.Header>
+ *   <Table.Body>
+ *     {data.map(({ name, fnr, start }, i) => {
+ *       return (
+ *         <Table.Row key={i + fnr}>
+ *           <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
+ *           <Table.DataCell>{fnr}</Table.DataCell>
+ *           <Table.DataCell>
+ *             {format(new Date(start), "dd.MM.yyyy")}
+ *           </Table.DataCell>
+ *         </Table.Row>
+ *       );
+ *     })}
+ *   </Table.Body>
+ * </Table>
+ * ```
+ */
 export const Table = forwardRef(
   (
     {
