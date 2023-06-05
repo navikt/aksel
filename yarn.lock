@@ -3924,7 +3924,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-codemod@^3.4.2, @navikt/ds-codemod@workspace:@navikt/codemod":
+"@navikt/ds-codemod@workspace:@navikt/codemod":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-codemod@workspace:@navikt/codemod"
   dependencies:
@@ -3951,7 +3951,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css-internal@^3.4.2, @navikt/ds-css-internal@workspace:@navikt/internal/css":
+"@navikt/ds-css-internal@workspace:@navikt/internal/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css-internal@workspace:@navikt/internal/css"
   dependencies:
@@ -4041,7 +4041,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react-internal@^3.4.2, @navikt/ds-react-internal@workspace:@navikt/internal/react":
+"@navikt/ds-react-internal@workspace:@navikt/internal/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react-internal@workspace:@navikt/internal/react"
   dependencies:
@@ -8220,11 +8220,8 @@ __metadata:
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
     "@navikt/aksel-icons": ^3.4.2
-    "@navikt/ds-codemod": ^3.4.2
     "@navikt/ds-css": ^3.4.2
-    "@navikt/ds-css-internal": ^3.4.2
     "@navikt/ds-react": ^3.4.2
-    "@navikt/ds-react-internal": ^3.4.2
     "@navikt/ds-tailwind": ^3.4.2
     "@navikt/ds-tokens": ^3.4.2
     prettier-plugin-tailwindcss: ^0.2.3
