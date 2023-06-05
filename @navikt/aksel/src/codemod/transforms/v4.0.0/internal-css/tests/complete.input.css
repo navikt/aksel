@@ -538,3 +538,8 @@ button.navdsi-header__title:active,
   border-right-color: transparent;
   border-top-color: transparent;
 }
+
+.tokens {
+  --ac-header-bg: red;
+  --ac-header-active-bg: orange;
+}

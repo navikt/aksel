@@ -537,3 +537,8 @@ button.navds-internalheader__title:active,
   border-right-color: transparent;
   border-top-color: transparent;
 }
+
+.tokens {
+  --ac-internalheader-bg: red;
+  --ac-internalheader-active-bg: orange;
+}
