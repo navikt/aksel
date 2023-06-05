@@ -1,5 +1,7 @@
 # Aksel React-components for "internal"-solutions
 
+NOTICE: Package is deprecated. Use `@navikt/ds-react` instead.
+
 NAVs designsystem React-components used for more internal facing surfaces.
 
 - Uses styling from `@navikt/ds-css` and `@navikt/ds-internal-css`

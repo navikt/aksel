@@ -8,8 +8,16 @@ export default function moveAndRenameImport(
     toImport,
     fromName,
     toName,
-  }: { fromImport: string; toImport: string; fromName: string; toName: string }
+    ignoreAlias = false,
+  }: {
+    fromImport: string;
+    toImport: string;
+    fromName: string;
+    toName: string;
+    ignoreAlias?: boolean;
+  }
 ) {
+  /* Does package-name exist */
   const existingFromImport = root.find(j.ImportDeclaration, {
     source: {
       value: fromImport,
@@ -39,6 +47,7 @@ export default function moveAndRenameImport(
     existingFromImportSpecifier.remove();
   }
 
+  /* Remove import if its now empty */
   if (
     !existingFromImport.get("specifiers").value?.length ||
     existingFromImport.get("specifiers").value?.length === 0
@@ -46,12 +55,14 @@ export default function moveAndRenameImport(
     existingFromImport.remove();
   }
 
+  /* Does package exist */
   const existingImport = root.find(j.ImportDeclaration, {
     source: {
       value: toImport,
     },
   });
 
+  /* Check if migrated name allready exist */
   const existingImportSpecifier = existingImport.find(j.ImportSpecifier, {
     imported: {
       name: toName,
@@ -59,7 +70,9 @@ export default function moveAndRenameImport(
   });
 
   if (existingImportSpecifier.length <= 0) {
-    const newImportSpecifier = j.importSpecifier(j.identifier(toName));
+    const newImportSpecifier = ignoreAlias
+      ? j.importSpecifier(j.identifier(toName))
+      : j.importSpecifier(j.identifier(toName), j.identifier(localname));
 
     if (existingImport.length > 0) {
       existingImport.get("specifiers").push(newImportSpecifier);

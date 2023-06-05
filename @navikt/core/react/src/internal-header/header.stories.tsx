@@ -6,11 +6,11 @@ import {
 import { BodyLong, BodyShort, Detail } from "@navikt/ds-react";
 import { Meta } from "@storybook/react";
 import React from "react";
-import { Header, Dropdown } from "..";
+import { InternalHeader, Dropdown } from "..";
 
 export default {
-  title: "ds-react-internal/Header",
-  component: Header,
+  title: "ds-react/InternalHeader",
+  component: InternalHeader,
   argTypes: {
     user: {
       control: {
@@ -18,32 +18,31 @@ export default {
         options: ["simple", "with description", "with dropdown"],
       },
     },
-    /* size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    }, */
   },
 } as Meta;
 
 export const Default = {
   render: (props) => {
     return (
-      <Header style={{ width: 600 }}>
+      <InternalHeader style={{ width: 600 }}>
         {props?.titleAsHeading ? (
-          <Header.Title as="h1">Tittel</Header.Title>
+          <InternalHeader.Title as="h1">Tittel</InternalHeader.Title>
         ) : (
-          <Header.Title href="/#home">Tittel med lenke</Header.Title>
+          <InternalHeader.Title href="/#home">
+            Tittel med lenke
+          </InternalHeader.Title>
         )}
         {props.systemMenu && (
           <Dropdown>
-            <Header.Button as={Dropdown.Toggle} style={{ marginLeft: "auto" }}>
+            <InternalHeader.Button
+              as={Dropdown.Toggle}
+              style={{ marginLeft: "auto" }}
+            >
               <MenuGridIcon
                 style={{ fontSize: "1.5rem" }}
                 title="MenuGridIconer og oppslagsverk"
               />
-            </Header.Button>
+            </InternalHeader.Button>
             <Dropdown.Menu strategy="fixed">
               <Dropdown.Menu.List>
                 <Dropdown.Menu.List.Item>
@@ -63,13 +62,13 @@ export const Default = {
           </Dropdown>
         )}
         {(!props.user || props.user === "simple") && (
-          <Header.User
+          <InternalHeader.User
             name="Ola Normann"
             style={{ marginLeft: props.systemMenu ? "none" : "auto" }}
           />
         )}
         {props.user === "with description" && (
-          <Header.User
+          <InternalHeader.User
             name="Ola Normann"
             description="0123456"
             style={{ marginLeft: props.systemMenu ? "none" : "auto" }}
@@ -77,7 +76,7 @@ export const Default = {
         )}
         {props.user === "with dropdown" && (
           <Dropdown>
-            <Header.Button
+            <InternalHeader.Button
               as={Dropdown.Toggle}
               style={{
                 marginLeft: props.systemMenu ? "none" : "auto",
@@ -88,7 +87,7 @@ export const Default = {
             >
               <BodyShort title="Ola Normann">KH</BodyShort>
               <ChevronDownIcon />
-            </Header.Button>
+            </InternalHeader.Button>
             <Dropdown.Menu strategy="fixed">
               <div>
                 <BodyLong size="small" as="div">
@@ -111,7 +110,7 @@ export const Default = {
             </Dropdown.Menu>
           </Dropdown>
         )}
-      </Header>
+      </InternalHeader>
     );
   },
 
@@ -122,40 +121,40 @@ export const Default = {
 };
 
 export const TitleAsHeading = () => (
-  <Header style={{ width: 600 }}>
-    <Header.Title as="h1">Tittel</Header.Title>
-  </Header>
+  <InternalHeader style={{ width: 600 }}>
+    <InternalHeader.Title as="h1">Tittel</InternalHeader.Title>
+  </InternalHeader>
 );
 
 export const TitleAsLink = () => (
-  <Header style={{ width: 600 }}>
-    <Header.Title href="/#home">Tittel med lenke</Header.Title>
-  </Header>
+  <InternalHeader style={{ width: 600 }}>
+    <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
+  </InternalHeader>
 );
 
 export const User = () => (
-  <Header style={{ width: 600 }}>
-    <Header.Title href="/#home">Tittel med lenke</Header.Title>
-    <Header.User name="Ola Normann" style={{ marginLeft: "auto" }} />
-  </Header>
+  <InternalHeader style={{ width: 600 }}>
+    <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
+    <InternalHeader.User name="Ola Normann" style={{ marginLeft: "auto" }} />
+  </InternalHeader>
 );
 
 export const UserWithDescription = () => (
-  <Header style={{ width: 600 }}>
-    <Header.Title href="/#home">Tittel med lenke</Header.Title>
-    <Header.User
+  <InternalHeader style={{ width: 600 }}>
+    <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
+    <InternalHeader.User
       name="Ola Normann"
       description="id: 123456"
       style={{ marginLeft: "auto" }}
     />
-  </Header>
+  </InternalHeader>
 );
 
 export const UserWithMenu = () => (
-  <Header style={{ width: 600 }}>
-    <Header.Title href="/#home">Tittel med lenke</Header.Title>
+  <InternalHeader style={{ width: 600 }}>
+    <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
     <Dropdown>
-      <Header.Button
+      <InternalHeader.Button
         as={Dropdown.Toggle}
         style={{
           marginLeft: "auto",
@@ -166,7 +165,7 @@ export const UserWithMenu = () => (
       >
         <BodyShort title="Ola Normann">KH</BodyShort>
         <ChevronDownIcon />
-      </Header.Button>
+      </InternalHeader.Button>
       <Dropdown.Menu strategy="fixed">
         <div>
           <BodyLong size="small" as="div">
@@ -188,19 +187,22 @@ export const UserWithMenu = () => (
         </Dropdown.Menu.List>
       </Dropdown.Menu>
     </Dropdown>
-  </Header>
+  </InternalHeader>
 );
 
 export const UserWithMenuGridIconMenu = () => (
-  <Header style={{ width: 600 }}>
-    <Header.Title href="/#home">Tittel med lenke</Header.Title>
+  <InternalHeader style={{ width: 600 }}>
+    <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
     <Dropdown>
-      <Header.Button as={Dropdown.Toggle} style={{ marginLeft: "auto" }}>
+      <InternalHeader.Button
+        as={Dropdown.Toggle}
+        style={{ marginLeft: "auto" }}
+      >
         <MenuGridIcon
           style={{ fontSize: "1.5rem" }}
           title="MenuGridIconer og oppslagsverk"
         />
-      </Header.Button>
+      </InternalHeader.Button>
       <Dropdown.Menu strategy="fixed">
         <Dropdown.Menu.List>
           <Dropdown.Menu.List.Item>
@@ -218,6 +220,6 @@ export const UserWithMenuGridIconMenu = () => (
         </Dropdown.Menu.List>
       </Dropdown.Menu>
     </Dropdown>
-    <Header.User name="Ola Normann" description="id: 123456" />
-  </Header>
+    <InternalHeader.User name="Ola Normann" description="id: 123456" />
+  </InternalHeader>
 );

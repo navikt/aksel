@@ -5,7 +5,6 @@ const indexTsx = `import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import "@navikt/ds-css";
-import "@navikt/ds-css-internal";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -26,8 +25,6 @@ export const CodeSandbox = ({ code }: { code: string }) => {
             "react-dom": "latest",
             "@navikt/ds-react": "latest",
             "@navikt/ds-css": "latest",
-            "@navikt/ds-react-internal": "latest",
-            "@navikt/ds-css-internal": "latest",
             "@navikt/ds-icons": "latest",
             "@navikt/aksel-icons": "latest",
           },

@@ -29,8 +29,6 @@
 ├── core/css        # @navikt/ds-css, css kjernekomponenter
 ├── core/tokens     # @navikt/ds-tokens, tokens
 ├── core/tailwind   # @navikt/ds-tailwind, tailwind-config
-├── internal/react  # @navikt/ds-react-internal, komponenter interne flater
-├── internal/css    # @navikt/ds-css-internal, css interne flater
 ├── aksel-icons     # @navikt/aksel-icons, ikonpakke
 └── aksel           # @navikt/aksel, kommandolinje-verktøy
 

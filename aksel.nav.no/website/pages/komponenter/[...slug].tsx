@@ -42,18 +42,6 @@ const kodepakker = {
     changelog:
       "https://github.com/navikt/aksel/blob/main/%40navikt/core/css/CHANGELOG.md",
   },
-  "ds-react-internal": {
-    title: "@navikt/ds-react-internal",
-    git: "https://github.com/navikt/aksel/tree/main/%40navikt/internal/react",
-    changelog:
-      "https://github.com/navikt/aksel/blob/main/%40navikt/internal/react/CHANGELOG.md",
-  },
-  "ds-css-internal": {
-    title: "@navikt/ds-css-internal",
-    git: "https://github.com/navikt/aksel/tree/main/%40navikt/internal/css",
-    changelog:
-      "https://github.com/navikt/aksel/blob/main/%40navikt/internal/css/CHANGELOG.md",
-  },
   "ds-icons": {
     title: "@navikt/ds-reaciconst",
     git: "https://github.com/navikt/aksel/tree/main/%40navikt/icons",
