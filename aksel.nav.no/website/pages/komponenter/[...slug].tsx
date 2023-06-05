@@ -8,6 +8,8 @@ import {
 } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { getDocumentsTmp, urlFor } from "@/sanity/interface";
+import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
   AkselSidebarT,
@@ -16,6 +18,7 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
+import { PersonHeadsetIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
@@ -26,8 +29,6 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
 import NotFotfund from "../404";
-import { getDocumentsTmp, urlFor } from "@/sanity/interface";
-import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 
 const kodepakker = {
   "ds-react": {
@@ -175,6 +176,7 @@ const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
       : null;
 
   const unsafe = page?.status?.unsafe;
+  const internal = page?.status?.internal;
 
   return (
     <>
@@ -313,6 +315,18 @@ const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
             </>
           )}
         </BodyShort>
+        {internal && (
+          <div className="mb-8 flex gap-3 rounded-lg bg-amber-50 px-6 py-4 ring-1 ring-inset ring-amber-400">
+            <span className="shrink-0 text-2xl">
+              <PersonHeadsetIcon aria-hidden />
+            </span>
+            <div>
+              <Heading size="xsmall" level="2">
+                Komponenten er ment for bruk på interne flater
+              </Heading>
+            </div>
+          </div>
+        )}
         {tag && (
           <SuggestionBlock
             variant={tag}
