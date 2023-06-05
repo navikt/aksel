@@ -7,8 +7,10 @@ import React from "react";
 
 const Intro = ({
   node,
+  internal,
 }: {
   node: AkselKomponentDocT["intro"] | AkselGrunnleggendeDocT["intro"];
+  internal?: boolean;
 }) => {
   if (!node || !node.body || !node.brukes_til) {
     return null;
@@ -26,10 +28,15 @@ const Intro = ({
             Egnet til:
           </Label>
           <ul className="mb-7 list-disc">
+            {internal && (
+              <li className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]">
+                Bruk på interne flater
+              </li>
+            )}
             {node.brukes_til.map((x) => (
               <li
                 key={x}
-                className="ml-5 mb-3 list-item max-w-[calc(theme(spacing.text)_-_1em)]"
+                className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]"
               >
                 {x}
               </li>
@@ -45,7 +52,7 @@ const Intro = ({
               {node.brukes_ikke_til.map((x) => (
                 <li
                   key={x}
-                  className="ml-5 mb-3 list-item max-w-[calc(theme(spacing.text)_-_1em)]"
+                  className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]"
                 >
                   {x}
                 </li>

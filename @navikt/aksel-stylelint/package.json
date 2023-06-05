@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-stylelint",
-  "version": "3.4.2",
+  "version": "4.0.0",
   "author": "Aksel | NAV",
   "homepage": "https://aksel.nav.no/grunnleggende/kode/stylelint",
   "repository": {
@@ -27,17 +27,16 @@
   ],
   "scripts": {
     "test": "jest",
-    "copy-internal-tokens": "node -e \"require('fs').copyFileSync('../internal/css/tokens.json','dist/internal-tokens.json')\"",
     "copy-css": "node -e \"require('fs').copyFileSync('../core/css/dist/index.css','dist/index.css')\"",
     "copy-tokens": "node -e \"require('fs').copyFileSync('../core/css/tokens.json','dist/tokens.json')\"",
-    "copy": "yarn copy-internal-tokens && yarn copy-css && yarn copy-tokens",
+    "copy": "yarn copy-css && yarn copy-tokens",
     "build": "tsc -p . && concurrently \"yarn:copy-*\"",
     "watch:lint": "tsc --watch -p .",
     "dev": "yarn watch:lint"
   },
   "devDependencies": {
-    "@navikt/ds-css": "^3.4.2",
-    "@navikt/ds-tokens": "^3.4.2",
+    "@navikt/ds-css": "^4.0.0",
+    "@navikt/ds-tokens": "^4.0.0",
     "@types/jest": "^29.0.0",
     "concurrently": "7.2.1",
     "copyfiles": "2.4.1",

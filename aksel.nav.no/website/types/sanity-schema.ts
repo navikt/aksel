@@ -74,7 +74,7 @@ export interface AkselBloggFrontpageT extends DocumentT<"blogg_landingsside"> {
 }
 
 export interface AkselBloggDocT extends DocumentT<"aksel_blogg">, ArticleT {
-  kategori: typeof bloggKategorier[number]["value"];
+  kategori: (typeof bloggKategorier)[number]["value"];
 }
 
 export interface AkselGodPraksisDocT
@@ -97,10 +97,11 @@ export interface AkselPrinsippDocT
 export interface AkselKomponentDocT
   extends DocumentT<"komponent_artikkel">,
     ArticleT {
-  kategori: typeof komponentKategorier[number]["value"];
+  kategori: (typeof komponentKategorier)[number]["value"];
   status: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     unsafe?: boolean;
+    internal?: boolean;
     bilde?: any;
   };
   intro: {
@@ -119,7 +120,7 @@ export interface AkselKomponentDocT
 export interface AkselGrunnleggendeDocT
   extends DocumentT<"ds_artikkel">,
     ArticleT {
-  kategori: typeof grunnleggendeKategorier[number]["value"];
+  kategori: (typeof grunnleggendeKategorier)[number]["value"];
   status: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     unsafe?: boolean;
@@ -139,7 +140,7 @@ export interface AkselGrunnleggendeDocT
 export type AkselSidebarT = Array<{
   heading: string;
   slug: string;
-  kategori: typeof komponentKategorier[number]["value"];
+  kategori: (typeof komponentKategorier)[number]["value"];
   tag: "beta" | "new" | "ready" | "deprecated";
   sidebarindex: number | null;
 }>;
@@ -148,7 +149,7 @@ export type ArticleListT = Array<{
   _id: string;
   heading: string;
   slug: { current: string };
-  kategori: typeof komponentKategorier[number]["value"];
+  kategori: (typeof komponentKategorier)[number]["value"];
   status: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     unsafe?: boolean;

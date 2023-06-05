@@ -1,8 +1,8 @@
-import { UNSAFE_MonthPicker } from "@navikt/ds-react";
+import { MonthPicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <UNSAFE_MonthPicker.Standalone onMonthSelect={console.log} />;
+  return <MonthPicker.Standalone onMonthSelect={console.log} />;
 };
 
 export default withDsExample(Example);
