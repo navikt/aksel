@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "husky install",
     "boot": "yarn workspaces foreach -v -pA --topological-dev --no-private run build",
-    "clean": "node scripts/clean.js && yarn workspace @navikt/ds-codemod clean",
+    "clean": "node scripts/clean.js",
     "storybook": "storybook dev -p 6006",
     "storybook:aksel": "concurrently \"yarn watch:tw\" \"cross-env STORYBOOK_STORIES=all storybook dev -p 6006\"",
     "dev": "yarn workspace aksel.nav.no dev",
@@ -22,14 +22,10 @@
   },
   "workspaces": [
     "@navikt/core/*",
-    "@navikt/internal/*",
-    "@navikt/codemod",
-    "@navikt/icons",
     "@navikt/aksel-icons",
     "@navikt/aksel-icons/figma-plugin",
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
-    "@navikt/community/*",
     "examples/*",
     "aksel.nav.no"
   ],
@@ -148,6 +144,7 @@
           "@navikt/internal/css/**/*"
         ],
         "rules": {
+          "aksel/no-deprecated-classes": true,
           "aksel/design-token-exists": true,
           "aksel/design-token-no-component-reference": null,
           "aksel/design-token-no-global-override": null,

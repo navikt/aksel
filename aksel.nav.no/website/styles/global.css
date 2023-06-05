@@ -8,10 +8,12 @@ pre {
   @apply !font-mono;
 }
 
+/* stylelint-disable-next-line aksel/no-class-override */
 .navds-heading + .navds-heading {
   margin-top: 0;
 }
 
+/* stylelint-disable-next-line aksel/no-class-override */
 .navds-alert code {
   color: var(--a-red-500);
   background-color: transparent;
@@ -29,6 +31,10 @@ p {
 a {
   color: inherit;
   text-decoration: inherit;
+}
+
+[id] {
+  scroll-margin-block: 5rem;
 }
 
 /* Improves rendering of images for chrome on Windows */

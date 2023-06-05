@@ -89,7 +89,6 @@ export const flattenObject = (obj) => {
 
 const tokenCSSFile = "./index.css";
 const tokenJsonFile = "./tokens.json";
-const internalTokensJSONFile = "./internal-tokens.json";
 
 let allowedTokenNames = [];
 
@@ -123,7 +122,6 @@ export const tokenExists = (
     });
 
     addTokens(tokenJsonFile, allowedTokenNames);
-    addTokens(internalTokensJSONFile, allowedTokenNames);
   }
 
   return allowedTokenNames.includes(inputToken);
