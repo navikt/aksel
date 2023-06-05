@@ -1,3 +1,4 @@
+/* stylelint-disable aksel/no-deprecated-classes */
 .navdsi-copy-to-clipboard:not(:hover):not(:active) {
   color: var(--ac-copy-to-clipboard-text, var(--a-text-default));
 }
