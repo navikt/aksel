@@ -45,6 +45,16 @@ export interface RadioGroupProps
   required?: boolean;
 }
 
+/**
+ * Form radio group
+ * @see https://aksel.nav.no/komponenter/core/radio
+ * @see {@link RadioGroupProps}
+ * @example
+ * <RadioGroup legend="Får du AAP nå?">
+ *    <Radio value="ja">Ja</Radio>
+ *    <Radio value="Nei">Nei</Radio>
+ * </RadioGroup>
+ */
 export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
   (
     {

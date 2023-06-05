@@ -2,7 +2,10 @@ import { definePreview } from "next-sanity/preview";
 import { ComponentType } from "react";
 import { clientConfig } from "@/sanity/config";
 
-const usePreview = definePreview(clientConfig);
+const usePreview = definePreview({
+  ...clientConfig,
+  subscriptionThrottleMs: 200,
+});
 
 const WithPreview = ({
   comp: Comp,

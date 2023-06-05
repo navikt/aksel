@@ -1,4 +1,4 @@
-import { FileError } from "@navikt/ds-icons";
+import { FileXMarkIcon } from "@navikt/aksel-icons";
 import { MasterDetailIcon } from "@sanity/icons";
 import { StructureBuilder } from "sanity/desk";
 /* documentStore is in Alpha, so avoid using for now */
@@ -53,7 +53,7 @@ export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
     S.divider(),
     S.listItem()
       .title(`Artikler uten tema (${ids.filter((x) => !x?.tema).length ?? 0})`)
-      .icon(FileError)
+      .icon(FileXMarkIcon)
       .child(
         S.documentList()
           .title(`Artikler uten tema`)

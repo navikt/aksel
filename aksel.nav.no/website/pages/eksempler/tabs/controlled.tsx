@@ -1,4 +1,9 @@
-import { Email, Historic, Send } from "@navikt/ds-icons";
+import {
+  ClockDashedIcon,
+  InboxDownIcon,
+  PaperplaneIcon,
+} from "@navikt/aksel-icons";
+
 import { Tabs } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
@@ -12,10 +17,18 @@ const Example = () => {
         <Tabs.Tab
           value="logg"
           label="Logg"
-          icon={<Historic title="historielogg" />}
+          icon={<ClockDashedIcon title="historielogg" />}
         />
-        <Tabs.Tab value="inbox" label="Inbox" icon={<Email title="inbox" />} />
-        <Tabs.Tab value="sendt" label="Sendt" icon={<Send title="sendt" />} />
+        <Tabs.Tab
+          value="inbox"
+          label="Inbox"
+          icon={<InboxDownIcon title="inbox" />}
+        />
+        <Tabs.Tab
+          value="sendt"
+          label="Sendt"
+          icon={<PaperplaneIcon title="sendt" />}
+        />
       </Tabs.List>
       <Tabs.Panel value="logg" className="h-24 w-full bg-gray-50 p-4">
         Logg-tab
@@ -38,5 +51,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 2,
 };
