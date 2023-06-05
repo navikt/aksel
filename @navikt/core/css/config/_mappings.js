@@ -128,6 +128,18 @@ const StyleMappings = {
     { component: "Search", main: formCss, dependencies: [typoCss] },
     { component: "Select", main: formCss, dependencies: [typoCss] },
     { component: "Stepper", main: "stepper.css", dependencies: [typoCss] },
+    {
+      component: "HStack",
+      main: "stack.css",
+    },
+    {
+      component: "VStack",
+      main: "stack.css",
+    },
+    {
+      component: "Spacer",
+      main: "stack.css",
+    },
     { component: "Switch", main: formCss, dependencies: [typoCss] },
     { component: "Table", main: "table.css", dependencies: [typoCss] },
     { component: "Tabs", main: "tabs.css", dependencies: [typoCss] },
