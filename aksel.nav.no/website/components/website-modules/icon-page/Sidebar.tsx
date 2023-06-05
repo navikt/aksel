@@ -104,7 +104,7 @@ export const IconSidebar = ({
         className="mt-3 scroll-m-20"
         id="icon-details"
       >
-        {name}
+        {`${name}Icon`}
       </Heading>
       <div>
         <span className="navds-sr-only">kategorier</span>

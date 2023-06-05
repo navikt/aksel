@@ -5,11 +5,8 @@ import { BodyShort, Detail, Tag } from "@navikt/ds-react";
 import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
-import {
-  grunnleggendeKategorier,
-  komponentKategorier,
-} from "../../../sanity/config";
+import { useState } from "react";
+import { useSection } from "./use-sections";
 
 const NavItem = ({
   link,
@@ -22,7 +19,7 @@ const NavItem = ({
   return (
     <li
       className={cl(
-        "focus-within:shadow-focus peer relative rounded-sm pl-2 before:absolute before:left-0 before:z-[-1]",
+        "focus-within:shadow-focus  peer relative rounded-sm pl-2 before:absolute before:left-0 before:z-[-1]",
         {
           "before:border-l-border-action-selected  before:top-1/2 before:h-6 before:-translate-y-1/2 before:rounded-full before:border-l-[4px]":
             isActive,
@@ -51,7 +48,7 @@ const NavItem = ({
           )}
         >
           {link.heading}
-          <span className="ml-2 capitalize">
+          <span className="ml-auto capitalize">
             {link.tag && ["deprecated", "beta", "new"].includes(link.tag) && (
               <Tag
                 size="xsmall"
@@ -133,41 +130,7 @@ export const Sidebar = ({
   kategori: "Komponenter" | "Grunnleggende";
   links: AkselSidebarT;
 }) => {
-  const sections = useMemo(
-    () =>
-      (kategori === "Komponenter"
-        ? komponentKategorier
-        : grunnleggendeKategorier
-      )
-        .map((x) => ({
-          ...x,
-          pages: links
-            .filter((y) => y?.kategori === x.value)
-            .sort((a, b) => {
-              if (a?.tag === "deprecated" && b?.tag === "deprecated") {
-                return 0;
-              } else if (a?.tag === "deprecated") {
-                return 1;
-              } else if (b.tag === "deprecated") {
-                return -1;
-              }
-
-              if (a.sidebarindex !== null || b.sidebarindex !== null) {
-                if (a.sidebarindex !== null && b.sidebarindex !== null) {
-                  return a.sidebarindex - b.sidebarindex;
-                } else if (a.sidebarindex !== null) {
-                  return -1;
-                } else {
-                  return 1;
-                }
-              }
-
-              return a?.heading.localeCompare(b?.heading);
-            }),
-        }))
-        .filter((x) => !(!x.pages || x.pages.length === 0)),
-    [links, kategori]
-  );
+  const sections = useSection({ kategori, links });
 
   return (
     <div

@@ -12,7 +12,7 @@ import {
   ResolveSlugT,
   ResolveTemaT,
 } from "@/types";
-import { Clock } from "@navikt/ds-icons";
+import { SparklesIcon } from "@navikt/aksel-icons";
 import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
@@ -140,9 +140,10 @@ const Page = ({ temaer, page, resent }: PageProps["props"]) => {
               <Heading
                 level="2"
                 size="medium"
-                className="text-deepblue-800 flex items-center gap-4"
+                className="text-deepblue-800 flex items-center gap-2"
               >
-                <Clock aria-hidden className="shrink-0" /> Nyeste artikler
+                <SparklesIcon aria-hidden className="shrink-0" /> Nyeste
+                artikler
               </Heading>
               <div className="card-grid-3-1 my-6">
                 {resent.map((art: any) => (
