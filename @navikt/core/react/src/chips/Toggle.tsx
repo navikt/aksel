@@ -9,6 +9,16 @@ export interface ToggleChipsProps
    * Toggles aria-pressed and visual-changes
    */
   selected?: boolean;
+  /**
+   * Chip-variants
+   * @default "action"
+   */
+  variant?: "action" | "neutral";
+  /**
+   * Toggles display of checkmark on selected
+   * @default true
+   */
+  checkmark?: boolean;
 }
 
 export interface ToggleChipsType
@@ -16,17 +26,29 @@ export interface ToggleChipsType
 
 export const ToggleChips: ToggleChipsType = forwardRef(
   (
-    { className, children, selected, as: Component = "button", ...rest },
+    {
+      className,
+      children,
+      selected,
+      variant = "action",
+      checkmark = true,
+      as: Component = "button",
+      ...rest
+    },
     ref
   ) => {
     return (
       <Component
         {...rest}
         ref={ref}
-        className={cl("navds-chips__chip navds-chips__toggle", className)}
+        className={cl(
+          "navds-chips__chip navds-chips__toggle",
+          className,
+          `navds-chips__toggle--${variant}`
+        )}
         aria-pressed={selected}
       >
-        {selected && (
+        {selected && checkmark && (
           <svg
             aria-hidden
             className="navds-chips__toggle-icon"

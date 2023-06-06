@@ -34,14 +34,14 @@
 }
 
 .navds-chips__toggle {
-  box-shadow: inset 0 0 0 1px var(--ac-chip-toggle-border, var(--a-border-default));
-  background-color: var(--ac-chip-toggle-bg, var(--a-surface-neutral-subtle));
+  box-shadow: inset 0 0 0 1px var(--ac-chip-toggle-border, var(--a-border-subtle));
+  background-color: var(--ac-chip-toggle-bg, var(--a-surface-action-subtle));
   color: var(--ac-chip-toggle-text, var(--a-text-default));
 }
 
 .navds-chips__toggle:hover {
-  box-shadow: inset 0 0 0 1px var(--ac-chip-toggle-hover-border, var(--a-border-strong));
-  background-color: var(--ac-chip-toggle-hover-bg, var(--a-surface-neutral-subtle-hover));
+  box-shadow: inset 0 0 0 1px var(--ac-chip-toggle-hover-border, var(--a-border-subtle-hover));
+  background-color: var(--ac-chip-toggle-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-chips__toggle[aria-pressed="true"] {
@@ -52,6 +52,28 @@
 
 .navds-chips__toggle[aria-pressed="true"]:hover {
   background-color: var(--ac-chip-toggle-pressed-hover-bg, var(--a-surface-action-selected-hover));
+}
+
+/* Toggle variant neutral */
+.navds-chips__toggle--neutral {
+  box-shadow: inset 0 0 0 1px var(--ac-chip-toggle-neutral-border, var(--a-border-subtle));
+  background-color: var(--ac-chip-toggle-neutral-bg, var(--a-surface-neutral-subtle));
+  color: var(--ac-chip-toggle-neutral-text, var(--a-text-default));
+}
+
+.navds-chips__toggle--neutral:hover {
+  box-shadow: inset 0 0 0 1px var(--ac-chip-toggle-neutral-hover-border, var(--a-border-subtle-hover));
+  background-color: var(--ac-chip-toggle-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+}
+
+.navds-chips__toggle--neutral[aria-pressed="true"] {
+  box-shadow: none;
+  background-color: var(--ac-chip-toggle-neutral-pressed-bg, var(--a-surface-neutral-selected));
+  color: var(--ac-chip-toggle-neutral-pressed-text, var(--a-text-on-neutral));
+}
+
+.navds-chips__toggle--neutral[aria-pressed="true"]:hover {
+  background-color: var(--ac-chip-toggle-neutral-pressed-hover-bg, var(--a-surface-neutral-selected));
 }
 
 .navds-chips__toggle:focus-visible {
