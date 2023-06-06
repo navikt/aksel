@@ -20,4 +20,9 @@ export const deprecations: DeprecatedList = [
       "Class were moved to '@navikt/ds-css' and renamed with 'navds'-prefix in v4.0.0. Docs: https://aksel.nav.no/grunnleggende/kode/endringslogg#h728704adeb59.",
     deprecatePrefix: true,
   },
+  {
+    classes: ["navds-chips--icon-left"],
+    message:
+      "In v4.1.0 Chips. Toggle no longer handles special alignment for checkmark-icon, thus removing this class",
+  },
 ];
