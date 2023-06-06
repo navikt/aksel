@@ -51,7 +51,7 @@ export const ZindexView = ({ cat }: { cat: string }) => {
             </div>
 
             <BodyShort as="dl" size="small">
-              <dt>{sanitizeName(x.name.replace("border-radius-", ""))}</dt>
+              <dt>{sanitizeName(x.name.replace("z-index-", ""))}</dt>
               <dd className="text-text-subtle ">{x.value}</dd>
             </BodyShort>
           </div>
@@ -59,23 +59,4 @@ export const ZindexView = ({ cat }: { cat: string }) => {
       })}
     </Grid>
   );
-  /* return (
-    <Frame
-      tokens={shapes}
-      styles="borderRadius"
-      element={({ token }: { token: string; name?: string }) => {
-        return (
-          <div
-            className="min-h-16 flex h-full w-full items-end rounded-md px-4 text-5xl font-semibold"
-            aria-hidden
-            style={{
-              background: `var(--a-surface-default)`,
-            }}
-          >
-            {token}
-          </div>
-        );
-      }}
-    />
-  ); */
 };
