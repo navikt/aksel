@@ -53,15 +53,6 @@ export interface AlertContextProps {
   size: "medium" | "small";
 }
 
-/**
- * A component that displays an alert message with an icon and a text.
- * @param {React.ReactNode} children - The content of the alert.
- * @param {string} variant - The type of alert. Can be "error", "warning", "info", or "success".
- * @param {string} size - The size of the alert. Can be "medium" or "small".
- * @param {boolean} fullWidth - Whether the alert should have full width or not.
- * @param {boolean} inline - Whether the alert should be displayed inline or not.
- * @returns {JSX.Element} - The Alert component.
- */
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
