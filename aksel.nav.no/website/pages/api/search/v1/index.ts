@@ -253,7 +253,7 @@ function getSearchResults(results, query) {
     ],
     includeScore: true,
     shouldSort: true,
-    minMatchCharLength: 4,
+    minMatchCharLength: 3,
     useExtendedSearch: true,
     includeMatches: true,
     ignoreLocation: true,
