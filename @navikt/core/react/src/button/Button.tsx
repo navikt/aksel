@@ -49,8 +49,8 @@ export interface ButtonProps
 
 /**
  * A button component
- * @see https://aksel.nav.no/komponenter/core/button
- * @see {@link ButtonProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/button)
+ * @see 🏷️ {@link ButtonProps}
  * @example
  * ```jsx
  * <Button>Klikk meg</Button>

@@ -61,8 +61,8 @@ export const ToggleGroupContext = createContext<ToggleContextProps | null>(
 /**
  * A component that displays a group of toggle buttons.
  *
- * @see https://aksel.nav.no/komponenter/core/toggle-group
- * @see {@link ToggleGroupProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/toggle-group)
+ * @see 🏷️ {@link ToggleGroupProps}
  *
  * @example
  * ```jsx

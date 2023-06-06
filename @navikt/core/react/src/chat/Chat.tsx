@@ -50,8 +50,8 @@ interface ChatComponent
 /**
  * A component for displaying chat messages.
  *
- * @see https://aksel.nav.no/komponenter/core/chat
- * @see {@link ChatProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/chat)
+ * @see 🏷️ {@link ChatProps}
  *
  * @example
  * ```jsx

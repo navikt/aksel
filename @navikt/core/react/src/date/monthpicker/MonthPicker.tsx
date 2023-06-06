@@ -103,8 +103,8 @@ interface MonthPickerComponent
 /**
  * A component that displays a month picker.
  *
- * @see https://aksel.nav.no/komponenter/core/monthpicker
- * @see {@link MonthPickerProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/monthpicker)
+ * @see 🏷️ {@link MonthPickerProps}
  *
  * @example
  * ```jsx

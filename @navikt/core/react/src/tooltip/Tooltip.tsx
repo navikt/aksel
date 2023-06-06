@@ -78,8 +78,8 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * A component that displays a tooltip when the user hovers over its child element.
  *
- * @see https://aksel.nav.no/komponenter/core/tooltip
- * @see {@link TooltipProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/tooltip)
+ * @see 🏷️ {@link TooltipProps}
  *
  * @example
  * ```jsx

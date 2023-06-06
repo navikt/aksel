@@ -21,8 +21,8 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * A component that displays a guide panel.
  *
- * @see https://aksel.nav.no/komponenter/core/guidepanel
- * @see {@link GuidePanelProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/guidepanel)
+ * @see 🏷️ {@link GuidePanelProps}
  *
  * @example
  * ```jsx

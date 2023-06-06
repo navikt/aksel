@@ -41,8 +41,8 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
 /**
  * A component that displays a small label with a text and a background color.
  *
- * @see https://aksel.nav.no/komponenter/core/tag
- * @see {@link TagProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/tag)
+ * @see 🏷️ {@link TagProps}
  *
  * @example
  * ```jsx

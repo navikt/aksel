@@ -58,8 +58,8 @@ export interface TextareaProps
 /**
  * A component that displays a textarea input field with a label.
  *
- * @see https://aksel.nav.no/komponenter/core/textarea
- * @see {@link TextareaProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/textarea)
+ * @see 🏷️ {@link TextareaProps}
  *
  * @example
  * ```jsx

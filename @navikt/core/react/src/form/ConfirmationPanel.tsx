@@ -29,8 +29,8 @@ export interface ConfirmationPanelProps
 /**
  * A component that displays a confirmation checkbox with a label.
  *
- * @see https://aksel.nav.no/komponenter/core/confirmationpanel
- * @see {@link ConfirmationPanelProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/confirmationpanel)
+ * @see 🏷️ {@link ConfirmationPanelProps}
  *
  * @example
  * ```jsx

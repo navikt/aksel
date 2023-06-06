@@ -59,8 +59,8 @@ export const TableContext = createContext<TableContextProps | null>(null);
 /**
  * A component that displays a table with headers and rows.
  *
- * @see https://aksel.nav.no/komponenter/core/table
- * @see {@link TableProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/table)
+ * @see 🏷️ {@link TableProps}
  *
  * @example
  * ```jsx

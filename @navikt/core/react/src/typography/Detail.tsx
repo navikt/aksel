@@ -25,8 +25,8 @@ export interface DetailProps
 /**
  * Part of a set of components for displaying text with consistent typography.
  *
- * @see https://aksel.nav.no/komponenter/core/typography
- * @see {@link DetailProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
+ * @see 🏷️ {@link DetailProps}
  *
  * @example
  * ```jsx

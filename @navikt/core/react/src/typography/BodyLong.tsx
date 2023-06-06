@@ -22,8 +22,8 @@ export interface BodyLongProps
 /**
  * Part of a set of components for displaying text with consistent typography.
  *
- * @see https://aksel.nav.no/komponenter/core/typography
- * @see {@link BodyLongProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
+ * @see 🏷️ {@link BodyLongProps}
  *
  * @example
  * ```jsx

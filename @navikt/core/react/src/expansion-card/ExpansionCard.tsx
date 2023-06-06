@@ -80,8 +80,8 @@ export type ExpansionCardProps = ExpansionCardCommonProps &
 /**
  * A component that displays an expandable card.
  *
- * @see https://aksel.nav.no/komponenter/core/expansioncard
- * @see {@link ExpansionCardProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/expansioncard)
+ * @see 🏷️ {@link ExpansionCardProps}
  *
  * @example
  * ```jsx

@@ -34,8 +34,8 @@ export interface HelpTextProps
 /**
  * A component that displays a help text button with a popover.
  *
- * @see https://aksel.nav.no/komponenter/core/helptext
- * @see {@link HelpTextProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/helptext)
+ * @see 🏷️ {@link HelpTextProps}
  *
  * @example
  * ```jsx

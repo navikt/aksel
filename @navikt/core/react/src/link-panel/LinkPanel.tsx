@@ -31,8 +31,8 @@ interface LinkPanelComponentType
 /**
  * A component that displays a link panel.
  *
- * @see https://aksel.nav.no/komponenter/core/linkpanel
- * @see {@link LinkPanelProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/linkpanel)
+ * @see 🏷️ {@link LinkPanelProps}
  *
  * @example
  * ```jsx

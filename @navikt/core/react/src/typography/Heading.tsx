@@ -26,8 +26,8 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 /**
  * Part of a set of components for displaying text with consistent typography.
  *
- * @see https://aksel.nav.no/komponenter/core/typography
- * @see {@link HeadingProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
+ * @see 🏷️ {@link HeadingProps}
  *
  * @example
  * ```jsx

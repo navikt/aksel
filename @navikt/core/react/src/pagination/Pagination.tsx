@@ -92,8 +92,8 @@ export const getSteps = ({
 /**
  * A component that displays pagination controls.
  *
- * @see https://aksel.nav.no/komponenter/core/pagination
- * @see {@link PaginationProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)
+ * @see 🏷️ {@link PaginationProps}
  *
  * @example
  * ```jsx

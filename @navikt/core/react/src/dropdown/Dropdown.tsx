@@ -41,8 +41,8 @@ export const DropdownContext = createContext<DropdownContextType | null>(null);
 /**
  * A component that displays a dropdown menu when the user clicks on its toggle button.
  *
- * @see https://aksel.nav.no/komponenter/core/dropdown
- * @see {@link DropdownProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/dropdown)
+ * @see 🏷️ {@link DropdownProps}
  *
  * @example
  * ```jsx

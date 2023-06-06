@@ -30,8 +30,8 @@ interface InternalHeaderComponent
 /**
  * A component that displays a header with a title and user information.
  *
- * @see https://aksel.nav.no/komponenter/core/i-header
- * @see {@link InternalHeaderProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/i-header)
+ * @see 🏷️ {@link InternalHeaderProps}
  *
  * @example
  * ```jsx

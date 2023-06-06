@@ -22,8 +22,8 @@ export interface BodyShortProps
 /**
  * Part of a set of components for displaying text with consistent typography.
  *
- * @see https://aksel.nav.no/komponenter/core/typography
- * @see {@link BodyShortProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
+ * @see 🏷️ {@link BodyShortProps}
  *
  * @example
  * ```jsx

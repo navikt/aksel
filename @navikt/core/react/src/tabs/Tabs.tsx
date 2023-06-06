@@ -62,8 +62,8 @@ export const TabsContext = createContext<TabsContextProps | null>(null);
 /**
  * A component that displays a set of tabs that can be used to switch between different views.
  *
- * @see https://aksel.nav.no/komponenter/core/tabs
- * @see {@link TabsProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/tabs)
+ * @see 🏷️ {@link TabsProps}
  *
  * @example
  * ```jsx

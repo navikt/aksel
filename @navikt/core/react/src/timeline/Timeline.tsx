@@ -58,8 +58,8 @@ interface TimelineComponent
 /**
  * A component that displays a timeline of events.
  *
- * @see https://aksel.nav.no/komponenter/core/timeline
- * @see {@link TimelineProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/timeline)
+ * @see 🏷️ {@link TimelineProps}
  *
  * @example
  * ```jsx

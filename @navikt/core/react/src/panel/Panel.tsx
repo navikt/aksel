@@ -19,8 +19,8 @@ export type PanelType = OverridableComponent<PanelProps, HTMLElement>;
 /**
  * A component that displays a bordered panel with heading and body.
  *
- * @see https://aksel.nav.no/komponenter/core/panel
- * @see {@link PanelProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/panel)
+ * @see 🏷️ {@link PanelProps}
  *
  * @example
  * ```jsx

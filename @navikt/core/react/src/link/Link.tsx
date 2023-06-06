@@ -13,8 +13,8 @@ export interface LinkProps
 /**
  * A component that displays a hyperlink.
  *
- * @see https://aksel.nav.no/komponenter/core/link
- * @see {@link LinkProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/link)
+ * @see 🏷️ {@link LinkProps}
  *
  * @example
  * ```jsx

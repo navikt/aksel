@@ -74,8 +74,8 @@ type ModalLifecycle = {
 /**
  * A component that displays a modal dialog.
  *
- * @see https://aksel.nav.no/komponenter/core/modal
- * @see {@link ModalProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/modal)
+ * @see 🏷️ {@link ModalProps}
  *
  * @example
  * ```jsx

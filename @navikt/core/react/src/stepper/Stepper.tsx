@@ -49,8 +49,8 @@ export const StepperContext = createContext<StepperContextProps | null>(null);
 /**
  * A component that displays a stepper with clickable steps.
  *
- * @see https://aksel.nav.no/komponenter/core/stepper
- * @see {@link StepperProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/stepper)
+ * @see 🏷️ {@link StepperProps}
  *
  * @example
  * ```jsx

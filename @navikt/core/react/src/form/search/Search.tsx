@@ -94,8 +94,8 @@ export const SearchContext = React.createContext<SearchContextProps | null>(
 /**
  * A component that displays a search input field.
  *
- * @see https://aksel.nav.no/komponenter/core/search
- * @see {@link SearchProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/search)
+ * @see 🏷️ {@link SearchProps}
  *
  * @example
  * ```jsx

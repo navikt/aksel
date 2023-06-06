@@ -35,8 +35,8 @@ interface ErrorSummaryComponent
 /**
  * A component that displays a summary of errors.
  *
- * @see https://aksel.nav.no/komponenter/core/errorsummary
- * @see {@link ErrorSummaryProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/errorsummary)
+ * @see 🏷️ {@link ErrorSummaryProps}
  *
  * @example
  * ```jsx

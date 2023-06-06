@@ -36,8 +36,8 @@ export interface TextFieldProps
 /**
  * A component that displays a text input field with a label.
  *
- * @see https://aksel.nav.no/komponenter/core/textfield
- * @see {@link TextFieldProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/textfield)
+ * @see 🏷️ {@link TextFieldProps}
  *
  * @example
  * ```jsx

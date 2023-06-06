@@ -55,8 +55,8 @@ export interface AlertContextProps {
 
 /**
  * A component for displaying alerts
- * @see https://aksel.nav.no/komponenter/core/alert
- * @see {@link AlertProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/alert)
+ * @see 🏷️ {@link AlertProps}
  * @example
  * ```jsx
  * <Alert variant="error">Dette er en feilmelding</Alert>

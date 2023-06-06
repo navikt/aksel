@@ -58,8 +58,8 @@ export interface SwitchProps
 /**
  * A component that displays a switch input field.
  *
- * @see https://aksel.nav.no/komponenter/core/switch
- * @see {@link SwitchProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/switch)
+ * @see 🏷️ {@link SwitchProps}
  *
  * @example
  * ```jsx

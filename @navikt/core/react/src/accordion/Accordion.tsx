@@ -41,8 +41,8 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
 /**
  * A component that displays collapsible content sections.
  *
- * @see https://aksel.nav.no/komponenter/core/accordion
- * @see {@link AccordionProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/accordion)
+ * @see 🏷️ {@link AccordionProps}
  *
  * @example
  * ```jsx

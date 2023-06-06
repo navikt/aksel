@@ -38,8 +38,8 @@ export interface CheckboxGroupProps
 /**
  * A component that allows users to select one or more options from a list.
  *
- * @see https://aksel.nav.no/komponenter/core/checkbox
- * @see {@link CheckboxProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/checkbox)
+ * @see 🏷️ {@link CheckboxProps}
  *
  * @example
  * ```jsx

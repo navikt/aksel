@@ -33,8 +33,8 @@ export interface SelectProps
 /**
  * A component that displays a select input field.
  *
- * @see https://aksel.nav.no/komponenter/core/select
- * @see {@link SelectProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/select)
+ * @see 🏷️ {@link SelectProps}
  *
  * @example
  * ```jsx

@@ -68,8 +68,8 @@ export interface CopyButtonProps
 /**
  * A button component that copies text to the clipboard when clicked.
  *
- * @see https://aksel.nav.no/komponenter/core/copybutton
- * @see {@link CopyButtonProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/copybutton)
+ * @see 🏷️ {@link CopyButtonProps}
  *
  * @example
  * ```jsx

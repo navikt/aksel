@@ -26,8 +26,8 @@ export const useProvider = () => useContext(ProviderContext);
 /**
  * A component that provides a context to its children.
  *
- * @see https://aksel.nav.no/komponenter/core/provider
- * @see {@link ProviderProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/provider)
+ * @see 🏷️ {@link ProviderProps}
  *
  * @example
  * ```jsx

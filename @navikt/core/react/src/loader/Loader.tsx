@@ -41,8 +41,8 @@ export type LoaderType = React.ForwardRefExoticComponent<
 /**
  * A component that displays a loading spinner.
  *
- * @see https://aksel.nav.no/komponenter/core/loader
- * @see {@link LoaderProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/loader)
+ * @see 🏷️ {@link LoaderProps}
  *
  * @example
  * ```jsx

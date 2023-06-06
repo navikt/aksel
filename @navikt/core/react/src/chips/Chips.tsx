@@ -23,8 +23,8 @@ interface ChipsComponent
 /**
  * A component that displays a list of items as chips.
  *
- * @see https://aksel.nav.no/komponenter/core/chips
- * @see {@link ChipsProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/chips)
+ * @see 🏷️ {@link ChipsProps}
  *
  * @example
  * ```jsx

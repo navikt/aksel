@@ -127,8 +127,8 @@ interface DatePickerComponent
 /**
  * A component that allows users to select a date from a calendar.
  *
- * @see https://aksel.nav.no/komponenter/core/datepicker
- * @see {@link DatePickerProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/datepicker)
+ * @see 🏷️ {@link DatePickerProps}
  *
  * @example
  * ```jsx

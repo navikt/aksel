@@ -84,8 +84,8 @@ interface PopoverComponent
 /**
  * A component that displays a popover.
  *
- * @see https://aksel.nav.no/komponenter/core/popover
- * @see {@link PopoverProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/popover)
+ * @see 🏷️ {@link PopoverProps}
  *
  * @example
  * ```jsx
