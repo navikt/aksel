@@ -14,22 +14,25 @@ const Example = () => {
     "Vennesla",
   ];
 
-  const [filter, setFilter] = useState(options);
+  const [selected, setSelected] = useState(["Gjøvik", "Hamar"]);
 
   return (
     <Chips>
-      {filter.map((c) => (
-        <Chips.Removable
+      {options.map((c) => (
+        <Chips.Toggle
+          selected={selected.includes(c)}
           key={c}
-          variant="action"
+          variant="neutral"
           onClick={() =>
-            setFilter((x) =>
-              x.length === 1 ? options : x.filter((y) => y !== c)
+            setSelected(
+              selected.includes(c)
+                ? selected.filter((x) => x !== c)
+                : [...selected, c]
             )
           }
         >
           {c}
-        </Chips.Removable>
+        </Chips.Toggle>
       ))}
     </Chips>
   );
@@ -43,5 +46,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 2,
 };

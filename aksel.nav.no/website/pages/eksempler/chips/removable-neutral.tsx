@@ -21,7 +21,7 @@ const Example = () => {
       {filter.map((c) => (
         <Chips.Removable
           key={c}
-          variant="action"
+          variant="neutral"
           onClick={() =>
             setFilter((x) =>
               x.length === 1 ? options : x.filter((y) => y !== c)
@@ -43,5 +43,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 5,
 };

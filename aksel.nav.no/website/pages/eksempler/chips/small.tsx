@@ -3,9 +3,18 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 import { useState } from "react";
 
 const Example = () => {
-  const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
+  const options = [
+    "Lillehammer",
+    "Nittedal",
+    "Enebakk",
+    "Hamar",
+    "Skedsmo",
+    "Arendal",
+    "Gjøvik",
+    "Vennesla",
+  ];
 
-  const [selected, setSelected] = useState(["Dansk", "Svensk"]);
+  const [selected, setSelected] = useState(["Arendal", "Nittedal"]);
   const [filter, setFilter] = useState(options);
 
   return (
@@ -53,5 +62,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
+  index: 6,
 };
