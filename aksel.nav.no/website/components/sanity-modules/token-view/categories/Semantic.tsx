@@ -1,7 +1,12 @@
-import { PersonCircleIcon } from "@navikt/aksel-icons";
+import { FilesIcon } from "@navikt/aksel-icons";
+import { BodyShort, CopyButton } from "@navikt/ds-react";
 import docs from "@navikt/ds-tokens/docs.json";
+import { sanitizeName, getGlobalReference, getColorString } from "../utilities";
+import { Grid } from "../Grid";
+import { PersonCircleIcon } from "@navikt/aksel-icons";
 import color from "tinycolor2";
 import { Frame } from "../Frame";
+import Link from "next/link";
 
 export const SemanticView = ({ cat }: { cat: string }) => {
   const colors = docs[cat];
@@ -95,5 +100,56 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       />
     );
   }
-  return <Frame tokens={colors} styles="background" showHex />;
+  console.log(colors);
+  return (
+    <Grid>
+      {colors.map((x) => {
+        const c = color(x.value);
+        const ref = getGlobalReference(x.value);
+
+        return (
+          <div key={x.name} id={x.name} className="flex w-fit items-center">
+            <div
+              style={{
+                background: `var(${x.name})`,
+                boxShadow: `inset 0 2px 4px 0 rgba(0,0,0,0.06)`,
+              }}
+              className="group mr-3 grid h-12 w-12 place-content-center rounded-lg"
+            >
+              <CopyButton
+                variant="neutral"
+                copyText={x.name}
+                className="focus-visible:shadow-focus-gap rounded-lg opacity-0 duration-0 focus-visible:opacity-100 group-hover:opacity-100 group-hover:transition-opacity"
+                icon={<FilesIcon title={x.name} fontSize="1.5rem" />}
+                style={{
+                  color:
+                    c.getAlpha() === 1
+                      ? color
+                          .mostReadable(x.value, ["#fff", "#262626"])
+                          .toHexString()
+                      : "var(--a-text-default)",
+                }}
+              />
+            </div>
+
+            <BodyShort as="dl" size="small">
+              <dt>{sanitizeName(x.name.replace("surface-", ""))}</dt>
+              <dd className="text-text-subtle ">
+                {ref ? (
+                  <Link
+                    href={`#${ref.name}`}
+                    className="focus-visible:bg-border-focus hover:underline focus:outline-none"
+                  >
+                    {sanitizeName(ref.name)}
+                  </Link>
+                ) : (
+                  getColorString(x.value)
+                )}
+              </dd>
+            </BodyShort>
+          </div>
+        );
+      })}
+    </Grid>
+  );
 };

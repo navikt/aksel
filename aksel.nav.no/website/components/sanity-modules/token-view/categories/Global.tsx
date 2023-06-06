@@ -11,16 +11,12 @@ export const GlobalView = ({ cat }: { cat: string }) => {
   return (
     <Grid>
       {colors.map((x) => {
-        const c = color(x.value);
-
         return (
           <div key={x.name} id={x.name} className="flex w-fit items-center">
             <div
               style={{
                 background: `var(${x.name})`,
-                boxShadow: `inset 0 2px 4px 0 rgba(${
-                  c.getLuminance() > 0.5 ? "0,0,0,0.06" : "255,255,255,0.2"
-                })`,
+                boxShadow: `inset 0 2px 4px 0 rgba(0,0,0,0.06)`,
               }}
               className="group mr-3 grid h-12 w-12 place-content-center rounded-lg"
             >
