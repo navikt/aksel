@@ -1,38 +1,43 @@
+import { FilesIcon } from "@navikt/aksel-icons";
+import { BodyShort, CopyButton } from "@navikt/ds-react";
 import docs from "@navikt/ds-tokens/docs.json";
-import { Frame } from "../Frame";
+import { Grid } from "../Grid";
+import { sanitizeName } from "../utilities";
+
+const getDomToken = (token: string) => {
+  const bodyStyles = window.getComputedStyle(document.body);
+  return bodyStyles.getPropertyValue(token);
+};
 
 export const ShadowView = ({ cat }: { cat: string }) => {
   const shadows = docs[cat];
 
   return (
-    <Frame
-      tokens={shadows}
-      styles="boxShadow"
-      element={({ token, name }: { token: string; name?: string }) => {
-        const isLigth = name && name.includes("focus-inverted");
-
+    <Grid stacked>
+      {shadows.map((x) => {
         return (
-          <div
-            className="min-h-16 flex h-full w-full items-center justify-center rounded-md px-4 text-5xl font-semibold"
-            aria-hidden
-            style={{
-              background: isLigth
-                ? `var(--a-surface-inverted)`
-                : `var(--a-surface-default)`,
-            }}
-          >
+          <div key={x.name} id={x.name} className="flex w-fit items-center">
             <div
-              className="h-8 w-full rounded-md"
               style={{
-                boxShadow: `${token}`,
-                background: isLigth
-                  ? "var(--a-surface-inverted)"
-                  : "var(--a-bg-subtle)",
+                boxShadow: `var(${x.name})`,
               }}
-            />
+              className="group mr-4 grid h-12 w-12 place-content-center rounded-lg"
+            >
+              <CopyButton
+                variant="neutral"
+                copyText={x.name}
+                className="focus-visible:shadow-focus-gap rounded-lg opacity-0 duration-0 focus-visible:opacity-100 group-hover:opacity-100 group-hover:transition-opacity"
+                icon={<FilesIcon title={x.name} fontSize="1.5rem" />}
+              />
+            </div>
+
+            <BodyShort as="dl" size="small">
+              <dt>{sanitizeName(x.name.replace("shadow-", ""))}</dt>
+              <dd className="text-text-subtle ">{getDomToken(x.name)}</dd>
+            </BodyShort>
           </div>
         );
-      }}
-    />
+      })}
+    </Grid>
   );
 };
