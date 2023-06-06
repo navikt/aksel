@@ -8,8 +8,6 @@ import {
 } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocumentsTmp, urlFor } from "@/sanity/interface";
-import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
   AkselSidebarT,
@@ -28,6 +26,8 @@ import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
 import NotFotfund from "../404";
+import { getDocumentsTmp, urlFor } from "@/sanity/interface";
+import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 
 const kodepakker = {
   "ds-react": {
@@ -41,6 +41,18 @@ const kodepakker = {
     git: "https://github.com/navikt/aksel/tree/main/%40navikt/core/css",
     changelog:
       "https://github.com/navikt/aksel/blob/main/%40navikt/core/css/CHANGELOG.md",
+  },
+  "ds-react-internal": {
+    title: "@navikt/ds-react-internal",
+    git: "https://github.com/navikt/aksel/tree/main/%40navikt/internal/react",
+    changelog:
+      "https://github.com/navikt/aksel/blob/main/%40navikt/internal/react/CHANGELOG.md",
+  },
+  "ds-css-internal": {
+    title: "@navikt/ds-css-internal",
+    git: "https://github.com/navikt/aksel/tree/main/%40navikt/internal/css",
+    changelog:
+      "https://github.com/navikt/aksel/blob/main/%40navikt/internal/css/CHANGELOG.md",
   },
   "ds-icons": {
     title: "@navikt/ds-reaciconst",
@@ -175,7 +187,6 @@ const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
       : null;
 
   const unsafe = page?.status?.unsafe;
-  const internal = page?.status?.internal;
 
   return (
     <>
@@ -218,7 +229,6 @@ const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
         variant="page"
         intro={
           <Detail as="div" className="mt-2 flex items-center gap-3">
-            {internal && <StatusTag status="internal" />}
             <StatusTag showStable status={page?.status?.tag} />
             {`OPPDATERT ${dateStr(date)}`}
           </Detail>
@@ -322,7 +332,7 @@ const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
             reference={`<${page?.heading} />`}
           />
         )}
-        <IntroSeksjon node={page?.intro} internal={internal} />
+        <IntroSeksjon node={page?.intro} />
         {page?.status?.tag === "ready" && (
           <SuggestionBlock
             variant="komponent"

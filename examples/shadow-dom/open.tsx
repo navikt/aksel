@@ -1,7 +1,16 @@
-import styles from "@navikt/ds-css/dist/index.css?inline";
-import { DatePicker, Provider, useDatepicker } from "@navikt/ds-react";
-import React from "react";
 import ReactDOM from "react-dom/client";
+import {
+  Provider,
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  Modal,
+  Tooltip,
+  UNSAFE_DatePicker,
+  UNSAFE_useDatepicker,
+} from "@navikt/ds-react";
+import styles from "@navikt/ds-css/dist/index.css?inline";
+import React, { useState } from "react";
 
 class CustomComponent extends HTMLElement {
   connectedCallback() {
@@ -20,16 +29,16 @@ class CustomComponent extends HTMLElement {
 }
 
 const DateWrapper = () => {
-  const { datepickerProps, inputProps, selectedDay } = useDatepicker({
+  const { datepickerProps, inputProps, selectedDay } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     onDateChange: console.log,
   });
 
   return (
     <div className="min-h-96">
-      <DatePicker {...datepickerProps}>
-        <DatePicker.Input {...inputProps} label="Velg dato" />
-      </DatePicker>
+      <UNSAFE_DatePicker {...datepickerProps}>
+        <UNSAFE_DatePicker.Input {...inputProps} label="Velg dato" />
+      </UNSAFE_DatePicker>
       <div className="pt-4">{selectedDay && selectedDay.toDateString()}</div>
     </div>
   );

@@ -1,6 +1,6 @@
 import {
-  DatePicker,
-  useDatepicker,
+  UNSAFE_DatePicker,
+  UNSAFE_useDatepicker,
   Button,
   Modal,
   Heading,
@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 const Example = () => {
   const [open, setOpen] = useState(false);
 
-  const { datepickerProps, inputProps, selectedDay } = useDatepicker({
+  const { datepickerProps, inputProps, selectedDay } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     onDateChange: console.log,
   });
@@ -36,9 +36,9 @@ const Example = () => {
             Heading
           </Heading>
           <div className="min-h-96">
-            <DatePicker {...datepickerProps} strategy="fixed">
-              <DatePicker.Input {...inputProps} label="Velg dato" />
-            </DatePicker>
+            <UNSAFE_DatePicker {...datepickerProps} strategy="fixed">
+              <UNSAFE_DatePicker.Input {...inputProps} label="Velg dato" />
+            </UNSAFE_DatePicker>
             <div className="pt-4">
               {selectedDay && selectedDay.toDateString()}
             </div>

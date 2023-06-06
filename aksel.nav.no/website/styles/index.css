@@ -1,5 +1,6 @@
 @import "tailwindcss/base";
 @import "@navikt/ds-css";
+@import "@navikt/ds-css-internal";
 @import "./global.css";
 
 @import "tailwindcss/components";

@@ -28,11 +28,6 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: "large" | "medium" | "small";
   /**
-   * Whether to indent content or not
-   * @default true
-   */
-  indent?: boolean;
-  /**
    * Instances of Accordion.Item
    */
   children: React.ReactNode;
@@ -65,7 +60,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       variant = "default",
       headingSize = "small",
       size = "medium",
-      indent = true,
       ...rest
     },
     ref
@@ -83,8 +77,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           className={cl(
             "navds-accordion",
             className,
-            `navds-accordion--${size}`,
-            { "navds-accordion--indent": indent }
+            `navds-accordion--${size}`
           )}
           ref={ref}
         />

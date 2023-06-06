@@ -10,7 +10,6 @@ import { Tag } from "./Tag";
 import Card, { ArticleT } from "./Card";
 import cl from "clsx";
 import { urlFor } from "@/sanity/interface";
-import { useEffect, useRef, useState } from "react";
 
 export type LatestT = {
   _type: "nytt_fra_aksel";
@@ -25,16 +24,6 @@ export type LatestT = {
 
 const Latest = ({ block }: { block: LatestT }) => {
   const highlights = block.highlights?.length;
-  const [intersected, setIntersected] = useState(false);
-  const section = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      entry.isIntersecting && setIntersected(entry.isIntersecting);
-    });
-    observer.observe(section.current);
-    return () => observer.disconnect();
-  }, []);
 
   const articles = getList(block);
 
@@ -45,22 +34,13 @@ const Latest = ({ block }: { block: LatestT }) => {
       </Heading>
 
       {highlights && <Highlights highlights={block.highlights} />}
-      <section
-        ref={section}
-        aria-label="Nyeste artikler fra Aksel"
-        className="mt-20"
-      >
+      <section aria-label="Nyeste artikler fra Aksel" className="mt-20">
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 480: 1, 768: 2, 1024: 3 }}
         >
           <Masonry gutter="1.5rem">
-            {articles.map((x, index) => (
-              <Card
-                key={x._id}
-                article={x}
-                index={index}
-                visible={intersected}
-              />
+            {articles.map((x) => (
+              <Card key={x._id} article={x} />
             ))}
           </Masonry>
         </ResponsiveMasonry>

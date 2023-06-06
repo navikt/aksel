@@ -1,5 +1,5 @@
 import { Button } from "@navikt/ds-react";
-import { Dropdown } from "@navikt/ds-react";
+import { Dropdown } from "@navikt/ds-react-internal";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {

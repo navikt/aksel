@@ -1,10 +1,10 @@
-import { DatePicker, useDatepicker } from "@navikt/ds-react";
+import { UNSAFE_DatePicker, UNSAFE_useDatepicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 
 const Example = () => {
   const [hasError, setHasError] = useState(false);
-  const { datepickerProps, inputProps } = useDatepicker({
+  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     onValidate: (val) => {
       setHasError(!val.isValidDate);
@@ -14,13 +14,13 @@ const Example = () => {
 
   return (
     <div className="min-h-96">
-      <DatePicker {...datepickerProps}>
-        <DatePicker.Input
+      <UNSAFE_DatePicker {...datepickerProps}>
+        <UNSAFE_DatePicker.Input
           {...inputProps}
           label="Velg dato"
           error={hasError && "Noe er feil"}
         />
-      </DatePicker>
+      </UNSAFE_DatePicker>
     </div>
   );
 };

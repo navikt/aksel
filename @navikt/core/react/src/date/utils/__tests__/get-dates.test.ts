@@ -73,6 +73,7 @@ describe("Extracts correct months", () => {
       current: new Date(2022, 9, 22),
       res: 9,
     };
+    console.log(getMonths(t.start, t.end, t.current));
     expect(getMonths(t.start, t.end, t.current).length).toEqual(t.res);
   });
 });

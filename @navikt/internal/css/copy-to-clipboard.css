@@ -1,0 +1,7 @@
+.navdsi-copy-to-clipboard:not(:hover):not(:active) {
+  color: var(--ac-copy-to-clipboard-text, var(--a-text-default));
+}
+
+.navdsi-copy-to-clipboard__popover {
+  padding: var(--a-spacing-1);
+}

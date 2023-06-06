@@ -8,8 +8,12 @@
       "@navikt/ds-css",
       "@navikt/ds-tokens",
       "@navikt/ds-tailwind",
+      "@navikt/ds-css-internal",
+      "@navikt/ds-react-internal",
+      "@navikt/ds-codemod",
       "@navikt/aksel-icons",
       "@navikt/aksel",
+      "@navikt/ds-icons",
       "@navikt/aksel-stylelint"
     ]
   ],
@@ -17,7 +21,12 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["shadow-dom", "aksel.nav.no", "aksel-icons-figma-plugin"],
+  "ignore": [
+    "shadow-dom",
+    "aksel.nav.no",
+    "@navikt/ds-navno",
+    "aksel-icons-figma-plugin"
+  ],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"

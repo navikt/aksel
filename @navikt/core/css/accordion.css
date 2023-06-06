@@ -141,14 +141,9 @@
 /*************************
  * Content *
  *************************/
-
 .navds-accordion__content {
-  padding: 0 var(--a-spacing-3) var(--a-spacing-5);
-  animation: fadeAccordionContent 250ms ease;
-}
-
-.navds-accordion--indent > :where(.navds-accordion__item) > :where(.navds-accordion__content) {
   padding: 0 var(--a-spacing-3) var(--a-spacing-5) var(--a-spacing-11);
+  animation: fadeAccordionContent 250ms ease;
 }
 
 .navds-accordion__content--closed {

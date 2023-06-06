@@ -1,0 +1,15 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "noEmitHelpers": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "outDir": "./esm",
+    "isolatedModules": true
+  },
+  "include": ["./src"]
+}

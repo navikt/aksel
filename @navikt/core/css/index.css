@@ -9,12 +9,10 @@
 @import "chat.css";
 @import "chips.css";
 @import "copybutton.css";
-@import "dropdown.css";
 @import "expansioncard.css";
 @import "guide-panel.css";
 @import "form/index.css";
 @import "help-text.css";
-@import "internalheader.css";
 @import "link.css";
 @import "loader.css";
 @import "modal.css";
@@ -22,7 +20,6 @@
 @import "popover.css";
 @import "date.css";
 @import "tag.css";
-@import "timeline.css";
 @import "tooltip.css";
 @import "toggle-group.css";
 @import "panel.css";

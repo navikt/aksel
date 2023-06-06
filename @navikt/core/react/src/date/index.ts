@@ -1,19 +1,19 @@
 export { type DateInputProps } from "./DateInput";
 export {
   type DatePickerProps,
-  default as DatePicker,
+  default as UNSAFE_DatePicker,
 } from "./datepicker/DatePicker";
 export { type DatePickerStandaloneProps } from "./datepicker/DatePickerStandalone";
 export { type MonthPickerStandaloneProps } from "./monthpicker/MonthPickerStandalone";
 export {
-  useDatepicker,
-  useMonthpicker,
-  useRangeDatepicker,
+  UNSAFE_useDatepicker,
+  UNSAFE_useMonthpicker,
+  UNSAFE_useRangeDatepicker,
   type RangeValidationT,
   type DateValidationT,
   type MonthValidationT,
 } from "./hooks";
 export {
-  default as MonthPicker,
+  default as UNSAFE_MonthPicker,
   type MonthPickerProps,
 } from "./monthpicker/MonthPicker";

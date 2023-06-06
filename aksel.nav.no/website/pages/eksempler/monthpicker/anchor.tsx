@@ -1,4 +1,4 @@
-import { Button, MonthPicker } from "@navikt/ds-react";
+import { Button, UNSAFE_MonthPicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 
@@ -8,13 +8,13 @@ const Example = () => {
 
   return (
     <div className="min-h-96">
-      <MonthPicker
+      <UNSAFE_MonthPicker
         onMonthSelect={setMonth}
         onClose={() => setOpen(false)}
         open={open}
       >
         <Button onClick={() => setOpen((x) => !x)}>Velg månede</Button>
-      </MonthPicker>
+      </UNSAFE_MonthPicker>
       {month && <div className="pt-4">{month.getMonth()}</div>}
     </div>
   );

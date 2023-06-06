@@ -1,12 +1,12 @@
-import { InternalHeader } from "@navikt/ds-react";
+import { Header } from "@navikt/ds-react-internal";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <InternalHeader>
-      <InternalHeader.Title href="#home">Sykepenger</InternalHeader.Title>
-      <InternalHeader.User name="Ola Normann" className="ml-auto" />
-    </InternalHeader>
+    <Header>
+      <Header.Title href="#home">Sykepenger</Header.Title>
+      <Header.User name="Ola Normann" className="ml-auto" />
+    </Header>
   );
 };
 

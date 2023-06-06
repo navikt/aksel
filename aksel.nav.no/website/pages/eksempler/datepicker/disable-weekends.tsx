@@ -1,8 +1,10 @@
-import { DatePicker } from "@navikt/ds-react";
+import { UNSAFE_DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <DatePicker.Standalone disableWeekends onSelect={console.log} />;
+  return (
+    <UNSAFE_DatePicker.Standalone disableWeekends onSelect={console.log} />
+  );
 };
 
 export default withDsExample(Example);

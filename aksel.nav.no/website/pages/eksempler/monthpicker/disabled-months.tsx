@@ -1,4 +1,4 @@
-import { MonthPicker } from "@navikt/ds-react";
+import { UNSAFE_MonthPicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
@@ -8,7 +8,7 @@ const Example = () => {
   ];
 
   return (
-    <MonthPicker.Standalone
+    <UNSAFE_MonthPicker.Standalone
       onMonthSelect={console.log}
       dropdownCaption
       fromDate={new Date("1 Oct 2020")}

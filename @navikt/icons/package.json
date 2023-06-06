@@ -1,0 +1,70 @@
+{
+  "name": "@navikt/ds-icons",
+  "version": "3.4.2",
+  "description": "Aksel icons for NAV",
+  "author": "Aksel | NAV designsystem team",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/aksel.git"
+  },
+  "keywords": [
+    "Icons",
+    "NAV",
+    "Aksel",
+    "designsystem",
+    "react",
+    "svg"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "typings": "./esm/index.d.ts",
+  "files": [
+    "/cjs",
+    "/esm",
+    "/src",
+    "/svg",
+    "/meta.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "scripts": {
+    "create-package-json-pointers-to-esm": "node ../../scripts/createPackageJsonsWithESMPointers.js",
+    "create-icons": "svgr --silent --out-dir src svg",
+    "clean": "rimraf src cjs esm",
+    "build": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node cleanTypes.js && yarn create-package-json-pointers-to-esm",
+    "update": "ts-node figma/index.ts dotenv/config",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "@types/react": "^17.0.30 || ^18.0.0",
+    "react": "^17.0.0 || ^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@svgr/cli": "6.2.1",
+    "@types/jest": "^29.0.0",
+    "@types/lodash.startcase": "^4.4.6",
+    "@types/rimraf": "3.0.2",
+    "axios": "1.3.6",
+    "concurrently": "7.2.1",
+    "copyfiles": "^2.4.1",
+    "dotenv": "^10.0.0",
+    "jest": "^29.0.0",
+    "lodash.kebabcase": "^4.1.1",
+    "lodash.startcase": "4.4.0",
+    "react": "^18.0.0",
+    "rimraf": "3.0.2",
+    "ts-jest": "^29.0.0",
+    "ts-node": "10.9.0",
+    "typescript": "^4.8.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

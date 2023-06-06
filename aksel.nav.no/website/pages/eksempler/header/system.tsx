@@ -1,18 +1,18 @@
 import { MenuGridIcon } from "@navikt/aksel-icons";
-import { Dropdown, InternalHeader } from "@navikt/ds-react";
+import { Dropdown, Header } from "@navikt/ds-react-internal";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <InternalHeader>
-      <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
+    <Header>
+      <Header.Title as="h1">Sykepenger</Header.Title>
       <Dropdown>
-        <InternalHeader.Button as={Dropdown.Toggle} className="ml-auto">
+        <Header.Button as={Dropdown.Toggle} className="ml-auto">
           <MenuGridIcon
             style={{ fontSize: "1.5rem" }}
             title="Systemer og oppslagsverk"
           />
-        </InternalHeader.Button>
+        </Header.Button>
 
         <Dropdown.Menu>
           <Dropdown.Menu.GroupedList>
@@ -25,8 +25,8 @@ const Example = () => {
           </Dropdown.Menu.GroupedList>
         </Dropdown.Menu>
       </Dropdown>
-      <InternalHeader.User name="Ola Normann" />
-    </InternalHeader>
+      <Header.User name="Ola Normann" />
+    </Header>
   );
 };
 

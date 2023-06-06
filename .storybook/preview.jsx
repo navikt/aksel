@@ -1,4 +1,6 @@
+import { RouterContext } from "next/dist/shared/lib/router-context";
 import "@navikt/ds-css/index.css";
+import "@navikt/ds-css-internal/index.css";
 import "./layout.css";
 
 export const parameters = {

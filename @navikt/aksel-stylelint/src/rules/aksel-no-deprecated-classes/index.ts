@@ -17,15 +17,7 @@ const ruleFunction: stylelint.Rule = () => {
       selectorParser((selectors) => {
         selectors.walkClasses((className) => {
           for (const deprecation of deprecations) {
-            if (
-              !deprecation.deprecatePrefix &&
-              !deprecation.classes.includes(className.value)
-            ) {
-              continue;
-            } else if (
-              deprecation.deprecatePrefix &&
-              !deprecation.classes.some((x) => className.value.startsWith(x))
-            ) {
+            if (!deprecation.classes.includes(className.value)) {
               return;
             }
             stylelint.utils.report({

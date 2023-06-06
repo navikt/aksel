@@ -1,4 +1,4 @@
-import { Button, DatePicker } from "@navikt/ds-react";
+import { Button, UNSAFE_DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 
@@ -8,7 +8,7 @@ const Example = () => {
 
   return (
     <div className="min-h-96">
-      <DatePicker
+      <UNSAFE_DatePicker
         onSelect={setDays}
         mode="multiple"
         max={5}
@@ -16,7 +16,7 @@ const Example = () => {
         open={open}
       >
         <Button onClick={() => setOpen((x) => !x)}>Velg dager</Button>
-      </DatePicker>
+      </UNSAFE_DatePicker>
       {days && (
         <div className="pt-4">
           {days.map((x) => (

@@ -36,13 +36,15 @@ Promise.all([
   getGlobFiles("./@navikt/**/lib", { dot: true }),
   getGlobFiles("./@navikt/**/esm", { dot: true }),
   getGlobFiles("./@navikt/**/cjs", { dot: true }),
+  getGlobFiles("./@navikt/icons/src", { dot: true }),
   getGlobFiles("./@navikt/aksel-icons/src", { dot: true }),
-]).then(([dist, libvnext, esmvnext, cjsvnext, akselIconsSrc]) => {
+]).then(([dist, libvnext, esmvnext, cjsvnext, iconsrc, akselIconsSrc]) => {
   const folders = [
     ...dist,
     ...libvnext,
     ...esmvnext,
     ...cjsvnext,
+    ...iconsrc,
     ...akselIconsSrc,
   ].filter((path) => !path.includes("node_modules"));
 

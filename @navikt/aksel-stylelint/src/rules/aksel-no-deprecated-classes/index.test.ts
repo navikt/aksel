@@ -40,17 +40,5 @@ getTestRule()({
       column: 7,
       endColumn: 38,
     },
-    {
-      code: ".foo, \n .navdsi-dropdown-example \n .bar {}",
-      description: "selector with deprecated class name 1",
-      message: messages.unexpected(
-        "navdsi-dropdown-example",
-        deprecations[1].message
-      ),
-      line: 2,
-      endLine: 2,
-      column: 3,
-      endColumn: 26,
-    },
   ],
 });

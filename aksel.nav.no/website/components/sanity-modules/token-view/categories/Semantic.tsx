@@ -63,7 +63,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
     );
   }
 
-  if (cat === "semantic-border" || cat === "semantic-data-border") {
+  if (cat === "semantic-border") {
     return (
       <Frame
         tokens={colors}

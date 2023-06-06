@@ -1,0 +1,60 @@
+{
+  "name": "@navikt/ds-react-internal",
+  "version": "3.4.2",
+  "description": "Aksel react components for internal UIs in NAV",
+  "author": "Aksel | NAV designsystem team",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "typescript",
+    "javascript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/aksel"
+  },
+  "sideEffects": false,
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "typings": "./esm/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "files": [
+    "/cjs",
+    "/esm",
+    "/src",
+    "_docs.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "scripts": {
+    "docgen": "yarn ts-node ../../../scripts/docgen.ts",
+    "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
+    "clean": "rimraf cjs esm",
+    "build": "concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "watch": "tsc --watch -p tsconfig.esm.json"
+  },
+  "dependencies": {
+    "@floating-ui/react": "0.24.1",
+    "@navikt/aksel-icons": "^3.4.2",
+    "@navikt/ds-react": "^3.4.2",
+    "clsx": "^1.1.1",
+    "copy-to-clipboard": "^3.3.1"
+  },
+  "devDependencies": {
+    "concurrently": "7.2.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "10.9.0",
+    "typescript": "^4.8.0"
+  },
+  "peerDependencies": {
+    "@types/react": "^17.0.30 || ^18.0.0",
+    "react": "^17.0.0 || ^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  }
+}
