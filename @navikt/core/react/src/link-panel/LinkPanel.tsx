@@ -33,6 +33,7 @@ interface LinkPanelComponentType
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/linkpanel)
  * @see 🏷️ {@link LinkPanelProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
  * ```jsx

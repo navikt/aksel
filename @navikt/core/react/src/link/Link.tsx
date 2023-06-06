@@ -15,6 +15,7 @@ export interface LinkProps
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/link)
  * @see 🏷️ {@link LinkProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
  * ```jsx

@@ -28,6 +28,7 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
  * @see 🏷️ {@link HeadingProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
  * ```jsx

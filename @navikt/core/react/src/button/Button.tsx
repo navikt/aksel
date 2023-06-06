@@ -51,6 +51,7 @@ export interface ButtonProps
  * A button component
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/button)
  * @see 🏷️ {@link ButtonProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  * @example
  * ```jsx
  * <Button>Klikk meg</Button>

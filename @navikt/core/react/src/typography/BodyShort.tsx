@@ -24,6 +24,7 @@ export interface BodyShortProps
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
  * @see 🏷️ {@link BodyShortProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
  * ```jsx

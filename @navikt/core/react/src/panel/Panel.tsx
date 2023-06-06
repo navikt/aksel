@@ -21,6 +21,7 @@ export type PanelType = OverridableComponent<PanelProps, HTMLElement>;
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/panel)
  * @see 🏷️ {@link PanelProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
  * ```jsx

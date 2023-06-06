@@ -24,6 +24,7 @@ export interface LabelProps
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
  * @see 🏷️ {@link LabelProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
  * ```jsx
