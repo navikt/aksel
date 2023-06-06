@@ -1,5 +1,5 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { BreakpointsView } from "components/sanity-modules/token-view/categories/Breakpoints";
+import { BreakpointsView } from "./categories/Breakpoints";
 import { FontView } from "./categories/Font";
 import { GlobalView } from "./categories/Global";
 import { SemanticView } from "./categories/Semantic";
@@ -34,5 +34,5 @@ const TokenView = ({
       return null;
   }
 };
-
-export default withErrorBoundary(TokenView, "TokenView");
+export default TokenView;
+/* export default withErrorBoundary(TokenView, "TokenView"); */
