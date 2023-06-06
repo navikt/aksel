@@ -39,6 +39,7 @@ export const sanitySlug = (prefix: string, depth: number, source?: string) => ({
         .trim()
         .slice(0, 200)
         .trim()
+        .replace(/–+/gm, "")
         .replace(/\s+/g, "-")
         .replace(/-+/gm, "-")
         .replace(/æ/g, "a")
