@@ -6,7 +6,7 @@ import {
   PersonGroupIcon,
   ParasolBeachIcon,
 } from "@navikt/aksel-icons";
-import { Timeline } from "@navikt/ds-react-internal";
+import { Timeline } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 

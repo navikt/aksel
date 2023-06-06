@@ -8,7 +8,7 @@ getTestRule()({
 
   accept: [
     {
-      code: ".foo { --ac-accordion-header-bg-hover: 1px; --ac-header-bg: red; }",
+      code: ".foo { --ac-accordion-header-bg-hover: 1px; --ac-internalheader-bg: red; }",
       description: "existing '--ac-' tokens overridden",
     },
     {
