@@ -1,7 +1,6 @@
 import { FilesIcon } from "@navikt/aksel-icons";
 import { BodyShort, CopyButton } from "@navikt/ds-react";
 import docs from "@navikt/ds-tokens/docs.json";
-
 import { Grid } from "../Grid";
 import { sanitizeName } from "../utilities";
 
