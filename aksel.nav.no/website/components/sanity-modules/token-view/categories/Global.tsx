@@ -1,25 +1,18 @@
 import { FilesIcon } from "@navikt/aksel-icons";
 import { BodyShort, CopyButton } from "@navikt/ds-react";
 import docs from "@navikt/ds-tokens/docs.json";
+import { sanitizeName, getColorString } from "../utilities";
 import color from "tinycolor2";
-
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+import { Grid } from "../Grid";
 
 export const GlobalView = ({ cat }: { cat: string }) => {
   const colors: { name: string; value: string }[] = docs[cat];
-  console.log(colors);
 
-  const sanitize = (x: string) =>
-    capitalize(x.replace("--a-", "").replaceAll("-", " "));
   return (
-    <div className="mt-8 grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-6">
+    <Grid>
       {colors.map((x) => {
         const c = color(x.value);
 
-        const alpha = c.getAlpha() !== 1;
-        const colorname = alpha
-          ? c.toRgbString()
-          : c.toHexString().toUpperCase();
         return (
           <div key={x.name} id={x.name} className="flex w-fit items-center">
             <div
@@ -45,12 +38,14 @@ export const GlobalView = ({ cat }: { cat: string }) => {
             </div>
 
             <BodyShort as="dl">
-              <dt>{sanitize(x.name)}</dt>
-              <dd className="text-text-subtle text-medium">{colorname}</dd>
+              <dt>{sanitizeName(x.name)}</dt>
+              <dd className="text-text-subtle text-medium">
+                {getColorString(x.value)}
+              </dd>
             </BodyShort>
           </div>
         );
       })}
-    </div>
+    </Grid>
   );
 };
