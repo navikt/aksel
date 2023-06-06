@@ -19,6 +19,18 @@ export const SemanticView = () => (
   <TokenView token={{ title: "semantic-surface", kategori: "test" }} />
 );
 
+export const SemanticBorderView = () => (
+  <TokenView token={{ title: "semantic-border", kategori: "test" }} />
+);
+
+export const SemanticIconView = () => (
+  <TokenView token={{ title: "semantic-icon", kategori: "test" }} />
+);
+
+export const SemanticTextView = () => (
+  <TokenView token={{ title: "semantic-text", kategori: "test" }} />
+);
+
 export const RadiusView = () => (
   <TokenView token={{ title: "radius", kategori: "test" }} />
 );
