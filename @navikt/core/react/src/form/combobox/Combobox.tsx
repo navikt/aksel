@@ -65,9 +65,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       inputDescriptionId,
       inputProps,
       value,
-      onChange,
       size = "medium",
       searchTerm,
+      setValue,
     } = useInputContext();
 
     const focusInput = useCallback(() => {
@@ -77,9 +77,9 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const handleClear = useCallback(
       (event: ComboboxClearEvent) => {
         onClear?.(event);
-        onChange("");
+        setValue("");
       },
-      [onChange, onClear]
+      [setValue, onClear]
     );
 
     const handleDeleteSelectedOption = useCallback(
