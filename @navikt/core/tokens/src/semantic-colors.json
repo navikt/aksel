@@ -5,7 +5,7 @@
         "value": "{a.gray.900.value}"
       },
       "subtle": {
-        "value": "{a.grayalpha.600.value}"
+        "value": "{a.grayalpha.700.value}"
       },
       "visited": {
         "value": "{a.purple.500.value}"
