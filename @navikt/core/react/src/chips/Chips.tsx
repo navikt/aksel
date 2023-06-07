@@ -1,7 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
-import ToggleChips, { ToggleChipsType } from "./Toggle";
-import RemovableChips, { RemovableChipsType } from "./Removable";
+import ToggleChips, { ToggleChipsProps } from "./Toggle";
+import RemovableChips, { RemovableChipsProps } from "./Removable";
+import { OverridableComponent } from "../util/OverridableComponent";
 
 export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -16,8 +17,18 @@ interface ChipsComponent
   extends React.ForwardRefExoticComponent<
     ChipsProps & React.RefAttributes<HTMLUListElement>
   > {
-  Toggle: ToggleChipsType;
-  Removable: RemovableChipsType;
+  /**
+   * Toggle between selected-states.
+   * @see 🏷️ {@link ToggleChipsProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Toggle: OverridableComponent<ToggleChipsProps, HTMLButtonElement>;
+  /**
+   * Remove filter or the likes on click
+   * @see 🏷️ {@link RemovableChipsProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Removable: OverridableComponent<RemovableChipsProps, HTMLButtonElement>;
 }
 
 /**
