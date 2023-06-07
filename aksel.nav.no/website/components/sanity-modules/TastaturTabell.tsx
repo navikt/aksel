@@ -6,7 +6,7 @@ import React from "react";
 const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
   <kbd
     className={cl(
-      "mx-05 my-0 inline-block min-w-[2rem] rounded-md border border-gray-300 bg-gray-100 py-[1px] px-2 text-center font-mono text-sm text-gray-900"
+      "mx-05 my-0 inline-block min-w-[2rem] rounded-md border border-gray-300 bg-gray-100 px-2 py-[1px] text-center font-mono text-sm text-gray-900"
     )}
     {...props}
   />
@@ -34,9 +34,11 @@ const UuSeksjon = ({ node }: { node: UUTableT }) => {
   return (
     <table className="mb-7 w-full border-separate border-spacing-0 rounded border border-gray-300">
       <thead>
-        <tr className="rounded-t">
-          <td className="rounded-tl bg-gray-50 p-2 ">Kommando</td>
-          <td className="rounded-tr bg-gray-50 p-2 ">Interaksjon</td>
+        <tr className="rounded-t text-left">
+          <th className="font-regular rounded-tl bg-gray-50 p-2 ">Kommando</th>
+          <th className="font-regular rounded-tr bg-gray-50 p-2 ">
+            Interaksjon
+          </th>
         </tr>
       </thead>
       <tbody className="">
@@ -45,7 +47,7 @@ const UuSeksjon = ({ node }: { node: UUTableT }) => {
             key={x._key}
             className="peer border-b border-t border-gray-300 text-base last-of-type:rounded-b"
           >
-            <td className="border-t border-r border-gray-300 p-2">
+            <td className="border-r border-t border-gray-300 p-2">
               {getKey(x.key)}
             </td>
             <td className="border-t border-gray-300 p-2">{x.action}</td>

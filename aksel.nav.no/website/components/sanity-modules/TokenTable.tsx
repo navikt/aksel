@@ -29,9 +29,11 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
       >
         <table className="border-border-divider w-full border-separate border-spacing-0 rounded-t border">
           <thead>
-            <tr className="rounded-t">
-              <td className="rounded-tl bg-gray-50 p-2 ">Token</td>
-              <td className="rounded-tr bg-gray-50 p-2 ">Fallback</td>
+            <tr className="rounded-t text-left">
+              <th className="font-regular rounded-tl bg-gray-50 p-2 ">Token</th>
+              <th className="font-regular rounded-tr bg-gray-50 p-2 ">
+                Fallback
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -40,7 +42,7 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
                 key={key}
                 className="peer border-b border-t border-gray-300 font-mono text-sm last-of-type:rounded-b"
               >
-                <td className="border-t border-r border-gray-300 p-2">{key}</td>
+                <td className="border-r border-t border-gray-300 p-2">{key}</td>
                 <td className="border-t border-gray-300 p-2">{val}</td>
               </tr>
             ))}
@@ -57,7 +59,7 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
                   };\n`,
                 ""
               )}
-              className="absolute top-2 right-2 z-10"
+              className="absolute right-2 top-2 z-10"
             />
             <Label size="small" as="span" spacing>
               Hva er dette?
