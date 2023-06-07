@@ -33,6 +33,17 @@ export interface TextFieldProps
   type?: "email" | "number" | "password" | "tel" | "text" | "url";
 }
 
+/**
+ * A component that displays a text input field with a label.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/textfield)
+ * @see 🏷️ {@link TextFieldProps}
+ *
+ * @example
+ * ```jsx
+ * <TextField label="Har du noen tilbakemeldinger?" />
+ * ```
+ */
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
     const {

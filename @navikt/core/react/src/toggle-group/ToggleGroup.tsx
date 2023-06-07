@@ -1,3 +1,4 @@
+import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import cl from "clsx";
 import React, {
   createContext,
@@ -5,9 +6,8 @@ import React, {
   HTMLAttributes,
   useState,
 } from "react";
-import ToggleItem, { ToggleItemType } from "./ToggleItem";
-import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import { Label, useId } from "..";
+import ToggleItem, { ToggleItemProps } from "./ToggleItem";
 
 export interface ToggleGroupProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -47,7 +47,12 @@ interface ToggleGroupComponent
   extends React.ForwardRefExoticComponent<
     ToggleGroupProps & React.RefAttributes<HTMLDivElement>
   > {
-  Item: ToggleItemType;
+  /**
+   * @see 🏷️ {@link ToggleItemProps}
+   */
+  Item: React.ForwardRefExoticComponent<
+    ToggleItemProps & React.RefAttributes<HTMLButtonElement>
+  >;
 }
 
 interface ToggleContextProps {
@@ -58,6 +63,21 @@ export const ToggleGroupContext = createContext<ToggleContextProps | null>(
   null
 );
 
+/**
+ * A component that displays a group of toggle buttons.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/toggle-group)
+ * @see 🏷️ {@link ToggleGroupProps}
+ *
+ * @example
+ * ```jsx
+ * <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
+ *   <ToggleGroup.Item value="ulest">Ulest</ToggleGroup.Item>
+ *   <ToggleGroup.Item value="lest">Leste</ToggleGroup.Item>
+ *   <ToggleGroup.Item value="sendt">Sendt</ToggleGroup.Item>
+ * </ToggleGroup>
+ * ```
+ */
 export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
   (
     {

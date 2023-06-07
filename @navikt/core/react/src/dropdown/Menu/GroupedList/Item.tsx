@@ -11,35 +11,31 @@ export interface GroupedItemProps
   children: React.ReactNode;
 }
 
-export type GroupedItemType = OverridableComponent<
+export const GroupedItem: OverridableComponent<
   GroupedItemProps,
   HTMLButtonElement
->;
+> = forwardRef(({ as: Component = "button", className, ...rest }, ref) => {
+  const context = useContext(DropdownContext);
 
-export const GroupedItem: GroupedItemType = forwardRef(
-  ({ as: Component = "button", className, ...rest }, ref) => {
-    const context = useContext(DropdownContext);
-
-    return (
-      <dd className="navds-dropdown__list-item">
-        <Component
-          {...rest}
-          value={rest.children}
-          onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-            context?.onSelect?.(event);
-            rest?.onClick?.(event);
-          }}
-          ref={ref}
-          className={cl(
-            "navds-dropdown__item",
-            "navds-body-short",
-            "navds-body-short--small",
-            className
-          )}
-        />
-      </dd>
-    );
-  }
-);
+  return (
+    <dd className="navds-dropdown__list-item">
+      <Component
+        {...rest}
+        value={rest.children}
+        onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+          context?.onSelect?.(event);
+          rest?.onClick?.(event);
+        }}
+        ref={ref}
+        className={cl(
+          "navds-dropdown__item",
+          "navds-body-short",
+          "navds-body-short--small",
+          className
+        )}
+      />
+    </dd>
+  );
+});
 
 export default GroupedItem;

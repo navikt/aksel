@@ -21,10 +21,10 @@ export interface ToggleChipsProps
   checkmark?: boolean;
 }
 
-export interface ToggleChipsType
-  extends OverridableComponent<ToggleChipsProps, HTMLButtonElement> {}
-
-export const ToggleChips: ToggleChipsType = forwardRef(
+export const ToggleChips: OverridableComponent<
+  ToggleChipsProps,
+  HTMLButtonElement
+> = forwardRef(
   (
     {
       className,

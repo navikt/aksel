@@ -14,10 +14,6 @@ export interface InternalHeaderUserProps
   description?: string;
 }
 
-export type InternalHeaderUserType = React.ForwardRefExoticComponent<
-  InternalHeaderUserProps & React.RefAttributes<HTMLDivElement>
->;
-
 export const InternalHeaderUser = forwardRef<
   HTMLDivElement,
   InternalHeaderUserProps

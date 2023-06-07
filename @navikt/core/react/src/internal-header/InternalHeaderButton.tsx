@@ -9,20 +9,15 @@ export interface InternalHeaderButtonProps
    */
   children: React.ReactNode;
 }
-
-export type InternalHeaderButtonType = OverridableComponent<
+export const InternalHeaderButton: OverridableComponent<
   InternalHeaderButtonProps,
   HTMLButtonElement
->;
-
-export const InternalHeaderButton: InternalHeaderButtonType = forwardRef(
-  ({ as: Component = "button", className, ...rest }, ref) => (
-    <Component
-      {...rest}
-      ref={ref}
-      className={cl("navds-internalheader__button", className)}
-    />
-  )
-);
+> = forwardRef(({ as: Component = "button", className, ...rest }, ref) => (
+  <Component
+    {...rest}
+    ref={ref}
+    className={cl("navds-internalheader__button", className)}
+  />
+));
 
 export default InternalHeaderButton;
