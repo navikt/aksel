@@ -1,17 +1,32 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import AccordionItem, { AccordionItemType } from "./AccordionItem";
-import AccordionContent, { AccordionContentType } from "./AccordionContent";
-import AccordionHeader, { AccordionHeaderType } from "./AccordionHeader";
+import AccordionItem, { AccordionItemProps } from "./AccordionItem";
+import AccordionContent, { AccordionContentProps } from "./AccordionContent";
+import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
 import { AccordionContext } from "./AccordionContext";
 
 interface AccordionComponent
   extends React.ForwardRefExoticComponent<
     AccordionProps & React.RefAttributes<HTMLDivElement>
   > {
-  Item: AccordionItemType;
-  Header: AccordionHeaderType;
-  Content: AccordionContentType;
+  /**
+   * @see 🏷️ {@link AccordionItemProps}
+   */
+  Item: React.ForwardRefExoticComponent<
+    AccordionItemProps & React.RefAttributes<HTMLDivElement>
+  >;
+  /**
+   * @see 🏷️ {@link AccordionHeaderProps}
+   */
+  Header: React.ForwardRefExoticComponent<
+    AccordionHeaderProps & React.RefAttributes<HTMLButtonElement>
+  >;
+  /**
+   * @see 🏷️ {@link AccordionContentProps}
+   */
+  Content: React.ForwardRefExoticComponent<
+    AccordionContentProps & React.RefAttributes<HTMLDivElement>
+  >;
 }
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -38,6 +53,26 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+/**
+ * A component that displays collapsible content sections.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/accordion)
+ * @see 🏷️ {@link AccordionProps}
+ *
+ * @example
+ * ```jsx
+ * <Accordion>
+ *   <Accordion.Item>
+ *     <Accordion.Header>Section 1</Accordion.Header>
+ *     <Accordion.Content>Content 1</Accordion.Content>
+ *   </Accordion.Item>
+ *   <Accordion.Item>
+ *     <Accordion.Header>Section 2</Accordion.Header>
+ *     <Accordion.Content>Content 2</Accordion.Content>
+ *   </Accordion.Item>
+ * </Accordion>
+ * ```
+ */
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {

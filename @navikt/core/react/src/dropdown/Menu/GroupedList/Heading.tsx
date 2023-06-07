@@ -9,23 +9,20 @@ export interface GroupedHeadingProps
   children: React.ReactNode;
 }
 
-export type GroupedHeadingType = React.ForwardRefExoticComponent<
-  GroupedHeadingProps & React.RefAttributes<HTMLElement>
->;
-
-export const GroupedHeading: GroupedHeadingType = forwardRef(
-  ({ className, ...rest }, ref) => (
-    <dt
-      {...rest}
-      ref={ref}
-      className={cl(
-        "navds-dropdown__list-heading",
-        "navds-heading",
-        "navds-heading--xsmall",
-        className
-      )}
-    />
-  )
-);
+export const GroupedHeading = forwardRef<
+  HTMLDetailsElement,
+  GroupedHeadingProps
+>(({ className, ...rest }, ref) => (
+  <dt
+    {...rest}
+    ref={ref}
+    className={cl(
+      "navds-dropdown__list-heading",
+      "navds-heading",
+      "navds-heading--xsmall",
+      className
+    )}
+  />
+));
 
 export default GroupedHeading;

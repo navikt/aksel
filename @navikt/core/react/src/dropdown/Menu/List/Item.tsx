@@ -10,13 +10,8 @@ export interface ListItemProps extends React.ButtonHTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 
-export type ListItemType = OverridableComponent<
-  ListItemProps,
-  HTMLButtonElement
->;
-
-export const ListItem: ListItemType = forwardRef(
-  ({ as: Component = "button", className, ...rest }, ref) => {
+export const ListItem: OverridableComponent<ListItemProps, HTMLButtonElement> =
+  forwardRef(({ as: Component = "button", className, ...rest }, ref) => {
     const context = useContext(DropdownContext);
 
     return (
@@ -38,7 +33,6 @@ export const ListItem: ListItemType = forwardRef(
         />
       </li>
     );
-  }
-);
+  });
 
 export default ListItem;

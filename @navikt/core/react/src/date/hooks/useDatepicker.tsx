@@ -113,6 +113,19 @@ const getValidationMessage = (val = {}): DateValidationT => ({
   ...val,
 });
 
+/**
+ *
+ * @see 🏷️ {@link UseDatepickerOptions}
+ * @see 🏷️ {@link UseDatepickerValue}
+ * @see 🏷️ {@link DateValidationT}
+ * @example
+ * const { datepickerProps, inputProps } = useDatepicker({
+ *   fromDate: new Date("Aug 23 2019"),
+ *   toDate: new Date("Feb 23 2024"),
+ *   onDateChange: console.log,
+ *   onValidate: console.log,
+ * });
+ */
 export const useDatepicker = (
   opt: UseDatepickerOptions = {}
 ): UseDatepickerValue => {

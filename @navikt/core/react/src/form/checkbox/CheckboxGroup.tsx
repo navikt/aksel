@@ -35,6 +35,21 @@ export interface CheckboxGroupProps
   onChange?: (value: any[]) => void;
 }
 
+/**
+ * A component that allows users to select one or more options from a list.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/checkbox)
+ * @see 🏷️ {@link CheckboxProps}
+ *
+ * @example
+ * ```jsx
+ * <CheckboxGroup legend="Hvor vil du sitte?">
+ *   <Checkbox value="Bakerst">Bakerst</Checkbox>
+ *   <Checkbox value="Midterst">Midterst</Checkbox>
+ *   <Checkbox value="Fremst">Fremst</Checkbox>
+ * </CheckboxGroup>
+ * ```
+ */
 export const CheckboxGroup = forwardRef<
   HTMLFieldSetElement,
   CheckboxGroupProps

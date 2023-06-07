@@ -1,6 +1,7 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
-import ListItem, { ListItemType } from "./Item";
+import React, { forwardRef } from "react";
+import { OverridableComponent } from "../../../util/OverridableComponent";
+import ListItem, { ListItemProps } from "./Item";
 
 export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
@@ -13,7 +14,11 @@ export interface ListType
   extends React.ForwardRefExoticComponent<
     ListProps & React.RefAttributes<HTMLUListElement>
   > {
-  Item: ListItemType;
+  /**
+   * @see 🏷️ {@link ListItemProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Item: OverridableComponent<ListItemProps, HTMLButtonElement>;
 }
 
 export const List = forwardRef(({ className, children, ...rest }, ref) => (

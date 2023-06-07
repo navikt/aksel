@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { createContext, forwardRef, useContext } from "react";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util/useId";
-import { ListItem, ListItemType } from "./ListItem";
+import { ListItem, ListItemProps } from "./ListItem";
 
 export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -28,7 +28,12 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export interface ListComponent
   extends React.ForwardRefExoticComponent<ListProps> {
-  Item: ListItemType;
+  /**
+   * @see 🏷️ {@link ListItemProps}
+   */
+  Item: React.ForwardRefExoticComponent<
+    ListItemProps & React.RefAttributes<HTMLLIElement>
+  >;
 }
 
 interface ListContextProps {

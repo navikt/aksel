@@ -1,7 +1,8 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
-import GroupedHeading, { GroupedHeadingType } from "./Heading";
-import GroupedItem, { GroupedItemType } from "./Item";
+import React, { forwardRef } from "react";
+import { OverridableComponent } from "../../../util/OverridableComponent";
+import GroupedHeading, { GroupedHeadingProps } from "./Heading";
+import GroupedItem, { GroupedItemProps } from "./Item";
 
 export interface GroupedListProps
   extends React.HTMLAttributes<HTMLDListElement> {
@@ -15,8 +16,17 @@ export interface GroupedListType
   extends React.ForwardRefExoticComponent<
     GroupedListProps & React.RefAttributes<HTMLDListElement>
   > {
-  Heading: GroupedHeadingType;
-  Item: GroupedItemType;
+  /**
+   * @see 🏷️ {@link GroupedHeadingProps}
+   */
+  Heading: React.ForwardRefExoticComponent<
+    GroupedHeadingProps & React.RefAttributes<HTMLDetailsElement>
+  >;
+  /**
+   * @see 🏷️ {@link GroupedItemProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Item: OverridableComponent<GroupedItemProps, HTMLButtonElement>;
 }
 
 export const DescriptionList = forwardRef(

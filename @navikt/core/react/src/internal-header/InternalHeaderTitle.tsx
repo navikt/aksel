@@ -10,26 +10,18 @@ export interface InternalHeaderTitleProps
   children: React.ReactNode;
 }
 
-export type InternalHeaderTitleType = OverridableComponent<
+export const InternalHeaderTitle: OverridableComponent<
   InternalHeaderTitleProps,
   HTMLAnchorElement
->;
-
-export const InternalHeaderTitle: InternalHeaderTitleType = forwardRef(
-  ({ as: Component = "a", children, className, ...rest }, ref) => (
-    <Component
-      {...rest}
-      ref={ref}
-      size="xsmall"
-      className={cl(
-        "navds-internalheader__title",
-        "navds-body-short",
-        className
-      )}
-    >
-      <span>{children}</span>
-    </Component>
-  )
-);
+> = forwardRef(({ as: Component = "a", children, className, ...rest }, ref) => (
+  <Component
+    {...rest}
+    ref={ref}
+    size="xsmall"
+    className={cl("navds-internalheader__title", "navds-body-short", className)}
+  >
+    <span>{children}</span>
+  </Component>
+));
 
 export default InternalHeaderTitle;
