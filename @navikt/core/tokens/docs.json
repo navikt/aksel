@@ -339,7 +339,7 @@
   ],
   "semantic-icon": [
     { "name": "--a-icon-default", "value": "rgba(38, 38, 38, 1)" },
-    { "name": "--a-icon-subtle", "value": "rgba(89, 89, 89, 1)" },
+    { "name": "--a-icon-subtle", "value": "rgba(0, 0, 0, 0.65)" },
     { "name": "--a-icon-on-neutral", "value": "rgba(255, 255, 255, 1)" },
     { "name": "--a-icon-on-inverted", "value": "rgba(255, 255, 255, 1)" },
     { "name": "--a-icon-action", "value": "rgba(0, 103, 197, 1)" },

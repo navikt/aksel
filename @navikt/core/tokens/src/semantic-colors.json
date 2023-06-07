@@ -284,7 +284,7 @@
         "value": "{a.gray.900.value}"
       },
       "subtle": {
-        "value": "{a.gray.700.value}"
+        "value": "{a.grayalpha.700.value}"
       },
       "action": {
         "selected": { "value": "{a.deepblue.500.value}" },
