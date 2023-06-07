@@ -221,7 +221,7 @@
   ],
   "semantic-text": [
     { "name": "--a-text-default", "value": "rgba(38, 38, 38, 1)" },
-    { "name": "--a-text-subtle", "value": "rgba(0, 0, 0, 0.56)" },
+    { "name": "--a-text-subtle", "value": "rgba(0, 0, 0, 0.65)" },
     { "name": "--a-text-visited", "value": "rgba(99, 70, 137, 1)" },
     { "name": "--a-text-danger", "value": "rgba(195, 0, 0, 1)" },
     { "name": "--a-text-action", "value": "rgba(0, 103, 197, 1)" },
@@ -339,7 +339,7 @@
   ],
   "semantic-icon": [
     { "name": "--a-icon-default", "value": "rgba(38, 38, 38, 1)" },
-    { "name": "--a-icon-subtle", "value": "rgba(112, 112, 112, 1)" },
+    { "name": "--a-icon-subtle", "value": "rgba(0, 0, 0, 0.65)" },
     { "name": "--a-icon-on-neutral", "value": "rgba(255, 255, 255, 1)" },
     { "name": "--a-icon-on-inverted", "value": "rgba(255, 255, 255, 1)" },
     { "name": "--a-icon-action", "value": "rgba(0, 103, 197, 1)" },

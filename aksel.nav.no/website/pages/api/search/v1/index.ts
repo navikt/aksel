@@ -218,6 +218,7 @@ async function searchSanity() {
       return (
         res?.result?.map((x) => ({
           ...x,
+          contentHeadings: getHeadings(x?.content),
           content: toPlainText(x?.content),
           codeExamples: getCodeExamples(x?.content),
         })) ?? []
@@ -236,6 +237,7 @@ function getSearchResults(results, query) {
   const fuse = new Fuse<SearchHitT>(results, {
     keys: [
       { name: "heading", weight: 100 },
+      { name: "contentHeadings", weight: 70 },
       { name: "ingress", weight: 50 },
       { name: "intro", weight: 50 },
       { name: "content", weight: 10 },
@@ -254,13 +256,19 @@ function getSearchResults(results, query) {
     includeScore: true,
     shouldSort: true,
     minMatchCharLength: 3,
-    useExtendedSearch: true,
     includeMatches: true,
     ignoreLocation: true,
     threshold: 0.2,
     distance: 6000,
   });
   return fuse.search(query).filter((x) => x.score < 0.3);
+}
+
+function getHeadings(blocks: any[]) {
+  if (!blocks || blocks.length === 0) {
+    return "";
+  }
+  return blocks.filter((x) => x.style === "h2").map((x) => x.children[0].text);
 }
 
 function toPlainText(blocks: any[]) {

@@ -38,6 +38,17 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   size?: "medium" | "small" | "xsmall";
 }
 
+/**
+ * A component that displays a small label with a text and a background color.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/tag)
+ * @see 🏷️ {@link TagProps}
+ *
+ * @example
+ * ```jsx
+ * <Tag variant="success">Success</Tag>
+ * ```
+ */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
   ({ className, variant, size = "medium", ...rest }, ref) => (
     <BodyShort

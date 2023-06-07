@@ -38,23 +38,41 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
 interface TimelineComponent
   extends React.ForwardRefExoticComponent<TimelineProps> {
   /**
-   * Built-in timeline row
+   * @see 🏷️ {@link TimelineRowType}
    */
   Row: TimelineRowType;
   /**
-   * Built-in row period
+   * @see 🏷️ {@link PeriodType}
    */
   Period: PeriodType;
   /**
-   * Built-in timeline pin
+   * @see 🏷️ {@link PinType}
    */
   Pin: PinType;
   /**
-   * Built-in timeline zoom-component
+   * @see 🏷️ {@link ZoomType}
    */
   Zoom: ZoomType;
 }
 
+/**
+ * A component that displays a timeline of events. Meant for Internal systems.
+ * @note Component is made for desktop enviroments and will start having issues on smaller screens.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/timeline)
+ * @see 🏷️ {@link TimelineProps}
+ *
+ * @example
+ * ```jsx
+ * <Timeline>
+ *   <Timeline.Row>
+ *    <Timeline.Period start={new Date("2020-01-01")} end={new Date("2020-01-31")}>
+ *    <p>Period 1</p>
+ *   </Timeline.Period>
+ *  <Timeline.Row>
+ * </Timeline>
+ * ```
+ */
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, direction = "left", ...rest }, ref) => {
     const isMultipleRows = Array.isArray(children);

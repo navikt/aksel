@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
-import Bubble, { BubbleType } from "./Bubble";
+import Bubble, { BubbleProps } from "./Bubble";
 import { BodyLong, BodyShort } from "../typography";
 
 export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
@@ -44,9 +44,30 @@ interface ChatComponent
   extends React.ForwardRefExoticComponent<
     ChatProps & React.RefAttributes<HTMLDivElement>
   > {
-  Bubble: BubbleType;
+  /**
+   * @see 🏷️ {@link BubbleProps}
+   */
+  Bubble: React.ForwardRefExoticComponent<
+    BubbleProps & React.RefAttributes<HTMLDivElement>
+  >;
 }
 
+/**
+ * A component for displaying chat messages.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/chat)
+ * @see 🏷️ {@link ChatProps}
+ *
+ * @example
+ * ```jsx
+ * <Chat>
+ *   <Chat.Bubble avatar="A" name="Alice">Hello!</Chat.Bubble>
+ * </Chat>
+ * <Chat>
+ *   <Chat.Bubble avatar="B" name="Bob">Hi there!</Chat.Bubble>
+ * </Chat>
+ * ```
+ */
 export const Chat = forwardRef<HTMLDivElement, ChatProps>(
   (
     {

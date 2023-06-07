@@ -25,11 +25,7 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   toptextPosition?: "left" | "right";
 }
 
-export type BubbleType = React.ForwardRefExoticComponent<
-  BubbleProps & React.RefAttributes<HTMLDivElement>
->;
-
-const Bubble: BubbleType = forwardRef(
+const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
   (
     {
       children,

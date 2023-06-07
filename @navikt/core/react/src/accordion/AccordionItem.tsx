@@ -27,10 +27,6 @@ export interface AccordionItemProps
   defaultOpen?: boolean;
 }
 
-export type AccordionItemType = React.ForwardRefExoticComponent<
-  AccordionItemProps & React.RefAttributes<HTMLDivElement>
->;
-
 export interface AccordionItemContextProps {
   open: boolean;
   toggleOpen: () => void;
@@ -39,7 +35,7 @@ export interface AccordionItemContextProps {
 export const AccordionItemContext =
   createContext<AccordionItemContextProps | null>(null);
 
-const AccordionItem: AccordionItemType = forwardRef(
+const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   (
     { children, className, open, defaultOpen = false, onClick, id, ...rest },
     ref

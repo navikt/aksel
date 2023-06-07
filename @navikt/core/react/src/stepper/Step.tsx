@@ -45,69 +45,66 @@ const CompletedIcon = () => (
   </svg>
 );
 
-export interface StepperStepType
-  extends OverridableComponent<StepperStepProps, HTMLAnchorElement> {}
+export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
+  forwardRef(
+    (
+      {
+        className,
+        children,
+        as: Component = "a",
+        unsafe_index = 0,
+        completed = false,
+        interactive,
+        ...rest
+      },
+      ref
+    ) => {
+      const context = useContext(StepperContext);
+      if (context === null) {
+        console.error("<Stepper.Step> has to be used within <Stepper>");
+        return null;
+      }
+      const { activeStep } = context;
 
-export const StepComponent: OverridableComponent<
-  StepperStepProps,
-  HTMLAnchorElement
-> = forwardRef(
-  (
-    {
-      className,
-      children,
-      as: Component = "a",
-      unsafe_index = 0,
-      completed = false,
-      interactive,
-      ...rest
-    },
-    ref
-  ) => {
-    const context = useContext(StepperContext);
-    if (context === null) {
-      console.error("<Stepper.Step> has to be used within <Stepper>");
-      return null;
-    }
-    const { activeStep } = context;
+      const isInteractive = interactive ?? context?.interactive;
 
-    const isInteractive = interactive ?? context?.interactive;
+      const Comp = isInteractive ? Component : "div";
 
-    const Comp = isInteractive ? Component : "div";
-
-    return (
-      <Comp
-        {...rest}
-        aria-current={activeStep === unsafe_index}
-        ref={ref}
-        className={cl("navds-stepper__step", className, {
-          "navds-stepper__step--active": activeStep === unsafe_index,
-          "navds-stepper__step--behind": activeStep > unsafe_index,
-          "navds-stepper__step--non-interactive": !isInteractive,
-          "navds-stepper__step--completed": completed,
-        })}
-        onClick={(e) => {
-          isInteractive && context.onStepChange(unsafe_index + 1);
-          rest?.onClick?.(e);
-        }}
-      >
-        {completed ? (
-          <span className="navds-stepper__circle navds-stepper__circle--success">
-            <CompletedIcon />
-          </span>
-        ) : (
-          <Label className="navds-stepper__circle" as="span" aria-hidden="true">
-            {unsafe_index + 1}
+      return (
+        <Comp
+          {...rest}
+          aria-current={activeStep === unsafe_index}
+          ref={ref}
+          className={cl("navds-stepper__step", className, {
+            "navds-stepper__step--active": activeStep === unsafe_index,
+            "navds-stepper__step--behind": activeStep > unsafe_index,
+            "navds-stepper__step--non-interactive": !isInteractive,
+            "navds-stepper__step--completed": completed,
+          })}
+          onClick={(e) => {
+            isInteractive && context.onStepChange(unsafe_index + 1);
+            rest?.onClick?.(e);
+          }}
+        >
+          {completed ? (
+            <span className="navds-stepper__circle navds-stepper__circle--success">
+              <CompletedIcon />
+            </span>
+          ) : (
+            <Label
+              className="navds-stepper__circle"
+              as="span"
+              aria-hidden="true"
+            >
+              {unsafe_index + 1}
+            </Label>
+          )}
+          <Label as="span" className="navds-stepper__content">
+            {children}
           </Label>
-        )}
-        <Label as="span" className="navds-stepper__content">
-          {children}
-        </Label>
-      </Comp>
-    );
-  }
-);
-
-const Step = StepComponent as StepperStepType;
+        </Comp>
+      );
+    }
+  );
 
 export default Step;

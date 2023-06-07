@@ -47,8 +47,8 @@ export interface RadioGroupProps
 
 /**
  * Form radio group
- * @see https://aksel.nav.no/komponenter/core/radio
- * @see {@link RadioGroupProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/radio)
+ * @see 🏷️ {@link RadioGroupProps}
  * @example
  * <RadioGroup legend="Får du AAP nå?">
  *    <Radio value="ja">Ja</Radio>

@@ -1,3 +1,7 @@
+[data-theme="dark"] {
+  --ac-form-description: var(--a-text-on-inverted);
+}
+
 .navds-form-field {
   display: grid;
   justify-items: start;
@@ -6,6 +10,7 @@
 
 .navds-form-field__description {
   margin-top: -6px;
+  color: var(--ac-form-description, var(--a-text-subtle));
 }
 
 .navds-form-field .navds-error-message,

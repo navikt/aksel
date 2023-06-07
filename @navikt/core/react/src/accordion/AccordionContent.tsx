@@ -11,11 +11,7 @@ export interface AccordionContentProps
   children: React.ReactNode;
 }
 
-export type AccordionContentType = React.ForwardRefExoticComponent<
-  AccordionContentProps & React.RefAttributes<HTMLDivElement>
->;
-
-const AccordionContent: AccordionContentType = forwardRef(
+const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ children, className, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
