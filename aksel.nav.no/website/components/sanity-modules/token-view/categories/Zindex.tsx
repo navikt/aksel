@@ -1,23 +1,13 @@
 import docs from "@navikt/ds-tokens/docs.json";
-
 import { FilesIcon } from "@navikt/aksel-icons";
 import { BodyShort, CopyButton } from "@navikt/ds-react";
+import cl from "clsx";
 import { Grid } from "../Grid";
 import { sanitizeName } from "../utilities";
-import cl from "clsx";
 
 export const ZindexView = ({ cat }: { cat: string }) => {
   const zindex = docs[cat];
-  /* <CopyButton
-                variant="neutral"
-                copyText={x.name}
-                className="focus-visible:shadow-focus-gap  rounded-lg opacity-0 duration-0 focus-visible:opacity-100 group-hover:opacity-100 group-hover:transition-opacity"
-                icon={<FilesIcon title={x.name} fontSize="1.5rem" />}
-                style={{
-                  borderRadius: `${x.value}`,
-                  color: "var(--a-text-on-action)",
-                }}
-              /> */
+
   return (
     <Grid>
       {zindex.map((x, y) => {

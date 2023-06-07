@@ -7,13 +7,13 @@ export const SpacingView = ({ cat }: { cat: string }) => {
   return (
     <table className="mb-7 w-full border-separate border-spacing-0 rounded border border-gray-200">
       <thead>
-        <tr className="rounded-t">
-          <td className="rounded-tl bg-gray-50 p-2">Token</td>
-          <td className="bg-gray-50 p-2">Rem</td>
-          <td className="bg-gray-50 p-2 ">px</td>
-          <td className="hidden rounded-tr bg-gray-50 p-2 sm:table-cell">
+        <tr className="rounded-t text-left">
+          <th className="font-regular rounded-tl bg-gray-50 p-2">Token</th>
+          <th className="font-regular bg-gray-50 p-2">Rem</th>
+          <th className="font-regular bg-gray-50 p-2">px</th>
+          <th className="font-regular hidden rounded-tr bg-gray-50 p-2 sm:table-cell">
             <span className="sr-only">Kopi</span>
-          </td>
+          </th>
         </tr>
       </thead>
       <tbody className="">
