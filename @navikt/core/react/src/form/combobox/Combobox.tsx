@@ -38,7 +38,6 @@ export const Combobox = forwardRef<
     toggleListButtonLabel,
     inputClassName,
     shouldShowSelectedOptions = true,
-    singleSelect,
     ...rest
   } = props;
 
@@ -58,6 +57,7 @@ export const Combobox = forwardRef<
     prevSelectedOptions,
     removeSelectedOption,
     addSelectedOption,
+    singleSelect,
   } = useSelectedOptionsContext();
 
   const {

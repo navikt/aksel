@@ -15,6 +15,7 @@ type SelectedOptionsContextType = {
   removeSelectedOption: (option: string) => void;
   setSelectedOptions: (any) => void;
   prevSelectedOptions?: string[];
+  singleSelect?: boolean;
 };
 
 const SelectedOptionsContext = createContext<SelectedOptionsContextType>(
@@ -81,6 +82,7 @@ export const SelectedOptionsProvider = ({
     removeSelectedOption,
     setSelectedOptions,
     prevSelectedOptions,
+    singleSelect,
   };
 
   return (

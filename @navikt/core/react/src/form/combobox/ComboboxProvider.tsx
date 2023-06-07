@@ -34,7 +34,9 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
             <FilteredOptionsProvider
               value={{ isListOpen, options, singleSelect }}
             >
-              <Combobox {...rest}>{children}</Combobox>
+              <Combobox {...rest}>
+                {children}
+              </Combobox>
             </FilteredOptionsProvider>
           </CustomOptionsProvider>
         </SelectedOptionsProvider>
