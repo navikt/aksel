@@ -9,6 +9,10 @@
   margin-top: var(--a-spacing-2);
 }
 
+.navds-fieldset__description {
+  color: var(--ac-form-description, var(--a-text-subtle));
+}
+
 .navds-fieldset > .navds-fieldset__description:not(:empty) {
   margin-top: 0.125rem;
 }
