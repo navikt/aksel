@@ -22,6 +22,7 @@ export const Example = () => {
   return (
     <div>
       <Combobox
+        label="Komboboks"
         options={initialOptions}
         selectedOptions={initialSelectedOptions}
       />
