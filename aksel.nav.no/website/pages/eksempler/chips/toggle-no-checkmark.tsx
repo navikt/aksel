@@ -14,22 +14,19 @@ const Example = () => {
     "Vennesla",
   ];
 
-  const [filter, setFilter] = useState(options);
+  const [selected, setSelected] = useState(3);
 
   return (
     <Chips>
-      {filter.map((c) => (
-        <Chips.Removable
+      {options.map((c, y) => (
+        <Chips.Toggle
+          selected={selected === y}
+          checkmark={false}
           key={c}
-          variant="action"
-          onClick={() =>
-            setFilter((x) =>
-              x.length === 1 ? options : x.filter((y) => y !== c)
-            )
-          }
+          onClick={() => setSelected(y)}
         >
           {c}
-        </Chips.Removable>
+        </Chips.Toggle>
       ))}
     </Chips>
   );
@@ -43,5 +40,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 3,
 };
