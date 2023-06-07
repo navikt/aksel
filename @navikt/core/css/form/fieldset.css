@@ -1,3 +1,7 @@
+[data-theme="dark"] {
+  --ac-form-description: var(--a-text-on-inverted);
+}
+
 .navds-fieldset {
   margin: 0;
   padding: 0;
