@@ -41,6 +41,19 @@ const GetIcon = (s: string) => {
   }
 };
 
+const getText = (s: string) => {
+  switch (s) {
+    case "do":
+      return "Do: ";
+    case "dont":
+      return "Don't: ";
+    case "warning":
+      return "Fare på ferde: ";
+    default:
+      return "";
+  }
+};
+
 const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
   if (!block.picture) return null;
   return (
@@ -75,12 +88,9 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
       <figcaption data-variant={block.variant}>
         <div className="mt-3">
           {block.description && (
-            <BodyShort
-              size="small"
-              as="span"
-              className="inline-flex items-center gap-2"
-            >
-              {block.description}
+            <BodyShort size="small" as="span">
+              <span className="font-semibold">{getText(block.variant)}</span>
+              <span>{block.description}</span>
             </BodyShort>
           )}
         </div>
