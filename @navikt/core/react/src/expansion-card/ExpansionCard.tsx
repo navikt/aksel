@@ -1,28 +1,48 @@
 import cl from "clsx";
 import React, { createContext, forwardRef, useRef, useState } from "react";
+import { OverridableComponent } from "../util/OverridableComponent";
 import ExpansionCardContent, {
-  ExpansionCardContentType,
+  ExpansionCardContentProps,
 } from "./ExpansionCardContent";
 import {
   ExpansionCardDescription,
-  ExpansionCardDescriptionType,
+  ExpansionCardDescriptionProps,
 } from "./ExpansionCardDescription";
 import ExpansionCardHeader, {
-  ExpansionCardHeaderType,
+  ExpansionCardHeaderProps,
 } from "./ExpansionCardHeader";
 import {
   ExpansionCardTitle,
-  ExpansionCardTitleType,
+  ExpansionCardTitleProps,
 } from "./ExpansionCardTitle";
 
 interface ExpansionCardComponent
   extends React.ForwardRefExoticComponent<
     ExpansionCardProps & React.RefAttributes<HTMLDivElement>
   > {
-  Header: ExpansionCardHeaderType;
-  Title: ExpansionCardTitleType;
-  Description: ExpansionCardDescriptionType;
-  Content: ExpansionCardContentType;
+  /**
+   * @see 🏷️ {@link ExpansionCardHeaderProps}
+   */
+  Header: React.ForwardRefExoticComponent<
+    ExpansionCardHeaderProps & React.RefAttributes<HTMLDivElement>
+  >;
+  /**
+   * @see 🏷️ {@link ExpansionCardTitleProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Title: OverridableComponent<ExpansionCardTitleProps, HTMLHeadingElement>;
+  /**
+   * @see 🏷️ {@link ExpansionCardDescriptionProps}
+   */
+  Description: React.ForwardRefExoticComponent<
+    ExpansionCardDescriptionProps & React.RefAttributes<HTMLParagraphElement>
+  >;
+  /**
+   * @see 🏷️ {@link ExpansionCardContentProps}
+   */
+  Content: React.ForwardRefExoticComponent<
+    ExpansionCardContentProps & React.RefAttributes<HTMLDivElement>
+  >;
 }
 
 interface ExpansionCardCommonProps

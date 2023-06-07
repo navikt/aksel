@@ -8,43 +8,40 @@ export interface ExpansionCardHeaderProps
   children: React.ReactNode;
 }
 
-export type ExpansionCardHeaderType = React.ForwardRefExoticComponent<
-  ExpansionCardHeaderProps & React.RefAttributes<HTMLDivElement>
->;
+const ExpansionCardHeader = forwardRef<
+  HTMLDivElement,
+  ExpansionCardHeaderProps
+>(({ children, className, ...rest }, ref) => {
+  const panelContext = useContext(ExpansionCardContext);
 
-const ExpansionCardHeader: ExpansionCardHeaderType = forwardRef(
-  ({ children, className, ...rest }, ref) => {
-    const panelContext = useContext(ExpansionCardContext);
-
-    if (panelContext === null) {
-      console.error(
-        "<ExpansionCard.Header> has to be used within an <ExpansionCard>"
-      );
-      return null;
-    }
-
-    return (
-      <div
-        ref={ref}
-        {...rest}
-        className={cl("navds-expansioncard__header", className)}
-      >
-        <div className="navds-expansioncard__header-content">{children}</div>
-
-        <button
-          className="navds-expansioncard__header-button"
-          onClick={() => panelContext.toggleOpen()}
-          type="button"
-          aria-expanded={panelContext.open}
-        >
-          <ChevronDownIcon
-            className="navds-expansioncard__header-chevron"
-            title="Vis mer"
-          />
-        </button>
-      </div>
+  if (panelContext === null) {
+    console.error(
+      "<ExpansionCard.Header> has to be used within an <ExpansionCard>"
     );
+    return null;
   }
-);
+
+  return (
+    <div
+      ref={ref}
+      {...rest}
+      className={cl("navds-expansioncard__header", className)}
+    >
+      <div className="navds-expansioncard__header-content">{children}</div>
+
+      <button
+        className="navds-expansioncard__header-button"
+        onClick={() => panelContext.toggleOpen()}
+        type="button"
+        aria-expanded={panelContext.open}
+      >
+        <ChevronDownIcon
+          className="navds-expansioncard__header-chevron"
+          title="Vis mer"
+        />
+      </button>
+    </div>
+  );
+});
 
 export default ExpansionCardHeader;
