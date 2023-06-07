@@ -7,15 +7,11 @@ import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsCon
 import { useInputContext } from "./inputContext";
 
 interface InputProps
-  extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    "size" | "onChange" | "value"
-  > {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
   ref: React.Ref<HTMLInputElement>;
   handleClear: (e) => void;
   toggleOption: (e) => void;
   inputClassName?: string;
-  size?: "small" | "medium";
   errorId?: string;
   value?: string;
   error?: React.ReactNode;
@@ -113,15 +109,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <input
-        ref={ref}
-        {...omit(rest, [
-          "error",
-          "errorId",
-          "size",
-          "setSelectedOptions",
-          "setOptions",
-        ])}
+        {...rest}
         {...omit(inputProps, ["aria-invalid"])}
+        ref={ref}
         value={value}
         onChange={onChange}
         type="text"

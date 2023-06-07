@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import usePrevious from "../../../util/usePrevious";
 import { useInputContext } from "../Input/inputContext";
+import { ComboboxProps } from "../types";
 
 type SelectedOptionsContextType = {
   selectedOptions: string[];
@@ -25,11 +26,10 @@ export const SelectedOptionsProvider = ({
   value,
 }: {
   children: any;
-  value: {
-    selectedOptions: string[];
-    singleSelect: boolean;
-    onToggleSelected: (option: string, isSelected: boolean) => void;
-  };
+  value: Pick<
+    ComboboxProps,
+    "selectedOptions" | "singleSelect" | "onToggleSelected"
+  >;
 }) => {
   const { setSearchTerm, setValue } = useInputContext();
   const {

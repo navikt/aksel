@@ -1,38 +1,46 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import Combobox from "./Combobox";
 import { FilteredOptionsProvider } from "./FilteredOptions/filteredOptionsContext";
 import { CustomOptionsProvider } from "./customOptionsContext";
 import { SelectedOptionsProvider } from "./SelectedOptions/selectedOptionsContext";
 import { InputContextProvider } from "./Input/inputContext";
+import { ComboboxProps } from "./types";
 
-export default function ComboboxProvider(props) {
-  const {
-    children,
-    id,
-    isListOpen,
-    onToggleSelected,
-    selectedOptions,
-    options,
-    value,
-    onChange,
-    singleSelect,
-    ...rest
-  } = props;
-  return (
-    <InputContextProvider value={{ id, value, onChange }}>
-      <SelectedOptionsProvider
-        value={{ selectedOptions, singleSelect, onToggleSelected }}
+const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
+  (props, ref) => {
+    const {
+      children,
+      error,
+      errorId,
+      id,
+      isListOpen,
+      onToggleSelected,
+      selectedOptions,
+      options,
+      value,
+      onChange,
+      singleSelect,
+      size,
+      ...rest
+    } = props;
+    return (
+      <InputContextProvider
+        value={{ error, errorId, id, value, onChange, size }}
       >
-        <CustomOptionsProvider>
-          <FilteredOptionsProvider
-            value={{ isListOpen, options, singleSelect }}
-          >
-            <Combobox singleSelect={singleSelect} {...rest}>
-              {children}
-            </Combobox>
-          </FilteredOptionsProvider>
-        </CustomOptionsProvider>
-      </SelectedOptionsProvider>
-    </InputContextProvider>
-  );
-}
+        <SelectedOptionsProvider
+          value={{ selectedOptions, singleSelect, onToggleSelected }}
+        >
+          <CustomOptionsProvider>
+            <FilteredOptionsProvider
+              value={{ isListOpen, options, singleSelect }}
+            >
+              <Combobox {...rest}>{children}</Combobox>
+            </FilteredOptionsProvider>
+          </CustomOptionsProvider>
+        </SelectedOptionsProvider>
+      </InputContextProvider>
+    );
+  }
+);
+
+export default ComboboxProvider;

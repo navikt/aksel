@@ -51,7 +51,6 @@ export const Default = (props) => {
         label="Hva er dine favorittfrukter?"
         /* everything under here is optional? */
         size="medium"
-        variant="simple"
         id={id}
       />
     </div>
@@ -104,7 +103,6 @@ export const WithExternalChips = (props) => {
         loading={props.loading}
         size="medium"
         error={props.error && "error here"}
-        hasError={props.error && true}
         id={id}
         shouldShowSelectedOptions={false}
       />
@@ -142,20 +140,14 @@ Loading.args = {
 
 export function SingleSelect(props) {
   const id = useId();
-  const [options, setOptions] = useState(props.options);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    props.selectedOptions
-  );
   return (
     <div>
       <Combobox
         id={id}
         label="Komboboks (single select)"
         singleSelect={props.singleSelect || true}
-        options={options}
-        selectedOptions={selectedOptions}
-        setOptions={setOptions}
-        setSelectedOptions={setSelectedOptions}
+        options={props.options}
+        selectedOptions={props.selectedOptions}
       />
     </div>
   );
@@ -184,7 +176,6 @@ export const WithCallbacks = () => {
       <Combobox
         label="Hva er dine favorittfrukter?"
         size="medium"
-        variant="simple"
         id={id}
         options={options}
         onToggleSelected={(option, isSelected) =>

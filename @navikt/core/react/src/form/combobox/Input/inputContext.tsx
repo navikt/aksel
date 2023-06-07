@@ -28,7 +28,7 @@ export const InputContextProvider = ({ children, value: props }) => {
     id: externalId,
     value: externalValue,
     onChange: externalOnChange,
-    size: _size,
+    size,
   } = props;
   const formFieldProps = useFormField(
     {
@@ -37,7 +37,7 @@ export const InputContextProvider = ({ children, value: props }) => {
       error,
       errorId,
       id: externalId,
-      size: _size,
+      size,
     },
     "comboboxfield"
   );
