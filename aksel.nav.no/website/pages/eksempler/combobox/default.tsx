@@ -1,6 +1,5 @@
 import { Combobox } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
-import { useState } from "react";
 
 const initialOptions = [
   "banana",
@@ -20,17 +19,11 @@ const initialOptions = [
 const initialSelectedOptions = ["passion fruit", "grape fruit"];
 
 export const Example = () => {
-  const [options, setOptions] = useState(initialOptions);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    initialSelectedOptions
-  );
   return (
     <div>
       <Combobox
-        options={options}
-        setOptions={setOptions}
-        selectedOptions={selectedOptions}
-        setSelectedOptions={setSelectedOptions}
+        options={initialOptions}
+        selectedOptions={initialSelectedOptions}
       />
     </div>
   );
