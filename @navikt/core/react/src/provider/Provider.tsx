@@ -24,7 +24,7 @@ export interface ProviderProps {
 export const useProvider = () => useContext(ProviderContext);
 
 /**
- * A component that provides a context to its children.
+ * Provides added context to the component tree.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/provider)
  * @see 🏷️ {@link ProviderProps}

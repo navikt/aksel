@@ -1,6 +1,7 @@
 import React, { createContext, forwardRef } from "react";
 import cl from "clsx";
-import Step, { StepperStepProps, StepperStepType } from "./Step";
+import Step, { StepperStepProps } from "./Step";
+import { OverridableComponent } from "../util/OverridableComponent";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
@@ -33,7 +34,11 @@ interface StepperComponent
   extends React.ForwardRefExoticComponent<
     StepperProps & React.RefAttributes<HTMLOListElement>
   > {
-  Step: StepperStepType;
+  /**
+   * @see 🏷️ {@link StepperStepProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Step: OverridableComponent<StepperStepProps, HTMLAnchorElement>;
 }
 
 interface StepperContextProps {
