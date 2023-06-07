@@ -121,11 +121,6 @@
   border-radius: var(--a-border-radius-full);
 }
 
-.navds-chips--small .navds-chips__toggle-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
 .navds-chips--small .navds-chips__removable-icon {
   width: 1.25rem;
   height: 1.25rem;

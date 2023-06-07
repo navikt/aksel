@@ -191,7 +191,7 @@ export const Regular = () => {
 };
 
 export const Small = () => {
-  const [selected, setSelected] = useState<number[]>([]);
+  const [selected, setSelected] = useState<number[]>([2, 4]);
   return (
     <div className="colgap">
       <Chips size="small">
