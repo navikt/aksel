@@ -20,6 +20,7 @@ export interface LinkProps
  * @example
  * ```jsx
  * <Link href="#">lenke til ny side</Link>
+ * <Link as={ReactRouter.Link} to="#">lenke til ny side</Link>
  * ```
  */
 export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
