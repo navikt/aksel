@@ -27,12 +27,12 @@ export const ZindexView = ({ cat }: { cat: string }) => {
               style={{
                 boxShadow: `inset 0 2px 4px 0 rgba(0,0,0,0.06)`,
               }}
-              className="bg-surface-subtle group relative mr-3 flex h-12 w-12 flex-col-reverse place-content-center justify-between overflow-hidden rounded-lg"
+              className="bg-surface-subtle group  mr-3 flex h-12 w-12 flex-col-reverse place-content-center justify-between overflow-hidden rounded-lg"
             >
               <CopyButton
                 variant="neutral"
                 copyText={x.name}
-                className="focus-visible:shadow-focus-gap absolute z-10 rounded-lg opacity-0 duration-0 focus-visible:opacity-100 group-hover:opacity-100 group-hover:transition-opacity"
+                className="focus-visible:shadow-focus-gap peer absolute z-10 rounded-lg opacity-0 duration-0 focus-visible:opacity-100 group-hover:opacity-100 group-hover:transition-opacity"
                 icon={<FilesIcon title={x.name} fontSize="1.5rem" />}
                 style={{
                   borderRadius: `${x.value}`,
@@ -42,10 +42,13 @@ export const ZindexView = ({ cat }: { cat: string }) => {
                 <div
                   aria-hidden
                   key={x.value}
-                  className={cl("h-2 w-12 group-hover:opacity-10", {
-                    "bg-surface-alt-3-strong": y === xi,
-                    "bg-surface-neutral-subtle": y !== xi,
-                  })}
+                  className={cl(
+                    "h-2 w-12 group-hover:opacity-10 peer-focus-visible:opacity-10",
+                    {
+                      "bg-surface-alt-3-strong": y === xi,
+                      "bg-surface-neutral-subtle": y !== xi,
+                    }
+                  )}
                 />
               ))}
             </div>
