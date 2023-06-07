@@ -34,5 +34,5 @@ const TokenView = ({
       return null;
   }
 };
-export default TokenView;
-/* export default withErrorBoundary(TokenView, "TokenView"); */
+
+export default withErrorBoundary(TokenView, "TokenView");

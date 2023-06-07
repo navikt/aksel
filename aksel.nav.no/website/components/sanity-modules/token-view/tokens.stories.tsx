@@ -1,4 +1,10 @@
-import TokenView from "./index";
+import { FontView } from "./categories/Font";
+import { GlobalView } from "./categories/Global";
+import { SemanticView } from "./categories/Semantic";
+import { ShadowView } from "./categories/Shadow";
+import { SpacingView } from "./categories/Spacing";
+import { ZindexView } from "./categories/Zindex";
+import { BreakpointsView } from "./categories/Breakpoints";
 import "../../../dist/tw.css";
 export default {
   title: "sanity-modules/tokenview",
@@ -7,46 +13,24 @@ export default {
   },
 };
 
-export const FontView = () => (
-  <TokenView token={{ title: "font", kategori: "test" }} />
-);
+export const FontViewDemo = () => <FontView cat="font" />;
 
-export const GlobalView = () => (
-  <TokenView token={{ title: "global-blue", kategori: "test" }} />
-);
+export const GlobalViewDemo = () => <GlobalView cat="global-blue" />;
 
-export const SemanticView = () => (
-  <TokenView token={{ title: "semantic-surface", kategori: "test" }} />
-);
+export const SemanticViewDemo = () => <SemanticView cat="semantic-surface" />;
 
-export const SemanticBorderView = () => (
-  <TokenView token={{ title: "semantic-border", kategori: "test" }} />
-);
+export const SemanticBorderView = () => <SemanticView cat="semantic-border" />;
 
-export const SemanticIconView = () => (
-  <TokenView token={{ title: "semantic-icon", kategori: "test" }} />
-);
+export const SemanticIconView = () => <SemanticView cat="semantic-icon" />;
 
-export const SemanticTextView = () => (
-  <TokenView token={{ title: "semantic-text", kategori: "test" }} />
-);
+export const SemanticTextView = () => <SemanticView cat="semantic-text" />;
 
-export const RadiusView = () => (
-  <TokenView token={{ title: "radius", kategori: "test" }} />
-);
+export const RadiusView = () => <SemanticView cat="semantic-radius" />;
 
-export const ShadowView = () => (
-  <TokenView token={{ title: "shadow", kategori: "test" }} />
-);
+export const ShadowViewDemo = () => <ShadowView cat="shadow" />;
 
-export const SpacingView = () => (
-  <TokenView token={{ title: "spacing", kategori: "test" }} />
-);
+export const SpacingViewDemo = () => <SpacingView cat="spacing" />;
 
-export const IndexView = () => (
-  <TokenView token={{ title: "z-index", kategori: "test" }} />
-);
+export const IndexView = () => <ZindexView cat="z-index" />;
 
-export const BreakpointView = () => (
-  <TokenView token={{ title: "breakpoints", kategori: "test" }} />
-);
+export const BreakpointView = () => <BreakpointsView cat="breakpoints" />;

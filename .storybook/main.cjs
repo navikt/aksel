@@ -16,7 +16,7 @@ module.exports = {
     ...(process.env.STORYBOOK_STORIES === "all"
       ? [
           "../aksel.nav.no/website/components/**/*.stories.tsx",
-          // "../aksel.nav.no/website/pages/eksempler/**/*.tsx",
+          "../aksel.nav.no/website/pages/eksempler/**/*.tsx",
         ]
       : []),
   ],
