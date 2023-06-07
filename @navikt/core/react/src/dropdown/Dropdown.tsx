@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import Toggle, { ToggleType } from "./Toggle";
+import Toggle, { ToggleProps } from "./Toggle";
 import Menu, { MenuType } from "./Menu";
 
 export interface DropdownProps {
@@ -24,7 +24,15 @@ export interface DropdownProps {
 }
 
 export interface DropdownType extends React.FC<DropdownProps> {
-  Toggle: ToggleType;
+  /**
+   * @see 🏷️ {@link ToggleProps}
+   */
+  Toggle: React.ForwardRefExoticComponent<
+    ToggleProps & React.RefAttributes<HTMLButtonElement>
+  >;
+  /**
+   * @see 🏷️ {@link MenuType}
+   */
   Menu: MenuType;
 }
 
