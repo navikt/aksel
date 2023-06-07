@@ -3,4 +3,4 @@
 "@navikt/ds-react": patch
 ---
 
-add indent prop to accordion
+:sparkles: La til `indent`-prop på Accordion
