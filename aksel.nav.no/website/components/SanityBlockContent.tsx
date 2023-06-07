@@ -25,17 +25,11 @@ import {
   UuFeedback,
   Video,
 } from ".";
+import { KBD } from "components/website-modules/KBD";
 
 export const InlineCode = (props: React.HTMLAttributes<HTMLElement>) => (
   <code
     className="bg-surface-alt-3-subtle/50 py-05 rounded px-1 leading-normal [font-size:_calc(16em_/_18)]"
-    {...props}
-  />
-);
-
-export const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
-  <kbd
-    className="text-text-default bg-surface-default py-05 text-medium whitespace-nowrap rounded px-1 leading-normal shadow-[0_0_0_1px_var(--a-border-strong)]"
     {...props}
   />
 );
@@ -169,7 +163,7 @@ const serializers = {
     return (
       <BodyLong
         as="li"
-        className="ml-5 mb-3 max-w-[calc(theme(spacing.text)_-_1em)]"
+        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
       >
         {props.children}
       </BodyLong>
