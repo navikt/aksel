@@ -107,9 +107,9 @@
 }
 
 .navds-chips__removable--neutral {
-  background-color: var(--ac-chip-removable-neutral-bg, var(--a-surface-neutral-selected));
-  color: var(--ac-chip-removable-neutral-text, var(--a-text-on-neutral));
-  box-shadow: inset 0 0 0 1px var(--ac-chip-removable-neutral-border, var(--a-surface-transparent));
+  background-color: var(--ac-chip-removable-neutral-bg, var(--a-surface-neutral-subtle));
+  color: var(--ac-chip-removable-neutral-text, var(--a-text-default));
+  box-shadow: inset 0 0 0 1px var(--ac-chip-removable-neutral-border, var(--a-border-default));
 }
 
 .navds-chips__removable-icon {
@@ -135,16 +135,23 @@
   width: 1rem;
 }
 
-.navds-chips__removable--action:focus-visible,
-.navds-chips__removable--neutral:focus-visible {
+.navds-chips__removable--action:focus-visible {
   box-shadow: inset 0 0 0 1px var(--a-surface-default), 0 0 0 2px var(--a-border-focus);
 }
 
+.navds-chips__removable--neutral:focus-visible {
+  box-shadow: 0 0 0 2px var(--a-border-focus);
+}
+
 @supports not selector(:focus-visible) {
-  .navds-chips__removable--action:focus,
-  .navds-chips__removable--neutral:focus {
+  .navds-chips__removable--action:focus {
     outline: none;
     box-shadow: inset 0 0 0 1px var(--a-surface-default), 0 0 0 2px var(--a-border-focus);
+  }
+
+  .navds-chips__removable--neutral:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--a-border-focus);
   }
 }
 
@@ -153,8 +160,8 @@
 }
 
 .navds-chips__removable--neutral:hover {
-  background-color: var(--ac-chip-removable-neutral-hover-bg, var(--a-surface-neutral-selected));
-  box-shadow: inset 0 0 0 1px var(--ac-chip-removable-neutral-hover-border, var(--a-surface-transparent));
+  background-color: var(--ac-chip-removable-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+  box-shadow: inset 0 0 0 1px var(--ac-chip-removable-neutral-hover-border, var(--a-border-strong));
 }
 
 .navds-chips--icon-left {
