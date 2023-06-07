@@ -1,29 +1,9 @@
-# :memo: Checklist
+# :memo: PR Checklist
 
-<details>
+- [ ] :wastebasket: Are you deprecating a CSS class? (are you removing the last known reference to a CSS class?) add the class to the `@navikt/aksel-stylelint/src/deprecations.ts`
 
-<summary>Are you making a tool?</summary>
+- [ ] :balance_scale: Is the feature/component/code sufficiently complex to warrant tests? (beyond storybook & snapshots) create tests
 
-> Something that could be downloaded separately outside the greater context of the monorepo. It should be self-contained, as well as non-trusting of the dependencies of its dependencies.
+- [ ] :boom: Are there breaking changes? create codemod.
 
-### Are there any implicit dependencies that should be made explicit?
-
-- [ ] review external dependencies. handy command: `grep -hE 'import.*? from "[^.]' -R ./src --exclude='*.test.*' | sort -u`
-
-</details>
-
-## Are you deprecating a CSS class? (are you removing the last known reference to a CSS class?)
-
-- [ ] add the class to the `@navikt/aksel-stylelint/src/deprecations.ts`
-
-## :balance_scale: Is the feature/component/code sufficiently complex to warrant tests? (beyond storybook & snapshots)
-
-- [ ] create tests
-
-## Does the PR need a codemod? (breaking changes)
-
-- [ ] create codemod
-
-## Run changeset
-
-- [ ] `yarn changeset`
+- [ ] Run `yarn changeset`
