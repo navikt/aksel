@@ -109,7 +109,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 ) as AccordionComponent;
 
 Accordion.Header = AccordionHeader;
-
 Accordion.Content = AccordionContent;
 Accordion.Item = AccordionItem;
 
