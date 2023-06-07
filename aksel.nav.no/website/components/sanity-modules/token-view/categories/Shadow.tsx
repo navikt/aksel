@@ -4,11 +4,6 @@ import docs from "@navikt/ds-tokens/docs.json";
 import { Grid } from "../Grid";
 import { sanitizeName } from "../utilities";
 
-const getDomToken = (token: string) => {
-  const bodyStyles = window.getComputedStyle(document.body);
-  return bodyStyles.getPropertyValue(token);
-};
-
 export const ShadowView = ({ cat }: { cat: string }) => {
   const shadows = docs[cat];
 
@@ -33,7 +28,7 @@ export const ShadowView = ({ cat }: { cat: string }) => {
 
             <BodyShort as="dl" size="small">
               <dt>{sanitizeName(x.name.replace("shadow-", ""))}</dt>
-              <dd className="text-text-subtle ">{getDomToken(x.name)}</dd>
+              <dd className="text-text-subtle ">{x.value}</dd>
             </BodyShort>
           </div>
         );

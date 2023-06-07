@@ -19,7 +19,7 @@ export const SpacingView = ({ cat }: { cat: string }) => {
       <tbody className="">
         {spacings.map((x) => (
           <tr
-            key={x._key}
+            key={x.value}
             className="peer border-b border-t border-gray-200 text-base last-of-type:rounded-b"
           >
             <td className="border-t border-gray-200 px-2 py-1">
