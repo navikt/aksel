@@ -36,7 +36,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
             "navds-skeleton--no-width": !width,
           }
         )}
-        style={{ ...style, width: width, height: height }}
+        style={{ ...style, width, height }}
         aria-hidden
       >
         {children}

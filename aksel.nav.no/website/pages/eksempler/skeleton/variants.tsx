@@ -3,7 +3,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="w-48">
+    <div className="grid w-48 gap-2">
       {/* variant="text" kan endre størelse med justering av font-size */}
       <Skeleton variant="text" width="60%" />
 
