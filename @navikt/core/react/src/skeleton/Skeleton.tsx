@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
-import { omit } from "../util";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -9,7 +8,7 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   variant?: "circle" | "rectangle" | "rounded" | "text";
   /**
-   * When not infering height from children, you must specify height
+   * When not inferring height from children, you must specify height
    */
   height?: number | string;
   /**
@@ -19,32 +18,30 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
-  ({ className, variant = "text", ...rest }, ref) => {
+  (
+    { className, children, height, width, style, variant = "text", ...rest },
+    ref
+  ) => {
     return (
       <div
-        {...omit(rest, ["width", "height"])}
+        {...rest}
         ref={ref}
         className={cl(
           "navds-skeleton",
           className,
-          getStyles({ ...rest, variant })
+          `navds-skeleton--${variant}`,
+          {
+            "navds-skeleton--has-children": Boolean(children),
+            "navds-skeleton--no-height": !height,
+            "navds-skeleton--no-width": !width,
+          }
         )}
-        style={{ width: rest?.width, height: rest?.height, ...rest.style }}
-      />
+        style={{ ...style, width: width, height: height }}
+      >
+        {children}
+      </div>
     );
   }
 );
-
-function getStyles(props: Partial<SkeletonProps>) {
-  return cl({
-    "navds-skeleton--has-children": Boolean(props.children),
-    "navds-skeleton--text": props.variant === "text",
-    "navds-skeleton--circle": props.variant === "circle",
-    "navds-skeleton--rectangle": props.variant === "rectangle",
-    "navds-skeleton--rounded": props.variant === "rounded",
-    "navds-skeleton--no-height": !props.height,
-    "navds-skeleton--no-width": !props.width,
-  });
-}
 
 export default Skeleton;
