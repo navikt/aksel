@@ -1,7 +1,7 @@
 import { AkselSidebarT } from "@/types";
 import { logNav } from "@/utils";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { BodyShort, Detail, Tag } from "@navikt/ds-react";
+import { Detail, Tag } from "@navikt/ds-react";
 import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -17,17 +17,7 @@ const NavItem = ({
 }) => {
   const isActive = asPath === `/${link.slug}`;
   return (
-    <li
-      className={cl(
-        "focus-within:shadow-focus  peer relative rounded-sm px-2 before:absolute before:left-0 before:z-[-1]",
-        {
-          "before:border-l-border-action-selected  before:top-1/2 before:h-6 before:-translate-y-1/2 before:rounded-full before:border-l-[4px]":
-            isActive,
-          "before:h-full before:rounded-full before:border-l before:border-l-gray-200  hover:before:top-1/2 hover:before:h-6 hover:before:-translate-y-1/2 hover:before:border-l-2 hover:before:border-l-gray-400":
-            !isActive,
-        }
-      )}
-    >
+    <li>
       <Link
         href={`/${link.slug}`}
         onClick={(e) => {
@@ -38,10 +28,14 @@ const NavItem = ({
           );
         }}
         className={cl(
-          "hover:text-deepblue-800 relative flex overflow-hidden py-[6px] pl-2 text-base no-underline focus:outline-none",
+          "hover:text-deepblue-800 focus-visible:shadow-focus text-medium relative  flex overflow-hidden rounded-sm py-1 pl-4 pr-2 leading-snug before:rounded-full focus:outline-none",
           {
+            "before:border-l-border-action-selected before:absolute before:left-0 before:top-1/2 before:h-6 before:-translate-y-1/2 before:border-l-[4px]":
+              isActive,
             "text-deepblue-800 font-semibold": isActive,
             "text-text-subtle": !isActive,
+            "before:absolute before:left-0 before:h-full before:border-l before:border-l-gray-200  hover:before:top-1/2 hover:before:h-6 hover:before:-translate-y-1/2 hover:before:border-l-2 hover:before:border-l-gray-400":
+              !isActive,
           }
         )}
       >
