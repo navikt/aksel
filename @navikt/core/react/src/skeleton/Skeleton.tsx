@@ -37,6 +37,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
           }
         )}
         style={{ ...style, width: width, height: height }}
+        aria-hidden
       >
         {children}
       </div>

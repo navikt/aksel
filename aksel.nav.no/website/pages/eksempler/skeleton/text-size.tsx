@@ -26,5 +26,4 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "variant='text' brukes 'em' for størrelse. Dette kan kan være nyttig hvis man ønsker å gjøre skeleton tilnærmet typografien.",
 };
