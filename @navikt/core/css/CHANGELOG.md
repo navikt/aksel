@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 4.1.1
+
+### Patch Changes
+
+- [`91343563c`](https://github.com/navikt/aksel/commit/91343563c916a554d8ade5401c28ab4c3b3e26af) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset markering av tekst i skeleton.
+
 ## 4.1.0
 
 ### Minor Changes
