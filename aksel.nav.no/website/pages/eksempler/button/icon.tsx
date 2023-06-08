@@ -1,9 +1,9 @@
-import { Edit } from "@navikt/ds-icons";
+import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <Button icon={<Edit aria-hidden />}>Rediger</Button>;
+  return <Button icon={<PencilIcon aria-hidden />}>Rediger</Button>;
 };
 
 export default withDsExample(Example);

@@ -1,6 +1,6 @@
 <h1 align="center">
-    <img src="https://user-images.githubusercontent.com/26967723/164701858-e8237611-1285-4c68-b9e3-e047499b94cf.svg" />
-    <br/>Aksel
+    <img src="/aksel.nav.no/website/public/favicon.svg" style="width:13rem"/>
+    <br/><br/>Aksel
 </h1>
 
 <div align="center">
@@ -14,8 +14,8 @@
       <a href="https://github.com/navikt/aksel/pulls">
           <img src="https://img.shields.io/badge/PRs-welcome-green.svg?color=%23262626"" />
       </a>
+        <a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=version"></a>
     </div>
-    <div><a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=version"></a></div>
     <br/>
     <a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/aksel/issues">Issues</a>
 <br/>
@@ -29,9 +29,8 @@
 ├── core/css        # @navikt/ds-css, css kjernekomponenter
 ├── core/tokens     # @navikt/ds-tokens, tokens
 ├── core/tailwind   # @navikt/ds-tailwind, tailwind-config
-├── internal/react  # @navikt/ds-react-internal, komponenter interne flater
-├── internal/css    # @navikt/ds-css-internal, css interne flater
 ├── aksel-icons     # @navikt/aksel-icons, ikonpakke
+├── aksel-stylelint # @navikt/aksel-stylelint, stylelint-config
 └── aksel           # @navikt/aksel, kommandolinje-verktøy
 
 aksel.nav.no/

@@ -1,4 +1,4 @@
-import { PeopleInCircle } from "@navikt/ds-icons";
+import { PersonCircleIcon } from "@navikt/aksel-icons";
 import docs from "@navikt/ds-tokens/docs.json";
 import color from "tinycolor2";
 import { Frame } from "../Frame";
@@ -55,7 +55,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   : `var(--a-surface-default)`,
               }}
             >
-              <PeopleInCircle aria-hidden />
+              <PersonCircleIcon aria-hidden />
             </div>
           );
         }}
@@ -63,7 +63,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
     );
   }
 
-  if (cat === "semantic-border") {
+  if (cat === "semantic-border" || cat === "semantic-data-border") {
     return (
       <Frame
         tokens={colors}

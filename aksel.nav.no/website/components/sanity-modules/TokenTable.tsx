@@ -1,7 +1,6 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { TokenTableT } from "@/types";
 import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
-import internal from "@navikt/ds-css-internal/tokens.json";
 import core from "@navikt/ds-css/tokens.json";
 import { BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
 import cl from "classnames";
@@ -12,11 +11,7 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
   const [open, setOpen] = useState(false);
 
   const tokens: { [key: string]: string } | null =
-    node.title in core
-      ? core[node.title]
-      : node.title in internal
-      ? internal[node.title]
-      : null;
+    node.title in core ? core[node.title] : null;
 
   if (!tokens) {
     return null;
@@ -45,7 +40,7 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
                 key={key}
                 className="peer border-b border-t border-gray-300 font-mono text-sm last-of-type:rounded-b"
               >
-                <td className="border-t border-r border-gray-300 p-2">{key}</td>
+                <td className="border-r border-t border-gray-300 p-2">{key}</td>
                 <td className="border-t border-gray-300 p-2">{val}</td>
               </tr>
             ))}
@@ -62,7 +57,7 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
                   };\n`,
                 ""
               )}
-              className="absolute top-2 right-2 z-10"
+              className="absolute right-2 top-2 z-10"
             />
             <Label size="small" as="span" spacing>
               Hva er dette?

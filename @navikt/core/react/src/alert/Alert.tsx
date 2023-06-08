@@ -53,6 +53,15 @@ export interface AlertContextProps {
   size: "medium" | "small";
 }
 
+/**
+ * A component for displaying alerts
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/alert)
+ * @see 🏷️ {@link AlertProps}
+ * @example
+ * ```jsx
+ * <Alert variant="error">Dette er en feilmelding</Alert>
+ * ```
+ */
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {

@@ -1,12 +1,12 @@
 import {
-  Coronavirus,
-  Edit,
-  Hospital,
-  Money,
-  People,
-  Vacation,
-} from "@navikt/ds-icons";
-import { Timeline } from "@navikt/ds-react-internal";
+  VirusIcon,
+  PencilIcon,
+  HospitalIcon,
+  PiggybankIcon,
+  PersonIcon,
+  ParasolBeachIcon,
+} from "@navikt/aksel-icons";
+import { Timeline } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 
@@ -16,7 +16,7 @@ const Example = () => {
   return (
     <div className="min-w-[800px] overflow-x-auto">
       <Timeline>
-        <Timeline.Row label="Person" icon={<People aria-hidden />}>
+        <Timeline.Row label="Person" icon={<PersonIcon aria-hidden />}>
           {person.map((p: any, i) => {
             return (
               <Timeline.Period
@@ -33,7 +33,7 @@ const Example = () => {
             );
           })}
         </Timeline.Row>
-        <Timeline.Row label="Sykehus A" icon={<Hospital aria-hidden />}>
+        <Timeline.Row label="Sykehus A" icon={<HospitalIcon aria-hidden />}>
           {jobb.map((p: any, i) => {
             return (
               <Timeline.Period
@@ -70,7 +70,7 @@ const person = [
     start: new Date("Jan 1 2022"),
     end: new Date("Jan 31 2022"),
     status: "warning",
-    icon: <Edit aria-hidden />,
+    icon: <PencilIcon aria-hidden />,
     statusLabel: "Sykemeldt",
   },
   {
@@ -78,7 +78,7 @@ const person = [
     start: new Date("Apr 1 2022"),
     end: new Date("Apr 30 2022"),
     status: "neutral",
-    icon: <Vacation aria-hidden />,
+    icon: <ParasolBeachIcon aria-hidden />,
     label: "test",
     statusLabel: "Ferie",
   },
@@ -87,7 +87,7 @@ const person = [
     start: new Date("Jul 1 2022"),
     end: new Date("Jul 31 2022"),
     status: "warning",
-    icon: <Edit aria-hidden />,
+    icon: <PencilIcon aria-hidden />,
     statusLabel: "Sykemeldt",
   },
   {
@@ -95,7 +95,7 @@ const person = [
     start: new Date("Aug 1 2022"),
     end: new Date("Aug 30 2022"),
     status: "warning",
-    icon: <Coronavirus aria-hidden />,
+    icon: <VirusIcon aria-hidden />,
     statusLabel: "Stønad korona",
   },
 ];
@@ -107,7 +107,7 @@ const jobb = [
     end: new Date("Mar 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
-    icon: <Money aria-hidden />,
+    icon: <PiggybankIcon aria-hidden />,
   },
   {
     id: 6,
@@ -115,7 +115,7 @@ const jobb = [
     end: new Date("Apr 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
-    icon: <Money aria-hidden />,
+    icon: <PiggybankIcon aria-hidden />,
   },
   {
     id: 7,
@@ -123,7 +123,7 @@ const jobb = [
     end: new Date("June 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
-    icon: <Money aria-hidden />,
+    icon: <PiggybankIcon aria-hidden />,
   },
   {
     id: 8,
@@ -131,7 +131,7 @@ const jobb = [
     end: new Date("July 1 2022"),
     status: "success",
     statusLabel: "Utbetaling",
-    icon: <Money aria-hidden />,
+    icon: <PiggybankIcon aria-hidden />,
   },
 ];
 

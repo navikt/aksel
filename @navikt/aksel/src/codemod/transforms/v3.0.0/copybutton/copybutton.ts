@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import moveAndRenameImport from "../../../utils/moveAndRenameImport";
 import removePropsFromComponent from "../../../utils/removeProps";
+import { getLineTerminator } from "../../../utils/lineterminator";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
@@ -22,10 +23,11 @@ export default function transformer(file, api, options, ...rest) {
     toImport: "@navikt/ds-react",
     fromName: "CopyToClipboard",
     toName,
+    ignoreAlias: true,
   });
 
   if (localName === null) {
-    return root.toSource(options.printOptions);
+    return root.toSource(getLineTerminator(file.source));
   }
 
   /* Finds and replaces import from CopyToClipboard -> CopyButton */
@@ -85,5 +87,5 @@ export default function transformer(file, api, options, ...rest) {
     });
   }
 
-  return root.toSource(options.printOptions);
+  return root.toSource(getLineTerminator(file.source));
 }

@@ -12,7 +12,7 @@ import {
   SelectSingleEventHandler,
 } from "react-day-picker";
 import { omit, Popover, useId } from "../..";
-import { DateInputType, DatePickerInput } from "../DateInput";
+import { DateInputProps, DatePickerInput } from "../DateInput";
 import { DateContext } from "../context";
 import { getLocaleFromString, labels } from "../utils";
 import { Caption, DropdownCaption } from "./caption";
@@ -120,10 +120,48 @@ export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
 
 interface DatePickerComponent
   extends React.ForwardRefExoticComponent<DatePickerProps> {
+  /**
+   * @example
+   * ```jsx
+   * <DatePicker.Standalone
+   *   dropdownCaption
+   *   fromDate={new Date("2020-10-01")}
+   *   toDate={new Date("2024-10-01")}
+   * />
+   * ```
+   */
   Standalone: DatePickerStandaloneType;
-  Input: DateInputType;
+  /**
+   * Custom TextField for DatePicker
+   * @see 🏷️ {@link DateInputProps}
+   */
+  Input: React.ForwardRefExoticComponent<
+    DateInputProps & React.RefAttributes<HTMLInputElement>
+  >;
 }
 
+/**
+ * A component that allows users to select a date from a calendar.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/datepicker)
+ * @see 🏷️ {@link DatePickerProps}
+ *
+ * @example
+ * ```jsx
+ *  const { inputProps, datepickerProps } = useMonthpicker({
+ *    onMonthChange: console.log,
+ *  });
+ *
+ *  return (
+ *     <DatePicker {...datepickerProps} dropdownCaption>
+ *       <DatePicker.Input
+ *         {...inputProps}
+ *         label="Velg dato"
+ *       />
+ *     </DatePicker>
+ *  );
+ * ```
+ */
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   (
     {

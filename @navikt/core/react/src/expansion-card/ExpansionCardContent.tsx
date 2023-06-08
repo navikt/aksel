@@ -8,36 +8,33 @@ export interface ExpansionCardContentProps
   children: React.ReactNode;
 }
 
-export type ExpansionCardContentType = React.ForwardRefExoticComponent<
-  ExpansionCardContentProps & React.RefAttributes<HTMLDivElement>
->;
+const ExpansionCardContent = forwardRef<
+  HTMLDivElement,
+  ExpansionCardContentProps
+>(({ children, className, ...rest }, ref) => {
+  const panelContext = useContext(ExpansionCardContext);
 
-const ExpansionCardContent: ExpansionCardContentType = forwardRef(
-  ({ children, className, ...rest }, ref) => {
-    const panelContext = useContext(ExpansionCardContext);
-
-    if (panelContext === null) {
-      console.error(
-        "<ExpansionCard.Content> has to be used within an <ExpansionCard>"
-      );
-      return null;
-    }
-
-    return (
-      <BodyLong
-        {...rest}
-        ref={ref}
-        as="div"
-        className={cl("navds-expansioncard__content", className, {
-          "navds-expansioncard__content--closed": !panelContext.open,
-        })}
-        aria-hidden={!panelContext.open}
-        size={panelContext.size}
-      >
-        <div className="navds-expansioncard__content-inner">{children}</div>
-      </BodyLong>
+  if (panelContext === null) {
+    console.error(
+      "<ExpansionCard.Content> has to be used within an <ExpansionCard>"
     );
+    return null;
   }
-);
+
+  return (
+    <BodyLong
+      {...rest}
+      ref={ref}
+      as="div"
+      className={cl("navds-expansioncard__content", className, {
+        "navds-expansioncard__content--closed": !panelContext.open,
+      })}
+      aria-hidden={!panelContext.open}
+      size={panelContext.size}
+    >
+      <div className="navds-expansioncard__content-inner">{children}</div>
+    </BodyLong>
+  );
+});
 
 export default ExpansionCardContent;

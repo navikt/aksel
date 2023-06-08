@@ -114,11 +114,12 @@ export const Default = {
   },
 
   args: {
-    controlled: "false",
+    controlled: false,
     nItems: 2,
     variant: "default",
     headingSize: "medium",
     size: "medium",
+    indent: true,
   },
 };
 
@@ -137,7 +138,7 @@ export const DefaultOpen = {
 
   args: {
     openItems: [1, 2],
-    controlled: "false",
+    controlled: false,
     nItems: 5,
     variant: "neutral",
     headingSize: "large",
@@ -251,6 +252,7 @@ export const WithTable = {
   args: {
     variant: "default",
     headingSize: "large",
+    indent: false,
   },
 };
 

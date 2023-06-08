@@ -1,5 +1,65 @@
 # @navikt/ds-react
 
+## 4.0.0
+
+### Major Changes
+
+- [#2026](https://github.com/navikt/aksel/pull/2026) [`895bdc08e`](https://github.com/navikt/aksel/commit/895bdc08e50647d9b9186cbf0e9ab069323de56c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :test-tube: Datepicker og Monthpicker er nå ute av beta. Kjør codemod for migrering, eller `cmd/ctrl + shift + f` og erstatt `UNSAFE_` med ``
+
+  - UNSAFE-prefix er fjernet fra Datepicker og Monthpicker
+
+  ```bash
+  npx @navikt/aksel codemod v4-date
+  ```
+
+- [#2026](https://github.com/navikt/aksel/pull/2026) [`895bdc08e`](https://github.com/navikt/aksel/commit/895bdc08e50647d9b9186cbf0e9ab069323de56c) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :truck: Komponenter i `@navikt/ds-react-internal` er flyttet over til `@navikt/ds-react`
+
+  - `<Header />` er renamet til `<InternalHeader />`
+  - Dropdown, Timeline og InternalHeader(Header) er flyttet over til `@navikt/ds-react`
+  - All styling fra `@navikt/ds-css-internal` er flyttet til `@navikt/ds-css` og classname-prefix er endret fra `navdsi` -> `navds` for flyttede komponenter. Sett opp [stylelint med configen vår](https://aksel.nav.no/grunnleggende/kode/stylelint), så vil du få feilmelding om du bruker gamle klassenavn.
+  - Fikset cascading-problem mellom dropdown og popover. Dropdown blir ikke lengre påvirket av import-rekkefølge av popover.
+  - Styling for flyttede komponenter finnes nå på CDN (https://aksel.nav.no/grunnleggende/kode/css-import)
+
+  Kjør codemod for migrering:
+
+  ```bash
+  // React
+  npx @navikt/aksel codemod v4-internal-react
+
+  // CSS
+  npx @navikt/aksel codemod v4-internal-css
+  ```
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.0.0
+
+## 3.4.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.4.2
+
+## 3.4.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.4.1
+
+## 3.4.0
+
+### Minor Changes
+
+- [#2010](https://github.com/navikt/aksel/pull/2010) [`b958d41a2`](https://github.com/navikt/aksel/commit/b958d41a20c66327658514fcf24ae20893c9531a) Thanks [@HalvorHaugan](https://github.com/HalvorHaugan)! - Ny variant "moderate" i Tag
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@3.4.0
+
 ## 3.3.1
 
 ### Patch Changes

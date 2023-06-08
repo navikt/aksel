@@ -6,6 +6,7 @@ import {
 } from "../../../utils/imports";
 import { translateToken } from "../../../utils/translate-token";
 import { tokens } from "../../../tokens-map.mjs";
+import { getLineTerminator } from "../../../utils/lineterminator";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
@@ -55,7 +56,7 @@ export default function transformer(file: JSCodeshift, api) {
         "@navikt/ds-tokens/dist/tokens"
       );
 
-      let code = root.toSource();
+      let code = root.toSource(getLineTerminator(file.source));
 
       const rgx = new RegExp("(" + localName + ")", "gm");
       code = code.replace(rgx, out);
@@ -63,5 +64,5 @@ export default function transformer(file: JSCodeshift, api) {
     }
   });
 
-  return root.toSource();
+  return root.toSource(getLineTerminator(file.source));
 }

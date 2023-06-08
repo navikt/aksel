@@ -22,9 +22,6 @@ export interface RemovableChipsProps
   onDelete?: () => void;
 }
 
-export interface RemovableChipsType
-  extends OverridableComponent<RemovableChipsProps, HTMLButtonElement> {}
-
 export const RemovableChips: OverridableComponent<
   RemovableChipsProps,
   HTMLButtonElement
@@ -63,6 +60,6 @@ export const RemovableChips: OverridableComponent<
       </Component>
     );
   }
-) as RemovableChipsType;
+);
 
 export default RemovableChips;

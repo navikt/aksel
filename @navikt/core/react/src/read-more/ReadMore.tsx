@@ -30,6 +30,23 @@ export interface ReadMoreProps
   size?: "medium" | "small";
 }
 
+/**
+ * ReadMore
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/read-more)
+ * @see 🏷️ {@link ReadMoreProps}
+ *
+ * @example
+ * // Default
+ * <ReadMore header="Dette regnes som helsemessige begrensninger">
+ *  Med helsemessige begrensninger mener vi funksjonshemming, sykdom...
+ * </ReadMore>
+ *
+ * @example
+ * // Litt mindre versjon
+ * <ReadMore size="small" header="Dette regnes som helsemessige begrensninger">
+ *   Med helsemessige begrensninger mener vi funksjonshemming, sykdom...
+ * </ReadMore>
+ */
 export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
   (
     {

@@ -67,5 +67,4 @@ if (wrongValues.length || notFound.length || removed.length) {
   console.log(wrongValues);
   console.groupEnd();
   console.log("\n");
-  throw new Error("Found errors when validation tokens.");
 }

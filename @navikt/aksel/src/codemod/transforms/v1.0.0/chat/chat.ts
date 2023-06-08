@@ -1,3 +1,4 @@
+import { getLineTerminator } from "../../../utils/lineterminator";
 import renameProps from "../../../utils/rename-props";
 
 /**
@@ -64,5 +65,5 @@ export default function transformer(file, api, options) {
     });
   }
 
-  return root.toSource(options.printOptions);
+  return root.toSource(getLineTerminator(file.source));
 }

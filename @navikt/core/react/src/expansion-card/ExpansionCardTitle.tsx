@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
 
-interface ExpansionCardTitleProps
+export interface ExpansionCardTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
   /**
@@ -12,12 +12,10 @@ interface ExpansionCardTitleProps
   size?: "large" | "medium" | "small";
 }
 
-export type ExpansionCardTitleType = OverridableComponent<
+export const ExpansionCardTitle: OverridableComponent<
   ExpansionCardTitleProps,
   HTMLHeadingElement
->;
-
-export const ExpansionCardTitle: ExpansionCardTitleType = forwardRef(
+> = forwardRef(
   ({ className, as: Component = "h3", size = "medium", ...rest }, ref) => (
     <Component
       {...rest}

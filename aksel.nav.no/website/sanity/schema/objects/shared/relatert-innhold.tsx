@@ -1,5 +1,6 @@
+import { LinkIcon } from "@navikt/aksel-icons";
 import { allArticleDocsRef } from "../../../config";
-import { Link } from "@navikt/ds-icons";
+
 import React from "react";
 import { defineType, defineField } from "sanity";
 
@@ -7,7 +8,7 @@ export const RelatertInnhold = defineType({
   name: "relatert_innhold",
   title: "Relatert Innhold",
   type: "object",
-  icon: Link,
+  icon: LinkIcon,
   fields: [
     defineField({
       title: "Lenker til innhold",
@@ -72,7 +73,7 @@ export const RelatertInnhold = defineType({
       links: "links",
     },
     prepare(s) {
-      return { title: "Relatert innhold kort", media: () => <Link /> };
+      return { title: "Relatert innhold kort", media: () => <LinkIcon /> };
     },
   },
 });
