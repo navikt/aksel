@@ -12,7 +12,7 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   height?: number | string;
   /**
-   * When not infering width from children, you must specify width
+   * When not inferring width from children, you must specify width
    */
   width?: number | string;
 }
