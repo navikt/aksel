@@ -1,5 +1,27 @@
 # @navikt/ds-react
 
+## 4.1.0
+
+### Minor Changes
+
+- [#2035](https://github.com/navikt/aksel/pull/2035) [`7b42f536a`](https://github.com/navikt/aksel/commit/7b42f536aa90c1b5dbe2b19f1bbe292701546420) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Oppdatert Chips
+
+  - Toggle Chips har nå varianter: neutral og action
+  - Toggle Chips har nå en ny prop: `checkmark` som slår av/på checkmark ved selected-state
+
+- [#1821](https://github.com/navikt/aksel/pull/1821) [`db8c38a09`](https://github.com/navikt/aksel/commit/db8c38a094cd183db54aebecb62d5b223920a040) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Ny komponent Skeleton!
+
+  - varianter: text, circle, rounded og rectangle
+
+### Patch Changes
+
+- [#2034](https://github.com/navikt/aksel/pull/2034) [`17d92c9ed`](https://github.com/navikt/aksel/commit/17d92c9ed5f82a80f99a1512989744343edf60b3) Thanks [@JulianNymark](https://github.com/JulianNymark)! - Add JSDoc typings
+
+- [#2027](https://github.com/navikt/aksel/pull/2027) [`c028f36e2`](https://github.com/navikt/aksel/commit/c028f36e2bc58223ebf8b655980dde7eafb30add) Thanks [@JulianNymark](https://github.com/JulianNymark)! - :sparkles: La til `indent`-prop på Accordion
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.0
+
 ## 4.0.0
 
 ### Major Changes
