@@ -30,4 +30,5 @@ export interface ComboboxProps
   value?: string;
   inputClassName?: string | undefined;
   singleSelect?: boolean;
+  shouldAutocomplete?: boolean;
 }

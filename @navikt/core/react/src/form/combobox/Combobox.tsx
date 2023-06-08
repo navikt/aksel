@@ -68,6 +68,7 @@ export const Combobox = forwardRef<
     size = "medium",
     searchTerm,
     setValue,
+    shouldAutocomplete,
   } = useInputContext();
 
   const focusInput = useCallback(() => {
@@ -146,10 +147,10 @@ export const Combobox = forwardRef<
   }, [focusInput, selectedOptions, prevSelectedOptions]);
 
   useEffect(() => {
-    if (inputRef && value !== searchTerm) {
+    if (shouldAutocomplete && inputRef && value !== searchTerm) {
       inputRef.current?.setSelectionRange?.(searchTerm.length, value.length);
     }
-  }, [value, inputRef, searchTerm]);
+  }, [value, inputRef, searchTerm, shouldAutocomplete]);
 
   return (
     <ComboboxWrapper

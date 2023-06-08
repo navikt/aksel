@@ -15,6 +15,7 @@ interface InputContextType extends FormFieldType {
   onChange: ChangeEventHandler<HTMLInputElement>;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  shouldAutocomplete?: boolean;
 }
 
 const InputContext = createContext<InputContextType>({} as InputContextType);
@@ -28,6 +29,7 @@ export const InputContextProvider = ({ children, value: props }) => {
     id: externalId,
     value: externalValue,
     onChange: externalOnChange,
+    shouldAutocomplete,
     size,
   } = props;
   const formFieldProps = useFormField(
@@ -75,6 +77,7 @@ export const InputContextProvider = ({ children, value: props }) => {
         onChange,
         searchTerm,
         setSearchTerm,
+        shouldAutocomplete,
       }}
     >
       {children}

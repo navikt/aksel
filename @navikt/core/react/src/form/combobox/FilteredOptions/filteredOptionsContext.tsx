@@ -51,6 +51,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     searchTerm,
     setValue,
     setSearchTerm,
+    shouldAutocomplete,
   } = useInputContext();
 
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState<
@@ -74,6 +75,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
 
   useEffect(() => {
     if (
+      shouldAutocomplete &&
       searchTerm !== "" &&
       (previousSearchTerm?.length || 0) < searchTerm.length &&
       filteredOptions.length > 0 &&
@@ -90,6 +92,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     searchTerm,
     setSearchTerm,
     setValue,
+    shouldAutocomplete,
   ]);
 
   const isListOpen = useMemo(() => {
@@ -101,13 +104,25 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setInternalListOpen((oldState) => newState ?? !oldState);
   }, []);
 
+  const isValueNew = useMemo(
+    () => Boolean(value) && !isValueInList(value, filteredOptions),
+    [value, filteredOptions]
+  );
+
+  const getMinimumIndex = useCallback(() => {
+    return isValueNew && !singleSelect ? -1 : 0;
+  }, [isValueNew, singleSelect]);
+
   useEffect(() => {
     if (value) {
       toggleIsListOpen(true);
+      if (!shouldAutocomplete) {
+        setFilteredOptionsIndex(getMinimumIndex());
+      }
     } else {
       toggleIsListOpen(false);
     }
-  }, [value, toggleIsListOpen]);
+  }, [getMinimumIndex, value, shouldAutocomplete, toggleIsListOpen]);
 
   const currentOption = useMemo(() => {
     if (filteredOptionsIndex == null) {
@@ -118,15 +133,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     }
     return filteredOptions[filteredOptionsIndex];
   }, [filteredOptionsIndex, filteredOptions, value]);
-
-  const isValueNew = useMemo(
-    () => Boolean(value) && !isValueInList(value, filteredOptions),
-    [value, filteredOptions]
-  );
-
-  const getMinimumIndex = useCallback(() => {
-    return isValueNew && !singleSelect ? -1 : 0;
-  }, [isValueNew, singleSelect]);
 
   const resetFilteredOptionsIndex = () => {
     setFilteredOptionsIndex(getMinimumIndex());

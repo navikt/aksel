@@ -138,7 +138,7 @@ Loading.args = {
   isListOpen: true,
 };
 
-export function SingleSelect(props) {
+export function SingleSelectWithAutocomplete(props) {
   const id = useId();
   return (
     <div>
@@ -148,15 +148,40 @@ export function SingleSelect(props) {
         singleSelect={props.singleSelect || true}
         options={props.options}
         selectedOptions={props.selectedOptions}
+        shouldAutocomplete={props.shouldAutocomplete}
       />
     </div>
   );
 }
 
-SingleSelect.args = {
+SingleSelectWithAutocomplete.args = {
   singleSelect: true,
   options,
   initialSelectedOptions,
+  shouldAutocomplete: true,
+};
+
+export function SingleSelectWithoutAutoComplete(props) {
+  const id = useId();
+  return (
+    <div>
+      <Combobox
+        id={id}
+        label="Komboboks (single select)"
+        singleSelect={props.singleSelect || true}
+        options={props.options}
+        selectedOptions={props.selectedOptions}
+        shouldAutocomplete={props.shouldAutocomplete}
+      />
+    </div>
+  );
+}
+
+SingleSelectWithoutAutoComplete.args = {
+  singleSelect: true,
+  options,
+  initialSelectedOptions,
+  shouldAutocomplete: false,
 };
 
 export const WithCallbacks = () => {
