@@ -88,7 +88,7 @@ const Dropdown = ({
   const { asPath } = useRouter();
 
   return (
-    <li className="peer w-full peer-data-[open=true]:mt-6" data-open={open}>
+    <li className="sidebar-dropdown w-full" data-open={open}>
       <button
         onClick={() => setOpen((x) => !x)}
         className="min-h-8 text-text-subtle hover:text-deepblue-800 group z-10 flex w-full cursor-pointer items-center justify-between pr-2 focus:outline-none"
@@ -114,6 +114,11 @@ const Dropdown = ({
           <NavItem link={z} key={z?.heading} asPath={asPath} />
         ))}
       </ul>
+      <style jsx>{`
+        .sidebar-dropdown[data-open="true"] + .sidebar-dropdown {
+          margin-top: var(--a-spacing-6);
+        }
+      `}</style>
     </li>
   );
 };
@@ -130,10 +135,10 @@ export const Sidebar = ({
   return (
     <div
       data-testid="ds-sidebar"
-      className="toc-ignore w-sidebar bg-surface-default z-[1002] hidden shrink-0 self-start overflow-x-auto pb-8 pl-6 md:block"
+      className="toc-ignore w-sidebar bg-surface-default z-[1002] hidden shrink-0 self-start pb-4 md:block"
     >
-      <nav aria-label={kategori}>
-        <ul>
+      <nav aria-label={kategori} className={cl("overflow-x-auto")}>
+        <ul className="pb-4 pl-6">
           {sections.map((kat) => (
             <Dropdown links={kat.pages} title={kat.title} key={kat.title} />
           ))}
