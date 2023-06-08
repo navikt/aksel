@@ -5,6 +5,7 @@ import { ShadowView } from "./categories/Shadow";
 import { SpacingView } from "./categories/Spacing";
 import { ZindexView } from "./categories/Zindex";
 import { BreakpointsView } from "./categories/Breakpoints";
+import { ShapesView } from "./categories/Shapes";
 import "../../../dist/tw.css";
 export default {
   title: "sanity-modules/tokenview",
@@ -25,7 +26,7 @@ export const SemanticIconView = () => <SemanticView cat="semantic-icon" />;
 
 export const SemanticTextView = () => <SemanticView cat="semantic-text" />;
 
-export const RadiusView = () => <SemanticView cat="semantic-radius" />;
+export const RadiusViewDemo = () => <ShapesView cat="radius" />;
 
 export const ShadowViewDemo = () => <ShadowView cat="shadow" />;
 

@@ -1,6 +1,5 @@
-import { FilesIcon } from "@navikt/aksel-icons";
-import { BodyShort, CopyButton } from "@navikt/ds-react";
 import docs from "@navikt/ds-tokens/docs.json";
+import { Copy } from "../Copy";
 import { Grid } from "../Grid";
 import { sanitizeName } from "../utilities";
 
@@ -16,20 +15,19 @@ export const ShadowView = ({ cat }: { cat: string }) => {
               style={{
                 boxShadow: `var(${x.name})`,
               }}
-              className="group mr-4 grid h-12 w-12 place-content-center rounded-lg"
-            >
-              <CopyButton
-                variant="neutral"
-                copyText={x.name}
-                className="focus-visible:shadow-focus-gap rounded-lg opacity-0 duration-0 focus-visible:opacity-100 group-hover:opacity-100 group-hover:transition-opacity"
-                icon={<FilesIcon title={x.name} fontSize="1.5rem" />}
-              />
-            </div>
-
-            <BodyShort as="dl" size="small">
-              <dt>{sanitizeName(x.name.replace("shadow-", ""))}</dt>
-              <dd className="text-text-subtle ">{x.value}</dd>
-            </BodyShort>
+              className="mr-3 grid h-16 w-16 place-content-center rounded-lg text-4xl leading-none"
+            />
+            <dl className="grid h-full">
+              <dt className="inline-flex items-center gap-2">
+                <Copy
+                  text={sanitizeName(x.name.replace("shadow-", ""))}
+                  copyText={x.name}
+                />
+              </dt>
+              <dd className="text-text-subtle text-medium mt-auto">
+                {x.value}
+              </dd>
+            </dl>
           </div>
         );
       })}

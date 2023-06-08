@@ -45,18 +45,18 @@ export const BreakpointsView = ({ cat }: { cat: string }) => {
 function getSvg(token: string) {
   switch (true) {
     case token.includes("xs"):
-      return <MobileSmallIcon title="Mobile small" fontSize="3rem" />;
+      return <MobileSmallIcon title="Mobile small" fontSize="2.5rem" />;
 
     case token.includes("sm"):
-      return <MobileIcon title="Mobile regular" fontSize="3rem" />;
+      return <MobileIcon title="Mobile regular" fontSize="2.5rem" />;
 
     case token.includes("md"):
-      return <TabletIcon title="Tablet" fontSize="3rem" />;
+      return <TabletIcon title="Tablet" fontSize="2.5rem" />;
 
     case token.includes("lg"):
-      return <LaptopIcon title="Laptop" fontSize="3rem" />;
+      return <LaptopIcon title="Laptop" fontSize="2.5rem" />;
     case token.includes("xl"):
-      return <MonitorIcon title="Dekstop" fontSize="3rem" />;
+      return <MonitorIcon title="Dekstop" fontSize="2.5rem" />;
 
     default:
       return null;

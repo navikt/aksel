@@ -17,11 +17,11 @@ export const GlobalView = ({ cat }: { cat: string }) => {
               }}
               className="mr-3 grid h-16 w-16 rounded-lg"
             />
-            <dl>
+            <dl className="grid h-full">
               <dt className="inline-flex items-center gap-2">
                 <Copy text={sanitizeName(x.name)} copyText={x.name} />
               </dt>
-              <dd className="text-text-subtle text-medium">
+              <dd className="text-text-subtle text-medium mt-auto">
                 {getColorString(x.value)}
               </dd>
             </dl>
