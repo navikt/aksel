@@ -26,7 +26,7 @@ export const Copy = ({ text, copyText }) => {
     <button
       type="button"
       aria-live="polite"
-      className="py-05 bg-surface-neutral-subtle focus-visible:shadow-focus min-h-8 text-medium hover:bg-surface-neutral-subtle-hover group rounded px-1 leading-none focus:outline-none"
+      className="py-05 focus-visible:shadow-focus min-h-8 text-medium hover:bg-surface-neutral-subtle-hover group rounded px-1 leading-none focus:outline-none"
       onClick={handleClick}
     >
       <span className="inline-flex flex-row-reverse items-center gap-1">
