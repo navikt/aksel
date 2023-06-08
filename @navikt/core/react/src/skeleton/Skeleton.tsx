@@ -17,6 +17,15 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   width?: number | string;
 }
 
+/**
+ * Simple skeleton loader
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/skeleton)
+ * @see 🏷️ {@link SkeletonProps}
+ * @example
+ * ```jsx
+ * <Skeleton variant="circle" height="5rem" width="5rem" />
+ * ```
+ */
 export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
   (
     { className, children, height, width, style, variant = "text", ...rest },
