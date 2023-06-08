@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 4.1.2
+
+### Patch Changes
+
+- [`30068dca3`](https://github.com/navikt/aksel/commit/30068dca3fcdf4bf7bbfbfb3d09baa9fee003962) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Jsdoc for Skeleton-komponent
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.2
+
 ## 4.1.1
 
 ### Patch Changes
