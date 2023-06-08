@@ -1,8 +1,10 @@
-import { ClipboardIcon } from "@navikt/aksel-icons";
+import { CheckmarkIcon, ClipboardIcon } from "@navikt/aksel-icons";
 import { useEffect, useRef, useState } from "react";
+import cl from "clsx";
 
 export const Copy = ({ text, copyText }) => {
   const [active, setActive] = useState(false);
+  const [canfade, setCanfade] = useState(false);
   const timeoutRef = useRef<number>();
 
   useEffect(() => {
@@ -13,7 +15,7 @@ export const Copy = ({ text, copyText }) => {
 
   const handleClick = () => {
     timeoutRef.current && clearTimeout(timeoutRef.current);
-
+    setCanfade(true);
     navigator.clipboard.writeText(copyText);
     setActive(true);
 
@@ -30,7 +32,16 @@ export const Copy = ({ text, copyText }) => {
       onClick={handleClick}
     >
       <span className="inline-flex flex-row-reverse items-center gap-1">
-        <ClipboardIcon title={active ? "kopiert" : "kopier css-variabel"} />
+        <span>
+          {active ? (
+            <CheckmarkIcon title="Kopiert" className="animate-textbounce" />
+          ) : (
+            <ClipboardIcon
+              title="Kopier css-variabel"
+              className={cl(canfade && "animate-fadeIn")}
+            />
+          )}
+        </span>
         <span aria-live="polite">{text}</span>
       </span>
     </button>
