@@ -3,7 +3,7 @@ import cl from "clsx";
 export const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
   <kbd
     className={cl(
-      "mx-05 border-border-subtle  my-0 inline-block min-w-[2rem] rounded-md border px-2 py-[1px] text-center font-mono text-sm text-gray-900",
+      "mx-05 ring-border-subtle my-0 inline-block  min-w-[2rem] rounded-md px-2 py-[1px] text-center font-mono text-sm text-gray-900 ring-1 ring-inset",
       "from-surface-default via-surface-default to-surface-neutral-subtle bg-gradient-to-b"
     )}
   >

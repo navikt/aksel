@@ -215,12 +215,21 @@ export const GlobalSearch = () => {
         overlayClassName={styles.modalOverlaySearch}
       >
         <div className="search-grid-wrapper relative mx-auto max-w-4xl gap-4 gap-x-8 py-24">
-          <button
-            className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover absolute right-4 top-8 flex items-center justify-center rounded px-2 py-3 text-lg focus:outline-none"
-            onClick={() => handleClose()}
+          {/* <button
+            className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover absolute right-4 top-8 flex items-center justify-center gap-2 rounded px-2 py-3 text-lg focus:outline-none"
+
           >
-            Lukk søk <KBD>ESC</KBD>
-          </button>
+            <span>Lukk søk</span>
+          </button> */}
+          <Button
+            className="absolute right-4 top-8"
+            variant="tertiary-neutral"
+            icon={<KBD>ESC</KBD>}
+            onClick={() => handleClose()}
+            iconPosition="right"
+          >
+            Lukk søk
+          </Button>
           <div className="search-grid-filter mt-8">
             <CheckboxGroup legend="Filter" onChange={setTags}>
               {Object.entries(searchOptions)
@@ -247,8 +256,8 @@ export const GlobalSearch = () => {
             <form role="search" onSubmit={(e) => e.preventDefault()}>
               <Search
                 label={
-                  <span className="flex items-center">
-                    Søk i hele Aksel{" "}
+                  <span className="flex items-center gap-2">
+                    <span>Søk i hele Aksel</span>
                     {os === "mac" ? <KBD>CMD + B</KBD> : <KBD>CTRL + B</KBD>}
                   </span>
                 }

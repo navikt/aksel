@@ -50,7 +50,7 @@ export function Hit({
         <span className="mt-4 flex gap-2 empty:mt-0">
           {hit.item?.tema &&
             hit.item?.tema.map((x) => (
-              <Tag variant="alt3" size="xsmall" key={x}>
+              <Tag variant="neutral-moderate" size="xsmall" key={x}>
                 {x}
               </Tag>
             ))}
