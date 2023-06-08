@@ -93,3 +93,26 @@ export const TextSizing = {
     </div>
   ),
 };
+
+export const NativeText = {
+  render: () => (
+    <div>
+      <h1>
+        <Skeleton>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
+          voluptas sint dolore omnis quia consequatur beatae vero cum officia
+          debitis. Quidem debitis omnis reprehenderit nobis rerum. Nulla,
+          magnam? Saepe, eveniet? Test
+        </Skeleton>
+      </h1>
+      <Skeleton>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
+          voluptas sint dolore omnis quia consequatur beatae vero cum officia
+          debitis. Quidem debitis omnis reprehenderit nobis rerum. Nulla,
+          magnam? Saepe, eveniet? Test
+        </p>
+      </Skeleton>
+    </div>
+  ),
+};

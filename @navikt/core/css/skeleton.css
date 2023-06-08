@@ -22,8 +22,6 @@
 }
 
 .navds-skeleton--text {
-  margin-top: 0;
-  margin-bottom: 0;
   height: auto;
   transform-origin: 0 55%;
   transform: scale(1, 0.6);
