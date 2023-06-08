@@ -30,6 +30,22 @@ export interface SelectProps
   style?: React.CSSProperties;
 }
 
+/**
+ * A component that displays a select input field.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/select)
+ * @see 🏷️ {@link SelectProps}
+ *
+ * @example
+ * ```jsx
+ * <Select label="Hvilket land har du bosted i.">
+ *   <option value="">Velg land</option>
+ *   <option value="norge">Norge</option>
+ *   <option value="sverige">Sverige</option>
+ *   <option value="danmark">Danmark</option>
+ * </Select>
+ * ```
+ */
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (props, ref) => {
     const {

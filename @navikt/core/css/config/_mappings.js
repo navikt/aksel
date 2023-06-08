@@ -69,6 +69,11 @@ const StyleMappings = {
       dependencies: [typoCss],
     },
     { component: "Detail", main: typoCss },
+    {
+      component: "Dropdown",
+      main: "dropdown.css",
+      dependencies: [typoCss, "popover.css"],
+    },
     { component: "ErrorMessage", main: typoCss },
     { component: "ErrorSummary", main: formCss, dependencies: [typoCss] },
     {
@@ -90,6 +95,11 @@ const StyleMappings = {
       dependencies: ["popover.css"],
     },
     { component: "Ingress", main: typoCss },
+    {
+      component: "InternalHeader",
+      main: "internalheader.css",
+      dependencies: [typoCss],
+    },
     { component: "Label", main: typoCss },
     { component: "Link", main: "link.css", dependencies: [typoCss] },
     {
@@ -131,12 +141,17 @@ const StyleMappings = {
     },
     { component: "Tooltip", main: "tooltip.css", dependencies: [typoCss] },
     {
-      component: "UNSAFE_DatePicker",
+      component: "Timeline",
+      main: "timeline.css",
+      dependencies: [typoCss],
+    },
+    {
+      component: "DatePicker",
       main: "date.css",
       dependencies: [typoCss, "button.css", "popover.css"],
     },
     {
-      component: "UNSAFE_MonthPicker",
+      component: "MonthPicker",
       main: "date.css",
       dependencies: [typoCss, "button.css", "popover.css"],
     },

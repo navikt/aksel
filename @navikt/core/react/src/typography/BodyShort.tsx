@@ -19,6 +19,20 @@ export interface BodyShortProps
   spacing?: boolean;
 }
 
+/**
+ * Part of a set of components for displaying text with consistent typography.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
+ * @see 🏷️ {@link BodyShortProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+ *
+ * @example
+ * ```jsx
+ *     <BodyShort level="1" size="xlarge">
+ *       Pengestøtte når du er syk
+ *     </BodyShort>
+ * ```
+ */
 export const BodyShort: OverridableComponent<
   BodyShortProps,
   HTMLParagraphElement

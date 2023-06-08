@@ -2,10 +2,10 @@ import React, { forwardRef } from "react";
 import { Panel, OverridableComponent } from "..";
 
 import cl from "clsx";
-import { LinkPanelTitle, LinkPanelTitleType } from "./LinkPanelTitle";
+import { LinkPanelTitle, LinkPanelTitleProps } from "./LinkPanelTitle";
 import {
   LinkPanelDescription,
-  LinkPanelDescriptionType,
+  LinkPanelDescriptionProps,
 } from "./LinkPanelDescription";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 
@@ -24,10 +24,36 @@ export interface LinkPanelProps
 
 interface LinkPanelComponentType
   extends OverridableComponent<LinkPanelProps, HTMLAnchorElement> {
-  Title: LinkPanelTitleType;
-  Description: LinkPanelDescriptionType;
+  /**
+   * @see 🏷️ {@link LinkPanelDescriptionProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Title: OverridableComponent<LinkPanelTitleProps, HTMLDivElement>;
+  /**
+   * @see 🏷️ {@link LinkPanelDescriptionProps}
+   */
+  Description: React.ForwardRefExoticComponent<
+    LinkPanelDescriptionProps & React.RefAttributes<HTMLDivElement>
+  >;
 }
 
+/**
+ * A component that displays a link panel.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/linkpanel)
+ * @see 🏷️ {@link LinkPanelProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+ *
+ * @example
+ * ```jsx
+ * <LinkPanel href="#" border>
+ *   <LinkPanel.Title>Arbeidssøker eller permittert</LinkPanel.Title>
+ *   <LinkPanel.Description>
+ *     Om jobb, registrering, CV, dagpenger og feriepenger av dagpenger
+ *   </LinkPanel.Description>
+ * </LinkPanel>
+ * ```
+ */
 export const LinkPanelComponent: OverridableComponent<
   LinkPanelProps,
   HTMLAnchorElement

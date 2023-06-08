@@ -67,6 +67,13 @@ export const KomponentArtikkel = defineType({
           hidden: ({ parent }) => !(parent?.tag === "beta"),
         }),
         defineField({
+          name: "internal",
+          title: "Interne flater",
+          description: "Er komponenten ment for bruk på interne flater?",
+          type: "boolean",
+          initialValue: false,
+        }),
+        defineField({
           name: "bilde",
           title: "Thumbnail",
           type: "image",

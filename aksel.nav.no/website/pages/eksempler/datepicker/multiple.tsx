@@ -1,9 +1,9 @@
-import { UNSAFE_DatePicker } from "@navikt/ds-react";
+import { DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <UNSAFE_DatePicker.Standalone
+    <DatePicker.Standalone
       mode="multiple"
       min={1}
       max={3}

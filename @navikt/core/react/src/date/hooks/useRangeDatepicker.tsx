@@ -102,7 +102,7 @@ const RANGE = {
   TO: "TO",
 } as const;
 
-type RangeT = typeof RANGE[keyof typeof RANGE];
+type RangeT = (typeof RANGE)[keyof typeof RANGE];
 
 const fromValidation = (day: Date, opt?: UseRangeDatepickerOptions) => {
   const isBefore =
@@ -190,6 +190,18 @@ const initialValidation = (
   return getValidationMessage({ ...fromVal }, { ...toVal });
 };
 
+/**
+ *
+ * @see 🏷️ {@link UseRangeDatepickerOptions}
+ * @see 🏷️ {@link UseRangeDatepickerValue}
+ * @see 🏷️ {@link RangeValidationT}
+ * @example
+ * const { datepickerProps, fromInputProps, toInputProps } = useRangeDatepicker({
+ *   fromDate: new Date("Aug 23 2019"),
+ *   onRangeChange: console.log,
+ *   onValidate: console.log,
+ * });
+ */
 export const useRangeDatepicker = (
   opt: UseRangeDatepickerOptions = {}
 ): UseRangeDatepickerValue => {

@@ -19,10 +19,6 @@ export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export type TabListType = React.ForwardRefExoticComponent<
-  TabListProps & React.RefAttributes<HTMLDivElement>
->;
-
 export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, ...rest }, ref) => {
     const context = useContext(TabsContext);
@@ -127,6 +123,6 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
       </div>
     );
   }
-) as TabListType;
+);
 
 export default TabList;

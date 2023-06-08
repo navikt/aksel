@@ -1,7 +1,6 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { TokenTableT } from "@/types";
 import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
-import internal from "@navikt/ds-css-internal/tokens.json";
 import core from "@navikt/ds-css/tokens.json";
 import { BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
 import cl from "classnames";
@@ -12,11 +11,7 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
   const [open, setOpen] = useState(false);
 
   const tokens: { [key: string]: string } | null =
-    node.title in core
-      ? core[node.title]
-      : node.title in internal
-      ? internal[node.title]
-      : null;
+    node.title in core ? core[node.title] : null;
 
   if (!tokens) {
     return null;

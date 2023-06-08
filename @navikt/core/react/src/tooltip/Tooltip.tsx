@@ -75,6 +75,19 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   keys?: string[];
 }
 
+/**
+ * A component that displays a tooltip when the user hovers over its child element.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/tooltip)
+ * @see 🏷️ {@link TooltipProps}
+ *
+ * @example
+ * ```jsx
+ * <Tooltip content="Skriv ut dokument">
+ *   <Button icon={<PrinterLargeIcon title="demo knapp" />} />
+ * </Tooltip>
+ * ```
+ */
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
