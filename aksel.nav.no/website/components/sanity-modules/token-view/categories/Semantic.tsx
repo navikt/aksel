@@ -22,6 +22,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
               <div
                 style={{
                   background: isLight ? `var(--a-surface-inverted)` : undefined,
+                  color: x.value,
                   boxShadow: `inset 0 2px 4px 0 rgba(0,0,0,0.06)`,
                 }}
                 className="mr-3 grid h-16 w-16 place-content-center rounded-lg text-2xl leading-none"
