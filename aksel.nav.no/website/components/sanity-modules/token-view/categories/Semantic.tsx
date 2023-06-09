@@ -105,10 +105,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
     );
   }
 
-  if (
-    cat.startsWith("semantic-border") ||
-    cat.startsWith("semantic-data-border")
-  ) {
+  if (cat.startsWith("semantic-border")) {
     return (
       <Grid>
         {colors.map((x) => {
@@ -126,6 +123,128 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                 <dt className="inline-flex items-center gap-2">
                   <Copy
                     text={sanitizeName(x.name.replace("border-", ""))}
+                    copyText={x.name}
+                  />
+                </dt>
+                <dd className="text-text-subtle text-medium mt-auto">
+                  {ref ? (
+                    <Link
+                      href={`#${ref.name}`}
+                      className="focus-visible:bg-border-focus focus-visible:text-text-on-action hover:underline focus:outline-none"
+                    >
+                      {sanitizeName(ref.name)}
+                    </Link>
+                  ) : (
+                    getColorString(x.value)
+                  )}
+                </dd>
+              </dl>
+            </div>
+          );
+        })}
+      </Grid>
+    );
+  }
+  if (cat.startsWith("semantic-data-border")) {
+    return (
+      <Grid>
+        {colors.map((x) => {
+          const ref = getGlobalReference(x.value);
+
+          return (
+            <div
+              key={x.name}
+              id={x.name}
+              className="z-0 flex w-fit items-center"
+            >
+              <div className="mr-3 flex h-16 w-16 items-end justify-evenly rounded-lg text-4xl leading-none">
+                <span
+                  className="rounded-t-small h-full w-3"
+                  style={{
+                    border: `1px solid var(${x.name})`,
+                    backgroundColor: `var(${x.name.replace(
+                      "border",
+                      "surface"
+                    )}-subtle)`,
+                  }}
+                />
+                <span
+                  className="rounded-t-small h-2/3 w-3"
+                  style={{
+                    border: `1px solid var(${x.name})`,
+                    backgroundColor: `var(${x.name.replace(
+                      "border",
+                      "surface"
+                    )}-subtle)`,
+                  }}
+                />
+                <span
+                  className="rounded-t-small h-1/3 w-3"
+                  style={{
+                    border: `1px solid var(${x.name})`,
+                    backgroundColor: `var(${x.name.replace(
+                      "border",
+                      "surface"
+                    )}-subtle)`,
+                  }}
+                />
+              </div>
+              <dl className="grid h-full">
+                <dt className="inline-flex items-center gap-2">
+                  <Copy
+                    text={sanitizeName(x.name.replace("surface-", ""))}
+                    copyText={x.name}
+                  />
+                </dt>
+                <dd className="text-text-subtle text-medium mt-auto">
+                  {ref ? (
+                    <Link
+                      href={`#${ref.name}`}
+                      className="focus-visible:bg-border-focus focus-visible:text-text-on-action hover:underline focus:outline-none"
+                    >
+                      {sanitizeName(ref.name)}
+                    </Link>
+                  ) : (
+                    getColorString(x.value)
+                  )}
+                </dd>
+              </dl>
+            </div>
+          );
+        })}
+      </Grid>
+    );
+  }
+  if (cat.startsWith("semantic-data-surface")) {
+    return (
+      <Grid>
+        {colors.map((x) => {
+          const ref = getGlobalReference(x.value);
+
+          return (
+            <div
+              key={x.name}
+              id={x.name}
+              className="z-0 flex w-fit items-center"
+            >
+              <div className="mr-3 flex h-16 w-16 items-end justify-evenly rounded-lg text-4xl leading-none">
+                <span
+                  className="rounded-t-small h-full w-3"
+                  style={{ backgroundColor: `var(${x.name})` }}
+                />
+                <span
+                  className="rounded-t-small h-2/3 w-3"
+                  style={{ backgroundColor: `var(${x.name})` }}
+                />
+                <span
+                  className="rounded-t-small h-1/3 w-3"
+                  style={{ backgroundColor: `var(${x.name})` }}
+                />
+              </div>
+              <dl className="grid h-full">
+                <dt className="inline-flex items-center gap-2">
+                  <Copy
+                    text={sanitizeName(x.name.replace("surface-", ""))}
                     copyText={x.name}
                   />
                 </dt>
