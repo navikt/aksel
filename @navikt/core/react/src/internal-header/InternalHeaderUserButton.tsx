@@ -17,27 +17,24 @@ export interface InternalHeaderUserButtonProps
   description?: string;
 }
 
-export type InternalHeaderUserButtonType = OverridableComponent<
+export const InternalHeaderUserButton: OverridableComponent<
   InternalHeaderUserButtonProps,
   HTMLButtonElement
->;
-
-export const InternalHeaderUserButton: InternalHeaderUserButtonType =
-  forwardRef(({ as, name, description, className, ...rest }, ref) => (
-    <InternalHeaderButton
-      {...rest}
-      as={as}
-      ref={ref}
-      className={cl("navds-internalheader__user-button", className)}
-    >
-      <div>
-        <BodyShort size="small" as="div">
-          {name}
-        </BodyShort>
-        {description && <Detail as="div">{description}</Detail>}
-      </div>
-      <ChevronDownIcon title="vis meny" />
-    </InternalHeaderButton>
-  ));
+> = forwardRef(({ as, name, description, className, ...rest }, ref) => (
+  <InternalHeaderButton
+    {...rest}
+    as={as}
+    ref={ref}
+    className={cl("navds-internalheader__user-button", className)}
+  >
+    <div>
+      <BodyShort size="small" as="div">
+        {name}
+      </BodyShort>
+      {description && <Detail as="div">{description}</Detail>}
+    </div>
+    <ChevronDownIcon title="vis meny" />
+  </InternalHeaderButton>
+));
 
 export default InternalHeaderUserButton;

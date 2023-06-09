@@ -10,11 +10,7 @@ export interface ToggleProps
   children: React.ReactNode;
 }
 
-export type ToggleType = React.ForwardRefExoticComponent<
-  ToggleProps & React.RefAttributes<HTMLButtonElement>
->;
-
-export const Toggle: ToggleType = forwardRef(
+export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
   ({ className, onClick, ...rest }, ref) => {
     const context = useContext(DropdownContext);
 

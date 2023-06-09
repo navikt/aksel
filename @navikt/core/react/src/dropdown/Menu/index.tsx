@@ -1,8 +1,8 @@
-import { Popover } from "../../popover";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { Popover } from "../../popover";
 import { DropdownContext } from "../Dropdown";
-import Divider, { DividerType } from "./Divider";
+import Divider from "./Divider";
 import GroupedList, { GroupedListType } from "./GroupedList";
 import List, { ListType } from "./List";
 
@@ -43,9 +43,20 @@ export interface MenuType<Props = MenuProps>
   extends React.ForwardRefExoticComponent<
     Props & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * @see 🏷️ {@link ListType}
+   */
   List: ListType;
+  /**
+   * @see 🏷️ {@link GroupedListType}
+   */
   GroupedList: GroupedListType;
-  Divider: DividerType;
+  /**
+   * @see 🏷️ {@link React.HTMLAttributes<HTMLHRElement>}
+   */
+  Divider: React.ForwardRefExoticComponent<
+    React.HTMLAttributes<HTMLHRElement> & React.RefAttributes<HTMLHRElement>
+  >;
 }
 
 export const Menu = forwardRef<HTMLDivElement, MenuProps>(

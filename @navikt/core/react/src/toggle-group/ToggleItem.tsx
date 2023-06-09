@@ -16,10 +16,6 @@ export interface ToggleItemProps
   value: string;
 }
 
-export type ToggleItemType = React.ForwardRefExoticComponent<
-  ToggleItemProps & React.RefAttributes<HTMLButtonElement>
->;
-
 const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
   ({ className, children, ...rest }, ref) => {
     const context = useContext(ToggleGroupContext);
@@ -40,6 +36,6 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
       </RadixToggleGroup.Item>
     );
   }
-) as ToggleItemType;
+);
 
 export default ToggleItem;

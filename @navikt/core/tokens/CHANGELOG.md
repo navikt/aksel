@@ -1,5 +1,26 @@
 # @navikt/ds-tokens
 
+## 4.1.2
+
+## 4.1.1
+
+## 4.1.0
+
+### Minor Changes
+
+- [#2032](https://github.com/navikt/aksel/pull/2032) [`6aca0a4b6`](https://github.com/navikt/aksel/commit/6aca0a4b6aa063a2fdbb30f679c871898074dd74) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Fargetokens for datavisualisering.
+
+  6 varianter for surface,surface-subtle og border.
+
+  ```css
+  background-color: var(--a-data-surface-1-subtle);
+  border-color: var(--a-data-1-border);
+  ```
+
+- [#2036](https://github.com/navikt/aksel/pull/2036) [`b2f796d68`](https://github.com/navikt/aksel/commit/b2f796d681f1c1d76d26d1fd743268c8c618a854) Thanks [@KenAJoh](https://github.com/KenAJoh)! - - Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600).
+  - Icon-subtle bruker nå grayalpha.
+  - Alle description-felter på fieldsets har nå text-subtle som farge.
+
 ## 4.0.0
 
 ## 3.4.2
