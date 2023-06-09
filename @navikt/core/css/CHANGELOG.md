@@ -1,5 +1,35 @@
 # @navikt/ds-css
 
+## 4.1.2
+
+## 4.1.1
+
+### Patch Changes
+
+- [`91343563c`](https://github.com/navikt/aksel/commit/91343563c916a554d8ade5401c28ab4c3b3e26af) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset markering av tekst i skeleton.
+
+## 4.1.0
+
+### Minor Changes
+
+- [#2035](https://github.com/navikt/aksel/pull/2035) [`7b42f536a`](https://github.com/navikt/aksel/commit/7b42f536aa90c1b5dbe2b19f1bbe292701546420) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Oppdatert Chips
+
+  - Toggle Chips har nå varianter: neutral og action
+  - Toggle Chips har nå en ny prop: `checkmark` som slår av/på checkmark ved selected-state
+
+- [#2036](https://github.com/navikt/aksel/pull/2036) [`b2f796d68`](https://github.com/navikt/aksel/commit/b2f796d681f1c1d76d26d1fd743268c8c618a854) Thanks [@KenAJoh](https://github.com/KenAJoh)! - - Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600).
+
+  - Icon-subtle bruker nå grayalpha.
+  - Alle description-felter på fieldsets har nå text-subtle som farge.
+
+- [#1821](https://github.com/navikt/aksel/pull/1821) [`db8c38a09`](https://github.com/navikt/aksel/commit/db8c38a094cd183db54aebecb62d5b223920a040) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Ny komponent Skeleton!
+
+  - varianter: text, circle, rounded og rectangle
+
+### Patch Changes
+
+- [#2027](https://github.com/navikt/aksel/pull/2027) [`c028f36e2`](https://github.com/navikt/aksel/commit/c028f36e2bc58223ebf8b655980dde7eafb30add) Thanks [@JulianNymark](https://github.com/JulianNymark)! - :sparkles: La til `indent`-prop på Accordion
+
 ## 4.0.0
 
 ### Major Changes

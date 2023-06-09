@@ -1,0 +1,56 @@
+.navds-skeleton {
+  display: block;
+  background-color: var(--ac-skeleton-bg, var(--a-surface-neutral-moderate));
+  height: 1.3em;
+  animation: akselSkeletonAnimation 0.8s linear infinite alternate;
+  pointer-events: none;
+}
+
+.navds-skeleton--has-children {
+  color: transparent;
+}
+
+.navds-skeleton--has-children > * {
+  visibility: hidden;
+}
+
+.navds-skeleton--has-children.navds-skeleton--no-height {
+  height: auto;
+}
+
+.navds-skeleton--has-children.navds-skeleton--no-width {
+  width: fit-content;
+}
+
+.navds-skeleton--text {
+  height: auto;
+  transform-origin: 0 55%;
+  transform: scale(1, 0.6);
+  border-radius: var(--a-border-radius-medium);
+}
+
+.navds-skeleton--text:empty::before {
+  content: "\00a0";
+}
+
+.navds-skeleton--circle {
+  border-radius: var(--a-border-radius-full);
+}
+
+.navds-skeleton--rectangle {
+  border-radius: 0;
+}
+
+.navds-skeleton--rounded {
+  border-radius: var(--a-border-radius-xlarge);
+}
+
+@keyframes akselSkeletonAnimation {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
