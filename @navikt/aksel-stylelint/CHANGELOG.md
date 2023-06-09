@@ -1,5 +1,18 @@
 # @navikt/aksel-stylelint
 
+## 4.1.2
+
+## 4.1.1
+
+## 4.1.0
+
+### Minor Changes
+
+- [#2035](https://github.com/navikt/aksel/pull/2035) [`7b42f536a`](https://github.com/navikt/aksel/commit/7b42f536aa90c1b5dbe2b19f1bbe292701546420) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Oppdatert Chips
+
+  - Toggle Chips har nå varianter: neutral og action
+  - Toggle Chips har nå en ny prop: `checkmark` som slår av/på checkmark ved selected-state
+
 ## 4.0.0
 
 ## 3.4.2
