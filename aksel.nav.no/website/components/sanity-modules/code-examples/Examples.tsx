@@ -82,6 +82,7 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
           {node.dir.filer.map((fil) => {
             return (
               <Chips.Toggle
+                checkmark={false}
                 key={fil._key}
                 value={fil.navn}
                 selected={active === fil.navn}
