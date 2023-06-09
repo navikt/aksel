@@ -13,7 +13,7 @@
 }
 
 .navds-link-panel:hover {
-  box-shadow: var(--a-shadow-medium);
+  box-shadow: var(--a-shadow-small);
   border-color: var(--ac-link-panel-hover-border, var(--a-border-action));
 }
 
