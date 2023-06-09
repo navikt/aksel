@@ -1,13 +1,17 @@
 ### :memo: PR Checklist
 
-- [ ] :sparkles: New component? add mapping to `@navikt/core/css/config/_mappings.js`
+<!-- Remove non-relevant fields -->
 
-- [ ] :wastebasket: Are you deprecating a CSS class? (are you removing the last known reference to a CSS class?) add the class to the `@navikt/aksel-stylelint/src/deprecations.ts`
+- [ ] :sparkles: New component? Add CSS-mappings to `@navikt/core/css/config/_mappings.js`.
 
-- [ ] :balance_scale: Is the feature/component/code sufficiently complex to warrant tests? (beyond storybook & snapshots) create tests
+- [ ] :wastebasket: Are you deprecating a CSS class? (are you removing the last known reference to a CSS class?). Add it to `@navikt/aksel-stylelint/src/deprecations.ts` with a suitable description.
 
-- [ ] :boom: Are there breaking changes? create codemod.
+- [ ] :balance_scale: Is the feature/component/code sufficiently complex to warrant tests? Add some unit-tests :test_tube:
 
-- [ ] :test_tube: Are there useful variations and use-cases in the storybook stories? (for visual testing)
+- [ ] :balance_scale: Does the feature/component add some complex user-interactions? Consider adding some [interaction-tests with storybook](https://storybook.js.org/docs/react/writing-tests/interaction-testing) :test_tube:
 
-- [ ] Run `yarn changeset`
+- [ ] :boom: Are there breaking changes? Consider adding a codemod for easier migration.
+
+- [ ] :test_tube: Are all variations and cases shown in the storybook stories? Stories are used for [visual regression testing](https://www.chromatic.com/docs/), so make sure they are complete.
+
+- [ ] Run `yarn changeset` for version and changelog generation
