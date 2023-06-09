@@ -1,7 +1,7 @@
-import { InlineCode } from "@/sanity-block";
 import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { KBD } from "@sanity/ui";
+import { InlineCode } from "components/website-modules/InlineCode";
 import NextLink from "next/link";
 import { Role } from "sanity";
 

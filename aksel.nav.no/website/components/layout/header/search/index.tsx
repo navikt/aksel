@@ -1,20 +1,20 @@
-import { useDebounce, logSearch } from "@/utils";
+import { SearchLogT, SearchResultsT, searchOptions } from "@/types";
+import { logSearch, useDebounce } from "@/utils";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import {
   Button,
   Checkbox,
   CheckboxGroup,
-  Detail,
   Loader,
   Search,
 } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "components/assets";
-import { SearchLogT, searchOptions, SearchResultsT } from "@/types";
+import { KBD } from "components/website-modules/KBD";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
-import { Group, GroupComponent } from "./Group";
 import styles from "../header.module.css";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { Group, GroupComponent } from "./Group";
 
 /**
  * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
@@ -189,7 +189,7 @@ export const GlobalSearch = () => {
   };
 
   return (
-    <div className="z-[1050] mr-4 ml-auto flex justify-center lg:mr-0 lg:ml-0">
+    <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
       <Button
         variant="primary"
         className="hover:bg-deepblue-700 bg-deepblue-600 focus-visible:shadow-focus-gap h-11 focus:shadow-none"
@@ -215,12 +215,21 @@ export const GlobalSearch = () => {
         overlayClassName={styles.modalOverlaySearch}
       >
         <div className="search-grid-wrapper relative mx-auto max-w-4xl gap-4 gap-x-8 py-24">
-          <button
-            className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover absolute top-8 right-4 flex items-center justify-center rounded py-3 px-2 text-lg focus:outline-none"
-            onClick={() => handleClose()}
+          {/* <button
+            className="focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover absolute right-4 top-8 flex items-center justify-center gap-2 rounded px-2 py-3 text-lg focus:outline-none"
+
           >
-            Lukk søk <KBD>ESC</KBD>
-          </button>
+            <span>Lukk søk</span>
+          </button> */}
+          <Button
+            className="absolute right-4 top-8"
+            variant="tertiary-neutral"
+            icon={<KBD>ESC</KBD>}
+            onClick={() => handleClose()}
+            iconPosition="right"
+          >
+            Lukk søk
+          </Button>
           <div className="search-grid-filter mt-8">
             <CheckboxGroup legend="Filter" onChange={setTags}>
               {Object.entries(searchOptions)
@@ -247,8 +256,8 @@ export const GlobalSearch = () => {
             <form role="search" onSubmit={(e) => e.preventDefault()}>
               <Search
                 label={
-                  <span className="flex items-center">
-                    Søk i hele Aksel{" "}
+                  <span className="flex items-center gap-2">
+                    <span>Søk i hele Aksel</span>
                     {os === "mac" ? <KBD>CMD + B</KBD> : <KBD>CTRL + B</KBD>}
                   </span>
                 }
@@ -359,14 +368,3 @@ export const GlobalSearch = () => {
     </div>
   );
 };
-
-function KBD({ children }: { children: React.ReactNode }) {
-  return (
-    <Detail
-      as="kbd"
-      className="bg-surface-neutral-subtle-hover ml-2 hidden rounded px-2 font-sans font-semibold uppercase md:inline-block"
-    >
-      {children}
-    </Detail>
-  );
-}

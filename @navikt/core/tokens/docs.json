@@ -47,27 +47,27 @@
       "name": "--a-font-family",
       "value": "\"Source Sans Pro\", Arial, sans-serif"
     },
-    { "name": "--a-font-weight-bold", "value": "600" },
     { "name": "--a-font-weight-regular", "value": "400" },
-    { "name": "--a-font-line-height-heading-2xlarge", "value": "3.25rem" },
-    { "name": "--a-font-line-height-heading-xlarge", "value": "2.5rem" },
-    { "name": "--a-font-line-height-heading-large", "value": "2.25rem" },
-    { "name": "--a-font-line-height-heading-medium", "value": "2rem" },
-    { "name": "--a-font-line-height-heading-small", "value": "1.75rem" },
-    { "name": "--a-font-line-height-heading-xsmall", "value": "1.5rem" },
-    { "name": "--a-font-line-height-xlarge", "value": "1.75rem" },
-    { "name": "--a-font-line-height-large", "value": "1.5rem" },
-    { "name": "--a-font-line-height-medium", "value": "1.25rem" },
-    { "name": "--a-font-size-heading-2xlarge", "value": "2.5rem" },
-    { "name": "--a-font-size-heading-xlarge", "value": "2rem" },
-    { "name": "--a-font-size-heading-large", "value": "1.75rem" },
-    { "name": "--a-font-size-heading-medium", "value": "1.5rem" },
-    { "name": "--a-font-size-heading-small", "value": "1.25rem" },
-    { "name": "--a-font-size-heading-xsmall", "value": "1.125rem" },
-    { "name": "--a-font-size-xlarge", "value": "1.25rem" },
-    { "name": "--a-font-size-large", "value": "1.125rem" },
+    { "name": "--a-font-weight-bold", "value": "600" },
+    { "name": "--a-font-size-small", "value": "0.875rem" },
     { "name": "--a-font-size-medium", "value": "1rem" },
-    { "name": "--a-font-size-small", "value": "0.875rem" }
+    { "name": "--a-font-size-large", "value": "1.125rem" },
+    { "name": "--a-font-size-xlarge", "value": "1.25rem" },
+    { "name": "--a-font-size-heading-xsmall", "value": "1.125rem" },
+    { "name": "--a-font-size-heading-small", "value": "1.25rem" },
+    { "name": "--a-font-size-heading-medium", "value": "1.5rem" },
+    { "name": "--a-font-size-heading-large", "value": "1.75rem" },
+    { "name": "--a-font-size-heading-xlarge", "value": "2rem" },
+    { "name": "--a-font-size-heading-2xlarge", "value": "2.5rem" },
+    { "name": "--a-font-line-height-medium", "value": "1.25rem" },
+    { "name": "--a-font-line-height-large", "value": "1.5rem" },
+    { "name": "--a-font-line-height-xlarge", "value": "1.75rem" },
+    { "name": "--a-font-line-height-heading-xsmall", "value": "1.5rem" },
+    { "name": "--a-font-line-height-heading-small", "value": "1.75rem" },
+    { "name": "--a-font-line-height-heading-medium", "value": "2rem" },
+    { "name": "--a-font-line-height-heading-large", "value": "2.25rem" },
+    { "name": "--a-font-line-height-heading-xlarge", "value": "2.5rem" },
+    { "name": "--a-font-line-height-heading-2xlarge", "value": "3.25rem" }
   ],
   "global-base": [
     { "name": "--a-transparent", "value": "rgba(255, 255, 255, 0)" },
@@ -195,26 +195,34 @@
     { "name": "--a-purple-900", "value": "rgba(31, 20, 47, 1)" }
   ],
 
-  "semantic-border": [
+  "semantic-border-default": [
     { "name": "--a-border-default", "value": "rgba(0, 0, 0, 0.44)" },
     { "name": "--a-border-strong", "value": "rgba(0, 0, 0, 0.65)" },
     { "name": "--a-border-divider", "value": "rgba(0, 0, 0, 0.19)" },
     { "name": "--a-border-subtle", "value": "rgba(0, 0, 0, 0.1)" },
     { "name": "--a-border-subtle-hover", "value": "rgba(0, 0, 0, 0.19)" },
+    { "name": "--a-border-on-inverted", "value": "rgba(229, 229, 229, 1)" },
+    { "name": "--a-border-on-inverted-subtle", "value": "rgba(89, 89, 89, 1)" }
+  ],
+  "semantic-border-action": [
     { "name": "--a-border-action", "value": "rgba(0, 103, 197, 1)" },
     { "name": "--a-border-action-selected", "value": "rgba(0, 91, 130, 1)" },
-    { "name": "--a-border-selected", "value": "rgba(0, 103, 197, 1)" },
+    { "name": "--a-border-selected", "value": "rgba(0, 103, 197, 1)" }
+  ],
+  "semantic-border-status": [
     { "name": "--a-border-success", "value": "rgba(6, 137, 58, 1)" },
     { "name": "--a-border-danger", "value": "rgba(195, 0, 0, 1)" },
     { "name": "--a-border-warning", "value": "rgba(199, 115, 0, 1)" },
-    { "name": "--a-border-info", "value": "rgba(54, 141, 168, 1)" },
-    { "name": "--a-border-on-inverted", "value": "rgba(229, 229, 229, 1)" },
-    { "name": "--a-border-on-inverted-subtle", "value": "rgba(89, 89, 89, 1)" },
+    { "name": "--a-border-info", "value": "rgba(54, 141, 168, 1)" }
+  ],
+  "semantic-border-focus": [
     { "name": "--a-border-focus", "value": "rgba(0, 52, 125, 1)" },
     {
       "name": "--a-border-focus-on-inverted",
       "value": "rgba(153, 195, 255, 1)"
-    },
+    }
+  ],
+  "semantic-border-alt": [
     { "name": "--a-border-alt-1", "value": "rgba(130, 105, 162, 1)" },
     { "name": "--a-border-alt-2", "value": "rgba(127, 137, 0, 1)" },
     { "name": "--a-border-alt-3", "value": "rgba(0, 91, 130, 1)" }
@@ -241,7 +249,7 @@
     { "name": "--a-text-on-alt-2", "value": "rgba(38, 38, 38, 1)" },
     { "name": "--a-text-on-alt-3", "value": "rgba(255, 255, 255, 1)" }
   ],
-  "semantic-surface": [
+  "semantic-surface-default": [
     { "name": "--a-surface-default", "value": "rgba(255, 255, 255, 1)" },
     { "name": "--a-surface-hover", "value": "rgba(0, 0, 0, 0.05)" },
     { "name": "--a-surface-active", "value": "rgba(0, 0, 0, 0.1)" },
@@ -251,7 +259,9 @@
     { "name": "--a-surface-backdrop", "value": "rgba(0, 0, 0, 0.65)" },
     { "name": "--a-surface-inverted-hover", "value": "rgba(64, 64, 64, 1)" },
     { "name": "--a-surface-inverted-active", "value": "rgba(89, 89, 89, 1)" },
-    { "name": "--a-surface-inverted", "value": "rgba(38, 38, 38, 1)" },
+    { "name": "--a-surface-inverted", "value": "rgba(38, 38, 38, 1)" }
+  ],
+  "semantic-surface-action": [
     { "name": "--a-surface-action-subtle", "value": "rgba(230, 240, 255, 1)" },
     {
       "name": "--a-surface-action-subtle-hover",
@@ -264,7 +274,9 @@
     {
       "name": "--a-surface-action-selected-hover",
       "value": "rgba(0, 80, 119, 1)"
-    },
+    }
+  ],
+  "semantic-surface-neutral": [
     { "name": "--a-surface-neutral-subtle", "value": "rgba(0, 0, 0, 0.05)" },
     {
       "name": "--a-surface-neutral-subtle-hover",
@@ -274,7 +286,9 @@
     { "name": "--a-surface-neutral", "value": "rgba(89, 89, 89, 1)" },
     { "name": "--a-surface-neutral-hover", "value": "rgba(64, 64, 64, 1)" },
     { "name": "--a-surface-neutral-selected", "value": "rgba(38, 38, 38, 1)" },
-    { "name": "--a-surface-neutral-active", "value": "rgba(38, 38, 38, 1)" },
+    { "name": "--a-surface-neutral-active", "value": "rgba(38, 38, 38, 1)" }
+  ],
+  "semantic-surface-success": [
     { "name": "--a-surface-success-subtle", "value": "rgba(204, 241, 214, 1)" },
     {
       "name": "--a-surface-success-subtle-hover",
@@ -285,7 +299,9 @@
       "value": "rgba(153, 222, 173, 1)"
     },
     { "name": "--a-surface-success", "value": "rgba(6, 137, 58, 1)" },
-    { "name": "--a-surface-success-hover", "value": "rgba(0, 124, 46, 1)" },
+    { "name": "--a-surface-success-hover", "value": "rgba(0, 124, 46, 1)" }
+  ],
+  "semantic-surface-danger": [
     { "name": "--a-surface-danger-subtle", "value": "rgba(255, 194, 194, 1)" },
     {
       "name": "--a-surface-danger-subtle-hover",
@@ -297,7 +313,9 @@
     },
     { "name": "--a-surface-danger", "value": "rgba(195, 0, 0, 1)" },
     { "name": "--a-surface-danger-hover", "value": "rgba(173, 0, 0, 1)" },
-    { "name": "--a-surface-danger-active", "value": "rgba(140, 0, 0, 1)" },
+    { "name": "--a-surface-danger-active", "value": "rgba(140, 0, 0, 1)" }
+  ],
+  "semantic-surface-warning": [
     { "name": "--a-surface-warning-subtle", "value": "rgba(255, 236, 204, 1)" },
     {
       "name": "--a-surface-warning-moderate",
@@ -307,14 +325,18 @@
     {
       "name": "--a-surface-warning-subtle-hover",
       "value": "rgba(255, 215, 153, 1)"
-    },
+    }
+  ],
+  "semantic-surface-info": [
     { "name": "--a-surface-info-subtle", "value": "rgba(216, 249, 255, 1)" },
     {
       "name": "--a-surface-info-subtle-hover",
       "value": "rgba(181, 241, 255, 1)"
     },
     { "name": "--a-surface-info-moderate", "value": "rgba(181, 241, 255, 1)" },
-    { "name": "--a-surface-info", "value": "rgba(102, 203, 236, 1)" },
+    { "name": "--a-surface-info", "value": "rgba(102, 203, 236, 1)" }
+  ],
+  "semantic-surface-alt": [
     { "name": "--a-surface-alt-1", "value": "rgba(130, 105, 162, 1)" },
     { "name": "--a-surface-alt-1-subtle", "value": "rgba(224, 216, 233, 1)" },
     { "name": "--a-surface-alt-1-moderate", "value": "rgba(192, 178, 210, 1)" },
@@ -337,18 +359,22 @@
       "value": "rgba(241, 241, 241, 1)"
     }
   ],
-  "semantic-icon": [
+  "semantic-icon-defaults": [
     { "name": "--a-icon-default", "value": "rgba(38, 38, 38, 1)" },
     { "name": "--a-icon-subtle", "value": "rgba(0, 0, 0, 0.65)" },
     { "name": "--a-icon-on-neutral", "value": "rgba(255, 255, 255, 1)" },
-    { "name": "--a-icon-on-inverted", "value": "rgba(255, 255, 255, 1)" },
+    { "name": "--a-icon-on-inverted", "value": "rgba(255, 255, 255, 1)" }
+  ],
+  "semantic-icon-action": [
     { "name": "--a-icon-action", "value": "rgba(0, 103, 197, 1)" },
     { "name": "--a-icon-action-selected", "value": "rgba(0, 91, 130, 1)" },
     {
       "name": "--a-icon-action-on-action-subtle",
       "value": "rgba(0, 86, 180, 1)"
     },
-    { "name": "--a-icon-on-action", "value": "rgba(255, 255, 255, 1)" },
+    { "name": "--a-icon-on-action", "value": "rgba(255, 255, 255, 1)" }
+  ],
+  "semantic-icon-status": [
     { "name": "--a-icon-success", "value": "rgba(6, 137, 58, 1)" },
     { "name": "--a-icon-on-success", "value": "rgba(255, 255, 255, 1)" },
     { "name": "--a-icon-danger", "value": "rgba(195, 0, 0, 1)" },
@@ -356,11 +382,14 @@
     { "name": "--a-icon-warning", "value": "rgba(199, 115, 0, 1)" },
     { "name": "--a-icon-on-warning", "value": "rgba(38, 38, 38, 1)" },
     { "name": "--a-icon-info", "value": "rgba(35, 107, 125, 1)" },
-    { "name": "--a-icon-on-info", "value": "rgba(38, 38, 38, 1)" },
+    { "name": "--a-icon-on-info", "value": "rgba(38, 38, 38, 1)" }
+  ],
+  "semantic-icon-alt": [
     { "name": "--a-icon-alt-1", "value": "rgba(99, 70, 137, 1)" },
     { "name": "--a-icon-alt-2", "value": "rgba(127, 137, 0, 1)" },
     { "name": "--a-icon-alt-3", "value": "rgba(51, 128, 165, 1)" }
   ],
+
   "semantic-data-surface": [
     {
       "name": "--a-data-surface-1",
