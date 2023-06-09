@@ -11,6 +11,7 @@ import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
 import { allArticleDocuments } from "../../../../sanity/config";
 import IconMetadata from "@navikt/aksel-icons/metadata";
+import { logger } from "logger";
 
 const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
 
@@ -225,7 +226,7 @@ async function searchSanity() {
       );
     })
     .catch((err) => {
-      console.log("Error message: ", err.message);
+      logger.error(err);
       return [];
     });
 

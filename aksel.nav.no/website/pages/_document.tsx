@@ -1,3 +1,6 @@
+// This is imported to allow the Output File Tracing feature of Next.js to work correctly with the log patcher
+import "next-logger";
+
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
