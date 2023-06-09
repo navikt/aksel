@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 4.1.3
+
+### Patch Changes
+
+- [`44a75acb6`](https://github.com/navikt/aksel/commit/44a75acb6b904d614a01344f42111761a48cb7e2) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Classname ble ikke riktig forwardet til ikke-klikkbar Period i Timeline
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.3
+
 ## 4.1.2
 
 ### Patch Changes
