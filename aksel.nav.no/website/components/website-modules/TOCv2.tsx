@@ -1,5 +1,5 @@
 import { removeEmojies } from "@/utils";
-import { BodyShort, Link } from "@navikt/ds-react";
+import { BodyShort, Link, useClientLayoutEffect } from "@navikt/ds-react";
 import cl from "clsx";
 import throttle from "lodash/throttle";
 import * as React from "react";
@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 
 export function TableOfContentsv2({
   changedState,
-  hideToc = true,
+
   aksel = false,
 }: {
   changedState: any;
-  hideToc?: boolean;
+
   aksel?: boolean;
 }) {
   const [toc, setToc] = useState<
@@ -21,7 +21,7 @@ export function TableOfContentsv2({
   const [activeId, setActiveId] = useState(null);
   const [activeSubId, setActiveSubId] = useState(null);
 
-  useEffect(() => {
+  useClientLayoutEffect(() => {
     const time = setTimeout(() => {
       const main = document.getElementsByTagName("main")?.[0];
       const tags = main?.getElementsByTagName("h2");
@@ -126,24 +126,27 @@ export function TableOfContentsv2({
     element && element?.scrollIntoView();
   };
 
-  const renderToc = !(toc.length < 2) && !hideToc;
+  const renderToc = toc.length !== 0;
 
   return (
     <aside
       className={cl(
-        "toc-ignore sticky top-20 z-[1] order-1 my-0 ml-6 mb-16 mr-auto h-full w-full max-w-[160px] flex-col items-start sm:-mr-6 md:-mr-10",
+        "toc-ignore sticky top-20 z-[1] order-1 my-0 mb-16 ml-6 mr-auto h-full w-full max-w-[160px] flex-col items-start sm:-mr-6 md:-mr-10",
+        "invisible xl:flex ",
         {
-          hidden: !renderToc,
-          "hidden xl:flex": renderToc,
+          invisible: !renderToc,
+          "xl:visible": renderToc,
         }
       )}
     >
-      <BodyShort
-        id="toc-heading"
-        className="text-deepblue-800 mb-2 font-semibold"
-      >
-        Innhold på siden
-      </BodyShort>
+      {toc.length > 0 && (
+        <BodyShort
+          id="toc-heading"
+          className="text-deepblue-800 animate-fadeIn mb-2 font-semibold "
+        >
+          Innhold på siden
+        </BodyShort>
+      )}
 
       <nav
         aria-labelledby="toc-heading"
@@ -157,9 +160,8 @@ export function TableOfContentsv2({
                 <BodyShort
                   as="li"
                   size="small"
-                  className={cl("relative py-1", {
+                  className={cl("animate-fadeIn relative py-1 ", {
                     "font-semibold": link.id === activeId,
-                    "": link.id !== activeId,
                   })}
                 >
                   <Link

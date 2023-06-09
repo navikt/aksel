@@ -75,7 +75,7 @@ export const WithSidebar = ({
     <>
       <Header />
       <div className="bg-bg-default">
-        <div className="mx-auto mt-6 mb-24 flex w-full max-w-screen-2xl gap-6">
+        <div className="mx-auto mb-24 mt-6 flex w-full max-w-screen-2xl gap-6">
           <Sidebar kategori={pageType.type} links={sidebar} />
           <div className="relative w-full">
             <main
@@ -149,17 +149,14 @@ export const WithSidebar = ({
                   </div>
                 )}
                 {variant === "landingPage" && (
-                  <div className="pointer-events-none absolute top-0 right-0 hidden sm:block">
+                  <div className="pointer-events-none absolute right-0 top-0 hidden sm:block">
                     <HeaderCube className="text-deepblue-300 z-0 max-h-full" />
                   </div>
                 )}
               </div>
               <div className={cl("sm:px-6 md:px-10", { flex: withToc })}>
                 {withToc && (
-                  <TableOfContentsv2
-                    changedState={pageProps["content"]}
-                    hideToc={false}
-                  />
+                  <TableOfContentsv2 changedState={pageProps["content"]} />
                 )}
                 <div className="w-full">
                   {children}

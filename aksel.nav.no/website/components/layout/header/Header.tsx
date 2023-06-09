@@ -59,7 +59,7 @@ export const Header = ({
             "mx-auto flex h-full max-w-screen-2xl items-center pr-4 lg:pr-6"
           )}
         >
-          <div className="flex h-11 items-center pr-4 pl-4 sm:pr-6 sm:pl-4">
+          <div className="flex h-11 items-center pl-4 pr-4 sm:pl-4 sm:pr-6">
             <Link
               href="/"
               passHref

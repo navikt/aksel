@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "next | pino-pretty",
     "build:old": "next build",
-    "build": "next build && yarn cp:assets",
+    "build": "next build && yarn create-searchindex && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && node server.js",
     "cp:assets": "cross-env cp -R public .next/standalone/aksel.nav.no/website/ && cross-env cp -R .next/static .next/standalone/aksel.nav.no/website/.next/static",
+    "create-searchindex": "ts-node --project tsconfig.json ./scripts/create-index",
     "e2e": "yarn build && NEXT_PUBLIC_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "e2e:full": "yarn build && ts-node ./e2e/genUrls.ts && NEXT_PUBLIC_TEST=true FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "e2e:ci": "NEXT_PUBLIC_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
@@ -26,6 +27,7 @@
     "watch:tw": "yarn tailwindcss -i ./styles/index.css -o ./dist/tw.css --watch"
   },
   "dependencies": {
+    "@amplitude/analytics-browser": "^1.10.8",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^6.1.2",
     "@sanity/code-input": "4.1.1",
@@ -37,7 +39,6 @@
     "@sanity/ui": "^1.5.0",
     "@sanity/vision": "3.12.0",
     "@svgr/webpack": "^5.5.0",
-    "amplitude-js": "^8.21.5",
     "boring-avatars": "1.7.0",
     "clsx": "^1.2.1",
     "codesandbox": "^2.2.3",

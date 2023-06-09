@@ -1,7 +1,7 @@
 import { Label } from "@navikt/ds-react";
 import { GroupedHitsT, SearchHitT, searchOptions } from "@/types";
-import { Hit, IconHit, IconPageHit } from "./Hit";
-import React from "react";
+import { Hit } from "./Hit";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 export function Group({
   groups,
@@ -55,6 +55,25 @@ export function GroupComponent({
   startIndex: number;
   logSuccess: (index: number, url: string) => void;
 }) {
+  const [intersected, setIntersected] = useState(false);
+  const item = useRef(null);
+
+  const split = useMemo(() => {
+    if (hits.length <= 5) {
+      return { initial: hits, lazy: null };
+    }
+
+    return { initial: hits.slice(0, 4), lazy: hits.slice(4 + 1) };
+  }, [hits]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      entry.isIntersecting && setIntersected(entry.isIntersecting);
+    });
+    item.current && observer.observe(item.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div>
       <div className="z-10 mt-4 rounded bg-teal-100 p-2">
@@ -63,46 +82,27 @@ export function GroupComponent({
         </Label>
       </div>
       <ul className="mt-2">
-        {hits.map((x, xi) => {
-          switch (x.item._type) {
-            case "icon":
-              return (
-                <React.Fragment key={x.item.name + xi}>
-                  <IconHit
-                    key={x.item.name}
-                    hit={x}
-                    query={query}
-                    index={startIndex + xi}
-                    logSuccess={logSuccess}
-                  />
-                </React.Fragment>
-              );
-            case "icon_page":
-              return (
-                <React.Fragment key={x.item.heading + xi}>
-                  <IconPageHit
-                    key={x.item.heading}
-                    hit={x}
-                    query={query}
-                    index={startIndex + xi}
-                    logSuccess={logSuccess}
-                  />
-                </React.Fragment>
-              );
-            default:
-              return (
-                <React.Fragment key={x.item._id}>
-                  <Hit
-                    key={x.item._id}
-                    hit={x}
-                    query={query}
-                    index={startIndex + xi}
-                    logSuccess={logSuccess}
-                  />
-                </React.Fragment>
-              );
-          }
-        })}
+        {split.initial.map((x, xi) => (
+          <Hit
+            key={xi}
+            hit={x}
+            query={query}
+            index={startIndex + xi}
+            logSuccess={logSuccess}
+            ref={xi === split.initial.length - 1 ? item : null}
+          />
+        ))}
+        {split.lazy &&
+          intersected &&
+          split.lazy.map((x, xi) => (
+            <Hit
+              key={xi}
+              hit={x}
+              query={query}
+              index={startIndex + xi}
+              logSuccess={logSuccess}
+            />
+          ))}
       </ul>
     </div>
   );
