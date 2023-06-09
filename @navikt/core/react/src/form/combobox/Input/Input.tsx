@@ -42,6 +42,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       filteredOptionsIndex,
       moveFocusUp,
       moveFocusDown,
+      ariaDescribedBy,
     } = useFilteredOptionsContext();
 
     const handleKeyUp = (e) => {
@@ -123,6 +124,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         autoComplete="off"
         aria-autocomplete="list"
         aria-activedescendant={activeDecendantId}
+        aria-describedby={value !== "" ? ariaDescribedBy : undefined}
         className={cl(
           inputClassName,
           "navds-combobox__input",

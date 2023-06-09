@@ -25,6 +25,7 @@ const getMatchingValuesFromList = (value, list) =>
 
 type FilteredOptionsContextType = {
   activeDecendantId?: string;
+  ariaDescribedBy?: string;
   filteredOptionsRef: React.RefObject<HTMLUListElement>;
   filteredOptionsIndex: number | null;
   setFilteredOptionsIndex: (index: number) => void;
@@ -53,6 +54,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setSearchTerm,
     shouldAutocomplete,
   } = useInputContext();
+  const [ariaDescribedBy, setAriaDescribedBy] = useState<string>();
 
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState<
     number | null
@@ -116,13 +118,24 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   useEffect(() => {
     if (value) {
       toggleIsListOpen(true);
-      if (!shouldAutocomplete) {
-        setFilteredOptionsIndex(getMinimumIndex());
+      if (shouldAutocomplete) {
+        //setFilteredOptionsIndex(getMinimumIndex());
+        setAriaDescribedBy(
+          `${id}-option-${filteredOptions[0].replace(" ", "-")}`
+        );
       }
     } else {
       toggleIsListOpen(false);
+      setAriaDescribedBy(undefined);
     }
-  }, [getMinimumIndex, value, shouldAutocomplete, toggleIsListOpen]);
+  }, [
+    getMinimumIndex,
+    value,
+    shouldAutocomplete,
+    toggleIsListOpen,
+    filteredOptions,
+    id,
+  ]);
 
   const currentOption = useMemo(() => {
     if (filteredOptionsIndex == null) {
@@ -206,6 +219,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     resetFilteredOptionsIndex,
     moveFocusUp,
     moveFocusDown,
+    ariaDescribedBy,
   };
 
   return (

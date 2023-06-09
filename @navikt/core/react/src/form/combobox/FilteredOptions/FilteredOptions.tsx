@@ -78,7 +78,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
               "navds-combobox__list-item--selected":
                 selectedOptions.includes(o),
             })}
-            id={`${id}-option-${o}`}
+            id={`${id}-option-${o.replace(" ", "-")}`}
             key={o}
             tabIndex={-1}
             onClick={(e) => {
