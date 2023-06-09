@@ -9,7 +9,7 @@ import { getColorString, getGlobalReference, sanitizeName } from "../utilities";
 export const SemanticView = ({ cat }: { cat: string }) => {
   const colors = docs[cat];
 
-  if (cat === "semantic-text") {
+  if (cat.startsWith("semantic-text")) {
     return (
       <Grid>
         {colors.map((x) => {
@@ -55,7 +55,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       </Grid>
     );
   }
-  if (cat === "semantic-icon") {
+  if (cat.startsWith("semantic-icon")) {
     return (
       <Grid>
         {colors.map((x) => {
@@ -105,7 +105,10 @@ export const SemanticView = ({ cat }: { cat: string }) => {
     );
   }
 
-  if (cat === "semantic-border" || cat === "semantic-data-border") {
+  if (
+    cat.startsWith("semantic-border") ||
+    cat.startsWith("semantic-data-border")
+  ) {
     return (
       <Grid>
         {colors.map((x) => {
