@@ -1,3 +1,4 @@
+/* stylelint-disable aksel/design-token-no-global-override */
 .modalOverlay {
   z-index: var(--a-z-index-modal);
   @apply bg-surface-backdrop fixed inset-0 grid place-items-center lg:hidden;
@@ -11,4 +12,18 @@
 .akselTertiaryButton {
   --a-text-action: var(--a-deepblue-800);
   --a-text-action-on-action-subtle: var(--a-deepblue-800);
+}
+
+.searchGrid {
+  grid-template-areas:
+    "input input"
+    "results results";
+}
+
+@media (min-width: 768px) {
+  .searchGrid {
+    grid-template-areas:
+      "empty input"
+      "filter results";
+  }
 }

@@ -18,7 +18,6 @@ import { Group, GroupComponent } from "./Group";
 import { useSearch } from "./useSearch";
 import { useShortcut } from "./useShortcut";
 import { useDebounce } from "./useDebounce";
-import searchStyles from "./search.module.css";
 import cl from "clsx";
 
 export const GlobalSearch = () => {
@@ -95,7 +94,7 @@ export const GlobalSearch = () => {
   };
 
   const ErrorMessage = () => (
-    <p className={searchStyles.searchResults} aria-live="assertive">
+    <p className="[grid-area:results]" aria-live="assertive">
       Noe gikk galt! Last siden på nytt eller ta kontakt med Aksel.
     </p>
   );
@@ -128,8 +127,8 @@ export const GlobalSearch = () => {
       >
         <div
           className={cl(
-            "relative mx-auto max-w-4xl gap-4 gap-x-8 py-24",
-            searchStyles.searchGrid
+            "relative mx-auto grid max-w-4xl grid-cols-[12rem_auto] gap-4 gap-x-8 py-24",
+            styles.searchGrid
           )}
         >
           <Button
@@ -145,7 +144,7 @@ export const GlobalSearch = () => {
 
           {isValidating && (
             <>
-              <div className={cl("mt-16", searchStyles.searchFilter)}>
+              <div className="mt-16 hidden [grid-area:filter] md:block">
                 <div className="grid gap-4">
                   {Object.keys(searchOptions).map((x) => (
                     <span key={x} className="flex items-center gap-4">
@@ -159,7 +158,7 @@ export const GlobalSearch = () => {
                   ))}
                 </div>
               </div>
-              <div className={cl("w-full", searchStyles.searchInput)}>
+              <div className="w-full [grid-area:input]">
                 <div className="grid gap-2">
                   <Skeleton width="10rem" variant="text" />
                   <Skeleton height="3rem" variant="rounded" />
@@ -170,7 +169,7 @@ export const GlobalSearch = () => {
 
           {!isValidating && !error && (
             <>
-              <div className={cl("mt-8", searchStyles.searchFilter)}>
+              <div className="mt-8 hidden [grid-area:filter] md:block">
                 <CheckboxGroup
                   legend="Filter"
                   onChange={(v) => {
@@ -200,7 +199,7 @@ export const GlobalSearch = () => {
                     ))}
                 </CheckboxGroup>
               </div>
-              <div className={cl("w-full", searchStyles.searchInput)}>
+              <div className="w-full [grid-area:input]">
                 <form role="search" onSubmit={(e) => e.preventDefault()}>
                   <Search
                     label={
@@ -234,10 +233,7 @@ export const GlobalSearch = () => {
                 </form>
               </div>
               <div
-                className={cl(
-                  "mt-8 w-full max-w-3xl",
-                  searchStyles.searchResults
-                )}
+                className="mt-8 w-full max-w-3xl [grid-area:results]"
                 role={query && deboucedQuery === query ? "status" : undefined}
               >
                 {results && (
