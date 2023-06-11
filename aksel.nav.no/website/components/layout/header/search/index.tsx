@@ -15,7 +15,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import styles from "../header.module.css";
 import { Group, GroupComponent } from "./Group";
-import { useResults } from "./useResults";
+import { useSearch } from "./useSearch";
 import { useShortcut } from "./useShortcut";
 
 export const GlobalSearch = () => {
@@ -28,7 +28,7 @@ export const GlobalSearch = () => {
   const router = useRouter();
   useShortcut(open, setOpen, inputRef);
 
-  const { results, update, reset, error, isValidating } = useResults();
+  const { results, update, reset, error, isValidating } = useSearch();
 
   const deboucedQuery = useDebounce(query);
 
@@ -41,13 +41,7 @@ export const GlobalSearch = () => {
 
   const handleSearchStart = (value: string) => {
     setQuery(value);
-
-    if (value === "") {
-      reset();
-      return;
-    }
-    /* updateResults(value); */
-    update(value, activeTags);
+    value === "" ? reset() : update(value, activeTags);
   };
 
   const handleClose = useCallback(() => {

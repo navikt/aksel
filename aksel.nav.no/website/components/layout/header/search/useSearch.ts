@@ -6,7 +6,7 @@ import { formatResults } from "./format-result";
 import { fuseSearch } from "./fuse-search";
 import { createSearchResult } from "./group-results";
 
-export const useResults = () => {
+export const useSearch = () => {
   const [fuseResults, setFuseResults] = useState<SearchResultsT>(null);
 
   const { data, error, isValidating } = useSWRImmutable(
