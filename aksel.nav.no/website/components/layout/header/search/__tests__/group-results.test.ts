@@ -1,5 +1,5 @@
 import { SearchResultsT } from "@/types";
-import { createSearchResult } from "../group-results";
+import { createSearchResult } from "../utils";
 
 describe("createSearchResult", () => {
   let result;

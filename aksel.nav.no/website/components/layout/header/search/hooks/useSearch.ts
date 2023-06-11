@@ -2,9 +2,7 @@ import { allArticleDocuments } from "@/sanity/config";
 import { SearchResultsT } from "@/types";
 import { useCallback, useState } from "react";
 import useSWRImmutable from "swr/immutable";
-import { formatResults } from "./format-result";
-import { fuseSearch } from "./fuse-search";
-import { createSearchResult } from "./group-results";
+import { formatResults, fuseSearch, createSearchResult } from "../utils";
 
 export const useSearch = () => {
   const [fuseResults, setFuseResults] = useState<SearchResultsT>(null);

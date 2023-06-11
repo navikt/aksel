@@ -15,9 +15,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import styles from "../header.module.css";
 import { Group, GroupComponent } from "./Group";
-import { useSearch } from "./useSearch";
-import { useShortcut } from "./useShortcut";
-import { useDebounce } from "./useDebounce";
+import { useSearch, useDebounce, useShortcut } from "./hooks";
 import cl from "clsx";
 
 export const GlobalSearch = () => {
