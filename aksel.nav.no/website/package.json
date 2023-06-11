@@ -7,10 +7,10 @@
   "scripts": {
     "dev": "next | pino-pretty",
     "build:old": "next build",
-    "build": "next build && yarn create-searchindex && yarn cp:assets",
+    "build": "next build && yarn update:searchindex && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && node server.js",
     "cp:assets": "cross-env cp -R public .next/standalone/aksel.nav.no/website/ && cross-env cp -R .next/static .next/standalone/aksel.nav.no/website/.next/static",
-    "create-searchindex": "ts-node --project tsconfig.json ./scripts/create-index",
+    "update:searchindex": "ts-node --project tsconfig.json ./scripts/create-index",
     "e2e": "yarn build && NEXT_PUBLIC_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "e2e:full": "yarn build && ts-node ./e2e/genUrls.ts && NEXT_PUBLIC_TEST=true FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "e2e:ci": "NEXT_PUBLIC_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",

@@ -89,12 +89,15 @@ function highlightStr(str: string, query: string) {
 const highlightedHeadings = ["eksempler", "props", "tokens"];
 
 function HeadingLinks({ hit }: { hit: SearchHitT }) {
+  const Description = () => (
+    <span className="font-regular text-text-subtle text-lg" aria-hidden>
+      {hit.description}
+    </span>
+  );
   if (hit.item._type === "komponent_artikkel") {
     return (
       <>
-        <span className="font-regular text-text-subtle text-lg" aria-hidden>
-          {hit.description}
-        </span>
+        <Description />
         <Chips className="mt-3" size="small">
           {hit.item.lvl2
             .filter(
@@ -114,9 +117,5 @@ function HeadingLinks({ hit }: { hit: SearchHitT }) {
     );
   }
 
-  return (
-    <span className="font-regular text-text-subtle text-lg" aria-hidden>
-      {hit.description}
-    </span>
-  );
+  return <Description />;
 }

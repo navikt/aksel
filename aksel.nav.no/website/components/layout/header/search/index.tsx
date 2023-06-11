@@ -1,5 +1,4 @@
-import { allArticleDocuments } from "@/sanity/config";
-import { SearchResultsT, searchOptions } from "@/types";
+import { searchOptions } from "@/types";
 import { logSearch } from "@/utils";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import {
@@ -16,20 +15,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import styles from "../header.module.css";
 import { Group, GroupComponent } from "./Group";
-import { formatResults } from "./format-result";
-import { fuseSearch } from "./fuse-search";
-import { createSearchResult } from "./group-results";
-import useSWRImmutable from "swr/immutable";
+import { useResults } from "./useResults";
+import { useShortcut } from "./useShortcut";
 
-/**
- * https://www.figma.com/file/71Sm1h6VV23lbBbQ3CJJ9t/Aksel-v2?node-id=1861%3A186079&t=ARKgZcA6B7ysmG3V-0
- * TODO:
- * - Oppdatere url-query basert på query + filter: ?search=abcd&filter=god_praksis
- * - Oppdatere søkefelt og filter basert på url.
-
- */
 export const GlobalSearch = () => {
-  const [fuseResults, setFuseResults] = useState<SearchResultsT>(null);
   const [open, setOpen] = useState(false);
   const [activeTags, setTags] = useState<Array<keyof typeof searchOptions>>([]);
   const [os, setOs] = useState<"mac" | "windows">("windows");
@@ -37,13 +26,11 @@ export const GlobalSearch = () => {
 
   const [query, setQuery] = useState("");
   const router = useRouter();
+  useShortcut(open, setOpen, inputRef);
+
+  const { results, update, reset, error, isValidating } = useResults();
 
   const deboucedQuery = useDebounce(query);
-
-  const { data, error, isValidating } = useSWRImmutable(
-    `/searchindex.json`,
-    (query) => fetch(query).then((res) => res.json())
-  );
 
   useEffect(() => {
     ReactModal.setAppElement("#__next");
@@ -52,43 +39,23 @@ export const GlobalSearch = () => {
       : setOs("windows");
   }, []);
 
-  const updateResults = useCallback(
-    (value: string, tags?: string[]) => {
-      if (!value) {
-        return;
-      }
-      const rawResults = fuseSearch(data, value);
-
-      const tagVersion = tags ?? activeTags;
-      const formatedResults = formatResults(
-        rawResults.filter((x) =>
-          (tagVersion.length > 0 ? tagVersion : allArticleDocuments).includes(
-            x.item._type
-          )
-        )
-      );
-
-      setFuseResults(createSearchResult(formatedResults, rawResults));
-    },
-    [activeTags, data]
-  );
-
   const handleSearchStart = (value: string) => {
     setQuery(value);
 
     if (value === "") {
-      setFuseResults(null);
+      reset();
       return;
     }
-    updateResults(value);
+    /* updateResults(value); */
+    update(value, activeTags);
   };
 
   const handleClose = useCallback(() => {
     setOpen(false);
-    setFuseResults(null);
+    reset();
     setQuery("");
     setTags([]);
-  }, []);
+  }, [reset]);
 
   const logSuccessSearchAttempt = useCallback(
     (index: number, url: string) => {
@@ -99,34 +66,13 @@ export const GlobalSearch = () => {
         filter: activeTags,
         index,
         url,
-        accuracy: (100 - index / fuseResults?.totalHits).toFixed(0),
-        topResult: index <= fuseResults?.topResults?.length,
+        accuracy: (100 - index / results?.totalHits).toFixed(0),
+        topResult: index <= results?.topResults?.length,
       };
       logSearch(data);
     },
-    [router.asPath, query, activeTags, fuseResults]
+    [router.asPath, query, activeTags, results]
   );
-
-  useEffect(() => {
-    const listener = (event: KeyboardEvent) => {
-      if (
-        event.key === "b" &&
-        (event.metaKey || event.ctrlKey) &&
-        !event.shiftKey
-      ) {
-        event.preventDefault();
-        if (open) {
-          inputRef.current?.focus();
-        } else {
-          setOpen(true);
-        }
-      }
-    };
-
-    document.addEventListener("keydown", listener);
-
-    return () => document.removeEventListener("keydown", listener);
-  }, [open]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -144,12 +90,18 @@ export const GlobalSearch = () => {
   }, [handleClose, router.events]);
 
   const noHits = (key: string) => {
-    return !Object.hasOwn(fuseResults?.groupedHits ?? {}, key);
+    return !Object.hasOwn(results?.groupedHits ?? {}, key);
   };
 
   const noHitsAndQuery = (key: string) => {
     return query.length > 0 && !activeTags.find((x) => x === key);
   };
+
+  const ErrorMessage = () => (
+    <p className="search-grid-results" aria-live="assertive">
+      Noe gikk galt! Last siden på nytt eller ta kontakt med Aksel.
+    </p>
+  );
 
   return (
     <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
@@ -187,11 +139,7 @@ export const GlobalSearch = () => {
           >
             Lukk søk
           </Button>
-          {error && (
-            <p className="search-grid-results" aria-live="assertive">
-              Noe gikk galt! Last siden på nytt eller ta kontakt med Aksel.
-            </p>
-          )}
+          {error && <ErrorMessage />}
 
           {isValidating && (
             <>
@@ -225,7 +173,7 @@ export const GlobalSearch = () => {
                   legend="Filter"
                   onChange={(v) => {
                     setTags(v);
-                    updateResults(query, v);
+                    update(query, v);
                   }}
                 >
                   {Object.entries(searchOptions)
@@ -235,15 +183,15 @@ export const GlobalSearch = () => {
                         disabled={
                           noHitsAndQuery(key) &&
                           noHits(key) &&
-                          fuseResults?.hits[key] === 0
+                          results?.hits[key] === 0
                         }
                         key={key}
                         value={key}
                         className="whitespace-nowrap"
                       >
                         {`${val.display} ${
-                          fuseResults?.hits[key] > 0
-                            ? `(${fuseResults?.hits[key]})`
+                          results?.hits[key] > 0
+                            ? `(${results?.hits[key]})`
                             : ""
                         }`}
                       </Checkbox>
@@ -270,7 +218,7 @@ export const GlobalSearch = () => {
                     onChange={(v) => handleSearchStart(v)}
                     onClear={() => {
                       setQuery("");
-                      setFuseResults(null);
+                      reset();
                     }}
                     ref={inputRef}
                     autoComplete="off"
@@ -287,10 +235,10 @@ export const GlobalSearch = () => {
                 className="search-grid-results mt-8 w-full max-w-3xl"
                 role={query && deboucedQuery === query ? "status" : undefined}
               >
-                {fuseResults && (
+                {results && (
                   <div id="aksel-search-results" aria-label="Søkeresultater">
                     <p className="text-xl font-semibold">
-                      {`${fuseResults?.totalHits} treff på "${query}"${
+                      {`${results?.totalHits} treff på "${query}"${
                         activeTags.length > 0
                           ? ` i ${activeTags
                               .map((x) =>
@@ -301,7 +249,7 @@ export const GlobalSearch = () => {
                       }`}
                     </p>
                     <div className="mt-4 pb-16 md:block">
-                      {fuseResults?.topResults.length > 0 && (
+                      {results?.topResults.length > 0 && (
                         <GroupComponent
                           startIndex={1}
                           heading={
@@ -311,18 +259,18 @@ export const GlobalSearch = () => {
                             </span>
                           }
                           logSuccess={logSuccessSearchAttempt}
-                          hits={fuseResults?.topResults}
+                          hits={results?.topResults}
                           query={query}
                         />
                       )}
                       <Group
                         startIndex={
-                          fuseResults.topResults.length > 0
-                            ? fuseResults.topResults.length + 1
+                          results.topResults.length > 0
+                            ? results.topResults.length + 1
                             : 1
                         }
                         logSuccess={logSuccessSearchAttempt}
-                        groups={fuseResults.groupedHits}
+                        groups={results.groupedHits}
                         query={query}
                       />
                     </div>
