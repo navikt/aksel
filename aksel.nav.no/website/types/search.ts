@@ -66,7 +66,6 @@ export type SearchLogT = {
   query: string;
   filter: string[];
   searchedFromUrl: string;
-
   index?: number;
   accuracy?: string;
   topResult?: boolean;

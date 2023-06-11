@@ -2,20 +2,21 @@ import { urlFor } from "@/sanity/interface";
 import { SearchHitT } from "@/types";
 import { Chips } from "@navikt/ds-react";
 import cl from "classnames";
+import { SearchContext, SearchResultContext } from "./providers";
 import { StatusTag } from "components/website-modules/StatusTag";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
-import { forwardRef } from "react";
+import { forwardRef, useContext } from "react";
 
 export const Hit = forwardRef<
   HTMLLIElement,
   {
     hit: SearchHitT;
-    query: string;
     index: number;
-    logSuccess: (index: number, url: string) => void;
   }
->(({ hit, query, index, logSuccess }, ref) => {
+>(({ hit, index }, ref) => {
+  const { query } = useContext(SearchContext);
+  const { logSuccess } = useContext(SearchResultContext);
   return (
     <li
       ref={ref}

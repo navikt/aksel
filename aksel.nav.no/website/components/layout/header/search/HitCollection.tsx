@@ -3,16 +3,12 @@ import { GroupedHitsT, SearchHitT, searchOptions } from "@/types";
 import { Hit } from "./Hit";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-export function Group({
+export function CollectionMapper({
   groups,
-  query,
   startIndex,
-  logSuccess,
 }: {
   groups: GroupedHitsT;
-  query: string;
   startIndex: number;
-  logSuccess: (index: number, url: string) => void;
 }) {
   if (Object.keys(groups).length === 0) {
     return null;
@@ -28,13 +24,11 @@ export function Group({
             prev.reduce((prev, cur) => prev + cur[1].length, 0) + startIndex;
 
           return (
-            <GroupComponent
-              logSuccess={logSuccess}
+            <Collection
               startIndex={total}
               key={key}
               heading={`${searchOptions[key].display} (${val.length})`}
               hits={val}
-              query={query}
             />
           );
         })}
@@ -42,18 +36,15 @@ export function Group({
   );
 }
 
-export function GroupComponent({
+export function Collection({
   heading,
   hits,
-  query,
   startIndex,
-  logSuccess,
 }: {
   heading: React.ReactNode;
   hits: SearchHitT[];
-  query: string;
+
   startIndex: number;
-  logSuccess: (index: number, url: string) => void;
 }) {
   const [intersected, setIntersected] = useState(false);
   const item = useRef(null);
@@ -86,22 +77,14 @@ export function GroupComponent({
           <Hit
             key={xi}
             hit={x}
-            query={query}
             index={startIndex + xi}
-            logSuccess={logSuccess}
             ref={xi === split.initial.length - 1 ? item : null}
           />
         ))}
         {split.lazy &&
           intersected &&
           split.lazy.map((x, xi) => (
-            <Hit
-              key={xi}
-              hit={x}
-              query={query}
-              index={startIndex + xi}
-              logSuccess={logSuccess}
-            />
+            <Hit key={xi} hit={x} index={startIndex + xi} />
           ))}
       </ul>
     </div>

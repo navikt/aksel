@@ -1,32 +1,12 @@
 import { searchOptions } from "@/types";
-import { logSearch } from "@/utils";
 import { ChangeLogIconOutline } from "components/assets";
-import { useRouter } from "next/router";
-import { useCallback, useContext } from "react";
-import { Group, GroupComponent } from "./Group";
+import { useContext } from "react";
+import { Collection, CollectionMapper } from "./HitCollection";
 import { SearchContext, SearchResultContext } from "./providers";
 
 export const Results = () => {
   const { tags, query, deboucedQuery } = useContext(SearchContext);
   const { results, isValidating, error } = useContext(SearchResultContext);
-  const router = useRouter();
-
-  const logSuccessSearchAttempt = useCallback(
-    (index: number, url: string) => {
-      const data = {
-        type: "suksess",
-        searchedFromUrl: router.asPath,
-        query,
-        filter: tags,
-        index,
-        url,
-        accuracy: (100 - index / results?.totalHits).toFixed(0),
-        topResult: index <= results?.topResults?.length,
-      };
-      logSearch(data);
-    },
-    [router.asPath, query, tags, results]
-  );
 
   if (isValidating || error) {
     return null;
@@ -50,7 +30,7 @@ export const Results = () => {
           </p>
           <div className="mt-4 pb-16 md:block">
             {results?.topResults.length > 0 && (
-              <GroupComponent
+              <Collection
                 startIndex={1}
                 heading={
                   <span className="flex items-center gap-2">
@@ -58,20 +38,16 @@ export const Results = () => {
                     <ChangeLogIconOutline className="shrink-0" />
                   </span>
                 }
-                logSuccess={logSuccessSearchAttempt}
                 hits={results?.topResults}
-                query={query}
               />
             )}
-            <Group
+            <CollectionMapper
               startIndex={
                 results.topResults.length > 0
                   ? results.topResults.length + 1
                   : 1
               }
-              logSuccess={logSuccessSearchAttempt}
               groups={results.groupedHits}
-              query={query}
             />
           </div>
         </div>
