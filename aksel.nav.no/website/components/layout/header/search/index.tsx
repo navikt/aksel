@@ -17,6 +17,9 @@ import styles from "../header.module.css";
 import { Group, GroupComponent } from "./Group";
 import { useSearch } from "./useSearch";
 import { useShortcut } from "./useShortcut";
+import { useDebounce } from "./useDebounce";
+import searchStyles from "./search.module.css";
+import cl from "clsx";
 
 export const GlobalSearch = () => {
   const [open, setOpen] = useState(false);
@@ -92,7 +95,7 @@ export const GlobalSearch = () => {
   };
 
   const ErrorMessage = () => (
-    <p className="search-grid-results" aria-live="assertive">
+    <p className={searchStyles.searchResults} aria-live="assertive">
       Noe gikk galt! Last siden på nytt eller ta kontakt med Aksel.
     </p>
   );
@@ -123,7 +126,12 @@ export const GlobalSearch = () => {
         className="bg-surface-default absolute inset-0 block w-screen overflow-x-auto px-4 md:px-6"
         overlayClassName={styles.modalOverlaySearch}
       >
-        <div className="search-grid-wrapper relative mx-auto max-w-4xl gap-4 gap-x-8 py-24">
+        <div
+          className={cl(
+            "relative mx-auto max-w-4xl gap-4 gap-x-8 py-24",
+            searchStyles.searchGrid
+          )}
+        >
           <Button
             className="group absolute right-4 top-8"
             variant="tertiary-neutral"
@@ -137,7 +145,7 @@ export const GlobalSearch = () => {
 
           {isValidating && (
             <>
-              <div className="search-grid-filter mt-16">
+              <div className={cl("mt-16", searchStyles.searchFilter)}>
                 <div className="grid gap-4">
                   {Object.keys(searchOptions).map((x) => (
                     <span key={x} className="flex items-center gap-4">
@@ -151,7 +159,7 @@ export const GlobalSearch = () => {
                   ))}
                 </div>
               </div>
-              <div className="search-grid-input w-full ">
+              <div className={cl("w-full", searchStyles.searchInput)}>
                 <div className="grid gap-2">
                   <Skeleton width="10rem" variant="text" />
                   <Skeleton height="3rem" variant="rounded" />
@@ -162,7 +170,7 @@ export const GlobalSearch = () => {
 
           {!isValidating && !error && (
             <>
-              <div className="search-grid-filter mt-8">
+              <div className={cl("mt-8", searchStyles.searchFilter)}>
                 <CheckboxGroup
                   legend="Filter"
                   onChange={(v) => {
@@ -192,7 +200,7 @@ export const GlobalSearch = () => {
                     ))}
                 </CheckboxGroup>
               </div>
-              <div className="search-grid-input w-full">
+              <div className={cl("w-full", searchStyles.searchInput)}>
                 <form role="search" onSubmit={(e) => e.preventDefault()}>
                   <Search
                     label={
@@ -226,7 +234,10 @@ export const GlobalSearch = () => {
                 </form>
               </div>
               <div
-                className="search-grid-results mt-8 w-full max-w-3xl"
+                className={cl(
+                  "mt-8 w-full max-w-3xl",
+                  searchStyles.searchResults
+                )}
                 role={query && deboucedQuery === query ? "status" : undefined}
               >
                 {results && (
@@ -274,55 +285,7 @@ export const GlobalSearch = () => {
             </>
           )}
         </div>
-        <style jsx>{`
-          .search-grid-wrapper {
-            display: grid;
-            grid-template-columns: 12rem auto;
-            grid-template-areas:
-              "input input"
-              "results results";
-          }
-
-          .search-grid-wrapper .search-grid-filter {
-            display: none;
-          }
-
-          .search-grid-wrapper .search-grid-input {
-            grid-area: input;
-          }
-
-          .search-grid-wrapper .search-grid-results {
-            grid-area: results;
-          }
-
-          @media (min-width: 768px) {
-            .search-grid-wrapper {
-              display: grid;
-              grid-template-columns: 12rem auto;
-              grid-template-areas:
-                "empty input"
-                "filter results";
-            }
-
-            .search-grid-wrapper .search-grid-filter {
-              display: block;
-              grid-area: filter;
-            }
-          }
-        `}</style>
       </ReactModal>
     </div>
   );
 };
-
-function useDebounce(value: any) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const timeOut = setTimeout(() => setDebouncedValue(value), 1000);
-
-    return () => clearTimeout(timeOut);
-  }, [value]);
-
-  return debouncedValue;
-}
