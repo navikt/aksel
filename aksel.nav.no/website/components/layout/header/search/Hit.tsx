@@ -1,7 +1,7 @@
 import { urlFor } from "@/sanity/interface";
 import { SearchHitT } from "@/types";
 import { Chips } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import { SearchContext, SearchResultContext } from "./providers";
 import { StatusTag } from "components/website-modules/StatusTag";
 import Image from "next/legacy/image";
