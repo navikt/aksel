@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 import fs from "fs";
 import { allArticleDocuments } from "../sanity/config";
 import { noCdnClient } from "../sanity/interface/client.server";
+import { omit } from "lodash";
+import { FuseItemT } from "../types";
 dotenv.config();
 
 main();
@@ -11,9 +13,14 @@ async function main() {
 }
 
 async function createIndex() {
-  const data = await noCdnClient(process.env.SANITY_PRIVATE_NO_DRAFTS)
+  const data: Partial<Omit<FuseItemT, "content">> &
+    { publishedAt: Date | null; content: any[] }[] = await noCdnClient(
+    process.env.SANITY_PRIVATE_NO_DRAFTS
+  )
     .fetch(
-      `*[_type in [${allArticleDocuments.map((x) => `"${x}"`)}]]{
+      `*[_type in [${allArticleDocuments.map(
+        (x) => `"${x}"`
+      )}]]| order(publishedAt desc){
     heading,
     "slug": slug.current,
     "tema": tema[]->title,
@@ -21,7 +28,8 @@ async function createIndex() {
     status,
     _type,
     "intro": pt::text(intro.body),
-    content
+    content,
+    publishedAt
   }`
     )
     .catch((err) => {
@@ -40,14 +48,31 @@ async function createIndex() {
   );
 }
 
-function sanitzeSanityData(data: any[]) {
-  return data.map((x) => ({
-    ...x,
-    lvl2: getHeadings(x?.content, "h2"),
-    lvl3: getHeadings(x?.content, "h3"),
-    lvl4: getHeadings(x?.content, "h4"),
-    content: toPlainText(x?.content),
-  }));
+function sanitzeSanityData(
+  data: Partial<Omit<FuseItemT, "content">> &
+    { publishedAt: Date | null; content: any[] }[]
+) {
+  return data
+    .sort((a, b) => {
+      if (!a.publishedAt && !b.publishedAt) {
+        return 0;
+      } else if (!a.publishedAt) {
+        return 1;
+      } else if (!b.publishedAt) {
+        return -1;
+      }
+
+      return (
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      );
+    })
+    .map((x) => ({
+      ...omit(x, ["publishedAt"]),
+      lvl2: getHeadings(x?.content, "h2"),
+      lvl3: getHeadings(x?.content, "h3"),
+      lvl4: getHeadings(x?.content, "h4"),
+      content: toPlainText(x?.content),
+    }));
 }
 
 function getHeadings(blocks: any[], block: "h2" | "h3" | "h4") {

@@ -30,6 +30,7 @@ interface PageItemT {
   slug: string;
   status?: { bilde: any; tag: string };
   tema?: string[];
+  content: string;
   lvl2?: { text: string; id: string }[];
   lvl3?: { text: string; id: string }[];
   lvl4?: { text: string; id: string }[];
