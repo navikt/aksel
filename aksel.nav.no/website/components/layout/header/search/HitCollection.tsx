@@ -69,13 +69,13 @@ export function Collection({
   return (
     <div>
       {heading && (
-        <div className="sticky top-0 z-10 rounded bg-teal-100 p-2">
-          <Label className="px-6 md:px-8" as="h3">
+        <div className="sticky top-0 z-10 rounded bg-teal-100/80 p-2 backdrop-blur-sm">
+          <Label className="px-2 md:px-8" as="h3">
             {heading}
           </Label>
         </div>
       )}
-      <ul className="mt-2 px-4 md:px-6">
+      <ul className="mt-2 px-0 md:px-6">
         {split.initial.map((x, xi) => (
           <Hit
             key={xi}

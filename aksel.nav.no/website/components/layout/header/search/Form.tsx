@@ -79,9 +79,10 @@ export const SearchForm = () => {
         />
       </div>
       {chipsToShow.length !== 0 && query && (
-        <Chips className="px-4 pb-2 md:px-6">
+        <Chips className="px-4 pb-2 md:px-10">
           {chipsToShow.map(([key, val]) => (
             <Chips.Toggle
+              key={key}
               variant="neutral"
               selected={tags.includes(key as keyof typeof searchOptions)}
               onClick={() => {
