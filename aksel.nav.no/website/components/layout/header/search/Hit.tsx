@@ -36,7 +36,7 @@ export const Hit = forwardRef<
         "border-border-subtle relative flex snap-start scroll-my-10  items-center justify-between gap-3 rounded border-b px-2 last-of-type:border-b-0 last-of-type:pb-2"
       )}
     >
-      <div className="w-full px-2 py-4">
+      <div className="w-full truncate px-2 py-4">
         <span
           className={cl({
             "flex flex-col gap-1": simple,
@@ -124,7 +124,10 @@ function HeadingLinks({
   hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
 }) {
   const Description = () => (
-    <span className="font-regular text-text-subtle text-lg" aria-hidden>
+    <span
+      className="font-regular text-text-subtle max-w-full text-lg"
+      aria-hidden
+    >
       {hit.description}
     </span>
   );
