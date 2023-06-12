@@ -55,7 +55,7 @@ export const Hit = forwardRef<
           {simple ? (
             <Tag
               type={hit.item._type}
-              size="small"
+              size="xsmall"
               text={hit.item.tema ? hit.item.tema[0] : undefined}
               inline
               aria-hidden
@@ -102,7 +102,7 @@ function highlightStr(str: string, query: string) {
           <span
             key={i}
             className={cl({
-              "text-text-default group-focus-visible:text-text-on-action bg-teal-200/80 group-focus-visible:bg-transparent":
+              "text-text-default group-focus-visible:text-text-on-action bg-teal-100 group-focus-visible:bg-transparent":
                 query
                   .split(" ")
                   .map((x) => x.toLowerCase())

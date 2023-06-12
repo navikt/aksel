@@ -1,7 +1,8 @@
-import { Label } from "@navikt/ds-react";
 import { GroupedHitsT, SearchHitT, searchOptions } from "@/types";
-import { Hit } from "./Hit";
+import { Heading } from "@navikt/ds-react";
+import { Tag } from "components/sanity-modules/frontpage-blocks/Tag";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Hit } from "./Hit";
 
 export function CollectionMapper({
   groups,
@@ -19,6 +20,7 @@ export function CollectionMapper({
       {Object.entries(groups)
         .sort((a, b) => searchOptions[a[0]].index - searchOptions[b[0]].index)
         .map(([key, val], index, arr) => {
+          console.log(`${searchOptions[key].display} (${val.length})`);
           const prev = arr.slice(0, index);
           const total =
             prev.reduce((prev, cur) => prev + cur[1].length, 0) + startIndex;
@@ -28,6 +30,7 @@ export function CollectionMapper({
               startIndex={total}
               key={key}
               heading={`${searchOptions[key].display} (${val.length})`}
+              tag={key}
               hits={val}
             />
           );
@@ -41,11 +44,13 @@ export function Collection({
   hits,
   startIndex,
   simple = false,
+  tag,
 }: {
   heading?: React.ReactNode;
   hits: SearchHitT[] | Omit<SearchHitT, "score" | "anchor">[];
   simple?: boolean;
   startIndex: number;
+  tag?: string;
 }) {
   const [intersected, setIntersected] = useState(false);
   const item = useRef(null);
@@ -68,12 +73,26 @@ export function Collection({
 
   return (
     <div>
-      {heading && (
-        <div className="sticky -top-[1px] z-10 bg-teal-100/95  p-2">
-          <Label className="px-2 md:px-8" as="h3">
-            {heading}
-          </Label>
-        </div>
+      {heading && tag && (
+        <h3 className="bg-surface-subtle sticky -top-[1px] z-10 p-2 px-4 md:px-10">
+          <Tag
+            hTag="span"
+            type={tag}
+            size="small"
+            inline
+            aria-hidden
+            count={hits.length}
+          />
+        </h3>
+      )}
+      {heading && !tag && (
+        <Heading
+          className="bg-surface-subtle sticky -top-[1px] z-10 p-2 px-4  md:px-10"
+          size="small"
+          level="3"
+        >
+          {heading}
+        </Heading>
       )}
       <ul className="mt-2 px-0 md:px-6">
         {split.initial.map((x, xi) => (

@@ -126,7 +126,7 @@ const Card = ({
           <Tag
             type={article._type}
             text={article.tema ? article.tema[0] : undefined}
-            size="small"
+            size="xsmall"
             beta={article.status?.tag === "beta"}
           />
         </div>

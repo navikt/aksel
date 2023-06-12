@@ -7,25 +7,35 @@ export const Tag = ({
   size = "medium",
   beta = false,
   inline = false,
+  hTag,
+  count,
   ...rest
 }: {
   type: string;
   text?: string;
-  size?: "medium" | "small";
+  size?: "medium" | "small" | "xsmall";
   beta?: boolean;
   inline?: boolean;
+  hTag?: string;
+  count?: number;
 }) => {
   const Comp = ({ ...props }: any) =>
-    size === "medium" ? (
-      <Heading {...props} as="div" size="medium" {...rest} />
+    size === "medium" || size === "small" ? (
+      <Heading {...rest} {...props} as={hTag ?? "div"} size={size}>
+        {props.children}
+        {`${count ? ` (${count})` : ""}`}
+      </Heading>
     ) : (
       <Label
         {...rest}
         {...props}
-        as="div"
+        as={hTag ?? "div"}
         size="small"
         className={cl(props?.className, !inline && "mb-2")}
-      />
+      >
+        {props.children}
+        {`${count ? ` (${count})` : ""}`}
+      </Label>
     );
 
   switch (type) {

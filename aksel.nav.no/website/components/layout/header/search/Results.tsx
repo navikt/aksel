@@ -40,7 +40,7 @@ export const Results = () => {
       )}
       {results && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
-          <Label as="p" className="px-4 pt-3 md:px-10">
+          <Label as="p" className="sr-only">
             {`${results?.totalHits} treff på "${query}"${
               tags.length > 0
                 ? ` i ${tags
@@ -49,7 +49,7 @@ export const Results = () => {
                 : ""
             }`}
           </Label>
-          <div className="mt-3 pb-4">
+          <div className="pb-4">
             {results?.topResults.length > 0 && (
               <Collection
                 startIndex={1}
