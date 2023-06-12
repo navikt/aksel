@@ -1,5 +1,5 @@
+import { allArticleDocuments } from "@/sanity/config";
 import { SearchHitT, SearchResultsT } from "@/types";
-import { logSearch } from "@/utils";
 import { useRouter } from "next/router";
 import {
   createContext,
@@ -11,7 +11,6 @@ import {
 import { useSearch } from "../hooks";
 import { formatRawResults } from "../utils";
 import { SearchContext } from "./SearchProvider";
-import { allArticleDocuments } from "@/sanity/config";
 
 type SearchResultContextType = {
   results: SearchResultsT;
@@ -20,7 +19,6 @@ type SearchResultContextType = {
   isValidating: boolean;
   reset: () => void;
   close: () => void;
-  logSuccess: (index: number, url: string, tag?: string) => void;
   mostResent: Omit<SearchHitT, "score" | "anchor">[];
 };
 
@@ -31,7 +29,6 @@ export const SearchResultContext = createContext<SearchResultContextType>({
   isValidating: false,
   reset: () => null,
   close: () => null,
-  logSuccess: () => null,
   mostResent: [],
 });
 
@@ -42,8 +39,7 @@ export const SearchResultProvider = ({
 }) => {
   const router = useRouter();
   const context = useSearch();
-  const { setOpen, query, setQuery, tags, setTags, deboucedQuery } =
-    useContext(SearchContext);
+  const { setOpen, setQuery, tags, setTags } = useContext(SearchContext);
 
   const mostResent: Omit<SearchHitT, "score" | "anchor">[] = useMemo(() => {
     if (!context.rawData) {
@@ -81,43 +77,9 @@ export const SearchResultProvider = ({
     };
   }, [handleClose, router.events]);
 
-  useEffect(() => {
-    logSearch({
-      type: "standard",
-      searchedFromUrl: router.asPath,
-      query: deboucedQuery,
-      filter: tags,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deboucedQuery]);
-
-  const logSuccess = useCallback(
-    (index: number, url: string, tag?: string) => {
-      const data = {
-        type: "suksess",
-        searchedFromUrl: router.asPath,
-        query,
-        filter: tags,
-        tag,
-        index,
-        url,
-        accuracy: (100 - index / context?.results?.totalHits).toFixed(0),
-        topResult: index <= context?.results?.topResults?.length,
-      };
-      logSearch(data);
-    },
-    [
-      router.asPath,
-      query,
-      tags,
-      context?.results?.totalHits,
-      context?.results?.topResults?.length,
-    ]
-  );
-
   return (
     <SearchResultContext.Provider
-      value={{ ...context, mostResent, close: handleClose, logSuccess }}
+      value={{ ...context, mostResent, close: handleClose }}
     >
       {children}
     </SearchResultContext.Provider>

@@ -1,15 +1,14 @@
 import { urlFor } from "@/sanity/interface";
 import { SearchHitT } from "@/types";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Chips } from "@navikt/ds-react";
 import cl from "clsx";
-import { SearchContext, SearchResultContext } from "./providers";
+import { Tag } from "components/sanity-modules/frontpage-blocks/Tag";
 import { StatusTag } from "components/website-modules/StatusTag";
 import Image from "next/legacy/image";
-import NextLink from "next/link";
+import { default as Link, default as NextLink } from "next/link";
 import { forwardRef, useContext } from "react";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
-import Link from "next/link";
-import { Tag } from "components/sanity-modules/frontpage-blocks/Tag";
+import { SearchContext, SearchLoggingContext } from "./providers";
 
 export const Hit = forwardRef<
   HTMLLIElement,
@@ -20,7 +19,7 @@ export const Hit = forwardRef<
   }
 >(({ hit, index, simple = false }, ref) => {
   const { query } = useContext(SearchContext);
-  const { logSuccess } = useContext(SearchResultContext);
+  const { logSuccess } = useContext(SearchLoggingContext);
 
   const getHref = () => {
     if ("anchor" in hit) {
@@ -125,7 +124,7 @@ function HeadingLinks({
   hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
   index: number;
 }) {
-  const { logSuccess } = useContext(SearchResultContext);
+  const { logSuccess } = useContext(SearchLoggingContext);
 
   const Description = () => (
     <span

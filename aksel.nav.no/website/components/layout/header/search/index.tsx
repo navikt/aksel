@@ -1,12 +1,18 @@
 import { Search } from "./Search";
-import { SearchProvider, SearchResultProvider } from "./providers";
+import {
+  SearchProvider,
+  SearchResultProvider,
+  SearchLoggingProvider,
+} from "./providers";
 
 export const GlobalSearch = () => {
   return (
     <SearchProvider>
-      <SearchResultProvider>
-        <Search />
-      </SearchResultProvider>
+      <SearchLoggingProvider>
+        <SearchResultProvider>
+          <Search />
+        </SearchResultProvider>
+      </SearchLoggingProvider>
     </SearchProvider>
   );
 };
