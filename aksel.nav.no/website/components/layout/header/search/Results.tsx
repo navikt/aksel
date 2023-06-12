@@ -14,7 +14,7 @@ export const Results = () => {
 
   return (
     <div
-      className="mt-8 w-full max-w-3xl [grid-area:results]"
+      className="mt-8 w-full max-w-3xl"
       role={query && deboucedQuery === query ? "status" : undefined}
     >
       {results && (

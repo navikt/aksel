@@ -1,5 +1,12 @@
 import { searchOptions } from "@/types";
-import { createContext, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDebounce, useShortcut } from "../hooks";
 
 type SearchContextType = {
@@ -7,7 +14,7 @@ type SearchContextType = {
   open: boolean;
   setOpen: (v) => void;
   tags: Array<keyof typeof searchOptions>;
-  setTags: (v: Array<keyof typeof searchOptions>) => void;
+  setTags: Dispatch<SetStateAction<Array<keyof typeof searchOptions>>>;
   query: string;
   setQuery: (v: string) => void;
   deboucedQuery: string;

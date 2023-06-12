@@ -1,5 +1,5 @@
 import { searchOptions } from "@/types";
-import { Checkbox, CheckboxGroup, Search } from "@navikt/ds-react";
+import { Checkbox, CheckboxGroup, Chips, Search } from "@navikt/ds-react";
 import { KBD } from "components/website-modules/KBD";
 import { useContext, useRef } from "react";
 import { useShortcut } from "./hooks";
@@ -32,62 +32,58 @@ export const SearchForm = () => {
   }
 
   return (
-    <>
-      <div className="mt-8 hidden [grid-area:filter] md:block">
-        <CheckboxGroup
-          legend="Filter"
-          onChange={(v) => {
-            setTags(v);
-            update(query, v);
-          }}
-        >
-          {Object.entries(searchOptions)
-            .filter((x) => !x[1].hidden)
-            .map(([key, val]) => (
-              <Checkbox
-                disabled={
-                  noHitsAndQuery(key) && noHits(key) && results?.hits[key] === 0
-                }
-                key={key}
-                value={key}
-                className="whitespace-nowrap"
-              >
-                {`${val.display} ${
-                  results?.hits[key] > 0 ? `(${results?.hits[key]})` : ""
-                }`}
-              </Checkbox>
-            ))}
-        </CheckboxGroup>
-      </div>
-      <div className="w-full [grid-area:input]">
-        <form role="search" onSubmit={(e) => e.preventDefault()}>
-          <Search
-            label={
-              <span className="flex items-center gap-2">
-                <span>Søk i hele Aksel</span>
-                {os === "mac" ? <KBD>CMD + B</KBD> : <KBD>CTRL + B</KBD>}
-              </span>
-            }
-            aria-autocomplete="both"
-            variant="simple"
-            value={query}
-            hideLabel={false}
-            onChange={(v) => handleSearchStart(v)}
-            onClear={() => {
-              setQuery("");
-              reset();
-            }}
-            ref={inputRef}
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck={false}
-            autoFocus
-            id="aksel-search-input"
-            clearButton={false}
-          />
-        </form>
-      </div>
-    </>
+    <form
+      role="search"
+      onSubmit={(e) => e.preventDefault()}
+      className="grid w-full gap-3"
+    >
+      <Search
+        label={
+          <span className="flex items-center gap-2">
+            <span>Søk i hele Aksel</span>
+            {os === "mac" ? <KBD>CMD + B</KBD> : <KBD>CTRL + B</KBD>}
+          </span>
+        }
+        aria-autocomplete="both"
+        variant="simple"
+        value={query}
+        hideLabel={false}
+        onChange={(v) => handleSearchStart(v)}
+        onClear={() => {
+          setQuery("");
+          reset();
+        }}
+        ref={inputRef}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+        autoFocus
+        id="aksel-search-input"
+        clearButton={false}
+      />
+      <Chips>
+        {Object.entries(searchOptions)
+          .filter((x) => !x[1].hidden)
+          .filter(
+            ([key]) =>
+              !(noHitsAndQuery(key) && noHits(key) && results?.hits[key] === 0)
+          )
+          .map(([key, val]) => (
+            <Chips.Toggle
+              selected={tags.includes(key as keyof typeof searchOptions)}
+              onClick={() => {
+                const newTags = (tags as string[]).includes(key)
+                  ? tags.filter((y) => y !== key)
+                  : [...tags, key];
+                setTags(newTags as Array<keyof typeof searchOptions>);
+                update(query, newTags);
+              }}
+            >
+              {val.display}
+            </Chips.Toggle>
+          ))}
+      </Chips>
+    </form>
   );
 };

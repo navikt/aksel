@@ -7,6 +7,7 @@ import { StatusTag } from "components/website-modules/StatusTag";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { forwardRef, useContext } from "react";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
 
 export const Hit = forwardRef<
   HTMLLIElement,
@@ -87,7 +88,7 @@ function highlightStr(str: string, query: string) {
   );
 }
 
-const highlightedHeadings = ["eksempler", "props", "tokens"];
+const highlightedHeadings = ["eksempler", "props", "tokens", "retningslinjer"];
 
 function HeadingLinks({ hit }: { hit: SearchHitT }) {
   const Description = () => (
@@ -111,7 +112,15 @@ function HeadingLinks({ hit }: { hit: SearchHitT }) {
                 variant="neutral"
                 as="a"
                 href={`/${hit.item.slug}${`#h${x.id}`}`}
-              >{`#${x.text}`}</Chips.Toggle>
+              >
+                {/* <span className="flex items-center">
+                  <span>{`${x.text}`}</span>
+                  <span>
+                    <ChevronRightIcon aria-hidden className="-mr-1" />
+                  </span>
+                </span> */}
+                a
+              </Chips.Toggle>
             ))}
         </Chips>
       </>

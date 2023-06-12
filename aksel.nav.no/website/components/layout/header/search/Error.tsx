@@ -8,7 +8,7 @@ export const Error = () => {
 
   if (error) {
     return (
-      <p className="[grid-area:results]" aria-live="assertive">
+      <p aria-live="assertive">
         Noe gikk galt! Last siden på nytt eller ta kontakt med Aksel.
       </p>
     );
@@ -19,7 +19,7 @@ export const Error = () => {
 
   return (
     <>
-      <div className="mt-16 hidden [grid-area:filter] md:block">
+      <div className="mt-16 hidden md:block">
         <div className="grid gap-4">
           {Object.keys(searchOptions).map((_, xi) => (
             <span key={xi} className="flex items-center gap-4">
@@ -29,7 +29,7 @@ export const Error = () => {
           ))}
         </div>
       </div>
-      <div className="w-full [grid-area:input]">
+      <div className="w-full">
         <div className="grid gap-2">
           <DsSkeleton width="10rem" variant="text" />
           <DsSkeleton height="3rem" variant="rounded" />

@@ -41,15 +41,10 @@ export const Search = () => {
         onRequestClose={close}
         aria={{ modal: true }}
         contentLabel="Søk"
-        className="bg-surface-default absolute inset-0 block w-screen overflow-x-auto px-4 md:px-6"
+        className="bg-surface-default absolute inset-0 mx-auto my-auto block h-[80%] w-[70%] overflow-x-auto rounded-lg px-4 shadow-xl md:px-6"
         overlayClassName={styles.modalOverlaySearch}
       >
-        <div
-          className={cl(
-            "relative mx-auto grid max-w-4xl grid-cols-[12rem_auto] gap-4 gap-x-8 py-24",
-            styles.searchGrid
-          )}
-        >
+        <div className="relative mx-auto grid max-w-4xl gap-4 gap-x-8 py-24">
           <Button
             className="group absolute right-4 top-8"
             variant="tertiary-neutral"
