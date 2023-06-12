@@ -24,6 +24,25 @@ export function formatResults(res: Fuse.FuseResult<FuseItemT>[]): SearchHitT[] {
   });
 }
 
+export function formatRawResults(
+  res: FuseItemT[]
+): Omit<SearchHitT, "score" | "anchor">[] {
+  return res.map((x) => {
+    let description = x?.intro ?? x.ingress ?? "";
+    const clampDesc = description?.length > 120;
+    description &&= description.slice(0, 120);
+    clampDesc && (description += "...");
+
+    return {
+      item: omit(x, ["intro", "ingress"]) as Omit<
+        FuseItemT,
+        "ingress" | "intro"
+      >,
+      description,
+    };
+  });
+}
+
 function resolveAnchor(match: Fuse.FuseResultMatch, item: FuseItemT) {
   if (match.key.includes("lvl")) {
     return item[match.key.split(".")[0]][match.refIndex].id;

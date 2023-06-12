@@ -1,4 +1,4 @@
-import { SearchResultsT } from "@/types";
+import { SearchHitT, SearchResultsT } from "@/types";
 import { createContext, useCallback, useContext, useEffect } from "react";
 import { useSearch } from "../hooks";
 import { SearchContext } from "./SearchProvider";
@@ -13,6 +13,7 @@ type SearchResultContextType = {
   reset: () => void;
   close: () => void;
   logSuccess: (index: number, url: string) => void;
+  mostResent: Omit<SearchHitT, "score" | "anchor">[];
 };
 
 export const SearchResultContext = createContext<SearchResultContextType>({
@@ -23,6 +24,7 @@ export const SearchResultContext = createContext<SearchResultContextType>({
   reset: () => null,
   close: () => null,
   logSuccess: () => null,
+  mostResent: [],
 });
 
 export const SearchResultProvider = ({

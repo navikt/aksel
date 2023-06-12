@@ -13,12 +13,20 @@ import Link from "next/link";
 export const Hit = forwardRef<
   HTMLLIElement,
   {
-    hit: SearchHitT;
+    hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
     index: number;
   }
 >(({ hit, index }, ref) => {
   const { query } = useContext(SearchContext);
   const { logSuccess } = useContext(SearchResultContext);
+
+  const getHref = () => {
+    if ("anchor" in hit) {
+      return `/${hit.item.slug}${hit?.anchor ? `#h${hit.anchor}` : ""}`;
+    }
+    return `/${hit.item.slug}`;
+  };
+
   return (
     <li
       ref={ref}
@@ -29,7 +37,7 @@ export const Hit = forwardRef<
       <div className="px-2 py-4">
         <span className="flex items-center gap-2">
           <NextLink
-            href={`/${hit.item.slug}${hit.anchor ? `#h${hit.anchor}` : ""}`}
+            href={getHref()}
             onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
             className="focus-visible:shadow-focus focus-visible:bg-border-focus focus-visible:text-text-on-action group text-xl font-semibold focus:outline-none"
           >
@@ -91,7 +99,11 @@ function highlightStr(str: string, query: string) {
 
 const highlightedHeadings = ["eksempler", "props", "tokens", "retningslinjer"];
 
-function HeadingLinks({ hit }: { hit: SearchHitT }) {
+function HeadingLinks({
+  hit,
+}: {
+  hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
+}) {
   const Description = () => (
     <span className="font-regular text-text-subtle text-lg" aria-hidden>
       {hit.description}

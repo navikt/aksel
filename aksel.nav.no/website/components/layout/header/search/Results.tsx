@@ -7,7 +7,8 @@ import { Label } from "@navikt/ds-react";
 
 export const Results = () => {
   const { tags, query, deboucedQuery } = useContext(SearchContext);
-  const { results, isValidating, error } = useContext(SearchResultContext);
+  const { results, isValidating, error, mostResent } =
+    useContext(SearchResultContext);
 
   if (isValidating || error) {
     return null;
@@ -18,6 +19,24 @@ export const Results = () => {
       className="w-full overflow-y-scroll"
       role={query && deboucedQuery === query ? "status" : undefined}
     >
+      {!results && mostResent && (
+        <div
+          className="pb-4"
+          id="aksel-search-results"
+          aria-label="Nyeste artikler"
+        >
+          <Collection
+            startIndex={0}
+            heading={
+              <span className="flex items-center gap-2">
+                Nyeste artikler
+                <ChangeLogIconOutline className="shrink-0" />
+              </span>
+            }
+            hits={mostResent}
+          />
+        </div>
+      )}
       {results && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
           <Label as="p" className="px-4 pt-3 md:px-6">
@@ -29,7 +48,7 @@ export const Results = () => {
                 : ""
             }`}
           </Label>
-          <div className="mt-3 pb-4 md:block">
+          <div className="mt-3 pb-4">
             {results?.topResults.length > 0 && (
               <Collection
                 startIndex={1}

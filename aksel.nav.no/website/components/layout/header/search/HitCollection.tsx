@@ -42,7 +42,7 @@ export function Collection({
   startIndex,
 }: {
   heading?: React.ReactNode;
-  hits: SearchHitT[];
+  hits: SearchHitT[] | Omit<SearchHitT, "score" | "anchor">[];
 
   startIndex: number;
 }) {

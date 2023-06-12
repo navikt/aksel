@@ -1,8 +1,13 @@
 import { allArticleDocuments } from "@/sanity/config";
-import { SearchResultsT } from "@/types";
-import { useCallback, useState } from "react";
+import { SearchHitT, SearchResultsT } from "@/types";
+import { useCallback, useMemo, useState } from "react";
 import useSWRImmutable from "swr/immutable";
-import { formatResults, fuseSearch, createSearchResult } from "../utils";
+import {
+  formatResults,
+  fuseSearch,
+  createSearchResult,
+  formatRawResults,
+} from "../utils";
 
 export const useSearch = () => {
   const [fuseResults, setFuseResults] = useState<SearchResultsT>(null);
@@ -32,11 +37,21 @@ export const useSearch = () => {
     },
     [data]
   );
+
+  const mostResent: Omit<SearchHitT, "score" | "anchor">[] = useMemo(() => {
+    if (!data) {
+      return null;
+    }
+
+    return formatRawResults(data.slice(0, 5));
+  }, [data]);
+
   return {
     results: fuseResults,
     update: updateResults,
     error,
     isValidating,
     reset: () => setFuseResults(null),
+    mostResent,
   };
 };
