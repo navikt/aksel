@@ -16,7 +16,7 @@ export function createSearchResult(
   const response: SearchResultsT = {
     groupedHits,
     topResults:
-      result?.length > 3 ? result.slice(0, 3).filter((x) => x.score < 0.1) : [],
+      result?.length > 4 ? result.slice(0, 4).filter((x) => x.score < 0.1) : [],
     totalHits: result?.length ?? 0,
     hits: {
       komponent_artikkel: rawResults.filter(

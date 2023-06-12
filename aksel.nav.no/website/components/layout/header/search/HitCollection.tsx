@@ -41,7 +41,7 @@ export function Collection({
   hits,
   startIndex,
 }: {
-  heading: React.ReactNode;
+  heading?: React.ReactNode;
   hits: SearchHitT[];
 
   startIndex: number;
@@ -67,12 +67,14 @@ export function Collection({
 
   return (
     <div>
-      <div className="z-10 mt-4 rounded bg-teal-100 p-2">
-        <Label className="text-text-default" as="h3">
-          {heading}
-        </Label>
-      </div>
-      <ul className="mt-2">
+      {heading && (
+        <div className="sticky top-0 z-10 rounded bg-teal-100 p-2">
+          <Label className="px-6 md:px-8" as="h3">
+            {heading}
+          </Label>
+        </div>
+      )}
+      <ul className="mt-2 px-4 md:px-6">
         {split.initial.map((x, xi) => (
           <Hit
             key={xi}

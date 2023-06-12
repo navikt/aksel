@@ -8,6 +8,7 @@ import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { forwardRef, useContext } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
+import Link from "next/link";
 
 export const Hit = forwardRef<
   HTMLLIElement,
@@ -107,20 +108,15 @@ function HeadingLinks({ hit }: { hit: SearchHitT }) {
                 !!x.id && highlightedHeadings.includes(x.text.toLowerCase())
             )
             .map((x) => (
-              <Chips.Toggle
+              <Link
+                prefetch={false}
                 key={x.text}
-                variant="neutral"
-                as="a"
                 href={`/${hit.item.slug}${`#h${x.id}`}`}
+                className="min-h-6 bg-surface-neutral-subtle focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ring-border-subtle flex items-center justify-center rounded-full px-2 ring-1 ring-inset focus:outline-none"
               >
-                {/* <span className="flex items-center">
-                  <span>{`${x.text}`}</span>
-                  <span>
-                    <ChevronRightIcon aria-hidden className="-mr-1" />
-                  </span>
-                </span> */}
-                a
-              </Chips.Toggle>
+                <span>{`${x.text}`}</span>
+                <ChevronRightIcon aria-hidden className="-mr-1" />
+              </Link>
             ))}
         </Chips>
       </>

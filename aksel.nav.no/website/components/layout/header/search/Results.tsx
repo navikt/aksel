@@ -14,12 +14,12 @@ export const Results = () => {
 
   return (
     <div
-      className="mt-8 w-full max-w-3xl"
+      className="w-full overflow-y-scroll"
       role={query && deboucedQuery === query ? "status" : undefined}
     >
       {results && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
-          <p className="text-xl font-semibold">
+          <p className="px-4 pt-3 text-xl font-semibold md:px-6">
             {`${results?.totalHits} treff på "${query}"${
               tags.length > 0
                 ? ` i ${tags
@@ -28,7 +28,7 @@ export const Results = () => {
                 : ""
             }`}
           </p>
-          <div className="mt-4 pb-16 md:block">
+          <div className="mt-3 pb-4 md:block">
             {results?.topResults.length > 0 && (
               <Collection
                 startIndex={1}
