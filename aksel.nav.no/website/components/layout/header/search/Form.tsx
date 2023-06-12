@@ -4,13 +4,18 @@ import { Button, Chips, Search } from "@navikt/ds-react";
 import { KBD } from "components/website-modules/KBD";
 import { useContext, useRef } from "react";
 import { useShortcut } from "./hooks";
-import { SearchContext, SearchResultContext } from "./providers";
+import {
+  SearchContext,
+  SearchNavigationContext,
+  SearchResultContext,
+} from "./providers";
 
 export const SearchForm = () => {
   const { open, setOpen, tags, setTags, query, setQuery, os } =
     useContext(SearchContext);
-  const { update, results, reset, isValidating, error, close } =
+  const { update, results, reset, isValidating, error } =
     useContext(SearchResultContext);
+  const { close } = useContext(SearchNavigationContext);
   const inputRef = useRef(null);
 
   useShortcut(open, setOpen, inputRef);

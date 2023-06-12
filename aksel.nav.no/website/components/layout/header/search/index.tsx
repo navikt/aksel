@@ -3,6 +3,7 @@ import {
   SearchProvider,
   SearchResultProvider,
   SearchLoggingProvider,
+  SearchNavigationProvider,
 } from "./providers";
 
 export const GlobalSearch = () => {
@@ -10,7 +11,9 @@ export const GlobalSearch = () => {
     <SearchProvider>
       <SearchLoggingProvider>
         <SearchResultProvider>
-          <Search />
+          <SearchNavigationProvider>
+            <Search />
+          </SearchNavigationProvider>
         </SearchResultProvider>
       </SearchLoggingProvider>
     </SearchProvider>

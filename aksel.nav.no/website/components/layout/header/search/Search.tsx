@@ -1,17 +1,17 @@
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
+import cl from "clsx";
 import { useContext, useEffect } from "react";
 import ReactModal from "react-modal";
 import styles from "../header.module.css";
 import { Error } from "./Error";
 import { SearchForm } from "./Form";
 import { Results } from "./Results";
-import { SearchContext, SearchResultContext } from "./providers";
-import cl from "clsx";
+import { SearchContext, SearchNavigationContext } from "./providers";
 
 export const Search = () => {
   const { open, setOpen } = useContext(SearchContext);
-  const { close } = useContext(SearchResultContext);
+  const { close } = useContext(SearchNavigationContext);
 
   useEffect(() => {
     ReactModal.setAppElement("#__next");
