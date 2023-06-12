@@ -23,10 +23,10 @@ export const Hit = forwardRef<
     <li
       ref={ref}
       className={cl(
-        "border-border-subtle relative flex items-center justify-between gap-4 rounded border-b px-2 last-of-type:border-b-0"
+        "border-border-subtle relative flex items-center justify-between gap-3 rounded border-b px-2 last-of-type:border-b-0 last-of-type:pb-2"
       )}
     >
-      <div className="px-2 py-6">
+      <div className="px-2 py-4">
         <span className="flex items-center gap-2">
           <NextLink
             href={`/${hit.item.slug}${hit.anchor ? `#h${hit.anchor}` : ""}`}

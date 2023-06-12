@@ -3,6 +3,7 @@ import { ChangeLogIconOutline } from "components/assets";
 import { useContext } from "react";
 import { Collection, CollectionMapper } from "./HitCollection";
 import { SearchContext, SearchResultContext } from "./providers";
+import { Label } from "@navikt/ds-react";
 
 export const Results = () => {
   const { tags, query, deboucedQuery } = useContext(SearchContext);
@@ -19,7 +20,7 @@ export const Results = () => {
     >
       {results && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
-          <p className="px-4 pt-3 text-xl font-semibold md:px-6">
+          <Label as="p" className="px-4 pt-3 md:px-6">
             {`${results?.totalHits} treff på "${query}"${
               tags.length > 0
                 ? ` i ${tags
@@ -27,7 +28,7 @@ export const Results = () => {
                     .join(", ")}`
                 : ""
             }`}
-          </p>
+          </Label>
           <div className="mt-3 pb-4 md:block">
             {results?.topResults.length > 0 && (
               <Collection
