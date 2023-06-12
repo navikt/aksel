@@ -69,7 +69,7 @@ export function Collection({
   return (
     <div>
       {heading && (
-        <div className="sticky top-0 z-10 rounded bg-teal-100/95 p-2">
+        <div className="sticky -top-[1px] z-10 bg-teal-100/95  p-2">
           <Label className="px-2 md:px-8" as="h3">
             {heading}
           </Label>
