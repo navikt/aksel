@@ -40,22 +40,23 @@ export function Collection({
   heading,
   hits,
   startIndex,
+  simple = false,
 }: {
   heading?: React.ReactNode;
   hits: SearchHitT[] | Omit<SearchHitT, "score" | "anchor">[];
-
+  simple?: boolean;
   startIndex: number;
 }) {
   const [intersected, setIntersected] = useState(false);
   const item = useRef(null);
 
   const split = useMemo(() => {
-    if (hits.length <= 5) {
+    if (hits.length <= (simple ? 20 : 5)) {
       return { initial: hits, lazy: null };
     }
 
     return { initial: hits.slice(0, 4), lazy: hits.slice(4 + 1) };
-  }, [hits]);
+  }, [hits, simple]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -81,12 +82,13 @@ export function Collection({
             hit={x}
             index={startIndex + xi}
             ref={xi === split.initial.length - 1 ? item : null}
+            simple={simple}
           />
         ))}
         {split.lazy &&
           intersected &&
           split.lazy.map((x, xi) => (
-            <Hit key={xi} hit={x} index={startIndex + xi} />
+            <Hit key={xi} hit={x} index={startIndex + xi} simple={simple} />
           ))}
       </ul>
     </div>

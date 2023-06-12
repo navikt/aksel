@@ -9,14 +9,16 @@ import NextLink from "next/link";
 import { forwardRef, useContext } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import Link from "next/link";
+import { Tag } from "components/sanity-modules/frontpage-blocks/Tag";
 
 export const Hit = forwardRef<
   HTMLLIElement,
   {
     hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
     index: number;
+    simple?: boolean;
   }
->(({ hit, index }, ref) => {
+>(({ hit, index, simple = false }, ref) => {
   const { query } = useContext(SearchContext);
   const { logSuccess } = useContext(SearchResultContext);
 
@@ -34,8 +36,13 @@ export const Hit = forwardRef<
         "border-border-subtle relative flex items-center justify-between gap-3 rounded border-b px-2 last-of-type:border-b-0 last-of-type:pb-2"
       )}
     >
-      <div className="px-2 py-4">
-        <span className="flex items-center gap-2">
+      <div className="w-full px-2 py-4">
+        <span
+          className={cl({
+            "flex flex-col": simple,
+            "flex items-center gap-2": !simple,
+          })}
+        >
           <NextLink
             href={getHref()}
             onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
@@ -45,26 +52,38 @@ export const Hit = forwardRef<
               {highlightStr(hit.item.heading, query)}
             </span>
           </NextLink>
-          <StatusTag status={hit?.item?.status?.tag} aria-hidden />
+          {simple ? (
+            <Tag
+              type={hit.item._type}
+              size="small"
+              text={hit.item.tema ? hit.item.tema[0] : undefined}
+              inline
+              aria-hidden
+            />
+          ) : (
+            <StatusTag status={hit?.item?.status?.tag} aria-hidden />
+          )}
         </span>
 
-        <HeadingLinks hit={hit} />
+        {!simple && <HeadingLinks hit={hit} />}
       </div>
 
-      <div className="hidden aspect-square w-24 sm:block">
-        {hit.item?.status?.bilde && (
-          <Image
-            src={urlFor(hit.item.status.bilde).auto("format").url()}
-            decoding="sync"
-            width="96"
-            height="96"
-            layout="fixed"
-            objectFit="contain"
-            alt={hit.item?.heading + " thumbnail"}
-            aria-hidden
-          />
-        )}
-      </div>
+      {!simple && (
+        <div className="hidden aspect-square w-24 sm:block">
+          {hit.item?.status?.bilde && (
+            <Image
+              src={urlFor(hit.item.status.bilde).auto("format").url()}
+              decoding="sync"
+              width="96"
+              height="96"
+              layout="fixed"
+              objectFit="contain"
+              alt={hit.item?.heading + " thumbnail"}
+              aria-hidden
+            />
+          )}
+        </div>
+      )}
     </li>
   );
 });

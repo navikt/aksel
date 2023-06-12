@@ -6,21 +6,25 @@ export const Tag = ({
   text,
   size = "medium",
   beta = false,
+  inline = false,
+  ...rest
 }: {
   type: string;
   text?: string;
   size?: "medium" | "small";
   beta?: boolean;
+  inline?: boolean;
 }) => {
   const Comp = ({ ...props }: any) =>
     size === "medium" ? (
-      <Heading {...props} as="div" size="medium" />
+      <Heading {...props} as="div" size="medium" {...rest} />
     ) : (
       <Label
+        {...rest}
         {...props}
         as="div"
         size="small"
-        className={cl(props?.className, "mb-2")}
+        className={cl(props?.className, !inline && "mb-2")}
       />
     );
 
@@ -36,7 +40,11 @@ export const Tag = ({
         <Comp className="text-deepblue-600 flex items-center gap-3">
           Komponent
           {beta && (
-            <DsTag variant="alt1" size="small">
+            <DsTag
+              variant="alt1"
+              size="small"
+              className="border-violet-300 bg-violet-50"
+            >
               Beta
             </DsTag>
           )}

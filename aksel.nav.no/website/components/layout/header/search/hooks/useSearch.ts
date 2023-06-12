@@ -43,7 +43,7 @@ export const useSearch = () => {
       return null;
     }
 
-    return formatRawResults(data.slice(0, 5));
+    return formatRawResults(data.slice(0, 20));
   }, [data]);
 
   return {

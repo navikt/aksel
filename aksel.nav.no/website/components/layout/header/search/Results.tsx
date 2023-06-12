@@ -33,6 +33,7 @@ export const Results = () => {
                 <ChangeLogIconOutline className="shrink-0" />
               </span>
             }
+            simple
             hits={mostResent}
           />
         </div>
