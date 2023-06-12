@@ -3,7 +3,7 @@ import { ChangeLogIconOutline } from "components/assets";
 import { useContext } from "react";
 import { Collection, CollectionMapper } from "./HitCollection";
 import { SearchContext, SearchResultContext } from "./providers";
-import { Label } from "@navikt/ds-react";
+import { Heading, Label } from "@navikt/ds-react";
 
 export const Results = () => {
   const { tags, query, deboucedQuery } = useContext(SearchContext);
@@ -16,7 +16,7 @@ export const Results = () => {
 
   return (
     <div
-      className="w-full overflow-y-scroll"
+      className="flex h-full flex-col overflow-y-scroll"
       role={query && deboucedQuery === query ? "status" : undefined}
     >
       {!results && mostResent && (
@@ -38,7 +38,14 @@ export const Results = () => {
           />
         </div>
       )}
-      {results && (
+      {!results?.totalHits && query && (
+        <Heading size="medium" as="p" className="mx-auto w-fit py-24">
+          <span className="text-text-subtle">{`Ingen treff på "`}</span>
+          <span>{query}</span>
+          <span className="text-text-subtle">"</span>
+        </Heading>
+      )}
+      {results?.totalHits > 0 && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
           <Label as="p" className="sr-only">
             {`${results?.totalHits} treff på "${query}"${

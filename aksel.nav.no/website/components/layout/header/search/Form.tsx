@@ -69,8 +69,8 @@ export const SearchForm = () => {
           autoFocus
           id="aksel-search-input"
           clearButton={false}
-          className="border-none"
           placeholder="Søk gjennom hele aksel"
+          className="border-none focus:shadow-none"
         />
         <Button
           variant="tertiary-neutral"
