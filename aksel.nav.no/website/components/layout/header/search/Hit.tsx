@@ -65,7 +65,7 @@ export const Hit = forwardRef<
           )}
         </span>
 
-        {!simple && <HeadingLinks hit={hit} />}
+        {!simple && <HeadingLinks index={index} hit={hit} />}
       </div>
 
       {!simple && (
@@ -120,9 +120,13 @@ const highlightedHeadings = ["eksempler", "props", "tokens", "retningslinjer"];
 
 function HeadingLinks({
   hit,
+  index,
 }: {
   hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
+  index: number;
 }) {
+  const { logSuccess } = useContext(SearchResultContext);
+
   const Description = () => (
     <span
       className="font-regular text-text-subtle max-w-full text-lg"
@@ -146,9 +150,12 @@ function HeadingLinks({
                 prefetch={false}
                 key={x.text}
                 href={`/${hit.item.slug}${`#h${x.id}`}`}
+                onClick={() =>
+                  logSuccess(index, `/${(hit.item as any).slug}`, x.text)
+                }
                 className="min-h-6 bg-surface-neutral-subtle focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ring-border-subtle flex items-center justify-center rounded-full px-2 ring-1 ring-inset focus:outline-none"
               >
-                <span>{`${x.text}`}</span>
+                <span>{x.text}</span>
                 <ChevronRightIcon aria-hidden className="-mr-1" />
               </Link>
             ))}

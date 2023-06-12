@@ -71,4 +71,5 @@ export type SearchLogT = {
   accuracy?: string;
   topResult?: boolean;
   url?: string;
+  tag?: string;
 };

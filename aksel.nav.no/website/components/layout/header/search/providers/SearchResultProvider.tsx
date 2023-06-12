@@ -20,7 +20,7 @@ type SearchResultContextType = {
   isValidating: boolean;
   reset: () => void;
   close: () => void;
-  logSuccess: (index: number, url: string) => void;
+  logSuccess: (index: number, url: string, tag?: string) => void;
   mostResent: Omit<SearchHitT, "score" | "anchor">[];
 };
 
@@ -92,12 +92,13 @@ export const SearchResultProvider = ({
   }, [deboucedQuery]);
 
   const logSuccess = useCallback(
-    (index: number, url: string) => {
+    (index: number, url: string, tag?: string) => {
       const data = {
         type: "suksess",
         searchedFromUrl: router.asPath,
         query,
         filter: tags,
+        tag,
         index,
         url,
         accuracy: (100 - index / context?.results?.totalHits).toFixed(0),
