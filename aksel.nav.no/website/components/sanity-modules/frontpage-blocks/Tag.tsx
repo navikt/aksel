@@ -75,11 +75,12 @@ export const Tag = ({
       return (
         <Comp className="flex items-center gap-3 text-violet-800">
           Prinsipper
-          {beta && (
-            <DsTag variant="alt1" size="small">
-              Beta
-            </DsTag>
-          )}
+        </Comp>
+      );
+    case "aksel_standalone":
+      return (
+        <Comp className="flex items-center gap-3 text-violet-800">
+          Unike sider
         </Comp>
       );
 

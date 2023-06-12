@@ -6,16 +6,14 @@ import {
   SearchNavigationProvider,
 } from "./providers";
 
-export const GlobalSearch = () => {
-  return (
-    <SearchProvider>
-      <SearchLoggingProvider>
-        <SearchResultProvider>
-          <SearchNavigationProvider>
-            <Search />
-          </SearchNavigationProvider>
-        </SearchResultProvider>
-      </SearchLoggingProvider>
-    </SearchProvider>
-  );
-};
+export const GlobalSearch = () => (
+  <SearchProvider>
+    <SearchLoggingProvider>
+      <SearchResultProvider>
+        <SearchNavigationProvider>
+          <Search />
+        </SearchNavigationProvider>
+      </SearchResultProvider>
+    </SearchLoggingProvider>
+  </SearchProvider>
+);

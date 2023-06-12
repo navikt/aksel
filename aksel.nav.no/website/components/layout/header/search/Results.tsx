@@ -16,21 +16,17 @@ export const Results = () => {
 
   return (
     <div
-      className="flex h-full flex-col overflow-y-scroll"
+      className="flex h-full flex-col overflow-y-auto"
       role={query && deboucedQuery === query ? "status" : undefined}
     >
       {!results && mostResent && (
-        <div
-          className="pb-4"
-          id="aksel-search-results"
-          aria-label="Nyeste artikler"
-        >
+        <div id="aksel-search-results" aria-label="Nyeste artikler">
           <Collection
             startIndex={0}
             heading={
               <span className="flex items-center gap-2">
                 Nyeste artikler
-                <ChangeLogIconOutline className="shrink-0" />
+                <ChangeLogIconOutline className="shrink-0" aria-hidden />
               </span>
             }
             simple
