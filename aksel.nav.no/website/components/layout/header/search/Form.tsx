@@ -43,7 +43,7 @@ export const SearchForm = () => {
     <form
       role="search"
       onSubmit={(e) => e.preventDefault()}
-      className="bg-surface-default border-border-subtle grid w-full gap-2 border-b"
+      className="bg-surface-default grid w-full gap-2"
     >
       <div className="flex flex-row-reverse items-center gap-1 p-1">
         <Button

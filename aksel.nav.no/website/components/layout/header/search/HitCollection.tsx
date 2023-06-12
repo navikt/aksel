@@ -73,7 +73,7 @@ export function Collection({
   return (
     <div>
       {heading && tag && (
-        <h3 className="bg-surface-subtle sticky -top-[1px] z-10 p-2 px-4 md:px-10">
+        <h3 className="bg-surface-subtle sticky top-0 z-10 p-2 px-4 md:px-10">
           <Tag
             hTag="span"
             type={tag}
@@ -86,7 +86,7 @@ export function Collection({
       )}
       {heading && !tag && (
         <Heading
-          className="bg-surface-subtle sticky -top-[1px] z-10 p-2 px-4  md:px-10"
+          className="bg-surface-subtle sticky top-0 z-10 p-2 px-4  md:px-10"
           size="small"
           level="3"
         >
