@@ -99,9 +99,9 @@ module.exports = {
         header: "inset 0 -1px 0 rgb(180, 180, 180, 0.1)",
       },
       keyframes: {
-        fadeInSearch: {
-          "0%": { opacity: 0.4 },
-          "100%": { opacity: 1 },
+        searchModal: {
+          "0%": { transform: "scale(0.98)", opacity: 0.7 },
+          "100%": { transform: "scale(1)", opacity: 1 },
         },
         fadeIn: {
           "0%": { opacity: 0 },
@@ -185,7 +185,7 @@ module.exports = {
       },
       animation: {
         fadeIn: "fadeIn 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
-        fadeInSearch: "fadeInSearch 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
+        searchModal: "searchModal 0.15s ease",
         toc: "toc 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
         expand: "expand 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
         expandLg: "expandLg 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",

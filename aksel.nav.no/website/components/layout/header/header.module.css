@@ -6,7 +6,7 @@
 
 .modalOverlaySearch {
   z-index: 3000;
-  @apply bg-surface-backdrop fixed inset-0 grid place-items-center;
+  @apply bg-deepblue-900/20 fixed inset-0 grid place-items-center;
 }
 
 .akselTertiaryButton {

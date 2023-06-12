@@ -45,7 +45,12 @@ export const SearchForm = () => {
       onSubmit={(e) => e.preventDefault()}
       className="bg-surface-default border-border-subtle grid w-full gap-2 border-b"
     >
-      <div className="flex items-center gap-1 p-1">
+      <div className="flex flex-row-reverse items-center gap-1 p-1">
+        <Button
+          variant="tertiary-neutral"
+          icon={<XMarkIcon title="Lukk søk" />}
+          onClick={close}
+        />
         <Search
           label={
             <span className="flex items-center gap-2">
@@ -71,11 +76,6 @@ export const SearchForm = () => {
           clearButton={false}
           placeholder="Søk gjennom hele aksel"
           className="border-none focus:shadow-none"
-        />
-        <Button
-          variant="tertiary-neutral"
-          icon={<XMarkIcon title="Lukk søk" />}
-          onClick={close}
         />
       </div>
       {chipsToShow.length !== 0 && (

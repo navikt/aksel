@@ -40,8 +40,9 @@ export const Search = () => {
         onRequestClose={close}
         aria={{ modal: true }}
         contentLabel="Søk"
-        className="bg-surface-default focus:shadow-focus absolute inset-0 mx-auto my-auto flex  h-[90%] max-h-[42rem] w-full max-w-[90%] flex-col overflow-x-hidden rounded-lg shadow-xl focus:outline-none md:h-[80%] lg:max-w-4xl"
+        className="bg-surface-default focus:shadow-focus animate-searchModal absolute inset-0 mx-auto my-auto flex h-[90%] max-h-[42rem] w-full max-w-[90%] flex-col overflow-x-hidden rounded-lg shadow-xl focus:outline-none md:h-[80%] lg:max-w-4xl"
         overlayClassName={cl(styles.modalOverlaySearch, "backdrop-blur-[2px]")}
+        htmlOpenClassName="overflow-hidden"
       >
         <Error />
         <SearchForm />
