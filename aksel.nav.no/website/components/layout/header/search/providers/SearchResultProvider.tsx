@@ -1,9 +1,17 @@
 import { SearchHitT, SearchResultsT } from "@/types";
-import { createContext, useCallback, useContext, useEffect } from "react";
-import { useSearch } from "../hooks";
-import { SearchContext } from "./SearchProvider";
-import { useRouter } from "next/router";
 import { logSearch } from "@/utils";
+import { useRouter } from "next/router";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
+import { useSearch } from "../hooks";
+import { formatRawResults } from "../utils";
+import { SearchContext } from "./SearchProvider";
+import { allArticleDocuments } from "@/sanity/config";
 
 type SearchResultContextType = {
   results: SearchResultsT;
@@ -36,6 +44,20 @@ export const SearchResultProvider = ({
   const context = useSearch();
   const { setOpen, query, setQuery, tags, setTags, deboucedQuery } =
     useContext(SearchContext);
+
+  const mostResent: Omit<SearchHitT, "score" | "anchor">[] = useMemo(() => {
+    if (!context.rawData) {
+      return null;
+    }
+
+    return formatRawResults(
+      context.rawData
+        .filter((x) =>
+          (tags.length > 0 ? tags : allArticleDocuments).includes(x._type)
+        )
+        .slice(0, 20)
+    );
+  }, [context.rawData, tags]);
 
   const handleClose = useCallback(() => {
     setOpen(false);
@@ -94,7 +116,7 @@ export const SearchResultProvider = ({
 
   return (
     <SearchResultContext.Provider
-      value={{ ...context, close: handleClose, logSuccess }}
+      value={{ ...context, mostResent, close: handleClose, logSuccess }}
     >
       {children}
     </SearchResultContext.Provider>
