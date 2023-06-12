@@ -16,7 +16,7 @@ export const Results = () => {
 
   return (
     <div
-      className="w-full snap-y overflow-y-scroll"
+      className="w-full overflow-y-scroll"
       role={query && deboucedQuery === query ? "status" : undefined}
     >
       {!results && mostResent && (
@@ -40,7 +40,7 @@ export const Results = () => {
       )}
       {results && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
-          <Label as="p" className="snap-start px-4 pt-3 md:px-10">
+          <Label as="p" className="px-4 pt-3 md:px-10">
             {`${results?.totalHits} treff på "${query}"${
               tags.length > 0
                 ? ` i ${tags

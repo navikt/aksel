@@ -33,7 +33,7 @@ export const Hit = forwardRef<
     <li
       ref={ref}
       className={cl(
-        "border-border-subtle relative flex snap-start scroll-my-10  items-center justify-between gap-3 rounded border-b px-2 last-of-type:border-b-0 last-of-type:pb-2"
+        "border-border-subtle relative flex scroll-my-10  items-center justify-between gap-3 rounded border-b px-2 last-of-type:border-b-0 last-of-type:pb-2"
       )}
     >
       <div className="w-full truncate px-2 py-4">
