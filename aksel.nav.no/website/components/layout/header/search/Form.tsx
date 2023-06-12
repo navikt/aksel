@@ -1,10 +1,10 @@
 import { searchOptions } from "@/types";
+import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Chips, Search } from "@navikt/ds-react";
+import { KBD } from "components/website-modules/KBD";
 import { useContext, useRef } from "react";
 import { useShortcut } from "./hooks";
 import { SearchContext, SearchResultContext } from "./providers";
-import { KBD } from "components/website-modules/KBD";
-import { XMarkIcon } from "@navikt/aksel-icons";
 
 export const SearchForm = () => {
   const { open, setOpen, tags, setTags, query, setQuery, os } =

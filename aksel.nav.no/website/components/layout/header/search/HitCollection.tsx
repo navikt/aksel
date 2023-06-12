@@ -20,7 +20,6 @@ export function CollectionMapper({
       {Object.entries(groups)
         .sort((a, b) => searchOptions[a[0]].index - searchOptions[b[0]].index)
         .map(([key, val], index, arr) => {
-          console.log(`${searchOptions[key].display} (${val.length})`);
           const prev = arr.slice(0, index);
           const total =
             prev.reduce((prev, cur) => prev + cur[1].length, 0) + startIndex;
