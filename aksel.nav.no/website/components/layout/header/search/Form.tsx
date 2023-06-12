@@ -70,7 +70,7 @@ export const SearchForm = () => {
           id="aksel-search-input"
           clearButton={false}
           className="border-none"
-          placeholder="Søk dokumentasjonen"
+          placeholder="Søk gjennom hele aksel"
         />
         <Button
           variant="tertiary-neutral"
