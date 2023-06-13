@@ -118,7 +118,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   useEffect(() => {
     if (value) {
       toggleIsListOpen(true);
-      if (shouldAutocomplete) {
+      if (shouldAutocomplete && filteredOptions[0]) {
         //setFilteredOptionsIndex(getMinimumIndex());
         setAriaDescribedBy(
           `${id}-option-${filteredOptions[0].replace(" ", "-")}`
