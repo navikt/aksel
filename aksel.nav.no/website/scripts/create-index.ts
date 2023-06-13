@@ -88,7 +88,7 @@ function mapContent(blocks: any[]) {
     return "";
   }
 
-  const contentBlocks: { text: string; anchor?: string }[] = [];
+  const contentBlocks: { text: string; id?: string }[] = [];
 
   let currentAnchor = "";
   blocks.forEach((x) => {
@@ -98,16 +98,14 @@ function mapContent(blocks: any[]) {
     if (x.style === "normal") {
       contentBlocks.push({
         text: x.children[0].text.replace(/\n|\r/g, " "),
-        anchor: currentAnchor,
+        id: currentAnchor,
       });
     }
   });
 
-  const mapped = Object.entries(groupBy(contentBlocks, "anchor")).reduce(
-    (prev: { anchor?: string; text: string }[], [key, value]) => {
-      const anchor = key;
-
-      return [...prev, { anchor, text: value.map((x) => x.text).join(" ") }];
+  const mapped = Object.entries(groupBy(contentBlocks, "id")).reduce(
+    (prev: { id?: string; text: string }[], [key, value]) => {
+      return [...prev, { id: key, text: value.map((x) => x.text).join(" ") }];
     },
     []
   );

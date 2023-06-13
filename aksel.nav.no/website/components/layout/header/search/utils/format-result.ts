@@ -33,5 +33,9 @@ function resolveAnchor(match: Fuse.FuseResultMatch, item: FuseItemT) {
   if (match.key.includes("lvl")) {
     return item[match.key.split(".")[0]][match.refIndex].id;
   }
+  if (match.key === "content.text") {
+    console.log(item[match.key.split(".")[0]][match.refIndex].id);
+    return item[match.key.split(".")[0]][match.refIndex].id;
+  }
   return null;
 }
