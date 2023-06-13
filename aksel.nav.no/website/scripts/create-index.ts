@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import fs from "fs";
 import { allArticleDocuments } from "../sanity/config";
 import { noCdnClient } from "../sanity/interface/client.server";
-import { omit } from "lodash";
+import { omit, groupBy } from "lodash";
 import { FuseItemT } from "../types";
 dotenv.config();
 
@@ -13,7 +13,7 @@ async function main() {
 }
 
 async function createIndex() {
-  const data: Partial<Omit<FuseItemT, "content">> &
+  const data: Partial<FuseItemT> &
     { publishedAt: Date | null; content: any[] }[] = await noCdnClient(
     process.env.SANITY_PRIVATE_NO_DRAFTS
   )
@@ -49,8 +49,7 @@ async function createIndex() {
 }
 
 function sanitzeSanityData(
-  data: Partial<Omit<FuseItemT, "content">> &
-    { publishedAt: Date | null; content: any[] }[]
+  data: Partial<FuseItemT> & { publishedAt: Date | null; content: any[] }[]
 ) {
   return data
     .sort((a, b) => {
@@ -71,7 +70,7 @@ function sanitzeSanityData(
       lvl2: getHeadings(x?.content, "h2"),
       lvl3: getHeadings(x?.content, "h3"),
       lvl4: getHeadings(x?.content, "h4"),
-      content: toPlainText(x?.content),
+      content: mapContent(x?.content),
     }));
 }
 
@@ -84,12 +83,34 @@ function getHeadings(blocks: any[], block: "h2" | "h3" | "h4") {
     .map((x) => ({ text: x.children[0].text, id: x._key ?? "" }));
 }
 
-function toPlainText(blocks: any[]) {
+function mapContent(blocks: any[]) {
   if (!blocks || blocks.length === 0) {
     return "";
   }
 
-  return blocks
-    .filter((x) => x.style === "normal")
-    .map((x) => x.children[0].text.replace(/\n|\r/g, " "));
+  const contentBlocks: { text: string; anchor?: string }[] = [];
+
+  let currentAnchor = "";
+  blocks.forEach((x) => {
+    if (["h2", "h3", "h4"].includes(x.style)) {
+      currentAnchor = x._key ?? "";
+    }
+    if (x.style === "normal") {
+      contentBlocks.push({
+        text: x.children[0].text.replace(/\n|\r/g, " "),
+        anchor: currentAnchor,
+      });
+    }
+  });
+
+  const mapped = Object.entries(groupBy(contentBlocks, "anchor")).reduce(
+    (prev: { anchor?: string; text: string }[], [key, value]) => {
+      const anchor = key;
+
+      return [...prev, { anchor, text: value.map((x) => x.text).join(" ") }];
+    },
+    []
+  );
+
+  return mapped;
 }
