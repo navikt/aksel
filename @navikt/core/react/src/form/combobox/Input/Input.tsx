@@ -43,6 +43,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       moveFocusUp,
       moveFocusDown,
       ariaDescribedBy,
+      moveFocusToInput,
+      moveFocusToEnd,
     } = useFilteredOptionsContext();
 
     const handleKeyUp = (e) => {
@@ -55,6 +57,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         case "Enter":
           e.preventDefault();
           toggleOption(e);
+          break;
+        case "Home":
+          moveFocusToInput();
+          break;
+        case "End":
+          moveFocusToEnd();
           break;
         default:
           break;

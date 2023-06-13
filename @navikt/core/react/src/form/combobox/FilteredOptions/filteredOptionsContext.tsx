@@ -38,6 +38,8 @@ type FilteredOptionsContextType = {
   resetFilteredOptionsIndex: () => void;
   moveFocusUp: () => void;
   moveFocusDown: () => void;
+  moveFocusToInput: () => void;
+  moveFocusToEnd: () => void;
 };
 const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
   {} as FilteredOptionsContextType
@@ -153,13 +155,31 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
 
   const scrollToOption = useCallback((newIndex: number) => {
     if (filteredOptionsRef.current) {
-      const child = filteredOptionsRef.current.children[newIndex + 1];
+      const child = filteredOptionsRef.current.children[newIndex];
       const { top, bottom } = child.getBoundingClientRect();
       const parentRect = filteredOptionsRef.current.getBoundingClientRect();
-      if (top < parentRect.top || bottom > parentRect.bottom)
+      if (top < parentRect.top || bottom > parentRect.bottom) {
         child.scrollIntoView({ block: "nearest" });
+      }
     }
   }, []);
+
+  useEffect(() => {
+    if (filteredOptionsIndex !== null && isListOpen) {
+      scrollToOption(filteredOptionsIndex);
+    }
+  }, [filteredOptionsIndex, isListOpen, scrollToOption]);
+
+  const moveFocusToInput = useCallback(() => {
+    setFilteredOptionsIndex(null);
+    toggleIsListOpen(false);
+  }, [toggleIsListOpen]);
+
+  const moveFocusToEnd = useCallback(() => {
+    const lastIndex = filteredOptions.length - 1;
+    toggleIsListOpen(true);
+    setFilteredOptionsIndex(lastIndex);
+  }, [filteredOptions.length, toggleIsListOpen]);
 
   const moveFocusUp = useCallback(() => {
     if (filteredOptionsIndex === null) {
@@ -171,8 +191,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     }
     const newIndex = Math.max(getMinimumIndex(), filteredOptionsIndex - 1);
     setFilteredOptionsIndex(newIndex);
-    scrollToOption(newIndex);
-  }, [filteredOptionsIndex, getMinimumIndex, scrollToOption, toggleIsListOpen]);
+  }, [filteredOptionsIndex, getMinimumIndex, toggleIsListOpen]);
 
   const moveFocusDown = useCallback(() => {
     if (filteredOptionsIndex === null || !isListOpen) {
@@ -185,13 +204,11 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
       filteredOptions.length - 1
     );
     setFilteredOptionsIndex(newIndex);
-    scrollToOption(newIndex);
   }, [
     filteredOptions.length,
     filteredOptionsIndex,
     getMinimumIndex,
     isListOpen,
-    scrollToOption,
     toggleIsListOpen,
   ]);
 
@@ -219,6 +236,8 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     resetFilteredOptionsIndex,
     moveFocusUp,
     moveFocusDown,
+    moveFocusToInput,
+    moveFocusToEnd,
     ariaDescribedBy,
   };
 
