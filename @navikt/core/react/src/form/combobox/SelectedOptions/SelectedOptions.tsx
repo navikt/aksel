@@ -19,7 +19,7 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
             <Chips.Removable
               className="navds-combobox__selected-option"
               key={option + i}
-              onMouseUp={(e) => {
+              onPointerUp={(e) => {
                 handleDeleteSelectedOption(option);
               }}
               onKeyUp={(e) => {

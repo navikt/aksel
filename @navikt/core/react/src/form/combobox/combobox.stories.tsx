@@ -82,7 +82,7 @@ export const WithExternalChips = (props) => {
           {selectedOptions.map((option) => (
             <Chips.Removable
               key={option}
-              onMouseUp={() => toggleSelected(option)}
+              onPointerUp={() => toggleSelected(option)}
               onKeyUp={(e) => e.key === "Enter" && toggleSelected(option)}
             >
               {option}

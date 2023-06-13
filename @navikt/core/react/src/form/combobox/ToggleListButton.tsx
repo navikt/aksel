@@ -14,7 +14,7 @@ export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
   return (
     <button
       type="button"
-      onMouseDown={() => toggleIsListOpen()}
+      onPointerUp={() => toggleIsListOpen()}
       onKeyDown={({ key }) => key === "Enter" && toggleIsListOpen()}
       className="navds-combobox__button-toggle-list"
       aria-expanded={isListOpen}
