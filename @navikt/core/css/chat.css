@@ -1,10 +1,8 @@
 .navds-chat {
-  --avatar-size: 2.5rem;
-  --avatar-gap: var(--a-spacing-3);
-
   display: flex;
   align-items: flex-end;
-  gap: var(--avatar-gap);
+  gap: var(--a-spacing-3);
+  max-width: 40.75rem;
 }
 
 .navds-chat--right {
@@ -36,8 +34,8 @@
   justify-content: center;
   overflow: hidden;
   padding: 0.35em;
-  height: var(--avatar-size);
-  width: var(--avatar-size);
+  height: 2.5rem;
+  width: 2.5rem;
   font-size: var(--a-font-size-xlarge);
   letter-spacing: 0.022em;
 }
@@ -49,12 +47,9 @@
 }
 
 .navds-chat__bubble {
-  --bubble-max-width-with-avatar: 37.5rem;
-
   padding: var(--a-spacing-4);
   box-shadow: var(--a-shadow-xsmall);
   width: fit-content;
-  max-width: calc(var(--bubble-max-width-with-avatar) + var(--avatar-size) + var(--avatar-gap));
   background-color: var(--ac-chat-bubble-bg, var(--a-bg-subtle));
   border: 1px solid var(--ac-chat-border-color, var(--a-border-subtle));
   border-radius: var(--a-border-radius-xlarge);
@@ -62,10 +57,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--a-spacing-2);
-}
-
-.navds-chat--has-avatar .navds-chat__bubble {
-  max-width: var(--bubble-max-width-with-avatar);
 }
 
 .navds-chat--right .navds-chat__bubble {

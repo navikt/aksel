@@ -104,8 +104,7 @@ const Chat = forwardRef<HTMLDivElement, ChatProps>(
           className,
           `navds-chat--${position}`,
           `navds-chat--top-text-${toptextPosition ?? position}`,
-          `navds-chat--size-${size}`,
-          { "navds-chat--has-avatar": Boolean(avatar) }
+          `navds-chat--size-${size}`
         )}
         {...rest}
       >
