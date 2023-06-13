@@ -44,12 +44,13 @@ export const InputContextProvider = ({ children, value: props }) => {
     "comboboxfield"
   );
   const [internalValue, setInternalValue] = useState<string>("");
-  const [searchTerm, setSearchTerm] = useState("");
 
   const value = useMemo(
     () => String(externalValue ?? internalValue),
     [externalValue, internalValue]
   );
+
+  const [searchTerm, setSearchTerm] = useState(value);
 
   const onChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {

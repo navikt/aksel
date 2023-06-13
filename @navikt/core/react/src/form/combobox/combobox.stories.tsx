@@ -205,6 +205,28 @@ ComboboxWithAddNewOptions.args = {
   shouldAutocomplete: false,
 };
 
+export function ComboboxWithNoHits(props) {
+  const id = useId();
+  const [value, setValue] = useState(props.value);
+  return (
+    <div>
+      <Combobox
+        id={id}
+        label="Komboboks (uten søketreff)"
+        options={props.options}
+        value={value}
+        onChange={(event) => setValue(event.currentTarget.value)}
+      />
+    </div>
+  );
+}
+
+ComboboxWithNoHits.args = {
+  singleSelect: true,
+  options,
+  value: "Orange",
+};
+
 export const WithCallbacks = () => {
   const id = useId();
   const [lastSelected, setLastSelected] = useState<{

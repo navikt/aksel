@@ -128,7 +128,9 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, [isValueNew, singleSelect]);
 
   useEffect(() => {
-    if ((value && value !== "") || isLoading) {
+    if (!isLoading && filteredOptions.length === 0) {
+      setAriaDescribedBy(`${id}-no-hits`);
+    } else if ((value && value !== "") || isLoading) {
       toggleIsListOpen(true);
       if (shouldAutocomplete && filteredOptions[0]) {
         //setFilteredOptionsIndex(getMinimumIndex());

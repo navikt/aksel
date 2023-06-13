@@ -50,6 +50,16 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
             <Loader />
           </li>
         )}
+        {!isLoading && filteredOptions.length === 0 && (
+          <li
+            className="navds-combobox__list-item navds-combobox__list-item--loading"
+            role="option"
+            aria-selected={false}
+            id={`${id}-no-hits`}
+          >
+            Ingen søketreff
+          </li>
+        )}
         {isValueNew && !singleSelect && (
           <li
             tabIndex={-1}
