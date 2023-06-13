@@ -23,10 +23,9 @@ export const useSearch = () => {
 
         const rawResults = fuseSearch(data, value);
 
-        const tagVersion = tags;
         const formatedResults = formatResults(
           rawResults.filter((x) =>
-            (tagVersion.length > 0 ? tagVersion : allArticleDocuments).includes(
+            (tags.length > 0 ? tags : allArticleDocuments).includes(
               x.item._type
             )
           )

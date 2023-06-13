@@ -91,7 +91,5 @@ function toPlainText(blocks: any[]) {
 
   return blocks
     .filter((x) => x.style === "normal")
-    .map((x) => x.children[0].text)
-    .join(" ")
-    .replace(/\n|\r/g, " ");
+    .map((x) => x.children[0].text.replace(/\n|\r/g, " "));
 }
