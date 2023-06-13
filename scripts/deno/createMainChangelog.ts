@@ -1,34 +1,32 @@
 import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { Root } from "npm:@types/mdast";
+import { heading, root, text } from "npm:mdast-builder";
 import remarkParse from "npm:remark-parse";
 import remarkStringify from "npm:remark-stringify";
-import { Plugin, unified } from "npm:unified";
-import { visit, SKIP } from "npm:unist-util-visit";
+import { unified } from "npm:unified";
+import { SKIP } from "npm:unist-util-visit";
 import { visitParents } from "npm:unist-util-visit-parents";
-import { root, text, heading, paragraph } from "npm:mdast-builder";
-import { Root } from "npm:@types/mdast";
+
+/**
+ * Small diagram of the process:
+
+           original 
+        markdown files
+               |
+               V
+          custom JSON 
+        representation
+         of changelog
+               |
+               V
+        final markdown
+ */
 
 type PackageName = string;
 type Version = string;
 type LogGrouping = Partial<Record<string, string[]>>;
 type VersionEntry = Record<PackageName, LogGrouping>;
 type Changelog = Record<Version, VersionEntry>;
-
-const compact: Plugin<[], Root> = () => {
-  return (tree, file) => {
-    visit(tree, (node) => {
-      if (node.type === "heading") {
-        visit(node, "text", (textNode) => {
-          if (node.depth === 1) {
-            node.depth = 3;
-          }
-          if (textNode.value.startsWith("@navikt/")) {
-            textNode.value = "TEST";
-          }
-        });
-      }
-    });
-  };
-};
 
 const upsertEntry = (
   changelog: Changelog,
@@ -63,21 +61,14 @@ const upsertEntry = (
   changelog[lastSeenVersion] = updatedVersion;
 };
 
-const nodeToMarkdown = (node: Root): string => {
-  return unified().use(remarkStringify, { bullet: "-" }).stringify(node);
-};
-
 const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
   const changelog: Changelog = {};
 
   for (const filePath of filePaths) {
     const fileContent = readFileSync(filePath, { encoding: "utf-8" });
-    const result = await unified()
-      .use(remarkParse)
-      .use(compact)
-      .parse(fileContent);
+    const result = await unified().use(remarkParse).parse(fileContent);
 
-    console.log(JSON.stringify(result, null, 2)); // DEBUG (show the AST)
+    // console.log(JSON.stringify(result, null, 2)); // DEBUG (show the AST)
 
     // TODO is there a _better_ way? This seems cluttered and hard to reason about
     let lastSeenPackage = "";
@@ -110,16 +101,15 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
         upsertEntry(
           changelog,
           { lastSeenPackage, lastSeenVersion, lastSeenSemverHeading },
-
           //@ts-ignore
-          nodeToMarkdown(node as Root)
+          structuredClone(node as Root)
         );
         return SKIP;
       }
     });
   }
 
-  console.log(changelog);
+  // console.log(changelog);
   return changelog;
 };
 
@@ -159,7 +149,7 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
 
         //@ts-ignore
         for (const change of changes) {
-          headings.push(paragraph([text(change)]));
+          headings.push(change);
         }
       }
     }
@@ -167,18 +157,8 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
 
   headings.unshift(heading(1, [text("Changelog")]));
 
-  // for (const [version, versionEntry] of Object.entries(changelog)) {
-  //   console.log(version);
-  //   for (const [packageName, logGrouping] of Object.entries(versionEntry)) {
-  //     console.log(packageName);
-  //     for (const [semverHeading, changes] of Object.entries(logGrouping)) {
-  //       console.log(semverHeading);
-  //       console.log(changes);
-  //     }
-  //   }
-  // }
-
   const changelog_node_tree = root(headings) as Root;
+  // console.log(JSON.stringify(changelog_node_tree, null, 2));
   const processed = await unified()
     .use(remarkStringify, { bullet: "-" })
     .stringify(changelog_node_tree);
@@ -191,3 +171,4 @@ console.log("processing the following markdown files:", changelogFiles);
 const changelogJSON = await parseMarkdownFiles(changelogFiles);
 const changelog = await createMainChangelog(changelogJSON);
 writeFileSync("CHANGELOG.md", changelog);
+console.log("wrote to CHANGELOG.md");
