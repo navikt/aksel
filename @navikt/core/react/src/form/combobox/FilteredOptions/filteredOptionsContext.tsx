@@ -124,13 +124,15 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, [isValueNew, singleSelect]);
 
   useEffect(() => {
-    if (value) {
+    if ((value && value !== "") || isLoading) {
       toggleIsListOpen(true);
       if (shouldAutocomplete && filteredOptions[0]) {
         //setFilteredOptionsIndex(getMinimumIndex());
         setAriaDescribedBy(
           `${id}-option-${filteredOptions[0].replace(" ", "-")}`
         );
+      } else if (isLoading) {
+        setAriaDescribedBy(`${id}-is-loading`);
       }
     } else {
       toggleIsListOpen(false);
@@ -138,6 +140,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     }
   }, [
     getMinimumIndex,
+    isLoading,
     value,
     shouldAutocomplete,
     toggleIsListOpen,
@@ -160,7 +163,10 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   };
 
   const scrollToOption = useCallback((newIndex: number) => {
-    if (filteredOptionsRef.current) {
+    if (
+      filteredOptionsRef.current &&
+      filteredOptionsRef.current.children[newIndex]
+    ) {
       const child = filteredOptionsRef.current.children[newIndex];
       const { top, bottom } = child.getBoundingClientRect();
       const parentRect = filteredOptionsRef.current.getBoundingClientRect();
@@ -224,7 +230,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     } else if (filteredOptionsIndex === -1) {
       return `${id}-combobox-new-option`;
     } else {
-      return `${id}-option-${currentOption}`;
+      return `${id}-option-${currentOption?.replace(" ", "-")}`;
     }
   }, [filteredOptionsIndex, currentOption, id]);
 

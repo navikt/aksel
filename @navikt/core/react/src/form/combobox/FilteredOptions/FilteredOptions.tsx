@@ -45,6 +45,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
             className="navds-combobox__list-item navds-combobox__list-item--loading"
             role="option"
             aria-selected={false}
+            id={`${id}-is-loading`}
           >
             <Loader />
           </li>
