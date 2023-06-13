@@ -1,11 +1,11 @@
 import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
-import { Root, Text } from "npm:@types/mdast";
+import { Root, Text, List, ListItem } from "npm:@types/mdast";
 import { Node } from "npm:@types/unist";
 import { heading, root, text } from "npm:mdast-builder";
 import remarkParse from "npm:remark-parse";
 import remarkStringify from "npm:remark-stringify";
 import { unified } from "npm:unified";
-import { SKIP } from "npm:unist-util-visit";
+import { SKIP, EXIT, visit } from "npm:unist-util-visit";
 import { visitParents } from "npm:unist-util-visit-parents";
 
 /**
@@ -68,16 +68,53 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
 
   for (const filePath of filePaths) {
     const fileContent = readFileSync(filePath, { encoding: "utf-8" });
-    const result = await unified().use(remarkParse).parse(fileContent);
-
-    // console.log(JSON.stringify(result, null, 2)); // DEBUG (show the AST)
+    const fileAST = await unified().use(remarkParse).parse(fileContent);
 
     // TODO is there a _better_ way? This seems cluttered and hard to reason about
     let lastSeenPackage = "";
     let lastSeenVersion = "";
     let lastSeenSemverHeading = "";
 
-    visitParents(result, (node, ancestors) => {
+    // filtering pass (try to remove some undesired nodes)
+    visitParents(fileAST, "paragraph", (node, ancestors) => {
+      if (
+        node.children[0].type === "text" &&
+        node.children[0].value.startsWith("Updated dependencies")
+      ) {
+        const listIndex = ancestors.findLastIndex((ancestor) => {
+          if (ancestor.type === "list") {
+            return true;
+          }
+          return false;
+        });
+        const parent = ancestors[listIndex] as List;
+
+        // we traversed up from child match to parent
+        // so we need to traverse down from parent to child
+        // again to find index of child within parent... yeah 😂
+        const indexWithinList = parent.children.findIndex((child: ListItem) => {
+          return child.children.some((grandchild) => {
+            let found = false;
+            visit(grandchild, (node) => {
+              if (
+                node.type === "text" &&
+                node.value.startsWith("Updated dependencies")
+              ) {
+                found = true;
+                return EXIT;
+              }
+            });
+            return found;
+          });
+        });
+        if (parent && Number.isInteger(indexWithinList)) {
+          parent.children.splice(indexWithinList, 1);
+          return [SKIP, indexWithinList];
+        }
+      }
+    });
+
+    visit(fileAST, (node) => {
       if (node.type === "root") {
         return;
       }
@@ -106,6 +143,9 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
         }
         return SKIP;
       } else {
+        if (node.type === "list" && node.children.length === 0) {
+          return SKIP;
+        }
         upsertEntry(
           changelog,
           { lastSeenPackage, lastSeenVersion, lastSeenSemverHeading },
@@ -115,8 +155,6 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
       }
     });
   }
-
-  // console.log(changelog);
   return changelog;
 };
 
@@ -163,7 +201,6 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
   headings.unshift(heading(1, [text("Changelog")]));
 
   const changelog_node_tree = root(headings) as Root;
-  // console.log(JSON.stringify(changelog_node_tree, null, 2));
   const processed = await unified()
     .use(remarkStringify, { bullet: "-" })
     .stringify(changelog_node_tree);
