@@ -9,6 +9,7 @@ import { ComboboxProps } from "./types";
 const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
     const {
+      allowNewValues = false,
       children,
       error,
       errorId,
@@ -42,7 +43,13 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
         >
           <CustomOptionsProvider>
             <FilteredOptionsProvider
-              value={{ isListOpen, isLoading, options, singleSelect }}
+              value={{
+                allowNewValues,
+                isListOpen,
+                isLoading,
+                options,
+                singleSelect,
+              }}
             >
               <Combobox {...rest}>{children}</Combobox>
             </FilteredOptionsProvider>

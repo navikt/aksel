@@ -12,6 +12,7 @@ export type ComboboxClearEvent =
 export interface ComboboxProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "value"> {
+  allowNewValues?: boolean;
   isListOpen?: boolean;
   options: string[];
   selectedOptions?: string[];

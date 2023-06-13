@@ -181,6 +181,28 @@ SingleSelectWithoutAutoComplete.args = {
   shouldAutocomplete: false,
 };
 
+export function ComboboxWithAddNewOptions(props) {
+  const id = useId();
+  return (
+    <div>
+      <Combobox
+        id={id}
+        label="Komboboks (med nye verdier)"
+        options={props.options}
+        allowNewValues={props.allowNewValues}
+      />
+    </div>
+  );
+}
+
+ComboboxWithAddNewOptions.args = {
+  allowNewValues: true,
+  singleSelect: true,
+  options,
+  initialSelectedOptions,
+  shouldAutocomplete: false,
+};
+
 export const WithCallbacks = () => {
   const id = useId();
   const [lastSelected, setLastSelected] = useState<{

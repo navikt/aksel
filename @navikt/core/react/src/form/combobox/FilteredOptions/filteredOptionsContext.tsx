@@ -48,6 +48,7 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
 
 export const FilteredOptionsProvider = ({ children, value: props }) => {
   const {
+    allowNewValues,
     isListOpen: isExternalListOpen,
     isLoading,
     options,
@@ -115,8 +116,11 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, []);
 
   const isValueNew = useMemo(
-    () => Boolean(value) && !isValueInList(value, filteredOptions),
-    [value, filteredOptions]
+    () =>
+      allowNewValues &&
+      Boolean(value) &&
+      !isValueInList(value, filteredOptions),
+    [allowNewValues, value, filteredOptions]
   );
 
   const getMinimumIndex = useCallback(() => {
