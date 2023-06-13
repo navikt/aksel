@@ -75,7 +75,11 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
     let lastSeenVersion = "";
     let lastSeenSemverHeading = "";
 
-    // filtering pass (try to remove some undesired nodes)
+    ///////////////////
+    // filtering passes
+    ///////////////////
+
+    // filter out all the 'Updated dependencies' nodes (at their relevant parent)
     visitParents(fileAST, "paragraph", (node, ancestors) => {
       if (
         node.children[0].type === "text" &&
@@ -107,12 +111,26 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
             return found;
           });
         });
-        if (parent && Number.isInteger(indexWithinList)) {
+        if (parent && indexWithinList !== -1) {
           parent.children.splice(indexWithinList, 1);
           return [SKIP, indexWithinList];
         }
       }
     });
+
+    // filter all empty list nodes
+    visit(fileAST, (node, index, parent) => {
+      if (node.type === "list" && node.children.length === 0) {
+        if (parent && index !== null) {
+          parent.children.splice(index, 1);
+          return [SKIP, index];
+        }
+      }
+    });
+
+    ///////////////////
+    // upsert into custom JS object
+    ///////////////////
 
     visit(fileAST, (node) => {
       if (node.type === "root") {
@@ -143,9 +161,6 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
         }
         return SKIP;
       } else {
-        if (node.type === "list" && node.children.length === 0) {
-          return SKIP;
-        }
         upsertEntry(
           changelog,
           { lastSeenPackage, lastSeenVersion, lastSeenSemverHeading },
@@ -170,10 +185,7 @@ const getChangelogs = () => {
       ) {
         walkFiles(filePath);
       } else {
-        if (
-          !filePath.match(/^CHANGELOG\.md$/) &&
-          file.match(/^CHANGELOG\.md$/)
-        ) {
+        if (file.match(/^CHANGELOG\.md$/)) {
           changelogs.push(filePath);
         }
       }
