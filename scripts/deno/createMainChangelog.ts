@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { Root, Text, List, ListItem } from "npm:@types/mdast";
 import { Node } from "npm:@types/unist";
 import { heading, root, text } from "npm:mdast-builder";
@@ -7,6 +7,7 @@ import remarkStringify from "npm:remark-stringify";
 import { unified } from "npm:unified";
 import { SKIP, EXIT, visit } from "npm:unist-util-visit";
 import { visitParents } from "npm:unist-util-visit-parents";
+import { getChangelogs } from "./utils.ts";
 
 /**
  * Small diagram of the process:
@@ -173,28 +174,6 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
   return changelog;
 };
 
-const getChangelogs = () => {
-  const changelogs: string[] = [];
-  const walkFiles = (dirPath: string) => {
-    const files = readdirSync(dirPath);
-    files.forEach((file) => {
-      const filePath = `${dirPath}/${file}`;
-      if (
-        statSync(filePath).isDirectory() &&
-        !file.startsWith("node_modules")
-      ) {
-        walkFiles(filePath);
-      } else {
-        if (file.match(/^CHANGELOG\.md$/)) {
-          changelogs.push(filePath);
-        }
-      }
-    });
-  };
-  walkFiles("./@navikt");
-  return changelogs;
-};
-
 const createMainChangelog = async (changelog: Changelog): Promise<string> => {
   const headings = [];
   Object.entries(changelog).forEach(([version, versionEntry]) => {
@@ -220,7 +199,7 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
   return processed;
 };
 
-const changelogFiles = getChangelogs();
+const changelogFiles = getChangelogs("./@navikt");
 console.log("processing the following markdown files:", changelogFiles);
 const changelogJSON = await parseMarkdownFiles(changelogFiles);
 const changelog = await createMainChangelog(changelogJSON);
