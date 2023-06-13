@@ -1,11 +1,11 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import { Root, Text, List, ListItem } from "npm:@types/mdast";
+import { List, ListItem, Root, Text } from "npm:@types/mdast";
 import { Node } from "npm:@types/unist";
 import { heading, root, text } from "npm:mdast-builder";
 import remarkParse from "npm:remark-parse";
 import remarkStringify from "npm:remark-stringify";
 import { unified } from "npm:unified";
-import { SKIP, EXIT, visit } from "npm:unist-util-visit";
+import { EXIT, SKIP, visit } from "npm:unist-util-visit";
 import { visitParents } from "npm:unist-util-visit-parents";
 import { getChangelogs } from "./utils.ts";
 
