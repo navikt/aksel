@@ -13,10 +13,7 @@ async function main() {
 }
 
 async function createIndex() {
-  const data: Partial<FuseItemT> &
-    { publishedAt: Date | null; content: any[] }[] = await noCdnClient(
-    process.env.SANITY_PRIVATE_NO_DRAFTS
-  )
+  const data = await noCdnClient(process.env.SANITY_PRIVATE_NO_DRAFTS)
     .fetch(
       `*[_type in [${allArticleDocuments.map(
         (x) => `"${x}"`
@@ -29,7 +26,8 @@ async function createIndex() {
     _type,
     "intro": pt::text(intro.body),
     content,
-    publishedAt
+    publishedAt,
+    seo
   }`
     )
     .catch((err) => {
@@ -48,9 +46,7 @@ async function createIndex() {
   );
 }
 
-function sanitzeSanityData(
-  data: Partial<FuseItemT> & { publishedAt: Date | null; content: any[] }[]
-) {
+function sanitzeSanityData(data) {
   return data
     .sort((a, b) => {
       if (!a.publishedAt && !b.publishedAt) {
@@ -66,11 +62,12 @@ function sanitzeSanityData(
       );
     })
     .map((x) => ({
-      ...omit(x, ["publishedAt"]),
-      lvl2: getHeadings(x?.content, "h2"),
-      lvl3: getHeadings(x?.content, "h3"),
-      lvl4: getHeadings(x?.content, "h4"),
-      content: mapContent(x?.content),
+      ...omit(x, ["publishedAt", "seo"]),
+      intro: x.intro ?? x.seo?.meta ?? "",
+      lvl2: getHeadings(x.content, "h2"),
+      lvl3: getHeadings(x.content, "h3"),
+      lvl4: getHeadings(x.content, "h4"),
+      content: mapContent(x.content),
     }));
 }
 
