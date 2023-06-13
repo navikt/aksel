@@ -30,7 +30,6 @@ export const Combobox = forwardRef<
     hideLabel = false,
     description,
     label,
-    loading,
     children,
     clearButton = true,
     clearButtonLabel,
@@ -237,7 +236,6 @@ export const Combobox = forwardRef<
           id={inputProps.id}
           toggleOption={toggleOption}
           focusInput={focusInput}
-          loading={loading}
         />
       </div>
     </ComboboxWrapper>

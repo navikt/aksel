@@ -31,6 +31,7 @@ type FilteredOptionsContextType = {
   setFilteredOptionsIndex: (index: number) => void;
   isListOpen: boolean;
   setInternalListOpen: (open: boolean) => void;
+  isLoading?: boolean;
   filteredOptions: string[];
   isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
@@ -46,7 +47,12 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
 );
 
 export const FilteredOptionsProvider = ({ children, value: props }) => {
-  const { isListOpen: isExternalListOpen, options, singleSelect } = props;
+  const {
+    isListOpen: isExternalListOpen,
+    isLoading,
+    options,
+    singleSelect,
+  } = props;
   const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
   const {
     inputProps: { id },
@@ -229,6 +235,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setFilteredOptionsIndex,
     isListOpen,
     setInternalListOpen,
+    isLoading,
     filteredOptions,
     isValueNew,
     toggleIsListOpen,

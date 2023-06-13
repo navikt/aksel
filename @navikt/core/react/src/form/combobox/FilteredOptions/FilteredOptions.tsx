@@ -12,17 +12,17 @@ interface FilteredOptionsProps {
   toggleOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   focusInput: () => void;
   ref: React.RefObject<HTMLUListElement>;
-  loading?: boolean;
   singleSelect?: boolean;
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
-  ({ toggleOption, loading, singleSelect }, ref) => {
+  ({ toggleOption, singleSelect }, ref) => {
     const {
       inputProps: { id },
       value,
     } = useInputContext();
     const {
+      isLoading,
       isListOpen,
       filteredOptions,
       filteredOptionsIndex,
@@ -40,7 +40,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
         id={`${id}-filtered-options`}
         role="listbox"
       >
-        {loading && (
+        {isLoading && (
           <li
             className="navds-combobox__list-item navds-combobox__list-item--loading"
             role="option"

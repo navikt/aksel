@@ -20,7 +20,7 @@ export interface ComboboxProps
   clearButtonLabel?: string;
   toggleListButton?: boolean;
   toggleListButtonLabel?: string;
-  loading?: boolean;
+  isLoading?: boolean;
   onChange?: (value: string) => void;
   onToggleSelected?: (option: string, isSelected: boolean) => void;
   hideLabel?: boolean;
