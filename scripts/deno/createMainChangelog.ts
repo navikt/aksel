@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
-import { Root } from "npm:@types/mdast";
+import { Root, Text } from "npm:@types/mdast";
+import { Node } from "npm:@types/unist";
 import { heading, root, text } from "npm:mdast-builder";
 import remarkParse from "npm:remark-parse";
 import remarkStringify from "npm:remark-stringify";
@@ -24,8 +25,9 @@ import { visitParents } from "npm:unist-util-visit-parents";
 
 type PackageName = string;
 type Version = string;
-type LogGrouping = Partial<Record<string, string[]>>;
-type VersionEntry = Record<PackageName, LogGrouping>;
+type RawASTNode = Node;
+type SemverChangeHeading = Record<string, RawASTNode[]>;
+type VersionEntry = Record<PackageName, SemverChangeHeading>;
 type Changelog = Record<Version, VersionEntry>;
 
 const upsertEntry = (
@@ -39,7 +41,7 @@ const upsertEntry = (
     lastSeenVersion: string;
     lastSeenSemverHeading: string;
   },
-  value: string
+  value: RawASTNode
 ) => {
   if (!changelog[lastSeenVersion]) {
     changelog[lastSeenVersion] = {};
@@ -47,14 +49,14 @@ const upsertEntry = (
   if (!changelog[lastSeenVersion][lastSeenPackage]) {
     changelog[lastSeenVersion][lastSeenPackage] = {};
   }
-  const semverHeading =
+  const raw_ast_nodes =
     changelog[lastSeenVersion][lastSeenPackage][lastSeenSemverHeading];
-  if (!semverHeading) {
+  if (!raw_ast_nodes) {
     changelog[lastSeenVersion][lastSeenPackage][lastSeenSemverHeading] = [
       value,
     ];
   } else {
-    semverHeading.push(value);
+    raw_ast_nodes.push(value);
   }
 
   const updatedVersion = changelog[lastSeenVersion] || [];
@@ -80,29 +82,34 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
         return;
       }
       if (node.type === "heading" && node.depth === 1) {
-        //@ts-ignore
-        const packageName = node.children[0].value;
-        if (packageName.startsWith("@navikt/")) {
-          lastSeenPackage = packageName;
+        const childNode = node.children[0] as Text | undefined;
+        if (childNode && childNode.type === "text") {
+          const packageName = childNode.value;
+          if (packageName.startsWith("@navikt/")) {
+            lastSeenPackage = packageName;
+          }
         }
         return SKIP;
       } else if (node.type === "heading" && node.depth === 2) {
-        //@ts-ignore
-        const version = node.children[0].value;
-        if (version.match(/^\d+\.\d+\.\d+$/)) {
-          lastSeenVersion = version;
+        const childNode = node.children[0] as Text | undefined;
+        if (childNode && childNode.type === "text") {
+          const version = childNode.value;
+          if (version.match(/^\d+\.\d+\.\d+$/)) {
+            lastSeenVersion = version;
+          }
         }
         return SKIP;
       } else if (node.type === "heading" && node.depth === 3) {
-        //@ts-ignore
-        lastSeenSemverHeading = node.children[0].value;
+        const childNode = node.children[0] as Text | undefined;
+        if (childNode && childNode.type === "text") {
+          lastSeenSemverHeading = childNode.value;
+        }
         return SKIP;
       } else {
         upsertEntry(
           changelog,
           { lastSeenPackage, lastSeenVersion, lastSeenSemverHeading },
-          //@ts-ignore
-          structuredClone(node as Root)
+          structuredClone(node)
         );
         return SKIP;
       }
@@ -146,10 +153,8 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
       headings.push(heading(3, [text(packageName)]));
       for (const [semverHeading, changes] of Object.entries(logGrouping)) {
         headings.push(heading(4, [text(semverHeading)]));
-
-        //@ts-ignore
-        for (const change of changes) {
-          headings.push(change);
+        for (const raw_ast_nodes of changes) {
+          headings.push(raw_ast_nodes);
         }
       }
     }
