@@ -13,7 +13,7 @@ export function formatResults(res: Fuse.FuseResult<FuseItemT>[]): SearchHitT[] {
             "ingress" | "intro"
           >,
           anchor: resolveAnchor(x.matches[0], x.item),
-          description: x?.item.intro ?? x.item.ingress ?? "",
+          description: x?.item.intro || x.item.ingress || "",
         },
         ["matches"]
       ) as SearchHitT
@@ -25,7 +25,7 @@ export function formatRawResults(
 ): Omit<SearchHitT, "score" | "anchor">[] {
   return res.map((x) => ({
     item: omit(x, ["intro", "ingress"]) as Omit<FuseItemT, "ingress" | "intro">,
-    description: x?.intro ?? x.ingress ?? "",
+    description: x?.intro || x.ingress || "",
   }));
 }
 
@@ -34,7 +34,6 @@ function resolveAnchor(match: Fuse.FuseResultMatch, item: FuseItemT) {
     return item[match.key.split(".")[0]][match.refIndex].id;
   }
   if (match.key === "content.text") {
-    console.log(item[match.key.split(".")[0]][match.refIndex].id);
     return item[match.key.split(".")[0]][match.refIndex].id;
   }
   return null;
