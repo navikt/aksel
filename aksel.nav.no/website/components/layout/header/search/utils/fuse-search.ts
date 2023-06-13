@@ -19,7 +19,7 @@ export function fuseSearch(results: any[], query: string) {
     minMatchCharLength: 3,
     includeMatches: true,
     threshold: 0.3,
-    ignoreLocation: true,
+    location: 120,
   });
   return fuse.search(query).filter((x) => x.score < 0.3);
 }
