@@ -1,7 +1,10 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
 import Bubble, { BubbleProps } from "./Bubble";
-import { BodyLong, BodyShort } from "../typography";
+import { BodyLong } from "../typography";
+
+export const POSITIONS = ["left", "right"] as const;
+export const SIZES = ["medium", "small"] as const;
 
 export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -17,27 +20,34 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   timestamp?: string;
   /**
-   * Avatar for messenger. Regular text for initials works to
+   * Avatar for messenger. Regular text for initials works too, but it will be hidden for screen readers.
    */
-  avatar: React.ReactNode;
+  avatar?: React.ReactNode;
   /**
-   * Background color on bubbles
+   * Background color on bubbles.
+   * Recommended colors: --a-bg-subtle (default), --a-surface-info-subtle or --a-bg-default
+   * Avoid using the same background color as the parent
    */
   backgroundColor?: string;
   /**
-   * Background color for avatar
+   * Background color for avatar. It's recommended to use same color on bubbles and avatar.
    */
   avatarBgColor?: string;
   /**
-   * Positions avatar and Bubbles
+   * Positions avatar and bubbles
    * @default "left"
    */
-  position?: "left" | "right";
+  position?: (typeof POSITIONS)[number];
   /**
    * Hoizontal position of toptext
-   * @default Same as chat
+   * @default Same as position
    */
-  toptextPosition?: "left" | "right";
+  toptextPosition?: (typeof POSITIONS)[number];
+  /**
+   * Affects padding and font size in bubbles
+   * @default "medium"
+   */
+  size?: (typeof SIZES)[number];
 }
 
 interface ChatComponent
@@ -53,22 +63,23 @@ interface ChatComponent
 }
 
 /**
- * A component for displaying chat messages.
+ * A component for communicating dialogs between two parties.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/chat)
  * @see 🏷️ {@link ChatProps}
  *
  * @example
  * ```jsx
- * <Chat>
- *   <Chat.Bubble avatar="A" name="Alice">Hello!</Chat.Bubble>
+ * <Chat avatar="A" name="Alice" timestamp="01.01.21 14:00">
+ *   <Chat.Bubble>Hello!</Chat.Bubble>
+ *   <Chat.Bubble>How can I help you?</Chat.Bubble>
  * </Chat>
- * <Chat>
- *   <Chat.Bubble avatar="B" name="Bob">Hi there!</Chat.Bubble>
+ * <Chat avatar="B" name="Bob" timestamp="01.01.21 14:01" position="right">
+ *   <Chat.Bubble>Hi there!</Chat.Bubble>
  * </Chat>
  * ```
  */
-export const Chat = forwardRef<HTMLDivElement, ChatProps>(
+const Chat = forwardRef<HTMLDivElement, ChatProps>(
   (
     {
       children,
@@ -80,8 +91,9 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       avatarBgColor,
       backgroundColor,
       toptextPosition,
+      size = "medium",
       ...rest
-    },
+    }: ChatProps,
     ref
   ) => {
     return (
@@ -90,24 +102,27 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
         className={cl(
           "navds-chat",
           className,
-          `navds-chat--${position} navds-chat--top-text-${
-            toptextPosition ?? position
-          }`
+          `navds-chat--${position}`,
+          `navds-chat--top-text-${toptextPosition ?? position}`,
+          `navds-chat--size-${size}`,
+          { "navds-chat--has-avatar": Boolean(avatar) }
         )}
         {...rest}
       >
-        <BodyShort
-          as="div"
-          className="navds-chat__avatar"
-          style={{ backgroundColor: avatarBgColor }}
-        >
-          {avatar}
-        </BodyShort>
+        {avatar && (
+          <div
+            className="navds-chat__avatar"
+            aria-hidden
+            style={{ backgroundColor: avatarBgColor }}
+          >
+            {avatar}
+          </div>
+        )}
         <ol className="navds-chat__bubble-wrapper">
           {React.Children.map(children, (child, i) => {
             if (React.isValidElement(child)) {
               return (
-                <BodyLong as="li">
+                <BodyLong as="li" size={size}>
                   {React.cloneElement(child, {
                     name: name && i === 0 ? name : undefined,
                     timestamp: timestamp && i === 0 ? timestamp : undefined,

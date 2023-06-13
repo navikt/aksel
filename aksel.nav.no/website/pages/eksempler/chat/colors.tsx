@@ -8,19 +8,18 @@ const Example = () => {
         avatar="EVA"
         name="EVA"
         timestamp="01.01.21 14:00"
-        avatarBgColor="rgba(204, 225, 255, 1)"
-        backgroundColor="rgba(230, 240, 255, 1)"
+        avatarBgColor="var(--a-surface-info-subtle)"
+        backgroundColor="var(--a-surface-info-subtle)"
       >
         <Chat.Bubble>Hei! Mitt navn er Eva.</Chat.Bubble>
         <Chat.Bubble>Hva kan jeg hjelpe deg med?</Chat.Bubble>
       </Chat>
       <Chat
-        avatar="NO"
         name="Ola Normann"
         timestamp="01.01.21 14:00"
         position="right"
-        avatarBgColor="rgba(255, 236, 204, 1)"
-        backgroundColor="rgba(255, 249, 240, 1)"
+        avatarBgColor="var(--a-bg-default)"
+        backgroundColor="var(--a-bg-default)"
       >
         <Chat.Bubble>Hei Eva.</Chat.Bubble>
         <Chat.Bubble>
@@ -31,7 +30,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "subtle");
 
 /* Storybook story */
 export const Demo = {
@@ -40,4 +39,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "Unngå samme bakgrunnsfarge utenfor boblene som inni.",
 };

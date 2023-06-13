@@ -1,6 +1,7 @@
 import React from "react";
 import { Chat } from "../index";
 import { Meta } from "@storybook/react";
+import { POSITIONS, SIZES } from "./Chat";
 
 export default {
   title: "ds-react/Chat",
@@ -16,19 +17,25 @@ export default {
         type: "text",
       },
     },
+    position: {
+      control: { type: "radio" },
+      options: POSITIONS,
+    },
+    toptextPosition: {
+      control: { type: "radio" },
+      options: POSITIONS,
+    },
+    size: {
+      control: { type: "radio" },
+      options: SIZES,
+    },
   },
-} as Meta;
+} satisfies Meta<typeof Chat>;
 
 export const Default = {
   render: (props) => {
     return (
-      <Chat
-        avatar={props?.avatar ?? "ON"}
-        name={props?.name ?? "Ola Normann"}
-        timestamp={props?.timestamp ?? "01.01.21 14:00"}
-        avatarBgColor={props?.avatarBgColor}
-        backgroundColor={props?.backgroundColor}
-      >
+      <Chat {...props}>
         <Chat.Bubble>
           Aute minim nisi sunt mollit duis sunt nulla minim non proident.
         </Chat.Bubble>
@@ -48,14 +55,14 @@ export const Default = {
   },
 };
 
-export const Farger = () => {
+export const Colors = () => {
   return (
     <Chat
       avatar="ON"
       name="Ola Normann"
       timestamp="01.01.21 14:00"
-      avatarBgColor="var(--a-lightblue-200)"
-      backgroundColor="var(--a-lightblue-100)"
+      avatarBgColor="var(--a-surface-info-subtle)"
+      backgroundColor="var(--a-surface-info-subtle)"
     >
       <Chat.Bubble>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
@@ -135,7 +142,6 @@ export const ToptextPosition = () => {
         </Chat.Bubble>
       </Chat>
       <Chat
-        avatar="KH"
         name="Kari Høyli"
         timestamp="01.01.21 14:32"
         position="right"

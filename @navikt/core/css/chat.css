@@ -1,14 +1,14 @@
 .navds-chat {
+  --avatar-size: 2.5rem;
+  --avatar-gap: var(--a-spacing-3);
+
   display: flex;
   align-items: flex-end;
-  gap: var(--a-spacing-4);
-  padding-right: var(--a-spacing-16);
+  gap: var(--avatar-gap);
 }
 
 .navds-chat--right {
   flex-direction: row-reverse;
-  padding-right: 0;
-  padding-left: var(--a-spacing-16);
 }
 
 .navds-chat__bubble-wrapper {
@@ -26,15 +26,20 @@
 
 .navds-chat__avatar {
   align-items: center;
+  box-shadow: var(--a-shadow-xsmall);
   background: var(--ac-chat-avatar-bg, var(--a-bg-subtle));
-  color: var(--ac-chat-avatar-color, var(--a-text-default));
+  border: 1px solid var(--ac-chat-border-color, var(--a-border-subtle));
   border-radius: var(--a-border-radius-full);
+  color: var(--ac-chat-avatar-color, var(--a-text-default));
   display: flex;
   flex-shrink: 0;
   justify-content: center;
   overflow: hidden;
-  height: 3rem;
-  width: 3rem;
+  padding: 0.35em;
+  height: var(--avatar-size);
+  width: var(--avatar-size);
+  font-size: var(--a-font-size-xlarge);
+  letter-spacing: 0.022em;
 }
 
 .navds-chat__avatar svg {
@@ -44,11 +49,14 @@
 }
 
 .navds-chat__bubble {
-  padding: 1rem;
-  box-shadow: var(--a-shadow-small);
+  --bubble-max-width-with-avatar: 37.5rem;
+
+  padding: var(--a-spacing-4);
+  box-shadow: var(--a-shadow-xsmall);
   width: fit-content;
-  max-width: 37.5rem;
+  max-width: calc(var(--bubble-max-width-with-avatar) + var(--avatar-size) + var(--avatar-gap));
   background-color: var(--ac-chat-bubble-bg, var(--a-bg-subtle));
+  border: 1px solid var(--ac-chat-border-color, var(--a-border-subtle));
   border-radius: var(--a-border-radius-xlarge);
   border-bottom-left-radius: 2px;
   display: flex;
@@ -56,9 +64,17 @@
   gap: var(--a-spacing-2);
 }
 
+.navds-chat--has-avatar .navds-chat__bubble {
+  max-width: var(--bubble-max-width-with-avatar);
+}
+
 .navds-chat--right .navds-chat__bubble {
   border-radius: var(--a-border-radius-xlarge);
   border-bottom-right-radius: 2px;
+}
+
+.navds-chat--size-small .navds-chat__bubble {
+  padding: var(--a-spacing-3);
 }
 
 .navds-chat__top-text {
@@ -66,6 +82,8 @@
   display: flex;
   gap: var(--a-spacing-2);
   align-items: baseline;
+  font-weight: normal;
+  margin: 0;
 }
 
 .navds-chat--right .navds-chat__top-text {
@@ -86,8 +104,4 @@
 
 .navds-chat--right .navds-chat__top-text--left {
   align-self: flex-start;
-}
-
-.navds-chat__name {
-  font-weight: var(--a-font-weight-bold);
 }
