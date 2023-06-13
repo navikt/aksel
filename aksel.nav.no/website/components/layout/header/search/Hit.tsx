@@ -9,6 +9,7 @@ import Image from "next/legacy/image";
 import { default as Link, default as NextLink } from "next/link";
 import { forwardRef, useContext } from "react";
 import { SearchContext, SearchLoggingContext } from "./providers";
+import { highlightMatches, highlightStr } from "./utils";
 
 export const Hit = forwardRef<
   HTMLLIElement,
@@ -87,34 +88,6 @@ export const Hit = forwardRef<
   );
 });
 
-function splitStr(str: string, query: string) {
-  const regexStr = query.toLowerCase().split(" ").join("|");
-  return str.split(new RegExp(`(${regexStr})`, "gi"));
-}
-
-function highlightStr(str: string, query: string) {
-  return (
-    <span>
-      {splitStr(str, query)
-        .filter((x) => !!x)
-        .map((part, i) => (
-          <span
-            key={i}
-            className={cl({
-              "text-text-default group-focus-visible:text-text-on-action bg-teal-100 group-focus-visible:bg-transparent":
-                query
-                  .split(" ")
-                  .map((x) => x.toLowerCase())
-                  .includes(part.toLowerCase()),
-            })}
-          >
-            {part}
-          </span>
-        ))}
-    </span>
-  );
-}
-
 const highlightedHeadings = ["eksempler", "props", "tokens", "retningslinjer"];
 
 function HeadingLinks({
@@ -126,14 +99,21 @@ function HeadingLinks({
 }) {
   const { logSuccess } = useContext(SearchLoggingContext);
 
-  const Description = () => (
-    <span
-      className="font-regular text-text-subtle max-w-full text-lg"
-      aria-hidden
-    >
-      {hit.description}
-    </span>
-  );
+  const Description = () => {
+    if (hit.matches[0].key !== "heading") {
+      return highlightMatches(hit.matches[0]);
+    }
+
+    return (
+      <span
+        className="font-regular text-text-subtle max-w-full text-lg"
+        aria-hidden
+      >
+        {hit.description}
+      </span>
+    );
+  };
+
   if (hit.item._type === "komponent_artikkel") {
     return (
       <>

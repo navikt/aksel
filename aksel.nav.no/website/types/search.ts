@@ -1,4 +1,5 @@
 import { allArticleDocuments } from "../sanity/config";
+import Fuse from "fuse.js";
 
 export const searchOptions: {
   [K in (typeof allArticleDocuments)[number]]: {
@@ -53,9 +54,10 @@ export type FuseHitsT = {
 
 export type SearchHitT = {
   item: FuseItemT;
-  score: number;
+  score?: number;
   anchor?: string;
   description?: string;
+  matches?: readonly Fuse.FuseResultMatch[];
 };
 
 export type GroupedHitsT = Partial<

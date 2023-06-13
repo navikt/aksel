@@ -3,21 +3,17 @@ import { omit } from "@navikt/ds-react";
 import Fuse from "fuse.js";
 
 export function formatResults(res: Fuse.FuseResult<FuseItemT>[]): SearchHitT[] {
-  return res.map(
-    (x) =>
-      omit(
-        {
-          ...x,
-          item: omit(x.item, ["intro", "ingress"]) as Omit<
-            FuseItemT,
-            "ingress" | "intro"
-          >,
-          anchor: resolveAnchor(x.matches[0], x.item),
-          description: x?.item.intro || x.item.ingress || "",
-        },
-        ["matches"]
-      ) as SearchHitT
-  );
+  return res.map((x) => {
+    return {
+      ...x,
+      item: omit(x.item, ["intro", "ingress"]) as Omit<
+        FuseItemT,
+        "ingress" | "intro"
+      >,
+      anchor: resolveAnchor(x.matches[0], x.item),
+      description: x?.item.intro || x.item.ingress || "",
+    };
+  });
 }
 
 export function formatRawResults(

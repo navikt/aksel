@@ -11,7 +11,7 @@ type SearchResultContextType = {
   error: any;
   isValidating: boolean;
   reset: () => void;
-  mostResent: Omit<SearchHitT, "score" | "anchor">[];
+  mostResent: Omit<SearchHitT, "score" | "anchor" | "matches">[];
 };
 
 export const SearchResultContext = createContext<SearchResultContextType>({
