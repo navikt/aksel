@@ -53,7 +53,7 @@ export const InputContextProvider = ({ children, value: props }) => {
 
   const onChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target?.value;
+      const value = event.currentTarget.value;
       externalValue ?? setInternalValue(value);
       externalOnChange?.(event);
       setSearchTerm(value);

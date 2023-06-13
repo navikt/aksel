@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { ChangeEvent, InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
 export type ComboboxClearEvent =
@@ -22,7 +22,7 @@ export interface ComboboxProps
   toggleListButton?: boolean;
   toggleListButtonLabel?: string;
   isLoading?: boolean;
-  onChange?: (value: string) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onToggleSelected?: (option: string, isSelected: boolean) => void;
   hideLabel?: boolean;
   label: React.ReactNode;

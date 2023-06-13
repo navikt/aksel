@@ -97,7 +97,9 @@ export const WithExternalChips = (props) => {
         isListOpen={props.isListOpen}
         /* everything under here is optional */
         value={props.controlled ? value : undefined}
-        onChange={props.controlled ? setValue : undefined}
+        onChange={(event) =>
+          props.controlled ? setValue(event.currentTarget.value) : undefined
+        }
         label="Komboboks"
         size="medium"
         error={props.error && "error here"}
