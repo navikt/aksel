@@ -35,9 +35,9 @@ export const Results = () => {
         </div>
       )}
       {!results?.totalHits && query && (
-        <Heading size="medium" as="p" className="mx-auto w-fit py-24">
+        <Heading size="medium" as="p" className="mx-auto w-fit px-6 py-24">
           <span className="text-text-subtle">{`Ingen treff på "`}</span>
-          <span>{query}</span>
+          <span className="break-all">{query}</span>
           <span className="text-text-subtle">"</span>
         </Heading>
       )}

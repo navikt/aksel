@@ -80,7 +80,7 @@ export const SearchForm = () => {
           id="aksel-search-input"
           clearButton={false}
           placeholder="Søk gjennom hele aksel"
-          className="border-none focus:shadow-none"
+          className="border-none pr-0 focus:shadow-none"
         />
       </div>
       {chipsToShow.length !== 0 && (
