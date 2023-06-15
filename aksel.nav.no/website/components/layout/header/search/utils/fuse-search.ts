@@ -11,7 +11,7 @@ export function fuseSearch(results: any[], query: string) {
       { name: "lvl4.text", weight: 30 },
       { name: "ingress", weight: 30 },
       { name: "intro", weight: 30 },
-      { name: "tema", weight: 30 },
+      { name: "tema", weight: 70 },
       { name: "content.text", weight: 20 },
     ],
     includeScore: true,

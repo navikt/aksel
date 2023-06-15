@@ -6,7 +6,7 @@ import {
   SearchNavigationProvider,
 } from "./providers";
 
-export const GlobalSearch = () => (
+const GlobalSearch = () => (
   <SearchProvider>
     <SearchLoggingProvider>
       <SearchResultProvider>
@@ -17,3 +17,5 @@ export const GlobalSearch = () => (
     </SearchLoggingProvider>
   </SearchProvider>
 );
+
+export default GlobalSearch;

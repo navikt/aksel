@@ -18,7 +18,7 @@ export const Search = () => {
   }, []);
 
   return (
-    <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
+    <>
       <Button
         variant="primary"
         className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
@@ -48,6 +48,6 @@ export const Search = () => {
         <SearchForm />
         <Results />
       </ReactModal>
-    </div>
+    </>
   );
 };

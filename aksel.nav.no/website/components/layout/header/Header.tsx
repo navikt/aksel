@@ -1,10 +1,13 @@
-import Logo from "components/assets/Logo";
-import Link from "next/link";
-import { logNav } from "../..";
 import cl from "clsx";
-import { useRouter } from "next/router";
+import Logo from "components/assets/Logo";
 import { Hamburger } from "components/layout/header/Hamburger";
-import { GlobalSearch } from "./search";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { logNav } from "../..";
+import { Button } from "@navikt/ds-react";
+import { Suspense, lazy } from "react";
+
+const GlobalSearch = lazy(() => import("./search"));
 
 const LinkElement = ({ name, href, prefetch = undefined }) => {
   const { asPath } = useRouter();
@@ -88,7 +91,21 @@ export const Header = ({
               <LinkElement name="Bloggen" href="/produktbloggen" />
             </ul>
           </nav>
-          <GlobalSearch />
+          <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
+            <Suspense
+              fallback={
+                <Button
+                  variant="primary"
+                  className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
+                  aria-keyshortcuts="Control+b"
+                  loading
+                  iconPosition="left"
+                />
+              }
+            >
+              <GlobalSearch />
+            </Suspense>
+          </div>
           <div className="mr-2 h-full lg:hidden">
             <Hamburger />
           </div>
