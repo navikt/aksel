@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 4.1.6
+
+### Patch Changes
+
+- [`9a8bb26c3`](https://github.com/navikt/aksel/commit/9a8bb26c36cfbb1a95cf28a043d2df3dbfe7185d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Timeline-period brakk ved bruk av jsdom-tester
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.6
+
 ## 4.1.5
 
 ### Patch Changes
