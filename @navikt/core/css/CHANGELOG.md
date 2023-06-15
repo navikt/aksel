@@ -1,5 +1,7 @@
 # @navikt/ds-css
 
+## 4.1.5
+
 ## 4.1.4
 
 ### Patch Changes
