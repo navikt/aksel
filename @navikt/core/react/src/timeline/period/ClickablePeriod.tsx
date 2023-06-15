@@ -90,14 +90,15 @@ const ClickablePeriod = React.memo(
       useCallback(
         (e: FocusEvent) => {
           if (
-            ![refs.domReference.current, refs?.floating?.current].some(
-              (element) => element?.contains(e.target as Node)
-            )
+            ![
+              refs.reference.current as HTMLButtonElement | null,
+              refs?.floating?.current,
+            ].some((element) => element?.contains(e.target as Node))
           ) {
             open && setOpen(false);
           }
         },
-        [open, refs.domReference, refs?.floating]
+        [open, refs.reference, refs?.floating]
       )
     );
 
