@@ -544,6 +544,7 @@ export const useRangeDatepicker = (
     onOpenToggle: () => setOpen((x) => !x),
     disabled,
     disableWeekends,
+    bubbleEscape: true,
     ref: setDaypickerRef,
   };
 
