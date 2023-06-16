@@ -84,7 +84,7 @@ export const SearchForm = () => {
         />
       </div>
       {chipsToShow.length !== 0 && (
-        <Chips className="px-4 pb-2 md:px-10">
+        <Chips className="px-4 pb-4 md:px-10">
           {chipsToShow.map(([key, val]) => (
             <Chips.Toggle
               key={key}

@@ -39,6 +39,11 @@ export const Results = () => {
           <span className="text-text-subtle">{`Ingen treff på "`}</span>
           <span className="break-all">{query}</span>
           <span className="text-text-subtle">"</span>
+          {tags.length > 0 && (
+            <span className="text-text-subtle">{` i ${tags
+              .map((x) => searchOptions[x].display.toLowerCase())
+              .join(", ")}`}</span>
+          )}
         </Heading>
       )}
       {results?.totalHits > 0 && (
