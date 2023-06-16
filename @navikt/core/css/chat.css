@@ -33,11 +33,11 @@
   flex-shrink: 0;
   justify-content: center;
   overflow: hidden;
-  padding: 0.35em;
+  padding: 0.441em 0.29em;
   height: 2.5rem;
   width: 2.5rem;
-  font-size: var(--a-font-size-xlarge);
-  letter-spacing: 0.022em;
+  font-size: 17px;
+  letter-spacing: 0.0187em;
 }
 
 .navds-chat__avatar svg {
