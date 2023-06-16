@@ -79,7 +79,7 @@ interface ChatComponent
  * </Chat>
  * ```
  */
-const Chat = forwardRef<HTMLDivElement, ChatProps>(
+export const Chat = forwardRef<HTMLDivElement, ChatProps>(
   (
     {
       children,
