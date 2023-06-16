@@ -74,7 +74,7 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
         )}
         aria-hidden
       >
-        <span className="absolute left-[10px] z-10 translate-y-2">
+        <span className="absolute right-[10px] z-10 translate-y-2">
           {GetIcon(block.variant)}
         </span>
       </div>
