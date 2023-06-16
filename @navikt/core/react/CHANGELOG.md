@@ -1,5 +1,32 @@
 # @navikt/ds-react
 
+## 4.1.6
+
+### Patch Changes
+
+- [`9a8bb26c3`](https://github.com/navikt/aksel/commit/9a8bb26c36cfbb1a95cf28a043d2df3dbfe7185d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Timeline-period brakk ved bruk av jsdom-tester
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.6
+
+## 4.1.5
+
+### Patch Changes
+
+- [#2051](https://github.com/navikt/aksel/pull/2051) [`925aa7a14`](https://github.com/navikt/aksel/commit/925aa7a140bc0cd63e8884bea0bd478838c1aa17) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: OverridableComponent fungerer nå med komponenter som allerede bruker 'as'-prop
+
+- [#2052](https://github.com/navikt/aksel/pull/2052) [`7c17e40ca`](https://github.com/navikt/aksel/commit/7c17e40cac6703f00ce756276e9616deb73f6098) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: floating-ui sendte ikke escape-events opp gjennom dom-treet
+
+- Updated dependencies [[`8f16d1571`](https://github.com/navikt/aksel/commit/8f16d1571ec7cf452c09618a9a918ee2a634c75a)]:
+  - @navikt/aksel-icons@4.1.5
+
+## 4.1.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.4
+
 ## 4.1.3
 
 ### Patch Changes
