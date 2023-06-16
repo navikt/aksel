@@ -26,7 +26,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Background color on bubbles.
    * Recommended colors: --a-bg-subtle (default), --a-surface-info-subtle or --a-bg-default
-   * Avoid using the same background color as the parent
+   * Avoid using the same background as the surface behind Chat
    */
   backgroundColor?: string;
   /**
