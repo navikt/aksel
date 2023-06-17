@@ -126,7 +126,7 @@ export const IconPage = ({ name }: { name: string }) => {
                   onSubmit={(e) => e.preventDefault()}
                   className="flex h-fit w-full flex-wrap-reverse items-center gap-4 px-4 py-2"
                 >
-                  <div className="min-w-40">
+                  <div className="min-w-[10.25rem]">
                     <ToggleGroup
                       value={toggle}
                       onChange={(v) => setToggle(v as any)}
@@ -137,7 +137,7 @@ export const IconPage = ({ name }: { name: string }) => {
                       <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
                     </ToggleGroup>
                   </div>
-                  <div className=" min-w-48 flex w-full items-center gap-2  md:w-fit">
+                  <div className="min-w-48 md:min-w-96 flex w-full items-center gap-2  md:w-fit">
                     <Search
                       variant="simple"
                       label="Ikonsøk"
