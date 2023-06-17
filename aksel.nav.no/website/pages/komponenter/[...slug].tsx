@@ -67,6 +67,7 @@ type PageProps = NextPageT<{
   sidebar: AkselSidebarT;
   seo: any;
   refs: ArticleListT;
+  publishDate: string;
 }>;
 
 /**
@@ -148,24 +149,31 @@ export const getStaticProps = async ({
       preview,
       title: page?.heading ?? "",
       id: page?._id ?? "",
+      publishDate: await dateStr(
+        page?.updateInfo?.lastVerified
+          ? page?.updateInfo?.lastVerified
+          : page?.publishedAt
+          ? page.publishedAt
+          : page._updatedAt
+      ),
     },
     notFound: !page && !preview,
     revalidate: 60,
   };
 };
 
-const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
+const Page = ({
+  page,
+  sidebar,
+  refs,
+  seo,
+  publishDate,
+}: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
 
   const pack = page?.kodepakker?.length > 0 && kodepakker[page?.kodepakker[0]];
-
-  const date = page?.updateInfo?.lastVerified
-    ? page?.updateInfo?.lastVerified
-    : page?.publishedAt
-    ? page.publishedAt
-    : page._updatedAt;
 
   const tag =
     page?.status?.tag === "beta"
@@ -220,7 +228,7 @@ const Page = ({ page, sidebar, refs, seo }: PageProps["props"]) => {
           <Detail as="div" className="mt-2 flex items-center gap-3">
             {internal && <StatusTag status="internal" />}
             <StatusTag showStable status={page?.status?.tag} />
-            {`OPPDATERT ${dateStr(date)}`}
+            {`OPPDATERT ${publishDate}`}
           </Detail>
         }
         footer={

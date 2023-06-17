@@ -37,6 +37,7 @@ type PageProps = NextPageT<{
   page: ResolveContributorsT<
     ResolveTemaT<ResolveSlugT<ResolveRelatedArticlesT<AkselGodPraksisDocT>>>
   >;
+  publishDate: string;
 }>;
 
 export const query = `{
@@ -99,13 +100,20 @@ export const getStaticProps = async ({
       preview,
       id: page?._id ?? "",
       title: page?.heading ?? "",
+      publishDate: await dateStr(
+        page?.updateInfo?.lastVerified
+          ? page?.updateInfo?.lastVerified
+          : page?.publishedAt
+          ? page.publishedAt
+          : page._updatedAt
+      ),
     },
     notFound: !page && !preview,
     revalidate: 60,
   };
 };
 
-const Page = ({ page: data }: PageProps["props"]) => {
+const Page = ({ page: data, publishDate }: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
   }
@@ -118,12 +126,6 @@ const Page = ({ page: data }: PageProps["props"]) => {
     );
     return null;
   }
-
-  const date = data?.updateInfo?.lastVerified
-    ? data?.updateInfo?.lastVerified
-    : data?.publishedAt
-    ? data.publishedAt
-    : data._updatedAt;
 
   const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
 
@@ -227,7 +229,7 @@ const Page = ({ page: data }: PageProps["props"]) => {
 
               <div className="mt-6 inline-flex flex-wrap items-center gap-2 text-base">
                 <Detail uppercase as="span">
-                  {dateStr(date)}
+                  {publishDate}
                 </Detail>
                 {authors?.length > 0 && (
                   <>
@@ -297,7 +299,7 @@ const Page = ({ page: data }: PageProps["props"]) => {
                     </BodyShort>
                   )}
                   <BodyShort as="span" className="text-text-subtle">
-                    Publisert: {dateStr(data?.publishedAt ?? data?._updatedAt)}
+                    Publisert: {publishDate}
                   </BodyShort>
                 </div>
                 <div className="mt-12 md:mt-16">
