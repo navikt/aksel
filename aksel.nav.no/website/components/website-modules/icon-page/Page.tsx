@@ -209,9 +209,9 @@ export const IconPage = ({ name }: { name: string }) => {
                                           }
                                         }}
                                         className={cl(
-                                          "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-2 focus:ring-blue-800",
+                                          "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-blue-800 focus-visible:ring-2",
                                           {
-                                            "bg-surface-selected ring-border-alt-3 z-10 ring-1":
+                                            "from-surface-selected bg-surface-selected ring-border-alt-3 z-10 bg-gradient-to-br to-teal-50 ring-1":
                                               i.id === name,
                                           }
                                         )}

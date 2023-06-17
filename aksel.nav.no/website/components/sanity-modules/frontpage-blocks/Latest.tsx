@@ -23,9 +23,12 @@ const Latest = ({ block }: { block: LatestT }) => {
   const section = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      entry.isIntersecting && setIntersected(entry.isIntersecting);
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        entry.isIntersecting && setIntersected(entry.isIntersecting);
+      },
+      { rootMargin: "0px 0px 100px 0px" }
+    );
     observer.observe(section.current);
     return () => observer.disconnect();
   }, []);

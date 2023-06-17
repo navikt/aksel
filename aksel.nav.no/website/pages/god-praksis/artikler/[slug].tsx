@@ -38,6 +38,7 @@ type PageProps = NextPageT<{
     ResolveTemaT<ResolveSlugT<ResolveRelatedArticlesT<AkselGodPraksisDocT>>>
   >;
   publishDate: string;
+  verifiedDate: string;
 }>;
 
 export const query = `{
@@ -100,20 +101,25 @@ export const getStaticProps = async ({
       preview,
       id: page?._id ?? "",
       title: page?.heading ?? "",
-      publishDate: await dateStr(
+      verifiedDate: await dateStr(
         page?.updateInfo?.lastVerified
           ? page?.updateInfo?.lastVerified
           : page?.publishedAt
           ? page.publishedAt
           : page._updatedAt
       ),
+      publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
     },
     notFound: !page && !preview,
     revalidate: 60,
   };
 };
 
-const Page = ({ page: data, publishDate }: PageProps["props"]) => {
+const Page = ({
+  page: data,
+  publishDate,
+  verifiedDate,
+}: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
   }
@@ -229,7 +235,7 @@ const Page = ({ page: data, publishDate }: PageProps["props"]) => {
 
               <div className="mt-6 inline-flex flex-wrap items-center gap-2 text-base">
                 <Detail uppercase as="span">
-                  {publishDate}
+                  {verifiedDate}
                 </Detail>
                 {authors?.length > 0 && (
                   <>
