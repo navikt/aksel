@@ -38,9 +38,7 @@ const Card = ({
   visible: boolean;
   index: number;
 }) => {
-  const date = useFormatedDate(
-    article.publishedAt ? article.publishedAt : article._updatedAt
-  );
+  const date = useFormatedDate(article.publishedAt ?? article._updatedAt);
 
   const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
   const showImage = [

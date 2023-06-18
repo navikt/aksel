@@ -27,11 +27,7 @@ const ArtikkelCard = ({
   ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
 > & { source: string; variant: string; level?: "2" | "3" }) => {
   const date = useFormatedDate(
-    (rest as any)?.updateInfo?.lastVerified
-      ? (rest as any)?.updateInfo?.lastVerified
-      : publishedAt
-      ? publishedAt
-      : _updatedAt
+    (rest as any)?.updateInfo?.lastVerified ?? publishedAt ?? _updatedAt
   );
 
   return (
