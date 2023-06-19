@@ -19,34 +19,83 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@amplitude/analytics-connector@npm:^1.4.6":
+"@amplitude/analytics-browser@npm:^1.10.8":
+  version: 1.11.2
+  resolution: "@amplitude/analytics-browser@npm:1.11.2"
+  dependencies:
+    "@amplitude/analytics-client-common": ^1.0.3
+    "@amplitude/analytics-core": ^1.1.2
+    "@amplitude/analytics-types": ^1.2.1
+    "@amplitude/plugin-page-view-tracking-browser": ^1.0.5
+    "@amplitude/plugin-web-attribution-browser": ^1.0.5
+    "@amplitude/ua-parser-js": ^0.7.31
+    tslib: ^2.4.1
+  checksum: 3f5c3bd4611503910fa674f7fa8220babcfc14c5dc16f8a0f7f7e381de417c14cc65a702418e1cfad137bb2c7a9dc713057ccd28d76e0693fb96c37a271b5fe1
+  languageName: node
+  linkType: hard
+
+"@amplitude/analytics-client-common@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@amplitude/analytics-client-common@npm:1.0.3"
+  dependencies:
+    "@amplitude/analytics-connector": ^1.4.5
+    "@amplitude/analytics-core": ^1.1.2
+    "@amplitude/analytics-types": ^1.2.1
+    tslib: ^2.4.1
+  checksum: 34c158c32566d375cfbab43b0f9539c6f88e09b310113f6017f1f508efe9eb251fab2fd66582f64503257817f7c7c323bbb50f61bf68ffd1fc3cb0a18b4c08ab
+  languageName: node
+  linkType: hard
+
+"@amplitude/analytics-connector@npm:^1.4.5":
   version: 1.4.8
   resolution: "@amplitude/analytics-connector@npm:1.4.8"
   checksum: 72b94cc2018af4d7bec48acf2129a933bee8268fee53d737408a058eef98ac84e7239265d53885f0d8fc73774657a6620db401a44674137486ebc550b320d6e4
   languageName: node
   linkType: hard
 
-"@amplitude/types@npm:^1.10.2":
-  version: 1.10.2
-  resolution: "@amplitude/types@npm:1.10.2"
-  checksum: 206ef520979c76a69baa145679a60c96249c165ff8354c0b58d183b917ae3abb35569cb0e9587ecf6c7b8636b2cc69d05ea9ecbd1cc9cade503256860bd80afe
+"@amplitude/analytics-core@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@amplitude/analytics-core@npm:1.1.2"
+  dependencies:
+    "@amplitude/analytics-types": ^1.2.1
+    tslib: ^2.4.1
+  checksum: c274bfdff3408b1c9604cb77e123288e07f46516cc574087c59154b3f3986a4db2f0515971214650d22041317c2c2a03aca823aad650bc7e4ea8c0ac90401301
   languageName: node
   linkType: hard
 
-"@amplitude/ua-parser-js@npm:0.7.33":
+"@amplitude/analytics-types@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@amplitude/analytics-types@npm:1.2.1"
+  checksum: 263adea76537f4d5ef429338ff5bf3a080192bd392a4422fe40026bf94b10158195d48575117dd6b414f9f0c724a695f9d625e8f661544e1e4fe97c85c400e02
+  languageName: node
+  linkType: hard
+
+"@amplitude/plugin-page-view-tracking-browser@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@amplitude/plugin-page-view-tracking-browser@npm:1.0.5"
+  dependencies:
+    "@amplitude/analytics-client-common": ^1.0.3
+    "@amplitude/analytics-types": ^1.2.1
+    tslib: ^2.4.1
+  checksum: dfd469d65a280048988e8bf33c6ac5bcdca7ed546b2e528f610c9dd9e69814e3923d629257b7baa37a6f1f3229477d47b42b2a58351e8de526cbf8971d120b47
+  languageName: node
+  linkType: hard
+
+"@amplitude/plugin-web-attribution-browser@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@amplitude/plugin-web-attribution-browser@npm:1.0.5"
+  dependencies:
+    "@amplitude/analytics-client-common": ^1.0.3
+    "@amplitude/analytics-types": ^1.2.1
+    tslib: ^2.4.1
+  checksum: 45132c0e502c79238ba18f2737c0dcee2bcf3dc3ccca30590571cca53728b8fee6bd625abefb8db902cd30ce369b8ca95579fa96e03f9383c1321730eda702f9
+  languageName: node
+  linkType: hard
+
+"@amplitude/ua-parser-js@npm:^0.7.31":
   version: 0.7.33
   resolution: "@amplitude/ua-parser-js@npm:0.7.33"
   checksum: b08ce4cd4e96fed9eebffadb4060d24751cea80caf4265e6b829b7cfdb6561431386015674b3ac330a8987b990e2ca70725d4298eb1438beccb85264848b0b34
-  languageName: node
-  linkType: hard
-
-"@amplitude/utils@npm:^1.10.2":
-  version: 1.10.2
-  resolution: "@amplitude/utils@npm:1.10.2"
-  dependencies:
-    "@amplitude/types": ^1.10.2
-    tslib: ^2.0.0
-  checksum: 9b5d3652725e30add1e42a1f221a3954c844d9aeb9d73b197c5ea2a0b91a86ccdedd4878e829cdae0eca287e68d37016347b97860069fa233d8d9ec78821d1c9
   languageName: node
   linkType: hard
 
@@ -3757,7 +3806,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^4.1.6, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^4.1.7, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3784,8 +3833,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^4.1.6
-    "@navikt/ds-tokens": ^4.1.6
+    "@navikt/ds-css": ^4.1.7
+    "@navikt/ds-tokens": ^4.1.7
     "@types/jest": ^29.0.0
     concurrently: 7.2.1
     copyfiles: 2.4.1
@@ -3802,7 +3851,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 4.1.6
+    "@navikt/ds-css": 4.1.7
     "@types/inquirer": ^9.0.3
     "@types/jest": ^29.0.0
     axios: 1.3.6
@@ -3826,11 +3875,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@4.1.6, @navikt/ds-css@^4.1.6, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@4.1.7, @navikt/ds-css@^4.1.7, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^4.1.6
+    "@navikt/ds-tokens": ^4.1.7
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3843,12 +3892,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@4.1.6, @navikt/ds-react@^4.1.6, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@4.1.7, @navikt/ds-react@^4.1.7, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.24.1
-    "@navikt/aksel-icons": ^4.1.6
+    "@navikt/aksel-icons": ^4.1.7
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3884,11 +3933,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^4.1.6, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^4.1.7, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^4.1.6
+    "@navikt/ds-tokens": ^4.1.7
     "@types/jest": ^29.0.0
     color: 4.2.3
     jest: ^29.0.0
@@ -3899,7 +3948,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^4.1.6, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^4.1.7, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -7921,11 +7970,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^4.1.6
-    "@navikt/ds-css": ^4.1.6
-    "@navikt/ds-react": ^4.1.6
-    "@navikt/ds-tailwind": ^4.1.6
-    "@navikt/ds-tokens": ^4.1.6
+    "@navikt/aksel-icons": ^4.1.7
+    "@navikt/ds-css": ^4.1.7
+    "@navikt/ds-react": ^4.1.7
+    "@navikt/ds-tailwind": ^4.1.7
+    "@navikt/ds-tokens": ^4.1.7
     prettier-plugin-tailwindcss: ^0.2.3
   languageName: unknown
   linkType: soft
@@ -7979,20 +8028,6 @@ __metadata:
     yarn: ^1.22.10
   languageName: unknown
   linkType: soft
-
-"amplitude-js@npm:^8.21.5":
-  version: 8.21.9
-  resolution: "amplitude-js@npm:8.21.9"
-  dependencies:
-    "@amplitude/analytics-connector": ^1.4.6
-    "@amplitude/ua-parser-js": 0.7.33
-    "@amplitude/utils": ^1.10.2
-    "@babel/runtime": ^7.21.0
-    blueimp-md5: ^2.19.0
-    query-string: 8.1.0
-  checksum: 01409772abf904fecac26e81c453c884a8d3f1dd6b8a01a75288c8f1c8dccb022fdf2257fa66641d480241c3f4c0adbc643c9cfa89673642d9587180bb679c48
-  languageName: node
-  linkType: hard
 
 "ansi-align@npm:^2.0.0":
   version: 2.0.0
@@ -8959,13 +8994,6 @@ __metadata:
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
   checksum: 869417503c722e7dc54ca46715f70e15f4d9c602a423a02c825570862d12935be59ed9c7ba34a9b31f186c017c23cac6b54e35446f8353059c101da73eac22ef
-  languageName: node
-  linkType: hard
-
-"blueimp-md5@npm:^2.19.0":
-  version: 2.19.0
-  resolution: "blueimp-md5@npm:2.19.0"
-  checksum: 28095dcbd2c67152a2938006e8d7c74c3406ba6556071298f872505432feb2c13241b0476644160ee0a5220383ba94cb8ccdac0053b51f68d168728f9c382530
   languageName: node
   linkType: hard
 
@@ -11113,13 +11141,6 @@ __metadata:
   version: 0.2.2
   resolution: "decode-uri-component@npm:0.2.2"
   checksum: 95476a7d28f267292ce745eac3524a9079058bbb35767b76e3ee87d42e34cd0275d2eb19d9d08c3e167f97556e8a2872747f5e65cbebcac8b0c98d83e285f139
-  languageName: node
-  linkType: hard
-
-"decode-uri-component@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "decode-uri-component@npm:0.4.1"
-  checksum: 0473924860986fb6ca19ee65a2af13e08801b4f3660475b058500ea8479ed715c919884a026b6bf4296dbb640d3cea74fadf45490b2439152fc548271d0201ec
   languageName: node
   linkType: hard
 
@@ -13337,13 +13358,6 @@ __metadata:
   dependencies:
     to-regex-range: ^5.0.1
   checksum: cc283f4e65b504259e64fd969bcf4def4eb08d85565e906b7d36516e87819db52029a76b6363d0f02d0d532f0033c9603b9e2d943d56ee3b0d4f7ad3328ff917
-  languageName: node
-  linkType: hard
-
-"filter-obj@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "filter-obj@npm:5.1.0"
-  checksum: ba7c24d9b2c0552ee87d268e07eca74483af61fb740545ffa809f7e9e5294de38cf163ecc55af0e8a40020af9a49512c32f4022de2a858b110420fc8bffa7c9c
   languageName: node
   linkType: hard
 
@@ -20507,17 +20521,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"query-string@npm:8.1.0":
-  version: 8.1.0
-  resolution: "query-string@npm:8.1.0"
-  dependencies:
-    decode-uri-component: ^0.4.1
-    filter-obj: ^5.1.0
-    split-on-first: ^3.0.0
-  checksum: 16fe49ab714f2b802bd31bc417876a38a82cd49bea01c0d6c37ca3439604c774752c8c66f9eda5ee33c268de2fc2a65e0e0e27aa97d8d98159af5c1fc838a017
-  languageName: node
-  linkType: hard
-
 "querystringify@npm:^2.1.1":
   version: 2.2.0
   resolution: "querystringify@npm:2.2.0"
@@ -22316,8 +22319,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "shadow-dom@workspace:examples/shadow-dom"
   dependencies:
-    "@navikt/ds-css": 4.1.6
-    "@navikt/ds-react": 4.1.6
+    "@navikt/ds-css": 4.1.7
+    "@navikt/ds-react": 4.1.7
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": ^2.1.0
@@ -22856,13 +22859,6 @@ __metadata:
   version: 1.0.0
   resolution: "speedometer@npm:1.0.0"
   checksum: 6b322bbb0607c9994fba2a6ac189cf6caea4ce9f5067c1ccfc2848b55883f65d48292bfed4244ce855573ed7cdf0f69943ae6e507f7ec90eef232b64cdba6237
-  languageName: node
-  linkType: hard
-
-"split-on-first@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "split-on-first@npm:3.0.0"
-  checksum: 75dc27ecbac65cfbeab9a3b90cf046307220192d3d7a30e46aa0f19571cc9b4802aac813f3de2cc9b16f2e46aae72f275659b5d2614bb5369c77724d739e5f73
   languageName: node
   linkType: hard
 
@@ -24200,7 +24196,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.4.1":
   version: 2.5.3
   resolution: "tslib@npm:2.5.3"
   checksum: 88902b309afaf83259131c1e13da1dceb0ad1682a213143a1346a649143924d78cf3760c448b84d796938fd76127183894f8d85cbb3bf9c4fddbfcc140c0003c
@@ -25300,6 +25296,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "website@workspace:aksel.nav.no/website"
   dependencies:
+    "@amplitude/analytics-browser": ^1.10.8
     "@axe-core/playwright": ^4.5.2
     "@babel/core": ^7.19.0
     "@next/bundle-analyzer": ^12.1.0
@@ -25321,7 +25318,6 @@ __metadata:
     "@types/jest": ^29.0.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
-    amplitude-js: ^8.21.5
     autoprefixer: ^10.4.0
     babel-loader: ^8.2.0
     boring-avatars: 1.7.0
