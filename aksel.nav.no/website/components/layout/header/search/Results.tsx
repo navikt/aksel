@@ -6,7 +6,7 @@ import { SearchContext, SearchResultContext } from "./providers";
 import { Heading, Label } from "@navikt/ds-react";
 
 export const Results = () => {
-  const { tags, query, deboucedQuery } = useContext(SearchContext);
+  const { tags, query } = useContext(SearchContext);
   const { results, isValidating, error, mostResent } =
     useContext(SearchResultContext);
 
@@ -15,10 +15,7 @@ export const Results = () => {
   }
 
   return (
-    <div
-      className="flex h-full flex-col overflow-y-auto"
-      role={query && deboucedQuery === query ? "status" : undefined}
-    >
+    <div className="flex h-full flex-col overflow-y-auto" role="status">
       {!results && mostResent && (
         <div id="aksel-search-results" aria-label="Nyeste artikler">
           <Collection

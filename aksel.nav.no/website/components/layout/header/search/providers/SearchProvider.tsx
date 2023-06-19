@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useDebounce, useShortcut } from "../hooks";
+import { useShortcut } from "../hooks";
 
 type SearchContextType = {
   os: "mac" | "windows";
@@ -17,7 +17,6 @@ type SearchContextType = {
   setTags: Dispatch<SetStateAction<Array<keyof typeof searchOptions>>>;
   query: string;
   setQuery: (v: string) => void;
-  deboucedQuery: string;
 };
 
 export const SearchContext = createContext<SearchContextType>({
@@ -28,7 +27,6 @@ export const SearchContext = createContext<SearchContextType>({
   setTags: () => null,
   query: "",
   setQuery: () => null,
-  deboucedQuery: "",
 });
 
 export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
@@ -40,8 +38,6 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
   const [query, setQuery] = useState("");
 
   useShortcut(open, setOpen, inputRef);
-
-  const deboucedQuery = useDebounce(query);
 
   useEffect(() => {
     navigator.userAgent?.indexOf("Mac OS X") !== -1
@@ -59,7 +55,6 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
         setTags,
         query,
         setQuery,
-        deboucedQuery,
       }}
     >
       {children}
