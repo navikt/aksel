@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 4.1.6
+
+## 4.1.5
+
+## 4.1.4
+
+### Patch Changes
+
+- [#2049](https://github.com/navikt/aksel/pull/2049) [`e06096105`](https://github.com/navikt/aksel/commit/e060961050c75ec815e5c125001f1ff99106e298) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Subtle-description på form-elementer brakk bruk av Readmore
+
+## 4.1.3
+
 ## 4.1.2
 
 ## 4.1.1

@@ -1,4 +1,5 @@
 import { noCdnClient } from "@/sanity/client.server";
+import { logger } from "logger";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const token = process.env.SANITY_WRITE_KEY;
@@ -60,7 +61,7 @@ export default async function logPageScroll(
     })
     .commit()
     .catch((err) => {
-      console.error("Error:", err);
+      logger.error(err);
       return res.status(500).json({ message: "Error updating metrics" });
     });
 

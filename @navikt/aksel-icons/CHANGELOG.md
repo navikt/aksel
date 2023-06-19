@@ -1,5 +1,20 @@
 # @navikt/aksel-icons
 
+## 4.1.6
+
+## 4.1.5
+
+### Patch Changes
+
+- [#2054](https://github.com/navikt/aksel/pull/2054) [`8f16d1571`](https://github.com/navikt/aksel/commit/8f16d1571ec7cf452c09618a9a918ee2a634c75a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Nye ikoner
+
+  - ChevronRightLast
+  - ChevronLeftLast
+
+## 4.1.4
+
+## 4.1.3
+
 ## 4.1.2
 
 ## 4.1.1
