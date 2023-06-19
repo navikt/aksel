@@ -1,5 +1,5 @@
 import { urlFor } from "@/sanity/interface";
-import { SearchHitT } from "@/types";
+import { SearchHitT, searchOptions } from "@/types";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Chips } from "@navikt/ds-react";
 import cl from "clsx";
@@ -17,8 +17,9 @@ export const Hit = forwardRef<
     hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
     index: number;
     simple?: boolean;
+    tag?: Partial<keyof typeof searchOptions>;
   }
->(({ hit, index, simple = false }, ref) => {
+>(({ hit, index, simple = false, tag }, ref) => {
   const { query } = useContext(SearchContext);
   const { logSuccess } = useContext(SearchLoggingContext);
 
@@ -49,7 +50,7 @@ export const Hit = forwardRef<
             className="focus-visible:shadow-focus focus-visible:bg-border-focus focus-visible:text-text-on-action group scroll-my-32 text-xl font-semibold focus:outline-none"
           >
             <span className="group-hover:underline">
-              {highlightStr(hit.item.heading, query)}
+              {highlightStr(hit.item.heading, query, tag)}
             </span>
           </NextLink>
           {simple ? (

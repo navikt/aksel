@@ -3,6 +3,7 @@ import { Heading } from "@navikt/ds-react";
 import { Tag } from "components/sanity-modules/frontpage-blocks/Tag";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Hit } from "./Hit";
+import cl from "clsx";
 
 export function CollectionMapper({
   groups,
@@ -19,21 +20,27 @@ export function CollectionMapper({
     <>
       {Object.entries(groups)
         .sort((a, b) => searchOptions[a[0]].index - searchOptions[b[0]].index)
-        .map(([key, val], index, arr) => {
-          const prev = arr.slice(0, index);
-          const total =
-            prev.reduce((prev, cur) => prev + cur[1].length, 0) + startIndex;
+        .map(
+          (
+            [key, val]: [key: keyof typeof searchOptions, val: SearchHitT[]],
+            index,
+            arr
+          ) => {
+            const prev = arr.slice(0, index);
+            const total =
+              prev.reduce((prev, cur) => prev + cur[1].length, 0) + startIndex;
 
-          return (
-            <Collection
-              startIndex={total}
-              key={key}
-              heading={`${searchOptions[key].display} (${val.length})`}
-              tag={key}
-              hits={val}
-            />
-          );
-        })}
+            return (
+              <Collection
+                startIndex={total}
+                key={key}
+                heading={`${searchOptions[key].display} (${val.length})`}
+                tag={key}
+                hits={val}
+              />
+            );
+          }
+        )}
     </>
   );
 }
@@ -49,7 +56,7 @@ export function Collection({
   hits: SearchHitT[] | Omit<SearchHitT, "score" | "anchor">[];
   simple?: boolean;
   startIndex: number;
-  tag?: string;
+  tag?: Partial<keyof typeof searchOptions>;
 }) {
   const [intersected, setIntersected] = useState(false);
   const item = useRef(null);
@@ -73,13 +80,24 @@ export function Collection({
   return (
     <div>
       {heading && tag && (
-        <h3 className="sticky top-0 z-10 bg-teal-50 p-2 px-4 md:px-10">
+        <h3
+          className={cl("sticky top-0 z-10 p-2 px-4 md:px-10", {
+            "bg-deepblue-50": ["komponent_artikkel", "ds_artikkel"].includes(
+              tag
+            ),
+            "bg-violet-50": ["aksel_prinsipp", "aksel_standalone"].includes(
+              tag
+            ),
+            "bg-teal-50": tag === "aksel_artikkel",
+            "bg-pink-50": tag === "aksel_blogg",
+          })}
+        >
           <Tag hTag="span" type={tag} size="small" inline count={hits.length} />
         </h3>
       )}
       {heading && !tag && (
         <Heading
-          className="sticky top-0 z-10 bg-teal-50 p-2 px-4  md:px-10"
+          className="bg-surface-subtle sticky top-0 z-10 p-2 px-4  md:px-10"
           size="small"
           level="3"
         >
@@ -94,12 +112,19 @@ export function Collection({
             index={startIndex + xi}
             ref={xi === split.initial.length - 1 ? item : null}
             simple={simple}
+            tag={tag}
           />
         ))}
         {split.lazy &&
           intersected &&
           split.lazy.map((x, xi) => (
-            <Hit key={xi} hit={x} index={startIndex + xi} simple={simple} />
+            <Hit
+              key={xi}
+              hit={x}
+              index={startIndex + xi}
+              simple={simple}
+              tag={tag}
+            />
           ))}
       </ul>
     </div>

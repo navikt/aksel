@@ -44,7 +44,7 @@ export const Tag = ({
         <Comp className="text-teal-700">{text ? text : "God praksis"}</Comp>
       );
     case "aksel_blogg":
-      return <Comp className="text-pink-600">Blogg</Comp>;
+      return <Comp className="text-pink-700">Blogg</Comp>;
     case "komponent_artikkel":
       return (
         <Comp className="text-deepblue-600 flex items-center gap-3">
