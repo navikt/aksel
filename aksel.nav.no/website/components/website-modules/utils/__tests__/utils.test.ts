@@ -21,12 +21,12 @@ describe("Utils test", () => {
     expect(capitalize(str4)).toEqual("Teststr");
   });
 
-  test("dateStr", () => {
+  test("dateStr", async () => {
     const date = "2022-06-09T11:05:48Z";
     const date2 = "2021-03-02T12:05:48Z";
 
-    expect(dateStr(date)).toEqual("9. juni 2022");
-    expect(dateStr(date2)).toEqual("2. mars 2021");
+    expect(await dateStr(date)).toEqual("9. juni 2022");
+    expect(await dateStr(date2)).toEqual("2. mars 2021");
   });
 
   test("abbrName", () => {
