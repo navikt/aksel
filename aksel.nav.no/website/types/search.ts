@@ -21,6 +21,7 @@ export type SearchResultsT = {
   topResults: SearchHitT[];
   hits: Record<keyof typeof searchOptions, number>;
   totalHits: number;
+  query?: string;
 };
 
 interface PageItemT {

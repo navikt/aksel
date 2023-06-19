@@ -15,7 +15,7 @@ export const Results = () => {
   }
 
   return (
-    <div className="flex h-full flex-col overflow-y-auto" role="status">
+    <div className="flex h-full flex-col overflow-y-auto">
       {!results && mostResent && (
         <div id="aksel-search-results" aria-label="Nyeste artikler">
           <Collection
@@ -32,7 +32,13 @@ export const Results = () => {
         </div>
       )}
       {!results?.totalHits && query && (
-        <Heading size="medium" as="p" className="mx-auto w-fit px-6 py-24">
+        <Heading
+          size="medium"
+          as="p"
+          className="mx-auto w-fit px-6 py-24"
+          aria-live="polite"
+          aria-atomic
+        >
           <span className="text-text-subtle">{`Ingen treff på "`}</span>
           <span className="break-all">{query}</span>
           <span className="text-text-subtle">"</span>
@@ -45,8 +51,8 @@ export const Results = () => {
       )}
       {results?.totalHits > 0 && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
-          <Label as="p" className="sr-only">
-            {`${results?.totalHits} treff på "${query}"${
+          <Label as="p" className="sr-only" aria-live="polite">
+            {`${results?.totalHits} treff på "${results.query}"${
               tags.length > 0
                 ? ` i ${tags
                     .map((x) => searchOptions[x].display.toLowerCase())

@@ -31,7 +31,10 @@ export const useSearch = () => {
           )
         );
 
-        setFuseResults(createSearchResult(formatedResults, rawResults));
+        setFuseResults({
+          ...createSearchResult(formatedResults, rawResults),
+          query: value,
+        });
         logSearch({
           type: "standard",
           searchedFromUrl: window.location.pathname,
