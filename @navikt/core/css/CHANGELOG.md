@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 4.1.7
+
+### Patch Changes
+
+- [`42b5af64a`](https://github.com/navikt/aksel/commit/42b5af64ab35d0f2d126d41f8fc3e61fe2834b36) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset jsdom-problemer ved rendring av Timeline
+
+## 4.1.6
+
+## 4.1.5
+
 ## 4.1.4
 
 ### Patch Changes

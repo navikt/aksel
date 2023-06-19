@@ -11,9 +11,9 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import { useEventListener, mergeRefs } from "../../util";
 import cl from "clsx";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
+import { mergeRefs } from "../../util";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -85,22 +85,6 @@ const ClickablePeriod = React.memo(
       [periodRef, refs.setReference]
     );
 
-    useEventListener(
-      "focusin",
-      useCallback(
-        (e: FocusEvent) => {
-          if (
-            ![refs.domReference.current, refs?.floating?.current].some(
-              (element) => element?.contains(e.target as Node)
-            )
-          ) {
-            open && setOpen(false);
-          }
-        },
-        [open, refs.domReference, refs?.floating]
-      )
-    );
-
     const staticSide = {
       top: "bottom",
       right: "left",
@@ -165,6 +149,10 @@ const ClickablePeriod = React.memo(
             ref={refs.setFloating}
             {...getFloatingProps({
               tabIndex: -1,
+              onBlur: (e) =>
+                e.target.previousSibling !== document.activeElement &&
+                open &&
+                setOpen(false),
             })}
             style={{
               ...floatingStyles,

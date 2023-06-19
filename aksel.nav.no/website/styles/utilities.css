@@ -76,4 +76,9 @@ p.override-text-no-max {
 
 [id] > code {
   font-size: inherit;
+  color: inherit;
+}
+
+[id] > code > .inline-code-amp {
+  display: none;
 }

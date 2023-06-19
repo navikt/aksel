@@ -1,15 +1,16 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import { getAuthors } from "components/website-modules/LatestBloggs";
+import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
-import { dateStr, logNav } from "../..";
+import { getAuthors, logNav } from "@/utils";
 
 const BloggCard = ({
   blog,
 }: {
   blog: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
 }) => {
+  const date = useFormatedDate(blog?.publishedAt ?? blog._createdAt);
   return (
     <li
       key={blog._id}
@@ -38,7 +39,7 @@ const BloggCard = ({
           className="text-text-subtle mt-auto flex gap-2 justify-self-end"
         >
           <span className="font-semibold">{getAuthors(blog)[0]}</span>
-          <span>{dateStr(blog?.publishedAt ?? blog._createdAt)}</span>
+          <span>{date}</span>
         </BodyShort>
       )}
     </li>
