@@ -38,14 +38,13 @@ export const Highlight = ({
             quality={100}
             layout="fill"
             aria-hidden
-            priority
             className={cl(
               "bg-deepblue-200 rounded-lg object-cover sm:object-contain",
               {
                 "hue-rotate-[65deg]": article?.status?.tag === "beta",
               }
             )}
-            decoding="sync"
+            decoding="auto"
           />
         ) : article?.seo?.image ? (
           <Image
@@ -54,11 +53,10 @@ export const Highlight = ({
             layout="fill"
             objectFit="cover"
             aria-hidden
-            priority
             className={cl("rounded-lg", {
               "hue-rotate-[65deg]": article?.status?.tag === "beta",
             })}
-            decoding="sync"
+            decoding="auto"
           />
         ) : (
           <Image
@@ -66,9 +64,8 @@ export const Highlight = ({
             layout="fill"
             objectFit="contain"
             aria-hidden
-            priority
             className="rounded-lg"
-            decoding="sync"
+            decoding="auto"
           />
         )}
       </div>
