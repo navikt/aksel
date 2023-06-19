@@ -64,7 +64,7 @@
   border-bottom-right-radius: 2px;
 }
 
-.navds-chat--size-small .navds-chat__bubble {
+.navds-chat--small .navds-chat__bubble {
   padding: var(--a-spacing-3);
 }
 

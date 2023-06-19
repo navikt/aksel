@@ -78,6 +78,23 @@ interface ChatComponent
  *   <Chat.Bubble>Hi there!</Chat.Bubble>
  * </Chat>
  * ```
+ * @example
+ * ```jsx
+ * // With recommended colors
+ * <Chat
+ *  avatar="A"
+ *  name="Alice"
+ *  timestamp="01.01.21 14:00"
+ *  backgroundColor="var(--a-surface-info-subtle)"
+ *  avatarBgColor="var(--a-surface-info-subtle)"
+ * >
+ *   <Chat.Bubble>Hello!</Chat.Bubble>
+ *   <Chat.Bubble>How can I help you?</Chat.Bubble>
+ * </Chat>
+ * <Chat avatar="B" name="Bob" timestamp="01.01.21 14:01" position="right">
+ *   <Chat.Bubble>Hi there!</Chat.Bubble>
+ * </Chat>
+ * ```
  */
 export const Chat = forwardRef<HTMLDivElement, ChatProps>(
   (
@@ -104,7 +121,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
           className,
           `navds-chat--${position}`,
           `navds-chat--top-text-${toptextPosition ?? position}`,
-          `navds-chat--size-${size}`
+          `navds-chat--${size}`
         )}
         {...rest}
       >
