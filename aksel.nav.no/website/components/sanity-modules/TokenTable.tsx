@@ -3,7 +3,7 @@ import { TokenTableT } from "@/types";
 import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import core from "@navikt/ds-css/tokens.json";
 import { BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import NextLink from "next/link";
 import { useState } from "react";

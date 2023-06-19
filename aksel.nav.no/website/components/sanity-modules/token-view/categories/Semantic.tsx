@@ -169,7 +169,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   }}
                 />
                 <span
-                  className="rounded-t-small h-2/3 w-3"
+                  className="rounded-t-small h-2/4 w-3"
                   style={{
                     border: `1px solid var(${x.name})`,
                     backgroundColor: `var(${x.name.replace(
@@ -179,7 +179,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   }}
                 />
                 <span
-                  className="rounded-t-small h-1/3 w-3"
+                  className="rounded-t-small h-2/3 w-3"
                   style={{
                     border: `1px solid var(${x.name})`,
                     backgroundColor: `var(${x.name.replace(
@@ -233,11 +233,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   style={{ backgroundColor: `var(${x.name})` }}
                 />
                 <span
-                  className="rounded-t-small h-2/3 w-3"
+                  className="rounded-t-small h-2/4 w-3"
                   style={{ backgroundColor: `var(${x.name})` }}
                 />
                 <span
-                  className="rounded-t-small h-1/3 w-3"
+                  className="rounded-t-small h-2/3 w-3"
                   style={{ backgroundColor: `var(${x.name})` }}
                 />
               </div>

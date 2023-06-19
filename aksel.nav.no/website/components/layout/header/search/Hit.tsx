@@ -1,6 +1,6 @@
 import { isNew } from "@/utils";
 import { Tag } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import Image from "next/legacy/image";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SearchHitT } from "@/types";

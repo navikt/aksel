@@ -106,9 +106,6 @@ export const KomponentArtikkel = defineType({
         list: [
           { title: "ds-react", value: "ds-react" },
           { title: "ds-css", value: "ds-css" },
-          { title: "ds-react-internal", value: "ds-react-internal" },
-          { title: "ds-css-internal", value: "ds-css-internal" },
-          { title: "ds-icons", value: "ds-icons" },
           { title: "ds-tokens", value: "ds-tokens" },
           { title: "ds-tailwind", value: "ds-tailwind" },
         ],

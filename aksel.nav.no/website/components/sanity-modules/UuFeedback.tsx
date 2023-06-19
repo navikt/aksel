@@ -1,7 +1,7 @@
 import { FeedbackT } from "@/types";
 import { IdContext } from "@/utils";
 import { Button, Heading, Textarea } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 

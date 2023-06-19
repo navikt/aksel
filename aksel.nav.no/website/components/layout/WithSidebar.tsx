@@ -123,10 +123,10 @@ export const WithSidebar = ({
                     </Heading>
                     <div
                       className={cl({
-                        " w-fit": variant !== "page",
+                        "w-fit": variant !== "page",
                       })}
                     >
-                      {intro && intro}
+                      {intro}
                     </div>
                   </div>
                   {variant === "page" && pageProps.status?.bilde && (
@@ -160,10 +160,7 @@ export const WithSidebar = ({
               </div>
               <div className={cl("sm:px-6 md:px-10", { flex: withToc })}>
                 {withToc && (
-                  <TableOfContentsv2
-                    changedState={pageProps["content"]}
-                    hideToc={false}
-                  />
+                  <TableOfContentsv2 changedState={pageProps["content"]} />
                 )}
                 <div className="w-full">
                   {children}
