@@ -5,9 +5,29 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { logNav } from "../..";
 import { Button } from "@navikt/ds-react";
-import { Suspense, lazy } from "react";
+import dynamic from "next/dynamic";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 
-const GlobalSearch = lazy(() => import("./search"));
+export const GlobalSearch = dynamic(() => import("./search"), {
+  loading: () => (
+    <Button
+      variant="primary"
+      className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
+      aria-keyshortcuts="Control+b"
+      icon={
+        <MagnifyingGlassIcon
+          className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
+          aria-label="Åpne meny"
+          aria-hidden
+        />
+      }
+      iconPosition="left"
+    >
+      Søk
+    </Button>
+  ),
+  ssr: false,
+});
 
 const LinkElement = ({ name, href, prefetch = undefined }) => {
   const { asPath } = useRouter();
@@ -92,19 +112,7 @@ export const Header = ({
             </ul>
           </nav>
           <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
-            <Suspense
-              fallback={
-                <Button
-                  variant="primary"
-                  className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
-                  aria-keyshortcuts="Control+b"
-                  loading
-                  iconPosition="left"
-                />
-              }
-            >
-              <GlobalSearch />
-            </Suspense>
+            <GlobalSearch />
           </div>
           <div className="mr-2 h-full lg:hidden">
             <Hamburger />
