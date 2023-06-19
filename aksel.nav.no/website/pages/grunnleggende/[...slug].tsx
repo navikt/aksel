@@ -25,6 +25,7 @@ type PageProps = NextPageT<{
   sidebar: AkselSidebarT;
   seo: any;
   refs: ArticleListT;
+  publishDate: string;
 }>;
 
 export const query = `{
@@ -79,22 +80,17 @@ export const getStaticProps = async ({
       title: page?.heading ?? "",
       id: page?._id ?? "",
       refs: [],
+      publishDate: await dateStr(page._updatedAt),
     },
     notFound: !page && !preview,
     revalidate: 60,
   };
 };
 
-const Page = ({ page, sidebar, seo }: PageProps["props"]) => {
+const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
-
-  const date = page?.updateInfo?.lastVerified
-    ? page?.updateInfo?.lastVerified
-    : page?.publishedAt
-    ? page.publishedAt
-    : page._updatedAt;
 
   return (
     <>
@@ -131,7 +127,7 @@ const Page = ({ page, sidebar, seo }: PageProps["props"]) => {
         intro={
           <Detail as="div" className="mt-2 flex items-center gap-3">
             <StatusTag showStable status={page?.status?.tag} />
-            {`OPPDATERT ${dateStr(date)}`}
+            {`OPPDATERT ${publishDate}`}
           </Detail>
         }
         pageProps={page}

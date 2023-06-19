@@ -126,7 +126,7 @@ export const IconPage = ({ name }: { name: string }) => {
                   onSubmit={(e) => e.preventDefault()}
                   className="flex h-fit w-full flex-wrap-reverse items-center gap-4 px-4 py-2"
                 >
-                  <div className="min-w-40">
+                  <div className="min-w-[10.25rem]">
                     <ToggleGroup
                       value={toggle}
                       onChange={(v) => setToggle(v as any)}
@@ -137,7 +137,7 @@ export const IconPage = ({ name }: { name: string }) => {
                       <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
                     </ToggleGroup>
                   </div>
-                  <div className=" min-w-48 flex w-full items-center gap-2  md:w-fit">
+                  <div className="min-w-48 md:min-w-96 flex w-full items-center gap-2  md:w-fit">
                     <Search
                       variant="simple"
                       label="Ikonsøk"
@@ -209,9 +209,9 @@ export const IconPage = ({ name }: { name: string }) => {
                                           }
                                         }}
                                         className={cl(
-                                          "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-2 focus:ring-blue-800",
+                                          "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-blue-800 focus-visible:ring-2",
                                           {
-                                            "bg-surface-selected ring-border-alt-3 z-10 ring-1":
+                                            "from-surface-selected bg-surface-selected ring-border-alt-3 z-10 bg-gradient-to-br to-teal-50 ring-1":
                                               i.id === name,
                                           }
                                         )}
