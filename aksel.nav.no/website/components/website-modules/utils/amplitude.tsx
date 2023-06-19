@@ -24,7 +24,9 @@ export const initAmplitude = () => {
     init("1a9a84a5e557ac9635a250bc27d75030", undefined, {
       useBatch: true,
       serverUrl: "https://amplitude.nav.no/collect",
-      attribution: { disabled: true },
+      defaultTracking: {
+        attribution: false,
+      },
       ingestionMetadata: { sourceName: window.location.toString() },
     });
   }
@@ -65,10 +67,9 @@ const isProduction = () => {
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
   return new Promise(function (resolve: any) {
     const eventData = data ? { ...data } : {};
-    /* if (amplitude && isProduction()) {
-      amplitude.getInstance().logEvent(eventName, eventData, resolve);
-    } */
-    track(eventName, eventData, resolve);
+    if (isProduction()) {
+      track(eventName, eventData, resolve);
+    }
   });
 }
 
