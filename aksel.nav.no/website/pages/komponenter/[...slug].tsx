@@ -42,12 +42,6 @@ const kodepakker = {
     changelog:
       "https://github.com/navikt/aksel/blob/main/%40navikt/core/css/CHANGELOG.md",
   },
-  "ds-icons": {
-    title: "@navikt/ds-reaciconst",
-    git: "https://github.com/navikt/aksel/tree/main/%40navikt/icons",
-    changelog:
-      "https://github.com/navikt/aksel/blob/main/%40navikt/icons/CHANGELOG.md",
-  },
   "ds-tokens": {
     title: "@navikt/ds-tokens",
     git: "https://github.com/navikt/aksel/tree/main/%40navikt/core/tokens",

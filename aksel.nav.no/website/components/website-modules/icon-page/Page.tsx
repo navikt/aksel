@@ -2,7 +2,7 @@ import { useMedia } from "@/utils";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";

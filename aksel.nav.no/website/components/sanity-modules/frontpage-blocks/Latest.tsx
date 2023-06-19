@@ -96,7 +96,6 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
                   quality={100}
                   layout="fill"
                   aria-hidden
-                  priority
                   className={cl(
                     "bg-deepblue-200 rounded-lg object-cover sm:object-contain",
                     {
@@ -112,7 +111,6 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
                   layout="fill"
                   objectFit="cover"
                   aria-hidden
-                  priority
                   className={cl("rounded-lg", {
                     "hue-rotate-[65deg]": x?.status?.tag === "beta",
                   })}
@@ -124,7 +122,6 @@ function Highlights({ highlights }: { highlights: ArticleT[] }) {
                   layout="fill"
                   objectFit="contain"
                   aria-hidden
-                  priority
                   className="rounded-lg"
                   decoding="sync"
                 />

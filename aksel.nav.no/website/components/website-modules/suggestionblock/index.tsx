@@ -1,6 +1,6 @@
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Button, Heading } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
 import { ChangeLogIconOutline } from "components/assets";
 
 const SuggestionBlockComponent = ({
