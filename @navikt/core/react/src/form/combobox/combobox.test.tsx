@@ -62,7 +62,7 @@ describe("Render combobox", () => {
   });
 
   it("Should show loading icon when loading (used for async search)", async () => {
-    const utils = render(<App options={[]} isListOpen loading />);
+    const utils = render(<App options={[]} isListOpen isLoading />);
 
     expect(await utils.findByRole("option", { name: "venter..." }));
   });

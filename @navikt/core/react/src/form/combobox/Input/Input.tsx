@@ -42,6 +42,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       filteredOptionsIndex,
       moveFocusUp,
       moveFocusDown,
+      ariaDescribedBy,
+      moveFocusToInput,
+      moveFocusToEnd,
     } = useFilteredOptionsContext();
 
     const handleKeyUp = (e) => {
@@ -54,6 +57,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         case "Enter":
           e.preventDefault();
           toggleOption(e);
+          break;
+        case "Home":
+          moveFocusToInput();
+          break;
+        case "End":
+          moveFocusToEnd();
           break;
         default:
           break;
@@ -118,11 +127,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         role="combobox"
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
-        aria-controls={`${inputProps.id}-filteredOptions`}
+        aria-controls={`${inputProps.id}-filtered-options`}
         aria-expanded={!!isListOpen}
         autoComplete="off"
         aria-autocomplete="list"
         aria-activedescendant={activeDecendantId}
+        aria-describedby={ariaDescribedBy}
         className={cl(
           inputClassName,
           "navds-combobox__input",

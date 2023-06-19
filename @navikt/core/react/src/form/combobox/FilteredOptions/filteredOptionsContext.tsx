@@ -25,11 +25,13 @@ const getMatchingValuesFromList = (value, list) =>
 
 type FilteredOptionsContextType = {
   activeDecendantId?: string;
+  ariaDescribedBy?: string;
   filteredOptionsRef: React.RefObject<HTMLUListElement>;
   filteredOptionsIndex: number | null;
   setFilteredOptionsIndex: (index: number) => void;
   isListOpen: boolean;
   setInternalListOpen: (open: boolean) => void;
+  isLoading?: boolean;
   filteredOptions: string[];
   isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
@@ -37,13 +39,21 @@ type FilteredOptionsContextType = {
   resetFilteredOptionsIndex: () => void;
   moveFocusUp: () => void;
   moveFocusDown: () => void;
+  moveFocusToInput: () => void;
+  moveFocusToEnd: () => void;
 };
 const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
   {} as FilteredOptionsContextType
 );
 
 export const FilteredOptionsProvider = ({ children, value: props }) => {
-  const { isListOpen: isExternalListOpen, options, singleSelect } = props;
+  const {
+    allowNewValues,
+    isListOpen: isExternalListOpen,
+    isLoading,
+    options,
+    singleSelect,
+  } = props;
   const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
   const {
     inputProps: { id },
@@ -53,6 +63,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setSearchTerm,
     shouldAutocomplete,
   } = useInputContext();
+  const [ariaDescribedBy, setAriaDescribedBy] = useState<string>();
 
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState<
     number | null
@@ -105,8 +116,11 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, []);
 
   const isValueNew = useMemo(
-    () => Boolean(value) && !isValueInList(value, filteredOptions),
-    [value, filteredOptions]
+    () =>
+      allowNewValues &&
+      Boolean(value) &&
+      !isValueInList(value, filteredOptions),
+    [allowNewValues, value, filteredOptions]
   );
 
   const getMinimumIndex = useCallback(() => {
@@ -114,15 +128,31 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, [isValueNew, singleSelect]);
 
   useEffect(() => {
-    if (value) {
+    if (!isLoading && filteredOptions.length === 0) {
+      setAriaDescribedBy(`${id}-no-hits`);
+    } else if ((value && value !== "") || isLoading) {
       toggleIsListOpen(true);
-      if (!shouldAutocomplete) {
-        setFilteredOptionsIndex(getMinimumIndex());
+      if (shouldAutocomplete && filteredOptions[0]) {
+        //setFilteredOptionsIndex(getMinimumIndex());
+        setAriaDescribedBy(
+          `${id}-option-${filteredOptions[0].replace(" ", "-")}`
+        );
+      } else if (isLoading) {
+        setAriaDescribedBy(`${id}-is-loading`);
       }
     } else {
       toggleIsListOpen(false);
+      setAriaDescribedBy(undefined);
     }
-  }, [getMinimumIndex, value, shouldAutocomplete, toggleIsListOpen]);
+  }, [
+    getMinimumIndex,
+    isLoading,
+    value,
+    shouldAutocomplete,
+    toggleIsListOpen,
+    filteredOptions,
+    id,
+  ]);
 
   const currentOption = useMemo(() => {
     if (filteredOptionsIndex == null) {
@@ -139,14 +169,35 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   };
 
   const scrollToOption = useCallback((newIndex: number) => {
-    if (filteredOptionsRef.current) {
-      const child = filteredOptionsRef.current.children[newIndex + 1];
+    if (
+      filteredOptionsRef.current &&
+      filteredOptionsRef.current.children[newIndex]
+    ) {
+      const child = filteredOptionsRef.current.children[newIndex];
       const { top, bottom } = child.getBoundingClientRect();
       const parentRect = filteredOptionsRef.current.getBoundingClientRect();
-      if (top < parentRect.top || bottom > parentRect.bottom)
+      if (top < parentRect.top || bottom > parentRect.bottom) {
         child.scrollIntoView({ block: "nearest" });
+      }
     }
   }, []);
+
+  useEffect(() => {
+    if (filteredOptionsIndex !== null && isListOpen) {
+      scrollToOption(filteredOptionsIndex);
+    }
+  }, [filteredOptionsIndex, isListOpen, scrollToOption]);
+
+  const moveFocusToInput = useCallback(() => {
+    setFilteredOptionsIndex(null);
+    toggleIsListOpen(false);
+  }, [toggleIsListOpen]);
+
+  const moveFocusToEnd = useCallback(() => {
+    const lastIndex = filteredOptions.length - 1;
+    toggleIsListOpen(true);
+    setFilteredOptionsIndex(lastIndex);
+  }, [filteredOptions.length, toggleIsListOpen]);
 
   const moveFocusUp = useCallback(() => {
     if (filteredOptionsIndex === null) {
@@ -158,8 +209,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     }
     const newIndex = Math.max(getMinimumIndex(), filteredOptionsIndex - 1);
     setFilteredOptionsIndex(newIndex);
-    scrollToOption(newIndex);
-  }, [filteredOptionsIndex, getMinimumIndex, scrollToOption, toggleIsListOpen]);
+  }, [filteredOptionsIndex, getMinimumIndex, toggleIsListOpen]);
 
   const moveFocusDown = useCallback(() => {
     if (filteredOptionsIndex === null || !isListOpen) {
@@ -172,13 +222,11 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
       filteredOptions.length - 1
     );
     setFilteredOptionsIndex(newIndex);
-    scrollToOption(newIndex);
   }, [
     filteredOptions.length,
     filteredOptionsIndex,
     getMinimumIndex,
     isListOpen,
-    scrollToOption,
     toggleIsListOpen,
   ]);
 
@@ -188,7 +236,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     } else if (filteredOptionsIndex === -1) {
       return `${id}-combobox-new-option`;
     } else {
-      return `${id}-option-${currentOption}`;
+      return `${id}-option-${currentOption?.replace(" ", "-")}`;
     }
   }, [filteredOptionsIndex, currentOption, id]);
 
@@ -199,6 +247,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setFilteredOptionsIndex,
     isListOpen,
     setInternalListOpen,
+    isLoading,
     filteredOptions,
     isValueNew,
     toggleIsListOpen,
@@ -206,6 +255,9 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     resetFilteredOptionsIndex,
     moveFocusUp,
     moveFocusDown,
+    moveFocusToInput,
+    moveFocusToEnd,
+    ariaDescribedBy,
   };
 
   return (

@@ -8,12 +8,12 @@ export default {
   title: "ds-react/Combobox",
   component: Combobox,
   argTypes: {
-    loading: {
+    isListOpen: {
       control: {
         type: "boolean",
       },
     },
-    isListOpen: {
+    isLoading: {
       control: {
         type: "boolean",
       },
@@ -59,7 +59,6 @@ export const Default = (props) => {
 
 Default.args = {
   controlled: false,
-  loading: false,
   options,
   initialSelectedOptions,
   selectedOptions: [],
@@ -83,7 +82,7 @@ export const WithExternalChips = (props) => {
           {selectedOptions.map((option) => (
             <Chips.Removable
               key={option}
-              onMouseUp={() => toggleSelected(option)}
+              onPointerUp={() => toggleSelected(option)}
               onKeyUp={(e) => e.key === "Enter" && toggleSelected(option)}
             >
               {option}
@@ -98,9 +97,10 @@ export const WithExternalChips = (props) => {
         isListOpen={props.isListOpen}
         /* everything under here is optional */
         value={props.controlled ? value : undefined}
-        onChange={props.controlled ? setValue : undefined}
+        onChange={(event) =>
+          props.controlled ? setValue(event.currentTarget.value) : undefined
+        }
         label="Komboboks"
-        loading={props.loading}
         size="medium"
         error={props.error && "error here"}
         id={id}
@@ -112,12 +112,11 @@ export const WithExternalChips = (props) => {
 
 WithExternalChips.args = {
   controlled: false,
-  loading: false,
   options,
   selectedOptions: [],
 };
 
-export function Loading({ isListOpen, loading }) {
+export function Loading({ isListOpen, isLoading }) {
   const id = useId();
   return (
     <div>
@@ -127,14 +126,14 @@ export function Loading({ isListOpen, loading }) {
         options={[]}
         selectedOptions={[]}
         isListOpen={isListOpen}
-        loading={loading}
+        isLoading={isLoading}
       />
     </div>
   );
 }
 
 Loading.args = {
-  loading: true,
+  isLoading: true,
   isListOpen: true,
 };
 
@@ -182,6 +181,50 @@ SingleSelectWithoutAutoComplete.args = {
   options,
   initialSelectedOptions,
   shouldAutocomplete: false,
+};
+
+export function ComboboxWithAddNewOptions(props) {
+  const id = useId();
+  return (
+    <div>
+      <Combobox
+        id={id}
+        label="Komboboks (med nye verdier)"
+        options={props.options}
+        allowNewValues={props.allowNewValues}
+      />
+    </div>
+  );
+}
+
+ComboboxWithAddNewOptions.args = {
+  allowNewValues: true,
+  singleSelect: true,
+  options,
+  initialSelectedOptions,
+  shouldAutocomplete: false,
+};
+
+export function ComboboxWithNoHits(props) {
+  const id = useId();
+  const [value, setValue] = useState(props.value);
+  return (
+    <div>
+      <Combobox
+        id={id}
+        label="Komboboks (uten søketreff)"
+        options={props.options}
+        value={value}
+        onChange={(event) => setValue(event.currentTarget.value)}
+      />
+    </div>
+  );
+}
+
+ComboboxWithNoHits.args = {
+  singleSelect: true,
+  options,
+  value: "Orange",
 };
 
 export const WithCallbacks = () => {
