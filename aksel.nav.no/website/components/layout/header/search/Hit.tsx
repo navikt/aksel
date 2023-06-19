@@ -105,10 +105,7 @@ function HeadingLinks({
     }
 
     return (
-      <span
-        className="font-regular text-text-subtle max-w-full text-lg"
-        aria-hidden
-      >
+      <span className="font-regular text-text-subtle max-w-full text-lg">
         {hit.description}
       </span>
     );

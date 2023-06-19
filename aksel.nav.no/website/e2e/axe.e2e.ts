@@ -6,7 +6,7 @@ test.describe("Axe a11y", () => {
   for (const url of urls) {
     test(`Check page ${url}`, async ({ page }) => {
       await page.goto(`http://localhost:3000${url}`);
-      page.waitForLoadState("domcontentloaded");
+      await page.waitForLoadState("domcontentloaded");
       const accessibilityScanResults = await new AxeBuilder({ page })
         .disableRules(["definition-list", "scrollable-region-focusable"])
         .exclude("iframe")
