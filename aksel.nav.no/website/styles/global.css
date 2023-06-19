@@ -59,7 +59,6 @@ a {
 /* Stop content behind modal-scrolling */
 .aksel.ReactModal__Body--open {
   overflow: hidden;
-  max-height: 100vh;
 }
 
 .skiplink {

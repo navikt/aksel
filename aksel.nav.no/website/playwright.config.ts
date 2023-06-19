@@ -46,7 +46,7 @@ const config: PlaywrightTestConfig = {
       },
       ...(process.env.FULL_TEST
         ? { testMatch: [/.*\.e2e\.(ts|tsx)/, /smoketest.test.ts/] }
-        : { testMatch: [/smoketest.test.ts/] }),
+        : { testMatch: [/smoketest.test.ts/, /search.e2e.ts/] }),
     },
     {
       name: "Safari",

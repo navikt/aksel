@@ -1,10 +1,33 @@
-import Logo from "components/assets/Logo";
-import Link from "next/link";
-import { logNav } from "../..";
 import cl from "clsx";
-import { useRouter } from "next/router";
+import Logo from "components/assets/Logo";
 import { Hamburger } from "components/layout/header/Hamburger";
-import { GlobalSearch } from "./search";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { logNav } from "../..";
+import { Button } from "@navikt/ds-react";
+import dynamic from "next/dynamic";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+
+export const GlobalSearch = dynamic(() => import("./search"), {
+  loading: () => (
+    <Button
+      variant="primary"
+      className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
+      aria-keyshortcuts="Control+b"
+      icon={
+        <MagnifyingGlassIcon
+          className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
+          aria-label="Åpne meny"
+          aria-hidden
+        />
+      }
+      iconPosition="left"
+    >
+      Søk
+    </Button>
+  ),
+  ssr: false,
+});
 
 const LinkElement = ({ name, href, prefetch = undefined }) => {
   const { asPath } = useRouter();
@@ -59,7 +82,7 @@ export const Header = ({
             "mx-auto flex h-full max-w-screen-2xl items-center pr-4 lg:pr-6"
           )}
         >
-          <div className="flex h-11 items-center pr-4 pl-4 sm:pr-6 sm:pl-4">
+          <div className="flex h-11 items-center pl-4 pr-4 sm:pl-4 sm:pr-6">
             <Link
               href="/"
               passHref
@@ -88,7 +111,9 @@ export const Header = ({
               <LinkElement name="Bloggen" href="/produktbloggen" />
             </ul>
           </nav>
-          <GlobalSearch />
+          <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
+            <GlobalSearch />
+          </div>
           <div className="mr-2 h-full lg:hidden">
             <Hamburger />
           </div>

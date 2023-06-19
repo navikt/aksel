@@ -1,7 +1,8 @@
 import { allArticleDocuments } from "../sanity/config";
+import Fuse from "fuse.js";
 
 export const searchOptions: {
-  [K in typeof allArticleDocuments[number] | "icon" | "icon_page"]: {
+  [K in (typeof allArticleDocuments)[number]]: {
     display: string;
     index: number;
     hidden?: boolean;
@@ -11,10 +12,8 @@ export const searchOptions: {
   aksel_artikkel: { display: "God praksis", index: 1 },
   ds_artikkel: { display: "Grunnleggende", index: 2 },
   aksel_blogg: { display: "Blogg", index: 3 },
-  icon: { display: "Ikoner", index: 4 },
   aksel_prinsipp: { display: "Prinsipper", index: 5 },
   aksel_standalone: { display: "Unike sider", index: 6, hidden: true },
-  icon_page: { display: "Ikonsøk", index: 7, hidden: true },
 };
 
 export type SearchResultsT = {
@@ -22,41 +21,24 @@ export type SearchResultsT = {
   topResults: SearchHitT[];
   hits: Record<keyof typeof searchOptions, number>;
   totalHits: number;
+  query?: string;
 };
 
 interface PageItemT {
-  _type: keyof Omit<keyof typeof searchOptions, "icon">;
-  content: string;
+  _type: keyof typeof searchOptions;
   heading: string;
   ingress?: string;
   intro?: string;
-  publishedAt?: string;
   slug: string;
   status?: { bilde: any; tag: string };
   tema?: string[];
-  updateInfo?: { lastVerified: string };
-  _createdAt: string;
-  _id: string;
-  _updatedAt: string;
+  content: string[];
+  lvl2?: { text: string; id: string }[];
+  lvl3?: { text: string; id: string }[];
+  lvl4?: { text: string; id: string }[];
 }
 
-interface IconItemT {
-  _type: "icon";
-  name: string;
-  category: string;
-  sub_category: string;
-  keywords: string;
-  created_at: string;
-}
-
-export interface IconPageItemT {
-  _type: "icon_page";
-  heading: string;
-  description: string;
-  keywords: string[];
-}
-
-export type FuseItemT = PageItemT | IconItemT | IconPageItemT;
+export type FuseItemT = PageItemT;
 
 export type FuseHitsT = {
   item: FuseItemT;
@@ -73,12 +55,10 @@ export type FuseHitsT = {
 
 export type SearchHitT = {
   item: FuseItemT;
-  score: number;
-
-  highlight: {
-    shouldHightlight: boolean;
-    description: string;
-  };
+  score?: number;
+  anchor?: string;
+  description?: string;
+  matches?: readonly Fuse.FuseResultMatch[];
 };
 
 export type GroupedHitsT = Partial<
@@ -86,16 +66,13 @@ export type GroupedHitsT = Partial<
 >;
 
 export type SearchLogT = {
-  type: "suksess" | "feilet" | "standard";
-  retries: number;
-  retriedQueries: string[];
+  type: string;
   query: string;
   filter: string[];
-  hits: number;
   searchedFromUrl: string;
-
   index?: number;
   accuracy?: string;
   topResult?: boolean;
   url?: string;
+  tag?: string;
 };
