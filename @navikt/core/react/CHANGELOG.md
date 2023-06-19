@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 4.1.7
+
+### Patch Changes
+
+- [`42b5af64a`](https://github.com/navikt/aksel/commit/42b5af64ab35d0f2d126d41f8fc3e61fe2834b36) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset jsdom-problemer ved rendring av Timeline
+
+- [#2056](https://github.com/navikt/aksel/pull/2056) [`dfbbe92a6`](https://github.com/navikt/aksel/commit/dfbbe92a63210278d9dd4d154c01f116ad921fc1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - La til `wrapperClassname`-prop for HelpText
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.7
+
 ## 4.1.6
 
 ### Patch Changes
