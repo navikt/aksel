@@ -55,6 +55,7 @@ export const SearchForm = () => {
           variant="tertiary-neutral"
           icon={<XMarkIcon title="Lukk søk" />}
           onClick={close}
+          type="button"
         />
         <Search
           label={
@@ -90,6 +91,7 @@ export const SearchForm = () => {
               key={key}
               variant="neutral"
               selected={tags.includes(key as keyof typeof searchOptions)}
+              type="button"
               onClick={() => {
                 const newTags = (tags as string[]).includes(key)
                   ? tags.filter((y) => y !== key)
