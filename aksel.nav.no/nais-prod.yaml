@@ -50,6 +50,3 @@ spec:
     - emptyDir:
         medium: Memory
       mountPath: /app/aksel.nav.no/website/.next/cache
-    - emptyDir:
-        medium: Disk
-      mountPath: /app/aksel.nav.no/website/searchindex
