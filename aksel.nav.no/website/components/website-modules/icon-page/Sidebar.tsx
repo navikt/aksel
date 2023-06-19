@@ -184,7 +184,7 @@ export const IconSidebar = ({
             theme={undefined}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="relative m-0 max-w-[80vw]  overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:max-w-[20rem]">
+              <pre className="relative m-0 max-w-[80vw]  overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:max-w-sm">
                 {tokens.map((line, i) => (
                   <div
                     key={i}
@@ -217,7 +217,7 @@ export const IconSidebar = ({
             theme={undefined}
           >
             {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="w-text relative m-0 max-w-[80vw] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:w-auto lg:max-w-[20rem]">
+              <pre className="w-text relative m-0 max-w-[80vw] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:w-auto lg:max-w-sm">
                 {tokens.map((line, i) => (
                   <div
                     key={i}

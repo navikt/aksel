@@ -28,6 +28,7 @@ import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   prinsipp: ResolveContributorsT<ResolveSlugT<AkselPrinsippDocT>>;
+  publishDate: string;
 }>;
 
 export const query = `{
@@ -61,13 +62,14 @@ export const getServerSideProps: GetServerSideProps = async (
       preview: context.preview ?? false,
       id: prinsipp?._id,
       title: prinsipp?.heading ?? "",
+      publishDate: await dateStr(prinsipp?.publishedAt ?? prinsipp._createdAt),
     },
     notFound:
       (!prinsipp && !context.preview) || context.params.prinsipp.length > 2,
   };
 };
 
-const Page = ({ prinsipp: data }: PageProps["props"]) => {
+const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
   }
@@ -155,7 +157,7 @@ const Page = ({ prinsipp: data }: PageProps["props"]) => {
                     as="span"
                     className="text-text-subtle "
                   >
-                    {dateStr(data?._updatedAt)}
+                    {publishDate}
                   </BodyShort>
                   {authors?.length > 0 && (
                     <BodyShort
@@ -214,8 +216,7 @@ const Page = ({ prinsipp: data }: PageProps["props"]) => {
                         </BodyShort>
                       )}
                       <BodyShort as="span" className="text-text-subtle ">
-                        Publisert:{" "}
-                        {dateStr(data?.publishedAt ?? data?._updatedAt)}
+                        Publisert: {publishDate}
                       </BodyShort>
                     </div>
                     <div className="mt-12 md:mt-16">
