@@ -1,16 +1,4 @@
-import { clientConfig } from "@/sanity/config";
-import { _checkAuth } from "@sanity/preview-kit";
 import { useEffect, useState } from "react";
-
-export const useCheckAuth = () => {
-  const [user, setUser] = useState<boolean>(true);
-
-  useEffect(() => {
-    _checkAuth(clientConfig.projectId, null).then(setUser);
-  }, []);
-
-  return user;
-};
 
 export const useMedia = (media: string): boolean => {
   const [isActive, setIsActive] = useState(false);
