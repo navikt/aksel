@@ -8,8 +8,11 @@ function splitStr(str: string, query: string) {
 }
 
 export function highlightStr(str: string, query: string) {
+  if (!query) {
+    return str;
+  }
   return (
-    <span>
+    <>
       {splitStr(str, query)
         .filter((x) => !!x)
         .map((part, i) => (
@@ -26,7 +29,7 @@ export function highlightStr(str: string, query: string) {
             {part}
           </span>
         ))}
-    </span>
+    </>
   );
 }
 
