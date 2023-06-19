@@ -78,8 +78,8 @@ export const Small = () => {
 export const Colors = () => {
   return (
     <Chat
-      avatar="ON"
-      name="Ola Normann"
+      avatar="NAV"
+      name="NAV"
       timestamp="01.01.21 14:00"
       avatarBgColor="var(--a-surface-info-subtle)"
       backgroundColor="var(--a-surface-info-subtle)"
