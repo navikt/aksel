@@ -25,7 +25,7 @@
 .navds-chat__avatar {
   align-items: center;
   box-shadow: var(--a-shadow-xsmall);
-  background-color: var(--ac-chat-avatar-bg, var(--a-bg-subtle));
+  background-color: var(--ac-chat-avatar-bg, var(--a-surface-neutral-subtle));
   border: 1px solid var(--ac-chat-border-color, var(--a-border-subtle));
   border-radius: var(--a-border-radius-full);
   color: var(--ac-chat-avatar-color, var(--a-text-default));
@@ -33,11 +33,10 @@
   flex-shrink: 0;
   justify-content: center;
   overflow: hidden;
-  padding: 0.441em 0.29em;
   height: 2.5rem;
   width: 2.5rem;
-  font-size: 17px;
-  letter-spacing: 0.0187em;
+  font-size: 1.06rem;
+  letter-spacing: 0.024rem;
 }
 
 .navds-chat__avatar svg {
@@ -50,7 +49,7 @@
   padding: var(--a-spacing-4);
   box-shadow: var(--a-shadow-xsmall);
   width: fit-content;
-  background-color: var(--ac-chat-bubble-bg, var(--a-bg-subtle));
+  background-color: var(--ac-chat-bubble-bg, var(--a-surface-neutral-subtle));
   border: 1px solid var(--ac-chat-border-color, var(--a-border-subtle));
   border-radius: var(--a-border-radius-xlarge);
   border-bottom-left-radius: 2px;
@@ -75,7 +74,7 @@
 
 .navds-chat--neutral .navds-chat__bubble,
 .navds-chat--neutral .navds-chat__avatar {
-  background-color: var(--a-bg-default);
+  background-color: var(--a-surface-default);
 }
 
 .navds-chat__top-text {
