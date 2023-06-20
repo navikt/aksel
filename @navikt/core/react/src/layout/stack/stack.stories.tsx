@@ -95,6 +95,30 @@ export const Nested = {
   ),
 };
 
+export const DividerDemo = {
+  render: () => (
+    <div style={{ height: "80vh", width: "40rem" }}>
+      <VStack gap={{ xs: "2", md: "6", lg: "12" }}>
+        <HStack gap={{ xs: "2", md: "6", lg: "12" }}>
+          <Placeholders count={1} />
+          <Spacer />
+          <Placeholders count={1} />
+        </HStack>
+        <hr
+          style={{
+            border: "none",
+            borderBottom: "1px solid var(--a-border-divider)",
+            margin: 0,
+          }}
+        />
+        <HStack gap={{ xs: "2", md: "6", lg: "12" }}>
+          <Placeholders count={2} />
+        </HStack>
+      </VStack>
+    </div>
+  ),
+};
+
 function Placeholders({
   count,
   children,

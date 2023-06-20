@@ -14,6 +14,8 @@
   --ac-vstack-gap-lg: initial;
   --ac-vstack-gap-xl: initial;
   --__ac-vstack-gap: var(--ac-vstack-gap-xs);
+
+  gap: var(--__ac-vstack-gap);
 }
 
 .navds-hstack {
@@ -23,6 +25,8 @@
   --ac-hstack-gap-lg: initial;
   --ac-hstack-gap-xl: initial;
   --__ac-hstack-gap: var(--ac-hstack-gap-xs);
+
+  gap: var(--__ac-hstack-gap);
 }
 
 .navds-stack__spacer {
@@ -31,14 +35,12 @@
   align-self: stretch;
 }
 
-.navds-vstack > * ~ :not(.navds-stack__spacer) {
-  margin-inline: 0;
-  margin-block: var(--__ac-vstack-gap) 0;
+.navds-vstack > * ~ .navds-stack__spacer {
+  margin-block: calc(var(--__ac-vstack-gap) * -1);
 }
 
-.navds-hstack > * ~ :not(.navds-stack__spacer) {
-  margin-block: 0;
-  margin-inline: var(--__ac-hstack-gap) 0;
+.navds-hstack > * ~ .navds-stack__spacer {
+  margin-inline: calc(var(--__ac-vstack-gap) * -1);
 }
 
 @media (min-width: 480px) {
