@@ -75,7 +75,7 @@ export const WithSidebar = ({
     <>
       <Header />
       <div className="bg-bg-default">
-        <div className="mx-auto mt-6 mb-24 flex w-full max-w-screen-2xl gap-6">
+        <div className="mx-auto mb-24 mt-6 flex w-full max-w-screen-2xl gap-6">
           <Sidebar kategori={pageType.type} links={sidebar} />
           <div className="relative w-full">
             <main
@@ -83,83 +83,84 @@ export const WithSidebar = ({
               id="hovedinnhold"
               className="min-h-screen-header md:max-w-screen-sidebar relative w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
             >
-              <div
-                className={cl(
-                  "relative mb-10 min-h-[12.5rem] overflow-hidden rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
-                  {
-                    "bg-surface-subtle flex items-center justify-between":
-                      variant === "page",
-                    "bg-deepblue-700 grid py-[4.25rem] pb-6":
-                      variant !== "page",
-                  }
-                )}
-              >
-                <div className="z-[1]">
-                  {variant === "page" && pageProps?.kategori && (
-                    <Detail as="div" className="mb-2">
-                      <NextLink
-                        href={`/${pageType.type.toLowerCase()}`}
-                        passHref
-                        legacyBehavior
-                      >
-                        <Link className="text-text-default">
-                          {capitalize(pageType.type)}
-                        </Link>
-                      </NextLink>{" "}
-                      / {capitalize(pageProps.kategori)}
-                    </Detail>
-                  )}
-
-                  <Heading
-                    level="1"
-                    size="xlarge"
-                    className={cl({
-                      "text-deepblue-800": variant === "page",
-                      "text-text-on-action bg-deepblue-700/80 w-fit":
+              <div className="from-deepblue-700 rounded-xl bg-gradient-to-br via-blue-500 to-violet-700">
+                <div
+                  className={cl(
+                    "relative mb-10 min-h-[12.5rem] overflow-hidden rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
+                    {
+                      "bg-surface-subtle flex items-center justify-between":
+                        variant === "page",
+                      "bg-deepblue-700/80 grid py-[4.25rem] pb-6":
                         variant !== "page",
-                    })}
-                  >
-                    {pageType.title}
-                  </Heading>
-                  <div
-                    className={cl({
-                      "bg-deepblue-700/80 w-fit": variant !== "page",
-                    })}
-                  >
-                    {intro && intro}
-                  </div>
-                </div>
-                {variant === "page" && pageProps.status?.bilde && (
-                  <div
-                    className={cl(
-                      "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
-                      {
-                        "hue-rotate-[65deg]": pageProps?.status?.tag === "beta",
-                      }
+                    }
+                  )}
+                >
+                  <div className="z-[1]">
+                    {variant === "page" && pageProps?.kategori && (
+                      <Detail as="div" className="mb-2">
+                        <NextLink
+                          href={`/${pageType.type.toLowerCase()}`}
+                          passHref
+                          legacyBehavior
+                        >
+                          <Link className="text-text-default">
+                            {capitalize(pageType.type)}
+                          </Link>
+                        </NextLink>{" "}
+                        / {capitalize(pageProps.kategori)}
+                      </Detail>
                     )}
-                  >
-                    <Image
-                      src={urlFor(pageProps.status?.bilde).auto("format").url()}
-                      decoding="async"
-                      layout="fill"
-                      objectFit="contain"
-                      aria-hidden
-                      priority
-                    />
+
+                    <Heading
+                      level="1"
+                      size="xlarge"
+                      className={cl({
+                        "text-deepblue-800": variant === "page",
+                        "text-text-on-action  w-fit": variant !== "page",
+                      })}
+                    >
+                      {pageType.title}
+                    </Heading>
+                    <div
+                      className={cl({
+                        "w-fit": variant !== "page",
+                      })}
+                    >
+                      {intro}
+                    </div>
                   </div>
-                )}
-                {variant === "landingPage" && (
-                  <div className="pointer-events-none absolute top-0 right-0 hidden sm:block">
-                    <HeaderCube className="text-deepblue-300 z-0 max-h-full" />
-                  </div>
-                )}
+                  {variant === "page" && pageProps.status?.bilde && (
+                    <div
+                      className={cl(
+                        "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
+                        {
+                          "hue-rotate-[65deg]":
+                            pageProps?.status?.tag === "beta",
+                        }
+                      )}
+                    >
+                      <Image
+                        src={urlFor(pageProps.status?.bilde)
+                          .auto("format")
+                          .url()}
+                        decoding="async"
+                        layout="fill"
+                        objectFit="contain"
+                        aria-hidden
+                        priority
+                      />
+                    </div>
+                  )}
+                  {variant === "landingPage" && (
+                    <div className="pointer-events-none absolute right-0 top-0 hidden sm:block">
+                      <HeaderCube className="text-deepblue-300 z-[-1] max-h-full" />
+                    </div>
+                  )}
+                </div>
               </div>
               <div className={cl("sm:px-6 md:px-10", { flex: withToc })}>
                 {withToc && (
-                  <TableOfContentsv2
-                    changedState={pageProps["content"]}
-                    hideToc={false}
-                  />
+                  <TableOfContentsv2 changedState={pageProps["content"]} />
                 )}
                 <div className="w-full">
                   {children}

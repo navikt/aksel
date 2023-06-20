@@ -21,6 +21,12 @@ export default function Document() {
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <link
+          rel="preload"
+          href="/searchindex.json"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
       </Head>
       <body data-theme="light" className="aksel antialiased">
         <Main />

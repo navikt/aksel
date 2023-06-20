@@ -101,6 +101,7 @@ const serializers = {
               spacing
               level="4"
               size="small"
+              id={`h${node._key}`}
               {...textProps}
             />
           );
