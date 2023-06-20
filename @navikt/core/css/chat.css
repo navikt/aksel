@@ -25,7 +25,7 @@
 .navds-chat__avatar {
   align-items: center;
   box-shadow: var(--a-shadow-xsmall);
-  background: var(--ac-chat-avatar-bg, var(--a-bg-subtle));
+  background-color: var(--ac-chat-avatar-bg, var(--a-bg-subtle));
   border: 1px solid var(--ac-chat-border-color, var(--a-border-subtle));
   border-radius: var(--a-border-radius-full);
   color: var(--ac-chat-avatar-color, var(--a-text-default));
@@ -66,6 +66,16 @@
 
 .navds-chat--small .navds-chat__bubble {
   padding: var(--a-spacing-3);
+}
+
+.navds-chat--info .navds-chat__bubble,
+.navds-chat--info .navds-chat__avatar {
+  background-color: var(--a-surface-info-subtle);
+}
+
+.navds-chat--neutral .navds-chat__bubble,
+.navds-chat--neutral .navds-chat__avatar {
+  background-color: var(--a-bg-default);
 }
 
 .navds-chat__top-text {

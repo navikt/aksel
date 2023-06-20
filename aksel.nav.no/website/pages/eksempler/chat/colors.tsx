@@ -4,13 +4,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="grid gap-10">
-      <Chat
-        avatar="EVA"
-        name="EVA"
-        timestamp="01.01.21 14:00"
-        avatarBgColor="var(--a-surface-info-subtle)"
-        backgroundColor="var(--a-surface-info-subtle)"
-      >
+      <Chat avatar="EVA" name="EVA" timestamp="01.01.21 14:00" variant="info">
         <Chat.Bubble>Hei! Mitt navn er Eva.</Chat.Bubble>
         <Chat.Bubble>Hva kan jeg hjelpe deg med?</Chat.Bubble>
       </Chat>
@@ -18,8 +12,7 @@ const Example = () => {
         name="Ola Normann"
         timestamp="01.01.21 14:00"
         position="right"
-        avatarBgColor="var(--a-bg-default)"
-        backgroundColor="var(--a-bg-default)"
+        variant="neutral"
       >
         <Chat.Bubble>Hei Eva.</Chat.Bubble>
         <Chat.Bubble>
@@ -39,5 +32,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Unngå samme bakgrunnsfarge utenfor boblene som inni.",
+  desc: "Unngå lik bakgrunnsfarge i komponenten som på flaten bak.",
 };

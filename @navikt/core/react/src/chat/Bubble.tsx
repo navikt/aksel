@@ -17,6 +17,7 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   timestamp?: string;
   /**
    * Background color on bubble
+   * @deprecated Use `variant` on Chat instead
    */
   backgroundColor?: string;
   /**

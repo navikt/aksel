@@ -24,13 +24,19 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   avatar?: React.ReactNode;
   /**
-   * Background color on bubbles.
-   * Recommended colors: --a-bg-subtle (default), --a-surface-info-subtle or --a-bg-default
-   * Avoid using the same background as the surface behind Chat
+   * Changes background color on avatar and bubbles.
+   * Avoid using the same background as the surface behind Chat.
+   * @default "subtle"
+   */
+  variant?: "subtle" | "info" | "neutral";
+  /**
+   * Background color on bubbles
+   * @deprecated Use `variant` instead
    */
   backgroundColor?: string;
   /**
-   * Background color for avatar. It's recommended to use same color on bubbles and avatar.
+   * Background color for avatar
+   * @deprecated Use `variant` instead
    */
   avatarBgColor?: string;
   /**
@@ -78,23 +84,6 @@ interface ChatComponent
  *   <Chat.Bubble>Hi there!</Chat.Bubble>
  * </Chat>
  * ```
- * @example
- * ```jsx
- * // With recommended colors
- * <Chat
- *  avatar="A"
- *  name="Alice"
- *  timestamp="01.01.21 14:00"
- *  backgroundColor="var(--a-surface-info-subtle)"
- *  avatarBgColor="var(--a-surface-info-subtle)"
- * >
- *   <Chat.Bubble>Hello!</Chat.Bubble>
- *   <Chat.Bubble>How can I help you?</Chat.Bubble>
- * </Chat>
- * <Chat avatar="B" name="Bob" timestamp="01.01.21 14:01" position="right">
- *   <Chat.Bubble>Hi there!</Chat.Bubble>
- * </Chat>
- * ```
  */
 export const Chat = forwardRef<HTMLDivElement, ChatProps>(
   (
@@ -105,6 +94,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       timestamp,
       avatar,
       position = "left",
+      variant = "subtle",
       avatarBgColor,
       backgroundColor,
       toptextPosition,
@@ -112,47 +102,46 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       ...rest
     }: ChatProps,
     ref
-  ) => {
-    return (
-      <div
-        ref={ref}
-        className={cl(
-          "navds-chat",
-          className,
-          `navds-chat--${position}`,
-          `navds-chat--top-text-${toptextPosition ?? position}`,
-          `navds-chat--${size}`
-        )}
-        {...rest}
-      >
-        {avatar && (
-          <div
-            className="navds-chat__avatar"
-            aria-hidden
-            style={{ backgroundColor: avatarBgColor }}
-          >
-            {avatar}
-          </div>
-        )}
-        <ol className="navds-chat__bubble-wrapper">
-          {React.Children.map(children, (child, i) => {
-            if (React.isValidElement(child)) {
-              return (
-                <BodyLong as="li" size={size}>
-                  {React.cloneElement(child, {
-                    name: name && i === 0 ? name : undefined,
-                    timestamp: timestamp && i === 0 ? timestamp : undefined,
-                    backgroundColor,
-                    ...child.props,
-                  })}
-                </BodyLong>
-              );
-            }
-          })}
-        </ol>
-      </div>
-    );
-  }
+  ) => (
+    <div
+      ref={ref}
+      className={cl(
+        "navds-chat",
+        className,
+        `navds-chat--${position}`,
+        `navds-chat--top-text-${toptextPosition ?? position}`,
+        `navds-chat--${size}`,
+        `navds-chat--${variant}`
+      )}
+      {...rest}
+    >
+      {avatar && (
+        <div
+          className="navds-chat__avatar"
+          aria-hidden
+          style={{ backgroundColor: avatarBgColor }}
+        >
+          {avatar}
+        </div>
+      )}
+      <ol className="navds-chat__bubble-wrapper">
+        {React.Children.map(children, (child, i) => {
+          if (React.isValidElement(child)) {
+            return (
+              <BodyLong as="li" size={size}>
+                {React.cloneElement(child, {
+                  name: name && i === 0 ? name : undefined,
+                  timestamp: timestamp && i === 0 ? timestamp : undefined,
+                  backgroundColor,
+                  ...child.props,
+                })}
+              </BodyLong>
+            );
+          }
+        })}
+      </ol>
+    </div>
+  )
 ) as ChatComponent;
 
 Chat.Bubble = Bubble;
