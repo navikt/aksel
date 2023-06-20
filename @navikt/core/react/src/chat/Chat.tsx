@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
-import Bubble, { BubbleProps } from "./Bubble";
+import Bubble from "./Bubble";
 import { BodyLong } from "../typography";
 
 export const POSITIONS = ["left", "right"] as const;
@@ -63,9 +63,7 @@ interface ChatComponent
   /**
    * @see 🏷️ {@link BubbleProps}
    */
-  Bubble: React.ForwardRefExoticComponent<
-    BubbleProps & React.RefAttributes<HTMLDivElement>
-  >;
+  Bubble: typeof Bubble;
 }
 
 /**
