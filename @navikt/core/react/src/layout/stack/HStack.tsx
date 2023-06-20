@@ -9,6 +9,7 @@ export type HStackProps = Omit<StackProps, "direction">;
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/Stack)
  * @see 🏷️ {@link HStackProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
  * <HStack gap="8">

@@ -2,13 +2,14 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
 import { StackProps, Stack } from "./Stack";
 
-export type VStackProps = Omit<StackProps, "direction" | "wrap" | "justify">;
+export type VStackProps = Omit<StackProps, "direction" | "wrap">;
 
 /**
  * Layout-primitive for vetical flexbox
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/Stack)
  * @see 🏷️ {@link VStackProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
  * @example
  * <VStack gap="8">

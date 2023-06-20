@@ -17,8 +17,9 @@ export const Horizontal = {
 
 export const Spacing = {
   render: () => (
-    <div style={{ height: "80vh" }}>
+    <div style={{ height: "80vh", display: "flex" }}>
       <VStack gap="8">
+        <Spacer />
         <HStack gap="4">
           <Placeholders count={1} />
           <Spacer />
@@ -28,7 +29,6 @@ export const Spacing = {
           <Placeholders count={1} />
           <Placeholders count={1} />
         </HStack>
-        <Spacer />
         <HStack gap="4">
           <Placeholders count={2} />
         </HStack>

@@ -35,12 +35,12 @@
   align-self: stretch;
 }
 
-.navds-vstack > * ~ .navds-stack__spacer {
-  margin-block: calc(var(--__ac-vstack-gap) * -1);
+.navds-vstack > .navds-stack__spacer {
+  margin-block-start: calc(var(--__ac-vstack-gap) * -1);
 }
 
-.navds-hstack > * ~ .navds-stack__spacer {
-  margin-inline: calc(var(--__ac-vstack-gap) * -1);
+.navds-hstack > .navds-stack__spacer {
+  margin-inline-start: calc(var(--__ac-vstack-gap) * -1);
 }
 
 @media (min-width: 480px) {
