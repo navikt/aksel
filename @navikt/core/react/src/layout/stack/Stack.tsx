@@ -57,7 +57,12 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
         "--ac-stack-align": align,
         "--ac-stack-justify": justify,
         "--ac-stack-wrap": wrap ? "wrap" : "nowrap",
-        ...getResponsiveProps("stack", "gap", "spacing", gap),
+        ...getResponsiveProps(
+          `${direction === "column" ? "v" : "h"}stack`,
+          "gap",
+          "spacing",
+          gap
+        ),
         ..._style,
       } as React.CSSProperties;
 
@@ -66,7 +71,10 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
           {...rest}
           ref={ref}
           style={style}
-          className={cl("navds-stack", `navds-stack--${direction}`, className)}
+          className={cl("navds-stack", className, {
+            "navds-vstack": direction === "column",
+            "navds-hstack": direction === "row",
+          })}
         />
       );
     }

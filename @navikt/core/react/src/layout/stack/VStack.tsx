@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
 import { StackProps, Stack } from "./Stack";
 
-export type VStackProps = Omit<StackProps, "direction" | "wrap">;
+export type VStackProps = Omit<StackProps, "direction" | "wrap" | "justify">;
 
 /**
  * Layout-primitive for vetical flexbox

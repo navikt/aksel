@@ -1,17 +1,14 @@
-import { HStack } from "@navikt/ds-react";
+import { VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="4" wrap={false}>
+    <VStack gap={{ xs: "4", sm: "6", md: "8", lg: "10", xl: "12" }}>
       <Placeholder />
       <Placeholder />
       <Placeholder />
       <Placeholder />
-      <Placeholder />
-      <Placeholder />
-      <Placeholder />
-    </HStack>
+    </VStack>
   );
 };
 
@@ -23,7 +20,8 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 7,
+  desc: "Med responsive gap kan man redusere/øke mellomrom basert på brekkpunktene våre",
 };
 
 const Placeholder = () => {
