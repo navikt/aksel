@@ -55,6 +55,17 @@ export interface SwitchProps
   description?: string;
 }
 
+/**
+ * A component that displays a switch input field.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/switch)
+ * @see 🏷️ {@link SwitchProps}
+ *
+ * @example
+ * ```jsx
+ * <Switch>Slå på notifikasjoner</Switch>
+ * ```
+ */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   (props, ref) => {
     const { inputProps, size } = useFormField(props, "switch");

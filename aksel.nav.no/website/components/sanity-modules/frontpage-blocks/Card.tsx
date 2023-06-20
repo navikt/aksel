@@ -1,13 +1,14 @@
-import { abbrName, dateStr } from "@/utils";
-import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import { logNav } from "components/website-modules/utils/amplitude";
-import NextLink from "next/link";
-import NextImage from "next/legacy/image";
-import { Tag } from "./Tag";
-import cl from "clsx";
-import { getImage } from "components/website-modules/utils/get-image";
-import { urlFor } from "@/sanity/interface";
 import { withErrorBoundary } from "@/error-boundary";
+import { urlFor } from "@/sanity/interface";
+import { abbrName } from "@/utils";
+import { BodyShort, Detail, Heading } from "@navikt/ds-react";
+import cl from "clsx";
+import { logNav } from "components/website-modules/utils/amplitude";
+import { getImage } from "components/website-modules/utils/get-image";
+import { useFormatedDate } from "components/website-modules/utils/getDate";
+import NextImage from "next/legacy/image";
+import NextLink from "next/link";
+import { Tag } from "./Tag";
 
 export type ArticleT = {
   _key: string;
@@ -28,8 +29,16 @@ export type ArticleT = {
   contributors?: { title: string }[];
 };
 
-const Card = ({ article }: { article: ArticleT }) => {
-  const date = article.publishedAt ? article.publishedAt : article._updatedAt;
+const Card = ({
+  article,
+  visible,
+  index,
+}: {
+  article: ArticleT;
+  visible: boolean;
+  index: number;
+}) => {
+  const date = useFormatedDate(article.publishedAt ?? article._updatedAt);
 
   const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
   const showImage = [
@@ -43,8 +52,14 @@ const Card = ({ article }: { article: ArticleT }) => {
       className={cl(
         "bg-surface-default group relative rounded-lg",
         "focus-within:ring-border-focus ring-border-subtle-hover focus-within:ring-[3px]",
-        "shadow-[0_0_1px_rgb(0_0_0/0.3),0_1px_3px_rgb(0_0_0/0.15)]"
+        "shadow-[0_0_1px_rgb(0_0_0/0.3),0_1px_3px_rgb(0_0_0/0.15)]",
+        `transition-[opacity,transform] duration-700`,
+        {
+          "translate-y-0 opacity-100": visible,
+          "translate-y-12 opacity-0": !visible,
+        }
       )}
+      style={{ transitionDelay: `${index * 70}ms` }}
     >
       {showImage && (
         <div
@@ -112,7 +127,7 @@ const Card = ({ article }: { article: ArticleT }) => {
           <Tag
             type={article._type}
             text={article.tema ? article.tema[0] : undefined}
-            size="small"
+            size="xsmall"
             beta={article.status?.tag === "beta"}
           />
         </div>
@@ -128,7 +143,7 @@ const Card = ({ article }: { article: ArticleT }) => {
                 {abbrName(article?.contributors[0]?.title)}
               </Detail>
             )}
-            <Detail as="span">{dateStr(date)}</Detail>
+            <Detail as="span">{date}</Detail>
           </span>
         )}
       </div>

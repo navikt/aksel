@@ -1,14 +1,15 @@
 import { withErrorBoundary } from "@/error-boundary";
 
 import {
-  ResolveContributorsSingleT,
-  ResolveTemaT,
-  ResolveSlugT,
   AkselGodPraksisDocT,
+  ResolveContributorsSingleT,
+  ResolveSlugT,
+  ResolveTemaT,
 } from "@/types";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
-import { abbrName, dateStr, logNav } from "../..";
+import { abbrName, logNav } from "../..";
 
 const ArtikkelCard = ({
   slug,
@@ -25,11 +26,9 @@ const ArtikkelCard = ({
 }: ResolveContributorsSingleT<
   ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
 > & { source: string; variant: string; level?: "2" | "3" }) => {
-  const date = (rest as any)?.updateInfo?.lastVerified
-    ? (rest as any)?.updateInfo?.lastVerified
-    : publishedAt
-    ? publishedAt
-    : _updatedAt;
+  const date = useFormatedDate(
+    (rest as any)?.updateInfo?.lastVerified ?? publishedAt ?? _updatedAt
+  );
 
   return (
     <div className="hover:shadow-small focus-within:ring-border-focus bg-surface-default ring-border-subtle group relative rounded-lg p-3 pb-16 ring-1 focus-within:ring-[3px] sm:p-5 sm:pb-16">
@@ -70,7 +69,7 @@ const ArtikkelCard = ({
             </Detail>
           )}
           <Detail as="span" className="text-text-subtle">
-            {dateStr(date)}
+            {date}
           </Detail>
         </span>
       ) : (

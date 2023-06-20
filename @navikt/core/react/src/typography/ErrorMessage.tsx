@@ -19,6 +19,20 @@ export interface ErrorMessageProps
   spacing?: boolean;
 }
 
+/**
+ * Part of a set of components for displaying text with consistent typography.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
+ * @see 🏷️ {@link ErrorMessageProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+ *
+ * @example
+ * ```jsx
+ *     <ErrorMessage level="1" size="xlarge">
+ *       Pengestøtte når du er syk
+ *     </ErrorMessage>
+ * ```
+ */
 export const ErrorMessage: OverridableComponent<
   ErrorMessageProps,
   HTMLParagraphElement

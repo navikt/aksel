@@ -20,47 +20,46 @@ export interface TabProps
   value: string;
 }
 
-export type TabType = OverridableComponent<TabProps, HTMLButtonElement>;
+export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
+  forwardRef(
+    (
+      { className, as: Component = "button", label, icon, value, ...rest },
+      ref
+    ) => {
+      const context = useContext(TabsContext);
 
-export const Tab: TabType = forwardRef(
-  (
-    { className, as: Component = "button", label, icon, value, ...rest },
-    ref
-  ) => {
-    const context = useContext(TabsContext);
+      if (!label && !icon) {
+        console.error("<Tabs.Tab/> needs label/icon");
+        return null;
+      }
 
-    if (!label && !icon) {
-      console.error("<Tabs.Tab/> needs label/icon");
-      return null;
-    }
-
-    return (
-      <RadixTabs.Trigger value={value} asChild>
-        <Component
-          ref={ref}
-          className={cl(
-            "navds-tabs__tab",
-            `navds-tabs__tab--${context?.size ?? "medium"}`,
-            `navds-tabs__tab-icon--${context?.iconPosition}`,
-            className,
-            {
-              "navds-tabs__tab--icon-only": icon && !label,
-            }
-          )}
-          {...rest}
-        >
-          <BodyShort
-            as="span"
-            className="navds-tabs__tab-inner"
-            size={context?.size}
+      return (
+        <RadixTabs.Trigger value={value} asChild>
+          <Component
+            ref={ref}
+            className={cl(
+              "navds-tabs__tab",
+              `navds-tabs__tab--${context?.size ?? "medium"}`,
+              `navds-tabs__tab-icon--${context?.iconPosition}`,
+              className,
+              {
+                "navds-tabs__tab--icon-only": icon && !label,
+              }
+            )}
+            {...rest}
           >
-            {icon}
-            {label}
-          </BodyShort>
-        </Component>
-      </RadixTabs.Trigger>
-    );
-  }
-);
+            <BodyShort
+              as="span"
+              className="navds-tabs__tab-inner"
+              size={context?.size}
+            >
+              {icon}
+              {label}
+            </BodyShort>
+          </Component>
+        </RadixTabs.Trigger>
+      );
+    }
+  );
 
 export default Tab;

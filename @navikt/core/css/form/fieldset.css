@@ -1,3 +1,7 @@
+[data-theme="dark"] {
+  --ac-form-description: var(--a-text-on-inverted);
+}
+
 .navds-fieldset {
   margin: 0;
   padding: 0;
@@ -7,6 +11,10 @@
 
 .navds-fieldset > :not(:first-child):not(:empty) {
   margin-top: var(--a-spacing-2);
+}
+
+.navds-fieldset__description {
+  color: var(--ac-form-description, var(--a-text-subtle));
 }
 
 .navds-fieldset > .navds-fieldset__description:not(:empty) {

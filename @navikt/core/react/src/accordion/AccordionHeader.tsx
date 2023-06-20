@@ -13,11 +13,7 @@ export interface AccordionHeaderProps
   children: React.ReactNode;
 }
 
-export type AccordionHeaderType = React.ForwardRefExoticComponent<
-  AccordionHeaderProps & React.RefAttributes<HTMLButtonElement>
->;
-
-const AccordionHeader: AccordionHeaderType = forwardRef(
+const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
   ({ children, className, onClick, ...rest }, ref) => {
     const itemContext = useContext(AccordionItemContext);
     const accordionContext = useContext(AccordionContext);

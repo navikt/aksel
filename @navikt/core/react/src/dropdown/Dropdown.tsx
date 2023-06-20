@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import Toggle, { ToggleType } from "./Toggle";
+import Toggle, { ToggleProps } from "./Toggle";
 import Menu, { MenuType } from "./Menu";
 
 export interface DropdownProps {
@@ -24,7 +24,15 @@ export interface DropdownProps {
 }
 
 export interface DropdownType extends React.FC<DropdownProps> {
-  Toggle: ToggleType;
+  /**
+   * @see 🏷️ {@link ToggleProps}
+   */
+  Toggle: React.ForwardRefExoticComponent<
+    ToggleProps & React.RefAttributes<HTMLButtonElement>
+  >;
+  /**
+   * @see 🏷️ {@link MenuType}
+   */
   Menu: MenuType;
 }
 
@@ -38,6 +46,37 @@ export interface DropdownContextType {
 
 export const DropdownContext = createContext<DropdownContextType | null>(null);
 
+/**
+ * A component that displays a dropdown menu when the user clicks on its toggle button.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/dropdown)
+ * @see 🏷️ {@link DropdownProps}
+ *
+ * @example
+ * ```jsx
+ * <Dropdown>
+ *   <Button as={Dropdown.Toggle}>Toggle</Button>
+ *   <Dropdown.Menu>
+ *     <Dropdown.Menu.GroupedList>
+ *       <Dropdown.Menu.GroupedList.Heading>
+ *         Systemer og oppslagsverk
+ *       </Dropdown.Menu.GroupedList.Heading>
+ *       <Dropdown.Menu.GroupedList.Item>
+ *         Gosys
+ *       </Dropdown.Menu.GroupedList.Item>
+ *       <Dropdown.Menu.GroupedList.Item>
+ *         Infotrygd
+ *       </Dropdown.Menu.GroupedList.Item>
+ *     </Dropdown.Menu.GroupedList>
+ *     <Dropdown.Menu.Divider />
+ *     <Dropdown.Menu.List>
+ *       <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
+ *       <Dropdown.Menu.List.Item>Infotrygd</Dropdown.Menu.List.Item>
+ *     </Dropdown.Menu.List>
+ *   </Dropdown.Menu>
+ * </Dropdown>
+ * ```
+ */
 export const Dropdown = (({
   children,
   onSelect,

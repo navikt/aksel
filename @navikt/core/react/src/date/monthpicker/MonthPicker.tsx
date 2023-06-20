@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
 import { Popover, useId } from "../..";
-import { DateInputType, MonthPickerInput } from "../DateInput";
+import { DateInputProps, MonthPickerInput } from "../DateInput";
 import { DateContext, SharedMonthProvider } from "../context";
 import { getLocaleFromString, Matcher } from "../utils";
 import MonthCaption from "./MonthCaption";
@@ -86,20 +86,57 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "absolute"
    */
   strategy?: "absolute" | "fixed";
+  /**
+   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
+   * @default false
+   */
+  bubbleEscape?: boolean;
 }
 
 interface MonthPickerComponent
   extends React.ForwardRefExoticComponent<MonthPickerProps> {
   /**
-   * Variant without popover
+   * @example
+   * ```jsx
+   * <MonthPicker.Standalone
+   *   dropdownCaption
+   *   fromDate={new Date("1 Oct 2020")}
+   *   toDate={new Date("1 Oct 2024")}
+   * />
+   * ```
    */
   Standalone: MonthPickerStandaloneType;
   /**
-   * Built-in Inputfield
+   * Custom TextField for MonthPicker
+   * @see 🏷️ {@link DateInputProps}
    */
-  Input: DateInputType;
+  Input: React.ForwardRefExoticComponent<
+    DateInputProps & React.RefAttributes<HTMLInputElement>
+  >;
 }
 
+/**
+ * A component that displays a month picker.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/monthpicker)
+ * @see 🏷️ {@link MonthPickerProps}
+ *
+ * @example
+ * ```jsx
+ *  const { inputProps, monthpickerProps } = useMonthpicker({
+ *    onMonthChange: console.log,
+ *  });
+ *
+ *  return (
+ *     <MonthPicker {...monthpickerProps} dropdownCaption>
+ *       <MonthPicker.Input
+ *         {...inputProps}
+ *         label="Velg måned"
+ *       />
+ *     </MonthPicker>
+ *  );
+ * ```
+ */
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   (
     {
@@ -121,6 +158,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       year,
       onYearChange,
       strategy = "absolute",
+      bubbleEscape = false,
     },
     ref
   ) => {
@@ -172,6 +210,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
               id={ariaId}
               className="navds-date"
               strategy={strategy}
+              bubbleEscape={bubbleEscape}
             >
               <RootProvider
                 locale={getLocaleFromString(locale)}

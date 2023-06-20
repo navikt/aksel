@@ -1,7 +1,7 @@
 CMS og nettside for [aksel.nav.no](https://aksel.nav.no/)
 
 ```sh
-├── /website        # NEXT.JS app (v12)
+├── /website        # NEXT.JS app (v13)
 └── /website/sanity # Sanity CMS-app (v3)
 ```
 
@@ -27,16 +27,16 @@ Alle eksemplene våre ligger under /website/pages/eksempler. For å se endringen
 
 ### Nettside (localhost:3000)
 
-```
+```bash
 yarn install
-yarn workspace aksel.nav.no dev
+yarn dev
 ```
 
 **Rettigheter**
 
 Sanity-datasettet er privat, noe som betyr du må ha tilgang til sanity applikasjonen + følgende token for å få data lokalt:
 
-```
+```env
 SANITY_PREVIEW_TOKEN
 SANITY_PRIVATE_NO_DRAFTS
 ```
@@ -58,4 +58,4 @@ Kjøres backups hver 3 dag til GCP-bucket under `designsystem-prod`
 
 Spørsmål og kontakt kan rettes til team Aksel
 
-Aksel har også en egen Slack-kanal #Aksel-designsystemet
+Aksel har også en egen Slack-kanal #aksel-designsystemet

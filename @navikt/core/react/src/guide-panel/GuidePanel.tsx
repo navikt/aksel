@@ -18,6 +18,21 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   poster?: boolean;
 }
 
+/**
+ * A component that displays a guide panel.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/guidepanel)
+ * @see 🏷️ {@link GuidePanelProps}
+ *
+ * @example
+ * ```jsx
+ * <GuidePanel>
+ *   Saksbehandlingstiden varierer fra kommune til kommune. Hvis det går mer
+ *   enn X måneder siden du søkte, skal du få brev om at saksbehandlingstiden
+ *   er forlenget.
+ * </GuidePanel>
+ * ```
+ */
 export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
   (
     { children, className, illustration, poster = false, color, ...rest },

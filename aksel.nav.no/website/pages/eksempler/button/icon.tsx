@@ -3,7 +3,15 @@ import { Button } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <Button icon={<PencilIcon aria-hidden />}>Rediger</Button>;
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button icon={<PencilIcon aria-hidden />}>Rediger</Button>
+      <Button icon={<PencilIcon aria-hidden />} />
+      <Button iconPosition="right" icon={<PencilIcon aria-hidden />}>
+        Rediger
+      </Button>
+    </div>
+  );
 };
 
 export default withDsExample(Example);
@@ -14,5 +22,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 8,
+  index: 4,
 };

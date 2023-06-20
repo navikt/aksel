@@ -11,15 +11,9 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import { useEventListener, mergeRefs } from "../util";
 import { format } from "date-fns";
-import React, {
-  forwardRef,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useMemo, useRef, useState } from "react";
+import { mergeRefs } from "../util";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";
@@ -83,22 +77,6 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
       [ref, refs.setReference]
     );
 
-    useEventListener(
-      "focusin",
-      useCallback(
-        (e: FocusEvent) => {
-          if (
-            ![refs.domReference.current, refs?.floating?.current].some(
-              (element) => element?.contains(e.target as Node)
-            )
-          ) {
-            open && setOpen(false);
-          }
-        },
-        [open, refs.domReference, refs?.floating]
-      )
-    );
-
     const staticSide = {
       top: "bottom",
       right: "left",
@@ -139,6 +117,10 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             ref={refs.setFloating}
             {...getFloatingProps({
               tabIndex: -1,
+              onBlur: (e) =>
+                e.target.previousSibling !== document.activeElement &&
+                open &&
+                setOpen(false),
             })}
             style={{
               ...floatingStyles,

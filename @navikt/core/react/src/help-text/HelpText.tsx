@@ -29,8 +29,25 @@ export interface HelpTextProps
     | "right-end"
     | "left-start"
     | "left-end";
+  /**
+   * Classname for wrapper
+   */
+  wrapperClassName?: string;
 }
 
+/**
+ * A component that displays a help text button with a popover.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/helptext)
+ * @see 🏷️ {@link HelpTextProps}
+ *
+ * @example
+ * ```jsx
+ * <HelpText title="Hvor kommer dette fra?">
+ *   Informasjonen er hentet fra X sin statistikk fra 2021
+ * </HelpText>
+ * ```
+ */
 export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
   (
     {
@@ -40,6 +57,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
       strategy = "absolute",
       title = "hjelp",
       onClick,
+      wrapperClassName,
       ...rest
     },
     ref
@@ -49,7 +67,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     const [open, setOpen] = useState(false);
 
     return (
-      <div className="navds-help-text">
+      <div className={cl("navds-help-text", wrapperClassName)}>
         <button
           {...rest}
           ref={mergedRef}

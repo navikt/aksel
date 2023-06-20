@@ -110,6 +110,19 @@ const getIsAfter = (opt: { toDate?: Date; date?: Date }) =>
     (opt.toDate.getFullYear() === opt.date.getFullYear() &&
       opt.toDate.getMonth() < opt.date.getMonth()));
 
+/**
+ *
+ * @see 🏷️ {@link UseMonthPickerOptions}
+ * @see 🏷️ {@link UseMonthPickerValue}
+ * @see 🏷️ {@link MonthValidationT}
+ * @example
+ * const { monthpickerProps, inputProps } = useMonthpicker({
+ *   fromDate: new Date("Aug 23 2019"),
+ *   toDate: new Date("Feb 23 2024"),
+ *   onMonthChange: console.log,
+ *   onValidate: console.log,
+ * });
+ */
 export const useMonthpicker = (
   opt: UseMonthPickerOptions = {}
 ): UseMonthPickerValue => {
@@ -299,6 +312,7 @@ export const useMonthpicker = (
     open,
     onOpenToggle: () => handleOpen(!open),
     disabled,
+    bubbleEscape: true,
     ref: setMonthpickerRef,
   };
 

@@ -91,6 +91,19 @@ export const SearchContext = React.createContext<SearchContextProps | null>(
   null
 );
 
+/**
+ * A component that displays a search input field.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/search)
+ * @see 🏷️ {@link SearchProps}
+ *
+ * @example
+ * ```jsx
+ * <form>
+ *   <Search label="Søk alle NAV sine sider" variant="primary" />
+ * </form>
+ * ```
+ */
 export const Search = forwardRef<HTMLInputElement, SearchProps>(
   (props, ref) => {
     const {

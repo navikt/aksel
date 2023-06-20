@@ -32,8 +32,8 @@ export interface ReadMoreProps
 
 /**
  * ReadMore
- * @see https://aksel.nav.no/komponenter/core/read-more
- * @see {@link ReadMoreProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/read-more)
+ * @see 🏷️ {@link ReadMoreProps}
  *
  * @example
  * // Default

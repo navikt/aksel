@@ -2,8 +2,15 @@ import { BodyShort, Heading, Link } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon, SlackIcon } from "components/assets";
 import Logo from "components/assets/Logo";
 import { logNav } from "components/website-modules/utils/amplitude";
-import { EditButton } from "../..";
 import FooterForm from "./FooterForm";
+import dynamic from "next/dynamic";
+
+export const EditButton = dynamic(
+  () => import("components/website-modules/EditButton"),
+  {
+    ssr: false,
+  }
+);
 
 const Footer = () => {
   return (

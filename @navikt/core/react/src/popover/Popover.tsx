@@ -72,6 +72,11 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default "absolute"
    */
   strategy?: "absolute" | "fixed";
+  /**
+   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
+   * @default false
+   */
+  bubbleEscape?: boolean;
 }
 
 interface PopoverComponent
@@ -81,6 +86,26 @@ interface PopoverComponent
   Content: PopoverContentType;
 }
 
+/**
+ * A component that displays a popover.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/popover)
+ * @see 🏷️ {@link PopoverProps}
+ *
+ * @example
+ * ```jsx
+ * <Button ref={buttonRef} onClick={() => setOpenState(true)}>
+ *   Åpne popover
+ * </Button>
+ * <Popover
+ *   open={openState}
+ *   onClose={() => setOpenState(false)}
+ *   anchorEl={buttonRef.current}
+ * >
+ *   <Popover.Content>Innhold her!</Popover.Content>
+ * </Popover>
+ * ```
+ */
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
@@ -93,6 +118,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement = "top",
       offset,
       strategy: userStrategy = "absolute",
+      bubbleEscape = false,
       ...rest
     },
     ref
@@ -123,7 +149,11 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const { getFloatingProps } = useInteractions([
       useClick(context),
-      useDismiss(context),
+      useDismiss(context, {
+        bubbles: {
+          escapeKey: bubbleEscape,
+        },
+      }),
     ]);
 
     useClientLayoutEffect(() => {

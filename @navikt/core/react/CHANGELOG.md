@@ -1,5 +1,90 @@
 # @navikt/ds-react
 
+## 4.1.7
+
+### Patch Changes
+
+- [`42b5af64a`](https://github.com/navikt/aksel/commit/42b5af64ab35d0f2d126d41f8fc3e61fe2834b36) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset jsdom-problemer ved rendring av Timeline
+
+- [#2056](https://github.com/navikt/aksel/pull/2056) [`dfbbe92a6`](https://github.com/navikt/aksel/commit/dfbbe92a63210278d9dd4d154c01f116ad921fc1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - La til `wrapperClassname`-prop for HelpText
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.7
+
+## 4.1.6
+
+### Patch Changes
+
+- [`9a8bb26c3`](https://github.com/navikt/aksel/commit/9a8bb26c36cfbb1a95cf28a043d2df3dbfe7185d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Timeline-period brakk ved bruk av jsdom-tester
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.6
+
+## 4.1.5
+
+### Patch Changes
+
+- [#2051](https://github.com/navikt/aksel/pull/2051) [`925aa7a14`](https://github.com/navikt/aksel/commit/925aa7a140bc0cd63e8884bea0bd478838c1aa17) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: OverridableComponent fungerer nå med komponenter som allerede bruker 'as'-prop
+
+- [#2052](https://github.com/navikt/aksel/pull/2052) [`7c17e40ca`](https://github.com/navikt/aksel/commit/7c17e40cac6703f00ce756276e9616deb73f6098) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: floating-ui sendte ikke escape-events opp gjennom dom-treet
+
+- Updated dependencies [[`8f16d1571`](https://github.com/navikt/aksel/commit/8f16d1571ec7cf452c09618a9a918ee2a634c75a)]:
+  - @navikt/aksel-icons@4.1.5
+
+## 4.1.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.4
+
+## 4.1.3
+
+### Patch Changes
+
+- [`44a75acb6`](https://github.com/navikt/aksel/commit/44a75acb6b904d614a01344f42111761a48cb7e2) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Classname ble ikke riktig forwardet til ikke-klikkbar Period i Timeline
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.3
+
+## 4.1.2
+
+### Patch Changes
+
+- [`30068dca3`](https://github.com/navikt/aksel/commit/30068dca3fcdf4bf7bbfbfb3d09baa9fee003962) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Jsdoc for Skeleton-komponent
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.2
+
+## 4.1.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.1
+
+## 4.1.0
+
+### Minor Changes
+
+- [#2035](https://github.com/navikt/aksel/pull/2035) [`7b42f536a`](https://github.com/navikt/aksel/commit/7b42f536aa90c1b5dbe2b19f1bbe292701546420) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Oppdatert Chips
+
+  - Toggle Chips har nå varianter: neutral og action
+  - Toggle Chips har nå en ny prop: `checkmark` som slår av/på checkmark ved selected-state
+
+- [#1821](https://github.com/navikt/aksel/pull/1821) [`db8c38a09`](https://github.com/navikt/aksel/commit/db8c38a094cd183db54aebecb62d5b223920a040) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :tada: Ny komponent Skeleton!
+
+  - varianter: text, circle, rounded og rectangle
+
+### Patch Changes
+
+- [#2034](https://github.com/navikt/aksel/pull/2034) [`17d92c9ed`](https://github.com/navikt/aksel/commit/17d92c9ed5f82a80f99a1512989744343edf60b3) Thanks [@JulianNymark](https://github.com/JulianNymark)! - Add JSDoc typings
+
+- [#2027](https://github.com/navikt/aksel/pull/2027) [`c028f36e2`](https://github.com/navikt/aksel/commit/c028f36e2bc58223ebf8b655980dde7eafb30add) Thanks [@JulianNymark](https://github.com/JulianNymark)! - :sparkles: La til `indent`-prop på Accordion
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.1.0
+
 ## 4.0.0
 
 ### Major Changes

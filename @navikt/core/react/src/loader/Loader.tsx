@@ -38,6 +38,17 @@ export type LoaderType = React.ForwardRefExoticComponent<
   LoaderProps & React.RefAttributes<SVGSVGElement>
 >;
 
+/**
+ * A component that displays a loading spinner.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/loader)
+ * @see 🏷️ {@link LoaderProps}
+ *
+ * @example
+ * ```jsx
+ * <Loader size="3xlarge" title="venter..." />
+ * ```
+ */
 export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
   (
     {

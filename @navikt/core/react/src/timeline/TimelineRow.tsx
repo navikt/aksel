@@ -72,6 +72,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
         >
           <ol
             {...rest}
+            tabIndex={-1}
             ref={ref}
             aria-label={
               periods.length === 0

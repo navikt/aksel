@@ -61,6 +61,10 @@
   list-style-type: none;
 }
 
+.navds-timeline__row-periods:focus {
+  outline: none;
+}
+
 .navds-timeline__period {
   height: 100%;
   border-radius: var(--a-border-radius-full);
