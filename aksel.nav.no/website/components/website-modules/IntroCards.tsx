@@ -29,6 +29,7 @@ export const IntroCards = ({
                 "shadow-small max-w-md": variant === "forside",
               }
             )}
+            prefetch={false}
             onClick={(e) =>
               logNav(
                 "intro-kort",

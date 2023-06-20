@@ -3,9 +3,17 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <Tag variant="info" size="xsmall">
-      Info
-    </Tag>
+    <div className="flex flex-wrap gap-2">
+      <Tag size="xsmall" variant="neutral">
+        xsmall
+      </Tag>
+      <Tag size="xsmall" variant="neutral-moderate">
+        xsmall
+      </Tag>
+      <Tag size="xsmall" variant="neutral-filled">
+        xsmall
+      </Tag>
+    </div>
   );
 };
 
@@ -17,5 +25,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 21,
+  index: 4,
 };
