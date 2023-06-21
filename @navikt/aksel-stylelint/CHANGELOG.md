@@ -1,5 +1,17 @@
 # @navikt/aksel-stylelint
 
+## 4.2.0
+
+### Minor Changes
+
+- [#2048](https://github.com/navikt/aksel/pull/2048) [`b1625ba38`](https://github.com/navikt/aksel/commit/b1625ba3882b430d678d0623922d7fb56aa724b3) Thanks [@HalvorHaugan](https://github.com/HalvorHaugan)! - Oppdatert Chat
+
+  - :sparkles: Ny prop `size` som kan settes til "small" for en mer kompakt layout
+  - :sparkles: Ny prop `variant` som erstatter `backgroundColor` og `avatarBgColor`
+  - :sparkles: `avatar` er nå valgfritt
+  - :wheelchair: Forbedret UU
+  - :lipstick: Oppdatert utseende
+
 ## 4.1.7
 
 ## 4.1.6
