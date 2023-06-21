@@ -44,21 +44,14 @@ const upsertEntry = (
   },
   value: RawASTNode
 ) => {
-  if (!changelog[lastSeenVersion]) {
-    changelog[lastSeenVersion] = {};
-  }
-  if (!changelog[lastSeenVersion][lastSeenPackage]) {
-    changelog[lastSeenVersion][lastSeenPackage] = {};
-  }
+  changelog[lastSeenVersion] ??= {};
+  changelog[lastSeenVersion][lastSeenPackage] ??= {};
+
   const raw_ast_nodes =
     changelog[lastSeenVersion][lastSeenPackage][lastSeenSemverHeading];
-  if (!raw_ast_nodes) {
-    changelog[lastSeenVersion][lastSeenPackage][lastSeenSemverHeading] = [
-      value,
-    ];
-  } else {
-    raw_ast_nodes.push(value);
-  }
+
+  changelog[lastSeenVersion][lastSeenPackage][lastSeenSemverHeading] =
+    raw_ast_nodes ? [...raw_ast_nodes, value] : [value];
 
   const updatedVersion = changelog[lastSeenVersion] || [];
   changelog[lastSeenVersion] = updatedVersion;
@@ -70,6 +63,8 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
   for (const filePath of filePaths) {
     const fileContent = readFileSync(filePath, { encoding: "utf-8" });
     const fileAST = await unified().use(remarkParse).parse(fileContent);
+
+    console.log(JSON.stringify(fileAST, null, 2));
 
     // TODO is there a _better_ way? This seems cluttered and hard to reason about
     let lastSeenPackage = "";
@@ -86,12 +81,9 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
         node.children[0].type === "text" &&
         node.children[0].value.startsWith("Updated dependencies")
       ) {
-        const listIndex = ancestors.findLastIndex((ancestor) => {
-          if (ancestor.type === "list") {
-            return true;
-          }
-          return false;
-        });
+        const listIndex = ancestors.findLastIndex(
+          (ancestor) => ancestor.type === "list"
+        );
         const parent = ancestors[listIndex] as List;
 
         // we traversed up from child match to parent
@@ -145,7 +137,6 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
             lastSeenPackage = packageName;
           }
         }
-        return SKIP;
       } else if (node.type === "heading" && node.depth === 2) {
         const childNode = node.children[0] as Text | undefined;
         if (childNode && childNode.type === "text") {
@@ -154,21 +145,19 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
             lastSeenVersion = version;
           }
         }
-        return SKIP;
       } else if (node.type === "heading" && node.depth === 3) {
         const childNode = node.children[0] as Text | undefined;
         if (childNode && childNode.type === "text") {
           lastSeenSemverHeading = childNode.value;
         }
-        return SKIP;
       } else {
         upsertEntry(
           changelog,
           { lastSeenPackage, lastSeenVersion, lastSeenSemverHeading },
           structuredClone(node)
         );
-        return SKIP;
       }
+      return SKIP;
     });
   }
   return changelog;
