@@ -4,15 +4,16 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="grid gap-10">
-      <Chat avatar="EVA" name="EVA" timestamp="01.01.21 14:00" variant="info">
+      <Chat avatar="EVA" name="EVA" timestamp="01.01.21 14:00" size="small">
         <Chat.Bubble>Hei! Mitt navn er Eva.</Chat.Bubble>
         <Chat.Bubble>Hva kan jeg hjelpe deg med?</Chat.Bubble>
       </Chat>
       <Chat
+        avatar="ON"
         name="Ola Normann"
         timestamp="01.01.21 14:00"
+        size="small"
         position="right"
-        variant="neutral"
       >
         <Chat.Bubble>Hei Eva.</Chat.Bubble>
         <Chat.Bubble>
@@ -23,7 +24,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "subtle");
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {
@@ -31,6 +32,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  desc: "Unngå lik bakgrunnsfarge i komponenten som på flaten bak.",
+  index: 4,
 };
