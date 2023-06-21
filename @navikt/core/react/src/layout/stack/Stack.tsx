@@ -57,12 +57,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
         "--ac-stack-align": align,
         "--ac-stack-justify": justify,
         "--ac-stack-wrap": wrap ? "wrap" : "nowrap",
-        ...getResponsiveProps(
-          `${direction === "column" ? "v" : "h"}stack`,
-          "gap",
-          "spacing",
-          gap
-        ),
+        ...getResponsiveProps(`stack`, "gap", "spacing", gap),
         ..._style,
       } as React.CSSProperties;
 

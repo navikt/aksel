@@ -48,6 +48,20 @@ export const Vertical = {
   ),
 };
 
+export const VerticalDemo = {
+  render: () => (
+    <VStack gap="2">
+      <VStack>
+        <Placeholders count={4} />
+      </VStack>
+      <Placeholders count={4} />
+      <VStack>
+        <Placeholders count={4} />
+      </VStack>
+    </VStack>
+  ),
+};
+
 export const VerticalAlign = {
   render: () => (
     <VStack gap="4">
