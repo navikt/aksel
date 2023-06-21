@@ -81,83 +81,81 @@ export const WithSidebar = ({
             <main
               tabIndex={-1}
               id="hovedinnhold"
-              className="min-h-screen-header md:max-w-screen-sidebar relative w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
+              className="min-h-screen-header md:max-w-screen-sidebar relative z-0 w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
             >
-              <div className="from-deepblue-700 rounded-xl bg-gradient-to-br via-blue-500 to-violet-700">
-                <div
-                  className={cl(
-                    "relative mb-10 min-h-[12.5rem] overflow-hidden rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
-                    {
-                      "bg-surface-subtle flex items-center justify-between":
-                        variant === "page",
-                      "bg-deepblue-700/80 grid py-[4.25rem] pb-6":
-                        variant !== "page",
-                    }
+              <div
+                className={cl(
+                  "relative mb-10 min-h-[12.5rem] overflow-hidden rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
+                  {
+                    "bg-surface-subtle flex items-center justify-between":
+                      variant === "page",
+                    "bg-deepblue-700/80 grid py-[4.25rem] pb-6":
+                      variant !== "page",
+                    "before:from-deepblue-700 before:absolute before:inset-0 before:-z-10 before:rounded-xl before:bg-gradient-to-br before:via-blue-500 before:to-violet-700":
+                      variant !== "page",
+                  }
+                )}
+              >
+                <div className="z-[1]">
+                  {variant === "page" && pageProps?.kategori && (
+                    <Detail as="div" className="mb-2">
+                      <NextLink
+                        href={`/${pageType.type.toLowerCase()}`}
+                        passHref
+                        legacyBehavior
+                      >
+                        <Link className="text-text-default">
+                          {capitalize(pageType.type)}
+                        </Link>
+                      </NextLink>{" "}
+                      / {capitalize(pageProps.kategori)}
+                    </Detail>
                   )}
-                >
-                  <div className="z-[1]">
-                    {variant === "page" && pageProps?.kategori && (
-                      <Detail as="div" className="mb-2">
-                        <NextLink
-                          href={`/${pageType.type.toLowerCase()}`}
-                          passHref
-                          legacyBehavior
-                        >
-                          <Link className="text-text-default">
-                            {capitalize(pageType.type)}
-                          </Link>
-                        </NextLink>{" "}
-                        / {capitalize(pageProps.kategori)}
-                      </Detail>
-                    )}
 
-                    <Heading
-                      level="1"
-                      size="xlarge"
-                      className={cl({
-                        "text-deepblue-800": variant === "page",
-                        "text-text-on-action  w-fit": variant !== "page",
-                      })}
-                    >
-                      {pageType.title}
-                    </Heading>
-                    <div
-                      className={cl({
-                        "w-fit": variant !== "page",
-                      })}
-                    >
-                      {intro}
-                    </div>
+                  <Heading
+                    level="1"
+                    size="xlarge"
+                    className={cl({
+                      "text-deepblue-800": variant === "page",
+                      "text-text-on-action  w-fit": variant !== "page",
+                    })}
+                  >
+                    {pageType.title}
+                  </Heading>
+                  <div
+                    className={cl({
+                      "w-fit": variant !== "page",
+                    })}
+                  >
+                    {intro}
                   </div>
-                  {variant === "page" && pageProps.status?.bilde && (
-                    <div
-                      className={cl(
-                        "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
-                        {
-                          "hue-rotate-[65deg]":
-                            pageProps?.status?.tag === "beta",
-                        }
-                      )}
-                    >
-                      <Image
-                        src={urlFor(pageProps.status?.bilde)
-                          .auto("format")
-                          .url()}
-                        decoding="async"
-                        layout="fill"
-                        objectFit="contain"
-                        aria-hidden
-                        priority
-                      />
-                    </div>
-                  )}
-                  {variant === "landingPage" && (
-                    <div className="pointer-events-none absolute right-0 top-0 hidden sm:block">
-                      <HeaderCube className="text-deepblue-300 z-[-1] max-h-full" />
-                    </div>
-                  )}
                 </div>
+                {variant === "page" && pageProps.status?.bilde && (
+                  <div
+                    className={cl(
+                      "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
+                      {
+                        "hue-rotate-[65deg]": pageProps?.status?.tag === "beta",
+                      }
+                    )}
+                  >
+                    <Image
+                      src={urlFor(pageProps.status?.bilde).auto("format").url()}
+                      decoding="async"
+                      layout="fill"
+                      objectFit="contain"
+                      aria-hidden
+                      priority
+                    />
+                  </div>
+                )}
+                {variant === "landingPage" && (
+                  <div className="pointer-events-none absolute right-0 top-0 hidden sm:block">
+                    <HeaderCube className="text-deepblue-300 z-[-1] max-h-full" />
+                  </div>
+                )}
               </div>
+
               <div className={cl("sm:px-6 md:px-10", { flex: withToc })}>
                 {withToc && (
                   <TableOfContentsv2 changedState={pageProps["content"]} />
