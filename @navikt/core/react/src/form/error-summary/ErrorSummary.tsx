@@ -29,6 +29,18 @@ interface ErrorSummaryComponent
   extends React.ForwardRefExoticComponent<
     ErrorSummaryProps & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * Link to error
+   *
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   *
+   * @example
+   * ```jsx
+   * <ErrorSummary.Item href="#1">
+   *   Felt må fylles ut med alder
+   * </ErrorSummary.Item>
+   * ```
+   */
   Item: ErrorSummaryItemType;
 }
 
