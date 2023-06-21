@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 4.3.0
+
+### Minor Changes
+
+- [#2069](https://github.com/navikt/aksel/pull/2069) [`99c08b8e4`](https://github.com/navikt/aksel/commit/99c08b8e4ab33acd20a21719986452652ffe3c57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Popover og Helptext har nå luft mot siden av skjerm på mindre flater
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.3.0
+
 ## 4.2.0
 
 ### Minor Changes
