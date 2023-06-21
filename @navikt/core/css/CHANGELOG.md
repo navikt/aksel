@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 4.3.0
+
+### Minor Changes
+
+- [#2069](https://github.com/navikt/aksel/pull/2069) [`99c08b8e4`](https://github.com/navikt/aksel/commit/99c08b8e4ab33acd20a21719986452652ffe3c57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Popover og Helptext har nå luft mot siden av skjerm på mindre flater
+
+### Patch Changes
+
+- [#2067](https://github.com/navikt/aksel/pull/2067) [`d39ed906c`](https://github.com/navikt/aksel/commit/d39ed906c61149ac823ebab2e8974a105e592163) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Nested ExpansionCard fikk styling fra parent
+
 ## 4.2.0
 
 ### Minor Changes
