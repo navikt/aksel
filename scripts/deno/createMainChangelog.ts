@@ -1,11 +1,19 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import { List, ListItem, Root, Text } from "npm:@types/mdast";
+import {
+  List,
+  ListItem,
+  Root,
+  Text,
+  Link,
+  Paragraph,
+  PhrasingContent,
+} from "npm:@types/mdast";
 import { Node } from "npm:@types/unist";
 import { heading, root, text } from "npm:mdast-builder";
 import remarkParse from "npm:remark-parse";
 import remarkStringify from "npm:remark-stringify";
 import { unified } from "npm:unified";
-import { EXIT, SKIP, visit } from "npm:unist-util-visit";
+import { EXIT, SKIP, CONTINUE, visit } from "npm:unist-util-visit";
 import { visitParents } from "npm:unist-util-visit-parents";
 import { getChangelogs } from "./utils.ts";
 
@@ -27,8 +35,7 @@ import { getChangelogs } from "./utils.ts";
 type PackageName = string;
 type Version = string;
 type RawASTNode = Node;
-type SemverChangeHeading = Record<string, RawASTNode[]>;
-type VersionEntry = Record<PackageName, SemverChangeHeading>;
+type VersionEntry = Record<PackageName, Node[]>;
 type Changelog = Record<Version, VersionEntry>;
 
 const upsertEntry = (
@@ -36,25 +43,62 @@ const upsertEntry = (
   {
     lastSeenPackage,
     lastSeenVersion,
-    lastSeenSemverHeading,
   }: {
     lastSeenPackage: string;
     lastSeenVersion: string;
-    lastSeenSemverHeading: string;
   },
   value: RawASTNode
 ) => {
   changelog[lastSeenVersion] ??= {};
-  changelog[lastSeenVersion][lastSeenPackage] ??= {};
 
-  const raw_ast_nodes =
-    changelog[lastSeenVersion][lastSeenPackage][lastSeenSemverHeading];
+  const raw_ast_nodes = changelog[lastSeenVersion][lastSeenPackage];
 
-  changelog[lastSeenVersion][lastSeenPackage][lastSeenSemverHeading] =
-    raw_ast_nodes ? [...raw_ast_nodes, value] : [value];
+  changelog[lastSeenVersion][lastSeenPackage] = raw_ast_nodes
+    ? [...raw_ast_nodes, value]
+    : [value];
 
   const updatedVersion = changelog[lastSeenVersion] || [];
   changelog[lastSeenVersion] = updatedVersion;
+};
+
+const PROrCommitHashLink = (node: Root): Link | null => {
+  let infoLink: Link | null = null;
+  visit(node, (someChildNode) => {
+    if (someChildNode.type === "link") {
+      infoLink = structuredClone(someChildNode);
+      return EXIT;
+    }
+  });
+
+  return infoLink;
+};
+
+const processNode = (node: Root) => {
+  const infoLink = PROrCommitHashLink(node) || text("");
+  visitParents(node, (childNode, ancestors) => {
+    if (childNode.type === "text" && childNode.value.startsWith("! -")) {
+      const parent = ancestors.findLast(
+        (ancestor) => ancestor.type === "paragraph"
+      ) as Paragraph;
+      visit(parent, (node, index, parent) => {
+        if (
+          node.type === "link" ||
+          (node.type === "text" && node.value === " Thanks ")
+        ) {
+          if (parent && index !== null) {
+            parent.children.splice(index, 1);
+            return [CONTINUE, index];
+          }
+        }
+        if (node.type === "text" && node.value.startsWith("! -")) {
+          node.value = node.value.replace(/! (- )+/, "");
+          return;
+        }
+      });
+      parent.children.push(text(" ") as PhrasingContent);
+      parent.children.push(infoLink as PhrasingContent);
+    }
+  });
 };
 
 const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
@@ -64,12 +108,9 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
     const fileContent = readFileSync(filePath, { encoding: "utf-8" });
     const fileAST = await unified().use(remarkParse).parse(fileContent);
 
-    console.log(JSON.stringify(fileAST, null, 2));
-
     // TODO is there a _better_ way? This seems cluttered and hard to reason about
     let lastSeenPackage = "";
     let lastSeenVersion = "";
-    let lastSeenSemverHeading = "";
 
     ///////////////////
     // filtering passes
@@ -148,12 +189,12 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
       } else if (node.type === "heading" && node.depth === 3) {
         const childNode = node.children[0] as Text | undefined;
         if (childNode && childNode.type === "text") {
-          lastSeenSemverHeading = childNode.value;
+          // ignore semver heading ('Major', 'Minor', 'Patch')
         }
       } else {
         upsertEntry(
           changelog,
-          { lastSeenPackage, lastSeenVersion, lastSeenSemverHeading },
+          { lastSeenPackage, lastSeenVersion },
           structuredClone(node)
         );
       }
@@ -167,13 +208,11 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
   const headings = [];
   Object.entries(changelog).forEach(([version, versionEntry]) => {
     headings.push(heading(2, [text(version)]));
-    for (const [packageName, logGrouping] of Object.entries(versionEntry)) {
+    for (const [packageName, changes] of Object.entries(versionEntry)) {
       headings.push(heading(3, [text(packageName)]));
-      for (const [semverHeading, changes] of Object.entries(logGrouping)) {
-        headings.push(heading(4, [text(semverHeading)]));
-        for (const raw_ast_nodes of changes) {
-          headings.push(raw_ast_nodes);
-        }
+      for (const change of changes) {
+        processNode(change as Root);
+        headings.push(change);
       }
     }
   });
