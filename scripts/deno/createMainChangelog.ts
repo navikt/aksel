@@ -34,7 +34,6 @@ import { getChangelogs } from "./utils.ts";
 
 type PackageName = string;
 type Version = string;
-type RawASTNode = Node;
 type VersionEntry = Record<PackageName, Node[]>;
 type Changelog = Record<Version, VersionEntry>;
 
@@ -47,7 +46,7 @@ const upsertEntry = (
     lastSeenPackage: string;
     lastSeenVersion: string;
   },
-  value: RawASTNode
+  value: Node
 ) => {
   changelog[lastSeenVersion] ??= {};
 
@@ -108,10 +107,6 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
     const fileContent = readFileSync(filePath, { encoding: "utf-8" });
     const fileAST = await unified().use(remarkParse).parse(fileContent);
 
-    // TODO is there a _better_ way? This seems cluttered and hard to reason about
-    let lastSeenPackage = "";
-    let lastSeenVersion = "";
-
     ///////////////////
     // filtering passes
     ///////////////////
@@ -165,6 +160,9 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
     ///////////////////
     // upsert into custom JS object
     ///////////////////
+
+    let lastSeenPackage = "";
+    let lastSeenVersion = "";
 
     visit(fileAST, (node) => {
       if (node.type === "root") {
