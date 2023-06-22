@@ -22,6 +22,7 @@ const InputContext = createContext<InputContextType>({} as InputContextType);
 
 export const InputContextProvider = ({ children, value: props }) => {
   const {
+    defaultValue = "",
     description,
     disabled,
     error,
@@ -43,7 +44,7 @@ export const InputContextProvider = ({ children, value: props }) => {
     },
     "comboboxfield"
   );
-  const [internalValue, setInternalValue] = useState<string>("");
+  const [internalValue, setInternalValue] = useState<string>(defaultValue);
 
   const value = useMemo(
     () => String(externalValue ?? internalValue),

@@ -11,6 +11,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
     const {
       allowNewValues = false,
       children,
+      defaultValue,
       error,
       errorId,
       id,
@@ -29,6 +30,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
     return (
       <InputContextProvider
         value={{
+          defaultValue,
           error,
           errorId,
           id,
