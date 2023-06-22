@@ -24,4 +24,4 @@
 
 ### Major Changes
 
-- Alle token er oppdatert til nytt format. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112)
+- Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
