@@ -28,6 +28,10 @@ jobs:
           node-version: 16.13.0
           cache: yarn
 
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
       - name: Restore cache
         uses: actions/cache@v3
         with:
@@ -43,7 +47,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: yarn version
+          version: yarn version && yarn changelog
           publish: yarn release
           createGithubReleases: false
         env:
