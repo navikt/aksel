@@ -2,7 +2,7 @@
 import { Meta } from "@storybook/react";
 import React, { useState, useId } from "react";
 import { userEvent, within } from "@storybook/testing-library";
-import { Chips, Combobox } from "../../index";
+import { Chips, Combobox, TextField } from "../../index";
 
 export default {
   title: "ds-react/Combobox",
@@ -225,6 +225,34 @@ ComboboxWithNoHits.args = {
   singleSelect: true,
   options,
   value: "Orange",
+};
+
+export const Controlled = (props) => {
+  const id = useId();
+  const [value, setValue] = useState(props.value);
+
+  return (
+    <>
+      <TextField
+        label="Overstyr value"
+        onChange={(event) => setValue(event.target.value)}
+        value={value}
+      />
+      <br />
+      <Combobox
+        label="Hva er dine favorittfrukter?"
+        id={id}
+        options={props.options}
+        onChange={(event) => setValue(event.target.value)}
+        value={value}
+      />
+    </>
+  );
+};
+
+Controlled.args = {
+  value: "apple",
+  options,
 };
 
 export const WithCallbacks = () => {
