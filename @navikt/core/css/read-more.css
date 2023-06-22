@@ -41,6 +41,7 @@
   border-left: 2px solid var(--ac-read-more-line, var(--a-border-divider));
   margin-left: 13px;
   padding-left: 13px;
+  color: var(--a-text-default);
 }
 
 .navds-read-more--small .navds-read-more__content {

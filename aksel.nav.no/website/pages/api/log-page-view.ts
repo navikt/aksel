@@ -1,5 +1,6 @@
 import { noCdnClient } from "@/sanity/client.server";
 import { format, isSameWeek } from "date-fns";
+import { logger } from "logger";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const token = process.env.SANITY_WRITE_KEY;
@@ -63,7 +64,7 @@ export default async function logPageView(
     .inc({ pageviews: 1 })
     .commit()
     .catch((err) => {
-      console.error("Error:", err);
+      logger.error(err);
       return res.status(500).json({ message: "Error updating page" });
     });
 
@@ -78,7 +79,7 @@ export default async function logPageView(
       .inc({ "weeksObj.weeks[0].views": 1 })
       .commit()
       .catch((err) => {
-        console.error("Error:", err);
+        logger.error(err);
         return res.status(500).json({ message: "Error updating current week" });
       });
   } else {
@@ -97,7 +98,7 @@ export default async function logPageView(
         autoGenerateArrayKeys: true,
       })
       .catch((err) => {
-        console.error("Error:", err);
+        logger.error(err);
         return res.status(500).json({ message: "Error creating new week" });
       });
   }

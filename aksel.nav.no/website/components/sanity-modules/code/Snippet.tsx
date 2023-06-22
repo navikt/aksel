@@ -46,8 +46,9 @@ const CodeSnippet = ({
       >
         <CopyButton
           data-theme="dark"
+          size="small"
           copyText={code.code}
-          className={cl(style.copybutton, "absolute top-2 right-2 z-10")}
+          className={cl(style.copybutton, "absolute right-2 top-2 z-10")}
         />
         <Highlight
           code={code.code}

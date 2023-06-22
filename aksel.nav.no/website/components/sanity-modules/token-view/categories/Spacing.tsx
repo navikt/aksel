@@ -1,31 +1,41 @@
 import docs from "@navikt/ds-tokens/docs.json";
-import { Frame } from "../Frame";
+import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 
 export const SpacingView = ({ cat }: { cat: string }) => {
   const spacings = docs[cat];
 
   return (
-    <Frame
-      tokens={spacings}
-      styles="boxShadow"
-      element={({ token }: { token: string; name?: string }) => {
-        return (
-          <div
-            className="min-h-16 flex h-full w-full items-center justify-start rounded-md px-4 text-5xl font-semibold"
-            aria-hidden
-            style={{
-              background: `var(--a-surface-default)`,
-            }}
-          >
-            <div
-              className="bg-surface-alt-3-strong h-8 rounded-md"
-              style={{
-                width: token,
-              }}
-            />
-          </div>
-        );
-      }}
-    />
+    <AkselTable
+      withCopy
+      th={[
+        { text: "Token" },
+        { text: "rem" },
+        { text: "px" },
+        { text: "demo", sronly: true, hideOnSm: true },
+      ]}
+    >
+      {spacings.map((x) => (
+        <AkselTableRow
+          key={x.name}
+          tr={[
+            { text: x.name.replace("--a-spacing-", "") },
+            { text: x.value.replace("rem", "") },
+            { text: Number(x.value.replace("rem", "") * 16) },
+            {
+              hideOnSm: true,
+              text: (
+                <div
+                  className="bg-surface-alt-3-strong mr-auto h-8 rounded-md"
+                  style={{
+                    width: x.value,
+                  }}
+                />
+              ),
+            },
+          ]}
+          copyText={x.name}
+        />
+      ))}
+    </AkselTable>
   );
 };

@@ -3,37 +3,36 @@ import { withErrorBoundary } from "@/error-boundary";
 import { urlFor } from "@/sanity/interface";
 import { DoDontT } from "@/types";
 import {
-  CheckmarkCircleFillIcon,
-  ExclamationmarkTriangleFillIcon,
-  XMarkOctagonFillIcon,
+  CheckmarkIcon,
+  ExclamationmarkIcon,
+  XMarkIcon,
 } from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
-import React from "react";
 
 const GetIcon = (s: string) => {
   switch (s) {
     case "do":
       return (
-        <CheckmarkCircleFillIcon
+        <CheckmarkIcon
           aria-hidden
-          fontSize="1.5rem"
+          fontSize="2rem"
           className="flex-shrink-0 text-green-500"
         />
       );
     case "dont":
       return (
-        <XMarkOctagonFillIcon
+        <XMarkIcon
           aria-hidden
-          fontSize="1.5rem"
+          fontSize="2rem"
           className="flex-shrink-0 text-red-500"
         />
       );
     case "warning":
       return (
-        <ExclamationmarkTriangleFillIcon
+        <ExclamationmarkIcon
           aria-hidden
-          fontSize="1.5rem"
+          fontSize="2rem"
           className="flex-shrink-0 text-orange-500"
         />
       );
@@ -42,42 +41,56 @@ const GetIcon = (s: string) => {
   }
 };
 
+const getText = (s: string) => {
+  switch (s) {
+    case "do":
+      return "Do: ";
+    case "dont":
+      return "Don't: ";
+    case "warning":
+      return "Fare på ferde: ";
+    default:
+      return "";
+  }
+};
+
 const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
   if (!block.picture) return null;
   return (
     <figure
-      className={cl("sm:min-w-80 flex min-w-full flex-1 flex-col rounded-t", {
+      className={cl("sm:min-w-80 flex min-w-full flex-1 flex-col", {
         "basis-full": block?.fullwidth,
         "max-w-sm": !block?.fullwidth,
       })}
     >
-      <img
-        className="ring-border-subtle rounded-t bg-gray-50 ring-1"
-        alt={block.alt}
-        loading="lazy"
-        decoding="async"
-        src={urlFor(block.picture).auto("format").url()}
-      />
       <div
         className={cl(
-          "z-10 -ml-[1px] w-[calc(100%_+_2px)] rounded-b border-t-8",
+          "relative z-10 -ml-[1px] w-[calc(100%_+_2px)] border-t-4",
           {
             "border-t-border-success": block.variant === "do",
             "border-t-border-danger": block.variant === "dont",
             "border-t-surface-warning": block.variant === "warning",
           }
         )}
+        aria-hidden
+      >
+        <span className="absolute right-[10px] z-10 translate-y-2">
+          {GetIcon(block.variant)}
+        </span>
+      </div>
+      <img
+        className="ring-border-subtle  bg-gray-50 ring-1"
+        alt={block.alt}
+        loading="lazy"
+        decoding="async"
+        src={urlFor(block.picture).auto("format").url()}
       />
       <figcaption data-variant={block.variant}>
         <div className="mt-3">
           {block.description && (
-            <BodyShort
-              size="small"
-              as="span"
-              className="inline-flex items-center gap-2"
-            >
-              {GetIcon(block.variant)}
-              {block.description}
+            <BodyShort size="small" as="span">
+              <span className="font-semibold">{getText(block.variant)}</span>
+              <span>{block.description}</span>
             </BodyShort>
           )}
         </div>

@@ -73,3 +73,12 @@ p.override-text-no-max {
   background-position: 0 0, 10px 10px;
   background-size: 20px 20px;
 }
+
+[id] > code {
+  font-size: inherit;
+  color: inherit;
+}
+
+[id] > code > .inline-code-amp {
+  display: none;
+}

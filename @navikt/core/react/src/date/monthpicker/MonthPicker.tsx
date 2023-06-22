@@ -86,6 +86,11 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "absolute"
    */
   strategy?: "absolute" | "fixed";
+  /**
+   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
+   * @default false
+   */
+  bubbleEscape?: boolean;
 }
 
 interface MonthPickerComponent
@@ -153,6 +158,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       year,
       onYearChange,
       strategy = "absolute",
+      bubbleEscape = false,
     },
     ref
   ) => {
@@ -204,6 +210,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
               id={ariaId}
               className="navds-date navds-date__popover"
               strategy={strategy}
+              bubbleEscape={bubbleEscape}
             >
               <RootProvider
                 locale={getLocaleFromString(locale)}

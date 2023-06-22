@@ -3,7 +3,8 @@ import { TokenTableT } from "@/types";
 import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import core from "@navikt/ds-css/tokens.json";
 import { BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
-import cl from "classnames";
+import cl from "clsx";
+import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import NextLink from "next/link";
 import { useState } from "react";
 
@@ -27,27 +28,13 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
             !open && showMore,
         })}
       >
-        <table className="border-border-divider w-full border-separate border-spacing-0 rounded-t border">
-          <thead>
-            <tr className="rounded-t">
-              <td className="rounded-tl bg-gray-50 p-2 ">Token</td>
-              <td className="rounded-tr bg-gray-50 p-2 ">Fallback</td>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(tokens).map(([key, val]) => (
-              <tr
-                key={key}
-                className="peer border-b border-t border-gray-300 font-mono text-sm last-of-type:rounded-b"
-              >
-                <td className="border-r border-t border-gray-300 p-2">{key}</td>
-                <td className="border-t border-gray-300 p-2">{val}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <AkselTable th={[{ text: "Token" }, { text: "Fallback" }]}>
+          {Object.entries(tokens).map(([key, val]) => (
+            <AkselTableRow key={key} tr={[{ text: key }, { text: val }]} />
+          ))}
+        </AkselTable>
         {(open || !showMore) && (
-          <div className="border-border-divider bg-surface-neutral-subtle relative w-full rounded-b border border-t-0 p-2 pr-14">
+          <div className="border-border-subtle bg-surface-default relative -mt-8 w-full rounded-b border border-t-0 p-2 pr-14">
             <CopyButton
               copyText={Object.entries(tokens).reduce(
                 (prev, cur) =>
