@@ -12,24 +12,24 @@ export type ComboboxClearEvent =
 export interface ComboboxProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "value"> {
-  allowNewValues?: boolean;
-  isListOpen?: boolean;
+  label: React.ReactNode;
   options: string[];
-  selectedOptions?: string[];
-  onClear?: (e: ComboboxClearEvent) => void;
+  allowNewValues?: boolean;
+  children?: React.ReactNode;
   clearButton?: boolean;
   clearButtonLabel?: string;
-  toggleListButton?: boolean;
-  toggleListButtonLabel?: string;
+  hideLabel?: boolean;
+  inputClassName?: string | undefined;
+  isListOpen?: boolean;
   isLoading?: boolean;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClear?: (e: ComboboxClearEvent) => void;
   onToggleSelected?: (option: string, isSelected: boolean) => void;
-  hideLabel?: boolean;
-  label: React.ReactNode;
-  children?: React.ReactNode;
-  shouldShowSelectedOptions?: boolean;
-  value?: string;
-  inputClassName?: string | undefined;
   singleSelect?: boolean;
+  selectedOptions?: string[];
   shouldAutocomplete?: boolean;
+  shouldShowSelectedOptions?: boolean;
+  toggleListButton?: boolean;
+  toggleListButtonLabel?: string;
+  value?: string;
 }
