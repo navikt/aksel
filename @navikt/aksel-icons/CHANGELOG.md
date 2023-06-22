@@ -4,19 +4,19 @@
 
 ### Patch Changes
 
-- [#2054](https://github.com/navikt/aksel/pull/2054) - Nye ikoner `ChevronRightLast` og `ChevronLeftLast`
+- Nye ikoner `ChevronRightLast` og `ChevronLeftLast` ([PR](https://github.com/navikt/aksel/pull/2054))
 
 ## 3.2.3
 
 ### Patch Changes
 
-- [#1998](https://github.com/navikt/aksel/pull/1998) - Nye ikoner `FileParagraph` og `FilePlus`
+- Nye ikoner `FileParagraph` og `FilePlus` ([PR](https://github.com/navikt/aksel/pull/1998))
 
 ## 2.9.8
 
 ### Patch Changes
 
-- [#1959](https://github.com/navikt/aksel/pull/1959) - Oppdatert Statusikoner til å være tydeligere og mer konsistente.
+- Oppdatert Statusikoner til å være tydeligere og mer konsistente. ([PR](https://github.com/navikt/aksel/pull/1959))
 
 ## 2.9.7
 
@@ -28,31 +28,31 @@
 
 ### Patch Changes
 
-- [#1956](https://github.com/navikt/aksel/pull/1956) - Fikset `CheckmarkCircleIcon`-bug
+- Fikset `CheckmarkCircleIcon`-bug ([PR](https://github.com/navikt/aksel/pull/1956))
 
 ## 2.9.3
 
 ### Patch Changes
 
-- [#1950](https://github.com/navikt/aksel/pull/1950) - Nye ikoner `BulletList` og `NumberList`
+- Nye ikoner `BulletList` og `NumberList` ([PR](https://github.com/navikt/aksel/pull/1950))
 
 ## 2.8.15
 
 ### Patch Changes
 
-- [#1928](https://github.com/navikt/aksel/pull/1928) - :tada: Nye ikoner `HandKnot` og `HandKnotFilled`
+- :tada: Nye ikoner `HandKnot` og `HandKnotFilled` ([PR](https://github.com/navikt/aksel/pull/1928))
 
 ## 2.8.13
 
 ### Patch Changes
 
-- [#1921](https://github.com/navikt/aksel/pull/1921) - Oppdatert `InformationSquare`-ikon
+- Oppdatert `InformationSquare`-ikon ([PR](https://github.com/navikt/aksel/pull/1921))
 
 ## 2.8.11
 
 ### Patch Changes
 
-- [#1909](https://github.com/navikt/aksel/pull/1909) - Oppdatert `VideoSlack`, `Questionmark` og `Information`-ikoner
+- Oppdatert `VideoSlack`, `Questionmark` og `Information`-ikoner ([PR](https://github.com/navikt/aksel/pull/1909))
 
 ## 2.8.8
 
@@ -76,10 +76,10 @@
 
 ### Patch Changes
 
-- [#1852](https://github.com/navikt/aksel/pull/1852) - Nye ikoner ,`CaretDownFill` ,`CaretLeft` ,`CaretLeftFill` ,`CaretLeftRight` ,`CaretLeftRightFill` ,`CaretRight` ,`CaretRightFill` ,`CaretUpDownFill` ,`CaretUpFill` ,`Escalator` ,`Moon` ,`MoonFill`. Fjernet `EscalatorStroke`
+- Nye ikoner ,`CaretDownFill` ,`CaretLeft` ,`CaretLeftFill` ,`CaretLeftRight` ,`CaretLeftRightFill` ,`CaretRight` ,`CaretRightFill` ,`CaretUpDownFill` ,`CaretUpFill` ,`Escalator` ,`Moon` ,`MoonFill`. Fjernet `EscalatorStroke` ([PR](https://github.com/navikt/aksel/pull/1852))
 
 ## 2.7.0
 
 ### Minor Changes
 
-- [#1847](https://github.com/navikt/aksel/pull/1847) - Ny ikonpakke med for core icons 3! `@navikt/aksel-icons`
+- Ny ikonpakke med for core icons 3! `@navikt/aksel-icons` ([PR](https://github.com/navikt/aksel/pull/1847))

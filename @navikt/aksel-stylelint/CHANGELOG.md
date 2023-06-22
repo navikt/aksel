@@ -4,13 +4,13 @@
 
 ### Minor Changes
 
-- [#2035](https://github.com/navikt/aksel/pull/2035) - Deprecated klassenavn `navds-chips--icon-left`
+- Deprecated klassenavn `navds-chips--icon-left` ([PR](https://github.com/navikt/aksel/pull/2035))
 
 ## 3.4.2
 
 ### Patch Changes
 
-- [#2017](https://github.com/navikt/aksel/pull/2017) - La til riktige dependencies
+- La til riktige dependencies ([PR](https://github.com/navikt/aksel/pull/2017))
 
 ## 3.4.1
 
@@ -22,4 +22,4 @@
 
 ### Minor Changes
 
-- [#1973](https://github.com/navikt/aksel/pull/1973) - Stylelint-pakke for Aksel
+- Stylelint-pakke for Aksel ([PR](https://github.com/navikt/aksel/pull/1973))
