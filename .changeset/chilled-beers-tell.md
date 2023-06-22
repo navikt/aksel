@@ -6,6 +6,6 @@
 
 :lipstick: Shadow-tokens er oppdatert
 
-- Alle shadow-tokens er nå mer tydelig og kan brukes uten eksplisitt border.
+- Alle shadow-tokens er nå tydeligere og kan brukes uten eksplisitt border.
 - Datepicker og Monthpicker har nå ikke border som default da shadow er tydelig nok
 - Modal bruker nå shadow-xlarge
