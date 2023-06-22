@@ -278,3 +278,7 @@
   visibility: hidden;
   pointer-events: none;
 }
+
+.navds-date__popover:where(.navds-popover) {
+  border: none;
+}
