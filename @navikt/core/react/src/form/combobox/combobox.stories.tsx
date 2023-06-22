@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
 import React, { useState, useId } from "react";
-
+import { userEvent, within } from "@storybook/testing-library";
 import { Chips, Combobox } from "../../index";
 
 export default {
@@ -256,4 +256,39 @@ export const WithCallbacks = () => {
 
 WithCallbacks.args = {
   options: [],
+};
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export const CancelInputTest = {
+  render: () => {
+    return (
+      <div data-theme="light">
+        <Combobox
+          options={options}
+          selectedOptions={initialSelectedOptions}
+          label="Hva er dine favorittfrukter?"
+        />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+
+    userEvent.click(input);
+    await userEvent.type(input, "apple", { delay: 200 });
+    await sleep(1000);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(1000);
+    userEvent.keyboard("{esc}");
+    await sleep(1000);
+    userEvent.keyboard("{ArrowDown}");
+    const banana = canvas.getByText("banana");
+    userEvent.click(banana);
+  },
 };
