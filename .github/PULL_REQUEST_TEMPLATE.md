@@ -1,17 +1,44 @@
-### :memo: PR Checklist
+### Description
 
-<!-- Remove non-relevant fields -->
+<!-- PR description/motivation
+add links to project-tasks, slack discussions etc here
+-->
 
-- [ ] :sparkles: New component? Add CSS-mappings to `@navikt/core/css/config/_mappings.js`.
+### Change summary
 
-- [ ] :wastebasket: Are you deprecating a CSS class? (are you removing the last known reference to a CSS class?). Add it to `@navikt/aksel-stylelint/src/deprecations.ts` with a suitable description.
+<!-- Short summary of changes in PR
+- added variant x
+- fixed bug in y
+-->
 
-- [ ] :balance_scale: Is the feature/component/code sufficiently complex to warrant tests? Add some unit-tests :test_tube:
+### PR Checklist 📝 (Remove fields after check!)
 
-- [ ] :balance_scale: Does the feature/component add some complex user-interactions? Consider adding some [interaction-tests with storybook](https://storybook.js.org/docs/react/writing-tests/interaction-testing) :test_tube:
+#### New component? ✨
 
-- [ ] :boom: Are there breaking changes? Consider adding a codemod for easier migration.
+- Check that component-styling is correctly configured in `@navikt/core/css/config/_mappings.js`. This is needed for correct build and CDN upload.
+- Check that styling is correctly exported from `@navikt/core/css/index.css`
+- Check that correct tokens for component is documented in `@navikt/core/css/tokens.json`
+- Check that only needed components and types are exported from `@navikt/core/react/src/index.ts`
+- Add JSDoc to component (see other components for reference)
+- Create storybook-stories for relevant component variations and compositions. Stories are used for [visual regression testing](https://www.chromatic.com/docs/), so make sure they are complete.
+- Is the component sufficiently complex to warrant tests? Add some unit-tests for jest.
 
-- [ ] :test_tube: Are all variations and cases shown in the storybook stories? Stories are used for [visual regression testing](https://www.chromatic.com/docs/), so make sure they are complete.
+#### Component-updates 🎉
 
-- [ ] Run `yarn changeset` for version and changelog generation
+- Revalidate if everything under `New component` is still accounted for
+- Deprecating/removing a CSS class? Add it to `@navikt/aksel-stylelint/src/deprecations.ts` with a suitable description. This helps stylelint-users keep their code clean and bug-free.
+
+#### Documentation 📝
+
+- Add/update component-demos for component `aksel.nav.no/website/pages/eksempler`
+- Create/Update documentation in sanity if needed
+  Note: Props, tokens and examples only updates to sanity on merge to main
+
+#### Versioning 🏷️
+
+- Run `yarn changeset` to generate a version-entry for change.
+- - Bug/hotfix: Patch
+- - New feature: Minor
+- - Breaking change: Major
+- Adding breaking changes? Consider adding a codemod for easier migration.
+- Breaking changes also needs documentation under "Migration"-page on website
