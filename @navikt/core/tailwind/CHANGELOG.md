@@ -4,21 +4,21 @@
 
 ### Minor Changes
 
-- [#2041](https://github.com/navikt/aksel/pull/2041) - Shadow-tokens er oppdatert
+- Shadow-tokens er oppdatert ([PR](https://github.com/navikt/aksel/pull/2041))
 
-- [#2036](https://github.com/navikt/aksel/pull/2036) - Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600).
+- Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600). ([PR](https://github.com/navikt/aksel/pull/2036))
 
 ## 4.1.0
 
 ### Minor Changes
 
-- [#2032](https://github.com/navikt/aksel/pull/2032) - :tada: Fargetokens for datavisualisering.
+- :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
 
 ## 2.5.0
 
 ### Minor Changes
 
-- [#1832](https://github.com/navikt/aksel/pull/1832) - Breakpoint-tokens er lagt til. Overskriver native tailwind-breakpoints
+- Breakpoint-tokens er lagt til. Overskriver native tailwind-breakpoints ([PR](https://github.com/navikt/aksel/pull/1832))
 
 ## 2.0.0
 

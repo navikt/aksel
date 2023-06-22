@@ -4,29 +4,29 @@
 
 ### Minor Changes
 
-- [#2041](https://github.com/navikt/aksel/pull/2041) - Shadow-tokens er oppdatert: Datepicker har nå ikke border, Modal bruker shadow-xlarge, LinkCard bruker shadow-xsmall
+- Shadow-tokens er oppdatert: Datepicker har nå ikke border, Modal bruker shadow-xlarge, LinkCard bruker shadow-xsmall ([PR](https://github.com/navikt/aksel/pull/2041))
 
 ## 4.3.0
 
 ### Minor Changes
 
-- [#2069](https://github.com/navikt/aksel/pull/2069) - Popover/Helptext: Maksbredde på 100vw - 1.5rem. Treffer ikke lengre kanten på skjermen.
+- Popover/Helptext: Maksbredde på 100vw - 1.5rem. Treffer ikke lengre kanten på skjermen. ([PR](https://github.com/navikt/aksel/pull/2069))
 
 ### Patch Changes
 
-- [#2067](https://github.com/navikt/aksel/pull/2067) - ExpansionCard: Ved nesting av komponetene fikk man styling fra parent
+- ExpansionCard: Ved nesting av komponetene fikk man styling fra parent ([PR](https://github.com/navikt/aksel/pull/2067))
 
 ## 4.2.0
 
 ### Minor Changes
 
-- [#2048](https://github.com/navikt/aksel/pull/2048) - Chat: `small`-size, innebygde varianter for farge og oppdatert utseende.
+- Chat: `small`-size, innebygde varianter for farge og oppdatert utseende. ([PR](https://github.com/navikt/aksel/pull/2048))
 
 ## 4.1.4
 
 ### Patch Changes
 
-- [#2049](https://github.com/navikt/aksel/pull/2049) - Readmore: setter nå eksplisitt color for å ikke arve text-subtle fra parent.
+- Readmore: setter nå eksplisitt color for å ikke arve text-subtle fra parent. ([PR](https://github.com/navikt/aksel/pull/2049))
 
 ## 4.1.1
 
@@ -38,15 +38,15 @@
 
 ### Minor Changes
 
-- [#2035](https://github.com/navikt/aksel/pull/2035) - Chips: `neutral` og `action`-varianter av Chips.Toggle. Opt-out mulighet for Checkmark. Oppdatert checkmark-ikon
+- Chips: `neutral` og `action`-varianter av Chips.Toggle. Opt-out mulighet for Checkmark. Oppdatert checkmark-ikon ([PR](https://github.com/navikt/aksel/pull/2035))
 
-- [#2036](https://github.com/navikt/aksel/pull/2036) - Alle description-felter på fieldsets har nå `text-subtle` som farge.
+- Alle description-felter på fieldsets har nå `text-subtle` som farge. ([PR](https://github.com/navikt/aksel/pull/2036))
 
 ## 4.0.0
 
 ### Major Changes
 
-- [#2026](https://github.com/navikt/aksel/pull/2026) - All styling fra `@navikt/ds-css-internal` er flyttet til `@navikt/ds-css`.
+- All styling fra `@navikt/ds-css-internal` er flyttet til `@navikt/ds-css`. ([PR](https://github.com/navikt/aksel/pull/2026))
 
 - classname-prefix er endret fra `navdsi` -> `navds` for flyttede komponenter.
 
@@ -58,49 +58,49 @@
 
 ### Minor Changes
 
-- [#2010](https://github.com/navikt/aksel/pull/2010) - Tag: `moderate`-variant
+- Tag: `moderate`-variant ([PR](https://github.com/navikt/aksel/pull/2010))
 
 ## 3.2.3
 
 ### Patch Changes
 
-- [#1993](https://github.com/navikt/aksel/pull/1993) - Datepicker: Fikset small-variant av datepicker-input.
+- Datepicker: Fikset small-variant av datepicker-input. ([PR](https://github.com/navikt/aksel/pull/1993))
 
-- [#1994](https://github.com/navikt/aksel/pull/1994) - CopyButton: `xsmall`-size for bruk i tabeller
+- CopyButton: `xsmall`-size for bruk i tabeller ([PR](https://github.com/navikt/aksel/pull/1994))
 
 ## 3.1.3
 
 ### Patch Changes
 
-- [#1976](https://github.com/navikt/aksel/pull/1976) - :lipstick: Oppdatert utseende for ToggleGroup. `Medium` og `Small`-size er begge 10px lavere, mindre border-radius
+- :lipstick: Oppdatert utseende for ToggleGroup. `Medium` og `Small`-size er begge 10px lavere, mindre border-radius ([PR](https://github.com/navikt/aksel/pull/1976))
 
 ## 3.1.0
 
 ### Minor Changes
 
-- [#1966](https://github.com/navikt/aksel/pull/1966) - Alle komponenter bruker nå default `:focus-visible` for fokusmarkering. Medfølger også fallback for `:focus`
+- Alle komponenter bruker nå default `:focus-visible` for fokusmarkering. Medfølger også fallback for `:focus` ([PR](https://github.com/navikt/aksel/pull/1966))
 
 ### Patch Changes
 
-- [#1967](https://github.com/navikt/aksel/pull/1967) - Oppdatert Label og Description spacing for skjemakomponenter
+- Oppdatert Label og Description spacing for skjemakomponenter ([PR](https://github.com/navikt/aksel/pull/1967))
 
 ## 3.0.0
 
 ### Major Changes
 
-- [#1964](https://github.com/navikt/aksel/pull/1964) - Accordion: Chevron er left-aligned, deler av styling er refaktorert, `size`-props og `neutral`-variant
+- Accordion: Chevron er left-aligned, deler av styling er refaktorert, `size`-props og `neutral`-variant ([PR](https://github.com/navikt/aksel/pull/1964))
 
 ## 2.9.0
 
 ### Minor Changes
 
-- [#1941](https://github.com/navikt/aksel/pull/1941) - CSS nå tilgjengelig som separate filer: Kan lastest fra CDN, minified-versjoner tilgjengelig
+- CSS nå tilgjengelig som separate filer: Kan lastest fra CDN, minified-versjoner tilgjengelig ([PR](https://github.com/navikt/aksel/pull/1941))
 
 ## 2.8.9
 
 ### Patch Changes
 
-- [#1905](https://github.com/navikt/aksel/pull/1905) - Button: Padding/border-radius tokens
+- Button: Padding/border-radius tokens ([PR](https://github.com/navikt/aksel/pull/1905))
 
 ## 2.8.7
 
@@ -120,19 +120,19 @@
 
 - Accordion: tokens for header-bakgrunn
 
-- [#1879](https://github.com/navikt/aksel/pull/1879) - Select: Fikset tekstfarge på iphone
+- Select: Fikset tekstfarge på iphone ([PR](https://github.com/navikt/aksel/pull/1879))
 
 ## 2.8.2
 
 ### Patch Changes
 
-- [#1870](https://github.com/navikt/aksel/pull/1870) - ExpansioCard: Oppdatert typografi
+- ExpansioCard: Oppdatert typografi ([PR](https://github.com/navikt/aksel/pull/1870))
 
 ## 2.7.8
 
 ### Patch Changes
 
-- [#1863](https://github.com/navikt/aksel/pull/1863) - Tabs: La til focus-markering for Tabs.Panel
+- Tabs: La til focus-markering for Tabs.Panel ([PR](https://github.com/navikt/aksel/pull/1863))
 
 ## 2.7.5
 
@@ -150,7 +150,7 @@
 
 ### Patch Changes
 
-- [#1823](https://github.com/navikt/aksel/pull/1823) - List: La til støtte for nesting
+- List: La til støtte for nesting ([PR](https://github.com/navikt/aksel/pull/1823))
 
 ## 2.3.1
 
@@ -162,7 +162,7 @@
 
 ### Minor Changes
 
-- [#1813](https://github.com/navikt/aksel/pull/1813) - Select: Fikset sentrering av tekst i Firefox
+- Select: Fikset sentrering av tekst i Firefox ([PR](https://github.com/navikt/aksel/pull/1813))
 
 ### Patch Changes
 
@@ -172,7 +172,7 @@
 
 ### Minor Changes
 
-- [#1789](https://github.com/navikt/aksel/pull/1789) - ToggleGroup: `Neutral`-variant.
+- ToggleGroup: `Neutral`-variant. ([PR](https://github.com/navikt/aksel/pull/1789))
 
 - Button: `Neutral`-variant.
 
@@ -186,7 +186,7 @@
 
 ### Patch Changes
 
-- [#1737](https://github.com/navikt/aksel/pull/1737) - Radio: Fikset default visuell error-state
+- Radio: Fikset default visuell error-state ([PR](https://github.com/navikt/aksel/pull/1737))
 
 ## 2.0.5
 
@@ -230,4 +230,4 @@
 
 ### Minor Changes
 
-- [#1684](https://github.com/navikt/aksel/pull/1684) - Tag: `filled`-varianter
+- Tag: `filled`-varianter ([PR](https://github.com/navikt/aksel/pull/1684))
