@@ -26,7 +26,7 @@ module.exports = {
           900: "#831843",
         },
         teal: {
-          50: "#f0fdfa",
+          50: "#defcf6",
           100: "#ccfbf1",
           200: "#99f6e4",
           300: "#5eead4",
@@ -99,17 +99,9 @@ module.exports = {
         header: "inset 0 -1px 0 rgb(180, 180, 180, 0.1)",
       },
       keyframes: {
-        shimmerBg: {
-          "0%": { backgroundSize: "400% 400%", backgroundPosition: "0% 0%" },
-          "50%": {
-            backgroundSize: "400% 400%",
-            backgroundPosition: "100% 100%",
-          },
-          "100%": { backgroundSize: "400% 400%", backgroundPosition: "0% 0%" },
-        },
-        fadeInRight: {
-          "0%": { width: "20%", opacity: 0.5 },
-          "100%": { width: "100%", opacity: 1 },
+        searchModal: {
+          "0%": { transform: "scale(0.98)", opacity: 0.7 },
+          "100%": { transform: "scale(1)", opacity: 1 },
         },
         fadeIn: {
           "0%": { opacity: 0 },
@@ -192,9 +184,8 @@ module.exports = {
         },
       },
       animation: {
-        shimmerBg: "shimmerBg 15s ease infinite",
-        fadeInRight: "fadeInRight 0.30s ease-in-out forwards",
         fadeIn: "fadeIn 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
+        searchModal: "searchModal 0.15s ease",
         toc: "toc 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
         expand: "expand 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
         expandLg: "expandLg 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",

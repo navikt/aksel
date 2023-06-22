@@ -75,13 +75,13 @@ export const WithSidebar = ({
     <>
       <Header />
       <div className="bg-bg-default">
-        <div className="mx-auto mt-6 mb-24 flex w-full max-w-screen-2xl gap-6">
+        <div className="mx-auto mb-24 mt-6 flex w-full max-w-screen-2xl gap-6">
           <Sidebar kategori={pageType.type} links={sidebar} />
           <div className="relative w-full">
             <main
               tabIndex={-1}
               id="hovedinnhold"
-              className="min-h-screen-header md:max-w-screen-sidebar relative w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
+              className="min-h-screen-header md:max-w-screen-sidebar relative z-0 w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
             >
               <div
                 className={cl(
@@ -89,7 +89,9 @@ export const WithSidebar = ({
                   {
                     "bg-surface-subtle flex items-center justify-between":
                       variant === "page",
-                    "bg-deepblue-700 grid py-[4.25rem] pb-6":
+                    "bg-deepblue-700/80 grid py-[4.25rem] pb-6":
+                      variant !== "page",
+                    "before:from-deepblue-700 before:absolute before:inset-0 before:-z-10 before:rounded-xl before:bg-gradient-to-br before:via-blue-500 before:to-violet-700":
                       variant !== "page",
                   }
                 )}
@@ -115,18 +117,17 @@ export const WithSidebar = ({
                     size="xlarge"
                     className={cl({
                       "text-deepblue-800": variant === "page",
-                      "text-text-on-action bg-deepblue-700/80 w-fit":
-                        variant !== "page",
+                      "text-text-on-action  w-fit": variant !== "page",
                     })}
                   >
                     {pageType.title}
                   </Heading>
                   <div
                     className={cl({
-                      "bg-deepblue-700/80 w-fit": variant !== "page",
+                      "w-fit": variant !== "page",
                     })}
                   >
-                    {intro && intro}
+                    {intro}
                   </div>
                 </div>
                 {variant === "page" && pageProps.status?.bilde && (
@@ -149,17 +150,15 @@ export const WithSidebar = ({
                   </div>
                 )}
                 {variant === "landingPage" && (
-                  <div className="pointer-events-none absolute top-0 right-0 hidden sm:block">
-                    <HeaderCube className="text-deepblue-300 z-0 max-h-full" />
+                  <div className="pointer-events-none absolute right-0 top-0 hidden sm:block">
+                    <HeaderCube className="text-deepblue-300 z-[-1] max-h-full" />
                   </div>
                 )}
               </div>
+
               <div className={cl("sm:px-6 md:px-10", { flex: withToc })}>
                 {withToc && (
-                  <TableOfContentsv2
-                    changedState={pageProps["content"]}
-                    hideToc={false}
-                  />
+                  <TableOfContentsv2 changedState={pageProps["content"]} />
                 )}
                 <div className="w-full">
                   {children}

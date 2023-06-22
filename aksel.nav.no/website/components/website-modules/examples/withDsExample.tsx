@@ -7,12 +7,13 @@ export const withDsExample = (
   /**
    * Static: Used for dynamic-height examples like ExpansionCard
    */
-  variant?: "full" | "inverted" | "static"
+  variant?: "full" | "inverted" | "static" | "subtle"
 ) => {
   const DsHOC = (props: any) => (
     <div
       className={cl({
         "bg-gray-900": variant === "inverted",
+        "bg-bg-subtle": variant === "subtle",
         [styles.containerStatic]: variant === "static",
         [styles.container]: variant !== "static",
       })}

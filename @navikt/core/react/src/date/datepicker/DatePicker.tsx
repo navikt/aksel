@@ -114,6 +114,11 @@ export interface DatePickerDefaultProps
    * @default "absolute"
    */
   strategy?: "absolute" | "fixed";
+  /**
+   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
+   * @default false
+   */
+  bubbleEscape?: boolean;
 }
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
@@ -180,6 +185,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onClose,
       onOpenToggle,
       strategy = "absolute",
+      bubbleEscape = false,
       ...rest
     },
     ref
@@ -251,6 +257,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               role="dialog"
               ref={ref}
               strategy={strategy}
+              bubbleEscape={bubbleEscape}
             >
               <DayPicker
                 locale={getLocaleFromString(locale)}

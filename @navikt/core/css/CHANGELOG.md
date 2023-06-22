@@ -1,5 +1,43 @@
 # @navikt/ds-css
 
+## 4.3.0
+
+### Minor Changes
+
+- [#2069](https://github.com/navikt/aksel/pull/2069) [`99c08b8e4`](https://github.com/navikt/aksel/commit/99c08b8e4ab33acd20a21719986452652ffe3c57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Popover og Helptext har nå luft mot siden av skjerm på mindre flater
+
+### Patch Changes
+
+- [#2067](https://github.com/navikt/aksel/pull/2067) [`d39ed906c`](https://github.com/navikt/aksel/commit/d39ed906c61149ac823ebab2e8974a105e592163) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Nested ExpansionCard fikk styling fra parent
+
+## 4.2.0
+
+### Minor Changes
+
+- [#2048](https://github.com/navikt/aksel/pull/2048) [`b1625ba38`](https://github.com/navikt/aksel/commit/b1625ba3882b430d678d0623922d7fb56aa724b3) Thanks [@HalvorHaugan](https://github.com/HalvorHaugan)! - Oppdatert Chat
+
+  - :sparkles: Ny prop `size` som kan settes til "small" for en mer kompakt layout
+  - :sparkles: Ny prop `variant` som erstatter `backgroundColor` og `avatarBgColor`
+  - :sparkles: `avatar` er nå valgfritt
+  - :wheelchair: Forbedret UU
+  - :lipstick: Oppdatert utseende
+
+## 4.1.7
+
+### Patch Changes
+
+- [`42b5af64a`](https://github.com/navikt/aksel/commit/42b5af64ab35d0f2d126d41f8fc3e61fe2834b36) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset jsdom-problemer ved rendring av Timeline
+
+## 4.1.6
+
+## 4.1.5
+
+## 4.1.4
+
+### Patch Changes
+
+- [#2049](https://github.com/navikt/aksel/pull/2049) [`e06096105`](https://github.com/navikt/aksel/commit/e060961050c75ec815e5c125001f1ff99106e298) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Subtle-description på form-elementer brakk bruk av Readmore
+
 ## 4.1.3
 
 ## 4.1.2

@@ -17,14 +17,6 @@ spec:
     path: /api/isAlive
     initialDelay: 10
 
-  resources:
-    limits:
-      cpu: 2000m
-      memory: 2048Mi
-    requests:
-      cpu: 500m
-      memory: 1024Mi
-
   accessPolicy:
     outbound:
       external:
@@ -35,3 +27,7 @@ spec:
         - host: cdn.sanity.io
       rules: []
       env:
+  filesFrom:
+    - emptyDir:
+        medium: Memory
+      mountPath: /app/aksel.nav.no/website/.next/cache

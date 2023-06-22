@@ -1,8 +1,8 @@
 import {
-  arrow as flArrow,
   autoUpdate,
-  flip,
+  arrow as flArrow,
   offset as flOffset,
+  flip,
   shift,
   useClick,
   useDismiss,
@@ -11,8 +11,8 @@ import {
 } from "@floating-ui/react";
 import cl from "clsx";
 import React, {
-  forwardRef,
   HTMLAttributes,
+  forwardRef,
   useCallback,
   useMemo,
   useRef,
@@ -72,6 +72,11 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default "absolute"
    */
   strategy?: "absolute" | "fixed";
+  /**
+   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
+   * @default false
+   */
+  bubbleEscape?: boolean;
 }
 
 interface PopoverComponent
@@ -113,6 +118,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement = "top",
       offset,
       strategy: userStrategy = "absolute",
+      bubbleEscape = false,
       ...rest
     },
     ref
@@ -135,15 +141,19 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       onOpenChange: onClose,
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
-        shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        shift({ padding: 12 }),
         flArrow({ element: arrowRef, padding: 8 }),
       ],
     });
 
     const { getFloatingProps } = useInteractions([
       useClick(context),
-      useDismiss(context),
+      useDismiss(context, {
+        bubbles: {
+          escapeKey: bubbleEscape,
+        },
+      }),
     ]);
 
     useClientLayoutEffect(() => {

@@ -5,6 +5,7 @@
   border: 1px solid;
   border-color: var(--ac-popover-border, var(--a-border-default));
   border-radius: var(--a-border-radius-medium);
+  max-width: calc(100vw - var(--a-spacing-6));
 }
 
 .navds-popover__content {
