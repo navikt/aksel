@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 4.4.0
+
+### Minor Changes
+
+- [#2041](https://github.com/navikt/aksel/pull/2041) [`de3626958`](https://github.com/navikt/aksel/commit/de3626958266d1271840fa341c36500ab66b573d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Shadow-tokens er oppdatert til mer tydeligere varianter
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.4.0
+
 ## 4.3.0
 
 ### Minor Changes
