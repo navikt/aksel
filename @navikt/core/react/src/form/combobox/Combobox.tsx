@@ -30,7 +30,6 @@ export const Combobox = forwardRef<
     hideLabel = false,
     description,
     label,
-    children,
     clearButton = true,
     clearButtonLabel,
     toggleListButton = true,
