@@ -143,7 +143,7 @@ export const getStaticProps = async ({
       preview,
       title: page?.heading ?? "",
       id: page?._id ?? "",
-      publishDate: await dateStr(page._updatedAt),
+      publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
     },
     notFound: !page && !preview,
     revalidate: 60,

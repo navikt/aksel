@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async (
       preview: context.preview ?? false,
       id: blogg?._id ?? "",
       title: blogg?.heading ?? "",
-      publishDate: await dateStr(blogg?.publishedAt ?? blogg._createdAt),
+      publishDate: await dateStr(blogg?.publishedAt ?? blogg?._createdAt),
     },
     notFound: !blogg && !context.preview,
   };
