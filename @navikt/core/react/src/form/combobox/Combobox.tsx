@@ -241,6 +241,5 @@ export const Combobox = forwardRef<
   );
 });
 
-// TODO: Remove this line. Only added to trigger build
 
 export default Combobox;
