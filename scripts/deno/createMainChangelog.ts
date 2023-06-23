@@ -187,18 +187,34 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
   return changelog;
 };
 
+const semverSort = (a: string, b: string): number => {
+  const [aMajor, aMinor, aPatch] = a.split(".").map((v) => parseInt(v));
+  const [bMajor, bMinor, bPatch] = b.split(".").map((v) => parseInt(v));
+
+  if (aMajor !== bMajor) {
+    return aMajor - bMajor;
+  } else if (aMinor !== bMinor) {
+    return aMinor - bMinor;
+  } else {
+    return aPatch - bPatch;
+  }
+};
+
 const createMainChangelog = async (changelog: Changelog): Promise<string> => {
   const headings = [];
-  Object.entries(changelog).forEach(([version, versionEntry]) => {
-    headings.push(heading(2, [text(version)]));
-    for (const [packageName, changes] of Object.entries(versionEntry)) {
-      headings.push(heading(3, [text(packageName)]));
-      for (const change of changes) {
-        processNode(change as Root);
-        headings.push(change);
+  Object.entries(changelog)
+    .sort((a, b) => semverSort(a[0], b[0]))
+    .reverse()
+    .forEach(([version, versionEntry]) => {
+      headings.push(heading(2, [text(version)]));
+      for (const [packageName, changes] of Object.entries(versionEntry)) {
+        headings.push(heading(3, [text(packageName)]));
+        for (const change of changes) {
+          processNode(change as Root);
+          headings.push(change);
+        }
       }
-    }
-  });
+    });
 
   headings.unshift(heading(1, [text("Changelog")]));
 
