@@ -44,8 +44,7 @@ export const Default = (props) => {
   return (
     <div data-theme="light">
       <Combobox
-        options={options}
-        selectedOptions={initialSelectedOptions}
+        options={props.options}
         label="Hva er dine favorittfrukter?"
         /* everything under here is optional? */
         size="medium"
@@ -56,10 +55,7 @@ export const Default = (props) => {
 };
 
 Default.args = {
-  controlled: false,
   options,
-  initialSelectedOptions,
-  selectedOptions: [],
 };
 
 export const WithExternalChips = (props) => {
@@ -144,7 +140,6 @@ export function SingleSelectWithAutocomplete(props) {
         label="Komboboks (single select)"
         singleSelect={props.singleSelect || true}
         options={props.options}
-        selectedOptions={props.selectedOptions}
         shouldAutocomplete={props.shouldAutocomplete}
       />
     </div>
@@ -154,7 +149,6 @@ export function SingleSelectWithAutocomplete(props) {
 SingleSelectWithAutocomplete.args = {
   singleSelect: true,
   options,
-  initialSelectedOptions,
   shouldAutocomplete: true,
 };
 
@@ -167,7 +161,6 @@ export function SingleSelectWithoutAutoComplete(props) {
         label="Komboboks (single select)"
         singleSelect={props.singleSelect || true}
         options={props.options}
-        selectedOptions={props.selectedOptions}
         shouldAutocomplete={props.shouldAutocomplete}
       />
     </div>
@@ -177,7 +170,6 @@ export function SingleSelectWithoutAutoComplete(props) {
 SingleSelectWithoutAutoComplete.args = {
   singleSelect: true,
   options,
-  initialSelectedOptions,
   shouldAutocomplete: false,
 };
 
@@ -199,7 +191,6 @@ ComboboxWithAddNewOptions.args = {
   allowNewValues: true,
   singleSelect: true,
   options,
-  initialSelectedOptions,
   shouldAutocomplete: false,
 };
 
@@ -228,6 +219,15 @@ ComboboxWithNoHits.args = {
 export const Controlled = (props) => {
   const id = useId();
   const [value, setValue] = useState(props.value);
+  const [selectedOptions, setSelectedOptions] = useState(props.selectedOptions);
+
+  const onToggleSelected = (option, isSelected) => {
+    if (isSelected) {
+      setSelectedOptions([...selectedOptions, option]);
+    } else {
+      setSelectedOptions(selectedOptions.filter((o) => o !== option));
+    }
+  };
 
   return (
     <>
@@ -242,6 +242,8 @@ export const Controlled = (props) => {
         id={id}
         options={props.options}
         onChange={(event) => setValue(event.target.value)}
+        onToggleSelected={onToggleSelected}
+        selectedOptions={selectedOptions}
         value={value}
       />
     </>
@@ -251,6 +253,7 @@ export const Controlled = (props) => {
 Controlled.args = {
   value: "apple",
   options,
+  selectedOptions: initialSelectedOptions,
 };
 
 export const WithCallbacks = () => {
@@ -292,11 +295,7 @@ export const CancelInputTest = {
   render: () => {
     return (
       <div data-theme="light">
-        <Combobox
-          options={options}
-          selectedOptions={initialSelectedOptions}
-          label="Hva er dine favorittfrukter?"
-        />
+        <Combobox options={options} label="Hva er dine favorittfrukter?" />
       </div>
     );
   },

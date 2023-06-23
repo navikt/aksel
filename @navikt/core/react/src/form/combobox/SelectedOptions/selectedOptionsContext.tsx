@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import usePrevious from "../../../util/usePrevious";
 import { useInputContext } from "../Input/inputContext";
 import { ComboboxProps } from "../types";
@@ -32,18 +26,14 @@ export const SelectedOptionsProvider = ({
     "selectedOptions" | "singleSelect" | "onToggleSelected"
   >;
 }) => {
-  const { focusInput, setSearchTerm, setValue } = useInputContext();
+  const { setSearchTerm, setValue } = useInputContext();
   const {
     selectedOptions: externalSelectedOptions,
     singleSelect,
     onToggleSelected,
   } = value;
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-
-  useEffect(
-    () => setSelectedOptions(externalSelectedOptions || []),
-    [externalSelectedOptions]
-  );
+  const [internalSelectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const selectedOptions = externalSelectedOptions ?? internalSelectedOptions;
 
   const addSelectedOption = useCallback(
     (option: string) => {
@@ -57,10 +47,9 @@ export const SelectedOptionsProvider = ({
           option,
         ]);
       }
-      focusInput();
       onToggleSelected?.(option, true);
     },
-    [focusInput, onToggleSelected, setSearchTerm, setValue, singleSelect]
+    [onToggleSelected, setSearchTerm, setValue, singleSelect]
   );
 
   const removeSelectedOption = useCallback(
@@ -70,10 +59,9 @@ export const SelectedOptionsProvider = ({
           (selectedOption) => selectedOption !== option
         )
       );
-      focusInput();
       onToggleSelected?.(option, false);
     },
-    [focusInput, onToggleSelected]
+    [onToggleSelected]
   );
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
