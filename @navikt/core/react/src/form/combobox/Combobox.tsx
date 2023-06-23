@@ -49,6 +49,7 @@ export const Combobox = forwardRef<
   } = useSelectedOptionsContext();
 
   const {
+    focusInput,
     hasError,
     inputDescriptionId,
     inputProps,
@@ -166,6 +167,7 @@ export const Combobox = forwardRef<
                 currentOption,
             }
           )}
+          onClick={focusInput}
         >
           {singleSelect ? (
             <>
@@ -217,6 +219,5 @@ export const Combobox = forwardRef<
     </ComboboxWrapper>
   );
 });
-
 
 export default Combobox;
