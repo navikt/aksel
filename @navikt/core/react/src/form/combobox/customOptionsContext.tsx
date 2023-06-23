@@ -6,6 +6,7 @@ import React, {
   MouseEvent,
 } from "react";
 import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
+import { useInputContext } from "./Input/inputContext";
 
 export interface CustomOptionProps {
   value?: string;
@@ -26,6 +27,7 @@ const CustomOptionsContext = createContext<CustomOptionsContextType>(
 export const CustomOptionsProvider = ({ children }) => {
   const [customOptions, setCustomOptions] = useState<string[]>([]);
   const { setSelectedOptions } = useSelectedOptionsContext();
+  const { focusInput } = useInputContext();
 
   const removeCustomOption = useCallback(
     ({ value, event }: CustomOptionProps) => {
@@ -47,9 +49,10 @@ export const CustomOptionsProvider = ({ children }) => {
           ...selectedOptions,
           newValue.trim(),
         ]);
+        focusInput();
       }
     },
-    [setCustomOptions, setSelectedOptions]
+    [focusInput, setCustomOptions, setSelectedOptions]
   );
 
   const customOptionsState = {

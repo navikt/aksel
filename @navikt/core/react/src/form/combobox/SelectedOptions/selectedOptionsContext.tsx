@@ -32,7 +32,7 @@ export const SelectedOptionsProvider = ({
     "selectedOptions" | "singleSelect" | "onToggleSelected"
   >;
 }) => {
-  const { setSearchTerm, setValue } = useInputContext();
+  const { focusInput, setSearchTerm, setValue } = useInputContext();
   const {
     selectedOptions: externalSelectedOptions,
     singleSelect,
@@ -57,9 +57,10 @@ export const SelectedOptionsProvider = ({
           option,
         ]);
       }
+      focusInput();
       onToggleSelected?.(option, true);
     },
-    [onToggleSelected, setSearchTerm, setValue, singleSelect]
+    [focusInput, onToggleSelected, setSearchTerm, setValue, singleSelect]
   );
 
   const removeSelectedOption = useCallback(
@@ -69,9 +70,10 @@ export const SelectedOptionsProvider = ({
           (selectedOption) => selectedOption !== option
         )
       );
+      focusInput();
       onToggleSelected?.(option, false);
     },
-    [onToggleSelected]
+    [focusInput, onToggleSelected]
   );
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);

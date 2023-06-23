@@ -1,11 +1,5 @@
 import cl from "clsx";
-import React, {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
+import React, { forwardRef, useCallback, useMemo } from "react";
 import { BodyShort, Label, mergeRefs } from "../..";
 import ClearButton from "./ClearButton";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
@@ -43,16 +37,12 @@ export const Combobox = forwardRef<
   // TODO: if text is long, new line
   // TODO: mobile, should fewer options be shown at a time?
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const mergedInputRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
-
   const { currentOption, toggleIsListOpen, filteredOptions } =
     useFilteredOptionsContext();
   const { customOptions, removeCustomOption, addCustomOption } =
     useCustomOptionsContext();
   const {
     selectedOptions,
-    prevSelectedOptions,
     removeSelectedOption,
     addSelectedOption,
     singleSelect,
@@ -62,16 +52,16 @@ export const Combobox = forwardRef<
     hasError,
     inputDescriptionId,
     inputProps,
+    inputRef,
     value,
     size = "medium",
-    searchTerm,
     setValue,
-    shouldAutocomplete,
   } = useInputContext();
 
-  const focusInput = useCallback(() => {
-    inputRef.current?.focus?.();
-  }, []);
+  const mergedInputRef = useMemo(
+    () => mergeRefs([inputRef, ref]),
+    [inputRef, ref]
+  );
 
   const handleClear = useCallback(
     (event: ComboboxClearEvent) => {
@@ -95,9 +85,8 @@ export const Combobox = forwardRef<
       if (selectedOptions.includes(value.trim())) return;
       addCustomOption({ value });
       handleClear(event);
-      focusInput();
     },
-    [selectedOptions, value, addCustomOption, handleClear, focusInput]
+    [selectedOptions, value, addCustomOption, handleClear]
   );
 
   const toggleOption = useCallback(
@@ -138,17 +127,6 @@ export const Combobox = forwardRef<
       handleAddCustomOption,
     ]
   );
-
-  //focus on input whenever selectedOptions changes
-  useEffect(() => {
-    if (prevSelectedOptions !== selectedOptions) focusInput();
-  }, [focusInput, selectedOptions, prevSelectedOptions]);
-
-  useEffect(() => {
-    if (shouldAutocomplete && inputRef && value !== searchTerm) {
-      inputRef.current?.setSelectionRange?.(searchTerm.length, value.length);
-    }
-  }, [value, inputRef, searchTerm, shouldAutocomplete]);
 
   return (
     <ComboboxWrapper
@@ -234,7 +212,6 @@ export const Combobox = forwardRef<
           singleSelect={singleSelect}
           id={inputProps.id}
           toggleOption={toggleOption}
-          focusInput={focusInput}
         />
       </div>
     </ComboboxWrapper>

@@ -4,12 +4,16 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { useFormField, FormFieldType } from "../../useFormField";
 
 interface InputContextType extends FormFieldType {
+  focusInput: () => void;
+  inputRef: React.RefObject<HTMLInputElement>;
   value: string;
   setValue: (text: string) => void;
   onChange: ChangeEventHandler<HTMLInputElement>;
@@ -44,6 +48,7 @@ export const InputContextProvider = ({ children, value: props }) => {
     },
     "comboboxfield"
   );
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
 
   const value = useMemo(
@@ -70,10 +75,22 @@ export const InputContextProvider = ({ children, value: props }) => {
     [setInternalValue]
   );
 
+  const focusInput = useCallback(() => {
+    inputRef.current?.focus?.();
+  }, []);
+
+  useEffect(() => {
+    if (shouldAutocomplete && inputRef && value !== searchTerm) {
+      inputRef.current?.setSelectionRange?.(searchTerm.length, value.length);
+    }
+  }, [value, searchTerm, shouldAutocomplete]);
+
   return (
     <InputContext.Provider
       value={{
         ...formFieldProps,
+        focusInput,
+        inputRef,
         value,
         setValue,
         onChange,
