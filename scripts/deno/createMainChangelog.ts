@@ -2,29 +2,28 @@ import { readFileSync, writeFileSync } from "node:fs";
 import {
   List,
   ListItem,
-  Root,
-  Text,
-  Link,
   Paragraph,
   PhrasingContent,
+  Root,
+  Text,
 } from "npm:@types/mdast";
 import { Node } from "npm:@types/unist";
 import { heading, root, text } from "npm:mdast-builder";
 import remarkParse from "npm:remark-parse";
 import remarkStringify from "npm:remark-stringify";
 import { unified } from "npm:unified";
-import { EXIT, SKIP, CONTINUE, visit } from "npm:unist-util-visit";
+import { CONTINUE, EXIT, SKIP, visit } from "npm:unist-util-visit";
 import { visitParents } from "npm:unist-util-visit-parents";
 import { getChangelogs } from "./utils.ts";
 
 /**
  * Small diagram of the process:
 
-           original 
+           original
         markdown files
                |
                V
-          custom JSON 
+          custom JSON
         representation
          of changelog
                |
@@ -60,20 +59,7 @@ const upsertEntry = (
   changelog[lastSeenVersion] = updatedVersion;
 };
 
-const PROrCommitHashLink = (node: Root): Link | null => {
-  let infoLink: Link | null = null;
-  visit(node, (someChildNode) => {
-    if (someChildNode.type === "link") {
-      infoLink = structuredClone(someChildNode);
-      return EXIT;
-    }
-  });
-
-  return infoLink;
-};
-
 const processNode = (node: Root) => {
-  const infoLink = PROrCommitHashLink(node) || text("");
   visitParents(node, (childNode, ancestors) => {
     if (childNode.type === "text" && childNode.value.startsWith("! -")) {
       const parent = ancestors.findLast(
@@ -95,7 +81,6 @@ const processNode = (node: Root) => {
         }
       });
       parent.children.push(text(" ") as PhrasingContent);
-      parent.children.push(infoLink as PhrasingContent);
     }
   });
 };
