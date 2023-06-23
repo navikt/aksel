@@ -33,7 +33,7 @@
 
 .navds-help-text__popover.navds-popover {
   background-color: var(--ac-help-text-popover-bg, var(--a-surface-info-subtle));
-  max-width: min(65ch, 90vw);
+  max-width: min(65ch, calc(100vw - 1.5rem));
 
   --ac-popover-border: var(--a-border-info);
 }
