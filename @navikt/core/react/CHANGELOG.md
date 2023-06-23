@@ -385,3 +385,85 @@
 ### Minor Changes
 
 - Ny komponent Provider! For håndtering av global config på tvers av komponenter
+
+## 1.3.39
+
+### Patch Changes
+
+- useId-bug fikset ved bruk i både react 17 og 18
+
+- Datepicker: Patchet UX-bugs ved navigering til fortid/nåtid
+
+- HelpText: Reverserte til å tillate bruk av `React.ReactNode` som children
+
+- DatePicker og MonthPicker er tilgjengelig som Beta
+
+- Modal: `overlayClassName`-prop lagt til
+
+- ConfirmationPanel: Checkbox lenker nå til innholdet i `aria-describedby`
+
+- Table: `shadeOnHover`-prop for å skru av/på hover-effekt
+
+- Table: `colSpan`-prop på `Table.ExpandableRow`
+
+- HelpText: har nå standard max-width på `65ch`
+
+- Stepper: `interactive` og `completed`-props for wizard-løsninger
+
+## 1.2.0
+
+### Minor Changes
+
+- Dropdown: `closeOnSelect`-prop for å skru av/på lukking av dropdown ved valg
+
+## 1.1.0
+
+### Minor Changes
+
+- Dropdown: `onSelect`-prop for callback ved valg av element
+
+## 1.0.0
+
+## Major Changes
+
+- Samversjonering: Alle pakker fra Aksel har nå, og vil i fremtiden ha samme versjonsnummer.
+
+- Accordion/ReadMore: `renderContentWhenClosed`-prop fjernet
+
+- Button: `icon` og `iconPosition`-prop for bedre ikonplassering
+
+- Tabs: `loop`-prop er flyttet fra `Tabs.Tablist` til `Tabs`. `iconPosition`-prop er flyttet fra `Tabs.Tab` til `Tabs`
+
+- Chat: `SpeechBubble`-komponent er renamet til `Chat`.
+
+- Chat: `topText` heter nå `name` og `timestamp`, `illustration` heter nå `avatar` og `illustrationBgColor` heter nå `avatarBgColor`
+
+- Pagination: `medium` -> `small`, `small` -> `xsmall`
+
+- Popover: `auto`, `auto-start` og `auto-end` er fjernet som `placement`-prop
+
+- CopyToClipboard: `iconPlacement` er renamet til `iconPosition`
+
+- ConfirmationPanel: `ref` er flyttet fra wrapper-div til checkbox
+
+- Stepper: `StepIndicator` er refaktorert og renamet til `Stepper`. `StepIndicator`-komponenten er fjernet
+
+- MicroCard: er deprecated
+
+- PageHeader: er deprecated
+
+- Menu: er deprecated
+
+- Divider: er deprecated og renamet til `Dropdown.Menu.Divider`
+
+- `@material/ui` er fjernet som dependency
+
+- `react-popper` og `@popperjs/core` er fjernet som dependency. Bruker nå `@floating-ui/react-dom-interactive`
+
+- `classnames` er byttet ut med `clsx` internt
+
+- `react-collapse` er fjernet som dependency
+
+- `uuid` er fjernet som dependency. Bruker nå intern løsning for id-håndtering
+
+- Label: er nå standard `label`-tag (tidligere p-tag)

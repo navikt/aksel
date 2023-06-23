@@ -231,3 +231,15 @@
 ### Minor Changes
 
 - Tag: `filled`-varianter ([PR](https://github.com/navikt/aksel/pull/1684))
+
+## 1.3.39
+
+### Patch Changes
+
+- Fikset bruk av `:watch` for diverse parsere (less, parcel)
+
+## 1.3.24
+
+### Patch Changes
+
+- Tokens tilgjengeligjøres nå også på `:host`. Dette lar shadow-dom brukere konsumere tokens direkte.
