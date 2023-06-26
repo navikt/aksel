@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Alert } from ".";
 import { BodyLong, Heading as DsHeading, Link } from "..";
+import { within, userEvent } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const meta: Meta<typeof Alert> = {
   title: "ds-react/Alert",
@@ -146,4 +148,45 @@ export const Links = () => {
       ))}
     </div>
   );
+};
+
+const CloseButton = ({ children }: { children?: React.ReactNode }) => {
+  let [show, setShow] = React.useState(true);
+
+  return (
+    show && (
+      <Alert variant="success" closeButton onClose={() => setShow(false)}>
+        {children || "Content"}
+      </Alert>
+    )
+  );
+};
+
+export const WithCloseButton: Story = {
+  render: () => {
+    return (
+      <div className="colgap">
+        <CloseButton />
+        <CloseButton>
+          <BodyLong>
+            Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
+            laboris ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat
+            sint commodo consequat eu aute.
+          </BodyLong>
+          <Link href="#">Id elit esse enim reprehenderit</Link>
+        </CloseButton>
+      </div>
+    );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const buttons = canvas.getAllByTitle("Lukk Alert");
+
+    await step("click button", async () => {
+      await userEvent.click(buttons[0]);
+    });
+
+    const buttonsAfter = canvas.getAllByTitle("Lukk Alert");
+    expect(buttonsAfter.length).toBe(1);
+  },
 };
