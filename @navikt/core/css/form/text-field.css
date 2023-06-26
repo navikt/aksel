@@ -73,7 +73,7 @@
   cursor: not-allowed;
 }
 
-.navds-text-field--readonly > .navds-text-field__input {
+.navds-text-field--readonly .navds-text-field__input {
   background-color: var(--a-surface-subtle);
   border-color: var(--a-border-subtle);
   cursor: default;

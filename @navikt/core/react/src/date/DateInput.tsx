@@ -35,7 +35,6 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     label,
     description,
     variant = "datepicker",
-    readOnly,
     ...rest
   } = props;
 
@@ -58,6 +57,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     errorId,
     showErrorMsg,
     hasError,
+    readOnly,
   } = useFormField(props, conditionalVariables.prefix);
 
   return (
@@ -73,6 +73,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "navds-form-field--disabled": !!inputProps.disabled,
           "navds-text-field--disabled": !!inputProps.disabled,
           "navds-text-field--readonly": readOnly,
+          "navds-date__field--readonly": readOnly,
         }
       )}
     >
@@ -114,7 +115,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           size={14}
         />
         <button
-          disabled={inputProps.disabled}
+          disabled={inputProps.disabled || readOnly}
           tabIndex={open ? -1 : 0}
           onClick={() => onOpen()}
           type="button"
