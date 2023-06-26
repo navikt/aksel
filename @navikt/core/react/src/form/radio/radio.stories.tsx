@@ -94,9 +94,26 @@ export const GroupDescription = () => (
 );
 
 export const Readonly = () => (
-  <RadioGroup legend="Group legend" defaultValue="tekst2" readOnly>
-    <Radio value="tekst">Radiotekst</Radio>
-    <Radio value="tekst2">Radiotekst</Radio>
-    <Radio value="tekst3">Radiotekst</Radio>
-  </RadioGroup>
+  <div className="colgap">
+    <RadioGroup
+      legend="Group legend"
+      description="Group description"
+      defaultValue="tekst2"
+      readOnly
+    >
+      <Radio value="tekst">Radiotekst</Radio>
+      <Radio value="tekst2">Radiotekst</Radio>
+      <Radio value="tekst3">Radiotekst</Radio>
+    </RadioGroup>
+    <RadioGroup
+      legend="Group legend"
+      defaultValue="tekst2"
+      readOnly
+      error="errormessage"
+    >
+      <Radio value="tekst">Radiotekst</Radio>
+      <Radio value="tekst2">Radiotekst</Radio>
+      <Radio value="tekst3">Radiotekst</Radio>
+    </RadioGroup>
+  </div>
 );

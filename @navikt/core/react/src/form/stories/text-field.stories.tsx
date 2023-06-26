@@ -83,3 +83,16 @@ export const Disabled = () => {
 export const HideLabel = () => {
   return <TextField label="Ipsum enim quis culpa" hideLabel />;
 };
+
+export const Readonly = () => {
+  return (
+    <div className="colgap">
+      <TextField
+        label="Ipsum enim quis culpa"
+        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        readOnly
+      />
+      <TextField label="Ipsum enim quis culpa" readOnly error="Errormessage" />
+    </div>
+  );
+};

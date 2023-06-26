@@ -197,6 +197,15 @@ export const Readonly = () => (
       <Checkbox value="tekst">Checkboxtekst</Checkbox>
       <Checkbox value="tekst2">Checkboxtekst</Checkbox>
     </CheckboxGroup>
+    <CheckboxGroup
+      legend="Group legend"
+      error="errormessage"
+      defaultValue={["tekst2"]}
+      readOnly
+    >
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
     <hr />
     <Checkbox value="tekst1" readOnly>
       Checkboxtekst

@@ -85,6 +85,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       hideLabel = false,
       resize,
       i18n,
+      readOnly,
       ...rest
     } = props;
 
@@ -115,6 +116,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           `navds-form-field--${size}`,
           {
             "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-textarea--readonly": readOnly,
             "navds-textarea--error": hasError,
             "navds-textarea--resize": resize,
           }
@@ -152,6 +154,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             }
             minRows={getMinRows()}
             ref={ref}
+            readOnly={readOnly}
             className={cl(
               "navds-textarea__input",
               "navds-body-short",

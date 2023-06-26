@@ -35,6 +35,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     label,
     description,
     variant = "datepicker",
+    readOnly,
     ...rest
   } = props;
 
@@ -71,6 +72,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "navds-date__field--error": hasError,
           "navds-form-field--disabled": !!inputProps.disabled,
           "navds-text-field--disabled": !!inputProps.disabled,
+          "navds-text-field--readonly": readOnly,
         }
       )}
     >
@@ -102,6 +104,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           {...inputProps}
           autoComplete="off"
           aria-controls={ariaId}
+          readOnly={readOnly}
           className={cl(
             "navds-date__field-input",
             "navds-text-field__input",

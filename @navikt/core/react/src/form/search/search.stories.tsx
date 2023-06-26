@@ -189,3 +189,18 @@ export const HtmlSize = () => (
     />
   </div>
 );
+
+export const Readonly = () => (
+  <div className="colgap">
+    <Search label="Label søk" variant="simple" hideLabel={false} />
+    <Search label="Label søk" variant="primary" hideLabel={false} />
+    <Search label="Label søk" variant="secondary" hideLabel={false} />
+    <Search
+      label="Label søk"
+      description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+      error="errormessage"
+      variant="simple"
+      hideLabel={false}
+    />
+  </div>
+);

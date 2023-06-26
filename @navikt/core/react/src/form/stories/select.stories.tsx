@@ -117,8 +117,17 @@ export const HideLabel = () => {
 
 export const Readonly = () => {
   return (
-    <Select label="Ipsum enim quis culpa" readOnly>
-      {content}
-    </Select>
+    <div className="colgap">
+      <Select
+        label="Ipsum enim quis culpa"
+        description="Consectetur labore velit."
+        readOnly
+      >
+        {content}
+      </Select>
+      <Select label="Ipsum enim quis culpa" readOnly error="errormessage">
+        {content}
+      </Select>
+    </div>
   );
 };

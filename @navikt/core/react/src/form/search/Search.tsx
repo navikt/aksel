@@ -130,6 +130,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       onChange,
       onSearchClick,
       htmlSize,
+      readOnly,
       ...rest
     } = props;
 
@@ -186,6 +187,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           {
             "navds-search--error": hasError,
             "navds-search--disabled": !!inputProps.disabled,
+            "navds-search--readonly": readOnly,
             "navds-search--with-size": !!htmlSize,
           }
         )}
@@ -227,6 +229,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               onChange={(e) => handleChange(e.target.value)}
               type="search"
               role="searchbox"
+              readOnly={readOnly}
               className={cl(
                 className,
                 "navds-search__input",

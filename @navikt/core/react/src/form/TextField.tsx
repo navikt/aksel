@@ -62,6 +62,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       htmlSize,
       hideLabel = false,
       type = "text",
+      readOnly,
       ...rest
     } = props;
 
@@ -75,6 +76,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "navds-text-field--error": hasError,
             "navds-text-field--disabled": !!inputProps.disabled,
             "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-text-field--readonly": readOnly,
           }
         )}
       >
@@ -105,6 +107,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {...inputProps}
           ref={ref}
           type={type}
+          readOnly={readOnly}
           className={cl(
             "navds-text-field__input",
             "navds-body-short",

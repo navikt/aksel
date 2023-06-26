@@ -94,3 +94,28 @@ export const Error = () => {
     </div>
   );
 };
+
+export const Readonly = () => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <div className="colgap">
+      <ConfirmationPanel
+        checked={!checked}
+        onChange={() => setChecked(!checked)}
+        label="Checkbox label text"
+        readOnly
+      >
+        {content}
+      </ConfirmationPanel>
+      <ConfirmationPanel
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+        label="Checkbox label text"
+        error="Adipisicing sint aute quis veniam incididunt duis est sint aute cillum."
+        readOnly
+      >
+        {content}
+      </ConfirmationPanel>
+    </div>
+  );
+};
