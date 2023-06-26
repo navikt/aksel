@@ -1,8 +1,8 @@
 import {
-  arrow as flArrow,
   autoUpdate,
-  flip,
+  arrow as flArrow,
   offset as flOffset,
+  flip,
   shift,
   useClick,
   useDismiss,
@@ -11,8 +11,8 @@ import {
 } from "@floating-ui/react";
 import cl from "clsx";
 import React, {
-  forwardRef,
   HTMLAttributes,
+  forwardRef,
   useCallback,
   useMemo,
   useRef,
@@ -141,8 +141,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       onOpenChange: onClose,
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
-        shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        shift({ padding: 12 }),
         flArrow({ element: arrowRef, padding: 8 }),
       ],
     });

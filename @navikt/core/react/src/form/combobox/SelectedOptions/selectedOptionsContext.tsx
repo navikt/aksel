@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import usePrevious from "../../../util/usePrevious";
 import { useInputContext } from "../Input/inputContext";
 import { ComboboxProps } from "../types";
@@ -38,12 +32,8 @@ export const SelectedOptionsProvider = ({
     singleSelect,
     onToggleSelected,
   } = value;
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-
-  useEffect(
-    () => setSelectedOptions(externalSelectedOptions || []),
-    [externalSelectedOptions]
-  );
+  const [internalSelectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const selectedOptions = externalSelectedOptions ?? internalSelectedOptions;
 
   const addSelectedOption = useCallback(
     (option: string) => {

@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
 import React, { useState, useId } from "react";
-
-import { Chips, Combobox } from "../../index";
+import { userEvent, within } from "@storybook/testing-library";
+import { Chips, Combobox, TextField } from "../../index";
 
 export default {
   title: "ds-react/Combobox",
@@ -35,8 +35,6 @@ const options = [
   "strawberry",
   "watermelon",
   "grape fruit",
-  "undefined",
-  "undefinedagain",
 ];
 
 const initialSelectedOptions = ["passion fruit", "grape fruit"];
@@ -46,8 +44,7 @@ export const Default = (props) => {
   return (
     <div data-theme="light">
       <Combobox
-        options={options}
-        selectedOptions={initialSelectedOptions}
+        options={props.options}
         label="Hva er dine favorittfrukter?"
         /* everything under here is optional? */
         size="medium"
@@ -58,10 +55,7 @@ export const Default = (props) => {
 };
 
 Default.args = {
-  controlled: false,
   options,
-  initialSelectedOptions,
-  selectedOptions: [],
 };
 
 export const WithExternalChips = (props) => {
@@ -146,7 +140,6 @@ export function SingleSelectWithAutocomplete(props) {
         label="Komboboks (single select)"
         singleSelect={props.singleSelect || true}
         options={props.options}
-        selectedOptions={props.selectedOptions}
         shouldAutocomplete={props.shouldAutocomplete}
       />
     </div>
@@ -156,7 +149,6 @@ export function SingleSelectWithAutocomplete(props) {
 SingleSelectWithAutocomplete.args = {
   singleSelect: true,
   options,
-  initialSelectedOptions,
   shouldAutocomplete: true,
 };
 
@@ -169,7 +161,6 @@ export function SingleSelectWithoutAutoComplete(props) {
         label="Komboboks (single select)"
         singleSelect={props.singleSelect || true}
         options={props.options}
-        selectedOptions={props.selectedOptions}
         shouldAutocomplete={props.shouldAutocomplete}
       />
     </div>
@@ -179,7 +170,6 @@ export function SingleSelectWithoutAutoComplete(props) {
 SingleSelectWithoutAutoComplete.args = {
   singleSelect: true,
   options,
-  initialSelectedOptions,
   shouldAutocomplete: false,
 };
 
@@ -201,7 +191,6 @@ ComboboxWithAddNewOptions.args = {
   allowNewValues: true,
   singleSelect: true,
   options,
-  initialSelectedOptions,
   shouldAutocomplete: false,
 };
 
@@ -225,6 +214,46 @@ ComboboxWithNoHits.args = {
   singleSelect: true,
   options,
   value: "Orange",
+};
+
+export const Controlled = (props) => {
+  const id = useId();
+  const [value, setValue] = useState(props.value);
+  const [selectedOptions, setSelectedOptions] = useState(props.selectedOptions);
+
+  const onToggleSelected = (option, isSelected) => {
+    if (isSelected) {
+      setSelectedOptions([...selectedOptions, option]);
+    } else {
+      setSelectedOptions(selectedOptions.filter((o) => o !== option));
+    }
+  };
+
+  return (
+    <>
+      <TextField
+        label="Overstyr value"
+        onChange={(event) => setValue(event.target.value)}
+        value={value}
+      />
+      <br />
+      <Combobox
+        label="Hva er dine favorittfrukter?"
+        id={id}
+        options={props.options}
+        onChange={(event) => setValue(event.target.value)}
+        onToggleSelected={onToggleSelected}
+        selectedOptions={selectedOptions}
+        value={value}
+      />
+    </>
+  );
+};
+
+Controlled.args = {
+  value: "apple",
+  options,
+  selectedOptions: initialSelectedOptions,
 };
 
 export const WithCallbacks = () => {
@@ -256,4 +285,35 @@ export const WithCallbacks = () => {
 
 WithCallbacks.args = {
   options: [],
+};
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export const CancelInputTest = {
+  render: () => {
+    return (
+      <div data-theme="light">
+        <Combobox options={options} label="Hva er dine favorittfrukter?" />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+
+    userEvent.click(input);
+    await userEvent.type(input, "apple", { delay: 200 });
+    await sleep(1000);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(1000);
+    userEvent.keyboard("{esc}");
+    await sleep(1000);
+    userEvent.keyboard("{ArrowDown}");
+    const banana = canvas.getByText("banana");
+    userEvent.click(banana);
+  },
 };

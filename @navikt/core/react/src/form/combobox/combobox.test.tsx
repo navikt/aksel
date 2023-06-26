@@ -67,3 +67,47 @@ describe("Render combobox", () => {
     expect(await utils.findByRole("option", { name: "venter..." }));
   });
 });
+
+describe("Combobox state-handling", () => {
+  it("Should not select previous focused element when closes", async () => {
+    const utils = render(<App options={options} />);
+
+    await userEvent.click(
+      utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+    );
+    await act(async () => {
+      await userEvent.type(
+        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
+        "ban"
+      );
+      await userEvent.keyboard("{ArrowDown}");
+      await userEvent.keyboard("{ArrowUp}");
+      await userEvent.keyboard("{Enter}");
+    });
+
+    expect(
+      await utils.findByRole("button", { name: "banana slett" })
+    ).toBeNull();
+  });
+
+  it("Should reset list when resetting input (ESC)", async () => {
+    const utils = render(<App options={options} />);
+
+    await userEvent.click(
+      utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+    );
+    await act(async () => {
+      await userEvent.type(
+        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
+        "apple"
+      );
+      await userEvent.keyboard("{ArrowDown}");
+      await userEvent.keyboard("{esc}");
+      await userEvent.keyboard("{ArrowDown}");
+    });
+
+    expect(
+      await utils.findByRole("option", { name: "banana" })
+    ).toBeInTheDocument();
+  });
+});

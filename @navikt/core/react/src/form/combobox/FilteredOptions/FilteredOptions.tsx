@@ -10,7 +10,6 @@ import { useInputContext } from "../Input/inputContext";
 interface FilteredOptionsProps {
   id: string;
   toggleOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
-  focusInput: () => void;
   ref: React.RefObject<HTMLUListElement>;
   singleSelect?: boolean;
 }

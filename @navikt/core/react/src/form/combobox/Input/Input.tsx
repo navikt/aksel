@@ -45,6 +45,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       ariaDescribedBy,
       moveFocusToInput,
       moveFocusToEnd,
+      shouldAutocomplete,
     } = useFilteredOptionsContext();
 
     const handleKeyUp = (e) => {
@@ -130,7 +131,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-controls={`${inputProps.id}-filtered-options`}
         aria-expanded={!!isListOpen}
         autoComplete="off"
-        aria-autocomplete="list"
+        aria-autocomplete={shouldAutocomplete ? "both" : "list"}
         aria-activedescendant={activeDecendantId}
         aria-describedby={ariaDescribedBy}
         className={cl(

@@ -257,6 +257,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               role="dialog"
               ref={ref}
               strategy={strategy}
+              className="navds-date__popover"
               bubbleEscape={bubbleEscape}
             >
               <DayPicker

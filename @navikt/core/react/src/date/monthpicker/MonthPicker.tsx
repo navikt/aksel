@@ -208,7 +208,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
               role="dialog"
               ref={ref}
               id={ariaId}
-              className="navds-date"
+              className="navds-date navds-date__popover"
               strategy={strategy}
               bubbleEscape={bubbleEscape}
             >

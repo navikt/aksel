@@ -8,6 +8,10 @@ export interface ErrorSummaryItemProps
    * Link text
    */
   children: React.ReactNode;
+  /**
+   * Link to errormessage
+   */
+  href?: string;
 }
 
 export type ErrorSummaryItemType = OverridableComponent<

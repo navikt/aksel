@@ -6,7 +6,7 @@ import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useSection } from "./use-sections";
+import { useSection } from "./useSection";
 
 const NavItem = ({
   link,

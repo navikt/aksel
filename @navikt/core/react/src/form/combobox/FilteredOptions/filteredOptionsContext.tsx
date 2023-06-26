@@ -41,6 +41,7 @@ type FilteredOptionsContextType = {
   moveFocusDown: () => void;
   moveFocusToInput: () => void;
   moveFocusToEnd: () => void;
+  shouldAutocomplete?: boolean;
 };
 const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
   {} as FilteredOptionsContextType
@@ -245,6 +246,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     filteredOptionsRef,
     filteredOptionsIndex,
     setFilteredOptionsIndex,
+    shouldAutocomplete,
     isListOpen,
     setInternalListOpen,
     isLoading,
