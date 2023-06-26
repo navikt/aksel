@@ -70,13 +70,13 @@
 
 ### Patch Changes
 
-- Nye ikoner `CaretUpDownFilledDown`,`CaretUpDownFilledUp`,`CloudDown`,`CloudDownFill`,`CloudUp`,`CloudUpFill`,`HddDown`,`HddDownFill`,`HddUp`,`HddUpFill`,`Inbox`,`InboxDown`,`InboxDownFill`,`InboxFill`,`InboxUp`,`InboxUpFill`,`ShoppingBasket`,`ShoppingBasketFill`
+- Nye ikoner `CaretUpDownFilledDown`, `CaretUpDownFilledUp`, `CloudDown`, `CloudDownFill`, `CloudUp`, `CloudUpFill`, `HddDown`, `HddDownFill`, `HddUp`, `HddUpFill`, `Inbox`, `InboxDown`, `InboxDownFill`, `InboxFill`, `InboxUp`, `InboxUpFill`, `ShoppingBasket`, `ShoppingBasketFill`
 
 ## 2.7.4
 
 ### Patch Changes
 
-- Nye ikoner ,`CaretDownFill` ,`CaretLeft` ,`CaretLeftFill` ,`CaretLeftRight` ,`CaretLeftRightFill` ,`CaretRight` ,`CaretRightFill` ,`CaretUpDownFill` ,`CaretUpFill` ,`Escalator` ,`Moon` ,`MoonFill`. Fjernet `EscalatorStroke` ([PR](https://github.com/navikt/aksel/pull/1852))
+- Nye ikoner, `CaretDownFill`, `CaretLeft`, `CaretLeftFill`, `CaretLeftRight`, `CaretLeftRightFill`, `CaretRight`, `CaretRightFill`, `CaretUpDownFill`, `CaretUpFill`, `Escalator`, `Moon`, `MoonFill`. Fjernet `EscalatorStroke` ([PR](https://github.com/navikt/aksel/pull/1852))
 
 ## 2.7.0
 
