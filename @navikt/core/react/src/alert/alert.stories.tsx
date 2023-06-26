@@ -28,6 +28,7 @@ export const Default: Story = {
       size={props.size}
       fullWidth={props.fullWidth}
       inline={props.inline}
+      closeButton={props.closeButton}
     >
       {props.children}
     </Alert>
@@ -38,6 +39,7 @@ export const Default: Story = {
     fullWidth: false,
     variant: "info",
     size: "medium",
+    closeButton: false,
   },
   argTypes: {
     variant: {
@@ -51,6 +53,9 @@ export const Default: Story = {
         type: "radio",
       },
       options: ["medium", "small"],
+    },
+    closeButton: {
+      type: "boolean",
     },
   },
 };
