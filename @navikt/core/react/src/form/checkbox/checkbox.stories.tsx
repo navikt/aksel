@@ -196,6 +196,9 @@ export const Readonly = () => (
     <CheckboxGroup legend="Group legend" defaultValue={["tekst2"]} readOnly>
       <Checkbox value="tekst">Checkboxtekst</Checkbox>
       <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+      <Checkbox value="tekst2" indeterminate>
+        Checkboxtekst
+      </Checkbox>
     </CheckboxGroup>
     <CheckboxGroup
       legend="Group legend"
