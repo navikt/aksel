@@ -27,7 +27,7 @@ export type SearchClearEvent =
   | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
 
 export interface SearchProps
-  extends FormFieldProps,
+  extends Omit<FormFieldProps, "readOnly">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
   children?: React.ReactNode;
   /**
@@ -130,7 +130,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       onChange,
       onSearchClick,
       htmlSize,
-      readOnly,
       ...rest
     } = props;
 
@@ -187,7 +186,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           {
             "navds-search--error": hasError,
             "navds-search--disabled": !!inputProps.disabled,
-            "navds-search--readonly": readOnly,
             "navds-search--with-size": !!htmlSize,
           }
         )}
@@ -223,13 +221,12 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             )}
             <input
               ref={mergedRef}
-              {...omit(rest, ["error", "errorId", "size"])}
+              {...omit(rest, ["error", "errorId", "size", "readOnly"])}
               {...inputProps}
               value={value ?? internalValue}
               onChange={(e) => handleChange(e.target.value)}
               type="search"
               role="searchbox"
-              readOnly={readOnly}
               className={cl(
                 className,
                 "navds-search__input",
