@@ -26,7 +26,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Changes background color on avatar and bubbles.
    * Avoid using the same background as the surface behind Chat.
-   * @default "subtle"
+   * @default "neutral"
    */
   variant?: "subtle" | "info" | "neutral";
   /**
@@ -92,7 +92,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       timestamp,
       avatar,
       position = "left",
-      variant = "subtle",
+      variant = "neutral",
       avatarBgColor,
       backgroundColor,
       toptextPosition,
