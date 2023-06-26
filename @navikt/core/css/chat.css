@@ -26,7 +26,6 @@
   align-items: center;
   box-shadow: var(--a-shadow-xsmall);
   background-color: var(--ac-chat-avatar-bg, var(--a-surface-neutral-subtle));
-  border: 1px solid var(--ac-chat-border-color, var(--a-border-subtle));
   border-radius: var(--a-border-radius-full);
   color: var(--ac-chat-avatar-color, var(--a-text-default));
   display: flex;
@@ -41,8 +40,9 @@
 
 .navds-chat__avatar svg {
   align-self: center;
-  height: 100%;
   width: 100%;
+  max-width: 1.5rem;
+  max-height: 1.5rem;
 }
 
 .navds-chat__bubble {
@@ -50,7 +50,6 @@
   box-shadow: var(--a-shadow-xsmall);
   width: fit-content;
   background-color: var(--ac-chat-bubble-bg, var(--a-surface-neutral-subtle));
-  border: 1px solid var(--ac-chat-border-color, var(--a-border-subtle));
   border-radius: var(--a-border-radius-xlarge);
   border-bottom-left-radius: 2px;
   display: flex;
