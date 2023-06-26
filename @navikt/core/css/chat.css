@@ -34,6 +34,7 @@
   overflow: hidden;
   height: 2.5rem;
   width: 2.5rem;
+  line-height: 2.5rem; /* Makes text properly vertically centered in Chrome */
   font-size: 1.06rem;
   letter-spacing: 0.024rem;
 }
