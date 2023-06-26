@@ -29,6 +29,10 @@ export interface FormFieldProps {
    * Override internal id
    */
   id?: string;
+  /**
+   * Read only-state
+   */
+  readOnly?: boolean;
 }
 
 /**
@@ -46,8 +50,14 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
   const inputDescriptionId = `${prefix}-description-${genId}`;
 
   const disabled = fieldset?.disabled || props.disabled;
-  const hasError: boolean = !disabled && !!(error || fieldset?.error);
-  const showErrorMsg = !disabled && !!error && typeof error !== "boolean";
+  const readOnly = fieldset?.readOnly || props.readOnly;
+
+  const hasError: boolean =
+    !disabled && !readOnly && !!(error || fieldset?.error);
+  const showErrorMsg =
+    !disabled && !readOnly && !!error && typeof error !== "boolean";
+
+  const ariaInvalid = { ...(hasError ? { "aria-invalid": true } : {}) };
 
   return {
     showErrorMsg,
@@ -55,9 +65,10 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
     errorId,
     inputDescriptionId,
     size: size ?? fieldset?.size ?? "medium",
+    readOnly,
     inputProps: {
       id,
-      "aria-invalid": hasError,
+      ...ariaInvalid,
       "aria-describedby":
         cl(props["aria-describedby"], {
           [inputDescriptionId]:

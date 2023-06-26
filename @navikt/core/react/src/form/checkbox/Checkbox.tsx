@@ -42,7 +42,7 @@ export interface CheckboxProps
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { inputProps, hasError, size } = useCheckbox(props);
+    const { inputProps, hasError, size, readOnly } = useCheckbox(props);
 
     return (
       <div
@@ -53,6 +53,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {
             "navds-checkbox--error": hasError,
             "navds-checkbox--disabled": inputProps.disabled,
+            "navds-checkbox--readonly": readOnly,
           }
         )}
       >
@@ -65,10 +66,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "hideLabel",
             "indeterminate",
             "errorId",
+            "readOnly",
           ])}
           {...inputProps}
           type="checkbox"
           className="navds-checkbox__input"
+          aria-readonly={readOnly}
           aria-checked={props.indeterminate ? "mixed" : inputProps.checked}
           ref={(el) => {
             if (el) {

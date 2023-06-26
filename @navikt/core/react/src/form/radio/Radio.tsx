@@ -6,7 +6,7 @@ import { FormFieldProps } from "../useFormField";
 import { useRadio } from "./useRadio";
 
 export interface RadioProps
-  extends Omit<FormFieldProps, "error" | "errorId">,
+  extends Omit<FormFieldProps, "error" | "errorId" | "readOnly">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
    * Radio label
@@ -23,20 +23,22 @@ export interface RadioProps
 }
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
-  const { inputProps, size, hasError } = useRadio(props);
+  const { inputProps, size, hasError, readOnly } = useRadio(props);
 
   return (
     <div
       className={cl(props.className, "navds-radio", `navds-radio--${size}`, {
         "navds-radio--error": hasError,
         "navds-radio--disabled": inputProps.disabled,
+        "navds-radio--readonly": readOnly,
       })}
     >
       <input
-        {...omit(props, ["children", "size", "description"])}
+        {...omit(props, ["children", "size", "description", "readOnly"])}
         {...inputProps}
         className="navds-radio__input"
         ref={ref}
+        aria-readonly={readOnly}
       />
       <label htmlFor={inputProps.id} className="navds-radio__label">
         <span className="navds-radio__content">

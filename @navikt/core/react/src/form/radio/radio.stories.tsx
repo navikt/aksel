@@ -92,3 +92,11 @@ export const GroupDescription = () => (
     <Radio value="tekst2">Radiotekst</Radio>
   </RadioGroup>
 );
+
+export const Readonly = () => (
+  <RadioGroup legend="Group legend" defaultValue="tekst2" readOnly>
+    <Radio value="tekst">Radiotekst</Radio>
+    <Radio value="tekst2">Radiotekst</Radio>
+    <Radio value="tekst3">Radiotekst</Radio>
+  </RadioGroup>
+);

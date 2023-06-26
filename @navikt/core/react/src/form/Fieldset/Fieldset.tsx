@@ -21,6 +21,10 @@ export type FieldsetContextProps = {
    * Sets fieldset and all form-children to disabled
    */
   disabled: boolean;
+  /**
+   * Read only-state
+   */
+  readOnly?: boolean;
 };
 
 export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
@@ -57,6 +61,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       showErrorMsg,
       hasError,
       size,
+      readOnly,
       inputDescriptionId,
     } = useFieldset(props);
 
@@ -82,17 +87,21 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           }),
           size,
           disabled: props.disabled ?? false,
+          readOnly,
         }}
       >
         <fieldset
-          {...omit(rest, ["errorId", "error", "size"])}
+          {...omit(rest, ["errorId", "error", "size", "readOnly"])}
           {...inputProps}
           ref={ref}
           className={cl(
             className,
             "navds-fieldset",
             `navds-fieldset--${size}`,
-            { "navds-fieldset--error": hasError }
+            {
+              "navds-fieldset--error": hasError,
+              "navds-fieldset--readonly": readOnly,
+            }
           )}
         >
           <Label

@@ -190,3 +190,19 @@ export const Indeterminate = () => {
     </>
   );
 };
+
+export const Readonly = () => (
+  <div className="colgap">
+    <CheckboxGroup legend="Group legend" defaultValue={["tekst2"]} readOnly>
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+    <hr />
+    <Checkbox value="tekst1" readOnly>
+      Checkboxtekst
+    </Checkbox>
+    <Checkbox value="tekst1" checked readOnly>
+      Checkboxtekst
+    </Checkbox>
+  </div>
+);
