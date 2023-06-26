@@ -102,7 +102,9 @@ export const Readonly = () => (
       readOnly
     >
       <Radio value="tekst">Radiotekst</Radio>
-      <Radio value="tekst2">Radiotekst</Radio>
+      <Radio value="tekst2" description="testdescription">
+        Radiotekst
+      </Radio>
       <Radio value="tekst3">Radiotekst</Radio>
     </RadioGroup>
     <RadioGroup
