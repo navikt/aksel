@@ -12,7 +12,7 @@ const Example = () => {
         name="Ola Normann"
         timestamp="01.01.21 14:00"
         position="right"
-        variant="neutral"
+        variant="subtle"
       >
         <Chat.Bubble>Hei Eva.</Chat.Bubble>
         <Chat.Bubble>

@@ -72,8 +72,8 @@
   background-color: var(--a-surface-info-subtle);
 }
 
-.navds-chat--neutral .navds-chat__bubble,
-.navds-chat--neutral .navds-chat__avatar {
+.navds-chat--subtle .navds-chat__bubble,
+.navds-chat--subtle .navds-chat__avatar {
   background-color: var(--a-surface-default);
 }
 
