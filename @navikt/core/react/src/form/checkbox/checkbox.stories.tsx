@@ -206,7 +206,9 @@ export const Readonly = () => (
       defaultValue={["tekst2"]}
       readOnly
     >
-      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+      <Checkbox value="tekst" description="testdescription">
+        Checkboxtekst
+      </Checkbox>
       <Checkbox value="tekst2">Checkboxtekst</Checkbox>
     </CheckboxGroup>
     <hr />
