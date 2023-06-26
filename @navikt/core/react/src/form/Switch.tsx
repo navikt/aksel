@@ -68,7 +68,7 @@ export interface SwitchProps
  */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   (props, ref) => {
-    const { inputProps, size } = useFormField(props, "switch");
+    const { inputProps, size, readOnly } = useFormField(props, "switch");
 
     const {
       children,
@@ -90,11 +90,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       checkedProp !== undefined && setChecked(checkedProp);
     }, [checkedProp]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setChecked(e.target.checked);
-      props.onChange && props.onChange(e);
-    };
-
     return (
       <div
         className={cl(
@@ -105,18 +100,33 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           {
             "navds-switch--loading": loading,
             "navds-switch--disabled": inputProps.disabled ?? loading,
+            "navds-switch--readonly": readOnly,
           }
         )}
       >
         <input
-          {...omit(rest, ["size"])}
+          {...omit(rest, ["size", "readOnly"])}
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
           disabled={inputProps.disabled ?? loading}
+          aria-readonly={readOnly}
           checked={checkedProp}
           defaultChecked={defaultChecked}
           ref={ref}
           type="checkbox"
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => {
+            if (readOnly) {
+              return;
+            }
+            setChecked(e.target.checked);
+            props.onChange && props.onChange(e);
+          }}
+          onClick={(e) => {
+            if (readOnly) {
+              e.preventDefault();
+              return;
+            }
+            props?.onClick?.(e);
+          }}
           className={cl(className, "navds-switch__input")}
         />
         <span className="navds-switch__track">

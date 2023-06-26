@@ -116,3 +116,15 @@ export const HideLabel = () => {
     </div>
   );
 };
+
+export const Readonly = () => {
+  return (
+    <div className="colgap">
+      <Switch readOnly>Label text</Switch>
+
+      <Switch checked readOnly>
+        Label text
+      </Switch>
+    </div>
+  );
+};
