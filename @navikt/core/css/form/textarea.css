@@ -99,9 +99,8 @@
   cursor: not-allowed;
 }
 
-.navds-textarea__input[readonly] {
-  background-color: var(--ac-textarea-bg, var(--a-surface-default));
-  border-color: var(--ac-textarea-border, var(--a-border-default));
-  box-shadow: none;
-  cursor: not-allowed;
+.navds-textarea--readonly .navds-textarea__input {
+  background-color: var(--a-surface-subtle);
+  border-color: var(--a-border-subtle);
+  cursor: default;
 }
