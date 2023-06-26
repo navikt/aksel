@@ -79,3 +79,9 @@
 .navds-select__input:disabled > option {
   color: var(--a-text-default);
 }
+
+.navds-select--readonly .navds-select__input {
+  background-color: var(--a-surface-subtle);
+  border-color: var(--a-border-subtle);
+  cursor: default;
+}
