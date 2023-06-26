@@ -56,6 +56,7 @@ export const Combobox = forwardRef<
     inputRef,
     value,
     size = "medium",
+    setSearchTerm,
     setValue,
   } = useInputContext();
 
@@ -68,8 +69,9 @@ export const Combobox = forwardRef<
     (event: ComboboxClearEvent) => {
       onClear?.(event);
       setValue("");
+      setSearchTerm("");
     },
-    [setValue, onClear]
+    [onClear, setSearchTerm, setValue]
   );
 
   const handleDeleteSelectedOption = useCallback(
