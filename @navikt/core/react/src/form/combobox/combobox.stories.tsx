@@ -310,7 +310,7 @@ export const CancelInputTest = {
 
     userEvent.keyboard("{ArrowDown}");
     await sleep(1000);
-    userEvent.keyboard("{esc}");
+    userEvent.keyboard("{Escape}");
     await sleep(1000);
     userEvent.keyboard("{ArrowDown}");
     const banana = canvas.getByText("banana");

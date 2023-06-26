@@ -102,7 +102,7 @@ describe("Combobox state-handling", () => {
         "apple"
       );
       await userEvent.keyboard("{ArrowDown}");
-      await userEvent.keyboard("{esc}");
+      await userEvent.keyboard("{Escape}");
       await userEvent.keyboard("{ArrowDown}");
     });
 
