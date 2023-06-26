@@ -102,7 +102,7 @@ export const getStaticProps = async ({
       id: page?._id ?? "",
       title: page?.heading ?? "",
       verifiedDate: await dateStr(
-        page?.updateInfo?.lastVerified ?? page.publishedAt ?? page._updatedAt
+        page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt
       ),
       publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
     },
