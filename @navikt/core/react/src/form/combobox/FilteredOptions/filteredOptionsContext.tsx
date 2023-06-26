@@ -207,9 +207,10 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     if (filteredOptionsIndex === getMinimumIndex()) {
       toggleIsListOpen(false);
       setFilteredOptionsIndex(null);
+    } else {
+      const newIndex = Math.max(getMinimumIndex(), filteredOptionsIndex - 1);
+      setFilteredOptionsIndex(newIndex);
     }
-    const newIndex = Math.max(getMinimumIndex(), filteredOptionsIndex - 1);
-    setFilteredOptionsIndex(newIndex);
   }, [filteredOptionsIndex, getMinimumIndex, toggleIsListOpen]);
 
   const moveFocusDown = useCallback(() => {

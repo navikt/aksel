@@ -86,7 +86,7 @@ describe("Combobox state-handling", () => {
     });
 
     expect(
-      await utils.findByRole("button", { name: "banana slett" })
+      await utils.queryByRole("button", { name: "banana slett" })
     ).toBeNull();
   });
 
