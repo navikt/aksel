@@ -50,7 +50,7 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
   const inputDescriptionId = `${prefix}-description-${genId}`;
 
   const disabled = fieldset?.disabled || props.disabled;
-  const readOnly = fieldset?.readOnly || props.readOnly;
+  const readOnly = fieldset?.readOnly || props.readOnly || undefined;
 
   const hasError: boolean =
     !disabled && !readOnly && !!(error || fieldset?.error);

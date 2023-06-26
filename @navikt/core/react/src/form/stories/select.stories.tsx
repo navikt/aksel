@@ -114,3 +114,11 @@ export const HideLabel = () => {
     </Select>
   );
 };
+
+export const Readonly = () => {
+  return (
+    <Select label="Ipsum enim quis culpa" readOnly>
+      {content}
+    </Select>
+  );
+};
