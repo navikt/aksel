@@ -3,6 +3,7 @@ import React, { forwardRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label, omit, useId } from "..";
 import TextareaAutosize from "../util/TextareaAutoSize";
 import { FormFieldProps, useFormField } from "./useFormField";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -129,6 +130,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-sr-only": hideLabel,
           })}
         >
+          <ReadOnlyIcon readOnly={readOnly} />
           {label}
         </Label>
         {!!description && (

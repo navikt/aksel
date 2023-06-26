@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { BodyShort, Loader, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
 
 const SelectedIcon = () => (
   <svg
@@ -146,6 +147,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             })}
           >
             <BodyShort as="div" size={size} className="navds-switch__label">
+              <ReadOnlyIcon readOnly={readOnly} />
               {children}
             </BodyShort>
             {description && (

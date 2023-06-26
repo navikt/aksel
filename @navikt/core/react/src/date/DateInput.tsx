@@ -4,6 +4,7 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 import { BodyShort, ErrorMessage, Label, omit } from "..";
 import { FormFieldProps, useFormField } from "../form/useFormField";
 import { useDateInputContext } from "./context";
+import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
 
 export interface DateInputProps
   extends FormFieldProps,
@@ -84,6 +85,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "navds-sr-only": hideLabel,
         })}
       >
+        <ReadOnlyIcon readOnly={readOnly} />
         {label}
       </Label>
       {!!description && (

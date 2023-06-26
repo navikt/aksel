@@ -3,6 +3,7 @@ import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
 import { BodyShort, ErrorMessage, Label, omit } from "../..";
 import { FormFieldProps } from "../useFormField";
 import { useFieldset } from "./useFieldset";
+import { ReadOnlyIcon } from "../ReadOnlyIcon";
 
 export type FieldsetContextProps = {
   /**
@@ -111,6 +112,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
               "navds-sr-only": !!hideLegend,
             })}
           >
+            <ReadOnlyIcon readOnly={readOnly} />
             {legend}
           </Label>
           {!!description && (

@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import { BodyShort, ErrorMessage, Label, omit } from "..";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface TextFieldProps
@@ -87,6 +88,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "navds-sr-only": hideLabel,
           })}
         >
+          <ReadOnlyIcon readOnly={readOnly} />
           {label}
         </Label>
 

@@ -36,3 +36,9 @@
 .navds-form-field__subdescription {
   color: var(--ac-form-subdescription, var(--a-text-subtle));
 }
+
+.navds-form-field__readonly-icon {
+  margin-right: var(--a-spacing-2);
+  vertical-align: middle;
+  margin-bottom: 3px;
+}
