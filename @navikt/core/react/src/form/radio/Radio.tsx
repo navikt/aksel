@@ -38,7 +38,6 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         {...inputProps}
         className="navds-radio__input"
         ref={ref}
-        aria-readonly={readOnly}
       />
       <label htmlFor={inputProps.id} className="navds-radio__label">
         <span className="navds-radio__content">

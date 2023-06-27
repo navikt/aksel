@@ -82,6 +82,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
           "navds-radio-group",
           `navds-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`
         )}
+        aria-readonly={fieldset?.readOnly}
       >
         <RadioGroupContext.Provider
           value={{
