@@ -3,7 +3,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="shadow-medium ring-border-subtle w-56 rounded-lg p-6 ring-1">
+    <div className="shadow-xsmall w-56 rounded-lg p-6 ">
       <Skeleton variant="circle" width={60} height={60} />
       <Skeleton variant="text" width="100%" />
       <Skeleton variant="text" width="100%" />

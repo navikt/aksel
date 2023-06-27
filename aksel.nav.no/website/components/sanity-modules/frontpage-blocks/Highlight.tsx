@@ -84,7 +84,7 @@ export const Highlight = ({
                 e.currentTarget.getAttribute("href")
               )
             }
-            className="text-text-default mb-5 mt-2 no-underline hover:underline"
+            className="text-text-default mb-5 mt-2 underline hover:no-underline"
           >
             <Heading size="large" level="3">
               {article?.heading}

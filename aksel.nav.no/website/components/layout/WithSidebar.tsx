@@ -89,7 +89,7 @@ export const WithSidebar = ({
                   {
                     "bg-surface-subtle flex items-center justify-between":
                       variant === "page",
-                    "bg-deepblue-700/80 grid py-[4.25rem] pb-6":
+                    "bg-deepblue-700/70 grid py-[4.25rem] pb-6":
                       variant !== "page",
                     "before:from-deepblue-700 before:absolute before:inset-0 before:-z-10 before:rounded-xl before:bg-gradient-to-br before:via-blue-500 before:to-violet-700":
                       variant !== "page",

@@ -11,7 +11,7 @@ export const withDsExample = (
 ) => {
   const DsHOC = (props: any) => (
     <div
-      className={cl({
+      className={cl(styles.examples, {
         "bg-gray-900": variant === "inverted",
         "bg-bg-subtle": variant === "subtle",
         [styles.containerStatic]: variant === "static",
