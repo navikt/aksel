@@ -4,6 +4,7 @@ import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { FormFieldProps } from "../useFormField";
 import useCheckbox from "./useCheckbox";
+import { ReadOnlyIcon } from "../ReadOnlyIcon";
 
 export interface CheckboxProps
   extends FormFieldProps,
@@ -42,7 +43,7 @@ export interface CheckboxProps
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { inputProps, hasError, size, readOnly } = useCheckbox(props);
+    const { inputProps, hasError, size, readOnly, nested } = useCheckbox(props);
 
     return (
       <div
@@ -92,6 +93,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             })}
           >
             <BodyShort as="span" size={size}>
+              {!nested && <ReadOnlyIcon readOnly={readOnly} />}
               {props.children}
             </BodyShort>
             {props.description && (

@@ -31,6 +31,7 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
   return {
     ...rest,
     readOnly,
+    nested: !!checkboxGroup,
     inputProps: {
       ...inputProps,
       checked: checkboxGroup?.value
