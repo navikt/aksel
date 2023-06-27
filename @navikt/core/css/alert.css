@@ -75,9 +75,8 @@
   padding: 0;
 }
 
-.navds-alert > .navds-alert__button-wrapper {
+.navds-alert__button-wrapper {
   align-self: flex-start;
-  justify-self: flex-end;
   flex: 1;
   display: flex;
   flex-flow: row nowrap;
