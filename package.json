@@ -35,7 +35,7 @@
       {
         "files": "**/*.css",
         "options": {
-          "printWidth": 120
+          "printWidth": 130
         }
       }
     ]
