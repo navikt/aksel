@@ -88,11 +88,12 @@ export const Readonly = () => {
   return (
     <div className="colgap">
       <TextField
-        label="lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        label="Bosted"
+        description="Skriv bosted i Norge"
         readOnly
+        value="Oslo"
       />
-      <TextField label="Ipsum enim quis culpa" readOnly error="Errormessage" />
+      <TextField label="Bosted" readOnly error="feilmelding" value="Oslo" />
     </div>
   );
 };

@@ -125,11 +125,17 @@ export const Readonly = () => {
   return (
     <div className="colgap">
       <Textarea
-        label="Ipsum enim quis culpa"
-        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        label="På hvilket grunnlag har du tatt denne vurderingen?"
+        description="Beskriv i korte punkter"
+        value="Denne vurderingen ble gjort på grunnlag av X og Y"
         readOnly
       />
-      <Textarea label="Ipsum enim quis culpa" readOnly error="errormessage" />
+      <Textarea
+        label="På hvilket grunnlag har du tatt denne vurderingen?"
+        readOnly
+        value="Denne vurderingen ble gjort på grunnlag av X og Y"
+        error="feilmelding"
+      />
     </div>
   );
 };

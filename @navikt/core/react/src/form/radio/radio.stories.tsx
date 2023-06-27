@@ -96,26 +96,26 @@ export const GroupDescription = () => (
 export const Readonly = () => (
   <div className="colgap">
     <RadioGroup
-      legend="Group legend"
-      description="Group description"
-      defaultValue="tekst2"
+      legend="Hvilken frukt vil du ha?"
+      description="Du kan bare velge en frukt"
+      defaultValue="eple"
       readOnly
     >
-      <Radio value="tekst">Radiotekst</Radio>
-      <Radio value="tekst2" description="testdescription">
-        Radiotekst
+      <Radio value="eple">Eple</Radio>
+      <Radio value="banan" description="Bananer er importert fra X">
+        Banan
       </Radio>
-      <Radio value="tekst3">Radiotekst</Radio>
+      <Radio value="druer">Druer</Radio>
     </RadioGroup>
     <RadioGroup
-      legend="Group legend"
-      defaultValue="tekst2"
+      legend="Hvilken frukt vil du ha?"
+      defaultValue="eple"
       readOnly
-      error="errormessage"
+      error="Du må velge en frukt"
     >
-      <Radio value="tekst">Radiotekst</Radio>
-      <Radio value="tekst2">Radiotekst</Radio>
-      <Radio value="tekst3">Radiotekst</Radio>
+      <Radio value="eple">Eple</Radio>
+      <Radio value="banan">Banan</Radio>
+      <Radio value="druer">Druer</Radio>
     </RadioGroup>
   </div>
 );

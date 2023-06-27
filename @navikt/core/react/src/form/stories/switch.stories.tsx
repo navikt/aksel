@@ -120,12 +120,12 @@ export const HideLabel = () => {
 export const Readonly = () => {
   return (
     <div className="colgap">
-      <Switch description="Consectetur labore velit eiusmod." readOnly>
-        Label text
+      <Switch description="Slår av alle notifikasjoner" readOnly>
+        Notifikasjoner
       </Switch>
 
       <Switch checked readOnly>
-        Label text
+        Notifikasjoner
       </Switch>
     </div>
   );

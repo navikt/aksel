@@ -355,6 +355,7 @@ export const Readonly = () => {
         <DatePicker.Input
           size="medium"
           {...inputProps}
+          value="01.02.2021"
           label="Velg dato"
           readOnly
         />

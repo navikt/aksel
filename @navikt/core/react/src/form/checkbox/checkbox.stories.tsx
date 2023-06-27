@@ -193,30 +193,34 @@ export const Indeterminate = () => {
 
 export const Readonly = () => (
   <div className="colgap">
-    <CheckboxGroup legend="Group legend" defaultValue={["tekst2"]} readOnly>
-      <Checkbox value="tekst">Checkboxtekst</Checkbox>
-      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
-      <Checkbox value="tekst2" indeterminate>
-        Checkboxtekst
+    <CheckboxGroup
+      legend="Hvilken frukt liker du?"
+      defaultValue={["banan"]}
+      readOnly
+    >
+      <Checkbox value="banan">Banan</Checkbox>
+      <Checkbox value="eple">Eple</Checkbox>
+      <Checkbox value="druer" indeterminate>
+        Druer
       </Checkbox>
     </CheckboxGroup>
     <CheckboxGroup
-      legend="Group legend"
-      error="errormessage"
-      defaultValue={["tekst2"]}
+      legend="Hvilken frukt liker du?"
+      error="feilmelding"
+      defaultValue={["Eple"]}
       readOnly
     >
-      <Checkbox value="tekst" description="testdescription">
-        Checkboxtekst
+      <Checkbox value="eple" description="Epler kommer i 4 varianter">
+        Eple
       </Checkbox>
-      <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+      <Checkbox value="banan">Banan</Checkbox>
     </CheckboxGroup>
     <hr />
     <Checkbox value="tekst1" readOnly>
-      Checkboxtekst
+      Eple single
     </Checkbox>
     <Checkbox value="tekst1" checked readOnly>
-      Checkboxtekst
+      Banan single
     </Checkbox>
   </div>
 );

@@ -119,13 +119,13 @@ export const Readonly = () => {
   return (
     <div className="colgap">
       <Select
-        label="Ipsum enim quis culpa"
-        description="Consectetur labore velit."
+        label="Hvilkets land er du fra?"
+        description="Velg landet du bor 180 dagen i året"
         readOnly
       >
         {content}
       </Select>
-      <Select label="Ipsum enim quis culpa" readOnly error="errormessage">
+      <Select label="Hvilkets land er du fra?" readOnly error="feilmelding">
         {content}
       </Select>
     </div>
