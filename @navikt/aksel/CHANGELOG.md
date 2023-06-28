@@ -1,5 +1,12 @@
 # @navikt/aksel
 
+## 4.4.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@4.4.2
+
 ## 4.4.1
 
 ### Patch Changes
