@@ -42,10 +42,10 @@ export const Combobox = forwardRef<
   const { customOptions, removeCustomOption, addCustomOption } =
     useCustomOptionsContext();
   const {
+    isMultiSelect,
     selectedOptions,
     removeSelectedOption,
     addSelectedOption,
-    singleSelect,
   } = useSelectedOptionsContext();
 
   const {
@@ -171,7 +171,7 @@ export const Combobox = forwardRef<
           )}
           onClick={focusInput}
         >
-          {singleSelect ? (
+          {!isMultiSelect ? (
             <>
               <Input
                 id={inputProps.id}
@@ -180,7 +180,6 @@ export const Combobox = forwardRef<
                 inputClassName={inputClassName}
                 handleClear={handleClear}
                 toggleOption={toggleOption}
-                singleSelect
                 {...rest}
               />
             </>
@@ -212,11 +211,7 @@ export const Combobox = forwardRef<
             <ToggleListButton toggleListButtonLabel={toggleListButtonLabel} />
           )}
         </div>
-        <FilteredOptions
-          singleSelect={singleSelect}
-          id={inputProps.id}
-          toggleOption={toggleOption}
-        />
+        <FilteredOptions id={inputProps.id} toggleOption={toggleOption} />
       </div>
     </ComboboxWrapper>
   );

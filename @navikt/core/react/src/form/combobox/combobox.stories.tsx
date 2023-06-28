@@ -138,7 +138,6 @@ export function SingleSelectWithAutocomplete(props) {
       <Combobox
         id={id}
         label="Komboboks (single select)"
-        singleSelect={props.singleSelect || true}
         options={props.options}
         shouldAutocomplete={props.shouldAutocomplete}
       />
@@ -147,7 +146,6 @@ export function SingleSelectWithAutocomplete(props) {
 }
 
 SingleSelectWithAutocomplete.args = {
-  singleSelect: true,
   options,
   shouldAutocomplete: true,
 };
@@ -159,7 +157,6 @@ export function SingleSelectWithoutAutoComplete(props) {
       <Combobox
         id={id}
         label="Komboboks (single select)"
-        singleSelect={props.singleSelect || true}
         options={props.options}
         shouldAutocomplete={props.shouldAutocomplete}
       />
@@ -168,7 +165,6 @@ export function SingleSelectWithoutAutoComplete(props) {
 }
 
 SingleSelectWithoutAutoComplete.args = {
-  singleSelect: true,
   options,
   shouldAutocomplete: false,
 };
@@ -179,6 +175,7 @@ export function ComboboxWithAddNewOptions(props) {
     <div>
       <Combobox
         id={id}
+        isMultiSelect={props.isMultiSelect}
         label="Komboboks (med nye verdier)"
         options={props.options}
         allowNewValues={props.allowNewValues}
@@ -189,7 +186,7 @@ export function ComboboxWithAddNewOptions(props) {
 
 ComboboxWithAddNewOptions.args = {
   allowNewValues: true,
-  singleSelect: true,
+  isMultiSelect: true,
   options,
   shouldAutocomplete: false,
 };
@@ -211,7 +208,6 @@ export function ComboboxWithNoHits(props) {
 }
 
 ComboboxWithNoHits.args = {
-  singleSelect: true,
   options,
   value: "Orange",
 };

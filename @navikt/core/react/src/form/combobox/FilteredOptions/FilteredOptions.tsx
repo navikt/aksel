@@ -11,16 +11,16 @@ interface FilteredOptionsProps {
   id: string;
   toggleOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   ref: React.RefObject<HTMLUListElement>;
-  singleSelect?: boolean;
 }
 
 const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
-  ({ toggleOption, singleSelect }, ref) => {
+  ({ toggleOption }, ref) => {
     const {
       inputProps: { id },
       value,
     } = useInputContext();
     const {
+      allowNewValues,
       isLoading,
       isListOpen,
       filteredOptions,
@@ -59,7 +59,7 @@ const FilteredOptions = forwardRef<HTMLUListElement, FilteredOptionsProps>(
             Ingen søketreff
           </li>
         )}
-        {isValueNew && !singleSelect && (
+        {isValueNew && allowNewValues && (
           <li
             tabIndex={-1}
             onClick={(e) => {

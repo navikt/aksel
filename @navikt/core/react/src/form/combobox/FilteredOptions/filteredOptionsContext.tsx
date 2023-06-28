@@ -25,6 +25,7 @@ const getMatchingValuesFromList = (value, list) =>
 
 type FilteredOptionsContextType = {
   activeDecendantId?: string;
+  allowNewValues?: boolean;
   ariaDescribedBy?: string;
   filteredOptionsRef: React.RefObject<HTMLUListElement>;
   filteredOptionsIndex: number | null;
@@ -53,7 +54,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     isListOpen: isExternalListOpen,
     isLoading,
     options,
-    singleSelect,
   } = props;
   const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
   const {
@@ -117,16 +117,13 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, []);
 
   const isValueNew = useMemo(
-    () =>
-      allowNewValues &&
-      Boolean(value) &&
-      !isValueInList(value, filteredOptions),
-    [allowNewValues, value, filteredOptions]
+    () => Boolean(value) && !isValueInList(value, filteredOptions),
+    [value, filteredOptions]
   );
 
   const getMinimumIndex = useCallback(() => {
-    return isValueNew && !singleSelect ? -1 : 0;
-  }, [isValueNew, singleSelect]);
+    return isValueNew && allowNewValues ? -1 : 0;
+  }, [allowNewValues, isValueNew]);
 
   useEffect(() => {
     if (!isLoading && filteredOptions.length === 0) {
@@ -244,6 +241,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
 
   const filteredOptionsState = {
     activeDecendantId,
+    allowNewValues,
     filteredOptionsRef,
     filteredOptionsIndex,
     setFilteredOptionsIndex,

@@ -15,20 +15,11 @@ interface InputProps
   errorId?: string;
   value?: string;
   error?: React.ReactNode;
-  singleSelect?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    {
-      handleClear,
-      toggleOption,
-      inputClassName,
-      error,
-      errorId,
-      singleSelect,
-      ...rest
-    },
+    { handleClear, toggleOption, inputClassName, error, errorId, ...rest },
     ref
   ) => {
     const { inputProps, onChange, size, value } = useInputContext();
@@ -87,9 +78,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (e.target.selectionStart === value?.length) {
             e.preventDefault();
             moveFocusDown();
-            if (singleSelect) {
-              //onChange(currentOption);
-            }
           }
         } else if (e.key === "ArrowUp") {
           // Check that the FilteredOptions list is open and has virtual focus.
@@ -97,9 +85,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (isListOpen && filteredOptionsIndex !== null) {
             e.preventDefault();
             moveFocusUp();
-          }
-          if (singleSelect) {
-            //onChange(currentOption);
           }
         }
       },
@@ -109,13 +94,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         customOptions,
         removeCustomOption,
         removeSelectedOption,
-        singleSelect,
         moveFocusDown,
         isListOpen,
         filteredOptionsIndex,
         moveFocusUp,
       ]
     );
+
+    const onBlur = () => {
+      toggleIsListOpen(false);
+    };
 
     return (
       <input
@@ -126,6 +114,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onChange={onChange}
         type="text"
         role="combobox"
+        onBlur={onBlur}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
         aria-controls={`${inputProps.id}-filtered-options`}

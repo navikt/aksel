@@ -56,6 +56,13 @@ export interface ComboboxProps
    */
   isLoading?: boolean;
   /**
+   * Set to "true" to allow multiple selections
+   *
+   * This will display selected values as a list of Chips in front of the input field, instead of a selection replacing the value of the input.
+   *
+   */
+  isMultiSelect?: boolean;
+  /**
    * Callback function triggered whenever the value of the input field is triggered.
    *
    * @param event
@@ -79,13 +86,6 @@ export interface ComboboxProps
    * @returns
    */
   onToggleSelected?: (option: string, isSelected: boolean) => void;
-  /**
-   * Set to "true" to allow only one selection
-   *
-   * This will transform the combobox from a multiselect component with chips for selected options,
-   * to an auto-complete component which sets the value to the selected option.
-   */
-  singleSelect?: boolean;
   /**
    * List of selected options.
    *

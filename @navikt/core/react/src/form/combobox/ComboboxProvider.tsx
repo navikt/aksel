@@ -17,13 +17,13 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       id,
       isListOpen,
       isLoading = false,
+      isMultiSelect,
       onToggleSelected,
       selectedOptions,
       options,
       value,
       onChange,
       shouldAutocomplete,
-      singleSelect,
       size,
       ...rest
     } = props;
@@ -41,7 +41,11 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
         }}
       >
         <SelectedOptionsProvider
-          value={{ selectedOptions, singleSelect, onToggleSelected }}
+          value={{
+            isMultiSelect,
+            selectedOptions,
+            onToggleSelected,
+          }}
         >
           <CustomOptionsProvider>
             <FilteredOptionsProvider
@@ -49,8 +53,8 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
                 allowNewValues,
                 isListOpen,
                 isLoading,
+                isMultiSelect,
                 options,
-                singleSelect,
               }}
             >
               <Combobox {...rest}>{children}</Combobox>
