@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.4.2
+
+### @navikt/ds-react
+
+- Textarea: Fikset i18n for counter ([`718b3204d`](https://github.com/navikt/aksel/commit/718b3204d8714c4fc515dcad484424214bdc0c77))
+
 ## 4.4.1
 
 ### @navikt/ds-css
@@ -8,15 +14,15 @@
 
 ## 4.4.0
 
-### @navikt/ds-react
-
-- Fikset klassenavn brukt for popover i Datepicker og Monthpicker ([PR](https://github.com/navikt/aksel/pull/2041))
-
 ### @navikt/ds-tailwind
 
 - Shadow-tokens er oppdatert ([PR](https://github.com/navikt/aksel/pull/2041))
 
 - Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600). ([PR](https://github.com/navikt/aksel/pull/2036))
+
+### @navikt/ds-react
+
+- Fikset klassenavn brukt for popover i Datepicker og Monthpicker ([PR](https://github.com/navikt/aksel/pull/2041))
 
 ### @navikt/ds-tokens
 
@@ -102,6 +108,10 @@
 
 ## 4.1.0
 
+### @navikt/ds-tailwind
+
+- :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
+
 ### @navikt/ds-react
 
 - Chips: `neutral` og `action`-varianter for Chips.Toggle. `checkmark`-prop for Chips.Toggle ([PR](https://github.com/navikt/aksel/pull/2035))
@@ -113,10 +123,6 @@
 - La til JSDoc dokumentasjon for alle komponenter ([PR](https://github.com/navikt/aksel/pull/2034))
 
 - Accordion: La til `indent`-prop ([PR](https://github.com/navikt/aksel/pull/2027))
-
-### @navikt/ds-tailwind
-
-- :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
 
 ### @navikt/ds-tokens
 
@@ -658,13 +664,13 @@
 
 ## 2.0.0
 
-### @navikt/ds-react
-
-- Fonter blir bruk i all typografi blir nå lastet fra CDN
-
 ### @navikt/ds-tailwind
 
 - Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
+
+### @navikt/ds-react
+
+- Fonter blir bruk i all typografi blir nå lastet fra CDN
 
 ### @navikt/ds-tokens
 

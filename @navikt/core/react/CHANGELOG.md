@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 4.4.2
+
+### Patch Changes
+
+- Textarea: Fikset i18n for counter ([`718b3204d`](https://github.com/navikt/aksel/commit/718b3204d8714c4fc515dcad484424214bdc0c77))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.4.2
+
 ## 4.4.1
 
 ### Patch Changes
