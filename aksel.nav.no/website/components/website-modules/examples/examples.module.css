@@ -1,5 +1,6 @@
 .examples a {
   text-underline-offset: initial;
+  text-decoration-thickness: auto;
 }
 
 .container {
