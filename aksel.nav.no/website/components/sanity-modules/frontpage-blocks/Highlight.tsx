@@ -86,7 +86,6 @@ export const Highlight = ({
               )
             }
             href={`/${article.slug.current}`}
-            passHref
             className="text-text-default mb-5 mt-2 underline hover:no-underline"
           >
             {article?.heading}
