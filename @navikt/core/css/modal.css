@@ -1,58 +1,16 @@
-.ReactModal__Body--open {
-  overflow: hidden;
-}
-
 .navds-modal {
   background-color: var(--ac-modal-bg, var(--a-surface-default));
   border-radius: var(--a-border-radius-medium);
-  display: block;
-  position: relative;
-  overflow: auto;
-  max-height: 100%;
   box-shadow: var(--a-shadow-xlarge);
+  padding: 0;
+}
+
+.navds-modal::backdrop {
+  background-color: var(--ac-modal-backdrop, var(--a-surface-backdrop));
 }
 
 .navds-modal__content {
   padding: var(--a-spacing-4);
-}
-
-.navds-modal:focus-visible,
-.navds-modal--focus {
-  box-shadow: var(--a-shadow-focus);
-  outline: none;
-}
-
-@supports not selector(:focus-visible) {
-  .navds-modal:focus,
-  .navds-modal--focus {
-    box-shadow: var(--a-shadow-focus);
-    outline: none;
-  }
-}
-
-.navds-modal__overlay {
-  position: fixed;
-  z-index: var(--a-z-index-modal);
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--ac-modal-backdrop, var(--a-surface-backdrop));
-  padding: var(--a-spacing-4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.navds-modal__button--shake {
-  transform: rotate(0deg);
-  transition: transform 100ms cubic-bezier(0.82, 2, 1, 0.3);
-}
-
-/* prettier-ignore */
-.navds-modal__overlay:active > .navds-modal:not(:active) > .navds-modal__button--shake {
-  transform: rotate(10deg);
-  transition: transform 100ms cubic-bezier(0.82, -2, 1, 0.3);
 }
 
 .navds-modal__button {
@@ -61,9 +19,4 @@
   right: var(--a-spacing-4);
   display: flex;
   padding: var(--a-spacing-2);
-}
-
-.navds-modal__button svg {
-  height: 1.5rem;
-  width: 1.5rem;
 }

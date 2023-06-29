@@ -1,21 +1,17 @@
 import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Example = () => {
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    Modal.setAppElement("#__next");
-  }, []);
 
   return (
     <>
       <Button onClick={() => setOpen(true)}>Åpne modal</Button>
       <Modal
         open={open}
+        onClose={() => setOpen((o) => !o)}
         aria-label="Modal demo"
-        onClose={() => setOpen((x) => !x)}
         aria-labelledby="modal-heading"
       >
         <Modal.Content>

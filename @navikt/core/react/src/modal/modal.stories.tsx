@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { BodyLong, Button, Heading } from "..";
-import Modal from "./Modal";
+import Modal, { ModalProps } from "./Modal";
 
 export default {
   title: "ds-react/Modal",
@@ -12,31 +12,27 @@ export default {
 };
 
 export const Default = {
-  render: (props) => {
+  render: (props: ModalProps) => {
     const [open, setOpen] = useState(false);
-
-    useEffect(() => {
-      Modal.setAppElement?.("#root");
-    }, []);
 
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open Modal</Button>
         <Modal
+          {...props}
           open={open}
           onClose={() => setOpen(false)}
           aria-labelledby="header123"
-          {...props}
         >
           <Modal.Content>
             <Heading spacing id="header123" level="1" size="large">
-              Header
+              Default modal
             </Heading>
             <Heading spacing level="2" size="medium">
-              Header
+              May be closed in three different ways:
             </Heading>
             <BodyLong>
-              Voluptate laboris mollit dolore qui. Magna elit.
+              Close button, clicking outside of this modal, or pressing Escape.
             </BodyLong>
           </Modal.Content>
         </Modal>
@@ -45,40 +41,73 @@ export const Default = {
   },
 
   args: {
+    shouldCloseOnEsc: true,
     shouldCloseOnOverlayClick: true,
     closeButton: true,
   },
 };
 
-export const ParentSelector = () => {
-  const [open, setOpen] = useState(true);
+export const OnlyCloseButton = {
+  render: (props: ModalProps) => {
+    const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    Modal.setAppElement?.("#root");
-  }, []);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open Modal</Button>
+        <Modal
+          {...props}
+          open={open}
+          onClose={() => setOpen(false)}
+          aria-labelledby="header123"
+        >
+          <Modal.Content>
+            <Heading spacing id="header123" level="1" size="large">
+              Force the close button
+            </Heading>
+            <BodyLong>
+              Try clicking outside of this modal or pressing Escape.
+            </BodyLong>
+            <BodyLong>
+              To close this modal, you must click the close button.
+            </BodyLong>
+          </Modal.Content>
+        </Modal>
+      </>
+    );
+  },
 
-  const parentEl = document.getElementById("custom-container");
+  args: {
+    shouldCloseOnEsc: false,
+    shouldCloseOnOverlayClick: false,
+    closeButton: true,
+  },
+};
 
-  return (
-    <>
-      <div id="custom-container" />
-      <Button onClick={() => setOpen(true)}>Open Modal</Button>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="header123"
-        parentSelector={parentEl ? () => parentEl : undefined}
-      >
-        <Modal.Content>
-          <Heading spacing id="header123" level="1" size="large">
-            Header
-          </Heading>
-          <Heading spacing level="2" size="medium">
-            Header
-          </Heading>
-          <BodyLong>Voluptate laboris mollit dolore qui. Magna elit.</BodyLong>
-        </Modal.Content>
-      </Modal>
-    </>
-  );
+export const OpenWithRef = {
+  render: (props: ModalProps) => {
+    const ref = useRef<HTMLDialogElement>(null);
+
+    return (
+      <>
+        <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
+        <Modal {...props} aria-labelledby="header123" ref={ref}>
+          <Modal.Content>
+            <Heading spacing id="header123" level="1" size="large">
+              Modal opened via ref
+            </Heading>
+            <BodyLong>
+              This modal was opened by calling ref.showModal().
+            </BodyLong>
+            <BodyLong>Using the "open" prop is recommended.</BodyLong>
+          </Modal.Content>
+        </Modal>
+      </>
+    );
+  },
+
+  args: {
+    shouldCloseOnEsc: true,
+    shouldCloseOnOverlayClick: true,
+    closeButton: true,
+  },
 };

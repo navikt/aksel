@@ -1,20 +1,14 @@
 import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
-import { useState } from "react";
+import { useRef } from "react";
 
 const Example = () => {
-  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDialogElement>(null);
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Åpne modal</Button>
-      <Modal
-        open={open}
-        onClose={() => setOpen((o) => !o)}
-        closeButton={false}
-        aria-label="Modal demo"
-        aria-labelledby="modal-heading"
-      >
+      <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
+      <Modal aria-label="Modal demo" aria-labelledby="modal-heading" ref={ref}>
         <Modal.Content>
           <Heading spacing level="1" size="large" id="modal-heading">
             Laborum proident id ullamco

@@ -11,7 +11,8 @@ const Example = () => {
       <Modal
         open={open}
         onClose={() => setOpen((o) => !o)}
-        closeButton={false}
+        shouldCloseOnOverlayClick={false}
+        shouldCloseOnEsc={false}
         aria-label="Modal demo"
         aria-labelledby="modal-heading"
       >
