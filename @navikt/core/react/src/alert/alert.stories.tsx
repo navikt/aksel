@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Alert } from ".";
 import { BodyLong, Heading as DsHeading, Link } from "..";
+import { within, userEvent } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const meta: Meta<typeof Alert> = {
   title: "ds-react/Alert",
@@ -20,22 +22,14 @@ const variants: Array<"error" | "warning" | "info" | "success"> = [
 ];
 
 export const Default: Story = {
-  render: (props) => (
-    <Alert
-      variant={props.variant}
-      size={props.size}
-      fullWidth={props.fullWidth}
-      inline={props.inline}
-    >
-      {props.children}
-    </Alert>
-  ),
+  render: (props) => <Alert {...props} />,
 
   args: {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
     fullWidth: false,
     variant: "info",
     size: "medium",
+    closeButton: false,
   },
   argTypes: {
     variant: {
@@ -50,21 +44,39 @@ export const Default: Story = {
       },
       options: ["medium", "small"],
     },
+    closeButton: {
+      type: "boolean",
+    },
   },
 };
 
-export const Small = () => {
-  return (
-    <div className="colgap">
-      {variants.map((variant, i) => (
-        <Alert key={variant} variant={variant} size="small">
-          {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-          )}
-        </Alert>
-      ))}
-    </div>
-  );
+export const Small = {
+  render: (props) => {
+    return (
+      <div className="colgap">
+        {variants.map((variant, i) => (
+          <Alert
+            key={variant}
+            variant={variant}
+            size="small"
+            closeButton={props.closeButton}
+          >
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
+          </Alert>
+        ))}
+      </div>
+    );
+  },
+  args: {
+    closeButton: false,
+  },
+  argtypes: {
+    closeButton: {
+      type: "boolean",
+    },
+  },
 };
 
 export const FullWidth = () => {
@@ -146,4 +158,45 @@ export const Links = () => {
       ))}
     </div>
   );
+};
+
+const AlertWithCloseButton = ({ children }: { children?: React.ReactNode }) => {
+  let [show, setShow] = React.useState(true);
+
+  return (
+    show && (
+      <Alert variant="success" closeButton onClose={() => setShow(false)}>
+        {children || "Content"}
+      </Alert>
+    )
+  );
+};
+
+export const WithCloseButton: Story = {
+  render: () => {
+    return (
+      <div className="colgap">
+        <AlertWithCloseButton />
+        <AlertWithCloseButton>
+          <BodyLong>
+            Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
+            laboris ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat
+            sint commodo consequat eu aute.
+          </BodyLong>
+          <Link href="#">Id elit esse enim reprehenderit</Link>
+        </AlertWithCloseButton>
+      </div>
+    );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const buttons = canvas.getAllByTitle("Lukk Alert");
+
+    await step("click button", async () => {
+      await userEvent.click(buttons[0]);
+    });
+
+    const buttonsAfter = canvas.getAllByTitle("Lukk Alert");
+    expect(buttonsAfter.length).toBe(1);
+  },
 };
