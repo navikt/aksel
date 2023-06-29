@@ -22,17 +22,7 @@ const variants: Array<"error" | "warning" | "info" | "success"> = [
 ];
 
 export const Default: Story = {
-  render: (props) => (
-    <Alert
-      variant={props.variant}
-      size={props.size}
-      fullWidth={props.fullWidth}
-      inline={props.inline}
-      closeButton={props.closeButton}
-    >
-      {props.children}
-    </Alert>
-  ),
+  render: (props) => <Alert {...props} />,
 
   args: {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
@@ -60,18 +50,33 @@ export const Default: Story = {
   },
 };
 
-export const Small = () => {
-  return (
-    <div className="colgap">
-      {variants.map((variant, i) => (
-        <Alert key={variant} variant={variant} size="small">
-          {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-          )}
-        </Alert>
-      ))}
-    </div>
-  );
+export const Small = {
+  render: (props) => {
+    return (
+      <div className="colgap">
+        {variants.map((variant, i) => (
+          <Alert
+            key={variant}
+            variant={variant}
+            size="small"
+            closeButton={props.closeButton}
+          >
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
+          </Alert>
+        ))}
+      </div>
+    );
+  },
+  args: {
+    closeButton: false,
+  },
+  argtypes: {
+    closeButton: {
+      type: "boolean",
+    },
+  },
 };
 
 export const FullWidth = () => {
@@ -155,7 +160,7 @@ export const Links = () => {
   );
 };
 
-const CloseButton = ({ children }: { children?: React.ReactNode }) => {
+const AlertWithCloseButton = ({ children }: { children?: React.ReactNode }) => {
   let [show, setShow] = React.useState(true);
 
   return (
@@ -171,15 +176,15 @@ export const WithCloseButton: Story = {
   render: () => {
     return (
       <div className="colgap">
-        <CloseButton />
-        <CloseButton>
+        <AlertWithCloseButton />
+        <AlertWithCloseButton>
           <BodyLong>
             Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
             laboris ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat
             sint commodo consequat eu aute.
           </BodyLong>
           <Link href="#">Id elit esse enim reprehenderit</Link>
-        </CloseButton>
+        </AlertWithCloseButton>
       </div>
     );
   },
