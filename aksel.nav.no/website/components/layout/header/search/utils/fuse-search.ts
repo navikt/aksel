@@ -16,7 +16,7 @@ export function fuseSearch(results: any[], query: string) {
     ],
     includeScore: true,
     shouldSort: true,
-    minMatchCharLength: 3,
+    minMatchCharLength: 2,
     includeMatches: true,
     threshold: 0.3,
     location: 120,

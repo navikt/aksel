@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 4.4.2
+
+## 4.4.1
+
+### Patch Changes
+
+- :lipstick: Chat: fjernet border, satt avatar svg til 24x24px, byttet om "subtle" og "neutral" ([#2077](https://github.com/navikt/aksel/pull/2077))
+
 ## 4.4.0
 
 ### Minor Changes
