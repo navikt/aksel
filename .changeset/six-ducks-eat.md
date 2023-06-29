@@ -3,4 +3,4 @@
 "@navikt/ds-react": minor
 ---
 
-:sparkles: Add close button to Alert component
+- Alert: La til `closeButton`-prop
