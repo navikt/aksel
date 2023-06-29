@@ -24,7 +24,7 @@
   font-size: 1.5rem;
   align-self: flex-start;
   height: var(--a-font-line-height-xlarge);
-  margin: var(--ac-alert-padding-icon, var(--a-spacing-1));
+  margin: var(--a-spacing-1);
   background: radial-gradient(circle, var(--a-surface-default) 50%, 0, transparent);
 }
 
