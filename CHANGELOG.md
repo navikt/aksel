@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.5.0
+
+### @navikt/ds-react
+
+- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+### @navikt/ds-css
+
+- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+<!---->
+
+- - Button: Fikset outline-bug i tertiary-variant ved `:active`-state ([#2079](https://github.com/navikt/aksel/pull/2079))
+
 ## 4.4.2
 
 ### @navikt/ds-react
