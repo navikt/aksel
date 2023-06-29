@@ -112,7 +112,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         {closeButton && !inline && (
           <div className="navds-alert__button-wrapper">
             <Button
-              className={cl("navds-alert__button")}
+              className="navds-alert__button"
               size="small"
               variant="tertiary-neutral"
               onClick={onClose}
