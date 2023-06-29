@@ -28,13 +28,13 @@ const NavItem = ({
           );
         }}
         className={cl(
-          "hover:text-deepblue-800 focus-visible:shadow-focus text-medium relative  flex overflow-hidden rounded-sm py-1 pl-4 pr-2 leading-snug before:rounded-full hover:before:transition-colors focus:outline-none",
+          "hover:text-deepblue-800 focus-visible:shadow-focus text-medium relative flex  overflow-hidden py-1 pl-4 pr-2 leading-snug before:rounded-full hover:before:transition-colors focus:outline-none focus-visible:z-10 focus-visible:rounded-sm",
           {
             "before:border-l-border-action-selected before:absolute before:left-0 before:top-1/2 before:h-6 before:-translate-y-1/2 before:border-l-[4px]":
               isActive,
             "text-deepblue-800 font-semibold": isActive,
             "text-text-subtle": !isActive,
-            "before:absolute before:left-0 before:h-full before:border-l before:border-l-gray-200 hover:before:top-1/2  hover:before:h-6 hover:before:-translate-y-1/2 hover:before:border-l-2 hover:before:border-l-gray-400":
+            "before:absolute before:left-0 before:top-0 before:h-full before:border-l before:border-l-gray-200 hover:before:top-1/2  hover:before:h-6 hover:before:min-h-[70%] hover:before:-translate-y-1/2 hover:before:border-l-2 hover:before:border-l-gray-400":
               !isActive,
           }
         )}
@@ -87,7 +87,7 @@ const Dropdown = ({
       >
         <Detail
           as="span"
-          className="group-focus-visible:shadow-focus group-hover:bg-surface-neutral-subtle group-active:bg-bg-surface-neutral-subtle-hover mt-6 flex w-full items-center justify-between rounded-sm pl-2 font-semibold transition first:mt-0"
+          className="group-focus-visible:shadow-focus group-hover:bg-surface-neutral-subtle group-active:bg-surface-neutral-subtle-hover mt-6 flex w-full items-center justify-between rounded-sm pl-2 font-semibold transition-colors first:mt-0"
         >
           {title}
           <span className="flex h-6 w-6  items-center justify-center rounded">
