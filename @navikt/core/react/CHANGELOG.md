@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 4.5.0
+
+### Minor Changes
+
+- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.5.0
+
 ## 4.4.2
 
 ### Patch Changes
