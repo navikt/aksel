@@ -60,80 +60,6 @@ Default.args = {
   shouldAutoComplete: true,
 };
 
-export const WithExternalChips = (props) => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    props.selectedOptions
-  );
-  const [value, setValue] = useState("");
-  const id = useId();
-
-  const toggleSelected = (option) =>
-    selectedOptions.includes(option)
-      ? setSelectedOptions(selectedOptions.filter((opt) => opt !== option))
-      : setSelectedOptions([...selectedOptions, option]);
-  return (
-    <div data-theme={props.darkmode ? "dark" : "light"}>
-      {selectedOptions && (
-        <Chips>
-          {selectedOptions.map((option) => (
-            <Chips.Removable
-              key={option}
-              onPointerUp={() => toggleSelected(option)}
-              onKeyUp={(e) => e.key === "Enter" && toggleSelected(option)}
-            >
-              {option}
-            </Chips.Removable>
-          ))}
-        </Chips>
-      )}
-      <Combobox
-        options={options}
-        selectedOptions={selectedOptions}
-        onToggleSelected={(option: string) => toggleSelected(option)}
-        isListOpen={props.isListOpen}
-        isMultiSelect
-        /* everything under here is optional */
-        value={props.controlled ? value : undefined}
-        onChange={(event) =>
-          props.controlled ? setValue(event.currentTarget.value) : undefined
-        }
-        label="Komboboks"
-        size="medium"
-        error={props.error && "error here"}
-        id={id}
-        shouldShowSelectedOptions={false}
-      />
-    </div>
-  );
-};
-
-WithExternalChips.args = {
-  controlled: false,
-  options,
-  selectedOptions: [],
-};
-
-export function Loading({ isListOpen, isLoading }) {
-  const id = useId();
-  return (
-    <div>
-      <Combobox
-        id={id}
-        label="Komboboks (laster)"
-        options={[]}
-        selectedOptions={[]}
-        isListOpen={isListOpen}
-        isLoading={isLoading}
-      />
-    </div>
-  );
-}
-
-Loading.args = {
-  isLoading: true,
-  isListOpen: true,
-};
-
 export function MultiSelect(props) {
   const id = useId();
   return (
@@ -173,6 +99,79 @@ MultiSelectWithAddNewOptions.args = {
   isMultiSelect: true,
   options,
   shouldAutocomplete: false,
+};
+
+export const MultiSelectWithExternalChips = (props) => {
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(
+    props.selectedOptions
+  );
+  const [value, setValue] = useState("");
+  const id = useId();
+
+  const toggleSelected = (option) =>
+    selectedOptions.includes(option)
+      ? setSelectedOptions(selectedOptions.filter((opt) => opt !== option))
+      : setSelectedOptions([...selectedOptions, option]);
+  return (
+    <div data-theme={props.darkmode ? "dark" : "light"}>
+      {selectedOptions && (
+        <Chips>
+          {selectedOptions.map((option) => (
+            <Chips.Removable
+              key={option}
+              onPointerUp={() => toggleSelected(option)}
+              onKeyUp={(e) => e.key === "Enter" && toggleSelected(option)}
+            >
+              {option}
+            </Chips.Removable>
+          ))}
+        </Chips>
+      )}
+      <Combobox
+        options={options}
+        selectedOptions={selectedOptions}
+        onToggleSelected={(option: string) => toggleSelected(option)}
+        isListOpen={props.isListOpen}
+        isMultiSelect
+        value={props.controlled ? value : undefined}
+        onChange={(event) =>
+          props.controlled ? setValue(event.currentTarget.value) : undefined
+        }
+        label="Komboboks"
+        size="medium"
+        error={props.error && "error here"}
+        id={id}
+        shouldShowSelectedOptions={false}
+      />
+    </div>
+  );
+};
+
+MultiSelectWithExternalChips.args = {
+  controlled: false,
+  options,
+  selectedOptions: [],
+};
+
+export function Loading({ isListOpen, isLoading }) {
+  const id = useId();
+  return (
+    <div>
+      <Combobox
+        id={id}
+        label="Komboboks (laster)"
+        options={[]}
+        selectedOptions={[]}
+        isListOpen={isListOpen}
+        isLoading={isLoading}
+      />
+    </div>
+  );
+}
+
+Loading.args = {
+  isLoading: true,
+  isListOpen: true,
 };
 
 export function ComboboxWithNoHits(props) {
