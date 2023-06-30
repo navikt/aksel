@@ -44,6 +44,7 @@ export const Default = (props) => {
   return (
     <div data-theme="light">
       <Combobox
+        shouldAutocomplete={props.shouldAutoComplete}
         options={props.options}
         label="Hva er dine favorittfrukter?"
         /* everything under here is optional? */
@@ -56,6 +57,7 @@ export const Default = (props) => {
 
 Default.args = {
   options,
+  shouldAutoComplete: true,
 };
 
 export const WithExternalChips = (props) => {
@@ -89,6 +91,7 @@ export const WithExternalChips = (props) => {
         selectedOptions={selectedOptions}
         onToggleSelected={(option: string) => toggleSelected(option)}
         isListOpen={props.isListOpen}
+        isMultiSelect
         /* everything under here is optional */
         value={props.controlled ? value : undefined}
         onChange={(event) =>
@@ -131,52 +134,33 @@ Loading.args = {
   isListOpen: true,
 };
 
-export function SingleSelectWithAutocomplete(props) {
+export function MultiSelect(props) {
   const id = useId();
   return (
     <div>
       <Combobox
         id={id}
-        label="Komboboks (single select)"
+        label="Komboboks - velg flere"
         options={props.options}
-        shouldAutocomplete={props.shouldAutocomplete}
+        isMultiSelect={props.isMultiSelect}
       />
     </div>
   );
 }
 
-SingleSelectWithAutocomplete.args = {
+MultiSelect.args = {
   options,
-  shouldAutocomplete: true,
+  isMultiSelect: true,
 };
 
-export function SingleSelectWithoutAutoComplete(props) {
-  const id = useId();
-  return (
-    <div>
-      <Combobox
-        id={id}
-        label="Komboboks (single select)"
-        options={props.options}
-        shouldAutocomplete={props.shouldAutocomplete}
-      />
-    </div>
-  );
-}
-
-SingleSelectWithoutAutoComplete.args = {
-  options,
-  shouldAutocomplete: false,
-};
-
-export function ComboboxWithAddNewOptions(props) {
+export function MultiSelectWithAddNewOptions(props) {
   const id = useId();
   return (
     <div>
       <Combobox
         id={id}
         isMultiSelect={props.isMultiSelect}
-        label="Komboboks (med nye verdier)"
+        label="Komboboks (med mulighet for å legge til nye verdier)"
         options={props.options}
         allowNewValues={props.allowNewValues}
       />
@@ -184,7 +168,7 @@ export function ComboboxWithAddNewOptions(props) {
   );
 }
 
-ComboboxWithAddNewOptions.args = {
+MultiSelectWithAddNewOptions.args = {
   allowNewValues: true,
   isMultiSelect: true,
   options,
@@ -202,6 +186,7 @@ export function ComboboxWithNoHits(props) {
         options={props.options}
         value={value}
         onChange={(event) => setValue(event.currentTarget.value)}
+        isListOpen={true}
       />
     </div>
   );
