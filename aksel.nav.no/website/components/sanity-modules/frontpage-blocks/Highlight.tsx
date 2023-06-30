@@ -75,8 +75,9 @@ export const Highlight = ({
           text={article.tema ? article.tema[0] : undefined}
           beta={article?.status?.tag === "beta"}
         />
-        <NextLink href={`/${article.slug.current}`} passHref legacyBehavior>
+        <Heading size="large" level="3">
           <Link
+            as={NextLink}
             onClick={(e) =>
               logNav(
                 "artikkel-kort",
@@ -84,13 +85,12 @@ export const Highlight = ({
                 e.currentTarget.getAttribute("href")
               )
             }
-            className="text-text-default mb-5 mt-2 no-underline hover:underline"
+            href={`/${article.slug.current}`}
+            className="text-text-default mb-5 mt-2 underline hover:no-underline"
           >
-            <Heading size="large" level="3">
-              {article?.heading}
-            </Heading>
+            {article?.heading}
           </Link>
-        </NextLink>
+        </Heading>
         <BodyLong className="mb-4" size="small">
           {article?.ingress ?? article.seo?.meta}
         </BodyLong>

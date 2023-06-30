@@ -3,11 +3,11 @@ import {
   usePageView,
 } from "components/website-modules/utils/amplitude";
 import { useScrollToHashOnPageLoad } from "components/website-modules/utils/util";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { Router } from "next/router";
 import { useEffect } from "react";
 import { IdContext } from "../components/website-modules/utils/contexts/id-context";
-import dynamic from "next/dynamic";
 import "../styles/index.css";
 
 initAmplitude();

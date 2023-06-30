@@ -35,11 +35,10 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
       <ul className="grid grid-cols-[repeat(auto-fill,_minmax(min(17rem,_100%),_1fr))] gap-6">
         {sorted.map((x) => (
           <li key={x._id}>
-            <div className="bg-surface-subtle focus-within:ring-border-focus ring-border-subtle hover:shadow-medium min-h-56 group relative rounded-2xl focus-within:ring-[3px] hover:ring-1">
+            <div className="bg-surface-subtle focus-within:ring-border-focus shadow-xsmall hover:shadow-small min-h-56 group relative rounded-2xl focus-within:ring-[3px]">
               <div
                 className={cl(
-                  "flex max-h-44 items-center justify-center overflow-hidden rounded-t-2xl",
-                  "filter",
+                  "flex max-h-44 items-center justify-center overflow-hidden rounded-t-2xl filter",
                   {
                     "hue-rotate-[65deg]": x?.status?.tag === "beta",
                     grayscale: x?.status?.tag === "deprecated",
@@ -105,10 +104,10 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
                     <Heading
                       as="a"
                       size="small"
-                      className="z-10 before:absolute before:inset-0 focus:outline-none group-hover:underline"
+                      className="z-10 underline before:absolute before:inset-0 focus:outline-none"
                     >
                       {x.heading}
-                      <span className="absolute top-4 left-4">
+                      <span className="absolute left-4 top-4">
                         <StatusTag status={x?.status?.tag} />
                       </span>
                     </Heading>

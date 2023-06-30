@@ -1,5 +1,11 @@
 # @navikt/aksel-stylelint
 
+## 4.5.0
+
+## 4.4.2
+
+## 4.4.1
+
 ## 4.1.0
 
 ### Minor Changes

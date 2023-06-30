@@ -294,7 +294,6 @@
 .navds-button--tertiary:active {
   color: var(--ac-button-tertiary-active-text, var(--a-text-on-action));
   background-color: var(--ac-button-tertiary-active-bg, var(--a-surface-action-active));
-  box-shadow: inset 0 0 0 1px var(--a-surface-default);
 }
 
 .navds-button--tertiary:active:hover {
@@ -346,7 +345,6 @@
 .navds-button--tertiary-neutral:active {
   color: var(--ac-button-tertiary-neutral-active-text, var(--a-text-on-neutral));
   background-color: var(--ac-button-tertiary-neutral-active-bg, var(--a-surface-neutral-active));
-  box-shadow: inset 0 0 0 1px var(--a-surface-default);
 }
 
 .navds-button--tertiary-neutral:active:hover {

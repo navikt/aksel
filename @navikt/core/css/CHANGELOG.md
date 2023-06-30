@@ -1,5 +1,23 @@
 # @navikt/ds-css
 
+## 4.5.0
+
+### Minor Changes
+
+- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+### Patch Changes
+
+- - Button: Fikset outline-bug i tertiary-variant ved `:active`-state ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+## 4.4.2
+
+## 4.4.1
+
+### Patch Changes
+
+- :lipstick: Chat: fjernet border, satt avatar svg til 24x24px, byttet om "subtle" og "neutral" ([#2077](https://github.com/navikt/aksel/pull/2077))
+
 ## 4.4.0
 
 ### Minor Changes
