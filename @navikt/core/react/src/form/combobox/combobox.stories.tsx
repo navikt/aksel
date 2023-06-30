@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
-import React, { useState, useId } from "react";
+import React, { useState, useId, useMemo } from "react";
 import { userEvent, within } from "@storybook/testing-library";
 import { Chips, Combobox, TextField } from "../../index";
 
@@ -200,6 +200,10 @@ export const Controlled = (props) => {
   const id = useId();
   const [value, setValue] = useState(props.value);
   const [selectedOptions, setSelectedOptions] = useState(props.selectedOptions);
+  const filteredOptions = useMemo(
+    () => props.options.filter((option) => option.includes(value)),
+    [props.options, value]
+  );
 
   const onToggleSelected = (option, isSelected) => {
     if (isSelected) {
@@ -220,6 +224,7 @@ export const Controlled = (props) => {
       <Combobox
         label="Hva er dine favorittfrukter?"
         id={id}
+        filteredOptions={filteredOptions}
         options={props.options}
         onChange={(event) => setValue(event.target.value)}
         onToggleSelected={onToggleSelected}

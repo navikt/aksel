@@ -51,6 +51,7 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
 export const FilteredOptionsProvider = ({ children, value: props }) => {
   const {
     allowNewValues,
+    filteredOptions: externalFilteredOptions,
     isListOpen: isExternalListOpen,
     isLoading,
     options,
@@ -73,10 +74,13 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const { customOptions } = useCustomOptionsContext();
 
   const filteredOptions = useMemo(() => {
+    if (externalFilteredOptions) {
+      return externalFilteredOptions;
+    }
     const opts = [...customOptions, ...options];
     setFilteredOptionsIndex(null);
     return getMatchingValuesFromList(searchTerm, opts);
-  }, [customOptions, options, searchTerm]);
+  }, [customOptions, externalFilteredOptions, options, searchTerm]);
 
   useEffect(() => {
     if (isExternalListOpen !== undefined)

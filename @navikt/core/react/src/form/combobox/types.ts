@@ -35,6 +35,12 @@ export interface ComboboxProps
    */
   clearButtonLabel?: string;
   /**
+   * A list of options to display in the dropdown list.
+   * If provided, this overrides the internal search logic in the component.
+   * Useful for e.g. searching on a server or when overriding the search algorithm to search for synonyms or similar.
+   */
+  filteredOptions?: string[];
+  /**
    * Optionally hide the label visually.
    * Not recommended, but can be considered for e.g. search fields in the top menu.
    */

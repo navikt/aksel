@@ -14,6 +14,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultValue,
       error,
       errorId,
+      filteredOptions,
       id,
       isListOpen,
       isLoading = false,
@@ -51,6 +52,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
             <FilteredOptionsProvider
               value={{
                 allowNewValues,
+                filteredOptions,
                 isListOpen,
                 isLoading,
                 isMultiSelect,
