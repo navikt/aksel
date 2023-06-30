@@ -1,13 +1,22 @@
-import { definePreview } from "next-sanity/preview";
+import { useLiveQuery } from "next-sanity/preview";
 import { ComponentType } from "react";
-import { clientConfig } from "@/sanity/config";
 
-const usePreview = definePreview({
-  ...clientConfig,
-  subscriptionThrottleMs: 200,
-});
+import { getClient } from "@/sanity/client.server";
+import { LiveQueryProvider } from "next-sanity/preview";
+import { useMemo } from "react";
 
-const WithPreview = ({
+function PreviewProvider({
+  children,
+}: /* token, */
+{
+  children: React.ReactNode;
+  /* token: string; */
+}) {
+  const client = useMemo(() => getClient(), []);
+  return <LiveQueryProvider client={client}>{children}</LiveQueryProvider>;
+}
+
+function LiveQuery({
   comp: Comp,
   query,
   params,
@@ -17,9 +26,32 @@ const WithPreview = ({
   query: string;
   props: any;
   params?: any;
-}) => {
-  const data = usePreview(null, query, params);
+}) {
+  const [data, loading] = useLiveQuery(props, query, params);
+
+  if (loading) {
+    return <>Loading...</>;
+  }
+
   return <Comp {...props} {...data} />;
+}
+
+const WithPreview = ({
+  comp,
+  query,
+  params,
+  props,
+}: {
+  comp;
+  query: string;
+  props: any;
+  params?: any;
+}) => {
+  return (
+    <PreviewProvider>
+      <LiveQuery props={props} query={query} params={params} comp={comp} />
+    </PreviewProvider>
+  );
 };
 
 export default WithPreview;
