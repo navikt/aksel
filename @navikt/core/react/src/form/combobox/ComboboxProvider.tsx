@@ -6,6 +6,28 @@ import { SelectedOptionsProvider } from "./SelectedOptions/selectedOptionsContex
 import { InputContextProvider } from "./Input/inputContext";
 import { ComboboxProps } from "./types";
 
+/**
+ * A component that allows the user to search in a list of options
+ *
+ * Has options for allowing only one or multiple options to be selected,
+ * or adding new, user-submitted values.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/combobox)
+ *
+ * @example
+ * ```jsx
+ * const options = ["apple", "banana", "orange"];
+ *
+ * return (
+ *    <Combobox
+ *      label="Velg en verdi"
+ *      options={options}
+ *      id="my-combobox"
+ *      shouldAutoComplete
+ *    />
+ * )
+ * ```
+ */
 const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
     const {
