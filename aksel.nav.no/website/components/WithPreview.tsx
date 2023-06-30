@@ -4,15 +4,16 @@ import { ComponentType } from "react";
 import { getClient } from "@/sanity/client.server";
 import { LiveQueryProvider } from "next-sanity/preview";
 import { useMemo } from "react";
+import PreviewBanner from "components/website-modules/PreviewBanner";
 
-function PreviewProvider({
-  children,
-}: /* token, */
-{
-  children: React.ReactNode;
-  /* token: string; */
-}) {
-  const client = useMemo(() => getClient(), []);
+function PreviewProvider({ children }: { children: React.ReactNode }) {
+  const client = useMemo(() => {
+    return getClient().withConfig({
+      useCdn: false,
+      ignoreBrowserTokenWarning: true,
+      perspective: "previewDrafts",
+    });
+  }, []);
   return <LiveQueryProvider client={client}>{children}</LiveQueryProvider>;
 }
 
@@ -29,11 +30,12 @@ function LiveQuery({
 }) {
   const [data, loading] = useLiveQuery(props, query, params);
 
-  if (loading) {
-    return <>Loading...</>;
-  }
-
-  return <Comp {...props} {...data} />;
+  return (
+    <>
+      <PreviewBanner loading={loading} />
+      <Comp {...props} {...data} />;
+    </>
+  );
 }
 
 const WithPreview = ({
