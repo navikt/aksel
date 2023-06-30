@@ -236,37 +236,6 @@ Controlled.args = {
   selectedOptions: initialSelectedOptions,
 };
 
-export const WithCallbacks = () => {
-  const id = useId();
-  const [lastSelected, setLastSelected] = useState<{
-    option: string;
-    isSelected: boolean;
-  }>();
-  return (
-    <div>
-      {lastSelected && (
-        <p>
-          Sist valgt: {lastSelected.option} (
-          {lastSelected.isSelected ? "valgt" : "ikke valgt"})
-        </p>
-      )}
-      <Combobox
-        label="Hva er dine favorittfrukter?"
-        size="medium"
-        id={id}
-        options={options}
-        onToggleSelected={(option, isSelected) =>
-          setLastSelected({ option, isSelected })
-        }
-      />
-    </div>
-  );
-};
-
-WithCallbacks.args = {
-  options: [],
-};
-
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
