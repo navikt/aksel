@@ -165,7 +165,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0;
-  box-shadow: var(--a-shadow-large);
+  box-shadow: var(--a-shadow-small);
   border-radius: 4px;
 }
 
