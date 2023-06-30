@@ -206,7 +206,7 @@
   ],
   "semantic-border-action": [
     { "name": "--a-border-action", "value": "rgba(0, 103, 197, 1)" },
-    { "name": "--a-border-action-selected", "value": "rgba(0, 91, 130, 1)" },
+    { "name": "--a-border-action-selected", "value": "rgba(0, 69, 156, 1)" },
     { "name": "--a-border-selected", "value": "rgba(0, 103, 197, 1)" }
   ],
   "semantic-border-status": [
@@ -233,7 +233,7 @@
     { "name": "--a-text-visited", "value": "rgba(99, 70, 137, 1)" },
     { "name": "--a-text-danger", "value": "rgba(195, 0, 0, 1)" },
     { "name": "--a-text-action", "value": "rgba(0, 103, 197, 1)" },
-    { "name": "--a-text-action-selected", "value": "rgba(0, 91, 130, 1)" },
+    { "name": "--a-text-action-selected", "value": "rgba(0, 69, 156, 1)" },
     {
       "name": "--a-text-action-on-action-subtle",
       "value": "rgba(0, 86, 180, 1)"
@@ -269,11 +269,11 @@
     },
     { "name": "--a-surface-action", "value": "rgba(0, 103, 197, 1)" },
     { "name": "--a-surface-action-hover", "value": "rgba(0, 86, 180, 1)" },
-    { "name": "--a-surface-action-active", "value": "rgba(0, 91, 130, 1)" },
-    { "name": "--a-surface-action-selected", "value": "rgba(0, 91, 130, 1)" },
+    { "name": "--a-surface-action-active", "value": "rgba(0, 69, 156, 1)" },
+    { "name": "--a-surface-action-selected", "value": "rgba(0, 69, 156, 1)" },
     {
       "name": "--a-surface-action-selected-hover",
-      "value": "rgba(0, 80, 119, 1)"
+      "value": "rgba(0, 52, 125, 1)"
     }
   ],
   "semantic-surface-neutral": [
@@ -367,7 +367,7 @@
   ],
   "semantic-icon-action": [
     { "name": "--a-icon-action", "value": "rgba(0, 103, 197, 1)" },
-    { "name": "--a-icon-action-selected", "value": "rgba(0, 91, 130, 1)" },
+    { "name": "--a-icon-action-selected", "value": "rgba(0, 69, 156, 1)" },
     {
       "name": "--a-icon-action-on-action-subtle",
       "value": "rgba(0, 86, 180, 1)"
