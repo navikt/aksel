@@ -33,9 +33,6 @@ export const Combobox = forwardRef<
     ...rest
   } = props;
 
-  // we have the code for error handling, and dont do anythign with it
-  // TODO: if text is long, new line
-  // TODO: mobile, should fewer options be shown at a time?
 
   const { currentOption, toggleIsListOpen, filteredOptions } =
     useFilteredOptionsContext();
