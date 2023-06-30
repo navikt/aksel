@@ -45,19 +45,36 @@
   margin: 0;
 }
 
-.navds-combobox__input:focus {
+.navds-combobox__input:focus-visible {
   outline: none;
   border: none;
   box-shadow: none;
 }
 
-.navds-combobox__wrapper-inner:has(.navds-combobox__input:focus) {
+.navds-combobox__wrapper-inner:has(.navds-combobox__input:focus-visible) {
   box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
   box-shadow: var(--a-shadow-focus);
 }
 
-.navds-combobox__wrapper-inner:has(.navds-combobox__input:focus).navds-combobox__wrapper-inner--virtually-unfocused {
+.navds-combobox__wrapper-inner:has(.navds-combobox__input:focus-visible).navds-combobox__wrapper-inner--virtually-unfocused {
   box-shadow: none;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-combobox__input:focus-visible {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .navds-combobox__wrapper-inner:has(.navds-combobox__input:focus) {
+    box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
+    box-shadow: var(--a-shadow-focus);
+  }
+
+  .navds-combobox__wrapper-inner:has(.navds-combobox__input:focus).navds-combobox__wrapper-inner--virtually-unfocused {
+    box-shadow: none;
+  }
 }
 
 .navds-combobox__button-clear {
@@ -112,10 +129,18 @@
   color: var(--a-text-action-selected);
 }
 
-.navds-combobox__button-toggle-list:focus {
+.navds-combobox__button-toggle-list:focus-visible {
   box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
   box-shadow: var(--a-shadow-focus);
   outline: none;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-combobox__button-toggle-list:focus {
+    box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
+    box-shadow: var(--a-shadow-focus);
+    outline: none;
+  }
 }
 
 .navds-combobox__button-toggle-list svg {
