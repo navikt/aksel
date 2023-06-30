@@ -9,12 +9,14 @@ interface ClearButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 export const ClearButton: React.FC<ClearButtonProps> = ({
   handleClear,
   clearButtonLabel,
+  ...rest
 }) => {
   return (
     <button
       type="button"
       onClick={handleClear}
       className="navds-combobox__button-clear"
+      {...rest}
     >
       <span className="navds-sr-only">
         {clearButtonLabel ? clearButtonLabel : "Tøm"}

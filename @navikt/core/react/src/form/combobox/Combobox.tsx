@@ -205,6 +205,7 @@ export const Combobox = forwardRef<
             <ClearButton
               handleClear={(event) => handleClear({ trigger: "Click", event })}
               clearButtonLabel={clearButtonLabel}
+              tabIndex={-1}
             />
           )}
           {toggleListButton && (
