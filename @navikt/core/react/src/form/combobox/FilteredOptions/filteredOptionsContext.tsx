@@ -31,7 +31,6 @@ type FilteredOptionsContextType = {
   filteredOptionsIndex: number | null;
   setFilteredOptionsIndex: (index: number) => void;
   isListOpen: boolean;
-  setInternalListOpen: (open: boolean) => void;
   isLoading?: boolean;
   filteredOptions: string[];
   isValueNew: boolean;
@@ -81,11 +80,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setFilteredOptionsIndex(null);
     return getMatchingValuesFromList(searchTerm, opts);
   }, [customOptions, externalFilteredOptions, options, searchTerm]);
-
-  useEffect(() => {
-    if (isExternalListOpen !== undefined)
-      setInternalListOpen(isExternalListOpen);
-  }, [isExternalListOpen]);
 
   const previousSearchTerm = usePrevious(searchTerm);
 
@@ -251,7 +245,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setFilteredOptionsIndex,
     shouldAutocomplete,
     isListOpen,
-    setInternalListOpen,
     isLoading,
     filteredOptions,
     isValueNew,
