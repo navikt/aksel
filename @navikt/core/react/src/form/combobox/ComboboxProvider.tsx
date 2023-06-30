@@ -81,7 +81,9 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
                 options,
               }}
             >
-              <Combobox {...rest}>{children}</Combobox>
+              <Combobox ref={ref} {...rest}>
+                {children}
+              </Combobox>
             </FilteredOptionsProvider>
           </CustomOptionsProvider>
         </SelectedOptionsProvider>
