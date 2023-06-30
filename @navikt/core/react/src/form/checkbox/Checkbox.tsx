@@ -72,7 +72,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {...inputProps}
           type="checkbox"
           className="navds-checkbox__input"
-          aria-readonly={readOnly}
           aria-checked={props.indeterminate ? "mixed" : inputProps.checked}
           ref={(el) => {
             if (el) {
@@ -93,7 +92,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             })}
           >
             <BodyShort as="span" size={size}>
-              {!nested && <ReadOnlyIcon readOnly={readOnly} />}
+              {!nested && (
+                <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
+              )}
               {props.children}
             </BodyShort>
             {props.description && (

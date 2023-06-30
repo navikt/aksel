@@ -80,7 +80,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         }
       },
       onKeyDown: (evt) => {
-        if (readOnly && ["ArrowDown", "ArrowUp", " "].includes(evt.key)) {
+        if (
+          readOnly &&
+          ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", " "].includes(
+            evt.key
+          )
+        ) {
           evt.preventDefault();
         }
       },
@@ -106,7 +111,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             "navds-sr-only": hideLabel,
           })}
         >
-          <ReadOnlyIcon readOnly={readOnly} />
+          <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
           {label}
         </Label>
         {!!description && (
@@ -132,7 +137,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               "navds-body-short",
               `navds-body--${size ?? "medium"}`
             )}
-            aria-readonly={readOnly}
             size={props.htmlSize}
           >
             {children}

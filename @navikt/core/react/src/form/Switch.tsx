@@ -109,7 +109,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           {...omit(rest, ["size", "readOnly"])}
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
           disabled={inputProps.disabled ?? loading}
-          aria-readonly={readOnly}
           checked={checkedProp}
           defaultChecked={defaultChecked}
           ref={ref}
@@ -147,7 +146,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             })}
           >
             <BodyShort as="div" size={size} className="navds-switch__label">
-              <ReadOnlyIcon readOnly={readOnly} />
+              <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
               {children}
             </BodyShort>
             {description && (

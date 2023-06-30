@@ -93,7 +93,7 @@ export const GroupDescription = () => (
   </RadioGroup>
 );
 
-export const Readonly = () => (
+export const UUDemo = () => (
   <div className="colgap">
     <RadioGroup
       legend="Hvilken frukt vil du ha?"
@@ -108,14 +108,14 @@ export const Readonly = () => (
       <Radio value="druer">Druer</Radio>
     </RadioGroup>
     <RadioGroup
-      legend="Hvilken frukt vil du ha?"
-      defaultValue="eple"
+      legend="Når har du ferie?"
+      defaultValue="1"
       readOnly
-      error="Du må velge en frukt"
+      error="du må velge en ferie"
     >
-      <Radio value="eple">Eple</Radio>
-      <Radio value="banan">Banan</Radio>
-      <Radio value="druer">Druer</Radio>
+      <Radio value="1">August</Radio>
+      <Radio value="2">Juli</Radio>
+      <Radio value="3">Juni</Radio>
     </RadioGroup>
   </div>
 );

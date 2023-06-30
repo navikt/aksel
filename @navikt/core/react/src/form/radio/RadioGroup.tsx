@@ -65,6 +65,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       value,
       onChange = () => {},
       required,
+      readOnly,
       ...rest
     },
     ref
@@ -76,13 +77,14 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
     return (
       <Fieldset
         {...rest}
+        readOnly={readOnly}
         ref={ref}
         className={cl(
           className,
           "navds-radio-group",
           `navds-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`
         )}
-        aria-readonly={fieldset?.readOnly}
+        nativeReadOnly={false}
       >
         <RadioGroupContext.Provider
           value={{
