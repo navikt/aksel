@@ -3,6 +3,7 @@ import { Meta } from "@storybook/react";
 import React, { useState, useId, useMemo } from "react";
 import { userEvent, within } from "@storybook/testing-library";
 import { Chips, Combobox, TextField } from "../../index";
+import { expect } from "@storybook/jest";
 
 export default {
   title: "ds-react/Combobox",
@@ -269,5 +270,90 @@ export const CancelInputTest = {
     userEvent.keyboard("{ArrowDown}");
     const banana = canvas.getByText("banana");
     userEvent.click(banana);
+  },
+};
+
+export const RemoveSelectedMultiSelectTest = {
+  render: () => {
+    return (
+      <div data-theme="light">
+        <Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          isMultiSelect
+        />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+
+    userEvent.click(input);
+    await userEvent.type(input, "apple", { delay: 200 });
+    await sleep(250);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    userEvent.keyboard("{Escape}");
+    await sleep(250);
+
+    userEvent.click(input);
+    await userEvent.type(input, "banana", { delay: 200 });
+    await sleep(250);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    userEvent.keyboard("{Escape}");
+    await sleep(250);
+
+    const appleSlett = canvas.getByLabelText("apple slett");
+    userEvent.click(appleSlett);
+    await sleep(250);
+
+    const bananaSlett = canvas.getByLabelText("banana slett");
+    expect(bananaSlett).toBeInTheDocument();
+    const appleSlettAgain = canvas.queryByLabelText("apple slett");
+    expect(appleSlettAgain).not.toBeInTheDocument();
+  },
+};
+
+export const AddWhenAddNewDisabledTest = {
+  render: () => {
+    return (
+      <div data-theme="light">
+        <Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          isMultiSelect
+        />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+
+    userEvent.click(input);
+    await userEvent.type(input, "aaa", { delay: 200 });
+    await sleep(250);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    userEvent.keyboard("{Escape}");
+    await sleep(250);
+
+    const invalidSelect = canvas.queryByLabelText("aaa slett");
+    expect(invalidSelect).not.toBeInTheDocument();
   },
 };
