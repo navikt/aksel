@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Checkbox, CheckboxGroup } from "../../index";
-import { Meta } from "@storybook/react";
 
 export default {
   title: "ds-react/Checkbox",
