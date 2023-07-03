@@ -178,3 +178,40 @@
 .navds-switch__input:disabled ~ .navds-switch__label-wrapper {
   cursor: not-allowed;
 }
+
+/* Readonly */
+.navds-switch--readonly > .navds-switch__track,
+.navds-switch--readonly > .navds-switch__input:hover ~ .navds-switch__track,
+.navds-switch--readonly > .navds-switch__input:checked ~ .navds-switch__track,
+.navds-switch--readonly > .navds-switch__input:checked:hover ~ .navds-switch__track {
+  background-color: var(--a-surface-neutral-moderate);
+}
+
+.navds-switch--readonly > .navds-switch__label-wrapper,
+.navds-switch--readonly > .navds-switch__input {
+  cursor: default;
+}
+
+.navds-switch--readonly > .navds-switch__input:hover ~ .navds-switch__label-wrapper,
+.navds-switch--readonly .navds-switch__label-wrapper:hover {
+  color: var(--a-text-default);
+}
+
+.navds-switch--readonly .navds-switch__thumb {
+  background-color: var(--a-surface-subtle);
+  box-shadow: 0 0 0 2px var(--a-border-default);
+}
+
+.navds-switch--readonly > .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
+  color: var(--a-icon-subtle);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .navds-switch--readonly > .navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
+    transform: translateX(0);
+  }
+
+  .navds-switch--readonly > .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
+    transform: translateX(20px);
+  }
+}

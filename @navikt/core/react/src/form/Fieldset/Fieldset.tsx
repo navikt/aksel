@@ -3,6 +3,7 @@ import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
 import { BodyShort, ErrorMessage, Label, omit } from "../..";
 import { FormFieldProps } from "../useFormField";
 import { useFieldset } from "./useFieldset";
+import { ReadOnlyIcon } from "../ReadOnlyIcon";
 
 export type FieldsetContextProps = {
   /**
@@ -21,6 +22,10 @@ export type FieldsetContextProps = {
    * Sets fieldset and all form-children to disabled
    */
   disabled: boolean;
+  /**
+   * Read only-state
+   */
+  readOnly?: boolean;
 };
 
 export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
@@ -47,6 +52,7 @@ export interface FieldsetProps
    * @default true
    */
   errorPropagation?: boolean;
+  nativeReadOnly?: boolean;
 }
 
 export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
@@ -57,6 +63,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       showErrorMsg,
       hasError,
       size,
+      readOnly,
       inputDescriptionId,
     } = useFieldset(props);
 
@@ -69,6 +76,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       legend,
       description,
       hideLegend,
+      nativeReadOnly = true,
       ...rest
     } = props;
 
@@ -82,17 +90,21 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           }),
           size,
           disabled: props.disabled ?? false,
+          readOnly,
         }}
       >
         <fieldset
-          {...omit(rest, ["errorId", "error", "size"])}
+          {...omit(rest, ["errorId", "error", "size", "readOnly"])}
           {...inputProps}
           ref={ref}
           className={cl(
             className,
             "navds-fieldset",
             `navds-fieldset--${size}`,
-            { "navds-fieldset--error": hasError }
+            {
+              "navds-fieldset--error": hasError,
+              "navds-fieldset--readonly": readOnly,
+            }
           )}
         >
           <Label
@@ -102,6 +114,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
               "navds-sr-only": !!hideLegend,
             })}
           >
+            <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={nativeReadOnly} />
             {legend}
           </Label>
           {!!description && (

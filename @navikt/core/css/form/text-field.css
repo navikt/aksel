@@ -73,11 +73,10 @@
   cursor: not-allowed;
 }
 
-.navds-text-field__input[readonly] {
-  background-color: var(--ac-textfield-bg, var(--a-surface-default));
-  border-color: var(--ac-textfield-border, var(--a-border-default));
-  box-shadow: none;
-  cursor: not-allowed;
+.navds-text-field--readonly .navds-text-field__input {
+  background-color: var(--a-surface-subtle);
+  border-color: var(--a-border-subtle);
+  cursor: default;
 }
 
 /**

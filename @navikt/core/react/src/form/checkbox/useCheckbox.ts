@@ -10,7 +10,7 @@ import { omit } from "../..";
 const useCheckbox = ({ children, ...props }: CheckboxProps) => {
   const checkboxGroup = useContext(CheckboxGroupContext);
 
-  const { inputProps, ...rest } = useFormField(
+  const { inputProps, readOnly, ...rest } = useFormField(
     omit(props, ["description"]),
     "checkbox"
   );
@@ -30,6 +30,8 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
 
   return {
     ...rest,
+    readOnly,
+    nested: !!checkboxGroup,
     inputProps: {
       ...inputProps,
       checked: checkboxGroup?.value
@@ -39,8 +41,18 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
         ? checkboxGroup.defaultValue.includes(props.value)
         : props.defaultChecked,
       onChange: (e) => {
+        if (readOnly) {
+          return;
+        }
         props.onChange && props.onChange(e);
         checkboxGroup && checkboxGroup.toggleValue(props.value);
+      },
+      onClick: (e) => {
+        if (readOnly) {
+          e.preventDefault();
+          return;
+        }
+        props?.onClick?.(e);
       },
     },
   };
