@@ -254,6 +254,10 @@
   cursor: default;
 }
 
+.navds-checkbox--readonly .navds-checkbox__label-text {
+  display: inline-flex;
+}
+
 .navds-checkbox--readonly > .navds-checkbox__input:hover + .navds-checkbox__label,
 .navds-radio--readonly > .navds-radio__input:hover + .navds-radio__label {
   color: var(--a-text-default);

@@ -117,6 +117,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           `navds-form-field--${size}`,
           {
             "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-form-field--readonly": readOnly,
             "navds-textarea--readonly": readOnly,
             "navds-textarea--error": hasError,
             "navds-textarea--resize": resize,

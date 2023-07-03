@@ -73,6 +73,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "navds-date__field--error": hasError,
           "navds-form-field--disabled": !!inputProps.disabled,
           "navds-text-field--disabled": !!inputProps.disabled,
+          "navds-form-field--readonly": readOnly,
           "navds-text-field--readonly": readOnly,
           "navds-date__field--readonly": readOnly,
         }

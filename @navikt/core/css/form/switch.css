@@ -197,6 +197,10 @@
   color: var(--a-text-default);
 }
 
+.navds-switch--readonly .navds-switch__label {
+  display: inline-flex;
+}
+
 .navds-switch--readonly .navds-switch__thumb {
   background-color: var(--a-surface-subtle);
   box-shadow: 0 0 0 2px var(--a-border-default);
