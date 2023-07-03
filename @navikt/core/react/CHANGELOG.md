@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 4.6.0
+
+### Minor Changes
+
+- Skjema: De fleste skjemakomponenter støtter nå `readOnly`-state ([#2080](https://github.com/navikt/aksel/pull/2080))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.6.0
+
 ## 4.5.0
 
 ### Minor Changes
