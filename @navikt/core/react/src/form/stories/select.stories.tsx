@@ -114,3 +114,20 @@ export const HideLabel = () => {
     </Select>
   );
 };
+
+export const Readonly = () => {
+  return (
+    <div className="colgap">
+      <Select
+        label="Hvilkets land er du fra?"
+        description="Velg landet du bor 180 dagen i året"
+        readOnly
+      >
+        {content}
+      </Select>
+      <Select label="Hvilkets land er du fra?" readOnly error="feilmelding">
+        {content}
+      </Select>
+    </div>
+  );
+};

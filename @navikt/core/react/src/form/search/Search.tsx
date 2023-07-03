@@ -27,7 +27,7 @@ export type SearchClearEvent =
   | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
 
 export interface SearchProps
-  extends FormFieldProps,
+  extends Omit<FormFieldProps, "readOnly">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
   children?: React.ReactNode;
   /**
@@ -221,7 +221,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             )}
             <input
               ref={mergedRef}
-              {...omit(rest, ["error", "errorId", "size"])}
+              {...omit(rest, ["error", "errorId", "size", "readOnly"])}
               {...inputProps}
               value={value ?? internalValue}
               onChange={(e) => handleChange(e.target.value)}

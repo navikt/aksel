@@ -10,7 +10,7 @@ import { omit } from "../..";
 export const useRadio = (props: RadioProps) => {
   const radioGroup = useContext(RadioGroupContext);
 
-  const { inputProps, ...rest } = useFormField(
+  const { inputProps, readOnly, ...rest } = useFormField(
     omit(props, ["description"]),
     "radio"
   );
@@ -25,6 +25,7 @@ export const useRadio = (props: RadioProps) => {
 
   return {
     ...rest,
+    readOnly,
     inputProps: {
       ...inputProps,
       name: radioGroup?.name,
@@ -37,8 +38,18 @@ export const useRadio = (props: RadioProps) => {
           ? undefined
           : radioGroup?.value === props.value,
       onChange: (e) => {
+        if (readOnly) {
+          return;
+        }
         props.onChange && props.onChange(e);
         radioGroup?.onChange && radioGroup.onChange(props.value);
+      },
+      onClick: (e) => {
+        if (readOnly) {
+          e.preventDefault();
+          return;
+        }
+        props?.onClick?.(e);
       },
       required: radioGroup?.required,
       type: "radio",

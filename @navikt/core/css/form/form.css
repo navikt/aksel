@@ -36,3 +36,14 @@
 .navds-form-field__subdescription {
   color: var(--ac-form-subdescription, var(--a-text-subtle));
 }
+
+.navds-form-field--readonly > :where(.navds-form-field__label) {
+  display: inline-flex;
+}
+
+.navds-form-field__readonly-icon {
+  margin-top: var(--a-spacing-05);
+  margin-right: var(--a-spacing-2);
+  flex-shrink: 0;
+  align-self: flex-start;
+}

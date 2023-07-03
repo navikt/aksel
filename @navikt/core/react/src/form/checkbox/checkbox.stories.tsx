@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Checkbox, CheckboxGroup } from "../../index";
-import { Meta } from "@storybook/react";
 
 export default {
   title: "ds-react/Checkbox",
@@ -190,3 +190,37 @@ export const Indeterminate = () => {
     </>
   );
 };
+
+export const Readonly = () => (
+  <div className="colgap">
+    <CheckboxGroup
+      legend="Hvilken frukt liker du?"
+      defaultValue={["banan"]}
+      readOnly
+    >
+      <Checkbox value="banan">Banan</Checkbox>
+      <Checkbox value="eple">Eple</Checkbox>
+      <Checkbox value="druer" indeterminate>
+        Druer
+      </Checkbox>
+    </CheckboxGroup>
+    <CheckboxGroup
+      legend="Hvilken frukt liker du?"
+      error="feilmelding"
+      defaultValue={["Eple"]}
+      readOnly
+    >
+      <Checkbox value="eple" description="Epler kommer i 4 varianter">
+        Eple
+      </Checkbox>
+      <Checkbox value="banan">Banan</Checkbox>
+    </CheckboxGroup>
+    <hr />
+    <Checkbox value="tekst1" readOnly>
+      Eple single
+    </Checkbox>
+    <Checkbox value="tekst1" checked readOnly>
+      Banan single
+    </Checkbox>
+  </div>
+);

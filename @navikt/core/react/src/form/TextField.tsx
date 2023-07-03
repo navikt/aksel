@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import { BodyShort, ErrorMessage, Label, omit } from "..";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface TextFieldProps
@@ -62,6 +63,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       htmlSize,
       hideLabel = false,
       type = "text",
+      readOnly,
       ...rest
     } = props;
 
@@ -71,10 +73,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           className,
           "navds-form-field",
           `navds-form-field--${size}`,
+
           {
             "navds-text-field--error": hasError,
             "navds-text-field--disabled": !!inputProps.disabled,
             "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-form-field--readonly": readOnly,
+            "navds-text-field--readonly": readOnly,
           }
         )}
       >
@@ -85,6 +90,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "navds-sr-only": hideLabel,
           })}
         >
+          <ReadOnlyIcon readOnly={readOnly} />
           {label}
         </Label>
 
@@ -105,6 +111,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {...inputProps}
           ref={ref}
           type={type}
+          readOnly={readOnly}
           className={cl(
             "navds-text-field__input",
             "navds-body-short",

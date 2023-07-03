@@ -4,6 +4,7 @@ import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { FormFieldProps } from "../useFormField";
 import useCheckbox from "./useCheckbox";
+import { ReadOnlyIcon } from "../ReadOnlyIcon";
 
 export interface CheckboxProps
   extends FormFieldProps,
@@ -42,7 +43,7 @@ export interface CheckboxProps
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { inputProps, hasError, size } = useCheckbox(props);
+    const { inputProps, hasError, size, readOnly, nested } = useCheckbox(props);
 
     return (
       <div
@@ -53,6 +54,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {
             "navds-checkbox--error": hasError,
             "navds-checkbox--disabled": inputProps.disabled,
+            "navds-checkbox--readonly": readOnly,
           }
         )}
       >
@@ -65,6 +67,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "hideLabel",
             "indeterminate",
             "errorId",
+            "readOnly",
           ])}
           {...inputProps}
           type="checkbox"
@@ -88,7 +91,14 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               "navds-sr-only": props.hideLabel,
             })}
           >
-            <BodyShort as="span" size={size}>
+            <BodyShort
+              as="span"
+              size={size}
+              className="navds-checkbox__label-text"
+            >
+              {!nested && (
+                <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
+              )}
               {props.children}
             </BodyShort>
             {props.description && (
