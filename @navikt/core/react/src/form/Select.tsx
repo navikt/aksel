@@ -99,6 +99,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           `navds-form-field--${size}`,
           {
             "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-form-field--readonly": readOnly,
             "navds-select--error": hasError,
             "navds-select--readonly": readOnly,
           }
