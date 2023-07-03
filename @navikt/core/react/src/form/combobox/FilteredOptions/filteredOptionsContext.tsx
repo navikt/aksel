@@ -218,7 +218,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     }
     const newIndex = Math.min(
       filteredOptionsIndex + 1,
-      filteredOptions.length - 1
+      Math.max(getMinimumIndex(), filteredOptions.length - 1)
     );
     setFilteredOptionsIndex(newIndex);
   }, [
