@@ -2,7 +2,14 @@ import { Switch } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <Switch disabled>Slå på notifikasjoner</Switch>;
+  return (
+    <div className="grid gap-4">
+      <Switch readOnly>Slå på notifikasjoner</Switch>
+      <Switch readOnly checked>
+        Slå på notifikasjoner
+      </Switch>
+    </div>
+  );
 };
 
 export default withDsExample(Example);
@@ -13,5 +20,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 99,
+  index: 98,
 };

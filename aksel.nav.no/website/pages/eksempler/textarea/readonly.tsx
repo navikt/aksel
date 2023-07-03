@@ -2,7 +2,7 @@ import { Textarea } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <Textarea label="Har du noen tilbakemeldinger?" disabled />;
+  return <Textarea label="Har du noen tilbakemeldinger?" readOnly />;
 };
 
 export default withDsExample(Example);
@@ -13,5 +13,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 99,
+  index: 98,
 };

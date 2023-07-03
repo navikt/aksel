@@ -8,7 +8,8 @@ const Example = () => {
     <RadioGroup
       legend="Velg din aldersgruppe."
       onChange={(val: any) => handleChange(val)}
-      disabled
+      value="20"
+      readOnly
     >
       <Radio value="10">10-20 år</Radio>
       <Radio value="20">21-45 år</Radio>
@@ -25,5 +26,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 99,
+  index: 98,
 };

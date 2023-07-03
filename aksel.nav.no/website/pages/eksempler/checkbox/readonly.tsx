@@ -8,7 +8,8 @@ const Example = () => {
     <CheckboxGroup
       legend="Hvor vil du sitte?"
       onChange={(val: any[]) => handleChange(val)}
-      disabled
+      value={["Midterst"]}
+      readOnly
     >
       <Checkbox value="Bakerst">Bakerst</Checkbox>
       <Checkbox value="Midterst">Midterst</Checkbox>
@@ -25,5 +26,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 99,
+  index: 98,
 };
