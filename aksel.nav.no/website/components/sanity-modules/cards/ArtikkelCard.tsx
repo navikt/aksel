@@ -31,7 +31,7 @@ const ArtikkelCard = ({
   );
 
   return (
-    <div className="hover:shadow-small focus-within:ring-border-focus bg-surface-default ring-border-subtle group relative rounded-lg p-3 pb-16 ring-1 focus-within:ring-[3px] sm:p-5 sm:pb-16">
+    <div className="shadow-xsmall hover:shadow-small focus-within:ring-border-focus bg-surface-default group relative rounded-lg p-3 pb-16 focus-within:ring-[3px] sm:p-5 sm:pb-16">
       <NextLink
         href={{
           pathname: `/${slug}`,
@@ -52,7 +52,7 @@ const ArtikkelCard = ({
         <Heading
           level={level}
           size="small"
-          className="text-deepblue-700 group-hover:underline"
+          className="text-deepblue-700 underline group-hover:no-underline"
         >
           {heading}
         </Heading>

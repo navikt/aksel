@@ -51,8 +51,7 @@ const Card = ({
     <div
       className={cl(
         "bg-surface-default group relative rounded-lg",
-        "focus-within:ring-border-focus ring-border-subtle-hover focus-within:ring-[3px]",
-        "shadow-[0_0_1px_rgb(0_0_0/0.3),0_1px_3px_rgb(0_0_0/0.15)]",
+        "focus-within:ring-border-focus ring-border-subtle-hover shadow-xsmall hover:shadow-small focus-within:ring-[3px]",
         `transition-[opacity,transform] duration-700`,
         {
           "translate-y-0 opacity-100": visible,
@@ -120,7 +119,11 @@ const Card = ({
               )
             }
           >
-            <Heading level="3" size="small" className="group-hover:underline">
+            <Heading
+              level="3"
+              size="small"
+              className="underline group-hover:no-underline"
+            >
               {article.heading}
             </Heading>
           </NextLink>

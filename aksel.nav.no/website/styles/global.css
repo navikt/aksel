@@ -31,6 +31,8 @@ p {
 a {
   color: inherit;
   text-decoration: inherit;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 0.0625em;
 }
 
 [id] {

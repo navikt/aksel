@@ -3,10 +3,12 @@ import {
   CheckmarkCircleFillIcon,
   ExclamationmarkTriangleFillIcon,
   XMarkOctagonFillIcon,
+  XMarkIcon,
 } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong } from "../typography/BodyLong";
+import { Button } from "../button";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -32,6 +34,17 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   inline?: boolean;
+  /**
+   * Removes close-button(X) when false
+   * Requires onClose to be set
+   * @default true
+   */
+  closeButton?: boolean;
+  /**
+   * Callback for alert wanting to close
+   * requires closeButton to be true
+   */
+  onClose?: () => void;
 }
 
 const Icon = ({ variant, ...props }) => {
@@ -71,27 +84,45 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       size = "medium",
       fullWidth = false,
       inline = false,
+      closeButton = false,
+      onClose,
       ...rest
     },
     ref
-  ) => (
-    <div
-      {...rest}
-      ref={ref}
-      className={cl(
-        className,
-        "navds-alert",
-        `navds-alert--${variant}`,
-        `navds-alert--${size}`,
-        { "navds-alert--full-width": fullWidth, "navds-alert--inline": inline }
-      )}
-    >
-      <Icon variant={variant} className="navds-alert__icon" />
-      <BodyLong as="div" size={size} className="navds-alert__wrapper">
-        {children}
-      </BodyLong>
-    </div>
-  )
+  ) => {
+    return (
+      <div
+        {...rest}
+        ref={ref}
+        className={cl(
+          className,
+          "navds-alert",
+          `navds-alert--${variant}`,
+          `navds-alert--${size}`,
+          {
+            "navds-alert--full-width": fullWidth,
+            "navds-alert--inline": inline,
+          }
+        )}
+      >
+        <Icon variant={variant} className="navds-alert__icon" />
+        <BodyLong as="div" size={size} className="navds-alert__wrapper">
+          {children}
+        </BodyLong>
+        {closeButton && !inline && (
+          <div className="navds-alert__button-wrapper">
+            <Button
+              className="navds-alert__button"
+              size="small"
+              variant="tertiary-neutral"
+              onClick={onClose}
+              icon={<XMarkIcon title="Lukk Alert" />}
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
 );
 
 export default Alert;

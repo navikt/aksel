@@ -64,7 +64,7 @@ export interface SwitchProps
  *
  * @example
  * ```jsx
- * <Switch>Slå på notifikasjoner</Switch>
+ * <Switch>Varsle med SMS</Switch>
  * ```
  */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
