@@ -60,6 +60,15 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
 
   const ariaInvalid = { ...(hasError ? { "aria-invalid": true } : {}) };
 
+  if ((props as any)?.required && process.env.NODE_ENV !== "production") {
+    console.warn(
+      "Aksel: Use of 'required' in form-elements is heavily discuouraged. Docs about why here:"
+    );
+    console.warn(
+      "https://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#h3bfe00453471"
+    );
+  }
+
   return {
     showErrorMsg,
     hasError,
