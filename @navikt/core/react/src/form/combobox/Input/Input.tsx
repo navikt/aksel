@@ -101,6 +101,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       ]
     );
 
+    const onFocus = () => {
+      toggleIsListOpen(true);
+    };
+
     const onBlur = () => {
       toggleIsListOpen(false);
     };
@@ -114,6 +118,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onChange={onChange}
         type="text"
         role="combobox"
+        onFocus={onFocus}
         onBlur={onBlur}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
