@@ -47,6 +47,7 @@ export interface FormFieldType {
     "aria-describedby"?: string;
     disabled?: boolean;
   };
+  readOnly?: boolean;
 }
 
 /**
