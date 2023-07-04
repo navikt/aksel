@@ -5,6 +5,16 @@ import { OverridableComponent } from "../util/OverridableComponent";
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
+   * Whether the link is suitable for being inlined in text.
+   * @default false
+   */
+  inline?: boolean;
+  /**
+   * Whether the link should have space around it.
+   * @default false
+   */
+  spacing?: boolean;
+  /**
    * Link text
    */
   children: React.ReactNode;
@@ -24,8 +34,26 @@ export interface LinkProps
  * ```
  */
 export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
-  forwardRef(({ as: Component = "a", className, ...rest }, ref) => (
-    <Component {...rest} ref={ref} className={cl("navds-link", className)} />
-  ));
+  forwardRef(
+    (
+      {
+        as: Component = "a",
+        className,
+        inline = false,
+        spacing = false,
+        ...rest
+      },
+      ref
+    ) => (
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl("navds-link", className, {
+          "navds-link--inline": inline,
+          "navds-link--spacing": spacing,
+        })}
+      />
+    )
+  );
 
 export default Link;

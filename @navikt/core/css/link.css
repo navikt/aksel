@@ -1,18 +1,34 @@
 .navds-link {
   color: var(--ac-link-text, var(--a-text-action));
   text-decoration: underline;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--a-spacing-1);
+}
+
+.navds-link > svg {
+  margin: 0 0.25em -0.15em;
+}
+
+.navds-link:hover {
+  text-decoration: none;
+}
+
+.navds-link.navds-link--inline {
+  text-decoration: none;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.navds-link--spacing::before,
+.navds-link--spacing::after {
+  content: " ";
+}
+
+.navds-link.navds-link--inline:hover {
+  text-decoration: underline;
 }
 
 .navds-alert .navds-link,
 .navds-confirmation-panel .navds-link {
   color: var(--a-text-default);
-}
-
-.navds-link:hover {
-  text-decoration: none;
 }
 
 .navds-link:focus-visible {

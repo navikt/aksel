@@ -12,22 +12,23 @@ export default {
 };
 
 export const Default = {
-  render: (props) => {
+  render: ({ icon, inline, spacing }) => {
     const LinkD = () => (
-      <Link href="#">
-        {props.icon && <PlusCircleFillIcon />}Ex aliqua incididunt{" "}
-        {props.icon && <PlusCircleFillIcon />}
+      <Link href="#" inline={inline} spacing={spacing}>
+        {icon && <PlusCircleFillIcon />}Ex aliqua incididunt
+        {icon && <PlusCircleFillIcon />}
       </Link>
     );
 
-    if (props.inline) {
+    if (inline) {
       return (
-        <BodyLong>
-          Incididunt laborum nisi nisi Lorem <LinkD /> in. Laborum aute fugiat
-          officia adipisicing non veniam dolor nulla non ex consectetur fugiat
-          eiusmod aute. Culpa sit aute est duis minim in in voluptate velit
-          fugiat. Laboris est id deserunt ut ea Lorem eu. Esse elit laboris aute
-          commodo sint laborum fugiat aliqua.
+        <BodyLong style={{ width: "800px", border: "1px solid black" }}>
+          Incididunt laborum nisi nisi Lorem
+          <LinkD />
+          in. Laborum aute fugiat officia adipisicing non veniam dolor nulla non
+          ex consectetur fugiat eiusmod aute. Culpa sit aute est duis minim in
+          in voluptate velit fugiat. Laboris est id deserunt ut ea Lorem eu.
+          Esse elit laboris aute commodo sint laborum fugiat aliqua.
         </BodyLong>
       );
     }
@@ -37,6 +38,93 @@ export const Default = {
   args: {
     icon: false,
     inline: false,
+    spacing: false,
+  },
+};
+
+export const Inline = {
+  render: ({ icon, viewSpacing = false }) => {
+    const LinkD = ({
+      children = "Ex aliqua incididunt",
+      inline = false,
+      spacing = false,
+    }) => (
+      <Link href="#" inline={inline} spacing={spacing}>
+        {icon && <PlusCircleFillIcon />}
+        {children}
+        {icon && <PlusCircleFillIcon />}
+      </Link>
+    );
+
+    return (
+      <div
+        className="colgap"
+        style={{ width: "800px", border: "1px solid black" }}
+      >
+        <style>
+          {viewSpacing &&
+            `
+            .navds-link--spacing::before { background-color: red;}
+            .navds-link--spacing::after { background-color: green;}
+            `}
+          {`.storybook-custom-spacing { white-space: pre;}`}
+        </style>
+        <BodyLong>
+          <LinkD />
+          Eiusmod aute.
+          <LinkD />
+          Culpa sit aute est duis minim in in voluptate velit
+          <LinkD inline>
+            https://blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah.com
+          </LinkD>
+          Incididunt laborum nisi nisi Lorem officia adipisicing non veniam
+          <LinkD inline>
+            blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah
+          </LinkD>
+          dolor eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
+          <LinkD inline>Link</LinkD>
+        </BodyLong>
+        <BodyLong>
+          <LinkD inline spacing>
+            Link
+          </LinkD>
+          Eiusmod aute.
+          <LinkD inline spacing>
+            Link
+          </LinkD>
+          Culpa sit aute est duis minim in in voluptate velit
+          <LinkD inline spacing>
+            https://blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah.com
+          </LinkD>
+          Incididunt laborum nisi nisi Lorem officia adipisicing non veniam
+          <LinkD inline spacing>
+            blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah
+          </LinkD>
+          dolor eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
+          <LinkD inline spacing>
+            Link
+          </LinkD>
+        </BodyLong>
+        <BodyLong className="storybook-custom-spacing">
+          Custom{"   "}
+          <LinkD inline>link</LinkD>
+          {"     "}spacing.
+        </BodyLong>
+      </div>
+    );
+  },
+  argTypes: {
+    viewSpacing: {
+      control: {
+        type: "boolean",
+      },
+    },
+  },
+  args: {
+    viewSpacing: false,
+    icon: false,
   },
 };
 
