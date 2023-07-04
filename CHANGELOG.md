@@ -1,5 +1,39 @@
 # Changelog
 
+## 4.6.1
+
+### @navikt/ds-react
+
+- Skjema: Labels og Legends bruker nå inline-flex når readOnly er satt ([#2089](https://github.com/navikt/aksel/pull/2089))
+
+### @navikt/ds-css
+
+- Skjema: Labels og Legends bruker nå inline-flex når readOnly er satt ([#2089](https://github.com/navikt/aksel/pull/2089))
+
+## 4.6.0
+
+### @navikt/ds-react
+
+- Skjema: De fleste skjemakomponenter støtter nå `readOnly`-state ([#2080](https://github.com/navikt/aksel/pull/2080))
+
+### @navikt/ds-css
+
+- Skjema: De fleste skjemakomponenter har nå styling for `readOnly`-state ([#2080](https://github.com/navikt/aksel/pull/2080))
+
+## 4.5.0
+
+### @navikt/ds-react
+
+- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+### @navikt/ds-css
+
+- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+<!---->
+
+- - Button: Fikset outline-bug i tertiary-variant ved `:active`-state ([#2079](https://github.com/navikt/aksel/pull/2079))
+
 ## 4.4.2
 
 ### @navikt/ds-react

@@ -30,6 +30,10 @@
   padding: 0;
 }
 
+.navds-fieldset--readonly > :where(.navds-fieldset__legend) {
+  display: inline-flex;
+}
+
 .navds-fieldset:disabled > .navds-fieldset__legend,
 .navds-fieldset:disabled > .navds-fieldset__description {
   opacity: 0.3;

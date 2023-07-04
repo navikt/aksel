@@ -282,3 +282,9 @@
 .navds-date__popover:where(.navds-popover) {
   border: none;
 }
+
+/* Readonly */
+
+.navds-date__field--readonly .navds-date__field-button {
+  cursor: default;
+}

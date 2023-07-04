@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { BodyShort, Loader, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
 
 const SelectedIcon = () => (
   <svg
@@ -63,12 +64,12 @@ export interface SwitchProps
  *
  * @example
  * ```jsx
- * <Switch>Slå på notifikasjoner</Switch>
+ * <Switch>Varsle med SMS</Switch>
  * ```
  */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   (props, ref) => {
-    const { inputProps, size } = useFormField(props, "switch");
+    const { inputProps, size, readOnly } = useFormField(props, "switch");
 
     const {
       children,
@@ -90,11 +91,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       checkedProp !== undefined && setChecked(checkedProp);
     }, [checkedProp]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setChecked(e.target.checked);
-      props.onChange && props.onChange(e);
-    };
-
     return (
       <div
         className={cl(
@@ -105,18 +101,32 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           {
             "navds-switch--loading": loading,
             "navds-switch--disabled": inputProps.disabled ?? loading,
+            "navds-switch--readonly": readOnly,
           }
         )}
       >
         <input
-          {...omit(rest, ["size"])}
+          {...omit(rest, ["size", "readOnly"])}
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
           disabled={inputProps.disabled ?? loading}
           checked={checkedProp}
           defaultChecked={defaultChecked}
           ref={ref}
           type="checkbox"
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => {
+            if (readOnly) {
+              return;
+            }
+            setChecked(e.target.checked);
+            props.onChange && props.onChange(e);
+          }}
+          onClick={(e) => {
+            if (readOnly) {
+              e.preventDefault();
+              return;
+            }
+            props?.onClick?.(e);
+          }}
           className={cl(className, "navds-switch__input")}
         />
         <span className="navds-switch__track">
@@ -136,6 +146,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             })}
           >
             <BodyShort as="div" size={size} className="navds-switch__label">
+              <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
               {children}
             </BodyShort>
             {description && (

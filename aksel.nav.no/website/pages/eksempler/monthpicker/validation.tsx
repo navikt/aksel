@@ -16,13 +16,11 @@ const Example = () => {
   return (
     <div className="min-h-96">
       <MonthPicker {...monthpickerProps}>
-        <div className="grid gap-4">
-          <MonthPicker.Input
-            {...inputProps}
-            label="Velg månede"
-            error={hasError && "Du må velge månede"}
-          />
-        </div>
+        <MonthPicker.Input
+          {...inputProps}
+          label="Velg månede"
+          error={hasError && "Du må velge månede"}
+        />
       </MonthPicker>
     </div>
   );

@@ -3,7 +3,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <Select label="Hvilket land har du bosted i." disabled>
+    <Select label="Hvilket land har du bosted i." readOnly value="sverige">
       <option value="">Velg land</option>
       <option value="norge">Norge</option>
       <option value="sverige">Sverige</option>
@@ -20,5 +20,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 99,
+  index: 98,
 };

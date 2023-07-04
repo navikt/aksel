@@ -321,6 +321,9 @@ export const useRangeDatepicker = (
   };
 
   const handleFocus = (e, src: RangeT) => {
+    if (e.target.readOnly) {
+      return;
+    }
     !open && openOnFocus && setOpen(true);
     let day = parseDate(
       e.target.value,

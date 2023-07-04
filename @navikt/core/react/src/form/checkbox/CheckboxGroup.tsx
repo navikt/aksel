@@ -81,6 +81,7 @@ export const CheckboxGroup = forwardRef<
           "navds-checkbox-group",
           `navds-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`
         )}
+        nativeReadOnly={false}
       >
         <CheckboxGroupContext.Provider
           value={{
