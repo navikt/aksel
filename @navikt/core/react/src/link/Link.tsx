@@ -50,17 +50,28 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         ...rest
       },
       ref
-    ) => (
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl("navds-link", className, {
-          "navds-link--inline": inline,
-          "navds-link--spacing": spacing,
-          "navds-link--break-all": breakAll,
-        })}
-      />
-    )
+    ) =>
+      spacing ? (
+        <span className="navds-link-spacer">
+          <Component
+            {...rest}
+            ref={ref}
+            className={cl("navds-link", className, {
+              "navds-link--inline": inline,
+              "navds-link--break-all": breakAll,
+            })}
+          />
+        </span>
+      ) : (
+        <Component
+          {...rest}
+          ref={ref}
+          className={cl("navds-link", className, {
+            "navds-link--inline": inline,
+            "navds-link--break-all": breakAll,
+          })}
+        />
+      )
   );
 
 export default Link;

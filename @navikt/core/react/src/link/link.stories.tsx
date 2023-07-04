@@ -66,8 +66,8 @@ export const Inline = {
         <style>
           {viewSpacing &&
             `
-            .navds-link--spacing::before { background-color: red;}
-            .navds-link--spacing::after { background-color: green;}
+            .navds-link-spacer::before { background-color: red;}
+            .navds-link-spacer::after { background-color: green;}
             `}
           {`.storybook-custom-spacing { white-space: pre;}`}
         </style>

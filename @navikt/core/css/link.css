@@ -21,8 +21,8 @@
   word-break: break-all;
 }
 
-.navds-link--spacing::before,
-.navds-link--spacing::after {
+.navds-link-spacer::before,
+.navds-link-spacer::after {
   content: " ";
 }
 
