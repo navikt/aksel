@@ -50,8 +50,7 @@ export const Inline = {
       spacing = false,
     }) => (
       <Link href="#" inline={inline} spacing={spacing}>
-        {icon && <PlusCircleFillIcon />}
-        {children}
+        {icon && <PlusCircleFillIcon />} {children}{" "}
         {icon && <PlusCircleFillIcon />}
       </Link>
     );
@@ -70,9 +69,9 @@ export const Inline = {
           {`.storybook-custom-spacing { white-space: pre;}`}
         </style>
         <BodyLong>
-          <LinkD />
+          <LinkD inline />
           Eiusmod aute.
-          <LinkD />
+          <LinkD inline />
           Culpa sit aute est duis minim in in voluptate velit
           <LinkD inline>
             https://blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah.com
