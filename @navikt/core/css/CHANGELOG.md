@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 4.6.1
+
+### Patch Changes
+
+- Skjema: Labels og Legends bruker nå inline-flex når readOnly er satt ([#2089](https://github.com/navikt/aksel/pull/2089))
+
+## 4.6.0
+
+### Minor Changes
+
+- Skjema: De fleste skjemakomponenter har nå styling for `readOnly`-state ([#2080](https://github.com/navikt/aksel/pull/2080))
+
 ## 4.5.0
 
 ### Minor Changes

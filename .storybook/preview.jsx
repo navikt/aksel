@@ -4,7 +4,7 @@ import "./layout.css";
 export const parameters = {
   options: {
     storySort: {
-      method: "",
+      method: "alphabetical",
       order: ["Intro", "ds-react", ["form"], ["Default"], "ds-icons"],
       locales: "",
     },
