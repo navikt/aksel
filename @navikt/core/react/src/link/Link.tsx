@@ -15,6 +15,11 @@ export interface LinkProps
    */
   spacing?: boolean;
   /**
+   * Whether the link should break on all characters. Useful for long links with no "words".
+   * @default false
+   */
+  breakAll?: boolean;
+  /**
    * Link text
    */
   children: React.ReactNode;
@@ -41,6 +46,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         className,
         inline = false,
         spacing = false,
+        "break-all": breakAll = false,
         ...rest
       },
       ref
@@ -51,6 +57,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         className={cl("navds-link", className, {
           "navds-link--inline": inline,
           "navds-link--spacing": spacing,
+          "navds-link--break-all": breakAll,
         })}
       />
     )

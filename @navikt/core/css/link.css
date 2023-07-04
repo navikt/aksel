@@ -17,6 +17,10 @@
   overflow-wrap: break-word;
 }
 
+.navds-link.navds-link--break-all {
+  word-break: break-all;
+}
+
 .navds-link--spacing::before,
 .navds-link--spacing::after {
   content: " ";

@@ -44,13 +44,16 @@ export const Default = {
 
 export const Inline = {
   render: ({ icon, viewSpacing = false }) => {
-    const LinkD = ({
+    const LinkInline = ({
       children = "Ex aliqua incididunt",
-      inline = false,
       spacing = false,
+      "break-all": breakAll = false,
     }) => (
-      <Link href="#" inline={inline} spacing={spacing}>
-        {icon && <PlusCircleFillIcon />} {children}{" "}
+      <Link href="#" inline spacing={spacing} break-all={breakAll}>
+        {icon && <PlusCircleFillIcon />}
+        {spacing && !icon ? "" : " "}
+        {children}
+        {spacing && !icon ? "" : " "}
         {icon && <PlusCircleFillIcon />}
       </Link>
     );
@@ -69,46 +72,40 @@ export const Inline = {
           {`.storybook-custom-spacing { white-space: pre;}`}
         </style>
         <BodyLong>
-          <LinkD inline />
+          <LinkInline />
           Eiusmod aute.
-          <LinkD inline />
+          <LinkInline />
           Culpa sit aute est duis minim in in voluptate velit
-          <LinkD inline>
+          <LinkInline break-all>
             https://blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah.com
-          </LinkD>
+          </LinkInline>
           Incididunt laborum nisi nisi Lorem officia adipisicing non veniam
-          <LinkD inline>
+          <LinkInline>
             blah blah blah blah blah blah blah blah blah blah blah blah blah
             blah blah blah blah blah blah blah blah
-          </LinkD>
+          </LinkInline>
           dolor eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
-          <LinkD inline>Link</LinkD>
+          <LinkInline>Link</LinkInline>
         </BodyLong>
         <BodyLong>
-          <LinkD inline spacing>
-            Link
-          </LinkD>
+          <LinkInline spacing />
           Eiusmod aute.
-          <LinkD inline spacing>
-            Link
-          </LinkD>
+          <LinkInline spacing />
           Culpa sit aute est duis minim in in voluptate velit
-          <LinkD inline spacing>
+          <LinkInline spacing break-all>
             https://blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah.com
-          </LinkD>
+          </LinkInline>
           Incididunt laborum nisi nisi Lorem officia adipisicing non veniam
-          <LinkD inline spacing>
+          <LinkInline spacing>
             blah blah blah blah blah blah blah blah blah blah blah blah blah
             blah blah blah blah blah blah blah blah
-          </LinkD>
+          </LinkInline>
           dolor eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
-          <LinkD inline spacing>
-            Link
-          </LinkD>
+          <LinkInline spacing>Link</LinkInline>
         </BodyLong>
         <BodyLong className="storybook-custom-spacing">
           Custom{"   "}
-          <LinkD inline>link</LinkD>
+          <LinkInline>link</LinkInline>
           {"     "}spacing.
         </BodyLong>
       </div>
