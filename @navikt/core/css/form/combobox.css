@@ -185,6 +185,7 @@
 
 .navds-combobox__list-item,
 .navds-combobox__list-item__new-option {
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
