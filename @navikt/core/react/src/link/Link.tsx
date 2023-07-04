@@ -10,15 +10,10 @@ export interface LinkProps
    */
   inline?: boolean;
   /**
-   * Whether the link should have space around it.
-   * @default false
-   */
-  spacing?: boolean;
-  /**
    * Whether the link should break on all characters. Useful for long links with no "words".
    * @default false
    */
-  breakAll?: boolean;
+  "break-All"?: boolean;
   /**
    * Link text
    */
@@ -45,33 +40,20 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         as: Component = "a",
         className,
         inline = false,
-        spacing = false,
         "break-all": breakAll = false,
         ...rest
       },
       ref
-    ) =>
-      spacing ? (
-        <span className="navds-link-spacer">
-          <Component
-            {...rest}
-            ref={ref}
-            className={cl("navds-link", className, {
-              "navds-link--inline": inline,
-              "navds-link--break-all": breakAll,
-            })}
-          />
-        </span>
-      ) : (
-        <Component
-          {...rest}
-          ref={ref}
-          className={cl("navds-link", className, {
-            "navds-link--inline": inline,
-            "navds-link--break-all": breakAll,
-          })}
-        />
-      )
+    ) => (
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl("navds-link", className, {
+          "navds-link--inline": inline,
+          "navds-link--break-all": breakAll,
+        })}
+      />
+    )
   );
 
 export default Link;

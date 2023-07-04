@@ -21,11 +21,6 @@
   word-break: break-all;
 }
 
-.navds-link-spacer::before,
-.navds-link-spacer::after {
-  content: " ";
-}
-
 .navds-link.navds-link--inline:hover {
   text-decoration: underline;
 }

@@ -12,24 +12,32 @@ export default {
 };
 
 export const Default = {
-  render: ({ icon, inline, spacing }) => {
+  render: ({ icon, inline }) => {
     const LinkD = () => (
-      <Link href="#" inline={inline} spacing={spacing}>
-        {icon && <PlusCircleFillIcon />}Ex aliqua incididunt
-        {icon && <PlusCircleFillIcon />}
-      </Link>
+      <>
+        {" "}
+        <Link href="#" inline={inline}>
+          {icon && <PlusCircleFillIcon />}Ex aliqua incididunt
+          {icon && <PlusCircleFillIcon />}
+        </Link>{" "}
+      </>
     );
 
     if (inline) {
       return (
-        <BodyLong style={{ width: "800px", border: "1px solid black" }}>
-          Incididunt laborum nisi nisi Lorem
-          <LinkD />
-          in. Laborum aute fugiat officia adipisicing non veniam dolor nulla non
-          ex consectetur fugiat eiusmod aute. Culpa sit aute est duis minim in
-          in voluptate velit fugiat. Laboris est id deserunt ut ea Lorem eu.
-          Esse elit laboris aute commodo sint laborum fugiat aliqua.
-        </BodyLong>
+        <div
+          className="colgap"
+          style={{ width: "800px", border: "1px solid black" }}
+        >
+          <BodyLong>
+            Incididunt laborum nisi nisi Lorem
+            <LinkD />
+            in. Laborum aute fugiat officia adipisicing non veniam dolor nulla
+            non ex consectetur fugiat eiusmod aute. Culpa sit aute est duis
+            minim in in voluptate velit fugiat. Laboris est id deserunt ut ea
+            Lorem eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
+          </BodyLong>
+        </div>
       );
     }
     return <LinkD />;
@@ -38,24 +46,32 @@ export const Default = {
   args: {
     icon: false,
     inline: false,
-    spacing: false,
   },
 };
 
 export const Inline = {
-  render: ({ icon, viewSpacing = false }) => {
+  render: ({ icon }) => {
     const LinkInline = ({
       children = "Ex aliqua incididunt",
-      spacing = false,
       "break-all": breakAll = false,
     }) => (
-      <Link href="#" inline spacing={spacing} break-all={breakAll}>
-        {icon && <PlusCircleFillIcon />}
-        {icon ? " " : ""}
-        {children}
-        {icon ? " " : ""}
-        {icon && <PlusCircleFillIcon />}
-      </Link>
+      <>
+        {" "}
+        <Link href="#" inline break-all={breakAll}>
+          {icon && (
+            <>
+              <PlusCircleFillIcon />{" "}
+            </>
+          )}
+          {children}
+          {icon && (
+            <>
+              {" "}
+              <PlusCircleFillIcon />
+            </>
+          )}
+        </Link>{" "}
+      </>
     );
 
     return (
@@ -63,14 +79,7 @@ export const Inline = {
         className="colgap"
         style={{ width: "800px", border: "1px solid black" }}
       >
-        <style>
-          {viewSpacing &&
-            `
-            .navds-link-spacer::before { background-color: red;}
-            .navds-link-spacer::after { background-color: green;}
-            `}
-          {`.storybook-custom-spacing { white-space: pre;}`}
-        </style>
+        <style>{`.storybook-custom-spacing { white-space: pre;}`}</style>
         <BodyLong>
           <LinkInline />
           Eiusmod aute.
@@ -87,22 +96,6 @@ export const Inline = {
           dolor eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
           <LinkInline>Link</LinkInline>
         </BodyLong>
-        <BodyLong>
-          <LinkInline spacing />
-          Eiusmod aute.
-          <LinkInline spacing />
-          Culpa sit aute est duis minim in in voluptate velit
-          <LinkInline spacing break-all>
-            https://blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah.com
-          </LinkInline>
-          Incididunt laborum nisi nisi Lorem officia adipisicing non veniam
-          <LinkInline spacing>
-            blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah
-          </LinkInline>
-          dolor eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
-          <LinkInline spacing>Link</LinkInline>
-        </BodyLong>
         <BodyLong className="storybook-custom-spacing">
           Custom{"   "}
           <LinkInline>link</LinkInline>
@@ -111,15 +104,7 @@ export const Inline = {
       </div>
     );
   },
-  argTypes: {
-    viewSpacing: {
-      control: {
-        type: "boolean",
-      },
-    },
-  },
   args: {
-    viewSpacing: false,
     icon: false,
   },
 };
