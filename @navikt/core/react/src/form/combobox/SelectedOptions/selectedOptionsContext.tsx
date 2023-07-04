@@ -38,7 +38,7 @@ export const SelectedOptionsProvider = ({
     | "onToggleSelected"
   >;
 }) => {
-  const { setSearchTerm, setValue } = useInputContext();
+  const { clearInput, focusInput } = useInputContext();
   const { customOptions, removeCustomOption, addCustomOption } =
     useCustomOptionsContext();
   const {
@@ -66,20 +66,10 @@ export const SelectedOptionsProvider = ({
         ]);
       } else {
         setSelectedOptions([option]);
-        setValue(option);
-        setSearchTerm(option);
       }
       onToggleSelected?.(option, true);
     },
-    [
-      addCustomOption,
-      allowNewValues,
-      isMultiSelect,
-      onToggleSelected,
-      options,
-      setSearchTerm,
-      setValue,
-    ]
+    [addCustomOption, allowNewValues, isMultiSelect, onToggleSelected, options]
   );
 
   const removeSelectedOption = useCallback(
@@ -105,8 +95,19 @@ export const SelectedOptionsProvider = ({
       } else {
         addSelectedOption(option);
       }
+      if (!isMultiSelect) {
+        clearInput();
+      }
+      focusInput();
     },
-    [addSelectedOption, removeSelectedOption, selectedOptions]
+    [
+      addSelectedOption,
+      clearInput,
+      focusInput,
+      isMultiSelect,
+      removeSelectedOption,
+      selectedOptions,
+    ]
   );
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
