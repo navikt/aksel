@@ -189,13 +189,13 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
               title: "Kom i gang med Kode",
               desc: "Intro til alle kodepakkene våre",
               icon: CodeIcon,
-              href: "/grunnleggende/kode/kom-i-gang-med-kodepakkene",
+              href: "/grunnleggende/introduksjon/kom-i-gang-med-kodepakkene",
             },
             {
               title: "Kom i gang med Figma",
               desc: "Hvordan bruke Figma-bibliotekene våre",
               icon: FigmaIcon,
-              href: "/grunnleggende/styling/design-tokens",
+              href: "/grunnleggende/introduksjon/kom-i-gang-med-figma",
             },
             {
               title: "Forslag til nye komponenter",
