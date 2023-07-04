@@ -51,9 +51,9 @@ export const Inline = {
     }) => (
       <Link href="#" inline spacing={spacing} break-all={breakAll}>
         {icon && <PlusCircleFillIcon />}
-        {spacing && !icon ? "" : " "}
+        {icon ? " " : ""}
         {children}
-        {spacing && !icon ? "" : " "}
+        {icon ? " " : ""}
         {icon && <PlusCircleFillIcon />}
       </Link>
     );
