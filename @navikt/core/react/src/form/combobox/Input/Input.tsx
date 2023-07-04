@@ -21,6 +21,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       useSelectedOptionsContext();
     const {
       activeDecendantId,
+      allowNewValues,
       currentOption,
       toggleIsListOpen,
       isListOpen,
@@ -35,12 +36,31 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const onEnter = useCallback(
       (event: React.KeyboardEvent) => {
-        if (currentOption) {
+        if (shouldAutocomplete && selectedOptions.includes(value)) {
           event.preventDefault();
+          // Trying to set the same value that is already set, so just clearing the input
+          clearInput(event);
+        } else if (currentOption) {
+          event.preventDefault();
+          // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption);
+          clearInput(event);
+        } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
+          event.preventDefault();
+          // Autocompleting or adding a new value
+          toggleOption(value);
+          clearInput(event);
         }
       },
-      [currentOption, toggleOption]
+      [
+        allowNewValues,
+        clearInput,
+        currentOption,
+        selectedOptions,
+        shouldAutocomplete,
+        toggleOption,
+        value,
+      ]
     );
 
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {

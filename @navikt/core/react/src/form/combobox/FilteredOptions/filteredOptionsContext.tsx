@@ -129,7 +129,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     } else if ((value && value !== "") || isLoading) {
       toggleIsListOpen(true);
       if (shouldAutocomplete && filteredOptions[0]) {
-        //setFilteredOptionsIndex(getMinimumIndex());
         setAriaDescribedBy(
           `${id}-option-${filteredOptions[0].replace(" ", "-")}`
         );

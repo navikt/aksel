@@ -8,21 +8,20 @@ interface SelectedOptionsProps {
 }
 
 const Option = ({ option }: { option: string }) => {
-  const { removeSelectedOption } = useSelectedOptionsContext();
+  const { isMultiSelect, removeSelectedOption } = useSelectedOptionsContext();
 
   const onClick = (e) => {
     e.stopPropagation();
     removeSelectedOption(option);
   };
 
-  return (
-    <Chips.Removable
-      className="navds-combobox__selected-option"
-      onClick={onClick}
-    >
-      {option}
-    </Chips.Removable>
-  );
+  if (!isMultiSelect) {
+    return (
+      <div className="navds-combobox__selected-options--no-bg">{option}</div>
+    );
+  }
+
+  return <Chips.Removable onClick={onClick}>{option}</Chips.Removable>;
 };
 
 const SelectedOptions: React.FC<SelectedOptionsProps> = ({

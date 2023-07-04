@@ -33,7 +33,7 @@ export const Combobox = forwardRef<
   } = props;
 
   const { currentOption, toggleIsListOpen } = useFilteredOptionsContext();
-  const { isMultiSelect, selectedOptions } = useSelectedOptionsContext();
+  const { selectedOptions } = useSelectedOptionsContext();
 
   const {
     clearInput,
@@ -91,23 +91,17 @@ export const Combobox = forwardRef<
           )}
           onClick={focusInput}
         >
-          {!isMultiSelect ? (
+          {!shouldShowSelectedOptions ? (
             <Input
               id={inputProps.id}
-              key="combobox-input"
               ref={mergedInputRef}
               inputClassName={inputClassName}
               {...rest}
             />
           ) : (
-            <SelectedOptions
-              selectedOptions={
-                shouldShowSelectedOptions ? selectedOptions : undefined
-              }
-            >
+            <SelectedOptions selectedOptions={selectedOptions}>
               <Input
                 id={inputProps.id}
-                key="combobox-input"
                 ref={mergedInputRef}
                 inputClassName={inputClassName}
                 {...rest}

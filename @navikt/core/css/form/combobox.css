@@ -32,6 +32,16 @@
   flex: 1;
 }
 
+.navds-combobox__selected-options--no-bg {
+  font-family: inherit;
+  font-size: var(--a-font-size-large);
+  font-weight: var(--a-font-weight-regular);
+  letter-spacing: 0;
+  line-height: var(--a-font-line-height-large);
+  margin: 0;
+  padding-left: calc(0.5rem - 4px);
+}
+
 .navds-combobox__input-wrapper {
   width: 100%;
 }
