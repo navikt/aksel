@@ -1,7 +1,15 @@
+.navds-notificationbadge__wrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -50%);
+  height: 20px;
+  width: 20px;
+}
+
 .navds-notificationbadge {
   display: grid;
   place-content: center;
-  position: relative;
   transition-duration: 0.3s;
   transition-property: width, height, background-color;
   transition-timing-function: ease-in-out;
@@ -11,119 +19,24 @@
   font-size: 14px;
   line-height: 0;
   font-weight: 600;
+  background-color: var(--a-surface-danger);
+  color: var(--a-text-on-danger);
+  box-shadow: 0 0 0 2px var(--a-surface-default);
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .navds-notificationbadge--count {
   border-radius: var(--a-border-radius-full);
-  min-height: 1.5rem;
-  min-width: 1.5rem;
-  padding: var(--a-spacing-1);
+  min-height: 1rem;
+  padding-inline: var(--a-spacing-1);
 }
 
 .navds-notificationbadge--marker {
   border-radius: 100%;
   width: 12px;
   height: 12px;
-}
-
-.navds-notificationbadge--top-left {
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translate(-40%, -40%);
-}
-
-.navds-notificationbadge--top-right {
-  position: absolute;
-  right: 0;
-  top: 0;
-  transform: translate(40%, -40%);
-}
-
-.navds-notificationbadge--bottom-left {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  transform: translate(-40%, 40%);
-}
-
-.navds-notificationbadge--bottom-right {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  transform: translate(50%, 50%);
-}
-
-.navds-notificationbadge--neutral {
-  background-color: var(--a-surface-neutral);
-  color: var(--a-text-on-neutral);
-}
-
-.navds-notificationbadge--neutral:where(.navds-notificationbadge--count) {
-  box-shadow: 0 0 0 1px var(--a-gray-400);
-}
-
-.navds-notificationbadge--success {
-  background-color: var(--a-surface-success);
-  color: var(--a-text-on-success);
-}
-
-.navds-notificationbadge--success:where(.navds-notificationbadge--count) {
-  box-shadow: 0 0 0 1px var(--a-green-400);
-}
-
-.navds-notificationbadge--error {
-  background-color: var(--a-surface-danger);
-  color: var(--a-text-on-danger);
-}
-
-.navds-notificationbadge--error:where(.navds-notificationbadge--count) {
-  box-shadow: 0 0 0 1px var(--a-red-400);
-}
-
-.navds-notificationbadge--alt1 {
-  background-color: var(--a-surface-alt-1);
-  color: var(--a-text-on-alt-1);
-}
-
-.navds-notificationbadge--alt1:where(.navds-notificationbadge--count) {
-  box-shadow: 0 0 0 1px var(--a-purple-400);
-}
-
-.navds-notificationbadge--alt2 {
-  background-color: var(--a-surface-alt-2);
-  color: var(--a-text-on-alt-2);
-}
-
-.navds-notificationbadge--alt2:where(.navds-notificationbadge--count) {
-  box-shadow: 0 0 0 1px var(--a-limegreen-400);
-}
-
-.navds-notificationbadge--alt3 {
-  background-color: var(--a-surface-alt-3);
-  color: var(--a-text-on-alt-3);
-}
-
-.navds-notificationbadge--alt3:where(.navds-notificationbadge--count) {
-  box-shadow: 0 0 0 1px var(--a-deepblue-400);
-}
-
-.navds-notificationbadge--warning {
-  background-color: var(--a-surface-warning);
-  color: var(--a-text-on-warning);
-}
-
-.navds-notificationbadge--warning:where(.navds-notificationbadge--count) {
-  box-shadow: 0 0 0 1px var(--a-orange-400);
-}
-
-.navds-notificationbadge--info {
-  background-color: var(--a-surface-info);
-  color: var(--a-text-on-info);
-}
-
-.navds-notificationbadge--info:where(.navds-notificationbadge--count) {
-  box-shadow: 0 0 0 1px var(--a-lightblue-400);
 }
 
 .navds-notificationbadge--pulse::before {
