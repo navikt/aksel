@@ -20,9 +20,8 @@ import {
 import { WithSidebar } from "components/layout/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
 import { urlFor } from "@/sanity/interface";
 import { sidebarQuery, landingPageQuery } from "@/sanity/queries";
@@ -251,7 +250,7 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -260,7 +259,7 @@ const Wrapper = (props: any) => {
             type: "komponent_artikkel",
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

@@ -1,6 +1,7 @@
+import { FileResetIcon } from "@navikt/aksel-icons";
+import { DocumentIcon } from "@sanity/icons";
 import differenceInMonths from "date-fns/differenceInMonths";
-/* import differenceInDays from "date-fns/differenceInDays"; */
-
+import React from "react";
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
 export const artikkelPreview = (_type: string) => {
@@ -21,9 +22,6 @@ export const artikkelPreview = (_type: string) => {
           ) &&
           updateInfo
         ) {
-          /* const diff = Math.abs(
-            differenceInDays(new Date(updateInfo), new Date())
-          ); */
           return {
             title: heading,
             subtitle: `${isAfter(updateInfo) ? "UTDATERT |" : ""}  ${_type} ${
@@ -31,6 +29,12 @@ export const artikkelPreview = (_type: string) => {
                 ? `${(tema ?? kategori) && "/ "}${tema ?? kategori ?? ``}`
                 : ""
             }`,
+            media: () =>
+              isAfter(updateInfo) ? (
+                <FileResetIcon aria-hidden style={{ fontSize: "4rem" }} />
+              ) : (
+                <DocumentIcon />
+              ),
           };
         }
         return {

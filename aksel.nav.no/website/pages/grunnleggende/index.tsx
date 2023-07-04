@@ -10,9 +10,8 @@ import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { WithSidebar } from "components/layout/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import { grunnleggendeKategorier } from "../../sanity/config";
 import { urlFor } from "@/sanity/interface";
 import { sidebarQuery, landingPageQuery } from "@/sanity/queries";
@@ -130,7 +129,7 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -139,7 +138,7 @@ const Wrapper = (props: any) => {
             type: "ds_artikkel",
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 
