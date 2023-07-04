@@ -1,7 +1,8 @@
-import amplitude from "amplitude-js";
+import { SearchLogT } from "@/types";
 import getConfig from "next/config";
 import { Router } from "next/router";
 import { useCallback, useEffect, useMemo } from "react";
+import { track, init } from "@amplitude/analytics-browser";
 const { publicRuntimeConfig } = getConfig();
 
 export enum AmplitudeEvents {
@@ -19,30 +20,16 @@ export enum AmplitudeEvents {
 }
 
 export const initAmplitude = () => {
-  if (amplitude && !(typeof window === "undefined")) {
-    amplitude.getInstance().init("default", "", {
-      apiEndpoint: "amplitude.nav.no/collect-auto",
-      saveEvents: false,
-      includeUtm: true,
-      includeReferrer: true,
-      platform: window.location.toString(),
+  if (!(typeof window === "undefined")) {
+    init("1a9a84a5e557ac9635a250bc27d75030", undefined, {
+      useBatch: true,
+      serverUrl: "https://amplitude.nav.no/collect",
+      defaultTracking: {
+        attribution: false,
+      },
+      ingestionMetadata: { sourceName: window.location.toString() },
     });
   }
-};
-
-export type SearchLogT = {
-  type: "suksess" | "feilet" | "standard";
-  retries: number;
-  retriedQueries: string[];
-  query: string;
-  filter: string[];
-  hits: number;
-  searchedFromUrl: string;
-
-  index?: number;
-  accuracy?: string;
-  topResult?: boolean;
-  url?: string;
 };
 
 export const logSearch = (data: SearchLogT) => {
@@ -80,8 +67,8 @@ const isProduction = () => {
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
   return new Promise(function (resolve: any) {
     const eventData = data ? { ...data } : {};
-    if (amplitude && isProduction()) {
-      amplitude.getInstance().logEvent(eventName, eventData, resolve);
+    if (isProduction()) {
+      track(eventName, eventData, resolve);
     }
   });
 }
@@ -109,7 +96,17 @@ export const usePageView = (router: Router, pageProps: any) => {
       } catch (error) {
         isDevelopment && console.error(error);
       }
-      logPageView(e, data, first);
+      /* first-prop might be an object */
+      logPageView(
+        e,
+        {
+          ...data,
+          ...(pageProps?.title && pageProps?.title.length > 0
+            ? { sidetittel: pageProps.title }
+            : {}),
+        },
+        first === true
+      );
       try {
         if (isForside && isProduction() && !!pageId) {
           fetch(`/api/log-page-view?id=${pageId}`);

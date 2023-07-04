@@ -35,9 +35,16 @@
   border-color: var(--ac-textfield-hover-border, var(--a-border-action));
 }
 
-.navds-text-field__input:focus {
+.navds-text-field__input:focus-visible {
   outline: none;
   box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-text-field__input:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 /**
@@ -48,8 +55,14 @@
   box-shadow: 0 0 0 1px var(--ac-textfield-error-border, var(--a-border-danger));
 }
 
-.navds-text-field--error > .navds-text-field__input:focus:not(:hover):not(:disabled) {
+.navds-text-field--error > .navds-text-field__input:focus-visible:not(:hover):not(:disabled) {
   box-shadow: 0 0 0 1px var(--a-border-danger), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-text-field--error > .navds-text-field__input:focus:not(:hover):not(:disabled) {
+    box-shadow: 0 0 0 1px var(--a-border-danger), var(--a-shadow-focus);
+  }
 }
 
 /* Disabled handling */
@@ -60,11 +73,10 @@
   cursor: not-allowed;
 }
 
-.navds-text-field__input[readonly] {
-  background-color: var(--ac-textfield-bg, var(--a-surface-default));
-  border-color: var(--ac-textfield-border, var(--a-border-default));
-  box-shadow: none;
-  cursor: not-allowed;
+.navds-text-field--readonly .navds-text-field__input {
+  background-color: var(--a-surface-subtle);
+  border-color: var(--a-border-subtle);
+  cursor: default;
 }
 
 /**

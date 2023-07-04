@@ -1,465 +1,516 @@
 # @navikt/ds-react
 
-## 2.6.0
+## 4.6.1
+
+### Patch Changes
+
+- Skjema: Labels og Legends bruker nå inline-flex når readOnly er satt ([#2089](https://github.com/navikt/aksel/pull/2089))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.6.1
+
+## 4.6.0
+
+### Minor Changes
+
+- Skjema: De fleste skjemakomponenter støtter nå `readOnly`-state ([#2080](https://github.com/navikt/aksel/pull/2080))
 
 ### Patch Changes
 
 - Updated dependencies []:
-  - @navikt/ds-icons@2.6.0
+  - @navikt/aksel-icons@4.6.0
+
+## 4.5.0
+
+### Minor Changes
+
+- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.5.0
+
+## 4.4.2
+
+### Patch Changes
+
+- Textarea: Fikset i18n for counter ([`718b3204d`](https://github.com/navikt/aksel/commit/718b3204d8714c4fc515dcad484424214bdc0c77))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.4.2
+
+## 4.4.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.4.1
+
+## 4.4.0
+
+### Minor Changes
+
+- Fikset klassenavn brukt for popover i Datepicker og Monthpicker ([PR](https://github.com/navikt/aksel/pull/2041))
+
+## 4.3.0
+
+### Minor Changes
+
+- Popover og Helptext har nå luft mot siden av skjerm på mindre flater ([PR](https://github.com/navikt/aksel/pull/2069))
+
+## 4.2.0
+
+### Minor Changes
+
+- Oppdatert Chat: `size` og `variant`-prop, optional `avatar`, uu og ui-forbedringer ([PR](https://github.com/navikt/aksel/pull/2048))
+
+## 4.1.7
+
+### Patch Changes
+
+- Fikset JSDom-problemer ved testing av Timeline
+
+- La til `wrapperClassname`-prop for HelpText ([PR](https://github.com/navikt/aksel/pull/2056))
+
+## 4.1.6
+
+### Patch Changes
+
+- Timeline-period brakk ved bruk av JSDom i vitest og jest
+
+## 4.1.5
+
+### Patch Changes
+
+- `OverridableComponent` fungerer nå med komponenter som allerede bruker 'as'-prop. ([PR](https://github.com/navikt/aksel/pull/2051))
+
+- Popover: `bubbleEscape`-prop tilbyr muligheten for escape-events til å sendes opp gjennom dom-treet. ([PR](https://github.com/navikt/aksel/pull/2052))
+
+## 4.1.3
+
+### Patch Changes
+
+- `className` ble ikke riktig forwardet til ikke-klikkbar Period i Timeline
+
+## 4.1.2
+
+### Patch Changes
+
+- La til JSDoc for Skeleton-komponent
+
+## 4.1.0
+
+### Minor Changes
+
+- Chips: `neutral` og `action`-varianter for Chips.Toggle. `checkmark`-prop for Chips.Toggle ([PR](https://github.com/navikt/aksel/pull/2035))
+
+- Ny komponent Skeleton! ([PR](https://github.com/navikt/aksel/pull/1821))
+
+### Patch Changes
+
+- La til JSDoc dokumentasjon for alle komponenter ([PR](https://github.com/navikt/aksel/pull/2034))
+
+- Accordion: La til `indent`-prop ([PR](https://github.com/navikt/aksel/pull/2027))
+
+## 4.0.0
+
+### Major Changes
+
+- Datepicker og Monthpicker er ute av beta. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h4ef68ae743b0) ([PR](https://github.com/navikt/aksel/pull/2026))
+
+- Komponenter i `@navikt/ds-react-internal` er flyttet over til `@navikt/ds-react`. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h3b8538e1981d) ([PR](https://github.com/navikt/aksel/pull/2026))
+
+## 3.4.0
+
+### Minor Changes
+
+- Tag: `moderate`-variant ([PR](https://github.com/navikt/aksel/pull/2010))
+
+## 3.3.1
+
+### Patch Changes
+
+- CopyButton: native `Clipboard API` ([PR](https://github.com/navikt/aksel/pull/2005))
+
+## 3.3.0
+
+### Patch Changes
+
+- Timeline: popover/tooltip vises nå på hover, ikke onClick. ([PR](https://github.com/navikt/aksel/pull/1995))
+
+## 3.2.4
+
+### Patch Changes
+
+- Search: Støtter nå htmlSize-prop ([PR](https://github.com/navikt/aksel/pull/2000))
+
+## 3.2.3
+
+### Patch Changes
+
+- Datepicker: Oppdatert small-variant av Datepicker.Input. UI-oppdatert samtidig. ([PR](https://github.com/navikt/aksel/pull/1993))
+
+- CopyButton: `xsmall`-variant for bruk i tabeller ([PR](https://github.com/navikt/aksel/pull/1994))
+
+## 3.2.2
+
+### Patch Changes
+
+- CopyButton: Fjernet use-client directive fra komponent. (warning i vite/rollup)
+
+## 3.2.0
+
+### Minor Changes
+
+- Ny komponent CopyButton! Erstatter `CopyToClipboard` som nå er tagget som deprecated ([PR](https://github.com/navikt/aksel/pull/1982))
+
+## 3.1.0
+
+### Patch Changes
+
+- Oppdatert Label og Description spacing for alle skjemakomponenter ([PR](https://github.com/navikt/aksel/pull/1967))
+
+## 3.0.1
+
+### Patch Changes
+
+- Fjernet `@navikt/ds-icons` fra dependencies
+
+- Accordion: Oppdatert default headingSize brukt i i Accordion.Header
+
+## 3.0.0
+
+### Major Changes
+
+- Accordion: left-aligner chevron, `neutral`-variant, `size`-prop ([PR](https://github.com/navikt/aksel/pull/1964))
+
+- Bruker nå nå `@navikt/aksel-icons` for interne ikoner ([PR](https://github.com/navikt/aksel/pull/1964))
+
+## 2.9.1
+
+### Patch Changes
+
+- ExpansionCard: Støtter nå `aria-labelledby` i tillegg til `aria-label` ([PR](https://github.com/navikt/aksel/pull/1944))
+
+## 2.8.16
+
+### Patch Changes
+
+- ExpansionCard: ExpansionCard.Content sendte ikke `className` videre
+
+- Datepicker. Bedre håndtering av visning for out-of-range-datoer ([PR](https://github.com/navikt/aksel/pull/1929))
+
+## 2.8.14
+
+### Patch Changes
+
+- Datepicker/Monthpicker: Oppdaterer vist måneder ved popover åpne/lukk. Fikser out-of-range håndtering av `today`
+
+## 2.8.10
+
+### Patch Changes
+
+- Datepicker/Monthpicker: refaktorert event-handling i hooks ([PR](https://github.com/navikt/aksel/pull/1907))
+
+## 2.8.7
+
+### Patch Changes
+
+- Fikset typografi-bruk for `Radio` og `Checkbox`.
+
+## 2.8.3
+
+### Patch Changes
+
+- Textarea: oppdatert counter-tekst + mulighet for lokalisering ([PR](https://github.com/navikt/aksel/pull/1875))
+
+## 2.8.2
+
+### Patch Changes
+
+- ExpansioCard: Oppdatert typografibruk ([PR](https://github.com/navikt/aksel/pull/1870))
+
+## 2.8.1
+
+### Patch Changes
+
+- ExpansionCard: Oppdaetrt standard title-size til `medium`
+
+## 2.8.0
+
+### Minor Changes
+
+- Ny komponent ExpansionCard! ([PR](https://github.com/navikt/aksel/pull/1820))
+
+## 2.6.2
+
+### Patch Changes
+
+- Textarea: Fikset React v18 problem med `TextareaAutosize`
+
+## 2.6.1
+
+### Patch Changes
+
+- Search: `onSearchClick`-prop for lettere submit-handling
 
 ## 2.5.1
 
 ### Patch Changes
 
-- [`ac1e69b34`](https://github.com/navikt/aksel/commit/ac1e69b342ae207db2e80e3058555c56902e5832) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :recycle: Refaktorert nested-list logikk
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.5.1
-
-## 2.5.0
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.5.0
-
-## 2.4.3
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.4.3
+- List: Refaktorert nestede lister
 
 ## 2.4.2
 
 ### Patch Changes
 
-- [#1823](https://github.com/navikt/aksel/pull/1823) [`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8) Thanks [@kschieren](https://github.com/kschieren)! - added support for nested lists
-
-- Updated dependencies [[`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8)]:
-  - @navikt/ds-icons@2.4.2
+- List: la til støtte for nestede lister ([PR](https://github.com/navikt/aksel/pull/1823))
 
 ## 2.4.1
 
 ### Patch Changes
 
-- [#1827](https://github.com/navikt/aksel/pull/1827) [`98c06b0be`](https://github.com/navikt/aksel/commit/98c06b0be20debff9969af874d5239ec920fa401) Thanks [@kschieren](https://github.com/kschieren)! - Added fixedWeeks prop to standalone datepicker
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.4.1
+- Datepicker: la til `fixedWeeks`-prop for å alltid vise 6 uker i Datepicker.Standalone ([PR](https://github.com/navikt/aksel/pull/1827))
 
 ## 2.4.0
 
 ### Minor Changes
 
-- [#1807](https://github.com/navikt/aksel/pull/1807) [`70eeb24b3`](https://github.com/navikt/aksel/commit/70eeb24b38ac871c7f2e31e1621b949669c401b6) Thanks [@kschieren](https://github.com/kschieren)! - Added List component
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.4.0
-
-## 2.3.1
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.3.1
-
-## 2.3.0
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.3.0
+- Ny komponent List! ([PR](https://github.com/navikt/aksel/pull/1807))
 
 ## 2.2.0
 
 ### Minor Changes
 
-- [#1789](https://github.com/navikt/aksel/pull/1789) [`c0929a534`](https://github.com/navikt/aksel/commit/c0929a534dc8effece5435f8be550cb7931a52b1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Button og ToggleGroup har nå en neutral-variant, oppdatert neutral-tokens
+- ToggleGroup: `neutral`-variant ([PR](https://github.com/navikt/aksel/pull/1789))
 
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.2.0
+- Button: `neutral`-variant ([PR](https://github.com/navikt/aksel/pull/1789))
 
 ## 2.1.7
 
 ### Patch Changes
 
-- [`6ac97aeb3`](https://github.com/navikt/aksel/commit/6ac97aeb34735020e5a2083e51e836877abaefa3) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset rekkefølge på onValidate og onRangeChange i useRangepicker-hook
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.1.7
+- Datepicker: Fikset rekkefølge på `onValidate` og `onRangeChange` i useRangepicker-hook
 
 ## 2.1.6
 
 ### Patch Changes
 
-- [#1777](https://github.com/navikt/aksel/pull/1777) [`cd1c93f9d`](https://github.com/navikt/aksel/commit/cd1c93f9d471fbbc38215d788a73f21b5b216c5b) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Datepicker og monthpicker kan nå bestemme om popover skal dukke opp ved fokus
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.1.6
+- Datepicker/Monthpicker: `openOnFocus`-prop for manuell håndtering av popover ([PR](https://github.com/navikt/aksel/pull/1777))
 
 ## 2.1.5
 
 ### Patch Changes
 
-- Hotfix: ESM import fra date-fns feilet
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.1.5
+- Datepicker: ESM import fra date-fns fungerer nå
 
 ## 2.1.4
 
 ### Patch Changes
 
-- [`87f194c1d`](https://github.com/navikt/aksel/commit/87f194c1dc29b10a604de676b358d117e2dbf52f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset edgecase i useRangepicker der valg av startdato etter sluttdato ga feil output
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.1.4
+- Datepicker: Fikset edgecase i `useRangepicker` der valg av startdato etter sluttdato ga feil output
 
 ## 2.1.3
 
 ### Patch Changes
 
-- [#1771](https://github.com/navikt/aksel/pull/1771) [`494566e60`](https://github.com/navikt/aksel/commit/494566e604e958363f75ebfa2adbc1669397636a) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Monthpicker håndterer nå visning av År riktig
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.1.3
-
-## 2.1.2
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.1.2
+- Monthpicker: håndterer visning av år riktig ([PR](https://github.com/navikt/aksel/pull/1771))
 
 ## 2.1.1
 
 ### Patch Changes
 
-- [#1759](https://github.com/navikt/aksel/pull/1759) [`dcf5cfc06`](https://github.com/navikt/aksel/commit/dcf5cfc06b751341559ef30085bd974820531e57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset @types/react v18 feil introdusert i v2.0.6
-
-- Updated dependencies [[`dcf5cfc06`](https://github.com/navikt/aksel/commit/dcf5cfc06b751341559ef30085bd974820531e57)]:
-  - @navikt/ds-icons@2.1.1
+- Fikset `@types/react` v18 feil introdusert i v2.0.6 ([PR](https://github.com/navikt/aksel/pull/1759))
 
 ## 2.1.0
 
 ### Minor Changes
 
-- [`0873fe652`](https://github.com/navikt/aksel/commit/0873fe6520e817e462197c162b49c05826da4838) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Datepicker/Monthpicker støtter nå år med 2 siffer i input
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.1.0
+- Datepicker/Monthpicker: år med 2 siffer i input fungerer nå
 
 ## 2.0.18
 
 ### Patch Changes
 
-- [`98177d0cd`](https://github.com/navikt/aksel/commit/98177d0cd3802029dcf398ce93c1767d3b0860c5) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bedre typer for ref i datepicker
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.18
-
-## 2.0.17
-
-### Patch Changes
-
-- Updated dependencies [[`27e3dfee0`](https://github.com/navikt/aksel/commit/27e3dfee07e135893e9f62cd32f80ed83a3510de)]:
-  - @navikt/ds-icons@2.0.17
-
-## 2.0.16
-
-### Patch Changes
-
-- Updated dependencies [[`54f8b0795`](https://github.com/navikt/aksel/commit/54f8b07956bbfb7de51f6682a5fc64903bfd1bdf)]:
-  - @navikt/ds-icons@2.0.16
+- Datepicker: Bedre typer for `ref`
 
 ## 2.0.15
 
 ### Patch Changes
 
-- [#1748](https://github.com/navikt/aksel/pull/1748) [`22dfd8e60`](https://github.com/navikt/aksel/commit/22dfd8e60315c421749394d35e41f412a00a7593) Thanks [@KenAJoh](https://github.com/KenAJoh)! - toptextPosition prop i Chat for horisontal plassering av navn og dato.
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.15
+- Chat: `toptextPosition`-prop for horisontal plassering av navn og dato. ([PR](https://github.com/navikt/aksel/pull/1748))
 
 ## 2.0.14
 
 ### Patch Changes
 
-- [`8e5c55443`](https://github.com/navikt/aksel/commit/8e5c554431c98b1b658c5054c0b3cf08b8a65e52) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bumpet @floating-ui/react
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.14
-
-## 2.0.13
-
-### Patch Changes
-
-- Updated dependencies [[`a6c339123`](https://github.com/navikt/aksel/commit/a6c3391237f13394063e4c004ac9efb1875fc944)]:
-  - @navikt/ds-icons@2.0.13
-
-## 2.0.12
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.12
-
-## 2.0.11
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.11
-
-## 2.0.10
-
-### Patch Changes
-
-- Button submittet form i table
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.10
-
-## 2.0.9
-
-### Patch Changes
-
-- ShouldCloseOnEsc i Modal
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.9
-
-## 2.0.8
-
-### Patch Changes
-
-- Confirmationpanel wrappet med div
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.8
+- Oppdatert `@floating-ui/react`-versjon
 
 ## 2.0.7
 
 ### Patch Changes
 
-- :bug: Fikset keyboard-click i monthpicker
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.7
+- Monthpicker: Fikset keyboard-click
 
 ## 2.0.6
 
 ### Patch Changes
 
-- DateInput hadde duplikat className satt
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.6
-
-## 2.0.5
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.5
-
-## 2.0.4
-
-### Patch Changes
-
-- Updated dependencies [[`e4b6237e1`](https://github.com/navikt/aksel/commit/e4b6237e1bbf13b1ce5415845d558831b47caf7c)]:
-  - @navikt/ds-icons@2.0.4
+- Datepicker: Datepicker.Input satt `className` flere ganger
 
 ## 2.0.3
 
 ### Patch Changes
 
-- :sparkles: La til muligheten til å velge layout-strategi for datepicker-popover
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.3
+- Datepicker: `strategi`-prop for layout-strategi av popover
 
 ## 2.0.2
 
 ### Patch Changes
 
-- :bug: Fikset click-event for datepicker
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.2
-
-## 2.0.1
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@2.0.1
+- Datepicker: onClick-event fikset
 
 ## 2.0.0
 
 ### Major Changes
 
-- [`6b96e4833`](https://github.com/navikt/aksel/commit/6b96e48330c2e013a1acee85cefccd9ccc1aece4) Thanks [@KenAJoh](https://github.com/KenAJoh)! - v2: Tokens update and font-loading
+- Fonter blir bruk i all typografi blir nå lastet fra CDN
 
 ## 1.5.10
 
 ### Patch Changes
 
-- [#1717](https://github.com/navikt/aksel/pull/1717) [`d9352982d`](https://github.com/navikt/aksel/commit/d9352982d42d5d12a9c5fc345e546f57c753738d) Thanks [@vebnor](https://github.com/vebnor)! - Fikset parentSelector prop i Modal
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.10
-
-## 1.5.9
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.9
-
-## 1.5.8
-
-### Patch Changes
-
-- console.log removed
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.8
+- Modal: `parentSelector`-prop i Modal ([PR](https://github.com/navikt/aksel/pull/1717))
 
 ## 1.5.7
 
 ### Patch Changes
 
-- defaultMonth/Year prop date-komponent
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.7
+- Datepicker: `defaultMonth` og `Year` prop lagt til
 
 ## 1.5.6
 
 ### Patch Changes
 
-- Datepicker fungerte ikke med open shadow-dom
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.6
-
-## 1.5.5
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.5
-
-## 1.5.4
-
-### Patch Changes
-
-- Updated dependencies [[`77302a30b`](https://github.com/navikt/aksel/commit/77302a30b8eef8dc00b2d2e9c904a3f57da81a11)]:
-  - @navikt/ds-icons@1.5.4
-
-## 1.5.3
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.3
+- Datepicker: fungerer nå med `open` shadow-dom
 
 ## 1.5.2
 
 ### Patch Changes
 
-- :memo: Rename FilterChips to ToggleChips
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.2
-
-## 1.5.1
-
-### Patch Changes
-
-- Flex-wrap chips.css
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.1
+- Chips: `FilterChips` heter nå `ToggleChips`
 
 ## 1.5.0
 
 ### Minor Changes
 
-- [#1684](https://github.com/navikt/aksel/pull/1684) [`e19bf67b3`](https://github.com/navikt/aksel/commit/e19bf67b337dea39989c68b5e9c2591cf0d5b40f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Oppdaterte tag-varianter
+- Tag: `filles`-varianter ([PR](https://github.com/navikt/aksel/pull/1684))
 
-- [#1668](https://github.com/navikt/aksel/pull/1668) [`97c5f60e9`](https://github.com/navikt/aksel/commit/97c5f60e9111da7e08f55c8d0aa29581f0a9b1ca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Chips komponent :sparkles:
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.5.0
+- Ny komponent Chips! ([PR](https://github.com/navikt/aksel/pull/1668))
 
 ## 1.4.4
 
 ### Patch Changes
 
-- Eksponerer validation-typer
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.4.4
+- Datepicker: Eksponerer `onValidation`-typer
 
 ## 1.4.3
 
 ### Patch Changes
 
-- :sparkles: Validering og inputFormat i Date-komponenter
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.4.3
-
-## 1.4.2
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.4.2
+- Datepicker: Validering og inputFormat funksjonalitet
 
 ## 1.4.1
 
 ### Patch Changes
 
-- [`3c08651df`](https://github.com/navikt/aksel/commit/3c08651df28c3e19dd8c8a7a1d0032200bec473d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Date-komponenter følger språkrådets dato-formatering for måneder.
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.4.1
+- Datepicker: Følger språkrådets dato-formatering for måneder.
 
 ## 1.4.0
 
 ### Minor Changes
 
-- [`1bdb7e377`](https://github.com/navikt/aksel/commit/1bdb7e3777ece28d153991b78dbdd289366fca57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - [#1702](https://github.com/navikt/aksel/pull/1702) [`20bcc28cb`](https://github.com/navikt/aksel/commit/20bcc28cb0a886aa40d2c1b042fb2706a144c014) Thanks [@andnorda](https://github.com/andnorda)! - Global Provider komponent for håndtering av global config
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @navikt/ds-icons@1.4.0
+- Ny komponent Provider! For håndtering av global config på tvers av komponenter
 
 ## 1.3.39
 
 ### Patch Changes
 
-- [`40f0b3340`](https://github.com/navikt/aksel/commit/40f0b3340d01bf85fecc04f2f3a8e8b2acf996f1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bump for latest-tag
+- useId-bug fikset ved bruk i både react 17 og 18
 
-- Updated dependencies [[`40f0b3340`](https://github.com/navikt/aksel/commit/40f0b3340d01bf85fecc04f2f3a8e8b2acf996f1)]:
-  - @navikt/ds-icons@1.3.39
+- Datepicker: Patchet UX-bugs ved navigering til fortid/nåtid
 
-## 1.3.38
+- HelpText: Reverserte til å tillate bruk av `React.ReactNode` som children
 
-### Patch Changes
+- DatePicker og MonthPicker er tilgjengelig som Beta
 
-- Updated dependencies [[`aa506975b`](https://github.com/navikt/aksel/commit/aa506975b4466d4daa79c75f5f9faa255b7fae42)]:
-  - @navikt/ds-icons@1.3.38
+- Modal: `overlayClassName`-prop lagt til
+
+- ConfirmationPanel: Checkbox lenker nå til innholdet i `aria-describedby`
+
+- Table: `shadeOnHover`-prop for å skru av/på hover-effekt
+
+- Table: `colSpan`-prop på `Table.ExpandableRow`
+
+- HelpText: har nå standard max-width på `65ch`
+
+- Stepper: `interactive` og `completed`-props for wizard-løsninger
+
+## 1.2.0
+
+### Minor Changes
+
+- Dropdown: `closeOnSelect`-prop for å skru av/på lukking av dropdown ved valg
+
+## 1.1.0
+
+### Minor Changes
+
+- Dropdown: `onSelect`-prop for callback ved valg av element
+
+## 1.0.0
+
+## Major Changes
+
+- Samversjonering: Alle pakker fra Aksel har nå, og vil i fremtiden ha samme versjonsnummer.
+
+- Accordion/ReadMore: `renderContentWhenClosed`-prop fjernet
+
+- Button: `icon` og `iconPosition`-prop for bedre ikonplassering
+
+- Tabs: `loop`-prop er flyttet fra `Tabs.Tablist` til `Tabs`. `iconPosition`-prop er flyttet fra `Tabs.Tab` til `Tabs`
+
+- Chat: `SpeechBubble`-komponent er renamet til `Chat`.
+
+- Chat: `topText` heter nå `name` og `timestamp`, `illustration` heter nå `avatar` og `illustrationBgColor` heter nå `avatarBgColor`
+
+- Pagination: `medium` -> `small`, `small` -> `xsmall`
+
+- Popover: `auto`, `auto-start` og `auto-end` er fjernet som `placement`-prop
+
+- CopyToClipboard: `iconPlacement` er renamet til `iconPosition`
+
+- ConfirmationPanel: `ref` er flyttet fra wrapper-div til checkbox
+
+- Stepper: `StepIndicator` er refaktorert og renamet til `Stepper`. `StepIndicator`-komponenten er fjernet
+
+- MicroCard: er deprecated
+
+- PageHeader: er deprecated
+
+- Menu: er deprecated
+
+- Divider: er deprecated og renamet til `Dropdown.Menu.Divider`
+
+- `@material/ui` er fjernet som dependency
+
+- `react-popper` og `@popperjs/core` er fjernet som dependency. Bruker nå `@floating-ui/react-dom-interactive`
+
+- `classnames` er byttet ut med `clsx` internt
+
+- `react-collapse` er fjernet som dependency
+
+- `uuid` er fjernet som dependency. Bruker nå intern løsning for id-håndtering
+
+- Label: er nå standard `label`-tag (tidligere p-tag)

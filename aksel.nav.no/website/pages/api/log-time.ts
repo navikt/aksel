@@ -1,6 +1,7 @@
-import { noCdnClient } from "@/sanity-client";
+import { noCdnClient } from "@/sanity/client.server";
 import { NextApiRequest, NextApiResponse } from "next";
 import { calcNewAverage } from "./log-scroll";
+import { logger } from "logger";
 
 const token = process.env.SANITY_WRITE_KEY;
 
@@ -47,7 +48,7 @@ export default async function logTime(
     })
     .commit()
     .catch((err) => {
-      console.error("Error:", err);
+      logger.error(err);
       return res.status(500).json({ message: "Error updating page" });
     });
 

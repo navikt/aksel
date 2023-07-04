@@ -1,4 +1,4 @@
-import { Back, Next } from "@navikt/ds-icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "clsx";
 import React, {
@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { mergeRefs, debounce } from "..";
+import { debounce, mergeRefs } from "..";
 import { TabsContext } from "./Tabs";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,10 +18,6 @@ export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
 }
-
-export type TabListType = React.ForwardRefExoticComponent<
-  TabListProps & React.RefAttributes<HTMLDivElement>
->;
 
 export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, ...rest }, ref) => {
@@ -103,9 +99,9 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
         }}
       >
         {dir === -1 ? (
-          <Back title="scroll tilbake" />
+          <ChevronLeftIcon title="scroll tilbake" />
         ) : (
-          <Next title="scroll neste" />
+          <ChevronRightIcon title="scroll neste" />
         )}
       </div>
     );
@@ -127,6 +123,6 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
       </div>
     );
   }
-) as TabListType;
+);
 
 export default TabList;

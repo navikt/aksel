@@ -1,25 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
+import { withErrorBoundary } from "@/error-boundary";
+import { BildeT } from "@/types";
 import { BodyLong, Link } from "@navikt/ds-react";
 import cl from "clsx";
-import React from "react";
-import { urlFor, SanityT } from "@/lib";
-import { withErrorBoundary } from "@/error-boundary";
-import style from "./index.module.css";
 import NextLink from "next/link";
+import style from "./index.module.css";
+import { urlFor } from "@/sanity/interface";
 
-const Bilde = ({
-  node,
-  className,
-}: {
-  node: SanityT.Schema.bilde & {
-    background?: {
-      rgb: { a: number; b: number; g: number; r: number };
-      alpha: number;
-    };
-    dekorativt?: boolean;
-  };
-  className?: string;
-}): JSX.Element => {
+const Bilde = ({ node, className }: { node: BildeT; className?: string }) => {
   if (!node || !node.asset) {
     return null;
   }

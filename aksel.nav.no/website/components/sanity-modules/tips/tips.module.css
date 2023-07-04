@@ -1,7 +1,0 @@
-.tips {
-  @apply bg-gray-50;
-}
-
-:global(.aksel-artikkel) .tips {
-  @apply bg-white;
-}

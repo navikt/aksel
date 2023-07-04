@@ -1,15 +1,7 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
 import { BodyShort, Detail, Heading, Tooltip } from "@navikt/ds-react";
 import { Highlighter } from "./Highlight";
-
-export type PropT = {
-  _type: "komponent";
-  _key: string;
-  title?: string;
-  overridable?: boolean;
-  propref?: SanityT.Schema.ds_props;
-};
+import { PropTableT } from "@/types";
 
 const List = ({ prop, parent }: { prop: any; parent: string }) => {
   if (prop?.description && prop.description.includes("@private")) {
@@ -27,7 +19,11 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
             prop?.required ? "" : "?"
           } `}</span>
         ) : (
-          <Tooltip content={`${prop.defaultValue}`} arrow={false} delay={0}>
+          <Tooltip
+            content={`default: ${prop.defaultValue}`}
+            arrow={false}
+            delay={0}
+          >
             <span className="mr-2 cursor-pointer border-b border-dashed border-gray-600 font-semibold">{`${
               prop.name
             }${prop?.required ? "" : "?"}`}</span>
@@ -51,7 +47,7 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
   );
 };
 
-const PropTable = ({ komponent }: { komponent: PropT }): JSX.Element => {
+const PropTable = ({ komponent }: { komponent: PropTableT }) => {
   return (
     <div>
       <Heading

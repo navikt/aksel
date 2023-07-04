@@ -1,11 +1,10 @@
 import "@navikt/ds-css/index.css";
-import "@navikt/ds-css-internal/index.css";
 import "./layout.css";
 
 export const parameters = {
   options: {
     storySort: {
-      method: "",
+      method: "alphabetical",
       order: ["Intro", "ds-react", ["form"], ["Default"], "ds-icons"],
       locales: "",
     },

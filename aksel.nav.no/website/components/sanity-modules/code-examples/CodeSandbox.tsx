@@ -1,11 +1,10 @@
-import { Edit } from "@navikt/ds-icons";
+import { PencilIcon } from "@navikt/aksel-icons";
 import { getParameters } from "codesandbox/lib/api/define";
 
 const indexTsx = `import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import "@navikt/ds-css";
-import "@navikt/ds-css-internal";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -26,9 +25,7 @@ export const CodeSandbox = ({ code }: { code: string }) => {
             "react-dom": "latest",
             "@navikt/ds-react": "latest",
             "@navikt/ds-css": "latest",
-            "@navikt/ds-react-internal": "latest",
-            "@navikt/ds-css-internal": "latest",
-            "@navikt/ds-icons": "latest",
+            "@navikt/aksel-icons": "latest",
           },
         } as any,
         isBinary: false,
@@ -58,9 +55,9 @@ export const CodeSandbox = ({ code }: { code: string }) => {
       <input type="hidden" name="query" value="module=App.js" />
       <button
         type="submit"
-        className="flex items-center justify-center gap-2 rounded-sm px-3 py-2 hover:bg-gray-100 focus:outline-none focus-visible:shadow-focus-inset active:bg-gray-200"
+        className="focus-visible:shadow-focus-inset flex items-center justify-center gap-1 rounded-sm px-3 py-2 hover:bg-gray-100 focus:outline-none active:bg-gray-200"
       >
-        <Edit aria-hidden />
+        <PencilIcon aria-hidden fontSize="1.5rem" />
         CodeSandbox
       </button>
     </form>

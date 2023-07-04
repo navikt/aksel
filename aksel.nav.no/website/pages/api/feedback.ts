@@ -1,7 +1,8 @@
+import { noCdnClient } from "@/sanity/client.server";
+import { FeedbackT } from "@/types";
 import dotenv from "dotenv";
+import { logger } from "logger";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { FeedbackT } from "@/lib";
-import { noCdnClient } from "../../lib/sanity/sanity.server";
 
 dotenv.config();
 
@@ -28,7 +29,7 @@ export default async function handler(
         const token = process.env.SANITY_WRITE_KEY;
 
         if (!token && isDevelopment) {
-          console.log("No token! api/feedback");
+          logger.info("No token! api/feedback");
           return;
         }
 
@@ -61,12 +62,12 @@ export default async function handler(
 
         await transactionClient
           .commit()
-          .then(() => console.log("Feedback-logged"))
-          .catch((e) => console.error(e.message));
+          .then(() => logger.info("Feedback-logged"))
+          .catch((e) => logger.error(e.message));
 
         return res.json({ status: "ok" });
       } catch (err) {
-        console.error(err);
+        logger.error(err);
         res.status(500).json({ msg: "Error, check console" });
       }
       break;

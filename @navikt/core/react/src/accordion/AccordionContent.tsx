@@ -1,6 +1,5 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import AnimateHeight from "../util/AnimateHeight";
 import { BodyLong } from "../typography/BodyLong";
 import { AccordionItemContext } from "./AccordionItem";
 
@@ -12,11 +11,7 @@ export interface AccordionContentProps
   children: React.ReactNode;
 }
 
-export type AccordionContentType = React.ForwardRefExoticComponent<
-  AccordionContentProps & React.RefAttributes<HTMLDivElement>
->;
-
-const AccordionContent: AccordionContentType = forwardRef(
+const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ children, className, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
@@ -28,16 +23,20 @@ const AccordionContent: AccordionContentType = forwardRef(
     }
 
     return (
-      <AnimateHeight height={context.open ? "auto" : 0} duration={250}>
-        <BodyLong
-          {...rest}
-          as="div"
-          ref={ref}
-          className={cl("navds-accordion__content", className)}
-        >
-          {children}
-        </BodyLong>
-      </AnimateHeight>
+      <BodyLong
+        {...rest}
+        as="div"
+        ref={ref}
+        className={cl(
+          "navds-accordion__content",
+          {
+            "navds-accordion__content--closed": !context.open,
+          },
+          className
+        )}
+      >
+        {children}
+      </BodyLong>
     );
   }
 );

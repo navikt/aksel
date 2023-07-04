@@ -1,8 +1,8 @@
 import { Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
+import { CodeSnippetT } from "@/types";
 
-const Kode = ({ node }: { node: SanityT.Schema.kode }): JSX.Element => {
+const Kode = ({ node }: { node: CodeSnippetT }) => {
   if (!node || !node.code) {
     return null;
   }

@@ -1,8 +1,10 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "clsx";
-import useCheckbox from "./useCheckbox";
+import React, { forwardRef, InputHTMLAttributes } from "react";
+import { BodyShort } from "../../typography";
+import { omit } from "../../util";
 import { FormFieldProps } from "../useFormField";
-import { BodyShort, Detail, omit } from "../..";
+import useCheckbox from "./useCheckbox";
+import { ReadOnlyIcon } from "../ReadOnlyIcon";
 
 export interface CheckboxProps
   extends FormFieldProps,
@@ -41,9 +43,7 @@ export interface CheckboxProps
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { inputProps, hasError, size } = useCheckbox(props);
-
-    const Description = size === "medium" ? BodyShort : Detail;
+    const { inputProps, hasError, size, readOnly, nested } = useCheckbox(props);
 
     return (
       <div
@@ -54,6 +54,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {
             "navds-checkbox--error": hasError,
             "navds-checkbox--disabled": inputProps.disabled,
+            "navds-checkbox--readonly": readOnly,
           }
         )}
       >
@@ -66,6 +67,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "hideLabel",
             "indeterminate",
             "errorId",
+            "readOnly",
           ])}
           {...inputProps}
           type="checkbox"
@@ -89,17 +91,24 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               "navds-sr-only": props.hideLabel,
             })}
           >
-            <BodyShort as="span" size={size}>
+            <BodyShort
+              as="span"
+              size={size}
+              className="navds-checkbox__label-text"
+            >
+              {!nested && (
+                <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
+              )}
               {props.children}
             </BodyShort>
             {props.description && (
-              <Description
+              <BodyShort
                 as="span"
-                size="small"
-                className="navds-checkbox__description"
+                size={size}
+                className="navds-form-field__subdescription navds-checkbox__description"
               >
                 {props.description}
-              </Description>
+              </BodyShort>
             )}
           </span>
         </label>

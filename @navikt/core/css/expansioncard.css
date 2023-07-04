@@ -1,0 +1,201 @@
+.navds-expansioncard {
+  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-color, var(--a-border-default));
+  --__ac-expansioncard-border-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
+  --__ac-expansioncard-border-width: 1px;
+
+  border-radius: var(--__ac-expansioncard-border-radius);
+  background-color: var(--ac-expansioncard-bg, var(--a-surface-default));
+  height: fit-content;
+}
+
+.navds-expansioncard--open {
+  --__ac-expansioncard-border-color: var(
+    --ac-expansioncard-border-open-color,
+    var(--ac-expansioncard-border-color, var(--a-border-default))
+  );
+}
+
+.navds-expansioncard:hover {
+  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
+}
+
+:where(.navds-expansioncard.navds-expansioncard--open):hover {
+  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
+}
+
+/*************************
+ * Header *
+ *************************/
+.navds-expansioncard__header {
+  width: 100%;
+  display: flex;
+  gap: var(--a-spacing-4);
+  padding: var(--a-spacing-4) var(--a-spacing-6);
+  border-radius: var(--__ac-expansioncard-border-radius);
+  background-color: var(--ac-expansioncard-header-bg, var(--a-surface-transparent));
+  position: relative;
+  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
+  justify-content: space-between;
+}
+
+.navds-expansioncard--small > :where(.navds-expansioncard__header) {
+  padding: var(--a-spacing-3) var(--a-spacing-4);
+}
+
+.navds-expansioncard__header:hover {
+  background-color: var(--ac-expansioncard-header-bg-hover, var(--a-surface-hover));
+  box-shadow: 0 0 0 1px var(--__ac-expansioncard-border-color);
+}
+
+.navds-expansioncard--open > :where(.navds-expansioncard__header) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
+  border-bottom: none;
+  background-color: var(--ac-expansioncard-header-open-bg, var(--a-surface-transparent));
+}
+
+.navds-expansioncard--open > :where(.navds-expansioncard__header):hover {
+  background-color: var(--ac-expansioncard-header-bg-hover, var(--a-surface-hover));
+  box-shadow: 1px 0 0 0 var(--__ac-expansioncard-border-color), -1px 0 0 0 var(--__ac-expansioncard-border-color),
+    0 -1px 0 0 var(--__ac-expansioncard-border-color);
+}
+
+/*************************
+ * Header/Typography *
+ *************************/
+
+.navds-expansioncard__title--small {
+  margin-top: 10px;
+}
+
+.navds-expansioncard__title--medium {
+  margin-top: var(--a-spacing-2);
+}
+
+.navds-expansioncard__title--large {
+  margin-top: var(--a-spacing-1);
+}
+
+.navds-expansioncard--small > :where(.navds-expansioncard__header) :where(.navds-expansioncard__title--small) {
+  margin-top: var(--a-spacing-05);
+}
+
+.navds-expansioncard--small :where(.navds-expansioncard__title--medium, .navds-expansioncard__title--large) {
+  margin-top: 0;
+}
+
+/*************************
+ * Header/Button *
+ *************************/
+.navds-expansioncard__header-button {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--ac-expansioncard-button-border-radius, var(--a-border-radius-medium));
+  min-height: 3rem;
+  min-width: 3rem;
+  font-size: 1.5rem;
+  align-self: flex-start;
+}
+
+.navds-expansioncard--small > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-button) {
+  min-height: 2rem;
+  min-width: 2rem;
+}
+
+:where(.navds-expansioncard__header):hover > :where(.navds-expansioncard__header-button) {
+  background-color: var(--a-surface-hover);
+}
+
+.navds-expansioncard__header-chevron {
+  transition: transform 150ms ease-in-out;
+}
+
+.navds-expansioncard--open > :where(.navds-expansioncard__header) :where(.navds-expansioncard__header-chevron) {
+  transform: translateY(0) rotate(180deg);
+}
+
+.navds-expansioncard__header-button:hover > :where(.navds-expansioncard__header-chevron) {
+  transform: translateY(1px);
+}
+
+.navds-expansioncard__header-button:focus-visible {
+  outline: none;
+  box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-expansioncard__header-button:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
+}
+
+.navds-expansioncard--open
+  > :where(.navds-expansioncard__header)
+  > :where(.navds-expansioncard__header-button):hover
+  :where(.navds-expansioncard__header-chevron) {
+  transform: translateY(-1px) rotate(180deg);
+}
+
+.navds-expansioncard__header-button::after {
+  inset: 0;
+  z-index: 1;
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+/*************************
+ * Content *
+ *************************/
+.navds-expansioncard__content {
+  border-end-end-radius: var(--__ac-expansioncard-border-radius);
+  border-end-start-radius: var(--__ac-expansioncard-border-radius);
+  padding: var(--a-spacing-3) var(--a-spacing-6) var(--a-spacing-6);
+  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
+  border-top: none;
+}
+
+.navds-expansioncard--small > :where(.navds-expansioncard__content) {
+  padding: var(--a-spacing-3) var(--a-spacing-4) var(--a-spacing-4);
+}
+
+.navds-expansioncard__content--closed {
+  display: none;
+}
+
+:where(.navds-expansioncard__header):hover + .navds-expansioncard__content {
+  box-shadow: 1px 0 0 0 var(--__ac-expansioncard-border-color), -1px 0 0 0 var(--__ac-expansioncard-border-color),
+    0 1px 0 0 var(--__ac-expansioncard-border-color);
+}
+
+.navds-expansioncard__content-inner {
+  animation: fadeExpansionCard 250ms ease;
+}
+
+.navds-expansioncard--no-animation :where(.navds-expansioncard__content-inner) {
+  animation: none;
+}
+
+@keyframes fadeExpansionCard {
+  0% {
+    opacity: 0.25;
+    transform: translateY(-8px);
+  }
+
+  40% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

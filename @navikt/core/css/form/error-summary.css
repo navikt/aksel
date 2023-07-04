@@ -8,9 +8,16 @@
   padding: var(--a-spacing-3);
 }
 
-.navds-error-summary:focus {
+.navds-error-summary:focus-visible {
   box-shadow: var(--a-shadow-focus);
   outline: none;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-error-summary:focus {
+    box-shadow: var(--a-shadow-focus);
+    outline: none;
+  }
 }
 
 .navds-error-summary__list {
@@ -23,7 +30,7 @@
 }
 
 .navds-error-summary__list > * {
-  color: var(--a-blue-500);
+  color: var(--ac-error-summary-list-dot, var(--a-text-action));
 }
 
 .navds-error-summary--small > .navds-error-summary__list {

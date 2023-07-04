@@ -1,8 +1,9 @@
-import { ExternalLink } from "@navikt/ds-icons";
+import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading, Ingress, Link } from "@navikt/ds-react";
 import BlockContent from "@sanity/block-content-to-react";
 import cl from "clsx";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
+import ExpansionCard from "components/sanity-modules/ExpansionCard";
 import NextLink from "next/link";
 import React, { createContext, useContext } from "react";
 import {
@@ -24,14 +25,8 @@ import {
   UuFeedback,
   Video,
 } from ".";
-
-export const InlineCode = (props: React.HTMLAttributes<HTMLElement>) => (
-  <code className="inline-code" {...props} />
-);
-
-export const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
-  <kbd className="inline-kbd" {...props} />
-);
+import { KBD } from "components/website-modules/KBD";
+import { InlineCode } from "components/website-modules/InlineCode";
 
 const serializers = {
   types: {
@@ -43,6 +38,7 @@ const serializers = {
     do_dont: ({ node }) => <DoDont node={node} />,
     bilde: ({ node }) => <Bilde node={node} />,
     alert: ({ node }) => <Alert node={node} />,
+    expansioncard: ({ node }) => <ExpansionCard node={node} />,
     kode: ({ node }) => <Kode node={node} />,
     tabell_v2: ({ node }) => <Tabell node={node} />,
     accordion: ({ node }) => <Accordion node={node} />,
@@ -105,6 +101,7 @@ const serializers = {
               spacing
               level="4"
               size="small"
+              id={`h${node._key}`}
               {...textProps}
             />
           );
@@ -161,7 +158,7 @@ const serializers = {
     return (
       <BodyLong
         as="li"
-        className="ml-5 mb-3 max-w-[calc(theme(spacing.text)_-_1em)]"
+        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
       >
         {props.children}
       </BodyLong>
@@ -212,7 +209,7 @@ const serializers = {
             )
           }
         >
-          {children} <ExternalLink title="åpner lenken i ny fane" />
+          {children} <ExternalLinkIcon title="åpner lenken i ny fane" />
         </Link>
       ) : (
         <NextLink href={href} passHref legacyBehavior>

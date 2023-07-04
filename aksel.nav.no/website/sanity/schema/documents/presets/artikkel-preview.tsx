@@ -16,12 +16,9 @@ export const artikkelPreview = (_type: string) => {
       prepare(selection) {
         const { heading, tema, kategori, type, updateInfo } = selection;
         if (
-          [
-            "ds_artikkel",
-            "aksel_artikkel",
-            "komponent_artikkel",
-            "testDoc",
-          ].includes(type) &&
+          ["ds_artikkel", "aksel_artikkel", "komponent_artikkel"].includes(
+            type
+          ) &&
           updateInfo
         ) {
           /* const diff = Math.abs(

@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import fs from "fs";
-import { getAllPages } from "../lib/sanity/santiy";
+import { getAllPages } from "../sanity/interface/interface";
 
 dotenv.config();
 

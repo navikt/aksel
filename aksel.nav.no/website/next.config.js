@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
+const path = require("path");
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -13,11 +14,10 @@ const ContentSecurityPolicy = `
   img-src 'self' cdn.sanity.io https://avatars.githubusercontent.com data: ${cdnUrl};
   script-src 'self' ${cdnUrl} https://in2.taskanalytics.com/tm.js 'nonce-4e1aa203a32e' 'unsafe-eval';
   style-src 'self' ${cdnUrl} 'unsafe-inline';
-  report-uri https://sentry.gc.nav.no/api/113/envelope/?sentry_key=d35bd60e413c489ca0f2fd389b4e6e5e&sentry_version=7;
-  connect-src 'self' ${cdnUrl} https://raw.githubusercontent.com/navikt/ wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://sentry.gc.nav.no https://in2.taskanalytics.com/03346;
-  frame-ancestors localhost:3333 'self' localhost:3000 https://verktoykasse.sanity.studio/;
+  connect-src 'self' ${cdnUrl} https://raw.githubusercontent.com/navikt/ wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://in2.taskanalytics.com/03346;
+  frame-ancestors 'self' localhost:3000;
   media-src 'self' ${cdnUrl} cdn.sanity.io;
-  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.dev.nav.no/;
+  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.ekstern.dev.nav.no;
 `;
 
 const securityHeaders = [
@@ -56,14 +56,6 @@ const useCdn = process.env.USE_CDN_ASSETS === "true";
 const config = () =>
   withBundleAnalyzer({
     transpilePackages: ["@navikt/ds-tokens"],
-    serverRuntimeConfig: {
-      // Will only be available on the server side
-      azureAppClientId: process.env.AZURE_APP_CLIENT_ID,
-      azureJwksUri: process.env.AZURE_OPENID_CONFIG_JWKS_URI,
-      azureAppIssuer: process.env.AZURE_OPENID_CONFIG_ISSUER,
-      azureAppWellKnownUrl: process.env.AZURE_APP_WELL_KNOWN_URL,
-      azureAppJWK: process.env.AZURE_APP_JWK,
-    },
     publicRuntimeConfig: {
       NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
     },
@@ -117,6 +109,10 @@ const config = () =>
     images: {
       domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
       dangerouslyAllowSVG: true,
+    },
+    output: "standalone",
+    experimental: {
+      outputFileTracingRoot: path.join(__dirname, "../../"),
     },
   });
 

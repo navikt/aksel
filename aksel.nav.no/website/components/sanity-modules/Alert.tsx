@@ -1,13 +1,9 @@
 import { Alert as DsAlert, Heading } from "@navikt/ds-react";
 import React from "react";
-import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
+import { AlertT } from "@/types";
 
-const Alert = ({
-  node,
-}: {
-  node: SanityT.Schema.alert & { _key: string };
-}): JSX.Element => {
+const Alert = ({ node }: { node: AlertT }) => {
   return (
     <div className="mb-7 max-w-2xl">
       <DsAlert variant={node.variant}>
@@ -16,7 +12,7 @@ const Alert = ({
             spacing
             size="small"
             as={node.heading_level}
-            id={node._key}
+            id={`${encodeURIComponent(node.heading)}-a`}
             className="scroll-m-20"
           >
             {node.heading}

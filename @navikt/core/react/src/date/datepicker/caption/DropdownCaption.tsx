@@ -1,4 +1,4 @@
-import { Left, Right } from "@navikt/ds-icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import setMonth from "date-fns/setMonth";
 import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
@@ -7,6 +7,7 @@ import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { Button, Select } from "../../..";
 import { getMonths, getYears } from "../../utils/get-dates";
 import { labelMonthDropdown, labelYearDropdown } from "../../utils/labels";
+import { max, min } from "date-fns";
 
 export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
@@ -23,13 +24,18 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
     return null;
   }
 
-  const handleYearChange: React.ChangeEventHandler<HTMLSelectElement> = (e) =>
-    goToMonth(setYear(startOfMonth(displayMonth), Number(e.target.value)));
+  const handleYearChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    const newMonth = setYear(
+      startOfMonth(displayMonth),
+      Number(e.target.value)
+    );
+    goToMonth(startOfMonth(min([max([newMonth, fromDate]), toDate])));
+  };
 
   const handleMonthChange: React.ChangeEventHandler<HTMLSelectElement> = (e) =>
     goToMonth(setMonth(startOfMonth(displayMonth), Number(e.target.value)));
 
-  const years = getYears(fromDate, toDate);
+  const years = getYears(fromDate, toDate, displayMonth.getFullYear());
   const months = getMonths(fromDate, toDate, displayMonth);
 
   const previousLabel = labelPrevious(previousMonth, { locale });
@@ -52,7 +58,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         variant="tertiary"
         disabled={!previousMonth}
         onClick={() => previousMonth && goToMonth(previousMonth)}
-        icon={<Left title="velg forrige måned" />}
+        icon={<ArrowLeftIcon title="velg forrige måned" />}
         className="navds-date__caption-button"
         type="button"
       />
@@ -88,7 +94,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
 
       <Button
         aria-label={nextLabel}
-        icon={<Right title="velg neste måned" />}
+        icon={<ArrowRightIcon title="velg neste måned" />}
         onClick={() => nextMonth && goToMonth(nextMonth)}
         disabled={!nextMonth}
         variant="tertiary"

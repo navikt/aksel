@@ -1,7 +1,7 @@
 CMS og nettside for [aksel.nav.no](https://aksel.nav.no/)
 
 ```sh
-├── /website        # NEXT.JS app (v12)
+├── /website        # NEXT.JS app (v13)
 └── /website/sanity # Sanity CMS-app (v3)
 ```
 
@@ -11,7 +11,7 @@ CMS og nettside for [aksel.nav.no](https://aksel.nav.no/)
 
 ### /website/sanity
 
-Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no/admin)(krever NAV SSO).
+Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no/admin)(krever NAV SSO for innlogging).
 
 `production`-datasettet er privat, så man må ha riktige tilganger for å kunne lese/jobbe med dataen der.
 
@@ -19,24 +19,31 @@ Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no
 
 ### Bidrag
 
-Branch `main` blir pusher rett til prod -> aksel.nav.no. For å utvikle nye features brukes branch `next` som ved push publiseres til devmiljø aksel.dev.nav.no (krever naisdevice). Kan også publisere andre branches til dev ved bruk av workflow-dispatch.
+Branch `main` blir pusher rett til prod -> aksel.nav.no. For å utvikle nye features kan branch `next` brukes, som ved push publiseres til devmiljø https://aksel.ekstern.dev.nav.no/. Kan også publisere andre branches til dev ved bruk av workflow-dispatch.
 
 ## Kode-eksempler
 
-Alle eksemplene våre ligger under /website/pages/eksempler. For å se endringene live kan man starte opp storybook med `yarn storybook`. Du trenger da ikke tilgang til sanity for å se endringene.
+Alle eksemplene våre ligger under `/website/pages/eksempler`. For å se endringene live kan man starte opp storybook med `yarn storybook:aksel`.
+
+> Du trenger ikke secrets for å teste storybook
 
 ### Nettside (localhost:3000)
 
-```
+```bash
+// dev
 yarn install
-yarn workspace aksel.nav.no dev
+yarn dev
+
+// prod
+yarn build:next
+yarn serve:next
 ```
 
 **Rettigheter**
 
 Sanity-datasettet er privat, noe som betyr du må ha tilgang til sanity applikasjonen + følgende token for å få data lokalt:
 
-```
+```env
 SANITY_PREVIEW_TOKEN
 SANITY_PRIVATE_NO_DRAFTS
 ```
@@ -58,4 +65,4 @@ Kjøres backups hver 3 dag til GCP-bucket under `designsystem-prod`
 
 Spørsmål og kontakt kan rettes til team Aksel
 
-Aksel har også en egen Slack-kanal #Aksel-designsystemet
+Aksel har også en egen Slack-kanal `#aksel-designsystemet`

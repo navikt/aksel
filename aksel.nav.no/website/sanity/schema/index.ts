@@ -8,7 +8,6 @@ export const schema: SchemaPluginOptions = {
     document.Editors,
     document.Forside,
     document.Redirect,
-    document.TestDoc,
     document.Skrivehjelp,
     document.Publiseringsflyt,
     document.Feedback,
@@ -52,6 +51,7 @@ export const schema: SchemaPluginOptions = {
     object.Video,
     object.Accordion,
     object.Alert,
+    object.ExpansionCard,
     object.Tips,
     object.UnikSidemodul,
 
@@ -62,6 +62,7 @@ export const schema: SchemaPluginOptions = {
     object.RiktekstStandard,
     object.RiktekstPrinsipp,
     object.RiktekstStandalone,
+    object.RiktekstAccordion,
 
     /* Komponentsider */
     object.PropsSeksjon,

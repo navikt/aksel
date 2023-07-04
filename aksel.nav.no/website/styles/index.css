@@ -1,13 +1,9 @@
 @import "tailwindcss/base";
 @import "@navikt/ds-css";
-@import "@navikt/ds-css-internal";
 @import "./global.css";
 
 @import "tailwindcss/components";
 @import "./prismjs.css";
-@import "./layout.css";
-@import "./components.css";
-@import "./overrides.css";
 
 @import "tailwindcss/utilities";
 @import "./utilities.css";

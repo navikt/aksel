@@ -1,3 +1,7 @@
+[data-theme="dark"] {
+  --ac-form-description: var(--a-text-on-inverted);
+}
+
 .navds-form-field {
   display: grid;
   justify-items: start;
@@ -5,7 +9,8 @@
 }
 
 .navds-form-field__description {
-  margin-top: -4px;
+  margin-top: -6px;
+  color: var(--ac-form-description, var(--a-text-subtle));
 }
 
 .navds-form-field .navds-error-message,
@@ -26,4 +31,19 @@
 
 .navds-form-field__error:empty {
   display: none;
+}
+
+.navds-form-field__subdescription {
+  color: var(--ac-form-subdescription, var(--a-text-subtle));
+}
+
+.navds-form-field--readonly > :where(.navds-form-field__label) {
+  display: inline-flex;
+}
+
+.navds-form-field__readonly-icon {
+  margin-top: var(--a-spacing-05);
+  margin-right: var(--a-spacing-2);
+  flex-shrink: 0;
+  align-self: flex-start;
 }

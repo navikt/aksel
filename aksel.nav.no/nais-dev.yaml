@@ -9,14 +9,14 @@ spec:
   image: {{ image }}
   port: 3000
   ingresses:
-    - "https://aksel.dev.nav.no"
+    - "https://aksel.ekstern.dev.nav.no"
   liveness:
     path: /api/isAlive
+    initialDelay: 10
   readiness:
     path: /api/isAlive
-  replicas:
-    min: 1
-    max: 1
+    initialDelay: 10
+
   accessPolicy:
     outbound:
       external:
@@ -27,3 +27,7 @@ spec:
         - host: cdn.sanity.io
       rules: []
       env:
+  filesFrom:
+    - emptyDir:
+        medium: Memory
+      mountPath: /app/aksel.nav.no/website/.next/cache

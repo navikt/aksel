@@ -29,6 +29,10 @@ export interface FormFieldProps {
    * Override internal id
    */
   id?: string;
+  /**
+   * Read only-state
+   */
+  readOnly?: boolean;
 }
 
 /**
@@ -46,8 +50,24 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
   const inputDescriptionId = `${prefix}-description-${genId}`;
 
   const disabled = fieldset?.disabled || props.disabled;
-  const hasError: boolean = !disabled && !!(error || fieldset?.error);
-  const showErrorMsg = !disabled && !!error && typeof error !== "boolean";
+  const readOnly =
+    ((fieldset?.readOnly || props.readOnly) && !disabled) || undefined;
+
+  const hasError: boolean =
+    !disabled && !readOnly && !!(error || fieldset?.error);
+  const showErrorMsg =
+    !disabled && !readOnly && !!error && typeof error !== "boolean";
+
+  const ariaInvalid = { ...(hasError ? { "aria-invalid": true } : {}) };
+
+  if ((props as any)?.required && process.env.NODE_ENV !== "production") {
+    console.warn(
+      "Aksel: Use of 'required' in form-elements is heavily discuouraged. Docs about why here:"
+    );
+    console.warn(
+      "https://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#h3bfe00453471"
+    );
+  }
 
   return {
     showErrorMsg,
@@ -55,9 +75,10 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
     errorId,
     inputDescriptionId,
     size: size ?? fieldset?.size ?? "medium",
+    readOnly,
     inputProps: {
       id,
-      "aria-invalid": hasError,
+      ...ariaInvalid,
       "aria-describedby":
         cl(props["aria-describedby"], {
           [inputDescriptionId]:
@@ -65,6 +86,7 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
           [errorId]: showErrorMsg,
           [fieldset?.errorId ?? ""]: hasError && !!fieldset?.error,
         }) || undefined,
+
       disabled,
     },
   };

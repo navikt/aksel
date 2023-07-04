@@ -1,8 +1,10 @@
-import React, { forwardRef, SelectHTMLAttributes } from "react";
 import cl from "clsx";
-import { Expand } from "@navikt/ds-icons";
-import { BodyLong, Label, ErrorMessage, omit, Detail } from "..";
+import React, { forwardRef, SelectHTMLAttributes } from "react";
+
+import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { BodyShort, ErrorMessage, Label, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
 
 export interface SelectProps
   extends FormFieldProps,
@@ -29,6 +31,22 @@ export interface SelectProps
   style?: React.CSSProperties;
 }
 
+/**
+ * A component that displays a select input field.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/select)
+ * @see 🏷️ {@link SelectProps}
+ *
+ * @example
+ * ```jsx
+ * <Select label="Hvilket land har du bosted i.">
+ *   <option value="">Velg land</option>
+ *   <option value="norge">Norge</option>
+ *   <option value="sverige">Sverige</option>
+ *   <option value="danmark">Danmark</option>
+ * </Select>
+ * ```
+ */
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (props, ref) => {
     const {
@@ -38,7 +56,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       hasError,
       size,
       inputDescriptionId,
-    } = useFormField(props, "textField");
+      readOnly,
+    } = useFormField(props, "select");
 
     const {
       children,
@@ -51,6 +70,27 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       ...rest
     } = props;
 
+    const readOnlyEventHandlers = {
+      onMouseDown: (evt) => {
+        // NOTE: does not prevent click
+        if (readOnly) {
+          evt.preventDefault();
+          // focus on the element as per readonly input behavior
+          evt.target.focus();
+        }
+      },
+      onKeyDown: (evt) => {
+        if (
+          readOnly &&
+          ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", " "].includes(
+            evt.key
+          )
+        ) {
+          evt.preventDefault();
+        }
+      },
+    };
+
     return (
       <div
         className={cl(
@@ -59,7 +99,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           `navds-form-field--${size}`,
           {
             "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-form-field--readonly": readOnly,
             "navds-select--error": hasError,
+            "navds-select--readonly": readOnly,
           }
         )}
       >
@@ -70,39 +112,26 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             "navds-sr-only": hideLabel,
           })}
         >
+          <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
           {label}
         </Label>
         {!!description && (
-          <>
-            {size === "medium" ? (
-              <BodyLong
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </BodyLong>
-            ) : (
-              <Detail
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </Detail>
-            )}
-          </>
+          <BodyShort
+            className={cl("navds-form-field__description", {
+              "navds-sr-only": hideLabel,
+            })}
+            id={inputDescriptionId}
+            size={size}
+            as="div"
+          >
+            {description}
+          </BodyShort>
         )}
         <div className="navds-select__container" style={style}>
           <select
-            {...omit(rest, ["error", "errorId", "size"])}
+            {...omit(rest, ["error", "errorId", "size", "readOnly"])}
             {...inputProps}
+            {...readOnlyEventHandlers}
             ref={ref}
             className={cl(
               "navds-select__input",
@@ -113,7 +142,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           >
             {children}
           </select>
-          <Expand className="navds-select__chevron" aria-hidden />
+          <ChevronDownIcon className="navds-select__chevron" aria-hidden />
         </div>
         <div
           className="navds-form-field__error"

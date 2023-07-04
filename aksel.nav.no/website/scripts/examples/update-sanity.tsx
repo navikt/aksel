@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import { readExampleFile, readExampleFiles } from ".";
-import { SanityT } from "../../lib";
-import { noCdnClient } from "../../lib/sanity/sanity.server";
+import { noCdnClient } from "../../sanity/interface/client.server";
 import { getExampleFiles } from "./get-example-files";
 dotenv.config();
 
@@ -17,10 +16,11 @@ const main = async () => {
   const transactionClient = noCdnClient(token).transaction();
   const examples = getExampleFiles();
 
-  const docs: SanityT.Schema.kode_eksempler_fil[] = await noCdnClient(
-    token
-  ).fetch(`*[_type == "kode_eksempler_fil"]`);
+  const docs = await noCdnClient(token).fetch(
+    `*[_type == "kode_eksempler_fil"]`
+  );
 
+  /* Delete fremoved examples */
   for (const doc of docs) {
     if (!examples.some((x) => doc._id === createId(x.path))) {
       transactionClient.delete(doc._id);

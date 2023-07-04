@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useId, useState } from "react";
-import { UNSAFE_useDatepicker, UNSAFE_useRangeDatepicker } from "..";
+import { useDatepicker, useRangeDatepicker } from "..";
 import { Button } from "../..";
 import DatePicker from "./DatePicker";
 
@@ -12,39 +12,18 @@ const disabledDays = [
 export default {
   title: "ds-react/Datepicker",
   component: DatePicker,
-  argTypes: {
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    },
-    locale: {
-      control: {
-        type: "radio",
-        options: ["nb", "nn", "en"],
-      },
-    },
-    mode: {
-      defaultValue: "single",
-      control: {
-        type: "radio",
-        options: ["single", "multiple", "range"],
-      },
-    },
-  },
 };
 
 export const Default = {
   render: (props) => {
     const [open, setOpen] = useState(false);
 
-    const rangeCtx = UNSAFE_useRangeDatepicker({
+    const rangeCtx = useRangeDatepicker({
       fromDate: new Date("Aug 23 2020"),
       toDate: new Date("Aug 23 2023"),
     });
 
-    const singleCtx = UNSAFE_useDatepicker({
+    const singleCtx = useDatepicker({
       fromDate: new Date("Aug 23 2020"),
       toDate: new Date("Aug 23 2023"),
     });
@@ -123,6 +102,27 @@ export const Default = {
     inputfield: true,
     standalone: false,
     openOnFocus: true,
+    mode: "single",
+  },
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+    locale: {
+      control: {
+        type: "radio",
+        options: ["nb", "nn", "en"],
+      },
+    },
+    mode: {
+      control: {
+        type: "radio",
+        options: ["single", "multiple", "range"],
+      },
+    },
   },
 };
 
@@ -147,16 +147,15 @@ export const ShowWeekNumber = () => (
 );
 
 export const UseDatepicker = () => {
-  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+  const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
     onDateChange: console.log,
-    locale: "en",
-    openOnFocus: false,
   });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...datepickerProps}>
+      <DatePicker {...datepickerProps} dropdownCaption>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
     </div>
@@ -164,12 +163,11 @@ export const UseDatepicker = () => {
 };
 
 export const UseRangedDatepicker = () => {
-  const { datepickerProps, fromInputProps, toInputProps } =
-    UNSAFE_useRangeDatepicker({
-      fromDate: new Date("Aug 23 2019"),
-      onRangeChange: console.log,
-      onValidate: console.log,
-    });
+  const { datepickerProps, fromInputProps, toInputProps } = useRangeDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    onRangeChange: console.log,
+    onValidate: console.log,
+  });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
@@ -184,7 +182,7 @@ export const UseRangedDatepicker = () => {
 };
 
 export const OpenOnFocus = () => {
-  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+  const { datepickerProps, inputProps } = useDatepicker({
     onDateChange: console.log,
     openOnFocus: false,
   });
@@ -244,7 +242,7 @@ export const UserControlled = () => {
 
 export const Validering = () => {
   const [error, setError] = useState(false);
-  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+  const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 2 2019"),
     onValidate: (val) => setError(val.isWeekend),
     defaultSelected: new Date("Nov 26 2022"),
@@ -290,13 +288,12 @@ export const ErrorInput = () => {
 };
 
 export const UseRangedDatepickerValidation = () => {
-  const { datepickerProps, fromInputProps, toInputProps } =
-    UNSAFE_useRangeDatepicker({
-      fromDate: new Date("Aug 23 2019"),
-      disableWeekends: true,
-      disabled: [new Date("Oct 10 2022")],
-      onValidate: console.table,
-    });
+  const { datepickerProps, fromInputProps, toInputProps } = useRangeDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    disableWeekends: true,
+    disabled: [new Date("Oct 10 2022")],
+    onValidate: console.table,
+  });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
@@ -311,7 +308,7 @@ export const UseRangedDatepickerValidation = () => {
 };
 
 export const defaultShownMonth = () => {
-  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+  const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     onDateChange: console.log,
     defaultMonth: new Date("Oct 23 2022"),
@@ -321,6 +318,47 @@ export const defaultShownMonth = () => {
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...datepickerProps}>
         <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};
+
+export const Size = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps} dropdownCaption>
+        <DatePicker.Input size="medium" {...inputProps} label="Velg dato" />
+      </DatePicker>
+      <DatePicker {...datepickerProps} dropdownCaption>
+        <DatePicker.Input size="small" {...inputProps} label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};
+
+export const Readonly = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps} dropdownCaption>
+        <DatePicker.Input
+          size="medium"
+          {...inputProps}
+          value="01.02.2021"
+          label="Velg dato"
+          readOnly
+        />
       </DatePicker>
     </div>
   );

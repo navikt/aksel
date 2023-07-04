@@ -1,4 +1,4 @@
-import { Close } from "@navikt/ds-icons";
+import { XMarkIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
@@ -21,9 +21,6 @@ export interface RemovableChipsProps
    */
   onDelete?: () => void;
 }
-
-export interface RemovableChipsType
-  extends OverridableComponent<RemovableChipsProps, HTMLButtonElement> {}
 
 export const RemovableChips: OverridableComponent<
   RemovableChipsProps,
@@ -58,11 +55,11 @@ export const RemovableChips: OverridableComponent<
       >
         <span className="navds-chips__chip-text">{children}</span>
         <span className="navds-chips__removable-icon">
-          <Close aria-hidden />
+          <XMarkIcon aria-hidden />
         </span>
       </Component>
     );
   }
-) as RemovableChipsType;
+);
 
 export default RemovableChips;
