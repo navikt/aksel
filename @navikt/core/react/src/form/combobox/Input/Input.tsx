@@ -119,14 +119,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       ]
     );
 
-    const onFocus = () => {
-      toggleIsListOpen(true);
-    };
-
-    const onBlur = () => {
-      toggleIsListOpen(false);
-    };
-
     return (
       <input
         {...rest}
@@ -136,8 +128,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onChange={onChange}
         type="text"
         role="combobox"
-        onFocus={onFocus}
-        onBlur={onBlur}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
         aria-controls={`${inputProps.id}-filtered-options`}

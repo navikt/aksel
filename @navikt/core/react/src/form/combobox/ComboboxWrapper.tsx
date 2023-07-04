@@ -22,6 +22,12 @@ const ComboboxWrapper = ({
 }: ComboboxWrapperProps) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
+  function onFocusInsideWrapper(e) {
+    if (!wrapperRef.current?.contains(e.relatedTarget)) {
+      toggleIsListOpen(true);
+    }
+  }
+
   function onBlurWrapper(e) {
     if (!wrapperRef.current?.contains(e.relatedTarget)) {
       toggleIsListOpen(false);
@@ -41,6 +47,7 @@ const ComboboxWrapper = ({
           "navds-search--disabled": !!inputProps.disabled,
         }
       )}
+      onFocus={onFocusInsideWrapper}
       onBlur={onBlurWrapper}
     >
       {children}
