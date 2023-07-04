@@ -43,7 +43,7 @@ function LiveQuery({
   return (
     <>
       <PreviewBanner loading={loading} validUser={validUser} />
-      <Comp {...props} {...data} />;
+      <Comp {...props} {...data} />
     </>
   );
 }
