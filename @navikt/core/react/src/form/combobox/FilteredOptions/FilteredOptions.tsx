@@ -55,7 +55,7 @@ const FilteredOptions = () => {
       {isValueNew && allowNewValues && (
         <li
           tabIndex={-1}
-          onClick={() => toggleOption(value)}
+          onPointerUp={(event) => toggleOption(value, event)}
           id={`${id}-combobox-new-option`}
           className={cl("navds-combobox__list-item__new-option", {
             "navds-combobox__list-item__new-option--focus":
@@ -81,7 +81,7 @@ const FilteredOptions = () => {
           id={`${id}-option-${o.replace(" ", "-")}`}
           key={o}
           tabIndex={-1}
-          onClick={() => toggleOption(o)}
+          onPointerUp={(event) => toggleOption(o, event)}
           role="option"
           aria-selected={selectedOptions.includes(o)}
         >

@@ -17,7 +17,10 @@ type SelectedOptionsContextType = {
   prevSelectedOptions?: string[];
   selectedOptions: string[];
   setSelectedOptions: (any) => void;
-  toggleOption: (option: string) => void;
+  toggleOption: (
+    option: string,
+    event: React.KeyboardEvent | React.PointerEvent
+  ) => void;
 };
 
 const SelectedOptionsContext = createContext<SelectedOptionsContextType>(
@@ -89,14 +92,14 @@ export const SelectedOptionsProvider = ({
   );
 
   const toggleOption = useCallback(
-    (option: string) => {
+    (option: string, event: React.KeyboardEvent | React.PointerEvent) => {
       if (selectedOptions.includes(option)) {
         removeSelectedOption(option);
       } else {
         addSelectedOption(option);
       }
       if (!isMultiSelect) {
-        clearInput();
+        clearInput(event);
       }
       focusInput();
     },

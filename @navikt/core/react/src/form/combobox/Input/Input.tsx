@@ -43,12 +43,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (currentOption) {
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
-          toggleOption(currentOption);
+          toggleOption(currentOption, event);
           clearInput(event);
         } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
           event.preventDefault();
           // Autocompleting or adding a new value
-          toggleOption(value);
+          toggleOption(value, event);
           clearInput(event);
         }
       },
