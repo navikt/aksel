@@ -4,7 +4,15 @@ import { ComponentType } from "react";
 import { getClient } from "@/sanity/client.server";
 import { LiveQueryProvider } from "next-sanity/preview";
 import { useMemo } from "react";
-import PreviewBanner from "components/website-modules/PreviewBanner";
+import dynamic from "next/dynamic";
+import { useCheckAuth } from "components/website-modules/utils/useCheckAuth";
+
+export const PreviewBanner = dynamic(
+  () => import("components/website-modules/PreviewBanner"),
+  {
+    ssr: false,
+  }
+);
 
 function PreviewProvider({ children }: { children: React.ReactNode }) {
   const client = useMemo(() => {
@@ -22,17 +30,19 @@ function LiveQuery({
   query,
   params,
   props,
+  validUser,
 }: {
   comp: ComponentType;
   query: string;
   props: any;
   params?: any;
+  validUser: boolean;
 }) {
   const [data, loading] = useLiveQuery(props, query, params);
 
   return (
     <>
-      <PreviewBanner loading={loading} />
+      <PreviewBanner loading={loading} validUser={validUser} />
       <Comp {...props} {...data} />;
     </>
   );
@@ -49,9 +59,16 @@ const WithPreview = ({
   props: any;
   params?: any;
 }) => {
+  const validUser = useCheckAuth();
   return (
     <PreviewProvider>
-      <LiveQuery props={props} query={query} params={params} comp={comp} />
+      <LiveQuery
+        props={props}
+        query={query}
+        params={params}
+        comp={comp}
+        validUser={validUser}
+      />
     </PreviewProvider>
   );
 };

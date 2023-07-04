@@ -2,8 +2,8 @@ import { BodyShort, Heading, Link } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon, SlackIcon } from "components/assets";
 import Logo from "components/assets/Logo";
 import { logNav } from "components/website-modules/utils/amplitude";
-import FooterForm from "./FooterForm";
 import dynamic from "next/dynamic";
+import FooterForm from "./FooterForm";
 
 export const EditButton = dynamic(
   () => import("components/website-modules/EditButton"),
@@ -27,7 +27,6 @@ const Footer = () => {
         <Kontakt />
         <FooterForm />
       </div>
-
       <EditButton />
     </footer>
   );
