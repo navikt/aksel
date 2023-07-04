@@ -1,14 +1,6 @@
 import React, { ChangeEvent, InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
-export type ComboboxClearEvent =
-  | {
-      trigger: "Click";
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
-    }
-  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> }
-  | { trigger: "Enter"; event: React.KeyboardEvent<HTMLButtonElement> };
-
 export interface ComboboxProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "value"> {
@@ -78,12 +70,10 @@ export interface ComboboxProps
   /**
    * Callback function triggered whenever the input field is cleared
    *
-   * TODO: Is the param event too custom, while appearing to be a standard event?
-   *
    * @param event
    * @returns
    */
-  onClear?: (event: ComboboxClearEvent) => void;
+  onClear?: (event: React.PointerEvent | React.KeyboardEvent) => void;
   /**
    * Callback function triggered whenever an option is selected or de-selected
    *
