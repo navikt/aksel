@@ -1,23 +1,10 @@
-import React, {
-  useState,
-  useCallback,
-  createContext,
-  useContext,
-  MouseEvent,
-} from "react";
-import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
+import React, { useState, useCallback, createContext, useContext } from "react";
 import { useInputContext } from "./Input/inputContext";
-
-export interface CustomOptionProps {
-  value?: string;
-  event?: MouseEvent<HTMLElement>;
-}
 
 type CustomOptionsContextType = {
   customOptions: string[];
-  setCustomOptions: (options: string[]) => void;
-  removeCustomOption: ({ value, event }: CustomOptionProps) => void;
-  addCustomOption: ({ value, event }: CustomOptionProps) => void;
+  removeCustomOption: (option: string) => void;
+  addCustomOption: (option: string) => void;
 };
 
 const CustomOptionsContext = createContext<CustomOptionsContextType>(
@@ -26,38 +13,28 @@ const CustomOptionsContext = createContext<CustomOptionsContextType>(
 
 export const CustomOptionsProvider = ({ children }) => {
   const [customOptions, setCustomOptions] = useState<string[]>([]);
-  const { setSelectedOptions } = useSelectedOptionsContext();
   const { focusInput } = useInputContext();
 
   const removeCustomOption = useCallback(
-    ({ value, event }: CustomOptionProps) => {
-      const newValue =
-        value || (event?.target as HTMLElement)?.textContent?.trim?.();
-      if (newValue)
-        setCustomOptions(customOptions.filter((o) => o !== newValue));
+    (option) => {
+      setCustomOptions((prevCustomOptions) =>
+        prevCustomOptions.filter((o) => o !== option)
+      );
+      focusInput();
     },
-    [customOptions, setCustomOptions]
+    [focusInput, setCustomOptions]
   );
 
   const addCustomOption = useCallback(
-    ({ value, event }: CustomOptionProps) => {
-      const newValue =
-        value || (event?.target as HTMLElement)?.textContent?.trim?.();
-      if (newValue) {
-        setCustomOptions((prevOptions) => [...prevOptions, newValue]);
-        setSelectedOptions((selectedOptions) => [
-          ...selectedOptions,
-          newValue.trim(),
-        ]);
-        focusInput();
-      }
+    (option) => {
+      setCustomOptions((prevOptions) => [...prevOptions, option]);
+      focusInput();
     },
-    [focusInput, setCustomOptions, setSelectedOptions]
+    [focusInput, setCustomOptions]
   );
 
   const customOptionsState = {
     customOptions,
-    setCustomOptions,
     removeCustomOption,
     addCustomOption,
   };

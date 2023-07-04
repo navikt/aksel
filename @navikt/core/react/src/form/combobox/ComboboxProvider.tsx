@@ -46,6 +46,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       options,
       value,
       onChange,
+      onClear,
       shouldAutocomplete,
       size,
       ...rest
@@ -59,18 +60,21 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
           id,
           value,
           onChange,
+          onClear,
           shouldAutocomplete,
           size,
         }}
       >
-        <SelectedOptionsProvider
-          value={{
-            isMultiSelect,
-            selectedOptions,
-            onToggleSelected,
-          }}
-        >
-          <CustomOptionsProvider>
+        <CustomOptionsProvider>
+          <SelectedOptionsProvider
+            value={{
+              allowNewValues,
+              isMultiSelect,
+              selectedOptions,
+              onToggleSelected,
+              options,
+            }}
+          >
             <FilteredOptionsProvider
               value={{
                 allowNewValues,
@@ -85,8 +89,8 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
                 {children}
               </Combobox>
             </FilteredOptionsProvider>
-          </CustomOptionsProvider>
-        </SelectedOptionsProvider>
+          </SelectedOptionsProvider>
+        </CustomOptionsProvider>
       </InputContextProvider>
     );
   }

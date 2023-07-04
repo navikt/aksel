@@ -1,31 +1,39 @@
 import React from "react";
 import { Chips } from "../../..";
+import { useSelectedOptionsContext } from "./selectedOptionsContext";
 
 interface SelectedOptionsProps {
   selectedOptions?: string[];
-  handleDeleteSelectedOption: (option: string) => void;
   children: React.ReactNode;
 }
 
+const Option = ({ option }: { option: string }) => {
+  const { removeSelectedOption } = useSelectedOptionsContext();
+
+  const onClick = (e) => {
+    e.stopPropagation();
+    removeSelectedOption(option);
+  };
+
+  return (
+    <Chips.Removable
+      className="navds-combobox__selected-option"
+      onClick={onClick}
+    >
+      {option}
+    </Chips.Removable>
+  );
+};
+
 const SelectedOptions: React.FC<SelectedOptionsProps> = ({
   selectedOptions = [],
-  handleDeleteSelectedOption,
   children,
 }) => {
   return (
     <Chips className="navds-combobox__selected-options">
       {selectedOptions.length
         ? selectedOptions.map((option, i) => (
-            <Chips.Removable
-              className="navds-combobox__selected-option"
-              key={option + i}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleDeleteSelectedOption(option);
-              }}
-            >
-              {option}
-            </Chips.Removable>
+            <Option key={option + i} option={option} />
           ))
         : []}
       {children}

@@ -2,15 +2,12 @@ import { omit } from "../../..";
 import React, { useCallback, forwardRef, InputHTMLAttributes } from "react";
 import cl from "clsx";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { useCustomOptionsContext } from "../customOptionsContext";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useInputContext } from "./inputContext";
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
   ref: React.Ref<HTMLInputElement>;
-  handleClear: (e) => void;
-  toggleOption: (e) => void;
   inputClassName?: string;
   errorId?: string;
   value?: string;
@@ -18,16 +15,13 @@ interface InputProps
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    { handleClear, toggleOption, inputClassName, error, errorId, ...rest },
-    ref
-  ) => {
-    const { inputProps, onChange, size, value } = useInputContext();
-    const { selectedOptions, removeSelectedOption } =
+  ({ inputClassName, error, errorId, ...rest }, ref) => {
+    const { clearInput, inputProps, onChange, size, value } = useInputContext();
+    const { selectedOptions, removeSelectedOption, toggleOption } =
       useSelectedOptionsContext();
-    const { customOptions, removeCustomOption } = useCustomOptionsContext();
     const {
       activeDecendantId,
+      currentOption,
       toggleIsListOpen,
       isListOpen,
       filteredOptionsIndex,
@@ -39,16 +33,25 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       shouldAutocomplete,
     } = useFilteredOptionsContext();
 
-    const handleKeyUp = (e) => {
+    const onEnter = useCallback(
+      (event: React.KeyboardEvent) => {
+        if (currentOption) {
+          event.preventDefault();
+          toggleOption(currentOption);
+        }
+      },
+      [currentOption, toggleOption]
+    );
+
+    const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
       e.preventDefault();
       switch (e.key) {
         case "Escape":
-          handleClear({ trigger: e.key, event: e });
+          clearInput(e);
           toggleIsListOpen(false);
           break;
         case "Enter":
-          e.preventDefault();
-          toggleOption(e);
+          onEnter(e);
           break;
         case "Home":
           moveFocusToInput();
@@ -67,9 +70,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (value === "") {
             const lastSelectedOption =
               selectedOptions[selectedOptions.length - 1];
-            if (customOptions.includes(lastSelectedOption)) {
-              removeCustomOption({ value: lastSelectedOption });
-            }
             removeSelectedOption(lastSelectedOption);
           }
         } else if (e.key === "ArrowDown") {
@@ -91,8 +91,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       [
         value,
         selectedOptions,
-        customOptions,
-        removeCustomOption,
         removeSelectedOption,
         moveFocusDown,
         isListOpen,

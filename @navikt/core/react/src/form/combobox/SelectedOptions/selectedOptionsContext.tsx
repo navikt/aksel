@@ -1,7 +1,14 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import usePrevious from "../../../util/usePrevious";
 import { useInputContext } from "../Input/inputContext";
 import { ComboboxProps } from "../types";
+import { useCustomOptionsContext } from "../customOptionsContext";
 
 type SelectedOptionsContextType = {
   addSelectedOption: (option: string) => void;
@@ -10,6 +17,7 @@ type SelectedOptionsContextType = {
   prevSelectedOptions?: string[];
   selectedOptions: string[];
   setSelectedOptions: (any) => void;
+  toggleOption: (option: string) => void;
 };
 
 const SelectedOptionsContext = createContext<SelectedOptionsContextType>(
@@ -23,21 +31,35 @@ export const SelectedOptionsProvider = ({
   children: any;
   value: Pick<
     ComboboxProps,
-    "isMultiSelect" | "selectedOptions" | "onToggleSelected"
+    | "allowNewValues"
+    | "isMultiSelect"
+    | "options"
+    | "selectedOptions"
+    | "onToggleSelected"
   >;
 }) => {
   const { setSearchTerm, setValue } = useInputContext();
+  const { customOptions, removeCustomOption, addCustomOption } =
+    useCustomOptionsContext();
   const {
+    allowNewValues,
     isMultiSelect,
     selectedOptions: externalSelectedOptions,
     onToggleSelected,
+    options,
   } = value;
   const [internalSelectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const selectedOptions = externalSelectedOptions ?? internalSelectedOptions;
+  const selectedOptions = useMemo(
+    () =>
+      externalSelectedOptions ?? [...customOptions, ...internalSelectedOptions],
+    [customOptions, externalSelectedOptions, internalSelectedOptions]
+  );
 
   const addSelectedOption = useCallback(
     (option: string) => {
-      if (isMultiSelect) {
+      if (!options.includes(option)) {
+        allowNewValues && addCustomOption(option);
+      } else if (isMultiSelect) {
         setSelectedOptions((prevSelectedOptions) => [
           ...prevSelectedOptions,
           option,
@@ -49,19 +71,42 @@ export const SelectedOptionsProvider = ({
       }
       onToggleSelected?.(option, true);
     },
-    [isMultiSelect, onToggleSelected, setSearchTerm, setValue]
+    [
+      addCustomOption,
+      allowNewValues,
+      isMultiSelect,
+      onToggleSelected,
+      options,
+      setSearchTerm,
+      setValue,
+    ]
   );
 
   const removeSelectedOption = useCallback(
     (option: string) => {
-      setSelectedOptions((prevSelectedOptions) =>
-        prevSelectedOptions.filter(
-          (selectedOption) => selectedOption !== option
-        )
-      );
+      if (customOptions.includes(option)) {
+        removeCustomOption(option);
+      } else {
+        setSelectedOptions((prevSelectedOptions) =>
+          prevSelectedOptions.filter(
+            (selectedOption) => selectedOption !== option
+          )
+        );
+      }
       onToggleSelected?.(option, false);
     },
-    [onToggleSelected]
+    [customOptions, onToggleSelected, removeCustomOption]
+  );
+
+  const toggleOption = useCallback(
+    (option: string) => {
+      if (selectedOptions.includes(option)) {
+        removeSelectedOption(option);
+      } else {
+        addSelectedOption(option);
+      }
+    },
+    [addSelectedOption, removeSelectedOption, selectedOptions]
   );
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
@@ -73,6 +118,7 @@ export const SelectedOptionsProvider = ({
     prevSelectedOptions,
     selectedOptions,
     setSelectedOptions,
+    toggleOption,
   };
 
   return (
