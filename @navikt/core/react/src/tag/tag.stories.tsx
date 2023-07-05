@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta } from "@storybook/react";
-import { Tag, TagProps } from ".";
+import { CounterTag, Tag, TagProps } from ".";
 
 const variants: TagProps["variant"][] = [
   "warning",
@@ -95,6 +95,28 @@ export const Variants = () => {
           {variant}
         </Tag>
       ))}
+    </div>
+  );
+};
+
+export const CounterTags = () => {
+  return (
+    <div className="colgap">
+      <div className="rowgap rowgap-wrap">
+        {variants.map((variant, i) => (
+          <CounterTag key={variant} variant={variant} count={10 * i} />
+        ))}
+      </div>
+      <div className="rowgap rowgap-wrap">
+        {variants.map((variant, i) => (
+          <CounterTag
+            key={variant}
+            variant={variant}
+            count={10 * i}
+            shape="circle"
+          />
+        ))}
+      </div>
     </div>
   );
 };

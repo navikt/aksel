@@ -162,3 +162,13 @@
   background-color: var(--ac-tag-alt-3-moderate-bg, var(--a-surface-alt-3-moderate));
   color: var(--ac-tag-alt-3-moderate-text, var(--a-text-default));
 }
+
+/* CounterTag */
+.navds-tag--circle {
+  border-radius: var(--a-border-radius-full);
+}
+
+.navds-counter-tag {
+  font-size: 14px;
+  min-width: 20px;
+}
