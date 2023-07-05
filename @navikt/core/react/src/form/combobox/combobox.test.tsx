@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import { fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { Combobox } from "..";
@@ -50,7 +50,9 @@ describe("Render combobox", () => {
         );
       });
       await act(async () => {
-        fireEvent.click(await utils.findByRole("option", { name: "apple" }));
+        await userEvent.click(
+          await utils.findByRole("option", { name: "apple" })
+        );
       });
       expect(
         await utils.findByRole("option", { name: "apple", selected: true })
