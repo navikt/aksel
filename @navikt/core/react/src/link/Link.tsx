@@ -5,15 +5,17 @@ import { OverridableComponent } from "../util/OverridableComponent";
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
-   * Whether the link is suitable for being inlined in text.
+   * Inverts when the underline appears. If this is true,
+   * the underline does not appear by default, but does appear when the link is hovered.
+   * This makes it more suitable for use when inlined in text.
    * @default false
    */
-  inline?: boolean;
+  "remove-underline"?: boolean;
   /**
-   * Whether the link should break on all characters. Useful for long links with no "words".
-   * @default false
+   * Variant of the component to use.
+   * @default "action"
    */
-  "break-All"?: boolean;
+  variant?: "action" | "neutral" | "subtle";
   /**
    * Link text
    */
@@ -39,8 +41,8 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
       {
         as: Component = "a",
         className,
-        inline = false,
-        "break-all": breakAll = false,
+        "remove-underline": removeUnderline = false,
+        variant = "action",
         ...rest
       },
       ref
@@ -48,9 +50,8 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
       <Component
         {...rest}
         ref={ref}
-        className={cl("navds-link", className, {
-          "navds-link--inline": inline,
-          "navds-link--break-all": breakAll,
+        className={cl("navds-link", className, `navds-link--${variant}`, {
+          "navds-link--remove-underline": removeUnderline,
         })}
       />
     )

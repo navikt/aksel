@@ -11,12 +11,41 @@ export default {
   component: Link,
 };
 
+const LinkWrapper = ({
+  children = "Ex aliqua incididunt",
+  icon = false,
+  variant = "action",
+  "remove-underline": removeUnderline = false,
+}) => (
+  <>
+    {" "}
+    <Link
+      href="#"
+      remove-underline={removeUnderline}
+      variant={variant as "action" | "neutral" | "subtle"}
+    >
+      {icon && (
+        <>
+          <PlusCircleFillIcon />{" "}
+        </>
+      )}
+      {children}
+      {icon && (
+        <>
+          {" "}
+          <PlusCircleFillIcon />
+        </>
+      )}
+    </Link>{" "}
+  </>
+);
+
 export const Default = {
   render: ({ icon, inline }) => {
     const LinkD = () => (
       <>
         {" "}
-        <Link href="#" inline={inline}>
+        <Link href="#" remove-underline={inline}>
           {icon && <PlusCircleFillIcon />}Ex aliqua incididunt
           {icon && <PlusCircleFillIcon />}
         </Link>{" "}
@@ -27,7 +56,11 @@ export const Default = {
       return (
         <div
           className="colgap"
-          style={{ width: "800px", border: "1px solid black" }}
+          style={{
+            width: "800px",
+            border: "1px solid black",
+            borderRadius: "8px",
+          }}
         >
           <BodyLong>
             Incididunt laborum nisi nisi Lorem
@@ -51,54 +84,36 @@ export const Default = {
 
 export const Inline = {
   render: ({ icon }) => {
-    const LinkInline = ({
-      children = "Ex aliqua incididunt",
-      "break-all": breakAll = false,
-    }) => (
-      <>
-        {" "}
-        <Link href="#" inline break-all={breakAll}>
-          {icon && (
-            <>
-              <PlusCircleFillIcon />{" "}
-            </>
-          )}
-          {children}
-          {icon && (
-            <>
-              {" "}
-              <PlusCircleFillIcon />
-            </>
-          )}
-        </Link>{" "}
-      </>
-    );
-
     return (
       <div
         className="colgap"
-        style={{ width: "800px", border: "1px solid black" }}
+        style={{
+          width: "800px",
+          border: "1px solid black",
+          borderRadius: "8px",
+        }}
       >
         <style>{`.storybook-custom-spacing { white-space: pre;}`}</style>
         <BodyLong>
-          <LinkInline />
+          <LinkWrapper remove-underline icon={icon} />
           Eiusmod aute.
-          <LinkInline />
-          Culpa sit aute est duis minim in in voluptate velit
-          <LinkInline break-all>
-            https://blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah.com
-          </LinkInline>
-          Incididunt laborum nisi nisi Lorem officia adipisicing non veniam
-          <LinkInline>
+          <LinkWrapper remove-underline icon={icon} />
+          Culpa sit aute est duis minim in in voluptate velit Incididunt laborum
+          nisi nisi Lorem officia adipisicing non veniam
+          <LinkWrapper remove-underline icon={icon}>
             blah blah blah blah blah blah blah blah blah blah blah blah blah
             blah blah blah blah blah blah blah blah
-          </LinkInline>
+          </LinkWrapper>
           dolor eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
-          <LinkInline>Link</LinkInline>
+          <LinkWrapper remove-underline icon={icon}>
+            Link
+          </LinkWrapper>
         </BodyLong>
         <BodyLong className="storybook-custom-spacing">
           Custom{"   "}
-          <LinkInline>link</LinkInline>
+          <LinkWrapper remove-underline icon={icon}>
+            link
+          </LinkWrapper>
           {"     "}spacing.
         </BodyLong>
       </div>
@@ -151,4 +166,23 @@ export const ConfirmationPanel = () => {
       </DsConfirmationPanel>
     </div>
   );
+};
+
+export const Variants = {
+  render: ({ icon }) => {
+    return (
+      <div className="colgap">
+        {["action", "neutral", "subtle"].map((variant) => (
+          <>
+            <div>
+              <LinkWrapper icon={icon} variant={variant} />
+            </div>
+          </>
+        ))}
+      </div>
+    );
+  },
+  args: {
+    icon: false,
+  },
 };
