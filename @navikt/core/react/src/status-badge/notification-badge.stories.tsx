@@ -21,7 +21,26 @@ export const Default = {
         <Box label="pulse">
           <NotificationBadge pulse>42</NotificationBadge>
         </Box>
-        <div style={{ position: "relative", width: "fit-content" }}>
+        <div
+          style={{
+            position: "relative",
+            width: "fit-content",
+            display: "flex",
+            gap: "8px",
+          }}
+        >
+          <Button
+            variant="tertiary"
+            size="small"
+            icon={
+              <>
+                <BellIcon />
+                <NotificationBadge pulse>20</NotificationBadge>
+              </>
+            }
+          >
+            Meldinger
+          </Button>
           <Button
             variant="tertiary"
             size="small"
@@ -31,7 +50,7 @@ export const Default = {
                 <NotificationBadge pulse />
               </>
             }
-          ></Button>
+          />
         </div>
       </div>
     );

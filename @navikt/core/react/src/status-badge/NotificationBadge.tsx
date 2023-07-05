@@ -18,7 +18,7 @@ export const NotificationBadge = forwardRef<
   NotificationBadgeProps
 >(({ className, children, absolute = false, pulse = false, ...rest }, ref) => {
   return (
-    <span className="navds-notificationbadge__wrapper">
+    <sup className="navds-notificationbadge__wrapper">
       <span
         {...rest}
         ref={ref}
@@ -30,7 +30,7 @@ export const NotificationBadge = forwardRef<
       >
         {children}
       </span>
-    </span>
+    </sup>
   );
 });
 
