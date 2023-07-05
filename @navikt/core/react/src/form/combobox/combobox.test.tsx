@@ -40,9 +40,11 @@ describe("Render combobox", () => {
     it("Should be able to search, select and remove selections", async () => {
       const utils = render(<App isMultiSelect options={options} />);
 
-      await userEvent.click(
-        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
-      );
+      await act(async () => {
+        await userEvent.click(
+          utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+        );
+      });
       await act(async () => {
         await userEvent.type(
           utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
@@ -76,9 +78,11 @@ describe("Combobox state-handling", () => {
   it("Should not select previous focused element when closes", async () => {
     const utils = render(<App options={options} />);
 
-    await userEvent.click(
-      utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
-    );
+    await act(async () => {
+      await userEvent.click(
+        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+      );
+    });
     await act(async () => {
       await userEvent.type(
         utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
@@ -97,9 +101,11 @@ describe("Combobox state-handling", () => {
   it("Should reset list when resetting input (ESC)", async () => {
     const utils = render(<App options={options} />);
 
-    await userEvent.click(
-      utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
-    );
+    await act(async () => {
+      await userEvent.click(
+        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+      );
+    });
     await act(async () => {
       await userEvent.type(
         utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
