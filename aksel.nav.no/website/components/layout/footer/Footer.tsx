@@ -3,7 +3,7 @@ import { FigmaIcon, GithubIcon, SlackIcon } from "components/assets";
 import Logo from "components/assets/Logo";
 import { logNav } from "components/website-modules/utils/amplitude";
 import dynamic from "next/dynamic";
-import FooterForm from "./FooterForm";
+/* import FooterForm from "./FooterForm"; */
 
 export const EditButton = dynamic(
   () => import("components/website-modules/EditButton"),
@@ -12,6 +12,7 @@ export const EditButton = dynamic(
   }
 );
 
+/* FooterForm is disabled to better comply with policy */
 const Footer = () => {
   return (
     <footer
@@ -20,12 +21,12 @@ const Footer = () => {
       data-theme="dark"
       className="toc-ignore text-text-on-inverted bg-deepblue-800 relative flex w-full justify-center"
     >
-      <div className="relative z-10 mx-auto grid w-full max-w-screen-2xl gap-12 px-4 pb-16 pt-12 md:grid-cols-2 md:px-6 lg:grid-cols-4 xl:grid-cols-5 xl:gap-6">
+      <div className="relative z-10 mx-auto grid w-full max-w-screen-2xl gap-12 px-4 pb-16 pt-12 md:grid-cols-2 md:px-6 lg:grid-cols-4 xl:grid-cols-4 xl:gap-6">
         <LogoBlock />
         <Snarveier />
         <SideLenker />
         <Kontakt />
-        <FooterForm />
+        {/* <FooterForm /> */}
       </div>
       <EditButton />
     </footer>
