@@ -18,6 +18,7 @@
 .navds-button {
   --__ac-button-padding: var(--a-spacing-3) var(--a-spacing-5);
 
+  position: relative;
   display: inline-flex;
   cursor: pointer;
   margin: 0;

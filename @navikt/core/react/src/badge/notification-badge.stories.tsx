@@ -1,7 +1,7 @@
-import React from "react";
-import { NotificationBadge } from "./NotificationBadge";
 import { BellIcon } from "@navikt/aksel-icons";
+import React from "react";
 import { Button } from "../button";
+import { NotificationBadge } from "./NotificationBadge";
 
 export default {
   title: "ds-react/NotificationBadge",
@@ -13,13 +13,13 @@ export const Default = {
     return (
       <div className="colgap" style={{ gap: "2rem" }}>
         <Box>
-          <NotificationBadge>42</NotificationBadge>
+          <NotificationBadge count={42} />
         </Box>
         <Box label="marker">
           <NotificationBadge />
         </Box>
         <Box label="pulse">
-          <NotificationBadge pulse>42</NotificationBadge>
+          <NotificationBadge pulse count={42} />
         </Box>
         <div
           style={{
@@ -35,7 +35,7 @@ export const Default = {
             icon={
               <>
                 <BellIcon />
-                <NotificationBadge pulse>20</NotificationBadge>
+                <NotificationBadge pulse count={299999} />
               </>
             }
           >
