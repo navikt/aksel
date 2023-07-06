@@ -226,6 +226,7 @@ export const Controlled = (props) => {
         label="Hva er dine favorittfrukter?"
         id={id}
         filteredOptions={filteredOptions}
+        isMultiSelect
         options={props.options}
         onChange={(event) => setValue(event.target.value)}
         onToggleSelected={onToggleSelected}
