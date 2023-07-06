@@ -6,7 +6,6 @@ import React, {
   useContext,
   useCallback,
   useRef,
-  useLayoutEffect,
 } from "react";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../Input/inputContext";
@@ -136,14 +135,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
       return undefined;
     }
   }, [isLoading, value, shouldAutocomplete, filteredOptions, id]);
-
-  useLayoutEffect(() => {
-    if ((value && value !== "") || isLoading) {
-      toggleIsListOpen(true);
-    } else if (filteredOptions.length === 0) {
-      toggleIsListOpen(false);
-    }
-  }, [isLoading, value, toggleIsListOpen, filteredOptions]);
 
   const currentOption = useMemo(() => {
     if (filteredOptionsIndex == null) {
