@@ -10,7 +10,7 @@ type ComboboxWrapperProps = {
   };
   inputSize: string;
   toggleIsListOpen: (isListOpen: boolean) => void;
-  toggleListButtonRef: React.ForwardedRef<HTMLButtonElement>;
+  toggleListButtonRef: React.RefObject<HTMLButtonElement>;
 };
 
 const ComboboxWrapper = ({
