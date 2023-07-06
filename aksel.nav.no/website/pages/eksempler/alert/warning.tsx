@@ -3,11 +3,9 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
-      <Alert variant="warning">
-        Du må være registrert hos NAV for å bruke aktivitetsplanen.
-      </Alert>
-    </div>
+    <Alert variant="warning">
+      Du må være registrert hos NAV for å bruke aktivitetsplanen.
+    </Alert>
   );
 };
 

@@ -2,11 +2,7 @@ import { Alert } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return (
-    <div className="grid gap-4">
-      <Alert variant="success">Søknad er sendt inn!</Alert>
-    </div>
-  );
+  return <Alert variant="success">Søknad er sendt inn!</Alert>;
 };
 
 export default withDsExample(Example);

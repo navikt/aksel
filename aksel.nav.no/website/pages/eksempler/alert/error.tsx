@@ -3,9 +3,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
-      <Alert variant="error">Noe gikk galt! Prøv igjen om noen minutter.</Alert>
-    </div>
+    <Alert variant="error">Noe gikk galt! Prøv igjen om noen minutter.</Alert>
   );
 };
 
