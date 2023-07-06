@@ -25,6 +25,11 @@
 
 .navds-combobox__selected-options > li {
   margin: auto 0;
+  background-color: var(--ac-combobox-selected-options-bg, var(--a-surface-action-selected));
+}
+
+.navds-combobox__selected-options > li:hover {
+  background-color: var(--ac-combobox-selected-options-hover-bg, var(--a-surface-action-selected-hover));
 }
 
 .navds-combobox__selected-options > li:last-of-type {
@@ -64,7 +69,7 @@
   position: absolute;
   right: 2.25rem;
   border-radius: var(--a-border-radius-medium);
-  color: var(--a-text-subtle);
+  color: var(--ac-combobox-clear-icon, var(--a-text-subtle));
   height: 32px;
   width: 32px;
   top: 50%;
@@ -104,12 +109,12 @@
 
 .navds-combobox__button-clear:active:hover,
 .navds-combobox__button-toggle-list:active:hover {
-  color: var(--a-text-action);
+  color: var(--ac-combobox-clear-icon-active, var(--a-text-action));
 }
 
 .navds-combobox__button-clear:hover,
 .navds-combobox__button-toggle-list:hover {
-  color: var(--a-text-action-selected);
+  color: var(--ac-combobox-clear-icon-hover, var(--a-text-action-selected));
 }
 
 .navds-combobox__button-toggle-list:focus {
@@ -135,13 +140,15 @@
   top: calc(100% + var(--a-spacing-2));
   list-style: none;
   margin: 0;
-  border: 1px solid var(--a-border-divider);
+  border: 1px solid var(--ac-combobox-list-border-color, var(--a-border-divider));
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0;
   box-shadow: var(--a-shadow-large);
   border-radius: 4px;
+  gap: 4px 0;
+  color: var(--ac-combobox-list-text, var(--a-text-default));
 }
 
 .navds-combobox__list--closed {
@@ -156,27 +163,29 @@
   align-items: center;
   padding: var(--a-spacing-5);
   width: 100%;
+  background-color: var(--ac-combobox-list-item-bg, var(--a-surface-default));
 }
 
 .navds-combobox__list-item--loading {
   justify-content: center;
   padding: var(--a-spacing-5);
+  background-color: var(--ac-combobox-list-item-loading-bg, var(--a-surface-default));
 }
 
 .navds-combobox__list-item--focus,
 .navds-combobox__list-item:hover {
-  background-color: var(--a-surface-hover);
+  background-color: var(--ac-combobox-list-item-hover-bg, var(--a-surface-hover));
   border-left: 4px solid var(--a-border-strong);
   padding-left: calc(var(--a-spacing-5) - 4px);
 }
 
 .navds-combobox__list-item--selected {
-  background-color: var(--a-surface-selected);
+  background-color: var(--ac-combobox-list-item-selected, var(--a-surface-default));
 }
 
 .navds-combobox__list-item--selected.navds-combobox__list-item--focus,
 .navds-combobox__list-item--selected:hover {
-  background-color: var(--a-surface-action-subtle-hover);
+  background-color: var(--ac-combobox-selected-options-hover-bg, var(--a-surface-action-selected-hover));
   border-left: 4px solid var(--a-border-focus);
   padding-left: calc(var(--a-spacing-5) - 4px);
 }

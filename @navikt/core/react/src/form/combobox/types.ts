@@ -65,8 +65,6 @@ export interface ComboboxProps
   /**
    * Callback function triggered whenever the input field is cleared
    *
-   * TODO: Is the param event too custom, while appearing to be a standard event?
-   *
    * @param event
    * @returns
    */
@@ -113,9 +111,6 @@ export interface ComboboxProps
   toggleListButton?: boolean;
   /**
    * Custom name for the toggle list-button. Requires "toggleListButton" to be "true".
-   *
-   * TODO: Should either be removed or replaced with one option for "open label" and one for "close label"
-   *       Both are unneccessary, as this button is removed from tab order because it does the same as up/down arrows and escape key
    *
    * @default "Alternativer"
    */
