@@ -42,16 +42,6 @@ const FilteredOptions = () => {
           <Loader aria-label="Søker..." />
         </li>
       )}
-      {!isLoading && filteredOptions.length === 0 && (
-        <li
-          className="navds-combobox__list-item__no-options"
-          role="option"
-          aria-selected={false}
-          id={`${id}-no-hits`}
-        >
-          Ingen søketreff
-        </li>
-      )}
       {isValueNew && allowNewValues && (
         <li
           tabIndex={-1}
@@ -68,6 +58,16 @@ const FilteredOptions = () => {
           <BodyShort>
             Legg til <Label as="span">&#8220;{value}&#8221;</Label>
           </BodyShort>
+        </li>
+      )}
+      {!isLoading && filteredOptions.length === 0 && (
+        <li
+          className="navds-combobox__list-item__no-options"
+          role="option"
+          aria-selected={false}
+          id={`${id}-no-hits`}
+        >
+          Ingen søketreff
         </li>
       )}
       {filteredOptions.map((option, index) => (
