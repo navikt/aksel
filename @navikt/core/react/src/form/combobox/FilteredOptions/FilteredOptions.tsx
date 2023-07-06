@@ -72,21 +72,22 @@ const FilteredOptions = () => {
           </BodyShort>
         </li>
       )}
-      {filteredOptions.map((o, i) => (
+      {filteredOptions.map((option, index) => (
         <li
           className={cl("navds-combobox__list-item", {
-            "navds-combobox__list-item--focus": i === filteredOptionsIndex,
-            "navds-combobox__list-item--selected": selectedOptions.includes(o),
+            "navds-combobox__list-item--focus": index === filteredOptionsIndex,
+            "navds-combobox__list-item--selected":
+              selectedOptions.includes(option),
           })}
-          id={`${id}-option-${o.replace(" ", "-")}`}
-          key={o}
+          id={`${id}-option-${option.replace(" ", "-")}`}
+          key={option}
           tabIndex={-1}
-          onPointerUp={(event) => toggleOption(o, event)}
+          onPointerUp={(event) => toggleOption(option, event)}
           role="option"
-          aria-selected={selectedOptions.includes(o)}
+          aria-selected={selectedOptions.includes(option)}
         >
-          <BodyShort>{o}</BodyShort>
-          {selectedOptions.includes(o) && <CheckIcon />}
+          <BodyShort>{option}</BodyShort>
+          {selectedOptions.includes(option) && <CheckIcon />}
         </li>
       ))}
     </ul>
