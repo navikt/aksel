@@ -1,8 +1,7 @@
 import React from "react";
 import cl from "clsx";
 import { BodyShort, Label, Loader } from "../../..";
-import { PlusIcon } from "@navikt/aksel-icons";
-import CheckIcon from "./CheckIcon";
+import { CheckmarkIcon, PlusIcon } from "@navikt/aksel-icons";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { useInputContext } from "../Input/inputContext";
@@ -85,7 +84,7 @@ const FilteredOptions = () => {
           aria-selected={selectedOptions.includes(option)}
         >
           <BodyShort>{option}</BodyShort>
-          {selectedOptions.includes(option) && <CheckIcon />}
+          {selectedOptions.includes(option) && <CheckmarkIcon />}
         </li>
       ))}
     </ul>
