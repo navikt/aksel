@@ -192,8 +192,8 @@
 }
 
 .navds-combobox__list-item,
+.navds-combobox__list-item__no-options,
 .navds-combobox__list-item__new-option {
-  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -204,14 +204,17 @@
 }
 
 .navds-combobox__list-item--loading {
+  display: flex;
   justify-content: center;
   padding: var(--a-spacing-5);
   background-color: var(--ac-combobox-list-item-loading-bg, var(--a-surface-default));
+  width: 100%;
 }
 
 .navds-combobox__list-item--focus,
 .navds-combobox__list-item:hover {
   background-color: var(--ac-combobox-list-item-hover-bg, var(--a-surface-hover));
+  cursor: pointer;
   border-left: 4px solid var(--a-border-strong);
   padding-left: calc(var(--a-spacing-5) - 4px);
 }
@@ -229,9 +232,15 @@
 
 .navds-combobox__list-item__new-option {
   border-bottom: 1px solid var(--a-border-divider);
-  background-color: var(--a-bg-subtle);
+  background: var(--a-surface-neutral-subtle);
+  cursor: pointer;
   justify-content: flex-start;
   gap: 1rem;
+}
+
+.navds-combobox__list-item__new-option:hover {
+  border-bottom: 1px solid var(--a-border-divider);
+  background: var(--a-surface-neutral-subtle-hover);
 }
 
 .navds-combobox__list-item__new-option--focus {

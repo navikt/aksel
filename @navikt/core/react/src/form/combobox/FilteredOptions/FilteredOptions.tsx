@@ -34,7 +34,7 @@ const FilteredOptions = () => {
     >
       {isLoading && (
         <li
-          className="navds-combobox__list-item navds-combobox__list-item--loading"
+          className="navds-combobox__list-item--loading"
           role="option"
           aria-selected={false}
           id={`${id}-is-loading`}
@@ -44,7 +44,7 @@ const FilteredOptions = () => {
       )}
       {!isLoading && filteredOptions.length === 0 && (
         <li
-          className="navds-combobox__list-item navds-combobox__list-item--loading"
+          className="navds-combobox__list-item__no-options"
           role="option"
           aria-selected={false}
           id={`${id}-no-hits`}
