@@ -10,10 +10,9 @@ import {
 } from "@/types";
 import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import NextLink from "next/link";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import NotFotfund from "../../404";
 
 import {
@@ -322,7 +321,7 @@ const WithPreview = lazy(() => import("../../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -331,7 +330,7 @@ const Wrapper = (props: any) => {
             slug: `god-praksis/artikler/${props?.slug}`,
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 
