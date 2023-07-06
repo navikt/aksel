@@ -26,6 +26,8 @@ export default async function handler(
   switch (req.method) {
     case "POST":
       try {
+        res.status(405).json({ msg: "Feedback is temporarily disabled" });
+        return;
         const token = process.env.SANITY_WRITE_KEY;
 
         if (!token && isDevelopment) {
