@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { ChevronUpIcon, ChevronDownIcon } from "@navikt/aksel-icons";
 
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
@@ -7,9 +7,10 @@ interface ToggleListButtonProps {
   toggleListButtonLabel?: string;
 }
 
-export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
-  toggleListButtonLabel,
-}) => {
+export const ToggleListButton = forwardRef<
+  HTMLButtonElement,
+  ToggleListButtonProps
+>(({ toggleListButtonLabel }, ref) => {
   const { isListOpen, toggleIsListOpen } = useFilteredOptionsContext();
   return (
     <button
@@ -19,6 +20,7 @@ export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
       className="navds-combobox__button-toggle-list"
       aria-expanded={isListOpen}
       tabIndex={-1}
+      ref={ref}
     >
       <span className="navds-sr-only">
         {toggleListButtonLabel ?? "Alternativer"}
@@ -30,6 +32,6 @@ export const ToggleListButton: React.FC<ToggleListButtonProps> = ({
       )}
     </button>
   );
-};
+});
 
 export default ToggleListButton;

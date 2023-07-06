@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef, useMemo, useRef } from "react";
 import { BodyShort, Label, mergeRefs } from "../..";
 import ClearButton from "./ClearButton";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
@@ -32,6 +32,8 @@ export const Combobox = forwardRef<
     ...rest
   } = props;
 
+  const toggleListButtonRef = useRef<HTMLButtonElement>(null);
+
   const { currentOption, toggleIsListOpen } = useFilteredOptionsContext();
   const { selectedOptions } = useSelectedOptionsContext();
 
@@ -58,6 +60,7 @@ export const Combobox = forwardRef<
       inputProps={inputProps}
       inputSize={size}
       toggleIsListOpen={toggleIsListOpen}
+      toggleListButtonRef={toggleListButtonRef}
     >
       <Label
         htmlFor={inputProps.id}
@@ -116,7 +119,10 @@ export const Combobox = forwardRef<
             />
           )}
           {toggleListButton && (
-            <ToggleListButton toggleListButtonLabel={toggleListButtonLabel} />
+            <ToggleListButton
+              toggleListButtonLabel={toggleListButtonLabel}
+              ref={toggleListButtonRef}
+            />
           )}
         </div>
         <FilteredOptions />

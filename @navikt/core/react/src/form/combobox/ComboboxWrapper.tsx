@@ -10,6 +10,7 @@ type ComboboxWrapperProps = {
   };
   inputSize: string;
   toggleIsListOpen: (isListOpen: boolean) => void;
+  toggleListButtonRef: React.ForwardedRef<HTMLButtonElement>;
 };
 
 const ComboboxWrapper = ({
@@ -19,11 +20,15 @@ const ComboboxWrapper = ({
   inputProps,
   inputSize,
   toggleIsListOpen,
+  toggleListButtonRef,
 }: ComboboxWrapperProps) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   function onFocusInsideWrapper(e) {
-    if (!wrapperRef.current?.contains(e.relatedTarget)) {
+    if (
+      !wrapperRef.current?.contains(e.relatedTarget) &&
+      toggleListButtonRef?.current !== e.target
+    ) {
       toggleIsListOpen(true);
     }
   }
