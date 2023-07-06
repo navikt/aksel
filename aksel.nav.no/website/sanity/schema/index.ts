@@ -11,7 +11,6 @@ export const schema: SchemaPluginOptions = {
     document.Skrivehjelp,
     document.Publiseringsflyt,
     document.Feedback,
-    document.Metrikker,
 
     /* Komponentsider */
     document.KodeEksempelDoc,

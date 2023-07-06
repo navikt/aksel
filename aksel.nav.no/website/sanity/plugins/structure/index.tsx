@@ -21,7 +21,6 @@ import {
 import { FeedbackPanes } from "./feedback";
 import { FeedbackView } from "./FeedbackPreview";
 import { GodPraksisPanes } from "./god-praksis";
-/* import Metrics from "./Metrics"; */
 import { FileTextIcon, ImageIcon } from "@navikt/aksel-icons";
 import { PanesWithCount } from "./with-count";
 import differenceInMonths from "date-fns/differenceInMonths";
@@ -52,7 +51,6 @@ const filtered = [
   "skrivehjelp",
   "publication_flow",
   "aksel_feedback",
-  "metrics",
 ];
 
 export const structure = async (
@@ -367,13 +365,6 @@ export const structure = async (
                       .schemaType(`publication_flow`)
                       .icon(FileTextIcon)
                       .id(`publication_flow`),
-                    S.listItem()
-                      .title("Metrikker")
-                      .child(
-                        S.documentList()
-                          .title("Metrikker")
-                          .filter(`_type == 'metrics'`)
-                      ),
                   ])
               ),
           ]
@@ -444,14 +435,10 @@ export const defaultDocumentNode = (S, { schemaType }) => {
         .component(FeedbackView)
         .icon(CommentIcon)
         .title("Tilbakemeldinger"),
-      /* S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"), */
     ]);
   }
   if (schemaType === "aksel_forside") {
-    return S.document().views([
-      S.view.form(),
-      /* S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"), */
-    ]);
+    return S.document().views([S.view.form()]);
   }
   return S.document().views([S.view.form()]);
 };
