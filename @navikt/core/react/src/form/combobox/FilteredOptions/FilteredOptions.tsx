@@ -67,7 +67,7 @@ const FilteredOptions = () => {
           } /* TODO: Should this attribute ever be true? Can the add-button have the selected state? */
         >
           <PlusIcon />
-          <BodyShort size="medium">
+          <BodyShort>
             Legg til <Label as="span">&#8220;{value}&#8221;</Label>
           </BodyShort>
         </li>
@@ -85,7 +85,7 @@ const FilteredOptions = () => {
           role="option"
           aria-selected={selectedOptions.includes(o)}
         >
-          <BodyShort size="medium">{o}</BodyShort>
+          <BodyShort>{o}</BodyShort>
           {selectedOptions.includes(o) && <CheckIcon />}
         </li>
       ))}
