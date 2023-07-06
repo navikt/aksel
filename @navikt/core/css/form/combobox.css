@@ -26,6 +26,7 @@
 .navds-combobox__selected-options > li {
   margin: auto 0;
   background-color: var(--ac-combobox-selected-options-bg, var(--a-surface-action-selected));
+  border-radius: var(--a-border-radius-full);
 }
 
 .navds-combobox__selected-options > li:hover {
@@ -185,7 +186,7 @@
 
 .navds-combobox__list-item--selected.navds-combobox__list-item--focus,
 .navds-combobox__list-item--selected:hover {
-  background-color: var(--ac-combobox-selected-options-hover-bg, var(--a-surface-action-selected-hover));
+  background-color: var(--ac-combobox-selected-options-hover-bg, var(--a-surface-hover));
   border-left: 4px solid var(--a-border-focus);
   padding-left: calc(var(--a-spacing-5) - 4px);
 }
