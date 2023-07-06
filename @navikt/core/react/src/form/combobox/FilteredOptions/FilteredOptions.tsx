@@ -39,7 +39,7 @@ const FilteredOptions = () => {
           aria-selected={false}
           id={`${id}-is-loading`}
         >
-          <Loader />
+          <Loader aria-label="Søker..." />
         </li>
       )}
       {!isLoading && filteredOptions.length === 0 && (
