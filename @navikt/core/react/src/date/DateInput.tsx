@@ -4,6 +4,7 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 import { BodyShort, ErrorMessage, Label, omit } from "..";
 import { FormFieldProps, useFormField } from "../form/useFormField";
 import { useDateInputContext } from "./context";
+import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
 
 export interface DateInputProps
   extends FormFieldProps,
@@ -57,6 +58,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     errorId,
     showErrorMsg,
     hasError,
+    readOnly,
   } = useFormField(props, conditionalVariables.prefix);
 
   return (
@@ -71,6 +73,9 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "navds-date__field--error": hasError,
           "navds-form-field--disabled": !!inputProps.disabled,
           "navds-text-field--disabled": !!inputProps.disabled,
+          "navds-form-field--readonly": readOnly,
+          "navds-text-field--readonly": readOnly,
+          "navds-date__field--readonly": readOnly,
         }
       )}
     >
@@ -81,6 +86,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "navds-sr-only": hideLabel,
         })}
       >
+        <ReadOnlyIcon readOnly={readOnly} />
         {label}
       </Label>
       {!!description && (
@@ -102,6 +108,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           {...inputProps}
           autoComplete="off"
           aria-controls={ariaId}
+          readOnly={readOnly}
           className={cl(
             "navds-date__field-input",
             "navds-text-field__input",
@@ -111,8 +118,8 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           size={14}
         />
         <button
-          disabled={inputProps.disabled}
-          tabIndex={open ? -1 : 0}
+          disabled={inputProps.disabled || readOnly}
+          tabIndex={readOnly ? -1 : open ? -1 : 0}
           onClick={() => onOpen()}
           type="button"
           className="navds-date__field-button"

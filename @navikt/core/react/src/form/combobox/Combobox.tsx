@@ -1,13 +1,12 @@
 import cl from "clsx";
-import React, { forwardRef, useCallback, useMemo } from "react";
+import React, { forwardRef, useMemo, useRef } from "react";
 import { BodyShort, Label, mergeRefs } from "../..";
 import ClearButton from "./ClearButton";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "./SelectedOptions/SelectedOptions";
 import ToggleListButton from "./ToggleListButton";
-import { ComboboxClearEvent, ComboboxProps } from "./types";
-import { useCustomOptionsContext } from "./customOptionsContext";
+import { ComboboxProps } from "./types";
 import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 import ComboboxWrapper from "./ComboboxWrapper";
 import { useInputContext } from "./Input/inputContext";
@@ -33,18 +32,13 @@ export const Combobox = forwardRef<
     ...rest
   } = props;
 
-  const { currentOption, toggleIsListOpen, filteredOptions } =
-    useFilteredOptionsContext();
-  const { customOptions, removeCustomOption, addCustomOption } =
-    useCustomOptionsContext();
-  const {
-    selectedOptions,
-    removeSelectedOption,
-    addSelectedOption,
-    singleSelect,
-  } = useSelectedOptionsContext();
+  const toggleListButtonRef = useRef<HTMLButtonElement>(null);
+
+  const { currentOption, toggleIsListOpen } = useFilteredOptionsContext();
+  const { selectedOptions } = useSelectedOptionsContext();
 
   const {
+    clearInput,
     focusInput,
     hasError,
     inputDescriptionId,
@@ -52,77 +46,11 @@ export const Combobox = forwardRef<
     inputRef,
     value,
     size = "medium",
-    setValue,
   } = useInputContext();
 
   const mergedInputRef = useMemo(
     () => mergeRefs([inputRef, ref]),
     [inputRef, ref]
-  );
-
-  const handleClear = useCallback(
-    (event: ComboboxClearEvent) => {
-      onClear?.(event);
-      setValue("");
-    },
-    [setValue, onClear]
-  );
-
-  const handleDeleteSelectedOption = useCallback(
-    (clickedOption) => {
-      removeSelectedOption(clickedOption);
-      if (customOptions.includes(clickedOption))
-        removeCustomOption({ value: clickedOption });
-    },
-    [customOptions, removeCustomOption, removeSelectedOption]
-  );
-
-  const handleAddCustomOption = useCallback(
-    (event) => {
-      if (selectedOptions.includes(value.trim())) return;
-      addCustomOption({ value });
-      handleClear(event);
-    },
-    [selectedOptions, value, addCustomOption, handleClear]
-  );
-
-  const toggleOption = useCallback(
-    (event) => {
-      const clickedOption = event?.target?.textContent;
-      const focusedOption = currentOption;
-      // onClick: toggle selected option
-      if (clickedOption) {
-        if (selectedOptions.includes(clickedOption)) {
-          handleDeleteSelectedOption(clickedOption);
-        } else if (filteredOptions.includes(clickedOption))
-          addSelectedOption(clickedOption);
-      }
-      // onEnter: remove selected filteredOption
-      else if (focusedOption && selectedOptions.includes(focusedOption)) {
-        removeSelectedOption(focusedOption);
-        if (customOptions.includes(focusedOption))
-          removeCustomOption({ value: focusedOption });
-      }
-      // onEnter: add focused option
-      else if (focusedOption && filteredOptions?.includes?.(focusedOption)) {
-        addSelectedOption(focusedOption);
-      }
-      //onEnter: add custom option
-      else if (focusedOption && !filteredOptions.includes(focusedOption)) {
-        handleAddCustomOption(event);
-      }
-    },
-    [
-      currentOption,
-      selectedOptions,
-      filteredOptions,
-      addSelectedOption,
-      handleDeleteSelectedOption,
-      removeSelectedOption,
-      customOptions,
-      removeCustomOption,
-      handleAddCustomOption,
-    ]
   );
 
   return (
@@ -132,6 +60,7 @@ export const Combobox = forwardRef<
       inputProps={inputProps}
       inputSize={size}
       toggleIsListOpen={toggleIsListOpen}
+      toggleListButtonRef={toggleListButtonRef}
     >
       <Label
         htmlFor={inputProps.id}
@@ -160,57 +89,43 @@ export const Combobox = forwardRef<
             "navds-combobox__wrapper-inner navds-text-field__input",
             {
               "navds-combobox__wrapper-inner--virtually-unfocused":
-                currentOption,
+                currentOption !== null,
             }
           )}
           onClick={focusInput}
         >
-          {singleSelect ? (
-            <>
-              <Input
-                id={inputProps.id}
-                key="combobox-input"
-                ref={mergedInputRef}
-                inputClassName={inputClassName}
-                handleClear={handleClear}
-                toggleOption={toggleOption}
-                singleSelect
-                {...rest}
-              />
-            </>
+          {!shouldShowSelectedOptions ? (
+            <Input
+              id={inputProps.id}
+              ref={mergedInputRef}
+              inputClassName={inputClassName}
+              {...rest}
+            />
           ) : (
-            <SelectedOptions
-              selectedOptions={
-                shouldShowSelectedOptions ? selectedOptions : undefined
-              }
-              handleDeleteSelectedOption={handleDeleteSelectedOption}
-            >
+            <SelectedOptions selectedOptions={selectedOptions}>
               <Input
                 id={inputProps.id}
-                key="combobox-input"
                 ref={mergedInputRef}
                 inputClassName={inputClassName}
-                handleClear={handleClear}
-                toggleOption={toggleOption}
                 {...rest}
               />
             </SelectedOptions>
           )}
           {value && clearButton && (
             <ClearButton
-              handleClear={(event) => handleClear({ trigger: "Click", event })}
+              handleClear={clearInput}
               clearButtonLabel={clearButtonLabel}
+              tabIndex={-1}
             />
           )}
           {toggleListButton && (
-            <ToggleListButton toggleListButtonLabel={toggleListButtonLabel} />
+            <ToggleListButton
+              toggleListButtonLabel={toggleListButtonLabel}
+              ref={toggleListButtonRef}
+            />
           )}
         </div>
-        <FilteredOptions
-          singleSelect={singleSelect}
-          id={inputProps.id}
-          toggleOption={toggleOption}
-        />
+        <FilteredOptions />
       </div>
     </ComboboxWrapper>
   );

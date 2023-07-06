@@ -66,7 +66,7 @@ export const Hamburger = () => {
           aria={{ modal: true }}
           overlayClassName={styles.modalOverlay}
           contentLabel="Meny"
-          className="bg-surface-default absolute left-4 top-0 right-4 block rounded py-14 px-11 sm:right-6 sm:left-auto sm:w-96 sm:max-w-[90%] lg:hidden"
+          className="bg-surface-default shadow-xlarge absolute left-4 right-4 top-0 block rounded px-11 py-14 sm:left-auto sm:right-6 sm:w-96 sm:max-w-[90%] lg:hidden"
         >
           <nav aria-label="hovedmeny">
             <ul>
@@ -75,7 +75,7 @@ export const Hamburger = () => {
                 onClick={() => setOpen(false)}
                 className={cl(
                   styles.akselTertiaryButton,
-                  "absolute top-2 right-2"
+                  "absolute right-2 top-2"
                 )}
                 icon={<XMarkIcon title="lukk meny" fontSize="1.5rem" />}
               />

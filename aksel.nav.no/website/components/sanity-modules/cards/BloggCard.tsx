@@ -19,7 +19,7 @@ const BloggCard = ({
       <Heading size="medium" as="div">
         <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
           <Link
-            className="text-deepblue-500 no-underline hover:underline"
+            className="text-deepblue-500 underline hover:no-underline"
             onClick={(e) =>
               logNav(
                 "blogg-card",

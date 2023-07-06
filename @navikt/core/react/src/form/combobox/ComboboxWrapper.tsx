@@ -10,6 +10,7 @@ type ComboboxWrapperProps = {
   };
   inputSize: string;
   toggleIsListOpen: (isListOpen: boolean) => void;
+  toggleListButtonRef: React.RefObject<HTMLButtonElement>;
 };
 
 const ComboboxWrapper = ({
@@ -19,8 +20,18 @@ const ComboboxWrapper = ({
   inputProps,
   inputSize,
   toggleIsListOpen,
+  toggleListButtonRef,
 }: ComboboxWrapperProps) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+  function onFocusInsideWrapper(e) {
+    if (
+      !wrapperRef.current?.contains(e.relatedTarget) &&
+      toggleListButtonRef?.current !== e.target
+    ) {
+      toggleIsListOpen(true);
+    }
+  }
 
   function onBlurWrapper(e) {
     if (!wrapperRef.current?.contains(e.relatedTarget)) {
@@ -41,6 +52,7 @@ const ComboboxWrapper = ({
           "navds-search--disabled": !!inputProps.disabled,
         }
       )}
+      onFocus={onFocusInsideWrapper}
       onBlur={onBlurWrapper}
     >
       {children}

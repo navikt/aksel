@@ -77,14 +77,12 @@
 }
 
 .navds-toggle-group__button:focus-visible:hover[aria-pressed="false"] {
-  box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)),
-    0 0 0 4px var(--a-border-focus);
+  box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)), 0 0 0 4px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-toggle-group__button:focus:hover[aria-pressed="false"] {
-    box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)),
-      0 0 0 4px var(--a-border-focus);
+    box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)), 0 0 0 4px var(--a-border-focus);
   }
 }
 

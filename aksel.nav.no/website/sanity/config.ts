@@ -36,11 +36,11 @@ export const allArticleDocsRef = allArticleDocuments.map((x) => ({ type: x }));
 export const komponentKategorier = [{ title: "Core", value: "core" }];
 
 export const grunnleggendeKategorier = [
+  { title: "Introduksjon", value: "introduksjon" },
   { title: "Styling", value: "styling" },
   { title: "Guider", value: "guider" },
   { title: "Design", value: "design" },
   { title: "Kode", value: "kode" },
-  { title: "Nedlastbart", value: "nedlastbart" },
 ];
 
 export const monsterKategorier = [];

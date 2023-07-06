@@ -154,14 +154,12 @@
 }
 
 .navds-button--primary-neutral:focus-visible {
-  box-shadow: inset 0 0 0 1px var(--ac-button-primary-neutral-focus-border, var(--a-surface-default)),
-    var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 1px var(--ac-button-primary-neutral-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--primary-neutral:focus {
-    box-shadow: inset 0 0 0 1px var(--ac-button-primary-neutral-focus-border, var(--a-surface-default)),
-      var(--a-shadow-focus);
+    box-shadow: inset 0 0 0 1px var(--ac-button-primary-neutral-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
   }
 }
 
@@ -202,14 +200,12 @@
 }
 
 .navds-button--secondary:focus-visible:active {
-  box-shadow: inset 0 0 0 1px var(--ac-button-secondary-active-focus-border, var(--a-surface-default)),
-    var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 1px var(--ac-button-secondary-active-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--secondary:focus:active {
-    box-shadow: inset 0 0 0 1px var(--ac-button-secondary-active-focus-border, var(--a-surface-default)),
-      var(--a-shadow-focus);
+    box-shadow: inset 0 0 0 1px var(--ac-button-secondary-active-focus-border, var(--a-surface-default)), var(--a-shadow-focus);
   }
 }
 
@@ -236,15 +232,13 @@
 
 .navds-button--secondary-neutral:focus-visible {
   color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
-  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)),
-    var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--secondary-neutral:focus {
     color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
-    box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)),
-      var(--a-shadow-focus);
+    box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
   }
 }
 
@@ -300,7 +294,6 @@
 .navds-button--tertiary:active {
   color: var(--ac-button-tertiary-active-text, var(--a-text-on-action));
   background-color: var(--ac-button-tertiary-active-bg, var(--a-surface-action-active));
-  box-shadow: inset 0 0 0 1px var(--a-surface-default);
 }
 
 .navds-button--tertiary:active:hover {
@@ -340,21 +333,18 @@
 }
 
 .navds-button--tertiary-neutral:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)),
-    var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--tertiary-neutral:focus {
-    box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)),
-      var(--a-shadow-focus);
+    box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)), var(--a-shadow-focus);
   }
 }
 
 .navds-button--tertiary-neutral:active {
   color: var(--ac-button-tertiary-neutral-active-text, var(--a-text-on-neutral));
   background-color: var(--ac-button-tertiary-neutral-active-bg, var(--a-surface-neutral-active));
-  box-shadow: inset 0 0 0 1px var(--a-surface-default);
 }
 
 .navds-button--tertiary-neutral:active:hover {

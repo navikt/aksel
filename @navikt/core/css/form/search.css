@@ -146,8 +146,7 @@
 }
 
 .navds-search__button-search.navds-button--secondary:focus-visible:active {
-  box-shadow: 0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset,
-    var(--a-shadow-focus);
+  box-shadow: 0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset, var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
@@ -160,8 +159,7 @@
   }
 
   .navds-search__button-search.navds-button--secondary:focus:active {
-    box-shadow: 0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset,
-      var(--a-shadow-focus);
+    box-shadow: 0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset, var(--a-shadow-focus);
   }
 }
 

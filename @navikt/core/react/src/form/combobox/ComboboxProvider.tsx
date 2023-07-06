@@ -6,6 +6,28 @@ import { SelectedOptionsProvider } from "./SelectedOptions/selectedOptionsContex
 import { InputContextProvider } from "./Input/inputContext";
 import { ComboboxProps } from "./types";
 
+/**
+ * A component that allows the user to search in a list of options
+ *
+ * Has options for allowing only one or multiple options to be selected,
+ * or adding new, user-submitted values.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/combobox)
+ *
+ * @example
+ * ```jsx
+ * const options = ["apple", "banana", "orange"];
+ *
+ * return (
+ *    <Combobox
+ *      label="Velg en verdi"
+ *      options={options}
+ *      id="my-combobox"
+ *      shouldAutoComplete
+ *    />
+ * )
+ * ```
+ */
 const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {
     const {
@@ -14,16 +36,18 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultValue,
       error,
       errorId,
+      filteredOptions,
       id,
       isListOpen,
       isLoading = false,
+      isMultiSelect,
       onToggleSelected,
       selectedOptions,
       options,
       value,
       onChange,
+      onClear,
       shouldAutocomplete,
-      singleSelect,
       size,
       ...rest
     } = props;
@@ -36,27 +60,37 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
           id,
           value,
           onChange,
+          onClear,
           shouldAutocomplete,
           size,
         }}
       >
-        <SelectedOptionsProvider
-          value={{ selectedOptions, singleSelect, onToggleSelected }}
-        >
-          <CustomOptionsProvider>
+        <CustomOptionsProvider>
+          <SelectedOptionsProvider
+            value={{
+              allowNewValues,
+              isMultiSelect,
+              selectedOptions,
+              onToggleSelected,
+              options,
+            }}
+          >
             <FilteredOptionsProvider
               value={{
                 allowNewValues,
+                filteredOptions,
                 isListOpen,
                 isLoading,
+                isMultiSelect,
                 options,
-                singleSelect,
               }}
             >
-              <Combobox {...rest}>{children}</Combobox>
+              <Combobox ref={ref} {...rest}>
+                {children}
+              </Combobox>
             </FilteredOptionsProvider>
-          </CustomOptionsProvider>
-        </SelectedOptionsProvider>
+          </SelectedOptionsProvider>
+        </CustomOptionsProvider>
       </InputContextProvider>
     );
   }

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import { fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { Combobox } from "..";
@@ -36,28 +36,34 @@ const App = (props) => {
 };
 
 describe("Render combobox", () => {
-  it("Should be able to search, select and remove selections", async () => {
-    const utils = render(<App options={options} />);
+  describe("with multi select", () => {
+    it("Should be able to search, select and remove selections", async () => {
+      const utils = render(<App isMultiSelect options={options} />);
 
-    await userEvent.click(
-      utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
-    );
-    await act(async () => {
-      await userEvent.type(
-        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
-        "apple"
-      );
-    });
-    await act(async () => {
-      fireEvent.click(await utils.findByRole("option", { name: "apple" }));
-    });
-    expect(
-      await utils.findByRole("option", { name: "apple", selected: true })
-    ).toBeInTheDocument();
-    await act(async () => {
-      await userEvent.click(
-        await utils.findByRole("button", { name: "apple slett" })
-      );
+      await act(async () => {
+        await userEvent.click(
+          utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+        );
+      });
+      await act(async () => {
+        await userEvent.type(
+          utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
+          "apple"
+        );
+      });
+      await act(async () => {
+        await userEvent.click(
+          await utils.findByRole("option", { name: "apple" })
+        );
+      });
+      expect(
+        await utils.findByRole("option", { name: "apple", selected: true })
+      ).toBeInTheDocument();
+      await act(async () => {
+        await userEvent.click(
+          await utils.findByRole("button", { name: "apple slett" })
+        );
+      });
     });
   });
 
@@ -72,9 +78,11 @@ describe("Combobox state-handling", () => {
   it("Should not select previous focused element when closes", async () => {
     const utils = render(<App options={options} />);
 
-    await userEvent.click(
-      utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
-    );
+    await act(async () => {
+      await userEvent.click(
+        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+      );
+    });
     await act(async () => {
       await userEvent.type(
         utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
@@ -86,23 +94,25 @@ describe("Combobox state-handling", () => {
     });
 
     expect(
-      await utils.findByRole("button", { name: "banana slett" })
+      await utils.queryByRole("button", { name: "banana slett" })
     ).toBeNull();
   });
 
   it("Should reset list when resetting input (ESC)", async () => {
     const utils = render(<App options={options} />);
 
-    await userEvent.click(
-      utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
-    );
+    await act(async () => {
+      await userEvent.click(
+        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+      );
+    });
     await act(async () => {
       await userEvent.type(
         utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
         "apple"
       );
       await userEvent.keyboard("{ArrowDown}");
-      await userEvent.keyboard("{esc}");
+      await userEvent.keyboard("{Escape}");
       await userEvent.keyboard("{ArrowDown}");
     });
 

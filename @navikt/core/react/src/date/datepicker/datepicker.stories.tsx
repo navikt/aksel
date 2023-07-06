@@ -341,3 +341,25 @@ export const Size = () => {
     </div>
   );
 };
+
+export const Readonly = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps} dropdownCaption>
+        <DatePicker.Input
+          size="medium"
+          {...inputProps}
+          value="01.02.2021"
+          label="Velg dato"
+          readOnly
+        />
+      </DatePicker>
+    </div>
+  );
+};

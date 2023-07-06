@@ -209,8 +209,7 @@ button.navds-stepper__step {
   color: var(--ac-stepper-non-interactive-active, var(--a-text-default));
 }
 
-.navds-stepper__step--non-interactive.navds-stepper__step--behind.navds-stepper__step--completed
-  + .navds-stepper__line {
+.navds-stepper__step--non-interactive.navds-stepper__step--behind.navds-stepper__step--completed + .navds-stepper__line {
   background-color: var(--ac-stepper-non-interactive-line-completed, var(--a-border-strong));
 }
 
@@ -238,8 +237,7 @@ button.navds-stepper__step {
   background-color: var(--ac-stepper-active-completed, var(--a-surface-action-selected));
 }
 
-:where(.navds-stepper__step--non-interactive, .navds-stepper__step--non-interactive:hover)
-  .navds-stepper__circle--success {
+:where(.navds-stepper__step--non-interactive, .navds-stepper__step--non-interactive:hover) .navds-stepper__circle--success {
   color: var(--a-text-on-inverted);
   background-color: var(--ac-stepper-non-interactive-completed-bg, var(--a-surface-neutral));
 }
@@ -249,8 +247,7 @@ button.navds-stepper__step {
   background-color: var(--ac-stepper-non-interactive-active-completed, var(--a-surface-inverted));
 }
 
-:where(.navds-stepper__step--completed.navds-stepper__step--active.navds-stepper__step--non-interactive)
-  .navds-stepper__circle {
+:where(.navds-stepper__step--completed.navds-stepper__step--active.navds-stepper__step--non-interactive) .navds-stepper__circle {
   color: var(--ac-stepper-non-interactive-active-completed, var(--a-text-default));
 }
 

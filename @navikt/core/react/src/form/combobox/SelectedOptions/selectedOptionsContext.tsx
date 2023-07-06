@@ -1,15 +1,26 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import usePrevious from "../../../util/usePrevious";
 import { useInputContext } from "../Input/inputContext";
 import { ComboboxProps } from "../types";
+import { useCustomOptionsContext } from "../customOptionsContext";
 
 type SelectedOptionsContextType = {
-  selectedOptions: string[];
   addSelectedOption: (option: string) => void;
+  isMultiSelect?: boolean;
   removeSelectedOption: (option: string) => void;
-  setSelectedOptions: (any) => void;
   prevSelectedOptions?: string[];
-  singleSelect?: boolean;
+  selectedOptions: string[];
+  setSelectedOptions: (any) => void;
+  toggleOption: (
+    option: string,
+    event: React.KeyboardEvent | React.PointerEvent
+  ) => void;
 };
 
 const SelectedOptionsContext = createContext<SelectedOptionsContextType>(
@@ -23,56 +34,95 @@ export const SelectedOptionsProvider = ({
   children: any;
   value: Pick<
     ComboboxProps,
-    "selectedOptions" | "singleSelect" | "onToggleSelected"
+    | "allowNewValues"
+    | "isMultiSelect"
+    | "options"
+    | "selectedOptions"
+    | "onToggleSelected"
   >;
 }) => {
-  const { setSearchTerm, setValue } = useInputContext();
+  const { clearInput, focusInput } = useInputContext();
+  const { customOptions, removeCustomOption, addCustomOption } =
+    useCustomOptionsContext();
   const {
+    allowNewValues,
+    isMultiSelect,
     selectedOptions: externalSelectedOptions,
-    singleSelect,
     onToggleSelected,
+    options,
   } = value;
   const [internalSelectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const selectedOptions = externalSelectedOptions ?? internalSelectedOptions;
+  const selectedOptions = useMemo(
+    () =>
+      externalSelectedOptions ?? [...customOptions, ...internalSelectedOptions],
+    [customOptions, externalSelectedOptions, internalSelectedOptions]
+  );
 
   const addSelectedOption = useCallback(
     (option: string) => {
-      if (singleSelect) {
-        setSelectedOptions([option]);
-        setValue(option);
-        setSearchTerm(option);
-      } else {
+      if (!options.includes(option)) {
+        allowNewValues && addCustomOption(option);
+      } else if (isMultiSelect) {
         setSelectedOptions((prevSelectedOptions) => [
           ...prevSelectedOptions,
           option,
         ]);
+      } else {
+        setSelectedOptions([option]);
       }
       onToggleSelected?.(option, true);
     },
-    [onToggleSelected, setSearchTerm, setValue, singleSelect]
+    [addCustomOption, allowNewValues, isMultiSelect, onToggleSelected, options]
   );
 
   const removeSelectedOption = useCallback(
     (option: string) => {
-      setSelectedOptions((prevSelectedOptions) =>
-        prevSelectedOptions.filter(
-          (selectedOption) => selectedOption !== option
-        )
-      );
+      if (customOptions.includes(option)) {
+        removeCustomOption(option);
+      } else {
+        setSelectedOptions((prevSelectedOptions) =>
+          prevSelectedOptions.filter(
+            (selectedOption) => selectedOption !== option
+          )
+        );
+      }
       onToggleSelected?.(option, false);
     },
-    [onToggleSelected]
+    [customOptions, onToggleSelected, removeCustomOption]
+  );
+
+  const toggleOption = useCallback(
+    (option: string, event: React.KeyboardEvent | React.PointerEvent) => {
+      if (selectedOptions.includes(option)) {
+        removeSelectedOption(option);
+      } else {
+        addSelectedOption(option);
+      }
+      if (!isMultiSelect) {
+        clearInput(event);
+      }
+      focusInput();
+    },
+    [
+      addSelectedOption,
+      clearInput,
+      focusInput,
+      isMultiSelect,
+      removeSelectedOption,
+      selectedOptions,
+    ]
   );
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
 
   const selectedOptionsState = {
-    selectedOptions,
     addSelectedOption,
+    isMultiSelect,
     removeSelectedOption,
-    setSelectedOptions,
     prevSelectedOptions,
-    singleSelect,
+    selectedOptions,
+    setSelectedOptions,
+    toggleOption,
   };
 
   return (

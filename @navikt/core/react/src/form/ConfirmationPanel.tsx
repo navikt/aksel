@@ -6,7 +6,7 @@ import { useFormField } from "./useFormField";
 export interface ConfirmationPanelProps
   extends Omit<
     CheckboxProps,
-    "children" | "indeterminate" | "hideLabel" | "error"
+    "children" | "indeterminate" | "hideLabel" | "error" | "readOnly"
   > {
   /**
    * Additional information on panel

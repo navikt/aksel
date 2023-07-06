@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
-import React, { useState, useId } from "react";
+import React, { useState, useId, useMemo } from "react";
 import { userEvent, within } from "@storybook/testing-library";
 import { Chips, Combobox, TextField } from "../../index";
+import { expect } from "@storybook/jest";
 
 export default {
   title: "ds-react/Combobox",
@@ -44,6 +45,7 @@ export const Default = (props) => {
   return (
     <div data-theme="light">
       <Combobox
+        shouldAutocomplete={props.shouldAutoComplete}
         options={props.options}
         label="Hva er dine favorittfrukter?"
         /* everything under here is optional? */
@@ -56,9 +58,51 @@ export const Default = (props) => {
 
 Default.args = {
   options,
+  shouldAutoComplete: true,
 };
 
-export const WithExternalChips = (props) => {
+export function MultiSelect(props) {
+  const id = useId();
+  return (
+    <div>
+      <Combobox
+        id={id}
+        label="Komboboks - velg flere"
+        options={props.options}
+        isMultiSelect={props.isMultiSelect}
+      />
+    </div>
+  );
+}
+
+MultiSelect.args = {
+  options,
+  isMultiSelect: true,
+};
+
+export function MultiSelectWithAddNewOptions(props) {
+  const id = useId();
+  return (
+    <div>
+      <Combobox
+        id={id}
+        isMultiSelect={props.isMultiSelect}
+        label="Komboboks (med mulighet for å legge til nye verdier)"
+        options={props.options}
+        allowNewValues={props.allowNewValues}
+      />
+    </div>
+  );
+}
+
+MultiSelectWithAddNewOptions.args = {
+  allowNewValues: true,
+  isMultiSelect: true,
+  options,
+  shouldAutocomplete: false,
+};
+
+export const MultiSelectWithExternalChips = (props) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     props.selectedOptions
   );
@@ -89,7 +133,7 @@ export const WithExternalChips = (props) => {
         selectedOptions={selectedOptions}
         onToggleSelected={(option: string) => toggleSelected(option)}
         isListOpen={props.isListOpen}
-        /* everything under here is optional */
+        isMultiSelect
         value={props.controlled ? value : undefined}
         onChange={(event) =>
           props.controlled ? setValue(event.currentTarget.value) : undefined
@@ -104,7 +148,7 @@ export const WithExternalChips = (props) => {
   );
 };
 
-WithExternalChips.args = {
+MultiSelectWithExternalChips.args = {
   controlled: false,
   options,
   selectedOptions: [],
@@ -131,69 +175,6 @@ Loading.args = {
   isListOpen: true,
 };
 
-export function SingleSelectWithAutocomplete(props) {
-  const id = useId();
-  return (
-    <div>
-      <Combobox
-        id={id}
-        label="Komboboks (single select)"
-        singleSelect={props.singleSelect || true}
-        options={props.options}
-        shouldAutocomplete={props.shouldAutocomplete}
-      />
-    </div>
-  );
-}
-
-SingleSelectWithAutocomplete.args = {
-  singleSelect: true,
-  options,
-  shouldAutocomplete: true,
-};
-
-export function SingleSelectWithoutAutoComplete(props) {
-  const id = useId();
-  return (
-    <div>
-      <Combobox
-        id={id}
-        label="Komboboks (single select)"
-        singleSelect={props.singleSelect || true}
-        options={props.options}
-        shouldAutocomplete={props.shouldAutocomplete}
-      />
-    </div>
-  );
-}
-
-SingleSelectWithoutAutoComplete.args = {
-  singleSelect: true,
-  options,
-  shouldAutocomplete: false,
-};
-
-export function ComboboxWithAddNewOptions(props) {
-  const id = useId();
-  return (
-    <div>
-      <Combobox
-        id={id}
-        label="Komboboks (med nye verdier)"
-        options={props.options}
-        allowNewValues={props.allowNewValues}
-      />
-    </div>
-  );
-}
-
-ComboboxWithAddNewOptions.args = {
-  allowNewValues: true,
-  singleSelect: true,
-  options,
-  shouldAutocomplete: false,
-};
-
 export function ComboboxWithNoHits(props) {
   const id = useId();
   const [value, setValue] = useState(props.value);
@@ -205,13 +186,13 @@ export function ComboboxWithNoHits(props) {
         options={props.options}
         value={value}
         onChange={(event) => setValue(event.currentTarget.value)}
+        isListOpen={true}
       />
     </div>
   );
 }
 
 ComboboxWithNoHits.args = {
-  singleSelect: true,
   options,
   value: "Orange",
 };
@@ -220,6 +201,10 @@ export const Controlled = (props) => {
   const id = useId();
   const [value, setValue] = useState(props.value);
   const [selectedOptions, setSelectedOptions] = useState(props.selectedOptions);
+  const filteredOptions = useMemo(
+    () => props.options.filter((option) => option.includes(value)),
+    [props.options, value]
+  );
 
   const onToggleSelected = (option, isSelected) => {
     if (isSelected) {
@@ -240,6 +225,7 @@ export const Controlled = (props) => {
       <Combobox
         label="Hva er dine favorittfrukter?"
         id={id}
+        filteredOptions={filteredOptions}
         options={props.options}
         onChange={(event) => setValue(event.target.value)}
         onToggleSelected={onToggleSelected}
@@ -254,37 +240,6 @@ Controlled.args = {
   value: "apple",
   options,
   selectedOptions: initialSelectedOptions,
-};
-
-export const WithCallbacks = () => {
-  const id = useId();
-  const [lastSelected, setLastSelected] = useState<{
-    option: string;
-    isSelected: boolean;
-  }>();
-  return (
-    <div>
-      {lastSelected && (
-        <p>
-          Sist valgt: {lastSelected.option} (
-          {lastSelected.isSelected ? "valgt" : "ikke valgt"})
-        </p>
-      )}
-      <Combobox
-        label="Hva er dine favorittfrukter?"
-        size="medium"
-        id={id}
-        options={options}
-        onToggleSelected={(option, isSelected) =>
-          setLastSelected({ option, isSelected })
-        }
-      />
-    </div>
-  );
-};
-
-WithCallbacks.args = {
-  options: [],
 };
 
 function sleep(ms: number) {
@@ -310,10 +265,95 @@ export const CancelInputTest = {
 
     userEvent.keyboard("{ArrowDown}");
     await sleep(1000);
-    userEvent.keyboard("{esc}");
+    userEvent.keyboard("{Escape}");
     await sleep(1000);
     userEvent.keyboard("{ArrowDown}");
     const banana = canvas.getByText("banana");
     userEvent.click(banana);
+  },
+};
+
+export const RemoveSelectedMultiSelectTest = {
+  render: () => {
+    return (
+      <div data-theme="light">
+        <Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          isMultiSelect
+        />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+
+    userEvent.click(input);
+    await userEvent.type(input, "apple", { delay: 200 });
+    await sleep(250);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    userEvent.keyboard("{Escape}");
+    await sleep(250);
+
+    userEvent.click(input);
+    await userEvent.type(input, "banana", { delay: 200 });
+    await sleep(250);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    userEvent.keyboard("{Escape}");
+    await sleep(250);
+
+    const appleSlett = canvas.getByLabelText("apple slett");
+    userEvent.click(appleSlett);
+    await sleep(250);
+
+    const bananaSlett = canvas.getByLabelText("banana slett");
+    expect(bananaSlett).toBeInTheDocument();
+    const appleSlettAgain = canvas.queryByLabelText("apple slett");
+    expect(appleSlettAgain).not.toBeInTheDocument();
+  },
+};
+
+export const AddWhenAddNewDisabledTest = {
+  render: () => {
+    return (
+      <div data-theme="light">
+        <Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          isMultiSelect
+        />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+
+    userEvent.click(input);
+    await userEvent.type(input, "aaa", { delay: 200 });
+    await sleep(250);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    userEvent.keyboard("{Escape}");
+    await sleep(250);
+
+    const invalidSelect = canvas.queryByLabelText("aaa slett");
+    expect(invalidSelect).not.toBeInTheDocument();
   },
 };

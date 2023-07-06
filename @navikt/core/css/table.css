@@ -28,9 +28,7 @@
   background-color: var(--ac-table-row-selected-hover, var(--a-surface-action-subtle-hover));
 }
 
-.navds-table--zebra-stripes
-  .navds-table__body
-  :where(.navds-table__row:nth-child(odd):not(.navds-table__row--selected)) {
+.navds-table--zebra-stripes .navds-table__body :where(.navds-table__row:nth-child(odd):not(.navds-table__row--selected)) {
   background-color: var(--ac-table-row-zebra, var(--a-surface-subtle));
 }
 

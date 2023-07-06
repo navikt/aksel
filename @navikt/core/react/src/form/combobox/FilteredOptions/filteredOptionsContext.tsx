@@ -25,12 +25,12 @@ const getMatchingValuesFromList = (value, list) =>
 
 type FilteredOptionsContextType = {
   activeDecendantId?: string;
+  allowNewValues?: boolean;
   ariaDescribedBy?: string;
   filteredOptionsRef: React.RefObject<HTMLUListElement>;
   filteredOptionsIndex: number | null;
   setFilteredOptionsIndex: (index: number) => void;
   isListOpen: boolean;
-  setInternalListOpen: (open: boolean) => void;
   isLoading?: boolean;
   filteredOptions: string[];
   isValueNew: boolean;
@@ -50,10 +50,10 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
 export const FilteredOptionsProvider = ({ children, value: props }) => {
   const {
     allowNewValues,
+    filteredOptions: externalFilteredOptions,
     isListOpen: isExternalListOpen,
     isLoading,
     options,
-    singleSelect,
   } = props;
   const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
   const {
@@ -73,15 +73,13 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const { customOptions } = useCustomOptionsContext();
 
   const filteredOptions = useMemo(() => {
+    if (externalFilteredOptions) {
+      return externalFilteredOptions;
+    }
     const opts = [...customOptions, ...options];
     setFilteredOptionsIndex(null);
     return getMatchingValuesFromList(searchTerm, opts);
-  }, [customOptions, options, searchTerm]);
-
-  useEffect(() => {
-    if (isExternalListOpen !== undefined)
-      setInternalListOpen(isExternalListOpen);
-  }, [isExternalListOpen]);
+  }, [customOptions, externalFilteredOptions, options, searchTerm]);
 
   const previousSearchTerm = usePrevious(searchTerm);
 
@@ -117,16 +115,13 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, []);
 
   const isValueNew = useMemo(
-    () =>
-      allowNewValues &&
-      Boolean(value) &&
-      !isValueInList(value, filteredOptions),
-    [allowNewValues, value, filteredOptions]
+    () => Boolean(value) && !isValueInList(value, filteredOptions),
+    [value, filteredOptions]
   );
 
   const getMinimumIndex = useCallback(() => {
-    return isValueNew && !singleSelect ? -1 : 0;
-  }, [isValueNew, singleSelect]);
+    return isValueNew && allowNewValues ? -1 : 0;
+  }, [allowNewValues, isValueNew]);
 
   useEffect(() => {
     if (!isLoading && filteredOptions.length === 0) {
@@ -134,7 +129,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     } else if ((value && value !== "") || isLoading) {
       toggleIsListOpen(true);
       if (shouldAutocomplete && filteredOptions[0]) {
-        //setFilteredOptionsIndex(getMinimumIndex());
         setAriaDescribedBy(
           `${id}-option-${filteredOptions[0].replace(" ", "-")}`
         );
@@ -207,23 +201,27 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     if (filteredOptionsIndex === getMinimumIndex()) {
       toggleIsListOpen(false);
       setFilteredOptionsIndex(null);
+    } else {
+      const newIndex = Math.max(getMinimumIndex(), filteredOptionsIndex - 1);
+      setFilteredOptionsIndex(newIndex);
     }
-    const newIndex = Math.max(getMinimumIndex(), filteredOptionsIndex - 1);
-    setFilteredOptionsIndex(newIndex);
   }, [filteredOptionsIndex, getMinimumIndex, toggleIsListOpen]);
 
   const moveFocusDown = useCallback(() => {
     if (filteredOptionsIndex === null || !isListOpen) {
       toggleIsListOpen(true);
-      setFilteredOptionsIndex(getMinimumIndex());
+      if (allowNewValues || filteredOptions.length >= 1) {
+        setFilteredOptionsIndex(getMinimumIndex());
+      }
       return;
     }
     const newIndex = Math.min(
       filteredOptionsIndex + 1,
-      filteredOptions.length - 1
+      Math.max(getMinimumIndex(), filteredOptions.length - 1)
     );
     setFilteredOptionsIndex(newIndex);
   }, [
+    allowNewValues,
     filteredOptions.length,
     filteredOptionsIndex,
     getMinimumIndex,
@@ -243,12 +241,12 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
 
   const filteredOptionsState = {
     activeDecendantId,
+    allowNewValues,
     filteredOptionsRef,
     filteredOptionsIndex,
     setFilteredOptionsIndex,
     shouldAutocomplete,
     isListOpen,
-    setInternalListOpen,
     isLoading,
     filteredOptions,
     isValueNew,

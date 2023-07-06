@@ -49,13 +49,13 @@
 }
 
 .navds-accordion__item:last-child:where(.navds-accordion__item--open) :where(.navds-accordion__header) {
-  box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent),
-    inset 0 2px 0 0 var(--a-transparent), inset 0 2px 0 0 var(--__ac-accordion-header-shadow-color);
+  box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent), inset 0 2px 0 0 var(--a-transparent),
+    inset 0 2px 0 0 var(--__ac-accordion-header-shadow-color);
 }
 
 .navds-accordion__item:last-child:where(.navds-accordion__item--open) {
-  box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent),
-    inset 0 2px 0 0 var(--a-transparent), inset 0 -2px 0 0 var(--__ac-accordion-header-shadow-color);
+  box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent), inset 0 2px 0 0 var(--a-transparent),
+    inset 0 -2px 0 0 var(--__ac-accordion-header-shadow-color);
 }
 
 .navds-accordion__item--open > :where(.navds-accordion__header) {
@@ -106,9 +106,7 @@
   align-self: center;
 }
 
-:where(.navds-accordion__header):hover
-  > :where(.navds-accordion__icon-wrapper)
-  > :where(.navds-accordion__header-chevron) {
+:where(.navds-accordion__header):hover > :where(.navds-accordion__icon-wrapper) > :where(.navds-accordion__header-chevron) {
   transform: translateY(1px);
 }
 

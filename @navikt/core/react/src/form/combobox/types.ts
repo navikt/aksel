@@ -1,14 +1,6 @@
 import React, { ChangeEvent, InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
-export type ComboboxClearEvent =
-  | {
-      trigger: "Click";
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
-    }
-  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> }
-  | { trigger: "Enter"; event: React.KeyboardEvent<HTMLButtonElement> };
-
 export interface ComboboxProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "value"> {
@@ -35,6 +27,12 @@ export interface ComboboxProps
    */
   clearButtonLabel?: string;
   /**
+   * A list of options to display in the dropdown list.
+   * If provided, this overrides the internal search logic in the component.
+   * Useful for e.g. searching on a server or when overriding the search algorithm to search for synonyms or similar.
+   */
+  filteredOptions?: string[];
+  /**
    * Optionally hide the label visually.
    * Not recommended, but can be considered for e.g. search fields in the top menu.
    */
@@ -56,6 +54,13 @@ export interface ComboboxProps
    */
   isLoading?: boolean;
   /**
+   * Set to "true" to allow multiple selections
+   *
+   * This will display selected values as a list of Chips in front of the input field, instead of a selection replacing the value of the input.
+   *
+   */
+  isMultiSelect?: boolean;
+  /**
    * Callback function triggered whenever the value of the input field is triggered.
    *
    * @param event
@@ -68,7 +73,7 @@ export interface ComboboxProps
    * @param event
    * @returns
    */
-  onClear?: (event: ComboboxClearEvent) => void;
+  onClear?: (event: React.PointerEvent | React.KeyboardEvent) => void;
   /**
    * Callback function triggered whenever an option is selected or de-selected
    *
@@ -77,13 +82,6 @@ export interface ComboboxProps
    * @returns
    */
   onToggleSelected?: (option: string, isSelected: boolean) => void;
-  /**
-   * Set to "true" to allow only one selection
-   *
-   * This will transform the combobox from a multiselect component with chips for selected options,
-   * to an auto-complete component which sets the value to the selected option.
-   */
-  singleSelect?: boolean;
   /**
    * List of selected options.
    *
