@@ -6,6 +6,7 @@ import React, {
   useContext,
   useCallback,
   useRef,
+  useLayoutEffect,
 } from "react";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../Input/inputContext";
@@ -64,7 +65,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     setSearchTerm,
     shouldAutocomplete,
   } = useInputContext();
-  const [ariaDescribedBy, setAriaDescribedBy] = useState<string>();
 
   const [filteredOptionsIndex, setFilteredOptionsIndex] = useState<
     number | null
@@ -123,31 +123,27 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     return isValueNew && allowNewValues ? -1 : 0;
   }, [allowNewValues, isValueNew]);
 
-  useEffect(() => {
+  const ariaDescribedBy = useMemo(() => {
     if (!isLoading && filteredOptions.length === 0) {
-      setAriaDescribedBy(`${id}-no-hits`);
+      return `${id}-no-hits`;
     } else if ((value && value !== "") || isLoading) {
-      toggleIsListOpen(true);
       if (shouldAutocomplete && filteredOptions[0]) {
-        setAriaDescribedBy(
-          `${id}-option-${filteredOptions[0].replace(" ", "-")}`
-        );
+        return `${id}-option-${filteredOptions[0].replace(" ", "-")}`;
       } else if (isLoading) {
-        setAriaDescribedBy(`${id}-is-loading`);
+        return `${id}-is-loading`;
       }
     } else {
-      toggleIsListOpen(false);
-      setAriaDescribedBy(undefined);
+      return undefined;
     }
-  }, [
-    getMinimumIndex,
-    isLoading,
-    value,
-    shouldAutocomplete,
-    toggleIsListOpen,
-    filteredOptions,
-    id,
-  ]);
+  }, [isLoading, value, shouldAutocomplete, filteredOptions, id]);
+
+  useLayoutEffect(() => {
+    if ((value && value !== "") || isLoading) {
+      toggleIsListOpen(true);
+    } else if (filteredOptions.length === 0) {
+      toggleIsListOpen(false);
+    }
+  }, [isLoading, value, toggleIsListOpen, filteredOptions]);
 
   const currentOption = useMemo(() => {
     if (filteredOptionsIndex == null) {
