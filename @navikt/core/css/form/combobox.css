@@ -25,7 +25,6 @@
 
 .navds-combobox__selected-options > li {
   margin: auto 0;
-  background-color: var(--ac-combobox-selected-options-bg, var(--a-surface-action-selected));
   border-radius: var(--a-border-radius-full);
 }
 
