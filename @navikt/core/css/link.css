@@ -3,6 +3,10 @@
   text-decoration: underline;
 }
 
+.navds-link:visited {
+  color: var(--ac-link-visited-text, var(--a-text-visited));
+}
+
 .navds-link > svg {
   margin: 0 -0.1em -0.15em;
 }

@@ -6,6 +6,8 @@ import {
   ConfirmationPanel as DsConfirmationPanel,
   Link,
 } from "..";
+import { RandomIcon } from "../util/RandomIcon";
+
 export default {
   title: "ds-react/Link",
   component: Link,
@@ -13,7 +15,8 @@ export default {
 
 const LinkWrapper = ({
   children = "Ex aliqua incididunt",
-  icon = false,
+  iconRight = false,
+  iconLeft = false,
   variant = "action",
   "remove-underline": removeUnderline = false,
 }) => (
@@ -24,16 +27,16 @@ const LinkWrapper = ({
       remove-underline={removeUnderline}
       variant={variant as "action" | "neutral" | "subtle"}
     >
-      {icon && (
+      {iconLeft && (
         <>
-          <PlusCircleFillIcon />{" "}
+          <RandomIcon />{" "}
         </>
       )}
       {children}
-      {icon && (
+      {iconRight && (
         <>
           {" "}
-          <PlusCircleFillIcon />
+          <RandomIcon />
         </>
       )}
     </Link>{" "}
@@ -83,7 +86,7 @@ export const Default = {
 };
 
 export const Inline = {
-  render: ({ icon }) => {
+  render: ({ iconLeft, iconRight }) => {
     return (
       <div
         className="colgap"
@@ -95,23 +98,43 @@ export const Inline = {
       >
         <style>{`.storybook-custom-spacing { white-space: pre;}`}</style>
         <BodyLong>
-          <LinkWrapper remove-underline icon={icon} />
+          <LinkWrapper
+            remove-underline
+            iconLeft={iconLeft}
+            iconRight={iconRight}
+          />
           Eiusmod aute.
-          <LinkWrapper remove-underline icon={icon} />
+          <LinkWrapper
+            remove-underline
+            iconLeft={iconLeft}
+            iconRight={iconRight}
+          />
           Culpa sit aute est duis minim in in voluptate velit Incididunt laborum
           nisi nisi Lorem officia adipisicing non veniam
-          <LinkWrapper remove-underline icon={icon}>
+          <LinkWrapper
+            remove-underline
+            iconLeft={iconLeft}
+            iconRight={iconRight}
+          >
             blah blah blah blah blah blah blah blah blah blah blah blah blah
             blah blah blah blah blah blah blah blah
           </LinkWrapper>
           dolor eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
-          <LinkWrapper remove-underline icon={icon}>
+          <LinkWrapper
+            remove-underline
+            iconLeft={iconLeft}
+            iconRight={iconRight}
+          >
             Link
           </LinkWrapper>
         </BodyLong>
         <BodyLong className="storybook-custom-spacing">
           Custom{"   "}
-          <LinkWrapper remove-underline icon={icon}>
+          <LinkWrapper
+            remove-underline
+            iconLeft={iconLeft}
+            iconRight={iconRight}
+          >
             link
           </LinkWrapper>
           {"     "}spacing.
@@ -120,7 +143,8 @@ export const Inline = {
     );
   },
   args: {
-    icon: false,
+    iconLeft: false,
+    iconRight: false,
   },
 };
 
@@ -169,13 +193,17 @@ export const ConfirmationPanel = () => {
 };
 
 export const Variants = {
-  render: ({ icon }) => {
+  render: ({ iconLeft, iconRight }) => {
     return (
       <div className="colgap">
         {["action", "neutral", "subtle"].map((variant) => (
           <>
             <div>
-              <LinkWrapper icon={icon} variant={variant} />
+              <LinkWrapper
+                iconLeft={iconLeft}
+                iconRight={iconRight}
+                variant={variant}
+              />
             </div>
           </>
         ))}
@@ -183,6 +211,7 @@ export const Variants = {
     );
   },
   args: {
-    icon: false,
+    iconLeft: false,
+    iconRight: false,
   },
 };
