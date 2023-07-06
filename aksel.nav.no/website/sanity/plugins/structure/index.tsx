@@ -24,6 +24,9 @@ import { GodPraksisPanes } from "./god-praksis";
 /* import Metrics from "./Metrics"; */
 import { FileTextIcon, ImageIcon } from "@navikt/aksel-icons";
 import { PanesWithCount } from "./with-count";
+import differenceInMonths from "date-fns/differenceInMonths";
+
+const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
 /* import { WebPreview, JsonView } from './previews' */
 const filtered = [
@@ -88,11 +91,37 @@ export const structure = async (
     { id: currentUser?.id }
   );
 
+  let outdated = await getClient({ apiVersion: "2021-06-07" }).fetch(
+    `*[$id in contributors[]->user_id.current]{_id, updateInfo}`,
+    { id: currentUser?.id }
+  );
+
+  outdated = outdated.filter((x) => isAfter(x.updateInfo?.lastVerified));
+  console.log(outdated.length);
+
   return S.list()
     .title("Innholdstyper")
     .items([
       ...(editor
         ? [S.documentListItem().schemaType(`editor`).id(editor._id)]
+        : []),
+      ...(outdated.length > 0
+        ? [
+            S.listItem()
+              .title(
+                `Utdaterte artikler (${
+                  outdated.filter((x) => !x._id.includes("draft")).length
+                })`
+              )
+              .child(
+                S.documentList()
+                  .title(`Utdaterte artikler`)
+                  .filter(`_id in $ids`)
+                  .params({
+                    ids: outdated.map((x) => x?._id),
+                  })
+              ),
+          ]
         : []),
       ...(feedback.length > 0
         ? [

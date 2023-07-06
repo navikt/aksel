@@ -3,7 +3,6 @@ import {
   usePageView,
 } from "components/website-modules/utils/amplitude";
 import { useScrollToHashOnPageLoad } from "components/website-modules/utils/util";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import { Router } from "next/router";
 import { useEffect } from "react";
@@ -11,13 +10,6 @@ import { IdContext } from "../components/website-modules/utils/contexts/id-conte
 import "../styles/index.css";
 
 initAmplitude();
-
-export const PreviewBanner = dynamic(
-  () => import("components/website-modules/PreviewBanner"),
-  {
-    ssr: false,
-  }
-);
 
 function App({
   Component,
@@ -56,7 +48,6 @@ function App({
         />
         <meta property="og:site_name" content="Aksel" key="ogsitename" />
       </Head>
-      {pageProps?.preview && <PreviewBanner />}
 
       <IdContext.Provider value={{ id: pageProps?.id ?? pageProps?.page?._id }}>
         <Component {...pageProps} />

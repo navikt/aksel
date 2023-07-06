@@ -20,6 +20,5 @@ export { default as Video } from "./sanity-modules/VideoEmbed";
 export * from "./website-modules/BreadCrumbs";
 export { default as Feedback } from "./website-modules/feedback";
 export * from "./website-modules/H2";
-export { default as PreviewBanner } from "./website-modules/PreviewBanner";
 export * from "./website-modules/TOC";
 export * from "./website-modules/utils";
