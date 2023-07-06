@@ -36,14 +36,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const onEnter = useCallback(
       (event: React.KeyboardEvent) => {
-        if (shouldAutocomplete && selectedOptions.includes(value)) {
-          event.preventDefault();
-          // Trying to set the same value that is already set, so just clearing the input
-          clearInput(event);
-        } else if (currentOption) {
+        if (currentOption) {
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption, event);
+          clearInput(event);
+        } else if (shouldAutocomplete && selectedOptions.includes(value)) {
+          event.preventDefault();
+          // Trying to set the same value that is already set, so just clearing the input
           clearInput(event);
         } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
           event.preventDefault();
