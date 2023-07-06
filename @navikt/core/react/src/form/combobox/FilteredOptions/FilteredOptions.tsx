@@ -62,9 +62,7 @@ const FilteredOptions = () => {
               filteredOptionsIndex === -1,
           })}
           role="option"
-          aria-selected={
-            !selectedOptions.includes(value)
-          } /* TODO: Should this attribute ever be true? Can the add-button have the selected state? */
+          aria-selected={false}
         >
           <PlusIcon />
           <BodyShort>
