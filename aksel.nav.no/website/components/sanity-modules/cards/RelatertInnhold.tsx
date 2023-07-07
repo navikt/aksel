@@ -37,7 +37,7 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
               e.currentTarget.getAttribute("href")
             )
           }
-          className="toc-ignore shadow-small focus-visible:shadow-focus bg-surface-default ring-border-subtle group grid rounded border-2 border-transparent px-4 py-3 ring-1 focus:outline-none"
+          className="toc-ignore shadow-xsmall hover:shadow-small focus-visible:shadow-focus bg-surface-default group grid rounded border-2 border-transparent px-4 py-3 focus:outline-none"
         >
           <Heading
             as="span"

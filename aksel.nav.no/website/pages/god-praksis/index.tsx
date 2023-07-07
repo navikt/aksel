@@ -18,9 +18,8 @@ import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import React, { lazy } from "react";
+import React, { Suspense, lazy } from "react";
 
 type PageProps = NextPageT<{
   page: AkselGodPraksisLandingPageDocT;
@@ -169,9 +168,9 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview comp={Page} query={query} props={props} />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

@@ -201,6 +201,9 @@ export const useMonthpicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    if (e.target.readOnly) {
+      return;
+    }
     !open && openOnFocus && handleOpen(true);
     let day = parseDate(
       e.target.value,

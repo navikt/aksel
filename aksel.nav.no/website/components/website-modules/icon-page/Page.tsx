@@ -120,7 +120,7 @@ export const IconPage = ({ name }: { name: string }) => {
               <TitleLinks />
             </div>
 
-            <div className="bg-surface-default shadow-small ring-border-subtle z-10 mb-8 mt-16 h-full w-full rounded-2xl ring-1">
+            <div className="bg-surface-default shadow-large z-10 mb-8 mt-16 h-full w-full rounded-2xl">
               <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center rounded-t-2xl border-b p-1">
                 <form
                   onSubmit={(e) => e.preventDefault()}
@@ -192,7 +192,6 @@ export const IconPage = ({ name }: { name: string }) => {
                                   {sub.icons.map((i) => {
                                     const T = Icons[`${i.id}Icon`];
                                     if (T === undefined) {
-                                      console.log(i);
                                       return null;
                                     }
                                     return (

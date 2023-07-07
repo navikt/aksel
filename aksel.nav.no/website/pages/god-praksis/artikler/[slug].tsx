@@ -10,10 +10,9 @@ import {
 } from "@/types";
 import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import NextLink from "next/link";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import NotFotfund from "../../404";
 
 import {
@@ -102,7 +101,7 @@ export const getStaticProps = async ({
       id: page?._id ?? "",
       title: page?.heading ?? "",
       verifiedDate: await dateStr(
-        page?.updateInfo?.lastVerified ?? page.publishedAt ?? page._updatedAt
+        page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt
       ),
       publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
     },
@@ -250,21 +249,16 @@ const Page = ({
                 <div className="mt-8 flex flex-wrap gap-2">
                   {filteredTema.map(({ title, slug }: any) => (
                     <span key={title}>
-                      <NextLink
-                        key={title}
+                      <BodyShort
                         href={`/god-praksis/${slug.current}`}
-                        passHref
-                        legacyBehavior
+                        key={title}
+                        size="small"
+                        as={NextLink}
+                        className="min-h-8 text-deepblue-800 focus-visible:shadow-focus bg-surface-neutral-subtle hover:bg-surface-neutral-subtle-hover ring-border-subtle flex items-center  justify-center gap-[2px] rounded-full pl-4 pr-1 ring-1 ring-inset focus:outline-none"
                       >
-                        <BodyShort
-                          size="small"
-                          as="a"
-                          className="min-h-8 text-deepblue-800 focus-visible:shadow-focus flex items-center justify-center gap-[2px] rounded-full bg-gray-200 pl-4 pr-1 capitalize no-underline hover:underline focus:outline-none"
-                        >
-                          {title}
-                          <ChevronRightIcon aria-hidden fontSize="1.25rem" />
-                        </BodyShort>
-                      </NextLink>
+                        {title}
+                        <ChevronRightIcon aria-hidden fontSize="1.25rem" />
+                      </BodyShort>
                     </span>
                   ))}
                 </div>
@@ -327,7 +321,7 @@ const WithPreview = lazy(() => import("../../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -336,7 +330,7 @@ const Wrapper = (props: any) => {
             slug: `god-praksis/artikler/${props?.slug}`,
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

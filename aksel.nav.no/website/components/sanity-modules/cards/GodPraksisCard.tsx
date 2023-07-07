@@ -18,7 +18,7 @@ const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
   }
 
   return (
-    <li className="ring-border-subtle bg-surface-default hover:shadow-small focus-within:ring-border-focus relative grid rounded-lg p-6 ring-1  focus-within:ring-[3px]">
+    <li className="bg-surface-default focus-within:ring-border-focus shadow-xsmall hover:shadow-small group relative grid rounded-lg p-6 focus-within:ring-[3px]">
       <div className="relative mb-4 h-16 w-16">
         <Image
           src={urlFor(node?.pictogram).auto("format").url()}
@@ -39,7 +39,7 @@ const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
             e.currentTarget.getAttribute("href")
           )
         }
-        className="navds-heading--medium text-deepblue-700 navds-heading  mb-4 no-underline after:absolute after:inset-0 after:rounded-lg focus:outline-none group-hover:underline"
+        className="navds-heading--medium text-deepblue-700 navds-heading  mb-4 underline after:absolute after:inset-0 after:rounded-lg focus:outline-none group-hover:no-underline"
       >
         {node.title}
       </NextLink>

@@ -3,6 +3,7 @@ import React, { forwardRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label, omit, useId } from "..";
 import TextareaAutosize from "../util/TextareaAutoSize";
 import { FormFieldProps, useFormField } from "./useFormField";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -85,6 +86,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       hideLabel = false,
       resize,
       i18n,
+      readOnly,
       ...rest
     } = props;
 
@@ -115,6 +117,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           `navds-form-field--${size}`,
           {
             "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-form-field--readonly": readOnly,
+            "navds-textarea--readonly": readOnly,
             "navds-textarea--error": hasError,
             "navds-textarea--resize": resize,
           }
@@ -127,6 +131,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-sr-only": hideLabel,
           })}
         >
+          <ReadOnlyIcon readOnly={readOnly} />
           {label}
         </Label>
         {!!description && (
@@ -152,6 +157,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             }
             minRows={getMinRows()}
             ref={ref}
+            readOnly={readOnly}
             className={cl(
               "navds-textarea__input",
               "navds-body-short",
@@ -203,8 +209,8 @@ export const Counter = ({ maxLength, currentLength, size, i18n }) => {
       size={size}
     >
       {difference < 0
-        ? `${Math.abs(difference)} ${i18n?.counterLeft ?? "tegn for mye"}`
-        : `${difference} ${i18n?.counterTooMuch ?? "tegn igjen"}`}
+        ? `${Math.abs(difference)} ${i18n?.counterTooMuch ?? "tegn for mye"}`
+        : `${difference} ${i18n?.counterLeft ?? "tegn igjen"}`}
     </BodyShort>
   );
 };

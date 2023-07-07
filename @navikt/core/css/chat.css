@@ -1,14 +1,12 @@
 .navds-chat {
   display: flex;
   align-items: flex-end;
-  gap: var(--a-spacing-4);
-  padding-right: var(--a-spacing-16);
+  gap: var(--a-spacing-3);
+  max-width: 40.75rem;
 }
 
 .navds-chat--right {
   flex-direction: row-reverse;
-  padding-right: 0;
-  padding-left: var(--a-spacing-16);
 }
 
 .navds-chat__bubble-wrapper {
@@ -26,29 +24,33 @@
 
 .navds-chat__avatar {
   align-items: center;
-  background: var(--ac-chat-avatar-bg, var(--a-bg-subtle));
-  color: var(--ac-chat-avatar-color, var(--a-text-default));
+  box-shadow: var(--a-shadow-xsmall);
+  background-color: var(--ac-chat-avatar-bg, var(--a-surface-neutral-subtle));
   border-radius: var(--a-border-radius-full);
+  color: var(--ac-chat-avatar-color, var(--a-text-default));
   display: flex;
   flex-shrink: 0;
   justify-content: center;
   overflow: hidden;
-  height: 3rem;
-  width: 3rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  line-height: 2.5rem; /* Makes text properly vertically centered in Chrome */
+  font-size: 1.06rem;
+  letter-spacing: 0.024rem;
 }
 
 .navds-chat__avatar svg {
   align-self: center;
-  height: 100%;
   width: 100%;
+  max-width: 1.5rem;
+  max-height: 1.5rem;
 }
 
 .navds-chat__bubble {
-  padding: 1rem;
-  box-shadow: var(--a-shadow-small);
+  padding: var(--a-spacing-4);
+  box-shadow: var(--a-shadow-xsmall);
   width: fit-content;
-  max-width: 37.5rem;
-  background-color: var(--ac-chat-bubble-bg, var(--a-bg-subtle));
+  background-color: var(--ac-chat-bubble-bg, var(--a-surface-neutral-subtle));
   border-radius: var(--a-border-radius-xlarge);
   border-bottom-left-radius: 2px;
   display: flex;
@@ -61,11 +63,27 @@
   border-bottom-right-radius: 2px;
 }
 
+.navds-chat--small .navds-chat__bubble {
+  padding: var(--a-spacing-3);
+}
+
+.navds-chat--info .navds-chat__bubble,
+.navds-chat--info .navds-chat__avatar {
+  background-color: var(--a-surface-info-subtle);
+}
+
+.navds-chat--subtle .navds-chat__bubble,
+.navds-chat--subtle .navds-chat__avatar {
+  background-color: var(--a-surface-default);
+}
+
 .navds-chat__top-text {
   color: var(--ac-chat-top-text, var(--a-text-default));
   display: flex;
   gap: var(--a-spacing-2);
   align-items: baseline;
+  font-weight: normal;
+  margin: 0;
 }
 
 .navds-chat--right .navds-chat__top-text {
@@ -86,8 +104,4 @@
 
 .navds-chat--right .navds-chat__top-text--left {
   align-self: flex-start;
-}
-
-.navds-chat__name {
-  font-weight: var(--a-font-weight-bold);
 }

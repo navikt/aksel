@@ -24,9 +24,9 @@ export const IntroCards = ({
             href={href}
             passHref
             className={cl(
-              "focus-visible:shadow-focus ring-border-subtle text-deepblue-700 bg-surface-default hover:shadow-small hover:ring-border-subtle group z-10 rounded-lg p-4 ring-1 hover:ring-1 focus:outline-none",
+              "focus-visible:shadow-focus text-deepblue-700 bg-surface-default shadow-xsmall hover:shadow-small group z-10 rounded-lg p-4 focus:outline-none",
               {
-                "shadow-small max-w-md": variant === "forside",
+                "max-w-md": variant === "forside",
               }
             )}
             prefetch={false}
@@ -44,7 +44,7 @@ export const IntroCards = ({
                 className="text-deepblue-500 shrink-0 text-2xl"
                 role="img"
               />
-              <span className="text-xl font-semibold group-hover:underline">
+              <span className="text-xl font-semibold underline group-hover:no-underline">
                 {title}
               </span>
             </span>

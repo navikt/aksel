@@ -41,7 +41,7 @@ export const HighlightedBlogg = ({
           )}
         </div>
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-deepblue-500 no-underline hover:underline">
+          <Link className="text-deepblue-500 underline hover:no-underline">
             <Heading size="large" level="2">
               {blogg.heading}
             </Heading>
@@ -82,7 +82,7 @@ export const HighlightedBlogg = ({
           )}
         </div>
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-deepblue-500 no-underline hover:underline">
+          <Link className="text-deepblue-500 underline hover:no-underline">
             <Heading size="large" level="2">
               {blogg.heading}
             </Heading>

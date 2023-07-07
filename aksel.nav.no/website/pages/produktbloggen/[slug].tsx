@@ -16,11 +16,10 @@ import { AkselCubeStatic } from "components/website-modules/cube";
 import Feedback from "components/website-modules/feedback";
 import TableOfContents from "components/website-modules/TOC";
 import { getImage } from "components/website-modules/utils/get-image";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 import { urlFor } from "@/sanity/interface";
 import { destructureBlocks, contributorsAll } from "@/sanity/queries";
@@ -67,7 +66,7 @@ export const getServerSideProps: GetServerSideProps = async (
       preview: context.preview ?? false,
       id: blogg?._id ?? "",
       title: blogg?.heading ?? "",
-      publishDate: await dateStr(blogg?.publishedAt ?? blogg._createdAt),
+      publishDate: await dateStr(blogg?.publishedAt ?? blogg?._createdAt),
     },
     notFound: !blogg && !context.preview,
   };
@@ -258,14 +257,14 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
           props={props}
           params={{ slug: `produktbloggen/${props.slug}` }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

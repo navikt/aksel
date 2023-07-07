@@ -11,9 +11,7 @@ const Example = () => {
   return (
     <div className="min-h-96">
       <MonthPicker {...monthpickerProps}>
-        <div className="grid gap-4">
-          <MonthPicker.Input {...inputProps} label="Velg månede" />
-        </div>
+        <MonthPicker.Input {...inputProps} label="Velg månede" />
       </MonthPicker>
       {selectedMonth && <div className="pt-4">{selectedMonth.getMonth()}</div>}
     </div>

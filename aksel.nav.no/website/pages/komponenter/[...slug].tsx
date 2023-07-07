@@ -24,9 +24,8 @@ import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
 
 const kodepakker = {
@@ -143,7 +142,7 @@ export const getStaticProps = async ({
       preview,
       title: page?.heading ?? "",
       id: page?._id ?? "",
-      publishDate: await dateStr(page._updatedAt),
+      publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
     },
     notFound: !page && !preview,
     revalidate: 60,
@@ -336,7 +335,7 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -347,7 +346,7 @@ const Wrapper = (props: any) => {
           }}
           props={props}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

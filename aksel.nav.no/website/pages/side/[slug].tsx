@@ -3,10 +3,9 @@ import { SanityBlockContent } from "@/sanity-block";
 import { Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { GetServerSideProps } from "next/types";
-import React, { lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
 import NotFotfund from "../404";
 import { destructureBlocks } from "@/sanity/queries";
@@ -70,7 +69,7 @@ const Page = ({ page }: PageProps["props"]) => {
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel bg-surface-subtle pt-[8vw] pb-16 focus:outline-none sm:pb-32"
+        className="aksel-artikkel bg-surface-subtle pb-16 pt-[8vw] focus:outline-none sm:pb-32"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose">
@@ -100,7 +99,7 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -109,7 +108,7 @@ const Wrapper = (props: any) => {
             slug: `side/${props.slug}`,
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

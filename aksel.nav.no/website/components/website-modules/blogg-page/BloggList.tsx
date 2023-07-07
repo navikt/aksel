@@ -40,7 +40,7 @@ export const BloggList = ({
 
         <div>
           <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-            <Link className="text-deepblue-500 no-underline hover:underline">
+            <Link className="text-deepblue-500 underline hover:no-underline">
               <Heading size="small" level="2">
                 {blogg.heading}
               </Heading>
@@ -88,7 +88,7 @@ export const BloggList = ({
         </div>
         <div className="md:hidden">
           <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-            <Link className="text-deepblue-500 no-underline hover:underline">
+            <Link className="text-deepblue-500 underline hover:no-underline">
               <Heading size="small" level="2">
                 {blogg.heading}
               </Heading>
