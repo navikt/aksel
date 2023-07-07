@@ -60,7 +60,11 @@ export const SelectedOptionsProvider = ({
 
   const addSelectedOption = useCallback(
     (option: string) => {
-      if (!options.includes(option)) {
+      if (
+        !options
+          .map((opt) => opt.toLowerCase())
+          .includes(option?.toLowerCase?.())
+      ) {
         allowNewValues && addCustomOption(option);
       } else if (isMultiSelect) {
         setSelectedOptions((prevSelectedOptions) => [

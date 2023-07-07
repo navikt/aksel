@@ -162,8 +162,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           "navds-body-short",
           `navds-body-${size}`
         )}
-        enterKeyHint="search"
-        inputMode="search"
       />
     );
   }
