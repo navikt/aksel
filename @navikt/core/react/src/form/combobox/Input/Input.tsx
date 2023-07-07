@@ -161,6 +161,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           "navds-body-short",
           `navds-body-${size}`
         )}
+        enterKeyHint="done"
       />
     );
   }
