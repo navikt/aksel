@@ -1,6 +1,8 @@
 import React from "react";
 import type { Meta } from "@storybook/react";
-import { CounterTag, Tag, TagProps } from ".";
+import { CounterTag, Tag, TagProps, NotificationTag } from ".";
+import { Button } from "../button";
+import { BellIcon } from "@navikt/aksel-icons";
 
 const variants: TagProps["variant"][] = [
   "warning",
@@ -120,3 +122,71 @@ export const CounterTags = () => {
     </div>
   );
 };
+
+export const NotificationTagDemo = {
+  render: () => {
+    return (
+      <div className="colgap" style={{ gap: "2rem" }}>
+        <Box>
+          <NotificationTag count={42} />
+        </Box>
+        <Box label="marker">
+          <NotificationTag />
+        </Box>
+        <Box label="pulse">
+          <NotificationTag pulse count={42} />
+        </Box>
+        <div
+          style={{
+            position: "relative",
+            width: "fit-content",
+            display: "flex",
+            gap: "8px",
+          }}
+        >
+          <Button
+            variant="tertiary"
+            size="small"
+            icon={
+              <>
+                <BellIcon />
+                <NotificationTag pulse count={299999} />
+              </>
+            }
+          >
+            Meldinger
+          </Button>
+          <Button
+            variant="tertiary"
+            size="small"
+            icon={
+              <>
+                <BellIcon />
+                <NotificationTag pulse />
+              </>
+            }
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+const Box = ({ ...props }) => (
+  <div
+    style={{
+      position: "relative",
+      width: "6rem",
+      borderRadius: 4,
+      height: "2rem",
+      background: "var(--a-surface-alt-1-moderate)",
+      color: "white",
+      fontSize: 14,
+      display: "grid",
+      placeContent: "center",
+    }}
+  >
+    {props?.label}
+    {props?.children}
+  </div>
+);

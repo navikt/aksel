@@ -172,3 +172,73 @@
   font-size: 14px;
   min-width: 20px;
 }
+
+/* NotificationTag */
+.navds-notification-tag {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -50%);
+  height: 16px;
+  width: 8px;
+  z-index: 10;
+}
+
+.navds-notification-tag > .navds-counter-tag {
+  transition-duration: 0.3s;
+  transition-property: width, height, background-color;
+  transition-timing-function: ease-in-out;
+  user-select: none;
+  white-space: nowrap;
+  box-shadow: 0 0 0 2px var(--a-surface-default);
+  font-size: 14px;
+  line-height: 0;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.navds-notification-tag--count > .navds-counter-tag {
+  min-height: 1rem;
+  padding-inline: var(--a-spacing-1);
+}
+
+.navds-notification-tag--marker > .navds-counter-tag {
+  width: 12px;
+  height: 12px;
+  min-height: initial;
+  min-width: initial;
+}
+
+.navds-notification-tag--pulse::before {
+  background-color: inherit;
+  position: absolute;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  transform: scale(1);
+  animation: notification-tag cubic-bezier(0, 0, 0.2, 1) 2s infinite;
+  z-index: -1;
+}
+
+.navds-notification-tag--pulse:where(.navds-notification-tag--count)::before {
+  animation: notification-tag cubic-bezier(0, 0, 0.2, 1) 2s infinite;
+}
+
+@keyframes notification-tag {
+  75%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes notification-tag {
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
