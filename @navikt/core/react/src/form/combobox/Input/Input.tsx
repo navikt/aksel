@@ -77,6 +77,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           toggleIsListOpen(false);
           break;
         case "Enter":
+        case "Accept":
           onEnter(e);
           break;
         case "Home":
