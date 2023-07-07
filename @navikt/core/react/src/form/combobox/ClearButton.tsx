@@ -21,7 +21,7 @@ export const ClearButton: React.FC<ClearButtonProps> = ({
       <span className="navds-sr-only">
         {clearButtonLabel ? clearButtonLabel : "Tøm"}
       </span>
-      <XMarkIcon aria-hidden width="20" height="20" />
+      <XMarkIcon aria-hidden />
     </button>
   );
 };

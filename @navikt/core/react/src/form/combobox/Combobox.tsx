@@ -111,19 +111,21 @@ export const Combobox = forwardRef<
               />
             </SelectedOptions>
           )}
-          {value && clearButton && (
-            <ClearButton
-              handleClear={clearInput}
-              clearButtonLabel={clearButtonLabel}
-              tabIndex={-1}
-            />
-          )}
-          {toggleListButton && (
-            <ToggleListButton
-              toggleListButtonLabel={toggleListButtonLabel}
-              ref={toggleListButtonRef}
-            />
-          )}
+          <div>
+            {value && clearButton && (
+              <ClearButton
+                handleClear={clearInput}
+                clearButtonLabel={clearButtonLabel}
+                tabIndex={-1}
+              />
+            )}
+            {toggleListButton && (
+              <ToggleListButton
+                toggleListButtonLabel={toggleListButtonLabel}
+                ref={toggleListButtonRef}
+              />
+            )}
+          </div>
         </div>
         <FilteredOptions />
       </div>
