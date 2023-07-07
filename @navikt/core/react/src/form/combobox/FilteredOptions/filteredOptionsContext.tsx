@@ -6,6 +6,7 @@ import React, {
   useContext,
   useCallback,
   useRef,
+  useLayoutEffect,
 } from "react";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../Input/inputContext";
@@ -82,7 +83,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
 
   const previousSearchTerm = usePrevious(searchTerm);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       shouldAutocomplete &&
       normalizeText(searchTerm) !== "" &&

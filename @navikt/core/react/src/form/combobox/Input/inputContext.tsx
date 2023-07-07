@@ -4,7 +4,7 @@ import React, {
   createContext,
   useCallback,
   useContext,
-  useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -90,7 +90,7 @@ export const InputContextProvider = ({ children, value: props }) => {
     inputRef.current?.focus?.();
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (shouldAutocomplete && inputRef && value !== searchTerm) {
       inputRef.current?.setSelectionRange?.(searchTerm.length, value.length);
     }
