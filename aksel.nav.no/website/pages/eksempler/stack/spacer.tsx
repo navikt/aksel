@@ -3,8 +3,8 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="bg-deepblue-50 w-72 max-w-full">
-      <HStack gap="3">
+    <div className="bg-deepblue-50">
+      <HStack gap="3" wrap={false}>
         <Placeholder />
         <Spacer />
         <Placeholder />
@@ -13,7 +13,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {
@@ -33,7 +33,7 @@ const Placeholder = ({
 }) => {
   return (
     <div
-      className="min-h-4 text-text-on-action h-auto w-auto rounded bg-teal-600 p-2"
+      className="min-h-8 text-text-on-action aspect-square h-auto w-auto rounded bg-teal-600 p-2"
       style={{ padding: noPadding && 0 }}
     >
       {text}
