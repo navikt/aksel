@@ -243,6 +243,42 @@ Controlled.args = {
   selectedOptions: initialSelectedOptions,
 };
 
+export const ComboboxSizes = (props) => (
+  <>
+    <Combobox
+      label="Hva er dine favorittfrukter?"
+      description="Medium single-select"
+      options={options}
+    />
+    <br />
+    <Combobox
+      label="Hva er dine favorittfrukter?"
+      description="Small single-select"
+      options={options}
+      size="small"
+    />
+    <br />
+    <Combobox
+      label="Hva er dine favorittfrukter?"
+      description="Medium multiselect"
+      options={options}
+      isMultiSelect
+    />
+    <br />
+    <Combobox
+      label="Hva er dine favorittfrukter?"
+      description="Small multiselect"
+      options={options}
+      isMultiSelect
+      size="small"
+    />
+  </>
+);
+
+ComboboxSizes.args = {
+  options,
+};
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
