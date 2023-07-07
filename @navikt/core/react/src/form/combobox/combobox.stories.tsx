@@ -276,7 +276,6 @@ export const ComboboxSizes = (props) => (
       options={options}
       isMultiSelect
       allowNewValues
-      value="app"
     />
     <br />
     <Combobox
@@ -286,7 +285,6 @@ export const ComboboxSizes = (props) => (
       isMultiSelect
       size="small"
       allowNewValues
-      value="app"
     />
   </DemoContainer>
 );
