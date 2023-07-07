@@ -52,8 +52,9 @@
   flex: 1;
   border: none;
   padding: 0;
-  padding-right: var(--a-spacing-10);
   margin: 0;
+  min-width: 10ch;
+  width: 100%;
 }
 
 .navds-combobox__input:focus-visible {
