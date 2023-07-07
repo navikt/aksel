@@ -85,7 +85,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   useEffect(() => {
     if (
       shouldAutocomplete &&
-      searchTerm !== "" &&
+      normalizeText(searchTerm) !== "" &&
       (previousSearchTerm?.length || 0) < searchTerm.length &&
       filteredOptions.length > 0 &&
       !isValueInList(searchTerm, filteredOptions)
