@@ -101,7 +101,7 @@ export const Variants = () => {
   );
 };
 
-export const CounterTags = () => {
+export const Counter = () => {
   return (
     <div className="colgap">
       <div className="rowgap rowgap-wrap">
@@ -123,70 +123,47 @@ export const CounterTags = () => {
   );
 };
 
-export const NotificationTagDemo = {
+export const Notification = {
   render: () => {
     return (
-      <div className="colgap" style={{ gap: "2rem" }}>
-        <Box>
-          <NotificationTag count={42} />
-        </Box>
-        <Box label="marker">
-          <NotificationTag />
-        </Box>
-        <Box label="pulse">
-          <NotificationTag pulse count={42} />
-        </Box>
-        <div
-          style={{
-            position: "relative",
-            width: "fit-content",
-            display: "flex",
-            gap: "8px",
-          }}
-        >
-          <Button
-            variant="tertiary"
-            size="small"
-            icon={
-              <>
-                <BellIcon />
-                <NotificationTag pulse count={299999} />
-              </>
-            }
-          >
-            Meldinger
-          </Button>
-          <Button
-            variant="tertiary"
-            size="small"
-            icon={
-              <>
-                <BellIcon />
-                <NotificationTag pulse />
-              </>
-            }
-          />
-        </div>
+      <div className="rowgap" style={{ gap: "2rem" }}>
+        <Button
+          variant="tertiary"
+          icon={
+            <>
+              <BellIcon title="notifikasjoner" />
+              <NotificationTag />
+            </>
+          }
+        />
+        <Button
+          variant="tertiary"
+          icon={
+            <>
+              <BellIcon title="notifikasjoner" />
+              <NotificationTag count={299999} />
+            </>
+          }
+        />
+        <Button
+          variant="tertiary"
+          icon={
+            <>
+              <BellIcon title="notifikasjoner" />
+              <NotificationTag pulse count={42} />
+            </>
+          }
+        />
+        <Button
+          variant="tertiary"
+          icon={
+            <>
+              <BellIcon title="notifikasjoner" />
+              <NotificationTag pulse />
+            </>
+          }
+        />
       </div>
     );
   },
 };
-
-const Box = ({ ...props }) => (
-  <div
-    style={{
-      position: "relative",
-      width: "6rem",
-      borderRadius: 4,
-      height: "2rem",
-      background: "var(--a-surface-alt-1-moderate)",
-      color: "white",
-      fontSize: 14,
-      display: "grid",
-      placeContent: "center",
-    }}
-  >
-    {props?.label}
-    {props?.children}
-  </div>
-);
