@@ -58,7 +58,7 @@ export const CounterTag = forwardRef<HTMLSpanElement, CounterTagProps>(
         size={size}
         className={cl("navds-counter-tag", className, `navds-tag--${shape}`)}
       >
-        {getCount()}
+        <span className="navds-counter-tag__text">{getCount()}</span>
       </Tag>
     );
   }
