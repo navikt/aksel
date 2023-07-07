@@ -1,14 +1,11 @@
-import React, { HTMLAttributes, forwardRef } from "react";
 import cl from "clsx";
-import CounterTag from "./CounterTag";
+import React, { forwardRef } from "react";
+import CounterTag, { CounterTagProps } from "./CounterTag";
 
 export interface NotificationTagProps
-  extends Omit<HTMLAttributes<HTMLSpanElement>, "children"> {
-  count?: Number;
-  maxCount?: Number;
-  className?: string;
+  extends Omit<CounterTagProps, "children" | "variant"> {
   /**
-   *
+   *  Adds a sublte pulse-animation to the tag
    * @default false
    */
   pulse?: boolean;
@@ -17,7 +14,7 @@ export interface NotificationTagProps
 export const NotificationTag = forwardRef<
   HTMLSpanElement,
   NotificationTagProps
->(({ className, pulse = false, maxCount = 500, count, ...rest }, ref) => {
+>(({ className, pulse = false, maxCount = 99, count, ...rest }, ref) => {
   return (
     <sup
       ref={ref}
@@ -28,7 +25,12 @@ export const NotificationTag = forwardRef<
         "navds-notification-tag--marker": !count,
       })}
     >
-      <CounterTag count={count} shape="circle" variant="error-filled" />
+      <CounterTag
+        count={count}
+        maxCount={maxCount}
+        shape="circle"
+        variant="error-filled"
+      />
     </sup>
   );
 });

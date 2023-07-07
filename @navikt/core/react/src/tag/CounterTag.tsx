@@ -3,8 +3,19 @@ import React, { forwardRef } from "react";
 import { Tag, TagProps } from "..";
 
 export interface CounterTagProps extends Omit<TagProps, "children"> {
+  /**
+   * Count to display
+   */
   count?: Number;
+  /**
+   * Max count before displaying "+"
+   * @default 99
+   */
   maxCount?: Number;
+  /**
+   * Tag-shape
+   * @default "rounded"
+   */
   shape?: "circle" | "rounded";
 }
 
