@@ -11,8 +11,11 @@
   flex-direction: row;
   width: 100%;
   border: 1px solid black;
-  padding: 4px;
   padding-right: calc(32px + 2.5rem);
+}
+
+.navds-form-field--small .navds-combobox__wrapper-inner {
+  padding: var(--a-spacing-1) calc(var(--a-spacing-3) / 2);
 }
 
 .navds-combobox__wrapper-inner:hover {
