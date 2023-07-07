@@ -208,6 +208,12 @@
   width: 100%;
 }
 
+.navds-form-field--small .navds-combobox__list-item,
+.navds-form-field--small .navds-combobox__list-item__no-options,
+.navds-form-field--small .navds-combobox__list-item__new-option {
+  padding: calc(var(--a-spacing-3) / 2) var(--a-spacing-2);
+}
+
 .navds-combobox__list-item--loading {
   display: flex;
   justify-content: center;

@@ -9,6 +9,7 @@ import { useInputContext } from "../Input/inputContext";
 const FilteredOptions = () => {
   const {
     inputProps: { id },
+    size,
     value,
   } = useInputContext();
   const {
@@ -56,8 +57,11 @@ const FilteredOptions = () => {
           aria-selected={false}
         >
           <PlusIcon />
-          <BodyShort>
-            Legg til <Label as="span">&#8220;{value}&#8221;</Label>
+          <BodyShort size={size}>
+            Legg til{" "}
+            <Label as="span" size={size}>
+              &#8220;{value}&#8221;
+            </Label>
           </BodyShort>
         </li>
       )}
@@ -90,7 +94,7 @@ const FilteredOptions = () => {
           role="option"
           aria-selected={selectedOptions.includes(option)}
         >
-          <BodyShort>{option}</BodyShort>
+          <BodyShort size={size}>{option}</BodyShort>
           {selectedOptions.includes(option) && <CheckmarkIcon />}
         </li>
       ))}

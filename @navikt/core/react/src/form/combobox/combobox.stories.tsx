@@ -275,6 +275,8 @@ export const ComboboxSizes = (props) => (
       description="Medium multiselect"
       options={options}
       isMultiSelect
+      allowNewValues
+      value="app"
     />
     <br />
     <Combobox
@@ -283,6 +285,8 @@ export const ComboboxSizes = (props) => (
       options={options}
       isMultiSelect
       size="small"
+      allowNewValues
+      value="app"
     />
   </DemoContainer>
 );
