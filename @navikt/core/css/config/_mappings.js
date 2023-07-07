@@ -133,6 +133,8 @@ const StyleMappings = {
     { component: "Table", main: "table.css", dependencies: [typoCss] },
     { component: "Tabs", main: "tabs.css", dependencies: [typoCss] },
     { component: "Tag", main: "tag.css", dependencies: [typoCss] },
+    { component: "CounterTag", main: "tag.css", dependencies: [typoCss] },
+    { component: "NotificationTag", main: "tag.css", dependencies: [typoCss] },
     { component: "TextField", main: formCss, dependencies: [typoCss] },
     { component: "Textarea", main: formCss, dependencies: [typoCss] },
     {
