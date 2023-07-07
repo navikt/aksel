@@ -64,15 +64,6 @@ const Feedback = ({
     [asPath, activeState, hasLoggedFeedback]
   );
 
-  useEffect(() => {
-    const callLogFeedback = () => logFeedback(false);
-
-    window.addEventListener("beforeunload", callLogFeedback);
-    return () => {
-      window.removeEventListener("beforeunload", callLogFeedback);
-    };
-  }, [logFeedback]);
-
   const handleSend = (e) => {
     e.preventDefault();
 
@@ -154,6 +145,9 @@ const Feedback = ({
     : cl("scroll-my-[30vh] toc-ignore mt-44 mb-28", {
         "mx-auto": center,
       });
+
+  /* Hidden to better comply with policy */
+  return null;
 
   return (
     <div className={classes} id="feedback-block" data-hj-suppress>
