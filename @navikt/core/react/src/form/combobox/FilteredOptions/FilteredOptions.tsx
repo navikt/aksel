@@ -19,8 +19,10 @@ const FilteredOptions = () => {
     filteredOptionsIndex,
     filteredOptionsRef,
     isValueNew,
+    toggleIsListOpen,
   } = useFilteredOptionsContext();
-  const { selectedOptions, toggleOption } = useSelectedOptionsContext();
+  const { isMultiSelect, selectedOptions, toggleOption } =
+    useSelectedOptionsContext();
 
   return (
     <ul
@@ -79,7 +81,12 @@ const FilteredOptions = () => {
           id={`${id}-option-${option.replace(" ", "-")}`}
           key={option}
           tabIndex={-1}
-          onPointerUp={(event) => toggleOption(option, event)}
+          onPointerUp={(event) => {
+            toggleOption(option, event);
+            if (!isMultiSelect) {
+              toggleIsListOpen(false);
+            }
+          }}
           role="option"
           aria-selected={selectedOptions.includes(option)}
         >
