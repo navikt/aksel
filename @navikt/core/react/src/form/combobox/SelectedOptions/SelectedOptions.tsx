@@ -4,6 +4,7 @@ import { useSelectedOptionsContext } from "./selectedOptionsContext";
 
 interface SelectedOptionsProps {
   selectedOptions?: string[];
+  size?: "medium" | "small";
   children: React.ReactNode;
 }
 
@@ -26,10 +27,11 @@ const Option = ({ option }: { option: string }) => {
 
 const SelectedOptions: React.FC<SelectedOptionsProps> = ({
   selectedOptions = [],
+  size,
   children,
 }) => {
   return (
-    <Chips className="navds-combobox__selected-options">
+    <Chips className="navds-combobox__selected-options" size={size}>
       {selectedOptions.length
         ? selectedOptions.map((option, i) => (
             <Option key={option + i} option={option} />

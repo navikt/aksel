@@ -102,7 +102,7 @@ export const Combobox = forwardRef<
               {...rest}
             />
           ) : (
-            <SelectedOptions selectedOptions={selectedOptions}>
+            <SelectedOptions selectedOptions={selectedOptions} size={size}>
               <Input
                 id={inputProps.id}
                 ref={mergedInputRef}
