@@ -28,10 +28,6 @@
   border-radius: var(--a-border-radius-full);
 }
 
-.navds-combobox__selected-options > li:hover {
-  background-color: var(--ac-combobox-selected-options-hover-bg, var(--a-surface-action-selected-hover));
-}
-
 .navds-combobox__selected-options > li:last-of-type {
   display: flex;
   flex: 1;
