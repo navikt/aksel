@@ -18,10 +18,9 @@ import {
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { GetServerSideProps } from "next/types";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
 import { urlFor } from "@/sanity/interface";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
@@ -243,7 +242,7 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -253,7 +252,7 @@ const Wrapper = (props: any) => {
             valid: "true",
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

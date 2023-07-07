@@ -91,7 +91,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               "navds-sr-only": props.hideLabel,
             })}
           >
-            <BodyShort as="span" size={size}>
+            <BodyShort
+              as="span"
+              size={size}
+              className="navds-checkbox__label-text"
+            >
               {!nested && (
                 <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
               )}

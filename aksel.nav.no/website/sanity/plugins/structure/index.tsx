@@ -21,9 +21,11 @@ import {
 import { FeedbackPanes } from "./feedback";
 import { FeedbackView } from "./FeedbackPreview";
 import { GodPraksisPanes } from "./god-praksis";
-/* import Metrics from "./Metrics"; */
 import { FileTextIcon, ImageIcon } from "@navikt/aksel-icons";
 import { PanesWithCount } from "./with-count";
+import differenceInMonths from "date-fns/differenceInMonths";
+
+const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
 /* import { WebPreview, JsonView } from './previews' */
 const filtered = [
@@ -49,7 +51,6 @@ const filtered = [
   "skrivehjelp",
   "publication_flow",
   "aksel_feedback",
-  "metrics",
 ];
 
 export const structure = async (
@@ -88,11 +89,37 @@ export const structure = async (
     { id: currentUser?.id }
   );
 
+  let outdated = await getClient({ apiVersion: "2021-06-07" }).fetch(
+    `*[$id in contributors[]->user_id.current]{_id, updateInfo}`,
+    { id: currentUser?.id }
+  );
+
+  outdated = outdated.filter((x) => isAfter(x.updateInfo?.lastVerified));
+  console.log(outdated.length);
+
   return S.list()
     .title("Innholdstyper")
     .items([
       ...(editor
         ? [S.documentListItem().schemaType(`editor`).id(editor._id)]
+        : []),
+      ...(outdated.length > 0
+        ? [
+            S.listItem()
+              .title(
+                `Utdaterte artikler (${
+                  outdated.filter((x) => !x._id.includes("draft")).length
+                })`
+              )
+              .child(
+                S.documentList()
+                  .title(`Utdaterte artikler`)
+                  .filter(`_id in $ids`)
+                  .params({
+                    ids: outdated.map((x) => x?._id),
+                  })
+              ),
+          ]
         : []),
       ...(feedback.length > 0
         ? [
@@ -338,13 +365,6 @@ export const structure = async (
                       .schemaType(`publication_flow`)
                       .icon(FileTextIcon)
                       .id(`publication_flow`),
-                    S.listItem()
-                      .title("Metrikker")
-                      .child(
-                        S.documentList()
-                          .title("Metrikker")
-                          .filter(`_type == 'metrics'`)
-                      ),
                   ])
               ),
           ]
@@ -415,14 +435,10 @@ export const defaultDocumentNode = (S, { schemaType }) => {
         .component(FeedbackView)
         .icon(CommentIcon)
         .title("Tilbakemeldinger"),
-      /* S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"), */
     ]);
   }
   if (schemaType === "aksel_forside") {
-    return S.document().views([
-      S.view.form(),
-      /* S.view.component(Metrics).icon(ChartUpwardIcon).title("Metrikker"), */
-    ]);
+    return S.document().views([S.view.form()]);
   }
   return S.document().views([S.view.form()]);
 };

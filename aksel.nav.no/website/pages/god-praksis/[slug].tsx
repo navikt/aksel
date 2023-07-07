@@ -8,10 +8,9 @@ import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import Image from "next/legacy/image";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 import { getAkselTema, urlFor } from "@/sanity/interface";
 import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
@@ -193,7 +192,7 @@ const Page = ({ tema: page }: PageProps["props"]) => {
             </div>
           </div>
 
-          <div className="relative px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
+          <div className="relative px-4 pb-24 pt-8 md:pt-16 xl:pt-8 ">
             {hasPages ? (
               <div className="dynamic-wrapper grid gap-20">
                 {page.seksjoner.map((seksjon) =>
@@ -245,7 +244,7 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -254,7 +253,7 @@ const Wrapper = (props: any) => {
             slug: props?.slug,
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 4.6.1
+
+### Patch Changes
+
+- Skjema: Labels og Legends bruker nå inline-flex når readOnly er satt ([#2089](https://github.com/navikt/aksel/pull/2089))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.6.1
+
 ## 4.6.0
 
 ### Minor Changes

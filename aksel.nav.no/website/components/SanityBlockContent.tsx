@@ -1,4 +1,3 @@
-import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading, Ingress, Link } from "@navikt/ds-react";
 import BlockContent from "@sanity/block-content-to-react";
 import cl from "clsx";
@@ -178,25 +177,11 @@ const serializers = {
       if (!href) {
         return children;
       }
-      if (href && href.startsWith("mailto:")) {
-        return (
-          <NextLink href={href} passHref legacyBehavior>
-            <Link
-              onClick={(e) =>
-                logNav(
-                  "link",
-                  window.location.pathname,
-                  e.currentTarget.getAttribute("href")
-                )
-              }
-              className="inline"
-            >
-              {children}
-            </Link>
-          </NextLink>
-        );
-      }
-      return blank ? (
+
+      const externalLink =
+        href.startsWith("http") && !href.startsWith("https://aksel.nav.no/");
+
+      return blank || externalLink ? (
         <Link
           href={href}
           target="_blank"
@@ -209,44 +194,46 @@ const serializers = {
             )
           }
         >
-          {children} <ExternalLinkIcon title="åpner lenken i ny fane" />
+          {children}
         </Link>
       ) : (
-        <NextLink href={href} passHref legacyBehavior>
-          <Link
-            onClick={(e) =>
-              logNav(
-                "link",
-                window.location.pathname,
-                e.currentTarget.getAttribute("href")
-              )
-            }
-            className="inline"
-          >
-            {children}
-          </Link>
-        </NextLink>
+        <Link
+          as={NextLink}
+          href={href}
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+          className="inline"
+        >
+          {children}
+        </Link>
       );
     },
     internalLink: ({ mark, children }: { mark: any; children: any }) => {
       const { slug = {} } = mark;
-      if (!slug || !slug.current) return children;
+      if (!slug || !slug.current) {
+        return children;
+      }
 
       const href = `/${slug?.current}`;
       return (
-        <NextLink href={href} passHref legacyBehavior>
-          <Link
-            onClick={(e) =>
-              logNav(
-                "link",
-                window.location.pathname,
-                e.currentTarget.getAttribute("href")
-              )
-            }
-          >
-            {children}
-          </Link>
-        </NextLink>
+        <Link
+          as={NextLink}
+          href={href}
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+        >
+          {children}
+        </Link>
       );
     },
   },

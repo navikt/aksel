@@ -1,7 +1,7 @@
 import { SearchLogT } from "@/types";
 import getConfig from "next/config";
 import { Router } from "next/router";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { track, init } from "@amplitude/analytics-browser";
 const { publicRuntimeConfig } = getConfig();
 
@@ -74,15 +74,6 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
 }
 
 export const usePageView = (router: Router, pageProps: any) => {
-  const pageId = useMemo(
-    () => pageProps?.id || pageProps?.page?._id,
-    [pageProps]
-  );
-  const isForside = useMemo(
-    () => pageProps?.page?._type === "aksel_forside",
-    [pageProps]
-  );
-
   const logView = useCallback(
     (e, first = false) => {
       const data = {};
@@ -107,62 +98,30 @@ export const usePageView = (router: Router, pageProps: any) => {
         },
         first === true
       );
-      try {
-        if (isForside && isProduction() && !!pageId) {
-          fetch(`/api/log-page-view?id=${pageId}`);
-        }
-      } catch (error) {
-        isDevelopment && console.error(error);
-      }
     },
-    [pageProps, pageId, isForside]
+    [pageProps]
   );
 
-  const logScroll = useCallback(
-    (highestPercent: number) => {
-      highestPercent > 100 && (highestPercent = 100);
-      if (
-        document === undefined ||
-        window?.location?.pathname?.startsWith?.("/eksempler")
-      ) {
-        return;
-      }
+  const logScroll = useCallback((highestPercent: number) => {
+    highestPercent > 100 && (highestPercent = 100);
+    if (
+      document === undefined ||
+      window?.location?.pathname?.startsWith?.("/eksempler")
+    ) {
+      return;
+    }
 
-      if (isNaN(highestPercent)) {
-        return;
-      }
+    if (isNaN(highestPercent)) {
+      return;
+    }
 
-      logAmplitudeEvent(AmplitudeEvents.scroll, {
-        side: window.location.pathname,
-        prosent: highestPercent,
-      });
-      try {
-        if (isForside && isProduction() && !!pageId) {
-          fetch(`/api/log-scroll?id=${pageId}&length=${highestPercent}`);
-        }
-      } catch (error) {
-        isDevelopment && console.error(error);
-      }
-    },
-    [pageId, isForside]
-  );
-
-  const logTimeSpent = useCallback(
-    (timeSpent: number) => {
-      try {
-        if (isForside && timeSpent <= 420 && isProduction() && !!pageId) {
-          fetch(`/api/log-time?id=${pageId}&time=${timeSpent}`);
-        }
-      } catch (error) {
-        isDevelopment && console.error(error);
-      }
-    },
-    [pageId, isForside]
-  );
+    logAmplitudeEvent(AmplitudeEvents.scroll, {
+      side: window.location.pathname,
+      prosent: highestPercent,
+    });
+  }, []);
 
   useEffect(() => {
-    const startTime = new Date().getTime();
-
     let highestPercent = 0;
     let timeoutId = null;
     const footer = document.querySelector("#aksel-footer") as HTMLElement;
@@ -171,7 +130,7 @@ export const usePageView = (router: Router, pageProps: any) => {
     function scrollListener() {
       timeoutId = setTimeout(() => {
         const currentPercent = Math.round(
-          (window.pageYOffset /
+          (window.scrollY /
             (document.body.scrollHeight -
               window.innerHeight -
               (footer ? footer.offsetHeight : 0))) *
@@ -194,11 +153,6 @@ export const usePageView = (router: Router, pageProps: any) => {
       router.events.off("routeChangeComplete", logView);
       router.events.off("routeChangeStart", logScroll);
       window.removeEventListener("scroll", scrollListener);
-
-      if (isForside) {
-        logTimeSpent(Math.round((new Date().getTime() - startTime) / 1000));
-        logScroll(highestPercent);
-      }
     };
-  }, [router.events, logView, logScroll, logTimeSpent, isForside]);
+  }, [router.events, logView, logScroll]);
 };
