@@ -21,6 +21,7 @@ export const Demo = {
 
 export const args = {
   index: 4,
+  desc: "VStack er en enkel layout-komponent for flexbox med flex-direction: column.",
 };
 
 const Placeholder = () => {

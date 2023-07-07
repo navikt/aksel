@@ -47,6 +47,7 @@ export const Demo = {
 
 export const args = {
   index: 5,
+  desc: "Endrer CSS på 'justify-content'.",
 };
 
 const Divider = () => {

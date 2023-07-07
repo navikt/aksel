@@ -59,6 +59,7 @@ export const Demo = {
 
 export const args = {
   index: 3,
+  desc: "Endrer CSS på 'justify-content'.",
 };
 
 const Placeholder = ({

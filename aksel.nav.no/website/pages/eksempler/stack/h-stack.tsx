@@ -21,6 +21,7 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  desc: "HStack er en enkel layout-komponent for flexbox.",
 };
 
 const Placeholder = () => {
