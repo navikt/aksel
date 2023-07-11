@@ -13,9 +13,8 @@ import { Detail } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/WithSidebar";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 import { getDocumentsTmp, urlFor } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
@@ -145,7 +144,7 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -155,7 +154,7 @@ const Wrapper = (props: any) => {
           }}
           props={props}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

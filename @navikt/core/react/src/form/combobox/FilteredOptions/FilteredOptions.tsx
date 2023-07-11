@@ -1,8 +1,7 @@
 import React from "react";
 import cl from "clsx";
 import { BodyShort, Label, Loader } from "../../..";
-import { PlusIcon } from "@navikt/aksel-icons";
-import CheckIcon from "./CheckIcon";
+import { CheckmarkIcon, PlusIcon } from "@navikt/aksel-icons";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { useInputContext } from "../Input/inputContext";
@@ -10,6 +9,7 @@ import { useInputContext } from "../Input/inputContext";
 const FilteredOptions = () => {
   const {
     inputProps: { id },
+    size,
     value,
   } = useInputContext();
   const {
@@ -20,8 +20,10 @@ const FilteredOptions = () => {
     filteredOptionsIndex,
     filteredOptionsRef,
     isValueNew,
+    toggleIsListOpen,
   } = useFilteredOptionsContext();
-  const { selectedOptions, toggleOption } = useSelectedOptionsContext();
+  const { isMultiSelect, selectedOptions, toggleOption } =
+    useSelectedOptionsContext();
 
   return (
     <ul
@@ -34,22 +36,12 @@ const FilteredOptions = () => {
     >
       {isLoading && (
         <li
-          className="navds-combobox__list-item navds-combobox__list-item--loading"
+          className="navds-combobox__list-item--loading"
           role="option"
           aria-selected={false}
           id={`${id}-is-loading`}
         >
-          <Loader />
-        </li>
-      )}
-      {!isLoading && filteredOptions.length === 0 && (
-        <li
-          className="navds-combobox__list-item navds-combobox__list-item--loading"
-          role="option"
-          aria-selected={false}
-          id={`${id}-no-hits`}
-        >
-          Ingen søketreff
+          <Loader aria-label="Søker..." />
         </li>
       )}
       {isValueNew && allowNewValues && (
@@ -62,31 +54,48 @@ const FilteredOptions = () => {
               filteredOptionsIndex === -1,
           })}
           role="option"
-          aria-selected={
-            !selectedOptions.includes(value)
-          } /* TODO: Should this attribute ever be true? Can the add-button have the selected state? */
+          aria-selected={false}
         >
           <PlusIcon />
-          <BodyShort size="medium">
-            Legg til <Label as="span">&#8220;{value}&#8221;</Label>
+          <BodyShort size={size}>
+            Legg til{" "}
+            <Label as="span" size={size}>
+              &#8220;{value}&#8221;
+            </Label>
           </BodyShort>
         </li>
       )}
-      {filteredOptions.map((o, i) => (
+      {!isLoading && filteredOptions.length === 0 && (
+        <li
+          className="navds-combobox__list-item__no-options"
+          role="option"
+          aria-selected={false}
+          id={`${id}-no-hits`}
+        >
+          Ingen søketreff
+        </li>
+      )}
+      {filteredOptions.map((option, index) => (
         <li
           className={cl("navds-combobox__list-item", {
-            "navds-combobox__list-item--focus": i === filteredOptionsIndex,
-            "navds-combobox__list-item--selected": selectedOptions.includes(o),
+            "navds-combobox__list-item--focus": index === filteredOptionsIndex,
+            "navds-combobox__list-item--selected":
+              selectedOptions.includes(option),
           })}
-          id={`${id}-option-${o.replace(" ", "-")}`}
-          key={o}
+          id={`${id}-option-${option.replace(" ", "-")}`}
+          key={option}
           tabIndex={-1}
-          onPointerUp={(event) => toggleOption(o, event)}
+          onPointerUp={(event) => {
+            toggleOption(option, event);
+            if (!isMultiSelect) {
+              toggleIsListOpen(false);
+            }
+          }}
           role="option"
-          aria-selected={selectedOptions.includes(o)}
+          aria-selected={selectedOptions.includes(option)}
         >
-          <BodyShort size="medium">{o}</BodyShort>
-          {selectedOptions.includes(o) && <CheckIcon />}
+          <BodyShort size={size}>{option}</BodyShort>
+          {selectedOptions.includes(option) && <CheckmarkIcon />}
         </li>
       ))}
     </ul>

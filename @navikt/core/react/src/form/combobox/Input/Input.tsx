@@ -1,5 +1,10 @@
 import { omit } from "../../..";
-import React, { useCallback, forwardRef, InputHTMLAttributes } from "react";
+import React, {
+  useCallback,
+  forwardRef,
+  InputHTMLAttributes,
+  ChangeEvent,
+} from "react";
 import cl from "clsx";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
@@ -23,6 +28,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       activeDecendantId,
       allowNewValues,
       currentOption,
+      filteredOptions,
       toggleIsListOpen,
       isListOpen,
       filteredOptionsIndex,
@@ -71,6 +77,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           toggleIsListOpen(false);
           break;
         case "Enter":
+        case "Accept":
           onEnter(e);
           break;
         case "Home":
@@ -119,13 +126,26 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       ]
     );
 
+    const onChangeHandler = useCallback(
+      (event: ChangeEvent<HTMLInputElement>) => {
+        const newValue = event.target.value;
+        if (newValue && newValue !== "") {
+          toggleIsListOpen(true);
+        } else if (filteredOptions.length === 0) {
+          toggleIsListOpen(false);
+        }
+        onChange(event);
+      },
+      [filteredOptions.length, onChange, toggleIsListOpen]
+    );
+
     return (
       <input
         {...rest}
         {...omit(inputProps, ["aria-invalid"])}
         ref={ref}
         value={value}
-        onChange={onChange}
+        onChange={onChangeHandler}
         type="text"
         role="combobox"
         onKeyUp={handleKeyUp}

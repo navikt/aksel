@@ -40,10 +40,22 @@ const options = [
 
 const initialSelectedOptions = ["passion fruit", "grape fruit"];
 
+const DemoContainer = ({
+  dataTheme,
+  children,
+}: {
+  children: any;
+  dataTheme: "dark" | "light";
+}) => (
+  <div data-theme={dataTheme} style={{ width: "300px" }}>
+    {children}
+  </div>
+);
+
 export const Default = (props) => {
   const id = useId();
   return (
-    <div data-theme="light">
+    <DemoContainer dataTheme={props.darkMode}>
       <Combobox
         shouldAutocomplete={props.shouldAutoComplete}
         options={props.options}
@@ -52,7 +64,7 @@ export const Default = (props) => {
         size="medium"
         id={id}
       />
-    </div>
+    </DemoContainer>
   );
 };
 
@@ -64,14 +76,14 @@ Default.args = {
 export function MultiSelect(props) {
   const id = useId();
   return (
-    <div>
+    <DemoContainer dataTheme={props.darkMode}>
       <Combobox
         id={id}
         label="Komboboks - velg flere"
         options={props.options}
         isMultiSelect={props.isMultiSelect}
       />
-    </div>
+    </DemoContainer>
   );
 }
 
@@ -83,7 +95,7 @@ MultiSelect.args = {
 export function MultiSelectWithAddNewOptions(props) {
   const id = useId();
   return (
-    <div>
+    <DemoContainer dataTheme={props.darkMode}>
       <Combobox
         id={id}
         isMultiSelect={props.isMultiSelect}
@@ -91,7 +103,7 @@ export function MultiSelectWithAddNewOptions(props) {
         options={props.options}
         allowNewValues={props.allowNewValues}
       />
-    </div>
+    </DemoContainer>
   );
 }
 
@@ -114,7 +126,7 @@ export const MultiSelectWithExternalChips = (props) => {
       ? setSelectedOptions(selectedOptions.filter((opt) => opt !== option))
       : setSelectedOptions([...selectedOptions, option]);
   return (
-    <div data-theme={props.darkmode ? "dark" : "light"}>
+    <DemoContainer dataTheme={props.darkMode}>
       {selectedOptions && (
         <Chips>
           {selectedOptions.map((option) => (
@@ -144,7 +156,7 @@ export const MultiSelectWithExternalChips = (props) => {
         id={id}
         shouldShowSelectedOptions={false}
       />
-    </div>
+    </DemoContainer>
   );
 };
 
@@ -154,19 +166,19 @@ MultiSelectWithExternalChips.args = {
   selectedOptions: [],
 };
 
-export function Loading({ isListOpen, isLoading }) {
+export function Loading(props) {
   const id = useId();
   return (
-    <div>
+    <DemoContainer dataTheme={props.darkMode}>
       <Combobox
         id={id}
         label="Komboboks (laster)"
         options={[]}
         selectedOptions={[]}
-        isListOpen={isListOpen}
-        isLoading={isLoading}
+        isListOpen={props.isListOpen}
+        isLoading={props.isLoading}
       />
-    </div>
+    </DemoContainer>
   );
 }
 
@@ -179,7 +191,7 @@ export function ComboboxWithNoHits(props) {
   const id = useId();
   const [value, setValue] = useState(props.value);
   return (
-    <div>
+    <DemoContainer dataTheme={props.darkMode}>
       <Combobox
         id={id}
         label="Komboboks (uten søketreff)"
@@ -188,7 +200,7 @@ export function ComboboxWithNoHits(props) {
         onChange={(event) => setValue(event.currentTarget.value)}
         isListOpen={true}
       />
-    </div>
+    </DemoContainer>
   );
 }
 
@@ -215,7 +227,7 @@ export const Controlled = (props) => {
   };
 
   return (
-    <>
+    <DemoContainer dataTheme={props.darkMode}>
       <TextField
         label="Overstyr value"
         onChange={(event) => setValue(event.target.value)}
@@ -226,13 +238,14 @@ export const Controlled = (props) => {
         label="Hva er dine favorittfrukter?"
         id={id}
         filteredOptions={filteredOptions}
+        isMultiSelect
         options={props.options}
         onChange={(event) => setValue(event.target.value)}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
         value={value}
       />
-    </>
+    </DemoContainer>
   );
 };
 
@@ -242,16 +255,54 @@ Controlled.args = {
   selectedOptions: initialSelectedOptions,
 };
 
+export const ComboboxSizes = (props) => (
+  <DemoContainer dataTheme={props.darkMode}>
+    <Combobox
+      label="Hva er dine favorittfrukter?"
+      description="Medium single-select"
+      options={options}
+    />
+    <br />
+    <Combobox
+      label="Hva er dine favorittfrukter?"
+      description="Small single-select"
+      options={options}
+      size="small"
+    />
+    <br />
+    <Combobox
+      label="Hva er dine favorittfrukter?"
+      description="Medium multiselect"
+      options={options}
+      isMultiSelect
+      allowNewValues
+    />
+    <br />
+    <Combobox
+      label="Hva er dine favorittfrukter?"
+      description="Small multiselect"
+      options={options}
+      isMultiSelect
+      size="small"
+      allowNewValues
+    />
+  </DemoContainer>
+);
+
+ComboboxSizes.args = {
+  options,
+};
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export const CancelInputTest = {
-  render: () => {
+  render: (props) => {
     return (
-      <div data-theme="light">
+      <DemoContainer dataTheme={props.darkMode}>
         <Combobox options={options} label="Hva er dine favorittfrukter?" />
-      </div>
+      </DemoContainer>
     );
   },
   play: async ({ canvasElement }) => {
@@ -274,15 +325,15 @@ export const CancelInputTest = {
 };
 
 export const RemoveSelectedMultiSelectTest = {
-  render: () => {
+  render: (props) => {
     return (
-      <div data-theme="light">
+      <DemoContainer dataTheme={props.darkMode}>
         <Combobox
           options={options}
           label="Hva er dine favorittfrukter?"
           isMultiSelect
         />
-      </div>
+      </DemoContainer>
     );
   },
   play: async ({ canvasElement }) => {
@@ -324,15 +375,15 @@ export const RemoveSelectedMultiSelectTest = {
 };
 
 export const AddWhenAddNewDisabledTest = {
-  render: () => {
+  render: (props) => {
     return (
-      <div data-theme="light">
+      <DemoContainer dataTheme={props.darkMode}>
         <Combobox
           options={options}
           label="Hva er dine favorittfrukter?"
           isMultiSelect
         />
-      </div>
+      </DemoContainer>
     );
   },
   play: async ({ canvasElement }) => {

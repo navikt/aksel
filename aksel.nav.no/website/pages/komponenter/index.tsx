@@ -20,9 +20,8 @@ import {
 import { WithSidebar } from "components/layout/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
 import { urlFor } from "@/sanity/interface";
 import { sidebarQuery, landingPageQuery } from "@/sanity/queries";
@@ -190,13 +189,13 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
               title: "Kom i gang med Kode",
               desc: "Intro til alle kodepakkene våre",
               icon: CodeIcon,
-              href: "/grunnleggende/kode/kom-i-gang-med-kodepakkene",
+              href: "/grunnleggende/introduksjon/kom-i-gang-med-kodepakkene",
             },
             {
               title: "Kom i gang med Figma",
               desc: "Hvordan bruke Figma-bibliotekene våre",
               icon: FigmaIcon,
-              href: "/grunnleggende/styling/design-tokens",
+              href: "/grunnleggende/introduksjon/kom-i-gang-med-figma",
             },
             {
               title: "Forslag til nye komponenter",
@@ -251,7 +250,7 @@ const WithPreview = lazy(() => import("../../components/WithPreview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
           query={query}
@@ -260,7 +259,7 @@ const Wrapper = (props: any) => {
             type: "komponent_artikkel",
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 

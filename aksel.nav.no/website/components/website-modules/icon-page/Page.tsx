@@ -192,7 +192,6 @@ export const IconPage = ({ name }: { name: string }) => {
                                   {sub.icons.map((i) => {
                                     const T = Icons[`${i.id}Icon`];
                                     if (T === undefined) {
-                                      console.log(i);
                                       return null;
                                     }
                                     return (
