@@ -13,7 +13,7 @@ const template = (variables, { tpl }) => {
     ],
     source: {
       type: "StringLiteral",
-      value: "./util/useId",
+      value: "react",
     },
   });
 
