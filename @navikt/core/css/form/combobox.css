@@ -192,7 +192,7 @@
   box-shadow: var(--a-shadow-small);
   border-radius: 4px;
   gap: 4px 0;
-  background-color: var(--ac-combobox-list-item-bg, var(--a-surface-default));
+  background-color: var(--ac-combobox-list-bg, var(--a-surface-default));
   color: var(--ac-combobox-list-text, var(--a-text-default));
 }
 
@@ -214,6 +214,7 @@
   align-items: center;
   padding: var(--a-spacing-3);
   width: 100%;
+  background-color: var(--ac-combobox-list-item-bg, var(--a-surface-default));
 }
 
 .navds-form-field--small .navds-combobox__list-item,
@@ -239,12 +240,12 @@
 }
 
 .navds-combobox__list-item--selected {
-  background-color: var(--ac-combobox-list-item-selected, var(--a-surface-selected));
+  background-color: var(--ac-combobox-list-item-selected-bg, var(--a-surface-selected));
 }
 
 .navds-combobox__list-item--selected.navds-combobox__list-item--focus,
 .navds-combobox__list-item--selected:hover {
-  background-color: var(--ac-combobox-selected-options-hover-bg, var(--a-surface-action-subtle-hover));
+  background-color: var(--ac-combobox-list-item-selected-hover-bg, var(--a-surface-action-subtle-hover));
   border-left: 4px solid var(--ac-combobox-list-item-selected-hover-border-left, var(--a-border-focus));
   padding-left: calc(var(--a-spacing-3) - 4px);
 }
