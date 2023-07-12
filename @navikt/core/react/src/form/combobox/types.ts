@@ -64,7 +64,7 @@ export interface ComboboxProps
    * Callback function triggered whenever the value of the input field is triggered.
    *
    * @param event
-   * @returns nothing
+   * @returns
    */
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   /**
