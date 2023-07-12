@@ -33,6 +33,7 @@ const FilteredOptions = () => {
       })}
       id={`${id}-filtered-options`}
       role="listbox"
+      tabIndex={-1}
     >
       {isLoading && (
         <li
