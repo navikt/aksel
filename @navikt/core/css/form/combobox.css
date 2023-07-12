@@ -277,7 +277,7 @@
 
   /* add bigger click area for input */
   .navds-combobox__input {
-    min-width: max-content;
+    min-width: min-content;
     padding: 0.75rem 0;
   }
 
