@@ -56,7 +56,7 @@ const FilteredOptions = () => {
           role="option"
           aria-selected={false}
         >
-          <PlusIcon />
+          <PlusIcon aria-hidden />
           <BodyShort size={size}>
             Legg til{" "}
             <Label as="span" size={size}>
