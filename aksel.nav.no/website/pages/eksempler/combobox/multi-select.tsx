@@ -2,29 +2,30 @@ import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const initialOptions = [
-  "banana",
-  "apple",
-  "tangerine",
-  "pear",
-  "grape",
-  "kiwi",
-  "mango",
-  "passion fruit",
-  "pineapple",
-  "strawberry",
-  "watermelon",
-  "grape fruit",
+  "car",
+  "bus",
+  "train",
+  "skateboard",
+  "bicycle",
+  "motorcycle",
+  "boat",
+  "airplane",
+  "helicopter",
+  "truck",
+  "van",
+  "scooter",
 ];
 
-const initialSelectedOptions = ["passion fruit", "grape fruit"];
+const initialSelectedOptions = ["skateboard", "helicopter"];
 
 export const Example = () => {
   return (
     <div>
       <UNSAFE_Combobox
-        label="Komboboks"
+        label="Hva er de kuleste transportmidlene?"
         options={initialOptions}
         selectedOptions={initialSelectedOptions}
+        isMultiSelect
       />
     </div>
   );
@@ -33,5 +34,6 @@ export const Example = () => {
 export default withDsExample(Example);
 
 export const args = {
-  index: 0,
+  index: 1,
+  desc: "Ved Multi Select kan brukeren velge flere valg fra listen.",
 };

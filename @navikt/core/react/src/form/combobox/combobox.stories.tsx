@@ -57,10 +57,10 @@ export const Default = (props) => {
   return (
     <DemoContainer dataTheme={props.darkMode}>
       <UNSAFE_Combobox
-        shouldAutocomplete={props.shouldAutoComplete}
         options={props.options}
         label="Hva er dine favorittfrukter?"
         /* everything under here is optional? */
+        shouldAutocomplete={props.shouldAutoComplete}
         size="medium"
         id={id}
       />
