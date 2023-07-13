@@ -17,6 +17,7 @@ export {
   type RadioProps,
 } from "./radio";
 export { Search, type SearchClearEvent, type SearchProps } from "./search";
+export { Combobox as UNSAFE_Combobox, type ComboboxProps } from "./combobox";
 export { default as Select, type SelectProps } from "./Select";
 export { default as Switch, type SwitchProps } from "./Switch";
 export { Counter, default as Textarea, type TextareaProps } from "./Textarea";

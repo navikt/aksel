@@ -47,5 +47,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "Toggle chip brukes til filtrering av innhold og data."
+  desc: "Toggle chip brukes til filtrering av innhold og data.",
 };
