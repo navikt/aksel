@@ -3,4 +3,4 @@
 "@navikt/ds-react": minor
 ---
 
-Combobox
+Ny komponent Combobox!
