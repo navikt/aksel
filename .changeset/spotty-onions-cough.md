@@ -1,6 +1,5 @@
 ---
-"@navikt/ds-css": minor
-"@navikt/ds-react": minor
+"@navikt/ds-react": patch
 ---
 
-Ny komponent Combobox!
+Combobox post-release tweaks
