@@ -16,15 +16,12 @@ const initialOptions = [
   "scooter",
 ];
 
-const initialSelectedOptions = ["skateboard", "helicopter"];
-
 export const Example = () => {
   return (
     <div>
       <UNSAFE_Combobox
         label="Hva er de kuleste transportmidlene?"
         options={initialOptions}
-        selectedOptions={initialSelectedOptions}
         isMultiSelect
       />
     </div>
