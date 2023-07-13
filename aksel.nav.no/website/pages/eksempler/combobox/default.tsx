@@ -1,4 +1,4 @@
-import { Combobox } from "@navikt/ds-react";
+import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const initialOptions = [
@@ -21,7 +21,7 @@ const initialSelectedOptions = ["passion fruit", "grape fruit"];
 export const Example = () => {
   return (
     <div>
-      <Combobox
+      <UNSAFE_Combobox
         label="Komboboks"
         options={initialOptions}
         selectedOptions={initialSelectedOptions}

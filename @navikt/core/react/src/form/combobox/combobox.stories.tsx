@@ -2,12 +2,12 @@
 import { Meta } from "@storybook/react";
 import React, { useState, useId, useMemo } from "react";
 import { userEvent, within } from "@storybook/testing-library";
-import { Chips, Combobox, TextField } from "../../index";
+import { Chips, UNSAFE_Combobox, TextField } from "../../index";
 import { expect } from "@storybook/jest";
 
 export default {
   title: "ds-react/Combobox",
-  component: Combobox,
+  component: UNSAFE_Combobox,
   argTypes: {
     isListOpen: {
       control: {
@@ -56,7 +56,7 @@ export const Default = (props) => {
   const id = useId();
   return (
     <DemoContainer dataTheme={props.darkMode}>
-      <Combobox
+      <UNSAFE_Combobox
         shouldAutocomplete={props.shouldAutoComplete}
         options={props.options}
         label="Hva er dine favorittfrukter?"
@@ -77,7 +77,7 @@ export function MultiSelect(props) {
   const id = useId();
   return (
     <DemoContainer dataTheme={props.darkMode}>
-      <Combobox
+      <UNSAFE_Combobox
         id={id}
         label="Komboboks - velg flere"
         options={props.options}
@@ -96,7 +96,7 @@ export function MultiSelectWithAddNewOptions(props) {
   const id = useId();
   return (
     <DemoContainer dataTheme={props.darkMode}>
-      <Combobox
+      <UNSAFE_Combobox
         id={id}
         isMultiSelect={props.isMultiSelect}
         label="Komboboks (med mulighet for å legge til nye verdier)"
@@ -140,7 +140,7 @@ export const MultiSelectWithExternalChips = (props) => {
           ))}
         </Chips>
       )}
-      <Combobox
+      <UNSAFE_Combobox
         options={options}
         selectedOptions={selectedOptions}
         onToggleSelected={(option: string) => toggleSelected(option)}
@@ -170,7 +170,7 @@ export function Loading(props) {
   const id = useId();
   return (
     <DemoContainer dataTheme={props.darkMode}>
-      <Combobox
+      <UNSAFE_Combobox
         id={id}
         label="Komboboks (laster)"
         options={[]}
@@ -192,7 +192,7 @@ export function ComboboxWithNoHits(props) {
   const [value, setValue] = useState(props.value);
   return (
     <DemoContainer dataTheme={props.darkMode}>
-      <Combobox
+      <UNSAFE_Combobox
         id={id}
         label="Komboboks (uten søketreff)"
         options={props.options}
@@ -234,7 +234,7 @@ export const Controlled = (props) => {
         value={value}
       />
       <br />
-      <Combobox
+      <UNSAFE_Combobox
         label="Hva er dine favorittfrukter?"
         id={id}
         filteredOptions={filteredOptions}
@@ -257,20 +257,20 @@ Controlled.args = {
 
 export const ComboboxSizes = (props) => (
   <DemoContainer dataTheme={props.darkMode}>
-    <Combobox
+    <UNSAFE_Combobox
       label="Hva er dine favorittfrukter?"
       description="Medium single-select"
       options={options}
     />
     <br />
-    <Combobox
+    <UNSAFE_Combobox
       label="Hva er dine favorittfrukter?"
       description="Small single-select"
       options={options}
       size="small"
     />
     <br />
-    <Combobox
+    <UNSAFE_Combobox
       label="Hva er dine favorittfrukter?"
       description="Medium multiselect"
       options={options}
@@ -278,7 +278,7 @@ export const ComboboxSizes = (props) => (
       allowNewValues
     />
     <br />
-    <Combobox
+    <UNSAFE_Combobox
       label="Hva er dine favorittfrukter?"
       description="Small multiselect"
       options={options}
@@ -301,7 +301,10 @@ export const CancelInputTest = {
   render: (props) => {
     return (
       <DemoContainer dataTheme={props.darkMode}>
-        <Combobox options={options} label="Hva er dine favorittfrukter?" />
+        <UNSAFE_Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+        />
       </DemoContainer>
     );
   },
@@ -328,7 +331,7 @@ export const RemoveSelectedMultiSelectTest = {
   render: (props) => {
     return (
       <DemoContainer dataTheme={props.darkMode}>
-        <Combobox
+        <UNSAFE_Combobox
           options={options}
           label="Hva er dine favorittfrukter?"
           isMultiSelect
@@ -378,7 +381,7 @@ export const AddWhenAddNewDisabledTest = {
   render: (props) => {
     return (
       <DemoContainer dataTheme={props.darkMode}>
-        <Combobox
+        <UNSAFE_Combobox
           options={options}
           label="Hva er dine favorittfrukter?"
           isMultiSelect

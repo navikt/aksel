@@ -2,7 +2,7 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
-import { Combobox } from "..";
+import { UNSAFE_Combobox } from "..";
 import { act } from "react-dom/test-utils";
 
 const options = [
@@ -24,7 +24,7 @@ const App = (props) => {
   const id = useId();
   return (
     <div data-theme="light">
-      <Combobox
+      <UNSAFE_Combobox
         label="Hva er dine favorittfrukter?"
         size="medium"
         variant="simple"
