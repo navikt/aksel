@@ -31,7 +31,7 @@ export const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 export const args = {
   index: 1,
