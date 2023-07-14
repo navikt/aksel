@@ -15,22 +15,19 @@ const initialOptions = [
   "The Rise of Skywalker",
 ];
 
-const initialSelectedOptions = ["The Phantom Menace"];
-
 export const Example = () => {
   return (
     <div>
       <UNSAFE_Combobox
         label="Hva er den aller kuleste Star Wars-filmen noensinne, helt objektivt?"
         options={initialOptions}
-        selectedOptions={initialSelectedOptions}
         shouldAutocomplete={true}
       />
     </div>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 export const args = {
   index: 0,

@@ -16,22 +16,19 @@ const initialOptions = [
   "wine",
 ];
 
-const initialSelectedOptions = ["lemonade", "coffee", "beer"];
-
 export const Example = () => {
   return (
     <div>
       <UNSAFE_Combobox
         label="Hva er dine favorittdrikker? Legg gjerne til flere alternativer."
         options={initialOptions}
-        selectedOptions={initialSelectedOptions}
         isMultiSelect
       />
     </div>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 export const args = {
   index: 1,
