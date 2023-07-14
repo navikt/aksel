@@ -16,21 +16,18 @@ const initialOptions = [
   "grape fruit",
 ];
 
-const initialSelectedOptions = ["passion fruit"];
-
 export const Example = () => {
   return (
     <div>
       <UNSAFE_Combobox
         label="Hva er din favorittfrukt?"
         options={initialOptions}
-        selectedOptions={initialSelectedOptions}
       />
     </div>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 export const args = {
   index: 0,
