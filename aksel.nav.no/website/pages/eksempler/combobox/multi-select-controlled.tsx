@@ -27,8 +27,7 @@ export const Example = () => {
     initialSelectedOptions
   );
   const filteredOptions = useMemo(
-    () =>
-      initialOptions.filter((initialOptions) => initialOptions.includes(value)),
+    () => initialOptions.filter((option) => option.includes(value)),
     [value]
   );
 
@@ -60,5 +59,5 @@ export default withDsExample(Example, "static");
 
 export const args = {
   index: 1,
-  desc: "Du kan Ved Multi Select kan brukeren velge flere valg fra nedtrekkslisten.",
+  desc: "Du kan overstyre blant annet value, selectedOptions, filteredOptions.",
 };
