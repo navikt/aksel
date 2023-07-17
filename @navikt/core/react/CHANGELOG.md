@@ -1,5 +1,20 @@
 # @navikt/ds-react
 
+## 4.7.0
+
+### Minor Changes
+
+- Ny komponent Combobox! ([#1868](https://github.com/navikt/aksel/pull/1868))
+
+### Patch Changes
+
+- Timeline: Har nå egen `axisLabelTemplates`-prop for axixlabel formatering ([#2109](https://github.com/navikt/aksel/pull/2109))
+
+- Combobox post-release tweaks ([#2112](https://github.com/navikt/aksel/pull/2112))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.0
+
 ## 4.6.1
 
 ### Patch Changes

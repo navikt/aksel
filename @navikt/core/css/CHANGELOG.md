@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 4.7.0
+
+### Minor Changes
+
+- Ny komponent Combobox! ([#1868](https://github.com/navikt/aksel/pull/1868))
+
 ## 4.6.1
 
 ### Patch Changes
