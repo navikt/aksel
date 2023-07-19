@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 4.7.1
+
+### Patch Changes
+
+- Datepicker: Fikset bug ved bruk dynamisk oppdatering av minDate. Vist `month` vil nå alltid være oppdatert når datepicker åpnes ([#2117](https://github.com/navikt/aksel/pull/2117))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.1
+
 ## 4.7.0
 
 ### Minor Changes
