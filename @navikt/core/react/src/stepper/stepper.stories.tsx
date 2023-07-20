@@ -11,8 +11,8 @@ export default {
     orientation: {
       control: {
         type: "radio",
-        options: ["horizontal", "vertical"],
       },
+      options: ["horizontal", "vertical"],
     },
     activeStep: {
       control: {
