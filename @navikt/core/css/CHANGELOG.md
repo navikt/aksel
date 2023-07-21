@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 4.7.2
+
+### Patch Changes
+
+- Stepper: Fikset `hotizontal`-bug når step var `completed` ([#2116](https://github.com/navikt/aksel/pull/2116))
+
 ## 4.7.1
 
 ## 4.7.0
