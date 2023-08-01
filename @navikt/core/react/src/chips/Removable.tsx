@@ -34,6 +34,7 @@ export const RemovableChips: OverridableComponent<
       as: Component = "button",
       removeLabel = "slett",
       onDelete,
+      type = "button",
       ...rest
     },
     ref
@@ -42,6 +43,7 @@ export const RemovableChips: OverridableComponent<
       <Component
         {...rest}
         ref={ref}
+        type={type}
         className={cl(
           "navds-chips__chip navds-chips__removable navds-chips--icon-right",
           className,
