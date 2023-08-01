@@ -16,7 +16,7 @@
   display: table-row;
 }
 
-.navds-table__body .navds-table__row--shade-on-hover:hover {
+.navds-table__body .navds-table__row--shade-on-hover:not(.navds-table__expandable-row--expansion-disabled):hover {
   background-color: var(--ac-table-row-hover, var(--a-bg-subtle));
 }
 
@@ -152,6 +152,10 @@
 
 .navds-table__expandable-row:not(.navds-table__expandable-row--open) .navds-table__data-cell {
   transition: border-bottom-color 190ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+}
+
+.navds-table__expandable-row:not(.navds-table__expandable-row--open):not(.navds-table__expandable-row--expansion-disabled):hover {
+  cursor: pointer;
 }
 
 .navds-table__expandable-row--open .navds-table__data-cell {

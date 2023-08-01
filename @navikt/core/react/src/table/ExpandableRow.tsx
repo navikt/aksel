@@ -31,7 +31,7 @@ export interface ExpandableRowProps extends Omit<RowProps, "content"> {
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Disable expansio
+   * Disable expansion. shadeOnHover will not be visible.
    * @default false
    */
   expansionDisabled?: boolean;
@@ -68,6 +68,14 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
 
     const isOpen = open ?? internalOpen;
 
+    const clickHandler = (e) => {
+      onOpenChange?.(!isOpen);
+      if (open === undefined) {
+        setInternalOpen((open) => !open);
+      }
+      e.stopPropagation();
+    };
+
     return (
       <>
         <Row
@@ -75,7 +83,10 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           ref={ref}
           className={cl("navds-table__expandable-row", className, {
             "navds-table__expandable-row--open": isOpen,
+            "navds-table__expandable-row--expansion-disabled":
+              expansionDisabled,
           })}
+          onClick={!expansionDisabled ? clickHandler : undefined}
         >
           {togglePlacement === "right" && children}
           <DataCell
@@ -89,12 +100,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
                 className="navds-table__toggle-expand-button"
                 aria-controls={id}
                 aria-expanded={isOpen}
-                onClick={() => {
-                  onOpenChange?.(!isOpen);
-                  if (open === undefined) {
-                    setInternalOpen((open) => !open);
-                  }
-                }}
+                onClick={clickHandler}
               >
                 <ChevronDownIcon
                   className="navds-table__expandable-icon"
