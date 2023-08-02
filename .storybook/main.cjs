@@ -1,5 +1,4 @@
 const storyIndexers = require("./indexer");
-
 const path = require("path");
 const { mergeConfig } = require("vite");
 
@@ -59,15 +58,17 @@ module.exports = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      define: { "process.env": {} },
+      define: {
+        "process.env": {},
+      },
       resolve: {
         alias: [
           /*
-          // Example
-          {
-            find: "@components",
-            replacement: path.resolve(__dirname, "./src/components"),
-          }, */
+        // Example
+        {
+          find: "@components",
+          replacement: path.resolve(__dirname, "./src/components"),
+        }, */
           {
             find: "components",
             replacement: path.resolve(
