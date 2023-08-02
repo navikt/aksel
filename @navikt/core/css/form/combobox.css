@@ -11,7 +11,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  border: 1px solid black;
+  border: 1px solid var(--a-border-default);
 }
 
 .navds-combobox__wrapper-inner > :first-child {
@@ -52,7 +52,7 @@
   letter-spacing: 0;
   line-height: var(--a-font-line-height-large);
   margin: 0;
-  padding-left: calc(0.5rem - 4px);
+  padding-left: 0.25rem;
 }
 
 .navds-combobox__input-wrapper {
@@ -190,8 +190,8 @@
   align-items: flex-start;
   padding: 0;
   box-shadow: var(--a-shadow-small);
-  border-radius: 4px;
-  gap: 4px 0;
+  border-radius: var(--a-border-radius-medium);
+  gap: var(--a-spacing-1) 0;
   background-color: var(--ac-combobox-list-bg, var(--a-surface-default));
   color: var(--ac-combobox-list-text, var(--a-text-default));
 }

@@ -6,7 +6,7 @@
   color: var(--ac-select-text, var(--a-text-default));
   width: 100%;
   box-sizing: border-box;
-  min-height: 48px;
+  min-height: 3rem;
   display: inline-block;
   position: relative;
   padding: 0.5rem;
@@ -45,7 +45,7 @@
 }
 
 .navds-form-field--small .navds-select__input {
-  min-height: 32px;
+  min-height: 2rem;
   padding: 0 2rem 0 0.25rem;
 }
 
