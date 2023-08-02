@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Combobox: Chips submitter ikke forms ved klikk
+Chips: Removable Chips submitter ikke forms ved klikk lengre
