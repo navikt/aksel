@@ -115,15 +115,15 @@
 
 .navds-checkbox__input:checked + .navds-checkbox__label::before {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
-  background-position: 6px center;
+  background-position: 0.375rem center;
   background-repeat: no-repeat;
-  background-size: 13px;
+  background-size: 0.8125rem;
   box-shadow: none;
   background-color: var(--ac-radio-checkbox-action, var(--a-surface-action));
 }
 
 .navds-checkbox--small > .navds-checkbox__input:checked + .navds-checkbox__label::before {
-  background-position: 4px center;
+  background-position: 0.25rem center;
 }
 
 .navds-checkbox__input:indeterminate:focus-visible + .navds-checkbox__label::before,
