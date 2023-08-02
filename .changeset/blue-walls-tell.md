@@ -2,4 +2,4 @@
 "@navikt/ds-css": patch
 ---
 
-Oppdatert bruk av REM i enkelete komponenter for å forbedre utrykk ved font-scaling i browser
+Oppdatert bruk av REM i komponenter for forbedret utrykk ved font-scaling i browser
