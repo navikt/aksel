@@ -1,31 +1,25 @@
-import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
+import { FileIcon } from "@navikt/aksel-icons";
+import { BodyLong, Button, Modal } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 
 const Example = () => {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    Modal.setAppElement("#__next");
-  }, []);
+  const ref = useRef<HTMLDialogElement>(null);
 
   return (
-    <>
-      <Button onClick={() => setOpen(true)}>Åpne modal</Button>
+    <div className="py-16">
+      <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
+
       <Modal
-        open={open}
-        aria-label="Modal demo"
-        onClose={() => setOpen((x) => !x)}
-        aria-labelledby="modal-heading"
+        ref={ref}
+        header={{
+          label: "Modal demo",
+          icon: <FileIcon aria-hidden />,
+          heading: "Overskrift",
+        }}
       >
         <Modal.Content>
-          <Heading spacing level="1" size="large" id="modal-heading">
-            Laborum proident id ullamco
-          </Heading>
-          <Heading spacing level="2" size="medium">
-            Excepteur labore nostrud incididunt exercitation.
-          </Heading>
-          <BodyLong spacing>
+          <BodyLong>
             Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
             incididunt dolor do ad ut. Incididunt eiusmod nostrud deserunt duis
             laborum. Proident aute culpa qui nostrud velit adipisicing minim.
@@ -34,8 +28,27 @@ const Example = () => {
             Exercitation nostrud est laborum magna non non aliqua qui esse.
           </BodyLong>
         </Modal.Content>
+        <Modal.Footer>
+          <Button type="button" onClick={() => ref.current?.close()}>
+            Primær
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => ref.current?.close()}
+          >
+            Sekundær
+          </Button>
+          <Button
+            type="button"
+            variant="tertiary"
+            onClick={() => ref.current?.close()}
+          >
+            Tertiær
+          </Button>
+        </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 };
 

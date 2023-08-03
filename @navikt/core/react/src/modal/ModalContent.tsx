@@ -3,17 +3,10 @@ import cl from "clsx";
 
 export interface ModalContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Modal.Content content
-   */
   children: React.ReactNode;
 }
 
-export type ModalContentType = React.ForwardRefExoticComponent<
-  ModalContentProps & React.RefAttributes<HTMLDivElement>
->;
-
-const ModalContent: ModalContentType = forwardRef(
+const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
   ({ className, ...rest }, ref) => (
     <div
       {...rest}

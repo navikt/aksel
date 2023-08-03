@@ -4048,6 +4048,7 @@ __metadata:
     concurrently: 7.2.1
     copyfiles: ^2.4.1
     date-fns: 2.29.3
+    dialog-polyfill-universal: 0.1.0
     faker: 5.5.3
     fast-glob: 3.2.11
     jest: ^29.0.0
@@ -11862,6 +11863,22 @@ __metadata:
     detect: bin/detect-port.js
     detect-port: bin/detect-port.js
   checksum: b48da9340481742547263d5d985e65d078592557863402ecf538511735e83575867e94f91fe74405ea19b61351feb99efccae7e55de9a151d5654e3417cea05b
+  languageName: node
+  linkType: hard
+
+"dialog-polyfill-universal@npm:0.1.0":
+  version: 0.1.0
+  resolution: "dialog-polyfill-universal@npm:0.1.0"
+  dependencies:
+    dialog-polyfill: ^0.5.6
+  checksum: ce98f7a8ff87eae39af230a91679e9fe52f495b0e72c45e4ec673d2f5165a836dc6225ae0be4ab9c328f3b0fabe1bf0e7515dcfe42782f06737009caae96d5d0
+  languageName: node
+  linkType: hard
+
+"dialog-polyfill@npm:^0.5.6":
+  version: 0.5.6
+  resolution: "dialog-polyfill@npm:0.5.6"
+  checksum: dde8d4b6a62b63b710e0d0d70b615d92ff08f3cb2b521e1f99b17e8220d9d55d0fdf9fc17fbe77b0ff1be817094e14b60c4c4bacd5456fba427ede48d2d90230
   languageName: node
   linkType: hard
 

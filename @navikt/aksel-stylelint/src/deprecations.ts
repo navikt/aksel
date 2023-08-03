@@ -25,4 +25,13 @@ export const deprecations: DeprecatedList = [
     message:
       "In v4.1.0 Chips. Toggle no longer handles special alignment for checkmark-icon, thus removing this class",
   },
+  {
+    classes: ["navds-modal__overlay"],
+    message:
+      "Removed in v5.0.0, use `.navds-modal::backdrop` and `.navds-modal--polyfilled + .backdrop` instead",
+  },
+  {
+    classes: ["navds-modal__button--shake"],
+    message: "Removed in v5.0.0",
+  },
 ];

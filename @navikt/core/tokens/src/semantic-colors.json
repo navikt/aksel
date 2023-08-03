@@ -89,7 +89,7 @@
         "value": "{a.transparent.value}"
       },
       "backdrop": {
-        "value": "{a.grayalpha.700.value}"
+        "value": "{a.grayalpha.500.value}"
       },
       "inverted": {
         "hover": {

@@ -1,69 +1,114 @@
-.ReactModal__Body--open {
-  overflow: hidden;
-}
-
 .navds-modal {
   background-color: var(--ac-modal-bg, var(--a-surface-default));
-  border-radius: var(--a-border-radius-medium);
-  display: block;
-  position: relative;
-  overflow: auto;
-  max-height: 100%;
+  border: 1px solid var(--ac-modal-border, var(--a-border-subtle));
+  border-radius: var(--a-border-radius-large);
   box-shadow: var(--a-shadow-xlarge);
+  padding: 0;
+  position: fixed;
 }
 
-.navds-modal__content {
-  padding: var(--a-spacing-4);
+.navds-modal[open] {
+  display: flex;
+  flex-direction: column;
 }
 
-.navds-modal:focus-visible,
-.navds-modal--focus {
-  box-shadow: var(--a-shadow-focus);
-  outline: none;
+.navds-modal--polyfilled {
+  top: 50%;
+  transform: translate(0, -50%);
+  overflow: auto;
+  max-height: 80%;
+
+  /* From polyfill (dialog-polyfill/dist/dialog-polyfill.css): */
+  left: 0;
+  right: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
 }
 
-@supports not selector(:focus-visible) {
-  .navds-modal:focus,
-  .navds-modal--focus {
-    box-shadow: var(--a-shadow-focus);
-    outline: none;
+.navds-modal--polyfilled:not([open]) {
+  display: none; /* from polyfill */
+}
+
+._dialog_overlay {
+  /* From polyfill */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@media (min-width: 768px) {
+  .navds-modal {
+    max-width: 700px;
   }
 }
 
-.navds-modal__overlay {
+@media (max-width: 767px) {
+  .navds-modal {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.navds-modal::backdrop {
+  /*
+   * Cannot use --a-surface-backdrop because ::backdrop does not inherit from anything but itself.
+   * But consumers can do `::backdrop { --ac-modal-backdrop: white; }`
+   * We can add ::backdrop to tokens.css when we remove the polyfill.
+   */
+  background: var(--ac-modal-backdrop, rgb(0 0 0 / 0.44));
+}
+
+.navds-modal--polyfilled + .backdrop /* Cannot be combined with ::backdrop selector */ {
+  background: var(--ac-modal-backdrop, rgb(0 0 0 / 0.44));
+
+  /* From polyfill: */
   position: fixed;
-  z-index: var(--a-z-index-modal);
   top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  background-color: var(--ac-modal-backdrop, var(--a-surface-backdrop));
-  padding: var(--a-spacing-4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.navds-modal__button--shake {
-  transform: rotate(0deg);
-  transition: transform 100ms cubic-bezier(0.82, 2, 1, 0.3);
-}
-
-/* prettier-ignore */
-.navds-modal__overlay:active > .navds-modal:not(:active) > .navds-modal__button--shake {
-  transform: rotate(10deg);
-  transition: transform 100ms cubic-bezier(0.82, -2, 1, 0.3);
 }
 
 .navds-modal__button {
-  position: absolute;
-  top: var(--a-spacing-4);
-  right: var(--a-spacing-4);
-  display: flex;
-  padding: var(--a-spacing-2);
+  margin-left: var(--a-spacing-4);
+  float: right;
 }
 
-.navds-modal__button svg {
-  height: 1.5rem;
-  width: 1.5rem;
+.navds-modal__header {
+  padding: var(--a-spacing-6) var(--a-spacing-6) var(--a-spacing-4) var(--a-spacing-6);
+}
+
+.navds-modal__header-icon svg {
+  display: inline;
+  vertical-align: -0.25rem;
+  margin-right: var(--a-spacing-1);
+}
+
+.navds-modal__label {
+  font-weight: 600;
+  color: var(--a-text-subtle);
+}
+
+.navds-modal__content {
+  padding: var(--a-spacing-6);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.navds-modal__header + .navds-modal__content {
+  padding-top: var(--a-spacing-0);
+}
+
+.navds-modal__footer {
+  display: flex;
+  flex-flow: row-reverse wrap;
+  gap: var(--a-spacing-4);
+  padding: var(--a-spacing-4) var(--a-spacing-6) var(--a-spacing-6) var(--a-spacing-6);
+}
+
+.navds-modal__footer :last-child {
+  margin-right: auto;
 }

@@ -256,7 +256,7 @@
     { "name": "--a-surface-selected", "value": "rgba(230, 240, 255, 1)" },
     { "name": "--a-surface-subtle", "value": "rgba(247, 247, 247, 1)" },
     { "name": "--a-surface-transparent", "value": "rgba(255, 255, 255, 0)" },
-    { "name": "--a-surface-backdrop", "value": "rgba(0, 0, 0, 0.65)" },
+    { "name": "--a-surface-backdrop", "value": "rgba(0, 0, 0, 0.44)" },
     { "name": "--a-surface-inverted-hover", "value": "rgba(64, 64, 64, 1)" },
     { "name": "--a-surface-inverted-active", "value": "rgba(89, 89, 89, 1)" },
     { "name": "--a-surface-inverted", "value": "rgba(38, 38, 38, 1)" }

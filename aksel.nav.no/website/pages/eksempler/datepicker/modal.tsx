@@ -1,50 +1,29 @@
-import {
-  DatePicker,
-  useDatepicker,
-  Button,
-  Modal,
-  Heading,
-} from "@navikt/ds-react";
+import { DatePicker, useDatepicker, Button, Modal } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import format from "date-fns/format";
 import nbLocale from "date-fns/locale/nb";
 
 const Example = () => {
-  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDialogElement>(null);
 
   const { datepickerProps, inputProps, selectedDay } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     onDateChange: console.log,
   });
 
-  useEffect(() => {
-    Modal.setAppElement("#__next");
-  }, []);
-
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Åpne modal</Button>
+      <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
-      <Modal
-        open={open}
-        aria-label="Modal demo"
-        onClose={() => setOpen((x) => !x)}
-        shouldCloseOnEsc={!datepickerProps.open}
-        aria-labelledby="modal-heading"
-      >
-        <Modal.Content className="min-w-96 max-w-full">
-          <Heading spacing level="1" size="large" id="modal-heading">
-            Heading
-          </Heading>
-          <div className="min-h-96">
-            <DatePicker {...datepickerProps} strategy="fixed">
-              <DatePicker.Input {...inputProps} label="Velg dato" />
-            </DatePicker>
-            <div className="pt-4">
-              {selectedDay &&
-                format(selectedDay, "dd.MM.yyyy", { locale: nbLocale })}
-            </div>
+      <Modal ref={ref} aria-label="Modal demo" header={{ heading: "Heading" }}>
+        <Modal.Content className="min-h-96 min-w-96 max-w-full">
+          <DatePicker {...datepickerProps} strategy="fixed">
+            <DatePicker.Input {...inputProps} label="Velg dato" />
+          </DatePicker>
+          <div className="pt-4">
+            {selectedDay &&
+              format(selectedDay, "dd.MM.yyyy", { locale: nbLocale })}
           </div>
         </Modal.Content>
       </Modal>
@@ -61,5 +40,4 @@ export const Demo = {
 
 export const args = {
   index: 11,
-  desc: "Ved bruk av datepicker i Modal er det viktig at 'Escape' ikke lukker selve modalen hvis datepicker er åpen. Bruk 'shouldCloseOnEsc' for å toggle dette når datepicker er åpen.",
 };
