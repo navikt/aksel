@@ -63,12 +63,6 @@ module.exports = {
       },
       resolve: {
         alias: [
-          /*
-        // Example
-        {
-          find: "@components",
-          replacement: path.resolve(__dirname, "./src/components"),
-        }, */
           {
             find: "components",
             replacement: path.resolve(
