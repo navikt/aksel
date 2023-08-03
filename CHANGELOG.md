@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.7.3
+
+### @navikt/ds-react
+
+- Chips: Removable Chips submitter ikke forms ved klikk lengre ([#2124](https://github.com/navikt/aksel/pull/2124))
+
 ## 4.7.2
 
 ### @navikt/ds-css
