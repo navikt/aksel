@@ -7,6 +7,8 @@ import {
 } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useEffect, useState } from "react";
+import format from "date-fns/format";
+import nbLocale from "date-fns/locale/nb";
 
 const Example = () => {
   const [open, setOpen] = useState(false);
@@ -40,7 +42,8 @@ const Example = () => {
               <DatePicker.Input {...inputProps} label="Velg dato" />
             </DatePicker>
             <div className="pt-4">
-              {selectedDay && selectedDay.toDateString()}
+              {selectedDay &&
+                format(selectedDay, "dd.MM.yyyy", { locale: nbLocale })}
             </div>
           </div>
         </Modal.Content>

@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 4.7.3
+
+### Patch Changes
+
+- Chips: Removable Chips submitter ikke forms ved klikk lengre ([#2124](https://github.com/navikt/aksel/pull/2124))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.3
+
 ## 4.7.2
 
 ### Patch Changes
