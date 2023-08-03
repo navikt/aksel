@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { useId } from "..";
 import AnimateHeight from "../util/AnimateHeight";
 import DataCell from "./DataCell";
@@ -65,15 +65,27 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
     const id = useId();
+    const expandableButtonRef = useRef<HTMLButtonElement | null>(null);
+    const expandableIconRef = useRef<SVGSVGElement | null>(null);
 
     const isOpen = open ?? internalOpen;
 
-    const clickHandler = (e) => {
+    const expansionHandler = (e) => {
       onOpenChange?.(!isOpen);
       if (open === undefined) {
         setInternalOpen((open) => !open);
       }
       e.stopPropagation();
+    };
+
+    const onRowClick = (e) => {
+      if (
+        e.target.nodeName === "TD" ||
+        e.target === expandableButtonRef.current ||
+        e.target === expandableIconRef.current
+      ) {
+        expansionHandler(e);
+      }
     };
 
     return (
@@ -86,7 +98,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
             "navds-table__expandable-row--expansion-disabled":
               expansionDisabled,
           })}
-          onClick={!expansionDisabled ? clickHandler : undefined}
+          onClick={!expansionDisabled ? onRowClick : undefined}
         >
           {togglePlacement === "right" && children}
           <DataCell
@@ -96,13 +108,15 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           >
             {!expansionDisabled && (
               <button
+                ref={expandableButtonRef}
                 type="button"
                 className="navds-table__toggle-expand-button"
                 aria-controls={id}
                 aria-expanded={isOpen}
-                onClick={clickHandler}
+                onClick={expansionHandler}
               >
                 <ChevronDownIcon
+                  ref={expandableIconRef}
                   className="navds-table__expandable-icon"
                   title={isOpen ? "Vis mindre" : "Vis mer"}
                 />

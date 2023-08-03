@@ -261,7 +261,6 @@ export const ClickableRow = {
                 <Button
                   size="xsmall"
                   onClick={(e) => {
-                    e.stopPropagation();
                     alert("Mer info");
                   }}
                 >
@@ -278,13 +277,7 @@ export const ClickableRow = {
             >
               <Table.DataCell>Hans</Table.DataCell>
               <Table.DataCell>
-                <Checkbox
-                  hideLabel
-                  size="small"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                >
+                <Checkbox hideLabel size="small">
                   Sett
                 </Checkbox>
               </Table.DataCell>
