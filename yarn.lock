@@ -4043,7 +4043,6 @@ __metadata:
     "@testing-library/user-event": ^14.2.0
     "@types/faker": 5.5.8
     "@types/jest": ^29.0.0
-    "@types/react-modal": ^3.13.1
     clsx: ^1.2.1
     concurrently: 7.2.1
     copyfiles: ^2.4.1
@@ -4055,7 +4054,6 @@ __metadata:
     jest-environment-jsdom: ^29.0.0
     react-day-picker: 8.3.4
     react-dom: ^18.0.0
-    react-modal: 3.15.1
     react-router-dom: ^6.3.0
     rimraf: 3.0.2
     swr: ^1.1.2
@@ -7722,15 +7720,6 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: b44c3262efa2c68fa6fe2beb9ef86170b18305469461a3f97aa14943cc033cb21a26944f718bdb6434eea6e8f7fcba251c4f45b65b897a3fcf751b5a6003cf82
-  languageName: node
-  linkType: hard
-
-"@types/react-modal@npm:^3.13.1":
-  version: 3.16.0
-  resolution: "@types/react-modal@npm:3.16.0"
-  dependencies:
-    "@types/react": "*"
-  checksum: 975c0238d81cea234a2318a7cfcb95a8e6beb7fc5341ca2311651535c6476881e8d2f2f2e1c679ca6e416c04505c748071a1fab0d3fb3e88b0a9e43060b012fe
   languageName: node
   linkType: hard
 
