@@ -23,6 +23,8 @@ const initialSelectedOptions = ["Norge"];
 
 export const Example = () => {
   const [value, setValue] = useState("");
+  const mockPersistUserAddedValues = (value, isSelected) => undefined;
+
   const [selectedOptions, setSelectedOptions] = useState(
     initialSelectedOptions
   );
@@ -31,17 +33,25 @@ export const Example = () => {
     [value]
   );
 
-  const onToggleSelected = (option, isSelected) => {
+  const onToggleSelected = (
+    option: string,
+    isSelected: boolean,
+    isAddedByUser: boolean
+  ) => {
     if (isSelected) {
       setSelectedOptions([...selectedOptions, option]);
     } else {
       setSelectedOptions(selectedOptions.filter((o) => o !== option));
+    }
+    if (isAddedByUser) {
+      mockPersistUserAddedValues(option, isSelected);
     }
   };
 
   return (
     <div>
       <UNSAFE_Combobox
+        allowNewValues
         label="Hvilke land har du besøkt de siste 6 ukene? Velg opptil flere."
         filteredOptions={filteredOptions}
         isMultiSelect
