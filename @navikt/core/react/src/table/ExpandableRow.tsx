@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { useId } from "..";
 import AnimateHeight from "../util/AnimateHeight";
 import DataCell from "./DataCell";
@@ -65,9 +65,6 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
     const id = useId();
-    const expandableButtonRef = useRef<HTMLButtonElement | null>(null);
-    const expandableIconRef = useRef<SVGSVGElement | null>(null);
-
     const isOpen = open ?? internalOpen;
 
     const expansionHandler = (e) => {
@@ -79,11 +76,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     };
 
     const onRowClick = (e) => {
-      if (
-        e.target.nodeName === "TD" ||
-        e.target === expandableButtonRef.current ||
-        e.target === expandableIconRef.current
-      ) {
+      if (e.target.nodeName === "TD" || e.target.nodeName === "TH") {
         expansionHandler(e);
       }
     };
@@ -108,7 +101,6 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           >
             {!expansionDisabled && (
               <button
-                ref={expandableButtonRef}
                 type="button"
                 className="navds-table__toggle-expand-button"
                 aria-controls={id}
@@ -116,7 +108,6 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
                 onClick={expansionHandler}
               >
                 <ChevronDownIcon
-                  ref={expandableIconRef}
                   className="navds-table__expandable-icon"
                   title={isOpen ? "Vis mindre" : "Vis mer"}
                 />
