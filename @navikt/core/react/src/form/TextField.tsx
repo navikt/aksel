@@ -38,7 +38,6 @@ export interface TextFieldProps
     | "text"
     | "url"
     | "time"
-    | "month"
     | "week";
 }
 
