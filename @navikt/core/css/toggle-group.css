@@ -8,7 +8,7 @@
   border-radius: var(--a-border-radius-medium);
   background-color: var(--ac-toggle-group-bg, var(--a-surface-transparent));
   box-shadow: inset 0 0 0 1px var(--ac-toggle-group-border, var(--a-border-default));
-  padding: calc(var(--a-spacing-1) + 1px);
+  padding: calc(var(--a-spacing-1) + 0.0625rem);
   gap: var(--a-spacing-1);
   display: inline-grid;
   grid-auto-flow: column;
@@ -16,7 +16,7 @@
 }
 
 .navds-toggle-group--small {
-  padding: calc(var(--a-spacing-05) + 1px);
+  padding: calc(var(--a-spacing-05) + 0.0625rem);
 }
 
 .navds-toggle-group--neutral {

@@ -20,7 +20,7 @@
 
 .navds-tabs__scroll-button {
   padding: var(--a-spacing-3) var(--a-spacing-4);
-  width: 44px;
+  width: 2.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,7 +38,7 @@
 
 .navds-tabs--small .navds-tabs__scroll-button {
   padding: 0.375rem var(--a-spacing-4);
-  width: 32px;
+  width: 2rem;
 }
 
 .navds-tabs__tab {

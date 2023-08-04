@@ -181,7 +181,7 @@
     0 0 0 4px var(--ac-timeline-pin-bg, var(--a-surface-danger)), 0 0 0 5px var(--a-surface-default);
   z-index: 2;
   border-radius: var(--a-border-radius-full);
-  padding: 3.5px;
+  padding: var(--a-spacing-1);
   position: relative;
 }
 
