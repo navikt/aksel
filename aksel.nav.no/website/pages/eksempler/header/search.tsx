@@ -1,4 +1,4 @@
-import { Search } from "@navikt/ds-react";
+import { Search, Spacer } from "@navikt/ds-react";
 import { InternalHeader } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -20,7 +20,8 @@ const Example = () => {
           placeholder="Søk"
         />
       </form>
-      <InternalHeader.User name="Ola Normann" className="ml-auto" />
+      <Spacer />
+      <InternalHeader.User name="Ola Normann" />
     </InternalHeader>
   );
 };

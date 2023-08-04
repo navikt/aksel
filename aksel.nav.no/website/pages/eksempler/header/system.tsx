@@ -1,13 +1,14 @@
 import { MenuGridIcon } from "@navikt/aksel-icons";
-import { Dropdown, InternalHeader } from "@navikt/ds-react";
+import { Dropdown, InternalHeader, Spacer } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
     <InternalHeader>
       <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
+      <Spacer />
       <Dropdown>
-        <InternalHeader.Button as={Dropdown.Toggle} className="ml-auto">
+        <InternalHeader.Button as={Dropdown.Toggle}>
           <MenuGridIcon
             style={{ fontSize: "1.5rem" }}
             title="Systemer og oppslagsverk"
