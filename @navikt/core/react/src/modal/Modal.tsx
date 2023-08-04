@@ -48,14 +48,22 @@ export interface ModalProps
    */
   open?: boolean;
   /**
-   * User defined classname for modal
+   * Called when the modal has been closed
    */
-  className?: string;
+  onClose?: React.ReactEventHandler<HTMLDialogElement>;
   /**
    * Called when the user wants to close the modal (clicked the close button or pressed Esc).
    * @returns Whether to close the modal
    */
   onBeforeClose?: () => boolean | void;
+  /**
+   * Called when the user presses the Esc key, unless `onBeforeClose()` returns `false`.
+   */
+  onCancel?: React.ReactEventHandler<HTMLDialogElement>;
+  /**
+   * User defined classname for modal
+   */
+  className?: string;
   /**
    * Sets aria-labelledby on modal.
    * No need to set this manually if the `header` prop is used. A reference to `header.label` or `header.heading` will be created automatically.
