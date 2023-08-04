@@ -12,6 +12,7 @@
   height: 1rem;
   box-sizing: content-box;
   grid-column: 2;
+  margin-bottom: var(--a-spacing-1);
 }
 
 .navds-timeline__row-label {
@@ -232,7 +233,7 @@
 .navds-timeline__pin-wrapper::before {
   content: "";
   top: var(--navdsc-timeline-pin-size);
-  height: calc(94% - var(--navdsc-timeline-pin-size));
+  height: calc(88% - var(--navdsc-timeline-pin-size));
   width: 1px;
   margin: 0 auto;
   background: var(--a-surface-inverted);
