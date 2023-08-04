@@ -1,14 +1,14 @@
-import { VStack } from "@navikt/ds-react";
+import { HStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <HStack gap={{ xs: "4", sm: "6", md: "8", lg: "10", xl: "12" }}>
       <Placeholder />
       <Placeholder />
       <Placeholder />
       <Placeholder />
-    </VStack>
+    </HStack>
   );
 };
 
@@ -21,7 +21,7 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "VStack er en enkel layout-komponent for flexbox med flex-direction: column.",
+  desc: "Med responsive gap kan man redusere/øke mellomrom basert på brekkpunktene våre. Implementasjonen er mobile-first, slik at man 'sm: 8' vil sette gap for 'md', 'lg' og 'xl' også.",
 };
 
 const Placeholder = () => {

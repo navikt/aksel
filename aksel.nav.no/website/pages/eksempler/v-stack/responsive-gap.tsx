@@ -20,7 +20,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 7,
+  index: 3,
   desc: "Med responsive gap kan man redusere/øke mellomrom basert på brekkpunktene våre",
 };
 

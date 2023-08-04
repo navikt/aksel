@@ -58,8 +58,8 @@ export const Demo = {
 };
 
 export const args = {
-  index: 5,
-  desc: "Endrer CSS på 'align-items'.",
+  index: 1,
+  desc: "Endrer 'align-items'.",
 };
 
 const Placeholder = ({

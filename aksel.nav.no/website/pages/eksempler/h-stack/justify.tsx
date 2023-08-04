@@ -3,42 +3,43 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="bg-deepblue-50">
+    <div className="min-w-72 bg-deepblue-50">
       <VStack gap="12">
-        <HStack gap="3" align="center">
+        <HStack gap="3" justify="center">
           <Placeholder text="center" />
           <Placeholder />
           <Placeholder />
           <Placeholder />
-          <Placeholder />
         </HStack>
-        <HStack gap="3" align="end">
+        <HStack gap="3" justify="end">
           <Placeholder text="end" />
           <Placeholder />
           <Placeholder />
           <Placeholder />
-          <Placeholder />
         </HStack>
-        <HStack gap="3" align="start">
+        <HStack gap="3" justify="start">
           <Placeholder text="start" />
           <Placeholder />
           <Placeholder />
           <Placeholder />
-          <Placeholder />
         </HStack>
-        <HStack gap="3" align="stretch">
-          <Placeholder text="stretch" />
-          <Placeholder />
+        <HStack gap="3" justify="space-around">
+          <Placeholder text="around" />
           <Placeholder />
           <Placeholder />
           <Placeholder />
         </HStack>
-        <HStack gap="3" align="baseline">
-          <Placeholder text="baseline" />
-          <Placeholder text="text" noPadding />
-          <Placeholder text="text" noPadding />
-          <Placeholder text="text" noPadding />
-          <Placeholder text="text" noPadding />
+        <HStack gap="3" justify="space-between">
+          <Placeholder text="between" />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+        </HStack>
+        <HStack gap="3" justify="space-evenly">
+          <Placeholder text="evenly" />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
         </HStack>
       </VStack>
     </div>
@@ -53,8 +54,8 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
-  desc: "Endrer CSS på 'align-items'.",
+  index: 3,
+  desc: "Endrer 'justify-content'.",
 };
 
 const Placeholder = ({
