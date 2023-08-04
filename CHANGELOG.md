@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.8.0
+
+### @navikt/ds-css
+
+- Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
+
+### @navikt/ds-react
+
+- Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
+
 ## 4.7.4
 
 ### @navikt/ds-css
