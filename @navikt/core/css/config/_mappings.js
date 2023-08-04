@@ -57,7 +57,7 @@ const StyleMappings = {
     {
       component: "UNSAFE_Combobox",
       main: "combobox.css",
-      dependencies: [typoCss],
+      dependencies: [typoCss, "chips.css"],
     },
     {
       component: "ConfirmationPanel",
