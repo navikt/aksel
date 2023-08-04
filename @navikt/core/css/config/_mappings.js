@@ -117,7 +117,7 @@ const StyleMappings = {
     {
       component: "Modal",
       main: "modal.css",
-      dependencies: ["button.css"],
+      dependencies: [typoCss, "button.css"],
     },
     {
       component: "Pagination",
