@@ -10,6 +10,11 @@ module.exports = (indexers) => {
   const exampleIndexer = async (fileName: string, opts) => {
     let code = readFileSync(fileName, "utf-8").toString();
 
+    code = code
+      .split("\n")
+      .filter((line) => !line.includes("withDsExample"))
+      .join("\n");
+
     code = code.replace("export const args =", "const args =");
 
     code += `\nexport default { title: "Eksempler/${fileName

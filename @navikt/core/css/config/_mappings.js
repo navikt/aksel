@@ -55,6 +55,11 @@ const StyleMappings = {
     { component: "CheckboxGroup", main: formCss, dependencies: [typoCss] },
     { component: "Chips", main: "chips.css", dependencies: [typoCss] },
     {
+      component: "UNSAFE_Combobox",
+      main: "combobox.css",
+      dependencies: [typoCss],
+    },
+    {
       component: "ConfirmationPanel",
       main: formCss,
       dependencies: [typoCss],

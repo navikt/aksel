@@ -13,6 +13,7 @@ import Pin, { PinType } from "./Pin";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { parseRows } from "./utils/timeline";
 import Zoom, { ZoomType } from "./zoom";
+import { AxisLabelTemplates } from "./utils/types.external";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -33,6 +34,11 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "left"
    */
   direction?: "left" | "right";
+  /**
+   * Templates for label texts. The templates are passed to the date-fns `format` function.
+   * Defaults to { day: "dd.MM", month: "MMM yy", year: "yyyy" }.
+   */
+  axisLabelTemplates?: AxisLabelTemplates;
 }
 
 interface TimelineComponent
@@ -74,7 +80,17 @@ interface TimelineComponent
  * ```
  */
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
-  ({ children, startDate, endDate, direction = "left", ...rest }, ref) => {
+  (
+    {
+      children,
+      startDate,
+      endDate,
+      direction = "left",
+      axisLabelTemplates,
+      ...rest
+    },
+    ref
+  ) => {
     const isMultipleRows = Array.isArray(children);
 
     const firstFocusabled = useRef<
@@ -194,7 +210,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       >
         <div {...rest} ref={ref}>
           <div className="navds-timeline">
-            <AxisLabels />
+            <AxisLabels templates={axisLabelTemplates} />
 
             {pins.map((pin) => {
               return pin;

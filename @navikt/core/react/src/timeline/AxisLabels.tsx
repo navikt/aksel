@@ -19,13 +19,14 @@ import React from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { isVisible } from "./utils";
 import { horizontalPositionAndWidth } from "./utils/calc";
-import { AxisLabel } from "./utils/types.external";
+import { AxisLabel, AxisLabelTemplates } from "./utils/types.external";
 
 export const dayLabels = (
   start: Date,
   end: Date,
   totalDays: number,
-  direction: "left" | "right"
+  direction: "left" | "right",
+  template: string = "dd.MM"
 ): AxisLabel[] => {
   const increment = Math.ceil(totalDays / 10);
   const lastDay = startOfDay(end);
@@ -43,7 +44,7 @@ export const dayLabels = (
       return {
         direction: direction,
         horizontalPosition: horizontalPosition,
-        label: format(day, "dd.MM", { locale: nbLocale }),
+        label: format(day, template, { locale: nbLocale }),
         date: day,
         width: width,
       };
@@ -54,7 +55,8 @@ export const dayLabels = (
 export const monthLabels = (
   start: Date,
   end: Date,
-  direction: "left" | "right"
+  direction: "left" | "right",
+  template: string = "MMM yy"
 ): AxisLabel[] => {
   const startMonth = startOfMonth(start);
   const endMonth = endOfMonth(end);
@@ -70,7 +72,7 @@ export const monthLabels = (
     return {
       direction: direction,
       horizontalPosition: horizontalPosition,
-      label: format(month, "MMM yy", { locale: nbLocale }),
+      label: format(month, template, { locale: nbLocale }),
       date: month,
       width: width,
     };
@@ -80,7 +82,8 @@ export const monthLabels = (
 export const yearLabels = (
   start: Date,
   end: Date,
-  direction: "left" | "right"
+  direction: "left" | "right",
+  template: string = "yyyy"
 ): AxisLabel[] => {
   const firstYear = startOfYear(start);
   const lastYear = endOfYear(end);
@@ -96,7 +99,7 @@ export const yearLabels = (
     return {
       direction: direction,
       horizontalPosition: horizontalPosition,
-      label: year.getFullYear().toString(),
+      label: format(year, template, { locale: nbLocale }),
       date: year,
       width: width,
     };
@@ -106,21 +109,28 @@ export const yearLabels = (
 const axisLabels = (
   start: Date,
   end: Date,
-  direction: "left" | "right"
+  direction: "left" | "right",
+  templates?: AxisLabelTemplates
 ): AxisLabel[] => {
   const totalDays = differenceInDays(end, start);
   if (totalDays < 40) {
-    return dayLabels(start, end, totalDays, direction);
+    return dayLabels(start, end, totalDays, direction, templates?.day);
   } else if (totalDays < 370) {
-    return monthLabels(start, end, direction);
+    return monthLabels(start, end, direction, templates?.month);
   } else {
-    return yearLabels(start, end, direction);
+    return yearLabels(start, end, direction, templates?.year);
   }
 };
 
-export const AxisLabels = () => {
+export const AxisLabels = ({
+  templates,
+}: {
+  templates?: AxisLabelTemplates;
+}) => {
   const { endDate, startDate, direction } = useTimelineContext();
-  const labels = axisLabels(startDate, endDate, direction).filter(isVisible);
+  const labels = axisLabels(startDate, endDate, direction, templates).filter(
+    isVisible
+  );
 
   return (
     <div className="navds-timeline__axislabels" aria-hidden="true">

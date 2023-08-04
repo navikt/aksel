@@ -75,7 +75,7 @@ export const WithSidebar = ({
     <>
       <Header />
       <div className="bg-bg-default">
-        <div className="mx-auto mb-24 mt-6 flex w-full max-w-screen-2xl gap-6">
+        <div className="mx-auto mb-24 flex w-full max-w-screen-2xl gap-6 pt-6">
           <Sidebar kategori={pageType.type} links={sidebar} />
           <div className="relative w-full">
             <main
