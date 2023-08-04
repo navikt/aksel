@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 4.7.4
+
+### Patch Changes
+
+- Oppdatert bruk av REM i komponenter for forbedret utrykk ved font-scaling i browser ([#2126](https://github.com/navikt/aksel/pull/2126))
+
 ## 4.7.3
 
 ## 4.7.2
