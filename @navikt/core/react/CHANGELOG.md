@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 4.7.4
+
+### Patch Changes
+
+- Textfield: La til type 'time' som tilgjengelig option ([#2137](https://github.com/navikt/aksel/pull/2137))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.4
+
 ## 4.7.3
 
 ### Patch Changes
