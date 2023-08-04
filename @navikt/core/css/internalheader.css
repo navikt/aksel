@@ -2,7 +2,7 @@
   display: flex;
   align-self: stretch;
   background: var(--ac-internalheader-bg, var(--a-surface-inverted));
-  min-height: var(--a-spacing-12);
+  min-height: 3rem;
 
   --navds-internalheader-focus: inset 0 0 0 2px var(--a-border-focus-on-inverted);
 }

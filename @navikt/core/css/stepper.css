@@ -113,7 +113,7 @@ button.navds-stepper__step {
 .navds-stepper__circle--success {
   border: none;
   background: none;
-  font-size: 28px;
+  font-size: 1.75rem;
   color: var(--a-text-on-action);
   background-color: var(--ac-stepper-text, var(--a-surface-action));
 }
