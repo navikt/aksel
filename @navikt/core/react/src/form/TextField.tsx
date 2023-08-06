@@ -1,6 +1,7 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "clsx";
-import { BodyLong, Detail, Label, ErrorMessage, omit } from "..";
+import React, { forwardRef, InputHTMLAttributes } from "react";
+import { BodyShort, ErrorMessage, Label, omit } from "..";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface TextFieldProps
@@ -30,9 +31,20 @@ export interface TextFieldProps
    * Type of form control. Picking the correct type helps user fill inn their required information
    * @default "text"
    */
-  type?: "email" | "number" | "password" | "tel" | "text" | "url";
+  type?: "email" | "number" | "password" | "tel" | "text" | "url" | "time";
 }
 
+/**
+ * A component that displays a text input field with a label.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/textfield)
+ * @see 🏷️ {@link TextFieldProps}
+ *
+ * @example
+ * ```jsx
+ * <TextField label="Har du noen tilbakemeldinger?" />
+ * ```
+ */
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
     const {
@@ -51,6 +63,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       htmlSize,
       hideLabel = false,
       type = "text",
+      readOnly,
       ...rest
     } = props;
 
@@ -60,10 +73,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           className,
           "navds-form-field",
           `navds-form-field--${size}`,
+
           {
             "navds-text-field--error": hasError,
             "navds-text-field--disabled": !!inputProps.disabled,
             "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-form-field--readonly": readOnly,
+            "navds-text-field--readonly": readOnly,
           }
         )}
       >
@@ -74,41 +90,28 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "navds-sr-only": hideLabel,
           })}
         >
+          <ReadOnlyIcon readOnly={readOnly} />
           {label}
         </Label>
 
         {!!description && (
-          <>
-            {size === "medium" ? (
-              <BodyLong
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </BodyLong>
-            ) : (
-              <Detail
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </Detail>
-            )}
-          </>
+          <BodyShort
+            className={cl("navds-form-field__description", {
+              "navds-sr-only": hideLabel,
+            })}
+            id={inputDescriptionId}
+            size={size}
+            as="div"
+          >
+            {description}
+          </BodyShort>
         )}
         <input
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
           ref={ref}
           type={type}
+          readOnly={readOnly}
           className={cl(
             "navds-text-field__input",
             "navds-body-short",

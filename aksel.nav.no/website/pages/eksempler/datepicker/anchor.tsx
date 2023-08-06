@@ -1,5 +1,7 @@
-import { Button, UNSAFE_DatePicker } from "@navikt/ds-react";
+import { Button, DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
+import format from "date-fns/format";
+import nbLocale from "date-fns/locale/nb";
 import { useState } from "react";
 
 const Example = () => {
@@ -8,7 +10,7 @@ const Example = () => {
 
   return (
     <div className="min-h-96">
-      <UNSAFE_DatePicker
+      <DatePicker
         onSelect={setDays}
         mode="multiple"
         max={5}
@@ -16,11 +18,13 @@ const Example = () => {
         open={open}
       >
         <Button onClick={() => setOpen((x) => !x)}>Velg dager</Button>
-      </UNSAFE_DatePicker>
+      </DatePicker>
       {days && (
         <div className="pt-4">
           {days.map((x) => (
-            <div key={x.toString()}>{x.toDateString()}</div>
+            <div key={x.toString()}>
+              {format(x, "dd.MM.yyyy", { locale: nbLocale })}
+            </div>
           ))}
         </div>
       )}

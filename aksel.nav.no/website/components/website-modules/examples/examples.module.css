@@ -1,3 +1,8 @@
+.examples a {
+  text-underline-offset: initial;
+  text-decoration-thickness: auto;
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -5,4 +10,16 @@
   height: 100vh;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.containerStatic {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  padding: 1.5rem 1rem;
+}
+
+.containerStatic > * {
+  max-width: 30rem;
+  width: 100%;
 }

@@ -46,6 +46,7 @@ export const Default = {
           variant={props.variant}
           hideLabel={props.hideLabel}
           error={props.error}
+          onSearchClick={console.log}
         />
       </div>
     );
@@ -160,6 +161,31 @@ export const NoClearButton = () => (
       variant="simple"
       clearButton={false}
       value="søketekst"
+    />
+  </div>
+);
+
+export const HtmlSize = () => (
+  <div className="colgap">
+    <Search
+      label="Lorem ipsum dolor sit amet"
+      description="Saepe laborum delectus officia perferendis quaerat excepturi possimus hic enim dicta assumenda."
+      hideLabel={false}
+      htmlSize="20"
+    />
+    <Search
+      label="Lorem ipsum dolor sit amet"
+      description="Saepe laborum delectus officia perferendis quaerat excepturi possimus hic enim dicta assumenda."
+      hideLabel={false}
+      htmlSize="20"
+      variant="secondary"
+    />
+    <Search
+      label="Lorem ipsum dolor sit amet"
+      description="Saepe laborum delectus officia perferendis quaerat excepturi possimus hic enim dicta assumenda."
+      hideLabel={false}
+      htmlSize="20"
+      variant="simple"
     />
   </div>
 );

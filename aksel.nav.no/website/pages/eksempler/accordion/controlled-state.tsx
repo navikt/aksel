@@ -6,7 +6,10 @@ const Example = () => {
   const [open, setOpen] = useState(false);
   return (
     <div className="grid place-items-start gap-2">
-      <Accordion style={{ width: "100%", maxWidth: "65ch" }}>
+      <Button variant="secondary" onClick={() => setOpen(!open)}>
+        Toggle Accordion
+      </Button>
+      <Accordion>
         <Accordion.Item open={open}>
           <Accordion.Header>Til deg som er mellom 62 og 67 år</Accordion.Header>
           <Accordion.Content>
@@ -26,14 +29,11 @@ const Example = () => {
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
-      <Button variant="secondary" onClick={() => setOpen(!open)}>
-        Toggle Accordion
-      </Button>
     </div>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {

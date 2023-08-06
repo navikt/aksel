@@ -1,6 +1,7 @@
 import React, { createContext, forwardRef } from "react";
 import cl from "clsx";
-import Step, { StepperStepProps, StepperStepType } from "./Step";
+import Step, { StepperStepProps } from "./Step";
+import { OverridableComponent } from "../util/OverridableComponent";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
@@ -33,7 +34,11 @@ interface StepperComponent
   extends React.ForwardRefExoticComponent<
     StepperProps & React.RefAttributes<HTMLOListElement>
   > {
-  Step: StepperStepType;
+  /**
+   * @see 🏷️ {@link StepperStepProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Step: OverridableComponent<StepperStepProps, HTMLAnchorElement>;
 }
 
 interface StepperContextProps {
@@ -46,6 +51,30 @@ interface StepperContextProps {
 
 export const StepperContext = createContext<StepperContextProps | null>(null);
 
+/**
+ * A component that displays a stepper with clickable steps.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/stepper)
+ * @see 🏷️ {@link StepperProps}
+ *
+ * @example
+ * ```jsx
+ * <>
+ *   <Heading size="medium" spacing level="2" id="stepper-heading">
+ *     Søknadssteg
+ *   </Heading>
+ *   <Stepper
+ *     aria-labelledby="stepper-heading"
+ *     activeStep={activeStep}
+ *     onStepChange={(x) => setActiveStep(x)}
+ *   >
+ *     <Stepper.Step href="#">Start søknad</Stepper.Step>
+ *     <Stepper.Step href="#">Saksopplysninger</Stepper.Step>
+ *     <Stepper.Step href="#">Vedlegg</Stepper.Step>
+ *   </Stepper>
+ * </>
+ * ```
+ */
 export const Stepper: StepperComponent = forwardRef<
   HTMLOListElement,
   StepperProps
@@ -85,7 +114,15 @@ export const Stepper: StepperComponent = forwardRef<
           {React.Children.map(children, (step, index) => {
             return (
               <li
-                className={cl("navds-stepper__item")}
+                className={cl("navds-stepper__item", {
+                  "navds-stepper__item--behind": activeStep > index,
+                  "navds-stepper__item--completed":
+                    React.isValidElement<StepperStepProps>(step) &&
+                    step?.props?.completed,
+                  "navds-stepper__item--non-interactive":
+                    React.isValidElement<StepperStepProps>(step) &&
+                    !(step?.props?.interactive ?? interactive),
+                })}
                 key={index + (children?.toString?.() ?? "")}
               >
                 <span className="navds-stepper__line navds-stepper__line--1" />

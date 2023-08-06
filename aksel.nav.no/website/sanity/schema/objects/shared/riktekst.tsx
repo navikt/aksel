@@ -1,8 +1,8 @@
-import { ExternalLink, FileContent, Link } from "@navikt/ds-icons";
 import { BoldIcon, CodeIcon, ItalicIcon, OlistIcon } from "@sanity/icons";
 import { KBD } from "@sanity/ui";
 import React from "react";
 import { allArticleDocsRef } from "../../../config";
+import { ExternalLinkIcon, FileTextIcon, LinkIcon } from "@navikt/aksel-icons";
 
 export const styles = [
   {
@@ -62,7 +62,7 @@ export const block = {
         title: "Link til sanity-side",
         name: "internalLink",
         type: "object",
-        icon: () => <Link title="Lenke til sanity-side" />,
+        icon: () => <LinkIcon title="Lenke til sanity-side" />,
         options: {
           modal: {
             type: "dialog",
@@ -82,7 +82,7 @@ export const block = {
         title: "Lenke",
         name: "link",
         type: "object",
-        icon: () => <ExternalLink title="Lenke til ekstern-side" />,
+        icon: () => <ExternalLinkIcon title="Lenke til ekstern-side" />,
         fields: [
           {
             title: "URL",
@@ -123,8 +123,9 @@ const Riktekst = (
     | "prinsipp"
     | "standard"
     | "standalone"
+    | "accordion"
 ) => {
-  const fields: string[] = [];
+  let fields: string[] = [];
   const standard = [
     "relatert_innhold",
     "bilde",
@@ -133,8 +134,20 @@ const Riktekst = (
     "do_dont",
     "alert",
     "accordion",
+    "expansioncard",
     "tabell_v2",
     "video",
+  ];
+
+  const accordion = [
+    "relatert_innhold",
+    "video",
+    "bilde",
+    "kode",
+    "tips",
+    "do_dont",
+    "alert",
+    "tabell_v2",
   ];
 
   const komponent = [
@@ -161,6 +174,9 @@ const Riktekst = (
     case "standalone":
       fields.push("uufeedback");
       break;
+    case "accordion":
+      fields = [...accordion];
+      break;
     default:
       break;
   }
@@ -181,7 +197,7 @@ export const RiktekstStandard = {
   name: "riktekst_standard",
   type: "array",
   of: Riktekst("standard"),
-  icon: FileContent,
+  icon: FileTextIcon,
 };
 
 export const RiktekstPrinsipp = {
@@ -189,7 +205,7 @@ export const RiktekstPrinsipp = {
   name: "riktekst_prinsipp",
   type: "array",
   of: Riktekst("prinsipp"),
-  icon: FileContent,
+  icon: FileTextIcon,
 };
 
 export const RiktekstGrunnleggende = {
@@ -197,7 +213,7 @@ export const RiktekstGrunnleggende = {
   name: "riktekst_grunnleggende",
   type: "array",
   of: Riktekst("grunnleggende"),
-  icon: FileContent,
+  icon: FileTextIcon,
 };
 
 export const RiktekstKomponent = {
@@ -205,7 +221,7 @@ export const RiktekstKomponent = {
   name: "riktekst_komponent",
   type: "array",
   of: Riktekst("komponent"),
-  icon: FileContent,
+  icon: FileTextIcon,
 };
 
 export const RiktekstEnkel = {
@@ -213,7 +229,15 @@ export const RiktekstEnkel = {
   name: "riktekst_enkel",
   type: "array",
   of: [block],
-  icon: FileContent,
+  icon: FileTextIcon,
+};
+
+export const RiktekstAccordion = {
+  title: "Riktekst",
+  name: "riktekst_accordion",
+  type: "array",
+  of: Riktekst("accordion"),
+  icon: FileTextIcon,
 };
 
 export const RiktekstStandalone = {
@@ -221,5 +245,5 @@ export const RiktekstStandalone = {
   name: "riktekst_standalone",
   type: "array",
   of: Riktekst("standalone"),
-  icon: FileContent,
+  icon: FileTextIcon,
 };

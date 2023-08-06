@@ -9,16 +9,25 @@
   position: relative;
   overflow: auto;
   max-height: 100%;
+  box-shadow: var(--a-shadow-xlarge);
 }
 
 .navds-modal__content {
   padding: var(--a-spacing-4);
 }
 
-.navds-modal:focus,
+.navds-modal:focus-visible,
 .navds-modal--focus {
   box-shadow: var(--a-shadow-focus);
   outline: none;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-modal:focus,
+  .navds-modal--focus {
+    box-shadow: var(--a-shadow-focus);
+    outline: none;
+  }
 }
 
 .navds-modal__overlay {

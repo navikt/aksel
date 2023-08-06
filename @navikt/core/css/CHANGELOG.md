@@ -1,201 +1,303 @@
 # @navikt/ds-css
 
-## 2.6.0
+## 4.8.0
 
-## 2.5.1
+### Minor Changes
 
-## 2.5.0
+- Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
+
+## 4.7.4
+
+### Patch Changes
+
+- Oppdatert bruk av REM i komponenter for forbedret utrykk ved font-scaling i browser ([#2126](https://github.com/navikt/aksel/pull/2126))
+
+## 4.7.3
+
+## 4.7.2
+
+### Patch Changes
+
+- Stepper: Fikset `hotizontal`-bug når step var `completed` ([#2116](https://github.com/navikt/aksel/pull/2116))
+
+## 4.7.1
+
+## 4.7.0
+
+### Minor Changes
+
+- Ny komponent Combobox! ([#1868](https://github.com/navikt/aksel/pull/1868))
+
+## 4.6.1
+
+### Patch Changes
+
+- Skjema: Labels og Legends bruker nå inline-flex når readOnly er satt ([#2089](https://github.com/navikt/aksel/pull/2089))
+
+## 4.6.0
+
+### Minor Changes
+
+- Skjema: De fleste skjemakomponenter har nå styling for `readOnly`-state ([#2080](https://github.com/navikt/aksel/pull/2080))
+
+## 4.5.0
+
+### Minor Changes
+
+- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+### Patch Changes
+
+- - Button: Fikset outline-bug i tertiary-variant ved `:active`-state ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+## 4.4.2
+
+## 4.4.1
+
+### Patch Changes
+
+- :lipstick: Chat: fjernet border, satt avatar svg til 24x24px, byttet om "subtle" og "neutral" ([#2077](https://github.com/navikt/aksel/pull/2077))
+
+## 4.4.0
+
+### Minor Changes
+
+- Shadow-tokens er oppdatert: Datepicker har nå ikke border, Modal bruker shadow-xlarge, LinkCard bruker shadow-xsmall ([PR](https://github.com/navikt/aksel/pull/2041))
+
+## 4.3.0
+
+### Minor Changes
+
+- Popover/Helptext: Maksbredde på 100vw - 1.5rem. Treffer ikke lengre kanten på skjermen. ([PR](https://github.com/navikt/aksel/pull/2069))
+
+### Patch Changes
+
+- ExpansionCard: Ved nesting av komponetene fikk man styling fra parent ([PR](https://github.com/navikt/aksel/pull/2067))
+
+## 4.2.0
+
+### Minor Changes
+
+- Chat: `small`-size, innebygde varianter for farge og oppdatert utseende. ([PR](https://github.com/navikt/aksel/pull/2048))
+
+## 4.1.4
+
+### Patch Changes
+
+- Readmore: setter nå eksplisitt color for å ikke arve text-subtle fra parent. ([PR](https://github.com/navikt/aksel/pull/2049))
+
+## 4.1.1
+
+### Patch Changes
+
+- :bug: Fikset cursor-markering av tekst i skeleton.
+
+## 4.1.0
+
+### Minor Changes
+
+- Chips: `neutral` og `action`-varianter av Chips.Toggle. Opt-out mulighet for Checkmark. Oppdatert checkmark-ikon ([PR](https://github.com/navikt/aksel/pull/2035))
+
+- Alle description-felter på fieldsets har nå `text-subtle` som farge. ([PR](https://github.com/navikt/aksel/pull/2036))
+
+## 4.0.0
+
+### Major Changes
+
+- All styling fra `@navikt/ds-css-internal` er flyttet til `@navikt/ds-css`. ([PR](https://github.com/navikt/aksel/pull/2026))
+
+- classname-prefix er endret fra `navdsi` -> `navds` for flyttede komponenter.
+
+- Fikset cascading-problem mellom dropdown og popover. Dropdown blir ikke lengre påvirket av import-rekkefølge av popover.
+
+- Styling for flyttede komponenter finnes nå på CDN [Guide](https://aksel.nav.no/grunnleggende/kode/css-import)
+
+## 3.4.0
+
+### Minor Changes
+
+- Tag: `moderate`-variant ([PR](https://github.com/navikt/aksel/pull/2010))
+
+## 3.2.3
+
+### Patch Changes
+
+- Datepicker: Fikset small-variant av datepicker-input. ([PR](https://github.com/navikt/aksel/pull/1993))
+
+- CopyButton: `xsmall`-size for bruk i tabeller ([PR](https://github.com/navikt/aksel/pull/1994))
+
+## 3.1.3
+
+### Patch Changes
+
+- :lipstick: Oppdatert utseende for ToggleGroup. `Medium` og `Small`-size er begge 10px lavere, mindre border-radius ([PR](https://github.com/navikt/aksel/pull/1976))
+
+## 3.1.0
+
+### Minor Changes
+
+- Alle komponenter bruker nå default `:focus-visible` for fokusmarkering. Medfølger også fallback for `:focus` ([PR](https://github.com/navikt/aksel/pull/1966))
+
+### Patch Changes
+
+- Oppdatert Label og Description spacing for skjemakomponenter ([PR](https://github.com/navikt/aksel/pull/1967))
+
+## 3.0.0
+
+### Major Changes
+
+- Accordion: Chevron er left-aligned, deler av styling er refaktorert, `size`-props og `neutral`-variant ([PR](https://github.com/navikt/aksel/pull/1964))
+
+## 2.9.0
+
+### Minor Changes
+
+- CSS nå tilgjengelig som separate filer: Kan lastest fra CDN, minified-versjoner tilgjengelig ([PR](https://github.com/navikt/aksel/pull/1941))
+
+## 2.8.9
+
+### Patch Changes
+
+- Button: Padding/border-radius tokens ([PR](https://github.com/navikt/aksel/pull/1905))
+
+## 2.8.7
+
+### Patch Changes
+
+- Button: token for tertiary
+
+## 2.8.6
+
+### Patch Changes
+
+- Alert, Chips og ErrorSummary har nå bedre utvalg av tokens
+
+## 2.8.5
+
+### Patch Changes
+
+- Accordion: tokens for header-bakgrunn
+
+- Select: Fikset tekstfarge på iphone ([PR](https://github.com/navikt/aksel/pull/1879))
+
+## 2.8.2
+
+### Patch Changes
+
+- ExpansioCard: Oppdatert typografi ([PR](https://github.com/navikt/aksel/pull/1870))
+
+## 2.7.8
+
+### Patch Changes
+
+- Tabs: La til focus-markering for Tabs.Panel ([PR](https://github.com/navikt/aksel/pull/1863))
+
+## 2.7.5
+
+### Patch Changes
+
+- ToggleGroup: Fikset token-bug
 
 ## 2.4.3
 
 ### Patch Changes
 
-- [`f962bc781`](https://github.com/navikt/aksel/commit/f962bc7816027c24e334d9754c3e07cda951cf56) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset disabled-opacity bug i select for Chrome
+- Select: Fikset disabled + opacity bug for Chrome
 
 ## 2.4.2
 
 ### Patch Changes
 
-- [#1823](https://github.com/navikt/aksel/pull/1823) [`a7ce61f84`](https://github.com/navikt/aksel/commit/a7ce61f840e5bfaafc4f70e550167fe0095555b8) Thanks [@kschieren](https://github.com/kschieren)! - added support for nested lists
-
-## 2.4.1
-
-## 2.4.0
-
-### Minor Changes
-
-- [#1807](https://github.com/navikt/aksel/pull/1807) [`70eeb24b3`](https://github.com/navikt/aksel/commit/70eeb24b38ac871c7f2e31e1621b949669c401b6) Thanks [@kschieren](https://github.com/kschieren)! - Added List component
+- List: La til støtte for nesting ([PR](https://github.com/navikt/aksel/pull/1823))
 
 ## 2.3.1
 
 ### Patch Changes
 
-- [`241b2e678`](https://github.com/navikt/aksel/commit/241b2e678f1f40909e2d36fe095dcbce8673f174) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fikset feil bruk av fallback-tokens i textarea, timeline
+- Fikset feil bruk av fallback-tokens i Textarea og Timeline
 
 ## 2.3.0
 
 ### Minor Changes
 
-- [#1813](https://github.com/navikt/aksel/pull/1813) [`7702c6527`](https://github.com/navikt/aksel/commit/7702c65275a4d86a8260852d091e6dd4cfe9217c) Thanks [@ingfo](https://github.com/ingfo)! - Fiksa sentrering av tekst i Select i Firefox
+- Select: Fikset sentrering av tekst i Firefox ([PR](https://github.com/navikt/aksel/pull/1813))
 
 ### Patch Changes
 
-- [`51b62cca7`](https://github.com/navikt/aksel/commit/51b62cca7b857e92669cd0b09e620b131faf80e5) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Select small 34px høyde -> 32px
+- Select: `small`-variant er nå 32px (var 34px)
 
 ## 2.2.0
 
 ### Minor Changes
 
-- [#1789](https://github.com/navikt/aksel/pull/1789) [`c0929a534`](https://github.com/navikt/aksel/commit/c0929a534dc8effece5435f8be550cb7931a52b1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Button og ToggleGroup har nå en neutral-variant, oppdatert neutral-tokens
+- ToggleGroup: `Neutral`-variant. ([PR](https://github.com/navikt/aksel/pull/1789))
 
-## 2.1.7
-
-## 2.1.6
-
-## 2.1.5
-
-## 2.1.4
-
-## 2.1.3
+- Button: `Neutral`-variant.
 
 ## 2.1.2
 
 ### Patch Changes
 
-- [`62f36da5e`](https://github.com/navikt/aksel/commit/62f36da5e74fc7f53414d42b310c3b57597795bc) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Small textfield har nå 8px horisontal padding (4px før)
-
-## 2.1.1
-
-## 2.1.0
-
-## 2.0.18
-
-## 2.0.17
-
-## 2.0.16
-
-## 2.0.15
-
-### Patch Changes
-
-- [#1748](https://github.com/navikt/aksel/pull/1748) [`22dfd8e60`](https://github.com/navikt/aksel/commit/22dfd8e60315c421749394d35e41f412a00a7593) Thanks [@KenAJoh](https://github.com/KenAJoh)! - toptextPosition prop i Chat for horisontal plassering av navn og dato.
-
-## 2.0.14
-
-## 2.0.13
+- TextField: `small`-variant har nå 8px horisontal padding (før 4px)
 
 ## 2.0.12
 
 ### Patch Changes
 
-- [#1737](https://github.com/navikt/aksel/pull/1737) [`8a1ef5e7e`](https://github.com/navikt/aksel/commit/8a1ef5e7e2c066cb80c13e14329e1585e2c427f8) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :bug: Fikset default visuell error-state for radio
-
-## 2.0.11
-
-## 2.0.10
-
-## 2.0.9
-
-## 2.0.8
-
-## 2.0.7
-
-## 2.0.6
+- Radio: Fikset default visuell error-state ([PR](https://github.com/navikt/aksel/pull/1737))
 
 ## 2.0.5
 
 ### Patch Changes
 
-- Reverserte border-width endrind i button
-
-## 2.0.4
-
-## 2.0.3
-
-## 2.0.2
+- Button: Reverserte border-width endrinder (var 1.5px, nå 2px)
 
 ## 2.0.1
 
 ### Patch Changes
 
-- [`e8007328d`](https://github.com/navikt/aksel/commit/e8007328db3f6d5be696cf24f03304c79be0f3f7) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bugfixer ved bruk av tokens
+- Bugfixer ved bruk av tokens oppdatert i v2.0.0
 
 ## 2.0.0
 
 ### Major Changes
 
-- [`6b96e4833`](https://github.com/navikt/aksel/commit/6b96e48330c2e013a1acee85cefccd9ccc1aece4) Thanks [@KenAJoh](https://github.com/KenAJoh)! - v2: Tokens update and font-loading
+- Fontlasting: Fonter lastes nå fra NAV-CDN
 
-## 1.5.10
+- Tokens: Alle komponenter bruker nå semantiske tokens for som standard, med innebygd støtte for komponent-spesifikke tokens.
 
 ## 1.5.9
 
 ### Patch Changes
 
-- 4px -> 2px gap chips-toggle active
-
-## 1.5.8
-
-## 1.5.7
-
-## 1.5.6
-
-## 1.5.5
-
-## 1.5.4
-
-### Patch Changes
-
-- [#1709](https://github.com/navikt/aksel/pull/1709) [`77302a30b`](https://github.com/navikt/aksel/commit/77302a30b8eef8dc00b2d2e9c904a3f57da81a11) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner
+- Chips: 4px -> 2px gap mellom checkmark i Chips.Toggle
 
 ## 1.5.3
 
 ### Patch Changes
 
-- Byttet om på alt-farge rekkefølge
-
-## 1.5.2
-
-### Patch Changes
-
-- :memo: Rename FilterChips to ToggleChips
+- Tokens: Byttet om på rekkefølge av alt-farger
 
 ## 1.5.1
 
 ### Patch Changes
 
-- Flex-wrap chips.css
+- Chips. Bruker nå standard flex-wrap
 
 ## 1.5.0
 
 ### Minor Changes
 
-- [#1684](https://github.com/navikt/aksel/pull/1684) [`e19bf67b3`](https://github.com/navikt/aksel/commit/e19bf67b337dea39989c68b5e9c2591cf0d5b40f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Oppdaterte tag-varianter
-
-- [#1668](https://github.com/navikt/aksel/pull/1668) [`97c5f60e9`](https://github.com/navikt/aksel/commit/97c5f60e9111da7e08f55c8d0aa29581f0a9b1ca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Chips komponent :sparkles:
-
-## 1.4.4
-
-## 1.4.3
-
-### Patch Changes
-
-- :sparkles: Validering og inputFormat i Date-komponenter
-
-## 1.4.2
-
-## 1.4.1
-
-### Patch Changes
-
-- [`3c08651df`](https://github.com/navikt/aksel/commit/3c08651df28c3e19dd8c8a7a1d0032200bec473d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Date-komponenter følger språkrådets dato-formatering for måneder.
-
-## 1.4.0
+- Tag: `filled`-varianter ([PR](https://github.com/navikt/aksel/pull/1684))
 
 ## 1.3.39
 
 ### Patch Changes
 
-- [`40f0b3340`](https://github.com/navikt/aksel/commit/40f0b3340d01bf85fecc04f2f3a8e8b2acf996f1) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bump for latest-tag
+- Fikset bruk av `:watch` for diverse parsere (less, parcel)
 
-## 1.3.38
+## 1.3.24
+
+### Patch Changes
+
+- Tokens tilgjengeligjøres nå også på `:host`. Dette lar shadow-dom brukere konsumere tokens direkte.

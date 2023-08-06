@@ -1,4 +1,11 @@
-import { previewClient } from "@/sanity-client";
+import { createClient } from "next-sanity";
+import { clientConfig } from "../../sanity/config";
+
+const previewClient = createClient({
+  ...clientConfig,
+  token: process.env.SANITY_PREVIEW_TOKEN,
+  ignoreBrowserTokenWarning: process.env.NODE_ENV === "test",
+});
 
 function redirectToPreview(res, Location) {
   // Enable preview mode by setting the cookies

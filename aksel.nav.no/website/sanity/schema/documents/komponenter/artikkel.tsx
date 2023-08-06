@@ -59,11 +59,25 @@ export const KomponentArtikkel = defineType({
           },
           validation: (Rule) => Rule.required(),
         },
-        {
+        defineField({
+          name: "unsafe",
+          title: "Unsafe",
+          description: "Er komponenten Beta + UNSAFE-prefikset?",
+          type: "boolean",
+          hidden: ({ parent }) => !(parent?.tag === "beta"),
+        }),
+        defineField({
+          name: "internal",
+          title: "Interne flater",
+          description: "Er komponenten ment for bruk på interne flater?",
+          type: "boolean",
+          initialValue: false,
+        }),
+        defineField({
           name: "bilde",
           title: "Thumbnail",
           type: "image",
-        },
+        }),
       ],
       options: {
         collapsible: true,
@@ -92,9 +106,6 @@ export const KomponentArtikkel = defineType({
         list: [
           { title: "ds-react", value: "ds-react" },
           { title: "ds-css", value: "ds-css" },
-          { title: "ds-react-internal", value: "ds-react-internal" },
-          { title: "ds-css-internal", value: "ds-css-internal" },
-          { title: "ds-icons", value: "ds-icons" },
           { title: "ds-tokens", value: "ds-tokens" },
           { title: "ds-tailwind", value: "ds-tailwind" },
         ],

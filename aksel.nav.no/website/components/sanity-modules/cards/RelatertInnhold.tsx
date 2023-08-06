@@ -1,16 +1,11 @@
+import { logNav } from "@/components";
+import { withErrorBoundary } from "@/error-boundary";
+import { RelatertInnholdT } from "@/types";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import NextLink from "next/link";
-import React from "react";
-import { logNav } from "@/components";
-import { SanityT } from "@/lib";
-import { withErrorBoundary } from "@/error-boundary";
 
-const RelatertInnhold = ({
-  node,
-}: {
-  node: SanityT.Schema.relatert_innhold;
-}): JSX.Element => {
+const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
   if (!node || node?.lenker?.length === 0) {
     return null;
   }
@@ -42,7 +37,7 @@ const RelatertInnhold = ({
               e.currentTarget.getAttribute("href")
             )
           }
-          className="toc-ignore shadow-small focus-visible:shadow-focus bg-surface-default ring-border-subtle group grid rounded border-2 border-transparent px-4 py-3 ring-1 focus:outline-none"
+          className="toc-ignore shadow-xsmall hover:shadow-small focus-visible:shadow-focus bg-surface-default group grid rounded border-2 border-transparent px-4 py-3 focus:outline-none"
         >
           <Heading
             as="span"

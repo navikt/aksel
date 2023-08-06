@@ -1,0 +1,61 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+/* stylelint-disable aksel/design-token-exists */
+.navds-stack {
+  --ac-stack-align: initial;
+  --ac-stack-justify: initial;
+  --ac-stack-direction: initial;
+  --ac-stack-wrap: initial;
+  --ac-stack-gap-xs: initial;
+  --ac-stack-gap-sm: initial;
+  --ac-stack-gap-md: initial;
+  --ac-stack-gap-lg: initial;
+  --ac-stack-gap-xl: initial;
+  --__ac-stack-gap: var(--ac-stack-gap-xs);
+
+  gap: var(--__ac-stack-gap);
+  display: flex;
+  align-items: var(--ac-stack-align);
+  justify-content: var(--ac-stack-justify);
+  flex-flow: var(--ac-stack-direction) var(--ac-stack-wrap);
+}
+
+.navds-stack__spacer {
+  flex: 1;
+  justify-self: stretch;
+  align-self: stretch;
+}
+
+.navds-stack > .navds-stack__spacer {
+  margin-block-start: calc(var(--__ac-stack-gap) * -1);
+}
+
+.navds-hstack > .navds-stack__spacer {
+  margin-inline-start: calc(var(--__ac-stack-gap) * -1);
+}
+
+@media (min-width: 480px) {
+  .navds-stack {
+    --__ac-stack-gap: var(--ac-stack-gap-sm, var(--ac-stack-gap-xs));
+  }
+}
+
+@media (min-width: 768px) {
+  .navds-stack {
+    --__ac-stack-gap: var(--ac-stack-gap-md, var(--ac-stack-gap-sm, var(--ac-stack-gap-xs)));
+  }
+}
+
+@media (min-width: 1024px) {
+  .navds-stack {
+    --__ac-stack-gap: var(--ac-stack-gap-lg, var(--ac-stack-gap-md, var(--ac-stack-gap-sm, var(--ac-stack-gap-xs))));
+  }
+}
+
+@media (min-width: 1280px) {
+  .navds-stack {
+    --__ac-stack-gap: var(
+      --ac-stack-gap-xl,
+      var(--ac-stack-gap-lg, var(--ac-stack-gap-md, var(--ac-stack-gap-sm, var(--ac-stack-gap-xs))))
+    );
+  }
+}

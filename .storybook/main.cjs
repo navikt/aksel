@@ -1,5 +1,4 @@
 const storyIndexers = require("./indexer");
-
 const path = require("path");
 const { mergeConfig } = require("vite");
 
@@ -23,6 +22,7 @@ module.exports = {
   addons: [
     "@storybook/addon-a11y",
     "@whitespace/storybook-addon-html",
+    "@storybook/addon-interactions",
     {
       name: "@storybook/addon-storysource",
       options: {
@@ -58,20 +58,23 @@ module.exports = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      define: { "process.env": {} },
+      define: {
+        "process.env": {},
+      },
       resolve: {
         alias: [
-          /*
-          // Example
-          {
-            find: "@components",
-            replacement: path.resolve(__dirname, "./src/components"),
-          }, */
           {
             find: "components",
             replacement: path.resolve(
               __dirname,
               "../aksel.nav.no/website/components"
+            ),
+          },
+          {
+            find: "@utils",
+            replacement: path.resolve(
+              __dirname,
+              "../aksel.nav.no/website/components/website-modules/utils/index.ts"
             ),
           },
         ],

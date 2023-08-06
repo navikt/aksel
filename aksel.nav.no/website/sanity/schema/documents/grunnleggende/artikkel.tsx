@@ -12,7 +12,7 @@ import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 const prefix = "grunnleggende/";
 
 export const GrunnleggendeArtikkel = defineType({
-  title: "Ds-Artikkel",
+  title: "Grunnleggende artikkel",
   name: "ds_artikkel",
   type: "document",
   groups,
@@ -67,6 +67,14 @@ export const GrunnleggendeArtikkel = defineType({
         collapsible: true,
         collapsed: false,
       },
+    }),
+    defineField({
+      title: "Sidebar-index",
+      description:
+        "Overstyrer sortering av artikler i sidebar. Hvis feltet er tomt, sorteres den alfabetisk.",
+      name: "sidebarindex",
+      type: "number",
+      group: "settings",
     }),
     defineField({
       title: "Innhold",

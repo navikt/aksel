@@ -5,7 +5,7 @@ import { useId } from "..";
 export interface LoaderProps extends SVGProps<SVGSVGElement> {
   /**
    * Changes Loader width/height
-   * 64px | 40px | 32px | 24px | 20px | 16px
+   * 88px | 64px | 40px | 32px | 24px | 20px | 16px
    * @default "medium"
    */
   size?:
@@ -38,6 +38,17 @@ export type LoaderType = React.ForwardRefExoticComponent<
   LoaderProps & React.RefAttributes<SVGSVGElement>
 >;
 
+/**
+ * A component that displays a loading spinner.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/loader)
+ * @see 🏷️ {@link LoaderProps}
+ *
+ * @example
+ * ```jsx
+ * <Loader size="3xlarge" title="venter..." />
+ * ```
+ */
 export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
   (
     {

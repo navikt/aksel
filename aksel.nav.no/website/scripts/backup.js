@@ -1,14 +1,14 @@
-import sanityClient from "@sanity/client";
+import { createClient } from "@sanity/client";
 import exportDataset from "@sanity/export";
-import { config } from "../lib/sanity/config";
+import { clientConfig } from "../sanity/config";
 const sanityToken = process.env.SANITY_PREVIEW_TOKEN;
 
 if (!sanityToken) {
   throw new Error("Could not find token from SANITY_PREVIEW_TOKEN");
 }
 
-const client = sanityClient({
-  ...config,
+const client = createClient({
+  ...clientConfig,
   dataset: "production",
   token: sanityToken,
 });

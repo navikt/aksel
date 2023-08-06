@@ -8,10 +8,12 @@ pre {
   @apply !font-mono;
 }
 
+/* stylelint-disable-next-line aksel/no-class-override */
 .navds-heading + .navds-heading {
   margin-top: 0;
 }
 
+/* stylelint-disable-next-line aksel/no-class-override */
 .navds-alert code {
   color: var(--a-red-500);
   background-color: transparent;
@@ -29,6 +31,12 @@ p {
 a {
   color: inherit;
   text-decoration: inherit;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 0.0625em;
+}
+
+[id] {
+  scroll-margin-block: 5rem;
 }
 
 /* Improves rendering of images for chrome on Windows */
@@ -48,4 +56,13 @@ a {
       image-rendering: unset !important;
     }
   }
+}
+
+/* Stop content behind modal-scrolling */
+.aksel.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.skiplink {
+  @apply z-modal bg-border-focus text-text-on-inverted absolute left-0 -translate-y-full p-4 no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
 }

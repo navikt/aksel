@@ -1,36 +1,95 @@
 import { dateStr } from "@/components";
-import { getDocumentsTmp, grunnleggendeQuery, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import {
+  AkselGrunnleggendeDocT,
+  AkselSidebarT,
+  ArticleListT,
+  NextPageT,
+  ResolveContributorsT,
+  ResolveSlugT,
+} from "@/types";
 import { Detail } from "@navikt/ds-react";
-import { WithSidebar } from "components/layout/page-templates/WithSidebar";
+import { WithSidebar } from "components/layout/WithSidebar";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
+import { getDocumentsTmp, urlFor } from "@/sanity/interface";
+import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 
-const Page = ({
-  page,
-  sidebar,
-  seo,
-}: {
-  slug?: string[];
-  page: any;
-  sidebar: any;
+type PageProps = NextPageT<{
+  page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
+  sidebar: AkselSidebarT;
   seo: any;
-  preview: boolean;
-}): JSX.Element => {
+  refs: ArticleListT;
+  publishDate: string;
+}>;
+
+export const query = `{
+  "page": *[_type == "ds_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
+    {
+      ...,
+      "slug": slug.current,
+      content[]{
+        ...,
+        ${destructureBlocks}
+      },
+  },
+  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
+  ${sidebarQuery}
+}`;
+
+export const getStaticPaths = async (): Promise<{
+  fallback: string;
+  paths: { params: { slug: string[] } }[];
+}> => {
+  return {
+    paths: await getDocumentsTmp("ds_artikkel").then((paths) =>
+      paths.map((slug) => ({
+        params: {
+          slug: slug.split("/").filter((x) => x !== "grunnleggende"),
+        },
+      }))
+    ),
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps = async ({
+  params: { slug },
+  preview = false,
+}: {
+  params: { slug: string[] };
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const { page, sidebar, seo } = await getClient().fetch(query, {
+    slug: `grunnleggende/${slug.slice(0, 2).join("/")}`,
+    type: "ds_artikkel",
+  });
+
+  return {
+    props: {
+      page: page,
+      slug: slug.slice(0, 2).join("/"),
+      seo,
+      sidebar,
+      preview,
+      title: page?.heading ?? "",
+      id: page?._id ?? "",
+      refs: [],
+      publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+    },
+    notFound: !page && !preview,
+    revalidate: 60,
+  };
+};
+
+const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
-
-  const date = page?.updateInfo?.lastVerified
-    ? page?.updateInfo?.lastVerified
-    : page?.publishedAt
-    ? page.publishedAt
-    : page._updatedAt;
 
   return (
     <>
@@ -67,7 +126,7 @@ const Page = ({
         intro={
           <Detail as="div" className="mt-2 flex items-center gap-3">
             <StatusTag showStable status={page?.status?.tag} />
-            {`OPPDATERT ${dateStr(date)}`}
+            {`OPPDATERT ${publishDate}`}
           </Detail>
         }
         pageProps={page}
@@ -82,20 +141,20 @@ const Page = ({
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
-          query={grunnleggendeQuery}
+          query={query}
           params={{
-            slug: `grunnleggende/${props.slug.slice(0, 2).join("/")}`,
+            slug: `grunnleggende/${props.slug}`,
             type: "ds_artikkel",
           }}
           props={props}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 
@@ -103,44 +162,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-export const getStaticPaths = async (): Promise<{
-  fallback: string;
-  paths: { params: { slug: string[] } }[];
-}> => {
-  return {
-    paths: await getDocumentsTmp("ds_artikkel").then((paths) =>
-      paths.map((slug) => ({
-        params: {
-          slug: slug.split("/").filter((x) => x !== "grunnleggende"),
-        },
-      }))
-    ),
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string[] };
-  preview?: boolean;
-}) => {
-  const { page, sidebar, seo } = await getClient().fetch(grunnleggendeQuery, {
-    slug: `grunnleggende/${slug.slice(0, 2).join("/")}`,
-    type: "ds_artikkel",
-  });
-
-  return {
-    props: {
-      page: page,
-      slug,
-      seo,
-      sidebar,
-      preview,
-    },
-    notFound: !page && !preview,
-    revalidate: 60,
-  };
-};

@@ -1,9 +1,9 @@
-import React, { forwardRef, useState } from "react";
 import cl from "clsx";
-import { BodyShort, BodyLong, Label, ErrorMessage, omit, Detail } from "..";
-import { FormFieldProps, useFormField } from "./useFormField";
-import { useId } from "..";
+import React, { forwardRef, useState } from "react";
+import { BodyShort, ErrorMessage, Label, omit, useId } from "..";
 import TextareaAutosize from "../util/TextareaAutoSize";
+import { FormFieldProps, useFormField } from "./useFormField";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -13,7 +13,7 @@ export interface TextareaProps
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Allowed character-count for content
-   * @note This is just a visual validator, you need to set actual character-limits if needed
+   * @note This is just a visual indicator! You will need to handle actual character-limits/validation if needed
    */
   maxLength?: number;
   /**
@@ -45,8 +45,28 @@ export interface TextareaProps
    * Enables resizing of field
    */
   resize?: boolean;
+  /**
+   * i18n-translations for counter-text
+   */
+  i18n?: {
+    /** @default Antall tegn igjen */
+    counterLeft?: string;
+    /** @default tegn for mye */
+    counterTooMuch?: string;
+  };
 }
 
+/**
+ * A component that displays a textarea input field with a label.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/textarea)
+ * @see 🏷️ {@link TextareaProps}
+ *
+ * @example
+ * ```jsx
+ * <Textarea label="Har du noen tilbakemeldinger?" />
+ * ```
+ */
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
     const {
@@ -65,6 +85,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       maxLength,
       hideLabel = false,
       resize,
+      i18n,
+      readOnly,
       ...rest
     } = props;
 
@@ -95,6 +117,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           `navds-form-field--${size}`,
           {
             "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-form-field--readonly": readOnly,
+            "navds-textarea--readonly": readOnly,
             "navds-textarea--error": hasError,
             "navds-textarea--resize": resize,
           }
@@ -107,34 +131,20 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-sr-only": hideLabel,
           })}
         >
+          <ReadOnlyIcon readOnly={readOnly} />
           {label}
         </Label>
         {!!description && (
-          <>
-            {size === "medium" ? (
-              <BodyLong
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </BodyLong>
-            ) : (
-              <Detail
-                className={cl("navds-form-field__description", {
-                  "navds-sr-only": hideLabel,
-                })}
-                id={inputDescriptionId}
-                size="small"
-                as="div"
-              >
-                {description}
-              </Detail>
-            )}
-          </>
+          <BodyShort
+            className={cl("navds-form-field__description", {
+              "navds-sr-only": hideLabel,
+            })}
+            id={inputDescriptionId}
+            size={size}
+            as="div"
+          >
+            {description}
+          </BodyShort>
         )}
         <div className="navds-textarea__wrapper">
           <TextareaAutosize
@@ -147,6 +157,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             }
             minRows={getMinRows()}
             ref={ref}
+            readOnly={readOnly}
             className={cl(
               "navds-textarea__input",
               "navds-body-short",
@@ -166,6 +177,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 maxLength={maxLength}
                 currentLength={props.value?.length ?? controlledValue?.length}
                 size={size}
+                i18n={i18n}
               />
             </>
           )}
@@ -185,7 +197,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   }
 );
 
-export const Counter = ({ maxLength, currentLength, size }) => {
+export const Counter = ({ maxLength, currentLength, size, i18n }) => {
   const difference = maxLength - currentLength;
 
   return (
@@ -197,8 +209,8 @@ export const Counter = ({ maxLength, currentLength, size }) => {
       size={size}
     >
       {difference < 0
-        ? `Antall tegn for mye ${Math.abs(difference)}`
-        : `Antall tegn igjen ${difference}`}
+        ? `${Math.abs(difference)} ${i18n?.counterTooMuch ?? "tegn for mye"}`
+        : `${difference} ${i18n?.counterLeft ?? "tegn igjen"}`}
     </BodyShort>
   );
 };

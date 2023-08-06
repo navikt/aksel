@@ -18,12 +18,7 @@ export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
   icon?: React.ReactNode;
 }
 
-export interface ListItemType
-  extends React.ForwardRefExoticComponent<
-    ListItemProps & React.RefAttributes<HTMLLIElement>
-  > {}
-
-export const ListItem: ListItemType = forwardRef(
+export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ className, children, title, icon, ...rest }, ref) => {
     const { listType, isNested } = useContext(ListContext);
 

@@ -1,18 +1,64 @@
 import { Footer } from "@/layout";
-import { akselBloggPosts, SanityT, urlFor } from "@/lib";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import {
+  AkselBloggDocT,
+  AkselBloggFrontpageT,
+  NextPageT,
+  ResolveContributorsT,
+  ResolveSlugT,
+} from "@/types";
 import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import { LatestBloggposts } from "components/website-modules/LatestBloggs";
-import { PreviewSuspense } from "next-sanity/preview";
+import { LatestBloggposts } from "components/website-modules/blogg-page";
 import Head from "next/head";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
+import { urlFor } from "@/sanity/interface";
+import { destructureBlocks, contributorsAll } from "@/sanity/queries";
 
-const Page = (props: PageProps): JSX.Element => {
+type PageProps = NextPageT<{
+  page: AkselBloggFrontpageT;
+  bloggposts: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
+}>;
+
+export const query = `*[_type == "blogg_landingsside"][0]{
+  "page": {..., intro[]{...,${destructureBlocks}}},
+  "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
+    seo,
+    heading,
+    ingress,
+    publishedAt,
+    _createdAt,
+    _id,
+    "slug": slug.current,
+    ${contributorsAll}
+  }
+}`;
+
+export const getStaticProps = async ({
+  preview = false,
+}: {
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const { bloggposts, page } = await getClient().fetch(query);
+
+  return {
+    props: {
+      page,
+      bloggposts,
+      preview,
+      title: "Forside Blogg",
+      id: page?._id ?? "",
+    },
+    notFound: false,
+    revalidate: 60,
+  };
+};
+
+const Page = (props: PageProps["props"]) => {
   if (!props.bloggposts) {
     return <NotFotfund />;
   }
@@ -57,7 +103,7 @@ const Page = (props: PageProps): JSX.Element => {
           className="relative min-h-[80vh] overflow-hidden focus:outline-none"
         >
           <AkselCubeStatic className="text-[#FFE78A] opacity-10" />
-          <div className="centered-layout mb-40 grid max-w-screen-2xl">
+          <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 sm:px-6">
             <LatestBloggposts
               bloggs={props?.bloggposts}
               title="Blogg"
@@ -72,7 +118,7 @@ const Page = (props: PageProps): JSX.Element => {
                 <Heading level="2" size="xlarge" className="text-deepblue-800">
                   Flere blogginnlegg
                 </Heading>
-                <ul className="mt-12 grid gap-x-3 gap-y-6 md:grid-cols-2 md:gap-y-10 md:gap-x-6 lg:grid-cols-3">
+                <ul className="mt-12 grid gap-x-3 gap-y-6 md:grid-cols-2 md:gap-x-6 md:gap-y-10 lg:grid-cols-3">
                   {remainingPosts.map((blog) => (
                     <BloggCard key={blog._id} blog={blog} />
                   ))}
@@ -89,12 +135,12 @@ const Page = (props: PageProps): JSX.Element => {
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
-        <WithPreview comp={Page} query={akselBloggPosts} props={props} />
-      </PreviewSuspense>
+      <Suspense fallback={<Page {...props} />}>
+        <WithPreview comp={Page} query={query} props={props} />
+      </Suspense>
     );
   }
 
@@ -102,40 +148,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-export type AkselBloggPage = Partial<
-  SanityT.Schema.aksel_blogg & {
-    slug: string;
-    contributors?: { title?: string }[];
-  }
->;
-
-interface PageProps {
-  bloggposts: AkselBloggPage[];
-  page: any;
-  preview: boolean;
-}
-
-interface StaticProps {
-  props: PageProps;
-  notFound: boolean;
-  revalidate: number;
-}
-
-export const getStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}): Promise<StaticProps | { notFound: true }> => {
-  const { bloggposts, page } = await getClient().fetch(akselBloggPosts);
-
-  return {
-    props: {
-      page,
-      bloggposts,
-      preview,
-    },
-    notFound: !bloggposts && !preview,
-    revalidate: 60,
-  };
-};

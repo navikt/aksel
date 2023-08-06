@@ -1,8 +1,8 @@
-import { ExternalLink } from "@navikt/ds-icons";
 import { BodyLong, Detail, Heading, Ingress, Link } from "@navikt/ds-react";
 import BlockContent from "@sanity/block-content-to-react";
 import cl from "clsx";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
+import ExpansionCard from "components/sanity-modules/ExpansionCard";
 import NextLink from "next/link";
 import React, { createContext, useContext } from "react";
 import {
@@ -24,14 +24,8 @@ import {
   UuFeedback,
   Video,
 } from ".";
-
-export const InlineCode = (props: React.HTMLAttributes<HTMLElement>) => (
-  <code className="inline-code" {...props} />
-);
-
-export const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
-  <kbd className="inline-kbd" {...props} />
-);
+import { KBD } from "components/website-modules/KBD";
+import { InlineCode } from "components/website-modules/InlineCode";
 
 const serializers = {
   types: {
@@ -43,6 +37,7 @@ const serializers = {
     do_dont: ({ node }) => <DoDont node={node} />,
     bilde: ({ node }) => <Bilde node={node} />,
     alert: ({ node }) => <Alert node={node} />,
+    expansioncard: ({ node }) => <ExpansionCard node={node} />,
     kode: ({ node }) => <Kode node={node} />,
     tabell_v2: ({ node }) => <Tabell node={node} />,
     accordion: ({ node }) => <Accordion node={node} />,
@@ -105,6 +100,7 @@ const serializers = {
               spacing
               level="4"
               size="small"
+              id={`h${node._key}`}
               {...textProps}
             />
           );
@@ -161,7 +157,7 @@ const serializers = {
     return (
       <BodyLong
         as="li"
-        className="ml-5 mb-3 max-w-[calc(theme(spacing.text)_-_1em)]"
+        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
       >
         {props.children}
       </BodyLong>
@@ -181,25 +177,11 @@ const serializers = {
       if (!href) {
         return children;
       }
-      if (href && href.startsWith("mailto:")) {
-        return (
-          <NextLink href={href} passHref legacyBehavior>
-            <Link
-              onClick={(e) =>
-                logNav(
-                  "link",
-                  window.location.pathname,
-                  e.currentTarget.getAttribute("href")
-                )
-              }
-              className="inline"
-            >
-              {children}
-            </Link>
-          </NextLink>
-        );
-      }
-      return blank ? (
+
+      const externalLink =
+        href.startsWith("http") && !href.startsWith("https://aksel.nav.no/");
+
+      return blank || externalLink ? (
         <Link
           href={href}
           target="_blank"
@@ -212,44 +194,46 @@ const serializers = {
             )
           }
         >
-          {children} <ExternalLink title="åpner lenken i ny fane" />
+          {children}
         </Link>
       ) : (
-        <NextLink href={href} passHref legacyBehavior>
-          <Link
-            onClick={(e) =>
-              logNav(
-                "link",
-                window.location.pathname,
-                e.currentTarget.getAttribute("href")
-              )
-            }
-            className="inline"
-          >
-            {children}
-          </Link>
-        </NextLink>
+        <Link
+          as={NextLink}
+          href={href}
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+          className="inline"
+        >
+          {children}
+        </Link>
       );
     },
     internalLink: ({ mark, children }: { mark: any; children: any }) => {
       const { slug = {} } = mark;
-      if (!slug || !slug.current) return children;
+      if (!slug || !slug.current) {
+        return children;
+      }
 
       const href = `/${slug?.current}`;
       return (
-        <NextLink href={href} passHref legacyBehavior>
-          <Link
-            onClick={(e) =>
-              logNav(
-                "link",
-                window.location.pathname,
-                e.currentTarget.getAttribute("href")
-              )
-            }
-          >
-            {children}
-          </Link>
-        </NextLink>
+        <Link
+          as={NextLink}
+          href={href}
+          onClick={(e) =>
+            logNav(
+              "link",
+              window.location.pathname,
+              e.currentTarget.getAttribute("href")
+            )
+          }
+        >
+          {children}
+        </Link>
       );
     },
   },

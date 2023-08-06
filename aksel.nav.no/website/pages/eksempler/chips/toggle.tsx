@@ -3,9 +3,18 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 import { useState } from "react";
 
 const Example = () => {
-  const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
+  const options = [
+    "Lillehammer",
+    "Nittedal",
+    "Enebakk",
+    "Hamar",
+    "Skedsmo",
+    "Arendal",
+    "Gjøvik",
+    "Vennesla",
+  ];
 
-  const [selected, setSelected] = useState(["Dansk", "Svensk"]);
+  const [selected, setSelected] = useState(["Nittedal", "Arendal"]);
 
   return (
     <Chips>
@@ -37,4 +46,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "Toggle chip brukes til filtrering av innhold og data.",
 };

@@ -29,9 +29,39 @@ interface ErrorSummaryComponent
   extends React.ForwardRefExoticComponent<
     ErrorSummaryProps & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * Link to error
+   *
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   *
+   * @example
+   * ```jsx
+   * <ErrorSummary.Item href="#1">
+   *   Felt må fylles ut med alder
+   * </ErrorSummary.Item>
+   * ```
+   */
   Item: ErrorSummaryItemType;
 }
 
+/**
+ * A component that displays a summary of errors.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/errorsummary)
+ * @see 🏷️ {@link ErrorSummaryProps}
+ *
+ * @example
+ * ```jsx
+ * <ErrorSummary heading="Du må fikse disse feilene før du kan sende inn søknad.">
+ *   <ErrorSummary.Item href="#1">
+ *     Felt må fylles ut med alder
+ *   </ErrorSummary.Item>
+ *   <ErrorSummary.Item href="#2">
+ *     Tekstfeltet må ha en godkjent e-mail
+ *   </ErrorSummary.Item>
+ * </ErrorSummary>
+ * ```
+ */
 export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
   (
     {

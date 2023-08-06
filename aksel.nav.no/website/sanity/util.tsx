@@ -1,7 +1,7 @@
-import { InlineCode } from "@/sanity-block";
-import { ExternalLink } from "@navikt/ds-icons";
+import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { KBD } from "@sanity/ui";
+import { InlineCode } from "components/website-modules/InlineCode";
 import NextLink from "next/link";
 import { Role } from "sanity";
 
@@ -168,7 +168,7 @@ export const serializers = {
     return (
       <BodyLong
         as="li"
-        className="ml-5 mb-3 max-w-[calc(theme(spacing.text)_-_1em)]"
+        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
       >
         {props.children}
       </BodyLong>
@@ -194,7 +194,7 @@ export const serializers = {
       }
       return blank ? (
         <Link href={href} target="_blank" rel="noreferrer noopener">
-          {children} <ExternalLink title="åpner lenken i ny fane" />
+          {children} <ExternalLinkIcon title="åpner lenken i ny fane" />
         </Link>
       ) : (
         <NextLink href={href} passHref legacyBehavior>

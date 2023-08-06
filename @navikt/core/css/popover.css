@@ -5,6 +5,7 @@
   border: 1px solid;
   border-color: var(--ac-popover-border, var(--a-border-default));
   border-radius: var(--a-border-radius-medium);
+  max-width: calc(100vw - var(--a-spacing-6));
 }
 
 .navds-popover__content {
@@ -15,9 +16,16 @@
   display: none;
 }
 
-.navds-popover:focus {
+.navds-popover:focus-visible {
   outline: none;
   box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-popover:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
 }
 
 .navds-popover__arrow {

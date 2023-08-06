@@ -2,18 +2,18 @@
 import { act, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
-import { UNSAFE_DatePicker, UNSAFE_useDatepicker } from "..";
+import { DatePicker, useDatepicker } from "..";
 
 const App = () => {
-  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+  const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     onDateChange: console.log,
   });
 
   return (
-    <UNSAFE_DatePicker {...datepickerProps}>
-      <UNSAFE_DatePicker.Input {...inputProps} label="Velg dato" />
-    </UNSAFE_DatePicker>
+    <DatePicker {...datepickerProps}>
+      <DatePicker.Input {...inputProps} label="Velg dato" />
+    </DatePicker>
   );
 };
 

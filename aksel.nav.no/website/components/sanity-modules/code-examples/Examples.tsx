@@ -1,25 +1,20 @@
 import { capitalize, Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
-import { BodyLong, Link, Chips } from "@navikt/ds-react";
+import { CodeExapmplesT } from "@/types";
+import { BodyLong, Chips, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import { useEffect, useState } from "react";
 import { CodeSandbox } from "./CodeSandbox";
+import { useRouter } from "next/router";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";
 
-const ComponentExamples = ({
-  node,
-}: {
-  node: Omit<SanityT.Schema.kode_eksempler, "dir" | "filnavn"> & {
-    dir?: SanityT.Schema.kode_eksempler_fil;
-    filnavn?: SanityT.Schema.kode_eksempler_fil;
-  };
-}): JSX.Element => {
+const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
+  const router = useRouter();
 
   const handleExampleLoad = () => {
     let attempts = 0;
@@ -50,6 +45,22 @@ const ComponentExamples = ({
     node?.dir?.filer?.[0]?.navn && setActiveExample(node.dir.filer[0].navn);
   }, [node]);
 
+  useEffect(() => {
+    const hash = router.asPath.split("#")[1];
+    if (
+      hash &&
+      hash.startsWith(`${node.dir.title.toLowerCase()}demo-`) &&
+      node.dir.filer.some(
+        (f) =>
+          f.navn === hash.replace(`${node.dir.title.toLowerCase()}demo-`, "")
+      )
+    ) {
+      setActiveExample(
+        hash.replace(`${node.dir.title.toLowerCase()}demo-`, "") as string
+      );
+    }
+  }, [router, node]);
+
   const fixName = (str: string) =>
     capitalize(
       str
@@ -58,12 +69,7 @@ const ComponentExamples = ({
         .trim()
     ) ?? str;
 
-  if (
-    !node.dir?.filer ||
-    node.dir.filer.length === 0 ||
-    (!node.standalone && !node.dir) ||
-    (node.standalone && !node.filnavn)
-  ) {
+  if (!node.dir?.filer || node.dir.filer.length === 0) {
     return null;
   }
 
@@ -76,12 +82,21 @@ const ComponentExamples = ({
           {node.dir.filer.map((fil) => {
             return (
               <Chips.Toggle
+                checkmark={false}
                 key={fil._key}
                 value={fil.navn}
                 selected={active === fil.navn}
+                id={`${node.dir.title.toLowerCase()}demo-${fil.navn}`}
                 onClick={() => {
                   setActiveExample(fil.navn);
                   setUnloaded(true);
+                  router.replace(
+                    `#${node.dir.title.toLowerCase()}demo-${fil.navn}`,
+                    undefined,
+                    {
+                      shallow: true,
+                    }
+                  );
                 }}
               >
                 {fixName(fil.navn)}
@@ -154,7 +169,6 @@ const ComponentExamples = ({
 
                 <Snippet
                   node={{
-                    _type: "kode" as const,
                     code: { code: fil.innhold.trim(), language: "jsx" },
                   }}
                 />

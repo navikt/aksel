@@ -1,4 +1,4 @@
-import { Expand } from "@navikt/ds-icons";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Label } from "@navikt/ds-react";
 import { StackCompactIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
@@ -6,6 +6,8 @@ import { defineField, defineType } from "sanity";
 export const Accordion = defineType({
   name: "accordion",
   title: "Accordion",
+  description:
+    "Accordion brukes hvis man har flere seksjoner man ønsker å skjule. Bruke ExpansionCard om du bare skal vise en seksjon",
   type: "object",
   icon: StackCompactIcon,
   fields: [
@@ -37,7 +39,11 @@ export const Accordion = defineType({
         },
       ],
       validation: (Rule) =>
-        Rule.required().min(1).error("Accordion modul må ha minst 1 element"),
+        Rule.required()
+          .min(2)
+          .error(
+            "Accordion modul må ha minst 2 elementer. Bruk ExpansionCard om du bare trenger 1"
+          ),
     }),
   ],
   components: {
@@ -47,10 +53,10 @@ export const Accordion = defineType({
           {val.list.map((x) => (
             <div
               key={x._key}
-              className="border-b-border flex w-full justify-between border-b py-2 px-4 "
+              className="border-b-border flex w-full justify-between border-b px-4 py-2 "
             >
               <span>{x.title}</span>
-              <Expand aria-hidden />
+              <ChevronDownIcon aria-hidden />
             </div>
           ))}
         </div>

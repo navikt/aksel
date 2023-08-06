@@ -1,9 +1,10 @@
 import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import cl from "clsx";
 import ReactModal from "react-modal";
-import { Close } from "@navikt/ds-icons";
+
 import { Button, mergeRefs, useProvider } from "..";
 import ModalContent, { ModalContentType } from "./ModalContent";
+import { XMarkIcon } from "@navikt/aksel-icons";
 
 export interface ModalProps {
   /**
@@ -70,6 +71,33 @@ type ModalLifecycle = {
   setAppElement: (element: any) => void;
 };
 
+/**
+ * A component that displays a modal dialog.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/modal)
+ * @see 🏷️ {@link ModalProps}
+ *
+ * @example
+ * ```jsx
+ * const [open, setOpen] = useState(false);
+ *
+ * <Modal
+ *   open={open}
+ *   aria-label="Modal demo"
+ *   onClose={() => setOpen((x) => !x)}
+ *   aria-labelledby="modal-heading"
+ * >
+ *   <Modal.Content>
+ *     <Heading spacing level="1" size="large" id="modal-heading">
+ *       Viktig info
+ *     </Heading>
+ *     <BodyLong spacing>
+ *       Hallo!
+ *     </BodyLong>
+ *   </Modal.Content>
+ * </Modal>
+ * ```
+ */
 export const Modal = forwardRef<ReactModal, ModalProps>(
   (
     {
@@ -144,10 +172,10 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
               "navds-modal__button--shake": shouldCloseOnOverlayClick,
             })}
             size="small"
-            variant="tertiary"
+            variant="tertiary-neutral"
             ref={buttonRef}
             onClick={onClose}
-            icon={<Close title="Lukk modalvindu" />}
+            icon={<XMarkIcon title="Lukk modalvindu" />}
           />
         )}
       </ReactModal>

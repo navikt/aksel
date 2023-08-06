@@ -86,7 +86,36 @@ export const GroupDescription = () => (
     defaultValue="tekst2"
     description="Group description"
   >
-    <Radio value="tekst">Radiotekst</Radio>
+    <Radio value="tekst" description="textdesc">
+      Radiotekst
+    </Radio>
     <Radio value="tekst2">Radiotekst</Radio>
   </RadioGroup>
+);
+
+export const UUDemo = () => (
+  <div className="colgap">
+    <RadioGroup
+      legend="Hvilken frukt vil du ha?"
+      description="Du kan bare velge en frukt"
+      defaultValue="eple"
+      readOnly
+    >
+      <Radio value="eple">Eple</Radio>
+      <Radio value="banan" description="Bananer er importert fra X">
+        Banan
+      </Radio>
+      <Radio value="druer">Druer</Radio>
+    </RadioGroup>
+    <RadioGroup
+      legend="Når har du ferie?"
+      defaultValue="1"
+      readOnly
+      error="du må velge en ferie"
+    >
+      <Radio value="1">August</Radio>
+      <Radio value="2">Juli</Radio>
+      <Radio value="3">Juni</Radio>
+    </RadioGroup>
+  </div>
 );

@@ -6,6 +6,7 @@ export const Feedback = defineType({
   title: "Feedback",
   name: "aksel_feedback",
   type: "document",
+  liveEdit: true,
   __experimental_omnisearch_visibility: false,
   fields: [
     defineField({
@@ -44,12 +45,6 @@ export const Feedback = defineType({
       readOnly: true,
     }),
     defineField({
-      title: "Behandlet",
-      name: "behandlet",
-      type: "boolean",
-      initialValue: false,
-    }),
-    defineField({
       title: "URL",
       name: "url",
       type: "string",
@@ -69,9 +64,16 @@ export const Feedback = defineType({
     defineField({
       title: "Notater",
       description:
-        "Legg til noen notater hvis det var noen aksjonspunkter basert på tilbakemeldingen",
+        "Legg til notater hvis det var noen tanker/aksjonspunkter basert på tilbakemeldingen",
       name: "notat",
       type: "text",
+    }),
+    defineField({
+      title: "Behandlet",
+      description: "Tagger tilbakemeldingen som sett/tatt rede for/ferdig",
+      name: "behandlet",
+      type: "boolean",
+      initialValue: false,
     }),
   ],
   preview: {

@@ -14,6 +14,20 @@ export interface IngressProps
   spacing?: boolean;
 }
 
+/**
+ * Part of a set of components for displaying text with consistent typography.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
+ * @see 🏷️ {@link IngressProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+ *
+ * @example
+ * ```jsx
+ *     <Ingress level="1" size="xlarge">
+ *       Pengestøtte når du er syk
+ *     </Ingress>
+ * ```
+ */
 export const Ingress: OverridableComponent<IngressProps, HTMLParagraphElement> =
   forwardRef(({ className, spacing, as: Component = "p", ...rest }, ref) => (
     <Component

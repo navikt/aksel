@@ -1,6 +1,6 @@
 import React, { useId, useState } from "react";
 import { Button } from "../..";
-import { UNSAFE_useMonthpicker } from "../hooks";
+import { useMonthpicker } from "../hooks";
 import MonthPicker from "./MonthPicker";
 
 export default {
@@ -23,7 +23,7 @@ export default {
 };
 
 export const Default = () => {
-  const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
+  const { inputProps, monthpickerProps } = useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
   });
 
@@ -74,14 +74,16 @@ export const Standalone = () => {
 };
 
 export const UseMonthpicker = () => {
-  const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
+  const { inputProps, monthpickerProps } = useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
     onMonthChange: console.log,
+    fromDate: new Date("Jan 1 2022"),
+    toDate: new Date("Sep 27 2025"),
   });
 
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker {...monthpickerProps}>
+      <MonthPicker {...monthpickerProps} dropdownCaption>
         <MonthPicker.Input
           {...inputProps}
           label="Velg måned"
@@ -93,7 +95,7 @@ export const UseMonthpicker = () => {
 };
 
 export const UseMonthpickerFormat = () => {
-  const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
+  const { inputProps, monthpickerProps } = useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
     onMonthChange: console.log,
     inputFormat: "MM.yyyy",
@@ -113,7 +115,7 @@ export const UseMonthpickerFormat = () => {
 };
 
 export const Required = () => {
-  const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
+  const { inputProps, monthpickerProps } = useMonthpicker({
     locale: "nb",
     defaultSelected: new Date(),
     disabled: [new Date("Apr 1 2022")],

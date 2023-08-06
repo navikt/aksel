@@ -21,13 +21,6 @@ spec:
     path: /api/isAlive
     initialDelay: 20
     timeout: 1
-  resources:
-    limits:
-      cpu: 1000m
-      memory: 2048Mi
-    requests:
-      cpu: 500m
-      memory: 1024Mi
   accessPolicy:
     outbound:
       external:
@@ -46,3 +39,7 @@ spec:
           age: 7
           numNewerVersions: 3
           withState: ANY
+  filesFrom:
+    - emptyDir:
+        medium: Memory
+      mountPath: /app/aksel.nav.no/website/.next/cache

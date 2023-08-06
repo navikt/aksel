@@ -1,46 +1,18 @@
-import { SanityT } from "@/lib";
 import { withErrorBoundary } from "@/error-boundary";
+import { TokenTableT } from "@/types";
+import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import core from "@navikt/ds-css/tokens.json";
-import internal from "@navikt/ds-css-internal/tokens.json";
-import { useEffect, useRef, useState } from "react";
-import { Expand, SuccessStroke } from "@navikt/ds-icons";
-import cl from "classnames";
-import { Link, BodyLong, Label } from "@navikt/ds-react";
+import { BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
+import cl from "clsx";
+import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import NextLink from "next/link";
-import copy from "copy-to-clipboard";
-import { CopyIcon } from "@sanity/icons";
+import { useState } from "react";
 
-const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
+const TokenTable = ({ node }: { node: TokenTableT }) => {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(false);
-
-  const timeoutRef = useRef<NodeJS.Timeout>();
-
-  const handleCopy = () => {
-    setActive(true);
-    timeoutRef.current && clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setActive(false), 2000);
-    const str = Object.entries(tokens).reduce(
-      (prev, cur) =>
-        prev +
-        `${cur[0]}: ${
-          cur[1].startsWith("--") ? `var(${cur[1]})` : `${cur[1]}`
-        };\n`,
-      ""
-    );
-    copy(str);
-  };
-
-  useEffect(() => {
-    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
-  }, []);
 
   const tokens: { [key: string]: string } | null =
-    node.title in core
-      ? core[node.title]
-      : node.title in internal
-      ? internal[node.title]
-      : null;
+    node.title in core ? core[node.title] : null;
 
   if (!tokens) {
     return null;
@@ -56,43 +28,24 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
             !open && showMore,
         })}
       >
-        <table className="border-border-divider w-full border-separate border-spacing-0 rounded-t border">
-          <thead>
-            <tr className="rounded-t">
-              <td className="rounded-tl bg-gray-50 p-2 ">Token</td>
-              <td className="rounded-tr bg-gray-50 p-2 ">Fallback</td>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(tokens).map(([key, val]) => (
-              <tr
-                key={key}
-                className="peer border-b border-t border-gray-300 font-mono text-sm last-of-type:rounded-b"
-              >
-                <td className="border-t border-r border-gray-300 p-2">{key}</td>
-                <td className="border-t border-gray-300 p-2">{val}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <AkselTable th={[{ text: "Token" }, { text: "Fallback" }]}>
+          {Object.entries(tokens).map(([key, val]) => (
+            <AkselTableRow key={key} tr={[{ text: key }, { text: val }]} />
+          ))}
+        </AkselTable>
         {(open || !showMore) && (
-          <div className="border-border-divider bg-surface-neutral-subtle relative w-full rounded-b border border-t-0 p-2">
-            <button
-              onClick={handleCopy}
-              className="text-text-default hover:bg-surface-neutral-subtle-hover focus-visible:shadow-focus absolute top-2 right-2 rounded px-1 py-1 text-2xl focus:outline-none"
-            >
-              {active ? (
-                <>
-                  <SuccessStroke className="text-[1.5rem]" aria-hidden />
-                  <span className="sr-only">Kopier formarterte tokens</span>
-                </>
-              ) : (
-                <>
-                  <CopyIcon aria-hidden role="img" />
-                  <span className="sr-only">Kopier formarterte tokens</span>
-                </>
+          <div className="border-border-subtle bg-surface-default relative -mt-8 w-full rounded-b border border-t-0 p-2 pr-14">
+            <CopyButton
+              copyText={Object.entries(tokens).reduce(
+                (prev, cur) =>
+                  prev +
+                  `${cur[0]}: ${
+                    cur[1].startsWith("--") ? `var(${cur[1]})` : `${cur[1]}`
+                  };\n`,
+                ""
               )}
-            </button>
+              className="absolute right-2 top-2 z-10"
+            />
             <Label size="small" as="span" spacing>
               Hva er dette?
             </Label>
@@ -122,14 +75,15 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
       {!open && showMore && (
         <button
           onClick={() => setOpen(true)}
-          className="text-medium group mx-auto flex shrink-0 -translate-y-3/4 flex-col items-center focus:outline-none"
+          className="text-medium group mx-auto flex shrink-0 -translate-y-3/4 flex-col items-center gap-1 focus:outline-none"
         >
           <span className="group-focus-visible:bg-border-focus group-focus-visible:text-text-on-action group-focus-visible:shadow-focus">
             Se alle tokens
           </span>
-          <Expand
-            className="h-4 w-4 transition-all group-hover:translate-y-1"
+          <ChevronDownCircleIcon
+            className="transition-all group-hover:translate-y-1"
             aria-hidden
+            fontSize="1.5rem"
           />
         </button>
       )}

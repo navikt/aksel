@@ -1,17 +1,19 @@
 import {
-  UNSAFE_DatePicker,
-  UNSAFE_useDatepicker,
+  DatePicker,
+  useDatepicker,
   Button,
   Modal,
   Heading,
 } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useEffect, useState } from "react";
+import format from "date-fns/format";
+import nbLocale from "date-fns/locale/nb";
 
 const Example = () => {
   const [open, setOpen] = useState(false);
 
-  const { datepickerProps, inputProps, selectedDay } = UNSAFE_useDatepicker({
+  const { datepickerProps, inputProps, selectedDay } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     onDateChange: console.log,
   });
@@ -36,11 +38,12 @@ const Example = () => {
             Heading
           </Heading>
           <div className="min-h-96">
-            <UNSAFE_DatePicker {...datepickerProps} strategy="fixed">
-              <UNSAFE_DatePicker.Input {...inputProps} label="Velg dato" />
-            </UNSAFE_DatePicker>
+            <DatePicker {...datepickerProps} strategy="fixed">
+              <DatePicker.Input {...inputProps} label="Velg dato" />
+            </DatePicker>
             <div className="pt-4">
-              {selectedDay && selectedDay.toDateString()}
+              {selectedDay &&
+                format(selectedDay, "dd.MM.yyyy", { locale: nbLocale })}
             </div>
           </div>
         </Modal.Content>

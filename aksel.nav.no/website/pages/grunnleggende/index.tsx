@@ -1,29 +1,56 @@
-import { grunnleggendeLandingQuery, SidebarT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import {
+  AkselLandingPageDocT,
+  AkselSidebarT,
+  ArticleListT,
+  NextPageT,
+} from "@/types";
 import { Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
-import { WithSidebar } from "components/layout/page-templates/WithSidebar";
-import ComponentOverview from "components/sanity-modules/component-overview";
-import { PreviewSuspense } from "next-sanity/preview";
+import { WithSidebar } from "components/layout/WithSidebar";
+import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import Head from "next/head";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import { grunnleggendeKategorier } from "../../sanity/config";
+import { urlFor } from "@/sanity/interface";
+import { sidebarQuery, landingPageQuery } from "@/sanity/queries";
 
-const Page = ({
-  page,
-  sidebar,
-  links,
+type PageProps = NextPageT<{
+  page: AkselLandingPageDocT;
+  sidebar: AkselSidebarT;
+  links: ArticleListT;
+}>;
+
+export const query = `{${sidebarQuery}, ${landingPageQuery(
+  "grunnleggende"
+)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
+
+export const getStaticProps = async ({
+  preview = false,
 }: {
-  page: any;
-  links: {
-    _id: string;
-    heading: string;
-    slug: { current: string };
-    kategori: string;
-  }[];
-  sidebar: SidebarT;
-}): JSX.Element => {
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const { sidebar, page, links } = await getClient().fetch(query, {
+    type: "ds_artikkel",
+  });
+
+  return {
+    props: {
+      page,
+      sidebar,
+      links,
+      slug: "/grunnleggende",
+      preview,
+      title: "Forside Grunnleggende",
+      id: page?._id ?? "",
+    },
+    revalidate: 60,
+    notFound: false,
+  };
+};
+
+const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   return (
     <>
       <Head>
@@ -99,19 +126,19 @@ const Page = ({
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
-          query={grunnleggendeLandingQuery}
+          query={query}
           props={props}
           params={{
             type: "ds_artikkel",
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 
@@ -119,27 +146,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-export const getStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}) => {
-  const { sidebar, page, links } = await getClient().fetch(
-    grunnleggendeLandingQuery,
-    {
-      type: "ds_artikkel",
-    }
-  );
-
-  return {
-    props: {
-      page,
-      sidebar,
-      links,
-      slug: "/grunnleggende",
-      preview,
-    },
-    revalidate: 60,
-  };
-};

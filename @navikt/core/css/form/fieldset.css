@@ -1,3 +1,7 @@
+[data-theme="dark"] {
+  --ac-form-description: var(--a-text-on-inverted);
+}
+
 .navds-fieldset {
   margin: 0;
   padding: 0;
@@ -9,13 +13,25 @@
   margin-top: var(--a-spacing-2);
 }
 
+.navds-fieldset__description {
+  color: var(--ac-form-description, var(--a-text-subtle));
+}
+
 .navds-fieldset > .navds-fieldset__description:not(:empty) {
-  margin-top: var(--a-spacing-1);
+  margin-top: 0.125rem;
 }
 
 /* Applied when hideLegend is applied to fieldset */
 .navds-fieldset > .navds-sr-only + :not(:first-child):not(:empty) {
   margin-top: 0;
+}
+
+.navds-fieldset__legend {
+  padding: 0;
+}
+
+.navds-fieldset--readonly > :where(.navds-fieldset__legend) {
+  display: inline-flex;
 }
 
 .navds-fieldset:disabled > .navds-fieldset__legend,
