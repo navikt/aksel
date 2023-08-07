@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 4.9.0
+
+### Minor Changes
+
+- Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.9.0
+
 ## 4.8.0
 
 ### Minor Changes

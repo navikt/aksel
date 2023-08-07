@@ -31,10 +31,15 @@ export interface ExpandableRowProps extends Omit<RowProps, "content"> {
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Disable expansio
+   * Disable expansion. shadeOnHover will not be visible.
    * @default false
    */
   expansionDisabled?: boolean;
+  /**
+   * Makes the whole row clickable
+   * @default false
+   */
+  expandOnRowClick?: boolean;
   /**
    * The width of the expanded row's internal cell
    * @default 999
@@ -58,6 +63,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       open,
       onOpenChange,
       expansionDisabled = false,
+      expandOnRowClick = false,
       colSpan = 999,
       ...rest
     },
@@ -65,8 +71,21 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
     const id = useId();
-
     const isOpen = open ?? internalOpen;
+
+    const expansionHandler = (e) => {
+      onOpenChange?.(!isOpen);
+      if (open === undefined) {
+        setInternalOpen((open) => !open);
+      }
+      e.stopPropagation();
+    };
+
+    const onRowClick = (e) => {
+      if (e.target.nodeName === "TD" || e.target.nodeName === "TH") {
+        expansionHandler(e);
+      }
+    };
 
     return (
       <>
@@ -75,7 +94,13 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           ref={ref}
           className={cl("navds-table__expandable-row", className, {
             "navds-table__expandable-row--open": isOpen,
+            "navds-table__expandable-row--expansion-disabled":
+              expansionDisabled,
           })}
+          onClick={(e) => {
+            !expansionDisabled && expandOnRowClick && onRowClick(e);
+            rest?.onClick?.(e);
+          }}
         >
           {togglePlacement === "right" && children}
           <DataCell
@@ -89,12 +114,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
                 className="navds-table__toggle-expand-button"
                 aria-controls={id}
                 aria-expanded={isOpen}
-                onClick={() => {
-                  onOpenChange?.(!isOpen);
-                  if (open === undefined) {
-                    setInternalOpen((open) => !open);
-                  }
-                }}
+                onClick={expansionHandler}
               >
                 <ChevronDownIcon
                   className="navds-table__expandable-icon"
