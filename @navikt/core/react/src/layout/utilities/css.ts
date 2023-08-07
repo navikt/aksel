@@ -21,23 +21,20 @@ export type SpacingScale =
   | "24"
   | "32";
 
-export type ResponsiveProp<T> =
-  | T
-  | {
-      // eslint-disable-next-line no-unused-vars
-      [Breakpoint in BreakpointsAlias]?: T;
-    };
+type ResponsivePropConfig<T = string> = {
+  // eslint-disable-next-line no-unused-vars
+  [Breakpoint in BreakpointsAlias]?: T;
+};
 
-export function getResponsiveProps(
+export type ResponsiveProp<T> = T | ResponsivePropConfig<T>;
+
+export type ResponsiveValue<T = string> = undefined | ResponsiveProp<T>;
+
+export function getResponsiveProps<T = string>(
   componentName: string,
   componentProp: string,
   tokenSubgroup: string,
-  responsiveProp?:
-    | string
-    | {
-        // eslint-disable-next-line no-unused-vars
-        [Breakpoint in BreakpointsAlias]?: string;
-      }
+  responsiveProp?: ResponsiveProp<T>
 ) {
   if (!responsiveProp) return {};
 
@@ -51,6 +48,27 @@ export function getResponsiveProps(
     Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => [
       `--ac-${componentName}-${componentProp}-${breakpointAlias}`,
       `var(--a-${tokenSubgroup}-${aliasOrScale})`,
+    ])
+  );
+}
+
+export function getResponsiveValue<T = string>(
+  componentName: string,
+  componentProp: string,
+  responsiveProp?: ResponsiveValue<T>
+) {
+  if (!responsiveProp) return {};
+
+  if (typeof responsiveProp === "string") {
+    return {
+      [`--ac-${componentName}-${componentProp}-xs`]: responsiveProp,
+    };
+  }
+
+  return Object.fromEntries(
+    Object.entries(responsiveProp).map(([breakpointAlias, responsiveValue]) => [
+      `--ac-${componentName}-${componentProp}-${breakpointAlias}`,
+      responsiveValue,
     ])
   );
 }

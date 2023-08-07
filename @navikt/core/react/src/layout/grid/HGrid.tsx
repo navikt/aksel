@@ -2,6 +2,7 @@ import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
 import {
   getResponsiveProps,
+  getResponsiveValue,
   ResponsiveProp,
   SpacingScale,
 } from "../utilities/css";
@@ -10,22 +11,15 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Number of columns to display. Can be a number, a string with a unit or tokens for spesific breakpoints.
-   * Sets `grid-template-columns`.
+   * Sets `grid-template-columns, so 'fr, minmax' etc works`.
    * @example
    * columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}
    * @example
    * columns={3}
+   * @example
+   * columns="repeat(3, minmax(0, 1fr))"
    */
-  columns?:
-    | number
-    | string
-    | {
-        xs?: number | string;
-        sm?: number | string;
-        md?: number | string;
-        lg?: number | string;
-        xl?: number | string;
-      };
+  columns?: ResponsiveProp<number | string>;
   /** Spacing between columns. Can be a number, a string with a unit or tokens for spesific breakpoints.
    * @example
    * gap="6"
@@ -37,8 +31,8 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
 export const HGrid = forwardRef<HTMLDivElement, HGridProps>(
   ({ className, columns, gap, ...rest }, ref) => {
     const styles = {
-      ...gridProps(columns),
       ...getResponsiveProps(`hgrid`, "gap", "spacing", gap),
+      ...getResponsiveValue(`hgrid`, "grid-columns", formatGrid(columns)),
     } as React.CSSProperties;
 
     return (
@@ -52,42 +46,31 @@ export const HGrid = forwardRef<HTMLDivElement, HGridProps>(
   }
 );
 
-function gridProps(
-  HGrid?:
-    | number
-    | string
-    | {
-        xs?: number | string;
-        sm?: number | string;
-        md?: number | string;
-        lg?: number | string;
-        xl?: number | string;
-      }
-) {
-  if (!HGrid) {
+function formatGrid(props?: ResponsiveProp<number | string>) {
+  if (!props) {
     return {};
   }
 
-  if (typeof HGrid === "string" || typeof HGrid === "number") {
+  if (typeof props === "string" || typeof props === "number") {
     return {
-      [`--ac-HGrid-template-xs`]: formatHGrid(HGrid),
+      [`--ac-hgrid-template-xs`]: formatHGrid(props),
     };
   }
 
   return Object.fromEntries(
-    Object.entries(HGrid).map(([breakpoint, value]) => [
-      `--ac-HGrid-template-${breakpoint}`,
+    Object.entries(props).map(([breakpoint, value]) => [
+      `--ac-hgrid-template-${breakpoint}`,
       formatHGrid(value),
     ])
   );
 }
 
-const formatHGrid = (HGrid: number | string) => {
-  if (typeof HGrid === "number") {
-    return `repeat(${HGrid}, minmax(0, 1fr))`;
+const formatHGrid = (prop: number | string) => {
+  if (typeof prop === "number") {
+    return `repeat(${prop}, minmax(0, 1fr))`;
   }
 
-  return HGrid;
+  return prop;
 };
 
 export default HGrid;
