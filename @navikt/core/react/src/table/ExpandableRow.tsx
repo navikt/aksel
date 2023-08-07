@@ -91,7 +91,10 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
             "navds-table__expandable-row--expansion-disabled":
               expansionDisabled,
           })}
-          onClick={!expansionDisabled ? onRowClick : undefined}
+          onClick={(e) => {
+          !expansionDisabled && onRowClick(e);
+          rest?.onClick?.(e);
+          }
         >
           {togglePlacement === "right" && children}
           <DataCell
