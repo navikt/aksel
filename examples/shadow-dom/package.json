@@ -10,16 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@navikt/ds-css": "4.7.2",
-    "@navikt/ds-react": "4.7.2",
+    "@navikt/ds-css": "4.8.0",
+    "@navikt/ds-react": "4.8.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^2.1.0",
+    "@vitejs/plugin-react": "^3.1.0",
     "typescript": "^4.8.0",
-    "vite": "^3.1.0"
+    "vite": "^4.2.0"
   }
 }

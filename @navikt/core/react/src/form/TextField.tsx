@@ -31,7 +31,7 @@ export interface TextFieldProps
    * Type of form control. Picking the correct type helps user fill inn their required information
    * @default "text"
    */
-  type?: "email" | "number" | "password" | "tel" | "text" | "url";
+  type?: "email" | "number" | "password" | "tel" | "text" | "url" | "time";
 }
 
 /**

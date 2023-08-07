@@ -80,11 +80,11 @@
 }
 
 .navds-table .navds-checkbox .navds-checkbox__input {
-  top: -12px;
+  top: -0.75rem;
 }
 
 .navds-table .navds-checkbox--small .navds-checkbox__input {
-  top: -6px;
+  top: -0.375rem;
 }
 
 .navds-table .navds-checkbox .navds-checkbox__label {
@@ -172,12 +172,12 @@
 
 .navds-table__toggle-expand-cell {
   padding: 0;
-  width: 56px;
+  width: 3.5rem;
 }
 
 .navds-table--small .navds-table__toggle-expand-cell {
   padding: 0;
-  width: 36px;
+  width: 2.25rem;
 }
 
 .navds-table__toggle-expand-button {

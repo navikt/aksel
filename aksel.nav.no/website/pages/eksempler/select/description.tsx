@@ -4,7 +4,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <Select
-      label="Hvilket land har du bosted i."
+      label="Hvilket land har du bosted i?"
       description="Velg det landet du tilbringer mest tid."
     >
       <option value="">Velg land</option>

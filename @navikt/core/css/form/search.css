@@ -104,8 +104,8 @@
 
 .navds-search__button-search {
   flex-shrink: 0;
-  min-width: 64px;
-  min-height: 32px;
+  min-width: 4rem;
+  min-height: 2rem;
   border-radius: 0;
   border-top-right-radius: var(--a-border-radius-medium);
   border-bottom-right-radius: var(--a-border-radius-medium);
@@ -116,7 +116,7 @@
 }
 
 .navds-form-field--small .navds-search__button-search {
-  min-width: 40px;
+  min-width: 2.5rem;
 }
 
 .navds-search__button-search.navds-button--secondary {
