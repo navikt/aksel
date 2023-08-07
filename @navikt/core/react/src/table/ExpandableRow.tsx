@@ -36,6 +36,11 @@ export interface ExpandableRowProps extends Omit<RowProps, "content"> {
    */
   expansionDisabled?: boolean;
   /**
+   * Makes the whole row clickable
+   * @default false
+   */
+  expandOnRowClick?: boolean;
+  /**
    * The width of the expanded row's internal cell
    * @default 999
    */
@@ -58,6 +63,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       open,
       onOpenChange,
       expansionDisabled = false,
+      expandOnRowClick = false,
       colSpan = 999,
       ...rest
     },
@@ -92,7 +98,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
               expansionDisabled,
           })}
           onClick={(e) => {
-            !expansionDisabled && onRowClick(e);
+            !expansionDisabled && expandOnRowClick && onRowClick(e);
             rest?.onClick?.(e);
           }}
         >

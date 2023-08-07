@@ -253,6 +253,7 @@ export const ClickableRow = {
               onOpenChange={setIsRowOpen1}
               data-testid="row1"
               open={isRowOpen1}
+              expandOnRowClick
             >
               <Table.DataCell>Ola</Table.DataCell>
               <Table.DataCell>
@@ -272,6 +273,7 @@ export const ClickableRow = {
               onOpenChange={setIsRowOpen2}
               data-testid="row2"
               open={isRowOpen2}
+              expandOnRowClick
             >
               <Table.DataCell>Hans</Table.DataCell>
               <Table.DataCell>
