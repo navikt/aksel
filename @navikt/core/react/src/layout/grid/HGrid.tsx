@@ -46,26 +46,26 @@ export const HGrid = forwardRef<HTMLDivElement, HGridProps>(
   }
 );
 
-function formatGrid(props?: ResponsiveProp<number | string>) {
+function formatGrid(
+  props?: ResponsiveProp<number | string>
+): ResponsiveProp<number | string> {
   if (!props) {
     return {};
   }
 
   if (typeof props === "string" || typeof props === "number") {
-    return {
-      [`--ac-hgrid-template-xs`]: formatHGrid(props),
-    };
+    return getColumnValue(props);
   }
 
   return Object.fromEntries(
-    Object.entries(props).map(([breakpoint, value]) => [
-      `--ac-hgrid-template-${breakpoint}`,
-      formatHGrid(value),
+    Object.entries(props).map(([alias, breakPoint]) => [
+      alias,
+      getColumnValue(breakPoint),
     ])
   );
 }
 
-const formatHGrid = (prop: number | string) => {
+const getColumnValue = (prop: number | string) => {
   if (typeof prop === "number") {
     return `repeat(${prop}, minmax(0, 1fr))`;
   }
