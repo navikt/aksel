@@ -32,3 +32,4 @@ export * from "./toggle-group";
 export * from "./tooltip";
 export * from "./typography";
 export * from "./util";
+export * from "./layout/stack";

@@ -52,7 +52,7 @@
 .navds-copybutton__icon {
   font-size: 1.5rem;
   display: flex;
-  margin-left: -4px;
+  margin-left: -0.25rem;
 }
 
 .navds-copybutton__icon:only-child {
@@ -60,7 +60,7 @@
 }
 
 :where(.navds-copybutton--small, .navds-copybutton--xsmall):where(:not(:only-child)) {
-  margin: -2px;
+  margin: -0.125rem;
 }
 
 .navds-copybutton:focus-visible {

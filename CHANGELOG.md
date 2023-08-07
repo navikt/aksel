@@ -1,5 +1,31 @@
 # Changelog
 
+## 4.8.0
+
+### @navikt/ds-css
+
+- Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
+
+### @navikt/ds-react
+
+- Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
+
+## 4.7.4
+
+### @navikt/ds-css
+
+- Oppdatert bruk av REM i komponenter for forbedret utrykk ved font-scaling i browser ([#2126](https://github.com/navikt/aksel/pull/2126))
+
+### @navikt/ds-react
+
+- Textfield: La til type 'time' som tilgjengelig option ([#2137](https://github.com/navikt/aksel/pull/2137))
+
+## 4.7.3
+
+### @navikt/ds-react
+
+- Chips: Removable Chips submitter ikke forms ved klikk lengre ([#2124](https://github.com/navikt/aksel/pull/2124))
+
 ## 4.7.2
 
 ### @navikt/ds-css
@@ -84,6 +110,12 @@
 
 - Shadow-tokens er oppdatert til mer tydeligere varianter ([PR](https://github.com/navikt/aksel/pull/2041))
 
+### @navikt/ds-tailwind
+
+- Shadow-tokens er oppdatert ([PR](https://github.com/navikt/aksel/pull/2041))
+
+- Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600). ([PR](https://github.com/navikt/aksel/pull/2036))
+
 ### @navikt/ds-css
 
 - Shadow-tokens er oppdatert: Datepicker har nå ikke border, Modal bruker shadow-xlarge, LinkCard bruker shadow-xsmall ([PR](https://github.com/navikt/aksel/pull/2041))
@@ -91,12 +123,6 @@
 ### @navikt/ds-react
 
 - Fikset klassenavn brukt for popover i Datepicker og Monthpicker ([PR](https://github.com/navikt/aksel/pull/2041))
-
-### @navikt/ds-tailwind
-
-- Shadow-tokens er oppdatert ([PR](https://github.com/navikt/aksel/pull/2041))
-
-- Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600). ([PR](https://github.com/navikt/aksel/pull/2036))
 
 ## 4.3.0
 
@@ -184,6 +210,10 @@
 
 - Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600). ([PR](https://github.com/navikt/aksel/pull/2036))
 
+### @navikt/ds-tailwind
+
+- :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
+
 ### @navikt/ds-css
 
 - Chips: `neutral` og `action`-varianter av Chips.Toggle. Opt-out mulighet for Checkmark. Oppdatert checkmark-ikon ([PR](https://github.com/navikt/aksel/pull/2035))
@@ -201,10 +231,6 @@
 - La til JSDoc dokumentasjon for alle komponenter ([PR](https://github.com/navikt/aksel/pull/2034))
 
 - Accordion: La til `indent`-prop ([PR](https://github.com/navikt/aksel/pull/2027))
-
-### @navikt/ds-tailwind
-
-- :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
 
 ## 4.0.0
 
@@ -734,6 +760,10 @@
 
 - Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
 
+### @navikt/ds-tailwind
+
+- Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
+
 ### @navikt/ds-css
 
 - Fontlasting: Fonter lastes nå fra NAV-CDN
@@ -743,10 +773,6 @@
 ### @navikt/ds-react
 
 - Fonter blir bruk i all typografi blir nå lastet fra CDN
-
-### @navikt/ds-tailwind
-
-- Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
 
 ## 1.5.10
 
