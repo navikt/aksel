@@ -1,1 +1,1 @@
-export { default as Columns } from "./Columns";
+export { default as HGrid } from "./HGrid";

@@ -1,9 +1,9 @@
 import React from "react";
-import { Columns } from ".";
+import { HGrid } from ".";
 
 export default {
-  title: "ds-react/Columns",
-  component: Columns,
+  title: "ds-react/HGrid",
+  component: HGrid,
   parameters: {
     layout: "fullscreen",
   },
@@ -11,52 +11,52 @@ export default {
 
 export const Default = {
   render: () => (
-    <Columns>
+    <HGrid>
       <Placeholder text="1" />
       <Placeholder text="2" />
       <Placeholder text="3" />
       <Placeholder text="4" />
-    </Columns>
+    </HGrid>
   ),
 };
 
 export const Gap = {
   render: () => (
-    <Columns gap={{ sm: "6" }}>
+    <HGrid gap={{ sm: "6" }}>
       <Placeholder text="1" />
       <Placeholder text="2" />
       <Placeholder text="3" />
       <Placeholder text="4" />
-    </Columns>
+    </HGrid>
   ),
 };
 
 export const Width = {
   render: () => (
-    <Columns gap={{ sm: "6" }} columns={{ sm: 1, lg: "2fr 1fr 2fr 1fr" }}>
+    <HGrid gap={{ sm: "6" }} columns={{ sm: 1, lg: "2fr 1fr 2fr 1fr" }}>
       <Placeholder text="1" />
       <Placeholder text="2" />
       <Placeholder text="3" />
       <Placeholder text="4" />
-    </Columns>
+    </HGrid>
   ),
 };
 
 export const DynamicWidth = {
   render: () => (
-    <Columns
+    <HGrid
       gap={{ sm: "6", lg: "8" }}
       columns={{ sm: "1fr 3fr", lg: "2fr 2fr" }}
     >
       <Placeholder text="1" />
       <Placeholder text="2" />
-    </Columns>
+    </HGrid>
   ),
 };
 
 export const CardsStacking = {
   render: () => (
-    <Columns
+    <HGrid
       gap={{ xs: "4", sm: "6", lg: "8" }}
       columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
     >
@@ -64,7 +64,7 @@ export const CardsStacking = {
       <Placeholder text="2" />
       <Placeholder text="3" />
       <Placeholder text="4" />
-    </Columns>
+    </HGrid>
   ),
 };
 
@@ -78,13 +78,13 @@ export const PageLayout = {
         padding: "2rem 1rem",
       }}
     >
-      <Columns
+      <HGrid
         gap={{ xs: "4", sm: "6", lg: "8" }}
         columns={{ sm: 1, md: "1fr auto" }}
       >
         <Content text="Content" />
         <Sidebar text="Sidebar" />
-      </Columns>
+      </HGrid>
     </div>
   ),
 };
@@ -97,13 +97,13 @@ export const StaticSidebar = {
         padding: "2rem 0rem",
       }}
     >
-      <Columns
+      <HGrid
         gap={{ xs: "4", sm: "6", lg: "8" }}
         columns={{ sm: 1, md: "250px auto" }}
       >
         <Sidebar text="Sidebar" />
         <ContentStatic text="Content" />
-      </Columns>
+      </HGrid>
     </div>
   ),
 };

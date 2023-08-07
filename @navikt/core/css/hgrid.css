@@ -1,0 +1,59 @@
+/* stylelint-disable aksel/design-token-exists */
+.navds-hgrid {
+  --ac-hgrid-grid-columns-xs: initial;
+  --ac-hgrid-grid-columns-sm: initial;
+  --ac-hgrid-grid-columns-md: initial;
+  --ac-hgrid-grid-columns-lg: initial;
+  --ac-hgrid-grid-columns-xl: initial;
+  --__ac-hgrid-grid-columns: initial;
+  --ac-hgrid-gap-xs: initial;
+  --ac-hgrid-gap-sm: initial;
+  --ac-hgrid-gap-md: initial;
+  --ac-hgrid-gap-lg: initial;
+  --ac-hgrid-gap-xl: initial;
+  --__ac-hgrid-gap: var(--ac-hgrid-gap-xs);
+
+  display: grid;
+  grid-template-columns: var(--__ac-hgrid-grid-columns);
+  gap: var(--__ac-hgrid-gap);
+}
+
+@media (min-width: 480px) {
+  .navds-hgrid {
+    --__ac-hgrid-grid-columns: var(--ac-hgrid-grid-columns-sm, var(--ac-hgrid-grid-columns-xs));
+    --__ac-hgrid-gap: var(--ac-hgrid-gap-sm, var(--ac-hgrid-gap-xs));
+  }
+}
+
+@media (min-width: 768px) {
+  .navds-hgrid {
+    --__ac-hgrid-grid-columns: var(--ac-hgrid-grid-columns-md, var(--ac-hgrid-grid-columns-sm, var(--ac-hgrid-grid-columns-xs)));
+    --__ac-hgrid-gap: var(--ac-hgrid-gap-md, var(--ac-hgrid-gap-sm, var(--ac-hgrid-gap-xs)));
+  }
+}
+
+@media (min-width: 1024px) {
+  .navds-hgrid {
+    --__ac-hgrid-grid-columns: var(
+      --ac-hgrid-grid-columns-lg,
+      var(--ac-hgrid-grid-columns-md, var(--ac-hgrid-grid-columns-sm, var(--ac-hgrid-grid-columns-xs)))
+    );
+    --__ac-hgrid-gap: var(--ac-hgrid-gap-lg, var(--ac-hgrid-gap-md, var(--ac-hgrid-gap-sm, var(--ac-hgrid-gap-xs))));
+  }
+}
+
+@media (min-width: 1280px) {
+  .navds-hgrid {
+    --__ac-hgrid-grid-columns: var(
+      --ac-hgrid-grid-columns-xl,
+      var(
+        --ac-hgrid-grid-columns-lg,
+        var(--ac-hgrid-grid-columns-md, var(--ac-hgrid-grid-columns-sm, var(--ac-hgrid-grid-columns-xs)))
+      )
+    );
+    --__ac-hgrid-gap: var(
+      --ac-hgrid-gap-xl,
+      var(--ac-hgrid-gap-lg, var(--ac-hgrid-gap-md, var(--ac-hgrid-gap-sm, var(--ac-hgrid-gap-xs))))
+    );
+  }
+}

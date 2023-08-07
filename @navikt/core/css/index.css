@@ -8,13 +8,13 @@
 @import "content-container.css";
 @import "chat.css";
 @import "chips.css";
-@import "columns.css";
 @import "copybutton.css";
 @import "dropdown.css";
 @import "expansioncard.css";
 @import "guide-panel.css";
 @import "form/index.css";
 @import "help-text.css";
+@import "hgrid.css";
 @import "internalheader.css";
 @import "link.css";
 @import "loader.css";

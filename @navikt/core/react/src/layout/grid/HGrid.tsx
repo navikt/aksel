@@ -39,7 +39,7 @@ export const HGrid = forwardRef<HTMLDivElement, HGridProps>(
       <div
         {...rest}
         ref={ref}
-        className={cl("navds-HGrid", className)}
+        className={cl("navds-hgrid", className)}
         style={styles}
       />
     );
