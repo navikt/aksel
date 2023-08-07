@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Table } from "..";
 import { Button, Checkbox, Link } from "../..";
-// import { within, userEvent } from "@storybook/testing-library";
-// import { expect } from "@storybook/jest";
 
 export default {
   title: "ds-react/Table",
@@ -287,24 +285,4 @@ export const ClickableRow = {
       </>
     );
   },
-  // play: async ({ canvasElement, step }) => {
-  //   const canvas = within(canvasElement);
-  //   const button = canvas.getByText("Mer info");
-  //   const checkbox = canvas.getByText("Sett");
-
-  //   await step("click elements", async () => {
-  //     userEvent.click(button);
-  //     userEvent.click(checkbox);
-  //   });
-
-  //   const row1 = canvas.getByTestId("row1");
-  //   const row2 = canvas.getByTestId("row2");
-
-  //   expect(
-  //     row1.className.includes("navds-table__expandable-row--open")
-  //   ).toBeFalsy();
-  //   expect(
-  //     row2.className.includes("navds-table__expandable-row--open")
-  //   ).toBeFalsy();
-  // },
 };
