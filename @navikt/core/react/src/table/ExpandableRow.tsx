@@ -92,9 +92,9 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
               expansionDisabled,
           })}
           onClick={(e) => {
-          !expansionDisabled && onRowClick(e);
-          rest?.onClick?.(e);
-          }
+            !expansionDisabled && onRowClick(e);
+            rest?.onClick?.(e);
+          }}
         >
           {togglePlacement === "right" && children}
           <DataCell
