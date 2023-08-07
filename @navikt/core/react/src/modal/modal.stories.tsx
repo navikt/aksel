@@ -99,7 +99,7 @@ export const WithUseState = () => {
         onClose={() => setOpen(false)}
       >
         <Modal.Content>
-          This modal is quite small.
+          This modal is indeed quite small.
           {/* Nested modal */}
           <Modal
             open={open2}

@@ -144,7 +144,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
     const internalAriaId = useId();
 
-    if (useContext(ModalContext)) console.error("Modals should not be nested");
+    if (useContext(ModalContext)) {
+      console.error("Modals should not be nested");
+    }
 
     useEffect(() => {
       if (needPolyfill && modalRef.current) {
@@ -189,11 +191,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           {header && (
             <ModalHeader>
               {header.label && (
-                <Detail
-                  as="label"
-                  className="navds-modal__label"
-                  id={internalAriaId}
-                >
+                <Detail className="navds-modal__label" id={internalAriaId}>
                   {header.label}
                 </Detail>
               )}
