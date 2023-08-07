@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.9.0
+
+### @navikt/ds-css
+
+- Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
+
+### @navikt/ds-react
+
+- Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
+
 ## 4.8.0
 
 ### @navikt/ds-css
