@@ -3,4 +3,4 @@
 "@navikt/ds-react": minor
 ---
 
-Adding click event on table row
+Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop 
