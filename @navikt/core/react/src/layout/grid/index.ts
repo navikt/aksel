@@ -1,1 +1,1 @@
-export { default as HGrid } from "./HGrid";
+export { default as HGrid, type HGridProps } from "./HGrid";

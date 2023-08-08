@@ -5,7 +5,7 @@
   --ac-hgrid-grid-columns-md: initial;
   --ac-hgrid-grid-columns-lg: initial;
   --ac-hgrid-grid-columns-xl: initial;
-  --__ac-hgrid-grid-columns: initial;
+  --__ac-hgrid-grid-columns: var(--ac-hgrid-grid-columns-xs);
   --ac-hgrid-gap-xs: initial;
   --ac-hgrid-gap-sm: initial;
   --ac-hgrid-gap-md: initial;
