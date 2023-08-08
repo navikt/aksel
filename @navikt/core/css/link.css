@@ -3,12 +3,22 @@
   text-decoration: underline;
 }
 
+.navds-link.navds-link--inline {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--a-spacing-1);
+}
+
 .navds-link:visited {
   color: var(--ac-link-visited-text, var(--a-text-visited));
 }
 
 .navds-link > svg {
   margin: 0 -0.1em -0.15em;
+}
+
+.navds-link.navds-link--inline > svg {
+  transform: translateY(0.15em);
 }
 
 .navds-link:hover {

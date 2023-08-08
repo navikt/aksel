@@ -19,6 +19,7 @@ const LinkWrapper = ({
   iconLeft = false,
   variant = "action",
   "remove-underline": removeUnderline = false,
+  inline = false,
 }) => (
   <>
     {" "}
@@ -26,6 +27,7 @@ const LinkWrapper = ({
       href="#"
       remove-underline={removeUnderline}
       variant={variant as "action" | "neutral" | "subtle"}
+      inline={inline}
     >
       {iconLeft && (
         <>
@@ -85,7 +87,7 @@ export const Default = {
   },
 };
 
-export const Inline = {
+export const InlineInsideBodyLong = {
   render: ({ iconLeft, iconRight }) => {
     return (
       <div
@@ -102,12 +104,14 @@ export const Inline = {
             remove-underline
             iconLeft={iconLeft}
             iconRight={iconRight}
+            inline={true}
           />
           Eiusmod aute.
           <LinkWrapper
             remove-underline
             iconLeft={iconLeft}
             iconRight={iconRight}
+            inline={true}
           />
           Culpa sit aute est duis minim in in voluptate velit Incididunt laborum
           nisi nisi Lorem officia adipisicing non veniam
@@ -139,6 +143,26 @@ export const Inline = {
           </LinkWrapper>
           {"     "}spacing.
         </BodyLong>
+      </div>
+    );
+  },
+  args: {
+    iconLeft: false,
+    iconRight: false,
+  },
+};
+
+export const InlineFlex = {
+  render: ({ iconLeft, iconRight }) => {
+    return (
+      <div>
+        <LinkWrapper
+          remove-underline
+          iconLeft={iconLeft}
+          iconRight={iconRight}
+          inline={true}
+        />
+        Eiusmod aute.
       </div>
     );
   },

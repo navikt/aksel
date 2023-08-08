@@ -8,9 +8,14 @@ export interface LinkProps
    * Inverts when the underline appears. If this is true,
    * the underline does not appear by default, but does appear when the link is hovered.
    * This makes it more suitable for use when inlined in text.
+   * @default true
+   */
+  underline?: boolean;
+  /*
+   * Wether or not to render the link as a flex-inline element.
    * @default false
    */
-  "remove-underline"?: boolean;
+  inline?: boolean;
   /**
    * Variant of the component to use.
    * @default "action"
@@ -41,8 +46,9 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
       {
         as: Component = "a",
         className,
-        "remove-underline": removeUnderline = false,
+        underline = true,
         variant = "action",
+        inline,
         ...rest
       },
       ref
@@ -51,7 +57,8 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         {...rest}
         ref={ref}
         className={cl("navds-link", className, `navds-link--${variant}`, {
-          "navds-link--remove-underline": removeUnderline,
+          "navds-link--remove-underline": !underline,
+          "navds-link--inline": inline,
         })}
       />
     )
