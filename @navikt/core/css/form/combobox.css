@@ -9,9 +9,10 @@
   position: relative;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
-  border: 1px solid var(--a-border-default);
+  padding: calc(var(--a-spacing-2) - 2px) var(--a-spacing-2);
 }
 
 .navds-combobox__wrapper-inner > :first-child {
@@ -33,6 +34,7 @@
 
 .navds-combobox__selected-options {
   gap: var(--a-spacing-2);
+  align-items: center;
 }
 
 .navds-combobox__selected-options > li {
@@ -67,6 +69,7 @@
   margin: 0;
   min-width: 10ch;
   width: 100%;
+  height: 2rem;
 }
 
 .navds-combobox__input:focus-visible {
