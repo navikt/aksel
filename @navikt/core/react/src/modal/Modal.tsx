@@ -171,6 +171,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         ref={mergedRef}
         className={cl("navds-modal", className, {
           "navds-modal--polyfilled": needPolyfill,
+          "navds-modal--open": open,
         })}
         onCancel={(event) => {
           // FYI: onCancel fires when you press Esc

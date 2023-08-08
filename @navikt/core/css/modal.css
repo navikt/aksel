@@ -112,3 +112,36 @@
 .navds-modal__footer :nth-last-child(2) {
   margin-left: auto;
 }
+
+.navds-modal--open {
+  animation: akselModalFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
+}
+
+.navds-modal--open::backdrop {
+  animation: akselModalBackdropFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
+}
+
+@keyframes akselModalFadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, calc(5% + 4px), 0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes akselModalBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
