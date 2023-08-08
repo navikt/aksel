@@ -4,7 +4,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <Select
-      label="Hvilket land har du bosted i."
+      label="Hvilket land har du bosted i?"
       error="Adressen matcher ikke landet du har satt som bosted."
     >
       <option value="">Velg land</option>

@@ -1,5 +1,78 @@
 # @navikt/ds-react
 
+## 4.9.0
+
+### Minor Changes
+
+- Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.9.0
+
+## 4.8.0
+
+### Minor Changes
+
+- Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.8.0
+
+## 4.7.4
+
+### Patch Changes
+
+- Textfield: La til type 'time' som tilgjengelig option ([#2137](https://github.com/navikt/aksel/pull/2137))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.4
+
+## 4.7.3
+
+### Patch Changes
+
+- Chips: Removable Chips submitter ikke forms ved klikk lengre ([#2124](https://github.com/navikt/aksel/pull/2124))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.3
+
+## 4.7.2
+
+### Patch Changes
+
+- Stepper: Fikset `hotizontal`-bug når step var `completed` ([#2116](https://github.com/navikt/aksel/pull/2116))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.2
+
+## 4.7.1
+
+### Patch Changes
+
+- Datepicker: Fikset bug ved bruk dynamisk oppdatering av minDate. Vist `month` vil nå alltid være oppdatert når datepicker åpnes ([#2117](https://github.com/navikt/aksel/pull/2117))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.1
+
+## 4.7.0
+
+### Minor Changes
+
+- Ny komponent Combobox! ([#1868](https://github.com/navikt/aksel/pull/1868))
+
+### Patch Changes
+
+- Timeline: Har nå egen `axisLabelTemplates`-prop for axixlabel formatering ([#2109](https://github.com/navikt/aksel/pull/2109))
+
+- Combobox post-release tweaks ([#2112](https://github.com/navikt/aksel/pull/2112))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.0
+
 ## 4.6.1
 
 ### Patch Changes

@@ -16,7 +16,7 @@
   display: table-row;
 }
 
-.navds-table__body .navds-table__row--shade-on-hover:hover {
+.navds-table__body .navds-table__row--shade-on-hover:not(.navds-table__expandable-row--expansion-disabled):hover {
   background-color: var(--ac-table-row-hover, var(--a-bg-subtle));
 }
 
@@ -80,11 +80,11 @@
 }
 
 .navds-table .navds-checkbox .navds-checkbox__input {
-  top: -12px;
+  top: -0.75rem;
 }
 
 .navds-table .navds-checkbox--small .navds-checkbox__input {
-  top: -6px;
+  top: -0.375rem;
 }
 
 .navds-table .navds-checkbox .navds-checkbox__label {
@@ -154,6 +154,10 @@
   transition: border-bottom-color 190ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
 }
 
+.navds-table__expandable-row:not(.navds-table__expandable-row--expansion-disabled):hover {
+  cursor: pointer;
+}
+
 .navds-table__expandable-row--open .navds-table__data-cell {
   border-bottom-color: transparent;
 }
@@ -168,12 +172,12 @@
 
 .navds-table__toggle-expand-cell {
   padding: 0;
-  width: 56px;
+  width: 3.5rem;
 }
 
 .navds-table--small .navds-table__toggle-expand-cell {
   padding: 0;
-  width: 36px;
+  width: 2.25rem;
 }
 
 .navds-table__toggle-expand-button {
