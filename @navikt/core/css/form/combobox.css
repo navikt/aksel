@@ -243,6 +243,10 @@
   background-color: var(--ac-combobox-list-item-selected-bg, var(--a-surface-selected));
 }
 
+.navds-combobox__list-item--selected p {
+  font-weight: var(--a-font-weight-bold);
+}
+
 .navds-combobox__list-item--selected.navds-combobox__list-item--focus,
 .navds-combobox__list-item--selected:hover {
   background-color: var(--ac-combobox-list-item-selected-hover-bg, var(--a-surface-action-subtle-hover));
