@@ -11,7 +11,7 @@ export interface LinkProps
    * @default true
    */
   underline?: boolean;
-  /*
+  /**
    * Wether or not to render the link as a flex-inline element.
    * @default false
    */
