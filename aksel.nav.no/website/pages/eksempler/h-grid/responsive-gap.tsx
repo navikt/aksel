@@ -22,7 +22,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 3,
   desc: "Med responsiv gap kan man dynamiskt tilpasse spacing basert på brekkpunktene våre.",
 };
 

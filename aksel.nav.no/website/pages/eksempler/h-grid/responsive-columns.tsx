@@ -22,7 +22,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 2,
   desc: "Med responsive kolonner kan man dynamiskt tilpasse dem basert på brekkpunktene våre.",
 };
 

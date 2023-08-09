@@ -25,7 +25,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 1,
   desc: "Columns støtter både statisk antall kolonner med 'number' og mer fleksible kolonner med 'string'. ",
 };
 
