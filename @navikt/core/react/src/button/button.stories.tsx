@@ -1,7 +1,6 @@
 import { StarIcon } from "@navikt/aksel-icons";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "./index";
-import { Tabs, VStack } from "..";
 
 export default {
   title: "ds-react/Button",
@@ -149,8 +148,9 @@ export const Loading = {
     </div>
   ),
 
-  args: { chromatic: { disableSnapshot: true } },
-  chromatic: { disableSnapshot: true },
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };
 
 export const Icon = () => (
@@ -276,40 +276,7 @@ export const LoadingWithAs = {
     </div>
   ),
 
-  args: { chromatic: { disableSnapshot: true } },
-  chromatic: { disableSnapshot: true },
-};
-
-export const LoadingDemo = () => {
-  const [l, setL] = useState(false);
-
-  const handleLoading = () => {
-    setL(true);
-    setTimeout(() => setL(false), 2000);
-  };
-
-  return (
-    <Tabs defaultValue="logg">
-      <Tabs.List>
-        <Tabs.Tab value="logg" label="Logg" />
-        <Tabs.Tab value="inbox" label="Inbox" />
-      </Tabs.List>
-      <Tabs.Panel value="logg" className="h-24 w-full bg-gray-50 p-4">
-        <VStack gap="6">
-          <button onClick={handleLoading}>Toggle loading</button>
-          <Button loading={l} onClick={handleLoading}>
-            Testknapp 1
-          </Button>
-        </VStack>
-      </Tabs.Panel>
-      <Tabs.Panel value="inbox" className="h-24 w-full bg-gray-50 p-4">
-        <VStack gap="6">
-          <button onClick={handleLoading}>Toggle loading</button>
-          <Button loading={l} onClick={handleLoading}>
-            Testknapp 2
-          </Button>
-        </VStack>
-      </Tabs.Panel>
-    </Tabs>
-  );
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };
