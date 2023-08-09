@@ -78,10 +78,15 @@ export interface ComboboxProps
    * Callback function triggered whenever an option is selected or de-selected
    *
    * @param option
-   * @param isSelected
+   * @param isSelected - Whether the option has been selected or unselected
+   * @param isAddedByUser - Whether the option comes from user input, instead of from the list
    * @returns
    */
-  onToggleSelected?: (option: string, isSelected: boolean) => void;
+  onToggleSelected?: (
+    option: string,
+    isSelected: boolean,
+    isAddedByUser: boolean
+  ) => void;
   /**
    * List of selected options.
    *

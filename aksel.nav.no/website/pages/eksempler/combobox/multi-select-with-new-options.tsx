@@ -20,6 +20,7 @@ export const Example = () => {
   return (
     <div>
       <UNSAFE_Combobox
+        allowNewValues
         label="Hva er dine favorittdrikker? Legg gjerne til flere alternativer."
         options={initialOptions}
         isMultiSelect
