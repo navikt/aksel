@@ -1,6 +1,6 @@
 ---
-"@navikt/ds-css": major
-"@navikt/ds-react": major
+"@navikt/ds-css": minor
+"@navikt/ds-react": minor
 ---
 
 :sparkles: Add remove-underline prop to Link (inline)
