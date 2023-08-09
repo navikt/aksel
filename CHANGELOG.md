@@ -1,10 +1,10 @@
 # Changelog
 
-## 4.10.1
+## 4.10.2
 
 ### @navikt/ds-css
 
-- Link: Fikset visited farger og inline SVG-reset ved bruk av tailwind ([`d3bd1202e`](https://github.com/navikt/aksel/commit/d3bd1202eddb23dd3f1f09c3e4086ff3b19737d6))
+- Link: Fikset visited farger og inline SVG-reset ved bruk av tailwind
 
 ## 4.10.0
 
@@ -144,9 +144,9 @@
 
 ## 4.4.0
 
-### @navikt/ds-tokens
+### @navikt/ds-css
 
-- Shadow-tokens er oppdatert til mer tydeligere varianter ([PR](https://github.com/navikt/aksel/pull/2041))
+- Shadow-tokens er oppdatert: Datepicker har nå ikke border, Modal bruker shadow-xlarge, LinkCard bruker shadow-xsmall ([PR](https://github.com/navikt/aksel/pull/2041))
 
 ### @navikt/ds-tailwind
 
@@ -154,9 +154,9 @@
 
 - Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600). ([PR](https://github.com/navikt/aksel/pull/2036))
 
-### @navikt/ds-css
+### @navikt/ds-tokens
 
-- Shadow-tokens er oppdatert: Datepicker har nå ikke border, Modal bruker shadow-xlarge, LinkCard bruker shadow-xsmall ([PR](https://github.com/navikt/aksel/pull/2041))
+- Shadow-tokens er oppdatert til mer tydeligere varianter ([PR](https://github.com/navikt/aksel/pull/2041))
 
 ### @navikt/ds-react
 
@@ -238,25 +238,21 @@
 
 ## 4.1.0
 
-### @navikt/aksel-stylelint
+### @navikt/ds-css
 
-- Deprecated klassenavn `navds-chips--icon-left` ([PR](https://github.com/navikt/aksel/pull/2035))
+- Chips: `neutral` og `action`-varianter av Chips.Toggle. Opt-out mulighet for Checkmark. Oppdatert checkmark-ikon ([PR](https://github.com/navikt/aksel/pull/2035))
+
+- Alle description-felter på fieldsets har nå `text-subtle` som farge. ([PR](https://github.com/navikt/aksel/pull/2036))
+
+### @navikt/ds-tailwind
+
+- :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
 
 ### @navikt/ds-tokens
 
 - :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
 
 - Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600). ([PR](https://github.com/navikt/aksel/pull/2036))
-
-### @navikt/ds-tailwind
-
-- :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
-
-### @navikt/ds-css
-
-- Chips: `neutral` og `action`-varianter av Chips.Toggle. Opt-out mulighet for Checkmark. Oppdatert checkmark-ikon ([PR](https://github.com/navikt/aksel/pull/2035))
-
-- Alle description-felter på fieldsets har nå `text-subtle` som farge. ([PR](https://github.com/navikt/aksel/pull/2036))
 
 ### @navikt/ds-react
 
@@ -270,13 +266,11 @@
 
 - Accordion: La til `indent`-prop ([PR](https://github.com/navikt/aksel/pull/2027))
 
+### @navikt/aksel-stylelint
+
+- Deprecated klassenavn `navds-chips--icon-left` ([PR](https://github.com/navikt/aksel/pull/2035))
+
 ## 4.0.0
-
-### @navikt/aksel
-
-- Codemod for migrering av Datepicker/Monthpicker ut av Beta. `npx @navikt/aksel codemod v4-date` ([PR](https://github.com/navikt/aksel/pull/2026))
-
-- Codemods for migrering fra `@navikt/ds-react-internal` til `@navikt/ds-react` [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h3b8538e1981d) ([PR](https://github.com/navikt/aksel/pull/2026))
 
 ### @navikt/ds-css
 
@@ -294,6 +288,12 @@
 
 - Komponenter i `@navikt/ds-react-internal` er flyttet over til `@navikt/ds-react`. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h3b8538e1981d) ([PR](https://github.com/navikt/aksel/pull/2026))
 
+### @navikt/aksel
+
+- Codemod for migrering av Datepicker/Monthpicker ut av Beta. `npx @navikt/aksel codemod v4-date` ([PR](https://github.com/navikt/aksel/pull/2026))
+
+- Codemods for migrering fra `@navikt/ds-react-internal` til `@navikt/ds-react` [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h3b8538e1981d) ([PR](https://github.com/navikt/aksel/pull/2026))
+
 ## 3.4.2
 
 ### @navikt/aksel-stylelint
@@ -308,10 +308,6 @@
 
 ## 3.4.0
 
-### @navikt/aksel-stylelint
-
-- Stylelint-pakke for Aksel ([PR](https://github.com/navikt/aksel/pull/1973))
-
 ### @navikt/ds-css
 
 - Tag: `moderate`-variant ([PR](https://github.com/navikt/aksel/pull/2010))
@@ -319,6 +315,10 @@
 ### @navikt/ds-react
 
 - Tag: `moderate`-variant ([PR](https://github.com/navikt/aksel/pull/2010))
+
+### @navikt/aksel-stylelint
+
+- Stylelint-pakke for Aksel ([PR](https://github.com/navikt/aksel/pull/1973))
 
 ## 3.3.1
 
@@ -608,13 +608,13 @@
 
 ## 2.5.0
 
-### @navikt/ds-tokens
-
-- Breakpoint-tokens lagt til ([PR](https://github.com/navikt/aksel/pull/1832))
-
 ### @navikt/ds-tailwind
 
 - Breakpoint-tokens er lagt til. Overskriver native tailwind-breakpoints ([PR](https://github.com/navikt/aksel/pull/1832))
+
+### @navikt/ds-tokens
+
+- Breakpoint-tokens lagt til ([PR](https://github.com/navikt/aksel/pull/1832))
 
 ## 2.4.3
 
@@ -662,17 +662,17 @@
 
 ## 2.2.0
 
-### @navikt/ds-tokens
-
-- Justeringer av semantiske fargetokens, statusfarger nå mer tydelig ([PR](https://github.com/navikt/aksel/pull/1787))
-
-- Oppdatert neutral-tokens ([PR](https://github.com/navikt/aksel/pull/1789))
-
 ### @navikt/ds-css
 
 - ToggleGroup: `Neutral`-variant. ([PR](https://github.com/navikt/aksel/pull/1789))
 
 - Button: `Neutral`-variant.
+
+### @navikt/ds-tokens
+
+- Justeringer av semantiske fargetokens, statusfarger nå mer tydelig ([PR](https://github.com/navikt/aksel/pull/1787))
+
+- Oppdatert neutral-tokens ([PR](https://github.com/navikt/aksel/pull/1789))
 
 ### @navikt/ds-react
 
@@ -794,19 +794,19 @@
 
 ## 2.0.0
 
-### @navikt/ds-tokens
-
-- Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
-
-### @navikt/ds-tailwind
-
-- Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
-
 ### @navikt/ds-css
 
 - Fontlasting: Fonter lastes nå fra NAV-CDN
 
 - Tokens: Alle komponenter bruker nå semantiske tokens for som standard, med innebygd støtte for komponent-spesifikke tokens.
+
+### @navikt/ds-tailwind
+
+- Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
+
+### @navikt/ds-tokens
+
+- Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
 
 ### @navikt/ds-react
 

@@ -15,11 +15,7 @@
   margin: 0.1em 0.1em -0.1em;
   transform: translateY(0.05em);
   display: inline;
-}
-
-.navds-link:visited {
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  color: var(--ac-link-visited-text);
+  vertical-align: baseline;
 }
 
 .navds-link:hover {
