@@ -29,8 +29,9 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const HGrid = forwardRef<HTMLDivElement, HGridProps>(
-  ({ className, columns, gap, ...rest }, ref) => {
+  ({ className, columns, gap, style, ...rest }, ref) => {
     const styles: React.CSSProperties = {
+      ...style,
       ...getResponsiveProps(`hgrid`, "gap", "spacing", gap),
       ...getResponsiveValue(`hgrid`, "grid-columns", formatGrid(columns)),
     };
