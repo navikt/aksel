@@ -11,12 +11,15 @@
 }
 
 .navds-link.navds-link--inline-text > svg {
+  /* stylelint-disable-next-line plugin/declaration-block-no-ignored-properties */
   margin: 0.1em 0.1em -0.1em;
   transform: translateY(0.05em);
+  display: inline;
 }
 
 .navds-link:visited {
-  color: var(--ac-link-visited-text, var(--a-text-visited));
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  color: var(--ac-link-visited-text);
 }
 
 .navds-link:hover {

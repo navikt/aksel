@@ -7,7 +7,7 @@ const Example = () => {
     <BodyLong>
       Officia incididunt Culpa sit aute est duis minim in in voluptate velit
       Incididunt laborum nisi nisi Lorem officia adipisicing non veniam{" "}
-      <Link href="#" inlineText={true}>
+      <Link href="#" inlineText>
         lenke til ny side
         <PlusCircleFillIcon aria-hidden />
       </Link>{" "}
