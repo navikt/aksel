@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.10.1
+
+### @navikt/ds-css
+
+- Link: Fikset visited farger og inline SVG-reset ved bruk av tailwind ([`d3bd1202e`](https://github.com/navikt/aksel/commit/d3bd1202eddb23dd3f1f09c3e4086ff3b19737d6))
+
 ## 4.10.0
 
 ### @navikt/ds-css
