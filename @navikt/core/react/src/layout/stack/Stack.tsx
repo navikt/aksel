@@ -53,12 +53,12 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       ref
     ) => {
       const style = {
-        "--ac-stack-direction": direction,
-        "--ac-stack-align": align,
-        "--ac-stack-justify": justify,
-        "--ac-stack-wrap": wrap ? "wrap" : "nowrap",
-        ...getResponsiveProps(`stack`, "gap", "spacing", gap),
         ..._style,
+        "--__ac-stack-direction": direction,
+        "--__ac-stack-align": align,
+        "--__ac-stack-justify": justify,
+        "--__ac-stack-wrap": wrap ? "wrap" : "nowrap",
+        ...getResponsiveProps(`stack`, "gap", "spacing", gap),
       } as React.CSSProperties;
 
       return (
