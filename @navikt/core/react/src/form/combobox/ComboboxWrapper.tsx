@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 type ComboboxWrapperProps = {
   children: any;
@@ -23,6 +23,7 @@ const ComboboxWrapper = ({
   toggleListButtonRef,
 }: ComboboxWrapperProps) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const [hasFocusWithin, setHasFocusWithin] = useState(false);
 
   function onFocusInsideWrapper(e) {
     if (
@@ -30,12 +31,14 @@ const ComboboxWrapper = ({
       toggleListButtonRef?.current !== e.target
     ) {
       toggleIsListOpen(true);
+      setHasFocusWithin(true);
     }
   }
 
   function onBlurWrapper(e) {
     if (!wrapperRef.current?.contains(e.relatedTarget)) {
       toggleIsListOpen(false);
+      setHasFocusWithin(false);
     }
   }
 
@@ -50,6 +53,7 @@ const ComboboxWrapper = ({
         {
           "navds-search--error": hasError,
           "navds-search--disabled": !!inputProps.disabled,
+          "navds-combobox--focused": hasFocusWithin,
         }
       )}
       onFocus={onFocusInsideWrapper}

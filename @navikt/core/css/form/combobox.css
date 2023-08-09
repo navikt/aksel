@@ -104,6 +104,17 @@
   }
 }
 
+@supports not selector(:has) {
+  .navds-combobox--focused .navds-combobox__wrapper-inner {
+    box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
+    box-shadow: var(--a-shadow-focus);
+  }
+
+  .navds-combobox--focused .navds-combobox__wrapper-inner.navds-combobox__wrapper-inner--virtually-unfocused {
+    box-shadow: none;
+  }
+}
+
 .navds-combobox__button-clear {
   border-radius: var(--a-border-radius-medium);
   color: var(--ac-combobox-clear-icon, var(--a-text-subtle));
