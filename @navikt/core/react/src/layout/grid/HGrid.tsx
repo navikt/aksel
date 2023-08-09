@@ -11,7 +11,7 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Number of columns to display. Can be a number, a string with a unit or tokens for spesific breakpoints.
-   * Sets `grid-template-columns, so 'fr, minmax' etc works`.
+   * Sets `grid-template-columns`, so `fr`, `minmax` etc. works.
    * @example
    * columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}
    * @example
