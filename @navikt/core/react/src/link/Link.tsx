@@ -5,7 +5,7 @@ import { OverridableComponent } from "../util/OverridableComponent";
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
-   * Inverts when the underline appears. If this is true,
+   * Inverts when the underline appears. If this is false,
    * the underline does not appear by default, but does appear when the link is hovered.
    * This makes it more suitable for use when inlined in text.
    * @default true
@@ -66,7 +66,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         ref={ref}
         className={cl("navds-link", className, `navds-link--${variant}`, {
           "navds-link--remove-underline": !underline,
-          "navds-link--inline": inlineText,
+          "navds-link--inline-text": inlineText,
         })}
       />
     )

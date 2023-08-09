@@ -18,16 +18,16 @@ const LinkWrapper = ({
   iconRight = false,
   iconLeft = false,
   variant = "action",
-  "remove-underline": removeUnderline = false,
-  inline = false,
+  underline = false,
+  inlineText = true,
 }) => (
   <>
     {" "}
     <Link
       href="#"
-      remove-underline={removeUnderline}
+      underline={underline}
       variant={variant as "action" | "neutral" | "subtle"}
-      inline={inline}
+      inlineText={inlineText}
     >
       {iconLeft && (
         <>
@@ -50,7 +50,7 @@ export const Default = {
     const LinkD = () => (
       <>
         {" "}
-        <Link href="#" remove-underline={inline}>
+        <Link href="#" underline={!inline} inlineText={inline}>
           {icon && <PlusCircleFillIcon />}Ex aliqua incididunt
           {icon && <PlusCircleFillIcon />}
         </Link>{" "}
@@ -100,69 +100,27 @@ export const InlineInsideBodyLong = {
       >
         <style>{`.storybook-custom-spacing { white-space: pre;}`}</style>
         <BodyLong>
-          <LinkWrapper
-            remove-underline
-            iconLeft={iconLeft}
-            iconRight={iconRight}
-            inline={true}
-          />
+          <LinkWrapper underline iconLeft={iconLeft} iconRight={iconRight} />
           Eiusmod aute.
-          <LinkWrapper
-            remove-underline
-            iconLeft={iconLeft}
-            iconRight={iconRight}
-            inline={true}
-          />
+          <LinkWrapper underline iconLeft={iconLeft} iconRight={iconRight} />
           Culpa sit aute est duis minim in in voluptate velit Incididunt laborum
           nisi nisi Lorem officia adipisicing non veniam
-          <LinkWrapper
-            remove-underline
-            iconLeft={iconLeft}
-            iconRight={iconRight}
-          >
+          <LinkWrapper underline iconLeft={iconLeft} iconRight={iconRight}>
             blah blah blah blah blah blah blah blah blah blah blah blah blah
             blah blah blah blah blah blah blah blah
           </LinkWrapper>
           dolor eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
-          <LinkWrapper
-            remove-underline
-            iconLeft={iconLeft}
-            iconRight={iconRight}
-          >
+          <LinkWrapper underline iconLeft={iconLeft} iconRight={iconRight}>
             Link
           </LinkWrapper>
         </BodyLong>
         <BodyLong className="storybook-custom-spacing">
           Custom{"   "}
-          <LinkWrapper
-            remove-underline
-            iconLeft={iconLeft}
-            iconRight={iconRight}
-          >
+          <LinkWrapper underline iconLeft={iconLeft} iconRight={iconRight}>
             link
           </LinkWrapper>
           {"     "}spacing.
         </BodyLong>
-      </div>
-    );
-  },
-  args: {
-    iconLeft: false,
-    iconRight: false,
-  },
-};
-
-export const InlineFlex = {
-  render: ({ iconLeft, iconRight }) => {
-    return (
-      <div>
-        <LinkWrapper
-          remove-underline
-          iconLeft={iconLeft}
-          iconRight={iconRight}
-          inline={true}
-        />
-        Eiusmod aute.
       </div>
     );
   },

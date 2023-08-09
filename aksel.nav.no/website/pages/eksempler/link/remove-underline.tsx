@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <BodyLong>
       Officia incididunt{" "}
-      <Link href="#" remove-underline>
+      <Link href="#" underline={false}>
         lenke til ny side
       </Link>{" "}
       occaecat commodo id ad aliquip.

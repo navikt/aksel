@@ -1,24 +1,22 @@
 .navds-link {
   color: var(--ac-link-text, var(--a-text-action));
   text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--a-spacing-1);
 }
 
-.navds-link.navds-link--inline {
-  display: inline-flex;
-  align-items: baseline;
-  gap: var(--a-spacing-1);
+.navds-link.navds-link--inline-text {
+  display: inline;
+}
+
+.navds-link.navds-link--inline-text > svg {
+  margin: 0.1em 0.1em -0.1em;
+  transform: translateY(0.05em);
 }
 
 .navds-link:visited {
   color: var(--ac-link-visited-text, var(--a-text-visited));
-}
-
-.navds-link > svg {
-  margin: 0 -0.1em -0.15em;
-}
-
-.navds-link.navds-link--inline > svg {
-  transform: translateY(0.15em);
 }
 
 .navds-link:hover {
