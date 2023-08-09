@@ -3,5 +3,5 @@
 "@navikt/ds-react": minor
 ---
 
-Link: La til 'underline' og 'inlineText'-prop
+Link: La til 'variant', 'underline' og 'inlineText'-prop
 
