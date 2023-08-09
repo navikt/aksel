@@ -1,25 +1,47 @@
 import React from "react";
 import { HGrid } from ".";
 
+const columnsVariants = {
+  Number: "columnNumber",
+  String: "columnString",
+  Object: "columnObject",
+};
+
 export default {
   title: "ds-react/HGrid",
   component: HGrid,
   parameters: {
     layout: "fullscreen",
   },
+  argTypes: {
+    columnsType: {
+      defaultValue: Object.keys(columnsVariants)[0],
+      options: Object.keys(columnsVariants),
+      control: { type: "radio" },
+    },
+  },
 };
+
+/* const getColumnsProp = () */
 
 export const Default = {
   render: (props) => (
-    <HGrid {...props}>
+    <HGrid
+      gap={props?.gap ?? 4}
+      columns={props[columnsVariants[props.columnsType]]}
+    >
       <Placeholder text="1" />
       <Placeholder text="2" />
       <Placeholder text="3" />
       <Placeholder text="4" />
     </HGrid>
   ),
-  columns: 0,
-  gap: "0",
+  args: {
+    columnNumber: 4,
+    columnObject: { xs: 1, md: 4 },
+    columnString: "repeat(3, minmax(0, 1fr))",
+    gap: "4",
+  },
 };
 
 export const Gap = {
