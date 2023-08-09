@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.10.0
+
+### @navikt/ds-css
+
+- Link: La til 'variant', 'underline' og 'inlineText'-prop ([#2093](https://github.com/navikt/aksel/pull/2093))
+
+### @navikt/ds-react
+
+- Link: La til 'variant', 'underline' og 'inlineText'-prop ([#2093](https://github.com/navikt/aksel/pull/2093))
+
 ## 4.9.1
 
 ### @navikt/ds-css
