@@ -11,7 +11,6 @@ const Example = () => {
 
       <Modal
         open={open}
-        aria-label="Modal demo"
         onClose={() => setOpen(false)}
         aria-labelledby="modal-heading"
       >

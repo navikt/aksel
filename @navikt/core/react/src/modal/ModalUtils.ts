@@ -17,3 +17,23 @@ export function getCloseHandler(
   }
   return () => modalRef.current?.close();
 }
+
+export function getAriaProps(
+  props: React.AriaAttributes,
+  header: ModalProps["header"],
+  ariaLabelId?: string,
+  ariaDescId?: string
+) {
+  const ret: React.AriaAttributes = {};
+  if (!props["aria-labelledby"] && !props["aria-label"] && header) {
+    ret["aria-labelledby"] = ariaLabelId;
+  }
+  if (
+    !props["aria-describedby"] &&
+    !props["aria-description"] &&
+    header?.label
+  ) {
+    ret["aria-describedby"] = ariaDescId;
+  }
+  return ret;
+}

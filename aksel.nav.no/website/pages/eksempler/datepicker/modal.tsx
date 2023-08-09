@@ -16,7 +16,7 @@ const Example = () => {
     <>
       <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
-      <Modal ref={ref} aria-label="Modal demo" header={{ heading: "Heading" }}>
+      <Modal ref={ref} header={{ heading: "Heading" }}>
         <Modal.Content className="min-h-96 min-w-96 max-w-full">
           <DatePicker {...datepickerProps} strategy="fixed">
             <DatePicker.Input {...inputProps} label="Velg dato" />

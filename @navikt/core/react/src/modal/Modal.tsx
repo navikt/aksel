@@ -11,7 +11,7 @@ import { Detail, Heading, mergeRefs, useId } from "..";
 import ModalContent from "./ModalContent";
 import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
-import { ModalContext, getCloseHandler } from "./ModalUtils";
+import { ModalContext, getCloseHandler, getAriaProps } from "./ModalUtils";
 
 const needPolyfill =
   typeof window !== "undefined" && window.HTMLDialogElement === undefined;
@@ -66,8 +66,8 @@ export interface ModalProps
   className?: string;
   /**
    * Sets aria-labelledby on modal.
-   * No need to set this manually if the `header` prop is used. A reference to `header.label` or `header.heading` will be created automatically.
-   * @warning If not using `header`, you should set either `aria-labelledby`, `aria-describedby` or `aria-label`.
+   * No need to set this manually if the `header` prop is used. A reference to `header.heading` will be created automatically.
+   * @warning If not using `header`, you should set either `aria-labelledby` or `aria-label`.
    */
   "aria-labelledby"?: string;
 }
@@ -114,7 +114,6 @@ interface ModalComponent
  * <Modal
  *   open={open}
  *   onClose={() => setOpen(false)}
- *   aria-label="Example modal"
  *   aria-labelledby="modal-heading"
  * >
  *   <Modal.Header>
@@ -135,14 +134,14 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       className,
       onBeforeClose,
       onCancel,
-      "aria-labelledby": ariaLabelledBy,
       ...rest
     }: ModalProps,
     ref
   ) => {
     const modalRef = useRef<HTMLDialogElement>(null);
     const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
-    const internalAriaId = useId();
+    const ariaLabelId = useId();
+    const ariaDescId = useId();
 
     if (useContext(ModalContext)) {
       console.error("Modals should not be nested");
@@ -178,9 +177,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
             event.preventDefault();
           } else if (onCancel) onCancel(event);
         }}
-        aria-labelledby={
-          ariaLabelledBy ?? (header ? internalAriaId : undefined)
-        }
+        {...getAriaProps(rest, header, ariaLabelId, ariaDescId)}
         {...rest}
       >
         <ModalContext.Provider
@@ -191,14 +188,14 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           {header && (
             <ModalHeader>
               {header.label && (
-                <Detail className="navds-modal__label" id={internalAriaId}>
+                <Detail className="navds-modal__label" id={ariaDescId}>
                   {header.label}
                 </Detail>
               )}
               <Heading
                 size={header.size ?? "medium"}
                 level="2"
-                id={header.label ? undefined : internalAriaId}
+                id={ariaLabelId}
               >
                 <span className="navds-modal__header-icon">{header.icon}</span>
                 {header.heading}

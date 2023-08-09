@@ -9,7 +9,7 @@ const Example = () => {
     <div className="py-12">
       <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
-      <Modal ref={ref} aria-label="Modal demo" header={{ heading: "Skjema" }}>
+      <Modal ref={ref} header={{ heading: "Skjema" }}>
         <Modal.Content>
           <form method="dialog" id="skjema" onSubmit={(e) => alert("onSubmit")}>
             <TextField label="Har du noen tilbakemeldinger?" />
