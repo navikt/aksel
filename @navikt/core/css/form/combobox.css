@@ -88,7 +88,7 @@
 }
 
 @supports not selector(:focus-visible) {
-  .navds-combobox__input:focus-visible {
+  .navds-combobox__input:focus {
     outline: none;
     border: none;
     box-shadow: none;
