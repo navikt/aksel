@@ -72,7 +72,7 @@
 }
 
 .navds-link--neutral {
-  color: var(--ac-link-default-text, var(--a-text-default));
+  color: var(--ac-link-neutral-text, var(--a-text-default));
 }
 
 .navds-link--subtle {
