@@ -20,7 +20,7 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
    * columns="repeat(3, minmax(0, 1fr))"
    */
   columns?: ResponsiveProp<number | string>;
-  /** Spacing between columns. Can be a number, a string with a unit or tokens for spesific breakpoints.
+  /** Spacing between columns. Based on spacing-tokens.
    * @example
    * gap="6"
    * gap={{ sm: "2", md: "2", lg: "6", xl: "6"}}
