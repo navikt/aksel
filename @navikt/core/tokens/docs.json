@@ -88,7 +88,7 @@
   ],
   "global-grayalpha": [
     { "name": "--a-grayalpha-50", "value": "rgba(38, 55, 89, 0.06)" },
-    { "name": "--a-grayalpha-100", "value": "rgba(17, 41, 64, 0.13)" },
+    { "name": "--a-grayalpha-100", "value": "rgba(18, 43, 68, 0.08)" },
     { "name": "--a-grayalpha-200", "value": "rgba(17, 41, 64, 0.13)" },
     { "name": "--a-grayalpha-300", "value": "rgba(7, 26, 54, 0.21)" },
     { "name": "--a-grayalpha-400", "value": "rgba(5, 23, 51, 0.34)" },
@@ -199,8 +199,8 @@
     { "name": "--a-border-default", "value": "rgba(2, 20, 49, 0.49)" },
     { "name": "--a-border-strong", "value": "rgba(1, 11, 24, 0.68)" },
     { "name": "--a-border-divider", "value": "rgba(7, 26, 54, 0.21)" },
-    { "name": "--a-border-subtle", "value": "rgba(17, 41, 64, 0.13)" },
-    { "name": "--a-border-subtle-hover", "value": "rgba(7, 26, 54, 0.21)" },
+    { "name": "--a-border-subtle", "value": "rgba(7, 26, 54, 0.21)" },
+    { "name": "--a-border-subtle-hover", "value": "rgba(5, 23, 51, 0.34)" },
     { "name": "--a-border-on-inverted", "value": "rgba(224, 227, 230, 1)" },
     { "name": "--a-border-on-inverted-subtle", "value": "rgba(82, 89, 98, 1)" }
   ],
@@ -251,7 +251,7 @@
   ],
   "semantic-surface-default": [
     { "name": "--a-surface-default", "value": "rgba(255, 255, 255, 1)" },
-    { "name": "--a-surface-hover", "value": "rgba(17, 41, 64, 0.13)" },
+    { "name": "--a-surface-hover", "value": "rgba(18, 43, 68, 0.08)" },
     { "name": "--a-surface-active", "value": "rgba(17, 41, 64, 0.13)" },
     { "name": "--a-surface-selected", "value": "rgba(230, 240, 255, 1)" },
     { "name": "--a-surface-subtle", "value": "rgba(242, 243, 245, 1)" },
@@ -277,7 +277,7 @@
     }
   ],
   "semantic-surface-neutral": [
-    { "name": "--a-surface-neutral-subtle", "value": "rgba(17, 41, 64, 0.13)" },
+    { "name": "--a-surface-neutral-subtle", "value": "rgba(18, 43, 68, 0.08)" },
     {
       "name": "--a-surface-neutral-subtle-hover",
       "value": "rgba(17, 41, 64, 0.13)"
