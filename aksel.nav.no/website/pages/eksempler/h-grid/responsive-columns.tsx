@@ -14,18 +14,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "static");
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 2,
-  desc: "Med responsive kolonner kan man dynamiskt tilpasse dem basert på brekkpunktene våre.",
-};
-
 const Placeholder = ({ height = "auto", width = "auto" }) => {
   return (
     <div
@@ -57,4 +45,16 @@ const Background = ({
       {children}
     </div>
   );
+};
+
+export default withDsExample(Example, "static");
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 2,
+  desc: "Med responsive kolonner kan man dynamiskt tilpasse dem basert på brekkpunktene våre.",
 };

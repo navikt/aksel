@@ -17,18 +17,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "static");
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 1,
-  desc: "Columns støtter både statisk antall kolonner med 'number' og mer fleksible kolonner med 'string'. ",
-};
-
 const Placeholder = ({ height = "auto", width = "auto" }) => {
   return (
     <div
@@ -60,4 +48,16 @@ const Background = ({
       {children}
     </div>
   );
+};
+
+export default withDsExample(Example, "static");
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 1,
+  desc: "Columns støtter både statisk antall kolonner med 'number' og mer fleksible kolonner med 'string'. ",
 };

@@ -13,18 +13,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "static");
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 0,
-  desc: "HGrid lar deg enkelt dele innholdet opp i kolonner. Basert på CSS-grid",
-};
-
 const Placeholder = ({ height = "auto", width = "auto" }) => {
   return (
     <div
@@ -56,4 +44,16 @@ const Background = ({
       {children}
     </div>
   );
+};
+
+export default withDsExample(Example, "static");
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 0,
+  desc: "HGrid lar deg enkelt dele innholdet opp i kolonner. Basert på CSS-grid",
 };
