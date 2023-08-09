@@ -12,10 +12,10 @@ export interface LinkProps
    */
   underline?: boolean;
   /**
-   * Wether or not to render the link as a flex-inline element.
+   * Renders link with `display: inline` for better wrapping in text.
    * @default false
    */
-  inline?: boolean;
+  inlineText?: boolean;
   /**
    * Variant of the component to use.
    * @default "action"
@@ -39,6 +39,14 @@ export interface LinkProps
  * <Link href="#">lenke til ny side</Link>
  * <Link as={ReactRouter.Link} to="#">lenke til ny side</Link>
  * ```
+ * @example
+ * ```jsx
+ * <BodyLong>
+ * ...
+ *  <Link href="#" inlineText>lenke til ny side</Link>
+ * ...
+ * </BodyLong>
+ * ```
  */
 export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
   forwardRef(
@@ -48,7 +56,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         className,
         underline = true,
         variant = "action",
-        inline,
+        inlineText = false,
         ...rest
       },
       ref
@@ -58,7 +66,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         ref={ref}
         className={cl("navds-link", className, `navds-link--${variant}`, {
           "navds-link--remove-underline": !underline,
-          "navds-link--inline": inline,
+          "navds-link--inline": inlineText,
         })}
       />
     )
