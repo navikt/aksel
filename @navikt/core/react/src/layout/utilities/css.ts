@@ -36,17 +36,19 @@ export function getResponsiveProps<T = string>(
   tokenSubgroup: string,
   responsiveProp?: ResponsiveProp<T>
 ) {
-  if (!responsiveProp) return {};
+  if (!responsiveProp) {
+    return {};
+  }
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--ac-${componentName}-${componentProp}-xs`]: `var(--a-${tokenSubgroup}-${responsiveProp})`,
+      [`--__ac-${componentName}-${componentProp}-xs`]: `var(--a-${tokenSubgroup}-${responsiveProp})`,
     };
   }
 
   return Object.fromEntries(
     Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => [
-      `--ac-${componentName}-${componentProp}-${breakpointAlias}`,
+      `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
       `var(--a-${tokenSubgroup}-${aliasOrScale})`,
     ])
   );
@@ -57,17 +59,19 @@ export function getResponsiveValue<T = string>(
   componentProp: string,
   responsiveProp?: ResponsiveValue<T>
 ) {
-  if (!responsiveProp) return {};
+  if (!responsiveProp) {
+    return {};
+  }
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--ac-${componentName}-${componentProp}-xs`]: responsiveProp,
+      [`--__ac-${componentName}-${componentProp}-xs`]: responsiveProp,
     };
   }
 
   return Object.fromEntries(
     Object.entries(responsiveProp).map(([breakpointAlias, responsiveValue]) => [
-      `--ac-${componentName}-${componentProp}-${breakpointAlias}`,
+      `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
       responsiveValue,
     ])
   );

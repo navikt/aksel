@@ -57,7 +57,7 @@ export const HGrid = forwardRef<HTMLDivElement, HGridProps>(
     const styles: React.CSSProperties = {
       ...style,
       ...getResponsiveProps(`hgrid`, "gap", "spacing", gap),
-      ...getResponsiveValue(`hgrid`, "grid-columns", formatGrid(columns)),
+      ...getResponsiveValue(`hgrid`, "columns", formatGrid(columns)),
     };
 
     return (
