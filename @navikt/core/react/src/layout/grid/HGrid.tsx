@@ -27,7 +27,31 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
    */
   gap?: ResponsiveProp<SpacingScale>;
 }
-
+/**
+ * Horizontal Grid Primitive with dynamic columns and gap based on breakpoints.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/hgrid)
+ * @see 🏷️ {@link HGridProps}
+ *
+ * @example
+ * <HGrid gap="6" columns={3}>
+ *   <div />
+ *   <div />
+ *   <div />
+ * </HGrid>
+ * @example
+ * <HGrid gap={{xs: "2", md: "6"}} columns={3}>
+ *   <div />
+ *   <div />
+ *   <div />
+ * </HGrid>
+ * @example
+ * <HGrid gap="6" columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}>
+ *   <div />
+ *   <div />
+ *   <div />
+ * </HGrid>
+ */
 export const HGrid = forwardRef<HTMLDivElement, HGridProps>(
   ({ className, columns, gap, style, ...rest }, ref) => {
     const styles: React.CSSProperties = {
