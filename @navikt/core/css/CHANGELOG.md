@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 4.9.1
+
+### Patch Changes
+
+- Tweaks to combobox - updated example, small bugfixes, better affordance for selected options and added flag for "isAddedByUser" to onToggleSelected ([#2144](https://github.com/navikt/aksel/pull/2144))
+
 ## 4.9.0
 
 ### Minor Changes
