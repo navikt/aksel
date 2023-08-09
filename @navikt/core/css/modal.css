@@ -10,6 +10,7 @@
 .navds-modal[open] {
   display: flex;
   flex-direction: column;
+  animation: akselModalFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .navds-modal--polyfilled {
@@ -59,6 +60,7 @@
    * We can add ::backdrop to tokens.css when we remove the polyfill.
    */
   background: var(--ac-modal-backdrop, rgb(0 0 0 / 0.44));
+  animation: akselModalBackdropFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .navds-modal--polyfilled + .backdrop /* Cannot be combined with ::backdrop selector */ {
@@ -111,4 +113,29 @@
 
 .navds-modal__footer :nth-last-child(2) {
   margin-left: auto;
+}
+
+@keyframes akselModalFadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, calc(5% + 4px), 0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes akselModalBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
