@@ -126,11 +126,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
                 <span className="navds-button__icon">{icon}</span>
               )}
               {children && (
-                <Label
-                  as="span"
-                  size={size === "medium" ? "medium" : "small"}
-                  aria-live="polite"
-                >
+                <Label as="span" size={size === "medium" ? "medium" : "small"}>
                   {children}
                 </Label>
               )}
