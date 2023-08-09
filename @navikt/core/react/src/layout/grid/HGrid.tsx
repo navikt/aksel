@@ -83,9 +83,9 @@ function formatGrid(
   }
 
   return Object.fromEntries(
-    Object.entries(props).map(([alias, breakPoint]) => [
-      alias,
-      getColumnValue(breakPoint),
+    Object.entries(props).map(([breakpointToken, columnValue]) => [
+      breakpointToken,
+      getColumnValue(columnValue),
     ])
   );
 }
