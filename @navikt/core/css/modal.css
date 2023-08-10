@@ -111,7 +111,7 @@
   padding: var(--a-spacing-4) var(--a-spacing-6) var(--a-spacing-6) var(--a-spacing-6);
 }
 
-.navds-modal__footer :nth-last-child(2) {
+.navds-modal__footer :nth-of-type(2) {
   margin-left: auto;
 }
 

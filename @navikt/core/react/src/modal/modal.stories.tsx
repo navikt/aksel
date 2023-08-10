@@ -134,7 +134,7 @@ export const WithUseState = () => {
         </Modal.Content>
         <Modal.Footer>
           <Button onClick={() => setOpen2(true)}>Primary</Button>
-          <Button variant="tertiary" onClick={() => setOpen(false)}>
+          <Button variant="secondary" onClick={() => setOpen(false)}>
             Cancel
           </Button>
         </Modal.Footer>
