@@ -8,6 +8,7 @@ import { useInputContext } from "../Input/inputContext";
 
 const FilteredOptions = () => {
   const {
+    clearInput,
     inputProps: { id },
     size,
     value,
@@ -48,7 +49,10 @@ const FilteredOptions = () => {
       {isValueNew && allowNewValues && (
         <li
           tabIndex={-1}
-          onPointerUp={(event) => toggleOption(value, event)}
+          onPointerUp={(event) => {
+            toggleOption(value, event);
+            clearInput(event);
+          }}
           id={`${id}-combobox-new-option`}
           className={cl("navds-combobox__list-item__new-option", {
             "navds-combobox__list-item__new-option--focus":
@@ -88,6 +92,7 @@ const FilteredOptions = () => {
           tabIndex={-1}
           onPointerUp={(event) => {
             toggleOption(option, event);
+            clearInput(event);
             if (!isMultiSelect) {
               toggleIsListOpen(false);
             }

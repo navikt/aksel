@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table } from "..";
-import { Link } from "../..";
+import { Button, Checkbox, Link } from "../..";
 
 export default {
   title: "ds-react/Table",
@@ -37,6 +37,7 @@ export const Expandable = () => {
 };
 
 export const ExpandableSmall = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [open, setOpen] = useState(false);
   return (
     <Table size="small">
@@ -226,4 +227,64 @@ export const ExpandableOpen = () => {
       </Table.Body>
     </Table>
   );
+};
+
+export const ClickableRow = {
+  render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [isRowOpen1, setIsRowOpen1] = useState(false);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [isRowOpen2, setIsRowOpen2] = useState(false);
+
+    return (
+      <>
+        <Table zebraStripes>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Navn</Table.HeaderCell>
+              <Table.HeaderCell>Info</Table.HeaderCell>
+              <Table.HeaderCell aria-hidden />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            <Table.ExpandableRow
+              content={<div>placeholder row 1</div>}
+              togglePlacement="right"
+              onOpenChange={setIsRowOpen1}
+              data-testid="row1"
+              open={isRowOpen1}
+              expandOnRowClick
+            >
+              <Table.DataCell>Ola</Table.DataCell>
+              <Table.DataCell>
+                <Button
+                  size="xsmall"
+                  onClick={(e) => {
+                    alert("Mer info");
+                  }}
+                >
+                  Mer info
+                </Button>
+              </Table.DataCell>
+            </Table.ExpandableRow>
+            <Table.ExpandableRow
+              content={<div>placeholder row 2</div>}
+              togglePlacement="right"
+              onOpenChange={setIsRowOpen2}
+              data-testid="row2"
+              open={isRowOpen2}
+              expandOnRowClick
+            >
+              <Table.DataCell>Hans</Table.DataCell>
+              <Table.DataCell>
+                <Checkbox hideLabel size="small">
+                  Sett
+                </Checkbox>
+              </Table.DataCell>
+            </Table.ExpandableRow>
+          </Table.Body>
+        </Table>
+      </>
+    );
+  },
 };

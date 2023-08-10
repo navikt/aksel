@@ -1,5 +1,52 @@
 # @navikt/ds-react
 
+## 4.10.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.10.2
+
+## 4.10.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.10.1
+
+## 4.10.0
+
+### Minor Changes
+
+- Link: La til 'variant', 'underline' og 'inlineText'-prop ([#2093](https://github.com/navikt/aksel/pull/2093))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.10.0
+
+## 4.9.1
+
+### Patch Changes
+
+- Button: Fikset aria-live bug der knapp alltid ble lest opp av skjermleser ved render ([#2143](https://github.com/navikt/aksel/pull/2143))
+
+- Tweaks to combobox - updated example, small bugfixes, better affordance for selected options and added flag for "isAddedByUser" to onToggleSelected ([#2144](https://github.com/navikt/aksel/pull/2144))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.9.1
+
+## 4.9.0
+
+### Minor Changes
+
+- Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.9.0
+
 ## 4.8.0
 
 ### Minor Changes

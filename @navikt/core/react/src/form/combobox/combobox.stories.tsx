@@ -82,6 +82,7 @@ export function MultiSelect(props) {
         label="Komboboks - velg flere"
         options={props.options}
         isMultiSelect={props.isMultiSelect}
+        size={props.size}
       />
     </DemoContainer>
   );
@@ -90,6 +91,7 @@ export function MultiSelect(props) {
 MultiSelect.args = {
   options,
   isMultiSelect: true,
+  size: "medium",
 };
 
 export function MultiSelectWithAddNewOptions(props) {

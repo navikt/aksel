@@ -1,5 +1,29 @@
 # @navikt/ds-css
 
+## 4.10.2
+
+### Patch Changes
+
+- Link: Fikset visited farger og inline SVG-reset ved bruk av tailwind
+
+## 4.10.0
+
+### Minor Changes
+
+- Link: La til 'variant', 'underline' og 'inlineText'-prop ([#2093](https://github.com/navikt/aksel/pull/2093))
+
+## 4.9.1
+
+### Patch Changes
+
+- Tweaks to combobox - updated example, small bugfixes, better affordance for selected options and added flag for "isAddedByUser" to onToggleSelected ([#2144](https://github.com/navikt/aksel/pull/2144))
+
+## 4.9.0
+
+### Minor Changes
+
+- Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
+
 ## 4.8.0
 
 ### Minor Changes
