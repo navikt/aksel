@@ -6,6 +6,9 @@ import Modal from "./Modal";
 export default {
   title: "ds-react/Modal",
   component: Modal,
+  parameters: {
+    chromatic: { pauseAnimationAtEnd: true },
+  },
 };
 
 export const WithUseRef = () => {
@@ -97,9 +100,10 @@ export const WithUseState = () => {
         header={{ heading: "Simple header" }}
         open={open}
         onClose={() => setOpen(false)}
+        width={400}
       >
         <Modal.Content>
-          This modal is indeed quite small.
+          This modal has width set to 400.
           {/* Nested modal */}
           <Modal
             open={open2}

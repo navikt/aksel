@@ -41,7 +41,7 @@
 }
 
 @media (min-width: 768px) {
-  .navds-modal {
+  .navds-modal--autowidth {
     max-width: 700px;
   }
 }

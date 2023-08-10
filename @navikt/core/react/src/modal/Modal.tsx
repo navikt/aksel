@@ -61,6 +61,10 @@ export interface ModalProps
    */
   onCancel?: React.ReactEventHandler<HTMLDialogElement>;
   /**
+   * @default fit-content (up to 700px)
+   * */
+  width?: number | string;
+  /**
    * User defined classname for modal
    */
   className?: string;
@@ -129,11 +133,13 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
   (
     {
       header,
-      open,
       children,
-      className,
+      open,
       onBeforeClose,
       onCancel,
+      width,
+      className,
+      style,
       ...rest
     }: ModalProps,
     ref
@@ -170,7 +176,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         ref={mergedRef}
         className={cl("navds-modal", className, {
           "navds-modal--polyfilled": needPolyfill,
+          "navds-modal--autowidth": !width,
         })}
+        style={{ ...style, width }}
         onCancel={(event) => {
           // FYI: onCancel fires when you press Esc
           if (onBeforeClose && onBeforeClose() === false) {
