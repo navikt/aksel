@@ -1,0 +1,55 @@
+.navds-hgrid {
+  --__ac-hgrid-columns-xs: initial;
+  --__ac-hgrid-columns-sm: initial;
+  --__ac-hgrid-columns-md: initial;
+  --__ac-hgrid-columns-lg: initial;
+  --__ac-hgrid-columns-xl: initial;
+  --__ac-hgrid-columns: var(--__ac-hgrid-columns-xs);
+  --__ac-hgrid-gap-xs: initial;
+  --__ac-hgrid-gap-sm: initial;
+  --__ac-hgrid-gap-md: initial;
+  --__ac-hgrid-gap-lg: initial;
+  --__ac-hgrid-gap-xl: initial;
+  --__ac-hgrid-gap: var(--__ac-hgrid-gap-xs);
+
+  display: grid;
+  grid-template-columns: var(--__ac-hgrid-columns);
+  gap: var(--__ac-hgrid-gap);
+}
+
+@media (min-width: 480px) {
+  .navds-hgrid {
+    --__ac-hgrid-columns: var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs));
+    --__ac-hgrid-gap: var(--__ac-hgrid-gap-sm, var(--__ac-hgrid-gap-xs));
+  }
+}
+
+@media (min-width: 768px) {
+  .navds-hgrid {
+    --__ac-hgrid-columns: var(--__ac-hgrid-columns-md, var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs)));
+    --__ac-hgrid-gap: var(--__ac-hgrid-gap-md, var(--__ac-hgrid-gap-sm, var(--__ac-hgrid-gap-xs)));
+  }
+}
+
+@media (min-width: 1024px) {
+  .navds-hgrid {
+    --__ac-hgrid-columns: var(
+      --__ac-hgrid-columns-lg,
+      var(--__ac-hgrid-columns-md, var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs)))
+    );
+    --__ac-hgrid-gap: var(--__ac-hgrid-gap-lg, var(--__ac-hgrid-gap-md, var(--__ac-hgrid-gap-sm, var(--__ac-hgrid-gap-xs))));
+  }
+}
+
+@media (min-width: 1280px) {
+  .navds-hgrid {
+    --__ac-hgrid-columns: var(
+      --__ac-hgrid-columns-xl,
+      var(--__ac-hgrid-columns-lg, var(--__ac-hgrid-columns-md, var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs))))
+    );
+    --__ac-hgrid-gap: var(
+      --__ac-hgrid-gap-xl,
+      var(--__ac-hgrid-gap-lg, var(--__ac-hgrid-gap-md, var(--__ac-hgrid-gap-sm, var(--__ac-hgrid-gap-xs))))
+    );
+  }
+}
