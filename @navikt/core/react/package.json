@@ -43,7 +43,6 @@
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^1.2.1",
     "date-fns": "2.29.3",
-    "dialog-polyfill-universal": "0.1.0",
     "react-day-picker": "8.3.4"
   },
   "devDependencies": {

@@ -4,4 +4,3 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
   unobserve: jest.fn(),
   disconnect: jest.fn(),
 }));
-jest.mock("dialog-polyfill-universal", () => null);

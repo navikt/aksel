@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from "react";
 import cl from "clsx";
-import dialogPolyfill from "dialog-polyfill-universal";
+import dialogPolyfill from "./dialog-polyfill";
 import { Detail, Heading, mergeRefs, useId } from "..";
 import ModalContent from "./ModalContent";
 import ModalHeader from "./ModalHeader";
