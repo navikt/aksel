@@ -365,12 +365,20 @@ export const RemoveSelectedMultiSelectTest = {
     await sleep(250);
     userEvent.keyboard("{Enter}");
     await sleep(250);
-    userEvent.keyboard("{Escape}");
-    await sleep(250);
 
     const appleSlett = canvas.getByLabelText("apple slett");
+    appleSlett.focus();
+    await sleep(250);
     userEvent.click(appleSlett);
     await sleep(250);
+    const appleOption = canvas.getByRole("option", {
+      name: "apple",
+      selected: false,
+    });
+    expect(appleOption).toBeVisible();
+    userEvent.keyboard("{Escape}");
+    await sleep(250);
+    expect(appleOption).not.toBeVisible();
 
     const bananaSlett = canvas.getByLabelText("banana slett");
     expect(bananaSlett).toBeInTheDocument();
