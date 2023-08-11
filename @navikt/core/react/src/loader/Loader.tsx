@@ -5,7 +5,7 @@ import { useId } from "..";
 export interface LoaderProps extends SVGProps<SVGSVGElement> {
   /**
    * Changes Loader width/height
-   * 64px | 40px | 32px | 24px | 20px | 16px
+   * 88px | 64px | 40px | 32px | 24px | 20px | 16px
    * @default "medium"
    */
   size?:

@@ -35,10 +35,28 @@ export interface FormFieldProps {
   readOnly?: boolean;
 }
 
+export interface FormFieldType {
+  showErrorMsg: boolean;
+  hasError: boolean;
+  errorId: string;
+  inputDescriptionId: string;
+  size: "small" | "medium";
+  inputProps: {
+    id: string;
+    "aria-invalid"?: boolean;
+    "aria-describedby"?: string;
+    disabled?: boolean;
+  };
+  readOnly?: boolean;
+}
+
 /**
  * Handles props and their state for various form-fields in context with Fieldset
  */
-export const useFormField = (props: FormFieldProps, prefix: string) => {
+export const useFormField = (
+  props: FormFieldProps,
+  prefix: string
+): FormFieldType => {
   const { size, error, errorId: propErrorId } = props;
 
   const fieldset = useContext(FieldsetContext);
