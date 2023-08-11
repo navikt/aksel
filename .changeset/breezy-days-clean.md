@@ -13,4 +13,5 @@ Oppdatert Modal
   - `parentSelector` er fjernet
   - `overlayClassName` er fjernet. For å endre farge kan du bruke token: `::backdrop { --ac-modal-backdrop: white; }`. For annen styling kan du bruke `.navds-modal::backdrop` og `.navds-modal--polyfilled + .backdrop`.
   - `closeButton` er flyttet til headeren. Headeren er ikke synlig som standard, dermed heller ikke lukkeknappen. Men du kan fint ha en tom header med bare lukkeknapp hvis du ønsker.
+- :boom: Provider: `appElement` er fjernet
 - Se [dokumentasjonen](https://aksel.nav.no/komponenter/core/modal) for eksempler og mer informasjon om hvordan du bruker den nye modalen på best mulig måte
