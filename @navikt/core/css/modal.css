@@ -1,3 +1,7 @@
+.navds-modal__docbody--open {
+  overflow: hidden;
+}
+
 .navds-modal {
   background-color: var(--ac-modal-bg, var(--a-surface-default));
   border: 1px solid var(--ac-modal-border, var(--a-border-subtle));

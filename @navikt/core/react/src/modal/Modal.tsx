@@ -13,6 +13,7 @@ import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
 import { ModalContext, getCloseHandler, getAriaProps } from "./ModalUtils";
 
+const bodyClass = "navds-modal__docbody--open";
 const needPolyfill =
   typeof window !== "undefined" && window.HTMLDialogElement === undefined;
 
@@ -25,7 +26,7 @@ export interface ModalProps
   header?: {
     label?: string;
     icon?: React.ReactNode;
-    heading: React.ReactNode;
+    heading: string;
     /**
      * Heading size
      * @default "medium"
@@ -170,6 +171,25 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         }
       }
     }, [modalRef, open]);
+
+    useEffect(() => {
+      if (!modalRef.current) return;
+      if (open) document.body.classList.add(bodyClass); // In case `open` is true initially
+
+      const observer = new MutationObserver(() => {
+        if (modalRef.current?.open) document.body.classList.add(bodyClass);
+        else document.body.classList.remove(bodyClass);
+      });
+      observer.observe(modalRef.current, {
+        attributes: true,
+        attributeFilter: ["open"],
+      });
+      return () => {
+        observer.disconnect();
+        document.body.classList.remove(bodyClass); // In case modal is unmounted before it's closed
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modalRef]);
 
     return (
       <dialog
