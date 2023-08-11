@@ -3,4 +3,4 @@
 "@navikt/ds-react": minor
 ---
 
-[Layout] Columns komponent :tada:
+HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid)
