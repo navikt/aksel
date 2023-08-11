@@ -28,7 +28,7 @@ export const WithUseRef = () => {
           size: "small",
         }}
       >
-        <Modal.Content>
+        <Modal.Body>
           <BodyLong spacing>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -52,9 +52,9 @@ export const WithUseRef = () => {
                 Custom header
               </Heading>
             </Modal.Header>
-            <Modal.Content>
+            <Modal.Body>
               Nesting modals is not recommended, but works in most cases.
-            </Modal.Content>
+            </Modal.Body>
             <Modal.Footer>
               <Button onClick={() => ref2.current?.close()}>
                 Close w/o confirm
@@ -71,7 +71,7 @@ export const WithUseRef = () => {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </BodyLong>
-        </Modal.Content>
+        </Modal.Body>
         <Modal.Footer>
           <Button>Primary</Button>
           <Button variant="secondary" onClick={() => ref2.current?.showModal()}>
@@ -102,7 +102,7 @@ export const WithUseState = () => {
         onClose={() => setOpen(false)}
         width={400}
       >
-        <Modal.Content>
+        <Modal.Body>
           This modal has width set to 400.
           {/* Nested modal */}
           <Modal
@@ -113,7 +113,7 @@ export const WithUseState = () => {
             }}
             aria-label="Nested modal"
           >
-            <Modal.Content>
+            <Modal.Body>
               <BodyLong spacing>
                 Nesting modals is not recommended, but works in most cases. This
                 one does not have header or footer, but is bigger than the
@@ -129,9 +129,9 @@ export const WithUseState = () => {
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </BodyLong>
               <Button onClick={() => setOpen2(false)}>Close</Button>
-            </Modal.Content>
+            </Modal.Body>
           </Modal>
-        </Modal.Content>
+        </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => setOpen2(true)}>Primary</Button>
           <Button variant="secondary" onClick={() => setOpen(false)}>
@@ -148,7 +148,7 @@ export const EmptyHeader = () => (
   <div style={{ minWidth: "800px", minHeight: "600px" } /* For Chromatic */}>
     <Modal open>
       <Modal.Header />
-      <Modal.Content>
+      <Modal.Body>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -156,7 +156,7 @@ export const EmptyHeader = () => (
         velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
-      </Modal.Content>
+      </Modal.Body>
     </Modal>
   </div>
 );

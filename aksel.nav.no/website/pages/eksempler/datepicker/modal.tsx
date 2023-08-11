@@ -17,7 +17,7 @@ const Example = () => {
       <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
       <Modal ref={ref} header={{ heading: "Heading" }}>
-        <Modal.Content className="min-h-96 min-w-96 max-w-full">
+        <Modal.Body className="min-h-96 min-w-96 max-w-full">
           <DatePicker {...datepickerProps} strategy="fixed">
             <DatePicker.Input {...inputProps} label="Velg dato" />
           </DatePicker>
@@ -25,7 +25,7 @@ const Example = () => {
             {selectedDay &&
               format(selectedDay, "dd.MM.yyyy", { locale: nbLocale })}
           </div>
-        </Modal.Content>
+        </Modal.Body>
       </Modal>
     </>
   );

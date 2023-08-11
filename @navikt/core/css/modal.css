@@ -98,13 +98,13 @@
   color: var(--a-text-subtle);
 }
 
-.navds-modal__content {
+.navds-modal__body {
   padding: var(--a-spacing-6);
   overflow: auto;
   overscroll-behavior: contain;
 }
 
-.navds-modal__header + .navds-modal__content {
+.navds-modal__header + .navds-modal__body {
   padding-top: var(--a-spacing-0);
 }
 

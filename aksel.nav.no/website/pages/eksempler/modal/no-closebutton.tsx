@@ -19,7 +19,7 @@ const Example = () => {
             Laborum proident id ullamco
           </Heading>
         </Modal.Header>
-        <Modal.Content>
+        <Modal.Body>
           <Heading spacing level="2" size="medium">
             Excepteur labore nostrud incididunt exercitation.
           </Heading>
@@ -31,7 +31,7 @@ const Example = () => {
             exercitation non minim minim pariatur sunt laborum ipsum.
             Exercitation nostrud est laborum magna non non aliqua qui esse.
           </BodyLong>
-        </Modal.Content>
+        </Modal.Body>
       </Modal>
     </>
   );

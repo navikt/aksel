@@ -18,7 +18,7 @@ const Example = () => {
           heading: "Overskrift",
         }}
       >
-        <Modal.Content>
+        <Modal.Body>
           <BodyLong>
             Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
             incididunt dolor do ad ut. Incididunt eiusmod nostrud deserunt duis
@@ -27,7 +27,7 @@ const Example = () => {
             exercitation non minim minim pariatur sunt laborum ipsum.
             Exercitation nostrud est laborum magna non non aliqua qui esse.
           </BodyLong>
-        </Modal.Content>
+        </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={() => ref.current?.close()}>
             Primær

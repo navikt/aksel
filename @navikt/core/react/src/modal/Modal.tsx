@@ -8,7 +8,7 @@ import React, {
 import cl from "clsx";
 import dialogPolyfill from "./dialog-polyfill";
 import { Detail, Heading, mergeRefs, useId } from "..";
-import ModalContent from "./ModalContent";
+import ModalBody from "./ModalBody";
 import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
 import { ModalContext, getCloseHandler, getAriaProps } from "./ModalUtils";
@@ -82,7 +82,7 @@ interface ModalComponent
     ModalProps & React.RefAttributes<HTMLDialogElement>
   > {
   Header: typeof ModalHeader;
-  Content: typeof ModalContent;
+  Body: typeof ModalBody;
   Footer: typeof ModalFooter;
 }
 
@@ -104,9 +104,9 @@ interface ModalComponent
  *     heading: "My heading",
  *   }}
  * >
- *   <Modal.Content>
+ *   <Modal.Body>
  *     <BodyLong>Hello world</BodyLong>
- *   </Modal.Content>
+ *   </Modal.Body>
  *   <Modal.Footer>
  *     <Button>Save</Button>
  *     <Button type="button" variant="tertiary" onClick={() => ref.current?.close()}>Close</Button>
@@ -124,9 +124,9 @@ interface ModalComponent
  *   <Modal.Header>
  *     <Heading level="1" size="large" id="modal-heading">My heading</Heading>
  *   </Modal.Header>
- *   <Modal.Content>
+ *   <Modal.Body>
  *     <BodyLong>Hello world</BodyLong>
- *   </Modal.Content>
+ *   </Modal.Body>
  * </Modal>
  * ```
  */
@@ -239,7 +239,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 ) as ModalComponent;
 
 Modal.Header = ModalHeader;
-Modal.Content = ModalContent;
+Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
 
 export default Modal;
