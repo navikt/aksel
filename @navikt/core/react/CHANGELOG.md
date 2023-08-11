@@ -1,5 +1,20 @@
 # @navikt/ds-react
 
+## 4.11.0
+
+### Minor Changes
+
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+
+### Patch Changes
+
+- Fixes bug where combobox list could not be closed after clicking a chip ([#2155](https://github.com/navikt/aksel/pull/2155))
+
+- Grid: Markert som deprecated. Bruk nye 'HGrid' ([#2153](https://github.com/navikt/aksel/pull/2153))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.11.0
+
 ## 4.10.2
 
 ### Patch Changes
