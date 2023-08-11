@@ -86,7 +86,7 @@ export const query = `*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...4]{
           _type,
           _id,
           heading,
