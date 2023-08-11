@@ -99,6 +99,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
 
       return (
         <Component
+          {...(Component !== "button" ? { role: "button" } : {})}
           {...filterProps}
           ref={mergedRef}
           className={cl(
