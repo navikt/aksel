@@ -99,6 +99,10 @@ const StyleMappings = {
       main: "help-text.css",
       dependencies: ["popover.css"],
     },
+    {
+      component: "HGrid",
+      main: "hgrid.css",
+    },
     { component: "Ingress", main: typoCss },
     {
       component: "InternalHeader",
