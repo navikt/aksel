@@ -8,7 +8,6 @@ export function InputWithCounter(
     size?: "medium" | "large";
   }
 ) {
-  console.log(props);
   const { onChange, value = "", elementProps, schemaType } = props;
 
   //@ts-ignore
