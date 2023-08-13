@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 4.11.0
+
+### Minor Changes
+
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+
+### Patch Changes
+
+- List: Fikset alignment av ikoner ([#2149](https://github.com/navikt/aksel/pull/2149))
+
+- Font: La til egen font for semibold italic for bedre skalering cross-browser ([#2150](https://github.com/navikt/aksel/pull/2150))
+
 ## 4.10.2
 
 ### Patch Changes
