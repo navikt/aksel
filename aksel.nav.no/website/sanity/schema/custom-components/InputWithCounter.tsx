@@ -8,6 +8,7 @@ export function InputWithCounter(
     size?: "medium" | "large";
   }
 ) {
+  console.log(props);
   const { onChange, value = "", elementProps, schemaType } = props;
 
   //@ts-ignore
@@ -37,7 +38,11 @@ export function InputWithCounter(
         maxLength={maxLength}
         onChange={handleChange}
         value={value}
-        error={hasError && props.validationError}
+        error={
+          !value
+            ? "Artikkel mangler sidetittel"
+            : hasError && props.validationError
+        }
         rows={!props.size || props.size === "medium" ? 2 : 1}
       />
     </Stack>

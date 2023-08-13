@@ -95,7 +95,6 @@ export const structure = async (
   );
 
   outdated = outdated.filter((x) => isAfter(x.updateInfo?.lastVerified));
-  console.log(outdated.length);
 
   return S.list()
     .title("Innholdstyper")
