@@ -34,7 +34,7 @@
   cursor: pointer;
   background-color: var(--ac-toggle-group-button-bg, var(--a-surface-transparent));
   color: var(--ac-toggle-group-button-text, var(--a-text-default));
-  border-radius: 2px;
+  border-radius: var(--a-border-radius-small);
   min-width: fit-content;
   font-weight: var(--a-font-weight-regular);
 }
