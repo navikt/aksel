@@ -37,11 +37,7 @@ export function InputWithCounter(
         maxLength={maxLength}
         onChange={handleChange}
         value={value}
-        error={
-          !value
-            ? "Artikkel mangler sidetittel"
-            : hasError && props.validationError
-        }
+        error={hasError && props.validationError}
         rows={!props.size || props.size === "medium" ? 2 : 1}
       />
     </Stack>
