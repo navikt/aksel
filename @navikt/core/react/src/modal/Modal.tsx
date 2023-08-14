@@ -64,7 +64,7 @@ export interface ModalProps
   /**
    * @default fit-content (up to 700px)
    * */
-  width?: number | string;
+  width?: number | string | "small" | "medium" | "large";
   /**
    * User defined classname for modal
    */
@@ -193,10 +193,17 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     return (
       <dialog
         ref={mergedRef}
-        className={cl("navds-modal", className, {
-          "navds-modal--polyfilled": needPolyfill,
-          "navds-modal--autowidth": !width,
-        })}
+        className={cl(
+          "navds-modal",
+          className,
+          typeof width === "string" &&
+            ["small", "medium", "large"].includes(width) &&
+            `navds-modal--${width}`,
+          {
+            "navds-modal--polyfilled": needPolyfill,
+            "navds-modal--autowidth": !width,
+          }
+        )}
         style={{ ...style, width }}
         onCancel={(event) => {
           // FYI: onCancel fires when you press Esc
