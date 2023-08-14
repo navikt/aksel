@@ -1,6 +1,5 @@
 html {
-  /* Remove horizontal jump caused by scrollbar presens on long or short pages */
-  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
 code,
