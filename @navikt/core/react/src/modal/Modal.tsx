@@ -13,7 +13,7 @@ import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
 import { ModalContext, getCloseHandler } from "./ModalUtils";
 
-const bodyClass = "navds-modal__docbody--open";
+const bodyClass = "navds-modal__document-body";
 const needPolyfill =
   typeof window !== "undefined" && window.HTMLDialogElement === undefined;
 
