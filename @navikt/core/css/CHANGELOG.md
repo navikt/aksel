@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 4.11.1
+
+### Patch Changes
+
+- Border-radius: Fikset hardkodet border-radius i Datepicker, ToggleGroup og Combobox. ([#2159](https://github.com/navikt/aksel/pull/2159))
+
 ## 4.11.0
 
 ### Minor Changes
