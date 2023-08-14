@@ -11,7 +11,7 @@ import { Detail, Heading, mergeRefs, useId } from "..";
 import ModalBody from "./ModalBody";
 import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
-import { ModalContext, getCloseHandler, getAriaProps } from "./ModalUtils";
+import { ModalContext, getCloseHandler } from "./ModalUtils";
 
 const bodyClass = "navds-modal__docbody--open";
 const needPolyfill =
@@ -140,6 +140,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       onCancel,
       width,
       className,
+      "aria-labelledby": ariaLabelledby,
       style,
       ...rest
     }: ModalProps,
@@ -148,7 +149,6 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const modalRef = useRef<HTMLDialogElement>(null);
     const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
     const ariaLabelId = useId();
-    const ariaDescId = useId();
 
     if (useContext(ModalContext)) {
       console.error("Modals should not be nested");
@@ -205,7 +205,11 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
             event.preventDefault();
           } else if (onCancel) onCancel(event);
         }}
-        {...getAriaProps(rest, header, ariaLabelId, ariaDescId)}
+        aria-labelledby={
+          !ariaLabelledby && !rest["aria-label"] && header
+            ? ariaLabelId
+            : ariaLabelledby
+        }
         {...rest}
       >
         <ModalContext.Provider
@@ -216,9 +220,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           {header && (
             <ModalHeader>
               {header.label && (
-                <Detail className="navds-modal__label" id={ariaDescId}>
-                  {header.label}
-                </Detail>
+                <Detail className="navds-modal__label">{header.label}</Detail>
               )}
               <Heading
                 size={header.size ?? "medium"}
