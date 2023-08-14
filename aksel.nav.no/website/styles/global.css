@@ -57,11 +57,6 @@ a {
   }
 }
 
-/* Stop content behind modal-scrolling */
-.aksel.ReactModal__Body--open {
-  overflow: hidden;
-}
-
 .skiplink {
   @apply z-modal bg-border-focus text-text-on-inverted absolute left-0 -translate-y-full p-4 no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
 }
