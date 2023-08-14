@@ -76,6 +76,12 @@ export const IconPage = ({ name }: { name: string }) => {
     hideModal && Modal.setAppElement("#__next");
   }, [hideModal]);
 
+  const subCategoryWordLength = Math.max(
+    ...categories.map((cat) =>
+      Math.max(...cat.sub_categories.map((sub) => sub.sub_category.length))
+    )
+  );
+
   return (
     <>
       <Head>
@@ -182,9 +188,15 @@ export const IconPage = ({ name }: { name: string }) => {
                             return (
                               <div
                                 key={sub.sub_category}
-                                className="border-t-border-subtle border-t py-1"
+                                className="border-t-border-subtle border-t py-2"
                               >
-                                <HGrid columns="14rem 1fr">
+                                <HGrid
+                                  columns={{
+                                    xs: "1fr",
+                                    md: `${subCategoryWordLength}ch 1fr`,
+                                  }}
+                                  gap={{ xs: "0", md: "2" }}
+                                >
                                   <Heading
                                     level="3"
                                     size="xsmall"
@@ -213,7 +225,7 @@ export const IconPage = ({ name }: { name: string }) => {
                                             }
                                           }}
                                           className={cl(
-                                            "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-blue-800 focus-visible:ring-2",
+                                            "hover:bg-surface-neutral-subtle-hover bg-surface-subtle active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-blue-800 focus-visible:ring-2",
                                             {
                                               "from-surface-selected bg-surface-selected ring-border-alt-3 z-10 bg-gradient-to-br to-teal-50 ring-1":
                                                 i.id === name,
