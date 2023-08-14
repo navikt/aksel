@@ -174,7 +174,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 
     useEffect(() => {
       if (!modalRef.current) return;
-      if (open) document.body.classList.add(bodyClass); // In case `open` is true initially
+      if (modalRef.current.open) document.body.classList.add(bodyClass); // In case `open` is true initially
 
       const observer = new MutationObserver(() => {
         if (modalRef.current?.open) document.body.classList.add(bodyClass);
@@ -188,7 +188,6 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         observer.disconnect();
         document.body.classList.remove(bodyClass); // In case modal is unmounted before it's closed
       };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [modalRef]);
 
     return (
