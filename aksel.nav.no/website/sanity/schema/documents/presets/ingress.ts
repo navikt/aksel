@@ -4,7 +4,7 @@ export const ingressField = defineField({
   title: "Ingress",
   name: "ingress",
   description:
-    "Brukes til ingress, card description og seo description-tag. Bør bære konsis og oppsummerende.",
+    "Brukes til diverse metadata-felt. Bør bære konsis og oppsummere for hva artikkel innebærer.",
   type: "text",
   group: "innhold",
   rows: 3,

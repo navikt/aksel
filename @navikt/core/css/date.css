@@ -233,7 +233,7 @@
   text-decoration: none;
   border: none;
   background: none;
-  border-radius: 3px;
+  border-radius: calc(var(--a-border-radius-medium) - 1px);
   padding: var(--a-spacing-3);
   align-items: center;
   justify-content: center;

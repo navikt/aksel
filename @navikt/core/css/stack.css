@@ -1,22 +1,20 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-/* stylelint-disable aksel/design-token-exists */
 .navds-stack {
-  --ac-stack-align: initial;
-  --ac-stack-justify: initial;
-  --ac-stack-direction: initial;
-  --ac-stack-wrap: initial;
-  --ac-stack-gap-xs: initial;
-  --ac-stack-gap-sm: initial;
-  --ac-stack-gap-md: initial;
-  --ac-stack-gap-lg: initial;
-  --ac-stack-gap-xl: initial;
-  --__ac-stack-gap: var(--ac-stack-gap-xs);
+  --__ac-stack-align: initial;
+  --__ac-stack-justify: initial;
+  --__ac-stack-direction: initial;
+  --__ac-stack-wrap: initial;
+  --__ac-stack-gap-xs: initial;
+  --__ac-stack-gap-sm: initial;
+  --__ac-stack-gap-md: initial;
+  --__ac-stack-gap-lg: initial;
+  --__ac-stack-gap-xl: initial;
+  --__ac-stack-gap: var(--__ac-stack-gap-xs);
 
   gap: var(--__ac-stack-gap);
   display: flex;
-  align-items: var(--ac-stack-align);
-  justify-content: var(--ac-stack-justify);
-  flex-flow: var(--ac-stack-direction) var(--ac-stack-wrap);
+  align-items: var(--__ac-stack-align);
+  justify-content: var(--__ac-stack-justify);
+  flex-flow: var(--__ac-stack-direction) var(--__ac-stack-wrap);
 }
 
 .navds-stack__spacer {
@@ -35,27 +33,27 @@
 
 @media (min-width: 480px) {
   .navds-stack {
-    --__ac-stack-gap: var(--ac-stack-gap-sm, var(--ac-stack-gap-xs));
+    --__ac-stack-gap: var(--__ac-stack-gap-sm, var(--__ac-stack-gap-xs));
   }
 }
 
 @media (min-width: 768px) {
   .navds-stack {
-    --__ac-stack-gap: var(--ac-stack-gap-md, var(--ac-stack-gap-sm, var(--ac-stack-gap-xs)));
+    --__ac-stack-gap: var(--__ac-stack-gap-md, var(--__ac-stack-gap-sm, var(--__ac-stack-gap-xs)));
   }
 }
 
 @media (min-width: 1024px) {
   .navds-stack {
-    --__ac-stack-gap: var(--ac-stack-gap-lg, var(--ac-stack-gap-md, var(--ac-stack-gap-sm, var(--ac-stack-gap-xs))));
+    --__ac-stack-gap: var(--__ac-stack-gap-lg, var(--__ac-stack-gap-md, var(--__ac-stack-gap-sm, var(--__ac-stack-gap-xs))));
   }
 }
 
 @media (min-width: 1280px) {
   .navds-stack {
     --__ac-stack-gap: var(
-      --ac-stack-gap-xl,
-      var(--ac-stack-gap-lg, var(--ac-stack-gap-md, var(--ac-stack-gap-sm, var(--ac-stack-gap-xs))))
+      --__ac-stack-gap-xl,
+      var(--__ac-stack-gap-lg, var(--__ac-stack-gap-md, var(--__ac-stack-gap-sm, var(--__ac-stack-gap-xs))))
     );
   }
 }

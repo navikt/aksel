@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-stylelint",
-  "version": "4.10.2",
+  "version": "4.11.2",
   "author": "Aksel | NAV",
   "homepage": "https://aksel.nav.no/grunnleggende/kode/stylelint",
   "repository": {
@@ -35,8 +35,8 @@
     "dev": "yarn watch:lint"
   },
   "devDependencies": {
-    "@navikt/ds-css": "^4.10.2",
-    "@navikt/ds-tokens": "^4.10.2",
+    "@navikt/ds-css": "^4.11.2",
+    "@navikt/ds-tokens": "^4.11.2",
     "@types/jest": "^29.0.0",
     "concurrently": "7.2.1",
     "copyfiles": "2.4.1",

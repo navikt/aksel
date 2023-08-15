@@ -1,6 +1,7 @@
 import React from "react";
 import { Chips } from "../../..";
 import { useSelectedOptionsContext } from "./selectedOptionsContext";
+import { useInputContext } from "../Input/inputContext";
 
 interface SelectedOptionsProps {
   selectedOptions?: string[];
@@ -10,10 +11,12 @@ interface SelectedOptionsProps {
 
 const Option = ({ option }: { option: string }) => {
   const { isMultiSelect, removeSelectedOption } = useSelectedOptionsContext();
+  const { focusInput } = useInputContext();
 
   const onClick = (e) => {
     e.stopPropagation();
     removeSelectedOption(option);
+    focusInput();
   };
 
   if (!isMultiSelect) {

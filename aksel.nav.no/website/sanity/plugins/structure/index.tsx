@@ -95,7 +95,6 @@ export const structure = async (
   );
 
   outdated = outdated.filter((x) => isAfter(x.updateInfo?.lastVerified));
-  console.log(outdated.length);
 
   return S.list()
     .title("Innholdstyper")
@@ -125,7 +124,7 @@ export const structure = async (
         ? [
             S.listItem()
               .title(
-                `Nye tilbakemeldinger (${
+                `Tilbakemeldinger (${
                   feedback.filter(
                     (x) => !x._id.includes("draft") && x.behandlet === false
                   ).length
@@ -134,7 +133,7 @@ export const structure = async (
               .icon(CommentIcon)
               .child(
                 S.list()
-                  .title("Tilbakemeldinger")
+                  .title("Tilbakemeldinger.")
                   .items([
                     S.listItem()
                       .title(

@@ -96,7 +96,7 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ### [<img id="github-comment-finder" src="https://raw.githubusercontent.com/storybookjs/brand/main/logo/logo-storybook-inverse.svg" height="32"/>](${{steps.storybook_url.outputs.replaced}})
+            ## [Storybook demo](${{steps.storybook_url.outputs.replaced}})
 
             ### [Endringer til review](${{steps.chromatic_tests.outputs.url}}): ${{steps.chromatic_tests.outputs.changeCount}}
 
