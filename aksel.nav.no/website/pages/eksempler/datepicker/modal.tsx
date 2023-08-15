@@ -17,13 +17,15 @@ const Example = () => {
       <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
       <Modal ref={ref} header={{ heading: "Heading" }}>
-        <Modal.Body className="min-h-96 min-w-96 max-w-full">
-          <DatePicker {...datepickerProps} strategy="fixed">
-            <DatePicker.Input {...inputProps} label="Velg dato" />
-          </DatePicker>
-          <div className="pt-4">
-            {selectedDay &&
-              format(selectedDay, "dd.MM.yyyy", { locale: nbLocale })}
+        <Modal.Body>
+          <div className="min-h-96 min-w-96 max-w-full">
+            <DatePicker {...datepickerProps} strategy="fixed">
+              <DatePicker.Input {...inputProps} label="Velg dato" />
+            </DatePicker>
+            <div className="pt-4">
+              {selectedDay &&
+                format(selectedDay, "dd.MM.yyyy", { locale: nbLocale })}
+            </div>
           </div>
         </Modal.Body>
       </Modal>
