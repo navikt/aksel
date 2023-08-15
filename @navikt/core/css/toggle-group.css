@@ -113,7 +113,6 @@
 .navds-toggle-group__button[aria-checked="true"] {
   background-color: var(--ac-toggle-group-selected-bg, var(--a-surface-action-selected));
   color: var(--ac-toggle-group-selected-text, var(--a-text-on-action));
-  font-weight: var(--a-font-weight-bold);
 }
 
 .navds-toggle-group--neutral > .navds-toggle-group__button[aria-pressed="true"],
