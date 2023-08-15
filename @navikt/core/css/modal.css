@@ -22,6 +22,7 @@
   transform: translate(0, -50%);
   overflow: auto;
   max-height: 80%;
+  max-width: calc((100% - 6px) - 2em);
 
   /* From polyfill (dialog-polyfill/dist/dialog-polyfill.css): */
   left: 0;
