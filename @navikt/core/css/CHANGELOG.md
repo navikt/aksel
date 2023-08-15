@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 4.11.2
+
+### Patch Changes
+
+- :lipstick: ToggleGroup: fjern semibold fra selected button ([#2167](https://github.com/navikt/aksel/pull/2167))
+
 ## 4.11.1
 
 ### Patch Changes

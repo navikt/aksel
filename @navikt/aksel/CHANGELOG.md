@@ -1,5 +1,12 @@
 # @navikt/aksel
 
+## 4.11.2
+
+### Patch Changes
+
+- Updated dependencies [[`72321e384`](https://github.com/navikt/aksel/commit/72321e3846f785318ebdba9f8e06cf13b09cd524)]:
+  - @navikt/ds-css@4.11.2
+
 ## 4.11.1
 
 ### Patch Changes
