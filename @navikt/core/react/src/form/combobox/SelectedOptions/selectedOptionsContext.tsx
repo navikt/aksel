@@ -102,16 +102,13 @@ export const SelectedOptionsProvider = ({
       } else {
         addSelectedOption(option);
       }
-      if (!isMultiSelect) {
-        clearInput(event);
-      }
+      clearInput(event);
       focusInput();
     },
     [
       addSelectedOption,
       clearInput,
       focusInput,
-      isMultiSelect,
       removeSelectedOption,
       selectedOptions,
     ]

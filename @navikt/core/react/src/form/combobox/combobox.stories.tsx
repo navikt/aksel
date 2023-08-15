@@ -454,7 +454,7 @@ export const TestThatCallbacksOnlyFireWhenExpected = {
     await sleep(250);
     userEvent.keyboard("{Enter}");
     await sleep(250);
-    expect(args.onClear.mock.calls).toHaveLength(2); // Temporarily incorrect value until fixed. Correct value: 1
+    expect(args.onClear.mock.calls).toHaveLength(1);
     expect(args.onToggleSelected.mock.calls).toHaveLength(1);
   },
 };
