@@ -1,6 +1,7 @@
 .navds-list ul,
 .navds-list ol {
   padding: 0;
+  margin-block: var(--a-spacing-4);
 }
 
 .navds-list--nested {
@@ -58,6 +59,7 @@
 
 .navds-list ol {
   padding-left: var(--a-spacing-2);
+  list-style: decimal;
 }
 
 .navds-list ol li {
