@@ -87,7 +87,7 @@ export const IconSidebar = ({
         href="/ikoner"
         scroll={false}
         prefetch={false}
-        className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus active:bg-surface-neutral-subtle-hover absolute right-2 top-2 grid aspect-square place-content-center rounded text-xl focus:outline-none"
+        className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus active:bg-surface-neutral-subtle-hover absolute right-2 top-4 grid aspect-square place-content-center rounded text-xl focus:outline-none"
         onClick={() => {
           focusRef?.current?.focus?.();
         }}
