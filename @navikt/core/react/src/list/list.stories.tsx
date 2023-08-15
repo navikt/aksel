@@ -91,7 +91,7 @@ export const WithHeading = {
   },
 };
 
-export const Sizes = {
+export const SizesUl = {
   render: () => {
     return (
       <VStack gap="8">
@@ -122,6 +122,98 @@ export const Sizes = {
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
           <List.Item>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+        </List>
+      </VStack>
+    );
+  },
+};
+
+export const SizesOl = {
+  render: () => {
+    return (
+      <VStack gap="8">
+        <List
+          title="Medium list"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
+          size="medium"
+          as="ol"
+        >
+          <List.Item title="Lorem Ipsum Dolor Sit Amet">
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item title="Consectetur Adipiscing Elit">
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+        </List>
+        <List
+          title="Small list"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
+          size="small"
+          as="ol"
+        >
+          <List.Item title="Lorem Ipsum Dolor Sit Amet">
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item title="Consectetur Adipiscing Elit">
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+        </List>
+      </VStack>
+    );
+  },
+};
+
+export const SizesIcons = {
+  render: () => {
+    return (
+      <VStack gap="8">
+        <List
+          title="Medium list"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
+          size="medium"
+        >
+          <List.Item
+            icon={<HeadHeartIcon aria-hidden />}
+            title="Lorem Ipsum Dolor Sit Amet"
+          >
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item
+            icon={<HeadHeartIcon aria-hidden />}
+            title="Consectetur Adipiscing Elit"
+          >
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item icon={<HeadHeartIcon aria-hidden />}>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+        </List>
+        <List
+          title="Small list"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
+          size="small"
+        >
+          <List.Item
+            icon={<HeadHeartIcon aria-hidden />}
+            title="Lorem Ipsum Dolor Sit Amet"
+          >
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item
+            icon={<HeadHeartIcon aria-hidden />}
+            title="Consectetur Adipiscing Elit"
+          >
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item icon={<HeadHeartIcon aria-hidden />}>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
         </List>

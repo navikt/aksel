@@ -49,6 +49,11 @@
   color: var(--ac-list-marker-icon-color, var(--ac-list-marker-color, var(--a-icon-default)));
   display: flex;
   align-items: center;
+  height: var(--a-font-line-height-large);
+  padding-block-end: 1px;
+}
+
+.navds-list--small .navds-list__item-marker--icon {
   height: var(--a-font-line-height-medium);
 }
 
@@ -72,6 +77,12 @@
 
 .navds-list ol li::marker {
   font-weight: var(--a-font-weight-bold);
-  font-size: var(--a-font-size-medium);
+  font-size: var(--a-font-size-large);
   color: var(--ac-list-marker-ol-color, var(--ac-list-marker-color, var(--a-icon-default)));
+  line-height: var(--a-font-line-height-large);
+}
+
+.navds-list--small ol li::marker {
+  font-size: var(--a-font-size-small);
+  line-height: var(--a-font-line-height-medium);
 }
