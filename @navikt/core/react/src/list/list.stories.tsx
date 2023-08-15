@@ -106,7 +106,7 @@ export const Sizes = {
           <List.Item title="Consectetur Adipiscing Elit">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
-          <List.Item title="Sed Do Eiusmod Tempor Incididunt">
+          <List.Item>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
         </List>
@@ -121,7 +121,7 @@ export const Sizes = {
           <List.Item title="Consectetur Adipiscing Elit">
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
-          <List.Item title="Sed Do Eiusmod Tempor Incididunt">
+          <List.Item>
             Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
           </List.Item>
         </List>
