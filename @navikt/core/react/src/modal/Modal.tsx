@@ -192,21 +192,25 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       };
     }, [modalRef]);
 
+    const isWidthPreset =
+      typeof width === "string" && ["small", "medium"].includes(width);
+
     return (
       <dialog
         ref={mergedRef}
         className={cl(
           "navds-modal",
           className,
-          typeof width === "string" &&
-            ["small", "medium", "large"].includes(width) &&
-            `navds-modal--${width}`,
+          isWidthPreset && `navds-modal--${width}`,
           {
             "navds-modal--polyfilled": needPolyfill,
             "navds-modal--autowidth": !width,
           }
         )}
-        style={{ ...style, width }}
+        style={{
+          ...style,
+          ...(!isWidthPreset ? { width } : {}),
+        }}
         onCancel={(event) => {
           // FYI: onCancel fires when you press Esc
           if (onBeforeClose && onBeforeClose() === false) {
