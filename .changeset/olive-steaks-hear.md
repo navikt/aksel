@@ -3,4 +3,4 @@
 "@navikt/ds-css": minor
 ---
 
-CopyButton: Har nå prop 'iconPlacement' for å høyre/venstrestille ikon
+CopyButton: Har nå prop 'iconPosition' for å høyre/venstre aligne ikon
