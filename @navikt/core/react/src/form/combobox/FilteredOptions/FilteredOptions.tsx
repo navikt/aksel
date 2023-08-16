@@ -50,6 +50,8 @@ const FilteredOptions = () => {
           tabIndex={-1}
           onPointerUp={(event) => {
             toggleOption(value, event);
+            if (!isMultiSelect && !selectedOptions.includes(value))
+              toggleIsListOpen(false);
           }}
           id={`${id}-combobox-new-option`}
           className={cl("navds-combobox__list-item__new-option", {
@@ -90,9 +92,8 @@ const FilteredOptions = () => {
           tabIndex={-1}
           onPointerUp={(event) => {
             toggleOption(option, event);
-            if (!isMultiSelect) {
+            if (!isMultiSelect && !selectedOptions.includes(option))
               toggleIsListOpen(false);
-            }
           }}
           role="option"
           aria-selected={selectedOptions.includes(option)}

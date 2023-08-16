@@ -60,10 +60,10 @@ export const SelectedOptionsProvider = ({
 
   const addSelectedOption = useCallback(
     (option: string) => {
-      const isAddedByUser = !options
+      const isCustomOption = !options
         .map((opt) => opt.toLowerCase())
         .includes(option?.toLowerCase?.());
-      if (isAddedByUser) {
+      if (isCustomOption) {
         allowNewValues && addCustomOption(option);
       } else if (isMultiSelect) {
         setSelectedOptions((prevSelectedOptions) => [
@@ -73,15 +73,15 @@ export const SelectedOptionsProvider = ({
       } else {
         setSelectedOptions([option]);
       }
-      onToggleSelected?.(option, true, isAddedByUser);
+      onToggleSelected?.(option, true, isCustomOption);
     },
     [addCustomOption, allowNewValues, isMultiSelect, onToggleSelected, options]
   );
 
   const removeSelectedOption = useCallback(
     (option: string) => {
-      const isAddedByUser = customOptions.includes(option);
-      if (isAddedByUser) {
+      const isCustomOption = customOptions.includes(option);
+      if (isCustomOption) {
         removeCustomOption(option);
       } else {
         setSelectedOptions((prevSelectedOptions) =>
@@ -90,7 +90,7 @@ export const SelectedOptionsProvider = ({
           )
         );
       }
-      onToggleSelected?.(option, false, isAddedByUser);
+      onToggleSelected?.(option, false, isCustomOption);
     },
     [customOptions, onToggleSelected, removeCustomOption]
   );
