@@ -45,7 +45,7 @@
 .navds-table__header-cell,
 .navds-table__data-cell {
   display: table-cell;
-  padding: var(--a-spacing-4) var(--a-spacing-3);
+  padding: var(--a-spacing-3) var(--a-spacing-2);
   border-bottom: 1px solid var(--ac-table-row-border, var(--a-border-default));
   text-align: left;
 }
@@ -74,9 +74,14 @@
   border-bottom-color: transparent;
 }
 
+.navds-table--large .navds-table__header-cell,
+.navds-table--large .navds-table__data-cell {
+  padding: var(--a-spacing-4) var(--a-spacing-2);
+}
+
 .navds-table--small .navds-table__header-cell,
 .navds-table--small .navds-table__data-cell {
-  padding: var(--a-spacing-2) var(--a-spacing-3);
+  padding: var(--a-spacing-1) var(--a-spacing-2);
 }
 
 .navds-table .navds-checkbox .navds-checkbox__input {
