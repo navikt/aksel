@@ -153,3 +153,15 @@ export const EmptyHeader = () => (
     </Modal>
   </div>
 );
+
+export const Small = () => (
+  <Modal open width="small" header={{ heading: "Simple header" }}>
+    <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
+  </Modal>
+);
+
+export const Medium = () => (
+  <Modal open width="medium" header={{ heading: "Simple header" }}>
+    <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
+  </Modal>
+);
