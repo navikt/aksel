@@ -11,9 +11,9 @@ import { Detail, Heading, mergeRefs, useId } from "..";
 import ModalBody from "./ModalBody";
 import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
-import { ModalContext, getCloseHandler } from "./ModalUtils";
+import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
+import { ModalContext } from "./ModalContext";
 
-const bodyClass = "navds-modal__document-body";
 const needPolyfill =
   typeof window !== "undefined" && window.HTMLDialogElement === undefined;
 
@@ -174,23 +174,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     }, [modalRef, open]);
 
-    useEffect(() => {
-      if (!modalRef.current) return;
-      if (modalRef.current.open) document.body.classList.add(bodyClass); // In case `open` is true initially
-
-      const observer = new MutationObserver(() => {
-        if (modalRef.current?.open) document.body.classList.add(bodyClass);
-        else document.body.classList.remove(bodyClass);
-      });
-      observer.observe(modalRef.current, {
-        attributes: true,
-        attributeFilter: ["open"],
-      });
-      return () => {
-        observer.disconnect();
-        document.body.classList.remove(bodyClass); // In case modal is unmounted before it's closed
-      };
-    }, [modalRef]);
+    useBodyScrollLock(modalRef, "navds-modal__document-body");
 
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);

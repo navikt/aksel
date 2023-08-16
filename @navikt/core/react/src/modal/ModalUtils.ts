@@ -1,10 +1,5 @@
-import React, { createContext } from "react";
+import React from "react";
 import type { ModalProps } from "./Modal";
-
-interface ModalContextProps {
-  closeHandler?: React.MouseEventHandler<HTMLButtonElement>;
-}
-export const ModalContext = createContext<ModalContextProps | null>(null);
 
 export function getCloseHandler(
   modalRef: React.RefObject<HTMLDialogElement>,
@@ -16,4 +11,27 @@ export function getCloseHandler(
     return () => onBeforeClose() !== false && modalRef.current?.close();
   }
   return () => modalRef.current?.close();
+}
+
+export function useBodyScrollLock(
+  modalRef: React.RefObject<HTMLDialogElement>,
+  bodyClass: string
+) {
+  React.useEffect(() => {
+    if (!modalRef.current) return;
+    if (modalRef.current.open) document.body.classList.add(bodyClass); // In case `open` is true initially
+
+    const observer = new MutationObserver(() => {
+      if (modalRef.current?.open) document.body.classList.add(bodyClass);
+      else document.body.classList.remove(bodyClass);
+    });
+    observer.observe(modalRef.current, {
+      attributes: true,
+      attributeFilter: ["open"],
+    });
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove(bodyClass); // In case modal is unmounted before it's closed
+    };
+  }, [modalRef, bodyClass]);
 }

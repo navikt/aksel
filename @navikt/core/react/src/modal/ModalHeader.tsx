@@ -2,7 +2,7 @@ import React, { forwardRef, useContext } from "react";
 import cl from "clsx";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { ModalContext } from "./ModalUtils";
+import { ModalContext } from "./ModalContext";
 
 export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;

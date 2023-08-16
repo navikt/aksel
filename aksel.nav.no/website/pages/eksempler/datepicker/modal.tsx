@@ -19,7 +19,7 @@ const Example = () => {
       <Modal ref={ref} header={{ heading: "Heading" }}>
         <Modal.Body>
           <div className="min-h-96 min-w-96 max-w-full">
-            <DatePicker {...datepickerProps} strategy="fixed">
+            <DatePicker {...datepickerProps}>
               <DatePicker.Input {...inputProps} label="Velg dato" />
             </DatePicker>
             <div className="pt-4">

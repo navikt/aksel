@@ -111,7 +111,7 @@ export interface DatePickerDefaultProps
    * Avoid using if possible!
    * Changes what CSS position property to use.
    * You want to use "fixed" if parent wrapper has position relative, but you want popover to escape
-   * @default "absolute"
+   * @default See Popover
    */
   strategy?: "absolute" | "fixed";
   /**
@@ -184,7 +184,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       open: _open,
       onClose,
       onOpenToggle,
-      strategy = "absolute",
+      strategy,
       bubbleEscape = false,
       ...rest
     },
