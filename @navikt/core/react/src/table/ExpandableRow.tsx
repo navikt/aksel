@@ -96,6 +96,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
             "navds-table__expandable-row--open": isOpen,
             "navds-table__expandable-row--expansion-disabled":
               expansionDisabled,
+            "navds-table__expandable-row--clickable": expandOnRowClick,
           })}
           onClick={(e) => {
             !expansionDisabled && expandOnRowClick && onRowClick(e);
@@ -110,8 +111,8 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           >
             {!expansionDisabled && (
               <button
-                type="button"
                 className="navds-table__toggle-expand-button"
+                type="button"
                 aria-controls={id}
                 aria-expanded={isOpen}
                 onClick={expansionHandler}
