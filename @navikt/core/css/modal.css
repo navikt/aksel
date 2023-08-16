@@ -63,21 +63,6 @@
   .navds-modal--autowidth {
     max-width: 700px;
   }
-
-  .navds-modal--small {
-    width: 100%;
-    max-width: min(95vw, 500px);
-  }
-
-  .navds-modal--medium {
-    width: 100%;
-    max-width: min(95vw, 700px);
-  }
-
-  .navds-modal--large {
-    width: 100%;
-    max-width: min(95vw, 1000px);
-  }
 }
 
 @media (max-width: 767px) {
