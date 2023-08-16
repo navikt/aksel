@@ -80,10 +80,11 @@ export const InputContextProvider = ({ children, value: props }) => {
   const clearInput = useCallback(
     (event: React.PointerEvent | React.KeyboardEvent) => {
       onClear?.(event);
+      externalOnChange?.(null, "");
       setValue("");
       setSearchTerm("");
     },
-    [onClear, setSearchTerm, setValue]
+    [externalOnChange, onClear, setValue]
   );
 
   const focusInput = useCallback(() => {

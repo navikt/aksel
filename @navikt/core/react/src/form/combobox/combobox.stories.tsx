@@ -479,6 +479,6 @@ export const TestThatCallbacksOnlyFireWhenExpected = {
     await sleep(250);
     expect(args.onClear.mock.calls).toHaveLength(1);
     expect(args.onToggleSelected.mock.calls).toHaveLength(1);
-    expect(args.onChange.mock.calls).toHaveLength(searchWord.length);
+    expect(args.onChange.mock.calls).toHaveLength(searchWord.length + 1);
   },
 };
