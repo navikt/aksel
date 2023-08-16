@@ -198,15 +198,11 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     return (
       <dialog
         ref={mergedRef}
-        className={cl(
-          "navds-modal",
-          className,
-          isWidthPreset && `navds-modal--${width}`,
-          {
-            "navds-modal--polyfilled": needPolyfill,
-            "navds-modal--autowidth": !width,
-          }
-        )}
+        className={cl("navds-modal", className, {
+          "navds-modal--polyfilled": needPolyfill,
+          "navds-modal--autowidth": !width,
+          [`navds-modal--${width}`]: isWidthPreset,
+        })}
         style={{
           ...style,
           ...(!isWidthPreset ? { width } : {}),
