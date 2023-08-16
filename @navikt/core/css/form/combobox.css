@@ -283,7 +283,7 @@
 
 .navds-combobox__list-item__new-option--focus {
   box-shadow: var(--a-shadow-focus) inset, var(--a-border-action) 0 0 0 5px inset;
-  border-radius: 3px;
+  border-radius: calc(var(--a-border-radius-medium) - 1px);
 }
 
 /* Mobile */

@@ -93,6 +93,7 @@ interface ModalComponent
  * @see 🏷️ {@link ModalProps}
  *
  * @example
+ * State change with `useRef`
  * ```jsx
  * const ref = useRef<HTMLDialogElement>(null);
  * <Button onClick={() => ref.current?.showModal()}>Open modal</Button>
@@ -114,6 +115,7 @@ interface ModalComponent
  * </Modal>
  * ```
  * @example
+ * State change with `useState`
  * ```jsx
  * const [open, setOpen] = useState(false);
  * <Modal

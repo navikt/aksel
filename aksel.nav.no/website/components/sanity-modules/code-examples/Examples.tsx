@@ -1,11 +1,16 @@
 import { capitalize, Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
 import { CodeExapmplesT } from "@/types";
-import { BodyLong, Chips, Link } from "@navikt/ds-react";
+import {
+  ExternalLinkIcon,
+  LaptopIcon,
+  MobileSmallIcon,
+} from "@navikt/aksel-icons";
+import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import cl from "clsx";
-import { useEffect, useState } from "react";
-import { CodeSandbox } from "./CodeSandbox";
 import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
+import { CodeSandbox } from "./CodeSandbox";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";
@@ -15,6 +20,7 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
   const router = useRouter();
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleExampleLoad = () => {
     let attempts = 0;
@@ -139,10 +145,11 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
                     id={iframeId}
                     aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
                     className={cl(
-                      "min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                      "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                       { invisible: unloaded }
                     )}
                     title="Kode-eksempler"
+                    ref={iframeRef}
                   />
                   {unloaded && (
                     <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
@@ -153,18 +160,50 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
                     </div>
                   )}
                 </div>
-                <div className="mb-2 flex justify-center gap-2 rounded-b border border-gray-300 px-2 py-1 text-base sm:justify-end ">
-                  <CodeSandbox code={fil.innhold.trim()} />
-                  <Link
-                    href={`/eksempler/${node.dir.title}/${fil.navn.replace(
-                      ".tsx",
-                      ""
-                    )}`}
-                    className="si-ignore text-gray-900"
-                    target="_blank"
-                  >
-                    Åpne i nytt vindu
-                  </Link>
+                <div className="mb-2 rounded-b border border-gray-300 p-1">
+                  <HStack gap="4" justify="space-between">
+                    <div className="hidden sm:block">
+                      <HStack gap="2">
+                        <Button
+                          variant="tertiary-neutral"
+                          size="small"
+                          icon={
+                            <MobileSmallIcon title="Sett eksempel til mobilbredde" />
+                          }
+                          onClick={() =>
+                            (iframeRef.current.style.width = "360px")
+                          }
+                        />
+
+                        <Button
+                          variant="tertiary-neutral"
+                          size="small"
+                          icon={
+                            <LaptopIcon title="Sett eksempel til desktopbredde" />
+                          }
+                          onClick={() => (iframeRef.current.style.width = "")}
+                        />
+                      </HStack>
+                    </div>
+
+                    <HStack gap="2">
+                      <CodeSandbox code={fil.innhold.trim()} />
+                      <Button
+                        variant="tertiary-neutral"
+                        size="small"
+                        icon={
+                          <ExternalLinkIcon title="Åpne eksempel i nytt vindu" />
+                        }
+                        target="_blank"
+                        className="si-ignore"
+                        as="a"
+                        href={`/eksempler/${node.dir.title}/${fil.navn.replace(
+                          ".tsx",
+                          ""
+                        )}`}
+                      />
+                    </HStack>
+                  </HStack>
                 </div>
 
                 <Snippet

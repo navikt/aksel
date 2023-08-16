@@ -12,32 +12,23 @@ const Example = () => {
       <Modal
         open={open}
         onClose={() => setOpen(false)}
-        header={{
-          heading: "Er du sikker?",
-          size: "small",
-          closeButton: false,
-        }}
-        width={500}
+        aria-labelledby="modal-heading"
       >
+        <Modal.Header>
+          <Heading level="1" size="large" id="modal-heading">
+            Laborum proident id ullamco
+          </Heading>
+        </Modal.Header>
         <Modal.Body>
           <BodyLong>
             Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
             incididunt dolor do ad ut. Incididunt eiusmod nostrud deserunt duis
-            laborum.
+            laborum. Proident aute culpa qui nostrud velit adipisicing minim.
+            Consequat aliqua aute dolor do sit Lorem nisi mollit velit. Aliqua
+            exercitation non minim minim pariatur sunt laborum ipsum.
+            Exercitation nostrud est laborum magna non non aliqua qui esse.
           </BodyLong>
         </Modal.Body>
-        <Modal.Footer>
-          <Button type="button" variant="danger" onClick={() => setOpen(false)}>
-            Ja, jeg er sikker
-          </Button>
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={() => setOpen(false)}
-          >
-            Avbryt
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );
@@ -51,6 +42,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
-  desc: "Lukkeknappen i headeren kan skjules, men da må du ha en annen knapp som lukker modalen.",
+  index: 3,
+  desc: "Headeren tilbys som en egen komponent for de tilfellene du trenger mer fleksiblitet enn header-propen gir deg. Begge varianter har mulighet for å skjule lukkeknappen.",
 };

@@ -37,6 +37,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       ariaDescribedBy,
       moveFocusToInput,
       moveFocusToEnd,
+      setFilteredOptionsIndex,
       shouldAutocomplete,
     } = useFilteredOptionsContext();
 
@@ -139,6 +140,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       [filteredOptions.length, onChange, toggleIsListOpen]
     );
 
+    const onBlur = () => {
+      setFilteredOptionsIndex(-1);
+    };
+
     return (
       <input
         {...rest}
@@ -148,6 +153,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onChange={onChangeHandler}
         type="text"
         role="combobox"
+        onBlur={onBlur}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
         aria-controls={`${inputProps.id}-filtered-options`}
