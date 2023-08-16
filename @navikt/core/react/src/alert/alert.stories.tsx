@@ -185,6 +185,16 @@ export const WithCloseButton: Story = {
           </BodyLong>
           <Link href="#">Id elit esse enim reprehenderit</Link>
         </AlertWithCloseButton>
+        <AlertWithCloseButton>
+          <DsHeading spacing size="small" level="3">
+            Aliquip duis est in commodo pariatur
+          </DsHeading>
+          <BodyLong>
+            Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
+            laboris ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat
+            sint commodo consequat eu aute.
+          </BodyLong>
+        </AlertWithCloseButton>
       </div>
     );
   },
