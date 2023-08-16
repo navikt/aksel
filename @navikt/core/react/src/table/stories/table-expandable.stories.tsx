@@ -36,6 +36,44 @@ export const Expandable = () => {
   );
 };
 
+export const ExpandableLarge = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [open, setOpen] = useState(false);
+  return (
+    <Table size="large">
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell />
+          {columns.map(({ key, name }) => (
+            <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+          ))}
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {data.slice(0, 1).map((data) => (
+          <Table.ExpandableRow content={data.content} key={data.name}>
+            {columns.map(({ key }) => (
+              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+            ))}
+          </Table.ExpandableRow>
+        ))}
+        {data.slice(1, 2).map((data) => (
+          <Table.ExpandableRow
+            content={data.content}
+            key={data.name}
+            open={open}
+            onOpenChange={(open) => setOpen(open)}
+          >
+            {columns.map(({ key }) => (
+              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+            ))}
+          </Table.ExpandableRow>
+        ))}
+      </Table.Body>
+    </Table>
+  );
+};
+
 export const ExpandableSmall = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [open, setOpen] = useState(false);
