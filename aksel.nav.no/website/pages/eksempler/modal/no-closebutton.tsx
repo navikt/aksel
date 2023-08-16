@@ -17,7 +17,7 @@ const Example = () => {
           size: "small",
           closeButton: false,
         }}
-        width={500}
+        width="small"
       >
         <Modal.Body>
           <BodyLong>

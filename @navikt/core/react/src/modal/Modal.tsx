@@ -216,7 +216,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
               )}
               <Heading
                 size={header.size ?? "medium"}
-                level="2"
+                level="1"
                 id={ariaLabelId}
               >
                 <span className="navds-modal__header-icon">{header.icon}</span>
