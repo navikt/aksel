@@ -19,7 +19,7 @@ const Example = () => {
           <Button form="skjema">Send</Button>
           <Button
             type="button"
-            variant="tertiary"
+            variant="secondary"
             onClick={() => ref.current?.close()}
           >
             Avbryt
@@ -38,6 +38,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 4,
   desc: 'Det er ikke støtte for å ha <form> som direkte barn av <Modal>. Legg <form> enten rundt hele modalen eller inni <Modal.Body>. Sistnevnte gjør det mulig å sette method="dialog", som gjør at modalen lukkes ved submit.',
 };
