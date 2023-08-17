@@ -26,7 +26,12 @@
   height: var(--a-font-line-height-xlarge);
   margin-inline: var(--a-spacing-1);
   margin-block: 0;
+  margin-block-start: -1px;
   background: radial-gradient(circle, var(--a-surface-default) 50%, 0, transparent);
+}
+
+.navds-alert--close-button > .navds-alert__icon {
+  margin-block-start: 0;
 }
 
 .navds-alert--small > .navds-alert__icon {
