@@ -97,7 +97,9 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
             </Heading>
           )}
           {description && (
-            <BodyShort id={`description-${ariaId}`}>{description}</BodyShort>
+            <BodyShort size={listSize} id={`description-${ariaId}`}>
+              {description}
+            </BodyShort>
           )}
           <ListTag
             aria-labelledby={title && `tittel-${ariaId}`}
