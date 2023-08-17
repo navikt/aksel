@@ -42,8 +42,12 @@ export const SelectedOptionsProvider = ({
   >;
 }) => {
   const { clearInput, focusInput } = useInputContext();
-  const { customOptions, removeCustomOption, addCustomOption } =
-    useCustomOptionsContext();
+  const {
+    customOptions,
+    removeCustomOption,
+    addCustomOption,
+    setCustomOptions,
+  } = useCustomOptionsContext();
   const {
     allowNewValues,
     isMultiSelect,
@@ -65,6 +69,7 @@ export const SelectedOptionsProvider = ({
         .includes(option?.toLowerCase?.());
       if (isCustomOption) {
         allowNewValues && addCustomOption(option);
+        !isMultiSelect && setSelectedOptions([]);
       } else if (isMultiSelect) {
         setSelectedOptions((prevSelectedOptions) => [
           ...prevSelectedOptions,
@@ -72,10 +77,18 @@ export const SelectedOptionsProvider = ({
         ]);
       } else {
         setSelectedOptions([option]);
+        setCustomOptions([]);
       }
       onToggleSelected?.(option, true, isCustomOption);
     },
-    [addCustomOption, allowNewValues, isMultiSelect, onToggleSelected, options]
+    [
+      addCustomOption,
+      allowNewValues,
+      isMultiSelect,
+      onToggleSelected,
+      options,
+      setCustomOptions,
+    ]
   );
 
   const removeSelectedOption = useCallback(
