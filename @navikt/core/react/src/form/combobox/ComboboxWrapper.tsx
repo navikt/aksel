@@ -49,10 +49,9 @@ const ComboboxWrapper = ({
         className,
         "navds-form-field",
         `navds-form-field--${inputSize}`,
-        "navds-search",
         {
-          "navds-search--error": hasError,
-          "navds-search--disabled": !!inputProps.disabled,
+          "navds-combobox--error": hasError,
+          "navds-combobox--disabled": !!inputProps.disabled,
           "navds-combobox--focused": hasFocusWithin,
         }
       )}
