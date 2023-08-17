@@ -114,9 +114,8 @@ export const Header = ({
           <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
             <GlobalSearch />
           </div>
-          <div className="mr-2 h-full lg:hidden">
-            <Hamburger />
-          </div>
+
+          <Hamburger />
         </div>
       </header>
     </>

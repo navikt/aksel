@@ -9,8 +9,7 @@ import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import Fuse from "fuse.js";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { categorizeIcons, getFillIcon } from "./utils";
 import { IconSidebar } from "./Sidebar";
 import { TitleLinks } from "./TitleLinks";
@@ -69,12 +68,6 @@ export const IconPage = ({ name }: { name: string }) => {
         : strokeIcons
     );
   }, [toggle, query, strokeIcons, fillIcons]);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    hideModal && Modal.setAppElement("#__next");
-  }, [hideModal]);
 
   const subCategoryWordLength = Math.max(
     ...categories.map((cat) =>
@@ -260,15 +253,8 @@ export const IconPage = ({ name }: { name: string }) => {
                 {!hideModal && (
                   <Modal
                     open={!!name}
-                    onClose={() =>
-                      router.push(`/ikoner#${name}`, undefined, {
-                        shallow: true,
-                      })
-                    }
-                    closeButton={false}
-                    aria-modal
                     aria-label={`${name} ikon`}
-                    className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded px-2 py-6 focus:outline-none sm:px-6"
+                    className="rounded px-2 py-6 sm:px-6"
                   >
                     {name && <IconSidebar name={name} focusRef={focusRef} />}
                   </Modal>

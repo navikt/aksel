@@ -1,3 +1,4 @@
+import { FileIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useRef } from "react";
@@ -9,7 +10,14 @@ const Example = () => {
     <div className="py-16">
       <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
-      <Modal ref={ref} header={{ heading: "Overskrift" }}>
+      <Modal
+        ref={ref}
+        header={{
+          label: "Modal demo",
+          icon: <FileIcon aria-hidden />,
+          heading: "Overskrift",
+        }}
+      >
         <Modal.Body>
           <BodyLong>
             Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
@@ -52,5 +60,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 1,
 };

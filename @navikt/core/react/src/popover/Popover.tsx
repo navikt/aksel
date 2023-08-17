@@ -16,10 +16,12 @@ import React, {
   useCallback,
   useMemo,
   useRef,
+  useContext,
 } from "react";
 import { mergeRefs } from "..";
 import { useClientLayoutEffect, useEventListener } from "../util";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
+import { ModalContext } from "../modal/ModalContext";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -117,13 +119,15 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       onClose,
       placement = "top",
       offset,
-      strategy: userStrategy = "absolute",
+      strategy: userStrategy,
       bubbleEscape = false,
       ...rest
     },
     ref
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
+    const isInModal = useContext(ModalContext) !== null;
+    const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
 
     const {
       x,
@@ -135,7 +139,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement: flPlacement,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
     } = useFloating({
-      strategy: userStrategy,
+      strategy: chosenStrategy,
       placement,
       open: open,
       onOpenChange: onClose,

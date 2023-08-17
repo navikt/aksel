@@ -42,7 +42,7 @@ const ModalWrapper = () => {
     <>
       <Button onClick={() => setIsOpen(true)}>Open modal</Button>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <Modal.Content>modal content</Modal.Content>
+        <Modal.Body>modal content</Modal.Body>
       </Modal>
     </>
   );
