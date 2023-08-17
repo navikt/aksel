@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.12.1
+
+### @navikt/ds-css
+
+- Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
+
+### @navikt/ds-react
+
+- Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
+
 ## 4.12.0
 
 ### @navikt/ds-css
