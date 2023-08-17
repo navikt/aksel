@@ -4,12 +4,17 @@
   margin-block: var(--a-spacing-4);
 }
 
-.navds-list--nested {
-  margin: var(--a-spacing-4) 0 var(--a-spacing-8) 0;
+.navds-list--nested ul,
+.navds-list--nested ol {
+  margin-block: var(--a-spacing-2);
 }
 
-.navds-list li:not(.navds-list__item--noMargin) {
-  margin-bottom: var(--a-spacing-5);
+.navds-list li {
+  margin-block-end: var(--a-spacing-5);
+}
+
+.navds-list--nested li {
+  margin-block-end: var(--a-spacing-3);
 }
 
 .navds-list:last-child > ul > li:last-child,

@@ -20,7 +20,7 @@ export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
 
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ className, children, title, icon, ...rest }, ref) => {
-    const { listType, isNested, size } = useContext(ListContext);
+    const { listType, size } = useContext(ListContext);
 
     if (listType === "ol" && icon) {
       console.warn(
@@ -29,13 +29,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
     }
 
     return (
-      <li
-        {...rest}
-        ref={ref}
-        className={cl("navds-list__item", className, {
-          "navds-list__item--noMargin": isNested,
-        })}
-      >
+      <li {...rest} ref={ref} className={cl("navds-list__item", className)}>
         {listType === "ul" && (
           <div
             className={cl({
