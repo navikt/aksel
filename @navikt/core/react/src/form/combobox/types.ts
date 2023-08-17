@@ -66,7 +66,10 @@ export interface ComboboxProps
    * @param event
    * @returns
    */
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    event: ChangeEvent<HTMLInputElement> | null,
+    value?: string
+  ) => void;
   /**
    * Callback function triggered whenever the input field is cleared
    *
