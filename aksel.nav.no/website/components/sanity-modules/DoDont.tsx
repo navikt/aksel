@@ -44,11 +44,11 @@ const GetIcon = (s: string) => {
 const getText = (s: string) => {
   switch (s) {
     case "do":
-      return "Do: ";
+      return "Gjør: ";
     case "dont":
-      return "Don't: ";
+      return "Unngå: ";
     case "warning":
-      return "Fare på ferde: ";
+      return "Utfordrende: ";
     default:
       return "";
   }
@@ -74,7 +74,7 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
         )}
         aria-hidden
       >
-        <span className="absolute right-[10px] z-10 translate-y-2">
+        <span className="absolute right-[2px] z-10">
           {GetIcon(block.variant)}
         </span>
       </div>
