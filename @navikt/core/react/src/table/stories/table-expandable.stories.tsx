@@ -37,7 +37,6 @@ export const Expandable = () => {
 };
 
 export const ExpandableLarge = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [open, setOpen] = useState(false);
   return (
     <Table size="large">
@@ -75,7 +74,6 @@ export const ExpandableLarge = () => {
 };
 
 export const ExpandableSmall = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [open, setOpen] = useState(false);
   return (
     <Table size="small">
