@@ -94,6 +94,27 @@ MultiSelect.args = {
   size: "medium",
 };
 
+export function WithAddNewOptions(props) {
+  const id = useId();
+  return (
+    <DemoContainer dataTheme={props.darkMode}>
+      <UNSAFE_Combobox
+        id={id}
+        label="Komboboks med mulighet for å legge til nye verdier"
+        options={props.options}
+        allowNewValues={props.allowNewValues}
+        shouldAutocomplete={props.shouldAutoComplete}
+      />
+    </DemoContainer>
+  );
+}
+
+WithAddNewOptions.args = {
+  options,
+  allowNewValues: true,
+  shouldAutoComplete: true,
+};
+
 export function MultiSelectWithAddNewOptions(props) {
   const id = useId();
   return (
@@ -101,7 +122,7 @@ export function MultiSelectWithAddNewOptions(props) {
       <UNSAFE_Combobox
         id={id}
         isMultiSelect={props.isMultiSelect}
-        label="Komboboks (med mulighet for å legge til nye verdier)"
+        label="Multiselect komboboks med mulighet for å legge til nye verdier"
         options={props.options}
         allowNewValues={props.allowNewValues}
       />

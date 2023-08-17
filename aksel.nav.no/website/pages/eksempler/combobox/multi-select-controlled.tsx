@@ -36,14 +36,14 @@ export const Example = () => {
   const onToggleSelected = (
     option: string,
     isSelected: boolean,
-    isAddedByUser: boolean
+    isCustomOption: boolean
   ) => {
     if (isSelected) {
       setSelectedOptions([...selectedOptions, option]);
     } else {
       setSelectedOptions(selectedOptions.filter((o) => o !== option));
     }
-    if (isAddedByUser) {
+    if (isCustomOption) {
       mockPersistUserAddedValues(option, isSelected);
     }
   };
