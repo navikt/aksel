@@ -102,6 +102,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           {
             "navds-alert--full-width": fullWidth,
             "navds-alert--inline": inline,
+            "navds-alert--close-button": closeButton,
           }
         )}
       >

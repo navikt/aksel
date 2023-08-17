@@ -63,6 +63,11 @@ export interface CopyButtonProps
    * @default 'Kopiert'
    */
   activeTitle?: string;
+  /**
+   * Icon position in Button
+   * @default "left"
+   */
+  iconPosition?: "left" | "right";
 }
 
 /**
@@ -91,6 +96,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       activeDuration = 2000,
       title = "Kopier",
       activeTitle = "Kopiert",
+      iconPosition = "left",
       ...rest
     },
     ref
@@ -119,6 +125,25 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       }, activeDuration);
     };
 
+    const CopyIcon = () => {
+      return active ? (
+        <span className="navds-copybutton__icon">
+          {activeIcon ?? (
+            <CheckmarkIcon
+              aria-hidden={!!text}
+              title={text ? undefined : activeTitle}
+            />
+          )}
+        </span>
+      ) : (
+        <span className="navds-copybutton__icon">
+          {icon ?? (
+            <FilesIcon aria-hidden={!!text} title={text ? undefined : title} />
+          )}
+        </span>
+      );
+    };
+
     return (
       <button
         ref={ref}
@@ -138,25 +163,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         onClick={handleClick}
       >
         <span className="navds-copybutton__content">
-          {active ? (
-            <span className="navds-copybutton__icon">
-              {activeIcon ?? (
-                <CheckmarkIcon
-                  aria-hidden={!!text}
-                  title={text ? undefined : activeTitle}
-                />
-              )}
-            </span>
-          ) : (
-            <span className="navds-copybutton__icon">
-              {icon ?? (
-                <FilesIcon
-                  aria-hidden={!!text}
-                  title={text ? undefined : title}
-                />
-              )}
-            </span>
-          )}
+          {iconPosition === "left" && <CopyIcon />}
 
           {text &&
             (active ? (
@@ -176,6 +183,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
                 {text}
               </Label>
             ))}
+          {iconPosition === "right" && <CopyIcon />}
         </span>
       </button>
     );
