@@ -148,5 +148,22 @@ export const DifferentBackgroundDemo = () => (
       <Radio value="1">August</Radio>
       <Radio value="2">Juli</Radio>
     </RadioGroup>
+    <RadioGroup
+      legend="Alt er feil"
+      error="Du gjør alt feil"
+      style={{ backgroundColor: "lightblue" }}
+    >
+      <Radio value="1">Feil</Radio>
+      <Radio value="2">Feil</Radio>
+    </RadioGroup>
+    <RadioGroup
+      legend="Du får ikke endre denne"
+      readOnly
+      defaultValue="1"
+      style={{ backgroundColor: "lightgray" }}
+    >
+      <Radio value="1">Ikke</Radio>
+      <Radio value="2">Prøv</Radio>
+    </RadioGroup>
   </div>
 );
