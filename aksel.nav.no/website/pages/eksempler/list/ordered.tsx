@@ -26,5 +26,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "Husk å sette riktig nivå/tag på List elementet hvis du bruker en tittel.",
+  desc: "Husk å sette riktig heading-nivå/tag på hvis du bruker en title.",
 };
