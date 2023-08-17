@@ -37,8 +37,8 @@
   box-shadow: 0 0 0 1px var(--ac-combobox-error-border, var(--a-border-danger));
 }
 
-.navds-text-field--error.navds-combobox--focused
-  .navds-text-field__input:not(:hover):not(:disabled):not(.navds-combobox__wrapper-inner--virtually-unfocused) {
+.navds-combobox--error
+  .navds-text-field__input:not(:hover):not(:disabled):not(.navds-combobox__wrapper-inner--virtually-unfocused):focus-within {
   box-shadow: 0 0 0 1px var(--ac-combobox-error-border, var(--a-border-danger)), var(--a-shadow-focus);
 }
 
