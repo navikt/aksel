@@ -30,7 +30,8 @@
   background: radial-gradient(circle, var(--a-surface-default) 50%, 0, transparent);
 }
 
-.navds-alert--close-button > .navds-alert__icon {
+.navds-alert--close-button > .navds-alert__icon,
+.navds-alert--small > .navds-alert__icon {
   margin-block-start: 0;
 }
 
