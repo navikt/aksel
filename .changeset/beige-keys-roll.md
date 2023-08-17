@@ -1,5 +1,5 @@
 ---
-"@navikt/ds-react": patch
+"@navikt/ds-react": minor
 ---
 
-Add support for error messages to combobox
+Combobox: La til støtte for feilmeldinger i Combobox

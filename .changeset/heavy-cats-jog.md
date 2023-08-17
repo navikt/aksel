@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Trigger Combobox.onChange callback in addition to onClear when clearing the value programmatically
+Combobox: Kjører nå 'onChange' + 'onClear' når input blir reset programmatisk

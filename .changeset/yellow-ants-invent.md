@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-:bug: Combobox, single-select: lukk nedtrekksmenyen hvis man legger til ny option
+Combobox: Lukker nå nedtrekksmeny hvis man legger til ny option i singleselect
