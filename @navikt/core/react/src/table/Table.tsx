@@ -49,7 +49,6 @@ export interface TableType
 }
 
 export interface TableContextProps {
-  size: TableProps["size"];
   onSortChange?: (sortKey: string) => void;
   sort?: SortState;
 }
@@ -100,7 +99,7 @@ export const Table = forwardRef(
     },
     ref
   ) => (
-    <TableContext.Provider value={{ size, onSortChange, sort }}>
+    <TableContext.Provider value={{ onSortChange, sort }}>
       <table
         {...rest}
         ref={ref}
