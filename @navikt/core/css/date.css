@@ -223,7 +223,7 @@
 
 .navds-date__field-button {
   position: absolute;
-  right: 1px;
+  right: 0.0625rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--ac-date-input-button-text, var(--a-text-default));
@@ -233,12 +233,12 @@
   text-decoration: none;
   border: none;
   background: none;
-  border-radius: 3px;
+  border-radius: calc(var(--a-border-radius-medium) - 1px);
   padding: var(--a-spacing-3);
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  height: calc(100% - 2px);
+  height: calc(100% - 0.125rem);
   border-start-start-radius: 0;
   border-end-start-radius: 0;
 }
@@ -284,7 +284,6 @@
 }
 
 /* Readonly */
-
 .navds-date__field--readonly .navds-date__field-button {
   cursor: default;
 }

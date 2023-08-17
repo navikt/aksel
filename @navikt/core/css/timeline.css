@@ -12,6 +12,7 @@
   height: 1rem;
   box-sizing: content-box;
   grid-column: 2;
+  margin-bottom: var(--a-spacing-1);
 }
 
 .navds-timeline__row-label {
@@ -181,7 +182,7 @@
     0 0 0 4px var(--ac-timeline-pin-bg, var(--a-surface-danger)), 0 0 0 5px var(--a-surface-default);
   z-index: 2;
   border-radius: var(--a-border-radius-full);
-  padding: 3.5px;
+  padding: var(--a-spacing-1);
   position: relative;
 }
 
@@ -232,7 +233,7 @@
 .navds-timeline__pin-wrapper::before {
   content: "";
   top: var(--navdsc-timeline-pin-size);
-  height: calc(94% - var(--navdsc-timeline-pin-size));
+  height: calc(88% - var(--navdsc-timeline-pin-size));
   width: 1px;
   margin: 0 auto;
   background: var(--a-surface-inverted);

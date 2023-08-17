@@ -1,5 +1,81 @@
 # @navikt/ds-css
 
+## 4.11.2
+
+### Patch Changes
+
+- :lipstick: ToggleGroup: fjern semibold fra selected button ([#2167](https://github.com/navikt/aksel/pull/2167))
+
+## 4.11.1
+
+### Patch Changes
+
+- Border-radius: Fikset hardkodet border-radius i Datepicker, ToggleGroup og Combobox. ([#2159](https://github.com/navikt/aksel/pull/2159))
+
+## 4.11.0
+
+### Minor Changes
+
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+
+### Patch Changes
+
+- List: Fikset alignment av ikoner ([#2149](https://github.com/navikt/aksel/pull/2149))
+
+- Font: La til egen font for semibold italic for bedre skalering cross-browser ([#2150](https://github.com/navikt/aksel/pull/2150))
+
+## 4.10.2
+
+### Patch Changes
+
+- Link: Fikset visited farger og inline SVG-reset ved bruk av tailwind
+
+## 4.10.0
+
+### Minor Changes
+
+- Link: La til 'variant', 'underline' og 'inlineText'-prop ([#2093](https://github.com/navikt/aksel/pull/2093))
+
+## 4.9.1
+
+### Patch Changes
+
+- Tweaks to combobox - updated example, small bugfixes, better affordance for selected options and added flag for "isAddedByUser" to onToggleSelected ([#2144](https://github.com/navikt/aksel/pull/2144))
+
+## 4.9.0
+
+### Minor Changes
+
+- Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
+
+## 4.8.0
+
+### Minor Changes
+
+- Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
+
+## 4.7.4
+
+### Patch Changes
+
+- Oppdatert bruk av REM i komponenter for forbedret utrykk ved font-scaling i browser ([#2126](https://github.com/navikt/aksel/pull/2126))
+
+## 4.7.3
+
+## 4.7.2
+
+### Patch Changes
+
+- Stepper: Fikset `hotizontal`-bug når step var `completed` ([#2116](https://github.com/navikt/aksel/pull/2116))
+
+## 4.7.1
+
+## 4.7.0
+
+### Minor Changes
+
+- Ny komponent Combobox! ([#1868](https://github.com/navikt/aksel/pull/1868))
+
 ## 4.6.1
 
 ### Patch Changes

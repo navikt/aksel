@@ -137,7 +137,7 @@ export function TableOfContents({
           hidden: !renderToc,
           "col-start-3 max-w-prose md:sticky md:top-20 lg:flex":
             aksel && renderToc,
-          "mt-12 mr-auto h-full xl:flex": !aksel && renderToc,
+          "mr-auto mt-12 h-full xl:flex": !aksel && renderToc,
         }
       )}
     >

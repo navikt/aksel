@@ -55,6 +55,11 @@ const StyleMappings = {
     { component: "CheckboxGroup", main: formCss, dependencies: [typoCss] },
     { component: "Chips", main: "chips.css", dependencies: [typoCss] },
     {
+      component: "UNSAFE_Combobox",
+      main: "combobox.css",
+      dependencies: [typoCss, "chips.css"],
+    },
+    {
       component: "ConfirmationPanel",
       main: formCss,
       dependencies: [typoCss],
@@ -94,6 +99,10 @@ const StyleMappings = {
       main: "help-text.css",
       dependencies: ["popover.css"],
     },
+    {
+      component: "HGrid",
+      main: "hgrid.css",
+    },
     { component: "Ingress", main: typoCss },
     {
       component: "InternalHeader",
@@ -129,6 +138,18 @@ const StyleMappings = {
     { component: "Select", main: formCss, dependencies: [typoCss] },
     { component: "Skeleton", main: "skeleton.css", dependencies: [] },
     { component: "Stepper", main: "stepper.css", dependencies: [typoCss] },
+    {
+      component: "HStack",
+      main: "stack.css",
+    },
+    {
+      component: "VStack",
+      main: "stack.css",
+    },
+    {
+      component: "Spacer",
+      main: "stack.css",
+    },
     { component: "Switch", main: formCss, dependencies: [typoCss] },
     { component: "Table", main: "table.css", dependencies: [typoCss] },
     { component: "Tabs", main: "tabs.css", dependencies: [typoCss] },

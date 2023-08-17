@@ -163,8 +163,7 @@ export const useMonthpicker = (
   const handleOpen = useCallback(
     (open: boolean) => {
       setOpen(open);
-      !open &&
-        setYear(selectedMonth ?? defaultSelected ?? defaultYear ?? today);
+      open && setYear(selectedMonth ?? defaultSelected ?? defaultYear ?? today);
     },
     [defaultSelected, defaultYear, selectedMonth, today]
   );

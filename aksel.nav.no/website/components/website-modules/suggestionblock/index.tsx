@@ -186,7 +186,7 @@ const options: {
     icon: <ChangeLogIconOutline />,
   },
   "komponent-beta": {
-    text: "Komponenten er under utvikling, men klar for adopsjon. Vi er ønsker gjerne innspill på hvordan den fungerer og hvilken forbedringer vi kan gjøre.",
+    text: "Komponenten er under utvikling, men klar for adopsjon. Vi ønsker gjerne innspill på hvordan den fungerer og hvilken forbedringer vi kan gjøre.",
     link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩%2Cbeta+🧪&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
     heading: "Beta",
     icon: (

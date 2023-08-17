@@ -65,3 +65,9 @@ export interface SimplePeriod {
    */
   end: Date;
 }
+
+export type AxisLabelTemplates = {
+  day?: string;
+  month?: string;
+  year?: string;
+};

@@ -30,7 +30,7 @@ p.override-text-no-max {
   position: absolute;
   width: 8px;
   height: 8px;
-  border-radius: 2px;
+  border-radius: var(--a-border-radius-small);
   background-color: var(--a-deepblue-500);
   transform: translateY(10px) translateX(2px) rotate(45deg);
   left: 0;

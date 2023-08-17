@@ -1,5 +1,143 @@
 # @navikt/ds-react
 
+## 4.11.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.11.2
+
+## 4.11.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.11.1
+
+## 4.11.0
+
+### Minor Changes
+
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+
+### Patch Changes
+
+- Fixes bug where combobox list could not be closed after clicking a chip ([#2155](https://github.com/navikt/aksel/pull/2155))
+
+- Grid: Markert som deprecated. Bruk nye 'HGrid' ([#2153](https://github.com/navikt/aksel/pull/2153))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.11.0
+
+## 4.10.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.10.2
+
+## 4.10.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.10.1
+
+## 4.10.0
+
+### Minor Changes
+
+- Link: La til 'variant', 'underline' og 'inlineText'-prop ([#2093](https://github.com/navikt/aksel/pull/2093))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.10.0
+
+## 4.9.1
+
+### Patch Changes
+
+- Button: Fikset aria-live bug der knapp alltid ble lest opp av skjermleser ved render ([#2143](https://github.com/navikt/aksel/pull/2143))
+
+- Tweaks to combobox - updated example, small bugfixes, better affordance for selected options and added flag for "isAddedByUser" to onToggleSelected ([#2144](https://github.com/navikt/aksel/pull/2144))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.9.1
+
+## 4.9.0
+
+### Minor Changes
+
+- Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.9.0
+
+## 4.8.0
+
+### Minor Changes
+
+- Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.8.0
+
+## 4.7.4
+
+### Patch Changes
+
+- Textfield: La til type 'time' som tilgjengelig option ([#2137](https://github.com/navikt/aksel/pull/2137))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.4
+
+## 4.7.3
+
+### Patch Changes
+
+- Chips: Removable Chips submitter ikke forms ved klikk lengre ([#2124](https://github.com/navikt/aksel/pull/2124))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.3
+
+## 4.7.2
+
+### Patch Changes
+
+- Stepper: Fikset `hotizontal`-bug når step var `completed` ([#2116](https://github.com/navikt/aksel/pull/2116))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.2
+
+## 4.7.1
+
+### Patch Changes
+
+- Datepicker: Fikset bug ved bruk dynamisk oppdatering av minDate. Vist `month` vil nå alltid være oppdatert når datepicker åpnes ([#2117](https://github.com/navikt/aksel/pull/2117))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.1
+
+## 4.7.0
+
+### Minor Changes
+
+- Ny komponent Combobox! ([#1868](https://github.com/navikt/aksel/pull/1868))
+
+### Patch Changes
+
+- Timeline: Har nå egen `axisLabelTemplates`-prop for axixlabel formatering ([#2109](https://github.com/navikt/aksel/pull/2109))
+
+- Combobox post-release tweaks ([#2112](https://github.com/navikt/aksel/pull/2112))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.7.0
+
 ## 4.6.1
 
 ### Patch Changes

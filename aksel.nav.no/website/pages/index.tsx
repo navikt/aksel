@@ -22,9 +22,8 @@ import FrontpageBlock, {
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
-import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import { lazy, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 type PageProps = NextPageT<{
   tema: Array<AkselTemaT>;
@@ -87,7 +86,7 @@ export const query = `*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...4]{
           _type,
           _id,
           heading,
@@ -238,7 +237,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
               <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-48 rounded-2xl px-4 py-12 ring-1 sm:-translate-y-32 sm:px-12 sm:py-20">
                 {!reducedMotion && (
                   <button
-                    className="focus-visible:shadow-focus text-text-subtle hover:text-text-default absolute top-2 right-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
+                    className="focus-visible:shadow-focus text-text-subtle hover:text-text-default absolute right-2 top-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
                     onClick={() => {
                       setPause(!pause);
                       localStorage.setItem(
@@ -298,9 +297,9 @@ const WithPreview = lazy(() => import("../components/WithPreview"));
 const Page = (props: PageProps["props"]) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Forside {...props} />}>
+      <Suspense fallback={<Forside {...props} />}>
         <WithPreview comp={Forside} query={query} props={props} />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 
