@@ -170,6 +170,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-autocomplete={shouldAutocomplete ? "both" : "list"}
         aria-activedescendant={activeDecendantId}
         aria-describedby={ariaDescribedBy}
+        aria-invalid={inputProps["aria-invalid"]}
         className={cl(
           inputClassName,
           "navds-combobox__input",
