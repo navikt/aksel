@@ -69,7 +69,7 @@ export const SelectedOptionsProvider = ({
         .includes(option?.toLowerCase?.());
       if (isCustomOption) {
         allowNewValues && addCustomOption(option);
-        setSelectedOptions([]);
+        !isMultiSelect && setSelectedOptions([]);
       } else if (isMultiSelect) {
         setSelectedOptions((prevSelectedOptions) => [
           ...prevSelectedOptions,
