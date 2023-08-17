@@ -52,7 +52,14 @@
 .navds-copybutton__icon {
   font-size: 1.5rem;
   display: flex;
+}
+
+.navds-copybutton__icon:first-of-type {
   margin-left: -0.25rem;
+}
+
+.navds-copybutton__icon:last-of-type {
+  margin-right: -0.25rem;
 }
 
 .navds-copybutton__icon:only-child {
