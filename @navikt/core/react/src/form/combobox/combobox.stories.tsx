@@ -316,6 +316,33 @@ ComboboxSizes.args = {
   options,
 };
 
+export const WithError = {
+  args: {
+    error: "Du må velge en favorittfrukt.",
+    isLoading: true,
+  },
+  render: (props) => {
+    const [hasSelectedValue, setHasSelectedValue] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    return (
+      <DemoContainer dataTheme={props.darkMode}>
+        <UNSAFE_Combobox
+          filteredOptions={isLoading ? [] : undefined}
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          error={!hasSelectedValue && props.error}
+          isLoading={isLoading}
+          onChange={() => {
+            setIsLoading(true);
+            setTimeout(() => setIsLoading(false), 2000);
+          }}
+          onToggleSelected={(_, isSelected) => setHasSelectedValue(isSelected)}
+        />
+      </DemoContainer>
+    );
+  },
+};
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useMemo, useRef } from "react";
-import { BodyShort, Label, mergeRefs } from "../..";
+import { BodyShort, ErrorMessage, Label, mergeRefs } from "../..";
 import ClearButton from "./ClearButton";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
@@ -39,12 +39,15 @@ export const Combobox = forwardRef<
 
   const {
     clearInput,
+    error,
+    errorId,
     focusInput,
     hasError,
     inputDescriptionId,
     inputProps,
     inputRef,
     value,
+    showErrorMsg,
     size = "medium",
   } = useInputContext();
 
@@ -128,6 +131,14 @@ export const Combobox = forwardRef<
           </div>
         </div>
         <FilteredOptions />
+      </div>
+      <div
+        className="navds-form-field__error"
+        id={errorId}
+        aria-relevant="additions removals"
+        aria-live="polite"
+      >
+        {showErrorMsg && <ErrorMessage size={size}>{error}</ErrorMessage>}
       </div>
     </ComboboxWrapper>
   );
