@@ -70,12 +70,12 @@
    * But consumers can do `::backdrop { --ac-modal-backdrop: white; }`
    * We can add ::backdrop to tokens.css when we remove the polyfill.
    */
-  background: var(--ac-modal-backdrop, rgb(0 0 0 / 0.44));
+  background: var(--ac-modal-backdrop, rgb(2 20 49 / 0.49));
   animation: akselModalBackdropFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .navds-modal--polyfilled + .backdrop /* Cannot be combined with ::backdrop selector */ {
-  background: var(--ac-modal-backdrop, rgb(0 0 0 / 0.44));
+  background: var(--ac-modal-backdrop, rgb(2 20 49 / 0.49));
 
   /* From polyfill: */
   position: fixed;
