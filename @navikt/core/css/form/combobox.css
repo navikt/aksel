@@ -34,7 +34,7 @@
 
 .navds-combobox--error .navds-text-field__input:not(:hover):not(:disabled) {
   border-color: var(--ac-combobox-error-border, var(--a-border-danger));
-  box-shadow: 0 0 0 1px;
+  box-shadow: 0 0 0 1px var(--ac-combobox-error-border, var(--a-border-danger));
 }
 
 .navds-combobox__selected-options {
