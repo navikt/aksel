@@ -253,6 +253,11 @@
   padding-left: calc(var(--a-spacing-3) - 4px);
 }
 
+.navds-form-field--small .navds-combobox__list-item--focus,
+.navds-form-field--small .navds-combobox__list-item:hover {
+  padding-left: calc(var(--a-spacing-2) - 4px);
+}
+
 .navds-combobox__list-item--selected {
   background-color: var(--ac-combobox-list-item-selected-bg, var(--a-surface-selected));
 }
@@ -283,7 +288,7 @@
 
 .navds-combobox__list-item__new-option--focus {
   box-shadow: var(--a-shadow-focus) inset, var(--a-border-action) 0 0 0 5px inset;
-  border-radius: 3px;
+  border-radius: calc(var(--a-border-radius-medium) - 1px);
 }
 
 /* Mobile */

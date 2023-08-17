@@ -22,8 +22,12 @@ interface InputProps
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ inputClassName, error, errorId, ...rest }, ref) => {
     const { clearInput, inputProps, onChange, size, value } = useInputContext();
-    const { selectedOptions, removeSelectedOption, toggleOption } =
-      useSelectedOptionsContext();
+    const {
+      selectedOptions,
+      removeSelectedOption,
+      toggleOption,
+      isMultiSelect,
+    } = useSelectedOptionsContext();
     const {
       activeDecendantId,
       allowNewValues,
@@ -47,7 +51,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption, event);
-          clearInput(event);
+          if (!isMultiSelect && !selectedOptions.includes(currentOption))
+            toggleIsListOpen(false);
         } else if (shouldAutocomplete && selectedOptions.includes(value)) {
           event.preventDefault();
           // Trying to set the same value that is already set, so just clearing the input
@@ -56,15 +61,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           event.preventDefault();
           // Autocompleting or adding a new value
           toggleOption(value, event);
-          clearInput(event);
+          if (!isMultiSelect && !selectedOptions.includes(value))
+            toggleIsListOpen(false);
         }
       },
       [
         allowNewValues,
         clearInput,
         currentOption,
+        isMultiSelect,
         selectedOptions,
         shouldAutocomplete,
+        toggleIsListOpen,
         toggleOption,
         value,
       ]

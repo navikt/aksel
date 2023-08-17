@@ -79,13 +79,13 @@ export interface ComboboxProps
    *
    * @param option
    * @param isSelected - Whether the option has been selected or unselected
-   * @param isAddedByUser - Whether the option comes from user input, instead of from the list
+   * @param isCustomOption - Whether the option comes from user input, instead of from the list
    * @returns
    */
   onToggleSelected?: (
     option: string,
     isSelected: boolean,
-    isAddedByUser: boolean
+    isCustomOption: boolean
   ) => void;
   /**
    * List of selected options.

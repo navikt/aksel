@@ -1,7 +1,7 @@
 import { useMedia } from "@/utils";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
-import { Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
+import { HGrid, Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "clsx";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
@@ -75,6 +75,12 @@ export const IconPage = ({ name }: { name: string }) => {
   useEffect(() => {
     hideModal && Modal.setAppElement("#__next");
   }, [hideModal]);
+
+  const subCategoryWordLength = Math.max(
+    ...categories.map((cat) =>
+      Math.max(...cat.sub_categories.map((sub) => sub.sub_category.length))
+    )
+  );
 
   return (
     <>
@@ -177,56 +183,68 @@ export const IconPage = ({ name }: { name: string }) => {
                         >
                           {cat.category}
                         </Heading>
-                        <div className="grid w-full gap-2">
+                        <div className="grid w-full">
                           {cat.sub_categories.map((sub) => {
                             return (
-                              <div key={sub.sub_category}>
-                                <Heading
-                                  level="3"
-                                  size="xsmall"
-                                  className="text-text-subtle mb-1"
+                              <div
+                                key={sub.sub_category}
+                                className="border-t-border-subtle border-t py-2"
+                              >
+                                <HGrid
+                                  columns={{
+                                    xs: "1fr",
+                                    md: `${subCategoryWordLength}ch 1fr`,
+                                  }}
+                                  gap={{ xs: "0", md: "2" }}
                                 >
-                                  {sub.sub_category}
-                                </Heading>
-                                <div className="gap-05 flex flex-wrap">
-                                  {sub.icons.map((i) => {
-                                    const T = Icons[`${i.id}Icon`];
-                                    if (T === undefined) {
-                                      return null;
-                                    }
-                                    return (
-                                      <Link
-                                        href={`/ikoner/${i.id}`}
-                                        scroll={false}
-                                        key={i.id}
-                                        prefetch={false}
-                                        id={i.id}
-                                        tabIndex={0}
-                                        ref={(el) => {
-                                          if (name === i.id) {
-                                            focusRef.current = el;
-                                          }
-                                        }}
-                                        className={cl(
-                                          "hover:bg-surface-hover bg-surface-default active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-blue-800 focus-visible:ring-2",
-                                          {
-                                            "from-surface-selected bg-surface-selected ring-border-alt-3 z-10 bg-gradient-to-br to-teal-50 ring-1":
-                                              i.id === name,
-                                          }
-                                        )}
-                                      >
-                                        <span className="navds-sr-only">
-                                          {i.name}
-                                        </span>
-                                        <T
-                                          className="text-3xl"
-                                          aria-hidden
-                                          alt=""
-                                        />
-                                      </Link>
-                                    );
-                                  })}
-                                </div>
+                                  <Heading
+                                    level="3"
+                                    size="xsmall"
+                                    className="text-text-subtle leading-[44px]"
+                                  >
+                                    {sub.sub_category}
+                                  </Heading>
+
+                                  <div className="gap-05 flex flex-wrap">
+                                    {sub.icons.map((i) => {
+                                      const T = Icons[`${i.id}Icon`];
+                                      if (T === undefined) {
+                                        return null;
+                                      }
+                                      return (
+                                        <Link
+                                          href={`/ikoner/${i.id}`}
+                                          scroll={false}
+                                          key={i.id}
+                                          prefetch={false}
+                                          id={i.id}
+                                          tabIndex={0}
+                                          ref={(el) => {
+                                            if (name === i.id) {
+                                              focusRef.current = el;
+                                            }
+                                          }}
+                                          className={cl(
+                                            "hover:bg-surface-neutral-subtle-hover bg-surface-subtle active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-blue-800 focus-visible:ring-2",
+                                            {
+                                              "from-surface-selected bg-surface-selected ring-border-alt-3 z-10 bg-gradient-to-br to-teal-50 ring-1":
+                                                i.id === name,
+                                            }
+                                          )}
+                                        >
+                                          <span className="navds-sr-only">
+                                            {i.name}
+                                          </span>
+                                          <T
+                                            className="text-3xl"
+                                            aria-hidden
+                                            alt=""
+                                          />
+                                        </Link>
+                                      );
+                                    })}
+                                  </div>
+                                </HGrid>
                               </div>
                             );
                           })}
