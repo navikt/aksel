@@ -42,8 +42,12 @@ export const SelectedOptionsProvider = ({
   >;
 }) => {
   const { clearInput, focusInput } = useInputContext();
-  const { customOptions, removeCustomOption, addCustomOption } =
-    useCustomOptionsContext();
+  const {
+    customOptions,
+    removeCustomOption,
+    addCustomOption,
+    setCustomOptions,
+  } = useCustomOptionsContext();
   const {
     allowNewValues,
     isMultiSelect,
@@ -60,11 +64,12 @@ export const SelectedOptionsProvider = ({
 
   const addSelectedOption = useCallback(
     (option: string) => {
-      const isAddedByUser = !options
+      const isCustomOption = !options
         .map((opt) => opt.toLowerCase())
         .includes(option?.toLowerCase?.());
-      if (isAddedByUser) {
+      if (isCustomOption) {
         allowNewValues && addCustomOption(option);
+        !isMultiSelect && setSelectedOptions([]);
       } else if (isMultiSelect) {
         setSelectedOptions((prevSelectedOptions) => [
           ...prevSelectedOptions,
@@ -72,16 +77,24 @@ export const SelectedOptionsProvider = ({
         ]);
       } else {
         setSelectedOptions([option]);
+        setCustomOptions([]);
       }
-      onToggleSelected?.(option, true, isAddedByUser);
+      onToggleSelected?.(option, true, isCustomOption);
     },
-    [addCustomOption, allowNewValues, isMultiSelect, onToggleSelected, options]
+    [
+      addCustomOption,
+      allowNewValues,
+      isMultiSelect,
+      onToggleSelected,
+      options,
+      setCustomOptions,
+    ]
   );
 
   const removeSelectedOption = useCallback(
     (option: string) => {
-      const isAddedByUser = customOptions.includes(option);
-      if (isAddedByUser) {
+      const isCustomOption = customOptions.includes(option);
+      if (isCustomOption) {
         removeCustomOption(option);
       } else {
         setSelectedOptions((prevSelectedOptions) =>
@@ -90,7 +103,7 @@ export const SelectedOptionsProvider = ({
           )
         );
       }
-      onToggleSelected?.(option, false, isAddedByUser);
+      onToggleSelected?.(option, false, isCustomOption);
     },
     [customOptions, onToggleSelected, removeCustomOption]
   );
@@ -102,16 +115,13 @@ export const SelectedOptionsProvider = ({
       } else {
         addSelectedOption(option);
       }
-      if (!isMultiSelect) {
-        clearInput(event);
-      }
+      clearInput(event);
       focusInput();
     },
     [
       addSelectedOption,
       clearInput,
       focusInput,
-      isMultiSelect,
       removeSelectedOption,
       selectedOptions,
     ]

@@ -1,10 +1,12 @@
 import React, { useState, useCallback, createContext, useContext } from "react";
 import { useInputContext } from "./Input/inputContext";
+import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 
 type CustomOptionsContextType = {
   customOptions: string[];
   removeCustomOption: (option: string) => void;
   addCustomOption: (option: string) => void;
+  setCustomOptions: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 const CustomOptionsContext = createContext<CustomOptionsContextType>(
@@ -14,6 +16,7 @@ const CustomOptionsContext = createContext<CustomOptionsContextType>(
 export const CustomOptionsProvider = ({ children }) => {
   const [customOptions, setCustomOptions] = useState<string[]>([]);
   const { focusInput } = useInputContext();
+  const { isMultiSelect } = useSelectedOptionsContext();
 
   const removeCustomOption = useCallback(
     (option) => {
@@ -27,16 +30,21 @@ export const CustomOptionsProvider = ({ children }) => {
 
   const addCustomOption = useCallback(
     (option) => {
-      setCustomOptions((prevOptions) => [...prevOptions, option]);
+      if (isMultiSelect) {
+        setCustomOptions((prevOptions) => [...prevOptions, option]);
+      } else {
+        setCustomOptions([option]);
+      }
       focusInput();
     },
-    [focusInput, setCustomOptions]
+    [focusInput, isMultiSelect, setCustomOptions]
   );
 
   const customOptionsState = {
     customOptions,
     removeCustomOption,
     addCustomOption,
+    setCustomOptions,
   };
 
   return (
