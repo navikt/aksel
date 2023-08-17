@@ -34,4 +34,8 @@ export const deprecations: DeprecatedList = [
     classes: ["navds-modal__button--shake"],
     message: "Removed in v5.0.0",
   },
+  {
+    classes: ["navds-modal__content"],
+    message: "Renamed to `.navds-modal__body` in v5.0.0",
+  },
 ];
