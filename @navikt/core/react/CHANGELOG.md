@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 4.12.1
+
+### Patch Changes
+
+- Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.12.1
+
 ## 4.12.0
 
 ### Minor Changes
