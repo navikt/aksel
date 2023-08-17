@@ -13,6 +13,10 @@
   margin-block-end: var(--a-spacing-5);
 }
 
+.navds-list--small li {
+  margin-block-end: var(--a-spacing-2);
+}
+
 .navds-list--nested li {
   margin-block-end: var(--a-spacing-3);
 }
