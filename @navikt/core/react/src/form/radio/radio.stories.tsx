@@ -119,3 +119,34 @@ export const UUDemo = () => (
     </RadioGroup>
   </div>
 );
+
+export const DifferentBackgroundDemo = () => (
+  <div className="colgap">
+    <RadioGroup
+      legend="Hvem vant Rumpeldunkserien i første året til Harry Potter?"
+      defaultValue="3"
+    >
+      <Radio value="1">Griffing</Radio>
+      <Radio value="2">Smygard</Radio>
+      <Radio value="3">Håsblås</Radio>
+      <Radio value="4">Ravnklo</Radio>
+    </RadioGroup>
+    <RadioGroup
+      legend="Hvilken frukt vil du ha?"
+      defaultValue="eple"
+      className="bg-blue-100"
+      style={{ backgroundColor: "grey" }}
+    >
+      <Radio value="eple">Eple</Radio>
+      <Radio value="druer">Druer</Radio>
+    </RadioGroup>
+    <RadioGroup
+      legend="Når har du ferie?"
+      defaultValue="1"
+      style={{ backgroundColor: "lightblue" }}
+    >
+      <Radio value="1">August</Radio>
+      <Radio value="2">Juli</Radio>
+    </RadioGroup>
+  </div>
+);
