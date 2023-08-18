@@ -43,12 +43,9 @@ const CodeSnippet = ({
         )}
         {...props}
       >
-        <CopyButton
-          data-theme="dark"
-          size="small"
-          copyText={code.code}
-          className="absolute right-2 top-2 z-10 group-[.aksel-artikkel]/aksel:hidden"
-        />
+        <div className="absolute right-0 top-0 z-10 rounded-lg bg-[#0f172a] p-2 group-[.aksel-artikkel]/aksel:hidden">
+          <CopyButton data-theme="dark" size="small" copyText={code.code} />
+        </div>
         <Highlight
           code={code.code}
           language={language}
@@ -56,7 +53,7 @@ const CodeSnippet = ({
           theme={undefined}
         >
           {({ tokens, getLineProps, getTokenProps }) => (
-            <pre className="text-text-on-inverted relative m-0 mr-16 overflow-x-auto overflow-y-auto rounded-lg bg-[#0f172a] p-4 font-mono group-[.aksel-artikkel]/aksel:mr-0">
+            <pre className="text-text-on-inverted relative m-0 overflow-x-auto overflow-y-auto rounded-lg bg-[#0f172a] p-4 font-mono group-[.aksel-artikkel]/aksel:mr-0">
               {tokens.map((line, i) => (
                 <div
                   key={i}
