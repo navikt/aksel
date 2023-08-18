@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.0.1
+
+### Patch Changes
+
+- Checkbox: Hotfix da checkmark ikke var sentrert hvis man brukte tailwind ([`90db7dd0c`](https://github.com/navikt/aksel/commit/90db7dd0c120c16a387d3169c05c1f33dc694323))
+
 ## 5.0.0
 
 ### Major Changes
