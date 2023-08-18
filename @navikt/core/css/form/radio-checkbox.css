@@ -135,6 +135,11 @@
   height: 1.25rem;
 }
 
+/* Tailwind sets all svg to block */
+.navds-checkbox__icon > svg {
+  display: inline;
+}
+
 .navds-checkbox--small > .navds-checkbox__input:checked + .navds-checkbox__label::before {
   background-position: 0.25rem center;
 }
