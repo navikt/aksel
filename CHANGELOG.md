@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.2
+
+### @navikt/ds-react
+
+- :label: Modal: Bedre type for `width` ([#2191](https://github.com/navikt/aksel/pull/2191))
+
 ## 5.0.1
 
 ### @navikt/ds-css
