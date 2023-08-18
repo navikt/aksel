@@ -30,13 +30,13 @@ const Bilde = ({ node, className }: { node: BildeT; className?: string }) => {
                 }
               : { backgroundColor: "var(--a-gray-50)" }
           }
-          className="flex justify-center rounded p-0 group-[.aksel-artikkel]/aksel:rounded-lg"
+          className="flex justify-center rounded-lg p-0"
         >
           <img
             alt={!node?.dekorativt ? node.alt : ""}
             decoding="async"
             src={urlFor(node).auto("format").url()}
-            className="rounded group-[.aksel-artikkel]/aksel:rounded-lg"
+            className="rounded-lg"
           />
         </div>
         {node.caption && (
