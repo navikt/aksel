@@ -124,7 +124,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel overflow-hidden bg-[#FEFCE9] pb-16 pt-[8vw] focus:outline-none sm:pb-32"
+        className="aksel-artikkel group/aksel overflow-hidden bg-[#FEFCE9] pb-16 pt-[8vw] focus:outline-none sm:pb-32"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose text-center">

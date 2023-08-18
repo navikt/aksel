@@ -1,7 +1,7 @@
 export * from "./assets";
 export { default as Accordion } from "./sanity-modules/Accordion";
 export { default as Alert } from "./sanity-modules/Alert";
-export { default as Bilde } from "./sanity-modules/bilde/Bilde";
+export { default as Bilde } from "./sanity-modules/Bilde";
 export * from "./sanity-modules/cards";
 export * from "./sanity-modules/code";
 export * from "./sanity-modules/code-examples";
