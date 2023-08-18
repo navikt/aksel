@@ -10,9 +10,9 @@ import Fuse from "fuse.js";
 import Head from "next/head";
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
-import { categorizeIcons, getFillIcon } from "./utils";
 import { IconSidebar } from "./Sidebar";
 import { TitleLinks } from "./TitleLinks";
+import { categorizeIcons, getFillIcon } from "./utils";
 
 const fuseStroke = new Fuse(
   Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),
@@ -69,10 +69,14 @@ export const IconPage = ({ name }: { name: string }) => {
     );
   }, [toggle, query, strokeIcons, fillIcons]);
 
-  const subCategoryWordLength = Math.max(
-    ...categories.map((cat) =>
-      Math.max(...cat.sub_categories.map((sub) => sub.sub_category.length))
-    )
+  const subCategoryWordLength = useMemo(
+    () =>
+      Math.max(
+        ...categorizeIcons(strokeIcons).map((cat) =>
+          Math.max(...cat.sub_categories.map((sub) => sub.sub_category.length))
+        )
+      ),
+    [strokeIcons]
   );
 
   return (
@@ -255,6 +259,7 @@ export const IconPage = ({ name }: { name: string }) => {
                     open={!!name}
                     aria-label={`${name} ikon`}
                     className="rounded px-2 py-6 sm:px-6"
+                    onClose={() => null}
                   >
                     {name && <IconSidebar name={name} focusRef={focusRef} />}
                   </Modal>
