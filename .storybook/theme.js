@@ -9,7 +9,7 @@ export default create({
   fontCode: "monospace",
 
   // Text colors
-  textColor: "#262626",
+  textColor: "#23262a",
   textInverseColor: "rgba(255,255,255,0.9)",
 
   colorSecondary: "rgba(0, 36, 58, 1)",

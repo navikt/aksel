@@ -201,21 +201,21 @@ const options: {
       >
         <path
           d="M14.5471 3.99994H10.4528V9.48408L4.83594 17.1731C3.94768 18.3891 4.92474 19.9999 6.55053 19.9999H18.4495C20.0753 19.9999 21.0523 18.3891 20.1641 17.1731L14.5471 9.48408V3.99994Z"
-          stroke="#262626"
+          stroke="#23262a"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M9.5 4H15.5"
-          stroke="#262626"
+          stroke="#23262a"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M8.75 12L16.25 12"
-          stroke="#262626"
+          stroke="#23262a"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -239,21 +239,21 @@ const options: {
       >
         <path
           d="M14.5471 3.99994H10.4528V9.48408L4.83594 17.1731C3.94768 18.3891 4.92474 19.9999 6.55053 19.9999H18.4495C20.0753 19.9999 21.0523 18.3891 20.1641 17.1731L14.5471 9.48408V3.99994Z"
-          stroke="#262626"
+          stroke="#23262a"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M9.5 4H15.5"
-          stroke="#262626"
+          stroke="#23262a"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M8.75 12L16.25 12"
-          stroke="#262626"
+          stroke="#23262a"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
