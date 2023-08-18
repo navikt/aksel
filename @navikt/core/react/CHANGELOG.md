@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 5.0.2
+
+### Patch Changes
+
+- :label: Modal: Bedre type for `width` ([#2191](https://github.com/navikt/aksel/pull/2191))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.0.2
+
 ## 5.0.1
 
 ### Patch Changes
