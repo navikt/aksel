@@ -34,7 +34,7 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
           ))}
         </AkselTable>
         {(open || !showMore) && (
-          <div className="border-border-subtle bg-surface-default relative -mt-8 w-full rounded-b border border-t-0 p-2 pr-14">
+          <div className="border-border-subtle bg-surface-default relative -mt-8 w-full rounded-b-lg border border-t-0 p-2 pr-14">
             <CopyButton
               copyText={Object.entries(tokens).reduce(
                 (prev, cur) =>
