@@ -13,7 +13,7 @@
 
 .colgap[data-theme="dark"],
 .rowgap[data-theme="dark"] {
-  background-color: #262626;
+  background-color: var(--a-gray-900);
 }
 
 .rowgap-wrap {
