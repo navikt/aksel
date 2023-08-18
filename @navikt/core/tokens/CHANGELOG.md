@@ -1,5 +1,13 @@
 # @navikt/ds-tokens
 
+## 5.0.0
+
+### Major Changes
+
+- Gray: Gråfarger er nå mindre varme ([#2092](https://github.com/navikt/aksel/pull/2092))
+
+- Action: Selected-varianter av action er nå 'blue' ('deepblue' før) ([#2092](https://github.com/navikt/aksel/pull/2092))
+
 ## 4.12.1
 
 ## 4.12.0

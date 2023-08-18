@@ -1,5 +1,24 @@
 # @navikt/ds-react
 
+## 5.0.0
+
+### Major Changes
+
+- Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
+
+  - :sparkles: Støtte for header og footer
+  - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
+  - :boom: Provider: `appElement` er fjernet
+
+### Patch Changes
+
+- Table: ExpandableRow har oppdatert knapp for å matche Accordion og ExpansionCard ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+- Table: Har lagt til ny size: 'large'. ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.0.0
+
 ## 4.12.1
 
 ### Patch Changes
