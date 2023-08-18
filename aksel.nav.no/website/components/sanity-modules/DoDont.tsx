@@ -10,30 +10,26 @@ import {
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
 
-const GetIcon = (s: string) => {
+const getIcon = (s: string) => {
   switch (s) {
     case "do":
       return (
         <CheckmarkIcon
           aria-hidden
-          fontSize="2rem"
-          className="flex-shrink-0 text-green-500"
+          fontSize="1.5rem"
+          className="flex-shrink-0"
         />
       );
     case "dont":
       return (
-        <XMarkIcon
-          aria-hidden
-          fontSize="2rem"
-          className="flex-shrink-0 text-red-500"
-        />
+        <XMarkIcon aria-hidden fontSize="1.5rem" className="flex-shrink-0" />
       );
     case "warning":
       return (
         <ExclamationmarkIcon
           aria-hidden
-          fontSize="2rem"
-          className="flex-shrink-0 text-orange-500"
+          fontSize="1.5rem"
+          className="flex-shrink-0"
         />
       );
     default:
@@ -44,11 +40,11 @@ const GetIcon = (s: string) => {
 const getText = (s: string) => {
   switch (s) {
     case "do":
-      return "Gjør: ";
+      return "Gjør";
     case "dont":
-      return "Unngå: ";
+      return "Unngå";
     case "warning":
-      return "Utfordrende: ";
+      return "Utfordrende";
     default:
       return "";
   }
@@ -63,34 +59,35 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
         "max-w-sm": !block?.fullwidth,
       })}
     >
-      <div
-        className={cl(
-          "relative z-10 -ml-[1px] w-[calc(100%_+_2px)] border-t-4",
-          {
-            "border-t-border-success": block.variant === "do",
-            "border-t-border-danger": block.variant === "dont",
-            "border-t-surface-warning": block.variant === "warning",
-          }
-        )}
-        aria-hidden
-      >
-        <span className="absolute right-[2px] z-10">
-          {GetIcon(block.variant)}
-        </span>
-      </div>
       <img
-        className="ring-border-subtle  bg-gray-50 ring-1"
+        className="ring-border-subtle rounded-t-lg bg-gray-50 ring-1"
         alt={block.alt}
         loading="lazy"
         decoding="async"
         src={urlFor(block.picture).auto("format").url()}
       />
+
       <figcaption data-variant={block.variant}>
+        <div
+          className={cl(
+            "relative -ml-[1px] flex w-[calc(100%_+_2px)] items-center gap-1 rounded-b-lg px-2 py-1 text-white",
+            {
+              "bg-green-400": block.variant === "do",
+              "bg-red-400": block.variant === "dont",
+              "bg-orange-400": block.variant === "warning",
+            }
+          )}
+          aria-hidden
+        >
+          <span>{getIcon(block.variant)}</span>
+          <BodyShort size="small" as="span">
+            {getText(block.variant)}
+          </BodyShort>
+        </div>
         <div className="mt-3">
           {block.description && (
             <BodyShort size="small" as="span">
-              <span className="font-semibold">{getText(block.variant)}</span>
-              <span>{block.description}</span>
+              {block.description}
             </BodyShort>
           )}
         </div>
