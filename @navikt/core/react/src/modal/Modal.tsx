@@ -64,7 +64,7 @@ export interface ModalProps
   /**
    * @default fit-content (up to 700px)
    * */
-  width?: "medium" | "small" | number | string;
+  width?: "medium" | "small" | number | `${number}${string}`;
   /**
    * User defined classname for modal
    */
