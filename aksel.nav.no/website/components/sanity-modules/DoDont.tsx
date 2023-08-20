@@ -3,9 +3,9 @@ import { withErrorBoundary } from "@/error-boundary";
 import { urlFor } from "@/sanity/interface";
 import { DoDontT } from "@/types";
 import {
-  CheckmarkCircleIcon,
-  ExclamationmarkTriangleIcon,
-  XMarkOctagonIcon,
+  CheckmarkIcon,
+  ExclamationmarkIcon,
+  XMarkIcon,
 } from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
@@ -14,7 +14,7 @@ const getIcon = (s: string) => {
   switch (s) {
     case "do":
       return (
-        <CheckmarkCircleIcon
+        <CheckmarkIcon
           aria-hidden
           fontSize="1.5rem"
           className="flex-shrink-0"
@@ -22,15 +22,11 @@ const getIcon = (s: string) => {
       );
     case "dont":
       return (
-        <XMarkOctagonIcon
-          aria-hidden
-          fontSize="1.5rem"
-          className="flex-shrink-0"
-        />
+        <XMarkIcon aria-hidden fontSize="1.5rem" className="flex-shrink-0" />
       );
     case "warning":
       return (
-        <ExclamationmarkTriangleIcon
+        <ExclamationmarkIcon
           aria-hidden
           fontSize="1.5rem"
           className="flex-shrink-0"
@@ -48,7 +44,7 @@ const getText = (s: string) => {
     case "dont":
       return "Unngå";
     case "warning":
-      return "Utfordrende";
+      return "Pass på";
     default:
       return "";
   }
@@ -64,16 +60,9 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
       })}
     >
       <div className="shadow-xsmall ring-border-subtle relative rounded-lg ring-1 ring-inset ">
-        <img
-          className="relative z-[-1] rounded-t-lg bg-gray-50"
-          alt={block.alt}
-          loading="lazy"
-          decoding="async"
-          src={urlFor(block.picture).auto("format").url()}
-        />
         <span
           className={cl(
-            "relative z-[-1] flex items-center gap-1 rounded-b-lg px-2 py-1",
+            "relative z-[-1] flex items-center gap-1 rounded-t-lg px-4 py-3",
             {
               "bg-surface-success-moderate": block.variant === "do",
               "bg-surface-danger-moderate": block.variant === "dont",
@@ -83,18 +72,21 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
           aria-hidden
         >
           <span>{getIcon(block.variant)}</span>
-          <BodyShort size="small" as="span">
-            {getText(block.variant)}
-          </BodyShort>
+          <BodyShort as="span">{getText(block.variant)}</BodyShort>
         </span>
+        <img
+          className="relative z-[-1] rounded-b-lg bg-gray-50"
+          alt={block.alt}
+          loading="lazy"
+          decoding="async"
+          src={urlFor(block.picture).auto("format").url()}
+        />
       </div>
 
       <figcaption data-variant={block.variant}>
-        <div className="mt-3">
+        <div className="mt-2 px-4">
           {block.description && (
-            <BodyShort size="small" as="span">
-              {block.description}
-            </BodyShort>
+            <BodyShort as="span">{block.description}</BodyShort>
           )}
         </div>
       </figcaption>
