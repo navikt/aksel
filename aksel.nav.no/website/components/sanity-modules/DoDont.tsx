@@ -3,9 +3,9 @@ import { withErrorBoundary } from "@/error-boundary";
 import { urlFor } from "@/sanity/interface";
 import { DoDontT } from "@/types";
 import {
-  CheckmarkIcon,
-  ExclamationmarkIcon,
-  XMarkIcon,
+  CheckmarkCircleIcon,
+  ExclamationmarkTriangleIcon,
+  XMarkOctagonIcon,
 } from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
@@ -14,7 +14,7 @@ const getIcon = (s: string) => {
   switch (s) {
     case "do":
       return (
-        <CheckmarkIcon
+        <CheckmarkCircleIcon
           aria-hidden
           fontSize="1.5rem"
           className="flex-shrink-0"
@@ -22,11 +22,15 @@ const getIcon = (s: string) => {
       );
     case "dont":
       return (
-        <XMarkIcon aria-hidden fontSize="1.5rem" className="flex-shrink-0" />
+        <XMarkOctagonIcon
+          aria-hidden
+          fontSize="1.5rem"
+          className="flex-shrink-0"
+        />
       );
     case "warning":
       return (
-        <ExclamationmarkIcon
+        <ExclamationmarkTriangleIcon
           aria-hidden
           fontSize="1.5rem"
           className="flex-shrink-0"
@@ -59,22 +63,21 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
         "max-w-sm": !block?.fullwidth,
       })}
     >
-      <img
-        className="ring-border-subtle rounded-t-lg bg-gray-50 ring-1"
-        alt={block.alt}
-        loading="lazy"
-        decoding="async"
-        src={urlFor(block.picture).auto("format").url()}
-      />
-
-      <figcaption data-variant={block.variant}>
-        <div
+      <div className="shadow-xsmall ring-border-subtle relative rounded-lg ring-1 ring-inset ">
+        <img
+          className="relative z-[-1] rounded-t-lg bg-gray-50"
+          alt={block.alt}
+          loading="lazy"
+          decoding="async"
+          src={urlFor(block.picture).auto("format").url()}
+        />
+        <span
           className={cl(
-            "relative -ml-[1px] flex w-[calc(100%_+_2px)] items-center gap-1 rounded-b-lg px-2 py-1 text-white",
+            "relative z-[-1] flex items-center gap-1 rounded-b-lg px-2 py-1",
             {
-              "bg-green-400": block.variant === "do",
-              "bg-red-400": block.variant === "dont",
-              "bg-orange-400": block.variant === "warning",
+              "bg-surface-success-moderate": block.variant === "do",
+              "bg-surface-danger-moderate": block.variant === "dont",
+              "bg-surface-warning-moderate": block.variant === "warning",
             }
           )}
           aria-hidden
@@ -83,7 +86,10 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
           <BodyShort size="small" as="span">
             {getText(block.variant)}
           </BodyShort>
-        </div>
+        </span>
+      </div>
+
+      <figcaption data-variant={block.variant}>
         <div className="mt-3">
           {block.description && (
             <BodyShort size="small" as="span">
