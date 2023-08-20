@@ -19,6 +19,7 @@
     "baseUrl": ".",
     "paths": {
       "@/components": ["components/index.ts"],
+      "@/sb-util": [".storybook/utils.tsx"],
       "@/types": ["types/index.ts"],
       "@/pages/*": ["pages/*"],
       "@/sanity-block": ["components/SanityBlockContent.tsx"],
