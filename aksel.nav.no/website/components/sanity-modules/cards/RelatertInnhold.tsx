@@ -1,7 +1,8 @@
 import { logNav } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
 import { RelatertInnholdT } from "@/types";
-import { BodyShort, Heading } from "@navikt/ds-react";
+import { NewspaperIcon } from "@navikt/aksel-icons";
+import { BodyShort, Heading, Link } from "@navikt/ds-react";
 import NextLink from "next/link";
 
 const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
@@ -15,6 +16,40 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
   const getTag = (x: any): string => {
     return new URL(x.ekstern_link).hostname.replace("www.", "");
   };
+
+  return (
+    <div className="ring-border-subtle toc-ignore link-color-override bg-surface-subtle my-7 max-w-2xl rounded-lg p-4 ring-1 ring-inset sm:p-6">
+      <Heading
+        className="override-text-no-max text-text-subtle -ml-[2px] flex items-center gap-2"
+        size="small"
+        as="p"
+        spacing
+      >
+        <NewspaperIcon fontSize="1.5rem" title="Nyheter" aria-hidden />
+        Relevante lenker
+      </Heading>
+      <ul className="grid gap-3">
+        {node.lenker.map((x) => (
+          <li key={x._key}>
+            <Link
+              as={NextLink}
+              href={getHref(x)}
+              onClick={(e) =>
+                logNav(
+                  "relatert-innhold",
+                  window.location.pathname,
+                  e.currentTarget.getAttribute("href")
+                )
+              }
+              className="text-xl font-semibold"
+            >
+              {x.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 
   return (
     <div className="mb-8 grid w-full max-w-4xl gap-4 sm:grid-cols-2">
