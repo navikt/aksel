@@ -39,7 +39,7 @@ const LinkElement = ({ name, href, prefetch = undefined }) => {
         className={cl(
           "text-deepblue-800 focus-visible:shadow-focus relative grid h-11 place-items-center rounded px-2 focus:outline-none",
           {
-            "before:bg-border-action-selected font-semibold before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
+            "before:bg-deepblue-600 font-semibold before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
               asPath.startsWith(href),
             "hover:before:bg-border-subtle-hover before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
               !asPath.startsWith(href),

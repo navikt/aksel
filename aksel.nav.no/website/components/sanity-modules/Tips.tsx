@@ -10,7 +10,7 @@ const Tips = ({ node }: { node: TipsT }) => {
   }
 
   return (
-    <div className="ring-border-subtle bg-surface-alt-3-subtle my-7 max-w-2xl rounded-lg p-4 ring-1 ring-inset sm:p-6">
+    <div className="ring-border-subtle link-color-override bg-surface-alt-3-subtle my-7 max-w-2xl rounded-lg p-4 ring-1 ring-inset sm:p-6">
       <Heading
         className="override-text-no-max text-icon-alt-3 -ml-[2px] flex items-center gap-1"
         size="small"

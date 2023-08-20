@@ -2,7 +2,6 @@ import { logNav } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
 import { RelatertInnholdT } from "@/types";
 import { BodyShort, Heading } from "@navikt/ds-react";
-import cl from "clsx";
 import NextLink from "next/link";
 
 const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
@@ -18,13 +17,7 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
   };
 
   return (
-    <div
-      className={cl(
-        "relatedCard",
-        "mb-8 max-w-4xl gap-4",
-        "grid w-full sm:grid-cols-2"
-      )}
-    >
+    <div className="mb-8 grid w-full max-w-4xl gap-4 sm:grid-cols-2">
       {node.lenker.map((x) => (
         <NextLink
           href={getHref(x)}
@@ -37,7 +30,7 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
               e.currentTarget.getAttribute("href")
             )
           }
-          className="toc-ignore shadow-xsmall hover:shadow-small focus-visible:shadow-focus bg-surface-default group grid rounded border-2 border-transparent px-4 py-3 focus:outline-none"
+          className="toc-ignore shadow-xsmall hover:shadow-small focus-visible:shadow-focus bg-surface-default group grid rounded-lg border-2 border-transparent px-4 py-3 focus:outline-none"
         >
           <Heading
             as="span"
