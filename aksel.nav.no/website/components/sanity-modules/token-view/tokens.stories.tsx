@@ -8,7 +8,7 @@ import { BreakpointsView } from "./categories/Breakpoints";
 import { ShapesView } from "./categories/Shapes";
 import "../../../dist/tw.css";
 export default {
-  title: "sanity-modules/tokenview",
+  title: "sanity-modules/Tokens",
   parameters: {
     layout: "fullscreen",
   },
@@ -18,11 +18,64 @@ export const FontViewDemo = () => <FontView cat="font" />;
 
 export const GlobalViewDemo = () => <GlobalView cat="global-blue" />;
 
-export const SemanticViewDemo = () => <SemanticView cat="semantic-surface" />;
+export const SemanticDefaultDemo = () => (
+  <SemanticView cat="semantic-surface-default" />
+);
 
-export const SemanticBorderView = () => <SemanticView cat="semantic-border" />;
+export const SemanticActionDemo = () => (
+  <SemanticView cat="semantic-surface-action" />
+);
 
-export const SemanticIconView = () => <SemanticView cat="semantic-icon" />;
+export const SemanticNeutralDemo = () => (
+  <SemanticView cat="semantic-surface-neutral" />
+);
+
+export const SemanticSuccessDemo = () => (
+  <SemanticView cat="semantic-surface-success" />
+);
+
+export const SemanticDangerDemo = () => (
+  <SemanticView cat="semantic-surface-danger" />
+);
+
+export const SemanticWarningDemo = () => (
+  <SemanticView cat="semantic-surface-warning" />
+);
+
+export const SemanticInfoDemo = () => (
+  <SemanticView cat="semantic-surface-info" />
+);
+
+export const SemanticAltDemo = () => (
+  <SemanticView cat="semantic-surface-alt" />
+);
+
+export const SemanticBorderDefault = () => (
+  <SemanticView cat="semantic-border-default" />
+);
+export const SemanticBorderAction = () => (
+  <SemanticView cat="semantic-border-action" />
+);
+export const SemanticBorderStatus = () => (
+  <SemanticView cat="semantic-border-status" />
+);
+export const SemanticBorderFocus = () => (
+  <SemanticView cat="semantic-border-focus" />
+);
+export const SemanticBorderAlt = () => (
+  <SemanticView cat="semantic-border-alt" />
+);
+
+export const SemanticIconDefault = () => (
+  <SemanticView cat="semantic-icon-default" />
+);
+export const SemanticIconAction = () => (
+  <SemanticView cat="semantic-icon-action" />
+);
+export const SemanticIconStatus = () => (
+  <SemanticView cat="semantic-icon-status" />
+);
+export const SemanticIconAlt = () => <SemanticView cat="semantic-icon-alt" />;
 
 export const SemanticTextView = () => <SemanticView cat="semantic-text" />;
 
