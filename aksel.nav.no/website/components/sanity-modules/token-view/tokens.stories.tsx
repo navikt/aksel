@@ -6,7 +6,7 @@ import { SpacingView } from "./categories/Spacing";
 import { ZindexView } from "./categories/Zindex";
 import { BreakpointsView } from "./categories/Breakpoints";
 import { ShapesView } from "./categories/Shapes";
-import "../../../dist/tw.css";
+
 export default {
   title: "sanity-modules/Tokens",
   parameters: {

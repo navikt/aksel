@@ -1,6 +1,8 @@
 import type { StorybookConfig } from "@storybook/nextjs";
 
+import { readFileSync } from "fs";
 import { join, dirname } from "path";
+import { loadCsf } from "@storybook/csf-tools";
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -9,8 +11,48 @@ import { join, dirname } from "path";
 function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, "package.json")));
 }
+
 const config: StorybookConfig = {
-  stories: ["../**/*.mdx", "../**/*.stories.@(ts|tsx)"],
+  storyIndexers: (indexers) => {
+    const csfIndexer = async (fileName: string, opts) => {
+      const code = readFileSync(fileName, "utf-8").toString();
+      return loadCsf(code, { ...opts, fileName }).parse();
+    };
+
+    const exampleIndexer = async (fileName: string, opts) => {
+      let code = readFileSync(fileName, "utf-8").toString();
+
+      code = code
+        .split("\n")
+        .filter((line) => !line.includes("withDsExample"))
+        .join("\n");
+
+      code = code.replace("export const args =", "const args =");
+
+      code += `\nexport default { title: "Eksempler/${fileName
+        .split("pages/eksempler/")[1]
+        .replace(".tsx", "")}"  };\n`;
+
+      return loadCsf(code, { ...opts, fileName }).parse();
+    };
+
+    return [
+      ...(indexers || []),
+      {
+        test: /(stories|story)\.[tj]sx?$/,
+        indexer: csfIndexer,
+      },
+      {
+        test: /pages\/eksempler\/|(".+")|(.+.tsx)$/,
+        indexer: exampleIndexer,
+      },
+    ];
+  },
+  stories: [
+    "../**/*.mdx",
+    "../**/*.stories.@(ts|tsx)",
+    "../pages/eksempler/**/*.tsx",
+  ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),

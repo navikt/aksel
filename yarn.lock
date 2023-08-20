@@ -27086,6 +27086,7 @@ __metadata:
     boring-avatars: 1.10.1
     clsx: ^1.2.1
     codesandbox: ^2.2.3
+    concurrently: 7.2.1
     cross-env: ^7.0.0
     date-fns: 2.29.3
     dotenv: ^10.0.0

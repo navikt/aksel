@@ -40,20 +40,12 @@ export const globalTypes = {
 };
 
 export const withTheme = (StoryFn, context) => {
-  const foundCss =
-    context.parameters.fileName.startsWith("./@navikt") &&
-    document.querySelector('[data-vite-dev-id$="dist/tw.css"]');
   return (
     <div
       data-theme={context.parameters.theme || context.globals.theme || "light"}
       lang="no"
       id="root"
     >
-      {foundCss && (
-        <div className="css-warning">
-          OBS! Ser ut som CSS fra aksel.nav.no er lastet. Refresh siden!
-        </div>
-      )}
       <StoryFn />
     </div>
   );

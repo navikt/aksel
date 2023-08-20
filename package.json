@@ -8,7 +8,6 @@
     "boot": "yarn workspaces foreach -v -pA --topological-dev --no-private run build",
     "clean": "node scripts/clean.js",
     "storybook": "storybook dev -p 6006",
-    "storybook:aksel": "storybook dev -c aksel.nav.no/website/.storybook -p 6006",
     "dev": "yarn workspace aksel.nav.no dev",
     "docgen": "yarn workspaces foreach -p run docgen",
     "changelog": "deno run --allow-read --allow-write --no-config scripts/deno/createMainChangelog.ts",
