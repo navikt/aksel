@@ -14,10 +14,10 @@ export const Icons = () => {
           <span>{key}</span>
           <span className="icon-group">
             <span>
-              <Value fontSize="3rem" />
+              <Value fontSize="3rem" aria-hidden title={key} />
             </span>
             <span>
-              <Value fontSize="3rem" />
+              <Value fontSize="3rem" aria-hidden title={key + " Inverted"} />
             </span>
           </span>
         </div>
