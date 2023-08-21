@@ -1,0 +1,174 @@
+import { Meta } from "@storybook/blocks";
+
+import AkselThumbnail from "./assets/aksel-thumbnail.png";
+import Setup from "./assets/setup.png";
+import Components from "./assets/components.png";
+
+<Meta title="Getting started" />
+
+<div className="sb-container">
+  <div className='sb-section-title'>
+
+    # Getting started
+
+    Aksel is the toolbox for product development <a href="https://aksel.nav.no"target="_blank">@NAV</a> (Norwegian Labour and Welfare Administration)
+
+    This includes the designsystem, best practices for product-development, principles for user-experience and a blog. <a href="https://aksel.nav.no/god-praksis/artikler/om-aksel" target="_blank">
+    Read more about Aksel.</a>
+
+  </div>
+  <div className="sb-section">
+    <div className="sb-section-item">
+      <img
+        src={AkselThumbnail}
+        alt="Aksel-thumbnail"
+        aria-hidden
+      />
+
+      <h3 className="sb-section-item-heading"><a
+        href="https://aksel.nav.no"
+        target="_blank"
+        className="sb-link"
+      >Website</a></h3>
+      <p className="sb-section-item-paragraph">Includes everything you need to get started building and developing digital products for NAV today.</p>
+
+    </div>
+    <div className="sb-section-item">
+      <img
+        src={Setup}
+        alt="Setup-thumbnail"
+        aria-hidden
+      />
+
+      <h3 className="sb-section-item-heading"><a
+        href="https://aksel.nav.no/grunnleggende/introduksjon/kom-i-gang-med-kodepakkene"
+        target="_blank"
+        className="sb-link"
+      >Setup</a></h3>
+      <p className="sb-section-item-paragraph">Get started developing using our solutions. How to install, setup and use our React, CSS and Icons.</p>
+
+    </div>
+    <div className="sb-section-item">
+      <img
+        src={Components}
+        alt="Components-thumbnail"
+        aria-hidden
+      />
+
+      <h3 className="sb-section-item-heading"><a
+        href="https://aksel.nav.no/grunnleggende/introduksjon/kom-i-gang-med-kodepakkene"
+        target="_blank"
+        className="sb-link"
+      >Components</a></h3>
+      <p className="sb-section-item-paragraph">Browse trough 40+ components with examples, do and don't, props and accessibility information.</p>
+
+    </div>
+
+  </div>
+</div>
+<div className="sb-container">
+  <div className='sb-section-title'>
+    ## More than just a component library
+
+    Aksel offers tools that makes developing frontend-applications easier.
+
+  </div>
+
+  <div className="sb-section">
+    <div className="sb-section-item">
+
+      <h3 className="sb-section-item-heading"><a
+        href="https://aksel.nav.no/ikoner"
+        target="_blank"
+        className="sb-link"
+      >Icons</a></h3>
+      <p className="sb-section-item-paragraph">We provide an icon library with 800+ open-source icons.</p>
+
+    </div>
+    <div className="sb-section-item">
+
+      <h3 className="sb-section-item-heading"><a
+        href="https://aksel.nav.no/grunnleggende/styling/design-tokens"
+        target="_blank"
+        className="sb-link"
+      >Tokens</a></h3>
+      <p className="sb-section-item-paragraph">Colors, spacing, shadows and more. All available for CSS, SASS, Less and JS.</p>
+
+    </div>
+    <div className="sb-section-item">
+
+
+      <h3 className="sb-section-item-heading"><a
+        href="https://aksel.nav.no/grunnleggende/kode/stylelint"
+        target="_blank"
+        className="sb-link"
+      >Stylelint</a></h3>
+      <p className="sb-section-item-paragraph">Using our Stylelint-plugin helps keep your code free from bugs and makes adopting updates safer.</p>
+
+    </div>
+    <div className="sb-section-item">
+      <h3 className="sb-section-item-heading"><a
+        href="https://aksel.nav.no/grunnleggende/kode/tailwind"
+        target="_blank"
+        className="sb-link"
+      >Tailwind</a></h3>
+      <p className="sb-section-item-paragraph">Our tokens made available as a simple tailwind-config.</p>
+    </div>
+    <div className="sb-section-item">
+      <h3 className="sb-section-item-heading"><a
+        href="https://aksel.nav.no/grunnleggende/kode/kommandolinje"
+        target="_blank"
+        className="sb-link"
+      >CLI</a></h3>
+      <p className="sb-section-item-paragraph">CLI for codemods and advanced CSS-imports</p>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  {`
+  .sb-container {
+    margin-bottom: 48px;
+  }
+
+  .sb-section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: var(--a-spacing-6);
+  }
+
+  .sb-link{
+    text-decoration: underline;
+    color: var(--a-text-default);
+  }
+
+  img {
+    object-fit: cover;
+    padding-bottom: var(--a-spacing-5);
+  }
+
+  .sb-section-title {
+    margin-bottom: var(--a-spacing-8);
+  }
+
+
+
+  .sb-section-item-heading {
+    padding-bottom: var(--a-spacing-1);
+    margin: 0 !important;
+  }
+
+  .sb-section-item-paragraph {
+    margin: 0;
+    padding-bottom: var(--a-spacing-3);
+  }
+
+  @media screen and (max-width: 768px) {
+    .sb-section {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  `}
+</style>
