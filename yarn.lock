@@ -27067,14 +27067,6 @@ __metadata:
     "@sanity/table": 1.0.1
     "@sanity/ui": ^1.7.4
     "@sanity/vision": 3.15.1
-    "@storybook/addon-essentials": ^7.3.2
-    "@storybook/addon-interactions": ^7.3.2
-    "@storybook/addon-links": ^7.3.2
-    "@storybook/addon-onboarding": ^1.0.8
-    "@storybook/blocks": ^7.3.2
-    "@storybook/nextjs": ^7.3.2
-    "@storybook/react": ^7.3.2
-    "@storybook/testing-library": ^0.2.0
     "@svgr/webpack": ^5.5.0
     "@testing-library/jest-dom": ^5.16.0
     "@testing-library/react": ^13.3.0
@@ -27116,7 +27108,6 @@ __metadata:
     showdown: ^2.1.0
     sitemap: ^7.0.0
     start-server-and-test: ^1.14.0
-    storybook: ^7.3.2
     styled-components: ^5.2
     swr: ^1.1.2
     tailwindcss: ^3.3.3
