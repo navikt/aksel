@@ -1,3 +1,30 @@
+export function AkselTheme(Story) {
+  return <div className="aksel-artikkel group/aksel">{Story()}</div>;
+}
+
+export function getKey() {
+  return `${Math.random().toString(36).slice(2, 7)}`;
+}
+
+type BlockProps = { length?: number; heading?: boolean; link?: boolean };
+
+export function getBlocks({
+  length = 2,
+  heading = false,
+  link = true,
+}: BlockProps): any[] {
+  let blocks: any[] = [];
+
+  [...Array(length).keys()].forEach((_, idx) =>
+    blocks.push(getParagraph(link, idx))
+  );
+
+  if (heading) {
+    blocks = [getHeading(), ...blocks];
+  }
+  return blocks;
+}
+
 const texts = [
   "Command station, this is ST 321. Code Clearance Blue. We're starting our approach.",
   "Deactivate the security shield. The security deflector shield will be deactivated when we have confirmation of your code transmission. Stand by. You are clear to proceed.",
@@ -13,10 +40,10 @@ const texts = [
   "With your wisdom, I'm sure that we can work out an arrangement which will be mutually beneficial and enable us to avoid any unpleasant confrontation. As a token of my goodwill, I present to you a gift: these two droids.",
 ];
 
-export const getKey = () => `${Math.random().toString(36).slice(2, 7)}`;
-
-const getParagraph = (link: boolean, index) => {
-  const random = randomInteger(index % texts.length, texts.length - 1);
+function getParagraph(link: boolean, index: number) {
+  const min = index % texts.length;
+  const max = texts.length - 1;
+  const random = Math.floor(Math.random() * (max - min + 1)) + min;
 
   const paragraph = {
     _key: getKey(),
@@ -48,9 +75,9 @@ const getParagraph = (link: boolean, index) => {
     });
   }
   return paragraph;
-};
+}
 
-const getHeading = () => {
+function getHeading() {
   return {
     _key: getKey(),
     children: [
@@ -65,31 +92,4 @@ const getHeading = () => {
     _type: "block",
     style: "h3",
   };
-};
-
-type BlockProps = { length?: number; heading?: boolean; link?: boolean };
-
-export const getBlocks = ({
-  length = 2,
-  heading = false,
-  link = true,
-}: BlockProps): any[] => {
-  let blocks: any[] = [];
-
-  [...Array(length).keys()].forEach((_, idx) =>
-    blocks.push(getParagraph(link, idx))
-  );
-
-  if (heading) {
-    blocks = [getHeading(), ...blocks];
-  }
-  return blocks;
-};
-
-function randomInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-export const AkselTheme = (Story: any) => {
-  return <div className="aksel-artikkel group/aksel">{Story()}</div>;
-};
