@@ -6,7 +6,6 @@ export const parameters = {
     storySort: {
       method: "alphabetical",
       order: ["Intro", "ds-react", ["form"], ["Default"], "ds-icons"],
-      locales: "",
     },
   },
   layout: "centered",
@@ -27,7 +26,6 @@ export const parameters = {
 export const globalTypes = {
   theme: {
     name: "Theme",
-    description: "Global theme for components",
     toolbar: {
       icon: "circlehollow",
       items: [
