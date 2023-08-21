@@ -1,0 +1,15 @@
+name: ReceiptFill
+category: Money
+sub_category: Budgeting
+keywords:
+  - Invoice
+  - transaction
+  - purchase
+  - proof of purchase
+  - faktura
+  - transaksjon
+  - kjøp
+  - kvittering
+variant: Fill
+updated_at: 19.08.2023
+created_at: 07.03.2023
