@@ -279,6 +279,15 @@ export const DifferentBackgroundDemo = () => {
         <Checkbox value="2">Prøv</Checkbox>
       </CheckboxGroup>
       <CheckboxGroup
+        legend="Denne er disabled"
+        disabled
+        defaultValue={["1"]}
+        style={{ backgroundColor: "grey" }}
+      >
+        <Checkbox value="1">Klarer du</Checkbox>
+        <Checkbox value="2">Å lese dette?</Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup
         legend="Hvilke filtre vil du bruke?"
         style={{ backgroundColor: "darkgrey" }}
       >

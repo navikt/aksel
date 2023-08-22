@@ -165,5 +165,14 @@ export const DifferentBackgroundDemo = () => (
       <Radio value="1">Ikke</Radio>
       <Radio value="2">Prøv</Radio>
     </RadioGroup>
+    <RadioGroup
+      legend="Denne er disabled"
+      disabled
+      defaultValue="1"
+      style={{ backgroundColor: "lightgray" }}
+    >
+      <Radio value="1">Klarer du</Radio>
+      <Radio value="2">Å lese dette?</Radio>
+    </RadioGroup>
   </div>
 );
