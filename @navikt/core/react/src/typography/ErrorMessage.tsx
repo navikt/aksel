@@ -1,9 +1,11 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
+import { TypoProps } from "./types";
 
 export interface ErrorMessageProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {
+  extends Pick<TypoProps, "spacing">,
+    React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * medium: 18px, small: 16px
    * @default "medium"
@@ -13,10 +15,6 @@ export interface ErrorMessageProps
    * Error text
    */
   children: React.ReactNode;
-  /**
-   * Adds margin-bottom
-   */
-  spacing?: boolean;
 }
 
 /**

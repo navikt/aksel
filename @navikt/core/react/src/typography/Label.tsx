@@ -1,9 +1,11 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
+import { TypoProps } from "./types";
 
 export interface LabelProps
-  extends React.LabelHTMLAttributes<HTMLLabelElement> {
+  extends Omit<TypoProps, "weight">,
+    React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * medium: 18px, small: 16px
    * @default "medium"
@@ -13,10 +15,6 @@ export interface LabelProps
    * Paragraph text
    */
   children: React.ReactNode;
-  /**
-   * Adds margin-bottom
-   */
-  spacing?: boolean;
 }
 
 /**

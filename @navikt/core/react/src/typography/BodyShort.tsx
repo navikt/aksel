@@ -1,22 +1,20 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
+import { TypoProps } from "./types";
 
 export interface BodyShortProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {
+  extends TypoProps,
+    React.HTMLAttributes<HTMLParagraphElement> {
   /**
-   * medium: 18px, small: 16px
+   * large: 20px, medium: 18px, small: 16px
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "large" | "medium" | "small";
   /**
    * Paragraph text
    */
   children: React.ReactNode;
-  /**
-   * Adds margin-bottom
-   */
-  spacing?: boolean;
 }
 
 /**

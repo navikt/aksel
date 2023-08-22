@@ -1,9 +1,11 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
+import { TypoProps } from "./types";
 
 export interface DetailProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {
+  extends TypoProps,
+    React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * @deprecated Medium === small
    */
@@ -12,10 +14,6 @@ export interface DetailProps
    * Paragraph text
    */
   children: React.ReactNode;
-  /**
-   * Adds margin-bottom
-   */
-  spacing?: boolean;
   /**
    * All caps
    */

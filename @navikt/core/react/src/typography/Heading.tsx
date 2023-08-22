@@ -1,8 +1,11 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
+import { TypoProps } from "./types";
 
-export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface HeadingProps
+  extends Pick<TypoProps, "spacing" | "visuallyHidden" | "align">,
+    React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Heading level
    * @default "1"
@@ -16,11 +19,6 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
    * Heading text
    */
   children: React.ReactNode;
-  /**
-   * Adds margin-bottom
-   * @default false
-   */
-  spacing?: boolean;
 }
 
 /**

@@ -15,6 +15,7 @@ export interface IngressProps
 }
 
 /**
+ * @deprecated Use `<BodyLong size="large" />`
  * Part of a set of components for displaying text with consistent typography.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/typography)
