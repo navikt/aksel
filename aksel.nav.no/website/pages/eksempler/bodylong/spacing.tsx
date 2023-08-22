@@ -5,14 +5,14 @@ const Example = () => {
   return (
     <div>
       <BodyLong spacing>
-        Amet dolore non tempor incididunt dolor est enim aute commodo cillum
-        quis. Ex esse veniam ipsum quis. Pariatur duis do qui exercitation ut
-        laboris sit veniam nostrud nulla esse.
+        Har du utgifter i forbindelse med at du søker jobb, deltar på kurs eller
+        tar utdanning? Du kan ha rett til tilleggsstønader for å dekke deler av
+        disse utgiftene, som for eksempel utgifter til reise eller flytting.
       </BodyLong>
       <BodyLong>
-        Magna aliqua et adipisicing nostrud elit ea. Id ipsum ut laborum ut
-        adipisicing magna laboris pariatur commodo quis nulla ea aliquip mollit.
-        Nisi aliquip voluptate laboris nisi eiusmod labore eu non.
+        Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til
+        barnebidrag fra en eller begge foreldre mens du fullfører videregående
+        skole eller tilsvarende.
       </BodyLong>
     </div>
   );

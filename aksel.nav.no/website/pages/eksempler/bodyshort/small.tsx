@@ -4,7 +4,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <BodyShort size="small">
-      The red fox jumps over the lazy brown dog.
+      Du må gjøre en filtrering for å se brukere i listen.
     </BodyShort>
   );
 };

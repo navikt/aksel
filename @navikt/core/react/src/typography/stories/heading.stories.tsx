@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import React from "react";
+import { expect } from "@storybook/jest";
+import { within } from "@storybook/testing-library";
+import { default as React } from "react";
 import { Heading } from "..";
 import { VStack } from "../..";
 
@@ -13,7 +15,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const lorem = "Veniam consequat cillum";
+const lorem = "Hva kan vi hjelpe deg med?";
 
 export const Default: Story = {
   args: {
@@ -67,4 +69,26 @@ export const Spacing: Story = {
       </Heading>
     </div>
   ),
+};
+
+export const OverrideTag: Story = {
+  render: () => (
+    <div>
+      <Heading spacing level="1" size="small">
+        default heading
+      </Heading>
+      <Heading as="legend" size="small">
+        legend heading
+      </Heading>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const defaultHeading = canvas.getByText("default heading");
+    const legendHeading = canvas.getByText("legend heading");
+
+    expect(defaultHeading.tagName).toEqual("H1");
+    expect(legendHeading.tagName).toEqual("LEGEND");
+  },
 };

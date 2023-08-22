@@ -8,10 +8,9 @@ const Example = () => {
         Pengestøtte når du er syk
       </Heading>
       <BodyLong>
-        Magna aliqua et adipisicing nostrud elit ea. Id ipsum ut laborum ut
-        adipisicing magna laboris pariatur commodo quis nulla ea aliquip mollit.
-        Nisi aliquip voluptate laboris nisi eiusmod labore eu non. Deserunt sint
-        incididunt est sunt ex labore irure irure est eiusmod.
+        Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til
+        barnebidrag fra en eller begge foreldre mens du fullfører videregående
+        skole eller tilsvarende.
       </BodyLong>
     </div>
   );

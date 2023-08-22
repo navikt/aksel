@@ -4,8 +4,8 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div>
-      <Detail spacing>The red fox jumps over the lazy brown dog.</Detail>
-      <Detail>The red fox jumps over the lazy brown dog.</Detail>
+      <Detail spacing>Trenger du hjelp til å komme i jobb?</Detail>
+      <Detail>Trenger hjelp til å utføre utdanning</Detail>
     </div>
   );
 };

@@ -4,11 +4,9 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <BodyLong>
-      Amet dolore non tempor incididunt dolor est enim aute commodo cillum quis.
-      Ex esse veniam ipsum quis. Pariatur duis do qui exercitation ut laboris
-      sit veniam nostrud nulla esse. In aute sint enim reprehenderit ut
-      voluptate do id. Laborum irure qui officia aute ipsum. Exercitation dolor
-      sunt deserunt non anim.
+      Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til
+      barnebidrag fra en eller begge foreldre mens du fullfører videregående
+      skole eller tilsvarende.
     </BodyLong>
   );
 };
