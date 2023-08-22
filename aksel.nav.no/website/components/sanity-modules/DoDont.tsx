@@ -25,17 +25,15 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
     >
       <div className="shadow-xsmall ring-border-subtle relative rounded-lg ring-1 ring-inset ">
         <BodyShort
-          size="small"
           as="span"
           className={cl(
-            "relative z-[-1] flex items-center gap-1 rounded-t-lg px-2 py-1",
+            "relative z-[-1] flex items-center gap-1 rounded-t-lg px-4 py-2",
             {
               "bg-surface-success-moderate": block.variant === "do",
               "bg-surface-danger-moderate": block.variant === "dont",
               "bg-surface-warning-moderate": block.variant === "warning",
             }
           )}
-          aria-hidden
         >
           <span>{getIcon(block.variant)}</span>
           <span>{getText(block.variant)}</span>
@@ -49,7 +47,7 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
         />
       </div>
       {block.description && (
-        <figcaption className="mt-2 px-2">{block.description}</figcaption>
+        <figcaption className="mt-2 px-4">{block.description}</figcaption>
       )}
     </BodyShort>
   );
