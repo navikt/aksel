@@ -229,3 +229,15 @@
   white-space: nowrap !important;
   width: 1px !important;
 }
+
+.navds-typo--color-default {
+  color: var(--a-text-default);
+}
+
+.navds-typo--color-subtle {
+  color: var(--a-text-subtle);
+}
+
+.navds-typo--color-on-inverted {
+  color: var(--a-text-on-inverted);
+}

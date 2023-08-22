@@ -8,4 +8,5 @@ export type TypoProps = {
    * Adds spacing below text
    */
   spacing?: boolean;
+  color?: "default" | "subtle" | "on-inverted";
 };

@@ -7,9 +7,8 @@ export const typoClassNames = (props: Partial<TypoProps>) => {
     "navds-typo--underline": !!props.underline,
     "navds-typo--truncate": !!props.truncate,
     "navds-typo--semibold": props.weight === "semibold",
-    "navds-typo--align-start": props.align === "start",
-    "navds-typo--align-center": props.align === "center",
-    "navds-typo--align-end": props.align === "end",
+    [`navds-typo--align-${props.align}`]: !!props.align,
+    [`navds-typo--${props.color}`]: !!props.color,
     "navds-typo--visually-hidden": !!props.visuallyHidden,
   });
 };
