@@ -63,4 +63,4 @@ declare module "*.svg" {
 
 ## License
 
-[MIT](https://github.com/navikt/aksel/blob/main/LICENCE)
+[MIT](https://github.com/navikt/aksel/blob/main/fonts/LICENCE)
