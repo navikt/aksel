@@ -2,6 +2,7 @@ import React from "react";
 import type { Meta } from "@storybook/react";
 import { BodyLong } from "../../typography";
 import { Box } from "./Box";
+import { VStack } from "../..";
 
 export default {
   title: "ds-react/Box",
@@ -19,4 +20,38 @@ export const Default = {
       </BodyLong>
     </Box>
   ),
+};
+
+export const ThemingDemo = {
+  render: () => {
+    const LinkCard = ({ children }) => (
+      <Box padding="4" background="surface-default">
+        {children}
+      </Box>
+    );
+
+    const SpecificLinkCard = () => {
+      return (
+        <div
+          style={
+            {
+              "--a-linkcard-bg": "var(--a-surface-success-subtle)",
+              "--a-linkcard-bg-hover": "var(--a-surface-success-moderate)",
+            } as React.CSSProperties
+          }
+        >
+          <LinkCard>Custom-stylet LinkCard som bruker Box som base</LinkCard>
+        </div>
+      );
+    };
+
+    return (
+      <VStack gap="8">
+        {/* Default look */}
+        <LinkCard>Dette er et Card som bruker Box som base</LinkCard>
+        {/* Themed/Custom look */}
+        <SpecificLinkCard />
+      </VStack>
+    );
+  },
 };
