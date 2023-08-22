@@ -190,3 +190,42 @@
 .navds-error-message {
   color: var(--ac-typo-error-text, var(--a-text-danger));
 }
+
+.navds-typo--underline {
+  text-decoration: underline;
+}
+
+.navds-typo--truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.navds-typo--semibold {
+  font-weight: var(--a-font-weight-bold);
+}
+
+.navds-typo--align-start {
+  text-align: start;
+}
+
+.navds-typo--align-center {
+  text-align: center;
+}
+
+.navds-typo--align-end {
+  text-align: end;
+}
+
+.navds-typo--visually-hidden {
+  border: 0 !important;
+  clip: rect(0, 0, 0, 0) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  top: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
