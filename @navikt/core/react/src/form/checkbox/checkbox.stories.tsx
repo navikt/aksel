@@ -278,8 +278,10 @@ export const DifferentBackgroundDemo = () => {
         <Checkbox value="1">Ikke</Checkbox>
         <Checkbox value="2">Prøv</Checkbox>
       </CheckboxGroup>
-      <span className="bg-blue-100">Faux checkbox group</span>
-      <CheckboxGroup legend="Hvilke filtre vil du bruke?">
+      <CheckboxGroup
+        legend="Hvilke filtre vil du bruke?"
+        style={{ backgroundColor: "darkgrey" }}
+      >
         <Checkbox
           checked={checked[0] && checked[1] && checked[2]}
           indeterminate={new Set(checked).size === 2} // if both false and true are present
