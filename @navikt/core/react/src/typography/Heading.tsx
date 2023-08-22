@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
+import { typoClassNames } from "./util";
 
 export interface HeadingProps
   extends Pick<TypoProps, "spacing" | "visuallyHidden" | "align">,
@@ -37,16 +38,35 @@ export interface HeadingProps
  */
 export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
   forwardRef(
-    ({ level = "1", size, spacing = false, className, as, ...rest }, ref) => {
+    (
+      {
+        level = "1",
+        size,
+        className,
+        as,
+        spacing,
+        align,
+        visuallyHidden,
+        ...rest
+      },
+      ref
+    ) => {
       let HeadingTag = as ?? (`h${level}` as React.ElementType);
 
       return (
         <HeadingTag
           {...rest}
           ref={ref}
-          className={cl(className, "navds-heading", `navds-heading--${size}`, {
-            "navds-typo--spacing": spacing,
-          })}
+          className={cl(
+            className,
+            "navds-heading",
+            `navds-heading--${size}`,
+            typoClassNames({
+              spacing,
+              align,
+              visuallyHidden,
+            })
+          )}
         />
       );
     }

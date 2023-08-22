@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
+import { typoClassNames } from "./util";
 
 export interface LabelProps
   extends Omit<TypoProps, "weight">,
@@ -34,16 +35,36 @@ export interface LabelProps
 export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
   forwardRef(
     (
-      { className, size = "medium", spacing, as: Component = "label", ...rest },
+      {
+        className,
+        size = "medium",
+        as: Component = "label",
+        spacing,
+        underline,
+        truncate,
+        align,
+        visuallyHidden,
+        ...rest
+      },
       ref
     ) => (
       <Component
         {...rest}
         ref={ref}
-        className={cl(className, "navds-label", {
-          "navds-label--small": size === "small",
-          "navds-typo--spacing": !!spacing,
-        })}
+        className={cl(
+          className,
+          "navds-label",
+          typoClassNames({
+            spacing,
+            underline,
+            truncate,
+            align,
+            visuallyHidden,
+          }),
+          {
+            "navds-label--small": size === "small",
+          }
+        )}
       />
     )
   );

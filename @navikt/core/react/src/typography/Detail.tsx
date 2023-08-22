@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
+import { typoClassNames } from "./util";
 
 export interface DetailProps
   extends TypoProps,
@@ -43,6 +44,11 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
         spacing,
         uppercase,
         as: Component = "p",
+        underline,
+        truncate,
+        weight = "regular",
+        align,
+        visuallyHidden,
         ...rest
       },
       ref
@@ -50,11 +56,22 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
       <Component
         {...rest}
         ref={ref}
-        className={cl(className, "navds-detail", {
-          "navds-detail--small": size === "small",
-          "navds-typo--spacing": !!spacing,
-          "navds-typo--uppercase": !!uppercase,
-        })}
+        className={cl(
+          className,
+          "navds-detail",
+          typoClassNames({
+            spacing,
+            underline,
+            truncate,
+            weight,
+            align,
+            visuallyHidden,
+          }),
+          {
+            "navds-detail--small": size === "small",
+            "navds-typo--uppercase": !!uppercase,
+          }
+        )}
       />
     )
   );

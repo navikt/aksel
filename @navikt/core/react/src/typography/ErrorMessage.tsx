@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
+import { typoClassNames } from "./util";
 
 export interface ErrorMessageProps
   extends Pick<TypoProps, "spacing">,
@@ -39,10 +40,17 @@ export const ErrorMessage: OverridableComponent<
     <Component
       {...rest}
       ref={ref}
-      className={cl("navds-error-message", "navds-label", className, {
-        "navds-label--small": size === "small",
-        "navds-typo--spacing": !!spacing,
-      })}
+      className={cl(
+        "navds-error-message",
+        "navds-label",
+        className,
+        typoClassNames({
+          spacing,
+        }),
+        {
+          "navds-label--small": size === "small",
+        }
+      )}
     />
   )
 );

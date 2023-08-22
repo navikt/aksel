@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
+import { typoClassNames } from "./util";
 
 export interface BodyLongProps
   extends TypoProps,
@@ -36,16 +37,38 @@ export const BodyLong: OverridableComponent<
   HTMLParagraphElement
 > = forwardRef(
   (
-    { className, size = "medium", spacing, as: Component = "p", ...rest },
+    {
+      className,
+      size = "medium",
+      as: Component = "p",
+      spacing,
+      underline,
+      truncate,
+      weight = "regular",
+      align,
+      visuallyHidden,
+      ...rest
+    },
     ref
   ) => (
     <Component
       {...rest}
       ref={ref}
-      className={cl(className, "navds-body-long", {
-        "navds-body-long--small": size === "small",
-        "navds-typo--spacing": !!spacing,
-      })}
+      className={cl(
+        className,
+        "navds-body-long",
+        typoClassNames({
+          spacing,
+          underline,
+          truncate,
+          weight,
+          align,
+          visuallyHidden,
+        }),
+        {
+          "navds-body-long--small": size === "small",
+        }
+      )}
     />
   )
 );
