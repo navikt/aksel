@@ -10,59 +10,25 @@ import {
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
 
-const getIcon = (s: string) => {
-  switch (s) {
-    case "do":
-      return (
-        <CheckmarkIcon
-          aria-hidden
-          fontSize="1.5rem"
-          className="flex-shrink-0"
-        />
-      );
-    case "dont":
-      return (
-        <XMarkIcon aria-hidden fontSize="1.5rem" className="flex-shrink-0" />
-      );
-    case "warning":
-      return (
-        <ExclamationmarkIcon
-          aria-hidden
-          fontSize="1.5rem"
-          className="flex-shrink-0"
-        />
-      );
-    default:
-      return null;
-  }
-};
-
-const getText = (s: string) => {
-  switch (s) {
-    case "do":
-      return "Gjør";
-    case "dont":
-      return "Unngå";
-    case "warning":
-      return "Pass på";
-    default:
-      return "";
-  }
-};
-
 const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
-  if (!block.picture) return null;
+  if (!block.picture) {
+    return null;
+  }
+
   return (
-    <figure
+    <BodyShort
+      as="figure"
       className={cl("sm:min-w-80 flex min-w-full flex-1 flex-col", {
         "basis-full": block?.fullwidth,
         "max-w-sm": !block?.fullwidth,
       })}
     >
       <div className="shadow-xsmall ring-border-subtle relative rounded-lg ring-1 ring-inset ">
-        <span
+        <BodyShort
+          size="small"
+          as="span"
           className={cl(
-            "relative z-[-1] flex items-center gap-1 rounded-t-lg px-4 py-3",
+            "relative z-[-1] flex items-center gap-1 rounded-t-lg px-2 py-1",
             {
               "bg-surface-success-moderate": block.variant === "do",
               "bg-surface-danger-moderate": block.variant === "dont",
@@ -72,8 +38,8 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
           aria-hidden
         >
           <span>{getIcon(block.variant)}</span>
-          <BodyShort as="span">{getText(block.variant)}</BodyShort>
-        </span>
+          <span>{getText(block.variant)}</span>
+        </BodyShort>
         <img
           className="relative z-[-1] rounded-b-lg bg-gray-50"
           alt={block.alt}
@@ -82,15 +48,10 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
           src={urlFor(block.picture).auto("format").url()}
         />
       </div>
-
-      <figcaption data-variant={block.variant}>
-        <div className="mt-2 px-4">
-          {block.description && (
-            <BodyShort as="span">{block.description}</BodyShort>
-          )}
-        </div>
-      </figcaption>
-    </figure>
+      {block.description && (
+        <figcaption className="mt-2 px-2">{block.description}</figcaption>
+      )}
+    </BodyShort>
   );
 };
 
@@ -109,5 +70,37 @@ const DoDont = ({ node }: { node: DoDontT }) => {
     </div>
   );
 };
+
+function getIcon(s: string) {
+  const iconProps = {
+    "aria-hidden": true,
+    fontSize: "1.25rem",
+    className: "flex-shrink-0",
+  };
+
+  switch (s) {
+    case "do":
+      return <CheckmarkIcon {...iconProps} />;
+    case "dont":
+      return <XMarkIcon {...iconProps} />;
+    case "warning":
+      return <ExclamationmarkIcon {...iconProps} />;
+    default:
+      return null;
+  }
+}
+
+function getText(s: string) {
+  switch (s) {
+    case "do":
+      return "Gjør";
+    case "dont":
+      return "Unngå";
+    case "warning":
+      return "Pass på";
+    default:
+      return "";
+  }
+}
 
 export default withErrorBoundary(DoDont, "DoDont");
