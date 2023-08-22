@@ -1,5 +1,81 @@
 # @navikt/ds-react
 
+## 5.0.2
+
+### Patch Changes
+
+- :label: Modal: Bedre type for `width` ([#2191](https://github.com/navikt/aksel/pull/2191))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.0.2
+
+## 5.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.0.1
+
+## 5.0.0
+
+### Major Changes
+
+- Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
+
+  - :sparkles: Støtte for header og footer
+  - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
+  - :boom: Provider: `appElement` er fjernet
+
+### Patch Changes
+
+- Table: ExpandableRow har oppdatert knapp for å matche Accordion og ExpansionCard ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+- Table: Har lagt til ny size: 'large'. ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.0.0
+
+## 4.12.1
+
+### Patch Changes
+
+- Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.12.1
+
+## 4.12.0
+
+### Minor Changes
+
+- Combobox: La til støtte for feilmeldinger i Combobox ([#2182](https://github.com/navikt/aksel/pull/2182))
+
+- CopyButton: Har nå prop 'iconPosition' for å høyre/venstre aligne ikon ([#2173](https://github.com/navikt/aksel/pull/2173))
+
+### Patch Changes
+
+- List: Fikset sentrering, margins ([#2168](https://github.com/navikt/aksel/pull/2168))
+
+- Combobox: Kjører nå 'onChange' + 'onClear' når input blir reset programmatisk ([#2183](https://github.com/navikt/aksel/pull/2183))
+
+- Combobox: Fikset custom-options i singleselect ([#2180](https://github.com/navikt/aksel/pull/2180))
+
+- Combobox: Fjernet unødvendige 'onClear'-calls når man velger verdier ([#2170](https://github.com/navikt/aksel/pull/2170))
+
+- Checkbox: Checkmark er nå SVG-ikon og ikke Base64 ([#2171](https://github.com/navikt/aksel/pull/2171))
+
+- Combobox: Lukker nå nedtrekksmeny hvis man legger til ny option i singleselect ([#2177](https://github.com/navikt/aksel/pull/2177))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.12.0
+
+## 4.11.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@4.11.2
+
 ## 4.11.1
 
 ### Patch Changes

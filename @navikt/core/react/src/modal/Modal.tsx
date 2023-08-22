@@ -1,75 +1,90 @@
-import React, { forwardRef, useEffect, useMemo, useRef } from "react";
+import React, {
+  forwardRef,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import cl from "clsx";
-import ReactModal from "react-modal";
+import dialogPolyfill from "./dialog-polyfill";
+import { Detail, Heading, mergeRefs, useId } from "..";
+import ModalBody from "./ModalBody";
+import ModalHeader from "./ModalHeader";
+import ModalFooter from "./ModalFooter";
+import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
+import { ModalContext } from "./ModalContext";
 
-import { Button, mergeRefs, useProvider } from "..";
-import ModalContent, { ModalContentType } from "./ModalContent";
-import { XMarkIcon } from "@navikt/aksel-icons";
+const needPolyfill =
+  typeof window !== "undefined" && window.HTMLDialogElement === undefined;
 
-export interface ModalProps {
+export interface ModalProps
+  extends React.DialogHTMLAttributes<HTMLDialogElement> {
+  /**
+   * Content for the header. Alteratively you can use <Modal.Header> instead for more control,
+   * but then you have to set `aria-label` or `aria-labelledby` on the modal manually.
+   */
+  header?: {
+    label?: string;
+    icon?: React.ReactNode;
+    heading: string;
+    /**
+     * Heading size
+     * @default "medium"
+     * */
+    size?: "medium" | "small";
+    /**
+     * Removes close-button (X) when false
+     * @default true
+     */
+    closeButton?: boolean;
+  };
   /**
    * Modal content
    */
   children: React.ReactNode;
   /**
-   * Open state for modal
+   * Whether the modal should be visible or not.
+   * Remember to use the `onClose` callback to keep your local state in sync.
+   * You can also use `ref.current.openModal()` and `ref.current.close()`.
    */
-  open: boolean;
+  open?: boolean;
   /**
-   * Callback for modal wanting to close
+   * Called when the modal has been closed
    */
-  onClose: () => void;
+  onClose?: React.ReactEventHandler<HTMLDialogElement>;
   /**
-   * If modal should close on overlay click (click outside Modal)
-   * @default true
+   * Called when the user wants to close the modal (clicked the close button or pressed Esc).
+   * @returns Whether to close the modal
    */
-  shouldCloseOnOverlayClick?: boolean;
+  onBeforeClose?: () => boolean | void;
+  /**
+   * Called when the user presses the Esc key, unless `onBeforeClose()` returns `false`.
+   */
+  onCancel?: React.ReactEventHandler<HTMLDialogElement>;
+  /**
+   * @default fit-content (up to 700px)
+   * */
+  width?: "medium" | "small" | number | `${number}${string}`;
   /**
    * User defined classname for modal
    */
   className?: string;
   /**
-   * User defined classname for modal
+   * Sets aria-labelledby on modal.
+   * No need to set this manually if the `header` prop is used. A reference to `header.heading` will be created automatically.
+   * @warning If not using `header`, you should set either `aria-labelledby` or `aria-label`.
    */
-  overlayClassName?: string;
-  /**
-   * Removes close-button(X) when false
-   * @default true
-   */
-  closeButton?: boolean;
-  /**
-   *
-   */
-  shouldCloseOnEsc?: boolean;
-  /**
-   * Allows custom styling of ReactModal, in accordance with their typing
-   */
-  style?: ReactModal.Styles;
-  /**
-   * Callback for setting parent element modal will attach to
-   */
-  parentSelector?(): HTMLElement;
   "aria-labelledby"?: string;
-  "aria-describedby"?: string;
-  "aria-modal"?: boolean;
-  /**
-   * Sets aria-label on modal
-   * @warning This should be set if not using 'aria-labelledby' or 'aria-describedby'
-   */
-  "aria-label"?: string;
 }
 
 interface ModalComponent
-  extends ModalLifecycle,
-    React.ForwardRefExoticComponent<
-      ModalProps & React.RefAttributes<ReactModal>
-    > {
-  Content: ModalContentType;
+  extends React.ForwardRefExoticComponent<
+    ModalProps & React.RefAttributes<HTMLDialogElement>
+  > {
+  Header: typeof ModalHeader;
+  Body: typeof ModalBody;
+  Footer: typeof ModalFooter;
 }
-
-type ModalLifecycle = {
-  setAppElement: (element: any) => void;
-};
 
 /**
  * A component that displays a modal dialog.
@@ -78,112 +93,147 @@ type ModalLifecycle = {
  * @see 🏷️ {@link ModalProps}
  *
  * @example
+ * State change with `useRef`
+ * ```jsx
+ * const ref = useRef<HTMLDialogElement>(null);
+ * <Button onClick={() => ref.current?.showModal()}>Open modal</Button>
+ * <Modal
+ *   ref={ref}
+ *   header={{
+ *     label: "Optional label",
+ *     icon: <FileIcon aria-hidden />,
+ *     heading: "My heading",
+ *   }}
+ * >
+ *   <Modal.Body>
+ *     <BodyLong>Hello world</BodyLong>
+ *   </Modal.Body>
+ *   <Modal.Footer>
+ *     <Button>Save</Button>
+ *     <Button type="button" variant="tertiary" onClick={() => ref.current?.close()}>Close</Button>
+ *   </Modal.Footer>
+ * </Modal>
+ * ```
+ * @example
+ * State change with `useState`
  * ```jsx
  * const [open, setOpen] = useState(false);
- *
  * <Modal
  *   open={open}
- *   aria-label="Modal demo"
- *   onClose={() => setOpen((x) => !x)}
+ *   onClose={() => setOpen(false)}
  *   aria-labelledby="modal-heading"
  * >
- *   <Modal.Content>
- *     <Heading spacing level="1" size="large" id="modal-heading">
- *       Viktig info
- *     </Heading>
- *     <BodyLong spacing>
- *       Hallo!
- *     </BodyLong>
- *   </Modal.Content>
+ *   <Modal.Header>
+ *     <Heading level="1" size="large" id="modal-heading">My heading</Heading>
+ *   </Modal.Header>
+ *   <Modal.Body>
+ *     <BodyLong>Hello world</BodyLong>
+ *   </Modal.Body>
  * </Modal>
  * ```
  */
-export const Modal = forwardRef<ReactModal, ModalProps>(
+export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
   (
     {
+      header,
       children,
       open,
-      onClose,
+      onBeforeClose,
+      onCancel,
+      width,
       className,
-      overlayClassName,
-      shouldCloseOnOverlayClick = true,
-      shouldCloseOnEsc = true,
-      closeButton = true,
-      "aria-describedby": ariaDescribedBy,
-      "aria-labelledby": ariaLabelledBy,
-      "aria-modal": ariaModal,
-      "aria-label": contentLabel,
+      "aria-labelledby": ariaLabelledby,
       style,
-      parentSelector,
       ...rest
-    },
+    }: ModalProps,
     ref
   ) => {
-    const modalRef = useRef<ReactModal | null>(null);
+    const modalRef = useRef<HTMLDialogElement>(null);
     const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const rootElement = useProvider()?.rootElement;
-    const appElement = useProvider()?.appElement;
+    const ariaLabelId = useId();
+
+    if (useContext(ModalContext)) {
+      console.error("Modals should not be nested");
+    }
 
     useEffect(() => {
-      appElement && Modal.setAppElement(appElement);
-    }, [appElement]);
-
-    const onModalCloseRequest = (e) => {
-      if (shouldCloseOnOverlayClick || e.type === "keydown") {
-        onClose();
-      } else if (buttonRef.current) {
-        buttonRef.current.focus();
+      if (needPolyfill && modalRef.current) {
+        dialogPolyfill.registerDialog(modalRef.current);
       }
-    };
+    }, [modalRef]);
 
-    const getParentSelector = () => {
-      if (parentSelector) {
-        return parentSelector;
+    useEffect(() => {
+      // We need to have this in a useEffect so that the content renders before the modal is displayed,
+      // and in case `open` is true initially.
+      if (modalRef.current && open !== undefined) {
+        if (open && !modalRef.current.open) {
+          modalRef.current.showModal();
+        } else if (!open && modalRef.current.open) {
+          modalRef.current.close();
+        }
       }
-      return rootElement !== undefined
-        ? () => rootElement as HTMLElement
-        : undefined;
-    };
+    }, [modalRef, open]);
+
+    useBodyScrollLock(modalRef, "navds-modal__document-body");
+
+    const isWidthPreset =
+      typeof width === "string" && ["small", "medium"].includes(width);
 
     return (
-      <ReactModal
-        {...rest}
-        parentSelector={getParentSelector()}
-        style={style}
-        isOpen={open}
+      <dialog
         ref={mergedRef}
-        className={cl("navds-modal", className)}
-        overlayClassName={cl("navds-modal__overlay", overlayClassName)}
-        shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
-        shouldCloseOnEsc={shouldCloseOnEsc}
-        onRequestClose={(e) => onModalCloseRequest(e)}
-        aria={{
-          describedby: ariaDescribedBy,
-          labelledby: ariaLabelledBy,
-          modal: ariaModal,
+        className={cl("navds-modal", className, {
+          "navds-modal--polyfilled": needPolyfill,
+          "navds-modal--autowidth": !width,
+          [`navds-modal--${width}`]: isWidthPreset,
+        })}
+        style={{
+          ...style,
+          ...(!isWidthPreset ? { width } : {}),
         }}
-        contentLabel={contentLabel}
+        onCancel={(event) => {
+          // FYI: onCancel fires when you press Esc
+          if (onBeforeClose && onBeforeClose() === false) {
+            event.preventDefault();
+          } else if (onCancel) onCancel(event);
+        }}
+        aria-labelledby={
+          !ariaLabelledby && !rest["aria-label"] && header
+            ? ariaLabelId
+            : ariaLabelledby
+        }
+        {...rest}
       >
-        {children}
-        {closeButton && (
-          <Button
-            className={cl("navds-modal__button", {
-              "navds-modal__button--shake": shouldCloseOnOverlayClick,
-            })}
-            size="small"
-            variant="tertiary-neutral"
-            ref={buttonRef}
-            onClick={onClose}
-            icon={<XMarkIcon title="Lukk modalvindu" />}
-          />
-        )}
-      </ReactModal>
+        <ModalContext.Provider
+          value={{
+            closeHandler: getCloseHandler(modalRef, header, onBeforeClose),
+          }}
+        >
+          {header && (
+            <ModalHeader>
+              {header.label && (
+                <Detail className="navds-modal__label">{header.label}</Detail>
+              )}
+              <Heading
+                size={header.size ?? "medium"}
+                level="1"
+                id={ariaLabelId}
+              >
+                <span className="navds-modal__header-icon">{header.icon}</span>
+                {header.heading}
+              </Heading>
+            </ModalHeader>
+          )}
+
+          {children}
+        </ModalContext.Provider>
+      </dialog>
     );
   }
 ) as ModalComponent;
 
-Modal.setAppElement = (element) => ReactModal.setAppElement(element);
-Modal.Content = ModalContent;
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;
 
 export default Modal;

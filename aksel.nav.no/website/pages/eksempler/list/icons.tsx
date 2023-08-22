@@ -41,6 +41,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 3,
   desc: "Husk å sette aria-hidden på ikonet.",
 };

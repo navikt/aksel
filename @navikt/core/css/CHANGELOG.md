@@ -1,5 +1,54 @@
 # @navikt/ds-css
 
+## 5.0.2
+
+## 5.0.1
+
+### Patch Changes
+
+- Checkbox: Hotfix da checkmark ikke var sentrert hvis man brukte tailwind ([`90db7dd0c`](https://github.com/navikt/aksel/commit/90db7dd0c120c16a387d3169c05c1f33dc694323))
+
+## 5.0.0
+
+### Major Changes
+
+- Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
+
+  - :sparkles: Støtte for header og footer
+  - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
+
+### Patch Changes
+
+- Table: ExpandableRow har oppdatert knapp for å matche Accordion og ExpansionCard ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+- Table: Alle størrelser har justert padding. Small-size table bruker nå også standard typografi-størrelse (18px). ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+## 4.12.1
+
+### Patch Changes
+
+- Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
+
+## 4.12.0
+
+### Minor Changes
+
+- CopyButton: Har nå prop 'iconPosition' for å høyre/venstre aligne ikon ([#2173](https://github.com/navikt/aksel/pull/2173))
+
+### Patch Changes
+
+- List: Fikset sentrering, margins ([#2168](https://github.com/navikt/aksel/pull/2168))
+
+- Checkbox: Checkmark er nå SVG-ikon og ikke Base64 ([#2171](https://github.com/navikt/aksel/pull/2171))
+
+- Alert: Fikset alignment av status-ikon mot tekst ([#2179](https://github.com/navikt/aksel/pull/2179))
+
+## 4.11.2
+
+### Patch Changes
+
+- :lipstick: ToggleGroup: fjern semibold fra selected button ([#2167](https://github.com/navikt/aksel/pull/2167))
+
 ## 4.11.1
 
 ### Patch Changes

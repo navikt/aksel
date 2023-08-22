@@ -9,11 +9,10 @@ import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import Fuse from "fuse.js";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { categorizeIcons, getFillIcon } from "./utils";
+import { useMemo, useRef, useState } from "react";
 import { IconSidebar } from "./Sidebar";
 import { TitleLinks } from "./TitleLinks";
+import { categorizeIcons, getFillIcon } from "./utils";
 
 const fuseStroke = new Fuse(
   Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),
@@ -70,16 +69,14 @@ export const IconPage = ({ name }: { name: string }) => {
     );
   }, [toggle, query, strokeIcons, fillIcons]);
 
-  const router = useRouter();
-
-  useEffect(() => {
-    hideModal && Modal.setAppElement("#__next");
-  }, [hideModal]);
-
-  const subCategoryWordLength = Math.max(
-    ...categories.map((cat) =>
-      Math.max(...cat.sub_categories.map((sub) => sub.sub_category.length))
-    )
+  const subCategoryWordLength = useMemo(
+    () =>
+      Math.max(
+        ...categorizeIcons(strokeIcons).map((cat) =>
+          Math.max(...cat.sub_categories.map((sub) => sub.sub_category.length))
+        )
+      ),
+    [strokeIcons]
   );
 
   return (
@@ -260,15 +257,9 @@ export const IconPage = ({ name }: { name: string }) => {
                 {!hideModal && (
                   <Modal
                     open={!!name}
-                    onClose={() =>
-                      router.push(`/ikoner#${name}`, undefined, {
-                        shallow: true,
-                      })
-                    }
-                    closeButton={false}
-                    aria-modal
                     aria-label={`${name} ikon`}
-                    className="bg-surface-default focus-visible:shadow-focus z-modal absolute block h-full overflow-y-auto rounded px-2 py-6 focus:outline-none sm:px-6"
+                    className="rounded px-2 py-6 sm:px-6"
+                    onClose={() => null}
                   >
                     {name && <IconSidebar name={name} focusRef={focusRef} />}
                   </Modal>

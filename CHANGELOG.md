@@ -1,5 +1,102 @@
 # Changelog
 
+## 5.0.2
+
+### @navikt/ds-react
+
+- :label: Modal: Bedre type for `width` ([#2191](https://github.com/navikt/aksel/pull/2191))
+
+## 5.0.1
+
+### @navikt/ds-css
+
+- Checkbox: Hotfix da checkmark ikke var sentrert hvis man brukte tailwind ([`90db7dd0c`](https://github.com/navikt/aksel/commit/90db7dd0c120c16a387d3169c05c1f33dc694323))
+
+## 5.0.0
+
+### @navikt/ds-tokens
+
+- Gray: Gråfarger er nå mindre varme ([#2092](https://github.com/navikt/aksel/pull/2092))
+
+- Action: Selected-varianter av action er nå 'blue' ('deepblue' før) ([#2092](https://github.com/navikt/aksel/pull/2092))
+
+### @navikt/ds-css
+
+- Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
+
+  - :sparkles: Støtte for header og footer
+  - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
+
+<!---->
+
+- Table: ExpandableRow har oppdatert knapp for å matche Accordion og ExpansionCard ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+- Table: Alle størrelser har justert padding. Small-size table bruker nå også standard typografi-størrelse (18px). ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+### @navikt/ds-react
+
+- Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
+
+  - :sparkles: Støtte for header og footer
+  - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
+  - :boom: Provider: `appElement` er fjernet
+
+<!---->
+
+- Table: ExpandableRow har oppdatert knapp for å matche Accordion og ExpansionCard ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+- Table: Har lagt til ny size: 'large'. ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+## 4.12.1
+
+### @navikt/ds-css
+
+- Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
+
+### @navikt/ds-react
+
+- Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
+
+## 4.12.0
+
+### @navikt/ds-css
+
+- CopyButton: Har nå prop 'iconPosition' for å høyre/venstre aligne ikon ([#2173](https://github.com/navikt/aksel/pull/2173))
+
+<!---->
+
+- List: Fikset sentrering, margins ([#2168](https://github.com/navikt/aksel/pull/2168))
+
+- Checkbox: Checkmark er nå SVG-ikon og ikke Base64 ([#2171](https://github.com/navikt/aksel/pull/2171))
+
+- Alert: Fikset alignment av status-ikon mot tekst ([#2179](https://github.com/navikt/aksel/pull/2179))
+
+### @navikt/ds-react
+
+- Combobox: La til støtte for feilmeldinger i Combobox ([#2182](https://github.com/navikt/aksel/pull/2182))
+
+- CopyButton: Har nå prop 'iconPosition' for å høyre/venstre aligne ikon ([#2173](https://github.com/navikt/aksel/pull/2173))
+
+<!---->
+
+- List: Fikset sentrering, margins ([#2168](https://github.com/navikt/aksel/pull/2168))
+
+- Combobox: Kjører nå 'onChange' + 'onClear' når input blir reset programmatisk ([#2183](https://github.com/navikt/aksel/pull/2183))
+
+- Combobox: Fikset custom-options i singleselect ([#2180](https://github.com/navikt/aksel/pull/2180))
+
+- Combobox: Fjernet unødvendige 'onClear'-calls når man velger verdier ([#2170](https://github.com/navikt/aksel/pull/2170))
+
+- Checkbox: Checkmark er nå SVG-ikon og ikke Base64 ([#2171](https://github.com/navikt/aksel/pull/2171))
+
+- Combobox: Lukker nå nedtrekksmeny hvis man legger til ny option i singleselect ([#2177](https://github.com/navikt/aksel/pull/2177))
+
+## 4.11.2
+
+### @navikt/ds-css
+
+- :lipstick: ToggleGroup: fjern semibold fra selected button ([#2167](https://github.com/navikt/aksel/pull/2167))
+
 ## 4.11.1
 
 ### @navikt/ds-css

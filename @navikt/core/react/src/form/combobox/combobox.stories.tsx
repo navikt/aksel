@@ -3,7 +3,7 @@ import { Meta } from "@storybook/react";
 import React, { useState, useId, useMemo } from "react";
 import { userEvent, within } from "@storybook/testing-library";
 import { Chips, UNSAFE_Combobox, TextField } from "../../index";
-import { expect } from "@storybook/jest";
+import { expect, jest } from "@storybook/jest";
 
 export default {
   title: "ds-react/Combobox",
@@ -94,6 +94,27 @@ MultiSelect.args = {
   size: "medium",
 };
 
+export function WithAddNewOptions(props) {
+  const id = useId();
+  return (
+    <DemoContainer dataTheme={props.darkMode}>
+      <UNSAFE_Combobox
+        id={id}
+        label="Komboboks med mulighet for å legge til nye verdier"
+        options={props.options}
+        allowNewValues={props.allowNewValues}
+        shouldAutocomplete={props.shouldAutoComplete}
+      />
+    </DemoContainer>
+  );
+}
+
+WithAddNewOptions.args = {
+  options,
+  allowNewValues: true,
+  shouldAutoComplete: true,
+};
+
 export function MultiSelectWithAddNewOptions(props) {
   const id = useId();
   return (
@@ -101,7 +122,7 @@ export function MultiSelectWithAddNewOptions(props) {
       <UNSAFE_Combobox
         id={id}
         isMultiSelect={props.isMultiSelect}
-        label="Komboboks (med mulighet for å legge til nye verdier)"
+        label="Multiselect komboboks med mulighet for å legge til nye verdier"
         options={props.options}
         allowNewValues={props.allowNewValues}
       />
@@ -295,6 +316,33 @@ ComboboxSizes.args = {
   options,
 };
 
+export const WithError = {
+  args: {
+    error: "Du må velge en favorittfrukt.",
+    isLoading: true,
+  },
+  render: (props) => {
+    const [hasSelectedValue, setHasSelectedValue] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    return (
+      <DemoContainer dataTheme={props.darkMode}>
+        <UNSAFE_Combobox
+          filteredOptions={isLoading ? [] : undefined}
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          error={!hasSelectedValue && props.error}
+          isLoading={isLoading}
+          onChange={() => {
+            setIsLoading(true);
+            setTimeout(() => setIsLoading(false), 2000);
+          }}
+          onToggleSelected={(_, isSelected) => setHasSelectedValue(isSelected)}
+        />
+      </DemoContainer>
+    );
+  },
+};
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -324,6 +372,7 @@ export const CancelInputTest = {
     userEvent.keyboard("{Escape}");
     await sleep(1000);
     userEvent.keyboard("{ArrowDown}");
+    await sleep(500);
     const banana = canvas.getByText("banana");
     userEvent.click(banana);
   },
@@ -419,5 +468,44 @@ export const AddWhenAddNewDisabledTest = {
 
     const invalidSelect = canvas.queryByLabelText("aaa slett");
     expect(invalidSelect).not.toBeInTheDocument();
+  },
+};
+
+export const TestThatCallbacksOnlyFireWhenExpected = {
+  args: {
+    onChange: jest.fn(),
+    onClear: jest.fn(),
+    onToggleSelected: jest.fn(),
+  },
+  render: (props) => {
+    return (
+      <DemoContainer dataTheme={props.darkMode}>
+        <UNSAFE_Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          {...props}
+        />
+      </DemoContainer>
+    );
+  },
+  play: async ({ canvasElement, args }) => {
+    args.onToggleSelected.mockClear();
+    args.onClear.mockClear();
+    args.onChange.mockClear();
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+    const searchWord = "tangerine";
+
+    userEvent.click(input);
+    await userEvent.type(input, searchWord, { delay: 200 });
+    await sleep(250);
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    expect(args.onClear.mock.calls).toHaveLength(1);
+    expect(args.onToggleSelected.mock.calls).toHaveLength(1);
+    expect(args.onChange.mock.calls).toHaveLength(searchWord.length + 1);
   },
 };

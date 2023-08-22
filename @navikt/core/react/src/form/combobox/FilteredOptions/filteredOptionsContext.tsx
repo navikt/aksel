@@ -8,6 +8,7 @@ import React, {
   useRef,
   useLayoutEffect,
 } from "react";
+import cl from "clsx";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../Input/inputContext";
 import usePrevious from "../../../util/usePrevious";
@@ -58,7 +59,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   } = props;
   const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
   const {
-    inputProps: { id },
+    inputProps: { "aria-describedby": partialAriaDescribedBy, id },
     value,
     searchTerm,
     setValue,
@@ -124,18 +125,26 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, [allowNewValues, isValueNew]);
 
   const ariaDescribedBy = useMemo(() => {
+    let activeOption;
     if (!isLoading && filteredOptions.length === 0) {
-      return `${id}-no-hits`;
+      activeOption = `${id}-no-hits`;
     } else if ((value && value !== "") || isLoading) {
       if (shouldAutocomplete && filteredOptions[0]) {
-        return `${id}-option-${filteredOptions[0].replace(" ", "-")}`;
-      } else if (isLoading) {
-        return `${id}-is-loading`;
+        activeOption = `${id}-option-${filteredOptions[0].replace(" ", "-")}`;
+      } else if (isListOpen && isLoading) {
+        activeOption = `${id}-is-loading`;
       }
-    } else {
-      return undefined;
     }
-  }, [isLoading, value, shouldAutocomplete, filteredOptions, id]);
+    return cl(activeOption, partialAriaDescribedBy) || undefined;
+  }, [
+    isListOpen,
+    isLoading,
+    value,
+    partialAriaDescribedBy,
+    shouldAutocomplete,
+    filteredOptions,
+    id,
+  ]);
 
   const currentOption = useMemo(() => {
     if (filteredOptionsIndex == null) {
