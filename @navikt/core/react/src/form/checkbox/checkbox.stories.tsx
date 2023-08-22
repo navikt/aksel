@@ -224,3 +224,83 @@ export const Readonly = () => (
     </Checkbox>
   </div>
 );
+
+export const DifferentBackgroundDemo = () => {
+  const [checked, setChecked] = useState([true, false, false]);
+
+  const toggleChecked = (index) => {
+    setChecked((checked) =>
+      checked.map((value, i) => (i === index ? !value : value))
+    );
+  };
+  return (
+    <div className="colgap">
+      <CheckboxGroup
+        legend="Hvem vant Rumpeldunkserien i første året til Harry Potter?"
+        defaultValue={["3"]}
+      >
+        <Checkbox value="1">Griffing</Checkbox>
+        <Checkbox value="2">Smygard</Checkbox>
+        <Checkbox value="3">Håsblås</Checkbox>
+        <Checkbox value="4">Ravnklo</Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup
+        legend="Hvilke frukter vil du ha?"
+        defaultValue={["eple"]}
+        className="bg-blue-100"
+        style={{ backgroundColor: "grey" }}
+      >
+        <Checkbox value="eple">Eple</Checkbox>
+        <Checkbox value="druer">Druer</Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup
+        legend="Når har du ferie?"
+        defaultValue={["1"]}
+        style={{ backgroundColor: "lightblue" }}
+      >
+        <Checkbox value="1">August</Checkbox>
+        <Checkbox value="2">Juli</Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup
+        legend="Alt er feil"
+        error="Du gjør alt feil"
+        style={{ backgroundColor: "lightblue" }}
+      >
+        <Checkbox value="1">Feil</Checkbox>
+        <Checkbox value="2">Feil</Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup
+        legend="Du får ikke endre denne"
+        readOnly
+        defaultValue={["1"]}
+        style={{ backgroundColor: "lightgray" }}
+      >
+        <Checkbox value="1">Ikke</Checkbox>
+        <Checkbox value="2">Prøv</Checkbox>
+      </CheckboxGroup>
+      <span className="bg-blue-100">Faux checkbox group</span>
+      <CheckboxGroup legend="Hvilke filtre vil du bruke?">
+        <Checkbox
+          checked={checked[0] && checked[1] && checked[2]}
+          indeterminate={new Set(checked).size === 2} // if both false and true are present
+          onChange={(e) =>
+            setChecked([e.target.checked, e.target.checked, e.target.checked])
+          }
+        >
+          Alle
+        </Checkbox>
+        <div style={{ paddingLeft: "2rem" }}>
+          <Checkbox checked={checked[0]} onChange={() => toggleChecked(0)}>
+            Filter 1
+          </Checkbox>
+          <Checkbox checked={checked[1]} onChange={() => toggleChecked(1)}>
+            Filter 2
+          </Checkbox>
+          <Checkbox checked={checked[2]} onChange={() => toggleChecked(2)}>
+            Filter 3
+          </Checkbox>
+        </div>
+      </CheckboxGroup>
+    </div>
+  );
+};
