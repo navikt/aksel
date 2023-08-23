@@ -31,20 +31,13 @@
 .navds-radio__label::before {
   content: "";
   background-color: var(--ac-radio-checkbox-bg, var(--a-surface-default));
-  box-shadow: 0 0 0 2px var(--ac-radio-checkbox-border, var(--a-border-default));
   height: 1.25rem;
   width: 1.25rem;
   margin: 2px;
   border-radius: var(--a-border-radius-medium);
   flex-shrink: 0;
+  border: 2px solid var(--ac-radio-checkbox-border, var(--a-border-default));
 }
-
-/*
-  box-shadow: 0 0 0 2px var(--ac-radio-checkbox-border, var(--a-border-default));
-  height: calc(1.5rem - 2px);
-  width: calc(1.5rem - 2px);
-  margin: 2px;
-*/
 
 .navds-radio__label::before {
   border-radius: var(--a-border-radius-full);
@@ -78,25 +71,25 @@
 
 .navds-checkbox__input:focus-visible + .navds-checkbox__label::before,
 .navds-radio__input:focus-visible + .navds-radio__label::before {
-  box-shadow: 0 0 0 2px var(--ac-radio-checkbox-border, var(--a-border-default)), var(--a-shadow-focus);
+  box-shadow: 0 0 0 2px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-checkbox__input:focus + .navds-checkbox__label::before,
   .navds-radio__input:focus + .navds-radio__label::before {
-    box-shadow: 0 0 0 2px var(--ac-radio-checkbox-border, var(--a-border-default)), var(--a-shadow-focus);
+    box-shadow: 0 0 0 2px var(--a-border-focus);
   }
 }
 
 .navds-checkbox__input:hover:focus-visible + .navds-checkbox__label::before,
 .navds-radio__input:hover:focus-visible + .navds-radio__label::before {
-  box-shadow: 0 0 0 2px var(--ac-radio-checkbox-action, var(--a-surface-action)), var(--a-shadow-focus);
+  box-shadow: 0 0 0 2px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-checkbox__input:hover:focus + .navds-checkbox__label::before,
   .navds-radio__input:hover:focus + .navds-radio__label::before {
-    box-shadow: 0 0 0 2px var(--ac-radio-checkbox-action, var(--a-surface-action)), var(--a-shadow-focus);
+    box-shadow: 0 0 0 2px var(--a-border-focus);
   }
 }
 
@@ -154,13 +147,13 @@
 
 .navds-checkbox__input:indeterminate:focus-visible + .navds-checkbox__label::before,
 .navds-checkbox__input:checked:focus-visible + .navds-checkbox__label::before {
-  box-shadow: 0 0 0 1px var(--ac-radio-checkbox-bg, var(--a-surface-default)), var(--a-shadow-focus);
+  /* box-shadow: 0 0 0 1px white, 0px 0px 0 3px var(--a-border-focus, blue); */
 }
 
 @supports not selector(:focus-visible) {
   .navds-checkbox__input:indeterminate:focus + .navds-checkbox__label::before,
   .navds-checkbox__input:checked:focus + .navds-checkbox__label::before {
-    box-shadow: 0 0 0 1px var(--ac-radio-checkbox-bg, var(--a-surface-default)), var(--a-shadow-focus);
+    box-shadow: 0 0 0 1px red, 1px 1px 0 2px var(--a-border-focus, blue);
   }
 }
 
