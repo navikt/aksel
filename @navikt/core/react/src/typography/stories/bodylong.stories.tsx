@@ -21,6 +21,23 @@ export const Default: Story = {
   args: {
     spacing: false,
     children: lorem,
+    underline: false,
+    truncate: false,
+    visuallyHidden: false,
+  },
+  argTypes: {
+    weight: {
+      control: "radio",
+      options: ["regular", "semibold"],
+    },
+    align: {
+      control: "radio",
+      options: ["start", "center", "end"],
+    },
+    color: {
+      control: "radio",
+      options: ["default", "subtle", "on-inverted"],
+    },
   },
 };
 

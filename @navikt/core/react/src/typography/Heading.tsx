@@ -5,7 +5,7 @@ import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
 export interface HeadingProps
-  extends Pick<TypoProps, "spacing" | "visuallyHidden" | "align">,
+  extends Pick<TypoProps, "spacing" | "visuallyHidden" | "align" | "color">,
     React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Heading level
@@ -47,6 +47,7 @@ export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
         spacing,
         align,
         visuallyHidden,
+        color,
         ...rest
       },
       ref
@@ -65,6 +66,7 @@ export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
               spacing,
               align,
               visuallyHidden,
+              color,
             })
           )}
         />

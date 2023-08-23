@@ -47,6 +47,7 @@ export const BodyLong: OverridableComponent<
       weight = "regular",
       align,
       visuallyHidden,
+      color,
       ...rest
     },
     ref
@@ -64,6 +65,7 @@ export const BodyLong: OverridableComponent<
           weight,
           align,
           visuallyHidden,
+          color,
         }),
         {
           "navds-body-long--small": size === "small",

@@ -44,6 +44,7 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
         truncate,
         align,
         visuallyHidden,
+        color,
         ...rest
       },
       ref
@@ -60,6 +61,7 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
             truncate,
             align,
             visuallyHidden,
+            color,
           }),
           {
             "navds-label--small": size === "small",

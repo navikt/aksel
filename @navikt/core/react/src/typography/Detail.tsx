@@ -49,6 +49,7 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
         weight = "regular",
         align,
         visuallyHidden,
+        color,
         ...rest
       },
       ref
@@ -66,6 +67,7 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
             weight,
             align,
             visuallyHidden,
+            color,
           }),
           {
             "navds-detail--small": size === "small",
