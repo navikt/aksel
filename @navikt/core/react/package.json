@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "4.11.2",
+  "version": "5.0.3",
   "description": "Aksel react-components for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -38,13 +38,12 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.24.1",
-    "@navikt/aksel-icons": "^4.11.2",
+    "@navikt/aksel-icons": "^5.0.3",
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^1.2.1",
     "date-fns": "2.29.3",
-    "react-day-picker": "8.3.4",
-    "react-modal": "3.15.1"
+    "react-day-picker": "8.3.4"
   },
   "devDependencies": {
     "@testing-library/dom": "8.13.0",
@@ -53,7 +52,6 @@
     "@testing-library/user-event": "^14.2.0",
     "@types/faker": "5.5.8",
     "@types/jest": "^29.0.0",
-    "@types/react-modal": "^3.13.1",
     "concurrently": "7.2.1",
     "copyfiles": "^2.4.1",
     "faker": "5.5.3",

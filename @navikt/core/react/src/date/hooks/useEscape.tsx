@@ -1,9 +1,9 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, RefObject } from "react";
 
 export const useEscape = (
   open: boolean,
   setOpen: (openState: boolean) => void,
-  focusRef: any
+  focusRef: RefObject<HTMLElement>
 ) => {
   const handleClose = useCallback(() => {
     setOpen(false);
@@ -11,7 +11,12 @@ export const useEscape = (
   }, [focusRef, setOpen]);
 
   const escape = useCallback(
-    (e) => open && e.key === "Escape" && handleClose(),
+    (event: KeyboardEvent) => {
+      if (open && event.key === "Escape") {
+        event.preventDefault(); // This prevents modal from closing when using datepicker inside modal
+        handleClose();
+      }
+    },
     [handleClose, open]
   );
 

@@ -1,9 +1,6 @@
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Button } from "@navikt/ds-react";
-import cl from "clsx";
-import { useContext, useEffect } from "react";
-import ReactModal from "react-modal";
-import styles from "../header.module.css";
+import { Button, Modal } from "@navikt/ds-react";
+import { useContext } from "react";
 import { Error } from "./Error";
 import { SearchForm } from "./Form";
 import { Results } from "./Results";
@@ -12,10 +9,6 @@ import { SearchContext, SearchNavigationContext } from "./providers";
 export const Search = () => {
   const { open, setOpen } = useContext(SearchContext);
   const { close } = useContext(SearchNavigationContext);
-
-  useEffect(() => {
-    ReactModal.setAppElement("#__next");
-  }, []);
 
   return (
     <>
@@ -35,19 +28,17 @@ export const Search = () => {
       >
         Søk
       </Button>
-      <ReactModal
-        isOpen={open}
-        onRequestClose={close}
-        aria={{ modal: true }}
-        contentLabel="Søk"
-        className="bg-surface-default focus-visible:shadow-focus animate-searchModal shadow-xlarge absolute inset-0 mx-auto my-auto flex h-[90%] max-h-[52rem] w-full max-w-[90%] flex-col overflow-x-hidden rounded-lg focus:outline-none md:h-[80%] lg:max-w-4xl"
-        overlayClassName={cl(styles.modalOverlaySearch, "backdrop-blur-[2px]")}
-        htmlOpenClassName="overflow-hidden"
+      <Modal
+        open={open}
+        onClose={close}
+        aria-label="Søk"
+        className="h-[90%] max-h-[52rem] "
+        width="medium"
       >
         <Error />
         <SearchForm />
         <Results />
-      </ReactModal>
+      </Modal>
     </>
   );
 };

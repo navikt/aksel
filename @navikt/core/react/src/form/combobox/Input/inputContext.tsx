@@ -13,6 +13,7 @@ import { useFormField, FormFieldType } from "../../useFormField";
 
 interface InputContextType extends FormFieldType {
   clearInput: (event: React.PointerEvent | React.KeyboardEvent) => void;
+  error?: string;
   focusInput: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
   value: string;
@@ -80,10 +81,11 @@ export const InputContextProvider = ({ children, value: props }) => {
   const clearInput = useCallback(
     (event: React.PointerEvent | React.KeyboardEvent) => {
       onClear?.(event);
+      externalOnChange?.(null, "");
       setValue("");
       setSearchTerm("");
     },
-    [onClear, setSearchTerm, setValue]
+    [externalOnChange, onClear, setValue]
   );
 
   const focusInput = useCallback(() => {
@@ -101,6 +103,7 @@ export const InputContextProvider = ({ children, value: props }) => {
       value={{
         ...formFieldProps,
         clearInput,
+        error,
         focusInput,
         inputRef,
         value,

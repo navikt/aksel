@@ -132,7 +132,12 @@
 
 .navds-checkbox--small .navds-checkbox__input:checked + .navds-checkbox__label > .navds-checkbox__icon {
   transform: translate(0.25rem, -10%);
-  height: 1.25rem;
+}
+
+/* Tailwind sets all svg to block */
+.navds-checkbox__icon > svg {
+  display: inline;
+  vertical-align: initial;
 }
 
 .navds-checkbox--small > .navds-checkbox__input:checked + .navds-checkbox__label::before {
