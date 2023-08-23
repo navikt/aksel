@@ -49,7 +49,7 @@ export const Default: Story = {
 
 export const SizeLarge: Story = {
   render: () => (
-    <VStack gap="2">
+    <VStack gap="4">
       <BodyLong size="large">{lorem}</BodyLong>
       <BodyLong size="large" underline>
         {lorem}

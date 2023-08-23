@@ -7,20 +7,19 @@ const Example = () => {
 
   return (
     <VStack gap="4">
-      <Label size="small">{lorem}</Label>
-      <Divider />
       <div>
-        <Descriptor>Underline</Descriptor>
-        <Label size="small" underline>
-          {lorem}
-        </Label>
+        <Descriptor>Start</Descriptor>
+        <Label align="start">{lorem}</Label>
       </div>
       <Divider />
       <div>
-        <Descriptor>Truncate (ellipsis)</Descriptor>
-        <Label size="small" truncate>
-          {lorem}
-        </Label>
+        <Descriptor>Center</Descriptor>
+        <Label align="center">{lorem}</Label>
+      </div>
+      <Divider />
+      <div>
+        <Descriptor>End</Descriptor>
+        <Label align="end">{lorem}</Label>
       </div>
     </VStack>
   );
@@ -34,7 +33,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 5,
 };
 
 function Descriptor({ children }) {

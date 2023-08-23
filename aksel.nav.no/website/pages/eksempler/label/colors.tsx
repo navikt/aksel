@@ -7,20 +7,19 @@ const Example = () => {
 
   return (
     <VStack gap="4">
-      <Label size="small">{lorem}</Label>
-      <Divider />
       <div>
-        <Descriptor>Underline</Descriptor>
-        <Label size="small" underline>
-          {lorem}
-        </Label>
+        <Descriptor>Default</Descriptor>
+        <Label color="default">{lorem}</Label>
       </div>
       <Divider />
       <div>
-        <Descriptor>Truncate (ellipsis)</Descriptor>
-        <Label size="small" truncate>
-          {lorem}
-        </Label>
+        <Descriptor>Subtle</Descriptor>
+        <Label color="subtle">{lorem}</Label>
+      </div>
+      <Divider />
+      <div className="bg-surface-inverted text-text-on-inverted">
+        <Descriptor>On-inverted</Descriptor>
+        <Label color="on-inverted">{lorem}</Label>
       </div>
     </VStack>
   );
@@ -34,7 +33,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 4,
 };
 
 function Descriptor({ children }) {

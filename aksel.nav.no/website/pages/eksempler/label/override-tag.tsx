@@ -1,10 +1,8 @@
-import { BodyShort } from "@navikt/ds-react";
+import { Label } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return (
-    <BodyShort>Du må gjøre en filtrering for å se brukere i listen.</BodyShort>
-  );
+  return <Label as="span">Dette er nå en span!</Label>;
 };
 
 export default withDsExample(Example);
@@ -15,5 +13,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 6,
 };

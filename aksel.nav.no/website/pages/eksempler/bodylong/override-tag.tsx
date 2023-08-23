@@ -2,13 +2,7 @@ import { BodyLong } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return (
-    <BodyLong>
-      Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til
-      barnebidrag fra en eller begge foreldre mens du fullfører videregående
-      skole eller tilsvarende.
-    </BodyLong>
-  );
+  return <BodyLong as="span">Dette er nå en span!</BodyLong>;
 };
 
 export default withDsExample(Example);
@@ -19,5 +13,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 8,
 };

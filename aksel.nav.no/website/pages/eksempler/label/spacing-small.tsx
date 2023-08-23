@@ -2,11 +2,18 @@ import { Label } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
+  const lorem =
+    "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
+
   return (
-    <Label>
-      Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om
-      refusjon.
-    </Label>
+    <div>
+      <Label size="small" spacing>
+        {lorem}
+      </Label>
+      <Label size="small" spacing>
+        {lorem}
+      </Label>
+    </div>
   );
 };
 
@@ -18,6 +25,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
-  desc: "Label rendres i dag som et 'label'-element. Husk å endre til riktig tag ved bruk av 'as'-prop hvis du vil bruke eks span/p",
+  index: 3,
 };
