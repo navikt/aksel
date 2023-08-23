@@ -65,24 +65,11 @@ export const structure = async (
 
   const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
   const adminOrDev = currentUser.roles.find((x) =>
-    ["developer", "administrator", "editor"].includes(x.name)
+    ["developer", "administrator"].includes(x.name)
   );
   const developer = currentUser.roles.find((x) =>
     ["developer"].includes(x.name)
   );
-  /* const hasBloggerRole = currentUser.roles.find((x) => x.name === "blogger");
-  const hasGrunnleggendeRole = currentUser.roles.find(
-    (x: Role) => x.name === "grunnleggende"
-  );
-  const hasKomponenterRole = currentUser.roles.find(
-    (x: Role) => x.name === "komponenter"
-  );
-  const hasPrinsipperRole = currentUser.roles.find(
-    (x: Role) => x.name === "prinsipper"
-  );
-  const hasGodPraksisForfatterRole = currentUser.roles.find(
-    (x: Role) => x.name === "god-praksis-forfatter"
-  ); */
 
   const feedback = await getClient({ apiVersion: "2021-06-07" }).fetch(
     `*[_type == "aksel_feedback" && $id in doc_ref->contributors[]->user_id.current]{_id, behandlet}`,
@@ -429,7 +416,7 @@ export const defaultDocumentNode = (S, { schemaType }) => {
         .options({
           url: (doc) => resolveProductionUrl(doc),
         })
-        .title("Forhåndsvinsing"),
+        .title("Forhåndsvisning"),
       S.view
         .component(FeedbackView)
         .icon(CommentIcon)
