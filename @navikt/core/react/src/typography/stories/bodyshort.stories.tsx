@@ -4,6 +4,7 @@ import { within } from "@storybook/testing-library";
 import React from "react";
 import { BodyShort } from "..";
 import { VStack } from "../..";
+import { typoColors } from "../types";
 
 const meta = {
   title: "ds-react/Typography/BodyShort",
@@ -26,6 +27,10 @@ export const Default: Story = {
     visuallyHidden: false,
   },
   argTypes: {
+    size: {
+      control: "radio",
+      options: ["large", "medium", "small"],
+    },
     weight: {
       control: "radio",
       options: ["regular", "semibold"],
@@ -36,9 +41,26 @@ export const Default: Story = {
     },
     color: {
       control: "radio",
-      options: ["default", "subtle", "on-inverted"],
+      options: typoColors,
     },
   },
+};
+
+export const SizeLarge: Story = {
+  render: () => (
+    <VStack gap="2">
+      <BodyShort size="large">{lorem}</BodyShort>
+      <BodyShort size="large" underline>
+        {lorem}
+      </BodyShort>
+      <BodyShort size="large" weight="semibold">
+        {lorem}
+      </BodyShort>
+      <BodyShort size="large" truncate>
+        {lorem}
+      </BodyShort>
+    </VStack>
+  ),
 };
 
 export const SizeMedium: Story = {
@@ -72,6 +94,19 @@ export const SizeSmall: Story = {
         {lorem}
       </BodyShort>
     </VStack>
+  ),
+};
+
+export const SpacingLarge: Story = {
+  render: () => (
+    <div>
+      <BodyShort size="large" spacing>
+        {lorem}
+      </BodyShort>
+      <BodyShort size="large" spacing>
+        {lorem}
+      </BodyShort>
+    </div>
   ),
 };
 

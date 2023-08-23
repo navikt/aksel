@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
-import { TypoProps } from "./types";
+import { TypoProps, typoColors } from "./types";
 import { typoClassNames } from "./util";
 
 export interface LabelProps
   extends Omit<TypoProps, "weight">,
-    React.LabelHTMLAttributes<HTMLLabelElement> {
+    Omit<React.HTMLAttributes<HTMLLabelElement>, "color"> {
   /**
    * medium: 18px, small: 16px
    * @default "medium"
@@ -67,6 +67,7 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
             "navds-label--small": size === "small",
           }
         )}
+        {...(color && !typoColors.includes(color) ? { color } : {})}
       />
     )
   );

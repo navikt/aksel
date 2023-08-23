@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
-import { TypoProps } from "./types";
+import { TypoProps, typoColors } from "./types";
 import { typoClassNames } from "./util";
 
 export interface HeadingProps
   extends Pick<TypoProps, "spacing" | "visuallyHidden" | "align" | "color">,
-    React.HTMLAttributes<HTMLHeadingElement> {
+    Omit<React.HTMLAttributes<HTMLHeadingElement>, "color"> {
   /**
    * Heading level
    * @default "1"
@@ -69,6 +69,7 @@ export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
               color,
             })
           )}
+          {...(color && !typoColors.includes(color) ? { color } : {})}
         />
       );
     }

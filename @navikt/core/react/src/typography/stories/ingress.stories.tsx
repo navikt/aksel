@@ -5,7 +5,7 @@ import React from "react";
 import { Ingress } from "..";
 
 const meta = {
-  title: "ds-react/Typography/Ingress",
+  title: "ds-react/Typography/deprecated/Ingress",
   component: Ingress,
 } satisfies Meta<typeof Ingress>;
 

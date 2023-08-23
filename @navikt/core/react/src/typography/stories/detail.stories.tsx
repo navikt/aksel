@@ -4,6 +4,7 @@ import { within } from "@storybook/testing-library";
 import React from "react";
 import { Detail } from "..";
 import { VStack } from "../..";
+import { typoColors } from "../types";
 
 const meta = {
   title: "ds-react/Typography/Detail",
@@ -36,7 +37,7 @@ export const Default: Story = {
     },
     color: {
       control: "radio",
-      options: ["default", "subtle", "on-inverted"],
+      options: typoColors,
     },
   },
 };

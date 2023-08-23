@@ -4,6 +4,7 @@ import { within } from "@storybook/testing-library";
 import React from "react";
 import { Label } from "..";
 import { VStack } from "../..";
+import { typoColors } from "../types";
 
 const meta = {
   title: "ds-react/Typography/Label",
@@ -27,13 +28,17 @@ export const Default: Story = {
     visuallyHidden: false,
   },
   argTypes: {
+    size: {
+      control: "radio",
+      options: ["large", "medium", "small"],
+    },
     align: {
       control: "radio",
       options: ["start", "center", "end"],
     },
     color: {
       control: "radio",
-      options: ["default", "subtle", "on-inverted"],
+      options: typoColors,
     },
   },
 };

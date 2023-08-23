@@ -22,6 +22,12 @@ export const Default: Story = {
     spacing: false,
     children: lorem,
   },
+  argTypes: {
+    size: {
+      control: "radio",
+      options: ["medium", "small"],
+    },
+  },
 };
 
 export const SizeMedium: Story = {

@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
-import { TypoProps } from "./types";
+import { TypoProps, typoColors } from "./types";
 import { typoClassNames } from "./util";
 
 export interface BodyShortProps
@@ -58,6 +58,7 @@ export const BodyShort: OverridableComponent<
       className={cl(
         className,
         "navds-body-short",
+        `navds-body-short--${size}`,
         typoClassNames({
           spacing,
           underline,
@@ -66,11 +67,9 @@ export const BodyShort: OverridableComponent<
           align,
           visuallyHidden,
           color,
-        }),
-        {
-          "navds-body-short--small": size === "small",
-        }
+        })
       )}
+      {...(color && !typoColors.includes(color) ? { color } : {})}
     />
   )
 );

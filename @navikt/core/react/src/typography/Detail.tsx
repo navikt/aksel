@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
-import { TypoProps } from "./types";
+import { TypoProps, typoColors } from "./types";
 import { typoClassNames } from "./util";
 
 export interface DetailProps
   extends TypoProps,
-    React.HTMLAttributes<HTMLParagraphElement> {
+    Omit<React.HTMLAttributes<HTMLParagraphElement>, "color"> {
   /**
    * @deprecated Medium === small
    */
@@ -68,12 +68,13 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
             align,
             visuallyHidden,
             color,
+            uppercase,
           }),
           {
             "navds-detail--small": size === "small",
-            "navds-typo--uppercase": !!uppercase,
           }
         )}
+        {...(color && !typoColors.includes(color) ? { color } : {})}
       />
     )
   );

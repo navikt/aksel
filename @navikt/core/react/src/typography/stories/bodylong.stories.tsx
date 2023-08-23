@@ -4,6 +4,7 @@ import { within } from "@storybook/testing-library";
 import React from "react";
 import { BodyLong } from "..";
 import { VStack } from "../..";
+import { typoColors } from "../types";
 
 const meta = {
   title: "ds-react/Typography/BodyLong",
@@ -27,6 +28,10 @@ export const Default: Story = {
     visuallyHidden: false,
   },
   argTypes: {
+    size: {
+      control: "radio",
+      options: ["large", "medium", "small"],
+    },
     weight: {
       control: "radio",
       options: ["regular", "semibold"],
@@ -37,9 +42,26 @@ export const Default: Story = {
     },
     color: {
       control: "radio",
-      options: ["default", "subtle", "on-inverted"],
+      options: typoColors,
     },
   },
+};
+
+export const SizeLarge: Story = {
+  render: () => (
+    <VStack gap="2">
+      <BodyLong size="large">{lorem}</BodyLong>
+      <BodyLong size="large" underline>
+        {lorem}
+      </BodyLong>
+      <BodyLong size="large" weight="semibold">
+        {lorem}
+      </BodyLong>
+      <BodyLong size="large" truncate>
+        {lorem}
+      </BodyLong>
+    </VStack>
+  ),
 };
 
 export const SizeMedium: Story = {
@@ -73,6 +95,19 @@ export const SizeSmall: Story = {
         {lorem}
       </BodyLong>
     </VStack>
+  ),
+};
+
+export const SpacingLarge: Story = {
+  render: () => (
+    <div>
+      <BodyLong size="large" spacing>
+        {lorem}
+      </BodyLong>
+      <BodyLong size="large" spacing>
+        {lorem}
+      </BodyLong>
+    </div>
   ),
 };
 

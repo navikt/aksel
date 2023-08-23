@@ -5,6 +5,7 @@ import { within } from "@storybook/testing-library";
 import { default as React } from "react";
 import { Heading } from "..";
 import { VStack } from "../..";
+import { typoColors } from "../types";
 
 const meta = {
   title: "ds-react/Typography/Heading",
@@ -22,6 +23,27 @@ export const Default: Story = {
   args: {
     spacing: false,
     children: lorem,
+    underline: false,
+    truncate: false,
+    visuallyHidden: false,
+  },
+  argTypes: {
+    size: {
+      control: "radio",
+      options: ["xlarge", "large", "medium", "small", "xsmall"],
+    },
+    level: {
+      control: "radio",
+      options: ["1", "2", "3", "4", "5", "6"],
+    },
+    align: {
+      control: "radio",
+      options: ["start", "center", "end"],
+    },
+    color: {
+      control: "radio",
+      options: typoColors,
+    },
   },
 };
 

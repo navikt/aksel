@@ -1,3 +1,5 @@
+export const typoColors = ["default", "subtle", "on-inverted"];
+
 export type TypoProps = {
   underline?: boolean;
   truncate?: boolean;
@@ -8,5 +10,5 @@ export type TypoProps = {
    * Adds spacing below text
    */
   spacing?: boolean;
-  color?: "default" | "subtle" | "on-inverted";
+  color?: "default" | "subtle" | "on-inverted" | string;
 };

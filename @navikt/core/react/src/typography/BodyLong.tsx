@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
-import { TypoProps } from "./types";
+import { TypoProps, typoColors } from "./types";
 import { typoClassNames } from "./util";
 
 export interface BodyLongProps
   extends TypoProps,
-    React.HTMLAttributes<HTMLParagraphElement> {
+    Omit<React.HTMLAttributes<HTMLParagraphElement>, "color"> {
   /**
    * large: 20px, medium: 18px, small: 16px
    * @default "medium"
@@ -58,6 +58,7 @@ export const BodyLong: OverridableComponent<
       className={cl(
         className,
         "navds-body-long",
+        `navds-body-long--${size}`,
         typoClassNames({
           spacing,
           underline,
@@ -66,11 +67,9 @@ export const BodyLong: OverridableComponent<
           align,
           visuallyHidden,
           color,
-        }),
-        {
-          "navds-body-long--small": size === "small",
-        }
+        })
       )}
+      {...(color && !typoColors.includes(color) ? { color } : {})}
     />
   )
 );
