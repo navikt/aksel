@@ -509,3 +509,61 @@ export const TestThatCallbacksOnlyFireWhenExpected = {
     expect(args.onChange.mock.calls).toHaveLength(searchWord.length + 1);
   },
 };
+
+export const TestConsistentUpperCaseWhenAutoCompleting = {
+  args: {
+    onChange: jest.fn(),
+    onClear: jest.fn(),
+    onToggleSelected: jest.fn(),
+  },
+  render: (props) => {
+    return (
+      <DemoContainer dataTheme={props.darkMode}>
+        <UNSAFE_Combobox
+          options={["UPPERCASE", "WORD"]}
+          label="Hva er dine favorittfrukter?"
+          shouldAutocomplete
+          {...props}
+        />
+      </DemoContainer>
+    );
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole<HTMLInputElement>("combobox");
+
+    userEvent.click(input);
+    await userEvent.type(input, "upper", { delay: 250 });
+    await sleep(250);
+    expect(input.value).toBe("UPPERCASE");
+  },
+};
+
+export const TestConsistentLowerCaseWhenAutoCompleting = {
+  args: {
+    onChange: jest.fn(),
+    onClear: jest.fn(),
+    onToggleSelected: jest.fn(),
+  },
+  render: (props) => {
+    return (
+      <DemoContainer dataTheme={props.darkMode}>
+        <UNSAFE_Combobox
+          options={["lowercase", "word"]}
+          label="Hva er dine favorittfrukter?"
+          shouldAutocomplete
+          {...props}
+        />
+      </DemoContainer>
+    );
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole<HTMLInputElement>("combobox");
+
+    userEvent.click(input);
+    await userEvent.type(input, "LOWER", { delay: 250 });
+    await sleep(250);
+    expect(input.value).toBe("lowercase");
+  },
+};

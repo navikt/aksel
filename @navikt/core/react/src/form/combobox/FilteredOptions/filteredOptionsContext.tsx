@@ -92,9 +92,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
       filteredOptions.length > 0 &&
       !isValueInList(searchTerm, filteredOptions)
     ) {
-      setValue(
-        `${searchTerm}${filteredOptions[0].substring(searchTerm.length)}`
-      );
+      setValue(filteredOptions[0]);
       setSearchTerm(searchTerm);
     }
   }, [
