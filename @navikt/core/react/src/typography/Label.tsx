@@ -6,7 +6,7 @@ import { typoClassNames } from "./util";
 
 export interface LabelProps
   extends Omit<TypoProps, "weight">,
-    Omit<React.HTMLAttributes<HTMLLabelElement>, "color"> {
+    React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * medium: 18px, small: 16px
    * @default "medium"
