@@ -171,7 +171,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     }, [modalRef, open]);
 
-    useBodyScrollLock(modalRef, "navds-modal__document-body");
+    useBodyScrollLock(modalRef);
 
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
