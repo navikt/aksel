@@ -70,10 +70,25 @@ export const ThemingDemo = {
 box.padding ? box.padding : 
 */
 
-export const PaddingDemo = {
+export const PaddingBreakpoints = {
   render: () => (
     <div>
       <Box padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6" }}>
+        <BodyLong>
+          This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
+          nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
+          Proident pariatur proident pariatur magna consequat velit id commodo
+          quis sunt tempor ullamco aliquip pariatur.
+        </BodyLong>
+      </Box>
+    </div>
+  ),
+};
+
+export const Padding = {
+  render: () => (
+    <div>
+      <Box padding="4">
         <BodyLong>
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
           nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.

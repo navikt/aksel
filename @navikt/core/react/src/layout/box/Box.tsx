@@ -4,7 +4,7 @@ import cl from "clsx";
 import {
   ResponsiveProp,
   SpacingScale,
-  getResponsiveProps,
+  getResponsivePropsPaddingMargin,
 } from "../utilities/css";
 
 type Element = "div" | "span" | "section" | "legend" | "ul" | "li";
@@ -248,44 +248,28 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         : undefined,
       "--ac-box-overflow-x": overflowX,
       "--ac-box-overflow-y": overflowY,
-      ...getResponsiveProps(
-        "box",
-        "padding-block-end",
-        "space",
-        paddingBlockEnd || padding
-      ),
-      ...getResponsiveProps(
-        "box",
-        "padding-block-start",
-        "space",
-        paddingBlockStart || padding
-      ),
-      ...getResponsiveProps(
-        "box",
-        "padding-inline-start",
-        "space",
-        paddingInlineStart || padding
-      ),
-      ...getResponsiveProps(
-        "box",
-        "padding-inline-end",
-        "space",
-        paddingInlineEnd || padding
-      ),
+      "--__ac-box-padding": padding,
+      ...getResponsivePropsPaddingMargin("box", "padding", "spacing", {
+        padding,
+        paddingBlockStart,
+        paddingBlockEnd,
+        paddingInlineStart,
+        paddingInlineEnd,
+      }),
       "--ac-box-shadow": shadow ? `var(--a-shadow-${shadow})` : undefined,
       "--ac-box-width": width,
       position,
       "--ac-box-inset-block-start": insetBlockStart
-        ? `var(--a-space-${insetBlockStart})`
+        ? `var(--a-spacing-${insetBlockStart})`
         : undefined,
       "--ac-box-inset-block-end": insetBlockEnd
-        ? `var(--a-space-${insetBlockEnd})`
+        ? `var(--a-spacing-${insetBlockEnd})`
         : undefined,
       "--ac-box-inset-inline-start": insetInlineStart
-        ? `var(--a-space-${insetInlineStart})`
+        ? `var(--a-spacing-${insetInlineStart})`
         : undefined,
       "--ac-box-inset-inline-end": insetInlineEnd
-        ? `var(--a-space-${insetInlineEnd})`
+        ? `var(--a-spacing-${insetInlineEnd})`
         : undefined,
       zIndex,
       opacity,

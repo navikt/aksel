@@ -1,14 +1,31 @@
 .navds-box {
-  background-color: red;
+  /* 
+  --__ac-box-align: initial;
+  --__ac-box-justify: initial;
+  --__ac-box-direction: initial;
+  --__ac-box-wrap: initial;
+  --__ac-box-gap-xs: initial;
+  --__ac-box-gap-sm: initial;
+  --__ac-box-gap-md: initial;
+  --__ac-box-gap-lg: initial;
+  --__ac-box-gap-xl: initial;
+  --__ac-box-padding: initial;
+  --__ac-box-gap: var(--__ac-box-gap-xs); 
+  */
 
-  --__ac-stack-align: initial;
-  --__ac-stack-justify: initial;
-  --__ac-stack-direction: initial;
-  --__ac-stack-wrap: initial;
-  --__ac-stack-gap-xs: initial;
-  --__ac-stack-gap-sm: initial;
-  --__ac-stack-gap-md: initial;
-  --__ac-stack-gap-lg: initial;
-  --__ac-stack-gap-xl: initial;
-  --__ac-stack-gap: var(--__ac-stack-gap-xs);
+  --__ac-box-padding-block-xs: initial;
+  --__ac-box-padding-inline-xs: initial;
+  --__ac-box-padding-block-sm: initial;
+  --__ac-box-padding-inline-sm: initial;
+  --__ac-box-padding-block-md: initial;
+  --__ac-box-padding-inline-md: initial;
+  --__ac-box-padding-block-lg: initial;
+  --__ac-box-padding-inline-lg: initial;
+  --__ac-box-padding-block-xl: initial;
+  --__ac-box-padding-inline-xl: initial;
+  --__ac-box-padding-inline: var(--__ac-box-padding-inline-xs);
+  --__ac-box-padding-block: var(--__ac-box-padding-block-xs);
+
+  padding-inline: var(--__ac-box-padding-inline);
+  padding-block: var(--__ac-box-padding-block);
 }
