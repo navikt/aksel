@@ -13,6 +13,7 @@ import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
 import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
 import { ModalContext } from "./ModalContext";
+import ModalPortal from "./ModalPortal";
 
 const needPolyfill =
   typeof window !== "undefined" && window.HTMLDialogElement === undefined;
@@ -65,6 +66,11 @@ export interface ModalProps
    * @default fit-content (up to 700px)
    * */
   width?: "medium" | "small" | number | `${number}${string}`;
+  /**
+   * Lets you render the modal into a different part of the DOM.
+   * Will use `rootElement` from `Provider` if defined, otherwise `document.body`.
+   */
+  portal?: boolean;
   /**
    * User defined classname for modal
    */
@@ -141,6 +147,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       onBeforeClose,
       onCancel,
       width,
+      portal,
       className,
       "aria-labelledby": ariaLabelledby,
       style,
@@ -174,12 +181,12 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     }, [modalRef, open]);
 
-    useBodyScrollLock(modalRef, "navds-modal__document-body");
+    useBodyScrollLock(modalRef, "navds-modal__document-body", open);
 
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
 
-    return (
+    const component = (
       <dialog
         ref={mergedRef}
         className={cl("navds-modal", className, {
@@ -229,6 +236,15 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         </ModalContext.Provider>
       </dialog>
     );
+
+    if (portal) {
+      return (
+        <ModalPortal modalRef={modalRef} open={open}>
+          {component}
+        </ModalPortal>
+      );
+    }
+    return component;
   }
 ) as ModalComponent;
 

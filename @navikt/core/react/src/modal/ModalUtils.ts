@@ -15,11 +15,12 @@ export function getCloseHandler(
 
 export function useBodyScrollLock(
   modalRef: React.RefObject<HTMLDialogElement>,
-  bodyClass: string
+  bodyClass: string,
+  open?: ModalProps["open"]
 ) {
   React.useEffect(() => {
+    if (open) document.body.classList.add(bodyClass); // In case `open` is true initially
     if (!modalRef.current) return;
-    if (modalRef.current.open) document.body.classList.add(bodyClass); // In case `open` is true initially
 
     const observer = new MutationObserver(() => {
       if (modalRef.current?.open) document.body.classList.add(bodyClass);
@@ -33,5 +34,6 @@ export function useBodyScrollLock(
       observer.disconnect();
       document.body.classList.remove(bodyClass); // In case modal is unmounted before it's closed
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalRef, bodyClass]);
 }
