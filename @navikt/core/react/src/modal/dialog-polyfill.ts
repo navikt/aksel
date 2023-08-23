@@ -50,36 +50,6 @@ function safeDispatchEvent(target, event) {
 }
 
 /**
- * @param {Element} el to check for stacking context
- * @return {boolean} whether this el or its parents creates a stacking context
- */
-function createsStackingContext(el) {
-  while (el && el !== document.body) {
-    var s = window.getComputedStyle(el);
-    // eslint-disable-next-line no-loop-func
-    var invalid = function (k, ok) {
-      return !(s[k] === undefined || s[k] === ok);
-    };
-
-    if (
-      s.opacity < 1 ||
-      invalid("zIndex", "auto") ||
-      invalid("transform", "none") ||
-      invalid("mixBlendMode", "normal") ||
-      invalid("filter", "none") ||
-      invalid("perspective", "none") ||
-      s["isolation"] === "isolate" ||
-      s.position === "fixed" ||
-      s.webkitOverflowScrolling === "touch"
-    ) {
-      return true;
-    }
-    el = el.parentElement;
-  }
-  return false;
-}
-
-/**
  * Finds the nearest <dialog> from the passed element.
  *
  * @param {Element} el to search from
@@ -482,14 +452,6 @@ dialogPolyfillInfo.prototype = /** @type {HTMLDialogElement.prototype} */ {
       );
     }
 
-    if (createsStackingContext(this.dialog_.parentElement)) {
-      /*console.warn(
-        "A dialog is being shown inside a stacking context. " +
-          "This may cause it to be unusable. For more information, see this link: " +
-          "https://github.com/GoogleChrome/dialog-polyfill/#stacking-context"
-      );*/
-    }
-
     this.setOpen(true);
     this.openAsModal_ = true;
 
@@ -608,7 +570,7 @@ dialogPolyfill.needsCentering = function (dialog) {
  * @param {!Element} element to force upgrade
  */
 dialogPolyfill.forceRegisterDialog = function (element) {
-  if (/*window.HTMLDialogElement ||*/ element.showModal) {
+  if (element.showModal) {
     console.warn(
       "This browser already supports <dialog>, the polyfill " +
         "may not work correctly",
