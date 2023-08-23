@@ -2,10 +2,12 @@ import { Detail } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
+  const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
+
   return (
     <div>
-      <Detail spacing>Trenger du hjelp til å komme i jobb?</Detail>
-      <Detail>Trenger hjelp til å utføre utdanning</Detail>
+      <Detail spacing>{lorem}</Detail>
+      <Detail spacing>{lorem}</Detail>
     </div>
   );
 };

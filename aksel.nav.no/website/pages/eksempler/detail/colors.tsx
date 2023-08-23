@@ -6,21 +6,19 @@ const Example = () => {
 
   return (
     <VStack gap="4">
-      <Detail>{lorem}</Detail>
-      <Divider />
       <div>
-        <Descriptor>Underline</Descriptor>
-        <Detail underline>{lorem}</Detail>
+        <Descriptor>Default</Descriptor>
+        <Detail color="default">{lorem}</Detail>
       </div>
       <Divider />
       <div>
-        <Descriptor>Semibold</Descriptor>
-        <Detail weight="semibold">{lorem}</Detail>
+        <Descriptor>Subtle</Descriptor>
+        <Detail color="subtle">{lorem}</Detail>
       </div>
       <Divider />
-      <div>
-        <Descriptor>Truncate (ellipsis)</Descriptor>
-        <Detail truncate>{lorem}</Detail>
+      <div className="bg-surface-inverted text-text-on-inverted">
+        <Descriptor>On-inverted</Descriptor>
+        <Detail color="on-inverted">{lorem}</Detail>
       </div>
     </VStack>
   );
@@ -34,7 +32,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 2,
 };
 
 function Descriptor({ children }) {
