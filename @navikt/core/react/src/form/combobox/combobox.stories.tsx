@@ -533,7 +533,7 @@ export const TestConsistentUpperCaseWhenAutoCompleting = {
     const input = canvas.getByRole<HTMLInputElement>("combobox");
 
     userEvent.click(input);
-    await userEvent.type(input, "upper", { delay: 250 });
+    await userEvent.type(input, "uppercase", { delay: 250 });
     await sleep(250);
     expect(input.value).toBe("UPPERCASE");
   },
@@ -562,7 +562,7 @@ export const TestConsistentLowerCaseWhenAutoCompleting = {
     const input = canvas.getByRole<HTMLInputElement>("combobox");
 
     userEvent.click(input);
-    await userEvent.type(input, "LOWER", { delay: 250 });
+    await userEvent.type(input, "LOWERCASE", { delay: 250 });
     await sleep(250);
     expect(input.value).toBe("lowercase");
   },
