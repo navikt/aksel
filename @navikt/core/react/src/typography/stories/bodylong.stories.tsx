@@ -8,6 +8,7 @@ import { VStack } from "../..";
 const meta = {
   title: "ds-react/Typography/BodyLong",
   component: BodyLong,
+  decorators: [(story) => <div style={{ maxWidth: "700px" }}>{story()}</div>],
 } satisfies Meta<typeof BodyLong>;
 
 export default meta;
@@ -45,7 +46,15 @@ export const SizeMedium: Story = {
   render: () => (
     <VStack gap="2">
       <BodyLong size="medium">{lorem}</BodyLong>
-      <BodyLong size="medium">{lorem}</BodyLong>
+      <BodyLong size="medium" underline>
+        {lorem}
+      </BodyLong>
+      <BodyLong size="medium" weight="semibold">
+        {lorem}
+      </BodyLong>
+      <BodyLong size="medium" truncate>
+        {lorem}
+      </BodyLong>
     </VStack>
   ),
 };
@@ -54,7 +63,15 @@ export const SizeSmall: Story = {
   render: () => (
     <VStack gap="2">
       <BodyLong size="small">{lorem}</BodyLong>
-      <BodyLong size="small">{lorem}</BodyLong>
+      <BodyLong size="small" underline>
+        {lorem}
+      </BodyLong>
+      <BodyLong size="small" weight="semibold">
+        {lorem}
+      </BodyLong>
+      <BodyLong size="small" truncate>
+        {lorem}
+      </BodyLong>
     </VStack>
   ),
 };
@@ -82,6 +99,28 @@ export const SpacingSmall: Story = {
         {lorem}
       </BodyLong>
     </div>
+  ),
+};
+
+export const Colors: Story = {
+  render: () => (
+    <VStack gap="2">
+      <BodyLong color="default">{lorem}</BodyLong>
+      <BodyLong color="subtle">{lorem}</BodyLong>
+      <div style={{ background: "var(--a-gray-900)" }}>
+        <BodyLong color="on-inverted">{lorem}</BodyLong>
+      </div>
+    </VStack>
+  ),
+};
+
+export const Algin: Story = {
+  render: () => (
+    <VStack gap="2">
+      <BodyLong align="start">{lorem}</BodyLong>
+      <BodyLong align="center">{lorem}</BodyLong>
+      <BodyLong align="end">{lorem}</BodyLong>
+    </VStack>
   ),
 };
 

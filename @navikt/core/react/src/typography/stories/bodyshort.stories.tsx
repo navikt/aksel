@@ -8,6 +8,7 @@ import { VStack } from "../..";
 const meta = {
   title: "ds-react/Typography/BodyShort",
   component: BodyShort,
+  decorators: [(story) => <div style={{ maxWidth: "200px" }}>{story()}</div>],
 } satisfies Meta<typeof BodyShort>;
 
 export default meta;
@@ -20,6 +21,23 @@ export const Default: Story = {
   args: {
     spacing: false,
     children: lorem,
+    underline: false,
+    truncate: false,
+    visuallyHidden: false,
+  },
+  argTypes: {
+    weight: {
+      control: "radio",
+      options: ["regular", "semibold"],
+    },
+    align: {
+      control: "radio",
+      options: ["start", "center", "end"],
+    },
+    color: {
+      control: "radio",
+      options: ["default", "subtle", "on-inverted"],
+    },
   },
 };
 
@@ -27,7 +45,15 @@ export const SizeMedium: Story = {
   render: () => (
     <VStack gap="2">
       <BodyShort size="medium">{lorem}</BodyShort>
-      <BodyShort size="medium">{lorem}</BodyShort>
+      <BodyShort size="medium" underline>
+        {lorem}
+      </BodyShort>
+      <BodyShort size="medium" weight="semibold">
+        {lorem}
+      </BodyShort>
+      <BodyShort size="medium" truncate>
+        {lorem}
+      </BodyShort>
     </VStack>
   ),
 };
@@ -36,7 +62,15 @@ export const SizeSmall: Story = {
   render: () => (
     <VStack gap="2">
       <BodyShort size="small">{lorem}</BodyShort>
-      <BodyShort size="small">{lorem}</BodyShort>
+      <BodyShort size="small" underline>
+        {lorem}
+      </BodyShort>
+      <BodyShort size="small" weight="semibold">
+        {lorem}
+      </BodyShort>
+      <BodyShort size="small" truncate>
+        {lorem}
+      </BodyShort>
     </VStack>
   ),
 };
@@ -64,6 +98,28 @@ export const SpacingSmall: Story = {
         {lorem}
       </BodyShort>
     </div>
+  ),
+};
+
+export const Colors: Story = {
+  render: () => (
+    <VStack gap="2">
+      <BodyShort color="default">{lorem}</BodyShort>
+      <BodyShort color="subtle">{lorem}</BodyShort>
+      <div style={{ background: "var(--a-gray-900)" }}>
+        <BodyShort color="on-inverted">{lorem}</BodyShort>
+      </div>
+    </VStack>
+  ),
+};
+
+export const Algin: Story = {
+  render: () => (
+    <VStack gap="2">
+      <BodyShort align="start">{lorem}</BodyShort>
+      <BodyShort align="center">{lorem}</BodyShort>
+      <BodyShort align="end">{lorem}</BodyShort>
+    </VStack>
   ),
 };
 

@@ -8,6 +8,7 @@ import { VStack } from "../..";
 const meta = {
   title: "ds-react/Typography/Label",
   component: Label,
+  decorators: [(story) => <div style={{ maxWidth: "400px" }}>{story()}</div>],
 } satisfies Meta<typeof Label>;
 
 export default meta;
@@ -21,6 +22,19 @@ export const Default: Story = {
   args: {
     spacing: false,
     children: lorem,
+    underline: false,
+    truncate: false,
+    visuallyHidden: false,
+  },
+  argTypes: {
+    align: {
+      control: "radio",
+      options: ["start", "center", "end"],
+    },
+    color: {
+      control: "radio",
+      options: ["default", "subtle", "on-inverted"],
+    },
   },
 };
 
@@ -28,7 +42,12 @@ export const SizeMedium: Story = {
   render: () => (
     <VStack gap="2">
       <Label size="medium">{lorem}</Label>
-      <Label size="medium">{lorem}</Label>
+      <Label size="medium" underline>
+        {lorem}
+      </Label>
+      <Label size="medium" truncate>
+        {lorem}
+      </Label>
     </VStack>
   ),
 };
@@ -37,7 +56,12 @@ export const SizeSmall: Story = {
   render: () => (
     <VStack gap="2">
       <Label size="small">{lorem}</Label>
-      <Label size="small">{lorem}</Label>
+      <Label size="small" underline>
+        {lorem}
+      </Label>
+      <Label size="small" truncate>
+        {lorem}
+      </Label>
     </VStack>
   ),
 };
@@ -45,10 +69,10 @@ export const SizeSmall: Story = {
 export const SpacingMedium: Story = {
   render: () => (
     <div>
-      <Label size="medium" spacing>
+      <Label size="medium" spacing as="p">
         {lorem}
       </Label>
-      <Label size="medium" spacing>
+      <Label size="medium" spacing as="p">
         {lorem}
       </Label>
     </div>
@@ -58,13 +82,35 @@ export const SpacingMedium: Story = {
 export const SpacingSmall: Story = {
   render: () => (
     <div>
-      <Label size="small" spacing>
+      <Label size="small" spacing as="p">
         {lorem}
       </Label>
-      <Label size="small" spacing>
+      <Label size="small" spacing as="p">
         {lorem}
       </Label>
     </div>
+  ),
+};
+
+export const Colors: Story = {
+  render: () => (
+    <VStack gap="2">
+      <Label color="default">{lorem}</Label>
+      <Label color="subtle">{lorem}</Label>
+      <div style={{ background: "var(--a-gray-900)" }}>
+        <Label color="on-inverted">{lorem}</Label>
+      </div>
+    </VStack>
+  ),
+};
+
+export const Algin: Story = {
+  render: () => (
+    <VStack gap="2">
+      <Label align="start">{lorem}</Label>
+      <Label align="center">{lorem}</Label>
+      <Label align="end">{lorem}</Label>
+    </VStack>
   ),
 };
 

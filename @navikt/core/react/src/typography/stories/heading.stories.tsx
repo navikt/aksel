@@ -9,6 +9,7 @@ import { VStack } from "../..";
 const meta = {
   title: "ds-react/Typography/Heading",
   component: Heading,
+  decorators: [(story) => <div style={{ maxWidth: "300px" }}>{story()}</div>],
 } satisfies Meta<typeof Heading>;
 
 export default meta;
@@ -71,13 +72,47 @@ export const Spacing: Story = {
   ),
 };
 
+export const Colors: Story = {
+  render: () => (
+    <VStack gap="2">
+      <Heading level="1" size="large" color="default">
+        {lorem}
+      </Heading>
+      <Heading level="2" size="large" color="subtle">
+        {lorem}
+      </Heading>
+      <div style={{ background: "var(--a-gray-900)" }}>
+        <Heading level="3" size="large" color="on-inverted">
+          {lorem}
+        </Heading>
+      </div>
+    </VStack>
+  ),
+};
+
+export const Algin: Story = {
+  render: () => (
+    <VStack gap="2">
+      <Heading level="1" size="large" align="start">
+        {lorem}
+      </Heading>
+      <Heading level="2" size="large" align="center">
+        {lorem}
+      </Heading>
+      <Heading level="3" size="large" align="end">
+        {lorem}
+      </Heading>
+    </VStack>
+  ),
+};
+
 export const OverrideTag: Story = {
   render: () => (
     <div>
-      <Heading spacing level="1" size="small">
+      <Heading spacing level="1" size="large">
         default heading
       </Heading>
-      <Heading as="legend" size="small">
+      <Heading as="legend" size="large">
         legend heading
       </Heading>
     </div>
