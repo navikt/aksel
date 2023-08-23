@@ -109,6 +109,10 @@
   line-height: var(--a-font-line-height-xlarge);
 }
 
+.navds-body-long--large.navds-typo--spacing {
+  margin-bottom: var(--a-spacing-10);
+}
+
 .navds-body-long--small {
   font-size: var(--a-font-size-medium);
   letter-spacing: 0.002em;
@@ -134,7 +138,11 @@
 .navds-body-short--large {
   font-size: var(--a-font-size-xlarge);
   letter-spacing: -0.0013em;
-  line-height: var(--a-font-line-height-xlarge);
+  line-height: var(--a-font-line-height-large);
+}
+
+.navds-body-short--large.navds-typo--spacing {
+  margin-bottom: var(--a-spacing-4);
 }
 
 .navds-body-short--small {
