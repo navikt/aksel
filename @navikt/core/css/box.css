@@ -1,3 +1,14 @@
 .navds-box {
   background-color: red;
+
+  --__ac-stack-align: initial;
+  --__ac-stack-justify: initial;
+  --__ac-stack-direction: initial;
+  --__ac-stack-wrap: initial;
+  --__ac-stack-gap-xs: initial;
+  --__ac-stack-gap-sm: initial;
+  --__ac-stack-gap-md: initial;
+  --__ac-stack-gap-lg: initial;
+  --__ac-stack-gap-xl: initial;
+  --__ac-stack-gap: var(--__ac-stack-gap-xs);
 }

@@ -120,7 +120,7 @@ export interface BoxProps extends React.AriaAttributes {
   /** Outline width */
   outlineWidth?: number; // TODO
   /** Visually hide the contents (still announced by screenreader) */
-  visuallyHidden?: boolean;
+  srOnly?: boolean;
   /** z-index of box */
   zIndex?: string;
 }
@@ -163,7 +163,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       style: _style,
       tabIndex,
       width,
-      visuallyHidden,
+      srOnly,
       position,
       insetBlockStart,
       insetBlockEnd,
