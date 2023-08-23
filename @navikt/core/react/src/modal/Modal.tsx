@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from "react";
 import cl from "clsx";
-import dialogPolyfill from "./dialog-polyfill";
+import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
 import { Detail, Heading, mergeRefs, useId } from "..";
 import ModalBody from "./ModalBody";
 import ModalHeader from "./ModalHeader";
@@ -14,9 +14,6 @@ import ModalFooter from "./ModalFooter";
 import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
 import { ModalContext } from "./ModalContext";
 import ModalPortal from "./ModalPortal";
-
-const needPolyfill =
-  typeof window !== "undefined" && window.HTMLDialogElement === undefined;
 
 export interface ModalProps
   extends React.DialogHTMLAttributes<HTMLDialogElement> {
@@ -181,7 +178,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     }, [modalRef, open]);
 
-    useBodyScrollLock(modalRef, "navds-modal__document-body", open);
+    useBodyScrollLock(modalRef, open);
 
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
