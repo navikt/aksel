@@ -1,4 +1,16 @@
 export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
+
+const PreviousBreakpointLookup: {
+  // eslint-disable-next-line no-unused-vars
+  [key in BreakpointsAlias]: BreakpointsAlias | null;
+} = {
+  xs: null,
+  sm: "xs",
+  md: "sm",
+  lg: "md",
+  xl: "lg",
+};
+
 export type SpacingScale =
   | "0"
   | "05"
@@ -141,28 +153,62 @@ export function getResponsivePropsPaddingOrMarginForInlineAndBlock<T = string>(
     );
   }
 
+  // needs to be recursively called until we hit xs (null) to know for sure if there was any prior breakpoint
+  function getPreviousSetBreakpoint(
+    blockString: BlockString,
+    breakpointAlias: BreakpointsAlias
+  ) {
+    let curr: BreakpointsAlias | null = breakpointAlias;
+    while (curr) {
+      if (blockString[curr]) {
+        return blockString[curr];
+      }
+      curr = PreviousBreakpointLookup[curr];
+    }
+    if (curr) {
+      return PreviousBreakpointLookup[curr];
+    }
+    return null;
+  }
+
   function setBlockProp(
     responsiveKey: ResponsiveProp<SpacingScale> | undefined,
-    blockDirection: BlockString,
+    blockString: BlockString,
     index: 0 | 1
   ) {
     if (!responsiveKey) return;
     if (typeof responsiveKey === "string") {
-      blockDirection.xs = index
-        ? [blockDirection?.xs?.[0] ?? "0", responsiveKey]
-        : [responsiveKey, blockDirection?.xs?.[1] ?? "0"];
+      blockString.xs = index
+        ? [blockString?.xs?.[0] ?? "0", responsiveKey]
+        : [responsiveKey, blockString?.xs?.[1] ?? "0"];
       return;
     }
 
-    Object.assign(blockDirection, {
-      ...blockDirection,
+    Object.assign(blockString, {
+      ...structuredClone(blockString),
       ...Object.fromEntries(
         Object.entries(responsiveKey).map(([breakpointAlias, aliasOrScale]) => {
           return [
             breakpointAlias,
             index
-              ? [blockDirection?.[breakpointAlias]?.[0] ?? "0", aliasOrScale]
-              : [aliasOrScale, blockDirection?.[breakpointAlias]?.[0] ?? "0"],
+              ? [
+                  blockString?.[breakpointAlias]?.[0] ??
+                    (getPreviousSetBreakpoint(
+                      blockString,
+                      breakpointAlias as BreakpointsAlias // TODO type this
+                    )?.[1] ||
+                      "0"),
+                  aliasOrScale,
+                ]
+              : [
+                  aliasOrScale,
+                  blockString?.[breakpointAlias]?.[0] ??
+                    (getPreviousSetBreakpoint(
+                      blockString,
+                      breakpointAlias as BreakpointsAlias // TODO type this
+                    )?.[0] ||
+                      "0"),
+                ],
           ];
         })
       ),

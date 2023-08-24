@@ -85,10 +85,27 @@ export const PaddingBreakpoints = {
   ),
 };
 
-export const PaddingBreakpointsInherit = {
+export const PaddingBreakpointsInherit1 = {
   render: () => (
     <div>
       <Box padding={{ xs: "2" }} paddingInlineStart={{ md: "24" }}>
+        <BodyLong>
+          This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
+          nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
+          Proident pariatur proident pariatur magna consequat velit id commodo
+          quis sunt tempor ullamco aliquip pariatur.
+        </BodyLong>
+      </Box>
+    </div>
+  ),
+};
+export const PaddingBreakpointsInherit2 = {
+  render: () => (
+    <div>
+      <Box
+        padding={{ xs: "2", sm: "3" }}
+        paddingInlineStart={{ sm: "4", md: "24" }}
+      >
         <BodyLong>
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
           nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
