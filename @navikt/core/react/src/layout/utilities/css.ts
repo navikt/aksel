@@ -120,11 +120,6 @@ export function getResponsivePropsPaddingOrMarginForInlineAndBlock<T = string>(
     setBlockProp(responsiveKey, blockString, 0);
   }
 
-  console.log(JSON.stringify(blockString, null, 2));
-  console.log(
-    createStyleEntries(blockString, componentName, componentProp, logicalCss)
-  );
-
   return createStyleEntries(
     blockString,
     componentName,
