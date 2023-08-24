@@ -5300,7 +5300,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-actions@npm:7.3.2, @storybook/addon-actions@npm:^7.3.2":
+"@storybook/addon-actions@npm:7.3.2":
   version: 7.3.2
   resolution: "@storybook/addon-actions@npm:7.3.2"
   dependencies:
@@ -5481,32 +5481,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:^7.3.2":
-  version: 7.3.2
-  resolution: "@storybook/addon-links@npm:7.3.2"
-  dependencies:
-    "@storybook/client-logger": 7.3.2
-    "@storybook/core-events": 7.3.2
-    "@storybook/csf": ^0.1.0
-    "@storybook/global": ^5.0.0
-    "@storybook/manager-api": 7.3.2
-    "@storybook/preview-api": 7.3.2
-    "@storybook/router": 7.3.2
-    "@storybook/types": 7.3.2
-    prop-types: ^15.7.2
-    ts-dedent: ^2.0.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  peerDependenciesMeta:
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  checksum: 9f8df6bbdf905bfe1c3dc7f63d66049781b32047261a971ae8b16e70e530b1b9e7d4a84ce8bf51038b65de1d5dc445fd39192f2ddb0a7a0770d05fb2c13087a2
-  languageName: node
-  linkType: hard
-
 "@storybook/addon-measure@npm:7.3.2":
   version: 7.3.2
   resolution: "@storybook/addon-measure@npm:7.3.2"
@@ -5528,19 +5502,6 @@ __metadata:
     react-dom:
       optional: true
   checksum: 37b92265b76e66a239064edf8883a54fb3c6e8613d6cf5383054ae40d773204a0c1eb70e11e518ed0d6a1a5c79eaaccf21bb678c1dd79b6c651a5ab7e9cbeaa5
-  languageName: node
-  linkType: hard
-
-"@storybook/addon-onboarding@npm:^1.0.8":
-  version: 1.0.8
-  resolution: "@storybook/addon-onboarding@npm:1.0.8"
-  dependencies:
-    "@storybook/telemetry": ^7.1.0-alpha.32
-    react-confetti: ^6.1.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: f7f27869a06fd84058d4144aa94d72ace862ef726a083dd0f3cffae9916d7264ef4e8d154585eb6143eda85e4b21ee784e9114b9ca7905b82baab77738f8d0cf
   languageName: node
   linkType: hard
 
@@ -6563,7 +6524,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/telemetry@npm:7.3.2, @storybook/telemetry@npm:^7.1.0-alpha.32":
+"@storybook/telemetry@npm:7.3.2":
   version: 7.3.2
   resolution: "@storybook/telemetry@npm:7.3.2"
   dependencies:
@@ -8780,11 +8741,8 @@ __metadata:
   dependencies:
     "@changesets/cli": 2.26.2
     "@storybook/addon-a11y": ^7.3.2
-    "@storybook/addon-actions": ^7.3.2
     "@storybook/addon-essentials": ^7.3.2
     "@storybook/addon-interactions": ^7.3.2
-    "@storybook/addon-links": ^7.3.2
-    "@storybook/addon-onboarding": ^1.0.8
     "@storybook/addon-storysource": ^7.3.2
     "@storybook/addons": 7.2.3
     "@storybook/blocks": ^7.3.2
@@ -22095,17 +22053,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-confetti@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "react-confetti@npm:6.1.0"
-  dependencies:
-    tween-functions: ^1.2.0
-  peerDependencies:
-    react: ^16.3.0 || ^17.0.1 || ^18.0.0
-  checksum: 24b6975df144d2bf09d8e1c95ddc49e547775f911efaa8d96b49e522659d931539e9d9e48cc0db3a01f3a671be7e3824e6e728db85096f5527db5d1c69ebb153
-  languageName: node
-  linkType: hard
-
 "react-copy-to-clipboard@npm:^5.0.4, react-copy-to-clipboard@npm:^5.1.0":
   version: 5.1.0
   resolution: "react-copy-to-clipboard@npm:5.1.0"
@@ -25945,13 +25892,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tween-functions@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "tween-functions@npm:1.2.0"
-  checksum: 880708d680eff5c347ddcb9f922ad121703a91c78ce308ed309073e73a794b633eb0b80589a839365803f150515ad34c9646809ae8a0e90f09e62686eefb1ab6
-  languageName: node
-  linkType: hard
-
 "type-check@npm:^0.4.0, type-check@npm:~0.4.0":
   version: 0.4.0
   resolution: "type-check@npm:0.4.0"
@@ -27078,7 +27018,6 @@ __metadata:
     boring-avatars: 1.10.1
     clsx: ^1.2.1
     codesandbox: ^2.2.3
-    concurrently: 7.2.1
     cross-env: ^7.0.0
     date-fns: 2.29.3
     dotenv: ^10.0.0

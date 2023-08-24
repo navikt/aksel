@@ -212,11 +212,8 @@
   "devDependencies": {
     "@changesets/cli": "2.26.2",
     "@storybook/addon-a11y": "^7.3.2",
-    "@storybook/addon-actions": "^7.3.2",
     "@storybook/addon-essentials": "^7.3.2",
     "@storybook/addon-interactions": "^7.3.2",
-    "@storybook/addon-links": "^7.3.2",
-    "@storybook/addon-onboarding": "^1.0.8",
     "@storybook/addon-storysource": "^7.3.2",
     "@storybook/addons": "7.2.3",
     "@storybook/blocks": "^7.3.2",
