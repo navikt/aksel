@@ -5,15 +5,16 @@ import React, {
   useMemo,
   useRef,
 } from "react";
+import { createPortal } from "react-dom";
+import { useFloatingPortalNode } from "@floating-ui/react";
 import cl from "clsx";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
-import { Detail, Heading, mergeRefs, useId } from "..";
+import { Detail, Heading, mergeRefs, useId, useProvider } from "..";
 import ModalBody from "./ModalBody";
 import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
 import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
 import { ModalContext } from "./ModalContext";
-import ModalPortal from "./ModalPortal";
 
 export interface ModalProps
   extends React.DialogHTMLAttributes<HTMLDialogElement> {
@@ -155,30 +156,36 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const modalRef = useRef<HTMLDialogElement>(null);
     const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
     const ariaLabelId = useId();
+    const rootElement = useProvider()?.rootElement;
+    const portalNode = useFloatingPortalNode({ root: rootElement });
 
     if (useContext(ModalContext)) {
       console.error("Modals should not be nested");
     }
 
     useEffect(() => {
-      if (needPolyfill && modalRef.current) {
+      // If using portal, modalRef.current will not be set before portalNode is set.
+      // If not using portal, modalRef.current is available first.
+      // We check both to avoid activating polyfill twice when not using portal.
+      if (needPolyfill && modalRef.current && portalNode) {
         dialogPolyfill.registerDialog(modalRef.current);
       }
-    }, [modalRef]);
+    }, [modalRef, portalNode]);
 
     useEffect(() => {
       // We need to have this in a useEffect so that the content renders before the modal is displayed,
       // and in case `open` is true initially.
-      if (modalRef.current && open !== undefined) {
+      // We need to check both modalRef.current and portalNode to make sure the polyfill has been activated.
+      if (modalRef.current && portalNode && open !== undefined) {
         if (open && !modalRef.current.open) {
           modalRef.current.showModal();
         } else if (!open && modalRef.current.open) {
           modalRef.current.close();
         }
       }
-    }, [modalRef, open]);
+    }, [modalRef, portalNode, open]);
 
-    useBodyScrollLock(modalRef, open);
+    useBodyScrollLock(modalRef, portalNode);
 
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
@@ -235,11 +242,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     );
 
     if (portal) {
-      return (
-        <ModalPortal modalRef={modalRef} open={open}>
-          {component}
-        </ModalPortal>
-      );
+      if (portalNode) return createPortal(component, portalNode);
+      return null;
     }
     return component;
   }
