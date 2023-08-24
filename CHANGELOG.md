@@ -1,5 +1,23 @@
 # Changelog
 
+## 5.1.0
+
+### @navikt/ds-react
+
+- :sparkles: Modal: mulighet for å rendre i portal ([#2209](https://github.com/navikt/aksel/pull/2209))
+
+<!---->
+
+- :white_check_mark: Modal: use polyfill in JSDOM ([#2208](https://github.com/navikt/aksel/pull/2208))
+
+- Datepicker: Input setter ikke nå aria-controls før popover åpnes ([#2213](https://github.com/navikt/aksel/pull/2213))
+
+### @navikt/ds-css
+
+- :lipstick: Modal: fjern kantlinje ([#2210](https://github.com/navikt/aksel/pull/2210))
+
+- Tokens: Fikset table-token ([#2204](https://github.com/navikt/aksel/pull/2204))
+
 ## 5.0.3
 
 ### @navikt/ds-react
