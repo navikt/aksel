@@ -14,7 +14,7 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
     x?.intern ? `/${x.intern_lenke}` : x.ekstern_link;
 
   return (
-    <div className="ring-border-subtle toc-ignore link-color-override bg-surface-subtle my-7 max-w-2xl rounded-lg p-4 ring-1 ring-inset sm:p-6">
+    <div className="ring-border-subtle toc-ignore bg-surface-subtle my-7 max-w-2xl rounded-lg p-4 ring-1 ring-inset sm:p-6">
       <Heading
         className="override-text-no-max text-text-subtle flex items-center gap-2"
         size="small"
@@ -24,7 +24,7 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
         <NewspaperIcon fontSize="1.5rem" title="Nyheter" aria-hidden />
         Relevante lenker
       </Heading>
-      <ul className="grid gap-3 pl-6 sm:pl-8">
+      <ul className="grid gap-3 pl-8">
         {node.lenker.map((x) => (
           <li key={x._key} className="list-item">
             <Link
@@ -37,7 +37,7 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
                   e.currentTarget.getAttribute("href")
                 )
               }
-              className="text-xl font-semibold"
+              className="text-xl font-semibold text-gray-800"
             >
               {x.title}
             </Link>
