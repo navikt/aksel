@@ -8,28 +8,14 @@ export const Video = defineType({
   icon: DocumentVideoIcon,
   fields: [
     defineField({
-      name: "bruk_embed",
-      title: "Bruk Microsoft-streams embed",
-      type: "boolean",
-    }),
-    defineField({
-      name: "embed",
-      title: "Iframe",
-      description:
-        "Trykk share og legg inn iframe her fra Microsoft-streams. Husk å velge størrelse og slå av autplay og show info!",
-      type: "text",
-      rows: 3,
-      hidden: ({ parent }) => !parent?.bruk_embed,
-    }),
-    defineField({
       name: "webm",
       title: "Video i WebM format",
-      description: "Vi anbefaler å bruke Webm formatet om mulig!",
+      description:
+        "Vi anbefaler å bruke Webm formatet. Formatet minsker fil-størrelse + perseverer kvalitet bedre",
       type: "file",
       options: {
         accept: "video/webm",
       },
-      hidden: ({ parent }) => parent?.bruk_embed,
     }),
     defineField({
       name: "fallback",
@@ -38,13 +24,11 @@ export const Video = defineType({
       options: {
         accept: "video/mp4",
       },
-      hidden: ({ parent }) => parent?.bruk_embed,
     }),
     defineField({
       name: "alt",
       title: "Alt tekst for skjermlesere",
       type: "string",
-
       validation: (Rule) => Rule.required(),
     }),
     defineField({
