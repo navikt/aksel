@@ -16,7 +16,7 @@ const Video = ({ node }: { node: VideoT }) => {
   return (
     <figure className={cl("m-0 mb-8 flex flex-col gap-2")}>
       <video
-        className="focus-visible:shadow-focus-gap focus:outline-none"
+        className="focus-visible:shadow-focus-gap rounded-lg focus:outline-none"
         title={node.alt}
         playsInline
         controls
@@ -35,14 +35,13 @@ const Video = ({ node }: { node: VideoT }) => {
         )}
       </video>
       {node?.caption && (
-        <BodyLong as="figcaption" className="self-center">
+        <BodyLong as="figcaption" className="px-7">
           {node.caption}
         </BodyLong>
       )}
       {node?.transkripsjon && (
         <ReadMore
-          header={`${open ? "Lukk" : "Åpne"} video transkripsjon`}
-          className="ml-[2px]"
+          header="Transkripsjon"
           open={open}
           onClick={() => setOpen((x) => !x)}
         >
