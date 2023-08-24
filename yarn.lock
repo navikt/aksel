@@ -3438,7 +3438,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^5.0.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^5.0.3, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3465,8 +3465,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^5.0.2
-    "@navikt/ds-tokens": ^5.0.2
+    "@navikt/ds-css": ^5.0.3
+    "@navikt/ds-tokens": ^5.0.3
     "@types/jest": ^29.0.0
     concurrently: 7.2.1
     copyfiles: 2.4.1
@@ -3483,7 +3483,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 5.0.2
+    "@navikt/ds-css": 5.0.3
     "@types/inquirer": ^9.0.3
     "@types/jest": ^29.0.0
     axios: 1.3.6
@@ -3507,11 +3507,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@5.0.2, @navikt/ds-css@^5.0.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@5.0.3, @navikt/ds-css@^5.0.3, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^5.0.2
+    "@navikt/ds-tokens": ^5.0.3
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3524,12 +3524,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@5.0.2, @navikt/ds-react@^5.0.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@5.0.3, @navikt/ds-react@^5.0.3, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.24.1
-    "@navikt/aksel-icons": ^5.0.2
+    "@navikt/aksel-icons": ^5.0.3
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3563,11 +3563,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^5.0.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^5.0.3, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^5.0.2
+    "@navikt/ds-tokens": ^5.0.3
     "@types/jest": ^29.0.0
     color: 4.2.3
     jest: ^29.0.0
@@ -3578,7 +3578,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^5.0.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^5.0.3, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -5602,20 +5602,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addons@npm:7.2.3":
-  version: 7.2.3
-  resolution: "@storybook/addons@npm:7.2.3"
-  dependencies:
-    "@storybook/manager-api": 7.2.3
-    "@storybook/preview-api": 7.2.3
-    "@storybook/types": 7.2.3
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: b182e10fca5b31d5e0f95d93dd7216b32195d46a6da4aa1946aff2827ac480ed8e444f843166a3d3358d8ac00d77fe5fe56e1779ad7d0080a822a70bca82e554
-  languageName: node
-  linkType: hard
-
 "@storybook/addons@npm:7.3.2":
   version: 7.3.2
   resolution: "@storybook/addons@npm:7.3.2"
@@ -5785,20 +5771,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/channels@npm:7.2.3":
-  version: 7.2.3
-  resolution: "@storybook/channels@npm:7.2.3"
-  dependencies:
-    "@storybook/client-logger": 7.2.3
-    "@storybook/core-events": 7.2.3
-    "@storybook/global": ^5.0.0
-    qs: ^6.10.0
-    telejson: ^7.0.3
-    tiny-invariant: ^1.3.1
-  checksum: f8cd22b15d2e12011b14d1aa4d4ac3d95b5e40083c91ccc3245f1d9cc7895537028d84c6d54c90b1227a2118fb632271f1c4d75661a97592f5e7a82dc621aaf1
-  languageName: node
-  linkType: hard
-
 "@storybook/channels@npm:7.3.2":
   version: 7.3.2
   resolution: "@storybook/channels@npm:7.3.2"
@@ -5871,15 +5843,6 @@ __metadata:
     "@storybook/client-logger": 7.3.2
     "@storybook/preview-api": 7.3.2
   checksum: 8f84037df26ecaacacfeeecad5c86d6998c43fdb4d51e8d69a4f4ad0ecdd8497551302fbfa7f4482ca3648797d94a8fb2e73c0c1beb449d79724f7704c514b20
-  languageName: node
-  linkType: hard
-
-"@storybook/client-logger@npm:7.2.3":
-  version: 7.2.3
-  resolution: "@storybook/client-logger@npm:7.2.3"
-  dependencies:
-    "@storybook/global": ^5.0.0
-  checksum: 1b8db51dfed084210082551375131e19c6830ac55b2e67bde7594801d73f6d33cbb903115c5699735d85ea0e46414dd1ddd1035bcf9d27de1be06ecc686f4d26
   languageName: node
   linkType: hard
 
@@ -5973,13 +5936,6 @@ __metadata:
     resolve-from: ^5.0.0
     ts-dedent: ^2.0.0
   checksum: 82e4258465d1444572c1d133099215d2d4480ce8bf98127242fd859fe38bc3008787f3e9d45e8fd445a7286c6e494ad1f51b75ef9f05659ea9e364e2ce18524f
-  languageName: node
-  linkType: hard
-
-"@storybook/core-events@npm:7.2.3":
-  version: 7.2.3
-  resolution: "@storybook/core-events@npm:7.2.3"
-  checksum: 2c976c88cbac5e3be37c946c460a4305dfcb639fa23faf419b866bb943c18398811a6521dbec6649ff6a19e4fdf644288f8a73bd5391a28d3bba24db44a8d80e
   languageName: node
   linkType: hard
 
@@ -6161,33 +6117,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/manager-api@npm:7.2.3":
-  version: 7.2.3
-  resolution: "@storybook/manager-api@npm:7.2.3"
-  dependencies:
-    "@storybook/channels": 7.2.3
-    "@storybook/client-logger": 7.2.3
-    "@storybook/core-events": 7.2.3
-    "@storybook/csf": ^0.1.0
-    "@storybook/global": ^5.0.0
-    "@storybook/router": 7.2.3
-    "@storybook/theming": 7.2.3
-    "@storybook/types": 7.2.3
-    dequal: ^2.0.2
-    lodash: ^4.17.21
-    memoizerific: ^1.11.3
-    semver: ^7.3.7
-    store2: ^2.14.2
-    telejson: ^7.0.3
-    ts-dedent: ^2.0.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 017cd88167892d02ea2b644ab4e91be39ec9777db722ae923be5841d3db29137f0d05cc984d38561cefb30110ccd395147b9f1b92508ad0ed4e913d5b0e757ff
-  languageName: node
-  linkType: hard
-
-"@storybook/manager-api@npm:7.3.2":
+"@storybook/manager-api@npm:7.3.2, @storybook/manager-api@npm:^7.3.2":
   version: 7.3.2
   resolution: "@storybook/manager-api@npm:7.3.2"
   dependencies:
@@ -6335,28 +6265,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/preview-api@npm:7.2.3":
-  version: 7.2.3
-  resolution: "@storybook/preview-api@npm:7.2.3"
-  dependencies:
-    "@storybook/channels": 7.2.3
-    "@storybook/client-logger": 7.2.3
-    "@storybook/core-events": 7.2.3
-    "@storybook/csf": ^0.1.0
-    "@storybook/global": ^5.0.0
-    "@storybook/types": 7.2.3
-    "@types/qs": ^6.9.5
-    dequal: ^2.0.2
-    lodash: ^4.17.21
-    memoizerific: ^1.11.3
-    qs: ^6.10.0
-    synchronous-promise: ^2.0.15
-    ts-dedent: ^2.0.0
-    util-deprecate: ^1.0.2
-  checksum: 756ff46c144a0cdac2814afd560ade066141dbaa0753d4094997bdb71d6f5acb181dea93279ae83a8c52bd3aca88a3a116ed36552c4b134340575bd1157200f4
-  languageName: node
-  linkType: hard
-
 "@storybook/preview-api@npm:7.3.2":
   version: 7.3.2
   resolution: "@storybook/preview-api@npm:7.3.2"
@@ -6470,20 +6378,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/router@npm:7.2.3":
-  version: 7.2.3
-  resolution: "@storybook/router@npm:7.2.3"
-  dependencies:
-    "@storybook/client-logger": 7.2.3
-    memoizerific: ^1.11.3
-    qs: ^6.10.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 0abf733e618129c1fa668e1d2adc45d9b108891677ea5a5fdcf21332c3d408bb9e8b10b7bd9b87f140c00abad11978b3c876e542e72e176c81090d01a956abe8
-  languageName: node
-  linkType: hard
-
 "@storybook/router@npm:7.3.2":
   version: 7.3.2
   resolution: "@storybook/router@npm:7.3.2"
@@ -6551,21 +6445,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:7.2.3":
-  version: 7.2.3
-  resolution: "@storybook/theming@npm:7.2.3"
-  dependencies:
-    "@emotion/use-insertion-effect-with-fallbacks": ^1.0.0
-    "@storybook/client-logger": 7.2.3
-    "@storybook/global": ^5.0.0
-    memoizerific: ^1.11.3
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: d39c4d4bdc87a5918a42d6193cbe59d9d6853a6127b1ee0bb224868723cacd676cf6fca834c5b8631a3db92501837dc49212b759e5829995ab0dddf9a0543e6a
-  languageName: node
-  linkType: hard
-
 "@storybook/theming@npm:7.3.2, @storybook/theming@npm:^7.3.2":
   version: 7.3.2
   resolution: "@storybook/theming@npm:7.3.2"
@@ -6578,18 +6457,6 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: aab7d83213ac3df7062fd39e33587311c972bfa3879a32dbc2f4dfa899c7b716ffa6c81496c18032bc8b4f0961cc50de0b0486aacf0e512aaec295cb635d8d4d
-  languageName: node
-  linkType: hard
-
-"@storybook/types@npm:7.2.3":
-  version: 7.2.3
-  resolution: "@storybook/types@npm:7.2.3"
-  dependencies:
-    "@storybook/channels": 7.2.3
-    "@types/babel__core": ^7.0.0
-    "@types/express": ^4.7.0
-    file-system-cache: 2.3.0
-  checksum: 7486ff9a48d25e3ed52102a5351cadbaa3f3b08b83e2b7531046b371203a003a2114aad3779297409d54afc0b30ea2d66b226a0e0376f4a71b9df8a2a8167e11
   languageName: node
   linkType: hard
 
@@ -8726,11 +8593,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^5.0.2
-    "@navikt/ds-css": ^5.0.2
-    "@navikt/ds-react": ^5.0.2
-    "@navikt/ds-tailwind": ^5.0.2
-    "@navikt/ds-tokens": ^5.0.2
+    "@navikt/aksel-icons": ^5.0.3
+    "@navikt/ds-css": ^5.0.3
+    "@navikt/ds-react": ^5.0.3
+    "@navikt/ds-tailwind": ^5.0.3
+    "@navikt/ds-tokens": ^5.0.3
     prettier-plugin-tailwindcss: ^0.2.3
   languageName: unknown
   linkType: soft
@@ -8744,10 +8611,10 @@ __metadata:
     "@storybook/addon-essentials": ^7.3.2
     "@storybook/addon-interactions": ^7.3.2
     "@storybook/addon-storysource": ^7.3.2
-    "@storybook/addons": 7.2.3
     "@storybook/blocks": ^7.3.2
     "@storybook/csf-tools": ^7.3.2
     "@storybook/jest": ^0.2.0
+    "@storybook/manager-api": ^7.3.2
     "@storybook/nextjs": ^7.3.2
     "@storybook/react": ^7.3.2
     "@storybook/react-vite": ^7.3.2
@@ -23819,8 +23686,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "shadow-dom@workspace:examples/shadow-dom"
   dependencies:
-    "@navikt/ds-css": 5.0.2
-    "@navikt/ds-react": 5.0.2
+    "@navikt/ds-css": 5.0.3
+    "@navikt/ds-react": 5.0.3
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": ^3.1.0
