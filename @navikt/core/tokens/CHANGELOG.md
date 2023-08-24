@@ -1,5 +1,13 @@
 # @navikt/ds-tokens
 
+## 5.0.3
+
+### Patch Changes
+
+- ConfirmationPanel: Fikset opplesing av feilmelding ([#2199](https://github.com/navikt/aksel/pull/2199))
+
+- Tokens: `--a-icon-alt-3` er nå i synk med figma ([#2199](https://github.com/navikt/aksel/pull/2199))
+
 ## 5.0.2
 
 ## 5.0.1
