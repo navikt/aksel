@@ -92,6 +92,11 @@ export interface BoxProps extends React.AriaAttributes {
    * paddingInlineEnd={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   paddingInlineEnd?: Spacing;
+  margin?: Spacing;
+  marginInline?: Spacing;
+  marginBlock?: Spacing;
+  marginBlockStart?: Spacing;
+  marginBlockEnd?: Spacing;
   /** Aria role */
   role?: Extract<
     React.AriaRole,
@@ -156,6 +161,13 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       outlineColor,
       outlineStyle,
       outlineWidth,
+      margin,
+      marginInline,
+      marginBlock,
+      marginBlockStart,
+      marginBlockEnd,
+      marginInlineStart,
+      marginInlineEnd,
       padding,
       paddingInline,
       paddingBlock,
@@ -273,6 +285,28 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
           paddingBlock,
           paddingBlockStart,
           paddingBlockEnd,
+        }
+      ),
+      ...getResponsivePropsPaddingOrMarginForInlineAndBlock(
+        "box",
+        "margin",
+        "inline",
+        {
+          margin,
+          marginInline,
+          marginInlineStart,
+          marginInlineEnd,
+        }
+      ),
+      ...getResponsivePropsPaddingOrMarginForInlineAndBlock(
+        "box",
+        "margin",
+        "block",
+        {
+          margin,
+          marginBlock,
+          marginBlockStart,
+          marginBlockEnd,
         }
       ),
       "--ac-box-shadow": shadow ? `var(--a-shadow-${shadow})` : undefined,

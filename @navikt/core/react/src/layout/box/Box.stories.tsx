@@ -2,7 +2,7 @@ import React from "react";
 import type { Meta } from "@storybook/react";
 import { BodyLong } from "../../typography";
 import { Box } from "./Box";
-import { VStack } from "../..";
+import { HStack, VStack } from "../..";
 
 export default {
   title: "ds-react/Box",
@@ -20,6 +20,54 @@ export const Default = {
       </BodyLong>
     </Box>
   ),
+};
+
+export const Card = {
+  render: () => {
+    const Card = ({ children }) => (
+      <Box
+        width="200px" // TODO
+        padding="4"
+        margin="4"
+        background="surface-default" // TODO
+        borderRadius="4" // TODO
+      >
+        {children}
+      </Box>
+    );
+
+    return (
+      <HStack gap="8">
+        <Card>
+          <h1>Card one</h1>
+          <BodyLong>
+            This is inside a box. Deserunt veniam eu fugiat ad est occaecat
+            aliqua nisi aliquip. Aute amet occaecat ex aliqua irure elit labore
+            pariatur. Proident pariatur proident pariatur magna consequat velit
+            id commodo quis sunt tempor ullamco aliquip pariatur.
+          </BodyLong>
+        </Card>
+        <Card>
+          <h1>Card two</h1>
+          <BodyLong>
+            This is inside a box. Deserunt veniam eu fugiat ad est occaecat
+            aliqua nisi aliquip. Aute amet occaecat ex aliqua irure elit labore
+            pariatur. Proident pariatur proident pariatur magna consequat velit
+            id commodo quis sunt tempor ullamco aliquip pariatur.
+          </BodyLong>
+        </Card>
+        <Card>
+          <h1>Card three</h1>
+          <BodyLong>
+            This is inside a box. Deserunt veniam eu fugiat ad est occaecat
+            aliqua nisi aliquip. Aute amet occaecat ex aliqua irure elit labore
+            pariatur. Proident pariatur proident pariatur magna consequat velit
+            id commodo quis sunt tempor ullamco aliquip pariatur.
+          </BodyLong>
+        </Card>
+      </HStack>
+    );
+  },
 };
 
 export const ThemingDemo = {
@@ -56,24 +104,24 @@ export const ThemingDemo = {
   },
 };
 
-/*
-  padding,
-  paddingBlockStart,
-  paddingBlockEnd,
-  paddingInlineStart,
-  paddingInlineEnd
-
-  padding="4"
-  padding={{ top: 4, bottom: 4, left: 4, right: 4 }}
-*/
-/* 
-box.padding ? box.padding : 
-*/
-
 export const PaddingBreakpoints = {
   render: () => (
     <div>
       <Box padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6" }}>
+        <BodyLong>
+          This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
+          nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
+          Proident pariatur proident pariatur magna consequat velit id commodo
+          quis sunt tempor ullamco aliquip pariatur.
+        </BodyLong>
+      </Box>
+    </div>
+  ),
+};
+export const MarginBreakpoints = {
+  render: () => (
+    <div>
+      <Box margin={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6" }}>
         <BodyLong>
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
           nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
