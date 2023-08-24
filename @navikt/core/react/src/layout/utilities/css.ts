@@ -26,9 +26,16 @@ type ResponsivePropConfig<T = string> = {
   [Breakpoint in BreakpointsAlias]?: T;
 };
 
+type ResponsiveLogicalTuple<T = string> = {
+  // eslint-disable-next-line no-unused-vars
+  [Breakpoint in BreakpointsAlias]?: [T, T];
+};
+
 export type ResponsiveProp<T> = T | ResponsivePropConfig<T>;
 
 export type ResponsiveValue<T = string> = undefined | ResponsiveProp<T>;
+
+type LogicalDesignator = "inline" | "block";
 
 export function getResponsiveProps<T = string>(
   componentName: string,
@@ -65,10 +72,10 @@ type blockT<T extends string> =
   | `${T}BlockEnd`;
 
 // eslint-disable-next-line no-unused-vars
-export function getResponsivePropsPaddingMargin<T = string>(
+export function getResponsivePropsPaddingOrMarginForInlineAndBlock<T = string>(
   componentName: string,
   componentProp: "padding" | "margin",
-  tokenSubgroup: string,
+  logicalCss: LogicalDesignator,
   responsiveProps: {
     // eslint-disable-next-line no-unused-vars
     [key in blockT<"margin" | "padding">]?: ResponsiveProp<SpacingScale>;
@@ -78,64 +85,88 @@ export function getResponsivePropsPaddingMargin<T = string>(
     return {};
   }
 
-  type BlockString = {
-    top: ResponsivePropConfig<SpacingScale>;
-    right: ResponsivePropConfig<SpacingScale>;
-    bottom: ResponsivePropConfig<SpacingScale>;
-    left: ResponsivePropConfig<SpacingScale>;
-  };
+  type BlockString = ResponsiveLogicalTuple<SpacingScale>;
 
-  let blockString: BlockString = { top: {}, right: {}, bottom: {}, left: {} };
+  let blockString: BlockString = {};
 
   if (responsiveProps?.[componentProp]) {
     const responsiveKey = responsiveProps[componentProp];
-    setBlockProp(responsiveKey, blockString, "top");
-    setBlockProp(responsiveKey, blockString, "right");
-    setBlockProp(responsiveKey, blockString, "bottom");
-    setBlockProp(responsiveKey, blockString, "left");
+    setBlockProp(responsiveKey, blockString, 0);
+    setBlockProp(responsiveKey, blockString, 1);
   }
   if (responsiveProps?.[`${componentProp}Inline`]) {
     const responsiveKey = responsiveProps[`${componentProp}Inline`];
-    setBlockProp(responsiveKey, blockString, "left");
-    setBlockProp(responsiveKey, blockString, "right");
+    setBlockProp(responsiveKey, blockString, 0);
+    setBlockProp(responsiveKey, blockString, 1);
   }
   if (responsiveProps?.[`${componentProp}InlineStart`]) {
     const responsiveKey = responsiveProps[`${componentProp}InlineStart`];
-    setBlockProp(responsiveKey, blockString, "left");
+    setBlockProp(responsiveKey, blockString, 0);
   }
   if (responsiveProps?.[`${componentProp}InlineEnd`]) {
     const responsiveKey = responsiveProps[`${componentProp}InlineEnd`];
-    setBlockProp(responsiveKey, blockString, "right");
+    setBlockProp(responsiveKey, blockString, 0);
   }
 
-  //TODO CONTINUE HERE - make this work
-
-  return Object.fromEntries(
-    Object.entries(blockString).map(([key, value]) => [
-      `--__ac-${componentName}-${componentProp}-${key}`,
-      `var(--a-${tokenSubgroup}-${value})`,
-    ])
+  console.log(JSON.stringify(blockString, null, 2));
+  console.log(
+    createStyleEntries(blockString, componentName, componentProp, logicalCss)
   );
+
+  return createStyleEntries(
+    blockString,
+    componentName,
+    componentProp,
+    logicalCss
+  );
+
+  /** desired output?
+  [
+    ['--__ac-box-padding-inline-xs', `var(...) var(...)`], 
+    ['--__ac-box-padding-block-xs'], `var(...) var(...)`],
+    ...
+  ]
+  */
+  function createStyleEntries(
+    blockString: BlockString,
+    componentName: string,
+    componentProp: string,
+    blockOrInline: LogicalDesignator
+  ) {
+    return Object.fromEntries(
+      Object.entries(blockString).map(([breakpointAlias, aliasOrScale]) => [
+        `--__ac-${componentName}-${componentProp}-${blockOrInline}-${breakpointAlias}`,
+        `var(--a-spacing-${aliasOrScale[0]}) var(--a-spacing-${aliasOrScale[1]})`,
+      ])
+    );
+  }
 
   function setBlockProp(
     responsiveKey: ResponsiveProp<SpacingScale> | undefined,
     blockDirection: BlockString,
-    subtree: "top" | "bottom" | "right" | "left" // TODO type
+    index: 0 | 1
   ) {
     if (!responsiveKey) return;
     if (typeof responsiveKey === "string") {
-      blockDirection[subtree].xs = responsiveKey;
+      blockDirection.xs = index
+        ? [blockDirection?.xs?.[0] ?? "0", responsiveKey]
+        : [responsiveKey, blockDirection?.xs?.[1] ?? "0"];
       return;
     }
-    blockDirection[subtree] = {
-      ...blockDirection[subtree],
+
+    Object.assign(blockDirection, {
+      ...blockDirection,
       ...Object.fromEntries(
-        Object.entries(responsiveKey).map(([breakpointAlias, aliasOrScale]) => [
-          breakpointAlias,
-          aliasOrScale,
-        ])
+        Object.entries(responsiveKey).map(([breakpointAlias, aliasOrScale]) => {
+          return [
+            breakpointAlias,
+            index
+              ? [blockDirection?.[breakpointAlias]?.[0] ?? "0", aliasOrScale]
+              : [aliasOrScale, blockDirection?.[breakpointAlias]?.[0] ?? "0"],
+          ];
+        })
       ),
-    };
+    });
   }
 }
 

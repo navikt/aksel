@@ -4,7 +4,7 @@ import cl from "clsx";
 import {
   ResponsiveProp,
   SpacingScale,
-  getResponsivePropsPaddingMargin,
+  getResponsivePropsPaddingOrMarginForInlineAndBlock,
 } from "../utilities/css";
 
 type Element = "div" | "span" | "section" | "legend" | "ul" | "li";
@@ -65,6 +65,9 @@ export interface BoxProps extends React.AriaAttributes {
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   padding?: Spacing;
+  // TODO
+  paddingInline?: Spacing;
+  paddingBlock?: Spacing;
   /** Vertical start spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
    * @example
    * paddingBlockStart='4'
@@ -154,6 +157,8 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       outlineStyle,
       outlineWidth,
       padding,
+      paddingInline,
+      paddingBlock,
       paddingBlockStart,
       paddingBlockEnd,
       paddingInlineStart,
@@ -248,14 +253,28 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         : undefined,
       "--ac-box-overflow-x": overflowX,
       "--ac-box-overflow-y": overflowY,
-      "--__ac-box-padding": padding,
-      ...getResponsivePropsPaddingMargin("box", "padding", "spacing", {
-        padding,
-        paddingBlockStart,
-        paddingBlockEnd,
-        paddingInlineStart,
-        paddingInlineEnd,
-      }),
+      ...getResponsivePropsPaddingOrMarginForInlineAndBlock(
+        "box",
+        "padding",
+        "inline",
+        {
+          padding,
+          paddingInline,
+          paddingInlineStart,
+          paddingInlineEnd,
+        }
+      ),
+      ...getResponsivePropsPaddingOrMarginForInlineAndBlock(
+        "box",
+        "padding",
+        "block",
+        {
+          padding,
+          paddingBlock,
+          paddingBlockStart,
+          paddingBlockEnd,
+        }
+      ),
       "--ac-box-shadow": shadow ? `var(--a-shadow-${shadow})` : undefined,
       "--ac-box-width": width,
       position,
