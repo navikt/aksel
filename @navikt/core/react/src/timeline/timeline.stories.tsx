@@ -1,8 +1,8 @@
 import { CheckmarkCircleFillIcon } from "@navikt/aksel-icons";
-import { useState } from "@storybook/addons";
 import { Meta } from "@storybook/react";
 import * as React from "react";
 import Timeline from "./Timeline";
+import { useState } from "react";
 
 export default {
   title: "ds-react/Timeline",

@@ -1,5 +1,29 @@
 # @navikt/ds-react
 
+## 5.1.0
+
+### Minor Changes
+
+- :sparkles: Modal: mulighet for å rendre i portal ([#2209](https://github.com/navikt/aksel/pull/2209))
+
+### Patch Changes
+
+- :white_check_mark: Modal: use polyfill in JSDOM ([#2208](https://github.com/navikt/aksel/pull/2208))
+
+- Datepicker: Input setter ikke nå aria-controls før popover åpnes ([#2213](https://github.com/navikt/aksel/pull/2213))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.1.0
+
+## 5.0.3
+
+### Patch Changes
+
+- ConfirmationPanel: Fikset opplesing av feilmelding ([#2199](https://github.com/navikt/aksel/pull/2199))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.0.3
+
 ## 5.0.2
 
 ### Patch Changes

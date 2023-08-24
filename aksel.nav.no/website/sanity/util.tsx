@@ -3,7 +3,6 @@ import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { KBD } from "@sanity/ui";
 import { InlineCode } from "components/website-modules/InlineCode";
 import NextLink from "next/link";
-import { Role } from "sanity";
 
 export const toPlainText = (blocks) => {
   if (!blocks || blocks.length === 0) {
@@ -21,7 +20,7 @@ export const toPlainText = (blocks) => {
     .join("\n\n");
 };
 
-export const getTemplates = (roles: Role[]) => {
+export const getTemplates = (restTemplates: any[] = []) => {
   const templates = {
     profil: [
       {
@@ -78,17 +77,10 @@ export const getTemplates = (roles: Role[]) => {
       },
     ],
   };
-  return Object.values(templates).flat();
-  /* return [
-    ...roles
-      .map((role) => {
-        if (templates[role.name.replaceAll("-", "_")]) {
-          return templates[role.name.replaceAll("-", "_")];
-        }
-        return [];
-      })
-      .flat(),
-  ]; */
+
+  return Object.values(templates)
+    .flat()
+    .filter((x) => !restTemplates.find((y) => y.templateId === x.templateId));
 };
 
 export const serializers = {

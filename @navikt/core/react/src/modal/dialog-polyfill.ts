@@ -1,5 +1,10 @@
 // @ts-nocheck
 
+export const needPolyfill =
+  typeof window !== "undefined" &&
+  (window.HTMLDialogElement === undefined ||
+    navigator.userAgent.includes("jsdom"));
+
 // Copyright (c) 2013 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -42,35 +47,6 @@ function safeDispatchEvent(target, event) {
     target[check](event);
   }
   return target.dispatchEvent(event);
-}
-
-/**
- * @param {Element} el to check for stacking context
- * @return {boolean} whether this el or its parents creates a stacking context
- */
-function createsStackingContext(el) {
-  while (el && el !== document.body) {
-    var s = window.getComputedStyle(el);
-    var invalid = function (k, ok) {
-      return !(s[k] === undefined || s[k] === ok);
-    };
-
-    if (
-      s.opacity < 1 ||
-      invalid("zIndex", "auto") ||
-      invalid("transform", "none") ||
-      invalid("mixBlendMode", "normal") ||
-      invalid("filter", "none") ||
-      invalid("perspective", "none") ||
-      s["isolation"] === "isolate" ||
-      s.position === "fixed" ||
-      s.webkitOverflowScrolling === "touch"
-    ) {
-      return true;
-    }
-    el = el.parentElement;
-  }
-  return false;
 }
 
 /**
@@ -476,14 +452,6 @@ dialogPolyfillInfo.prototype = /** @type {HTMLDialogElement.prototype} */ {
       );
     }
 
-    if (createsStackingContext(this.dialog_.parentElement)) {
-      console.warn(
-        "A dialog is being shown inside a stacking context. " +
-          "This may cause it to be unusable. For more information, see this link: " +
-          "https://github.com/GoogleChrome/dialog-polyfill/#stacking-context"
-      );
-    }
-
     this.setOpen(true);
     this.openAsModal_ = true;
 
@@ -602,7 +570,7 @@ dialogPolyfill.needsCentering = function (dialog) {
  * @param {!Element} element to force upgrade
  */
 dialogPolyfill.forceRegisterDialog = function (element) {
-  if (window.HTMLDialogElement || element.showModal) {
+  if (element.showModal) {
     console.warn(
       "This browser already supports <dialog>, the polyfill " +
         "may not work correctly",
@@ -847,7 +815,7 @@ dialogPolyfill.DialogManager.prototype.removeDialog = function (dpi) {
   this.updateStacking();
 };
 
-if (typeof window !== "undefined" && window.HTMLDialogElement === undefined) {
+if (needPolyfill) {
   dialogPolyfill.dm = new dialogPolyfill.DialogManager();
   dialogPolyfill.formSubmitter = null;
   dialogPolyfill.imagemapUseValue = null;
@@ -857,7 +825,7 @@ if (typeof window !== "undefined" && window.HTMLDialogElement === undefined) {
  * Installs global handlers, such as click listers and native method overrides. These are needed
  * even if a no dialog is registered, as they deal with <form method="dialog">.
  */
-if (typeof window !== "undefined" && window.HTMLDialogElement === undefined) {
+if (needPolyfill) {
   /**
    * If HTMLFormElement translates method="DIALOG" into 'get', then replace the descriptor with
    * one that returns the correct value.
