@@ -102,7 +102,7 @@ function SideLenker() {
           Hva er Aksel?
         </FooterLink>
         <FooterLink href="/side/personvernerklaering">
-          Personvernserklæring
+          Personvernerklæring
         </FooterLink>
         <FooterLink href="/side/tilgjengelighetserklaring-for-aksel">
           Tilgjengelighetserklæring

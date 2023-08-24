@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 5.0.3
+
+### Patch Changes
+
+- ConfirmationPanel: Fikset opplesing av feilmelding ([#2199](https://github.com/navikt/aksel/pull/2199))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.0.3
+
 ## 5.0.2
 
 ### Patch Changes

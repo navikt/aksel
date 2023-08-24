@@ -60,12 +60,13 @@ function defaultConfig() {
       },
     },
     document: {
-      newDocumentOptions: (prev, { currentUser }) =>
-        currentUser.roles.find((x) =>
-          ["developer", "administrator", "editor"].includes(x.name)
+      newDocumentOptions: (prev, { currentUser }) => {
+        return currentUser.roles.find((x) =>
+          ["developer", "administrator"].includes(x.name)
         )
-          ? [...getTemplates(currentUser.roles), ...prev]
-          : getTemplates(currentUser.roles),
+          ? [...getTemplates(prev), ...prev]
+          : getTemplates();
+      },
     },
     plugins: [
       deskTool({
