@@ -317,7 +317,7 @@ export type TipsT = ArrayObjectT<{
 export type VideoT = ArrayObjectT<{
   alt: string;
   webm: { extension: string; url: string } | null;
-  fallback: { extension: string; url: string } | null;
+  fallback?: { extension: string; url: string } | null;
   transkripsjon?: string;
   caption?: string;
 }>;

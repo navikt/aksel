@@ -16,7 +16,7 @@ export { default as TastaturModul } from "./sanity-modules/TastaturTabell";
 export { default as Tips } from "./sanity-modules/Tips";
 export { default as TokenTable } from "./sanity-modules/TokenTable";
 export * from "./sanity-modules/UuFeedback";
-export { default as Video } from "./sanity-modules/VideoEmbed";
+export { default as Video } from "./sanity-modules/Video";
 export * from "./website-modules/BreadCrumbs";
 export { default as Feedback } from "./website-modules/feedback";
 export * from "./website-modules/H2";

@@ -8,6 +8,7 @@ const Video = ({ node }: { node: VideoT }) => {
   const [open, setOpen] = useState(false);
 
   if (!node || (!node.webm && !node.fallback) || !node.alt) {
+    console.log("called");
     return null;
   }
 
@@ -26,10 +27,12 @@ const Video = ({ node }: { node: VideoT }) => {
         aria-label="Trykk space for å starte/pause video"
       >
         <source src={node.webm.url} type={`video/${node.webm.extension}`} />
-        <source
-          src={node.fallback.url}
-          type={`video/${node.fallback.extension}`}
-        />
+        {node.fallback && (
+          <source
+            src={node.fallback.url}
+            type={`video/${node.fallback.extension}`}
+          />
+        )}
       </video>
       {node?.caption && (
         <BodyLong as="figcaption" className="self-center">

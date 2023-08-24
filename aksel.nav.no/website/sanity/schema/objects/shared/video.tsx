@@ -16,6 +16,7 @@ export const Video = defineType({
       options: {
         accept: "video/webm",
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "fallback",
