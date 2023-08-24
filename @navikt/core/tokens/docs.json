@@ -390,7 +390,7 @@
   "semantic-icon-alt": [
     { "name": "--a-icon-alt-1", "value": "rgba(99, 70, 137, 1)" },
     { "name": "--a-icon-alt-2", "value": "rgba(127, 137, 0, 1)" },
-    { "name": "--a-icon-alt-3", "value": "rgba(51, 128, 165, 1)" }
+    { "name": "--a-icon-alt-3", "value": "rgba(0, 91, 130, 1)" }
   ],
 
   "semantic-data-surface": [
