@@ -160,8 +160,8 @@ export const Small = () => (
   </Modal>
 );
 
-export const Medium = () => (
-  <Modal open width="medium" header={{ heading: "Simple header" }}>
+export const MediumWithPortal = () => (
+  <Modal open portal width="medium" header={{ heading: "Simple header" }}>
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
