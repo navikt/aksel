@@ -9,12 +9,17 @@
   margin-block: var(--a-spacing-2);
 }
 
+.navds-list--small ul,
+.navds-list--small ol {
+  margin-block: var(--a-spacing-3);
+}
+
 .navds-list li {
-  margin-block-end: var(--a-spacing-5);
+  margin-block-end: var(--a-spacing-4);
 }
 
 .navds-list--small li {
-  margin-block-end: var(--a-spacing-2);
+  margin-block-end: var(--a-spacing-3);
 }
 
 .navds-list--nested li {
