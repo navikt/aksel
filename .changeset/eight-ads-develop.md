@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Button: role=button settes når as-prop settes til noe annet enn 'Button'
+Button: Ved bruk av `as`-prop vil `role="button"` nå bli lagt til. Native `onKeyUp` for `Space` er også implementert slik at standard `button`-interaksjon vil være likere uansett html-tag.
