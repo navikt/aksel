@@ -139,7 +139,7 @@ export const Colors: Story = {
   ),
 };
 
-export const Algin: Story = {
+export const Align: Story = {
   render: () => (
     <VStack gap="2">
       <BodyShort align="start">{lorem}</BodyShort>

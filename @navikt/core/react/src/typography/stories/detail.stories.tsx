@@ -63,7 +63,7 @@ export const Colors: Story = {
   ),
 };
 
-export const Algin: Story = {
+export const Align: Story = {
   render: () => (
     <VStack gap="2">
       <Detail align="start">{lorem}</Detail>
