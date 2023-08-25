@@ -4,7 +4,7 @@
   box-shadow: var(--a-shadow-medium);
   border: 1px solid;
   border-color: var(--ac-popover-border, var(--a-border-default));
-  border-radius: var(--a-border-radius-medium);
+  border-radius: var(--a-border-radius-large);
   max-width: calc(100vw - var(--a-spacing-6));
 }
 
