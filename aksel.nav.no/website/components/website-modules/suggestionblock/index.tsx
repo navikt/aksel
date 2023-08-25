@@ -122,7 +122,7 @@ export const SuggestionBlock = ({
   return (
     <div
       className={cl(
-        "bg-surface-subtle flex max-w-2xl flex-wrap justify-between gap-3 rounded-lg p-4 ring-1",
+        "bg-surface-neutral-subtle flex max-w-2xl flex-wrap justify-between gap-3 rounded-lg p-4 ring-1",
         {
           "ring-border-subtle mb-12": variant !== "ikon-not-found",
           "bg-teal-100 ring-teal-300": variant === "ikon-not-found",

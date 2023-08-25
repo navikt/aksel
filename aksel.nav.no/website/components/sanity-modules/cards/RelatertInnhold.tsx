@@ -14,7 +14,7 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
     x?.intern ? `/${x.intern_lenke}` : x.ekstern_link;
 
   return (
-    <div className="ring-border-subtle toc-ignore bg-surface-subtle my-7 max-w-2xl rounded-lg p-4 ring-1 ring-inset sm:p-6">
+    <div className="ring-border-subtle toc-ignore bg-surface-neutral-subtle my-7 max-w-2xl rounded-lg p-4 ring-1 ring-inset sm:p-6">
       <Heading
         className="override-text-no-max text-text-subtle flex items-center gap-2"
         size="small"

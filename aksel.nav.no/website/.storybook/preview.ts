@@ -11,6 +11,23 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    backgrounds: {
+      default: "default",
+      values: [
+        {
+          name: "default",
+          value: "var(--a-surface-default)",
+        },
+        {
+          name: "god-praksis",
+          value: "var(--a-surface-subtle)",
+        },
+        {
+          name: "blogg",
+          value: "var(--a-amber-50)",
+        },
+      ],
+    },
   },
 };
 
