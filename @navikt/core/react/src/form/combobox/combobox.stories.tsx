@@ -509,3 +509,52 @@ export const TestThatCallbacksOnlyFireWhenExpected = {
     expect(args.onChange.mock.calls).toHaveLength(searchWord.length + 1);
   },
 };
+
+export const TestHoverAndFocusSwitching = {
+  render: (props) => {
+    return (
+      <DemoContainer dataTheme={props.darkMode}>
+        <UNSAFE_Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          {...props}
+        />
+      </DemoContainer>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await sleep(500);
+
+    const getInput = () =>
+      canvas.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
+      });
+
+    userEvent.click(getInput());
+    expect(getInput().getAttribute("aria-expanded")).toEqual("false");
+    expect(getInput().getAttribute("aria-activedescendant")).toBeNull();
+
+    await sleep(250);
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    const bananaOption = canvas.getByRole("option", { name: "banana" });
+    expect(getInput().getAttribute("aria-activedescendant")).toBe(
+      bananaOption.getAttribute("id")
+    );
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    const appleOption = canvas.getByRole("option", { name: "apple" });
+    expect(getInput().getAttribute("aria-activedescendant")).toBe(
+      appleOption.getAttribute("id")
+    );
+
+    userEvent.hover(bananaOption);
+    await sleep(250);
+    expect(getInput().getAttribute("aria-activedescendant")).toBe(
+      bananaOption.getAttribute("id")
+    );
+  },
+};

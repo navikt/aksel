@@ -7,6 +7,7 @@ import React, {
   useCallback,
   useRef,
   useLayoutEffect,
+  SetStateAction,
 } from "react";
 import cl from "clsx";
 import { useCustomOptionsContext } from "../customOptionsContext";
@@ -35,6 +36,8 @@ type FilteredOptionsContextType = {
   isListOpen: boolean;
   isLoading?: boolean;
   filteredOptions: string[];
+  isMouseLastUsedInputDevice: boolean;
+  setIsMouseLastUsedInputDevice: React.Dispatch<SetStateAction<boolean>>;
   isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
   currentOption: string | null;
@@ -83,6 +86,9 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   }, [customOptions, externalFilteredOptions, options, searchTerm]);
 
   const previousSearchTerm = usePrevious(searchTerm);
+
+  const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] =
+    useState(false);
 
   useLayoutEffect(() => {
     if (
@@ -246,6 +252,8 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     isListOpen,
     isLoading,
     filteredOptions,
+    isMouseLastUsedInputDevice,
+    setIsMouseLastUsedInputDevice,
     isValueNew,
     toggleIsListOpen,
     currentOption,
