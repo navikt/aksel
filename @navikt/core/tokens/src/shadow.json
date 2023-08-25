@@ -18,9 +18,9 @@
       },
       "focus": {
         "inverted": {
-          "value": "0 0 0 3px {a.border.focus.on.inverted.value}"
+          "value": "0 0 0 3px {a.border-focus-on-inverted.value}"
         },
-        "@": { "value": "0 0 0 3px {a.border.focus.@.value}" }
+        "@": { "value": "0 0 0 3px {a.border-focus.value}" }
       }
     }
   }
