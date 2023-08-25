@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 5.2.0
+
+### Patch Changes
+
+- CSS: Popover har nå 8px border-radius. Fikset padding-bug i Select-small. ([#2219](https://github.com/navikt/aksel/pull/2219))
+
+- Hovering over combobox dropdown will move selection/focus in the list, so we don't end up with a split focus, and reversely when moving focus while hovering ([#2193](https://github.com/navikt/aksel/pull/2193))
+
 ## 5.1.0
 
 ### Patch Changes

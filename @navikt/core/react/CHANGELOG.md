@@ -1,5 +1,18 @@
 # @navikt/ds-react
 
+## 5.2.0
+
+### Patch Changes
+
+- Button: Ved bruk av `as`-prop vil `role="button"` nå bli lagt til. Native `onKeyUp` for `Space` er også implementert slik at standard `button`-interaksjon vil være likere uansett html-tag. ([#2154](https://github.com/navikt/aksel/pull/2154))
+
+- Combobox: Fikset bruk av `useLayoutEffect` med SSR-safe metode. ([#2219](https://github.com/navikt/aksel/pull/2219))
+
+- Hovering over combobox dropdown will move selection/focus in the list, so we don't end up with a split focus, and reversely when moving focus while hovering ([#2193](https://github.com/navikt/aksel/pull/2193))
+
+- Updated dependencies [[`7e789158c`](https://github.com/navikt/aksel/commit/7e789158ce03357c2a2b2173a2c29c7fb6e6bcbb)]:
+  - @navikt/aksel-icons@5.2.0
+
 ## 5.1.0
 
 ### Minor Changes
