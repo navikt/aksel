@@ -6,13 +6,13 @@ import React, {
   useContext,
   useCallback,
   useRef,
-  useLayoutEffect,
   SetStateAction,
 } from "react";
 import cl from "clsx";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../Input/inputContext";
 import usePrevious from "../../../util/usePrevious";
+import { useClientLayoutEffect } from "../../../util";
 
 const normalizeText = (text: string): string =>
   typeof text === "string" ? `${text}`.toLowerCase().trim() : "";
@@ -90,7 +90,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] =
     useState(false);
 
-  useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     if (
       shouldAutocomplete &&
       normalizeText(searchTerm) !== "" &&
