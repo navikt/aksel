@@ -7,15 +7,12 @@ import {
   getResponsivePropsPaddingOrMarginForInlineAndBlock,
 } from "../utilities/css";
 
-type Element = "div" | "span" | "section" | "legend" | "ul" | "li";
 
-type LineStyles = "solid" | "dashed";
-type Overflow = "hidden" | "scroll";
-type Position = "relative" | "absolute" | "fixed" | "sticky";
+type Element = "div" | "span" | "section" | "legend" | "ul" | "li";
 
 type Spacing = ResponsiveProp<SpacingScale>;
 
-export interface BoxProps extends React.AriaAttributes {
+export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   /** HTML Element type
    * @default 'div'
@@ -25,8 +22,6 @@ export interface BoxProps extends React.AriaAttributes {
   background?: string; // TODO
   /** Border color */
   borderColor?: string | "transparent"; // TODO
-  /** Border style */
-  borderStyle?: LineStyles;
   /** Border radius */
   borderRadius?: string; // TODO
   /** Vertical end horizontal start border radius */
@@ -37,28 +32,6 @@ export interface BoxProps extends React.AriaAttributes {
   borderRadiusStartStart?: string; //TODO
   /** Vertical start horizontal end border radius */
   borderRadiusStartEnd?: string; //TODO
-  /** Border width */
-  borderWidth?: string; //TODO
-  /** Vertical start border width */
-  borderBlockStartWidth?: string; //TODO
-  /** Vertical end border width */
-  borderBlockEndWidth?: string; //TODO
-  /** Horizontal start border width */
-  borderInlineStartWidth?: string; //TODO
-  /** Horizontal end border width */
-  borderInlineEndWidth?: string; //TODO
-  /** Color of children */
-  color?: string; //TODO
-  /** Minimum height of container */
-  minHeight?: string;
-  /** Minimum width of container */
-  minWidth?: string;
-  /** Maximum width of container */
-  maxWidth?: string;
-  /** Clip horizontal content of children */
-  overflowX?: Overflow;
-  /** Clip vertical content of children */
-  overflowY?: Overflow;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
    * @example
    * padding='4'
@@ -92,45 +65,8 @@ export interface BoxProps extends React.AriaAttributes {
    * paddingInlineEnd={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   paddingInlineEnd?: Spacing;
-  margin?: Spacing;
-  marginInline?: Spacing;
-  marginBlock?: Spacing;
-  marginBlockStart?: Spacing;
-  marginBlockEnd?: Spacing;
-  /** Aria role */
-  role?: Extract<
-    React.AriaRole,
-    "status" | "presentation" | "menu" | "listbox" | "combobox"
-  >;
   /** Shadow on box */
   shadow?: "lg"; // TODO
-  /** Set tab order */
-  tabIndex?: Extract<React.AllHTMLAttributes<HTMLElement>["tabIndex"], number>;
-  /** Width of container */
-  width?: string;
-  // These could be moved to new layout component(s) in the future
-  /** Position of box */
-  position?: Position;
-  /** Top position of box */
-  insetBlockStart?: Spacing;
-  /** Bottom position of box */
-  insetBlockEnd?: Spacing;
-  /** Left position of box */
-  insetInlineStart?: Spacing;
-  /** Right position of box */
-  insetInlineEnd?: Spacing;
-  /** Opacity of box */
-  opacity?: string;
-  /** Outline color */
-  outlineColor?: "red"; // TODO
-  /** Outline style */
-  outlineStyle?: LineStyles;
-  /** Outline width */
-  outlineWidth?: number; // TODO
-  /** Visually hide the contents (still announced by screenreader) */
-  srOnly?: boolean;
-  /** z-index of box */
-  zIndex?: string;
 }
 
 export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
