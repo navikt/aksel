@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 5.1.0
+
+### Patch Changes
+
+- :lipstick: Modal: fjern kantlinje ([#2210](https://github.com/navikt/aksel/pull/2210))
+
+- Tokens: Fikset table-token ([#2204](https://github.com/navikt/aksel/pull/2204))
+
 ## 5.0.3
 
 ### Patch Changes

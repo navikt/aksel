@@ -18,7 +18,7 @@ class CustomComponent extends HTMLElement {
     this.attachShadow({ mode: "closed" }).appendChild(rootElement);
 
     ReactDOM.createRoot(appElement).render(
-      <Provider rootElement={rootElement} appElement={appElement}>
+      <Provider rootElement={rootElement}>
         <style>{styles}</style>
         <Button>Click me!</Button>
         <CheckboxGroup legend="Legend" defaultValue={["tekst2"]}>
@@ -41,7 +41,7 @@ const ModalWrapper = () => {
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>Open modal</Button>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal portal open={isOpen} onClose={() => setIsOpen(false)}>
         <Modal.Body>modal content</Modal.Body>
       </Modal>
     </>
