@@ -18,7 +18,7 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
   return (
     <BodyShort
       as="figure"
-      className={cl("sm:min-w-80 flex min-w-full flex-1 flex-col", {
+      className={cl("sm:min-w-80 z-10 flex min-w-full flex-1 flex-col", {
         "basis-full": block?.fullwidth,
         "max-w-sm": !block?.fullwidth,
       })}
