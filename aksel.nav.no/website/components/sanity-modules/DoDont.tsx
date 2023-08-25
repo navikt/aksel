@@ -39,7 +39,7 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
           <span>{getText(block.variant)}</span>
         </BodyShort>
         <img
-          className="relative z-[-1] rounded-b-lg bg-gray-50"
+          className="relative z-[-1] w-full rounded-b-lg bg-gray-50"
           alt={block.alt}
           loading="lazy"
           decoding="async"
