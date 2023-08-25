@@ -13,35 +13,47 @@ type Story = StoryObj<typeof meta>;
 export const Icons: Story = {
   render: () => {
     return (
-      <div className="colgap">
+      <div className="icons">
         {Object.entries(AkselIcons).map(([key, Value]) => (
-          <div key={key} className="icon-section">
-            <span>{key}</span>
-            <span className="icon-group">
-              <span>
-                <Value fontSize="3rem" aria-hidden title={key} />
-              </span>
-              <span>
-                <Value fontSize="3rem" aria-hidden title={key + " Inverted"} />
-              </span>
-            </span>
-          </div>
+          <React.Fragment key={key}>
+            <Value fontSize="3rem" aria-hidden title={key} />
+          </React.Fragment>
         ))}
         <style>
           {`
-          .icon-section{
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--a-spacing-4);
-            align-items: center;
-          }
-          .icon-group {
+          .icons{
             display: flex;
-            gap: var(--a-spacing-4)
+            flex-wrap: wrap;
           }
+          `}
+        </style>
+      </div>
+    );
+  },
+};
 
-          .icon-group > span:last-of-type {
-            background: var(--a-surface-inverted);
+export const IconsInverted: Story = {
+  render: () => {
+    return (
+      <div className="icons">
+        {Object.entries(AkselIcons).map(([key, Value]) => (
+          <React.Fragment key={key}>
+            <Value
+              fontSize="3rem"
+              aria-hidden
+              title={key}
+              className="icon-color"
+            />
+          </React.Fragment>
+        ))}
+        <style>
+          {`
+          .icons{
+            display: flex;
+            flex-wrap: wrap;
+            background: var(--a-gray-900);
+          }
+          .icon-color{
             color: var(--a-icon-on-inverted);
           }
           `}
