@@ -42,6 +42,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       moveFocusToInput,
       moveFocusToEnd,
       setFilteredOptionsIndex,
+      setIsMouseLastUsedInputDevice,
       shouldAutocomplete,
     } = useFilteredOptionsContext();
 
@@ -102,6 +103,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const handleKeyDown = useCallback(
       (e) => {
+        setIsMouseLastUsedInputDevice(false);
         if (e.key === "Backspace") {
           if (value === "") {
             const lastSelectedOption =
@@ -132,6 +134,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         isListOpen,
         filteredOptionsIndex,
         moveFocusUp,
+        setIsMouseLastUsedInputDevice,
       ]
     );
 
