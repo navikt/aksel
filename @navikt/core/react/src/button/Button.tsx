@@ -102,9 +102,14 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           {...(Component !== "button" ? { role: "button" } : {})}
           {...filterProps}
           ref={mergedRef}
-          onKeyDown={(e) => {
-            filterProps.onKeyDown?.(e);
-            if (e.key === " " && !disabled && !widthOverride) {
+          onKeyUp={(e: React.KeyboardEvent<HTMLButtonElement>) => {
+            filterProps.onKeyUp?.(e);
+            if (
+              e.key === " " &&
+              !disabled &&
+              !widthOverride &&
+              !e.isDefaultPrevented()
+            ) {
               e.currentTarget.click();
             }
           }}

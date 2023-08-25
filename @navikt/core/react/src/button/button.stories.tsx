@@ -280,3 +280,23 @@ export const LoadingWithAs = {
     chromatic: { disableSnapshot: true },
   },
 };
+
+export const RoleDemo = () => {
+  const doSomething = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div>
+      <Button
+        onKeyUp={doSomething}
+        onClick={() => null}
+        as="a"
+        href="https://nav.no"
+        target="_blank"
+      >
+        Testknapp
+      </Button>
+    </div>
+  );
+};
