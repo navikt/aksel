@@ -6,7 +6,11 @@ import {
   SpacingScale,
   getResponsivePropsPaddingOrMarginForInlineAndBlock,
 } from "../utilities/css";
+import colors from "../../../../tokens/src/semantic-colors.json";
 
+// TODO, how to create a type from a subset of a type?... hmm
+// type bgColors = Pick<keyof typeof colors['a'], `bg-${string}`>;
+type bgColors = keyof typeof colors.a;
 
 type Element = "div" | "span" | "section" | "legend" | "ul" | "li";
 
@@ -19,7 +23,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   as?: Element;
   /** Background color */
-  background?: string; // TODO
+  background?: bgColors;
   /** Border color */
   borderColor?: string | "transparent"; // TODO
   /** Border radius */
