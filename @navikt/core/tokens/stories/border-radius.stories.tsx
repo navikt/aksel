@@ -13,7 +13,7 @@ const Border = ({ token }) => (
       width: 4rem;
       height: 4rem;
       background: #f7f7f7;
-      border: 2px solid #262626;
+      border: 2px solid #23262a;
     }
     `}</style>
   </>

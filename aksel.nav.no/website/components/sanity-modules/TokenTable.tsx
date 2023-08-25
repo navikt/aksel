@@ -1,8 +1,8 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { TokenTableT } from "@/types";
-import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import core from "@navikt/ds-css/tokens.json";
-import { BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
+import { BodyLong, Button, CopyButton, Label, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import NextLink from "next/link";
@@ -34,7 +34,7 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
           ))}
         </AkselTable>
         {(open || !showMore) && (
-          <div className="border-border-subtle bg-surface-default relative -mt-8 w-full rounded-b border border-t-0 p-2 pr-14">
+          <div className="border-border-subtle bg-surface-default relative -mt-8 w-full rounded-b-lg border border-t-0 p-2 pr-14">
             <CopyButton
               copyText={Object.entries(tokens).reduce(
                 (prev, cur) =>
@@ -73,19 +73,23 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
         )}
       </div>
       {!open && showMore && (
-        <button
-          onClick={() => setOpen(true)}
-          className="text-medium group mx-auto flex shrink-0 -translate-y-3/4 flex-col items-center gap-1 focus:outline-none"
-        >
-          <span className="group-focus-visible:bg-border-focus group-focus-visible:text-text-on-action group-focus-visible:shadow-focus">
-            Se alle tokens
-          </span>
-          <ChevronDownCircleIcon
-            className="transition-all group-hover:translate-y-1"
-            aria-hidden
-            fontSize="1.5rem"
-          />
-        </button>
+        <div className="bg-surface-default mx-auto grid w-fit -translate-y-[80%] place-content-center shadow-[0_0_8px_8px_var(--a-surface-default)]">
+          <Button
+            variant="secondary-neutral"
+            onClick={() => setOpen(true)}
+            className="group"
+            icon={
+              <ChevronDownIcon
+                className="group-hover:translate-y-05 transition-transform"
+                aria-hidden
+                fontSize="1.5rem"
+              />
+            }
+            iconPosition="right"
+          >
+            Vis mer
+          </Button>
+        </div>
       )}
     </div>
   );

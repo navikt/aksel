@@ -313,3 +313,11 @@ export type TipsT = ArrayObjectT<{
   eksperiment?: boolean;
   body: any[];
 }>;
+
+export type VideoT = ArrayObjectT<{
+  alt: string;
+  webm: { extension: string; url: string } | null;
+  fallback?: { extension: string; url: string } | null;
+  transkripsjon?: string;
+  caption?: string;
+}>;

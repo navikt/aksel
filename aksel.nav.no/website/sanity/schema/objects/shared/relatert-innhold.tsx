@@ -15,7 +15,7 @@ export const RelatertInnhold = defineType({
       name: "lenker",
       type: "array",
       validation: (Rule) =>
-        Rule.required().max(4).error("Kan ha maks 4 relaterte lenker"),
+        Rule.required().max(10).error("Kan ha maks 10 relaterte lenker"),
       of: [
         {
           title: "Lenke",

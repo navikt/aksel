@@ -1,7 +1,6 @@
-import { Alert as DsAlert, Heading } from "@navikt/ds-react";
-import React from "react";
 import { SanityBlockContent } from "@/sanity-block";
 import { AlertT } from "@/types";
+import { Alert as DsAlert, Heading } from "@navikt/ds-react";
 
 const Alert = ({ node }: { node: AlertT }) => {
   return (

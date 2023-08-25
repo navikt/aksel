@@ -48,6 +48,7 @@ const config: StorybookConfig = {
       },
     ];
   },
+  staticDirs: ["../public"],
   stories: [
     "../**/*.mdx",
     "../**/*.stories.@(ts|tsx)",

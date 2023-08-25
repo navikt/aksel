@@ -119,7 +119,7 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className={cl("aksel-artikkel pt-4 focus:outline-none", {
+        className={cl("aksel-artikkel group/aksel pt-4 focus:outline-none", {
           "bg-white": mainPage,
           "bg-surface-subtle": !mainPage,
         })}

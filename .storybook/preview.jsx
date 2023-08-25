@@ -17,7 +17,7 @@ export const parameters = {
       },
       {
         name: "Darkmode",
-        value: "#262626",
+        value: "#23262a",
       },
     ],
   },
