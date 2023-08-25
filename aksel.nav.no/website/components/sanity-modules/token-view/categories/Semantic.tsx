@@ -267,6 +267,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
       </Grid>
     );
   }
+
   return (
     <Grid>
       {colors.map((x) => {
