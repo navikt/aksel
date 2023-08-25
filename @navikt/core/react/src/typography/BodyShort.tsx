@@ -27,8 +27,8 @@ export interface BodyShortProps
  *
  * @example
  * ```jsx
- *     <BodyShort level="1" size="xlarge">
- *       Pengestøtte når du er syk
+ *     <BodyShort>
+ *       Du må gjøre en filtrering for å se brukere i listen.
  *     </BodyShort>
  * ```
  */

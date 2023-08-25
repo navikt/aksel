@@ -32,7 +32,7 @@ export interface HeadingProps
  * @example
  * ```jsx
  *     <Heading level="1" size="xlarge">
- *       Pengestøtte når du er syk
+ *       Hva kan vi hjelpe deg med?
  *     </Heading>
  * ```
  */

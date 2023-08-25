@@ -30,8 +30,8 @@ export interface DetailProps
  *
  * @example
  * ```jsx
- *     <Detail level="1" size="xlarge">
- *       Pengestøtte når du er syk
+ *     <Detail>
+ *       Du må gjøre en filtrering for å se brukere i listen.
  *     </Detail>
  * ```
  */

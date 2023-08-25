@@ -27,8 +27,8 @@ export interface LabelProps
  *
  * @example
  * ```jsx
- *     <Label level="1" size="xlarge">
- *       Pengestøtte når du er syk
+ *     <Label >
+ *       Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon
  *     </Label>
  * ```
  */

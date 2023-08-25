@@ -27,8 +27,8 @@ export interface ErrorMessageProps
  *
  * @example
  * ```jsx
- *     <ErrorMessage level="1" size="xlarge">
- *       Pengestøtte når du er syk
+ *     <ErrorMessage >
+ *       Du må fylle ut: Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon
  *     </ErrorMessage>
  * ```
  */

@@ -47,9 +47,6 @@ export const SizeMedium: Story = {
   render: () => (
     <VStack gap="2">
       <Label size="medium">{lorem}</Label>
-      <Label size="medium" underline>
-        {lorem}
-      </Label>
       <Label size="medium" truncate>
         {lorem}
       </Label>
@@ -61,9 +58,6 @@ export const SizeSmall: Story = {
   render: () => (
     <VStack gap="2">
       <Label size="small">{lorem}</Label>
-      <Label size="small" underline>
-        {lorem}
-      </Label>
       <Label size="small" truncate>
         {lorem}
       </Label>

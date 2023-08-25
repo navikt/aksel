@@ -50,9 +50,6 @@ export const SizeLarge: Story = {
   render: () => (
     <VStack gap="2">
       <BodyShort size="large">{lorem}</BodyShort>
-      <BodyShort size="large" underline>
-        {lorem}
-      </BodyShort>
       <BodyShort size="large" weight="semibold">
         {lorem}
       </BodyShort>
@@ -67,9 +64,6 @@ export const SizeMedium: Story = {
   render: () => (
     <VStack gap="2">
       <BodyShort size="medium">{lorem}</BodyShort>
-      <BodyShort size="medium" underline>
-        {lorem}
-      </BodyShort>
       <BodyShort size="medium" weight="semibold">
         {lorem}
       </BodyShort>
@@ -84,9 +78,6 @@ export const SizeSmall: Story = {
   render: () => (
     <VStack gap="2">
       <BodyShort size="small">{lorem}</BodyShort>
-      <BodyShort size="small" underline>
-        {lorem}
-      </BodyShort>
       <BodyShort size="small" weight="semibold">
         {lorem}
       </BodyShort>
