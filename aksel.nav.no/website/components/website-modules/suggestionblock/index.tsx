@@ -20,10 +20,13 @@ const SuggestionBlockComponent = ({
       })}
     >
       <span
-        className={cl("shrink-0 text-2xl", {
-          "text-lightblue-800": variant === "komponent-ny",
-          "text-violet-800": variant === "komponent-beta",
-        })}
+        className={cl(
+          "-mt-[1px] grid h-7 shrink-0 place-content-center text-2xl",
+          {
+            "text-lightblue-800": variant === "komponent-ny",
+            "text-violet-800": variant === "komponent-beta",
+          }
+        )}
       >
         {options[variant]?.icon}
       </span>
@@ -130,7 +133,11 @@ export const SuggestionBlock = ({
       )}
     >
       <BodyShort className="-ml-[2px] flex items-center gap-2">
-        <LightBulbIcon aria-hidden className="shrink-0" fontSize="1.75rem" />
+        <LightBulbIcon
+          aria-hidden
+          className="-mt-[2px] shrink-0"
+          fontSize="1.75rem"
+        />
         {options[variant]?.text}
       </BodyShort>
       <Button
