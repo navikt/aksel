@@ -9,13 +9,6 @@ const Example = () => {
       <BodyShort size="small">{lorem}</BodyShort>
       <Divider />
       <div>
-        <Descriptor>Underline</Descriptor>
-        <BodyShort size="small" underline>
-          {lorem}
-        </BodyShort>
-      </div>
-      <Divider />
-      <div>
         <Descriptor>Semibold</Descriptor>
         <BodyShort size="small" weight="semibold">
           {lorem}

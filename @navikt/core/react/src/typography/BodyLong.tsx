@@ -42,7 +42,6 @@ export const BodyLong: OverridableComponent<
       size = "medium",
       as: Component = "p",
       spacing,
-      underline,
       truncate,
       weight = "regular",
       align,
@@ -61,7 +60,6 @@ export const BodyLong: OverridableComponent<
         `navds-body-long--${size}`,
         typoClassNames({
           spacing,
-          underline,
           truncate,
           weight,
           align,

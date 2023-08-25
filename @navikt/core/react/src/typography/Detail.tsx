@@ -44,7 +44,6 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
         spacing,
         uppercase,
         as: Component = "p",
-        underline,
         truncate,
         weight = "regular",
         align,
@@ -62,7 +61,6 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
           "navds-detail",
           typoClassNames({
             spacing,
-            underline,
             truncate,
             weight,
             align,

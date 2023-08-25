@@ -6,7 +6,6 @@ export const typoClassNames = (
 ) => {
   return cl({
     "navds-typo--spacing": !!props.spacing,
-    "navds-typo--underline": !!props.underline,
     "navds-typo--truncate": !!props.truncate,
     "navds-typo--semibold": props.weight === "semibold",
     [`navds-typo--align-${props.align}`]: !!props.align,

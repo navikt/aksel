@@ -9,11 +9,6 @@ const Example = () => {
       <Detail>{lorem}</Detail>
       <Divider />
       <div>
-        <Descriptor>Underline</Descriptor>
-        <Detail underline>{lorem}</Detail>
-      </div>
-      <Divider />
-      <div>
         <Descriptor>Semibold</Descriptor>
         <Detail weight="semibold">{lorem}</Detail>
       </div>

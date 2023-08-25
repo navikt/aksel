@@ -10,13 +10,6 @@ const Example = () => {
       <Label size="small">{lorem}</Label>
       <Divider />
       <div>
-        <Descriptor>Underline</Descriptor>
-        <Label size="small" underline>
-          {lorem}
-        </Label>
-      </div>
-      <Divider />
-      <div>
         <Descriptor>Truncate (ellipsis)</Descriptor>
         <Label size="small" truncate>
           {lorem}

@@ -10,11 +10,6 @@ const Example = () => {
       <BodyLong>{lorem}</BodyLong>
       <Divider />
       <div>
-        <Descriptor>Underline</Descriptor>
-        <BodyLong underline>{lorem}</BodyLong>
-      </div>
-      <Divider />
-      <div>
         <Descriptor>Semibold</Descriptor>
         <BodyLong weight="semibold">{lorem}</BodyLong>
       </div>

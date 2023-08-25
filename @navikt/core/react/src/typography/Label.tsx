@@ -40,7 +40,6 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
         size = "medium",
         as: Component = "label",
         spacing,
-        underline,
         truncate,
         align,
         visuallyHidden,
@@ -57,7 +56,6 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
           "navds-label",
           typoClassNames({
             spacing,
-            underline,
             truncate,
             align,
             visuallyHidden,

@@ -211,10 +211,6 @@
   color: var(--ac-typo-error-text, var(--a-text-danger));
 }
 
-.navds-typo--underline {
-  text-decoration: underline;
-}
-
 .navds-typo--truncate {
   overflow: hidden;
   white-space: nowrap;
