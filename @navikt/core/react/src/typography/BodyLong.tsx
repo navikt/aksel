@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
-import { setNativeColor, typoClassNames } from "./util";
+import { typoClassNames } from "./util";
 
 export interface BodyLongProps
   extends TypoProps,
@@ -69,7 +69,6 @@ export const BodyLong: OverridableComponent<
           color,
         })
       )}
-      {...setNativeColor(color)}
     />
   )
 );

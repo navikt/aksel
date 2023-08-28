@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
-import { setNativeColor, typoClassNames } from "./util";
+import { typoClassNames } from "./util";
 
 export interface HeadingProps
   extends Pick<TypoProps, "spacing" | "visuallyHidden" | "align" | "color">,
@@ -69,7 +69,6 @@ export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
               color,
             })
           )}
-          {...setNativeColor(color)}
         />
       );
     }

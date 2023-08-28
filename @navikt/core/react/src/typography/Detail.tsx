@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
-import { setNativeColor, typoClassNames } from "./util";
+import { typoClassNames } from "./util";
 
 export interface DetailProps
   extends TypoProps,
@@ -72,7 +72,6 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
             "navds-detail--small": size === "small",
           }
         )}
-        {...setNativeColor(color)}
       />
     )
   );

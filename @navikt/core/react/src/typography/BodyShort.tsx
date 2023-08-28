@@ -2,11 +2,11 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
-import { setNativeColor, typoClassNames } from "./util";
+import { typoClassNames } from "./util";
 
 export interface BodyShortProps
   extends TypoProps,
-    React.HTMLAttributes<HTMLParagraphElement> {
+    Omit<React.HTMLAttributes<HTMLParagraphElement>, "color"> {
   /**
    * large: 20px, medium: 18px, small: 16px
    * @default "medium"
@@ -67,7 +67,6 @@ export const BodyShort: OverridableComponent<
           color,
         })
       )}
-      {...setNativeColor(color)}
     />
   )
 );

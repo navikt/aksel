@@ -1,5 +1,3 @@
-export const typoColors = ["default", "subtle", "on-inverted"];
-
 export type TypoProps = {
   /**
    * Truncate text overflow with ellipsis.
@@ -24,5 +22,5 @@ export type TypoProps = {
   /**
    * Adjusts color
    */
-  color?: "default" | "subtle" | "on-inverted" | string;
+  color?: "default" | "subtle" | "on-inverted";
 };
