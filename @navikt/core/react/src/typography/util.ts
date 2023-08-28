@@ -15,3 +15,7 @@ export const typoClassNames = (
     "navds-typo--uppercase": !!props.uppercase,
   });
 };
+
+export const setNativeColor = (color?: string) => {
+  return { ...(color && !typoColors.includes(color) ? { color } : {}) };
+};

@@ -246,10 +246,6 @@
   width: 1px !important;
 }
 
-.navds-typo--color-default {
-  color: var(--a-text-default);
-}
-
 .navds-typo--color-subtle {
   color: var(--a-text-subtle);
 }
