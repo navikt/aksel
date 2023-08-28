@@ -75,12 +75,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       as: Component = "div",
       background,
       borderColor,
-      borderStyle,
-      borderWidth,
-      borderBlockStartWidth,
-      borderBlockEndWidth,
-      borderInlineStartWidth,
-      borderInlineEndWidth,
       borderRadius,
       borderRadiusEndStart,
       borderRadiusEndEnd,
@@ -88,22 +82,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       borderRadiusStartEnd,
       className,
       children,
-      color,
-      minHeight,
-      minWidth,
-      maxWidth,
-      overflowX,
-      overflowY,
-      outlineColor,
-      outlineStyle,
-      outlineWidth,
-      margin,
-      marginInline,
-      marginBlock,
-      marginBlockStart,
-      marginBlockEnd,
-      marginInlineStart,
-      marginInlineEnd,
       padding,
       paddingInline,
       paddingBlock,
@@ -115,26 +93,11 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       shadow,
       style: _style,
       tabIndex,
-      width,
       srOnly,
-      position,
-      insetBlockStart,
-      insetBlockEnd,
-      insetInlineStart,
-      insetInlineEnd,
-      zIndex,
-      opacity,
       ...rest
     },
     ref
   ) => {
-    // eslint-disable-next-line no-nested-ternary
-    const outlineStyleValue = outlineStyle
-      ? outlineStyle
-      : outlineColor || outlineWidth
-      ? "solid"
-      : undefined;
-
     const style = {
       "--__ac-box-background": background
         ? `var(--a-${background})`
@@ -157,33 +120,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       "--ac-box-border-radius-start-end": borderRadiusStartEnd
         ? `var(--a-border-radius-${borderRadiusStartEnd})`
         : undefined,
-      "--ac-box-border-width": borderWidth
-        ? `var(--a-border-width-${borderWidth})`
-        : undefined,
-      "--ac-box-border-block-start-width": borderBlockStartWidth
-        ? `var(--a-border-width-${borderBlockStartWidth})`
-        : undefined,
-      "--ac-box-border-block-end-width": borderBlockEndWidth
-        ? `var(--a-border-width-${borderBlockEndWidth})`
-        : undefined,
-      "--ac-box-border-inline-start-width": borderInlineStartWidth
-        ? `var(--a-border-width-${borderInlineStartWidth})`
-        : undefined,
-      "--ac-box-border-inline-end-width": borderInlineEndWidth
-        ? `var(--a-border-width-${borderInlineEndWidth})`
-        : undefined,
-      "--ac-box-min-height": minHeight,
-      "--ac-box-min-width": minWidth,
-      "--ac-box-max-width": maxWidth,
-      "--ac-box-outline-color": outlineColor
-        ? `var(--a-color-${outlineColor})`
-        : undefined,
-      "--ac-box-outline-style": outlineStyleValue,
-      "--ac-box-outline-width": outlineWidth
-        ? `var(--a-border-width-${outlineWidth})`
-        : undefined,
-      "--ac-box-overflow-x": overflowX,
-      "--ac-box-overflow-y": overflowY,
       ...getResponsivePropsPaddingOrMarginForInlineAndBlock(
         "box",
         "padding",
@@ -206,45 +142,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
           paddingBlockEnd,
         }
       ),
-      ...getResponsivePropsPaddingOrMarginForInlineAndBlock(
-        "box",
-        "margin",
-        "inline",
-        {
-          margin,
-          marginInline,
-          marginInlineStart,
-          marginInlineEnd,
-        }
-      ),
-      ...getResponsivePropsPaddingOrMarginForInlineAndBlock(
-        "box",
-        "margin",
-        "block",
-        {
-          margin,
-          marginBlock,
-          marginBlockStart,
-          marginBlockEnd,
-        }
-      ),
       "--ac-box-shadow": shadow ? `var(--a-shadow-${shadow})` : undefined,
-      "--ac-box-width": width,
-      position,
-      "--ac-box-inset-block-start": insetBlockStart
-        ? `var(--a-spacing-${insetBlockStart})`
-        : undefined,
-      "--ac-box-inset-block-end": insetBlockEnd
-        ? `var(--a-spacing-${insetBlockEnd})`
-        : undefined,
-      "--ac-box-inset-inline-start": insetInlineStart
-        ? `var(--a-spacing-${insetInlineStart})`
-        : undefined,
-      "--ac-box-inset-inline-end": insetInlineEnd
-        ? `var(--a-spacing-${insetInlineEnd})`
-        : undefined,
-      zIndex,
-      opacity,
     } as React.CSSProperties;
 
     return (

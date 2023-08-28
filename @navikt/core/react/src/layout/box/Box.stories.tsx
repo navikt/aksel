@@ -22,30 +22,26 @@ export const Default = {
   ),
 };
 
-export const Card = {
-  render: () => {
-    const Card = ({ children }) => (
-      <HStack gap="4">
-        <Box
-          padding="4"
-          background="surface-action-subtle"
-          borderColor="border-default"
-          borderRadius="xlarge"
-        >
-          {children}
-        </Box>
-      </HStack>
-    );
+const Card = ({ children }) => (
+  <Box
+    padding="4"
+    background="bg-default"
+    borderColor="border-default"
+    borderRadius="xlarge"
+  >
+    <div style={{ width: "20rem" }}>{children}</div>
+  </Box>
+);
 
+export const AsCard = {
+  render: () => {
     return (
-      <HStack gap="8">
+      <HStack gap="4" justify="center">
         <Card>
           <h1>Card one</h1>
           <BodyLong>
             This is inside a box. Deserunt veniam eu fugiat ad est occaecat
             aliqua nisi aliquip. Aute amet occaecat ex aliqua irure elit labore
-            pariatur. Proident pariatur proident pariatur magna consequat velit
-            id commodo quis sunt tempor ullamco aliquip pariatur.
           </BodyLong>
         </Card>
         <Card>
@@ -53,8 +49,6 @@ export const Card = {
           <BodyLong>
             This is inside a box. Deserunt veniam eu fugiat ad est occaecat
             aliqua nisi aliquip. Aute amet occaecat ex aliqua irure elit labore
-            pariatur. Proident pariatur proident pariatur magna consequat velit
-            id commodo quis sunt tempor ullamco aliquip pariatur.
           </BodyLong>
         </Card>
         <Card>
@@ -62,8 +56,6 @@ export const Card = {
           <BodyLong>
             This is inside a box. Deserunt veniam eu fugiat ad est occaecat
             aliqua nisi aliquip. Aute amet occaecat ex aliqua irure elit labore
-            pariatur. Proident pariatur proident pariatur magna consequat velit
-            id commodo quis sunt tempor ullamco aliquip pariatur.
           </BodyLong>
         </Card>
       </HStack>
@@ -73,23 +65,17 @@ export const Card = {
 
 export const ThemingDemo = {
   render: () => {
-    const LinkCard = ({ children }) => (
-      <Box padding="4" background="surface-default">
-        {children}
-      </Box>
-    );
-
-    const SpecificLinkCard = () => {
+    const LinkCard = () => {
       return (
         <div
           style={
             {
-              "--a-linkcard-bg": "var(--a-surface-success-subtle)",
+              "--__ac-box-background": "var(--a-surface-success-subtle)",
               "--a-linkcard-bg-hover": "var(--a-surface-success-moderate)",
             } as React.CSSProperties
           }
         >
-          <LinkCard>Custom-stylet LinkCard som bruker Box som base</LinkCard>
+          <Card>Custom-stylet LinkCard som bruker Box som base</Card>
         </div>
       );
     };
@@ -97,9 +83,9 @@ export const ThemingDemo = {
     return (
       <VStack gap="8">
         {/* Default look */}
-        <LinkCard>Dette er et Card som bruker Box som base</LinkCard>
+        <Card>Dette er et Card som bruker Box som base</Card>
         {/* Themed/Custom look */}
-        <SpecificLinkCard />
+        <LinkCard />
       </VStack>
     );
   },
@@ -169,21 +155,21 @@ export const Padding = {
 
 export const WithHGrid = () => {
   return (
-    <Box background="bg-default">
+    <Box background="bg-subtle" padding="10">
       <HGrid
         gap="6"
         columns={{ xs: "repeat(auto-fit, minmax(10rem, 1fr))", md: 4 }}
       >
-        <Box>
+        <Box padding="4" background="bg-default">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
         </Box>
-        <Box>
+        <Box padding="4" background="bg-default">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
         </Box>
-        <Box>
+        <Box padding="4" background="bg-default">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
         </Box>
-        <Box>
+        <Box padding="4" background="bg-default">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
         </Box>
       </HGrid>
