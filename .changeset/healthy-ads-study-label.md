@@ -2,4 +2,4 @@
 "@navikt/ds-react": minor
 ---
 
-Label: Oppdatert med props `color` og `visuallyHidden`.
+Label: Oppdatert med props `textColor` og `visuallyHidden`.

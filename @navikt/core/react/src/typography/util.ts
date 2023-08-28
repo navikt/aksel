@@ -7,7 +7,7 @@ export const typoClassNames = (props: TypoProps & { uppercase?: boolean }) => {
     "navds-typo--truncate": props.truncate,
     "navds-typo--semibold": props.weight === "semibold",
     [`navds-typo--align-${props.align}`]: props.align,
-    [`navds-typo--color-${props.color}`]: props.color,
+    [`navds-typo--color-${props.textColor}`]: props.textColor,
     "navds-typo--visually-hidden": props.visuallyHidden,
     "navds-typo--uppercase": props.uppercase,
   });

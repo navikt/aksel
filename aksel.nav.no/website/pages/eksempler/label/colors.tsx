@@ -9,17 +9,12 @@ const Example = () => {
     <VStack gap="4">
       <div>
         <Descriptor>Default</Descriptor>
-        <Label color="default">{lorem}</Label>
+        <Label textColor="default">{lorem}</Label>
       </div>
       <Divider />
       <div>
         <Descriptor>Subtle</Descriptor>
-        <Label color="subtle">{lorem}</Label>
-      </div>
-      <Divider />
-      <div className="bg-surface-inverted text-text-on-inverted">
-        <Descriptor>On-inverted</Descriptor>
-        <Label color="on-inverted">{lorem}</Label>
+        <Label textColor="subtle">{lorem}</Label>
       </div>
     </VStack>
   );

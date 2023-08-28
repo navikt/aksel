@@ -19,13 +19,6 @@ const Example = () => {
           {lorem}
         </Heading>
       </div>
-      <Divider />
-      <div className="bg-surface-inverted text-text-on-inverted">
-        <Descriptor>On-inverted</Descriptor>
-        <Heading color="on-inverted" size="medium">
-          {lorem}
-        </Heading>
-      </div>
     </VStack>
   );
 };

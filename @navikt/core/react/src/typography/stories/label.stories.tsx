@@ -29,9 +29,9 @@ export const Default: Story = {
       control: "radio",
       options: ["large", "medium", "small"],
     },
-    color: {
+    textColor: {
       control: "radio",
-      options: ["default", "subtle", "on-inverted"],
+      options: ["default", "subtle"],
     },
   },
 };
@@ -73,11 +73,8 @@ export const SpacingSmall: Story = {
 export const Colors: Story = {
   render: () => (
     <VStack gap="2">
-      <Label color="default">{lorem}</Label>
-      <Label color="subtle">{lorem}</Label>
-      <div style={{ background: "var(--a-gray-900)" }}>
-        <Label color="on-inverted">{lorem}</Label>
-      </div>
+      <Label textColor="default">{lorem}</Label>
+      <Label textColor="subtle">{lorem}</Label>
     </VStack>
   ),
 };

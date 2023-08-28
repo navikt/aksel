@@ -15,11 +15,6 @@ const Example = () => {
         <Descriptor>Subtle</Descriptor>
         <Detail color="subtle">{lorem}</Detail>
       </div>
-      <Divider />
-      <div className="bg-surface-inverted text-text-on-inverted">
-        <Descriptor>On-inverted</Descriptor>
-        <Detail color="on-inverted">{lorem}</Detail>
-      </div>
     </VStack>
   );
 };

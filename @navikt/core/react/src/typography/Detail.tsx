@@ -6,7 +6,7 @@ import { typoClassNames } from "./util";
 
 export interface DetailProps
   extends TypoProps,
-    Omit<React.HTMLAttributes<HTMLParagraphElement>, "color"> {
+    React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * @deprecated Medium === small
    */
@@ -48,7 +48,7 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
         weight = "regular",
         align,
         visuallyHidden,
-        color,
+        textColor,
         ...rest
       },
       ref
@@ -65,7 +65,7 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
             weight,
             align,
             visuallyHidden,
-            color,
+            textColor,
             uppercase,
           }),
           {

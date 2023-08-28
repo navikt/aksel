@@ -6,7 +6,7 @@ import { typoClassNames } from "./util";
 
 export interface BodyLongProps
   extends TypoProps,
-    Omit<React.HTMLAttributes<HTMLParagraphElement>, "color"> {
+    React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * large: 20px, medium: 18px, small: 16px
    * @default "medium"
@@ -48,7 +48,7 @@ export const BodyLong: OverridableComponent<
       weight = "regular",
       align,
       visuallyHidden,
-      color,
+      textColor,
       ...rest
     },
     ref
@@ -66,7 +66,7 @@ export const BodyLong: OverridableComponent<
           weight,
           align,
           visuallyHidden,
-          color,
+          textColor,
         })
       )}
     />

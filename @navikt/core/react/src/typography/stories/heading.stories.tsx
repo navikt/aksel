@@ -37,9 +37,9 @@ export const Default: Story = {
       control: "radio",
       options: ["start", "center", "end"],
     },
-    color: {
+    textColor: {
       control: "radio",
-      options: ["default", "subtle", "on-inverted"],
+      options: ["default", "subtle"],
     },
   },
 };
@@ -94,17 +94,12 @@ export const Spacing: Story = {
 export const Colors: Story = {
   render: () => (
     <VStack gap="2">
-      <Heading level="1" size="large" color="default">
+      <Heading level="1" size="large" textColor="default">
         {lorem}
       </Heading>
-      <Heading level="2" size="large" color="subtle">
+      <Heading level="2" size="large" textColor="subtle">
         {lorem}
       </Heading>
-      <div style={{ background: "var(--a-gray-900)" }}>
-        <Heading level="3" size="large" color="on-inverted">
-          {lorem}
-        </Heading>
-      </div>
     </VStack>
   ),
 };
