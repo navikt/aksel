@@ -1,5 +1,15 @@
 # @navikt/aksel-icons
 
+## 5.2.1
+
+## 5.2.0
+
+### Minor Changes
+
+- Ikoner: Oppdatert ikonpakke ([#2197](https://github.com/navikt/aksel/pull/2197))
+
+## 5.1.0
+
 ## 5.0.3
 
 ## 5.0.2

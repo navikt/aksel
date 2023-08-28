@@ -1,5 +1,27 @@
 # @navikt/ds-css
 
+## 5.2.1
+
+### Patch Changes
+
+- Font: Fikset henting av italic-font ([#2220](https://github.com/navikt/aksel/pull/2220))
+
+## 5.2.0
+
+### Patch Changes
+
+- CSS: Popover har nå 8px border-radius. Fikset padding-bug i Select-small. ([#2219](https://github.com/navikt/aksel/pull/2219))
+
+- Hovering over combobox dropdown will move selection/focus in the list, so we don't end up with a split focus, and reversely when moving focus while hovering ([#2193](https://github.com/navikt/aksel/pull/2193))
+
+## 5.1.0
+
+### Patch Changes
+
+- :lipstick: Modal: fjern kantlinje ([#2210](https://github.com/navikt/aksel/pull/2210))
+
+- Tokens: Fikset table-token ([#2204](https://github.com/navikt/aksel/pull/2204))
+
 ## 5.0.3
 
 ### Patch Changes

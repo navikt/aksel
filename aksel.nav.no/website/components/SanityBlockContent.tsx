@@ -186,6 +186,7 @@ const serializers = {
           href={href}
           target="_blank"
           rel="noreferrer noopener"
+          inlineText
           onClick={(e) =>
             logNav(
               "link",
@@ -200,6 +201,7 @@ const serializers = {
         <Link
           as={NextLink}
           href={href}
+          inlineText
           onClick={(e) =>
             logNav(
               "link",
@@ -224,6 +226,7 @@ const serializers = {
         <Link
           as={NextLink}
           href={href}
+          inlineText
           onClick={(e) =>
             logNav(
               "link",

@@ -107,7 +107,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
           autoComplete="off"
-          aria-controls={ariaId}
+          aria-controls={open ? ariaId : undefined}
           readOnly={readOnly}
           className={cl(
             "navds-date__field-input",

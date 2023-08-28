@@ -182,7 +182,6 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
         }
         pageProps={page}
       >
-        {/* <SuggestionBlock variant="komponenter" /> */}
         <IntroCards
           links={[
             {

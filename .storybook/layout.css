@@ -13,19 +13,9 @@
 
 .colgap[data-theme="dark"],
 .rowgap[data-theme="dark"] {
-  background-color: #262626;
+  background-color: var(--a-gray-900);
 }
 
 .rowgap-wrap {
   flex-wrap: wrap;
-}
-
-.css-warning {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  border-radius: 6px;
-  padding: 1.5rem;
-  background-color: var(--a-surface-warning-subtle);
-  border: 1px solid var(--a-border-warning);
 }

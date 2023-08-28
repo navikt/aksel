@@ -37,4 +37,18 @@ describe("Modal", () => {
       expect(document.body.classList).not.toContain(BODY_CLASS)
     );
   });
+
+  test("should toggle body class when using portal", async () => {
+    render(
+      <Modal portal open>
+        <Modal.Header />
+      </Modal>
+    );
+    expect(document.body.classList).toContain(BODY_CLASS);
+
+    fireEvent.click(screen.getByRole("button"));
+    await waitFor(() =>
+      expect(document.body.classList).not.toContain(BODY_CLASS)
+    );
+  });
 });

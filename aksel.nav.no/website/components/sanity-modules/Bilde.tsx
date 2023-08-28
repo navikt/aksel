@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { withErrorBoundary } from "@/error-boundary";
+import { urlFor } from "@/sanity/interface";
 import { BildeT } from "@/types";
 import { BodyLong, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import NextLink from "next/link";
-import style from "./index.module.css";
-import { urlFor } from "@/sanity/interface";
 
 const Bilde = ({ node, className }: { node: BildeT; className?: string }) => {
   if (!node || !node.asset) {
@@ -15,9 +14,13 @@ const Bilde = ({ node, className }: { node: BildeT; className?: string }) => {
   return (
     <>
       <figure
-        className={cl("m-0 mb-8 flex flex-col", style.figure, className, {
-          "md:max-w-text": node?.small,
-        })}
+        className={cl(
+          "m-0 mb-8 flex flex-col group-[.aksel-artikkel]/aksel:mx-auto",
+          className,
+          {
+            "md:max-w-text": node?.small,
+          }
+        )}
       >
         <div
           style={
@@ -27,13 +30,13 @@ const Bilde = ({ node, className }: { node: BildeT; className?: string }) => {
                 }
               : { backgroundColor: "var(--a-gray-50)" }
           }
-          className={cl(style.bilde, "flex justify-center p-0")}
+          className="flex justify-center rounded-lg p-0"
         >
           <img
             alt={!node?.dekorativt ? node.alt : ""}
             decoding="async"
             src={urlFor(node).auto("format").url()}
-            className={cl(style.bilde)}
+            className="rounded-lg"
           />
         </div>
         {node.caption && (
