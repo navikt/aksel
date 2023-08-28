@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.2.1
+
+### Patch Changes
+
+- Font: Fikset henting av italic-font ([#2220](https://github.com/navikt/aksel/pull/2220))
+
 ## 5.2.0
 
 ### Patch Changes
