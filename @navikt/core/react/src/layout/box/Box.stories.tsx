@@ -1,8 +1,10 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import type { Meta } from "@storybook/react";
-import { BodyLong } from "../../typography";
+import { BodyLong, Heading } from "../../typography";
 import { Box } from "./Box";
 import { HGrid, HStack, VStack } from "../..";
+import { BackgroundColors, BorderRadii } from "./types";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
 
 export default {
   title: "ds-react/Box",
@@ -22,12 +24,20 @@ export const Default = {
   ),
 };
 
-const Card = ({ children }) => (
+const Card = ({
+  background,
+  borderRadius = "xlarge",
+  children,
+}: {
+  background?: BackgroundColors;
+  borderRadius?: BorderRadii;
+  children: ReactNode;
+}) => (
   <Box
     padding="4"
-    background="bg-default"
-    borderColor="border-default"
-    borderRadius="xlarge"
+    background={background}
+    borderColor="border-subtle"
+    borderRadius={borderRadius}
   >
     <div style={{ width: "20rem" }}>{children}</div>
   </Box>
@@ -67,15 +77,73 @@ export const ThemingDemo = {
   render: () => {
     const LinkCard = () => {
       return (
+        <>
+          <style>
+            {" "}
+            {/** complex / nested CSS selectors... a better way? */}
+            {`
+            .link-card:hover .navds-heading {
+              color: var(--a-text-action);
+              text-decoration: underline;
+            }
+          `}
+          </style>
+          <Box
+            className="link-card"
+            borderRadius="small"
+            borderColor="border-default"
+            padding="4"
+            paddingBlockEnd="10" // this prop seems broken?
+            paddingInlineStart="4"
+            paddingInlineEnd="2"
+            borderColorHover="border-action"
+            onClick={() => alert("Clicked!")}
+          >
+            <HStack gap="4" align="center">
+              <VStack gap="2">
+                <Heading size="medium">
+                  LinkCard som bruker Box, HStack og VStack
+                </Heading>
+                <BodyLong>This truly is inside a box!</BodyLong>
+              </VStack>
+              <ChevronRightIcon fontSize={24} />
+            </HStack>
+          </Box>
+        </>
+      );
+    };
+
+    const ChatBubble = () => {
+      return <Box>Chatbobble som bruker Box som base</Box>;
+    };
+
+    return (
+      <VStack gap="8">
+        {/* Default look */}
+        <Card>Dette er et Card som bruker Box som base</Card>
+        {/* Themed/Custom look */}
+        <LinkCard />
+        <ChatBubble />
+      </VStack>
+    );
+  },
+};
+
+export const OverridingAvTokens = {
+  render: () => {
+    const LinkCard = () => {
+      return (
         <div
           style={
             {
-              "--__ac-box-background": "var(--a-surface-success-subtle)",
-              "--a-linkcard-bg-hover": "var(--a-surface-success-moderate)",
+              "--ac-box-background": "var(--a-surface-success-subtle)",
+              "--ac-box-background-hover": "var(--a-surface-success-moderate)",
             } as React.CSSProperties
           }
         >
-          <Card>Custom-stylet LinkCard som bruker Box som base</Card>
+          <Card borderRadius="small">
+            <h3>Overriding av tokens til Card (som bruker Box som base)</h3>
+          </Card>
         </div>
       );
     };
@@ -141,13 +209,20 @@ export const PaddingBreakpointsInherit2 = {
 export const Padding = {
   render: () => (
     <div>
-      <Box padding="4">
-        <BodyLong>
-          This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
-          nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
-          Proident pariatur proident pariatur magna consequat velit id commodo
-          quis sunt tempor ullamco aliquip pariatur.
-        </BodyLong>
+      <Box padding="10">
+        <BodyLong>Padding all around</BodyLong>
+      </Box>
+      <Box padding="4" paddingBlockStart="10">
+        <BodyLong>Padding to the North</BodyLong>
+      </Box>
+      <Box padding="4" paddingInlineEnd="10">
+        <BodyLong>Padding to the East</BodyLong>
+      </Box>
+      <Box padding="4" paddingBlockEnd="10">
+        <BodyLong>Padding to the South</BodyLong>
+      </Box>
+      <Box padding="4" paddingInlineStart="10">
+        <BodyLong>Padding to the West</BodyLong>
       </Box>
     </div>
   ),

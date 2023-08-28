@@ -79,18 +79,16 @@ type blockT<T extends string> =
   | `${T}InlineStart`
   | `${T}InlineEnd`
   | `${T}Block`
-  | `${T}Block`
   | `${T}BlockStart`
   | `${T}BlockEnd`;
 
 // eslint-disable-next-line no-unused-vars
-export function getResponsivePropsPaddingOrMarginForInlineAndBlock<T = string>(
+export function getResponsivePropsPaddingForInlineOrBlock<T = string>(
   componentName: string,
-  componentProp: "padding" | "margin",
   logicalCss: LogicalDesignator,
   responsiveProps: {
     // eslint-disable-next-line no-unused-vars
-    [key in blockT<"margin" | "padding">]?: ResponsiveProp<SpacingScale>;
+    [key in blockT<"padding">]?: ResponsiveProp<SpacingScale>;
   }
 ) {
   if (!responsiveProps) {
@@ -101,31 +99,41 @@ export function getResponsivePropsPaddingOrMarginForInlineAndBlock<T = string>(
 
   let blockString: BlockString = {};
 
-  if (responsiveProps?.[componentProp]) {
-    const responsiveKey = responsiveProps[componentProp];
+  if (responsiveProps?.["padding"]) {
+    const responsiveKey = responsiveProps["padding"];
     setBlockProp(responsiveKey, blockString, 0);
     setBlockProp(responsiveKey, blockString, 1);
   }
-  if (responsiveProps?.[`${componentProp}Inline`]) {
-    const responsiveKey = responsiveProps[`${componentProp}Inline`];
+  if (responsiveProps?.[`paddingInline`]) {
+    const responsiveKey = responsiveProps[`paddingInline`];
     setBlockProp(responsiveKey, blockString, 0);
     setBlockProp(responsiveKey, blockString, 1);
   }
-  if (responsiveProps?.[`${componentProp}InlineStart`]) {
-    const responsiveKey = responsiveProps[`${componentProp}InlineStart`];
+  if (responsiveProps?.[`paddingInlineStart`]) {
+    const responsiveKey = responsiveProps[`paddingInlineStart`];
     setBlockProp(responsiveKey, blockString, 0);
   }
-  if (responsiveProps?.[`${componentProp}InlineEnd`]) {
-    const responsiveKey = responsiveProps[`${componentProp}InlineEnd`];
+  if (responsiveProps?.[`paddingInlineEnd`]) {
+    const responsiveKey = responsiveProps[`paddingInlineEnd`];
+    setBlockProp(responsiveKey, blockString, 0);
+  }
+  if (responsiveProps?.[`paddingBlock`]) {
+    const responsiveKey = responsiveProps[`paddingBlock`];
+    setBlockProp(responsiveKey, blockString, 0);
+    setBlockProp(responsiveKey, blockString, 1);
+  }
+  if (responsiveProps?.[`paddingBlockStart`]) {
+    const responsiveKey = responsiveProps[`paddingBlockStart`];
+    setBlockProp(responsiveKey, blockString, 0);
+  }
+  if (responsiveProps?.[`paddingBlockEnd`]) {
+    const responsiveKey = responsiveProps[`paddingBlockEnd`];
     setBlockProp(responsiveKey, blockString, 0);
   }
 
-  return createStyleEntries(
-    blockString,
-    componentName,
-    componentProp,
-    logicalCss
-  );
+  console.log({ blockString, responsiveProps });
+
+  return createStyleEntries(blockString, componentName, "padding", logicalCss);
 
   /** desired output?
   [
@@ -148,7 +156,6 @@ export function getResponsivePropsPaddingOrMarginForInlineAndBlock<T = string>(
     );
   }
 
-  // needs to be recursively called until we hit xs (null) to know for sure if there was any prior breakpoint
   function getPreviousSetBreakpoint(
     blockString: BlockString,
     breakpointAlias: BreakpointsAlias
@@ -190,7 +197,7 @@ export function getResponsivePropsPaddingOrMarginForInlineAndBlock<T = string>(
                   blockString?.[breakpointAlias]?.[0] ??
                     (getPreviousSetBreakpoint(
                       blockString,
-                      breakpointAlias as BreakpointsAlias // TODO type this
+                      breakpointAlias as BreakpointsAlias
                     )?.[1] ||
                       "0"),
                   aliasOrScale,
@@ -200,7 +207,7 @@ export function getResponsivePropsPaddingOrMarginForInlineAndBlock<T = string>(
                   blockString?.[breakpointAlias]?.[0] ??
                     (getPreviousSetBreakpoint(
                       blockString,
-                      breakpointAlias as BreakpointsAlias // TODO type this
+                      breakpointAlias as BreakpointsAlias
                     )?.[0] ||
                       "0"),
                 ],

@@ -4,7 +4,7 @@ import cl from "clsx";
 import {
   ResponsiveProp,
   SpacingScale,
-  getResponsivePropsPaddingOrMarginForInlineAndBlock,
+  getResponsivePropsPaddingForInlineOrBlock,
 } from "../utilities/css";
 import { BackgroundColors, BorderColors, BorderRadii } from "./types";
 
@@ -20,8 +20,12 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   as?: Element;
   /** Background color */
   background?: BackgroundColors;
+  /** Background color on hover */
+  backgroundHover?: BackgroundColors;
   /** Border color */
   borderColor?: BorderColors;
+  /** Border color on hover */
+  borderColorHover?: BorderColors;
   /** Border radius */
   borderRadius?: BorderRadii;
   /** Vertical end horizontal start border radius */
@@ -74,7 +78,9 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     {
       as: Component = "div",
       background,
+      backgroundHover,
       borderColor,
+      borderColorHover,
       borderRadius,
       borderRadiusEndStart,
       borderRadiusEndEnd,
@@ -101,10 +107,16 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     const style = {
       "--__ac-box-background": background
         ? `var(--a-${background})`
-        : undefined,
+        : `var(--ac-box-background, ${undefined})`,
+      "--__ac-box-background-hover": backgroundHover
+        ? `var(--a-${backgroundHover})`
+        : `var(--ac-box-background-hover, ${undefined})`,
       "--__ac-box-border-color": borderColor
         ? `var(--a-${borderColor})`
-        : undefined,
+        : `var(--ac-box-border-color, ${undefined})`,
+      "--__ac-box-border-color-hover": borderColorHover
+        ? `var(--a-${borderColorHover})`
+        : `var(--ac-box-border-color-hover, var(--__ac-box-border-color, ${undefined}))`,
       "--__ac-box-border-radius": borderRadius
         ? `var(--a-border-radius-${borderRadius})`
         : undefined,
@@ -120,28 +132,18 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       "--ac-box-border-radius-start-end": borderRadiusStartEnd
         ? `var(--a-border-radius-${borderRadiusStartEnd})`
         : undefined,
-      ...getResponsivePropsPaddingOrMarginForInlineAndBlock(
-        "box",
-        "padding",
-        "inline",
-        {
-          padding,
-          paddingInline,
-          paddingInlineStart,
-          paddingInlineEnd,
-        }
-      ),
-      ...getResponsivePropsPaddingOrMarginForInlineAndBlock(
-        "box",
-        "padding",
-        "block",
-        {
-          padding,
-          paddingBlock,
-          paddingBlockStart,
-          paddingBlockEnd,
-        }
-      ),
+      ...getResponsivePropsPaddingForInlineOrBlock("box", "inline", {
+        padding,
+        paddingInline,
+        paddingInlineStart,
+        paddingInlineEnd,
+      }),
+      ...getResponsivePropsPaddingForInlineOrBlock("box", "block", {
+        padding,
+        paddingBlock,
+        paddingBlockStart,
+        paddingBlockEnd,
+      }),
       "--ac-box-shadow": shadow ? `var(--a-shadow-${shadow})` : undefined,
     } as React.CSSProperties;
 

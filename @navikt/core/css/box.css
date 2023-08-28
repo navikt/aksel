@@ -24,7 +24,9 @@
   --__ac-box-margin-inline: var(--__ac-box-margin-inline-xs);
   --__ac-box-margin-block: var(--__ac-box-margin-block-xs);
   --__ac-box-background: initial;
+  --__ac-box-background-hover: initial;
   --__ac-box-border-color: transparent;
+  --__ac-box-border-color-hover: var(--__ac-box-border-color);
   --__ac-box-border-radius: initial;
 
   padding-inline: var(--__ac-box-padding-inline);
@@ -36,6 +38,11 @@
   border-color: var(--__ac-box-border-color);
   border-radius: var(--__ac-box-border-radius);
   border-width: 1px;
+}
+
+.navds-box:hover {
+  background-color: var(--__ac-box-background-hover);
+  border-color: var(--__ac-box-border-color-hover);
 }
 
 @media (min-width: 480px) {
