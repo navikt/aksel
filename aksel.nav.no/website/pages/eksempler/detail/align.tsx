@@ -1,4 +1,4 @@
-import { BodyShort, VStack } from "@navikt/ds-react";
+import { Detail, VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
@@ -6,20 +6,19 @@ const Example = () => {
 
   return (
     <VStack gap="4">
-      <BodyShort size="small">{lorem}</BodyShort>
-      <Divider />
       <div>
-        <Descriptor>Semibold</Descriptor>
-        <BodyShort size="small" weight="semibold">
-          {lorem}
-        </BodyShort>
+        <Descriptor>Start</Descriptor>
+        <Detail align="start">{lorem}</Detail>
       </div>
       <Divider />
       <div>
-        <Descriptor>Truncate (ellipsis)</Descriptor>
-        <BodyShort size="small" truncate>
-          {lorem}
-        </BodyShort>
+        <Descriptor>Center</Descriptor>
+        <Detail align="center">{lorem}</Detail>
+      </div>
+      <Divider />
+      <div>
+        <Descriptor>End</Descriptor>
+        <Detail align="end">{lorem}</Detail>
       </div>
     </VStack>
   );
@@ -33,7 +32,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 3,
 };
 
 function Descriptor({ children }) {
