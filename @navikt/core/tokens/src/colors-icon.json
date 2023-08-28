@@ -1,0 +1,61 @@
+{
+  "a": {
+    "icon-default": {
+      "value": "{a.gray.900.value}"
+    },
+    "icon-subtle": {
+      "value": "{a.grayalpha.700.value}"
+    },
+    "icon-action-selected": {
+      "value": "{a.blue.700.value}"
+    },
+    "icon-action-on-action-subtle": {
+      "value": "{a.blue.600.value}"
+    },
+    "icon-action": {
+      "value": "{a.blue.500.value}"
+    },
+    "icon-success": {
+      "value": "{a.green.500.value}"
+    },
+    "icon-danger": {
+      "value": "{a.red.500.value}"
+    },
+    "icon-warning": {
+      "value": "{a.orange.600.value}"
+    },
+    "icon-info": {
+      "value": "{a.lightblue.800.value}"
+    },
+    "icon-alt1": {
+      "value": "{a.purple.500.value}"
+    },
+    "icon-alt2": {
+      "value": "{a.limegreen.700.value}"
+    },
+    "icon-alt3": {
+      "value": "{a.deepblue.500.value}"
+    },
+    "icon-on-neutral": {
+      "value": "{a.white.value}"
+    },
+    "icon-on-inverted": {
+      "value": "{a.white.value}"
+    },
+    "icon-on-action": {
+      "value": "{a.white.value}"
+    },
+    "icon-on-success": {
+      "value": "{a.white.value}"
+    },
+    "icon-on-danger": {
+      "value": "{a.white.value}"
+    },
+    "icon-on-warning": {
+      "value": "{a.gray.900.value}"
+    },
+    "icon-on-info": {
+      "value": "{a.gray.900.value}"
+    }
+  }
+}

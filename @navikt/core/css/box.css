@@ -23,11 +23,18 @@
   --__ac-box-margin-inline-xl: initial;
   --__ac-box-margin-inline: var(--__ac-box-margin-inline-xs);
   --__ac-box-margin-block: var(--__ac-box-margin-block-xs);
+  --__ac-box-background: initial;
+  --__ac-box-border-color: initial;
+  --__ac-box-border-radius: initial;
 
   padding-inline: var(--__ac-box-padding-inline);
   padding-block: var(--__ac-box-padding-block);
   margin-inline: var(--__ac-box-margin-inline);
   margin-block: var(--__ac-box-margin-block);
+  background-color: var(--__ac-box-background);
+  border-style: solid;
+  border-color: var(--__ac-box-border-color);
+  border-radius: var(--__ac-box-border-radius);
 }
 
 @media (min-width: 480px) {

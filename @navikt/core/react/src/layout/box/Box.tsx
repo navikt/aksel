@@ -6,11 +6,7 @@ import {
   SpacingScale,
   getResponsivePropsPaddingOrMarginForInlineAndBlock,
 } from "../utilities/css";
-import colors from "../../../../tokens/src/semantic-colors.json";
-
-// TODO, how to create a type from a subset of a type?... hmm
-// type bgColors = Pick<keyof typeof colors['a'], `bg-${string}`>;
-type bgColors = keyof typeof colors.a;
+import { BackgroundColors, BorderColors, BorderRadii } from "./types";
 
 type Element = "div" | "span" | "section" | "legend" | "ul" | "li";
 
@@ -23,11 +19,11 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   as?: Element;
   /** Background color */
-  background?: bgColors;
+  background?: BackgroundColors;
   /** Border color */
-  borderColor?: string | "transparent"; // TODO
+  borderColor?: BorderColors;
   /** Border radius */
-  borderRadius?: string; // TODO
+  borderRadius?: BorderRadii;
   /** Vertical end horizontal start border radius */
   borderRadiusEndStart?: string;
   /** Vertical end horizontal end border radius */
@@ -133,18 +129,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     ref
   ) => {
     // eslint-disable-next-line no-nested-ternary
-    const borderStyleValue = borderStyle
-      ? borderStyle
-      : borderColor ||
-        borderWidth ||
-        borderBlockStartWidth ||
-        borderBlockEndWidth ||
-        borderInlineStartWidth ||
-        borderInlineEndWidth
-      ? "solid"
-      : undefined;
-
-    // eslint-disable-next-line no-nested-ternary
     const outlineStyleValue = outlineStyle
       ? outlineStyle
       : outlineColor || outlineWidth
@@ -152,18 +136,13 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       : undefined;
 
     const style = {
-      "--ac-box-color": color ? `var(--a-color-${color})` : undefined,
-      "--ac-box-background": background
-        ? `var(--a-color-${background})`
+      "--__ac-box-background": background
+        ? `var(--a-${background})`
         : undefined,
-      // eslint-disable-next-line no-nested-ternary
-      "--ac-box-border-color": borderColor
-        ? borderColor === "transparent"
-          ? "transparent"
-          : `var(--a-color-${borderColor})`
+      "--__ac-box-border-color": borderColor
+        ? `var(--a-${borderColor})`
         : undefined,
-      "--ac-box-border-style": borderStyleValue,
-      "--ac-box-border-radius": borderRadius
+      "--__ac-box-border-radius": borderRadius
         ? `var(--a-border-radius-${borderRadius})`
         : undefined,
       "--ac-box-border-radius-end-start": borderRadiusEndStart

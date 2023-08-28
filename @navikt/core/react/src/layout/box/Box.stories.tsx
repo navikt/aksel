@@ -2,7 +2,7 @@ import React from "react";
 import type { Meta } from "@storybook/react";
 import { BodyLong } from "../../typography";
 import { Box } from "./Box";
-import { HStack, VStack } from "../..";
+import { HGrid, HStack, VStack } from "../..";
 
 export default {
   title: "ds-react/Box",
@@ -25,15 +25,16 @@ export const Default = {
 export const Card = {
   render: () => {
     const Card = ({ children }) => (
-      <Box
-        width="200px" // TODO
-        padding="4"
-        margin="4"
-        background="surface-default" // TODO
-        borderRadius="4" // TODO
-      >
-        {children}
-      </Box>
+      <HStack gap="4">
+        <Box
+          padding="4"
+          background="surface-action-subtle"
+          borderColor="border-default"
+          borderRadius="xlarge"
+        >
+          {children}
+        </Box>
+      </HStack>
     );
 
     return (
@@ -118,20 +119,6 @@ export const PaddingBreakpoints = {
     </div>
   ),
 };
-export const MarginBreakpoints = {
-  render: () => (
-    <div>
-      <Box margin={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6" }}>
-        <BodyLong>
-          This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
-          nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
-          Proident pariatur proident pariatur magna consequat velit id commodo
-          quis sunt tempor ullamco aliquip pariatur.
-        </BodyLong>
-      </Box>
-    </div>
-  ),
-};
 
 export const PaddingBreakpointsInherit1 = {
   render: () => (
@@ -178,4 +165,28 @@ export const Padding = {
       </Box>
     </div>
   ),
+};
+
+export const WithHGrid = () => {
+  return (
+    <Box background="bg-default">
+      <HGrid
+        gap="6"
+        columns={{ xs: "repeat(auto-fit, minmax(10rem, 1fr))", md: 4 }}
+      >
+        <Box>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+        </Box>
+        <Box>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+        </Box>
+        <Box>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+        </Box>
+        <Box>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+        </Box>
+      </HGrid>
+    </Box>
+  );
 };

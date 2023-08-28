@@ -1,0 +1,55 @@
+{
+  "a": {
+    "text-default": {
+      "value": "{a.gray.900.value}"
+    },
+    "text-subtle": {
+      "value": "{a.grayalpha.700.value}"
+    },
+    "text-visited": {
+      "value": "{a.purple.500.value}"
+    },
+    "text-danger": {
+      "value": "{a.red.500.value}"
+    },
+    "text-action-selected": {
+      "value": "{a.blue.700.value}"
+    },
+    "text-action-on-action-subtle": {
+      "value": "{a.blue.600.value}"
+    },
+    "text-action": {
+      "value": "{a.blue.500.value}"
+    },
+    "text-on-inverted": {
+      "value": "{a.white.value}"
+    },
+    "text-on-neutral": {
+      "value": "{a.white.value}"
+    },
+    "text-on-action": {
+      "value": "{a.white.value}"
+    },
+    "text-on-success": {
+      "value": "{a.white.value}"
+    },
+    "text-on-danger": {
+      "value": "{a.white.value}"
+    },
+    "text-on-warning": {
+      "value": "{a.gray.900.value}"
+    },
+    "text-on-info": {
+      "value": "{a.gray.900.value}"
+    },
+    "text-on-alt1": {
+      "value": "{a.white.value}"
+    },
+    "text-on-alt2": {
+      "value": "{a.gray.900.value}"
+    },
+    "text-on-alt3": {
+      "value": "{a.white.value}"
+    }
+  }
+}
