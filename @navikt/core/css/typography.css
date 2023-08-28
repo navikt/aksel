@@ -249,3 +249,8 @@
 .navds-typo--color-subtle {
   color: var(--a-text-subtle);
 }
+
+[data-theme="dark"].navds-typo--color-subtle,
+[data-theme="dark"] .navds-typo--color-subtle {
+  --a-text-subtle: var(--a-gray-300);
+}
