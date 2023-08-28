@@ -22,17 +22,12 @@ export const Default: Story = {
   args: {
     spacing: false,
     children: lorem,
-    truncate: false,
     visuallyHidden: false,
   },
   argTypes: {
     size: {
       control: "radio",
       options: ["large", "medium", "small"],
-    },
-    align: {
-      control: "radio",
-      options: ["start", "center", "end"],
     },
     color: {
       control: "radio",
@@ -42,25 +37,11 @@ export const Default: Story = {
 };
 
 export const SizeMedium: Story = {
-  render: () => (
-    <VStack gap="2">
-      <Label size="medium">{lorem}</Label>
-      <Label size="medium" truncate>
-        {lorem}
-      </Label>
-    </VStack>
-  ),
+  render: () => <Label size="medium">{lorem}</Label>,
 };
 
 export const SizeSmall: Story = {
-  render: () => (
-    <VStack gap="2">
-      <Label size="small">{lorem}</Label>
-      <Label size="small" truncate>
-        {lorem}
-      </Label>
-    </VStack>
-  ),
+  render: () => <Label size="small">{lorem}</Label>,
 };
 
 export const SpacingMedium: Story = {
@@ -97,16 +78,6 @@ export const Colors: Story = {
       <div style={{ background: "var(--a-gray-900)" }}>
         <Label color="on-inverted">{lorem}</Label>
       </div>
-    </VStack>
-  ),
-};
-
-export const Align: Story = {
-  render: () => (
-    <VStack gap="2">
-      <Label align="start">{lorem}</Label>
-      <Label align="center">{lorem}</Label>
-      <Label align="end">{lorem}</Label>
     </VStack>
   ),
 };

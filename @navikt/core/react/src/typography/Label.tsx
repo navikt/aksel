@@ -5,7 +5,7 @@ import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
 export interface LabelProps
-  extends Omit<TypoProps, "weight">,
+  extends Omit<TypoProps, "weight" | "align" | "truncate">,
     Omit<React.LabelHTMLAttributes<HTMLLabelElement>, "color"> {
   /**
    * medium: 18px, small: 16px
@@ -40,8 +40,6 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
         size = "medium",
         as: Component = "label",
         spacing,
-        truncate,
-        align,
         visuallyHidden,
         color,
         ...rest
@@ -56,8 +54,6 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
           "navds-label",
           typoClassNames({
             spacing,
-            truncate,
-            align,
             visuallyHidden,
             color,
           }),
