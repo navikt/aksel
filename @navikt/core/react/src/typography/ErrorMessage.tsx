@@ -27,7 +27,7 @@ export interface ErrorMessageProps
  *
  * @example
  * ```jsx
- *     <ErrorMessage >
+ *     <ErrorMessage>
  *       Du må fylle ut: Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon
  *     </ErrorMessage>
  * ```

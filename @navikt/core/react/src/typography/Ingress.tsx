@@ -25,7 +25,7 @@ export interface IngressProps
  *
  * @example
  * ```jsx
- *     <Ingress >
+ *     <Ingress>
  *       Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.
  *     </Ingress>
  * ```

@@ -27,7 +27,7 @@ export interface LabelProps
  *
  * @example
  * ```jsx
- *     <Label >
+ *     <Label>
  *       Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon
  *     </Label>
  * ```

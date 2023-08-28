@@ -22,8 +22,6 @@ export const Default: Story = {
   args: {
     spacing: false,
     children: lorem,
-
-    truncate: false,
     visuallyHidden: false,
   },
   argTypes: {
