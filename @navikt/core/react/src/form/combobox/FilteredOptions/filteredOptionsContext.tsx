@@ -6,12 +6,13 @@ import React, {
   useContext,
   useCallback,
   useRef,
-  useLayoutEffect,
+  SetStateAction,
 } from "react";
 import cl from "clsx";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../Input/inputContext";
 import usePrevious from "../../../util/usePrevious";
+import { useClientLayoutEffect } from "../../../util";
 
 const normalizeText = (text: string): string =>
   typeof text === "string" ? `${text}`.toLowerCase().trim() : "";
@@ -35,6 +36,8 @@ type FilteredOptionsContextType = {
   isListOpen: boolean;
   isLoading?: boolean;
   filteredOptions: string[];
+  isMouseLastUsedInputDevice: boolean;
+  setIsMouseLastUsedInputDevice: React.Dispatch<SetStateAction<boolean>>;
   isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
   currentOption: string | null;
@@ -84,7 +87,10 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
 
   const previousSearchTerm = usePrevious(searchTerm);
 
-  useLayoutEffect(() => {
+  const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] =
+    useState(false);
+
+  useClientLayoutEffect(() => {
     if (
       shouldAutocomplete &&
       normalizeText(searchTerm) !== "" &&
@@ -246,6 +252,8 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     isListOpen,
     isLoading,
     filteredOptions,
+    isMouseLastUsedInputDevice,
+    setIsMouseLastUsedInputDevice,
     isValueNew,
     toggleIsListOpen,
     currentOption,

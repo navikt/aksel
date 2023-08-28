@@ -16,7 +16,7 @@ Hvis du selv ønsker å legge til nye ikoner kan du kopiere filenes fra `/templa
 
 - Sizing, width og height må være 24x24: `width="24" height="24" `
 - Viewbox: `viewBox="0 0 24 24"`
-- Fill på path: `fill="#262626"`
+- Fill på path: `fill="#23262A"`
 
 ### Yml
 
@@ -47,7 +47,7 @@ Hvis du ønsker å teste om alt stemmer, både i `svg` og `yml` før du lager en
 ### Generelt
 
 - Designet følger Keyline-malen (under assets i figma-pakken).
-- Alle lag og grupper skal bruke `#262626` for stroke og fill.
+- Alle lag og grupper skal bruke `#23262A` for stroke og fill.
 
 ### Stroke (linje)
 

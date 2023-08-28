@@ -1,9 +1,6 @@
+/* stylelint-disable-next-line aksel/no-class-override */
 .navds-body-long.navds-typo--spacing + .list-margin {
   @apply -mt-4;
-}
-
-.svg-color-reset.navds-link svg {
-  color: inherit;
 }
 
 .override-text-700 p {
@@ -12,6 +9,16 @@
 
 p.override-text-no-max {
   max-width: none;
+}
+
+/* stylelint-disable-next-line aksel/no-class-override */
+.link-color-override .navds-link:not(:active, :focus) {
+  color: var(--a-text-default);
+}
+
+/* stylelint-disable-next-line aksel/no-class-override */
+.svg-color-reset.navds-link svg {
+  color: inherit;
 }
 
 .dynamic-wrapper {
@@ -37,16 +44,9 @@ p.override-text-no-max {
   content: "";
 }
 
-.aksel-artikkel .aksel-list-ul li::marker
-/* .aksel-artikkel .aksel-list-ol li::marker  */ {
+.aksel-artikkel .aksel-list-ul li::marker {
   content: none;
 }
-
-/*
-.aksel-artikkel .aksel-list-ol {
-  counter-reset: li;
-  list-style: none;
-} */
 
 .aksel-artikkel .aksel-list-ul {
   list-style: none;

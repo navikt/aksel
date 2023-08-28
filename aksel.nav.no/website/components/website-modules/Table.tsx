@@ -14,21 +14,24 @@ export function AkselTable({
   withCopy?: boolean;
 }) {
   return (
-    <table className="border-border-subtle mb-7 w-full border-separate border-spacing-0 rounded border">
+    <table className="border-border-subtle mb-7 w-full border-separate border-spacing-0 rounded-lg border">
       <thead>
-        <tr className="rounded-t text-left">
+        <tr className="rounded-t-lg text-left">
           {th.map((x) => (
             <th
               key={x.text}
-              className={cl("font-regular bg-surface-subtle rounded-tl p-2", {
-                "hidden sm:table-cell": !!x.hideOnSm,
-              })}
+              className={cl(
+                "font-regular bg-surface-subtle p-2 first-of-type:rounded-tl-lg last-of-type:rounded-tr-lg",
+                {
+                  "hidden sm:table-cell": !!x.hideOnSm,
+                }
+              )}
             >
               {x?.sronly ? <span className="sr-only">{x.text}</span> : x.text}
             </th>
           ))}
           {withCopy && (
-            <th className="font-regular bg-surface-subtle hidden rounded-tl p-2 sm:table-cell">
+            <th className="font-regular bg-surface-subtle hidden p-2 last-of-type:rounded-tr-lg sm:table-cell">
               <span className="sr-only">Kopi</span>
             </th>
           )}
@@ -53,7 +56,7 @@ export function AkselTableRow({
   const useCopy = useContext(TableContext);
 
   return (
-    <tr className="peer border-b border-t border-gray-200 text-base last-of-type:rounded-b">
+    <tr className="peer border-b border-t border-gray-200 text-base last-of-type:rounded-b-lg">
       {tr.map((x, xi) => (
         <td
           key={xi}

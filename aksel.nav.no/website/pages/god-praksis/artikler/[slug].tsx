@@ -209,7 +209,7 @@ const Page = ({
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel bg-surface-subtle pt-4 focus:outline-none"
+        className="aksel-artikkel group/aksel bg-surface-subtle pt-4 focus:outline-none"
       >
         <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
           <article className="pb-16 pt-12 md:pb-32">
