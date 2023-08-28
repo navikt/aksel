@@ -1,6 +1,6 @@
 import { capitalize, Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
-import { CodeExapmplesT } from "@/types";
+import { CodeExamplesT } from "@/types";
 import {
   ExternalLinkIcon,
   LaptopIcon,
@@ -15,7 +15,7 @@ import { CodeSandbox } from "./CodeSandbox";
 const iframePadding = 192;
 const iframeId = "example-iframe";
 
-const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
+const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
@@ -81,6 +81,10 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
 
   const active = activeExample ?? node?.dir?.filer?.[0]?.navn;
 
+  const getIframeUrl = (name: string) => {
+    return `/eksempler/${node.dir.title}/${name}`;
+  };
+
   return (
     <div>
       <div className="mb-5 max-w-xl">
@@ -136,10 +140,7 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
                   )}
                 >
                   <iframe
-                    src={`/eksempler/${node.dir.title}/${fil.navn.replace(
-                      ".tsx",
-                      ""
-                    )}`}
+                    src={getIframeUrl(fil.navn.replace(".tsx", ""))}
                     height={frameState}
                     onLoad={() => handleExampleLoad()}
                     id={iframeId}

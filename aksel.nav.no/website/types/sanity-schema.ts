@@ -278,7 +278,7 @@ export interface RelatertInnholdT {
   >;
 }
 
-export interface CodeExapmplesT {
+export interface CodeExamplesT {
   title: string;
   dir: {
     title: string;
