@@ -249,7 +249,3 @@
 .navds-typo--color-subtle {
   color: var(--a-text-subtle);
 }
-
-.navds-typo--color-on-inverted {
-  color: var(--a-text-on-inverted);
-}
