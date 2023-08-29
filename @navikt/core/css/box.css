@@ -11,18 +11,6 @@
   --__ac-box-padding-inline-xl: initial;
   --__ac-box-padding-inline: var(--__ac-box-padding-inline-xs);
   --__ac-box-padding-block: var(--__ac-box-padding-block-xs);
-  --__ac-box-margin-block-xs: initial;
-  --__ac-box-margin-inline-xs: initial;
-  --__ac-box-margin-block-sm: initial;
-  --__ac-box-margin-inline-sm: initial;
-  --__ac-box-margin-block-md: initial;
-  --__ac-box-margin-inline-md: initial;
-  --__ac-box-margin-block-lg: initial;
-  --__ac-box-margin-inline-lg: initial;
-  --__ac-box-margin-block-xl: initial;
-  --__ac-box-margin-inline-xl: initial;
-  --__ac-box-margin-inline: var(--__ac-box-margin-inline-xs);
-  --__ac-box-margin-block: var(--__ac-box-margin-block-xs);
   --__ac-box-background: initial;
   --__ac-box-background-hover: initial;
   --__ac-box-border-color: transparent;
@@ -31,8 +19,6 @@
 
   padding-inline: var(--__ac-box-padding-inline);
   padding-block: var(--__ac-box-padding-block);
-  margin-inline: var(--__ac-box-margin-inline);
-  margin-block: var(--__ac-box-margin-block);
   background-color: var(--__ac-box-background);
   border-style: solid;
   border-color: var(--__ac-box-border-color);
@@ -49,8 +35,6 @@
   .navds-box {
     --__ac-box-padding-inline: var(--__ac-box-padding-inline-sm, var(--__ac-box-padding-inline-xs));
     --__ac-box-padding-block: var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs));
-    --__ac-box-margin-inline: var(--__ac-box-margin-inline-sm, var(--__ac-box-margin-inline-xs));
-    --__ac-box-margin-block: var(--__ac-box-margin-block-sm, var(--__ac-box-margin-block-xs));
   }
 }
 
@@ -64,11 +48,6 @@
       --__ac-box-padding-block-md,
       var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs))
     );
-    --__ac-box-margin-inline: var(
-      --__ac-box-margin-inline-md,
-      var(--__ac-box-margin-inline-sm, var(--__ac-box-margin-inline-xs))
-    );
-    --__ac-box-margin-block: var(--__ac-box-margin-block-md, var(--__ac-box-margin-block-sm, var(--__ac-box-margin-block-xs)));
   }
 }
 
@@ -81,14 +60,6 @@
     --__ac-box-padding-block: var(
       --__ac-box-padding-block-lg,
       var(--__ac-box-padding-block-md, var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs)))
-    );
-    --__ac-box-margin-inline: var(
-      --__ac-box-margin-inline-lg,
-      var(--__ac-box-margin-inline-md, var(--__ac-box-margin-inline-sm, var(--__ac-box-margin-inline-xs)))
-    );
-    --__ac-box-margin-block: var(
-      --__ac-box-margin-block-lg,
-      var(--__ac-box-margin-block-md, var(--__ac-box-margin-block-sm, var(--__ac-box-margin-block-xs)))
     );
   }
 }
@@ -107,20 +78,6 @@
       var(
         --__ac-box-padding-block-lg,
         var(--__ac-box-padding-block-md, var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs)))
-      )
-    );
-    --__ac-box-margin-inline: var(
-      --__ac-box-margin-inline-xl,
-      var(
-        --__ac-box-margin-inline-lg,
-        var(--__ac-box-margin-inline-md, var(--__ac-box-margin-inline-sm, var(--__ac-box-margin-inline-xs)))
-      )
-    );
-    --__ac-box-margin-block: var(
-      --__ac-box-margin-block-xl,
-      var(
-        --__ac-box-margin-block-lg,
-        var(--__ac-box-margin-block-md, var(--__ac-box-margin-block-sm, var(--__ac-box-margin-block-xs)))
       )
     );
   }

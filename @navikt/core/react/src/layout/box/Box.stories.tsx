@@ -208,23 +208,32 @@ export const PaddingBreakpointsInherit2 = {
 
 export const Padding = {
   render: () => (
-    <div>
-      <Box padding="10">
-        <BodyLong>Padding all around</BodyLong>
-      </Box>
-      <Box padding="4" paddingBlockStart="10">
-        <BodyLong>Padding to the North</BodyLong>
-      </Box>
-      <Box padding="4" paddingInlineEnd="10">
-        <BodyLong>Padding to the East</BodyLong>
-      </Box>
-      <Box padding="4" paddingBlockEnd="10">
-        <BodyLong>Padding to the South</BodyLong>
-      </Box>
-      <Box padding="4" paddingInlineStart="10">
-        <BodyLong>Padding to the West</BodyLong>
-      </Box>
-    </div>
+    <>
+      <style>
+        {`
+          .navds-box {
+            width: fit-content;
+          }
+        `}
+      </style>
+      <VStack align="center">
+        <Box padding="20">
+          <BodyLong>Padding all around</BodyLong>
+        </Box>
+        <Box padding="1" paddingBlockStart="20">
+          <BodyLong>Padding to the North</BodyLong>
+        </Box>
+        <Box padding="1" paddingInlineEnd="20">
+          <BodyLong>Padding to the East</BodyLong>
+        </Box>
+        <Box padding="1" paddingBlockEnd="20">
+          <BodyLong>Padding to the South</BodyLong>
+        </Box>
+        <Box padding="1" paddingInlineStart="20">
+          <BodyLong>Padding to the West</BodyLong>
+        </Box>
+      </VStack>
+    </>
   ),
 };
 

@@ -82,6 +82,90 @@ type blockT<T extends string> =
   | `${T}BlockStart`
   | `${T}BlockEnd`;
 
+type BlockString = ResponsiveLogicalTuple<SpacingScale>;
+
+/** desired output?
+  [
+    ['--__ac-box-padding-inline-xs', `var(...) var(...)`], 
+    ['--__ac-box-padding-block-xs'], `var(...) var(...)`],
+    ...
+  ]
+  */
+function createStyleEntries(
+  blockString: BlockString,
+  componentName: string,
+  componentProp: string,
+  blockOrInline: LogicalDesignator
+) {
+  return Object.fromEntries(
+    Object.entries(blockString).map(([breakpointAlias, aliasOrScale]) => [
+      `--__ac-${componentName}-${componentProp}-${blockOrInline}-${breakpointAlias}`,
+      `var(--a-spacing-${aliasOrScale[0]}) var(--a-spacing-${aliasOrScale[1]})`,
+    ])
+  );
+}
+
+function getPreviousSetBreakpoint(
+  blockString: BlockString,
+  breakpointAlias: BreakpointsAlias
+) {
+  let curr: BreakpointsAlias | null = breakpointAlias;
+  while (curr) {
+    if (blockString[curr]) {
+      return blockString[curr];
+    }
+    curr = PreviousBreakpointLookup[curr];
+  }
+  if (curr) {
+    return PreviousBreakpointLookup[curr];
+  }
+  return null;
+}
+
+function setBlockProp(
+  blockString: BlockString,
+  responsiveKey: ResponsiveProp<SpacingScale> | undefined,
+  index: 0 | 1
+) {
+  if (!responsiveKey) return;
+  if (typeof responsiveKey === "string") {
+    blockString.xs = index
+      ? [blockString?.xs?.[0] ?? "0", responsiveKey]
+      : [responsiveKey, blockString?.xs?.[1] ?? "0"];
+    return;
+  }
+
+  Object.assign(blockString, {
+    ...structuredClone(blockString),
+    ...Object.fromEntries(
+      Object.entries(responsiveKey).map(([breakpointAlias, spacingScale]) => {
+        return [
+          breakpointAlias,
+          index
+            ? [
+                blockString?.[breakpointAlias]?.[0] ??
+                  (getPreviousSetBreakpoint(
+                    blockString,
+                    breakpointAlias as BreakpointsAlias
+                  )?.[1] ||
+                    "0"),
+                spacingScale,
+              ]
+            : [
+                spacingScale,
+                blockString?.[breakpointAlias]?.[0] ??
+                  (getPreviousSetBreakpoint(
+                    blockString,
+                    breakpointAlias as BreakpointsAlias
+                  )?.[0] ||
+                    "0"),
+              ],
+        ];
+      })
+    ),
+  });
+}
+
 // eslint-disable-next-line no-unused-vars
 export function getResponsivePropsPaddingForInlineOrBlock<T = string>(
   componentName: string,
@@ -95,127 +179,47 @@ export function getResponsivePropsPaddingForInlineOrBlock<T = string>(
     return {};
   }
 
-  type BlockString = ResponsiveLogicalTuple<SpacingScale>;
-
   let blockString: BlockString = {};
 
   if (responsiveProps?.["padding"]) {
     const responsiveKey = responsiveProps["padding"];
-    setBlockProp(responsiveKey, blockString, 0);
-    setBlockProp(responsiveKey, blockString, 1);
+    setBlockProp(blockString, responsiveKey, 0);
+    setBlockProp(blockString, responsiveKey, 1);
   }
   if (responsiveProps?.[`paddingInline`]) {
     const responsiveKey = responsiveProps[`paddingInline`];
-    setBlockProp(responsiveKey, blockString, 0);
-    setBlockProp(responsiveKey, blockString, 1);
+    setBlockProp(blockString, responsiveKey, 0);
+    setBlockProp(blockString, responsiveKey, 1);
   }
   if (responsiveProps?.[`paddingInlineStart`]) {
     const responsiveKey = responsiveProps[`paddingInlineStart`];
-    setBlockProp(responsiveKey, blockString, 0);
+    setBlockProp(blockString, responsiveKey, 0);
   }
   if (responsiveProps?.[`paddingInlineEnd`]) {
     const responsiveKey = responsiveProps[`paddingInlineEnd`];
-    setBlockProp(responsiveKey, blockString, 0);
+    setBlockProp(blockString, responsiveKey, 1);
   }
   if (responsiveProps?.[`paddingBlock`]) {
     const responsiveKey = responsiveProps[`paddingBlock`];
-    setBlockProp(responsiveKey, blockString, 0);
-    setBlockProp(responsiveKey, blockString, 1);
+    setBlockProp(blockString, responsiveKey, 0);
+    setBlockProp(blockString, responsiveKey, 1);
   }
   if (responsiveProps?.[`paddingBlockStart`]) {
     const responsiveKey = responsiveProps[`paddingBlockStart`];
-    setBlockProp(responsiveKey, blockString, 0);
+    setBlockProp(blockString, responsiveKey, 0);
   }
   if (responsiveProps?.[`paddingBlockEnd`]) {
     const responsiveKey = responsiveProps[`paddingBlockEnd`];
-    setBlockProp(responsiveKey, blockString, 0);
+    setBlockProp(blockString, responsiveKey, 1);
   }
 
-  console.log({ blockString, responsiveProps });
-
-  return createStyleEntries(blockString, componentName, "padding", logicalCss);
-
-  /** desired output?
-  [
-    ['--__ac-box-padding-inline-xs', `var(...) var(...)`], 
-    ['--__ac-box-padding-block-xs'], `var(...) var(...)`],
-    ...
-  ]
-  */
-  function createStyleEntries(
-    blockString: BlockString,
-    componentName: string,
-    componentProp: string,
-    blockOrInline: LogicalDesignator
-  ) {
-    return Object.fromEntries(
-      Object.entries(blockString).map(([breakpointAlias, aliasOrScale]) => [
-        `--__ac-${componentName}-${componentProp}-${blockOrInline}-${breakpointAlias}`,
-        `var(--a-spacing-${aliasOrScale[0]}) var(--a-spacing-${aliasOrScale[1]})`,
-      ])
-    );
-  }
-
-  function getPreviousSetBreakpoint(
-    blockString: BlockString,
-    breakpointAlias: BreakpointsAlias
-  ) {
-    let curr: BreakpointsAlias | null = breakpointAlias;
-    while (curr) {
-      if (blockString[curr]) {
-        return blockString[curr];
-      }
-      curr = PreviousBreakpointLookup[curr];
-    }
-    if (curr) {
-      return PreviousBreakpointLookup[curr];
-    }
-    return null;
-  }
-
-  function setBlockProp(
-    responsiveKey: ResponsiveProp<SpacingScale> | undefined,
-    blockString: BlockString,
-    index: 0 | 1
-  ) {
-    if (!responsiveKey) return;
-    if (typeof responsiveKey === "string") {
-      blockString.xs = index
-        ? [blockString?.xs?.[0] ?? "0", responsiveKey]
-        : [responsiveKey, blockString?.xs?.[1] ?? "0"];
-      return;
-    }
-
-    Object.assign(blockString, {
-      ...structuredClone(blockString),
-      ...Object.fromEntries(
-        Object.entries(responsiveKey).map(([breakpointAlias, aliasOrScale]) => {
-          return [
-            breakpointAlias,
-            index
-              ? [
-                  blockString?.[breakpointAlias]?.[0] ??
-                    (getPreviousSetBreakpoint(
-                      blockString,
-                      breakpointAlias as BreakpointsAlias
-                    )?.[1] ||
-                      "0"),
-                  aliasOrScale,
-                ]
-              : [
-                  aliasOrScale,
-                  blockString?.[breakpointAlias]?.[0] ??
-                    (getPreviousSetBreakpoint(
-                      blockString,
-                      breakpointAlias as BreakpointsAlias
-                    )?.[0] ||
-                      "0"),
-                ],
-          ];
-        })
-      ),
-    });
-  }
+  const entries = createStyleEntries(
+    blockString,
+    componentName,
+    "padding",
+    logicalCss
+  );
+  return entries;
 }
 
 export function getResponsiveValue<T = string>(
