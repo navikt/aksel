@@ -43,23 +43,25 @@ const CodeSnippet = ({
         )}
         {...props}
       >
-        <div className="bg-deepblue-900 absolute right-4 top-2 z-10 rounded-lg p-1 group-[.aksel-artikkel]/aksel:hidden">
+        <div className="bg-deepblue-900 absolute right-4 top-[6px] z-10 rounded-lg p-1 group-[.aksel-artikkel]/aksel:hidden">
           <CopyButton data-theme="dark" size="small" copyText={code.code} />
         </div>
         <Highlight code={code.code} language={language} theme={themes.dracula}>
           {({ tokens, getLineProps, getTokenProps }) => (
-            <pre className="text-text-on-inverted min-h-14 bg-deepblue-900 relative m-0 max-h-96 overflow-x-auto overflow-y-auto rounded-lg p-4 font-mono group-[.aksel-artikkel]/aksel:mr-0">
-              {tokens.map((line, i) => (
-                <div
-                  key={i}
-                  {...getLineProps({ line, key: i })}
-                  className="text-medium whitespace-pre break-words"
-                >
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
-                  ))}
-                </div>
-              ))}
+            <pre className="text-medium m-0 flex rounded-lg">
+              <code className="max-h-96 min-w-full flex-none overflow-auto p-4">
+                {tokens.map((line, i) => (
+                  <span
+                    key={i}
+                    {...getLineProps({ line, key: i })}
+                    className="block"
+                  >
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token, key })} />
+                    ))}
+                  </span>
+                ))}
+              </code>
             </pre>
           )}
         </Highlight>
