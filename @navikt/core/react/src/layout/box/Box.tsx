@@ -4,6 +4,7 @@ import cl from "clsx";
 import {
   ResponsiveProp,
   SpacingScale,
+  getBorderRadius,
   getResponsivePropsPaddingForInlineOrBlock,
 } from "../utilities/css";
 import { BackgroundColors, BorderColors, BorderRadii, Shadows } from "./types";
@@ -29,13 +30,13 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Border radius */
   borderRadius?: BorderRadii;
   /** Vertical end horizontal start border radius */
-  borderRadiusEndStart?: string;
+  borderRadiusEndStart?: BorderRadii;
   /** Vertical end horizontal end border radius */
-  borderRadiusEndEnd?: string; //TODO
+  borderRadiusEndEnd?: BorderRadii;
   /** Vertical start horizontal start border radius */
-  borderRadiusStartStart?: string; //TODO
+  borderRadiusStartStart?: BorderRadii;
   /** Vertical start horizontal end border radius */
-  borderRadiusStartEnd?: string; //TODO
+  borderRadiusStartEnd?: BorderRadii;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
    * @example
    * padding='4'
@@ -116,25 +117,17 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         : `var(--ac-box-background-hover, var(--__ac-box-background, ${undefined}))`,
       "--__ac-box-border-color": borderColor
         ? `var(--a-${borderColor})`
-        : `var(--ac-box-border-color, ${undefined})`,
+        : `var(--ac-box-border-color, transparent))`,
       "--__ac-box-border-color-hover": borderColorHover
         ? `var(--a-${borderColorHover})`
         : `var(--ac-box-border-color-hover, var(--__ac-box-border-color, ${undefined}))`,
-      "--__ac-box-border-radius": borderRadius
-        ? `var(--a-border-radius-${borderRadius})`
-        : undefined,
-      "--ac-box-border-radius-end-start": borderRadiusEndStart // TODO individual radius on each corner
-        ? `var(--a-border-radius-${borderRadiusEndStart})`
-        : undefined,
-      "--ac-box-border-radius-end-end": borderRadiusEndEnd
-        ? `var(--a-border-radius-${borderRadiusEndEnd})`
-        : undefined,
-      "--ac-box-border-radius-start-start": borderRadiusStartStart
-        ? `var(--a-border-radius-${borderRadiusStartStart})`
-        : undefined,
-      "--ac-box-border-radius-start-end": borderRadiusStartEnd
-        ? `var(--a-border-radius-${borderRadiusStartEnd})`
-        : undefined,
+      "--__ac-box-border-radius": getBorderRadius({
+        borderRadius,
+        borderRadiusStartStart,
+        borderRadiusStartEnd,
+        borderRadiusEndStart,
+        borderRadiusEndEnd,
+      }),
       ...getResponsivePropsPaddingForInlineOrBlock("box", "inline", {
         padding,
         paddingInline,

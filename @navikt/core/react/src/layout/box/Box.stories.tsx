@@ -80,7 +80,7 @@ export const ThemingDemo = {
       return (
         <>
           <style>
-            {/** complex / nested CSS selectors... a better way?... more props? */}
+            {/** TODO complex / nested CSS selectors... a better way?... more props? */}
             {`
             .link-card:hover .navds-heading {
               color: var(--a-text-action);
@@ -122,14 +122,22 @@ export const ThemingDemo = {
     };
 
     const ChatBubble = () => {
-      return <Box>Chatbobble som bruker Box som base</Box>;
+      return (
+        <Box
+          background="surface-neutral-subtle"
+          shadow="xsmall"
+          padding="4"
+          borderRadius="xlarge"
+          borderRadiusEndStart="small"
+        >
+          Hei! Dette er en chatbobble som bruker Box som base!
+        </Box>
+      );
     };
 
     return (
       <VStack gap="8">
-        {/* Default look */}
         <Card>Dette er et Card som bruker Box som base</Card>
-        {/* Themed/Custom look */}
         <LinkCard />
         <ChatBubble />
       </VStack>
@@ -142,6 +150,7 @@ export const OverridingAvTokens = {
     const LinkCard = () => {
       return (
         <div
+          /** TODO do we actually want this? */
           style={
             {
               "--ac-box-background": "var(--a-surface-success-subtle)",
@@ -158,9 +167,7 @@ export const OverridingAvTokens = {
 
     return (
       <VStack gap="8">
-        {/* Default look */}
         <Card>Dette er et Card som bruker Box som base</Card>
-        {/* Themed/Custom look */}
         <LinkCard />
       </VStack>
     );
@@ -170,7 +177,10 @@ export const OverridingAvTokens = {
 export const PaddingBreakpoints = {
   render: () => (
     <div>
-      <Box padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6" }}>
+      <Box
+        padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6" }}
+        borderColor="border-default"
+      >
         <BodyLong>
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
           nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
@@ -185,7 +195,11 @@ export const PaddingBreakpoints = {
 export const PaddingBreakpointsInherit1 = {
   render: () => (
     <div>
-      <Box padding={{ xs: "2" }} paddingInlineStart={{ md: "24" }}>
+      <Box
+        padding={{ xs: "2" }}
+        paddingInlineStart={{ md: "24" }}
+        borderColor="border-default"
+      >
         <BodyLong>
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
           nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
@@ -202,6 +216,7 @@ export const PaddingBreakpointsInherit2 = {
       <Box
         padding={{ xs: "2", sm: "3" }}
         paddingInlineStart={{ sm: "4", md: "24" }}
+        borderColor="border-default"
       >
         <BodyLong>
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
@@ -225,19 +240,19 @@ export const Padding = {
         `}
       </style>
       <VStack align="center">
-        <Box padding="20">
+        <Box padding="20" borderColor="border-default">
           <BodyLong>Padding all around</BodyLong>
         </Box>
-        <Box padding="1" paddingBlockStart="20">
+        <Box padding="1" paddingBlockStart="20" borderColor="border-default">
           <BodyLong>Padding to the North</BodyLong>
         </Box>
-        <Box padding="1" paddingInlineEnd="20">
+        <Box padding="1" paddingInlineEnd="20" borderColor="border-default">
           <BodyLong>Padding to the East</BodyLong>
         </Box>
-        <Box padding="1" paddingBlockEnd="20">
+        <Box padding="1" paddingBlockEnd="20" borderColor="border-default">
           <BodyLong>Padding to the South</BodyLong>
         </Box>
-        <Box padding="1" paddingInlineStart="20">
+        <Box padding="1" paddingInlineStart="20" borderColor="border-default">
           <BodyLong>Padding to the West</BodyLong>
         </Box>
       </VStack>

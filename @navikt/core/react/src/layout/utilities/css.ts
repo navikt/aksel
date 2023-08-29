@@ -1,3 +1,5 @@
+import { BorderRadii } from "../box/types";
+
 export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
 
 const PreviousBreakpointLookup: {
@@ -244,3 +246,48 @@ export function getResponsiveValue<T = string>(
     ])
   );
 }
+
+type StartsAndEnds<T extends string> =
+  | `${T}`
+  | `${T}StartStart`
+  | `${T}StartEnd`
+  | `${T}EndStart`
+  | `${T}EndEnd`;
+
+type RadiusSpecifier = {
+  // eslint-disable-next-line no-unused-vars
+  [key in StartsAndEnds<"borderRadius">]?: BorderRadii;
+};
+
+/**
+ [
+  ['--__ac-box-border-radius', `var(...)`],
+ ]
+ */
+export const getBorderRadius = (radius: RadiusSpecifier): string => {
+  console.log({ radius });
+  let borderRadius = radius.borderRadius
+    ? `var(--a-border-radius-${radius.borderRadius})`
+    : "0";
+  let startStart = borderRadius,
+    startEnd = borderRadius,
+    endStart = borderRadius,
+    endEnd = borderRadius;
+
+  console.log(startStart, startEnd, endStart, endEnd);
+  startStart = radius.borderRadiusStartStart
+    ? `var(--a-border-radius-${radius.borderRadiusStartStart})`
+    : startStart;
+  startEnd = radius.borderRadiusStartEnd
+    ? `var(--a-border-radius-${radius.borderRadiusStartEnd})`
+    : startEnd;
+  endStart = radius.borderRadiusEndStart
+    ? `var(--a-border-radius-${radius.borderRadiusEndStart})`
+    : endStart;
+  endEnd = radius.borderRadiusEndEnd
+    ? `var(--a-border-radius-${radius.borderRadiusEndEnd})`
+    : endEnd;
+
+  console.log(startStart, startEnd, endStart, endEnd);
+  return `${startStart} ${startEnd} ${endEnd} ${endStart}`;
+};
