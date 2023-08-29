@@ -1,6 +1,7 @@
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
-import { Button, CopyButton, Heading, Tooltip } from "@navikt/ds-react";
+import { Button, Heading } from "@navikt/ds-react";
+import Snippet from "components/sanity-modules/code/Snippet";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import {
   AmplitudeEvents,
@@ -8,7 +9,6 @@ import {
 } from "components/website-modules/utils/amplitude";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Highlight } from "prism-react-renderer";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 
@@ -126,112 +126,37 @@ export const IconSidebar = ({
       >
         Last ned
       </Button>
-      <div data-prism-theme="light">
-        <Heading level="3" size="small" className="mb-2 mt-6">
-          Kode
-        </Heading>
-        <div className="ring-border-subtle rounded-lg ring-1">
-          <div className="border-b-border-subtle text-medium flex items-center justify-between border-b px-3 py-1">
-            <span>Import</span>
-            <Tooltip content="Kopier React-import">
-              <CopyButton
-                size="small"
-                copyText={`import {
-  ${name}Icon
-} from '@navikt/aksel-icons';`}
-              />
-            </Tooltip>
-          </div>
-          <Highlight
-            code={`import {
-  ${name}Icon
-} from '@navikt/aksel-icons';`}
-            language="tsx"
-            theme={undefined}
-          >
-            {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="relative m-0 overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono">
-                {tokens.map((line, i) => (
-                  <div
-                    key={i}
-                    {...getLineProps({ line, key: i })}
-                    className="text-medium whitespace-pre break-words"
-                  >
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
-                  </div>
-                ))}
-              </pre>
-            )}
-          </Highlight>
-        </div>
-        <div className="ring-border-subtle mt-3 rounded-lg ring-1">
-          <div className="border-b-border-subtle text-medium flex items-center justify-between border-b px-3 py-1">
-            <span>React</span>
-            <Tooltip content="Kopier React-snippet">
-              <CopyButton
-                size="small"
-                copyText={`<${name}Icon title="a11y-title" />`}
-              />
-            </Tooltip>
-          </div>
-          <Highlight
-            code={`<${name}Icon title="a11y-title" fontSize="1.5rem" />`}
-            language="tsx"
-            {...defaultProps}
-            theme={undefined}
-          >
-            {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="relative m-0 max-w-[80vw]  overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:max-w-sm">
-                {tokens.map((line, i) => (
-                  <div
-                    key={i}
-                    {...getLineProps({ line, key: i })}
-                    className="text-medium whitespace-pre break-words"
-                  >
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
-                  </div>
-                ))}
-              </pre>
-            )}
-          </Highlight>
-        </div>
-        <div className="ring-border-subtle mt-3 rounded-lg ring-1">
-          <div className="border-b-border-subtle text-medium flex items-center justify-between border-b px-3 py-1">
-            <span>SVG</span>
-            <Tooltip content="Kopier SVG-kode">
-              <CopyButton
-                size="small"
-                copyText={ReactDOMServer.renderToString(<SelectedIcon />)}
-              />
-            </Tooltip>
-          </div>
-          <Highlight
-            code={ReactDOMServer.renderToString(<SelectedIcon />)}
-            language="tsx"
-            {...defaultProps}
-            theme={undefined}
-          >
-            {({ tokens, getLineProps, getTokenProps }) => (
-              <pre className="w-text relative m-0 max-w-[80vw] overflow-x-auto overflow-y-auto rounded-b-lg p-3 font-mono lg:w-auto lg:max-w-sm">
-                {tokens.map((line, i) => (
-                  <div
-                    key={i}
-                    {...getLineProps({ line, key: i })}
-                    className="text-medium whitespace-pre break-words"
-                  >
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
-                  </div>
-                ))}
-              </pre>
-            )}
-          </Highlight>
-        </div>
+      <div className="mt-6 max-w-md">
+        <Snippet
+          node={{
+            title: "Import",
+            code: {
+              code: `import { ${name}Icon } from '@navikt/aksel-icons';`,
+              language: "jsx",
+            },
+          }}
+        />
+
+        <Snippet
+          node={{
+            title: "React",
+            code: {
+              code: `<${name}Icon title="a11y-title" fontSize="1.5rem" />`,
+              language: "jsx",
+            },
+          }}
+        />
+
+        <Snippet
+          node={{
+            title: "SVG",
+            code: {
+              code: ReactDOMServer.renderToString(<SelectedIcon />),
+              language: "jsx",
+            },
+          }}
+        />
+
         <div>
           <SuggestionBlock variant="ikon" reference={name} />
         </div>

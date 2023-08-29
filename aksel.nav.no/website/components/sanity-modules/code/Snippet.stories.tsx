@@ -59,7 +59,7 @@ export const HTML: Story = {
     node: {
       code: {
         code: "<button>Click me!</button>",
-        language: "jsx",
+        language: "html",
       },
     },
   },

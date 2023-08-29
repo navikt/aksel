@@ -223,6 +223,7 @@ export interface DoDontT {
 }
 
 export interface CodeSnippetT {
+  title?: string;
   code: {
     language: string;
     code: string;

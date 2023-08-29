@@ -7,7 +7,7 @@ import { CopyButton } from "@navikt/ds-react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import dracula from "./theme";
 
-const CodeSnippet = ({ node: { code } }: { node: CodeSnippetT }) => {
+const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
   if (!code || !code.code) {
     return null;
   }
@@ -18,21 +18,18 @@ const CodeSnippet = ({ node: { code } }: { node: CodeSnippetT }) => {
     case "js":
       language = "javascript";
       break;
-    case "html":
-      language = "markup";
-      break;
-    case "terminal":
-      language = "bash";
+    case "bash":
+      language = "terminal";
       break;
     default:
       break;
   }
 
   return (
-    <div className="shadow-small relative mb-7 grid rounded-lg bg-[#282a36] last:mb-0">
+    <div className="relative mb-7 grid rounded-lg bg-[#282a36] last:mb-0">
       <div className="text-text-on-inverted text-medium relative flex leading-6">
-        <div className="mt-2 flex flex-none items-center border-b  border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">
-          Terminal
+        <div className="mt-2 flex flex-none items-center border-b border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">
+          {!title ? <span className="capitalize">{language}</span> : title}
         </div>
         <div className="mt-2 flex h-10 flex-auto rounded-tl bg-[#44475a]" />
 
@@ -45,17 +42,17 @@ const CodeSnippet = ({ node: { code } }: { node: CodeSnippetT }) => {
       </div>
       <Highlight code={code.code} language={language} theme={dracula}>
         {({ tokens, getLineProps, getTokenProps }) => (
-          <pre className="text-medium m-0 flex rounded-lg">
-            <code className="max-h-96 min-w-full flex-none overflow-auto p-4 leading-6">
+          <pre className="text-medium m-0 flex overflow-auto rounded-lg leading-6">
+            <code className="max-h-96 min-w-full flex-none p-4">
               {tokens.map((line, i) => (
                 <span
                   key={i}
                   {...getLineProps({ line, key: i })}
                   className={cl(
-                    language === "bash" ? "flex items-center" : "block"
+                    language === "terminal" ? "flex items-center" : "block"
                   )}
                 >
-                  {language === "bash" && (
+                  {language === "terminal" && (
                     <ChevronRightIcon
                       aria-hidden
                       className="mr-2 h-5 w-auto flex-none overflow-visible text-pink-400"
