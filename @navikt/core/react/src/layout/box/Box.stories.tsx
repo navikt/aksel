@@ -100,11 +100,10 @@ export const ThemingDemo = {
           <Box
             className="link-card"
             borderRadius="small"
-            borderColor="border-default"
+            borderColor={{ default: "border-default", hover: "border-action" }}
             padding="4"
             paddingInlineStart="4"
-            borderColorHover="border-action"
-            shadowHover="small"
+            shadow={{ hover: "small" }}
             onClick={() => alert("Clicked!")}
           >
             <HStack gap="4" align="center">

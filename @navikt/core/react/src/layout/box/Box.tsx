@@ -20,13 +20,11 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   as?: Element;
   /** Background color */
-  background?: BackgroundColors;
-  /** Background color on hover */
-  backgroundHover?: BackgroundColors;
+  background?:
+    | BackgroundColors
+    | { default?: BackgroundColors; hover: BackgroundColors };
   /** Border color */
-  borderColor?: BorderColors;
-  /** Border color on hover */
-  borderColorHover?: BorderColors;
+  borderColor?: BorderColors | { default?: BorderColors; hover: BorderColors };
   /** Border radius */
   borderRadius?: BorderRadii;
   /** Vertical end horizontal start border radius */
@@ -71,9 +69,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   paddingInlineEnd?: Spacing;
   /** Shadow on box */
-  shadow?: Shadows;
-  /** Shadow on box on hover */
-  shadowHover?: Shadows;
+  shadow?: Shadows | { default?: Shadows; hover: Shadows };
 }
 
 export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
@@ -81,9 +77,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     {
       as: Component = "div",
       background,
-      backgroundHover,
       borderColor,
-      borderColorHover,
       borderRadius,
       borderRadiusEndStart,
       borderRadiusEndEnd,
@@ -100,7 +94,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       paddingInlineEnd,
       role,
       shadow,
-      shadowHover,
       style: _style,
       tabIndex,
       srOnly,
@@ -108,19 +101,57 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     },
     ref
   ) => {
+    let boxShadow: string | undefined = undefined;
+    let boxShadowHover: string | undefined = undefined;
+    if (typeof shadow === "object") {
+      boxShadow = shadow.default
+        ? `var(--a-shadow-${shadow.default})`
+        : undefined;
+      boxShadowHover = `var(--a-shadow-${shadow.hover})`;
+    } else if (typeof shadow === "string") {
+      boxShadow = `var(--a-shadow-${shadow})`;
+      boxShadowHover = `var(--__ac-box-shadow, ${undefined})`;
+    } else {
+      boxShadow = `var(--ac-box-shadow, ${undefined})`;
+      boxShadowHover = `var(--ac-box-shadow-hover, var(--__ac-box-shadow, ${undefined}))`;
+    }
+
+    // TODO: DRY? (Don't repeat yourself)
+    let boxBackground: string | undefined = undefined;
+    let boxBackgroundHover: string | undefined = undefined;
+    if (typeof background === "object") {
+      boxBackground = background.default
+        ? `var(--a-${background.default})`
+        : undefined;
+      boxBackgroundHover = `var(--a-${background.hover})`;
+    } else if (typeof background === "string") {
+      boxBackground = `var(--a-${background})`;
+      boxBackgroundHover = `var(--__ac-box-background, ${undefined})`;
+    } else {
+      boxBackground = `var(--ac-box-background, ${undefined})`;
+      boxBackgroundHover = `var(--ac-box-background-hover, var(--__ac-box-background, ${undefined}))`;
+    }
+
+    let boxBorderColor: string | undefined = undefined;
+    let boxBorderColorHover: string | undefined = undefined;
+    if (typeof borderColor === "object") {
+      boxBorderColor = borderColor.default
+        ? `var(--a-${borderColor.default})`
+        : "transparent";
+      boxBorderColorHover = `var(--a-${borderColor.hover})`;
+    } else if (typeof borderColor === "string") {
+      boxBorderColor = `var(--a-${borderColor})`;
+      boxBorderColorHover = `var(--__ac-box-border-color, ${undefined})`;
+    } else {
+      boxBorderColor = `var(--ac-box-border-color, transparent)`;
+      boxBorderColorHover = `var(--ac-box-border-color-hover, var(--__ac-box-border-color, transparent))`;
+    }
+
     const style = {
-      "--__ac-box-background": background
-        ? `var(--a-${background})`
-        : `var(--ac-box-background, ${undefined})`,
-      "--__ac-box-background-hover": backgroundHover
-        ? `var(--a-${backgroundHover})`
-        : `var(--ac-box-background-hover, var(--__ac-box-background, ${undefined}))`,
-      "--__ac-box-border-color": borderColor
-        ? `var(--a-${borderColor})`
-        : `var(--ac-box-border-color, transparent))`,
-      "--__ac-box-border-color-hover": borderColorHover
-        ? `var(--a-${borderColorHover})`
-        : `var(--ac-box-border-color-hover, var(--__ac-box-border-color, ${undefined}))`,
+      "--__ac-box-background": boxBackground,
+      "--__ac-box-background-hover": boxBackgroundHover,
+      "--__ac-box-border-color": boxBorderColor,
+      "--__ac-box-border-color-hover": boxBorderColorHover,
       "--__ac-box-border-radius": getBorderRadius({
         borderRadius,
         borderRadiusStartStart,
@@ -140,12 +171,8 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         paddingBlockStart,
         paddingBlockEnd,
       }),
-      "--__ac-box-shadow": shadow
-        ? `var(--a-shadow-${shadow})`
-        : `var(--ac-box-shadow, ${undefined})`,
-      "--__ac-box-shadow-hover": shadowHover
-        ? `var(--a-shadow-${shadowHover})`
-        : `var(--ac-box-shadow-hover, var(--__ac-box-shadow, ${undefined}))`,
+      "--__ac-box-shadow": boxShadow,
+      "--__ac-box-shadow-hover": boxShadowHover,
     } as React.CSSProperties;
 
     return (
