@@ -1,6 +1,6 @@
 import { capitalize, Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
-import { CodeExapmplesT } from "@/types";
+import { CodeExamplesT } from "@/types";
 import {
   ExternalLinkIcon,
   LaptopIcon,
@@ -15,7 +15,7 @@ import { CodeSandbox } from "./CodeSandbox";
 const iframePadding = 192;
 const iframeId = "example-iframe";
 
-const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
+const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
