@@ -8,7 +8,7 @@ import {
 } from "components/website-modules/utils/amplitude";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Highlight, { defaultProps } from "prism-react-renderer";
+import { Highlight } from "prism-react-renderer";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 
@@ -147,7 +147,6 @@ export const IconSidebar = ({
   ${name}Icon
 } from '@navikt/aksel-icons';`}
             language="tsx"
-            {...defaultProps}
             theme={undefined}
           >
             {({ tokens, getLineProps, getTokenProps }) => (

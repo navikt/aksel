@@ -7,7 +7,6 @@ export * from "./sanity-modules/code";
 export * from "./sanity-modules/code-examples";
 export { default as DoDont } from "./sanity-modules/DoDont";
 export { default as IntroKomponent } from "./sanity-modules/IntroSeksjon";
-export { default as Kode } from "./sanity-modules/Kode";
 export { default as PropsSeksjon } from "./sanity-modules/props/PropsSeksjon";
 export { default as PropTable } from "./sanity-modules/props/PropTabell";
 export { default as SideModul } from "./sanity-modules/SideModul";
