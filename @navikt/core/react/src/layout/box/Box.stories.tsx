@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import type { Meta } from "@storybook/react";
-import { BodyLong, Heading } from "../../typography";
+import { BodyLong, BodyShort, Heading } from "../../typography";
 import { Box } from "./Box";
 import { HGrid, HStack, VStack } from "../..";
 import { BackgroundColors, BorderRadii } from "./types";
@@ -123,15 +123,35 @@ export const ThemingDemo = {
 
     const ChatBubble = () => {
       return (
-        <Box
-          background="surface-neutral-subtle"
-          shadow="xsmall"
-          padding="4"
-          borderRadius="xlarge"
-          borderRadiusEndStart="small"
-        >
-          Hei! Dette er en chatbobble som bruker Box som base!
-        </Box>
+        <>
+          <style>
+            {`
+            .chat-bubble {
+              color: var(--a-text-default);
+            }
+            .chat-bubble__title {
+              font-size: 14px;
+            }
+          `}
+          </style>
+          <Box
+            className="chat-bubble"
+            background="surface-neutral-subtle"
+            shadow="xsmall"
+            padding="4"
+            borderRadius="xlarge"
+            borderRadiusEndStart="small"
+          >
+            <VStack gap="2">
+              <BodyShort className="chat-bubble__title">
+                BOX • 01.01.21 14:00
+              </BodyShort>
+              <BodyLong>
+                Hei! Dette er en chatbobble som bruker Box som base!
+              </BodyLong>
+            </VStack>
+          </Box>
+        </>
       );
     };
 
