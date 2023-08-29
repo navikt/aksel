@@ -38,6 +38,7 @@ const Card = ({
     background={background}
     borderColor="border-subtle"
     borderRadius={borderRadius}
+    shadow="xsmall"
   >
     <div style={{ width: "20rem" }}>{children}</div>
   </Box>
@@ -79,12 +80,20 @@ export const ThemingDemo = {
       return (
         <>
           <style>
-            {" "}
-            {/** complex / nested CSS selectors... a better way? */}
+            {/** complex / nested CSS selectors... a better way?... more props? */}
             {`
             .link-card:hover .navds-heading {
               color: var(--a-text-action);
               text-decoration: underline;
+            }
+            .link-card:hover .link-card__chevron,
+            .link-card:focus-within .link-card__chevron {
+              transform: translateX(4px);
+            }
+            .link-card__chevron {
+              flex-shrink: 0;
+              font-size: 1.5rem;
+              transition: transform 200ms;
             }
           `}
           </style>
@@ -93,10 +102,9 @@ export const ThemingDemo = {
             borderRadius="small"
             borderColor="border-default"
             padding="4"
-            paddingBlockEnd="10" // this prop seems broken?
             paddingInlineStart="4"
-            paddingInlineEnd="2"
             borderColorHover="border-action"
+            shadowHover="small"
             onClick={() => alert("Clicked!")}
           >
             <HStack gap="4" align="center">
@@ -106,7 +114,7 @@ export const ThemingDemo = {
                 </Heading>
                 <BodyLong>This truly is inside a box!</BodyLong>
               </VStack>
-              <ChevronRightIcon fontSize={24} />
+              <ChevronRightIcon fontSize={24} className="link-card__chevron" />
             </HStack>
           </Box>
         </>

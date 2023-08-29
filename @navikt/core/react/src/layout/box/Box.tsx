@@ -6,7 +6,7 @@ import {
   SpacingScale,
   getResponsivePropsPaddingForInlineOrBlock,
 } from "../utilities/css";
-import { BackgroundColors, BorderColors, BorderRadii } from "./types";
+import { BackgroundColors, BorderColors, BorderRadii, Shadows } from "./types";
 
 type Element = "div" | "span" | "section" | "legend" | "ul" | "li";
 
@@ -70,7 +70,9 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   paddingInlineEnd?: Spacing;
   /** Shadow on box */
-  shadow?: "lg"; // TODO
+  shadow?: Shadows;
+  /** Shadow on box on hover */
+  shadowHover?: Shadows;
 }
 
 export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
@@ -97,6 +99,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       paddingInlineEnd,
       role,
       shadow,
+      shadowHover,
       style: _style,
       tabIndex,
       srOnly,
@@ -110,7 +113,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         : `var(--ac-box-background, ${undefined})`,
       "--__ac-box-background-hover": backgroundHover
         ? `var(--a-${backgroundHover})`
-        : `var(--ac-box-background-hover, ${undefined})`,
+        : `var(--ac-box-background-hover, var(--__ac-box-background, ${undefined}))`,
       "--__ac-box-border-color": borderColor
         ? `var(--a-${borderColor})`
         : `var(--ac-box-border-color, ${undefined})`,
@@ -120,7 +123,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       "--__ac-box-border-radius": borderRadius
         ? `var(--a-border-radius-${borderRadius})`
         : undefined,
-      "--ac-box-border-radius-end-start": borderRadiusEndStart
+      "--ac-box-border-radius-end-start": borderRadiusEndStart // TODO individual radius on each corner
         ? `var(--a-border-radius-${borderRadiusEndStart})`
         : undefined,
       "--ac-box-border-radius-end-end": borderRadiusEndEnd
@@ -144,7 +147,12 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         paddingBlockStart,
         paddingBlockEnd,
       }),
-      "--ac-box-shadow": shadow ? `var(--a-shadow-${shadow})` : undefined,
+      "--__ac-box-shadow": shadow
+        ? `var(--a-shadow-${shadow})`
+        : `var(--ac-box-shadow, ${undefined})`,
+      "--__ac-box-shadow-hover": shadowHover
+        ? `var(--a-shadow-${shadowHover})`
+        : `var(--ac-box-shadow-hover, var(--__ac-box-shadow, ${undefined}))`,
     } as React.CSSProperties;
 
     return (
