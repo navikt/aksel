@@ -47,7 +47,7 @@ export const JS: Story = {
   args: {
     node: {
       code: {
-        code: "const numbers = [1, 2, 3, 4];\n\nnumbers.map(x => console.log(x);)",
+        code: "const numbers = [1, 2, 3, 4];\n\nnumbers.map(x => console.log(x))",
         language: "js",
       },
     },

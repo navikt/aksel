@@ -61,7 +61,10 @@ const CodeSnippet = ({
                     )}
                   >
                     {language === "bash" && (
-                      <ChevronRightIcon className="mr-2 h-5 w-auto flex-none overflow-visible text-pink-400" />
+                      <ChevronRightIcon
+                        aria-hidden
+                        className="mr-2 h-5 w-auto flex-none overflow-visible text-pink-400"
+                      />
                     )}
                     {line.map((token, key) => (
                       <span key={key} {...getTokenProps({ token, key })} />
