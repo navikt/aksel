@@ -1,6 +1,6 @@
 import { withErrorBoundary } from "@/error-boundary";
 import cl from "clsx";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
+import { Highlight, Language, themes } from "prism-react-renderer";
 import React from "react";
 import { CodeSnippetT } from "@/types";
 import { CopyButton } from "@navikt/ds-react";
@@ -37,20 +37,18 @@ const CodeSnippet = ({
   return (
     <>
       <div
-        className={cl(className, "relative mb-8 grid rounded-lg bg-[#0f172a]")}
+        className={cl(
+          className,
+          "bg-deepblue-900 relative mb-8 grid rounded-lg"
+        )}
         {...props}
       >
-        <div className="absolute right-4 top-2 z-10 rounded-lg bg-[#0f172a] p-1 group-[.aksel-artikkel]/aksel:hidden">
+        <div className="bg-deepblue-900 absolute right-4 top-2 z-10 rounded-lg p-1 group-[.aksel-artikkel]/aksel:hidden">
           <CopyButton data-theme="dark" size="small" copyText={code.code} />
         </div>
-        <Highlight
-          code={code.code}
-          language={language}
-          {...defaultProps}
-          theme={undefined}
-        >
+        <Highlight code={code.code} language={language} theme={themes.dracula}>
           {({ tokens, getLineProps, getTokenProps }) => (
-            <pre className="text-text-on-inverted min-h-14 relative m-0 max-h-96 overflow-x-auto overflow-y-auto rounded-lg bg-[#0f172a] p-4 font-mono group-[.aksel-artikkel]/aksel:mr-0">
+            <pre className="text-text-on-inverted min-h-14 bg-deepblue-900 relative m-0 max-h-96 overflow-x-auto overflow-y-auto rounded-lg p-4 font-mono group-[.aksel-artikkel]/aksel:mr-0">
               {tokens.map((line, i) => (
                 <div
                   key={i}
