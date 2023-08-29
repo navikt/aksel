@@ -25,7 +25,7 @@ export const Bash: Story = {
   args: {
     node: {
       code: {
-        code: "npx cowsay moo",
+        code: "yarn install @navikt/ds-react @navikt/ds-css\nnpm add @navikt/ds-react @navikt/ds-css",
         language: "bash",
       },
     },
