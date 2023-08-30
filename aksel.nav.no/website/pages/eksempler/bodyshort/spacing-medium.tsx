@@ -1,4 +1,4 @@
-import { Detail } from "@navikt/ds-react";
+import { BodyShort } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
@@ -6,8 +6,8 @@ const Example = () => {
 
   return (
     <div>
-      <Detail spacing>{lorem}</Detail>
-      <Detail spacing>{lorem}</Detail>
+      <BodyShort spacing>{lorem}</BodyShort>
+      <BodyShort spacing>{lorem}</BodyShort>
     </div>
   );
 };
@@ -20,5 +20,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 4,
 };

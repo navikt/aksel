@@ -2,10 +2,16 @@ import { BodyShort } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
+  const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
+
   return (
     <div>
-      <BodyShort spacing>The red fox jumps over the lazy brown dog.</BodyShort>
-      <BodyShort>The red fox jumps over the lazy brown dog.</BodyShort>
+      <BodyShort size="large" spacing>
+        {lorem}
+      </BodyShort>
+      <BodyShort size="large" spacing>
+        {lorem}
+      </BodyShort>
     </div>
   );
 };
@@ -18,5 +24,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 3,
 };

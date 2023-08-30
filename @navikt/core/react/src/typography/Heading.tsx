@@ -1,8 +1,12 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
+import { TypoProps } from "./types";
+import { typoClassNames } from "./util";
 
-export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface HeadingProps
+  extends Pick<TypoProps, "spacing" | "visuallyHidden" | "align" | "textColor">,
+    React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Heading level
    * @default "1"
@@ -16,11 +20,6 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
    * Heading text
    */
   children: React.ReactNode;
-  /**
-   * Adds margin-bottom
-   * @default false
-   */
-  spacing?: boolean;
 }
 
 /**
@@ -33,22 +32,43 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
  * @example
  * ```jsx
  *     <Heading level="1" size="xlarge">
- *       Pengestøtte når du er syk
+ *       Hva kan vi hjelpe deg med?
  *     </Heading>
  * ```
  */
 export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
   forwardRef(
-    ({ level = "1", size, spacing = false, className, as, ...rest }, ref) => {
+    (
+      {
+        level = "1",
+        size,
+        className,
+        as,
+        spacing,
+        align,
+        visuallyHidden,
+        textColor,
+        ...rest
+      },
+      ref
+    ) => {
       let HeadingTag = as ?? (`h${level}` as React.ElementType);
 
       return (
         <HeadingTag
           {...rest}
           ref={ref}
-          className={cl(className, "navds-heading", `navds-heading--${size}`, {
-            "navds-typo--spacing": spacing,
-          })}
+          className={cl(
+            className,
+            "navds-heading",
+            `navds-heading--${size}`,
+            typoClassNames({
+              spacing,
+              align,
+              visuallyHidden,
+              textColor,
+            })
+          )}
         />
       );
     }

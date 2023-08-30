@@ -1,12 +1,8 @@
-import { Heading } from "@navikt/ds-react";
+import { BodyLong } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return (
-    <Heading level="1" size="xlarge">
-      Pengestøtte når du er syk
-    </Heading>
-  );
+  return <BodyLong as="span">Dette er nå en span!</BodyLong>;
 };
 
 export default withDsExample(Example);
@@ -17,5 +13,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 8,
 };

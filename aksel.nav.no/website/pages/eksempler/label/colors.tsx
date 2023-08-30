@@ -1,25 +1,20 @@
-import { BodyShort, VStack } from "@navikt/ds-react";
+import { Label, VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
+  const lorem =
+    "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
 
   return (
     <VStack gap="4">
-      <BodyShort size="small">{lorem}</BodyShort>
-      <Divider />
       <div>
-        <Descriptor>Semibold</Descriptor>
-        <BodyShort size="small" weight="semibold">
-          {lorem}
-        </BodyShort>
+        <Descriptor>Default</Descriptor>
+        <Label textColor="default">{lorem}</Label>
       </div>
       <Divider />
       <div>
-        <Descriptor>Truncate (ellipsis)</Descriptor>
-        <BodyShort size="small" truncate>
-          {lorem}
-        </BodyShort>
+        <Descriptor>Subtle</Descriptor>
+        <Label textColor="subtle">{lorem}</Label>
       </div>
     </VStack>
   );
@@ -33,7 +28,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 4,
 };
 
 function Descriptor({ children }) {

@@ -1,9 +1,12 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
+import { TypoProps } from "./types";
+import { typoClassNames } from "./util";
 
 export interface DetailProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {
+  extends TypoProps,
+    React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * @deprecated Medium === small
    */
@@ -12,10 +15,6 @@ export interface DetailProps
    * Paragraph text
    */
   children: React.ReactNode;
-  /**
-   * Adds margin-bottom
-   */
-  spacing?: boolean;
   /**
    * All caps
    */
@@ -31,8 +30,8 @@ export interface DetailProps
  *
  * @example
  * ```jsx
- *     <Detail level="1" size="xlarge">
- *       Pengestøtte når du er syk
+ *     <Detail>
+ *       Du må gjøre en filtrering for å se brukere i listen.
  *     </Detail>
  * ```
  */
@@ -45,6 +44,11 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
         spacing,
         uppercase,
         as: Component = "p",
+        truncate,
+        weight = "regular",
+        align,
+        visuallyHidden,
+        textColor,
         ...rest
       },
       ref
@@ -52,11 +56,22 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
       <Component
         {...rest}
         ref={ref}
-        className={cl(className, "navds-detail", {
-          "navds-detail--small": size === "small",
-          "navds-typo--spacing": !!spacing,
-          "navds-typo--uppercase": !!uppercase,
-        })}
+        className={cl(
+          className,
+          "navds-detail",
+          typoClassNames({
+            spacing,
+            truncate,
+            weight,
+            align,
+            visuallyHidden,
+            textColor,
+            uppercase,
+          }),
+          {
+            "navds-detail--small": size === "small",
+          }
+        )}
       />
     )
   );

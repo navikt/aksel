@@ -2,10 +2,7 @@ import { Label } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  const lorem =
-    "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
-
-  return <Label size="small">{lorem}</Label>;
+  return <Label as="span">Dette er nå en span!</Label>;
 };
 
 export default withDsExample(Example);
@@ -16,5 +13,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 5,
 };
