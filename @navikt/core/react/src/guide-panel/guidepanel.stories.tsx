@@ -1,10 +1,12 @@
 import React from "react";
-import { BodyLong, GuidePanel } from "../index";
+import { BodyLong, GuidePanel, VStack } from "../index";
 import { Meta } from "@storybook/react";
+import { InformationIcon } from "@navikt/aksel-icons";
+
 export default {
   title: "ds-react/GuidePanel",
   component: GuidePanel,
-} as Meta;
+} satisfies Meta<typeof GuidePanel>;
 
 const panelText = `Sit sint eu dolore reprehenderit exercitation labore aute anim sit
 adipisicing proident. Tempor ipsum ea cupidatat qui esse do veniam
@@ -13,17 +15,15 @@ enim id.`;
 
 export const Default = {
   render: (props) => {
-    const newProps = props?.colorOverride
+    const style: React.CSSProperties = props?.colorOverride
       ? {
-          style: {
-            ["--ac-guide-panel-illustration-bg" as any]: "var(--a-purple-200)",
-            ["--ac-guide-panel-border" as any]: "var(--a-purple-400)",
-          },
+          "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
+          "--ac-guide-panel-border": "var(--a-purple-400)",
         }
       : {};
 
     return (
-      <GuidePanel {...newProps} poster={props?.poster}>
+      <GuidePanel style={style} poster={props?.poster}>
         {panelText}
       </GuidePanel>
     );
@@ -35,13 +35,34 @@ export const Default = {
   },
 };
 
-export const Poster = () => <GuidePanel poster>{panelText}</GuidePanel>;
+export const PosterVariants = {
+  render: () => (
+    <VStack gap="6" align="start">
+      <GuidePanel>
+        If you exclude the <code>poster</code> prop, you will get the poster
+        variant on mobile (&lt;480px) and the non-poster variant otherwise.
+      </GuidePanel>
+      <GuidePanel poster>
+        Use the <code>poster</code> prop to get the poster variant on all
+        viewports.
+      </GuidePanel>
+      <GuidePanel poster={false}>
+        Set <code>poster=false</code> to get the non-poster variant on all
+        viewports.
+      </GuidePanel>
+    </VStack>
+  ),
+
+  parameters: {
+    chromatic: { viewports: [479, 800] },
+  },
+};
 
 export const ColorOverride = () => (
   <GuidePanel
     style={{
-      ["--ac-guide-panel-illustration-bg" as any]: "var(--a-purple-200)",
-      ["--ac-guide-panel-border" as any]: "var(--a-purple-400)",
+      "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
+      "--ac-guide-panel-border": "var(--a-purple-400)",
     }}
   >
     {panelText}
@@ -62,4 +83,8 @@ export const Content = () => (
       laborum veniam enim. Nisi deserunt officia minim enim.
     </BodyLong>
   </GuidePanel>
+);
+
+export const CustomIllustration = () => (
+  <GuidePanel illustration={<InformationIcon />}>{panelText}</GuidePanel>
 );
