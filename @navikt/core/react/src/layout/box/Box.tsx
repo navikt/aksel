@@ -72,6 +72,33 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   shadow?: Shadows | { default?: Shadows; hover: Shadows };
 }
 
+/**
+ * Foundational Layout-primitive for generic encapsulation & styling.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/Box)
+ * @see 🏷️ {@link BoxProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+ *
+ * @example
+ * <Box padding="4">
+ *   <BodyShort>Hei</BodyShort>
+ * </Box>
+ *
+ * @example
+ * <Box padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}>
+ *   <BodyShort>Hei</BodyShort>
+ * </Box>
+ *
+ * @example
+ * <VStack gap="8">
+ *  <Box padding="4">
+ *   <BodyShort>Hei</BodyShort>
+ *  </Box>
+ *  <Box padding="4">
+ *    <BodyShort>Hei</BodyShort>
+ *  </Box>
+ * </VStack>
+ */
 export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
   (
     {
