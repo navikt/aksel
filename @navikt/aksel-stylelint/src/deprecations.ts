@@ -38,4 +38,17 @@ export const deprecations: DeprecatedList = [
     classes: ["navds-modal__content"],
     message: "Renamed to `.navds-modal__body` in v5.0.0",
   },
+  {
+    classes: ["navds-guide-panel--poster"],
+    message: "Use `.navds-guide-panel--poster-true` instead",
+  },
+  {
+    classes: [
+      "navds-guide",
+      "navds-guide__illustration",
+      "navds-guide__illustration--small",
+      "navds-guide__illustration--medium",
+    ],
+    message: "Use `.navds-guide-panel__guide` instead",
+  },
 ];
