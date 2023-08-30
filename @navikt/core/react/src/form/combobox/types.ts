@@ -98,6 +98,11 @@ export interface ComboboxProps
    */
   selectedOptions?: string[];
   /**
+   * Maximum number of selected options.
+   * If set, the remaining options will be disabled when the limit is reached.
+   */
+  maxSelectedOptions?: number;
+  /**
    * Set to "true" to enable inline autocomplete.
    *
    * @default false

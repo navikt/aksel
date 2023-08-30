@@ -171,7 +171,9 @@ export const MultiSelectWithExternalChips = (props) => {
         isMultiSelect
         value={props.controlled ? value : undefined}
         onChange={(event) =>
-          props.controlled ? setValue(event.currentTarget.value) : undefined
+          event && props.controlled
+            ? setValue(event.currentTarget.value)
+            : undefined
         }
         label="Komboboks"
         size="medium"
@@ -220,7 +222,7 @@ export function ComboboxWithNoHits(props) {
         label="Komboboks (uten søketreff)"
         options={props.options}
         value={value}
-        onChange={(event) => setValue(event.currentTarget.value)}
+        onChange={(event) => setValue(event?.currentTarget.value)}
         isListOpen={true}
       />
     </DemoContainer>
@@ -263,7 +265,7 @@ export const Controlled = (props) => {
         filteredOptions={filteredOptions}
         isMultiSelect
         options={props.options}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event) => setValue(event?.target.value)}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
         value={value}
@@ -314,6 +316,20 @@ export const ComboboxSizes = (props) => (
 
 ComboboxSizes.args = {
   options,
+};
+
+export const WithMaxFourChoices = (props) => {
+  const id = useId();
+  return (
+    <DemoContainer dataTheme={props.darkMode}>
+      <UNSAFE_Combobox
+        id={id}
+        label="Komboboks (uten søketreff)"
+        options={props.options}
+        maxSelectedOptions={4}
+      />
+    </DemoContainer>
+  );
 };
 
 export const WithError = {

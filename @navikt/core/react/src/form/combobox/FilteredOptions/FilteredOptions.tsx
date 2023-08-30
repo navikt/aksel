@@ -25,7 +25,7 @@ const FilteredOptions = () => {
     setFilteredOptionsIndex,
     toggleIsListOpen,
   } = useFilteredOptionsContext();
-  const { isMultiSelect, selectedOptions, toggleOption } =
+  const { isMultiSelect, selectedOptions, toggleOption, maxSelectedOptions } =
     useSelectedOptionsContext();
 
   return (
@@ -39,9 +39,20 @@ const FilteredOptions = () => {
       role="listbox"
       tabIndex={-1}
     >
+      {maxSelectedOptions != null &&
+        selectedOptions.length >= maxSelectedOptions && (
+          <li
+            className="navds-combobox__list-item__max-selected"
+            role="option"
+            aria-selected={false}
+            id={`${id}-max-selected`}
+          >
+            ({`${selectedOptions.length} av ${maxSelectedOptions} er valgt`})
+          </li>
+        )}
       {isLoading && (
         <li
-          className="navds-combobox__list-item--loading"
+          className="navds-combobox__list-item__loading"
           role="option"
           aria-selected={false}
           id={`${id}-is-loading`}
