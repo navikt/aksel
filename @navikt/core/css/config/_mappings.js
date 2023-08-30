@@ -45,6 +45,10 @@ const StyleMappings = {
       main: typoCss,
     },
     {
+      component: "Box",
+      main: "box.css",
+    },
+    {
       component: "Button",
       main: "button.css",
       dependencies: [typoCss, "loader.css"],

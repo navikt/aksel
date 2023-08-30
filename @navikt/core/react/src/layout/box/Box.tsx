@@ -159,6 +159,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       boxBackgroundHover = `var(--ac-box-background-hover, var(--__ac-box-background, ${undefined}))`;
     }
 
+    // TODO: DRY? (Don't repeat yourself)
     let boxBorderColor: string | undefined = undefined;
     let boxBorderColorHover: string | undefined = undefined;
     if (typeof borderColor === "object") {
