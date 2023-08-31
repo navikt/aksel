@@ -113,7 +113,7 @@ const LinkElement = ({ children }) => {
 
 const DesktopSidebar = () => (
   <div className="bg-surface-default p-4 pt-10">
-    <div className="pl-4">
+    <div className="pb-2 pl-4">
       <Heading size="medium" className="leading-heading-xlarge">
         Innhold
       </Heading>
