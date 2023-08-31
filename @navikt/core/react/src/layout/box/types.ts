@@ -4,9 +4,27 @@ import borderColors from "../../../../tokens/src/colors-border.json";
 import borderRadii from "../../../../tokens/src/border.json";
 import shadows from "../../../../tokens/src/shadow.json";
 
-export type BackgroundColors =
-  | keyof typeof bgColors.a
-  | keyof typeof surfaceColors.a;
-export type BorderColors = keyof typeof borderColors.a;
-export type BorderRadii = keyof typeof borderRadii.a.border.radius;
-export type Shadows = keyof typeof shadows.a.shadow;
+type BackgroundColors = keyof typeof bgColors.a | keyof typeof surfaceColors.a;
+type BorderColors = keyof typeof borderColors.a;
+type BorderRadii = keyof typeof borderRadii.a.border.radius;
+type Shadows = keyof typeof shadows.a.shadow;
+
+export type BackgroundSpecifier =
+  | BackgroundColors
+  | { default?: BackgroundColors; hover: BackgroundColors };
+
+export type BorderColorSpecifier =
+  | BorderColors
+  | { default?: BorderColors; hover: BorderColors };
+
+export type BorderRadiusSpecifier =
+  | BorderRadii
+  | {
+      default?: BorderRadii;
+      topLeft?: BorderRadii;
+      topRight?: BorderRadii;
+      bottomLeft?: BorderRadii;
+      bottomRight?: BorderRadii;
+    };
+
+export type ShadowSpecifier = Shadows | { default?: Shadows; hover: Shadows };

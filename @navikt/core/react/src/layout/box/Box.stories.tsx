@@ -3,7 +3,7 @@ import type { Meta } from "@storybook/react";
 import { BodyLong, Detail, Heading } from "../../typography";
 import { Box } from "./Box";
 import { HGrid, HStack, VStack } from "../..";
-import { BackgroundColors, BorderRadii } from "./types";
+import { BackgroundSpecifier, BorderRadiusSpecifier } from "./types";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 
 export default {
@@ -29,8 +29,8 @@ const Card = ({
   borderRadius = "xlarge",
   children,
 }: {
-  background?: BackgroundColors;
-  borderRadius?: BorderRadii;
+  background?: BackgroundSpecifier;
+  borderRadius?: BorderRadiusSpecifier;
   children: ReactNode;
 }) => (
   <Box
@@ -132,8 +132,7 @@ export const ThemingDemo = {
             background="surface-neutral-subtle"
             shadow="xsmall"
             padding="4"
-            borderRadius="xlarge"
-            borderRadiusEndStart="small"
+            borderRadius={{ default: "xlarge", bottomLeft: "small" }}
           >
             <VStack gap="2">
               <Detail>BOX • 01.01.21 14:00</Detail>
@@ -146,11 +145,60 @@ export const ThemingDemo = {
       );
     };
 
+    const PricePill = () => {
+      return (
+        <>
+          <style>
+            {`
+              .old-price {
+                text-decoration: line-through;
+              }
+            `}
+          </style>
+          <HStack>
+            <Box
+              background="surface-success-subtle"
+              shadow="xsmall"
+              padding="4"
+              borderRadius={{
+                default: "xlarge",
+                topLeft: "full",
+                bottomLeft: "full",
+              }}
+            >
+              <VStack align="center">
+                <Detail>Episk ny pris</Detail>
+                <Heading size="medium">889.99 kr</Heading>
+              </VStack>
+            </Box>
+            <Box
+              background="surface-danger-subtle"
+              shadow="xsmall"
+              padding="4"
+              borderRadius={{
+                default: "xlarge",
+                topRight: "full",
+                bottomRight: "full",
+              }}
+            >
+              <VStack align="center">
+                <Detail>Førpris</Detail>
+                <Heading className="old-price" size="medium">
+                  399.99 kr
+                </Heading>
+              </VStack>
+            </Box>
+          </HStack>
+        </>
+      );
+    };
+
     return (
       <VStack gap="8">
         <Card>Dette er et Card som bruker Box som base</Card>
         <LinkCard />
         <ChatBubble />
+        <PricePill />
       </VStack>
     );
   },

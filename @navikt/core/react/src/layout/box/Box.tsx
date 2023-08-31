@@ -7,35 +7,30 @@ import {
   getBorderRadius,
   getResponsivePropsPaddingForInlineOrBlock,
 } from "../utilities/css";
-import { BackgroundColors, BorderColors, BorderRadii, Shadows } from "./types";
+import {
+  BorderRadiusSpecifier,
+  BorderColorSpecifier,
+  BackgroundSpecifier,
+  ShadowSpecifier,
+} from "./types";
 
 type Spacing = ResponsiveProp<SpacingScale>;
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   /** Background color */
-  background?:
-    | BackgroundColors
-    | { default?: BackgroundColors; hover: BackgroundColors };
+  background?: BackgroundSpecifier;
   /** Border color */
-  borderColor?: BorderColors | { default?: BorderColors; hover: BorderColors };
+  borderColor?: BorderColorSpecifier;
   /** Border radius */
-  borderRadius?: BorderRadii;
-  /** Vertical end horizontal start border radius */
-  borderRadiusEndStart?: BorderRadii;
-  /** Vertical end horizontal end border radius */
-  borderRadiusEndEnd?: BorderRadii;
-  /** Vertical start horizontal start border radius */
-  borderRadiusStartStart?: BorderRadii;
-  /** Vertical start horizontal end border radius */
-  borderRadiusStartEnd?: BorderRadii;
+  borderRadius?: BorderRadiusSpecifier;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
    * @example
    * padding='4'
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   padding?: Spacing;
-  // TODO
+  /** Horizontal spacing around children. Accepts  */
   paddingInline?: Spacing;
   paddingBlock?: Spacing;
   /** Vertical start spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
@@ -63,7 +58,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   paddingInlineEnd?: Spacing;
   /** Shadow on box */
-  shadow?: Shadows | { default?: Shadows; hover: Shadows };
+  shadow?: ShadowSpecifier;
 }
 
 /**
@@ -175,13 +170,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       "--__ac-box-background-hover": boxBackgroundHover,
       "--__ac-box-border-color": boxBorderColor,
       "--__ac-box-border-color-hover": boxBorderColorHover,
-      "--__ac-box-border-radius": getBorderRadius({
-        borderRadius,
-        borderRadiusStartStart,
-        borderRadiusStartEnd,
-        borderRadiusEndStart,
-        borderRadiusEndEnd,
-      }),
+      "--__ac-box-border-radius": getBorderRadius(borderRadius),
       ...getResponsivePropsPaddingForInlineOrBlock("box", "inline", {
         padding,
         paddingInline,
