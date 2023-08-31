@@ -4,6 +4,7 @@ const componentDir = "dist/component";
 
 const typoCss = "typography.css";
 const formCss = "form.css";
+const primitivesCss = "primitives.css";
 const componentsCss = "components.css";
 
 const StyleMappings = {
@@ -101,7 +102,7 @@ const StyleMappings = {
     },
     {
       component: "HGrid",
-      main: "hgrid.css",
+      main: primitivesCss,
     },
     { component: "Ingress", main: typoCss },
     {
@@ -140,15 +141,23 @@ const StyleMappings = {
     { component: "Stepper", main: "stepper.css", dependencies: [typoCss] },
     {
       component: "HStack",
-      main: "stack.css",
+      main: primitivesCss,
     },
     {
       component: "VStack",
-      main: "stack.css",
+      main: primitivesCss,
     },
     {
       component: "Spacer",
-      main: "stack.css",
+      main: primitivesCss,
+    },
+    {
+      component: "Show",
+      main: primitivesCss,
+    },
+    {
+      component: "Hide",
+      main: primitivesCss,
     },
     { component: "Switch", main: formCss, dependencies: [typoCss] },
     { component: "Table", main: "table.css", dependencies: [typoCss] },
@@ -184,6 +193,7 @@ module.exports = {
   StyleMappings,
   typoCss,
   formCss,
+  primitivesCss,
   componentsCss,
   rootDir,
   globalDir,
