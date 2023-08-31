@@ -39,16 +39,15 @@ export const deprecations: DeprecatedList = [
     message: "Renamed to `.navds-modal__body` in v5.0.0",
   },
   {
-    classes: ["navds-guide-panel--poster"],
-    message: "Use `.navds-guide-panel--poster-true` instead",
+    classes: ["navds-guide__illustration"],
+    message: "Use `.navds-guide` instead",
   },
   {
     classes: [
-      "navds-guide",
-      "navds-guide__illustration",
       "navds-guide__illustration--small",
       "navds-guide__illustration--medium",
     ],
-    message: "Use `.navds-guide-panel__guide` instead",
+    message:
+      "There is no 1:1 replacement for this, the size will depend on the 'poster' prop and the viewport width",
   },
 ];

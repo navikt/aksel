@@ -38,13 +38,13 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
     <div
       {...rest}
       ref={ref}
-      className={cl(
-        "navds-guide-panel",
-        className,
-        `navds-guide-panel--poster-${poster}`
-      )}
+      className={cl("navds-guide-panel", className, {
+        "navds-guide-panel--poster": poster === true,
+        "navds-guide-panel--not-poster": poster === false,
+        "navds-guide-panel--responsive-poster": poster === undefined,
+      })}
     >
-      <div className="navds-guide-panel__guide">
+      <div className="navds-guide">
         {illustration ?? <DefaultIllustration />}
       </div>
       <div className="navds-guide-panel__content">{children}</div>
