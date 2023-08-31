@@ -14,12 +14,12 @@ cupidatat. Excepteur irure reprehenderit esse tempor nisi duis qui ea
 enim id.`;
 
 export const Default = {
-  render: (props) => {
-    const style: React.CSSProperties = props?.colorOverride
-      ? {
+  render: (props: { poster: boolean; colorOverride: boolean }) => {
+    const style = props.colorOverride
+      ? ({
           "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
           "--ac-guide-panel-border": "var(--a-purple-400)",
-        }
+        } as React.CSSProperties)
       : {};
 
     return (
