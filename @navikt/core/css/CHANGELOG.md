@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.3.0
+
+### Minor Changes
+
+- Typography: Oppdatert med typo-klasser for `textColor`, `weight`, `align`, `visuallyHidden` og `truncated`. ([#2211](https://github.com/navikt/aksel/pull/2211))
+
 ## 5.2.1
 
 ### Patch Changes
