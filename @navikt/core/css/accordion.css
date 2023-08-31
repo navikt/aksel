@@ -1,3 +1,7 @@
+.navds-accordion {
+  --__ac-accordion-header-shadow-color: var(--ac-accordion-header-border, var(--a-border-divider));
+}
+
 .navds-accordion__item:focus-within {
   position: relative;
 }
@@ -6,7 +10,6 @@
  * Header *
  *************************/
 .navds-accordion__header {
-  --__ac-accordion-header-shadow-color: var(--ac-accordion-header-border, var(--a-border-divider));
   --__ac-accordion-header-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent),
     inset 0 2px 0 0 var(--__ac-accordion-header-shadow-color);
 
