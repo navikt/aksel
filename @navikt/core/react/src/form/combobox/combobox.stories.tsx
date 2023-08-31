@@ -170,8 +170,8 @@ export const MultiSelectWithExternalChips = (props) => {
         isListOpen={props.isListOpen}
         isMultiSelect
         value={props.controlled ? value : undefined}
-        onChange={(event) =>
-          props.controlled ? setValue(event.currentTarget.value) : undefined
+        onChange={(event, value) =>
+          props.controlled ? setValue(value || "") : undefined
         }
         label="Komboboks"
         size="medium"
@@ -220,7 +220,7 @@ export function ComboboxWithNoHits(props) {
         label="Komboboks (uten søketreff)"
         options={props.options}
         value={value}
-        onChange={(event) => setValue(event.currentTarget.value)}
+        onChange={(event) => setValue(event?.currentTarget.value)}
         isListOpen={true}
       />
     </DemoContainer>
@@ -263,7 +263,7 @@ export const Controlled = (props) => {
         filteredOptions={filteredOptions}
         isMultiSelect
         options={props.options}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event) => setValue(event?.target.value || "")}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
         value={value}

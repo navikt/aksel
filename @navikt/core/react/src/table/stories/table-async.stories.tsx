@@ -105,7 +105,8 @@ export const Async = () => {
           sort={sort}
           onSortChange={(sortKey) =>
             setSort(
-              sort?.orderBy === sortKey && sort.direction === "descending"
+              !sortKey ||
+                (sort?.orderBy === sortKey && sort.direction === "descending")
                 ? undefined
                 : {
                     orderBy: sortKey,

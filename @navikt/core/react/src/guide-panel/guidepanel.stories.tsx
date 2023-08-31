@@ -16,8 +16,8 @@ export const Default = {
     const newProps = props?.colorOverride
       ? {
           style: {
-            ["--ac-guide-panel-illustration-bg" as any]: "var(--a-purple-200)",
-            ["--ac-guide-panel-border" as any]: "var(--a-purple-400)",
+            "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
+            "--ac-guide-panel-border": "var(--a-purple-400)",
           },
         }
       : {};

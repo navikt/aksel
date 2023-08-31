@@ -163,13 +163,11 @@ export const Links = () => {
 const AlertWithCloseButton = ({ children }: { children?: React.ReactNode }) => {
   let [show, setShow] = React.useState(true);
 
-  return (
-    show && (
-      <Alert variant="success" closeButton onClose={() => setShow(false)}>
-        {children || "Content"}
-      </Alert>
-    )
-  );
+  return show ? (
+    <Alert variant="success" closeButton onClose={() => setShow(false)}>
+      {children || "Content"}
+    </Alert>
+  ) : null;
 };
 
 export const WithCloseButton: Story = {
