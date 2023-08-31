@@ -9,16 +9,10 @@ import {
 } from "../utilities/css";
 import { BackgroundColors, BorderColors, BorderRadii, Shadows } from "./types";
 
-type Element = "div" | "span" | "section" | "legend" | "ul" | "li";
-
 type Spacing = ResponsiveProp<SpacingScale>;
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
-  /** HTML Element type
-   * @default 'div'
-   */
-  as?: Element;
   /** Background color */
   background?:
     | BackgroundColors
@@ -139,8 +133,8 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       boxShadow = `var(--a-shadow-${shadow})`;
       boxShadowHover = `var(--__ac-box-shadow, ${undefined})`;
     } else {
-      boxShadow = `var(--ac-box-shadow, ${undefined})`;
-      boxShadowHover = `var(--ac-box-shadow-hover, var(--__ac-box-shadow, ${undefined}))`;
+      boxShadow = undefined;
+      boxShadowHover = `var(--__ac-box-shadow, ${undefined})`;
     }
 
     // TODO: DRY? (Don't repeat yourself)
@@ -155,8 +149,8 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       boxBackground = `var(--a-${background})`;
       boxBackgroundHover = `var(--__ac-box-background, ${undefined})`;
     } else {
-      boxBackground = `var(--ac-box-background, ${undefined})`;
-      boxBackgroundHover = `var(--ac-box-background-hover, var(--__ac-box-background, ${undefined}))`;
+      boxBackground = undefined;
+      boxBackgroundHover = `var(--__ac-box-background, ${undefined})`;
     }
 
     // TODO: DRY? (Don't repeat yourself)
@@ -171,11 +165,12 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       boxBorderColor = `var(--a-${borderColor})`;
       boxBorderColorHover = `var(--__ac-box-border-color, ${undefined})`;
     } else {
-      boxBorderColor = `var(--ac-box-border-color, transparent)`;
-      boxBorderColorHover = `var(--ac-box-border-color-hover, var(--__ac-box-border-color, transparent))`;
+      boxBorderColor = "transparent";
+      boxBorderColorHover = `var(--__ac-box-border-color, transparent)`;
     }
 
     const style = {
+      ..._style,
       "--__ac-box-background": boxBackground,
       "--__ac-box-background-hover": boxBackgroundHover,
       "--__ac-box-border-color": boxBorderColor,

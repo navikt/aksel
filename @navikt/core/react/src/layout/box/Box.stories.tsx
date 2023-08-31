@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import type { Meta } from "@storybook/react";
-import { BodyLong, BodyShort, Heading } from "../../typography";
+import { BodyLong, Detail, Heading } from "../../typography";
 import { Box } from "./Box";
 import { HGrid, HStack, VStack } from "../..";
 import { BackgroundColors, BorderRadii } from "./types";
@@ -80,8 +80,11 @@ export const ThemingDemo = {
       return (
         <>
           <style>
-            {/** TODO complex / nested CSS selectors... a better way?... more props? */}
             {`
+            .link-card {
+              color: var(--navds-color-text-primary);
+              text-decoration: none;
+            }
             .link-card:hover .navds-heading {
               color: var(--a-text-action);
               text-decoration: underline;
@@ -98,6 +101,8 @@ export const ThemingDemo = {
           `}
           </style>
           <Box
+            as="a"
+            href="#"
             className="link-card"
             borderRadius="small"
             borderColor={{ default: "border-default", hover: "border-action" }}
@@ -123,18 +128,7 @@ export const ThemingDemo = {
     const ChatBubble = () => {
       return (
         <>
-          <style>
-            {`
-            .chat-bubble {
-              color: var(--a-text-default);
-            }
-            .chat-bubble__title {
-              font-size: 14px;
-            }
-          `}
-          </style>
           <Box
-            className="chat-bubble"
             background="surface-neutral-subtle"
             shadow="xsmall"
             padding="4"
@@ -142,9 +136,7 @@ export const ThemingDemo = {
             borderRadiusEndStart="small"
           >
             <VStack gap="2">
-              <BodyShort className="chat-bubble__title">
-                BOX • 01.01.21 14:00
-              </BodyShort>
+              <Detail>BOX • 01.01.21 14:00</Detail>
               <BodyLong>
                 Hei! Dette er en chatbobble som bruker Box som base!
               </BodyLong>
@@ -159,35 +151,6 @@ export const ThemingDemo = {
         <Card>Dette er et Card som bruker Box som base</Card>
         <LinkCard />
         <ChatBubble />
-      </VStack>
-    );
-  },
-};
-
-export const OverridingAvTokens = {
-  render: () => {
-    const LinkCard = () => {
-      return (
-        <div
-          /** TODO do we actually want this? */
-          style={
-            {
-              "--ac-box-background": "var(--a-surface-success-subtle)",
-              "--ac-box-background-hover": "var(--a-surface-success-moderate)",
-            } as React.CSSProperties
-          }
-        >
-          <Card borderRadius="small">
-            <h3>Overriding av tokens til Card (som bruker Box som base)</h3>
-          </Card>
-        </div>
-      );
-    };
-
-    return (
-      <VStack gap="8">
-        <Card>Dette er et Card som bruker Box som base</Card>
-        <LinkCard />
       </VStack>
     );
   },
