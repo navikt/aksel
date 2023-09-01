@@ -3,8 +3,7 @@
   "compilerOptions": {
     "outDir": "./cjs",
     "module": "commonjs",
-    "noImplicitAny": false,
-    "resolveJsonModule": true
+    "noImplicitAny": false
   },
   "include": ["./src"]
 }
