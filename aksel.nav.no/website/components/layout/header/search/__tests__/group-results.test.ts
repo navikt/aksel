@@ -1,7 +1,7 @@
 import { SearchResultsT } from "@/types";
 import { createSearchResult } from "../utils";
 
-describe.skip("createSearchResult", () => {
+describe("createSearchResult", () => {
   let result;
   let rawResults;
 
