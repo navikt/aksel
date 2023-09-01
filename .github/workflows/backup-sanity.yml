@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 0 # Required to retrieve git history
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 19
 
       - name: Restore cache
         uses: actions/cache@v3
