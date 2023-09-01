@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { Meta, StoryObj } from "@storybook/react";
 import React, { useId, useState } from "react";
 import { useDatepicker, useRangeDatepicker } from "..";
 import { Button } from "../..";
-import DatePicker from "./DatePicker";
+import DatePicker, { DatePickerProps } from "./DatePicker";
 
 const disabledDays = [
   new Date("Oct 10 2022"),
@@ -12,20 +13,29 @@ const disabledDays = [
 export default {
   title: "ds-react/Datepicker",
   component: DatePicker,
+} satisfies Meta<typeof DatePicker>;
+
+type DefaultStoryProps = DatePickerProps & {
+  size: "medium" | "small";
+  openOnFocus: boolean;
+  inputfield: boolean;
+  standalone: boolean;
 };
 
-export const Default = {
+export const Default: StoryObj<DefaultStoryProps> = {
   render: (props) => {
     const [open, setOpen] = useState(false);
 
     const rangeCtx = useRangeDatepicker({
       fromDate: new Date("Aug 23 2020"),
       toDate: new Date("Aug 23 2023"),
+      openOnFocus: props.openOnFocus,
     });
 
     const singleCtx = useDatepicker({
       fromDate: new Date("Aug 23 2020"),
       toDate: new Date("Aug 23 2023"),
+      openOnFocus: props.openOnFocus,
     });
 
     const newProps = {
@@ -44,9 +54,7 @@ export const Default = {
     return (
       <div>
         <Comp
-          locale={props?.locale}
-          dropdownCaption={props?.dropdownCaption}
-          disableWeekends={props?.disableWeekends}
+          dropdownCaption={props.dropdownCaption}
           showWeekNumber={props.showWeekNumber}
           mode={props.mode}
           {...(props.mode === "single"
@@ -55,6 +63,8 @@ export const Default = {
             ? rangeCtx.datepickerProps
             : {})}
           {...newProps}
+          locale={props.locale}
+          disableWeekends={props.disableWeekends}
         >
           {!props.standalone && (
             <>
@@ -99,29 +109,23 @@ export const Default = {
     dropdownCaption: false,
     disableWeekends: false,
     showWeekNumber: false,
+    mode: "single",
+    openOnFocus: true,
     inputfield: true,
     standalone: false,
-    openOnFocus: true,
-    mode: "single",
   },
   argTypes: {
     size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
+      options: ["medium", "small"],
+      control: { type: "radio" },
     },
     locale: {
-      control: {
-        type: "radio",
-        options: ["nb", "nn", "en"],
-      },
+      options: ["nb", "nn", "en"],
+      control: { type: "radio" },
     },
     mode: {
-      control: {
-        type: "radio",
-        options: ["single", "multiple", "range"],
-      },
+      options: ["single", "multiple", "range"],
+      control: { type: "radio" },
     },
   },
 };
