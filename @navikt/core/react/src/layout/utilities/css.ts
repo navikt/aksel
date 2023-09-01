@@ -266,8 +266,6 @@ export const getBorderRadius = (
     ? `var(--a-border-radius-${radius.default})`
     : "0";
 
-  console.log({ radius });
-
   let topLeft = radiusDefault,
     topRight = radiusDefault,
     bottomLeft = radiusDefault,
@@ -286,6 +284,5 @@ export const getBorderRadius = (
     ? `var(--a-border-radius-${radius.bottomRight})`
     : bottomRight;
 
-  console.log(topLeft, topRight, bottomLeft, bottomRight);
   return `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
 };
