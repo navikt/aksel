@@ -86,13 +86,6 @@ type blockT<T extends string> =
 
 type BlockString = ResponsiveLogicalTuple<SpacingScale>;
 
-/** desired output?
-  [
-    ['--__ac-box-padding-inline-xs', `var(...) var(...)`], 
-    ['--__ac-box-padding-block-xs'], `var(...) var(...)`],
-    ...
-  ]
-  */
 function createStyleEntries(
   blockString: BlockString,
   componentName: string,
@@ -246,13 +239,6 @@ export function getResponsiveValue<T = string>(
     ])
   );
 }
-
-// type LeftsAndRights<T extends string> =
-//   | `${T}`
-//   | `${T}LeftLeft`
-//   | `${T}LeftRight`
-//   | `${T}RightLeft`
-//   | `${T}RightRight`;
 
 export const getBorderRadius = (
   radius: BorderRadiusSpecifier | undefined
