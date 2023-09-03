@@ -28,5 +28,5 @@ export const List = forwardRef(({ className, children, ...rest }, ref) => (
 )) as ListType;
 
 List.Item = ListItem;
-
+List.displayName = "Dropdown.Menu.List";
 export default List;
