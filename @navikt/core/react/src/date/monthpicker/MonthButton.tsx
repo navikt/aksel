@@ -1,8 +1,7 @@
 import cl from "clsx";
-import compareAsc from "date-fns/compareAsc";
-import compareDesc from "date-fns/compareDesc";
 import format from "date-fns/format";
 import isSameMonth from "date-fns/isSameMonth";
+import isSameYear from  "date-fns/isSameYear";
 import setYear from "date-fns/setYear";
 import React, { useEffect, useRef } from "react";
 import { useDayPicker } from "react-day-picker";
@@ -20,13 +19,12 @@ interface MonthType {
 
 const disableMonth = (month: Date, fromDate?: Date, toDate?: Date) => {
   if (fromDate && toDate) {
-    return (
-      compareAsc(month, fromDate) === -1 || compareDesc(month, toDate) === -1
-    );
+    return (isSameMonth(month, fromDate) && isSameYear(month, fromDate))
+    || (isSameMonth(month, toDate) && isSameYear(month, toDate))
   } else if (fromDate) {
-    return compareAsc(month, fromDate) === -1;
+    return isSameMonth(month, fromDate) && isSameYear(month, fromDate)
   } else if (toDate) {
-    return compareDesc(month, toDate) === -1;
+    return isSameMonth(month, toDate) && isSameYear(month, toDate)
   }
   return false;
 };

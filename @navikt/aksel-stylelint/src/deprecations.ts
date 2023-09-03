@@ -38,4 +38,16 @@ export const deprecations: DeprecatedList = [
     classes: ["navds-modal__content"],
     message: "Renamed to `.navds-modal__body` in v5.0.0",
   },
+  {
+    classes: ["navds-guide__illustration"],
+    message: "Use `.navds-guide` instead",
+  },
+  {
+    classes: [
+      "navds-guide__illustration--small",
+      "navds-guide__illustration--medium",
+    ],
+    message:
+      "There is no 1:1 replacement for this, the size will depend on the 'poster' prop and the viewport width",
+  },
 ];
