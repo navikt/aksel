@@ -1,5 +1,18 @@
 # @navikt/ds-react
 
+## 5.3.1
+
+### Patch Changes
+
+- Fix bug in monthpicker, only compare year and month for equality on date object ([#2231](https://github.com/navikt/aksel/pull/2231))
+
+- :lipstick: GuidePanel: justert design ([#2227](https://github.com/navikt/aksel/pull/2227))
+
+- :bug: DatePicker: Riktig skriftstørrelse på small input ([#2232](https://github.com/navikt/aksel/pull/2232))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.3.1
+
 ## 5.3.0
 
 ### Minor Changes
