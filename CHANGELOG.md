@@ -1,5 +1,21 @@
 # Changelog
 
+## 5.3.1
+
+### @navikt/ds-react
+
+- Fix bug in monthpicker, only compare year and month for equality on date object ([#2231](https://github.com/navikt/aksel/pull/2231))
+
+- :lipstick: GuidePanel: justert design ([#2227](https://github.com/navikt/aksel/pull/2227))
+
+- :bug: DatePicker: Riktig skriftstørrelse på small input ([#2232](https://github.com/navikt/aksel/pull/2232))
+
+### @navikt/ds-css
+
+- :bug: fix missing accordion bottom box-shadow on last element (when opened) ([#2229](https://github.com/navikt/aksel/pull/2229))
+
+- :lipstick: GuidePanel: justert design ([#2227](https://github.com/navikt/aksel/pull/2227))
+
 ## 5.3.0
 
 ### @navikt/ds-react

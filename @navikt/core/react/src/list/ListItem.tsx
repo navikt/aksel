@@ -69,4 +69,5 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   }
 );
 
+ListItem.displayName = "List.Item";
 export default ListItem;

@@ -8,18 +8,18 @@ const Example = () => {
     <VStack gap="4">
       <div>
         <Descriptor>Default</Descriptor>
-        <Detail color="default">{lorem}</Detail>
+        <Detail textColor="default">{lorem}</Detail>
       </div>
       <Divider />
       <div>
         <Descriptor>Subtle</Descriptor>
-        <Detail color="subtle">{lorem}</Detail>
+        <Detail textColor="subtle">{lorem}</Detail>
       </div>
     </VStack>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {
