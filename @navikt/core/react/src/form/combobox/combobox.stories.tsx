@@ -1,26 +1,18 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Meta } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState, useId, useMemo } from "react";
 import { userEvent, within } from "@storybook/testing-library";
-import { Chips, UNSAFE_Combobox, TextField } from "../../index";
+import { Chips, UNSAFE_Combobox, ComboboxProps, TextField } from "../../index";
 import { expect, jest } from "@storybook/jest";
 
 export default {
   title: "ds-react/Combobox",
   component: UNSAFE_Combobox,
-  argTypes: {
-    isListOpen: {
-      control: {
-        type: "boolean",
-      },
-    },
-    isLoading: {
-      control: {
-        type: "boolean",
-      },
-    },
-  },
-} as Meta;
+  decorators: [(story) => <div style={{ width: "300px" }}>{story()}</div>],
+} satisfies Meta<typeof UNSAFE_Combobox>;
+
+type StoryObject = StoryObj<typeof UNSAFE_Combobox>;
+type StoryFunction = StoryFn<typeof UNSAFE_Combobox>;
 
 const options = [
   "banana",
@@ -38,55 +30,39 @@ const options = [
   "grape fruit",
 ];
 
-const initialSelectedOptions = ["passion fruit", "grape fruit"];
-
-const DemoContainer = ({
-  dataTheme,
-  children,
-}: {
-  children: any;
-  dataTheme: "dark" | "light";
-}) => (
-  <div data-theme={dataTheme} style={{ width: "300px" }}>
-    {children}
-  </div>
-);
-
-export const Default = (props) => {
+export const Default: StoryFunction = (props) => {
   const id = useId();
-  return (
-    <DemoContainer dataTheme={props.darkMode}>
-      <UNSAFE_Combobox
-        options={props.options}
-        label="Hva er dine favorittfrukter?"
-        /* everything under here is optional? */
-        shouldAutocomplete={props.shouldAutoComplete}
-        size="medium"
-        id={id}
-      />
-    </DemoContainer>
-  );
+  return <UNSAFE_Combobox {...props} id={id} />;
 };
-
 Default.args = {
   options,
-  shouldAutoComplete: true,
+  label: "Hva er dine favorittfrukter?",
+  shouldAutocomplete: true,
+  isLoading: false,
+};
+Default.argTypes = {
+  isListOpen: {
+    control: { type: "boolean" },
+  },
+  size: {
+    options: ["medium", "small"],
+    defaultValue: "medium",
+    control: { type: "radio" },
+  },
 };
 
-export function MultiSelect(props) {
+export const MultiSelect: StoryFunction = (props) => {
   const id = useId();
   return (
-    <DemoContainer dataTheme={props.darkMode}>
-      <UNSAFE_Combobox
-        id={id}
-        label="Komboboks - velg flere"
-        options={props.options}
-        isMultiSelect={props.isMultiSelect}
-        size={props.size}
-      />
-    </DemoContainer>
+    <UNSAFE_Combobox
+      id={id}
+      label="Komboboks - velg flere"
+      options={props.options}
+      isMultiSelect={props.isMultiSelect}
+      size={props.size}
+    />
   );
-}
+};
 
 MultiSelect.args = {
   options,
@@ -94,41 +70,37 @@ MultiSelect.args = {
   size: "medium",
 };
 
-export function WithAddNewOptions(props) {
+export const WithAddNewOptions: StoryFunction = (props) => {
   const id = useId();
   return (
-    <DemoContainer dataTheme={props.darkMode}>
-      <UNSAFE_Combobox
-        id={id}
-        label="Komboboks med mulighet for å legge til nye verdier"
-        options={props.options}
-        allowNewValues={props.allowNewValues}
-        shouldAutocomplete={props.shouldAutoComplete}
-      />
-    </DemoContainer>
+    <UNSAFE_Combobox
+      id={id}
+      label="Komboboks med mulighet for å legge til nye verdier"
+      options={props.options}
+      allowNewValues={props.allowNewValues}
+      shouldAutocomplete={props.shouldAutocomplete}
+    />
   );
-}
+};
 
 WithAddNewOptions.args = {
   options,
   allowNewValues: true,
-  shouldAutoComplete: true,
+  shouldAutocomplete: true,
 };
 
-export function MultiSelectWithAddNewOptions(props) {
+export const MultiSelectWithAddNewOptions: StoryFunction = (props) => {
   const id = useId();
   return (
-    <DemoContainer dataTheme={props.darkMode}>
-      <UNSAFE_Combobox
-        id={id}
-        isMultiSelect={props.isMultiSelect}
-        label="Multiselect komboboks med mulighet for å legge til nye verdier"
-        options={props.options}
-        allowNewValues={props.allowNewValues}
-      />
-    </DemoContainer>
+    <UNSAFE_Combobox
+      id={id}
+      isMultiSelect={props.isMultiSelect}
+      label="Multiselect komboboks med mulighet for å legge til nye verdier"
+      options={props.options}
+      allowNewValues={props.allowNewValues}
+    />
   );
-}
+};
 
 MultiSelectWithAddNewOptions.args = {
   allowNewValues: true,
@@ -137,19 +109,20 @@ MultiSelectWithAddNewOptions.args = {
   shouldAutocomplete: false,
 };
 
-export const MultiSelectWithExternalChips = (props) => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    props.selectedOptions
-  );
+export const MultiSelectWithExternalChips: StoryFn<{
+  controlled: boolean;
+  options: ComboboxProps["options"];
+}> = (props) => {
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [value, setValue] = useState("");
   const id = useId();
 
-  const toggleSelected = (option) =>
+  const toggleSelected = (option: string) =>
     selectedOptions.includes(option)
       ? setSelectedOptions(selectedOptions.filter((opt) => opt !== option))
       : setSelectedOptions([...selectedOptions, option]);
   return (
-    <DemoContainer dataTheme={props.darkMode}>
+    <>
       {selectedOptions && (
         <Chips>
           {selectedOptions.map((option) => (
@@ -164,10 +137,9 @@ export const MultiSelectWithExternalChips = (props) => {
         </Chips>
       )}
       <UNSAFE_Combobox
-        options={options}
+        options={props.options}
         selectedOptions={selectedOptions}
-        onToggleSelected={(option: string) => toggleSelected(option)}
-        isListOpen={props.isListOpen}
+        onToggleSelected={(option) => toggleSelected(option)}
         isMultiSelect
         value={props.controlled ? value : undefined}
         onChange={(event, value) =>
@@ -175,73 +147,73 @@ export const MultiSelectWithExternalChips = (props) => {
         }
         label="Komboboks"
         size="medium"
-        error={props.error && "error here"}
         id={id}
         shouldShowSelectedOptions={false}
       />
-    </DemoContainer>
+    </>
   );
 };
 
 MultiSelectWithExternalChips.args = {
   controlled: false,
   options,
-  selectedOptions: [],
 };
 
-export function Loading(props) {
+export const Loading: StoryFunction = (props) => {
   const id = useId();
   return (
-    <DemoContainer dataTheme={props.darkMode}>
-      <UNSAFE_Combobox
-        id={id}
-        label="Komboboks (laster)"
-        options={[]}
-        selectedOptions={[]}
-        isListOpen={props.isListOpen}
-        isLoading={props.isLoading}
-      />
-    </DemoContainer>
+    <UNSAFE_Combobox
+      id={id}
+      label="Komboboks (laster)"
+      options={[]}
+      selectedOptions={[]}
+      isListOpen={props.isListOpen}
+      isLoading={props.isLoading}
+    />
   );
-}
+};
 
 Loading.args = {
   isLoading: true,
   isListOpen: true,
 };
 
-export function ComboboxWithNoHits(props) {
+export const ComboboxWithNoHits: StoryFunction = (props) => {
   const id = useId();
   const [value, setValue] = useState(props.value);
   return (
-    <DemoContainer dataTheme={props.darkMode}>
-      <UNSAFE_Combobox
-        id={id}
-        label="Komboboks (uten søketreff)"
-        options={props.options}
-        value={value}
-        onChange={(event) => setValue(event?.currentTarget.value)}
-        isListOpen={true}
-      />
-    </DemoContainer>
+    <UNSAFE_Combobox
+      id={id}
+      label="Komboboks (uten søketreff)"
+      options={props.options}
+      value={value}
+      onChange={(event) => setValue(event?.currentTarget.value)}
+      isListOpen={true}
+    />
   );
-}
+};
 
 ComboboxWithNoHits.args = {
   options,
   value: "Orange",
 };
 
-export const Controlled = (props) => {
+export const Controlled: StoryFn<{
+  value: string;
+  options: string[];
+  initialSelectedOptions: string[];
+}> = (props) => {
   const id = useId();
   const [value, setValue] = useState(props.value);
-  const [selectedOptions, setSelectedOptions] = useState(props.selectedOptions);
+  const [selectedOptions, setSelectedOptions] = useState(
+    props.initialSelectedOptions
+  );
   const filteredOptions = useMemo(
     () => props.options.filter((option) => option.includes(value)),
     [props.options, value]
   );
 
-  const onToggleSelected = (option, isSelected) => {
+  const onToggleSelected = (option: string, isSelected: boolean) => {
     if (isSelected) {
       setSelectedOptions([...selectedOptions, option]);
     } else {
@@ -250,7 +222,7 @@ export const Controlled = (props) => {
   };
 
   return (
-    <DemoContainer dataTheme={props.darkMode}>
+    <>
       <TextField
         label="Overstyr value"
         onChange={(event) => setValue(event.target.value)}
@@ -268,18 +240,18 @@ export const Controlled = (props) => {
         selectedOptions={selectedOptions}
         value={value}
       />
-    </DemoContainer>
+    </>
   );
 };
 
 Controlled.args = {
   value: "apple",
   options,
-  selectedOptions: initialSelectedOptions,
+  initialSelectedOptions: ["passion fruit", "grape fruit"],
 };
 
-export const ComboboxSizes = (props) => (
-  <DemoContainer dataTheme={props.darkMode}>
+export const ComboboxSizes = () => (
+  <>
     <UNSAFE_Combobox
       label="Hva er dine favorittfrukter?"
       description="Medium single-select"
@@ -309,36 +281,29 @@ export const ComboboxSizes = (props) => (
       size="small"
       allowNewValues
     />
-  </DemoContainer>
+  </>
 );
 
-ComboboxSizes.args = {
-  options,
-};
-
-export const WithError = {
+export const WithError: StoryObject = {
   args: {
     error: "Du må velge en favorittfrukt.",
-    isLoading: true,
   },
   render: (props) => {
     const [hasSelectedValue, setHasSelectedValue] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     return (
-      <DemoContainer dataTheme={props.darkMode}>
-        <UNSAFE_Combobox
-          filteredOptions={isLoading ? [] : undefined}
-          options={options}
-          label="Hva er dine favorittfrukter?"
-          error={!hasSelectedValue && props.error}
-          isLoading={isLoading}
-          onChange={() => {
-            setIsLoading(true);
-            setTimeout(() => setIsLoading(false), 2000);
-          }}
-          onToggleSelected={(_, isSelected) => setHasSelectedValue(isSelected)}
-        />
-      </DemoContainer>
+      <UNSAFE_Combobox
+        filteredOptions={isLoading ? [] : undefined}
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        error={!hasSelectedValue && props.error}
+        isLoading={isLoading}
+        onChange={() => {
+          setIsLoading(true);
+          setTimeout(() => setIsLoading(false), 2000);
+        }}
+        onToggleSelected={(_, isSelected) => setHasSelectedValue(isSelected)}
+      />
     );
   },
 };
@@ -347,15 +312,10 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export const CancelInputTest = {
-  render: (props) => {
+export const CancelInputTest: StoryObject = {
+  render: () => {
     return (
-      <DemoContainer dataTheme={props.darkMode}>
-        <UNSAFE_Combobox
-          options={options}
-          label="Hva er dine favorittfrukter?"
-        />
-      </DemoContainer>
+      <UNSAFE_Combobox options={options} label="Hva er dine favorittfrukter?" />
     );
   },
   play: async ({ canvasElement }) => {
@@ -378,16 +338,14 @@ export const CancelInputTest = {
   },
 };
 
-export const RemoveSelectedMultiSelectTest = {
-  render: (props) => {
+export const RemoveSelectedMultiSelectTest: StoryObject = {
+  render: () => {
     return (
-      <DemoContainer dataTheme={props.darkMode}>
-        <UNSAFE_Combobox
-          options={options}
-          label="Hva er dine favorittfrukter?"
-          isMultiSelect
-        />
-      </DemoContainer>
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        isMultiSelect
+      />
     );
   },
   play: async ({ canvasElement }) => {
@@ -436,16 +394,14 @@ export const RemoveSelectedMultiSelectTest = {
   },
 };
 
-export const AddWhenAddNewDisabledTest = {
-  render: (props) => {
+export const AddWhenAddNewDisabledTest: StoryObject = {
+  render: () => {
     return (
-      <DemoContainer dataTheme={props.darkMode}>
-        <UNSAFE_Combobox
-          options={options}
-          label="Hva er dine favorittfrukter?"
-          isMultiSelect
-        />
-      </DemoContainer>
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        isMultiSelect
+      />
     );
   },
   play: async ({ canvasElement }) => {
@@ -471,7 +427,11 @@ export const AddWhenAddNewDisabledTest = {
   },
 };
 
-export const TestThatCallbacksOnlyFireWhenExpected = {
+export const TestThatCallbacksOnlyFireWhenExpected: StoryObj<{
+  onChange: ReturnType<typeof jest.fn>;
+  onClear: ReturnType<typeof jest.fn>;
+  onToggleSelected: ReturnType<typeof jest.fn>;
+}> = {
   args: {
     onChange: jest.fn(),
     onClear: jest.fn(),
@@ -479,13 +439,11 @@ export const TestThatCallbacksOnlyFireWhenExpected = {
   },
   render: (props) => {
     return (
-      <DemoContainer dataTheme={props.darkMode}>
-        <UNSAFE_Combobox
-          options={options}
-          label="Hva er dine favorittfrukter?"
-          {...props}
-        />
-      </DemoContainer>
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        {...props}
+      />
     );
   },
   play: async ({ canvasElement, args }) => {
@@ -510,16 +468,10 @@ export const TestThatCallbacksOnlyFireWhenExpected = {
   },
 };
 
-export const TestHoverAndFocusSwitching = {
-  render: (props) => {
+export const TestHoverAndFocusSwitching: StoryObject = {
+  render: () => {
     return (
-      <DemoContainer dataTheme={props.darkMode}>
-        <UNSAFE_Combobox
-          options={options}
-          label="Hva er dine favorittfrukter?"
-          {...props}
-        />
-      </DemoContainer>
+      <UNSAFE_Combobox options={options} label="Hva er dine favorittfrukter?" />
     );
   },
   play: async ({ canvasElement }) => {

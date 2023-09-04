@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Alert } from ".";
+import { Alert, AlertProps } from ".";
 import { BodyLong, Heading as DsHeading, Link } from "..";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
@@ -14,7 +14,7 @@ export default meta;
 
 type Story = StoryObj<typeof Alert>;
 
-const variants: Array<"error" | "warning" | "info" | "success"> = [
+const variants: AlertProps["variant"][] = [
   "error",
   "warning",
   "info",
@@ -33,24 +33,17 @@ export const Default: Story = {
   },
   argTypes: {
     variant: {
-      control: {
-        type: "radio",
-      },
+      control: { type: "radio" },
       options: ["info", "error", "warning", "success"],
     },
     size: {
-      control: {
-        type: "radio",
-      },
+      control: { type: "radio" },
       options: ["medium", "small"],
-    },
-    closeButton: {
-      type: "boolean",
     },
   },
 };
 
-export const Small = {
+export const Small: Story = {
   render: (props) => {
     return (
       <div className="colgap">
@@ -69,13 +62,9 @@ export const Small = {
       </div>
     );
   },
+
   args: {
     closeButton: false,
-  },
-  argtypes: {
-    closeButton: {
-      type: "boolean",
-    },
   },
 };
 
