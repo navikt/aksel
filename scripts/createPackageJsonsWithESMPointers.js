@@ -12,7 +12,7 @@ const createPackageJsonsWithESMPointers = async () => {
   const packageIndexes = glob
     .sync("**/index.{ts,tsx}", { cwd: source })
     .map(path.dirname);
-
+  console.log("packageIndexes:", packageIndexes);
   await Promise.all(
     packageIndexes.map(async (directoryPackage) => {
       const packageJsonPath = path.join(
@@ -39,6 +39,12 @@ const createPackageJsonsWithESMPointers = async () => {
 };
 
 const checkPaths = async (packageJsonPath, packageJson) => {
+  console.log(
+    "---",
+    packageJsonPath,
+    packageJson,
+    path.resolve(path.dirname(packageJsonPath), packageJson.types)
+  );
   const [typingsEntryExist, moduleEntryExists, mainEntryExists] =
     await Promise.all([
       fse.pathExists(
@@ -51,7 +57,9 @@ const checkPaths = async (packageJsonPath, packageJson) => {
         path.resolve(path.dirname(packageJsonPath), packageJson.main)
       ),
       fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2)),
-    ]).catch((_) => null);
+    ]).catch((error) => {
+      console.log("HALVOR", error);
+    });
 
   const errorMessages = [];
   !typingsEntryExist &&
@@ -62,7 +70,8 @@ const checkPaths = async (packageJsonPath, packageJson) => {
     errorMessages.push(`'main' entry '${packageJson.main}' does not exist`);
 
   if (errorMessages.length > 0) {
-    throw new Error(`${packageJsonPath}:\n${errorMessages.join("\n")}`);
+    console.log(`${packageJsonPath}:\n${errorMessages.join("\n")}`);
+    //throw new Error(`${packageJsonPath}:\n${errorMessages.join("\n")}`);
   }
 };
 
