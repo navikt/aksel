@@ -118,58 +118,44 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     ref
   ) => {
     let boxShadow: string | undefined = undefined;
-    let boxShadowHover: string | undefined = undefined;
     if (typeof shadow === "object") {
       boxShadow = shadow.default
         ? `var(--a-shadow-${shadow.default})`
         : undefined;
-      boxShadowHover = `var(--a-shadow-${shadow.hover})`;
     } else if (typeof shadow === "string") {
       boxShadow = `var(--a-shadow-${shadow})`;
-      boxShadowHover = `var(--__ac-box-shadow, ${undefined})`;
     } else {
       boxShadow = undefined;
-      boxShadowHover = `var(--__ac-box-shadow, ${undefined})`;
     }
 
     // TODO: DRY? (Don't repeat yourself)
     let boxBackground: string | undefined = undefined;
-    let boxBackgroundHover: string | undefined = undefined;
     if (typeof background === "object") {
       boxBackground = background.default
         ? `var(--a-${background.default})`
         : undefined;
-      boxBackgroundHover = `var(--a-${background.hover})`;
     } else if (typeof background === "string") {
       boxBackground = `var(--a-${background})`;
-      boxBackgroundHover = `var(--__ac-box-background, ${undefined})`;
     } else {
       boxBackground = undefined;
-      boxBackgroundHover = `var(--__ac-box-background, ${undefined})`;
     }
 
     // TODO: DRY? (Don't repeat yourself)
     let boxBorderColor: string | undefined = undefined;
-    let boxBorderColorHover: string | undefined = undefined;
     if (typeof borderColor === "object") {
       boxBorderColor = borderColor.default
         ? `var(--a-${borderColor.default})`
         : "transparent";
-      boxBorderColorHover = `var(--a-${borderColor.hover})`;
     } else if (typeof borderColor === "string") {
       boxBorderColor = `var(--a-${borderColor})`;
-      boxBorderColorHover = `var(--__ac-box-border-color, ${undefined})`;
     } else {
       boxBorderColor = "transparent";
-      boxBorderColorHover = `var(--__ac-box-border-color, transparent)`;
     }
 
     const style = {
       ..._style,
       "--__ac-box-background": boxBackground,
-      "--__ac-box-background-hover": boxBackgroundHover,
       "--__ac-box-border-color": boxBorderColor,
-      "--__ac-box-border-color-hover": boxBorderColorHover,
       "--__ac-box-border-radius": getBorderRadius(borderRadius),
       ...getResponsivePropsPaddingForInlineOrBlock("box", "inline", {
         padding,
@@ -184,7 +170,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         paddingBlockEnd,
       }),
       "--__ac-box-shadow": boxShadow,
-      "--__ac-box-shadow-hover": boxShadowHover,
     } as React.CSSProperties;
 
     return (

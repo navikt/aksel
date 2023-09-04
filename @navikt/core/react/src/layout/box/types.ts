@@ -14,13 +14,9 @@ type BorderColors = any;
 type BorderRadii = any;
 type Shadows = any;
 
-export type BackgroundSpecifier =
-  | BackgroundColors
-  | { default?: BackgroundColors; hover: BackgroundColors };
+export type BackgroundSpecifier = BackgroundColors;
 
-export type BorderColorSpecifier =
-  | BorderColors
-  | { default?: BorderColors; hover: BorderColors };
+export type BorderColorSpecifier = BorderColors;
 
 export type BorderRadiusSpecifier =
   | BorderRadii
@@ -32,4 +28,4 @@ export type BorderRadiusSpecifier =
       bottomRight?: BorderRadii;
     };
 
-export type ShadowSpecifier = Shadows | { default?: Shadows; hover: Shadows };
+export type ShadowSpecifier = Shadows;

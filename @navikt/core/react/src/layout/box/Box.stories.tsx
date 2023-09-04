@@ -85,6 +85,10 @@ export const ThemingDemo = {
               color: var(--navds-color-text-primary);
               text-decoration: none;
             }
+            .link-card:hover {
+              border-color: var(--a-border-action);
+              box-shadow: var(--a-shadow-small);
+            }
             .link-card:hover .navds-heading {
               color: var(--a-text-action);
               text-decoration: underline;
@@ -105,10 +109,9 @@ export const ThemingDemo = {
             href="#"
             className="link-card"
             borderRadius="small"
-            borderColor={{ default: "border-default", hover: "border-action" }}
+            borderColor="border-default"
             padding="4"
             paddingInlineStart="4"
-            shadow={{ hover: "small" }}
             onClick={() => alert("Clicked!")}
           >
             <HStack gap="4" align="center">
