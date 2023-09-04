@@ -16,10 +16,10 @@ enim id.`;
 export const Default = {
   render: (props: { poster: boolean; colorOverride: boolean }) => {
     const style = props.colorOverride
-      ? ({
+      ? {
           "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
           "--ac-guide-panel-border": "var(--a-purple-400)",
-        } as React.CSSProperties)
+        }
       : {};
 
     return (
