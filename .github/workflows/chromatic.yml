@@ -15,6 +15,10 @@ jobs:
   visual_regression_test:
     name: "visual regression test (chromatic)"
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -54,7 +58,7 @@ jobs:
 
       - name: replace storybook url
         if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
-        uses: frabert/replace-string-action@v2.0
+        uses: frabert/replace-string-action@v2
         id: storybook_url
         with:
           pattern: "(iframe.html)"
@@ -70,7 +74,7 @@ jobs:
 
       - name: Find Comment
         if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
-        uses: peter-evans/find-comment@v1
+        uses: peter-evans/find-comment@v2
         id: fc
         with:
           issue-number: ${{ github.event.pull_request.number }}
@@ -79,7 +83,7 @@ jobs:
 
       - name: Create or update comment
         if: steps.chromatic_tests.outcome == 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@v3
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
@@ -91,7 +95,7 @@ jobs:
 
       - name: Create or update failed comment
         if: steps.chromatic_tests.outcome != 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@v3
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
