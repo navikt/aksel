@@ -26,14 +26,16 @@ const propList = (
   name: string
 ) =>
   src.map((prop) => {
+    const parseName = (name) => {
+      return `${name.toLowerCase().replaceAll(".", "-")}_${name}_ds_props`;
+    };
+
     let dupe = false;
-    if (ids.includes(`${prop?.displayName?.toLowerCase()}_${name}_ds_props`)) {
-      console.error(
-        `Found duplicate id: ${`${prop.displayName.toLowerCase()}_${name}_ds_props`}`
-      );
+    if (ids.includes(parseName(prop.displayName))) {
+      console.error(`Found duplicate id: ${parseName(prop.displayName)}`);
       dupe = true;
     }
-    const id = `${prop.displayName.toLowerCase()}_${name}_ds_props`;
+    const id = parseName(prop.displayName);
     ids.push(id);
 
     return {

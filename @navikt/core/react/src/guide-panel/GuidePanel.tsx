@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import Guide from "./Guide";
 import cl from "clsx";
+import { DefaultIllustration } from "./Illustration";
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -12,14 +12,14 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
    */
   illustration?: React.ReactNode;
   /**
-   * Poster positions guide-illustation above content
-   * @default false, renders illustation left of content
+   * Render illustation above content
+   * @default true on mobile (<480px)
    */
   poster?: boolean;
 }
 
 /**
- * A component that displays a guide panel.
+ * A component for guiding users on the website
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/guidepanel)
  * @see 🏷️ {@link GuidePanelProps}
@@ -34,18 +34,19 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
  * ```
  */
 export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
-  (
-    { children, className, illustration, poster = false, color, ...rest },
-    ref
-  ) => (
+  ({ children, className, illustration, poster, ...rest }, ref) => (
     <div
       {...rest}
       ref={ref}
       className={cl("navds-guide-panel", className, {
-        "navds-guide-panel--poster": poster,
+        "navds-guide-panel--poster": poster === true,
+        "navds-guide-panel--not-poster": poster === false,
+        "navds-guide-panel--responsive-poster": poster === undefined,
       })}
     >
-      <Guide size={poster ? "medium" : "small"} illustration={illustration} />
+      <div className="navds-guide">
+        {illustration ?? <DefaultIllustration />}
+      </div>
       <div className="navds-guide-panel__content">{children}</div>
     </div>
   )
