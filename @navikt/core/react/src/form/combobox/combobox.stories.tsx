@@ -142,8 +142,10 @@ export const MultiSelectWithExternalChips: StoryFn<{
         onToggleSelected={(option) => toggleSelected(option)}
         isMultiSelect
         value={props.controlled ? value : undefined}
-        onChange={(event, value) =>
-          props.controlled ? setValue(value || "") : undefined
+        onChange={(event) =>
+          props.controlled
+            ? setValue(event?.currentTarget.value || "")
+            : undefined
         }
         label="Komboboks"
         size="medium"
