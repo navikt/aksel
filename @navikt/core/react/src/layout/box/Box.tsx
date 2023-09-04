@@ -118,11 +118,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     ref
   ) => {
     let boxShadow: string | undefined = undefined;
-    if (typeof shadow === "object") {
-      boxShadow = shadow.default
-        ? `var(--a-shadow-${shadow.default})`
-        : undefined;
-    } else if (typeof shadow === "string") {
+    if (typeof shadow === "string") {
       boxShadow = `var(--a-shadow-${shadow})`;
     } else {
       boxShadow = undefined;
@@ -130,11 +126,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
 
     // TODO: DRY? (Don't repeat yourself)
     let boxBackground: string | undefined = undefined;
-    if (typeof background === "object") {
-      boxBackground = background.default
-        ? `var(--a-${background.default})`
-        : undefined;
-    } else if (typeof background === "string") {
+    if (typeof background === "string") {
       boxBackground = `var(--a-${background})`;
     } else {
       boxBackground = undefined;
@@ -142,11 +134,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
 
     // TODO: DRY? (Don't repeat yourself)
     let boxBorderColor: string | undefined = undefined;
-    if (typeof borderColor === "object") {
-      boxBorderColor = borderColor.default
-        ? `var(--a-${borderColor.default})`
-        : "transparent";
-    } else if (typeof borderColor === "string") {
+    if (typeof borderColor === "string") {
       boxBorderColor = `var(--a-${borderColor})`;
     } else {
       boxBorderColor = "transparent";
