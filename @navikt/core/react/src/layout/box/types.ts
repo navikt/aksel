@@ -1,22 +1,19 @@
-// import bgColors from "../../../../tokens/src/colors-bg.json";
-// import surfaceColors from "../../../../tokens/src/colors-surface.json";
-// import borderColors from "../../../../tokens/src/colors-border.json";
-// import borderRadii from "../../../../tokens/src/border.json";
-// import shadows from "../../../../tokens/src/shadow.json";
+//import bgColors from "../../../../tokens/src/colors-bg.json";
+//import surfaceColors from "../../../../tokens/src/colors-surface.json";
+import borderColors from "../../../../tokens/src/colors-border.json";
+//import borderRadii from "../../../../tokens/src/border.json";
+//import shadows from "../../../../tokens/src/shadow.json";
 
-// type BackgroundColors = keyof typeof bgColors.a | keyof typeof surfaceColors.a;
-// type BorderColors = keyof typeof borderColors.a;
-// type BorderRadii = keyof typeof borderRadii.a.border.radius;
-// type Shadows = keyof typeof shadows.a.shadow;
+type BackgroundColors = any; //keyof typeof bgColors.a | keyof typeof surfaceColors.a;
+type BorderColors = keyof typeof borderColors.a;
+type BorderRadii = any; //keyof typeof borderRadii.a.border.radius;
+type Shadows = any; //keyof typeof shadows.a.shadow;
 
-type BackgroundColors = any;
-type BorderColors = any;
-type BorderRadii = any;
-type Shadows = any;
+export type BackgroundSpecifier =
+  | BackgroundColors
+  | { default: BackgroundColors };
 
-export type BackgroundSpecifier = BackgroundColors;
-
-export type BorderColorSpecifier = BorderColors;
+export type BorderColorSpecifier = BorderColors | { default: BackgroundColors };
 
 export type BorderRadiusSpecifier =
   | BorderRadii
@@ -28,4 +25,4 @@ export type BorderRadiusSpecifier =
       bottomRight?: BorderRadii;
     };
 
-export type ShadowSpecifier = Shadows;
+export type ShadowSpecifier = Shadows | { default: Shadows };
