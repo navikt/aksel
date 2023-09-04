@@ -1,6 +1,7 @@
 //import bgColors from "../../../../tokens/src/colors-bg.json";
 //import surfaceColors from "../../../../tokens/src/colors-surface.json";
-import borderColors from "../../../../tokens/src/colors-border.json";
+//import borderColors from "../../../../tokens/src/colors-border.json";
+import borderColors from "@navikt/ds-tokens/src/colors-border.json";
 //import borderRadii from "../../../../tokens/src/border.json";
 //import shadows from "../../../../tokens/src/shadow.json";
 
