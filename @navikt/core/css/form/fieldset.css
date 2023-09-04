@@ -1,5 +1,9 @@
 [data-theme="dark"] {
-  --ac-form-description: var(--a-text-on-inverted);
+  --__ac-form-description: var(--a-text-on-inverted);
+}
+
+[data-theme="light"] {
+  --__ac-form-description: initial;
 }
 
 .navds-fieldset {
@@ -14,7 +18,7 @@
 }
 
 .navds-fieldset__description {
-  color: var(--ac-form-description, var(--a-text-subtle));
+  color: var(--ac-form-description, var(--__ac-form-description, var(--a-text-subtle)));
 }
 
 .navds-fieldset > .navds-fieldset__description:not(:empty) {
