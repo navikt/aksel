@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "5.2.1",
+  "version": "5.3.1",
   "description": "CSS for NAV Designsystem",
   "author": "Aksel | NAV designsystem team",
   "keywords": [
@@ -27,7 +27,7 @@
     "css:get-version": "node config/get-version.js"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^5.2.1",
+    "@navikt/ds-tokens": "^5.3.1",
     "cssnano": "6.0.0",
     "fast-glob": "3.2.11",
     "lodash": "4.17.21",
