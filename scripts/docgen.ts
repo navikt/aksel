@@ -2,15 +2,15 @@ import { writeFileSync } from "fs";
 import fg from "fast-glob";
 import * as docgen from "react-docgen-typescript";
 
-const options = {
+const options: docgen.ParserOptions = {
   savePropValueAsString: true,
   shouldRemoveUndefinedFromOptional: true,
 
-  propFilter: (prop: any, comp: any) => {
+  propFilter: (prop) => {
     if (prop.name === "className") return true;
     if (prop.declarations !== undefined && prop.declarations.length > 0) {
-      const hasPropAdditionalDescription = prop.declarations.find(
-        (declaration: any) => {
+      const hasPropAdditionalDescription = prop.declarations.some(
+        (declaration) => {
           return (
             !declaration.fileName.includes("node_modules") ||
             declaration.name === "RefAttributes"
@@ -18,7 +18,7 @@ const options = {
         }
       );
 
-      return !!hasPropAdditionalDescription;
+      return hasPropAdditionalDescription;
     }
 
     return true;

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Button } from "@navikt/ds-react";
-import { Dropdown } from "@navikt/ds-react";
+import { Button, Dropdown } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import Link from "next/link";
 
