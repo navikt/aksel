@@ -140,10 +140,11 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       boxBorderColor = "transparent";
     }
 
-    const style = {
+    const style: React.CSSProperties = {
       ..._style,
       "--__ac-box-background": boxBackground,
       "--__ac-box-border-color": boxBorderColor,
+      "--__ac-box-shadow": boxShadow,
       "--__ac-box-border-radius": getBorderRadius(borderRadius),
       ...getResponsivePropsPaddingForInlineOrBlock("box", "inline", {
         padding,
@@ -157,8 +158,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         paddingBlockStart,
         paddingBlockEnd,
       }),
-      "--__ac-box-shadow": boxShadow,
-    } as React.CSSProperties;
+    };
 
     return (
       <Component
