@@ -18,11 +18,11 @@ type Spacing = ResponsiveProp<SpacingScale>;
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
-  /** Background color */
+  /** Background color. Accepts a color token */
   background?: BackgroundSpecifier;
-  /** Border color */
+  /** Border color. Accepts a color token */
   borderColor?: BorderColorSpecifier;
-  /** Border radius */
+  /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
   borderRadius?: BorderRadiusSpecifier;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
    * @example
