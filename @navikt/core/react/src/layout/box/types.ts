@@ -1,4 +1,4 @@
-import tokens from "@navikt/ds-tokens/dist/tokens-module";
+import tokens from "../../../../tokens/dist/tokens-module";
 
 type Prefix<
   ThePrefix extends string,
