@@ -3,7 +3,7 @@ import type { Meta } from "@storybook/react";
 import { HStack, VStack, Spacer } from ".";
 
 export default {
-  title: "ds-react/Stack",
+  title: "ds-react/Primitives/Stack",
   component: HStack,
 } satisfies Meta<typeof HStack>;
 

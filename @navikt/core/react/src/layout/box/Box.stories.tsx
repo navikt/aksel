@@ -7,7 +7,7 @@ import { BackgroundSpecifier, BorderRadiusSpecifier } from "./types";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 
 export default {
-  title: "ds-react/Box",
+  title: "ds-react/Primitives/Box",
   component: Box,
 } satisfies Meta<typeof Box>;
 
@@ -111,7 +111,6 @@ export const ThemingDemo = {
             borderRadius="small"
             borderColor="border-default"
             padding="4"
-            paddingInlineStart="4"
             onClick={() => alert("Clicked!")}
           >
             <HStack gap="4" align="center">

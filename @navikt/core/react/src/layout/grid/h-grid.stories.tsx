@@ -8,7 +8,7 @@ const columnsVariants = {
 };
 
 export default {
-  title: "ds-react/HGrid",
+  title: "ds-react/Primitives/HGrid",
   component: HGrid,
   parameters: {
     layout: "fullscreen",
