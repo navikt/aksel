@@ -22,7 +22,6 @@ export type SpacingScale =
   | "32";
 
 type ResponsivePropConfig<T = string> = {
-  // eslint-disable-next-line no-unused-vars
   [Breakpoint in BreakpointsAlias]?: T;
 };
 
