@@ -161,8 +161,7 @@ function setBlockProp(
   });
 }
 
-// eslint-disable-next-line no-unused-vars
-export function getResponsivePropsPaddingForInlineOrBlock<T = string>(
+export function getResponsivePropsPaddingForInlineOrBlock(
   componentName: string,
   logicalCss: LogicalDesignator,
   responsiveProps: {
@@ -176,35 +175,35 @@ export function getResponsivePropsPaddingForInlineOrBlock<T = string>(
 
   let blockString: BlockString = {};
 
-  if (responsiveProps?.["padding"]) {
-    const responsiveKey = responsiveProps["padding"];
+  if (responsiveProps?.padding) {
+    const responsiveKey = responsiveProps.padding;
     setBlockProp(blockString, responsiveKey, 0);
     setBlockProp(blockString, responsiveKey, 1);
   }
-  if (responsiveProps?.[`paddingInline`]) {
-    const responsiveKey = responsiveProps[`paddingInline`];
+  if (responsiveProps?.paddingInline) {
+    const responsiveKey = responsiveProps.paddingInline;
     setBlockProp(blockString, responsiveKey, 0);
     setBlockProp(blockString, responsiveKey, 1);
   }
-  if (responsiveProps?.[`paddingInlineStart`]) {
-    const responsiveKey = responsiveProps[`paddingInlineStart`];
+  if (responsiveProps?.paddingInlineStart) {
+    const responsiveKey = responsiveProps.paddingInlineStart;
     setBlockProp(blockString, responsiveKey, 0);
   }
-  if (responsiveProps?.[`paddingInlineEnd`]) {
-    const responsiveKey = responsiveProps[`paddingInlineEnd`];
+  if (responsiveProps?.paddingInlineEnd) {
+    const responsiveKey = responsiveProps.paddingInlineEnd;
     setBlockProp(blockString, responsiveKey, 1);
   }
-  if (responsiveProps?.[`paddingBlock`]) {
-    const responsiveKey = responsiveProps[`paddingBlock`];
+  if (responsiveProps?.paddingBlock) {
+    const responsiveKey = responsiveProps.paddingBlock;
     setBlockProp(blockString, responsiveKey, 0);
     setBlockProp(blockString, responsiveKey, 1);
   }
-  if (responsiveProps?.[`paddingBlockStart`]) {
-    const responsiveKey = responsiveProps[`paddingBlockStart`];
+  if (responsiveProps?.paddingBlockStart) {
+    const responsiveKey = responsiveProps.paddingBlockStart;
     setBlockProp(blockString, responsiveKey, 0);
   }
-  if (responsiveProps?.[`paddingBlockEnd`]) {
-    const responsiveKey = responsiveProps[`paddingBlockEnd`];
+  if (responsiveProps?.paddingBlockEnd) {
+    const responsiveKey = responsiveProps.paddingBlockEnd;
     setBlockProp(blockString, responsiveKey, 1);
   }
 

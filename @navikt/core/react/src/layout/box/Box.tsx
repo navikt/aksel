@@ -30,8 +30,13 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   padding?: Spacing;
-  /** Horizontal spacing around children. Accepts  */
+  /** Unidirectional spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes */
   paddingInline?: Spacing;
+  /** Horizontal start spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
+   * @example
+   * paddingBlockStart='4'
+   * paddingBlockStart={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   */
   paddingBlock?: Spacing;
   /** Vertical start spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
    * @example
