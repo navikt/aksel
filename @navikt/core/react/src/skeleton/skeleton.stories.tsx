@@ -116,3 +116,14 @@ export const NativeText = {
     </div>
   ),
 };
+
+export const InlineText = {
+  render: () => (
+    <BodyLong>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
+      voluptas sint dolore <Skeleton as="div">omnis quia consequatur</Skeleton>{" "}
+      beatae vero cum officia debitis. Quidem debitis omnis reprehenderit nobis
+      rerum. Nulla, magnam? Saepe, eveniet? Test
+    </BodyLong>
+  ),
+};
