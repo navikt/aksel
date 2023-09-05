@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "postinstall": "husky install",
-    "boot": "yarn workspaces @navikt/core/tokens run build && yarn workspaces foreach -v -pA --topological-dev --no-private run build",
+    "boot": "yarn workspaces focus @navikt/ds-tokens run build && yarn workspaces foreach -v -pA --topological-dev --no-private run build",
     "clean": "node scripts/clean.js",
     "storybook": "storybook dev -p 6006",
     "storybook:aksel": "yarn concurrently \"yarn watch:tw\" \"yarn storybook dev -c aksel.nav.no/website/.storybook -p 6007\"",
