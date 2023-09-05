@@ -33,7 +33,10 @@ export const landingsider = [
 
 export const allArticleDocsRef = allArticleDocuments.map((x) => ({ type: x }));
 
-export const komponentKategorier = [{ title: "Core", value: "core" }];
+export const komponentKategorier = [
+  { title: "Primitives", value: "primitives" },
+  { title: "Core", value: "core" },
+];
 
 export const grunnleggendeKategorier = [
   { title: "Introduksjon", value: "introduksjon" },
