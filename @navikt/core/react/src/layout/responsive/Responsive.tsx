@@ -1,6 +1,5 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
-import { OverridableComponent } from "../../util/OverridableComponent";
 import { BreakpointsAlias } from "../utilities/css";
 
 export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
@@ -15,12 +14,17 @@ export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
    * below='md'
    */
   below?: Exclude<BreakpointsAlias, "xs">;
+  /**
+   * Overrides html-tag
+   * @default "div"
+   */
+  as?: "div" | "span";
 }
 
-const Responsive: OverridableComponent<
-  ResponsiveProps & { variant: "show" | "hide" },
-  HTMLDivElement
-> = forwardRef(
+const Responsive = forwardRef<
+  HTMLDivElement,
+  ResponsiveProps & { variant: "show" | "hide" }
+>(
   (
     { as: Component = "div", className, above, below, variant, ...rest },
     ref
@@ -41,12 +45,52 @@ const Responsive: OverridableComponent<
   }
 );
 
-export const Hide: OverridableComponent<ResponsiveProps, HTMLDivElement> =
-  forwardRef((props, ref) => (
-    <Responsive {...props} ref={ref} variant="hide" />
-  ));
+/**
+ * Responsive view Primitive to show/hide elements based on breakpoints
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/hide)
+ * @see 🏷️ {@link ResponsiveProps}
+ *
+ * @example
+ * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+ *   <div/>
+ *   <Hide below="md">
+ *      // Only visible above "md"
+ *   </Hide>
+ * </HGrid>
+ * @example
+ * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+ *   <div/>
+ *   <Hide above="md">
+ *      // Only visible below "md"
+ *   </Hide>
+ * </HGrid>
+ */
+export const Hide = forwardRef<HTMLDivElement, ResponsiveProps>(
+  (props, ref) => <Responsive {...props} ref={ref} variant="hide" />
+);
 
-export const Show: OverridableComponent<ResponsiveProps, HTMLDivElement> =
-  forwardRef((props, ref) => (
-    <Responsive {...props} ref={ref} variant="show" />
-  ));
+/**
+ * Responsive view Primitive to show/hide elements based on breakpoints
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/show)
+ * @see 🏷️ {@link ResponsiveProps}
+ *
+ * @example
+ * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+ *   <div/>
+ *   <Show below="md">
+ *      // Only visible below "md"
+ *   </Show>
+ * </HGrid>
+ * @example
+ * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+ *   <div/>
+ *   <Show above="md">
+ *      // Only visible above "md"
+ *   </Show>
+ * </HGrid>
+ */
+export const Show = forwardRef<HTMLDivElement, ResponsiveProps>(
+  (props, ref) => <Responsive {...props} ref={ref} variant="show" />
+);

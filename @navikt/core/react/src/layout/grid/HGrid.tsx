@@ -30,7 +30,7 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * Horizontal Grid Primitive with dynamic columns and gap based on breakpoints.
  *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/hgrid)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/hgrid)
  * @see 🏷️ {@link HGridProps}
  *
  * @example

@@ -7,7 +7,7 @@ export type HStackProps = Omit<StackProps, "direction">;
 /**
  * Layout-primitive for horizontal flexbox
  *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/Stack)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/hstack)
  * @see 🏷️ {@link HStackProps}
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
