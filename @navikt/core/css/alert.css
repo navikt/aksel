@@ -38,6 +38,10 @@
   height: var(--a-font-line-height-large);
 }
 
+.navds-alert--small.navds-alert--close-button > .navds-alert__icon {
+  height: var(--a-font-line-height-xlarge);
+}
+
 .navds-alert--error {
   border-color: var(--ac-alert-error-border, var(--a-border-danger));
   background-color: var(--ac-alert-error-bg, var(--a-surface-danger-subtle));
