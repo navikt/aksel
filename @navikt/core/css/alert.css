@@ -13,6 +13,7 @@
 
 .navds-alert--small {
   padding: var(--a-spacing-2) var(--a-spacing-4);
+  gap: var(--a-spacing-2);
 }
 
 .navds-alert--full-width {
@@ -24,8 +25,6 @@
   font-size: 1.5rem;
   align-self: flex-start;
   height: var(--a-font-line-height-xlarge);
-  margin-inline: var(--a-spacing-1);
-  margin-block: 0;
   margin-block-start: -1px;
   background: radial-gradient(circle, var(--a-surface-default) 50%, 0, transparent);
 }
