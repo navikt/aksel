@@ -60,7 +60,7 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Show gjør det enklere å konsistent gjøre layout-endringer ved konkrete brekkpunt",
+  desc: "Show gjør det enklere å konsistent utføre layout-endringer ved konkrete brekkpunkt",
 };
 
 function Logo() {

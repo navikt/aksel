@@ -55,7 +55,7 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Hide gjør det enklere å konsistent gjøre layout-endringer ved konkrete brekkpunt",
+  desc: "Hide gjør det enklere å konsistent utføre layout-endringer ved konkrete brekkpunkt",
 };
 
 export const args = {
