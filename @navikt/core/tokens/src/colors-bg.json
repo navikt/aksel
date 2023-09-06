@@ -1,0 +1,10 @@
+{
+  "a": {
+    "bg-default": {
+      "value": "{a.white.value}"
+    },
+    "bg-subtle": {
+      "value": "{a.gray.100.value}"
+    }
+  }
+}
