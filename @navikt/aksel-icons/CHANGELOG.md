@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 5.3.4
+
+### Patch Changes
+
+- :bug: SVG import map er nå riktig path ([#2250](https://github.com/navikt/aksel/pull/2250))
+
 ## 5.3.3
 
 ## 5.3.2
