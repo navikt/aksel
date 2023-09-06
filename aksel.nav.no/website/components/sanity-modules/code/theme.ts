@@ -53,7 +53,7 @@ export const draculaModified: PrismTheme = {
     {
       types: ["comment"],
       style: {
-        color: "rgb(98, 114, 164)",
+        color: "var(--a-gray-300)",
       },
     },
     {
