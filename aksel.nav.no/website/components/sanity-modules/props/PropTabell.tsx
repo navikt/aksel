@@ -33,7 +33,9 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
         <span>{prop.type ? <>{Highlighter({ type: prop.type })}</> : ""}</span>
       </dt>
       {prop.description && (
-        <dd className="font-sans text-base">{prop.description}</dd>
+        <dd className="whitespace-pre-wrap font-sans text-base">
+          {prop.description}
+        </dd>
       )}
       {prop.name === "ref" && prop.type.includes("Ref<") && (
         <dd className="font-sans text-base">
