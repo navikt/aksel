@@ -268,7 +268,7 @@
       "on-inverted": {
         "value": "{a.gray.200.value}"
       },
-      "on-subtle": {
+      "on-inverted-subtle": {
         "value": "{a.gray.700.value}"
       },
       "alt1": {
