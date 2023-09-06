@@ -52,7 +52,7 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
       <Highlight code={code.code} language={language} theme={dracula}>
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre className="text-medium m-0 flex overflow-auto rounded-lg leading-6">
-            <code className="max-h-96 min-w-full flex-none p-4 pb-4">
+            <code className="max-h-80 min-w-full flex-none p-4">
               {tokens.map((line, i) => (
                 <span
                   key={i}
