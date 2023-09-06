@@ -28,7 +28,7 @@
     "watch:tw": "yarn tailwindcss -i ./styles/index.css -o ./dist/tw.css --watch"
   },
   "dependencies": {
-    "@amplitude/analytics-browser": "^2.0.0",
+    "@amplitude/analytics-browser": "^2.2.3",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^6.4.6",
     "@sanity/code-input": "4.1.1",

@@ -25,8 +25,8 @@ export const Error = () => {
       <div className="flex flex-wrap gap-2 px-4 pb-4 md:px-10">
         {Object.keys(searchOptions)
           .slice(0, Object.keys(searchOptions).length - 1)
-          .map((x) => (
-            <Skeleton variant="rounded" height="1.75rem">
+          .map((x, i) => (
+            <Skeleton variant="rounded" height="1.75rem" key={i}>
               {searchOptions[x].display}
             </Skeleton>
           ))}
