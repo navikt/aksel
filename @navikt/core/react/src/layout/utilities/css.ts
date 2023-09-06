@@ -40,16 +40,14 @@ type ResponsivePropConfig<T = string> = {
   [Breakpoint in BreakpointsAlias]?: T;
 };
 
-type ResponsiveLogicalTuple<T = string> = {
+type ResponsivePropConfigTuple<T = string> = {
   // eslint-disable-next-line no-unused-vars
   [Breakpoint in BreakpointsAlias]?: [T, T];
 };
 
 export type ResponsiveProp<T> = T | ResponsivePropConfig<T>;
 
-export type ResponsiveValue<T = string> = undefined | ResponsiveProp<T>;
-
-type LogicalDesignator = "inline" | "block";
+type BlockOrInline = "inline" | "block";
 
 export function getResponsiveProps<T = string>(
   componentName: string,
@@ -75,39 +73,45 @@ export function getResponsiveProps<T = string>(
   );
 }
 
-type blockT<T extends string> =
-  | `${T}`
-  | `${T}Inline`
-  | `${T}InlineStart`
-  | `${T}InlineEnd`
-  | `${T}Block`
-  | `${T}BlockStart`
-  | `${T}BlockEnd`;
+type Prefix<T extends string, T2 extends string> = `${T}${T2}`;
 
-type BlockString = ResponsiveLogicalTuple<SpacingScale>;
+type PaddingCSSProp = Prefix<
+  "padding",
+  | ""
+  | "Inline"
+  | "InlineStart"
+  | "InlineEnd"
+  | "Block"
+  | "BlockStart"
+  | "BlockEnd"
+>;
+
+type ResponsiveSpacing = ResponsivePropConfigTuple<SpacingScale>;
 
 function createStyleEntries(
-  blockString: BlockString,
+  responsiveSpacing: ResponsiveSpacing,
   componentName: string,
   componentProp: string,
-  blockOrInline: LogicalDesignator
+  blockOrInline: BlockOrInline
 ) {
   return Object.fromEntries(
-    Object.entries(blockString).map(([breakpointAlias, aliasOrScale]) => [
-      `--__ac-${componentName}-${componentProp}-${blockOrInline}-${breakpointAlias}`,
-      `var(--a-spacing-${aliasOrScale[0]}) var(--a-spacing-${aliasOrScale[1]})`,
-    ])
+    Object.entries(responsiveSpacing).map(
+      ([breakpointAlias, spacingScales]) => [
+        `--__ac-${componentName}-${componentProp}-${blockOrInline}-${breakpointAlias}`,
+        `var(--a-spacing-${spacingScales[0]}) var(--a-spacing-${spacingScales[1]})`,
+      ]
+    )
   );
 }
 
 function getPreviousSetBreakpoint(
-  blockString: BlockString,
+  responsiveSpacing: ResponsiveSpacing,
   breakpointAlias: BreakpointsAlias
 ) {
   let curr: BreakpointsAlias | null = breakpointAlias;
   while (curr) {
-    if (blockString[curr]) {
-      return blockString[curr];
+    if (responsiveSpacing[curr]) {
+      return responsiveSpacing[curr];
     }
     curr = PreviousBreakpointLookup[curr];
   }
@@ -117,109 +121,116 @@ function getPreviousSetBreakpoint(
   return null;
 }
 
+/**
+ * Each call to this function overwrites responsiveSpacing (non pure)
+ * with (hopefully) more specific CSS properties. Index toggles which of the values
+ * in the tuple are used, and the meaning of the tuple changes based on whether it's
+ * 'block' (top & bottom) or 'inline' (left & right)
+ */
 function setBlockProp(
-  blockString: BlockString,
-  responsiveKey: ResponsiveProp<SpacingScale> | undefined,
+  responsiveSpacing: ResponsiveSpacing,
+  responsivePropValue: ResponsiveProp<SpacingScale> | undefined,
   index: 0 | 1
 ) {
-  if (!responsiveKey) return;
-  if (typeof responsiveKey === "string") {
-    blockString.xs = index
-      ? [blockString?.xs?.[0] ?? "0", responsiveKey]
-      : [responsiveKey, blockString?.xs?.[1] ?? "0"];
+  if (!responsivePropValue) return;
+  if (typeof responsivePropValue === "string") {
+    responsiveSpacing.xs = index
+      ? [responsiveSpacing?.xs?.[0] ?? "0", responsivePropValue]
+      : [responsivePropValue, responsiveSpacing?.xs?.[1] ?? "0"];
     return;
   }
 
-  Object.assign(blockString, {
-    ...structuredClone(blockString),
+  Object.assign(responsiveSpacing, {
+    ...structuredClone(responsiveSpacing),
     ...Object.fromEntries(
-      Object.entries(responsiveKey).map(([breakpointAlias, spacingScale]) => {
-        return [
-          breakpointAlias,
-          index
-            ? [
-                blockString?.[breakpointAlias]?.[0] ??
-                  (getPreviousSetBreakpoint(
-                    blockString,
-                    breakpointAlias as BreakpointsAlias
-                  )?.[1] ||
-                    "0"),
-                spacingScale,
-              ]
-            : [
-                spacingScale,
-                blockString?.[breakpointAlias]?.[0] ??
-                  (getPreviousSetBreakpoint(
-                    blockString,
-                    breakpointAlias as BreakpointsAlias
-                  )?.[0] ||
-                    "0"),
-              ],
-        ];
-      })
+      Object.entries(responsivePropValue).map(
+        ([breakpointAlias, spacingScale]) => {
+          return [
+            breakpointAlias,
+            index
+              ? [
+                  responsiveSpacing?.[breakpointAlias]?.[0] ??
+                    (getPreviousSetBreakpoint(
+                      responsiveSpacing,
+                      breakpointAlias as BreakpointsAlias
+                    )?.[1] ||
+                      "0"),
+                  spacingScale,
+                ]
+              : [
+                  spacingScale,
+                  responsiveSpacing?.[breakpointAlias]?.[0] ??
+                    (getPreviousSetBreakpoint(
+                      responsiveSpacing,
+                      breakpointAlias as BreakpointsAlias
+                    )?.[0] ||
+                      "0"),
+                ],
+          ];
+        }
+      )
     ),
   });
 }
 
-export function getResponsivePropsPaddingForInlineOrBlock(
+export function getResponsivePropsPadding(
   componentName: string,
-  logicalCss: LogicalDesignator,
+  blockOrInline: BlockOrInline,
   responsiveProps: {
     // eslint-disable-next-line no-unused-vars
-    [key in blockT<"padding">]?: ResponsiveProp<SpacingScale>;
+    [key in PaddingCSSProp]?: ResponsiveProp<SpacingScale>;
   }
 ) {
   if (!responsiveProps) {
     return {};
   }
 
-  let blockString: BlockString = {};
+  let responsiveSpacing: ResponsiveSpacing = {};
 
   if (responsiveProps?.padding) {
-    const responsiveKey = responsiveProps.padding;
-    setBlockProp(blockString, responsiveKey, 0);
-    setBlockProp(blockString, responsiveKey, 1);
+    const responsivePropValue = responsiveProps.padding;
+    setBlockProp(responsiveSpacing, responsivePropValue, 0);
+    setBlockProp(responsiveSpacing, responsivePropValue, 1);
   }
   if (responsiveProps?.paddingInline) {
-    const responsiveKey = responsiveProps.paddingInline;
-    setBlockProp(blockString, responsiveKey, 0);
-    setBlockProp(blockString, responsiveKey, 1);
+    const responsivePropValue = responsiveProps.paddingInline;
+    setBlockProp(responsiveSpacing, responsivePropValue, 0);
+    setBlockProp(responsiveSpacing, responsivePropValue, 1);
   }
   if (responsiveProps?.paddingInlineStart) {
-    const responsiveKey = responsiveProps.paddingInlineStart;
-    setBlockProp(blockString, responsiveKey, 0);
+    const responsivePropValue = responsiveProps.paddingInlineStart;
+    setBlockProp(responsiveSpacing, responsivePropValue, 0);
   }
   if (responsiveProps?.paddingInlineEnd) {
-    const responsiveKey = responsiveProps.paddingInlineEnd;
-    setBlockProp(blockString, responsiveKey, 1);
+    const responsivePropValue = responsiveProps.paddingInlineEnd;
+    setBlockProp(responsiveSpacing, responsivePropValue, 1);
   }
   if (responsiveProps?.paddingBlock) {
-    const responsiveKey = responsiveProps.paddingBlock;
-    setBlockProp(blockString, responsiveKey, 0);
-    setBlockProp(blockString, responsiveKey, 1);
+    const responsivePropValue = responsiveProps.paddingBlock;
+    setBlockProp(responsiveSpacing, responsivePropValue, 0);
+    setBlockProp(responsiveSpacing, responsivePropValue, 1);
   }
   if (responsiveProps?.paddingBlockStart) {
-    const responsiveKey = responsiveProps.paddingBlockStart;
-    setBlockProp(blockString, responsiveKey, 0);
+    const responsivePropValue = responsiveProps.paddingBlockStart;
+    setBlockProp(responsiveSpacing, responsivePropValue, 0);
   }
   if (responsiveProps?.paddingBlockEnd) {
-    const responsiveKey = responsiveProps.paddingBlockEnd;
-    setBlockProp(blockString, responsiveKey, 1);
+    const responsivePropValue = responsiveProps.paddingBlockEnd;
+    setBlockProp(responsiveSpacing, responsivePropValue, 1);
   }
 
-  const entries = createStyleEntries(
-    blockString,
+  return createStyleEntries(
+    responsiveSpacing,
     componentName,
     "padding",
-    logicalCss
+    blockOrInline
   );
-  return entries;
 }
 
 export function getResponsiveValue<T = string>(
   componentName: string,
   componentProp: string,
-  responsiveProp?: ResponsiveValue<T>
+  responsiveProp?: ResponsiveProp<T>
 ) {
   if (!responsiveProp) {
     return {};
