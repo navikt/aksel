@@ -33,7 +33,7 @@
       "import": "./dist/react/esm/index.js",
       "require": "./dist/react/cjs/index.js"
     },
-    "./svg/*.svg": "./dist/react/svg/*.svg",
+    "./svg/*.svg": "./dist/svg/*.svg",
     "./metadata": {
       "types": "./dist/metadata.d.ts",
       "default": "./dist/metadata.js"
