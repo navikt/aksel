@@ -43,10 +43,6 @@ module.exports = {
           destination: "tokens.d.ts",
           format: "typescript/es6-declarations",
         },
-        {
-          destination: "tokens-module.d.ts",
-          format: "typescript/module-declarations",
-        },
       ],
     },
     js: {
