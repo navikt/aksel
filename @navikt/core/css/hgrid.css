@@ -11,10 +11,12 @@
   --__ac-hgrid-gap-lg: initial;
   --__ac-hgrid-gap-xl: initial;
   --__ac-hgrid-gap: var(--__ac-hgrid-gap-xs);
+  --__ac-hgrid-align: initial;
 
   display: grid;
   grid-template-columns: var(--__ac-hgrid-columns);
   gap: var(--__ac-hgrid-gap);
+  align-items: var(--__ac-hgrid-align);
 }
 
 @media (min-width: 480px) {
