@@ -17,7 +17,6 @@ import {
 type Spacing = ResponsiveProp<SpacingScale>;
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
   /** Background color. Accepts a color token */
   background?: BackgroundSpecifier;
   /** Border color. Accepts a color token */
@@ -105,7 +104,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       borderRadiusStartStart,
       borderRadiusStartEnd,
       className,
-      children,
       padding,
       paddingInline,
       paddingBlock,
@@ -113,37 +111,20 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       paddingBlockEnd,
       paddingInlineStart,
       paddingInlineEnd,
-      role,
       shadow,
       style: _style,
-      tabIndex,
-      srOnly,
       ...rest
     },
     ref
   ) => {
-    let boxShadow: string | undefined = undefined;
-    if (typeof shadow === "string") {
-      boxShadow = `var(--a-shadow-${shadow})`;
-    } else {
-      boxShadow = undefined;
-    }
-
-    // TODO: DRY? (Don't repeat yourself)
-    let boxBackground: string | undefined = undefined;
-    if (typeof background === "string") {
-      boxBackground = `var(--a-${background})`;
-    } else {
-      boxBackground = undefined;
-    }
-
-    // TODO: DRY? (Don't repeat yourself)
-    let boxBorderColor: string | undefined = undefined;
-    if (typeof borderColor === "string") {
-      boxBorderColor = `var(--a-${borderColor})`;
-    } else {
-      boxBorderColor = "transparent";
-    }
+    const boxShadow =
+      typeof shadow === "string" ? `var(--a-shadow-${shadow})` : undefined;
+    const boxBackground =
+      typeof background === "string" ? `var(--a-${background})` : undefined;
+    const boxBorderColor =
+      typeof borderColor === "string"
+        ? `var(--a-${borderColor})`
+        : "transparent";
 
     const style: React.CSSProperties = {
       ..._style,
@@ -171,9 +152,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         className={cl("navds-box", className)}
         ref={ref}
         style={style}
-        role={role}
-        tabIndex={tabIndex}
-        children={children}
       />
     );
   }
