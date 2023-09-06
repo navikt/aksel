@@ -3677,6 +3677,7 @@ __metadata:
   dependencies:
     "@floating-ui/react": 0.24.1
     "@navikt/aksel-icons": ^5.3.1
+    "@navikt/ds-tokens": ^5.3.1
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
