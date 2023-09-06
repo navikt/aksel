@@ -24,39 +24,39 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   borderColor?: BorderColorSpecifier;
   /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
   borderRadius?: BorderRadiusSpecifier;
-  /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
+  /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * padding='4'
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   padding?: Spacing;
-  /** Unidirectional spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes */
+  /** Unidirectional spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints */
   paddingInline?: Spacing;
-  /** Horizontal start spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
+  /** Horizontal start spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * paddingBlockStart='4'
    * paddingBlockStart={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   paddingBlock?: Spacing;
-  /** Vertical start spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
+  /** Vertical start spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * paddingBlockStart='4'
    * paddingBlockStart={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   paddingBlockStart?: Spacing;
-  /** Vertical end spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
+  /** Vertical end spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * paddingBlockEnd='4'
    * paddingBlockEnd={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   paddingBlockEnd?: Spacing;
-  /** Horizontal start spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
+  /** Horizontal start spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * paddingInlineStart='4'
    * paddingInlineStart={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   paddingInlineStart?: Spacing;
-  /** Horizontal end spacing around children. Accepts a spacing token or an object of spacing tokens for different screen sizes.
+  /** Horizontal end spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * paddingInlineEnd='4'
    * paddingInlineEnd={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
