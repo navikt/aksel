@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.3.3
+
+### Patch Changes
+
+- HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
+
 ## 5.3.2
 
 ### Patch Changes
