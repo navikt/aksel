@@ -46,7 +46,6 @@
     "react-day-picker": "8.3.4"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^5.3.1",
     "@testing-library/dom": "8.13.0",
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^13.3.0",
