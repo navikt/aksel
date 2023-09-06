@@ -102,7 +102,7 @@ export const NativeText = {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
           voluptas sint dolore omnis quia consequatur beatae vero cum officia
           debitis. Quidem debitis omnis reprehenderit nobis rerum. Nulla,
-          magnam? Saepe, eveniet? Test
+          magnam? Saepe, eveniet?
         </Skeleton>
       </h1>
       <Skeleton>
@@ -110,9 +110,20 @@ export const NativeText = {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
           voluptas sint dolore omnis quia consequatur beatae vero cum officia
           debitis. Quidem debitis omnis reprehenderit nobis rerum. Nulla,
-          magnam? Saepe, eveniet? Test
+          magnam? Saepe, eveniet?
         </p>
       </Skeleton>
     </div>
+  ),
+};
+
+export const InlineText = {
+  render: () => (
+    <BodyLong>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
+      voluptas sint dolore <Skeleton as="span">omnis quia consequatur</Skeleton>{" "}
+      beatae vero cum officia debitis. Quidem debitis omnis reprehenderit nobis
+      rerum. Nulla, magnam? Saepe, eveniet?
+    </BodyLong>
   ),
 };

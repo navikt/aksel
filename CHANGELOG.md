@@ -1,5 +1,25 @@
 # Changelog
 
+## 5.3.3
+
+### @navikt/ds-react
+
+- HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
+
+### @navikt/ds-css
+
+- HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
+
+## 5.3.2
+
+### @navikt/ds-react
+
+- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
+
+### @navikt/ds-css
+
+- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
+
 ## 5.3.1
 
 ### @navikt/ds-react

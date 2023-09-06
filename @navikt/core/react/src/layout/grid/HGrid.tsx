@@ -26,6 +26,10 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
    * gap={{ sm: "2", md: "2", lg: "6", xl: "6"}}
    */
   gap?: ResponsiveProp<SpacingScale>;
+  /**
+   * Vertical alignment of children. Elements will by default stretch to the height of parent-element.
+   */
+  align?: "start" | "center" | "end";
 }
 /**
  * Horizontal Grid Primitive with dynamic columns and gap based on breakpoints.
@@ -53,9 +57,10 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
  * </HGrid>
  */
 export const HGrid = forwardRef<HTMLDivElement, HGridProps>(
-  ({ className, columns, gap, style, ...rest }, ref) => {
+  ({ className, columns, gap, style, align, ...rest }, ref) => {
     const styles: React.CSSProperties = {
       ...style,
+      "--__ac-hgrid-align": align,
       ...getResponsiveProps(`hgrid`, "gap", "spacing", gap),
       ...getResponsiveValue(`hgrid`, "columns", formatGrid(columns)),
     };
