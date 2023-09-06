@@ -13,12 +13,13 @@ const ColorGroups = ({ prefix }: { prefix: string }) => (
       .map(([group, groupTokens]) => {
         const groupName = group.replace(prefix, "");
         return (
-          <div className="colgap">
+          <div key={group} className="colgap">
             <h2>
               {groupName.charAt(0).toLocaleUpperCase() + groupName.substring(1)}
             </h2>
             {groupTokens.map((color) => (
               <div
+                key={color.name}
                 style={{
                   background: color.value,
                   width: "50rem",

@@ -12,9 +12,9 @@ type ParsedChild = {
 };
 
 export const parseRows = (rowChildren: ReactNode[]) => {
-  let parsedChildren: ParsedChild[] = [];
+  const parsedChildren: ParsedChild[] = [];
   rowChildren?.forEach((r: React.ReactNode) => {
-    let periods: ParsedChild["periods"] = [];
+    const periods: ParsedChild["periods"] = [];
     if (React.isValidElement(r) && r?.props?.children) {
       if (Array.isArray(r.props.children)) {
         for (let i = 0; i < r.props.children.length; i++) {
@@ -72,7 +72,7 @@ export const parseRows = (rowChildren: ReactNode[]) => {
         label: r.props.label,
         icon: r.props.icon,
         headingTag: r.props.headingTag,
-        periods: periods,
+        periods,
         restProps: omit(r.props, ["label", "icon", "headingTag"]),
         ref: (r as any)?.ref,
       });

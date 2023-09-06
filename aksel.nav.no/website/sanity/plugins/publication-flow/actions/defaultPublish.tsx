@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { useDocumentOperation } from "sanity";
-
 import {
+  useDocumentOperation,
   DocumentActionComponent,
   DocumentActionDescription,
   DocumentActionProps,

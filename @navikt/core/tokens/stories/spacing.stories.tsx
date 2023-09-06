@@ -33,6 +33,7 @@ export const Spacing = () => {
     <div className="colgap">
       {Object.entries(sortObject).map(([key, val]) => (
         <div
+          key={key}
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
