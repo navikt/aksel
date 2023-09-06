@@ -26,7 +26,10 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
   }
 
   return (
-    <div className="relative mb-7 grid rounded-lg bg-[#282a36] last:mb-0">
+    <section
+      aria-label="Kode"
+      className="aksel-codesnippet relative mb-7 grid rounded-lg bg-[#282a36] last:mb-0"
+    >
       <div className="text-text-on-inverted text-medium relative flex leading-6">
         <div className="mt-2 flex flex-none items-center border-b border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">
           {!title ? (
@@ -34,10 +37,10 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
               {language}
             </Label>
           ) : (
-            title
+            <Label as="span">{title}</Label>
           )}
         </div>
-        <div className="mt-2 flex h-10 flex-auto rounded-tl bg-[#44475a]" />
+        <div className="mt-2 flex h-10 flex-auto rounded-tl bg-[#44475a] shadow-inner" />
 
         <CopyButton
           data-theme="dark"
@@ -49,12 +52,13 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
       <Highlight code={code.code} language={language} theme={dracula}>
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre className="text-medium m-0 flex overflow-auto rounded-lg leading-6">
-            <code className="max-h-96 min-w-full flex-none p-4">
+            <code className="max-h-96 min-w-full flex-none p-4 pb-4">
               {tokens.map((line, i) => (
                 <span
                   key={i}
                   {...getLineProps({ line, key: i })}
                   className={cl(
+                    "last-of-type:pb-4",
                     language === "terminal" ? "flex items-center" : "block"
                   )}
                 >
@@ -73,7 +77,7 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
           </pre>
         )}
       </Highlight>
-    </div>
+    </section>
   );
 };
 
