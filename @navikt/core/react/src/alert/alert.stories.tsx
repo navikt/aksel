@@ -213,6 +213,6 @@ export const WithCloseButton: Story = {
     });
 
     const buttonsAfter = canvas.getAllByTitle("Lukk Alert");
-    expect(buttonsAfter.length).toBe(2);
+    expect(buttonsAfter.length).toBe(4);
   },
 };
