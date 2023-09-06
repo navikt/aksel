@@ -5,7 +5,7 @@ import React from "react";
 import { CodeSnippetT } from "@/types";
 import { CopyButton, Label } from "@navikt/ds-react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
-import dracula from "./theme";
+import theme from "./theme";
 
 const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
   if (!code || !code.code) {
@@ -28,7 +28,7 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
   return (
     <section
       aria-label="Kode"
-      className="aksel-codesnippet relative mb-7 grid rounded-lg bg-[#282a36] last:mb-0"
+      className="aksel-codesnippet bg-surface-inverted relative mb-7 grid rounded-lg last:mb-0"
     >
       <div className="text-text-on-inverted text-medium relative flex leading-6">
         <div className="mt-2 flex flex-none items-center border-b border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">
@@ -40,7 +40,7 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
             <Label as="span">{title}</Label>
           )}
         </div>
-        <div className="mt-2 flex h-10 flex-auto rounded-tl bg-[#44475a] shadow-inner" />
+        <div className="mt-2 flex h-10 flex-auto rounded-tl bg-gray-100/10 shadow-inner" />
 
         <CopyButton
           data-theme="dark"
@@ -49,10 +49,10 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
           className="absolute right-2 top-3"
         />
       </div>
-      <Highlight code={code.code} language={language} theme={dracula}>
+      <Highlight code={code.code} language={language} theme={theme}>
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre className="text-medium m-0 flex overflow-auto rounded-lg leading-6">
-            <code className="max-h-80 min-w-full flex-none p-4">
+            <code className="max-h-80 min-w-full flex-none p-4 pb-0">
               {tokens.map((line, i) => (
                 <span
                   key={i}
