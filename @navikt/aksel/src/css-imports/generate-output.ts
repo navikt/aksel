@@ -7,6 +7,7 @@ import {
   componentDir,
   rootDir,
   globalDir,
+  primitivesCss,
 } from "@navikt/ds-css/config/_mappings";
 import { inquiry } from "./inquiry";
 import clipboard from "clipboardy";
@@ -141,6 +142,13 @@ function advancedOutput(
   if (componentImportsList.find((x) => x === formCss)) {
     componentImportsList = componentImportsList.filter((x) => x !== formCss);
     componentImportsList.unshift(formCss);
+  }
+
+  if (componentImportsList.find((x) => x === primitivesCss)) {
+    componentImportsList = componentImportsList.filter(
+      (x) => x !== primitivesCss
+    );
+    componentImportsList.unshift(primitivesCss);
   }
 
   if (componentImportsList.find((x) => x === typoCss)) {
