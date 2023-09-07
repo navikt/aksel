@@ -39,7 +39,7 @@ const Placeholder = ({
   return (
     <div
       className={cl(
-        "min-h-48 text-text-on-action grid h-auto w-auto place-content-center rounded p-2",
+        "min-h-24 text-text-on-action grid aspect-video h-auto w-auto place-content-center rounded p-2",
         {
           "bg-pink-600": mobil,
           "bg-violet-600": desktop,
