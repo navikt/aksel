@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.3.4
+
+### Patch Changes
+
+- Alert: 12px -> 8px gap mellom tekst og ikon ved `size="small"` ([#2240](https://github.com/navikt/aksel/pull/2240))
+
 ## 5.3.3
 
 ### Patch Changes

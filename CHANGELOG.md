@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.3.4
+
+### @navikt/aksel-icons
+
+- :bug: SVG import map er nå riktig path ([#2250](https://github.com/navikt/aksel/pull/2250))
+
+### @navikt/ds-css
+
+- Alert: 12px -> 8px gap mellom tekst og ikon ved `size="small"` ([#2240](https://github.com/navikt/aksel/pull/2240))
+
 ## 5.3.3
 
 ### @navikt/ds-react
