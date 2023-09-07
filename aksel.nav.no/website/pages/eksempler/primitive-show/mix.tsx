@@ -21,12 +21,11 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
 };
 
 export const args = {
-  index: 2,
-  desc: "Prøv å endre størrelse på nettleservindu",
+  index: 1,
+  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
 };
 
 const Placeholder = ({

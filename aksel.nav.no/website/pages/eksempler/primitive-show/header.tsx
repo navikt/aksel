@@ -55,7 +55,6 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
 };
 
 export const args = {
