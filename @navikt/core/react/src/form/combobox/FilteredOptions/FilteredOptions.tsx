@@ -42,17 +42,17 @@ const FilteredOptions = () => {
       {maxSelectedOptions != null &&
         selectedOptions.length >= maxSelectedOptions && (
           <li
-            className="navds-combobox__list-item__max-selected"
+            className="navds-combobox__list-item navds-combobox__list-item__max-selected"
             role="option"
             aria-selected={false}
             id={`${id}-max-selected`}
           >
-            ({`${selectedOptions.length} av ${maxSelectedOptions} er valgt`})
+            {`${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
           </li>
         )}
       {isLoading && (
         <li
-          className="navds-combobox__list-item__loading"
+          className="navds-combobox__list-item navds-combobox__list-item__loading"
           role="option"
           aria-selected={false}
           id={`${id}-is-loading`}
@@ -75,10 +75,13 @@ const FilteredOptions = () => {
               toggleIsListOpen(false);
           }}
           id={`${id}-combobox-new-option`}
-          className={cl("navds-combobox__list-item__new-option", {
-            "navds-combobox__list-item__new-option--focus":
-              filteredOptionsIndex === -1,
-          })}
+          className={cl(
+            "navds-combobox__list-item navds-combobox__list-item__new-option",
+            {
+              "navds-combobox__list-item__new-option--focus":
+                filteredOptionsIndex === -1,
+            }
+          )}
           role="option"
           aria-selected={false}
         >
@@ -93,7 +96,7 @@ const FilteredOptions = () => {
       )}
       {!isLoading && filteredOptions.length === 0 && (
         <li
-          className="navds-combobox__list-item__no-options"
+          className="navds-combobox__list-item navds-combobox__list-item__no-options"
           role="option"
           aria-selected={false}
           id={`${id}-no-hits`}

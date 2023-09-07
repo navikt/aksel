@@ -318,18 +318,28 @@ ComboboxSizes.args = {
   options,
 };
 
-export const WithMaxFourChoices = (props) => {
+export const MaxSelectedOptions = (props) => {
   const id = useId();
   return (
     <DemoContainer dataTheme={props.darkMode}>
       <UNSAFE_Combobox
         id={id}
-        label="Komboboks (uten søketreff)"
+        label="Komboboks med begrenset antall valg"
         options={props.options}
-        maxSelectedOptions={4}
+        maxSelectedOptions={2}
+        selectedOptions={props.selectedOptions}
+        isMultiSelect
+        allowNewValues
+        isListOpen
+        value="a"
       />
     </DemoContainer>
   );
+};
+
+MaxSelectedOptions.args = {
+  options,
+  selectedOptions: [options[0], options[1]],
 };
 
 export const WithError = {
