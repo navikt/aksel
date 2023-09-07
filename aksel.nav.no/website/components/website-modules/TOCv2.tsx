@@ -151,7 +151,7 @@ export function TableOfContentsv2({
       <nav
         aria-labelledby="toc-heading"
         id="toc-scroll"
-        className="max-h-[80vh] overflow-y-auto"
+        className="max-h-[80vh] w-full overflow-y-auto"
       >
         <ul>
           {toc.map((link) => {

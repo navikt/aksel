@@ -50,7 +50,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, { showBreakpoints: true });
 
 /* Storybook story */
 export const Demo = {
