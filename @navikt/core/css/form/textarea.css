@@ -1,12 +1,23 @@
 [data-theme="dark"] {
-  --ac-textarea-text: var(--a-text-on-inverted);
-  --ac-textarea-bg: var(--a-transparent);
-  --ac-textarea-border: var(--a-border-on-inverted);
-  --ac-textarea-hover-border: var(--a-blue-200);
-  --ac-textarea-placeholder: var(--a-gray-500);
-  --ac-textarea-error-border: var(--a-red-300);
-  --ac-textarea-counter-text: var(--a-gray-300);
-  --ac-textarea-counter-error-text: var(--a-red-300);
+  --__ac-textarea-text: var(--a-text-on-inverted);
+  --__ac-textarea-bg: var(--a-transparent);
+  --__ac-textarea-border: var(--a-border-on-inverted);
+  --__ac-textarea-hover-border: var(--a-blue-200);
+  --__ac-textarea-placeholder: var(--a-gray-500);
+  --__ac-textarea-error-border: var(--a-red-300);
+  --__ac-textarea-counter-text: var(--a-gray-300);
+  --__ac-textarea-counter-error-text: var(--a-red-300);
+}
+
+[data-theme="light"] {
+  --__ac-textarea-text: initial;
+  --__ac-textarea-bg: initial;
+  --__ac-textarea-border: initial;
+  --__ac-textarea-hover-border: initial;
+  --__ac-textarea-placeholder: initial;
+  --__ac-textarea-error-border: initial;
+  --__ac-textarea-counter-text: initial;
+  --__ac-textarea-counter-error-text: initial;
 }
 
 .navds-textarea__wrapper {
@@ -17,13 +28,13 @@
 .navds-textarea__input {
   appearance: none;
   padding: var(--a-spacing-2);
-  background-color: var(--ac-textarea-bg, var(--a-surface-default));
+  background-color: var(--ac-textarea-bg, var(--__ac-textarea-bg, var(--a-surface-default)));
   border-radius: var(--a-border-radius-medium);
-  border: 1px solid var(--ac-textarea-border, var(--a-border-default));
+  border: 1px solid var(--ac-textarea-border, var(--__ac-textarea-border, var(--a-border-default)));
   resize: none;
   width: 100%;
   display: block;
-  color: var(--ac-textarea-text, var(--a-text-default));
+  color: var(--ac-textarea-text, var(--__ac-textarea-text, var(--a-text-default)));
 }
 
 .navds-textarea--counter {
@@ -31,11 +42,11 @@
 }
 
 .navds-textarea__input::placeholder {
-  color: var(--ac-textarea-placeholder, var(--a-text-subtle));
+  color: var(--ac-textarea-placeholder, var(--__ac-textarea-placeholder, var(--a-text-subtle)));
 }
 
 .navds-textarea__input:hover {
-  border-color: var(--ac-textarea-hover-border, var(--a-border-action));
+  border-color: var(--ac-textarea-hover-border, var(--__ac-textarea-hover-border, var(--a-border-action)));
 }
 
 .navds-textarea__input:focus-visible {
@@ -60,7 +71,7 @@
 
 .navds-textarea__counter {
   pointer-events: none;
-  color: var(--ac-textarea-counter-text, var(--a-text-subtle));
+  color: var(--ac-textarea-counter-text, var(--__ac-textarea-counter-text, var(--a-text-subtle)));
   font-style: italic;
   position: absolute;
   text-align: left;
@@ -70,7 +81,7 @@
 }
 
 .navds-textarea__counter--error {
-  color: var(--ac-textarea-counter-error-text, var(--a-text-danger));
+  color: var(--ac-textarea-counter-error-text, var(--__ac-textarea-counter-error-text, var(--a-text-danger)));
 }
 
 .navds-textarea--resize .navds-textarea__input {
@@ -81,20 +92,20 @@
   Error handling
 */
 .navds-textarea--error .navds-textarea__input:not(:hover):not(:focus-visible):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--a-border-danger));
-  border-color: var(--ac-textarea-error-border, var(--a-border-danger));
+  box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
+  border-color: var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
 }
 
 @supports not selector(:focus-visible) {
   .navds-textarea--error .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
-    box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--a-border-danger));
-    border-color: var(--ac-textarea-error-border, var(--a-border-danger));
+    box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
+    border-color: var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
   }
 }
 
 .navds-textarea__input:disabled {
-  background-color: var(--ac-textarea-bg, var(--a-surface-default));
-  border-color: var(--ac-textarea-border, var(--a-border-default));
+  background-color: var(--ac-textarea-bg, var(--__ac-textarea-bg, var(--a-surface-default)));
+  border-color: var(--ac-textarea-border, var(--__ac-textarea-border, var(--a-border-default)));
   box-shadow: none;
   cursor: not-allowed;
 }

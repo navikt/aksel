@@ -8,14 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import {
-  BodyShort,
-  ErrorMessage,
-  Label,
-  mergeRefs,
-  omit,
-  useEventListener,
-} from "../..";
+import { BodyShort, ErrorMessage, Label, mergeRefs, omit } from "../..";
 import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 
@@ -135,7 +128,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
 
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([searchRef, ref]), [ref]);
-    const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
 
@@ -156,27 +148,22 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       [handleChange, onClear]
     );
 
-    useEventListener(
-      "keydown",
-      useCallback(
-        (e) => {
-          if (e.key === "Escape") {
-            e.preventDefault();
-            handleClear({ trigger: "Escape", event: e });
-          }
-        },
-        [handleClear]
-      ),
-      wrapperRef
-    );
-
     const handleClick = () => {
       onSearchClick?.(`${value ?? internalValue}`);
     };
 
     return (
       <div
-        ref={setWrapperRef}
+        onKeyDown={(e) => {
+          if (e.key !== "Escape") {
+            return;
+          }
+          searchRef.current?.value &&
+            searchRef.current?.value !== "" &&
+            e.preventDefault();
+
+          handleClear({ trigger: "Escape", event: e });
+        }}
         className={cl(
           className,
           "navds-form-field",

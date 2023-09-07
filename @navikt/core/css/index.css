@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import "baseline/index.css";
 @import "typography.css";
+@import "primitives/index.css";
 @import "grid.css";
 @import "accordion.css";
 @import "alert.css";
@@ -14,7 +15,6 @@
 @import "guide-panel.css";
 @import "form/index.css";
 @import "help-text.css";
-@import "hgrid.css";
 @import "internalheader.css";
 @import "link.css";
 @import "loader.css";
@@ -30,7 +30,6 @@
 @import "link-panel.css";
 @import "read-more.css";
 @import "skeleton.css";
-@import "stack.css";
 @import "stepper.css";
 @import "table.css";
 @import "tabs.css";

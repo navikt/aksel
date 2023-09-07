@@ -36,3 +36,4 @@ export * from "./layout/box";
 export * from "./layout/stack";
 export * from "./layout/grid";
 export * from "./layout/content-container";
+export * from "./layout/responsive";
