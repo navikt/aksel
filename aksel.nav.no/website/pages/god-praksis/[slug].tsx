@@ -157,7 +157,6 @@ const Page = ({ tema: page }: PageProps["props"]) => {
               <div className="mt-4 flex flex-col items-center justify-between gap-8">
                 <SanityBlockContent
                   blocks={page.beskrivelse}
-                  noLastMargin
                   className="override-text-700 max-w-prose xl:mb-8"
                   isIngress
                 />
@@ -203,10 +202,7 @@ const Page = ({ tema: page }: PageProps["props"]) => {
                       </Heading>
                       {seksjon.beskrivelse && (
                         <div className="max-w-prose">
-                          <SanityBlockContent
-                            blocks={seksjon.beskrivelse}
-                            noLastMargin
-                          />
+                          <SanityBlockContent blocks={seksjon.beskrivelse} />
                         </div>
                       )}
                       <div className="card-grid-3-1 mt-6">

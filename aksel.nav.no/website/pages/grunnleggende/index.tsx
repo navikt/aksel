@@ -1,20 +1,20 @@
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { urlFor } from "@/sanity/interface";
+import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
   AkselLandingPageDocT,
   AkselSidebarT,
   ArticleListT,
   NextPageT,
 } from "@/types";
-import { Heading, Ingress } from "@navikt/ds-react";
+import { BodyLong, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { WithSidebar } from "components/layout/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import Head from "next/head";
 import { Suspense, lazy } from "react";
 import { grunnleggendeKategorier } from "../../sanity/config";
-import { urlFor } from "@/sanity/interface";
-import { sidebarQuery, landingPageQuery } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
@@ -106,9 +106,9 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
               </Heading>
               <div>
                 {page?.[`ingress_${kat.value}`] && (
-                  <Ingress className="mb-4 only:mb-7">
+                  <BodyLong size="large" className="mb-4 only:mb-7">
                     {page[`ingress_${kat.value}`]}
-                  </Ingress>
+                  </BodyLong>
                 )}
                 {page?.[`intro_${kat.value}`] && (
                   <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
