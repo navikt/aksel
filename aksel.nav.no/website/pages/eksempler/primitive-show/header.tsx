@@ -28,9 +28,11 @@ const Example = () => {
                 Søk
               </Button>
             </Show>
-            <Button icon={<BellIcon aria-hidden />} variant="tertiary">
-              Varsler
-            </Button>
+            <Show above="sm">
+              <Button icon={<BellIcon aria-hidden />} variant="tertiary">
+                Varsler
+              </Button>
+            </Show>
             <Show above="md">
               <Button icon={<PersonIcon aria-hidden />} variant="tertiary">
                 <BodyShort weight="semibold" truncate className="max-w-[10vw]">
