@@ -30,7 +30,6 @@
   "dependencies": {
     "@amplitude/analytics-browser": "^2.2.3",
     "@portabletext/react": "^3.0.7",
-    "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^6.4.6",
     "@sanity/code-input": "4.1.1",
     "@sanity/color-input": "^3.1.0",

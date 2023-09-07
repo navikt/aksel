@@ -1,6 +1,6 @@
 import { WarningOutlineIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
-import { toPlainText } from "../../../util";
+import { toPlainText } from "@portabletext/react";
 
 export const Alert = defineType({
   name: "alert",
