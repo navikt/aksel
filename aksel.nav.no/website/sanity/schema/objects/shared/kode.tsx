@@ -15,25 +15,32 @@ export const Kode = defineType({
       validation: (Rule) => Rule.required(),
       options: {
         languageAlternatives: [
-          { value: "js", title: "Javascript" },
-          { value: "jsx", title: "JSX" },
+          { value: "tsx", title: "TSX" },
+          { value: "javascript", title: "Javascript" },
           { value: "html", title: "HTML" },
           { value: "css", title: "CSS" },
-          { value: "less", title: "Less" },
-          { value: "terminal", title: "Terminal/Bash" },
-          { value: "terminal", title: "Standard" },
+          { value: "scss", title: "SCSS" },
+          { value: "less", title: "LESS" },
+          { value: "bash", title: "Terminal" },
+          { value: "markdown", title: "Markdown" },
         ],
       },
+    }),
+    defineField({
+      title: "Title",
+      name: "title",
+      description: "Erstatter kodespråk som tittel",
+      type: "string",
     }),
   ],
   preview: {
     select: {
       code: "code",
-      ref: "ref.title",
+      title: "title",
     },
-    prepare: ({ code, ref }) => ({
-      title: code ? `${code?.code?.slice(0, 50)}...` : ref ? ref : "Kode",
-      subtitle: "kode",
+    prepare: ({ code, title }) => ({
+      title: code ? `${code?.code?.slice(0, 50)}...` : "Kode",
+      subtitle: title ?? "kode",
       media: CodeBlockIcon,
     }),
   },

@@ -18,12 +18,21 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
     case "js":
       language = "javascript";
       break;
-    case "bash":
-      language = "terminal";
+    case "jsx":
+      language = "tsx";
+      break;
+    case "scss":
+      language = "css";
+      break;
+    case "less":
+      language = "css";
       break;
     default:
       break;
   }
+
+  const terminalStyling = (lang) => lang === "bash" || lang === "terminal";
+  const formatTitle = (input) => (input === "bash" ? "Terminal" : input);
 
   return (
     <section
@@ -34,7 +43,7 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
         <div className="mt-2 flex flex-none items-center border-b border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">
           {!title ? (
             <Label as="span" className="uppercase">
-              {language}
+              {formatTitle(language)}
             </Label>
           ) : (
             <Label as="span">{title}</Label>
@@ -59,10 +68,10 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
                   {...getLineProps({ line, key: i })}
                   className={cl(
                     "last-of-type:pb-4",
-                    language === "terminal" ? "flex items-center" : "block"
+                    terminalStyling(language) ? "flex items-center" : "block"
                   )}
                 >
-                  {language === "terminal" && (
+                  {terminalStyling(language) && (
                     <ChevronRightIcon
                       aria-hidden
                       className="mr-2 h-5 w-auto flex-none overflow-visible text-pink-400"

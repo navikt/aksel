@@ -208,7 +208,7 @@ const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
 
                 <Snippet
                   node={{
-                    code: { code: fil.innhold.trim(), language: "jsx" },
+                    code: { code: fil.innhold.trim(), language: "tsx" },
                   }}
                 />
               </>
