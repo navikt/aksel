@@ -193,7 +193,6 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const component = (
       <dialog
         {...rest}
-        data-theme="light"
         ref={mergedRef}
         className={cl("navds-modal", className, {
           "navds-modal--polyfilled": needPolyfill,
