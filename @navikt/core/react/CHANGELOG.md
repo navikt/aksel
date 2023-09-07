@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 5.3.5
+
+### Patch Changes
+
+- :bug: Popover: sjekk at det er et HTML-element som får fokus ([#2258](https://github.com/navikt/aksel/pull/2258))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.3.5
+
+## 5.3.4
+
+### Patch Changes
+
+- Updated dependencies [[`27dacfdbe`](https://github.com/navikt/aksel/commit/27dacfdbe96a861b19c20d4494485c863d0ee8d9)]:
+  - @navikt/aksel-icons@5.3.4
+
 ## 5.3.3
 
 ### Patch Changes
