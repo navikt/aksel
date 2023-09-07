@@ -8,7 +8,7 @@ const Example = () => {
   return <Label size="small">{lorem}</Label>;
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, "static");
 
 /* Storybook story */
 export const Demo = {

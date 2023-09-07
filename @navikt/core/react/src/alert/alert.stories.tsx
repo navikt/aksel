@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Alert } from ".";
+import { Alert, AlertProps } from ".";
 import { BodyLong, Heading as DsHeading, Link } from "..";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
@@ -14,7 +14,7 @@ export default meta;
 
 type Story = StoryObj<typeof Alert>;
 
-const variants: Array<"error" | "warning" | "info" | "success"> = [
+const variants: AlertProps["variant"][] = [
   "error",
   "warning",
   "info",
@@ -33,24 +33,17 @@ export const Default: Story = {
   },
   argTypes: {
     variant: {
-      control: {
-        type: "radio",
-      },
+      control: { type: "radio" },
       options: ["info", "error", "warning", "success"],
     },
     size: {
-      control: {
-        type: "radio",
-      },
+      control: { type: "radio" },
       options: ["medium", "small"],
-    },
-    closeButton: {
-      type: "boolean",
     },
   },
 };
 
-export const Small = {
+export const Small: Story = {
   render: (props) => {
     return (
       <div className="colgap">
@@ -69,13 +62,9 @@ export const Small = {
       </div>
     );
   },
+
   args: {
     closeButton: false,
-  },
-  argtypes: {
-    closeButton: {
-      type: "boolean",
-    },
   },
 };
 
@@ -160,16 +149,25 @@ export const Links = () => {
   );
 };
 
-const AlertWithCloseButton = ({ children }: { children?: React.ReactNode }) => {
+const AlertWithCloseButton = ({
+  children,
+  size,
+}: {
+  size?: "medium" | "small";
+  children?: React.ReactNode;
+}) => {
   let [show, setShow] = React.useState(true);
 
-  return (
-    show && (
-      <Alert variant="success" closeButton onClose={() => setShow(false)}>
-        {children || "Content"}
-      </Alert>
-    )
-  );
+  return show ? (
+    <Alert
+      variant="warning"
+      size={size}
+      closeButton
+      onClose={() => setShow(false)}
+    >
+      {children || "Content"}
+    </Alert>
+  ) : null;
 };
 
 export const WithCloseButton: Story = {
@@ -178,14 +176,22 @@ export const WithCloseButton: Story = {
       <div className="colgap">
         <AlertWithCloseButton />
         <AlertWithCloseButton>
+          <BodyLong>Ullamco ullamco laborum et commodo sint culpa</BodyLong>
+        </AlertWithCloseButton>
+        <AlertWithCloseButton>
+          <DsHeading spacing size="small" level="3">
+            Aliquip duis est in commodo pariatur
+          </DsHeading>
           <BodyLong>
             Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
             laboris ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat
             sint commodo consequat eu aute.
           </BodyLong>
-          <Link href="#">Id elit esse enim reprehenderit</Link>
         </AlertWithCloseButton>
-        <AlertWithCloseButton>
+        <AlertWithCloseButton size="small">
+          <BodyLong>Ullamco ullamco laborum et commodo</BodyLong>
+        </AlertWithCloseButton>
+        <AlertWithCloseButton size="small">
           <DsHeading spacing size="small" level="3">
             Aliquip duis est in commodo pariatur
           </DsHeading>
@@ -207,6 +213,6 @@ export const WithCloseButton: Story = {
     });
 
     const buttonsAfter = canvas.getAllByTitle("Lukk Alert");
-    expect(buttonsAfter.length).toBe(2);
+    expect(buttonsAfter.length).toBe(4);
   },
 };

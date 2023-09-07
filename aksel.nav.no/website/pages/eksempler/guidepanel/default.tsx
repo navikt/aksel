@@ -20,4 +20,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  desc: "Hvis 'poster'-propen ikke er satt, brukes poster-varianten automatisk på mobil (<480px).",
 };

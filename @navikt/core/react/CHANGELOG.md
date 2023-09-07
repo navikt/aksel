@@ -1,5 +1,60 @@
 # @navikt/ds-react
 
+## 5.3.4
+
+### Patch Changes
+
+- Updated dependencies [[`27dacfdbe`](https://github.com/navikt/aksel/commit/27dacfdbe96a861b19c20d4494485c863d0ee8d9)]:
+  - @navikt/aksel-icons@5.3.4
+
+## 5.3.3
+
+### Patch Changes
+
+- HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.3.3
+
+## 5.3.2
+
+### Patch Changes
+
+- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.3.2
+
+## 5.3.1
+
+### Patch Changes
+
+- Fix bug in monthpicker, only compare year and month for equality on date object ([#2231](https://github.com/navikt/aksel/pull/2231))
+
+- :lipstick: GuidePanel: justert design ([#2227](https://github.com/navikt/aksel/pull/2227))
+
+- :bug: DatePicker: Riktig skriftstørrelse på small input ([#2232](https://github.com/navikt/aksel/pull/2232))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.3.1
+
+## 5.3.0
+
+### Minor Changes
+
+- Heading: Oppdatert med props `textColor`, `align`, `visuallyHidden`. ([#2211](https://github.com/navikt/aksel/pull/2211))
+
+- Label: Oppdatert med props `textColor` og `visuallyHidden`. ([#2211](https://github.com/navikt/aksel/pull/2211))
+
+- BodyLong, BodyShort, Detail: Oppdatert med props `textColor`,`weight`,`align`, `visuallyHidden` og `truncated`. ([#2211](https://github.com/navikt/aksel/pull/2211))
+
+### Patch Changes
+
+- :wheelchair: Textarea: Skjermleser-spesifikk tekst leses opp sammenhengende ([#2216](https://github.com/navikt/aksel/pull/2216))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.3.0
+
 ## 5.2.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "5.2.1",
+  "version": "5.3.4",
   "author": "Aksel | NAV",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -33,7 +33,7 @@
       "import": "./dist/react/esm/index.js",
       "require": "./dist/react/cjs/index.js"
     },
-    "./svg/*.svg": "./dist/react/svg/*.svg",
+    "./svg/*.svg": "./dist/svg/*.svg",
     "./metadata": {
       "types": "./dist/metadata.d.ts",
       "default": "./dist/metadata.js"

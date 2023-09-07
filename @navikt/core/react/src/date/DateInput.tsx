@@ -113,7 +113,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
             "navds-date__field-input",
             "navds-text-field__input",
             "navds-body-short",
-            `navds-body-${size}`
+            `navds-body-short--${size}`
           )}
           size={14}
         />
