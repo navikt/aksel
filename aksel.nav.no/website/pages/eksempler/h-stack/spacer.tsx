@@ -13,7 +13,10 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, { variant: "static" });
+export default withDsExample(Example, {
+  variant: "full",
+  showBreakpoints: true,
+});
 
 /* Storybook story */
 export const Demo = {
