@@ -1,5 +1,27 @@
 # Changelog
 
+## 5.4.0
+
+### @navikt/ds-react
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+<!---->
+
+- Search: Kjører nå bare preventDefault ved Escape når `input` inneholder tekst ([#2245](https://github.com/navikt/aksel/pull/2245))
+
+### @navikt/ds-tokens
+
+- Tokens: `data-theme="light"` vil nå tilbakestille theming ([#2238](https://github.com/navikt/aksel/pull/2238))
+
+### @navikt/ds-css
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+<!---->
+
+- ErrorSummary: Har nå 8px border-radius ([#2256](https://github.com/navikt/aksel/pull/2256))
+
 ## 5.3.5
 
 ### @navikt/ds-react
