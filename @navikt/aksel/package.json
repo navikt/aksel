@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel",
-  "version": "5.3.1",
+  "version": "5.3.4",
   "description": "Aksel command line interface. Handles css-imports, codemods and more",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://aksel.nav.no/grunnleggende/kode/kommandolinje",
   "dependencies": {
-    "@navikt/ds-css": "5.3.1",
+    "@navikt/ds-css": "5.3.4",
     "axios": "1.3.6",
     "chalk": "4.1.0",
     "clipboardy": "^2.3.0",
