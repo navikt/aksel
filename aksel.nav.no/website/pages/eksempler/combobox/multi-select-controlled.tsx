@@ -23,7 +23,9 @@ const initialSelectedOptions = ["Norge"];
 
 export const Example = () => {
   const [value, setValue] = useState("");
-  const mockPersistUserAddedValues = (value, isSelected) => undefined;
+  const mockPersistUserAddedValues = (value, isSelected) => {
+    console.log("custom option", { value, isSelected });
+  };
 
   const [selectedOptions, setSelectedOptions] = useState(
     initialSelectedOptions
@@ -55,7 +57,7 @@ export const Example = () => {
         label="Hvilke land har du besøkt de siste 6 ukene? Velg opptil flere."
         filteredOptions={filteredOptions}
         isMultiSelect
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event) => setValue(event?.target.value || "")}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
         options={initialOptions}

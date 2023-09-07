@@ -71,7 +71,6 @@ export const SearchForm = () => {
           autoCorrect="off"
           autoCapitalize="off"
           spellCheck={false}
-          autoFocus
           id="aksel-search-input"
           clearButton={false}
           placeholder="Søk gjennom hele aksel"

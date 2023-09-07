@@ -35,5 +35,3 @@ describe("Utils test", () => {
     expect(abbrName("Ola Test Test2 Normann")).toEqual("Ola T. T. Normann");
   });
 });
-
-export {};

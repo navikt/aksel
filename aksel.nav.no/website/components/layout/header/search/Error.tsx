@@ -26,7 +26,7 @@ export const Error = () => {
         {Object.keys(searchOptions)
           .slice(0, Object.keys(searchOptions).length - 1)
           .map((x) => (
-            <Skeleton variant="rounded" height="1.75rem">
+            <Skeleton key={x} variant="rounded" height="1.75rem">
               {searchOptions[x].display}
             </Skeleton>
           ))}

@@ -39,9 +39,9 @@ export const Results = () => {
           aria-live="polite"
           aria-atomic
         >
-          <span className="text-text-subtle">{`Ingen treff på "`}</span>
+          <span className="text-text-subtle">Ingen treff på &quot;</span>
           <span className="break-all">{query}</span>
-          <span className="text-text-subtle">"</span>
+          <span className="text-text-subtle">&quot;</span>
           {tags.length > 0 && (
             <span className="text-text-subtle">{` i ${tags
               .map((x) => searchOptions[x].display.toLowerCase())

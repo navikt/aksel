@@ -72,7 +72,7 @@ export const RelatertInnhold = defineType({
     select: {
       links: "links",
     },
-    prepare(s) {
+    prepare() {
       return { title: "Relatert innhold kort", media: () => <LinkIcon /> };
     },
   },
