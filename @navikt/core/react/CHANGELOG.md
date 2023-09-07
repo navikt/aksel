@@ -1,5 +1,18 @@
 # @navikt/ds-react
 
+## 5.4.0
+
+### Minor Changes
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+### Patch Changes
+
+- Search: Kjører nå bare preventDefault ved Escape når `input` inneholder tekst ([#2245](https://github.com/navikt/aksel/pull/2245))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.4.0
+
 ## 5.3.5
 
 ### Patch Changes

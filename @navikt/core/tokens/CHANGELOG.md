@@ -1,5 +1,11 @@
 # @navikt/ds-tokens
 
+## 5.4.0
+
+### Patch Changes
+
+- Tokens: `data-theme="light"` vil nå tilbakestille theming ([#2238](https://github.com/navikt/aksel/pull/2238))
+
 ## 5.3.5
 
 ## 5.3.4
