@@ -8,19 +8,19 @@ export default {
   component: Tabs,
   argTypes: {
     size: {
+      options: ["medium", "small"],
       control: {
         type: "radio",
-        options: ["medium", "small"],
       },
     },
     iconPosition: {
+      options: ["top", "left"],
       control: {
         type: "radio",
-        options: ["top", "left"],
       },
     },
   },
-} as Meta;
+} satisfies Meta<typeof Tabs>;
 
 const Panel = () => {
   return (
