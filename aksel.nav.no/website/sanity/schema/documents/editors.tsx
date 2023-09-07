@@ -147,7 +147,7 @@ export const Editors = defineType({
       title: "Navn",
       name: "title",
       description:
-        "Det er frivillig å vise navnet ditt på Aksel. Hvis du ikke ønsker at navnet ditt skal være tilgjengelig kan du velge 'Gjør meg anonym' rett under.",
+        "Det er frivillig å vise navnet ditt på Aksel. Hvis du ikke ønsker at navnet ditt skal være tilgjengelig kan man velge å bare bruke fornavn eller sette seg som 'anonym'",
       type: "string",
       validation: (Rule) => Rule.required().error("Må legge til navn"),
     }),
@@ -177,7 +177,7 @@ export const Editors = defineType({
       title: "Sanity bruker-id (dev only)",
       name: "user_id",
       type: "slug",
-      validation: (Rule) => Rule.required().error("Må ha Id"),
+      validation: (Rule) => Rule.required(),
       options: {
         source: (_, { currentUser }) => {
           return currentUser.id;
