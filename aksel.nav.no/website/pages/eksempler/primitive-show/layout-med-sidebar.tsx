@@ -32,17 +32,16 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, { showBreakpoints: true });
 
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
 };
 
 export const args = {
   index: 2,
-  desc: "Prøv å endre størrelse på nettleservindu",
+  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
 };
 
 const ContentFirst = () => (

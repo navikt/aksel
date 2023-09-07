@@ -1,9 +1,9 @@
-import { Accordion, Loader } from "@navikt/ds-react";
+import { Alert, BodyLong, Heading, Loader } from "@navikt/ds-react";
 import { Card } from "@sanity/ui";
 import {
-  getPublishedId,
   IntentButton,
   Preview,
+  getPublishedId,
   useClient,
   useSchema,
 } from "sanity";
@@ -60,8 +60,17 @@ export function FeedbackView(props) {
 
   return (
     <div className="grid place-items-center">
-      <div className="mx-auto mt-8 w-full px-6">
+      <div className="mx-auto mt-4 w-full px-6">
+        <Alert variant="info">
+          Løsning for tilbakemeldinger på Aksel er midlertidig slått av.
+        </Alert>
         <div className="mt-7">
+          <Heading level="2" size="small" spacing>
+            Tilbakemeldinger
+          </Heading>
+          {notDone.length === 0 && (
+            <BodyLong textColor="subtle">Ingen nye tilbakemeldinger</BodyLong>
+          )}
           <ul>
             {notDone.map((x) => (
               <li key={x._id}>
@@ -92,38 +101,28 @@ export function FeedbackView(props) {
         </div>
         {done.length > 0 && (
           <div className="mt-7">
-            <Accordion>
-              <Accordion.Item>
-                <Accordion.Header>{`Ferdig behandlet ${done.length}`}</Accordion.Header>
-                <Accordion.Content>
-                  <ul>
-                    {done.map((x) => (
-                      <li key={x._id}>
-                        <Card flex={1}>
-                          <IntentButton
-                            intent="edit"
-                            mode="bleed"
-                            padding={1}
-                            radius={2}
-                            params={{
-                              type: "aksel_feedback",
-                              id: getPublishedId(x._id),
-                            }}
-                            style={{ width: "100%" }}
-                          >
-                            <Preview
-                              schemaType={schemaType}
-                              value={x}
-                              key={x._id}
-                            />
-                          </IntentButton>
-                        </Card>
-                      </li>
-                    ))}
-                  </ul>
-                </Accordion.Content>
-              </Accordion.Item>
-            </Accordion>
+            <Heading level="2" size="small" spacing>
+              Ferdig behandet
+            </Heading>
+            <ul>
+              {done.map((x) => (
+                <li key={x._id}>
+                  <Card flex={1}>
+                    <IntentButton
+                      intent="edit"
+                      mode="bleed"
+                      radius={2}
+                      params={{
+                        type: "aksel_feedback",
+                        id: getPublishedId(x._id),
+                      }}
+                    >
+                      <Preview schemaType={schemaType} value={x} key={x._id} />
+                    </IntentButton>
+                  </Card>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>
