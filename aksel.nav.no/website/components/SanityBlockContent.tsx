@@ -1,17 +1,16 @@
 import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
-
+import cl from "clsx";
 import {
   PortableText,
   PortableTextMarkComponentProps,
   PortableTextReactComponents,
 } from "@portabletext/react";
-
 import ExpansionCard from "components/sanity-modules/ExpansionCard";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
 import { InlineCode } from "components/website-modules/InlineCode";
 import { KBD } from "components/website-modules/KBD";
 import NextLink from "next/link";
-import { createContext, useContext } from "react";
+
 import {
   Accordion,
   Alert,
@@ -34,7 +33,6 @@ import {
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
-    /* V2 content structure */
     relatert_innhold: ({ value }) => <RelatertInnhold node={value} />,
     innholdskort: ({ value }) => <InnholdsKort node={value} />,
     tastatur_modul: ({ value }) => <TastaturModul node={value} />,
@@ -54,85 +52,92 @@ const serializers: Partial<PortableTextReactComponents> = {
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
     uufeedback: ({ value }) => <UuFeedback node={value} />,
   },
-  block: ({ value, children }) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const context: BlockContextT = useContext(BlockContext);
-    const style = value.style;
-    /* if (children && children.length === 1 && children[0] === "") return null; */
-
-    const textProps = { children };
-    switch (style) {
-      case "normal":
-        return context?.isIngress ? (
-          <BodyLong size="large" spacing {...textProps} className="last:mb-0" />
-        ) : (
-          <BodyLong spacing {...textProps} className="last:mb-0" />
-        );
-
-      case "detail":
-        return <Detail spacing {...textProps} />;
-      case "h2":
-        return <LevelTwoHeading {...textProps} id={`h${value._key}`} />;
-      case "h3":
-        return (
-          <Heading
-            className="max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
-            spacing
-            level="3"
-            size="medium"
-            tabIndex={-1}
-            id={`h${value._key}`}
-            {...textProps}
-          />
-        );
-      case "h4":
-        return (
-          <Heading
-            className="max-w-text text-deepblue-800 mt-6"
-            spacing
-            level="4"
-            size="small"
-            id={`h${value._key}`}
-            {...textProps}
-          />
-        );
-      case "ingress":
-        return (
-          <BodyLong size="large" spacing className="max-w-text">
-            {children}
-          </BodyLong>
-        );
-      default:
-        return <BodyLong spacing {...textProps} className="max-w-text" />;
-    }
+  block: {
+    normal: ({ children }) => (
+      <BodyLong
+        spacing
+        className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
+      >
+        {children}
+      </BodyLong>
+    ),
+    detail: ({ children }) => <Detail spacing>{children}</Detail>,
+    ingress: ({ children }) => (
+      <BodyLong size="large" spacing className="max-w-text">
+        {children}
+      </BodyLong>
+    ),
+    h2: ({ children, value }) => (
+      <LevelTwoHeading id={`h${value._key}`}>{children}</LevelTwoHeading>
+    ),
+    h3: ({ children, value }) => (
+      <Heading
+        className="max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
+        spacing
+        level="3"
+        size="medium"
+        tabIndex={-1}
+        id={`h${value._key}`}
+      >
+        {children}
+      </Heading>
+    ),
+    h4: ({ children, value }) => (
+      <Heading
+        className="max-w-text text-deepblue-800 mt-6"
+        spacing
+        level="4"
+        size="small"
+        id={`h${value._key}`}
+      >
+        {children}
+      </Heading>
+    ),
+    heading4: ({ children, value }) => (
+      <Heading
+        className="max-w-text text-deepblue-800 mt-6"
+        spacing
+        level="4"
+        size="small"
+        id={`h${value._key}`}
+      >
+        {children}
+      </Heading>
+    ),
   },
-  list: (props: any) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    if (props?.type === "number") {
-      return (
-        <ol
-          type="1"
-          className="aksel-list-ol list-margin max-w-text mb-7 list-decimal last:mb-0"
-        >
-          {props.children}
-        </ol>
-      );
-    }
-    return (
+
+  list: {
+    bullet: ({ children }) => (
       <ul className="aksel-list-ul list-margin max-w-text relative mb-7 list-disc last:mb-0">
-        {props.children}
+        {children}
       </ul>
-    );
+    ),
+    number: ({ children }) => (
+      <ol
+        type="1"
+        className="aksel-list-ol list-margin max-w-text mb-7 list-decimal last:mb-0"
+      >
+        {children}
+      </ol>
+    ),
   },
-  listItem: (props: any) => {
-    return (
+  listItem: {
+    bullet: ({ children }) => (
       <BodyLong
         as="li"
         className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
       >
-        {props.children}
+        {children}
       </BodyLong>
-    );
+    ),
+    number: ({ children }) => (
+      <BodyLong
+        as="li"
+        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
+      >
+        {children}
+      </BodyLong>
+    ),
   },
   marks: {
     kbd: ({ text }) => <KBD>{text}</KBD>,
@@ -188,14 +193,6 @@ const serializers: Partial<PortableTextReactComponents> = {
   },
 };
 
-export type BlockContextT = {
-  isIngress?: boolean;
-};
-
-export const BlockContext = createContext<BlockContextT>({
-  isIngress: false,
-});
-
 export const SanityBlockContent = ({
   blocks,
   isIngress = false,
@@ -206,14 +203,17 @@ export const SanityBlockContent = ({
   isIngress?: boolean;
 }) => {
   return (
-    <BlockContext.Provider
-      value={{
-        isIngress,
-      }}
+    <div
+      className={cl(
+        className,
+        isIngress && "aksel-block-ingress group/ingress"
+      )}
     >
-      <div className={className}>
-        <PortableText value={blocks ?? []} components={serializers} />
-      </div>
-    </BlockContext.Provider>
+      <PortableText
+        value={blocks ?? []}
+        components={serializers}
+        data-test="what"
+      />
+    </div>
   );
 };
