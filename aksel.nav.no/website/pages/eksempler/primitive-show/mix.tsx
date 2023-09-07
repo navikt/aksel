@@ -16,17 +16,16 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, { showBreakpoints: true });
 
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
 };
 
 export const args = {
-  index: 2,
-  desc: "Prøv å endre størrelse på nettleservindu",
+  index: 1,
+  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
 };
 
 const Placeholder = ({
@@ -43,7 +42,7 @@ const Placeholder = ({
   return (
     <div
       className={cl(
-        "min-h-48 text-text-on-action grid h-auto w-auto place-content-center rounded p-2",
+        "min-h-24 text-text-on-action grid aspect-video h-auto w-auto place-content-center rounded p-2",
         {
           "bg-pink-600": mobil,
           "bg-violet-600": desktop,

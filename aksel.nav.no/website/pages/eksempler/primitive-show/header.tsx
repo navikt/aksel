@@ -28,9 +28,11 @@ const Example = () => {
                 Søk
               </Button>
             </Show>
-            <Button icon={<BellIcon aria-hidden />} variant="tertiary">
-              Varsler
-            </Button>
+            <Show above="sm">
+              <Button icon={<BellIcon aria-hidden />} variant="tertiary">
+                Varsler
+              </Button>
+            </Show>
             <Show above="md">
               <Button icon={<PersonIcon aria-hidden />} variant="tertiary">
                 <BodyShort weight="semibold" truncate className="max-w-[10vw]">
@@ -50,12 +52,14 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, {
+  variant: "full",
+  showBreakpoints: true,
+});
 
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
 };
 
 export const args = {

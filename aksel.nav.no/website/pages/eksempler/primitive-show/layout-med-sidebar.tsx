@@ -15,7 +15,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div className="bg-surface-subtle p-16">
+    <div className="py-12">
       <HGrid columns={{ xs: 1, md: "240px minmax(auto,700px)" }} gap="4">
         <Show above="md">
           <DesktopSidebar />
@@ -32,17 +32,19 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, {
+  showBreakpoints: true,
+  variant: "subtle",
+});
 
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
 };
 
 export const args = {
   index: 2,
-  desc: "Prøv å endre størrelse på nettleservindu",
+  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
 };
 
 const ContentFirst = () => (

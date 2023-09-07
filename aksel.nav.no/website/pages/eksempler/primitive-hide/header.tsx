@@ -28,9 +28,11 @@ const Example = () => {
                 Søk
               </Button>
             </Hide>
-            <Button icon={<BellIcon aria-hidden />} variant="tertiary">
-              Varsler
-            </Button>
+            <Hide below="sm">
+              <Button icon={<BellIcon aria-hidden />} variant="tertiary">
+                Varsler
+              </Button>
+            </Hide>
             <Hide below="md">
               <Button icon={<PersonIcon aria-hidden />} variant="tertiary">
                 <BodyShort weight="semibold" truncate className="max-w-[10vw]">
@@ -50,17 +52,19 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, {
+  variant: "full",
+  showBreakpoints: true,
+});
 
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Hide gjør det enklere å konsistent utføre layout-endringer ved konkrete brekkpunkt",
 };
 
 export const args = {
   index: 2,
-  desc: "Prøv å endre størrelse på nettleservindu",
+  desc: "Hide gjør det enklere å konsistent utføre layout-endringer ved konkrete brekkpunkt",
 };
 
 function Logo() {

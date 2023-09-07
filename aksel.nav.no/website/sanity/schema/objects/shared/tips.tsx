@@ -15,17 +15,10 @@ export const Tips = defineType({
       validation: (Rule) =>
         Rule.required().error("Tips-modul må ha noe innhold"),
     }),
-    defineField({
-      title: "Hjelp ønskes",
-      name: "eksperiment",
-      type: "boolean",
-      initialValue: false,
-    }),
   ],
   preview: {
     select: {
       body: "body",
-      eksperiment: "eksperiment",
     },
     prepare(selection) {
       return {

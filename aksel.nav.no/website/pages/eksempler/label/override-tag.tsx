@@ -5,7 +5,7 @@ const Example = () => {
   return <Label as="span">Dette er nå en span!</Label>;
 };
 
-export default withDsExample(Example, "static");
+export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */
 export const Demo = {

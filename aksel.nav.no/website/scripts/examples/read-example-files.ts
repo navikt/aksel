@@ -14,7 +14,8 @@ export const getDesc = (str: string) => {
 export const filterCode = (code: string) => {
   const exampleList = code
     .substring(0, code.indexOf("export const args ="))
-    .split("\n");
+    .split("\n")
+    .filter((x) => !x.includes("examples/withDsExample"));
 
   const storyIndex = exampleList.findIndex(
     (x) => x === "/* Storybook story */"
@@ -22,15 +23,15 @@ export const filterCode = (code: string) => {
 
   if (storyIndex === -1) {
     return exampleList
-      .filter((line) => !line.includes("withDsExample"))
       .join("\n")
+      .replace(/^\s*export default withDsExample\(Example[\s\S]*?;\s*/gm, "")
       .trim();
   }
 
   return exampleList
     .filter((_, idx) => idx < storyIndex || idx > storyIndex + 3)
-    .filter((line) => !line.includes("withDsExample"))
     .join("\n")
+    .replace(/^\s*export default withDsExample\(Example[\s\S]*?;\s*/gm, "")
     .trim();
 };
 
