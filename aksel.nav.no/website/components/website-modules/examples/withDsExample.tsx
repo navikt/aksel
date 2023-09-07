@@ -7,7 +7,13 @@ export const withDsExample = (
   /**
    * Static: Used for dynamic-height examples like ExpansionCard
    */
-  variant?: "full" | "inverted" | "static" | "subtle"
+  {
+    variant,
+    showBreakpoints,
+  }: {
+    variant?: "full" | "inverted" | "static" | "subtle";
+    showBreakpoints?: boolean;
+  } = {}
 ) => {
   const DsHOC = (props: any) => (
     <div

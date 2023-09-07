@@ -50,7 +50,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "full");
+export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */
 export const Demo = {
