@@ -21,7 +21,7 @@ const createPackageJsonsWithESMPointers = async () => {
         "package.json"
       );
 
-      const depth = (packageJsonPath.match(/\//g) || []).length;
+      const depth = packageJsonPath.split(path.sep).length - 1;
       const esmDir = `../`.repeat(depth) + "esm";
 
       const packageJson = {
