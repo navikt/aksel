@@ -1,10 +1,9 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { CodeSnippetT } from "@/types";
+import { ChevronRightIcon, TerminalIcon } from "@navikt/aksel-icons";
+import { CopyButton, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Highlight, Language } from "prism-react-renderer";
-import React from "react";
-import { CodeSnippetT } from "@/types";
-import { CopyButton, Label } from "@navikt/ds-react";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
 import theme from "./theme";
 
 const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
@@ -32,7 +31,12 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
   }
 
   const terminalStyling = (lang) => lang === "bash" || lang === "terminal";
-  const formatTitle = (input) => (input === "bash" ? "Terminal" : input);
+  const Title = ({ input }) =>
+    input === "bash" || input === "terminal" ? (
+      <TerminalIcon title="terminal" fontSize="1.5rem" />
+    ) : (
+      <span>{input}</span>
+    );
 
   return (
     <section
@@ -43,7 +47,7 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
         <div className="mt-2 flex flex-none items-center border-b border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">
           {!title ? (
             <Label as="span" className="uppercase">
-              {formatTitle(language)}
+              <Title input={language} />
             </Label>
           ) : (
             <Label as="span">{title}</Label>

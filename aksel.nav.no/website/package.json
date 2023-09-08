@@ -36,7 +36,6 @@
     "@sanity/image-url": "1.0.2",
     "@sanity/table": "1.0.1",
     "@sanity/vision": "3.16.2",
-    "@svgr/webpack": "^5.5.0",
     "boring-avatars": "1.10.1",
     "clsx": "^1.2.1",
     "codesandbox": "^2.2.3",
