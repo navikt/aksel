@@ -18,7 +18,7 @@ export function TableOfContentsv2({ changedState }: { changedState: any }) {
   return (
     <aside
       className={cl(
-        "toc-ignore sticky top-20 z-[1] order-1 my-0 mb-16 ml-6 mr-auto h-full max-w-[160px] flex-col items-start overflow-x-hidden sm:-mr-6 md:-mr-10",
+        "toc-ignore sticky top-20 z-[1] order-1 my-0 mb-16 ml-6 mr-auto h-full w-full max-w-[160px] flex-col items-start overflow-x-hidden sm:-mr-6 md:-mr-10",
         {
           "invisible hidden": !renderToc,
           "invisible hidden xl:visible xl:flex": renderToc,
