@@ -15,6 +15,12 @@
   display: none;
 }
 
+/* stylelint-disable-next-line aksel/no-class-override */
 .aksel-admin.aksel-admin svg[focusable="false"] {
   font-size: calc(30 / 16 * 1em);
+}
+
+/* stylelint-disable-next-line aksel/no-class-override */
+.aksel-admin.aksel-admin :where(.navds-button, .navds-copybutton) svg[focusable="false"] {
+  font-size: inherit;
 }
