@@ -68,12 +68,6 @@ const config = () =>
         },
       ];
     },
-    rewrites: async () => [
-      {
-        source: "/sitemap.xml",
-        destination: "/api/sitemap",
-      },
-    ],
     async redirects() {
       return [
         {
@@ -109,8 +103,4 @@ const config = () =>
     },
   });
 
-if (process.env.NODE_ENV === "production") {
-  module.exports = config();
-} else {
-  module.exports = config();
-}
+module.exports = config();
