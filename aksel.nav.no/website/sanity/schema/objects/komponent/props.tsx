@@ -51,7 +51,7 @@ export const PropsSeksjon = defineType({
     prepare() {
       return {
         title: "Props",
-        media: UlistIcon,
+        media: BulletListIcon,
       };
     },
   },

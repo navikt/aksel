@@ -70,7 +70,7 @@ export const Accordion = defineType({
       list: "list",
     },
     prepare({ ...props }) {
-      return { title: "Accordion", media: StackCompactIcon, list: props?.list };
+      return { title: "Accordion", media: Density3Icon, list: props?.list };
     },
   },
 });
