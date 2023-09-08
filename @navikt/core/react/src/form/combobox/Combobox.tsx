@@ -87,6 +87,7 @@ export const Combobox = forwardRef<
         </BodyShort>
       )}
       <div className="navds-combobox__wrapper">
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <div
           className={cl(
             "navds-combobox__wrapper-inner navds-text-field__input",
