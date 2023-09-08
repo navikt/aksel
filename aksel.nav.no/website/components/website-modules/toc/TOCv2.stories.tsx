@@ -4,7 +4,7 @@ import TOC from "./TOCv2";
 import { useEffect, useState } from "react";
 
 const meta = {
-  title: "Sanity-modules/TOCv2",
+  title: "Website-modules/TOCv2",
   component: TOC,
   tags: ["autodocs"],
 } satisfies Meta<typeof TOC>;
