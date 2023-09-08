@@ -8677,7 +8677,6 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-storybook: ^0.6.13
     eslint-plugin-testing-library: ^6.0.1
-    eslint-stats: ^1.0.1
     fast-glob: 3.2.11
     fs-extra: ^10.0.1
     glob: ^7.1.6
@@ -13329,16 +13328,6 @@ __metadata:
     esrecurse: ^4.3.0
     estraverse: ^5.2.0
   checksum: ec97dbf5fb04b94e8f4c5a91a7f0a6dd3c55e46bfc7bbcd0e3138c3a76977570e02ed89a1810c778dcd72072ff0e9621ba1379b4babe53921d71e2e4486fda3e
-  languageName: node
-  linkType: hard
-
-"eslint-stats@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "eslint-stats@npm:1.0.1"
-  dependencies:
-    chalk: ^2.4.1
-    lodash: ^4.17.4
-  checksum: f65befea87090130d9257a7861dc69a646fcc89c8b2f2bdd8b829c36ef78c1be3a69e0e12f9fa75c311e56e79eb62ae892c9a19336da9de4aa4dbaba2d4cadfa
   languageName: node
   linkType: hard
 

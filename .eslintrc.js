@@ -1,4 +1,3 @@
-// TODO: Fjern eslint-stats
 module.exports = {
   env: {
     browser: true,

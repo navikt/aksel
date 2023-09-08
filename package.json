@@ -149,7 +149,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.13",
     "eslint-plugin-testing-library": "^6.0.1",
-    "eslint-stats": "^1.0.1",
     "fast-glob": "3.2.11",
     "fs-extra": "^10.0.1",
     "glob": "^7.1.6",
