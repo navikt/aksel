@@ -127,9 +127,9 @@ export const IconPage = ({ name }: { name: string }) => {
               <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center rounded-t-2xl border-b p-1">
                 <form
                   onSubmit={(e) => e.preventDefault()}
-                  className="flex h-fit w-full flex-wrap-reverse items-center gap-4 px-4 py-2"
+                  className="flex w-full flex-wrap-reverse items-center  gap-4 px-4 py-2 sm:flex-nowrap"
                 >
-                  <div className="min-w-[10.25rem]">
+                  <div className="w-fit">
                     <ToggleGroup
                       value={toggle}
                       onChange={(v) => setToggle(v as any)}
@@ -140,18 +140,16 @@ export const IconPage = ({ name }: { name: string }) => {
                       <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
                     </ToggleGroup>
                   </div>
-                  <div className="min-w-48 md:min-w-96 flex w-full items-center gap-2  md:w-fit">
-                    <Search
-                      variant="simple"
-                      label="Ikonsøk"
-                      className="border-none"
-                      placeholder="Søk"
-                      autoComplete="off"
-                      onChange={setQuery}
-                      value={query}
-                      clearButton={false}
-                    />
-                  </div>
+                  <Search
+                    variant="simple"
+                    label="Ikonsøk"
+                    className="border-none"
+                    placeholder="Søk"
+                    autoComplete="off"
+                    onChange={setQuery}
+                    value={query}
+                    clearButton={false}
+                  />
                 </form>
               </div>
               <div className="flex">
@@ -258,7 +256,7 @@ export const IconPage = ({ name }: { name: string }) => {
                   <Modal
                     open={!!name}
                     aria-label={`${name} ikon`}
-                    className="rounded px-2 py-6 sm:px-6"
+                    className="rounded px-6 py-6"
                     onClose={() => null}
                   >
                     {name && <IconSidebar name={name} focusRef={focusRef} />}
