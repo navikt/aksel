@@ -19,5 +19,5 @@ export { default as Video } from "./sanity-modules/Video";
 export * from "./website-modules/BreadCrumbs";
 export { default as Feedback } from "./website-modules/feedback";
 export * from "./website-modules/H2";
-export * from "./website-modules/TOC";
+export * from "./website-modules/toc/TOC";
 export * from "./website-modules/utils";
