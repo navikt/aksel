@@ -13,18 +13,17 @@ module.exports = {
     "plugin:jsx-a11y/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
-    // TODO: Add storybook
+    "plugin:storybook/recommended",
     // TODO: Look into opinionated stylistic plugin
     // TODO: Replace @typescript-eslint/recommended with @typescript-eslint/recommended-type-checked
   ],
   settings: { react: { version: "detect" } },
   rules: {
     "import/no-unresolved": "off",
-    // TODO: Look into if these are really needed:
-    "react/no-unknown-property": [2, { ignore: ["jsx", "global"] }],
-    "react/jsx-pascal-case": 0,
-    "import/no-anonymous-default-export": ["error", { allowObject: true }],
-    "react/jsx-curly-brace-presence": ["error", { props: "never" }],
+    "react/jsx-curly-brace-presence": [
+      "error",
+      { propElementValues: "always" },
+    ],
     // Temporary:  (Eventuelt gjøre om til warn?)
     "react/prop-types": "off",
     "react/display-name": "off",
@@ -35,8 +34,7 @@ module.exports = {
       files: ["**/*.ts?(x)"],
       extends: ["plugin:@typescript-eslint/recommended"],
       rules: {
-        // Temporary:
-        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-explicit-any": "off", // Temporary
       },
     },
     {
@@ -59,19 +57,19 @@ module.exports = {
         sourceType: "module",
       },
       rules: {
-        // TODO: Look into if these are really needed:
-        "@typescript-eslint/ban-ts-comment": "off",
-        "import/no-anonymous-default-export": "off",
-        "jsx-a11y/anchor-is-valid": "off",
+        "react/no-unknown-property": [2, { ignore: ["jsx", "global"] }],
         "react/react-in-jsx-scope": "off",
-        "@typescript-eslint/no-explicit-any": "off",
-        "react/display-name": "off",
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
         "@next/next/no-html-link-for-pages": [
           "error",
           "aksel.nav.no/website/pages/",
         ],
+        "@typescript-eslint/ban-ts-comment": "off", // Temporary
+      },
+    },
+    {
+      files: ["aksel.nav.no/website/pages/eksempler/**"],
+      rules: {
+        "jsx-a11y/anchor-is-valid": "off",
       },
     },
   ],

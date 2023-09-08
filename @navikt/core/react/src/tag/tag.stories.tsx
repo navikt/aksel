@@ -75,7 +75,7 @@ export const Small = () => {
   );
 };
 
-export const xSmall = () => {
+export const XSmall = () => {
   return (
     <div className="rowgap rowgap-wrap">
       {variants.map((variant) => (
