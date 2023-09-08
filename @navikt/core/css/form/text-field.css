@@ -1,21 +1,30 @@
 [data-theme="dark"] {
-  --ac-textfield-text: var(--a-text-on-inverted);
-  --ac-textfield-bg: var(--a-surface-inverted);
-  --ac-textfield-border: var(--a-border-on-inverted);
-  --ac-textfield-hover-border: var(--a-blue-200);
-  --ac-textfield-placeholder: var(--a-gray-500);
-  --ac-textfield-error-border: var(--a-red-300);
+  --__ac-textfield-text: var(--a-text-on-inverted);
+  --__ac-textfield-bg: var(--a-surface-inverted);
+  --__ac-textfield-border: var(--a-border-on-inverted);
+  --__ac-textfield-hover-border: var(--a-blue-200);
+  --__ac-textfield-placeholder: var(--a-gray-500);
+  --__ac-textfield-error-border: var(--a-red-300);
+}
+
+[data-theme="light"] {
+  --__ac-textfield-text: initial;
+  --__ac-textfield-bg: initial;
+  --__ac-textfield-border: initial;
+  --__ac-textfield-hover-border: initial;
+  --__ac-textfield-placeholder: initial;
+  --__ac-textfield-error-border: initial;
 }
 
 .navds-text-field__input {
   appearance: none;
   padding: var(--a-spacing-2);
-  background-color: var(--ac-textfield-bg, var(--a-surface-default));
+  background-color: var(--ac-textfield-bg, var(--__ac-textfield-bg, var(--a-surface-default)));
   border-radius: var(--a-border-radius-medium);
-  border: 1px solid var(--ac-textfield-border, var(--a-border-default));
+  border: 1px solid var(--ac-textfield-border, var(--__ac-textfield-border, var(--a-border-default)));
   min-height: 3rem;
   width: 100%;
-  color: var(--ac-textfield-text, var(--a-text-default));
+  color: var(--ac-textfield-text, var(--__ac-textfield-text, var(--a-text-default)));
 }
 
 .navds-text-field__input[size] {
@@ -23,7 +32,7 @@
 }
 
 .navds-text-field__input::placeholder {
-  color: var(--ac-textfield-placeholder, var(--a-text-subtle));
+  color: var(--ac-textfield-placeholder, var(--__ac-textfield-placeholder, var(--a-text-subtle)));
 }
 
 .navds-form-field--small .navds-text-field__input {
@@ -32,7 +41,7 @@
 }
 
 .navds-text-field__input:hover {
-  border-color: var(--ac-textfield-hover-border, var(--a-border-action));
+  border-color: var(--ac-textfield-hover-border, var(--__ac-textfield-hover-border, var(--a-border-action)));
 }
 
 .navds-text-field__input:focus-visible {
@@ -51,8 +60,8 @@
   Error handling
 */
 .navds-text-field--error > .navds-text-field__input:not(:hover):not(:disabled) {
-  border-color: var(--ac-textfield-error-border, var(--a-border-danger));
-  box-shadow: 0 0 0 1px var(--ac-textfield-error-border, var(--a-border-danger));
+  border-color: var(--ac-textfield-error-border, var(--__ac-textfield-error-border, var(--a-border-danger)));
+  box-shadow: 0 0 0 1px var(--ac-textfield-error-border, var(--__ac-textfield-error-border, var(--a-border-danger)));
 }
 
 .navds-text-field--error > .navds-text-field__input:focus-visible:not(:hover):not(:disabled) {
@@ -67,8 +76,8 @@
 
 /* Disabled handling */
 .navds-text-field__input:disabled {
-  background-color: var(--ac-textfield-bg, var(--a-surface-default));
-  border-color: var(--ac-textfield-border, var(--a-border-default));
+  background-color: var(--ac-textfield-bg, var(--__ac-textfield-bg, var(--a-surface-default)));
+  border-color: var(--ac-textfield-border, var(--__ac-textfield-border, var(--a-border-default)));
   box-shadow: none;
   cursor: not-allowed;
 }

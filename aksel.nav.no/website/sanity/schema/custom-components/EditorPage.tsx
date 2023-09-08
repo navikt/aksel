@@ -1,4 +1,11 @@
-import { Accordion, BodyShort, Heading, Link, Loader } from "@navikt/ds-react";
+import {
+  Accordion,
+  BodyShort,
+  Heading,
+  Label,
+  Link,
+  Loader,
+} from "@navikt/ds-react";
 import { Card } from "@sanity/ui";
 import { differenceInMonths } from "date-fns";
 import React, { useMemo } from "react";
@@ -177,7 +184,7 @@ const FeedbackList = ({ data, title }: { data: any[]; title: string }) => {
     <Accordion.Item>
       <Accordion.Header>{`${title} (${list.length ?? 0})`}</Accordion.Header>
       <Accordion.Content>
-        <ul>
+        <ul className="mt-4">
           {list.map((x) => (
             <li key={x._id}>
               <Card flex={1}>
@@ -242,13 +249,13 @@ export const EditorPage = () => {
     <div>
       <div>
         <Heading level="2" size="small" spacing>
-          Dine tilganger i Aksel studio
+          Dine tilganger
         </Heading>
         <dl>
           {user.roles.map((x) => (
             <React.Fragment key={x.name}>
-              <dt>{x.title}</dt>
-              <dd className="ml-4 mb-2 list-item last-of-type:mb-7">
+              <Label as="dt">{x.title}</Label>
+              <dd className="my-2 ml-4 list-item last-of-type:mb-7">
                 {x.description}
               </dd>
             </React.Fragment>
@@ -264,7 +271,7 @@ export const EditorPage = () => {
       {!fbError && !fbValidating && (
         <div className="mt-7">
           <Heading level="2" size="small" spacing>
-            Tilbakemeldinger på artikler du er satt som forfatter (
+            Tilbakemeldinger på artikler du er bidragsyter i (
             {fbData?.length ?? 0})
           </Heading>
           {fbData?.length > 0 && (

@@ -15,6 +15,11 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
    * When not inferring width from children, you must specify width
    */
   width?: number | string;
+  /**
+   * Overrides html-tag
+   * @default "div"
+   */
+  as?: "div" | "span";
 }
 
 /**
@@ -28,11 +33,20 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
   (
-    { className, children, height, width, style, variant = "text", ...rest },
+    {
+      className,
+      children,
+      height,
+      width,
+      style,
+      variant = "text",
+      as: As = "div",
+      ...rest
+    },
     ref
   ) => {
     return (
-      <div
+      <As
         {...rest}
         ref={ref}
         className={cl(
@@ -49,7 +63,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
         aria-hidden
       >
         {children}
-      </div>
+      </As>
     );
   }
 );

@@ -1,5 +1,6 @@
 import React from "react";
 import { HGrid } from ".";
+import { VStack } from "../stack";
 
 const columnsVariants = {
   Number: "columnNumber",
@@ -86,12 +87,31 @@ export const DynamicColumns = {
   ),
 };
 
-function Placeholder({ text }) {
+export const AlignItems = {
+  render: () => (
+    <VStack gap="8">
+      <HGrid gap="4" columns={2} align="start">
+        <Placeholder text="start" height="8rem" />
+        <Placeholder text="auto" height="auto" />
+      </HGrid>
+      <HGrid gap="4" columns={2} align="center">
+        <Placeholder text="center" height="8rem" />
+        <Placeholder text="auto" height="auto" />
+      </HGrid>
+      <HGrid gap="4" columns={2} align="end">
+        <Placeholder text="end" height="8rem" />
+        <Placeholder text="auto" height="auto" />
+      </HGrid>
+    </VStack>
+  ),
+};
+
+function Placeholder({ text, height }: { text: string; height?: string }) {
   return (
     <div
       style={{
         background: "var(--a-deepblue-900)",
-        height: "5rem",
+        height: height ?? "5rem",
         width: "auto",
         color: "white",
       }}

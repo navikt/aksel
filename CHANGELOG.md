@@ -1,5 +1,63 @@
 # Changelog
 
+## 5.4.0
+
+### @navikt/ds-react
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+<!---->
+
+- Search: Kjører nå bare preventDefault ved Escape når `input` inneholder tekst ([#2245](https://github.com/navikt/aksel/pull/2245))
+
+### @navikt/ds-tokens
+
+- Tokens: `data-theme="light"` vil nå tilbakestille theming ([#2238](https://github.com/navikt/aksel/pull/2238))
+
+### @navikt/ds-css
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+<!---->
+
+- ErrorSummary: Har nå 8px border-radius ([#2256](https://github.com/navikt/aksel/pull/2256))
+
+## 5.3.5
+
+### @navikt/ds-react
+
+- :bug: Popover: sjekk at det er et HTML-element som får fokus ([#2258](https://github.com/navikt/aksel/pull/2258))
+
+## 5.3.4
+
+### @navikt/aksel-icons
+
+- :bug: SVG import map er nå riktig path ([#2250](https://github.com/navikt/aksel/pull/2250))
+
+### @navikt/ds-css
+
+- Alert: 12px -> 8px gap mellom tekst og ikon ved `size="small"` ([#2240](https://github.com/navikt/aksel/pull/2240))
+
+## 5.3.3
+
+### @navikt/ds-react
+
+- HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
+
+### @navikt/ds-css
+
+- HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
+
+## 5.3.2
+
+### @navikt/ds-react
+
+- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
+
+### @navikt/ds-css
+
+- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
+
 ## 5.3.1
 
 ### @navikt/ds-react

@@ -85,6 +85,14 @@ export const KomponentArtikkel = defineType({
       },
     }),
     defineField({
+      title: "Sidebar index",
+      description:
+        "Overstyrer sortering av artikler i sidebar. Hvis feltet er tomt, sorteres den alfabetisk.",
+      name: "sidebarindex",
+      type: "number",
+      group: "settings",
+    }),
+    defineField({
       name: "intro",
       type: "intro_komponent",
       group: "innhold",

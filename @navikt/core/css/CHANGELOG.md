@@ -1,5 +1,35 @@
 # @navikt/ds-css
 
+## 5.4.0
+
+### Minor Changes
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+### Patch Changes
+
+- ErrorSummary: Har nå 8px border-radius ([#2256](https://github.com/navikt/aksel/pull/2256))
+
+## 5.3.5
+
+## 5.3.4
+
+### Patch Changes
+
+- Alert: 12px -> 8px gap mellom tekst og ikon ved `size="small"` ([#2240](https://github.com/navikt/aksel/pull/2240))
+
+## 5.3.3
+
+### Patch Changes
+
+- HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
+
+## 5.3.2
+
+### Patch Changes
+
+- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
+
 ## 5.3.1
 
 ### Patch Changes

@@ -7,7 +7,7 @@ export type VStackProps = Omit<StackProps, "direction" | "wrap">;
 /**
  * Layout-primitive for vetical flexbox
  *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/Stack)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/vstack)
  * @see 🏷️ {@link VStackProps}
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *

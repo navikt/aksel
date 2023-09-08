@@ -223,6 +223,7 @@ export interface DoDontT {
 }
 
 export interface CodeSnippetT {
+  title?: string;
   code: {
     language: string;
     code: string;
@@ -278,7 +279,7 @@ export interface RelatertInnholdT {
   >;
 }
 
-export interface CodeExapmplesT {
+export interface CodeExamplesT {
   title: string;
   dir: {
     title: string;

@@ -1,5 +1,4 @@
 .navds-skeleton {
-  display: block;
   background-color: var(--ac-skeleton-bg, var(--a-surface-neutral-moderate));
   height: 1.3em;
   animation: akselSkeletonAnimation 0.8s linear infinite alternate;

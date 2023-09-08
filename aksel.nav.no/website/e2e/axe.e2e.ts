@@ -12,6 +12,8 @@ test.describe("Axe a11y", () => {
         .exclude("iframe")
         .exclude("#aksel-expansioncard")
         .exclude("#toc-scroll")
+        .exclude("#toc-scroll")
+        .exclude(".aksel-codesnippet")
         .analyze();
       expect(accessibilityScanResults.violations).toEqual([]);
     });

@@ -1,5 +1,52 @@
 # @navikt/ds-react
 
+## 5.4.0
+
+### Minor Changes
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+### Patch Changes
+
+- Search: Kjører nå bare preventDefault ved Escape når `input` inneholder tekst ([#2245](https://github.com/navikt/aksel/pull/2245))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.4.0
+
+## 5.3.5
+
+### Patch Changes
+
+- :bug: Popover: sjekk at det er et HTML-element som får fokus ([#2258](https://github.com/navikt/aksel/pull/2258))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.3.5
+
+## 5.3.4
+
+### Patch Changes
+
+- Updated dependencies [[`27dacfdbe`](https://github.com/navikt/aksel/commit/27dacfdbe96a861b19c20d4494485c863d0ee8d9)]:
+  - @navikt/aksel-icons@5.3.4
+
+## 5.3.3
+
+### Patch Changes
+
+- HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.3.3
+
+## 5.3.2
+
+### Patch Changes
+
+- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.3.2
+
 ## 5.3.1
 
 ### Patch Changes
