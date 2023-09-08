@@ -172,6 +172,84 @@ const Page = ({
   const unsafe = page?.status?.unsafe;
   const internal = page?.status?.internal;
 
+  const Links = () => (
+    <BodyShort
+      as="span"
+      size="small"
+      className="text-text-subtle mt-4 flex flex-wrap gap-4"
+    >
+      {pack && (
+        <>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={pack.git}
+            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            onClick={() =>
+              logAmplitudeEvent("link", {
+                kilde: "intro-lenker komponenter",
+                til: "github",
+              })
+            }
+          >
+            <GithubIcon /> Github
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={`https://yarnpkg.com/package/${pack.title}`}
+            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            onClick={() =>
+              logAmplitudeEvent("link", {
+                kilde: "intro-lenker komponenter",
+                til: "yarn",
+              })
+            }
+          >
+            <YarnIcon />
+            Yarn
+          </a>
+        </>
+      )}
+
+      {page.figma_link && (
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href={page.figma_link}
+          className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+          onClick={() =>
+            logAmplitudeEvent("link", {
+              kilde: "intro-lenker komponenter",
+              til: "figma",
+            })
+          }
+        >
+          <FigmaIcon /> Figma
+        </a>
+      )}
+      {pack && (
+        <>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={pack.changelog}
+            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            onClick={() =>
+              logAmplitudeEvent("link", {
+                kilde: "intro-lenker komponenter",
+                til: "endringslogg",
+              })
+            }
+          >
+            <ChangelogIcon />
+            Endringslogg
+          </a>
+        </>
+      )}
+    </BodyShort>
+  );
+
   return (
     <>
       <Head>
@@ -212,10 +290,17 @@ const Page = ({
         pageProps={page}
         variant="page"
         intro={
-          <Detail as="div" className="mt-2 flex items-center gap-3">
-            {internal && <StatusTag status="internal" />}
-            <StatusTag showStable status={page?.status?.tag} />
-            {`OPPDATERT ${publishDate}`}
+          <Detail as="div">
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <span>
+                Oppdatert <time>{publishDate}</time>
+              </span>
+              {internal && <StatusTag status="internal" />}
+              {page?.status?.tag !== "beta" && (
+                <StatusTag showStable status={page?.status?.tag} />
+              )}
+            </div>
+            <Links />
           </Detail>
         }
         footer={
@@ -235,81 +320,6 @@ const Page = ({
           )
         }
       >
-        <BodyShort
-          as="span"
-          size="small"
-          className="text-text-subtle mb-6 flex flex-wrap gap-4"
-        >
-          {pack && (
-            <>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={pack.git}
-                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-                onClick={() =>
-                  logAmplitudeEvent("link", {
-                    kilde: "intro-lenker komponenter",
-                    til: "github",
-                  })
-                }
-              >
-                <GithubIcon /> Github
-              </a>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={`https://yarnpkg.com/package/${pack.title}`}
-                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-                onClick={() =>
-                  logAmplitudeEvent("link", {
-                    kilde: "intro-lenker komponenter",
-                    til: "yarn",
-                  })
-                }
-              >
-                <YarnIcon />
-                Yarn
-              </a>
-            </>
-          )}
-
-          {page.figma_link && (
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href={page.figma_link}
-              className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-              onClick={() =>
-                logAmplitudeEvent("link", {
-                  kilde: "intro-lenker komponenter",
-                  til: "figma",
-                })
-              }
-            >
-              <FigmaIcon /> Figma
-            </a>
-          )}
-          {pack && (
-            <>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={pack.changelog}
-                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-                onClick={() =>
-                  logAmplitudeEvent("link", {
-                    kilde: "intro-lenker komponenter",
-                    til: "endringslogg",
-                  })
-                }
-              >
-                <ChangelogIcon />
-                Endringslogg
-              </a>
-            </>
-          )}
-        </BodyShort>
         {tag && (
           <SuggestionBlock
             variant={tag}
