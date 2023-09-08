@@ -131,7 +131,7 @@ export function TableOfContentsv2({
   return (
     <aside
       className={cl(
-        "toc-ignore sticky top-20 z-[1] order-1 my-0 mb-16 ml-6 mr-auto h-full w-full max-w-[160px] flex-col items-start sm:-mr-6 md:-mr-10",
+        "toc-ignore sticky top-20 z-[1] order-1 my-0 mb-16 ml-6 mr-auto h-full max-w-[160px] flex-col items-start overflow-x-hidden sm:-mr-6 md:-mr-10",
         "invisible hidden xl:flex",
         {
           invisible: !renderToc,
@@ -159,6 +159,7 @@ export function TableOfContentsv2({
               <React.Fragment key={link.id}>
                 <BodyShort
                   as="li"
+                  truncate
                   size="small"
                   className={cl("animate-fadeIn relative py-1 ", {
                     "font-semibold": link.id === activeId,
@@ -168,7 +169,7 @@ export function TableOfContentsv2({
                     href={`#${link.id}`}
                     onClick={() => handleFocus(`${link.id}`)}
                     className={cl(
-                      "z-10 block  max-w-full no-underline hover:underline",
+                      "z-10 block max-w-full no-underline hover:underline",
                       {
                         "text-deepblue-800":
                           link.id === activeId &&
