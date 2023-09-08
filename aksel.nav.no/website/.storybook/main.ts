@@ -22,10 +22,7 @@ const config: StorybookConfig = {
     const exampleIndexer = async (fileName: string, opts) => {
       let code = readFileSync(fileName, "utf-8").toString();
 
-      code = code.replace(
-        /^\s*export default withDsExample\(Example[\s\S]*?;\s*/gm,
-        ""
-      );
+      code = code.replace(/export default withDsExample\([^;]+;/, "");
 
       code = code.replace("export const args =", "const args =");
 
