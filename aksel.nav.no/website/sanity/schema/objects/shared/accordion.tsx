@@ -1,6 +1,6 @@
-import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { ChevronDownIcon, Density3Icon } from "@navikt/aksel-icons";
 import { Label } from "@navikt/ds-react";
-import { StackCompactIcon } from "@sanity/icons";
+
 import { defineField, defineType } from "sanity";
 
 export const Accordion = defineType({
@@ -9,7 +9,7 @@ export const Accordion = defineType({
   description:
     "Accordion brukes hvis man har flere seksjoner man ønsker å skjule. Bruke ExpansionCard om du bare skal vise en seksjon",
   type: "object",
-  icon: StackCompactIcon,
+  icon: Density3Icon,
   fields: [
     defineField({
       title: "Accordion-liste",

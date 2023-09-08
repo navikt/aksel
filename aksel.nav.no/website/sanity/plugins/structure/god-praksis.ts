@@ -1,5 +1,5 @@
-import { FileXMarkIcon } from "@navikt/aksel-icons";
-import { MasterDetailIcon } from "@sanity/icons";
+import { FileXMarkIcon, TagIcon } from "@navikt/aksel-icons";
+
 import { StructureBuilder } from "sanity/desk";
 /* documentStore is in Alpha, so avoid using for now */
 export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
@@ -28,7 +28,7 @@ export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
   return [
     S.listItem()
       .title(`Temasider (${tema.length})`)
-      .icon(MasterDetailIcon)
+      .icon(TagIcon)
       .child(S.documentTypeList("aksel_tema")),
     S.divider(),
     ...tema.map(({ title, _id }) =>
