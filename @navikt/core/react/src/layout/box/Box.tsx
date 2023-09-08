@@ -19,7 +19,7 @@ type Spacing = ResponsiveProp<SpacingScale>;
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Background color. Accepts a color token */
   background?: BackgroundSpecifier;
-  /** Border color. Accepts a color token */
+  /** Border color. Accepts a color token. If this is not set then there will be no border. */
   borderColor?: BorderColorSpecifier;
   /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
   borderRadius?: BorderRadiusSpecifier;
@@ -122,15 +122,15 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     const boxBackground =
       typeof background === "string" ? `var(--a-${background})` : undefined;
     const boxBorderColor =
-      typeof borderColor === "string"
-        ? `var(--a-${borderColor})`
-        : "transparent";
+      typeof borderColor === "string" ? `var(--a-${borderColor})` : undefined;
+    const borderStyle = typeof borderColor === "string" ? "solid" : undefined;
 
     const style: React.CSSProperties = {
       ..._style,
       "--__ac-box-background": boxBackground,
-      "--__ac-box-border-color": boxBorderColor,
       "--__ac-box-shadow": boxShadow,
+      "--__ac-box-border-color": boxBorderColor,
+      "--__ac-box-border-style": borderStyle,
       "--__ac-box-border-radius": getBorderRadius(borderRadius),
       ...getResponsivePropsPadding("box", "inline", {
         padding,
