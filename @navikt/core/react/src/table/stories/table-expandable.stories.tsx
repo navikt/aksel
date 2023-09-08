@@ -147,7 +147,7 @@ const data = [
     status: "Inaktiv",
     content: (
       <>
-        Ola Conny Brakkestad sier "hei". Her er litt innhold med en{" "}
+        Ola Conny Brakkestad sier hei. Her er litt innhold med en{" "}
         <Link href="#">link.</Link>
       </>
     ),
@@ -162,7 +162,7 @@ const data = [
     status: <Link href="http://example.com">Hissig</Link>,
     content: (
       <>
-        Henriette Kristensen sier "hei". Her er litt innhold med en{" "}
+        Henriette Kristensen sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">lenke</Link>. I forhold til en betydelig
         avveining synliggjøres potensialet med sikte på satsingsområdet. Gitt en
         manglende avveining synliggjøres instrumentet på bakgrunn av forholdene.
@@ -183,7 +183,7 @@ const data = [
     status: "Deaktivert",
     content: (
       <>
-        Suki Clydesdale sier "hei". Her er litt innhold med en{" "}
+        Suki Clydesdale sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">link</Link>.
       </>
     ),
@@ -198,7 +198,7 @@ const data = [
     status: <Link href="#">Starter</Link>,
     content: (
       <>
-        Hans-Hermann Hoppe sier "hei". Her er litt innhold med en{" "}
+        Hans-Hermann Hoppe sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">link</Link>.
       </>
     ),
@@ -213,7 +213,7 @@ const data = [
     status: <Link href="#">Eksplodert</Link>,
     content: (
       <>
-        Max Kraft sier "hei". Her er litt innhold med en{" "}
+        Max Kraft sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">link</Link>.
       </>
     ),
@@ -228,7 +228,7 @@ const data = [
     status: <Link href="#">Gunstig</Link>,
     content: (
       <>
-        Pat Ole sier "hei". Her er litt innhold med en{" "}
+        Pat Ole sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">lenke</Link>.
       </>
     ),
@@ -295,7 +295,7 @@ export const ClickableRow = {
               <Table.DataCell>
                 <Button
                   size="xsmall"
-                  onClick={(e) => {
+                  onClick={() => {
                     alert("Mer info");
                   }}
                 >

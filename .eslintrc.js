@@ -1,3 +1,4 @@
+// TODO: Fjern eslint-stats
 module.exports = {
   env: {
     browser: true,
@@ -19,7 +20,7 @@ module.exports = {
   settings: { react: { version: "detect" } },
   rules: {
     "import/no-unresolved": "off",
-    // Look into if these are really needed:
+    // TODO: Look into if these are really needed:
     "react/no-unknown-property": [2, { ignore: ["jsx", "global"] }],
     "react/jsx-pascal-case": 0,
     "import/no-anonymous-default-export": ["error", { allowObject: true }],
@@ -27,6 +28,7 @@ module.exports = {
     // Temporary:  (Eventuelt gjøre om til warn?)
     "react/prop-types": "off",
     "react/display-name": "off",
+    "import/no-named-as-default": "off",
   },
   overrides: [
     {
@@ -57,6 +59,7 @@ module.exports = {
         sourceType: "module",
       },
       rules: {
+        // TODO: Look into if these are really needed:
         "@typescript-eslint/ban-ts-comment": "off",
         "import/no-anonymous-default-export": "off",
         "jsx-a11y/anchor-is-valid": "off",

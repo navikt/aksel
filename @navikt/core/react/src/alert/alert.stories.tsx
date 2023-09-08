@@ -140,7 +140,7 @@ export const Heading = () => {
 export const Links = () => {
   return (
     <div className="colgap">
-      {variants.map((variant, i) => (
+      {variants.map((variant) => (
         <Alert key={variant} variant={variant}>
           <Link href="#">Id elit esse enim reprehenderit</Link>
         </Alert>
@@ -150,7 +150,7 @@ export const Links = () => {
 };
 
 const AlertWithCloseButton = ({ children }: { children?: React.ReactNode }) => {
-  let [show, setShow] = React.useState(true);
+  const [show, setShow] = React.useState(true);
 
   return show ? (
     <Alert variant="success" closeButton onClose={() => setShow(false)}>
