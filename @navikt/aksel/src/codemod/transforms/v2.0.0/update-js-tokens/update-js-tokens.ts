@@ -13,7 +13,7 @@ import { getLineTerminator } from "../../../utils/lineterminator";
  * @param {import('jscodeshift').API} api
  */
 export default function transformer(file: JSCodeshift, api) {
-  let src = file.source;
+  const src = file.source;
 
   const j = api.jscodeshift as JSCodeshift;
 

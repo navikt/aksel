@@ -59,8 +59,8 @@ const App = () => {
   }, [toggle, query, strokeIcons, fillIcons]);
 
   const onCreate = (id: string, name: string) => {
-    let svg = document.getElementById(id)?.outerHTML;
-    let size = 24;
+    const svg = document.getElementById(id)?.outerHTML;
+    const size = 24;
     // eslint-disable-next-line no-restricted-globals
     parent.postMessage(
       {
