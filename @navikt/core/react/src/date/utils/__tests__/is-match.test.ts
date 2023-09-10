@@ -13,13 +13,13 @@ describe("Returns if date is disabled", () => {
   test("Date should be disabled type Date[] (true)", () => {
     expect(isMatch(new Date("Dec 4 2011"), disabled)).toBeTruthy();
   });
-  test("Date should be disabled type Range (true)", () => {
+  test("Date should be disabled type Range (false)", () => {
     expect(isMatch(new Date("Sep 5 2023"), disabled)).toBeTruthy();
   });
   test("Date should be disabled type Range (true)", () => {
     expect(isMatch(new Date("Sep 3 2023"), disabled)).toBeTruthy();
   });
-  test("Date should be disabled type After (true)", () => {
+  test("Date should be disabled type After (same month)(true)", () => {
     expect(
       isMatch(new Date("Aug 5 2018"), [{ after: new Date("Aug 2 2018") }])
     ).toBeTruthy();
@@ -34,7 +34,7 @@ describe("Returns if date is disabled", () => {
       isMatch(new Date("Aug 1 2018"), [{ before: new Date("Aug 2 2018") }])
     ).toBeTruthy();
   });
-  test("Date should be disabled type Before (true)", () => {
+  test("Date should be disabled type Before (false)", () => {
     expect(
       isMatch(new Date("Jul 1 2018"), [{ before: new Date("Aug 2 2018") }])
     ).toBeTruthy();
