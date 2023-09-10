@@ -30,7 +30,7 @@ describe("Validate tokens dokumentation", () => {
       const formatedKey = `--${kebabCase(key)}`.replace("--az-", "--a-z-");
 
       const tokenInDoc = flatten.find((x) => x.name === formatedKey);
-      expect(tokenInDoc?.value).toEqual(val);
+      expect(tokenInDoc.value).toEqual(val);
     });
   });
 });
