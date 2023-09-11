@@ -2,15 +2,12 @@ import { ChevronRightIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   Box,
+  BoxProps,
   Detail,
   HStack,
   Heading,
   VStack,
 } from "@navikt/ds-react";
-import {
-  BackgroundSpecifier,
-  BorderRadiusSpecifier,
-} from "@navikt/ds-react/esm/layout/box/types";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { ReactNode } from "react";
 
@@ -19,8 +16,8 @@ const Card = ({
   borderRadius = "xlarge",
   children,
 }: {
-  background?: BackgroundSpecifier;
-  borderRadius?: BorderRadiusSpecifier;
+  background?: BoxProps["background"];
+  borderRadius?: BoxProps["borderRadius"];
   children: ReactNode;
 }) => (
   <Box
@@ -93,7 +90,7 @@ const Example = () => {
           background="surface-neutral-subtle"
           shadow="xsmall"
           padding="4"
-          borderRadius={{ default: "xlarge", bottomLeft: "small" }}
+          borderRadius="xlarge xlarge 0 xlarge"
         >
           <VStack gap="2">
             <Detail>BOX • 01.01.21 14:00</Detail>
@@ -114,33 +111,30 @@ const Example = () => {
                 .old-price {
                   text-decoration: line-through;
                 }
+                .pill-section {
+                    min-width: 8rem;
+                }
               `}
         </style>
         <HStack>
           <Box
+            className="pill-section"
             background="surface-success-subtle"
             shadow="xsmall"
-            padding="4"
-            borderRadius={{
-              default: "xlarge",
-              topLeft: "full",
-              bottomLeft: "full",
-            }}
+            padding="5"
+            borderRadius="full 0 0 full"
           >
             <VStack align="center">
-              <Detail>Episk ny pris</Detail>
-              <Heading size="medium">889.99 kr</Heading>
+              <Detail>Ny pris</Detail>
+              <Heading size="medium">1 kr</Heading>
             </VStack>
           </Box>
           <Box
+            className="pill-section"
             background="surface-danger-subtle"
             shadow="xsmall"
             padding="4"
-            borderRadius={{
-              default: "xlarge",
-              topRight: "full",
-              bottomRight: "full",
-            }}
+            borderRadius="0 full full 0"
           >
             <VStack align="center">
               <Detail>Førpris</Detail>
