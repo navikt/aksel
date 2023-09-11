@@ -5,6 +5,7 @@ import {
   ResponsiveProp,
   SpacingScale,
   getResponsivePropsPadding,
+  getResponsivePropsRadius,
 } from "../utilities/css";
 import {
   BorderRadiusSpecifier,
@@ -129,10 +130,10 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       borderInlineStartWidth,
       borderInlineEndWidth,
       borderRadius,
-      borderStartStartRadius,
-      borderStartEndRadius,
-      borderEndStartRadius,
-      borderEndEndRadius,
+      borderRadiusStartStart,
+      borderRadiusStartEnd,
+      borderRadiusEndStart,
+      borderRadiusEndEnd,
       className,
       padding,
       paddingInline,
@@ -169,7 +170,13 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       "--__ac-box-border-inline-end-width": borderInlineEndWidth
         ? `${borderInlineEndWidth}px`
         : undefined,
-
+      ...getResponsivePropsRadius("box", {
+        borderRadius,
+        borderRadiusStartStart,
+        borderRadiusStartEnd,
+        borderRadiusEndStart,
+        borderRadiusEndEnd,
+      }),
       ...getResponsivePropsPadding("box", "inline", {
         padding,
         paddingInline,

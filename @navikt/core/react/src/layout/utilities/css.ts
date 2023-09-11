@@ -1,3 +1,5 @@
+import { BorderRadiusSpecifier } from "../box/types";
+
 export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
 
 const PreviousBreakpointLookup: {
@@ -248,36 +250,17 @@ export function getResponsiveValue<T = string>(
   );
 }
 
-// TODO: remove
-/* export const getBorderRadius = (
-  radius: BorderRadiusSpecifier | undefined
-): string => {
-  if (!radius) return "0";
-  if (typeof radius === "string") {
-    return `var(--a-border-radius-${radius})`;
+type RadiusCSSProp = Prefix<
+  "borderRadius",
+  "" | "StartStart" | "StartEnd" | "EndStart" | "EndEnd"
+>;
+
+export function getResponsivePropsRadius(
+  componentName: string,
+  responsiveProps: {
+    // eslint-disable-next-line no-unused-vars
+    [key in RadiusCSSProp]?: ResponsiveProp<BorderRadiusSpecifier>;
   }
-
-  let radiusDefault = radius.default
-    ? `var(--a-border-radius-${radius.default})`
-    : "0";
-
-  let topLeft = radiusDefault,
-    topRight = radiusDefault,
-    bottomLeft = radiusDefault,
-    bottomRight = radiusDefault;
-
-  topLeft = radius.topLeft
-    ? `var(--a-border-radius-${radius.topLeft})`
-    : topLeft;
-  topRight = radius.topRight
-    ? `var(--a-border-radius-${radius.topRight})`
-    : topRight;
-  bottomLeft = radius.bottomLeft
-    ? `var(--a-border-radius-${radius.bottomLeft})`
-    : bottomLeft;
-  bottomRight = radius.bottomRight
-    ? `var(--a-border-radius-${radius.bottomRight})`
-    : bottomRight;
-
-  return `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
-}; */
+) {
+  return {};
+}
