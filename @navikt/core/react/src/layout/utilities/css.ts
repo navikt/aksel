@@ -89,7 +89,7 @@ export function getResponsiveValue<T = string>(
   );
 }
 
-export function getResponsiveComplexProps<T = string>(
+export function getResponsiveComplexProps<T extends string>(
   componentName: string,
   componentProp: string,
   tokenSubgroup: string,
@@ -110,9 +110,6 @@ export function getResponsiveComplexProps<T = string>(
 
   return Object.fromEntries(
     Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => {
-      if (typeof aliasOrScale !== "string") {
-        return [];
-      }
       return [
         `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
         aliasOrScale

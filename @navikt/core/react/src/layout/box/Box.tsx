@@ -7,6 +7,7 @@ import {
   PaddingType,
   ResponsiveProp,
   getResponsiveComplexProps,
+  SpacingScale,
 } from "../utilities/css";
 import {
   BackgroundSpecifier,
@@ -138,24 +139,19 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         "border-radius",
         borderRadius
       ),
-      ...getResponsiveComplexProps<PaddingType>(
+      ...getResponsiveComplexProps<SpacingScale>(
         "box",
         "padding",
         "spacing",
         padding
       ),
-      ...getResponsiveComplexProps<PaddingLogicalType>(
-        "box",
-        "padding-inline",
-        "spacing",
-        paddingInline
-      ),
-      ...getResponsiveComplexProps<PaddingLogicalType>(
-        "box",
-        "padding-block",
-        "spacing",
-        paddingBlock
-      ),
+      // TODO: Fix types
+      ...getResponsiveComplexProps<
+        SpacingScale | `${SpacingScale} ${SpacingScale}`
+      >("box", "padding-inline", "spacing", paddingInline),
+      ...getResponsiveComplexProps<
+        SpacingScale | `${SpacingScale} ${SpacingScale}`
+      >("box", "padding-block", "spacing", paddingBlock),
     };
 
     return (
