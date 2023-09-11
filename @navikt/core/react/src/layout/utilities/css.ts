@@ -1,5 +1,3 @@
-import { BorderRadiusSpecifier } from "../box/types";
-
 export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
 
 const PreviousBreakpointLookup: {
@@ -250,7 +248,8 @@ export function getResponsiveValue<T = string>(
   );
 }
 
-export const getBorderRadius = (
+// TODO: remove
+/* export const getBorderRadius = (
   radius: BorderRadiusSpecifier | undefined
 ): string => {
   if (!radius) return "0";
@@ -281,4 +280,4 @@ export const getBorderRadius = (
     : bottomRight;
 
   return `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
-};
+}; */

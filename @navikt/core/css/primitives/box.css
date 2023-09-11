@@ -13,13 +13,18 @@
   --__ac-box-padding-block: var(--__ac-box-padding-block-xs);
   --__ac-box-background: initial;
   --__ac-box-border-color: initial;
-  --__ac-box-border-radius: initial;
   --__ac-box-shadow: initial;
   --__ac-box-border-width: 0;
   --__ac-box-border-block-start-width: var(--__ac-box-border-width);
   --__ac-box-border-block-end-width: var(--__ac-box-border-width);
   --__ac-box-border-inline-start-width: var(--__ac-box-border-width);
   --__ac-box-border-inline-end-width: var(--__ac-box-border-width);
+  --__ac-box-border-radius-xs: initial;
+  --__ac-box-border-radius-sm: initial;
+  --__ac-box-border-radius-md: initial;
+  --__ac-box-border-radius-lg: initial;
+  --__ac-box-border-radius-xl: initial;
+  --__ac-box-border-radius: var(--__ac-box-border-radius-xs);
 
   padding-inline: var(--__ac-box-padding-inline);
   padding-block: var(--__ac-box-padding-block);
@@ -38,6 +43,7 @@
   .navds-box {
     --__ac-box-padding-inline: var(--__ac-box-padding-inline-sm, var(--__ac-box-padding-inline-xs));
     --__ac-box-padding-block: var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs));
+    --__ac-box-border-radius: var(--__ac-box-border-radius-sm, var(--__ac-box-border-radius-xs));
   }
 }
 
@@ -51,6 +57,10 @@
       --__ac-box-padding-block-md,
       var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs))
     );
+    --__ac-box-border-radius: var(
+      --__ac-box-border-radius-md,
+      var(--__ac-box-border-radius-sm, var(--__ac-box-border-radius-xs))
+    );
   }
 }
 
@@ -63,6 +73,10 @@
     --__ac-box-padding-block: var(
       --__ac-box-padding-block-lg,
       var(--__ac-box-padding-block-md, var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs)))
+    );
+    --__ac-box-border-radius: var(
+      --__ac-box-border-radius-lg,
+      var(--__ac-box-border-radius-md, var(--__ac-box-border-radius-sm, var(--__ac-box-border-radius-xs)))
     );
   }
 }
@@ -81,6 +95,13 @@
       var(
         --__ac-box-padding-block-lg,
         var(--__ac-box-padding-block-md, var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs)))
+      )
+    );
+    --__ac-box-border-radius: var(
+      --__ac-box-border-radius-xl,
+      var(
+        --__ac-box-border-radius-lg,
+        var(--__ac-box-border-radius-md, var(--__ac-box-border-radius-sm, var(--__ac-box-border-radius-xs)))
       )
     );
   }

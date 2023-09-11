@@ -134,7 +134,7 @@ export const ThemingDemo = {
             background="surface-neutral-subtle"
             shadow="xsmall"
             padding="4"
-            borderRadius={{ default: "xlarge", bottomLeft: "small" }}
+            /*  borderRadius={{ default: "xlarge", bottomLeft: "small" }} */
           >
             <VStack gap="2">
               <Detail>BOX • 01.01.21 14:00</Detail>
@@ -157,7 +157,7 @@ export const ThemingDemo = {
               }
             `}
           </style>
-          <HStack>
+          {/* <HStack>
             <Box
               background="surface-success-subtle"
               shadow="xsmall"
@@ -190,7 +190,7 @@ export const ThemingDemo = {
                 </Heading>
               </VStack>
             </Box>
-          </HStack>
+          </HStack> */}
         </>
       );
     };
@@ -345,6 +345,36 @@ export const BorderWidth = () => {
         borderInlineStartWidth="1"
         borderInlineEndWidth="2"
         borderColor="border-strong"
+        borderRadius="large"
+      >
+        Box
+      </Box>
+    </VStack>
+  );
+};
+
+export const BorderRadius = () => {
+  return (
+    <VStack gap="4">
+      <Box
+        background="bg-subtle"
+        padding="10"
+        borderWidth="2"
+        borderColor="border-strong"
+        borderRadius="large"
+      >
+        Box
+      </Box>
+      <Box
+        background="bg-subtle"
+        padding="10"
+        borderWidth="2"
+        borderColor="border-strong"
+        borderRadius={{
+          xs: "small",
+          md: "medium",
+          lg: "xlarge",
+        }}
       >
         Box
       </Box>

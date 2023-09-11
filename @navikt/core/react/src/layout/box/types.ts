@@ -13,14 +13,6 @@ export type BackgroundSpecifier = BackgroundColors;
 
 export type BorderColorSpecifier = BorderColors;
 
-export type BorderRadiusSpecifier =
-  | BorderRadii
-  | {
-      default?: BorderRadii;
-      topLeft?: BorderRadii;
-      topRight?: BorderRadii;
-      bottomLeft?: BorderRadii;
-      bottomRight?: BorderRadii;
-    };
+export type BorderRadiusSpecifier = BorderRadii | "0";
 
 export type ShadowSpecifier = Shadows;

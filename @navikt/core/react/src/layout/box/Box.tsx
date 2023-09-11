@@ -4,7 +4,6 @@ import cl from "clsx";
 import {
   ResponsiveProp,
   SpacingScale,
-  getBorderRadius,
   getResponsivePropsPadding,
 } from "../utilities/css";
 import {
@@ -24,7 +23,11 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Border color. Accepts a color token. If this is not set then there will be no border. */
   borderColor?: BorderColorSpecifier;
   /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
-  borderRadius?: BorderRadiusSpecifier;
+  borderRadius?: ResponsiveProp<BorderRadiusSpecifier>;
+  borderStartStartRadius?: ResponsiveProp<BorderRadiusSpecifier>;
+  borderStartEndRadius?: ResponsiveProp<BorderRadiusSpecifier>;
+  borderEndStartRadius?: ResponsiveProp<BorderRadiusSpecifier>;
+  borderEndEndRadius?: ResponsiveProp<BorderRadiusSpecifier>;
   /**
    * Border-width
    */
@@ -126,10 +129,10 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       borderInlineStartWidth,
       borderInlineEndWidth,
       borderRadius,
-      borderRadiusEndStart,
-      borderRadiusEndEnd,
-      borderRadiusStartStart,
-      borderRadiusStartEnd,
+      borderStartStartRadius,
+      borderStartEndRadius,
+      borderEndStartRadius,
+      borderEndEndRadius,
       className,
       padding,
       paddingInline,
@@ -167,7 +170,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         ? `${borderInlineEndWidth}px`
         : undefined,
 
-      "--__ac-box-border-radius": getBorderRadius(borderRadius),
       ...getResponsivePropsPadding("box", "inline", {
         padding,
         paddingInline,
