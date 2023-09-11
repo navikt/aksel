@@ -3,33 +3,38 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <VStack gap="4">
+    <VStack gap="8">
       <Box
         background="surface-subtle"
-        borderColor="border-alt-3"
         padding="4"
-        borderWidth="2"
-        borderRadius="xlarge"
+        borderRadius="large"
+        shadow="xsmall"
       >
-        border-radius
+        xsmall
       </Box>
       <Box
         background="surface-subtle"
-        borderColor="border-alt-3"
         padding="4"
-        borderWidth="2"
-        borderRadius="xlarge xlarge 0 0"
+        borderRadius="large"
+        shadow="small"
       >
-        Fleksibel border-radius
+        small
       </Box>
       <Box
         background="surface-subtle"
-        borderColor="border-alt-3"
         padding="4"
-        borderWidth="2"
-        borderRadius={{ md: "large" }}
+        borderRadius="large"
+        shadow="medium"
       >
-        Dynamisk border-radius
+        medium
+      </Box>
+      <Box
+        background="surface-subtle"
+        padding="4"
+        borderRadius="large"
+        shadow="large"
+      >
+        large
       </Box>
     </VStack>
   );
@@ -45,6 +50,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 6,
-  desc: "'borderRadius' lar deg endre border-radius på Box basert på tokens. Du kan også enkelt endre border-radius basert på brekkpunkt.",
+  index: 7,
+  desc: "'shadow' lar deg endre box-shadow på Box basert på tokens.",
 };
