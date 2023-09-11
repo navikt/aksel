@@ -23,7 +23,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Border-width
    */
-  borderWidth?: SpaceDelimitedAttribute<"1" | "2" | "3" | "4" | "5">;
+  borderWidth?: SpaceDelimitedAttribute<"0" | "1" | "2" | "3" | "4" | "5">;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * padding='4'
