@@ -1,5 +1,3 @@
-import { BorderRadiusSpecifier } from "../box/types";
-
 export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
 
 export type SpacingScale =
@@ -24,11 +22,11 @@ export type SpacingScale =
   | "24"
   | "32";
 
-export type BorderRadiusType =
-  | BorderRadiusSpecifier
-  | `${BorderRadiusSpecifier} ${BorderRadiusSpecifier}`
-  | `${BorderRadiusSpecifier} ${BorderRadiusSpecifier} ${BorderRadiusSpecifier}`
-  | `${BorderRadiusSpecifier} ${BorderRadiusSpecifier} ${BorderRadiusSpecifier} ${BorderRadiusSpecifier}`;
+export type FlexibleAttributeT<T extends string> =
+  | T
+  | `${T} ${T}`
+  | `${T} ${T} ${T}`
+  | `${T} ${T} ${T} ${T}`;
 
 type FixedResponsiveT<T> = {
   // eslint-disable-next-line no-unused-vars
@@ -36,11 +34,6 @@ type FixedResponsiveT<T> = {
 };
 
 export type ResponsiveProp<T> = T | FixedResponsiveT<T>;
-
-export type PaddingType = ResponsiveProp<SpacingScale>;
-export type PaddingLogicalType = ResponsiveProp<
-  SpacingScale | `${SpacingScale} ${SpacingScale}`
->;
 
 export function getResponsiveProps<T = string>(
   componentName: string,

@@ -9,10 +9,10 @@ type BorderColors = keyof typeof borderColors.a;
 type BorderRadii = keyof (typeof borderRadii.a)["border-radius"];
 type Shadows = keyof typeof shadows.a.shadow;
 
-export type BackgroundSpecifier = BackgroundColors;
+export type BackgroundScale = BackgroundColors;
 
-export type BorderColorSpecifier = BorderColors;
+export type BorderColorScale = BorderColors;
 
-export type BorderRadiusSpecifier = BorderRadii | "0";
+export type BorderRadiusScale = BorderRadii | "0";
 
-export type ShadowSpecifier = Shadows;
+export type ShadowScale = Shadows;

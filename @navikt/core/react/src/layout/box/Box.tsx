@@ -1,53 +1,46 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
+import { BorderRadiusScale } from "../box/types";
 import {
-  BorderRadiusType,
-  PaddingLogicalType,
-  PaddingType,
+  FlexibleAttributeT,
   ResponsiveProp,
-  getResponsiveComplexProps,
   SpacingScale,
+  getResponsiveComplexProps,
 } from "../utilities/css";
-import {
-  BackgroundSpecifier,
-  BorderColorSpecifier,
-  ShadowSpecifier,
-} from "./types";
-
-type BorderWidthScale = "1" | "2" | "3" | "4" | "5";
+import { BackgroundScale, BorderColorScale, ShadowScale } from "./types";
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Background color. Accepts a color token */
-  background?: BackgroundSpecifier;
+  background?: BackgroundScale;
   /** Border color. Accepts a color token. If this is not set then there will be no border. */
-  borderColor?: BorderColorSpecifier;
+  borderColor?: BorderColorScale;
   /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
-  borderRadius?: ResponsiveProp<BorderRadiusType>;
+  borderRadius?: ResponsiveProp<FlexibleAttributeT<BorderRadiusScale>>;
   /**
    * Border-width
    */
-  borderWidth?:
-    | BorderWidthScale
-    | `${BorderWidthScale} ${BorderWidthScale}`
-    | `${BorderWidthScale} ${BorderWidthScale} ${BorderWidthScale}`
-    | `${BorderWidthScale} ${BorderWidthScale} ${BorderWidthScale} ${BorderWidthScale}`;
+  borderWidth?: FlexibleAttributeT<"1" | "2" | "3" | "4" | "5">;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * padding='4'
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
-  padding?: PaddingType;
+  padding?: ResponsiveProp<SpacingScale>;
   /** Unidirectional spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints */
-  paddingInline?: PaddingLogicalType;
+  paddingInline?: ResponsiveProp<
+    SpacingScale | `${SpacingScale} ${SpacingScale}`
+  >;
   /** Horizontal start spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * paddingBlockStart='4'
    * paddingBlockStart={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
-  paddingBlock?: PaddingLogicalType;
+  paddingBlock?: ResponsiveProp<
+    SpacingScale | `${SpacingScale} ${SpacingScale}`
+  >;
   /** Shadow on box */
-  shadow?: ShadowSpecifier;
+  shadow?: ShadowScale;
 }
 
 /**
@@ -110,25 +103,25 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
             .map((x) => `${x}px`)
             .join(" ")
         : undefined,
-      ...getResponsiveComplexProps<BorderRadiusType>(
+      ...getResponsiveComplexProps(
         "box",
         "border-radius",
         "border-radius",
         borderRadius
       ),
-      ...getResponsiveComplexProps<SpacingScale>(
+      ...getResponsiveComplexProps("box", "padding", "spacing", padding),
+      ...getResponsiveComplexProps(
         "box",
-        "padding",
+        "padding-inline",
         "spacing",
-        padding
+        paddingInline
       ),
-      // TODO: Fix types
-      ...getResponsiveComplexProps<
-        SpacingScale | `${SpacingScale} ${SpacingScale}`
-      >("box", "padding-inline", "spacing", paddingInline),
-      ...getResponsiveComplexProps<
-        SpacingScale | `${SpacingScale} ${SpacingScale}`
-      >("box", "padding-block", "spacing", paddingBlock),
+      ...getResponsiveComplexProps(
+        "box",
+        "padding-block",
+        "spacing",
+        paddingBlock
+      ),
     };
 
     return (
