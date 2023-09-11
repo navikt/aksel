@@ -35,17 +35,18 @@ export type SpacingScale =
   | "24"
   | "32";
 
-type ResponsivePropConfig<T = string> = {
+export type BorderRadiusType =
+  | BorderRadiusSpecifier
+  | `${BorderRadiusSpecifier} ${BorderRadiusSpecifier}`
+  | `${BorderRadiusSpecifier} ${BorderRadiusSpecifier} ${BorderRadiusSpecifier}`
+  | `${BorderRadiusSpecifier} ${BorderRadiusSpecifier} ${BorderRadiusSpecifier} ${BorderRadiusSpecifier}`;
+
+type FixedResponsiveT<T> = {
   // eslint-disable-next-line no-unused-vars
   [Breakpoint in BreakpointsAlias]?: T;
 };
 
-type ResponsivePropConfigTuple<T = string> = {
-  // eslint-disable-next-line no-unused-vars
-  [Breakpoint in BreakpointsAlias]?: [T, T];
-};
-
-export type ResponsiveProp<T> = T | ResponsivePropConfig<T>;
+export type ResponsiveProp<T> = T | FixedResponsiveT<T>;
 
 type BlockOrInline = "inline" | "block";
 
@@ -86,7 +87,7 @@ type PaddingCSSProp = Prefix<
   | "BlockEnd"
 >;
 
-type ResponsiveSpacing = ResponsivePropConfigTuple<SpacingScale>;
+type ResponsiveSpacing = FixedResponsiveT<[SpacingScale, SpacingScale]>;
 
 function createStyleEntries(
   responsiveSpacing: ResponsiveSpacing,
@@ -250,17 +251,37 @@ export function getResponsiveValue<T = string>(
   );
 }
 
-type RadiusCSSProp = Prefix<
-  "borderRadius",
-  "" | "StartStart" | "StartEnd" | "EndStart" | "EndEnd"
->;
-
-export function getResponsivePropsRadius(
+export function getResponsivePropsRadius<T = string>(
   componentName: string,
-  responsiveProps: {
-    // eslint-disable-next-line no-unused-vars
-    [key in RadiusCSSProp]?: ResponsiveProp<BorderRadiusSpecifier>;
-  }
+  componentProp: string,
+  tokenSubgroup: string,
+  responsiveProp?: ResponsiveProp<T>
 ) {
-  return {};
+  if (!responsiveProp) {
+    return {};
+  }
+
+  if (typeof responsiveProp === "string") {
+    return {
+      [`--__ac-${componentName}-${componentProp}-xs`]: responsiveProp
+        .split(" ")
+        .map((x) => `var(--a-${tokenSubgroup}-${x})`)
+        .join(" "),
+    };
+  }
+
+  return Object.fromEntries(
+    Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => {
+      if (typeof aliasOrScale !== "string") {
+        return [];
+      }
+      return [
+        `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
+        aliasOrScale
+          .split(" ")
+          .map((x) => `var(--a-${tokenSubgroup}-${x})`)
+          .join(" "),
+      ];
+    })
+  );
 }

@@ -361,7 +361,7 @@ export const BorderRadius = () => {
         padding="10"
         borderWidth="2"
         borderColor="border-strong"
-        borderRadius="large"
+        borderRadius="small medium large xlarge"
       >
         Box
       </Box>
@@ -371,9 +371,9 @@ export const BorderRadius = () => {
         borderWidth="2"
         borderColor="border-strong"
         borderRadius={{
-          xs: "small",
-          md: "medium",
-          lg: "xlarge",
+          xs: "small medium large xlarge",
+          md: "medium small large full",
+          lg: "xlarge large",
         }}
       >
         Box

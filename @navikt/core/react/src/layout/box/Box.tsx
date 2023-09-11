@@ -2,13 +2,13 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
 import cl from "clsx";
 import {
+  BorderRadiusType,
   ResponsiveProp,
   SpacingScale,
   getResponsivePropsPadding,
   getResponsivePropsRadius,
 } from "../utilities/css";
 import {
-  BorderRadiusSpecifier,
   BorderColorSpecifier,
   BackgroundSpecifier,
   ShadowSpecifier,
@@ -24,11 +24,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Border color. Accepts a color token. If this is not set then there will be no border. */
   borderColor?: BorderColorSpecifier;
   /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
-  borderRadius?: ResponsiveProp<BorderRadiusSpecifier>;
-  borderStartStartRadius?: ResponsiveProp<BorderRadiusSpecifier>;
-  borderStartEndRadius?: ResponsiveProp<BorderRadiusSpecifier>;
-  borderEndStartRadius?: ResponsiveProp<BorderRadiusSpecifier>;
-  borderEndEndRadius?: ResponsiveProp<BorderRadiusSpecifier>;
+  borderRadius?: ResponsiveProp<BorderRadiusType>;
   /**
    * Border-width
    */
@@ -130,10 +126,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       borderInlineStartWidth,
       borderInlineEndWidth,
       borderRadius,
-      borderRadiusStartStart,
-      borderRadiusStartEnd,
-      borderRadiusEndStart,
-      borderRadiusEndEnd,
       className,
       padding,
       paddingInline,
@@ -170,13 +162,12 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       "--__ac-box-border-inline-end-width": borderInlineEndWidth
         ? `${borderInlineEndWidth}px`
         : undefined,
-      ...getResponsivePropsRadius("box", {
-        borderRadius,
-        borderRadiusStartStart,
-        borderRadiusStartEnd,
-        borderRadiusEndStart,
-        borderRadiusEndEnd,
-      }),
+      ...getResponsivePropsRadius<BorderRadiusType>(
+        "box",
+        "border-radius",
+        "border-radius",
+        borderRadius
+      ),
       ...getResponsivePropsPadding("box", "inline", {
         padding,
         paddingInline,
