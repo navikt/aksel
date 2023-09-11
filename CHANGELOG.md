@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.4.1
+
+### @navikt/ds-react
+
+- MonthPicker: Fikset kalkulering av fromDate/toDate ([#2269](https://github.com/navikt/aksel/pull/2269))
+
 ## 5.4.0
 
 ### @navikt/ds-react

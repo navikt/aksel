@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 5.4.1
+
+### Patch Changes
+
+- MonthPicker: Fikset kalkulering av fromDate/toDate ([#2269](https://github.com/navikt/aksel/pull/2269))
+
+- Updated dependencies []:
+  - @navikt/aksel-icons@5.4.1
+
 ## 5.4.0
 
 ### Minor Changes
