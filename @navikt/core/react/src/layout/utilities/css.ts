@@ -22,7 +22,7 @@ export type SpacingScale =
   | "24"
   | "32";
 
-export type FlexibleAttributeT<T extends string> =
+export type SpaceDelimitedAttribute<T extends string> =
   | T
   | `${T} ${T}`
   | `${T} ${T} ${T}`
@@ -34,30 +34,6 @@ type FixedResponsiveT<T> = {
 };
 
 export type ResponsiveProp<T> = T | FixedResponsiveT<T>;
-
-export function getResponsiveProps<T = string>(
-  componentName: string,
-  componentProp: string,
-  tokenSubgroup: string,
-  responsiveProp?: ResponsiveProp<T>
-) {
-  if (!responsiveProp) {
-    return {};
-  }
-
-  if (typeof responsiveProp === "string") {
-    return {
-      [`--__ac-${componentName}-${componentProp}-xs`]: `var(--a-${tokenSubgroup}-${responsiveProp})`,
-    };
-  }
-
-  return Object.fromEntries(
-    Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => [
-      `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
-      `var(--a-${tokenSubgroup}-${aliasOrScale})`,
-    ])
-  );
-}
 
 export function getResponsiveValue<T = string>(
   componentName: string,
@@ -82,7 +58,7 @@ export function getResponsiveValue<T = string>(
   );
 }
 
-export function getResponsiveComplexProps<T extends string>(
+export function getResponsiveProps<T extends string>(
   componentName: string,
   componentProp: string,
   tokenSubgroup: string,

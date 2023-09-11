@@ -3,10 +3,10 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
 import { BorderRadiusScale } from "../box/types";
 import {
-  FlexibleAttributeT,
+  SpaceDelimitedAttribute,
   ResponsiveProp,
   SpacingScale,
-  getResponsiveComplexProps,
+  getResponsiveProps,
 } from "../utilities/css";
 import { BackgroundScale, BorderColorScale, ShadowScale } from "./types";
 
@@ -16,11 +16,11 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Border color. Accepts a color token. If this is not set then there will be no border. */
   borderColor?: BorderColorScale;
   /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
-  borderRadius?: ResponsiveProp<FlexibleAttributeT<BorderRadiusScale>>;
+  borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiusScale>>;
   /**
    * Border-width
    */
-  borderWidth?: FlexibleAttributeT<"1" | "2" | "3" | "4" | "5">;
+  borderWidth?: SpaceDelimitedAttribute<"1" | "2" | "3" | "4" | "5">;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * padding='4'
@@ -103,25 +103,15 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
             .map((x) => `${x}px`)
             .join(" ")
         : undefined,
-      ...getResponsiveComplexProps(
+      ...getResponsiveProps(
         "box",
         "border-radius",
         "border-radius",
         borderRadius
       ),
-      ...getResponsiveComplexProps("box", "padding", "spacing", padding),
-      ...getResponsiveComplexProps(
-        "box",
-        "padding-inline",
-        "spacing",
-        paddingInline
-      ),
-      ...getResponsiveComplexProps(
-        "box",
-        "padding-block",
-        "spacing",
-        paddingBlock
-      ),
+      ...getResponsiveProps("box", "padding", "spacing", padding),
+      ...getResponsiveProps("box", "padding-inline", "spacing", paddingInline),
+      ...getResponsiveProps("box", "padding-block", "spacing", paddingBlock),
     };
 
     return (
