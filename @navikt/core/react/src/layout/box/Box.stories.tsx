@@ -134,7 +134,7 @@ export const ThemingDemo = {
             background="surface-neutral-subtle"
             shadow="xsmall"
             padding="4"
-            /*  borderRadius={{ default: "xlarge", bottomLeft: "small" }} */
+            borderRadius="xlarge xlarge xlarge 0"
           >
             <VStack gap="2">
               <Detail>BOX • 01.01.21 14:00</Detail>
@@ -157,16 +157,12 @@ export const ThemingDemo = {
               }
             `}
           </style>
-          {/* <HStack>
+          <HStack>
             <Box
               background="surface-success-subtle"
               shadow="xsmall"
               padding="4"
-              borderRadius={{
-                default: "xlarge",
-                topLeft: "full",
-                bottomLeft: "full",
-              }}
+              borderRadius="full 0 0 full"
             >
               <VStack align="center">
                 <Detail>Episk ny pris</Detail>
@@ -177,11 +173,7 @@ export const ThemingDemo = {
               background="surface-danger-subtle"
               shadow="xsmall"
               padding="4"
-              borderRadius={{
-                default: "xlarge",
-                topRight: "full",
-                bottomRight: "full",
-              }}
+              borderRadius="0 full full 0"
             >
               <VStack align="center">
                 <Detail>Førpris</Detail>
@@ -190,7 +182,7 @@ export const ThemingDemo = {
                 </Heading>
               </VStack>
             </Box>
-          </HStack> */}
+          </HStack>
         </>
       );
     };
