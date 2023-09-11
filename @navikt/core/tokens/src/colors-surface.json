@@ -129,34 +129,34 @@
     "surface-info": {
       "value": "{a.lightblue.500.value}"
     },
-    "surface-alt1-subtle": {
+    "surface-alt-1-subtle": {
       "value": "{a.purple.100.value}"
     },
-    "surface-alt1-moderate": {
+    "surface-alt-1-moderate": {
       "value": "{a.purple.200.value}"
     },
-    "surface-alt1": {
+    "surface-alt-1": {
       "value": "{a.purple.400.value}"
     },
-    "surface-alt2-subtle": {
+    "surface-alt-2-subtle": {
       "value": "{a.limegreen.100.value}"
     },
-    "surface-alt2-moderate": {
+    "surface-alt-2-moderate": {
       "value": "{a.limegreen.200.value}"
     },
-    "surface-alt2": {
+    "surface-alt-2": {
       "value": "{a.limegreen.400.value}"
     },
-    "surface-alt3-subtle": {
+    "surface-alt-3-subtle": {
       "value": "{a.deepblue.100.value}"
     },
-    "surface-alt3-moderate": {
+    "surface-alt-3-moderate": {
       "value": "{a.deepblue.200.value}"
     },
-    "surface-alt3-strong": {
+    "surface-alt-3-strong": {
       "value": "{a.deepblue.800.value}"
     },
-    "surface-alt3": {
+    "surface-alt-3": {
       "value": "{a.deepblue.500.value}"
     }
   }

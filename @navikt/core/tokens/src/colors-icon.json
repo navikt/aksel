@@ -27,13 +27,13 @@
     "icon-info": {
       "value": "{a.lightblue.800.value}"
     },
-    "icon-alt1": {
+    "icon-alt-1": {
       "value": "{a.purple.500.value}"
     },
-    "icon-alt2": {
+    "icon-alt-2": {
       "value": "{a.limegreen.700.value}"
     },
-    "icon-alt3": {
+    "icon-alt-3": {
       "value": "{a.deepblue.500.value}"
     },
     "icon-on-neutral": {

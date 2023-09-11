@@ -42,13 +42,13 @@
     "text-on-info": {
       "value": "{a.gray.900.value}"
     },
-    "text-on-alt1": {
+    "text-on-alt-1": {
       "value": "{a.white.value}"
     },
-    "text-on-alt2": {
+    "text-on-alt-2": {
       "value": "{a.gray.900.value}"
     },
-    "text-on-alt3": {
+    "text-on-alt-3": {
       "value": "{a.white.value}"
     }
   }

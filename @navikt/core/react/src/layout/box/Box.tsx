@@ -10,6 +10,9 @@ import {
 } from "../utilities/css";
 import { BackgroundScale, BorderColorScale, ShadowScale } from "./types";
 
+/**
+ * TODO: Exclude stateful color-variants (same for shadow?)
+ */
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Background color. Accepts a color token */
   background?: BackgroundScale;

@@ -48,13 +48,13 @@
     "border-on-inverted-subtle": {
       "value": "{a.gray.700.value}"
     },
-    "border-alt1": {
+    "border-alt-1": {
       "value": "{a.purple.400.value}"
     },
-    "border-alt2": {
+    "border-alt-2": {
       "value": "{a.limegreen.700.value}"
     },
-    "border-alt3": {
+    "border-alt-3": {
       "value": "{a.deepblue.500.value}"
     }
   }
