@@ -35,7 +35,7 @@
   border-color: var(--__ac-box-border-color);
   border-radius: var(--__ac-box-border-radius);
   box-shadow: var(--__ac-box-shadow);
-  border-width: var(--__ac-box-border-width);
+  border-width: var(--__ac-box-border-width, 0);
 }
 
 @media (min-width: 480px) {
