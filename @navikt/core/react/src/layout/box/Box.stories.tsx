@@ -330,10 +330,7 @@ export const BorderWidth = () => {
       <Box
         background="bg-subtle"
         padding="10"
-        borderBlockStartWidth="1"
-        borderBlockEndWidth="2"
-        borderInlineStartWidth="3"
-        borderInlineEndWidth="4"
+        borderWidth="1 2 3 4"
         borderColor="border-strong"
       >
         Box
@@ -341,9 +338,7 @@ export const BorderWidth = () => {
       <Box
         background="bg-subtle"
         padding="10"
-        borderWidth="5"
-        borderInlineStartWidth="1"
-        borderInlineEndWidth="2"
+        borderWidth="5 2 4 1"
         borderColor="border-strong"
         borderRadius="large"
       >

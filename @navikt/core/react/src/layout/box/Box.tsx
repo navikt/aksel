@@ -27,23 +27,11 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Border-width
    */
-  borderWidth?: BorderWidthScale;
-  /**
-   * Border top width
-   */
-  borderBlockStartWidth?: BorderWidthScale;
-  /**
-   * Border bottom width
-   */
-  borderBlockEndWidth?: BorderWidthScale;
-  /**
-   * Border left width
-   */
-  borderInlineStartWidth?: BorderWidthScale;
-  /**
-   * Border right width
-   */
-  borderInlineEndWidth?: BorderWidthScale;
+  borderWidth?:
+    | BorderWidthScale
+    | `${BorderWidthScale} ${BorderWidthScale}`
+    | `${BorderWidthScale} ${BorderWidthScale} ${BorderWidthScale}`
+    | `${BorderWidthScale} ${BorderWidthScale} ${BorderWidthScale} ${BorderWidthScale}`;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * padding='4'
@@ -96,10 +84,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       background,
       borderColor,
       borderWidth,
-      borderBlockStartWidth,
-      borderBlockEndWidth,
-      borderInlineStartWidth,
-      borderInlineEndWidth,
       borderRadius,
       className,
       padding,
@@ -120,18 +104,11 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       "--__ac-box-border-color": borderColor
         ? `var(--a-${borderColor})`
         : undefined,
-      "--__ac-box-border-width": borderWidth ? `${borderWidth}px` : undefined,
-      "--__ac-box-border-block-start-width": borderBlockStartWidth
-        ? `${borderBlockStartWidth}px`
-        : undefined,
-      "--__ac-box-border-block-end-width": borderBlockEndWidth
-        ? `${borderBlockEndWidth}px`
-        : undefined,
-      "--__ac-box-border-inline-start-width": borderInlineStartWidth
-        ? `${borderInlineStartWidth}px`
-        : undefined,
-      "--__ac-box-border-inline-end-width": borderInlineEndWidth
-        ? `${borderInlineEndWidth}px`
+      "--__ac-box-border-width": borderWidth
+        ? borderWidth
+            .split(" ")
+            .map((x) => `${x}px`)
+            .join(" ")
         : undefined,
       ...getResponsiveComplexProps<BorderRadiusType>(
         "box",

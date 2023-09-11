@@ -20,11 +20,7 @@
   --__ac-box-background: initial;
   --__ac-box-border-color: initial;
   --__ac-box-shadow: initial;
-  --__ac-box-border-width: 0;
-  --__ac-box-border-block-start-width: var(--__ac-box-border-width);
-  --__ac-box-border-block-end-width: var(--__ac-box-border-width);
-  --__ac-box-border-inline-start-width: var(--__ac-box-border-width);
-  --__ac-box-border-inline-end-width: var(--__ac-box-border-width);
+  --__ac-box-border-width: initial;
   --__ac-box-border-radius-xs: initial;
   --__ac-box-border-radius-sm: initial;
   --__ac-box-border-radius-md: initial;
@@ -39,10 +35,7 @@
   border-color: var(--__ac-box-border-color);
   border-radius: var(--__ac-box-border-radius);
   box-shadow: var(--__ac-box-shadow);
-  border-block-start-width: var(--__ac-box-border-block-start-width);
-  border-block-end-width: var(--__ac-box-border-block-end-width);
-  border-inline-start-width: var(--__ac-box-border-inline-start-width);
-  border-inline-end-width: var(--__ac-box-border-inline-end-width);
+  border-width: var(--__ac-box-border-width);
 }
 
 @media (min-width: 480px) {
