@@ -1,20 +1,18 @@
+import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
-import cl from "clsx";
 import {
   BorderRadiusType,
+  PaddingLogicalType,
+  PaddingType,
   ResponsiveProp,
-  SpacingScale,
-  getResponsivePropsPadding,
-  getResponsivePropsRadius,
+  getResponsiveComplexProps,
 } from "../utilities/css";
 import {
-  BorderColorSpecifier,
   BackgroundSpecifier,
+  BorderColorSpecifier,
   ShadowSpecifier,
 } from "./types";
-
-type Spacing = ResponsiveProp<SpacingScale>;
 
 type BorderWidthScale = "1" | "2" | "3" | "4" | "5";
 
@@ -50,39 +48,15 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    * padding='4'
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
-  padding?: Spacing;
+  padding?: PaddingType;
   /** Unidirectional spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints */
-  paddingInline?: Spacing;
+  paddingInline?: PaddingLogicalType;
   /** Horizontal start spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * paddingBlockStart='4'
    * paddingBlockStart={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
-  paddingBlock?: Spacing;
-  /** Vertical start spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
-   * @example
-   * paddingBlockStart='4'
-   * paddingBlockStart={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
-   */
-  paddingBlockStart?: Spacing;
-  /** Vertical end spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
-   * @example
-   * paddingBlockEnd='4'
-   * paddingBlockEnd={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
-   */
-  paddingBlockEnd?: Spacing;
-  /** Horizontal start spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
-   * @example
-   * paddingInlineStart='4'
-   * paddingInlineStart={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
-   */
-  paddingInlineStart?: Spacing;
-  /** Horizontal end spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
-   * @example
-   * paddingInlineEnd='4'
-   * paddingInlineEnd={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
-   */
-  paddingInlineEnd?: Spacing;
+  paddingBlock?: PaddingLogicalType;
   /** Shadow on box */
   shadow?: ShadowSpecifier;
 }
@@ -130,10 +104,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       padding,
       paddingInline,
       paddingBlock,
-      paddingBlockStart,
-      paddingBlockEnd,
-      paddingInlineStart,
-      paddingInlineEnd,
       shadow,
       style: _style,
       ...rest
@@ -162,24 +132,30 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       "--__ac-box-border-inline-end-width": borderInlineEndWidth
         ? `${borderInlineEndWidth}px`
         : undefined,
-      ...getResponsivePropsRadius<BorderRadiusType>(
+      ...getResponsiveComplexProps<BorderRadiusType>(
         "box",
         "border-radius",
         "border-radius",
         borderRadius
       ),
-      ...getResponsivePropsPadding("box", "inline", {
-        padding,
-        paddingInline,
-        paddingInlineStart,
-        paddingInlineEnd,
-      }),
-      ...getResponsivePropsPadding("box", "block", {
-        padding,
-        paddingBlock,
-        paddingBlockStart,
-        paddingBlockEnd,
-      }),
+      ...getResponsiveComplexProps<PaddingType>(
+        "box",
+        "padding",
+        "spacing",
+        padding
+      ),
+      ...getResponsiveComplexProps<PaddingLogicalType>(
+        "box",
+        "padding-inline",
+        "spacing",
+        paddingInline
+      ),
+      ...getResponsiveComplexProps<PaddingLogicalType>(
+        "box",
+        "padding-block",
+        "spacing",
+        paddingBlock
+      ),
     };
 
     return (

@@ -229,7 +229,7 @@ export const PaddingBreakpointsInherit1 = {
     <div>
       <Box
         padding={{ xs: "2" }}
-        paddingInlineStart={{ md: "24" }}
+        paddingInline={{ md: "24 0" }}
         borderColor="border-default"
       >
         <BodyLong>
@@ -247,7 +247,7 @@ export const PaddingBreakpointsInherit2 = {
     <div>
       <Box
         padding={{ xs: "2", sm: "3" }}
-        paddingInlineStart={{ sm: "4", md: "24" }}
+        paddingInline={{ sm: "4 0", md: "24 0" }}
         borderColor="border-default"
       >
         <BodyLong>
@@ -275,16 +275,16 @@ export const Padding = {
         <Box padding="20" borderColor="border-default">
           <BodyLong>Padding all around</BodyLong>
         </Box>
-        <Box padding="1" paddingBlockStart="20" borderColor="border-default">
+        <Box padding="1" paddingBlock="20 0" borderColor="border-default">
           <BodyLong>Padding to the North</BodyLong>
         </Box>
-        <Box padding="1" paddingInlineEnd="20" borderColor="border-default">
+        <Box padding="1" paddingInline="0 20" borderColor="border-default">
           <BodyLong>Padding to the East</BodyLong>
         </Box>
-        <Box padding="1" paddingBlockEnd="20" borderColor="border-default">
+        <Box padding="1" paddingBlock="0 20" borderColor="border-default">
           <BodyLong>Padding to the South</BodyLong>
         </Box>
-        <Box padding="1" paddingInlineStart="20" borderColor="border-default">
+        <Box padding="1" paddingInline="20 0" borderColor="border-default">
           <BodyLong>Padding to the West</BodyLong>
         </Box>
       </VStack>
@@ -375,6 +375,20 @@ export const BorderRadius = () => {
           md: "medium small large full",
           lg: "xlarge large",
         }}
+      >
+        Box
+      </Box>
+    </VStack>
+  );
+};
+
+export const PaddingDemo = () => {
+  return (
+    <VStack gap="4">
+      <Box
+        background="bg-subtle"
+        padding="0"
+        paddingInline={{ xs: "20", lg: "10" }}
       >
         Box
       </Box>
