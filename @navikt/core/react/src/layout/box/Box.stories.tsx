@@ -315,3 +315,39 @@ export const WithHGrid = () => {
     </Box>
   );
 };
+
+export const BorderWidth = () => {
+  return (
+    <VStack gap="4">
+      <Box
+        background="bg-subtle"
+        padding="10"
+        borderWidth="2"
+        borderColor="border-strong"
+      >
+        Box
+      </Box>
+      <Box
+        background="bg-subtle"
+        padding="10"
+        borderBlockStartWidth="1"
+        borderBlockEndWidth="2"
+        borderInlineStartWidth="3"
+        borderInlineEndWidth="4"
+        borderColor="border-strong"
+      >
+        Box
+      </Box>
+      <Box
+        background="bg-subtle"
+        padding="10"
+        borderWidth="5"
+        borderInlineStartWidth="1"
+        borderInlineEndWidth="2"
+        borderColor="border-strong"
+      >
+        Box
+      </Box>
+    </VStack>
+  );
+};

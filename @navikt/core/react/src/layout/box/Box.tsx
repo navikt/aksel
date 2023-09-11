@@ -16,6 +16,8 @@ import {
 
 type Spacing = ResponsiveProp<SpacingScale>;
 
+type BorderWidthScale = "1" | "2" | "3" | "4" | "5";
+
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Background color. Accepts a color token */
   background?: BackgroundSpecifier;
@@ -23,6 +25,26 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   borderColor?: BorderColorSpecifier;
   /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
   borderRadius?: BorderRadiusSpecifier;
+  /**
+   * Border-width
+   */
+  borderWidth?: BorderWidthScale;
+  /**
+   * Border top width
+   */
+  borderBlockStartWidth?: BorderWidthScale;
+  /**
+   * Border bottom width
+   */
+  borderBlockEndWidth?: BorderWidthScale;
+  /**
+   * Border left width
+   */
+  borderInlineStartWidth?: BorderWidthScale;
+  /**
+   * Border right width
+   */
+  borderInlineEndWidth?: BorderWidthScale;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * padding='4'
@@ -98,6 +120,11 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       as: Component = "div",
       background,
       borderColor,
+      borderWidth,
+      borderBlockStartWidth,
+      borderBlockEndWidth,
+      borderInlineStartWidth,
+      borderInlineEndWidth,
       borderRadius,
       borderRadiusEndStart,
       borderRadiusEndEnd,
@@ -117,20 +144,29 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     },
     ref
   ) => {
-    const boxShadow =
-      typeof shadow === "string" ? `var(--a-shadow-${shadow})` : undefined;
-    const boxBackground =
-      typeof background === "string" ? `var(--a-${background})` : undefined;
-    const boxBorderColor =
-      typeof borderColor === "string" ? `var(--a-${borderColor})` : undefined;
-    const borderStyle = typeof borderColor === "string" ? "solid" : undefined;
-
     const style: React.CSSProperties = {
       ..._style,
-      "--__ac-box-background": boxBackground,
-      "--__ac-box-shadow": boxShadow,
-      "--__ac-box-border-color": boxBorderColor,
-      "--__ac-box-border-style": borderStyle,
+      "--__ac-box-background": background
+        ? `var(--a-${background})`
+        : undefined,
+      "--__ac-box-shadow": shadow ? `var(--a-shadow-${shadow})` : undefined,
+      "--__ac-box-border-color": borderColor
+        ? `var(--a-${borderColor})`
+        : undefined,
+      "--__ac-box-border-width": borderWidth ? `${borderWidth}px` : undefined,
+      "--__ac-box-border-block-start-width": borderBlockStartWidth
+        ? `${borderBlockStartWidth}px`
+        : undefined,
+      "--__ac-box-border-block-end-width": borderBlockEndWidth
+        ? `${borderBlockEndWidth}px`
+        : undefined,
+      "--__ac-box-border-inline-start-width": borderInlineStartWidth
+        ? `${borderInlineStartWidth}px`
+        : undefined,
+      "--__ac-box-border-inline-end-width": borderInlineEndWidth
+        ? `${borderInlineEndWidth}px`
+        : undefined,
+
       "--__ac-box-border-radius": getBorderRadius(borderRadius),
       ...getResponsivePropsPadding("box", "inline", {
         padding,
