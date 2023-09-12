@@ -3,7 +3,7 @@ import type { Meta } from "@storybook/react";
 import { BodyLong, Detail, Heading } from "../../typography";
 import { Box } from "./Box";
 import { HGrid, HStack, VStack } from "../..";
-import { BackgroundScale, BorderRadiusScale } from "./types";
+import { BackgroundToken, BorderRadiiToken } from "./types";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 
 export default {
@@ -29,8 +29,8 @@ const Card = ({
   borderRadius = "xlarge",
   children,
 }: {
-  background?: BackgroundScale;
-  borderRadius?: BorderRadiusScale;
+  background?: BackgroundToken;
+  borderRadius?: BorderRadiiToken;
   children: ReactNode;
 }) => (
   <Box

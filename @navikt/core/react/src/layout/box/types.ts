@@ -4,15 +4,11 @@ import borderColors from "@navikt/ds-tokens/src/colors-border.json";
 import borderRadii from "@navikt/ds-tokens/src/border.json";
 import shadows from "@navikt/ds-tokens/src/shadow.json";
 
-type BackgroundColors = keyof typeof bgColors.a | keyof typeof surfaceColors.a;
-type BorderColors = keyof typeof borderColors.a;
-type BorderRadii = keyof (typeof borderRadii.a)["border-radius"];
-type Shadows = keyof typeof shadows.a.shadow;
-
-export type BackgroundScale = BackgroundColors;
-
-export type BorderColorScale = BorderColors;
-
-export type BorderRadiusScale = BorderRadii | "0";
-
-export type ShadowScale = Shadows;
+export type BackgroundToken =
+  | keyof typeof bgColors.a
+  | keyof typeof surfaceColors.a;
+export type BorderColorToken = keyof typeof borderColors.a;
+export type BorderRadiiToken =
+  | keyof (typeof borderRadii.a)["border-radius"]
+  | "0";
+export type ShadowToken = keyof typeof shadows.a.shadow;

@@ -1,25 +1,22 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
-import { BorderRadiusScale } from "../box/types";
+import { BorderRadiiToken } from "../box/types";
 import {
   SpaceDelimitedAttribute,
   ResponsiveProp,
   SpacingScale,
   getResponsiveProps,
 } from "../utilities/css";
-import { BackgroundScale, BorderColorScale, ShadowScale } from "./types";
+import { BackgroundToken, BorderColorToken, ShadowToken } from "./types";
 
-/**
- * TODO: Exclude stateful color-variants (same for shadow?)
- */
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Background color. Accepts a color token */
-  background?: BackgroundScale;
+  background?: BackgroundToken;
   /** Border color. Accepts a color token. If this is not set then there will be no border. */
-  borderColor?: BorderColorScale;
+  borderColor?: BorderColorToken;
   /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
-  borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiusScale>>;
+  borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiiToken>>;
   /**
    * Border-width
    */
@@ -43,7 +40,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
     SpacingScale | `${SpacingScale} ${SpacingScale}`
   >;
   /** Shadow on box */
-  shadow?: ShadowScale;
+  shadow?: ShadowToken;
 }
 
 /**
