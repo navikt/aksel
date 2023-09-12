@@ -17,9 +17,11 @@ const App = () => {
 };
 
 describe("Render datepicker", () => {
+  // eslint-disable-next-line jest/expect-expect
   it("Should not crash when e.target is window", async () => {
     render(<App />);
 
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
       await userEvent.click(screen.getByText("Velg dato"));
     });
