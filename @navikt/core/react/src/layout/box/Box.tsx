@@ -1,24 +1,36 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
-import { BorderRadiiToken } from "../box/types";
+import { BorderRadiiToken } from "../utilities/types";
 import {
   SpaceDelimitedAttribute,
   ResponsiveProp,
   SpacingScale,
   getResponsiveProps,
 } from "../utilities/css";
-import { BackgroundToken, BorderColorToken, ShadowToken } from "./types";
+import {
+  BackgroundToken,
+  BorderColorToken,
+  ShadowToken,
+} from "../utilities/types";
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Background color. Accepts a color token */
+  /** Background color. Accepts a color token. */
   background?: BackgroundToken;
-  /** Border color. Accepts a color token. If this is not set then there will be no border. */
+  /** Border color. Accepts a color token. */
   borderColor?: BorderColorToken;
-  /** Border radius. Accepts a radius token, or an object of radius tokens to set the radius on each corner. */
+  /** Border radius. Accepts a radius token, or an object of radius tokens for different breakpoints.
+   * @example
+   * borderRadius='full'
+   * borderRadius='0 full large small'
+   * borderRadius={{xs: 'small large', sm: '0', md: 'large', lg: 'full'}}
+   */
   borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiiToken>>;
   /**
-   * Border-width
+   * Border-width. If this is not set there will be no border.
+   * @example
+   * borderWidth='2'
+   * borderWidth='1 2 3 4'
    */
   borderWidth?: SpaceDelimitedAttribute<"0" | "1" | "2" | "3" | "4" | "5">;
   /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
@@ -27,26 +39,35 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   padding?: ResponsiveProp<SpacingScale>;
-  /** Unidirectional spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints */
+  /** Horizontal padding around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
+   * @example
+   * paddingInline='4'
+   * paddingInline='4 5'
+   * paddingInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   */
   paddingInline?: ResponsiveProp<
     SpacingScale | `${SpacingScale} ${SpacingScale}`
   >;
-  /** Horizontal start spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
+  /** Vertical padding around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
-   * paddingBlockStart='4'
-   * paddingBlockStart={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * paddingBlock='4'
+   * paddingBlock='4 5'
+   * paddingBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   paddingBlock?: ResponsiveProp<
     SpacingScale | `${SpacingScale} ${SpacingScale}`
   >;
-  /** Shadow on box */
+  /** Shadow on box. Accepts a shadow token.
+   * @example
+   * shadow='small'
+   */
   shadow?: ShadowToken;
 }
 
 /**
  * Foundational Layout-primitive for generic encapsulation & styling.
  *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/Box)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/box)
  * @see 🏷️ {@link BoxProps}
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *

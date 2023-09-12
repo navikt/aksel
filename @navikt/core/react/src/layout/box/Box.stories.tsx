@@ -3,7 +3,7 @@ import type { Meta } from "@storybook/react";
 import { BodyLong, Detail, Heading } from "../../typography";
 import { Box } from "./Box";
 import { HGrid, HStack, VStack } from "../..";
-import { BackgroundToken, BorderRadiiToken } from "./types";
+import { BackgroundToken, BorderRadiiToken } from "../utilities/types";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 
 export default {
