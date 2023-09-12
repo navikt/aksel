@@ -4,4 +4,4 @@
 "@navikt/ds-css": minor
 ---
 
-add Box layout component
+Box: Ny primitive, erstatter dagens `Panel`
