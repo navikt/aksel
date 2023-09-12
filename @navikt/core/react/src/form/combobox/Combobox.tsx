@@ -14,11 +14,9 @@ import Input from "./Input/Input";
 
 export const Combobox = forwardRef<
   HTMLInputElement,
-  Omit<ComboboxProps, "onChange" | "options" | "size">
+  Omit<ComboboxProps, "onChange" | "options" | "size" | "onClear" | "value">
 >((props, ref) => {
   const {
-    value: externalValue,
-    onClear,
     className,
     hideLabel = false,
     description,
