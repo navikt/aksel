@@ -9,9 +9,6 @@
     "border-divider": {
       "value": "{a.grayalpha.300.value}"
     },
-    "border-subtle-hover": {
-      "value": "{a.grayalpha.400.value}"
-    },
     "border-subtle": {
       "value": "{a.grayalpha.300.value}"
     },
