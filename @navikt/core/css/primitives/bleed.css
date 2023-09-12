@@ -1,6 +1,9 @@
 .navds-bleed {
-  padding-left: calc((100vw - 100%) / 2);
   margin-left: calc((100vw - 100%) / -2);
-  padding-right: calc((100vw - 100%) / 2);
   margin-right: calc((100vw - 100%) / -2);
+}
+
+.navds-bleed--preserve {
+  padding-left: calc((100vw - 100%) / 2);
+  padding-right: calc((100vw - 100%) / 2);
 }

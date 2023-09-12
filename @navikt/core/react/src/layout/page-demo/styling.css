@@ -1,0 +1,25 @@
+.reset-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  position: sticky;
+  top: 1rem;
+  bottom: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+}
+
+.sidebarlink {
+  color: var(--a-text-action);
+  cursor: pointer;
+  padding: var(--a-spacing-3) var(--a-spacing-4);
+}
+
+.sidebarlink:hover {
+  text-decoration: underline;
+  background-color: var(--a-surface-action-subtle);
+  color: var(--a-text-default);
+}
