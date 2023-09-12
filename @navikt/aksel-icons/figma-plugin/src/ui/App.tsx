@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useState } from "react";
@@ -61,7 +62,6 @@ const App = () => {
   const onCreate = (id: string, name: string) => {
     const svg = document.getElementById(id)?.outerHTML;
     const size = 24;
-    // eslint-disable-next-line no-restricted-globals
     parent.postMessage(
       {
         pluginMessage: {
@@ -154,7 +154,7 @@ const App = () => {
                       </Heading>
                       <div className="icons-wrapper">
                         {sub.icons.map((i) => {
-                          const T = Icons[`${i.id}Icon`];
+                          const T = Icons[`${i.id}Icon`]; // eslint-disable-line import/namespace
                           if (T === undefined) {
                             console.log(i);
                             return null;
