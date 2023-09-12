@@ -23,7 +23,8 @@ module.exports = {
       "error",
       { propElementValues: "always" },
     ],
-    // Temporary:  (Eventuelt gjøre om til warn?)
+    // TODO: Consider adding the rule "id-length"
+    // Temporary:
     "react/prop-types": "off",
     "react/display-name": "off",
     "import/no-named-as-default": "off",
