@@ -21,7 +21,7 @@ describe("Render datepicker", () => {
   it("Should not crash when e.target is window", async () => {
     render(<App />);
 
-    // eslint-disable-next-line testing-library/no-unnecessary-act
+    // eslint-disable-next-line testing-library/no-unnecessary-act -- https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning
     await act(async () => {
       await userEvent.click(screen.getByText("Velg dato"));
     });
