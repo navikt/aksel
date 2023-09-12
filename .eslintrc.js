@@ -28,6 +28,7 @@ module.exports = {
     "react/display-name": "off",
     "import/no-named-as-default": "off",
   },
+  //reportUnusedDisableDirectives: true, // TODO
   overrides: [
     {
       files: ["**/*.ts?(x)"],
