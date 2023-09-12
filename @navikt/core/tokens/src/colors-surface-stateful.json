@@ -27,6 +27,9 @@
     "surface-neutral-subtle-hover": {
       "value": "{a.grayalpha.200.value}"
     },
+    "surface-neutral-active": {
+      "value": "{a.gray.900.value}"
+    },
     "surface-neutral-hover": {
       "value": "{a.gray.800.value}"
     },
