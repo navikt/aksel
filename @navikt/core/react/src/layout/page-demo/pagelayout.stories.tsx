@@ -9,13 +9,15 @@ import {
   HGrid,
   Heading,
   Hide,
-  Link,
+  List,
   Show,
   VStack,
 } from "../..";
-import { Header } from "./Header";
-import { Sidebar } from "./Sidebar";
 import { AvatarPanel } from "./AvatarPanel";
+import { FilterCard } from "./Filter";
+import { Header } from "./Header";
+import { IntroCard } from "./Intro";
+import { Sidebar } from "./Sidebar";
 import "./styling.css";
 
 const meta = {
@@ -42,7 +44,7 @@ export const Page: Story = {
             <Box paddingInline="4">
               <HGrid
                 align="start"
-                columns={{ xs: 1, md: "288px minmax(auto,600px)" }}
+                columns={{ xs: 1, md: "288px minmax(auto, 600px)" }}
                 gap={{ xs: "3", md: "6" }}
               >
                 <Box style={{ position: "sticky", top: "1rem" }}>
@@ -51,8 +53,9 @@ export const Page: Story = {
                   </Show>
                 </Box>
 
-                <VStack gap={{ xs: "6", md: "12" }}>
-                  <ContentFirst />
+                <VStack gap={{ xs: "6", md: "8" }}>
+                  <IntroCard />
+                  <FilterCard />
                   <Hide above="md">
                     <Sidebar />
                   </Hide>
@@ -75,34 +78,12 @@ export const Page: Story = {
   },
 };
 
-function ContentFirst() {
-  return (
-    <AvatarPanel>
-      <VStack gap="6">
-        <VStack gap="2" align="start">
-          <Heading size="large">Kort om tiltakspenger</Heading>
-          <CopyButton
-            copyText="#"
-            text="Kopier lenke"
-            size="small"
-            icon={<LinkIcon aria-hidden />}
-          />
-        </VStack>
-        <BodyLong>
-          Når du deltar i et arbeidsmarkedstiltak, kan du ha rett til
-          tiltakspenger.
-        </BodyLong>
-      </VStack>
-    </AvatarPanel>
-  );
-}
-
 function ContentLast() {
   return (
     <AvatarPanel>
-      <VStack gap="6">
+      <Box paddingBlock="0 6">
         <VStack gap="2" align="start">
-          <Heading size="large">Hvor lenge?</Heading>
+          <Heading size="large">Hvem kan få?</Heading>
           <CopyButton
             copyText="#"
             text="Kopier lenke"
@@ -110,15 +91,25 @@ function ContentLast() {
             icon={<LinkIcon aria-hidden />}
           />
         </VStack>
-        <BodyLong>
-          Det er i utgangspunktet ikke tidsbegrensing for hvor lenge man kan få
-          pleiepenger, så lenge vilkårene for å få pleiepenger er oppfylt.
-        </BodyLong>
-        <BodyLong>
-          Det er egne regler hvis man oppholder seg utenfor EØS,{" "}
-          <Link href="#">les mer om dette her.</Link>
-        </BodyLong>
-      </VStack>
+      </Box>
+      <BodyLong weight="semibold">
+        Har du blitt arbeidsledig eller permittert, kan du få dagpenger fra NAV
+        hvis alt dette gjelder for deg:
+      </BodyLong>
+      <List>
+        <List.Item>
+          Du har mistet minst 50 prosent av den totale arbeidstiden din.
+        </List.Item>
+        <List.Item>
+          Du har fått inntekten din helt eller delvis redusert.
+        </List.Item>
+        <List.Item>
+          Du har hatt en inntekt på minst 177 930 kroner (1,5 G - Grunnbeløp) de
+          siste 12 månedene, eller minst 355 860 kroner (3 G) de siste 36
+          månedene.
+        </List.Item>
+        <List.Item>Du er under 67 år.</List.Item>
+      </List>
     </AvatarPanel>
   );
 }

@@ -4,6 +4,7 @@
   padding: 0;
 }
 
+/* Sidebars */
 .sidebar {
   position: sticky;
   top: 1rem;
@@ -22,4 +23,21 @@
   text-decoration: underline;
   background-color: var(--a-surface-action-subtle);
   color: var(--a-text-default);
+}
+
+/* Cards */
+.avatar-card {
+  --avatar-size: 4rem;
+
+  position: relative;
+  margin-top: calc(var(--avatar-size) / 2);
+}
+
+.avatar {
+  position: absolute;
+  top: calc((var(--avatar-size) / 2) * -1);
+  height: var(--avatar-size);
+  width: var(--avatar-size);
+  display: grid;
+  place-content: center;
 }
