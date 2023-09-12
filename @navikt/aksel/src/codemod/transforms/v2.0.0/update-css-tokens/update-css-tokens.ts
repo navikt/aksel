@@ -8,7 +8,6 @@ export default function transformer(file) {
   let src = file.source;
 
   tokens.forEach((tok) => {
-    // eslint-disable-next-line no-useless-concat
     const rgx = new RegExp("(" + `${tok[0]}:` + ")", "gm");
     src = src.replace(rgx, `--v2-migration${tok[0].replace("--", "__")}:`);
   });
