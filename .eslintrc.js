@@ -1,3 +1,4 @@
+// TODO: Convert to new format: https://eslint.org/docs/latest/use/configure/migration-guide
 module.exports = {
   env: {
     browser: true,
@@ -23,6 +24,7 @@ module.exports = {
       "error",
       { propElementValues: "always" },
     ],
+    // TODO add: "object-shorthand": "error",
     // TODO: Consider adding the rule "id-length"
     // Temporary:
     "react/prop-types": "off",
