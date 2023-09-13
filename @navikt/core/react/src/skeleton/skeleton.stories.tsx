@@ -121,9 +121,10 @@ export const InlineText = {
   render: () => (
     <BodyLong>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
-      voluptas sint dolore <Skeleton as="span">omnis quia consequatur</Skeleton>{" "}
-      beatae vero cum officia debitis. Quidem debitis omnis reprehenderit nobis
-      rerum. Nulla, magnam? Saepe, eveniet?
+      voluptas sint dolore <Skeleton width="40px" as="span" variant="text" />{" "}
+      beatae vero cum officia debitis. Quidem debitis omnis reprehenderit nobis{" "}
+      <Skeleton as="span">test text</Skeleton> rerum. Nulla, magnam? Saepe,
+      eveniet?
     </BodyLong>
   ),
 };
