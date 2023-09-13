@@ -1,5 +1,4 @@
 // https://github.com/radix-ui/primitives/blob/main/packages/react/slot/src/Slot.tsx
-
 import * as React from "react";
 import mergeRefs from "./mergeRefs";
 
@@ -10,35 +9,6 @@ interface SlotProps extends React.HTMLAttributes<HTMLElement> {
 export const Slot = React.forwardRef<HTMLElement, SlotProps>(
   (props, forwardedRef) => {
     const { children, ...slotProps } = props;
-    const childrenArray = React.Children.toArray(children);
-    const slottable = childrenArray.find(isSlottable);
-
-    if (slottable) {
-      // the new element to render is the one passed as a child of `Slottable`
-      const newElement = slottable.props.children as React.ReactNode;
-
-      const newChildren = childrenArray.map((child) => {
-        if (child === slottable) {
-          // because the new element will be the one rendered, we are only interested
-          // in grabbing its children (`newElement.props.children`)
-          if (React.Children.count(newElement) > 1)
-            return React.Children.only(null);
-          return React.isValidElement(newElement)
-            ? (newElement.props.children as React.ReactNode)
-            : null;
-        } else {
-          return child;
-        }
-      });
-
-      return (
-        <SlotClone {...slotProps} ref={forwardedRef}>
-          {React.isValidElement(newElement)
-            ? React.cloneElement(newElement, undefined, newChildren)
-            : null}
-        </SlotClone>
-      );
-    }
 
     return (
       <SlotClone {...slotProps} ref={forwardedRef}>
@@ -65,19 +35,16 @@ const SlotClone = React.forwardRef<any, SlotCloneProps>(
       });
     }
 
-    return React.Children.count(children) > 1
-      ? React.Children.only(null)
-      : null;
+    if (React.Children.count(children) > 1) {
+      console.error(
+        "Aksel: Components using 'asChild' expects to recieve a single React element child."
+      );
+      return React.Children.only(null);
+    }
+
+    return null;
   }
 );
-
-const Slottable = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
-};
-
-function isSlottable(child: React.ReactNode): child is React.ReactElement {
-  return React.isValidElement(child) && child.type === Slottable;
-}
 
 function mergeProps(
   slotProps: Record<string, any>,
