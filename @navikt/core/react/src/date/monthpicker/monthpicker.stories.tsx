@@ -46,7 +46,7 @@ export const dropdownCaption = () => {
   return (
     <MonthPicker.Standalone
       dropdownCaption
-      fromDate={new Date("Jan 1 2019")}
+      fromDate={new Date("Feb 10 2019")}
       toDate={new Date("Sep 27 2032")}
     />
   );
