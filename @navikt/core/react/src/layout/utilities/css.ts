@@ -63,6 +63,7 @@ export function getResponsiveProps<T extends string>(
   componentProp: string,
   tokenSubgroup: string,
   responsiveProp?: ResponsiveProp<T>,
+  invert = false,
   tokenExceptions: string[] = []
 ) {
   if (!responsiveProp) {
@@ -73,9 +74,15 @@ export function getResponsiveProps<T extends string>(
     return {
       [`--__ac-${componentName}-${componentProp}-xs`]: responsiveProp
         .split(" ")
-        .map((x) =>
-          tokenExceptions.includes(x) ? x : `var(--a-${tokenSubgroup}-${x})`
-        )
+        .map((x) => {
+          if (tokenExceptions.includes(x)) {
+            return x;
+          }
+          if (invert) {
+            return `calc(-1 * var(--a-${tokenSubgroup}-${x}))`;
+          }
+          return `var(--a-${tokenSubgroup}-${x})`;
+        })
         .join(" "),
     };
   }
@@ -86,9 +93,15 @@ export function getResponsiveProps<T extends string>(
         `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
         aliasOrScale
           .split(" ")
-          .map((x) =>
-            tokenExceptions.includes(x) ? x : `var(--a-${tokenSubgroup}-${x})`
-          )
+          .map((x) => {
+            if (tokenExceptions.includes(x)) {
+              return x;
+            }
+            if (invert) {
+              return `calc(-1 * var(--a-${tokenSubgroup}-${x}))`;
+            }
+            return `var(--a-${tokenSubgroup}-${x})`;
+          })
           .join(" "),
       ];
     })

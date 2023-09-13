@@ -1,0 +1,24 @@
+.navds-bleed {
+  --__ac-bleed-margin-xs: initial;
+  --__ac-bleed-margin-sm: initial;
+  --__ac-bleed-margin-md: initial;
+  --__ac-bleed-margin-lg: initial;
+  --__ac-bleed-margin-xl: initial;
+  --__ac-bleed-margin-block-xs: initial;
+  --__ac-bleed-margin-inline-xs: initial;
+  --__ac-bleed-margin-block-sm: initial;
+  --__ac-bleed-margin-inline-sm: initial;
+  --__ac-bleed-margin-block-md: initial;
+  --__ac-bleed-margin-inline-md: initial;
+  --__ac-bleed-margin-block-lg: initial;
+  --__ac-bleed-margin-inline-lg: initial;
+  --__ac-bleed-margin-block-xl: initial;
+  --__ac-bleed-margin-inline-xl: initial;
+  --__ac-bleed-margin: var(--__ac-bleed-margin-xs);
+  --__ac-bleed-margin-inline: var(--__ac-bleed-margin-inline-xs);
+  --__ac-bleed-margin-block: var(--__ac-bleed-margin-block-xs);
+
+  margin: var(--__ac-bleed-margin);
+  margin-inline: var(--__ac-bleed-margin-inline);
+  margin-block: var(--__ac-bleed-margin-block);
+}
