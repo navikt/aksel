@@ -28,7 +28,6 @@ export async function sitemapPages(
       "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,
     }`
   );
-  console.log(pages);
 
   return [
     { path: "", lastmod: pages.frontpage },
