@@ -32,6 +32,34 @@ const StyleMappings = {
   ],
   components: [
     {
+      component: "Box",
+      main: primitivesCss,
+    },
+    {
+      component: "HGrid",
+      main: primitivesCss,
+    },
+    {
+      component: "HStack",
+      main: primitivesCss,
+    },
+    {
+      component: "VStack",
+      main: primitivesCss,
+    },
+    {
+      component: "Spacer",
+      main: primitivesCss,
+    },
+    {
+      component: "Show",
+      main: primitivesCss,
+    },
+    {
+      component: "Hide",
+      main: primitivesCss,
+    },
+    {
       component: "Accordion",
       main: "accordion.css",
       dependencies: [typoCss],
@@ -100,10 +128,6 @@ const StyleMappings = {
       main: "help-text.css",
       dependencies: ["popover.css"],
     },
-    {
-      component: "HGrid",
-      main: primitivesCss,
-    },
     { component: "Ingress", main: typoCss },
     {
       component: "InternalHeader",
@@ -139,26 +163,6 @@ const StyleMappings = {
     { component: "Select", main: formCss, dependencies: [typoCss] },
     { component: "Skeleton", main: "skeleton.css", dependencies: [] },
     { component: "Stepper", main: "stepper.css", dependencies: [typoCss] },
-    {
-      component: "HStack",
-      main: primitivesCss,
-    },
-    {
-      component: "VStack",
-      main: primitivesCss,
-    },
-    {
-      component: "Spacer",
-      main: primitivesCss,
-    },
-    {
-      component: "Show",
-      main: primitivesCss,
-    },
-    {
-      component: "Hide",
-      main: primitivesCss,
-    },
     { component: "Switch", main: formCss, dependencies: [typoCss] },
     { component: "Table", main: "table.css", dependencies: [typoCss] },
     { component: "Tabs", main: "tabs.css", dependencies: [typoCss] },

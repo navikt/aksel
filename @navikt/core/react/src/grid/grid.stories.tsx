@@ -2,7 +2,7 @@ import * as React from "react";
 import { BodyLong, Grid, Cell, ContentContainer } from "../index";
 
 export default {
-  title: "ds-react/Grid",
+  title: "ds-react/Primitives/Grid",
   component: { Grid, Cell },
   parameters: {
     layout: "fullscreen",
