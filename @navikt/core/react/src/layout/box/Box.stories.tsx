@@ -223,6 +223,7 @@ export const PaddingBreakpointsInherit1 = {
         padding={{ xs: "2" }}
         paddingInline={{ md: "24 0" }}
         borderColor="border-default"
+        borderWidth="1"
       >
         <BodyLong>
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
@@ -241,6 +242,7 @@ export const PaddingBreakpointsInherit2 = {
         padding={{ xs: "2", sm: "3" }}
         paddingInline={{ sm: "4 0", md: "24 0" }}
         borderColor="border-default"
+        borderWidth="1"
       >
         <BodyLong>
           This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
