@@ -5,6 +5,10 @@
   pointer-events: none;
 }
 
+.navds-skeleton--inline {
+  display: inline-block;
+}
+
 .navds-skeleton--has-children {
   color: transparent;
 }

@@ -57,6 +57,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
             "navds-skeleton--has-children": Boolean(children),
             "navds-skeleton--no-height": !height,
             "navds-skeleton--no-width": !width,
+            "navds-skeleton--inline": As === "span",
           }
         )}
         style={{ ...style, width, height }}
