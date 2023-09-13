@@ -48,10 +48,6 @@ export const Slot = React.forwardRef<HTMLElement, SlotProps>(
   }
 );
 
-/* -------------------------------------------------------------------------------------------------
- * SlotClone
- * -----------------------------------------------------------------------------------------------*/
-
 interface SlotCloneProps {
   children: React.ReactNode;
 }
