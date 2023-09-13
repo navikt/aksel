@@ -5,7 +5,7 @@ import { Tag } from "../../tag";
 import { VStack } from "../stack";
 
 export default {
-  title: "ds-react/Responsive/Hide",
+  title: "ds-react/Primitives/Hide",
   component: Hide,
 } satisfies Meta<typeof Hide>;
 

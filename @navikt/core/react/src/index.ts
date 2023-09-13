@@ -32,6 +32,7 @@ export * from "./toggle-group";
 export * from "./tooltip";
 export * from "./typography";
 export * from "./util";
+export * from "./layout/box";
 export * from "./layout/stack";
 export * from "./layout/grid";
 export * from "./layout/content-container";

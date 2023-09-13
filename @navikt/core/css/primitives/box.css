@@ -1,0 +1,117 @@
+.navds-box {
+  --__ac-box-padding-xs: initial;
+  --__ac-box-padding-sm: initial;
+  --__ac-box-padding-md: initial;
+  --__ac-box-padding-lg: initial;
+  --__ac-box-padding-xl: initial;
+  --__ac-box-padding-block-xs: initial;
+  --__ac-box-padding-inline-xs: initial;
+  --__ac-box-padding-block-sm: initial;
+  --__ac-box-padding-inline-sm: initial;
+  --__ac-box-padding-block-md: initial;
+  --__ac-box-padding-inline-md: initial;
+  --__ac-box-padding-block-lg: initial;
+  --__ac-box-padding-inline-lg: initial;
+  --__ac-box-padding-block-xl: initial;
+  --__ac-box-padding-inline-xl: initial;
+  --__ac-box-padding: var(--__ac-box-padding-xs);
+  --__ac-box-padding-inline: var(--__ac-box-padding-inline-xs);
+  --__ac-box-padding-block: var(--__ac-box-padding-block-xs);
+  --__ac-box-background: initial;
+  --__ac-box-border-color: initial;
+  --__ac-box-shadow: initial;
+  --__ac-box-border-width: initial;
+  --__ac-box-border-radius-xs: initial;
+  --__ac-box-border-radius-sm: initial;
+  --__ac-box-border-radius-md: initial;
+  --__ac-box-border-radius-lg: initial;
+  --__ac-box-border-radius-xl: initial;
+  --__ac-box-border-radius: var(--__ac-box-border-radius-xs);
+
+  padding-inline: var(--__ac-box-padding-inline, var(--__ac-box-padding));
+  padding-block: var(--__ac-box-padding-block, var(--__ac-box-padding));
+  background-color: var(--__ac-box-background);
+  border-style: solid;
+  border-color: var(--__ac-box-border-color);
+  border-radius: var(--__ac-box-border-radius);
+  box-shadow: var(--__ac-box-shadow);
+  border-width: var(--__ac-box-border-width, 0);
+}
+
+@media (min-width: 480px) {
+  .navds-box {
+    --__ac-box-padding: var(--__ac-box-padding-sm, var(--__ac-box-padding-xs));
+    --__ac-box-padding-inline: var(--__ac-box-padding-inline-sm, var(--__ac-box-padding-inline-xs));
+    --__ac-box-padding-block: var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs));
+    --__ac-box-border-radius: var(--__ac-box-border-radius-sm, var(--__ac-box-border-radius-xs));
+  }
+}
+
+@media (min-width: 768px) {
+  .navds-box {
+    --__ac-box-padding: var(--__ac-box-padding-md, var(--__ac-box-padding-sm, var(--__ac-box-padding-xs)));
+    --__ac-box-padding-inline: var(
+      --__ac-box-padding-inline-md,
+      var(--__ac-box-padding-inline-sm, var(--__ac-box-padding-inline-xs))
+    );
+    --__ac-box-padding-block: var(
+      --__ac-box-padding-block-md,
+      var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs))
+    );
+    --__ac-box-border-radius: var(
+      --__ac-box-border-radius-md,
+      var(--__ac-box-border-radius-sm, var(--__ac-box-border-radius-xs))
+    );
+  }
+}
+
+@media (min-width: 1024px) {
+  .navds-box {
+    --__ac-box-padding: var(
+      --__ac-box-padding-lg,
+      var(--__ac-box-padding-md, var(--__ac-box-padding-sm, var(--__ac-box-padding-xs)))
+    );
+    --__ac-box-padding-inline: var(
+      --__ac-box-padding-inline-lg,
+      var(--__ac-box-padding-inline-md, var(--__ac-box-padding-inline-sm, var(--__ac-box-padding-inline-xs)))
+    );
+    --__ac-box-padding-block: var(
+      --__ac-box-padding-block-lg,
+      var(--__ac-box-padding-block-md, var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs)))
+    );
+    --__ac-box-border-radius: var(
+      --__ac-box-border-radius-lg,
+      var(--__ac-box-border-radius-md, var(--__ac-box-border-radius-sm, var(--__ac-box-border-radius-xs)))
+    );
+  }
+}
+
+@media (min-width: 1280px) {
+  .navds-box {
+    --__ac-box-padding: var(
+      --__ac-box-padding-xl,
+      var(--__ac-box-padding-lg, var(--__ac-box-padding-md, var(--__ac-box-padding-sm, var(--__ac-box-padding-xs))))
+    );
+    --__ac-box-padding-inline: var(
+      --__ac-box-padding-inline-xl,
+      var(
+        --__ac-box-padding-inline-lg,
+        var(--__ac-box-padding-inline-md, var(--__ac-box-padding-inline-sm, var(--__ac-box-padding-inline-xs)))
+      )
+    );
+    --__ac-box-padding-block: var(
+      --__ac-box-padding-block-xl,
+      var(
+        --__ac-box-padding-block-lg,
+        var(--__ac-box-padding-block-md, var(--__ac-box-padding-block-sm, var(--__ac-box-padding-block-xs)))
+      )
+    );
+    --__ac-box-border-radius: var(
+      --__ac-box-border-radius-xl,
+      var(
+        --__ac-box-border-radius-lg,
+        var(--__ac-box-border-radius-md, var(--__ac-box-border-radius-sm, var(--__ac-box-border-radius-xs)))
+      )
+    );
+  }
+}
