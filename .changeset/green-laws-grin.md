@@ -2,4 +2,4 @@
 "@navikt/ds-css": patch
 ---
 
-:recycle: Box: Refaktorert CSS-variabler
+:recycle: Box: Forenkling av CSS-variabler
