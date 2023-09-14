@@ -29,8 +29,9 @@ export function ContentPanel() {
       paddingInline="2"
       paddingBlock="8 4"
       background="surface-default"
+      borderRadius="medium"
     >
-      <Box paddingBlock="0 3" paddingInline="4 0">
+      <Box paddingBlock="0 4" paddingInline="2 0">
         <Heading size="medium">Innhold</Heading>
       </Box>
       <ul className="reset-list">
@@ -54,10 +55,12 @@ export function ContentPanel() {
 export function NewsPanel() {
   return (
     <Box
-      padding="4"
+      paddingBlock="4"
+      paddingInline="2"
       background="surface-default"
       aria-label="Nyttig å vite"
       as="section"
+      borderRadius="medium"
     >
       <Box paddingBlock="0 3" paddingInline="2">
         <Heading size="small">Nyttig å vite</Heading>

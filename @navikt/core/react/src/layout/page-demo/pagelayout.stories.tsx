@@ -82,7 +82,7 @@ function ContentLast() {
   return (
     <AvatarPanel>
       <Box paddingBlock="0 6">
-        <VStack gap="2" align="start">
+        <VStack gap="3" align="start">
           <Heading size="large">Hvem kan få?</Heading>
           <CopyButton
             copyText="#"

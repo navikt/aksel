@@ -7,13 +7,14 @@ import { HStack, VStack } from "../stack";
 
 export function IntroCard() {
   return (
-    <Box background="bg-default" padding="10">
+    <Box background="bg-default" padding="10" borderRadius="medium">
       <VStack gap="6">
-        <VStack gap="2" align="start">
+        <VStack gap="3" align="start">
           <Heading size="large">Kort om dagpenger</Heading>
           <CopyButton
             copyText="#"
             text="Kopier lenke"
+            activeText="Lenken er kopiert"
             size="small"
             icon={<LinkIcon aria-hidden />}
           />
@@ -38,8 +39,8 @@ export function IntroCard() {
               <HStack gap="2" align="center">
                 <Box
                   borderRadius="full"
-                  borderWidth="4"
-                  borderColor="border-success"
+                  background="surface-warning"
+                  padding="1"
                 />
                 <Detail as="span">Er arbeidsledig eller permitert</Detail>
               </HStack>
@@ -55,8 +56,8 @@ export function IntroCard() {
               <HStack gap="2" align="center">
                 <Box
                   borderRadius="full"
-                  borderWidth="4"
-                  borderColor="border-success"
+                  background="surface-warning"
+                  padding="1"
                 />
                 <Detail as="span">Søker jobb</Detail>
               </HStack>
@@ -72,8 +73,8 @@ export function IntroCard() {
               <HStack gap="2" align="center">
                 <Box
                   borderRadius="full"
-                  borderWidth="4"
-                  borderColor="border-success"
+                  background="surface-warning"
+                  padding="1"
                 />
                 <Detail as="span">Trenger hjelp til å komme i jobb</Detail>
               </HStack>

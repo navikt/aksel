@@ -5,7 +5,13 @@ import { HStack } from "../stack";
 
 export function AvatarPanel({ children }: { children: React.ReactNode }) {
   return (
-    <Box background="bg-default" padding="10" className="avatar-card">
+    <Box
+      background="bg-default"
+      paddingInline="10"
+      paddingBlock="12 10"
+      className="avatar-card"
+      borderRadius="medium"
+    >
       <HStack justify="center">
         <Box
           borderRadius="full"
