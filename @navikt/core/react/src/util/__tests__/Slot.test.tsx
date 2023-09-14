@@ -51,7 +51,7 @@ describe("Slot", () => {
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
-    test("Should call onClick when event is on Slot and Child on Slot", async () => {
+    test("Should call onClick when event is on Slot and undefined on Child", async () => {
       const handleClick = jest.fn();
       render(
         <Slot onClick={handleClick}>
