@@ -14,7 +14,7 @@ export function UpdateInfo() {
   }
 
   return (
-    <Alert variant="warning">
+    <Alert variant="warning" data-theme="light">
       Artikkelen er over 6 mnd gammel og trenger ny godkjenning!
       <div className="mt-4">
         Sist oppdatert: {verified.split("-").reverse().join(".")}

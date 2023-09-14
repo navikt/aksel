@@ -60,7 +60,7 @@ export function FeedbackView(props) {
   return (
     <div className="grid place-items-center">
       <div className="mx-auto mt-4 w-full px-6">
-        <Alert variant="info">
+        <Alert variant="info" data-theme="light">
           Løsning for tilbakemeldinger på Aksel er midlertidig slått av.
         </Alert>
         <div className="mt-7">
