@@ -1,7 +1,5 @@
 import { translateToken } from "../translate-token";
 
-export {};
-
 jest.autoMockOff();
 
 const tokens = [

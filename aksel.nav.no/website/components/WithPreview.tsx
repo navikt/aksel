@@ -1,9 +1,6 @@
-import { useLiveQuery } from "next-sanity/preview";
-import { ComponentType } from "react";
-
 import { getClient } from "@/sanity/client.server";
-import { LiveQueryProvider } from "next-sanity/preview";
-import { useMemo } from "react";
+import { useLiveQuery, LiveQueryProvider } from "next-sanity/preview";
+import { useMemo, ComponentType } from "react";
 import dynamic from "next/dynamic";
 import { useCheckAuth } from "components/website-modules/utils/useCheckAuth";
 

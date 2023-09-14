@@ -70,6 +70,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
             "navds-timeline__row--active": active,
           })}
         >
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
           <ol
             {...rest}
             tabIndex={-1}

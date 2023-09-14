@@ -5,7 +5,7 @@ import { tokens } from "../../../tokens-map.mjs";
  * @param {import('jscodeshift').FileInfo} file
  * @param {import('jscodeshift').API} api
  */
-export default function transformer(file, api) {
+export default function transformer(file) {
   let src = file.source;
 
   tokens.forEach((tok) => {

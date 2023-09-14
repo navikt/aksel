@@ -16,11 +16,11 @@ import {
 } from "./actions";
 import { createBadgeComponent, CreateStatusBadge } from "./badges";
 
-const generateBadges = (prev: DocumentBadgeComponent[], documentId: string) => {
+const generateBadges = (prev: DocumentBadgeComponent[]) => {
   const defaultBadges = prev.map((badge: DocumentBadgeComponent) => {
     return createBadgeComponent(badge);
   });
-  return [...defaultBadges, CreateStatusBadge(documentId)];
+  return [...defaultBadges, CreateStatusBadge()];
 };
 
 const getCustomActions = (prev: DocumentActionComponent[]) => {
@@ -79,9 +79,9 @@ export const publicationFlow = definePlugin<PublicationFlowOptions>(
         }
         return prev;
       },
-      badges: (prev, { documentId, schemaType }) => {
+      badges: (prev, { schemaType }) => {
         if (hasQualityControl.some((e) => e === schemaType)) {
-          return generateBadges(prev, documentId);
+          return generateBadges(prev);
         }
         return prev;
       },

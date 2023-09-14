@@ -62,7 +62,6 @@ export const Tema = defineType({
                 .replace(/æ/g, "a")
                 .replace(/å/g, "a")
                 .replace(/ø/g, "o")
-                // eslint-disable-next-line no-useless-escape
                 .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "")
             : "",
       },

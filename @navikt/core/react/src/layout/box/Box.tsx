@@ -1,7 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
-import { BorderRadiiToken } from "../utilities/types";
 import {
   SpaceDelimitedAttribute,
   ResponsiveProp,
@@ -12,6 +11,7 @@ import {
   BackgroundToken,
   BorderColorToken,
   ShadowToken,
+  BorderRadiiToken,
 } from "../utilities/types";
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {

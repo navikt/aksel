@@ -68,20 +68,17 @@ export const Prinsipp = defineType({
         slugify: (_, __, { parent }: any) => {
           if (!parent.prinsipp || !parent.heading) return "";
           const rest = parent.prinsipp.hovedside ? "" : `/${parent.heading}`;
-          return (
-            `${prefix}${parent.prinsipp.prinsippvalg}${rest}`
-              .toLowerCase()
-              .trim()
-              .slice(0, 200)
-              .trim()
-              .replace(/\s+/g, "-")
-              .replace(/-+/gm, "-")
-              .replace(/æ/g, "a")
-              .replace(/å/g, "a")
-              .replace(/ø/g, "o")
-              // eslint-disable-next-line no-useless-escape
-              .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "")
-          );
+          return `${prefix}${parent.prinsipp.prinsippvalg}${rest}`
+            .toLowerCase()
+            .trim()
+            .slice(0, 200)
+            .trim()
+            .replace(/\s+/g, "-")
+            .replace(/-+/gm, "-")
+            .replace(/æ/g, "a")
+            .replace(/å/g, "a")
+            .replace(/ø/g, "o")
+            .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "");
         },
       },
     }),

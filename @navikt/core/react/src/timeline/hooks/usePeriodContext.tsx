@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 interface PeriodContextProps {
-  periodId: String;
+  periodId: string;
   firstFocus: boolean;
   restProps?: any;
 }
