@@ -1,5 +1,11 @@
 # @navikt/ds-tokens
 
+## 5.5.0
+
+### Minor Changes
+
+- Box: Ny primitive, erstatter dagens `Panel` ([#2195](https://github.com/navikt/aksel/pull/2195))
+
 ## 5.4.1
 
 ## 5.4.0
