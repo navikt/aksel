@@ -1,14 +1,12 @@
 import { PlantIcon } from "@navikt/aksel-icons";
+import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
-import { ExpansionCard } from ".";
+import { ExpansionCard, ExpansionCardProps } from ".";
 import { BodyLong } from "../typography";
-import ExpansionCardContent from "./ExpansionCardContent";
-import ExpansionCardHeader from "./ExpansionCardHeader";
 
-export default {
+const meta: Meta<typeof ExpansionCard> = {
   title: "ds-react/ExpansionCard",
   component: ExpansionCard,
-  subcomponents: [ExpansionCardHeader, ExpansionCardContent],
   decorators: [
     (Story) => (
       <div
@@ -26,6 +24,7 @@ export default {
     ),
   ],
 };
+export default meta;
 
 const Content = () => (
   <ExpansionCard.Content>
@@ -59,42 +58,54 @@ const Content = () => (
   </ExpansionCard.Content>
 );
 
-export const Default = {
-  render: (props) => {
-    return (
-      <ExpansionCard
-        {...props}
-        open={props?.open || undefined}
-        size={props.size}
-        aria-label="default-demo"
-      >
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-          {props.description && (
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          )}
-        </ExpansionCard.Header>
-        <Content />
-      </ExpansionCard>
-    );
-  },
-  args: {
-    open: false,
-    size: "medium",
-    description: false,
-    variant: "neutral",
-  },
-  argTypes: {
-    size: { control: "select", options: ["medium", "small"] },
-  },
+type DefaultStoryProps = ExpansionCardProps & { description: boolean };
+type DefaultStory = StoryFn<DefaultStoryProps>;
+export const Default: DefaultStory = (props: DefaultStoryProps) => {
+  return (
+    <ExpansionCard
+      {...props}
+      open={props.open || undefined}
+      aria-label="default-demo"
+    >
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+        {props.description && (
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        )}
+      </ExpansionCard.Header>
+      <Content />
+    </ExpansionCard>
+  );
+};
+Default.args = {
+  open: false,
+  size: "medium",
+  description: false,
+};
+Default.argTypes = {
+  size: { control: "radio", options: ["medium", "small"] },
 };
 
-export const Description = {
-  render: () => (
-    <ExpansionCard aria-label="bare description">
+export const Description = () => (
+  <ExpansionCard aria-label="bare description">
+    <ExpansionCard.Header>
+      <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+      <ExpansionCard.Description>
+        For at yrkesskadedekningen skal gjelde, er det som hovedregel krav til
+        tid, sted og arbeidsoppgaver
+      </ExpansionCard.Description>
+    </ExpansionCard.Header>
+    <Content />
+  </ExpansionCard>
+);
+
+export const Sizes = () => (
+  <>
+    <h2>Medium</h2>
+    <ExpansionCard aria-label="Demo med description">
       <ExpansionCard.Header>
         <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         <ExpansionCard.Description>
@@ -104,75 +115,14 @@ export const Description = {
       </ExpansionCard.Header>
       <Content />
     </ExpansionCard>
-  ),
-};
-
-export const Sizes = {
-  render: () => (
-    <>
-      <h2>Medium</h2>
-      <ExpansionCard aria-label="Demo med description">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-          <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
-          </ExpansionCard.Description>
-        </ExpansionCard.Header>
-        <Content />
-      </ExpansionCard>
-      <ExpansionCard aria-label="Demo">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <Content />
-      </ExpansionCard>
-      <h2>Small</h2>
-      <ExpansionCard size="small" aria-label="small-demo">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-          <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
-          </ExpansionCard.Description>
-        </ExpansionCard.Header>
-        <Content />
-      </ExpansionCard>
-      <ExpansionCard
-        size="small"
-        aria-label="small-demo med avatar uten description"
-      >
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <Content />
-      </ExpansionCard>
-    </>
-  ),
-};
-
-export const HeadingSizing = {
-  render: () => (
-    <>
-      {(["large", "medium", "small"] as const).map((x) => (
-        <ExpansionCard aria-label={`demo-${x}`}>
-          <ExpansionCard.Header key={x}>
-            <ExpansionCard.Title size={x}>{x}</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-              til tid, sted og arbeidsoppgaver
-            </ExpansionCard.Description>
-          </ExpansionCard.Header>
-          <Content />
-        </ExpansionCard>
-      ))}
-    </>
-  ),
-};
-
-export const DefaultOpen = {
-  render: () => (
-    <ExpansionCard defaultOpen aria-label="defaultOpen demo">
+    <ExpansionCard aria-label="Demo">
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+      </ExpansionCard.Header>
+      <Content />
+    </ExpansionCard>
+    <h2>Small</h2>
+    <ExpansionCard size="small" aria-label="small-demo">
       <ExpansionCard.Header>
         <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
         <ExpansionCard.Description>
@@ -182,21 +132,24 @@ export const DefaultOpen = {
       </ExpansionCard.Header>
       <Content />
     </ExpansionCard>
-  ),
-};
+    <ExpansionCard
+      size="small"
+      aria-label="small-demo med avatar uten description"
+    >
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+      </ExpansionCard.Header>
+      <Content />
+    </ExpansionCard>
+  </>
+);
 
-export const ControlledState = {
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [open, setOpen] = useState(false);
-    return (
-      <ExpansionCard
-        open={open}
-        onToggle={setOpen}
-        aria-label="Controlled-state demo"
-      >
+export const HeadingSizing = () => (
+  <>
+    {(["large", "medium", "small"] as const).map((size) => (
+      <ExpansionCard key={size} aria-label={`demo-${size}`}>
         <ExpansionCard.Header>
-          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+          <ExpansionCard.Title size={size}>{size}</ExpansionCard.Title>
           <ExpansionCard.Description>
             For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
             til tid, sted og arbeidsoppgaver
@@ -204,55 +157,85 @@ export const ControlledState = {
         </ExpansionCard.Header>
         <Content />
       </ExpansionCard>
-    );
-  },
+    ))}
+  </>
+);
+
+export const DefaultOpen = () => (
+  <ExpansionCard defaultOpen aria-label="defaultOpen demo">
+    <ExpansionCard.Header>
+      <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+      <ExpansionCard.Description>
+        For at yrkesskadedekningen skal gjelde, er det som hovedregel krav til
+        tid, sted og arbeidsoppgaver
+      </ExpansionCard.Description>
+    </ExpansionCard.Header>
+    <Content />
+  </ExpansionCard>
+);
+
+export const ControlledState = () => {
+  const [open, setOpen] = useState(false);
+  return (
+    <ExpansionCard
+      open={open}
+      onToggle={setOpen}
+      aria-label="Controlled-state demo"
+    >
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+        <ExpansionCard.Description>
+          For at yrkesskadedekningen skal gjelde, er det som hovedregel krav til
+          tid, sted og arbeidsoppgaver
+        </ExpansionCard.Description>
+      </ExpansionCard.Header>
+      <Content />
+    </ExpansionCard>
+  );
 };
 
-export const Customization = {
-  render: () => (
-    <div className="subtle-card">
-      <ExpansionCard aria-label="custom-styling demo">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-          <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
-          </ExpansionCard.Description>
-        </ExpansionCard.Header>
-        <Content />
-      </ExpansionCard>
+export const Customization = () => (
+  <div className="subtle-card">
+    <ExpansionCard aria-label="custom-styling demo">
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+        <ExpansionCard.Description>
+          For at yrkesskadedekningen skal gjelde, er det som hovedregel krav til
+          tid, sted og arbeidsoppgaver
+        </ExpansionCard.Description>
+      </ExpansionCard.Header>
+      <Content />
+    </ExpansionCard>
 
-      <style>{`
+    <style>{`
         .subtle-card {
           --ac-expansioncard-bg: var(--a-surface-subtle);
           --ac-expansioncard-border-open-color: var(--a-border-alt-3);
         }`}</style>
-    </div>
-  ),
-};
+  </div>
+);
 
-export const Icon = {
-  render: () => (
-    <div>
-      <ExpansionCard aria-label="custom-styling demo">
-        <ExpansionCard.Header>
-          <div className="with-icon">
-            <div className="icon">
-              <PlantIcon aria-hidden />
-            </div>
-            <div>
-              <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-              <ExpansionCard.Description>
-                For at yrkesskadedekningen skal gjelde, er det som hovedregel
-                krav til tid, sted og arbeidsoppgaver
-              </ExpansionCard.Description>
-            </div>
+export const Icon = () => (
+  <div>
+    <ExpansionCard aria-label="custom-styling demo">
+      <ExpansionCard.Header>
+        <div className="with-icon">
+          <div className="icon">
+            <PlantIcon aria-hidden />
           </div>
-        </ExpansionCard.Header>
-        <Content />
-      </ExpansionCard>
+          <div>
+            <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+            <ExpansionCard.Description>
+              For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+              til tid, sted og arbeidsoppgaver
+            </ExpansionCard.Description>
+          </div>
+        </div>
+      </ExpansionCard.Header>
+      <Content />
+    </ExpansionCard>
 
-      <style>{`
+    <style>{`
         .with-icon {
           display: flex;
           align-items: center;
@@ -264,6 +247,5 @@ export const Icon = {
           display: grid;
           place-content: center;
         }`}</style>
-    </div>
-  ),
-};
+  </div>
+);

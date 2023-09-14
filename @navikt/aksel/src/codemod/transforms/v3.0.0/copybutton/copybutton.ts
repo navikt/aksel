@@ -7,7 +7,7 @@ import { getLineTerminator } from "../../../utils/lineterminator";
  * @param {import('jscodeshift').FileInfo} file
  * @param {import('jscodeshift').API} api
  */
-export default function transformer(file, api, options, ...rest) {
+export default function transformer(file, api) {
   const j = api.jscodeshift;
 
   let root: any;

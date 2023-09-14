@@ -18,7 +18,7 @@ export const getGlobalReference = (
 ): { name: string; value: string } => {
   const globalRefs = Object.entries(docs)
     .filter(([key]) => key.startsWith("global-"))
-    .reduce((acc, [_, value]) => [...acc, ...value], []);
+    .reduce((acc, [, value]) => [...acc, ...value], []);
 
   return globalRefs.find(({ value }) => semanticValue === value) ?? null;
 };

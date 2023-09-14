@@ -153,6 +153,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     };
 
     return (
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         onKeyDown={(e) => {
           if (e.key !== "Escape") {

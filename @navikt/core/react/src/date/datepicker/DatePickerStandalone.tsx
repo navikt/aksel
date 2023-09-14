@@ -44,7 +44,6 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
 >(
   (
     {
-      children,
       className,
       locale = "nb",
       dropdownCaption,
@@ -52,7 +51,6 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       disableWeekends = false,
       showWeekNumber = false,
       selected,
-      id,
       defaultSelected,
       onSelect,
       fixedWeeks = true,
@@ -121,7 +119,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
           showWeekNumber={showWeekNumber}
           fixedWeeks={fixedWeeks}
           showOutsideDays
-          {...omit(rest, ["onSelect"])}
+          {...omit(rest, ["onSelect", "children", "id"])}
         />
       </div>
     );

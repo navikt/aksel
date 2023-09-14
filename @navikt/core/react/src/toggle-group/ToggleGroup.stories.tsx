@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
 import {
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
@@ -8,24 +6,24 @@ import {
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { ToggleGroup } from "../index";
-export default {
+
+const meta: Meta<typeof ToggleGroup> = {
   title: "ds-react/ToggleGroup",
   component: ToggleGroup,
   argTypes: {
     size: {
+      options: ["medium", "small"],
       control: {
         type: "radio",
-        options: ["medium", "small"],
       },
     },
     variant: {
-      control: {
-        type: "radio",
-        options: ["action", "neutral"],
-      },
+      options: ["action", "neutral"],
+      control: { type: "radio" },
     },
   },
-} as Meta;
+};
+export default meta;
 
 const Items = (icon?: boolean, both?: boolean) => (
   <>
@@ -59,26 +57,24 @@ const Items = (icon?: boolean, both?: boolean) => (
   </>
 );
 
-export const Default = {
-  render: (props) => {
-    const [activeValue, setActiveValue] = useState("ulest");
-    return (
-      <ToggleGroup
-        size={props?.size}
-        value={activeValue}
-        onChange={setActiveValue}
-        label={props.label ? "Proident minim dolor pariatur." : undefined}
-      >
-        {Items(!!props?.icon, !!props?.text && props.icon)}
-      </ToggleGroup>
-    );
-  },
-
-  args: {
-    icon: true,
-    text: true,
-    label: false,
-  },
+export const Default = (props) => {
+  const [activeValue, setActiveValue] = useState("ulest");
+  return (
+    <ToggleGroup
+      size={props.size}
+      variant={props.variant}
+      value={activeValue}
+      onChange={setActiveValue}
+      label={props.label ? "Proident minim dolor pariatur." : undefined}
+    >
+      {Items(props.icon, props.text && props.icon)}
+    </ToggleGroup>
+  );
+};
+Default.args = {
+  icon: true,
+  text: true,
+  label: false,
 };
 
 export const Compositions = () => {
