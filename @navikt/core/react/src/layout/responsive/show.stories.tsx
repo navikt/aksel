@@ -5,7 +5,7 @@ import { Tag } from "../../tag";
 import { VStack } from "../stack";
 
 export default {
-  title: "ds-react/Responsive/Show",
+  title: "ds-react/Primitives/Show",
   component: Show,
 } satisfies Meta<typeof Show>;
 
