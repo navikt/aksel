@@ -35,7 +35,11 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
    * gap={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   gap?: ResponsiveProp<SpacingScale>;
-  direction: ResponsiveProp<"row" | "column">;
+  /**
+   * flex-direction
+   * @default "row"
+   */
+  direction?: ResponsiveProp<"row" | "column">;
 }
 
 export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
@@ -49,7 +53,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
         wrap = true,
         gap,
         style: _style,
-        direction,
+        direction = "row",
         ...rest
       },
       ref
