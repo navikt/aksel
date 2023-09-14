@@ -52,6 +52,7 @@ const serializers: Partial<PortableTextReactComponents> = {
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
     uufeedback: ({ value }) => <UuFeedback node={value} />,
   },
+  unknownType: () => null,
   block: {
     normal: ({ children }) => (
       <BodyLong
@@ -105,6 +106,14 @@ const serializers: Partial<PortableTextReactComponents> = {
       </Heading>
     ),
   },
+  unknownBlockStyle: ({ children }) => (
+    <BodyLong
+      spacing
+      className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
+    >
+      {children}
+    </BodyLong>
+  ),
 
   list: {
     bullet: ({ children }) => (
@@ -191,6 +200,7 @@ const serializers: Partial<PortableTextReactComponents> = {
       );
     },
   },
+  unknownMark: () => null,
 };
 
 export const SanityBlockContent = ({
