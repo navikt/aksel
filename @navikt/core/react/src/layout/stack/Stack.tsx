@@ -3,6 +3,7 @@ import React, { forwardRef, HTMLAttributes } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
 import {
   getResponsiveProps,
+  getResponsiveValue,
   ResponsiveProp,
   SpacingScale,
 } from "../utilities/css";
@@ -12,17 +13,18 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Justify-content
    */
-  justify?:
+  justify?: ResponsiveProp<
     | "start"
     | "center"
     | "end"
     | "space-around"
     | "space-between"
-    | "space-evenly";
+    | "space-evenly"
+  >;
   /**
    * Align-items
    */
-  align?: "start" | "center" | "end" | "baseline" | "stretch";
+  align?: ResponsiveProp<"start" | "center" | "end" | "baseline" | "stretch">;
   /**
    * flex-wrap
    */
@@ -33,7 +35,7 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
    * gap={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   gap?: ResponsiveProp<SpacingScale>;
-  direction: "row" | "column";
+  direction: ResponsiveProp<"row" | "column">;
 }
 
 export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
@@ -54,11 +56,11 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
     ) => {
       const style: React.CSSProperties = {
         ..._style,
-        "--__ac-stack-direction": direction,
-        "--__ac-stack-align": align,
-        "--__ac-stack-justify": justify,
         "--__ac-stack-wrap": wrap ? "wrap" : "nowrap",
         ...getResponsiveProps(`stack`, "gap", "spacing", gap),
+        ...getResponsiveValue(`stack`, "direction", direction),
+        ...getResponsiveValue(`stack`, "align", align),
+        ...getResponsiveValue(`stack`, "justify", justify),
       };
 
       return (

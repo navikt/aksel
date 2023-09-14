@@ -1,14 +1,29 @@
 .navds-stack {
-  --__ac-stack-align: initial;
-  --__ac-stack-justify: initial;
-  --__ac-stack-direction: initial;
   --__ac-stack-wrap: initial;
   --__ac-stack-gap-xs: initial;
-  --__ac-stack-gap-sm: initial;
-  --__ac-stack-gap-md: initial;
-  --__ac-stack-gap-lg: initial;
-  --__ac-stack-gap-xl: initial;
+  --__ac-stack-gap-sm: var(--__ac-stack-gap-xs);
+  --__ac-stack-gap-md: var(--__ac-stack-gap-md);
+  --__ac-stack-gap-lg: var(--__ac-stack-gap-lg);
+  --__ac-stack-gap-xl: var(--__ac-stack-gap-xl);
   --__ac-stack-gap: var(--__ac-stack-gap-xs);
+  --__ac-stack-justify-xs: initial;
+  --__ac-stack-justify-sm: var(--__ac-stack-justify-xs);
+  --__ac-stack-justify-md: var(--__ac-stack-justify-md);
+  --__ac-stack-justify-lg: var(--__ac-stack-justify-lg);
+  --__ac-stack-justify-xl: var(--__ac-stack-justify-xl);
+  --__ac-stack-justify: var(--__ac-stack-justify-xs);
+  --__ac-stack-align-xs: initial;
+  --__ac-stack-align-sm: var(--__ac-stack-align-xs);
+  --__ac-stack-align-md: var(--__ac-stack-align-md);
+  --__ac-stack-align-lg: var(--__ac-stack-align-lg);
+  --__ac-stack-align-xl: var(--__ac-stack-align-xl);
+  --__ac-stack-align: var(--__ac-stack-align-xs);
+  --__ac-stack-direction-xs: initial;
+  --__ac-stack-direction-sm: var(--__ac-stack-direction-xs);
+  --__ac-stack-direction-md: var(--__ac-stack-direction-md);
+  --__ac-stack-direction-lg: var(--__ac-stack-direction-lg);
+  --__ac-stack-direction-xl: var(--__ac-stack-direction-xl);
+  --__ac-stack-direction: var(--__ac-stack-direction-xs);
 
   gap: var(--__ac-stack-gap);
   display: flex;
@@ -33,27 +48,36 @@
 
 @media (min-width: 480px) {
   .navds-stack {
-    --__ac-stack-gap: var(--__ac-stack-gap-sm, var(--__ac-stack-gap-xs));
+    --__ac-stack-gap: var(--__ac-stack-gap-sm);
+    --__ac-stack-align: var(--__ac-stack-align-sm);
+    --__ac-stack-justify: var(--__ac-stack-justify-sm);
+    --__ac-stack-direction: var(--__ac-stack-direction-sm);
   }
 }
 
 @media (min-width: 768px) {
   .navds-stack {
-    --__ac-stack-gap: var(--__ac-stack-gap-md, var(--__ac-stack-gap-sm, var(--__ac-stack-gap-xs)));
+    --__ac-stack-gap: var(--__ac-stack-gap-md);
+    --__ac-stack-align: var(--__ac-stack-align-md);
+    --__ac-stack-justify: var(--__ac-stack-justify-md);
+    --__ac-stack-direction: var(--__ac-stack-direction-md);
   }
 }
 
 @media (min-width: 1024px) {
   .navds-stack {
-    --__ac-stack-gap: var(--__ac-stack-gap-lg, var(--__ac-stack-gap-md, var(--__ac-stack-gap-sm, var(--__ac-stack-gap-xs))));
+    --__ac-stack-gap: var(--__ac-stack-gap-lg);
+    --__ac-stack-align: var(--__ac-stack-align-lg);
+    --__ac-stack-justify: var(--__ac-stack-justify-lg);
+    --__ac-stack-direction: var(--__ac-stack-direction-lg);
   }
 }
 
 @media (min-width: 1280px) {
   .navds-stack {
-    --__ac-stack-gap: var(
-      --__ac-stack-gap-xl,
-      var(--__ac-stack-gap-lg, var(--__ac-stack-gap-md, var(--__ac-stack-gap-sm, var(--__ac-stack-gap-xs))))
-    );
+    --__ac-stack-gap: var(--__ac-stack-gap-xl);
+    --__ac-stack-align: var(--__ac-stack-align-xl);
+    --__ac-stack-justify: var(--__ac-stack-justify-xl);
+    --__ac-stack-direction: var(--__ac-stack-direction-xl);
   }
 }
