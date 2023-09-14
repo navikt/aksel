@@ -58,6 +58,40 @@ export function getResponsiveValue<T = string>(
   );
 }
 
+const translateExceptionToCSS = (exception: string) => {
+  switch (exception) {
+    case "full":
+      return "100%";
+    case "px":
+      return "1px";
+  }
+  return exception;
+};
+
+const translateTokenStringToCSS = (
+  tokenString: string,
+  tokenSubgroup: string,
+  tokenExceptions: string[],
+  invert: boolean
+) => {
+  return tokenString
+    .split(" ")
+    .map((x) => {
+      let output = `var(--a-${tokenSubgroup}-${x})`;
+      if (tokenExceptions.includes(x)) {
+        output = translateExceptionToCSS(x);
+      }
+      if (invert) {
+        if (x === "0") {
+          return `0`;
+        }
+        return `calc(-1 * ${output})`;
+      }
+      return output;
+    })
+    .join(" ");
+};
+
 export function getResponsiveProps<T extends string>(
   componentName: string,
   componentProp: string,
@@ -72,18 +106,13 @@ export function getResponsiveProps<T extends string>(
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--__ac-${componentName}-${componentProp}-xs`]: responsiveProp
-        .split(" ")
-        .map((x) => {
-          if (tokenExceptions.includes(x)) {
-            return x;
-          }
-          if (invert) {
-            return `calc(-1 * var(--a-${tokenSubgroup}-${x}))`;
-          }
-          return `var(--a-${tokenSubgroup}-${x})`;
-        })
-        .join(" "),
+      [`--__ac-${componentName}-${componentProp}-xs`]:
+        translateTokenStringToCSS(
+          responsiveProp,
+          tokenSubgroup,
+          tokenExceptions,
+          invert
+        ),
     };
   }
 
@@ -91,18 +120,12 @@ export function getResponsiveProps<T extends string>(
     Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => {
       return [
         `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
-        aliasOrScale
-          .split(" ")
-          .map((x) => {
-            if (tokenExceptions.includes(x)) {
-              return x;
-            }
-            if (invert) {
-              return `calc(-1 * var(--a-${tokenSubgroup}-${x}))`;
-            }
-            return `var(--a-${tokenSubgroup}-${x})`;
-          })
-          .join(" "),
+        translateTokenStringToCSS(
+          aliasOrScale,
+          tokenSubgroup,
+          tokenExceptions,
+          invert
+        ),
       ];
     })
   );
