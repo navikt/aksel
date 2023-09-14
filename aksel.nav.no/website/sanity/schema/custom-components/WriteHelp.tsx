@@ -3,7 +3,7 @@ import { useClient } from "sanity";
 import useSWR from "swr";
 import { serializers } from "../../util";
 
-export const WriteHelp = (props) => {
+export const WriteHelp = () => {
   const client = useClient({ apiVersion: "2021-06-07" });
   const { data, error } = useSWR(`*[_id == "skrivehjelp"][0]`, (query) =>
     client.fetch(query)

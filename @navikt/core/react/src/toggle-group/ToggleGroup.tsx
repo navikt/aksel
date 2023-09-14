@@ -88,7 +88,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       label,
       value,
       defaultValue,
-      id,
       "aria-describedby": desc,
       variant = "action",
       ...rest

@@ -1,13 +1,16 @@
-import { act, cleanup, fireEvent } from "@testing-library/react";
+import { act, fireEvent, screen } from "@testing-library/react";
 import React from "react";
-import { focusVisible, simulatePointerDown } from "../../tests/utils";
+import {
+  focusVisible,
+  simulatePointerDown,
+  renderWithStyles as render,
+} from "../../tests/utils";
 import userEvent from "@testing-library/user-event";
 import Tooltip from "./Tooltip";
-import { renderWithStyles as render } from "../../tests/utils";
 
 describe("Tooltip", () => {
   test("controlled open", () => {
-    const { getByRole } = render(
+    render(
       <Tooltip content="Hello World" open>
         <button id="testChild" type="submit">
           Hello World
@@ -15,12 +18,11 @@ describe("Tooltip", () => {
       </Tooltip>
     );
 
-    expect(getByRole("tooltip")).toBeVisible();
-    cleanup();
+    expect(screen.getByRole("tooltip")).toBeVisible();
   });
 
   test("default open", () => {
-    const { getByRole } = render(
+    render(
       <Tooltip content="Hello World" defaultOpen>
         <button id="testChild" type="submit">
           Hello World
@@ -28,12 +30,11 @@ describe("Tooltip", () => {
       </Tooltip>
     );
 
-    expect(getByRole("tooltip")).toBeVisible();
-    cleanup();
+    expect(screen.getByRole("tooltip")).toBeVisible();
   });
 
   test("Focus", async () => {
-    const { getByRole } = render(
+    render(
       <Tooltip content="Hello World">
         <button id="testChild" type="submit">
           Hello World
@@ -42,14 +43,12 @@ describe("Tooltip", () => {
     );
     simulatePointerDown();
 
-    focusVisible(getByRole("button"));
-    expect(getByRole("tooltip")).toBeVisible();
-
-    cleanup();
+    focusVisible(screen.getByRole("button"));
+    expect(screen.getByRole("tooltip")).toBeVisible();
   });
 
   test("Escape", async () => {
-    const { queryByRole, getByRole } = render(
+    render(
       <Tooltip content="Hello World">
         <button id="testChild" type="submit">
           Hello World
@@ -58,21 +57,17 @@ describe("Tooltip", () => {
     );
     simulatePointerDown();
 
-    focusVisible(getByRole("button"));
-    expect(getByRole("tooltip")).toBeVisible();
+    focusVisible(screen.getByRole("button"));
+    expect(screen.getByRole("tooltip")).toBeVisible();
 
-    act(() => {
-      fireEvent.keyDown(document, { key: "Escape" });
-    });
-    expect(queryByRole("tooltip")).toBeNull();
-
-    cleanup();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryByRole("tooltip")).toBeNull();
   });
 
   it("delay", async () => {
     const user = userEvent.setup();
 
-    const { queryByRole, getByRole } = render(
+    render(
       <Tooltip content="Hello World" delay={300}>
         <button id="testChild" type="submit">
           Hello World
@@ -81,18 +76,17 @@ describe("Tooltip", () => {
     );
 
     await act(async () => {
-      await user.hover(getByRole("button"));
+      await user.hover(screen.getByRole("button"));
       await new Promise((r) => setTimeout(r, 250));
-      expect(queryByRole("tooltip")).toBeNull();
+      expect(screen.queryByRole("tooltip")).toBeNull();
       await new Promise((r) => setTimeout(r, 600));
     });
 
-    expect(getByRole("tooltip")).toBeVisible();
-    cleanup();
+    expect(screen.getByRole("tooltip")).toBeVisible();
   });
 
   it("outsideClick", async () => {
-    const { queryByRole, getByRole } = render(
+    render(
       <div>
         <Tooltip content="Hello World">
           <button id="testChild" type="submit">
@@ -103,21 +97,19 @@ describe("Tooltip", () => {
       </div>
     );
 
-    simulatePointerDown(getByRole("button"));
-    focusVisible(getByRole("button"));
+    simulatePointerDown(screen.getByRole("button"));
+    focusVisible(screen.getByRole("button"));
 
     await act(async () => {
-      expect(getByRole("tooltip")).toBeVisible();
-      getByRole("link").focus();
+      expect(screen.getByRole("tooltip")).toBeVisible();
+      screen.getByRole("link").focus();
     });
 
-    expect(queryByRole("tooltip")).toBeNull();
-
-    cleanup();
+    expect(screen.queryByRole("tooltip")).toBeNull();
   });
 
   it("keep open on tooltip-click", async () => {
-    const { getByRole } = render(
+    render(
       <div>
         <Tooltip content="Hello World">
           <button id="testChild" type="submit">
@@ -127,21 +119,17 @@ describe("Tooltip", () => {
       </div>
     );
 
-    simulatePointerDown(getByRole("button"));
-    focusVisible(getByRole("button"));
+    simulatePointerDown(screen.getByRole("button"));
+    focusVisible(screen.getByRole("button"));
 
-    await act(async () => {
-      expect(getByRole("tooltip")).toBeVisible();
-      fireEvent.click(getByRole("tooltip"));
-    });
+    expect(screen.getByRole("tooltip")).toBeVisible();
+    fireEvent.click(screen.getByRole("tooltip"));
 
-    expect(getByRole("tooltip")).toBeVisible();
-
-    cleanup();
+    expect(screen.getByRole("tooltip")).toBeVisible();
   });
 
   it("close on focus-loss", async () => {
-    const { getByRole, queryByRole } = render(
+    render(
       <div>
         <Tooltip content="Hello World">
           <button id="testChild" type="submit">
@@ -152,16 +140,14 @@ describe("Tooltip", () => {
       </div>
     );
 
-    simulatePointerDown(getByRole("button"));
-    focusVisible(getByRole("button"));
+    simulatePointerDown(screen.getByRole("button"));
+    focusVisible(screen.getByRole("button"));
 
     await act(async () => {
-      expect(getByRole("tooltip")).toBeVisible();
-      getByRole("link").focus();
+      expect(screen.getByRole("tooltip")).toBeVisible();
+      screen.getByRole("link").focus();
     });
 
-    expect(queryByRole("tooltip")).toBeNull();
-
-    cleanup();
+    expect(screen.queryByRole("tooltip")).toBeNull();
   });
 });

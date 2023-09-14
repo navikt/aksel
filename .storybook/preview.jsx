@@ -1,3 +1,4 @@
+import React from "react";
 import "@navikt/ds-css/index.css";
 import "./layout.css";
 

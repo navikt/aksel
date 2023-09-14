@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Footer } from "@/layout";
 
 import { getClient } from "@/sanity/client.server";
