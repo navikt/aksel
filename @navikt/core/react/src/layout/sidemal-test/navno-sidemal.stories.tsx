@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Box, ContentBox, HGrid, Hide, Show, VStack } from "../..";
+import { Box, HGrid, Hide, Show, VStack } from "../..";
 import { Content } from "./Content";
 import { FilterCard } from "./Filter";
 import { Header } from "./Header";
 import { IntroCard } from "./Intro";
 import { Sidebar } from "./Sidebar";
 import "./styling.css";
+import { ContentBox } from "./content-box";
 
 const meta = {
   title: "kitchen sink/navno-sidemal",

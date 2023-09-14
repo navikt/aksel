@@ -3,7 +3,7 @@ import { Heading, BodyShort, Detail } from "../../typography";
 import { Box } from "../box";
 import { Hide, Show } from "../responsive";
 import { HStack, VStack } from "../stack";
-import { ContentBox } from "../content-box";
+import { ContentBox } from "./content-box";
 
 export function Header() {
   return (

@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
-import { OverridableComponent } from "../../util";
+import { OverridableComponent } from "../../../util";
 
 export interface ContentBoxProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -21,12 +21,24 @@ export const ContentBox: OverridableComponent<ContentBoxProps, HTMLDivElement> =
       };
 
       return (
-        <Component
-          {...rest}
-          ref={ref}
-          style={{ "--__ac-contentbox--max-width": getMaxWidth() }}
-          className={cl("navds-contentbox", className)}
-        />
+        <>
+          <Component
+            {...rest}
+            ref={ref}
+            style={{ "--__ac-contentbox--max-width": getMaxWidth() }}
+            className={cl("navds-contentbox", className)}
+          />
+          <style>
+            {`
+              .navds-contentbox {
+                --__ac-contentbox--max-width: initial;
+
+                margin: 0 auto;
+                max-width: var(--__ac-contentbox--max-width);
+              }
+            `}
+          </style>
+        </>
       );
     }
   );
