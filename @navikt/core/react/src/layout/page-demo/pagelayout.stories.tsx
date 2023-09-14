@@ -1,19 +1,7 @@
-import { LinkIcon } from "@navikt/aksel-icons";
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import {
-  BodyLong,
-  Box,
-  ContentBox,
-  CopyButton,
-  HGrid,
-  Heading,
-  Hide,
-  List,
-  Show,
-  VStack,
-} from "../..";
-import { AvatarPanel } from "./AvatarPanel";
+import { Box, ContentBox, HGrid, Hide, Show, VStack } from "../..";
+import { Content } from "./Content";
 import { FilterCard } from "./Filter";
 import { Header } from "./Header";
 import { IntroCard } from "./Intro";
@@ -44,7 +32,10 @@ export const Page: Story = {
             <Box paddingInline="4">
               <HGrid
                 align="start"
-                columns={{ xs: 1, md: "288px minmax(auto, 600px)" }}
+                columns={{
+                  xs: "minmax(auto, 600px)",
+                  md: "288px minmax(auto, 600px)",
+                }}
                 gap={{ xs: "3", md: "6" }}
               >
                 <Box style={{ position: "sticky", top: "1rem" }}>
@@ -59,15 +50,10 @@ export const Page: Story = {
                   <Hide above="md">
                     <Sidebar />
                   </Hide>
-                  <ContentLast />
-                  <ContentLast />
-                  <ContentLast />
-                  <ContentLast />
-                  <ContentLast />
-                  <ContentLast />
-                  <ContentLast />
-                  <ContentLast />
-                  <ContentLast />
+                  <Content />
+                  <Content />
+                  <Content />
+                  <Content />
                 </VStack>
               </HGrid>
             </Box>
@@ -77,39 +63,3 @@ export const Page: Story = {
     );
   },
 };
-
-function ContentLast() {
-  return (
-    <AvatarPanel>
-      <Box paddingBlock="0 6">
-        <VStack gap="3" align="start">
-          <Heading size="large">Hvem kan få?</Heading>
-          <CopyButton
-            copyText="#"
-            text="Kopier lenke"
-            size="small"
-            icon={<LinkIcon aria-hidden />}
-          />
-        </VStack>
-      </Box>
-      <BodyLong weight="semibold">
-        Har du blitt arbeidsledig eller permittert, kan du få dagpenger fra NAV
-        hvis alt dette gjelder for deg:
-      </BodyLong>
-      <List>
-        <List.Item>
-          Du har mistet minst 50 prosent av den totale arbeidstiden din.
-        </List.Item>
-        <List.Item>
-          Du har fått inntekten din helt eller delvis redusert.
-        </List.Item>
-        <List.Item>
-          Du har hatt en inntekt på minst 177 930 kroner (1,5 G - Grunnbeløp) de
-          siste 12 månedene, eller minst 355 860 kroner (3 G) de siste 36
-          månedene.
-        </List.Item>
-        <List.Item>Du er under 67 år.</List.Item>
-      </List>
-    </AvatarPanel>
-  );
-}

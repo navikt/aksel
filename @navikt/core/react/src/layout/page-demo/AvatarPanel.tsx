@@ -7,8 +7,8 @@ export function AvatarPanel({ children }: { children: React.ReactNode }) {
   return (
     <Box
       background="bg-default"
-      paddingInline="10"
-      paddingBlock="12 10"
+      paddingInline={{ xs: "4", md: "10" }}
+      paddingBlock={{ xs: "10 8", md: "12 10" }}
       className="avatar-card"
       borderRadius="medium"
     >

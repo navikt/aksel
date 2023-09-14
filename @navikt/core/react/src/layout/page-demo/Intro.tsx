@@ -7,7 +7,11 @@ import { HStack, VStack } from "../stack";
 
 export function IntroCard() {
   return (
-    <Box background="bg-default" padding="10" borderRadius="medium">
+    <Box
+      background="bg-default"
+      padding={{ xs: "4", md: "10" }}
+      borderRadius="medium"
+    >
       <VStack gap="6">
         <VStack gap="3" align="start">
           <Heading size="large">Kort om dagpenger</Heading>

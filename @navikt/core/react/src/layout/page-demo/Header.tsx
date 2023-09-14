@@ -35,7 +35,7 @@ export function Header() {
               <Show below="md">
                 <VStack gap="2">
                   <BodyShort size="small">PENGESTØTTE</BodyShort>
-                  <Detail>Oppdatert 5. juli 2023</Detail>
+                  <Detail>Oppdatert 24. august 2023</Detail>
                 </VStack>
               </Show>
             </VStack>

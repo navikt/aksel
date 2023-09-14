@@ -11,7 +11,7 @@ export function FilterCard() {
   return (
     <Box
       background="bg-default"
-      padding="5"
+      padding={{ xs: "4", md: "5" }}
       borderWidth="5"
       borderColor="border-alt-3"
       borderRadius="medium"
