@@ -14,6 +14,9 @@ export const Default = {
     <>
       <style>
         {`
+        .p {
+          padding: 1rem;
+        }
       .centered {
         height: auto;
         width: auto;
@@ -25,39 +28,39 @@ export const Default = {
       `}
       </style>
       <VStack gap="2">
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed marginInline="20 0">
-              <Box background="surface-success-subtle">
-                <BodyLong>marginInline="20 0"</BodyLong>
+        <Box background="surface-alt-1-subtle" padding="5">
+          <Box background="surface-alt-2-subtle" padding="5">
+            <Bleed marginInline="10 0">
+              <Box className="p" background="surface-success-subtle">
+                <BodyLong>marginInline="10 0"</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed marginInline="0 20">
-              <Box background="surface-success-subtle">
-                <BodyLong>marginInline="0 20"</BodyLong>
+        <Box background="surface-alt-1-subtle" padding="5">
+          <Box background="surface-alt-2-subtle" padding="5">
+            <Bleed marginInline="0 10">
+              <Box className="p" background="surface-success-subtle">
+                <BodyLong>marginInline="0 10"</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed marginBlock="20 0">
-              <Box background="surface-success-subtle">
-                <BodyLong>marginBlock="20 0"</BodyLong>
+        <Box background="surface-alt-1-subtle" padding="5">
+          <Box background="surface-alt-2-subtle" padding="5">
+            <Bleed marginBlock="10 0">
+              <Box className="p" background="surface-success-subtle">
+                <BodyLong>marginBlock="10 0"</BodyLong>
               </Box>
             </Bleed>
           </Box>
         </Box>
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed marginBlock="0 20">
-              <Box background="surface-success-subtle">
+        <Box background="surface-alt-1-subtle" padding="5">
+          <Box background="surface-alt-2-subtle" padding="5">
+            <Bleed marginBlock="0 10">
+              <Box className="p" background="surface-success-subtle">
                 <HStack className="centered" justify="center" align="center">
-                  <Box className="testbox">marginBlock="0 20"</Box>
+                  <Box className="testbox">marginBlock="0 10"</Box>
                 </HStack>
               </Box>
             </Bleed>
