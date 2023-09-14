@@ -9,7 +9,7 @@ import { Sidebar } from "./Sidebar";
 import "./styling.css";
 
 const meta = {
-  title: "PageDemo/navno",
+  title: "kitchen sink/navno-sidemal",
   parameters: {
     layout: "fullscreen",
   },
@@ -43,7 +43,6 @@ export const Page: Story = {
                     <Sidebar />
                   </Show>
                 </Box>
-
                 <VStack gap={{ xs: "6", md: "8" }}>
                   <IntroCard />
                   <FilterCard />

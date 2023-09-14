@@ -33,7 +33,6 @@ export * from "./tooltip";
 export * from "./typography";
 export * from "./util";
 export * from "./layout/box";
-export * from "./layout/bleed";
 export * from "./layout/content-box";
 export * from "./layout/stack";
 export * from "./layout/grid";
