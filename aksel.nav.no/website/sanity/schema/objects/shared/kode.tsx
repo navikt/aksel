@@ -13,7 +13,11 @@ export const Kode = defineType({
       type: "code",
       hidden: ({ parent }) => parent?.variant,
       validation: (Rule) => Rule.required(),
+      initialValue: {
+        language: "tsx",
+      },
       options: {
+        language: "tsx",
         languageAlternatives: [
           { value: "tsx", title: "TSX" },
           { value: "javascript", title: "Javascript" },
