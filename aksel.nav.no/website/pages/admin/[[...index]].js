@@ -20,7 +20,7 @@ const StudioPage = () => {
   return (
     <div
       data-theme={scheme}
-      className="h-full min-h-screen"
+      className="aksel-admin h-full min-h-screen"
       id="sanity-wrapper"
     >
       <NextStudio

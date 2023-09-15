@@ -17,7 +17,7 @@ const Alert = ({ node }: { node: AlertT }) => {
             {node.heading}
           </Heading>
         )}
-        <SanityBlockContent blocks={node.body} noLastMargin />
+        <SanityBlockContent blocks={node.body} />
       </DsAlert>
     </div>
   );

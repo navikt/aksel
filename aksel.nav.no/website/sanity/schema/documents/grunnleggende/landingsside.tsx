@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 import { grunnleggendeKategorier } from "../../../config";
 import { SEOFields } from "../presets/seo";
 import { groups } from "../presets/groups";
-import { HomeIcon } from "@sanity/icons";
+import { HouseIcon } from "@navikt/aksel-icons";
 
 const views = () => {
   const list = [];
@@ -43,7 +43,7 @@ export const GrunnleggendeLandingSide = defineType({
   preview: {
     prepare: () => ({
       title: "Landingsside grunnleggende",
-      media: HomeIcon,
+      media: HouseIcon,
     }),
   },
 });

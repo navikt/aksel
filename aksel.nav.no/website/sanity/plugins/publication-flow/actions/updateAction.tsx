@@ -1,4 +1,4 @@
-import { PublishIcon } from "@sanity/icons";
+import { CloudUpIcon } from "@navikt/aksel-icons";
 import {
   DocumentActionComponent,
   DocumentActionDescription,
@@ -16,7 +16,7 @@ export const createWrappedUpdateAction = (): DocumentActionComponent => {
       return {
         label: "Oppdater",
         tone: "primary",
-        icon: PublishIcon,
+        icon: CloudUpIcon,
         onHandle: () => {
           publish.execute();
           props.onComplete();

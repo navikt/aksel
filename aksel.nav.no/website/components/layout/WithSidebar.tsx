@@ -8,7 +8,7 @@ import cl from "clsx";
 import NextLink from "next/link";
 import { capitalize } from "@/utils";
 import Image from "next/legacy/image";
-import { TableOfContentsv2 } from "components/website-modules/TOCv2";
+import { TableOfContentsv2 } from "components/website-modules/toc/TOCv2";
 import { AkselSidebarT } from "@/types";
 import { urlFor } from "@/sanity/interface";
 

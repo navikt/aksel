@@ -34,7 +34,7 @@ const InnholdsKort = ({ node }: { node: InnholdsKortPrinsipperT }) => {
           {node.title}
         </NextLink>
       </Heading>
-      <SanityBlockContent blocks={node.body} noLastMargin />
+      <SanityBlockContent blocks={node.body} />
     </article>
   );
 };

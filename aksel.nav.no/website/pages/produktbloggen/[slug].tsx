@@ -14,7 +14,7 @@ import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Feedback from "components/website-modules/feedback";
-import TableOfContents from "components/website-modules/TOC";
+import TableOfContents from "components/website-modules/toc/TOC";
 import { getImage } from "components/website-modules/utils/get-image";
 import Head from "next/head";
 import Image from "next/legacy/image";
@@ -191,7 +191,6 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             <SanityBlockContent
               className="dynamic-wrapper-prose"
               blocks={blogg?.content ?? []}
-              variant="aksel"
             />
           </div>
         </div>

@@ -7,8 +7,8 @@ import {
   useDocumentOperation,
 } from "sanity";
 
-import { PublishIcon } from "@sanity/icons";
 import { QualityCheckContent } from "./focusAction";
+import { SealCheckmarkIcon } from "@navikt/aksel-icons";
 
 export const createWrappedApproveAction = () => {
   const WrappedApprove = (
@@ -46,7 +46,7 @@ export const createWrappedApproveAction = () => {
       onHandle: () => {
         setDialogOpen(true);
       },
-      icon: PublishIcon,
+      icon: SealCheckmarkIcon,
       tone: "positive",
       dialog: dialogOpen && {
         type: "dialog",
