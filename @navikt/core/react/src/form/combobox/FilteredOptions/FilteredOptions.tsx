@@ -25,8 +25,13 @@ const FilteredOptions = () => {
     setFilteredOptionsIndex,
     toggleIsListOpen,
   } = useFilteredOptionsContext();
-  const { isMultiSelect, selectedOptions, toggleOption, maxSelectedOptions } =
-    useSelectedOptionsContext();
+  const {
+    canSelectMoreOptions,
+    isMultiSelect,
+    selectedOptions,
+    toggleOption,
+    maxSelectedOptions,
+  } = useSelectedOptionsContext();
 
   return (
     <ul
@@ -39,17 +44,16 @@ const FilteredOptions = () => {
       role="listbox"
       tabIndex={-1}
     >
-      {maxSelectedOptions != null &&
-        selectedOptions.length >= maxSelectedOptions && (
-          <li
-            className="navds-combobox__list-item navds-combobox__list-item__max-selected"
-            role="option"
-            aria-selected={false}
-            id={`${id}-max-selected`}
-          >
-            {`${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
-          </li>
-        )}
+      {!canSelectMoreOptions && (
+        <li
+          className="navds-combobox__list-item navds-combobox__list-item__max-selected"
+          role="option"
+          aria-selected={false}
+          id={`${id}-max-selected`}
+        >
+          {`${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
+        </li>
+      )}
       {isLoading && (
         <li
           className="navds-combobox__list-item navds-combobox__list-item__loading"
@@ -60,7 +64,7 @@ const FilteredOptions = () => {
           <Loader aria-label="Søker..." />
         </li>
       )}
-      {isValueNew && allowNewValues && (
+      {isValueNew && canSelectMoreOptions && allowNewValues && (
         <li
           tabIndex={-1}
           onMouseMove={() => {
