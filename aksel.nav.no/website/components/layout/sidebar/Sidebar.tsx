@@ -122,6 +122,7 @@ export const Sidebar = ({
   links: AkselSidebarT;
 }) => {
   const sections = useSection({ kategori, links });
+  console.log({ kategori, links });
 
   return (
     <div
