@@ -86,35 +86,62 @@ export const px = {
 };
 
 export const full = {
+  parameters: {
+    layout: "fullscreen",
+  },
   render: () => (
-    <VStack gap="2">
-      <Box background="surface-alt-1-subtle" padding="10">
-        <Box background="surface-alt-2-subtle" padding="10">
-          <Bleed margin="full">
-            <Box background="surface-success-subtle">
-              <BodyLong>margin="full"</BodyLong>
-            </Box>
-          </Bleed>
+    <>
+      <style>
+        {`
+        .maxWidth {
+          max-width: 300px;
+        }
+        .flex {
+          display: flex;
+        }
+        `}
+      </style>
+      <VStack gap="2" align="center">
+        <Box
+          className="maxWidth"
+          background="surface-alt-1-subtle"
+          padding="10"
+        >
+          <Box background="surface-alt-2-subtle" padding="10">
+            <Bleed marginInline="full">
+              <Box background="surface-success-subtle">
+                <BodyLong>marginInline="full"</BodyLong>
+              </Box>
+            </Bleed>
+          </Box>
         </Box>
-      </Box>
-      <Box background="surface-alt-1-subtle" padding="10">
-        <Box background="surface-alt-2-subtle" padding="10">
-          <Bleed marginInline="full">
-            <Box background="surface-success-subtle">
-              <BodyLong>marginInline="full"</BodyLong>
-            </Box>
-          </Bleed>
+        <Box
+          className="maxWidth"
+          background="surface-alt-1-subtle"
+          padding="10"
+        >
+          <Box background="surface-alt-2-subtle" padding="10">
+            <Bleed marginInline="full 0">
+              <Box background="surface-success-subtle">
+                <BodyLong>marginInline="full 0"</BodyLong>
+              </Box>
+            </Bleed>
+          </Box>
         </Box>
-      </Box>
-      <Box background="surface-alt-1-subtle" padding="10">
-        <Box background="surface-alt-2-subtle" padding="10">
-          <Bleed marginInline="full 0">
-            <Box background="surface-success-subtle">
-              <BodyLong>marginInline="full 0"</BodyLong>
-            </Box>
-          </Bleed>
+        <Box
+          className="maxWidth"
+          background="surface-alt-1-subtle"
+          padding="10"
+        >
+          <Box background="surface-alt-2-subtle" padding="10">
+            <Bleed marginBlock="full">
+              <Box background="surface-success-subtle">
+                <BodyLong>marginInline="full 0"</BodyLong>
+              </Box>
+            </Bleed>
+          </Box>
         </Box>
-      </Box>
-    </VStack>
+      </VStack>
+    </>
   ),
 };

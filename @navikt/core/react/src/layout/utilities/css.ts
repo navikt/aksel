@@ -60,8 +60,6 @@ export function getResponsiveValue<T = string>(
 
 const translateExceptionToCSS = (exception: string) => {
   switch (exception) {
-    case "full":
-      return "100%";
     case "px":
       return "1px";
   }
@@ -69,6 +67,7 @@ const translateExceptionToCSS = (exception: string) => {
 };
 
 const translateTokenStringToCSS = (
+  componentProp: string,
   tokenString: string,
   tokenSubgroup: string,
   tokenExceptions: string[],
@@ -76,7 +75,16 @@ const translateTokenStringToCSS = (
 ) => {
   return tokenString
     .split(" ")
-    .map((x) => {
+    .map((x, _, arr) => {
+      if (componentProp === "margin-inline" && x === "full") {
+        const width = 100 / arr.length;
+        return `calc((100vw - ${width}%)/2)`;
+      }
+      if (componentProp === "margin-block" && x === "full") {
+        const height = 100 / arr.length;
+        return `calc((100vh - ${height}%)/2)`;
+      }
+
       let output = `var(--a-${tokenSubgroup}-${x})`;
       if (tokenExceptions.includes(x)) {
         output = translateExceptionToCSS(x);
@@ -108,6 +116,7 @@ export function getResponsiveProps<T extends string>(
     return {
       [`--__ac-${componentName}-${componentProp}-xs`]:
         translateTokenStringToCSS(
+          componentProp,
           responsiveProp,
           tokenSubgroup,
           tokenExceptions,
@@ -121,6 +130,7 @@ export function getResponsiveProps<T extends string>(
       return [
         `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
         translateTokenStringToCSS(
+          componentProp,
           aliasOrScale,
           tokenSubgroup,
           tokenExceptions,
