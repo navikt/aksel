@@ -1,10 +1,9 @@
 import { Heading, VStack } from "@navikt/ds-react";
-
 import { useEffect, useState } from "react";
 import {
-  getPublishedId,
   IntentButton,
   Preview,
+  getPublishedId,
   useClient,
   useFormValue,
   useSchema,

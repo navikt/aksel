@@ -14,13 +14,11 @@ interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
   ref: React.Ref<HTMLInputElement>;
   inputClassName?: string;
-  errorId?: string;
   value?: string;
-  error?: React.ReactNode;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputClassName, error, errorId, ...rest }, ref) => {
+  ({ inputClassName, ...rest }, ref) => {
     const { clearInput, inputProps, onChange, size, value } = useInputContext();
     const {
       selectedOptions,

@@ -140,7 +140,7 @@ export const Heading = () => {
 export const Links = () => {
   return (
     <div className="colgap">
-      {variants.map((variant, i) => (
+      {variants.map((variant) => (
         <Alert key={variant} variant={variant}>
           <Link href="#">Id elit esse enim reprehenderit</Link>
         </Alert>
@@ -156,7 +156,7 @@ const AlertWithCloseButton = ({
   size?: "medium" | "small";
   children?: React.ReactNode;
 }) => {
-  let [show, setShow] = React.useState(true);
+  const [show, setShow] = React.useState(true);
 
   return show ? (
     <Alert

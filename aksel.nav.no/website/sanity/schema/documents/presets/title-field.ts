@@ -13,7 +13,6 @@ export const titleField = defineField({
     Rule.max(60).error("Sidetittel kan ikke være over 60 tegn"),
   ],
   options: {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     maxLength: 60,
   },

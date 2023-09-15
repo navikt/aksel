@@ -1,14 +1,14 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import faker from "faker";
 import { ConfirmationPanel } from ".";
 
 test("omits error id from input", async () => {
   const label = faker.datatype.string();
 
-  const { getByLabelText } = render(
-    <ConfirmationPanel label={label} errorId="wat"></ConfirmationPanel>
-  );
+  render(<ConfirmationPanel label={label} errorId="wat"></ConfirmationPanel>);
 
-  expect(getByLabelText(label).getAttribute("errorid")).toBeNull();
+  const elm = screen.getByLabelText(label);
+  expect(elm).toBeInTheDocument();
+  expect(elm.getAttribute("errorid")).toBeNull();
 });

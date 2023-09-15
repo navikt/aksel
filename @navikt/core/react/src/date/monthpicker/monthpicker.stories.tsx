@@ -42,7 +42,7 @@ Default.argTypes = {
   },
 };
 
-export const dropdownCaption = () => {
+export const DropdownCaption = () => {
   return (
     <MonthPicker.Standalone
       dropdownCaption

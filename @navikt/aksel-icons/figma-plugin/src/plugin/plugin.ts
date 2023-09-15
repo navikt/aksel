@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 figma.showUI(__html__, { width: 480, height: 600 });
 
 figma.ui.onmessage = (msg) => {

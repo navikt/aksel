@@ -19,7 +19,7 @@ export const IconSidebar = ({
   name: string;
   focusRef: any;
 }) => {
-  const SelectedIcon = Icons[`${name}Icon`];
+  const SelectedIcon = Icons[`${name}Icon`]; // eslint-disable-line import/namespace
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [blob, setBlob]: any = useState();
   const router = useRouter();

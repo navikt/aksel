@@ -147,7 +147,7 @@ const data = [
     status: "Inaktiv",
     content: (
       <>
-        Ola Conny Brakkestad sier "hei". Her er litt innhold med en{" "}
+        Ola Conny Brakkestad sier hei. Her er litt innhold med en{" "}
         <Link href="#">link.</Link>
       </>
     ),
@@ -162,7 +162,7 @@ const data = [
     status: <Link href="http://example.com">Hissig</Link>,
     content: (
       <>
-        Henriette Kristensen sier "hei". Her er litt innhold med en{" "}
+        Henriette Kristensen sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">lenke</Link>. I forhold til en betydelig
         avveining synliggjøres potensialet med sikte på satsingsområdet. Gitt en
         manglende avveining synliggjøres instrumentet på bakgrunn av forholdene.
@@ -183,7 +183,7 @@ const data = [
     status: "Deaktivert",
     content: (
       <>
-        Suki Clydesdale sier "hei". Her er litt innhold med en{" "}
+        Suki Clydesdale sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">link</Link>.
       </>
     ),
@@ -198,7 +198,7 @@ const data = [
     status: <Link href="#">Starter</Link>,
     content: (
       <>
-        Hans-Hermann Hoppe sier "hei". Her er litt innhold med en{" "}
+        Hans-Hermann Hoppe sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">link</Link>.
       </>
     ),
@@ -213,7 +213,7 @@ const data = [
     status: <Link href="#">Eksplodert</Link>,
     content: (
       <>
-        Max Kraft sier "hei". Her er litt innhold med en{" "}
+        Max Kraft sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">link</Link>.
       </>
     ),
@@ -228,7 +228,7 @@ const data = [
     status: <Link href="#">Gunstig</Link>,
     content: (
       <>
-        Pat Ole sier "hei". Her er litt innhold med en{" "}
+        Pat Ole sier hei. Her er litt innhold med en{" "}
         <Link href="http://example.com">lenke</Link>.
       </>
     ),
@@ -265,62 +265,58 @@ export const ExpandableOpen = () => {
   );
 };
 
-export const ClickableRow = {
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [isRowOpen1, setIsRowOpen1] = useState(false);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [isRowOpen2, setIsRowOpen2] = useState(false);
+export const ClickableRow = () => {
+  const [isRowOpen1, setIsRowOpen1] = useState(false);
+  const [isRowOpen2, setIsRowOpen2] = useState(false);
 
-    return (
-      <>
-        <Table zebraStripes>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Navn</Table.HeaderCell>
-              <Table.HeaderCell>Info</Table.HeaderCell>
-              <Table.HeaderCell aria-hidden />
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Table.ExpandableRow
-              content={<div>placeholder row 1</div>}
-              togglePlacement="right"
-              onOpenChange={setIsRowOpen1}
-              data-testid="row1"
-              open={isRowOpen1}
-              expandOnRowClick
-            >
-              <Table.DataCell>Ola</Table.DataCell>
-              <Table.DataCell>
-                <Button
-                  size="xsmall"
-                  onClick={(e) => {
-                    alert("Mer info");
-                  }}
-                >
-                  Mer info
-                </Button>
-              </Table.DataCell>
-            </Table.ExpandableRow>
-            <Table.ExpandableRow
-              content={<div>placeholder row 2</div>}
-              togglePlacement="right"
-              onOpenChange={setIsRowOpen2}
-              data-testid="row2"
-              open={isRowOpen2}
-              expandOnRowClick
-            >
-              <Table.DataCell>Hans</Table.DataCell>
-              <Table.DataCell>
-                <Checkbox hideLabel size="small">
-                  Sett
-                </Checkbox>
-              </Table.DataCell>
-            </Table.ExpandableRow>
-          </Table.Body>
-        </Table>
-      </>
-    );
-  },
+  return (
+    <>
+      <Table zebraStripes>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Navn</Table.HeaderCell>
+            <Table.HeaderCell>Info</Table.HeaderCell>
+            <Table.HeaderCell aria-hidden />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          <Table.ExpandableRow
+            content={<div>placeholder row 1</div>}
+            togglePlacement="right"
+            onOpenChange={setIsRowOpen1}
+            data-testid="row1"
+            open={isRowOpen1}
+            expandOnRowClick
+          >
+            <Table.DataCell>Ola</Table.DataCell>
+            <Table.DataCell>
+              <Button
+                size="xsmall"
+                onClick={() => {
+                  alert("Mer info");
+                }}
+              >
+                Mer info
+              </Button>
+            </Table.DataCell>
+          </Table.ExpandableRow>
+          <Table.ExpandableRow
+            content={<div>placeholder row 2</div>}
+            togglePlacement="right"
+            onOpenChange={setIsRowOpen2}
+            data-testid="row2"
+            open={isRowOpen2}
+            expandOnRowClick
+          >
+            <Table.DataCell>Hans</Table.DataCell>
+            <Table.DataCell>
+              <Checkbox hideLabel size="small">
+                Sett
+              </Checkbox>
+            </Table.DataCell>
+          </Table.ExpandableRow>
+        </Table.Body>
+      </Table>
+    </>
+  );
 };

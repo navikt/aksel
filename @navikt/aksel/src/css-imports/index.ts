@@ -10,7 +10,7 @@ import { getDirectories } from "./get-directories";
 import { getAllVersions } from "./get-version";
 
 export async function cssImportsCommand() {
-  let answers: AnswersT = {
+  const answers: AnswersT = {
     "config-type": "regular",
     cdn: "no",
     version: "0.0.0",

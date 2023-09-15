@@ -3,7 +3,7 @@ import path from "node:path";
 
 import prettier from "prettier";
 
-const applyTransform = require("jscodeshift/dist/testUtils").applyTransform;
+import { applyTransform } from "jscodeshift/dist/testUtils";
 
 interface TestT {
   fixture: string;

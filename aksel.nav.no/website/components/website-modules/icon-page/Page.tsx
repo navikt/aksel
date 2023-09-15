@@ -202,7 +202,7 @@ export const IconPage = ({ name }: { name: string }) => {
 
                                   <div className="gap-05 flex flex-wrap">
                                     {sub.icons.map((i) => {
-                                      const T = Icons[`${i.id}Icon`];
+                                      const T = Icons[`${i.id}Icon`]; // eslint-disable-line import/namespace
                                       if (T === undefined) {
                                         return null;
                                       }

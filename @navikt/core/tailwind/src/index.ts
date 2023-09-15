@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import { writeFileSync } from "fs";
 import { getColors } from "./colors";
