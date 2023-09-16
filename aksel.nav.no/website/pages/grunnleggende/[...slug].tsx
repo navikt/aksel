@@ -120,7 +120,6 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
         />
       </Head>
       <WithSidebar
-        withToc
         sidebar={sidebar}
         pageType={{ type: "Grunnleggende", title: page?.heading }}
         intro={

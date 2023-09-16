@@ -284,7 +284,6 @@ const Page = ({
         />
       </Head>
       <WithSidebar
-        withToc
         sidebar={sidebar}
         pageType={{ type: "Komponenter", title: page?.heading }}
         pageProps={page}

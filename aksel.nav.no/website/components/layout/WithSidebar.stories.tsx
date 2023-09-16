@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { WithSidebar } from "./WithSidebar";
+import { SanityBlockContent } from "@/sanity-block";
+import { getBlocks } from "@/sb-util";
 
 const meta = {
   title: "Layout/WithSidebar",
@@ -13,16 +15,24 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const children = (
+  <>
+    <SanityBlockContent blocks={getBlocks({ length: 1, heading: true })} />
+    <SanityBlockContent blocks={getBlocks({ length: 2, heading: true })} />
+    <SanityBlockContent blocks={getBlocks({ length: 2, heading: true })} />
+    <SanityBlockContent blocks={getBlocks({ length: 2, heading: true })} />
+  </>
+);
+
 export const KomponenterLanding: Story = {
   args: {
-    children: "children content",
+    children,
     pageType: {
       type: "Komponenter",
       title: "Heading",
     },
     pageProps: { content: "1" },
     variant: "landingPage",
-    withToc: true,
     footer: "footer",
     intro: "intro",
     sidebar: [
@@ -60,7 +70,6 @@ export const Komponenter: Story = {
     },
     pageProps: { content: "1" },
     variant: "page",
-    withToc: true,
     footer: "footer",
     intro: "intro",
     sidebar: [
