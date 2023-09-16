@@ -82,7 +82,9 @@ export const IconPage = ({ name }: { name: string }) => {
   return (
     <>
       <Head>
-        <title>Ikoner</title>
+        <title>
+          {name.length > 0 ? `${name}Icon - Aksel` : "Ikoner - Aksel"}
+        </title>
         <meta property="og:title" content="Aksel ikoner" />
         <meta
           name="description"
@@ -99,6 +101,9 @@ export const IconPage = ({ name }: { name: string }) => {
           content="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
           key="ogimage"
         />
+        {name.length > 0 && (
+          <link rel="canonical" href="https://aksel.nav.no/ikoner/" />
+        )}
       </Head>
 
       <div className="bg-surface-subtle">
