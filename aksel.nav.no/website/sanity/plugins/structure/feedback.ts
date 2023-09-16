@@ -1,9 +1,9 @@
 import {
-  DotIcon,
   EyeClosedIcon,
-  EyeOpenIcon,
+  EyeWithPupilIcon,
+  MinusIcon,
   PresentationIcon,
-} from "@sanity/icons";
+} from "@navikt/aksel-icons";
 import { StructureBuilder } from "sanity/desk";
 
 export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
@@ -32,15 +32,18 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
   console.log(types); */
 
   return [
-    S.listItem().title(`Ubehandlet (${fb.ubehandlet})`).icon(EyeOpenIcon).child(
-      S.documentList()
-        .title(`Ubehandlet`)
-        .filter(`_type == "aksel_feedback" && behandlet == false`)
-      /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
-    ),
+    S.listItem()
+      .title(`Ubehandlet (${fb.ubehandlet})`)
+      .icon(EyeWithPupilIcon)
+      .child(
+        S.documentList()
+          .title(`Ubehandlet`)
+          .filter(`_type == "aksel_feedback" && behandlet == false`)
+        /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
+      ),
     S.listItem()
       .title(`God praksis`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -50,7 +53,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Komponentsider`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -60,7 +63,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Grunnleggende`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -70,7 +73,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Andre sider`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -80,7 +83,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Fant ikke det de lette etter`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -90,7 +93,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Footer`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -100,7 +103,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`UU-feedback`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -126,7 +129,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`God praksis totalt (${fb["totalt-gp"]})`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -136,7 +139,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Komponentsider totalt (${fb["totalt-comp"]})`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -146,7 +149,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Grunnleggende totalt (${fb["totalt-grunnleggende"]})`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -156,7 +159,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Andre sider totalt (${fb["totalt-rest"]})`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -166,7 +169,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Nei totalt (${fb["totalt-nei"]})`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -174,7 +177,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Forslag totalt (${fb["totalt-forslag"]})`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -182,7 +185,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Ja totalt (${fb["totalt-ja"]})`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -190,7 +193,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`Footer totalt (${fb["totalt-footer"]})`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)
@@ -198,7 +201,7 @@ export const FeedbackPanes = async (getClient, S: StructureBuilder) => {
       ),
     S.listItem()
       .title(`UU-feedback totalt (${fb["totalt-uu"]})`)
-      .icon(DotIcon)
+      .icon(MinusIcon)
       .child(
         S.documentList()
           .title(`Behandlet`)

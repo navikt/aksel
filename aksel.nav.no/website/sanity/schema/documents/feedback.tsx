@@ -1,6 +1,6 @@
-import { CommentIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 import { landingsider, previews } from "../../config";
+import { ChatIcon } from "@navikt/aksel-icons";
 
 export const Feedback = defineType({
   title: "Feedback",
@@ -97,7 +97,7 @@ export const Feedback = defineType({
             ? "Innhold"
             : "uu-feedback"
         }`,
-        media: CommentIcon,
+        media: ChatIcon,
       };
     },
   },

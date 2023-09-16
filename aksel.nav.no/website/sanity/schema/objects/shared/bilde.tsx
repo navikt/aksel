@@ -1,4 +1,4 @@
-import { ImageIcon } from "@sanity/icons";
+import { ImageIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 
 export const Bilde = defineType({

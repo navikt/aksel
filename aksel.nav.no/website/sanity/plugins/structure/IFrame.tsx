@@ -1,12 +1,12 @@
 import { SanityDocumentLike } from "sanity";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Box, Card, Flex, Spinner, ThemeProvider } from "@sanity/ui";
+
 import {
   ArrowsCirclepathIcon,
   LeaveIcon,
   MobileSmallIcon,
 } from "@navikt/aksel-icons";
-import { CopyButton, Button } from "@navikt/ds-react";
+import { CopyButton, Button, Loader, HStack, Spacer } from "@navikt/ds-react";
 
 export type IframeProps = {
   document: {
@@ -77,95 +77,54 @@ export const Iframe = (props: IframeProps) => {
   }, [displayed._rev]);
 
   return (
-    <ThemeProvider>
-      <Flex direction="column" style={{ height: `100%` }}>
-        <Card padding={2} borderBottom>
-          <Flex align="center" gap={2}>
-            <Box flex={1}>
-              <Flex align="center" gap={1}>
-                <CopyButton
-                  copyText={displayUrl}
-                  size="small"
-                  text="Kopier url"
-                />
-              </Flex>
-            </Box>
-            <Flex align="center" gap={1}>
-              <Button
-                icon={<MobileSmallIcon title="Velg frame-størrelse" />}
-                onClick={() =>
-                  setIframeSize(iframeSize === "mobile" ? "desktop" : "mobile")
-                }
-                size="small"
-                variant="tertiary-neutral"
-              />
-
-              <Button
-                icon={<ArrowsCirclepathIcon title="reload side" />}
-                onClick={() => reload()}
-                size="small"
-                variant="tertiary-neutral"
-              />
-              <Button
-                size="small"
-                icon={<LeaveIcon aria-hidden />}
-                onClick={() => window.open(displayUrl)}
-                variant="tertiary-neutral"
-                iconPosition="right"
-              >
-                Åpne side
-              </Button>
-            </Flex>
-          </Flex>
-        </Card>
-        <Card
-          tone="transparent"
-          padding={iframeSize === "mobile" ? 2 : 0}
-          style={{ height: `100%` }}
-        >
-          <Flex
-            align="center"
-            justify="center"
-            style={{ height: `100%`, position: `relative` }}
-          >
-            {loading && (
-              <Flex
-                justify="center"
-                align="center"
-                style={{ inset: `0`, position: `absolute` }}
-              >
-                <Flex
-                  style={{
-                    ...sizes[iframeSize],
-                    backgroundColor: `rgba(0,0,0,0.2)`,
-                  }}
-                  justify="center"
-                  align="center"
-                >
-                  <Card padding={4} radius={2} shadow={1}>
-                    <Flex
-                      align="center"
-                      direction="column"
-                      gap={3}
-                      height="fill"
-                      justify="center"
-                    >
-                      <Spinner />
-                    </Flex>
-                  </Card>
-                </Flex>
-              </Flex>
-            )}
-            <iframe
-              ref={iframe}
-              title="preview"
-              style={sizes[iframeSize]}
-              src={displayUrl}
-              onLoad={() => setLoading(false)}
+    <div className="flex h-full w-full flex-col items-center">
+      <div className="border-b-border-subtle place-self-stretch border-b p-2">
+        <HStack align="center" gap="2">
+          <CopyButton copyText={displayUrl} size="small" text="Kopier url" />
+          <Spacer />
+          <HStack align="center" gap="2">
+            <Button
+              icon={<MobileSmallIcon title="Velg frame-størrelse" />}
+              onClick={() =>
+                setIframeSize(iframeSize === "mobile" ? "desktop" : "mobile")
+              }
+              size="small"
+              variant="tertiary"
             />
-          </Flex>
-        </Card>
-      </Flex>
-    </ThemeProvider>
+
+            <Button
+              icon={<ArrowsCirclepathIcon title="reload side" />}
+              onClick={() => reload()}
+              size="small"
+              variant="tertiary"
+            />
+            <Button
+              size="small"
+              icon={<LeaveIcon aria-hidden />}
+              onClick={() => window.open(displayUrl)}
+              variant="tertiary"
+              iconPosition="right"
+            >
+              Åpne side
+            </Button>
+          </HStack>
+        </HStack>
+      </div>
+      <div className="h-full w-full">
+        {loading && (
+          <div className="bg-surface-backdrop absolute inset-0 grid h-full w-full place-content-center">
+            <Loader size="2xlarge" variant="inverted" />
+          </div>
+        )}
+
+        <iframe
+          ref={iframe}
+          title="preview"
+          style={sizes[iframeSize]}
+          src={displayUrl}
+          onLoad={() => setLoading(false)}
+        />
+      </div>
+    </div>
   );
 };

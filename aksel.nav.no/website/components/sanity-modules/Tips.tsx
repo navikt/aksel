@@ -20,7 +20,7 @@ const Tips = ({ node }: { node: TipsT }) => {
         <LightBulbIcon fontSize="1.5rem" title="tips" aria-hidden />
         Tips
       </Heading>
-      <SanityBlockContent blocks={node.body} noLastMargin />
+      <SanityBlockContent blocks={node.body} />
     </div>
   );
 };

@@ -271,10 +271,7 @@ const Page = ({
                 aksel
               />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
-                <SanityBlockContent
-                  blocks={data?.content ?? []}
-                  variant="aksel"
-                />
+                <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
                   {authors?.length > 0 && (
                     <Label className="text-deepblue-700 mb-2" as="p">

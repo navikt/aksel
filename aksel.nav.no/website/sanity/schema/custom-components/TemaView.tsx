@@ -1,9 +1,9 @@
-import { Card, Heading, Stack } from "@sanity/ui";
+import { Heading, VStack } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
 import {
-  getPublishedId,
   IntentButton,
   Preview,
+  getPublishedId,
   useClient,
   useFormValue,
   useSchema,
@@ -38,27 +38,26 @@ export function TemaView() {
   const notFound = artikler.filter((x) => !sider.includes(x._id));
 
   return (
-    <Stack space={3}>
-      <Heading size={1}>
-        {`Artikler ikke i seksjoner (${notFound.length})`}
+    <VStack gap="1">
+      <Heading size="xsmall" level="2" spacing>
+        {`Artikler uten seksjoner (${notFound.length})`}
       </Heading>
       {notFound.map((x) => (
-        <Card key={x._id} flex={1}>
-          <IntentButton
-            intent="edit"
-            mode="ghost"
-            padding={1}
-            radius={0}
-            params={{
-              type: "aksel_artikkel",
-              id: getPublishedId(x._id),
-            }}
-            style={{ width: "100%" }}
-          >
-            <Preview layout="default" schemaType={type} value={x} key={x._id} />
-          </IntentButton>
-        </Card>
+        <IntentButton
+          key={x._id}
+          intent="edit"
+          mode="ghost"
+          padding={1}
+          radius={0}
+          params={{
+            type: "aksel_artikkel",
+            id: getPublishedId(x._id),
+          }}
+          style={{ width: "100%" }}
+        >
+          <Preview layout="default" schemaType={type} value={x} key={x._id} />
+        </IntentButton>
       ))}
-    </Stack>
+    </VStack>
   );
 }

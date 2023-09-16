@@ -11,9 +11,9 @@ import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
 
 import { getTemplates } from "./util";
 
-import { DatabaseIcon, RemoveCircleIcon } from "@sanity/icons";
 import { allArticleDocuments } from "./config";
 import { schema } from "./schema";
+import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 
 const projectId = "hnbe3yhs";
 
@@ -33,7 +33,7 @@ export const workspaceConfig = defineConfig([
     name: "dev",
     dataset: "development",
     basePath: "/admin/dev",
-    icon: RemoveCircleIcon,
+    icon: TestFlaskIcon,
     auth: authStore("development"),
   },
 ]);

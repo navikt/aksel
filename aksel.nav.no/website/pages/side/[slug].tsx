@@ -84,7 +84,6 @@ const Page = ({ page }: PageProps["props"]) => {
             <SanityBlockContent
               className="dynamic-wrapper-prose"
               blocks={page?.content ?? []}
-              variant="aksel"
             />
           </div>
         </div>
