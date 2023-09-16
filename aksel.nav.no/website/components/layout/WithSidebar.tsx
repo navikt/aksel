@@ -10,43 +10,6 @@ import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { ReactNode } from "react";
 
-const HeaderCube = ({ ...props }) => (
-  <svg
-    width="354"
-    height="280"
-    viewBox="0 0 354 280"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden
-    {...props}
-  >
-    <path
-      d="M507.265 293.265L389.355 175.355V293.089L507.265 410.999V293.265Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M436.496 222.496L318.645 104.645L200.794 222.496L318.645 340.347L436.496 222.496Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M247.934 269.754L130.024 151.844V269.577L247.934 387.487V269.754Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M59.3133 81.1334L177.223 -36.7767L177.223 80.9564L59.3133 198.867V81.1334Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
 export const WithSidebar = ({
   children,
   sidebar,
@@ -143,7 +106,7 @@ export const WithSidebar = ({
             )}
             {variant === "landingPage" && (
               <div className="pointer-events-none absolute right-0 top-0 hidden sm:block">
-                <HeaderCube className="text-deepblue-300 z-[-1] max-h-full" />
+                <HeaderCube />
               </div>
             )}
           </div>
@@ -163,3 +126,42 @@ export const WithSidebar = ({
     </Box>
   );
 };
+
+function HeaderCube() {
+  return (
+    <svg
+      width="354"
+      height="280"
+      viewBox="0 0 354 280"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+      className="text-deepblue-300 z-[-1] max-h-full"
+    >
+      <path
+        d="M507.265 293.265L389.355 175.355V293.089L507.265 410.999V293.265Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M436.496 222.496L318.645 104.645L200.794 222.496L318.645 340.347L436.496 222.496Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M247.934 269.754L130.024 151.844V269.577L247.934 387.487V269.754Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M59.3133 81.1334L177.223 -36.7767L177.223 80.9564L59.3133 198.867V81.1334Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
