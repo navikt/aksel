@@ -9,6 +9,7 @@ import {
 import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
   AkselPrinsippDocT,
   NextPageT,
@@ -18,13 +19,10 @@ import {
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
-import Head from "next/head";
+import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
-import { urlFor } from "@/sanity/interface";
-import { contributorsAll, destructureBlocks } from "@/sanity/queries";
-import { SEO } from "components/website-modules/seo/SEO";
 
 type PageProps = NextPageT<{
   prinsipp: ResolveContributorsT<ResolveSlugT<AkselPrinsippDocT>>;
@@ -94,23 +92,6 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
         publishDate={publishDate}
         image={data?.seo?.image}
       />
-      <Head>
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:image"
-          content={
-            data?.seo?.image
-              ? urlFor(data?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
       <Header variant={mainPage ? "default" : "subtle"} />
       <main
         tabIndex={-1}
