@@ -100,7 +100,7 @@ const Page = (props: PageProps["props"]) => {
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="relative min-h-[80vh] overflow-hidden focus:outline-none"
+          className="relative overflow-hidden focus:outline-none"
         >
           <AkselCubeStatic className="text-[#FFE78A] opacity-10" />
           <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 sm:px-6">

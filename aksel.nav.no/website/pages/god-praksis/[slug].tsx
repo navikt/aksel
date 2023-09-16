@@ -128,7 +128,7 @@ const Page = ({ tema: page }: PageProps["props"]) => {
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="relative min-h-[80vh] overflow-hidden focus:outline-none"
+          className="relative overflow-hidden focus:outline-none"
         >
           <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
           <div className=" pt-20 text-center">

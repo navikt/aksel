@@ -105,11 +105,7 @@ const Page = ({ temaer, page, resent }: PageProps["props"]) => {
       </Head>
       <div className="bg-surface-subtle relative overflow-hidden">
         <Header variant="transparent" />
-        <main
-          tabIndex={-1}
-          id="hovedinnhold"
-          className=" min-h-[80vh]  focus:outline-none"
-        >
+        <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">
           <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 pt-20 sm:px-6">
             <Heading
               level="1"

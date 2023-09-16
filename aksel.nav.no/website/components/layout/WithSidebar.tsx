@@ -8,7 +8,6 @@ import Feedback from "components/website-modules/feedback";
 import { TableOfContentsv2 } from "components/website-modules/toc/TOCv2";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
-import { ReactNode } from "react";
 
 export const WithSidebar = ({
   children,
@@ -19,15 +18,15 @@ export const WithSidebar = ({
   variant = "landingPage",
   footer,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   sidebar: AkselSidebarT;
   pageType: {
     type: "Komponenter" | "Grunnleggende";
     title: string;
   };
   pageProps: any;
-  intro?: ReactNode;
-  footer?: ReactNode;
+  intro?: React.ReactNode;
+  footer?: React.ReactNode;
   variant?: "page" | "landingPage";
 }) => {
   return (
@@ -37,7 +36,7 @@ export const WithSidebar = ({
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="min-h-screen-header md:max-w-screen-sidebar relative z-0 w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
+          className="md:max-w-screen-sidebar relative z-0 w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
         >
           <div
             className={cl(

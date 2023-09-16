@@ -63,7 +63,7 @@ export const KomponenterLanding: Story = {
 
 export const Komponenter: Story = {
   args: {
-    children: "children content",
+    children,
     pageType: {
       type: "Komponenter",
       title: "Heading",

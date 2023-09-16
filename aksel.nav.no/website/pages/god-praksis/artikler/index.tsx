@@ -98,11 +98,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
       </Head>
       <div className="bg-surface-subtle overflow-clip">
         <Header variant="subtle" />
-        <main
-          tabIndex={-1}
-          id="hovedinnhold"
-          className="min-h-[80vh] focus:outline-none"
-        >
+        <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="relative grid overflow-x-clip pb-40">
             <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
             <div className="dynamic-wrapper mx-auto w-full px-4 sm:px-6">
