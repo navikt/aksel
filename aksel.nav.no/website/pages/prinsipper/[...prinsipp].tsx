@@ -24,7 +24,7 @@ import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
 import { urlFor } from "@/sanity/interface";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
-import { SEO } from "components/website-modules/SEO";
+import { SEO } from "components/website-modules/seo/SEO";
 
 type PageProps = NextPageT<{
   prinsipp: ResolveContributorsT<ResolveSlugT<AkselPrinsippDocT>>;

@@ -16,7 +16,7 @@ import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
-import { SEO } from "components/website-modules/SEO";
+import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";

@@ -6,7 +6,7 @@ import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
 import { Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import { SEO } from "components/website-modules/SEO";
+import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";

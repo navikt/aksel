@@ -14,7 +14,7 @@ import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
-import { SEO } from "components/website-modules/SEO";
+import { SEO } from "components/website-modules/seo/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Feedback from "components/website-modules/feedback";
 import TableOfContents from "components/website-modules/toc/TOC";

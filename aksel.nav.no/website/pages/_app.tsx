@@ -7,7 +7,7 @@ import { Router } from "next/router";
 import { useEffect } from "react";
 import { IdContext } from "../components/website-modules/utils/contexts/id-context";
 import "../styles/index.css";
-import { BaseSEO } from "components/website-modules/SEO";
+import { BaseSEO } from "components/website-modules/seo/BaseSEO";
 
 initAmplitude();
 

@@ -9,7 +9,7 @@ import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { SEO } from "components/website-modules/SEO";
+import { SEO } from "components/website-modules/seo/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Image from "next/legacy/image";
 import { Suspense, lazy } from "react";

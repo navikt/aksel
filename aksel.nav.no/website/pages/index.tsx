@@ -18,7 +18,7 @@ import FrontpageBlock, {
 } from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
-import { SEO } from "components/website-modules/SEO";
+import { SEO } from "components/website-modules/seo/SEO";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { lazy, Suspense, useEffect, useState } from "react";
 

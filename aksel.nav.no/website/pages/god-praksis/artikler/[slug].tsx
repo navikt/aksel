@@ -30,7 +30,7 @@ import {
 } from "@/sanity/queries";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Header } from "components/layout/header/Header";
-import { SEO } from "components/website-modules/SEO";
+import { SEO } from "components/website-modules/seo/SEO";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<

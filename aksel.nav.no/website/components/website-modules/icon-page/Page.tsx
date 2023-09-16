@@ -5,7 +5,7 @@ import { HGrid, Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "clsx";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import { SEO } from "components/website-modules/SEO";
+import { SEO } from "components/website-modules/seo/SEO";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import Fuse from "fuse.js";
 import Link from "next/link";

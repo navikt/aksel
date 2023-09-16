@@ -12,7 +12,7 @@ import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
-import { SEO } from "components/website-modules/SEO";
+import { SEO } from "components/website-modules/seo/SEO";
 import { LatestBloggposts } from "components/website-modules/blogg-page";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { Suspense, lazy } from "react";
