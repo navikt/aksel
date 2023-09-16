@@ -25,6 +25,8 @@ import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
 import { urlFor } from "@/sanity/interface";
 import { sidebarQuery, landingPageQuery } from "@/sanity/queries";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
 
 function Links() {
   return (
@@ -171,6 +173,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
           key="ogimage"
         />
       </Head>
+      <Header />
       <WithSidebar
         sidebar={sidebar}
         pageType={{ type: "Komponenter", title: "Komponenter" }}
@@ -240,6 +243,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
             </div>
           ))}
       </WithSidebar>
+      <Footer />
     </>
   );
 };

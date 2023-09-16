@@ -1,16 +1,14 @@
+import { urlFor } from "@/sanity/interface";
+import { AkselSidebarT } from "@/types";
+import { capitalize } from "@/utils";
 import { Box, Detail, Heading, Link } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
+import cl from "clsx";
 import { Sidebar } from "components/layout/sidebar/Sidebar";
 import Feedback from "components/website-modules/feedback";
-import { ReactNode } from "react";
-import cl from "clsx";
-import NextLink from "next/link";
-import { capitalize } from "@/utils";
-import Image from "next/legacy/image";
 import { TableOfContentsv2 } from "components/website-modules/toc/TOCv2";
-import { AkselSidebarT } from "@/types";
-import { urlFor } from "@/sanity/interface";
+import Image from "next/legacy/image";
+import NextLink from "next/link";
+import { ReactNode } from "react";
 
 const HeaderCube = ({ ...props }) => (
   <svg
@@ -70,105 +68,98 @@ export const WithSidebar = ({
   variant?: "page" | "landingPage";
 }) => {
   return (
-    <>
-      <Header />
-      <Box background="bg-default" paddingBlock="6 24">
-        <div className="mx-auto flex w-full max-w-screen-2xl gap-6">
-          <Sidebar kategori={pageType.type} links={sidebar} />
-          <main
-            tabIndex={-1}
-            id="hovedinnhold"
-            className="min-h-screen-header md:max-w-screen-sidebar relative z-0 w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
+    <Box background="bg-default" paddingBlock="6 24">
+      <div className="mx-auto flex w-full max-w-screen-2xl gap-6">
+        <Sidebar kategori={pageType.type} links={sidebar} />
+        <main
+          tabIndex={-1}
+          id="hovedinnhold"
+          className="min-h-screen-header md:max-w-screen-sidebar relative z-0 w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
+        >
+          <div
+            className={cl(
+              "relative mb-10 min-h-[12.5rem] overflow-hidden rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
+              {
+                "bg-surface-subtle flex items-center justify-between":
+                  variant === "page",
+                "bg-deepblue-700/70 grid py-[4.25rem] pb-6": variant !== "page",
+                "before:from-deepblue-700 before:absolute before:inset-0 before:-z-10 before:rounded-xl before:bg-gradient-to-br before:via-blue-500 before:to-violet-700":
+                  variant !== "page",
+              }
+            )}
           >
-            <div
-              className={cl(
-                "relative mb-10 min-h-[12.5rem] overflow-hidden rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
-                {
-                  "bg-surface-subtle flex items-center justify-between":
-                    variant === "page",
-                  "bg-deepblue-700/70 grid py-[4.25rem] pb-6":
-                    variant !== "page",
-                  "before:from-deepblue-700 before:absolute before:inset-0 before:-z-10 before:rounded-xl before:bg-gradient-to-br before:via-blue-500 before:to-violet-700":
-                    variant !== "page",
-                }
+            <div className="z-[1]">
+              {variant === "page" && pageProps?.kategori && (
+                <Detail as="div" className="mb-2">
+                  <NextLink
+                    href={`/${pageType.type.toLowerCase()}`}
+                    passHref
+                    legacyBehavior
+                  >
+                    <Link className="text-text-default">
+                      {capitalize(pageType.type)}
+                    </Link>
+                  </NextLink>{" "}
+                  / {capitalize(pageProps.kategori)}
+                </Detail>
               )}
-            >
-              <div className="z-[1]">
-                {variant === "page" && pageProps?.kategori && (
-                  <Detail as="div" className="mb-2">
-                    <NextLink
-                      href={`/${pageType.type.toLowerCase()}`}
-                      passHref
-                      legacyBehavior
-                    >
-                      <Link className="text-text-default">
-                        {capitalize(pageType.type)}
-                      </Link>
-                    </NextLink>{" "}
-                    / {capitalize(pageProps.kategori)}
-                  </Detail>
+
+              <Heading
+                level="1"
+                size="xlarge"
+                className={cl({
+                  "text-deepblue-800": variant === "page",
+                  "text-text-on-action  w-fit": variant !== "page",
+                })}
+              >
+                {pageType.title}
+              </Heading>
+              <div
+                className={cl({
+                  "w-fit": variant !== "page",
+                })}
+              >
+                {intro}
+              </div>
+            </div>
+            {variant === "page" && pageProps.status?.bilde && (
+              <div
+                className={cl(
+                  "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
+                  {
+                    "hue-rotate-[65deg]": pageProps?.status?.tag === "beta",
+                  }
                 )}
-
-                <Heading
-                  level="1"
-                  size="xlarge"
-                  className={cl({
-                    "text-deepblue-800": variant === "page",
-                    "text-text-on-action  w-fit": variant !== "page",
-                  })}
-                >
-                  {pageType.title}
-                </Heading>
-                <div
-                  className={cl({
-                    "w-fit": variant !== "page",
-                  })}
-                >
-                  {intro}
-                </div>
+              >
+                <Image
+                  src={urlFor(pageProps.status?.bilde).auto("format").url()}
+                  decoding="async"
+                  layout="fill"
+                  objectFit="contain"
+                  aria-hidden
+                  priority
+                />
               </div>
-              {variant === "page" && pageProps.status?.bilde && (
-                <div
-                  className={cl(
-                    "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
-                    {
-                      "hue-rotate-[65deg]": pageProps?.status?.tag === "beta",
-                    }
-                  )}
-                >
-                  <Image
-                    src={urlFor(pageProps.status?.bilde).auto("format").url()}
-                    decoding="async"
-                    layout="fill"
-                    objectFit="contain"
-                    aria-hidden
-                    priority
-                  />
-                </div>
-              )}
-              {variant === "landingPage" && (
-                <div className="pointer-events-none absolute right-0 top-0 hidden sm:block">
-                  <HeaderCube className="text-deepblue-300 z-[-1] max-h-full" />
-                </div>
-              )}
-            </div>
-
-            <div
-              className={cl("sm:px-6 md:px-10", { flex: variant === "page" })}
-            >
-              {variant === "page" && (
-                <TableOfContentsv2 changedState={pageProps["content"]} />
-              )}
-              <div className="w-full">
-                {children}
-                <Feedback docId={pageProps?._id} docType={pageProps?._type} />
-                {footer && <div className="w-full">{footer}</div>}
+            )}
+            {variant === "landingPage" && (
+              <div className="pointer-events-none absolute right-0 top-0 hidden sm:block">
+                <HeaderCube className="text-deepblue-300 z-[-1] max-h-full" />
               </div>
+            )}
+          </div>
+
+          <div className={cl("sm:px-6 md:px-10", { flex: variant === "page" })}>
+            {variant === "page" && (
+              <TableOfContentsv2 changedState={pageProps["content"]} />
+            )}
+            <div className="w-full">
+              {children}
+              <Feedback docId={pageProps?._id} docType={pageProps?._type} />
+              {footer && <div className="w-full">{footer}</div>}
             </div>
-          </main>
-        </div>
-      </Box>
-      <Footer />
-    </>
+          </div>
+        </main>
+      </div>
+    </Box>
   );
 };

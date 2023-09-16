@@ -18,6 +18,8 @@ import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 import { getDocumentsTmp, urlFor } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
@@ -119,6 +121,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
           key="ogimage"
         />
       </Head>
+      <Header />
       <WithSidebar
         sidebar={sidebar}
         pageType={{ type: "Grunnleggende", title: page?.heading }}
@@ -138,6 +141,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
       </WithSidebar>
+      <Footer />
     </>
   );
 };

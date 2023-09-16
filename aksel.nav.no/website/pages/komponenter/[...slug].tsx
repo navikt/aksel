@@ -27,6 +27,8 @@ import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import Head from "next/head";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
 
 const kodepakker = {
   "ds-react": {
@@ -283,6 +285,7 @@ const Page = ({
           key="ogimage"
         />
       </Head>
+      <Header />
       <WithSidebar
         sidebar={sidebar}
         pageType={{ type: "Komponenter", title: page?.heading }}
@@ -335,6 +338,7 @@ const Page = ({
         )}
         <SanityBlockContent blocks={page["content"]} />
       </WithSidebar>
+      <Footer />
     </>
   );
 };

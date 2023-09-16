@@ -15,6 +15,8 @@ import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import Head from "next/head";
 import { Suspense, lazy } from "react";
 import { grunnleggendeKategorier } from "../../sanity/config";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
@@ -80,6 +82,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
           key="ogimage"
         />
       </Head>
+      <Header />
       <WithSidebar
         sidebar={sidebar}
         pageType={{ type: "Grunnleggende", title: "Grunnleggende" }}
@@ -120,6 +123,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
             </div>
           ))}
       </WithSidebar>
+      <Footer />
     </>
   );
 };
