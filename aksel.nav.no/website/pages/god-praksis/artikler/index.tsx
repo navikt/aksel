@@ -1,18 +1,18 @@
 import { getClient } from "@/sanity/client.server";
 import { contributorsSingle } from "@/sanity/queries";
 import {
-  NextPageT,
-  ResolveTemaT,
-  ResolveSlugT,
   AkselGodPraksisDocT,
+  NextPageT,
   ResolveContributorsSingleT,
+  ResolveSlugT,
+  ResolveTemaT,
 } from "@/types";
 import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
+import { SEO } from "components/website-modules/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -92,10 +92,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
 
   return (
     <>
-      <Head>
-        <title>Artikler - Aksel</title>
-        <meta property="og:title" content="Artikler - Aksel" />
-      </Head>
+      <SEO title="Artikler" />
       <div className="bg-surface-subtle overflow-clip">
         <Header variant="subtle" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">

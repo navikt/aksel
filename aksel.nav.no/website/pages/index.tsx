@@ -1,7 +1,5 @@
 import { Footer } from "@/layout";
-
 import { getClient } from "@/sanity/client.server";
-import { urlFor } from "@/sanity/interface";
 import { contributorsAll } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
 import {
@@ -20,8 +18,8 @@ import FrontpageBlock, {
 } from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
 import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
+import { SEO } from "components/website-modules/SEO";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
-import Head from "next/head";
 import { lazy, Suspense, useEffect, useState } from "react";
 
 type PageProps = NextPageT<{
@@ -148,41 +146,14 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
 
   return (
     <>
-      <Head>
-        <title>Aksel - NAV</title>
-        <meta property="og:title" content="Aksel - NAV" key="ogtitle" />
-        <meta
-          name="description"
-          content={
-            page?.seo?.meta ??
-            "En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i NAV."
-          }
-          key="desc"
-        />
-        <meta
-          property="og:description"
-          content={
-            page?.seo?.meta ??
-            "En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i NAV."
-          }
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
-
+      <SEO
+        title="Aksel"
+        description={
+          page?.seo?.meta ??
+          "En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i NAV."
+        }
+        image={page?.seo?.image}
+      />
       <div
         className={cl(
           "header-animated-bg relative max-w-[100vw] overflow-hidden bg-violet-200",

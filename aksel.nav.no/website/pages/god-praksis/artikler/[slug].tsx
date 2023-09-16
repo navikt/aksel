@@ -10,7 +10,6 @@ import {
 } from "@/types";
 import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import Head from "next/head";
 import NextLink from "next/link";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../../404";
@@ -23,14 +22,15 @@ import {
   TableOfContents,
 } from "@/components";
 import { Footer } from "@/layout";
-import { Header } from "components/layout/header/Header";
+import { getAkselDocuments } from "@/sanity/interface";
 import {
   contributorsAll,
   contributorsSingle,
   destructureBlocks,
 } from "@/sanity/queries";
-import { getAkselDocuments, urlFor } from "@/sanity/interface";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { Header } from "components/layout/header/Header";
+import { SEO } from "components/website-modules/SEO";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
@@ -164,46 +164,12 @@ const Page = ({
 
   return (
     <>
-      <Head>
-        <title>{`${data?.heading} - Aksel`}</title>
-        <meta
-          property="og:title"
-          content={`${data?.heading} - Aksel`}
-          key="ogtitle"
-        />
-        <meta
-          name="description"
-          content={data?.seo?.meta ?? data?.ingress}
-          key="desc"
-        />
-        <meta
-          property="og:description"
-          content={data?.seo?.meta ?? data?.ingress}
-          key="ogdesc"
-        />
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:image"
-          content={
-            data?.seo?.image
-              ? urlFor(data?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : hasTema && (data.tema[0] as any)?.seo?.image
-              ? urlFor((data.tema[0] as any)?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={data?.heading}
+        description={data?.seo?.meta}
+        image={data?.seo?.image ?? (data?.tema?.[0] as any)?.seo?.image}
+        publishDate={publishDate}
+      />
 
       <Header variant="subtle" />
       <main

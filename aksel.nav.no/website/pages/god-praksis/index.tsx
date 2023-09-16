@@ -1,7 +1,6 @@
 import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { urlFor } from "@/sanity/interface";
 import { destructureBlocks } from "@/sanity/queries";
 import {
   AkselGodPraksisDocT,
@@ -17,9 +16,9 @@ import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
+import { SEO } from "components/website-modules/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import Head from "next/head";
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 
 type PageProps = NextPageT<{
   page: AkselGodPraksisLandingPageDocT;
@@ -79,30 +78,12 @@ const Page = ({ temaer, page, resent }: PageProps["props"]) => {
   const filteredTemas = temaer.filter((x) => x.refCount > 0);
   return (
     <>
-      <Head>
-        <title>God praksis - Aksel</title>
-        <meta property="og:title" content="Temaer - Aksel" />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title="God praksis"
+        description={page?.seo?.meta}
+        image={page?.seo?.image}
+      />
+
       <div className="bg-surface-subtle relative overflow-hidden">
         <Header variant="transparent" />
         <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">

@@ -8,7 +8,7 @@ import {
 } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocumentsTmp, urlFor } from "@/sanity/interface";
+import { getDocumentsTmp } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
@@ -19,16 +19,16 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
 import { WithSidebar } from "components/layout/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
+import { SEO } from "components/website-modules/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import Head from "next/head";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
 
 const kodepakker = {
   "ds-react": {
@@ -254,37 +254,12 @@ const Page = ({
 
   return (
     <>
-      <Head>
-        <title>{page?.heading ? `${page?.heading} - Aksel` : "Aksel"}</title>
-        <meta property="og:title" content={`${page.heading} - Aksel`} />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : seo
-              ? urlFor(seo)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={page?.heading}
+        description={page?.seo?.meta}
+        image={page?.seo?.image ?? seo}
+      />
+
       <Header />
       <WithSidebar
         sidebar={sidebar}

@@ -1,5 +1,7 @@
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { urlFor } from "@/sanity/interface";
+import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
   AkselBloggDocT,
   NextPageT,
@@ -12,17 +14,15 @@ import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
+import { SEO } from "components/website-modules/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import Feedback from "components/website-modules/feedback";
 import TableOfContents from "components/website-modules/toc/TOC";
 import { getImage } from "components/website-modules/utils/get-image";
-import Head from "next/head";
 import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { urlFor } from "@/sanity/interface";
-import { destructureBlocks, contributorsAll } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   blogg: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
@@ -85,40 +85,13 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
 
   return (
     <>
-      <Head>
-        <title>{`${blogg?.heading} - Aksel`}</title>
-        <meta
-          property="og:title"
-          content={`${blogg?.heading} - Aksel`}
-          key="ogtitle"
-        />
-        <meta
-          property="og:description"
-          content={blogg?.seo?.meta ?? blogg?.ingress}
-          key="ogdesc"
-        />
-        {authors?.[0] && <meta name="twitter:label1" content="Skrevet av" />}
-        {authors?.[0] && <meta name="twitter:data1" content={authors?.[0]} />}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:label2" content="Publisert" />
-        <meta name="twitter:data2" content={publishDate} />
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:image"
-          content={
-            blogg?.seo?.image
-              ? urlFor(blogg?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .quality(100)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : getImage(blogg?.heading ?? "", "OG")
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={blogg?.heading}
+        description={blogg?.seo?.meta ?? blogg?.ingress}
+        image={blogg?.seo?.image}
+        fallbackImage={getImage(blogg?.heading ?? "", "OG")}
+        publishDate={publishDate}
+      />
 
       <Header variant="blogg" />
       <main

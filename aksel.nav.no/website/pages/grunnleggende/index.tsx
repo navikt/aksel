@@ -1,6 +1,5 @@
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { urlFor } from "@/sanity/interface";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
   AkselLandingPageDocT,
@@ -11,12 +10,12 @@ import {
 import { BodyLong, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { WithSidebar } from "components/layout/WithSidebar";
-import ComponentOverview from "components/sanity-modules/ComponentOverview";
-import Head from "next/head";
-import { Suspense, lazy } from "react";
-import { grunnleggendeKategorier } from "../../sanity/config";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
+import ComponentOverview from "components/sanity-modules/ComponentOverview";
+import { SEO } from "components/website-modules/SEO";
+import { Suspense, lazy } from "react";
+import { grunnleggendeKategorier } from "../../sanity/config";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
@@ -55,33 +54,12 @@ export const getStaticProps = async ({
 const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   return (
     <>
-      <Head>
-        <title>Grunnleggende</title>
-        <meta property="og:title" content="Grunnleggende" />
-        <meta
-          name="description"
-          content="Grunnelegende deler fra designsystemet til NAV"
-        />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title="Grunnleggende"
+        description={page?.seo?.meta}
+        image={page?.seo?.image}
+      />
+
       <Header />
       <WithSidebar
         sidebar={sidebar}

@@ -1,5 +1,6 @@
 import { Footer } from "@/layout";
 import { getClient } from "@/sanity/client.server";
+import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
   AkselBloggDocT,
   AkselBloggFrontpageT,
@@ -11,13 +12,11 @@ import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
-import { AkselCubeStatic } from "components/website-modules/cube";
+import { SEO } from "components/website-modules/SEO";
 import { LatestBloggposts } from "components/website-modules/blogg-page";
-import Head from "next/head";
+import { AkselCubeStatic } from "components/website-modules/cube";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { urlFor } from "@/sanity/interface";
-import { destructureBlocks, contributorsAll } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   page: AkselBloggFrontpageT;
@@ -67,34 +66,12 @@ const Page = (props: PageProps["props"]) => {
 
   return (
     <>
-      <Head>
-        <title>Produktbloggen - Aksel</title>
-        <meta property="og:title" content="Produktbloggen - Aksel" />
-        <meta
-          name="description"
-          content={props?.page?.seo?.meta ?? ""}
-          key="desc"
-        />
-        <meta
-          property="og:description"
-          content={props?.page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            props?.page?.seo?.image
-              ? urlFor(props?.page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title="Produktbloggen"
+        description={props?.page?.seo?.meta}
+        image={props?.page?.seo?.image}
+      />
+
       <div className="bg-[#FEFCE9]">
         <Header variant="blogg" />
         <main

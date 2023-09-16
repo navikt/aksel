@@ -1,5 +1,6 @@
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
   AkselLandingPageDocT,
   AkselSidebarT,
@@ -18,15 +19,13 @@ import {
   YarnIcon,
 } from "components/assets";
 import { WithSidebar } from "components/layout/WithSidebar";
-import ComponentOverview from "components/sanity-modules/ComponentOverview";
-import { IntroCards } from "components/website-modules/IntroCards";
-import Head from "next/head";
-import { Suspense, lazy } from "react";
-import { komponentKategorier } from "../../sanity/config";
-import { urlFor } from "@/sanity/interface";
-import { sidebarQuery, landingPageQuery } from "@/sanity/queries";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
+import ComponentOverview from "components/sanity-modules/ComponentOverview";
+import { IntroCards } from "components/website-modules/IntroCards";
+import { SEO } from "components/website-modules/SEO";
+import { Suspense, lazy } from "react";
+import { komponentKategorier } from "../../sanity/config";
 
 function Links() {
   return (
@@ -149,30 +148,11 @@ export const getStaticProps = async ({
 const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   return (
     <>
-      <Head>
-        <title>Komponenter</title>
-        <meta property="og:title" content="Komponenter" />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title="Komponenter"
+        description={page?.seo?.meta}
+        image={page?.seo?.image}
+      />
       <Header />
       <WithSidebar
         sidebar={sidebar}

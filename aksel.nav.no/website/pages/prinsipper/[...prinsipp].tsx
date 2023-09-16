@@ -24,6 +24,7 @@ import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
 import { urlFor } from "@/sanity/interface";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
+import { SEO } from "components/website-modules/SEO";
 
 type PageProps = NextPageT<{
   prinsipp: ResolveContributorsT<ResolveSlugT<AkselPrinsippDocT>>;
@@ -87,18 +88,13 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
 
   return (
     <>
+      <SEO
+        title={`${data?.heading} - Prinsipp`}
+        description={data?.seo?.meta ?? data?.ingress}
+        publishDate={publishDate}
+        image={data?.seo?.image}
+      />
       <Head>
-        <title>{`${data?.heading} - Prinsipp - Aksel`}</title>
-        <meta
-          property="og:title"
-          content={`${data?.heading} - Aksel`}
-          key="ogtitle"
-        />
-        <meta
-          property="og:description"
-          content={data?.seo?.meta ?? data?.ingress}
-          key="ogdesc"
-        />
         <meta property="og:type" content="article" />
         <meta
           property="og:image"

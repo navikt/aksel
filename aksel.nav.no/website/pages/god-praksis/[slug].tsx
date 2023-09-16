@@ -2,18 +2,18 @@ import { abbrName } from "@/components";
 import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { getAkselTema, urlFor } from "@/sanity/interface";
+import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
+import { SEO } from "components/website-modules/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import Head from "next/head";
 import Image from "next/legacy/image";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { getAkselTema, urlFor } from "@/sanity/interface";
-import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   tema: Omit<AkselTemaT, "ansvarlig"> & {
@@ -99,30 +99,12 @@ const Page = ({ tema: page }: PageProps["props"]) => {
 
   return (
     <>
-      <Head>
-        <title>{`${page.title} - Aksel`}</title>
-        <meta property="og:title" content={`${page.title} - Aksel`} />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={page?.title}
+        description={page?.seo?.meta}
+        image={page?.seo?.image}
+      />
+
       <div className="bg-surface-subtle">
         <Header variant="subtle" />
         <main
