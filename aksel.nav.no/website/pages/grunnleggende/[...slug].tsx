@@ -20,6 +20,7 @@ import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
@@ -43,10 +44,7 @@ export const query = `{
   ${sidebarQuery}
 }`;
 
-export const getStaticPaths = async (): Promise<{
-  fallback: string;
-  paths: { params: { slug: string[] } }[];
-}> => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: await getDocumentsTmp("ds_artikkel").then((paths) =>
       paths.map((slug) => ({
@@ -59,7 +57,7 @@ export const getStaticPaths = async (): Promise<{
   };
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   params: { slug },
   preview = false,
 }: {

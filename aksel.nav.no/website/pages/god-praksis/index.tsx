@@ -19,6 +19,7 @@ import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import { SEO } from "components/website-modules/seo/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { Suspense, lazy } from "react";
+import { GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: AkselGodPraksisLandingPageDocT;
@@ -52,10 +53,8 @@ export const query = `*[_type == "godpraksis_landingsside"][0]{
   }
 }`;
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   preview = false,
-}: {
-  preview?: boolean;
 }): Promise<PageProps> => {
   const { temaer, page, resent } = await getClient().fetch(query);
 

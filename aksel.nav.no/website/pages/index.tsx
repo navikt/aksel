@@ -16,11 +16,12 @@ import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCard
 import FrontpageBlock, {
   BlocksT,
 } from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
-import { AkselCube } from "components/website-modules/cube";
 import { IntroCards } from "components/website-modules/IntroCards";
+import { AkselCube } from "components/website-modules/cube";
 import { SEO } from "components/website-modules/seo/SEO";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { GetStaticProps } from "next/types";
+import { Suspense, lazy, useEffect, useState } from "react";
 
 type PageProps = NextPageT<{
   tema: Array<AkselTemaT>;
@@ -32,7 +33,7 @@ type PageProps = NextPageT<{
   blocks?: BlocksT[];
 }>;
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }: {
   preview?: boolean;

@@ -1,25 +1,17 @@
+import { AppProps } from "next/app";
+import { BaseSEO } from "components/website-modules/seo/BaseSEO";
 import {
   initAmplitude,
   usePageView,
 } from "components/website-modules/utils/amplitude";
 import { useScrollToHashOnPageLoad } from "components/website-modules/utils/util";
-import { Router } from "next/router";
 import { useEffect } from "react";
 import { IdContext } from "../components/website-modules/utils/contexts/id-context";
 import "../styles/index.css";
-import { BaseSEO } from "components/website-modules/seo/BaseSEO";
 
 initAmplitude();
 
-function App({
-  Component,
-  pageProps,
-  router,
-}: {
-  Component: any;
-  pageProps: any;
-  router: Router;
-}) {
+function App({ Component, pageProps, router }: AppProps) {
   useScrollToHashOnPageLoad();
   usePageView(router, pageProps);
 

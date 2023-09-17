@@ -9,9 +9,10 @@ import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { SEO } from "components/website-modules/seo/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
+import { SEO } from "components/website-modules/seo/SEO";
 import Image from "next/legacy/image";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
@@ -51,7 +52,7 @@ export const query = `{
   }
 }`;
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: await getAkselTema().then((paths) =>
       paths.map(({ path }) => ({
@@ -64,7 +65,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
