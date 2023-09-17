@@ -34,6 +34,7 @@ export const Redirect = defineType({
       title: "Redirects (siden Sept 2023)",
       type: "number",
       initialValue: 0,
+      readOnly: true,
     }),
   ],
   __experimental_omnisearch_visibility: false,
