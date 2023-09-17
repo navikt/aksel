@@ -118,6 +118,7 @@ const Page = ({
   if (!data) {
     return <NotFotfund />;
   }
+  console.log(data.slug);
 
   if (!data.content || !data.heading) {
     console.warn(
@@ -169,6 +170,7 @@ const Page = ({
         description={data?.seo?.meta}
         image={data?.seo?.image ?? (data?.tema?.[0] as any)?.seo?.image}
         publishDate={publishDate}
+        canonical={`/${data.slug}`}
       />
 
       <Header variant="subtle" />
