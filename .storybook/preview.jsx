@@ -6,7 +6,7 @@ export const parameters = {
   options: {
     storySort: {
       method: "alphabetical",
-      order: ["Intro", "ds-react", ["form"], ["Default"], "ds-icons"],
+      order: ["Intro", "ds-react", ["Primitives"], ["Default"], "Aksel-icons"],
     },
   },
   layout: "centered",
