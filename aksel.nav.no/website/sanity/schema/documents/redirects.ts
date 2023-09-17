@@ -29,6 +29,12 @@ export const Redirect = defineType({
       type: "boolean",
       initialValue: () => true,
     }),
+    defineField({
+      name: "redirects",
+      title: "Redirects (siden Sept 2023)",
+      type: "number",
+      initialValue: 0,
+    }),
   ],
   __experimental_omnisearch_visibility: false,
 });
