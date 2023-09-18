@@ -1,11 +1,11 @@
-import { CodeBlockIcon } from "@sanity/icons";
+import { TerminalIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 
 export const Kode = defineType({
   title: "Kode",
   name: "kode",
   type: "object",
-  icon: CodeBlockIcon,
+  icon: TerminalIcon,
   fields: [
     defineField({
       name: "code",
@@ -13,7 +13,11 @@ export const Kode = defineType({
       type: "code",
       hidden: ({ parent }) => parent?.variant,
       validation: (Rule) => Rule.required(),
+      initialValue: {
+        language: "tsx",
+      },
       options: {
+        language: "tsx",
         languageAlternatives: [
           { value: "tsx", title: "TSX" },
           { value: "javascript", title: "Javascript" },
@@ -41,7 +45,7 @@ export const Kode = defineType({
     prepare: ({ code, title }) => ({
       title: code ? `${code?.code?.slice(0, 50)}...` : "Kode",
       subtitle: title ?? "kode",
-      media: CodeBlockIcon,
+      media: TerminalIcon,
     }),
   },
 });

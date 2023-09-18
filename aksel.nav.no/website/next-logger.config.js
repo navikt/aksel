@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const pino = require("pino");
 
 const logger = (defaultConfig = {}) =>

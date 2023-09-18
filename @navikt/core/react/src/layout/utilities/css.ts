@@ -29,7 +29,6 @@ export type SpaceDelimitedAttribute<T extends string> =
   | `${T} ${T} ${T} ${T}`;
 
 type FixedResponsiveT<T> = {
-  // eslint-disable-next-line no-unused-vars
   [Breakpoint in BreakpointsAlias]?: T;
 };
 

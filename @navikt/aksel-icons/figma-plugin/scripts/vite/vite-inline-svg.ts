@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import fs from "fs";
 import { Plugin } from "vite";
 

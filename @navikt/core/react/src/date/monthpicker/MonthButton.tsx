@@ -13,9 +13,9 @@ interface MonthType {
   month: Date;
   months: Date[];
   focus: Date | undefined;
-  setFocus: Function;
+  setFocus: (date?: Date) => void;
   tabRoot?: Date;
-  setTabRoot: Function;
+  setTabRoot: (date?: Date) => void;
 }
 
 const disableMonth = (month: Date, fromDate?: Date, toDate?: Date) => {

@@ -11,7 +11,7 @@ const Example = () => {
 
       <Modal ref={ref} header={{ heading: "Skjema" }} width={400}>
         <Modal.Body>
-          <form method="dialog" id="skjema" onSubmit={(e) => alert("onSubmit")}>
+          <form method="dialog" id="skjema" onSubmit={() => alert("onSubmit")}>
             <TextField label="Har du noen tilbakemeldinger?" />
           </form>
         </Modal.Body>

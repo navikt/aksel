@@ -14,44 +14,46 @@ const Example = () => {
   return (
     <Box
       as="header"
-      background="surface-default"
       borderWidth="0 0 4 0"
-      borderColor="border-warning"
+      borderColor="border-success"
+      paddingBlock="12 0"
     >
-      <Box paddingInline="4" paddingBlock="0 6">
-        <HStack align="start" gap="8">
-          <Hide below="md">
-            <Pictogram />
-          </Hide>
-
-          <VStack gap={{ xs: "4", md: "5" }}>
-            <Heading level="1" size="xlarge">
-              Er arbeidsledig eller permittert
-            </Heading>
-
+      <div className="max-w-5xl">
+        <Box background="surface-default" paddingInline="4" paddingBlock="0 6">
+          <HStack align="start" gap="8">
             <Hide below="md">
-              <HStack gap="4" align="center">
-                <BodyShort size="small">DETTE KAN DU HA RETT TIL</BodyShort>
-                <span aria-hidden="true">|</span>
-                <Detail>Oppdatert 5. juli 2023</Detail>
-              </HStack>
+              <Pictogram />
             </Hide>
-            <Show below="md">
-              <VStack gap="2">
-                <BodyShort size="small">DETTE KAN DU HA RETT TIL</BodyShort>
-                <Detail>Oppdatert 5. juli 2023</Detail>
-              </VStack>
-            </Show>
-          </VStack>
-        </HStack>
-      </Box>
+
+            <VStack gap={{ xs: "4", md: "5" }}>
+              <Heading level="1" size="xlarge">
+                Dagpenger
+              </Heading>
+
+              <Hide below="md">
+                <HStack gap="4" align="center">
+                  <BodyShort size="small">PENGESTØTTE</BodyShort>
+                  <span aria-hidden="true">|</span>
+                  <Detail>Oppdatert 5. juli 2023</Detail>
+                </HStack>
+              </Hide>
+              <Show below="md">
+                <VStack gap="2">
+                  <BodyShort size="small">PENGESTØTTE</BodyShort>
+                  <Detail>Oppdatert 24. august 2023</Detail>
+                </VStack>
+              </Show>
+            </VStack>
+          </HStack>
+        </Box>
+      </div>
     </Box>
   );
 };
 
 export default withDsExample(Example, {
   showBreakpoints: true,
-  variant: "subtle",
+  variant: "full",
 });
 
 /* Storybook story */
@@ -67,59 +69,45 @@ export const args = {
 function Pictogram() {
   return (
     <svg
+      aria-hidden
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
       width="80"
       height="80"
-      viewBox="0 0 96 96"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
+      viewBox="0 0 96.45 96.44"
     >
-      <g clipPath="url(#clip0_275_1062)">
+      <g clipPath="url(#clip0_4486_7567)">
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M48 24C34.7452 24 24 34.7452 24 48C24 61.2548 34.7452 72 48 72C61.2548 72 72 61.2548 72 48C72 34.7452 61.2548 24 48 24ZM16 48C16 30.3269 30.3269 16 48 16C65.6731 16 80 30.3269 80 48C80 65.6731 65.6731 80 48 80C30.3269 80 16 65.6731 16 48Z"
-          fill="#FFECCC"
+          d="M37.6276 55.6806L12.707 30.76L31.2599 12.2071L56.1805 37.1277L66.7031 26.6052L75.0165 74.5166L27.1051 66.2031L37.6276 55.6806Z"
+          fill="#CCF1D6"
         />
+        <path d="M41 11V33H2L2 9H27.5072" stroke="#262626" strokeWidth="3" />
+        <circle cx="22" cy="16" r="6.5" stroke="#262626" strokeWidth="3" />
+        <circle cx="35" cy="9" r="6.5" stroke="#262626" strokeWidth="3" />
+        <circle cx="62" cy="63" r="22.5" stroke="#262626" strokeWidth="3" />
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M70.3284 30.8284L30.8284 70.3284L25.1716 64.6716L64.6716 25.1716L70.3284 30.8284Z"
-          fill="#FFECCC"
-        />
-        <path
-          d="M50 26.7059H94M62.2222 11.8824V6.94118C62.2222 4.21224 64.4111 2 67.1111 2H76.8889C79.5889 2 81.7778 4.21224 81.7778 6.94118V11.8824M72 26.7059V34.1176M52 44H92C93.1046 44 94 43.1046 94 42V13.8824C94 12.7778 93.1046 11.8824 92 11.8824H52C50.8954 11.8824 50 12.7778 50 13.8824V42C50 43.1046 50.8954 44 52 44Z"
+          d="M77.8105 77.7964L94.9534 94.9392"
           stroke="#262626"
           strokeWidth="3"
         />
         <path
-          d="M2 58.6316H48V94H2V58.6316Z"
+          d="M47.6311 59.1036L72.7452 52.3743C73.0119 52.3028 73.2861 52.4611 73.3576 52.7279L75.1693 59.4894C75.3837 60.2896 74.9088 61.1121 74.1086 61.3265L50.9264 67.5381C50.1262 67.7525 49.3037 67.2777 49.0893 66.4775L47.2776 59.716C47.2061 59.4493 47.3644 59.1751 47.6311 59.1036Z"
           stroke="#262626"
           strokeWidth="3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
         />
         <path
-          d="M2 58.5L21 48"
-          stroke="#23262A"
+          d="M52.3847 74.912L50.4436 67.6676L74.5917 61.1971L76.5329 68.4416C76.7473 69.2418 76.2724 70.0643 75.4722 70.2787L54.2218 75.9727C53.4216 76.1871 52.5991 75.7122 52.3847 74.912Z"
+          stroke="#262626"
           strokeWidth="3"
-          strokeLinecap="round"
         />
         <path
-          d="M48 58.5L29 48"
-          stroke="#23262A"
+          d="M64.1814 55.1864L63.6638 53.2546C63.092 51.1207 60.8987 49.8544 58.7648 50.4261V50.4261C56.631 50.9979 55.3646 53.1913 55.9364 55.3251L56.454 57.257"
+          stroke="#262626"
           strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <path
-          d="M29 69H21"
-          stroke="#23262A"
-          strokeWidth="3"
-          strokeLinecap="round"
         />
       </g>
       <defs>
-        <clipPath id="clip0_275_1062">
+        <clipPath id="clip0_4486_7567">
           <rect width="96" height="96" fill="white" />
         </clipPath>
       </defs>

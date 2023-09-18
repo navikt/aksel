@@ -50,8 +50,8 @@ export interface PeriodProps {
   status: string;
   cropped: string;
   direction: string;
-  width: Number;
-  left: Number;
+  width: number;
+  left: number;
   icon?: React.ReactNode;
   children?: React.ReactNode;
   statusLabel?: string;
@@ -102,11 +102,12 @@ export const Period = forwardRef<HTMLDivElement, TimelinePeriodProps>(
         width={width}
         left={horizontalPosition}
         icon={icon}
-        children={children}
         isActive={isActive}
         statusLabel={statusLabel}
         restProps={restProps}
-      />
+      >
+        {children}
+      </ClickablePeriod>
     ) : (
       <NonClickablePeriod
         periodRef={ref}

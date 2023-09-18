@@ -16,11 +16,7 @@ const Accordion = ({ node }: { node: AccordionT }) => {
           <DsAccordion.Item key={el._key}>
             <DsAccordion.Header>{el.title}</DsAccordion.Header>
             <DsAccordion.Content>
-              <SanityBlockContent
-                blocks={el.content}
-                className="toc-ignore"
-                noLastMargin
-              />
+              <SanityBlockContent blocks={el.content} className="toc-ignore" />
             </DsAccordion.Content>
           </DsAccordion.Item>
         ))}

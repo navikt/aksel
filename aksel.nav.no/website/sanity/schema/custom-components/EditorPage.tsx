@@ -6,7 +6,6 @@ import {
   Link,
   Loader,
 } from "@navikt/ds-react";
-import { Card } from "@sanity/ui";
 import { differenceInMonths } from "date-fns";
 import React, { useMemo } from "react";
 import {
@@ -45,21 +44,19 @@ const DocumentList = ({
         <ul>
           {list.map((x) => (
             <li key={x._id}>
-              <Card flex={1}>
-                <IntentButton
-                  intent="edit"
-                  mode="bleed"
-                  padding={1}
-                  radius={2}
-                  params={{
-                    type,
-                    id: getPublishedId(x._id),
-                  }}
-                  style={{ width: "100%" }}
-                >
-                  <Preview schemaType={schemaType} value={x} key={x._id} />
-                </IntentButton>
-              </Card>
+              <IntentButton
+                intent="edit"
+                mode="bleed"
+                padding={1}
+                radius={2}
+                params={{
+                  type,
+                  id: getPublishedId(x._id),
+                }}
+                style={{ width: "100%" }}
+              >
+                <Preview schemaType={schemaType} value={x} key={x._id} />
+              </IntentButton>
             </li>
           ))}
         </ul>
@@ -94,26 +91,24 @@ const OutDatedList = ({ data }: { data: any[] }) => {
         <ul>
           {list.map((x) => (
             <li key={x._id}>
-              <Card flex={1}>
-                <IntentButton
-                  intent="edit"
-                  mode="ghost"
-                  padding={1}
-                  radius={0}
-                  params={{
-                    type: x._type,
-                    id: getPublishedId(x._id),
-                  }}
-                  style={{ width: "100%" }}
-                >
-                  <Preview
-                    layout="default"
-                    schemaType={schema.get(x._type)}
-                    value={x}
-                    key={x._id}
-                  />
-                </IntentButton>
-              </Card>
+              <IntentButton
+                intent="edit"
+                mode="ghost"
+                padding={1}
+                radius={0}
+                params={{
+                  type: x._type,
+                  id: getPublishedId(x._id),
+                }}
+                style={{ width: "100%" }}
+              >
+                <Preview
+                  layout="default"
+                  schemaType={schema.get(x._type)}
+                  value={x}
+                  key={x._id}
+                />
+              </IntentButton>
             </li>
           ))}
         </ul>
@@ -137,26 +132,24 @@ const DraftList = ({ data }: { data: any[] }) => {
         <ul>
           {list.map((x) => (
             <li key={x._id}>
-              <Card flex={1}>
-                <IntentButton
-                  intent="edit"
-                  mode="ghost"
-                  padding={1}
-                  radius={0}
-                  params={{
-                    type: x._type,
-                    id: getPublishedId(x._id),
-                  }}
-                  style={{ width: "100%" }}
-                >
-                  <Preview
-                    layout="default"
-                    schemaType={schema.get(x._type)}
-                    value={x}
-                    key={x._id}
-                  />
-                </IntentButton>
-              </Card>
+              <IntentButton
+                intent="edit"
+                mode="ghost"
+                padding={1}
+                radius={0}
+                params={{
+                  type: x._type,
+                  id: getPublishedId(x._id),
+                }}
+                style={{ width: "100%" }}
+              >
+                <Preview
+                  layout="default"
+                  schemaType={schema.get(x._type)}
+                  value={x}
+                  key={x._id}
+                />
+              </IntentButton>
             </li>
           ))}
         </ul>
@@ -187,26 +180,24 @@ const FeedbackList = ({ data, title }: { data: any[]; title: string }) => {
         <ul className="mt-4">
           {list.map((x) => (
             <li key={x._id}>
-              <Card flex={1}>
-                <IntentButton
-                  intent="edit"
-                  mode="ghost"
-                  padding={1}
-                  radius={0}
-                  params={{
-                    type: "aksel_feedback",
-                    id: getPublishedId(x._id),
-                  }}
-                  style={{ width: "100%" }}
-                >
-                  <Preview
-                    layout="default"
-                    schemaType={schema.get("aksel_feedback")}
-                    value={x}
-                    key={x._id}
-                  />
-                </IntentButton>
-              </Card>
+              <IntentButton
+                intent="edit"
+                mode="ghost"
+                padding={1}
+                radius={0}
+                params={{
+                  type: "aksel_feedback",
+                  id: getPublishedId(x._id),
+                }}
+                style={{ width: "100%" }}
+              >
+                <Preview
+                  layout="default"
+                  schemaType={schema.get("aksel_feedback")}
+                  value={x}
+                  key={x._id}
+                />
+              </IntentButton>
             </li>
           ))}
         </ul>

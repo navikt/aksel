@@ -124,9 +124,13 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
         sidebar={sidebar}
         pageType={{ type: "Grunnleggende", title: page?.heading }}
         intro={
-          <Detail as="div" className="mt-2 flex items-center gap-3">
-            <StatusTag showStable status={page?.status?.tag} />
-            {`OPPDATERT ${publishDate}`}
+          <Detail as="div">
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <span>
+                Oppdatert <time>{publishDate}</time>
+              </span>
+              <StatusTag showStable status={page?.status?.tag} />
+            </div>
           </Detail>
         }
         pageProps={page}

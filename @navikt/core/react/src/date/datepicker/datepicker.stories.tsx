@@ -311,7 +311,7 @@ export const UseRangedDatepickerValidation = () => {
   );
 };
 
-export const defaultShownMonth = () => {
+export const DefaultShownMonth = () => {
   const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     onDateChange: console.log,

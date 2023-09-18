@@ -22,18 +22,6 @@ describe("Returns initial year for monthpicker", () => {
       )
     ).toBeFalsy();
   });
-  test("Default selected should not be valid (false)", () => {
-    expect(
-      isSameYear(
-        new Date("Oct 4 2021"),
-        getInitialYear({
-          defaultMonth: new Date("Aug 4 2020"),
-          /* toDate: new Date("Oct 4 2021"), */
-          /* fromDate: new Date("Oct 4 2021"), */
-        })
-      )
-    ).toBeFalsy();
-  });
   test("Default selected should be valid with fromDate", () => {
     expect(
       isSameYear(

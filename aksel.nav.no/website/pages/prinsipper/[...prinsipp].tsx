@@ -191,10 +191,7 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
                         className="-mt-36 mb-10 sm:-mt-72"
                       />
                     )}
-                    <SanityBlockContent
-                      blocks={data?.content ?? []}
-                      variant="aksel"
-                    />
+                    <SanityBlockContent blocks={data?.content ?? []} />
                     <div className="mt-12">
                       {authors?.length > 0 && (
                         <Label className="text-deepblue-700 mb-2" as="p">

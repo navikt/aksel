@@ -114,18 +114,11 @@ const Page = ({ temaer, page, resent }: PageProps["props"]) => {
             <Heading
               level="1"
               size="xlarge"
-              className="text-deepblue-800 text-5xl"
+              className="text-deepblue-800 mb-4 text-5xl"
             >
               God praksis
             </Heading>
-            {page.intro && (
-              <SanityBlockContent
-                isIngress
-                className="mt-4"
-                noLastMargin
-                blocks={page.intro}
-              />
-            )}
+            {page.intro && <SanityBlockContent isIngress blocks={page.intro} />}
             <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
             <div>
               <ul className="card-grid-3-1 mt-20 ">

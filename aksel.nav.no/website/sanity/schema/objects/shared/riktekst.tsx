@@ -1,8 +1,15 @@
-import { BoldIcon, CodeIcon, ItalicIcon, OlistIcon } from "@sanity/icons";
-import { KBD } from "@sanity/ui";
 import React from "react";
 import { allArticleDocsRef } from "../../../config";
-import { ExternalLinkIcon, FileTextIcon, LinkIcon } from "@navikt/aksel-icons";
+import {
+  BulletListIcon,
+  CodeIcon,
+  ExternalLinkIcon,
+  FileTextIcon,
+  LinkIcon,
+  NumberListIcon,
+} from "@navikt/aksel-icons";
+import { KBD } from "components/website-modules/KBD";
+import { InlineCode } from "components/website-modules/InlineCode";
 
 export const styles = [
   {
@@ -20,12 +27,12 @@ export const block = {
     {
       title: "Bullet-liste",
       value: "bullet",
-      icon: () => <OlistIcon aria-label="Ul-liste" />,
+      icon: () => <BulletListIcon aria-label="Ul-liste" />,
     },
     {
       title: "Nummerert-liste",
       value: "number",
-      icon: () => <OlistIcon aria-label="Ol-liste" />,
+      icon: () => <NumberListIcon aria-label="Ol-liste" />,
     },
   ],
   marks: {
@@ -33,28 +40,33 @@ export const block = {
       {
         title: "Strong",
         value: "strong",
-        icon: () => <BoldIcon aria-label="Bold" />,
+        icon: () => (
+          <span className="font-semibold" aria-label="bold">
+            B
+          </span>
+        ),
       },
       {
         title: "Italic",
         value: "em",
-        icon: () => <ItalicIcon aria-label="Italic" />,
+        icon: () => (
+          <span className="italic" aria-label="italic">
+            i
+          </span>
+        ),
       },
       {
         title: "Inline-Kode",
         value: "code",
         icon: () => <CodeIcon aria-label="Kode" />,
+        component: ({ children }) => <InlineCode noAmps>{children}</InlineCode>,
       },
       {
         title: "KBD",
         value: "kbd",
-        icon: () => <div>KBD</div>,
+        icon: () => <KBD>KBD</KBD>,
 
-        component: (props) => (
-          <KBD padding={[1, 1, 2]} style={{ verticalAlign: "super" }}>
-            {props.children}
-          </KBD>
-        ),
+        component: ({ children }) => <KBD>{children}</KBD>,
       },
     ],
     annotations: [

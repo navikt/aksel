@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Heading } from "@navikt/ds-react";
 import Nextlink from "next/link";
 import cl from "clsx";
