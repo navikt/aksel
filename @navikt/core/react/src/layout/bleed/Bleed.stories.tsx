@@ -136,7 +136,7 @@ export const full = {
           <Box background="surface-alt-2-subtle" padding="10">
             <Bleed marginBlock="full">
               <Box background="surface-success-subtle">
-                <BodyLong>marginInline="full 0"</BodyLong>
+                <BodyLong>marginBlock="full"</BodyLong>
               </Box>
             </Bleed>
           </Box>

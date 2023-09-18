@@ -78,7 +78,7 @@ const translateTokenStringToCSS = (
     .map((x, _, arr) => {
       if (componentProp === "margin-inline" && x === "full") {
         const width = 100 / arr.length;
-        return `calc((100vw - ${width}%)/2)`;
+        return `calc((100vw - ${width}%)/-2)`;
       }
       if (componentProp === "margin-block" && x === "full") {
         const height = 100 / arr.length;
