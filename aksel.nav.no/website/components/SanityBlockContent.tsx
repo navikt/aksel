@@ -1,16 +1,16 @@
 import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
-import cl from "clsx";
 import {
   PortableText,
   PortableTextMarkComponentProps,
   PortableTextReactComponents,
 } from "@portabletext/react";
+import cl from "clsx";
 import ExpansionCard from "components/sanity-modules/ExpansionCard";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
 import { InlineCode } from "components/website-modules/InlineCode";
 import { KBD } from "components/website-modules/KBD";
 import NextLink from "next/link";
-
+import { Children } from "react";
 import {
   Accordion,
   Alert,
@@ -30,7 +30,6 @@ import {
   Video,
   logNav,
 } from ".";
-import { Children } from "react";
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
@@ -209,7 +208,7 @@ function SanitizedBlock({
 }: {
   children: React.ReactNode;
   type: string;
-  value?: any;
+  value?: { _key?: string };
 }) {
   const children = Children.toArray(_children).filter(Boolean);
 
