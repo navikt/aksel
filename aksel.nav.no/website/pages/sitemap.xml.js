@@ -4,8 +4,7 @@ function generateSiteMap(pages) {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      ${pages
-       .map(({ path, lastmod, ...rest }) => {
-         console.log(rest);
+       .map(({ path, lastmod }) => {
          return `
        <url>
            <loc>${`https://aksel.nav.no/${path}`}</loc>${
