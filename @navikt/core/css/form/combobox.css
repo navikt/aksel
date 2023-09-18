@@ -272,6 +272,16 @@
   margin-top: 0;
 }
 
+.navds-combobox__list-item__no-options:hover,
+.navds-combobox__list-item__loading:hover,
+.navds-combobox__list-item__max-selected:hover {
+  cursor: default;
+}
+
+.navds-combobox__list-item__max-selected:hover {
+  background-color: unset;
+}
+
 .navds-combobox__list-item--focus,
 .navds-combobox__list--with-hover .navds-combobox__list-item:hover {
   background-color: var(--ac-combobox-list-item-hover-bg, var(--a-surface-hover));

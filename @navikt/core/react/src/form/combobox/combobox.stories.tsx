@@ -293,12 +293,10 @@ export const MaxSelectedOptions = () => {
       id={id}
       label="Komboboks med begrenset antall valg"
       options={options}
-      maxSelectedOptions={2}
-      selectedOptions={[options[0], options[1]]}
+      maxSelectedOptions={1}
       isMultiSelect
       allowNewValues
       isListOpen
-      value="a"
     />
   );
 };
