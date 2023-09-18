@@ -64,7 +64,7 @@ export const Small = () => (
 
 export const CustomHeight = () => (
   <HStack gap="8">
-    <ShowMore aria-label="Tabellvisning" collapsedHeight="8rem">
+    <ShowMore as="aside" aria-label="Tabellvisning" collapsedHeight="8rem">
       {content}
     </ShowMore>
     <ShowMore aria-label="Tabellvisning" collapsedHeight={90} size="small">
