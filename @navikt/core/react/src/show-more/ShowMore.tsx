@@ -38,7 +38,8 @@ export type ShowMoreProps = ShowMoreBaseProps &
   ({ "aria-label": string } | { "aria-labelledby": string });
 
 /**
- * ShowMore
+ * A component for partially hiding less important content.
+ *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/show-more)
  * @see 🏷️ {@link ShowMoreProps}
  *
