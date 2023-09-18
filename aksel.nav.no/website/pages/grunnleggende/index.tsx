@@ -14,6 +14,7 @@ import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { SEO } from "components/website-modules/seo/SEO";
+import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { grunnleggendeKategorier } from "../../sanity/config";
 
@@ -27,10 +28,8 @@ export const query = `{${sidebarQuery}, ${landingPageQuery(
   "grunnleggende"
 )}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   preview = false,
-}: {
-  preview?: boolean;
 }): Promise<PageProps> => {
   const { sidebar, page, links } = await getClient().fetch(query, {
     type: "ds_artikkel",

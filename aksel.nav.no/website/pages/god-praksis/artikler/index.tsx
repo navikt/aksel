@@ -11,9 +11,10 @@ import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { SEO } from "components/website-modules/seo/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
+import { SEO } from "components/website-modules/seo/SEO";
 import { useRouter } from "next/router";
+import { GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
@@ -44,7 +45,7 @@ export const query = (boundry = "") => {
   }`;
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }: {
   preview?: boolean;

@@ -17,6 +17,7 @@ import { LatestBloggposts } from "components/website-modules/blogg-page";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
+import { GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: AkselBloggFrontpageT;
@@ -37,7 +38,7 @@ export const query = `*[_type == "blogg_landingsside"][0]{
   }
 }`;
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }: {
   preview?: boolean;

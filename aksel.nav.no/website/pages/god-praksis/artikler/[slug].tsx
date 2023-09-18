@@ -13,7 +13,7 @@ import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import NextLink from "next/link";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../../404";
-
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import {
   abbrName,
   BreadCrumbs,
@@ -66,10 +66,7 @@ export const query = `{
   }
 }`;
 
-export const getStaticPaths = async (): Promise<{
-  fallback: string;
-  paths: { params: { slug: string } }[];
-}> => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: await getAkselDocuments("aksel_artikkel").then((paths) =>
       paths.map((slug) => ({
@@ -82,7 +79,7 @@ export const getStaticPaths = async (): Promise<{
   };
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
