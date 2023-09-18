@@ -32,7 +32,7 @@ export const Default = {
           <Box background="surface-alt-2-subtle" padding="5">
             <Bleed marginInline="10 0">
               <Box className="p" background="surface-success-subtle">
-                <BodyLong>marginInline="10 0"</BodyLong>
+                <BodyLong>marginInline=&quot;10 0&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
@@ -41,7 +41,7 @@ export const Default = {
           <Box background="surface-alt-2-subtle" padding="5">
             <Bleed marginInline="0 10">
               <Box className="p" background="surface-success-subtle">
-                <BodyLong>marginInline="0 10"</BodyLong>
+                <BodyLong>marginInline=&quot;0 10&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
@@ -50,7 +50,7 @@ export const Default = {
           <Box background="surface-alt-2-subtle" padding="5">
             <Bleed marginBlock="10 0">
               <Box className="p" background="surface-success-subtle">
-                <BodyLong>marginBlock="10 0"</BodyLong>
+                <BodyLong>marginBlock=&quot;10 0&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
@@ -60,7 +60,7 @@ export const Default = {
             <Bleed marginBlock="0 10">
               <Box className="p" background="surface-success-subtle">
                 <HStack className="centered" justify="center" align="center">
-                  <Box className="testbox">marginBlock="0 10"</Box>
+                  <Box className="testbox">marginBlock=&quot;0 10&quot;</Box>
                 </HStack>
               </Box>
             </Bleed>
@@ -77,7 +77,7 @@ export const px = {
       <Box background="surface-alt-2-subtle" padding="10">
         <Bleed marginInline="px 0">
           <Box background="surface-success-subtle">
-            <BodyLong>marginInline="20 0"</BodyLong>
+            <BodyLong>marginInline=&quot;20 0&quot;</BodyLong>
           </Box>
         </Bleed>
       </Box>
@@ -110,7 +110,7 @@ export const full = {
           <Box background="surface-alt-2-subtle" padding="10">
             <Bleed marginInline="full">
               <Box background="surface-success-subtle">
-                <BodyLong>marginInline="full"</BodyLong>
+                <BodyLong>marginInline=&quot;full&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
@@ -123,7 +123,7 @@ export const full = {
           <Box background="surface-alt-2-subtle" padding="10">
             <Bleed marginInline="full 0">
               <Box background="surface-success-subtle">
-                <BodyLong>marginInline="full 0"</BodyLong>
+                <BodyLong>marginInline=&quot;full 0&quot;</BodyLong>
               </Box>
             </Bleed>
           </Box>
@@ -134,10 +134,50 @@ export const full = {
           padding="10"
         >
           <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed marginBlock="full">
+            <Bleed marginInline="0 full">
               <Box background="surface-success-subtle">
-                <BodyLong>marginBlock="full"</BodyLong>
+                <BodyLong>marginInline=&quot;0 full&quot;</BodyLong>
               </Box>
+            </Bleed>
+          </Box>
+        </Box>
+      </VStack>
+    </>
+  ),
+};
+
+export const reflectivePadding = {
+  render: () => (
+    <>
+      <p>
+        Only really works <br /> when asChild is implemented
+      </p>
+      <style>
+        {`
+        .navds-bleed {
+          background-color: var(--a-surface-success-subtle);
+        }
+        `}
+      </style>
+      <VStack gap="2">
+        <Box background="surface-alt-1-subtle" padding="10">
+          <Box background="surface-alt-2-subtle" padding="10">
+            <Bleed>
+              <BodyLong>before Bleed</BodyLong>
+            </Bleed>
+          </Box>
+        </Box>
+        <Box background="surface-alt-1-subtle" padding="10">
+          <Box background="surface-alt-2-subtle" padding="10">
+            <Bleed marginInline="20 0">
+              <BodyLong>without reflectivePadding</BodyLong>
+            </Bleed>
+          </Box>
+        </Box>
+        <Box background="surface-alt-1-subtle" padding="10">
+          <Box background="surface-alt-2-subtle" padding="10">
+            <Bleed margin="4" marginInline="20 0" reflectivePadding>
+              <BodyLong>with reflectivePadding</BodyLong>
             </Bleed>
           </Box>
         </Box>

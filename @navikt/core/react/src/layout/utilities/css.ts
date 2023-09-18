@@ -1,3 +1,5 @@
+import { BleedSpacing } from "../bleed/Bleed";
+
 export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
 
 export type SpacingScale =
@@ -139,3 +141,86 @@ export function getResponsiveProps<T extends string>(
     })
   );
 }
+
+export const mirrorMargin = (
+  reflectivePadding: boolean | undefined,
+  margin: ResponsiveProp<BleedSpacing> | undefined,
+  marginInline:
+    | ResponsiveProp<BleedSpacing | `${BleedSpacing} ${BleedSpacing}`>
+    | undefined,
+  marginBlock:
+    | ResponsiveProp<BleedSpacing | `${BleedSpacing} ${BleedSpacing}`>
+    | undefined
+):
+  | { paddingInline: string | undefined; paddingBlock: string | undefined }
+  | undefined => {
+  if (!reflectivePadding) {
+    return undefined;
+  }
+
+  let currentMarginInline = "";
+  let currentMarginBlock = "";
+
+  // margin
+  // the 4 string cases we need to handle:
+  // N [E=N] [S=N] [W=N]
+  // N E [S=N] [W=E]
+  // N E S [W=E]
+  // N E S W
+
+  // marginInline, string cases
+  // W [E=W]
+  // W E
+
+  // marginBlock, string cases
+  // N [S=N]
+  // N S
+
+  // then do the same thing above for each breakpoint in object
+
+  if (margin) {
+    if (typeof margin === "string") {
+      // string cases
+      const directions = margin.split(" ");
+
+      if (directions.length === 1) {
+        currentMarginInline = margin;
+        currentMarginBlock = margin;
+      } else if (directions.length === 2) {
+        currentMarginInline = directions[1];
+        currentMarginBlock = directions[0];
+      } else if (directions.length === 3) {
+        currentMarginInline = directions[1];
+        currentMarginBlock = [directions[0], directions[2]].join(" ");
+      } else {
+        currentMarginInline = [directions[1], directions[3]].join(" ");
+        currentMarginBlock = [directions[0], directions[2]].join(" ");
+      }
+    }
+  }
+  if (marginInline) {
+    if (typeof marginInline === "string") {
+      currentMarginInline = marginInline;
+    }
+  }
+  if (marginBlock) {
+    if (typeof marginBlock === "string") {
+      currentMarginBlock = marginBlock;
+    }
+  }
+
+  return {
+    paddingInline: !currentMarginInline
+      ? undefined
+      : currentMarginInline
+          .split(" ")
+          .map((x) => (x === "0" ? "0" : `var(--a-spacing-${x})`))
+          .join(" "),
+    paddingBlock: !currentMarginBlock
+      ? undefined
+      : currentMarginBlock
+          .split(" ")
+          .map((x) => (x === "0" ? "0" : `var(--a-spacing-${x})`))
+          .join(" "),
+  };
+};

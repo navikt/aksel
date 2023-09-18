@@ -4,22 +4,14 @@ import {
   ResponsiveProp,
   SpacingScale,
   getResponsiveProps,
+  mirrorMargin,
 } from "../utilities/css";
 
-type AllowedSpacing = "0" | "full" | "px" | SpacingScale;
+export type BleedSpacing = "0" | "full" | "px" | SpacingScale;
 
-interface AsChild {
-  /**
-   * If true, the children of the component will be rendered in place of itself. The rendered child(ren) will respect all props applied to it/them via a parent using the `asChild` prop. This removes mostly empty "wrapper" components from the DOM tree.
-   */
-  asChild?: boolean;
-}
-
-export interface BleedProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    AsChild {
+export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
   /** **Negative** margin around children. */
-  margin?: ResponsiveProp<AllowedSpacing>;
+  margin?: ResponsiveProp<BleedSpacing>;
   /** **Negative** horizontal margin around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * marginInline='4'
@@ -27,7 +19,7 @@ export interface BleedProps
    * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
    */
   marginInline?: ResponsiveProp<
-    AllowedSpacing | `${AllowedSpacing} ${AllowedSpacing}`
+    BleedSpacing | `${BleedSpacing} ${BleedSpacing}`
   >;
   /** **Negative** vertical margin around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
@@ -36,8 +28,12 @@ export interface BleedProps
    * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   marginBlock?: ResponsiveProp<
-    AllowedSpacing | `${AllowedSpacing} ${AllowedSpacing}`
+    BleedSpacing | `${BleedSpacing} ${BleedSpacing}`
   >;
+  /**
+   * When true, set the padding to mirror the margin. This maintains the apparent width of the element prior to adding Bleed.
+   */
+  reflectivePadding?: boolean;
 }
 
 /**
@@ -51,7 +47,15 @@ export interface BleedProps
  */
 export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
   (
-    { className, margin, marginInline, marginBlock, style: _style, ...rest },
+    {
+      className,
+      margin,
+      marginInline,
+      marginBlock,
+      reflectivePadding,
+      style: _style,
+      ...rest
+    },
     ref
   ) => {
     const style: React.CSSProperties = {
@@ -77,6 +81,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         true,
         ["0", "full", "px"]
       ),
+      ...mirrorMargin(reflectivePadding, margin, marginInline, marginBlock),
     };
 
     return (
