@@ -159,6 +159,11 @@ const StyleMappings = {
     { component: "Radio", main: formCss, dependencies: [typoCss] },
     { component: "RadioGroup", main: formCss, dependencies: [typoCss] },
     { component: "ReadMore", main: "read-more.css", dependencies: [typoCss] },
+    {
+      component: "ShowMore",
+      main: "show-more.css",
+      dependencies: [typoCss, "button.css"],
+    },
     { component: "Search", main: formCss, dependencies: [typoCss] },
     { component: "Select", main: formCss, dependencies: [typoCss] },
     { component: "Skeleton", main: "skeleton.css", dependencies: [] },
