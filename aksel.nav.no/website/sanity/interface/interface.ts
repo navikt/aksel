@@ -28,13 +28,14 @@ export async function sitemapPages(
       "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,
     }`
   );
+
   return [
-    { path: "", lastmod: pages.frontpage._updatedAt },
-    { path: "god-praksis", lastmod: pages.godpraksis._updatedAt },
-    { path: "ikoner", lastmod: "monthly" },
-    { path: "grunnleggende", lastmod: pages.grunnleggende._updatedAt },
-    { path: "komponenter", lastmod: pages.komponenter._updatedAt },
-    { path: "produktbloggen", lastmod: pages.blogg._updatedAt },
+    { path: "", lastmod: pages.frontpage },
+    { path: "god-praksis", lastmod: pages.godpraksis },
+    { path: "ikoner", lastmod: undefined },
+    { path: "grunnleggende", lastmod: pages.grunnleggende },
+    { path: "komponenter", lastmod: pages.komponenter },
+    { path: "produktbloggen", lastmod: pages.blogg },
     ...temaer.map((x) => ({
       path: `god-praksis/${x.path}`,
       lastmod: x.lastmod,

@@ -7,7 +7,7 @@ export const LevelTwoHeading = ({
   hidden,
   id,
 }: {
-  children: [React.ReactNode | string];
+  children: React.ReactNode;
   hidden?: boolean;
   id: string;
 }) => {

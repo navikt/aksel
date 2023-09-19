@@ -8,7 +8,7 @@ import {
 } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocumentsTmp, urlFor } from "@/sanity/interface";
+import { getDocumentsTmp } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
@@ -19,14 +19,17 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
 import { WithSidebar } from "components/layout/WithSidebar";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
+import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import Head from "next/head";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 
 const kodepakker = {
   "ds-react": {
@@ -103,10 +106,7 @@ export const query = `{
   ${sidebarQuery}
 }`;
 
-export const getStaticPaths = async (): Promise<{
-  fallback: string;
-  paths: { params: { slug: string[] } }[];
-}> => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: await getDocumentsTmp("komponent_artikkel").then((paths) =>
       paths.map((slug) => ({
@@ -119,7 +119,7 @@ export const getStaticPaths = async (): Promise<{
   };
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
@@ -172,50 +172,110 @@ const Page = ({
   const unsafe = page?.status?.unsafe;
   const internal = page?.status?.internal;
 
+  const Links = () => (
+    <BodyShort
+      as="span"
+      size="small"
+      className="text-text-subtle mt-4 flex flex-wrap gap-4"
+    >
+      {pack && (
+        <>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={pack.git}
+            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            onClick={() =>
+              logAmplitudeEvent("link", {
+                kilde: "intro-lenker komponenter",
+                til: "github",
+              })
+            }
+          >
+            <GithubIcon /> Github
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={`https://yarnpkg.com/package/${pack.title}`}
+            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            onClick={() =>
+              logAmplitudeEvent("link", {
+                kilde: "intro-lenker komponenter",
+                til: "yarn",
+              })
+            }
+          >
+            <YarnIcon />
+            Yarn
+          </a>
+        </>
+      )}
+
+      {page.figma_link && (
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href={page.figma_link}
+          className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+          onClick={() =>
+            logAmplitudeEvent("link", {
+              kilde: "intro-lenker komponenter",
+              til: "figma",
+            })
+          }
+        >
+          <FigmaIcon /> Figma
+        </a>
+      )}
+      {pack && (
+        <>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={pack.changelog}
+            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            onClick={() =>
+              logAmplitudeEvent("link", {
+                kilde: "intro-lenker komponenter",
+                til: "endringslogg",
+              })
+            }
+          >
+            <ChangelogIcon />
+            Endringslogg
+          </a>
+        </>
+      )}
+    </BodyShort>
+  );
+
   return (
     <>
-      <Head>
-        <title>{page?.heading ? `${page?.heading} - Aksel` : "Aksel"}</title>
-        <meta property="og:title" content={`${page.heading} - Aksel`} />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : seo
-              ? urlFor(seo)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={page?.heading}
+        description={page?.seo?.meta}
+        image={page?.seo?.image ?? seo}
+      />
+
+      <Header />
       <WithSidebar
-        withToc
         sidebar={sidebar}
         pageType={{ type: "Komponenter", title: page?.heading }}
         pageProps={page}
         variant="page"
         intro={
-          <Detail as="div" className="mt-2 flex items-center gap-3">
-            {internal && <StatusTag status="internal" />}
-            <StatusTag showStable status={page?.status?.tag} />
-            {`OPPDATERT ${publishDate}`}
+          <Detail as="div">
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <span>
+                Oppdatert <time>{publishDate}</time>
+              </span>
+              {internal && <StatusTag status="internal" />}
+              {page?.status?.tag !== "beta" && (
+                <StatusTag showStable status={page?.status?.tag} />
+              )}
+            </div>
+            <Links />
           </Detail>
         }
         footer={
@@ -235,81 +295,6 @@ const Page = ({
           )
         }
       >
-        <BodyShort
-          as="span"
-          size="small"
-          className="text-text-subtle mb-6 flex flex-wrap gap-4"
-        >
-          {pack && (
-            <>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={pack.git}
-                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-                onClick={() =>
-                  logAmplitudeEvent("link", {
-                    kilde: "intro-lenker komponenter",
-                    til: "github",
-                  })
-                }
-              >
-                <GithubIcon /> Github
-              </a>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={`https://yarnpkg.com/package/${pack.title}`}
-                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-                onClick={() =>
-                  logAmplitudeEvent("link", {
-                    kilde: "intro-lenker komponenter",
-                    til: "yarn",
-                  })
-                }
-              >
-                <YarnIcon />
-                Yarn
-              </a>
-            </>
-          )}
-
-          {page.figma_link && (
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href={page.figma_link}
-              className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-              onClick={() =>
-                logAmplitudeEvent("link", {
-                  kilde: "intro-lenker komponenter",
-                  til: "figma",
-                })
-              }
-            >
-              <FigmaIcon /> Figma
-            </a>
-          )}
-          {pack && (
-            <>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={pack.changelog}
-                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-                onClick={() =>
-                  logAmplitudeEvent("link", {
-                    kilde: "intro-lenker komponenter",
-                    til: "endringslogg",
-                  })
-                }
-              >
-                <ChangelogIcon />
-                Endringslogg
-              </a>
-            </>
-          )}
-        </BodyShort>
         {tag && (
           <SuggestionBlock
             variant={tag}
@@ -326,6 +311,7 @@ const Page = ({
         )}
         <SanityBlockContent blocks={page["content"]} />
       </WithSidebar>
+      <Footer />
     </>
   );
 };

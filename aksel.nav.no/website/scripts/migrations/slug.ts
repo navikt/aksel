@@ -30,13 +30,6 @@ const main = async () => {
     transactionClient.patch(data._id, (p) => p.unset(["slug_v2"]));
   });
 
-  /* transactionClient.create({
-    _type: "redirect",
-    source: `/designsystem`,
-    destination: `/`,
-    permanent: true,
-  }); */
-
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: true })
     .then((a) => console.log(`Updated! \n${JSON.stringify(a, null, 2)}`))

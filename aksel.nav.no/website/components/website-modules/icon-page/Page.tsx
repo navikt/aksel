@@ -5,9 +5,9 @@ import { HGrid, Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "clsx";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
+import { SEO } from "components/website-modules/seo/SEO";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import Fuse from "fuse.js";
-import Head from "next/head";
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import { IconSidebar } from "./Sidebar";
@@ -81,25 +81,12 @@ export const IconPage = ({ name }: { name: string }) => {
 
   return (
     <>
-      <Head>
-        <title>Ikoner</title>
-        <meta property="og:title" content="Aksel ikoner" />
-        <meta
-          name="description"
-          content="800+ open source-ikoner designet og utviklet for NAV"
-          key="desc"
-        />
-        <meta
-          property="og:description"
-          content="800+ open source-ikoner designet og utviklet for NAV"
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={name.length > 0 ? `${name}Icon` : "Ikoner"}
+        description="800+ open source-ikoner designet og utviklet for NAV"
+        fallbackImage="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
+        canonical="https://aksel.nav.no/ikoner"
+      />
 
       <div className="bg-surface-subtle">
         <Header variant="transparent" />
@@ -127,9 +114,9 @@ export const IconPage = ({ name }: { name: string }) => {
               <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center rounded-t-2xl border-b p-1">
                 <form
                   onSubmit={(e) => e.preventDefault()}
-                  className="flex h-fit w-full flex-wrap-reverse items-center gap-4 px-4 py-2"
+                  className="flex w-full flex-wrap-reverse items-center  gap-4 px-4 py-2 sm:flex-nowrap"
                 >
-                  <div className="min-w-[10.25rem]">
+                  <div className="w-fit">
                     <ToggleGroup
                       value={toggle}
                       onChange={(v) => setToggle(v as any)}
@@ -140,18 +127,16 @@ export const IconPage = ({ name }: { name: string }) => {
                       <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
                     </ToggleGroup>
                   </div>
-                  <div className="min-w-48 md:min-w-96 flex w-full items-center gap-2  md:w-fit">
-                    <Search
-                      variant="simple"
-                      label="Ikonsøk"
-                      className="border-none"
-                      placeholder="Søk"
-                      autoComplete="off"
-                      onChange={setQuery}
-                      value={query}
-                      clearButton={false}
-                    />
-                  </div>
+                  <Search
+                    variant="simple"
+                    label="Ikonsøk"
+                    className="border-none"
+                    placeholder="Søk"
+                    autoComplete="off"
+                    onChange={setQuery}
+                    value={query}
+                    clearButton={false}
+                  />
                 </form>
               </div>
               <div className="flex">
@@ -258,7 +243,7 @@ export const IconPage = ({ name }: { name: string }) => {
                   <Modal
                     open={!!name}
                     aria-label={`${name} ikon`}
-                    className="rounded px-2 py-6 sm:px-6"
+                    className="rounded px-6 py-6"
                     onClose={() => null}
                   >
                     {name && <IconSidebar name={name} focusRef={focusRef} />}

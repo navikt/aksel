@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta } from "@storybook/react";
-import { HStack, VStack, Spacer } from ".";
+import { HStack, VStack, Spacer, Stack } from ".";
+import { Box } from "../box";
 
 export default {
   title: "ds-react/Primitives/Stack",
@@ -130,6 +131,27 @@ export const DividerDemo = {
         </HStack>
       </VStack>
     </div>
+  ),
+};
+
+export const ResponsiveDirection = {
+  render: () => (
+    <Box
+      background="surface-alt-3-subtle"
+      padding="12"
+      style={{ minWidth: "20rem", aspectRatio: "1/1" }}
+    >
+      <Stack
+        align={{ xs: "center", md: "start" }}
+        gap="2"
+        direction={{ xs: "column", lg: "row" }}
+      >
+        <Box padding="6" background="surface-action" />
+        <Box padding="2" background="surface-action" />
+        <Box padding="6" background="surface-action" />
+        <Box padding="4" background="surface-action" />
+      </Stack>
+    </Box>
   ),
 };
 

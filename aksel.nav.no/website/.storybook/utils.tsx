@@ -90,6 +90,6 @@ function getHeading() {
     ],
     markDefs: [],
     _type: "block",
-    style: "h3",
+    style: "h2",
   };
 }

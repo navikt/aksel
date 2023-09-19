@@ -1,7 +1,6 @@
 import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { urlFor } from "@/sanity/interface";
 import { destructureBlocks } from "@/sanity/queries";
 import {
   AkselGodPraksisDocT,
@@ -17,9 +16,10 @@ import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
+import { SEO } from "components/website-modules/seo/SEO";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import Head from "next/head";
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
+import { GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: AkselGodPraksisLandingPageDocT;
@@ -53,10 +53,8 @@ export const query = `*[_type == "godpraksis_landingsside"][0]{
   }
 }`;
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   preview = false,
-}: {
-  preview?: boolean;
 }): Promise<PageProps> => {
   const { temaer, page, resent } = await getClient().fetch(query);
 
@@ -79,53 +77,24 @@ const Page = ({ temaer, page, resent }: PageProps["props"]) => {
   const filteredTemas = temaer.filter((x) => x.refCount > 0);
   return (
     <>
-      <Head>
-        <title>God praksis - Aksel</title>
-        <meta property="og:title" content="Temaer - Aksel" />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title="God praksis"
+        description={page?.seo?.meta}
+        image={page?.seo?.image}
+      />
+
       <div className="bg-surface-subtle relative overflow-hidden">
         <Header variant="transparent" />
-        <main
-          tabIndex={-1}
-          id="hovedinnhold"
-          className=" min-h-[80vh]  focus:outline-none"
-        >
+        <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">
           <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 pt-20 sm:px-6">
             <Heading
               level="1"
               size="xlarge"
-              className="text-deepblue-800 text-5xl"
+              className="text-deepblue-800 mb-4 text-5xl"
             >
               God praksis
             </Heading>
-            {page.intro && (
-              <SanityBlockContent
-                isIngress
-                className="mt-4"
-                noLastMargin
-                blocks={page.intro}
-              />
-            )}
+            {page.intro && <SanityBlockContent isIngress blocks={page.intro} />}
             <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
             <div>
               <ul className="card-grid-3-1 mt-20 ">

@@ -66,12 +66,6 @@ const config = () =>
         },
       ];
     },
-    rewrites: async () => [
-      {
-        source: "/sitemap.xml",
-        destination: "/api/sitemap",
-      },
-    ],
     async redirects() {
       return [
         {
@@ -96,14 +90,7 @@ const config = () =>
         },
       ];
     },
-    webpack(config) {
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
-      });
 
-      return config;
-    },
     images: {
       domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
       dangerouslyAllowSVG: true,
@@ -114,8 +101,4 @@ const config = () =>
     },
   });
 
-if (process.env.NODE_ENV === "production") {
-  module.exports = config();
-} else {
-  module.exports = config();
-}
+module.exports = config();
