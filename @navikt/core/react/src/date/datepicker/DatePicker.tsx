@@ -49,7 +49,7 @@ export type ConditionalModeProps =
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerDefaultProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
-    Pick<DayPickerBase, "month" | "onMonthChange" | "today" | "onDayClick"> {
+    Omit<DayPickerBase, "hidden" | "locale"> {
   /**
    * Element datepicker anchors to. Use <DatePicker.Input /> for built-in toggle, or make your own with the open/onClose props
    */
