@@ -4,8 +4,10 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div style={{ minHeight: "423px", width: "300px" }}>
-      <ShowMore aria-label="Facts" size="small">
-        <Heading size="medium">Tabellvisning</Heading>
+      <ShowMore aria-labelledby="overskrift123" size="small">
+        <Heading size="medium" id="overskrift123">
+          Tabellvisning
+        </Heading>
         <Table size="large">
           <Table.Header>
             <Table.Row>
