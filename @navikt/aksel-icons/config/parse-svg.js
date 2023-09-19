@@ -40,3 +40,5 @@ function parseIcon(svgString) {
 
   return icon;
 }
+
+module.exports = { parseIcon };
