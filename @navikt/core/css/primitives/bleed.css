@@ -1,19 +1,21 @@
 .navds-bleed {
   --__ac-bleed-margin-xs: initial;
-  --__ac-bleed-margin-sm: initial;
-  --__ac-bleed-margin-md: initial;
-  --__ac-bleed-margin-lg: initial;
-  --__ac-bleed-margin-xl: initial;
-  --__ac-bleed-margin-block-xs: initial;
+  --__ac-bleed-margin-sm: var(--__ac-bleed-margin-xs);
+  --__ac-bleed-margin-md: var(--__ac-bleed-margin-sm);
+  --__ac-bleed-margin-lg: var(--__ac-bleed-margin-md);
+  --__ac-bleed-margin-xl: var(--__ac-bleed-margin-lg);
   --__ac-bleed-margin-inline-xs: initial;
-  --__ac-bleed-margin-block-sm: initial;
-  --__ac-bleed-margin-inline-sm: initial;
-  --__ac-bleed-margin-block-md: initial;
-  --__ac-bleed-margin-inline-md: initial;
-  --__ac-bleed-margin-block-lg: initial;
-  --__ac-bleed-margin-inline-lg: initial;
-  --__ac-bleed-margin-block-xl: initial;
-  --__ac-bleed-margin-inline-xl: initial;
+  --__ac-bleed-margin-inline-sm: var(--__ac-bleed-margin-inline-xs);
+  --__ac-bleed-margin-inline-md: var(--__ac-bleed-margin-inline-sm);
+  --__ac-bleed-margin-inline-lg: var(--__ac-bleed-margin-inline-md);
+  --__ac-bleed-margin-inline-xl: var(--__ac-bleed-margin-inline-lg);
+  --__ac-bleed-margin-block-xs: initial;
+  --__ac-bleed-margin-block-sm: var(--__ac-bleed-margin-block-xs);
+  --__ac-bleed-margin-block-md: var(--__ac-bleed-margin-block-sm);
+  --__ac-bleed-margin-block-lg: var(--__ac-bleed-margin-block-md);
+  --__ac-bleed-margin-block-xl: var(--__ac-bleed-margin-block-lg);
+
+  /** --- */
   --__ac-bleed-margin: var(--__ac-bleed-margin-xs);
   --__ac-bleed-margin-inline: var(--__ac-bleed-margin-inline-xs);
   --__ac-bleed-margin-block: var(--__ac-bleed-margin-block-xs);
@@ -21,4 +23,36 @@
   margin: var(--__ac-bleed-margin);
   margin-inline: var(--__ac-bleed-margin-inline);
   margin-block: var(--__ac-bleed-margin-block);
+}
+
+@media (min-width: 480px) {
+  .navds-bleed {
+    --__ac-bleed-margin: var(--__ac-bleed-margin-sm);
+    --__ac-bleed-margin-inline: var(--__ac-bleed-margin-inline-sm);
+    --__ac-bleed-margin-block: var(--__ac-bleed-margin-block-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .navds-bleed {
+    --__ac-bleed-margin: var(--__ac-bleed-margin-md);
+    --__ac-bleed-margin-inline: var(--__ac-bleed-margin-inline-md);
+    --__ac-bleed-margin-block: var(--__ac-bleed-margin-block-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .navds-bleed {
+    --__ac-bleed-margin: var(--__ac-bleed-margin-lg);
+    --__ac-bleed-margin-inline: var(--__ac-bleed-margin-inline-lg);
+    --__ac-bleed-margin-block: var(--__ac-bleed-margin-block-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .navds-bleed {
+    --__ac-bleed-margin: var(--__ac-bleed-margin-xl);
+    --__ac-bleed-margin-inline: var(--__ac-bleed-margin-inline-xl);
+    --__ac-bleed-margin-block: var(--__ac-bleed-margin-block-xl);
+  }
 }

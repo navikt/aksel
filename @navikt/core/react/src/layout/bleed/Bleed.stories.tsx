@@ -71,7 +71,7 @@ export const Default = {
   ),
 };
 
-export const px = {
+export const Px = {
   render: () => (
     <Box background="surface-alt-1-subtle" padding="10">
       <Box background="surface-alt-2-subtle" padding="10">
@@ -85,7 +85,7 @@ export const px = {
   ),
 };
 
-export const full = {
+export const Full = {
   parameters: {
     layout: "fullscreen",
   },
@@ -146,42 +146,108 @@ export const full = {
   ),
 };
 
-export const reflectivePadding = {
+export const ReflectivePadding = {
   render: () => (
     <>
-      <p>
-        Only really works <br /> when asChild is implemented
-      </p>
       <style>
         {`
         .navds-bleed {
           background-color: var(--a-surface-success-subtle);
+          width: fit-content;
         }
         `}
       </style>
-      <VStack gap="2">
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed>
-              <BodyLong>before Bleed</BodyLong>
-            </Bleed>
+      <h3>
+        Note: reflectivePadding Only really works <br /> when asChild is
+        implemented
+      </h3>
+      <h3>Note2: &quot;full&quot; is not supported for marginBlock</h3>
+      <HStack gap="3">
+        <VStack gap="2">
+          <p>CSS string</p>
+          <Box background="surface-alt-1-subtle" padding="5">
+            <Box background="surface-alt-2-subtle" padding="5">
+              <Bleed>
+                <BodyLong>before Bleed</BodyLong>
+              </Bleed>
+            </Box>
           </Box>
-        </Box>
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed marginInline="20 0">
-              <BodyLong>without reflectivePadding</BodyLong>
-            </Bleed>
+          <Box background="surface-alt-1-subtle" padding="5">
+            <Box background="surface-alt-2-subtle" padding="5">
+              <Bleed marginInline="10 0">
+                <BodyLong>without reflectivePadding</BodyLong>
+              </Bleed>
+            </Box>
           </Box>
-        </Box>
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed margin="4" marginInline="20 0" reflectivePadding>
-              <BodyLong>with reflectivePadding</BodyLong>
-            </Bleed>
+          <Box background="surface-alt-1-subtle" padding="5">
+            <Box background="surface-alt-2-subtle" padding="5">
+              <Bleed marginInline="10 0" reflectivePadding>
+                <BodyLong>with reflectivePadding</BodyLong>
+              </Bleed>
+            </Box>
           </Box>
-        </Box>
-      </VStack>
+        </VStack>
+
+        <VStack gap="2">
+          <p>breakpoints</p>
+          <Box
+            background="surface-alt-1-subtle"
+            padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
+          >
+            <Box
+              background="surface-alt-2-subtle"
+              padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
+            >
+              <Bleed>
+                <BodyLong>before Bleed</BodyLong>
+              </Bleed>
+            </Box>
+          </Box>
+          <Box
+            background="surface-alt-1-subtle"
+            padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
+          >
+            <Box
+              background="surface-alt-2-subtle"
+              padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
+            >
+              <Bleed
+                marginInline={{
+                  xs: "4",
+                  sm: "8",
+                  md: "12",
+                  lg: "16",
+                  xl: "20",
+                }}
+              >
+                <BodyLong>without reflectivePadding</BodyLong>
+              </Bleed>
+            </Box>
+          </Box>
+          <Box
+            background="surface-alt-1-subtle"
+            padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
+          >
+            <Box
+              background="surface-alt-2-subtle"
+              padding={{ xs: "2", sm: "4", md: "6", lg: "8", xl: "10" }}
+            >
+              <Bleed
+                marginInline={{
+                  xs: "4",
+                  sm: "8",
+                  md: "12",
+                  lg: "16",
+                  xl: "20",
+                }}
+                reflectivePadding
+              >
+                <BodyLong>with reflectivePadding</BodyLong>
+              </Bleed>
+            </Box>
+          </Box>
+        </VStack>
+      </HStack>
     </>
   ),
 };
