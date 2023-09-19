@@ -204,7 +204,7 @@ export const useMonthpicker = (
       return;
     }
     !open && openOnFocus && handleOpen(true);
-    let day = parseDate(
+    const day = parseDate(
       e.target.value,
       today,
       locale,
@@ -223,7 +223,7 @@ export const useMonthpicker = (
   };
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    let day = parseDate(
+    const day = parseDate(
       e.target.value,
       today,
       locale,

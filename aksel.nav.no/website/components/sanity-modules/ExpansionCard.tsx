@@ -36,7 +36,7 @@ const ExpansionCard = ({
         )}
       </DsExpansionCard.Header>
       <DsExpansionCard.Content>
-        <SanityBlockContent blocks={node.body} noLastMargin />
+        <SanityBlockContent blocks={node.body} />
       </DsExpansionCard.Content>
     </DsExpansionCard>
   );

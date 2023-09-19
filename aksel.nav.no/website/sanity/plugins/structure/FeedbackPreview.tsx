@@ -1,5 +1,4 @@
 import { Alert, BodyLong, Heading, Loader } from "@navikt/ds-react";
-import { Card } from "@sanity/ui";
 import {
   IntentButton,
   Preview,
@@ -61,7 +60,7 @@ export function FeedbackView(props) {
   return (
     <div className="grid place-items-center">
       <div className="mx-auto mt-4 w-full px-6">
-        <Alert variant="info">
+        <Alert variant="info" data-theme="light">
           Løsning for tilbakemeldinger på Aksel er midlertidig slått av.
         </Alert>
         <div className="mt-7">
@@ -74,27 +73,25 @@ export function FeedbackView(props) {
           <ul>
             {notDone.map((x) => (
               <li key={x._id}>
-                <Card flex={1}>
-                  <IntentButton
+                <IntentButton
+                  key={x._id}
+                  intent="edit"
+                  mode="ghost"
+                  padding={1}
+                  radius={0}
+                  params={{
+                    type: "aksel_feedback",
+                    id: getPublishedId(x._id),
+                  }}
+                  style={{ width: "100%" }}
+                >
+                  <Preview
+                    schemaType={schemaType}
+                    value={x}
                     key={x._id}
-                    intent="edit"
-                    mode="ghost"
-                    padding={1}
-                    radius={0}
-                    params={{
-                      type: "aksel_feedback",
-                      id: getPublishedId(x._id),
-                    }}
-                    style={{ width: "100%" }}
-                  >
-                    <Preview
-                      schemaType={schemaType}
-                      value={x}
-                      key={x._id}
-                      layout="default"
-                    />
-                  </IntentButton>
-                </Card>
+                    layout="default"
+                  />
+                </IntentButton>
               </li>
             ))}
           </ul>
@@ -107,19 +104,17 @@ export function FeedbackView(props) {
             <ul>
               {done.map((x) => (
                 <li key={x._id}>
-                  <Card flex={1}>
-                    <IntentButton
-                      intent="edit"
-                      mode="bleed"
-                      radius={2}
-                      params={{
-                        type: "aksel_feedback",
-                        id: getPublishedId(x._id),
-                      }}
-                    >
-                      <Preview schemaType={schemaType} value={x} key={x._id} />
-                    </IntentButton>
-                  </Card>
+                  <IntentButton
+                    intent="edit"
+                    mode="bleed"
+                    radius={2}
+                    params={{
+                      type: "aksel_feedback",
+                      id: getPublishedId(x._id),
+                    }}
+                  >
+                    <Preview schemaType={schemaType} value={x} key={x._id} />
+                  </IntentButton>
                 </li>
               ))}
             </ul>

@@ -1,5 +1,5 @@
-/* eslint-disable react/jsx-pascal-case */
-import { act, render } from "@testing-library/react";
+/* eslint-disable testing-library/no-unnecessary-act -- https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning */
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { DatePicker, useRangeDatepicker } from "..";
@@ -23,15 +23,15 @@ const RangeDemo = () => {
 
 describe("Writing in input sets correct values", () => {
   it("useRangeDatepicker same date", async () => {
-    const utils = render(<RangeDemo />);
+    render(<RangeDemo />);
 
-    const fraInput = utils.getByRole("textbox", { name: "Fra" });
-    const tilInput = utils.getByRole("textbox", { name: "Til" });
+    const fraInput = screen.getByRole("textbox", { name: "Fra" });
+    const tilInput = screen.getByRole("textbox", { name: "Til" });
     await act(async () => {
       await userEvent.type(fraInput, "03.08.2022");
       await userEvent.type(tilInput, "03.08.2022");
     });
-    const res = utils.getByTitle("res");
+    const res = screen.getByTitle("res");
     expect(res.innerHTML).toEqual(
       JSON.stringify({
         from: "2022-08-03T00:00:00.000Z",
@@ -40,16 +40,16 @@ describe("Writing in input sets correct values", () => {
     );
   });
 
-  it("useRangeDatepicker before after to ", async () => {
-    const utils = render(<RangeDemo />);
+  it("useRangeDatepicker before after to", async () => {
+    render(<RangeDemo />);
 
-    const fraInput = utils.getByRole("textbox", { name: "Fra" });
-    const tilInput = utils.getByRole("textbox", { name: "Til" });
+    const fraInput = screen.getByRole("textbox", { name: "Fra" });
+    const tilInput = screen.getByRole("textbox", { name: "Til" });
     await act(async () => {
       await userEvent.type(fraInput, "03.08.2022");
       await userEvent.type(tilInput, "02.08.2022");
     });
-    const res = utils.getByTitle("res");
+    const res = screen.getByTitle("res");
     expect(res.innerHTML).toEqual(
       JSON.stringify({
         from: "2022-08-03T00:00:00.000Z",

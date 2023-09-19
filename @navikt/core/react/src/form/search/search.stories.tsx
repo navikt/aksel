@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 
@@ -32,31 +31,28 @@ export default {
   },
 } as Meta;
 
-export const Default = {
-  render: (props) => {
-    const [state, setState] = useState("");
-    return (
-      <div data-theme={props.darkmode ? "dark" : "light"}>
-        <Search
-          value={props.controlled ? state : undefined}
-          onChange={props.controlled ? setState : undefined}
-          label="Søk"
-          size={props.size}
-          clearButton={props.clearButton}
-          variant={props.variant}
-          hideLabel={props.hideLabel}
-          error={props.error}
-          onSearchClick={console.log}
-        />
-      </div>
-    );
-  },
-
-  args: {
-    controlled: false,
-    darkmode: false,
-    hideLabel: true,
-  },
+export const Default = (props) => {
+  const [state, setState] = useState("");
+  return (
+    <div data-theme={props.darkmode ? "dark" : "light"}>
+      <Search
+        value={props.controlled ? state : undefined}
+        onChange={props.controlled ? setState : undefined}
+        label="Søk"
+        size={props.size}
+        clearButton={props.clearButton}
+        variant={props.variant}
+        hideLabel={props.hideLabel}
+        error={props.error}
+        onSearchClick={console.log}
+      />
+    </div>
+  );
+};
+Default.args = {
+  controlled: false,
+  darkmode: false,
+  hideLabel: true,
 };
 
 export const Small = () => (

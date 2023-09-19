@@ -13,4 +13,7 @@ getAllPages(token)
       JSON.stringify(pages.map((x) => `/${x}`))
     )
   )
-  .catch(console.error);
+  .catch((e) => {
+    console.error("Failed generating urls for e2e tests");
+    console.error(e);
+  });

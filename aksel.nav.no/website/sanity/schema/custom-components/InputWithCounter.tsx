@@ -1,5 +1,4 @@
 import { Textarea } from "@navikt/ds-react";
-import { Stack } from "@sanity/ui";
 import React, { useCallback } from "react";
 import { set, StringInputProps, TextInputProps, unset } from "sanity";
 
@@ -28,18 +27,16 @@ export function InputWithCounter(
     props.validationError && props.validation.find((x) => x.level === "error");
 
   return (
-    <Stack space={2}>
-      <Textarea
-        {...elementProps}
-        size="small"
-        label={schemaType.title}
-        description={schemaType?.description}
-        maxLength={maxLength}
-        onChange={handleChange}
-        value={value}
-        error={hasError && props.validationError}
-        rows={!props.size || props.size === "medium" ? 2 : 1}
-      />
-    </Stack>
+    <Textarea
+      {...elementProps}
+      size="small"
+      label={schemaType.title}
+      description={schemaType?.description}
+      maxLength={maxLength}
+      onChange={handleChange}
+      value={value}
+      error={hasError && props.validationError}
+      rows={!props.size || props.size === "medium" ? 2 : 1}
+    />
   );
 }

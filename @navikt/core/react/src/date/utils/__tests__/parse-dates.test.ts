@@ -1,12 +1,14 @@
-import { parseDate } from "..";
-import { isValidDate } from "..";
+/* eslint-disable jest/expect-expect */
+import { parseDate, isValidDate } from "..";
 import nb from "date-fns/locale/nb";
 import getMonth from "date-fns/getMonth";
 
 const check = (inp: string) =>
+  // eslint-disable-next-line jest/valid-expect
   expect(isValidDate(parseDate(inp, new Date(), nb, "date", false)));
 
 const checkTwoDigit = (inp: string) =>
+  // eslint-disable-next-line jest/valid-expect
   expect(isValidDate(parseDate(inp, new Date(), nb, "date", true)));
 
 const parse = (inp: string) => parseDate(inp, new Date(), nb, "date", false);

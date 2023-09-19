@@ -19,4 +19,4 @@ Disallow: /*.js$
 Disallow: /eksempler
 Disallow: /admin
 
-Sitemap: https://aksel.nav.no/api/sitemap
+Sitemap: https://aksel.nav.no/sitemap.xml
