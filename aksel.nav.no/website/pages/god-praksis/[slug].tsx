@@ -2,18 +2,19 @@ import { abbrName } from "@/components";
 import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { getAkselTema, urlFor } from "@/sanity/interface";
+import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import Head from "next/head";
+import { SEO } from "components/website-modules/seo/SEO";
 import Image from "next/legacy/image";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { getAkselTema, urlFor } from "@/sanity/interface";
-import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   tema: Omit<AkselTemaT, "ansvarlig"> & {
@@ -51,7 +52,7 @@ export const query = `{
   }
 }`;
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: await getAkselTema().then((paths) =>
       paths.map(({ path }) => ({
@@ -64,7 +65,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
@@ -99,36 +100,18 @@ const Page = ({ tema: page }: PageProps["props"]) => {
 
   return (
     <>
-      <Head>
-        <title>{`${page.title} - Aksel`}</title>
-        <meta property="og:title" content={`${page.title} - Aksel`} />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={page?.title}
+        description={page?.seo?.meta}
+        image={page?.seo?.image}
+      />
+
       <div className="bg-surface-subtle">
         <Header variant="subtle" />
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="relative min-h-[80vh] overflow-hidden focus:outline-none"
+          className="relative overflow-hidden focus:outline-none"
         >
           <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
           <div className=" pt-20 text-center">
