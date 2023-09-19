@@ -17,10 +17,10 @@ interface ShowMoreBaseProps
    */
   size?: "medium" | "small";
   /**
-   * Changes background color. Padding is added when variant != transparent.
-   * @default transparent
+   * Changes background color. Variant 'inline' is transparent and has no padding.
+   * @default inline
    */
-  variant?: "transparent" | "default" | "subtle" | "info";
+  variant?: "inline" | "default" | "subtle" | "info";
   /**
    * Custom collapsed height.
    * @default 13.5rem
@@ -56,7 +56,7 @@ export const ShowMore: OverridableComponent<ShowMoreProps, HTMLDivElement> =
         children,
         open,
         size = "medium",
-        variant = "transparent",
+        variant = "inline",
         collapsedHeight = "13.5rem",
         className,
         onClick,

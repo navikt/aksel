@@ -7,7 +7,7 @@
   flex-direction: column-reverse;
 }
 
-.navds-show-more--transparent {
+.navds-show-more--inline {
   padding: 0;
 }
 
@@ -43,7 +43,7 @@
   z-index: 1;
 }
 
-.navds-show-more--transparent .navds-show-more__button-section {
+.navds-show-more--inline .navds-show-more__button-section {
   bottom: 0;
 }
 

@@ -9,7 +9,7 @@ const meta: Meta<typeof ShowMore> = {
 };
 export default meta;
 
-const variants = ["transparent", "default", "subtle", "info"] as const;
+const variants = ["inline", "default", "subtle", "info"] as const;
 
 const content = (
   <BodyLong style={{ maxWidth: 400 }}>
@@ -87,8 +87,8 @@ export const Variants = () => (
       }}
     >
       <div style={{ border: "1px dashed #FF000050", maxWidth: "400px" }}>
-        <ShowMore aria-label="Lorem ipsum" variant="transparent">
-          <Heading size="small">transparent</Heading>
+        <ShowMore aria-label="Lorem ipsum" variant="inline">
+          <Heading size="small">inline</Heading>
           <BodyLong spacing>
             This is the default variant. It does not have padding. The dashed
             border is not part of the component, but is added to the story to
@@ -103,7 +103,7 @@ export const Variants = () => (
       </ShowMore>
     </HStack>
     {variants
-      .filter((v) => !["transparent", "default"].includes(v))
+      .filter((v) => !["inline", "default"].includes(v))
       .map((variant) => (
         <ShowMore aria-label="Lorem ipsum" key={variant} variant={variant}>
           <Heading size="small">{variant}</Heading>
