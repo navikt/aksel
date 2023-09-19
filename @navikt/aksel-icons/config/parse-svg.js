@@ -10,10 +10,9 @@ const {
 
 main();
 
-const iconFolder = path.resolve(__dirname, "../dist/svg");
-
 function main() {
   const basePath = path.resolve(__dirname, "../icons");
+  const iconFolder = path.resolve(__dirname, "../dist/svg");
 
   const svgList = fastglob.sync("*.svg", { cwd: basePath });
 
@@ -23,7 +22,7 @@ function main() {
   mkdirSync(iconFolder);
 
   svgList.map((svg) => {
-    const icon = readFileSync(`${basePath}/${svg}`);
+    const icon = readFileSync(`${basePath}/${svg}`).toString();
     writeFileSync(`${iconFolder}/${svg}`, parseIcon(icon));
   });
 }
