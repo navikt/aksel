@@ -53,6 +53,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       selected,
       defaultSelected,
       onSelect,
+      onWeekNumberClick,
       fixedWeeks = true,
       ...rest
     },
@@ -100,7 +101,10 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             Caption: dropdownCaption ? DropdownCaption : Caption,
             Head: TableHead,
           }}
-          className="navds-date"
+          className={cl(
+            "navds-date",
+            onWeekNumberClick ? "navds-date_with_week_number_click" : ""
+          )}
           classNames={{ vhidden: "navds-sr-only" }}
           disabled={(day) => {
             return (
@@ -117,6 +121,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             weekend: "rdp-day__weekend",
           }}
           showWeekNumber={showWeekNumber}
+          onWeekNumberClick={onWeekNumberClick}
           fixedWeeks={fixedWeeks}
           showOutsideDays
           {...omit(rest, ["onSelect", "children", "id"])}

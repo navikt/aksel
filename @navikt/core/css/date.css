@@ -33,6 +33,23 @@
   border-radius: var(--a-border-radius-small);
 }
 
+.navds-date_with_week_number_click .rdp-tbody .rdp-row .rdp-cell:first-child {
+  font-size: var(--a-font-size-small);
+  padding-right: calc(var(--a-spacing-1) + var(--a-spacing-05) / 2);
+  position: relative;
+}
+
+.navds-date_with_week_number_click .rdp-tbody .rdp-row .rdp-cell:first-child button::after {
+  display: block;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -1px;
+  bottom: -1px;
+  width: var(--a-spacing-05);
+  background-color: var(--a-border-default);
+}
+
 .navds-date__caption-dropdown {
   display: flex;
   justify-content: space-between;

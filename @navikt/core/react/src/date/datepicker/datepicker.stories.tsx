@@ -150,6 +150,19 @@ export const ShowWeekNumber = () => (
   <DatePicker.Standalone showWeekNumber today={new Date("2006-07-01")} />
 );
 
+export const ClickableWeekNumber = () => (
+  <DatePicker.Standalone
+    showWeekNumber
+    today={new Date("2006-07-01")}
+    onWeekNumberClick={(ukenummer) => {
+      console.log(`Uke ${ukenummer} trykket på`);
+    }}
+    labels={{
+      labelWeekNumber: (ukenummer) => `Uke ${ukenummer}`,
+    }}
+  />
+);
+
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
