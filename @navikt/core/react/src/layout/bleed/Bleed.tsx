@@ -4,7 +4,6 @@ import {
   ResponsiveProp,
   SpacingScale,
   getResponsiveProps,
-  mirrorMargin,
 } from "../utilities/css";
 
 export type BleedSpacing = "0" | "full" | "px" | SpacingScale;
@@ -81,13 +80,14 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         true,
         ["0", "full", "px"]
       ),
-      ...mirrorMargin(reflectivePadding, margin, marginInline, marginBlock),
     };
 
     return (
       <div
         {...rest}
-        className={cl("navds-bleed", className)}
+        className={cl("navds-bleed", className, {
+          ["navds-bleed--padding"]: reflectivePadding,
+        })}
         ref={ref}
         style={style}
       />

@@ -158,7 +158,7 @@ export const ReflectivePadding = {
         `}
       </style>
       <h3>
-        Note: reflectivePadding Only really works <br /> when asChild is
+        Note: reflectivePadding Only really works <br /> well when asChild is
         implemented
       </h3>
       <h3>Note2: &quot;full&quot; is not supported for marginBlock</h3>
