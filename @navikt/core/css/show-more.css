@@ -1,10 +1,17 @@
 .navds-show-more {
+  --__ac-show-more-mask: linear-gradient(rgba(0 0 0 / 1) 1.25rem, rgba(0 0 0 / 0) calc(100% - 0.5rem));
+
   position: relative;
   border-radius: var(--a-border-radius-large);
   padding: var(--a-spacing-4);
   height: fit-content; /* in case the parent is stretching */
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  min-width: 12rem;
+}
+
+.navds-show-more--has-heading {
+  --__ac-show-more-mask: linear-gradient(rgba(0 0 0 / 1), rgba(0 0 0 / 0) calc(100% - 0.5rem));
 }
 
 .navds-show-more--inline {
@@ -27,8 +34,6 @@
 }
 
 .navds-show-more--closed .navds-show-more__content {
-  --__ac-show-more-mask: linear-gradient(rgba(0 0 0 / 1) 1.25rem, rgba(0 0 0 / 0) calc(100% - 0.5rem));
-
   -webkit-mask-image: var(--__ac-show-more-mask);
   mask-image: var(--__ac-show-more-mask);
   overflow: hidden;
@@ -41,6 +46,7 @@
   bottom: var(--a-spacing-4);
   margin-top: var(--a-spacing-4);
   z-index: 1;
+  order: 1;
 }
 
 .navds-show-more--inline .navds-show-more__button-section {
@@ -53,6 +59,6 @@
 
 .navds-show-more__button-wrapper {
   display: inline-block;
-  background: var(--a-bg-default);
+  background: var(--ac-show-more-button-bg, var(--a-bg-default));
   border-radius: var(--ac-button-border-radius, var(--a-border-radius-medium)); /* same as Button */
 }
