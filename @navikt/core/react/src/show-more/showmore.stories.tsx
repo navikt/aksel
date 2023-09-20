@@ -1,7 +1,8 @@
 import { Meta, StoryFn } from "@storybook/react";
-import React, { useState } from "react";
+import React from "react";
 import { ShowMore, ShowMoreProps } from ".";
 import { BodyLong, HStack, Heading } from "..";
+import { userEvent, within } from "@storybook/testing-library";
 
 const meta: Meta<typeof ShowMore> = {
   title: "ds-react/ShowMore",
@@ -19,41 +20,45 @@ const content = (
     molestie ultricies sit amet dictum metus. Morbi consequat urna tristique
     consectetur rhoncus. Phasellus ac facilisis libero. Maecenas quis nisi
     elementum, tincidunt justo a, fermentum massa. Vestibulum tincidunt in dolor
-    eget rhoncus. Aliquam vehicula, nisl id sollicitudin congue, tortor eros
-    tempor odio, a eleifend est ex vitae libero.
+    eget rhoncus. <a href="/">Link</a>. Aliquam vehicula, nisl id sollicitudin
+    congue, tortor eros tempor odio, a eleifend est ex vitae libero.
   </BodyLong>
 );
 
-export const Default: StoryFn<{
-  controlled: boolean;
-  size: "medium" | "small";
-  variant: ShowMoreProps["variant"];
-}> = ({ controlled, ...rest }) => {
-  const [state, setState] = useState(false);
-
+export const Default: StoryFn<ShowMoreProps> = (props: ShowMoreProps) => {
   return (
-    <ShowMore
-      open={controlled ? state : undefined}
-      onClick={() => setState((x) => !x)}
-      aria-label="Lorem ipsum"
-      {...rest}
-    >
+    <ShowMore heading="Heading" {...props}>
       {content}
     </ShowMore>
   );
 };
-Default.args = {
-  controlled: false,
-};
 Default.argTypes = {
+  as: {
+    control: "radio",
+    options: ["aside", "section"],
+  },
   size: {
+    control: "radio",
     options: ["medium", "small"],
-    control: { type: "radio" },
   },
   variant: {
+    control: "radio",
     options: variants,
-    control: { type: "radio" },
   },
+  collapsedHeight: {
+    control: { type: "text" },
+  },
+  headingSize: {
+    control: "radio",
+    options: ["xlarge", "large", "medium", "small", "xsmall"],
+  },
+  headingLevel: {
+    control: "radio",
+    options: ["1", "2", "3", "4", "5", "6"],
+  },
+};
+Default.args = {
+  heading: "Heading",
 };
 
 export const Small = () => (
@@ -87,8 +92,7 @@ export const Variants = () => (
       }}
     >
       <div style={{ border: "1px dashed #FF000050", maxWidth: "400px" }}>
-        <ShowMore aria-label="Lorem ipsum" variant="inline">
-          <Heading size="small">inline</Heading>
+        <ShowMore heading="inline" variant="inline">
           <BodyLong spacing>
             This is the default variant. It does not have padding. The dashed
             border is not part of the component, but is added to the story to
@@ -97,24 +101,72 @@ export const Variants = () => (
           {content}
         </ShowMore>
       </div>
-      <ShowMore aria-label="Lorem ipsum" variant="default">
-        <Heading size="small">default</Heading>
+      <ShowMore heading="default" variant="default">
         {content}
       </ShowMore>
     </HStack>
     {variants
       .filter((v) => !["inline", "default"].includes(v))
       .map((variant) => (
-        <ShowMore aria-label="Lorem ipsum" key={variant} variant={variant}>
-          <Heading size="small">{variant}</Heading>
+        <ShowMore heading={variant} key={variant} variant={variant}>
           {content}
         </ShowMore>
       ))}
   </HStack>
 );
 
-export const Open = () => (
-  <ShowMore aria-label="Lorem ipsum" open>
-    {content}
-  </ShowMore>
+export const Open: StoryFn = () => (
+  <ShowMore aria-label="Lorem ipsum">{content}</ShowMore>
+);
+Open.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await userEvent.click(canvas.getByRole("button"));
+};
+
+export const AccessibilityTest = () => (
+  <div style={{ maxWidth: 500 }}>
+    <Heading size="large">Test av tilgjengelighet.</Heading>
+    <p>
+      Dette er en story for å teste hvordan komponenten fungerer med
+      skjermleser.
+    </p>
+    <p>Her kommer første eksempel:</p>
+    <ShowMore
+      heading="Første ShowMore"
+      headingLevel="2"
+      size="small"
+      variant="info"
+    >
+      <BodyLong>Test av ShowMore med overskrift.</BodyLong>
+      <BodyLong>
+        <a href="/">Link</a>. Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Cras nisl eros, vestibulum et dui non, malesuada egestas nisi.
+        Suspendisse neque ante, volutpat a ante eu, blandit scelerisque ex.
+        Integer sit amet sapien eget mi molestie ultricies sit amet dictum
+        metus. Morbi consequat urna tristique consectetur rhoncus.
+      </BodyLong>
+      <BodyLong>
+        Phasellus ac facilisis libero. Maecenas quis nisi elementum, tincidunt
+        justo a, fermentum massa.
+      </BodyLong>
+    </ShowMore>
+    <p>Det var det første eksempelet. Under er det andre eksempelet:</p>
+    <ShowMore
+      aria-label="Andre ShowMore"
+      size="small"
+      variant="info"
+      collapsedHeight="4rem"
+    >
+      <BodyLong>Test av ShowMore uten overskrift.</BodyLong>
+      <BodyLong>
+        <a href="/">Link</a>. Vestibulum tincidunt in dolor eget rhoncus.
+        Aliquam vehicula, nisl id sollicitudin congue, tortor eros tempor odio,
+        a eleifend est ex vitae libero.
+      </BodyLong>
+    </ShowMore>
+    <p>
+      Nå har du sett to eksempler på ShowMore. Det første hadde en overskrift,
+      mens det andre hadde label i stedet.
+    </p>
+  </div>
 );
