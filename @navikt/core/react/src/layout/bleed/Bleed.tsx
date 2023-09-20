@@ -42,7 +42,12 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
  * @see 🏷️ {@link BleedProps}
  * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
  *
- * @example // TODO
+ * @example
+ * <Box padding="4">
+ *   <Bleed margin="4">
+ *     <BodyLong>Some content</BodyLong>
+ *   </Bleed>
+ * </Box>
  */
 export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
   (
