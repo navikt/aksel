@@ -203,6 +203,16 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       left: "right",
     }[flPlacement.split("-")[0]];
 
+    const floatingProps = getFloatingProps({
+      ref: floatingRef,
+      style: {
+        position: strategy,
+        top: y ?? 0,
+        left: x ?? 0,
+      },
+    });
+    delete floatingProps.tabIndex;
+
     return (
       <div
         className={cl("navds-popover", className, {
@@ -210,14 +220,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         })}
         data-placement={flPlacement}
         aria-hidden={!open || !anchorEl}
-        {...getFloatingProps({
-          ref: floatingRef,
-          style: {
-            position: strategy,
-            top: y ?? 0,
-            left: x ?? 0,
-          },
-        })}
+        {...floatingProps}
         {...rest}
       >
         {children}
