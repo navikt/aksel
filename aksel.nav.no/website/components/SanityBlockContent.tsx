@@ -1,16 +1,16 @@
 import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
-import cl from "clsx";
 import {
   PortableText,
   PortableTextMarkComponentProps,
   PortableTextReactComponents,
 } from "@portabletext/react";
+import cl from "clsx";
 import ExpansionCard from "components/sanity-modules/ExpansionCard";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
 import { InlineCode } from "components/website-modules/InlineCode";
 import { KBD } from "components/website-modules/KBD";
 import NextLink from "next/link";
-
+import { Children } from "react";
 import {
   Accordion,
   Alert,
@@ -55,64 +55,37 @@ const serializers: Partial<PortableTextReactComponents> = {
   unknownType: () => null,
   block: {
     normal: ({ children }) => (
-      <BodyLong
-        spacing
-        className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
-      >
-        {children}
-      </BodyLong>
+      <SanitizedBlock type="normal">{children}</SanitizedBlock>
     ),
-    detail: ({ children }) => <Detail spacing>{children}</Detail>,
+    detail: ({ children }) => (
+      <SanitizedBlock type="detail">{children}</SanitizedBlock>
+    ),
     ingress: ({ children }) => (
-      <BodyLong size="large" spacing className="max-w-text">
-        {children}
-      </BodyLong>
+      <SanitizedBlock type="ingress">{children}</SanitizedBlock>
     ),
     h2: ({ children, value }) => (
-      <LevelTwoHeading id={`h${value._key}`}>{children}</LevelTwoHeading>
+      <SanitizedBlock value={value} type="h2">
+        {children}
+      </SanitizedBlock>
     ),
     h3: ({ children, value }) => (
-      <Heading
-        className="max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
-        spacing
-        level="3"
-        size="medium"
-        tabIndex={-1}
-        id={`h${value._key}`}
-      >
+      <SanitizedBlock value={value} type="h3">
         {children}
-      </Heading>
+      </SanitizedBlock>
     ),
     h4: ({ children, value }) => (
-      <Heading
-        className="max-w-text text-deepblue-800 mt-6"
-        spacing
-        level="4"
-        size="small"
-        id={`h${value._key}`}
-      >
+      <SanitizedBlock value={value} type="h4">
         {children}
-      </Heading>
+      </SanitizedBlock>
     ),
     heading4: ({ children, value }) => (
-      <Heading
-        className="max-w-text text-deepblue-800 mt-6"
-        spacing
-        level="4"
-        size="small"
-        id={`h${value._key}`}
-      >
+      <SanitizedBlock value={value} type="h4">
         {children}
-      </Heading>
+      </SanitizedBlock>
     ),
   },
   unknownBlockStyle: ({ children }) => (
-    <BodyLong
-      spacing
-      className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
-    >
-      {children}
-    </BodyLong>
+    <SanitizedBlock type="unknown">{children}</SanitizedBlock>
   ),
 
   list: {
@@ -227,3 +200,78 @@ export const SanityBlockContent = ({
     </div>
   );
 };
+
+function SanitizedBlock({
+  children: _children,
+  type,
+  value,
+}: {
+  children: React.ReactNode;
+  type: string;
+  value?: { _key?: string };
+}) {
+  const children = Children.toArray(_children).filter(Boolean);
+
+  if (children.length === 0) {
+    return null;
+  }
+
+  switch (type) {
+    case "normal":
+      return (
+        <BodyLong
+          spacing
+          className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
+        >
+          {children}
+        </BodyLong>
+      );
+    case "detail":
+      return <Detail spacing>{children}</Detail>;
+    case "ingress":
+      return (
+        <BodyLong size="large" spacing className="max-w-text">
+          {children}
+        </BodyLong>
+      );
+    case "h2":
+      return (
+        <LevelTwoHeading id={`h${value._key}`}>{children}</LevelTwoHeading>
+      );
+    case "h3":
+      return (
+        <Heading
+          className="max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
+          spacing
+          level="3"
+          size="medium"
+          tabIndex={-1}
+          id={`h${value._key}`}
+        >
+          {children}
+        </Heading>
+      );
+    case "h4":
+      return (
+        <Heading
+          className="max-w-text text-deepblue-800 mt-6"
+          spacing
+          level="4"
+          size="small"
+          id={`h${value._key}`}
+        >
+          {children}
+        </Heading>
+      );
+
+    default:
+      return (
+        <BodyLong
+          spacing
+          className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
+        >
+          {children}
+        </BodyLong>
+      );
+  }
+}

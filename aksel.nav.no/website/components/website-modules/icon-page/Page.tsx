@@ -5,9 +5,9 @@ import { HGrid, Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "clsx";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
+import { SEO } from "components/website-modules/seo/SEO";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
 import Fuse from "fuse.js";
-import Head from "next/head";
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import { IconSidebar } from "./Sidebar";
@@ -81,25 +81,12 @@ export const IconPage = ({ name }: { name: string }) => {
 
   return (
     <>
-      <Head>
-        <title>Ikoner</title>
-        <meta property="og:title" content="Aksel ikoner" />
-        <meta
-          name="description"
-          content="800+ open source-ikoner designet og utviklet for NAV"
-          key="desc"
-        />
-        <meta
-          property="og:description"
-          content="800+ open source-ikoner designet og utviklet for NAV"
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={name.length > 0 ? `${name}Icon` : "Ikoner"}
+        description="800+ open source-ikoner designet og utviklet for NAV"
+        fallbackImage="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
+        canonical="https://aksel.nav.no/ikoner"
+      />
 
       <div className="bg-surface-subtle">
         <Header variant="transparent" />
