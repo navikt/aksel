@@ -210,7 +210,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         })}
         data-placement={flPlacement}
         aria-hidden={!open || !anchorEl}
-        tabIndex={-1}
         {...getFloatingProps({
           ref: floatingRef,
           style: {
@@ -218,6 +217,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             top: y ?? 0,
             left: x ?? 0,
           },
+          tabIndex: undefined,
         })}
         {...rest}
       >
