@@ -120,7 +120,6 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
               iconPosition="right"
               size={size}
               onClick={() => setIsOpen(!isOpen)}
-              aria-expanded={isOpen}
             >
               {isOpen ? "Vis mindre" : "Vis mer"}
             </Button>
