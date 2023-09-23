@@ -42,6 +42,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     const { startDate, endDate, direction } = useTimelineContext();
     const [open, setOpen] = useState(false);
     const arrowRef = useRef<HTMLDivElement | null>(null);
+    const contentRef = useRef<HTMLDivElement | null>(null);
 
     const {
       context,
@@ -116,18 +117,24 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             aria-hidden={!open}
             ref={refs.setFloating}
             {...getFloatingProps({
-              tabIndex: -1,
-              onBlur: (e) =>
-                e.target.previousSibling !== document.activeElement &&
-                open &&
-                setOpen(false),
+              tabIndex: undefined,
+              onBlur: (e) => {
+                !(
+                  !e.relatedTarget ||
+                  contentRef.current?.contains(e.relatedTarget)
+                ) &&
+                  open &&
+                  setOpen(false);
+              },
             })}
             style={{
               ...floatingStyles,
               display: open ? undefined : "none",
             }}
           >
-            <div className="navds-timeline__popover-content">{children}</div>
+            <div ref={contentRef} className="navds-timeline__popover-content">
+              {children}
+            </div>
             <div
               ref={(node) => {
                 arrowRef.current = node;
