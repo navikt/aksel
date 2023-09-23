@@ -61,7 +61,7 @@ const ClickablePeriod = React.memo(
     } = useFloating({
       placement: "top",
       open: open,
-      onOpenChange: setOpen,
+      onOpenChange: (_open) => setOpen(_open),
       middleware: [
         offset(16),
         shift(),

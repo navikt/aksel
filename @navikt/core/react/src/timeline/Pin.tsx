@@ -53,7 +53,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     } = useFloating({
       placement: "top",
       open: open,
-      onOpenChange: setOpen,
+      onOpenChange: (_open) => setOpen(_open),
       middleware: [
         offset(16),
         shift(),
