@@ -154,7 +154,7 @@ const ClickablePeriod = React.memo(
           <FloatingFocusManager
             context={context}
             modal={false}
-            order={["floating", "content"]}
+            initialFocus={-1}
             returnFocus={false}
           >
             <div

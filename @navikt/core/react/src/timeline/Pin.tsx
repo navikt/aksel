@@ -122,7 +122,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
           <FloatingFocusManager
             context={context}
             modal={false}
-            order={["floating", "content"]}
+            initialFocus={-1}
             returnFocus={false}
           >
             <div
@@ -130,6 +130,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
               data-placement={placement}
               ref={refs.setFloating}
               {...getFloatingProps()}
+              tabIndex={undefined}
               style={floatingStyles}
             >
               {children}
