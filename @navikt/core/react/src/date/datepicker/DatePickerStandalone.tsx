@@ -4,6 +4,7 @@ import React, { forwardRef } from "react";
 import {
   DateRange,
   DayPicker,
+  DayPickerBase,
   isMatch,
   SelectMultipleEventHandler,
   SelectRangeEventHandler,
@@ -12,8 +13,14 @@ import {
 import { omit } from "../..";
 import { getLocaleFromString, labels } from "../utils";
 import { Caption, DropdownCaption } from "./caption";
-import { ConditionalModeProps, DatePickerDefaultProps } from "./DatePicker";
+import {
+  DatePickerDefaultProps,
+  MultipleMode,
+  RangeMode,
+  SingleMode,
+} from "./DatePicker";
 import { TableHead } from "./TableHead";
+import { WeekNumber } from "./WeekNumber";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<
@@ -29,10 +36,16 @@ interface DatePickerStandaloneDefaultProps
    * @default true
    */
   fixedWeeks?: boolean;
+  /**
+   * Allows selecting a week at a time. Only used with mode="multiple" or mode="range"
+   */
+  onWeekNumberClick?: DayPickerBase["onWeekNumberClick"];
 }
 
+type StandaloneConditionalModeProps = SingleMode | MultipleMode | RangeMode;
+
 export type DatePickerStandaloneProps = DatePickerStandaloneDefaultProps &
-  ConditionalModeProps;
+  StandaloneConditionalModeProps;
 
 export type DatePickerStandaloneType = React.ForwardRefExoticComponent<
   DatePickerStandaloneProps & React.RefAttributes<HTMLDivElement>
@@ -99,6 +112,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
           components={{
             Caption: dropdownCaption ? DropdownCaption : Caption,
             Head: TableHead,
+            WeekNumber,
           }}
           className="navds-date"
           classNames={{ vhidden: "navds-sr-only" }}

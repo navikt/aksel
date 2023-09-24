@@ -22,37 +22,37 @@ import DatePickerStandalone, {
 import { DayButton } from "./DayButton";
 import { TableHead } from "./TableHead";
 
-export type ConditionalModeProps =
-  | {
-      mode?: "single";
-      onSelect?: (val?: Date) => void;
-      selected?: Date;
-      defaultSelected?: Date;
-    }
-  | {
-      mode?: "multiple";
-      onSelect?: (val?: Date[]) => void;
-      selected?: Date[];
-      defaultSelected?: Date[];
-      min?: number;
-      max?: number;
-    }
-  | {
-      mode?: "range";
-      onSelect?: (val?: DateRange) => void;
-      selected?: DateRange;
-      defaultSelected?: DateRange;
-      min?: number;
-      max?: number;
-    };
+export type SingleMode = {
+  mode?: "single";
+  onSelect?: (val?: Date) => void;
+  selected?: Date;
+  defaultSelected?: Date;
+};
+
+export type MultipleMode = {
+  mode?: "multiple";
+  onSelect?: (val?: Date[]) => void;
+  selected?: Date[];
+  defaultSelected?: Date[];
+  min?: number;
+  max?: number;
+};
+
+export type RangeMode = {
+  mode?: "range";
+  onSelect?: (val?: DateRange) => void;
+  selected?: DateRange;
+  defaultSelected?: DateRange;
+  min?: number;
+  max?: number;
+};
+
+type ConditionalModeProps = SingleMode | MultipleMode | RangeMode;
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerDefaultProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
-    Pick<
-      DayPickerBase,
-      "month" | "onMonthChange" | "today" | "onDayClick" | "onWeekNumberClick"
-    > {
+    Pick<DayPickerBase, "month" | "onMonthChange" | "today" | "onDayClick"> {
   /**
    * Element datepicker anchors to. Use <DatePicker.Input /> for built-in toggle, or make your own with the open/onClose props
    */

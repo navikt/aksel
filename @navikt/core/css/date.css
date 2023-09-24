@@ -23,14 +23,28 @@
 }
 
 .navds-date .rdp-weeknumber {
-  color: var(--ac-date-week-text, var(--a-text-on-neutral));
-  background: var(--ac-date-week-bg, var(--a-surface-neutral));
   font-size: var(--a-font-size-small);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: var(--a-spacing-05) var(--a-spacing-1);
+  display: grid;
+  place-content: center;
+  width: 2rem;
+  height: 2rem;
   border-radius: var(--a-border-radius-medium);
+  margin: var(--a-spacing-2);
+  color: var(--a-text-subtle);
+}
+
+.navds-date .rdp-weeknumber.rdp-button {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--a-border-default);
+  color: var(--a-text-subtle);
+  font-size: var(--a-font-size-small);
+}
+
+.navds-date .rdp-weeknumber.rdp-button:active {
+  background-color: var(--a-surface-action-active);
+  color: var(--a-text-on-action);
+  border-color: transparent;
 }
 
 .navds-date__caption__month .navds-select__container select {
