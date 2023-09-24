@@ -370,7 +370,7 @@ export const Readonly = () => {
 
 export const StandaloneOptions = () => {
   return (
-    <HGrid columns={2} gap="8">
+    <HGrid columns={{ xs: 1, md: 2 }} gap="8">
       <DatePicker.Standalone today={new Date("Nov 23 2022")} />
       <DatePicker.Standalone
         dropdownCaption
@@ -382,6 +382,11 @@ export const StandaloneOptions = () => {
       <DatePicker.Standalone
         showWeekNumber
         onWeekNumberClick={console.log}
+        today={new Date("Nov 23 2022")}
+        disableWeekends
+      />
+      <DatePicker.Standalone
+        mode="range"
         today={new Date("Nov 23 2022")}
         disableWeekends
       />

@@ -1,5 +1,5 @@
 .navds-date {
-  padding: var(--a-spacing-5) var(--a-spacing-4);
+  padding: var(--a-spacing-4) var(--a-spacing-3);
 }
 
 .navds-date .rdp-day_range_middle.rdp-day_disabled {
@@ -30,7 +30,7 @@
   justify-content: center;
   align-items: center;
   padding: var(--a-spacing-05) var(--a-spacing-1);
-  border-radius: var(--a-border-radius-small);
+  border-radius: var(--a-border-radius-medium);
 }
 
 .navds-date__caption__month .navds-select__container select {
@@ -39,20 +39,21 @@
 
 .navds-date .rdp-button {
   all: unset;
-  width: 3rem;
-  height: 3rem;
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
   text-align: center;
   border-radius: var(--a-border-radius-medium);
 }
 
 .navds-date .rdp-day_range_start {
-  border-radius: var(--a-border-radius-xlarge) var(--a-border-radius-small) var(--a-border-radius-small)
+  border-radius: var(--a-border-radius-xlarge) var(--a-border-radius-medium) var(--a-border-radius-medium)
     var(--a-border-radius-xlarge);
 }
 
 .navds-date .rdp-day_range_end:not(.rdp-day_range_start) {
-  border-radius: var(--a-border-radius-small) var(--a-border-radius-xlarge) var(--a-border-radius-xlarge)
-    var(--a-border-radius-small);
+  border-radius: var(--a-border-radius-medium) var(--a-border-radius-xlarge) var(--a-border-radius-xlarge)
+    var(--a-border-radius-medium);
 }
 
 .navds-date .rdp-day_range_start.rdp-day_range_end {
@@ -174,7 +175,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--a-spacing-2);
+  gap: var(--a-spacing-1);
+  padding-inline: var(--a-spacing-1);
 }
 
 .navds-date__caption-button,
@@ -272,4 +274,25 @@
 /* Readonly */
 .navds-date__field--readonly .navds-date__field-button {
   cursor: default;
+}
+
+.navds-date__caption-button {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media (min-width: 480px) {
+  .navds-date {
+    padding: var(--a-spacing-5) var(--a-spacing-4);
+  }
+
+  .navds-date__caption {
+    gap: var(--a-spacing-2);
+  }
+
+  .navds-date .rdp-button,
+  .navds-date__caption-button {
+    width: 3rem;
+    height: 3rem;
+  }
 }
