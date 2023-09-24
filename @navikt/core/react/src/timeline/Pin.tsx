@@ -1,4 +1,5 @@
 import {
+  FloatingFocusManager,
   autoUpdate,
   arrow as flArrow,
   flip,
@@ -10,6 +11,7 @@ import {
   useFocus,
   useHover,
   useInteractions,
+  useRole,
 } from "@floating-ui/react";
 import { format } from "date-fns";
 import React, { forwardRef, useMemo, useRef, useState } from "react";
@@ -42,7 +44,6 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     const { startDate, endDate, direction } = useTimelineContext();
     const [open, setOpen] = useState(false);
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const contentRef = useRef<HTMLDivElement | null>(null);
 
     const {
       context,
@@ -52,25 +53,32 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
       floatingStyles,
     } = useFloating({
       placement: "top",
-      open: open,
+      open,
       onOpenChange: (_open) => setOpen(_open),
+      whileElementsMounted: autoUpdate,
       middleware: [
         offset(16),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
       ],
-      whileElementsMounted: autoUpdate,
     });
 
+    const hover = useHover(context, {
+      handleClose: safePolygon(),
+      restMs: 25,
+      delay: { open: 1000 },
+      move: false,
+    });
+    const focus = useFocus(context);
+    const dismiss = useDismiss(context);
+    const role = useRole(context, { role: "dialog" });
+
     const { getFloatingProps, getReferenceProps } = useInteractions([
-      useHover(context, {
-        handleClose: safePolygon(),
-        restMs: 25,
-        delay: { open: 1000 },
-      }),
-      useFocus(context),
-      useDismiss(context),
+      hover,
+      focus,
+      dismiss,
+      role,
     ]);
 
     const mergedRef = useMemo(
@@ -110,43 +118,31 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             })}
           />
         </div>
-        {children && (
-          <div
-            className="navds-timeline__popover"
-            data-placement={placement}
-            aria-hidden={!open}
-            ref={refs.setFloating}
-            {...getFloatingProps({
-              tabIndex: undefined,
-              onBlur: (e) => {
-                !(
-                  !e.relatedTarget ||
-                  contentRef.current?.contains(e.relatedTarget)
-                ) &&
-                  open &&
-                  setOpen(false);
-              },
-            })}
-            style={{
-              ...floatingStyles,
-              display: open ? undefined : "none",
-            }}
+        {children && open && (
+          <FloatingFocusManager
+            context={context}
+            modal={false}
+            order={["floating", "content"]}
           >
-            <div ref={contentRef} className="navds-timeline__popover-content">
-              {children}
-            </div>
             <div
-              ref={(node) => {
-                arrowRef.current = node;
-              }}
-              style={{
-                ...(arrowX != null ? { left: arrowX } : {}),
-                ...(arrowY != null ? { top: arrowY } : {}),
-                ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
-              }}
-              className="navds-timeline__popover-arrow"
-            />
-          </div>
+              className="navds-timeline__popover"
+              data-placement={placement}
+              ref={refs.setFloating}
+              {...getFloatingProps()}
+              style={floatingStyles}
+            >
+              {children}
+              <div
+                ref={arrowRef}
+                style={{
+                  ...(arrowX != null ? { left: arrowX } : {}),
+                  ...(arrowY != null ? { top: arrowY } : {}),
+                  ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
+                }}
+                className="navds-timeline__popover-arrow"
+              />
+            </div>
+          </FloatingFocusManager>
         )}
       </>
     );

@@ -338,14 +338,11 @@
   border: 1px solid;
   border-color: var(--ac-popover-border, var(--a-border-default));
   border-radius: var(--a-border-radius-medium);
+  padding: var(--a-spacing-3);
 }
 
 .navds-timeline__popover:focus {
   outline: none;
-}
-
-.navds-timeline__popover-content {
-  padding: var(--a-spacing-3);
 }
 
 .navds-timeline__popover-arrow {
