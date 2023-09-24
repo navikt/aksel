@@ -5,11 +5,12 @@ export type AccordionContextProps = {
   headingSize?: "large" | "medium" | "small" | "xsmall";
   size?: "large" | "medium" | "small";
   openItems?: number[];
+  mounted: boolean;
 };
 
 export const AccordionContext = createContext<AccordionContextProps | null>({
-  variant: "default",
   headingSize: "small",
   size: "medium",
   openItems: [],
+  mounted: false,
 });
