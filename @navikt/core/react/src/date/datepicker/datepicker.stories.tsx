@@ -2,7 +2,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React, { useId, useState } from "react";
 import { useDatepicker, useRangeDatepicker } from "..";
-import { Button } from "../..";
+import { Button, HGrid } from "../..";
 import DatePicker, { DatePickerProps } from "./DatePicker";
 
 const disabledDays = [
@@ -365,5 +365,25 @@ export const Readonly = () => {
         />
       </DatePicker>
     </div>
+  );
+};
+
+export const StandaloneOptions = () => {
+  return (
+    <HGrid columns={2} gap="8">
+      <DatePicker.Standalone today={new Date("Aug 23 2022")} />
+      <DatePicker.Standalone
+        dropdownCaption
+        fromDate={new Date("Aug 23 2019")}
+        toDate={new Date("Feb 23 2024")}
+        today={new Date("Aug 23 2022")}
+      />
+      <DatePicker.Standalone showWeekNumber today={new Date("Aug 23 2022")} />
+      <DatePicker.Standalone
+        showWeekNumber
+        onWeekNumberClick={console.log}
+        today={new Date("Aug 23 2022")}
+      />
+    </HGrid>
   );
 };
