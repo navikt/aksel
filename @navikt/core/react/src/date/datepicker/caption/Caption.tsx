@@ -16,6 +16,15 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
 
   return (
     <div className="navds-date__caption">
+      <Button
+        aria-label={previousLabel}
+        variant="tertiary"
+        disabled={!previousMonth}
+        onClick={() => previousMonth && goToMonth(previousMonth)}
+        icon={<ArrowLeftIcon title="velg forrige måned" />}
+        className="navds-date__caption-button"
+        type="button"
+      />
       <Label
         as="span"
         aria-live="polite"
@@ -25,27 +34,15 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
       >
         {formatCaption(displayMonth, { locale })}
       </Label>
-
-      <div className="navds-date__caption__month-wrapper">
-        <Button
-          aria-label={previousLabel}
-          variant="tertiary"
-          disabled={!previousMonth}
-          onClick={() => previousMonth && goToMonth(previousMonth)}
-          icon={<ArrowLeftIcon title="velg forrige måned" />}
-          className="navds-date__caption-button"
-          type="button"
-        />
-        <Button
-          aria-label={nextLabel}
-          icon={<ArrowRightIcon title="velg neste måned" />}
-          onClick={() => nextMonth && goToMonth(nextMonth)}
-          disabled={!nextMonth}
-          variant="tertiary"
-          className="navds-date__caption-button"
-          type="button"
-        />
-      </div>
+      <Button
+        aria-label={nextLabel}
+        icon={<ArrowRightIcon title="velg neste måned" />}
+        onClick={() => nextMonth && goToMonth(nextMonth)}
+        disabled={!nextMonth}
+        variant="tertiary"
+        className="navds-date__caption-button"
+        type="button"
+      />
     </div>
   );
 };

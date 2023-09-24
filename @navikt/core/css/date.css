@@ -33,20 +33,6 @@
   border-radius: var(--a-border-radius-small);
 }
 
-.navds-date__caption-dropdown {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--a-spacing-2);
-  align-items: center;
-}
-
-.navds-date__caption__month-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: var(--a-spacing-2);
-  align-items: center;
-}
-
 .navds-date__caption__month .navds-select__container select {
   text-transform: capitalize;
 }

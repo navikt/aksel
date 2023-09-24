@@ -44,7 +44,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const MonthDropdownLabel = labelMonthDropdown(locale);
 
   return (
-    <div className="navds-date__caption-dropdown">
+    <div className="navds-date__caption">
       <span
         aria-live="polite"
         aria-atomic="true"
@@ -63,34 +63,32 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         type="button"
       />
 
-      <div className="navds-date__caption__month-wrapper">
-        <Select
-          label={MonthDropdownLabel}
-          hideLabel
-          className="navds-date__caption__month"
-          value={displayMonth.getMonth()}
-          onChange={handleMonthChange}
-        >
-          {months.map((m) => (
-            <option key={m.getMonth()} value={m.getMonth()}>
-              {formatMonthCaption(m, { locale })}
-            </option>
-          ))}
-        </Select>
-        <Select
-          label={yearDropdownLabel}
-          hideLabel
-          value={displayMonth.getFullYear()}
-          onChange={handleYearChange}
-          className="navds-date__caption__year"
-        >
-          {years.map((year) => (
-            <option key={year.getFullYear()} value={year.getFullYear()}>
-              {formatYearCaption(year, { locale })}
-            </option>
-          ))}
-        </Select>
-      </div>
+      <Select
+        label={MonthDropdownLabel}
+        hideLabel
+        className="navds-date__caption__month"
+        value={displayMonth.getMonth()}
+        onChange={handleMonthChange}
+      >
+        {months.map((m) => (
+          <option key={m.getMonth()} value={m.getMonth()}>
+            {formatMonthCaption(m, { locale })}
+          </option>
+        ))}
+      </Select>
+      <Select
+        label={yearDropdownLabel}
+        hideLabel
+        value={displayMonth.getFullYear()}
+        onChange={handleYearChange}
+        className="navds-date__caption__year"
+      >
+        {years.map((year) => (
+          <option key={year.getFullYear()} value={year.getFullYear()}>
+            {formatYearCaption(year, { locale })}
+          </option>
+        ))}
+      </Select>
 
       <Button
         aria-label={nextLabel}
