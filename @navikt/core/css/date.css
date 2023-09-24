@@ -1,5 +1,5 @@
 .navds-date {
-  padding: var(--a-spacing-3);
+  padding: var(--a-spacing-5) var(--a-spacing-4);
 }
 
 .navds-date .rdp-day_range_middle.rdp-day_disabled {
@@ -39,8 +39,8 @@
 
 .navds-date .rdp-button {
   all: unset;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
   text-align: center;
   border-radius: var(--a-border-radius-medium);
 }
