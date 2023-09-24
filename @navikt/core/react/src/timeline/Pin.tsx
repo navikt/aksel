@@ -123,6 +123,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             context={context}
             modal={false}
             order={["floating", "content"]}
+            returnFocus={false}
           >
             <div
               className="navds-timeline__popover"
