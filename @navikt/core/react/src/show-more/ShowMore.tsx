@@ -1,16 +1,18 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useMemo, useRef, useState } from "react";
 import cl from "clsx";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
-import { Button, Heading, HeadingProps, useId } from "..";
+import { Button, Heading, HeadingProps, mergeRefs, useId } from "..";
 
-interface ShowMoreBaseProps
+export interface ShowMoreProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "onClick"> {
   /**
    * Override what element to render the wrapper as.
    * @default aside
    */
   as?: "aside" | "section";
-  /** Content */
+  /**
+   * Content. Is [inert](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inert) when collapsed.
+   */
   children: React.ReactNode;
   /**
    * Changes button size
@@ -24,33 +26,30 @@ interface ShowMoreBaseProps
   variant?: "inline" | "default" | "subtle" | "info";
   /**
    * Custom height of content when collapsed.
-   * @default 11.5rem if heading is used, otherwise 13.5rem
+   * @default 10rem
    */
   collapsedHeight?: `${number}${string}` | number;
-  /** Label for the content */
-  "aria-label"?: string;
-  /** ID of an element that labels the content */
-  "aria-labelledby"?: string;
   /**
-   * Heading text. Will always be available to screen readers, and will be
-   * used as accessible label unless `aria-label` or `aria-labelledby` is used.
+   * Heading text. Always available to screen readers.
+   * Used as accessible label unless you define `aria-label` or `aria-labelledby`.
    */
-  heading?: string;
+  heading: string;
   /**
    * Heading size
    * @default medium
    */
   headingSize?: HeadingProps["size"];
-  /** Heading level */
+  /**
+   * Heading level
+   * @default "1"
+   */
   headingLevel?: HeadingProps["level"];
+  /**
+   * Scroll back up to the component after collapsing.
+   * @default true
+   */
+  scrollBackOnCollapse?: boolean;
 }
-
-export type ShowMoreProps = ShowMoreBaseProps &
-  (
-    | { "aria-label": string }
-    | { "aria-labelledby": string }
-    | { heading: string }
-  );
 
 /**
  * A component for partially hiding less important content.
@@ -59,7 +58,7 @@ export type ShowMoreProps = ShowMoreBaseProps &
  * @see 🏷️ {@link ShowMoreProps}
  *
  * @example
- * <ShowMore aria-label="Facts about toads">
+ * <ShowMore heading="Facts about toads">
  *   Toads have dry, leathery skin, short legs, and large bumps covering the parotoid glands.
  * </ShowMore>
  */
@@ -70,16 +69,19 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
       children,
       size = "medium",
       variant = "inline",
-      collapsedHeight,
-      className,
-      "aria-labelledby": ariaLabelledby,
+      collapsedHeight = "10rem",
       heading,
       headingSize = "medium",
-      headingLevel,
+      headingLevel = "1",
+      scrollBackOnCollapse = true,
+      className,
+      "aria-labelledby": ariaLabelledby,
       ...rest
     },
     ref
   ) => {
+    const localRef = useRef<HTMLElement>(null);
+    const mergedRef = useMemo(() => mergeRefs([localRef, ref]), [ref]);
     const [isOpen, setIsOpen] = useState(false);
     const ariaLabelId = useId();
 
@@ -87,28 +89,21 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
 
     return (
       <Component
-        ref={ref}
+        ref={mergedRef}
         className={cl(
           "navds-show-more",
           `navds-show-more--${variant}`,
           className,
-          {
-            "navds-show-more--closed": !isOpen,
-            "navds-show-more--has-heading": heading,
-          }
+          { "navds-show-more--closed": !isOpen }
         )}
         aria-labelledby={
-          !ariaLabelledby && !rest["aria-label"] && heading
-            ? ariaLabelId
-            : ariaLabelledby
+          !ariaLabelledby && !rest["aria-label"] ? ariaLabelId : ariaLabelledby
         }
         {...rest}
       >
-        {heading && (
-          <Heading size={headingSize} level={headingLevel} id={ariaLabelId}>
-            {heading}
-          </Heading>
-        )}
+        <Heading size={headingSize} level={headingLevel} id={ariaLabelId}>
+          {heading}
+        </Heading>
 
         <div className="navds-show-more__button-section">
           <div className="navds-show-more__button-wrapper">
@@ -119,7 +114,12 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
               icon={<ChevronIcon aria-hidden />}
               iconPosition="right"
               size={size}
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => {
+                setIsOpen(!isOpen);
+                if (scrollBackOnCollapse && isOpen) {
+                  localRef.current?.scrollIntoView();
+                }
+              }}
             >
               {isOpen ? "Vis mindre" : "Vis mer"}
             </Button>
@@ -128,11 +128,7 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
 
         <div
           className="navds-show-more__content"
-          style={
-            isOpen
-              ? {}
-              : { height: collapsedHeight ?? (heading ? "11.5rem" : "13.5rem") }
-          }
+          style={isOpen ? {} : { height: collapsedHeight }}
           // @ts-expect-error https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
           inert={isOpen ? undefined : ""}
         >

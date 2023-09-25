@@ -1,11 +1,10 @@
-import { BodyLong, Heading, ShowMore } from "@navikt/ds-react";
+import { BodyLong, ShowMore } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
     <div style={{ minHeight: "316px" }}>
-      <ShowMore aria-label="Facts" collapsedHeight="8rem">
-        <Heading size="small">Facts</Heading>
+      <ShowMore heading="Facts" collapsedHeight="8rem">
         <BodyLong>
           Did you hear that? They&apos;ve shut down the main reactor. We&apos;ll
           be destroyed for sure. This is madness! We&apos;re doomed!
