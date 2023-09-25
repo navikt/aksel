@@ -8,6 +8,7 @@ import { Button, Select } from "../../..";
 import { getMonths, getYears } from "../../utils/get-dates";
 import { labelMonthDropdown, labelYearDropdown } from "../../utils/labels";
 import { max, min } from "date-fns";
+import WeekRow from "./WeekRow";
 
 export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
@@ -44,64 +45,67 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const MonthDropdownLabel = labelMonthDropdown(locale);
 
   return (
-    <div className="navds-date__caption">
-      <span
-        aria-live="polite"
-        aria-atomic="true"
-        id={id}
-        className="navds-sr-only"
-      >
-        {formatCaption(displayMonth, { locale })}
-      </span>
-      <Button
-        aria-label={previousLabel}
-        variant="tertiary"
-        disabled={!previousMonth}
-        onClick={() => previousMonth && goToMonth(previousMonth)}
-        icon={<ArrowLeftIcon title="velg forrige måned" />}
-        className="navds-date__caption-button"
-        type="button"
-      />
-
+    <>
       <div className="navds-date__caption">
-        <Select
-          label={MonthDropdownLabel}
-          hideLabel
-          className="navds-date__caption__month"
-          value={displayMonth.getMonth()}
-          onChange={handleMonthChange}
+        <span
+          aria-live="polite"
+          aria-atomic="true"
+          id={id}
+          className="navds-sr-only"
         >
-          {months.map((m) => (
-            <option key={m.getMonth()} value={m.getMonth()}>
-              {formatMonthCaption(m, { locale })}
-            </option>
-          ))}
-        </Select>
-        <Select
-          label={yearDropdownLabel}
-          hideLabel
-          value={displayMonth.getFullYear()}
-          onChange={handleYearChange}
-          className="navds-date__caption__year"
-        >
-          {years.map((year) => (
-            <option key={year.getFullYear()} value={year.getFullYear()}>
-              {formatYearCaption(year, { locale })}
-            </option>
-          ))}
-        </Select>
-      </div>
+          {formatCaption(displayMonth, { locale })}
+        </span>
+        <Button
+          aria-label={previousLabel}
+          variant="tertiary"
+          disabled={!previousMonth}
+          onClick={() => previousMonth && goToMonth(previousMonth)}
+          icon={<ArrowLeftIcon title="velg forrige måned" />}
+          className="navds-date__caption-button"
+          type="button"
+        />
 
-      <Button
-        aria-label={nextLabel}
-        icon={<ArrowRightIcon title="velg neste måned" />}
-        onClick={() => nextMonth && goToMonth(nextMonth)}
-        disabled={!nextMonth}
-        variant="tertiary"
-        className="navds-date__caption-button"
-        type="button"
-      />
-    </div>
+        <div className="navds-date__caption">
+          <Select
+            label={MonthDropdownLabel}
+            hideLabel
+            className="navds-date__caption__month"
+            value={displayMonth.getMonth()}
+            onChange={handleMonthChange}
+          >
+            {months.map((m) => (
+              <option key={m.getMonth()} value={m.getMonth()}>
+                {formatMonthCaption(m, { locale })}
+              </option>
+            ))}
+          </Select>
+          <Select
+            label={yearDropdownLabel}
+            hideLabel
+            value={displayMonth.getFullYear()}
+            onChange={handleYearChange}
+            className="navds-date__caption__year"
+          >
+            {years.map((year) => (
+              <option key={year.getFullYear()} value={year.getFullYear()}>
+                {formatYearCaption(year, { locale })}
+              </option>
+            ))}
+          </Select>
+        </div>
+
+        <Button
+          aria-label={nextLabel}
+          icon={<ArrowRightIcon title="velg neste måned" />}
+          onClick={() => nextMonth && goToMonth(nextMonth)}
+          disabled={!nextMonth}
+          variant="tertiary"
+          className="navds-date__caption-button"
+          type="button"
+        />
+      </div>
+      <WeekRow displayMonth={displayMonth} />
+    </>
   );
 };
 

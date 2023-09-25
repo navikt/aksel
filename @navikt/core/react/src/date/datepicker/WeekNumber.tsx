@@ -8,6 +8,7 @@ export interface WeekNumberProps {
   number: number;
   /** The dates in the week. */
   dates: Date[];
+  headerVersion?: boolean;
 }
 
 /**
@@ -48,6 +49,20 @@ export function WeekNumber(props: WeekNumberProps): JSX.Element {
   const handleClick: React.MouseEventHandler = function (e) {
     onWeekNumberClick(weekNumber, dates, e);
   };
+
+  if (props?.headerVersion) {
+    return (
+      <Button
+        name="week-number"
+        aria-label={label}
+        className={classNames.weeknumber}
+        style={styles.weeknumber}
+        onClick={handleClick}
+      >
+        {weekNumber}
+      </Button>
+    );
+  }
 
   return (
     <Button

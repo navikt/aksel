@@ -5,14 +5,13 @@ import {
   DateRange,
   DayPicker,
   DayPickerBase,
-  isMatch,
   SelectMultipleEventHandler,
   SelectRangeEventHandler,
   SelectSingleEventHandler,
+  isMatch,
 } from "react-day-picker";
 import { omit } from "../..";
 import { getLocaleFromString, labels } from "../utils";
-import { Caption, DropdownCaption } from "./caption";
 import {
   DatePickerDefaultProps,
   MultipleMode,
@@ -21,6 +20,9 @@ import {
 } from "./DatePicker";
 import { TableHead } from "./TableHead";
 import { WeekNumber } from "./WeekNumber";
+import { Caption, DropdownCaption } from "./caption";
+import { Row } from "./Row";
+import { HeadRow } from "./HeadRow";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<
@@ -112,7 +114,9 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
           components={{
             Caption: dropdownCaption ? DropdownCaption : Caption,
             Head: TableHead,
+            HeadRow,
             WeekNumber,
+            Row,
           }}
           className="navds-date"
           classNames={{ vhidden: "navds-sr-only" }}

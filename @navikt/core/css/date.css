@@ -24,8 +24,9 @@
 
 .navds-date .rdp-weeknumber {
   font-size: var(--a-font-size-small);
-  display: grid;
-  place-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 2rem;
   height: 2rem;
   border-radius: var(--a-border-radius-medium);
@@ -36,7 +37,7 @@
 .navds-date .rdp-weeknumber.rdp-button {
   width: 2rem;
   height: 2rem;
-  border: 1px solid var(--a-border-default);
+  box-shadow: 0 0 0 1px var(--a-border-default);
   color: var(--a-text-subtle);
   font-size: var(--a-font-size-small);
 }
@@ -44,7 +45,7 @@
 .navds-date .rdp-weeknumber.rdp-button:active {
   background-color: var(--a-surface-action-active);
   color: var(--a-text-on-action);
-  border-color: transparent;
+  box-shadow: none;
 }
 
 .navds-date__caption__month .navds-select__container select {
@@ -293,6 +294,24 @@
 .navds-date__caption-button {
   width: 2rem;
   height: 2rem;
+}
+
+.navds-date__week {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.navds-date__week-button {
+  width: calc(3rem + 2px);
+  height: calc(3rem + 2px);
+  display: grid;
+  place-content: center;
+}
+
+.navds-date__week-text {
+  width: 3.4rem;
+  text-align: center;
 }
 
 @media (min-width: 480px) {
