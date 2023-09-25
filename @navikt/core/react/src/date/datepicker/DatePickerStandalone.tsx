@@ -18,11 +18,12 @@ import {
   RangeMode,
   SingleMode,
 } from "./DatePicker";
-import { TableHead } from "./TableHead";
-import { WeekNumber } from "./WeekNumber";
-import { Caption, DropdownCaption } from "./caption";
-import { Row } from "./Row";
-import { HeadRow } from "./HeadRow";
+import TableHead from "./parts/TableHead";
+import WeekNumber from "./parts/WeekNumber";
+import Caption from "./parts/Caption";
+import DropdownCaption from "./parts/DropdownCaption";
+import Row from "./parts/Row";
+import { HeadRow } from "./parts/HeadRow";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<

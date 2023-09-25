@@ -1,7 +1,7 @@
 import React from "react";
 import { addDays, Locale, startOfWeek } from "date-fns";
 import { useDayPicker } from "react-day-picker";
-import { Hide } from "../../layout/responsive";
+import { Hide } from "../../../layout/responsive";
 
 /**
  * Render the HeadRow component - i.e. the table head row with the weekday names.

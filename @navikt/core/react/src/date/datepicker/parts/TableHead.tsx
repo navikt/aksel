@@ -2,7 +2,7 @@ import React from "react";
 import { HeadRow, useDayPicker } from "react-day-picker";
 
 /** Render the table head. */
-export function TableHead(): JSX.Element {
+function TableHead(): JSX.Element {
   const { classNames, styles, components } = useDayPicker();
   const HeadRowComponent = components?.HeadRow ?? HeadRow;
   return (
@@ -11,3 +11,5 @@ export function TableHead(): JSX.Element {
     </thead>
   );
 }
+
+export default TableHead;

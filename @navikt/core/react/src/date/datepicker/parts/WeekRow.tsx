@@ -12,7 +12,7 @@ import {
 } from "date-fns";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
-import { WeekNumber } from "../WeekNumber";
+import WeekNumber from "./WeekNumber";
 import { Detail } from "../../../typography";
 import { Show } from "../../../layout/responsive";
 import { labelWeek } from "../../utils/labels";

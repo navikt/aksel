@@ -1,8 +1,8 @@
 import React from "react";
 import { getUnixTime } from "date-fns";
 import { useDayPicker, Day } from "react-day-picker";
-import { WeekNumber } from "./WeekNumber";
-import { Hide } from "../../layout/responsive";
+import WeekNumber from "./WeekNumber";
+import { Hide } from "../../../layout/responsive";
 
 /**
  * The props for the {@link Row} component.
@@ -17,7 +17,7 @@ export interface RowProps {
 }
 
 /** Render a row in the calendar, with the days and the week number. */
-export function Row(props: RowProps): JSX.Element {
+function Row(props: RowProps): JSX.Element {
   const { styles, classNames, showWeekNumber } = useDayPicker();
 
   return (
@@ -42,3 +42,5 @@ export function Row(props: RowProps): JSX.Element {
     </tr>
   );
 }
+
+export default Row;

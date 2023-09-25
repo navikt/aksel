@@ -15,12 +15,13 @@ import { omit, Popover, useId } from "../..";
 import { DateInputProps, DatePickerInput } from "../DateInput";
 import { DateContext } from "../context";
 import { getLocaleFromString, labels } from "../utils";
-import { Caption, DropdownCaption } from "./caption";
+import Caption from "./parts/Caption";
+import DropdownCaption from "./parts/DropdownCaption";
 import DatePickerStandalone, {
   DatePickerStandaloneType,
 } from "./DatePickerStandalone";
-import { DayButton } from "./DayButton";
-import { TableHead } from "./TableHead";
+import DayButton from "./parts/DayButton";
+import TableHead from "./parts/TableHead";
 
 export type SingleMode = {
   mode?: "single";

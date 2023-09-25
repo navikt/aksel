@@ -1,7 +1,7 @@
 /* https://github.com/gpbl/react-day-picker/blob/7f78cd5/src/components/WeekNumber/WeekNumber.tsx#L21 */
 import React from "react";
 import { Button, useDayPicker } from "react-day-picker";
-import { labelWeekNumber, labelWeekNumberButton } from "../utils/labels";
+import { labelWeekNumber, labelWeekNumberButton } from "../../utils/labels";
 
 export interface WeekNumberProps {
   /** The number of the week. */
@@ -15,7 +15,7 @@ export interface WeekNumberProps {
  * Render the week number element. If `onWeekNumberClick` is passed to DayPicker, it
  * renders a button, otherwise a span element.
  */
-export function WeekNumber(props: WeekNumberProps): JSX.Element {
+function WeekNumber(props: WeekNumberProps): JSX.Element {
   const { number: weekNumber, dates } = props;
   const {
     onWeekNumberClick,
@@ -76,3 +76,5 @@ export function WeekNumber(props: WeekNumberProps): JSX.Element {
     </Button>
   );
 }
+
+export default WeekNumber;
