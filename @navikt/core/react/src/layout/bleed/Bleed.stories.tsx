@@ -161,7 +161,6 @@ export const ReflectivePadding = {
         Note: reflectivePadding Only really works <br /> well when asChild is
         implemented
       </h3>
-      <h3>Note2: &quot;full&quot; is not supported for marginBlock</h3>
       <HStack gap="3">
         <VStack gap="2">
           <p>CSS string</p>

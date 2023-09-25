@@ -6,11 +6,10 @@ import {
   getResponsiveProps,
 } from "../utilities/css";
 
-export type BleedSpacing = "0" | "full" | "px" | SpacingScale;
+export type BleedSpacingInline = "0" | "full" | "px" | SpacingScale;
+export type BleedSpacingBlock = "0" | "px" | SpacingScale;
 
 export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** **Negative** margin around children. */
-  margin?: ResponsiveProp<BleedSpacing>;
   /** **Negative** horizontal margin around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * marginInline='4'
@@ -18,7 +17,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
    */
   marginInline?: ResponsiveProp<
-    BleedSpacing | `${BleedSpacing} ${BleedSpacing}`
+    BleedSpacingInline | `${BleedSpacingInline} ${BleedSpacingInline}`
   >;
   /** **Negative** vertical margin around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
@@ -27,7 +26,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   marginBlock?: ResponsiveProp<
-    BleedSpacing | `${BleedSpacing} ${BleedSpacing}`
+    BleedSpacingBlock | `${BleedSpacingBlock} ${BleedSpacingBlock}`
   >;
   /**
    * When true, set the padding to mirror the margin. This maintains the apparent width of the element prior to adding Bleed.
@@ -53,7 +52,6 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
   (
     {
       className,
-      margin,
       marginInline,
       marginBlock,
       reflectivePadding,
@@ -62,13 +60,8 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     },
     ref
   ) => {
-    const style: React.CSSProperties = {
+    let style: React.CSSProperties = {
       ..._style,
-      ...getResponsiveProps("bleed", "margin", "spacing", margin, true, [
-        "0",
-        "full",
-        "px",
-      ]),
       ...getResponsiveProps(
         "bleed",
         "margin-inline",
@@ -77,15 +70,38 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         true,
         ["0", "full", "px"]
       ),
+
       ...getResponsiveProps(
         "bleed",
         "margin-block",
         "spacing",
         marginBlock,
         true,
-        ["0", "full", "px"]
+        ["0", "px"]
       ),
     };
+
+    if (reflectivePadding) {
+      style = {
+        ...style,
+        ...getResponsiveProps(
+          "bleed",
+          "padding-inline",
+          "spacing",
+          marginInline,
+          false,
+          ["0", "full", "px"]
+        ),
+        ...getResponsiveProps(
+          "bleed",
+          "padding-block",
+          "spacing",
+          marginBlock,
+          false,
+          ["0", "px"]
+        ),
+      };
+    }
 
     return (
       <div

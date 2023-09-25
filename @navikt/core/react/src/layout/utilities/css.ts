@@ -79,10 +79,6 @@ const translateTokenStringToCSS = (
         const width = 100 / arr.length;
         return `calc((100vw - ${width}%)/-2)`;
       }
-      if (componentProp === "margin-block" && x === "full") {
-        const height = 100 / arr.length;
-        return `calc((100vh - ${height}%)/2)`;
-      }
 
       let output = `var(--a-${tokenSubgroup}-${x})`;
       if (tokenExceptions.includes(x)) {
@@ -121,22 +117,6 @@ export function getResponsiveProps<T extends string>(
         tokenExceptions,
         invert
       );
-    // re-calculate purely to add the inverse of resulting margin as padding
-    // but only do this in the case where reflectivePadding is true
-    if (["margin", "margin-inline", "margin-block"].includes(componentProp)) {
-      styleProps[
-        `--__ac-${componentName}-${componentProp.replace(
-          "margin",
-          "padding"
-        )}-xs`
-      ] = translateTokenStringToCSS(
-        componentProp,
-        responsiveProp,
-        tokenSubgroup,
-        tokenExceptions,
-        !invert
-      );
-    }
     return styleProps;
   }
 
@@ -150,22 +130,6 @@ export function getResponsiveProps<T extends string>(
         tokenExceptions,
         invert
       );
-    // re-calculate purely to add the inverse of resulting margin as padding
-    // but only do this in the case where reflectivePadding is true
-    if (["margin", "margin-inline", "margin-block"].includes(componentProp)) {
-      styleProps[
-        `--__ac-${componentName}-${componentProp.replace(
-          "margin",
-          "padding"
-        )}-${breakpointAlias}`
-      ] = translateTokenStringToCSS(
-        componentProp,
-        aliasOrScale,
-        tokenSubgroup,
-        tokenExceptions,
-        !invert
-      );
-    }
     return Object.entries(styleProps);
   });
   return styleProps;
