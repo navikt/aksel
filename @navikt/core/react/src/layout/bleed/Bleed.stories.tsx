@@ -150,7 +150,7 @@ export const Px = {
       <Box background="surface-alt-2-subtle" padding="10">
         <Bleed marginInline="px 0">
           <Box background="surface-success-subtle">
-            <BodyLong>marginInline=&quot;20 0&quot;</BodyLong>
+            <BodyLong>marginInline=&quot;px 0&quot;</BodyLong>
           </Box>
         </Bleed>
       </Box>
