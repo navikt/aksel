@@ -38,6 +38,9 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   reflectivePadding?: boolean;
 
+  /**
+   * When true, the Bleed will render as its child. This merges classes, styles and event handlers.
+   */
   asChild?: boolean;
 }
 
