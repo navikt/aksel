@@ -5,9 +5,12 @@ import { Detail } from "../../../typography";
 import { getMonthWeeks } from "../../utils/get-month-weeks";
 import { labelWeek } from "../../utils/labels";
 import WeekNumber from "./WeekNumber";
+import { useId } from "../../../util";
 
 const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
   const { locale, fixedWeeks, onWeekNumberClick } = useDayPicker();
+
+  const labelId = useId();
 
   if (!onWeekNumberClick) {
     return null;
@@ -20,7 +23,7 @@ const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
 
   return (
     <Show below="sm" asChild>
-      <table className="rdp-table">
+      <table className="rdp-table" role="grid">
         <tbody className="rdp-tbody">
           <tr className="rdp-row navds-date__week-row">
             <Detail
@@ -28,7 +31,7 @@ const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
               weight="semibold"
               className="rdp-cell navds-date__week-cell"
             >
-              <span className="navds-date__week-wrapper">
+              <span className="navds-date__week-wrapper" id={labelId}>
                 {labelWeek(locale?.code)}
               </span>
             </Detail>

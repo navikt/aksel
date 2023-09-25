@@ -296,23 +296,10 @@
   height: 2rem;
 }
 
-.navds-date__week {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.navds-date__week-button {
-  width: calc(3rem + 2px);
-  height: calc(3rem + 2px);
-  display: grid;
-  place-content: center;
-}
-
 .navds-date__week-row {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--a-spacing-05);
 }
 
 .navds-date__week-wrapper {

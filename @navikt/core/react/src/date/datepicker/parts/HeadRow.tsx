@@ -21,7 +21,7 @@ export function HeadRow(): JSX.Element {
   return (
     <tr style={styles.head_row} className={classNames.head_row}>
       {showWeekNumber && (
-        <Hide below="sm">
+        <Hide below="sm" asChild>
           <td style={styles.head_cell} className={classNames.head_cell}></td>
         </Hide>
       )}
