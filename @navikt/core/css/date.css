@@ -309,9 +309,18 @@
   place-content: center;
 }
 
-.navds-date__week-text {
-  width: 3.4rem;
-  text-align: center;
+.navds-date__week-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.navds-date__week-wrapper {
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }
 
 @media (min-width: 480px) {

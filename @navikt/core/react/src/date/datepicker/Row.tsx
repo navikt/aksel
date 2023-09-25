@@ -23,7 +23,7 @@ export function Row(props: RowProps): JSX.Element {
   return (
     <tr className={classNames.row} style={styles.row}>
       {showWeekNumber && (
-        <Hide below="sm">
+        <Hide below="sm" asChild>
           <td className={classNames.cell} style={styles.cell}>
             <WeekNumber number={props.weekNumber} dates={props.dates} />
           </td>

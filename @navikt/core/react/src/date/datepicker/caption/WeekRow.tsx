@@ -15,6 +15,7 @@ import { useDayPicker } from "react-day-picker";
 import { WeekNumber } from "../WeekNumber";
 import { Detail } from "../../../typography";
 import { Show } from "../../../layout/responsive";
+import { labelWeek } from "../../utils/labels";
 
 const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
   const { locale, fixedWeeks, onWeekNumberClick } = useDayPicker();
@@ -29,28 +30,32 @@ const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
   });
 
   return (
-    <Show below="sm">
-      <table /* className="navds-date__week" */ className="rdp-table">
+    <Show below="sm" asChild>
+      <table className="rdp-table">
         <tbody className="rdp-tbody">
-          <tr className="rdp-row">
+          <tr className="rdp-row navds-date__week-row">
             <Detail
               as="th"
-              weight="semibold" /* className="navds-date__week-text" */
-              className="rdp-cell"
+              weight="semibold"
+              className="rdp-cell navds-date__week-cell"
             >
-              Uke:
+              <span className="navds-date__week-wrapper">
+                {labelWeek(locale?.code)}
+              </span>
             </Detail>
 
             {weeks.map((week) => (
               <td
-                key={week.weekNumber} /* className="navds-date__week-button" */
-                className="rdp-cell"
+                key={week.weekNumber}
+                className="rdp-cell navds-date__week-cell"
               >
-                <WeekNumber
-                  number={week.weekNumber}
-                  dates={week.dates}
-                  headerVersion
-                />
+                <div className="navds-date__week-wrapper">
+                  <WeekNumber
+                    number={week.weekNumber}
+                    dates={week.dates}
+                    headerVersion
+                  />
+                </div>
               </td>
             ))}
           </tr>

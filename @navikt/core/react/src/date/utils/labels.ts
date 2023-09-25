@@ -120,3 +120,16 @@ export const labelWeekNumberButton = ({
       return `Velg uke ${week}`;
   }
 };
+
+export const labelWeek = (localeCode?: string): string => {
+  switch (localeCode) {
+    case "nb":
+      return `Uke:`;
+    case "nn":
+      return `Veke:`;
+    case "en-GB":
+      return `Week:`;
+    default:
+      return `Uke:`;
+  }
+};
