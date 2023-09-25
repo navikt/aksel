@@ -30,21 +30,32 @@ const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
 
   return (
     <Show below="sm">
-      <div className="navds-date__week">
-        <Detail as="span" weight="semibold" className="navds-date__week-text">
-          Uke:
-        </Detail>
+      <table /* className="navds-date__week" */ className="rdp-table">
+        <tbody className="rdp-tbody">
+          <tr className="rdp-row">
+            <Detail
+              as="th"
+              weight="semibold" /* className="navds-date__week-text" */
+              className="rdp-cell"
+            >
+              Uke:
+            </Detail>
 
-        {weeks.map((week) => (
-          <div key={week.weekNumber} className="navds-date__week-button">
-            <WeekNumber
-              number={week.weekNumber}
-              dates={week.dates}
-              headerVersion
-            />
-          </div>
-        ))}
-      </div>
+            {weeks.map((week) => (
+              <td
+                key={week.weekNumber} /* className="navds-date__week-button" */
+                className="rdp-cell"
+              >
+                <WeekNumber
+                  number={week.weekNumber}
+                  dates={week.dates}
+                  headerVersion
+                />
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
     </Show>
   );
 };
