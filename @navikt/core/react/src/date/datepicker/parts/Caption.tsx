@@ -4,6 +4,9 @@ import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { Button, Label } from "../../..";
 import WeekRow from "./WeekRow";
 
+/**
+ * https://github.com/gpbl/react-day-picker/tree/main/src/components/Caption
+ */
 export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   const {

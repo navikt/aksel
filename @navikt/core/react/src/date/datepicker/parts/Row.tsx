@@ -16,7 +16,9 @@ export interface RowProps {
   dates: Date[];
 }
 
-/** Render a row in the calendar, with the days and the week number. */
+/**
+ * https://github.com/gpbl/react-day-picker/tree/main/src/components/Row
+ */
 function Row(props: RowProps): JSX.Element {
   const { styles, classNames, showWeekNumber } = useDayPicker();
 

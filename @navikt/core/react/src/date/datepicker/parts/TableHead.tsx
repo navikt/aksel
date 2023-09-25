@@ -1,7 +1,9 @@
 import React from "react";
 import { HeadRow, useDayPicker } from "react-day-picker";
 
-/** Render the table head. */
+/**
+ * https://github.com/gpbl/react-day-picker/tree/main/src/components/Head
+ */
 function TableHead(): JSX.Element {
   const { classNames, styles, components } = useDayPicker();
   const HeadRowComponent = components?.HeadRow ?? HeadRow;

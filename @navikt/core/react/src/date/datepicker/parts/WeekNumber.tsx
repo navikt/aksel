@@ -12,8 +12,7 @@ export interface WeekNumberProps {
 }
 
 /**
- * Render the week number element. If `onWeekNumberClick` is passed to DayPicker, it
- * renders a button, otherwise a span element.
+ * https://github.com/gpbl/react-day-picker/tree/main/src/components/WeekNumber
  */
 function WeekNumber(props: WeekNumberProps): JSX.Element {
   const { number: weekNumber, dates } = props;

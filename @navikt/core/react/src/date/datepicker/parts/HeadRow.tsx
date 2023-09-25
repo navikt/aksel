@@ -4,7 +4,7 @@ import { useDayPicker } from "react-day-picker";
 import { Hide } from "../../../layout/responsive";
 
 /**
- * Render the HeadRow component - i.e. the table head row with the weekday names.
+ * https://github.com/gpbl/react-day-picker/tree/main/src/components/HeadRow
  */
 export function HeadRow(): JSX.Element {
   const {

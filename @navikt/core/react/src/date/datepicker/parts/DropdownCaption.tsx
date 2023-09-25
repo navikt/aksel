@@ -10,6 +10,9 @@ import { labelMonthDropdown, labelYearDropdown } from "../../utils/labels";
 import { max, min } from "date-fns";
 import WeekRow from "./WeekRow";
 
+/**
+ * https://github.com/gpbl/react-day-picker/tree/main/src/components/CaptionDropdowns
+ */
 export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   const {
