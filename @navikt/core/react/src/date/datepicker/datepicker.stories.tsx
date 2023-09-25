@@ -2,8 +2,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React, { useId, useState } from "react";
 import { useDatepicker, useRangeDatepicker } from "..";
-import { Button, HGrid } from "../..";
+import { Button, HGrid, VStack } from "../..";
 import DatePicker, { DatePickerProps } from "./DatePicker";
+import isSameDay from "date-fns/isSameDay";
 
 const disabledDays = [
   new Date("Oct 10 2022"),
@@ -392,5 +393,42 @@ export const StandaloneOptions = () => {
         disableWeekends
       />
     </HGrid>
+  );
+};
+
+export const WeekDayClick = () => {
+  const [days, setDays] = useState<Date[]>([]);
+
+  const handleWeekClick = (dates: Date[]) => {
+    const hasDayInWeek = !!days.find((x) => dates.find((y) => isSameDay(x, y)));
+
+    const cleanup = days.filter((y) => !dates.find((z) => isSameDay(y, z)));
+    if (hasDayInWeek) {
+      setDays(cleanup);
+    } else {
+      setDays([...dates, ...cleanup]);
+    }
+  };
+
+  return (
+    <VStack gap="8">
+      <DatePicker.Standalone
+        showWeekNumber
+        mode="multiple"
+        onWeekNumberClick={(_, dates) => handleWeekClick(dates)}
+        onSelect={(dates) => dates && setDays(dates)}
+        selected={days}
+        today={new Date("Nov 23 2022")}
+      />
+      <DatePicker.Standalone
+        showWeekNumber
+        mode="multiple"
+        onWeekNumberClick={(_, dates) => handleWeekClick(dates)}
+        onSelect={(dates) => dates && setDays(dates)}
+        selected={days}
+        today={new Date("Nov 23 2022")}
+        disableWeekends
+      />
+    </VStack>
   );
 };

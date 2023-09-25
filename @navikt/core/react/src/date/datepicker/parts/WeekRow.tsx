@@ -38,13 +38,13 @@ const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
                 key={week.weekNumber}
                 className="rdp-cell navds-date__week-cell"
               >
-                <div className="navds-date__week-wrapper">
+                <span className="navds-date__week-wrapper">
                   <WeekNumber
                     number={week.weekNumber}
                     dates={week.dates}
                     headerVersion
                   />
-                </div>
+                </span>
               </td>
             ))}
           </tr>
