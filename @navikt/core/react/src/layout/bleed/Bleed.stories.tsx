@@ -9,24 +9,28 @@ export default {
   component: Bleed,
 } satisfies Meta<typeof Bleed>;
 
+const style = (
+  <style>
+    {`
+.p {
+  padding: 3rem;
+}
+.centered {
+height: auto;
+width: auto;
+}
+.testbox {
+width: auto;
+height: auto;
+}
+`}
+  </style>
+);
+
 export const Default = {
   render: () => (
     <>
-      <style>
-        {`
-        .p {
-          padding: 1rem;
-        }
-      .centered {
-        height: auto;
-        width: auto;
-      }
-      .testbox {
-        width: auto;
-        height: auto;
-      }
-      `}
-      </style>
+      {style}
       <VStack gap="2">
         <Box background="surface-alt-1-subtle" padding="5">
           <Box background="surface-alt-2-subtle" padding="5">
@@ -74,21 +78,7 @@ export const Default = {
 export const AsChild = {
   render: () => (
     <>
-      <style>
-        {`
-        .p {
-          padding: 1rem;
-        }
-      .centered {
-        height: auto;
-        width: auto;
-      }
-      .testbox {
-        width: auto;
-        height: auto;
-      }
-      `}
-      </style>
+      {style}
       <VStack gap="2">
         <Box background="surface-alt-1-subtle" padding="5">
           <Box background="surface-alt-2-subtle" padding="5">
@@ -136,21 +126,7 @@ export const AsChild = {
 export const Breakpoints = {
   render: () => (
     <>
-      <style>
-        {`
-        .p {
-          padding: 3rem;
-        }
-      .centered {
-        height: auto;
-        width: auto;
-      }
-      .testbox {
-        width: auto;
-        height: auto;
-      }
-      `}
-      </style>
+      {style}
       <VStack gap="2">
         <Box background="surface-alt-1-subtle" padding={{ xs: "5", md: "10" }}>
           <Box
