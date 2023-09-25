@@ -10,7 +10,8 @@ export type BleedSpacingInline = "0" | "full" | "px" | SpacingScale;
 export type BleedSpacingBlock = "0" | "px" | SpacingScale;
 
 export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** **Negative** horizontal margin around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
+  /** **Negative** horizontal margin around children.
+   *  Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * marginInline='4'
    * marginInline='4 5'
@@ -19,7 +20,8 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
   marginInline?: ResponsiveProp<
     BleedSpacingInline | `${BleedSpacingInline} ${BleedSpacingInline}`
   >;
-  /** **Negative** vertical margin around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
+  /** **Negative** vertical margin around children.
+   *  Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * marginBlock='4'
    * marginBlock='4 5'
@@ -29,7 +31,9 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
     BleedSpacingBlock | `${BleedSpacingBlock} ${BleedSpacingBlock}`
   >;
   /**
-   * When true, set the padding to mirror the margin. This maintains the apparent width of the element prior to adding Bleed.
+   * When true, set the padding to mirror the margin.
+   * This maintains the apparent width of the element prior to adding Bleed.
+   * When this is used with `asChild`, it will overwrite the padding of the child.
    */
   reflectivePadding?: boolean;
 }
