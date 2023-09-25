@@ -108,16 +108,16 @@ export function getResponsiveProps<T extends string>(
   }
 
   if (typeof responsiveProp === "string") {
-    const styleProps = {};
-    styleProps[`--__ac-${componentName}-${componentProp}-xs`] =
-      translateTokenStringToCSS(
-        componentProp,
-        responsiveProp,
-        tokenSubgroup,
-        tokenExceptions,
-        invert
-      );
-    return styleProps;
+    return {
+      [`--__ac-${componentName}-${componentProp}-xs`]:
+        translateTokenStringToCSS(
+          componentProp,
+          responsiveProp,
+          tokenSubgroup,
+          tokenExceptions,
+          invert
+        ),
+    };
   }
 
   const styleProps = {};
@@ -130,7 +130,6 @@ export function getResponsiveProps<T extends string>(
         tokenExceptions,
         invert
       );
-    return Object.entries(styleProps);
   });
   return styleProps;
 }
