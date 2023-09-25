@@ -69,7 +69,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       selected,
       defaultSelected,
       onSelect,
-      fixedWeeks = true,
+      fixedWeeks = false,
       ...rest
     },
     ref
