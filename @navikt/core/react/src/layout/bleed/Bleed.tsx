@@ -5,6 +5,7 @@ import {
   SpacingScale,
   getResponsiveProps,
 } from "../utilities/css";
+import { Slot } from "../../util/Slot";
 
 export type BleedSpacingInline = "0" | "full" | "px" | SpacingScale;
 export type BleedSpacingBlock = "0" | "px" | SpacingScale;
@@ -36,6 +37,8 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * When this is used with `asChild`, it will overwrite the padding of the child.
    */
   reflectivePadding?: boolean;
+
+  asChild?: boolean;
 }
 
 /**
@@ -60,6 +63,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       marginBlock,
       reflectivePadding,
       style: _style,
+      asChild,
       ...rest
     },
     ref
@@ -107,8 +111,10 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       };
     }
 
+    const Comp = asChild ? Slot : "div";
+
     return (
-      <div
+      <Comp
         {...rest}
         className={cl("navds-bleed", className, {
           ["navds-bleed--padding"]: reflectivePadding,
