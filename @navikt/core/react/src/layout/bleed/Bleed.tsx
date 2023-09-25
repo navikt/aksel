@@ -117,7 +117,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       <Comp
         {...rest}
         className={cl("navds-bleed", className, {
-          ["navds-bleed--padding"]: reflectivePadding,
+          "navds-bleed--padding": reflectivePadding,
         })}
         ref={ref}
         style={style}
