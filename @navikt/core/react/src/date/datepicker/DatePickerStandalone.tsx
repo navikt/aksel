@@ -4,7 +4,6 @@ import React, { forwardRef } from "react";
 import {
   DateRange,
   DayPicker,
-  DayPickerBase,
   SelectMultipleEventHandler,
   SelectRangeEventHandler,
   SelectSingleEventHandler,
@@ -39,10 +38,6 @@ interface DatePickerStandaloneDefaultProps
    * @default true
    */
   fixedWeeks?: boolean;
-  /**
-   * Allows selecting a week at a time. Only used with mode="multiple" or mode="range"
-   */
-  onWeekNumberClick?: DayPickerBase["onWeekNumberClick"];
 }
 
 type StandaloneConditionalModeProps = SingleMode | MultipleMode | RangeMode;
@@ -70,6 +65,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       defaultSelected,
       onSelect,
       fixedWeeks = false,
+      onWeekNumberClick,
       ...rest
     },
     ref
@@ -93,15 +89,23 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       onSelect && (onSelect as (val?: DateRange) => void)(selectedDays);
     };
 
+    const mode = rest.mode ?? ("single" as any);
+
     const overrideProps = {
-      mode: rest.mode ?? ("single" as any),
+      mode,
       onSelect:
-        rest?.mode === "single"
+        mode === "single"
           ? handleSingleSelect
-          : rest?.mode === "multiple"
+          : mode === "multiple"
           ? handleMultipleSelect
           : handleRangeSelect,
     };
+
+    if (onWeekNumberClick && mode === "single") {
+      console.warn(
+        `Prop 'onWeekNumberClick' only works with mode="multiple" or mode="range"`
+      );
+    }
 
     return (
       <div
@@ -136,6 +140,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             weekend: "rdp-day__weekend",
           }}
           showWeekNumber={showWeekNumber}
+          onWeekNumberClick={mode !== "single" ? onWeekNumberClick : undefined}
           fixedWeeks={fixedWeeks}
           showOutsideDays
           {...omit(rest, ["onSelect", "children", "id"])}

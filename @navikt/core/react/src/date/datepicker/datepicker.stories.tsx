@@ -381,6 +381,7 @@ export const StandaloneOptions = () => {
       <DatePicker.Standalone showWeekNumber today={new Date("Nov 23 2022")} />
       <DatePicker.Standalone
         showWeekNumber
+        mode="multiple"
         onWeekNumberClick={console.log}
         today={new Date("Nov 23 2022")}
         disableWeekends

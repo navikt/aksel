@@ -28,6 +28,7 @@ export type SingleMode = {
   onSelect?: (val?: Date) => void;
   selected?: Date;
   defaultSelected?: Date;
+  onWeekNumberClick?: never;
 };
 
 export type MultipleMode = {
@@ -37,6 +38,10 @@ export type MultipleMode = {
   defaultSelected?: Date[];
   min?: number;
   max?: number;
+  /**
+   * Allows selecting a week at a time. Only used with mode="multiple" or mode="range"
+   */
+  onWeekNumberClick?: DayPickerBase["onWeekNumberClick"];
 };
 
 export type RangeMode = {
@@ -46,6 +51,10 @@ export type RangeMode = {
   defaultSelected?: DateRange;
   min?: number;
   max?: number;
+  /**
+   * Allows selecting a week at a time. Only used with mode="multiple" or mode="range"
+   */
+  onWeekNumberClick?: DayPickerBase["onWeekNumberClick"];
 };
 
 type ConditionalModeProps = SingleMode | MultipleMode | RangeMode;
@@ -190,6 +199,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onOpenToggle,
       strategy,
       bubbleEscape = false,
+      onWeekNumberClick,
       ...rest
     },
     ref
@@ -222,15 +232,22 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         (rest?.onSelect as (val?: DateRange) => void)(selectedDays);
     };
 
+    const mode = rest.mode ?? ("single" as any);
+
     const overrideProps = {
-      mode: rest.mode ?? ("single" as any),
-      onSelect:
-        rest?.mode === "single"
-          ? handleSingleSelect
-          : rest?.mode === "multiple"
-          ? handleMultipleSelect
-          : handleRangeSelect,
+      mode,
+      onSelect: mode
+        ? handleSingleSelect
+        : mode === "multiple"
+        ? handleMultipleSelect
+        : handleRangeSelect,
     };
+
+    if (onWeekNumberClick && mode === "single") {
+      console.warn(
+        `Prop 'onWeekNumberClick' only works with mode="multiple" or mode="range"`
+      );
+    }
 
     return (
       <DateContext.Provider
@@ -293,6 +310,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   weekend: "rdp-day__weekend",
                 }}
                 showWeekNumber={showWeekNumber}
+                onWeekNumberClick={
+                  mode !== "single" ? onWeekNumberClick : undefined
+                }
                 fixedWeeks
                 showOutsideDays
                 {...omit(rest, ["onSelect"])}
