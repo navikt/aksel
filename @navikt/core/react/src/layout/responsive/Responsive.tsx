@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
 import { BreakpointsAlias } from "../utilities/css";
+import { Slot } from "../../util/Slot";
 
 export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -19,6 +20,11 @@ export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
    * @default "div"
    */
   as?: "div" | "span";
+
+  /**
+   *
+   */
+  asChild?: boolean;
 }
 
 const Responsive = forwardRef<
@@ -26,14 +32,24 @@ const Responsive = forwardRef<
   ResponsiveProps & { variant: "show" | "hide" }
 >(
   (
-    { as: Component = "div", className, above, below, variant, ...rest },
+    {
+      as: Component = "div",
+      className,
+      above,
+      below,
+      variant,
+      asChild,
+      ...rest
+    },
     ref
   ) => {
     const aboveProp = variant === "show" ? above : below;
     const belowProp = variant === "show" ? below : above;
 
+    const Comp = asChild ? Slot : Component;
+
     return (
-      <Component
+      <Comp
         {...rest}
         ref={ref}
         className={cl("navds-responsive", className, {
