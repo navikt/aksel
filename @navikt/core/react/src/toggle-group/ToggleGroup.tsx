@@ -6,7 +6,8 @@ import React, {
   HTMLAttributes,
   useState,
 } from "react";
-import { Label, useId } from "..";
+import { Label } from "../typography";
+import { useId } from "../util";
 import ToggleItem, { ToggleItemProps } from "./ToggleItem";
 
 export interface ToggleGroupProps

@@ -1,8 +1,9 @@
 import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { BodyShort, OverridableComponent } from "..";
+import { BodyShort } from "../typography";
 import { TabsContext } from "./Tabs";
+import { OverridableComponent } from "../util";
 
 export interface TabProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> {

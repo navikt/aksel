@@ -1,3 +1,5 @@
+import { useFloatingPortalNode } from "@floating-ui/react";
+import cl from "clsx";
 import React, {
   forwardRef,
   useContext,
@@ -6,15 +8,15 @@ import React, {
   useRef,
 } from "react";
 import { createPortal } from "react-dom";
-import { useFloatingPortalNode } from "@floating-ui/react";
-import cl from "clsx";
-import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
-import { Detail, Heading, mergeRefs, useId, useProvider } from "..";
+import { useProvider } from "../provider";
+import { Detail, Heading } from "../typography";
+import { mergeRefs, useId } from "../util";
 import ModalBody from "./ModalBody";
-import ModalHeader from "./ModalHeader";
-import ModalFooter from "./ModalFooter";
-import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
 import { ModalContext } from "./ModalContext";
+import ModalFooter from "./ModalFooter";
+import ModalHeader from "./ModalHeader";
+import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
+import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
 
 export interface ModalProps
   extends React.DialogHTMLAttributes<HTMLDialogElement> {

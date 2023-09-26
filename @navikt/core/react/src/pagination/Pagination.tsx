@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
-import { BodyShort } from "..";
+import { BodyShort } from "../typography";
 import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,

@@ -8,9 +8,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { BodyShort, ErrorMessage, Label, mergeRefs, omit } from "../..";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
+import { mergeRefs, omit } from "../../util";
 
 export type SearchClearEvent =
   | {
