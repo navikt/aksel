@@ -104,9 +104,9 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       (c: any) => c?.type?.componentType === "row"
     );
 
-    const pins = React.Children.toArray(children).filter(
-      (c: any) => c?.type?.componentType === "pin"
-    );
+    const pins = React.Children.toArray(children)
+      .filter((c: any) => c?.type?.componentType === "pin")
+      .map((x) => () => x);
 
     const zoomComponent = React.Children.toArray(children).find(
       (c: any) => c?.type?.componentType === "zoom"
@@ -212,9 +212,9 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           <div className="navds-timeline">
             <AxisLabels templates={axisLabelTemplates} />
 
-            {pins.map((pin) => {
-              return pin;
-            })}
+            {pins.map((Pin, i) => (
+              <Pin key={`pin-${i}`} />
+            ))}
 
             {processedRows.map((row, i) => {
               return (

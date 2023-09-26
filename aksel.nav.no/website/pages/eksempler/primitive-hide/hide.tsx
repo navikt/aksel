@@ -5,7 +5,7 @@ import cl from "clsx";
 const Example = () => {
   return (
     <HGrid columns="1" gap="4">
-      <Hide above="md">
+      <Hide above="md" asChild>
         <Placeholder mobil text="Synlig bare på mobil" />
       </Hide>
       <Placeholder text="Alltid synlig" />
@@ -30,16 +30,19 @@ const Placeholder = ({
   noPadding,
   mobil,
   desktop,
+  className,
 }: {
   text?: string;
   noPadding?: boolean;
   mobil?: boolean;
   desktop?: boolean;
+  className?: string;
 }) => {
   return (
     <div
       className={cl(
         "min-h-24 text-text-on-action grid aspect-video h-auto w-auto place-content-center rounded p-2",
+        className,
         {
           "bg-pink-600": mobil,
           "bg-violet-600": desktop,
