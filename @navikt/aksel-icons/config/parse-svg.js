@@ -8,8 +8,6 @@ const {
   writeFileSync,
 } = require("fs");
 
-main();
-
 function main() {
   const basePath = path.resolve(__dirname, "../icons");
   const iconFolder = path.resolve(__dirname, "../dist/svg");
@@ -41,4 +39,4 @@ function parseIcon(svgString) {
   return icon;
 }
 
-module.exports = { parseIcon };
+module.exports = { parseIcon, main };
