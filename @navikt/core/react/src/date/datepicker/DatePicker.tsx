@@ -5,26 +5,23 @@ import {
   DateRange,
   DayPicker,
   DayPickerBase,
-  isMatch,
   Matcher,
-  SelectMultipleEventHandler,
-  SelectRangeEventHandler,
-  SelectSingleEventHandler,
+  isMatch,
 } from "react-day-picker";
-import { omit, Popover, useId } from "../..";
+import { Popover, omit, useId } from "../..";
 import { DateInputProps, DatePickerInput } from "../DateInput";
 import { DateContext } from "../context";
 import { getLocaleFromString, labels } from "../utils";
-import Caption from "./parts/Caption";
-import DropdownCaption from "./parts/DropdownCaption";
 import DatePickerStandalone, {
   DatePickerStandaloneType,
 } from "./DatePickerStandalone";
+import Caption from "./parts/Caption";
 import DayButton from "./parts/DayButton";
-import TableHead from "./parts/TableHead";
+import DropdownCaption from "./parts/DropdownCaption";
 import { HeadRow } from "./parts/HeadRow";
-import WeekNumber from "./parts/WeekNumber";
 import Row from "./parts/Row";
+import TableHead from "./parts/TableHead";
+import WeekNumber from "./parts/WeekNumber";
 
 export type SingleMode = {
   mode?: "single";
@@ -213,39 +210,21 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       Date | Date[] | DateRange | undefined
     >(defaultSelected);
 
-    const handleSingleSelect: SelectSingleEventHandler = (selectedDay) => {
-      setSelectedDates(selectedDay);
-      selectedDay && (onClose?.() ?? setOpen(false));
-      rest?.onSelect && (rest?.onSelect as (val?: Date) => void)(selectedDay);
-    };
-
-    const handleMultipleSelect: SelectMultipleEventHandler = (selectedDays) => {
-      setSelectedDates(selectedDays);
-      rest?.onSelect &&
-        (rest?.onSelect as (val?: Date[]) => void)(selectedDays);
-    };
-
-    const handleRangeSelect: SelectRangeEventHandler = (selectedDays) => {
-      setSelectedDates(selectedDays);
-      selectedDays?.from && selectedDays?.to && (onClose?.() ?? setOpen(false));
-      rest?.onSelect &&
-        (rest?.onSelect as (val?: DateRange) => void)(selectedDays);
-    };
-
     const mode = rest.mode ?? ("single" as any);
 
-    const overrideProps = {
-      mode,
-      onSelect: mode
-        ? handleSingleSelect
-        : mode === "multiple"
-        ? handleMultipleSelect
-        : handleRangeSelect,
-    };
+    /**
+     * @param selected Date | Date[] | DateRange | undefined
+     */
+    const handleSelect = (selected) => {
+      setSelectedDates(selected);
 
-    if (onWeekNumberClick && mode !== "multiple") {
-      console.warn(`Prop 'onWeekNumberClick' only works with mode="multiple"`);
-    }
+      if (rest.mode === "single") {
+        selected && (onClose?.() ?? setOpen(false));
+      } else if (rest.mode === "range") {
+        selected?.from && selected?.to && (onClose?.() ?? setOpen(false));
+      }
+      rest?.onSelect?.(selected);
+    };
 
     return (
       <DateContext.Provider
@@ -281,7 +260,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             >
               <DayPicker
                 locale={getLocaleFromString(locale)}
-                {...overrideProps}
+                mode={mode}
+                onSelect={handleSelect}
                 selected={selected ?? selectedDates}
                 components={{
                   Caption: dropdownCaption ? DropdownCaption : Caption,

@@ -1,14 +1,7 @@
 import cl from "clsx";
 import isWeekend from "date-fns/isWeekend";
 import React, { forwardRef } from "react";
-import {
-  DateRange,
-  DayPicker,
-  SelectMultipleEventHandler,
-  SelectRangeEventHandler,
-  SelectSingleEventHandler,
-  isMatch,
-} from "react-day-picker";
+import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../..";
 import { getLocaleFromString, labels } from "../utils";
 import {
@@ -75,36 +68,15 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       Date | Date[] | DateRange | undefined
     >(defaultSelected);
 
-    const handleSingleSelect: SelectSingleEventHandler = (selectedDay) => {
-      setSelectedDates(selectedDay);
-      onSelect && (onSelect as (val?: Date) => void)(selectedDay);
-    };
-
-    const handleMultipleSelect: SelectMultipleEventHandler = (selectedDays) => {
-      setSelectedDates(selectedDays);
-      onSelect && (onSelect as (val?: Date[]) => void)(selectedDays);
-    };
-
-    const handleRangeSelect: SelectRangeEventHandler = (selectedDays) => {
-      setSelectedDates(selectedDays);
-      onSelect && (onSelect as (val?: DateRange) => void)(selectedDays);
-    };
-
     const mode = rest.mode ?? ("single" as any);
 
-    const overrideProps = {
-      mode,
-      onSelect:
-        mode === "single"
-          ? handleSingleSelect
-          : mode === "multiple"
-          ? handleMultipleSelect
-          : handleRangeSelect,
+    /**
+     * @param selected Date | Date[] | DateRange | undefined
+     */
+    const handleSelect = (selected) => {
+      setSelectedDates(selected);
+      onSelect?.(selected);
     };
-
-    if (onWeekNumberClick && mode !== "multiple") {
-      console.warn(`Prop 'onWeekNumberClick' only works with mode="multiple"`);
-    }
 
     return (
       <div
@@ -113,7 +85,8 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       >
         <DayPicker
           locale={getLocaleFromString(locale)}
-          {...overrideProps}
+          mode={mode}
+          onSelect={handleSelect}
           selected={selected ?? selectedDates}
           components={{
             Caption: dropdownCaption ? DropdownCaption : Caption,
@@ -145,7 +118,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
           }
           fixedWeeks={fixedWeeks}
           showOutsideDays
-          {...omit(rest, ["onSelect", "children", "id"])}
+          {...omit(rest, ["children", "id"])}
         />
       </div>
     );
