@@ -8,7 +8,6 @@ import {
   Matcher,
   isMatch,
 } from "react-day-picker";
-import { Popover, omit, useId } from "../..";
 import { DateInputProps, DatePickerInput } from "../DateInput";
 import { DateContext } from "../context";
 import { getLocaleFromString, labels } from "../utils";
@@ -22,6 +21,8 @@ import { HeadRow } from "./parts/HeadRow";
 import Row from "./parts/Row";
 import TableHead from "./parts/TableHead";
 import WeekNumber from "./parts/WeekNumber";
+import { omit, useId } from "../../util";
+import { Popover } from "../../popover";
 
 export type SingleMode = {
   mode?: "single";

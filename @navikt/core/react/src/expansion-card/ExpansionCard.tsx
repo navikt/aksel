@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { createContext, forwardRef, useRef, useState } from "react";
-import { OverridableComponent } from "../util/OverridableComponent";
+import { OverridableComponent } from "../util";
 import ExpansionCardContent, {
   ExpansionCardContentProps,
 } from "./ExpansionCardContent";

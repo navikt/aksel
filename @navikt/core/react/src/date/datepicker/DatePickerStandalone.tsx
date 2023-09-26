@@ -2,7 +2,7 @@ import cl from "clsx";
 import isWeekend from "date-fns/isWeekend";
 import React, { forwardRef } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
-import { omit } from "../..";
+import { omit } from "../../util";
 import { getLocaleFromString, labels } from "../utils";
 import {
   DatePickerDefaultProps,

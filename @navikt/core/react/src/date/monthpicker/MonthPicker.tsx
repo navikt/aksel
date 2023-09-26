@@ -1,7 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
-import { Popover, useId } from "../..";
 import { DateInputProps, MonthPickerInput } from "../DateInput";
 import { DateContext, SharedMonthProvider } from "../context";
 import { getLocaleFromString, Matcher } from "../utils";
@@ -10,6 +9,8 @@ import MonthPickerStandalone, {
   MonthPickerStandaloneType,
 } from "./MonthPickerStandalone";
 import MonthSelector from "./MonthSelector";
+import { useId } from "../../util";
+import { Popover } from "../../popover";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

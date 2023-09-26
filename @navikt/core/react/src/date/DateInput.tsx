@@ -1,10 +1,11 @@
 import { CalendarIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import { BodyShort, ErrorMessage, Label, omit } from "..";
 import { FormFieldProps, useFormField } from "../form/useFormField";
 import { useDateInputContext } from "./context";
 import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
+import { BodyShort, ErrorMessage, Label } from "../typography";
+import { omit } from "../util";
 
 export interface DateInputProps
   extends FormFieldProps,
