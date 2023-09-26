@@ -21,8 +21,8 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  desc: "Endre størrelse på nettleservindu for å se komponent i aksjon",
+  index: 0,
+  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at dette skal fungere må child-element endte ikke inneholde 'className' eller forwarde 'className'",
 };
 
 const Placeholder = ({
