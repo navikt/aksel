@@ -183,7 +183,7 @@ const StyleMappings = {
     {
       component: "DatePicker",
       main: "date.css",
-      dependencies: [typoCss, "button.css", "popover.css"],
+      dependencies: [typoCss, primitivesCss, "button.css", "popover.css"],
     },
     {
       component: "MonthPicker",
