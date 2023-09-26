@@ -22,6 +22,9 @@ import DatePickerStandalone, {
 } from "./DatePickerStandalone";
 import DayButton from "./parts/DayButton";
 import TableHead from "./parts/TableHead";
+import { HeadRow } from "./parts/HeadRow";
+import WeekNumber from "./parts/WeekNumber";
+import Row from "./parts/Row";
 
 export type SingleMode = {
   mode?: "single";
@@ -282,8 +285,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 selected={selected ?? selectedDates}
                 components={{
                   Caption: dropdownCaption ? DropdownCaption : Caption,
-                  Day: DayButton,
                   Head: TableHead,
+                  HeadRow,
+                  WeekNumber,
+                  Row,
+                  Day: DayButton,
                 }}
                 className={cl("navds-date", className)}
                 classNames={{

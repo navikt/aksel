@@ -23,6 +23,7 @@ import Caption from "./parts/Caption";
 import DropdownCaption from "./parts/DropdownCaption";
 import Row from "./parts/Row";
 import { HeadRow } from "./parts/HeadRow";
+import DayButton from "./parts/DayButton";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<
@@ -120,6 +121,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             HeadRow,
             WeekNumber,
             Row,
+            Day: DayButton,
           }}
           className="navds-date"
           classNames={{ vhidden: "navds-sr-only" }}
