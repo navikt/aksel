@@ -140,7 +140,9 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             weekend: "rdp-day__weekend",
           }}
           showWeekNumber={showWeekNumber}
-          onWeekNumberClick={mode !== "single" ? onWeekNumberClick : undefined}
+          onWeekNumberClick={
+            mode === "multiple" ? onWeekNumberClick : undefined
+          }
           fixedWeeks={fixedWeeks}
           showOutsideDays
           {...omit(rest, ["onSelect", "children", "id"])}
