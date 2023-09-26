@@ -113,7 +113,7 @@ export const labelWeekNumberButton = ({
     case "nb":
       return `Velg uke ${week}`;
     case "nn":
-      return `Velj veke ${week}`;
+      return `Vel veke ${week}`;
     case "en-GB":
       return `Pick week ${week}`;
     default:
