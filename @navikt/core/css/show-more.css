@@ -10,10 +10,6 @@
   min-width: 12rem;
 }
 
-.navds-show-more--inline {
-  padding: 0;
-}
-
 .navds-show-more--default,
 .navds-show-more--default .navds-show-more__button-wrapper {
   background: var(--a-surface-default);
@@ -43,10 +39,6 @@
   margin-top: var(--a-spacing-4);
   z-index: 1;
   order: 1;
-}
-
-.navds-show-more--inline .navds-show-more__button-section {
-  bottom: 0;
 }
 
 .navds-show-more--closed .navds-show-more__button-section {

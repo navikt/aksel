@@ -20,10 +20,10 @@ export interface ShowMoreProps
    */
   size?: "medium" | "small";
   /**
-   * Changes background color. Variant 'inline' is transparent and has no padding.
-   * @default inline
+   * Changes background color
+   * @default default
    */
-  variant?: "inline" | "default" | "subtle" | "info";
+  variant?: "default" | "subtle" | "info";
   /**
    * Custom height of content when collapsed.
    * @default 10rem
@@ -68,7 +68,7 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
       as: Component = "aside",
       children,
       size = "medium",
-      variant = "inline",
+      variant = "default",
       collapsedHeight = "10rem",
       heading,
       headingSize = "medium",

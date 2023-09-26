@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import { ShowMore, ShowMoreProps } from ".";
-import { BodyLong, HStack, Heading } from "..";
+import { BodyLong, HStack, Box, Heading, Bleed } from "..";
 import { userEvent, within } from "@storybook/testing-library";
 
 const meta: Meta<typeof ShowMore> = {
@@ -10,7 +10,7 @@ const meta: Meta<typeof ShowMore> = {
 };
 export default meta;
 
-const variants = ["inline", "default", "subtle", "info"] as const;
+const variants = ["default", "subtle", "info"] as const;
 
 const content = (
   <BodyLong style={{ maxWidth: 400 }}>
@@ -26,11 +26,7 @@ const content = (
 );
 
 export const Default: StoryFn<ShowMoreProps> = (props: ShowMoreProps) => {
-  return (
-    <ShowMore heading="Heading" {...props}>
-      {content}
-    </ShowMore>
-  );
+  return <ShowMore {...props}>{content}</ShowMore>;
 };
 Default.argTypes = {
   as: {
@@ -79,32 +75,12 @@ export const CustomHeight = () => (
 );
 
 export const Variants = () => (
-  <HStack gap="4" style={{ padding: "1rem" }}>
-    <HStack
-      gap="4"
-      align="start"
-      style={{
-        padding: "2rem",
-        backgroundImage:
-          "linear-gradient(45deg, #f5f50050 25%, transparent 25%), linear-gradient(-45deg, #f5f50050 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f5f50050 75%), linear-gradient(-45deg, transparent 75%, #f5f50050 75%)",
-        backgroundSize: "20px 20px",
-        backgroundPosition: "0 0, 0 10px, 10px -10px, -10px 0px",
-      }}
-    >
-      <div style={{ border: "1px dashed #FF000050", maxWidth: "400px" }}>
-        <ShowMore heading="inline" variant="inline">
-          <BodyLong spacing>
-            This is the default variant. It does not have padding. The dashed
-            border is not part of the component, but is added to the story to
-            make it easier to see that there is no padding.
-          </BodyLong>
-          {content}
-        </ShowMore>
-      </div>
+  <HStack gap="12" style={{ padding: "1rem" }}>
+    <Box background="bg-subtle" padding="6">
       <ShowMore heading="default" variant="default">
         {content}
       </ShowMore>
-    </HStack>
+    </Box>
     {variants
       .filter((v) => !["inline", "default"].includes(v))
       .map((variant) => (
@@ -113,6 +89,17 @@ export const Variants = () => (
         </ShowMore>
       ))}
   </HStack>
+);
+
+export const RemovePadding = () => (
+  <Box borderWidth="1" padding="4">
+    <Heading size="medium">This text should be aligned</Heading>
+    <Bleed marginInline="4" asChild>
+      <ShowMore heading="This text should be aligned" size="small">
+        {content}
+      </ShowMore>
+    </Bleed>
+  </Box>
 );
 
 export const Open: StoryFn = () => (
