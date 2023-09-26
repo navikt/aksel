@@ -135,7 +135,9 @@ export const Breakpoints = {
           >
             <Bleed marginInline={{ xs: "10 0", md: "20 0" }}>
               <Box className="p" background="surface-success-subtle">
-                <BodyLong>marginInline=&quot;10 0&quot;</BodyLong>
+                <BodyLong>
+                  {'marginInline={{ xs: "10 0", md: "20 0" }}'}
+                </BodyLong>
               </Box>
             </Bleed>
           </Box>
@@ -147,7 +149,9 @@ export const Breakpoints = {
           >
             <Bleed marginInline={{ xs: "0 10", md: "0 20" }}>
               <Box className="p" background="surface-success-subtle">
-                <BodyLong>marginInline=&quot;0 10&quot;</BodyLong>
+                <BodyLong>
+                  {'marginInline={{ xs: "0 10", md: "0 20" }}'}
+                </BodyLong>
               </Box>
             </Bleed>
           </Box>
@@ -159,7 +163,9 @@ export const Breakpoints = {
           >
             <Bleed marginBlock={{ xs: "10 0", md: "20 0" }}>
               <Box className="p" background="surface-success-subtle">
-                <BodyLong>marginBlock=&quot;10 0&quot;</BodyLong>
+                <BodyLong>
+                  {'marginBlock={{ xs: "10 0", md: "20 0" }}'}
+                </BodyLong>
               </Box>
             </Bleed>
           </Box>
@@ -172,7 +178,9 @@ export const Breakpoints = {
             <Bleed marginBlock={{ xs: "0 10", md: "0 20" }}>
               <Box className="p" background="surface-success-subtle">
                 <HStack className="centered" justify="center" align="center">
-                  <Box className="testbox">marginBlock=&quot;0 10&quot;</Box>
+                  <Box className="testbox">
+                    {'marginBlock={{ xs: "0 10", md: "0 20" }}'}
+                  </Box>
                 </HStack>
               </Box>
             </Bleed>
