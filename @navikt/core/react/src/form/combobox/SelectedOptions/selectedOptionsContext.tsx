@@ -12,6 +12,7 @@ import { useCustomOptionsContext } from "../customOptionsContext";
 
 type SelectedOptionsContextType = {
   addSelectedOption: (option: string) => void;
+  canSelectMoreOptions: boolean;
   isMultiSelect?: boolean;
   removeSelectedOption: (option: string) => void;
   prevSelectedOptions?: string[];
@@ -132,8 +133,12 @@ export const SelectedOptionsProvider = ({
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
 
+  const canSelectMoreOptions =
+    !maxSelectedOptions || selectedOptions.length < maxSelectedOptions;
+
   const selectedOptionsState = {
     addSelectedOption,
+    canSelectMoreOptions,
     isMultiSelect,
     removeSelectedOption,
     prevSelectedOptions,

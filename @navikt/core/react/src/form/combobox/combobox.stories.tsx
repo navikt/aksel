@@ -288,15 +288,28 @@ export const ComboboxSizes = () => (
 
 export const MaxSelectedOptions = () => {
   const id = useId();
+  const [value, setValue] = useState<string | undefined>("a");
+  const [selectedOptions, setSelectedOptions] = useState([
+    options[0],
+    options[1],
+  ]);
   return (
     <UNSAFE_Combobox
       id={id}
       label="Komboboks med begrenset antall valg"
       options={options}
-      maxSelectedOptions={1}
+      maxSelectedOptions={2}
+      selectedOptions={selectedOptions}
+      onToggleSelected={(option, isSelected) =>
+        isSelected
+          ? setSelectedOptions([...selectedOptions, option])
+          : setSelectedOptions(selectedOptions.filter((o) => o !== option))
+      }
       isMultiSelect
       allowNewValues
       isListOpen
+      value={value}
+      onChange={(event) => setValue(event?.target.value)}
     />
   );
 };
