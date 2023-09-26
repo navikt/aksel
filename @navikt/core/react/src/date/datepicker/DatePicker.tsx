@@ -35,7 +35,7 @@ export type SingleMode = {
 };
 
 export type MultipleMode = {
-  mode?: "multiple";
+  mode: "multiple";
   onSelect?: (val?: Date[]) => void;
   selected?: Date[];
   defaultSelected?: Date[];
@@ -48,7 +48,7 @@ export type MultipleMode = {
 };
 
 export type RangeMode = {
-  mode?: "range";
+  mode: "range";
   onSelect?: (val?: DateRange) => void;
   selected?: DateRange;
   defaultSelected?: DateRange;
