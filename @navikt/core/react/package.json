@@ -17,6 +17,13 @@
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "typings": "./esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./esm/index.d.ts",
+      "import": "./esm/index.js",
+      "require": "./cjs/index.js"
+    }
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

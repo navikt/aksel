@@ -1,3 +1,9 @@
+import { Button } from "@navikt/ds-react";
+
 export const TestComponent = () => {
-  return <div>Hello from testcomponent</div>;
+  return (
+    <div>
+      <Button>Testknapp</Button>
+    </div>
+  );
 };

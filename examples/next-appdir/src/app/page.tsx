@@ -5,9 +5,7 @@ import { InteractiveComponent } from "@/components/InteractiveComponent";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div>
-        Hello world <TestComponent />
-      </div>
+      <TestComponent />
       <InteractiveComponent />
     </main>
   );
