@@ -39,7 +39,7 @@ export type MultipleMode = {
   min?: number;
   max?: number;
   /**
-   * Allows selecting a week at a time. Only used with mode="multiple" or mode="range"
+   * Allows selecting a week at a time. Only used with mode="multiple".
    */
   onWeekNumberClick?: DayPickerBase["onWeekNumberClick"];
 };
@@ -51,10 +51,7 @@ export type RangeMode = {
   defaultSelected?: DateRange;
   min?: number;
   max?: number;
-  /**
-   * Allows selecting a week at a time. Only used with mode="multiple" or mode="range"
-   */
-  onWeekNumberClick?: DayPickerBase["onWeekNumberClick"];
+  onWeekNumberClick?: never;
 };
 
 type ConditionalModeProps = SingleMode | MultipleMode | RangeMode;
@@ -244,9 +241,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     };
 
     if (onWeekNumberClick && mode === "single") {
-      console.warn(
-        `Prop 'onWeekNumberClick' only works with mode="multiple" or mode="range"`
-      );
+      console.warn(`Prop 'onWeekNumberClick' only works with mode="multiple"`);
     }
 
     return (
@@ -311,7 +306,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 }}
                 showWeekNumber={showWeekNumber}
                 onWeekNumberClick={
-                  mode !== "single" ? onWeekNumberClick : undefined
+                  mode === "multiple" ? onWeekNumberClick : undefined
                 }
                 fixedWeeks
                 showOutsideDays
