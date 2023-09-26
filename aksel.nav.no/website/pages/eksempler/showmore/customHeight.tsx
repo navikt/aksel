@@ -1,22 +1,36 @@
-import { BodyLong, ShowMore } from "@navikt/ds-react";
+import { List, ShowMore } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div style={{ minHeight: "316px" }}>
-      <ShowMore heading="Facts" collapsedHeight="8rem">
-        <BodyLong>
-          Did you hear that? They&apos;ve shut down the main reactor. We&apos;ll
-          be destroyed for sure. This is madness! We&apos;re doomed!
-          There&apos;ll be no escape for the Princess this time. What&apos;s
-          that? Artoo! Artoo-Detoo, where are you? At last! Where have you been?
-          They&apos;re heading in this direction. What are we going to do?
-          We&apos;ll be sent to the spice mine of Kessel or smashed into who
-          knows what! Wait a minute, where are you going? The Death Star plans
-          are not in the main computer. Where are those transmissions you
-          intercepted? What have you done with those plans? We intercepted no
-          transmissions. Aaah....This is a consular ship.
-        </BodyLong>
+    <div style={{ minHeight: 450, maxWidth: 600 }}>
+      <ShowMore heading="Fakta om rødreven" collapsedHeight="7rem">
+        <List>
+          <List.Item>
+            Rødreven varierer i størrelse og utseende avhengig av hvor den
+            lever.
+          </List.Item>
+          <List.Item>
+            Den er den største arten i slekten Vulpes og betydelig større enn
+            andre arter.
+          </List.Item>
+          <List.Item>
+            Rødrevens farge varierer, men typisk har den rød rygg, hvit hals og
+            buk, med svarte føtter og svart på baksiden av ørene.
+          </List.Item>
+          <List.Item>
+            Det finnes mørkere fargevarianter som korsrev og svartrev, samt
+            mutasjonen sølvrev.
+          </List.Item>
+          <List.Item>
+            Størrelsen varierer mellom kjønn og geografisk område, med hannene
+            som er større enn hunnene.
+          </List.Item>
+          <List.Item>
+            Rødreven er et mellomstort rovdyr som konkurrerer med andre
+            mellomstore rovpattedyr som prærieulv og sjakal.
+          </List.Item>
+        </List>
       </ShowMore>
     </div>
   );

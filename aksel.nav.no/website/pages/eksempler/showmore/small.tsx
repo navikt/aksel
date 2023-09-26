@@ -3,7 +3,7 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <div style={{ minHeight: "423px", width: "300px" }}>
+    <div style={{ minHeight: 423, width: 300 }}>
       <ShowMore heading="Tabellvisning" size="small">
         <Table size="large">
           <Table.Header>
