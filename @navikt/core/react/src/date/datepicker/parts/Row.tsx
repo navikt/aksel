@@ -36,7 +36,6 @@ function Row(props: RowProps): JSX.Element {
           className={classNames.cell}
           style={styles.cell}
           key={getUnixTime(date)}
-          /* role="presentation" */
         >
           <Day displayMonth={props.displayMonth} date={date} />
         </td>
