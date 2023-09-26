@@ -10,20 +10,22 @@ import {
   VStack,
   Label,
   List,
+  Box,
 } from "@navikt/ds-react";
+import cl from "clsx";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
     <div className="py-12">
       <HGrid columns={{ xs: 1, md: "240px minmax(auto,700px)" }} gap="4">
-        <Show above="md">
+        <Show above="md" asChild>
           <DesktopSidebar />
         </Show>
-        <Hide above="md">
+        <Hide above="md" asChild>
           <ContentFirst />
         </Hide>
-        <Hide above="md">
+        <Hide above="md" asChild>
           <MobileSidebar />
         </Hide>
         <ContentLast />
@@ -43,12 +45,12 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 3,
   desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
 };
 
-const ContentFirst = () => (
-  <div className="bg-surface-default h-fit p-10">
+const ContentFirst = ({ className }: { className?: string }) => (
+  <div className={cl("bg-surface-default h-fit p-10", className)}>
     <VStack gap="6">
       <VStack gap="2" align="start">
         <Heading size="large">Kort om pleiepenger for sykt barn</Heading>
@@ -113,13 +115,18 @@ const LinkElement = ({ children }) => {
   );
 };
 
-const DesktopSidebar = () => (
-  <div className="bg-surface-default p-4 pt-10">
-    <div className="pb-2 pl-4">
+const DesktopSidebar = ({ className }: { className?: string }) => (
+  <Box
+    paddingBlock="10 4"
+    paddingInline="6"
+    background="surface-default"
+    className={className}
+  >
+    <Box paddingBlock="0 2" paddingInline="4 0">
       <Heading size="medium" className="leading-heading-xlarge">
         Innhold
       </Heading>
-    </div>
+    </Box>
     <nav aria-label="innhold">
       <ul>
         <LinkElement>Hvem kan få?</LinkElement>
@@ -128,7 +135,9 @@ const DesktopSidebar = () => (
         <LinkElement>Når utbetales pengene?</LinkElement>
       </ul>
     </nav>
-  </div>
+  </Box>
 );
 
-const MobileSidebar = () => <DesktopSidebar />;
+const MobileSidebar = ({ className }: { className?: string }) => (
+  <DesktopSidebar className={className} />
+);

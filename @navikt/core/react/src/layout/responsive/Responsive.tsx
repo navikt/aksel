@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
 import { BreakpointsAlias } from "../utilities/css";
+import { Slot } from "../../util/Slot";
 
 export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -19,6 +20,10 @@ export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
    * @default "div"
    */
   as?: "div" | "span";
+  /**
+   * When true, will render element as its child. This merges classes, styles and event handlers.
+   */
+  asChild?: boolean;
 }
 
 const Responsive = forwardRef<
@@ -26,14 +31,24 @@ const Responsive = forwardRef<
   ResponsiveProps & { variant: "show" | "hide" }
 >(
   (
-    { as: Component = "div", className, above, below, variant, ...rest },
+    {
+      as: Component = "div",
+      className,
+      above,
+      below,
+      variant,
+      asChild,
+      ...rest
+    },
     ref
   ) => {
     const aboveProp = variant === "show" ? above : below;
     const belowProp = variant === "show" ? below : above;
 
+    const Comp = asChild ? Slot : Component;
+
     return (
-      <Component
+      <Comp
         {...rest}
         ref={ref}
         className={cl("navds-responsive", className, {
@@ -54,14 +69,14 @@ const Responsive = forwardRef<
  * @example
  * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
  *   <div/>
- *   <Hide below="md">
+ *   <Hide below="md" asChild>
  *      // Only visible above "md"
  *   </Hide>
  * </HGrid>
  * @example
  * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
  *   <div/>
- *   <Hide above="md">
+ *   <Hide above="md" asChild>
  *      // Only visible below "md"
  *   </Hide>
  * </HGrid>
@@ -79,14 +94,14 @@ export const Hide = forwardRef<HTMLDivElement, ResponsiveProps>(
  * @example
  * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
  *   <div/>
- *   <Show below="md">
+ *   <Show below="md" asChild>
  *      // Only visible below "md"
  *   </Show>
  * </HGrid>
  * @example
  * <HGrid columns={{ xs: 1, md: 2 }} gap="4">
  *   <div/>
- *   <Show above="md">
+ *   <Show above="md" asChild>
  *      // Only visible above "md"
  *   </Show>
  * </HGrid>
