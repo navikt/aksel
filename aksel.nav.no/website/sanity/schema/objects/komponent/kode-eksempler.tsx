@@ -1,4 +1,4 @@
-import { ComponentIcon } from "@sanity/icons";
+import { ComponentIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 
 export const KodeEksempler = defineType({

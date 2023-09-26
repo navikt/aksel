@@ -1,58 +1,53 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Radio, RadioGroup } from "../../index";
 
-export default {
+const meta: Meta<typeof Radio> = {
   title: "ds-react/Radio",
   component: Radio,
-  subcomponents: {
-    RadioGroup,
-  },
   argTypes: {
-    size: { control: { type: "select", options: ["medium", "small"] } },
+    size: {
+      options: ["medium", "small"],
+      control: { type: "radio" },
+    },
   },
-} as Meta;
+};
+export default meta;
 
-export const Default = {
-  render: (props) => {
-    const [state, setState] = useState("radio1");
+export const Default = (props) => {
+  const [state, setState] = useState("radio1");
 
-    return (
-      <RadioGroup
-        legend={props.legend}
-        description={props.description}
-        value={props.controlled ? state : undefined}
-        onChange={props.controlled ? setState : undefined}
-        hideLegend={props.hideLegend}
-        error={props.error ? "Errormelding" : undefined}
-        size={props?.size}
+  return (
+    <RadioGroup
+      legend={props.legend}
+      description={props.description}
+      value={props.controlled ? state : undefined}
+      onChange={props.controlled ? setState : undefined}
+      hideLegend={props.hideLegend}
+      error={props.error ? "Errormelding" : undefined}
+      size={props?.size}
+    >
+      <Radio value="radio1">{props.children || "Apple"}</Radio>
+      <Radio
+        value="radio2"
+        description={props.radioDescription ? "Orange description" : undefined}
       >
-        <Radio value="radio1">{props.children || "Apple"}</Radio>
-        <Radio
-          value="radio2"
-          description={
-            props.radioDescription ? "Orange description" : undefined
-          }
-        >
-          {props.children || "Orange"}
-        </Radio>
-        <Radio value="radio3">{props.children || "Banana"}</Radio>
-        <Radio value="radio4">{props.children || "Melon"}</Radio>
-      </RadioGroup>
-    );
-  },
-
-  args: {
-    controlled: false,
-    error: false,
-    size: "medium",
-    legend: "Legend-tekst",
-    radioDescription: false,
-    hideLegend: false,
-    children: "",
-    description: "",
-  },
+        {props.children || "Orange"}
+      </Radio>
+      <Radio value="radio3">{props.children || "Banana"}</Radio>
+      <Radio value="radio4">{props.children || "Melon"}</Radio>
+    </RadioGroup>
+  );
+};
+Default.args = {
+  controlled: false,
+  error: false,
+  size: "medium",
+  legend: "Legend-tekst",
+  radioDescription: false,
+  hideLegend: false,
+  children: "",
+  description: "",
 };
 
 export const Group = () => (

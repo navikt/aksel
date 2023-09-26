@@ -1,5 +1,5 @@
-import { FileResetIcon } from "@navikt/aksel-icons";
-import { DocumentIcon } from "@sanity/icons";
+import { FileResetIcon, FileTextIcon } from "@navikt/aksel-icons";
+
 import differenceInMonths from "date-fns/differenceInMonths";
 import React from "react";
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
@@ -33,7 +33,7 @@ export const artikkelPreview = (_type: string) => {
               isAfter(updateInfo) ? (
                 <FileResetIcon aria-hidden style={{ fontSize: "4rem" }} />
               ) : (
-                <DocumentIcon />
+                <FileTextIcon />
               ),
           };
         }

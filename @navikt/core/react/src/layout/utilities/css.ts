@@ -1,4 +1,5 @@
 export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
+
 export type SpacingScale =
   | "0"
   | "05"
@@ -21,43 +22,22 @@ export type SpacingScale =
   | "24"
   | "32";
 
-type ResponsivePropConfig<T = string> = {
-  // eslint-disable-next-line no-unused-vars
+export type SpaceDelimitedAttribute<T extends string> =
+  | T
+  | `${T} ${T}`
+  | `${T} ${T} ${T}`
+  | `${T} ${T} ${T} ${T}`;
+
+type FixedResponsiveT<T> = {
   [Breakpoint in BreakpointsAlias]?: T;
 };
 
-export type ResponsiveProp<T> = T | ResponsivePropConfig<T>;
-
-export type ResponsiveValue<T = string> = undefined | ResponsiveProp<T>;
-
-export function getResponsiveProps<T = string>(
-  componentName: string,
-  componentProp: string,
-  tokenSubgroup: string,
-  responsiveProp?: ResponsiveProp<T>
-) {
-  if (!responsiveProp) {
-    return {};
-  }
-
-  if (typeof responsiveProp === "string") {
-    return {
-      [`--__ac-${componentName}-${componentProp}-xs`]: `var(--a-${tokenSubgroup}-${responsiveProp})`,
-    };
-  }
-
-  return Object.fromEntries(
-    Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => [
-      `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
-      `var(--a-${tokenSubgroup}-${aliasOrScale})`,
-    ])
-  );
-}
+export type ResponsiveProp<T> = T | FixedResponsiveT<T>;
 
 export function getResponsiveValue<T = string>(
   componentName: string,
   componentProp: string,
-  responsiveProp?: ResponsiveValue<T>
+  responsiveProp?: ResponsiveProp<T>
 ) {
   if (!responsiveProp) {
     return {};
@@ -74,5 +54,42 @@ export function getResponsiveValue<T = string>(
       `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
       responsiveValue,
     ])
+  );
+}
+
+export function getResponsiveProps<T extends string>(
+  componentName: string,
+  componentProp: string,
+  tokenSubgroup: string,
+  responsiveProp?: ResponsiveProp<T>,
+  tokenExceptions: string[] = []
+) {
+  if (!responsiveProp) {
+    return {};
+  }
+
+  if (typeof responsiveProp === "string") {
+    return {
+      [`--__ac-${componentName}-${componentProp}-xs`]: responsiveProp
+        .split(" ")
+        .map((x) =>
+          tokenExceptions.includes(x) ? x : `var(--a-${tokenSubgroup}-${x})`
+        )
+        .join(" "),
+    };
+  }
+
+  return Object.fromEntries(
+    Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => {
+      return [
+        `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
+        aliasOrScale
+          .split(" ")
+          .map((x) =>
+            tokenExceptions.includes(x) ? x : `var(--a-${tokenSubgroup}-${x})`
+          )
+          .join(" "),
+      ];
+    })
   );
 }

@@ -8,7 +8,7 @@ const Example = () => {
   return <Label>{lorem}</Label>;
 };
 
-export default withDsExample(Example, "static");
+export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */
 export const Demo = {

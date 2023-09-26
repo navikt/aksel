@@ -1,7 +1,12 @@
 import { AkselSidebarT } from "@/types";
 import { logNav } from "@/utils";
-import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { Detail, Tag } from "@navikt/ds-react";
+import {
+  ChevronDownIcon,
+  SparklesIcon,
+  TestFlaskIcon,
+  TrashIcon,
+} from "@navikt/aksel-icons";
+import { Detail } from "@navikt/ds-react";
 import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -28,7 +33,7 @@ const NavItem = ({
           );
         }}
         className={cl(
-          "hover:text-deepblue-800 focus-visible:shadow-focus text-medium relative flex  overflow-hidden py-1 pl-4 pr-2 leading-snug before:rounded-full hover:before:transition-colors focus:outline-none focus-visible:z-10 focus-visible:rounded-sm",
+          "hover:text-deepblue-800 focus-visible:shadow-focus text-medium pr-05 relative flex overflow-hidden py-1 pl-4 leading-snug before:rounded-full hover:before:transition-colors focus:outline-none focus-visible:z-10 focus-visible:rounded-sm",
           {
             "before:border-l-border-action-selected before:absolute before:left-0 before:top-1/2 before:h-6 before:-translate-y-1/2 before:border-l-[4px]":
               isActive,
@@ -41,26 +46,26 @@ const NavItem = ({
       >
         {link.heading}
         <span className="ml-auto capitalize">
-          {link.tag && ["deprecated", "beta", "new"].includes(link.tag) && (
-            <Tag
-              size="xsmall"
-              variant={
-                link.tag === "beta"
-                  ? "alt1"
-                  : link.tag === "deprecated"
-                  ? "neutral"
-                  : "info"
-              }
-              className={cl({
-                "border-violet-300 bg-violet-50": link.tag === "beta",
-              })}
-            >
-              {link.tag === "new"
-                ? "ny"
-                : link.tag === "deprecated"
-                ? "Avviklet"
-                : link.tag}
-            </Tag>
+          {link?.tag === "beta" && (
+            <TestFlaskIcon
+              aria-hidden
+              className="text-violet-800"
+              fontSize="1.25rem"
+            />
+          )}
+          {link?.tag === "new" && (
+            <SparklesIcon
+              aria-hidden
+              className="text-lightblue-700"
+              fontSize="1.25rem"
+            />
+          )}
+          {link?.tag === "deprecated" && (
+            <TrashIcon
+              aria-hidden
+              className="text-text-default"
+              fontSize="1.25rem"
+            />
           )}
         </span>
       </Link>

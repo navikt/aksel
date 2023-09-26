@@ -3,7 +3,6 @@
 @import "./global.css";
 
 @import "tailwindcss/components";
-@import "./prismjs.css";
 
 @import "tailwindcss/utilities";
 @import "./utilities.css";

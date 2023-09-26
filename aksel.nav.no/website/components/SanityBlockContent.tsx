@@ -1,205 +1,136 @@
-import { BodyLong, Detail, Heading, Ingress, Link } from "@navikt/ds-react";
-import BlockContent from "@sanity/block-content-to-react";
+import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
+import {
+  PortableText,
+  PortableTextMarkComponentProps,
+  PortableTextReactComponents,
+} from "@portabletext/react";
 import cl from "clsx";
-import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
 import ExpansionCard from "components/sanity-modules/ExpansionCard";
+import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
+import { InlineCode } from "components/website-modules/InlineCode";
+import { KBD } from "components/website-modules/KBD";
 import NextLink from "next/link";
-import React, { createContext, useContext } from "react";
+import { Children } from "react";
 import {
   Accordion,
   Alert,
   Bilde,
   CodeExamples,
   DoDont,
-  Kode,
   LevelTwoHeading,
-  logNav,
   PropsSeksjon,
   RelatertInnhold,
   SideModul,
+  Snippet,
   Tabell,
   TastaturModul,
   Tips,
   TokenTable,
   UuFeedback,
   Video,
+  logNav,
 } from ".";
-import { KBD } from "components/website-modules/KBD";
-import { InlineCode } from "components/website-modules/InlineCode";
 
-const serializers = {
+const serializers: Partial<PortableTextReactComponents> = {
   types: {
-    /* V2 content structure */
-    relatert_innhold: ({ node }) => <RelatertInnhold node={node} />,
-    innholdskort: ({ node }) => <InnholdsKort node={node} />,
-    tastatur_modul: ({ node }) => <TastaturModul node={node} />,
-    riktekst_blokk: ({ node }) => <SanityBlockContent blocks={node.body} />,
-    do_dont: ({ node }) => <DoDont node={node} />,
-    bilde: ({ node }) => <Bilde node={node} />,
-    alert: ({ node }) => <Alert node={node} />,
-    expansioncard: ({ node }) => <ExpansionCard node={node} />,
-    kode: ({ node }) => <Kode node={node} />,
-    tabell_v2: ({ node }) => <Tabell node={node} />,
-    accordion: ({ node }) => <Accordion node={node} />,
-    props_seksjon: ({ node }) => <PropsSeksjon node={node} />,
-    spesial_seksjon: ({ node }) => <SideModul node={node} />,
-    token_kategori: ({ node }) => <TokenTable node={node} />,
-    video: ({ node }) => <Video node={node} />,
-    tips: ({ node }) => <Tips node={node} />,
-    kode_eksempler: ({ node }) => <CodeExamples node={node} />,
-    uufeedback: ({ node }) => <UuFeedback node={node} />,
-
-    block: ({ node, children }) => {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const context: BlockContextT = useContext(BlockContext);
-      const style = node.style;
-      if (children && children.length === 1 && children[0] === "") return null;
-
-      const textProps = { children };
-      switch (style) {
-        case "normal":
-          return context?.isIngress ? (
-            <Ingress
-              spacing
-              {...textProps}
-              className={cl({
-                "last:mb-0": context.noLastMargin,
-              })}
-            />
-          ) : (
-            <BodyLong
-              size={context.size}
-              spacing
-              {...textProps}
-              className={cl({
-                "last:mb-0": context.noLastMargin,
-              })}
-            />
-          );
-
-        case "detail":
-          return <Detail spacing {...textProps} />;
-        case "h2":
-          return <LevelTwoHeading {...textProps} id={`h${node._key}`} />;
-        case "h3":
-          return (
-            <Heading
-              className="max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
-              spacing
-              level="3"
-              size="medium"
-              tabIndex={-1}
-              id={`h${node._key}`}
-              {...textProps}
-            />
-          );
-        case "h4":
-          return (
-            <Heading
-              className="max-w-text text-deepblue-800 mt-6"
-              spacing
-              level="4"
-              size="small"
-              id={`h${node._key}`}
-              {...textProps}
-            />
-          );
-        case "ingress":
-          return (
-            <Ingress spacing className="max-w-text">
-              {children}
-            </Ingress>
-          );
-        default:
-          return (
-            <BodyLong
-              size={context.size}
-              spacing
-              {...textProps}
-              className="max-w-text"
-            />
-          );
-      }
-    },
+    relatert_innhold: ({ value }) => <RelatertInnhold node={value} />,
+    innholdskort: ({ value }) => <InnholdsKort node={value} />,
+    tastatur_modul: ({ value }) => <TastaturModul node={value} />,
+    riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
+    do_dont: ({ value }) => <DoDont node={value} />,
+    bilde: ({ value }) => <Bilde node={value} />,
+    alert: ({ value }) => <Alert node={value} />,
+    expansioncard: ({ value }) => <ExpansionCard node={value} />,
+    kode: ({ value }) => <Snippet node={value} />,
+    tabell_v2: ({ value }) => <Tabell node={value} />,
+    accordion: ({ value }) => <Accordion node={value} />,
+    props_seksjon: ({ value }) => <PropsSeksjon node={value} />,
+    spesial_seksjon: ({ value }) => <SideModul node={value} />,
+    token_kategori: ({ value }) => <TokenTable node={value} />,
+    video: ({ value }) => <Video node={value} />,
+    tips: ({ value }) => <Tips node={value} />,
+    kode_eksempler: ({ value }) => <CodeExamples node={value} />,
+    uufeedback: ({ value }) => <UuFeedback node={value} />,
   },
-  list: (props: any) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const context: BlockContextT = useContext(BlockContext);
-    if (props?.type === "number") {
-      return (
-        <ol
-          type="1"
-          className={cl(
-            "aksel-list-ol list-margin max-w-text mb-7 list-decimal",
-            {
-              "last:mb-0": context.noLastMargin,
-            }
-          )}
-        >
-          {props.children}
-        </ol>
-      );
-    }
-    return (
-      <ul
-        className={cl(
-          "aksel-list-ul list-margin max-w-text relative mb-7 list-disc",
-          {
-            "last:mb-0": context.noLastMargin,
-          }
-        )}
-      >
-        {props.children}
+  unknownType: () => null,
+  block: {
+    normal: ({ children }) => (
+      <SanitizedBlock type="normal">{children}</SanitizedBlock>
+    ),
+    detail: ({ children }) => (
+      <SanitizedBlock type="detail">{children}</SanitizedBlock>
+    ),
+    ingress: ({ children }) => (
+      <SanitizedBlock type="ingress">{children}</SanitizedBlock>
+    ),
+    h2: ({ children, value }) => (
+      <SanitizedBlock value={value} type="h2">
+        {children}
+      </SanitizedBlock>
+    ),
+    h3: ({ children, value }) => (
+      <SanitizedBlock value={value} type="h3">
+        {children}
+      </SanitizedBlock>
+    ),
+    h4: ({ children, value }) => (
+      <SanitizedBlock value={value} type="h4">
+        {children}
+      </SanitizedBlock>
+    ),
+    heading4: ({ children, value }) => (
+      <SanitizedBlock value={value} type="h4">
+        {children}
+      </SanitizedBlock>
+    ),
+  },
+  unknownBlockStyle: ({ children }) => (
+    <SanitizedBlock type="unknown">{children}</SanitizedBlock>
+  ),
+
+  list: {
+    bullet: ({ children }) => (
+      <ul className="aksel-list-ul list-margin max-w-text relative mb-7 list-disc last:mb-0">
+        {children}
       </ul>
-    );
+    ),
+    number: ({ children }) => (
+      <ol
+        type="1"
+        className="aksel-list-ol list-margin max-w-text mb-7 list-decimal last:mb-0"
+      >
+        {children}
+      </ol>
+    ),
   },
-  listItem: (props: any) => {
-    return (
+  listItem: {
+    bullet: ({ children }) => (
       <BodyLong
         as="li"
         className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
       >
-        {props.children}
+        {children}
       </BodyLong>
-    );
+    ),
+    number: ({ children }) => (
+      <BodyLong
+        as="li"
+        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
+      >
+        {children}
+      </BodyLong>
+    ),
   },
   marks: {
-    draft_only: () => null,
-    kbd: (props) => <KBD>{props.children}</KBD>,
-    code: (props) => <InlineCode>{props.children}</InlineCode>,
-    link: ({
-      mark: { blank, href },
-      children,
-    }: {
-      mark: any;
-      children: any;
-    }) => {
+    kbd: ({ text }) => <KBD>{text}</KBD>,
+    code: ({ text }) => <InlineCode>{text}</InlineCode>,
+    link: ({ text, value: { href } }: PortableTextMarkComponentProps<any>) => {
       if (!href) {
-        return children;
+        return <span>{text}</span>;
       }
 
-      const externalLink =
-        href.startsWith("http") && !href.startsWith("https://aksel.nav.no/");
-
-      return blank || externalLink ? (
+      return (
         <Link
-          href={href}
-          target="_blank"
-          rel="noreferrer noopener"
-          inlineText
-          onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
-          }
-        >
-          {children}
-        </Link>
-      ) : (
-        <Link
-          as={NextLink}
           href={href}
           inlineText
           onClick={(e) =>
@@ -209,16 +140,18 @@ const serializers = {
               e.currentTarget.getAttribute("href")
             )
           }
-          className="inline"
+          {...(href.startsWith("http") &&
+          !href.startsWith("https://aksel.nav.no/")
+            ? { target: "_blank", rel: "noreferrer noopener" }
+            : {})}
         >
-          {children}
+          {text}
         </Link>
       );
     },
-    internalLink: ({ mark, children }: { mark: any; children: any }) => {
-      const { slug = {} } = mark;
+    internalLink: ({ text, value: { slug } }) => {
       if (!slug || !slug.current) {
-        return children;
+        return <span>{text}</span>;
       }
 
       const href = `/${slug?.current}`;
@@ -235,60 +168,110 @@ const serializers = {
             )
           }
         >
-          {children}
+          {text}
         </Link>
       );
     },
   },
+  unknownMark: () => null,
 };
-
-export type BlockContextT = {
-  size: "medium" | "small";
-  noLastMargin: boolean;
-  variant: "ds" | "aksel";
-  isIngress?: boolean;
-};
-
-export const BlockContext = createContext<BlockContextT>({
-  size: "medium",
-  noLastMargin: false,
-  variant: "ds",
-  isIngress: false,
-});
 
 export const SanityBlockContent = ({
   blocks,
-  size = "medium",
-  noLastMargin = false,
-  variant,
   isIngress = false,
-  ...rest
+  className,
 }: {
   blocks: any;
-  size?: "medium" | "small";
   className?: string;
-  noLastMargin?: boolean;
-  variant?: "ds" | "aksel";
   isIngress?: boolean;
 }) => {
-  const context = useContext(BlockContext);
-
   return (
-    <BlockContext.Provider
-      value={{
-        size,
-        noLastMargin,
-        variant: variant ?? context?.variant ?? "ds",
-        isIngress,
-      }}
+    <div
+      className={cl(
+        className,
+        isIngress && "aksel-block-ingress group/ingress"
+      )}
     >
-      <BlockContent
-        blocks={blocks ?? []}
-        serializers={serializers}
-        options={{ size: "small" }}
-        renderContainerOnSingleChild
-        {...rest}
+      <PortableText
+        value={blocks ?? []}
+        components={serializers}
+        data-test="what"
       />
-    </BlockContext.Provider>
+    </div>
   );
 };
+
+function SanitizedBlock({
+  children: _children,
+  type,
+  value,
+}: {
+  children: React.ReactNode;
+  type: string;
+  value?: { _key?: string };
+}) {
+  const children = Children.toArray(_children).filter(Boolean);
+
+  if (children.length === 0) {
+    return null;
+  }
+
+  switch (type) {
+    case "normal":
+      return (
+        <BodyLong
+          spacing
+          className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
+        >
+          {children}
+        </BodyLong>
+      );
+    case "detail":
+      return <Detail spacing>{children}</Detail>;
+    case "ingress":
+      return (
+        <BodyLong size="large" spacing className="max-w-text">
+          {children}
+        </BodyLong>
+      );
+    case "h2":
+      return (
+        <LevelTwoHeading id={`h${value._key}`}>{children}</LevelTwoHeading>
+      );
+    case "h3":
+      return (
+        <Heading
+          className="max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
+          spacing
+          level="3"
+          size="medium"
+          tabIndex={-1}
+          id={`h${value._key}`}
+        >
+          {children}
+        </Heading>
+      );
+    case "h4":
+      return (
+        <Heading
+          className="max-w-text text-deepblue-800 mt-6"
+          spacing
+          level="4"
+          size="small"
+          id={`h${value._key}`}
+        >
+          {children}
+        </Heading>
+      );
+
+    default:
+      return (
+        <BodyLong
+          spacing
+          className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
+        >
+          {children}
+        </BodyLong>
+      );
+  }
+}

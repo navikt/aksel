@@ -90,7 +90,7 @@ export const flattenObject = (obj) => {
 const tokenCSSFile = "./index.css";
 const tokenJsonFile = "./tokens.json";
 
-let allowedTokenNames = [];
+const allowedTokenNames = [];
 
 export const addTokens = (
   tokenJSONFile: string,

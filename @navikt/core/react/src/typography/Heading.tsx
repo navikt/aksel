@@ -52,7 +52,7 @@ export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
       },
       ref
     ) => {
-      let HeadingTag = as ?? (`h${level}` as React.ElementType);
+      const HeadingTag = as ?? (`h${level}` as React.ElementType);
 
       return (
         <HeadingTag

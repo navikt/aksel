@@ -1,6 +1,5 @@
 // https://github.com/mui/material-ui/blob/d14be1cb1e4c7275a1f356dec98667c7ad491983/test/utils/focusVisible.ts#L3
-import { act, fireEvent } from "@testing-library/react";
-import { render } from "@testing-library/react";
+import { act, fireEvent, render } from "@testing-library/react";
 import fs from "fs";
 import path from "path";
 import { ReactElement } from "react";

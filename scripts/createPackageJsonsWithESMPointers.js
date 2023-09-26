@@ -51,7 +51,7 @@ const checkPaths = async (packageJsonPath, packageJson) => {
         path.resolve(path.dirname(packageJsonPath), packageJson.main)
       ),
       fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2)),
-    ]).catch((_) => null);
+    ]).catch(() => null);
 
   const errorMessages = [];
   !typingsEntryExist &&

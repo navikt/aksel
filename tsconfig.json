@@ -6,6 +6,7 @@
     "target": "es6",
     "moduleResolution": "node",
     "incremental": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   }
 }

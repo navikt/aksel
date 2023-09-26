@@ -23,7 +23,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "static");
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {

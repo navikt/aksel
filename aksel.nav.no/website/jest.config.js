@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
 // jest.config.js
 const nextJest = require("next/jest");
 const { pathsToModuleNameMapper } = require("ts-jest");

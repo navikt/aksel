@@ -1,4 +1,4 @@
-import { HomeIcon } from "@sanity/icons";
+import { HouseIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 
 export const PrinsipperLandingSide = defineType({
@@ -15,7 +15,7 @@ export const PrinsipperLandingSide = defineType({
   preview: {
     prepare: () => ({
       title: "Landingsside prinsipper",
-      media: HomeIcon,
+      media: HouseIcon,
     }),
   },
 });

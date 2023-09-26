@@ -11,7 +11,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "full");
+export default withDsExample(Example, { variant: "full" });
 
 export const args = {
   index: 2,

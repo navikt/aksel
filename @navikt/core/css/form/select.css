@@ -15,6 +15,7 @@
 
 .navds-select__input:hover {
   border-color: var(--ac-select-hover-bg, var(--a-border-action));
+  cursor: pointer;
 }
 
 .navds-select__input:focus-visible {

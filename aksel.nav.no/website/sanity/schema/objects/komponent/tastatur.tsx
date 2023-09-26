@@ -1,11 +1,11 @@
-import React from "react";
+import { KeyHorizontalIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 
 export const TastaturUU = defineType({
   title: "Tastatur",
   name: "tastatur_modul",
   type: "object",
-  icon: () => <div>KBD</div>,
+  icon: KeyHorizontalIcon,
   fields: [
     defineField({
       type: "array",

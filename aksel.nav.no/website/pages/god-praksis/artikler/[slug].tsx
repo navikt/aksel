@@ -10,11 +10,10 @@ import {
 } from "@/types";
 import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import Head from "next/head";
 import NextLink from "next/link";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../../404";
-
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import {
   abbrName,
   BreadCrumbs,
@@ -23,14 +22,15 @@ import {
   TableOfContents,
 } from "@/components";
 import { Footer } from "@/layout";
-import { Header } from "components/layout/header/Header";
+import { getAkselDocuments } from "@/sanity/interface";
 import {
   contributorsAll,
   contributorsSingle,
   destructureBlocks,
 } from "@/sanity/queries";
-import { getAkselDocuments, urlFor } from "@/sanity/interface";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { Header } from "components/layout/header/Header";
+import { SEO } from "components/website-modules/seo/SEO";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
@@ -66,10 +66,7 @@ export const query = `{
   }
 }`;
 
-export const getStaticPaths = async (): Promise<{
-  fallback: string;
-  paths: { params: { slug: string } }[];
-}> => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: await getAkselDocuments("aksel_artikkel").then((paths) =>
       paths.map((slug) => ({
@@ -82,7 +79,7 @@ export const getStaticPaths = async (): Promise<{
   };
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
@@ -164,46 +161,13 @@ const Page = ({
 
   return (
     <>
-      <Head>
-        <title>{`${data?.heading} - Aksel`}</title>
-        <meta
-          property="og:title"
-          content={`${data?.heading} - Aksel`}
-          key="ogtitle"
-        />
-        <meta
-          name="description"
-          content={data?.seo?.meta ?? data?.ingress}
-          key="desc"
-        />
-        <meta
-          property="og:description"
-          content={data?.seo?.meta ?? data?.ingress}
-          key="ogdesc"
-        />
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:image"
-          content={
-            data?.seo?.image
-              ? urlFor(data?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : hasTema && (data.tema[0] as any)?.seo?.image
-              ? urlFor((data.tema[0] as any)?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={data?.heading}
+        description={data?.seo?.meta ?? data?.ingress}
+        image={data?.seo?.image ?? (data?.tema?.[0] as any)?.seo?.image}
+        publishDate={publishDate}
+        canonical={`/${data.slug}`}
+      />
 
       <Header variant="subtle" />
       <main
@@ -271,10 +235,7 @@ const Page = ({
                 aksel
               />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
-                <SanityBlockContent
-                  blocks={data?.content ?? []}
-                  variant="aksel"
-                />
+                <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
                   {authors?.length > 0 && (
                     <Label className="text-deepblue-700 mb-2" as="p">

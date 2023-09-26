@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState, useId, useMemo } from "react";
 import { userEvent, within } from "@storybook/testing-library";
@@ -286,7 +285,7 @@ export const ComboboxSizes = () => (
   </>
 );
 
-export const MaxSelectedOptions = () => {
+export const MaxSelectedOptions: StoryFunction = () => {
   const id = useId();
   const [value, setValue] = useState<string | undefined>("a");
   const [selectedOptions, setSelectedOptions] = useState([
@@ -319,7 +318,9 @@ export const WithError: StoryObject = {
     error: "Du må velge en favorittfrukt.",
   },
   render: (props) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [hasSelectedValue, setHasSelectedValue] = useState(false);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isLoading, setIsLoading] = useState(false);
     return (
       <UNSAFE_Combobox

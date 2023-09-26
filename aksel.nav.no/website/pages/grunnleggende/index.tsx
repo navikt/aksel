@@ -1,20 +1,22 @@
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
   AkselLandingPageDocT,
   AkselSidebarT,
   ArticleListT,
   NextPageT,
 } from "@/types";
-import { Heading, Ingress } from "@navikt/ds-react";
+import { BodyLong, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import { WithSidebar } from "components/layout/WithSidebar";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
-import Head from "next/head";
+import { SEO } from "components/website-modules/seo/SEO";
+import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { grunnleggendeKategorier } from "../../sanity/config";
-import { urlFor } from "@/sanity/interface";
-import { sidebarQuery, landingPageQuery } from "@/sanity/queries";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
@@ -26,10 +28,8 @@ export const query = `{${sidebarQuery}, ${landingPageQuery(
   "grunnleggende"
 )}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   preview = false,
-}: {
-  preview?: boolean;
 }): Promise<PageProps> => {
   const { sidebar, page, links } = await getClient().fetch(query, {
     type: "ds_artikkel",
@@ -53,33 +53,13 @@ export const getStaticProps = async ({
 const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   return (
     <>
-      <Head>
-        <title>Grunnleggende</title>
-        <meta property="og:title" content="Grunnleggende" />
-        <meta
-          name="description"
-          content="Grunnelegende deler fra designsystemet til NAV"
-        />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title="Grunnleggende"
+        description={page?.seo?.meta}
+        image={page?.seo?.image}
+      />
+
+      <Header />
       <WithSidebar
         sidebar={sidebar}
         pageType={{ type: "Grunnleggende", title: "Grunnleggende" }}
@@ -106,9 +86,9 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
               </Heading>
               <div>
                 {page?.[`ingress_${kat.value}`] && (
-                  <Ingress className="mb-4 only:mb-7">
+                  <BodyLong size="large" className="mb-4 only:mb-7">
                     {page[`ingress_${kat.value}`]}
-                  </Ingress>
+                  </BodyLong>
                 )}
                 {page?.[`intro_${kat.value}`] && (
                   <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
@@ -120,6 +100,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
             </div>
           ))}
       </WithSidebar>
+      <Footer />
     </>
   );
 };

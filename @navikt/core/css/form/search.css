@@ -1,9 +1,17 @@
 [data-theme="dark"] {
-  --ac-search-button-border: var(--a-border-on-inverted);
-  --ac-search-button-border-hover: var(--a-blue-200);
-  --ac-search-clear-icon: var(--a-white);
-  --ac-search-clear-icon-hover: var(--a-blue-200);
-  --ac-search-error-border: var(--a-red-300);
+  --__ac-search-button-border: var(--a-border-on-inverted);
+  --__ac-search-button-border-hover: var(--a-blue-200);
+  --__ac-search-clear-icon: var(--a-white);
+  --__ac-search-clear-icon-hover: var(--a-blue-200);
+  --__ac-search-error-border: var(--a-red-300);
+}
+
+[data-theme="light"] {
+  --__ac-search-button-border: initial;
+  --__ac-search-button-border-hover: initial;
+  --__ac-search-clear-icon: initial;
+  --__ac-search-clear-icon-hover: initial;
+  --__ac-search-error-border: initial;
 }
 
 .navds-search {
@@ -65,7 +73,7 @@
   position: absolute;
   right: 0.75rem;
   border-radius: var(--a-border-radius-medium);
-  color: var(--ac-search-clear-icon, var(--a-text-default));
+  color: var(--ac-search-clear-icon, var(--__ac-search-clear-icon, var(--a-text-default)));
   height: 32px;
   width: 32px;
   top: 50%;
@@ -87,7 +95,7 @@
 }
 
 .navds-search__button-clear:hover {
-  color: var(--ac-search-clear-icon-hover, var(--a-text-action));
+  color: var(--ac-search-clear-icon-hover, var(--__ac-search-clear-icon-hover, var(--a-text-action)));
 }
 
 .navds-search__button-clear:focus-visible {
@@ -120,16 +128,17 @@
 }
 
 .navds-search__button-search.navds-button--secondary {
-  box-shadow: -1px 0 0 0 var(--ac-search-button-border, var(--a-border-default)) inset,
-    0 1px 0 0 var(--ac-search-button-border, var(--a-border-default)) inset,
-    0 -1px 0 0 var(--ac-search-button-border, var(--a-border-default)) inset;
+  box-shadow: -1px 0 0 0 var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
+    0 1px 0 0 var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
+    0 -1px 0 0 var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset;
 }
 
 .navds-search__button-search.navds-button--secondary:hover {
-  box-shadow: -1px 0 0 0 var(--ac-search-button-border-hover, var(--a-border-action)) inset,
-    0 1px 0 0 var(--ac-search-button-border-hover, var(--a-border-action)) inset,
-    0 -1px 0 0 var(--ac-search-button-border-hover, var(--a-border-action)) inset,
-    -1px 0 0 0 var(--ac-search-button-border-hover, var(--a-border-action));
+  box-shadow: -1px 0 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action)))
+      inset,
+    0 1px 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action))) inset,
+    0 -1px 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action))) inset,
+    -1px 0 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action)));
   z-index: 1;
 }
 
@@ -138,11 +147,13 @@
 }
 
 .navds-search__button-search.navds-button--secondary:focus-visible {
-  box-shadow: 0 0 0 1px var(--ac-search-button-border, var(--a-border-default)) inset, var(--a-shadow-focus);
+  box-shadow: 0 0 0 1px var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
+    var(--a-shadow-focus);
 }
 
 .navds-search__button-search.navds-button--secondary:focus-visible:hover {
-  box-shadow: 0 0 0 1px var(--ac-search-button-border-hover, var(--a-border-action)) inset, var(--a-shadow-focus);
+  box-shadow: 0 0 0 1px var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action))) inset,
+    var(--a-shadow-focus);
 }
 
 .navds-search__button-search.navds-button--secondary:focus-visible:active {
@@ -151,11 +162,14 @@
 
 @supports not selector(:focus-visible) {
   .navds-search__button-search.navds-button--secondary:focus {
-    box-shadow: 0 0 0 1px var(--ac-search-button-border, var(--a-border-default)) inset, var(--a-shadow-focus);
+    box-shadow: 0 0 0 1px var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
+      var(--a-shadow-focus);
   }
 
   .navds-search__button-search.navds-button--secondary:focus:hover {
-    box-shadow: 0 0 0 1px var(--ac-search-button-border-hover, var(--a-border-action)) inset, var(--a-shadow-focus);
+    box-shadow: 0 0 0 1px var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action)))
+        inset,
+      var(--a-shadow-focus);
   }
 
   .navds-search__button-search.navds-button--secondary:focus:active {
@@ -165,12 +179,13 @@
 
 /* Error-handling */
 .navds-search--error .navds-search__input:not(:hover):not(:disabled) {
-  border-color: var(--ac-search-error-border, var(--a-border-danger));
-  box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--a-border-danger));
+  border-color: var(--ac-search-error-border, var(--__ac-search-error-border, var(--a-border-danger)));
+  box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--__ac-search-error-border, var(--a-border-danger)));
 }
 
 .navds-search--error .navds-search__input:focus-visible:not(:hover):not(:disabled) {
-  box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--a-border-danger)), var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--__ac-search-error-border, var(--a-border-danger))),
+    var(--a-shadow-focus);
 }
 
 /* Focus layering */
@@ -182,7 +197,8 @@
 
 @supports not selector(:focus-visible) {
   .navds-search--error .navds-search__input:focus:not(:hover):not(:disabled) {
-    box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--a-border-danger)), var(--a-shadow-focus);
+    box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--__ac-search-error-border, var(--a-border-danger))),
+      var(--a-shadow-focus);
   }
 
   .navds-search__input:focus,

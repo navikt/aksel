@@ -14,6 +14,7 @@ const Video = ({ node }: { node: VideoT }) => {
   /* https://www.w3.org/WAI/PF/HTML/wiki/Media_Alt_Technologies#1:_Use_.40aria-label_for_the_text_description_of_player */
   return (
     <figure className="mb-7 grid gap-2">
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <video
         className="focus-visible:shadow-focus-gap w-full rounded-lg focus:outline-none"
         title={node.alt}

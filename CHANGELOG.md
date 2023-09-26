@@ -1,5 +1,55 @@
 # Changelog
 
+## 5.5.0
+
+### @navikt/ds-css
+
+- Box: Ny primitive, erstatter dagens `Panel` ([#2195](https://github.com/navikt/aksel/pull/2195))
+
+<!---->
+
+- Skeleton: Width fungerer nå med inline-variant av Skeleton ([#2273](https://github.com/navikt/aksel/pull/2273))
+
+### @navikt/ds-react
+
+- Box: Ny primitive, erstatter dagens `Panel` ([#2195](https://github.com/navikt/aksel/pull/2195))
+
+<!---->
+
+- Skeleton: Width fungerer nå med inline-variant av Skeleton ([#2273](https://github.com/navikt/aksel/pull/2273))
+
+### @navikt/ds-tokens
+
+- Box: Ny primitive, erstatter dagens `Panel` ([#2195](https://github.com/navikt/aksel/pull/2195))
+
+## 5.4.1
+
+### @navikt/ds-react
+
+- MonthPicker: Fikset kalkulering av fromDate/toDate ([#2269](https://github.com/navikt/aksel/pull/2269))
+
+## 5.4.0
+
+### @navikt/ds-css
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+<!---->
+
+- ErrorSummary: Har nå 8px border-radius ([#2256](https://github.com/navikt/aksel/pull/2256))
+
+### @navikt/ds-react
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+<!---->
+
+- Search: Kjører nå bare preventDefault ved Escape når `input` inneholder tekst ([#2245](https://github.com/navikt/aksel/pull/2245))
+
+### @navikt/ds-tokens
+
+- Tokens: `data-theme="light"` vil nå tilbakestille theming ([#2238](https://github.com/navikt/aksel/pull/2238))
+
 ## 5.3.5
 
 ### @navikt/ds-react
@@ -18,25 +68,31 @@
 
 ## 5.3.3
 
-### @navikt/ds-react
+### @navikt/ds-css
 
 - HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
 
-### @navikt/ds-css
+### @navikt/ds-react
 
 - HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
 
 ## 5.3.2
 
-### @navikt/ds-react
-
-- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
-
 ### @navikt/ds-css
 
 - Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
 
+### @navikt/ds-react
+
+- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
+
 ## 5.3.1
+
+### @navikt/ds-css
+
+- :bug: fix missing accordion bottom box-shadow on last element (when opened) ([#2229](https://github.com/navikt/aksel/pull/2229))
+
+- :lipstick: GuidePanel: justert design ([#2227](https://github.com/navikt/aksel/pull/2227))
 
 ### @navikt/ds-react
 
@@ -46,13 +102,11 @@
 
 - :bug: DatePicker: Riktig skriftstørrelse på small input ([#2232](https://github.com/navikt/aksel/pull/2232))
 
+## 5.3.0
+
 ### @navikt/ds-css
 
-- :bug: fix missing accordion bottom box-shadow on last element (when opened) ([#2229](https://github.com/navikt/aksel/pull/2229))
-
-- :lipstick: GuidePanel: justert design ([#2227](https://github.com/navikt/aksel/pull/2227))
-
-## 5.3.0
+- Typography: Oppdatert med typo-klasser for `textColor`, `weight`, `align`, `visuallyHidden` og `truncated`. ([#2211](https://github.com/navikt/aksel/pull/2211))
 
 ### @navikt/ds-react
 
@@ -66,10 +120,6 @@
 
 - :wheelchair: Textarea: Skjermleser-spesifikk tekst leses opp sammenhengende ([#2216](https://github.com/navikt/aksel/pull/2216))
 
-### @navikt/ds-css
-
-- Typography: Oppdatert med typo-klasser for `textColor`, `weight`, `align`, `visuallyHidden` og `truncated`. ([#2211](https://github.com/navikt/aksel/pull/2211))
-
 ## 5.2.1
 
 ### @navikt/ds-css
@@ -82,6 +132,12 @@
 
 - Ikoner: Oppdatert ikonpakke ([#2197](https://github.com/navikt/aksel/pull/2197))
 
+### @navikt/ds-css
+
+- CSS: Popover har nå 8px border-radius. Fikset padding-bug i Select-small. ([#2219](https://github.com/navikt/aksel/pull/2219))
+
+- Hovering over combobox dropdown will move selection/focus in the list, so we don't end up with a split focus, and reversely when moving focus while hovering ([#2193](https://github.com/navikt/aksel/pull/2193))
+
 ### @navikt/ds-react
 
 - Button: Ved bruk av `as`-prop vil `role="button"` nå bli lagt til. Native `onKeyUp` for `Space` er også implementert slik at standard `button`-interaksjon vil være likere uansett html-tag. ([#2154](https://github.com/navikt/aksel/pull/2154))
@@ -90,13 +146,13 @@
 
 - Hovering over combobox dropdown will move selection/focus in the list, so we don't end up with a split focus, and reversely when moving focus while hovering ([#2193](https://github.com/navikt/aksel/pull/2193))
 
+## 5.1.0
+
 ### @navikt/ds-css
 
-- CSS: Popover har nå 8px border-radius. Fikset padding-bug i Select-small. ([#2219](https://github.com/navikt/aksel/pull/2219))
+- :lipstick: Modal: fjern kantlinje ([#2210](https://github.com/navikt/aksel/pull/2210))
 
-- Hovering over combobox dropdown will move selection/focus in the list, so we don't end up with a split focus, and reversely when moving focus while hovering ([#2193](https://github.com/navikt/aksel/pull/2193))
-
-## 5.1.0
+- Tokens: Fikset table-token ([#2204](https://github.com/navikt/aksel/pull/2204))
 
 ### @navikt/ds-react
 
@@ -108,13 +164,13 @@
 
 - Datepicker: Input setter ikke nå aria-controls før popover åpnes ([#2213](https://github.com/navikt/aksel/pull/2213))
 
+## 5.0.3
+
 ### @navikt/ds-css
 
-- :lipstick: Modal: fjern kantlinje ([#2210](https://github.com/navikt/aksel/pull/2210))
+- ConfirmationPanel: Fikset opplesing av feilmelding ([#2199](https://github.com/navikt/aksel/pull/2199))
 
-- Tokens: Fikset table-token ([#2204](https://github.com/navikt/aksel/pull/2204))
-
-## 5.0.3
+- Checkbox: Fikset checkbox-alignment ved bruk av tailwindcss ([#2199](https://github.com/navikt/aksel/pull/2199))
 
 ### @navikt/ds-react
 
@@ -125,12 +181,6 @@
 - ConfirmationPanel: Fikset opplesing av feilmelding ([#2199](https://github.com/navikt/aksel/pull/2199))
 
 - Tokens: `--a-icon-alt-3` er nå i synk med figma ([#2199](https://github.com/navikt/aksel/pull/2199))
-
-### @navikt/ds-css
-
-- ConfirmationPanel: Fikset opplesing av feilmelding ([#2199](https://github.com/navikt/aksel/pull/2199))
-
-- Checkbox: Fikset checkbox-alignment ved bruk av tailwindcss ([#2199](https://github.com/navikt/aksel/pull/2199))
 
 ## 5.0.2
 
@@ -145,6 +195,19 @@
 - Checkbox: Hotfix da checkmark ikke var sentrert hvis man brukte tailwind ([`90db7dd0c`](https://github.com/navikt/aksel/commit/90db7dd0c120c16a387d3169c05c1f33dc694323))
 
 ## 5.0.0
+
+### @navikt/ds-css
+
+- Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
+
+  - :sparkles: Støtte for header og footer
+  - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
+
+<!---->
+
+- Table: ExpandableRow har oppdatert knapp for å matche Accordion og ExpansionCard ([#2178](https://github.com/navikt/aksel/pull/2178))
+
+- Table: Alle størrelser har justert padding. Small-size table bruker nå også standard typografi-størrelse (18px). ([#2178](https://github.com/navikt/aksel/pull/2178))
 
 ### @navikt/ds-react
 
@@ -166,30 +229,29 @@
 
 - Action: Selected-varianter av action er nå 'blue' ('deepblue' før) ([#2092](https://github.com/navikt/aksel/pull/2092))
 
+## 4.12.1
+
 ### @navikt/ds-css
 
-- Oppdatert Modal - Se [Migrering](https://aksel.nav.no/grunnleggende/kode/migrering) ([#2135](https://github.com/navikt/aksel/pull/2135))
-
-  - :sparkles: Støtte for header og footer
-  - :boom: Bruker nå native dialog i stedet for react-modal (med polyfill for eldre nettlesere)
-
-<!---->
-
-- Table: ExpandableRow har oppdatert knapp for å matche Accordion og ExpansionCard ([#2178](https://github.com/navikt/aksel/pull/2178))
-
-- Table: Alle størrelser har justert padding. Small-size table bruker nå også standard typografi-størrelse (18px). ([#2178](https://github.com/navikt/aksel/pull/2178))
-
-## 4.12.1
+- Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
 
 ### @navikt/ds-react
 
 - Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
 
+## 4.12.0
+
 ### @navikt/ds-css
 
-- Added red border to Combobox in error state ([#2184](https://github.com/navikt/aksel/pull/2184))
+- CopyButton: Har nå prop 'iconPosition' for å høyre/venstre aligne ikon ([#2173](https://github.com/navikt/aksel/pull/2173))
 
-## 4.12.0
+<!---->
+
+- List: Fikset sentrering, margins ([#2168](https://github.com/navikt/aksel/pull/2168))
+
+- Checkbox: Checkmark er nå SVG-ikon og ikke Base64 ([#2171](https://github.com/navikt/aksel/pull/2171))
+
+- Alert: Fikset alignment av status-ikon mot tekst ([#2179](https://github.com/navikt/aksel/pull/2179))
 
 ### @navikt/ds-react
 
@@ -211,18 +273,6 @@
 
 - Combobox: Lukker nå nedtrekksmeny hvis man legger til ny option i singleselect ([#2177](https://github.com/navikt/aksel/pull/2177))
 
-### @navikt/ds-css
-
-- CopyButton: Har nå prop 'iconPosition' for å høyre/venstre aligne ikon ([#2173](https://github.com/navikt/aksel/pull/2173))
-
-<!---->
-
-- List: Fikset sentrering, margins ([#2168](https://github.com/navikt/aksel/pull/2168))
-
-- Checkbox: Checkmark er nå SVG-ikon og ikke Base64 ([#2171](https://github.com/navikt/aksel/pull/2171))
-
-- Alert: Fikset alignment av status-ikon mot tekst ([#2179](https://github.com/navikt/aksel/pull/2179))
-
 ## 4.11.2
 
 ### @navikt/ds-css
@@ -237,16 +287,6 @@
 
 ## 4.11.0
 
-### @navikt/ds-react
-
-- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
-
-<!---->
-
-- Fixes bug where combobox list could not be closed after clicking a chip ([#2155](https://github.com/navikt/aksel/pull/2155))
-
-- Grid: Markert som deprecated. Bruk nye 'HGrid' ([#2153](https://github.com/navikt/aksel/pull/2153))
-
 ### @navikt/ds-css
 
 - HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
@@ -257,6 +297,16 @@
 
 - Font: La til egen font for semibold italic for bedre skalering cross-browser ([#2150](https://github.com/navikt/aksel/pull/2150))
 
+### @navikt/ds-react
+
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+
+<!---->
+
+- Fixes bug where combobox list could not be closed after clicking a chip ([#2155](https://github.com/navikt/aksel/pull/2155))
+
+- Grid: Markert som deprecated. Bruk nye 'HGrid' ([#2153](https://github.com/navikt/aksel/pull/2153))
+
 ## 4.10.2
 
 ### @navikt/ds-css
@@ -265,15 +315,19 @@
 
 ## 4.10.0
 
-### @navikt/ds-react
-
-- Link: La til 'variant', 'underline' og 'inlineText'-prop ([#2093](https://github.com/navikt/aksel/pull/2093))
-
 ### @navikt/ds-css
 
 - Link: La til 'variant', 'underline' og 'inlineText'-prop ([#2093](https://github.com/navikt/aksel/pull/2093))
 
+### @navikt/ds-react
+
+- Link: La til 'variant', 'underline' og 'inlineText'-prop ([#2093](https://github.com/navikt/aksel/pull/2093))
+
 ## 4.9.1
+
+### @navikt/ds-css
+
+- Tweaks to combobox - updated example, small bugfixes, better affordance for selected options and added flag for "isAddedByUser" to onToggleSelected ([#2144](https://github.com/navikt/aksel/pull/2144))
 
 ### @navikt/ds-react
 
@@ -281,39 +335,35 @@
 
 - Tweaks to combobox - updated example, small bugfixes, better affordance for selected options and added flag for "isAddedByUser" to onToggleSelected ([#2144](https://github.com/navikt/aksel/pull/2144))
 
-### @navikt/ds-css
-
-- Tweaks to combobox - updated example, small bugfixes, better affordance for selected options and added flag for "isAddedByUser" to onToggleSelected ([#2144](https://github.com/navikt/aksel/pull/2144))
-
 ## 4.9.0
 
-### @navikt/ds-react
+### @navikt/ds-css
 
 - Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
 
-### @navikt/ds-css
+### @navikt/ds-react
 
 - Table: ExpandableRow kan nå åpnes med 'expandOnRowClick'-prop ([#2127](https://github.com/navikt/aksel/pull/2127))
 
 ## 4.8.0
 
-### @navikt/ds-react
+### @navikt/ds-css
 
 - Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
 
-### @navikt/ds-css
+### @navikt/ds-react
 
 - Nye komponenter `VStack`, `HStack` og `Spacer` for å enklere kunne lage layout med flexbox og spacing-variabler. ([#2040](https://github.com/navikt/aksel/pull/2040))
 
 ## 4.7.4
 
-### @navikt/ds-react
-
-- Textfield: La til type 'time' som tilgjengelig option ([#2137](https://github.com/navikt/aksel/pull/2137))
-
 ### @navikt/ds-css
 
 - Oppdatert bruk av REM i komponenter for forbedret utrykk ved font-scaling i browser ([#2126](https://github.com/navikt/aksel/pull/2126))
+
+### @navikt/ds-react
+
+- Textfield: La til type 'time' som tilgjengelig option ([#2137](https://github.com/navikt/aksel/pull/2137))
 
 ## 4.7.3
 
@@ -323,11 +373,11 @@
 
 ## 4.7.2
 
-### @navikt/ds-react
+### @navikt/ds-css
 
 - Stepper: Fikset `hotizontal`-bug når step var `completed` ([#2116](https://github.com/navikt/aksel/pull/2116))
 
-### @navikt/ds-css
+### @navikt/ds-react
 
 - Stepper: Fikset `hotizontal`-bug når step var `completed` ([#2116](https://github.com/navikt/aksel/pull/2116))
 
@@ -339,6 +389,10 @@
 
 ## 4.7.0
 
+### @navikt/ds-css
+
+- Ny komponent Combobox! ([#1868](https://github.com/navikt/aksel/pull/1868))
+
 ### @navikt/ds-react
 
 - Ny komponent Combobox! ([#1868](https://github.com/navikt/aksel/pull/1868))
@@ -349,35 +403,27 @@
 
 - Combobox post-release tweaks ([#2112](https://github.com/navikt/aksel/pull/2112))
 
-### @navikt/ds-css
-
-- Ny komponent Combobox! ([#1868](https://github.com/navikt/aksel/pull/1868))
-
 ## 4.6.1
 
-### @navikt/ds-react
+### @navikt/ds-css
 
 - Skjema: Labels og Legends bruker nå inline-flex når readOnly er satt ([#2089](https://github.com/navikt/aksel/pull/2089))
 
-### @navikt/ds-css
+### @navikt/ds-react
 
 - Skjema: Labels og Legends bruker nå inline-flex når readOnly er satt ([#2089](https://github.com/navikt/aksel/pull/2089))
 
 ## 4.6.0
 
-### @navikt/ds-react
-
-- Skjema: De fleste skjemakomponenter støtter nå `readOnly`-state ([#2080](https://github.com/navikt/aksel/pull/2080))
-
 ### @navikt/ds-css
 
 - Skjema: De fleste skjemakomponenter har nå styling for `readOnly`-state ([#2080](https://github.com/navikt/aksel/pull/2080))
 
-## 4.5.0
-
 ### @navikt/ds-react
 
-- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
+- Skjema: De fleste skjemakomponenter støtter nå `readOnly`-state ([#2080](https://github.com/navikt/aksel/pull/2080))
+
+## 4.5.0
 
 ### @navikt/ds-css
 
@@ -386,6 +432,10 @@
 <!---->
 
 - - Button: Fikset outline-bug i tertiary-variant ved `:active`-state ([#2079](https://github.com/navikt/aksel/pull/2079))
+
+### @navikt/ds-react
+
+- - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
 
 ## 4.4.2
 
@@ -401,14 +451,6 @@
 
 ## 4.4.0
 
-### @navikt/ds-react
-
-- Fikset klassenavn brukt for popover i Datepicker og Monthpicker ([PR](https://github.com/navikt/aksel/pull/2041))
-
-### @navikt/ds-tokens
-
-- Shadow-tokens er oppdatert til mer tydeligere varianter ([PR](https://github.com/navikt/aksel/pull/2041))
-
 ### @navikt/ds-css
 
 - Shadow-tokens er oppdatert: Datepicker har nå ikke border, Modal bruker shadow-xlarge, LinkCard bruker shadow-xsmall ([PR](https://github.com/navikt/aksel/pull/2041))
@@ -419,11 +461,15 @@
 
 - Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600). ([PR](https://github.com/navikt/aksel/pull/2036))
 
-## 4.3.0
-
 ### @navikt/ds-react
 
-- Popover og Helptext har nå luft mot siden av skjerm på mindre flater ([PR](https://github.com/navikt/aksel/pull/2069))
+- Fikset klassenavn brukt for popover i Datepicker og Monthpicker ([PR](https://github.com/navikt/aksel/pull/2041))
+
+### @navikt/ds-tokens
+
+- Shadow-tokens er oppdatert til mer tydeligere varianter ([PR](https://github.com/navikt/aksel/pull/2041))
+
+## 4.3.0
 
 ### @navikt/ds-css
 
@@ -433,15 +479,19 @@
 
 - ExpansionCard: Ved nesting av komponetene fikk man styling fra parent ([PR](https://github.com/navikt/aksel/pull/2067))
 
-## 4.2.0
-
 ### @navikt/ds-react
 
-- Oppdatert Chat: `size` og `variant`-prop, optional `avatar`, uu og ui-forbedringer ([PR](https://github.com/navikt/aksel/pull/2048))
+- Popover og Helptext har nå luft mot siden av skjerm på mindre flater ([PR](https://github.com/navikt/aksel/pull/2069))
+
+## 4.2.0
 
 ### @navikt/ds-css
 
 - Chat: `small`-size, innebygde varianter for farge og oppdatert utseende. ([PR](https://github.com/navikt/aksel/pull/2048))
+
+### @navikt/ds-react
+
+- Oppdatert Chat: `size` og `variant`-prop, optional `avatar`, uu og ui-forbedringer ([PR](https://github.com/navikt/aksel/pull/2048))
 
 ## 4.1.7
 
@@ -499,6 +549,16 @@
 
 - Deprecated klassenavn `navds-chips--icon-left` ([PR](https://github.com/navikt/aksel/pull/2035))
 
+### @navikt/ds-css
+
+- Chips: `neutral` og `action`-varianter av Chips.Toggle. Opt-out mulighet for Checkmark. Oppdatert checkmark-ikon ([PR](https://github.com/navikt/aksel/pull/2035))
+
+- Alle description-felter på fieldsets har nå `text-subtle` som farge. ([PR](https://github.com/navikt/aksel/pull/2036))
+
+### @navikt/ds-tailwind
+
+- :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
+
 ### @navikt/ds-react
 
 - Chips: `neutral` og `action`-varianter for Chips.Toggle. `checkmark`-prop for Chips.Toggle ([PR](https://github.com/navikt/aksel/pull/2035))
@@ -517,23 +577,7 @@
 
 - Oppdatert text-subtle og icon-subtle tokens til 700-skala (tidligere 600). ([PR](https://github.com/navikt/aksel/pull/2036))
 
-### @navikt/ds-css
-
-- Chips: `neutral` og `action`-varianter av Chips.Toggle. Opt-out mulighet for Checkmark. Oppdatert checkmark-ikon ([PR](https://github.com/navikt/aksel/pull/2035))
-
-- Alle description-felter på fieldsets har nå `text-subtle` som farge. ([PR](https://github.com/navikt/aksel/pull/2036))
-
-### @navikt/ds-tailwind
-
-- :tada: Fargetokens for datavisualisering. ([PR](https://github.com/navikt/aksel/pull/2032))
-
 ## 4.0.0
-
-### @navikt/ds-react
-
-- Datepicker og Monthpicker er ute av beta. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h4ef68ae743b0) ([PR](https://github.com/navikt/aksel/pull/2026))
-
-- Komponenter i `@navikt/ds-react-internal` er flyttet over til `@navikt/ds-react`. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h3b8538e1981d) ([PR](https://github.com/navikt/aksel/pull/2026))
 
 ### @navikt/ds-css
 
@@ -544,6 +588,12 @@
 - Fikset cascading-problem mellom dropdown og popover. Dropdown blir ikke lengre påvirket av import-rekkefølge av popover.
 
 - Styling for flyttede komponenter finnes nå på CDN [Guide](https://aksel.nav.no/grunnleggende/kode/css-import)
+
+### @navikt/ds-react
+
+- Datepicker og Monthpicker er ute av beta. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h4ef68ae743b0) ([PR](https://github.com/navikt/aksel/pull/2026))
+
+- Komponenter i `@navikt/ds-react-internal` er flyttet over til `@navikt/ds-react`. [Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h3b8538e1981d) ([PR](https://github.com/navikt/aksel/pull/2026))
 
 ### @navikt/aksel
 
@@ -569,11 +619,11 @@
 
 - Stylelint-pakke for Aksel ([PR](https://github.com/navikt/aksel/pull/1973))
 
-### @navikt/ds-react
+### @navikt/ds-css
 
 - Tag: `moderate`-variant ([PR](https://github.com/navikt/aksel/pull/2010))
 
-### @navikt/ds-css
+### @navikt/ds-react
 
 - Tag: `moderate`-variant ([PR](https://github.com/navikt/aksel/pull/2010))
 
@@ -601,17 +651,17 @@
 
 - Nye ikoner `FileParagraph` og `FilePlus` ([PR](https://github.com/navikt/aksel/pull/1998))
 
-### @navikt/ds-react
-
-- Datepicker: Oppdatert small-variant av Datepicker.Input. UI-oppdatert samtidig. ([PR](https://github.com/navikt/aksel/pull/1993))
-
-- CopyButton: `xsmall`-variant for bruk i tabeller ([PR](https://github.com/navikt/aksel/pull/1994))
-
 ### @navikt/ds-css
 
 - Datepicker: Fikset small-variant av datepicker-input. ([PR](https://github.com/navikt/aksel/pull/1993))
 
 - CopyButton: `xsmall`-size for bruk i tabeller ([PR](https://github.com/navikt/aksel/pull/1994))
+
+### @navikt/ds-react
+
+- Datepicker: Oppdatert small-variant av Datepicker.Input. UI-oppdatert samtidig. ([PR](https://github.com/navikt/aksel/pull/1993))
+
+- CopyButton: `xsmall`-variant for bruk i tabeller ([PR](https://github.com/navikt/aksel/pull/1994))
 
 ## 3.2.2
 
@@ -633,10 +683,6 @@
 
 ## 3.1.0
 
-### @navikt/ds-react
-
-- Oppdatert Label og Description spacing for alle skjemakomponenter ([PR](https://github.com/navikt/aksel/pull/1967))
-
 ### @navikt/ds-css
 
 - Alle komponenter bruker nå default `:focus-visible` for fokusmarkering. Medfølger også fallback for `:focus` ([PR](https://github.com/navikt/aksel/pull/1966))
@@ -644,6 +690,10 @@
 <!---->
 
 - Oppdatert Label og Description spacing for skjemakomponenter ([PR](https://github.com/navikt/aksel/pull/1967))
+
+### @navikt/ds-react
+
+- Oppdatert Label og Description spacing for alle skjemakomponenter ([PR](https://github.com/navikt/aksel/pull/1967))
 
 ## 3.0.1
 
@@ -655,15 +705,15 @@
 
 ## 3.0.0
 
+### @navikt/ds-css
+
+- Accordion: Chevron er left-aligned, deler av styling er refaktorert, `size`-props og `neutral`-variant ([PR](https://github.com/navikt/aksel/pull/1964))
+
 ### @navikt/ds-react
 
 - Accordion: left-aligner chevron, `neutral`-variant, `size`-prop ([PR](https://github.com/navikt/aksel/pull/1964))
 
 - Bruker nå nå `@navikt/aksel-icons` for interne ikoner ([PR](https://github.com/navikt/aksel/pull/1964))
-
-### @navikt/ds-css
-
-- Accordion: Chevron er left-aligned, deler av styling er refaktorert, `size`-props og `neutral`-variant ([PR](https://github.com/navikt/aksel/pull/1964))
 
 ## 2.9.8
 
@@ -759,13 +809,13 @@
 
 ## 2.8.7
 
-### @navikt/ds-react
-
-- Fikset typografi-bruk for `Radio` og `Checkbox`.
-
 ### @navikt/ds-css
 
 - Button: token for tertiary
+
+### @navikt/ds-react
+
+- Fikset typografi-bruk for `Radio` og `Checkbox`.
 
 ## 2.8.6
 
@@ -795,13 +845,13 @@
 
 ## 2.8.2
 
-### @navikt/ds-react
-
-- ExpansioCard: Oppdatert typografibruk ([PR](https://github.com/navikt/aksel/pull/1870))
-
 ### @navikt/ds-css
 
 - ExpansioCard: Oppdatert typografi ([PR](https://github.com/navikt/aksel/pull/1870))
+
+### @navikt/ds-react
+
+- ExpansioCard: Oppdatert typografibruk ([PR](https://github.com/navikt/aksel/pull/1870))
 
 ## 2.8.1
 
@@ -865,13 +915,13 @@
 
 ## 2.5.0
 
-### @navikt/ds-tokens
-
-- Breakpoint-tokens lagt til ([PR](https://github.com/navikt/aksel/pull/1832))
-
 ### @navikt/ds-tailwind
 
 - Breakpoint-tokens er lagt til. Overskriver native tailwind-breakpoints ([PR](https://github.com/navikt/aksel/pull/1832))
+
+### @navikt/ds-tokens
+
+- Breakpoint-tokens lagt til ([PR](https://github.com/navikt/aksel/pull/1832))
 
 ## 2.4.3
 
@@ -881,13 +931,13 @@
 
 ## 2.4.2
 
-### @navikt/ds-react
-
-- List: la til støtte for nestede lister ([PR](https://github.com/navikt/aksel/pull/1823))
-
 ### @navikt/ds-css
 
 - List: La til støtte for nesting ([PR](https://github.com/navikt/aksel/pull/1823))
+
+### @navikt/ds-react
+
+- List: la til støtte for nestede lister ([PR](https://github.com/navikt/aksel/pull/1823))
 
 ## 2.4.1
 
@@ -919,6 +969,12 @@
 
 ## 2.2.0
 
+### @navikt/ds-css
+
+- ToggleGroup: `Neutral`-variant. ([PR](https://github.com/navikt/aksel/pull/1789))
+
+- Button: `Neutral`-variant.
+
 ### @navikt/ds-react
 
 - ToggleGroup: `neutral`-variant ([PR](https://github.com/navikt/aksel/pull/1789))
@@ -930,12 +986,6 @@
 - Justeringer av semantiske fargetokens, statusfarger nå mer tydelig ([PR](https://github.com/navikt/aksel/pull/1787))
 
 - Oppdatert neutral-tokens ([PR](https://github.com/navikt/aksel/pull/1789))
-
-### @navikt/ds-css
-
-- ToggleGroup: `Neutral`-variant. ([PR](https://github.com/navikt/aksel/pull/1789))
-
-- Button: `Neutral`-variant.
 
 ## 2.1.7
 
@@ -1051,14 +1101,6 @@
 
 ## 2.0.0
 
-### @navikt/ds-react
-
-- Fonter blir bruk i all typografi blir nå lastet fra CDN
-
-### @navikt/ds-tokens
-
-- Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
-
 ### @navikt/ds-css
 
 - Fontlasting: Fonter lastes nå fra NAV-CDN
@@ -1066,6 +1108,14 @@
 - Tokens: Alle komponenter bruker nå semantiske tokens for som standard, med innebygd støtte for komponent-spesifikke tokens.
 
 ### @navikt/ds-tailwind
+
+- Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
+
+### @navikt/ds-react
+
+- Fonter blir bruk i all typografi blir nå lastet fra CDN
+
+### @navikt/ds-tokens
 
 - Alle token er oppdatert til nytt format. ([Guide](https://aksel.nav.no/grunnleggende/kode/migrering#h76f47744d112))
 
@@ -1113,15 +1163,15 @@
 
 ## 1.5.0
 
+### @navikt/ds-css
+
+- Tag: `filled`-varianter ([PR](https://github.com/navikt/aksel/pull/1684))
+
 ### @navikt/ds-react
 
 - Tag: `filles`-varianter ([PR](https://github.com/navikt/aksel/pull/1684))
 
 - Ny komponent Chips! ([PR](https://github.com/navikt/aksel/pull/1668))
-
-### @navikt/ds-css
-
-- Tag: `filled`-varianter ([PR](https://github.com/navikt/aksel/pull/1684))
 
 ## 1.4.4
 
@@ -1149,6 +1199,10 @@
 
 ## 1.3.39
 
+### @navikt/ds-css
+
+- Fikset bruk av `:watch` for diverse parsere (less, parcel)
+
 ### @navikt/ds-react
 
 - useId-bug fikset ved bruk i både react 17 og 18
@@ -1170,10 +1224,6 @@
 - HelpText: har nå standard max-width på `65ch`
 
 - Stepper: `interactive` og `completed`-props for wizard-løsninger
-
-### @navikt/ds-css
-
-- Fikset bruk av `:watch` for diverse parsere (less, parcel)
 
 ## 1.3.24
 
