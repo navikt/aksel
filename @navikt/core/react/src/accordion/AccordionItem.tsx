@@ -54,6 +54,10 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       shouldAnimate.current = true;
     };
 
+    if (!context?.mounted) {
+      console.error("<Accordion.Item> has to be used within an <Accordion>");
+    }
+
     return (
       <div
         className={cl("navds-accordion__item", className, {
