@@ -240,7 +240,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         : handleRangeSelect,
     };
 
-    if (onWeekNumberClick && mode === "single") {
+    if (onWeekNumberClick && mode !== "multiple") {
       console.warn(`Prop 'onWeekNumberClick' only works with mode="multiple"`);
     }
 

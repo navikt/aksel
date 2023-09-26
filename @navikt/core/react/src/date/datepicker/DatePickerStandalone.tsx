@@ -101,10 +101,8 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
           : handleRangeSelect,
     };
 
-    if (onWeekNumberClick && mode === "single") {
-      console.warn(
-        `Prop 'onWeekNumberClick' only works with mode="multiple" or mode="range"`
-      );
+    if (onWeekNumberClick && mode !== "multiple") {
+      console.warn(`Prop 'onWeekNumberClick' only works with mode="multiple"`);
     }
 
     return (
