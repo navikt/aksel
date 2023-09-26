@@ -142,7 +142,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       strategy: chosenStrategy,
       placement,
       open: open,
-      onOpenChange: onClose,
+      onOpenChange: () => onClose(),
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
