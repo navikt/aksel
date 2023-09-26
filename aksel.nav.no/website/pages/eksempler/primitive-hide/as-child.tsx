@@ -1,17 +1,14 @@
-import { Hide, Show, HGrid } from "@navikt/ds-react";
+import { Hide, HGrid } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import cl from "clsx";
 
 const Example = () => {
   return (
     <HGrid columns={{ xs: 1, md: 2 }} gap="4">
-      <Show below="md" asChild>
+      <Hide above="md" asChild>
         <Placeholder mobil text="Synlig bare på mobil" />
-      </Show>
-      <Placeholder text="Alltid synlig" />
-      <Hide below="md" asChild>
-        <Placeholder desktop text="Synlig bare på Desktop" />
       </Hide>
+      <Placeholder text="Alltid synlig" />
     </HGrid>
   );
 };
@@ -24,8 +21,8 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
+  index: 0,
+  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at Hide + child-komponent skal fungere må child kunne ta inn 'className' som prop.",
 };
 
 const Placeholder = ({

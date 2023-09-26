@@ -43,3 +43,38 @@ export const Default = {
     </VStack>
   ),
 };
+
+export const AsChild = {
+  render: () => (
+    <VStack gap="12">
+      <VStack gap="2" align="center">
+        <Hide above="xl" asChild>
+          <Tag variant="neutral">Hidden above xl</Tag>
+        </Hide>
+        <Hide above="lg" asChild>
+          <Tag variant="neutral">Hidden above lg</Tag>
+        </Hide>
+        <Hide above="md" asChild>
+          <Tag variant="neutral">Hidden above md</Tag>
+        </Hide>
+        <Hide above="sm" asChild>
+          <Tag variant="neutral">Hidden above sm</Tag>
+        </Hide>
+      </VStack>
+      <VStack gap="2" align="center">
+        <Hide below="xl" asChild>
+          <Tag variant="alt3">Hidden below xl</Tag>
+        </Hide>
+        <Hide below="lg" asChild>
+          <Tag variant="alt3">Hidden below lg</Tag>
+        </Hide>
+        <Hide below="md" asChild>
+          <Tag variant="alt3">Hidden below md</Tag>
+        </Hide>
+        <Hide below="sm" asChild>
+          <Tag variant="alt3">Hidden below sm</Tag>
+        </Hide>
+      </VStack>
+    </VStack>
+  ),
+};
