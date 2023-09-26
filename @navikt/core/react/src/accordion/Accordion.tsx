@@ -91,6 +91,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           variant,
           headingSize,
           size,
+          mounted: true,
         }}
       >
         <div
