@@ -1,11 +1,13 @@
-"use client";
-import React, { useRef, useState, forwardRef, useMemo } from "react";
 import cl from "clsx";
-import { OverridableComponent } from "../util/OverridableComponent";
-import mergeRefs from "../util/mergeRefs";
-import { omit, useClientLayoutEffect } from "../util";
+import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { Loader } from "../loader";
 import { Label } from "../typography";
+import {
+  mergeRefs,
+  OverridableComponent,
+  omit,
+  useClientLayoutEffect,
+} from "../util";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
