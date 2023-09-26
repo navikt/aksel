@@ -19,7 +19,7 @@ function main() {
   }
   mkdirSync(iconFolder);
 
-  svgList.map((svg) => {
+  svgList.forEach((svg) => {
     const icon = readFileSync(`${basePath}/${svg}`).toString();
     writeFileSync(`${iconFolder}/${svg}`, parseIcon(icon));
   });
