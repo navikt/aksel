@@ -1,5 +1,27 @@
 # @navikt/ds-css
 
+## 5.6.0
+
+### Minor Changes
+
+- Primitives: ny komponent Bleed ([#2278](https://github.com/navikt/aksel/pull/2278))
+
+### Patch Changes
+
+- :recycle: Box: Forenkling av CSS-variabler ([#2279](https://github.com/navikt/aksel/pull/2279))
+
+- Accordion: Har nå 0.25rem padding-top mellom innhold og heading. ([#2310](https://github.com/navikt/aksel/pull/2310))
+
+- Added cursor:pointer to Select component ([#2293](https://github.com/navikt/aksel/pull/2293))
+
+- :bug: Box: sett border-radius riktig ([#2329](https://github.com/navikt/aksel/pull/2329))
+
+- Stack: Kan nå endre direction, justify og align ved brekkpunkt. `Stack` er også nå en egen komponent sammen med `HStack` og `VStack`. ([#2286](https://github.com/navikt/aksel/pull/2286))
+
+- Datepicker: Tilpasset padding og sizing på mobil. ([#2311](https://github.com/navikt/aksel/pull/2311))
+
+- MonthPicker: Tilpasset padding og sizing på mobil. ([#2311](https://github.com/navikt/aksel/pull/2311))
+
 ## 5.5.0
 
 ### Minor Changes

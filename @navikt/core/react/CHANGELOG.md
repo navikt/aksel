@@ -1,5 +1,33 @@
 # @navikt/ds-react
 
+## 5.6.0
+
+### Minor Changes
+
+- :recycle: Refaktorering og småfikser ([#2265](https://github.com/navikt/aksel/pull/2265))
+
+  - Refaktorering som følge av nye ESLint-regler
+  - AccordionItem/ToggleGroup: Støtte for 'id'-prop
+  - MonthPicker: Mer presis type for 'onMonthSelect' prop
+
+- Datepicker: Tilbyr nå muligheten til å bruke `onWeekNumberClick`. ([#2311](https://github.com/navikt/aksel/pull/2311))
+
+- Primitives: ny komponent Bleed ([#2278](https://github.com/navikt/aksel/pull/2278))
+
+### Patch Changes
+
+- Accordion: Console.error når Accordion blir brukt feil. ([#2310](https://github.com/navikt/aksel/pull/2310))
+
+- Stack: Kan nå endre direction, justify og align ved brekkpunkt. `Stack` er også nå en egen komponent sammen med `HStack` og `VStack`. ([#2286](https://github.com/navikt/aksel/pull/2286))
+
+- Primitives: Show/Hide støtter nå `asChild`-api ([#2312](https://github.com/navikt/aksel/pull/2312))
+
+- Remove tabIndex="-1" on Popover to fix VoiceOver navigation issue inside Popover ([#2303](https://github.com/navikt/aksel/pull/2303))
+
+- Updated dependencies [[`540b8c711`](https://github.com/navikt/aksel/commit/540b8c711dd17ac0bf004f4a35d807d1d9416316), [`d426a9471`](https://github.com/navikt/aksel/commit/d426a9471b09fd16355fc70b0c05e5bd69cdef00), [`522d136a8`](https://github.com/navikt/aksel/commit/522d136a844423bf4097bd30ae44a534484da088)]:
+  - @navikt/aksel-icons@5.6.0
+  - @navikt/ds-tokens@5.6.0
+
 ## 5.5.0
 
 ### Minor Changes
