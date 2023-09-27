@@ -25,7 +25,7 @@
   --__ac-box-border-radius-sm: var(--__ac-box-border-radius-xs);
   --__ac-box-border-radius-md: var(--__ac-box-border-radius-sm);
   --__ac-box-border-radius-lg: var(--__ac-box-border-radius-md);
-  --__ac-box-border-radius-xl: var(--__ac-box-border-radius-xl);
+  --__ac-box-border-radius-xl: var(--__ac-box-border-radius-lg);
   --__ac-box-border-radius: var(--__ac-box-border-radius-xs);
 
   padding-inline: var(--__ac-box-padding-inline, var(--__ac-box-padding));
