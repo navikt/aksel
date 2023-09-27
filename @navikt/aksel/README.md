@@ -242,4 +242,4 @@ This codemod can only be ran once, since the size-scale will keep decreasing for
 
 ## License
 
-[MIT](https://github.com/navikt/aksel/blob/main/LICENCE)
+[MIT](https://github.com/navikt/aksel/blob/main/LICENSE)

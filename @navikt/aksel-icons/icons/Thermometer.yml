@@ -1,17 +1,15 @@
 name: Thermometer
-category: Nature and animals
-sub_category: Nature
+category: Wellness
+sub_category: Equipment
 keywords:
-  - temperature measurement
-  - fever
-  - health
-  - climate
-  - thermostat
-  - temperaturmåling
-  - feber
+  - termometer
+  - lege
+  - umiddelbar hjelp
   - helse
-  - klima
-  - termostat
+  - health
+  - help
+  - doctor
+  - patient
 variant: Stroke
-updated_at: 08.03.2023
+updated_at: 19.08.2023
 created_at: 07.03.2023

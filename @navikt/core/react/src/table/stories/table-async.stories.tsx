@@ -14,7 +14,7 @@ export default {
 
 const rowsPerPage = 10;
 
-const queryString = (obj) =>
+const queryString = (obj: Record<string, number | string | undefined>) =>
   Object.keys(obj)
     .filter((key) => obj[key] !== undefined)
     .map((key) => key + "=" + obj[key])
@@ -22,11 +22,15 @@ const queryString = (obj) =>
 
 const updateData = async (url: string) => {
   const newUrl = new URL(`https://www.example.com/${url}`);
-  const comparator = (a, b, orderBy) => {
-    if (b[orderBy] < a[orderBy]) {
+  const comparator = (
+    a: Record<string, string | number | null>,
+    b: Record<string, string | number | null>,
+    orderBy: string
+  ) => {
+    if ((b[orderBy] ?? "") < (a[orderBy] ?? "")) {
       return -1;
     }
-    if (b[orderBy] > a[orderBy]) {
+    if ((b[orderBy] ?? "") > (a[orderBy] ?? "")) {
       return 1;
     }
     return 0;
@@ -74,7 +78,14 @@ export const Async = () => {
 
   const { results: people, count } = data;
 
-  const columns = [
+  type ColumnsType = {
+    key: keyof (typeof people)[0];
+    name: string;
+    width: number;
+    sortable?: boolean;
+    value?: (person: (typeof people)[0]) => string | undefined;
+  };
+  const columns: ColumnsType[] = [
     { key: "name", name: "Name", width: 154 },
     { key: "height", name: "Height", width: 108 },
     { key: "mass", name: "Mass", width: 95 },
@@ -105,7 +116,8 @@ export const Async = () => {
           sort={sort}
           onSortChange={(sortKey) =>
             setSort(
-              sort?.orderBy === sortKey && sort.direction === "descending"
+              !sortKey ||
+                (sort?.orderBy === sortKey && sort.direction === "descending")
                 ? undefined
                 : {
                     orderBy: sortKey,
@@ -144,7 +156,7 @@ export const Async = () => {
                       whiteSpace: "nowrap",
                       textOverflow: "ellipsis",
                     }}
-                    title={person[key]}
+                    title={person[key]?.toString()}
                     key={key}
                   >
                     {value ? value(person) : person[key]}

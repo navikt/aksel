@@ -60,6 +60,16 @@ export const Variants = {
   ),
 };
 
+export const IconPosition = {
+  render: () => (
+    <div className="colgap">
+      <CopyButton copyText="3.14" iconPosition="left" text="Kopier" />
+
+      <CopyButton copyText="3.14" iconPosition="right" text="Kopier" />
+    </div>
+  ),
+};
+
 export const Sizes = {
   render: () => (
     <div className="colgap">

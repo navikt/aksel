@@ -20,25 +20,15 @@ const token = process.env.SANITY_WRITE_KEY;
 }; */
 
 const main = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const transactionClient = noCdnClient(token).transaction();
 
   const docs = await noCdnClient(token).fetch(
     `*[_type in ["ds_artikkel", "komponent_artikkel"]]`
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
   docs.forEach((data) => {
     transactionClient.patch(data._id, (p) => p.unset(["slug_v2"]));
   });
-
-  /* transactionClient.create({
-    _type: "redirect",
-    source: `/designsystem`,
-    destination: `/`,
-    permanent: true,
-  }); */
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: true })

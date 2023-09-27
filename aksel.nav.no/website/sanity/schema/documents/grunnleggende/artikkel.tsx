@@ -69,7 +69,7 @@ export const GrunnleggendeArtikkel = defineType({
       },
     }),
     defineField({
-      title: "Sidebar-index",
+      title: "Sidebar index",
       description:
         "Overstyrer sortering av artikler i sidebar. Hvis feltet er tomt, sorteres den alfabetisk.",
       name: "sidebarindex",

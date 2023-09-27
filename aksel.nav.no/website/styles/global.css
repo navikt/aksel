@@ -1,6 +1,5 @@
 html {
-  /* Remove horizontal jump caused by scrollbar presens on long or short pages */
-  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
 code,
@@ -56,11 +55,6 @@ a {
       image-rendering: unset !important;
     }
   }
-}
-
-/* Stop content behind modal-scrolling */
-.aksel.ReactModal__Body--open {
-  overflow: hidden;
 }
 
 .skiplink {

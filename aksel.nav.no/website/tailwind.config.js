@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = {
   presets: [require("@navikt/ds-tailwind")],
   content: [

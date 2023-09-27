@@ -1,13 +1,3 @@
-import {
-  AccessDeniedIcon,
-  BookIcon,
-  BulbOutlineIcon,
-  CommentIcon,
-  JoystickIcon,
-  OkHandIcon,
-  TokenIcon,
-} from "@sanity/icons";
-import { Iframe } from "./IFrame";
 import { StructureBuilder } from "sanity/desk";
 import {
   bloggKategorier,
@@ -17,13 +7,24 @@ import {
   previews,
   prinsippKategorier,
 } from "../../config";
+import { Iframe } from "./IFrame";
 
-import { FeedbackPanes } from "./feedback";
-import { FeedbackView } from "./FeedbackPreview";
-import { GodPraksisPanes } from "./god-praksis";
-import { FileTextIcon, ImageIcon } from "@navikt/aksel-icons";
-import { PanesWithCount } from "./with-count";
+import {
+  ChatIcon,
+  CircleSlashIcon,
+  ComponentIcon,
+  FileTextIcon,
+  ImageIcon,
+  LightBulbIcon,
+  NewspaperIcon,
+  PencilBoardIcon,
+  TokenIcon,
+} from "@navikt/aksel-icons";
 import differenceInMonths from "date-fns/differenceInMonths";
+import { FeedbackView } from "./FeedbackPreview";
+import { FeedbackPanes } from "./feedback";
+import { GodPraksisPanes } from "./god-praksis";
+import { PanesWithCount } from "./with-count";
 
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
@@ -65,24 +66,11 @@ export const structure = async (
 
   const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
   const adminOrDev = currentUser.roles.find((x) =>
-    ["developer", "administrator", "editor"].includes(x.name)
+    ["developer", "administrator"].includes(x.name)
   );
   const developer = currentUser.roles.find((x) =>
     ["developer"].includes(x.name)
   );
-  /* const hasBloggerRole = currentUser.roles.find((x) => x.name === "blogger");
-  const hasGrunnleggendeRole = currentUser.roles.find(
-    (x: Role) => x.name === "grunnleggende"
-  );
-  const hasKomponenterRole = currentUser.roles.find(
-    (x: Role) => x.name === "komponenter"
-  );
-  const hasPrinsipperRole = currentUser.roles.find(
-    (x: Role) => x.name === "prinsipper"
-  );
-  const hasGodPraksisForfatterRole = currentUser.roles.find(
-    (x: Role) => x.name === "god-praksis-forfatter"
-  ); */
 
   const feedback = await getClient({ apiVersion: "2021-06-07" }).fetch(
     `*[_type == "aksel_feedback" && $id in doc_ref->contributors[]->user_id.current]{_id, behandlet}`,
@@ -95,7 +83,6 @@ export const structure = async (
   );
 
   outdated = outdated.filter((x) => isAfter(x.updateInfo?.lastVerified));
-  console.log(outdated.length);
 
   return S.list()
     .title("Innholdstyper")
@@ -125,16 +112,16 @@ export const structure = async (
         ? [
             S.listItem()
               .title(
-                `Nye tilbakemeldinger (${
+                `Tilbakemeldinger (${
                   feedback.filter(
                     (x) => !x._id.includes("draft") && x.behandlet === false
                   ).length
                 })`
               )
-              .icon(CommentIcon)
+              .icon(ChatIcon)
               .child(
                 S.list()
-                  .title("Tilbakemeldinger")
+                  .title("Tilbakemeldinger.")
                   .items([
                     S.listItem()
                       .title(
@@ -181,7 +168,7 @@ export const structure = async (
         : [S.divider()]),
       S.listItem()
         .title("God Praksis")
-        .icon(OkHandIcon)
+        .icon(PencilBoardIcon)
         .child(
           S.list()
             .title("God Praksis")
@@ -196,7 +183,7 @@ export const structure = async (
         ),
       S.listItem()
         .title("Prinsipper")
-        .icon(BulbOutlineIcon)
+        .icon(LightBulbIcon)
         .child(
           S.list()
             .title("Prinsipper")
@@ -246,7 +233,7 @@ export const structure = async (
         ),
       S.listItem()
         .title("Komponenter")
-        .icon(JoystickIcon)
+        .icon(ComponentIcon)
         .child(
           S.list()
             .title("Komponenter")
@@ -266,7 +253,7 @@ export const structure = async (
         ),
       S.listItem()
         .title("Produktbloggen")
-        .icon(BookIcon)
+        .icon(NewspaperIcon)
         .child(
           S.list()
             .title("Produktbloggen")
@@ -289,7 +276,7 @@ export const structure = async (
             S.divider(),
             S.listItem()
               .title("Admin")
-              .icon(AccessDeniedIcon)
+              .icon(CircleSlashIcon)
               .child(
                 S.list()
                   .title("Admin")
@@ -301,7 +288,7 @@ export const structure = async (
                       .id(`aksel_forside_dokument`),
                     S.listItem()
                       .title("Feedback")
-                      .icon(CommentIcon)
+                      .icon(ChatIcon)
                       .child(
                         S.list()
                           .title("Feedback")
@@ -430,11 +417,8 @@ export const defaultDocumentNode = (S, { schemaType }) => {
         .options({
           url: (doc) => resolveProductionUrl(doc),
         })
-        .title("Forhåndsvinsing"),
-      S.view
-        .component(FeedbackView)
-        .icon(CommentIcon)
-        .title("Tilbakemeldinger"),
+        .title("Forhåndsvisning"),
+      S.view.component(FeedbackView).icon(ChatIcon).title("Tilbakemeldinger"),
     ]);
   }
   if (schemaType === "aksel_forside") {

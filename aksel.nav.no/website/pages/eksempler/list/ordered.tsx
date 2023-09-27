@@ -8,10 +8,7 @@ const Example = () => {
         Blinkende innhold. Vi vil ikke gi brukerne våre anfall.
       </List.Item>
       <List.Item>
-        Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
-      </List.Item>
-      <List.Item>
-        Kritiske problemer og problemer med høye barrierer på innhold med høy
+        Kritiske problemer og problemer med høye barrierer for innhold med høy
         effekt.
       </List.Item>
       <List.Item>Middels barrierer på innhold med høy effekt.</List.Item>
@@ -28,6 +25,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  desc: "Husk å sette riktig nivå/tag på List elementet hvis du bruker en tittel.",
+  index: 2,
+  desc: "Husk å sette riktig heading-nivå/tag hvis du bruker en title.",
 };

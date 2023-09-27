@@ -45,7 +45,6 @@ export const sanitySlug = (prefix: string, depth: number, source?: string) => ({
         .replace(/æ/g, "a")
         .replace(/å/g, "a")
         .replace(/ø/g, "o")
-        // eslint-disable-next-line no-useless-escape
         .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, ""),
   },
 });
@@ -70,20 +69,17 @@ export const kategoriSlug = (prefix: string) => ({
   options: {
     source: "heading",
     slugify: (input, _, { parent }) => {
-      return (
-        `${prefix}${parent?.kategori}/${input}`
-          .toLowerCase()
-          .trim()
-          .slice(0, 200)
-          .trim()
-          .replace(/\s+/g, "-")
-          .replace(/-+/gm, "-")
-          .replace(/æ/g, "a")
-          .replace(/å/g, "a")
-          .replace(/ø/g, "o")
-          // eslint-disable-next-line no-useless-escape
-          .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "")
-      );
+      return `${prefix}${parent?.kategori}/${input}`
+        .toLowerCase()
+        .trim()
+        .slice(0, 200)
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/-+/gm, "-")
+        .replace(/æ/g, "a")
+        .replace(/å/g, "a")
+        .replace(/ø/g, "o")
+        .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "");
     },
   },
 });

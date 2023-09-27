@@ -1,6 +1,6 @@
 .navds-switch {
   position: relative;
-  min-height: 48px;
+  min-height: 3rem;
   width: fit-content;
 }
 
@@ -10,7 +10,7 @@
 
 .navds-switch--small {
   position: relative;
-  min-height: 32px;
+  min-height: 2rem;
 }
 
 /* Input */
@@ -18,14 +18,14 @@
   cursor: pointer;
   position: absolute;
   z-index: 1;
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   opacity: 0;
   top: 0;
 }
 
 .navds-switch--small > .navds-switch__input {
-  height: 32px;
+  height: 2rem;
   top: 0;
 }
 
@@ -47,11 +47,11 @@
 }
 
 .navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--a-spacing-2) - 2px) 0 calc(var(--a-spacing-2) - 2px) 3.25rem;
+  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 0 calc(var(--a-spacing-2) - var(--a-spacing-05)) 3.25rem;
 }
 
 .navds-switch--right.navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--a-spacing-2) - 2px) 3.25rem calc(var(--a-spacing-2) - 2px) 0;
+  padding: calc(var(--a-spacing-2) - var(--a-spacing-05)) 3.25rem calc(var(--a-spacing-2) - var(--a-spacing-05)) 0;
 }
 
 .navds-switch--with-description,
@@ -70,8 +70,8 @@
 
 /* Track */
 .navds-switch__track {
-  width: 44px;
-  height: 24px;
+  width: 2.75rem;
+  height: 1.5rem;
   background-color: var(--ac-switch-bg, var(--a-surface-neutral));
   position: absolute;
   top: var(--a-spacing-3);
@@ -125,12 +125,12 @@
   background-color: var(--ac-switch-thumb-bg, var(--a-surface-default));
   color: var(--ac-switch-thumb-icon, var(--a-icon-subtle));
   border-radius: var(--a-border-radius-full);
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   position: absolute;
   transform: translateX(0);
-  left: 2px;
-  top: 2px;
+  left: var(--a-spacing-05);
+  top: var(--a-spacing-05);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
@@ -138,17 +138,17 @@
 }
 
 .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
-  transform: translateX(20px);
+  transform: translateX(1.25rem);
   color: var(--ac-switch-thumb-icon-checked, var(--a-icon-success));
 }
 
 @media (hover: hover) and (pointer: fine) {
   .navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
-    transform: translateX(2px);
+    transform: translateX(0.125rem);
   }
 
   .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
-    transform: translateX(18px);
+    transform: translateX(1.125rem);
   }
 }
 
@@ -157,7 +157,7 @@
 }
 
 .navds-switch__input:checked:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
-  transform: translateX(20px);
+  transform: translateX(1.25rem);
 }
 
 /* Loader */
@@ -216,6 +216,6 @@
   }
 
   .navds-switch--readonly > .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
-    transform: translateX(20px);
+    transform: translateX(1.25rem);
   }
 }

@@ -274,39 +274,26 @@ const SingleHeaderAccordion = ({
   );
 };
 
-type sizesType = "large" | "medium" | "small";
-type headingSizesType = "large" | "medium" | "small" | "xsmall";
-const sizes: sizesType[] = ["large", "medium", "small"];
-const headingSizes: headingSizesType[] = ["large", "medium", "small", "xsmall"]; // enum this?!
+const sizes: AccordionProps["size"][] = ["large", "medium", "small"];
+const headingSizes: AccordionProps["headingSize"][] = [
+  "large",
+  "medium",
+  "small",
+  "xsmall",
+];
 
-export const Size = {
-  render: ({ ...props }) => {
-    return (
-      <div style={{ width: 500 }} className="colgap">
-        {sizes.map((element) => (
-          <SingleHeaderAccordion size={element} {...props} />
-        ))}
-      </div>
-    );
-  },
+export const Size = (props) => (
+  <div style={{ width: 500 }} className="colgap">
+    {sizes.map((size) => (
+      <SingleHeaderAccordion key={size} size={size} {...props} />
+    ))}
+  </div>
+);
 
-  args: {
-    variant: "neutral",
-  },
-};
-
-export const HeadingSize = {
-  render: ({ ...props }) => {
-    return (
-      <div style={{ width: 500 }} className="colgap">
-        {headingSizes.map((element) => (
-          <SingleHeaderAccordion headingSize={element} {...props} />
-        ))}
-      </div>
-    );
-  },
-
-  args: {
-    variant: "neutral",
-  },
-};
+export const HeadingSize = (props) => (
+  <div style={{ width: 500 }} className="colgap">
+    {headingSizes.map((size) => (
+      <SingleHeaderAccordion key={size} headingSize={size} {...props} />
+    ))}
+  </div>
+);

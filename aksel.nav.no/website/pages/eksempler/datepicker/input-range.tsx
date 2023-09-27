@@ -1,5 +1,7 @@
 import { DatePicker, useRangeDatepicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
+import format from "date-fns/format";
+import nbLocale from "date-fns/locale/nb";
 
 const Example = () => {
   const { datepickerProps, toInputProps, fromInputProps, selectedRange } =
@@ -18,8 +20,14 @@ const Example = () => {
       </DatePicker>
       {selectedRange && (
         <div className="pt-4">
-          <div>{selectedRange?.from && selectedRange.from.toDateString()}</div>
-          <div>{selectedRange?.to && selectedRange.to.toDateString()}</div>
+          <div>
+            {selectedRange?.from &&
+              format(selectedRange.from, "dd.MM.yyyy", { locale: nbLocale })}
+          </div>
+          <div>
+            {selectedRange?.to &&
+              format(selectedRange.to, "dd.MM.yyyy", { locale: nbLocale })}
+          </div>
         </div>
       )}
     </div>

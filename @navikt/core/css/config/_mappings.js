@@ -4,6 +4,7 @@ const componentDir = "dist/component";
 
 const typoCss = "typography.css";
 const formCss = "form.css";
+const primitivesCss = "primitives.css";
 const componentsCss = "components.css";
 
 const StyleMappings = {
@@ -31,6 +32,34 @@ const StyleMappings = {
   ],
   components: [
     {
+      component: "Box",
+      main: primitivesCss,
+    },
+    {
+      component: "HGrid",
+      main: primitivesCss,
+    },
+    {
+      component: "HStack",
+      main: primitivesCss,
+    },
+    {
+      component: "VStack",
+      main: primitivesCss,
+    },
+    {
+      component: "Spacer",
+      main: primitivesCss,
+    },
+    {
+      component: "Show",
+      main: primitivesCss,
+    },
+    {
+      component: "Hide",
+      main: primitivesCss,
+    },
+    {
       component: "Accordion",
       main: "accordion.css",
       dependencies: [typoCss],
@@ -54,6 +83,11 @@ const StyleMappings = {
     { component: "Checkbox", main: formCss, dependencies: [typoCss] },
     { component: "CheckboxGroup", main: formCss, dependencies: [typoCss] },
     { component: "Chips", main: "chips.css", dependencies: [typoCss] },
+    {
+      component: "UNSAFE_Combobox",
+      main: "combobox.css",
+      dependencies: [typoCss, "chips.css"],
+    },
     {
       component: "ConfirmationPanel",
       main: formCss,
@@ -112,7 +146,7 @@ const StyleMappings = {
     {
       component: "Modal",
       main: "modal.css",
-      dependencies: ["button.css"],
+      dependencies: [typoCss, "button.css"],
     },
     {
       component: "Pagination",
@@ -151,7 +185,7 @@ const StyleMappings = {
     {
       component: "DatePicker",
       main: "date.css",
-      dependencies: [typoCss, "button.css", "popover.css"],
+      dependencies: [typoCss, primitivesCss, "button.css", "popover.css"],
     },
     {
       component: "MonthPicker",
@@ -165,6 +199,7 @@ module.exports = {
   StyleMappings,
   typoCss,
   formCss,
+  primitivesCss,
   componentsCss,
   rootDir,
   globalDir,

@@ -33,7 +33,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "static");
+export default withDsExample(Example, { variant: "static" });
 
 /* Storybook story */
 export const Demo = {
@@ -41,5 +41,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 4,
 };

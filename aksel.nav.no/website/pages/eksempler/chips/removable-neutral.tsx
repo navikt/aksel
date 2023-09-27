@@ -44,5 +44,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Removable chip viser valgte verdier som brukeren kan fjerne."
+  desc: "Removable chip viser valgte verdier som brukeren kan fjerne.",
 };

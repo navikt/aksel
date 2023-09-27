@@ -114,7 +114,15 @@ export const Stepper: StepperComponent = forwardRef<
           {React.Children.map(children, (step, index) => {
             return (
               <li
-                className={cl("navds-stepper__item")}
+                className={cl("navds-stepper__item", {
+                  "navds-stepper__item--behind": activeStep > index,
+                  "navds-stepper__item--completed":
+                    React.isValidElement<StepperStepProps>(step) &&
+                    step?.props?.completed,
+                  "navds-stepper__item--non-interactive":
+                    React.isValidElement<StepperStepProps>(step) &&
+                    !(step?.props?.interactive ?? interactive),
+                })}
                 key={index + (children?.toString?.() ?? "")}
               >
                 <span className="navds-stepper__line navds-stepper__line--1" />

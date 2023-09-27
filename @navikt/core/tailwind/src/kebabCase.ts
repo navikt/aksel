@@ -1,4 +1,4 @@
-const _ = require("lodash");
+import _ from "lodash";
 
 const kebabCase = (string) =>
   _.kebabCase(string).replace(/(^|-)(\d+)-(x[ls])/g, "$1$2$3");

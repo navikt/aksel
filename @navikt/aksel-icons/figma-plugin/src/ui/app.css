@@ -58,7 +58,7 @@
 .icon-button {
   min-height: 3rem;
   min-width: 3rem;
-  border-radius: 2px;
+  border-radius: var(--a-border-radius-small);
   display: grid;
   place-content: center;
   background-color: var(--a-surface-default);

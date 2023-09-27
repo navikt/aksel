@@ -25,4 +25,29 @@ export const deprecations: DeprecatedList = [
     message:
       "In v4.1.0 Chips. Toggle no longer handles special alignment for checkmark-icon, thus removing this class",
   },
+  {
+    classes: ["navds-modal__overlay"],
+    message:
+      "Removed in v5.0.0, use `.navds-modal::backdrop` and `.navds-modal--polyfilled + .backdrop` instead",
+  },
+  {
+    classes: ["navds-modal__button--shake"],
+    message: "Removed in v5.0.0",
+  },
+  {
+    classes: ["navds-modal__content"],
+    message: "Renamed to `.navds-modal__body` in v5.0.0",
+  },
+  {
+    classes: ["navds-guide__illustration"],
+    message: "Use `.navds-guide` instead",
+  },
+  {
+    classes: [
+      "navds-guide__illustration--small",
+      "navds-guide__illustration--medium",
+    ],
+    message:
+      "There is no 1:1 replacement for this, the size will depend on the 'poster' prop and the viewport width",
+  },
 ];

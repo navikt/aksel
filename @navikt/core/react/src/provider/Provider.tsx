@@ -2,13 +2,9 @@ import React, { createContext, useContext } from "react";
 
 export interface ProviderContextType {
   /**
-   * Global root-element to attach portals to (Modal, Tooltip)
+   * Global root-element to attach portals to (Tooltip)
    */
   rootElement?: HTMLElement;
-  /**
-   * Global config for appElement (Modal)
-   */
-  appElement?: HTMLElement;
 }
 
 export const ProviderContext = createContext<ProviderContextType | undefined>(
@@ -18,7 +14,6 @@ export const ProviderContext = createContext<ProviderContextType | undefined>(
 export interface ProviderProps {
   children?: React.ReactNode;
   rootElement?: HTMLElement;
-  appElement?: HTMLElement;
 }
 
 export const useProvider = () => useContext(ProviderContext);

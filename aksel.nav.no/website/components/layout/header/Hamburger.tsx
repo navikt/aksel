@@ -1,13 +1,11 @@
-import { MenuHamburgerIcon, XMarkIcon } from "@navikt/aksel-icons";
+import { MenuHamburgerIcon } from "@navikt/aksel-icons";
 
-import { Button } from "@navikt/ds-react";
+import { Modal } from "@navikt/ds-react";
 import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import ReactModal from "react-modal";
+import { useState } from "react";
 import { logNav } from "../..";
-import styles from "./header.module.css";
 
 const LinkElement = ({ name, href, onClick }) => {
   const { asPath } = useRouter();
@@ -41,14 +39,9 @@ const LinkElement = ({ name, href, onClick }) => {
 
 export const Hamburger = () => {
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    ReactModal.setAppElement("#__next");
-  }, []);
-
   return (
     <>
-      <div className="z-[1050] mr-0 grid h-full place-content-center">
+      <div className="mr-2 grid h-full place-content-center lg:hidden">
         <button
           onClick={() => setOpen(!open)}
           aria-expanded={open}
@@ -60,25 +53,16 @@ export const Hamburger = () => {
             aria-label="Åpne meny"
           />
         </button>
-        <ReactModal
-          isOpen={open}
-          onRequestClose={() => setOpen(false)}
-          aria={{ modal: true }}
-          overlayClassName={styles.modalOverlay}
-          contentLabel="Meny"
-          className="bg-surface-default shadow-xlarge absolute left-4 right-4 top-0 block rounded px-11 py-14 sm:left-auto sm:right-6 sm:w-96 sm:max-w-[90%] lg:hidden"
-        >
+      </div>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        header={{ heading: "Meny" }}
+        width="small"
+      >
+        <Modal.Body>
           <nav aria-label="hovedmeny">
             <ul>
-              <Button
-                variant="tertiary"
-                onClick={() => setOpen(false)}
-                className={cl(
-                  styles.akselTertiaryButton,
-                  "absolute right-2 top-2"
-                )}
-                icon={<XMarkIcon title="lukk meny" fontSize="1.5rem" />}
-              />
               <LinkElement
                 onClick={() => setOpen(false)}
                 name="God praksis"
@@ -106,8 +90,8 @@ export const Hamburger = () => {
               />
             </ul>
           </nav>
-        </ReactModal>
-      </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

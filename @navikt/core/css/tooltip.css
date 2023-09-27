@@ -25,8 +25,8 @@
 }
 
 .navds-tooltip__arrow {
-  height: 7px;
-  width: 7px;
+  height: 0.4375rem;
+  width: 0.4375rem;
   transform: rotate(45deg);
   z-index: -1;
   background-color: var(--ac-tooltip-bg, var(--a-surface-inverted));
@@ -45,8 +45,8 @@
   color: var(--ac-tooltip-key-text, var(--a-text-on-inverted));
   border-radius: var(--a-border-radius-small);
   padding: 0 var(--a-spacing-1);
-  min-width: 18px;
-  height: 18px;
+  min-width: 1.125rem;
+  height: 1.125rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;

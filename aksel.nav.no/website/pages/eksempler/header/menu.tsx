@@ -1,16 +1,16 @@
-import { Dropdown, InternalHeader } from "@navikt/ds-react";
+import { Dropdown, InternalHeader, Spacer } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
     <InternalHeader>
       <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
+      <Spacer />
       <Dropdown>
         <InternalHeader.UserButton
           as={Dropdown.Toggle}
           name="Ola Normann"
           description="Enhet: Skien"
-          className="ml-auto"
         />
         <Dropdown.Menu>
           <Dropdown.Menu.List>
@@ -22,7 +22,7 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "full");
+export default withDsExample(Example, { variant: "full" });
 
 export const args = {
   index: 3,

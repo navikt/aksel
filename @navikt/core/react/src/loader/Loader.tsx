@@ -1,11 +1,11 @@
 import React, { forwardRef, SVGProps } from "react";
 import cl from "clsx";
-import { useId } from "..";
+import { omit, useId } from "..";
 
 export interface LoaderProps extends SVGProps<SVGSVGElement> {
   /**
    * Changes Loader width/height
-   * 64px | 40px | 32px | 24px | 20px | 16px
+   * 88px | 64px | 40px | 32px | 24px | 20px | 16px
    * @default "medium"
    */
   size?:
@@ -52,7 +52,6 @@ export type LoaderType = React.ForwardRefExoticComponent<
 export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
   (
     {
-      children,
       className,
       size = "medium",
       title = "venter...",
@@ -81,7 +80,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
         focusable="false"
         viewBox="0 0 50 50"
         preserveAspectRatio="xMidYMid"
-        {...rest}
+        {...omit(rest, ["children"])}
       >
         <title id={id ?? `loader-${internalId}`}>{title}</title>
         <circle

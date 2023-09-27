@@ -3,7 +3,7 @@ import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
 import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
-import { createAuthStore, defineConfig } from "sanity";
+import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
@@ -11,9 +11,9 @@ import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
 
 import { getTemplates } from "./util";
 
-import { DatabaseIcon, RemoveCircleIcon } from "@sanity/icons";
 import { allArticleDocuments } from "./config";
 import { schema } from "./schema";
+import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 
 const projectId = "hnbe3yhs";
 
@@ -33,7 +33,7 @@ export const workspaceConfig = defineConfig([
     name: "dev",
     dataset: "development",
     basePath: "/admin/dev",
-    icon: RemoveCircleIcon,
+    icon: TestFlaskIcon,
     auth: authStore("development"),
   },
 ]);
@@ -60,12 +60,13 @@ function defaultConfig() {
       },
     },
     document: {
-      newDocumentOptions: (prev, { currentUser }) =>
-        currentUser.roles.find((x) =>
-          ["developer", "administrator", "editor"].includes(x.name)
+      newDocumentOptions: (prev, { currentUser }) => {
+        return currentUser.roles.find((x) =>
+          ["developer", "administrator"].includes(x.name)
         )
-          ? [...getTemplates(currentUser.roles), ...prev]
-          : getTemplates(currentUser.roles),
+          ? [...getTemplates(prev), ...prev]
+          : getTemplates();
+      },
     },
     plugins: [
       deskTool({
@@ -94,9 +95,9 @@ function defaultConfig() {
 }
 
 function authStore(dataset: string) {
-  return createAuthStore({
+  return {
     redirectOnSingle: false,
-    mode: "replace",
+    mode: "replace" as const,
     projectId,
     dataset,
     providers: [
@@ -111,5 +112,5 @@ function authStore(dataset: string) {
         url: "https://api.sanity.io/v1/auth/login/github",
       },
     ],
-  });
+  };
 }

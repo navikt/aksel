@@ -1,6 +1,8 @@
 import { dateStr } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { getDocumentsTmp } from "@/sanity/interface";
+import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselGrunnleggendeDocT,
   AkselSidebarT,
@@ -11,13 +13,14 @@ import {
 } from "@/types";
 import { Detail } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/WithSidebar";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
+import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
-import Head from "next/head";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { getDocumentsTmp, urlFor } from "@/sanity/interface";
-import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
@@ -41,10 +44,7 @@ export const query = `{
   ${sidebarQuery}
 }`;
 
-export const getStaticPaths = async (): Promise<{
-  fallback: string;
-  paths: { params: { slug: string[] } }[];
-}> => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: await getDocumentsTmp("ds_artikkel").then((paths) =>
       paths.map((slug) => ({
@@ -57,7 +57,7 @@ export const getStaticPaths = async (): Promise<{
   };
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
@@ -93,40 +93,24 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
 
   return (
     <>
-      <Head>
-        <title>{page?.heading ? `${page?.heading} - Aksel` : "Aksel"}</title>
-        <meta property="og:title" content={`${page.heading} - Aksel`} />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : seo
-              ? urlFor(seo).width(1200).height(630).fit("crop").url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={page?.heading}
+        description={page?.seo?.meta}
+        image={page?.seo?.image ?? seo}
+      />
+
+      <Header />
       <WithSidebar
-        withToc
         sidebar={sidebar}
         pageType={{ type: "Grunnleggende", title: page?.heading }}
         intro={
-          <Detail as="div" className="mt-2 flex items-center gap-3">
-            <StatusTag showStable status={page?.status?.tag} />
-            {`OPPDATERT ${publishDate}`}
+          <Detail as="div">
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <span>
+                Oppdatert <time>{publishDate}</time>
+              </span>
+              <StatusTag showStable status={page?.status?.tag} />
+            </div>
           </Detail>
         }
         pageProps={page}
@@ -135,6 +119,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
       </WithSidebar>
+      <Footer />
     </>
   );
 };

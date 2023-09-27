@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import "baseline/index.css";
 @import "typography.css";
+@import "primitives/index.css";
 @import "grid.css";
 @import "accordion.css";
 @import "alert.css";

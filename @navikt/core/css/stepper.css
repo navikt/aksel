@@ -40,6 +40,10 @@
   background-color: var(--ac-stepper-line-completed, var(--a-border-selected));
 }
 
+.navds-stepper__item--behind.navds-stepper__item--completed + .navds-stepper__item > .navds-stepper__line--1 {
+  background-color: var(--ac-stepper-line-completed, var(--a-border-selected));
+}
+
 .navds-stepper__line--1 {
   grid-row: line-1;
   display: none;
@@ -109,7 +113,7 @@ button.navds-stepper__step {
 .navds-stepper__circle--success {
   border: none;
   background: none;
-  font-size: 28px;
+  font-size: 1.75rem;
   color: var(--a-text-on-action);
   background-color: var(--ac-stepper-text, var(--a-surface-action));
 }
@@ -210,6 +214,12 @@ button.navds-stepper__step {
 }
 
 .navds-stepper__step--non-interactive.navds-stepper__step--behind.navds-stepper__step--completed + .navds-stepper__line {
+  background-color: var(--ac-stepper-non-interactive-line-completed, var(--a-border-strong));
+}
+
+.navds-stepper__item--non-interactive.navds-stepper__item--behind.navds-stepper__item--completed
+  + .navds-stepper__item
+  > .navds-stepper__line--1 {
   background-color: var(--ac-stepper-non-interactive-line-completed, var(--a-border-strong));
 }
 

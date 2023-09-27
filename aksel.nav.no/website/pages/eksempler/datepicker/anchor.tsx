@@ -1,5 +1,7 @@
 import { Button, DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
+import format from "date-fns/format";
+import nbLocale from "date-fns/locale/nb";
 import { useState } from "react";
 
 const Example = () => {
@@ -20,7 +22,9 @@ const Example = () => {
       {days && (
         <div className="pt-4">
           {days.map((x) => (
-            <div key={x.toString()}>{x.toDateString()}</div>
+            <div key={x.toString()}>
+              {format(x, "dd.MM.yyyy", { locale: nbLocale })}
+            </div>
           ))}
         </div>
       )}

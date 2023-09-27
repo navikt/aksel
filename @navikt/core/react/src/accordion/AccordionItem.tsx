@@ -7,6 +7,7 @@ import React, {
   useState,
 } from "react";
 import { AccordionContext } from "./AccordionContext";
+import { omit } from "../util";
 
 export interface AccordionItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -36,10 +37,7 @@ export const AccordionItemContext =
   createContext<AccordionItemContextProps | null>(null);
 
 const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
-  (
-    { children, className, open, defaultOpen = false, onClick, id, ...rest },
-    ref
-  ) => {
+  ({ children, className, open, defaultOpen = false, ...rest }, ref) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
     const context = useContext(AccordionContext);
 
@@ -56,6 +54,10 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       shouldAnimate.current = true;
     };
 
+    if (!context?.mounted) {
+      console.error("<Accordion.Item> has to be used within an <Accordion>");
+    }
+
     return (
       <div
         className={cl("navds-accordion__item", className, {
@@ -64,7 +66,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
           "navds-accordion__item--no-animation": !shouldAnimate.current,
         })}
         ref={ref}
-        {...rest}
+        {...omit(rest, ["onClick"])}
       >
         <AccordionItemContext.Provider
           value={{

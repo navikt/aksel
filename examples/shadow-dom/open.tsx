@@ -11,7 +11,7 @@ class CustomComponent extends HTMLElement {
     this.attachShadow({ mode: "open" }).appendChild(rootElement);
 
     ReactDOM.createRoot(appElement).render(
-      <Provider rootElement={rootElement} appElement={appElement}>
+      <Provider rootElement={rootElement}>
         <style>{styles}</style>
         <DateWrapper />
       </Provider>

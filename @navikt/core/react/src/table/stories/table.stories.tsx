@@ -77,7 +77,10 @@ export const NoShadeOnHover = () => <TableComponent shadeOnHover={false} />;
 export const ZebraNoShadeOnHover = () => (
   <TableComponent zebraStripes shadeOnHover={false} />
 );
-export const Small = () => <TableComponent size="small" />;
+export const SizeLarge = () => <TableComponent size="large" />;
+export const SizeMedium = () => <TableComponent size="medium" />;
+export const SizeSmall = () => <TableComponent size="small" />;
+
 export const Buttons = () => <TableComponent size="small" button />;
 
 export const WithDivs = () => {

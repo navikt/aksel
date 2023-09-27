@@ -1,16 +1,17 @@
-import { InternalHeader } from "@navikt/ds-react";
+import { InternalHeader, Spacer } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
     <InternalHeader>
       <InternalHeader.Title href="#home">Sykepenger</InternalHeader.Title>
-      <InternalHeader.User name="Ola Normann" className="ml-auto" />
+      <Spacer />
+      <InternalHeader.User name="Ola Normann" />
     </InternalHeader>
   );
 };
 
-export default withDsExample(Example, "full");
+export default withDsExample(Example, { variant: "full" });
 
 export const args = {
   index: 1,

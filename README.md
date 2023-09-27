@@ -64,7 +64,7 @@ Vi tar gjerne i mot PR-er! [CONTRIBUTING.md](https://github.com/navikt/aksel/blo
 
 ## Lisenser
 
-[MIT](https://github.com/navikt/aksel/blob/main/LICENCE)
+[MIT](https://github.com/navikt/aksel/blob/main/LICENSE)
 
 ## Codeowners
 

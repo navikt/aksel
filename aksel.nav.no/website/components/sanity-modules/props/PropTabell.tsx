@@ -33,7 +33,9 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
         <span>{prop.type ? <>{Highlighter({ type: prop.type })}</> : ""}</span>
       </dt>
       {prop.description && (
-        <dd className="font-sans text-base">{prop.description}</dd>
+        <dd className="whitespace-pre-wrap font-sans text-base">
+          {prop.description}
+        </dd>
       )}
       {prop.name === "ref" && prop.type.includes("Ref<") && (
         <dd className="font-sans text-base">
@@ -53,7 +55,7 @@ const PropTable = ({ komponent }: { komponent: PropTableT }) => {
       <Heading
         size="xsmall"
         level="3"
-        className="scroll-m-8 rounded-t border border-b-0 border-gray-300 bg-gray-50 p-2"
+        className="scroll-m-8 rounded-t-lg border border-b-0 border-gray-300 bg-gray-50 p-2"
         id={`${komponent._key}`}
       >
         {komponent?.title ? komponent.title : "Props"}
@@ -61,7 +63,7 @@ const PropTable = ({ komponent }: { komponent: PropTableT }) => {
 
       <div className="toc-ignore relative mb-8">
         {komponent?.propref?.proplist?.length === 0 && (
-          <div className="mb-8 rounded-b border border-gray-300 p-2">
+          <div className="mb-8 rounded-b-lg border border-gray-300 p-2">
             <BodyShort>Fant ingen props for denne komponenten.</BodyShort>
           </div>
         )}

@@ -94,13 +94,25 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         }
       }, [loading, children]);
 
-      const filterProps =
+      const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
         disabled ?? widthOverride ? omit(rest, ["href"]) : rest;
 
       return (
         <Component
+          {...(Component !== "button" ? { role: "button" } : {})}
           {...filterProps}
           ref={mergedRef}
+          onKeyUp={(e: React.KeyboardEvent<HTMLButtonElement>) => {
+            filterProps.onKeyUp?.(e);
+            if (
+              e.key === " " &&
+              !disabled &&
+              !widthOverride &&
+              !e.isDefaultPrevented()
+            ) {
+              e.currentTarget.click();
+            }
+          }}
           className={cl(
             className,
             "navds-button",
@@ -126,11 +138,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
                 <span className="navds-button__icon">{icon}</span>
               )}
               {children && (
-                <Label
-                  as="span"
-                  size={size === "medium" ? "medium" : "small"}
-                  aria-live="polite"
-                >
+                <Label as="span" size={size === "medium" ? "medium" : "small"}>
                   {children}
                 </Label>
               )}

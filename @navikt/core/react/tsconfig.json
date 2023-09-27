@@ -1,9 +1,7 @@
 {
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./cjs",
-    "module": "commonjs",
-    "noImplicitAny": false
-  },
-  "include": ["./src"]
+    "noImplicitAny": false,
+    "resolveJsonModule": true
+  }
 }

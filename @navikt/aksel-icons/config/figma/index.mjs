@@ -4,6 +4,7 @@ import { makeConfig } from "./make-configs.mjs";
 import { existsSync, writeFileSync, mkdirSync, rmSync, readdirSync } from "fs";
 import { resolve } from "path";
 import { resolveName } from "./icon-name.mjs";
+import { paginate } from "./paginate.mjs";
 config();
 /* https://www.figma.com/file/wEdyFjCQSBR3U7FvrMbPXa/Core-Icons-Next?node-id=277%3A1221&t=mUJzFvnsceYYXNL5-0 */
 
@@ -15,14 +16,14 @@ if (!process.env.FIGMA_TOKEN) {
 
 async function main() {
   let icons = await fetchIcons();
-  /* icons = icons.filter(
-    (x) => x.containing_frame.pageName === "Files and application"
-  ); */
 
   const totalIcons = icons.length;
 
   const { images } = await fetchDownloadUrls(
-    icons.map((x) => x.node_id).join(",")
+    paginate(
+      icons.map((x) => x.node_id),
+      400
+    ).map((x) => x.join(","))
   );
 
   if (existsSync(iconFolder)) {

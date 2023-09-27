@@ -8,6 +8,10 @@ export interface GridProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+/**
+ * @deprecated Use <HGrid /> instead. <Grid /> will be removed in the future.
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/hgrid)
+ */
 export const Grid = forwardRef<HTMLDivElement, GridProps>(
   ({ children, className, ...rest }, ref) => (
     <div ref={ref} className={cl("navds-grid", className)} {...rest}>

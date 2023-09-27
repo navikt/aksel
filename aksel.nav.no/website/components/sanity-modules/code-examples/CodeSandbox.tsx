@@ -1,4 +1,5 @@
 import { PencilIcon } from "@navikt/aksel-icons";
+import { Button } from "@navikt/ds-react";
 import { getParameters } from "codesandbox/lib/api/define";
 
 const indexTsx = `import React from 'react';
@@ -50,16 +51,18 @@ export const CodeSandbox = ({ code }: { code: string }) => {
       action="https://codesandbox.io/api/v1/sandboxes/define"
       method="POST"
       target="_blank"
+      className="h-8"
     >
       <input type="hidden" name="parameters" value={parameters} />
       <input type="hidden" name="query" value="module=App.js" />
-      <button
+      <Button
+        variant="tertiary-neutral"
+        size="small"
         type="submit"
-        className="focus-visible:shadow-focus-inset flex items-center justify-center gap-1 rounded-sm px-3 py-2 hover:bg-gray-100 focus:outline-none active:bg-gray-200"
+        icon={<PencilIcon aria-hidden fontSize="1.5rem" />}
       >
-        <PencilIcon aria-hidden fontSize="1.5rem" />
         CodeSandbox
-      </button>
+      </Button>
     </form>
   );
 };

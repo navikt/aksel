@@ -25,6 +25,10 @@ export interface CellProps extends HTMLAttributes<HTMLDivElement> {
   lg?: Column;
 }
 
+/**
+ * @deprecated Use <HGrid /> instead. <Grid /> will be removed in the future.
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/hgrid)
+ */
 export const Cell = forwardRef<HTMLDivElement, CellProps>(
   ({ children, xs, sm, md, lg, className, ...rest }, ref) => {
     return (
