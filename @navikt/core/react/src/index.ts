@@ -38,3 +38,4 @@ export * from "./layout/stack";
 export * from "./layout/grid";
 export * from "./layout/content-container";
 export * from "./layout/responsive";
+export * from "./layout/bleed";
