@@ -20,7 +20,7 @@ const Example = () => {
             <Button icon={<MenuHamburgerIcon aria-hidden />} variant="tertiary">
               Meny
             </Button>
-            <Show above="md">
+            <Show above="md" asChild>
               <Button
                 icon={<MagnifyingGlassIcon aria-hidden />}
                 variant="tertiary"
@@ -28,19 +28,19 @@ const Example = () => {
                 Søk
               </Button>
             </Show>
-            <Show above="sm">
+            <Show above="sm" asChild>
               <Button icon={<BellIcon aria-hidden />} variant="tertiary">
                 Varsler
               </Button>
             </Show>
-            <Show above="md">
+            <Show above="md" asChild>
               <Button icon={<PersonIcon aria-hidden />} variant="tertiary">
                 <BodyShort weight="semibold" truncate className="max-w-[10vw]">
                   Ola Aksel Norman
                 </BodyShort>
               </Button>
             </Show>
-            <Show above="md">
+            <Show above="md" asChild>
               <Button icon={<LeaveIcon aria-hidden />} variant="tertiary">
                 Logg ut
               </Button>
@@ -63,7 +63,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
+  index: 4,
   desc: "Show gjør det enklere å konsistent utføre layout-endringer ved konkrete brekkpunkt",
 };
 

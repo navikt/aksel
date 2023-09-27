@@ -20,7 +20,7 @@ const Example = () => {
             <Button icon={<MenuHamburgerIcon aria-hidden />} variant="tertiary">
               Meny
             </Button>
-            <Hide below="md">
+            <Hide below="md" asChild>
               <Button
                 icon={<MagnifyingGlassIcon aria-hidden />}
                 variant="tertiary"
@@ -28,19 +28,19 @@ const Example = () => {
                 Søk
               </Button>
             </Hide>
-            <Hide below="sm">
+            <Hide below="sm" asChild>
               <Button icon={<BellIcon aria-hidden />} variant="tertiary">
                 Varsler
               </Button>
             </Hide>
-            <Hide below="md">
+            <Hide below="md" asChild>
               <Button icon={<PersonIcon aria-hidden />} variant="tertiary">
                 <BodyShort weight="semibold" truncate className="max-w-[10vw]">
                   Ola Aksel Norman
                 </BodyShort>
               </Button>
             </Hide>
-            <Hide below="md">
+            <Hide below="md" asChild>
               <Button icon={<LeaveIcon aria-hidden />} variant="tertiary">
                 Logg ut
               </Button>

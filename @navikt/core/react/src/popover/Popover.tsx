@@ -142,7 +142,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       strategy: chosenStrategy,
       placement,
       open: open,
-      onOpenChange: onClose,
+      onOpenChange: () => onClose(),
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
@@ -210,7 +210,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         })}
         data-placement={flPlacement}
         aria-hidden={!open || !anchorEl}
-        tabIndex={-1}
         {...getFloatingProps({
           ref: floatingRef,
           style: {
@@ -218,6 +217,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             top: y ?? 0,
             left: x ?? 0,
           },
+          tabIndex: undefined,
         })}
         {...rest}
       >
