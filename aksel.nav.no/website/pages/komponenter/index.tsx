@@ -1,142 +1,111 @@
-import { komponentLandingQuery, SanityT, SidebarT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
+import {
+  AkselLandingPageDocT,
+  AkselSidebarT,
+  ArticleListT,
+  NextPageT,
+} from "@/types";
 import { logAmplitudeEvent } from "@/utils";
+import { CodeIcon } from "@navikt/aksel-icons";
 import { BodyShort, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
 import {
-  GithubIcon,
-  YarnIcon,
-  FigmaIcon,
   ChangelogIcon,
+  FigmaIcon,
+  GithubIcon,
+  StorybookIcon,
+  YarnIcon,
 } from "components/assets";
-import { WithSidebar } from "components/layout/page-templates/WithSidebar";
-import ComponentOverview from "components/sanity-modules/component-overview";
-import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import { PreviewSuspense } from "next-sanity/preview";
-import Head from "next/head";
-import { lazy } from "react";
+import { WithSidebar } from "components/layout/WithSidebar";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
+import ComponentOverview from "components/sanity-modules/ComponentOverview";
+import { IntroCards } from "components/website-modules/IntroCards";
+import { SEO } from "components/website-modules/seo/SEO";
+import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
+import { GetStaticProps } from "next/types";
 
-function Links() {
-  return (
-    <BodyShort
-      as="span"
-      size="small"
-      className="text-text-subtle mb-6 flex flex-wrap gap-4"
-    >
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
-        href="https://github.com/navikt/aksel/tree/main/%40navikt"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-        onClick={() =>
-          logAmplitudeEvent("link", {
-            kilde: "intro-lenker ikonside",
-            til: "github",
-          })
-        }
-      >
-        <GithubIcon /> Github
-      </a>
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
-        href="https://yarnpkg.com/package/@navikt/ds-react"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-        onClick={() =>
-          logAmplitudeEvent("link", {
-            kilde: "intro-lenker ikonside",
-            til: "yarn",
-          })
-        }
-      >
-        <YarnIcon />
-        Yarn
-      </a>
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
-        href="/grunnleggende/kode/endringslogg"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-        onClick={() =>
-          logAmplitudeEvent("link", {
-            kilde: "intro-lenker komponenter",
-            til: "endringslogg",
-          })
-        }
-      >
-        <ChangelogIcon />
-        Endringslogg
-      </a>
+type PageProps = NextPageT<{
+  page: AkselLandingPageDocT;
+  sidebar: AkselSidebarT;
+  links: ArticleListT;
+}>;
 
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
-        href="https://www.figma.com/@nav_aksel"
-        className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-        onClick={() =>
-          logAmplitudeEvent("link", {
-            kilde: "intro-lenker ikonside",
-            til: "figma",
-          })
-        }
-      >
-        <FigmaIcon /> Figma
-      </a>
-    </BodyShort>
-  );
-}
+export const query = `{${sidebarQuery}, ${landingPageQuery(
+  "komponenter"
+)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
 
-const Page = ({
-  page,
-  sidebar,
-  links,
+export const getStaticProps: GetStaticProps = async ({
+  preview = false,
 }: {
-  page: any;
-  links: {
-    _id: string;
-    heading: string;
-    slug: { current: string };
-    kategori: string;
-    status?: SanityT.Schema.komponent_artikkel["status"];
-  }[];
-  sidebar: SidebarT;
-}): JSX.Element => {
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const { sidebar, page, links } = await getClient().fetch(query, {
+    type: "komponent_artikkel",
+  });
+
+  return {
+    props: {
+      page,
+      sidebar,
+      links,
+      slug: "/komponenter",
+      preview,
+      title: "",
+      id: page?._id ?? "",
+    },
+    revalidate: 60,
+    notFound: false,
+  };
+};
+
+const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   return (
     <>
-      <Head>
-        <title>Komponenter</title>
-        <meta property="og:title" content="Komponenter" />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title="Komponenter"
+        description={page?.seo?.meta}
+        image={page?.seo?.image}
+      />
+      <Header />
       <WithSidebar
         sidebar={sidebar}
         pageType={{ type: "Komponenter", title: "Komponenter" }}
-        intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
+        intro={
+          <Ingress className="text-text-on-action">
+            {page?.intro}
+            <Links />
+          </Ingress>
+        }
         pageProps={page}
       >
-        <Links />
-        <SuggestionBlock variant="komponenter" />
+        <IntroCards
+          links={[
+            {
+              title: "Kom i gang med Kode",
+              desc: "Intro til alle kodepakkene våre",
+              icon: CodeIcon,
+              href: "/grunnleggende/introduksjon/kom-i-gang-med-kodepakkene",
+            },
+            {
+              title: "Kom i gang med Figma",
+              desc: "Hvordan bruke Figma-bibliotekene våre",
+              icon: FigmaIcon,
+              href: "/grunnleggende/introduksjon/kom-i-gang-med-figma",
+            },
+            {
+              title: "Forslag til nye komponenter",
+              desc: "Opprett et github-issue",
+              icon: GithubIcon,
+              href: `https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰%2Ckomponenter+🧩&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+            },
+          ]}
+          className="grid-cols-1 pb-8 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3"
+          variant="komponentside"
+        />
         {komponentKategorier
           .filter(
             (kat) => links?.filter((x) => x.kategori === kat.value).length > 0
@@ -171,25 +140,110 @@ const Page = ({
             </div>
           ))}
       </WithSidebar>
+      <Footer />
     </>
   );
 };
 
+function Links() {
+  return (
+    <BodyShort
+      as="span"
+      size="small"
+      className="text-text-on-inverted mt-2 flex flex-wrap gap-4"
+    >
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://github.com/navikt/aksel/tree/main/%40navikt"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker ikonside",
+            til: "github",
+          })
+        }
+      >
+        <GithubIcon /> Github
+      </a>
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://yarnpkg.com/package/@navikt/ds-react"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker ikonside",
+            til: "yarn",
+          })
+        }
+      >
+        <YarnIcon />
+        Yarn
+      </a>
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="/grunnleggende/kode/endringslogg"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker komponenter",
+            til: "endringslogg",
+          })
+        }
+      >
+        <ChangelogIcon />
+        Endringslogg
+      </a>
+
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://www.figma.com/@nav_aksel"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker ikonside",
+            til: "figma",
+          })
+        }
+      >
+        <FigmaIcon /> Figma-community
+      </a>
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="/storybook"
+        className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted group flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
+        onClick={() =>
+          logAmplitudeEvent("link", {
+            kilde: "intro-lenker ikonside",
+            til: "storybook",
+          })
+        }
+      >
+        <StorybookIcon className="mr-1 " /> Storybook
+      </a>
+    </BodyShort>
+  );
+}
+
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
-          query={komponentLandingQuery}
+          query={query}
           props={props}
           params={{
             type: "komponent_artikkel",
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 
@@ -197,27 +251,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-export const getStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}) => {
-  const { sidebar, page, links } = await getClient().fetch(
-    komponentLandingQuery,
-    {
-      type: "komponent_artikkel",
-    }
-  );
-
-  return {
-    props: {
-      page,
-      sidebar,
-      links,
-      slug: "/komponenter",
-      preview,
-    },
-    revalidate: 60,
-  };
-};

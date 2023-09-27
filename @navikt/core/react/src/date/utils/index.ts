@@ -15,7 +15,7 @@ export {
 export { getLocaleFromString } from "./locale";
 export { disableDate } from "./dates-disabled";
 
-export { dateIsInCurrentMonth, isValidDate, hasNextYear } from "./check-dates";
+export { dateIsInCurrentMonth, isValidDate } from "./check-dates";
 export { getInitialYear } from "./get-initial-year";
 export { isMatch, isDateInRange, type Matcher } from "./is-match";
 export { nextEnabled } from "./navigation";

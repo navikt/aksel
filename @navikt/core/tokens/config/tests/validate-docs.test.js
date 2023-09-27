@@ -10,7 +10,7 @@ const wrongValues = [];
 
 describe("Validate tokens dokumentation", () => {
   flatten.forEach((x) => {
-    it(`${x} should be documented`, () => {
+    it(`${x.name} should be documented`, () => {
       expect(
         Object.keys(DsTokens).find(
           (y) => `--${kebabCase(y)}`.replace("--az-", "--a-z-") === x.name
@@ -21,16 +21,10 @@ describe("Validate tokens dokumentation", () => {
 
   Object.entries(DsTokens).forEach(([key, val]) => {
     const formatedKey = `--${kebabCase(key)}`.replace("--az-", "--a-z-");
-    it(`${formatedKey} should exist in docs`, () => {
+    it(`${formatedKey} should exist in docs and have correct value`, () => {
       const tokenInDoc = flatten.find((x) => x.name === formatedKey);
       expect(tokenInDoc).toBeDefined();
-    });
-
-    it(`${formatedKey} should have correct value ${val}`, () => {
-      const formatedKey = `--${kebabCase(key)}`.replace("--az-", "--a-z-");
-
-      const tokenInDoc = flatten.find((x) => x.name === formatedKey);
-      expect(tokenInDoc?.value).toEqual(val);
+      expect(tokenInDoc.value).toEqual(val);
     });
   });
 });
@@ -67,5 +61,4 @@ if (wrongValues.length || notFound.length || removed.length) {
   console.log(wrongValues);
   console.groupEnd();
   console.log("\n");
-  throw new Error("Found errors when validation tokens.");
 }

@@ -1,17 +1,16 @@
 import { useContext } from "react";
-import { CheckboxProps } from "../..";
+import { CheckboxProps, omit } from "../..";
 import { useFormField } from "../useFormField";
 import { CheckboxGroupContext } from "./CheckboxGroup";
-import { omit } from "../..";
 
 /**
  * Handles props for Checkboxes in context with Fieldset and CheckboxGroup
  */
-const useCheckbox = ({ children, ...props }: CheckboxProps) => {
+const useCheckbox = (props: CheckboxProps) => {
   const checkboxGroup = useContext(CheckboxGroupContext);
 
-  const { inputProps, ...rest } = useFormField(
-    omit(props, ["description"]),
+  const { inputProps, readOnly, ...rest } = useFormField(
+    omit(props, ["description", "children"]),
     "checkbox"
   );
 
@@ -30,6 +29,8 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
 
   return {
     ...rest,
+    readOnly,
+    nested: !!checkboxGroup,
     inputProps: {
       ...inputProps,
       checked: checkboxGroup?.value
@@ -39,8 +40,18 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
         ? checkboxGroup.defaultValue.includes(props.value)
         : props.defaultChecked,
       onChange: (e) => {
+        if (readOnly) {
+          return;
+        }
         props.onChange && props.onChange(e);
         checkboxGroup && checkboxGroup.toggleValue(props.value);
+      },
+      onClick: (e) => {
+        if (readOnly) {
+          e.preventDefault();
+          return;
+        }
+        props?.onClick?.(e);
       },
     },
   };

@@ -10,87 +10,52 @@ export const Forside = defineType({
   groups,
   fields: [
     defineField({
-      title: "Tittel",
-      name: "title",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      title: "'Kom i gang'-lenker",
-      name: "komigang",
-      type: "array",
-      validation: (Rule) => Rule.required().min(2).max(3),
-      of: [
-        {
-          type: "object",
-          name: "link",
-          fields: [
-            {
-              type: "string",
-              name: "title",
-              validation: (Rule) => Rule.required().max(50),
-            },
-            {
-              title: "Reference",
-              name: "reference",
-              type: "reference",
-              to: allArticleDocsRef,
-              validation: (Rule) => Rule.required(),
-            },
-          ],
-        },
-      ],
-    }),
-    defineField({
       title: "God praksis intro",
       name: "god_praksis_intro",
       type: "text",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      title: "Tema",
-      description: "Tema som blir vist på forsiden",
-      name: "tema",
+      title: "Blokker",
+      name: "blocks",
       type: "array",
-      validation: (Rule) => Rule.required().min(4),
       of: [
-        {
+        defineField({
+          title: "Nytt fra Aksel",
+          name: "nytt_fra_aksel",
           type: "object",
-          name: "temalink",
+          validation: (Rule) => Rule.required(),
           fields: [
-            {
-              name: "ref",
-              type: "reference",
-              to: [{ type: "aksel_tema" }],
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              type: "text",
-              name: "intro",
-              validation: (Rule) => Rule.required().max(210),
-              options: {
-                //@ts-ignore
-                maxLength: 210,
-              },
-            },
+            defineField({
+              title: "Fremhevet artikkler",
+              name: "highlights",
+              type: "array",
+              validation: (Rule) => Rule.max(2).required(),
+              of: [
+                defineField({
+                  title: "Fremhevet artikkel",
+                  name: "highlight",
+                  type: "reference",
+                  hidden: ({ value }) => !value,
+                  to: [...allArticleDocsRef],
+                  validation: (Rule) => Rule.required(),
+                }),
+              ],
+            }),
           ],
           preview: {
-            select: {
-              ref: "ref.title",
-              intro: "intro",
-              pictogram: "ref.pictogram",
-            },
-            prepare({ ...props }) {
-              return {
-                title: props?.ref,
-                subtitle: props?.intro,
-                media: props?.pictogram,
-              };
+            prepare() {
+              return { title: "Nytt fra Aksel" };
             },
           },
-        },
+        }),
       ],
     }),
     SEOFields,
   ],
+  preview: {
+    prepare() {
+      return { title: "Forside Aksel" };
+    },
+  },
 });

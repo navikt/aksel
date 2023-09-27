@@ -35,8 +35,14 @@
   color: var(--ac-pagination-selected-text, var(--a-text-on-action));
 }
 
-.navds-pagination__item[aria-current="true"]:focus {
+.navds-pagination__item[aria-current="true"]:focus-visible {
   box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-pagination__item[aria-current="true"]:focus {
+    box-shadow: inset 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
+  }
 }
 
 .navds-pagination__prev-next {

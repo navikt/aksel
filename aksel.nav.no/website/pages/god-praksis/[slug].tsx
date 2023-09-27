@@ -1,42 +1,95 @@
 import { abbrName } from "@/components";
 import { Footer } from "@/layout";
-import { akselTemaDocs, getAkselTema, SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import { getAkselTema, urlFor } from "@/sanity/interface";
+import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
+import { AkselTemaT, NextPageT } from "@/types";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import { PreviewSuspense } from "next-sanity/preview";
-import Head from "next/head";
+import { SEO } from "components/website-modules/seo/SEO";
 import Image from "next/legacy/image";
-import { lazy } from "react";
+import { GetStaticPaths, GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
-export type ArtiklerT = Partial<
-  SanityT.Schema.aksel_artikkel & {
-    slug: string;
-    tema: string[];
-    contributors?: { title?: string }[];
+type PageProps = NextPageT<{
+  tema: Omit<AkselTemaT, "ansvarlig"> & {
+    ansvarlig?: { title: string; roller: string[] };
+  };
+}>;
+
+export const query = `{
+  "tema": *[_type == "aksel_tema" && slug.current == $slug] | order(_updatedAt desc)[0]{
+    ...,
+    "ansvarlig": ansvarlig->{title, roller},
+    seksjoner[]{
+      ...,
+      beskrivelse[]{
+        ...,
+        ${destructureBlocks}
+      },
+      sider[]->{
+        _id,
+        heading,
+        _createdAt,
+        _updatedAt,
+        publishedAt,
+        updateInfo,
+        "slug": slug.current,
+        "tema": tema[]->title,
+        ingress,
+        "contributor": ${contributorsSingle}
+      }
+    },
+    "pictogram": pictogram.asset-> {
+        url,
+        altText,
+    },
   }
->;
+}`;
 
-export interface AkselTemaPage
-  extends Omit<SanityT.Schema.aksel_tema, "ansvarlig" | "pictogram"> {
-  artikler: ArtiklerT[];
-  ansvarlig?: { title?: string; roller: string[] };
-  pictogram: { url: string; altText?: string };
-  seo: any;
-}
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: await getAkselTema().then((paths) =>
+      paths.map(({ path }) => ({
+        params: {
+          slug: path,
+        },
+      }))
+    ),
+    fallback: "blocking",
+  };
+};
 
-interface PageProps {
-  tema: AkselTemaPage;
-  slug: string;
-  preview: boolean;
-}
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  preview = false,
+}: {
+  params: { slug: string };
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const { tema } = await getClient().fetch(query, {
+    slug,
+  });
 
-const Page = ({ tema: page }: PageProps): JSX.Element => {
+  return {
+    props: {
+      tema,
+      slug,
+      preview,
+      id: tema?._id ?? null,
+      title: tema?.title ?? "",
+    },
+    notFound: !tema && !preview,
+    revalidate: 60,
+  };
+};
+
+const Page = ({ tema: page }: PageProps["props"]) => {
   if (!page || !page.seksjoner || page.seksjoner.length === 0) {
     return <NotFotfund />;
   }
@@ -47,36 +100,18 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
 
   return (
     <>
-      <Head>
-        <title>{`${page.title} - Aksel`}</title>
-        <meta property="og:title" content={`${page.title} - Aksel`} />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={page?.title}
+        description={page?.seo?.meta}
+        image={page?.seo?.image}
+      />
+
       <div className="bg-surface-subtle">
         <Header variant="subtle" />
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="relative min-h-[80vh] overflow-hidden focus:outline-none"
+          className="relative overflow-hidden focus:outline-none"
         >
           <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
           <div className=" pt-20 text-center">
@@ -105,7 +140,6 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
               <div className="mt-4 flex flex-col items-center justify-between gap-8">
                 <SanityBlockContent
                   blocks={page.beskrivelse}
-                  noLastMargin
                   className="override-text-700 max-w-prose xl:mb-8"
                   isIngress
                 />
@@ -116,7 +150,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                   )}
                   aria-hidden={!hasAnsvarlig}
                 >
-                  <Detail as="div" size="small" className="mb-2" uppercase>
+                  <Detail as="div" className="mb-2" uppercase>
                     Ansvarlig for tema
                   </Detail>
                   <div className="grid">
@@ -140,7 +174,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
             </div>
           </div>
 
-          <div className="relative px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
+          <div className="relative px-4 pb-24 pt-8 md:pt-16 xl:pt-8 ">
             {hasPages ? (
               <div className="dynamic-wrapper grid gap-20">
                 {page.seksjoner.map((seksjon) =>
@@ -151,24 +185,19 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
                       </Heading>
                       {seksjon.beskrivelse && (
                         <div className="max-w-prose">
-                          <SanityBlockContent
-                            blocks={seksjon.beskrivelse}
-                            noLastMargin
-                          />
+                          <SanityBlockContent blocks={seksjon.beskrivelse} />
                         </div>
                       )}
                       <div className="card-grid-3-1 mt-6">
-                        {(seksjon?.sider as unknown as ArtiklerT[])?.map(
-                          (x: ArtiklerT) => (
-                            <ArtikkelCard
-                              {...x}
-                              level="3"
-                              source={page?.slug?.current}
-                              key={x._id}
-                              variant="god-praksis"
-                            />
-                          )
-                        )}
+                        {seksjon?.sider?.map((x) => (
+                          <ArtikkelCard
+                            {...x}
+                            level="3"
+                            source={page?.slug?.current}
+                            key={x._id}
+                            variant="god-praksis"
+                          />
+                        ))}
                       </div>
                     </div>
                   ) : null
@@ -191,19 +220,19 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
-          query={akselTemaDocs}
+          query={query}
           props={props}
           params={{
             slug: props?.slug,
           }}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 
@@ -211,39 +240,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-export const getStaticPaths = async () => {
-  return {
-    paths: await getAkselTema().then((paths) =>
-      paths.map(({ path }) => ({
-        params: {
-          slug: path,
-        },
-      }))
-    ),
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}) => {
-  const { tema } = await getClient().fetch(akselTemaDocs, {
-    slug,
-  });
-
-  return {
-    props: {
-      tema,
-      slug,
-      preview,
-      id: tema?._id ?? null,
-    },
-    notFound: !tema && !preview,
-    revalidate: 60,
-  };
-};

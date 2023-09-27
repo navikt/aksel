@@ -1,7 +1,6 @@
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef } from "react";
 import cl from "clsx";
 import { BodyShort } from "..";
-import { TableContext } from "./Table";
 
 export interface DataCellProps
   extends React.TdHTMLAttributes<HTMLTableCellElement> {
@@ -19,8 +18,6 @@ export interface DataCellType
 
 export const DataCell: DataCellType = forwardRef(
   ({ className, children = "", align, ...rest }, ref) => {
-    const context = useContext(TableContext);
-
     return (
       <BodyShort
         as="td"
@@ -28,7 +25,6 @@ export const DataCell: DataCellType = forwardRef(
         className={cl("navds-table__data-cell", className, {
           [`navds-table__data-cell--align-${align}`]: align,
         })}
-        size={context?.size}
         {...rest}
       >
         {children}

@@ -9,15 +9,14 @@ const Example = () => {
         <Chat.Bubble>Hva kan jeg hjelpe deg med?</Chat.Bubble>
       </Chat>
       <Chat
-        avatar="NO"
+        avatar="ON"
         name="Ola Normann"
         timestamp="01.01.21 14:00"
         position="right"
         toptextPosition="left"
       >
-        <Chat.Bubble>Hei Eva.</Chat.Bubble>
         <Chat.Bubble>
-          Hvor sjekker jeg statusen på foreldrepengersøknaden min?
+          Hei Eva. Hvor sjekker jeg statusen på foreldrepengersøknaden min?
         </Chat.Bubble>
       </Chat>
     </div>

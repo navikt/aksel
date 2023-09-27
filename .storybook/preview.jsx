@@ -1,13 +1,18 @@
+import React from "react";
 import "@navikt/ds-css/index.css";
-import "@navikt/ds-css-internal/index.css";
 import "./layout.css";
 
 export const parameters = {
   options: {
     storySort: {
-      method: "",
-      order: ["Intro", "ds-react", ["form"], ["Default"], "ds-icons"],
-      locales: "",
+      method: "alphabetical",
+      order: [
+        "Getting started",
+        "ds-react",
+        ["Primitives"],
+        ["Default"],
+        "Aksel-icons",
+      ],
     },
   },
   layout: "centered",
@@ -19,7 +24,7 @@ export const parameters = {
       },
       {
         name: "Darkmode",
-        value: "#262626",
+        value: "#23262a",
       },
     ],
   },
@@ -28,7 +33,6 @@ export const parameters = {
 export const globalTypes = {
   theme: {
     name: "Theme",
-    description: "Global theme for components",
     toolbar: {
       icon: "circlehollow",
       items: [
@@ -41,20 +45,12 @@ export const globalTypes = {
 };
 
 export const withTheme = (StoryFn, context) => {
-  const foundCss =
-    context.parameters.fileName.startsWith("./@navikt") &&
-    document.querySelector('[data-vite-dev-id$="dist/tw.css"]');
   return (
     <div
       data-theme={context.parameters.theme || context.globals.theme || "light"}
       lang="no"
       id="root"
     >
-      {foundCss && (
-        <div className="css-warning">
-          OBS! Ser ut som CSS fra aksel.nav.no er lastet. Refresh siden!
-        </div>
-      )}
       <StoryFn />
     </div>
   );

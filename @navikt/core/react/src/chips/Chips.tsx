@@ -1,7 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
-import ToggleChips, { ToggleChipsType } from "./Toggle";
-import RemovableChips, { RemovableChipsType } from "./Removable";
+import ToggleChips, { ToggleChipsProps } from "./Toggle";
+import RemovableChips, { RemovableChipsProps } from "./Removable";
+import { OverridableComponent } from "../util/OverridableComponent";
 
 export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -16,10 +17,47 @@ interface ChipsComponent
   extends React.ForwardRefExoticComponent<
     ChipsProps & React.RefAttributes<HTMLUListElement>
   > {
-  Toggle: ToggleChipsType;
-  Removable: RemovableChipsType;
+  /**
+   * Toggle between selected-states.
+   * @see 🏷️ {@link ToggleChipsProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Toggle: OverridableComponent<ToggleChipsProps, HTMLButtonElement>;
+  /**
+   * Remove filter or the likes on click
+   * @see 🏷️ {@link RemovableChipsProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Removable: OverridableComponent<RemovableChipsProps, HTMLButtonElement>;
 }
 
+/**
+ * A component that displays a list of items as chips.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/chips)
+ * @see 🏷️ {@link ChipsProps}
+ *
+ * @example
+ * ```jsx
+      <Chips size="small">
+        {options.map((c) => (
+          <Chips.Toggle
+            selected={selected.includes(c)}
+            key={c}
+            onClick={() =>
+              setSelected(
+                selected.includes(c)
+                  ? selected.filter((x) => x !== c)
+                  : [...selected, c]
+              )
+            }
+          >
+            {c}
+          </Chips.Toggle>
+        ))}
+      </Chips>
+ * ```
+ */
 export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
   ({ className, size = "medium", children, ...rest }, ref) => {
     return (
@@ -32,7 +70,7 @@ export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
         })}
       >
         {React.Children.map(children, (chip, index) => {
-          return <li key={index + (chip?.toString() ?? "")}>{chip}</li>;
+          return <li key={chip?.toString() || index}>{chip}</li>;
         })}
       </ul>
     );

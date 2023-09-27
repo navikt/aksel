@@ -5,13 +5,8 @@
     "esModuleInterop": true,
     "target": "es6",
     "moduleResolution": "node",
-    "incremental": true
-  },
-  "exclude": [
-    "**/stories",
-    "**/*.stories.*",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.e2e.ts"
-  ]
+    "incremental": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true
+  }
 }

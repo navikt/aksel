@@ -1,40 +1,43 @@
-import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
+import { BodyLong, Button, Modal } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Example = () => {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    Modal.setAppElement("#__next");
-  }, []);
-
   return (
     <>
       <Button onClick={() => setOpen(true)}>Åpne modal</Button>
+
       <Modal
         open={open}
-        aria-label="Modal demo"
-        onClose={() => setOpen((x) => !x)}
-        closeButton={false}
-        aria-labelledby="modal-heading"
+        onClose={() => setOpen(false)}
+        header={{
+          heading: "Er du sikker?",
+          size: "small",
+          closeButton: false,
+        }}
+        width="small"
       >
-        <Modal.Content>
-          <Heading spacing level="1" size="large" id="modal-heading">
-            Laborum proident id ullamco
-          </Heading>
-          <Heading spacing level="2" size="medium">
-            Excepteur labore nostrud incididunt exercitation.
-          </Heading>
-          <BodyLong spacing>
+        <Modal.Body>
+          <BodyLong>
             Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
             incididunt dolor do ad ut. Incididunt eiusmod nostrud deserunt duis
-            laborum. Proident aute culpa qui nostrud velit adipisicing minim.
-            Consequat aliqua aute dolor do sit Lorem nisi mollit velit. Aliqua
-            exercitation non minim minim pariatur sunt laborum ipsum.
-            Exercitation nostrud est laborum magna non non aliqua qui esse.
+            laborum.
           </BodyLong>
-        </Modal.Content>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type="button" variant="danger" onClick={() => setOpen(false)}>
+            Ja, jeg er sikker
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => setOpen(false)}
+          >
+            Avbryt
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );
@@ -48,5 +51,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 2,
+  desc: "Lukkeknappen i headeren kan skjules, men da må du ha en annen knapp som lukker modalen.",
 };

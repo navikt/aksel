@@ -1,62 +1,8 @@
 import React from "react";
-import { Tag } from ".";
+import type { Meta } from "@storybook/react";
+import { Tag, TagProps } from ".";
 
-export default {
-  title: "ds-react/Tag",
-  component: Tag,
-  argTypes: {
-    variant: {
-      defaultValue: "info",
-      control: {
-        type: "radio",
-        options: [
-          "warning",
-          "error",
-          "info",
-          "success",
-          "neutral",
-          "alt1",
-          "alt2",
-          "alt3",
-          "warning-filled",
-          "error-filled",
-          "info-filled",
-          "success-filled",
-          "neutral-filled",
-          "alt1-filled",
-          "alt2-filled",
-          "alt3-filled",
-        ],
-      },
-    },
-    size: {
-      defaultValue: "medium",
-      control: {
-        type: "radio",
-        options: ["xsmall", "small", "medium"],
-      },
-    },
-  },
-};
-
-const variants: Array<
-  | "warning"
-  | "warning-filled"
-  | "error"
-  | "error-filled"
-  | "info"
-  | "info-filled"
-  | "success"
-  | "success-filled"
-  | "neutral"
-  | "neutral-filled"
-  | "alt1"
-  | "alt1-filled"
-  | "alt2"
-  | "alt2-filled"
-  | "alt3"
-  | "alt3-filled"
-> = [
+const variants: TagProps["variant"][] = [
   "warning",
   "error",
   "info",
@@ -73,7 +19,36 @@ const variants: Array<
   "alt1-filled",
   "alt2-filled",
   "alt3-filled",
+  "warning-moderate",
+  "error-moderate",
+  "info-moderate",
+  "success-moderate",
+  "neutral-moderate",
+  "alt1-moderate",
+  "alt2-moderate",
+  "alt3-moderate",
 ];
+
+export default {
+  title: "ds-react/Tag",
+  component: Tag,
+  argTypes: {
+    variant: {
+      defaultValue: "info",
+      control: {
+        type: "radio",
+      },
+      options: variants,
+    },
+    size: {
+      defaultValue: "medium",
+      control: {
+        type: "radio",
+      },
+      options: ["xsmall", "small", "medium"],
+    },
+  },
+} satisfies Meta<typeof Tag>;
 
 export const Default = {
   render: (props) => (
@@ -91,7 +66,7 @@ export const Default = {
 export const Small = () => {
   return (
     <div className="rowgap rowgap-wrap">
-      {variants.map((variant, i) => (
+      {variants.map((variant) => (
         <Tag key={variant} variant={variant} size="small">
           {variant}
         </Tag>
@@ -100,10 +75,10 @@ export const Small = () => {
   );
 };
 
-export const xSmall = () => {
+export const XSmall = () => {
   return (
     <div className="rowgap rowgap-wrap">
-      {variants.map((variant, i) => (
+      {variants.map((variant) => (
         <Tag key={variant} variant={variant} size="xsmall">
           {variant}
         </Tag>
@@ -115,7 +90,7 @@ export const xSmall = () => {
 export const Variants = () => {
   return (
     <div className="rowgap rowgap-wrap">
-      {variants.map((variant, i) => (
+      {variants.map((variant) => (
         <Tag key={variant} variant={variant}>
           {variant}
         </Tag>

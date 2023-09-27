@@ -16,10 +16,10 @@ export interface SortState {
 export interface TableProps
   extends React.TableHTMLAttributes<HTMLTableElement> {
   /**
-   * Changes padding
+   * Changes padding around Cells
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "large" | "medium" | "small";
   /**
    * Zebra striped table
    * @default false
@@ -49,13 +49,44 @@ export interface TableType
 }
 
 export interface TableContextProps {
-  size: "medium" | "small";
   onSortChange?: (sortKey: string) => void;
   sort?: SortState;
 }
 
 export const TableContext = createContext<TableContextProps | null>(null);
 
+/**
+ * A component that displays a table with headers and rows.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/table)
+ * @see 🏷️ {@link TableProps}
+ *
+ * @example
+ * ```jsx
+ * <Table>
+ *   <Table.Header>
+ *     <Table.Row>
+ *       <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+ *       <Table.HeaderCell scope="col">Fødseslnr.</Table.HeaderCell>
+ *       <Table.HeaderCell scope="col">Start</Table.HeaderCell>
+ *     </Table.Row>
+ *   </Table.Header>
+ *   <Table.Body>
+ *     {data.map(({ name, fnr, start }, i) => {
+ *       return (
+ *         <Table.Row key={i + fnr}>
+ *           <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
+ *           <Table.DataCell>{fnr}</Table.DataCell>
+ *           <Table.DataCell>
+ *             {format(new Date(start), "dd.MM.yyyy")}
+ *           </Table.DataCell>
+ *         </Table.Row>
+ *       );
+ *     })}
+ *   </Table.Body>
+ * </Table>
+ * ```
+ */
 export const Table = forwardRef(
   (
     {
@@ -68,7 +99,7 @@ export const Table = forwardRef(
     },
     ref
   ) => (
-    <TableContext.Provider value={{ size, onSortChange, sort }}>
+    <TableContext.Provider value={{ onSortChange, sort }}>
       <table
         {...rest}
         ref={ref}

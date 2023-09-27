@@ -1,6 +1,7 @@
 import React from "react";
 import { Chat } from "../index";
 import { Meta } from "@storybook/react";
+import { POSITIONS, SIZES } from "./Chat";
 
 export default {
   title: "ds-react/Chat",
@@ -16,19 +17,25 @@ export default {
         type: "text",
       },
     },
+    position: {
+      control: { type: "radio" },
+      options: POSITIONS,
+    },
+    toptextPosition: {
+      control: { type: "radio" },
+      options: POSITIONS,
+    },
+    size: {
+      control: { type: "radio" },
+      options: SIZES,
+    },
   },
-} as Meta;
+} satisfies Meta<typeof Chat>;
 
 export const Default = {
   render: (props) => {
     return (
-      <Chat
-        avatar={props?.avatar ?? "ON"}
-        name={props?.name ?? "Ola Normann"}
-        timestamp={props?.timestamp ?? "01.01.21 14:00"}
-        avatarBgColor={props?.avatarBgColor}
-        backgroundColor={props?.backgroundColor}
-      >
+      <Chat {...props}>
         <Chat.Bubble>
           Aute minim nisi sunt mollit duis sunt nulla minim non proident.
         </Chat.Bubble>
@@ -48,141 +55,156 @@ export const Default = {
   },
 };
 
-export const Farger = () => {
-  return (
+export const Small = () => (
+  <Chat avatar="ON" name="Ola Normann" timestamp="01.01.21 14:00" size="small">
+    <Chat.Bubble>
+      Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+    </Chat.Bubble>
+    <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
+    <Chat.Bubble>
+      Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
+      labore nisi ut.
+    </Chat.Bubble>
+  </Chat>
+);
+
+export const Colors = () => (
+  <Chat
+    avatar="NAV"
+    name="NAV"
+    timestamp="01.01.21 14:00"
+    avatarBgColor="var(--a-surface-alt-1-subtle)"
+    backgroundColor="var(--a-surface-warning-subtle)"
+  >
+    <Chat.Bubble>
+      Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+    </Chat.Bubble>
+    <Chat.Bubble backgroundColor="lightYellow">
+      Tempor fugiat amet eu sint in in ullamco.
+    </Chat.Bubble>
+    <Chat.Bubble>
+      Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
+      labore nisi ut.
+    </Chat.Bubble>
+  </Chat>
+);
+
+export const Variants = () => (
+  <div className="colgap">
+    <Chat avatar="NAV" name="NAV" timestamp="01.01.21 14:00" variant="info">
+      <Chat.Bubble>
+        Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+      </Chat.Bubble>
+    </Chat>
+    <Chat
+      avatar="KN"
+      name="Kari Nordmann"
+      timestamp="01.01.21 14:03"
+      variant="neutral"
+      position="right"
+    >
+      <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
+    </Chat>
+    <Chat
+      avatar="ON"
+      name="Ola Nordmann"
+      timestamp="01.01.21 14:07"
+      variant="subtle"
+      position="right"
+    >
+      <Chat.Bubble>
+        Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
+        labore nisi ut.
+      </Chat.Bubble>
+    </Chat>
+  </div>
+);
+
+export const Position = () => (
+  <div className="colgap">
+    <Chat avatar="ON" name="Ola Normann" timestamp="01.01.21 14:00">
+      <Chat.Bubble>
+        Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
+        labore nisi ut.
+      </Chat.Bubble>
+    </Chat>
+    <Chat
+      avatar="KH"
+      name="Kari Høyli"
+      timestamp="01.01.21 14:32"
+      position="right"
+      variant="info"
+    >
+      <Chat.Bubble>
+        Reprehenderit pariatur officia exercitation laboris.
+      </Chat.Bubble>
+      <Chat.Bubble>
+        Enim velit deserunt do quis. Eu fugiat magna esse dolore ad sunt sit est
+        dolore incididunt. Occaecat cupidatat magna.
+      </Chat.Bubble>
+    </Chat>
+    <Chat avatar="ON" name="Ola Normann" timestamp="01.01.21 15:00">
+      <Chat.Bubble>
+        Exercitation irure Lorem cupidatat culpa anim cillum esse ullamco qui
+        dolore laborum et Lorem. Labore sunt duis id Lorem voluptate commodo ea
+        esse. Dolore esse aliqua proident ea ad commodo ut dolore voluptate
+        labore sunt aute.
+      </Chat.Bubble>
+    </Chat>
+  </div>
+);
+
+export const ToptextPosition = () => (
+  <div className="colgap">
     <Chat
       avatar="ON"
       name="Ola Normann"
       timestamp="01.01.21 14:00"
-      avatarBgColor="var(--a-lightblue-200)"
-      backgroundColor="var(--a-lightblue-100)"
+      toptextPosition="right"
     >
       <Chat.Bubble>
-        Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-      </Chat.Bubble>
-      <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
-      <Chat.Bubble>
         Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
         labore nisi ut.
       </Chat.Bubble>
     </Chat>
-  );
-};
-
-export const Position = () => {
-  return (
-    <div className="colgap">
-      <Chat
-        avatar="ON"
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        backgroundColor="rgba(255, 249, 240, 1)"
-        avatarBgColor="rgba(255, 236, 204, 1)"
-      >
-        <Chat.Bubble>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
-        </Chat.Bubble>
-      </Chat>
-      <Chat
-        avatar="KH"
-        name="Kari Høyli"
-        timestamp="01.01.21 14:32"
-        position="right"
-        backgroundColor="rgba(230, 240, 255, 1)"
-        avatarBgColor="rgba(204, 225, 255, 1)"
-      >
-        <Chat.Bubble>
-          Reprehenderit pariatur officia exercitation laboris.
-        </Chat.Bubble>
-        <Chat.Bubble>
-          Enim velit deserunt do quis. Eu fugiat magna esse dolore ad sunt sit
-          est dolore incididunt. Occaecat cupidatat magna.
-        </Chat.Bubble>
-      </Chat>
-      <Chat
-        avatar="ON"
-        name="Ola Normann"
-        timestamp="01.01.21 15:00"
-        backgroundColor="rgba(255, 249, 240, 1)"
-        avatarBgColor="rgba(255, 236, 204, 1)"
-      >
-        <Chat.Bubble>
-          Exercitation irure Lorem cupidatat culpa anim cillum esse ullamco qui
-          dolore laborum et Lorem. Labore sunt duis id Lorem voluptate commodo
-          ea esse. Dolore esse aliqua proident ea ad commodo ut dolore voluptate
-          labore sunt aute.
-        </Chat.Bubble>
-      </Chat>
-    </div>
-  );
-};
-
-export const ToptextPosition = () => {
-  return (
-    <div className="colgap">
-      <Chat
-        avatar="ON"
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        backgroundColor="rgba(255, 249, 240, 1)"
-        avatarBgColor="rgba(255, 236, 204, 1)"
-        toptextPosition="right"
-      >
-        <Chat.Bubble>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
-        </Chat.Bubble>
-      </Chat>
-      <Chat
-        avatar="KH"
-        name="Kari Høyli"
-        timestamp="01.01.21 14:32"
-        position="right"
-        backgroundColor="rgba(230, 240, 255, 1)"
-        avatarBgColor="rgba(204, 225, 255, 1)"
-        toptextPosition="left"
-      >
-        <Chat.Bubble>
-          Reprehenderit pariatur officia exercitation laboris.
-        </Chat.Bubble>
-        <Chat.Bubble>
-          Enim velit deserunt do quis. Eu fugiat magna esse dolore ad sunt sit
-          est dolore incididunt. Occaecat cupidatat magna.
-        </Chat.Bubble>
-      </Chat>
-      <Chat
-        avatar="ON"
-        name="Ola Normann"
-        timestamp="01.01.21 15:00"
-        backgroundColor="rgba(255, 249, 240, 1)"
-        avatarBgColor="rgba(255, 236, 204, 1)"
-      >
-        <Chat.Bubble toptextPosition="right">
-          Exercitation irure Lorem cupidatat culpa anim cillum esse ullamco qui
-          dolore laborum et Lorem. Labore sunt duis id Lorem voluptate commodo
-          ea esse. Dolore esse aliqua proident ea ad commodo ut dolore voluptate
-          labore sunt aute.
-        </Chat.Bubble>
-      </Chat>
-    </div>
-  );
-};
-
-export const Avatar = () => {
-  return (
-    <Chat avatar={<Illustration />} timestamp="01.01.21 14:00">
+    <Chat
+      name="Kari Høyli"
+      timestamp="01.01.21 14:32"
+      position="right"
+      variant="info"
+      toptextPosition="left"
+    >
       <Chat.Bubble>
-        Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+        Reprehenderit pariatur officia exercitation laboris.
       </Chat.Bubble>
-      <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
       <Chat.Bubble>
-        Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
-        labore nisi ut.
+        Enim velit deserunt do quis. Eu fugiat magna esse dolore ad sunt sit est
+        dolore incididunt. Occaecat cupidatat magna.
       </Chat.Bubble>
     </Chat>
-  );
-};
+    <Chat avatar="ON" name="Ola Normann" timestamp="01.01.21 15:00">
+      <Chat.Bubble toptextPosition="right">
+        Exercitation irure Lorem cupidatat culpa anim cillum esse ullamco qui
+        dolore laborum et Lorem. Labore sunt duis id Lorem voluptate commodo ea
+        esse. Dolore esse aliqua proident ea ad commodo ut dolore voluptate
+        labore sunt aute.
+      </Chat.Bubble>
+    </Chat>
+  </div>
+);
+
+export const Avatar = () => (
+  <Chat avatar={<Illustration />} timestamp="01.01.21 14:00">
+    <Chat.Bubble>
+      Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+    </Chat.Bubble>
+    <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
+    <Chat.Bubble>
+      Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
+      labore nisi ut.
+    </Chat.Bubble>
+  </Chat>
+);
 
 const Illustration = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 93">

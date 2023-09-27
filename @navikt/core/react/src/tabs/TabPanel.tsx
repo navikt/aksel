@@ -13,10 +13,6 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
 }
 
-export type TabPanelType = React.ForwardRefExoticComponent<
-  TabPanelProps & React.RefAttributes<HTMLDivElement>
->;
-
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   ({ className, ...rest }, ref) => (
     <TabsContent
@@ -25,6 +21,6 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
       className={cl("navds-tabs__tabpanel", className)}
     />
   )
-) as TabPanelType;
+);
 
 export default TabPanel;

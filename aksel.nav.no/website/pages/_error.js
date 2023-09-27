@@ -2,7 +2,6 @@ import { Heading, BodyLong } from "@navikt/ds-react";
 import React from "react";
 import { AkselCubeStatic } from "components/website-modules/cube";
 
-/* eslint-disable react/prop-types */
 const MyError = ({ statusCode }) => {
   return (
     <div

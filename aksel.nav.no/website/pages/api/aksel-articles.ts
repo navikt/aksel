@@ -1,5 +1,4 @@
-import { akselArticleFields } from "@/lib";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
 import { format } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -21,10 +20,17 @@ export default async function akselAarticles(
 
   const query = `{
     "publishDateArticles": *[_type == "aksel_artikkel"  && defined(publishedAt) && publishedAt <= "${lastPublishedAt}"] | order(publishedAt desc) {
-          ${akselArticleFields}
-        },
-    "noPublishDateArticles": *[_type == "aksel_artikkel" && !defined(publishedAt)] | order(_updatedAt desc){
-          ${akselArticleFields}
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          updateInfo,
+          "slug": slug.current,
+          "tema": tema[]->title,
+          ingress,
+          status,
+          _type,
         }
     }`;
 
@@ -33,7 +39,7 @@ export default async function akselAarticles(
   await getClient()
     .fetch(query)
     .then((data) => {
-      payload = [...data.publishDateArticles, ...data.noPublishDateArticles];
+      payload = [...data.publishDateArticles];
       return data;
     })
     .catch((err) => {

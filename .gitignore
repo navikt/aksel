@@ -151,3 +151,4 @@ playwright-report/
 backup-*.tar.gz
 sitemap-urls.json
 *.tar.gz
+searchindex.json

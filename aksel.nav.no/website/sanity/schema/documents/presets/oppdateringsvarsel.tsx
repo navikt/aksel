@@ -5,6 +5,7 @@ export const oppdateringsvarsel = defineField({
   title: "Sist godkjent",
   name: "updateInfo",
   type: "object",
+  group: "innhold",
   components: {
     field: UpdateInfo,
   },

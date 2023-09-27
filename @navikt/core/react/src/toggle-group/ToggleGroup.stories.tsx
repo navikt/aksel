@@ -1,79 +1,80 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { Email, EmailOpened, Send } from "@navikt/ds-icons";
+import {
+  EnvelopeClosedIcon,
+  EnvelopeOpenIcon,
+  InboxUpIcon,
+} from "@navikt/aksel-icons";
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { ToggleGroup } from "../index";
-export default {
+
+const meta: Meta<typeof ToggleGroup> = {
   title: "ds-react/ToggleGroup",
   component: ToggleGroup,
   argTypes: {
     size: {
+      options: ["medium", "small"],
       control: {
         type: "radio",
-        options: ["medium", "small"],
       },
     },
     variant: {
-      control: {
-        type: "radio",
-        options: ["action", "neutral"],
-      },
+      options: ["action", "neutral"],
+      control: { type: "radio" },
     },
   },
-} as Meta;
+};
+export default meta;
 
 const Items = (icon?: boolean, both?: boolean) => (
   <>
     <ToggleGroup.Item value="ulest">
       {both ? (
         <>
-          <Email /> Uleste
+          <EnvelopeClosedIcon /> Uleste
         </>
       ) : (
-        <>{icon ? <Email /> : "Uleste"}</>
+        <>{icon ? <EnvelopeClosedIcon /> : "Uleste"}</>
       )}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="lest">
       {both ? (
         <>
-          <EmailOpened /> Leste
+          <EnvelopeOpenIcon /> Leste
         </>
       ) : (
-        <>{icon ? <EmailOpened /> : "Leste"}</>
+        <>{icon ? <EnvelopeOpenIcon /> : "Leste"}</>
       )}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="sendt">
       {both ? (
         <>
-          <Send /> Sendte
+          <InboxUpIcon /> Sendt
         </>
       ) : (
-        <>{icon ? <Send /> : "Sendte"}</>
+        <>{icon ? <InboxUpIcon /> : "Sendt"}</>
       )}
     </ToggleGroup.Item>
   </>
 );
 
-export const Default = {
-  render: (props) => {
-    const [activeValue, setActiveValue] = useState("ulest");
-    return (
-      <ToggleGroup
-        size={props?.size}
-        value={activeValue}
-        onChange={setActiveValue}
-        label={props.label ? "Proident minim dolor pariatur." : undefined}
-      >
-        {Items(!!props?.icon, !!props?.text && props.icon)}
-      </ToggleGroup>
-    );
-  },
-
-  args: {
-    icon: true,
-    text: true,
-    label: false,
-  },
+export const Default = (props) => {
+  const [activeValue, setActiveValue] = useState("ulest");
+  return (
+    <ToggleGroup
+      size={props.size}
+      variant={props.variant}
+      value={activeValue}
+      onChange={setActiveValue}
+      label={props.label ? "Proident minim dolor pariatur." : undefined}
+    >
+      {Items(props.icon, props.text && props.icon)}
+    </ToggleGroup>
+  );
+};
+Default.args = {
+  icon: true,
+  text: true,
+  label: false,
 };
 
 export const Compositions = () => {

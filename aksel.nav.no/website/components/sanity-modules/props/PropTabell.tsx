@@ -1,15 +1,7 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
 import { BodyShort, Detail, Heading, Tooltip } from "@navikt/ds-react";
 import { Highlighter } from "./Highlight";
-
-export type PropT = {
-  _type: "komponent";
-  _key: string;
-  title?: string;
-  overridable?: boolean;
-  propref?: SanityT.Schema.ds_props;
-};
+import { PropTableT } from "@/types";
 
 const List = ({ prop, parent }: { prop: any; parent: string }) => {
   if (prop?.description && prop.description.includes("@private")) {
@@ -27,7 +19,11 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
             prop?.required ? "" : "?"
           } `}</span>
         ) : (
-          <Tooltip content={`${prop.defaultValue}`} arrow={false} delay={0}>
+          <Tooltip
+            content={`default: ${prop.defaultValue}`}
+            arrow={false}
+            delay={0}
+          >
             <span className="mr-2 cursor-pointer border-b border-dashed border-gray-600 font-semibold">{`${
               prop.name
             }${prop?.required ? "" : "?"}`}</span>
@@ -37,7 +33,9 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
         <span>{prop.type ? <>{Highlighter({ type: prop.type })}</> : ""}</span>
       </dt>
       {prop.description && (
-        <dd className="font-sans text-base">{prop.description}</dd>
+        <dd className="whitespace-pre-wrap font-sans text-base">
+          {prop.description}
+        </dd>
       )}
       {prop.name === "ref" && prop.type.includes("Ref<") && (
         <dd className="font-sans text-base">
@@ -51,13 +49,13 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
   );
 };
 
-const PropTable = ({ komponent }: { komponent: PropT }): JSX.Element => {
+const PropTable = ({ komponent }: { komponent: PropTableT }) => {
   return (
     <div>
       <Heading
         size="xsmall"
         level="3"
-        className="scroll-m-8 rounded-t border border-b-0 border-gray-300 bg-gray-50 p-2"
+        className="scroll-m-8 rounded-t-lg border border-b-0 border-gray-300 bg-gray-50 p-2"
         id={`${komponent._key}`}
       >
         {komponent?.title ? komponent.title : "Props"}
@@ -65,7 +63,7 @@ const PropTable = ({ komponent }: { komponent: PropT }): JSX.Element => {
 
       <div className="toc-ignore relative mb-8">
         {komponent?.propref?.proplist?.length === 0 && (
-          <div className="mb-8 rounded-b border border-gray-300 p-2">
+          <div className="mb-8 rounded-b-lg border border-gray-300 p-2">
             <BodyShort>Fant ingen props for denne komponenten.</BodyShort>
           </div>
         )}

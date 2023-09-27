@@ -6,19 +6,30 @@ import {
   logAmplitudeEvent,
   YarnIcon,
 } from "@/components";
-import { getDocumentsTmp, komponentQuery, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
+import { getClient } from "@/sanity/client.server";
+import { getDocumentsTmp } from "@/sanity/interface";
+import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
+import {
+  AkselKomponentDocT,
+  AkselSidebarT,
+  ArticleListT,
+  NextPageT,
+  ResolveContributorsT,
+  ResolveSlugT,
+} from "@/types";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import { WithSidebar } from "components/layout/page-templates/WithSidebar";
-import ComponentOverview from "components/sanity-modules/component-overview";
+import Footer from "components/layout/footer/Footer";
+import { Header } from "components/layout/header/Header";
+import { WithSidebar } from "components/layout/WithSidebar";
+import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
+import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import { PreviewSuspense } from "next-sanity/preview";
-import Head from "next/head";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 
 const kodepakker = {
   "ds-react": {
@@ -32,24 +43,6 @@ const kodepakker = {
     git: "https://github.com/navikt/aksel/tree/main/%40navikt/core/css",
     changelog:
       "https://github.com/navikt/aksel/blob/main/%40navikt/core/css/CHANGELOG.md",
-  },
-  "ds-react-internal": {
-    title: "@navikt/ds-react-internal",
-    git: "https://github.com/navikt/aksel/tree/main/%40navikt/internal/react",
-    changelog:
-      "https://github.com/navikt/aksel/blob/main/%40navikt/internal/react/CHANGELOG.md",
-  },
-  "ds-css-internal": {
-    title: "@navikt/ds-css-internal",
-    git: "https://github.com/navikt/aksel/tree/main/%40navikt/internal/css",
-    changelog:
-      "https://github.com/navikt/aksel/blob/main/%40navikt/internal/css/CHANGELOG.md",
-  },
-  "ds-icons": {
-    title: "@navikt/ds-reaciconst",
-    git: "https://github.com/navikt/aksel/tree/main/%40navikt/icons",
-    changelog:
-      "https://github.com/navikt/aksel/blob/main/%40navikt/icons/CHANGELOG.md",
   },
   "ds-tokens": {
     title: "@navikt/ds-tokens",
@@ -65,30 +58,109 @@ const kodepakker = {
   },
 };
 
+type PageProps = NextPageT<{
+  page: ResolveContributorsT<ResolveSlugT<AkselKomponentDocT>>;
+  sidebar: AkselSidebarT;
+  seo: any;
+  refs: ArticleListT;
+  publishDate: string;
+}>;
+
+/**
+ * "refs" må disables i preview da next-sanity sin
+ * preview-funksjonalitet fører til en infinite loop som låser applikasjonen.
+ * Dette er på grunn av av hele datasettet blir lastet inn i preview flere ganger som til slutt låser vinduet.
+ */
+export const query = `{
+  "page": *[_type == "komponent_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
+    {
+      ...,
+      "slug": slug.current,
+      linked_package {
+        "title": @->title,
+        "github_link": @->github_link,
+        "status": @->status
+      },
+      intro{
+        ...,
+        body[]{
+          ...,
+        ${destructureBlocks}
+        }
+      },
+      content[]{
+        ...,
+        ${destructureBlocks}
+      },
+  },
+  "refs": select(
+    $preview == "true" => [],
+    $preview != "true" => *[_type == "komponent_artikkel" && count(*[references(^._id)][slug.current == $slug]) > 0][0...3]{
+      _id,
+      heading,
+      "slug": slug,
+      status
+    }
+  ),
+  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
+  ${sidebarQuery}
+}`;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: await getDocumentsTmp("komponent_artikkel").then((paths) =>
+      paths.map((slug) => ({
+        params: {
+          slug: slug.split("/").filter((x) => x !== "komponenter"),
+        },
+      }))
+    ),
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  preview = false,
+}: {
+  params: { slug: string[] };
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const { page, sidebar, refs, seo } = await getClient().fetch(query, {
+    slug: `komponenter/${slug.slice(0, 2).join("/")}`,
+    type: "komponent_artikkel",
+    preview: "false",
+  });
+
+  return {
+    props: {
+      page: page,
+      refs,
+      slug: slug.slice(0, 2).join("/"),
+      seo,
+      sidebar,
+      preview,
+      title: page?.heading ?? "",
+      id: page?._id ?? "",
+      publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+    },
+    notFound: !page && !preview,
+    revalidate: 60,
+  };
+};
+
 const Page = ({
   page,
   sidebar,
   refs,
   seo,
-}: {
-  slug?: string[];
-  page: any;
-  refs: any[];
-  sidebar: any;
-  seo: any;
-  preview: boolean;
-}): JSX.Element => {
+  publishDate,
+}: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
 
   const pack = page?.kodepakker?.length > 0 && kodepakker[page?.kodepakker[0]];
-
-  const date = page?.updateInfo?.lastVerified
-    ? page?.updateInfo?.lastVerified
-    : page?.publishedAt
-    ? page.publishedAt
-    : page._updatedAt;
 
   const tag =
     page?.status?.tag === "beta"
@@ -97,49 +169,113 @@ const Page = ({
       ? "komponent-ny"
       : null;
 
+  const unsafe = page?.status?.unsafe;
+  const internal = page?.status?.internal;
+
+  const Links = () => (
+    <BodyShort
+      as="span"
+      size="small"
+      className="text-text-subtle mt-4 flex flex-wrap gap-4"
+    >
+      {pack && (
+        <>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={pack.git}
+            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            onClick={() =>
+              logAmplitudeEvent("link", {
+                kilde: "intro-lenker komponenter",
+                til: "github",
+              })
+            }
+          >
+            <GithubIcon /> Github
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={`https://yarnpkg.com/package/${pack.title}`}
+            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            onClick={() =>
+              logAmplitudeEvent("link", {
+                kilde: "intro-lenker komponenter",
+                til: "yarn",
+              })
+            }
+          >
+            <YarnIcon />
+            Yarn
+          </a>
+        </>
+      )}
+
+      {page.figma_link && (
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href={page.figma_link}
+          className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+          onClick={() =>
+            logAmplitudeEvent("link", {
+              kilde: "intro-lenker komponenter",
+              til: "figma",
+            })
+          }
+        >
+          <FigmaIcon /> Figma
+        </a>
+      )}
+      {pack && (
+        <>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={pack.changelog}
+            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            onClick={() =>
+              logAmplitudeEvent("link", {
+                kilde: "intro-lenker komponenter",
+                til: "endringslogg",
+              })
+            }
+          >
+            <ChangelogIcon />
+            Endringslogg
+          </a>
+        </>
+      )}
+    </BodyShort>
+  );
+
   return (
     <>
-      <Head>
-        <title>{page?.heading ? `${page?.heading} - Aksel` : "Aksel"}</title>
-        <meta property="og:title" content={`${page.heading} - Aksel`} />
-        <meta name="description" content={page?.seo?.meta ?? ""} key="desc" />
-        <meta
-          property="og:description"
-          content={page?.seo?.meta ?? ""}
-          key="ogdesc"
-        />
-        <meta
-          property="og:image"
-          content={
-            page?.seo?.image
-              ? urlFor(page?.seo?.image)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : seo
-              ? urlFor(seo)
-                  .width(1200)
-                  .height(630)
-                  .fit("crop")
-                  .quality(100)
-                  .url()
-              : ""
-          }
-          key="ogimage"
-        />
-      </Head>
+      <SEO
+        title={page?.heading}
+        description={page?.seo?.meta}
+        image={page?.seo?.image ?? seo}
+      />
+
+      <Header />
       <WithSidebar
-        withToc
         sidebar={sidebar}
         pageType={{ type: "Komponenter", title: page?.heading }}
         pageProps={page}
         variant="page"
         intro={
-          <Detail as="div" className="mt-2 flex items-center gap-3">
-            <StatusTag showStable status={page?.status?.tag} />
-            {`OPPDATERT ${dateStr(date)}`}
+          <Detail as="div">
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <span>
+                Oppdatert <time>{publishDate}</time>
+              </span>
+              {internal && <StatusTag status="internal" />}
+              {page?.status?.tag !== "beta" && (
+                <StatusTag showStable status={page?.status?.tag} />
+              )}
+            </div>
+            <Links />
           </Detail>
         }
         footer={
@@ -159,85 +295,14 @@ const Page = ({
           )
         }
       >
-        <BodyShort
-          as="span"
-          size="small"
-          className="text-text-subtle mb-6 flex flex-wrap gap-4"
-        >
-          {pack && (
-            <>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={pack.git}
-                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-                onClick={() =>
-                  logAmplitudeEvent("link", {
-                    kilde: "intro-lenker komponenter",
-                    til: "github",
-                  })
-                }
-              >
-                <GithubIcon /> Github
-              </a>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={`https://yarnpkg.com/package/${pack.title}`}
-                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-                onClick={() =>
-                  logAmplitudeEvent("link", {
-                    kilde: "intro-lenker komponenter",
-                    til: "yarn",
-                  })
-                }
-              >
-                <YarnIcon />
-                Yarn
-              </a>
-            </>
-          )}
-
-          {page.figma_link && (
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href={page.figma_link}
-              className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-              onClick={() =>
-                logAmplitudeEvent("link", {
-                  kilde: "intro-lenker komponenter",
-                  til: "figma",
-                })
-              }
-            >
-              <FigmaIcon /> Figma
-            </a>
-          )}
-          {pack && (
-            <>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={pack.changelog}
-                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
-                onClick={() =>
-                  logAmplitudeEvent("link", {
-                    kilde: "intro-lenker komponenter",
-                    til: "endringslogg",
-                  })
-                }
-              >
-                <ChangelogIcon />
-                Endringslogg
-              </a>
-            </>
-          )}
-        </BodyShort>
         {tag && (
-          <SuggestionBlock variant={tag} reference={`<${page?.heading} />`} />
+          <SuggestionBlock
+            variant={tag}
+            unsafe={unsafe}
+            reference={`<${page?.heading} />`}
+          />
         )}
-        <IntroSeksjon node={page?.intro} />
+        <IntroSeksjon node={page?.intro} internal={internal} />
         {page?.status?.tag === "ready" && (
           <SuggestionBlock
             variant="komponent"
@@ -246,27 +311,28 @@ const Page = ({
         )}
         <SanityBlockContent blocks={page["content"]} />
       </WithSidebar>
+      <Footer />
     </>
   );
 };
 
 const WithPreview = lazy(() => import("../../components/WithPreview"));
 
-const Wrapper = (props: any): JSX.Element => {
+const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <PreviewSuspense fallback={<Page {...props} />}>
+      <Suspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
-          query={komponentQuery}
+          query={query}
           params={{
-            slug: `komponenter/${props.slug.slice(0, 2).join("/")}`,
+            slug: `komponenter/${props.slug}`,
             type: "komponent_artikkel",
             preview: "true",
           }}
           props={props}
         />
-      </PreviewSuspense>
+      </Suspense>
     );
   }
 
@@ -274,46 +340,3 @@ const Wrapper = (props: any): JSX.Element => {
 };
 
 export default Wrapper;
-
-export const getStaticPaths = async (): Promise<{
-  fallback: string;
-  paths: { params: { slug: string[] } }[];
-}> => {
-  return {
-    paths: await getDocumentsTmp("komponent_artikkel").then((paths) =>
-      paths.map((slug) => ({
-        params: {
-          slug: slug.split("/").filter((x) => x !== "komponenter"),
-        },
-      }))
-    ),
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string[] };
-  preview?: boolean;
-}) => {
-  const { page, sidebar, refs, seo } = await getClient().fetch(komponentQuery, {
-    slug: `komponenter/${slug.slice(0, 2).join("/")}`,
-    type: "komponent_artikkel",
-    preview: "false",
-  });
-
-  return {
-    props: {
-      page: page,
-      refs,
-      slug,
-      seo,
-      sidebar,
-      preview,
-    },
-    notFound: !page && !preview,
-    revalidate: 60,
-  };
-};

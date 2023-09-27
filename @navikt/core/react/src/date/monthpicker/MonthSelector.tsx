@@ -4,7 +4,7 @@ import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
 import React, { useState } from "react";
 import { BodyShort } from "../..";
-import { useSharedMonthContext } from "../hooks";
+import { useSharedMonthContext } from "../context";
 import { isMatch } from "../utils";
 import MonthButton from "./MonthButton";
 
@@ -62,9 +62,9 @@ export const MonthSelector = () => {
   return (
     <BodyShort as="table" className="rdp-table">
       <tbody className="rdp-tbody">
-        {tableMonths.map((x, y) => (
-          <tr className="rdp-row" key={y}>
-            {x.map((month: Date, y) => {
+        {tableMonths.map((months, i) => (
+          <tr className="rdp-row" key={i}>
+            {months.map((month: Date) => {
               return (
                 <td key={month.toDateString()} className="rdp-cell">
                   <MonthButton

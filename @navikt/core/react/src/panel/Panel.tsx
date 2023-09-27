@@ -16,6 +16,25 @@ export interface PanelProps extends React.HTMLAttributes<HTMLElement> {
 
 export type PanelType = OverridableComponent<PanelProps, HTMLElement>;
 
+/**
+ * A component that displays a bordered panel with heading and body.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/panel)
+ * @see 🏷️ {@link PanelProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+ *
+ * @example
+ * ```jsx
+ * <Panel border>
+ *   <Heading spacing level="2" size="large">
+ *     Søk om økonomisk sosialhjelp
+ *   </Heading>
+ *   <BodyLong>
+ *     Du kan søke om det du trenger økonomisk støtte til.
+ *   </BodyLong>
+ * </Panel>
+ * ```
+ */
 export const Panel: PanelType = forwardRef(
   (
     { children, className, border = false, as: Component = "div", ...rest },

@@ -1,4 +1,4 @@
-import { Home } from "@navikt/ds-icons";
+import { HouseIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -39,7 +39,7 @@ export const KomponentIntro = defineType({
     prepare() {
       return {
         title: "Komponent-intro",
-        media: () => <Home />,
+        media: () => <HouseIcon />,
       };
     },
   },

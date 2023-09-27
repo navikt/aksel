@@ -1,4 +1,4 @@
-import { Star } from "@navikt/ds-icons";
+import { StarIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -6,7 +6,7 @@ export const UnikSidemodul = defineType({
   title: "Unik Sidemodul",
   type: "object",
   name: "spesial_seksjon",
-  icon: Star,
+  icon: StarIcon,
   validation: (Rule) => Rule.required(),
   fields: [
     defineField({
@@ -37,7 +37,7 @@ export const UnikSidemodul = defineType({
       return {
         title: s.modul,
         subtitle: "Unik Sidemodul",
-        media: () => <Star />,
+        media: () => <StarIcon />,
       };
     },
   },

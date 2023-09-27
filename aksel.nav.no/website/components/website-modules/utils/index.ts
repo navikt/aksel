@@ -1,16 +1,10 @@
-import nbLocale from "date-fns/locale/nb";
-import { format } from "date-fns";
+import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 
 export * from "./util";
 export * from "./amplitude";
 export * from "./hooks";
 export * from "./contexts";
-
-export const dateStr = (date: string) =>
-  format(new Date(date), "d. MMMM YYY", { locale: nbLocale });
-
-export const dateTimeStr = (date: string) =>
-  format(new Date(date), "d-MM-YYY", { locale: nbLocale });
+export * from "./date-string";
 
 export const isNew = (date: string) => {
   const date1 = new Date(date);
@@ -32,3 +26,7 @@ export const abbrName = (name: string): string => {
     )
     .join(" ");
 };
+
+export const getAuthors = (
+  blog: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>
+) => (blog?.contributors as any)?.map((x) => x?.title) ?? [];

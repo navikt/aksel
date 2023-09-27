@@ -1,8 +1,9 @@
 import React from "react";
 import { withErrorBoundary } from "@/error-boundary";
-import PropTableV2, { PropT } from "./PropTabell";
+import PropTableV2 from "./PropTabell";
+import { PropTableT } from "@/types";
 
-const PropsSeksjon = ({ node }: { node: any }): JSX.Element => {
+const PropsSeksjon = ({ node }: { node: any }) => {
   if (
     !node ||
     (node?.elementer?.length === 0 && node?.komponenter?.length === 0)
@@ -16,7 +17,7 @@ const PropsSeksjon = ({ node }: { node: any }): JSX.Element => {
         <>
           {node.komponenter.map((prop) => (
             <PropTableV2
-              komponent={prop as unknown as PropT}
+              komponent={prop as unknown as PropTableT}
               key={prop?._key}
             />
           ))}

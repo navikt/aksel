@@ -1,61 +1,96 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
+import { CodeSnippetT } from "@/types";
+import { ChevronRightIcon, TerminalIcon } from "@navikt/aksel-icons";
+import { CopyButton, Label } from "@navikt/ds-react";
 import cl from "clsx";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import React from "react";
-import CopyButton from "./CopyButton";
+import { Highlight, Language } from "prism-react-renderer";
+import theme from "./theme";
 
-const CodeSnippet = ({
-  node: { code },
-  className,
-  ...props
-}: {
-  node: SanityT.Schema.kode;
-  className?: string;
-  style?: any;
-}): JSX.Element => {
+const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
   if (!code || !code.code) {
     return null;
   }
 
-  let language = code.language ?? "javascript";
-  language =
-    language === "terminal" || language === "default" ? "bash" : language;
+  let language = (code?.language as Language) ?? "bash";
+
+  switch (code?.language) {
+    case "js":
+      language = "javascript";
+      break;
+    case "jsx":
+      language = "tsx";
+      break;
+    case "scss":
+      language = "css";
+      break;
+    case "less":
+      language = "css";
+      break;
+    default:
+      break;
+  }
+
+  const terminalStyling = (lang) => lang === "bash" || lang === "terminal";
+  const Title = ({ input }) =>
+    input === "bash" || input === "terminal" ? (
+      <TerminalIcon title="terminal" fontSize="1.5rem" />
+    ) : (
+      <span>{input}</span>
+    );
 
   return (
-    <>
-      <div
-        className={cl(
-          className,
-          "relative mb-8 grid max-h-96 overflow-x-auto rounded bg-gray-900"
-        )}
-        {...props}
-      >
-        <CopyButton content={code.code} />
-        <Highlight
-          code={code.code}
-          language={language}
-          {...defaultProps}
-          theme={undefined}
-        >
-          {({ tokens, getLineProps, getTokenProps }) => (
-            <pre className="text-text-on-inverted relative m-0 overflow-x-auto overflow-y-auto rounded-lg bg-gray-900 p-4 pr-16 font-mono">
+    <section
+      aria-label="Kode"
+      className="aksel-codesnippet bg-surface-inverted relative mb-7 grid rounded-lg last:mb-0"
+    >
+      <div className="text-text-on-inverted text-medium relative flex leading-6">
+        <div className="mt-2 flex flex-none items-center border-b border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">
+          {!title ? (
+            <Label as="span" className="uppercase">
+              <Title input={language} />
+            </Label>
+          ) : (
+            <Label as="span">{title}</Label>
+          )}
+        </div>
+        <div className="mt-2 flex h-10 flex-auto rounded-tl bg-gray-100/10 shadow-inner" />
+
+        <CopyButton
+          data-theme="dark"
+          size="small"
+          copyText={code.code}
+          className="absolute right-2 top-3"
+        />
+      </div>
+      <Highlight code={code.code} language={language} theme={theme}>
+        {({ tokens, getLineProps, getTokenProps }) => (
+          <pre className="text-medium m-0 flex overflow-auto rounded-lg leading-6">
+            <code className="max-h-80 min-w-full flex-none p-4 pb-0">
               {tokens.map((line, i) => (
-                <div
+                <span
                   key={i}
                   {...getLineProps({ line, key: i })}
-                  className="text-medium whitespace-pre break-words"
+                  className={cl(
+                    "last-of-type:pb-4",
+                    terminalStyling(language) ? "flex items-center" : "block"
+                  )}
                 >
+                  {terminalStyling(language) && (
+                    <ChevronRightIcon
+                      aria-hidden
+                      className="mr-2 h-5 w-auto flex-none overflow-visible text-pink-400"
+                    />
+                  )}
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
-                </div>
+                </span>
               ))}
-            </pre>
-          )}
-        </Highlight>
-      </div>
-    </>
+            </code>
+          </pre>
+        )}
+      </Highlight>
+    </section>
   );
 };
 

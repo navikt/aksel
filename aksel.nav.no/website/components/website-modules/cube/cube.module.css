@@ -1,5 +1,5 @@
 .animated {
-  animation: rotation 30s ease-in-out infinite;
+  animation: rotation 60s ease-in-out infinite;
   transform: rotate(-45deg);
   position: absolute;
   z-index: -1;
@@ -8,21 +8,21 @@
 }
 
 .animated1 {
-  animation: shape-1 30s ease-in-out infinite;
+  animation: shape-1 60s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: translate(-95rem, -13.95rem);
 }
 
 .animated2 {
-  animation: shape-2 30s ease-in-out infinite;
+  animation: shape-2 60s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: translate(-69.5rem, -13.95rem);
 }
 
 .animated3 {
-  animation: shape-3 30s ease-in-out infinite;
+  animation: shape-3 60s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(0, -27.7rem);
@@ -34,14 +34,14 @@
 }
 
 .animated5 {
-  animation: shape-5 30s ease-in-out infinite;
+  animation: shape-5 60s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: scaleX(-1) rotate(90deg) translate(-27.75rem, 27.75rem);
 }
 
 .animated6 {
-  animation: shape-6 30s ease-in-out infinite;
+  animation: shape-6 60s ease-in-out infinite;
   color: white;
   position: absolute;
   transform: translate(70rem, -13.95rem);

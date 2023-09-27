@@ -1,16 +1,20 @@
-import { PeopleFilled, Service } from "@navikt/ds-icons";
+import { PersonIcon, PersonHeadsetIcon } from "@navikt/aksel-icons";
 import { Chat } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
     <div className="grid gap-10">
-      <Chat avatar={<Service />} name="EVA" timestamp="01.01.21 14:00">
+      <Chat
+        avatar={<PersonHeadsetIcon />}
+        name="EVA"
+        timestamp="01.01.21 14:00"
+      >
         <Chat.Bubble>Hei! Mitt navn er Eva.</Chat.Bubble>
         <Chat.Bubble>Hva kan jeg hjelpe deg med?</Chat.Bubble>
       </Chat>
       <Chat
-        avatar={<PeopleFilled />}
+        avatar={<PersonIcon />}
         name="Ola Normann"
         timestamp="01.01.21 14:00"
         position="right"

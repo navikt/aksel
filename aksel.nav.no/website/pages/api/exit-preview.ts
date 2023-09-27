@@ -1,4 +1,6 @@
-export default function exit(req, res) {
+import type { NextApiRequest, NextApiResponse } from "next";
+
+export default function exit(_: NextApiRequest, res: NextApiResponse) {
   // Exit current user from preview mode
   res.clearPreviewData();
 

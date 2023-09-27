@@ -1,26 +1,22 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { BodyLong } from "..";
 import Stepper from "./Stepper";
 
-export default {
+const meta: Meta<typeof Stepper> = {
   title: "ds-react/Stepper",
   component: Stepper,
   argTypes: {
     orientation: {
-      control: {
-        type: "radio",
-        options: ["horizontal", "vertical"],
-      },
+      control: { type: "radio" },
+      options: ["horizontal", "vertical"],
     },
     activeStep: {
-      control: {
-        type: "number",
-      },
+      control: { type: "number" },
     },
   },
-} as Meta;
+};
+export default meta;
 
 const storyTexts = [
   "Minimize backwards overflow agile. Horsehead offer commitment to the cause nor copy and paste from stack overflow problem territories, innovation is hot right now for can you slack it to me?. High touch client table the discussion , and get buy-in so manage expectations loop back, please advise soonest. We need a paradigm shift dogpile that, and i need to pee and then go to another meeting for let's prioritize the low-hanging fruit.",
@@ -32,51 +28,48 @@ const storyTexts = [
   "Move the needle a loss a day will keep you focus yet can you put it into a banner that is not alarming, but eye catching and not too giant or strategic fit, nor it is all exactly as i said, but i don't like it or streamline. We've bootstrapped the model. This proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables the horse is out of the barn usabiltiy, for going forward but going forward.",
 ];
 
-export const Default = {
-  render: ({ asButton, ...props }) => {
-    const [activeStep, setActiveStep] = useState(1);
+export const Default = ({ asButton, ...props }) => {
+  const [activeStep, setActiveStep] = useState(1);
 
-    const newProps = {
-      onClick: (e) => e.preventDefault(),
-      ...(asButton ? { as: "button" } : { href: "#" }),
-    };
+  const newProps = {
+    onClick: (e) => e.preventDefault(),
+    ...(asButton ? { as: "button" } : { href: "#" }),
+  };
 
-    return (
-      <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
-        <Stepper
-          aria-labelledby="stepper-heading"
-          activeStep={activeStep}
-          onStepChange={setActiveStep}
-          orientation="vertical"
-          {...props}
-        >
-          <Stepper.Step {...newProps} completed={props.completed}>
-            Start søknad
-          </Stepper.Step>
-          <Stepper.Step {...newProps}>Personopplysninger</Stepper.Step>
-          <Stepper.Step {...newProps} completed={props.completed}>
-            Saksopplysninger
-          </Stepper.Step>
-          <Stepper.Step {...newProps} completed={props.completed}>
-            Søknadstekst for en veldig spesifikk prosess i NAV som må beskrives
-            og forklares i sitt fulle i denne labelen
-          </Stepper.Step>
-          <Stepper.Step {...newProps}>Vedlegg</Stepper.Step>
-          <Stepper.Step {...newProps}>Oppsummering</Stepper.Step>
-          <Stepper.Step {...newProps}>Innsending</Stepper.Step>
-        </Stepper>
-        <BodyLong style={{ marginTop: "5rem" }}>
-          {storyTexts[activeStep]}
-        </BodyLong>
-      </div>
-    );
-  },
-
-  args: {
-    asButton: false,
-    interactive: true,
-    completed: false,
-  },
+  return (
+    <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
+      <Stepper
+        aria-labelledby="stepper-heading"
+        activeStep={activeStep}
+        onStepChange={setActiveStep}
+        orientation="vertical"
+        {...props}
+      >
+        <Stepper.Step {...newProps} completed={props.completed}>
+          Start søknad
+        </Stepper.Step>
+        <Stepper.Step {...newProps}>Personopplysninger</Stepper.Step>
+        <Stepper.Step {...newProps} completed={props.completed}>
+          Saksopplysninger
+        </Stepper.Step>
+        <Stepper.Step {...newProps} completed={props.completed}>
+          Søknadstekst for en veldig spesifikk prosess i NAV som må beskrives og
+          forklares i sitt fulle i denne labelen
+        </Stepper.Step>
+        <Stepper.Step {...newProps}>Vedlegg</Stepper.Step>
+        <Stepper.Step {...newProps}>Oppsummering</Stepper.Step>
+        <Stepper.Step {...newProps}>Innsending</Stepper.Step>
+      </Stepper>
+      <BodyLong style={{ marginTop: "5rem" }}>
+        {storyTexts[activeStep]}
+      </BodyLong>
+    </div>
+  );
+};
+Default.args = {
+  asButton: false,
+  interactive: true,
+  completed: false,
 };
 
 export const Horizontal = () => {
@@ -175,9 +168,7 @@ export const CompletedSteps = () => {
         onStepChange={(step) => setActiveStep(step)}
       >
         <Stepper.Step completed={activeStep > 1}>Start søknad</Stepper.Step>
-        <Stepper.Step completed={activeStep > 2}>
-          Personopplysninger
-        </Stepper.Step>
+        <Stepper.Step completed>Personopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep >= 4}>
           Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst

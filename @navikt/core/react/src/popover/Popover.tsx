@@ -1,8 +1,8 @@
 import {
-  arrow as flArrow,
   autoUpdate,
-  flip,
+  arrow as flArrow,
   offset as flOffset,
+  flip,
   shift,
   useClick,
   useDismiss,
@@ -11,15 +11,17 @@ import {
 } from "@floating-ui/react";
 import cl from "clsx";
 import React, {
-  forwardRef,
   HTMLAttributes,
+  forwardRef,
   useCallback,
   useMemo,
   useRef,
+  useContext,
 } from "react";
 import { mergeRefs } from "..";
 import { useClientLayoutEffect, useEventListener } from "../util";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
+import { ModalContext } from "../modal/ModalContext";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -72,6 +74,11 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default "absolute"
    */
   strategy?: "absolute" | "fixed";
+  /**
+   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
+   * @default false
+   */
+  bubbleEscape?: boolean;
 }
 
 interface PopoverComponent
@@ -81,6 +88,26 @@ interface PopoverComponent
   Content: PopoverContentType;
 }
 
+/**
+ * A component that displays a popover.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/popover)
+ * @see 🏷️ {@link PopoverProps}
+ *
+ * @example
+ * ```jsx
+ * <Button ref={buttonRef} onClick={() => setOpenState(true)}>
+ *   Åpne popover
+ * </Button>
+ * <Popover
+ *   open={openState}
+ *   onClose={() => setOpenState(false)}
+ *   anchorEl={buttonRef.current}
+ * >
+ *   <Popover.Content>Innhold her!</Popover.Content>
+ * </Popover>
+ * ```
+ */
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
@@ -92,18 +119,19 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       onClose,
       placement = "top",
       offset,
-      strategy: userStrategy = "absolute",
+      strategy: userStrategy,
+      bubbleEscape = false,
       ...rest
     },
     ref
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
+    const isInModal = useContext(ModalContext) !== null;
+    const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
 
     const {
       x,
       y,
-      reference,
-      floating,
       strategy,
       context,
       update,
@@ -111,30 +139,34 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement: flPlacement,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
     } = useFloating({
-      strategy: userStrategy,
+      strategy: chosenStrategy,
       placement,
       open: open,
-      onOpenChange: onClose,
+      onOpenChange: () => onClose(),
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
-        shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        shift({ padding: 12 }),
         flArrow({ element: arrowRef, padding: 8 }),
       ],
     });
 
     const { getFloatingProps } = useInteractions([
       useClick(context),
-      useDismiss(context),
+      useDismiss(context, {
+        bubbles: {
+          escapeKey: bubbleEscape,
+        },
+      }),
     ]);
 
     useClientLayoutEffect(() => {
-      reference(anchorEl);
+      refs.setReference(anchorEl);
     }, [anchorEl]);
 
     const floatingRef = useMemo(
-      () => mergeRefs([floating, ref]),
-      [floating, ref]
+      () => mergeRefs([refs.setFloating, ref]),
+      [refs.setFloating, ref]
     );
 
     useClientLayoutEffect(() => {
@@ -152,6 +184,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       useCallback(
         (e: FocusEvent) => {
           if (
+            e.target instanceof HTMLElement &&
             ![anchorEl, refs?.floating?.current].some((element) =>
               element?.contains(e.target as Node)
             )
@@ -177,7 +210,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         })}
         data-placement={flPlacement}
         aria-hidden={!open || !anchorEl}
-        tabIndex={-1}
         {...getFloatingProps({
           ref: floatingRef,
           style: {
@@ -185,6 +217,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             top: y ?? 0,
             left: x ?? 0,
           },
+          tabIndex: undefined,
         })}
         {...rest}
       >

@@ -1,10 +1,10 @@
-import { Badge } from "@sanity/ui";
+import { Tag } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
 import {
   getPublishedId,
-  useFormValue,
-  useCurrentUser,
   useClient,
+  useCurrentUser,
+  useFormValue,
 } from "sanity";
 
 export function EditorPreview(props) {
@@ -38,7 +38,9 @@ export function EditorPreview(props) {
         editors.length > 0 &&
         props._id &&
         getPublishedId(props._id) === editors[0]._ref && (
-          <Badge>Forfatter</Badge>
+          <Tag variant="neutral-filled" size="small">
+            Forfatter
+          </Tag>
         )}
     </div>
   );

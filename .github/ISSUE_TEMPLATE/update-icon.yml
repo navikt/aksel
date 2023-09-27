@@ -3,7 +3,7 @@ description: Send inn innspill til ikon
 title: "[Tilbakemelding på ikon]: "
 labels: ["forespørsel 🥰", "ikoner 🖼️"]
 assignees:
-  - olejorgenbakken
+  - KenAJoh
 body:
   - type: markdown
     attributes:

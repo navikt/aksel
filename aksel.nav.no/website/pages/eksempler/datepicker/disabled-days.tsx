@@ -1,4 +1,4 @@
-import { UNSAFE_DatePicker } from "@navikt/ds-react";
+import { DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { isFriday } from "date-fns";
 
@@ -10,7 +10,7 @@ const Example = () => {
   ];
 
   return (
-    <UNSAFE_DatePicker.Standalone
+    <DatePicker.Standalone
       today={new Date("Oct 9 2022")}
       disabled={disabledDays}
       onSelect={console.log}

@@ -1,38 +1,36 @@
 import docs from "@navikt/ds-tokens/docs.json";
-import { Frame } from "../Frame";
+import { Copy } from "../Copy";
+import { Grid } from "../Grid";
+import { sanitizeName } from "../utilities";
 
 export const ShadowView = ({ cat }: { cat: string }) => {
   const shadows = docs[cat];
 
   return (
-    <Frame
-      tokens={shadows}
-      styles="boxShadow"
-      element={({ token, name }: { token: string; name?: string }) => {
-        const isLigth = name && name.includes("focus-inverted");
-
+    <Grid stacked>
+      {shadows.map((x) => {
         return (
-          <div
-            className="min-h-16 flex h-full w-full items-center justify-center rounded-md px-4 text-5xl font-semibold"
-            aria-hidden
-            style={{
-              background: isLigth
-                ? `var(--a-surface-inverted)`
-                : `var(--a-surface-default)`,
-            }}
-          >
+          <div key={x.name} id={x.name} className="flex w-fit items-center">
             <div
-              className="h-8 w-full rounded-md"
               style={{
-                boxShadow: `${token}`,
-                background: isLigth
-                  ? "var(--a-surface-inverted)"
-                  : "var(--a-bg-subtle)",
+                boxShadow: `var(${x.name})`,
               }}
+              className="mr-3 grid h-16 w-16 place-content-center rounded-lg text-4xl leading-none"
             />
+            <dl className="grid h-full">
+              <dt className="inline-flex items-center gap-2">
+                <Copy
+                  text={sanitizeName(x.name.replace("shadow-", ""))}
+                  copyText={x.name}
+                />
+              </dt>
+              <dd className="text-text-subtle text-medium mt-auto">
+                {x.value}
+              </dd>
+            </dl>
           </div>
         );
-      }}
-    />
+      })}
+    </Grid>
   );
 };

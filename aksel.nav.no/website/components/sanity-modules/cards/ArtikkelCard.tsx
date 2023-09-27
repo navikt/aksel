@@ -1,8 +1,15 @@
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
+
+import {
+  AkselGodPraksisDocT,
+  ResolveContributorsSingleT,
+  ResolveSlugT,
+  ResolveTemaT,
+} from "@/types";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
-import { abbrName, dateStr, logNav } from "../..";
+import { abbrName, logNav } from "../..";
 
 const ArtikkelCard = ({
   slug,
@@ -16,24 +23,15 @@ const ArtikkelCard = ({
   tema,
   level = "2",
   ...rest
-}: Partial<
-  (SanityT.Schema.aksel_artikkel | SanityT.Schema.aksel_blogg) & {
-    slug: string;
-    tema: string[];
-    source?: string;
-    contributor: { title: string } | null;
-    variant?: "god-praksis" | "tema";
-    level?: "2" | "3" | "4";
-  }
->) => {
-  const date = (rest as any)?.updateInfo?.lastVerified
-    ? (rest as any)?.updateInfo?.lastVerified
-    : publishedAt
-    ? publishedAt
-    : _updatedAt;
+}: ResolveContributorsSingleT<
+  ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
+> & { source: string; variant: string; level?: "2" | "3" }) => {
+  const date = useFormatedDate(
+    (rest as any)?.updateInfo?.lastVerified ?? publishedAt ?? _updatedAt
+  );
 
   return (
-    <div className="hover:shadow-small focus-within:ring-border-focus bg-surface-default ring-border-subtle group relative rounded-lg p-5 pb-16 ring-1 focus-within:ring-[3px]">
+    <div className="shadow-xsmall hover:shadow-small focus-within:ring-border-focus bg-surface-default group relative rounded-lg p-3 pb-16 focus-within:ring-[3px] sm:p-5 sm:pb-16">
       <NextLink
         href={{
           pathname: `/${slug}`,
@@ -54,7 +52,7 @@ const ArtikkelCard = ({
         <Heading
           level={level}
           size="small"
-          className="text-deepblue-700 group-hover:underline"
+          className="text-deepblue-700 underline group-hover:no-underline"
         >
           {heading}
         </Heading>
@@ -71,7 +69,7 @@ const ArtikkelCard = ({
             </Detail>
           )}
           <Detail as="span" className="text-text-subtle">
-            {dateStr(date)}
+            {date}
           </Detail>
         </span>
       ) : (

@@ -3,7 +3,7 @@ description: Send et ønske om et eller flere nye ikoner
 title: "[Nytt ikon]: "
 labels: ["nytt ✨", "ikoner 🖼", "forespørsel 🥰"]
 assignees:
-  - olejorgenbakken
+  - KenAJoh
 body:
   - type: markdown
     attributes:

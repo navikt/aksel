@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 
@@ -32,30 +31,28 @@ export default {
   },
 } as Meta;
 
-export const Default = {
-  render: (props) => {
-    const [state, setState] = useState("");
-    return (
-      <div data-theme={props.darkmode ? "dark" : "light"}>
-        <Search
-          value={props.controlled ? state : undefined}
-          onChange={props.controlled ? setState : undefined}
-          label="Søk"
-          size={props.size}
-          clearButton={props.clearButton}
-          variant={props.variant}
-          hideLabel={props.hideLabel}
-          error={props.error}
-        />
-      </div>
-    );
-  },
-
-  args: {
-    controlled: false,
-    darkmode: false,
-    hideLabel: true,
-  },
+export const Default = (props) => {
+  const [state, setState] = useState("");
+  return (
+    <div data-theme={props.darkmode ? "dark" : "light"}>
+      <Search
+        value={props.controlled ? state : undefined}
+        onChange={props.controlled ? setState : undefined}
+        label="Søk"
+        size={props.size}
+        clearButton={props.clearButton}
+        variant={props.variant}
+        hideLabel={props.hideLabel}
+        error={props.error}
+        onSearchClick={console.log}
+      />
+    </div>
+  );
+};
+Default.args = {
+  controlled: false,
+  darkmode: false,
+  hideLabel: true,
 };
 
 export const Small = () => (
@@ -160,6 +157,31 @@ export const NoClearButton = () => (
       variant="simple"
       clearButton={false}
       value="søketekst"
+    />
+  </div>
+);
+
+export const HtmlSize = () => (
+  <div className="colgap">
+    <Search
+      label="Lorem ipsum dolor sit amet"
+      description="Saepe laborum delectus officia perferendis quaerat excepturi possimus hic enim dicta assumenda."
+      hideLabel={false}
+      htmlSize="20"
+    />
+    <Search
+      label="Lorem ipsum dolor sit amet"
+      description="Saepe laborum delectus officia perferendis quaerat excepturi possimus hic enim dicta assumenda."
+      hideLabel={false}
+      htmlSize="20"
+      variant="secondary"
+    />
+    <Search
+      label="Lorem ipsum dolor sit amet"
+      description="Saepe laborum delectus officia perferendis quaerat excepturi possimus hic enim dicta assumenda."
+      hideLabel={false}
+      htmlSize="20"
+      variant="simple"
     />
   </div>
 );

@@ -1,11 +1,11 @@
-import { CodeBlockIcon } from "@sanity/icons";
+import { TerminalIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 
 export const Kode = defineType({
   title: "Kode",
   name: "kode",
   type: "object",
-  icon: CodeBlockIcon,
+  icon: TerminalIcon,
   fields: [
     defineField({
       name: "code",
@@ -13,28 +13,39 @@ export const Kode = defineType({
       type: "code",
       hidden: ({ parent }) => parent?.variant,
       validation: (Rule) => Rule.required(),
+      initialValue: {
+        language: "tsx",
+      },
       options: {
+        language: "tsx",
         languageAlternatives: [
-          { value: "js", title: "Javascript" },
-          { value: "jsx", title: "JSX" },
+          { value: "tsx", title: "TSX" },
+          { value: "javascript", title: "Javascript" },
           { value: "html", title: "HTML" },
           { value: "css", title: "CSS" },
-          { value: "less", title: "Less" },
-          { value: "terminal", title: "Terminal/Bash" },
-          { value: "terminal", title: "Standard" },
+          { value: "scss", title: "SCSS" },
+          { value: "less", title: "LESS" },
+          { value: "bash", title: "Terminal" },
+          { value: "markdown", title: "Markdown" },
         ],
       },
+    }),
+    defineField({
+      title: "Title",
+      name: "title",
+      description: "Erstatter kodespråk som tittel",
+      type: "string",
     }),
   ],
   preview: {
     select: {
       code: "code",
-      ref: "ref.title",
+      title: "title",
     },
-    prepare: ({ code, ref }) => ({
-      title: code ? `${code?.code?.slice(0, 50)}...` : ref ? ref : "Kode",
-      subtitle: "kode",
-      media: CodeBlockIcon,
+    prepare: ({ code, title }) => ({
+      title: code ? `${code?.code?.slice(0, 50)}...` : "Kode",
+      subtitle: title ?? "kode",
+      media: TerminalIcon,
     }),
   },
 });

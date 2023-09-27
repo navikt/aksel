@@ -116,3 +116,17 @@ export const HideLabel = () => {
     </div>
   );
 };
+
+export const Readonly = () => {
+  return (
+    <div className="colgap">
+      <Switch description="Slår av alle notifikasjoner" readOnly>
+        Notifikasjoner
+      </Switch>
+
+      <Switch checked readOnly>
+        Notifikasjoner
+      </Switch>
+    </div>
+  );
+};

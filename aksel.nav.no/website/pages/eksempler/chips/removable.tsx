@@ -3,7 +3,16 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 import { useState } from "react";
 
 const Example = () => {
-  const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
+  const options = [
+    "Lillehammer",
+    "Nittedal",
+    "Enebakk",
+    "Hamar",
+    "Skedsmo",
+    "Arendal",
+    "Gjøvik",
+    "Vennesla",
+  ];
 
   const [filter, setFilter] = useState(options);
 
@@ -12,6 +21,7 @@ const Example = () => {
       {filter.map((c) => (
         <Chips.Removable
           key={c}
+          variant="action"
           onClick={() =>
             setFilter((x) =>
               x.length === 1 ? options : x.filter((y) => y !== c)
@@ -33,5 +43,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 4,
+  desc: "Removable chip viser valgte verdier som brukeren kan fjerne.",
 };

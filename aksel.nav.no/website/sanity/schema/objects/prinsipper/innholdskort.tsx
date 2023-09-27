@@ -1,6 +1,6 @@
 // Usikker på om skal være med videre
 
-import { FileContent } from "@navikt/ds-icons";
+import { FileTextIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -49,7 +49,7 @@ export const InnholdsKort = defineType({
       return {
         title: selection?.title,
         subtitle: `Innholdskort`,
-        media: () => <FileContent />,
+        media: () => <FileTextIcon />,
       };
     },
   },

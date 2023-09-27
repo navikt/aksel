@@ -1,4 +1,8 @@
-import { Email, EmailOpened, Send } from "@navikt/ds-icons";
+import {
+  EnvelopeClosedIcon,
+  EnvelopeOpenIcon,
+  PaperplaneIcon,
+} from "@navikt/aksel-icons";
 import { ToggleGroup } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -6,15 +10,15 @@ const Example = () => {
   return (
     <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
       <ToggleGroup.Item value="ulest">
-        <Email aria-hidden />
+        <EnvelopeClosedIcon aria-hidden />
         Ulest
       </ToggleGroup.Item>
       <ToggleGroup.Item value="lest">
-        <EmailOpened aria-hidden />
+        <EnvelopeOpenIcon aria-hidden />
         Leste
       </ToggleGroup.Item>
       <ToggleGroup.Item value="sendt">
-        <Send aria-hidden />
+        <PaperplaneIcon aria-hidden />
         Sendt
       </ToggleGroup.Item>
     </ToggleGroup>

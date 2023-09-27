@@ -2,7 +2,7 @@ import { Switch } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <Switch hideLabel>Slå på notifikasjoner</Switch>;
+  return <Switch hideLabel>Varsle med SMS</Switch>;
 };
 
 export default withDsExample(Example);

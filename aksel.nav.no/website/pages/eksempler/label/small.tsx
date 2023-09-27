@@ -2,10 +2,13 @@ import { Label } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <Label size="small">The red fox jumps over the lazy brown dog.</Label>;
+  const lorem =
+    "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
+
+  return <Label size="small">{lorem}</Label>;
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */
 export const Demo = {
@@ -13,5 +16,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 1,
 };

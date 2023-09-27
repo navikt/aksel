@@ -1,20 +1,22 @@
+import { LinkIcon } from "@navikt/aksel-icons";
 import { allArticleDocsRef } from "../../../config";
-import { Link } from "@navikt/ds-icons";
+
 import React from "react";
 import { defineType, defineField } from "sanity";
 
 export const RelatertInnhold = defineType({
   name: "relatert_innhold",
-  title: "Relatert Innhold",
+  title: "Relaterte lenker",
+  description: "Liste med relevante lenker til innholdet",
   type: "object",
-  icon: Link,
+  icon: LinkIcon,
   fields: [
     defineField({
-      title: "Lenker til innhold",
+      title: "Lenker",
       name: "lenker",
       type: "array",
       validation: (Rule) =>
-        Rule.required().max(4).error("Kan ha maks 4 relaterte lenker"),
+        Rule.required().max(10).error("Kan ha maks 10 lenker"),
       of: [
         {
           title: "Lenke",
@@ -28,7 +30,7 @@ export const RelatertInnhold = defineType({
               validation: (Rule) =>
                 Rule.required()
                   .max(40)
-                  .error("Tittelen kan være på maks 35 tegn"),
+                  .error("Tittelen kan være på maks 40 tegn"),
             }),
             defineField({
               title: "Intern side i Sanity",
@@ -71,8 +73,8 @@ export const RelatertInnhold = defineType({
     select: {
       links: "links",
     },
-    prepare(s) {
-      return { title: "Relatert innhold kort", media: () => <Link /> };
+    prepare() {
+      return { title: "Relatert innhold kort", media: () => <LinkIcon /> };
     },
   },
 });

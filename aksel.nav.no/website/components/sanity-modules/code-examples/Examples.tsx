@@ -1,25 +1,26 @@
 import { capitalize, Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT } from "@/lib";
-import { BodyLong, Link, Chips } from "@navikt/ds-react";
+import { CodeExamplesT } from "@/types";
+import {
+  ExternalLinkIcon,
+  LaptopIcon,
+  MobileSmallIcon,
+} from "@navikt/aksel-icons";
+import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import cl from "clsx";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { CodeSandbox } from "./CodeSandbox";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";
 
-const ComponentExamples = ({
-  node,
-}: {
-  node: Omit<SanityT.Schema.kode_eksempler, "dir" | "filnavn"> & {
-    dir?: SanityT.Schema.kode_eksempler_fil;
-    filnavn?: SanityT.Schema.kode_eksempler_fil;
-  };
-}): JSX.Element => {
+const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
+  const router = useRouter();
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleExampleLoad = () => {
     let attempts = 0;
@@ -50,6 +51,22 @@ const ComponentExamples = ({
     node?.dir?.filer?.[0]?.navn && setActiveExample(node.dir.filer[0].navn);
   }, [node]);
 
+  useEffect(() => {
+    const hash = router.asPath.split("#")[1];
+    if (
+      hash &&
+      hash.startsWith(`${node.dir.title.toLowerCase()}demo-`) &&
+      node.dir.filer.some(
+        (f) =>
+          f.navn === hash.replace(`${node.dir.title.toLowerCase()}demo-`, "")
+      )
+    ) {
+      setActiveExample(
+        hash.replace(`${node.dir.title.toLowerCase()}demo-`, "") as string
+      );
+    }
+  }, [router, node]);
+
   const fixName = (str: string) =>
     capitalize(
       str
@@ -58,12 +75,7 @@ const ComponentExamples = ({
         .trim()
     ) ?? str;
 
-  if (
-    !node.dir?.filer ||
-    node.dir.filer.length === 0 ||
-    (!node.standalone && !node.dir) ||
-    (node.standalone && !node.filnavn)
-  ) {
+  if (!node.dir?.filer || node.dir.filer.length === 0) {
     return null;
   }
 
@@ -76,12 +88,21 @@ const ComponentExamples = ({
           {node.dir.filer.map((fil) => {
             return (
               <Chips.Toggle
+                checkmark={false}
                 key={fil._key}
                 value={fil.navn}
                 selected={active === fil.navn}
+                id={`${node.dir.title.toLowerCase()}demo-${fil.navn}`}
                 onClick={() => {
                   setActiveExample(fil.navn);
                   setUnloaded(true);
+                  router.replace(
+                    `#${node.dir.title.toLowerCase()}demo-${fil.navn}`,
+                    undefined,
+                    {
+                      shallow: true,
+                    }
+                  );
                 }}
               >
                 {fixName(fil.navn)}
@@ -107,7 +128,7 @@ const ComponentExamples = ({
               <>
                 <div
                   className={cl(
-                    "overflow-hidden rounded-t border border-b-0 border-gray-300 ",
+                    "overflow-hidden rounded-t-lg border border-b-0 border-gray-300 ",
                     {
                       "relative animate-pulse": unloaded,
                       "bg-gray-50": !unloaded,
@@ -124,10 +145,11 @@ const ComponentExamples = ({
                     id={iframeId}
                     aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
                     className={cl(
-                      "min-w-80 block w-full max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                      "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                       { invisible: unloaded }
                     )}
                     title="Kode-eksempler"
+                    ref={iframeRef}
                   />
                   {unloaded && (
                     <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
@@ -138,24 +160,55 @@ const ComponentExamples = ({
                     </div>
                   )}
                 </div>
-                <div className="mb-2 flex justify-center gap-2 rounded-b border border-gray-300 px-2 py-1 text-base sm:justify-end ">
-                  <CodeSandbox code={fil.innhold.trim()} />
-                  <Link
-                    href={`/eksempler/${node.dir.title}/${fil.navn.replace(
-                      ".tsx",
-                      ""
-                    )}`}
-                    className="si-ignore text-gray-900"
-                    target="_blank"
-                  >
-                    Åpne i nytt vindu
-                  </Link>
+                <div className="mb-2 rounded-b-lg border border-gray-300 p-1">
+                  <HStack gap="4" justify="space-between">
+                    <div className="hidden sm:block">
+                      <HStack gap="2">
+                        <Button
+                          variant="tertiary-neutral"
+                          size="small"
+                          icon={
+                            <MobileSmallIcon title="Sett eksempel til mobilbredde" />
+                          }
+                          onClick={() =>
+                            (iframeRef.current.style.width = "360px")
+                          }
+                        />
+
+                        <Button
+                          variant="tertiary-neutral"
+                          size="small"
+                          icon={
+                            <LaptopIcon title="Sett eksempel til desktopbredde" />
+                          }
+                          onClick={() => (iframeRef.current.style.width = "")}
+                        />
+                      </HStack>
+                    </div>
+
+                    <HStack gap="2">
+                      <CodeSandbox code={fil.innhold.trim()} />
+                      <Button
+                        variant="tertiary-neutral"
+                        size="small"
+                        icon={
+                          <ExternalLinkIcon title="Åpne eksempel i nytt vindu" />
+                        }
+                        target="_blank"
+                        className="si-ignore"
+                        as="a"
+                        href={`/eksempler/${node.dir.title}/${fil.navn.replace(
+                          ".tsx",
+                          ""
+                        )}`}
+                      />
+                    </HStack>
+                  </HStack>
                 </div>
 
                 <Snippet
                   node={{
-                    _type: "kode" as const,
-                    code: { code: fil.innhold.trim(), language: "jsx" },
+                    code: { code: fil.innhold.trim(), language: "tsx" },
                   }}
                 />
               </>

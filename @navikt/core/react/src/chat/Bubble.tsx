@@ -17,6 +17,7 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   timestamp?: string;
   /**
    * Background color on bubble
+   * @deprecated Use `variant` on Chat instead
    */
   backgroundColor?: string;
   /**
@@ -25,11 +26,7 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   toptextPosition?: "left" | "right";
 }
 
-export type BubbleType = React.ForwardRefExoticComponent<
-  BubbleProps & React.RefAttributes<HTMLDivElement>
->;
-
-const Bubble: BubbleType = forwardRef(
+const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
   (
     {
       children,
@@ -50,17 +47,20 @@ const Bubble: BubbleType = forwardRef(
         {...rest}
       >
         {(timestamp || name) && (
-          <div
+          <h3
             className={cl(
               `navds-chat__top-text`,
               toptextPosition && `navds-chat__top-text--${toptextPosition}`
             )}
           >
-            {name && <Detail className="navds-chat__name">{name}</Detail>}
-            {timestamp && (
-              <Detail className="navds-chat__timestamp">{timestamp}</Detail>
+            {name && <Detail as="span">{name}</Detail>}
+            {name && timestamp && (
+              <Detail as="span" aria-hidden>
+                &bull;
+              </Detail>
             )}
-          </div>
+            {timestamp && <Detail as="span">{timestamp}</Detail>}
+          </h3>
         )}
         {children}
       </div>

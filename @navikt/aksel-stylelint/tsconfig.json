@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "target": "es2020",
+    "preserveWatchOutput": true,
+    "declaration": false,
+    "types": ["node", "jest", "@types/jest"],
+    "outDir": "dist",
+    "rootDir": "./src",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist", "**/tests/**"]
+}

@@ -1,25 +1,25 @@
-import { _checkAuth } from "@sanity/preview-kit";
 import { useEffect, useState } from "react";
-import { config } from "../../../lib/sanity/config";
 
-export const useDebounce = (value: any) => {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const timeOut = setTimeout(() => setDebouncedValue(value), 300);
-
-    return () => clearTimeout(timeOut);
-  }, [value]);
-
-  return debouncedValue;
-};
-
-export const useCheckAuth = () => {
-  const [user, setUser] = useState<boolean>(true);
+export const useMedia = (media: string): boolean => {
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    _checkAuth(config.projectId, null).then(setUser);
-  }, []);
+    if (typeof window !== "undefined") {
+      const mediaQueryList = window.matchMedia(media);
 
-  return user;
+      setIsActive(mediaQueryList.matches);
+
+      const listener = (evt: MediaQueryListEvent) => {
+        setIsActive(evt.matches);
+      };
+
+      mediaQueryList.addEventListener("change", listener);
+
+      return () => {
+        mediaQueryList.removeEventListener("change", listener);
+      };
+    }
+  }, [media]);
+
+  return isActive;
 };

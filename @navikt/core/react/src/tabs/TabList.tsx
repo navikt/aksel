@@ -1,4 +1,4 @@
-import { Back, Next } from "@navikt/ds-icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "clsx";
 import React, {
@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { mergeRefs, debounce } from "..";
+import { debounce, mergeRefs } from "..";
 import { TabsContext } from "./Tabs";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,10 +18,6 @@ export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
 }
-
-export type TabListType = React.ForwardRefExoticComponent<
-  TabListProps & React.RefAttributes<HTMLDivElement>
->;
 
 export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, ...rest }, ref) => {
@@ -38,13 +34,10 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
         debounce(() => {
           if (!listRef?.current) return;
           const { scrollWidth, clientWidth } = listRef.current;
-          let showStartScroll;
-          let showEndScroll;
-
-          const scrollLeft = listRef?.current?.scrollLeft;
+          const scrollLeft = listRef.current.scrollLeft;
           // use 1 for the potential rounding error with browser zooms.
-          showStartScroll = scrollLeft > 1;
-          showEndScroll = scrollLeft < scrollWidth - clientWidth - 1;
+          const showStartScroll = scrollLeft > 1;
+          const showEndScroll = scrollLeft < scrollWidth - clientWidth - 1;
 
           setDisplayScroll((displayScroll) =>
             showStartScroll === displayScroll.start &&
@@ -93,6 +86,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
       dir: 1 | -1;
       hidden: boolean;
     }) => (
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
       <div
         className={cl("navds-tabs__scroll-button", {
           "navds-tabs__scroll-button--hidden": hidden,
@@ -103,9 +97,9 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
         }}
       >
         {dir === -1 ? (
-          <Back title="scroll tilbake" />
+          <ChevronLeftIcon title="scroll tilbake" />
         ) : (
-          <Next title="scroll neste" />
+          <ChevronRightIcon title="scroll neste" />
         )}
       </div>
     );
@@ -127,6 +121,6 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
       </div>
     );
   }
-) as TabListType;
+);
 
 export default TabList;

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { ConfirmationPanel } from "../index";
 import { Meta } from "@storybook/react";
+import React, { useState } from "react";
 import { Link } from "../..";
+import { ConfirmationPanel } from "../index";
+
 export default {
   title: "ds-react/ConfirmationPanel",
   component: ConfirmationPanel,

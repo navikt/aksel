@@ -1,6 +1,7 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
-import { Back, Next } from "@navikt/ds-icons";
+import React, { forwardRef } from "react";
+
+import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyShort } from "..";
 import PaginationItem, {
   PaginationItemProps,
@@ -88,6 +89,23 @@ export const getSteps = ({
   ];
 };
 
+/**
+ * A component that displays pagination controls.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)
+ * @see 🏷️ {@link PaginationProps}
+ *
+ * @example
+ * ```jsx
+ * <Pagination
+ *   page={pageState}
+ *   onPageChange={(x) => setPageState(x)}
+ *   count={9}
+ *   boundaryCount={1}
+ *   siblingCount={1}
+ * />
+ * ```
+ */
 export const Pagination = forwardRef<HTMLElement, PaginationProps>(
   (
     {
@@ -145,7 +163,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               page={page - 1}
               size={size}
               icon={
-                <Back
+                <ChevronLeftIcon
                   className="navds-pagination__prev-next-icon"
                   {...(prevNextTexts
                     ? { "aria-hidden": true }
@@ -199,7 +217,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               page={page + 1}
               size={size}
               icon={
-                <Next
+                <ChevronRightIcon
                   className="navds-pagination__prev-next-icon"
                   {...(prevNextTexts
                     ? { "aria-hidden": true }

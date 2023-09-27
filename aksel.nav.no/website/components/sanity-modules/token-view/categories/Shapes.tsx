@@ -1,37 +1,34 @@
 import docs from "@navikt/ds-tokens/docs.json";
-import { Frame } from "../Frame";
+import { Copy } from "../Copy";
+import { Grid } from "../Grid";
+import { sanitizeName } from "../utilities";
 
 export const ShapesView = ({ cat }: { cat: string }) => {
   const shapes = docs[cat];
 
   return (
-    <Frame
-      tokens={shapes}
-      styles="borderRadius"
-      element={({ token }: { token: string; name?: string }) => {
+    <Grid>
+      {shapes.map((x) => {
         return (
-          <div
-            className="min-h-16 flex h-full w-full items-center justify-center gap-4 rounded-md px-4 text-5xl font-semibold"
-            aria-hidden
-            style={{
-              background: `var(--a-surface-default)`,
-            }}
-          >
+          <div key={x.name} id={x.name} className="flex w-fit items-center">
             <div
-              className="bg-surface-alt-3-strong h-8 w-8 rounded-md"
-              style={{
-                borderRadius: `${token}`,
-              }}
+              style={{ borderRadius: x.value }}
+              className="bg-surface-alt-3-strong mr-3 grid h-16 w-16 place-content-center rounded-lg text-4xl leading-none"
             />
-            <div
-              className="bg-surface-alt-3-strong h-8 w-20 rounded-md"
-              style={{
-                borderRadius: `${token}`,
-              }}
-            />
+            <dl className="grid h-full">
+              <dt className="inline-flex items-center gap-2">
+                <Copy
+                  text={sanitizeName(x.name.replace("border-radius-", ""))}
+                  copyText={x.name}
+                />
+              </dt>
+              <dd className="text-text-subtle text-medium mt-auto">
+                {x.value}
+              </dd>
+            </dl>
           </div>
         );
-      }}
-    />
+      })}
+    </Grid>
   );
 };

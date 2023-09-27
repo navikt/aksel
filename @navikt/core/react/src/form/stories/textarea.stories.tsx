@@ -120,3 +120,22 @@ export const MaxRows = () => {
 export const Resize = () => {
   return <Textarea resize label="Ipsum enim quis culpa" />;
 };
+
+export const Readonly = () => {
+  return (
+    <div className="colgap">
+      <Textarea
+        label="På hvilket grunnlag har du tatt denne vurderingen?"
+        description="Beskriv i korte punkter"
+        value="Denne vurderingen ble gjort på grunnlag av X og Y"
+        readOnly
+      />
+      <Textarea
+        label="På hvilket grunnlag har du tatt denne vurderingen?"
+        readOnly
+        value="Denne vurderingen ble gjort på grunnlag av X og Y"
+        error="feilmelding"
+      />
+    </div>
+  );
+};

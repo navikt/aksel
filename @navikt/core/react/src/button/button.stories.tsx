@@ -1,4 +1,4 @@
-import { Star } from "@navikt/ds-icons";
+import { StarIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { Button } from "./index";
 
@@ -45,7 +45,7 @@ export const Default = {
         variant={props.variant}
         size={props.size}
         loading={props.loading}
-        icon={props.icon ? <Star /> : undefined}
+        icon={props.icon ? <StarIcon /> : undefined}
         iconPosition={props.iconPosition}
       >
         {props.children}
@@ -123,7 +123,7 @@ export const Link = () => (
 
 export const Loading = {
   render: () => (
-    <div className="colgap">
+    <div className="colgap chromatic-ignore">
       <div className="rowgap">
         {variants.map((variant) => (
           <Button key={variant} variant={variant} loading>
@@ -148,18 +148,19 @@ export const Loading = {
     </div>
   ),
 
-  args: { chromatic: { disableSnapshot: true } },
-  chromatic: { disableSnapshot: true },
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };
 
 export const Icon = () => (
-  <div className="colgap">
+  <div className="colgap ">
     <div className="rowgap">
       {variants.map((variant) => (
         <Button
           key={variant}
           variant={variant}
-          icon={<Star title="Stjerne" />}
+          icon={<StarIcon title="Stjerne" />}
         />
       ))}
     </div>
@@ -169,7 +170,7 @@ export const Icon = () => (
           key={variant}
           variant={variant}
           size="small"
-          icon={<Star title="Stjerne" />}
+          icon={<StarIcon title="Stjerne" />}
         />
       ))}
     </div>
@@ -179,7 +180,7 @@ export const Icon = () => (
           key={variant}
           variant={variant}
           size="xsmall"
-          icon={<Star title="Stjerne" />}
+          icon={<StarIcon title="Stjerne" />}
         />
       ))}
     </div>
@@ -193,7 +194,7 @@ export const IconWText = () => (
         <Button
           key={variant}
           variant={variant}
-          icon={<Star title="Stjerne" />}
+          icon={<StarIcon title="Stjerne" />}
           iconPosition={i % 2 ? "left" : "right"}
         >
           {varSwitch[variant]}
@@ -206,7 +207,7 @@ export const IconWText = () => (
           key={variant}
           variant={variant}
           size="small"
-          icon={<Star title="Stjerne" />}
+          icon={<StarIcon title="Stjerne" />}
           iconPosition={i % 2 ? "left" : "right"}
         >
           {varSwitch[variant]}
@@ -219,7 +220,7 @@ export const IconWText = () => (
           key={variant}
           variant={variant}
           size="xsmall"
-          icon={<Star title="Stjerne" />}
+          icon={<StarIcon title="Stjerne" />}
           iconPosition={i % 2 ? "left" : "right"}
         >
           {varSwitch[variant]}
@@ -250,7 +251,7 @@ export const Disabled = () => (
 
 export const LoadingWithAs = {
   render: () => (
-    <div className="colgap">
+    <div className="colgap chromatic-ignore">
       <div className="rowgap">
         {variants.map((variant) => (
           <Button key={variant} variant={variant} loading size="small">
@@ -275,6 +276,7 @@ export const LoadingWithAs = {
     </div>
   ),
 
-  args: { chromatic: { disableSnapshot: true } },
-  chromatic: { disableSnapshot: true },
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };

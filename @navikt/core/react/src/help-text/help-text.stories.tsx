@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { HelpText } from "..";
+import { BodyLong, Heading, HelpText } from "..";
 
 export default {
   title: "ds-react/HelpText",
@@ -64,4 +64,37 @@ export const Open = () => {
       voluptate pariatur.
     </HelpText>
   );
+};
+
+export const WrapperClassName = {
+  render: () => {
+    return (
+      <div>
+        <BodyLong spacing>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
+          perspiciatis vero voluptatum, asperiores cumque, deserunt accusantium
+          ullam ipsa accusamus officia cupiditate quae unde esse culpa, ratione
+          ab quam ea quas?
+        </BodyLong>
+
+        <Heading level="2" size="medium">
+          67 år og 1 måneder øklasdjkl askdak døkasøk daøkdkølasøkld asølkdøka
+          <HelpText wrapperClassName="testClass">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
+            perspiciatis vero voluptatum, asperiores cumque, deserunt
+            accusantium ullam ipsa accusamus officia cupiditate quae unde esse
+            culpa, ratione ab quam ea quas?
+          </HelpText>
+          <style>{`.testClass {display: inline-block; margin-left: 0.5rem; vertical-align: middle;}`}</style>
+        </Heading>
+
+        <BodyLong spacing>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
+          perspiciatis vero voluptatum, asperiores cumque, deserunt accusantium
+          ullam ipsa accusamus officia cupiditate quae unde esse culpa, ratione
+          ab quam ea quas?
+        </BodyLong>
+      </div>
+    );
+  },
 };

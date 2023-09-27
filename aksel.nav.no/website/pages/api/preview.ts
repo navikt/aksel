@@ -1,6 +1,14 @@
-import { previewClient } from "@/sanity-client";
+import { createClient } from "next-sanity";
+import { clientConfig } from "../../sanity/config";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-function redirectToPreview(res, Location) {
+const previewClient = createClient({
+  ...clientConfig,
+  token: process.env.SANITY_PREVIEW_TOKEN,
+  ignoreBrowserTokenWarning: process.env.NODE_ENV === "test",
+});
+
+function redirectToPreview(res: NextApiResponse, Location: string) {
   // Enable preview mode by setting the cookies
   res.setPreviewData({});
 
@@ -17,10 +25,13 @@ const landingPages = [
   "prinsipper",
 ];
 
-export default async function preview(req, res) {
+export default async function preview(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { slug } = req.query;
 
-  if (!slug && slug !== ":slug*") {
+  if ((!slug && slug !== ":slug*") || slug instanceof Array) {
     return redirectToPreview(res, "/");
   }
 

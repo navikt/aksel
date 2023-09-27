@@ -1,4 +1,4 @@
-import { Print } from "@navikt/ds-icons";
+import { PrinterSmallIcon } from "@navikt/aksel-icons";
 import { BodyLong, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
@@ -8,7 +8,7 @@ const Example = () => {
       Officia incididunt{" "}
       <Link href="#">
         lenke til ny side
-        <Print title="Skriv ut dokument" />
+        <PrinterSmallIcon title="Skriv ut dokument" />
       </Link>{" "}
       occaecat commodo id ad aliquip.
     </BodyLong>

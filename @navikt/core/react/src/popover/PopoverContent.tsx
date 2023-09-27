@@ -3,9 +3,6 @@ import cl from "clsx";
 
 export interface PopoverContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Modal.Content content
-   */
   children: React.ReactNode;
 }
 

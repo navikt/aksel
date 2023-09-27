@@ -1,24 +1,26 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "navikt/aksel" }],
+  "changelog": [
+    "@svitejs/changesets-changelog-github-compact",
+    { "repo": "navikt/aksel" }
+  ],
   "commit": false,
   "fixed": [
     [
       "@navikt/ds-react",
       "@navikt/ds-css",
-      "@navikt/ds-icons",
       "@navikt/ds-tokens",
       "@navikt/ds-tailwind",
-      "@navikt/ds-css-internal",
-      "@navikt/ds-react-internal",
-      "@navikt/ds-codemod"
+      "@navikt/aksel-icons",
+      "@navikt/aksel",
+      "@navikt/aksel-stylelint"
     ]
   ],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["shadow-dom", "aksel.nav.no", "@navikt/ds-navno"],
+  "ignore": ["shadow-dom", "aksel.nav.no", "aksel-icons-figma-plugin"],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"

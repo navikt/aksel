@@ -57,7 +57,7 @@ const CubeSmall = () => (
 
 export const BloggAd = () => {
   return (
-    <div className="full-bleed my-20 flex h-72 items-center bg-[#FBCFE8] px-4 md:rounded-2xl md:px-6 lg:h-80 lg:pl-12">
+    <div className="relative left-1/2 right-1/2 -mx-[50vw] my-20 flex h-72 w-screen items-center bg-[#FBCFE8] px-4 md:left-auto md:right-auto md:mx-auto md:w-full md:max-w-[85%] md:rounded-2xl md:px-6 lg:h-80 lg:pl-12">
       <div className="z-10 max-w-sm text-[#831843]">
         <Heading level="2" size="xlarge" spacing>
           Skriv for bloggen

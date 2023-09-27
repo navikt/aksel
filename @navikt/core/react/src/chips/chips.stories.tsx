@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { Chips } from ".";
 
@@ -23,68 +22,119 @@ export default {
 
 const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
 
-export const Default = {
-  render: (props) => {
-    const [selected, setSelected] = useState(["Dansk", "Svensk"]);
-    const [filter, setFilter] = useState(options);
+export const Default = (props) => {
+  const [selected, setSelected] = useState(["Dansk", "Svensk"]);
+  const [filter, setFilter] = useState(options);
 
-    if (props.type === "toggle") {
-      return (
-        <Chips size={props.size ?? "medium"}>
-          {options.map((c) => (
-            <Chips.Toggle
-              selected={selected.includes(c)}
-              key={c}
-              onClick={() =>
-                setSelected(
-                  selected.includes(c)
-                    ? selected.filter((x) => x !== c)
-                    : [...selected, c]
-                )
-              }
-            >
-              {c}
-            </Chips.Toggle>
-          ))}
-        </Chips>
-      );
-    }
-
+  if (props.type === "toggle") {
     return (
       <Chips size={props.size ?? "medium"}>
-        {filter.map((c) => (
-          <Chips.Removable
+        {options.map((c) => (
+          <Chips.Toggle
+            selected={selected.includes(c)}
             key={c}
-            onClick={() => setFilter((x) => x.filter((y) => y !== c))}
+            onClick={() =>
+              setSelected(
+                selected.includes(c)
+                  ? selected.filter((x) => x !== c)
+                  : [...selected, c]
+              )
+            }
           >
             {c}
-          </Chips.Removable>
+          </Chips.Toggle>
         ))}
       </Chips>
     );
-  },
+  }
+
+  return (
+    <Chips size={props.size ?? "medium"}>
+      {filter.map((c) => (
+        <Chips.Removable
+          key={c}
+          onClick={() => setFilter((x) => x.filter((y) => y !== c))}
+        >
+          {c}
+        </Chips.Removable>
+      ))}
+    </Chips>
+  );
 };
 
 export const Toggle = () => {
-  const [selected, setSelected] = useState<number[]>([]);
+  const [selected, setSelected] = useState<number[]>([2, 4]);
   return (
-    <Chips>
-      {options.map((c, y) => (
-        <Chips.Toggle
-          selected={selected.includes(y)}
-          onClick={() =>
-            setSelected(
-              selected.includes(y)
-                ? selected.filter((x) => x !== y)
-                : [...selected, y]
-            )
-          }
-          key={y}
-        >
-          {c}
-        </Chips.Toggle>
-      ))}
-    </Chips>
+    <div className="colgap">
+      <Chips>
+        {options.map((c, y) => (
+          <Chips.Toggle
+            selected={selected.includes(y)}
+            onClick={() =>
+              setSelected(
+                selected.includes(y)
+                  ? selected.filter((x) => x !== y)
+                  : [...selected, y]
+              )
+            }
+            key={y}
+          >
+            {c}
+          </Chips.Toggle>
+        ))}
+      </Chips>
+      <Chips>
+        {options.map((c, y) => (
+          <Chips.Toggle
+            variant="neutral"
+            selected={selected.includes(y)}
+            onClick={() =>
+              setSelected(
+                selected.includes(y)
+                  ? selected.filter((x) => x !== y)
+                  : [...selected, y]
+              )
+            }
+            key={y}
+          >
+            {c}
+          </Chips.Toggle>
+        ))}
+      </Chips>
+    </div>
+  );
+};
+
+export const ToggleNoCheckmark = () => {
+  const [selected, setSelected] = useState<number>(2);
+  return (
+    <div className="colgap">
+      <Chips>
+        {options.map((c, y) => (
+          <Chips.Toggle
+            selected={selected === y}
+            checkmark={false}
+            onClick={() => setSelected(y)}
+            key={y}
+          >
+            {c}
+          </Chips.Toggle>
+        ))}
+      </Chips>
+      <Chips>
+        {options.map((c, y) => (
+          <Chips.Toggle
+            variant="neutral"
+            selected={selected === y}
+            checkmark={false}
+            onClick={() => setSelected(y)}
+            key={y}
+          >
+            {c}
+          </Chips.Toggle>
+        ))}
+      </Chips>
+    </div>
   );
 };
 
@@ -108,7 +158,7 @@ export const Removable = () => {
 };
 
 export const Regular = () => {
-  const [selected, setSelected] = useState<number[]>([]);
+  const [selected, setSelected] = useState<number[]>([2]);
   return (
     <div className="colgap">
       <Chips>
@@ -138,7 +188,7 @@ export const Regular = () => {
 };
 
 export const Small = () => {
-  const [selected, setSelected] = useState<number[]>([]);
+  const [selected, setSelected] = useState<number[]>([2, 4]);
   return (
     <div className="colgap">
       <Chips size="small">

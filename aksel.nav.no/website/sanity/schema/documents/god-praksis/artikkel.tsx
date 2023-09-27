@@ -14,7 +14,7 @@ import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 const prefix = "god-praksis/artikler/";
 
 export const GodPraksisArtikkel = defineType({
-  title: "Aksel Artikkel",
+  title: "God praksis artikkel",
   name: "aksel_artikkel",
   type: "document",
   groups,
@@ -28,7 +28,7 @@ export const GodPraksisArtikkel = defineType({
     defineField({
       title: "Kobling til tema",
       description:
-        "Gjør det mulig for temaredaktør å vise artikkelen på en temaside",
+        "Lenker artikkel til Tema og tilgjengeliggjør den for tema-redaktører.",
       name: "tema",
       type: "array",
       of: [{ type: "reference", to: [{ type: "aksel_tema" }] }],

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "target": "es2015",
+    "preserveWatchOutput": true,
+    "declaration": false,
+    "types": ["node", "jest"],
+    "outDir": "dist",
+    "rootDir": "./src",
+    "resolveJsonModule": true,
+    "allowJs": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "jest.config.js", "**/tests/**"]
+}

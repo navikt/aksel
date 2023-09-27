@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // jest.setup.js
 import { setConfig } from "next/config";
 import config from "./next.config";

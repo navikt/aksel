@@ -1,4 +1,4 @@
-import { Picture } from "@navikt/ds-icons";
+import { ImageIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -6,7 +6,7 @@ export const HeroBilde = defineType({
   title: "Hero bilde",
   name: "herobilde",
   type: "image",
-  icon: Picture,
+  icon: ImageIcon,
   options: {
     hotspot: true,
   },
@@ -27,7 +27,7 @@ export const HeroBilde = defineType({
       return {
         title: selection?.alt,
         subtitle: `Bilde`,
-        media: () => <Picture />,
+        media: () => <ImageIcon />,
       };
     },
   },

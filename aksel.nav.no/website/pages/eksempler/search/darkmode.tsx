@@ -9,8 +9,8 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, "inverted");
+export default withDsExample(Example, { variant: "full" });
 
 export const args = {
-  index: 6,
+  index: 7,
 };

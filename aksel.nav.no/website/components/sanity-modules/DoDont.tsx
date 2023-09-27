@@ -1,93 +1,65 @@
 /* eslint-disable @next/next/no-img-element */
 import { withErrorBoundary } from "@/error-boundary";
-import { SanityT, urlFor } from "@/lib";
-import { ErrorFilled, SuccessFilled, WarningFilled } from "@navikt/ds-icons";
+import { urlFor } from "@/sanity/interface";
+import { DoDontT } from "@/types";
+import {
+  CheckmarkIcon,
+  ExclamationmarkIcon,
+  XMarkIcon,
+} from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
-import React from "react";
 
-const GetIcon = (s: string) => {
-  switch (s) {
-    case "do":
-      return (
-        <SuccessFilled
-          aria-hidden
-          className="text-large mt-[1px] flex-shrink-0 text-green-500"
-        />
-      );
-    case "dont":
-      return (
-        <ErrorFilled
-          aria-hidden
-          className="text-large mt-[1px] flex-shrink-0 text-red-500"
-        />
-      );
-    case "warning":
-      return (
-        <WarningFilled
-          aria-hidden
-          className="text-large mt-[1px] flex-shrink-0 text-orange-500"
-        />
-      );
-    default:
-      return null;
+const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
+  if (!block.picture) {
+    return null;
   }
-};
 
-const Element = ({
-  block,
-}: {
-  block: Sanity.Keyed<SanityT.Schema.do_dont_block>;
-}): JSX.Element => {
-  if (!block.picture) return null;
   return (
-    <figure
-      className={cl(
-        "flex min-w-full flex-1 flex-col rounded-t sm:min-w-[320px]",
-        {
-          "basis-full": block?.fullwidth,
-          "max-w-sm": !block?.fullwidth,
-        }
-      )}
+    <BodyShort
+      as="figure"
+      className={cl("sm:min-w-80 z-10 flex min-w-full flex-1 flex-col", {
+        "basis-full": block?.fullwidth,
+        "max-w-sm": !block?.fullwidth,
+      })}
     >
-      <img
-        className="rounded-t bg-gray-50 shadow-[0_0_0_1px_var(--a-border-divider)]"
-        alt={block.alt}
-        loading="lazy"
-        decoding="async"
-        src={urlFor(block.picture).auto("format").url()}
-      />
-      <div
-        className={cl(
-          "z-10 -ml-[1px] w-[calc(100%_+_2px)] rounded-b border-t-8",
-          {
-            "border-t-green-400": block.variant === "do",
-            "border-t-red-400": block.variant === "dont",
-            "border-t-orange-500": block.variant === "warning",
-          }
-        )}
-      />
-      <figcaption data-variant={block.variant}>
-        <div className="mt-3">
-          {block.description && (
-            <BodyShort size="small" as="span" className="inline-flex gap-2">
-              {GetIcon(block.variant)}
-              {block.description}
-            </BodyShort>
+      <div className="shadow-xsmall ring-border-subtle relative rounded-lg ring-1 ring-inset ">
+        <BodyShort
+          as="span"
+          className={cl(
+            "relative z-[-1] flex items-center gap-1 rounded-t-lg px-4 py-2",
+            {
+              "bg-surface-success-moderate": block.variant === "do",
+              "bg-surface-danger-moderate": block.variant === "dont",
+              "bg-surface-warning-moderate": block.variant === "warning",
+            }
           )}
-        </div>
-      </figcaption>
-    </figure>
+        >
+          <span>{getIcon(block.variant)}</span>
+          <span>{getText(block.variant)}</span>
+        </BodyShort>
+        <img
+          className="relative z-[-1] w-full rounded-b-lg bg-gray-50"
+          alt={block.alt}
+          loading="lazy"
+          decoding="async"
+          src={urlFor(block.picture).auto("format").url()}
+        />
+      </div>
+      {block.description && (
+        <figcaption className="mt-2 px-4">{block.description}</figcaption>
+      )}
+    </BodyShort>
   );
 };
 
-const DoDont = ({ node }: { node: SanityT.Schema.do_dont }) => {
+const DoDont = ({ node }: { node: DoDontT }) => {
   if (!node) return null;
 
   return (
     <div className="mb-8 last:mb-0">
       {node?.blokker?.length > 0 && (
-        <div className="last flex flex-wrap justify-start gap-8">
+        <div className="last flex flex-wrap justify-start gap-6">
           {node.blokker.map((x) => (
             <Element key={x._key} block={x} />
           ))}
@@ -96,5 +68,37 @@ const DoDont = ({ node }: { node: SanityT.Schema.do_dont }) => {
     </div>
   );
 };
+
+function getIcon(s: string) {
+  const iconProps = {
+    "aria-hidden": true,
+    fontSize: "1.25rem",
+    className: "flex-shrink-0",
+  };
+
+  switch (s) {
+    case "do":
+      return <CheckmarkIcon {...iconProps} />;
+    case "dont":
+      return <XMarkIcon {...iconProps} />;
+    case "warning":
+      return <ExclamationmarkIcon {...iconProps} />;
+    default:
+      return null;
+  }
+}
+
+function getText(s: string) {
+  switch (s) {
+    case "do":
+      return "Gjør";
+    case "dont":
+      return "Unngå";
+    case "warning":
+      return "Pass på";
+    default:
+      return "";
+  }
+}
 
 export default withErrorBoundary(DoDont, "DoDont");
