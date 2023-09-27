@@ -53,7 +53,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * @example
  * <Box padding="4">
- *   <Bleed margin="4">
+ *   <Bleed marginInline="4" marginBlock="4">
  *     <BodyLong>Some content</BodyLong>
  *   </Bleed>
  * </Box>
