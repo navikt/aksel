@@ -131,10 +131,6 @@ const generateName = async (
   return res;
 };
 
-const generateInitialName = async (ctx: InitialValueResolverContext) => ({
-  current: await generateName(ctx),
-});
-
 export const Editors = defineType({
   title: "Forfattere",
   name: "editor",
@@ -157,16 +153,18 @@ export const Editors = defineType({
         "På artikler bytter vi ut navnet ditt med et tullenavn. Eks. Sprudlende Tiger hvis valgt",
       name: "anonym",
       type: "boolean",
-      initialValue: true,
+      initialValue: false,
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       title: "Anonymt navn",
       name: "anon_navn",
       type: "slug",
-      initialValue: (_, ctx) => generateInitialName(ctx),
       validation: (Rule) =>
-        Rule.required().error("Må generere et anynymt navn"),
+        Rule.custom((v, ctx) => {
+          return !ctx.document?.anonym ? true : "Må generere et anonymt navn";
+        }).error(),
+
       hidden: ({ parent }) => !parent?.anonym,
       options: {
         source: "anonym",
@@ -174,10 +172,13 @@ export const Editors = defineType({
       },
     }),
     defineField({
-      title: "Sanity bruker-id (dev only)",
+      title: "Sanity user-id",
       name: "user_id",
       type: "slug",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().error(
+          "Fant allerede en bruker med denne ID-en. Slett dokumentet/brukeren nede i høyre, og last siden på nytt."
+        ),
       options: {
         source: (_, { currentUser }) => {
           return currentUser.id;
