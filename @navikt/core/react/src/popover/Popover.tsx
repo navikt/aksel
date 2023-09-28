@@ -141,7 +141,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     } = useFloating({
       strategy: chosenStrategy,
       placement,
-      open: open,
+      open,
       onOpenChange: () => onClose(),
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),

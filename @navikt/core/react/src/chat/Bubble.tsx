@@ -43,7 +43,7 @@ const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
       <div
         ref={ref}
         className={cl("navds-chat__bubble", className)}
-        style={{ backgroundColor: backgroundColor }}
+        style={{ backgroundColor }}
         {...rest}
       >
         {(timestamp || name) && (
