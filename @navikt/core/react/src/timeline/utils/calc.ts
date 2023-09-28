@@ -20,7 +20,7 @@ export const horizontalPositionAndWidth = (
     position(endInclusive, timelineStart, timelineEndInclusive) -
     horizontalPosition;
   return {
-    horizontalPosition: horizontalPosition,
-    width: width,
+    horizontalPosition,
+    width,
   };
 };

@@ -49,7 +49,7 @@ export const KodeEksempelDoc = defineType({
     prepare(selection) {
       const { title, dir } = selection;
       return {
-        title: title,
+        title,
         subtitle: dir ? "Alle kode-eksempler" : "Spesifikt kode-eksempel",
       };
     },
