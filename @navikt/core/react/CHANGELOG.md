@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.6.1
+
+### Patch Changes
+
+- Added aria-hidden to AccordionContent when closed, to fix issue where Radio labels were omitted when opening/closing AccordionItems ([#2338](https://github.com/navikt/aksel/pull/2338))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.6.1
+  - @navikt/aksel-icons@5.6.1
+
 ## 5.6.0
 
 ### Minor Changes
