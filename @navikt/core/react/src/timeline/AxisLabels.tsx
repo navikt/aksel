@@ -42,11 +42,11 @@ export const dayLabels = (
         end
       );
       return {
-        direction: direction,
-        horizontalPosition: horizontalPosition,
+        direction,
+        horizontalPosition,
         label: format(day, template, { locale: nbLocale }),
         date: day,
-        width: width,
+        width,
       };
     })
     .filter((label) => label !== null) as AxisLabel[];
@@ -70,11 +70,11 @@ export const monthLabels = (
       end
     );
     return {
-      direction: direction,
-      horizontalPosition: horizontalPosition,
+      direction,
+      horizontalPosition,
       label: format(month, template, { locale: nbLocale }),
       date: month,
-      width: width,
+      width,
     };
   });
 };
@@ -97,11 +97,11 @@ export const yearLabels = (
       end
     );
     return {
-      direction: direction,
-      horizontalPosition: horizontalPosition,
+      direction,
+      horizontalPosition,
       label: format(year, template, { locale: nbLocale }),
       date: year,
-      width: width,
+      width,
     };
   });
 };

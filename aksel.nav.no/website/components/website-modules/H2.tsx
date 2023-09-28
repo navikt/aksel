@@ -22,7 +22,7 @@ export const LevelTwoHeading = ({
         className={cl(
           "max-w-text text-deepblue-800 group mb-4 mt-12 scroll-mt-20 first-of-type:mt-0 focus:outline-none",
           {
-            hidden: hidden,
+            hidden,
             block: !hidden,
           }
         )}

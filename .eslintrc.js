@@ -25,7 +25,7 @@ module.exports = {
       { propElementValues: "always" },
     ],
     "array-callback-return": "error",
-    // TODO add: "object-shorthand": "error",
+    "object-shorthand": "error",
     // TODO: Consider adding the rule "id-length"
     // Temporary:
     "react/prop-types": "off",
