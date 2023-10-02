@@ -39,7 +39,7 @@
   height: 1rem;
 }
 
-.navds-popover[data-placement^="top"] > .navds-popover__arrow {
+.navds-popover[data-placement^='top'] > .navds-popover__arrow {
   border-left-color: transparent;
   border-top-color: transparent;
 }
@@ -50,12 +50,12 @@
   border-right-color: transparent;
 }
 
-.navds-popover[data-placement^="left"] > .navds-popover__arrow {
+.navds-popover[data-placement^='left'] > .navds-popover__arrow {
   border-left-color: transparent;
   border-bottom-color: transparent;
 }
 
-.navds-popover[data-placement^="right"] > .navds-popover__arrow {
+.navds-popover[data-placement^='right'] > .navds-popover__arrow {
   border-right-color: transparent;
   border-top-color: transparent;
 }

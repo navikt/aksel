@@ -347,7 +347,7 @@ button.navdsi-header__title:active,
 }
 
 .navdsi-timeline__pin-button::before {
-  content: "";
+  content: '';
   inset: 0;
   position: absolute;
   width: 25px;
@@ -391,7 +391,7 @@ button.navdsi-header__title:active,
 }
 
 .navdsi-timeline__pin-wrapper::before {
-  content: "";
+  content: '';
   top: var(--navdsc-timeline-pin-size);
   height: calc(94% - var(--navdsc-timeline-pin-size));
   width: 1px;
@@ -428,11 +428,11 @@ button.navdsi-header__title:active,
   border-radius: var(--a-border-radius-medium);
 }
 
-.navdsi-timeline__zoom-button:not([aria-pressed="true"]):hover {
+.navdsi-timeline__zoom-button:not([aria-pressed='true']):hover {
   background: var(--ac-timeline-zoom-bg-hover, var(--a-surface-action-subtle-hover));
 }
 
-.navdsi-timeline__zoom-button[aria-pressed="true"] {
+.navdsi-timeline__zoom-button[aria-pressed='true'] {
   background: var(--ac-timeline-zoom-selected-bg, var(--a-surface-inverted));
   color: var(--ac-timeline-zoom-selected-text, var(--a-text-on-inverted));
 }
@@ -519,22 +519,22 @@ button.navdsi-header__title:active,
   height: 1rem;
 }
 
-.navds-timeline__popover[data-placement^="top"] > .navds-timeline__popover-arrow {
+.navds-timeline__popover[data-placement^='top'] > .navds-timeline__popover-arrow {
   border-left-color: transparent;
   border-top-color: transparent;
 }
 
-.navds-timeline__popover[data-placement^="bottom"] > .navds-timeline__popover-arrow {
+.navds-timeline__popover[data-placement^='bottom'] > .navds-timeline__popover-arrow {
   border-bottom-color: transparent;
   border-right-color: transparent;
 }
 
-.navds-timeline__popover[data-placement^="left"] > .navds-timeline__popover-arrow {
+.navds-timeline__popover[data-placement^='left'] > .navds-timeline__popover-arrow {
   border-left-color: transparent;
   border-bottom-color: transparent;
 }
 
-.navds-timeline__popover[data-placement^="right"] > .navds-timeline__popover-arrow {
+.navds-timeline__popover[data-placement^='right'] > .navds-timeline__popover-arrow {
   border-right-color: transparent;
   border-top-color: transparent;
 }

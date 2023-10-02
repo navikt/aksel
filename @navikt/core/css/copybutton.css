@@ -1,4 +1,4 @@
-[data-theme="dark"] {
+[data-theme='dark'] {
   --__ac-copybutton-action-text: var(--a-blue-300);
   --__ac-copybutton-bg-hover: rgb(214 231 255 /0.13);
   --__ac-copybutton-icon-success: rgb(51 170 95 /1);
@@ -6,7 +6,7 @@
   --__ac-copybutton-text: rgb(251 252 254 /0.96);
 }
 
-[data-theme="light"] {
+[data-theme='light'] {
   --__ac-copybutton-action-text: initial;
   --__ac-copybutton-bg-hover: initial;
   --__ac-copybutton-icon-success: initial;

@@ -36,6 +36,9 @@ module.exports = {
       ],
     },
     ts: {
+      options: {
+        outputStringLiterals: true,
+      },
       transformGroup: "js",
       buildPath: "dist/",
       files: [
