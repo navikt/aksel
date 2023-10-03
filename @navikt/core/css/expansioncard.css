@@ -146,7 +146,7 @@
   inset: 0;
   z-index: 1;
   position: absolute;
-  content: '';
+  content: "";
   height: 100%;
   width: 100%;
   cursor: pointer;

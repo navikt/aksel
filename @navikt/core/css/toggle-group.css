@@ -76,23 +76,23 @@
   }
 }
 
-.navds-toggle-group__button:focus-visible:hover[aria-pressed='false'] {
+.navds-toggle-group__button:focus-visible:hover[aria-pressed="false"] {
   box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)), 0 0 0 4px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
-  .navds-toggle-group__button:focus:hover[aria-pressed='false'] {
+  .navds-toggle-group__button:focus:hover[aria-pressed="false"] {
     box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)), 0 0 0 4px var(--a-border-focus);
   }
 }
 
-.navds-toggle-group--neutral > .navds-toggle-group__button:focus:hover[aria-pressed='false'] {
+.navds-toggle-group--neutral > .navds-toggle-group__button:focus:hover[aria-pressed="false"] {
   box-shadow: 0 0 0 1px var(--ac-toggle-group-button-neutral-hover-bg, var(--a-surface-neutral-subtle-hover)),
     0 0 0 4px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
-  .navds-toggle-group--neutral > .navds-toggle-group__button:focus-visible:hover[aria-pressed='false'] {
+  .navds-toggle-group--neutral > .navds-toggle-group__button:focus-visible:hover[aria-pressed="false"] {
     box-shadow: 0 0 0 1px var(--ac-toggle-group-button-neutral-hover-bg, var(--a-surface-neutral-subtle-hover)),
       0 0 0 4px var(--a-border-focus);
   }
@@ -109,14 +109,14 @@
   flex-shrink: 0;
 }
 
-.navds-toggle-group__button[aria-pressed='true'],
-.navds-toggle-group__button[aria-checked='true'] {
+.navds-toggle-group__button[aria-pressed="true"],
+.navds-toggle-group__button[aria-checked="true"] {
   background-color: var(--ac-toggle-group-selected-bg, var(--a-surface-action-selected));
   color: var(--ac-toggle-group-selected-text, var(--a-text-on-action));
 }
 
-.navds-toggle-group--neutral > .navds-toggle-group__button[aria-pressed='true'],
-.navds-toggle-group--neutral > .navds-toggle-group__button[aria-checked='true'] {
+.navds-toggle-group--neutral > .navds-toggle-group__button[aria-pressed="true"],
+.navds-toggle-group--neutral > .navds-toggle-group__button[aria-checked="true"] {
   background-color: var(--ac-toggle-group-neutral-selected-bg, var(--a-surface-neutral-selected));
   color: var(--ac-toggle-group-neutral-selected-text, var(--a-text-on-neutral));
 }

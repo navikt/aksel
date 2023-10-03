@@ -33,7 +33,7 @@
 }
 
 .navds-skeleton--text:empty::before {
-  content: '\00a0';
+  content: "\00a0";
 }
 
 .navds-skeleton--circle {

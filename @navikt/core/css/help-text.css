@@ -42,11 +42,11 @@
   display: none;
 }
 
-.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded='true']) > .navds-help-text__icon {
+.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon {
   display: none;
 }
 
-.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded='true']) > .navds-help-text__icon--filled {
+.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon--filled {
   display: inherit;
 }
 

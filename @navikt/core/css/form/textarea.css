@@ -1,4 +1,4 @@
-[data-theme='dark'] {
+[data-theme="dark"] {
   --__ac-textarea-text: var(--a-text-on-inverted);
   --__ac-textarea-bg: var(--a-transparent);
   --__ac-textarea-border: var(--a-border-on-inverted);
@@ -9,7 +9,7 @@
   --__ac-textarea-counter-error-text: var(--a-red-300);
 }
 
-[data-theme='light'] {
+[data-theme="light"] {
   --__ac-textarea-text: initial;
   --__ac-textarea-bg: initial;
   --__ac-textarea-border: initial;

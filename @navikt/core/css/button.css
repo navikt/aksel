@@ -1,4 +1,4 @@
-[data-theme='dark'] {
+[data-theme="dark"] {
   --__ac-button-primary-text: var(--a-gray-900);
   --__ac-button-primary-bg: var(--a-blue-200);
   --__ac-button-primary-focus-border: var(--a-gray-900);
@@ -15,7 +15,7 @@
   --__ac-button-secondary-active-bg: var(--a-gray-700);
 }
 
-[data-theme='light'] {
+[data-theme="light"] {
   --__ac-button-primary-text: initial;
   --__ac-button-primary-bg: initial;
   --__ac-button-primary-focus-border: initial;

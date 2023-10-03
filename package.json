@@ -19,7 +19,8 @@
     "lint:css": "yarn stylelint @navikt/**/*.css",
     "changeset": "changeset",
     "version": "changeset version && yarn changelog",
-    "release": "yarn boot && yarn docgen && changeset publish"
+    "release": "yarn boot && yarn docgen && changeset publish",
+    "prettier": "prettier --write"
   },
   "workspaces": [
     "@navikt/core/*",
@@ -35,8 +36,7 @@
       {
         "files": "**/*.css",
         "options": {
-          "printWidth": 130,
-          "singleQuote": true
+          "printWidth": 130
         }
       }
     ]

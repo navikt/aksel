@@ -1,9 +1,9 @@
-[data-theme='dark'] {
+[data-theme="dark"] {
   --__ac-typo-error-text: var(--a-red-300);
   --__ac-typo-text-subtle: var(--a-gray-300);
 }
 
-[data-theme='light'] {
+[data-theme="light"] {
   --__ac-typo-error-text: initial;
   --__ac-typo-text-subtle: initial;
 }
