@@ -36,15 +36,15 @@ module.exports = {
       ],
     },
     ts: {
-      options: {
-        outputStringLiterals: true,
-      },
       transformGroup: "js",
       buildPath: "dist/",
       files: [
         {
           destination: "tokens.d.ts",
           format: "typescript/es6-declarations",
+          options: {
+            outputStringLiterals: true,
+          },
         },
       ],
     },
