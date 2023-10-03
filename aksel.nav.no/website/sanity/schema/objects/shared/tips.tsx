@@ -1,12 +1,12 @@
-import { BulbOutlineIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
-import { toPlainText } from "../../../util";
+import { toPlainText } from "@portabletext/react";
+import { LightBulbIcon } from "@navikt/aksel-icons";
 
 export const Tips = defineType({
   name: "tips",
   title: "Tips",
   type: "object",
-  icon: BulbOutlineIcon,
+  icon: LightBulbIcon,
   fields: [
     defineField({
       title: "Innhold",
@@ -15,23 +15,16 @@ export const Tips = defineType({
       validation: (Rule) =>
         Rule.required().error("Tips-modul må ha noe innhold"),
     }),
-    defineField({
-      title: "Hjelp ønskes",
-      name: "eksperiment",
-      type: "boolean",
-      initialValue: false,
-    }),
   ],
   preview: {
     select: {
       body: "body",
-      eksperiment: "eksperiment",
     },
     prepare(selection) {
       return {
         title: toPlainText(selection?.body ?? []) ?? "",
         subtitle: "Tips",
-        media: BulbOutlineIcon,
+        media: LightBulbIcon,
       };
     },
   },

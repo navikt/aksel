@@ -1,8 +1,8 @@
 import { CheckmarkCircleFillIcon } from "@navikt/aksel-icons";
-import { useState } from "@storybook/addons";
 import { Meta } from "@storybook/react";
 import * as React from "react";
 import Timeline from "./Timeline";
+import { useState } from "react";
 
 export default {
   title: "ds-react/Timeline",
@@ -110,7 +110,7 @@ export const Default = () => {
           label="Row 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any, i) => {
+          {row1.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -126,7 +126,7 @@ export const Default = () => {
           label="Row 2"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row2.map((p: any, i) => {
+          {row2.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -154,7 +154,7 @@ export const WithPins = () => {
           label="Row 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any, i) => {
+          {row1.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -170,7 +170,7 @@ export const WithPins = () => {
           label="Row 2"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row2.map((p: any, i) => {
+          {row2.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -195,7 +195,7 @@ export const WithZoom = () => {
           label="Row 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any, i) => {
+          {row1.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -211,7 +211,7 @@ export const WithZoom = () => {
           label="Row 2"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row2.map((p: any, i) => {
+          {row2.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -246,7 +246,7 @@ export const ActivePeriod = () => {
           label="Rad 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any, i) => {
+          {row1.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -268,7 +268,7 @@ export const ActivePeriod = () => {
           })}
         </Timeline.Row>
         <Timeline.Row label="Rad 2">
-          {row2.map((p: any, i) => {
+          {row2.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -368,13 +368,14 @@ export const ContentDemo = () => {
         <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
         <Timeline.Pin date={new Date("Jun 12 2022")}>
           Pin 2 <button>test</button>
+          <a href="/123">test123123</a>
         </Timeline.Pin>
         <Timeline.Pin date={new Date("Jul 28 2022")}>Pin 3</Timeline.Pin>
         <Timeline.Row
           label="Rad 1"
           icon={<CheckmarkCircleFillIcon aria-hidden />}
         >
-          {row1.map((p: any, i) => {
+          {row1.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}
@@ -400,7 +401,7 @@ export const ContentDemo = () => {
           })}
         </Timeline.Row>
         <Timeline.Row label="Rad 2">
-          {row2.map((p: any, i) => {
+          {row2.map((p: any) => {
             return (
               <Timeline.Period
                 key={p.id}

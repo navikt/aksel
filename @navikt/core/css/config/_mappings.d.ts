@@ -3,6 +3,7 @@ export declare const globalDir = "dist/global";
 export declare const componentDir = "dist/component";
 export declare const typoCss = "typography.css";
 export declare const formCss = "form.css";
+export declare const primitivesCss = "primitives.css";
 export declare const componentsCss = "components.css";
 export declare const StyleMappings: {
   baseline: {

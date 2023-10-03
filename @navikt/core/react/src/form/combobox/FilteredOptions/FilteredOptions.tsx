@@ -19,7 +19,10 @@ const FilteredOptions = () => {
     filteredOptions,
     filteredOptionsIndex,
     filteredOptionsRef,
+    isMouseLastUsedInputDevice,
+    setIsMouseLastUsedInputDevice,
     isValueNew,
+    setFilteredOptionsIndex,
     toggleIsListOpen,
   } = useFilteredOptionsContext();
   const { isMultiSelect, selectedOptions, toggleOption } =
@@ -30,6 +33,7 @@ const FilteredOptions = () => {
       ref={filteredOptionsRef}
       className={cl("navds-combobox__list", {
         "navds-combobox__list--closed": !isListOpen,
+        "navds-combobox__list--with-hover": isMouseLastUsedInputDevice,
       })}
       id={`${id}-filtered-options`}
       role="listbox"
@@ -48,6 +52,12 @@ const FilteredOptions = () => {
       {isValueNew && allowNewValues && (
         <li
           tabIndex={-1}
+          onMouseMove={() => {
+            if (filteredOptionsIndex !== -1) {
+              setFilteredOptionsIndex(-1);
+              setIsMouseLastUsedInputDevice(true);
+            }
+          }}
           onPointerUp={(event) => {
             toggleOption(value, event);
             if (!isMultiSelect && !selectedOptions.includes(value))
@@ -90,6 +100,12 @@ const FilteredOptions = () => {
           id={`${id}-option-${option.replace(" ", "-")}`}
           key={option}
           tabIndex={-1}
+          onMouseMove={() => {
+            if (filteredOptionsIndex !== index) {
+              setFilteredOptionsIndex(index);
+              setIsMouseLastUsedInputDevice(true);
+            }
+          }}
           onPointerUp={(event) => {
             toggleOption(option, event);
             if (!isMultiSelect && !selectedOptions.includes(option))

@@ -22,18 +22,19 @@ const propList = (
         type?: any;
       };
     };
-  }[],
-  name: string
+  }[]
 ) =>
   src.map((prop) => {
+    const parseName = (name) => {
+      return `${name.toLowerCase().replaceAll(".", "-")}_${name}_ds_props`;
+    };
+
     let dupe = false;
-    if (ids.includes(`${prop?.displayName?.toLowerCase()}_${name}_ds_props`)) {
-      console.error(
-        `Found duplicate id: ${`${prop.displayName.toLowerCase()}_${name}_ds_props`}`
-      );
+    if (ids.includes(parseName(prop.displayName))) {
+      console.error(`Found duplicate id: ${parseName(prop.displayName)}`);
       dupe = true;
     }
-    const id = `${prop.displayName.toLowerCase()}_${name}_ds_props`;
+    const id = parseName(prop.displayName);
     ids.push(id);
 
     return {
@@ -63,7 +64,7 @@ const updateProps = async () => {
   // this is our transactional client, it won't push anything until we say .commit() later
   const transactionClient = noCdnClient(token).transaction();
 
-  const props = propList(CoreDocs as any, "core");
+  const props = propList(CoreDocs as any);
 
   // Preserve existing props that are not in the new list to allow documenting deprecated props
   /* const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);

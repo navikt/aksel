@@ -1,5 +1,41 @@
 # @navikt/ds-tokens
 
+## 5.6.1
+
+## 5.6.0
+
+## 5.5.0
+
+### Minor Changes
+
+- Box: Ny primitive, erstatter dagens `Panel` ([#2195](https://github.com/navikt/aksel/pull/2195))
+
+## 5.4.1
+
+## 5.4.0
+
+### Patch Changes
+
+- Tokens: `data-theme="light"` vil nå tilbakestille theming ([#2238](https://github.com/navikt/aksel/pull/2238))
+
+## 5.3.5
+
+## 5.3.4
+
+## 5.3.3
+
+## 5.3.2
+
+## 5.3.1
+
+## 5.3.0
+
+## 5.2.1
+
+## 5.2.0
+
+## 5.1.0
+
 ## 5.0.3
 
 ### Patch Changes

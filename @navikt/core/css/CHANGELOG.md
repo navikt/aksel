@@ -1,5 +1,107 @@
 # @navikt/ds-css
 
+## 5.6.1
+
+## 5.6.0
+
+### Minor Changes
+
+- Primitives: ny komponent Bleed ([#2278](https://github.com/navikt/aksel/pull/2278))
+
+### Patch Changes
+
+- :recycle: Box: Forenkling av CSS-variabler ([#2279](https://github.com/navikt/aksel/pull/2279))
+
+- Accordion: Har nå 0.25rem padding-top mellom innhold og heading. ([#2310](https://github.com/navikt/aksel/pull/2310))
+
+- Added cursor:pointer to Select component ([#2293](https://github.com/navikt/aksel/pull/2293))
+
+- :bug: Box: sett border-radius riktig ([#2329](https://github.com/navikt/aksel/pull/2329))
+
+- Stack: Kan nå endre direction, justify og align ved brekkpunkt. `Stack` er også nå en egen komponent sammen med `HStack` og `VStack`. ([#2286](https://github.com/navikt/aksel/pull/2286))
+
+- Datepicker: Tilpasset padding og sizing på mobil. ([#2311](https://github.com/navikt/aksel/pull/2311))
+
+- MonthPicker: Tilpasset padding og sizing på mobil. ([#2311](https://github.com/navikt/aksel/pull/2311))
+
+## 5.5.0
+
+### Minor Changes
+
+- Box: Ny primitive, erstatter dagens `Panel` ([#2195](https://github.com/navikt/aksel/pull/2195))
+
+### Patch Changes
+
+- Skeleton: Width fungerer nå med inline-variant av Skeleton ([#2273](https://github.com/navikt/aksel/pull/2273))
+
+## 5.4.1
+
+## 5.4.0
+
+### Minor Changes
+
+- Primitives: Nye komponenter `Show` og `Hide` er lagt til. ([#2222](https://github.com/navikt/aksel/pull/2222))
+
+### Patch Changes
+
+- ErrorSummary: Har nå 8px border-radius ([#2256](https://github.com/navikt/aksel/pull/2256))
+
+## 5.3.5
+
+## 5.3.4
+
+### Patch Changes
+
+- Alert: 12px -> 8px gap mellom tekst og ikon ved `size="small"` ([#2240](https://github.com/navikt/aksel/pull/2240))
+
+## 5.3.3
+
+### Patch Changes
+
+- HGrid: Har nå `align`-prop for bedre kontroll over child-elementer ([#2242](https://github.com/navikt/aksel/pull/2242))
+
+## 5.3.2
+
+### Patch Changes
+
+- Skeleton: Lagt til as-prop for inline brk av Skeleton med span ([#2239](https://github.com/navikt/aksel/pull/2239))
+
+## 5.3.1
+
+### Patch Changes
+
+- :bug: fix missing accordion bottom box-shadow on last element (when opened) ([#2229](https://github.com/navikt/aksel/pull/2229))
+
+- :lipstick: GuidePanel: justert design ([#2227](https://github.com/navikt/aksel/pull/2227))
+
+## 5.3.0
+
+### Minor Changes
+
+- Typography: Oppdatert med typo-klasser for `textColor`, `weight`, `align`, `visuallyHidden` og `truncated`. ([#2211](https://github.com/navikt/aksel/pull/2211))
+
+## 5.2.1
+
+### Patch Changes
+
+- Font: Fikset henting av italic-font ([#2220](https://github.com/navikt/aksel/pull/2220))
+
+## 5.2.0
+
+### Patch Changes
+
+- CSS: Popover har nå 8px border-radius. Fikset padding-bug i Select-small. ([#2219](https://github.com/navikt/aksel/pull/2219))
+
+- Hovering over combobox dropdown will move selection/focus in the list, so we don't end up with a split focus, and reversely when moving focus while hovering ([#2193](https://github.com/navikt/aksel/pull/2193))
+
+## 5.1.0
+
+### Patch Changes
+
+- :lipstick: Modal: fjern kantlinje ([#2210](https://github.com/navikt/aksel/pull/2210))
+
+- Tokens: Fikset table-token ([#2204](https://github.com/navikt/aksel/pull/2204))
+
 ## 5.0.3
 
 ### Patch Changes

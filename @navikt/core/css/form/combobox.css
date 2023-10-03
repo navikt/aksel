@@ -256,7 +256,7 @@
 }
 
 .navds-combobox__list-item--focus,
-.navds-combobox__list-item:hover {
+.navds-combobox__list--with-hover .navds-combobox__list-item:hover {
   background-color: var(--ac-combobox-list-item-hover-bg, var(--a-surface-hover));
   cursor: pointer;
   border-left: 4px solid var(--ac-combobox-list-item-hover-border-left, var(--a-border-strong));
@@ -264,7 +264,7 @@
 }
 
 .navds-form-field--small .navds-combobox__list-item--focus,
-.navds-form-field--small .navds-combobox__list-item:hover {
+.navds-combobox__list--with-hover .navds-form-field--small .navds-combobox__list-item:hover {
   padding-left: calc(var(--a-spacing-2) - 4px);
 }
 
@@ -277,7 +277,7 @@
 }
 
 .navds-combobox__list-item--selected.navds-combobox__list-item--focus,
-.navds-combobox__list-item--selected:hover {
+.navds-combobox__list--with-hover .navds-combobox__list-item--selected:hover {
   background-color: var(--ac-combobox-list-item-selected-hover-bg, var(--a-surface-action-subtle-hover));
   border-left: 4px solid var(--ac-combobox-list-item-selected-hover-border-left, var(--a-border-focus));
   padding-left: calc(var(--a-spacing-3) - 4px);
@@ -291,7 +291,7 @@
   gap: 0.25rem;
 }
 
-.navds-combobox__list-item__new-option:hover {
+.navds-combobox__list--with-hover .navds-combobox__list-item__new-option:hover {
   border-bottom: 1px solid var(--a-border-divider);
   background: var(--a-surface-neutral-subtle-hover);
 }

@@ -4,7 +4,7 @@
 
 .navds-modal {
   background-color: var(--ac-modal-bg, var(--a-surface-default));
-  border: 1px solid var(--ac-modal-border, var(--a-border-subtle));
+  border: none;
   border-radius: var(--a-border-radius-large);
   box-shadow: var(--a-shadow-xlarge);
   padding: 0;

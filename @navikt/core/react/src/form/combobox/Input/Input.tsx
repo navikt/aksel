@@ -14,13 +14,11 @@ interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
   ref: React.Ref<HTMLInputElement>;
   inputClassName?: string;
-  errorId?: string;
   value?: string;
-  error?: React.ReactNode;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputClassName, error, errorId, ...rest }, ref) => {
+  ({ inputClassName, ...rest }, ref) => {
     const { clearInput, inputProps, onChange, size, value } = useInputContext();
     const {
       selectedOptions,
@@ -42,6 +40,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       moveFocusToInput,
       moveFocusToEnd,
       setFilteredOptionsIndex,
+      setIsMouseLastUsedInputDevice,
       shouldAutocomplete,
     } = useFilteredOptionsContext();
 
@@ -102,6 +101,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const handleKeyDown = useCallback(
       (e) => {
+        setIsMouseLastUsedInputDevice(false);
         if (e.key === "Backspace") {
           if (value === "") {
             const lastSelectedOption =
@@ -132,6 +132,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         isListOpen,
         filteredOptionsIndex,
         moveFocusUp,
+        setIsMouseLastUsedInputDevice,
       ]
     );
 

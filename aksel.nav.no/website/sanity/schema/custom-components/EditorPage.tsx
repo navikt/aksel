@@ -1,5 +1,11 @@
-import { Accordion, BodyShort, Heading, Link, Loader } from "@navikt/ds-react";
-import { Card } from "@sanity/ui";
+import {
+  Accordion,
+  BodyShort,
+  Heading,
+  Label,
+  Link,
+  Loader,
+} from "@navikt/ds-react";
 import { differenceInMonths } from "date-fns";
 import React, { useMemo } from "react";
 import {
@@ -38,21 +44,19 @@ const DocumentList = ({
         <ul>
           {list.map((x) => (
             <li key={x._id}>
-              <Card flex={1}>
-                <IntentButton
-                  intent="edit"
-                  mode="bleed"
-                  padding={1}
-                  radius={2}
-                  params={{
-                    type,
-                    id: getPublishedId(x._id),
-                  }}
-                  style={{ width: "100%" }}
-                >
-                  <Preview schemaType={schemaType} value={x} key={x._id} />
-                </IntentButton>
-              </Card>
+              <IntentButton
+                intent="edit"
+                mode="bleed"
+                padding={1}
+                radius={2}
+                params={{
+                  type,
+                  id: getPublishedId(x._id),
+                }}
+                style={{ width: "100%" }}
+              >
+                <Preview schemaType={schemaType} value={x} key={x._id} />
+              </IntentButton>
             </li>
           ))}
         </ul>
@@ -87,26 +91,24 @@ const OutDatedList = ({ data }: { data: any[] }) => {
         <ul>
           {list.map((x) => (
             <li key={x._id}>
-              <Card flex={1}>
-                <IntentButton
-                  intent="edit"
-                  mode="ghost"
-                  padding={1}
-                  radius={0}
-                  params={{
-                    type: x._type,
-                    id: getPublishedId(x._id),
-                  }}
-                  style={{ width: "100%" }}
-                >
-                  <Preview
-                    layout="default"
-                    schemaType={schema.get(x._type)}
-                    value={x}
-                    key={x._id}
-                  />
-                </IntentButton>
-              </Card>
+              <IntentButton
+                intent="edit"
+                mode="ghost"
+                padding={1}
+                radius={0}
+                params={{
+                  type: x._type,
+                  id: getPublishedId(x._id),
+                }}
+                style={{ width: "100%" }}
+              >
+                <Preview
+                  layout="default"
+                  schemaType={schema.get(x._type)}
+                  value={x}
+                  key={x._id}
+                />
+              </IntentButton>
             </li>
           ))}
         </ul>
@@ -130,26 +132,24 @@ const DraftList = ({ data }: { data: any[] }) => {
         <ul>
           {list.map((x) => (
             <li key={x._id}>
-              <Card flex={1}>
-                <IntentButton
-                  intent="edit"
-                  mode="ghost"
-                  padding={1}
-                  radius={0}
-                  params={{
-                    type: x._type,
-                    id: getPublishedId(x._id),
-                  }}
-                  style={{ width: "100%" }}
-                >
-                  <Preview
-                    layout="default"
-                    schemaType={schema.get(x._type)}
-                    value={x}
-                    key={x._id}
-                  />
-                </IntentButton>
-              </Card>
+              <IntentButton
+                intent="edit"
+                mode="ghost"
+                padding={1}
+                radius={0}
+                params={{
+                  type: x._type,
+                  id: getPublishedId(x._id),
+                }}
+                style={{ width: "100%" }}
+              >
+                <Preview
+                  layout="default"
+                  schemaType={schema.get(x._type)}
+                  value={x}
+                  key={x._id}
+                />
+              </IntentButton>
             </li>
           ))}
         </ul>
@@ -177,29 +177,27 @@ const FeedbackList = ({ data, title }: { data: any[]; title: string }) => {
     <Accordion.Item>
       <Accordion.Header>{`${title} (${list.length ?? 0})`}</Accordion.Header>
       <Accordion.Content>
-        <ul>
+        <ul className="mt-4">
           {list.map((x) => (
             <li key={x._id}>
-              <Card flex={1}>
-                <IntentButton
-                  intent="edit"
-                  mode="ghost"
-                  padding={1}
-                  radius={0}
-                  params={{
-                    type: "aksel_feedback",
-                    id: getPublishedId(x._id),
-                  }}
-                  style={{ width: "100%" }}
-                >
-                  <Preview
-                    layout="default"
-                    schemaType={schema.get("aksel_feedback")}
-                    value={x}
-                    key={x._id}
-                  />
-                </IntentButton>
-              </Card>
+              <IntentButton
+                intent="edit"
+                mode="ghost"
+                padding={1}
+                radius={0}
+                params={{
+                  type: "aksel_feedback",
+                  id: getPublishedId(x._id),
+                }}
+                style={{ width: "100%" }}
+              >
+                <Preview
+                  layout="default"
+                  schemaType={schema.get("aksel_feedback")}
+                  value={x}
+                  key={x._id}
+                />
+              </IntentButton>
             </li>
           ))}
         </ul>
@@ -242,13 +240,13 @@ export const EditorPage = () => {
     <div>
       <div>
         <Heading level="2" size="small" spacing>
-          Dine tilganger i Aksel studio
+          Dine tilganger
         </Heading>
         <dl>
           {user.roles.map((x) => (
             <React.Fragment key={x.name}>
-              <dt>{x.title}</dt>
-              <dd className="ml-4 mb-2 list-item last-of-type:mb-7">
+              <Label as="dt">{x.title}</Label>
+              <dd className="my-2 ml-4 list-item last-of-type:mb-7">
                 {x.description}
               </dd>
             </React.Fragment>
@@ -264,7 +262,7 @@ export const EditorPage = () => {
       {!fbError && !fbValidating && (
         <div className="mt-7">
           <Heading level="2" size="small" spacing>
-            Tilbakemeldinger på artikler du er satt som forfatter (
+            Tilbakemeldinger på artikler du er bidragsyter i (
             {fbData?.length ?? 0})
           </Heading>
           {fbData?.length > 0 && (

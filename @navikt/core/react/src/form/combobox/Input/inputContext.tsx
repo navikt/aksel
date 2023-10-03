@@ -4,12 +4,12 @@ import React, {
   createContext,
   useCallback,
   useContext,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
 import { useFormField, FormFieldType } from "../../useFormField";
+import { useClientLayoutEffect } from "../../../util";
 
 interface InputContextType extends FormFieldType {
   clearInput: (event: React.PointerEvent | React.KeyboardEvent) => void;
@@ -92,7 +92,7 @@ export const InputContextProvider = ({ children, value: props }) => {
     inputRef.current?.focus?.();
   }, []);
 
-  useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     if (shouldAutocomplete && inputRef && value !== searchTerm) {
       inputRef.current?.setSelectionRange?.(searchTerm.length, value.length);
     }

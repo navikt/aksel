@@ -1,9 +1,8 @@
-import BlockContent from "@sanity/block-content-to-react";
 import { useClient } from "sanity";
 import useSWR from "swr";
-import { serializers } from "../../util";
+import { SanityBlockContent } from "@/sanity-block";
 
-export const WriteHelp = (props) => {
+export const WriteHelp = () => {
   const client = useClient({ apiVersion: "2021-06-07" });
   const { data, error } = useSWR(`*[_id == "skrivehjelp"][0]`, (query) =>
     client.fetch(query)
@@ -15,16 +14,7 @@ export const WriteHelp = (props) => {
 
   const content = data?.content;
 
-  return (
-    <div className="flex shrink-0 items-center justify-between">
-      <BlockContent
-        blocks={content ?? []}
-        serializers={serializers}
-        options={{ size: "small" }}
-        renderContainerOnSingleChild
-      />
-    </div>
-  );
+  return <SanityBlockContent blocks={content ?? []} />;
 };
 
 export default WriteHelp;

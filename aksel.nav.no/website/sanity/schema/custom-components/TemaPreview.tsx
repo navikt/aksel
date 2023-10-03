@@ -1,4 +1,4 @@
-import { Badge } from "@sanity/ui";
+import { Tag } from "@navikt/ds-react";
 import { getPublishedId, useFormValue } from "sanity";
 
 export function TemaPreview(props) {
@@ -13,7 +13,9 @@ export function TemaPreview(props) {
         usedTema.length > 0 &&
         props._id &&
         getPublishedId(props._id) === usedTema[0]._ref && (
-          <Badge>HOVEDTEMA</Badge>
+          <Tag variant="neutral-filled" size="small">
+            HOVEDTEMA
+          </Tag>
         )}
     </div>
   );

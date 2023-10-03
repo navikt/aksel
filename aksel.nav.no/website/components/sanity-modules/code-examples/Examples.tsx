@@ -1,6 +1,6 @@
 import { capitalize, Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
-import { CodeExapmplesT } from "@/types";
+import { CodeExamplesT } from "@/types";
 import {
   ExternalLinkIcon,
   LaptopIcon,
@@ -15,7 +15,7 @@ import { CodeSandbox } from "./CodeSandbox";
 const iframePadding = 192;
 const iframeId = "example-iframe";
 
-const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
+const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
@@ -128,7 +128,7 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
               <>
                 <div
                   className={cl(
-                    "overflow-hidden rounded-t border border-b-0 border-gray-300 ",
+                    "overflow-hidden rounded-t-lg border border-b-0 border-gray-300 ",
                     {
                       "relative animate-pulse": unloaded,
                       "bg-gray-50": !unloaded,
@@ -160,7 +160,7 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
                     </div>
                   )}
                 </div>
-                <div className="mb-2 rounded-b border border-gray-300 p-1">
+                <div className="mb-2 rounded-b-lg border border-gray-300 p-1">
                   <HStack gap="4" justify="space-between">
                     <div className="hidden sm:block">
                       <HStack gap="2">
@@ -208,7 +208,7 @@ const ComponentExamples = ({ node }: { node: CodeExapmplesT }) => {
 
                 <Snippet
                   node={{
-                    code: { code: fil.innhold.trim(), language: "jsx" },
+                    code: { code: fil.innhold.trim(), language: "tsx" },
                   }}
                 />
               </>

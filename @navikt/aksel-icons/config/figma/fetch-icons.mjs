@@ -22,20 +22,31 @@ export const fetchIcons = async () => {
   return data?.meta?.components;
 };
 
-export const fetchDownloadUrls = async (ids) => {
-  return await fetch(
-    `https://api.figma.com/v1/images/${file_key}/?ids=${ids}&format=svg`,
-    {
-      headers: {
-        "Content-type": "application/json",
-        "X-FIGMA-TOKEN": process.env.FIGMA_TOKEN,
-      },
-    }
-  )
-    .then((x) => x.json())
-    .catch((e) => {
-      throw e.message;
-    });
+export const fetchDownloadUrls = async (idArray) => {
+  const urls = { images: null };
+
+  for (let ids of idArray) {
+    await fetch(
+      `https://api.figma.com/v1/images/${file_key}/?ids=${ids}&format=svg`,
+      {
+        headers: {
+          "Content-type": "application/json",
+          "X-FIGMA-TOKEN": process.env.FIGMA_TOKEN,
+        },
+      }
+    )
+      .then((x) => x.json())
+      .then((x) => {
+        urls.images = {
+          ...urls.images,
+          ...x.images,
+        };
+      })
+      .catch((e) => {
+        throw e.message;
+      });
+  }
+  return urls;
 };
 
 export const fetchIcon = async (url) => {

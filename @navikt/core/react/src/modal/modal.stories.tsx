@@ -16,7 +16,7 @@ export const WithUseRef = () => {
   const ref2 = useRef<HTMLDialogElement>(null);
 
   return (
-    <>
+    <div>
       <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
       <Modal
         open={ref.current ? undefined : true /* initially open */}
@@ -80,7 +80,7 @@ export const WithUseRef = () => {
           <Button variant="tertiary">Tertiary</Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 };
 WithUseRef.storyName = "With useRef";
@@ -160,8 +160,8 @@ export const Small = () => (
   </Modal>
 );
 
-export const Medium = () => (
-  <Modal open width="medium" header={{ heading: "Simple header" }}>
+export const MediumWithPortal = () => (
+  <Modal open portal width="medium" header={{ heading: "Simple header" }}>
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );

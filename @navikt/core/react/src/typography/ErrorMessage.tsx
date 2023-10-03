@@ -1,9 +1,12 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "../util/OverridableComponent";
+import { TypoProps } from "./types";
+import { typoClassNames } from "./util";
 
 export interface ErrorMessageProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {
+  extends Pick<TypoProps, "spacing">,
+    React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * medium: 18px, small: 16px
    * @default "medium"
@@ -13,10 +16,6 @@ export interface ErrorMessageProps
    * Error text
    */
   children: React.ReactNode;
-  /**
-   * Adds margin-bottom
-   */
-  spacing?: boolean;
 }
 
 /**
@@ -28,8 +27,8 @@ export interface ErrorMessageProps
  *
  * @example
  * ```jsx
- *     <ErrorMessage level="1" size="xlarge">
- *       Pengestøtte når du er syk
+ *     <ErrorMessage>
+ *       Du må fylle ut: Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon
  *     </ErrorMessage>
  * ```
  */
@@ -41,10 +40,17 @@ export const ErrorMessage: OverridableComponent<
     <Component
       {...rest}
       ref={ref}
-      className={cl("navds-error-message", "navds-label", className, {
-        "navds-label--small": size === "small",
-        "navds-typo--spacing": !!spacing,
-      })}
+      className={cl(
+        "navds-error-message",
+        "navds-label",
+        className,
+        typoClassNames({
+          spacing,
+        }),
+        {
+          "navds-label--small": size === "small",
+        }
+      )}
     />
   )
 );

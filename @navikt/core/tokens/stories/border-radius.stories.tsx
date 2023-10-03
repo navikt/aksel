@@ -13,7 +13,7 @@ const Border = ({ token }) => (
       width: 4rem;
       height: 4rem;
       background: #f7f7f7;
-      border: 2px solid #262626;
+      border: 2px solid #23262a;
     }
     `}</style>
   </>
@@ -22,5 +22,5 @@ const Border = ({ token }) => (
 export const Small = () => <Border token="var(--a-border-radius-small)" />;
 export const Medium = () => <Border token="var(--a-border-radius-medium)" />;
 export const Large = () => <Border token="var(--a-border-radius-large)" />;
-export const xLarge = () => <Border token="var(--a-border-radius-xlarge)" />;
+export const XLarge = () => <Border token="var(--a-border-radius-xlarge)" />;
 export const Full = () => <Border token="var(--a-border-radius-full)" />;

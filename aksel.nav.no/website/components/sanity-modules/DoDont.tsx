@@ -10,92 +10,46 @@ import {
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
 
-const GetIcon = (s: string) => {
-  switch (s) {
-    case "do":
-      return (
-        <CheckmarkIcon
-          aria-hidden
-          fontSize="2rem"
-          className="flex-shrink-0 text-green-500"
-        />
-      );
-    case "dont":
-      return (
-        <XMarkIcon
-          aria-hidden
-          fontSize="2rem"
-          className="flex-shrink-0 text-red-500"
-        />
-      );
-    case "warning":
-      return (
-        <ExclamationmarkIcon
-          aria-hidden
-          fontSize="2rem"
-          className="flex-shrink-0 text-orange-500"
-        />
-      );
-    default:
-      return null;
-  }
-};
-
-const getText = (s: string) => {
-  switch (s) {
-    case "do":
-      return "Gjør: ";
-    case "dont":
-      return "Unngå: ";
-    case "warning":
-      return "Utfordrende: ";
-    default:
-      return "";
-  }
-};
-
 const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
-  if (!block.picture) return null;
+  if (!block.picture) {
+    return null;
+  }
+
   return (
-    <figure
-      className={cl("sm:min-w-80 flex min-w-full flex-1 flex-col", {
+    <BodyShort
+      as="figure"
+      className={cl("sm:min-w-80 z-10 flex min-w-full flex-1 flex-col", {
         "basis-full": block?.fullwidth,
         "max-w-sm": !block?.fullwidth,
       })}
     >
-      <div
-        className={cl(
-          "relative z-10 -ml-[1px] w-[calc(100%_+_2px)] border-t-4",
-          {
-            "border-t-border-success": block.variant === "do",
-            "border-t-border-danger": block.variant === "dont",
-            "border-t-surface-warning": block.variant === "warning",
-          }
-        )}
-        aria-hidden
-      >
-        <span className="absolute right-[2px] z-10">
-          {GetIcon(block.variant)}
-        </span>
-      </div>
-      <img
-        className="ring-border-subtle  bg-gray-50 ring-1"
-        alt={block.alt}
-        loading="lazy"
-        decoding="async"
-        src={urlFor(block.picture).auto("format").url()}
-      />
-      <figcaption data-variant={block.variant}>
-        <div className="mt-3">
-          {block.description && (
-            <BodyShort size="small" as="span">
-              <span className="font-semibold">{getText(block.variant)}</span>
-              <span>{block.description}</span>
-            </BodyShort>
+      <div className="shadow-xsmall ring-border-subtle relative rounded-lg ring-1 ring-inset ">
+        <BodyShort
+          as="span"
+          className={cl(
+            "relative z-[-1] flex items-center gap-1 rounded-t-lg px-4 py-2",
+            {
+              "bg-surface-success-moderate": block.variant === "do",
+              "bg-surface-danger-moderate": block.variant === "dont",
+              "bg-surface-warning-moderate": block.variant === "warning",
+            }
           )}
-        </div>
-      </figcaption>
-    </figure>
+        >
+          <span>{getIcon(block.variant)}</span>
+          <span>{getText(block.variant)}</span>
+        </BodyShort>
+        <img
+          className="relative z-[-1] w-full rounded-b-lg bg-gray-50"
+          alt={block.alt}
+          loading="lazy"
+          decoding="async"
+          src={urlFor(block.picture).auto("format").url()}
+        />
+      </div>
+      {block.description && (
+        <figcaption className="mt-2 px-4">{block.description}</figcaption>
+      )}
+    </BodyShort>
   );
 };
 
@@ -114,5 +68,37 @@ const DoDont = ({ node }: { node: DoDontT }) => {
     </div>
   );
 };
+
+function getIcon(s: string) {
+  const iconProps = {
+    "aria-hidden": true,
+    fontSize: "1.25rem",
+    className: "flex-shrink-0",
+  };
+
+  switch (s) {
+    case "do":
+      return <CheckmarkIcon {...iconProps} />;
+    case "dont":
+      return <XMarkIcon {...iconProps} />;
+    case "warning":
+      return <ExclamationmarkIcon {...iconProps} />;
+    default:
+      return null;
+  }
+}
+
+function getText(s: string) {
+  switch (s) {
+    case "do":
+      return "Gjør";
+    case "dont":
+      return "Unngå";
+    case "warning":
+      return "Pass på";
+    default:
+      return "";
+  }
+}
 
 export default withErrorBoundary(DoDont, "DoDont");

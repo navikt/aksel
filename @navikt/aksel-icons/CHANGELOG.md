@@ -1,5 +1,51 @@
 # @navikt/aksel-icons
 
+## 5.6.1
+
+## 5.6.0
+
+### Minor Changes
+
+- Ikoner: SVG export setter nå `height="1em"`, `width="1em"` og `fill="currentColor"`. ([#2300](https://github.com/navikt/aksel/pull/2300))
+
+- Ikoner: Nye ikoner `book` og `books` ([#2313](https://github.com/navikt/aksel/pull/2313))
+
+### Patch Changes
+
+- Ikoner: Nye ikoner `ClipboardCheckmark` og `ClipboardLink` ([#2307](https://github.com/navikt/aksel/pull/2307))
+
+## 5.5.0
+
+## 5.4.1
+
+## 5.4.0
+
+## 5.3.5
+
+## 5.3.4
+
+### Patch Changes
+
+- :bug: SVG import map er nå riktig path ([#2250](https://github.com/navikt/aksel/pull/2250))
+
+## 5.3.3
+
+## 5.3.2
+
+## 5.3.1
+
+## 5.3.0
+
+## 5.2.1
+
+## 5.2.0
+
+### Minor Changes
+
+- Ikoner: Oppdatert ikonpakke ([#2197](https://github.com/navikt/aksel/pull/2197))
+
+## 5.1.0
+
 ## 5.0.3
 
 ## 5.0.2

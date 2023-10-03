@@ -1,58 +1,56 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { Radio, RadioGroup } from "../../index";
+import { Accordion, Radio, RadioGroup } from "../../index";
+import AccordionItem from "../../accordion/AccordionItem";
+import AccordionHeader from "../../accordion/AccordionHeader";
+import AccordionContent from "../../accordion/AccordionContent";
 
-export default {
+const meta: Meta<typeof Radio> = {
   title: "ds-react/Radio",
   component: Radio,
-  subcomponents: {
-    RadioGroup,
-  },
   argTypes: {
-    size: { control: { type: "select", options: ["medium", "small"] } },
+    size: {
+      options: ["medium", "small"],
+      control: { type: "radio" },
+    },
   },
-} as Meta;
+};
+export default meta;
 
-export const Default = {
-  render: (props) => {
-    const [state, setState] = useState("radio1");
+export const Default = (props) => {
+  const [state, setState] = useState("radio1");
 
-    return (
-      <RadioGroup
-        legend={props.legend}
-        description={props.description}
-        value={props.controlled ? state : undefined}
-        onChange={props.controlled ? setState : undefined}
-        hideLegend={props.hideLegend}
-        error={props.error ? "Errormelding" : undefined}
-        size={props?.size}
+  return (
+    <RadioGroup
+      legend={props.legend}
+      description={props.description}
+      value={props.controlled ? state : undefined}
+      onChange={props.controlled ? setState : undefined}
+      hideLegend={props.hideLegend}
+      error={props.error ? "Errormelding" : undefined}
+      size={props?.size}
+    >
+      <Radio value="radio1">{props.children || "Apple"}</Radio>
+      <Radio
+        value="radio2"
+        description={props.radioDescription ? "Orange description" : undefined}
       >
-        <Radio value="radio1">{props.children || "Apple"}</Radio>
-        <Radio
-          value="radio2"
-          description={
-            props.radioDescription ? "Orange description" : undefined
-          }
-        >
-          {props.children || "Orange"}
-        </Radio>
-        <Radio value="radio3">{props.children || "Banana"}</Radio>
-        <Radio value="radio4">{props.children || "Melon"}</Radio>
-      </RadioGroup>
-    );
-  },
-
-  args: {
-    controlled: false,
-    error: false,
-    size: "medium",
-    legend: "Legend-tekst",
-    radioDescription: false,
-    hideLegend: false,
-    children: "",
-    description: "",
-  },
+        {props.children || "Orange"}
+      </Radio>
+      <Radio value="radio3">{props.children || "Banana"}</Radio>
+      <Radio value="radio4">{props.children || "Melon"}</Radio>
+    </RadioGroup>
+  );
+};
+Default.args = {
+  controlled: false,
+  error: false,
+  size: "medium",
+  legend: "Legend-tekst",
+  radioDescription: false,
+  hideLegend: false,
+  children: "",
+  description: "",
 };
 
 export const Group = () => (
@@ -118,4 +116,25 @@ export const UUDemo = () => (
       <Radio value="3">Juni</Radio>
     </RadioGroup>
   </div>
+);
+
+/**
+ * Added to test bug where Radio labels are sometimes omitted from accessibility tree in Chrome when inside of an Accordion.
+ * It was not possible to replicate using a Storybook-test.
+ *
+ * See https://nav-it.slack.com/archives/C7NE7A8UF/p1695723000232659
+ */
+export const TestInsideAccordion = () => (
+  <Accordion>
+    <AccordionItem>
+      <AccordionHeader>Åpne for å velge</AccordionHeader>
+      <AccordionContent>
+        <RadioGroup legend="Velg én">
+          <Radio value="1">Første valg</Radio>
+          <Radio value="2">Andre valg</Radio>
+          <Radio value="3">Tredje valg</Radio>
+        </RadioGroup>
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
 );

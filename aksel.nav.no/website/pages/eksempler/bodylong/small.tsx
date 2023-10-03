@@ -1,19 +1,32 @@
-import { BodyLong } from "@navikt/ds-react";
+import { BodyLong, VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
+  const lorem =
+    "Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.";
+
   return (
-    <BodyLong size="small">
-      Amet dolore non tempor incididunt dolor est enim aute commodo cillum quis.
-      Ex esse veniam ipsum quis. Pariatur duis do qui exercitation ut laboris
-      sit veniam nostrud nulla esse. In aute sint enim reprehenderit ut
-      voluptate do id. Laborum irure qui officia aute ipsum. Exercitation dolor
-      sunt deserunt non anim.
-    </BodyLong>
+    <VStack gap="4">
+      <BodyLong size="small">{lorem}</BodyLong>
+      <Divider />
+      <div>
+        <Descriptor>Semibold</Descriptor>
+        <BodyLong size="small" weight="semibold">
+          {lorem}
+        </BodyLong>
+      </div>
+      <Divider />
+      <div>
+        <Descriptor>Truncate (ellipsis)</Descriptor>
+        <BodyLong size="small" truncate>
+          {lorem}
+        </BodyLong>
+      </div>
+    </VStack>
   );
 };
 
-export default withDsExample(Example);
+export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */
 export const Demo = {
@@ -23,3 +36,11 @@ export const Demo = {
 export const args = {
   index: 2,
 };
+
+function Descriptor({ children }) {
+  return <p className="mb-3 text-xl font-semibold">{children}</p>;
+}
+
+function Divider() {
+  return <hr className="border-border-subtle" />;
+}

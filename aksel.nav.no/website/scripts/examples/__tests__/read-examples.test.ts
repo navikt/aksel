@@ -35,6 +35,22 @@ const testStr3 = `${d}
 export default withDsExample(Example);
 `;
 
+const testStr4 = `${d}
+
+export default withDsExample(Example, {
+  variant: "full",
+  showBreakpoints: true,
+});
+
+export const args = {
+};`;
+
+const testStr4Res = `import { Button } from "@navikt/ds-react";
+
+const Example = () => {
+  return <Button>Primary</Button>;
+};`;
+
 const codeRes = `import { Button } from "@navikt/ds-react";
 
 const Example = () => {
@@ -56,6 +72,7 @@ describe("Reading code-examples", () => {
 
   test("filterCode", () => {
     expect(filterCode(testStr1)).toEqual(codeRes);
+    expect(filterCode(testStr4)).toEqual(testStr4Res);
   });
 
   test("readExampleFiles", () => {

@@ -223,6 +223,7 @@ export interface DoDontT {
 }
 
 export interface CodeSnippetT {
+  title?: string;
   code: {
     language: string;
     code: string;
@@ -278,7 +279,7 @@ export interface RelatertInnholdT {
   >;
 }
 
-export interface CodeExapmplesT {
+export interface CodeExamplesT {
   title: string;
   dir: {
     title: string;
@@ -312,4 +313,12 @@ export type PropTableT = ArrayObjectT<{
 export type TipsT = ArrayObjectT<{
   eksperiment?: boolean;
   body: any[];
+}>;
+
+export type VideoT = ArrayObjectT<{
+  alt: string;
+  webm: { extension: string; url: string } | null;
+  fallback?: { extension: string; url: string } | null;
+  transkripsjon?: string;
+  caption?: string;
 }>;

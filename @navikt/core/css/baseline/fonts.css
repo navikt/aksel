@@ -10,7 +10,7 @@
   font-style: italic;
   font-weight: 600;
   font-display: swap;
-  src: url("https://cdn.nav.no/aksel/fonts/SourceSans3-italic-latin-semibold") format("woff2");
+  src: url("https://cdn.nav.no/aksel/fonts/SourceSans3-italic-latin-semibold.woff2") format("woff2");
 }
 @font-face {
   font-family: "Source Sans Pro";

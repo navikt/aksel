@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "5.0.3",
+  "version": "5.6.1",
   "description": "Aksel react-components for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -32,13 +32,14 @@
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC jest"
   },
   "dependencies": {
-    "@floating-ui/react": "0.24.1",
-    "@navikt/aksel-icons": "^5.0.3",
+    "@floating-ui/react": "0.25.4",
+    "@navikt/aksel-icons": "^5.6.1",
+    "@navikt/ds-tokens": "^5.6.1",
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^1.2.1",
@@ -63,8 +64,8 @@
     "rimraf": "3.0.2",
     "swr": "^1.1.2",
     "ts-jest": "^29.0.0",
-    "ts-node": "10.9.0",
-    "typescript": "^4.8.0"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",

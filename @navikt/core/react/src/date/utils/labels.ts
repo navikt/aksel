@@ -82,3 +82,54 @@ export const labels: Partial<Labels> = {
   labelNext,
   labelPrevious,
 };
+
+export const labelWeekNumber = ({
+  localeCode,
+  week,
+}: {
+  localeCode?: string;
+  week: number;
+}): string => {
+  switch (localeCode) {
+    case "nb":
+      return `Uke ${week}`;
+    case "nn":
+      return `Veke ${week}`;
+    case "en-GB":
+      return `Week ${week}`;
+    default:
+      return `Uke ${week}`;
+  }
+};
+
+export const labelWeekNumberButton = ({
+  localeCode,
+  week,
+}: {
+  localeCode?: string;
+  week: number;
+}): string => {
+  switch (localeCode) {
+    case "nb":
+      return `Velg uke ${week}`;
+    case "nn":
+      return `Vel veke ${week}`;
+    case "en-GB":
+      return `Pick week ${week}`;
+    default:
+      return `Velg uke ${week}`;
+  }
+};
+
+export const labelWeek = (localeCode?: string): string => {
+  switch (localeCode) {
+    case "nb":
+      return `Uke:`;
+    case "nn":
+      return `Veke:`;
+    case "en-GB":
+      return `Week:`;
+    default:
+      return `Uke:`;
+  }
+};

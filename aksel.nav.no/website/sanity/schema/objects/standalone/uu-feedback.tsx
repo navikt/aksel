@@ -1,4 +1,4 @@
-import { ComposeIcon } from "@sanity/icons";
+import { DocPencilIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 
 export const UuFeedback = defineType({
@@ -6,7 +6,7 @@ export const UuFeedback = defineType({
   title: "UU-feedback",
   type: "object",
   description: "Egen feedback for tilgjengelighetserklæringen",
-  icon: ComposeIcon,
+  icon: DocPencilIcon,
   fields: [
     defineField({
       title: "Vis feedback",
