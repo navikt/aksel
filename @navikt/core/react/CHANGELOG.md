@@ -1,5 +1,13 @@
 # @navikt/ds-react
 
+## 5.6.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.6.3
+  - @navikt/aksel-icons@5.6.3
+
 ## 5.6.2
 
 ### Patch Changes
