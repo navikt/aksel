@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.6.2
+
+### @navikt/ds-tokens
+
+- Tokens: Tilbyr nå token literals for typer, tidligere string literals ([#2342](https://github.com/navikt/aksel/pull/2342))
+
 ## 5.6.1
 
 ### @navikt/ds-react
