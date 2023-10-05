@@ -15,7 +15,7 @@ module.exports = {
       "xl-down": { value: "1279px" },
     },
     font: {
-      family: { value: '"Source Sans Pro", Arial, sans-serif' },
+      family: { value: "'Source Sans Pro', Arial, sans-serif" },
       line: {
         height: {
           heading: {
