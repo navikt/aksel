@@ -46,28 +46,40 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const onEnter = useCallback(
       (event: React.KeyboardEvent) => {
+        const isTextInSelectedOptions = (text: string) => {
+          return selectedOptions.find(
+            (item) => item.toLowerCase() === text.toLowerCase()
+          );
+        };
+
         if (currentOption) {
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption, event);
-          if (!isMultiSelect && !selectedOptions.includes(currentOption))
+          if (!isMultiSelect && !isTextInSelectedOptions(currentOption))
             toggleIsListOpen(false);
-        } else if (shouldAutocomplete && selectedOptions.includes(value)) {
+        } else if (shouldAutocomplete && isTextInSelectedOptions(value)) {
           event.preventDefault();
           // Trying to set the same value that is already set, so just clearing the input
           clearInput(event);
         } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
           event.preventDefault();
           // Autocompleting or adding a new value
-          toggleOption(value, event);
-          if (!isMultiSelect && !selectedOptions.includes(value))
+          const selectedValue = filteredOptions[0] || value;
+          toggleOption(selectedValue, event);
+          if (
+            !isMultiSelect &&
+            !isTextInSelectedOptions(filteredOptions[0] || selectedValue)
+          ) {
             toggleIsListOpen(false);
+          }
         }
       },
       [
         allowNewValues,
         clearInput,
         currentOption,
+        filteredOptions,
         isMultiSelect,
         selectedOptions,
         shouldAutocomplete,
