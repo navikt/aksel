@@ -13,8 +13,8 @@ import Label from "../typography/Label";
 export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   /**
+   * 'xsmall' should only be used in tables
    * @default "medium"
-   * xsmall should only be used in tables/
    */
   size?: "medium" | "small" | "xsmall";
   /**
@@ -30,12 +30,12 @@ export interface CopyButtonProps
    */
   text?: string;
   /**
-   * Text shown when button is clicked
-   * Only set if used with 'text'-prop
+   * Text shown when button is clicked.
+   * Only set if used with `text`-prop.
    */
   activeText?: string;
   /**
-   *  Callback when 'copied'-state is active
+   * Callback when 'copied'-state is active
    */
   onActiveChange?: (state: boolean) => void;
   /**
@@ -54,17 +54,17 @@ export interface CopyButtonProps
    */
   activeDuration?: number;
   /**
-   * * accessible label for icon (ignored if text is set)
+   * Accessible label for icon (ignored if text is set)
    * @default 'Kopier'
    */
   title?: string;
   /**
-   * accessible label for icon in active-state (ignored if text is set)
+   * Accessible label for icon in active-state (ignored if text is set)
    * @default 'Kopiert'
    */
   activeTitle?: string;
   /**
-   * Icon position in Button
+   * Icon position in button
    * @default "left"
    */
   iconPosition?: "left" | "right";
@@ -125,24 +125,23 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       }, activeDuration);
     };
 
-    const CopyIcon = () => {
-      return active ? (
-        <span className="navds-copybutton__icon">
-          {activeIcon ?? (
-            <CheckmarkIcon
-              aria-hidden={!!text}
-              title={text ? undefined : activeTitle}
-            />
-          )}
-        </span>
-      ) : (
-        <span className="navds-copybutton__icon">
-          {icon ?? (
-            <FilesIcon aria-hidden={!!text} title={text ? undefined : title} />
-          )}
-        </span>
-      );
-    };
+    const copyIcon = (
+      <span className="navds-copybutton__icon">
+        {active
+          ? activeIcon ?? (
+              <CheckmarkIcon
+                aria-hidden={!!text}
+                title={text ? undefined : activeTitle}
+              />
+            )
+          : icon ?? (
+              <FilesIcon
+                aria-hidden={!!text}
+                title={text ? undefined : title}
+              />
+            )}
+      </span>
+    );
 
     return (
       <button
@@ -157,14 +156,14 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           `navds-copybutton--${variant}`,
           {
             "navds-copybutton--icon-only": !text,
+            "navds-copybutton--icon-right": iconPosition === "right",
             "navds-copybutton--active": active,
           }
         )}
         onClick={handleClick}
       >
         <span className="navds-copybutton__content">
-          {iconPosition === "left" && <CopyIcon />}
-
+          {iconPosition === "left" && copyIcon}
           {text &&
             (active ? (
               <Label
@@ -183,7 +182,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
                 {text}
               </Label>
             ))}
-          {iconPosition === "right" && <CopyIcon />}
+          {iconPosition === "right" && copyIcon}
         </span>
       </button>
     );

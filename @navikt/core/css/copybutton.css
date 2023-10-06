@@ -15,7 +15,7 @@
 }
 
 .navds-copybutton {
-  --__ac-copybutton-padding: var(--a-spacing-3) var(--a-spacing-5);
+  --__ac-copybutton-padding: var(--a-spacing-3) var(--a-spacing-5) var(--a-spacing-3) var(--a-spacing-4);
 
   cursor: pointer;
   margin: 0;
@@ -28,16 +28,28 @@
   place-content: center;
 }
 
+.navds-copybutton--icon-right {
+  --__ac-copybutton-padding: var(--a-spacing-3) var(--a-spacing-4) var(--a-spacing-3) var(--a-spacing-5);
+}
+
 .navds-copybutton--small {
-  --__ac-copybutton-padding: var(--a-spacing-1) var(--a-spacing-3);
+  --__ac-copybutton-padding: var(--a-spacing-1) var(--a-spacing-3) var(--a-spacing-1) var(--a-spacing-2);
 
   min-height: 2rem;
 }
 
+.navds-copybutton--small.navds-copybutton--icon-right {
+  --__ac-copybutton-padding: var(--a-spacing-1) var(--a-spacing-2) var(--a-spacing-1) var(--a-spacing-3);
+}
+
 .navds-copybutton--xsmall {
-  --__ac-copybutton-padding: var(--a-spacing-05) var(--a-spacing-2);
+  --__ac-copybutton-padding: var(--a-spacing-05) var(--a-spacing-2) var(--a-spacing-05) var(--a-spacing-1);
 
   min-height: 1.5rem;
+}
+
+.navds-copybutton--xsmall.navds-copybutton--icon-right {
+  --__ac-copybutton-padding: var(--a-spacing-05) var(--a-spacing-1) var(--a-spacing-05) var(--a-spacing-2);
 }
 
 .navds-copybutton--icon-only {
@@ -71,6 +83,28 @@
 
 .navds-copybutton__icon:only-child {
   margin: 0;
+}
+
+.navds-copybutton--active .navds-copybutton__icon {
+  animation: akselCopyButtonIconAnimation 2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes akselCopyButtonIconAnimation {
+  8% {
+    transform: translateY(0);
+  }
+
+  17% {
+    transform: translateY(-10%);
+  }
+
+  25% {
+    transform: translateY(2%);
+  }
+
+  30% {
+    transform: translateY(0);
+  }
 }
 
 :where(.navds-copybutton--small, .navds-copybutton--xsmall):where(:not(:only-child)) {
@@ -138,6 +172,10 @@
   align-items: center;
   justify-content: center;
   gap: var(--a-spacing-2);
+}
+
+.navds-copybutton--small > .navds-copybutton__content {
+  gap: 0.375rem;
 }
 
 .navds-copybutton--xsmall > .navds-copybutton__content {
