@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from "react";
+import { I18nProvider, TranslationDictionary } from "./i18n";
 
 export interface ProviderContextType {
   /**
@@ -14,6 +15,7 @@ export const ProviderContext = createContext<ProviderContextType | undefined>(
 export interface ProviderProps {
   children?: React.ReactNode;
   rootElement?: HTMLElement;
+  i18n?: TranslationDictionary;
 }
 
 export const useProvider = () => useContext(ProviderContext);
@@ -31,9 +33,13 @@ export const useProvider = () => useContext(ProviderContext);
  * </Provider>
  * ```
  */
-export const Provider = ({ children, ...rest }: ProviderProps) => {
+export const Provider = ({ children, i18n, ...rest }: ProviderProps) => {
   return (
-    <ProviderContext.Provider value={rest}>{children}</ProviderContext.Provider>
+    <I18nProvider i18n={i18n}>
+      <ProviderContext.Provider value={rest}>
+        {children}
+      </ProviderContext.Provider>
+    </I18nProvider>
   );
 };
 

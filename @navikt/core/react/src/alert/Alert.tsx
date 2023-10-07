@@ -1,14 +1,15 @@
 import {
-  InformationSquareFillIcon,
   CheckmarkCircleFillIcon,
   ExclamationmarkTriangleFillIcon,
-  XMarkOctagonFillIcon,
+  InformationSquareFillIcon,
   XMarkIcon,
+  XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BodyLong } from "../typography/BodyLong";
 import { Button } from "../button";
+import { ComponentTranslation, useI18n } from "../provider";
+import { BodyLong } from "../typography/BodyLong";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -45,18 +46,60 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * requires closeButton to be true
    */
   onClose?: () => void;
+  /**
+   *
+   */
+  translations?: ComponentTranslation["Alert"];
 }
 
-const Icon = ({ variant, ...props }) => {
+const Icon = ({
+  variant,
+  translations,
+  className,
+}: {
+  variant: AlertProps["variant"];
+  translations: AlertProps["translations"];
+  className: string;
+}) => {
+  const t = useI18n();
   switch (variant) {
     case "error":
-      return <XMarkOctagonFillIcon title="Feil" {...props} />;
+      return (
+        <XMarkOctagonFillIcon
+          title={t(
+            "Aksel.Alert.iconTitle.error",
+            translations?.iconTitle?.error
+          )}
+          className={className}
+        />
+      );
     case "warning":
-      return <ExclamationmarkTriangleFillIcon title="Advarsel" {...props} />;
+      return (
+        <ExclamationmarkTriangleFillIcon
+          title={t(
+            "Aksel.Alert.iconTitle.warning",
+            translations?.iconTitle?.warning
+          )}
+          className={className}
+        />
+      );
     case "info":
-      return <InformationSquareFillIcon title="Informasjon" {...props} />;
+      return (
+        <InformationSquareFillIcon
+          title={t("Aksel.Alert.iconTitle.info", translations?.iconTitle?.info)}
+          className={className}
+        />
+      );
     case "success":
-      return <CheckmarkCircleFillIcon title="Suksess" {...props} />;
+      return (
+        <CheckmarkCircleFillIcon
+          title={t(
+            "Aksel.Alert.iconTitle.success",
+            translations?.iconTitle?.success
+          )}
+          className={className}
+        />
+      );
     default:
       return null;
   }
@@ -86,10 +129,12 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       inline = false,
       closeButton = false,
       onClose,
+      translations,
       ...rest
     },
     ref
   ) => {
+    const t = useI18n();
     return (
       <div
         {...rest}
@@ -106,7 +151,11 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           }
         )}
       >
-        <Icon variant={variant} className="navds-alert__icon" />
+        <Icon
+          variant={variant}
+          translations={translations}
+          className="navds-alert__icon"
+        />
         <BodyLong as="div" size={size} className="navds-alert__wrapper">
           {children}
         </BodyLong>
@@ -117,7 +166,14 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
               size="small"
               variant="tertiary-neutral"
               onClick={onClose}
-              icon={<XMarkIcon title="Lukk Alert" />}
+              icon={
+                <XMarkIcon
+                  title={t(
+                    "Aksel.Alert.closeButtonTitle",
+                    translations?.closeButtonTitle
+                  )}
+                />
+              }
             />
           </div>
         )}

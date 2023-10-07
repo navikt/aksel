@@ -1,0 +1,13 @@
+{
+  "Aksel": {
+    "Alert": {
+      "iconTitle": {
+        "info": "Informasjon",
+        "success": "Suksess",
+        "warning": "Advarsel",
+        "error": "Feil"
+      },
+      "closeButtonTitle": "Lukk alert"
+    }
+  }
+}

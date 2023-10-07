@@ -1,9 +1,10 @@
+import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/testing-library";
 import React from "react";
 import { Alert, AlertProps } from ".";
-import { BodyLong, Heading as DsHeading, Link } from "..";
-import { within, userEvent } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { BodyLong, Heading as DsHeading, HStack, Link, Provider } from "..";
+import enGB from "../locales/enGB.json";
 
 const meta: Meta<typeof Alert> = {
   title: "ds-react/Alert",
@@ -214,5 +215,40 @@ export const WithCloseButton: Story = {
 
     const buttonsAfter = canvas.getAllByTitle("Lukk Alert");
     expect(buttonsAfter.length).toBe(4);
+  },
+};
+
+export const I18n = {
+  render: () => {
+    return (
+      <HStack gap="8">
+        <div>
+          <h2>Default global translation</h2>
+          <Alert variant="info">Lorem ipsum dolor sit amet</Alert>
+          <Alert variant="warning">Lorem ipsum dolor sit amet</Alert>
+        </div>
+        <div>
+          <h2>Provider translation</h2>
+          <Provider i18n={enGB}>
+            <Alert variant="info">Lorem ipsum dolor sit amet</Alert>
+            <Alert variant="warning">Lorem ipsum dolor sit amet</Alert>
+          </Provider>
+        </div>
+        <div>
+          <h2>Global + local translation</h2>
+          <Alert variant="info">Lorem ipsum dolor sit amet</Alert>
+          <Alert
+            variant="warning"
+            translations={{
+              iconTitle: {
+                warning: "Custom warning text based on context or state",
+              },
+            }}
+          >
+            Lorem ipsum dolor sit amet
+          </Alert>
+        </div>
+      </HStack>
+    );
   },
 };

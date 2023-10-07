@@ -1,0 +1,13 @@
+{
+  "Aksel": {
+    "Alert": {
+      "iconTitle": {
+        "info": "Information",
+        "success": "Success",
+        "warning": "Warning",
+        "error": "Error"
+      },
+      "closeButtonTitle": "Close alert"
+    }
+  }
+}
