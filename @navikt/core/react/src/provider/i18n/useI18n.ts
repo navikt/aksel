@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import nb from "../../locales/nb.json";
 import { I18nContext } from "./context";
+import { get } from "./get";
 
 /* https://dev.to/pffigueiredo/typescript-utility-keyof-nested-object-2pa3 */
 type NestedKeyOf<ObjectType extends object> = {
@@ -17,10 +18,38 @@ export function useI18n() {
    */
   const translate = (
     id: NestedKeyOf<typeof nb>,
-    localTranslation?: string | number
+    {
+      local,
+      replacements,
+    }: { local?: string | number; replacements?: string | number }
   ): string => {
-    console.log({ i18n, id, localTranslation });
-    return "";
+    /**
+     * https://regex101.com/r/LYKWi3/1
+     */
+    const REPLACE_REGEX = /{([^}]*)}/g;
+
+    const text: string = local ?? get(i18n, id);
+    if (!text) {
+      return "";
+    }
+
+    if (replacements) {
+      return text.replace(REPLACE_REGEX, (match: string) => {
+        const replacement: string = match.substring(1, match.length - 1)!;
+
+        if (replacements[replacement] === undefined) {
+          const replacementData = JSON.stringify(replacements);
+
+          throw new Error(
+            `Error translating key '${id}'. No replacement syntax ({}) found for key '${replacement}'. The following replacements were passed: '${replacementData}'`
+          );
+        }
+
+        return replacements[replacement];
+      });
+    }
+
+    return text;
   };
 
   return translate;

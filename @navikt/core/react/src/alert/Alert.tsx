@@ -66,37 +66,36 @@ const Icon = ({
     case "error":
       return (
         <XMarkOctagonFillIcon
-          title={t(
-            "Aksel.Alert.iconTitle.error",
-            translations?.iconTitle?.error
-          )}
+          title={t("Aksel.Alert.iconTitle.error", {
+            local: translations?.iconTitle?.error,
+          })}
           className={className}
         />
       );
     case "warning":
       return (
         <ExclamationmarkTriangleFillIcon
-          title={t(
-            "Aksel.Alert.iconTitle.warning",
-            translations?.iconTitle?.warning
-          )}
+          title={t("Aksel.Alert.iconTitle.warning", {
+            local: translations?.iconTitle?.warning,
+          })}
           className={className}
         />
       );
     case "info":
       return (
         <InformationSquareFillIcon
-          title={t("Aksel.Alert.iconTitle.info", translations?.iconTitle?.info)}
+          title={t("Aksel.Alert.iconTitle.info", {
+            local: translations?.iconTitle?.info,
+          })}
           className={className}
         />
       );
     case "success":
       return (
         <CheckmarkCircleFillIcon
-          title={t(
-            "Aksel.Alert.iconTitle.success",
-            translations?.iconTitle?.success
-          )}
+          title={t("Aksel.Alert.iconTitle.success", {
+            local: translations?.iconTitle?.success,
+          })}
           className={className}
         />
       );
@@ -168,10 +167,9 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
               onClick={onClose}
               icon={
                 <XMarkIcon
-                  title={t(
-                    "Aksel.Alert.closeButtonTitle",
-                    translations?.closeButtonTitle
-                  )}
+                  title={t("Aksel.Alert.closeButtonTitle", {
+                    local: translations?.closeButtonTitle,
+                  })}
                 />
               }
             />
