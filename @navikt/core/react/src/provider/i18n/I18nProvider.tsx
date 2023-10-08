@@ -6,13 +6,13 @@ const I18NProvider = ({
   i18n,
   children,
 }: {
-  i18n?: TranslationDictionary;
+  i18n?: TranslationDictionary | TranslationDictionary[];
   children: React.ReactNode;
 }) => {
   const i18nContext = useContext(I18nContext);
 
   return (
-    <I18nContext.Provider value={{ i18n: i18n ?? i18nContext }}>
+    <I18nContext.Provider value={i18n ?? i18nContext}>
       {children}
     </I18nContext.Provider>
   );

@@ -15,7 +15,7 @@ export const ProviderContext = createContext<ProviderContextType | undefined>(
 export interface ProviderProps {
   children?: React.ReactNode;
   rootElement?: HTMLElement;
-  i18n?: TranslationDictionary;
+  i18n?: TranslationDictionary[] | TranslationDictionary;
 }
 
 export const useProvider = () => useContext(ProviderContext);

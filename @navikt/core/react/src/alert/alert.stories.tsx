@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import React from "react";
 import { Alert, AlertProps } from ".";
-import { BodyLong, Heading as DsHeading, HStack, Link, Provider } from "..";
+import { BodyLong, Heading as DsHeading, Link, Provider, VStack } from "..";
 import enGB from "../locales/enGB.json";
 
 const meta: Meta<typeof Alert> = {
@@ -221,14 +221,17 @@ export const WithCloseButton: Story = {
 export const I18n = {
   render: () => {
     return (
-      <HStack gap="8">
+      <VStack gap="4">
         <div>
-          <h2>Default global translation</h2>
+          <h1>Inspect svg title for translations</h1>
+        </div>
+        <div>
+          <h2>Default global translation (nb)</h2>
           <Alert variant="info">Lorem ipsum dolor sit amet</Alert>
           <Alert variant="warning">Lorem ipsum dolor sit amet</Alert>
         </div>
         <div>
-          <h2>Provider translation</h2>
+          <h2>Provider translation (enGB)</h2>
           <Provider i18n={enGB}>
             <Alert variant="info">Lorem ipsum dolor sit amet</Alert>
             <Alert variant="warning">Lorem ipsum dolor sit amet</Alert>
@@ -236,7 +239,7 @@ export const I18n = {
         </div>
         <div>
           <h2>Global + local translation</h2>
-          <Alert variant="info">Lorem ipsum dolor sit amet</Alert>
+          <Alert variant="info">Default global (nb)</Alert>
           <Alert
             variant="warning"
             translations={{
@@ -245,10 +248,34 @@ export const I18n = {
               },
             }}
           >
-            Lorem ipsum dolor sit amet
+            {`translations={{
+              iconTitle: {
+                warning: "Custom warning text based on context or state",
+              },
+            }}`}
           </Alert>
         </div>
-      </HStack>
+        <div>
+          <h2>Custom global translation + default </h2>
+          <Provider
+            i18n={[
+              {
+                Aksel: {
+                  Alert: {
+                    iconTitle: {
+                      warning: "Custom language override merged with global",
+                    },
+                  },
+                },
+              },
+              enGB,
+            ]}
+          >
+            <Alert variant="info">Default global (enGB)</Alert>
+            <Alert variant="warning">Custom global</Alert>
+          </Provider>
+        </div>
+      </VStack>
     );
   },
 };

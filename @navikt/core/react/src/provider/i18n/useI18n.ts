@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import nb from "../../locales/nb.json";
 import { I18nContext } from "./context";
 import { get } from "./get";
+import { merge } from "./merge";
+import { TranslationDictionary } from "./types";
 
 /* https://dev.to/pffigueiredo/typescript-utility-keyof-nested-object-2pa3 */
 type NestedKeyOf<ObjectType extends object> = {
@@ -12,6 +14,11 @@ type NestedKeyOf<ObjectType extends object> = {
 
 export function useI18n() {
   const i18n = useContext(I18nContext);
+
+  const translation: TranslationDictionary = useMemo(
+    () => (Array.isArray(i18n) ? merge(...i18n.slice().reverse()) : i18n),
+    [i18n]
+  );
 
   /**
    * https://github.com/Shopify/polaris/blob/2115f9ba2f5bcbf2ad15745233501bff2db81ecf/polaris-react/src/utilities/i18n/I18n.ts#L24
@@ -28,7 +35,8 @@ export function useI18n() {
      */
     const REPLACE_REGEX = /{([^}]*)}/g;
 
-    const text: string = local ?? get(i18n, id);
+    const text: string = local ?? get(translation, id);
+
     if (!text) {
       return "";
     }

@@ -62,6 +62,7 @@ const Icon = ({
   className: string;
 }) => {
   const t = useI18n();
+
   switch (variant) {
     case "error":
       return (
