@@ -21019,7 +21019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.4.31, postcss@npm:^8.0.0, postcss@npm:^8.2.14, postcss@npm:^8.4.0, postcss@npm:^8.4.19, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.27, postcss@npm:^8.4.31":
+"postcss@npm:8.4.31, postcss@npm:^8.0.0, postcss@npm:^8.2.14, postcss@npm:^8.4.19, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.27, postcss@npm:^8.4.31":
   version: 8.4.31
   resolution: "postcss@npm:8.4.31"
   dependencies:
@@ -26624,7 +26624,7 @@ __metadata:
     next-sanity: ^5.4.6
     pino: ^8.14.1
     pino-pretty: ^10.0.0
-    postcss: ^8.4.0
+    postcss: ^8.4.31
     postcss-import: ^14.1.0
     postcss-loader: 7.0.0
     prism-react-renderer: ^2.0.0
