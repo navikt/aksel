@@ -211,6 +211,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
               className="navds-date navds-date__popover"
               strategy={strategy}
               bubbleEscape={bubbleEscape}
+              flip={false}
             >
               <RootProvider
                 locale={getLocaleFromString(locale)}
