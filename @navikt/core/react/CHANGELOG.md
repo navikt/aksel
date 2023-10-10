@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.6.4
+
+### Patch Changes
+
+- :lipstick: DatePicker: Litt smalere inputfelt ([#2354](https://github.com/navikt/aksel/pull/2354))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.6.4
+  - @navikt/aksel-icons@5.6.4
+
 ## 5.6.3
 
 ### Patch Changes
