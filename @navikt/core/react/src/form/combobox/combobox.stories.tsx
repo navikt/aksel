@@ -479,6 +479,7 @@ export const TestCasingWhenAutoCompleting = {
         options={["Camel Case", "lowercase", "UPPERCASE"]}
         label="Liker du best store eller små bokstaver?"
         shouldAutocomplete
+        allowNewValues
         {...props}
       />
     );
@@ -487,15 +488,26 @@ export const TestCasingWhenAutoCompleting = {
     const canvas = within(canvasElement);
     const input = canvas.getByRole<HTMLInputElement>("combobox");
 
+    // With exisiting option
     userEvent.click(input);
-    await userEvent.type(input, "CaMeL cAsE", { delay: 250 });
+    await userEvent.type(input, "cAmEl CaSe", { delay: 250 });
     await sleep(250);
-    expect(input.value).toBe("CaMeL cAsE");
+    expect(input.value).toBe("cAmEl CaSe");
     await userEvent.type(input, "{Enter}");
     await sleep(250);
     const chips = canvas.getAllByRole("list")[0];
-    const selectedChip = within(chips).getAllByRole("listitem")[0];
-    expect(selectedChip).toHaveTextContent("Camel Case"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
+    const selectedUpperCaseChip = within(chips).getAllByRole("listitem")[0];
+    expect(selectedUpperCaseChip).toHaveTextContent("Camel Case"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
+
+    // With custom option
+    userEvent.click(input);
+    await userEvent.type(input, "PaScAl CaSe", { delay: 250 });
+    await sleep(250);
+    expect(input.value).toBe("PaScAl CaSe");
+    await userEvent.type(input, "{Enter}");
+    await sleep(250);
+    const selectedSnakeCaseChip = within(chips).getAllByRole("listitem")[0];
+    expect(selectedSnakeCaseChip).toHaveTextContent("PaScAl CaSe"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
   },
 };
 
