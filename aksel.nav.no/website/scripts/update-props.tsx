@@ -25,7 +25,9 @@ async function updateProps() {
   await transactionClient
     .commit({ dryRun: true })
     .then(() => console.log("Successfully updated prop-documentation"))
-    .catch((e) => console.error(e.message));
+    .catch((e) => {
+      throw new Error(e.message);
+    });
 
   const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);
 
