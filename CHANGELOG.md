@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.6.4
+
+### @navikt/ds-react
+
+- :lipstick: DatePicker: Litt smalere inputfelt ([#2354](https://github.com/navikt/aksel/pull/2354))
+
 ## 5.6.3
 
 ### @navikt/ds-css
