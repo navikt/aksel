@@ -1,9 +1,7 @@
-import { LevelTwoHeading } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { AkselGrunnleggendeDocT, AkselKomponentDocT } from "@/types";
 import { Label } from "@navikt/ds-react";
-import React from "react";
 
 const Intro = ({
   node,
@@ -18,9 +16,9 @@ const Intro = ({
 
   return (
     <div className="mb-16">
-      <LevelTwoHeading hidden id="intro">
+      <h2 id="intro" className="sr-only">
         Intro
-      </LevelTwoHeading>
+      </h2>
       <SanityBlockContent blocks={node.body} />
       <div className="mt-7">
         <Label as="p" className="mb-3">
