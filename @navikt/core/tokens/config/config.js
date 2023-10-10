@@ -42,6 +42,9 @@ module.exports = {
         {
           destination: "tokens.d.ts",
           format: "typescript/es6-declarations",
+          options: {
+            outputStringLiterals: true,
+          },
         },
       ],
     },

@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 5.6.4
+
+## 5.6.3
+
+### Patch Changes
+
+- :bug: Modal: Sett riktig tekstfarge ([#2340](https://github.com/navikt/aksel/pull/2340))
+
+## 5.6.2
+
 ## 5.6.1
 
 ## 5.6.0

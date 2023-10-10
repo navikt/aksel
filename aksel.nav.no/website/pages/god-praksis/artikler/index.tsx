@@ -111,14 +111,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
                 {allArticles
                   .filter((a) => a.tema)
                   .map((x) => {
-                    return (
-                      <ArtikkelCard
-                        {...x}
-                        source={x?.slug}
-                        key={x._id}
-                        variant="tema"
-                      />
-                    );
+                    return <ArtikkelCard {...x} key={x._id} variant="tema" />;
                   })}
               </div>
               <div className="mt-6 flex flex-col items-center">

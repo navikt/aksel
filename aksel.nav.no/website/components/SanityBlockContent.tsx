@@ -17,7 +17,6 @@ import {
   Bilde,
   CodeExamples,
   DoDont,
-  LevelTwoHeading,
   PropsSeksjon,
   RelatertInnhold,
   SideModul,
@@ -236,7 +235,15 @@ function SanitizedBlock({
       );
     case "h2":
       return (
-        <LevelTwoHeading id={`h${value._key}`}>{children}</LevelTwoHeading>
+        <Heading
+          tabIndex={-1}
+          id={`h${value._key}`}
+          level="2"
+          size="large"
+          className="max-w-text text-deepblue-800 mb-4 mt-12 scroll-mt-20 first-of-type:mt-0 focus:outline-none"
+        >
+          {children}
+        </Heading>
       );
     case "h3":
       return (
