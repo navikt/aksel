@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.6.5
+
+### Patch Changes
+
+- Datepicker: Popover legger seg nå ikke ovenfor input ([#2349](https://github.com/navikt/aksel/pull/2349))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.6.5
+  - @navikt/aksel-icons@5.6.5
+
 ## 5.6.4
 
 ### Patch Changes
