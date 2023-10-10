@@ -467,7 +467,7 @@ export const TestThatCallbacksOnlyFireWhenExpected: StoryObj<{
   },
 };
 
-export const TestConsistentUpperCaseWhenAutoCompleting = {
+export const TestCasingWhenAutoCompleting = {
   args: {
     onChange: jest.fn(),
     onClear: jest.fn(),
@@ -476,8 +476,8 @@ export const TestConsistentUpperCaseWhenAutoCompleting = {
   render: (props) => {
     return (
       <UNSAFE_Combobox
-        options={["UPPERCASE", "WORD"]}
-        label="Hva er dine favorittfrukter?"
+        options={["Camel Case", "lowercase", "UPPERCASE"]}
+        label="Liker du best store eller små bokstaver?"
         shouldAutocomplete
         {...props}
       />
@@ -488,36 +488,14 @@ export const TestConsistentUpperCaseWhenAutoCompleting = {
     const input = canvas.getByRole<HTMLInputElement>("combobox");
 
     userEvent.click(input);
-    await userEvent.type(input, "uppercase", { delay: 250 });
+    await userEvent.type(input, "CaMeL cAsE", { delay: 250 });
     await sleep(250);
-    expect(input.value).toBe("UPPERCASE");
-  },
-};
-
-export const TestConsistentLowerCaseWhenAutoCompleting = {
-  args: {
-    onChange: jest.fn(),
-    onClear: jest.fn(),
-    onToggleSelected: jest.fn(),
-  },
-  render: (props) => {
-    return (
-      <UNSAFE_Combobox
-        options={["lowercase", "word"]}
-        label="Hva er dine favorittfrukter?"
-        shouldAutocomplete
-        {...props}
-      />
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const input = canvas.getByRole<HTMLInputElement>("combobox");
-
-    userEvent.click(input);
-    await userEvent.type(input, "LOWERCASE", { delay: 250 });
+    expect(input.value).toBe("CaMeL cAsE");
+    await userEvent.type(input, "{Enter}");
     await sleep(250);
-    expect(input.value).toBe("lowercase");
+    const chips = canvas.getAllByRole("list")[0];
+    const selectedChip = within(chips).getAllByRole("listitem")[0];
+    expect(selectedChip).toHaveTextContent("Camel Case"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
   },
 };
 
