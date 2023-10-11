@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { BodyLong } from "../typography";
-import { ExpansionCardContext } from "./ExpansionCard";
+import { ExpansionCardContext } from "./context";
 
 export interface ExpansionCardContentProps
   extends React.HTMLAttributes<HTMLDivElement> {

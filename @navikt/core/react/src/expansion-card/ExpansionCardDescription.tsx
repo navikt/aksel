@@ -1,7 +1,7 @@
-import React, { forwardRef, useContext } from "react";
 import cl from "clsx";
+import React, { forwardRef, useContext } from "react";
 import { BodyLong } from "../typography";
-import { ExpansionCardContext } from "./ExpansionCard";
+import { ExpansionCardContext } from "./context";
 
 export interface ExpansionCardDescriptionProps
   extends React.HTMLAttributes<HTMLParagraphElement> {

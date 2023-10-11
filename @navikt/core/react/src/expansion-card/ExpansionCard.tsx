@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { createContext, forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { OverridableComponent } from "../util";
 import ExpansionCardContent, {
   ExpansionCardContentProps,
@@ -15,6 +15,7 @@ import {
   ExpansionCardTitle,
   ExpansionCardTitleProps,
 } from "./ExpansionCardTitle";
+import { ExpansionCardContext } from "./context";
 
 interface ExpansionCardComponent
   extends React.ForwardRefExoticComponent<
@@ -81,18 +82,6 @@ type ExpansionCardConditionalProps =
        */
       "aria-labelledby": string;
     };
-
-export type ExpansionCardContextProps = {
-  open: boolean;
-  toggleOpen: () => void;
-  size: "medium" | "small";
-};
-
-export const ExpansionCardContext = createContext<ExpansionCardContextProps>({
-  open: false,
-  toggleOpen: () => {},
-  size: "medium",
-});
 
 export type ExpansionCardProps = ExpansionCardCommonProps &
   ExpansionCardConditionalProps;
