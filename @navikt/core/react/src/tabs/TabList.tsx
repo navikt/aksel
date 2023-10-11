@@ -10,7 +10,7 @@ import React, {
   useState,
 } from "react";
 import { debounce, mergeRefs } from "../util";
-import { TabsContext } from "./Tabs";
+import { TabsContext } from "./context";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
