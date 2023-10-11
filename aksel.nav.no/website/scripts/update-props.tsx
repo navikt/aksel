@@ -69,6 +69,9 @@ async function updateProps() {
           2
         )
       );
+      throw new Error(
+        "Failed when deleting old prop-documentation from sanity, see warning above."
+      );
     });
 }
 
