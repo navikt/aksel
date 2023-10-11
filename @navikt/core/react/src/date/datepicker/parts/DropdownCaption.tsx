@@ -1,15 +1,15 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
+import { max, min } from "date-fns";
 import setMonth from "date-fns/setMonth";
 import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
 import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
+import { Button } from "../../../button";
+import { Select } from "../../../form/Select";
 import { getMonths, getYears } from "../../utils/get-dates";
 import { labelMonthDropdown, labelYearDropdown } from "../../utils/labels";
-import { max, min } from "date-fns";
 import WeekRow from "./WeekRow";
-import { Button } from "../../../button";
-import Select from "../../../form/Select";
 
 /**
  * https://github.com/gpbl/react-day-picker/tree/main/src/components/CaptionDropdowns
