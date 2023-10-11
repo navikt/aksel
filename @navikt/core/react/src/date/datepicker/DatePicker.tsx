@@ -4,7 +4,7 @@ import React, { forwardRef, useRef, useState } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { Popover } from "../../popover";
 import { omit, useId } from "../../util";
-import { DateInputProps, DatePickerInput } from "../DateInput";
+import { DatePickerInput } from "../DateInput";
 import { DateContext } from "../context";
 import { getLocaleFromString, labels } from "../utils";
 import DatePickerStandalone from "./DatePickerStandalone";
@@ -36,9 +36,7 @@ interface DatePickerComponent
    * Custom TextField for DatePicker
    * @see 🏷️ {@link DateInputProps}
    */
-  Input: React.ForwardRefExoticComponent<
-    DateInputProps & React.RefAttributes<HTMLInputElement>
-  >;
+  Input: typeof DatePickerInput;
 }
 
 /**
