@@ -78,11 +78,10 @@ export const Props = defineType({
       id: "_id",
     },
     prepare(selection) {
-      const { title, filepath, id } = selection;
-      const str = id.includes("core") ? "ds-react" : "ds-internal";
+      const { title, filepath } = selection;
       return {
         title,
-        subtitle: `${str}: ${filepath}`,
+        subtitle: `${filepath}`,
       };
     },
   },
