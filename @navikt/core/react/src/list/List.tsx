@@ -32,7 +32,9 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export interface ListComponent
-  extends React.ForwardRefExoticComponent<ListProps> {
+  extends React.ForwardRefExoticComponent<
+    ListProps & React.RefAttributes<HTMLDivElement>
+  > {
   /**
    * @see 🏷️ {@link ListItemProps}
    */
