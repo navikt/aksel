@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { Accordion, Radio, RadioGroup } from "../../index";
-import AccordionItem from "../../accordion/AccordionItem";
-import AccordionHeader from "../../accordion/AccordionHeader";
 import AccordionContent from "../../accordion/AccordionContent";
+import AccordionHeader from "../../accordion/AccordionHeader";
+import AccordionItem from "../../accordion/AccordionItem";
+import { Accordion, Radio, RadioGroup } from "../../index";
 
 const meta: Meta<typeof Radio> = {
   title: "ds-react/Radio",
@@ -137,4 +137,27 @@ export const TestInsideAccordion = () => (
       </AccordionContent>
     </AccordionItem>
   </Accordion>
+);
+
+export const Readonly = () => (
+  <div className="colgap">
+    <RadioGroup
+      legend="Hvilken frukt liker du?"
+      defaultValue={["banan"]}
+      readOnly
+    >
+      <Radio value="banan">Banan</Radio>
+      <Radio value="eple">Eple</Radio>
+      <Radio value="druer">Druer</Radio>
+    </RadioGroup>
+    <RadioGroup
+      legend="Hvilken frukt liker du?"
+      error="feilmelding"
+      defaultValue="eple"
+      readOnly
+    >
+      <Radio value="eple">Eple</Radio>
+      <Radio value="banan">Banan</Radio>
+    </RadioGroup>
+  </div>
 );
