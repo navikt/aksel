@@ -134,7 +134,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   return {
     props: {
-      page: page,
+      page,
       refs,
       slug: slug.slice(0, 2).join("/"),
       seo,

@@ -1,5 +1,21 @@
 # @navikt/ds-tokens
 
+## 5.6.5
+
+## 5.6.4
+
+## 5.6.3
+
+## 5.6.2
+
+### Patch Changes
+
+- Tokens: Tilbyr nå token literals for typer, tidligere string literals ([#2342](https://github.com/navikt/aksel/pull/2342))
+
+## 5.6.1
+
+## 5.6.0
+
 ## 5.5.0
 
 ### Minor Changes

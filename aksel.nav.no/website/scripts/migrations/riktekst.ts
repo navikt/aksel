@@ -23,13 +23,13 @@ const randKey = () => {
 const createStyle = (text: string, style: string) => ({
   _key: randKey(),
   _type: "block",
-  style: style,
+  style,
   markDefs: [],
   children: [
     {
       _type: "span",
       marks: [],
-      text: text,
+      text,
     },
   ],
 });

@@ -154,7 +154,7 @@ export const SuggestionBlock = ({
   );
 };
 
-const issueUrl = "https://github.com/navikt/aksel/issues/new?assignees=KenAJoh";
+const issueUrl = "https://github.com/navikt/aksel/issues/new";
 
 const options: {
   [key: string]: {
@@ -168,39 +168,39 @@ const options: {
     text: "Har du forslag til nye ikoner, eller endringer?",
     link:
       issueUrl +
-      "&labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
+      "?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
   },
   komponent: {
     text: "Har du innspill til komponenten?",
-    link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+    link: `${issueUrl}?labels=forespørsel+🥰%2Ckomponenter+🧩&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
   },
   ikon: {
     text: "Har du innspill til ikonet?",
     link:
       issueUrl +
-      "&labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
+      "?labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+",
   },
   "ikon-not-found": {
     text: "Har du forslag til nye ikoner? Trykk på bidra eller send inn et nytt forslag!",
     link:
       issueUrl +
-      "&labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
+      "?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
   },
   "komponent-ny": {
     text: "Denne komponenten er ny eller oppdatert. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
-    link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩%2Cnytt+✨&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+    link: `${issueUrl}?labels=forespørsel+🥰%2Ckomponenter+🧩%2Cnytt+✨&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
     heading: "Ny",
     icon: <ChangeLogIconOutline />,
   },
   "komponent-beta": {
     text: "Komponenten er under utvikling, men klar for adopsjon. Vi ønsker gjerne innspill på hvordan den fungerer og hvilke forbedringer vi kan gjøre.",
-    link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩%2Cbeta+🧪&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+    link: `${issueUrl}?labels=forespørsel+🥰%2Ckomponenter+🧩%2Cbeta+🧪&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
     heading: "Beta",
     icon: <TestFlaskIcon aria-hidden />,
   },
   "komponent-beta-unsafe": {
     text: "Komponenten er under utvikling. Så lenge komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i minor versjon av kodepakker og i Figma. Teamet ditt må ta selv ta stilling til om dere ønsker å bruke denne i produksjon.",
-    link: `${issueUrl}&labels=forespørsel+🥰%2Ckomponenter+🧩%2Cbeta+🧪&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+    link: `${issueUrl}?labels=forespørsel+🥰%2Ckomponenter+🧩%2Cbeta+🧪&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
     heading: "Beta",
     icon: (
       <svg

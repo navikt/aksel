@@ -258,6 +258,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               strategy={strategy}
               className="navds-date__popover"
               bubbleEscape={bubbleEscape}
+              flip={false}
             >
               <DayPicker
                 locale={getLocaleFromString(locale)}

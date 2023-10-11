@@ -61,7 +61,7 @@ const ClickablePeriod = React.memo(
       floatingStyles,
     } = useFloating({
       placement: "top",
-      open: open,
+      open,
       onOpenChange: (_open) => setOpen(_open),
       whileElementsMounted: autoUpdate,
       middleware: [

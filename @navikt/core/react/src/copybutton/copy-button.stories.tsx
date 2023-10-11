@@ -1,38 +1,40 @@
-import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
-import { userEvent, within } from "@storybook/testing-library";
 import React from "react";
-import { CopyButton } from ".";
+import { userEvent, within } from "@storybook/testing-library";
+import { Meta, StoryObj } from "@storybook/react";
+import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { Tooltip } from "../tooltip";
+import { CopyButton } from ".";
 
-export default {
+const meta: Meta<typeof CopyButton> = {
   title: "ds-react/CopyButton",
   component: CopyButton,
+};
+export default meta;
+
+type Story = StoryObj<typeof CopyButton>;
+
+export const Default: Story = {
+  render: (props) => <CopyButton {...props} />,
   argTypes: {
     size: {
-      defaultValue: "medium",
       control: { type: "radio" },
-      options: ["small", "medium", "xsmall"],
+      options: ["medium", "small", "xsmall"],
     },
     variant: {
-      defaultValue: undefined,
       control: { type: "radio" },
       options: ["neutral", "action"],
     },
   },
-};
-
-export const Default = {
-  render: (args) => <CopyButton {...args} />,
   args: {
     size: "medium",
-    duration: 2000,
+    activeDuration: 2000,
     copyText: "3.14",
     text: "",
     activeText: "",
   },
 };
 
-export const Interaction = {
+export const Interaction: Story = {
   render: () => (
     <CopyButton
       copyText="3.14"
@@ -50,7 +52,7 @@ export const Interaction = {
   },
 };
 
-export const Variants = {
+export const Variants: Story = {
   render: () => (
     <div className="colgap">
       <CopyButton copyText="3.14" variant="action" text="Kopier" />
@@ -60,7 +62,7 @@ export const Variants = {
   ),
 };
 
-export const IconPosition = {
+export const IconPosition: Story = {
   render: () => (
     <div className="colgap">
       <CopyButton copyText="3.14" iconPosition="left" text="Kopier" />
@@ -70,7 +72,7 @@ export const IconPosition = {
   ),
 };
 
-export const Sizes = {
+export const Sizes: Story = {
   render: () => (
     <div className="colgap">
       <div className="rowgap">
@@ -115,7 +117,7 @@ export const Sizes = {
   ),
 };
 
-export const Texts = {
+export const Texts: Story = {
   render: () => (
     <div className="colgap">
       <div>
@@ -145,7 +147,7 @@ export const Texts = {
   ),
 };
 
-export const Icons = {
+export const Icons: Story = {
   render: () => (
     <div className="rowgap">
       <div>
@@ -175,7 +177,7 @@ export const Icons = {
   ),
 };
 
-export const InlineDemo = {
+export const InlineDemo: Story = {
   render: () => (
     <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
       <CopyButton size="small" copyText="3.14" /> Kopier dette feltet
@@ -183,7 +185,7 @@ export const InlineDemo = {
   ),
 };
 
-export const WithTooltip = {
+export const WithTooltip: Story = {
   render: () => {
     return (
       <div>
@@ -195,11 +197,11 @@ export const WithTooltip = {
   },
 };
 
-export const Duration = {
+export const Duration: Story = {
   render: () => <CopyButton copyText="3.14" activeDuration={300} />,
 };
 
-export const Disabled = {
+export const Disabled: Story = {
   render: () => (
     <div className="colgap">
       <CopyButton copyText="3.14" disabled />

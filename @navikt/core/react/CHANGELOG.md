@@ -1,5 +1,79 @@
 # @navikt/ds-react
 
+## 5.6.5
+
+### Patch Changes
+
+- Datepicker: Popover legger seg nå ikke ovenfor input ([#2349](https://github.com/navikt/aksel/pull/2349))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.6.5
+  - @navikt/aksel-icons@5.6.5
+
+## 5.6.4
+
+### Patch Changes
+
+- :lipstick: DatePicker: Litt smalere inputfelt ([#2354](https://github.com/navikt/aksel/pull/2354))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.6.4
+  - @navikt/aksel-icons@5.6.4
+
+## 5.6.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.6.3
+  - @navikt/aksel-icons@5.6.3
+
+## 5.6.2
+
+### Patch Changes
+
+- Updated dependencies [[`0f3066d87`](https://github.com/navikt/aksel/commit/0f3066d87aa4adc3ac1b744dd6cab15b5943efd6)]:
+  - @navikt/ds-tokens@5.6.2
+  - @navikt/aksel-icons@5.6.2
+
+## 5.6.1
+
+### Patch Changes
+
+- Added aria-hidden to AccordionContent when closed, to fix issue where Radio labels were omitted when opening/closing AccordionItems ([#2338](https://github.com/navikt/aksel/pull/2338))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.6.1
+  - @navikt/aksel-icons@5.6.1
+
+## 5.6.0
+
+### Minor Changes
+
+- :recycle: Refaktorering og småfikser ([#2265](https://github.com/navikt/aksel/pull/2265))
+
+  - Refaktorering som følge av nye ESLint-regler
+  - AccordionItem/ToggleGroup: Støtte for 'id'-prop
+  - MonthPicker: Mer presis type for 'onMonthSelect' prop
+
+- Datepicker: Tilbyr nå muligheten til å bruke `onWeekNumberClick`. ([#2311](https://github.com/navikt/aksel/pull/2311))
+
+- Primitives: ny komponent Bleed ([#2278](https://github.com/navikt/aksel/pull/2278))
+
+### Patch Changes
+
+- Accordion: Console.error når Accordion blir brukt feil. ([#2310](https://github.com/navikt/aksel/pull/2310))
+
+- Stack: Kan nå endre direction, justify og align ved brekkpunkt. `Stack` er også nå en egen komponent sammen med `HStack` og `VStack`. ([#2286](https://github.com/navikt/aksel/pull/2286))
+
+- Primitives: Show/Hide støtter nå `asChild`-api ([#2312](https://github.com/navikt/aksel/pull/2312))
+
+- Remove tabIndex="-1" on Popover to fix VoiceOver navigation issue inside Popover ([#2303](https://github.com/navikt/aksel/pull/2303))
+
+- Updated dependencies [[`540b8c711`](https://github.com/navikt/aksel/commit/540b8c711dd17ac0bf004f4a35d807d1d9416316), [`d426a9471`](https://github.com/navikt/aksel/commit/d426a9471b09fd16355fc70b0c05e5bd69cdef00), [`522d136a8`](https://github.com/navikt/aksel/commit/522d136a844423bf4097bd30ae44a534484da088)]:
+  - @navikt/aksel-icons@5.6.0
+  - @navikt/ds-tokens@5.6.0
+
 ## 5.5.0
 
 ### Minor Changes

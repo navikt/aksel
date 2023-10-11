@@ -1,4 +1,4 @@
-/* eslint-disable no-var */
+/* eslint-disable no-var, object-shorthand */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 

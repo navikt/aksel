@@ -1,5 +1,47 @@
 # @navikt/aksel
 
+## 5.6.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@5.6.5
+
+## 5.6.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@5.6.4
+
+## 5.6.3
+
+### Patch Changes
+
+- Updated dependencies [[`66ec09581`](https://github.com/navikt/aksel/commit/66ec09581c6350ab1bccd473512b29d303ef75f5)]:
+  - @navikt/ds-css@5.6.3
+
+## 5.6.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@5.6.2
+
+## 5.6.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@5.6.1
+
+## 5.6.0
+
+### Patch Changes
+
+- Updated dependencies [[`ddf13d783`](https://github.com/navikt/aksel/commit/ddf13d783b4c34f5c99ed6d8fd73cb1a2f7616fc), [`014fedb05`](https://github.com/navikt/aksel/commit/014fedb0518e9f70dfca4516621922f9f9049d61), [`82e982727`](https://github.com/navikt/aksel/commit/82e98272751532406225264577de634cc63f81d0), [`d1801a77c`](https://github.com/navikt/aksel/commit/d1801a77c0093d022f245f885edf401e44c75596), [`90e5053a6`](https://github.com/navikt/aksel/commit/90e5053a6778963a338b260472279acb7862e079), [`2aa3cd56f`](https://github.com/navikt/aksel/commit/2aa3cd56ff720433f03f7b36e957fb4362ebb085), [`2aa3cd56f`](https://github.com/navikt/aksel/commit/2aa3cd56ff720433f03f7b36e957fb4362ebb085), [`6535c227c`](https://github.com/navikt/aksel/commit/6535c227c57c37333950a6e7cb64c4921549dc58)]:
+  - @navikt/ds-css@5.6.0
+
 ## 5.5.0
 
 ### Patch Changes

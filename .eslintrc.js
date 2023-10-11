@@ -24,7 +24,8 @@ module.exports = {
       "error",
       { propElementValues: "always" },
     ],
-    // TODO add: "object-shorthand": "error",
+    "array-callback-return": "error",
+    "object-shorthand": "error",
     // TODO: Consider adding the rule "id-length"
     // Temporary:
     "react/prop-types": "off",
@@ -89,5 +90,6 @@ module.exports = {
     "cjs",
     "dist",
     "**/codemod/**/*.js",
+    "!.storybook",
   ],
 };
