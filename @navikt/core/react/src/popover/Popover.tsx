@@ -79,6 +79,11 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   bubbleEscape?: boolean;
+  /**
+   * Changes placement of the floating element in order to keep it in view.
+   * @default true
+   */
+  flip?: boolean;
 }
 
 interface PopoverComponent
@@ -121,6 +126,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       offset,
       strategy: userStrategy,
       bubbleEscape = false,
+      flip: _flip = true,
       ...rest
     },
     ref
@@ -145,7 +151,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       onOpenChange: () => onClose(),
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
-        flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        _flip && flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         shift({ padding: 12 }),
         flArrow({ element: arrowRef, padding: 8 }),
       ],
