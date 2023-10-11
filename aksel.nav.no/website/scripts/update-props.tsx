@@ -24,7 +24,7 @@ async function updateProps() {
   props.forEach((x) => transactionClient.createOrReplace(x));
 
   await transactionClient
-    .commit({ dryRun: true })
+    .commit()
     .then(() => console.log("Successfully updated prop-documentation"))
     .catch((e) => {
       throw new Error(e.message);
@@ -64,7 +64,7 @@ How to fix:
   }
 
   await transactionClient
-    .commit({ dryRun: true })
+    .commit()
     .then(() => console.log("Successfully deleted unused prop-documents"))
     .catch(() =>
       console.error(
