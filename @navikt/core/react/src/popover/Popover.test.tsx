@@ -1,11 +1,11 @@
-import { act, cleanup, fireEvent } from "@testing-library/react";
+import { act, fireEvent, screen } from "@testing-library/react";
 import React from "react";
 import { renderWithStyles as render } from "../../tests/utils";
 import Popover from "./Popover";
 
 describe("Popover", () => {
   test("open", () => {
-    const { getByTestId } = render(
+    render(
       <Popover
         open
         anchorEl={document.createElement("div")}
@@ -16,12 +16,11 @@ describe("Popover", () => {
       </Popover>
     );
 
-    expect(getByTestId("popover-id")).toBeVisible();
-    cleanup();
+    expect(screen.getByTestId("popover-id")).toBeVisible();
   });
 
   test("should be hidden", () => {
-    const { getByTestId } = render(
+    render(
       <Popover
         open={false}
         anchorEl={document.createElement("div")}
@@ -32,13 +31,12 @@ describe("Popover", () => {
       </Popover>
     );
 
-    expect(getByTestId("popover-id")).not.toBeVisible();
-    cleanup();
+    expect(screen.getByTestId("popover-id")).not.toBeVisible();
   });
 
   it("outsideClick", async () => {
     const fn = jest.fn();
-    const { getByRole, getByTestId } = render(
+    render(
       <div>
         <Popover
           open={true}
@@ -53,18 +51,16 @@ describe("Popover", () => {
     );
 
     await act(async () => {
-      expect(getByTestId("popover-id")).toBeVisible();
-      getByRole("link").focus();
+      expect(screen.getByTestId("popover-id")).toBeVisible();
+      screen.getByRole("link").focus();
     });
 
     expect(fn).toHaveBeenCalled();
-
-    cleanup();
   });
 
   it("escape", async () => {
     const fn = jest.fn();
-    const { container, getByTestId } = render(
+    const { container } = render(
       <div>
         <Popover
           open={true}
@@ -77,23 +73,19 @@ describe("Popover", () => {
       </div>
     );
 
-    await act(async () => {
-      expect(getByTestId("popover-id")).toBeVisible();
-      fireEvent.keyDown(
-        // Should work anywhere
-        container,
-        { key: "Escape" }
-      );
-    });
+    expect(screen.getByTestId("popover-id")).toBeVisible();
+    fireEvent.keyDown(
+      // Should work anywhere
+      container,
+      { key: "Escape" }
+    );
 
     expect(fn).toHaveBeenCalled();
-
-    cleanup();
   });
 
   it("keep open on popover-focus", async () => {
     const fn = jest.fn();
-    const { getByTestId } = render(
+    render(
       <div>
         <Popover
           open={true}
@@ -107,18 +99,16 @@ describe("Popover", () => {
     );
 
     await act(async () => {
-      expect(getByTestId("popover-id")).toBeVisible();
-      getByTestId("popover-id").focus();
+      expect(screen.getByTestId("popover-id")).toBeVisible();
+      screen.getByTestId("popover-id").focus();
     });
 
     expect(fn).toHaveBeenCalledTimes(0);
-
-    cleanup();
   }, 20000);
 
   it("keep open on popover-click", async () => {
     const fn = jest.fn();
-    const { getByTestId } = render(
+    render(
       <div>
         <Popover
           open={true}
@@ -131,13 +121,9 @@ describe("Popover", () => {
       </div>
     );
 
-    await act(async () => {
-      expect(getByTestId("popover-id")).toBeVisible();
-      fireEvent.click(getByTestId("popover-id"));
-    });
+    expect(screen.getByTestId("popover-id")).toBeVisible();
+    fireEvent.click(screen.getByTestId("popover-id"));
 
     expect(fn).toHaveBeenCalledTimes(0);
-
-    cleanup();
   });
 });

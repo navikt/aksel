@@ -120,15 +120,15 @@ const fromValidation = (day: Date, opt?: UseRangeDatepickerOptions) => {
       isInvalid: !isValidDate(day),
       isWeekend: opt?.disableWeekends && isWeekend(day),
       isDisabled: opt?.disabled && isMatch(day, opt.disabled),
-      isBefore: isBefore,
-      isAfter: isAfter,
+      isBefore,
+      isAfter,
     };
   }
   if (isBefore || isAfter) {
     return {
       isValidDate: false,
-      isBefore: isBefore,
-      isAfter: isAfter,
+      isBefore,
+      isAfter,
     };
   }
 };
@@ -325,7 +325,7 @@ export const useRangeDatepicker = (
       return;
     }
     !open && openOnFocus && setOpen(true);
-    let day = parseDate(
+    const day = parseDate(
       e.target.value,
       today,
       locale,
@@ -349,7 +349,7 @@ export const useRangeDatepicker = (
   };
 
   const handleBlur = (e, src: RangeT) => {
-    let day = parseDate(
+    const day = parseDate(
       e.target.value,
       today,
       locale,
@@ -379,7 +379,7 @@ export const useRangeDatepicker = (
     if (range?.from && range?.to) {
       setOpen(false);
     }
-    let prevToRange =
+    const prevToRange =
       !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;
 
     const resetTo = isBefore(prevToRange, range?.from);
@@ -534,7 +534,7 @@ export const useRangeDatepicker = (
   };
 
   const datepickerProps = {
-    month: month,
+    month,
     onMonthChange: (month) => setMonth(month),
     onSelect: handleSelect,
     selected: selectedRange,

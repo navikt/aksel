@@ -1,3 +1,13 @@
+[data-theme="dark"] {
+  --__ac-typo-error-text: var(--a-red-300);
+  --__ac-typo-text-subtle: var(--a-gray-300);
+}
+
+[data-theme="light"] {
+  --__ac-typo-error-text: initial;
+  --__ac-typo-text-subtle: initial;
+}
+
 /* Heading */
 .navds-heading {
   font-weight: var(--a-font-weight-bold);
@@ -202,13 +212,8 @@
   margin-bottom: var(--a-spacing-2);
 }
 
-[data-theme="dark"].navds-error-message,
-[data-theme="dark"] .navds-error-message {
-  --a-text-danger: var(--a-red-300);
-}
-
 .navds-error-message {
-  color: var(--ac-typo-error-text, var(--a-text-danger));
+  color: var(--ac-typo-error-text, var(--__ac-typo-error-text, var(--a-text-danger)));
 }
 
 .navds-typo--truncate {
@@ -247,10 +252,5 @@
 }
 
 .navds-typo--color-subtle {
-  color: var(--a-text-subtle);
-}
-
-[data-theme="dark"].navds-typo--color-subtle,
-[data-theme="dark"] .navds-typo--color-subtle {
-  --a-text-subtle: var(--a-gray-300);
+  color: var(--__ac-typo-text-subtle, var(--a-text-subtle));
 }

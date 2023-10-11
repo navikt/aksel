@@ -4,42 +4,83 @@ import dotenv from "dotenv";
 import { noCdnClient } from "../sanity/interface/client.server";
 
 dotenv.config();
+dotenv.config({ path: `.env.local` });
 
-const ids: string[] = [];
+updateProps();
 
-const propList = (
-  src: {
-    displayName: string;
-    filePath: string;
-    props: {
-      [key: string]: {
-        defaultValue: any;
-        description?: string;
-        name: string;
-        parent: any;
-        declarations: any;
-        required?: boolean;
-        type?: any;
-      };
-    };
-  }[],
-  name: string
-) =>
-  src.map((prop) => {
-    const parseName = (name) => {
-      return `${name.toLowerCase().replaceAll(".", "-")}_${name}_ds_props`;
-    };
+async function updateProps() {
+  const token = process.env.SANITY_WRITE_KEY;
 
-    let dupe = false;
-    if (ids.includes(parseName(prop.displayName))) {
-      console.error(`Found duplicate id: ${parseName(prop.displayName)}`);
-      dupe = true;
+  const transactionClient = noCdnClient(token).transaction();
+
+  const props = propList();
+
+  if (checkIfDuplicateExists(propList().map((x) => x._id))) {
+    throw new Error(
+      "Duplicate _id found for prop-list. This should not be possible..."
+    );
+  }
+
+  props.forEach((x) => transactionClient.createOrReplace(x));
+
+  await transactionClient
+    .commit()
+    .then(() => console.log("Successfully updated prop-documentation"))
+    .catch((e) => {
+      throw new Error(e.message);
+    });
+
+  const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);
+
+  let deletedIds: string[] = [];
+  for (const prop of remoteProps) {
+    if (!props.find(({ _id }) => _id === prop._id)) {
+      transactionClient.delete(prop._id);
+      deletedIds.push(prop._id);
     }
-    const id = parseName(prop.displayName);
-    ids.push(id);
+  }
+
+  await transactionClient
+    .commit()
+    .then(() => console.log("Successfully deleted unused prop-documents"))
+    .catch((e) => {
+      /**
+       * Errormessage includes all ids that failed.
+       */
+      deletedIds = deletedIds.filter((id) => e.message.includes(id));
+
+      console.log("\n");
+      console.log(
+        `Found ${deletedIds.length} prop definitions no longer documented.
+    This could be caused by moving file-location of prop-definition, a namechange or simply not existing anymore.
+
+    How to fix:
+    - Go to links provided under and try to manually delete document.
+    - You will then be prompted to update referenced document before deleting.
+    - After updating reference(s) and deleting document(s) there is no need to run the script again.`
+      );
+      console.log(
+        JSON.stringify(
+          deletedIds.map(
+            (x) =>
+              `https://aksel.nav.no/admin/prod/desk/admin;propsDesignsystemet;${x}`
+          ),
+          null,
+          2
+        )
+      );
+      throw new Error(
+        "Failed when deleting old prop-documentation from sanity, see warning above."
+      );
+    });
+}
+
+function propList() {
+  return CoreDocs.map((prop) => {
+    const _id = `${hashString(prop.displayName)}_${hashString(prop.filePath)}`;
 
     return {
-      _id: dupe ? `${id}_2` : id,
+      _id,
       _type: "ds_props",
       title: prop.displayName,
       displayname: prop.displayName,
@@ -58,30 +99,18 @@ const propList = (
       }),
     };
   });
+}
 
-const updateProps = async () => {
-  const token = process.env.SANITY_WRITE_KEY;
+function hashString(str: string) {
+  let output = 1;
+  for (let i = 0; i < str.length; i++) {
+    output *= str[i].charCodeAt(0);
+    output %= Number.MAX_SAFE_INTEGER;
+  }
 
-  // this is our transactional client, it won't push anything until we say .commit() later
-  const transactionClient = noCdnClient(token).transaction();
+  return output;
+}
 
-  const props = propList(CoreDocs as any, "core");
-
-  // Preserve existing props that are not in the new list to allow documenting deprecated props
-  /* const remoteProps = await noCdnClient(token).fetch(`*[_type == "ds_props"]`);
-
-  for (const prop of remoteProps) {
-    if (!props.find((x) => prop._id === x._id)) {
-      transactionClient.delete(prop._id);
-    }
-  } */
-
-  props.forEach((x) => transactionClient.createOrReplace(x));
-
-  await transactionClient
-    .commit()
-    .then((e) => console.log(e))
-    .catch((e) => console.error(e.message));
-};
-
-updateProps();
+function checkIfDuplicateExists(arr: string[]) {
+  return new Set(arr).size !== arr.length;
+}

@@ -16,6 +16,7 @@ const {
   rootDir,
   globalDir,
   componentDir,
+  primitivesCss,
 } = require("./_mappings.js");
 
 run();
@@ -121,6 +122,11 @@ function buildFragmentFiles() {
   files.push({
     input: "form/index.css",
     output: `${componentDir}/${formCss}`,
+  });
+
+  files.push({
+    input: "primitives/index.css",
+    output: `${componentDir}/${primitivesCss}`,
   });
 
   return files;

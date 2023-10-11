@@ -1,19 +1,20 @@
 import { getClient } from "@/sanity/client.server";
 import { contributorsSingle } from "@/sanity/queries";
 import {
-  NextPageT,
-  ResolveTemaT,
-  ResolveSlugT,
   AkselGodPraksisDocT,
+  NextPageT,
   ResolveContributorsSingleT,
+  ResolveSlugT,
+  ResolveTemaT,
 } from "@/types";
 import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import Head from "next/head";
+import { SEO } from "components/website-modules/seo/SEO";
 import { useRouter } from "next/router";
+import { GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
@@ -44,7 +45,7 @@ export const query = (boundry = "") => {
   }`;
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }: {
   preview?: boolean;
@@ -92,17 +93,10 @@ const Artikler = ({ articles }: PageProps["props"]) => {
 
   return (
     <>
-      <Head>
-        <title>Artikler - Aksel</title>
-        <meta property="og:title" content="Artikler - Aksel" />
-      </Head>
+      <SEO title="Artikler" />
       <div className="bg-surface-subtle overflow-clip">
         <Header variant="subtle" />
-        <main
-          tabIndex={-1}
-          id="hovedinnhold"
-          className="min-h-[80vh] focus:outline-none"
-        >
+        <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="relative grid overflow-x-clip pb-40">
             <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
             <div className="dynamic-wrapper mx-auto w-full px-4 sm:px-6">
@@ -117,14 +111,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
                 {allArticles
                   .filter((a) => a.tema)
                   .map((x) => {
-                    return (
-                      <ArtikkelCard
-                        {...x}
-                        source={x?.slug}
-                        key={x._id}
-                        variant="tema"
-                      />
-                    );
+                    return <ArtikkelCard {...x} key={x._id} variant="tema" />;
                   })}
               </div>
               <div className="mt-6 flex flex-col items-center">

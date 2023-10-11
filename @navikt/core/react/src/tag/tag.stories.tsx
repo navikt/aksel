@@ -66,7 +66,7 @@ export const Default = {
 export const Small = () => {
   return (
     <div className="rowgap rowgap-wrap">
-      {variants.map((variant, i) => (
+      {variants.map((variant) => (
         <Tag key={variant} variant={variant} size="small">
           {variant}
         </Tag>
@@ -75,10 +75,10 @@ export const Small = () => {
   );
 };
 
-export const xSmall = () => {
+export const XSmall = () => {
   return (
     <div className="rowgap rowgap-wrap">
-      {variants.map((variant, i) => (
+      {variants.map((variant) => (
         <Tag key={variant} variant={variant} size="xsmall">
           {variant}
         </Tag>
@@ -90,7 +90,7 @@ export const xSmall = () => {
 export const Variants = () => {
   return (
     <div className="rowgap rowgap-wrap">
-      {variants.map((variant, i) => (
+      {variants.map((variant) => (
         <Tag key={variant} variant={variant}>
           {variant}
         </Tag>

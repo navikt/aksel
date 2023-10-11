@@ -1,5 +1,4 @@
 import { Button } from "@navikt/ds-react";
-import BlockContent from "@sanity/block-content-to-react";
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
@@ -10,7 +9,7 @@ import {
   useDocumentOperation,
 } from "sanity";
 import useSWR from "swr";
-import { serializers } from "../../../util";
+import { SanityBlockContent } from "@/sanity-block";
 
 export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   const WrappedFocus = (
@@ -169,16 +168,5 @@ export const QualityCheckContent = ({ type }: QualityCheckContentProps) => {
 
   const blocks = data?.[type];
 
-  return (
-    <>
-      <div className="flex shrink-0 items-center justify-between">
-        <BlockContent
-          blocks={blocks ?? []}
-          serializers={serializers}
-          options={{ size: "small" }}
-          renderContainerOnSingleChild
-        />
-      </div>
-    </>
-  );
+  return <SanityBlockContent blocks={blocks ?? []} />;
 };

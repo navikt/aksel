@@ -85,7 +85,9 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
 
   if (typeof initHeight === "number") {
     // Reset negative height to 0
-    initHeight = height < 0 ? 0 : height;
+    if (typeof height !== "string") {
+      initHeight = height < 0 ? 0 : height;
+    }
     initOverflow = "hidden";
   } else if (isPercentage(initHeight)) {
     // If value is string "0%" make sure we convert it to number 0
@@ -215,7 +217,7 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
 
   const componentStyle: CSSProperties = {
     height: currentHeight,
-    overflow: overflow,
+    overflow,
   };
 
   if (useTransitions) {

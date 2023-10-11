@@ -1,12 +1,12 @@
-import { WarningOutlineIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
-import { toPlainText } from "../../../util";
+import { toPlainText } from "@portabletext/react";
+import { ExclamationmarkTriangleIcon } from "@navikt/aksel-icons";
 
 export const Alert = defineType({
   name: "alert",
   title: "Alert",
   type: "object",
-  icon: WarningOutlineIcon,
+  icon: ExclamationmarkTriangleIcon,
   fields: [
     defineField({
       title: "Variant",
@@ -62,7 +62,7 @@ export const Alert = defineType({
       return {
         title: toPlainText(selection?.body),
         subtitle: `Alert - ${selection.variant}`,
-        media: WarningOutlineIcon,
+        media: ExclamationmarkTriangleIcon,
       };
     },
   },

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "5.3.5",
+  "version": "5.6.5",
   "author": "Aksel | NAV",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -52,11 +52,10 @@
   ],
   "scripts": {
     "create-icons": "svgr --silent --index-template config/index-template.js --out-dir src icons",
-    "copy-util": "copyfiles util/* src",
-    "copy-svg": "copyfiles -f 'icons/*.svg' dist/svg/",
-    "copy": "yarn copy-util && yarn copy-svg",
+    "parse-svg": "node -e 'require(\"./config/parse-svg.js\").main()'",
+    "copy": "copyfiles util/* src",
     "update-metadata": "node config/metadata.js",
-    "build": "yarn copy && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node config/cleanTypes.js && yarn update-metadata",
+    "build": "yarn copy && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node config/cleanTypes.js && yarn update-metadata && yarn parse-svg",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "fetch-new:icons": "node config/figma/index.mjs",
     "zip:icons": "node config/zip.js"
@@ -76,7 +75,7 @@
     "lodash.startcase": "4.4.0",
     "react": "^18.0.0",
     "rehype-parse": "8.0.4",
-    "typescript": "^4.8.0",
+    "typescript": "^5.1.6",
     "unified": "10.1.2"
   },
   "jest": {

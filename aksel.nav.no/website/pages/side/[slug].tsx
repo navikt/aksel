@@ -1,15 +1,15 @@
 import { TableOfContents } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
+import { getClient } from "@/sanity/client.server";
+import { destructureBlocks } from "@/sanity/queries";
+import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
 import { Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import Head from "next/head";
+import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
-import React, { Suspense, lazy } from "react";
-import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { destructureBlocks } from "@/sanity/queries";
-import { getClient } from "@/sanity/client.server";
 
 type PageProps = NextPageT<{ page: ResolveSlugT<AkselStandaloneDocT> }>;
 
@@ -56,14 +56,7 @@ const Page = ({ page }: PageProps["props"]) => {
 
   return (
     <>
-      <Head>
-        <title>{`${page?.heading} - Aksel`}</title>
-        <meta
-          property="og:title"
-          content={`${page?.heading} - Aksel`}
-          key="ogtitle"
-        />
-      </Head>
+      <SEO title={page?.heading} />
 
       <Header variant="subtle" />
       <main
@@ -84,7 +77,6 @@ const Page = ({ page }: PageProps["props"]) => {
             <SanityBlockContent
               className="dynamic-wrapper-prose"
               blocks={page?.content ?? []}
-              variant="aksel"
             />
           </div>
         </div>

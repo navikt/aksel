@@ -18,10 +18,8 @@ function useGlobalId(idOverride?: string): string | undefined {
   return id;
 }
 
-// eslint-disable-next-line no-useless-concat -- Workaround for https://github.com/webpack/webpack/issues/14814
 const maybeReactUseId: undefined | (() => string) = (React as any)[
-  // eslint-disable-next-line no-useless-concat
-  "useId" + ""
+  "useId" + "" // Workaround for https://github.com/webpack/webpack/issues/14814
 ];
 /**
  *

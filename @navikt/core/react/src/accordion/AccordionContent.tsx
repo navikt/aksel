@@ -34,6 +34,9 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
           },
           className
         )}
+        aria-hidden={
+          !context.open || undefined
+        } /* Added to fix bug with Radio component, where label text inside a span sometimes is ignored by screen readers after hiding/displaying the RadioGroup inside an Accordion */
       >
         {children}
       </BodyLong>

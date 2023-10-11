@@ -1,9 +1,7 @@
-import { LevelTwoHeading } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { AkselGrunnleggendeDocT, AkselKomponentDocT } from "@/types";
 import { Label } from "@navikt/ds-react";
-import React from "react";
 
 const Intro = ({
   node,
@@ -18,31 +16,29 @@ const Intro = ({
 
   return (
     <div className="mb-16">
-      <LevelTwoHeading hidden id="intro">
-        {["Intro"]}
-      </LevelTwoHeading>
+      <h2 id="intro" className="sr-only">
+        Intro
+      </h2>
       <SanityBlockContent blocks={node.body} />
-      <div>
-        <>
-          <Label as="p" className="mb-3">
-            Egnet til:
-          </Label>
-          <ul className="mb-7 list-disc">
-            {internal && (
-              <li className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]">
-                Bruk på interne flater
-              </li>
-            )}
-            {node.brukes_til.map((x) => (
-              <li
-                key={x}
-                className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]"
-              >
-                {x}
-              </li>
-            ))}
-          </ul>
-        </>
+      <div className="mt-7">
+        <Label as="p" className="mb-3">
+          Egnet til:
+        </Label>
+        <ul className="mb-7 list-disc">
+          {internal && (
+            <li className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]">
+              Bruk på interne flater
+            </li>
+          )}
+          {node.brukes_til.map((x) => (
+            <li
+              key={x}
+              className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]"
+            >
+              {x}
+            </li>
+          ))}
+        </ul>
         {node?.brukes_ikke_til && (
           <>
             <Label as="p" className="mb-3">

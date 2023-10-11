@@ -138,7 +138,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               "navds-body-short",
               `navds-body--${size ?? "medium"}`
             )}
-            size={props.htmlSize}
+            size={htmlSize}
           >
             {children}
           </select>

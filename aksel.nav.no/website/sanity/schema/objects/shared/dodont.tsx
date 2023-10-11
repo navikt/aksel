@@ -1,5 +1,4 @@
-import { CheckmarkCircleIcon } from "@sanity/icons";
-
+import { CheckmarkCircleIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 
 export const DoDont = defineType({

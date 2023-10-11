@@ -1,5 +1,5 @@
-/* eslint-disable react/jsx-pascal-case */
-import { render } from "@testing-library/react";
+/* eslint-disable testing-library/no-unnecessary-act -- https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning */
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { UNSAFE_Combobox } from "..";
@@ -38,54 +38,58 @@ const App = (props) => {
 describe("Render combobox", () => {
   describe("with multi select", () => {
     it("Should be able to search, select and remove selections", async () => {
-      const utils = render(<App isMultiSelect options={options} />);
+      render(<App isMultiSelect options={options} />);
 
       await act(async () => {
         await userEvent.click(
-          utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+          screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
         );
       });
       await act(async () => {
         await userEvent.type(
-          utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
+          screen.getByRole("combobox", {
+            name: "Hva er dine favorittfrukter?",
+          }),
           "apple"
         );
       });
       await act(async () => {
         await userEvent.click(
-          await utils.findByRole("option", { name: "apple" })
+          await screen.findByRole("option", { name: "apple" })
         );
       });
       expect(
-        await utils.findByRole("option", { name: "apple", selected: true })
+        await screen.findByRole("option", { name: "apple", selected: true })
       ).toBeInTheDocument();
       await act(async () => {
         await userEvent.click(
-          await utils.findByRole("button", { name: "apple slett" })
+          await screen.findByRole("button", { name: "apple slett" })
         );
       });
     });
   });
 
   it("Should show loading icon when loading (used for async search)", async () => {
-    const utils = render(<App options={[]} isListOpen isLoading />);
+    render(<App options={[]} isListOpen isLoading />);
 
-    expect(await utils.findByRole("option", { name: "venter..." }));
+    expect(
+      await screen.findByRole("option", { name: "venter..." })
+    ).toBeInTheDocument();
   });
 });
 
 describe("Combobox state-handling", () => {
   it("Should not select previous focused element when closes", async () => {
-    const utils = render(<App options={options} />);
+    render(<App options={options} />);
 
     await act(async () => {
       await userEvent.click(
-        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+        screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
       );
     });
     await act(async () => {
       await userEvent.type(
-        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
+        screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
         "ban"
       );
       await userEvent.keyboard("{ArrowDown}");
@@ -93,22 +97,20 @@ describe("Combobox state-handling", () => {
       await userEvent.keyboard("{Enter}");
     });
 
-    expect(
-      await utils.queryByRole("button", { name: "banana slett" })
-    ).toBeNull();
+    expect(screen.queryByRole("button", { name: "banana slett" })).toBeNull();
   });
 
   it("Should reset list when resetting input (ESC)", async () => {
-    const utils = render(<App options={options} />);
+    render(<App options={options} />);
 
     await act(async () => {
       await userEvent.click(
-        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+        screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
       );
     });
     await act(async () => {
       await userEvent.type(
-        utils.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
+        screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
         "apple"
       );
       await userEvent.keyboard("{ArrowDown}");
@@ -117,7 +119,7 @@ describe("Combobox state-handling", () => {
     });
 
     expect(
-      await utils.findByRole("option", { name: "banana" })
+      await screen.findByRole("option", { name: "banana" })
     ).toBeInTheDocument();
   });
 });

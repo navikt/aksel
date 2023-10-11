@@ -70,7 +70,7 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Callback for user-controlled state
    */
-  onMonthSelect?: Function;
+  onMonthSelect?: (month?: Date) => void;
   /**
    * Used to set visible year programmatically. Component controlled by default
    */
@@ -211,6 +211,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
               className="navds-date navds-date__popover"
               strategy={strategy}
               bubbleEscape={bubbleEscape}
+              flip={false}
             >
               <RootProvider
                 locale={getLocaleFromString(locale)}

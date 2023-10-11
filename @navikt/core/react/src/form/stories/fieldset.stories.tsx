@@ -114,7 +114,7 @@ export const Disabled = () => (
   </div>
 );
 
-export const hideLegend = () => (
+export const HideLegend = () => (
   <Fieldset legend="Mollit eiusmod" hideLegend>
     {content}
   </Fieldset>

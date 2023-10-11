@@ -125,7 +125,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     } = useFloating({
       placement: _placement,
       open: userOpen ?? open,
-      onOpenChange: setOpen,
+      onOpenChange: (_open) => setOpen(_open),
       middleware: [
         offset(_offset ? _offset : _arrow ? 10 : 2),
         shift(),
