@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Label } from "../typography";
 import { OverridableComponent } from "../util";
-import { StepperContext } from "./Stepper";
+import { StepperContext } from "./context";
 
 export interface StepperStepProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
