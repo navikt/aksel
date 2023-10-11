@@ -1,8 +1,8 @@
-import React, { forwardRef, useContext } from "react";
-import cl from "clsx";
-import { BodyShort } from "../typography/BodyShort";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
-import { ToggleGroupContext } from "./ToggleGroup";
+import cl from "clsx";
+import React, { forwardRef, useContext } from "react";
+import { BodyShort } from "../typography/BodyShort";
+import { ToggleGroupContext } from "./context";
 
 export interface ToggleItemProps
   extends React.HTMLAttributes<HTMLButtonElement> {
