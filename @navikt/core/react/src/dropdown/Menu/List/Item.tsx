@@ -1,7 +1,7 @@
-import React, { forwardRef, useContext } from "react";
 import cl from "clsx";
+import React, { forwardRef, useContext } from "react";
 import { OverridableComponent } from "../../../util";
-import { DropdownContext } from "../../Dropdown";
+import { DropdownContext } from "../../context";
 
 export interface ListItemProps extends React.ButtonHTMLAttributes<HTMLElement> {
   /**

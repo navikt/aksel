@@ -1,7 +1,7 @@
-import { OverridableComponent } from "../../../util";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { DropdownContext } from "../../Dropdown";
+import { OverridableComponent } from "../../../util";
+import { DropdownContext } from "../../context";
 
 export interface GroupedItemProps
   extends React.ButtonHTMLAttributes<HTMLElement> {
