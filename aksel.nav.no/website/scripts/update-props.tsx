@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { noCdnClient } from "../sanity/interface/client.server";
 
 dotenv.config();
+dotenv.config({ path: `.env.local` });
 
 updateProps();
 
@@ -42,7 +43,7 @@ async function updateProps() {
   if (deletedIds.length > 0) {
     console.log("\n");
     console.log(
-      `Found prop ${deletedIds.length} definitions no longer documented.
+      `Found ${deletedIds.length} prop definitions no longer documented.
 This could be caused by moving file-location of prop-definition, a namechange or simply not existing anymore.
 
 How to fix:
