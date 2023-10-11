@@ -42,8 +42,9 @@ async function updateProps() {
   if (deletedIds.length > 0) {
     console.log("\n");
     console.log(
-      `Found prop definitions no longer documented.
-This could be caused by moving file-locations of prop-definition or a namechange.
+      `Found prop ${deletedIds.length} definitions no longer documented.
+This could be caused by moving file-location of prop-definition, a namechange or simply not existing anymore.
+
 How to fix:
 - Go to links provided under and try to manually delete document.
 - You will then be prompted to update referenced document before deleting.
@@ -107,6 +108,6 @@ function hashString(str: string) {
   return output;
 }
 
-function checkIfDuplicateExists(arr) {
+function checkIfDuplicateExists(arr: string[]) {
   return new Set(arr).size !== arr.length;
 }
