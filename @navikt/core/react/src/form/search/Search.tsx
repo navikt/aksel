@@ -1,17 +1,18 @@
-import { XMarkIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, {
-  forwardRef,
   InputHTMLAttributes,
+  forwardRef,
   useCallback,
   useMemo,
   useRef,
   useState,
 } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
+import { mergeRefs, omit } from "../../util";
 import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
-import { mergeRefs, omit } from "../../util";
+import { SearchContext } from "./context";
 
 export type SearchClearEvent =
   | {
@@ -73,17 +74,6 @@ interface SearchComponent
   > {
   Button: SearchButtonType;
 }
-
-export interface SearchContextProps {
-  disabled?: boolean;
-  size: "medium" | "small";
-  variant: "primary" | "secondary" | "simple";
-  handleClick: () => void;
-}
-
-export const SearchContext = React.createContext<SearchContextProps | null>(
-  null
-);
 
 /**
  * A component that displays a search input field.
