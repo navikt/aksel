@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { useFormField } from "../useFormField";
-import { RadioProps } from "./Radio";
-import { RadioGroupContext } from "./RadioGroup";
 import { omit } from "../../util";
+import { useFormField } from "../useFormField";
+import { RadioGroupContext } from "./RadioGroup";
+import { RadioProps } from "./types";
 
 /**
  * Handles props for Radios in context with Fieldset and RadioGroup
