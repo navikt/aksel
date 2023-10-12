@@ -4,34 +4,8 @@ import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { FormFieldProps } from "../useFormField";
+import { FieldsetContext } from "./context";
 import { useFieldset } from "./useFieldset";
-
-export type FieldsetContextProps = {
-  /**
-   * Error message applied to element,
-   */
-  error?: React.ReactNode;
-  /**
-   * Overrides internal errorId
-   */
-  errorId: string;
-  /**
-   * Changes paddings, margins and font-sizes
-   */
-  size: "medium" | "small";
-  /**
-   * Sets fieldset and all form-children to disabled
-   */
-  disabled: boolean;
-  /**
-   * Read only-state
-   */
-  readOnly?: boolean;
-};
-
-export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
-  null
-);
 
 export interface FieldsetProps
   extends FormFieldProps,

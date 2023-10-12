@@ -31,6 +31,7 @@ module.exports = {
     "react/prop-types": "off",
     "react/display-name": "off",
     "import/no-named-as-default": "off",
+    // "import/no-cycle": [1],
   },
   reportUnusedDisableDirectives: true,
   overrides: [

@@ -1,7 +1,7 @@
-import React, { forwardRef, useContext } from "react";
 import cl from "clsx";
-import { Fieldset, FieldsetContext, FieldsetProps } from "../Fieldset";
+import React, { forwardRef, useContext } from "react";
 import { useId } from "../../util";
+import { Fieldset, FieldsetContext, FieldsetProps } from "../Fieldset";
 
 export interface RadioGroupContextProps {
   name: string;
