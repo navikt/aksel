@@ -1,26 +1,8 @@
+import Spacing from "@navikt/ds-tokens/src/spacing.json";
+
 export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
 
-export type SpacingScale =
-  | "0"
-  | "05"
-  | "1"
-  | "2"
-  | "3"
-  | "4"
-  | "5"
-  | "6"
-  | "7"
-  | "8"
-  | "9"
-  | "10"
-  | "11"
-  | "12"
-  | "14"
-  | "16"
-  | "18"
-  | "20"
-  | "24"
-  | "32";
+export type SpacingScale = keyof (typeof Spacing)["a"]["spacing"];
 
 export type SpaceDelimitedAttribute<T extends string> =
   | T
