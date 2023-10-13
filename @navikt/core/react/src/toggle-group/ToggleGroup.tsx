@@ -1,12 +1,9 @@
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import cl from "clsx";
-import React, {
-  createContext,
-  forwardRef,
-  HTMLAttributes,
-  useState,
-} from "react";
-import { Label, useId } from "..";
+import React, { forwardRef, HTMLAttributes, useState } from "react";
+import { Label } from "../typography";
+import { useId } from "../util";
+import { ToggleGroupContext } from "./context";
 import ToggleItem, { ToggleItemProps } from "./ToggleItem";
 
 export interface ToggleGroupProps
@@ -54,14 +51,6 @@ interface ToggleGroupComponent
     ToggleItemProps & React.RefAttributes<HTMLButtonElement>
   >;
 }
-
-interface ToggleContextProps {
-  size: "medium" | "small";
-}
-
-export const ToggleGroupContext = createContext<ToggleContextProps | null>(
-  null
-);
 
 /**
  * A component that displays a group of toggle buttons.

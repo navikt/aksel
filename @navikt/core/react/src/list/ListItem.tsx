@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { BodyShort, Label } from "../typography";
-import { ListContext } from "./List";
+import { ListContext } from "./context";
 
 export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
   /**

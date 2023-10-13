@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
-import { BodyLong } from "..";
+import { BodyLong } from "../typography";
 
 export interface LinkPanelDescriptionProps
   extends React.HTMLAttributes<HTMLDivElement> {

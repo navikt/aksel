@@ -2,10 +2,10 @@ import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
+import { useId } from "../../../util";
 import { getMonthWeeks } from "../../utils/get-month-weeks";
 import { labelWeek } from "../../utils/labels";
 import WeekNumber from "./WeekNumber";
-import { useId } from "../../../util";
 
 const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
   const { locale, fixedWeeks, onWeekNumberClick } = useDayPicker();

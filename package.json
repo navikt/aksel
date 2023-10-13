@@ -27,7 +27,6 @@
     "@navikt/aksel-icons/figma-plugin",
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
-    "examples/*",
     "aksel.nav.no"
   ],
   "prettier": {

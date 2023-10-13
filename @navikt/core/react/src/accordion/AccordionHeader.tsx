@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { Heading } from "../typography/Heading";
+import { Heading } from "../typography";
 import { AccordionContext } from "./AccordionContext";
 import { AccordionItemContext } from "./AccordionItem";
 import { ChevronDownIcon } from "@navikt/aksel-icons";

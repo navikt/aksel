@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import copy from "../util/copy";
-import Label from "../typography/Label";
+import { Label } from "../typography";
 
 export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {

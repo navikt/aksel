@@ -14,14 +14,13 @@ import React, {
   HTMLAttributes,
   forwardRef,
   useCallback,
+  useContext,
   useMemo,
   useRef,
-  useContext,
 } from "react";
-import { mergeRefs } from "..";
-import { useClientLayoutEffect, useEventListener } from "../util";
-import PopoverContent, { PopoverContentType } from "./PopoverContent";
 import { ModalContext } from "../modal/ModalContext";
+import { mergeRefs, useClientLayoutEffect, useEventListener } from "../util";
+import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
