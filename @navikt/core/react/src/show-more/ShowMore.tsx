@@ -1,7 +1,9 @@
-import React, { forwardRef, useMemo, useRef, useState } from "react";
-import cl from "clsx";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
-import { Button, Heading, HeadingProps, mergeRefs, useId } from "..";
+import cl from "clsx";
+import React, { forwardRef, useMemo, useRef, useState } from "react";
+import { Button } from "../button";
+import { Heading, type HeadingProps } from "../typography";
+import { mergeRefs, useId } from "../util";
 
 export interface ShowMoreProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "onClick"> {
