@@ -21,8 +21,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Detail, useProvider } from "..";
+import { Detail } from "../typography";
 import { mergeRefs, useId } from "../util";
+import { useProvider } from "../provider";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**

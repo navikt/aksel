@@ -1,35 +1,10 @@
 import cl from "clsx";
-import React, { createContext, forwardRef, useContext } from "react";
+import React, { forwardRef, useContext } from "react";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util/useId";
-import { ListItem, ListItemProps } from "./ListItem";
-
-export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  /**
-   * HTML list element to render
-   * @default "ul"
-   */
-  as?: "ul" | "ol";
-  /**
-   * List heading title
-   */
-  title?: string;
-  /**
-   * List heading description
-   */
-  description?: string;
-  /**
-   * Allows setting a different HTML h-tag
-   * @default "h3"
-   */
-  headingTag?: React.ElementType<any>;
-  /**
-   * Changes padding, height and font-size
-   * @default medium
-   */
-  size?: "medium" | "small";
-}
+import { ListItem } from "./ListItem";
+import { ListContext } from "./context";
+import { ListProps } from "./types";
 
 export interface ListComponent
   extends React.ForwardRefExoticComponent<
@@ -38,22 +13,8 @@ export interface ListComponent
   /**
    * @see 🏷️ {@link ListItemProps}
    */
-  Item: React.ForwardRefExoticComponent<
-    ListItemProps & React.RefAttributes<HTMLLIElement>
-  >;
+  Item: typeof ListItem;
 }
-
-interface ListContextProps {
-  listType: ListProps["as"];
-  isNested: boolean | null;
-  size: ListProps["size"];
-}
-
-export const ListContext = createContext<ListContextProps>({
-  listType: "ul",
-  isNested: null,
-  size: "medium",
-});
 
 export const List = forwardRef<HTMLDivElement, ListProps>(
   (

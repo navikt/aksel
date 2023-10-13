@@ -1,6 +1,5 @@
 import cl from "clsx";
 import React, { forwardRef, useMemo, useRef } from "react";
-import { BodyShort, ErrorMessage, Label, mergeRefs } from "../..";
 import ClearButton from "./ClearButton";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
@@ -11,6 +10,8 @@ import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsCont
 import ComboboxWrapper from "./ComboboxWrapper";
 import { useInputContext } from "./Input/inputContext";
 import Input from "./Input/Input";
+import { mergeRefs } from "../../util";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
 
 export const Combobox = forwardRef<
   HTMLInputElement,

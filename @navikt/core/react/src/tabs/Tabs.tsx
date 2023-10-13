@@ -1,7 +1,8 @@
 import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "clsx";
-import React, { createContext, forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef, HTMLAttributes } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
+import { TabsContext } from "./context";
 import Tab, { TabProps } from "./Tab";
 import TabList, { TabListProps } from "./TabList";
 import TabPanel, { TabPanelProps } from "./TabPanel";
@@ -65,14 +66,6 @@ interface TabsComponent
     TabPanelProps & React.RefAttributes<HTMLDivElement>
   >;
 }
-
-interface TabsContextProps {
-  size: "medium" | "small";
-  loop: boolean;
-  iconPosition: "left" | "top";
-}
-
-export const TabsContext = createContext<TabsContextProps | null>(null);
 
 /**
  * A component that displays a set of tabs that can be used to switch between different views.

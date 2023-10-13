@@ -1,8 +1,8 @@
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { Button, ButtonProps } from "../..";
-import { SearchContext } from "./Search";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { Button, ButtonProps } from "../../button";
+import { SearchContext } from "./context";
 
 export interface SearchButtonProps
   extends Omit<ButtonProps, "size" | "children" | "variant"> {

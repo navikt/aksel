@@ -1,7 +1,7 @@
-import React, { createContext, forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import Step, { StepperStepProps } from "./Step";
-import { OverridableComponent } from "../util/OverridableComponent";
+import { StepperContext } from "./context";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
@@ -38,18 +38,8 @@ interface StepperComponent
    * @see 🏷️ {@link StepperStepProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Step: OverridableComponent<StepperStepProps, HTMLAnchorElement>;
+  Step: typeof Step;
 }
-
-interface StepperContextProps {
-  activeStep: number;
-  onStepChange: (step: number) => void;
-  lastIndex: number;
-  orientation: "horizontal" | "vertical";
-  interactive: boolean;
-}
-
-export const StepperContext = createContext<StepperContextProps | null>(null);
 
 /**
  * A component that displays a stepper with clickable steps.

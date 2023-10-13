@@ -1,13 +1,15 @@
-import { LinkBrokenIcon, LinkIcon } from "@navikt/aksel-icons";
+import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { CopyButton } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
     <CopyButton
-      copyText="3.14"
-      icon={<LinkIcon title="Kopier lenke" />}
-      activeIcon={<LinkBrokenIcon title="Kopierte lenke" />}
+      copyText="https://aksel.nav.no/"
+      text="Kopier lenke"
+      activeText="Lenken er kopiert"
+      icon={<LinkIcon aria-hidden />}
+      activeIcon={<ThumbUpIcon aria-hidden />}
     />
   );
 };
@@ -21,4 +23,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
+  desc: "ActiveIcon-propen lar deg endre ikon i active state",
 };
