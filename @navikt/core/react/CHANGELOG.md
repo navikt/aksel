@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 5.7.0
+
+### Patch Changes
+
+- Chores: Ryddet opp i sirkulære depdendencies ([#2366](https://github.com/navikt/aksel/pull/2366))
+
+- :lipstick: CopyButton: Justert padding, gap og animasjon ([#2355](https://github.com/navikt/aksel/pull/2355))
+
+- Updated dependencies [[`99fca2a56`](https://github.com/navikt/aksel/commit/99fca2a566e7464506f5d64ca1c8f11834cb63ef)]:
+  - @navikt/aksel-icons@5.7.0
+  - @navikt/ds-tokens@5.7.0
+
 ## 5.6.5
 
 ### Patch Changes
