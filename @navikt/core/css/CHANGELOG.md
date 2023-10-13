@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.7.0
+
+### Patch Changes
+
+- :lipstick: CopyButton: Justert padding, gap og animasjon ([#2355](https://github.com/navikt/aksel/pull/2355))
+
 ## 5.6.5
 
 ## 5.6.4

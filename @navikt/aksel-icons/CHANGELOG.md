@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 5.7.0
+
+### Minor Changes
+
+- Ikoner: Nye ikoner `ChevronLeftFirstCircle` og `ChevronRightLastCircle` ([#2365](https://github.com/navikt/aksel/pull/2365))
+
 ## 5.6.5
 
 ## 5.6.4

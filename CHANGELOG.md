@@ -1,5 +1,21 @@
 # Changelog
 
+## 5.7.0
+
+### @navikt/aksel-icons
+
+- Ikoner: Nye ikoner `ChevronLeftFirstCircle` og `ChevronRightLastCircle` ([#2365](https://github.com/navikt/aksel/pull/2365))
+
+### @navikt/ds-react
+
+- Chores: Ryddet opp i sirkulære depdendencies ([#2366](https://github.com/navikt/aksel/pull/2366))
+
+- :lipstick: CopyButton: Justert padding, gap og animasjon ([#2355](https://github.com/navikt/aksel/pull/2355))
+
+### @navikt/ds-css
+
+- :lipstick: CopyButton: Justert padding, gap og animasjon ([#2355](https://github.com/navikt/aksel/pull/2355))
+
 ## 5.6.5
 
 ### @navikt/ds-react
