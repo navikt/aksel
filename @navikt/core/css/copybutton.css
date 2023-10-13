@@ -175,7 +175,7 @@
 }
 
 .navds-copybutton--small > .navds-copybutton__content {
-  gap: 0.375rem;
+  gap: var(--a-spacing-1-5);
 }
 
 .navds-copybutton--xsmall > .navds-copybutton__content {
