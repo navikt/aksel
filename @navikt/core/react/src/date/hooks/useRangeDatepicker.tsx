@@ -120,15 +120,15 @@ const fromValidation = (day: Date, opt?: UseRangeDatepickerOptions) => {
       isInvalid: !isValidDate(day),
       isWeekend: opt?.disableWeekends && isWeekend(day),
       isDisabled: opt?.disabled && isMatch(day, opt.disabled),
-      isBefore: isBefore,
-      isAfter: isAfter,
+      isBefore,
+      isAfter,
     };
   }
   if (isBefore || isAfter) {
     return {
       isValidDate: false,
-      isBefore: isBefore,
-      isAfter: isAfter,
+      isBefore,
+      isAfter,
     };
   }
 };
@@ -534,7 +534,7 @@ export const useRangeDatepicker = (
   };
 
   const datepickerProps = {
-    month: month,
+    month,
     onMonthChange: (month) => setMonth(month),
     onSelect: handleSelect,
     selected: selectedRange,

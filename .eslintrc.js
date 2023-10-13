@@ -24,12 +24,14 @@ module.exports = {
       "error",
       { propElementValues: "always" },
     ],
-    // TODO add: "object-shorthand": "error",
+    "array-callback-return": "error",
+    "object-shorthand": "error",
     // TODO: Consider adding the rule "id-length"
     // Temporary:
     "react/prop-types": "off",
     "react/display-name": "off",
     "import/no-named-as-default": "off",
+    // "import/no-cycle": [1],
   },
   reportUnusedDisableDirectives: true,
   overrides: [
@@ -89,5 +91,6 @@ module.exports = {
     "cjs",
     "dist",
     "**/codemod/**/*.js",
+    "!.storybook",
   ],
 };

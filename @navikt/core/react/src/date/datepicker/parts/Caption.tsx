@@ -1,8 +1,10 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
-import { Button, Label } from "../../..";
+
 import WeekRow from "./WeekRow";
+import { Button } from "../../../button";
+import { Label } from "../../../typography";
 
 /**
  * https://github.com/gpbl/react-day-picker/tree/main/src/components/Caption

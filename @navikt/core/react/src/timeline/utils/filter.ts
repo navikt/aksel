@@ -1,5 +1,5 @@
 import { differenceInDays } from "date-fns";
-import { PeriodProps } from "../period";
+import { PeriodProps } from "../period/types";
 import { Spatial } from "./types.internal";
 
 export interface Positioned {

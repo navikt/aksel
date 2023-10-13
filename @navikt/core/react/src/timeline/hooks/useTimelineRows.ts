@@ -38,11 +38,11 @@ const spatialPeriod = (
 
   return {
     id: `r-${rowIndex}-p-${i}`,
-    start: start,
-    endInclusive: endInclusive,
-    horizontalPosition: horizontalPosition,
-    direction: direction,
-    width: width,
+    start,
+    endInclusive,
+    horizontalPosition,
+    direction,
+    width,
     end: endInclusive,
     status: period.status,
     onSelectPeriod: period.onSelectPeriod,
@@ -87,9 +87,9 @@ const trimmedPeriods = (period: PositionedPeriod) => {
 
   return {
     ...period,
-    width: width,
-    horizontalPosition: horizontalPosition,
-    cropped: cropped,
+    width,
+    horizontalPosition,
+    cropped,
   };
 };
 

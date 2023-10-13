@@ -199,10 +199,10 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         value={{
           startDate: startDate ?? start,
           endDate: endDate ?? endInclusive,
-          direction: direction,
+          direction,
           setStart: (d) => handleZoomChange(d),
           setEndInclusive: (d) => setEndInclusive(d),
-          activeRow: activeRow,
+          activeRow,
           setActiveRow: (key) => handleActiveRowChange(key),
           initiate: (i) => setActiveRow(i),
           addFocusable,

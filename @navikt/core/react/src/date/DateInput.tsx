@@ -1,10 +1,11 @@
 import { CalendarIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import { BodyShort, ErrorMessage, Label, omit } from "..";
 import { FormFieldProps, useFormField } from "../form/useFormField";
 import { useDateInputContext } from "./context";
 import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
+import { BodyShort, ErrorMessage, Label } from "../typography";
+import { omit } from "../util";
 
 export interface DateInputProps
   extends FormFieldProps,
@@ -115,7 +116,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
             "navds-body-short",
             `navds-body-short--${size}`
           )}
-          size={14}
+          size={isDatepickerVariant ? 10 : 14}
         />
         <button
           disabled={inputProps.disabled || readOnly}

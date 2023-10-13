@@ -20,7 +20,7 @@ import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
-import { PeriodProps } from "./index";
+import { PeriodProps } from "./types";
 
 interface TimelineClickablePeriodProps extends PeriodProps {
   onSelectPeriod?: (
@@ -61,7 +61,7 @@ const ClickablePeriod = React.memo(
       floatingStyles,
     } = useFloating({
       placement: "top",
-      open: open,
+      open,
       onOpenChange: (_open) => setOpen(_open),
       whileElementsMounted: autoUpdate,
       middleware: [

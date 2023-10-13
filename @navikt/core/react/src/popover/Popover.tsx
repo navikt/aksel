@@ -14,14 +14,13 @@ import React, {
   HTMLAttributes,
   forwardRef,
   useCallback,
+  useContext,
   useMemo,
   useRef,
-  useContext,
 } from "react";
-import { mergeRefs } from "..";
-import { useClientLayoutEffect, useEventListener } from "../util";
-import PopoverContent, { PopoverContentType } from "./PopoverContent";
 import { ModalContext } from "../modal/ModalContext";
+import { mergeRefs, useClientLayoutEffect, useEventListener } from "../util";
+import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -79,6 +78,11 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   bubbleEscape?: boolean;
+  /**
+   * Changes placement of the floating element in order to keep it in view.
+   * @default true
+   */
+  flip?: boolean;
 }
 
 interface PopoverComponent
@@ -121,6 +125,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       offset,
       strategy: userStrategy,
       bubbleEscape = false,
+      flip: _flip = true,
       ...rest
     },
     ref
@@ -141,11 +146,11 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     } = useFloating({
       strategy: chosenStrategy,
       placement,
-      open: open,
+      open,
       onOpenChange: () => onClose(),
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
-        flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        _flip && flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         shift({ padding: 12 }),
         flArrow({ element: arrowRef, padding: 8 }),
       ],

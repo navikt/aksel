@@ -5,9 +5,11 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { BodyShort, Loader, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
+import { Loader } from "../loader";
+import { BodyShort } from "../typography";
+import { omit } from "../util";
 
 const SelectedIcon = () => (
   <svg

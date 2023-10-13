@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
-import { Heading, BodyShort } from "../..";
+import { Heading, BodyShort } from "../../typography";
 import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
 import { useId } from "../../util";
 

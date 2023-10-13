@@ -1,5 +1,33 @@
 # @navikt/aksel-icons
 
+## 5.7.0
+
+### Minor Changes
+
+- Ikoner: Nye ikoner `ChevronLeftFirstCircle` og `ChevronRightLastCircle` ([#2365](https://github.com/navikt/aksel/pull/2365))
+
+## 5.6.5
+
+## 5.6.4
+
+## 5.6.3
+
+## 5.6.2
+
+## 5.6.1
+
+## 5.6.0
+
+### Minor Changes
+
+- Ikoner: SVG export setter nå `height="1em"`, `width="1em"` og `fill="currentColor"`. ([#2300](https://github.com/navikt/aksel/pull/2300))
+
+- Ikoner: Nye ikoner `book` og `books` ([#2313](https://github.com/navikt/aksel/pull/2313))
+
+### Patch Changes
+
+- Ikoner: Nye ikoner `ClipboardCheckmark` og `ClipboardLink` ([#2307](https://github.com/navikt/aksel/pull/2307))
+
 ## 5.5.0
 
 ## 5.4.1

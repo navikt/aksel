@@ -1,45 +1,10 @@
 import cl from "clsx";
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
-import { FormFieldProps } from "../useFormField";
-import useCheckbox from "./useCheckbox";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
-
-export interface CheckboxProps
-  extends FormFieldProps,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
-  /**
-   * Adds error indication on checkbox
-   * @default false
-   */
-  error?: boolean;
-  /**
-   * Id for error resulting in checkbox having error
-   */
-  errorId?: string;
-  /**
-   * Checkbox label
-   */
-  children: React.ReactNode;
-  /**
-   * Hides label and makes it viewable for screen-readers only.
-   */
-  hideLabel?: boolean;
-  /**
-   * The value of the HTML element.
-   */
-  value?: any;
-  /**
-   * Specify whether the Checkbox is in an indeterminate state
-   * @default false
-   */
-  indeterminate?: boolean;
-  /**
-   * Adds a description to extend labling of Checkbox
-   */
-  description?: string;
-}
+import { CheckboxProps } from "./types";
+import useCheckbox from "./useCheckbox";
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {

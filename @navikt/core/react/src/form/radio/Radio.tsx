@@ -1,26 +1,9 @@
 import cl from "clsx";
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
-import { FormFieldProps } from "../useFormField";
+import { RadioProps } from "./types";
 import { useRadio } from "./useRadio";
-
-export interface RadioProps
-  extends Omit<FormFieldProps, "error" | "errorId" | "readOnly">,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
-  /**
-   * Radio label
-   */
-  children: React.ReactNode;
-  /**
-   * The value of the HTML element
-   */
-  value: any;
-  /**
-   * Adds a description to extend labling of Radio
-   */
-  description?: string;
-}
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const { inputProps, size, hasError, readOnly } = useRadio(props);
