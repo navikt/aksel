@@ -27,9 +27,8 @@ import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import { lazy, Suspense } from "react";
-import NotFotfund from "../404";
 import { GetStaticPaths, GetStaticProps } from "next/types";
+import { lazy, Suspense } from "react";
 
 const kodepakker = {
   "ds-react": {
@@ -144,7 +143,7 @@ export const getStaticProps: GetStaticProps = async ({
       id: page?._id ?? "",
       publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
     },
-    notFound: !page && !preview,
+    notFound: (!page || !sidebar) && !preview,
     revalidate: 60,
   };
 };
@@ -156,10 +155,6 @@ const Page = ({
   seo,
   publishDate,
 }: PageProps["props"]) => {
-  if (!page) {
-    return <NotFotfund />;
-  }
-
   const pack = page?.kodepakker?.length > 0 && kodepakker[page?.kodepakker[0]];
 
   const tag =

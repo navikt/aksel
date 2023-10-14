@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async ({
       id: page?._id ?? "",
     },
     revalidate: 60,
-    notFound: false,
+    notFound: (!page || !sidebar) && !preview,
   };
 };
 

@@ -16,11 +16,10 @@ import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
-import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
-import { Suspense, lazy } from "react";
-import NotFotfund from "../404";
+import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticPaths, GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
@@ -87,10 +86,6 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
-  if (!page) {
-    return <NotFotfund />;
-  }
-
   return (
     <>
       <SEO

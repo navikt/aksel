@@ -24,9 +24,9 @@ import { Header } from "components/layout/header/Header";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { SEO } from "components/website-modules/seo/SEO";
+import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
-import { GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps = async ({
       id: page?._id ?? "",
     },
     revalidate: 60,
-    notFound: false,
+    notFound: (!page || !sidebar) && !preview,
   };
 };
 
