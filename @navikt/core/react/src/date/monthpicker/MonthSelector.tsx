@@ -62,9 +62,9 @@ export const MonthSelector = () => {
   return (
     <BodyShort as="table" className="rdp-table">
       <tbody className="rdp-tbody">
-        {tableMonths.map((months, i) => (
+        {tableMonths.map((tableRow, i) => (
           <tr className="rdp-row" key={i}>
-            {months.map((month: Date) => {
+            {tableRow.map((month: Date) => {
               return (
                 <td key={month.toDateString()} className="rdp-cell">
                   <MonthButton
