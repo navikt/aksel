@@ -49,6 +49,7 @@
     "prism-react-renderer": "^2.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-hotjar": "^6.1.0",
     "react-responsive-masonry": "^2.1.7",
     "sanity": "3.16.2",
     "sanity-plugin-asset-source-unsplash": "^1.1.0",
