@@ -59,7 +59,7 @@
 
 .navds-checkbox--small > .navds-checkbox__label,
 .navds-radio--small > .navds-radio__label {
-  padding: var(--a-spacing-1-b) 0;
+  padding: var(--a-spacing-1-alt) 0;
 }
 
 .navds-checkbox--small > .navds-checkbox__label::before,
@@ -101,7 +101,7 @@
   content: "";
   position: absolute;
   top: 50%;
-  transform: translate(var(--a-spacing-1-b), -50%);
+  transform: translate(var(--a-spacing-1-alt), -50%);
   background-color: var(--ac-radio-checkbox-bg, var(--a-surface-default));
   width: 0.75rem;
   height: 0.25rem;
@@ -126,7 +126,7 @@
   color: var(--ac-radio-checkbox-bg, var(--a-surface-default));
   position: absolute;
   height: 1.5rem;
-  transform: translate(var(--a-spacing-1-b));
+  transform: translate(var(--a-spacing-1-alt));
   pointer-events: none;
 }
 
