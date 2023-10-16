@@ -8,8 +8,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useFormField, FormFieldType } from "../../useFormField";
 import { useClientLayoutEffect } from "../../../util";
+import { FormFieldType, useFormField } from "../../useFormField";
 
 interface InputContextType extends FormFieldType {
   clearInput: (event: React.PointerEvent | React.KeyboardEvent) => void;
@@ -63,10 +63,10 @@ export const InputContextProvider = ({ children, value: props }) => {
 
   const onChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.currentTarget.value;
-      externalValue ?? setInternalValue(value);
+      const newValue = event.currentTarget.value;
+      externalValue ?? setInternalValue(newValue);
       externalOnChange?.(event);
-      setSearchTerm(value);
+      setSearchTerm(newValue);
     },
     [externalValue, externalOnChange]
   );

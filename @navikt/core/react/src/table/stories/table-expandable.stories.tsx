@@ -61,7 +61,7 @@ export const ExpandableLarge = () => {
             content={data.content}
             key={data.name}
             open={open}
-            onOpenChange={(open) => setOpen(open)}
+            onOpenChange={setOpen}
           >
             {columns.map(({ key }) => (
               <Table.DataCell key={key}>{data[key]}</Table.DataCell>
@@ -98,7 +98,7 @@ export const ExpandableSmall = () => {
             content={data.content}
             key={data.name}
             open={open}
-            onOpenChange={(open) => setOpen(open)}
+            onOpenChange={setOpen}
           >
             {columns.map(({ key }) => (
               <Table.DataCell key={key}>{data[key]}</Table.DataCell>
@@ -247,16 +247,16 @@ export const ExpandableOpen = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map((data) => (
+        {data.map((row) => (
           <Table.ExpandableRow
-            expansionDisabled={data.animal === "Sel"}
-            content={data.content}
-            key={data.name}
+            expansionDisabled={row.animal === "Sel"}
+            content={row.content}
+            key={row.name}
             togglePlacement="right"
             defaultOpen
           >
             {columns.map(({ key }) => (
-              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              <Table.DataCell key={key}>{row[key]}</Table.DataCell>
             ))}
           </Table.ExpandableRow>
         ))}

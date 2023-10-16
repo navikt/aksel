@@ -1,10 +1,10 @@
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { useId } from "../util";
 import AnimateHeight from "../util/AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
-import { ChevronDownIcon } from "@navikt/aksel-icons";
 
 export interface ExpandableRowProps extends Omit<RowProps, "content"> {
   /**
@@ -76,7 +76,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     const expansionHandler = (e) => {
       onOpenChange?.(!isOpen);
       if (open === undefined) {
-        setInternalOpen((open) => !open);
+        setInternalOpen((oldOpen) => !oldOpen);
       }
       e.stopPropagation();
     };

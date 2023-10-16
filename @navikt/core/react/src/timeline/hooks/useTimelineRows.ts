@@ -101,8 +101,7 @@ export const useTimelineRows = (
 ): InternalSimpleTimeline[] =>
   useMemo(
     () =>
-      rows.map((periods: InternalSimpleTimeline, i: number) => {
-        const rowIndex = i;
+      rows.map((periods: InternalSimpleTimeline, rowIndex: number) => {
         const timelinePeriods = periods.periods
           .sort((a: Period, b: Period) => a.start.valueOf() - b.start.valueOf())
           .map((period: Period & { restProps?: any; ref?: any }, i) => ({
