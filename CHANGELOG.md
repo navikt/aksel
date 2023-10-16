@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.7.1
+
+### @navikt/ds-react
+
+- Radio: readonly håndterer nå hover-state bedre ([#2363](https://github.com/navikt/aksel/pull/2363))
+
+### @navikt/ds-css
+
+- Radio: readonly håndterer nå hover-state bedre ([#2363](https://github.com/navikt/aksel/pull/2363))
+
 ## 5.7.0
 
 ### @navikt/aksel-icons
