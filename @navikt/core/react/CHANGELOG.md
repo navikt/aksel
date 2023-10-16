@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.7.2
+
+### Patch Changes
+
+- MonthPicker: Fikset tastaturnavigasjon ([#2374](https://github.com/navikt/aksel/pull/2374))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.2
+  - @navikt/aksel-icons@5.7.2
+
 ## 5.7.1
 
 ### Patch Changes
