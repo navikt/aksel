@@ -1,6 +1,7 @@
-import React, { createContext, useState } from "react";
-import Toggle, { ToggleProps } from "./Toggle";
+import React, { useState } from "react";
 import Menu, { MenuType } from "./Menu";
+import Toggle, { ToggleProps } from "./Toggle";
+import { DropdownContext } from "./context";
 
 export interface DropdownProps {
   children: React.ReactNode;
@@ -35,16 +36,6 @@ export interface DropdownType extends React.FC<DropdownProps> {
    */
   Menu: MenuType;
 }
-
-export interface DropdownContextType {
-  readonly isOpen: boolean;
-  handleToggle: (v: boolean) => void;
-  readonly anchorEl: Element | null;
-  setAnchorEl: React.Dispatch<React.SetStateAction<Element | null>>;
-  onSelect: (element: React.MouseEvent) => void;
-}
-
-export const DropdownContext = createContext<DropdownContextType | null>(null);
 
 /**
  * A component that displays a dropdown menu when the user clicks on its toggle button.

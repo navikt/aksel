@@ -1,5 +1,5 @@
 import React from "react";
-import type { ModalProps } from "./Modal";
+import type { ModalProps } from "./types";
 
 export function getCloseHandler(
   modalRef: React.RefObject<HTMLDialogElement>,

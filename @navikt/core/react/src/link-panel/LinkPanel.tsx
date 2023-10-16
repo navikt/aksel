@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import { Panel, OverridableComponent } from "..";
 
 import cl from "clsx";
 import { LinkPanelTitle, LinkPanelTitleProps } from "./LinkPanelTitle";
@@ -8,6 +7,8 @@ import {
   LinkPanelDescriptionProps,
 } from "./LinkPanelDescription";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { OverridableComponent } from "../util";
+import { Panel } from "../panel";
 
 export interface LinkPanelProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
