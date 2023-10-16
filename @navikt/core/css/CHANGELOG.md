@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.7.1
+
+### Patch Changes
+
+- Radio: readonly håndterer nå hover-state bedre ([#2363](https://github.com/navikt/aksel/pull/2363))
+
 ## 5.7.0
 
 ### Patch Changes

@@ -5,14 +5,15 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const cdnUrl = "https://cdn.nav.no";
+const hotjarUrl = "https://*.hotjar.com";
 
 const ContentSecurityPolicy = `
   default-src 'self' 'unsafe-inline' ${cdnUrl};
-  font-src 'self' ${cdnUrl} data:;
-  img-src 'self' cdn.sanity.io https://avatars.githubusercontent.com data: ${cdnUrl};
-  script-src 'self' ${cdnUrl} https://in2.taskanalytics.com/tm.js 'nonce-4e1aa203a32e' 'unsafe-eval';
-  style-src 'self' ${cdnUrl} 'unsafe-inline';
-  connect-src 'self' ${cdnUrl} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://in2.taskanalytics.com/03346;
+  font-src 'self' ${cdnUrl} ${hotjarUrl} data:;
+  img-src 'self' cdn.sanity.io https://avatars.githubusercontent.com data: ${cdnUrl} ${hotjarUrl};
+  script-src 'self' ${cdnUrl} ${hotjarUrl} https://in2.taskanalytics.com/tm.js 'nonce-4e1aa203a32e' 'unsafe-eval';
+  style-src 'self' ${cdnUrl} ${hotjarUrl} 'unsafe-inline';
+  connect-src 'self' ${cdnUrl} ${hotjarUrl} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://in2.taskanalytics.com/03346;
   frame-ancestors 'self' localhost:3000;
   media-src 'self' ${cdnUrl} cdn.sanity.io;
   frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.ekstern.dev.nav.no;
@@ -53,7 +54,7 @@ const useCdn = process.env.USE_CDN_ASSETS === "true";
 
 const config = () =>
   withBundleAnalyzer({
-    transpilePackages: ["@navikt/ds-tokens"],
+    transpilePackages: ["@navikt/ds-tokens", "react-hotjar"],
     publicRuntimeConfig: {
       NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
     },
