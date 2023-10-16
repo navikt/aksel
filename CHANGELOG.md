@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.7.2
+
+### @navikt/ds-react
+
+- MonthPicker: Fikset tastaturnavigasjon ([#2374](https://github.com/navikt/aksel/pull/2374))
+
 ## 5.7.1
 
 ### @navikt/ds-react
