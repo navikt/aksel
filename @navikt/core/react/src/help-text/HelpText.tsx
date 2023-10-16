@@ -14,10 +14,6 @@ export interface HelpTextProps
    */
   title?: string;
   /**
-   * Changes visual size of button/icon. Clickable area is kept at 1.5rem
-   */
-  size?: "medium" | "small";
-  /**
    * Default dialog-placement on open
    * @default "top"
    */
@@ -63,7 +59,6 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
       title = "hjelp",
       onClick,
       wrapperClassName,
-      size = "medium",
       ...rest
     },
     ref
@@ -81,11 +76,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
             setOpen((x) => !x);
             onClick?.(e);
           }}
-          className={cl(
-            className,
-            "navds-help-text__button",
-            `navds-help-text__button--${size}`
-          )}
+          className={cl(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
         >
@@ -99,7 +90,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           anchorEl={buttonRef.current}
           placement={placement}
           strategy={strategy}
-          offset={size === "small" ? 12 : undefined}
+          offset={12}
         >
           <Popover.Content className="navds-body-short">
             {children}

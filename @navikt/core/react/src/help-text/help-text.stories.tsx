@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { BodyLong, HStack, Heading, HelpText, VStack } from "..";
+import { BodyLong, Heading, HelpText } from "..";
 
 export default {
   title: "ds-react/HelpText",
@@ -31,12 +31,6 @@ export default {
       control: {
         type: "radio",
         options: ["fixed", "absolute"],
-      },
-    },
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
       },
     },
   },
@@ -101,23 +95,6 @@ export const WrapperClassName = {
           ab quam ea quas?
         </BodyLong>
       </div>
-    );
-  },
-};
-
-export const Sizes = {
-  render: () => {
-    return (
-      <VStack gap="4">
-        <HStack gap="2">
-          Lorem ipsum
-          <HelpText size="medium">Lorem ipsum dolor sit amet</HelpText>
-        </HStack>
-        <HStack gap="2">
-          Lorem ipsum
-          <HelpText size="small">Lorem ipsum dolor sit amet</HelpText>
-        </HStack>
-      </VStack>
     );
   },
 };
