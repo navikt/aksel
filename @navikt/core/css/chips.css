@@ -160,11 +160,11 @@
 }
 
 .navds-chips--icon-left {
-  padding-left: var(--a-spacing-1-5);
+  padding-left: var(--a-spacing-1-b);
 }
 
 .navds-chips--icon-right {
-  padding-right: var(--a-spacing-1-5);
+  padding-right: var(--a-spacing-1-b);
 }
 
 .navds-chips--small .navds-chips--icon-right {

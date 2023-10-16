@@ -4,7 +4,7 @@ export type SpacingScale =
   | "0"
   | "05"
   | "1"
-  | "1-5"
+  | "1-b"
   | "2"
   | "3"
   | "4"

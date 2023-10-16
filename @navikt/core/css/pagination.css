@@ -52,8 +52,8 @@
 }
 
 .navds-pagination--small .navds-pagination__prev-next:where(.navds-pagination--prev-next--with-text) {
-  padding-left: var(--a-spacing-1-5);
-  padding-right: var(--a-spacing-1-5);
+  padding-left: var(--a-spacing-1-b);
+  padding-right: var(--a-spacing-1-b);
 }
 
 .navds-pagination--xsmall .navds-pagination__prev-next:where(.navds-pagination--prev-next--with-text) {
