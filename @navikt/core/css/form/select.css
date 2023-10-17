@@ -43,6 +43,7 @@
   right: var(--a-spacing-2);
   pointer-events: none;
   align-self: center;
+  color: var(--ac-select-text, var(--a-text-default));
 }
 
 .navds-form-field--small .navds-select__input {
