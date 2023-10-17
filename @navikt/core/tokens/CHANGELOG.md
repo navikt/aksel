@@ -1,5 +1,11 @@
 # @navikt/ds-tokens
 
+## 5.7.3
+
+### Patch Changes
+
+- Ny spacing token på 0.375rem ([#2370](https://github.com/navikt/aksel/pull/2370))
+
 ## 5.7.2
 
 ## 5.7.1
