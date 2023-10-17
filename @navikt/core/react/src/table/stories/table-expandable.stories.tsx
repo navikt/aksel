@@ -19,15 +19,15 @@ export const Expandable = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map((data) => (
+        {data.map((row) => (
           <Table.ExpandableRow
-            expansionDisabled={data.animal === "Sel"}
-            content={data.content}
-            key={data.name}
+            expansionDisabled={row.animal === "Sel"}
+            content={row.content}
+            key={row.name}
             togglePlacement="right"
           >
             {columns.map(({ key }) => (
-              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              <Table.DataCell key={key}>{row[key]}</Table.DataCell>
             ))}
           </Table.ExpandableRow>
         ))}
@@ -49,22 +49,22 @@ export const ExpandableLarge = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.slice(0, 1).map((data) => (
-          <Table.ExpandableRow content={data.content} key={data.name}>
+        {data.slice(0, 1).map((row) => (
+          <Table.ExpandableRow content={row.content} key={row.name}>
             {columns.map(({ key }) => (
-              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              <Table.DataCell key={key}>{row[key]}</Table.DataCell>
             ))}
           </Table.ExpandableRow>
         ))}
-        {data.slice(1, 2).map((data) => (
+        {data.slice(1, 2).map((row) => (
           <Table.ExpandableRow
-            content={data.content}
-            key={data.name}
+            content={row.content}
+            key={row.name}
             open={open}
             onOpenChange={setOpen}
           >
             {columns.map(({ key }) => (
-              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              <Table.DataCell key={key}>{row[key]}</Table.DataCell>
             ))}
           </Table.ExpandableRow>
         ))}
@@ -86,22 +86,22 @@ export const ExpandableSmall = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.slice(0, 1).map((data) => (
-          <Table.ExpandableRow content={data.content} key={data.name}>
+        {data.slice(0, 1).map((row) => (
+          <Table.ExpandableRow content={row.content} key={row.name}>
             {columns.map(({ key }) => (
-              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              <Table.DataCell key={key}>{row[key]}</Table.DataCell>
             ))}
           </Table.ExpandableRow>
         ))}
-        {data.slice(1, 2).map((data) => (
+        {data.slice(1, 2).map((row) => (
           <Table.ExpandableRow
-            content={data.content}
-            key={data.name}
+            content={row.content}
+            key={row.name}
             open={open}
             onOpenChange={setOpen}
           >
             {columns.map(({ key }) => (
-              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              <Table.DataCell key={key}>{row[key]}</Table.DataCell>
             ))}
           </Table.ExpandableRow>
         ))}

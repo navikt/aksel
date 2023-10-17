@@ -39,11 +39,7 @@ module.exports = {
       files: ["**/*.ts?(x)"],
       extends: ["plugin:@typescript-eslint/recommended"],
       rules: {
-        "@typescript-eslint/no-shadow": "error",
-        //"no-shadow": ["error", { builtinGlobals: true, hoist: "all" }], // 296
-        //"no-shadow": ["error"], // 59
-        //"no-shadow": ["error", { builtinGlobals: true }], // 286
-        //"no-shadow": ["error", { hoist: "all" }], // 69
+        "@typescript-eslint/no-shadow": ["error", { hoist: "all" }],
         "@typescript-eslint/no-explicit-any": "off", // Temporary
       },
     },

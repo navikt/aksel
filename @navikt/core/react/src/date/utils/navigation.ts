@@ -15,27 +15,27 @@ export const nextEnabled = (
   const currentIndex = currentMonth.getMonth();
 
   if (key === "Home") {
-    const nextEnabled = nextOnRow(
+    const nextDate = nextOnRow(
       currentIndex,
       months,
       yearState,
       disabled,
       "home"
     );
-    if (nextEnabled) {
-      return nextEnabled;
+    if (nextDate) {
+      return nextDate;
     }
   }
   if (key === "End") {
-    const nextEnabled = nextOnRow(
+    const nextDate = nextOnRow(
       currentIndex,
       months,
       yearState,
       disabled,
       "end"
     );
-    if (nextEnabled) {
-      return nextEnabled;
+    if (nextDate) {
+      return nextDate;
     }
   }
   if (key === "PageUp") {

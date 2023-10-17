@@ -34,15 +34,13 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 }
 
-export function withErrorBoundary<Props>(
-  Component: React.ComponentType<Props>,
+export function withErrorBoundary<T>(
+  Component: React.ComponentType<T>,
   boundaryName: string
 ) {
-  return (props: Props): any => {
-    return (
-      <ErrorBoundary boundaryName={boundaryName}>
-        <Component {...props} />
-      </ErrorBoundary>
-    );
-  };
+  return (props: T) => (
+    <ErrorBoundary boundaryName={boundaryName}>
+      <Component {...props} />
+    </ErrorBoundary>
+  );
 }
