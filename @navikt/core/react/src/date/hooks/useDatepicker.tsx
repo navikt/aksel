@@ -164,9 +164,10 @@ export const useDatepicker = (
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
   const handleOpen = useCallback(
-    (open: boolean) => {
-      setOpen(open);
-      open && setMonth(selectedDay ?? defaultSelected ?? defaultMonth ?? today);
+    (openState: boolean) => {
+      setOpen(openState);
+      openState &&
+        setMonth(selectedDay ?? defaultSelected ?? defaultMonth ?? today);
     },
     [defaultMonth, defaultSelected, selectedDay, today]
   );
@@ -310,7 +311,7 @@ export const useDatepicker = (
 
   const datepickerProps = {
     month,
-    onMonthChange: (month) => setMonth(month),
+    onMonthChange: setMonth,
     onDayClick: handleDayClick,
     selected: selectedDay ?? new Date("Invalid date"),
     locale: _locale,

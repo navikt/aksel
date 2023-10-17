@@ -71,11 +71,11 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     const mode = rest.mode ?? ("single" as any);
 
     /**
-     * @param selected Date | Date[] | DateRange | undefined
+     * @param newSelected Date | Date[] | DateRange | undefined
      */
-    const handleSelect = (selected) => {
-      setSelectedDates(selected);
-      onSelect?.(selected);
+    const handleSelect = (newSelected) => {
+      setSelectedDates(newSelected);
+      onSelect?.(newSelected);
     };
 
     return (
