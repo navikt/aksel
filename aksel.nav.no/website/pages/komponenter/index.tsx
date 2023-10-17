@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   logger.info(
     { sidebar: !!sidebar, page: !!page, links: !!links },
-    "getStaticProps in /grunnleggende"
+    "getStaticProps in /komponenter"
   );
 
   return {
