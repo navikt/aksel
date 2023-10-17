@@ -136,7 +136,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className={cl(
               "navds-select__input",
               "navds-body-short",
-              `navds-body--${size ?? "medium"}`
+              `navds-body-short--${size ?? "medium"}`
             )}
             size={htmlSize}
           >
