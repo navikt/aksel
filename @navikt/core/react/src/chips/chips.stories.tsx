@@ -1,24 +1,12 @@
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Chips } from ".";
 
-export default {
+const meta: Meta<typeof Chips> = {
   title: "ds-react/Chips",
   component: Chips,
-  argTypes: {
-    type: {
-      control: {
-        type: "radio",
-        options: ["toggle", "removable"],
-      },
-    },
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    },
-  },
 };
+export default meta;
 
 const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
 
@@ -60,6 +48,16 @@ export const Default = (props) => {
       ))}
     </Chips>
   );
+};
+Default.argTypes = {
+  type: {
+    control: { type: "radio" },
+    options: ["toggle", "removable"],
+  },
+  size: {
+    control: { type: "radio" },
+    options: ["medium", "small"],
+  },
 };
 
 export const Toggle = () => {

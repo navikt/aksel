@@ -1,51 +1,35 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Textarea } from "../index";
-export default {
+
+const meta: Meta<typeof Textarea> = {
   title: "ds-react/Textarea",
   component: Textarea,
-  argTypes: {
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    },
-    description: {
-      type: "string",
-    },
-    error: {
-      type: "string",
-    },
-    hideLabel: {
-      type: "boolean",
-    },
-    disabled: {
-      type: "boolean",
-    },
-    maxRows: {
-      type: "number",
-    },
-    minRows: {
-      type: "number",
-    },
-  },
-} as Meta;
+};
+export default meta;
 
-export const Default = {
+export const Default: StoryObj<typeof Textarea> = {
   render: (props) => {
-    return (
-      <Textarea
-        {...props}
-        maxLength={props?.maxLength ?? 100}
-        label="Ipsum enim quis culpa"
-      />
-    );
+    return <Textarea {...props} />;
   },
 
   args: {
     maxLength: 100,
+    label: "Ipsum enim quis culpa",
     resize: false,
+  },
+
+  argTypes: {
+    size: {
+      control: { type: "radio" },
+      options: ["medium", "small"],
+    },
+    description: { type: "string" },
+    error: { type: "string" },
+    hideLabel: { type: "boolean" },
+    disabled: { type: "boolean" },
+    maxRows: { type: "number" },
+    minRows: { type: "number" },
   },
 };
 
