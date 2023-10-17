@@ -161,9 +161,9 @@ export const useMonthpicker = (
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
   const handleOpen = useCallback(
-    (openState: boolean) => {
-      setOpen(openState);
-      openState &&
+    (newOpen: boolean) => {
+      setOpen(newOpen);
+      newOpen &&
         setYear(selectedMonth ?? defaultSelected ?? defaultYear ?? today);
     },
     [defaultSelected, defaultYear, selectedMonth, today]
