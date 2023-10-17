@@ -1,39 +1,19 @@
-import { Bleed, BodyLong, Box, VStack } from "@navikt/ds-react";
+import { Bleed, BodyLong, Box, HStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <>
-      <VStack gap="2" align="center">
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed marginInline="full">
-              <Box background="surface-success-subtle">
-                <BodyLong>marginInline=&quot;full&quot;</BodyLong>
-              </Box>
-            </Bleed>
+    <Box background="surface-alt-3" padding="5" borderRadius="large">
+      <Box background="surface-subtle" padding="5" borderRadius="medium">
+        <Bleed marginInline="full" asChild>
+          <Box padding="3" className="p" background="surface-alt-3-subtle">
+            <HStack justify="center">
+              <BodyLong>Full</BodyLong>
+            </HStack>
           </Box>
-        </Box>
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed marginInline="full 0">
-              <Box background="surface-success-subtle">
-                <BodyLong>marginInline=&quot;full 0&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
-        </Box>
-        <Box background="surface-alt-1-subtle" padding="10">
-          <Box background="surface-alt-2-subtle" padding="10">
-            <Bleed marginInline="0 full">
-              <Box background="surface-success-subtle">
-                <BodyLong>marginInline=&quot;0 full&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
-        </Box>
-      </VStack>
-    </>
+        </Bleed>
+      </Box>
+    </Box>
   );
 };
 
@@ -47,5 +27,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 3,
+  desc: "Full lar Bleed bryte ut av parent og dekke hele skjermbredden. Dette kan være nyttig for 'Heroes' eller lignende elementer som ønsker å bryte ut av parent-layout",
 };
