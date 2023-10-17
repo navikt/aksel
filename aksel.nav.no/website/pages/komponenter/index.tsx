@@ -24,9 +24,10 @@ import { Header } from "components/layout/header/Header";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { SEO } from "components/website-modules/seo/SEO";
+import { logger } from "logger";
+import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
-import { GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
@@ -46,6 +47,11 @@ export const getStaticProps: GetStaticProps = async ({
   const { sidebar, page, links } = await getClient().fetch(query, {
     type: "komponent_artikkel",
   });
+
+  logger.info(
+    { sidebar: !!sidebar, page: !!page, links: !!links },
+    "getStaticProps in /grunnleggende"
+  );
 
   return {
     props: {
