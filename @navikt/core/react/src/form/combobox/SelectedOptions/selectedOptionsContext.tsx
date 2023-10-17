@@ -7,8 +7,8 @@ import React, {
 } from "react";
 import usePrevious from "../../../util/usePrevious";
 import { useInputContext } from "../Input/inputContext";
-import { ComboboxProps } from "../types";
 import { useCustomOptionsContext } from "../customOptionsContext";
+import { ComboboxProps } from "../types";
 
 type SelectedOptionsContextType = {
   addSelectedOption: (option: string) => void;
@@ -71,8 +71,8 @@ export const SelectedOptionsProvider = ({
         allowNewValues && addCustomOption(option);
         !isMultiSelect && setSelectedOptions([]);
       } else if (isMultiSelect) {
-        setSelectedOptions((prevSelectedOptions) => [
-          ...prevSelectedOptions,
+        setSelectedOptions((oldSelectedOptions) => [
+          ...oldSelectedOptions,
           option,
         ]);
       } else {
@@ -97,8 +97,8 @@ export const SelectedOptionsProvider = ({
       if (isCustomOption) {
         removeCustomOption(option);
       } else {
-        setSelectedOptions((prevSelectedOptions) =>
-          prevSelectedOptions.filter(
+        setSelectedOptions((oldSelectedOptions) =>
+          oldSelectedOptions.filter(
             (selectedOption) => selectedOption !== option
           )
         );

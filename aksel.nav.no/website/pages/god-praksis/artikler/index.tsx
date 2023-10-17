@@ -26,7 +26,7 @@ type PageProps = NextPageT<{
   articles: Array<ArticleT>;
 }>;
 
-export const query = (boundry = "") => {
+const getQuery = (boundry = "") => {
   return `{
     "articles": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)${boundry} {
       _id,
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({
 }: {
   preview?: boolean;
 }): Promise<PageProps> => {
-  const { articles } = await getClient().fetch(query("[0..21]"));
+  const { articles } = await getClient().fetch(getQuery("[0..21]"));
 
   return {
     props: {

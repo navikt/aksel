@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import useSWR from "swr";
-import people from "./people.json";
-import { Table } from "../index";
 import { Loader, Pagination, SortState } from "../..";
+import { Table } from "../index";
+import peopleJson from "./people.json";
 
 export default {
   title: "ds-react/Table",
@@ -44,8 +44,8 @@ const updateData = async (url: string) => {
   );
 
   return {
-    count: people.length,
-    results: people
+    count: peopleJson.length,
+    results: peopleJson
       .slice()
       .sort((a, b) => {
         if (sort) {
