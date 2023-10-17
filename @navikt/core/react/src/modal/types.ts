@@ -1,5 +1,5 @@
 export interface ModalProps
-  extends React.DialogHTMLAttributes<HTMLDialogElement> {
+  extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, "onClick"> {
   /**
    * Content for the header. Alteratively you can use <Modal.Header> instead for more control,
    * but then you have to set `aria-label` or `aria-labelledby` on the modal manually.
@@ -42,6 +42,11 @@ export interface ModalProps
    * Called when the user presses the Esc key, unless `onBeforeClose()` returns `false`.
    */
   onCancel?: React.ReactEventHandler<HTMLDialogElement>;
+  /**
+   * Whether to close when clicking on the backdrop.  *** TODO RULES ***
+   * @default false
+   */
+  closeOnClickOutside?: boolean;
   /**
    * @default fit-content (up to 700px)
    * */

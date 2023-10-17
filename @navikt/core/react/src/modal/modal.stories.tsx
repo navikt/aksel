@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
+import React, { useRef, useState } from "react";
 import { BodyLong, Button, Heading } from "..";
 import Modal from "./Modal";
 
@@ -27,6 +27,7 @@ export const WithUseRef = () => {
           heading: "Title",
           size: "small",
         }}
+        closeOnClickOutside
       >
         <Modal.Body>
           <BodyLong spacing>
@@ -45,6 +46,7 @@ export const WithUseRef = () => {
             onBeforeClose={() =>
               window.confirm("Are you sure you want to close the modal?")
             }
+            closeOnClickOutside
             aria-labelledby="heading123"
           >
             <Modal.Header>
@@ -111,6 +113,7 @@ export const WithUseState = () => {
               e.stopPropagation(); // onClose wil propagate to parent modal if not stopped
               setOpen2(false);
             }}
+            closeOnClickOutside
             aria-label="Nested modal"
             width={800}
           >
