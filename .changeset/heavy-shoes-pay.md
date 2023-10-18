@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Loader: har ny riktig `ref`-type.
+Loader: Har nå riktig `ref`-type.
