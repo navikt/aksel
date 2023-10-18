@@ -5,6 +5,7 @@ import {
   GithubIcon,
   YarnIcon,
 } from "@/components";
+import { amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocumentsTmp } from "@/sanity/interface";
@@ -26,7 +27,6 @@ import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import { amplitude } from "components/website-modules/utils/tracking/useAmplitude";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";

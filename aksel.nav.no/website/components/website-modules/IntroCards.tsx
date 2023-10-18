@@ -1,5 +1,5 @@
+import { amplitudeLogNavigation } from "@/logging";
 import cl from "clsx";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import Link from "next/link";
 
 export const IntroCards = ({

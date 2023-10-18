@@ -1,7 +1,7 @@
 // This is imported to allow the Output File Tracing feature of Next.js to work correctly with the log patcher
 import "next-logger";
 
-import { Html, Head, Main, NextScript } from "next/document";
+import { Head, Html, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
@@ -13,12 +13,6 @@ export default function Document() {
           href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2"
           as="font"
           type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/searchindex.json"
-          as="fetch"
           crossOrigin="anonymous"
         />
       </Head>

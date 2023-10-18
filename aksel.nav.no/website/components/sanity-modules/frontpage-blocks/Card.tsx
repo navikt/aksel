@@ -1,11 +1,11 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { abbrName } from "@/utils";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import { getImage } from "components/website-modules/utils/get-image";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import NextImage from "next/legacy/image";
 import NextLink from "next/link";
 import { Tag } from "./Tag";

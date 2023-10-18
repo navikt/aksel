@@ -1,8 +1,7 @@
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { FeedbackT, HelpfulArticleEnum } from "@/types";
 import { Button, Heading, Label, Textarea } from "@navikt/ds-react";
 import cl from "clsx";
-import { AmplitudeEvents } from "components/website-modules/utils/tracking/events";
-import { amplitude } from "components/website-modules/utils/tracking/useAmplitude";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { IdContext } from "../utils";

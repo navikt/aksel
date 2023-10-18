@@ -1,7 +1,7 @@
+import { amplitudeLogNavigation } from "@/logging";
 import { BodyShort, Heading, Link } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon, SlackIcon } from "components/assets";
 import Logo from "components/assets/Logo";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import dynamic from "next/dynamic";
 /* import FooterForm from "./FooterForm"; */
 

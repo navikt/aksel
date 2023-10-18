@@ -1,8 +1,8 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { InnholdsKortPrinsipperT } from "@/types";
 import { Heading } from "@navikt/ds-react";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import NextLink from "next/link";
 
 const InnholdsKort = ({ node }: { node: InnholdsKortPrinsipperT }) => {

@@ -1,10 +1,7 @@
+import { AmplitudeEvents, amplitude, amplitudeLogNavigation } from "@/logging";
 import { BrailleIcon, DownloadIcon, PackageIcon } from "@navikt/aksel-icons";
 import { Link as DsLink } from "@navikt/ds-react";
-
 import { FigmaIcon, GithubIcon } from "components/assets";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
-import { AmplitudeEvents } from "components/website-modules/utils/tracking/events";
-import { amplitude } from "components/website-modules/utils/tracking/useAmplitude";
 import NextLink from "next/link";
 
 const Divider = () => (

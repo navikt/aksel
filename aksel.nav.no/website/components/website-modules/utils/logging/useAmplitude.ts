@@ -12,12 +12,13 @@ const AMPLITUDE_PUBLIC_API_KEY = "1a9a84a5e557ac9635a250bc27d75030";
 const useAmplitudeInit = () => {
   useEffect(() => {
     const isProdUrl = () => window.location.host === "aksel.nav.no";
-
-    const isExamples = () => window.location.pathname.includes("eksempler/");
+    const isExample = () => window.location.pathname.includes("eksempler/");
     const isPreview = () => !!document.getElementById("exit-preview-id");
 
     const initAmplitude = async () => {
-      if (!isProdUrl()) {
+      if (isExample()) {
+        return;
+      } else if (!isProdUrl()) {
         mockAmplitude();
         return;
       }
@@ -30,7 +31,7 @@ const useAmplitudeInit = () => {
           pageViews: {
             trackHistoryChanges: "pathOnly",
             trackOn: () => {
-              return !isExamples() && !isPreview();
+              return !isPreview();
             },
           },
         },
@@ -44,14 +45,14 @@ const useAmplitudeInit = () => {
  * Allows logging events to console in dev
  */
 function mockAmplitude() {
-  console.log("Mocking amplitude-events\n");
   amplitude = {
     track: (
       eventInput: Types.BaseEvent | string,
-      eventProperties?: Record<string, any>,
-      eventOptions?: Types.EventOptions
+      eventProperties?: Record<string, any>
     ) => {
-      console.log({ eventInput, eventProperties, eventOptions });
+      console.group("Mocked amplitude-event");
+      console.table({ eventName: eventInput, ...eventProperties });
+      console.groupEnd();
       return {
         promise: new Promise<Types.Result>((resolve) =>
           resolve({

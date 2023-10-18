@@ -1,8 +1,8 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { RelatertInnholdT } from "@/types";
 import { NewspaperIcon } from "@navikt/aksel-icons";
 import { Heading, Link } from "@navikt/ds-react";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import NextLink from "next/link";
 
 const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {

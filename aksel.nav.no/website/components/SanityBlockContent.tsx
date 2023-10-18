@@ -1,3 +1,4 @@
+import { amplitudeLogNavigation } from "@/logging";
 import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
 import {
   PortableText,
@@ -9,7 +10,6 @@ import ExpansionCard from "components/sanity-modules/ExpansionCard";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
 import { InlineCode } from "components/website-modules/InlineCode";
 import { KBD } from "components/website-modules/KBD";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import NextLink from "next/link";
 import { Children } from "react";
 import {

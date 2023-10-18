@@ -1,9 +1,9 @@
+import { amplitudeLogNavigation } from "@/logging";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import cl from "clsx";
 import Logo from "components/assets/Logo";
 import { Hamburger } from "components/layout/header/Hamburger";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";

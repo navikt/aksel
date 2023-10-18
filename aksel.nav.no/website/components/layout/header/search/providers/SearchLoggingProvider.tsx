@@ -1,5 +1,4 @@
-import { AmplitudeEvents } from "components/website-modules/utils/tracking/events";
-import { amplitude } from "components/website-modules/utils/tracking/useAmplitude";
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { createContext, useCallback, useContext } from "react";
 import { useSearch } from "../hooks";
 import { SearchContext } from "./SearchProvider";

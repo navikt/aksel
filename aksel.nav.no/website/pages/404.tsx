@@ -1,7 +1,6 @@
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { AkselCubeStatic } from "components/website-modules/cube";
-import { AmplitudeEvents } from "components/website-modules/utils/tracking/events";
-import { amplitude } from "components/website-modules/utils/tracking/useAmplitude";
 import NextLink from "next/link";
 import { useEffect } from "react";
 

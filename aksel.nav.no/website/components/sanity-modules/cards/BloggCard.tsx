@@ -1,9 +1,9 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import { getAuthors } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import NextLink from "next/link";
 
 const BloggCard = ({

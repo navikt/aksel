@@ -1,3 +1,4 @@
+import { amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
@@ -23,7 +24,6 @@ import { Header } from "components/layout/header/Header";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { SEO } from "components/website-modules/seo/SEO";
-import { amplitude } from "components/website-modules/utils/tracking/useAmplitude";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";

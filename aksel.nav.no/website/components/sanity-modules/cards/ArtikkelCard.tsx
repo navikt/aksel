@@ -1,5 +1,6 @@
 import { withErrorBoundary } from "@/error-boundary";
 
+import { amplitudeLogNavigation } from "@/logging";
 import {
   AkselGodPraksisDocT,
   ResolveContributorsSingleT,
@@ -8,7 +9,6 @@ import {
 } from "@/types";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import NextLink from "next/link";
 import { abbrName } from "../..";
 

@@ -1,3 +1,4 @@
+import { amplitudeLogNavigation } from "@/logging";
 import { AkselSidebarT } from "@/types";
 import {
   ChevronDownIcon,
@@ -7,7 +8,6 @@ import {
 } from "@navikt/aksel-icons";
 import { Detail } from "@navikt/ds-react";
 import cl from "clsx";
-import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
