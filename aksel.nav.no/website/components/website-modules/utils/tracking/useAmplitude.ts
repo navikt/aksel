@@ -17,7 +17,7 @@ const useAmplitudeInit = () => {
     const isPreview = () => !!document.getElementById("exit-preview-id");
 
     const initAmplitude = async () => {
-      if (!isProdUrl) {
+      if (!isProdUrl()) {
         mockAmplitude();
         return;
       }
@@ -44,6 +44,7 @@ const useAmplitudeInit = () => {
  * Allows logging events to console in dev
  */
 function mockAmplitude() {
+  console.log("Mocking amplitude-events\n");
   amplitude = {
     track: (
       eventInput: Types.BaseEvent | string,
