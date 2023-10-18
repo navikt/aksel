@@ -3,6 +3,20 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
+    <DemoWrapper>
+      <Bleed marginInline={{ xs: "8", md: "12", lg: "16" }} asChild>
+        <Box padding="3" className="p" background="surface-alt-3-subtle">
+          <HStack justify="center">
+            <BodyLong>xs: 8, md: 12, lg: 16</BodyLong>
+          </HStack>
+        </Box>
+      </Bleed>
+    </DemoWrapper>
+  );
+};
+
+function DemoWrapper({ children }: { children: React.ReactNode }) {
+  return (
     <Box
       background="surface-alt-3"
       paddingBlock="4"
@@ -10,17 +24,11 @@ const Example = () => {
       borderRadius="large"
     >
       <Box background="surface-subtle" padding="4" borderRadius="medium">
-        <Bleed marginInline={{ xs: "8", md: "12", lg: "16" }} asChild>
-          <Box padding="3" className="p" background="surface-alt-3-subtle">
-            <HStack justify="center">
-              <BodyLong>{`marginInline={{ xs: "8", md: "12", lg: "16" }}`}</BodyLong>
-            </HStack>
-          </Box>
-        </Bleed>
+        {children}
       </Box>
     </Box>
   );
-};
+}
 
 export default withDsExample(Example, {
   showBreakpoints: true,
