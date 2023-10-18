@@ -3584,12 +3584,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^13.5.0":
-  version: 13.5.5
-  resolution: "@next/bundle-analyzer@npm:13.5.5"
+"@next/bundle-analyzer@npm:13.4.19":
+  version: 13.4.19
+  resolution: "@next/bundle-analyzer@npm:13.4.19"
   dependencies:
     webpack-bundle-analyzer: 4.7.0
-  checksum: b28f8880bf7867dab53fa6001658d4ba57949febc7a71e1dc45e05f7a55e0c106672662699c930fa5fad534946fed9611f8f60564109feaed0cb2b6e3631c4e4
+  checksum: 562ff4c21ae0b2a8061b7a5faac282319e8d197678138442151ab0de4af5a6e27b0900b5779d24df5758a9da45c5d5445e1ba3a35ea7507288965fa9fdcec53b
   languageName: node
   linkType: hard
 
@@ -3600,12 +3600,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:^12.2.0":
-  version: 12.3.4
-  resolution: "@next/eslint-plugin-next@npm:12.3.4"
+"@next/eslint-plugin-next@npm:13.4.19":
+  version: 13.4.19
+  resolution: "@next/eslint-plugin-next@npm:13.4.19"
   dependencies:
     glob: 7.1.7
-  checksum: e4ae97062f3efe8f70904cf0da296ab501a2924423273352d01b18d8ffff1eb2e9a65c47dd6f9cfa0d696eada272486a3f519b2786918d0a9ab735b93f5ce4b3
+  checksum: d60c136e4a8d156b50d4b248eef9918bbf4bd7da293487cdf1f7bc172b07beeae4a2822798942d2f87999af86c53d871ebea592f3d6099ae23a0746d2abf7c73
   languageName: node
   linkType: hard
 
@@ -18902,7 +18902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-logger@npm:^3.0.2":
+"next-logger@npm:3.0.2":
   version: 3.0.2
   resolution: "next-logger@npm:3.0.2"
   dependencies:
@@ -18914,7 +18914,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-sanity@npm:^5.5.8":
+"next-sanity@npm:5.5.8":
   version: 5.5.8
   resolution: "next-sanity@npm:5.5.8"
   dependencies:
@@ -26485,8 +26485,8 @@ __metadata:
     "@amplitude/analytics-browser": ^2.2.3
     "@axe-core/playwright": ^4.5.2
     "@babel/core": ^7.19.0
-    "@next/bundle-analyzer": ^13.5.0
-    "@next/eslint-plugin-next": ^12.2.0
+    "@next/bundle-analyzer": 13.4.19
+    "@next/eslint-plugin-next": 13.4.19
     "@playwright/test": 1.35.1
     "@portabletext/react": ^3.0.7
     "@sanity/block-tools": ^3.18.0
@@ -26517,8 +26517,8 @@ __metadata:
     json5: 2.2.1
     lodash: ^4.17.21
     next: 13.4.19
-    next-logger: ^3.0.2
-    next-sanity: ^5.5.8
+    next-logger: 3.0.2
+    next-sanity: 5.5.8
     pino: ^8.14.1
     pino-pretty: ^10.0.0
     postcss: ^8.4.31
