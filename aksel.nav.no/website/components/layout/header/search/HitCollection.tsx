@@ -1,9 +1,9 @@
 import { GroupedHitsT, SearchHitT, searchOptions } from "@/types";
 import { Heading } from "@navikt/ds-react";
+import cl from "clsx";
 import { Tag } from "components/sanity-modules/frontpage-blocks/Tag";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Hit } from "./Hit";
-import cl from "clsx";
 
 export function CollectionMapper({
   groups,
@@ -28,7 +28,8 @@ export function CollectionMapper({
           ) => {
             const prev = arr.slice(0, index);
             const total =
-              prev.reduce((prev, cur) => prev + cur[1].length, 0) + startIndex;
+              prev.reduce((prev2, cur) => prev2 + cur[1].length, 0) +
+              startIndex;
 
             return (
               <Collection

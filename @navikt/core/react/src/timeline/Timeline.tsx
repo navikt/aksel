@@ -1,6 +1,8 @@
 import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { AxisLabels } from "./AxisLabels";
+import Pin, { PinType } from "./Pin";
+import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { RowContext } from "./hooks/useRowContext";
 import { TimelineContext } from "./hooks/useTimelineContext";
 import {
@@ -9,11 +11,9 @@ import {
   useTimelineRows,
 } from "./hooks/useTimelineRows";
 import Period, { PeriodType } from "./period";
-import Pin, { PinType } from "./Pin";
-import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { parseRows } from "./utils/timeline";
-import Zoom, { ZoomType } from "./zoom";
 import { AxisLabelTemplates } from "./utils/types.external";
+import Zoom, { ZoomType } from "./zoom";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -187,10 +187,10 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       }
     };
 
-    const addFocusable = (ref: HTMLButtonElement | null, id: number) => {
+    const addFocusable = (btnRef: HTMLButtonElement | null, id: number) => {
       let items = firstFocusabled.current;
       items = items.filter((x) => x.id !== id);
-      items.push({ ref, id });
+      items.push({ ref: btnRef, id });
       firstFocusabled.current = items;
     };
 
@@ -212,8 +212,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           <div className="navds-timeline">
             <AxisLabels templates={axisLabelTemplates} />
 
-            {pins.map((Pin, i) => (
-              <Pin key={`pin-${i}`} />
+            {pins.map((PinChild, i) => (
+              <PinChild key={`pin-${i}`} />
             ))}
 
             {processedRows.map((row, i) => {
@@ -238,7 +238,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
               );
             })}
           </div>
-          {zoomComponent && zoomComponent}
+          {zoomComponent}
         </div>
       </TimelineContext.Provider>
     );

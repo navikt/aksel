@@ -97,17 +97,17 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const mode = rest.mode ?? ("single" as any);
 
     /**
-     * @param selected Date | Date[] | DateRange | undefined
+     * @param newSelected Date | Date[] | DateRange | undefined
      */
-    const handleSelect = (selected) => {
-      setSelectedDates(selected);
+    const handleSelect = (newSelected) => {
+      setSelectedDates(newSelected);
 
       if (rest.mode === "single") {
-        selected && (onClose?.() ?? setOpen(false));
+        newSelected && (onClose?.() ?? setOpen(false));
       } else if (rest.mode === "range") {
-        selected?.from && selected?.to && (onClose?.() ?? setOpen(false));
+        newSelected?.from && newSelected?.to && (onClose?.() ?? setOpen(false));
       }
-      rest?.onSelect?.(selected);
+      rest?.onSelect?.(newSelected);
     };
 
     return (
