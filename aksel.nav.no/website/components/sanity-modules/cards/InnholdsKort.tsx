@@ -1,8 +1,8 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { InnholdsKortPrinsipperT } from "@/types";
-import { logNav } from "@/utils";
 import { Heading } from "@navikt/ds-react";
+import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import NextLink from "next/link";
 
 const InnholdsKort = ({ node }: { node: InnholdsKortPrinsipperT }) => {
@@ -23,9 +23,9 @@ const InnholdsKort = ({ node }: { node: InnholdsKortPrinsipperT }) => {
           href={`/${node?.lenke}`}
           passHref
           onClick={(e) =>
-            logNav(
+            amplitudeLogNavigation(
               "prinsipp-kort",
-              window.location.pathname,
+
               e.currentTarget.getAttribute("href")
             )
           }

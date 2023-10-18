@@ -1,6 +1,6 @@
-import { logNav } from "components/website-modules/utils/amplitude";
-import Link from "next/link";
 import cl from "clsx";
+import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
+import Link from "next/link";
 
 export const IntroCards = ({
   links,
@@ -31,9 +31,8 @@ export const IntroCards = ({
             )}
             prefetch={false}
             onClick={(e) =>
-              logNav(
+              amplitudeLogNavigation(
                 "intro-kort",
-                window.location.pathname,
                 e.currentTarget.getAttribute("href")
               )
             }

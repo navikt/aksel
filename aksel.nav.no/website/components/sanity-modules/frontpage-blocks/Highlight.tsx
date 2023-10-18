@@ -1,9 +1,10 @@
 import { urlFor } from "@/sanity/interface";
-import { getAuthors, logNav } from "@/utils";
+import { getAuthors } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import { getImage } from "components/website-modules/utils/get-image";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
+import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { ArticleT } from "./Card";
@@ -79,9 +80,8 @@ export const Highlight = ({
           <Link
             as={NextLink}
             onClick={(e) =>
-              logNav(
+              amplitudeLogNavigation(
                 "artikkel-kort",
-                window.location.pathname,
                 e.currentTarget.getAttribute("href")
               )
             }

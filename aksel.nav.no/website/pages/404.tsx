@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { AmplitudeEvents, logAmplitudeEvent } from "@/components";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
-import NextLink from "next/link";
 import { AkselCubeStatic } from "components/website-modules/cube";
+import { AmplitudeEvents } from "components/website-modules/utils/tracking/events";
+import { amplitude } from "components/website-modules/utils/tracking/useAmplitude";
+import NextLink from "next/link";
+import { useEffect } from "react";
 
 function Page() {
   useEffect(() => {
-    logAmplitudeEvent(AmplitudeEvents.notfound, {
+    amplitude.track(AmplitudeEvents.notfound, {
       side: window.location.pathname,
     });
   }, []);

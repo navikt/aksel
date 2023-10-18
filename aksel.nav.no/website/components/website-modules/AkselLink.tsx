@@ -1,8 +1,8 @@
 import { withErrorBoundary } from "@/error-boundary";
+import cl from "clsx";
+import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import Link from "next/link";
 import React from "react";
-import cl from "clsx";
-import { logNav } from "@/utils";
 
 const AkselLink = ({
   href,
@@ -26,11 +26,7 @@ const AkselLink = ({
           !inverted,
       })}
       onClick={(e) =>
-        logNav(
-          "link",
-          window.location.pathname,
-          e.currentTarget.getAttribute("href")
-        )
+        amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
       }
     >
       {children}

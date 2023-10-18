@@ -1,10 +1,9 @@
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 
-export * from "./util";
-export * from "./amplitude";
-export * from "./hooks";
 export * from "./contexts";
 export * from "./date-string";
+export * from "./hooks";
+export * from "./util";
 
 export const isNew = (date: string) => {
   const date1 = new Date(date);

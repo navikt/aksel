@@ -3,7 +3,6 @@ import {
   dateStr,
   FigmaIcon,
   GithubIcon,
-  logAmplitudeEvent,
   YarnIcon,
 } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
@@ -27,9 +26,10 @@ import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
+import { amplitude } from "components/website-modules/utils/tracking/useAmplitude";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
-import { GetStaticPaths, GetStaticProps } from "next/types";
 
 const kodepakker = {
   "ds-react": {
@@ -186,7 +186,7 @@ const Page = ({
             href={pack.git}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              logAmplitudeEvent("link", {
+              amplitude.track("link", {
                 kilde: "intro-lenker komponenter",
                 til: "github",
               })
@@ -200,7 +200,7 @@ const Page = ({
             href={`https://yarnpkg.com/package/${pack.title}`}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              logAmplitudeEvent("link", {
+              amplitude.track("link", {
                 kilde: "intro-lenker komponenter",
                 til: "yarn",
               })
@@ -219,7 +219,7 @@ const Page = ({
           href={page.figma_link}
           className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
           onClick={() =>
-            logAmplitudeEvent("link", {
+            amplitude.track("link", {
               kilde: "intro-lenker komponenter",
               til: "figma",
             })
@@ -236,7 +236,7 @@ const Page = ({
             href={pack.changelog}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              logAmplitudeEvent("link", {
+              amplitude.track("link", {
                 kilde: "intro-lenker komponenter",
                 til: "endringslogg",
               })

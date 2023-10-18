@@ -1,12 +1,12 @@
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { Button } from "@navikt/ds-react";
 import cl from "clsx";
 import Logo from "components/assets/Logo";
 import { Hamburger } from "components/layout/header/Hamburger";
+import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { logNav } from "../..";
-import { Button } from "@navikt/ds-react";
-import dynamic from "next/dynamic";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 
 export const GlobalSearch = dynamic(() => import("./search"), {
   loading: () => (
@@ -46,11 +46,7 @@ const LinkElement = ({ name, href, prefetch = undefined }) => {
           }
         )}
         onClick={(e) =>
-          logNav(
-            "header",
-            window.location.pathname,
-            e.currentTarget.getAttribute("href")
-          )
+          amplitudeLogNavigation("header", e.currentTarget.getAttribute("href"))
         }
       >
         {name}
@@ -87,9 +83,8 @@ export const Header = ({
               href="/"
               passHref
               onClick={(e) =>
-                logNav(
+                amplitudeLogNavigation(
                   "header",
-                  window.location.pathname,
                   e.currentTarget.getAttribute("href")
                 )
               }

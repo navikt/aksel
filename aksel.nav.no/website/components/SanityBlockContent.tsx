@@ -9,6 +9,7 @@ import ExpansionCard from "components/sanity-modules/ExpansionCard";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
 import { InlineCode } from "components/website-modules/InlineCode";
 import { KBD } from "components/website-modules/KBD";
+import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import NextLink from "next/link";
 import { Children } from "react";
 import {
@@ -27,7 +28,6 @@ import {
   TokenTable,
   UuFeedback,
   Video,
-  logNav,
 } from ".";
 
 const serializers: Partial<PortableTextReactComponents> = {
@@ -133,11 +133,7 @@ const serializers: Partial<PortableTextReactComponents> = {
           href={href}
           inlineText
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
           {...(href.startsWith("http") &&
           !href.startsWith("https://aksel.nav.no/")
@@ -160,11 +156,7 @@ const serializers: Partial<PortableTextReactComponents> = {
           href={href}
           inlineText
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
         >
           {text}

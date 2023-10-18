@@ -1,9 +1,9 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { urlFor } from "@/sanity/interface";
 import { AkselTemaT } from "@/types";
-import { logNav } from "@/utils";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
+import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 
@@ -33,11 +33,7 @@ const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
         href={`/god-praksis/${node.slug.current}`}
         passHref
         onClick={(e) =>
-          logNav(
-            "card",
-            window.location.pathname,
-            e.currentTarget.getAttribute("href")
-          )
+          amplitudeLogNavigation("card", e.currentTarget.getAttribute("href"))
         }
         className="navds-heading--medium text-deepblue-700 navds-heading  mb-4 underline after:absolute after:inset-0 after:rounded-lg focus:outline-none group-hover:no-underline"
       >

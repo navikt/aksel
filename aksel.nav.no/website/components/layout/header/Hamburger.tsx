@@ -2,10 +2,10 @@ import { MenuHamburgerIcon } from "@navikt/aksel-icons";
 
 import { Modal } from "@navikt/ds-react";
 import cl from "clsx";
+import { amplitudeLogNavigation } from "components/website-modules/utils/tracking/event-tracking";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { logNav } from "../..";
 
 const LinkElement = ({ name, href, onClick }) => {
   const { asPath } = useRouter();
@@ -23,9 +23,8 @@ const LinkElement = ({ name, href, onClick }) => {
           }
         )}
         onClick={(e) => {
-          logNav(
+          amplitudeLogNavigation(
             "header",
-            window.location.pathname,
             e.currentTarget.getAttribute("href")
           );
           onClick();
