@@ -33,13 +33,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       filteredOptions,
       toggleIsListOpen,
       isListOpen,
-      filteredOptionsIndex,
       moveFocusUp,
       moveFocusDown,
       ariaDescribedBy,
       moveFocusToInput,
       moveFocusToEnd,
-      setFilteredOptionsIndex,
       setIsMouseLastUsedInputDevice,
       shouldAutocomplete,
     } = useFilteredOptionsContext();
@@ -50,8 +48,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption, event);
-          if (!isMultiSelect && !selectedOptions.includes(currentOption))
+          if (!isMultiSelect && !selectedOptions.includes(currentOption)) {
             toggleIsListOpen(false);
+          }
         } else if (shouldAutocomplete && selectedOptions.includes(value)) {
           event.preventDefault();
           // Trying to set the same value that is already set, so just clearing the input
@@ -118,7 +117,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (e.key === "ArrowUp") {
           // Check that the FilteredOptions list is open and has virtual focus.
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
-          if (isListOpen && filteredOptionsIndex !== null) {
+          if (isListOpen && activeDecendantId) {
             e.preventDefault();
             moveFocusUp();
           }
@@ -130,7 +129,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         removeSelectedOption,
         moveFocusDown,
         isListOpen,
-        filteredOptionsIndex,
+        activeDecendantId,
         moveFocusUp,
         setIsMouseLastUsedInputDevice,
       ]
@@ -144,13 +143,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (filteredOptions.length === 0) {
           toggleIsListOpen(false);
         }
+        moveFocusToInput();
         onChange(event);
       },
-      [filteredOptions.length, onChange, toggleIsListOpen]
+      [filteredOptions.length, moveFocusToInput, onChange, toggleIsListOpen]
     );
 
     const onBlur = () => {
-      setFilteredOptionsIndex(-1);
+      moveFocusToInput();
     };
 
     return (

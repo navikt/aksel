@@ -18,13 +18,13 @@ const FilteredOptions = () => {
     isLoading,
     isListOpen,
     filteredOptions,
-    filteredOptionsIndex,
     filteredOptionsRef,
     isMouseLastUsedInputDevice,
     setIsMouseLastUsedInputDevice,
     isValueNew,
-    setFilteredOptionsIndex,
+    moveFocusToElement,
     toggleIsListOpen,
+    activeDecendantId,
   } = useFilteredOptionsContext();
   const { isMultiSelect, selectedOptions, toggleOption } =
     useSelectedOptionsContext();
@@ -46,6 +46,7 @@ const FilteredOptions = () => {
           role="option"
           aria-selected={false}
           id={`${id}-is-loading`}
+          data-no-focus="true"
         >
           <Loader aria-label="Søker..." />
         </li>
@@ -54,8 +55,8 @@ const FilteredOptions = () => {
         <li
           tabIndex={-1}
           onMouseMove={() => {
-            if (filteredOptionsIndex !== -1) {
-              setFilteredOptionsIndex(-1);
+            if (activeDecendantId !== `${id}-combobox-new-option`) {
+              moveFocusToElement(`${id}-combobox-new-option`);
               setIsMouseLastUsedInputDevice(true);
             }
           }}
@@ -67,10 +68,11 @@ const FilteredOptions = () => {
           id={`${id}-combobox-new-option`}
           className={cl("navds-combobox__list-item__new-option", {
             "navds-combobox__list-item__new-option--focus":
-              filteredOptionsIndex === -1,
+              activeDecendantId === `${id}-combobox-new-option`,
           })}
           role="option"
           aria-selected={false}
+          data-value={value}
         >
           <PlusIcon aria-hidden />
           <BodyShort size={size}>
@@ -87,14 +89,16 @@ const FilteredOptions = () => {
           role="option"
           aria-selected={false}
           id={`${id}-no-hits`}
+          data-no-focus="true"
         >
           Ingen søketreff
         </li>
       )}
-      {filteredOptions.map((option, index) => (
+      {filteredOptions.map((option) => (
         <li
           className={cl("navds-combobox__list-item", {
-            "navds-combobox__list-item--focus": index === filteredOptionsIndex,
+            "navds-combobox__list-item--focus":
+              activeDecendantId === `${id}-option-${option.replace(" ", "-")}`,
             "navds-combobox__list-item--selected":
               selectedOptions.includes(option),
           })}
@@ -102,8 +106,10 @@ const FilteredOptions = () => {
           key={option}
           tabIndex={-1}
           onMouseMove={() => {
-            if (filteredOptionsIndex !== index) {
-              setFilteredOptionsIndex(index);
+            if (
+              activeDecendantId !== `${id}-option-${option.replace(" ", "-")}`
+            ) {
+              moveFocusToElement(`${id}-option-${option.replace(" ", "-")}`);
               setIsMouseLastUsedInputDevice(true);
             }
           }}
@@ -114,6 +120,7 @@ const FilteredOptions = () => {
           }}
           role="option"
           aria-selected={selectedOptions.includes(option)}
+          data-value={option}
         >
           <BodyShort size={size}>{option}</BodyShort>
           {selectedOptions.includes(option) && <CheckmarkIcon />}
