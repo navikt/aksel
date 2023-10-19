@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Meta, StoryObj } from "@storybook/react";
+import isSameDay from "date-fns/isSameDay";
 import React, { useId, useState } from "react";
 import { useDatepicker, useRangeDatepicker } from "..";
-import { Button, HGrid, VStack } from "../..";
+import { BodyLong, Button, HGrid, Modal, VStack } from "../..";
+
 import DatePicker, { DatePickerProps } from "./DatePicker";
-import isSameDay from "date-fns/isSameDay";
 
 const disabledDays = [
   new Date("Oct 10 2022"),
@@ -430,5 +431,29 @@ export const WeekDayClick = () => {
         disableWeekends
       />
     </VStack>
+  );
+};
+
+export const ModalDemo = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+  });
+
+  return (
+    <Modal open header={{ heading: "Modal-demo" }}>
+      <Modal.Body>
+        <BodyLong>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores nisi
+          incidunt ipsum cupiditate nostrum nesciunt, corrupti nihil at atque
+          animi ab aut. Quam iusto harum eligendi magnam nulla repudiandae
+          molestias.
+        </BodyLong>
+        <DatePicker {...datepickerProps} dropdownCaption>
+          <DatePicker.Input {...inputProps} label="Velg dato" />
+        </DatePicker>
+      </Modal.Body>
+    </Modal>
   );
 };
