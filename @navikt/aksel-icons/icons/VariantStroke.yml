@@ -1,11 +1,10 @@
-name: ChevronRightLastCircleFill
+name: VariantStroke
 category: Arrows
 sub_category: Chevron
 keywords:
   - right
   - høyre
   - side
-  - siste
-variant: Fill
+variant: Stroke
 updated_at: 11.10.2023
 created_at: 11.10.2023
