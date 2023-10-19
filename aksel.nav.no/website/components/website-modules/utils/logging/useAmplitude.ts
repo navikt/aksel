@@ -1,7 +1,23 @@
 import type { Types } from "@amplitude/analytics-browser";
+
 import { useEffect } from "react";
 
-export let amplitude: Partial<Pick<Types.BrowserClient, "init" | "track">>;
+const batchedEvents = [];
+
+export let amplitude: Partial<Pick<Types.BrowserClient, "init" | "track">> = {
+  track: (...eventsData) => {
+    batchedEvents.push(eventsData);
+    return {
+      promise: new Promise<Types.Result>((resolve) =>
+        resolve({
+          event: { event_type: "MockEvent" },
+          code: 200,
+          message: "Success: pre-batched amplitude-tracking",
+        })
+      ),
+    };
+  },
+};
 
 const AMPLITUDE_PUBLIC_API_KEY = "1a9a84a5e557ac9635a250bc27d75030";
 
@@ -24,18 +40,28 @@ const useAmplitudeInit = () => {
       }
 
       amplitude = await import("@amplitude/analytics-browser");
-      amplitude.init(AMPLITUDE_PUBLIC_API_KEY, undefined, {
-        useBatch: true,
-        serverUrl: "https://amplitude.nav.no/collect",
-        defaultTracking: {
-          pageViews: {
-            trackHistoryChanges: "pathOnly",
-            trackOn: () => {
-              return !isPreview();
+      amplitude
+        .init(AMPLITUDE_PUBLIC_API_KEY, undefined, {
+          useBatch: true,
+          serverUrl: "https://amplitude.nav.no/collect",
+          defaultTracking: {
+            pageViews: {
+              trackHistoryChanges: "pathOnly",
+              trackOn: () => {
+                return !isPreview();
+              },
             },
           },
-        },
-      });
+        })
+        .promise.then(() =>
+          batchedEvents
+            .splice(0, batchedEvents.length)
+            .forEach(([event, eventData]) => amplitude.track(event, eventData))
+        )
+        .catch(async () => {
+          const { logger } = await import("logger");
+          logger.error("Failed logging batched events");
+        });
     };
     initAmplitude();
   }, []);
