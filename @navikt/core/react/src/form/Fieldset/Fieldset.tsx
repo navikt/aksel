@@ -1,36 +1,11 @@
 import cl from "clsx";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
-import { BodyShort, ErrorMessage, Label, omit } from "../..";
-import { FormFieldProps } from "../useFormField";
-import { useFieldset } from "./useFieldset";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
+import { omit } from "../../util";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
-
-export type FieldsetContextProps = {
-  /**
-   * Error message applied to element,
-   */
-  error?: React.ReactNode;
-  /**
-   * Overrides internal errorId
-   */
-  errorId: string;
-  /**
-   * Changes paddings, margins and font-sizes
-   */
-  size: "medium" | "small";
-  /**
-   * Sets fieldset and all form-children to disabled
-   */
-  disabled: boolean;
-  /**
-   * Read only-state
-   */
-  readOnly?: boolean;
-};
-
-export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
-  null
-);
+import { FormFieldProps } from "../useFormField";
+import { FieldsetContext } from "./context";
+import { useFieldset } from "./useFieldset";
 
 export interface FieldsetProps
   extends FormFieldProps,

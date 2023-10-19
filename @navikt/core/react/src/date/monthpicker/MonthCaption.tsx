@@ -1,13 +1,14 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
+import { isAfter, isBefore } from "date-fns";
 import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
 import startOfYear from "date-fns/startOfYear";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
-import { Button, Select } from "../..";
+import { Button } from "../../button";
+import { Select } from "../../form/Select";
 import { useSharedMonthContext } from "../context";
 import { labelNextYear, labelPrevYear } from "../utils";
-import { isAfter, isBefore } from "date-fns";
 
 export const MonthCaption = () => {
   const {
@@ -23,9 +24,9 @@ export const MonthCaption = () => {
 
   if (hasDropdown && fromDate && toDate) {
     const fromYear = fromDate.getFullYear();
-    const toYear = toDate.getFullYear();
-    for (let year = fromYear; year <= toYear; year++) {
-      years.push(setYear(startOfYear(new Date()), year));
+    const toDateYear = toDate.getFullYear();
+    for (let currYear = fromYear; currYear <= toDateYear; currYear++) {
+      years.push(setYear(startOfYear(new Date()), currYear));
     }
 
     if (!years.map((x) => x.getFullYear()).includes(year.getFullYear())) {
@@ -74,9 +75,9 @@ export const MonthCaption = () => {
           onChange={handleYearChange}
           className="navds-date__caption__year"
         >
-          {years.map((year) => (
-            <option key={year.getFullYear()} value={year.getFullYear()}>
-              {formatYearCaption(year, { locale })}
+          {years.map((yearOpt) => (
+            <option key={yearOpt.getFullYear()} value={yearOpt.getFullYear()}>
+              {formatYearCaption(yearOpt, { locale })}
             </option>
           ))}
         </Select>

@@ -1,9 +1,9 @@
-import fs from "fs";
-import { JSDOM } from "jsdom";
 import { htmlToBlocks } from "@sanity/block-tools";
 import { Schema } from "@sanity/schema";
-import showdown from "showdown";
 import dotenv from "dotenv";
+import fs from "fs";
+import { JSDOM } from "jsdom";
+import showdown from "showdown";
 
 import { noCdnClient } from "../sanity/interface/client.server";
 
@@ -44,7 +44,7 @@ export async function main() {
     .fields.find((field) => field.name === "body").type;
 
   const blocks = htmlToBlocks(html, blockContentType, {
-    parseHtml: (html) => new JSDOM(html).window.document,
+    parseHtml: (htmlStr) => new JSDOM(htmlStr).window.document,
   });
   blocks.shift();
 

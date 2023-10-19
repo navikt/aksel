@@ -1,6 +1,9 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { Radio, RadioGroup } from "../../index";
+import AccordionContent from "../../accordion/AccordionContent";
+import AccordionHeader from "../../accordion/AccordionHeader";
+import AccordionItem from "../../accordion/AccordionItem";
+import { Accordion, Radio, RadioGroup } from "../../index";
 
 const meta: Meta<typeof Radio> = {
   title: "ds-react/Radio",
@@ -111,6 +114,50 @@ export const UUDemo = () => (
       <Radio value="1">August</Radio>
       <Radio value="2">Juli</Radio>
       <Radio value="3">Juni</Radio>
+    </RadioGroup>
+  </div>
+);
+
+/**
+ * Added to test bug where Radio labels are sometimes omitted from accessibility tree in Chrome when inside of an Accordion.
+ * It was not possible to replicate using a Storybook-test.
+ *
+ * See https://nav-it.slack.com/archives/C7NE7A8UF/p1695723000232659
+ */
+export const TestInsideAccordion = () => (
+  <Accordion>
+    <AccordionItem>
+      <AccordionHeader>Åpne for å velge</AccordionHeader>
+      <AccordionContent>
+        <RadioGroup legend="Velg én">
+          <Radio value="1">Første valg</Radio>
+          <Radio value="2">Andre valg</Radio>
+          <Radio value="3">Tredje valg</Radio>
+        </RadioGroup>
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+);
+
+export const Readonly = () => (
+  <div className="colgap">
+    <RadioGroup
+      legend="Hvilken frukt liker du?"
+      defaultValue={["banan"]}
+      readOnly
+    >
+      <Radio value="banan">Banan</Radio>
+      <Radio value="eple">Eple</Radio>
+      <Radio value="druer">Druer</Radio>
+    </RadioGroup>
+    <RadioGroup
+      legend="Hvilken frukt liker du?"
+      error="feilmelding"
+      defaultValue="eple"
+      readOnly
+    >
+      <Radio value="eple">Eple</Radio>
+      <Radio value="banan">Banan</Radio>
     </RadioGroup>
   </div>
 );

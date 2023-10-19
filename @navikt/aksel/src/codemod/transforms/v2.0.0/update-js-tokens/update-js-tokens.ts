@@ -1,12 +1,12 @@
 import type { JSCodeshift } from "jscodeshift";
+import { tokens } from "../../../tokens-map.mjs";
 import {
   getImportSpecifier,
   getImportSpecifierName,
   renameImportSpecifier,
 } from "../../../utils/imports";
-import { translateToken } from "../../../utils/translate-token";
-import { tokens } from "../../../tokens-map.mjs";
 import { getLineTerminator } from "../../../utils/lineterminator";
+import { translateToken } from "../../../utils/translate-token";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
@@ -29,9 +29,9 @@ export default function transformer(file: JSCodeshift, api) {
     return src;
   }
 
-  tokens.forEach((x) => {
-    const name = translateToken(x[0], "js");
-    const out = translateToken(x[1], "js");
+  tokens.forEach((token) => {
+    const name = translateToken(token[0], "js");
+    const out = translateToken(token[1], "js");
 
     let foundName: string = "";
 

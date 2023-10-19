@@ -217,7 +217,7 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
 
   const componentStyle: CSSProperties = {
     height: currentHeight,
-    overflow: overflow,
+    overflow,
   };
 
   if (useTransitions) {

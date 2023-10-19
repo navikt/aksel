@@ -38,11 +38,11 @@ const spatialPeriod = (
 
   return {
     id: `r-${rowIndex}-p-${i}`,
-    start: start,
-    endInclusive: endInclusive,
-    horizontalPosition: horizontalPosition,
-    direction: direction,
-    width: width,
+    start,
+    endInclusive,
+    horizontalPosition,
+    direction,
+    width,
     end: endInclusive,
     status: period.status,
     onSelectPeriod: period.onSelectPeriod,
@@ -87,9 +87,9 @@ const trimmedPeriods = (period: PositionedPeriod) => {
 
   return {
     ...period,
-    width: width,
-    horizontalPosition: horizontalPosition,
-    cropped: cropped,
+    width,
+    horizontalPosition,
+    cropped,
   };
 };
 
@@ -101,8 +101,7 @@ export const useTimelineRows = (
 ): InternalSimpleTimeline[] =>
   useMemo(
     () =>
-      rows.map((periods: InternalSimpleTimeline, i: number) => {
-        const rowIndex = i;
+      rows.map((periods: InternalSimpleTimeline, rowIndex: number) => {
         const timelinePeriods = periods.periods
           .sort((a: Period, b: Period) => a.start.valueOf() - b.start.valueOf())
           .map((period: Period & { restProps?: any; ref?: any }, i) => ({

@@ -1,10 +1,11 @@
 import React from "react";
 import cl from "clsx";
-import { BodyShort, Label, Loader } from "../../..";
 import { CheckmarkIcon, PlusIcon } from "@navikt/aksel-icons";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { useInputContext } from "../Input/inputContext";
+import { Loader } from "../../../loader";
+import { BodyShort, Label } from "../../../typography";
 
 const FilteredOptions = () => {
   const {

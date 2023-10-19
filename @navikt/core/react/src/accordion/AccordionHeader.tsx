@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { Heading } from "../typography/Heading";
+import { Heading } from "../typography";
 import { AccordionContext } from "./AccordionContext";
 import { AccordionItemContext } from "./AccordionItem";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
@@ -18,7 +18,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     const itemContext = useContext(AccordionItemContext);
     const accordionContext = useContext(AccordionContext);
 
-    if (accordionContext === null || itemContext === null) {
+    if (itemContext === null) {
       console.error(
         "<Accordion.Header> has to be used within an <Accordion.Item>, which in turn must be within an <Accordion>"
       );
@@ -45,7 +45,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
           />
         </div>
         <Heading
-          size={accordionContext.headingSize ?? "small"}
+          size={accordionContext?.headingSize ?? "small"}
           as="span"
           className="navds-accordion__header-content"
         >

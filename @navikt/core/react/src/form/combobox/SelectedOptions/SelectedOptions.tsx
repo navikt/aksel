@@ -1,5 +1,5 @@
 import React from "react";
-import { Chips } from "../../..";
+import { Chips } from "../../../chips";
 import { useSelectedOptionsContext } from "./selectedOptionsContext";
 import { useInputContext } from "../Input/inputContext";
 

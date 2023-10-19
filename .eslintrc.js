@@ -24,12 +24,14 @@ module.exports = {
       "error",
       { propElementValues: "always" },
     ],
-    // TODO add: "object-shorthand": "error",
+    "array-callback-return": "error",
+    "object-shorthand": "error",
     // TODO: Consider adding the rule "id-length"
     // Temporary:
     "react/prop-types": "off",
     "react/display-name": "off",
     "import/no-named-as-default": "off",
+    // "import/no-cycle": [1],
   },
   reportUnusedDisableDirectives: true,
   overrides: [
@@ -37,6 +39,7 @@ module.exports = {
       files: ["**/*.ts?(x)"],
       extends: ["plugin:@typescript-eslint/recommended"],
       rules: {
+        "@typescript-eslint/no-shadow": ["error", { hoist: "all" }], // TODO: Consider { builtinGlobals: true }
         "@typescript-eslint/no-explicit-any": "off", // Temporary
       },
     },
@@ -89,5 +92,6 @@ module.exports = {
     "cjs",
     "dist",
     "**/codemod/**/*.js",
+    "!.storybook",
   ],
 };

@@ -11,7 +11,7 @@
 
 .navds-tag--small {
   min-height: 1.5rem;
-  padding: 0 0.375rem;
+  padding: 0 var(--a-spacing-1-alt);
 }
 
 .navds-tag--xsmall {

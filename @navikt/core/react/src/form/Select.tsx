@@ -1,10 +1,10 @@
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, SelectHTMLAttributes } from "react";
-
-import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { BodyShort, ErrorMessage, Label, omit } from "..";
-import { FormFieldProps, useFormField } from "./useFormField";
+import { BodyShort, ErrorMessage, Label } from "../typography";
+import { omit } from "../util";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
+import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface SelectProps
   extends FormFieldProps,
@@ -136,7 +136,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className={cl(
               "navds-select__input",
               "navds-body-short",
-              `navds-body--${size ?? "medium"}`
+              `navds-body-short--${size ?? "medium"}`
             )}
             size={htmlSize}
           >

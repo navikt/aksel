@@ -4,6 +4,7 @@ export type SpacingScale =
   | "0"
   | "05"
   | "1"
+  | "1-alt"
   | "2"
   | "3"
   | "4"
@@ -57,11 +58,50 @@ export function getResponsiveValue<T = string>(
   );
 }
 
+const translateExceptionToCSS = (exception: string) => {
+  switch (exception) {
+    case "px":
+      return "1px";
+  }
+  return exception;
+};
+
+const translateTokenStringToCSS = (
+  componentProp: string,
+  tokenString: string,
+  tokenSubgroup: string,
+  tokenExceptions: string[],
+  invert: boolean
+) => {
+  return tokenString
+    .split(" ")
+    .map((x, _, arr) => {
+      if (componentProp === "margin-inline" && x === "full") {
+        const width = 100 / arr.length;
+        return `calc((100vw - ${width}%)/-2)`;
+      }
+
+      let output = `var(--a-${tokenSubgroup}-${x})`;
+      if (tokenExceptions.includes(x)) {
+        output = translateExceptionToCSS(x);
+      }
+      if (invert) {
+        if (x === "0") {
+          return `0`;
+        }
+        return `calc(-1 * ${output})`;
+      }
+      return output;
+    })
+    .join(" ");
+};
+
 export function getResponsiveProps<T extends string>(
   componentName: string,
   componentProp: string,
   tokenSubgroup: string,
   responsiveProp?: ResponsiveProp<T>,
+  invert = false,
   tokenExceptions: string[] = []
 ) {
   if (!responsiveProp) {
@@ -70,26 +110,27 @@ export function getResponsiveProps<T extends string>(
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--__ac-${componentName}-${componentProp}-xs`]: responsiveProp
-        .split(" ")
-        .map((x) =>
-          tokenExceptions.includes(x) ? x : `var(--a-${tokenSubgroup}-${x})`
-        )
-        .join(" "),
+      [`--__ac-${componentName}-${componentProp}-xs`]:
+        translateTokenStringToCSS(
+          componentProp,
+          responsiveProp,
+          tokenSubgroup,
+          tokenExceptions,
+          invert
+        ),
     };
   }
 
-  return Object.fromEntries(
-    Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => {
-      return [
-        `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
-        aliasOrScale
-          .split(" ")
-          .map((x) =>
-            tokenExceptions.includes(x) ? x : `var(--a-${tokenSubgroup}-${x})`
-          )
-          .join(" "),
-      ];
-    })
-  );
+  const styleProps = {};
+  Object.entries(responsiveProp).forEach(([breakpointAlias, aliasOrScale]) => {
+    styleProps[`--__ac-${componentName}-${componentProp}-${breakpointAlias}`] =
+      translateTokenStringToCSS(
+        componentProp,
+        aliasOrScale,
+        tokenSubgroup,
+        tokenExceptions,
+        invert
+      );
+  });
+  return styleProps;
 }

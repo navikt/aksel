@@ -1,125 +1,21 @@
 import cl from "clsx";
 import isWeekend from "date-fns/isWeekend";
 import React, { forwardRef, useRef, useState } from "react";
-import {
-  DateRange,
-  DayPicker,
-  DayPickerBase,
-  isMatch,
-  Matcher,
-  SelectMultipleEventHandler,
-  SelectRangeEventHandler,
-  SelectSingleEventHandler,
-} from "react-day-picker";
-import { omit, Popover, useId } from "../..";
-import { DateInputProps, DatePickerInput } from "../DateInput";
+import { DateRange, DayPicker, isMatch } from "react-day-picker";
+import { Popover } from "../../popover";
+import { omit, useId } from "../../util";
+import { DatePickerInput } from "../DateInput";
 import { DateContext } from "../context";
 import { getLocaleFromString, labels } from "../utils";
-import { Caption, DropdownCaption } from "./caption";
-import DatePickerStandalone, {
-  DatePickerStandaloneType,
-} from "./DatePickerStandalone";
-import { DayButton } from "./DayButton";
-import { TableHead } from "./TableHead";
-
-export type ConditionalModeProps =
-  | {
-      mode?: "single";
-      onSelect?: (val?: Date) => void;
-      selected?: Date;
-      defaultSelected?: Date;
-    }
-  | {
-      mode?: "multiple";
-      onSelect?: (val?: Date[]) => void;
-      selected?: Date[];
-      defaultSelected?: Date[];
-      min?: number;
-      max?: number;
-    }
-  | {
-      mode?: "range";
-      onSelect?: (val?: DateRange) => void;
-      selected?: DateRange;
-      defaultSelected?: DateRange;
-      min?: number;
-      max?: number;
-    };
-
-//github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
-export interface DatePickerDefaultProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
-    Pick<DayPickerBase, "month" | "onMonthChange" | "today" | "onDayClick"> {
-  /**
-   * Element datepicker anchors to. Use <DatePicker.Input /> for built-in toggle, or make your own with the open/onClose props
-   */
-  children?: React.ReactNode;
-  /**
-   * Classname for datepicker in popover
-   */
-  className?: string;
-  /**
-   * Classname for wrapper
-   */
-  wrapperClassName?: string;
-  /**
-   * Changes datepicker locale
-   * @default "nb" (norsk bokmål)
-   */
-  locale?: "nb" | "nn" | "en";
-  /**
-   * The earliest day to start navigation.
-   */
-  fromDate?: Date;
-  /**
-   * The latests day to end navigation.
-   */
-  toDate?: Date;
-  /**
-   * Display dropdown for choosing the month and the year. Needs `fromDate` + `toDate` to work.
-   * @default false
-   */
-  dropdownCaption?: boolean;
-  /**
-   * Apply the disabled modifier to the matching days.
-   * https://react-day-picker.js.org/api/types/Matcher
-   */
-  disabled?: Matcher[];
-  /**
-   * Disable saturday and sunday.
-   * @default false
-   */
-  disableWeekends?: boolean;
-  /**
-   * Shows week numbers in left-column. Use with caution, takes up valuable screenspace for small screens.
-   * @default false
-   */
-  showWeekNumber?: boolean;
-  /**
-   * Open state for user-controlled state. Component controlled by default
-   */
-  open?: boolean;
-  /**
-   * onClose callback for user-controlled state
-   */
-  onClose?: () => void;
-  /**
-   * onOpenToggle callback for user-controlled state. Only called if `<DatePicker.Input />` is used
-   */
-  onOpenToggle?: () => void;
-  /**
-   * Avoid using if possible!
-   * Changes what CSS position property to use.
-   * You want to use "fixed" if parent wrapper has position relative, but you want popover to escape
-   * @default See Popover
-   */
-  strategy?: "absolute" | "fixed";
-  /**
-   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
-   * @default false
-   */
-  bubbleEscape?: boolean;
-}
+import DatePickerStandalone from "./DatePickerStandalone";
+import Caption from "./parts/Caption";
+import DayButton from "./parts/DayButton";
+import DropdownCaption from "./parts/DropdownCaption";
+import { HeadRow } from "./parts/HeadRow";
+import Row from "./parts/Row";
+import TableHead from "./parts/TableHead";
+import WeekNumber from "./parts/WeekNumber";
+import { ConditionalModeProps, DatePickerDefaultProps } from "./types";
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
 
@@ -135,14 +31,12 @@ interface DatePickerComponent
    * />
    * ```
    */
-  Standalone: DatePickerStandaloneType;
+  Standalone: typeof DatePickerStandalone;
   /**
    * Custom TextField for DatePicker
    * @see 🏷️ {@link DateInputProps}
    */
-  Input: React.ForwardRefExoticComponent<
-    DateInputProps & React.RefAttributes<HTMLInputElement>
-  >;
+  Input: typeof DatePickerInput;
 }
 
 /**
@@ -186,6 +80,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onOpenToggle,
       strategy,
       bubbleEscape = false,
+      onWeekNumberClick,
       ...rest
     },
     ref
@@ -199,33 +94,20 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       Date | Date[] | DateRange | undefined
     >(defaultSelected);
 
-    const handleSingleSelect: SelectSingleEventHandler = (selectedDay) => {
-      setSelectedDates(selectedDay);
-      selectedDay && (onClose?.() ?? setOpen(false));
-      rest?.onSelect && (rest?.onSelect as (val?: Date) => void)(selectedDay);
-    };
+    const mode = rest.mode ?? ("single" as any);
 
-    const handleMultipleSelect: SelectMultipleEventHandler = (selectedDays) => {
-      setSelectedDates(selectedDays);
-      rest?.onSelect &&
-        (rest?.onSelect as (val?: Date[]) => void)(selectedDays);
-    };
+    /**
+     * @param newSelected Date | Date[] | DateRange | undefined
+     */
+    const handleSelect = (newSelected) => {
+      setSelectedDates(newSelected);
 
-    const handleRangeSelect: SelectRangeEventHandler = (selectedDays) => {
-      setSelectedDates(selectedDays);
-      selectedDays?.from && selectedDays?.to && (onClose?.() ?? setOpen(false));
-      rest?.onSelect &&
-        (rest?.onSelect as (val?: DateRange) => void)(selectedDays);
-    };
-
-    const overrideProps = {
-      mode: rest.mode ?? ("single" as any),
-      onSelect:
-        rest?.mode === "single"
-          ? handleSingleSelect
-          : rest?.mode === "multiple"
-          ? handleMultipleSelect
-          : handleRangeSelect,
+      if (rest.mode === "single") {
+        newSelected && (onClose?.() ?? setOpen(false));
+      } else if (rest.mode === "range") {
+        newSelected?.from && newSelected?.to && (onClose?.() ?? setOpen(false));
+      }
+      rest?.onSelect?.(newSelected);
     };
 
     return (
@@ -259,15 +141,20 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               strategy={strategy}
               className="navds-date__popover"
               bubbleEscape={bubbleEscape}
+              flip={false}
             >
               <DayPicker
                 locale={getLocaleFromString(locale)}
-                {...overrideProps}
+                mode={mode}
+                onSelect={handleSelect}
                 selected={selected ?? selectedDates}
                 components={{
                   Caption: dropdownCaption ? DropdownCaption : Caption,
-                  Day: DayButton,
                   Head: TableHead,
+                  HeadRow,
+                  WeekNumber,
+                  Row,
+                  Day: DayButton,
                 }}
                 className={cl("navds-date", className)}
                 classNames={{
@@ -289,6 +176,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   weekend: "rdp-day__weekend",
                 }}
                 showWeekNumber={showWeekNumber}
+                onWeekNumberClick={
+                  mode === "multiple" ? onWeekNumberClick : undefined
+                }
                 fixedWeeks
                 showOutsideDays
                 {...omit(rest, ["onSelect"])}

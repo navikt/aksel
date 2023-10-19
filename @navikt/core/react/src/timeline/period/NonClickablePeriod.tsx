@@ -1,7 +1,7 @@
+import cl from "clsx";
 import React from "react";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
-import { PeriodProps } from "./index";
-import cl from "clsx";
+import { PeriodProps } from "./types";
 
 interface TimelineNonClickablePeriodProps extends PeriodProps {
   periodRef?: React.ForwardedRef<HTMLDivElement>;
