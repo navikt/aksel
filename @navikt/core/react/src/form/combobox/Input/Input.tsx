@@ -9,6 +9,7 @@ import cl from "clsx";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useInputContext } from "./inputContext";
+import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
@@ -165,7 +166,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onBlur={onBlur}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
-        aria-controls={`${inputProps.id}-filtered-options`}
+        aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}
         aria-expanded={!!isListOpen}
         autoComplete="off"
         aria-autocomplete={shouldAutocomplete ? "both" : "list"}

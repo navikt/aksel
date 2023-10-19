@@ -6,6 +6,7 @@ import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsCon
 import { useInputContext } from "../Input/inputContext";
 import { Loader } from "../../../loader";
 import { BodyShort, Label } from "../../../typography";
+import filteredOptionsUtil from "./filtered-options-util";
 
 const FilteredOptions = () => {
   const {
@@ -36,7 +37,7 @@ const FilteredOptions = () => {
         "navds-combobox__list--closed": !isListOpen,
         "navds-combobox__list--with-hover": isMouseLastUsedInputDevice,
       })}
-      id={`${id}-filtered-options`}
+      id={filteredOptionsUtil.getFilteredOptionsId(id)}
       role="listbox"
       tabIndex={-1}
     >
@@ -45,7 +46,7 @@ const FilteredOptions = () => {
           className="navds-combobox__list-item--loading"
           role="option"
           aria-selected={false}
-          id={`${id}-is-loading`}
+          id={filteredOptionsUtil.getIsLoadingId(id)}
           data-no-focus="true"
         >
           <Loader aria-label="Søker..." />
@@ -55,8 +56,10 @@ const FilteredOptions = () => {
         <li
           tabIndex={-1}
           onMouseMove={() => {
-            if (activeDecendantId !== `${id}-combobox-new-option`) {
-              moveFocusToElement(`${id}-combobox-new-option`);
+            if (
+              activeDecendantId !== filteredOptionsUtil.getAddNewOptionId(id)
+            ) {
+              moveFocusToElement(filteredOptionsUtil.getAddNewOptionId(id));
               setIsMouseLastUsedInputDevice(true);
             }
           }}
@@ -65,10 +68,10 @@ const FilteredOptions = () => {
             if (!isMultiSelect && !selectedOptions.includes(value))
               toggleIsListOpen(false);
           }}
-          id={`${id}-combobox-new-option`}
+          id={filteredOptionsUtil.getAddNewOptionId(id)}
           className={cl("navds-combobox__list-item__new-option", {
             "navds-combobox__list-item__new-option--focus":
-              activeDecendantId === `${id}-combobox-new-option`,
+              activeDecendantId === filteredOptionsUtil.getAddNewOptionId(id),
           })}
           role="option"
           aria-selected={false}
@@ -88,7 +91,7 @@ const FilteredOptions = () => {
           className="navds-combobox__list-item__no-options"
           role="option"
           aria-selected={false}
-          id={`${id}-no-hits`}
+          id={filteredOptionsUtil.getNoHitsId(id)}
           data-no-focus="true"
         >
           Ingen søketreff
@@ -98,18 +101,18 @@ const FilteredOptions = () => {
         <li
           className={cl("navds-combobox__list-item", {
             "navds-combobox__list-item--focus":
-              activeDecendantId === `${id}-option-${option.replace(" ", "-")}`,
+              activeDecendantId === filteredOptionsUtil.getOptionId(id, option),
             "navds-combobox__list-item--selected":
               selectedOptions.includes(option),
           })}
-          id={`${id}-option-${option.replace(" ", "-")}`}
+          id={filteredOptionsUtil.getOptionId(id, option)}
           key={option}
           tabIndex={-1}
           onMouseMove={() => {
             if (
-              activeDecendantId !== `${id}-option-${option.replace(" ", "-")}`
+              activeDecendantId !== filteredOptionsUtil.getOptionId(id, option)
             ) {
-              moveFocusToElement(`${id}-option-${option.replace(" ", "-")}`);
+              moveFocusToElement(filteredOptionsUtil.getOptionId(id, option));
               setIsMouseLastUsedInputDevice(true);
             }
           }}

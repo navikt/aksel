@@ -12,19 +12,9 @@ import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../Input/inputContext";
 import usePrevious from "../../../util/usePrevious";
 import { useClientLayoutEffect } from "../../../util";
+import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus from "./useVirtualFocus";
 
-const normalizeText = (text: string): string =>
-  typeof text === "string" ? `${text}`.toLowerCase().trim() : "";
-
-const isPartOfText = (value, text) =>
-  normalizeText(text).startsWith(normalizeText(value ?? ""));
-
-const isValueInList = (value, list) =>
-  list?.find((listItem) => normalizeText(value) === normalizeText(listItem));
-
-const getMatchingValuesFromList = (value, list) =>
-  list?.filter((listItem) => isPartOfText(value, listItem));
 
 type FilteredOptionsContextType = {
   activeDecendantId?: string;
@@ -77,7 +67,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
       return externalFilteredOptions;
     }
     const opts = [...customOptions, ...options];
-    return getMatchingValuesFromList(searchTerm, opts);
+    return filteredOptionsUtils.getMatchingValuesFromList(searchTerm, opts);
   }, [customOptions, externalFilteredOptions, options, searchTerm]);
 
   const previousSearchTerm = usePrevious(searchTerm);
@@ -88,10 +78,10 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   useClientLayoutEffect(() => {
     if (
       shouldAutocomplete &&
-      normalizeText(searchTerm) !== "" &&
+      filteredOptionsUtils.normalizeText(searchTerm) !== "" &&
       (previousSearchTerm?.length || 0) < searchTerm.length &&
       filteredOptions.length > 0 &&
-      !isValueInList(searchTerm, filteredOptions)
+      !filteredOptionsUtils.isValueInList(searchTerm, filteredOptions)
     ) {
       setValue(
         `${searchTerm}${filteredOptions[0].substring(searchTerm.length)}`
@@ -120,19 +110,21 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   );
 
   const isValueNew = useMemo(
-    () => Boolean(value) && !isValueInList(value, filteredOptions),
+    () =>
+      Boolean(value) &&
+      !filteredOptionsUtils.isValueInList(value, filteredOptions),
     [value, filteredOptions]
   );
 
   const ariaDescribedBy = useMemo(() => {
     let activeOption;
     if (!isLoading && filteredOptions.length === 0) {
-      activeOption = `${id}-no-hits`;
+      activeOption = filteredOptionsUtils.getNoHitsId(id);
     } else if ((value && value !== "") || isLoading) {
       if (shouldAutocomplete && filteredOptions[0]) {
-        activeOption = `${id}-option-${filteredOptions[0].replace(" ", "-")}`;
+        activeOption = filteredOptionsUtils.getOptionId(id, filteredOptions[0]);
       } else if (isListOpen && isLoading) {
-        activeOption = `${id}-is-loading`;
+        activeOption = filteredOptionsUtils.getIsLoadingId(id);
       }
     }
     return cl(activeOption, partialAriaDescribedBy) || undefined;
