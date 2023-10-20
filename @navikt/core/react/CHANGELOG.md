@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.7.6
+
+### Patch Changes
+
+- :lipstick: Chips.Toggle: Ikon i uvalgt tilstand ([#2395](https://github.com/navikt/aksel/pull/2395))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.6
+  - @navikt/aksel-icons@5.7.6
+
 ## 5.7.5
 
 ### Patch Changes
