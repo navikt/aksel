@@ -1,5 +1,9 @@
 # @navikt/ds-tokens
 
+## 5.7.5
+
+## 5.7.4
+
 ## 5.7.3
 
 ### Patch Changes

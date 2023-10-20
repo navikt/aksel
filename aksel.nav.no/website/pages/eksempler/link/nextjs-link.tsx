@@ -1,15 +1,12 @@
-import { BodyLong, Link } from "@navikt/ds-react";
+import { Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
+import NextLink from "next/link";
 
 const Example = () => {
   return (
-    <BodyLong>
-      Officia incididunt{" "}
-      <Link href="#" underline={false}>
-        lenke til ny side
-      </Link>{" "}
-      occaecat commodo id ad aliquip.
-    </BodyLong>
+    <Link href="#" as={NextLink}>
+      Lenke til ny side
+    </Link>
   );
 };
 
@@ -21,5 +18,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 5,
 };
