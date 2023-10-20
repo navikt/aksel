@@ -4,7 +4,6 @@ import React, {
   createContext,
   useContext,
   useCallback,
-  useRef,
   SetStateAction,
 } from "react";
 import cl from "clsx";
@@ -15,12 +14,13 @@ import { useClientLayoutEffect } from "../../../util";
 import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus from "./useVirtualFocus";
 
-
 type FilteredOptionsContextType = {
   activeDecendantId?: string;
   allowNewValues?: boolean;
   ariaDescribedBy?: string;
-  filteredOptionsRef: React.RefObject<HTMLUListElement>;
+  filteredOptionsRef: React.Dispatch<
+    React.SetStateAction<HTMLUListElement | null>
+  >;
   isListOpen: boolean;
   isLoading?: boolean;
   filteredOptions: string[];
@@ -48,8 +48,9 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     isLoading,
     options,
   } = props;
-  const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
-  const virtualFocus = useVirtualFocus(filteredOptionsRef.current);
+  const [filteredOptionsRef, setFilteredOptionsRef] =
+    useState<HTMLUListElement | null>(null);
+  const virtualFocus = useVirtualFocus(filteredOptionsRef);
   const {
     inputProps: { "aria-describedby": partialAriaDescribedBy, id },
     value,
@@ -183,7 +184,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const filteredOptionsState = {
     activeDecendantId,
     allowNewValues,
-    filteredOptionsRef,
+    filteredOptionsRef: setFilteredOptionsRef,
     shouldAutocomplete,
     isListOpen,
     isLoading,
