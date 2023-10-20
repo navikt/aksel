@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.7.5
+
+### @navikt/ds-css
+
+- Checkbox, Radio: Transparent-border fungerer nå bedre på mørkere bakgrunner ([#2388](https://github.com/navikt/aksel/pull/2388))
+
+### @navikt/ds-react
+
+- Loader: Har nå riktig `ref`-type. ([#2391](https://github.com/navikt/aksel/pull/2391))
+
 ## 5.7.4
 
 ### @navikt/ds-react
