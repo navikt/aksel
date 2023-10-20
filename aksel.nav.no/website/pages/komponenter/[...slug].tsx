@@ -27,9 +27,9 @@ import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
-import { GetStaticPaths, GetStaticProps } from "next/types";
 
 const kodepakker = {
   "ds-react": {
@@ -303,7 +303,7 @@ const Page = ({
           />
         )}
         <IntroSeksjon node={page?.intro} internal={internal} />
-        {page?.status?.tag === "ready" && (
+        {page?.status?.tag === "ready" && !page?.hide_feedback && (
           <SuggestionBlock
             variant="komponent"
             reference={`<${page?.heading} />`}

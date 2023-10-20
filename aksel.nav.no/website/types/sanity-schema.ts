@@ -109,6 +109,7 @@ export interface AkselKomponentDocT
     brukes_til: string[];
     brukes_ikke_til?: string[];
   };
+  hide_feedback?: boolean;
   content: any[];
   kodepakker?: string[];
   figma_link?: string;
