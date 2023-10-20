@@ -155,6 +155,7 @@ export type ArticleListT = Array<{
     unsafe?: boolean;
     bilde?: any;
   };
+  sidebarindex?: number;
 }>;
 
 export type LandingPageTypeT<T extends string> = `${T}_landingsside`;
