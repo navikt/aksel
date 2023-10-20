@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.7.5
+
+### Patch Changes
+
+- Loader: Har nå riktig `ref`-type. ([#2391](https://github.com/navikt/aksel/pull/2391))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.5
+  - @navikt/aksel-icons@5.7.5
+
 ## 5.7.4
 
 ### Patch Changes
