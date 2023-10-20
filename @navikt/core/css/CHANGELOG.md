@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.7.5
+
+### Patch Changes
+
+- Checkbox, Radio: Transparent-border fungerer nå bedre på mørkere bakgrunner ([#2388](https://github.com/navikt/aksel/pull/2388))
+
 ## 5.7.4
 
 ## 5.7.3
