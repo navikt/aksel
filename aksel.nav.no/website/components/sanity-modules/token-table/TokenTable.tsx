@@ -1,16 +1,13 @@
 import { withErrorBoundary } from "@/error-boundary";
 import { TokenTableT } from "@/types";
-import { ChevronDownIcon } from "@navikt/aksel-icons";
 import core from "@navikt/ds-css/tokens.json";
-import { BodyLong, Button, CopyButton, Label, Link } from "@navikt/ds-react";
-import cl from "clsx";
+import { Bleed, BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
 import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import NextLink from "next/link";
-import { useState } from "react";
+
+import ShowMore from "./ShowMore";
 
 const TokenTable = ({ node }: { node: TokenTableT }) => {
-  const [open, setOpen] = useState(false);
-
   const tokens: { [key: string]: string } | null =
     node.title in core ? core[node.title] : null;
 
@@ -18,22 +15,15 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
     return null;
   }
 
-  const showMore = Object.keys(tokens).length > 8;
-
   return (
     <div className="mb-7">
-      <div
-        className={cl({
-          "after:to-bg-default relative max-h-80 overflow-y-hidden after:absolute after:inset-0 after:bg-gradient-to-b after:from-transparent after:via-transparent":
-            !open && showMore,
-        })}
-      >
-        <AkselTable th={[{ text: "Token" }, { text: "Fallback" }]}>
-          {Object.entries(tokens).map(([key, val]) => (
-            <AkselTableRow key={key} tr={[{ text: key }, { text: val }]} />
-          ))}
-        </AkselTable>
-        {(open || !showMore) && (
+      <Bleed marginInline="4" marginBlock="4" asChild>
+        <ShowMore as="section" aria-label="Proptabell" scrollBackOnCollapse>
+          <AkselTable th={[{ text: "Token" }, { text: "Fallback" }]}>
+            {Object.entries(tokens).map(([key, val]) => (
+              <AkselTableRow key={key} tr={[{ text: key }, { text: val }]} />
+            ))}
+          </AkselTable>
           <div className="border-border-subtle bg-surface-default relative -mt-9 w-full rounded-b-lg border border-t-0 p-2 pr-14">
             <CopyButton
               copyText={Object.entries(tokens).reduce(
@@ -70,27 +60,8 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
               .
             </BodyLong>
           </div>
-        )}
-      </div>
-      {!open && showMore && (
-        <div className="bg-surface-default mx-auto grid w-fit -translate-y-[80%] place-content-center shadow-[0_0_8px_8px_var(--a-surface-default)]">
-          <Button
-            variant="secondary-neutral"
-            onClick={() => setOpen(true)}
-            className="group"
-            icon={
-              <ChevronDownIcon
-                className="group-hover:translate-y-05 transition-transform"
-                aria-hidden
-                fontSize="1.5rem"
-              />
-            }
-            iconPosition="right"
-          >
-            Vis mer
-          </Button>
-        </div>
-      )}
+        </ShowMore>
+      </Bleed>
     </div>
   );
 };
