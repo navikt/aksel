@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 5.7.4
+
+## 5.7.3
+
+### Patch Changes
+
+- Ny spacing token på 0.375rem ([#2370](https://github.com/navikt/aksel/pull/2370))
+
+- Select: Tokenstøtte for å endre chevronfarge sammen med tekst ([#2383](https://github.com/navikt/aksel/pull/2383))
+
+- HelpText: Knapp er visuelt mindre. Klikkflate er fortsatt 24px ([#2376](https://github.com/navikt/aksel/pull/2376))
+
 ## 5.7.2
 
 ## 5.7.1

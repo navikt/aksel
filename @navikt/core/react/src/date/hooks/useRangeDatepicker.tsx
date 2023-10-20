@@ -1,5 +1,5 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
-import isBefore from "date-fns/isBefore";
+import checkIsBefore from "date-fns/isBefore";
 import isWeekend from "date-fns/isWeekend";
 import React, { useRef, useState } from "react";
 import { DateRange, isMatch } from "react-day-picker";
@@ -382,7 +382,7 @@ export const useRangeDatepicker = (
     const prevToRange =
       !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;
 
-    const resetTo = isBefore(prevToRange, range?.from);
+    const resetTo = checkIsBefore(prevToRange, range?.from);
 
     range?.from
       ? setFromInputValue(
@@ -535,7 +535,7 @@ export const useRangeDatepicker = (
 
   const datepickerProps = {
     month,
-    onMonthChange: (month) => setMonth(month),
+    onMonthChange: setMonth,
     onSelect: handleSelect,
     selected: selectedRange,
     locale: _locale,

@@ -116,7 +116,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           className={cl(
             "navds-text-field__input",
             "navds-body-short",
-            `navds-body-${size ?? "medium"}`
+            `navds-body-short--${size ?? "medium"}`
           )}
           size={htmlSize}
         />

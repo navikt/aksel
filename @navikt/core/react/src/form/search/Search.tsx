@@ -212,7 +212,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
                 `navds-search__input--${variant}`,
                 "navds-text-field__input",
                 "navds-body-short",
-                `navds-body-${size}`
+                `navds-body-short--${size}`
               )}
               {...(htmlSize ? { size: Number(htmlSize) } : {})}
             />

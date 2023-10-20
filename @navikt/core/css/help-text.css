@@ -1,6 +1,5 @@
 .navds-help-text__button {
   margin: 0;
-  padding: 0;
   border: 0;
   cursor: pointer;
   background-color: transparent;
@@ -9,17 +8,19 @@
   justify-content: center;
   align-items: center;
   color: var(--ac-help-text-button-color, var(--a-surface-action));
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  padding: calc(var(--a-spacing-1) / 2);
 }
 
 .navds-help-text__button:focus-visible {
-  box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 4px var(--a-border-focus);
+  outline: none;
+  box-shadow: 0 0 0 1px var(--a-border-focus), inset 0 0 0 1px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-help-text__button:focus {
     outline: none;
-    box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 4px var(--a-border-focus);
+    box-shadow: 0 0 0 1px var(--a-border-focus), inset 0 0 0 1px var(--a-border-focus);
   }
 }
 

@@ -1,7 +1,7 @@
-import React from "react";
-import { Meta } from "@storybook/react";
-import * as tokens from "../dist/tokens.js";
 import { Tooltip } from "@navikt/ds-react";
+import { Meta } from "@storybook/react";
+import React from "react";
+import * as tokens from "../dist/tokens.js";
 
 export default {
   title: "ds-tokens/Spacing",
@@ -14,24 +14,15 @@ export const Spacing = () => {
     {}
   );
 
-  const sortObject = Object.fromEntries(
-    Object.entries(allSpacing).sort((a, b) => {
-      if (a[0].endsWith("05"))
-        return 0.5 - Number(b[0].replace("ASpacing", ""));
-      if (b[0].endsWith("05"))
-        return Number(a[0].replace("ASpacing", "")) - 0.5;
-      return (
-        Number(a[0].replace("ASpacing", "")) -
-        Number(b[0].replace("ASpacing", ""))
-      );
-    })
+  const sorted = Object.entries(allSpacing).sort(
+    (a, b) => Number(a[1].replace("rem", "")) - Number(b[1].replace("rem", ""))
   );
 
   const fontSize = 16;
 
   return (
     <div className="colgap">
-      {Object.entries(sortObject).map(([key, val]) => (
+      {sorted.map(([key, val]) => (
         <div
           key={key}
           style={{
