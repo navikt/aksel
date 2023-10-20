@@ -1,7 +1,7 @@
+import { amplitudeLogNavigation } from "@/logging";
 import { BodyShort, Heading, Link } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon, SlackIcon } from "components/assets";
 import Logo from "components/assets/Logo";
-import { logNav } from "components/website-modules/utils/amplitude";
 import dynamic from "next/dynamic";
 /* import FooterForm from "./FooterForm"; */
 
@@ -119,11 +119,7 @@ function FooterLink({ children, href }) {
         className="text-text-on-inverted focus:shadow-focus focus:text-text-default flex w-fit items-center gap-1 underline hover:no-underline focus:bg-blue-200 focus:shadow-blue-200"
         href={href}
         onClick={(e) =>
-          logNav(
-            "footer",
-            window.location.pathname,
-            e.currentTarget.getAttribute("href")
-          )
+          amplitudeLogNavigation("footer", e.currentTarget.getAttribute("href"))
         }
       >
         {children}

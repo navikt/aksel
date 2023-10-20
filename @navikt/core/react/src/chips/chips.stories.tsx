@@ -1,24 +1,12 @@
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Chips } from ".";
 
-export default {
+const meta: Meta<typeof Chips> = {
   title: "ds-react/Chips",
   component: Chips,
-  argTypes: {
-    type: {
-      control: {
-        type: "radio",
-        options: ["toggle", "removable"],
-      },
-    },
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    },
-  },
 };
+export default meta;
 
 const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
 
@@ -61,12 +49,22 @@ export const Default = (props) => {
     </Chips>
   );
 };
+Default.argTypes = {
+  type: {
+    control: { type: "radio" },
+    options: ["toggle", "removable"],
+  },
+  size: {
+    control: { type: "radio" },
+    options: ["medium", "small"],
+  },
+};
 
-export const Toggle = () => {
+export const Toggle = ({ size }) => {
   const [selected, setSelected] = useState<number[]>([2, 4]);
   return (
     <div className="colgap">
-      <Chips>
+      <Chips size={size}>
         {options.map((c, y) => (
           <Chips.Toggle
             selected={selected.includes(y)}
@@ -83,7 +81,7 @@ export const Toggle = () => {
           </Chips.Toggle>
         ))}
       </Chips>
-      <Chips>
+      <Chips size={size}>
         {options.map((c, y) => (
           <Chips.Toggle
             variant="neutral"
@@ -103,6 +101,12 @@ export const Toggle = () => {
       </Chips>
     </div>
   );
+};
+Toggle.argTypes = {
+  size: {
+    control: { type: "radio" },
+    options: ["medium", "small"],
+  },
 };
 
 export const ToggleNoCheckmark = () => {

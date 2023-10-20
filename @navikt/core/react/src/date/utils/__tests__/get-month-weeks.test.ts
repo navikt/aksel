@@ -1,13 +1,12 @@
 /* https://github.com/gpbl/react-day-picker/blob/main/src/components/Table/utils/getMonthWeeks.test.ts */
-import { nb, enGB } from "date-fns/locale";
+import { enGB, nb } from "date-fns/locale";
 
 import { getMonthWeeks } from "../get-month-weeks";
 
 describe('when using the "nB" locale', () => {
   const locale = nb;
   describe("when getting the weeks for January 2022", () => {
-    const date = new Date(2022, 0);
-    const weeks = getMonthWeeks(date, { locale });
+    const weeks = getMonthWeeks(new Date(2022, 0), { locale });
     test("the first week should be the last of the previous year", () => {
       const weekNumbers = weeks.map((week) => week.weekNumber);
       expect(weekNumbers[0]).toEqual(52);
@@ -29,8 +28,10 @@ describe('when using the "enGB" locale', () => {
   describe("when using fixed weeks", () => {
     const useFixedWeeks = true;
     describe("when getting the weeks for December 2022", () => {
-      const date = new Date(2022, 11);
-      const weeks = getMonthWeeks(date, { useFixedWeeks, locale });
+      const weeks = getMonthWeeks(new Date(2022, 11), {
+        useFixedWeeks,
+        locale,
+      });
       test("should return 48 - 1 week numbers", () => {
         const weekNumbers = weeks.map((week) => week.weekNumber);
         const expectedResult = [48, 49, 50, 51, 52, 1];
@@ -67,8 +68,10 @@ describe('when using the "nb" locale', () => {
   describe("when using fixed weeks", () => {
     const useFixedWeeks = true;
     describe("when getting the weeks for December 2022", () => {
-      const date = new Date(2022, 11);
-      const weeks = getMonthWeeks(date, { useFixedWeeks, locale });
+      const weeks = getMonthWeeks(new Date(2022, 11), {
+        useFixedWeeks,
+        locale,
+      });
       test("should return 48 - 1 week numbers", () => {
         const weekNumbers = weeks.map((week) => week.weekNumber);
         const expectedResult = [48, 49, 50, 51, 52, 1];

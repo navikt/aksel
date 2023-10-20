@@ -1,9 +1,9 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { abbrName } from "@/utils";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import { logNav } from "components/website-modules/utils/amplitude";
 import { getImage } from "components/website-modules/utils/get-image";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextImage from "next/legacy/image";
@@ -112,9 +112,8 @@ const Card = ({
             passHref
             className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
             onClick={(e) =>
-              logNav(
+              amplitudeLogNavigation(
                 "forside-masonary",
-                window.location.pathname,
                 e.currentTarget.getAttribute("href")
               )
             }

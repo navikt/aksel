@@ -90,6 +90,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           anchorEl={buttonRef.current}
           placement={placement}
           strategy={strategy}
+          offset={12}
         >
           <Popover.Content className="navds-body-short">
             {children}

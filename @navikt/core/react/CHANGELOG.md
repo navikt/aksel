@@ -1,5 +1,57 @@
 # @navikt/ds-react
 
+## 5.7.5
+
+### Patch Changes
+
+- Loader: Har nå riktig `ref`-type. ([#2391](https://github.com/navikt/aksel/pull/2391))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.5
+  - @navikt/aksel-icons@5.7.5
+
+## 5.7.4
+
+### Patch Changes
+
+- Datepicker: Fungerer nå bedre i Modal ([#2400](https://github.com/navikt/aksel/pull/2400))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.4
+  - @navikt/aksel-icons@5.7.4
+
+## 5.7.3
+
+### Patch Changes
+
+- Forms: Fikset bug der size='small' ikke oppdaterte typografi. ([#2372](https://github.com/navikt/aksel/pull/2372))
+
+- HelpText: Knapp er visuelt mindre. Klikkflate er fortsatt 24px ([#2376](https://github.com/navikt/aksel/pull/2376))
+
+- Updated dependencies [[`3d3e90760`](https://github.com/navikt/aksel/commit/3d3e9076088c5e72ed89fb97109b75dcf6e09d96)]:
+  - @navikt/ds-tokens@5.7.3
+  - @navikt/aksel-icons@5.7.3
+
+## 5.7.2
+
+### Patch Changes
+
+- MonthPicker: Fikset tastaturnavigasjon ([#2374](https://github.com/navikt/aksel/pull/2374))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.2
+  - @navikt/aksel-icons@5.7.2
+
+## 5.7.1
+
+### Patch Changes
+
+- Radio: readonly håndterer nå hover-state bedre ([#2363](https://github.com/navikt/aksel/pull/2363))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.1
+  - @navikt/aksel-icons@5.7.1
+
 ## 5.7.0
 
 ### Patch Changes

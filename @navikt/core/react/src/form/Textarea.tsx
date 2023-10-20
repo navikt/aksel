@@ -162,7 +162,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             className={cl(
               "navds-textarea__input",
               "navds-body-short",
-              `navds-body-${size ?? "medium"}`,
+              `navds-body-short--${size ?? "medium"}`,
               {
                 "navds-textarea--counter": hasMaxLength,
               }
