@@ -11,45 +11,29 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Aksel: Story = {
-  args: {
-    node: {
-      rows: [
-        {
-          _key: getKey(),
-          cells: ["Tablehead 1", "Tablehead 2", "Tablehead 3"],
-        },
-        {
-          _key: getKey(),
-          cells: ["Cell 1", "Cell 2", "Cell 3"],
-        },
-        {
-          _key: getKey(),
-          cells: ["Cell 1", "Cell 2", "Cell 3"],
-        },
-      ],
-    },
+const args = {
+  node: {
+    rows: [
+      {
+        _key: getKey(),
+        cells: ["Tablehead 1", "Tablehead 2", "Tablehead 3"],
+      },
+      {
+        _key: getKey(),
+        cells: ["Cell 1", "Cell 2", "Cell 3"],
+      },
+      {
+        _key: getKey(),
+        cells: ["Cell 1", "Cell 2", "Cell 3"],
+      },
+    ],
   },
+};
+export const Aksel: Story = {
+  args,
   decorators: [AkselTheme],
 };
 
 export const Designsystem: Story = {
-  args: {
-    node: {
-      rows: [
-        {
-          _key: getKey(),
-          cells: ["Tablehead 1", "Tablehead 2", "Tablehead 3"],
-        },
-        {
-          _key: getKey(),
-          cells: ["Cell 1", "Cell 2", "Cell 3"],
-        },
-        {
-          _key: getKey(),
-          cells: ["Cell 1", "Cell 2", "Cell 3"],
-        },
-      ],
-    },
-  },
+  args,
 };
