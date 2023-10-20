@@ -1,20 +1,4 @@
-import Spacing from "@navikt/ds-tokens/src/spacing.json";
-
-export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
-
-export type SpacingScale = keyof (typeof Spacing)["a"]["spacing"];
-
-export type SpaceDelimitedAttribute<T extends string> =
-  | T
-  | `${T} ${T}`
-  | `${T} ${T} ${T}`
-  | `${T} ${T} ${T} ${T}`;
-
-type FixedResponsiveT<T> = {
-  [Breakpoint in BreakpointsAlias]?: T;
-};
-
-export type ResponsiveProp<T> = T | FixedResponsiveT<T>;
+import { ResponsiveProp } from "./types";
 
 export function getResponsiveValue<T = string>(
   componentName: string,
