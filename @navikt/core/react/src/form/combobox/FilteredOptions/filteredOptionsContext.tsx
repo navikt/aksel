@@ -75,6 +75,20 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] =
     useState(false);
 
+  const filteredOptionsMap = useMemo(
+    () =>
+      options.reduce(
+        (map: Map<string, string>, _option: string) => ({
+          ...map,
+          [filteredOptionsUtils.getOptionId(id, _option)]: _option,
+        }),
+        {
+          [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues && value,
+        }
+      ),
+    [allowNewValues, id, options, value]
+  );
+
   useClientLayoutEffect(() => {
     if (
       shouldAutocomplete &&
@@ -112,8 +126,8 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const isValueNew = useMemo(
     () =>
       Boolean(value) &&
-      !filteredOptionsUtils.isValueInList(value, filteredOptions),
-    [value, filteredOptions]
+      !filteredOptionsMap[filteredOptionsUtils.getOptionId(id, value)],
+    [filteredOptionsMap, id, value]
   );
 
   const ariaDescribedBy = useMemo(() => {
@@ -140,8 +154,9 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
 
   // TODO: Re-write or remove after re-write?
   const currentOption = useMemo(
-    () => virtualFocus.activeElement?.getAttribute("data-value"),
-    [virtualFocus]
+    () =>
+      filteredOptionsMap[virtualFocus.activeElement?.getAttribute("id") || -1],
+    [filteredOptionsMap, virtualFocus]
   );
 
   // TODO: Can be deleted if we move toggleIsListOpen(false) to the event handling in Input.tsx

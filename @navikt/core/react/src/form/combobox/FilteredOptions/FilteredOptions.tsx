@@ -75,7 +75,6 @@ const FilteredOptions = () => {
           })}
           role="option"
           aria-selected={false}
-          data-value={value}
         >
           <PlusIcon aria-hidden />
           <BodyShort size={size}>
@@ -123,7 +122,6 @@ const FilteredOptions = () => {
           }}
           role="option"
           aria-selected={selectedOptions.includes(option)}
-          data-value={option}
         >
           <BodyShort size={size}>{option}</BodyShort>
           {selectedOptions.includes(option) && <CheckmarkIcon />}
