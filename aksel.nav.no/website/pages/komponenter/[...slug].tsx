@@ -5,7 +5,7 @@ import {
   GithubIcon,
   YarnIcon,
 } from "@/components";
-import { amplitude } from "@/logging";
+import { amplitude, AmplitudeEvents } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocumentsTmp } from "@/sanity/interface";
@@ -186,7 +186,7 @@ const Page = ({
             href={pack.git}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              amplitude.track("link", {
+              amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
                 til: "github",
               })
@@ -200,7 +200,7 @@ const Page = ({
             href={`https://yarnpkg.com/package/${pack.title}`}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              amplitude.track("link", {
+              amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
                 til: "yarn",
               })
@@ -219,7 +219,7 @@ const Page = ({
           href={page.figma_link}
           className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
           onClick={() =>
-            amplitude.track("link", {
+            amplitude.track(AmplitudeEvents.link, {
               kilde: "intro-lenker komponenter",
               til: "figma",
             })
@@ -236,7 +236,7 @@ const Page = ({
             href={pack.changelog}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              amplitude.track("link", {
+              amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
                 til: "endringslogg",
               })

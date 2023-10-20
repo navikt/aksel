@@ -77,7 +77,7 @@ function mockAmplitude() {
       eventProperties?: Record<string, any>
     ) => {
       console.group("Mocked amplitude-event");
-      console.table({ eventName: eventInput, ...eventProperties });
+      console.table({ eventInput, ...eventProperties });
       console.groupEnd();
       return {
         promise: new Promise<Types.Result>((resolve) =>
