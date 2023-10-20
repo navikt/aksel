@@ -1,8 +1,10 @@
 import { Meta, StoryFn } from "@storybook/react";
+import setYear from "date-fns/setYear";
 import React, { useId, useState } from "react";
 import { Button, DateInputProps } from "../..";
 import { useMonthpicker } from "../hooks";
-import MonthPicker, { MonthPickerProps } from "./MonthPicker";
+import MonthPicker from "./MonthPicker";
+import { MonthPickerProps } from "./types";
 
 export default {
   title: "ds-react/Monthpicker",
@@ -144,6 +146,31 @@ export const UserControlled = () => {
           Velg måned
         </Button>
       </MonthPicker>
+    </div>
+  );
+};
+
+export const FollowYear = () => {
+  const { monthpickerProps, inputProps, selectedMonth, setSelected } =
+    useMonthpicker({
+      fromDate: new Date("Aug 23 2019"),
+      toDate: new Date("Aug 23 2025"),
+      onMonthChange: console.log,
+    });
+
+  const customYearChange = (yearDate?: Date) => {
+    monthpickerProps.onYearChange?.(yearDate);
+    if (selectedMonth && yearDate) {
+      setSelected(setYear(selectedMonth, yearDate.getFullYear()));
+    }
+  };
+
+  return (
+    <div className="min-h-96">
+      <MonthPicker {...monthpickerProps} onYearChange={customYearChange}>
+        <MonthPicker.Input {...inputProps} label="Velg månede" />
+      </MonthPicker>
+      {selectedMonth && <div className="pt-4">{selectedMonth.getMonth()}</div>}
     </div>
   );
 };
