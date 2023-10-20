@@ -1,6 +1,6 @@
-import React from "react";
-import { Loader } from "..";
 import { Meta } from "@storybook/react";
+import React from "react";
+import { Loader, LoaderProps } from "..";
 export default {
   title: "ds-react/Loader",
   component: Loader,
@@ -29,7 +29,7 @@ export default {
 } as Meta;
 
 export const Default = {
-  render: (props: any) => {
+  render: (props: LoaderProps) => {
     return <Loader {...props} />;
   },
 

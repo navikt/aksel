@@ -31,6 +31,7 @@ module.exports = {
     "react/prop-types": "off",
     "react/display-name": "off",
     "import/no-named-as-default": "off",
+    // "import/no-cycle": [1],
   },
   reportUnusedDisableDirectives: true,
   overrides: [
@@ -38,6 +39,7 @@ module.exports = {
       files: ["**/*.ts?(x)"],
       extends: ["plugin:@typescript-eslint/recommended"],
       rules: {
+        "@typescript-eslint/no-shadow": ["error", { hoist: "all" }], // TODO: Consider { builtinGlobals: true }
         "@typescript-eslint/no-explicit-any": "off", // Temporary
       },
     },

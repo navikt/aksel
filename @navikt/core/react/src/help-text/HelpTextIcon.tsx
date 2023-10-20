@@ -30,7 +30,7 @@ export const HelpTextIcon = ({
         cx="12"
         cy="12"
         r="11"
-        strokeWidth="2"
+        strokeWidth="1.5"
         stroke="currentColor"
         fill={filled ? "currentColor" : "transparent"}
       />

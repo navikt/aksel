@@ -4,7 +4,12 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 
 const Example = () => {
   return (
-    <CopyButton copyText="3.14" icon={<LinkIcon title="Kopier lenke" />} />
+    <CopyButton
+      copyText="https://aksel.nav.no/"
+      text="Kopier lenke"
+      activeText="Lenken er kopiert"
+      icon={<LinkIcon aria-hidden />}
+    />
   );
 };
 
@@ -17,4 +22,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
+  desc: "Icon-propen lar deg bytte ikon i default state",
 };

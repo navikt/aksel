@@ -111,9 +111,9 @@ export function getMigrationNames() {
 export function getMigrationString() {
   let str = "";
 
-  Object.entries(migrations).forEach(([version, migrations]) => {
+  Object.entries(migrations).forEach(([version, vMigrations]) => {
     str += `\n${chalk.underline(version)}\n`;
-    migrations.forEach((migration) => {
+    vMigrations.forEach((migration) => {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });
   });

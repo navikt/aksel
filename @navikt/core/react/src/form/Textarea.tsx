@@ -1,9 +1,10 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
-import { BodyShort, ErrorMessage, Label, omit, useId } from "..";
+import { BodyShort, ErrorMessage, Label } from "../typography";
 import TextareaAutosize from "../util/TextareaAutoSize";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
+import { omit, useId } from "../util";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -161,7 +162,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             className={cl(
               "navds-textarea__input",
               "navds-body-short",
-              `navds-body-${size ?? "medium"}`,
+              `navds-body-short--${size ?? "medium"}`,
               {
                 "navds-textarea--counter": hasMaxLength,
               }

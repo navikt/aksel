@@ -20,20 +20,18 @@ const Example = () => {
     );
   };
 
-  let sortData = data;
+  const comparator = (a, b, orderBy) => {
+    if (b[orderBy] < a[orderBy] || b[orderBy] === undefined) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  };
 
-  sortData = sortData.slice().sort((a, b) => {
+  const sortedData = data.slice().sort((a, b) => {
     if (sort) {
-      const comparator = (a, b, orderBy) => {
-        if (b[orderBy] < a[orderBy] || b[orderBy] === undefined) {
-          return -1;
-        }
-        if (b[orderBy] > a[orderBy]) {
-          return 1;
-        }
-        return 0;
-      };
-
       return sort.direction === "ascending"
         ? comparator(b, a, sort.orderBy)
         : comparator(a, b, sort.orderBy);
@@ -56,7 +54,7 @@ const Example = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {sortData.map(({ name, fnr, start }, i) => {
+          {sortedData.map(({ name, fnr, start }, i) => {
             return (
               <Table.Row key={i + fnr}>
                 <Table.HeaderCell scope="row">{name}</Table.HeaderCell>

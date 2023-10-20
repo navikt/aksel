@@ -4,8 +4,8 @@ import { RootProvider } from "react-day-picker";
 import { SharedMonthProvider } from "../context";
 import { getLocaleFromString } from "../utils";
 import MonthCaption from "./MonthCaption";
-import { MonthPickerProps } from "./MonthPicker";
 import MonthSelector from "./MonthSelector";
+import { MonthPickerProps } from "./types";
 
 export interface MonthPickerStandaloneProps
   extends Omit<

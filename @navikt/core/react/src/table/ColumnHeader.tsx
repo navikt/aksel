@@ -1,11 +1,11 @@
-import React, { forwardRef, useContext } from "react";
-import { TableContext } from "./Table";
-import HeaderCell, { HeaderCellProps } from "./HeaderCell";
 import {
   ArrowDownIcon,
   ArrowUpIcon,
   ArrowsUpDownIcon,
 } from "@navikt/aksel-icons";
+import React, { forwardRef, useContext } from "react";
+import HeaderCell, { HeaderCellProps } from "./HeaderCell";
+import { TableContext } from "./context";
 
 export interface ColumnHeaderProps extends HeaderCellProps {
   /**

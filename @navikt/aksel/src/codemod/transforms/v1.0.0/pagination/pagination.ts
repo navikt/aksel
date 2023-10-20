@@ -13,10 +13,10 @@ export default function transformer(file, api) {
   function addMigrationTag(node) {
     const attributes = node.openingElement.attributes;
     const isMigrated = attributes.find(
-      (node) =>
-        node.type === "JSXAttribute" &&
-        node.name.name === "data-version" &&
-        node.value.value === "v1"
+      (attr) =>
+        attr.type === "JSXAttribute" &&
+        attr.name.name === "data-version" &&
+        attr.value.value === "v1"
     );
 
     if (!isMigrated) {
@@ -30,7 +30,7 @@ export default function transformer(file, api) {
   function addExplicitStandardProp(node) {
     const attributes = node.openingElement.attributes;
     const variant = attributes.find(
-      (node) => node.type === "JSXAttribute" && node.name.name === "size"
+      (attr) => attr.type === "JSXAttribute" && attr.name.name === "size"
     );
 
     if (!variant) {

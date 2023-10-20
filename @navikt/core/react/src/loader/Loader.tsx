@@ -1,8 +1,8 @@
-import React, { forwardRef, SVGProps } from "react";
 import cl from "clsx";
-import { omit, useId } from "..";
+import React, { forwardRef, SVGProps } from "react";
+import { omit, useId } from "../util";
 
-export interface LoaderProps extends SVGProps<SVGSVGElement> {
+export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
   /**
    * Changes Loader width/height
    * 88px | 64px | 40px | 32px | 24px | 20px | 16px
@@ -31,6 +31,12 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
    * @default "neutral"
    */
   variant?: "neutral" | "interaction" | "inverted";
+  /**
+   * Allows getting a ref to the component instance.
+   * Once the component unmounts, React will set `ref.current` to `null` (or call the ref with `null` if you passed a callback ref).
+   * @see https://react.dev/learn/referencing-values-with-refs#refs-and-the-dom
+   */
+  ref?: React.Ref<SVGSVGElement>;
 }
 
 /* Workaround for @types/react v17/v18 feil */

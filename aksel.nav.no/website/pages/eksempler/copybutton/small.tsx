@@ -1,12 +1,12 @@
-import { CopyButton } from "@navikt/ds-react";
+import { CopyButton, HStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="flex items-center gap-2">
+    <HStack gap="3">
       <CopyButton size="small" copyText="3.14" />
       <CopyButton size="small" copyText="3.14" text="Kopier" />
-    </div>
+    </HStack>
   );
 };
 

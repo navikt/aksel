@@ -1,6 +1,6 @@
-import { Show, HGrid } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { HGrid, Show } from "@navikt/ds-react";
 import cl from "clsx";
+import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -22,7 +22,7 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at Show + child-komponent skal fungere må child kunne ta inn 'className' som prop.",
+  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at Show + child-komponent skal fungere må child kunne ta inn 'className' og 'style' som prop.",
 };
 
 const Placeholder = ({

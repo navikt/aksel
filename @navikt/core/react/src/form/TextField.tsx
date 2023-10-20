@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import { BodyShort, ErrorMessage, Label, omit } from "..";
+import { BodyShort, ErrorMessage, Label } from "../typography";
+import { omit } from "../util";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "./useFormField";
 
@@ -115,7 +116,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           className={cl(
             "navds-text-field__input",
             "navds-body-short",
-            `navds-body-${size ?? "medium"}`
+            `navds-body-short--${size ?? "medium"}`
           )}
           size={htmlSize}
         />

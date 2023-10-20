@@ -1,4 +1,4 @@
-import { omit } from "../../..";
+import { omit } from "../../../util";
 import React, {
   useCallback,
   forwardRef,
@@ -188,7 +188,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           inputClassName,
           "navds-combobox__input",
           "navds-body-short",
-          `navds-body-${size}`
+          `navds-body-short--${size}`
         )}
       />
     );

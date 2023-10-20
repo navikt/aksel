@@ -44,20 +44,6 @@ export interface TimelinePeriodProps
   isActive?: boolean;
 }
 
-export interface PeriodProps {
-  start: Date;
-  end: Date;
-  status: string;
-  cropped: string;
-  direction: string;
-  width: number;
-  left: number;
-  icon?: React.ReactNode;
-  children?: React.ReactNode;
-  statusLabel?: string;
-  restProps?: any;
-}
-
 export interface PeriodType
   extends React.ForwardRefExoticComponent<
     TimelinePeriodProps &

@@ -1,7 +1,7 @@
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { ExpansionCardContext } from "./ExpansionCard";
-import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { ExpansionCardContext } from "./context";
 
 export interface ExpansionCardHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
