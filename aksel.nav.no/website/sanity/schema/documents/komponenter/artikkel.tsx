@@ -1,10 +1,11 @@
 import { defineField, defineType } from "sanity";
 import { komponentKategorier } from "../../../config";
+import { devsOnly } from "../../../util";
 import { artikkelPreview } from "../presets/artikkel-preview";
-import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 import { editorField } from "../presets/editors";
 import { groups } from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
+import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 import { SEOFields } from "../presets/seo";
 import { kategoriSlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
@@ -91,6 +92,14 @@ export const KomponentArtikkel = defineType({
       name: "sidebarindex",
       type: "number",
       group: "settings",
+    }),
+    defineField({
+      title: "Ikke vis 'Send innspill'-modul på siden",
+      name: "hide_feedback",
+      type: "boolean",
+      initialValue: false,
+      group: "settings",
+      hidden: devsOnly,
     }),
     defineField({
       name: "intro",

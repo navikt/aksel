@@ -1,10 +1,10 @@
+import { amplitude, AmplitudeEvents } from "@/logging";
 import { allArticleDocuments } from "@/sanity/config";
 import { SearchResultsT } from "@/types";
+import { debounce } from "@navikt/ds-react";
 import { useMemo, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import { createSearchResult, formatResults, fuseSearch } from "../utils";
-import { debounce } from "@navikt/ds-react";
-import { logSearch } from "@/utils";
 
 export const useSearch = () => {
   const [fuseResults, setFuseResults] = useState<SearchResultsT>(null);
@@ -35,7 +35,7 @@ export const useSearch = () => {
           ...createSearchResult(formatedResults, rawResults),
           query: value,
         });
-        logSearch({
+        amplitude.track(AmplitudeEvents.søk, {
           type: "standard",
           searchedFromUrl: window.location.pathname,
           query: value,

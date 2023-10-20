@@ -1,4 +1,4 @@
-import { logSearch } from "@/utils";
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { createContext, useCallback, useContext } from "react";
 import { useSearch } from "../hooks";
 import { SearchContext } from "./SearchProvider";
@@ -32,7 +32,7 @@ export const SearchLoggingProvider = ({
         accuracy: (100 - index / context?.results?.totalHits).toFixed(0),
         topResult: index <= context?.results?.topResults?.length,
       };
-      logSearch(data);
+      amplitude.track(AmplitudeEvents.søk, data);
     },
     [
       query,

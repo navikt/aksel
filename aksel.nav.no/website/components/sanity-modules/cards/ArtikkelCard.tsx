@@ -1,5 +1,6 @@
 import { withErrorBoundary } from "@/error-boundary";
 
+import { amplitudeLogNavigation } from "@/logging";
 import {
   AkselGodPraksisDocT,
   ResolveContributorsSingleT,
@@ -9,7 +10,7 @@ import {
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
-import { abbrName, logNav } from "../..";
+import { abbrName } from "../..";
 
 const ArtikkelCard = ({
   slug,
@@ -42,9 +43,8 @@ const ArtikkelCard = ({
         passHref
         className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
         onClick={(e) =>
-          logNav(
+          amplitudeLogNavigation(
             "artikkel-kort",
-            window.location.pathname,
             e.currentTarget.getAttribute("href")
           )
         }

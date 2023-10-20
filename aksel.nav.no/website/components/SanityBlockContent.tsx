@@ -1,3 +1,4 @@
+import { amplitudeLogNavigation } from "@/logging";
 import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
 import {
   PortableText,
@@ -27,7 +28,6 @@ import {
   TokenTable,
   UuFeedback,
   Video,
-  logNav,
 } from ".";
 
 const serializers: Partial<PortableTextReactComponents> = {
@@ -133,11 +133,7 @@ const serializers: Partial<PortableTextReactComponents> = {
           href={href}
           inlineText
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
           {...(href.startsWith("http") &&
           !href.startsWith("https://aksel.nav.no/")
@@ -160,11 +156,7 @@ const serializers: Partial<PortableTextReactComponents> = {
           href={href}
           inlineText
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
         >
           {text}
