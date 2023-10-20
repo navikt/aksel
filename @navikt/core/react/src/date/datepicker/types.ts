@@ -100,10 +100,10 @@ export interface DatePickerDefaultProps
    * You want to use "fixed" if parent wrapper has position relative, but you want popover to escape
    * @default See Popover
    */
-  strategy?: "absolute" | "fixed";
+  /* strategy?: "absolute" | "fixed"; */
   /**
    * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
    * @default false
    */
-  bubbleEscape?: boolean;
+  /* bubbleEscape?: boolean; */
 }

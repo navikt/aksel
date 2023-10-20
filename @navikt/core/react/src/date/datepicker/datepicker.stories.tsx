@@ -1,9 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Meta, StoryObj } from "@storybook/react";
 import isSameDay from "date-fns/isSameDay";
-import React, { useId, useState } from "react";
+import React, { useId, useRef, useState } from "react";
 import { useDatepicker, useRangeDatepicker } from "..";
-import { BodyLong, Button, HGrid, HStack, Modal, VStack } from "../..";
+import {
+  BodyLong,
+  Box,
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  HGrid,
+  Heading,
+  Modal,
+  VStack,
+} from "../..";
 
 import DatePicker, { DatePickerProps } from "./DatePicker";
 
@@ -434,41 +444,75 @@ export const WeekDayClick = () => {
   );
 };
 
-export const ModalDemo = () => {
-  const { datepickerProps, inputProps } = useDatepicker({
-    fromDate: new Date("Aug 23 2019"),
-    toDate: new Date("Feb 23 2024"),
-    onDateChange: console.log,
-  });
+export const ModalDemo = {
+  render: () => {
+    const ref = useRef<HTMLDialogElement>(null);
+    const { datepickerProps, inputProps } = useDatepicker({
+      fromDate: new Date("Aug 23 2019"),
+      toDate: new Date("Feb 23 2024"),
+      onDateChange: console.log,
+    });
 
-  return (
-    <Modal open header={{ heading: "Modal-demo" }} width="1024px">
-      <Modal.Body style={{ position: "relative" }}>
-        <BodyLong>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores nisi
-          incidunt ipsum cupiditate nostrum nesciunt, corrupti nihil at atque
-          animi ab aut. Quam iusto harum eligendi magnam nulla repudiandae
-          molestias.
-        </BodyLong>
+    const { datepickerProps: dpP2, inputProps: iP2 } = useDatepicker({
+      fromDate: new Date("Aug 23 2019"),
+      toDate: new Date("Feb 23 2024"),
+      onDateChange: console.log,
+    });
 
-        <HGrid gap="6" columns={{ xs: 1, lg: 2 }}>
-          <HStack justify="center" align="start">
-            <DatePicker.Standalone
-              fromDate={new Date("Aug 23 2019")}
-              toDate={new Date("Feb 23 2024")}
-            />
-          </HStack>
-          <DatePicker {...datepickerProps} dropdownCaption>
-            <DatePicker.Input {...inputProps} label="Velg dato" />
-          </DatePicker>
-          <HStack justify="center">
-            <DatePicker.Standalone
-              fromDate={new Date("Aug 23 2019")}
-              toDate={new Date("Feb 23 2024")}
-            />
-          </HStack>
-        </HGrid>
-      </Modal.Body>
-    </Modal>
-  );
+    return (
+      <Box paddingInline="18" paddingBlock="12">
+        <div style={{ maxWidth: "700px", marginInline: "auto" }}>
+          <VStack gap="6" align="start">
+            <Heading level="1" size="xlarge">
+              Demo skjema
+            </Heading>
+            <BodyLong>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
+              ratione impedit et labore. Mollitia delectus, inventore quaerat
+              odit, et omnis quibusdam doloribus atque ea, aspernatur tempore
+              eveniet eius reprehenderit debitis.
+            </BodyLong>
+            <BodyLong>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatum ullam inventore earum deleniti ut aspernatur obcaecati,
+              eveniet, totam suscipit aut tempora a dolor. Fugiat eaque labore
+              porro aut corrupti modi!
+            </BodyLong>
+            <CheckboxGroup legend="Hvilken aldersgrupper hører du til?">
+              <Checkbox value="0">18-29år</Checkbox>
+              <Checkbox value="1">30-39år</Checkbox>
+              <Checkbox value="2">40-49år</Checkbox>
+            </CheckboxGroup>
+            <DatePicker {...datepickerProps} dropdownCaption>
+              <DatePicker.Input
+                {...inputProps}
+                label="Når spiste du sist julemat?"
+              />
+            </DatePicker>
+            <Button onClick={() => ref.current?.showModal()}>
+              Legg til ekstra informasjon
+            </Button>
+            <Modal header={{ heading: "Når starter jul?" }} ref={ref}>
+              <Modal.Body style={{ position: "relative" }}>
+                <VStack gap="7">
+                  <BodyLong>
+                    Nå er det jul igjen, nå er det jul igjen, og jula varer helt
+                    til påske.» Og hvert eneste år starter den tidligere og
+                    tidligere. Når begynner julen egentlig?
+                  </BodyLong>
+
+                  <DatePicker {...dpP2} dropdownCaption>
+                    <DatePicker.Input {...iP2} label="Når starter julen?" />
+                  </DatePicker>
+                </VStack>
+              </Modal.Body>
+            </Modal>
+          </VStack>
+        </div>
+      </Box>
+    );
+  },
+  parameters: {
+    layout: "fullscreen",
+  },
 };

@@ -1,11 +1,11 @@
 import { CalendarIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import { FormFieldProps, useFormField } from "../form/useFormField";
-import { useDateInputContext } from "./context";
 import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
+import { FormFieldProps, useFormField } from "../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
+import { useDateInputContext } from "./context";
 
 export interface DateInputProps
   extends FormFieldProps,
@@ -120,7 +120,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         />
         <button
           disabled={inputProps.disabled || readOnly}
-          tabIndex={readOnly ? -1 : open ? -1 : 0}
+          tabIndex={readOnly ? -1 : undefined}
           onClick={() => onOpen()}
           type="button"
           className="navds-date__field-button"

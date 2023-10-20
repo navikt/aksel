@@ -1,8 +1,8 @@
 import cl from "clsx";
 import isWeekend from "date-fns/isWeekend";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
-import { Popover } from "../../popover";
+import { Modal } from "../../modal";
 import { omit, useId } from "../../util";
 import { DatePickerInput } from "../DateInput";
 import { DateContext } from "../context";
@@ -78,8 +78,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       open: _open,
       onClose,
       onOpenToggle,
-      strategy,
-      bubbleEscape = false,
       onWeekNumberClick,
       ...rest
     },
@@ -87,8 +85,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   ) => {
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
-
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
 
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
@@ -121,12 +117,57 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           ariaId,
         }}
       >
-        <div
-          ref={wrapperRef}
-          className={cl("navds-date__wrapper", wrapperClassName)}
-        >
+        <div ref={ref} className={cl("navds-date__wrapper", wrapperClassName)}>
           {children}
-          {(_open ?? open) && (
+          <Modal
+            open={_open ?? open}
+            onClose={() => {
+              onClose?.();
+              setOpen(false);
+              onOpenToggle?.();
+            }}
+          >
+            <DayPicker
+              locale={getLocaleFromString(locale)}
+              mode={mode}
+              onSelect={handleSelect}
+              selected={selected ?? selectedDates}
+              components={{
+                Caption: dropdownCaption ? DropdownCaption : Caption,
+                Head: TableHead,
+                HeadRow,
+                WeekNumber,
+                Row,
+                Day: DayButton,
+              }}
+              className={cl("navds-date", className)}
+              classNames={{
+                vhidden: "navds-sr-only",
+              }}
+              disabled={(day) => {
+                return (
+                  (disableWeekends && isWeekend(day)) || isMatch(day, disabled)
+                );
+              }}
+              weekStartsOn={1}
+              initialFocus={false}
+              labels={labels as any}
+              modifiers={{
+                weekend: (day) => disableWeekends && isWeekend(day),
+              }}
+              modifiersClassNames={{
+                weekend: "rdp-day__weekend",
+              }}
+              showWeekNumber={showWeekNumber}
+              onWeekNumberClick={
+                mode === "multiple" ? onWeekNumberClick : undefined
+              }
+              fixedWeeks
+              showOutsideDays
+              {...omit(rest, ["onSelect"])}
+            />
+          </Modal>
+          {/* {(_open ?? open) && (
             <Popover
               arrow={false}
               anchorEl={wrapperRef.current}
@@ -143,48 +184,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               bubbleEscape={bubbleEscape}
               flip={false}
             >
-              <DayPicker
-                locale={getLocaleFromString(locale)}
-                mode={mode}
-                onSelect={handleSelect}
-                selected={selected ?? selectedDates}
-                components={{
-                  Caption: dropdownCaption ? DropdownCaption : Caption,
-                  Head: TableHead,
-                  HeadRow,
-                  WeekNumber,
-                  Row,
-                  Day: DayButton,
-                }}
-                className={cl("navds-date", className)}
-                classNames={{
-                  vhidden: "navds-sr-only",
-                }}
-                disabled={(day) => {
-                  return (
-                    (disableWeekends && isWeekend(day)) ||
-                    isMatch(day, disabled)
-                  );
-                }}
-                weekStartsOn={1}
-                initialFocus={false}
-                labels={labels as any}
-                modifiers={{
-                  weekend: (day) => disableWeekends && isWeekend(day),
-                }}
-                modifiersClassNames={{
-                  weekend: "rdp-day__weekend",
-                }}
-                showWeekNumber={showWeekNumber}
-                onWeekNumberClick={
-                  mode === "multiple" ? onWeekNumberClick : undefined
-                }
-                fixedWeeks
-                showOutsideDays
-                {...omit(rest, ["onSelect"])}
-              />
+
             </Popover>
-          )}
+          )} */}
         </div>
       </DateContext.Provider>
     );
