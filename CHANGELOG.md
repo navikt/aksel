@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.7.6
+
+### @navikt/ds-css
+
+- :lipstick: Chips.Toggle: Ikon i uvalgt tilstand ([#2395](https://github.com/navikt/aksel/pull/2395))
+
+### @navikt/ds-react
+
+- :lipstick: Chips.Toggle: Ikon i uvalgt tilstand ([#2395](https://github.com/navikt/aksel/pull/2395))
+
 ## 5.7.5
 
 ### @navikt/ds-css
