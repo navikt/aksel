@@ -1,5 +1,5 @@
-import { logNav } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { RelatertInnholdT } from "@/types";
 import { NewspaperIcon } from "@navikt/aksel-icons";
 import { Heading, Link } from "@navikt/ds-react";
@@ -31,9 +31,8 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
               as={NextLink}
               href={getHref(x)}
               onClick={(e) =>
-                logNav(
+                amplitudeLogNavigation(
                   "relatert-innhold",
-                  window.location.pathname,
                   e.currentTarget.getAttribute("href")
                 )
               }

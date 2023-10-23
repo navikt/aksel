@@ -1,5 +1,5 @@
+import { amplitudeLogNavigation } from "@/logging";
 import { AkselSidebarT } from "@/types";
-import { logNav } from "@/utils";
 import {
   ChevronDownIcon,
   SparklesIcon,
@@ -26,11 +26,7 @@ const NavItem = ({
       <Link
         href={`/${link.slug}`}
         onClick={(e) => {
-          logNav(
-            "meny",
-            window.location.pathname,
-            e.currentTarget.getAttribute("href")
-          );
+          amplitudeLogNavigation("meny", e.currentTarget.getAttribute("href"));
         }}
         className={cl(
           "hover:text-deepblue-800 focus-visible:shadow-focus text-medium pr-05 relative flex overflow-hidden py-1 pl-4 leading-snug before:rounded-full hover:before:transition-colors focus:outline-none focus-visible:z-10 focus-visible:rounded-sm",

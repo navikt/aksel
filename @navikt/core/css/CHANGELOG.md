@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.7.6
+
+### Patch Changes
+
+- :lipstick: Chips.Toggle: Ikon i uvalgt tilstand ([#2395](https://github.com/navikt/aksel/pull/2395))
+
 ## 5.7.5
 
 ### Patch Changes

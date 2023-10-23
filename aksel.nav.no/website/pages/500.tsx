@@ -1,11 +1,11 @@
-import { AmplitudeEvents, logAmplitudeEvent } from "@/components";
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import { AkselCubeStatic } from "components/website-modules/cube";
 import { useEffect } from "react";
 
 function Page() {
   useEffect(() => {
-    logAmplitudeEvent(AmplitudeEvents.error, {
+    amplitude.track(AmplitudeEvents.error, {
       side: window.location.pathname,
     });
   }, []);

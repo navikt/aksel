@@ -1,19 +1,5 @@
 import { useEffect } from "react";
 
-const environment = process.env.NODE_ENV;
-
-export const isProduction = (): boolean => {
-  if (typeof window !== "undefined") {
-    const url =
-      window && window.location && window.location.href
-        ? window.location.href
-        : "";
-    return environment === "production" && /aksel.nav.no/.test(url);
-  } else {
-    return false;
-  }
-};
-
 // https://stackoverflow.com/questions/38588346/anchor-a-tags-not-working-in-chrome-when-using/38588927#38588927
 // https://github.com/vercel/next.js/discussions/13134
 export function useScrollToHashOnPageLoad(): void {

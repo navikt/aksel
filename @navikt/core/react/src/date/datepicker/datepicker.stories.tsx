@@ -4,7 +4,6 @@ import isSameDay from "date-fns/isSameDay";
 import React, { useId, useState } from "react";
 import { useDatepicker, useRangeDatepicker } from "..";
 import { BodyLong, Button, HGrid, HStack, Modal, VStack } from "../..";
-
 import DatePicker, { DatePickerProps } from "./DatePicker";
 
 const disabledDays = [
