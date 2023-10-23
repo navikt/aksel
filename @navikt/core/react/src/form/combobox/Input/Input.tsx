@@ -31,6 +31,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       allowNewValues,
       currentOption,
       filteredOptions,
+      isValueNew,
       toggleIsListOpen,
       isListOpen,
       filteredOptionsIndex,
@@ -48,7 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       (event: React.KeyboardEvent) => {
         const isTextInSelectedOptions = (text: string) => {
           return selectedOptions.find(
-            (item) => item.toLowerCase() === text.toLowerCase()
+            (item) => item.toLocaleLowerCase() === text.toLocaleLowerCase()
           );
         };
 
@@ -65,7 +66,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
           event.preventDefault();
           // Autocompleting or adding a new value
-          const selectedValue = filteredOptions[0] || value;
+          const selectedValue =
+            allowNewValues && isValueNew ? value : filteredOptions[0];
           toggleOption(selectedValue, event);
           if (
             !isMultiSelect &&
@@ -81,6 +83,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         currentOption,
         filteredOptions,
         isMultiSelect,
+        isValueNew,
         selectedOptions,
         shouldAutocomplete,
         toggleIsListOpen,
