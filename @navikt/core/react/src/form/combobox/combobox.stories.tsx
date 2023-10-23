@@ -501,13 +501,13 @@ export const TestCasingWhenAutoCompleting = {
 
     // With custom option
     userEvent.click(input);
-    await userEvent.type(input, "PaScAl CaSe", { delay: 250 });
+    await userEvent.type(input, "cAmEl{Backspace}", { delay: 250 });
     await sleep(250);
-    expect(input.value).toBe("PaScAl CaSe");
+    expect(input.value).toBe("cAmEl");
     await userEvent.type(input, "{Enter}");
     await sleep(250);
-    const selectedSnakeCaseChip = within(chips).getAllByRole("listitem")[0];
-    expect(selectedSnakeCaseChip).toHaveTextContent("PaScAl CaSe"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
+    const selectedNewValueChip = within(chips).getAllByRole("listitem")[0];
+    expect(selectedNewValueChip).toHaveTextContent("cAmEl"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
   },
 };
 
