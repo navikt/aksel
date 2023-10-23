@@ -6,8 +6,6 @@ import {
   SpaceDelimitedAttribute,
   ResponsiveProp,
   SpacingScale,
-} from "../utilities/types";
-import {
   BackgroundToken,
   BorderColorToken,
   ShadowToken,
