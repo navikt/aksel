@@ -8,6 +8,7 @@ import React, {
   useRef,
 } from "react";
 import { createPortal } from "react-dom";
+import { DateContext } from "../date/context";
 import { useProvider } from "../provider";
 import { Detail, Heading } from "../typography";
 import { mergeRefs, useId } from "../util";
@@ -97,7 +98,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const rootElement = useProvider()?.rootElement;
     const portalNode = useFloatingPortalNode({ root: rootElement });
 
-    if (useContext(ModalContext)) {
+    const isDatePickerModal = useContext(DateContext);
+    if (useContext(ModalContext) && !isDatePickerModal) {
       console.error("Modals should not be nested");
     }
 

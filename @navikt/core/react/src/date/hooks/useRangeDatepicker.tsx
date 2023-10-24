@@ -218,7 +218,7 @@ export const useRangeDatepicker = (
     onValidate,
     defaultMonth,
     allowTwoDigitYear = true,
-    openOnFocus = true,
+    openOnFocus = false,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -255,7 +255,7 @@ export const useRangeDatepicker = (
 
   const [open, setOpen] = useState(false);
 
-  useOutsideClickHandler(open, setOpen, [
+  /*   useOutsideClickHandler(open, setOpen, [
     daypickerRef,
     inputRefTo.current,
     inputRefFrom.current,
@@ -267,7 +267,7 @@ export const useRangeDatepicker = (
     open,
     setOpen,
     selectedRange?.from && !selectedRange?.to ? inputRefTo : inputRefFrom
-  );
+  ); */
 
   const updateRange = (range?: DateRange) => {
     onRangeChange?.(range);
@@ -545,6 +545,7 @@ export const useRangeDatepicker = (
     mode: "range" as const,
     open,
     onOpenToggle: () => setOpen((x) => !x),
+    onClose: () => setOpen((x) => !x),
     disabled,
     disableWeekends,
     bubbleEscape: true,

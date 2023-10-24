@@ -18,6 +18,7 @@ import React, {
   useMemo,
   useRef,
 } from "react";
+import { DateContext } from "../date/context";
 import { ModalContext } from "../modal/ModalContext";
 import { mergeRefs, useClientLayoutEffect, useEventListener } from "../util";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
@@ -132,8 +133,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useContext(ModalContext) !== null;
+    const isInDatepicker = useContext(DateContext) !== null;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
-    const chosenFlip = isInModal ? true : _flip;
+    const chosenFlip = isInDatepicker ? false : _flip;
 
     const {
       x,

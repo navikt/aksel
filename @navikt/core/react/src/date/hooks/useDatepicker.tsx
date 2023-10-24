@@ -10,8 +10,6 @@ import {
   isValidDate,
   parseDate,
 } from "../utils";
-import { useEscape } from "./useEscape";
-import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export interface UseDatepickerOptions
   extends Pick<
@@ -59,8 +57,8 @@ export interface UseDatepickerOptions
    */
   allowTwoDigitYear?: boolean;
   /**
-   * Opens datepicker on input-focus
-   * @default true
+   * Will be removed in future versions
+   * @deprecated
    */
   openOnFocus?: boolean;
 }
@@ -143,13 +141,11 @@ export const useDatepicker = (
     onValidate,
     defaultMonth,
     allowTwoDigitYear = true,
-    openOnFocus = true,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const [daypickerRef, setDaypickerRef] = useState<HTMLDivElement>();
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
@@ -172,13 +168,13 @@ export const useDatepicker = (
     [defaultMonth, defaultSelected, selectedDay, today]
   );
 
-  useOutsideClickHandler(open, handleOpen, [
+  /* useOutsideClickHandler(open, handleOpen, [
     daypickerRef,
     inputRef.current,
     inputRef.current?.nextSibling,
-  ]);
+  ]); */
 
-  useEscape(open, handleOpen, inputRef);
+  /* useEscape(open, handleOpen, inputRef); */
 
   const updateDate = (date?: Date) => {
     onDateChange?.(date);
@@ -207,7 +203,6 @@ export const useDatepicker = (
     if (e.target.readOnly) {
       return;
     }
-    !open && openOnFocus && handleOpen(true);
     const day = parseDate(
       e.target.value,
       today,
@@ -319,11 +314,11 @@ export const useDatepicker = (
     toDate,
     today,
     open,
+    onClose: () => handleOpen(!open),
     onOpenToggle: () => handleOpen(!open),
     disabled,
     disableWeekends,
     bubbleEscape: true,
-    ref: setDaypickerRef,
   };
 
   const inputProps = {

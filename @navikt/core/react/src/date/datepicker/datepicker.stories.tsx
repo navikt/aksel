@@ -440,34 +440,45 @@ export const ModalDemo = () => {
     onDateChange: console.log,
   });
 
+  const { datepickerProps: d2, inputProps: i2 } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+  });
+
   return (
-    <Modal open header={{ heading: "Modal-demo" }} width="1024px">
+    <Modal open header={{ heading: "Modal-demo" }}>
       <Modal.Body style={{ position: "relative" }}>
-        <BodyLong>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores nisi
-          incidunt ipsum cupiditate nostrum nesciunt, corrupti nihil at atque
-          animi ab aut. Quam iusto harum eligendi magnam nulla repudiandae
-          molestias.
+        <BodyLong spacing>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
         </BodyLong>
 
-        <HGrid gap="6" columns={{ xs: 1, lg: 2 }}>
-          <HStack justify="center" align="start">
+        <HStack gap="6">
+          {/* <HStack justify="center" align="start">
             <DatePicker.Standalone
               fromDate={new Date("Aug 23 2019")}
               toDate={new Date("Feb 23 2024")}
             />
-          </HStack>
+          </HStack> */}
           <DatePicker {...datepickerProps} dropdownCaption>
             <DatePicker.Input {...inputProps} label="Velg dato" />
           </DatePicker>
-          <HStack justify="center">
+          <DatePicker {...d2} dropdownCaption>
+            <DatePicker.Input {...i2} label="Ekstra dato" />
+          </DatePicker>
+          {/* <HStack justify="center">
             <DatePicker.Standalone
               fromDate={new Date("Aug 23 2019")}
               toDate={new Date("Feb 23 2024")}
             />
-          </HStack>
-        </HGrid>
+          </HStack> */}
+        </HStack>
       </Modal.Body>
+      <Modal.Footer>
+        <Button>Neste</Button>
+        <Button variant="secondary">Tilbake</Button>
+        <Button variant="tertiary">Avbryt</Button>
+      </Modal.Footer>
     </Modal>
   );
 };
