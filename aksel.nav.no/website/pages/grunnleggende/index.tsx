@@ -14,7 +14,6 @@ import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import ComponentOverview from "components/sanity-modules/ComponentOverview";
 import { SEO } from "components/website-modules/seo/SEO";
-import { logger } from "logger";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { grunnleggendeKategorier } from "../../sanity/config";
@@ -27,7 +26,7 @@ type PageProps = NextPageT<{
 
 export const query = `{${sidebarQuery}, ${landingPageQuery(
   "grunnleggende"
-)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
+)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
@@ -35,11 +34,6 @@ export const getStaticProps: GetStaticProps = async ({
   const { sidebar, page, links } = await getClient().fetch(query, {
     type: "ds_artikkel",
   });
-
-  logger.info(
-    { sidebar: !!sidebar, page: !!page, links: !!links },
-    "getStaticProps in /grunnleggende"
-  );
 
   return {
     props: {

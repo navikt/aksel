@@ -1,9 +1,10 @@
 import { withErrorBoundary } from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
+import { getAuthors } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
-import { getAuthors, logNav } from "@/utils";
 
 const BloggCard = ({
   blog,
@@ -21,9 +22,8 @@ const BloggCard = ({
           <Link
             className="text-deepblue-500 underline hover:no-underline"
             onClick={(e) =>
-              logNav(
+              amplitudeLogNavigation(
                 "blogg-card",
-                window.location.pathname,
                 e.currentTarget.getAttribute("href")
               )
             }

@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 
-import tokens from "@navikt/ds-tokens/docs.json";
 import core from "@navikt/ds-css/tokens.json";
+import tokens from "@navikt/ds-tokens/docs.json";
 import { noCdnClient } from "../sanity/interface/client.server";
 
 dotenv.config();
@@ -12,14 +12,14 @@ const allTokens: { title: string; kategori: string }[] = [
 ];
 
 export const updateTokens = async () => {
-  const token = process.env.SANITY_WRITE_KEY;
+  const writeKey = process.env.SANITY_WRITE_KEY;
 
   // this is our transactional client, it won't push anything until we say .commit() later
-  const transactionClient = noCdnClient(token).transaction();
+  const transactionClient = noCdnClient(writeKey).transaction();
 
   // first let's fetch the current state from sanity,
   // So that we can delete old/changed tokens
-  const remoteTokens = await noCdnClient(token).fetch(
+  const remoteTokens = await noCdnClient(writeKey).fetch(
     `*[_type == "token_kategori"]`
   );
 

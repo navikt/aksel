@@ -6,11 +6,7 @@ const Example = () => {
   const [val, setVal] = useState("20");
 
   return (
-    <RadioGroup
-      legend="Velg din aldersgruppe."
-      onChange={(val: any) => setVal(val)}
-      value={val}
-    >
+    <RadioGroup legend="Velg din aldersgruppe." onChange={setVal} value={val}>
       <Radio value="10">10-20 år</Radio>
       <Radio value="20">21-45 år</Radio>
       <Radio value="40">46-80 år</Radio>

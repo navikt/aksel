@@ -65,18 +65,18 @@ const processNode = (node: Root) => {
       const parent = ancestors.findLast(
         (ancestor) => ancestor.type === "paragraph"
       ) as Paragraph;
-      visit(parent, (node, index, parent) => {
+      visit(parent, (node2, index, parent2) => {
         if (
-          node.type === "link" ||
-          (node.type === "text" && node.value === " Thanks ")
+          node2.type === "link" ||
+          (node2.type === "text" && node2.value === " Thanks ")
         ) {
-          if (parent && index !== null) {
-            parent.children.splice(index, 1);
+          if (parent2 && index !== null) {
+            parent2.children.splice(index, 1);
             return [CONTINUE, index];
           }
         }
-        if (node.type === "text" && node.value.startsWith("! -")) {
-          node.value = node.value.replace(/! (- )+/, "");
+        if (node2.type === "text" && node2.value.startsWith("! -")) {
+          node2.value = node2.value.replace(/! (- )+/, "");
           return;
         }
       });
@@ -113,10 +113,10 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
         const indexWithinList = parent.children.findIndex((child: ListItem) => {
           return child.children.some((grandchild) => {
             let found = false;
-            visit(grandchild, (node) => {
+            visit(grandchild, (node2) => {
               if (
-                node.type === "text" &&
-                node.value.startsWith("Updated dependencies")
+                node2.type === "text" &&
+                node2.value.startsWith("Updated dependencies")
               ) {
                 found = true;
                 return EXIT;
@@ -229,6 +229,6 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
 const changelogFiles = getChangelogs("./@navikt");
 console.log("processing the following markdown files:", changelogFiles);
 const changelogJSON = await parseMarkdownFiles(changelogFiles);
-const changelog = await createMainChangelog(changelogJSON);
-writeFileSync("CHANGELOG.md", changelog);
+const changelogStr = await createMainChangelog(changelogJSON);
+writeFileSync("CHANGELOG.md", changelogStr);
 console.log("wrote to CHANGELOG.md");

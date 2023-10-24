@@ -1,5 +1,6 @@
+import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
-import { getAuthors, logNav } from "@/utils";
+import { getAuthors } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import { getImage } from "components/website-modules/utils/get-image";
@@ -79,9 +80,8 @@ export const Highlight = ({
           <Link
             as={NextLink}
             onClick={(e) =>
-              logNav(
+              amplitudeLogNavigation(
                 "artikkel-kort",
-                window.location.pathname,
                 e.currentTarget.getAttribute("href")
               )
             }

@@ -1,5 +1,29 @@
 # @navikt/ds-css
 
+## 5.7.6
+
+### Patch Changes
+
+- :lipstick: Chips.Toggle: Ikon i uvalgt tilstand ([#2395](https://github.com/navikt/aksel/pull/2395))
+
+## 5.7.5
+
+### Patch Changes
+
+- Checkbox, Radio: Transparent-border fungerer nå bedre på mørkere bakgrunner ([#2388](https://github.com/navikt/aksel/pull/2388))
+
+## 5.7.4
+
+## 5.7.3
+
+### Patch Changes
+
+- Ny spacing token på 0.375rem ([#2370](https://github.com/navikt/aksel/pull/2370))
+
+- Select: Tokenstøtte for å endre chevronfarge sammen med tekst ([#2383](https://github.com/navikt/aksel/pull/2383))
+
+- HelpText: Knapp er visuelt mindre. Klikkflate er fortsatt 24px ([#2376](https://github.com/navikt/aksel/pull/2376))
+
 ## 5.7.2
 
 ## 5.7.1

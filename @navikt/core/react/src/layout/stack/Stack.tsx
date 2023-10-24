@@ -1,12 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
-import {
-  getResponsiveProps,
-  getResponsiveValue,
-  ResponsiveProp,
-  SpacingScale,
-} from "../utilities/css";
+import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
+import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

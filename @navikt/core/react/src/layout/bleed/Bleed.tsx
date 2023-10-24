@@ -1,10 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import {
-  ResponsiveProp,
-  SpacingScale,
-  getResponsiveProps,
-} from "../utilities/css";
+import { getResponsiveProps } from "../utilities/css";
+import { ResponsiveProp, SpacingScale } from "../utilities/types";
 import { Slot } from "../../util/Slot";
 
 export type BleedSpacingInline = "0" | "full" | "px" | SpacingScale;

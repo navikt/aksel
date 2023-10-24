@@ -135,14 +135,15 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
   }, []);
 
   const validatedTema = tema
-    .filter((t) => {
-      return (
+    .filter(
+      (t) =>
         t?.title &&
         t?.slug &&
         t?.pictogram &&
-        t?.seksjoner.find((s) => !!s?.sider.find((s: any) => s?._ref))
-      );
-    })
+        t?.seksjoner.some((seksjon) =>
+          seksjon?.sider.some((side: any) => side?._ref)
+        )
+    )
     .sort((a, b) => a.title.localeCompare(b.title));
 
   return (

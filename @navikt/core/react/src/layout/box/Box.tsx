@@ -1,13 +1,11 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
+import { getResponsiveProps } from "../utilities/css";
 import {
   SpaceDelimitedAttribute,
   ResponsiveProp,
   SpacingScale,
-  getResponsiveProps,
-} from "../utilities/css";
-import {
   BackgroundToken,
   BorderColorToken,
   ShadowToken,

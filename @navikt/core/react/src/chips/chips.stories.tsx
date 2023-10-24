@@ -60,11 +60,11 @@ Default.argTypes = {
   },
 };
 
-export const Toggle = () => {
+export const Toggle = ({ size }) => {
   const [selected, setSelected] = useState<number[]>([2, 4]);
   return (
     <div className="colgap">
-      <Chips>
+      <Chips size={size}>
         {options.map((c, y) => (
           <Chips.Toggle
             selected={selected.includes(y)}
@@ -81,7 +81,7 @@ export const Toggle = () => {
           </Chips.Toggle>
         ))}
       </Chips>
-      <Chips>
+      <Chips size={size}>
         {options.map((c, y) => (
           <Chips.Toggle
             variant="neutral"
@@ -101,6 +101,12 @@ export const Toggle = () => {
       </Chips>
     </div>
   );
+};
+Toggle.argTypes = {
+  size: {
+    control: { type: "radio" },
+    options: ["medium", "small"],
+  },
 };
 
 export const ToggleNoCheckmark = () => {
