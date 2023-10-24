@@ -14,7 +14,9 @@ const getFilteredOptionsId = (comboboxId: string) =>
   `${comboboxId}-filtered-options`;
 
 const getOptionId = (comboboxId: string, option: string) =>
-  `${comboboxId}-option-${option.replace(" ", "-")}`;
+  `${comboboxId.toLocaleLowerCase()}-option-${option
+    .replace(" ", "-")
+    .toLocaleLowerCase()}`;
 
 const getAddNewOptionId = (comboboxId: string) =>
   `${comboboxId}-combobox-new-option`;
