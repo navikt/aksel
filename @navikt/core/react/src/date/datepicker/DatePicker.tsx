@@ -11,6 +11,7 @@ import { useMedia } from "../../util/useMedia";
 import { DatePickerInput } from "../DateInput";
 import { DateContext } from "../context";
 import { getLocaleFromString, labels } from "../utils";
+import { modalCloseButtonLabel, modalLabel } from "../utils/labels";
 import DatePickerStandalone from "./DatePickerStandalone";
 import Caption from "./parts/Caption";
 import DayButton from "./parts/DayButton";
@@ -91,6 +92,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   ) => {
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
+
     const isInModal = useContext(ModalContext) !== null;
     const hideModal = useMedia("screen and (min-width: 768px)") && !isInModal;
 
@@ -193,16 +195,20 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             <Modal
               open={_open ?? open}
               onClose={() => {
-                onClose?.() ?? setOpen(false);
+                if (_open ?? open) {
+                  onClose?.() ?? setOpen(false);
+                }
               }}
+              aria-label={modalLabel(locale, mode)}
             >
               {DatePickerComponent}
               <Modal.Footer>
                 <Button
                   variant="tertiary"
                   onClick={() => onClose?.() ?? setOpen(false)}
+                  size="small"
                 >
-                  Lukk
+                  {modalCloseButtonLabel(locale)}
                 </Button>
               </Modal.Footer>
             </Modal>

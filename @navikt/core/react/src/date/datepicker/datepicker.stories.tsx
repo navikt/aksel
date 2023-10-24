@@ -440,12 +440,6 @@ export const ModalDemo = () => {
     onDateChange: console.log,
   });
 
-  const { datepickerProps: d2, inputProps: i2 } = useDatepicker({
-    fromDate: new Date("Aug 23 2019"),
-    toDate: new Date("Feb 23 2024"),
-    onDateChange: console.log,
-  });
-
   return (
     <Modal open header={{ heading: "Modal-demo" }}>
       <Modal.Body style={{ position: "relative" }}>
@@ -463,9 +457,7 @@ export const ModalDemo = () => {
           <DatePicker {...datepickerProps} dropdownCaption>
             <DatePicker.Input {...inputProps} label="Velg dato" />
           </DatePicker>
-          <DatePicker {...d2} dropdownCaption>
-            <DatePicker.Input {...i2} label="Ekstra dato" />
-          </DatePicker>
+
           {/* <HStack justify="center">
             <DatePicker.Standalone
               fromDate={new Date("Aug 23 2019")}

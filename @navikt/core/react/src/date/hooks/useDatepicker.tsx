@@ -238,7 +238,7 @@ export const useDatepicker = (
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
     if (day && !selected) {
       handleOpen(false);
-      inputRef.current && inputRef.current.focus();
+      /* inputRef.current && inputRef.current.focus(); */
     }
 
     if (!required && selected) {
