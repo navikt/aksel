@@ -1,10 +1,10 @@
-import { Heading } from "@navikt/ds-react";
-import Nextlink from "next/link";
-import cl from "clsx";
-import Image from "next/legacy/image";
-import { StatusTag } from "components/website-modules/StatusTag";
-import { ArticleListT } from "@/types";
 import { urlFor } from "@/sanity/interface";
+import { ArticleListT } from "@/types";
+import { Heading } from "@navikt/ds-react";
+import cl from "clsx";
+import { StatusTag } from "components/website-modules/StatusTag";
+import Image from "next/legacy/image";
+import Nextlink from "next/link";
 
 const ComponentOverview = ({ node }: { node: ArticleListT }) => {
   if (!node || node.length === 0) {
@@ -25,6 +25,16 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
         return 1;
       } else if (b?.status?.tag === "deprecated") {
         return -1;
+      }
+
+      if (a.sidebarindex !== null || b.sidebarindex !== null) {
+        if (a.sidebarindex !== null && b.sidebarindex !== null) {
+          return a.sidebarindex - b.sidebarindex;
+        } else if (a.sidebarindex !== null) {
+          return -1;
+        } else {
+          return 1;
+        }
       }
       return a?.heading?.localeCompare(b?.heading);
     });

@@ -95,8 +95,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
       shouldAutocomplete &&
       filteredOptionsUtils.normalizeText(searchTerm) !== "" &&
       (previousSearchTerm?.length || 0) < searchTerm.length &&
-      filteredOptions.length > 0 &&
-      !filteredOptionsUtils.isValueInList(searchTerm, filteredOptions)
+      filteredOptions.length > 0
     ) {
       setValue(
         `${searchTerm}${filteredOptions[0].substring(searchTerm.length)}`

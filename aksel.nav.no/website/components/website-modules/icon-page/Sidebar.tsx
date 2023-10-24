@@ -1,12 +1,9 @@
+import { AmplitudeEvents, amplitude } from "@/logging";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Button, Heading } from "@navikt/ds-react";
 import Snippet from "components/sanity-modules/code/Snippet";
 import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import {
-  AmplitudeEvents,
-  logAmplitudeEvent,
-} from "components/website-modules/utils/amplitude";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -52,7 +49,7 @@ export const IconSidebar = ({
   }, [name]);
 
   const logDownload = (icon, format) => {
-    logAmplitudeEvent(AmplitudeEvents.ikonnedlastning, {
+    amplitude.track(AmplitudeEvents.ikonnedlastning, {
       icon,
       format,
     });
