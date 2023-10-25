@@ -270,6 +270,7 @@ export type InnholdsKortPrinsipperT = ArrayObjectT<{
 }>;
 
 export interface RelatertInnholdT {
+  title?: string;
   lenker: Array<
     ArrayObjectT<{
       title: string;
