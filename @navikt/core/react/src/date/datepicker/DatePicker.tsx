@@ -1,17 +1,12 @@
 import cl from "clsx";
 import isWeekend from "date-fns/isWeekend";
-import React, { forwardRef, useContext, useRef, useState } from "react";
+import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
-import { Button } from "../../button";
-import { Modal } from "../../modal";
-import { ModalContext } from "../../modal/ModalContext";
-import { Popover } from "../../popover";
-import { omit, useId } from "../../util";
-import { useMedia } from "../../util/useMedia";
+import { mergeRefs, omit, useId } from "../../util";
 import { DateContext } from "../context";
 import { DatePickerInput } from "../parts/DateInput";
+import { DateWrapper } from "../parts/DateWrapper";
 import { getLocaleFromString, labels } from "../utils";
-import { modalCloseButtonLabel, modalLabel } from "../utils/labels";
 import DatePickerStandalone from "./DatePickerStandalone";
 import Caption from "./parts/Caption";
 import DayButton from "./parts/DayButton";
@@ -93,10 +88,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
-    const isInModal = useContext(ModalContext) !== null;
-    const hideModal = useMedia("screen and (min-width: 768px)") && !isInModal;
-
     const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
@@ -168,51 +161,24 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         }}
       >
         <div
-          ref={wrapperRef}
+          ref={mergedRef}
           className={cl("navds-date__wrapper", wrapperClassName)}
         >
           {children}
-          {(_open ?? open) && hideModal ? (
-            <Popover
-              arrow={false}
-              anchorEl={wrapperRef.current}
-              open={_open ?? open}
-              onClose={() => {
-                onClose?.() ?? setOpen(false);
-              }}
-              placement="bottom-start"
-              id={ariaId}
-              role="dialog"
-              ref={ref}
-              strategy={strategy}
-              className="navds-date__popover"
-              bubbleEscape={bubbleEscape}
-              flip={false}
-            >
-              {DatePickerComponent}
-            </Popover>
-          ) : (
-            <Modal
-              open={_open ?? open}
-              onClose={() => {
-                if (_open ?? open) {
-                  onClose?.() ?? setOpen(false);
-                }
-              }}
-              aria-label={modalLabel(locale, mode)}
-            >
-              {DatePickerComponent}
-              <Modal.Footer>
-                <Button
-                  variant="tertiary"
-                  onClick={() => onClose?.() ?? setOpen(false)}
-                  size="small"
-                >
-                  {modalCloseButtonLabel(locale)}
-                </Button>
-              </Modal.Footer>
-            </Modal>
-          )}
+          <DateWrapper
+            open={_open ?? open}
+            anchor={wrapperRef.current}
+            onClose={() => onClose?.() ?? setOpen(false)}
+            locale={locale}
+            variant={mode}
+            popoverProps={{
+              bubbleEscape,
+              id: ariaId,
+              strategy,
+            }}
+          >
+            {DatePickerComponent}
+          </DateWrapper>
         </div>
       </DateContext.Provider>
     );
