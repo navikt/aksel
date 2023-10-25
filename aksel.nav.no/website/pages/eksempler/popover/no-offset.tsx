@@ -13,11 +13,13 @@ const Example = () => {
       </Button>
       <Popover
         open={openState}
-        onClose={() => setOpenState(false)}
+        onClose={() => {}}
         anchorEl={buttonRef.current}
+        offset={0}
         arrow={false}
+        placement="bottom"
       >
-        <Popover.Content>Innhold her!</Popover.Content>
+        <Popover.Content>offset = 0</Popover.Content>
       </Popover>
     </>
   );
@@ -31,5 +33,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 2,
 };

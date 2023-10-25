@@ -7,19 +7,23 @@ const Example = () => {
   const [openState, setOpenState] = useState(false);
 
   return (
-    <>
+    <div className="mb-10">
       <Button ref={buttonRef} onClick={() => setOpenState(!openState)}>
         Åpne popover
       </Button>
       <Popover
         open={openState}
-        onClose={() => setOpenState(false)}
+        onClose={() => {}}
         anchorEl={buttonRef.current}
-        arrow={false}
+        flip={false}
+        placement="right"
       >
-        <Popover.Content>Innhold her!</Popover.Content>
+        <Popover.Content>
+          Denne popoveren holder seg til høyre selv om det er bedre plass under,
+          fordi <code>flip</code> er satt til <code>false</code>.
+        </Popover.Content>
       </Popover>
-    </>
+    </div>
   );
 };
 
@@ -31,5 +35,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 4,
 };
