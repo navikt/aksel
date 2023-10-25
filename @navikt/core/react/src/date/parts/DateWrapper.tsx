@@ -61,13 +61,12 @@ export const DateWrapper = ({
       open={open}
       onClose={() => open && onClose()}
       aria-label={modalLabel(locale, variant)}
+      className="navds-date__modal"
     >
       {children}
-      <Modal.Footer>
-        <Button variant="tertiary" onClick={() => onClose()} size="small">
-          {modalCloseButtonLabel(locale)}
-        </Button>
-      </Modal.Footer>
+      <Button variant="tertiary" onClick={() => onClose()} size="small">
+        {modalCloseButtonLabel(locale)}
+      </Button>
     </Modal>
   );
 };
