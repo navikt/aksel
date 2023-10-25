@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import isSameDay from "date-fns/isSameDay";
 import React, { useId, useState } from "react";
 import { useDatepicker, useRangeDatepicker } from "..";
-import { BodyLong, Button, HGrid, HStack, Modal, VStack } from "../..";
+import { BodyLong, Button, HGrid, Modal, VStack } from "../..";
 import DatePicker, { DatePickerProps } from "./DatePicker";
 
 const disabledDays = [
@@ -428,24 +428,13 @@ export const ModalDemo = () => {
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.
         </BodyLong>
 
-        <HStack gap="6">
-          {/* <HStack justify="center" align="start">
-            <DatePicker.Standalone
-              fromDate={new Date("Aug 23 2019")}
-              toDate={new Date("Feb 23 2024")}
-            />
-          </HStack> */}
-          <DatePicker {...datepickerProps} dropdownCaption>
-            <DatePicker.Input {...inputProps} label="Velg dato" />
-          </DatePicker>
-
-          {/* <HStack justify="center">
-            <DatePicker.Standalone
-              fromDate={new Date("Aug 23 2019")}
-              toDate={new Date("Feb 23 2024")}
-            />
-          </HStack> */}
-        </HStack>
+        <DatePicker {...datepickerProps} dropdownCaption>
+          <DatePicker.Input
+            {...inputProps}
+            label="Velg dato"
+            description="Format: dd.mm.yyyy"
+          />
+        </DatePicker>
       </Modal.Body>
       <Modal.Footer>
         <Button>Neste</Button>

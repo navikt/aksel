@@ -116,7 +116,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
             "navds-body-short",
             `navds-body-short--${size}`
           )}
-          size={isDatepickerVariant ? 10 : 14}
+          size={isDatepickerVariant ? 11 : 14}
         />
         <button
           disabled={inputProps.disabled || readOnly}
