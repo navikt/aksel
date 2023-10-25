@@ -43,7 +43,9 @@ export interface ModalProps
    */
   onCancel?: React.ReactEventHandler<HTMLDialogElement>;
   /**
-   * Whether to close when clicking on the backdrop.  *** TODO RULES ***
+   * Whether to close when clicking on the backdrop.
+   *
+   * **WARNING:** Users may click outside by accident. Don't use if closing causes data loss, or the modal contains important info.
    * @default false
    */
   closeOnClickOutside?: boolean;
