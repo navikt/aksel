@@ -45,8 +45,8 @@ export interface UseMonthPickerOptions
    */
   allowTwoDigitYear?: boolean;
   /**
-   * Opens datepicker on input-focus
-   * @default true
+   * Will be removed in future versions
+   * @deprecated
    */
   openOnFocus?: boolean;
 }
@@ -138,7 +138,6 @@ export const useMonthpicker = (
     onValidate,
     defaultYear,
     allowTwoDigitYear = true,
-    openOnFocus = true,
   } = opt;
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
@@ -204,7 +203,7 @@ export const useMonthpicker = (
     if (e.target.readOnly) {
       return;
     }
-    !open && openOnFocus && handleOpen(true);
+
     const day = parseDate(
       e.target.value,
       today,

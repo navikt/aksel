@@ -168,14 +168,6 @@ export const useDatepicker = (
     [defaultMonth, defaultSelected, selectedDay, today]
   );
 
-  /* useOutsideClickHandler(open, handleOpen, [
-    daypickerRef,
-    inputRef.current,
-    inputRef.current?.nextSibling,
-  ]); */
-
-  /* useEscape(open, handleOpen, inputRef); */
-
   const updateDate = (date?: Date) => {
     onDateChange?.(date);
     setSelectedDay(date);

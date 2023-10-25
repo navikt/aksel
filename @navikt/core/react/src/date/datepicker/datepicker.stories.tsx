@@ -18,7 +18,6 @@ export default {
 
 type DefaultStoryProps = DatePickerProps & {
   size: "medium" | "small";
-  openOnFocus: boolean;
   inputfield: boolean;
   standalone: boolean;
 };
@@ -30,13 +29,11 @@ export const Default: StoryObj<DefaultStoryProps> = {
     const rangeCtx = useRangeDatepicker({
       fromDate: new Date("Aug 23 2020"),
       toDate: new Date("Aug 23 2023"),
-      openOnFocus: props.openOnFocus,
     });
 
     const singleCtx = useDatepicker({
       fromDate: new Date("Aug 23 2020"),
       toDate: new Date("Aug 23 2023"),
-      openOnFocus: props.openOnFocus,
     });
 
     const newProps = {
@@ -111,7 +108,6 @@ export const Default: StoryObj<DefaultStoryProps> = {
     disableWeekends: false,
     showWeekNumber: false,
     mode: "single",
-    openOnFocus: true,
     inputfield: true,
     standalone: false,
   },
@@ -181,21 +177,6 @@ export const UseRangedDatepicker = () => {
           <DatePicker.Input {...fromInputProps} label="Fra" />
           <DatePicker.Input {...toInputProps} label="Til" />
         </div>
-      </DatePicker>
-    </div>
-  );
-};
-
-export const OpenOnFocus = () => {
-  const { datepickerProps, inputProps } = useDatepicker({
-    onDateChange: console.log,
-    openOnFocus: false,
-  });
-
-  return (
-    <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...datepickerProps}>
-        <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
     </div>
   );

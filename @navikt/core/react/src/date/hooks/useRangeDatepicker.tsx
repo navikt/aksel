@@ -12,8 +12,6 @@ import {
   parseDate,
 } from "../utils";
 import { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
-import { useEscape } from "./useEscape";
-import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export type RangeValidationT = {
   from: DateValidationT;
@@ -218,14 +216,12 @@ export const useRangeDatepicker = (
     onValidate,
     defaultMonth,
     allowTwoDigitYear = true,
-    openOnFocus = false,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
 
   const inputRefTo = useRef<HTMLInputElement>(null);
   const inputRefFrom = useRef<HTMLInputElement>(null);
-  const [daypickerRef, setDaypickerRef] = useState<HTMLDivElement>();
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
@@ -324,7 +320,6 @@ export const useRangeDatepicker = (
     if (e.target.readOnly) {
       return;
     }
-    !open && openOnFocus && setOpen(true);
     const day = parseDate(
       e.target.value,
       today,
@@ -549,7 +544,6 @@ export const useRangeDatepicker = (
     disabled,
     disableWeekends,
     bubbleEscape: true,
-    ref: setDaypickerRef,
   };
 
   const fromInputProps = {
