@@ -25,9 +25,7 @@
     "playwright": "playwright test",
     "test:watch": "jest --watch",
     "backup": "ts-node scripts/backup.js",
-    "watch:tw": "yarn tailwindcss -i ./styles/index.css -o ./dist/tw.css --watch",
-    "playroom:start": "playroom start",
-    "playroom:build": "playroom build"
+    "watch:tw": "yarn tailwindcss -i ./styles/index.css -o ./dist/tw.css --watch"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.2.3",
@@ -85,7 +83,6 @@
     "jsdom": "^22.1.0",
     "json5": "2.2.1",
     "pino-pretty": "^10.0.0",
-    "playroom": "^0.32.1",
     "postcss": "^8.4.31",
     "postcss-import": "^14.1.0",
     "postcss-loader": "7.0.0",

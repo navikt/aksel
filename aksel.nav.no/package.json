@@ -12,7 +12,8 @@
     "test": "yarn workspace website test"
   },
   "workspaces": [
-    "website"
+    "website",
+    "playroom"
   ],
   "dependencies": {
     "@navikt/aksel-icons": "^5.7.6",
