@@ -130,6 +130,7 @@ const serializers: Partial<PortableTextReactComponents> = {
 
       return (
         <Link
+          as={NextLink}
           href={href}
           inlineText
           onClick={(e) =>
