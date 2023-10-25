@@ -3850,15 +3850,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@portabletext/react@npm:^3.0.7":
-  version: 3.0.10
-  resolution: "@portabletext/react@npm:3.0.10"
+"@portabletext/react@npm:^3.0.11":
+  version: 3.0.11
+  resolution: "@portabletext/react@npm:3.0.11"
   dependencies:
     "@portabletext/toolkit": ^2.0.10
     "@portabletext/types": ^2.0.8
   peerDependencies:
     react: ^17 || ^18
-  checksum: fdb1fdd017e700ddeedf2ad04241e55d043a4b1dcbc940c7017396a86a698f8ef257d84c1d3c077fdc987130841d16fe3870bbee05600fc16206143355a7b9b2
+  checksum: d63116bc73b6ea9f68e87d23fcd05400c16e36443b6251ac9a62821eaed3d4107f815318695eec527b27ca3213282e2c7b83a2a15e4383f52eadb5ff6a9e4dbe
   languageName: node
   linkType: hard
 
@@ -26644,7 +26644,7 @@ __metadata:
     "@next/bundle-analyzer": 13.2.1
     "@next/eslint-plugin-next": 13.2.1
     "@playwright/test": 1.35.1
-    "@portabletext/react": ^3.0.7
+    "@portabletext/react": ^3.0.11
     "@sanity/block-tools": ^3.18.0
     "@sanity/client": ^6.6.0
     "@sanity/code-input": 4.1.1
