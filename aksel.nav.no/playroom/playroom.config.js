@@ -30,8 +30,8 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.(ts|tsx)$/,
-          include: [path.resolve("./src")],
+          test: /\.(js|ts|tsx)$/,
+          include: [path.resolve("./")],
           use: [
             {
               loader: require.resolve("babel-loader"),

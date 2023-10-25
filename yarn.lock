@@ -21284,6 +21284,7 @@ __metadata:
     babel-plugin-preval: ^5.1.0
     css-loader: ^6.8.1
     playroom: ^0.32.1
+    react: ^18.0.0
     style-loader: ^3.3.3
   languageName: unknown
   linkType: soft
