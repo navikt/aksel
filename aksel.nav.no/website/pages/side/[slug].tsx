@@ -72,7 +72,7 @@ const Page = ({ page }: PageProps["props"]) => {
           </div>
         </div>
         <div className="mt-12">
-          <TableOfContents changedState={page?.content ?? []} hideToc />
+          <TableOfContents hideToc />
           <div className="mt-8 px-4">
             <SanityBlockContent
               className="dynamic-wrapper-prose"

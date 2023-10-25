@@ -1,7 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
 import TOC from "./TOCv2";
-import { useEffect, useState } from "react";
 
 const meta = {
   title: "Website-modules/TOCv2",
@@ -14,11 +12,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Designsystemet: Story = {
   render: () => {
-    const [render, setRender] = useState<boolean>(false);
-    useEffect(() => {
-      setRender(true);
-    }, []);
-
     return (
       <div className="flex justify-between">
         <main className="grid gap-32 last-of-type:mb-[90vh]">
@@ -35,7 +28,7 @@ export const Designsystemet: Story = {
           <h3 id="Z3">Heading Z3</h3>
           <h3 id="Z4">Heading Z4</h3>
         </main>
-        <TOC changedState={render} />
+        <TOC />
       </div>
     );
   },
