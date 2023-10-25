@@ -251,20 +251,6 @@ export const useRangeDatepicker = (
 
   const [open, setOpen] = useState(false);
 
-  /*   useOutsideClickHandler(open, setOpen, [
-    daypickerRef,
-    inputRefTo.current,
-    inputRefFrom.current,
-    inputRefTo.current?.nextSibling,
-    inputRefFrom.current?.nextSibling,
-  ]);
-
-  useEscape(
-    open,
-    setOpen,
-    selectedRange?.from && !selectedRange?.to ? inputRefTo : inputRefFrom
-  ); */
-
   const updateRange = (range?: DateRange) => {
     onRangeChange?.(range);
     setSelectedRange(range);

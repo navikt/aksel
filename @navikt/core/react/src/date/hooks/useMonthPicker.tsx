@@ -8,8 +8,6 @@ import {
   isValidDate,
   parseDate,
 } from "../utils";
-import { useEscape } from "./useEscape";
-import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export interface UseMonthPickerOptions
   extends Pick<
@@ -146,7 +144,6 @@ export const useMonthpicker = (
   const locale = getLocaleFromString(_locale);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const [monthpickerRef, setMonthpickerRef] = useState<HTMLDivElement>();
 
   // Initialize states
   const [year, setYear] = useState(defaultSelected ?? defaultYear ?? today);
@@ -167,14 +164,6 @@ export const useMonthpicker = (
     },
     [defaultSelected, defaultYear, selectedMonth, today]
   );
-
-  useOutsideClickHandler(open, handleOpen, [
-    monthpickerRef,
-    inputRef.current,
-    inputRef.current?.nextSibling,
-  ]);
-
-  useEscape(open, handleOpen, inputRef);
 
   const updateMonth = (date?: Date) => {
     onMonthChange?.(date);
@@ -315,7 +304,6 @@ export const useMonthpicker = (
     onOpenToggle: () => handleOpen(!open),
     disabled,
     bubbleEscape: true,
-    ref: setMonthpickerRef,
   };
 
   const inputProps = {
