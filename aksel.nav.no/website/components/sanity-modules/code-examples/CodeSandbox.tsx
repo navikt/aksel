@@ -31,7 +31,7 @@ export const CodeSandbox = ({ code }: { code: string }) => {
         } as any,
         isBinary: false,
       },
-      "App.js": {
+      "App.tsx": {
         content: getCode(code),
         isBinary: false,
       },
@@ -54,7 +54,7 @@ export const CodeSandbox = ({ code }: { code: string }) => {
       className="h-8"
     >
       <input type="hidden" name="parameters" value={parameters} />
-      <input type="hidden" name="query" value="module=App.js" />
+      <input type="hidden" name="query" value="module=App.tsx" />
       <Button
         variant="tertiary-neutral"
         size="small"
