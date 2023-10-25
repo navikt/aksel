@@ -302,6 +302,7 @@ export const useMonthpicker = (
     toDate,
     open,
     onOpenToggle: () => handleOpen(!open),
+    onClose: () => handleOpen(!open),
     disabled,
     bubbleEscape: true,
   };
