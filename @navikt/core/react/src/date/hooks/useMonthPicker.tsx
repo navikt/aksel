@@ -43,7 +43,7 @@ export interface UseMonthPickerOptions
    */
   allowTwoDigitYear?: boolean;
   /**
-   * Will be removed in future versions
+   * Will be removed in a future major-versionfuture versions
    * @deprecated
    */
   openOnFocus?: boolean;

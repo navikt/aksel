@@ -57,7 +57,7 @@ export interface UseDatepickerOptions
    */
   allowTwoDigitYear?: boolean;
   /**
-   * Will be removed in future versions
+   * Will be removed in a future major-version
    * @deprecated
    */
   openOnFocus?: boolean;
