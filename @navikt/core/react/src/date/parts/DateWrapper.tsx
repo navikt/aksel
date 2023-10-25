@@ -1,3 +1,4 @@
+import cl from "clsx";
 import React, { useContext } from "react";
 import { Button } from "../../button";
 import { Modal } from "../../modal";
@@ -45,7 +46,9 @@ export const DateWrapper = ({
         onClose={() => onClose()}
         placement="bottom-start"
         role="dialog"
-        className="navds-date__popover"
+        className={cl("navds-date__popover", {
+          "navds-date": variant === "month",
+        })}
         flip={false}
         {...popoverProps}
       >
