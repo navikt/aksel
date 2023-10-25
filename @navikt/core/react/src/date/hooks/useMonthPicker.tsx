@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { DateInputProps } from "../DateInput";
 import { MonthPickerProps } from "../monthpicker/types";
+import { DateInputProps } from "../parts/DateInput";
 import {
   formatDateForInput,
   getLocaleFromString,

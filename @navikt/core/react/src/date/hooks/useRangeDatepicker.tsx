@@ -3,8 +3,8 @@ import checkIsBefore from "date-fns/isBefore";
 import isWeekend from "date-fns/isWeekend";
 import React, { useRef, useState } from "react";
 import { DateRange, isMatch } from "react-day-picker";
-import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
+import { DateInputProps } from "../parts/DateInput";
 import {
   formatDateForInput,
   getLocaleFromString,
