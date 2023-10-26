@@ -46,7 +46,10 @@ export const grunnleggendeKategorier = [
   { title: "Kode", value: "kode" },
 ];
 
-export const monsterKategorier = [];
+export const malerKategorier = [
+  { title: "Maler", value: "maler" },
+  { title: "Mønster", value: "monster" },
+];
 
 export const bloggKategorier = [
   { title: "Nytt fra teamene", value: "nytt-fra-teamene" },
