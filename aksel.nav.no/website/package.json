@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next | pino-pretty",
     "build:old": "next build",
-    "build": "next build && yarn update:searchindex && yarn cp:assets",
+    "build": "yarn workspace playroom build && next build && yarn update:searchindex && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "cp:playroom": "cross-env mkdir public/playroom && cross-env cp -R ../playroom/dist/* public/playroom",
     "cp:static": "cross-env cp -R .next/static .next/standalone/aksel.nav.no/website/.next/static",

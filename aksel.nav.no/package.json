@@ -13,7 +13,7 @@
   },
   "workspaces": [
     "website",
-    "@navikt/playroom"
+    "playroom"
   ],
   "dependencies": {
     "@navikt/aksel-icons": "^5.7.6",
