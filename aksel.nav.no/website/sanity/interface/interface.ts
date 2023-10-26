@@ -61,7 +61,7 @@ export const getAkselDocuments = async (
 };
 
 export const getDocumentsTmp = async (
-  source: "komponent_artikkel" | "ds_artikkel",
+  source: "komponent_artikkel" | "ds_artikkel" | "aksel_maler",
   token?: string
 ): Promise<string[]> => {
   const docs = await getDocuments(source, token);
@@ -87,6 +87,7 @@ async function getDocuments(
   source:
     | "komponent_artikkel"
     | "ds_artikkel"
+    | "aksel_maler"
     | "aksel_artikkel"
     | "aksel_blogg"
     | "aksel_prinsipp"
@@ -103,6 +104,7 @@ async function getDocuments(
           ? [
               "komponent_artikkel",
               "ds_artikkel",
+              "aksel_maler",
               "aksel_artikkel",
               "aksel_blogg",
               "aksel_prinsipp",

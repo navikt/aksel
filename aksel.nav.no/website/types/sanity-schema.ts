@@ -2,6 +2,7 @@ import {
   bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
+  malerKategorier,
 } from "../sanity/config";
 
 export type ResolveSlugT<T> = Omit<T, "slug"> & {
@@ -127,6 +128,19 @@ export interface AkselGrunnleggendeDocT
     unsafe?: boolean;
     bilde?: any;
   };
+  intro: {
+    body?: any[];
+    brukes_til: string[];
+    brukes_ikke_til?: string[];
+  };
+  content: any[];
+  updateInfo?: {
+    lastVerified?: string;
+  };
+}
+
+export interface AkselMalerDocT extends DocumentT<"aksel_maler">, ArticleT {
+  kategori: (typeof malerKategorier)[number]["value"];
   intro: {
     body?: any[];
     brukes_til: string[];

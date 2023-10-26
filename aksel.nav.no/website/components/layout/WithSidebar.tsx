@@ -30,7 +30,11 @@ export const WithSidebar = ({
   variant?: "page" | "landingPage";
 }) => {
   return (
-    <Box background="bg-default" paddingBlock="6 24">
+    <Box
+      background="bg-default"
+      paddingBlock="6 24"
+      className="min-h-screen-header"
+    >
       <div className="mx-auto flex w-full max-w-screen-2xl gap-6">
         <Sidebar kategori={pageType.type} links={sidebar} />
         <main

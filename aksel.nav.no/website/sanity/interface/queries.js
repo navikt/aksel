@@ -1,4 +1,4 @@
-import { grunnleggendeKategorier, komponentKategorier } from "../config";
+import { categoryLookup } from "../config";
 
 const markDef = `
 markDefs[]{
@@ -185,12 +185,7 @@ export const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
 }`;
 
 export const landingPageQuery = (t) => {
-  const kat =
-    t === "komponenter"
-      ? komponentKategorier
-      : t === "grunnleggende"
-      ? grunnleggendeKategorier
-      : [];
+  const kat = categoryLookup(t);
 
   return `"page": *[_type == "${t}_landingsside"][0]{
     ...,

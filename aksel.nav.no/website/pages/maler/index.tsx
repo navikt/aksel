@@ -25,14 +25,14 @@ type PageProps = NextPageT<{
 }>;
 
 export const query = `{${sidebarQuery}, ${landingPageQuery(
-  "grunnleggende"
-)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
+  "maler"
+)}, "links": *[_type == "aksel_maler" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
   const { sidebar, page, links } = await getClient().fetch(query, {
-    type: "ds_artikkel",
+    type: "aksel_maler",
   });
 
   return {

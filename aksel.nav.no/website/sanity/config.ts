@@ -51,6 +51,18 @@ export const malerKategorier = [
   { title: "Mønster", value: "monster" },
 ];
 
+const lookup = {
+  komponenter: komponentKategorier,
+  grunnleggende: grunnleggendeKategorier,
+  maler: malerKategorier,
+};
+
+export const categoryLookup = (c: string) => {
+  const _c = c.toLowerCase();
+
+  return _c in lookup ? lookup[_c] : [];
+};
+
 export const bloggKategorier = [
   { title: "Nytt fra teamene", value: "nytt-fra-teamene" },
   { title: "Da vi gjorde dette", value: "da-vi-gjorde-dette" },

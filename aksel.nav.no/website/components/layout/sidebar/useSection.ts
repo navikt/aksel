@@ -1,16 +1,6 @@
 import { AkselSidebarT } from "@/types";
 import { useMemo } from "react";
-import {
-  grunnleggendeKategorier,
-  komponentKategorier,
-  malerKategorier,
-} from "../../../sanity/config";
-
-const categoryLookup = {
-  Komponenter: komponentKategorier,
-  Grunnleggende: grunnleggendeKategorier,
-  Maler: malerKategorier,
-};
+import { categoryLookup } from "../../../sanity/config";
 
 export const useSection = ({
   kategori,
@@ -21,7 +11,7 @@ export const useSection = ({
 }) => {
   const sections = useMemo(
     () =>
-      categoryLookup[kategori]
+      categoryLookup(kategori)
         .map((x) => ({
           ...x,
           pages: links
