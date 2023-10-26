@@ -82,12 +82,13 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       open,
       onBeforeClose,
       onCancel,
-      closeOnClickOutside,
+      closeOnBackdropClick,
       width,
       portal,
       className,
       "aria-labelledby": ariaLabelledby,
       style,
+      onClick,
       ...rest
     }: ModalProps,
     ref
@@ -129,39 +130,51 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
 
+    const mergedClassName = cl("navds-modal", className, {
+      "navds-modal--polyfilled": needPolyfill,
+      "navds-modal--autowidth": !width,
+      [`navds-modal--${width}`]: isWidthPreset,
+    });
+
+    const mergedStyle = {
+      ...style,
+      ...(!isWidthPreset ? { width } : {}),
+    };
+
+    const mergedOnCancel: React.DialogHTMLAttributes<HTMLDialogElement>["onCancel"] =
+      (event) => {
+        if (onBeforeClose && onBeforeClose() === false) {
+          event.preventDefault();
+        } else if (onCancel) onCancel(event);
+      };
+
+    const mergedOnClick = closeOnBackdropClick
+      ? (event: React.MouseEvent<HTMLDialogElement>) => {
+          if (onClick) onClick(event);
+          if (
+            event.target === modalRef.current &&
+            (!onBeforeClose || onBeforeClose() !== false)
+          ) {
+            modalRef.current?.close();
+          }
+        }
+      : onClick;
+
+    const mergedAriaLabelledBy =
+      !ariaLabelledby && !rest["aria-label"] && header
+        ? ariaLabelId
+        : ariaLabelledby;
+
     const component = (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
       <dialog
         {...rest}
         ref={mergedRef}
-        className={cl("navds-modal", className, {
-          "navds-modal--polyfilled": needPolyfill,
-          "navds-modal--autowidth": !width,
-          [`navds-modal--${width}`]: isWidthPreset,
-        })}
-        style={{
-          ...style,
-          ...(!isWidthPreset ? { width } : {}),
-        }}
-        onCancel={(event) => {
-          // FYI: onCancel fires when you press Esc
-          if (onBeforeClose && onBeforeClose() === false) {
-            event.preventDefault();
-          } else if (onCancel) onCancel(event);
-        }}
-        onClick={
-          closeOnClickOutside
-            ? (event) =>
-                event.target === modalRef.current &&
-                (!onBeforeClose || onBeforeClose() !== false) &&
-                modalRef.current.close()
-            : undefined
-        }
-        aria-labelledby={
-          !ariaLabelledby && !rest["aria-label"] && header
-            ? ariaLabelId
-            : ariaLabelledby
-        }
+        className={mergedClassName}
+        style={mergedStyle}
+        onCancel={mergedOnCancel} // FYI: onCancel fires when you press Esc
+        onClick={mergedOnClick}
+        aria-labelledby={mergedAriaLabelledBy}
       >
         <ModalContext.Provider
           value={{

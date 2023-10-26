@@ -9,7 +9,7 @@ const Example = () => {
     <div className="py-16">
       <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
-      <Modal ref={ref} header={{ heading: "Overskrift" }} closeOnClickOutside>
+      <Modal ref={ref} header={{ heading: "Overskrift" }} closeOnBackdropClick>
         <Modal.Body>
           <BodyLong>
             Culpa aliquip ut cupidatat laborum minim quis ex in aliqua. Qui
@@ -34,5 +34,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Husk at det er lett å klikke utenfor ved et uhell. Ikke bruk 'closeOnClickOutside' hvis det kan føre til at brukeren mister data eller går glipp av viktig informasjon.",
+  desc: "Husk at det er lett å klikke utenfor ved et uhell. Ikke bruk 'closeOnBackdropClick' hvis det kan føre til at brukeren mister data eller går glipp av viktig informasjon.",
 };
