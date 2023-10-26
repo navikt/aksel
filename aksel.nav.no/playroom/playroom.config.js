@@ -20,7 +20,7 @@ module.exports = {
   iframeSandbox: "allow-scripts allow-same-origin",
   exampleCode: `
   <Heading>This is a sandbox!</Heading>
-  <HStack gap="2">
+  <HStack gap="10">
     <Box> box 1</Box> <Box> box 2</Box> <Box> box 3</Box>
   </HStack>
   <Button>test</Button>

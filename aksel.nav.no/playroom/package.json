@@ -1,9 +1,9 @@
 {
-  "name": "playroom",
+  "name": "@navikt/playroom",
   "packageManager": "yarn@3.2.1",
   "scripts": {
-    "playroom:start": "playroom start",
-    "playroom:build": "playroom build"
+    "start": "playroom start",
+    "build": "playroom build"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.2",

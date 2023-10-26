@@ -13,9 +13,10 @@
   },
   "workspaces": [
     "website",
-    "playroom"
+    "@navikt/playroom"
   ],
   "dependencies": {
+    "@navikt/playroom": "*",
     "@navikt/aksel-icons": "^5.7.6",
     "@navikt/ds-css": "^5.7.6",
     "@navikt/ds-react": "^5.7.6",

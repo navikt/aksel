@@ -13,12 +13,16 @@ const snippets = [
   {
     group: "Templates",
     name: "Component with state",
-    code: `// 👇 Everything after the last blank line will be rendered.
-  // State not updating? Try refreshing your browser
-  const [count, setCount] = useState(0);
-  
-  <div>Foo</div>
-  <Button variant="primary" onClick={() => setCount(count + 1)}>Count: {count}</Button>`,
+    code: `{
+  (() => {
+    const [count, setCount] = React.useState(0);
+
+    return (
+      <Button variant="primary" onClick={() => setCount(count + 1)}>Count: {count}</Button>
+    )
+  })()
+}
+    `,
   },
 ];
 
