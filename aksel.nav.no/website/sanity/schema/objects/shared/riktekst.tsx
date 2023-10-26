@@ -1,5 +1,3 @@
-import React from "react";
-import { allArticleDocsRef } from "../../../config";
 import {
   BulletListIcon,
   CodeIcon,
@@ -8,8 +6,10 @@ import {
   LinkIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
-import { KBD } from "components/website-modules/KBD";
 import { InlineCode } from "components/website-modules/InlineCode";
+import { KBD } from "components/website-modules/KBD";
+import React from "react";
+import { allArticleDocsRef } from "../../../config";
 
 export const styles = [
   {
@@ -131,6 +131,7 @@ const Riktekst = (
   type:
     | "god-praksis"
     | "grunnleggende"
+    | "maler"
     | "komponent"
     | "prinsipp"
     | "standard"
@@ -225,6 +226,14 @@ export const RiktekstGrunnleggende = {
   name: "riktekst_grunnleggende",
   type: "array",
   of: Riktekst("grunnleggende"),
+  icon: FileTextIcon,
+};
+
+export const RiktekstMaler = {
+  title: "Riktekst Maler",
+  name: "riktekst_maler",
+  type: "array",
+  of: Riktekst("maler"),
   icon: FileTextIcon,
 };
 

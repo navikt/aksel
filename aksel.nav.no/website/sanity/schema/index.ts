@@ -23,6 +23,10 @@ export const schema: SchemaPluginOptions = {
     document.GrunnleggendeLandingSide,
     document.GrunnleggendeArtikkel,
 
+    /* Maler */
+    document.MalerLandingSide,
+    document.MalerArtikkel,
+
     /* God-praksis */
     document.Tema,
     document.GodPraksisArtikkel,
@@ -58,6 +62,7 @@ export const schema: SchemaPluginOptions = {
     object.RiktekstKomponent,
     object.RiktekstEnkel,
     object.RiktekstGrunnleggende,
+    object.RiktekstMaler,
     object.RiktekstStandard,
     object.RiktekstPrinsipp,
     object.RiktekstStandalone,

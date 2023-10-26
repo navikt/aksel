@@ -4,6 +4,7 @@ import {
   grunnleggendeKategorier,
   komponentKategorier,
   landingsider,
+  malerKategorier,
   previews,
   prinsippKategorier,
 } from "../../config";
@@ -18,6 +19,7 @@ import {
   LightBulbIcon,
   NewspaperIcon,
   PencilBoardIcon,
+  RectangleSectionsIcon,
   TokenIcon,
 } from "@navikt/aksel-icons";
 import differenceInMonths from "date-fns/differenceInMonths";
@@ -32,7 +34,9 @@ const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 const filtered = [
   "ds_artikkel",
   "komponent_artikkel",
+  "aksel_maler",
   "grunnleggende_landingsside",
+  "maler_landingsside",
   "komponenter_landingsside",
   "media.tag",
   "editor",
@@ -246,6 +250,26 @@ export const structure = async (
               ...(await PanesWithCount(
                 "komponent_artikkel",
                 komponentKategorier,
+                getClient,
+                S
+              )),
+            ])
+        ),
+      S.listItem()
+        .title("Maler")
+        .icon(RectangleSectionsIcon)
+        .child(
+          S.list()
+            .title("Maler")
+            .items([
+              S.documentListItem()
+                .title(`Landingsside`)
+                .schemaType(`maler_landingsside`)
+                .id(`maler_landingsside_id1`),
+              S.divider(),
+              ...(await PanesWithCount(
+                "aksel_maler",
+                malerKategorier,
                 getClient,
                 S
               )),

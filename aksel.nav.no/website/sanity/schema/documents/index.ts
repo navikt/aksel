@@ -13,6 +13,8 @@ export * from "./komponenter/kode-eksempler";
 export * from "./komponenter/landingsside";
 export * from "./komponenter/props";
 export * from "./komponenter/tokens";
+export * from "./maler/artikkel";
+export * from "./maler/landingsside";
 export * from "./prinsipper/artikkel";
 export * from "./prinsipper/landingsside";
 export * from "./publiseringsflyt";

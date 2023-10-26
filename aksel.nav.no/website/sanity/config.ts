@@ -47,7 +47,7 @@ export const grunnleggendeKategorier = [
 ];
 
 export const malerKategorier = [
-  { title: "Maler", value: "maler" },
+  { title: "Layout", value: "layout" },
   { title: "Mønster", value: "monster" },
 ];
 
