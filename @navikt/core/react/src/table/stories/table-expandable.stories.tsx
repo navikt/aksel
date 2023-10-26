@@ -1,3 +1,5 @@
+import { expect, jest } from "@storybook/jest";
+import { userEvent, within } from "@storybook/testing-library";
 import React, { useState } from "react";
 import { Table } from "..";
 import { Button, Checkbox, Link } from "../..";
@@ -309,6 +311,14 @@ export const ClickableRow = () => {
             expandOnRowClick
           >
             <Table.DataCell>Hans</Table.DataCell>
+            <Table.DataCell hasInteractiveContent={false}>
+              <div>Should</div>
+              <div>be</div>
+              <div>clickable</div>
+            </Table.DataCell>
+            <Table.DataCell hasInteractiveContent={false}>
+              alkødaksdkasøld
+            </Table.DataCell>
             <Table.DataCell>
               <Checkbox hideLabel size="small">
                 Sett
@@ -319,4 +329,67 @@ export const ClickableRow = () => {
       </Table>
     </>
   );
+};
+
+export const ClickableRowTest = {
+  render: ({ onOpenChange }) => {
+    return (
+      <>
+        <Table zebraStripes>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell aria-hidden />
+              <Table.HeaderCell aria-hidden />
+              <Table.HeaderCell aria-hidden />
+              <Table.HeaderCell aria-hidden />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            <Table.ExpandableRow
+              content={<div>placeholder row 2</div>}
+              togglePlacement="right"
+              data-testid="row1"
+              expandOnRowClick
+              onOpenChange={onOpenChange}
+            >
+              <Table.DataCell hasInteractiveContent={false}>
+                <div data-testid="cell1">Should be clickable</div>
+              </Table.DataCell>
+              <Table.DataCell hasInteractiveContent={false} data-testid="cell2">
+                Should also be clickable
+              </Table.DataCell>
+
+              <Table.DataCell>
+                <div data-testid="cell3">Should not be clickable</div>
+              </Table.DataCell>
+            </Table.ExpandableRow>
+          </Table.Body>
+        </Table>
+      </>
+    );
+  },
+  args: {
+    onOpenChange: jest.fn(),
+  },
+  play: async ({ canvasElement, args }) => {
+    args.onOpenChange.mockClear();
+    const canvas = within(canvasElement);
+
+    const cell1 = canvas.getByText("Should be clickable");
+    const cell2 = canvas.getByText("Should also be clickable");
+    const cell3 = canvas.getByText("Should not be clickable");
+
+    await userEvent.click(cell1);
+    expect(args.onOpenChange.mock.calls).toHaveLength(1);
+    await userEvent.click(cell1);
+    expect(args.onOpenChange.mock.calls).toHaveLength(2);
+
+    await userEvent.click(cell2);
+    expect(args.onOpenChange.mock.calls).toHaveLength(3);
+    await userEvent.click(cell2);
+    expect(args.onOpenChange.mock.calls).toHaveLength(4);
+
+    await userEvent.click(cell3);
+    expect(args.onOpenChange.mock.calls).toHaveLength(4);
+  },
 };

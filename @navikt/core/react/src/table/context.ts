@@ -7,3 +7,10 @@ export interface TableContextProps {
 }
 
 export const TableContext = createContext<TableContextProps | null>(null);
+
+export interface TableExpansionContextProps {
+  expansionHandler: (event: any) => void;
+}
+
+export const TableExpansionContext =
+  createContext<TableExpansionContextProps | null>(null);

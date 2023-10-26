@@ -5,6 +5,7 @@ import { useId } from "../util";
 import AnimateHeight from "../util/AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
+import { TableExpansionContext } from "./context";
 
 export interface ExpandableRowProps extends Omit<RowProps, "content"> {
   /**
@@ -81,51 +82,52 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       e.stopPropagation();
     };
 
-    const onRowClick = (e) => {
-      if (e.target.nodeName === "TD" || e.target.nodeName === "TH") {
-        expansionHandler(e);
-      }
-    };
+    const allowExpand = (e) =>
+      !!(e.target.nodeName === "TD" || e.target.nodeName === "TH");
+
+    const onRowClick = (e) => allowExpand(e) && expansionHandler(e);
 
     return (
       <>
-        <Row
-          {...rest}
-          ref={ref}
-          className={cl("navds-table__expandable-row", className, {
-            "navds-table__expandable-row--open": isOpen,
-            "navds-table__expandable-row--expansion-disabled":
-              expansionDisabled,
-            "navds-table__expandable-row--clickable": expandOnRowClick,
-          })}
-          onClick={(e) => {
-            !expansionDisabled && expandOnRowClick && onRowClick(e);
-            rest?.onClick?.(e);
-          }}
-        >
-          {togglePlacement === "right" && children}
-          <DataCell
-            className={cl("navds-table__toggle-expand-cell", {
-              "navds-table__toggle-expand-cell--open": isOpen,
+        <TableExpansionContext.Provider value={{ expansionHandler }}>
+          <Row
+            {...rest}
+            ref={ref}
+            className={cl("navds-table__expandable-row", className, {
+              "navds-table__expandable-row--open": isOpen,
+              "navds-table__expandable-row--expansion-disabled":
+                expansionDisabled,
+              "navds-table__expandable-row--clickable": expandOnRowClick,
             })}
+            onClick={(e) => {
+              !expansionDisabled && expandOnRowClick && onRowClick(e);
+              rest?.onClick?.(e);
+            }}
           >
-            {!expansionDisabled && (
-              <button
-                className="navds-table__toggle-expand-button"
-                type="button"
-                aria-controls={id}
-                aria-expanded={isOpen}
-                onClick={expansionHandler}
-              >
-                <ChevronDownIcon
-                  className="navds-table__expandable-icon"
-                  title={isOpen ? "Vis mindre" : "Vis mer"}
-                />
-              </button>
-            )}
-          </DataCell>
-          {togglePlacement === "left" && children}
-        </Row>
+            {togglePlacement === "right" && children}
+            <DataCell
+              className={cl("navds-table__toggle-expand-cell", {
+                "navds-table__toggle-expand-cell--open": isOpen,
+              })}
+            >
+              {!expansionDisabled && (
+                <button
+                  className="navds-table__toggle-expand-button"
+                  type="button"
+                  aria-controls={id}
+                  aria-expanded={isOpen}
+                  onClick={expansionHandler}
+                >
+                  <ChevronDownIcon
+                    className="navds-table__expandable-icon"
+                    title={isOpen ? "Vis mindre" : "Vis mer"}
+                  />
+                </button>
+              )}
+            </DataCell>
+            {togglePlacement === "left" && children}
+          </Row>
+        </TableExpansionContext.Provider>
         <tr className="navds-table__expanded-row" aria-hidden={!isOpen} id={id}>
           <td colSpan={colSpan} className="navds-table__expanded-row-cell">
             <AnimateHeight
