@@ -311,14 +311,6 @@ export const ClickableRow = () => {
             expandOnRowClick
           >
             <Table.DataCell>Hans</Table.DataCell>
-            <Table.DataCell hasInteractiveContent={false}>
-              <div>Should</div>
-              <div>be</div>
-              <div>clickable</div>
-            </Table.DataCell>
-            <Table.DataCell hasInteractiveContent={false}>
-              alkødaksdkasøld
-            </Table.DataCell>
             <Table.DataCell>
               <Checkbox hideLabel size="small">
                 Sett
