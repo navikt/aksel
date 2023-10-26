@@ -1,3 +1,5 @@
+import { isSameMonth } from "date-fns";
+import fnsSetYear from "date-fns/setYear";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { DateInputProps } from "../DateInput";
 import { MonthPickerProps } from "../monthpicker/types";
@@ -8,6 +10,7 @@ import {
   isValidDate,
   parseDate,
 } from "../utils";
+import { isMonthDisabled } from "../utils/disabled-months";
 import { useEscape } from "./useEscape";
 import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
@@ -49,6 +52,10 @@ export interface UseMonthPickerOptions
    * @default true
    */
   openOnFocus?: boolean;
+  /**
+   * @default false
+   */
+  preserveMonthOnYearChange?: boolean;
 }
 
 interface UseMonthPickerValue {
@@ -139,6 +146,7 @@ export const useMonthpicker = (
     defaultYear,
     allowTwoDigitYear = true,
     openOnFocus = true,
+    preserveMonthOnYearChange = false,
   } = opt;
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
@@ -304,9 +312,38 @@ export const useMonthpicker = (
     setYear(month);
   };
 
+  /* Only allow de-selecting if not required */
+  const handleYearUpdate = (month?: Date) => {
+    updateMonth(month);
+    updateValidation();
+    setInputValue(
+      month ? formatDateForInput(month, locale, "month", inputFormat) : ""
+    );
+  };
+
+  const handleYearChange = (yearDate?: Date) => {
+    setYear(yearDate ?? today);
+
+    const _selectedValue = selectedMonth;
+    if (!preserveMonthOnYearChange || !_selectedValue || !yearDate) {
+      return;
+    }
+
+    const nextSelection = fnsSetYear(_selectedValue, yearDate.getFullYear());
+
+    const disabledMatch = disabled && isMatch(nextSelection, disabled);
+
+    const isDisabled =
+      disabledMatch ||
+      isMonthDisabled(nextSelection, fromDate, toDate) ||
+      isSameMonth(nextSelection, _selectedValue);
+
+    !isDisabled && handleYearUpdate(nextSelection);
+  };
+
   const monthpickerProps = {
     year,
-    onYearChange: (y?: Date) => setYear(y ?? today),
+    onYearChange: handleYearChange,
     onMonthSelect: handleMonthClick,
     selected: selectedMonth,
     locale: _locale,

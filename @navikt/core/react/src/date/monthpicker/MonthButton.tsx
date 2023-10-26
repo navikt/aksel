@@ -1,6 +1,4 @@
 import cl from "clsx";
-import compareAsc from "date-fns/compareAsc";
-import compareDesc from "date-fns/compareDesc";
 import format from "date-fns/format";
 import isSameMonth from "date-fns/isSameMonth";
 import setYear from "date-fns/setYear";
@@ -8,6 +6,7 @@ import React, { useEffect, useRef } from "react";
 import { useDayPicker } from "react-day-picker";
 import { useSharedMonthContext } from "../context";
 import { dateIsInCurrentMonth, isMatch, nextEnabled } from "../utils";
+import { isMonthDisabled } from "../utils/disabled-months";
 
 interface MonthType {
   month: Date;
@@ -17,20 +16,6 @@ interface MonthType {
   tabRoot?: Date;
   setTabRoot: (date?: Date) => void;
 }
-
-const disableMonth = (month: Date, fromDate?: Date, toDate?: Date) => {
-  if (fromDate && toDate) {
-    return (
-      (compareAsc(month, fromDate) === -1 && !isSameMonth(month, fromDate)) ||
-      (compareDesc(month, toDate) === -1 && !isSameMonth(month, toDate))
-    );
-  } else if (fromDate) {
-    return compareAsc(month, fromDate) === -1 && !isSameMonth(month, fromDate);
-  } else if (toDate) {
-    return compareDesc(month, toDate) === -1 && !isSameMonth(month, toDate);
-  }
-  return false;
-};
 
 export const MonthButton = ({
   month,
@@ -56,7 +41,7 @@ export const MonthButton = ({
 
   const isDisabled =
     isMatch(setYear(month, year.getFullYear()), disabled) ||
-    disableMonth(month, fromDate, toDate);
+    isMonthDisabled(month, fromDate, toDate);
 
   return (
     <button

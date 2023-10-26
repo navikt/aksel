@@ -1,5 +1,4 @@
 import { Meta, StoryFn } from "@storybook/react";
-import setYear from "date-fns/setYear";
 import React, { useId, useState } from "react";
 import { Button, DateInputProps } from "../..";
 import { useMonthpicker } from "../hooks";
@@ -151,23 +150,16 @@ export const UserControlled = () => {
 };
 
 export const FollowYear = () => {
-  const { monthpickerProps, inputProps, selectedMonth, setSelected } =
-    useMonthpicker({
-      fromDate: new Date("Aug 23 2019"),
-      toDate: new Date("Aug 23 2025"),
-      onMonthChange: console.log,
-    });
-
-  const customYearChange = (yearDate?: Date) => {
-    monthpickerProps.onYearChange?.(yearDate);
-    if (selectedMonth && yearDate) {
-      setSelected(setYear(selectedMonth, yearDate.getFullYear()));
-    }
-  };
+  const { monthpickerProps, inputProps, selectedMonth } = useMonthpicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Aug 23 2025"),
+    onMonthChange: console.log,
+    preserveMonthOnYearChange: true,
+  });
 
   return (
     <div className="min-h-96">
-      <MonthPicker {...monthpickerProps} onYearChange={customYearChange}>
+      <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input {...inputProps} label="Velg månede" />
       </MonthPicker>
       {selectedMonth && <div className="pt-4">{selectedMonth.getMonth()}</div>}
