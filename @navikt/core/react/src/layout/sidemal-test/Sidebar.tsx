@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "../../link";
 import { Heading, Label } from "../../typography";
 import { Box } from "../box";
 import { VStack } from "../stack";
-import { Link } from "../../link";
 
 const LinkElement = ({ children }) => {
   return (
