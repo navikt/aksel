@@ -1,4 +1,4 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { CodeSnippetT } from "@/types";
 import { ChevronRightIcon, TerminalIcon } from "@navikt/aksel-icons";
 import { CopyButton, Label } from "@navikt/ds-react";
@@ -6,7 +6,11 @@ import cl from "clsx";
 import { Highlight, Language } from "prism-react-renderer";
 import theme from "./theme";
 
-const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
+type CodeSnippetProps = {
+  node: CodeSnippetT;
+};
+
+const CodeSnippet = ({ node: { code, title } }: CodeSnippetProps) => {
   if (!code || !code.code) {
     return null;
   }
@@ -94,4 +98,10 @@ const CodeSnippet = ({ node: { code, title } }: { node: CodeSnippetT }) => {
   );
 };
 
-export default withErrorBoundary(CodeSnippet, "Kode snippet");
+export default function Component(props: CodeSnippetProps) {
+  return (
+    <ErrorBoundary boundaryName="Kodesnippet">
+      <CodeSnippet {...props} />
+    </ErrorBoundary>
+  );
+}

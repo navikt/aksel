@@ -1,4 +1,4 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { abbrName } from "@/utils";
@@ -29,15 +29,13 @@ export type ArticleT = {
   contributors?: { title: string }[];
 };
 
-const Card = ({
-  article,
-  visible,
-  index,
-}: {
+type CardProps = {
   article: ArticleT;
   visible: boolean;
   index: number;
-}) => {
+};
+
+const Card = ({ article, visible, index }: CardProps) => {
   const date = useFormatedDate(article.publishedAt ?? article._updatedAt);
 
   const showFooter = ["aksel_artikkel", "aksel_blogg"].includes(article._type);
@@ -153,4 +151,10 @@ const Card = ({
   );
 };
 
-export default withErrorBoundary(Card, "FrontpageBlockCard");
+export default function Component(props: CardProps) {
+  return (
+    <ErrorBoundary boundaryName="FrontpageBlockCard">
+      <Card {...props} />
+    </ErrorBoundary>
+  );
+}

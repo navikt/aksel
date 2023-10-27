@@ -1,4 +1,4 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { TokenTableT } from "@/types";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import core from "@navikt/ds-css/tokens.json";
@@ -8,7 +8,9 @@ import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import NextLink from "next/link";
 import { useState } from "react";
 
-const TokenTable = ({ node }: { node: TokenTableT }) => {
+type TokenTableProps = { node: TokenTableT };
+
+const TokenTable = ({ node }: TokenTableProps) => {
   const [open, setOpen] = useState(false);
 
   const tokens: { [key: string]: string } | null =
@@ -95,4 +97,10 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
   );
 };
 
-export default withErrorBoundary(TokenTable, "Token-tabell");
+export default function Component(props: TokenTableProps) {
+  return (
+    <ErrorBoundary boundaryName="Token-tabell">
+      <TokenTable {...props} />
+    </ErrorBoundary>
+  );
+}

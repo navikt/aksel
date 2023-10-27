@@ -1,17 +1,17 @@
+import { ErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { ExpansionCard as DsExpansionCard } from "@navikt/ds-react";
-import { withErrorBoundary } from "@/error-boundary";
 
-const ExpansionCard = ({
-  node,
-}: {
+type ExpansionCardProps = {
   node: {
     heading: string;
     heading_level: "h3" | "h4";
     description?: string;
     body: any[];
   };
-}) => {
+};
+
+const ExpansionCard = ({ node }: ExpansionCardProps) => {
   if (!node.heading || !node.body || !node.heading_level) {
     return null;
   }
@@ -42,4 +42,10 @@ const ExpansionCard = ({
   );
 };
 
-export default withErrorBoundary(ExpansionCard, "ExpansionCard");
+export default function Component(props: ExpansionCardProps) {
+  return (
+    <ErrorBoundary boundaryName="ExpansionCard">
+      <ExpansionCard {...props} />
+    </ErrorBoundary>
+  );
+}

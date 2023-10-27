@@ -1,4 +1,4 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { BreakpointsView } from "./categories/Breakpoints";
 import { FontView } from "./categories/Font";
 import { GlobalView } from "./categories/Global";
@@ -8,11 +8,14 @@ import { ShapesView } from "./categories/Shapes";
 import { SpacingView } from "./categories/Spacing";
 import { ZindexView } from "./categories/Zindex";
 
-const TokenView = ({
-  token,
-}: {
-  token: { title: string; kategori: string };
-}) => {
+type TokenViewProps = {
+  token: {
+    title: string;
+    kategori: string;
+  };
+};
+
+const TokenView = ({ token }: TokenViewProps) => {
   switch (true) {
     case token.title === "font":
       return <FontView cat={token.title} />;
@@ -35,4 +38,10 @@ const TokenView = ({
   }
 };
 
-export default withErrorBoundary(TokenView, "TokenView");
+export default function Component(props: TokenViewProps) {
+  return (
+    <ErrorBoundary boundaryName="TokenView">
+      <TokenView {...props} />
+    </ErrorBoundary>
+  );
+}

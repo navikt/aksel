@@ -1,4 +1,4 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import { useEffect, useRef, useState } from "react";
@@ -17,7 +17,11 @@ export type LatestT = {
   };
 };
 
-const Latest = ({ block }: { block: LatestT }) => {
+type LatestArticlesProps = {
+  block: LatestT;
+};
+
+const Latest = ({ block }: LatestArticlesProps) => {
   const highlights = block.highlights?.length;
   const [intersected, setIntersected] = useState(false);
   const section = useRef(null);
@@ -90,4 +94,10 @@ function getList(block: LatestT) {
   });
 }
 
-export default withErrorBoundary(Latest, "Latest");
+export default function Component(props: LatestArticlesProps) {
+  return (
+    <ErrorBoundary boundaryName="Latest-articles">
+      <Latest {...props} />
+    </ErrorBoundary>
+  );
+}

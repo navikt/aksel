@@ -1,8 +1,10 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { TableT } from "@/types";
 import { Table } from "@navikt/ds-react";
 
-const TableComponent = ({ node }: { node: TableT }) => {
+type TableProps = { node: TableT };
+
+const TableComponent = ({ node }: TableProps) => {
   if (!node || !node.rows || node.rows.length < 2) {
     return null;
   }
@@ -45,4 +47,10 @@ const TableComponent = ({ node }: { node: TableT }) => {
   );
 };
 
-export default withErrorBoundary(TableComponent, "Tabell");
+export default function Component(props: TableProps) {
+  return (
+    <ErrorBoundary boundaryName="Tabell">
+      <TableComponent {...props} />
+    </ErrorBoundary>
+  );
+}

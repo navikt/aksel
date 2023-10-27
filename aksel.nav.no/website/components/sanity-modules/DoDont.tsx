@@ -95,7 +95,7 @@ function getIcon(s: string) {
 function getText(s: string) {
   switch (s) {
     case "do":
-      return "Gjør 2";
+      return "Gjør";
     case "dont":
       return "Unngå";
     case "warning":

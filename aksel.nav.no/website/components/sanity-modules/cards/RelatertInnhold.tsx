@@ -1,11 +1,15 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import { RelatertInnholdT } from "@/types";
 import { NewspaperIcon } from "@navikt/aksel-icons";
 import { Heading, Link } from "@navikt/ds-react";
 import NextLink from "next/link";
 
-const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
+type RelatertInnholdProps = {
+  node: RelatertInnholdT;
+};
+
+const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
   if (!node || node?.lenker?.length === 0) {
     return null;
   }
@@ -47,4 +51,10 @@ const RelatertInnhold = ({ node }: { node: RelatertInnholdT }) => {
   );
 };
 
-export default withErrorBoundary(RelatertInnhold, "RelatertInnhold");
+export default function Component(props: RelatertInnholdProps) {
+  return (
+    <ErrorBoundary boundaryName="RelatertInnhold">
+      <RelatertInnhold {...props} />
+    </ErrorBoundary>
+  );
+}

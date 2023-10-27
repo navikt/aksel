@@ -1,11 +1,13 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { UUTableT } from "@/types";
 import { KBD } from "components/website-modules/KBD";
 
 import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import React from "react";
 
-const UuSeksjon = ({ node }: { node: UUTableT }) => {
+type UUTableProps = { node: UUTableT };
+
+const UuSeksjon = ({ node }: UUTableProps) => {
   if (!node || !node?.tastatur) {
     return null;
   }
@@ -36,4 +38,10 @@ const UuSeksjon = ({ node }: { node: UUTableT }) => {
   );
 };
 
-export default withErrorBoundary(UuSeksjon, "UuSeksjon");
+export default function Component(props: UUTableProps) {
+  return (
+    <ErrorBoundary boundaryName="uu-seksjon">
+      <UuSeksjon {...props} />
+    </ErrorBoundary>
+  );
+}

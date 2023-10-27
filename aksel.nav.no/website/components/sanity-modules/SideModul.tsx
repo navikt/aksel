@@ -1,18 +1,18 @@
-import React from "react";
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import TokenView from "./token-view";
 
-type SpesialT = {
-  _key: string;
-  _type: "spesial_seksjon";
-  modul?: "ikonsok" | "token_kategori";
-  logs?: any[];
-  komponenter?: any;
-  farge?: any;
-  token?: { title: string; kategori: string };
+type SideModulProps = {
+  node: {
+    _key: string;
+    _type: "spesial_seksjon";
+    modul?: "ikonsok" | "token_kategori";
+    logs?: any[];
+    komponenter?: any;
+    farge?: any;
+    token?: { title: string; kategori: string };
+  };
 };
-
-const SideModul = ({ node }: { node: SpesialT }) => {
+const SideModul = ({ node }: SideModulProps) => {
   if (!node || !node.modul) {
     return null;
   }
@@ -32,4 +32,10 @@ const SideModul = ({ node }: { node: SpesialT }) => {
   return <div className="mb-16">{GetModule()}</div>;
 };
 
-export default withErrorBoundary(SideModul, "SideModul");
+export default function Component(props: SideModulProps) {
+  return (
+    <ErrorBoundary boundaryName="SideModul">
+      <SideModul {...props} />
+    </ErrorBoundary>
+  );
+}

@@ -1,10 +1,12 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { TipsT } from "@/types";
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import { Heading } from "@navikt/ds-react";
 
-const Tips = ({ node }: { node: TipsT }) => {
+type TipsProps = { node: TipsT };
+
+const Tips = ({ node }: TipsProps) => {
   if (!node || !node.body) {
     return null;
   }
@@ -25,4 +27,10 @@ const Tips = ({ node }: { node: TipsT }) => {
   );
 };
 
-export default withErrorBoundary(Tips, "Tips");
+export default function Component(props: TipsProps) {
+  return (
+    <ErrorBoundary boundaryName="Tips">
+      <Tips {...props} />
+    </ErrorBoundary>
+  );
+}

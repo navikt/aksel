@@ -1,7 +1,7 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
+import { PropTableT } from "@/types";
 import { BodyShort, Detail, Heading, Tooltip } from "@navikt/ds-react";
 import { Highlighter } from "./Highlight";
-import { PropTableT } from "@/types";
 
 const List = ({ prop, parent }: { prop: any; parent: string }) => {
   if (prop?.description && prop.description.includes("@private")) {
@@ -49,7 +49,11 @@ const List = ({ prop, parent }: { prop: any; parent: string }) => {
   );
 };
 
-const PropTable = ({ komponent }: { komponent: PropTableT }) => {
+type PropTableProps = {
+  komponent: PropTableT;
+};
+
+const PropTable = ({ komponent }: PropTableProps) => {
   return (
     <div>
       <Heading
@@ -89,4 +93,10 @@ const PropTable = ({ komponent }: { komponent: PropTableT }) => {
   );
 };
 
-export default withErrorBoundary(PropTable, "Proptable");
+export default function Component(props: PropTableProps) {
+  return (
+    <ErrorBoundary boundaryName="Proptable">
+      <PropTable {...props} />
+    </ErrorBoundary>
+  );
+}

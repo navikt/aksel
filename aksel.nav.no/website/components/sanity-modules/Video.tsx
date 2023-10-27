@@ -1,10 +1,14 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { VideoT } from "@/types";
 import { BodyLong, ReadMore } from "@navikt/ds-react";
 
 import { useState } from "react";
 
-const Video = ({ node }: { node: VideoT }) => {
+type VideoProps = {
+  node: VideoT;
+};
+
+const Video = ({ node }: VideoProps) => {
   const [open, setOpen] = useState(false);
 
   if (!node || (!node.webm && !node.fallback) || !node.alt) {
@@ -53,4 +57,10 @@ const Video = ({ node }: { node: VideoT }) => {
   );
 };
 
-export default withErrorBoundary(Video, "Video");
+export default function Component(props: VideoProps) {
+  return (
+    <ErrorBoundary boundaryName="Video">
+      <Video {...props} />
+    </ErrorBoundary>
+  );
+}

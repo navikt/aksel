@@ -1,9 +1,12 @@
-import React from "react";
-import { withErrorBoundary } from "@/error-boundary";
-import PropTableV2 from "./PropTabell";
+import { ErrorBoundary } from "@/error-boundary";
 import { PropTableT } from "@/types";
+import PropTableV2 from "./PropTabell";
 
-const PropsSeksjon = ({ node }: { node: any }) => {
+type PropsSeksjonProps = {
+  node: any;
+};
+
+const PropsSeksjon = ({ node }: PropsSeksjonProps) => {
   if (
     !node ||
     (node?.elementer?.length === 0 && node?.komponenter?.length === 0)
@@ -27,4 +30,10 @@ const PropsSeksjon = ({ node }: { node: any }) => {
   );
 };
 
-export default withErrorBoundary(PropsSeksjon, "PropsSeksjon");
+export default function Component(props: PropsSeksjonProps) {
+  return (
+    <ErrorBoundary boundaryName="PropsSeksjon">
+      <PropsSeksjon {...props} />
+    </ErrorBoundary>
+  );
+}

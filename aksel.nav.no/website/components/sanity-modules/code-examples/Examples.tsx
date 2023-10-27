@@ -1,5 +1,5 @@
 import { capitalize, Snippet } from "@/components";
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
 import {
   ExternalLinkIcon,
@@ -15,7 +15,11 @@ import { CodeSandbox } from "./CodeSandbox";
 const iframePadding = 192;
 const iframeId = "example-iframe";
 
-const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
+type CodeExamplesProps = {
+  node: CodeExamplesT;
+};
+
+const ComponentExamples = ({ node }: CodeExamplesProps) => {
   const [activeExample, setActiveExample] = useState(null);
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
@@ -217,4 +221,10 @@ const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
   );
 };
 
-export default withErrorBoundary(ComponentExamples, "Eksempler kode");
+export default function Component(props: CodeExamplesProps) {
+  return (
+    <ErrorBoundary boundaryName="Kodeeksempler">
+      <ComponentExamples {...props} />
+    </ErrorBoundary>
+  );
+}

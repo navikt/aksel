@@ -1,15 +1,14 @@
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { AkselGrunnleggendeDocT, AkselKomponentDocT } from "@/types";
 import { Label } from "@navikt/ds-react";
 
-const Intro = ({
-  node,
-  internal,
-}: {
+type IntroProps = {
   node: AkselKomponentDocT["intro"] | AkselGrunnleggendeDocT["intro"];
   internal?: boolean;
-}) => {
+};
+
+const Intro = ({ node, internal }: IntroProps) => {
   if (!node || !node.body || !node.brukes_til) {
     return null;
   }
@@ -61,4 +60,10 @@ const Intro = ({
   );
 };
 
-export default withErrorBoundary(Intro, "Intro komponent");
+export default function Component(props: IntroProps) {
+  return (
+    <ErrorBoundary boundaryName="Intro-modul">
+      <Intro {...props} />
+    </ErrorBoundary>
+  );
+}
