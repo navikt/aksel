@@ -93,15 +93,12 @@ const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
                 value={fil.navn}
                 selected={active === fil.navn}
                 id={`${node.dir.title.toLowerCase()}demo-${fil.navn}`}
-                onClick={() => {
-                  setActiveExample(fil.navn);
+                onClick={async () => {
                   setUnloaded(true);
-                  router.replace(
-                    `#${node.dir.title.toLowerCase()}demo-${fil.navn}`,
-                    undefined,
-                    {
-                      shallow: true,
-                    }
+                  await router.replace(
+                    `${
+                      router.asPath.split("#")[0]
+                    }#${node.dir.title.toLowerCase()}demo-${fil.navn}`
                   );
                 }}
               >
