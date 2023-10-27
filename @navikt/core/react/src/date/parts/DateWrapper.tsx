@@ -64,6 +64,7 @@ export const DateWrapper = ({
       onClose={() => onClose()}
       aria-label={modalLabel(locale, variant)}
       className="navds-date__modal navds-date--polyfilled-nested"
+      closeOnBackdropClick
     >
       {children}
       <Button variant="tertiary" onClick={() => onClose()} size="small">
