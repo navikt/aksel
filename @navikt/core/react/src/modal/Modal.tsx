@@ -110,6 +110,11 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       if (needPolyfill && modalRef.current && portalNode) {
         dialogPolyfill.registerDialog(modalRef.current);
       }
+      // We set autofocus on the dialog element to prevent the default behavior where first focusable element gets focus when modal is opened.
+      // This is mainly to fix an edge case where having a Tooltip as the first focusable element would make it activate when you open the modal.
+      // We have to use JS because it doesn't work to set it with a prop (React bug?)
+      // Currently doesn't seem to work in Chrome. See also Tooltip.tsx
+      if (modalRef.current && portalNode) modalRef.current.autofocus = true;
     }, [modalRef, portalNode]);
 
     useEffect(() => {
@@ -150,16 +155,16 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 
     const mergedOnClick =
       closeOnBackdropClick && !needPolyfill // closeOnBackdropClick has issues on polyfill when nesting modals (DatePicker)
-      ? (event: React.MouseEvent<HTMLDialogElement>) => {
-          onClick && onClick(event);
-          if (
-            event.target === modalRef.current &&
-            (!onBeforeClose || onBeforeClose() !== false)
-          ) {
-            modalRef.current.close();
+        ? (event: React.MouseEvent<HTMLDialogElement>) => {
+            onClick && onClick(event);
+            if (
+              event.target === modalRef.current &&
+              (!onBeforeClose || onBeforeClose() !== false)
+            ) {
+              modalRef.current.close();
+            }
           }
-        }
-      : onClick;
+        : onClick;
 
     const mergedAriaLabelledBy =
       !ariaLabelledby && !rest["aria-label"] && header
@@ -180,6 +185,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         <ModalContext.Provider
           value={{
             closeHandler: getCloseHandler(modalRef, header, onBeforeClose),
+            ref: modalRef,
           }}
         >
           {header && (
