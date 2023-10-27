@@ -10,7 +10,7 @@ import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import cl from "clsx";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { CodeSandbox } from "./CodeSandbox";
+import { Sandbox } from "./Sandbox";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";
@@ -187,7 +187,7 @@ const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
                     </div>
 
                     <HStack gap="2">
-                      <CodeSandbox code={fil.innhold.trim()} />
+                      <Sandbox code={fil.innhold.trim()} />
                       <Button
                         variant="tertiary-neutral"
                         size="small"
