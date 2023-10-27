@@ -111,9 +111,7 @@ export const WithSidebar = ({
           </div>
 
           <div className={cl("sm:px-6 md:px-10", { flex: variant === "page" })}>
-            {variant === "page" && (
-              <TableOfContentsv2 changedState={pageProps["content"]} />
-            )}
+            {variant === "page" && <TableOfContentsv2 />}
             <div className="w-full">
               {children}
               <Feedback docId={pageProps?._id} docType={pageProps?._type} />
