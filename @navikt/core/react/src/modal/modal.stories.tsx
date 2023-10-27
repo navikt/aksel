@@ -27,6 +27,7 @@ export const WithUseRef = () => {
           heading: "Title",
           size: "small",
         }}
+        closeOnBackdropClick
       >
         <Modal.Body>
           <BodyLong spacing>
@@ -45,6 +46,7 @@ export const WithUseRef = () => {
             onBeforeClose={() =>
               window.confirm("Are you sure you want to close the modal?")
             }
+            closeOnBackdropClick
             aria-labelledby="heading123"
           >
             <Modal.Header>
@@ -111,6 +113,7 @@ export const WithUseState = () => {
               e.stopPropagation(); // onClose wil propagate to parent modal if not stopped
               setOpen2(false);
             }}
+            closeOnBackdropClick
             aria-label="Nested modal"
             width={800}
           >
