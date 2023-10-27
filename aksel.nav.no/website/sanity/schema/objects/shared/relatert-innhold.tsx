@@ -2,7 +2,7 @@ import { LinkIcon } from "@navikt/aksel-icons";
 import { allArticleDocsRef } from "../../../config";
 
 import React from "react";
-import { defineType, defineField } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const RelatertInnhold = defineType({
   name: "relatert_innhold",
@@ -11,6 +11,12 @@ export const RelatertInnhold = defineType({
   type: "object",
   icon: LinkIcon,
   fields: [
+    defineField({
+      title: "Tittel",
+      description: "'Relevante lenker' brukes som default",
+      name: "title",
+      type: "string",
+    }),
     defineField({
       title: "Lenker",
       name: "lenker",

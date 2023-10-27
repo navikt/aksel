@@ -33,6 +33,7 @@ const introSeksjon = `_type == "intro_komponent" =>{
 }`;
 
 const relatertInnhold = `_type == "relatert_innhold" =>{
+  title,
   lenker[]{
     ...,
     "intern_lenke": intern_lenke->slug.current,

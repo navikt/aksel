@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
-import { BodyLong, Button, Heading } from "..";
+import React, { useRef, useState } from "react";
+import { BodyLong, Button, Heading, Tooltip } from "..";
 import Modal from "./Modal";
 
 export default {
@@ -165,3 +165,28 @@ export const MediumWithPortal = () => (
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
+
+export const WithTooltip = () => {
+  const ref = useRef<HTMLDialogElement>(null);
+
+  return (
+    <div>
+      <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
+      <Modal
+        open={ref.current ? undefined : true /* initially open */}
+        ref={ref}
+      >
+        <Modal.Body>
+          <div style={{ marginBottom: "1rem" }}>
+            <Tooltip content="This_is_the_first_tooltip">
+              <Button>Test 1</Button>
+            </Tooltip>
+          </div>
+          <Tooltip content="This is the second tooltip">
+            <Button>Test 2</Button>
+          </Tooltip>
+        </Modal.Body>
+      </Modal>
+    </div>
+  );
+};
