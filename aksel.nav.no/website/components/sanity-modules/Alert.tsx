@@ -1,8 +1,13 @@
+import { ErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { AlertT } from "@/types";
 import { Alert as DsAlert, Heading } from "@navikt/ds-react";
 
-const Alert = ({ node }: { node: AlertT }) => {
+type AlertProps = {
+  node: AlertT;
+};
+
+const Alert = ({ node }: AlertProps) => {
   return (
     <div className="mb-7 max-w-2xl">
       <DsAlert variant={node.variant}>
@@ -23,4 +28,10 @@ const Alert = ({ node }: { node: AlertT }) => {
   );
 };
 
-export default Alert;
+export default function Component(props: AlertProps) {
+  return (
+    <ErrorBoundary boundaryName="Alert">
+      <Alert {...props} />
+    </ErrorBoundary>
+  );
+}

@@ -1,10 +1,13 @@
-import { Accordion as DsAccordion } from "@navikt/ds-react";
-import React from "react";
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { AccordionT } from "@/types";
+import { Accordion as DsAccordion } from "@navikt/ds-react";
 
-const Accordion = ({ node }: { node: AccordionT }) => {
+type AccordionProps = {
+  node: AccordionT;
+};
+
+const Accordion = ({ node }: AccordionProps) => {
   if (!node || node.list.length === 0) {
     return null;
   }
@@ -25,4 +28,10 @@ const Accordion = ({ node }: { node: AccordionT }) => {
   );
 };
 
-export default withErrorBoundary(Accordion, "Accordion");
+export default function Component(props: AccordionProps) {
+  return (
+    <ErrorBoundary boundaryName="Accordion">
+      <Accordion {...props} />
+    </ErrorBoundary>
+  );
+}

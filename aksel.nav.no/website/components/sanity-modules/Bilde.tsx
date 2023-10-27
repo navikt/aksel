@@ -1,12 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { urlFor } from "@/sanity/interface";
 import { BildeT } from "@/types";
 import { BodyLong, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import NextLink from "next/link";
 
-const Bilde = ({ node, className }: { node: BildeT; className?: string }) => {
+type BildeProps = {
+  node: BildeT;
+  className?: string;
+};
+
+const Bilde = ({ node, className }: BildeProps) => {
   if (!node || !node.asset) {
     return null;
   }
@@ -65,4 +70,10 @@ const Bilde = ({ node, className }: { node: BildeT; className?: string }) => {
   );
 };
 
-export default withErrorBoundary(Bilde, "Bilde");
+export default function Component(props: BildeProps) {
+  return (
+    <ErrorBoundary boundaryName="Bilde">
+      <Bilde {...props} />
+    </ErrorBoundary>
+  );
+}

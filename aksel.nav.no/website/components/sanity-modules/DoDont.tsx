@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { withErrorBoundary } from "@/error-boundary";
+import { ErrorBoundary } from "@/error-boundary";
 import { urlFor } from "@/sanity/interface";
 import { DoDontT } from "@/types";
 import {
@@ -53,7 +53,11 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
   );
 };
 
-const DoDont = ({ node }: { node: DoDontT }) => {
+type DoDontProps = {
+  node: DoDontT;
+};
+
+const DoDont = ({ node }: DoDontProps) => {
   if (!node) return null;
 
   return (
@@ -91,7 +95,7 @@ function getIcon(s: string) {
 function getText(s: string) {
   switch (s) {
     case "do":
-      return "Gjør";
+      return "Gjør 2";
     case "dont":
       return "Unngå";
     case "warning":
@@ -101,4 +105,10 @@ function getText(s: string) {
   }
 }
 
-export default withErrorBoundary(DoDont, "DoDont");
+export default function Component(props: DoDontProps) {
+  return (
+    <ErrorBoundary boundaryName="Dodont">
+      <DoDont {...props} />
+    </ErrorBoundary>
+  );
+}
