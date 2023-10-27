@@ -148,7 +148,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         } else if (onCancel) onCancel(event);
       };
 
-    const mergedOnClick = closeOnBackdropClick
+    const mergedOnClick =
+      closeOnBackdropClick && !needPolyfill // closeOnBackdropClick has issues on polyfill when nesting modals (DatePicker)
       ? (event: React.MouseEvent<HTMLDialogElement>) => {
           if (onClick) onClick(event);
           if (
