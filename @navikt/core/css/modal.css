@@ -23,7 +23,6 @@
 .navds-modal--polyfilled {
   top: 50%;
   transform: translate(0, -50%);
-  overflow: auto;
 
   /* From polyfill (dialog-polyfill/dist/dialog-polyfill.css): */
   left: 0;
@@ -31,6 +30,10 @@
   width: fit-content;
   height: fit-content;
   margin: auto;
+}
+
+.navds-modal--polyfilled .navds-modal--polyfilled {
+  overflow: auto;
 }
 
 .navds-modal--polyfilled:not([open]) {

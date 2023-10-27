@@ -1,8 +1,8 @@
 import {
-  arrow as flArrow,
-  autoUpdate,
-  flip,
   FloatingPortal,
+  autoUpdate,
+  arrow as flArrow,
+  flip,
   offset,
   safePolygon,
   shift,
@@ -14,16 +14,18 @@ import {
 } from "@floating-ui/react";
 import cl from "clsx";
 import React, {
+  HTMLAttributes,
   cloneElement,
   forwardRef,
-  HTMLAttributes,
+  useContext,
   useMemo,
   useRef,
   useState,
 } from "react";
+import { ModalContext } from "../modal/ModalContext";
+import { useProvider } from "../provider";
 import { Detail } from "../typography";
 import { mergeRefs, useId } from "../util";
-import { useProvider } from "../provider";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -110,7 +112,11 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   ) => {
     const [open, setOpen] = useState(defaultOpen);
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const rootElement = useProvider()?.rootElement;
+    const modalContext = useContext(ModalContext);
+    const providerRootElement = useProvider()?.rootElement;
+    const rootElement = modalContext
+      ? modalContext.ref.current
+      : providerRootElement;
 
     const {
       x,
@@ -133,7 +139,13 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
       ],
-      whileElementsMounted: autoUpdate,
+      whileElementsMounted: modalContext
+        ? (reference, floating, update) =>
+            // Makes weird behavoir in Chrome less weird (when first focusable elm in a Modal is a Tooltip)
+            // Can be removed when autofocus starts working on <dialog> in Chrome. See also Modal.tsx
+            autoUpdate(reference, floating, update, { animationFrame: true })
+        : autoUpdate,
+      strategy: modalContext ? "fixed" : undefined,
     });
 
     const { getReferenceProps, getFloatingProps } = useInteractions([
