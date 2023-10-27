@@ -141,7 +141,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ],
       whileElementsMounted: modalContext
         ? (reference, floating, update) =>
-            // Makes weird behavoir in Chrome less weird (when first focusable elm in a Modal is a Tooltip)
+            // Reduces jumping in Chrome when used in a Modal and it's the first focusable element.
             // Can be removed when autofocus starts working on <dialog> in Chrome. See also Modal.tsx
             autoUpdate(reference, floating, update, { animationFrame: true })
         : autoUpdate,
