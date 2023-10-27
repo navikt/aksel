@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { TableT } from "@/types";
 import { Table } from "@navikt/ds-react";
 

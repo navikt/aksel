@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { AkselTemaT } from "@/types";

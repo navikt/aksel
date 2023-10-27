@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { TipsT } from "@/types";
 import { LightBulbIcon } from "@navikt/aksel-icons";

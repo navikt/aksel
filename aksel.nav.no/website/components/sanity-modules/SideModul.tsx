@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import TokenView from "./token-view";
 
 type SideModulProps = {

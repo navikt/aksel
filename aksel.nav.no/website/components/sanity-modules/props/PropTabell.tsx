@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { PropTableT } from "@/types";
 import { BodyShort, Detail, Heading, Tooltip } from "@navikt/ds-react";
 import { Highlighter } from "./Highlight";

@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import { useEffect, useRef, useState } from "react";

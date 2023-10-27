@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { VideoT } from "@/types";
 import { BodyLong, ReadMore } from "@navikt/ds-react";
 

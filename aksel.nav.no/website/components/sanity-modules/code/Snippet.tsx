@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { CodeSnippetT } from "@/types";
 import { ChevronRightIcon, TerminalIcon } from "@navikt/aksel-icons";
 import { CopyButton, Label } from "@navikt/ds-react";

@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { UUTableT } from "@/types";
 import { KBD } from "components/website-modules/KBD";
 

@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import cl from "clsx";
 import Link from "next/link";

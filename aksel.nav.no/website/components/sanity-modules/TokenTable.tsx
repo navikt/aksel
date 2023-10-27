@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { TokenTableT } from "@/types";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import core from "@navikt/ds-css/tokens.json";

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { urlFor } from "@/sanity/interface";
 import { DoDontT } from "@/types";
 import {

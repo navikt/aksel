@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { BreakpointsView } from "./categories/Breakpoints";
 import { FontView } from "./categories/Font";
 import { GlobalView } from "./categories/Global";

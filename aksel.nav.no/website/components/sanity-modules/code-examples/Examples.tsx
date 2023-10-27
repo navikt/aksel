@@ -1,5 +1,5 @@
 import { capitalize, Snippet } from "@/components";
-import { ErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
 import {
   ExternalLinkIcon,
