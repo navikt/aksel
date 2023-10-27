@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 import setYear from "date-fns/setYear";
 import React, { useId, useState } from "react";
-import { Button, DateInputProps } from "../..";
+import { BodyLong, Button, DateInputProps, Modal } from "../..";
 import { useMonthpicker } from "../hooks";
 import MonthPicker from "./MonthPicker";
 import { MonthPickerProps } from "./types";
@@ -172,5 +172,36 @@ export const FollowYear = () => {
       </MonthPicker>
       {selectedMonth && <div className="pt-4">{selectedMonth.getMonth()}</div>}
     </div>
+  );
+};
+
+export const ModalDemo = () => {
+  const { monthpickerProps, inputProps } = useMonthpicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Aug 23 2025"),
+    onMonthChange: console.log,
+  });
+
+  return (
+    <Modal open header={{ heading: "Modal-demo" }}>
+      <Modal.Body style={{ position: "relative" }}>
+        <BodyLong spacing>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        </BodyLong>
+
+        <MonthPicker {...monthpickerProps}>
+          <MonthPicker.Input
+            {...inputProps}
+            label="Velg måned"
+            variant="monthpicker"
+          />
+        </MonthPicker>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button>Neste</Button>
+        <Button variant="secondary">Tilbake</Button>
+        <Button variant="tertiary">Avbryt</Button>
+      </Modal.Footer>
+    </Modal>
   );
 };

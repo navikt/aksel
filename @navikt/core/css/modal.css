@@ -154,3 +154,10 @@
     opacity: 1;
   }
 }
+
+.navds-modal--polyfilled .navds-modal--polyfilled.navds-date--polyfilled-nested {
+  min-width: fit-content;
+  max-width: 100vw;
+  max-height: 100vh;
+  animation: none;
+}

@@ -149,18 +149,6 @@
   width: fit-content;
 }
 
-/* Focus layering */
-.navds-date__field-input:focus-visible,
-.navds-date__field-button {
-  z-index: 1;
-}
-
-@supports not selector(:focus-visible) {
-  .navds-date__field-input:focus {
-    z-index: 1;
-  }
-}
-
 .navds-date .rdp-day_selected,
 .navds-monthpicker__month--selected {
   color: var(--ac-date-selected-text, var(--a-text-on-action));
