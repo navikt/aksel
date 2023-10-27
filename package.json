@@ -15,7 +15,7 @@
     "chromatic": "npx chromatic --project-token x3xqdfgkujg --build-script-name build:storybook",
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -p run test",
-    "lint": "yarn eslint . && yarn stylelint @navikt/**/*.css",
+    "lint": "yarn eslint --rule \"import/no-cycle:error\" . && yarn stylelint @navikt/**/*.css",
     "lint:css": "yarn stylelint @navikt/**/*.css",
     "changeset": "changeset",
     "version": "changeset version && yarn changelog",
