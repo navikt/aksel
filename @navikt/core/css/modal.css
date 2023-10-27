@@ -130,6 +130,14 @@
   margin-left: auto;
 }
 
+/* When Datepicker is used nested inside a Modal */
+.navds-modal--polyfilled .navds-modal--polyfilled.navds-date--polyfilled-nested {
+  min-width: fit-content;
+  max-width: 100vw;
+  max-height: 100vh;
+  animation: none;
+}
+
 @keyframes akselModalFadeIn {
   from {
     opacity: 0;
