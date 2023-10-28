@@ -1,6 +1,5 @@
 import {
   abbrName,
-  Bilde,
   BreadCrumbs,
   dateStr,
   Feedback,
@@ -19,6 +18,7 @@ import {
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
+import Bilde from "components/sanity-modules/bilde/Bilde";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
 import { lazy, Suspense } from "react";

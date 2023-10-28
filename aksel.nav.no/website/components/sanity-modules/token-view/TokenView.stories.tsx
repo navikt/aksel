@@ -1,11 +1,11 @@
-import { FontView } from "./categories/Font";
-import { GlobalView } from "./categories/Global";
-import { SemanticView } from "./categories/Semantic";
-import { ShadowView } from "./categories/Shadow";
-import { SpacingView } from "./categories/Spacing";
-import { ZindexView } from "./categories/Zindex";
-import { BreakpointsView } from "./categories/Breakpoints";
-import { ShapesView } from "./categories/Shapes";
+import { BreakpointsView } from "./parts/categories/Breakpoints";
+import { FontView } from "./parts/categories/Font";
+import { GlobalView } from "./parts/categories/Global";
+import { SemanticView } from "./parts/categories/Semantic";
+import { ShadowView } from "./parts/categories/Shadow";
+import { ShapesView } from "./parts/categories/Shapes";
+import { SpacingView } from "./parts/categories/Spacing";
+import { ZindexView } from "./parts/categories/Zindex";
 
 export default {
   title: "sanity-modules/Tokens",
