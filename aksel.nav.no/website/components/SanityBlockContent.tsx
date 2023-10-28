@@ -26,7 +26,6 @@ import {
   TastaturModul,
   Tips,
   TokenTable,
-  UuFeedback,
   Video,
 } from ".";
 
@@ -49,7 +48,6 @@ const serializers: Partial<PortableTextReactComponents> = {
     video: ({ value }) => <Video node={value} />,
     tips: ({ value }) => <Tips node={value} />,
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
-    uufeedback: ({ value }) => <UuFeedback node={value} />,
   },
   unknownType: () => null,
   block: {
