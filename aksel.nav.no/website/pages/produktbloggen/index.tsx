@@ -12,12 +12,12 @@ import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
-import { SEO } from "components/website-modules/seo/SEO";
+import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
 import { LatestBloggposts } from "components/website-modules/blogg-page";
-import { AkselCubeStatic } from "components/website-modules/cube";
+import { SEO } from "components/website-modules/seo/SEO";
+import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: AkselBloggFrontpageT;
