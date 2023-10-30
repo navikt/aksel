@@ -3,7 +3,7 @@ import { SearchHitT, searchOptions } from "@/types";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Chips } from "@navikt/ds-react";
 import cl from "clsx";
-import { Tag } from "components/sanity-modules/frontpage-blocks/Tag";
+import { Tag } from "components/sanity-modules/frontpage-blocks/latest-articles/Tag";
 import { StatusTag } from "components/website-modules/StatusTag";
 import Image from "next/legacy/image";
 import { default as Link, default as NextLink } from "next/link";
