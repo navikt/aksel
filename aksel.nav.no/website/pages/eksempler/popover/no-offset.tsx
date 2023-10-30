@@ -18,10 +18,13 @@ const Example = () => {
 
       <Popover
         open={openState}
-        onClose={() => setOpenState(false)}
+        onClose={() => {}}
         anchorEl={buttonRef.current}
+        offset={0}
+        arrow={false}
+        placement="bottom"
       >
-        <Popover.Content>Innhold her!</Popover.Content>
+        <Popover.Content>offset = 0</Popover.Content>
       </Popover>
     </>
   );
@@ -35,6 +38,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
-  desc: "Popover kan kobles til de fleste typer elementer med bruk av ref.",
+  index: 2,
 };

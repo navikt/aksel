@@ -30,7 +30,7 @@ const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
       ) as HTMLIFrameElement;
       const exampleIframeDOM = exampleIframe?.contentDocument;
       const exampleWrapper = exampleIframeDOM?.getElementById("ds-example");
-      if (exampleWrapper) {
+      if (exampleWrapper && exampleWrapper.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
         clearInterval(waitForExampleContentToRender);
         setFrameState(newHeight < 300 ? 300 : newHeight);
@@ -93,15 +93,12 @@ const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
                 value={fil.navn}
                 selected={active === fil.navn}
                 id={`${node.dir.title.toLowerCase()}demo-${fil.navn}`}
-                onClick={() => {
-                  setActiveExample(fil.navn);
+                onClick={async () => {
                   setUnloaded(true);
-                  router.replace(
-                    `#${node.dir.title.toLowerCase()}demo-${fil.navn}`,
-                    undefined,
-                    {
-                      shallow: true,
-                    }
+                  await router.replace(
+                    `${
+                      router.asPath.split("#")[0]
+                    }#${node.dir.title.toLowerCase()}demo-${fil.navn}`
                   );
                 }}
               >

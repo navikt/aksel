@@ -15,11 +15,11 @@
     "website"
   ],
   "dependencies": {
-    "@navikt/aksel-icons": "^5.7.5",
-    "@navikt/ds-css": "^5.7.5",
-    "@navikt/ds-react": "^5.7.5",
-    "@navikt/ds-tailwind": "^5.7.5",
-    "@navikt/ds-tokens": "^5.7.5"
+    "@navikt/aksel-icons": "^5.8.0",
+    "@navikt/ds-css": "^5.8.0",
+    "@navikt/ds-react": "^5.8.0",
+    "@navikt/ds-tailwind": "^5.8.0",
+    "@navikt/ds-tokens": "^5.8.0"
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.2.3"

@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
-import { BodyLong, Button, Heading } from "..";
+import React, { useRef, useState } from "react";
+import { BodyLong, Button, Heading, Tooltip } from "..";
 import Modal from "./Modal";
 
 export default {
@@ -27,6 +27,7 @@ export const WithUseRef = () => {
           heading: "Title",
           size: "small",
         }}
+        closeOnBackdropClick
       >
         <Modal.Body>
           <BodyLong spacing>
@@ -45,6 +46,7 @@ export const WithUseRef = () => {
             onBeforeClose={() =>
               window.confirm("Are you sure you want to close the modal?")
             }
+            closeOnBackdropClick
             aria-labelledby="heading123"
           >
             <Modal.Header>
@@ -111,6 +113,7 @@ export const WithUseState = () => {
               e.stopPropagation(); // onClose wil propagate to parent modal if not stopped
               setOpen2(false);
             }}
+            closeOnBackdropClick
             aria-label="Nested modal"
             width={800}
           >
@@ -165,3 +168,28 @@ export const MediumWithPortal = () => (
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
+
+export const WithTooltip = () => {
+  const ref = useRef<HTMLDialogElement>(null);
+
+  return (
+    <div>
+      <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
+      <Modal
+        open={ref.current ? undefined : true /* initially open */}
+        ref={ref}
+      >
+        <Modal.Body>
+          <div style={{ marginBottom: "1rem" }}>
+            <Tooltip content="This_is_the_first_tooltip">
+              <Button>Test 1</Button>
+            </Tooltip>
+          </div>
+          <Tooltip content="This is the second tooltip">
+            <Button>Test 2</Button>
+          </Tooltip>
+        </Modal.Body>
+      </Modal>
+    </div>
+  );
+};

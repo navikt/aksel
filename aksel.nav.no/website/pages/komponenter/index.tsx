@@ -36,7 +36,7 @@ type PageProps = NextPageT<{
 
 export const query = `{${sidebarQuery}, ${landingPageQuery(
   "komponenter"
-)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
+)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori, "sidebarindex": sidebarindex}}`;
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,

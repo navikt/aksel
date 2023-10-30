@@ -7,7 +7,7 @@ const Example = () => {
   const [openState, setOpenState] = useState(false);
 
   return (
-    <>
+    <div className="mb-10">
       <Button
         ref={buttonRef}
         onClick={() => setOpenState(!openState)}
@@ -18,12 +18,17 @@ const Example = () => {
 
       <Popover
         open={openState}
-        onClose={() => setOpenState(false)}
+        onClose={() => {}}
         anchorEl={buttonRef.current}
+        flip={false}
+        placement="right"
       >
-        <Popover.Content>Innhold her!</Popover.Content>
+        <Popover.Content>
+          Denne popoveren holder seg til høyre selv om det er bedre plass under,
+          fordi <code>flip</code> er satt til <code>false</code>.
+        </Popover.Content>
       </Popover>
-    </>
+    </div>
   );
 };
 
@@ -35,6 +40,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
-  desc: "Popover kan kobles til de fleste typer elementer med bruk av ref.",
+  index: 4,
 };

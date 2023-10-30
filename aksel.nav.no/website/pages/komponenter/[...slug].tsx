@@ -303,7 +303,7 @@ const Page = ({
           />
         )}
         <IntroSeksjon node={page?.intro} internal={internal} />
-        {page?.status?.tag === "ready" && (
+        {page?.status?.tag === "ready" && !page?.hide_feedback && (
           <SuggestionBlock
             variant="komponent"
             reference={`<${page?.heading} />`}

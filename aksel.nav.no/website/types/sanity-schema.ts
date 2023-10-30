@@ -109,6 +109,7 @@ export interface AkselKomponentDocT
     brukes_til: string[];
     brukes_ikke_til?: string[];
   };
+  hide_feedback?: boolean;
   content: any[];
   kodepakker?: string[];
   figma_link?: string;
@@ -155,6 +156,7 @@ export type ArticleListT = Array<{
     unsafe?: boolean;
     bilde?: any;
   };
+  sidebarindex?: number;
 }>;
 
 export type LandingPageTypeT<T extends string> = `${T}_landingsside`;
@@ -268,6 +270,7 @@ export type InnholdsKortPrinsipperT = ArrayObjectT<{
 }>;
 
 export interface RelatertInnholdT {
+  title?: string;
   lenker: Array<
     ArrayObjectT<{
       title: string;
