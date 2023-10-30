@@ -20,8 +20,10 @@ export const WithSidebar = ({
   children: React.ReactNode;
   sidebar: AkselSidebarT;
   pageType: {
-    type: "Komponenter" | "Grunnleggende" | "Templates";
+    type: "komponenter" | "grunnleggende" | "templates";
     title: string;
+    rootUrl: string;
+    rootTitle: string;
   };
   pageProps: any;
   intro?: React.ReactNode;
@@ -29,7 +31,11 @@ export const WithSidebar = ({
   variant?: "page" | "landingPage";
 }) => {
   return (
-    <Box background="bg-default" paddingBlock="6 24">
+    <Box
+      background="bg-default"
+      paddingBlock="6 24"
+      className="min-h-screen-header"
+    >
       <div className="mx-auto flex w-full max-w-screen-2xl gap-6">
         <Sidebar kategori={pageType.type} links={sidebar} />
         <main
@@ -52,13 +58,9 @@ export const WithSidebar = ({
             <div className="z-[1]">
               {variant === "page" && pageProps?.kategori && (
                 <Detail as="div" className="mb-2">
-                  <NextLink
-                    href={`/${pageType.type.toLowerCase()}`}
-                    passHref
-                    legacyBehavior
-                  >
+                  <NextLink href={pageType.rootUrl} passHref legacyBehavior>
                     <Link className="text-text-default">
-                      {capitalize(pageType.type)}
+                      {pageType.rootTitle}
                     </Link>
                   </NextLink>{" "}
                   / {capitalize(pageProps.kategori)}

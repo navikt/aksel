@@ -63,3 +63,20 @@ export const bloggKategorier = [
 export const prinsippKategorier = [
   { title: "Brukeropplevelse", value: "brukeropplevelse" },
 ];
+
+export const sanityCategoryLookup = (
+  category: "komponenter" | "grunnleggende" | "templates"
+) => {
+  const _category = category.toLowerCase();
+
+  switch (_category) {
+    case "komponenter":
+      return komponentKategorier;
+    case "grunnleggende":
+      return grunnleggendeKategorier;
+    case "templates":
+      return templatesKategorier;
+    default:
+      return [];
+  }
+};

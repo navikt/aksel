@@ -1,36 +1,17 @@
 import { AkselSidebarT } from "@/types";
 import { useMemo } from "react";
-import {
-  grunnleggendeKategorier,
-  komponentKategorier,
-  templatesKategorier,
-} from "../../../sanity/config";
-
-const categoryLookup = (
-  category: "Komponenter" | "Grunnleggende" | "Templates"
-) => {
-  switch (category) {
-    case "Komponenter":
-      return komponentKategorier;
-    case "Grunnleggende":
-      return grunnleggendeKategorier;
-    case "Templates":
-      return templatesKategorier;
-    default:
-      return [];
-  }
-};
+import { sanityCategoryLookup } from "../../../sanity/config";
 
 export const useSection = ({
   kategori,
   links,
 }: {
-  kategori: "Komponenter" | "Grunnleggende" | "Templates";
+  kategori: "komponenter" | "grunnleggende" | "templates";
   links: AkselSidebarT;
 }) => {
   const sections = useMemo(
     () =>
-      categoryLookup(kategori)
+      sanityCategoryLookup(kategori)
         .map((x) => ({
           ...x,
           pages: links

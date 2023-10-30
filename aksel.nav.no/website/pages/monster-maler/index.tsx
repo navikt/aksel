@@ -62,7 +62,12 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Templates", title: "Mønster og Maler" }}
+        pageType={{
+          type: "templates",
+          title: "Mønster og Maler",
+          rootUrl: "/monster-maler",
+          rootTitle: "Mønster og Maler",
+        }}
         intro={
           <BodyLong size="large" className="text-text-on-action">
             {page?.intro}

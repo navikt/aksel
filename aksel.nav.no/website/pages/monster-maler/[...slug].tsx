@@ -102,7 +102,12 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Templates", title: page?.heading }}
+        pageType={{
+          type: "templates",
+          title: page?.heading,
+          rootUrl: "/monster-maler",
+          rootTitle: "Mønster og Maler",
+        }}
         intro={
           <Detail as="div">
             <div className="mt-2 flex flex-wrap items-center gap-3">
