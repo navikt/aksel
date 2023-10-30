@@ -15,15 +15,16 @@ import { useSection } from "./useSection";
 
 const NavItem = ({
   link,
-  asPath,
 }: {
   link: { heading: string; slug: string; kategori: string; tag?: string };
-  asPath: string;
 }) => {
-  const isActive = asPath === `/${link.slug}`;
+  const { asPath } = useRouter();
+  const isActive = asPath.split("#")[0] === `/${link.slug}`;
+
   return (
     <li>
       <Link
+        aria-current={isActive ? "page" : undefined}
         href={`/${link.slug}`}
         onClick={(e) => {
           amplitudeLogNavigation("meny", e.currentTarget.getAttribute("href"));
@@ -77,7 +78,6 @@ const Dropdown = ({
   links: AkselSidebarT;
 }) => {
   const [open, setOpen] = useState(true);
-  const { asPath } = useRouter();
 
   return (
     <li className="peer w-full peer-data-[open=true]:mt-6" data-open={open}>
@@ -103,7 +103,7 @@ const Dropdown = ({
 
       <ul hidden={!open} className="pl-2">
         {links.map((z) => (
-          <NavItem link={z} key={z?.heading} asPath={asPath} />
+          <NavItem link={z} key={z?.heading} />
         ))}
       </ul>
     </li>

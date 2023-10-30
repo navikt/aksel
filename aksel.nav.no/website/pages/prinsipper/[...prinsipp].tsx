@@ -156,11 +156,7 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
             <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
               <div className="pb-16 md:pb-32">
                 <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
-                  <TableOfContents
-                    changedState={data?.content ?? []}
-                    hideToc={false}
-                    aksel
-                  />
+                  <TableOfContents hideToc={false} aksel />
                   <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                     {data?.hero_bilde && (
                       <Bilde

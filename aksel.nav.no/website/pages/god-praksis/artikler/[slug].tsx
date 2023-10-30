@@ -1,5 +1,19 @@
+import {
+  BreadCrumbs,
+  Feedback,
+  TableOfContents,
+  abbrName,
+  dateStr,
+} from "@/components";
+import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
+import { getAkselDocuments } from "@/sanity/interface";
+import {
+  contributorsAll,
+  contributorsSingle,
+  destructureBlocks,
+} from "@/sanity/queries";
 import {
   AkselGodPraksisDocT,
   NextPageT,
@@ -8,29 +22,15 @@ import {
   ResolveSlugT,
   ResolveTemaT,
 } from "@/types";
-import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import NextLink from "next/link";
-import { lazy, Suspense } from "react";
-import NotFotfund from "../../404";
-import { GetStaticPaths, GetStaticProps } from "next/types";
-import {
-  abbrName,
-  BreadCrumbs,
-  dateStr,
-  Feedback,
-  TableOfContents,
-} from "@/components";
-import { Footer } from "@/layout";
-import { getAkselDocuments } from "@/sanity/interface";
-import {
-  contributorsAll,
-  contributorsSingle,
-  destructureBlocks,
-} from "@/sanity/queries";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
+import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { SEO } from "components/website-modules/seo/SEO";
+import NextLink from "next/link";
+import { GetStaticPaths, GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
+import NotFotfund from "../../404";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
@@ -229,11 +229,7 @@ const Page = ({
               )}
             </div>
             <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
-              <TableOfContents
-                changedState={data?.content ?? []}
-                hideToc={false}
-                aksel
-              />
+              <TableOfContents hideToc={false} aksel />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                 <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
