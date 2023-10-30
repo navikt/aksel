@@ -1,4 +1,4 @@
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { AkselTemaT } from "@/types";
@@ -7,7 +7,11 @@ import cl from "clsx";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 
-const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
+type GodPraksisCardProps = {
+  node: AkselTemaT;
+};
+
+const GodPraksisCard = ({ node }: GodPraksisCardProps) => {
   if (
     !node?.pictogram ||
     !node?.slug?.current ||
@@ -47,4 +51,10 @@ const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
   );
 };
 
-export default withErrorBoundary(GodPraksisCard, "GodPraksisCard");
+export default function Component(props: GodPraksisCardProps) {
+  return (
+    <ErrorBoundary boundaryName="GodPraksisCard">
+      <GodPraksisCard {...props} />
+    </ErrorBoundary>
+  );
+}

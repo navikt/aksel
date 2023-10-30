@@ -1,10 +1,4 @@
-import {
-  BreadCrumbs,
-  Feedback,
-  TableOfContents,
-  abbrName,
-  dateStr,
-} from "@/components";
+import { BreadCrumbs, TableOfContents, abbrName, dateStr } from "@/components";
 import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
@@ -254,13 +248,6 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
-                </div>
-                <div className="mt-12 md:mt-16">
-                  <Feedback
-                    akselFeedback
-                    docId={data?._id}
-                    docType={data?._type}
-                  />
                 </div>
               </div>
             </div>
