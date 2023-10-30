@@ -35,6 +35,7 @@ export function readCodeFiles(
       innhold: code,
       navn: args.title ?? file.replace(".tsx", ""),
       description: args.desc,
+      index: args.index ?? 1,
     };
   });
 
