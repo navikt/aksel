@@ -1,6 +1,6 @@
 import ErrorBoundary from "@/error-boundary";
 import { UUTableT } from "@/types";
-import { KBD } from "components/website-modules/KBD";
+import KBD from "components/website-modules/KBD";
 
 import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import React from "react";

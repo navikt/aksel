@@ -1,5 +1,5 @@
-import styles from "./cube.module.css";
 import cl from "clsx";
+import styles from "./aksel-cube.module.css";
 
 const Rect = ({ ...props }) => (
   <svg
@@ -41,7 +41,7 @@ const Skewed = ({ ...props }) => (
   </svg>
 );
 
-export const AkselCube = () => (
+export const AkselCubeAnimated = () => (
   <div className={styles.animated}>
     <Skewed className={styles.animated1} />
     <Rect className={styles.animated2} />

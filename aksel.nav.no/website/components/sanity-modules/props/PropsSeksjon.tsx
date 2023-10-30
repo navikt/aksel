@@ -1,6 +1,6 @@
 import ErrorBoundary from "@/error-boundary";
 import { PropTableT } from "@/types";
-import PropTableV2 from "./PropTabell";
+import PropTableV2 from "./parts/PropTabell";
 
 type PropsSeksjonProps = {
   node: any;

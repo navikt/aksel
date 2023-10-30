@@ -1,11 +1,11 @@
 import ErrorBoundary from "@/error-boundary";
-import TokenView from "./token-view";
+import TokenView from "../token-view/TokenView";
 
 type SideModulProps = {
   node: {
     _key: string;
     _type: "spesial_seksjon";
-    modul?: "ikonsok" | "token_kategori";
+    modul?: "token_kategori";
     logs?: any[];
     komponenter?: any;
     farge?: any;
@@ -19,8 +19,6 @@ const SideModul = ({ node }: SideModulProps) => {
 
   const GetModule = () => {
     switch (node.modul) {
-      case "ikonsok":
-        return null;
       case "token_kategori":
         return <TokenView token={node.token} />;
       default: {

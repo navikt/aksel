@@ -1,4 +1,4 @@
-import { capitalize, Snippet } from "@/components";
+import { capitalize } from "@/components";
 import ErrorBoundary from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
 import {
@@ -8,9 +8,10 @@ import {
 } from "@navikt/aksel-icons";
 import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import cl from "clsx";
+import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { CodeSandbox } from "./CodeSandbox";
+import { CodeSandbox } from "./parts/CodeSandbox";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";
@@ -207,7 +208,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   </HStack>
                 </div>
 
-                <Snippet
+                <SnippetLazy
                   node={{
                     code: { code: fil.innhold.trim(), language: "tsx" },
                   }}
