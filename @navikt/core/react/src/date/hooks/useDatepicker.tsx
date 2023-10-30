@@ -310,7 +310,6 @@ export const useDatepicker = (
     onOpenToggle: () => handleOpen(!open),
     disabled,
     disableWeekends,
-    bubbleEscape: true,
   };
 
   const inputProps = {

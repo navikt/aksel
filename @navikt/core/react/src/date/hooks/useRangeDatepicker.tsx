@@ -529,7 +529,6 @@ export const useRangeDatepicker = (
     onClose: () => setOpen((x) => !x),
     disabled,
     disableWeekends,
-    bubbleEscape: true,
   };
 
   const fromInputProps = {

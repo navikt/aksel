@@ -164,6 +164,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
               event.target === modalRef.current &&
               (!onBeforeClose || onBeforeClose() !== false)
             ) {
+              console.log("close onoutside");
               modalRef.current.close();
             }
           }

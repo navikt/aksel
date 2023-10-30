@@ -304,7 +304,6 @@ export const useMonthpicker = (
     onOpenToggle: () => handleOpen(!open),
     onClose: () => handleOpen(!open),
     disabled,
-    bubbleEscape: true,
   };
 
   const inputProps = {

@@ -79,7 +79,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onClose,
       onOpenToggle,
       strategy,
-      bubbleEscape = false,
       onWeekNumberClick,
       ...rest
     },
@@ -145,7 +144,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         onWeekNumberClick={mode === "multiple" ? onWeekNumberClick : undefined}
         fixedWeeks
         showOutsideDays
-        {...omit(rest, ["onSelect"])}
+        {...omit(rest, ["onSelect", "bubbleEscape"])}
       />
     );
 
@@ -172,7 +171,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             locale={locale}
             variant={mode}
             popoverProps={{
-              bubbleEscape,
               id: ariaId,
               strategy,
             }}

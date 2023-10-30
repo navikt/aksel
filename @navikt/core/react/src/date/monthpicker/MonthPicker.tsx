@@ -74,7 +74,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       year,
       onYearChange,
       strategy = "absolute",
-      bubbleEscape = false,
     },
     ref
   ) => {
@@ -122,7 +121,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
             locale={locale}
             variant="month"
             popoverProps={{
-              bubbleEscape,
               id: ariaId,
               strategy,
             }}

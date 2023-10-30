@@ -15,7 +15,6 @@ type DateWrapperProps = {
   locale: "nb" | "nn" | "en";
   variant: "single" | "multiple" | "range" | "month";
   popoverProps: {
-    bubbleEscape: boolean;
     id?: string;
     strategy?: "absolute" | "fixed";
   };
@@ -63,13 +62,15 @@ export const DateWrapper = ({
       open
       onClose={() => onClose()}
       aria-label={modalLabel(locale, variant)}
-      className="navds-date__modal navds-date--polyfilled-nested"
+      className="navds-date--polyfilled-nested"
       closeOnBackdropClick
     >
-      {children}
-      <Button variant="tertiary" onClick={() => onClose()} size="small">
-        {modalCloseButtonLabel(locale)}
-      </Button>
+      <div className="navds-date__modal">
+        {children}
+        <Button variant="tertiary" onClick={() => onClose()} size="small">
+          {modalCloseButtonLabel(locale)}
+        </Button>
+      </div>
     </Modal>
   );
 };
