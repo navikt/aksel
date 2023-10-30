@@ -15,6 +15,7 @@ module.exports = {
   widths: [480, 768, 1024, 1280],
   port: 9000,
   frameComponent: path.resolve("./src/FrameComponent.tsx"),
+  useScope: path.resolve("./src/useScope.tsx"),
   openBrowser: false,
   paramType: "search", // default is 'hash'
   iframeSandbox: "allow-scripts allow-same-origin",

@@ -6,6 +6,27 @@ import * as jscodeshift from "jscodeshift";
 
 const parse = jscodeshift.withParser("tsx");
 
+const convertReactHooks = (code: string) => {
+  const reactHooks = [
+    "useState",
+    "useEffect",
+    "useRef",
+    "useContext",
+    "useReducer",
+    "useCallback",
+    "useMemo",
+    "useImperativeHandle",
+    "useLayoutEffect",
+    "useDebugValue",
+  ];
+
+  reactHooks.forEach((hook) => {
+    code = code.replace(new RegExp(` ${hook}\\(`, "g"), ` React.${hook}(`);
+  });
+
+  return code;
+};
+
 const convertTSXToJSX = (code: string) => {
   return ts.transpile(code, {
     jsx: ts.JsxEmit.Preserve,
@@ -25,15 +46,14 @@ const removeImportLines = (code: string) => {
 const processCode = (code: string) => {
   const removedImports = removeImportLines(code);
   const jsx = convertTSXToJSX(removedImports);
+  const jsxMogrified = convertReactHooks(jsx);
 
-  return `
-    {
-      (() => {
-        ${jsx}
-        return <Example />
-      })()
-    }
-  `;
+  return `{
+  (() => {
+    ${jsxMogrified}
+    return <Example />
+  })()
+}`;
 };
 
 export const Sandbox = ({ code }: { code: string }) => {
