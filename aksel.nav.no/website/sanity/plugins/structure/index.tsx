@@ -6,6 +6,7 @@ import {
   landingsider,
   previews,
   prinsippKategorier,
+  templatesKategorier,
 } from "../../config";
 import { Iframe } from "./IFrame";
 
@@ -18,6 +19,7 @@ import {
   LightBulbIcon,
   NewspaperIcon,
   PencilBoardIcon,
+  RectangleSectionsIcon,
   TokenIcon,
 } from "@navikt/aksel-icons";
 import differenceInMonths from "date-fns/differenceInMonths";
@@ -33,6 +35,8 @@ const filtered = [
   "ds_artikkel",
   "komponent_artikkel",
   "grunnleggende_landingsside",
+  "templates_landingsside",
+  "templates_artikkel",
   "komponenter_landingsside",
   "media.tag",
   "editor",
@@ -226,6 +230,26 @@ export const structure = async (
               ...(await PanesWithCount(
                 "ds_artikkel",
                 grunnleggendeKategorier,
+                getClient,
+                S
+              )),
+            ])
+        ),
+      S.listItem()
+        .title("Mønster og Maler")
+        .icon(RectangleSectionsIcon)
+        .child(
+          S.list()
+            .title("Mønster og Maler")
+            .items([
+              S.documentListItem()
+                .title(`Landingsside`)
+                .schemaType(`templates_landingsside`)
+                .id(`templates_landingsside_id1`),
+              S.divider(),
+              ...(await PanesWithCount(
+                "templates_artikkel",
+                templatesKategorier,
                 getClient,
                 S
               )),
