@@ -131,6 +131,7 @@ const Riktekst = (
   type:
     | "god-praksis"
     | "grunnleggende"
+    | "templates"
     | "komponent"
     | "prinsipp"
     | "standard"
@@ -254,5 +255,13 @@ export const RiktekstStandalone = {
   name: "riktekst_standalone",
   type: "array",
   of: Riktekst("standalone"),
+  icon: FileTextIcon,
+};
+
+export const RiktekstTemplates = {
+  title: "Riktekst",
+  name: "riktekst_templates",
+  type: "array",
+  of: Riktekst("templates"),
   icon: FileTextIcon,
 };
