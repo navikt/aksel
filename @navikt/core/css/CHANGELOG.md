@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.8.0
+
+### Patch Changes
+
+- :bug: Modal: Bedre støtte for Tooltip i Modal ([#2429](https://github.com/navikt/aksel/pull/2429))
+
 ## 5.7.6
 
 ### Patch Changes
