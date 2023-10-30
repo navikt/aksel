@@ -8,9 +8,14 @@ const Example = () => {
 
   return (
     <>
-      <Button ref={buttonRef} onClick={() => setOpenState(!openState)}>
+      <Button
+        ref={buttonRef}
+        onClick={() => setOpenState(!openState)}
+        aria-expanded={openState}
+      >
         Åpne popover
       </Button>
+
       <Popover
         open={openState}
         onClose={() => setOpenState(false)}
