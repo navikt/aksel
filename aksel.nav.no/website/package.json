@@ -51,6 +51,7 @@
     "react-dom": "^18.0.0",
     "react-hotjar": "^6.1.0",
     "react-responsive-masonry": "^2.1.7",
+    "rss": "^1.2.2",
     "sanity": "3.18.0",
     "sanity-plugin-asset-source-unsplash": "^1.1.1",
     "sanity-plugin-media": "^2.2.2",

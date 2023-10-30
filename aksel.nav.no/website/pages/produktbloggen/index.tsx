@@ -18,6 +18,7 @@ import { AkselCubeStatic } from "components/website-modules/cube";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 import { GetStaticProps } from "next/types";
+import generateRssFeed from "./generateRssFeed";
 
 type PageProps = NextPageT<{
   page: AkselBloggFrontpageT;
@@ -45,6 +46,7 @@ export const getStaticProps: GetStaticProps = async ({
 }): Promise<PageProps> => {
   const { bloggposts, page } = await getClient().fetch(query);
 
+  generateRssFeed(bloggposts);
   return {
     props: {
       page,

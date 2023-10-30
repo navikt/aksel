@@ -56,6 +56,12 @@ export function SEO({
         </>
       )}
       {canonical && <link rel="canonical" href={canonical} />}
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="Produktbloggen - aksel.nav.no"
+        href="/rss.xml"
+      />
     </Head>
   );
 }
