@@ -75,8 +75,4 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "absolute"
    */
   strategy?: "absolute" | "fixed";
-  /**
-   * @deprecated Will be removed in future major-versions
-   */
-  bubbleEscape?: boolean;
 }

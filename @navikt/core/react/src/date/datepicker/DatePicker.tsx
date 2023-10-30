@@ -144,7 +144,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         onWeekNumberClick={mode === "multiple" ? onWeekNumberClick : undefined}
         fixedWeeks
         showOutsideDays
-        {...omit(rest, ["onSelect", "bubbleEscape"])}
+        {...omit(rest, ["onSelect"])}
       />
     );
 

@@ -75,11 +75,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   strategy?: "absolute" | "fixed";
   /**
-   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
-   * @default false
-   */
-  bubbleEscape?: boolean;
-  /**
    * Changes placement of the floating element in order to keep it in view.
    * @default true
    */
@@ -125,7 +120,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement = "top",
       offset,
       strategy: userStrategy,
-      bubbleEscape = false,
       flip: _flip = true,
       ...rest
     },
@@ -162,11 +156,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const { getFloatingProps } = useInteractions([
       useClick(context),
-      useDismiss(context, {
-        bubbles: {
-          escapeKey: bubbleEscape,
-        },
-      }),
+      useDismiss(context),
     ]);
 
     useClientLayoutEffect(() => {

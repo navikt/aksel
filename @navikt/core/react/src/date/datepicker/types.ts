@@ -101,8 +101,4 @@ export interface DatePickerDefaultProps
    * @default See Popover
    */
   strategy?: "absolute" | "fixed";
-  /**
-   * @deprecated Will be removed in future major-versions
-   */
-  bubbleEscape?: boolean;
 }
