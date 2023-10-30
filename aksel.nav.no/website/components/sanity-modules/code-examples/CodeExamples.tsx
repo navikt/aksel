@@ -35,7 +35,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
       ) as HTMLIFrameElement;
       const exampleIframeDOM = exampleIframe?.contentDocument;
       const exampleWrapper = exampleIframeDOM?.getElementById("ds-example");
-      if (exampleWrapper) {
+      if (exampleWrapper && exampleWrapper.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
         clearInterval(waitForExampleContentToRender);
         setFrameState(newHeight < 300 ? 300 : newHeight);

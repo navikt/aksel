@@ -1,5 +1,23 @@
 # @navikt/ds-react
 
+## 5.8.0
+
+### Minor Changes
+
+- :sparkles: Modal: Støtte for å lukke ved klikk utenfor ([#2386](https://github.com/navikt/aksel/pull/2386))
+
+### Patch Changes
+
+- Autocomplete in combobox will not change formatting of the letters while being typed, but will use the casing of the autocompleted word when selecting the option. ([#2207](https://github.com/navikt/aksel/pull/2207))
+
+- Accordion: Fikset dom-validering ved bruk av `div` i `button`. ([#2426](https://github.com/navikt/aksel/pull/2426))
+
+- :bug: Modal: Bedre støtte for Tooltip i Modal ([#2429](https://github.com/navikt/aksel/pull/2429))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.8.0
+  - @navikt/aksel-icons@5.8.0
+
 ## 5.7.6
 
 ### Patch Changes
