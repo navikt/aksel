@@ -6,8 +6,8 @@ import {
   LinkIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
-import { InlineCode } from "components/website-modules/InlineCode";
-import { KBD } from "components/website-modules/KBD";
+import InlineCode from "components/website-modules/InlineCode";
+import KBD from "components/website-modules/KBD";
 import React from "react";
 import { allArticleDocsRef } from "../../../config";
 

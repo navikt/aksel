@@ -26,7 +26,7 @@ import ComponentOverview from "components/sanity-modules/component-overview/Comp
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
-import { SuggestionBlock } from "components/website-modules/suggestionblock";
+import { SuggestionBlock } from "components/website-modules/suggestionblock/SuggestionBlock";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";

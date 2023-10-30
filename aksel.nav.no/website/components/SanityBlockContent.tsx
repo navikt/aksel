@@ -22,8 +22,8 @@ import TastaturModul from "components/sanity-modules/tastatur-tabell/TastaturTab
 import Tips from "components/sanity-modules/tips/Tips";
 import TokenTable from "components/sanity-modules/token-tabell/TokenTable";
 import Video from "components/sanity-modules/video/Video";
-import { InlineCode } from "components/website-modules/InlineCode";
-import { KBD } from "components/website-modules/KBD";
+import InlineCode from "components/website-modules/InlineCode";
+import KBD from "components/website-modules/KBD";
 import NextLink from "next/link";
 import { Children } from "react";
 
