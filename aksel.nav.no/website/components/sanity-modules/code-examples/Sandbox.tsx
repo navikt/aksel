@@ -4,7 +4,7 @@ import { compressToEncodedURIComponent } from "lz-string";
 import ts from "typescript";
 import * as jscodeshift from "jscodeshift";
 
-const j = jscodeshift.withParser("tsx");
+const parse = jscodeshift.withParser("tsx");
 
 const convertTSXToJSX = (code: string) => {
   return ts.transpile(code, {
@@ -14,15 +14,11 @@ const convertTSXToJSX = (code: string) => {
 };
 
 const removeImportLines = (code: string) => {
-  // using jscodeshift to remove imports
-  const ast = j(code);
-
+  const ast = parse(code);
   const removeImport = (path: any) => {
-    j(path).remove();
+    parse(path).remove();
   };
-
-  ast.find(j.ImportDeclaration).forEach((path: any) => removeImport(path));
-
+  ast.find(parse.ImportDeclaration).forEach((path: any) => removeImport(path));
   return ast.toSource();
 };
 
