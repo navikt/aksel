@@ -1,13 +1,14 @@
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { TokenTableT } from "@/types";
 import core from "@navikt/ds-css/tokens.json";
 import { Bleed, BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
 import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import NextLink from "next/link";
+import ShowMore from "./parts/ShowMore";
 
-import ShowMore from "./ShowMore";
+type TokenTableProps = { node: TokenTableT };
 
-const TokenTable = ({ node }: { node: TokenTableT }) => {
+const TokenTable = ({ node }: TokenTableProps) => {
   const tokens: { [key: string]: string } | null =
     node.title in core ? core[node.title] : null;
 
@@ -82,4 +83,10 @@ const TokenTable = ({ node }: { node: TokenTableT }) => {
   );
 };
 
-export default withErrorBoundary(TokenTable, "Token-tabell");
+export default function Component(props: TokenTableProps) {
+  return (
+    <ErrorBoundary boundaryName="Token-tabell">
+      <TokenTable {...props} />
+    </ErrorBoundary>
+  );
+}
