@@ -3,21 +3,34 @@ import { useMemo } from "react";
 import {
   grunnleggendeKategorier,
   komponentKategorier,
+  templatesKategorier,
 } from "../../../sanity/config";
+
+const categoryLookup = (
+  category: "Komponenter" | "Grunnleggende" | "Templates"
+) => {
+  switch (category) {
+    case "Komponenter":
+      return komponentKategorier;
+    case "Grunnleggende":
+      return grunnleggendeKategorier;
+    case "Templates":
+      return templatesKategorier;
+    default:
+      return [];
+  }
+};
 
 export const useSection = ({
   kategori,
   links,
 }: {
-  kategori: "Komponenter" | "Grunnleggende";
+  kategori: "Komponenter" | "Grunnleggende" | "Templates";
   links: AkselSidebarT;
 }) => {
   const sections = useMemo(
     () =>
-      (kategori === "Komponenter"
-        ? komponentKategorier
-        : grunnleggendeKategorier
-      )
+      categoryLookup(kategori)
         .map((x) => ({
           ...x,
           pages: links

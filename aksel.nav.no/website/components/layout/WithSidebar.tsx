@@ -20,7 +20,7 @@ export const WithSidebar = ({
   children: React.ReactNode;
   sidebar: AkselSidebarT;
   pageType: {
-    type: "Komponenter" | "Grunnleggende";
+    type: "Komponenter" | "Grunnleggende" | "Templates";
     title: string;
   };
   pageProps: any;

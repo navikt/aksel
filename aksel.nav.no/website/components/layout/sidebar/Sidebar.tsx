@@ -114,7 +114,7 @@ export const Sidebar = ({
   kategori,
   links,
 }: {
-  kategori: "Komponenter" | "Grunnleggende";
+  kategori: "Komponenter" | "Grunnleggende" | "Templates";
   links: AkselSidebarT;
 }) => {
   const sections = useSection({ kategori, links });

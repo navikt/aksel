@@ -4,8 +4,8 @@ import { getClient } from "@/sanity/client.server";
 import { getDocumentsTmp } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
-  AkselGrunnleggendeDocT,
   AkselSidebarT,
+  AkselTemplatesDocT,
   ArticleListT,
   NextPageT,
   ResolveContributorsT,
@@ -23,7 +23,7 @@ import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
-  page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
+  page: ResolveContributorsT<ResolveSlugT<AkselTemplatesDocT>>;
   sidebar: AkselSidebarT;
   seo: any;
   refs: ArticleListT;
@@ -31,7 +31,7 @@ type PageProps = NextPageT<{
 }>;
 
 export const query = `{
-  "page": *[_type == "ds_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
+  "page": *[_type == "templates_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
     {
       ...,
       "slug": slug.current,
@@ -40,16 +40,16 @@ export const query = `{
         ${destructureBlocks}
       },
   },
-  "seo": *[_type == "grunnleggende_landingsside"][0].seo.image,
+  "seo": *[_type == "templates_landingsside"][0].seo.image,
   ${sidebarQuery}
 }`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getDocumentsTmp("ds_artikkel").then((paths) =>
+    paths: await getDocumentsTmp("templates_artikkel").then((paths) =>
       paths.map((slug) => ({
         params: {
-          slug: slug.split("/").filter((x) => x !== "grunnleggende"),
+          slug: slug.split("/").filter((x) => x !== "monster-maler"),
         },
       }))
     ),
@@ -65,8 +65,8 @@ export const getStaticProps: GetStaticProps = async ({
   preview?: boolean;
 }): Promise<PageProps> => {
   const { page, sidebar, seo } = await getClient().fetch(query, {
-    slug: `grunnleggende/${slug.slice(0, 2).join("/")}`,
-    type: "ds_artikkel",
+    slug: `monster-maler/${slug.slice(0, 2).join("/")}`,
+    type: "templates_artikkel",
   });
 
   return {
@@ -102,7 +102,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Grunnleggende", title: page?.heading }}
+        pageType={{ type: "Templates", title: page?.heading }}
         intro={
           <Detail as="div">
             <div className="mt-2 flex flex-wrap items-center gap-3">
@@ -134,8 +134,8 @@ const Wrapper = (props: any) => {
           comp={Page}
           query={query}
           params={{
-            slug: `grunnleggende/${props.slug}`,
-            type: "ds_artikkel",
+            slug: `monster-maler/${props.slug}`,
+            type: "templates_artikkel",
           }}
           props={props}
         />
