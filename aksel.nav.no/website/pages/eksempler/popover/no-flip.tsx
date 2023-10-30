@@ -18,7 +18,7 @@ const Example = () => {
 
       <Popover
         open={openState}
-        onClose={() => {}}
+        onClose={() => setOpenState(false)}
         anchorEl={buttonRef.current}
         flip={false}
         placement="right"
