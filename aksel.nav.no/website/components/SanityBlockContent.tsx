@@ -15,6 +15,7 @@ import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
 import DoDont from "components/sanity-modules/do-dont/DoDont";
 import ExpansionCard from "components/sanity-modules/expansioncard/ExpansionCard";
 import PropsSeksjon from "components/sanity-modules/props/PropsSeksjon";
+import RelatertInnhold from "components/sanity-modules/relatert-innhold/RelatertInnhold";
 import SideModul from "components/sanity-modules/side-modul/SideModul";
 import Tabell from "components/sanity-modules/tabell/Tabell";
 import TastaturModul from "components/sanity-modules/tastatur-tabell/TastaturTabell";
@@ -25,7 +26,6 @@ import { InlineCode } from "components/website-modules/InlineCode";
 import { KBD } from "components/website-modules/KBD";
 import NextLink from "next/link";
 import { Children } from "react";
-import { RelatertInnhold } from ".";
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
