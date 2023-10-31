@@ -1,6 +1,5 @@
 import React, { useState, useCallback, createContext, useContext } from "react";
 import { useInputContext } from "./Input/inputContext";
-import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 
 type CustomOptionsContextType = {
   customOptions: string[];
@@ -13,13 +12,19 @@ const CustomOptionsContext = createContext<CustomOptionsContextType>(
   {} as CustomOptionsContextType
 );
 
-export const CustomOptionsProvider = ({ children }) => {
+export const CustomOptionsProvider = ({
+  children,
+  value,
+}: {
+  children: any;
+  value: { isMultiSelect: boolean };
+}) => {
   const [customOptions, setCustomOptions] = useState<string[]>([]);
   const { focusInput } = useInputContext();
-  const { isMultiSelect } = useSelectedOptionsContext();
+  const { isMultiSelect } = value;
 
   const removeCustomOption = useCallback(
-    (option) => {
+    (option: string) => {
       setCustomOptions((prevCustomOptions) =>
         prevCustomOptions.filter((o) => o !== option)
       );
@@ -29,7 +34,7 @@ export const CustomOptionsProvider = ({ children }) => {
   );
 
   const addCustomOption = useCallback(
-    (option) => {
+    (option: string) => {
       if (isMultiSelect) {
         setCustomOptions((prevOptions) => [...prevOptions, option]);
       } else {
