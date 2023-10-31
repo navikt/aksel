@@ -7,9 +7,6 @@ import { parseCodeFiles } from "./parts/parse-code-files";
 import { RootDirectoriesT } from "./types";
 dotenv.config();
 
-const createId = (s: string) =>
-  `kode_eksempelid_${s.match(/\w/g)?.join("")}`.toLowerCase();
-
 const token = process.env.SANITY_WRITE_KEY;
 
 if (!token) {
@@ -55,4 +52,8 @@ export async function updateSanity(
     .commit({ autoGenerateArrayKeys: true, dryRun: isDryRun })
     .then(() => console.log(`Oppdaterte ${directory}-dokumenter i sanity`))
     .catch((e) => console.error(e.message));
+}
+
+function createId(s: string) {
+  return `kode_eksempelid_${s.match(/\w/g)?.join("")}`.toLowerCase();
 }
