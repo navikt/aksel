@@ -50,7 +50,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     },
   };
 
-  const { onOpen, ariaId, open } = useDateInputContext();
+  const context = useDateInputContext();
 
   const {
     inputProps,
@@ -108,7 +108,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
           autoComplete="off"
-          aria-controls={open ? ariaId : undefined}
+          aria-controls={context?.open ? context.ariaId : undefined}
           readOnly={readOnly}
           className={cl(
             "navds-date__field-input",
@@ -120,15 +120,15 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         />
         <button
           disabled={inputProps.disabled || readOnly}
-          tabIndex={readOnly ? -1 : open ? -1 : 0}
-          onClick={() => onOpen()}
+          tabIndex={readOnly ? -1 : context?.open ? -1 : 0}
+          onClick={() => context?.onOpen()}
           type="button"
           className="navds-date__field-button"
         >
           <CalendarIcon
             pointerEvents="none"
             title={
-              open
+              context?.open
                 ? conditionalVariables.iconTitle.close
                 : conditionalVariables.iconTitle.open
             }

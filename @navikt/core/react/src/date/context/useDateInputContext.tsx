@@ -19,12 +19,7 @@ interface DateContextContextProps {
   defined: boolean;
 }
 
-export const DateContext = createContext<DateContextContextProps>({
-  open: false,
-  onOpen: () => null,
-  ariaId: undefined,
-  defined: false,
-});
+export const DateContext = createContext<DateContextContextProps | null>(null);
 
 export const useDateInputContext = () => {
   const context = useContext(DateContext);
