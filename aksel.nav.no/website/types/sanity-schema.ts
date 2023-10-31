@@ -312,6 +312,10 @@ export type CodeExampleSchemaT = {
     index: number;
     description?: string;
   }[];
+  metadata?: {
+    version: string;
+    changelog: { description: string; version: string; date: string }[];
+  };
 };
 
 export interface CodeExamplesT {

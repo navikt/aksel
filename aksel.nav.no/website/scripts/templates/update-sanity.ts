@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { noCdnClient } from "../../sanity/interface/client.server";
 import { CodeExampleSchemaT } from "../../types";
+import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
 import { RootDirectoriesT } from "./types";
@@ -17,6 +18,7 @@ if (!token) {
 
 /* await updateSanity("eksempler"); */
 updateSanity("templates", true);
+updateSanity("eksempler", true);
 
 export async function updateSanity(
   directory: RootDirectoriesT,
@@ -37,15 +39,14 @@ export async function updateSanity(
   }
 
   for (const folder of folders) {
-    console.log(folder.path);
     const data: CodeExampleSchemaT = {
       _id: createId(folder.path),
       _type: "kode_eksempler_fil",
       title: folder.path,
       variant: directory,
       filer: parseCodeFiles(folder.path, directory),
+      metadata: extractMetadata(folder.path, directory),
     };
-    console.log(data);
 
     transactionClient.createOrReplace(data);
   }

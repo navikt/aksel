@@ -1,5 +1,4 @@
 import fs from "fs";
-
 import path from "path";
 import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
@@ -19,7 +18,9 @@ export function parseCodeFiles(
     return [];
   }
 
-  const codeFiles = fs.readdirSync(codeDirPath);
+  const codeFiles = fs
+    .readdirSync(codeDirPath)
+    .filter((x) => !x.includes(".json"));
 
   const parsedCode: FileArrayT = codeFiles.map((file) => {
     let code = "";
