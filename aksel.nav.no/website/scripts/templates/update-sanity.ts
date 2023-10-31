@@ -1,16 +1,13 @@
 import dotenv from "dotenv";
 import { noCdnClient } from "../../sanity/interface/client.server";
+import { CodeExampleSchemaT } from "../../types";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
 import { RootDirectoriesT } from "./types";
 dotenv.config();
 
 const createId = (s: string) =>
-  `kode_eksempelid_${s
-    .match(/\w/g)
-    ?.join("")
-    ?.match(/\D/g)
-    ?.join("")}`.toLowerCase();
+  `kode_eksempelid_${s.match(/\w/g)?.join("")}`.toLowerCase();
 
 const token = process.env.SANITY_WRITE_KEY;
 
@@ -19,7 +16,7 @@ if (!token) {
 }
 
 /* await updateSanity("eksempler"); */
-await updateSanity("templates", true);
+updateSanity("templates", true);
 
 export async function updateSanity(
   directory: RootDirectoriesT,
@@ -29,7 +26,7 @@ export async function updateSanity(
   const folders = getDirectories(directory);
 
   const oldSanityDocuments = await noCdnClient(token).fetch(
-    `*[_type == "kode_${directory}_fil"]`
+    `*[_type == "kode_eksempler_fil" && variant == "${directory}"]`
   );
 
   /* Delete old examples */
@@ -40,11 +37,12 @@ export async function updateSanity(
   }
 
   for (const folder of folders) {
-    const data = {
+    console.log(folder.path);
+    const data: CodeExampleSchemaT = {
       _id: createId(folder.path),
-      _type: `kode_${directory}_fil`,
+      _type: "kode_eksempler_fil",
       title: folder.path,
-      dir: true, // legacy
+      variant: directory,
       filer: parseCodeFiles(folder.path, directory),
     };
     console.log(data);

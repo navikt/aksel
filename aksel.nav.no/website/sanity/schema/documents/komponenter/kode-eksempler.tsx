@@ -14,13 +14,26 @@ export const KodeEksempelDoc = defineType({
       validation: (Rule) => Rule.required(),
       readOnly: true,
     }),
+
     defineField({
-      title: "Toggle om eksemplet er et dir eller filnavn",
-      name: "dir",
-      type: "boolean",
+      title: "Kategori",
+      name: "kategori",
+      type: "string",
       validation: (Rule) => Rule.required(),
-      initialValue: false,
       readOnly: true,
+      options: {
+        list: [
+          {
+            title: "Eksempler",
+            value: "eksempler",
+          },
+          {
+            title: "Templates",
+            value: "templates",
+          },
+        ],
+        layout: "radio",
+      },
     }),
     defineField({
       title: "Filer",
@@ -36,6 +49,7 @@ export const KodeEksempelDoc = defineType({
             { title: "Filnavn", name: "navn", type: "string" },
             { title: "Innhold", name: "innhold", type: "string" },
             { title: "Beskrivelse", name: "description", type: "text" },
+            { title: "Index", name: "index", type: "number" },
           ],
         },
       ],
@@ -44,13 +58,11 @@ export const KodeEksempelDoc = defineType({
   preview: {
     select: {
       title: "title",
-      dir: "dir",
     },
     prepare(selection) {
-      const { title, dir } = selection;
+      const { title } = selection;
       return {
         title,
-        subtitle: dir ? "Alle kode-eksempler" : "Spesifikt kode-eksempel",
       };
     },
   },

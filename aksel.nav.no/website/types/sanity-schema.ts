@@ -301,13 +301,24 @@ export interface RelatertInnholdT {
   >;
 }
 
+export type CodeExampleSchemaT = {
+  _id: string;
+  _type: string;
+  title: string;
+  variant: "eksempler" | "templates";
+  filer: {
+    innhold: string;
+    navn: string;
+    index: number;
+    description?: string;
+  }[];
+};
+
 export interface CodeExamplesT {
   title: string;
   dir: {
     title: string;
-    filer: Array<
-      ArrayObjectT<{ navn: string; innhold: string; description?: string }>
-    >;
+    filer: Array<ArrayObjectT<Omit<CodeExampleSchemaT, "_id" | "_type">>>;
   };
 }
 
