@@ -1,4 +1,4 @@
-import { filterCode } from "../filter-code";
+import { filterCode } from "../parts/filter-code";
 import { codeAfter, codeBefore } from "./mockdata";
 
 test("filterCode should remove unwanted code", () => {

@@ -1,5 +1,5 @@
 import fs from "fs";
-import { parseCodeFiles } from "../parse-code-files";
+import { parseCodeFiles } from "../parts/parse-code-files";
 import { codeAfter, codeBefore } from "./mockdata";
 
 jest.mock("fs");

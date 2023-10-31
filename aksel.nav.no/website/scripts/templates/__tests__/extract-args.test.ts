@@ -1,4 +1,4 @@
-import { extractArgs } from "../extract-args";
+import { extractArgs } from "../parts/extract-args";
 
 describe("Testing extractArgs function", () => {
   test("extractArgs should return null on failed parsing", () => {

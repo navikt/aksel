@@ -1,4 +1,4 @@
-import { getFiles } from "../get-files";
+import { getFiles } from "../parts/get-files";
 
 describe("Testing getFiles function", () => {
   test("getFiles should list directories in /pages/eksempler", () => {
