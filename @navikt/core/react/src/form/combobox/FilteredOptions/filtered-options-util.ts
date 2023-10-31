@@ -1,5 +1,5 @@
 const normalizeText = (text: string): string =>
-  typeof text === "string" ? `${text}`.toLowerCase().trim() : "";
+  typeof text === "string" ? text.toLocaleLowerCase().trim() : "";
 
 const isPartOfText = (value, text) =>
   normalizeText(text).startsWith(normalizeText(value ?? ""));
