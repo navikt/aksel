@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { WithSidebar } from "./WithSidebar";
 import { SanityBlockContent } from "@/sanity-block";
 import { getBlocks } from "@/sb-util";
+import type { Meta, StoryObj } from "@storybook/react";
+import { WithSidebar } from "./WithSidebar";
 
 const meta = {
   title: "Layout/WithSidebar",
@@ -28,8 +28,10 @@ export const KomponenterLanding: Story = {
   args: {
     children,
     pageType: {
-      type: "Komponenter",
+      type: "komponenter",
       title: "Heading",
+      rootUrl: "/komponenter",
+      rootTitle: "Komponenter",
     },
     pageProps: { content: "1" },
     variant: "landingPage",
@@ -65,8 +67,10 @@ export const Komponenter: Story = {
   args: {
     children,
     pageType: {
-      type: "Komponenter",
+      type: "komponenter",
       title: "Heading",
+      rootUrl: "/komponenter",
+      rootTitle: "Komponenter",
     },
     pageProps: { content: "1" },
     variant: "page",

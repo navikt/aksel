@@ -95,6 +95,7 @@ describe("createSearchResult", () => {
       aksel_blogg: 1,
       aksel_prinsipp: 1,
       aksel_standalone: 1,
+      aksel_templates: 0,
     };
     const actual: SearchResultsT = createSearchResult(result, rawResults);
     expect(actual.hits).toEqual(expected);
