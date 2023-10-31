@@ -63,7 +63,7 @@ export const KodeEksempelDoc = defineType({
         defineField({
           title: "Version",
           name: "version",
-          type: "string",
+          type: "number",
         }),
         defineField({
           title: "Changelog",
@@ -76,7 +76,7 @@ export const KodeEksempelDoc = defineType({
               type: "object",
               fields: [
                 { title: "Description", name: "description", type: "string" },
-                { title: "Version", name: "version", type: "string" },
+                { title: "Version", name: "version", type: "number" },
                 { title: "Date", name: "date", type: "string" },
               ],
             },

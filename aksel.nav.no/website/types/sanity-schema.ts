@@ -313,8 +313,8 @@ export type CodeExampleSchemaT = {
     description?: string;
   }[];
   metadata?: {
-    version: string;
-    changelog: { description: string; version: string; date: string }[];
+    version: number;
+    changelog: { description: string; version: number; date: string }[];
   };
 };
 
