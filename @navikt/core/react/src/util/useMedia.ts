@@ -10,8 +10,11 @@ export const noMatchMedia =
  * @param defaultFallback boolean
  * @returns isActive-boolean
  */
-export const useMedia = (media: string, defaultFallback?: boolean): boolean => {
-  const [isActive, setIsActive] = useState(defaultFallback ?? false);
+export const useMedia = (
+  media: string,
+  defaultFallback?: boolean
+): boolean | undefined => {
+  const [isActive, setIsActive] = useState(defaultFallback);
 
   useEffect(() => {
     if (noMatchMedia) {
