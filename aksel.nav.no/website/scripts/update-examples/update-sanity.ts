@@ -13,9 +13,8 @@ if (!token) {
   throw new Error("Missing token 'SANITY_WRITE_KEY' for updating sanity");
 }
 
-/* await updateSanity("eksempler"); */
-updateSanity("templates", true);
-updateSanity("eksempler", true);
+updateSanity("templates", false);
+updateSanity("eksempler", false);
 
 export async function updateSanity(
   directory: RootDirectoriesT,
