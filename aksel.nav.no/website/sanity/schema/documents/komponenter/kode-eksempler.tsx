@@ -54,6 +54,36 @@ export const KodeEksempelDoc = defineType({
         },
       ],
     }),
+    defineField({
+      title: "Metadata",
+      name: "metadata",
+      type: "object",
+      readOnly: true,
+      fields: [
+        defineField({
+          title: "Version",
+          name: "version",
+          type: "string",
+        }),
+        defineField({
+          title: "Changelog",
+          name: "changelog",
+          type: "array",
+          of: [
+            {
+              title: "Changelog-entry",
+              name: "entry",
+              type: "object",
+              fields: [
+                { title: "Description", name: "description", type: "string" },
+                { title: "Version", name: "version", type: "string" },
+                { title: "Date", name: "date", type: "string" },
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
   ],
   preview: {
     select: {
