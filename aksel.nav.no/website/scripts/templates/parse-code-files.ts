@@ -4,12 +4,12 @@ import path from "path";
 import { extractArgs } from "./extract-args";
 import { filterCode } from "./filter-code";
 import { sortResult } from "./sort";
-import { FileT } from "./types";
+import { FileArrayT } from "./types";
 
-export function readCodeFiles(
+export function parseCodeFiles(
   dirName: string,
   rootDir: "eksempler" | "templates"
-): FileT {
+): FileArrayT {
   const codeDirPath = path.resolve(
     process.cwd(),
     `pages/${rootDir}/${dirName}`
@@ -21,7 +21,7 @@ export function readCodeFiles(
 
   const codeFiles = fs.readdirSync(codeDirPath);
 
-  const parsedCode = codeFiles.map((file) => {
+  const parsedCode: FileArrayT = codeFiles.map((file) => {
     let code = "";
 
     code = fs.readFileSync(
@@ -33,9 +33,9 @@ export function readCodeFiles(
 
     return {
       innhold: code,
-      navn: args.title ?? file.replace(".tsx", ""),
-      description: args.desc,
-      index: args.index ?? 1,
+      navn: args?.title ?? file.replace(".tsx", ""),
+      description: args?.desc,
+      index: args?.index ?? 1,
     };
   });
 

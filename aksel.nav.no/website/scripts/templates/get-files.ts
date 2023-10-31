@@ -7,9 +7,7 @@ import { DirectoryDataT } from "./types";
  * @param directory
  * @returns DirectoryDataT
  */
-export const getFiles = (
-  directory: "eksempler" | "templates"
-): DirectoryDataT => {
+export function getFiles(directory: "eksempler" | "templates"): DirectoryDataT {
   const rootPath = path.resolve(process.cwd(), `pages/${directory}`);
 
   if (!fs.existsSync(rootPath)) {
@@ -22,4 +20,4 @@ export const getFiles = (
     .map((dirent) => dirent.name);
 
   return folders.map((dir) => ({ path: `${dir}` }));
-};
+}

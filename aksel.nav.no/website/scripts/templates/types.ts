@@ -1,8 +1,14 @@
-export type FileT = {
+export type FileArrayT = {
   innhold: string;
   navn: string;
-  description: string | null;
   index: number;
+  description?: string;
 }[];
 
 export type DirectoryDataT = { path: string }[];
+
+export type ArgsT = {
+  title?: string;
+  index?: number;
+  desc?: string;
+};
