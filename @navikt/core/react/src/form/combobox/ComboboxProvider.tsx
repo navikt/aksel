@@ -81,7 +81,6 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
                 filteredOptions,
                 isListOpen,
                 isLoading,
-                isMultiSelect,
                 options,
               }}
             >

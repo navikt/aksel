@@ -13,6 +13,19 @@ import usePrevious from "../../../util/usePrevious";
 import { useClientLayoutEffect } from "../../../util";
 import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus from "./useVirtualFocus";
+import { ComboboxProps } from "../types";
+
+type FilteredOptionsProps = {
+  children: any;
+  value: Pick<
+    ComboboxProps,
+    | "allowNewValues"
+    | "filteredOptions"
+    | "isListOpen"
+    | "isLoading"
+    | "options"
+  >;
+};
 
 type FilteredOptionsContextType = {
   activeDecendantId?: string;
@@ -28,7 +41,7 @@ type FilteredOptionsContextType = {
   setIsMouseLastUsedInputDevice: React.Dispatch<SetStateAction<boolean>>;
   isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
-  currentOption: string | null;
+  currentOption?: string;
   moveFocusUp: () => void;
   moveFocusDown: () => void;
   moveFocusToElement: (id: string) => void;
@@ -40,7 +53,10 @@ const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
   {} as FilteredOptionsContextType
 );
 
-export const FilteredOptionsProvider = ({ children, value: props }) => {
+export const FilteredOptionsProvider = ({
+  children,
+  value: props,
+}: FilteredOptionsProps) => {
   const {
     allowNewValues,
     filteredOptions: externalFilteredOptions,
@@ -79,12 +95,14 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const filteredOptionsMap = useMemo(
     () =>
       options.reduce(
-        (map: Map<string, string>, _option: string) => ({
+        (map, _option) => ({
           ...map,
           [filteredOptionsUtils.getOptionId(id, _option)]: _option,
         }),
         {
-          [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues && value,
+          [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
+            ? value
+            : undefined,
         }
       ),
     [allowNewValues, id, options, value]
