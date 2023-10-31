@@ -142,7 +142,11 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
               Changelog
             </Heading>
             <AkselTable
-              th={[{ text: "Dato" }, { text: "Version" }, { text: "Endring" }]}
+              th={[
+                { text: "Dato" },
+                { text: "Versjon" },
+                { text: "Endringer" },
+              ]}
             >
               {metadata.changelog
                 .sort((a, b) => a.version - b.version)
