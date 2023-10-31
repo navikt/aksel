@@ -1,7 +1,7 @@
 import { GroupedHitsT, SearchHitT, searchOptions } from "@/types";
 import { Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import { Tag } from "components/sanity-modules/frontpage-blocks/Tag";
+import { Tag } from "components/sanity-modules/frontpage-blocks/latest-articles/Tag";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Hit } from "./Hit";
 

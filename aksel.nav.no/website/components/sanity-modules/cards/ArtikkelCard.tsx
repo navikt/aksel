@@ -1,4 +1,4 @@
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 
 import { amplitudeLogNavigation } from "@/logging";
 import {
@@ -12,6 +12,14 @@ import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
 import { abbrName } from "../..";
 
+type ArtikkelCardProps = ResolveContributorsSingleT<
+  ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
+> & {
+  source?: string;
+  variant: string;
+  level?: "2" | "3";
+};
+
 const ArtikkelCard = ({
   slug,
   source,
@@ -24,9 +32,7 @@ const ArtikkelCard = ({
   tema,
   level = "2",
   ...rest
-}: ResolveContributorsSingleT<
-  ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
-> & { source?: string; variant: string; level?: "2" | "3" }) => {
+}: ArtikkelCardProps) => {
   const date = useFormatedDate(
     (rest as any)?.updateInfo?.lastVerified ?? publishedAt ?? _updatedAt
   );
@@ -89,4 +95,10 @@ const ArtikkelCard = ({
   );
 };
 
-export default withErrorBoundary(ArtikkelCard, "ArtikkelCard");
+export default function Component(props: ArtikkelCardProps) {
+  return (
+    <ErrorBoundary boundaryName="ArtikkelCard">
+      <ArtikkelCard {...props} />
+    </ErrorBoundary>
+  );
+}

@@ -21,7 +21,8 @@ import {
 import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import ComponentOverview from "components/sanity-modules/ComponentOverview";
+
+import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
