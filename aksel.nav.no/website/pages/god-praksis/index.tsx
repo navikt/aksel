@@ -16,10 +16,10 @@ import { Heading } from "@navikt/ds-react";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
+import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
 import { SEO } from "components/website-modules/seo/SEO";
-import { AkselCubeStatic } from "components/website-modules/cube";
-import { Suspense, lazy } from "react";
 import { GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
 
 type PageProps = NextPageT<{
   page: AkselGodPraksisLandingPageDocT;

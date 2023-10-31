@@ -5,15 +5,13 @@ import { useToc } from "components/website-modules/toc/useToc";
 import * as React from "react";
 
 export function TableOfContents({
-  changedState,
   hideToc = true,
   aksel = false,
 }: {
-  changedState: any;
   hideToc?: boolean;
   aksel?: boolean;
 }) {
-  const { toc, activeId, activeSubId } = useToc(changedState);
+  const { toc, activeId, activeSubId } = useToc();
 
   const handleFocus = (id: string) => {
     const element = document.getElementById(id);

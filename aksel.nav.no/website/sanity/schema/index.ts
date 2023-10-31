@@ -73,8 +73,5 @@ export const schema: SchemaPluginOptions = {
     /* Prinsipper */
     object.HeroBilde,
     object.InnholdsKort,
-
-    /* Standalone */
-    object.UuFeedback,
   ],
 };
