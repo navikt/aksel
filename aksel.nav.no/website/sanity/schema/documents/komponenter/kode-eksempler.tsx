@@ -16,8 +16,8 @@ export const KodeEksempelDoc = defineType({
     }),
 
     defineField({
-      title: "Kategori",
-      name: "kategori",
+      title: "Variant",
+      name: "variant",
       type: "string",
       validation: (Rule) => Rule.required(),
       readOnly: true,
@@ -88,11 +88,13 @@ export const KodeEksempelDoc = defineType({
   preview: {
     select: {
       title: "title",
+      variant: "variant",
     },
     prepare(selection) {
-      const { title } = selection;
+      const { title, variant } = selection;
       return {
         title,
+        subtitle: variant,
       };
     },
   },
