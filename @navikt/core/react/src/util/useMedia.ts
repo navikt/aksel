@@ -7,14 +7,14 @@ export const noMatchMedia =
 /**
  * @example useMedia("screen and (min-width: 1024px)")
  * @param media string
- * @param defaultFallback boolean
- * @returns isActive-boolean
+ * @param fallback boolean
+ * @returns boolean | undefined
  */
 export const useMedia = (
   media: string,
-  defaultFallback?: boolean
+  fallback?: boolean
 ): boolean | undefined => {
-  const [isActive, setIsActive] = useState(defaultFallback);
+  const [matches, setMatches] = useState(fallback);
 
   useEffect(() => {
     if (noMatchMedia) {
@@ -22,10 +22,10 @@ export const useMedia = (
     }
     const mediaQueryList = window.matchMedia(media);
 
-    setIsActive(mediaQueryList.matches);
+    setMatches(mediaQueryList.matches);
 
     const listener = (evt: MediaQueryListEvent) => {
-      setIsActive(evt.matches);
+      setMatches(evt.matches);
     };
 
     mediaQueryList.addEventListener("change", listener);
@@ -38,5 +38,5 @@ export const useMedia = (
     };
   }, [media]);
 
-  return isActive;
+  return matches;
 };
