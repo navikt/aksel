@@ -1,9 +1,9 @@
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Heading } from "../typography";
 import { AccordionContext } from "./AccordionContext";
 import { AccordionItemContext } from "./AccordionItem";
-import { ChevronDownIcon } from "@navikt/aksel-icons";
 
 export interface AccordionHeaderProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -37,13 +37,13 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         aria-expanded={itemContext.open}
         type="button"
       >
-        <div className="navds-accordion__icon-wrapper">
+        <span className="navds-accordion__icon-wrapper">
           <ChevronDownIcon
             className="navds-accordion__header-chevron"
             title="Vis mer"
             aria-hidden
           />
-        </div>
+        </span>
         <Heading
           size={accordionContext?.headingSize ?? "small"}
           as="span"

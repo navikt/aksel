@@ -1,11 +1,13 @@
 import { useClientLayoutEffect } from "@navikt/ds-react";
 import throttle from "lodash/throttle";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export const useToc = ({ changedState }: { changedState: any }) => {
+export const useToc = () => {
   const [toc, setToc] = useState<
     { heading: string; id: string; lvl3: { heading: string; id: string }[] }[]
   >([]);
+  const router = useRouter();
 
   const [activeId, setActiveId] = useState(null);
   const [activeSubId, setActiveSubId] = useState(null);
@@ -57,7 +59,7 @@ export const useToc = ({ changedState }: { changedState: any }) => {
     }, 150);
 
     return () => clearTimeout(time);
-  }, [changedState]);
+  }, [router.asPath]);
 
   useEffect(() => {
     const validPick = (el: HTMLElement) => {

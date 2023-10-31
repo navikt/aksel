@@ -1,20 +1,22 @@
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import cl from "clsx";
 import Link from "next/link";
 import React from "react";
+
+type AkselLinkProps = {
+  href: string;
+  children: React.ReactNode;
+  inverted?: boolean;
+  className?: string;
+};
 
 const AkselLink = ({
   href,
   children,
   inverted = false,
   className,
-}: {
-  href: string;
-  children: React.ReactNode;
-  inverted?: boolean;
-  className?: string;
-}) => {
+}: AkselLinkProps) => {
   return (
     <Link
       href={href}
@@ -55,4 +57,10 @@ const AkselLink = ({
   );
 };
 
-export default withErrorBoundary(AkselLink, "AkselLink");
+export default function Component(props: AkselLinkProps) {
+  return (
+    <ErrorBoundary boundaryName="AkselLink">
+      <AkselLink {...props} />
+    </ErrorBoundary>
+  );
+}

@@ -4,8 +4,8 @@ import cl from "clsx";
 import { useToc } from "components/website-modules/toc/useToc";
 import * as React from "react";
 
-export function TableOfContentsv2({ changedState }: { changedState: any }) {
-  const { toc, activeId, activeSubId } = useToc(changedState);
+export function TableOfContentsv2() {
+  const { toc, activeId, activeSubId } = useToc();
 
   const handleFocus = (id: string) => {
     const element = document.getElementById(id);
@@ -47,7 +47,7 @@ export function TableOfContentsv2({ changedState }: { changedState: any }) {
                   as="li"
                   truncate
                   size="small"
-                  className={cl("animate-fadeIn relative py-1 ", {
+                  className={cl("animate-toc relative py-1 ", {
                     "font-semibold": link.id === activeId,
                   })}
                 >
