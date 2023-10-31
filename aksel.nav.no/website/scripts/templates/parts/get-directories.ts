@@ -1,13 +1,13 @@
 import fs from "fs";
 import path from "path";
-import { DirectoryDataT } from "./types";
+import { DirectoryDataT, RootDirectoriesT } from "../types";
 
 /**
  * Returns metadata for each 'page' found in directory
  * @param directory
  * @returns DirectoryDataT
  */
-export function getFiles(directory: "eksempler" | "templates"): DirectoryDataT {
+export function getDirectories(directory: RootDirectoriesT): DirectoryDataT {
   const rootPath = path.resolve(process.cwd(), `pages/${directory}`);
 
   if (!fs.existsSync(rootPath)) {

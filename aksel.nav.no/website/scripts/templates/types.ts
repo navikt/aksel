@@ -12,3 +12,4 @@ export type ArgsT = {
   index?: number;
   desc?: string;
 };
+export type RootDirectoriesT = "eksempler" | "templates";

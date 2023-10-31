@@ -1,14 +1,14 @@
 import fs from "fs";
 
 import path from "path";
+import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
 import { filterCode } from "./filter-code";
 import { sortResult } from "./sort";
-import { FileArrayT } from "./types";
 
 export function parseCodeFiles(
   dirName: string,
-  rootDir: "eksempler" | "templates"
+  rootDir: RootDirectoriesT
 ): FileArrayT {
   const codeDirPath = path.resolve(
     process.cwd(),
