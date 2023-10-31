@@ -7,16 +7,18 @@ import {
   AkselSidebarT,
   AkselTemplatesDocT,
   ArticleListT,
+  CodeExampleSchemaT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
-import { Detail } from "@navikt/ds-react";
+import { Detail, Heading } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
+import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -30,7 +32,7 @@ type PageProps = NextPageT<{
   publishDate: string;
 }>;
 
-export const query = `{
+const query = `{
   "page": *[_type == "templates_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
     {
       ...,
@@ -91,6 +93,10 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
     return <NotFotfund />;
   }
 
+  const metadata: CodeExampleSchemaT["metadata"] = page.content.find(
+    (x) => x._type === "kode_eksempler"
+  )?.dir?.metadata;
+
   return (
     <>
       <SEO
@@ -123,6 +129,36 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       >
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
+
+        {metadata && metadata.changelog && (
+          <>
+            <Heading
+              tabIndex={-1}
+              id="changelog"
+              level="2"
+              size="large"
+              className="max-w-text text-deepblue-800 mb-4 mt-12 scroll-mt-20 focus:outline-none"
+            >
+              Changelog
+            </Heading>
+            <AkselTable
+              th={[{ text: "Dato" }, { text: "Version" }, { text: "Endring" }]}
+            >
+              {metadata.changelog
+                .sort((a, b) => a.version - b.version)
+                .map((log) => (
+                  <AkselTableRow
+                    key={log.version}
+                    tr={[
+                      { text: log.date },
+                      { text: log.version },
+                      { text: log.description },
+                    ]}
+                  />
+                ))}
+            </AkselTable>
+          </>
+        )}
       </WithSidebar>
       <Footer />
     </>
