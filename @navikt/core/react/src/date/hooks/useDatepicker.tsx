@@ -60,7 +60,7 @@ export interface UseDatepickerOptions
    * Will be removed in a future major-version
    * @deprecated
    */
-  openOnFocus?: boolean;
+  openOnFocus?: false;
 }
 
 interface UseDatepickerValue {
