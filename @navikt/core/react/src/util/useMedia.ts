@@ -14,27 +14,25 @@ export const useMedia = (media: string, defaultFallback?: boolean): boolean => {
   const [isActive, setIsActive] = useState(defaultFallback ?? false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (noMatchMedia) {
+      return;
+    }
+    const mediaQueryList = window.matchMedia(media);
+
+    setIsActive(mediaQueryList.matches);
+
+    const listener = (evt: MediaQueryListEvent) => {
+      setIsActive(evt.matches);
+    };
+
+    mediaQueryList.addEventListener("change", listener);
+
+    return () => {
       if (noMatchMedia) {
         return;
       }
-      const mediaQueryList = window.matchMedia(media);
-
-      setIsActive(mediaQueryList.matches);
-
-      const listener = (evt: MediaQueryListEvent) => {
-        setIsActive(evt.matches);
-      };
-
-      mediaQueryList.addEventListener("change", listener);
-
-      return () => {
-        if (noMatchMedia) {
-          return;
-        }
-        mediaQueryList.removeEventListener("change", listener);
-      };
-    }
+      mediaQueryList.removeEventListener("change", listener);
+    };
   }, [media]);
 
   return isActive;
