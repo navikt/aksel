@@ -314,6 +314,7 @@ export const Size = () => {
     fromDate: new Date("Aug 23 2019"),
     toDate: new Date("Feb 23 2024"),
     onDateChange: console.log,
+    defaultSelected: new Date("Feb 23 2023"),
   });
 
   return (
