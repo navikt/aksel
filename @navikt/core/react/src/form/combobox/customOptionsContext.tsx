@@ -17,7 +17,7 @@ export const CustomOptionsProvider = ({
   value,
 }: {
   children: any;
-  value: { isMultiSelect: boolean };
+  value: { isMultiSelect?: boolean };
 }) => {
   const [customOptions, setCustomOptions] = useState<string[]>([]);
   const { focusInput } = useInputContext();
