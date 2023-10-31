@@ -157,6 +157,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             onOpenToggle?.();
           },
           ariaId,
+          defined: true,
         }}
       >
         <div

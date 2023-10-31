@@ -107,6 +107,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
             onOpenToggle?.();
           },
           ariaId,
+          defined: true,
         }}
       >
         <div
