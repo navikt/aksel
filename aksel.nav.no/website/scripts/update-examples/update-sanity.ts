@@ -23,17 +23,7 @@ export async function updateSanity(
   const transactionClient = noCdnClient(token).transaction();
   const folders = getDirectories(directory);
 
-  const oldSanityDocuments = await noCdnClient(token).fetch(
-    `*[_type == "kode_eksempler_fil" && variant == "${directory}"]`
-  );
-
-  /* Delete old examples */
-  for (const document of oldSanityDocuments) {
-    if (!folders.some((folder) => document._id === createId(folder.path))) {
-      transactionClient.delete(document._id);
-    }
-  }
-
+  /* First we add/update examples */
   for (const folder of folders) {
     const data: CodeExampleSchemaT = {
       _id: createId(folder.path),
@@ -50,7 +40,54 @@ export async function updateSanity(
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: isDryRun })
     .then(() => console.log(`Oppdaterte ${directory}-dokumenter i sanity`))
-    .catch((e) => console.error(e.message));
+    .catch((e) => {
+      throw new Error(e.message);
+    });
+
+  const oldSanityDocuments = await noCdnClient(token).fetch(
+    `*[_type == "kode_eksempler_fil" && variant == "${directory}"]`
+  );
+
+  let deletedIds: string[] = [];
+  /* Delete old examples */
+  for (const document of oldSanityDocuments) {
+    if (!folders.some((folder) => document._id === createId(folder.path))) {
+      transactionClient.delete(document._id);
+      deletedIds.push(document._id);
+    }
+  }
+
+  await transactionClient
+    .commit()
+    .then(() => console.log(`Successfully deleted unused ${directory}`))
+    .catch((e) => {
+      /**
+       * Errormessage includes all ids that failed.
+       */
+      deletedIds = deletedIds.filter((id) => e.message.includes(id));
+
+      console.log("\n");
+      console.log(
+        `Found ${deletedIds.length} ${directory} documents longer documented locally, but referenced in sanity.
+    How to fix:
+    - Go to links provided under and try to manually delete document.
+    - You will then be prompted to update referenced document before deleting.
+    - After updating reference(s) and deleting document(s) there is no need to run the script again.`
+      );
+      console.log(
+        JSON.stringify(
+          deletedIds.map(
+            (x) =>
+              `https://aksel.nav.no/admin/prod/desk/admin;eksemplerTemplates;${x}`
+          ),
+          null,
+          2
+        )
+      );
+      throw new Error(
+        `Failed when deleting old ${directory}-documentation from sanity, see warning above.`
+      );
+    });
 }
 
 function createId(s: string) {
