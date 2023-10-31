@@ -64,11 +64,10 @@ export const Sandbox = ({ code }: { code: string }) => {
     })
   );
   return (
-    <form
-      action={`/sandbox/index.html?code=${compressedCode}`}
-      method="POST"
+    <a
+      href={`/sandbox/index.html?code=${compressedCode}`}
+      rel="noreferrer"
       target="_blank"
-      className="h-8"
     >
       <Button
         variant="tertiary-neutral"
@@ -78,6 +77,6 @@ export const Sandbox = ({ code }: { code: string }) => {
       >
         Sandbox
       </Button>
-    </form>
+    </a>
   );
 };

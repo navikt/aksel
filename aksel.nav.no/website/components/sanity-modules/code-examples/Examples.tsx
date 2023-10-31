@@ -11,6 +11,7 @@ import cl from "clsx";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Sandbox } from "./Sandbox";
+import { CodeSandbox } from "./CodeSandbox";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";
@@ -186,8 +187,9 @@ const ComponentExamples = ({ node }: { node: CodeExamplesT }) => {
                       </HStack>
                     </div>
 
-                    <HStack gap="2">
+                    <HStack gap="2" align="baseline">
                       <Sandbox code={fil.innhold.trim()} />
+                      <CodeSandbox code={fil.innhold.trim()} />
                       <Button
                         variant="tertiary-neutral"
                         size="small"
