@@ -1,11 +1,4 @@
-import {
-  abbrName,
-  Bilde,
-  BreadCrumbs,
-  dateStr,
-  Feedback,
-  TableOfContents,
-} from "@/components";
+import { abbrName, BreadCrumbs, dateStr, TableOfContents } from "@/components";
 import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
@@ -19,6 +12,7 @@ import {
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
+import Bilde from "components/sanity-modules/bilde/Bilde";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
 import { lazy, Suspense } from "react";
@@ -187,13 +181,6 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
                       <BodyShort as="span" className="text-text-subtle ">
                         Publisert: {publishDate}
                       </BodyShort>
-                    </div>
-                    <div className="mt-12 md:mt-16">
-                      <Feedback
-                        akselFeedback
-                        docId={data?._id}
-                        docType={data?._type}
-                      />
                     </div>
                   </div>
                 </div>

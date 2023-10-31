@@ -14,8 +14,7 @@ import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
-import { AkselCubeStatic } from "components/website-modules/cube";
-import Feedback from "components/website-modules/feedback";
+import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
 import { SEO } from "components/website-modules/seo/SEO";
 import TableOfContents from "components/website-modules/toc/TOC";
 import { getImage } from "components/website-modules/utils/get-image";
@@ -210,9 +209,6 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
               </ul>
             </div>
           )}
-          <div className="dynamic-wrapper-prose pt-16">
-            <Feedback akselFeedback docId={blogg?._id} docType={blogg?._type} />
-          </div>
 
           <div className="max-w-content-w-padding mx-auto grid w-full">
             <BloggAd />

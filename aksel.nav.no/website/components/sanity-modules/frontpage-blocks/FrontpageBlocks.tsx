@@ -1,8 +1,12 @@
-import Latest, { LatestT } from "./Latest";
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
+import Latest, { LatestT } from "./latest-articles/Latest";
 export type BlocksT = LatestT;
 
-export const FrontpageBlock = ({ blocks }: { blocks: BlocksT[] }) => {
+type FrontpageBlockProps = {
+  blocks: BlocksT[];
+};
+
+export const FrontpageBlock = ({ blocks }: FrontpageBlockProps) => {
   if (!blocks || !blocks.length) {
     return null;
   }
@@ -20,4 +24,10 @@ export const FrontpageBlock = ({ blocks }: { blocks: BlocksT[] }) => {
   );
 };
 
-export default withErrorBoundary(FrontpageBlock, "FrontpageBlock");
+export default function Component(props: FrontpageBlockProps) {
+  return (
+    <ErrorBoundary boundaryName="FrontpageBlock">
+      <FrontpageBlock {...props} />
+    </ErrorBoundary>
+  );
+}
