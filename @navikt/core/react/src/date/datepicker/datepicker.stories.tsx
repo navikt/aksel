@@ -444,3 +444,4 @@ export const ModalDemo = () => {
     </Modal>
   );
 };
+ModalDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };
