@@ -72,14 +72,28 @@ interface UseRangeDatepickerValue {
   fromInputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
-  >;
+  > & {
+    /**
+     * @private
+     */
+    setAnchorRef?: React.Dispatch<
+      React.SetStateAction<HTMLButtonElement | null>
+    >;
+  };
   /**
    * Use: <DatePicker.Input label="to" {...toInputProps}/>
    */
   toInputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
-  >;
+  > & {
+    /**
+     * @private
+     */
+    setAnchorRef?: React.Dispatch<
+      React.SetStateAction<HTMLButtonElement | null>
+    >;
+  };
   /**
    * Resets all states (callback)
    */
@@ -93,10 +107,6 @@ interface UseRangeDatepickerValue {
    * Manually override currently selected day
    */
   setSelected: (date?: DateRange) => void;
-  /**
-   * @private
-   */
-  setAnchorRef?: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
 }
 
 const RANGE = {

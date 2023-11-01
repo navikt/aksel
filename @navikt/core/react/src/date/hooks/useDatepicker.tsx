@@ -71,7 +71,17 @@ interface UseDatepickerValue {
   /**
    * Use: <DatePicker.Input {...inputProps}/>
    */
-  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "onBlur" | "value">;
+  inputProps: Pick<
+    DateInputProps,
+    "onChange" | "onFocus" | "onBlur" | "value"
+  > & {
+    /**
+     * @private
+     */
+    setAnchorRef?: React.Dispatch<
+      React.SetStateAction<HTMLButtonElement | null>
+    >;
+  };
   /**
    * Resets all states (callback)
    */
@@ -85,10 +95,6 @@ interface UseDatepickerValue {
    * Manually override currently selected day
    */
   setSelected: (date?: Date) => void;
-  /**
-   * @private
-   */
-  setAnchorRef?: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
 }
 
 export type DateValidationT = {

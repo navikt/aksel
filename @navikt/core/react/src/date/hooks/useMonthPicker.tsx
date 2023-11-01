@@ -57,7 +57,14 @@ interface UseMonthPickerValue {
   /**
    * Use: <MonthPicker.Input {...inputProps} />
    */
-  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value">;
+  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value"> & {
+    /**
+     * @private
+     */
+    setAnchorRef?: React.Dispatch<
+      React.SetStateAction<HTMLButtonElement | null>
+    >;
+  };
   /**
    * Currently selected Date
    * Up to user to validate value and extract month
@@ -71,10 +78,6 @@ interface UseMonthPickerValue {
    * Resets all states
    */
   reset: () => void;
-  /**
-   * @private
-   */
-  setAnchorRef?: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
 }
 
 export type MonthValidationT = {
