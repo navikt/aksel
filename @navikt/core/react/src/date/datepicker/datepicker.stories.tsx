@@ -331,7 +331,6 @@ export const Size = () => {
           size="medium"
           {...inputProps}
           label="Velg dato"
-          error="123"
         />
       </DatePicker>
       <DatePicker {...d2} dropdownCaption>
