@@ -316,14 +316,31 @@ export const Size = () => {
     onDateChange: console.log,
     defaultSelected: new Date("Feb 23 2023"),
   });
+  const { datepickerProps: d2, inputProps: i2 } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+    defaultSelected: new Date("Feb 23 2023"),
+  });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...datepickerProps} dropdownCaption>
-        <DatePicker.Input size="medium" {...inputProps} label="Velg dato" />
+        <DatePicker.Input
+          placeholder="10/10/2023"
+          size="medium"
+          {...inputProps}
+          label="Velg dato"
+          error="123"
+        />
       </DatePicker>
-      <DatePicker {...datepickerProps} dropdownCaption>
-        <DatePicker.Input size="small" {...inputProps} label="Velg dato" />
+      <DatePicker {...d2} dropdownCaption>
+        <DatePicker.Input
+          placeholder="10/10/2023"
+          size="small"
+          {...i2}
+          label="Velg dato"
+        />
       </DatePicker>
     </div>
   );

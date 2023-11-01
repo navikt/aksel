@@ -193,7 +193,7 @@
 }
 
 .navds-form-field--small .navds-date__field-input {
-  padding-right: var(--a-spacing-10);
+  padding-right: var(--a-spacing-8);
 }
 
 /* Error-handling */
