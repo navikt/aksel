@@ -35,6 +35,9 @@ const FilteredOptions = () => {
     maxSelectedOptions,
   } = useSelectedOptionsContext();
 
+  const isDisabled = (option) =>
+    !canSelectMoreOptions && !selectedOptions.includes(option);
+
   return (
     <ul
       ref={setFilteredOptionsRef}
@@ -52,6 +55,7 @@ const FilteredOptions = () => {
           role="option"
           aria-selected={false}
           id={`${id}-max-selected`}
+          data-no-focus="true"
         >
           {`${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
         </li>
@@ -124,6 +128,7 @@ const FilteredOptions = () => {
             "navds-combobox__list-item--selected":
               selectedOptions.includes(option),
           })}
+          data-no-focus={isDisabled(option) || undefined}
           id={filteredOptionsUtil.getOptionId(id, option)}
           key={option}
           tabIndex={-1}
@@ -138,6 +143,9 @@ const FilteredOptions = () => {
             }
           }}
           onPointerUp={(event) => {
+            if (isDisabled(option)) {
+              return;
+            }
             toggleOption(option, event);
             if (!isMultiSelect && !selectedOptions.includes(option))
               toggleIsListOpen(false);

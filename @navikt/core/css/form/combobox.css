@@ -286,6 +286,15 @@
   padding-left: calc(var(--a-spacing-2) - 4px);
 }
 
+.navds-combobox__list-item:has(.navds-combobox__list-item__new-option)[data-no-focus="true"] {
+  background: var(--a-surface-neutral-subtle);
+}
+
+.navds-combobox__list-item:not(.navds-combobox__list-item__max-selected)[data-no-focus="true"] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
 .navds-combobox__list-item--selected {
   background-color: var(--ac-combobox-list-item-selected-bg, var(--a-surface-selected));
 }
