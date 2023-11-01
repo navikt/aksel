@@ -302,7 +302,10 @@ export const useMonthpicker = (
     toDate,
     open,
     onOpenToggle: () => handleOpen(!open),
-    onClose: () => handleOpen(!open),
+    onClose: () => {
+      handleOpen(false);
+      inputRef.current && inputRef.current.focus();
+    },
     disabled,
   };
 

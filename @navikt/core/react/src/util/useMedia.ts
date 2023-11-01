@@ -31,9 +31,6 @@ export const useMedia = (
     mediaQueryList.addEventListener("change", listener);
 
     return () => {
-      if (noMatchMedia) {
-        return;
-      }
       mediaQueryList.removeEventListener("change", listener);
     };
   }, [media]);
