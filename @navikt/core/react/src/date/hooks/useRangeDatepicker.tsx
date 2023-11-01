@@ -1,7 +1,7 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import checkIsBefore from "date-fns/isBefore";
 import isWeekend from "date-fns/isWeekend";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { DateRange, isMatch } from "react-day-picker";
 import { DatePickerProps } from "../datepicker/DatePicker";
 import { DateInputProps } from "../parts/DateInput";
@@ -72,14 +72,14 @@ interface UseRangeDatepickerValue {
   fromInputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
-  > & { ref: React.RefObject<HTMLInputElement> };
+  >;
   /**
    * Use: <DatePicker.Input label="to" {...toInputProps}/>
    */
   toInputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
-  > & { ref: React.RefObject<HTMLInputElement> };
+  >;
   /**
    * Resets all states (callback)
    */
@@ -93,6 +93,10 @@ interface UseRangeDatepickerValue {
    * Manually override currently selected day
    */
   setSelected: (date?: DateRange) => void;
+  /**
+   * @private
+   */
+  setAnchorRef?: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
 }
 
 const RANGE = {
@@ -218,10 +222,9 @@ export const useRangeDatepicker = (
     allowTwoDigitYear = true,
   } = opt;
 
-  const locale = getLocaleFromString(_locale);
+  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement | null>(null);
 
-  const inputRefTo = useRef<HTMLInputElement>(null);
-  const inputRefFrom = useRef<HTMLInputElement>(null);
+  const locale = getLocaleFromString(_locale);
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
@@ -359,6 +362,7 @@ export const useRangeDatepicker = (
   const handleSelect = (range) => {
     if (range?.from && range?.to) {
       setOpen(false);
+      anchorRef?.focus();
     }
     const prevToRange =
       !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;
@@ -526,7 +530,10 @@ export const useRangeDatepicker = (
     mode: "range" as const,
     open,
     onOpenToggle: () => setOpen((x) => !x),
-    onClose: () => setOpen((x) => !x),
+    onClose: () => {
+      setOpen(false);
+      anchorRef?.focus();
+    },
     disabled,
     disableWeekends,
   };
@@ -536,7 +543,7 @@ export const useRangeDatepicker = (
     onFocus: (e) => handleFocus(e, RANGE.FROM),
     onBlur: (e) => handleBlur(e, RANGE.FROM),
     value: fromInputValue,
-    ref: inputRefFrom,
+    setAnchorRef,
   };
 
   const toInputProps = {
@@ -544,7 +551,7 @@ export const useRangeDatepicker = (
     onFocus: (e) => handleFocus(e, RANGE.TO),
     onBlur: (e) => handleBlur(e, RANGE.TO),
     value: toInputValue,
-    ref: inputRefTo,
+    setAnchorRef,
   };
 
   return {

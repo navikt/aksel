@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { Button } from "../../button";
 import { Modal } from "../../modal";
 import { ModalContext } from "../../modal/ModalContext";
@@ -29,6 +29,7 @@ export const DateWrapper = ({
   variant,
   popoverProps,
 }: DateWrapperProps) => {
+  const modalRef = useRef<HTMLDialogElement>(null);
   const isInModal = useContext(ModalContext) !== null;
   const hideModal =
     useMedia("screen and (min-width: 768px)", true) && !isInModal;
@@ -54,15 +55,23 @@ export const DateWrapper = ({
   }
   return (
     <Modal
+      ref={modalRef}
       open={open}
       onClose={onClose}
       aria-label={modalLabel(locale, variant)}
-      className={cl({ "navds-date__nested-modal": isInModal })}
+      className={cl("navds-date__modal", {
+        "navds-date__nested-modal": isInModal,
+        "navds-date": variant === "month",
+      })}
       closeOnBackdropClick
     >
-      <div className="navds-date__modal">
+      <div className="navds-date__modal-body">
         {children}
-        <Button variant="tertiary" onClick={onClose} size="small">
+        <Button
+          variant="tertiary"
+          onClick={() => modalRef?.current?.close()}
+          size="small"
+        >
           {modalCloseButtonLabel(locale)}
         </Button>
       </div>

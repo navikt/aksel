@@ -1,6 +1,6 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import isWeekend from "date-fns/isWeekend";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { DayClickEventHandler, isMatch } from "react-day-picker";
 import { DatePickerProps } from "../datepicker/DatePicker";
 import { DateInputProps } from "../parts/DateInput";
@@ -71,10 +71,7 @@ interface UseDatepickerValue {
   /**
    * Use: <DatePicker.Input {...inputProps}/>
    */
-  inputProps: Pick<
-    DateInputProps,
-    "onChange" | "onFocus" | "onBlur" | "value"
-  > & { ref: React.RefObject<HTMLInputElement> };
+  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "onBlur" | "value">;
   /**
    * Resets all states (callback)
    */
@@ -88,6 +85,10 @@ interface UseDatepickerValue {
    * Manually override currently selected day
    */
   setSelected: (date?: Date) => void;
+  /**
+   * @private
+   */
+  setAnchorRef?: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
 }
 
 export type DateValidationT = {
@@ -143,9 +144,8 @@ export const useDatepicker = (
     allowTwoDigitYear = true,
   } = opt;
 
+  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement | null>(null);
   const locale = getLocaleFromString(_locale);
-
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
@@ -230,7 +230,7 @@ export const useDatepicker = (
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
     if (day && !selected) {
       handleOpen(false);
-      inputRef.current && inputRef.current.focus();
+      anchorRef?.focus();
     }
 
     if (!required && selected) {
@@ -308,7 +308,7 @@ export const useDatepicker = (
     open,
     onClose: () => {
       handleOpen(false);
-      inputRef.current && inputRef.current.focus();
+      anchorRef?.focus();
     },
     onOpenToggle: () => handleOpen(!open),
     disabled,
@@ -320,7 +320,7 @@ export const useDatepicker = (
     onFocus: handleFocus,
     onBlur: handleBlur,
     value: inputValue,
-    ref: inputRef,
+    setAnchorRef,
   };
 
   return { datepickerProps, inputProps, reset, selectedDay, setSelected };

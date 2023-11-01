@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { MonthPickerProps } from "../monthpicker/types";
 import { DateInputProps } from "../parts/DateInput";
 import {
@@ -57,9 +57,7 @@ interface UseMonthPickerValue {
   /**
    * Use: <MonthPicker.Input {...inputProps} />
    */
-  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value"> & {
-    ref: React.RefObject<HTMLInputElement>;
-  };
+  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value">;
   /**
    * Currently selected Date
    * Up to user to validate value and extract month
@@ -73,6 +71,10 @@ interface UseMonthPickerValue {
    * Resets all states
    */
   reset: () => void;
+  /**
+   * @private
+   */
+  setAnchorRef?: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
 }
 
 export type MonthValidationT = {
@@ -138,12 +140,11 @@ export const useMonthpicker = (
     allowTwoDigitYear = true,
   } = opt;
 
+  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement | null>(null);
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   const today = useMemo(() => new Date(), []);
   const locale = getLocaleFromString(_locale);
-
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // Initialize states
   const [year, setYear] = useState(defaultSelected ?? defaultYear ?? today);
@@ -227,8 +228,8 @@ export const useMonthpicker = (
   const handleMonthClick = (month?: Date) => {
     if (month) {
       handleOpen(false);
-      inputRef.current && inputRef.current.focus();
       setYear(month);
+      anchorRef?.focus();
     }
 
     if (!required && !month) {
@@ -304,7 +305,7 @@ export const useMonthpicker = (
     onOpenToggle: () => handleOpen(!open),
     onClose: () => {
       handleOpen(false);
-      inputRef.current && inputRef.current.focus();
+      anchorRef?.focus();
     },
     disabled,
   };
@@ -314,7 +315,7 @@ export const useMonthpicker = (
     onFocus: handleFocus,
     onBlur: handleBlur,
     value: inputValue,
-    ref: inputRef,
+    setAnchorRef,
   };
 
   return { monthpickerProps, inputProps, reset, selectedMonth, setSelected };

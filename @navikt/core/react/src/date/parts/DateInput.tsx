@@ -1,6 +1,6 @@
 import { CalendarIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes, useRef } from "react";
 import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
@@ -28,6 +28,10 @@ export interface DateInputProps
    * @private
    */
   variant?: "datepicker" | "monthpicker";
+  /**
+   * @private
+   */
+  setAnchorRef: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
 }
 
 const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
@@ -37,8 +41,11 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     label,
     description,
     variant = "datepicker",
+    setAnchorRef,
     ...rest
   } = props;
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const isDatepickerVariant = variant === "datepicker";
 
@@ -121,9 +128,13 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         <button
           disabled={inputProps.disabled || readOnly}
           tabIndex={readOnly ? -1 : context?.open ? -1 : 0}
-          onClick={() => context?.onOpen()}
+          onClick={() => {
+            context?.onOpen();
+            setAnchorRef(buttonRef.current);
+          }}
           type="button"
           className="navds-date__field-button"
+          ref={buttonRef}
         >
           <CalendarIcon
             pointerEvents="none"
