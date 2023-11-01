@@ -130,7 +130,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           tabIndex={readOnly ? -1 : context?.open ? -1 : 0}
           onClick={() => {
             context?.onOpen();
-            setAnchorRef(buttonRef.current);
+            setAnchorRef?.(buttonRef.current);
           }}
           type="button"
           className="navds-date__field-button"
