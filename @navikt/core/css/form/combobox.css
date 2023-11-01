@@ -217,7 +217,6 @@
   border-radius: var(--a-border-radius-medium);
   background-color: var(--ac-combobox-list-bg, var(--a-surface-default));
   color: var(--ac-combobox-list-text, var(--a-text-default));
-  overflow: visible;
 }
 
 .navds-combobox__list :where(li) {
@@ -265,7 +264,7 @@
 .navds-combobox__list-item__max-selected {
   background: var(--ac-combobox-list-item-max-selected-bg, var(--a-surface-info-subtle));
   border-radius: 3px 3px 0 0;
-  box-shadow: 0 0 0 1px var(--ac-combobox-list-item-max-selected-border, var(--a-border-info));
+  border: 1px solid var(--ac-combobox-list-item-max-selected-border, var(--a-border-info));
   margin-bottom: 0;
 }
 
