@@ -139,7 +139,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
               size="large"
               className="max-w-text text-deepblue-800 mb-4 mt-12 scroll-mt-20 focus:outline-none"
             >
-              Changelog
+              Endringer
             </Heading>
             <AkselTable
               th={[
