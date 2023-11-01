@@ -1,17 +1,15 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import isWeekend from "date-fns/isWeekend";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { DayClickEventHandler, isMatch } from "react-day-picker";
-import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
+import { DateInputProps } from "../parts/DateInput";
 import {
   formatDateForInput,
   getLocaleFromString,
   isValidDate,
   parseDate,
 } from "../utils";
-import { useEscape } from "./useEscape";
-import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export interface UseDatepickerOptions
   extends Pick<
@@ -59,10 +57,10 @@ export interface UseDatepickerOptions
    */
   allowTwoDigitYear?: boolean;
   /**
-   * Opens datepicker on input-focus
-   * @default true
+   * Will be removed in a future major-version
+   * @deprecated
    */
-  openOnFocus?: boolean;
+  openOnFocus?: false;
 }
 
 interface UseDatepickerValue {
@@ -76,7 +74,14 @@ interface UseDatepickerValue {
   inputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
-  > & { ref: React.RefObject<HTMLInputElement> };
+  > & {
+    /**
+     * @private
+     */
+    setAnchorRef: React.Dispatch<
+      React.SetStateAction<HTMLButtonElement | null>
+    >;
+  };
   /**
    * Resets all states (callback)
    */
@@ -143,13 +148,10 @@ export const useDatepicker = (
     onValidate,
     defaultMonth,
     allowTwoDigitYear = true,
-    openOnFocus = true,
   } = opt;
 
+  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement | null>(null);
   const locale = getLocaleFromString(_locale);
-
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [daypickerRef, setDaypickerRef] = useState<HTMLDivElement>();
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
@@ -171,14 +173,6 @@ export const useDatepicker = (
     },
     [defaultMonth, defaultSelected, selectedDay, today]
   );
-
-  useOutsideClickHandler(open, handleOpen, [
-    daypickerRef,
-    inputRef.current,
-    inputRef.current?.nextSibling,
-  ]);
-
-  useEscape(open, handleOpen, inputRef);
 
   const updateDate = (date?: Date) => {
     onDateChange?.(date);
@@ -207,7 +201,6 @@ export const useDatepicker = (
     if (e.target.readOnly) {
       return;
     }
-    !open && openOnFocus && handleOpen(true);
     const day = parseDate(
       e.target.value,
       today,
@@ -243,7 +236,7 @@ export const useDatepicker = (
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
     if (day && !selected) {
       handleOpen(false);
-      inputRef.current && inputRef.current.focus();
+      anchorRef?.focus();
     }
 
     if (!required && selected) {
@@ -319,11 +312,13 @@ export const useDatepicker = (
     toDate,
     today,
     open,
+    onClose: () => {
+      handleOpen(false);
+      anchorRef?.focus();
+    },
     onOpenToggle: () => handleOpen(!open),
     disabled,
     disableWeekends,
-    bubbleEscape: true,
-    ref: setDaypickerRef,
   };
 
   const inputProps = {
@@ -331,7 +326,7 @@ export const useDatepicker = (
     onFocus: handleFocus,
     onBlur: handleBlur,
     value: inputValue,
-    ref: inputRef,
+    setAnchorRef,
   };
 
   return { datepickerProps, inputProps, reset, selectedDay, setSelected };

@@ -1,11 +1,11 @@
 import { CalendarIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
-import React, { forwardRef, InputHTMLAttributes } from "react";
-import { FormFieldProps, useFormField } from "../form/useFormField";
-import { useDateInputContext } from "./context";
-import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
-import { BodyShort, ErrorMessage, Label } from "../typography";
-import { omit } from "../util";
+import React, { forwardRef, InputHTMLAttributes, useRef } from "react";
+import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
+import { FormFieldProps, useFormField } from "../../form/useFormField";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
+import { omit } from "../../util";
+import { useDateInputContext } from "../context";
 
 export interface DateInputProps
   extends FormFieldProps,
@@ -28,6 +28,10 @@ export interface DateInputProps
    * @private
    */
   variant?: "datepicker" | "monthpicker";
+  /**
+   * @private
+   */
+  setAnchorRef?: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
 }
 
 const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
@@ -37,8 +41,11 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     label,
     description,
     variant = "datepicker",
+    setAnchorRef,
     ...rest
   } = props;
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const isDatepickerVariant = variant === "datepicker";
 
@@ -50,7 +57,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     },
   };
 
-  const { onOpen, ariaId, open } = useDateInputContext();
+  const context = useDateInputContext();
 
   const {
     inputProps,
@@ -108,7 +115,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
           autoComplete="off"
-          aria-controls={open ? ariaId : undefined}
+          aria-controls={context?.open ? context.ariaId : undefined}
           readOnly={readOnly}
           className={cl(
             "navds-date__field-input",
@@ -116,19 +123,23 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
             "navds-body-short",
             `navds-body-short--${size}`
           )}
-          size={isDatepickerVariant ? 10 : 14}
+          size={isDatepickerVariant ? 11 : 14}
         />
         <button
           disabled={inputProps.disabled || readOnly}
-          tabIndex={readOnly ? -1 : open ? -1 : 0}
-          onClick={() => onOpen()}
+          tabIndex={readOnly ? -1 : context?.open ? -1 : 0}
+          onClick={() => {
+            context?.onOpen();
+            setAnchorRef?.(buttonRef.current);
+          }}
           type="button"
           className="navds-date__field-button"
+          ref={buttonRef}
         >
           <CalendarIcon
             pointerEvents="none"
             title={
-              open
+              context?.open
                 ? conditionalVariables.iconTitle.close
                 : conditionalVariables.iconTitle.open
             }
