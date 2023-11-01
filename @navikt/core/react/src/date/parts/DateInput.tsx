@@ -31,7 +31,7 @@ export interface DateInputProps
   /**
    * @private
    */
-  setAnchorRef: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
+  setAnchorRef?: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
 }
 
 const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {

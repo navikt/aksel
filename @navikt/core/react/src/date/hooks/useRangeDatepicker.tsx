@@ -76,7 +76,7 @@ interface UseRangeDatepickerValue {
     /**
      * @private
      */
-    setAnchorRef?: React.Dispatch<
+    setAnchorRef: React.Dispatch<
       React.SetStateAction<HTMLButtonElement | null>
     >;
   };
