@@ -1,4 +1,3 @@
-export { type DateInputProps } from "./DateInput";
 export {
   default as DatePicker,
   type DatePickerProps,
@@ -15,3 +14,4 @@ export {
 export { default as MonthPicker } from "./monthpicker/MonthPicker";
 export { type MonthPickerStandaloneProps } from "./monthpicker/MonthPickerStandalone";
 export { type MonthPickerProps } from "./monthpicker/types";
+export { type DateInputProps } from "./parts/DateInput";
