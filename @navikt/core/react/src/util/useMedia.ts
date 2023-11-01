@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const noMatchMedia =
-  typeof window !== "undefined" &&
-  (window.matchMedia === undefined || navigator.userAgent.includes("jsdom"));
+  typeof window !== "undefined" && window.matchMedia === undefined;
 
 /**
  * @example useMedia("screen and (min-width: 1024px)")
