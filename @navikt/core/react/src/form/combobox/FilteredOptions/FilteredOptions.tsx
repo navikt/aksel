@@ -19,7 +19,7 @@ const FilteredOptions = () => {
     isLoading,
     isListOpen,
     filteredOptions,
-    filteredOptionsRef,
+    setFilteredOptionsRef,
     isMouseLastUsedInputDevice,
     setIsMouseLastUsedInputDevice,
     isValueNew,
@@ -32,7 +32,7 @@ const FilteredOptions = () => {
 
   return (
     <ul
-      ref={filteredOptionsRef}
+      ref={setFilteredOptionsRef}
       className={cl("navds-combobox__list", {
         "navds-combobox__list--closed": !isListOpen,
         "navds-combobox__list--with-hover": isMouseLastUsedInputDevice,

@@ -31,7 +31,7 @@ type FilteredOptionsContextType = {
   activeDecendantId?: string;
   allowNewValues?: boolean;
   ariaDescribedBy?: string;
-  filteredOptionsRef: React.Dispatch<
+  setFilteredOptionsRef: React.Dispatch<
     React.SetStateAction<HTMLUListElement | null>
   >;
   isListOpen: boolean;
@@ -201,7 +201,7 @@ export const FilteredOptionsProvider = ({
   const filteredOptionsState = {
     activeDecendantId,
     allowNewValues,
-    filteredOptionsRef: setFilteredOptionsRef,
+    setFilteredOptionsRef,
     shouldAutocomplete,
     isListOpen,
     isLoading,
