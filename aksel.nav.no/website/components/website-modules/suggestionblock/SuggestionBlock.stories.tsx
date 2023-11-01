@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SuggestionBlock } from "./index";
+import { SuggestionBlock } from "components/website-modules/suggestionblock/SuggestionBlock";
 
 const meta = {
   title: "Website-modules/SuggestionBlock",

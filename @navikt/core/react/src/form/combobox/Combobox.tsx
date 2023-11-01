@@ -1,6 +1,5 @@
 import cl from "clsx";
 import React, { forwardRef, useMemo, useRef } from "react";
-import { BodyShort, ErrorMessage, Label, mergeRefs } from "../..";
 import ClearButton from "./ClearButton";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
@@ -11,6 +10,8 @@ import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsCont
 import ComboboxWrapper from "./ComboboxWrapper";
 import { useInputContext } from "./Input/inputContext";
 import Input from "./Input/Input";
+import { mergeRefs } from "../../util";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
 
 export const Combobox = forwardRef<
   HTMLInputElement,
@@ -32,7 +33,7 @@ export const Combobox = forwardRef<
 
   const toggleListButtonRef = useRef<HTMLButtonElement>(null);
 
-  const { currentOption, toggleIsListOpen } = useFilteredOptionsContext();
+  const { activeDecendantId, toggleIsListOpen } = useFilteredOptionsContext();
   const { selectedOptions } = useSelectedOptionsContext();
 
   const {
@@ -91,7 +92,7 @@ export const Combobox = forwardRef<
             "navds-combobox__wrapper-inner navds-text-field__input",
             {
               "navds-combobox__wrapper-inner--virtually-unfocused":
-                currentOption !== null,
+                activeDecendantId !== null,
             }
           )}
           onClick={focusInput}

@@ -1,7 +1,7 @@
-import stylelint from "stylelint";
-import valueParser from "postcss-value-parser";
 import { readFileSync } from "node:fs";
 import { Node as PostCSSNode } from "postcss";
+import valueParser from "postcss-value-parser";
+import stylelint from "stylelint";
 
 import { isCustomProperty, tokenExists } from "../../utils";
 
@@ -34,7 +34,6 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
 });
 
 const checkDeclValue = (
-  controlledPrefixes: string[],
   value: string,
   postcssResult: stylelint.PostcssResult,
   rootNode: PostCSSNode
@@ -58,7 +57,6 @@ const checkDeclValue = (
 };
 
 const checkDeclProp = (
-  controlledPrefixes: string[],
   prop: string,
   postcssResult: stylelint.PostcssResult,
   rootNode: PostCSSNode
@@ -81,8 +79,8 @@ const checkDeclProp = (
 const ruleFunction: stylelint.Rule = () => {
   return (postcssRoot, postcssResult) => {
     postcssRoot.walkDecls((node) => {
-      checkDeclValue(controlledPrefixes, node.value, postcssResult, node);
-      checkDeclProp(controlledPrefixes, node.prop, postcssResult, node);
+      checkDeclValue(node.value, postcssResult, node);
+      checkDeclProp(node.prop, postcssResult, node);
     });
   };
 };

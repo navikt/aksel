@@ -2,21 +2,21 @@ import cl from "clsx";
 import isWeekend from "date-fns/isWeekend";
 import React, { forwardRef } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
-import { omit } from "../..";
+import { omit } from "../../util";
 import { getLocaleFromString, labels } from "../utils";
+import Caption from "./parts/Caption";
+import DayButton from "./parts/DayButton";
+import DropdownCaption from "./parts/DropdownCaption";
+import { HeadRow } from "./parts/HeadRow";
+import Row from "./parts/Row";
+import TableHead from "./parts/TableHead";
+import WeekNumber from "./parts/WeekNumber";
 import {
   DatePickerDefaultProps,
   MultipleMode,
   RangeMode,
   SingleMode,
-} from "./DatePicker";
-import TableHead from "./parts/TableHead";
-import WeekNumber from "./parts/WeekNumber";
-import Caption from "./parts/Caption";
-import DropdownCaption from "./parts/DropdownCaption";
-import Row from "./parts/Row";
-import { HeadRow } from "./parts/HeadRow";
-import DayButton from "./parts/DayButton";
+} from "./types";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<
@@ -71,11 +71,11 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     const mode = rest.mode ?? ("single" as any);
 
     /**
-     * @param selected Date | Date[] | DateRange | undefined
+     * @param newSelected Date | Date[] | DateRange | undefined
      */
-    const handleSelect = (selected) => {
-      setSelectedDates(selected);
-      onSelect?.(selected);
+    const handleSelect = (newSelected) => {
+      setSelectedDates(newSelected);
+      onSelect?.(newSelected);
     };
 
     return (

@@ -1,3 +1,5 @@
+import { useFloatingPortalNode } from "@floating-ui/react";
+import cl from "clsx";
 import React, {
   forwardRef,
   useContext,
@@ -6,80 +8,16 @@ import React, {
   useRef,
 } from "react";
 import { createPortal } from "react-dom";
-import { useFloatingPortalNode } from "@floating-ui/react";
-import cl from "clsx";
-import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
-import { Detail, Heading, mergeRefs, useId, useProvider } from "..";
+import { useProvider } from "../provider";
+import { Detail, Heading } from "../typography";
+import { mergeRefs, useId } from "../util";
 import ModalBody from "./ModalBody";
-import ModalHeader from "./ModalHeader";
-import ModalFooter from "./ModalFooter";
-import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
 import { ModalContext } from "./ModalContext";
-
-export interface ModalProps
-  extends React.DialogHTMLAttributes<HTMLDialogElement> {
-  /**
-   * Content for the header. Alteratively you can use <Modal.Header> instead for more control,
-   * but then you have to set `aria-label` or `aria-labelledby` on the modal manually.
-   */
-  header?: {
-    label?: string;
-    icon?: React.ReactNode;
-    heading: string;
-    /**
-     * Heading size
-     * @default "medium"
-     * */
-    size?: "medium" | "small";
-    /**
-     * Removes close-button (X) when false
-     * @default true
-     */
-    closeButton?: boolean;
-  };
-  /**
-   * Modal content
-   */
-  children: React.ReactNode;
-  /**
-   * Whether the modal should be visible or not.
-   * Remember to use the `onClose` callback to keep your local state in sync.
-   * You can also use `ref.current.openModal()` and `ref.current.close()`.
-   */
-  open?: boolean;
-  /**
-   * Called when the modal has been closed
-   */
-  onClose?: React.ReactEventHandler<HTMLDialogElement>;
-  /**
-   * Called when the user wants to close the modal (clicked the close button or pressed Esc).
-   * @returns Whether to close the modal
-   */
-  onBeforeClose?: () => boolean | void;
-  /**
-   * Called when the user presses the Esc key, unless `onBeforeClose()` returns `false`.
-   */
-  onCancel?: React.ReactEventHandler<HTMLDialogElement>;
-  /**
-   * @default fit-content (up to 700px)
-   * */
-  width?: "medium" | "small" | number | `${number}${string}`;
-  /**
-   * Lets you render the modal into a different part of the DOM.
-   * Will use `rootElement` from `Provider` if defined, otherwise `document.body`.
-   */
-  portal?: boolean;
-  /**
-   * User defined classname for modal
-   */
-  className?: string;
-  /**
-   * Sets aria-labelledby on modal.
-   * No need to set this manually if the `header` prop is used. A reference to `header.heading` will be created automatically.
-   * @warning If not using `header`, you should set either `aria-labelledby` or `aria-label`.
-   */
-  "aria-labelledby"?: string;
-}
+import ModalFooter from "./ModalFooter";
+import ModalHeader from "./ModalHeader";
+import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
+import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
+import { ModalProps } from "./types";
 
 interface ModalComponent
   extends React.ForwardRefExoticComponent<
@@ -144,11 +82,13 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       open,
       onBeforeClose,
       onCancel,
+      closeOnBackdropClick,
       width,
       portal,
       className,
       "aria-labelledby": ariaLabelledby,
       style,
+      onClick,
       ...rest
     }: ModalProps,
     ref
@@ -170,6 +110,11 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       if (needPolyfill && modalRef.current && portalNode) {
         dialogPolyfill.registerDialog(modalRef.current);
       }
+      // We set autofocus on the dialog element to prevent the default behavior where first focusable element gets focus when modal is opened.
+      // This is mainly to fix an edge case where having a Tooltip as the first focusable element would make it activate when you open the modal.
+      // We have to use JS because it doesn't work to set it with a prop (React bug?)
+      // Currently doesn't seem to work in Chrome. See also Tooltip.tsx
+      if (modalRef.current && portalNode) modalRef.current.autofocus = true;
     }, [modalRef, portalNode]);
 
     useEffect(() => {
@@ -190,34 +135,57 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
 
+    const mergedClassName = cl("navds-modal", className, {
+      "navds-modal--polyfilled": needPolyfill,
+      "navds-modal--autowidth": !width,
+      [`navds-modal--${width}`]: isWidthPreset,
+    });
+
+    const mergedStyle = {
+      ...style,
+      ...(!isWidthPreset ? { width } : {}),
+    };
+
+    const mergedOnCancel: React.DialogHTMLAttributes<HTMLDialogElement>["onCancel"] =
+      (event) => {
+        if (onBeforeClose && onBeforeClose() === false) {
+          event.preventDefault();
+        } else if (onCancel) onCancel(event);
+      };
+
+    const mergedOnClick =
+      closeOnBackdropClick && !needPolyfill // closeOnBackdropClick has issues on polyfill when nesting modals (DatePicker)
+        ? (event: React.MouseEvent<HTMLDialogElement>) => {
+            onClick && onClick(event);
+            if (
+              event.target === modalRef.current &&
+              (!onBeforeClose || onBeforeClose() !== false)
+            ) {
+              modalRef.current.close();
+            }
+          }
+        : onClick;
+
+    const mergedAriaLabelledBy =
+      !ariaLabelledby && !rest["aria-label"] && header
+        ? ariaLabelId
+        : ariaLabelledby;
+
     const component = (
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
       <dialog
         {...rest}
         ref={mergedRef}
-        className={cl("navds-modal", className, {
-          "navds-modal--polyfilled": needPolyfill,
-          "navds-modal--autowidth": !width,
-          [`navds-modal--${width}`]: isWidthPreset,
-        })}
-        style={{
-          ...style,
-          ...(!isWidthPreset ? { width } : {}),
-        }}
-        onCancel={(event) => {
-          // FYI: onCancel fires when you press Esc
-          if (onBeforeClose && onBeforeClose() === false) {
-            event.preventDefault();
-          } else if (onCancel) onCancel(event);
-        }}
-        aria-labelledby={
-          !ariaLabelledby && !rest["aria-label"] && header
-            ? ariaLabelId
-            : ariaLabelledby
-        }
+        className={mergedClassName}
+        style={mergedStyle}
+        onCancel={mergedOnCancel} // FYI: onCancel fires when you press Esc
+        onClick={mergedOnClick}
+        aria-labelledby={mergedAriaLabelledBy}
       >
         <ModalContext.Provider
           value={{
             closeHandler: getCloseHandler(modalRef, header, onBeforeClose),
+            ref: modalRef,
           }}
         >
           {header && (

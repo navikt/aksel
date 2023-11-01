@@ -1,6 +1,6 @@
 import { getKey } from "@/sb-util";
 import type { Meta, StoryObj } from "@storybook/react";
-import CodeExample from "./Examples";
+import CodeExample from "./CodeExamples";
 
 const meta = {
   title: "Sanity-modules/CodeExample",

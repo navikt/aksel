@@ -1,11 +1,13 @@
 import { useClientLayoutEffect } from "@navikt/ds-react";
 import throttle from "lodash/throttle";
-import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-export const useToc = ({ changedState }: { changedState: any }) => {
+export const useToc = () => {
   const [toc, setToc] = useState<
     { heading: string; id: string; lvl3: { heading: string; id: string }[] }[]
   >([]);
+  const router = useRouter();
 
   const [activeId, setActiveId] = useState(null);
   const [activeSubId, setActiveSubId] = useState(null);
@@ -35,7 +37,7 @@ export const useToc = ({ changedState }: { changedState: any }) => {
             y.contains(x)
           )
       );
-      const toc: {
+      const newToc: {
         heading: string;
         id: string;
         lvl3: { heading: string; id: string }[];
@@ -43,21 +45,21 @@ export const useToc = ({ changedState }: { changedState: any }) => {
       for (const x in filtered) {
         if (!filtered[x]?.id) continue;
         filtered[x].tagName === "H2"
-          ? toc.push({
+          ? newToc.push({
               heading: filtered[x].textContent,
               id: decodeURI(filtered[x].id),
               lvl3: [],
             })
-          : toc[toc.length - 1].lvl3.push({
+          : newToc[newToc.length - 1].lvl3.push({
               heading: filtered[x].textContent,
               id: decodeURI(filtered[x].id),
             });
       }
-      setToc([...toc]);
+      setToc([...newToc]);
     }, 150);
 
     return () => clearTimeout(time);
-  }, [changedState]);
+  }, [router.asPath]);
 
   useEffect(() => {
     const validPick = (el: HTMLElement) => {
@@ -77,8 +79,8 @@ export const useToc = ({ changedState }: { changedState: any }) => {
         }
         if (x?.lvl3) {
           for (const y of x.lvl3) {
-            const el = document.getElementById(y.id);
-            if (validPick(el)) {
+            const el2 = document.getElementById(y.id);
+            if (validPick(el2)) {
               activeSub = y.id;
             }
           }

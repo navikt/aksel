@@ -1,5 +1,6 @@
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
 
+import { amplitudeLogNavigation } from "@/logging";
 import {
   AkselGodPraksisDocT,
   ResolveContributorsSingleT,
@@ -9,7 +10,15 @@ import {
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
-import { abbrName, logNav } from "../..";
+import { abbrName } from "../..";
+
+type ArtikkelCardProps = ResolveContributorsSingleT<
+  ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
+> & {
+  source?: string;
+  variant: string;
+  level?: "2" | "3";
+};
 
 const ArtikkelCard = ({
   slug,
@@ -23,9 +32,7 @@ const ArtikkelCard = ({
   tema,
   level = "2",
   ...rest
-}: ResolveContributorsSingleT<
-  ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
-> & { source?: string; variant: string; level?: "2" | "3" }) => {
+}: ArtikkelCardProps) => {
   const date = useFormatedDate(
     (rest as any)?.updateInfo?.lastVerified ?? publishedAt ?? _updatedAt
   );
@@ -42,9 +49,8 @@ const ArtikkelCard = ({
         passHref
         className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
         onClick={(e) =>
-          logNav(
+          amplitudeLogNavigation(
             "artikkel-kort",
-            window.location.pathname,
             e.currentTarget.getAttribute("href")
           )
         }
@@ -89,4 +95,10 @@ const ArtikkelCard = ({
   );
 };
 
-export default withErrorBoundary(ArtikkelCard, "ArtikkelCard");
+export default function Component(props: ArtikkelCardProps) {
+  return (
+    <ErrorBoundary boundaryName="ArtikkelCard">
+      <ArtikkelCard {...props} />
+    </ErrorBoundary>
+  );
+}

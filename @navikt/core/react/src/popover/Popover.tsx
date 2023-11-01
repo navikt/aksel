@@ -14,14 +14,13 @@ import React, {
   HTMLAttributes,
   forwardRef,
   useCallback,
+  useContext,
   useMemo,
   useRef,
-  useContext,
 } from "react";
-import { mergeRefs } from "..";
-import { useClientLayoutEffect, useEventListener } from "../util";
-import PopoverContent, { PopoverContentType } from "./PopoverContent";
 import { ModalContext } from "../modal/ModalContext";
+import { mergeRefs, useClientLayoutEffect, useEventListener } from "../util";
+import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -134,6 +133,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useContext(ModalContext) !== null;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
+    const chosenFlip = isInModal ? true : _flip;
 
     const {
       x,
@@ -151,7 +151,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       onOpenChange: () => onClose(),
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
-        _flip && flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        chosenFlip &&
+          flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         shift({ padding: 12 }),
         flArrow({ element: arrowRef, padding: 8 }),
       ],

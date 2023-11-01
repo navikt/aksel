@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
-import { BodyShort } from "..";
+import { BodyShort } from "../typography";
 
 export interface DataCellProps
   extends React.TdHTMLAttributes<HTMLTableCellElement> {

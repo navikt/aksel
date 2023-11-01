@@ -1,15 +1,16 @@
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
+import { getAuthors } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
-import { getAuthors, logNav } from "@/utils";
 
-const BloggCard = ({
-  blog,
-}: {
+type BloggCardProps = {
   blog: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
-}) => {
+};
+
+const BloggCard = ({ blog }: BloggCardProps) => {
   const date = useFormatedDate(blog?.publishedAt ?? blog._createdAt);
   return (
     <li
@@ -21,9 +22,8 @@ const BloggCard = ({
           <Link
             className="text-deepblue-500 underline hover:no-underline"
             onClick={(e) =>
-              logNav(
+              amplitudeLogNavigation(
                 "blogg-card",
-                window.location.pathname,
                 e.currentTarget.getAttribute("href")
               )
             }
@@ -46,4 +46,10 @@ const BloggCard = ({
   );
 };
 
-export default withErrorBoundary(BloggCard, "BloggCard");
+export default function Component(props: BloggCardProps) {
+  return (
+    <ErrorBoundary boundaryName="ArtikkelCard">
+      <BloggCard {...props} />
+    </ErrorBoundary>
+  );
+}

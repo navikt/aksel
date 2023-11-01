@@ -44,7 +44,7 @@ Promise.all([
     ...esmvnext,
     ...cjsvnext,
     ...akselIconsSrc,
-  ].filter((path) => !path.includes("node_modules"));
+  ].filter((folder) => !folder.includes("node_modules"));
 
   folders.forEach((folder) => {
     console.log(`Deleting folder ${folder}`);

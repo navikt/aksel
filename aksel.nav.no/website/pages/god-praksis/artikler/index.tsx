@@ -11,7 +11,7 @@ import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { AkselCubeStatic } from "components/website-modules/cube";
+import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
 import { SEO } from "components/website-modules/seo/SEO";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next/types";
@@ -26,7 +26,7 @@ type PageProps = NextPageT<{
   articles: Array<ArticleT>;
 }>;
 
-export const query = (boundry = "") => {
+const getQuery = (boundry = "") => {
   return `{
     "articles": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)${boundry} {
       _id,
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({
 }: {
   preview?: boolean;
 }): Promise<PageProps> => {
-  const { articles } = await getClient().fetch(query("[0..21]"));
+  const { articles } = await getClient().fetch(getQuery("[0..21]"));
 
   return {
     props: {

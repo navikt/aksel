@@ -1,7 +1,7 @@
 /* https://github.com/mui/material-ui/blob/master/packages/mui-base/src/TextareaAutosize/TextareaAutosize.js */
 import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { debounce, mergeRefs, useClientLayoutEffect } from "..";
+import { debounce, mergeRefs, useClientLayoutEffect } from "../util";
 
 /**
  * https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/ownerDocument.ts

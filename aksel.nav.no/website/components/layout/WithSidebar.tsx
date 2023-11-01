@@ -4,7 +4,6 @@ import { capitalize } from "@/utils";
 import { Box, Detail, Heading, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import { Sidebar } from "components/layout/sidebar/Sidebar";
-import Feedback from "components/website-modules/feedback";
 import { TableOfContentsv2 } from "components/website-modules/toc/TOCv2";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
@@ -111,12 +110,9 @@ export const WithSidebar = ({
           </div>
 
           <div className={cl("sm:px-6 md:px-10", { flex: variant === "page" })}>
-            {variant === "page" && (
-              <TableOfContentsv2 changedState={pageProps["content"]} />
-            )}
+            {variant === "page" && <TableOfContentsv2 />}
             <div className="w-full">
               {children}
-              <Feedback docId={pageProps?._id} docType={pageProps?._type} />
               {footer && <div className="w-full">{footer}</div>}
             </div>
           </div>

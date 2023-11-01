@@ -1,11 +1,15 @@
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { InnholdsKortPrinsipperT } from "@/types";
-import { logNav } from "@/utils";
 import { Heading } from "@navikt/ds-react";
 import NextLink from "next/link";
 
-const InnholdsKort = ({ node }: { node: InnholdsKortPrinsipperT }) => {
+type InnholdsKortProps = {
+  node: InnholdsKortPrinsipperT;
+};
+
+const InnholdsKort = ({ node }: InnholdsKortProps) => {
   if (!node.title || !node.body || !node.lenke) {
     return null;
   }
@@ -23,9 +27,9 @@ const InnholdsKort = ({ node }: { node: InnholdsKortPrinsipperT }) => {
           href={`/${node?.lenke}`}
           passHref
           onClick={(e) =>
-            logNav(
+            amplitudeLogNavigation(
               "prinsipp-kort",
-              window.location.pathname,
+
               e.currentTarget.getAttribute("href")
             )
           }
@@ -39,4 +43,10 @@ const InnholdsKort = ({ node }: { node: InnholdsKortPrinsipperT }) => {
   );
 };
 
-export default withErrorBoundary(InnholdsKort, "InnholdsKort");
+export default function Component(props: InnholdsKortProps) {
+  return (
+    <ErrorBoundary boundaryName="InnholdsKort">
+      <InnholdsKort {...props} />
+    </ErrorBoundary>
+  );
+}

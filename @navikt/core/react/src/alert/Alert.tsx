@@ -7,7 +7,7 @@ import {
 } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BodyLong } from "../typography/BodyLong";
+import { BodyLong } from "../typography";
 import { Button } from "../button";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {

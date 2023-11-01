@@ -3,9 +3,9 @@ import {
   dateStr,
   FigmaIcon,
   GithubIcon,
-  logAmplitudeEvent,
   YarnIcon,
 } from "@/components";
+import { amplitude, AmplitudeEvents } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocumentsTmp } from "@/sanity/interface";
@@ -22,14 +22,14 @@ import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import { WithSidebar } from "components/layout/WithSidebar";
-import ComponentOverview from "components/sanity-modules/ComponentOverview";
-import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
+import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
+import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { SEO } from "components/website-modules/seo/SEO";
 import { StatusTag } from "components/website-modules/StatusTag";
-import { SuggestionBlock } from "components/website-modules/suggestionblock";
+import { SuggestionBlock } from "components/website-modules/suggestionblock/SuggestionBlock";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
-import { GetStaticPaths, GetStaticProps } from "next/types";
 
 const kodepakker = {
   "ds-react": {
@@ -186,7 +186,7 @@ const Page = ({
             href={pack.git}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              logAmplitudeEvent("link", {
+              amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
                 til: "github",
               })
@@ -200,7 +200,7 @@ const Page = ({
             href={`https://yarnpkg.com/package/${pack.title}`}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              logAmplitudeEvent("link", {
+              amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
                 til: "yarn",
               })
@@ -219,7 +219,7 @@ const Page = ({
           href={page.figma_link}
           className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
           onClick={() =>
-            logAmplitudeEvent("link", {
+            amplitude.track(AmplitudeEvents.link, {
               kilde: "intro-lenker komponenter",
               til: "figma",
             })
@@ -236,7 +236,7 @@ const Page = ({
             href={pack.changelog}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              logAmplitudeEvent("link", {
+              amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
                 til: "endringslogg",
               })
@@ -303,7 +303,7 @@ const Page = ({
           />
         )}
         <IntroSeksjon node={page?.intro} internal={internal} />
-        {page?.status?.tag === "ready" && (
+        {page?.status?.tag === "ready" && !page?.hide_feedback && (
           <SuggestionBlock
             variant="komponent"
             reference={`<${page?.heading} />`}

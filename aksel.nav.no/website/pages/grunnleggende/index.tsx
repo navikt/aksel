@@ -12,7 +12,7 @@ import cl from "clsx";
 import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import ComponentOverview from "components/sanity-modules/ComponentOverview";
+import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -26,7 +26,7 @@ type PageProps = NextPageT<{
 
 export const query = `{${sidebarQuery}, ${landingPageQuery(
   "grunnleggende"
-)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
+)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,

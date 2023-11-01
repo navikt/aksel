@@ -1,12 +1,12 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util/OverridableComponent";
+import { OverridableComponent } from "../util";
 
 export interface ToggleChipsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   /**
-   * Toggles aria-pressed and visual-changes
+   * Toggles aria-pressed and visual changes
    */
   selected?: boolean;
   /**
@@ -44,28 +44,38 @@ export const ToggleChips: OverridableComponent<
         className={cl(
           "navds-chips__chip navds-chips__toggle",
           className,
-          `navds-chips__toggle--${variant}`
+          `navds-chips__toggle--${variant}`,
+          { "navds-chips__toggle--with-checkmark": checkmark }
         )}
         aria-pressed={selected}
       >
-        {selected && checkmark && (
+        {checkmark && (
           <svg
             aria-hidden
             className="navds-chips__toggle-icon"
-            width="10"
-            height="8"
-            viewBox="0 0 10 8"
+            width="1.25em"
+            height="1.25em"
+            viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             focusable={false}
             role="img"
           >
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M9.51894 0.45851C9.81799 0.745107 9.8281 1.21987 9.5415 1.51893L3.7915 7.51893C3.51247 7.81009 3.05315 7.82848 2.75174 7.56056L0.501735 5.56056C0.192148 5.28537 0.164263 4.81132 0.439451 4.50173C0.71464 4.19214 1.18869 4.16426 1.49828 4.43944L3.20835 5.95951L8.45852 0.481072C8.74511 0.182015 9.21988 0.171913 9.51894 0.45851Z"
-              fill="currentColor"
-            />
+            {selected ? (
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M10 18.125C14.4873 18.125 18.125 14.4873 18.125 10C18.125 5.51269 14.4873 1.875 10 1.875C5.51269 1.875 1.875 5.51269 1.875 10C1.875 14.4873 5.51269 18.125 10 18.125ZM14.128 7.72904C14.3695 7.44357 14.3339 7.01635 14.0485 6.7748C13.763 6.53326 13.3358 6.56886 13.0942 6.85432L8.60428 12.1606L6.41627 9.97263C6.15185 9.70822 5.72315 9.70822 5.45873 9.97263C5.19431 10.2371 5.19431 10.6658 5.45873 10.9302L8.16706 13.6385C8.30095 13.7724 8.48479 13.8441 8.67397 13.8362C8.86316 13.8284 9.0404 13.7416 9.16271 13.5971L14.128 7.72904Z"
+                fill="currentColor"
+              />
+            ) : (
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M10 3.125C6.20304 3.125 3.125 6.20304 3.125 10C3.125 13.797 6.20304 16.875 10 16.875C13.797 16.875 16.875 13.797 16.875 10C16.875 6.20304 13.797 3.125 10 3.125ZM1.875 10C1.875 5.51269 5.51269 1.875 10 1.875C14.4873 1.875 18.125 5.51269 18.125 10C18.125 14.4873 14.4873 18.125 10 18.125C5.51269 18.125 1.875 14.4873 1.875 10Z"
+                fill="var(--a-border-default)"
+              />
+            )}
           </svg>
         )}
         <span className="navds-chips__chip-text">{children}</span>

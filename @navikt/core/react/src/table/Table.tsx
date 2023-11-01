@@ -1,17 +1,14 @@
-import React, { createContext, forwardRef } from "react";
 import cl from "clsx";
-import Header, { HeaderType } from "./Header";
-import Body, { BodyType } from "./Body";
-import Row, { RowType } from "./Row";
-import ColumnHeader, { ColumnHeaderType } from "./ColumnHeader";
-import HeaderCell, { HeaderCellType } from "./HeaderCell";
-import DataCell, { DataCellType } from "./DataCell";
-import ExpandableRow, { ExpandableRowType } from "./ExpandableRow";
-
-export interface SortState {
-  orderBy: string;
-  direction: "ascending" | "descending";
-}
+import React, { forwardRef } from "react";
+import Body from "./Body";
+import ColumnHeader from "./ColumnHeader";
+import DataCell from "./DataCell";
+import ExpandableRow from "./ExpandableRow";
+import Header from "./Header";
+import HeaderCell from "./HeaderCell";
+import Row from "./Row";
+import { TableContext } from "./context";
+import { SortState } from "./types";
 
 export interface TableProps
   extends React.TableHTMLAttributes<HTMLTableElement> {
@@ -39,21 +36,14 @@ export interface TableType
   extends React.ForwardRefExoticComponent<
     TableProps & React.RefAttributes<HTMLTableElement>
   > {
-  Header: HeaderType;
-  Body: BodyType;
-  Row: RowType;
-  DataCell: DataCellType;
-  HeaderCell: HeaderCellType;
-  ColumnHeader: ColumnHeaderType;
-  ExpandableRow: ExpandableRowType;
+  Header: typeof Header;
+  Body: typeof Body;
+  Row: typeof Row;
+  DataCell: typeof DataCell;
+  HeaderCell: typeof HeaderCell;
+  ColumnHeader: typeof ColumnHeader;
+  ExpandableRow: typeof ExpandableRow;
 }
-
-export interface TableContextProps {
-  onSortChange?: (sortKey: string) => void;
-  sort?: SortState;
-}
-
-export const TableContext = createContext<TableContextProps | null>(null);
 
 /**
  * A component that displays a table with headers and rows.

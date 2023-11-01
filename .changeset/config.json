@@ -20,7 +20,7 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["shadow-dom", "aksel.nav.no", "aksel-icons-figma-plugin"],
+  "ignore": ["aksel.nav.no", "aksel-icons-figma-plugin"],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"

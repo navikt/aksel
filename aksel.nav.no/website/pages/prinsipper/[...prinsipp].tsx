@@ -1,11 +1,4 @@
-import {
-  abbrName,
-  Bilde,
-  BreadCrumbs,
-  dateStr,
-  Feedback,
-  TableOfContents,
-} from "@/components";
+import { abbrName, BreadCrumbs, dateStr, TableOfContents } from "@/components";
 import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
@@ -19,6 +12,7 @@ import {
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Header } from "components/layout/header/Header";
+import Bilde from "components/sanity-modules/bilde/Bilde";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
 import { lazy, Suspense } from "react";
@@ -156,11 +150,7 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
             <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
               <div className="pb-16 md:pb-32">
                 <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
-                  <TableOfContents
-                    changedState={data?.content ?? []}
-                    hideToc={false}
-                    aksel
-                  />
+                  <TableOfContents hideToc={false} aksel />
                   <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                     {data?.hero_bilde && (
                       <Bilde
@@ -191,13 +181,6 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
                       <BodyShort as="span" className="text-text-subtle ">
                         Publisert: {publishDate}
                       </BodyShort>
-                    </div>
-                    <div className="mt-12 md:mt-16">
-                      <Feedback
-                        akselFeedback
-                        docId={data?._id}
-                        docType={data?._type}
-                      />
                     </div>
                   </div>
                 </div>

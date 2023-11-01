@@ -9,8 +9,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { debounce, mergeRefs } from "..";
-import { TabsContext } from "./Tabs";
+import { debounce, mergeRefs } from "../util";
+import { TabsContext } from "./context";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -39,10 +39,10 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
           const showStartScroll = scrollLeft > 1;
           const showEndScroll = scrollLeft < scrollWidth - clientWidth - 1;
 
-          setDisplayScroll((displayScroll) =>
-            showStartScroll === displayScroll.start &&
-            showEndScroll === displayScroll.end
-              ? displayScroll
+          setDisplayScroll((oldDisplayScroll) =>
+            showStartScroll === oldDisplayScroll.start &&
+            showEndScroll === oldDisplayScroll.end
+              ? oldDisplayScroll
               : { start: showStartScroll, end: showEndScroll }
           );
         }),

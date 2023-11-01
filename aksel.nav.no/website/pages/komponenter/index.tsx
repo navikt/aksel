@@ -1,3 +1,4 @@
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
@@ -7,7 +8,6 @@ import {
   ArticleListT,
   NextPageT,
 } from "@/types";
-import { logAmplitudeEvent } from "@/utils";
 import { CodeIcon } from "@navikt/aksel-icons";
 import { BodyShort, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
@@ -21,12 +21,13 @@ import {
 import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import ComponentOverview from "components/sanity-modules/ComponentOverview";
+
+import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { SEO } from "components/website-modules/seo/SEO";
+import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
-import { GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
@@ -36,7 +37,7 @@ type PageProps = NextPageT<{
 
 export const query = `{${sidebarQuery}, ${landingPageQuery(
   "komponenter"
-)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
+)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori, "sidebarindex": sidebarindex}}`;
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
@@ -158,7 +159,7 @@ function Links() {
         href="https://github.com/navikt/aksel/tree/main/%40navikt"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker ikonside",
             til: "github",
           })
@@ -172,7 +173,7 @@ function Links() {
         href="https://yarnpkg.com/package/@navikt/ds-react"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker ikonside",
             til: "yarn",
           })
@@ -187,7 +188,7 @@ function Links() {
         href="/grunnleggende/kode/endringslogg"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker komponenter",
             til: "endringslogg",
           })
@@ -203,7 +204,7 @@ function Links() {
         href="https://www.figma.com/@nav_aksel"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker ikonside",
             til: "figma",
           })
@@ -217,7 +218,7 @@ function Links() {
         href="/storybook"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted group flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker ikonside",
             til: "storybook",
           })

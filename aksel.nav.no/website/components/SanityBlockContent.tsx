@@ -1,3 +1,4 @@
+import { amplitudeLogNavigation } from "@/logging";
 import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
 import {
   PortableText,
@@ -5,30 +6,26 @@ import {
   PortableTextReactComponents,
 } from "@portabletext/react";
 import cl from "clsx";
-import ExpansionCard from "components/sanity-modules/ExpansionCard";
+import Accordion from "components/sanity-modules/accordion/Accordion";
+import Alert from "components/sanity-modules/alert/Alert";
+import Bilde from "components/sanity-modules/bilde/Bilde";
 import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
-import { InlineCode } from "components/website-modules/InlineCode";
-import { KBD } from "components/website-modules/KBD";
+import CodeExamples from "components/sanity-modules/code-examples/CodeExamples";
+import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
+import DoDont from "components/sanity-modules/do-dont/DoDont";
+import ExpansionCard from "components/sanity-modules/expansioncard/ExpansionCard";
+import PropsSeksjon from "components/sanity-modules/props/PropsSeksjon";
+import RelatertInnhold from "components/sanity-modules/relatert-innhold/RelatertInnhold";
+import SideModul from "components/sanity-modules/side-modul/SideModul";
+import Tabell from "components/sanity-modules/tabell/Tabell";
+import TastaturModul from "components/sanity-modules/tastatur-tabell/TastaturTabell";
+import Tips from "components/sanity-modules/tips/Tips";
+import TokenTable from "components/sanity-modules/token-tabell/TokenTable";
+import Video from "components/sanity-modules/video/Video";
+import InlineCode from "components/website-modules/InlineCode";
+import KBD from "components/website-modules/KBD";
 import NextLink from "next/link";
 import { Children } from "react";
-import {
-  Accordion,
-  Alert,
-  Bilde,
-  CodeExamples,
-  DoDont,
-  PropsSeksjon,
-  RelatertInnhold,
-  SideModul,
-  Snippet,
-  Tabell,
-  TastaturModul,
-  Tips,
-  TokenTable,
-  UuFeedback,
-  Video,
-  logNav,
-} from ".";
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
@@ -40,7 +37,7 @@ const serializers: Partial<PortableTextReactComponents> = {
     bilde: ({ value }) => <Bilde node={value} />,
     alert: ({ value }) => <Alert node={value} />,
     expansioncard: ({ value }) => <ExpansionCard node={value} />,
-    kode: ({ value }) => <Snippet node={value} />,
+    kode: ({ value }) => <SnippetLazy node={value} />,
     tabell_v2: ({ value }) => <Tabell node={value} />,
     accordion: ({ value }) => <Accordion node={value} />,
     props_seksjon: ({ value }) => <PropsSeksjon node={value} />,
@@ -49,7 +46,6 @@ const serializers: Partial<PortableTextReactComponents> = {
     video: ({ value }) => <Video node={value} />,
     tips: ({ value }) => <Tips node={value} />,
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
-    uufeedback: ({ value }) => <UuFeedback node={value} />,
   },
   unknownType: () => null,
   block: {
@@ -130,14 +126,11 @@ const serializers: Partial<PortableTextReactComponents> = {
 
       return (
         <Link
+          as={NextLink}
           href={href}
           inlineText
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
           {...(href.startsWith("http") &&
           !href.startsWith("https://aksel.nav.no/")
@@ -160,11 +153,7 @@ const serializers: Partial<PortableTextReactComponents> = {
           href={href}
           inlineText
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
         >
           {text}
