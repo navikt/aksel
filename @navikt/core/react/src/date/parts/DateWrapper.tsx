@@ -44,7 +44,7 @@ export const DateWrapper = ({
         arrow={false}
         anchorEl={anchor}
         open
-        onClose={() => onClose()}
+        onClose={onClose}
         placement="bottom-start"
         role="dialog"
         className={cl("navds-date__popover", {
