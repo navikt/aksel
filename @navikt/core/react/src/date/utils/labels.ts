@@ -163,13 +163,13 @@ const modalLabelMultiple = (localeCode?: string): string => {
 const modalLabelRanged = (localeCode?: string): string => {
   switch (localeCode) {
     case "nb":
-      return `Velg start og sluttdato`;
+      return `Velg start- og sluttdato`;
     case "nn":
-      return `Vel start og sluttdato`;
+      return `Vel start- og sluttdato`;
     case "en-GB":
       return `Pick a start and end date`;
     default:
-      return `Velg start og sluttdato`;
+      return `Velg start- og sluttdato`;
   }
 };
 
