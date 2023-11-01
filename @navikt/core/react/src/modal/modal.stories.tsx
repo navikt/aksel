@@ -205,43 +205,9 @@ export const WithTooltip: StoryFn = () => {
   );
 };
 
-const chromaticTestModes = {
-  mobile_portrait: {
-    viewport: {
-      width: 400,
-      height: 850,
-    },
-  },
-  mobile_landscape: {
-    viewport: {
-      width: 850,
-      height: 400,
-    },
-  },
-  desktop: {
-    viewport: {
-      width: 1280,
-      height: 960,
-    },
-  },
-};
 export const ChromaticViewportTesting: StoryFn = () => (
-  <div id="modal-story-wrapper">
-    <style>
-      {`#storybook-root { padding: 0 !important }`}
-
-      {Object.values(chromaticTestModes)
-        .map(
-          (mode) => `
-          @media (min-width:${mode.viewport.width}px) {
-            #modal-story-wrapper {
-              min-width: ${mode.viewport.width}px;
-              min-height: ${mode.viewport.height}px;
-            }
-          }`
-        )
-        .join("")}
-    </style>
+  <div id="modal-story-wrapper" style={{ width: "100vw", height: "100vh" }}>
+    <style>{`#storybook-root { padding: 0 !important }`}</style>
     <Modal
       open
       header={{ heading: "Chromatic Viewports Testing", label: "Test" }}
@@ -278,5 +244,26 @@ export const ChromaticViewportTesting: StoryFn = () => (
   </div>
 );
 ChromaticViewportTesting.parameters = {
-  chromatic: { modes: chromaticTestModes },
+  chromatic: {
+    modes: {
+      mobile_portrait: {
+        viewport: {
+          width: 400,
+          height: 850,
+        },
+      },
+      mobile_landscape: {
+        viewport: {
+          width: 850,
+          height: 400,
+        },
+      },
+      desktop: {
+        viewport: {
+          width: 1280,
+          height: 960,
+        },
+      },
+    },
+  },
 };
