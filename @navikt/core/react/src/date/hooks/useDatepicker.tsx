@@ -230,7 +230,8 @@ export const useDatepicker = (
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
     if (day && !selected) {
       handleOpen(false);
-      /* inputRef.current && inputRef.current.focus(); */
+      //(document.getElementById("test") as HTMLDialogElement).close();
+      inputRef.current && inputRef.current.focus();
     }
 
     if (!required && selected) {
@@ -306,7 +307,11 @@ export const useDatepicker = (
     toDate,
     today,
     open,
-    onClose: () => handleOpen(!open),
+    onClose: () => {
+      handleOpen(false);
+      console.log("onClose");
+      inputRef.current && inputRef.current.focus();
+    },
     onOpenToggle: () => handleOpen(!open),
     disabled,
     disableWeekends,

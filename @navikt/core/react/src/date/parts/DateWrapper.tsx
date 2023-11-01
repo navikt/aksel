@@ -33,17 +33,12 @@ export const DateWrapper = ({
   const hideModal =
     useMedia("screen and (min-width: 768px)", true) && !isInModal;
 
-  /* Avoids rendering both Popover and Modal in dom before needed */
-  if (!open) {
-    return null;
-  }
-
   if (hideModal) {
     return (
       <Popover
         arrow={false}
         anchorEl={anchor}
-        open
+        open={open}
         onClose={onClose}
         placement="bottom-start"
         role="dialog"
@@ -59,7 +54,7 @@ export const DateWrapper = ({
   }
   return (
     <Modal
-      open
+      open={open}
       onClose={onClose}
       aria-label={modalLabel(locale, variant)}
       className={cl({ "navds-date__nested-modal": isInModal })}
