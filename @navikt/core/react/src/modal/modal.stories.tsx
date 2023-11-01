@@ -1,17 +1,19 @@
 import { FileIcon } from "@navikt/aksel-icons";
+import { Meta, StoryFn } from "@storybook/react";
 import React, { useRef, useState } from "react";
 import { BodyLong, Button, Heading, Tooltip } from "..";
 import Modal from "./Modal";
 
-export default {
+const meta: Meta<typeof Modal> = {
   title: "ds-react/Modal",
   component: Modal,
   parameters: {
     chromatic: { pauseAnimationAtEnd: true },
   },
 };
+export default meta;
 
-export const WithUseRef = () => {
+export const WithUseRef: StoryFn = () => {
   const ref = useRef<HTMLDialogElement>(null);
   const ref2 = useRef<HTMLDialogElement>(null);
 
@@ -87,7 +89,7 @@ export const WithUseRef = () => {
 };
 WithUseRef.storyName = "With useRef";
 
-export const WithUseState = () => {
+export const WithUseState: StoryFn = () => {
   const [open, setOpen] = useState(true);
   const [open2, setOpen2] = useState(false);
 
@@ -140,7 +142,7 @@ export const WithUseState = () => {
 };
 WithUseState.storyName = "With useState";
 
-export const EmptyHeader = () => (
+export const EmptyHeader: StoryFn = () => (
   <div style={{ minWidth: "800px", minHeight: "600px" } /* For Chromatic */}>
     <Modal open>
       <Modal.Header />
@@ -157,19 +159,28 @@ export const EmptyHeader = () => (
   </div>
 );
 
-export const Small = () => (
+export const Small: StoryFn = () => (
   <Modal open width="small" header={{ heading: "Simple header" }}>
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
+Small.storyName = "Size = Small";
 
-export const MediumWithPortal = () => (
+export const MediumWithPortal: StoryFn = () => (
   <Modal open portal width="medium" header={{ heading: "Simple header" }}>
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
+MediumWithPortal.storyName = "Size = Medium (with portal)";
 
-export const WithTooltip = () => {
+export const Large800: StoryFn = () => (
+  <Modal open portal width={800} header={{ heading: "Simple header" }}>
+    <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
+  </Modal>
+);
+Large800.storyName = "Size = 800px";
+
+export const WithTooltip: StoryFn = () => {
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
@@ -192,4 +203,80 @@ export const WithTooltip = () => {
       </Modal>
     </div>
   );
+};
+
+const chromaticTestModes = {
+  mobile_portrait: {
+    viewport: {
+      width: 400,
+      height: 850,
+    },
+  },
+  mobile_landscape: {
+    viewport: {
+      width: 850,
+      height: 400,
+    },
+  },
+  desktop: {
+    viewport: {
+      width: 1280,
+      height: 960,
+    },
+  },
+};
+export const ChromaticViewportTesting: StoryFn = () => (
+  <div id="modal-story-wrapper">
+    <style>
+      {`#storybook-root { padding: 0 !important }`}
+
+      {Object.values(chromaticTestModes)
+        .map(
+          (mode) => `
+          @media (min-width:${mode.viewport.width}px) {
+            #modal-story-wrapper {
+              min-width: ${mode.viewport.width}px;
+              min-height: ${mode.viewport.height}px;
+            }
+          }`
+        )
+        .join("")}
+    </style>
+    <Modal
+      open
+      header={{ heading: "Chromatic Viewports Testing", label: "Test" }}
+    >
+      <Modal.Body>
+        <BodyLong spacing>
+          This story is tailored for testing the breakpoints with Chromatic.
+        </BodyLong>
+        <BodyLong spacing>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </BodyLong>
+        <BodyLong spacing>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum.
+        </BodyLong>
+        <BodyLong>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
+          ab illo inventore veritatis et quasi architecto beatae vitae dicta
+          sunt explicabo.
+        </BodyLong>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button>Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="tertiary">Tertiary</Button>
+      </Modal.Footer>
+    </Modal>
+  </div>
+);
+ChromaticViewportTesting.parameters = {
+  chromatic: { modes: chromaticTestModes },
 };
