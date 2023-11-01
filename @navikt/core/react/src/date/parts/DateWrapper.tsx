@@ -67,7 +67,7 @@ export const DateWrapper = ({
     >
       <div className="navds-date__modal">
         {children}
-        <Button variant="tertiary" onClick={() => onClose()} size="small">
+        <Button variant="tertiary" onClick={onClose} size="small">
           {modalCloseButtonLabel(locale)}
         </Button>
       </div>
