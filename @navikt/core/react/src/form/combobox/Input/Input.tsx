@@ -35,13 +35,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       isValueNew,
       toggleIsListOpen,
       isListOpen,
-      moveFocusUp,
-      moveFocusDown,
       ariaDescribedBy,
-      moveFocusToInput,
-      moveFocusToEnd,
       setIsMouseLastUsedInputDevice,
       shouldAutocomplete,
+      virtualFocus,
     } = useFilteredOptionsContext();
 
     const onEnter = useCallback(
@@ -104,10 +101,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           onEnter(e);
           break;
         case "Home":
-          moveFocusToInput();
+          virtualFocus.moveFocusToTop();
           break;
         case "End":
-          moveFocusToEnd();
+          virtualFocus.moveFocusToBottom();
           break;
         default:
           break;
@@ -128,14 +125,20 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           // so we don't interfere with text editing
           if (e.target.selectionStart === value?.length) {
             e.preventDefault();
-            moveFocusDown();
+            if (virtualFocus.activeElement === null || !isListOpen) {
+              toggleIsListOpen(true);
+            }
+            virtualFocus.moveFocusDown();
           }
         } else if (e.key === "ArrowUp") {
           // Check that the FilteredOptions list is open and has virtual focus.
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
           if (isListOpen && activeDecendantId) {
             e.preventDefault();
-            moveFocusUp();
+            if (virtualFocus.isFocusOnTheTop) {
+              toggleIsListOpen(false);
+            }
+            virtualFocus.moveFocusUp();
           }
         }
       },
@@ -143,11 +146,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         value,
         selectedOptions,
         removeSelectedOption,
-        moveFocusDown,
         isListOpen,
         activeDecendantId,
-        moveFocusUp,
         setIsMouseLastUsedInputDevice,
+        toggleIsListOpen,
+        virtualFocus,
       ]
     );
 
@@ -159,14 +162,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (filteredOptions.length === 0) {
           toggleIsListOpen(false);
         }
-        moveFocusToInput();
+        virtualFocus.moveFocusToTop();
         onChange(event);
       },
-      [filteredOptions.length, moveFocusToInput, onChange, toggleIsListOpen]
+      [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen]
     );
 
     const onBlur = () => {
-      moveFocusToInput();
+      virtualFocus.moveFocusToTop();
     };
 
     return (

@@ -12,7 +12,7 @@ import { useInputContext } from "../Input/inputContext";
 import usePrevious from "../../../util/usePrevious";
 import { useClientLayoutEffect } from "../../../util";
 import filteredOptionsUtils from "./filtered-options-util";
-import useVirtualFocus from "./useVirtualFocus";
+import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
 import { ComboboxProps } from "../types";
 
 type FilteredOptionsProps = {
@@ -42,12 +42,8 @@ type FilteredOptionsContextType = {
   isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
   currentOption?: string;
-  moveFocusUp: () => void;
-  moveFocusDown: () => void;
-  moveFocusToElement: (id: string) => void;
-  moveFocusToInput: () => void;
-  moveFocusToEnd: () => void;
   shouldAutocomplete?: boolean;
+  virtualFocus: VirtualFocusType;
 };
 const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
   {} as FilteredOptionsContextType
@@ -170,28 +166,11 @@ export const FilteredOptionsProvider = ({
     id,
   ]);
 
-  // TODO: Re-write or remove after re-write?
   const currentOption = useMemo(
     () =>
       filteredOptionsMap[virtualFocus.activeElement?.getAttribute("id") || -1],
     [filteredOptionsMap, virtualFocus]
   );
-
-  // TODO: Can be deleted if we move toggleIsListOpen(false) to the event handling in Input.tsx
-  const moveFocusUp = useCallback(() => {
-    if (virtualFocus.isFocusOnTheTop) {
-      toggleIsListOpen(false);
-    }
-    virtualFocus.moveFocusUp();
-  }, [toggleIsListOpen, virtualFocus]);
-
-  // TODO: Can be deleted if we move toggleIsListOpen(true) to the event handling in Input.tsx
-  const moveFocusDown = useCallback(() => {
-    if (virtualFocus.activeElement === null || !isListOpen) {
-      toggleIsListOpen(true);
-    }
-    virtualFocus.moveFocusDown();
-  }, [isListOpen, toggleIsListOpen, virtualFocus]);
 
   const activeDecendantId = useMemo(
     () => virtualFocus.activeElement?.getAttribute("id") || undefined,
@@ -211,11 +190,7 @@ export const FilteredOptionsProvider = ({
     isValueNew,
     toggleIsListOpen,
     currentOption,
-    moveFocusUp,
-    moveFocusDown,
-    moveFocusToElement: virtualFocus.moveFocusToElement,
-    moveFocusToInput: virtualFocus.moveFocusToTop,
-    moveFocusToEnd: virtualFocus.moveFocusToBottom,
+    virtualFocus,
     ariaDescribedBy,
   };
 

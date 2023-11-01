@@ -1,6 +1,21 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
-const useVirtualFocus = (containerRef: HTMLElement | null) => {
+export type VirtualFocusType = {
+  activeElement: HTMLElement | undefined;
+  getElementById: (id: string) => HTMLElement | undefined;
+  isFocusOnTheTop: boolean;
+  isFocusOnTheBottom: boolean;
+  setIndex: Dispatch<SetStateAction<number>>;
+  moveFocusUp: () => void;
+  moveFocusDown: () => void;
+  moveFocusToElement: (id: string) => void;
+  moveFocusToTop: () => void;
+  moveFocusToBottom: () => void;
+};
+
+const useVirtualFocus = (
+  containerRef: HTMLElement | null
+): VirtualFocusType => {
   const [index, setIndex] = useState(-1);
 
   const listOfAllChildren: Array<HTMLElement> = containerRef?.children

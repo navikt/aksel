@@ -23,9 +23,9 @@ const FilteredOptions = () => {
     isMouseLastUsedInputDevice,
     setIsMouseLastUsedInputDevice,
     isValueNew,
-    moveFocusToElement,
     toggleIsListOpen,
     activeDecendantId,
+    virtualFocus,
   } = useFilteredOptionsContext();
   const { isMultiSelect, selectedOptions, toggleOption } =
     useSelectedOptionsContext();
@@ -59,7 +59,9 @@ const FilteredOptions = () => {
             if (
               activeDecendantId !== filteredOptionsUtil.getAddNewOptionId(id)
             ) {
-              moveFocusToElement(filteredOptionsUtil.getAddNewOptionId(id));
+              virtualFocus.moveFocusToElement(
+                filteredOptionsUtil.getAddNewOptionId(id)
+              );
               setIsMouseLastUsedInputDevice(true);
             }
           }}
@@ -111,7 +113,9 @@ const FilteredOptions = () => {
             if (
               activeDecendantId !== filteredOptionsUtil.getOptionId(id, option)
             ) {
-              moveFocusToElement(filteredOptionsUtil.getOptionId(id, option));
+              virtualFocus.moveFocusToElement(
+                filteredOptionsUtil.getOptionId(id, option)
+              );
               setIsMouseLastUsedInputDevice(true);
             }
           }}
