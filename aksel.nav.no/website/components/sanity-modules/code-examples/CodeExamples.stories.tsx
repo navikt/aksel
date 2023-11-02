@@ -26,6 +26,7 @@ export const Designsystem: Story = {
             innhold:
               'import { Button } from "@navikt/ds-react";\n\nconst Example = () => {\n  return (\n    <div className="flex flex-wrap gap-2">\n      <Button variant="primary">Primary</Button>\n      <Button variant="secondary">Secondary</Button>\n      <Button variant="tertiary">Tertiary</Button>\n      <Button variant="danger">Danger</Button>\n    </div>\n  );\n};',
             navn: "default",
+            title: "title",
             index: 1,
           },
           {
@@ -34,6 +35,7 @@ export const Designsystem: Story = {
             innhold:
               'import { Button } from "@navikt/ds-react";\n\nconst Example = () => {\n  return (\n    <div className="flex flex-wrap gap-2">\n      <Button variant="primary-neutral">Primary</Button>\n      <Button variant="secondary-neutral">Secondary</Button>\n      <Button variant="tertiary-neutral">Tertiary</Button>\n    </div>\n  );\n};',
             navn: "neutral",
+            title: "title",
             index: 1,
           },
           {
@@ -42,6 +44,7 @@ export const Designsystem: Story = {
             innhold:
               'import { PencilIcon } from "@navikt/aksel-icons";\nimport { Button } from "@navikt/ds-react";\n\nconst Example = () => {\n  return (\n    <div className="flex flex-wrap gap-2">\n      <Button size="small" variant="primary" icon={<PencilIcon aria-hidden />}>\n        Primary\n      </Button>\n      <Button size="small" variant="secondary">\n        Secondary\n      </Button>\n      <Button size="small" variant="tertiary">\n        Tertiary\n      </Button>\n      <Button size="small" variant="danger">\n        Danger\n      </Button>\n    </div>\n  );\n};',
             navn: "small",
+            title: "title",
             index: 1,
           },
         ],
