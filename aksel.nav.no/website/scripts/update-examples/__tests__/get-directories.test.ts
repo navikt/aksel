@@ -8,7 +8,7 @@ describe("Testing getDirectories function", () => {
   });
 
   test("getDirectories should list directories in /pages/templates", () => {
-    const folders = getDirectories("eksempler");
+    const folders = getDirectories("templates");
 
     expect(folders.length).toBeGreaterThan(0);
   });

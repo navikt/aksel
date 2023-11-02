@@ -307,6 +307,7 @@ export type CodeExampleSchemaT = {
   title: string;
   variant: "eksempler" | "templates";
   filer: {
+    title: string;
     innhold: string;
     navn: string;
     index: number;
