@@ -1,10 +1,10 @@
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import checkIsBefore from "date-fns/isBefore";
 import isWeekend from "date-fns/isWeekend";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { DateRange, isMatch } from "react-day-picker";
-import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
+import { DateInputProps } from "../parts/DateInput";
 import {
   formatDateForInput,
   getLocaleFromString,
@@ -12,8 +12,6 @@ import {
   parseDate,
 } from "../utils";
 import { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
-import { useEscape } from "./useEscape";
-import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export type RangeValidationT = {
   from: DateValidationT;
@@ -74,14 +72,28 @@ interface UseRangeDatepickerValue {
   fromInputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
-  > & { ref: React.RefObject<HTMLInputElement> };
+  > & {
+    /**
+     * @private
+     */
+    setAnchorRef: React.Dispatch<
+      React.SetStateAction<HTMLButtonElement | null>
+    >;
+  };
   /**
    * Use: <DatePicker.Input label="to" {...toInputProps}/>
    */
   toInputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
-  > & { ref: React.RefObject<HTMLInputElement> };
+  > & {
+    /**
+     * @private
+     */
+    setAnchorRef?: React.Dispatch<
+      React.SetStateAction<HTMLButtonElement | null>
+    >;
+  };
   /**
    * Resets all states (callback)
    */
@@ -218,14 +230,11 @@ export const useRangeDatepicker = (
     onValidate,
     defaultMonth,
     allowTwoDigitYear = true,
-    openOnFocus = true,
   } = opt;
 
-  const locale = getLocaleFromString(_locale);
+  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement | null>(null);
 
-  const inputRefTo = useRef<HTMLInputElement>(null);
-  const inputRefFrom = useRef<HTMLInputElement>(null);
-  const [daypickerRef, setDaypickerRef] = useState<HTMLDivElement>();
+  const locale = getLocaleFromString(_locale);
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
@@ -254,20 +263,6 @@ export const useRangeDatepicker = (
   );
 
   const [open, setOpen] = useState(false);
-
-  useOutsideClickHandler(open, setOpen, [
-    daypickerRef,
-    inputRefTo.current,
-    inputRefFrom.current,
-    inputRefTo.current?.nextSibling,
-    inputRefFrom.current?.nextSibling,
-  ]);
-
-  useEscape(
-    open,
-    setOpen,
-    selectedRange?.from && !selectedRange?.to ? inputRefTo : inputRefFrom
-  );
 
   const updateRange = (range?: DateRange) => {
     onRangeChange?.(range);
@@ -324,7 +319,6 @@ export const useRangeDatepicker = (
     if (e.target.readOnly) {
       return;
     }
-    !open && openOnFocus && setOpen(true);
     const day = parseDate(
       e.target.value,
       today,
@@ -378,6 +372,7 @@ export const useRangeDatepicker = (
   const handleSelect = (range) => {
     if (range?.from && range?.to) {
       setOpen(false);
+      anchorRef?.focus();
     }
     const prevToRange =
       !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;
@@ -545,10 +540,12 @@ export const useRangeDatepicker = (
     mode: "range" as const,
     open,
     onOpenToggle: () => setOpen((x) => !x),
+    onClose: () => {
+      setOpen(false);
+      anchorRef?.focus();
+    },
     disabled,
     disableWeekends,
-    bubbleEscape: true,
-    ref: setDaypickerRef,
   };
 
   const fromInputProps = {
@@ -556,7 +553,7 @@ export const useRangeDatepicker = (
     onFocus: (e) => handleFocus(e, RANGE.FROM),
     onBlur: (e) => handleBlur(e, RANGE.FROM),
     value: fromInputValue,
-    ref: inputRefFrom,
+    setAnchorRef,
   };
 
   const toInputProps = {
@@ -564,7 +561,7 @@ export const useRangeDatepicker = (
     onFocus: (e) => handleFocus(e, RANGE.TO),
     onBlur: (e) => handleBlur(e, RANGE.TO),
     value: toInputValue,
-    ref: inputRefTo,
+    setAnchorRef,
   };
 
   return {
