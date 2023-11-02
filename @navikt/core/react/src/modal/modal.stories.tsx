@@ -143,20 +143,18 @@ export const WithUseState: StoryFn = () => {
 WithUseState.storyName = "With useState";
 
 export const EmptyHeader: StoryFn = () => (
-  <div style={{ minWidth: "800px", minHeight: "600px" } /* For Chromatic */}>
-    <Modal open>
-      <Modal.Header />
-      <Modal.Body>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Modal.Body>
-    </Modal>
-  </div>
+  <Modal open>
+    <Modal.Header />
+    <Modal.Body>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </Modal.Body>
+  </Modal>
 );
 
 export const Small: StoryFn = () => (
@@ -174,7 +172,7 @@ export const MediumWithPortal: StoryFn = () => (
 MediumWithPortal.storyName = "Size = Medium (with portal)";
 
 export const Large800: StoryFn = () => (
-  <Modal open portal width={800} header={{ heading: "Simple header" }}>
+  <Modal open width={800} header={{ heading: "Simple header" }}>
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
