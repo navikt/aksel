@@ -131,6 +131,7 @@ const Riktekst = (
   type:
     | "god-praksis"
     | "grunnleggende"
+    | "templates"
     | "komponent"
     | "prinsipp"
     | "standard"
@@ -169,6 +170,8 @@ const Riktekst = (
     "token_ref",
   ];
 
+  const templates = ["kode_eksempler"];
+
   const grunnleggende = ["spesial_seksjon"];
 
   fields.push(...standard);
@@ -185,6 +188,9 @@ const Riktekst = (
       break;
     case "accordion":
       fields = [...accordion];
+      break;
+    case "templates":
+      fields.push(...templates);
       break;
     default:
       break;
@@ -254,5 +260,13 @@ export const RiktekstStandalone = {
   name: "riktekst_standalone",
   type: "array",
   of: Riktekst("standalone"),
+  icon: FileTextIcon,
+};
+
+export const RiktekstTemplates = {
+  title: "Riktekst",
+  name: "riktekst_templates",
+  type: "array",
+  of: Riktekst("templates"),
   icon: FileTextIcon,
 };

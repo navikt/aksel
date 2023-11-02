@@ -19,3 +19,5 @@ export * from "./publiseringsflyt";
 export * from "./redirects";
 export * from "./skrivehjelp";
 export * from "./standalone-artikkel";
+export * from "./templates/artikkel";
+export * from "./templates/landingsside";

@@ -1,4 +1,4 @@
-import { Heading, Label, Tag as DsTag } from "@navikt/ds-react";
+import { Tag as DsTag, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
 
 export const Tag = ({
@@ -65,7 +65,26 @@ export const Tag = ({
         <Comp className="text-deepblue-600 flex items-center gap-3">
           Grunnleggende
           {beta && (
-            <DsTag variant="alt1" size="small">
+            <DsTag
+              variant="alt1"
+              size="small"
+              className="border-violet-300 bg-violet-50"
+            >
+              Beta
+            </DsTag>
+          )}
+        </Comp>
+      );
+    case "templates_artikkel":
+      return (
+        <Comp className="text-deepblue-600 flex items-center gap-3">
+          Mønster og Maler
+          {beta && (
+            <DsTag
+              variant="alt1"
+              size="small"
+              className="border-violet-300 bg-violet-50"
+            >
               Beta
             </DsTag>
           )}
