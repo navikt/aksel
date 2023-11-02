@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.9.2
+
+### Patch Changes
+
+- :bug: Datepicker lukker ikke lenger modalen den er i ([#2451](https://github.com/navikt/aksel/pull/2451))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.9.2
+  - @navikt/aksel-icons@5.9.2
+
 ## 5.9.1
 
 ### Patch Changes
