@@ -57,7 +57,10 @@ export const DateWrapper = ({
     <Modal
       ref={modalRef}
       open={open}
-      onClose={onClose}
+      onClose={(event) => {
+        event.stopPropagation();
+        onClose();
+      }}
       aria-label={modalLabel(locale, variant)}
       className={cl("navds-date__modal", {
         "navds-date__nested-modal": isInModal,

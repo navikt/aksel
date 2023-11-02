@@ -437,28 +437,36 @@ export const ModalDemo = () => {
     toDate: new Date("Feb 23 2024"),
     onDateChange: console.log,
   });
+  const [open, setOpen] = useState(true);
 
   return (
-    <Modal open header={{ heading: "Modal-demo" }}>
-      <Modal.Body style={{ position: "relative" }}>
-        <BodyLong spacing>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </BodyLong>
+    <>
+      <Button onClick={() => setOpen(!open)}>Open modal</Button>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        header={{ heading: "Modal-demo" }}
+      >
+        <Modal.Body style={{ position: "relative" }}>
+          <BodyLong spacing>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          </BodyLong>
 
-        <DatePicker {...datepickerProps} dropdownCaption>
-          <DatePicker.Input
-            {...inputProps}
-            label="Velg dato"
-            description="Format: dd.mm.yyyy"
-          />
-        </DatePicker>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button>Neste</Button>
-        <Button variant="secondary">Tilbake</Button>
-        <Button variant="tertiary">Avbryt</Button>
-      </Modal.Footer>
-    </Modal>
+          <DatePicker {...datepickerProps} dropdownCaption>
+            <DatePicker.Input
+              {...inputProps}
+              label="Velg dato"
+              description="Format: dd.mm.yyyy"
+            />
+          </DatePicker>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button>Neste</Button>
+          <Button variant="secondary">Tilbake</Button>
+          <Button variant="tertiary">Avbryt</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 ModalDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };
