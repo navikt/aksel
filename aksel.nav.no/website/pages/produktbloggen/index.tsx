@@ -18,7 +18,6 @@ import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import generateRssFeed from "./generateRssFeed";
 
 type PageProps = NextPageT<{
   page: AkselBloggFrontpageT;
@@ -46,7 +45,6 @@ export const getStaticProps: GetStaticProps = async ({
 }): Promise<PageProps> => {
   const { bloggposts, page } = await getClient().fetch(query);
 
-  generateRssFeed(bloggposts, "produktbloggen");
   return {
     props: {
       page,

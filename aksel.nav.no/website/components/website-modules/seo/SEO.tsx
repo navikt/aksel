@@ -60,7 +60,7 @@ export function SEO({
         rel="alternate"
         type="application/rss+xml"
         title="Produktbloggen - aksel.nav.no"
-        href="/rss.xml"
+        href="https://aksel.nav.no/rss/produktbloggen-rss.xml"
       />
     </Head>
   );
