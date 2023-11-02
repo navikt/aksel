@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.9.1
+
+### @navikt/ds-css
+
+- :lipstick: Modal: Bedre håndtering av mobiler i landskapsmodus ([#2444](https://github.com/navikt/aksel/pull/2444))
+
 ## 5.9.0
 
 ### @navikt/ds-css
