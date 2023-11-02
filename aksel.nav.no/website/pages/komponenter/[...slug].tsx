@@ -261,7 +261,12 @@ const Page = ({
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Komponenter", title: page?.heading }}
+        pageType={{
+          type: "komponenter",
+          title: page?.heading,
+          rootUrl: "/komponenter",
+          rootTitle: "Komponenter",
+        }}
         pageProps={page}
         variant="page"
         intro={

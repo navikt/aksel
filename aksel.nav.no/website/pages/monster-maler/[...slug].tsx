@@ -4,34 +4,36 @@ import { getClient } from "@/sanity/client.server";
 import { getDocumentsTmp } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
-  AkselGrunnleggendeDocT,
   AkselSidebarT,
+  AkselTemplatesDocT,
   ArticleListT,
+  CodeExampleSchemaT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
-import { Detail } from "@navikt/ds-react";
+import { Detail, Heading } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
+import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
-  page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
+  page: ResolveContributorsT<ResolveSlugT<AkselTemplatesDocT>>;
   sidebar: AkselSidebarT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;
 }>;
 
-export const query = `{
-  "page": *[_type == "ds_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
+const query = `{
+  "page": *[_type == "templates_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
     {
       ...,
       "slug": slug.current,
@@ -40,16 +42,16 @@ export const query = `{
         ${destructureBlocks}
       },
   },
-  "seo": *[_type == "grunnleggende_landingsside"][0].seo.image,
+  "seo": *[_type == "templates_landingsside"][0].seo.image,
   ${sidebarQuery}
 }`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getDocumentsTmp("ds_artikkel").then((paths) =>
+    paths: await getDocumentsTmp("templates_artikkel").then((paths) =>
       paths.map((slug) => ({
         params: {
-          slug: slug.split("/").filter((x) => x !== "grunnleggende"),
+          slug: slug.split("/").filter((x) => x !== "monster-maler"),
         },
       }))
     ),
@@ -65,8 +67,8 @@ export const getStaticProps: GetStaticProps = async ({
   preview?: boolean;
 }): Promise<PageProps> => {
   const { page, sidebar, seo } = await getClient().fetch(query, {
-    slug: `grunnleggende/${slug.slice(0, 2).join("/")}`,
-    type: "ds_artikkel",
+    slug: `monster-maler/${slug.slice(0, 2).join("/")}`,
+    type: "templates_artikkel",
   });
 
   return {
@@ -91,6 +93,10 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
     return <NotFotfund />;
   }
 
+  const metadata: CodeExampleSchemaT["metadata"] = page.content.find(
+    (x) => x._type === "kode_eksempler"
+  )?.dir?.metadata;
+
   return (
     <>
       <SEO
@@ -103,10 +109,10 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       <WithSidebar
         sidebar={sidebar}
         pageType={{
-          type: "grunnleggende",
+          type: "templates",
           title: page?.heading,
-          rootUrl: "/grunnleggende",
-          rootTitle: "Grunnleggende",
+          rootUrl: "/monster-maler",
+          rootTitle: "Mønster og Maler",
         }}
         intro={
           <Detail as="div">
@@ -123,6 +129,40 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       >
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
+
+        {metadata && metadata.changelog && (
+          <>
+            <Heading
+              tabIndex={-1}
+              id="changelog"
+              level="2"
+              size="large"
+              className="max-w-text text-deepblue-800 mb-4 mt-12 scroll-mt-20 focus:outline-none"
+            >
+              Endringer
+            </Heading>
+            <AkselTable
+              th={[
+                { text: "Dato" },
+                { text: "Versjon" },
+                { text: "Endringer" },
+              ]}
+            >
+              {metadata.changelog
+                .sort((a, b) => a.version - b.version)
+                .map((log) => (
+                  <AkselTableRow
+                    key={log.version}
+                    tr={[
+                      { text: log.date },
+                      { text: log.version },
+                      { text: log.description },
+                    ]}
+                  />
+                ))}
+            </AkselTable>
+          </>
+        )}
       </WithSidebar>
       <Footer />
     </>
@@ -139,8 +179,8 @@ const Wrapper = (props: any) => {
           comp={Page}
           query={query}
           params={{
-            slug: `grunnleggende/${props.slug}`,
-            type: "ds_artikkel",
+            slug: `monster-maler/${props.slug}`,
+            type: "templates_artikkel",
           }}
           props={props}
         />

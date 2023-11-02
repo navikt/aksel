@@ -29,6 +29,9 @@ export function createSearchResult(
         .length,
       aksel_blogg: rawResults.filter((x: any) => x.item._type === "aksel_blogg")
         .length,
+      templates_artikkel: rawResults.filter(
+        (x: any) => x.item._type === "templates_artikkel"
+      ).length,
       aksel_prinsipp: rawResults.filter(
         (x: any) => x.item._type === "aksel_prinsipp"
       ).length,

@@ -7,7 +7,7 @@ import {
   ArticleListT,
   NextPageT,
 } from "@/types";
-import { BodyLong, Heading, Ingress } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
@@ -16,7 +16,7 @@ import ComponentOverview from "components/sanity-modules/component-overview/Comp
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
-import { grunnleggendeKategorier } from "../../sanity/config";
+import { templatesKategorier } from "../../sanity/config";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
@@ -25,14 +25,14 @@ type PageProps = NextPageT<{
 }>;
 
 export const query = `{${sidebarQuery}, ${landingPageQuery(
-  "grunnleggende"
-)}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
+  "templates"
+)}, "links": *[_type == "templates_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
   const { sidebar, page, links } = await getClient().fetch(query, {
-    type: "ds_artikkel",
+    type: "templates_artikkel",
   });
 
   return {
@@ -40,9 +40,9 @@ export const getStaticProps: GetStaticProps = async ({
       page,
       sidebar,
       links,
-      slug: "/grunnleggende",
+      slug: "/monster-maler",
       preview,
-      title: "Forside Grunnleggende",
+      title: "Forside Mønster og Maler",
       id: page?._id ?? "",
     },
     revalidate: 60,
@@ -54,7 +54,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   return (
     <>
       <SEO
-        title="Grunnleggende"
+        title="Mønster og Maler"
         description={page?.seo?.meta}
         image={page?.seo?.image}
       />
@@ -63,22 +63,26 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
       <WithSidebar
         sidebar={sidebar}
         pageType={{
-          type: "grunnleggende",
-          title: "Grunnleggende",
-          rootUrl: "/grunnleggende",
-          rootTitle: "Grunnleggende",
+          type: "templates",
+          title: "Mønster og Maler",
+          rootUrl: "/monster-maler",
+          rootTitle: "Mønster og Maler",
         }}
-        intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
+        intro={
+          <BodyLong size="large" className="text-text-on-action">
+            {page?.intro}
+          </BodyLong>
+        }
         pageProps={page}
       >
-        {grunnleggendeKategorier
+        {templatesKategorier
           .filter(
             (kat) => links?.filter((x) => x.kategori === kat.value).length > 0
           )
           .map((kat, i) => (
             <div
               key={i}
-              className={cl({ "pb-8": i + 1 < grunnleggendeKategorier.length })}
+              className={cl({ "pb-8": i + 1 < templatesKategorier.length })}
             >
               <Heading
                 level="2"
@@ -121,7 +125,7 @@ const Wrapper = (props: any) => {
           query={query}
           props={props}
           params={{
-            type: "ds_artikkel",
+            type: "templates_artikkel",
           }}
         />
       </Suspense>

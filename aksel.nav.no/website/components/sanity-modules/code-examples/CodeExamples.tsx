@@ -75,7 +75,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
   const fixName = (str: string) =>
     capitalize(
       str
-        .replace(/[^\w]|_/g, " ")
+        .replace(/[^\wæøå]|_/g, " ")
         .replace(/\s+/g, " ")
         .trim()
     ) ?? str;
