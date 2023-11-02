@@ -346,7 +346,7 @@ export const structure = async (
                           ]) */
                     ),
                     S.listItem()
-                      .title("Komponent-eksempler Designsystemet")
+                      .title("Eksempler/Templates")
                       .child(
                         S.documentList()
                           .title("Eksempler")

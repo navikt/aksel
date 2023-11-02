@@ -95,7 +95,6 @@ const defaultBlock = `
  _type == "kode_eksempler" =>{
     ...,
     dir->,
-    filnavn->,
  },
  _type == "kode_ref" => @->,
  ${tips},

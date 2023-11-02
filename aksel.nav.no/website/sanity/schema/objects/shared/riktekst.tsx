@@ -170,6 +170,8 @@ const Riktekst = (
     "token_ref",
   ];
 
+  const templates = ["kode_eksempler"];
+
   const grunnleggende = ["spesial_seksjon"];
 
   fields.push(...standard);
@@ -186,6 +188,9 @@ const Riktekst = (
       break;
     case "accordion":
       fields = [...accordion];
+      break;
+    case "templates":
+      fields = [...templates];
       break;
     default:
       break;
