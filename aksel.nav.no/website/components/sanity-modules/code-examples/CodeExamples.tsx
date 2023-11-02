@@ -11,8 +11,8 @@ import cl from "clsx";
 import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { Sandbox } from "./Sandbox";
-import { CodeSandbox } from "./CodeSandbox";
+import { Sandbox } from "./parts/Sandbox";
+import { CodeSandbox } from "./parts/CodeSandbox";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";
