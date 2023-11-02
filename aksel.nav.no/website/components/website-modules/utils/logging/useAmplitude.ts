@@ -29,10 +29,11 @@ const useAmplitudeInit = () => {
   useEffect(() => {
     const isProdUrl = () => window.location.host === "aksel.nav.no";
     const isExample = () => window.location.pathname.includes("eksempler/");
+    const isTemplate = () => window.location.pathname.includes("templates/");
     const isPreview = () => !!document.getElementById("exit-preview-id");
 
     const initAmplitude = async () => {
-      if (isExample()) {
+      if (isExample() || isTemplate()) {
         return;
       } else if (!isProdUrl()) {
         mockAmplitude();

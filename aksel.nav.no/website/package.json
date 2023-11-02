@@ -20,7 +20,7 @@
     "e2e:ci-full": "ts-node ./e2e/genUrls.ts && FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "update:props": "ts-node --project tsconfig.tsnode.json ./scripts/update-props",
     "update:tokens": "ts-node --project tsconfig.tsnode.json ./scripts/update-tokens",
-    "update:eksempler": "ts-node --project tsconfig.tsnode.json ./scripts/examples/update-sanity",
+    "update:eksempler": "ts-node --project tsconfig.tsnode.json ./scripts/update-examples/update-sanity",
     "update:changelog": "ts-node --project tsconfig.tsnode.json ./scripts/changelog",
     "update:sanity": "yarn update:tokens && yarn update:props && yarn update:eksempler && yarn update:changelog",
     "analyze": "cross-env ANALYZE=true yarn build",
