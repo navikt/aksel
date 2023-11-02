@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async ({
 }): Promise<PageProps> => {
   const { bloggposts, page } = await getClient().fetch(query);
 
-  generateRssFeed(bloggposts);
+  generateRssFeed(bloggposts, "produktbloggen");
   return {
     props: {
       page,

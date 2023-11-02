@@ -1,9 +1,8 @@
 import RSS from "rss";
 import fs from "fs";
 
-export default async function generateRssFeed(bloggposts) {
+export default async function generateRssFeed(bloggposts, path) {
   const site_url = "https://aksel.nav.no/";
-  const path = "produktbloggen";
 
   const feedOptions = {
     title: "Produktbloggen - aksel.nav.no",
