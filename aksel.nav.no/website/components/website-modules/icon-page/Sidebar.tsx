@@ -2,8 +2,8 @@ import { AmplitudeEvents, amplitude } from "@/logging";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Button, Heading } from "@navikt/ds-react";
-import Snippet from "components/sanity-modules/code/Snippet";
-import { SuggestionBlock } from "components/website-modules/suggestionblock";
+import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
+import { SuggestionBlock } from "components/website-modules/suggestionblock/SuggestionBlock";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -124,7 +124,7 @@ export const IconSidebar = ({
         Last ned
       </Button>
       <div className="mt-6 max-w-md">
-        <Snippet
+        <SnippetLazy
           node={{
             title: "Import",
             code: {
@@ -134,7 +134,7 @@ export const IconSidebar = ({
           }}
         />
 
-        <Snippet
+        <SnippetLazy
           node={{
             title: "React",
             code: {
@@ -144,7 +144,7 @@ export const IconSidebar = ({
           }}
         />
 
-        <Snippet
+        <SnippetLazy
           node={{
             title: "SVG",
             code: {

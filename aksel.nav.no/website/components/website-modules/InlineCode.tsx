@@ -1,4 +1,4 @@
-export const InlineCode = (
+const InlineCode = (
   props: React.HTMLAttributes<HTMLElement> & { noAmps?: boolean }
 ) => (
   <code className="text-deepblue-800 font-mono text-sm font-semibold leading-normal before:contents">
@@ -15,3 +15,5 @@ export const InlineCode = (
     )}
   </code>
 );
+
+export default InlineCode;

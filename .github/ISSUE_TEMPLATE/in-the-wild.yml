@@ -1,0 +1,23 @@
+name: Eksempel på bruk
+description: Send et eksempel på ting fra Aksel som er brukt i det fri (tokens, komponenter, maler, etc)
+title: "[Eksempel på bruk]: "
+labels: ["dokumentasjon 📖"]
+assignees:
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Takk for at du bidrar til Aksel!
+  - type: input
+    id: title
+    attributes:
+      label: Lenke til side
+      description: Lenke til siden hvor eksemplet er
+      placeholder:
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Forklaring
+      description: Forklar om det er noe man må gjøre for å se eksemplet, eller hvor på siden det ligger

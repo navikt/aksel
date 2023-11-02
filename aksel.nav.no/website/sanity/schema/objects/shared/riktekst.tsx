@@ -1,5 +1,3 @@
-import React from "react";
-import { allArticleDocsRef } from "../../../config";
 import {
   BulletListIcon,
   CodeIcon,
@@ -8,8 +6,10 @@ import {
   LinkIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
-import { KBD } from "components/website-modules/KBD";
-import { InlineCode } from "components/website-modules/InlineCode";
+import InlineCode from "components/website-modules/InlineCode";
+import KBD from "components/website-modules/KBD";
+import React from "react";
+import { allArticleDocsRef } from "../../../config";
 
 export const styles = [
   {
@@ -182,9 +182,6 @@ const Riktekst = (
       break;
     case "prinsipp":
       fields.push("innholdskort");
-      break;
-    case "standalone":
-      fields.push("uufeedback");
       break;
     case "accordion":
       fields = [...accordion];
