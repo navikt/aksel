@@ -1,6 +1,6 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
-import { DateInputProps } from "../DateInput";
+import React, { useCallback, useMemo, useState } from "react";
 import { MonthPickerProps } from "../monthpicker/types";
+import { DateInputProps } from "../parts/DateInput";
 import {
   formatDateForInput,
   getLocaleFromString,
@@ -8,8 +8,6 @@ import {
   isValidDate,
   parseDate,
 } from "../utils";
-import { useEscape } from "./useEscape";
-import { useOutsideClickHandler } from "./useOutsideClickHandler";
 
 export interface UseMonthPickerOptions
   extends Pick<
@@ -45,8 +43,8 @@ export interface UseMonthPickerOptions
    */
   allowTwoDigitYear?: boolean;
   /**
-   * Opens datepicker on input-focus
-   * @default true
+   * Will be removed in a future major-version
+   * @deprecated
    */
   openOnFocus?: boolean;
 }
@@ -60,7 +58,12 @@ interface UseMonthPickerValue {
    * Use: <MonthPicker.Input {...inputProps} />
    */
   inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value"> & {
-    ref: React.RefObject<HTMLInputElement>;
+    /**
+     * @private
+     */
+    setAnchorRef: React.Dispatch<
+      React.SetStateAction<HTMLButtonElement | null>
+    >;
   };
   /**
    * Currently selected Date
@@ -138,16 +141,13 @@ export const useMonthpicker = (
     onValidate,
     defaultYear,
     allowTwoDigitYear = true,
-    openOnFocus = true,
   } = opt;
 
+  const [anchorRef, setAnchorRef] = useState<HTMLButtonElement | null>(null);
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   const today = useMemo(() => new Date(), []);
   const locale = getLocaleFromString(_locale);
-
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [monthpickerRef, setMonthpickerRef] = useState<HTMLDivElement>();
 
   // Initialize states
   const [year, setYear] = useState(defaultSelected ?? defaultYear ?? today);
@@ -168,14 +168,6 @@ export const useMonthpicker = (
     },
     [defaultSelected, defaultYear, selectedMonth, today]
   );
-
-  useOutsideClickHandler(open, handleOpen, [
-    monthpickerRef,
-    inputRef.current,
-    inputRef.current?.nextSibling,
-  ]);
-
-  useEscape(open, handleOpen, inputRef);
 
   const updateMonth = (date?: Date) => {
     onMonthChange?.(date);
@@ -204,7 +196,7 @@ export const useMonthpicker = (
     if (e.target.readOnly) {
       return;
     }
-    !open && openOnFocus && handleOpen(true);
+
     const day = parseDate(
       e.target.value,
       today,
@@ -239,8 +231,8 @@ export const useMonthpicker = (
   const handleMonthClick = (month?: Date) => {
     if (month) {
       handleOpen(false);
-      inputRef.current && inputRef.current.focus();
       setYear(month);
+      anchorRef?.focus();
     }
 
     if (!required && !month) {
@@ -314,9 +306,11 @@ export const useMonthpicker = (
     toDate,
     open,
     onOpenToggle: () => handleOpen(!open),
+    onClose: () => {
+      handleOpen(false);
+      anchorRef?.focus();
+    },
     disabled,
-    bubbleEscape: true,
-    ref: setMonthpickerRef,
   };
 
   const inputProps = {
@@ -324,7 +318,7 @@ export const useMonthpicker = (
     onFocus: handleFocus,
     onBlur: handleBlur,
     value: inputValue,
-    ref: inputRef,
+    setAnchorRef,
   };
 
   return { monthpickerProps, inputProps, reset, selectedMonth, setSelected };

@@ -13,13 +13,13 @@ interface DateContextContextProps {
    * Aria-connected ID
    */
   ariaId?: string;
+  /**
+   * Flag for enabled-check
+   */
+  defined: boolean;
 }
 
-export const DateContext = createContext<DateContextContextProps>({
-  open: false,
-  onOpen: () => null,
-  ariaId: undefined,
-});
+export const DateContext = createContext<DateContextContextProps | null>(null);
 
 export const useDateInputContext = () => {
   const context = useContext(DateContext);
