@@ -322,7 +322,9 @@ export interface CodeExamplesT {
   title: string;
   dir: {
     title: string;
-    filer: Array<ArrayObjectT<Omit<CodeExampleSchemaT, "_id" | "_type">>>;
+    filer: Array<ArrayObjectT<CodeExampleSchemaT["filer"][0]>>;
+    metadata?: CodeExampleSchemaT["metadata"];
+    variant: CodeExampleSchemaT["variant"];
   };
 }
 

@@ -43,6 +43,7 @@ const Card = ({ article, visible, index }: CardProps) => {
     "ds_artikkel",
     "komponent_artikkel",
     "aksel_blogg",
+    "templates_artikkel",
   ].includes(article._type);
 
   return (

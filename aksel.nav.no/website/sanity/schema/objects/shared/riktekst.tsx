@@ -190,7 +190,7 @@ const Riktekst = (
       fields = [...accordion];
       break;
     case "templates":
-      fields = [...templates];
+      fields.push(...templates);
       break;
     default:
       break;
