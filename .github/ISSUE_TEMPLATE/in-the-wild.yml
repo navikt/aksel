@@ -2,7 +2,6 @@ name: Eksempel på bruk
 description: Send et eksempel på ting fra Aksel som er brukt i det fri (tokens, komponenter, maler, etc)
 title: "[Eksempel på bruk]: "
 labels: ["dokumentasjon 📖"]
-assignees:
 body:
   - type: markdown
     attributes:
