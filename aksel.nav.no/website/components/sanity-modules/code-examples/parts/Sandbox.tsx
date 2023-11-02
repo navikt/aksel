@@ -56,16 +56,19 @@ const processCode = (code: string) => {
 }`;
 };
 
-export const Sandbox = ({ code }: { code: string }) => {
+export const processAndCompressForURI = (code: string) => {
   const processedCode = processCode(code);
-  const compressedCode = compressToEncodedURIComponent(
+  return compressToEncodedURIComponent(
     JSON.stringify({
       code: processedCode,
     })
   );
+};
+
+export const Sandbox = ({ code }: { code: string }) => {
   return (
     <a
-      href={`/sandbox/index.html?code=${compressedCode}`}
+      href={`/sandbox/index.html?code=${processAndCompressForURI(code)}`}
       rel="noreferrer"
       target="_blank"
     >

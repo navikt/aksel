@@ -48,11 +48,11 @@ export default withDsExample(Example, { variant: "static" });
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Man kan manuelt legge til ikoner eller illustrasjoner med egen styling.",
 };
 
 export const args = {
   index: 5,
+  desc: "Man kan manuelt legge til ikoner eller illustrasjoner med egen styling.",
 };
 
 const Innhold = () => (
