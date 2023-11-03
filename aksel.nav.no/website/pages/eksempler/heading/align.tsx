@@ -1,6 +1,14 @@
 import { Heading, VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
+function Descriptor({ children }) {
+  return <p className="mb-3 text-xl font-semibold">{children}</p>;
+}
+
+function Divider() {
+  return <hr className="border-border-subtle" />;
+}
+
 const Example = () => {
   const lorem = "Hva kan vi hjelpe deg med?";
 
@@ -40,11 +48,3 @@ export const Demo = {
 export const args = {
   index: 8,
 };
-
-function Descriptor({ children }) {
-  return <p className="mb-3 text-xl font-semibold">{children}</p>;
-}
-
-function Divider() {
-  return <hr className="border-border-subtle" />;
-}

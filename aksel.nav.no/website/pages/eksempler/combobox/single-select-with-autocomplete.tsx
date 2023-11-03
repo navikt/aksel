@@ -15,7 +15,7 @@ const initialOptions = [
   "The Rise of Skywalker",
 ];
 
-export const Example = () => {
+const Example = () => {
   return (
     <div>
       <UNSAFE_Combobox

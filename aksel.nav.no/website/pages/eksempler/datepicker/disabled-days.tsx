@@ -1,6 +1,9 @@
 import { DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
-import { isFriday } from "date-fns";
+
+const isFriday = (date: Date) => {
+  return date.getDay() === 5;
+};
 
 const Example = () => {
   const disabledDays = [

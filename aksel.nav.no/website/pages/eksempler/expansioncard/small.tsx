@@ -2,43 +2,6 @@ import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const Example = () => {
-  return (
-    <div className="grid gap-6">
-      <ExpansionCard size="small" aria-label="Small-variant">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-      <ExpansionCard size="small" aria-label="Small-variant med description">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
-          <ExpansionCard.Description>
-            Du er registerert som mottaker av sykepenger fra NAV
-          </ExpansionCard.Description>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-    </div>
-  );
-};
-
-export default withDsExample(Example, { variant: "static" });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 2,
-};
-
 const Innhold = () => (
   <>
     <Label as="p" spacing>
@@ -92,3 +55,40 @@ const Innhold = () => (
     </div>
   </>
 );
+
+const Example = () => {
+  return (
+    <div className="grid gap-6">
+      <ExpansionCard size="small" aria-label="Small-variant">
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
+      <ExpansionCard size="small" aria-label="Small-variant med description">
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            Du er registerert som mottaker av sykepenger fra NAV
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
+    </div>
+  );
+};
+
+export default withDsExample(Example, { variant: "static" });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 2,
+};

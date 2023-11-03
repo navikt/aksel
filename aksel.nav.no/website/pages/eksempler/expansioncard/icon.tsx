@@ -2,59 +2,6 @@ import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const Example = () => {
-  return (
-    <div className="subtle-card">
-      <ExpansionCard aria-label="Demo med custom-styling">
-        <ExpansionCard.Header>
-          <div className="with-icon">
-            <div className="icon">
-              <PlantIcon aria-hidden />
-            </div>
-            <div>
-              <ExpansionCard.Title>
-                Utbetaling av sykepenger
-              </ExpansionCard.Title>
-              <ExpansionCard.Description>
-                For at yrkesskadedekningen skal gjelde, er det som hovedregel
-                krav til tid, sted og arbeidsoppgaver
-              </ExpansionCard.Description>
-            </div>
-          </div>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-
-      <style>{`
-        .with-icon {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
-        .icon {
-          font-size: 3rem;
-          flex-shrink: 0;
-          display: grid;
-          place-content: center;
-        }`}</style>
-    </div>
-  );
-};
-
-export default withDsExample(Example, { variant: "static" });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 5,
-  desc: "Man kan manuelt legge til ikoner eller illustrasjoner med egen styling.",
-};
-
 const Innhold = () => (
   <>
     <Label as="p" spacing>
@@ -108,3 +55,56 @@ const Innhold = () => (
     </div>
   </>
 );
+
+const Example = () => {
+  return (
+    <div className="subtle-card">
+      <ExpansionCard aria-label="Demo med custom-styling">
+        <ExpansionCard.Header>
+          <div className="with-icon">
+            <div className="icon">
+              <PlantIcon aria-hidden />
+            </div>
+            <div>
+              <ExpansionCard.Title>
+                Utbetaling av sykepenger
+              </ExpansionCard.Title>
+              <ExpansionCard.Description>
+                For at yrkesskadedekningen skal gjelde, er det som hovedregel
+                krav til tid, sted og arbeidsoppgaver
+              </ExpansionCard.Description>
+            </div>
+          </div>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
+
+      <style>{`
+        .with-icon {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+        .icon {
+          font-size: 3rem;
+          flex-shrink: 0;
+          display: grid;
+          place-content: center;
+        }`}</style>
+    </div>
+  );
+};
+
+export default withDsExample(Example, { variant: "static" });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 5,
+  desc: "Man kan manuelt legge til ikoner eller illustrasjoner med egen styling.",
+};

@@ -2,32 +2,6 @@ import { Hide, Show, HGrid } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import cl from "clsx";
 
-const Example = () => {
-  return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="4">
-      <Show below="md" asChild>
-        <Placeholder mobil text="Synlig bare på mobil" />
-      </Show>
-      <Placeholder text="Alltid synlig" />
-      <Hide below="md" asChild>
-        <Placeholder desktop text="Synlig bare på Desktop" />
-      </Hide>
-    </HGrid>
-  );
-};
-
-export default withDsExample(Example, { showBreakpoints: true });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 2,
-  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
-};
-
 const Placeholder = ({
   text,
   noPadding,
@@ -57,4 +31,30 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+const Example = () => {
+  return (
+    <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+      <Show below="md" asChild>
+        <Placeholder mobil text="Synlig bare på mobil" />
+      </Show>
+      <Placeholder text="Alltid synlig" />
+      <Hide below="md" asChild>
+        <Placeholder desktop text="Synlig bare på Desktop" />
+      </Hide>
+    </HGrid>
+  );
+};
+
+export default withDsExample(Example, { showBreakpoints: true });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 2,
+  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
 };

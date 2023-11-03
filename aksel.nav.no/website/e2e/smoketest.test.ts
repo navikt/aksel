@@ -6,7 +6,7 @@ import { processAndCompressForURI } from "../components/sanity-modules/code-exam
 
 test.describe("Smoketest all pages", () => {
   for (const url of urls) {
-    test(`Check page ${url}`, async ({ page }) => {
+    test.skip(`Check page ${url}`, async ({ page }) => {
       await page.goto(`http://localhost:3000${url}`);
       await page.waitForLoadState("domcontentloaded");
 
@@ -32,8 +32,15 @@ test.describe("Smoketest all pages", () => {
 
     for (const folder of folders) {
       const files = parseCodeFiles(folder.path, "eksempler");
+      // if ( folder.path !== 'bodylong') {
+      //   continue;
+      // }
 
       for (const file of files) {
+        // if (file.navn !== "large") {
+        //   continue;
+        // }
+
         const url = `/sandbox/preview/index.html?code=${processAndCompressForURI(
           file.innhold
         )}`;

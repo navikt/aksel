@@ -1,6 +1,14 @@
 import { BodyLong, VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
+function Descriptor({ children }) {
+  return <p className="mb-3 text-xl font-semibold">{children}</p>;
+}
+
+function Divider() {
+  return <hr className="border-border-subtle" />;
+}
+
 const Example = () => {
   const lorem =
     "Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.";
@@ -30,11 +38,3 @@ export const Demo = {
 export const args = {
   index: 6,
 };
-
-function Descriptor({ children }) {
-  return <p className="mb-3 text-xl font-semibold">{children}</p>;
-}
-
-function Divider() {
-  return <hr className="border-border-subtle" />;
-}

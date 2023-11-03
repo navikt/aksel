@@ -16,7 +16,7 @@ const initialOptions = [
   "wine",
 ];
 
-export const Example = () => {
+const Example = () => {
   return (
     <div>
       <UNSAFE_Combobox

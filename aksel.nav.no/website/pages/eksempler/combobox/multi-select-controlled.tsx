@@ -21,7 +21,7 @@ const initialOptions = [
 
 const initialSelectedOptions = ["Norge"];
 
-export const Example = () => {
+const Example = () => {
   const [value, setValue] = useState("");
   const mockPersistUserAddedValues = (option, isSelected) => {
     console.log("custom option", { option, isSelected });

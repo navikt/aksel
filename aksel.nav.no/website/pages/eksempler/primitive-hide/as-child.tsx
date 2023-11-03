@@ -2,29 +2,6 @@ import { HGrid, Hide } from "@navikt/ds-react";
 import cl from "clsx";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const Example = () => {
-  return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="4">
-      <Hide above="md" asChild>
-        <Placeholder mobil text="Synlig bare på mobil" />
-      </Hide>
-      <Placeholder text="Alltid synlig" />
-    </HGrid>
-  );
-};
-
-export default withDsExample(Example, { showBreakpoints: true });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 0,
-  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at Hide + child-komponent skal fungere må child kunne ta inn 'className' og 'style' som prop.",
-};
-
 const Placeholder = ({
   text,
   noPadding,
@@ -54,4 +31,27 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+const Example = () => {
+  return (
+    <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+      <Hide above="md" asChild>
+        <Placeholder mobil text="Synlig bare på mobil" />
+      </Hide>
+      <Placeholder text="Alltid synlig" />
+    </HGrid>
+  );
+};
+
+export default withDsExample(Example, { showBreakpoints: true });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 0,
+  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at Hide + child-komponent skal fungere må child kunne ta inn 'className' og 'style' som prop.",
 };

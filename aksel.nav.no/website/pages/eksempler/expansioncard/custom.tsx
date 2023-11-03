@@ -2,44 +2,6 @@ import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const Example = () => {
-  return (
-    <div className="subtle-card">
-      <ExpansionCard aria-label="Demo med custom-styling">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
-          <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
-          </ExpansionCard.Description>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-
-      <style>{`
-        .subtle-card {
-          --ac-expansioncard-bg: var(--a-deepblue-50);
-          --ac-expansioncard-border-open-color: var(--a-border-alt-3);
-          --ac-expansioncard-border-hover-color: var(--a-border-alt-3);
-        }`}</style>
-    </div>
-  );
-};
-
-export default withDsExample(Example, { variant: "static" });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 4,
-  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser.",
-};
-
 const Innhold = () => (
   <>
     <Label as="p" spacing>
@@ -93,3 +55,41 @@ const Innhold = () => (
     </div>
   </>
 );
+
+const Example = () => {
+  return (
+    <div className="subtle-card">
+      <ExpansionCard aria-label="Demo med custom-styling">
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+          <ExpansionCard.Description>
+            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
+            til tid, sted og arbeidsoppgaver
+          </ExpansionCard.Description>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
+
+      <style>{`
+        .subtle-card {
+          --ac-expansioncard-bg: var(--a-deepblue-50);
+          --ac-expansioncard-border-open-color: var(--a-border-alt-3);
+          --ac-expansioncard-border-hover-color: var(--a-border-alt-3);
+        }`}</style>
+    </div>
+  );
+};
+
+export default withDsExample(Example, { variant: "static" });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 4,
+  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser.",
+};

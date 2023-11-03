@@ -1,6 +1,23 @@
 import { HStack, VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
+const Placeholder = ({
+  text,
+  noPadding,
+}: {
+  text?: string;
+  noPadding?: boolean;
+}) => {
+  return (
+    <div
+      className="min-h-4 text-text-on-action h-auto w-auto rounded bg-teal-600 p-2"
+      style={{ padding: noPadding && 0 }}
+    >
+      {text}
+    </div>
+  );
+};
+
 const Example = () => {
   return (
     <div className="bg-deepblue-50">
@@ -60,21 +77,4 @@ export const Demo = {
 export const args = {
   index: 1,
   desc: "Endrer 'align-items'.",
-};
-
-const Placeholder = ({
-  text,
-  noPadding,
-}: {
-  text?: string;
-  noPadding?: boolean;
-}) => {
-  return (
-    <div
-      className="min-h-4 text-text-on-action h-auto w-auto rounded bg-teal-600 p-2"
-      style={{ padding: noPadding && 0 }}
-    >
-      {text}
-    </div>
-  );
 };
