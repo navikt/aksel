@@ -34,7 +34,15 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
         iframeId
       ) as HTMLIFrameElement;
       const exampleIframeDOM = exampleIframe?.contentDocument;
-      const exampleWrapper = exampleIframeDOM?.getElementById("ds-example");
+
+      let exampleWrapper: HTMLElement;
+
+      if (node.dir.variant === "templates") {
+        exampleWrapper = exampleIframeDOM?.getElementById("__next");
+      } else {
+        exampleWrapper = exampleIframeDOM?.getElementById("ds-example");
+      }
+
       if (exampleWrapper && exampleWrapper.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
         clearInterval(waitForExampleContentToRender);
@@ -85,6 +93,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
   }
 
   const active = activeExample ?? node?.dir?.filer?.[0]?.navn;
+  const demoVariant = node.dir?.variant;
 
   return (
     <div>
@@ -107,7 +116,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   );
                 }}
               >
-                {fixName(fil.navn)}
+                {fixName(fil.title)}
               </Chips.Toggle>
             );
           })}
@@ -138,7 +147,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   )}
                 >
                   <iframe
-                    src={`/eksempler/${node.dir.title}/${fil.navn.replace(
+                    src={`/${demoVariant}/${node.dir.title}/${fil.navn.replace(
                       ".tsx",
                       ""
                     )}`}
@@ -148,7 +157,10 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                     aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
                     className={cl(
                       "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
-                      { invisible: unloaded }
+                      {
+                        invisible: unloaded,
+                        "p-6": demoVariant === "templates",
+                      }
                     )}
                     title="Kode-eksempler"
                     ref={iframeRef}
@@ -199,10 +211,9 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                         target="_blank"
                         className="si-ignore"
                         as="a"
-                        href={`/eksempler/${node.dir.title}/${fil.navn.replace(
-                          ".tsx",
-                          ""
-                        )}`}
+                        href={`/${demoVariant}/${
+                          node.dir.title
+                        }/${fil.navn.replace(".tsx", "")}`}
                       />
                     </HStack>
                   </HStack>
