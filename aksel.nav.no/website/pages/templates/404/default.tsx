@@ -1,21 +1,5 @@
-import { BugIcon } from "@navikt/aksel-icons";
-import {
-  BodyShort,
-  Box,
-  Button,
-  HGrid,
-  Heading,
-  Link,
-  List,
-  VStack,
-} from "@navikt/ds-react";
+import { BodyShort, Box, HGrid, Heading, Link, List } from "@navikt/ds-react";
 
-/**
- * TODO: varianter
- * Med/uten CTA-knapp til privat/samarbeid/arbeid ++
- * Feilrapporterings-lenke
- * Feilemelding på engelsk, kan fjernes hvis den er på engelsk
- */
 export default function Example() {
   const styles = `
   /* Må justeres basert på app inkludert header og footer  */
@@ -24,7 +8,6 @@ export default function Example() {
   }
 
   /* Malen skal sentreres på siden med en maksbredde satt.  */
-  /* Ligger i roadmap å lage ny Primitiv for dette. */
   .app-container__layout {
     max-width: 1024px;
     margin-inline: auto;
@@ -33,12 +16,15 @@ export default function Example() {
 
   return (
     <>
+      {/* Stiler bør trekkes ut i eget stylesheet, evt erstatte med tailwind */}
       <style>{styles}</style>
       {/* Header og Footer bør være inkludert i Mal */}
       {/* <Header /> */}
       <Box
+        data-aksel-template="404"
         className="app-container"
         paddingBlock="20"
+        /* Horisontal padding kan måtte justeres basert på layout */
         paddingInline={{ xs: "4", sm: "6" }}
         as="main"
       >
@@ -47,42 +33,21 @@ export default function Example() {
           columns={{ md: 1, lg: 2 }}
           className="app-container__layout"
         >
-          <VStack gap="16">
-            <VStack gap="12" align="start">
-              <div>
-                <Heading level="1" size="large" spacing>
-                  Beklager, vi fant ikke siden
-                </Heading>
-                <BodyShort>
-                  Denne siden kan være slettet, flyttet eller det er en feil i
-                  lenken
-                </BodyShort>
-                <List>
-                  <List.Item>Bruk gjerne søket eller menyen</List.Item>
-                  <List.Item>
-                    <Link href="#">Gå til forsiden</Link>
-                  </List.Item>
-                </List>
-              </div>
-              <Button>Gå til arbeidsgiversiden</Button>
-              <Link href="#">
-                <BugIcon aria-hidden />
-                Meld gjerne fra om at lenken ikke virker
-              </Link>
-            </VStack>
-            <div>
-              <Heading level="2" size="large" spacing>
-                Page not found
-              </Heading>
-              <BodyShort spacing>
-                The page you requested cannot be found.
-              </BodyShort>
-              <BodyShort>
-                Go to the <Link href="#">front page</Link>, or use one of the
-                links in the menu.
-              </BodyShort>
-            </div>
-          </VStack>
+          <div>
+            <Heading level="1" size="large" spacing>
+              Beklager, vi fant ikke siden
+            </Heading>
+            <BodyShort>
+              Denne siden kan være slettet, flyttet eller det er en feil i
+              lenken
+            </BodyShort>
+            <List>
+              <List.Item>Bruk gjerne søket eller menyen</List.Item>
+              <List.Item>
+                <Link href="#">Gå til forsiden</Link>
+              </List.Item>
+            </List>
+          </div>
           <StatusSvg />
         </HGrid>
       </Box>
@@ -133,7 +98,7 @@ function StatusSvg() {
 }
 
 export const args = {
-  index: 1,
-  title: "Med søk",
-  desc: "abc",
+  index: 0,
+  title: "Enkel",
+  desc: "I sin enkleste form skal 404-side inneholde en tittel, feilmelding, løsningsforslag og illustrasjon.",
 };
