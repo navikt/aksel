@@ -1,44 +1,102 @@
 import { BugIcon } from "@navikt/aksel-icons";
-import { BodyShort, Box, Button, Heading, Link, List } from "@navikt/ds-react";
+import {
+  BodyShort,
+  Box,
+  Button,
+  HGrid,
+  Heading,
+  Link,
+  List,
+  VStack,
+} from "@navikt/ds-react";
 
+/**
+ * TODO: varianter
+ * Med/uten CTA-knapp til privat/samarbeid/arbeid ++
+ * Feilrapporterings-lenke
+ * Feilemelding på engelsk, kan fjernes hvis den er på engelsk
+ */
 export default function Example() {
+  const styles = `
+  /* Må justeres basert på app inkludert header og footer  */
+  .app-container {
+    min-height: 80dvh;
+  }
+
+  /* Malen skal sentreres på siden med en maksbredde satt.  */
+  /* Ligger i roadmap å lage ny Primitiv for dette. */
+  .app-container__layout {
+    max-width: 1024px;
+    margin-inline: auto;
+  }
+  `;
+
   return (
-    <Box padding="8">
-      <Heading level="1" size="large" spacing>
-        Beklager, vi fant ikke siden
-      </Heading>
-      <BodyShort>
-        Denne siden kan være slettet, flyttet eller det er en feil i lenken
-      </BodyShort>
-      <List>
-        <List.Item>Bruk gjerne søket eller menyen</List.Item>
-        <List.Item>
-          <Link href="#">Gå til forsiden</Link>
-        </List.Item>
-      </List>
-      <Button>Gå til arbeidsgiversiden</Button>
-      <Link href="#">
-        <BugIcon aria-hidden />
-        Meld gjerne fra om at lenken ikke virker
-      </Link>
-      <Heading level="2" size="large" spacing>
-        Page not found
-      </Heading>
-      <BodyShort spacing>The page you requested cannot be found.</BodyShort>
-      <BodyShort>
-        Go to the <Link href="#">front page</Link>, or use one of the links in
-        the menu.
-      </BodyShort>
-      <StatusSvg />
-    </Box>
+    <>
+      <style>{styles}</style>
+      {/* Header og Footer bør være inkludert i Mal */}
+      {/* <Header /> */}
+      <Box
+        className="app-container"
+        paddingBlock="20"
+        paddingInline={{ xs: "4", sm: "6" }}
+        as="main"
+      >
+        <HGrid
+          gap="12"
+          columns={{ md: 1, lg: 2 }}
+          className="app-container__layout"
+        >
+          <VStack gap="16">
+            <VStack gap="12" align="start">
+              <div>
+                <Heading level="1" size="large" spacing>
+                  Beklager, vi fant ikke siden
+                </Heading>
+                <BodyShort>
+                  Denne siden kan være slettet, flyttet eller det er en feil i
+                  lenken
+                </BodyShort>
+                <List>
+                  <List.Item>Bruk gjerne søket eller menyen</List.Item>
+                  <List.Item>
+                    <Link href="#">Gå til forsiden</Link>
+                  </List.Item>
+                </List>
+              </div>
+              <Button>Gå til arbeidsgiversiden</Button>
+              <Link href="#">
+                <BugIcon aria-hidden />
+                Meld gjerne fra om at lenken ikke virker
+              </Link>
+            </VStack>
+            <div>
+              <Heading level="2" size="large" spacing>
+                Page not found
+              </Heading>
+              <BodyShort spacing>
+                The page you requested cannot be found.
+              </BodyShort>
+              <BodyShort>
+                Go to the <Link href="#">front page</Link>, or use one of the
+                links in the menu.
+              </BodyShort>
+            </div>
+          </VStack>
+          <StatusSvg />
+        </HGrid>
+      </Box>
+      {/* Header og Footer bør være inkludert i Mal */}
+      {/* <Footer /> */}
+    </>
   );
 }
 
 function StatusSvg() {
   return (
     <svg
-      width="550"
-      height="340"
+      width="min(100%, 500px)"
+      height="100%"
       viewBox="0 0 550 340"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -74,9 +132,8 @@ function StatusSvg() {
   );
 }
 
-/* const args = {
+export const args = {
   index: 1,
   title: "Med søk",
   desc: "abc",
 };
- */
