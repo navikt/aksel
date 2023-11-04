@@ -1,0 +1,5 @@
+.navds-frame {
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  max-width: var(--__ac-frame-width);
+  margin-inline: auto;
+}
