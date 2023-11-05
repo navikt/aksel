@@ -1,0 +1,12 @@
+.navds-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.navds-page--grow {
+  flex-grow: 1;
+}
+
+.navds-page--fullheight {
+  min-height: 100lvh;
+}
