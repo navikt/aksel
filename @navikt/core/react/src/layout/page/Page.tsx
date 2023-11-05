@@ -1,12 +1,7 @@
+import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import cl from "clsx";
 import React, { forwardRef } from "react";
-
-/* const widthLookup = {
-  content: "768px",
-  laptop: "1280px",
-  "laptop-xl": "1440px",
-  desktop: "1920px",
-}; */
+import { PageBlock } from "./parts/PageBlock";
 
 /**
  * TODO: Legge til støtte for HTMLBodyElement i `as`
@@ -17,6 +12,10 @@ export interface PageProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "div"
    */
   as?: "div";
+  /** Background color. Accepts a color token.
+   * @default bg-default
+   */
+  background?: keyof typeof bgColors.a;
   /**
    * Allows automatic positioning of footer
    */
@@ -25,6 +24,13 @@ export interface PageProps extends React.HTMLAttributes<HTMLDivElement> {
    * Makes sure to place footer below fold
    */
   footerPosition?: "belowFold";
+}
+
+interface PageComponent
+  extends React.ForwardRefExoticComponent<
+    PageProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Block: typeof PageBlock;
 }
 
 export const Page = forwardRef<HTMLDivElement, PageProps>(
@@ -36,12 +42,14 @@ export const Page = forwardRef<HTMLDivElement, PageProps>(
       footer,
       children,
       footerPosition,
+      background = "bg-default",
       ...rest
     },
     ref
   ) => {
     const style: React.CSSProperties = {
       ..._style,
+      "--__ac-page-background": `var(--a-${background})`,
     };
 
     const belowFold = footerPosition === "belowFold";
@@ -65,4 +73,8 @@ export const Page = forwardRef<HTMLDivElement, PageProps>(
       </Component>
     );
   }
-);
+) as PageComponent;
+
+Page.Block = PageBlock;
+
+export default Page;

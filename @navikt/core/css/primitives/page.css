@@ -1,6 +1,8 @@
 .navds-page {
   display: flex;
   flex-direction: column;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  background-color: var(--__ac-page-background);
 }
 
 .navds-page--grow {
@@ -9,4 +11,36 @@
 
 .navds-page--fullheight {
   min-height: 100lvh;
+}
+
+.navds-pageblock--gutters {
+  padding-inline: 1rem;
+}
+
+@media (min-width: 768px) {
+  .navds-pageblock--gutters {
+    padding-inline: 3rem;
+  }
+}
+
+/* Page.Block */
+.navds-pageblock {
+  margin-inline: auto;
+  width: 100%;
+}
+
+.navds-pageblock--content {
+  max-width: 768px;
+}
+
+.navds-pageblock--laptop {
+  max-width: 1280px;
+}
+
+.navds-pageblock--laptop-xl {
+  max-width: 1440px;
+}
+
+.navds-pageblock--desktop {
+  max-width: 1920px;
 }
