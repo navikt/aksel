@@ -2,11 +2,11 @@ import type { Meta } from "@storybook/react";
 import React from "react";
 import { BodyLong, Heading } from "../../typography";
 import { Box } from "../box";
-import { Frame } from "./Frame";
+import { Page } from "./Page";
 
-const meta: Meta<typeof Frame> = {
-  title: "ds-react/Primitives/Frame",
-  component: Frame,
+const meta: Meta<typeof Page> = {
+  title: "ds-react/Primitives/Page",
+  component: Page,
   parameters: {
     layout: "fullscreen",
   },
@@ -15,7 +15,7 @@ const meta: Meta<typeof Frame> = {
 export default meta;
 
 export const Default = () => (
-  <Frame width="laptop">
+  <Page width="laptop">
     <Box padding="4" background="surface-subtle">
       <Heading level="1" size="xlarge" spacing>
         Heading
@@ -27,5 +27,5 @@ export const Default = () => (
         dignissimos?
       </BodyLong>
     </Box>
-  </Frame>
+  </Page>
 );
