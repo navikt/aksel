@@ -5,7 +5,7 @@ import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-file
 
 test.describe("Smoketest all pages", () => {
   for (const url of urls) {
-    test.skip(`Check page ${url}`, async ({ page }) => {
+    test(`Check page ${url}`, async ({ page }) => {
       await page.goto(`http://localhost:3000${url}`);
       await page.waitForLoadState("domcontentloaded");
 
