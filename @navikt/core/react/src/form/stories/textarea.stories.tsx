@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
+import { Button } from "../../button";
 import { Textarea } from "../index";
 
 const meta: Meta<typeof Textarea> = {
@@ -120,6 +121,45 @@ export const Readonly = () => {
         value="Denne vurderingen ble gjort på grunnlag av X og Y"
         error="feilmelding"
       />
+    </div>
+  );
+};
+
+export const AutoScrollbar = () => {
+  return (
+    <div style={{ display: "flex", gap: "6rem" }}>
+      <div style={{ border: "1px dashed gray", height: "60vh" }}>
+        <Textarea
+          resize
+          label="Without display:flex on parent"
+          description="TODO remove?"
+          maxLength={30}
+          autoScrollbar
+        />
+        <Button>Send</Button>
+      </div>
+      <div
+        style={{
+          border: "1px solid lightGreen",
+          height: "90vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ border: "1px dashed gray" }}>
+          <h1>Header</h1>
+        </div>
+        <Textarea
+          resize
+          label="With display:flex on parent"
+          description="Foo bar"
+          maxLength={30}
+          autoScrollbar
+        />
+        <div style={{ border: "1px dashed gray" }}>
+          <Button>Send</Button>
+        </div>
+      </div>
     </div>
   );
 };

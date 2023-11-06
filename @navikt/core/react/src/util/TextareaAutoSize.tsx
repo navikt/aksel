@@ -30,11 +30,24 @@ interface TextareaAutosizeProps
    * @default 1
    */
   minRows?: number;
+  /**
+   * TODO: Write desc and maybe find better name
+   */
+  autoScrollbar?: boolean;
 }
 
 const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
   (
-    { className, onChange, maxRows, minRows = 1, style, value, ...other },
+    {
+      className,
+      onChange,
+      maxRows,
+      minRows = 1,
+      autoScrollbar,
+      style,
+      value,
+      ...other
+    },
     ref
   ) => {
     const { current: isControlled } = useRef(value != null);
@@ -215,10 +228,11 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
           // Apply the rows prop to get a "correct" first SSR paint
           rows={minRows}
           style={{
-            height: state.outerHeightStyle,
+            [/*autoScrollbar ? "maxHeight" : */ "height"]:
+              state.outerHeightStyle,
             // Need a large enough difference to allow scrolling.
             // This prevents infinite rendering loop.
-            ...(state.overflow ? { overflow: "hidden" } : {}),
+            ...(state.overflow && !autoScrollbar ? { overflow: "hidden" } : {}),
             ...style,
           }}
           {...other}

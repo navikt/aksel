@@ -1,10 +1,10 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label } from "../typography";
-import TextareaAutosize from "../util/TextareaAutoSize";
-import { FormFieldProps, useFormField } from "./useFormField";
-import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import { omit, useId } from "../util";
+import TextareaAutosize from "../util/TextareaAutoSize";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
+import { FormFieldProps, useFormField } from "./useFormField";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -47,10 +47,15 @@ export interface TextareaProps
    */
   resize?: boolean;
   /**
+   * Textarea will stopp growing and get a scrollbar when there's no more room to grow.
+   * Requires `display:flex` on the parent.
+   */
+  autoScrollbar?: boolean;
+  /**
    * i18n-translations for counter-text
    */
   i18n?: {
-    /** @default Antall tegn igjen */
+    /** @default tegn igjen */
     counterLeft?: string;
     /** @default tegn for mye */
     counterTooMuch?: string;
@@ -86,6 +91,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       maxLength,
       hideLabel = false,
       resize,
+      autoScrollbar,
       i18n,
       readOnly,
       ...rest
@@ -122,6 +128,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-textarea--readonly": readOnly,
             "navds-textarea--error": hasError,
             "navds-textarea--resize": resize,
+            "navds-textarea--autoscrollbar": autoScrollbar,
           }
         )}
       >
@@ -147,42 +154,38 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             {description}
           </BodyShort>
         )}
-        <div className="navds-textarea__wrapper">
-          <TextareaAutosize
-            {...omit(rest, ["error", "errorId", "size"])}
-            {...inputProps}
-            onChange={(e) =>
-              props.onChange
-                ? props.onChange(e)
-                : setControlledValue(e.target.value)
-            }
-            minRows={getMinRows()}
-            ref={ref}
-            readOnly={readOnly}
-            className={cl(
-              "navds-textarea__input",
-              "navds-body-short",
-              `navds-body-short--${size ?? "medium"}`,
-              {
-                "navds-textarea--counter": hasMaxLength,
-              }
-            )}
-            {...(describedBy ? { "aria-describedby": describedBy } : {})}
-          />
-          {hasMaxLength && (
-            <>
-              <span id={maxLengthId} className="navds-sr-only">
-                {`Tekstområde med plass til ${maxLength} tegn.`}
-              </span>
-              <Counter
-                maxLength={maxLength}
-                currentLength={props.value?.length ?? controlledValue?.length}
-                size={size}
-                i18n={i18n}
-              />
-            </>
+        <TextareaAutosize
+          {...omit(rest, ["error", "errorId", "size"])}
+          {...inputProps}
+          onChange={(e) =>
+            props.onChange
+              ? props.onChange(e)
+              : setControlledValue(e.target.value)
+          }
+          minRows={getMinRows()}
+          autoScrollbar={autoScrollbar}
+          ref={ref}
+          readOnly={readOnly}
+          className={cl(
+            "navds-textarea__input",
+            "navds-body-short",
+            `navds-body-short--${size ?? "medium"}`
           )}
-        </div>
+          {...(describedBy ? { "aria-describedby": describedBy } : {})}
+        />
+        {hasMaxLength && (
+          <>
+            <span id={maxLengthId} className="navds-sr-only">
+              {`Tekstområde med plass til ${maxLength} tegn.`}
+            </span>
+            <Counter
+              maxLength={maxLength}
+              currentLength={props.value?.length ?? controlledValue?.length}
+              size={size}
+              i18n={i18n}
+            />
+          </>
+        )}
         <div
           className="navds-form-field__error"
           id={errorId}
@@ -198,7 +201,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   }
 );
 
-export const Counter = ({ maxLength, currentLength, size, i18n }) => {
+interface CounterProps {
+  maxLength: number;
+  currentLength: number;
+  size: TextareaProps["size"];
+  i18n: TextareaProps["i18n"];
+}
+const Counter = ({ maxLength, currentLength, size, i18n }: CounterProps) => {
   const difference = maxLength - currentLength;
 
   return (
@@ -206,7 +215,7 @@ export const Counter = ({ maxLength, currentLength, size, i18n }) => {
       className={cl("navds-textarea__counter", {
         "navds-textarea__counter--error": difference < 0,
       })}
-      aria-live={difference < 20 ? "polite" : "off"}
+      role={difference < 20 ? "status" : undefined}
       size={size}
     >
       {difference < 0
