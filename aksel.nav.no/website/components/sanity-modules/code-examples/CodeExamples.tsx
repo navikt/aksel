@@ -201,7 +201,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                       </HStack>
                     </div>
 
-                    <HStack gap="2" align="baseline">
+                    <HStack gap="2">
                       {fil?.sandboxEnabled && (
                         <Sandbox code={fil?.sandboxBase64} />
                       )}
