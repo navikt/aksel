@@ -1,6 +1,7 @@
 .navds-page {
   display: flex;
   flex-direction: column;
+  min-height: 100lvh;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   background-color: var(--__ac-page-background);
 }
@@ -11,6 +12,10 @@
 
 .navds-page--fullheight {
   min-height: 100lvh;
+}
+
+.navds-page--padding {
+  padding-block-end: var(--a-spacing-16);
 }
 
 .navds-pageblock--gutters {
@@ -29,10 +34,6 @@
   width: 100%;
 }
 
-.navds-pageblock--content {
-  max-width: 768px;
-}
-
 .navds-pageblock--laptop {
   max-width: 1280px;
 }
@@ -43,4 +44,8 @@
 
 .navds-pageblock--desktop {
   max-width: 1920px;
+}
+
+.navds-pageblock--full {
+  max-width: 100%;
 }
