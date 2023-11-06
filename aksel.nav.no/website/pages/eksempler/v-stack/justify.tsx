@@ -18,6 +18,10 @@ const Placeholder = ({
   );
 };
 
+const Divider = () => {
+  return <hr className="border-r-border-divider m-0 h-full border-r" />;
+};
+
 const Example = () => {
   return (
     <div className="bg-deepblue-50 flex h-72">
@@ -65,8 +69,4 @@ export const Demo = {
 export const args = {
   index: 2,
   desc: "Endrer 'justify-content'.",
-};
-
-const Divider = () => {
-  return <hr className="border-r-border-divider m-0 h-full border-r" />;
 };
