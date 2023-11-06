@@ -84,4 +84,5 @@ export const Demo = {
 export const args = {
   index: 4,
   desc: "Show gjør det enklere å konsistent utføre layout-endringer ved konkrete brekkpunkt",
+  sandbox: false,
 };

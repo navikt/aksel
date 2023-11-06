@@ -2,7 +2,6 @@ import { test, expect } from "@playwright/test";
 import urls from "./test-urls.json";
 import { getDirectories } from "../scripts/update-examples/parts/get-directories";
 import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-files";
-import { processAndCompressForURI } from "../components/sanity-modules/code-examples/parts/Sandbox";
 
 test.describe("Smoketest all pages", () => {
   for (const url of urls) {
@@ -32,18 +31,12 @@ test.describe("Smoketest all pages", () => {
 
     for (const folder of folders) {
       const files = parseCodeFiles(folder.path, "eksempler");
-      // if ( folder.path !== 'bodylong') {
-      //   continue;
-      // }
-
       for (const file of files) {
-        // if (file.navn !== "large") {
-        //   continue;
-        // }
+        if (!file.sandboxEnabled) {
+          continue;
+        }
 
-        const url = `/sandbox/preview/index.html?code=${processAndCompressForURI(
-          file.innhold
-        )}`;
+        const url = `/sandbox/preview/index.html?code=${file.sandboxBase64}`;
 
         test(`check ${folder.path} - ${file.navn}`, async ({ page }) => {
           await page.goto(`http://localhost:3000${url}`);

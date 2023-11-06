@@ -54,4 +54,5 @@ export const Demo = {
 export const args = {
   index: 0,
   desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at Show + child-komponent skal fungere må child kunne ta inn 'className' og 'style' som prop.",
+  sandbox: false,
 };

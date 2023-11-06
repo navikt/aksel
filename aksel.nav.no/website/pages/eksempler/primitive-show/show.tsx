@@ -54,4 +54,5 @@ export const Demo = {
 export const args = {
   index: 1,
   desc: "Endre størrelse på nettleservindu for å se komponent i aksjon",
+  sandbox: false,
 };

@@ -19,4 +19,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
+  sandbox: false,
 };

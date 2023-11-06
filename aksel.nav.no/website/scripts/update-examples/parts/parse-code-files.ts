@@ -4,6 +4,7 @@ import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
 import { filterCode } from "./filter-code";
 import { sortResult } from "./sort";
+import { processAndCompressForURI } from "./sandbox-process-base64";
 
 export function parseCodeFiles(
   dirName: string,
@@ -37,6 +38,8 @@ export function parseCodeFiles(
       navn: args?.title ?? file.replace(".tsx", ""),
       description: args?.desc,
       index: args?.index ?? 1,
+      sandboxBase64: processAndCompressForURI(filterCode(code)),
+      sandboxEnabled: args?.sandbox ?? true,
     };
   });
 

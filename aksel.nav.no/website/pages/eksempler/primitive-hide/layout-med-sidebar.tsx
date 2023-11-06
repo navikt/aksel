@@ -140,4 +140,5 @@ export const Demo = {
 export const args = {
   index: 2,
   desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
+  sandbox: false,
 };

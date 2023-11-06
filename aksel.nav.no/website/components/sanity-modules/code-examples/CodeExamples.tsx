@@ -190,7 +190,9 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                     </div>
 
                     <HStack gap="2" align="baseline">
-                      <Sandbox code={fil.innhold.trim()} />
+                      {fil?.sandboxEnabled && (
+                        <Sandbox code={fil?.sandboxBase64} />
+                      )}
                       <CodeSandbox code={fil.innhold.trim()} />
                       <Button
                         variant="tertiary-neutral"
