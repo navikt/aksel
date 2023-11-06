@@ -200,7 +200,7 @@ export const StorybookIcon = ({ ...props }) => (
   </svg>
 );
 
-export const CubeIcon = ({ ...props }) => (
+export const CodeSandboxLogo = ({ ...props }) => (
   <svg
     width="24"
     height="24"

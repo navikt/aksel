@@ -1,6 +1,6 @@
 import { Button } from "@navikt/ds-react";
 import { getParameters } from "codesandbox/lib/api/define";
-import { CubeIcon } from "components/assets";
+import { CodeSandboxLogo } from "components/assets";
 
 const indexTsx = `import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -58,9 +58,10 @@ export const CodeSandbox = ({ code }: { code: string }) => {
       <Button
         variant="tertiary-neutral"
         size="small"
+        aria-label="Codesandbox"
         type="submit"
-        icon={<CubeIcon aria-hidden />}
-      ></Button>
+        icon={<CodeSandboxLogo aria-hidden />}
+      />
     </form>
   );
 };
