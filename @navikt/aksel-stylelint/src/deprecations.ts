@@ -50,4 +50,8 @@ export const deprecations: DeprecatedList = [
     message:
       "There is no 1:1 replacement for this, the size will depend on the 'poster' prop and the viewport width",
   },
+  {
+    classes: ["navds-textarea__wrapper"],
+    message: "Removed in v TODO",
+  },
 ];
