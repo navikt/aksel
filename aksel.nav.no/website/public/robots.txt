@@ -17,6 +17,7 @@ Disallow: /*_ssgManifest.js$
 Disallow: /*.js$
 
 Disallow: /eksempler
+Disallow: /templates
 Disallow: /admin
 
 Sitemap: https://aksel.nav.no/sitemap.xml

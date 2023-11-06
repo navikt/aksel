@@ -35,7 +35,8 @@ export function parseCodeFiles(
 
     return {
       innhold: code,
-      navn: args?.title ?? file.replace(".tsx", ""),
+      title: args?.title ?? file.replace(".tsx", ""),
+      navn: file.replace(".tsx", ""),
       description: args?.desc,
       index: args?.index ?? 1,
       sandboxBase64: processAndCompressForURI(filterCode(code)),
