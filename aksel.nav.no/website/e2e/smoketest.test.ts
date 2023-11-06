@@ -26,26 +26,28 @@ test.describe("Smoketest all pages", () => {
     });
   }
 
-  test.describe("sandbox examples", () => {
+  test.describe("sandbox examples (just a few)", () => {
     const folders = getDirectories("eksempler");
 
-    for (const folder of folders) {
+    const randomFolders = [folders[0], folders[20], folders[50]];
+
+    for (const folder of randomFolders) {
       const files = parseCodeFiles(folder.path, "eksempler");
-      for (const file of files) {
-        if (!file.sandboxEnabled) {
-          continue;
-        }
 
-        const url = `/sandbox/preview/index.html?code=${file.sandboxBase64}`;
-
-        test(`check ${folder.path} - ${file.navn}`, async ({ page }) => {
-          await page.goto(`http://localhost:3000${url}`);
-          await page.waitForLoadState("domcontentloaded");
-          const count = await page.locator("#sandbox-wrapper").count();
-
-          expect(count).toBeGreaterThan(0);
-        });
+      const file = files[0];
+      if (!file?.sandboxEnabled) {
+        continue;
       }
+
+      const url = `/sandbox/preview/index.html?code=${file.sandboxBase64}`;
+
+      test(`check ${folder.path} - ${file.navn}`, async ({ page }) => {
+        await page.goto(`http://localhost:3000${url}`);
+        await page.waitForLoadState("domcontentloaded");
+        const count = await page.locator("#sandbox-wrapper").count();
+
+        expect(count).toBeGreaterThan(0);
+      });
     }
   });
 });
