@@ -3,7 +3,10 @@ import { getDirectories } from "../scripts/update-examples/parts/get-directories
 import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-files";
 
 test.describe("sandbox examples (all)", () => {
-  const folders = getDirectories("eksempler");
+  const examples = getDirectories("eksempler");
+  const templates = getDirectories("templates");
+
+  const folders = [...examples, ...templates];
 
   for (const folder of folders) {
     const files = parseCodeFiles(folder.path, "eksempler");

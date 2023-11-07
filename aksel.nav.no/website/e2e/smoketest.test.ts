@@ -27,7 +27,10 @@ test.describe("Smoketest all pages", () => {
   }
 
   test.describe("sandbox examples (just a few)", () => {
-    const folders = getDirectories("eksempler");
+    const examples = getDirectories("eksempler");
+    const templates = getDirectories("templates");
+
+    const folders = [...examples, ...templates];
 
     const randomFolders = [folders[0], folders[20], folders[50]];
 
@@ -43,7 +46,7 @@ test.describe("Smoketest all pages", () => {
 
       test(`check ${folder.path} - ${file.navn}`, async ({ page }) => {
         await page.goto(`http://localhost:3000${url}`);
-        await page.waitForLoadState("domcontentloaded");
+        // await page.waitForLoadState("domcontentloaded");
         const count = await page.locator("#sandbox-wrapper").count();
 
         expect(count).toBeGreaterThan(0);
