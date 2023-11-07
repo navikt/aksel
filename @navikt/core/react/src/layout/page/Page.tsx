@@ -25,8 +25,9 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
   footerPosition?: "belowFold";
   /**
    * Adds a standardised padding of 4rem between content and footer
+   * @default block-end
    */
-  contentPadding?: boolean;
+  contentBlockPadding?: "end" | "none";
 }
 
 interface PageComponentType
@@ -45,7 +46,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
         children,
         footerPosition,
         background = "bg-default",
-        contentPadding,
+        contentBlockPadding = "end",
         ...rest
       },
       ref
@@ -66,9 +67,9 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
         >
           <div
             className={cl({
-              "navds-page--fullheight": belowFold,
-              "navds-page--grow": !belowFold,
-              "navds-page--padding": contentPadding,
+              "navds-page__content--fullheight": belowFold,
+              "navds-page__content--grow": !belowFold,
+              "navds-page__content--padding": contentBlockPadding === "end",
             })}
           >
             {children}

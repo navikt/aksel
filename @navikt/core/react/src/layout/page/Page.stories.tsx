@@ -12,26 +12,6 @@ const meta: Meta = {
   parameters: {
     layout: "fullscreen",
   },
-
-  argTypes: {
-    width: {
-      control: "radio",
-      options: widths,
-    },
-    background: {
-      control: "radio",
-      options: Object.keys(bgColors.a),
-    },
-    belowFold: {
-      control: "boolean",
-    },
-    gutters: {
-      control: "boolean",
-    },
-    contentPadding: {
-      control: "boolean",
-    },
-  },
 };
 
 export default meta;
@@ -41,33 +21,54 @@ export const Default: StoryFn = ({
   background,
   width,
   gutters,
-  contentPadding,
+  contentBlockPadding,
 }) => (
   <Page
     footer={<Footer width={width} gutters={gutters} />}
     footerPosition={belowFold ? "belowFold" : undefined}
     background={background}
-    contentPadding={contentPadding}
+    contentBlockPadding={contentBlockPadding}
   >
     <Header width={width} gutters={gutters} />
     <Content width={width} gutters={gutters} />
   </Page>
 );
 
+Default.argTypes = {
+  width: {
+    control: "radio",
+    options: widths,
+  },
+  background: {
+    control: "radio",
+    options: Object.keys(bgColors.a),
+  },
+  belowFold: {
+    control: "boolean",
+  },
+  gutters: {
+    control: "boolean",
+  },
+  contentBlockPadding: {
+    control: "radio",
+    options: ["end", "none"],
+  },
+};
+
 Default.args = {
   belowFold: false,
   gutters: false,
-  contentPadding: false,
+  contentBlockPadding: "end",
 };
 
-export const BelowFold: StoryFn = ({ width, gutters, contentPadding }) => (
+export const BelowFold: StoryFn = () => (
   <Page
-    footer={<Footer width={width} gutters={gutters} />}
+    footer={<Footer />}
     footerPosition="belowFold"
-    contentPadding={contentPadding}
+    contentBlockPadding="end"
   >
-    <Header width={width} gutters={gutters} />
-    <Content width={width} gutters={gutters} />
+    <Header />
+    <Content />
   </Page>
 );
 
@@ -78,10 +79,10 @@ export const Background: StoryFn = () => (
   </VStack>
 );
 
-export const ContentPadding: StoryFn = ({ width = "laptop-xl" }) => (
-  <Page footer={<Footer width={width} gutters />} contentPadding>
-    <Header width={width} gutters />
-    <Page.Block width={width} gutters as="main">
+export const ContentBlockPadding: StoryFn = () => (
+  <Page footer={<Footer width="laptop" gutters />} contentBlockPadding="end">
+    <Header width="laptop" gutters />
+    <Page.Block width="laptop" gutters as="main">
       <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
         Main
       </Box>
@@ -89,10 +90,10 @@ export const ContentPadding: StoryFn = ({ width = "laptop-xl" }) => (
   </Page>
 );
 
-export const Gutters: StoryFn = ({ width = "laptop" }) => (
-  <Page footer={<Footer width={width} gutters />}>
-    <Header width={width} gutters />
-    <Content width={width} gutters />
+export const Gutters: StoryFn = () => (
+  <Page footer={<Footer width="laptop" gutters />}>
+    <Header width="laptop" gutters />
+    <Content width="laptop" gutters />
   </Page>
 );
 
@@ -117,18 +118,15 @@ Gutters.parameters = {
 
 const MILJO_URL = "https://www.nav.no/dekoratoren";
 
-export const WithDecorator: StoryFn = ({
-  width = "laptop",
-  gutters = true,
-}) => {
+export const WithDecorator: StoryFn = () => {
   return (
     <Page
-      contentPadding
+      contentBlockPadding="end"
       footerPosition="belowFold"
       footer={<div id="decorator-footer"></div>}
     >
       <div id="decorator-header"></div>
-      <Content width={width} gutters={gutters} />
+      <Content width="laptop" gutters />
       <div
         id="decorator-env"
         data-src={`${MILJO_URL}/env?context=privatperson`}
@@ -160,7 +158,37 @@ WithDecorator.decorators = [
   },
 ];
 
-function Header({ width, gutters }) {
+export const OutsideBackground = () => {
+  return (
+    <Page
+      contentBlockPadding="end"
+      footer={
+        <Box
+          background="surface-alt-3-subtle"
+          style={{ height: 100 }}
+          as="footer"
+        >
+          <Page.Block width="laptop" gutters>
+            Footer
+          </Page.Block>
+        </Box>
+      }
+    >
+      <Box background="surface-alt-1-subtle" style={{ height: 64 }} as="header">
+        <Page.Block width="laptop" gutters>
+          Header
+        </Page.Block>
+      </Box>
+      <Box background="surface-alt-2-subtle" style={{ height: 300 }} as="main">
+        <Page.Block width="laptop" gutters>
+          main
+        </Page.Block>
+      </Box>
+    </Page>
+  );
+};
+
+function Header({ width = "laptop", gutters = false }: any) {
   return (
     <Page.Block as="header" width={width} gutters={gutters}>
       <Box background="surface-alt-3-subtle" style={{ height: 64 }}>
@@ -170,7 +198,7 @@ function Header({ width, gutters }) {
   );
 }
 
-function Content({ width, gutters }) {
+function Content({ width = "laptop", gutters = false }: any) {
   return (
     <Page.Block width={width} gutters={gutters} as="main">
       <Box background="surface-alt-3-subtle" style={{ height: 300 }}>
@@ -180,7 +208,7 @@ function Content({ width, gutters }) {
   );
 }
 
-function Footer({ width, gutters }) {
+function Footer({ width = "laptop", gutters = false }: any) {
   return (
     <Page.Block width={width} gutters={gutters} as="footer">
       <Box background="surface-alt-3-subtle" style={{ height: 100 }}>
