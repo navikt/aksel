@@ -273,7 +273,7 @@
 }
 
 .navds-combobox__list-item--focus,
-.navds-combobox__list--with-hover .navds-combobox__list-item:hover {
+.navds-combobox__list--with-hover .navds-combobox__list-item:not([data-no-focus="true"]):hover {
   background-color: var(--ac-combobox-list-item-hover-bg, var(--a-surface-hover));
   cursor: pointer;
   border-left: 4px solid var(--ac-combobox-list-item-hover-border-left, var(--a-border-strong));
