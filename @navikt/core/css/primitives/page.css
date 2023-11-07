@@ -39,11 +39,11 @@
 }
 
 .navds-pageblock--gutters {
-  padding-inline: 1rem;
+  padding-inline: var(--a-spacing-4);
 }
 
 @media (min-width: 768px) {
   .navds-pageblock--gutters {
-    padding-inline: 3rem;
+    padding-inline: var(--a-spacing-12);
   }
 }
