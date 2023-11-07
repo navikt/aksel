@@ -1,23 +1,6 @@
 import { HStack, VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const Placeholder = ({
-  text,
-  noPadding,
-}: {
-  text?: string;
-  noPadding?: boolean;
-}) => {
-  return (
-    <div
-      className="min-h-4 text-text-on-action h-auto w-auto rounded bg-teal-600 p-2"
-      style={{ padding: noPadding && 0 }}
-    >
-      {text}
-    </div>
-  );
-};
-
 const Example = () => {
   return (
     <div className="min-w-72 bg-deepblue-50">
@@ -59,6 +42,23 @@ const Example = () => {
           <Placeholder />
         </HStack>
       </VStack>
+    </div>
+  );
+};
+
+const Placeholder = ({
+  text,
+  noPadding,
+}: {
+  text?: string;
+  noPadding?: boolean;
+}) => {
+  return (
+    <div
+      className="min-h-4 text-text-on-action h-auto w-auto rounded bg-teal-600 p-2"
+      style={{ padding: noPadding && 0 }}
+    >
+      {text}
     </div>
   );
 };

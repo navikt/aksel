@@ -2,6 +2,43 @@ import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
+const Example = () => {
+  return (
+    <div className="grid gap-6">
+      <ExpansionCard aria-label="Heading-size large demo">
+        <ExpansionCard.Header>
+          <ExpansionCard.Title as="h2" size="large">
+            Utbetaling av sykepenger
+          </ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
+      <ExpansionCard aria-label="Heading-size medium demo">
+        <ExpansionCard.Header>
+          <ExpansionCard.Title as="h3" size="medium">
+            Utbetaling av sykepenger
+          </ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
+      <ExpansionCard aria-label="Heading-size small demo">
+        <ExpansionCard.Header>
+          <ExpansionCard.Title as="h4" size="small">
+            Utbetaling av sykepenger
+          </ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
+          <Innhold />
+        </ExpansionCard.Content>
+      </ExpansionCard>
+    </div>
+  );
+};
+
 const Innhold = () => (
   <>
     <Label as="p" spacing>
@@ -55,43 +92,6 @@ const Innhold = () => (
     </div>
   </>
 );
-
-const Example = () => {
-  return (
-    <div className="grid gap-6">
-      <ExpansionCard aria-label="Heading-size large demo">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title as="h2" size="large">
-            Utbetaling av sykepenger
-          </ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-      <ExpansionCard aria-label="Heading-size medium demo">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title as="h3" size="medium">
-            Utbetaling av sykepenger
-          </ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-      <ExpansionCard aria-label="Heading-size small demo">
-        <ExpansionCard.Header>
-          <ExpansionCard.Title as="h4" size="small">
-            Utbetaling av sykepenger
-          </ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <Innhold />
-        </ExpansionCard.Content>
-      </ExpansionCard>
-    </div>
-  );
-};
 
 export default withDsExample(Example, { variant: "static" });
 

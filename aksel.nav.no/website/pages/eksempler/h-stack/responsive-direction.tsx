@@ -1,10 +1,6 @@
 import { Stack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const Placeholder = () => {
-  return <div className="aspect-square h-12 rounded bg-teal-500 even:h-8" />;
-};
-
 const Example = () => {
   return (
     <Stack
@@ -18,6 +14,10 @@ const Example = () => {
       <Placeholder />
     </Stack>
   );
+};
+
+const Placeholder = () => {
+  return <div className="aspect-square h-12 rounded bg-teal-500 even:h-8" />;
 };
 
 export default withDsExample(Example, {

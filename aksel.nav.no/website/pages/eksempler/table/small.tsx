@@ -1,13 +1,6 @@
 import { Table } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const format = (date: Date) => {
-  const y = date.getFullYear();
-  const m = (date.getMonth() + 1).toString().padStart(2, "0");
-  const d = date.getDate().toString().padStart(2, "0");
-  return `${d}.${m}.${y}`;
-};
-
 const Example = () => {
   return (
     <Table size="small">
@@ -31,6 +24,13 @@ const Example = () => {
       </Table.Body>
     </Table>
   );
+};
+
+const format = (date: Date) => {
+  const y = date.getFullYear();
+  const m = (date.getMonth() + 1).toString().padStart(2, "0");
+  const d = date.getDate().toString().padStart(2, "0");
+  return `${d}.${m}.${y}`;
 };
 
 const data = [

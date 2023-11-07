@@ -2,21 +2,6 @@ import { BodyLong, Heading, Popover, Select } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 
-const options = [
-  "top",
-  "bottom",
-  "right",
-  "left",
-  "top-start",
-  "top-end",
-  "bottom-start",
-  "bottom-end",
-  "right-start",
-  "right-end",
-  "left-start",
-  "left-end",
-] as const;
-
 const Example = () => {
   const [anchor, setAnchor] = useState<HTMLSelectElement>(null);
   const [placement, setPlacement] = useState<Option>(options[0]);
@@ -53,6 +38,21 @@ const Example = () => {
     </div>
   );
 };
+
+const options = [
+  "top",
+  "bottom",
+  "right",
+  "left",
+  "top-start",
+  "top-end",
+  "bottom-start",
+  "bottom-end",
+  "right-start",
+  "right-end",
+  "left-start",
+  "left-end",
+] as const;
 
 export default withDsExample(Example);
 

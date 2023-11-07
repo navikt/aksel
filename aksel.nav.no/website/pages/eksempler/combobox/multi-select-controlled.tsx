@@ -2,25 +2,6 @@ import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useMemo, useState } from "react";
 
-const initialOptions = [
-  "Norge",
-  "Sverige",
-  "Danmark",
-  "Finland",
-  "Island",
-  "Storbritannia",
-  "Tyskland",
-  "Frankrike",
-  "Spania",
-  "Portugal",
-  "Italia",
-  "Hellas",
-  "Kroatia",
-  "Tyrkia",
-];
-
-const initialSelectedOptions = ["Norge"];
-
 const Example = () => {
   const [value, setValue] = useState("");
   const mockPersistUserAddedValues = (option, isSelected) => {
@@ -66,6 +47,25 @@ const Example = () => {
     </div>
   );
 };
+
+const initialOptions = [
+  "Norge",
+  "Sverige",
+  "Danmark",
+  "Finland",
+  "Island",
+  "Storbritannia",
+  "Tyskland",
+  "Frankrike",
+  "Spania",
+  "Portugal",
+  "Italia",
+  "Hellas",
+  "Kroatia",
+  "Tyrkia",
+];
+
+const initialSelectedOptions = ["Norge"];
 
 export default withDsExample(Example, { variant: "static" });
 

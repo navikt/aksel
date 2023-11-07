@@ -2,24 +2,6 @@ import { Alert, AlertProps } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import React from "react";
 
-const AlertWithCloseButton = ({
-  children,
-  variant,
-}: {
-  children?: React.ReactNode;
-  variant: AlertProps["variant"];
-}) => {
-  const [show, setShow] = React.useState(true);
-
-  return (
-    show && (
-      <Alert variant={variant} closeButton onClose={() => setShow(false)}>
-        {children || "Content"}
-      </Alert>
-    )
-  );
-};
-
 const Example = () => {
   return (
     <div className="grid gap-4">
@@ -38,6 +20,24 @@ const Example = () => {
         Noe gikk galt! Prøv igjen om noen minutter.
       </AlertWithCloseButton>
     </div>
+  );
+};
+
+const AlertWithCloseButton = ({
+  children,
+  variant,
+}: {
+  children?: React.ReactNode;
+  variant: AlertProps["variant"];
+}) => {
+  const [show, setShow] = React.useState(true);
+
+  return (
+    show && (
+      <Alert variant={variant} closeButton onClose={() => setShow(false)}>
+        {children || "Content"}
+      </Alert>
+    )
   );
 };
 

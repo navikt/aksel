@@ -10,6 +10,47 @@ import {
 } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
+const Example = () => {
+  return (
+    <Box
+      as="header"
+      borderWidth="0 0 4 0"
+      borderColor="border-success"
+      paddingBlock="12 0"
+    >
+      <div className="max-w-5xl">
+        <Box background="surface-default" paddingInline="4" paddingBlock="0 6">
+          <HStack align="start" gap="8">
+            <Hide below="md">
+              <Pictogram />
+            </Hide>
+
+            <VStack gap={{ xs: "4", md: "5" }}>
+              <Heading level="1" size="xlarge">
+                Dagpenger
+              </Heading>
+
+              <Hide below="md">
+                <HStack gap="4" align="center">
+                  <BodyShort size="small">PENGESTØTTE</BodyShort>
+                  <span aria-hidden="true">|</span>
+                  <Detail>Oppdatert 5. juli 2023</Detail>
+                </HStack>
+              </Hide>
+              <Show below="md">
+                <VStack gap="2">
+                  <BodyShort size="small">PENGESTØTTE</BodyShort>
+                  <Detail>Oppdatert 24. august 2023</Detail>
+                </VStack>
+              </Show>
+            </VStack>
+          </HStack>
+        </Box>
+      </div>
+    </Box>
+  );
+};
+
 function Pictogram() {
   return (
     <svg
@@ -58,47 +99,6 @@ function Pictogram() {
     </svg>
   );
 }
-
-const Example = () => {
-  return (
-    <Box
-      as="header"
-      borderWidth="0 0 4 0"
-      borderColor="border-success"
-      paddingBlock="12 0"
-    >
-      <div className="max-w-5xl">
-        <Box background="surface-default" paddingInline="4" paddingBlock="0 6">
-          <HStack align="start" gap="8">
-            <Hide below="md">
-              <Pictogram />
-            </Hide>
-
-            <VStack gap={{ xs: "4", md: "5" }}>
-              <Heading level="1" size="xlarge">
-                Dagpenger
-              </Heading>
-
-              <Hide below="md">
-                <HStack gap="4" align="center">
-                  <BodyShort size="small">PENGESTØTTE</BodyShort>
-                  <span aria-hidden="true">|</span>
-                  <Detail>Oppdatert 5. juli 2023</Detail>
-                </HStack>
-              </Hide>
-              <Show below="md">
-                <VStack gap="2">
-                  <BodyShort size="small">PENGESTØTTE</BodyShort>
-                  <Detail>Oppdatert 24. august 2023</Detail>
-                </VStack>
-              </Show>
-            </VStack>
-          </HStack>
-        </Box>
-      </div>
-    </Box>
-  );
-};
 
 export default withDsExample(Example, {
   showBreakpoints: true,

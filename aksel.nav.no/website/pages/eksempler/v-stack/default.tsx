@@ -1,10 +1,6 @@
 import { VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const Placeholder = () => {
-  return <div className="aspect-square h-12 rounded bg-teal-500" />;
-};
-
 const Example = () => {
   return (
     <VStack gap="4">
@@ -14,6 +10,10 @@ const Example = () => {
       <Placeholder />
     </VStack>
   );
+};
+
+const Placeholder = () => {
+  return <div className="aspect-square h-12 rounded bg-teal-500" />;
 };
 
 export default withDsExample(Example, { showBreakpoints: true });

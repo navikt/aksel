@@ -2,6 +2,19 @@ import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
+const Example = () => {
+  return (
+    <ExpansionCard aria-label="default-demo">
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+      </ExpansionCard.Header>
+      <ExpansionCard.Content>
+        <Innhold />
+      </ExpansionCard.Content>
+    </ExpansionCard>
+  );
+};
+
 const Innhold = () => (
   <>
     <Label as="p" spacing>
@@ -55,19 +68,6 @@ const Innhold = () => (
     </div>
   </>
 );
-
-const Example = () => {
-  return (
-    <ExpansionCard aria-label="default-demo">
-      <ExpansionCard.Header>
-        <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
-      </ExpansionCard.Header>
-      <ExpansionCard.Content>
-        <Innhold />
-      </ExpansionCard.Content>
-    </ExpansionCard>
-  );
-};
 
 export default withDsExample(Example, { variant: "static" });
 

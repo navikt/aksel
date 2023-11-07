@@ -15,6 +15,25 @@ import {
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import cl from "clsx";
 
+const Example = () => {
+  return (
+    <div className="py-12">
+      <HGrid columns={{ xs: 1, md: "240px minmax(auto,700px)" }} gap="4">
+        <Show above="md" asChild>
+          <DesktopSidebar />
+        </Show>
+        <Hide above="md" asChild>
+          <ContentFirst />
+        </Hide>
+        <Hide above="md" asChild>
+          <MobileSidebar />
+        </Hide>
+        <ContentLast />
+      </HGrid>
+    </div>
+  );
+};
+
 const ContentFirst = ({ className }: { className?: string }) => (
   <div className={cl("bg-surface-default h-fit p-10", className)}>
     <VStack gap="6">
@@ -107,25 +126,6 @@ const DesktopSidebar = ({ className }: { className?: string }) => (
 const MobileSidebar = ({ className }: { className?: string }) => (
   <DesktopSidebar className={className} />
 );
-
-const Example = () => {
-  return (
-    <div className="py-12">
-      <HGrid columns={{ xs: 1, md: "240px minmax(auto,700px)" }} gap="4">
-        <Show above="md" asChild>
-          <DesktopSidebar />
-        </Show>
-        <Hide above="md" asChild>
-          <ContentFirst />
-        </Hide>
-        <Hide above="md" asChild>
-          <MobileSidebar />
-        </Hide>
-        <ContentLast />
-      </HGrid>
-    </div>
-  );
-};
 
 export default withDsExample(Example, {
   showBreakpoints: true,

@@ -1,10 +1,6 @@
 import { DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const isFriday = (date: Date) => {
-  return date.getDay() === 5;
-};
-
 const Example = () => {
   const disabledDays = [
     new Date("Oct 10 2022"),
@@ -19,6 +15,10 @@ const Example = () => {
       onSelect={console.log}
     />
   );
+};
+
+const isFriday = (date: Date) => {
+  return date.getDay() === 5;
 };
 
 export default withDsExample(Example);

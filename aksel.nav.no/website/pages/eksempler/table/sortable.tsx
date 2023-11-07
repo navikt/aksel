@@ -2,13 +2,6 @@ import { Table } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 
-const format = (date: Date) => {
-  const y = date.getFullYear();
-  const m = (date.getMonth() + 1).toString().padStart(2, "0");
-  const d = date.getDate().toString().padStart(2, "0");
-  return `${d}.${m}.${y}`;
-};
-
 const Example = () => {
   const [sort, setSort] = useState(null);
 
@@ -73,6 +66,13 @@ const Example = () => {
       </Table>
     </>
   );
+};
+
+const format = (date: Date) => {
+  const y = date.getFullYear();
+  const m = (date.getMonth() + 1).toString().padStart(2, "0");
+  const d = date.getDate().toString().padStart(2, "0");
+  return `${d}.${m}.${y}`;
 };
 
 const data = [

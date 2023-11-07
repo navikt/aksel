@@ -1,8 +1,6 @@
 import { Heading, Skeleton } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-const loaded = false;
-
 const Example = () => {
   return (
     <>
@@ -22,6 +20,8 @@ const Example = () => {
     </>
   );
 };
+
+const loaded = false;
 
 export default withDsExample(Example);
 

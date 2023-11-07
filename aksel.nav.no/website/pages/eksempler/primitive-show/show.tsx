@@ -2,6 +2,17 @@ import { Show, HGrid } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 import cl from "clsx";
 
+const Example = () => {
+  return (
+    <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+      <Placeholder text="Alltid synlig" />
+      <Show above="md" asChild>
+        <Placeholder desktop text="Synlig bare på desktop" />
+      </Show>
+    </HGrid>
+  );
+};
+
 const Placeholder = ({
   text,
   noPadding,
@@ -30,17 +41,6 @@ const Placeholder = ({
     >
       {text}
     </div>
-  );
-};
-
-const Example = () => {
-  return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="4">
-      <Placeholder text="Alltid synlig" />
-      <Show above="md" asChild>
-        <Placeholder desktop text="Synlig bare på desktop" />
-      </Show>
-    </HGrid>
   );
 };
 

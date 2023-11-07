@@ -1,14 +1,6 @@
 import { Label, VStack } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
-function Descriptor({ children }) {
-  return <p className="mb-3 text-xl font-semibold">{children}</p>;
-}
-
-function Divider() {
-  return <hr className="border-border-subtle" />;
-}
-
 const Example = () => {
   const lorem =
     "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
@@ -27,6 +19,14 @@ const Example = () => {
     </VStack>
   );
 };
+
+function Descriptor({ children }) {
+  return <p className="mb-3 text-xl font-semibold">{children}</p>;
+}
+
+function Divider() {
+  return <hr className="border-border-subtle" />;
+}
 
 export default withDsExample(Example, { variant: "full" });
 

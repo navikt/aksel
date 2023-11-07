@@ -1,6 +1,18 @@
 import { HStack, Spacer } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
+const Example = () => {
+  return (
+    <div className="bg-deepblue-50">
+      <HStack gap="3" wrap={false}>
+        <Placeholder />
+        <Spacer />
+        <Placeholder />
+      </HStack>
+    </div>
+  );
+};
+
 const Placeholder = ({
   text,
   noPadding,
@@ -14,18 +26,6 @@ const Placeholder = ({
       style={{ padding: noPadding && 0 }}
     >
       {text}
-    </div>
-  );
-};
-
-const Example = () => {
-  return (
-    <div className="bg-deepblue-50">
-      <HStack gap="3" wrap={false}>
-        <Placeholder />
-        <Spacer />
-        <Placeholder />
-      </HStack>
     </div>
   );
 };
