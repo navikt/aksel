@@ -204,6 +204,12 @@ WithDecorator.decorators = [
   },
 ];
 
+WithDecorator.parameters = {
+  chromatic: {
+    disable: true,
+  },
+};
+
 export const OutsideBackground = () => {
   return (
     <Page
