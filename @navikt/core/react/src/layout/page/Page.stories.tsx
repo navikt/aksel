@@ -94,14 +94,32 @@ export const Background: StoryFn = () => (
 );
 
 export const ContentBlockPadding: StoryFn = () => (
-  <Page footer={<Footer width="laptop" gutters />} contentBlockPadding="end">
-    <Header width="laptop" gutters />
-    <Page.Block width="laptop" gutters as="main">
-      <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
-        Main
-      </Box>
-    </Page.Block>
-  </Page>
+  <HGrid columns={2} gap="6" align="start">
+    <Page
+      footer={<Footer width="laptop" gutters />}
+      contentBlockPadding="end"
+      background="bg-subtle"
+    >
+      <Header width="laptop" gutters />
+      <Page.Block width="laptop" gutters as="main">
+        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+          Main
+        </Box>
+      </Page.Block>
+    </Page>
+    <Page
+      footer={<Footer width="laptop" gutters />}
+      contentBlockPadding="none"
+      background="bg-subtle"
+    >
+      <Header width="laptop" gutters />
+      <Page.Block width="laptop" gutters as="main">
+        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+          Main
+        </Box>
+      </Page.Block>
+    </Page>
+  </HGrid>
 );
 
 export const Gutters: StoryFn = () => (
