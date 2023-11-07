@@ -16,7 +16,7 @@ export default function Example() {
 
   return (
     <>
-      {/* Stiler bør trekkes ut i eget stylesheet, evt erstatte med tailwind */}
+      {/* Stiler bør trekkes ut i eget stilark, ev. erstattes med Tailwind e.l. */}
       <style>{styles}</style>
       {/* Header og Footer bør være inkludert i Mal */}
       {/* <Header /> */}
