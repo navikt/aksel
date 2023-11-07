@@ -123,10 +123,24 @@ export const ContentBlockPadding: StoryFn = () => (
 );
 
 export const Gutters: StoryFn = () => (
-  <Page footer={<Footer width="laptop" gutters />}>
-    <Header width="laptop" gutters />
-    <Content width="laptop" gutters />
-  </Page>
+  <HGrid columns={2} gap="6" align="start">
+    <Page footer={<Footer width="laptop" gutters />} background="bg-subtle">
+      <Header width="laptop" gutters />
+      <Page.Block width="laptop" gutters as="main">
+        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+          Main
+        </Box>
+      </Page.Block>
+    </Page>
+    <Page footer={<Footer width="laptop" />} background="bg-subtle">
+      <Header width="laptop" />
+      <Page.Block width="laptop" as="main">
+        <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
+          Main
+        </Box>
+      </Page.Block>
+    </Page>
+  </HGrid>
 );
 
 Gutters.parameters = {
