@@ -8,3 +8,6 @@
 @import "./utilities.css";
 @import "./sanity.css";
 @import "./animations.css";
+
+/* Alpha-components for testing */
+@import "./alpha/show-more.css";

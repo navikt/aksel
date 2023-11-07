@@ -1,8 +1,7 @@
-import type { StorybookConfig } from "@storybook/nextjs";
-
-import { readFileSync } from "fs";
-import { join, dirname } from "path";
 import { loadCsf } from "@storybook/csf-tools";
+import type { StorybookConfig } from "@storybook/nextjs";
+import { readFileSync } from "fs";
+import { dirname, join } from "path";
 
 /**
  * This function is used to resolve the absolute path of a package.

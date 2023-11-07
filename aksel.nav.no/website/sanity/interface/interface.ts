@@ -25,6 +25,7 @@ export async function sitemapPages(
       "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,
       "grunnleggende": *[_type == "grunnleggende_landingsside"][0]._updatedAt,
       "komponenter": *[_type == "komponenter_landingsside"][0]._updatedAt,
+      "templates": *[_type == "templates_landingsside"][0]._updatedAt,
       "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,
     }`
   );
@@ -35,6 +36,7 @@ export async function sitemapPages(
     { path: "ikoner", lastmod: undefined },
     { path: "grunnleggende", lastmod: pages.grunnleggende },
     { path: "komponenter", lastmod: pages.komponenter },
+    { path: "monster-maler", lastmod: pages.templates },
     { path: "produktbloggen", lastmod: pages.blogg },
     ...temaer.map((x) => ({
       path: `god-praksis/${x.path}`,
@@ -61,7 +63,7 @@ export const getAkselDocuments = async (
 };
 
 export const getDocumentsTmp = async (
-  source: "komponent_artikkel" | "ds_artikkel",
+  source: "komponent_artikkel" | "ds_artikkel" | "templates_artikkel",
   token?: string
 ): Promise<string[]> => {
   const docs = await getDocuments(source, token);
@@ -91,6 +93,7 @@ async function getDocuments(
     | "aksel_blogg"
     | "aksel_prinsipp"
     | "aksel_standalone"
+    | "templates_artikkel"
     | "all",
   token?: string
 ): Promise<{ slug: string; lastmod: string }[]> {
@@ -107,6 +110,7 @@ async function getDocuments(
               "aksel_blogg",
               "aksel_prinsipp",
               "aksel_standalone",
+              "templates_artikkel",
             ]
           : [source],
     }

@@ -15,12 +15,12 @@ import { Detail } from "@navikt/ds-react";
 import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
-import { SEO } from "components/website-modules/seo/SEO";
+import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
+import { SEO } from "components/website-modules/seo/SEO";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { GetStaticPaths, GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
@@ -40,7 +40,7 @@ export const query = `{
         ${destructureBlocks}
       },
   },
-  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
+  "seo": *[_type == "grunnleggende_landingsside"][0].seo.image,
   ${sidebarQuery}
 }`;
 
@@ -102,7 +102,12 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Grunnleggende", title: page?.heading }}
+        pageType={{
+          type: "grunnleggende",
+          title: page?.heading,
+          rootUrl: "/grunnleggende",
+          rootTitle: "Grunnleggende",
+        }}
         intro={
           <Detail as="div">
             <div className="mt-2 flex flex-wrap items-center gap-3">

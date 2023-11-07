@@ -133,3 +133,86 @@ export const labelWeek = (localeCode?: string): string => {
       return `Uke:`;
   }
 };
+
+const modalLabelSingle = (localeCode?: string): string => {
+  switch (localeCode) {
+    case "nb":
+      return `Velg dato`;
+    case "nn":
+      return `Vel dato`;
+    case "en-GB":
+      return `Pick a date`;
+    default:
+      return `Velg dato`;
+  }
+};
+
+const modalLabelMultiple = (localeCode?: string): string => {
+  switch (localeCode) {
+    case "nb":
+      return `Velg datoer`;
+    case "nn":
+      return `Vel datoar`;
+    case "en-GB":
+      return `Pick dates`;
+    default:
+      return `Velg datoer`;
+  }
+};
+
+const modalLabelRanged = (localeCode?: string): string => {
+  switch (localeCode) {
+    case "nb":
+      return `Velg start- og sluttdato`;
+    case "nn":
+      return `Vel start- og sluttdato`;
+    case "en-GB":
+      return `Pick a start and end date`;
+    default:
+      return `Velg start- og sluttdato`;
+  }
+};
+
+const modalLabelMonth = (localeCode?: string): string => {
+  switch (localeCode) {
+    case "nb":
+      return `Velg måned`;
+    case "nn":
+      return `Vel månad`;
+    case "en-GB":
+      return `Pick a month`;
+    default:
+      return `Velg måned`;
+  }
+};
+
+export const modalLabel = (
+  localeCode: string,
+  variant: "single" | "multiple" | "range" | "month"
+) => {
+  switch (variant) {
+    case "single":
+      return modalLabelSingle(localeCode);
+    case "multiple":
+      return modalLabelMultiple(localeCode);
+    case "range":
+      return modalLabelRanged(localeCode);
+    case "month":
+      return modalLabelMonth(localeCode);
+    default:
+      return modalLabelSingle(localeCode);
+  }
+};
+
+export const modalCloseButtonLabel = (localeCode?: string): string => {
+  switch (localeCode) {
+    case "nb":
+      return `Lukk`;
+    case "nn":
+      return `Lukk`;
+    case "en-GB":
+      return `Close`;
+    default:
+      return `Lukk`;
+  }
+};

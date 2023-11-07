@@ -101,9 +101,4 @@ export interface DatePickerDefaultProps
    * @default See Popover
    */
   strategy?: "absolute" | "fixed";
-  /**
-   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
-   * @default false
-   */
-  bubbleEscape?: boolean;
 }

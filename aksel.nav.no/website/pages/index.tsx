@@ -17,7 +17,7 @@ import FrontpageBlock, {
   BlocksT,
 } from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
 import { IntroCards } from "components/website-modules/IntroCards";
-import { AkselCube } from "components/website-modules/cube";
+import { AkselCubeAnimated } from "components/website-modules/aksel-cube/AkselCube";
 import { SEO } from "components/website-modules/seo/SEO";
 import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { GetStaticProps } from "next/types";
@@ -97,7 +97,7 @@ export const query = `*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
           _type,
           _id,
           heading,
@@ -174,7 +174,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
               >
                 Aksel gjør det enklere å lage digitale produkter
               </Heading>
-              <AkselCube />
+              <AkselCubeAnimated />
             </div>
 
             <IntroCards

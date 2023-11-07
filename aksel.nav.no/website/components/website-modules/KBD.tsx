@@ -1,6 +1,6 @@
 import cl from "clsx";
 
-export const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
+const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
   <kbd
     className={cl(
       "mx-05 ring-border-subtle my-0 inline-block min-w-[2rem] rounded-md px-2 py-[1px] text-center font-mono text-sm text-gray-900 ring-1 ring-inset",
@@ -16,3 +16,5 @@ export const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
     `}</style>
   </kbd>
 );
+
+export default KBD;

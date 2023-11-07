@@ -1,10 +1,10 @@
 import cl from "clsx";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
-import { Popover } from "../../popover";
-import { useId } from "../../util";
-import { MonthPickerInput } from "../DateInput";
+import { mergeRefs, useId } from "../../util";
 import { DateContext, SharedMonthProvider } from "../context";
+import { MonthPickerInput } from "../parts/DateInput";
+import { DateWrapper } from "../parts/DateWrapper";
 import { getLocaleFromString } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthPickerStandalone from "./MonthPickerStandalone";
@@ -74,7 +74,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       year,
       onYearChange,
       strategy = "absolute",
-      bubbleEscape = false,
     },
     ref
   ) => {
@@ -82,6 +81,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     const [open, setOpen] = useState(_open ?? false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
     const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
       defaultSelected
@@ -107,51 +107,47 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
             onOpenToggle?.();
           },
           ariaId,
+          defined: true,
         }}
       >
         <div
-          ref={wrapperRef}
+          ref={mergedRef}
           className={cl("navds-date__wrapper", wrapperClassName)}
         >
           {children}
-          {(_open ?? open) && (
-            <Popover
-              arrow={false}
-              anchorEl={wrapperRef.current}
-              open={_open ?? open}
-              onClose={() => onClose?.() ?? setOpen(false)}
-              placement="bottom-start"
-              role="dialog"
-              ref={ref}
-              id={ariaId}
-              className="navds-date navds-date__popover"
-              strategy={strategy}
-              bubbleEscape={bubbleEscape}
-              flip={false}
+          <DateWrapper
+            open={_open ?? open}
+            anchor={wrapperRef.current}
+            onClose={() => onClose?.() ?? setOpen(false)}
+            locale={locale}
+            variant="month"
+            popoverProps={{
+              id: ariaId,
+              strategy,
+            }}
+          >
+            <RootProvider
+              locale={getLocaleFromString(locale)}
+              selected={selected ?? selectedMonth}
+              toDate={toDate}
+              fromDate={fromDate}
+              month={selected ?? selectedMonth}
             >
-              <RootProvider
-                locale={getLocaleFromString(locale)}
-                selected={selected ?? selectedMonth}
-                toDate={toDate}
-                fromDate={fromDate}
-                month={selected ?? selectedMonth}
-              >
-                <div className={cl("rdp-month", className)}>
-                  <SharedMonthProvider
-                    dropdownCaption={dropdownCaption}
-                    disabled={disabled}
-                    selected={selected ?? selectedMonth}
-                    onSelect={handleSelect}
-                    year={year}
-                    onYearChange={onYearChange}
-                  >
-                    <MonthCaption />
-                    <MonthSelector />
-                  </SharedMonthProvider>
-                </div>
-              </RootProvider>
-            </Popover>
-          )}
+              <div className={cl("rdp-month", className)}>
+                <SharedMonthProvider
+                  dropdownCaption={dropdownCaption}
+                  disabled={disabled}
+                  selected={selected ?? selectedMonth}
+                  onSelect={handleSelect}
+                  year={year}
+                  onYearChange={onYearChange}
+                >
+                  <MonthCaption />
+                  <MonthSelector />
+                </SharedMonthProvider>
+              </div>
+            </RootProvider>
+          </DateWrapper>
         </div>
       </DateContext.Provider>
     );

@@ -52,7 +52,7 @@ export type LoaderType = React.ForwardRefExoticComponent<
  *
  * @example
  * ```jsx
- * <Loader size="3xlarge" title="venter..." />
+ * <Loader size="3xlarge" title="Venter..." />
  * ```
  */
 export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(

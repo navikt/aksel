@@ -12,7 +12,7 @@ import cl from "clsx";
 import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import ComponentOverview from "components/sanity-modules/ComponentOverview";
+import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -62,7 +62,12 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Grunnleggende", title: "Grunnleggende" }}
+        pageType={{
+          type: "grunnleggende",
+          title: "Grunnleggende",
+          rootUrl: "/grunnleggende",
+          rootTitle: "Grunnleggende",
+        }}
         intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
         pageProps={page}
       >

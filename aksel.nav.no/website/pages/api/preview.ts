@@ -1,6 +1,6 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import { createClient } from "next-sanity";
 import { clientConfig } from "../../sanity/config";
-import type { NextApiRequest, NextApiResponse } from "next";
 
 const previewClient = createClient({
   ...clientConfig,
@@ -23,6 +23,7 @@ const landingPages = [
   "god-praksis",
   "produktbloggen",
   "prinsipper",
+  "monster-maler",
 ];
 
 export default async function preview(

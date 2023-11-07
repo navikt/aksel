@@ -1,7 +1,7 @@
+import { InformationIcon } from "@navikt/aksel-icons";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { BodyLong, GuidePanel, VStack } from "../index";
-import { Meta } from "@storybook/react";
-import { InformationIcon } from "@navikt/aksel-icons";
 
 export default {
   title: "ds-react/GuidePanel",

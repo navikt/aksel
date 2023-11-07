@@ -2,6 +2,7 @@ import {
   bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
+  templatesKategorier,
 } from "../sanity/config";
 
 export type ResolveSlugT<T> = Omit<T, "slug"> & {
@@ -122,6 +123,24 @@ export interface AkselGrunnleggendeDocT
   extends DocumentT<"ds_artikkel">,
     ArticleT {
   kategori: (typeof grunnleggendeKategorier)[number]["value"];
+  status: {
+    tag?: "beta" | "new" | "ready" | "deprecated";
+    unsafe?: boolean;
+    bilde?: any;
+  };
+  intro: {
+    body?: any[];
+    brukes_til: string[];
+    brukes_ikke_til?: string[];
+  };
+  content: any[];
+  updateInfo?: {
+    lastVerified?: string;
+  };
+}
+
+export interface AkselTemplatesDocT extends DocumentT<"ds_artikkel">, ArticleT {
+  kategori: (typeof templatesKategorier)[number]["value"];
   status: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     unsafe?: boolean;
@@ -282,13 +301,31 @@ export interface RelatertInnholdT {
   >;
 }
 
+export type CodeExampleSchemaT = {
+  _id: string;
+  _type: string;
+  title: string;
+  variant: "eksempler" | "templates";
+  filer: {
+    title: string;
+    innhold: string;
+    navn: string;
+    index: number;
+    description?: string;
+  }[];
+  metadata?: {
+    version: number;
+    changelog: { description: string; version: number; date: string }[];
+  };
+};
+
 export interface CodeExamplesT {
   title: string;
   dir: {
     title: string;
-    filer: Array<
-      ArrayObjectT<{ navn: string; innhold: string; description?: string }>
-    >;
+    filer: Array<ArrayObjectT<CodeExampleSchemaT["filer"][0]>>;
+    metadata?: CodeExampleSchemaT["metadata"];
+    variant: CodeExampleSchemaT["variant"];
   };
 }
 
