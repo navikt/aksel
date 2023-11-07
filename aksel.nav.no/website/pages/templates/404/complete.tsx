@@ -28,7 +28,7 @@ export default function Example() {
     <>
       {/* Stiler bør trekkes ut i eget stilark, ev. erstattes med Tailwind e.l. */}
       <style>{styles}</style>
-      {/* Header og Footer bør være inkludert i Mal */}
+      {/* Header og Footer bør være inkludert på siden */}
       {/* <Header /> */}
       <Box
         data-aksel-template="404"
