@@ -2,7 +2,7 @@ import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import type { Meta, StoryFn } from "@storybook/react";
 import React, { useEffect } from "react";
 import { Box } from "../box";
-import { VStack } from "../stack";
+import { HGrid } from "../grid";
 import Page from "./Page";
 import { widths } from "./parts/PageBlock";
 
@@ -73,10 +73,24 @@ export const BelowFold: StoryFn = () => (
 );
 
 export const Background: StoryFn = () => (
-  <VStack gap="4">
-    <Page background="bg-default">default</Page>
-    <Page background="bg-subtle">subtle</Page>
-  </VStack>
+  <HGrid columns={2} gap="4">
+    <Page
+      background="bg-default"
+      footer={<div>footer</div>}
+      contentBlockPadding="end"
+    >
+      <div>header</div>
+      <div>content</div>
+    </Page>
+    <Page
+      background="bg-subtle"
+      footer={<div>footer</div>}
+      contentBlockPadding="end"
+    >
+      <div>header</div>
+      <div>content</div>
+    </Page>
+  </HGrid>
 );
 
 export const ContentBlockPadding: StoryFn = () => (
