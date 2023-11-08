@@ -22,6 +22,35 @@ export interface PageBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   gutters?: boolean;
 }
 
+/**
+ * Acts as a top-level container for defining max-width, gutters and horizontal centering
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/page)
+ * @see 🏷️ {@link PageBlockProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+ *
+ * @example
+ * ```jsx
+ * <Page
+ *   footer={<Page.Block width="xl" gutters />}
+ * >
+ *   <Page.Block width="xl" gutters />// Header
+ *   <Page.Block width="xl" gutters />// Content
+ * </Page>
+ * ```
+ * @example
+ * With background bleed
+ * Wrapping Page.Block with Box allows the background to react screen-width
+ * ```jsx
+ * <Page
+ *   footer={<Box background="..."><Page.Block width="xl" gutters /></Box>}
+ *   footerPosition="belowFold"
+ * >
+ *   <Box background="..."><Page.Block width="xl" gutters /></Box>//Header
+ *   <Box background="..."><Page.Block width="xl" gutters /></Box>//Content
+ * </Page>
+ * ```
+ */
 export const PageBlock: OverridableComponent<PageBlockProps, HTMLDivElement> =
   forwardRef(
     ({ as: Component = "div", gutters, className, width, ...rest }, ref) => {

@@ -80,6 +80,34 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
     }
   );
 
+/**
+ * Page helps with establishing a top-level layout for your page
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/page)
+ * @see 🏷️ {@link PageProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+ *
+ * @example
+ * ```jsx
+ * <Page
+ *   footer={<Page.Block width="xl" gutters />}
+ * >
+ *   <Page.Block width="xl" gutters />// Header
+ *   <Page.Block width="xl" gutters />// Content
+ * </Page>
+ * ```
+ * @example
+ * Footer placed below page-fold
+ * ```jsx
+ * <Page
+ *   footer={<Page.Block width="xl" gutters />}
+ *   footerPosition="belowFold"
+ * >
+ *   <Page.Block width="xl" gutters />// Header
+ *   <Page.Block width="xl" gutters />// Content
+ * </Page>
+ * ```
+ */
 const Page = PageComponent as PageComponentType;
 
 Page.Block = PageBlock;
