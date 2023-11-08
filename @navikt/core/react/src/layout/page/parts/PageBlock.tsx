@@ -15,8 +15,8 @@ export interface PageBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   width?: (typeof widths)[number];
   /**
    * Adds a standardised responsive padding-inline
-   * @example 3rem on desktop
-   * @example 1rem on mobile
+   * @example 3rem on > md
+   * @example 1rem on < md
    * @default false
    */
   gutters?: boolean;
