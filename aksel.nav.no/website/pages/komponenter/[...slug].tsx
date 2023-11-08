@@ -1,10 +1,4 @@
-import {
-  ChangelogIcon,
-  dateStr,
-  FigmaIcon,
-  GithubIcon,
-  YarnIcon,
-} from "@/components";
+import { dateStr } from "@/components";
 import { amplitude, AmplitudeEvents } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
@@ -30,6 +24,12 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
 import { WithSidebar } from "components/layout/templates/WithSidebar";
+import {
+  ChangelogIcon,
+  FigmaIcon,
+  GithubIcon,
+  YarnIcon,
+} from "components/assets/Icons";
 
 const kodepakker = {
   "ds-react": {
