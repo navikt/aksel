@@ -12,7 +12,7 @@ import { Header } from "components/layout/header/Header";
 
 export default function Example() {
   return (
-    <Page data-aksel-template="404-v1" footer={<Footer />}>
+    <Page footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 16">
@@ -43,6 +43,7 @@ export default function Example() {
 function StatusSvg() {
   return (
     <svg
+      data-aksel-template="404-v1"
       width="min(100%, 500px)"
       viewBox="0 0 550 340"
       fill="none"
