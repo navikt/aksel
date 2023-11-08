@@ -29,6 +29,7 @@ export const Default: StoryObj<typeof Textarea> = {
     error: { type: "string" },
     hideLabel: { type: "boolean" },
     disabled: { type: "boolean" },
+    readOnly: { type: "boolean" },
     maxRows: { type: "number" },
     minRows: { type: "number" },
   },

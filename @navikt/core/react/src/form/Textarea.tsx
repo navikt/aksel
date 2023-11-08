@@ -173,7 +173,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           )}
           {...(describedBy ? { "aria-describedby": describedBy } : {})}
         />
-        {hasMaxLength && (
+        {hasMaxLength && !readOnly && !inputProps.disabled && (
           <>
             <span id={maxLengthId} className="navds-sr-only">
               {`Tekstområde med plass til ${maxLength} tegn.`}
