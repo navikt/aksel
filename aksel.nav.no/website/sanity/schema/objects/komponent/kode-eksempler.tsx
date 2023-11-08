@@ -20,19 +20,17 @@ export const KodeEksempler = defineType({
       name: "dir",
       type: "reference",
       to: [{ type: "kode_eksempler_fil" }],
-      options: {
-        filter: "dir == true",
-      },
     }),
   ],
   preview: {
     select: {
       dir: "dir.title",
+      variant: "dir.variant",
     },
-    prepare({ dir }) {
+    prepare({ dir, variant }) {
       return {
         title: "Komponent-demo",
-        subtitle: dir ?? "",
+        subtitle: `${variant} | ${dir}`,
         media: ComponentIcon,
       };
     },

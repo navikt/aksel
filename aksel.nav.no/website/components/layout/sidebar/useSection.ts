@@ -1,23 +1,17 @@
 import { AkselSidebarT } from "@/types";
 import { useMemo } from "react";
-import {
-  grunnleggendeKategorier,
-  komponentKategorier,
-} from "../../../sanity/config";
+import { sanityCategoryLookup } from "../../../sanity/config";
 
 export const useSection = ({
   kategori,
   links,
 }: {
-  kategori: "Komponenter" | "Grunnleggende";
+  kategori: "komponenter" | "grunnleggende" | "templates";
   links: AkselSidebarT;
 }) => {
   const sections = useMemo(
     () =>
-      (kategori === "Komponenter"
-        ? komponentKategorier
-        : grunnleggendeKategorier
-      )
+      sanityCategoryLookup(kategori)
         .map((x) => ({
           ...x,
           pages: links

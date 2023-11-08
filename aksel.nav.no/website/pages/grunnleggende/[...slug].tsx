@@ -40,7 +40,7 @@ export const query = `{
         ${destructureBlocks}
       },
   },
-  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
+  "seo": *[_type == "grunnleggende_landingsside"][0].seo.image,
   ${sidebarQuery}
 }`;
 
@@ -102,7 +102,12 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Grunnleggende", title: page?.heading }}
+        pageType={{
+          type: "grunnleggende",
+          title: page?.heading,
+          rootUrl: "/grunnleggende",
+          rootTitle: "Grunnleggende",
+        }}
         intro={
           <Detail as="div">
             <div className="mt-2 flex flex-wrap items-center gap-3">

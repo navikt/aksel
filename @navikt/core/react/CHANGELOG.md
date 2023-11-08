@@ -1,5 +1,43 @@
 # @navikt/ds-react
 
+## 5.9.2
+
+### Patch Changes
+
+- :bug: Datepicker lukker ikke lenger modalen den er i ([#2451](https://github.com/navikt/aksel/pull/2451))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.9.2
+  - @navikt/aksel-icons@5.9.2
+
+## 5.9.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.9.1
+  - @navikt/aksel-icons@5.9.1
+
+## 5.9.0
+
+### Minor Changes
+
+- Datepicker/Monthpicker: Hvis man bruker komponentene i Modal vil Popover bli erstattet med Modal uansett om man er på desktop eller mobil. ([#2419](https://github.com/navikt/aksel/pull/2419))
+
+- Datepicker/Monthpicker/Popover: Fjernet `bubbleEscape`-prop. ([#2419](https://github.com/navikt/aksel/pull/2419))
+
+- useDatepicker/useMonthPicker/useRangedpicker: Fjernet `openOnFocus`-prop, kan nå bare åpnes ved klikk på date-knapp i input. ([#2419](https://github.com/navikt/aksel/pull/2419))
+
+- Datepicker/Monthpicker: Bytter nå automatisk til Modalvisning på mobil. ([#2419](https://github.com/navikt/aksel/pull/2419))
+
+### Patch Changes
+
+- Added useVirtualFocus hook - used in Combobox for now ([#2394](https://github.com/navikt/aksel/pull/2394))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.9.0
+  - @navikt/aksel-icons@5.9.0
+
 ## 5.8.0
 
 ### Minor Changes

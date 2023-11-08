@@ -12,6 +12,7 @@ export const allArticleDocuments = [
   "aksel_blogg",
   "aksel_prinsipp",
   "aksel_standalone",
+  "templates_artikkel",
 ] as const;
 
 export const previews = [
@@ -21,12 +22,14 @@ export const previews = [
   "aksel_blogg",
   "aksel_prinsipp",
   "aksel_standalone",
+  "templates_artikkel",
 ];
 
 export const landingsider = [
   { name: "godpraksis_landingsside", url: "god-praksis" },
   { name: "blogg_landingsside", url: "produktbloggen" },
   { name: "grunnleggende_landingsside", url: "grunnleggende" },
+  { name: "templates_landingsside", url: "monster-maler" },
   { name: "komponenter_landingsside", url: "komponenter" },
   { name: "prinsipper_landingsside", url: "prinsipper" },
 ];
@@ -46,7 +49,10 @@ export const grunnleggendeKategorier = [
   { title: "Kode", value: "kode" },
 ];
 
-export const monsterKategorier = [];
+export const templatesKategorier = [
+  { title: "Mønster", value: "monster" },
+  { title: "Maler", value: "maler" },
+];
 
 export const bloggKategorier = [
   { title: "Nytt fra teamene", value: "nytt-fra-teamene" },
@@ -58,19 +64,19 @@ export const prinsippKategorier = [
   { title: "Brukeropplevelse", value: "brukeropplevelse" },
 ];
 
-const allDocumentTypes = [
-  "aksel_artikkel",
-  "aksel_blogg",
-  "aksel_prinsipp",
-  "aksel_standalone",
-  "blogg_landingsside",
-  "ds_artikkel",
-  "godpraksis_landingsside",
-  "grunnleggende_landingsside",
-  "komponent_artikkel",
-  "komponenter_landingsside",
-  "prinsipper_landingsside",
-  "aksel_forside",
-];
+export const sanityCategoryLookup = (
+  category: "komponenter" | "grunnleggende" | "templates"
+) => {
+  const _category = category.toLowerCase();
 
-export const allDocsRef = allDocumentTypes.map((x) => ({ type: x }));
+  switch (_category) {
+    case "komponenter":
+      return komponentKategorier;
+    case "grunnleggende":
+      return grunnleggendeKategorier;
+    case "templates":
+      return templatesKategorier;
+    default:
+      return [];
+  }
+};

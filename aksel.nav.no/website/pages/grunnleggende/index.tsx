@@ -62,7 +62,12 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Grunnleggende", title: "Grunnleggende" }}
+        pageType={{
+          type: "grunnleggende",
+          title: "Grunnleggende",
+          rootUrl: "/grunnleggende",
+          rootTitle: "Grunnleggende",
+        }}
         intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
         pageProps={page}
       >

@@ -1,17 +1,17 @@
 import {
-  VirusIcon,
-  PencilIcon,
   HospitalIcon,
-  PiggybankIcon,
-  PersonIcon,
   ParasolBeachIcon,
+  PencilIcon,
+  PersonIcon,
+  PiggybankIcon,
+  VirusIcon,
 } from "@navikt/aksel-icons";
-import { Timeline } from "@navikt/ds-react";
+import { Timeline, TimelinePeriodProps } from "@navikt/ds-react";
 import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="min-w-[800px] overflow-x-auto">
+    <div className="min-w-[800px]">
       <Timeline>
         <Timeline.Pin date={new Date("Mar 15 2022")}>
           <p>Periode: 01.03.2022 - 01.04.2022</p>
@@ -29,50 +29,47 @@ const Example = () => {
           <p style={{ color: "red" }}>Dager igjen: 1</p>
         </Timeline.Pin>
         <Timeline.Row label="Person" icon={<PersonIcon aria-hidden />}>
-          {person.map((p: any, i) => {
-            return (
-              <Timeline.Period
-                key={i}
-                start={p.start}
-                end={p.end}
-                status={p.status}
-                icon={p.icon}
-              />
-            );
-          })}
+          {person.map((p, i) => (
+            <Timeline.Period
+              key={i}
+              start={p.start}
+              end={p.end}
+              status={p.status}
+              icon={p.icon}
+              statusLabel={p.statusLabel}
+            />
+          ))}
         </Timeline.Row>
         <Timeline.Row label="Sykehus A" icon={<HospitalIcon aria-hidden />}>
-          {jobb.map((p: any, i) => {
-            return (
-              <Timeline.Period
-                key={i}
-                start={p.start}
-                end={p.end}
-                status={p.status}
-                icon={p.icon}
-              />
-            );
-          })}
+          {jobb.map((p, i) => (
+            <Timeline.Period
+              key={i}
+              start={p.start}
+              end={p.end}
+              status={p.status}
+              icon={p.icon}
+              statusLabel={p.statusLabel}
+            />
+          ))}
         </Timeline.Row>
         <Timeline.Row label="Sykehus B" icon={<HospitalIcon aria-hidden />}>
-          {jobb.map((p: any, i) => {
-            return (
-              <Timeline.Period
-                key={i}
-                start={p.start}
-                end={p.end}
-                status={p.status}
-                icon={p.icon}
-              />
-            );
-          })}
+          {jobb.map((p, i) => (
+            <Timeline.Period
+              key={i}
+              start={p.start}
+              end={p.end}
+              status={p.status}
+              icon={p.icon}
+              statusLabel={p.statusLabel}
+            />
+          ))}
         </Timeline.Row>
       </Timeline>
     </div>
   );
 };
 
-const person = [
+const person: TimelinePeriodProps[] = [
   {
     start: new Date("Jan 1 2022"),
     end: new Date("Jan 31 2022"),
@@ -85,7 +82,6 @@ const person = [
     end: new Date("Apr 30 2022"),
     status: "neutral",
     icon: <ParasolBeachIcon aria-hidden />,
-    label: "test",
     statusLabel: "Ferie",
   },
   {
@@ -104,7 +100,7 @@ const person = [
   },
 ];
 
-const jobb = [
+const jobb: TimelinePeriodProps[] = [
   {
     start: new Date("Feb 2 2022"),
     end: new Date("Mar 1 2022"),

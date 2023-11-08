@@ -33,7 +33,7 @@ export const Combobox = forwardRef<
 
   const toggleListButtonRef = useRef<HTMLButtonElement>(null);
 
-  const { currentOption, toggleIsListOpen } = useFilteredOptionsContext();
+  const { activeDecendantId, toggleIsListOpen } = useFilteredOptionsContext();
   const { selectedOptions } = useSelectedOptionsContext();
 
   const {
@@ -92,7 +92,7 @@ export const Combobox = forwardRef<
             "navds-combobox__wrapper-inner navds-text-field__input",
             {
               "navds-combobox__wrapper-inner--virtually-unfocused":
-                currentOption !== null,
+                activeDecendantId !== null,
             }
           )}
           onClick={focusInput}

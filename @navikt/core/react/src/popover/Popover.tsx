@@ -18,6 +18,7 @@ import React, {
   useMemo,
   useRef,
 } from "react";
+import { DateContext } from "../date/context";
 import { ModalContext } from "../modal/ModalContext";
 import { mergeRefs, useClientLayoutEffect, useEventListener } from "../util";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
@@ -74,11 +75,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   strategy?: "absolute" | "fixed";
   /**
-   * Bubbles Escape keydown-event up trough DOM-tree. This is set to false by default to prevent closing components like Modal on Escape
-   * @default false
-   */
-  bubbleEscape?: boolean;
-  /**
    * Changes placement of the floating element in order to keep it in view.
    * @default true
    */
@@ -124,7 +120,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement = "top",
       offset,
       strategy: userStrategy,
-      bubbleEscape = false,
       flip: _flip = true,
       ...rest
     },
@@ -132,8 +127,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useContext(ModalContext) !== null;
+    const isInDatepicker = useContext(DateContext) !== null;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
-    const chosenFlip = isInModal ? true : _flip;
+    const chosenFlip = isInDatepicker ? false : _flip;
 
     const {
       x,
@@ -160,11 +156,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const { getFloatingProps } = useInteractions([
       useClick(context),
-      useDismiss(context, {
-        bubbles: {
-          escapeKey: bubbleEscape,
-        },
-      }),
+      useDismiss(context),
     ]);
 
     useClientLayoutEffect(() => {
