@@ -42,7 +42,7 @@ export interface PageBlockProps extends React.HTMLAttributes<HTMLDivElement> {
  * ```
  * @example
  * With background bleed
- * Wrapping Page.Block with Box allows the background to react screen-width
+ * Wrapping `Page.Block` with `Box` allows the background-color to use full screen-width
  * ```jsx
  * <Page
  *   footer={<Box background="..."><Page.Block width="xl" gutters /></Box>}
