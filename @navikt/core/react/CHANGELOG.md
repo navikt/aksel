@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 5.10.0
+
+### Minor Changes
+
+- Primitives: Ny komponent `Page` og `Page.Block` ([#2456](https://github.com/navikt/aksel/pull/2456))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.0
+  - @navikt/aksel-icons@5.10.0
+
 ## 5.9.2
 
 ### Patch Changes

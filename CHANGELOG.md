@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.10.0
+
+### @navikt/ds-react
+
+- Primitives: Ny komponent `Page` og `Page.Block` ([#2456](https://github.com/navikt/aksel/pull/2456))
+
+### @navikt/ds-css
+
+- Primitives: Ny komponent `Page` og `Page.Block` ([#2456](https://github.com/navikt/aksel/pull/2456))
+
 ## 5.9.2
 
 ### @navikt/ds-react
