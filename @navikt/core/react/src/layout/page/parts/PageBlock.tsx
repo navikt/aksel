@@ -7,16 +7,18 @@ export const widths = ["lg", "xl", "2xl"] as const;
 export interface PageBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Predefined max-width
-   * @example lg:  1024px
-   * @example xl:  1280px
-   * @example 2xl: 1440px
-   * @default 100%
+   * @example
+   * lg:  1024px
+   * xl:  1280px
+   * 2xl: 1440px
+   * @default max-width: 100%;
    */
   width?: (typeof widths)[number];
   /**
    * Adds a standardised responsive padding-inline
-   * @example 3rem on > md
-   * @example 1rem on < md
+   * @example
+   * 3rem on > md
+   * 1rem on < md
    * @default false
    */
   gutters?: boolean;
