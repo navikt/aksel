@@ -8,8 +8,8 @@ import { StatusTag } from "components/website-modules/StatusTag";
 import Image from "next/legacy/image";
 import { default as Link, default as NextLink } from "next/link";
 import { forwardRef, useContext } from "react";
-import { SearchContext, SearchLoggingContext } from "./providers";
-import { highlightMatches, highlightStr } from "./utils";
+import { SearchContext, SearchLoggingContext } from "../providers";
+import { highlightMatches, highlightStr } from "../utils";
 
 export const Hit = forwardRef<
   HTMLLIElement,

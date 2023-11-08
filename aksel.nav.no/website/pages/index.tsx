@@ -1,4 +1,4 @@
-import { Footer } from "@/layout";
+import Footer from "components/layout/footer/Footer";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";

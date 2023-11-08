@@ -2,7 +2,7 @@ import { searchOptions } from "@/types";
 import { ChangeLogIconOutline } from "components/assets";
 import { useContext } from "react";
 import { Collection, CollectionMapper } from "./HitCollection";
-import { SearchContext, SearchResultContext } from "./providers";
+import { SearchContext, SearchResultContext } from "../providers";
 import { Heading, Label } from "@navikt/ds-react";
 
 export const Results = () => {

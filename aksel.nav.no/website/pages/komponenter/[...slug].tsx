@@ -21,7 +21,6 @@ import {
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
-import { WithSidebar } from "components/layout/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { SEO } from "components/website-modules/seo/SEO";
@@ -30,6 +29,7 @@ import { SuggestionBlock } from "components/website-modules/suggestionblock/Sugg
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
+import { WithSidebar } from "components/layout/templates/WithSidebar";
 
 const kodepakker = {
   "ds-react": {

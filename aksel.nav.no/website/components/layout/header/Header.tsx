@@ -8,26 +8,29 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export const GlobalSearch = dynamic(() => import("./search"), {
-  loading: () => (
-    <Button
-      variant="primary"
-      className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
-      aria-keyshortcuts="Control+b"
-      icon={
-        <MagnifyingGlassIcon
-          className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
-          aria-label="Åpne meny"
-          aria-hidden
-        />
-      }
-      iconPosition="left"
-    >
-      Søk
-    </Button>
-  ),
-  ssr: false,
-});
+export const GlobalSearch = dynamic(
+  () => import("../../website-modules/search/Search"),
+  {
+    loading: () => (
+      <Button
+        variant="primary"
+        className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
+        aria-keyshortcuts="Control+b"
+        icon={
+          <MagnifyingGlassIcon
+            className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
+            aria-label="Åpne meny"
+            aria-hidden
+          />
+        }
+        iconPosition="left"
+      >
+        Søk
+      </Button>
+    ),
+    ssr: false,
+  }
+);
 
 const LinkElement = ({ name, href, prefetch = undefined }) => {
   const { asPath } = useRouter();

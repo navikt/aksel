@@ -1,5 +1,4 @@
 import { abbrName } from "@/components";
-import { Footer } from "@/layout";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getAkselTema, urlFor } from "@/sanity/interface";
@@ -15,6 +14,7 @@ import Image from "next/legacy/image";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
+import Footer from "components/layout/footer/Footer";
 
 type PageProps = NextPageT<{
   tema: Omit<AkselTemaT, "ansvarlig"> & {

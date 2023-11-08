@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Error } from "./Error";
 import { SearchForm } from "./Form";
 import { Results } from "./Results";
-import { SearchContext, SearchNavigationContext } from "./providers";
+import { SearchContext, SearchNavigationContext } from "../providers";
 
 export const Search = () => {
   const { open, setOpen } = useContext(SearchContext);

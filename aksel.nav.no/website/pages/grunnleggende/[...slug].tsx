@@ -12,7 +12,7 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { Detail } from "@navikt/ds-react";
-import { WithSidebar } from "components/layout/WithSidebar";
+import { WithSidebar } from "components/layout/templates/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";

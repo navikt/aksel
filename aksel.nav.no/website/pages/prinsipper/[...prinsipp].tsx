@@ -1,5 +1,5 @@
 import { abbrName, BreadCrumbs, dateStr, TableOfContents } from "@/components";
-import { Footer } from "@/layout";
+import Footer from "components/layout/footer/Footer";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";

@@ -1,7 +1,7 @@
 import { searchOptions } from "@/types";
 import { Skeleton } from "@navikt/ds-react";
 import { useContext } from "react";
-import { SearchResultContext } from "./providers";
+import { SearchResultContext } from "../providers";
 
 export const Error = () => {
   const { isValidating, error } = useContext(SearchResultContext);

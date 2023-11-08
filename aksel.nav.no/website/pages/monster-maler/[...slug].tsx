@@ -13,7 +13,6 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { Detail, Heading } from "@navikt/ds-react";
-import { WithSidebar } from "components/layout/WithSidebar";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
@@ -23,6 +22,7 @@ import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
+import { WithSidebar } from "components/layout/templates/WithSidebar";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselTemplatesDocT>>;
