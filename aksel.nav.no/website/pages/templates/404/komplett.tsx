@@ -8,86 +8,61 @@ import {
   Link,
   List,
   VStack,
+  Page,
 } from "@navikt/ds-react";
 
 export default function Example() {
-  const styles = `
-  /* Må justeres basert på app inkludert header og footer  */
-  .app-container {
-    min-height: 80dvh;
-  }
-
-  /* Malen skal sentreres på siden med en maksbredde satt.  */
-  .app-container__layout {
-    max-width: 1024px;
-    margin-inline: auto;
-  }
-  `;
-
   return (
-    <>
-      {/* Stiler bør trekkes ut i eget stilark, ev. erstattes med Tailwind e.l. */}
-      <style>{styles}</style>
+    <Page data-aksel-template="404" /* footer={<Footer />} */>
       {/* Header og Footer bør være inkludert på siden */}
       {/* <Header /> */}
-      <Box
-        data-aksel-template="404"
-        className="app-container"
-        paddingBlock="20"
-        /* Horisontal padding kan måtte justeres basert på layout */
-        paddingInline={{ xs: "4", sm: "6" }}
-        as="main"
-      >
-        <HGrid
-          gap="12"
-          columns={{ md: 1, lg: 2 }}
-          className="app-container__layout"
-        >
-          <VStack gap="16">
-            <VStack gap="12" align="start">
-              <div>
-                <Heading level="1" size="large" spacing>
-                  Beklager, vi fant ikke siden
-                </Heading>
-                <BodyShort>
-                  Denne siden kan være slettet, flyttet eller det er en feil i
-                  lenken
-                </BodyShort>
-                <List>
-                  <List.Item>Bruk gjerne søket eller menyen</List.Item>
-                  <List.Item>
-                    <Link href="#">Gå til forsiden</Link>
-                  </List.Item>
-                </List>
-              </div>
-              <Button as="a" href="#">
-                Gå til Min side
-              </Button>
-              <Link href="#">
-                <BugIcon aria-hidden />
-                Meld gjerne fra om at lenken ikke virker
-              </Link>
-            </VStack>
+      <Page.Block as="main" width="xl" gutters>
+        <Box paddingBlock="20 0">
+          <HGrid gap="12" columns={{ md: 1, lg: 2 }}>
+            <VStack gap="16">
+              <VStack gap="12" align="start">
+                <div>
+                  <Heading level="1" size="large" spacing>
+                    Beklager, vi fant ikke siden
+                  </Heading>
+                  <BodyShort>
+                    Denne siden kan være slettet, flyttet eller det er en feil i
+                    lenken
+                  </BodyShort>
+                  <List>
+                    <List.Item>Bruk gjerne søket eller menyen</List.Item>
+                    <List.Item>
+                      <Link href="#">Gå til forsiden</Link>
+                    </List.Item>
+                  </List>
+                </div>
+                <Button as="a" href="#">
+                  Gå til Min side
+                </Button>
+                <Link href="#">
+                  <BugIcon aria-hidden />
+                  Meld gjerne fra om at lenken ikke virker
+                </Link>
+              </VStack>
 
-            <div>
-              <Heading level="2" size="large" spacing>
-                Page not found
-              </Heading>
-              <BodyShort spacing>
-                The page you requested cannot be found.
-              </BodyShort>
-              <BodyShort>
-                Go to the <Link href="#">front page</Link>, or use one of the
-                links in the menu.
-              </BodyShort>
-            </div>
-          </VStack>
-          <StatusSvg />
-        </HGrid>
-      </Box>
-      {/* Header og Footer bør være inkludert i Mal */}
-      {/* <Footer /> */}
-    </>
+              <div>
+                <Heading level="2" size="large" spacing>
+                  Page not found
+                </Heading>
+                <BodyShort spacing>
+                  The page you requested cannot be found.
+                </BodyShort>
+                <BodyShort>
+                  Go to the <Link href="#">front page</Link>, or use one of the
+                  links in the menu.
+                </BodyShort>
+              </div>
+            </VStack>
+            <StatusSvg />
+          </HGrid>
+        </Box>
+      </Page.Block>
+    </Page>
   );
 }
 

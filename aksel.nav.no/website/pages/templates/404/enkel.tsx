@@ -1,59 +1,45 @@
-import { BodyShort, Box, HGrid, Heading, Link, List } from "@navikt/ds-react";
+import {
+  BodyShort,
+  Box,
+  HGrid,
+  Heading,
+  Link,
+  List,
+  Page,
+} from "@navikt/ds-react";
 
 export default function Example() {
-  const styles = `
-  /* Må justeres basert på app inkludert header og footer  */
-  .app-container {
-    min-height: 80dvh;
-  }
-
-  /* Malen skal sentreres på siden med en maksbredde satt.  */
-  .app-container__layout {
-    max-width: 1024px;
-    margin-inline: auto;
-  }
-  `;
-
   return (
-    <>
-      {/* Stiler bør trekkes ut i eget stilark, ev. erstattes med Tailwind e.l. */}
-      <style>{styles}</style>
+    <Page data-aksel-template="404" /* footer={<Footer />} */>
       {/* Header og Footer bør være inkludert i Mal */}
       {/* <Header /> */}
-      <Box
-        data-aksel-template="404"
-        className="app-container"
-        paddingBlock="20"
-        /* Horisontal padding kan måtte justeres basert på layout */
-        paddingInline={{ xs: "4", sm: "6" }}
-        as="main"
-      >
-        <HGrid
-          gap="12"
-          columns={{ md: 1, lg: 2 }}
-          className="app-container__layout"
-        >
-          <div>
-            <Heading level="1" size="large" spacing>
-              Beklager, vi fant ikke siden
-            </Heading>
-            <BodyShort>
-              Denne siden kan være slettet, flyttet eller det er en feil i
-              lenken
-            </BodyShort>
-            <List>
-              <List.Item>Bruk gjerne søket eller menyen</List.Item>
-              <List.Item>
-                <Link href="#">Gå til forsiden</Link>
-              </List.Item>
-            </List>
-          </div>
-          <StatusSvg />
-        </HGrid>
-      </Box>
-      {/* Header og Footer bør være inkludert i Mal */}
-      {/* <Footer /> */}
-    </>
+      <Page.Block as="main" width="xl" gutters>
+        <Box paddingBlock="20 0">
+          <HGrid
+            gap="12"
+            columns={{ md: 1, lg: 2 }}
+            className="app-container__layout"
+          >
+            <div>
+              <Heading level="1" size="large" spacing>
+                Beklager, vi fant ikke siden
+              </Heading>
+              <BodyShort>
+                Denne siden kan være slettet, flyttet eller det er en feil i
+                lenken
+              </BodyShort>
+              <List>
+                <List.Item>Bruk gjerne søket eller menyen</List.Item>
+                <List.Item>
+                  <Link href="#">Gå til forsiden</Link>
+                </List.Item>
+              </List>
+            </div>
+            <StatusSvg />
+          </HGrid>
+        </Box>
+      </Page.Block>
+    </Page>
   );
 }
 
