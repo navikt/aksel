@@ -7,10 +7,10 @@ import {
   ResolveSlugT,
   ResolveTemaT,
 } from "@/types";
+import { abbrName } from "@/utils";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
-import { abbrName } from "../..";
 
 type ArtikkelCardProps = ResolveContributorsSingleT<
   ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>

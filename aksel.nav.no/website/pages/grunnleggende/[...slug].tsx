@@ -1,4 +1,3 @@
-import { dateStr } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocumentsTmp } from "@/sanity/interface";
@@ -21,6 +20,7 @@ import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
+import { dateStr } from "@/utils";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;

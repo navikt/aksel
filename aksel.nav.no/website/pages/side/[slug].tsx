@@ -1,4 +1,3 @@
-import { TableOfContents } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
@@ -10,6 +9,7 @@ import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
+import TableOfContents from "components/website-modules/toc/TOC";
 
 type PageProps = NextPageT<{ page: ResolveSlugT<AkselStandaloneDocT> }>;
 

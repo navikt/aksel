@@ -1,4 +1,3 @@
-import { dateStr } from "@/components";
 import { amplitude, AmplitudeEvents } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
@@ -30,6 +29,7 @@ import {
   GithubIcon,
   YarnIcon,
 } from "components/assets/Icons";
+import { dateStr } from "@/utils";
 
 const kodepakker = {
   "ds-react": {

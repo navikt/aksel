@@ -1,4 +1,3 @@
-import { BreadCrumbs, TableOfContents, abbrName, dateStr } from "@/components";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getAkselDocuments } from "@/sanity/interface";
@@ -25,6 +24,9 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../../404";
 import Footer from "components/layout/footer/Footer";
+import { abbrName, dateStr } from "@/utils";
+import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
+import TableOfContents from "components/website-modules/toc/TOC";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<

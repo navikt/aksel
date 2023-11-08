@@ -1,4 +1,3 @@
-import { capitalize } from "@/components";
 import ErrorBoundary from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
 import {
@@ -12,6 +11,7 @@ import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { CodeSandbox } from "./parts/CodeSandbox";
+import { capitalize } from "@/utils";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";

@@ -1,4 +1,3 @@
-import { abbrName, BreadCrumbs, dateStr, TableOfContents } from "@/components";
 import Footer from "components/layout/footer/Footer";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
@@ -17,6 +16,9 @@ import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
+import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
+import TableOfContents from "components/website-modules/toc/TOC";
+import { abbrName, dateStr } from "@/utils";
 
 type PageProps = NextPageT<{
   prinsipp: ResolveContributorsT<ResolveSlugT<AkselPrinsippDocT>>;
