@@ -2,14 +2,14 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../../util/OverridableComponent";
 
-export const widths = ["laptop", "laptop-xl", "desktop"] as const;
+export const widths = ["lg", "xl", "2xl"] as const;
 
 export interface PageBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Predefined max-width
-   * @example laptop:    1280px    | (xl)    | narrow  |
-   * @example laptop-xl: 1440px    | (2xl)   | regular |
-   * @example desktop:   1920px    | (3xl)   | wide    |
+   * @example lg:  1024px
+   * @example xl:  1280px
+   * @example 2xl: 1440px
    * @default 100%
    */
   width?: (typeof widths)[number];

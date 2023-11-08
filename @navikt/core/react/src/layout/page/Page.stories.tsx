@@ -96,24 +96,24 @@ export const Background: StoryFn = () => (
 export const ContentBlockPadding: StoryFn = () => (
   <HGrid columns={2} gap="6" align="start">
     <Page
-      footer={<Footer width="laptop" gutters />}
+      footer={<Footer width="lg" gutters />}
       contentBlockPadding="end"
       background="bg-subtle"
     >
-      <Header width="laptop" gutters />
-      <Page.Block width="laptop" gutters as="main">
+      <Header width="lg" gutters />
+      <Page.Block width="lg" gutters as="main">
         <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
     </Page>
     <Page
-      footer={<Footer width="laptop" gutters />}
+      footer={<Footer width="lg" gutters />}
       contentBlockPadding="none"
       background="bg-subtle"
     >
-      <Header width="laptop" gutters />
-      <Page.Block width="laptop" gutters as="main">
+      <Header width="lg" gutters />
+      <Page.Block width="lg" gutters as="main">
         <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
           Main
         </Box>
@@ -124,17 +124,17 @@ export const ContentBlockPadding: StoryFn = () => (
 
 export const Gutters: StoryFn = () => (
   <HGrid columns={2} gap="6" align="start">
-    <Page footer={<Footer width="laptop" gutters />} background="bg-subtle">
-      <Header width="laptop" gutters />
-      <Page.Block width="laptop" gutters as="main">
+    <Page footer={<Footer width="lg" gutters />} background="bg-subtle">
+      <Header width="lg" gutters />
+      <Page.Block width="lg" gutters as="main">
         <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
           Main
         </Box>
       </Page.Block>
     </Page>
-    <Page footer={<Footer width="laptop" />} background="bg-subtle">
-      <Header width="laptop" />
-      <Page.Block width="laptop" as="main">
+    <Page footer={<Footer width="lg" />} background="bg-subtle">
+      <Header width="lg" />
+      <Page.Block width="lg" as="main">
         <Box background="surface-alt-3-subtle" style={{ height: "80vh" }}>
           Main
         </Box>
@@ -172,7 +172,7 @@ export const WithDecorator: StoryFn = () => {
       footer={<div id="decorator-footer"></div>}
     >
       <div id="decorator-header"></div>
-      <Content width="laptop" gutters />
+      <Content width="lg" gutters />
       <div
         id="decorator-env"
         data-src={`${MILJO_URL}/env?context=privatperson`}
@@ -220,19 +220,19 @@ export const OutsideBackground = () => {
           style={{ height: 100 }}
           as="footer"
         >
-          <Page.Block width="laptop" gutters>
+          <Page.Block width="lg" gutters>
             Footer
           </Page.Block>
         </Box>
       }
     >
       <Box background="surface-alt-1-subtle" style={{ height: 64 }} as="header">
-        <Page.Block width="laptop" gutters>
+        <Page.Block width="lg" gutters>
           Header
         </Page.Block>
       </Box>
       <Box background="surface-alt-2-subtle" style={{ height: 300 }} as="main">
-        <Page.Block width="laptop" gutters>
+        <Page.Block width="lg" gutters>
           main
         </Page.Block>
       </Box>
@@ -240,7 +240,7 @@ export const OutsideBackground = () => {
   );
 };
 
-function Header({ width = "laptop", gutters = false }: any) {
+function Header({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block as="header" width={width} gutters={gutters}>
       <Box background="surface-alt-3-subtle" style={{ height: 64 }}>
@@ -250,7 +250,7 @@ function Header({ width = "laptop", gutters = false }: any) {
   );
 }
 
-function Content({ width = "laptop", gutters = false }: any) {
+function Content({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block width={width} gutters={gutters} as="main">
       <Box background="surface-alt-3-subtle" style={{ height: 300 }}>
@@ -260,7 +260,7 @@ function Content({ width = "laptop", gutters = false }: any) {
   );
 }
 
-function Footer({ width = "laptop", gutters = false }: any) {
+function Footer({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block width={width} gutters={gutters} as="footer">
       <Box background="surface-alt-3-subtle" style={{ height: 100 }}>
