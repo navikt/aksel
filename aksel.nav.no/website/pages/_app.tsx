@@ -4,8 +4,8 @@ import { useScrollToHashOnPageLoad } from "components/website-modules/utils/util
 import { AppProps } from "next/app";
 import { useEffect } from "react";
 import { hotjar } from "react-hotjar";
-import { IdContext } from "../components/website-modules/utils/contexts/id-context";
-import "../styles/index.css";
+import { IdContext } from "components/website-modules/utils/contexts/id-context";
+import "components/styles/index.css";
 
 function App({ Component, pageProps, router }: AppProps) {
   useScrollToHashOnPageLoad();
