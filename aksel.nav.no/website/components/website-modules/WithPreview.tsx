@@ -4,7 +4,7 @@ import { useMemo, ComponentType } from "react";
 import dynamic from "next/dynamic";
 import { useCheckAuth } from "components/website-modules/utils/useCheckAuth";
 
-export const PreviewBanner = dynamic(
+const PreviewBanner = dynamic(
   () => import("components/website-modules/PreviewBanner"),
   {
     ssr: false,

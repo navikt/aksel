@@ -218,7 +218,7 @@ const Page = ({ tema: page }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

@@ -264,7 +264,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Page = (props: PageProps["props"]) => {
   if (props?.preview) {

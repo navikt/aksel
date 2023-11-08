@@ -110,7 +110,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {
