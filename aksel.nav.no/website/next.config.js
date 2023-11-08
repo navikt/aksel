@@ -1,8 +1,7 @@
 const path = require("path");
 
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
+const ANALYZE = process.env.ANALYZE === "true";
+const withBundleAnalyzer = require("@next/bundle-analyzer")();
 
 const cdnUrl = "https://cdn.nav.no";
 const hotjarUrl = "https://*.hotjar.com";
@@ -53,54 +52,61 @@ const securityHeaders = [
 
 const useCdn = process.env.USE_CDN_ASSETS === "true";
 
-const config = () =>
-  withBundleAnalyzer({
-    transpilePackages: ["@navikt/ds-tokens", "react-hotjar"],
-    publicRuntimeConfig: {
-      NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
-    },
-    assetPrefix: useCdn ? "https://cdn.nav.no/aksel/website" : undefined,
-    async headers() {
-      return [
-        {
-          source: "/:path*",
-          headers: securityHeaders,
-        },
-      ];
-    },
-    async redirects() {
-      return [
-        {
-          source: "/studio",
-          destination: "/admin",
-          permanent: true,
-        },
-        {
-          source: "/storybook",
-          destination: "https://main--5f801fb2aea7820022de2936.chromatic.com/",
-          permanent: false,
-        },
-        {
-          source: "/prinsipper",
-          destination: "/",
-          permanent: false,
-        },
-        {
-          source: "/preview/:slug*",
-          destination: "/api/preview?slug=:slug*",
-          permanent: true,
-        },
-      ];
-    },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  transpilePackages: ["@navikt/ds-tokens", "react-hotjar"],
+  publicRuntimeConfig: {
+    NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
+  },
+  assetPrefix: useCdn ? "https://cdn.nav.no/aksel/website" : undefined,
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: "/studio",
+        destination: "/admin",
+        permanent: true,
+      },
+      {
+        source: "/storybook",
+        destination: "https://main--5f801fb2aea7820022de2936.chromatic.com/",
+        permanent: false,
+      },
+      {
+        source: "/prinsipper",
+        destination: "/",
+        permanent: false,
+      },
+      {
+        source: "/preview/:slug*",
+        destination: "/api/preview?slug=:slug*",
+        permanent: true,
+      },
+    ];
+  },
 
-    images: {
-      domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
-      dangerouslyAllowSVG: true,
-    },
-    output: "standalone",
-    experimental: {
-      outputFileTracingRoot: path.join(__dirname, "../../"),
-    },
-  });
+  images: {
+    remotePatterns: [
+      {
+        hostname: "cdn.sanity.io",
+      },
+      {
+        hostname: "raw.githubusercontent.com",
+      },
+    ],
+    dangerouslyAllowSVG: true,
+  },
+  output: "standalone",
+  experimental: {
+    outputFileTracingRoot: path.join(__dirname, "../../"),
+  },
+};
 
-module.exports = config();
+module.exports = ANALYZE ? withBundleAnalyzer(nextConfig) : nextConfig;

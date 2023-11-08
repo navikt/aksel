@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({
   };
 };
 
-export const query = `*[_type == "aksel_forside"][0]{
+const query = `*[_type == "aksel_forside"][0]{
   "page": {
     ...,
   },
