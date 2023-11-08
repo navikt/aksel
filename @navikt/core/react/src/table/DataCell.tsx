@@ -10,11 +10,11 @@ export interface DataCellProps
    */
   align?: "left" | "center" | "right";
   /**
-   * Assumes that content can be interactive.
-   * If set to `false` when used in `ExpandableRow`, Table will assume that onClick should be able to open/close row.
-   * @default true
+   * When true, assumes that all content in Table.DataCell is non-interactive.
+   * When used in `ExpandableRow`, this allows richer content in DataCell while still allowing opening/closing expanded row
+   * @default false
    */
-  hasInteractiveContent?: boolean;
+  alwaysExpandOnCellClick?: boolean;
 }
 
 export interface DataCellType
@@ -24,7 +24,13 @@ export interface DataCellType
 
 export const DataCell: DataCellType = forwardRef(
   (
-    { className, children = "", align, hasInteractiveContent = true, ...rest },
+    {
+      className,
+      children = "",
+      align,
+      alwaysExpandOnCellClick = false,
+      ...rest
+    },
     ref
   ) => {
     const context = useContext(TableExpansionContext);
@@ -43,7 +49,7 @@ export const DataCell: DataCellType = forwardRef(
         )}
         onClick={(e) => {
           rest?.onClick?.(e);
-          !hasInteractiveContent && context?.expansionHandler(e);
+          alwaysExpandOnCellClick && context?.expansionHandler(e);
         }}
         {...rest}
       >

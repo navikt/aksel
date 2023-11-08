@@ -344,10 +344,13 @@ export const ClickableRowTest = {
               expandOnRowClick
               onOpenChange={onOpenChange}
             >
-              <Table.DataCell hasInteractiveContent={false}>
+              <Table.DataCell alwaysExpandOnCellClick={false}>
                 <div data-testid="cell1">Should be clickable</div>
               </Table.DataCell>
-              <Table.DataCell hasInteractiveContent={false} data-testid="cell2">
+              <Table.DataCell
+                alwaysExpandOnCellClick={false}
+                data-testid="cell2"
+              >
                 Should also be clickable
               </Table.DataCell>
 
