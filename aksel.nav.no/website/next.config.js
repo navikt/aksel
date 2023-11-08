@@ -93,14 +93,7 @@ const nextConfig = {
   },
 
   images: {
-    remotePatterns: [
-      {
-        hostname: "cdn.sanity.io",
-      },
-      {
-        hostname: "raw.githubusercontent.com",
-      },
-    ],
+    domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
     dangerouslyAllowSVG: true,
   },
   output: "standalone",
