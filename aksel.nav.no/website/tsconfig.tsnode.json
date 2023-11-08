@@ -6,7 +6,7 @@
     "paths": {
       "@/components": ["components/index.ts"],
       "@/sb-util": [".storybook/utils.tsx"],
-      "@/types": ["types/index.ts"],
+      "@/types": ["components/types/index.ts"],
       "@/pages/*": ["pages/*"],
       "@/sanity-block": ["components/SanityBlockContent.tsx"],
       "@/utils": ["components/website-modules/utils/index.ts"],

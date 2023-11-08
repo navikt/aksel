@@ -3,7 +3,7 @@ import {
   grunnleggendeKategorier,
   komponentKategorier,
   templatesKategorier,
-} from "../sanity/config";
+} from "@/sanity/config";
 
 export type ResolveSlugT<T> = Omit<T, "slug"> & {
   slug: string;
