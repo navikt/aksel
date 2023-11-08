@@ -34,6 +34,7 @@ export const Search = () => {
         aria-label="Søk"
         className="h-[90%] max-h-[52rem] "
         width="medium"
+        closeOnBackdropClick
       >
         <Error />
         <SearchForm />

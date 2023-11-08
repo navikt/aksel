@@ -2,7 +2,7 @@ import { searchOptions } from "@/types";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Chips, Search } from "@navikt/ds-react";
 import KBD from "components/website-modules/KBD";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useShortcut } from "./hooks";
 import {
   SearchContext,
@@ -19,6 +19,10 @@ export const SearchForm = () => {
   const inputRef = useRef(null);
 
   useShortcut(open, setOpen, inputRef);
+
+  useEffect(() => {
+    setTimeout(() => open && inputRef.current.focus());
+  }, [open]);
 
   const handleSearchStart = (value: string) => {
     setQuery(value);
