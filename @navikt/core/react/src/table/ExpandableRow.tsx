@@ -81,11 +81,8 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       e.stopPropagation();
     };
 
-    const onRowClick = (e) => {
-      if (e.target.nodeName === "TD" || e.target.nodeName === "TH") {
-        expansionHandler(e);
-      }
-    };
+    const onRowClick = (e) =>
+      !isInteractiveTarget(e.target) && expansionHandler(e);
 
     return (
       <>
@@ -142,5 +139,23 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     );
   }
 );
+
+function isInteractiveTarget(elm: HTMLElement) {
+  if (elm.nodeName === "TD" || elm.nodeName === "TH") {
+    return false;
+  }
+  if (
+    ["BUTTON", "DETAILS", "LABEL", "SELECT", "TEXTAREA", "INPUT", "A"].includes(
+      elm.nodeName
+    )
+  ) {
+    return true;
+  }
+
+  if (!elm.parentElement) {
+    return false;
+  }
+  return isInteractiveTarget(elm.parentElement);
+}
 
 export default ExpandableRow;
