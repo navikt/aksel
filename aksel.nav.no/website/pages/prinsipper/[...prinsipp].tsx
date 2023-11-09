@@ -1,4 +1,5 @@
-import Footer from "components/layout/footer/Footer";
+import Footer from "@/layout/footer/Footer";
+import { Header } from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
@@ -8,17 +9,16 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
+import { abbrName, dateStr } from "@/utils";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "clsx";
-import { Header } from "components/layout/header/Header";
 import Bilde from "components/sanity-modules/bilde/Bilde";
-import { SEO } from "components/website-modules/seo/SEO";
-import { GetServerSideProps } from "next/types";
-import { lazy, Suspense } from "react";
-import NotFotfund from "../404";
 import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
+import { SEO } from "components/website-modules/seo/SEO";
 import TableOfContents from "components/website-modules/toc/TOC";
-import { abbrName, dateStr } from "@/utils";
+import { GetServerSideProps } from "next/types";
+import { Suspense, lazy } from "react";
+import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
   prinsipp: ResolveContributorsT<ResolveSlugT<AkselPrinsippDocT>>;

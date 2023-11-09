@@ -1,3 +1,5 @@
+import Footer from "@/layout/footer/Footer";
+import { Header } from "@/layout/header/Header";
 import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
@@ -18,16 +20,14 @@ import {
   StorybookIcon,
   YarnIcon,
 } from "components/assets";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
 
+import { WithSidebar } from "@/layout/templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
-import { WithSidebar } from "components/layout/templates/WithSidebar";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;

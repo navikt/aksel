@@ -1,9 +1,9 @@
+import { Sidebar } from "@/layout/sidebar/Sidebar";
 import { urlFor } from "@/sanity/interface";
 import { AkselSidebarT } from "@/types";
 import { capitalize } from "@/utils";
 import { Box, Detail, Heading, Link } from "@navikt/ds-react";
 import cl from "clsx";
-import { Sidebar } from "components/layout/sidebar/Sidebar";
 import { TableOfContentsv2 } from "components/website-modules/toc/TOCv2";
 import Image from "next/legacy/image";
 import NextLink from "next/link";

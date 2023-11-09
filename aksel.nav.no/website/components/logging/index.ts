@@ -1,3 +1,3 @@
 export { amplitudeLogNavigation } from "./event-tracking";
 export { AmplitudeEvents } from "./events";
-export { amplitude } from "./useAmplitude";
+export { default as useAmplitudeInit, amplitude } from "./useAmplitude";

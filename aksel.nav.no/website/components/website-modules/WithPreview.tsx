@@ -2,7 +2,7 @@ import { getClient } from "@/sanity/client.server";
 import { useLiveQuery, LiveQueryProvider } from "next-sanity/preview";
 import { useMemo, ComponentType } from "react";
 import dynamic from "next/dynamic";
-import { useCheckAuth } from "components/website-modules/utils/useCheckAuth";
+import { useCheckAuth } from "@/hooks/useCheckAuth";
 
 const PreviewBanner = dynamic(
   () => import("components/website-modules/PreviewBanner"),

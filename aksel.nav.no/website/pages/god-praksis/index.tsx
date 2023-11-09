@@ -1,4 +1,5 @@
-import Footer from "components/layout/footer/Footer";
+import Footer from "@/layout/footer/Footer";
+import { Header } from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
@@ -13,7 +14,6 @@ import {
 } from "@/types";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { Heading } from "@navikt/ds-react";
-import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
 import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";

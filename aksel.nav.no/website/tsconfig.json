@@ -18,22 +18,21 @@
     "types": ["node", "jest", "@testing-library/jest-dom"],
     "baseUrl": ".",
     "paths": {
-      "@/web/*": ["./components/website-modules/*"],
-      "@/cms/*": ["./components/sanity-modules/*"],
-
       "@/sb-util": [".storybook/utils.tsx"],
       "@/types": ["components/types/index.ts"],
-      "@/pages/*": ["pages/*"],
       "@/sanity-block": ["components/website-modules/SanityBlockContent.tsx"],
+      "@/hooks/*": ["./components/hooks/*"],
       "@/preview": ["components/website-modules/WithPreview.tsx"],
-      "@/utils": ["components/website-modules/utils/index.ts"],
-      "@/layout": ["components/layout/index.ts"],
+      "@/logging": ["components/logging/index.ts"],
+      "@/utils": ["components/utils/index.ts"],
+      "@/layout/*": ["components/layout/*"],
+      "@/web/*": ["./components/website-modules/*"],
+      "@/cms/*": ["./components/sanity-modules/*"],
       "@/error-boundary": ["components/website-modules/ErrorBoundary.tsx"],
       "@/sanity/config": ["sanity/config.ts"],
       "@/sanity/client.server": ["sanity/interface/client.server.js"],
       "@/sanity/interface": ["sanity/interface/interface.ts"],
-      "@/sanity/queries": ["sanity/interface/queries.js"],
-      "@/logging": ["components/website-modules/utils/logging/index.ts"]
+      "@/sanity/queries": ["sanity/interface/queries.js"]
     }
   },
   "ts-node": {

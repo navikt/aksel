@@ -1,14 +1,13 @@
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
-import { getAuthors } from "@/utils";
+import { getAuthors, getImage } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import cl from "clsx";
-import { getImage } from "components/website-modules/utils/get-image";
-import { useFormatedDate } from "components/website-modules/utils/getDate";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { ArticleT } from "./Card";
 import { Tag } from "./Tag";
+import { useFormatedDate } from "@/hooks/useFormatedDate";
 
 export const Highlight = ({
   article,

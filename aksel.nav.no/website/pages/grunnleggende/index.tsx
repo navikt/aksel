@@ -1,3 +1,6 @@
+import Footer from "@/layout/footer/Footer";
+import { Header } from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
@@ -9,9 +12,6 @@ import {
 } from "@/types";
 import { BodyLong, Heading, Ingress } from "@navikt/ds-react";
 import cl from "clsx";
-import { WithSidebar } from "components/layout/templates/WithSidebar";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
 import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";

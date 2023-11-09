@@ -3,10 +3,10 @@ import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import cl from "clsx";
 import Logo from "components/assets/Logo";
-import { Hamburger } from "components/layout/header/Hamburger";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Hamburger } from "./Hamburger";
 
 export const GlobalSearch = dynamic(
   () => import("../../website-modules/search/Search"),

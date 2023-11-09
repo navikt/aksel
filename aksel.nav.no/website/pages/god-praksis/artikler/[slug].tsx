@@ -1,3 +1,5 @@
+import Footer from "@/layout/footer/Footer";
+import { Header } from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
@@ -17,8 +19,6 @@ import {
 import { abbrName, dateStr } from "@/utils";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
 import { SEO } from "components/website-modules/seo/SEO";

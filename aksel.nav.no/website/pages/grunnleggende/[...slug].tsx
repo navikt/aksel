@@ -1,3 +1,6 @@
+import Footer from "@/layout/footer/Footer";
+import { Header } from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
@@ -12,9 +15,6 @@ import {
 } from "@/types";
 import { dateStr } from "@/utils";
 import { Detail } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import { WithSidebar } from "components/layout/templates/WithSidebar";
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { SEO } from "components/website-modules/seo/SEO";

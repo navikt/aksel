@@ -1,4 +1,5 @@
-import Footer from "components/layout/footer/Footer";
+import Footer from "@/layout/footer/Footer";
+import { Header } from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
@@ -9,7 +10,6 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { Heading } from "@navikt/ds-react";
-import { Header } from "components/layout/header/Header";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
 import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";

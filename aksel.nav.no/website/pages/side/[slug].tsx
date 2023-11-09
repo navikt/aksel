@@ -1,15 +1,15 @@
+import Footer from "@/layout/footer/Footer";
+import { Header } from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
 import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
 import { Heading } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
 import { SEO } from "components/website-modules/seo/SEO";
+import TableOfContents from "components/website-modules/toc/TOC";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import TableOfContents from "components/website-modules/toc/TOC";
 
 type PageProps = NextPageT<{ page: ResolveSlugT<AkselStandaloneDocT> }>;
 

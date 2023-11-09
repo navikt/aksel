@@ -1,4 +1,5 @@
 import ErrorBoundary from "@/error-boundary";
+import { useFormatedDate } from "@/hooks/useFormatedDate";
 
 import { amplitudeLogNavigation } from "@/logging";
 import {
@@ -9,7 +10,6 @@ import {
 } from "@/types";
 import { abbrName } from "@/utils";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextLink from "next/link";
 
 type ArtikkelCardProps = ResolveContributorsSingleT<

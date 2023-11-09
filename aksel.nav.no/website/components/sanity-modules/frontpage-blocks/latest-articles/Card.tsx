@@ -1,14 +1,13 @@
 import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
-import { abbrName } from "@/utils";
+import { abbrName, getImage } from "@/utils";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import { getImage } from "components/website-modules/utils/get-image";
-import { useFormatedDate } from "components/website-modules/utils/getDate";
 import NextImage from "next/legacy/image";
 import NextLink from "next/link";
 import { Tag } from "./Tag";
+import { useFormatedDate } from "@/hooks/useFormatedDate";
 
 export type ArticleT = {
   _key: string;
