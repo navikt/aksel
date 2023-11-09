@@ -22,9 +22,9 @@
     "update:changelog": "ts-node --project tsconfig.tsnode.json ./scripts/changelog",
     "update:sanity": "yarn update:tokens && yarn update:props && yarn update:eksempler && yarn update:changelog",
     "analyze": "cross-env ANALYZE=true yarn build",
-    "test": "jest",
+    "test": "jest --config ./config/jest.config.js",
     "playwright": "playwright test",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watch --config ./config/jest.config.js",
     "backup": "ts-node scripts/backup.js",
     "watch:tw": "yarn tailwindcss -i ./styles/index.css -o ./dist/tw.css --watch"
   },
