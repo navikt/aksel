@@ -198,7 +198,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             </BodyShort>
           </div>
           {morePosts && (
-            <div className="max-w-content-w-padding mx-auto mt-32 w-full">
+            <div className="mx-auto mt-32 w-full max-w-4xl">
               <Heading level="2" size="large">
                 Flere blogginnlegg
               </Heading>
@@ -210,7 +210,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             </div>
           )}
 
-          <div className="max-w-content-w-padding mx-auto grid w-full">
+          <div className="mx-auto grid w-full max-w-4xl">
             <BloggAd />
           </div>
         </div>

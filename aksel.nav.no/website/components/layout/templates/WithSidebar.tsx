@@ -41,7 +41,7 @@ export const WithSidebar = ({
         <main
           tabIndex={-1}
           id="hovedinnhold"
-          className="md:max-w-screen-sidebar relative z-0 w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
+          className="relative z-0 w-full px-4 focus:outline-none sm:pl-6 sm:pr-6 md:pl-0"
         >
           <div
             className={cl(

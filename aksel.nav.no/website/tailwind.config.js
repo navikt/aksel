@@ -61,13 +61,6 @@ module.exports = {
           900: "#2c0162",
         },
       },
-      fontFamily: {
-        sans: ["Source Sans Pro", "Arial", "sans-serif"],
-      },
-      transitionProperty: {
-        width: "width",
-        gap: "gap",
-      },
       spacing: {
         0: 0,
         header: "4rem",
@@ -75,8 +68,6 @@ module.exports = {
         text: "600px",
       },
       maxWidth: {
-        "screen-sidebar": "calc(100vw - 16rem)",
-        "content-w-padding": "896px",
         aksel: "1280px",
         text: "600px",
         prose: "75ch",
@@ -90,18 +81,9 @@ module.exports = {
         ...theme("spacing"),
       }),
       boxShadow: {
-        "focus-inverted-inset": "inset var(--a-shadow-focus-inverted)",
-        "focus-inset": "inset var(--a-shadow-focus)",
         "focus-gap": "0 0 0 1px white, var(--a-shadow-focus)",
-        "focus-gap-inset":
-          "inset 0 0 0 2px var(--a-border-focus), inset 0 0 0 3px white",
-        header: "inset 0 -1px 0 rgb(180, 180, 180, 0.1)",
       },
       keyframes: {
-        searchModal: {
-          "0%": { transform: "scale(0.98)", opacity: 0.7 },
-          "100%": { transform: "scale(1)", opacity: 1 },
-        },
         fadeIn: {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
@@ -110,87 +92,10 @@ module.exports = {
           "0%": { opacity: 0.2 },
           "100%": { opacity: 1 },
         },
-        expand: {
-          "0%": {
-            opacity: 0.2,
-            width: "30%",
-          },
-          "100%": {
-            opacity: 1,
-            width: "100%",
-          },
-        },
-        expandLg: {
-          "0%": {
-            opacity: 0.2,
-            width: "100px",
-          },
-          "100%": {
-            opacity: 1,
-            width: "500px",
-          },
-        },
-        popup: {
-          "0%": {
-            transform: "translateY(0)",
-          },
-          "10%": {
-            background: "var(--a-deepblue-500)",
-          },
-          "15%": {
-            transform: "translateY(-100%)",
-          },
-          "20%": {
-            background: "var(--a-deepblue-600)",
-          },
-          "50%": {
-            background: "var(--a-deepblue-500)",
-          },
-          "90%": {
-            transform: "translateY(-100%)",
-          },
-          "100%": {
-            transform: "translateY(0)",
-          },
-        },
-        textbounce: {
-          "8%": {
-            transform: "translateY(0)",
-          },
-          "17%": {
-            transform: "translateY(-10%)",
-          },
-          "25%": {
-            transform: "translateY(2%)",
-          },
-          "30%": {
-            transform: "translateY(0)",
-          },
-        },
-        popout: {
-          "0%": {
-            transform: "translateY(0px)",
-          },
-          "15%": {
-            transform: "translateY(-100%)",
-          },
-          "90%": {
-            transform: "translateY(-100%)",
-          },
-          "100%": {
-            transform: "translateY(0px)",
-          },
-        },
       },
       animation: {
         fadeIn: "fadeIn 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
-        searchModal: "searchModal 0.15s ease",
         toc: "toc 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
-        expand: "expand 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
-        expandLg: "expandLg 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
-        popup: "popup 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
-        popout: "popout 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
-        textbounce: "textbounce 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
       },
     },
   },

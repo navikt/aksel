@@ -2,9 +2,9 @@ import { PersonCircleIcon } from "@navikt/aksel-icons";
 import docs from "@navikt/ds-tokens/docs.json";
 import Link from "next/link";
 import color from "tinycolor2";
-import { Copy } from "../Copy";
 import { Grid } from "../Grid";
 import { getColorString, getGlobalReference, sanitizeName } from "../utilities";
+import { CopyButton } from "@navikt/ds-react";
 
 export const SemanticView = ({ cat }: { cat: string }) => {
   const colors = docs[cat];
@@ -31,9 +31,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
               </div>
               <dl className="grid h-full">
                 <dt className="inline-flex items-center gap-2">
-                  <Copy
-                    text={sanitizeName(x.name.replace("text-", ""))}
+                  <CopyButton
                     copyText={x.name}
+                    text={sanitizeName(x.name.replace("text-", ""))}
+                    size="small"
+                    iconPosition="right"
                   />
                 </dt>
                 <dd className="text-text-subtle text-medium mt-auto">
@@ -80,9 +82,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
               </div>
               <dl className="grid h-full">
                 <dt className="inline-flex items-center gap-2">
-                  <Copy
+                  <CopyButton
                     text={sanitizeName(x.name.replace("icon-", ""))}
                     copyText={x.name}
+                    size="small"
+                    iconPosition="right"
                   />
                 </dt>
                 <dd className="text-text-subtle text-medium mt-auto">
@@ -121,9 +125,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
               />
               <dl className="grid h-full">
                 <dt className="inline-flex items-center gap-2">
-                  <Copy
+                  <CopyButton
                     text={sanitizeName(x.name.replace("border-", ""))}
                     copyText={x.name}
+                    size="small"
+                    iconPosition="right"
                   />
                 </dt>
                 <dd className="text-text-subtle text-medium mt-auto">
@@ -191,9 +197,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
               </div>
               <dl className="grid h-full">
                 <dt className="inline-flex items-center gap-2">
-                  <Copy
+                  <CopyButton
                     text={sanitizeName(x.name.replace("surface-", ""))}
                     copyText={x.name}
+                    size="small"
+                    iconPosition="right"
                   />
                 </dt>
                 <dd className="text-text-subtle text-medium mt-auto">
@@ -243,9 +251,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
               </div>
               <dl className="grid h-full">
                 <dt className="inline-flex items-center gap-2">
-                  <Copy
+                  <CopyButton
                     text={sanitizeName(x.name.replace("surface-", ""))}
                     copyText={x.name}
+                    size="small"
+                    iconPosition="right"
                   />
                 </dt>
                 <dd className="text-text-subtle text-medium mt-auto">
@@ -286,9 +296,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
             </div>
             <dl className="grid h-full">
               <dt className="inline-flex items-center gap-2">
-                <Copy
+                <CopyButton
                   text={sanitizeName(x.name.replace("surface-", ""))}
                   copyText={x.name}
+                  size="small"
+                  iconPosition="right"
                 />
               </dt>
               <dd className="text-text-subtle text-medium mt-auto">
