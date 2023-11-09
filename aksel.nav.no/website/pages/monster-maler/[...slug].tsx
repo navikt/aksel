@@ -1,6 +1,6 @@
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocumentsTmp } from "@/sanity/interface";
+import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselSidebarT,
@@ -11,9 +11,11 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
+import { dateStr } from "@/utils";
 import { Detail, Heading } from "@navikt/ds-react";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
+import { WithSidebar } from "components/layout/templates/WithSidebar";
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { StatusTag } from "components/website-modules/StatusTag";
 import { AkselTable, AkselTableRow } from "components/website-modules/Table";
@@ -21,8 +23,6 @@ import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { WithSidebar } from "components/layout/templates/WithSidebar";
-import { dateStr } from "@/utils";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselTemplatesDocT>>;
@@ -48,8 +48,8 @@ const query = `{
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getDocumentsTmp("templates_artikkel").then((paths) =>
-      paths.map((slug) => ({
+    paths: await getDocuments("templates_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
         params: {
           slug: slug.split("/").filter((x) => x !== "monster-maler"),
         },

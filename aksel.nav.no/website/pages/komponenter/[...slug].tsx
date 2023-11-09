@@ -1,7 +1,7 @@
 import { amplitude, AmplitudeEvents } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocumentsTmp } from "@/sanity/interface";
+import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
@@ -11,9 +11,17 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
+import { dateStr } from "@/utils";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
+import {
+  ChangelogIcon,
+  FigmaIcon,
+  GithubIcon,
+  YarnIcon,
+} from "components/assets/Icons";
 import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
+import { WithSidebar } from "components/layout/templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { SEO } from "components/website-modules/seo/SEO";
@@ -22,14 +30,6 @@ import { SuggestionBlock } from "components/website-modules/suggestionblock/Sugg
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { lazy, Suspense } from "react";
 import NotFotfund from "../404";
-import { WithSidebar } from "components/layout/templates/WithSidebar";
-import {
-  ChangelogIcon,
-  FigmaIcon,
-  GithubIcon,
-  YarnIcon,
-} from "components/assets/Icons";
-import { dateStr } from "@/utils";
 
 const kodepakker = {
   "ds-react": {
@@ -108,8 +108,8 @@ export const query = `{
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getDocumentsTmp("komponent_artikkel").then((paths) =>
-      paths.map((slug) => ({
+    paths: await getDocuments("komponent_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
         params: {
           slug: slug.split("/").filter((x) => x !== "komponenter"),
         },

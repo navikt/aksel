@@ -1,5 +1,6 @@
 import imageUrlBuilder from "@sanity/image-url";
 import { getClient, noCdnClient, sanityClient } from "./client.server";
+import { allArticleDocuments } from "@/sanity/config";
 
 const imageBuilder = imageUrlBuilder(sanityClient);
 
@@ -62,14 +63,14 @@ export const getAkselDocuments = async (
   return docs.map((x) => x.slug);
 };
 
-export const getDocumentsTmp = async (
+/* export const getDocumentsTmp = async (
   source: "komponent_artikkel" | "ds_artikkel" | "templates_artikkel",
   token?: string
 ): Promise<string[]> => {
   const docs = await getDocuments(source, token);
 
   return docs.map((x) => x.slug);
-};
+}; */
 
 export async function getAkselTema(
   token?: string
@@ -85,34 +86,15 @@ export async function getAkselTema(
   }));
 }
 
-async function getDocuments(
-  source:
-    | "komponent_artikkel"
-    | "ds_artikkel"
-    | "aksel_artikkel"
-    | "aksel_blogg"
-    | "aksel_prinsipp"
-    | "aksel_standalone"
-    | "templates_artikkel"
-    | "all",
+export async function getDocuments(
+  source: (typeof allArticleDocuments)[number] | "all",
   token?: string
 ): Promise<{ slug: string; lastmod: string }[]> {
   const client = token ? noCdnClient(token) : getClient();
   const documents: any[] | null = await client.fetch(
     `*[_type in $types]{ _type, _id, 'slug': slug.current, _updatedAt }`,
     {
-      types:
-        source === "all"
-          ? [
-              "komponent_artikkel",
-              "ds_artikkel",
-              "aksel_artikkel",
-              "aksel_blogg",
-              "aksel_prinsipp",
-              "aksel_standalone",
-              "templates_artikkel",
-            ]
-          : [source],
+      types: source === "all" ? allArticleDocuments : [source],
     }
   );
   const paths = [];
