@@ -2,16 +2,9 @@ import imageUrlBuilder from "@sanity/image-url";
 import { getClient, noCdnClient, sanityClient } from "./client.server";
 import { allArticleDocuments } from "@/sanity/config";
 
-const imageBuilder = imageUrlBuilder(sanityClient);
-
 export function urlFor(source: any) {
-  return imageBuilder.image(source);
+  return imageUrlBuilder(sanityClient).image(source);
 }
-
-export const getAllPages = async (token?: string) => {
-  const pages = await sitemapPages(token);
-  return pages.map((x) => x.path);
-};
 
 export async function sitemapPages(
   token?: string
