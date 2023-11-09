@@ -2,7 +2,17 @@ import { noCdnClient, sanityClient } from "@/sanity/client.server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
+const ignoredPaths = ["/eksempler", "/templates", "/ikoner"];
+const ignoredStaticPaths = ["/", "/komponenter"];
+
 export async function middleware(req: NextRequest) {
+  if (
+    ignoredPaths.some((prefix) => req.nextUrl.pathname.startsWith(prefix)) ||
+    ignoredStaticPaths.some((prefix) => req.nextUrl.pathname === prefix)
+  ) {
+    return NextResponse.next();
+  }
+
   try {
     const redirect = await sanityClient.fetch(
       `
@@ -35,3 +45,19 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 }
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (fallbackfavicon file)
+     * - favicon.svg (favicon file)
+     * - searchindex.json
+     * - robots.txt
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|searchindex.json|robots.txt).*)",
+  ],
+};
