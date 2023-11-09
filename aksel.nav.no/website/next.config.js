@@ -1,6 +1,5 @@
 const path = require("path");
 
-const ANALYZE = process.env.ANALYZE === "true";
 const withBundleAnalyzer = require("@next/bundle-analyzer")();
 
 const cdnUrl = "https://cdn.nav.no";
@@ -102,4 +101,5 @@ const nextConfig = {
   },
 };
 
-module.exports = ANALYZE ? withBundleAnalyzer(nextConfig) : nextConfig;
+module.exports =
+  process.env.ANALYZE === "true" ? withBundleAnalyzer(nextConfig) : nextConfig;
