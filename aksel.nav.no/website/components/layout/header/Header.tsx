@@ -58,7 +58,7 @@ const LinkElement = ({ name, href, prefetch = undefined }) => {
   );
 };
 
-export const Header = ({
+const Header = ({
   variant = "default",
 }: {
   variant?: "blogg" | "subtle" | "default" | "transparent";
@@ -119,3 +119,5 @@ export const Header = ({
     </>
   );
 };
+
+export default Header;

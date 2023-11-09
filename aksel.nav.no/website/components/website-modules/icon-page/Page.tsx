@@ -1,6 +1,6 @@
 import { useMedia } from "@/hooks/useMedia";
 import Footer from "@/layout/footer/Footer";
-import { Header } from "@/layout/header/Header";
+import Header from "@/layout/header/Header";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { HGrid, Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";

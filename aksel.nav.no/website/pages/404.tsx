@@ -1,5 +1,5 @@
 import Footer from "@/layout/footer/Footer";
-import { Header } from "@/layout/header/Header";
+import Header from "@/layout/header/Header";
 import { AmplitudeEvents, amplitude } from "@/logging";
 import { BugIcon } from "@navikt/aksel-icons";
 import {

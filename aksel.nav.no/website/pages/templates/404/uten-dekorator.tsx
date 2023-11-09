@@ -1,5 +1,5 @@
 import Footer from "@/layout/footer/Footer";
-import { Header } from "@/layout/header/Header";
+import Header from "@/layout/header/Header";
 import {
   BodyShort,
   Box,
