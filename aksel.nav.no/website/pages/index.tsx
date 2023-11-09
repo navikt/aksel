@@ -11,7 +11,7 @@ import {
   PauseFillIcon,
   PlayFillIcon,
 } from "@navikt/aksel-icons";
-import { Heading, Ingress } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
 import FrontpageBlock, {
@@ -240,9 +240,9 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                     God praksis
                   </Heading>
                   {page?.god_praksis_intro && (
-                    <Ingress className="max-w-3xl">
+                    <BodyLong size="large" className="max-w-3xl">
                       {page.god_praksis_intro}
-                    </Ingress>
+                    </BodyLong>
                   )}
                 </div>
                 <ul className="mt-12 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">

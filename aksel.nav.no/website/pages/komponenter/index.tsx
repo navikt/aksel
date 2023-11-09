@@ -11,7 +11,7 @@ import {
   NextPageT,
 } from "@/types";
 import { CodeIcon } from "@navikt/aksel-icons";
-import { BodyShort, Heading, Ingress } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import {
   ChangelogIcon,
@@ -81,10 +81,10 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
           rootTitle: "Komponenter",
         }}
         intro={
-          <Ingress className="text-text-on-action">
+          <BodyLong size="large" className="text-text-on-action">
             {page?.intro}
             <Links />
-          </Ingress>
+          </BodyLong>
         }
         pageProps={page}
       >
@@ -132,9 +132,9 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
               </Heading>
               <div>
                 {page?.[`ingress_${kat.value}`] && (
-                  <Ingress className="mb-4 only:mb-7">
+                  <BodyLong size="large" className="mb-4 only:mb-7">
                     {page[`ingress_${kat.value}`]}
-                  </Ingress>
+                  </BodyLong>
                 )}
                 {page?.[`intro_${kat.value}`] && (
                   <SanityBlockContent blocks={page[`intro_${kat.value}`]} />

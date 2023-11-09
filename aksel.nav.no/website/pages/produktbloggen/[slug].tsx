@@ -11,7 +11,7 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { abbrName, dateStr, getImage } from "@/utils";
-import { BodyShort, Detail, Heading, Ingress } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import BloggCard from "components/sanity-modules/cards/BloggCard";
 import { BloggAd } from "components/website-modules/BloggAd";
 import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
@@ -107,9 +107,12 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
               {blogg.heading}
             </Heading>
             {blogg?.ingress && (
-              <Ingress className="text-deepblue-700 mt-4 text-2xl leading-normal">
+              <BodyLong
+                size="large"
+                className="text-deepblue-700 mt-4 text-2xl leading-normal"
+              >
                 {blogg?.ingress}
-              </Ingress>
+              </BodyLong>
             )}
             <div className="mt-8 inline-flex flex-wrap items-center gap-2 text-base">
               <Detail uppercase as="span">

@@ -18,7 +18,7 @@ import {
 } from "@/types";
 import { abbrName, dateStr } from "@/utils";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
 import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
 import { SEO } from "components/website-modules/seo/SEO";
@@ -183,9 +183,12 @@ const Page = ({
                 {data.heading}
               </Heading>
               {data?.ingress && (
-                <Ingress className="override-text-700 mt-4 text-2xl">
+                <BodyLong
+                  size="large"
+                  className="override-text-700 mt-4 text-2xl"
+                >
                   {data?.ingress}
-                </Ingress>
+                </BodyLong>
               )}
 
               <div className="mt-6 inline-flex flex-wrap items-center gap-2 text-base">

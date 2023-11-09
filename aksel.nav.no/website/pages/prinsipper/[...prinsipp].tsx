@@ -10,7 +10,7 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { abbrName, dateStr } from "@/utils";
-import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import Bilde from "components/sanity-modules/bilde/Bilde";
 import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
@@ -119,9 +119,12 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
                   {data.heading}
                 </Heading>
                 {data?.ingress && (
-                  <Ingress className="override-text-700 mt-5 text-2xl">
+                  <BodyLong
+                    size="large"
+                    className="override-text-700 mt-5 text-2xl"
+                  >
                     {data?.ingress}
-                  </Ingress>
+                  </BodyLong>
                 )}
                 <div className="mt-6 flex gap-3 text-base">
                   <BodyShort

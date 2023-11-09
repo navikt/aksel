@@ -10,7 +10,7 @@ import {
   ArticleListT,
   NextPageT,
 } from "@/types";
-import { BodyLong, Heading, Ingress } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import { SEO } from "components/website-modules/seo/SEO";
@@ -68,7 +68,11 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
           rootUrl: "/grunnleggende",
           rootTitle: "Grunnleggende",
         }}
-        intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
+        intro={
+          <BodyLong size="large" className="text-text-on-action">
+            {page?.intro}
+          </BodyLong>
+        }
         pageProps={page}
       >
         {grunnleggendeKategorier
