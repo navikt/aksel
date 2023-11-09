@@ -1,7 +1,7 @@
+import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 import { AmplitudeEvents, amplitude, amplitudeLogNavigation } from "@/logging";
 import { BrailleIcon, DownloadIcon, PackageIcon } from "@navikt/aksel-icons";
 import { Link as DsLink } from "@navikt/ds-react";
-import { FigmaIcon, GithubIcon } from "components/assets";
 import NextLink from "next/link";
 
 const Divider = () => (

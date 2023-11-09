@@ -1,3 +1,4 @@
+import { ChangelogIcon, FigmaIcon, GithubIcon, YarnIcon } from "@/assets/Icons";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
@@ -16,12 +17,6 @@ import {
 } from "@/types";
 import { dateStr } from "@/utils";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import {
-  ChangelogIcon,
-  FigmaIcon,
-  GithubIcon,
-  YarnIcon,
-} from "components/assets/Icons";
 import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
 import { SEO } from "components/website-modules/seo/SEO";

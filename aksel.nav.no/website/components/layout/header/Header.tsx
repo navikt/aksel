@@ -1,8 +1,8 @@
+import AkselLogo from "@/assets/Logo";
 import { amplitudeLogNavigation } from "@/logging";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import cl from "clsx";
-import Logo from "components/assets/Logo";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -93,7 +93,7 @@ const Header = ({
               }
               className="focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
             >
-              <Logo className="text-deepblue-800" />
+              <AkselLogo className="text-deepblue-800" />
               <span className="sr-only">Aksel</span>
             </Link>
           </div>

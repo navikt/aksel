@@ -26,6 +26,7 @@
       "@/logging": ["components/logging/index.ts"],
       "@/utils": ["components/utils/index.ts"],
       "@/layout/*": ["components/layout/*"],
+      "@/assets/*": ["components/assets/*"],
       "@/web/*": ["./components/website-modules/*"],
       "@/cms/*": ["./components/sanity-modules/*"],
       "@/error-boundary": ["components/website-modules/ErrorBoundary.tsx"],

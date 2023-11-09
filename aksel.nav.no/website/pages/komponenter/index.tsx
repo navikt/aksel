@@ -1,5 +1,13 @@
+import {
+  ChangelogIcon,
+  FigmaIcon,
+  GithubIcon,
+  StorybookIcon,
+  YarnIcon,
+} from "@/assets/Icons";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
@@ -13,15 +21,6 @@ import {
 import { CodeIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import {
-  ChangelogIcon,
-  FigmaIcon,
-  GithubIcon,
-  StorybookIcon,
-  YarnIcon,
-} from "components/assets";
-
-import { WithSidebar } from "@/layout/templates/WithSidebar";
 import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
 import { IntroCards } from "components/website-modules/IntroCards";
 import { SEO } from "components/website-modules/seo/SEO";

@@ -1,9 +1,9 @@
+import { ChangeLogIconOutline } from "@/assets/Icons";
 import { searchOptions } from "@/types";
-import { ChangeLogIconOutline } from "components/assets";
-import { useContext } from "react";
-import { Collection, CollectionMapper } from "./HitCollection";
-import { SearchContext, SearchResultContext } from "../providers";
 import { Heading, Label } from "@navikt/ds-react";
+import { useContext } from "react";
+import { SearchContext, SearchResultContext } from "../providers";
+import { Collection, CollectionMapper } from "./HitCollection";
 
 export const Results = () => {
   const { tags, query } = useContext(SearchContext);

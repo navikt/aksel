@@ -1,7 +1,7 @@
+import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
+import AkselLogo from "@/assets/Logo";
 import { amplitudeLogNavigation } from "@/logging";
 import { BodyShort, Heading, Link } from "@navikt/ds-react";
-import { FigmaIcon, GithubIcon, SlackIcon } from "components/assets";
-import Logo from "components/assets/Logo";
 import dynamic from "next/dynamic";
 
 export const EditButton = dynamic(
@@ -33,7 +33,7 @@ const Footer = () => {
 function LogoBlock() {
   return (
     <div>
-      <Logo className="fill-white" />
+      <AkselLogo className="fill-white" />
       <p className="mt-4">&copy; {new Date().getFullYear()} NAV</p>
       <p>Arbeids- og velferdsetaten</p>
     </div>
