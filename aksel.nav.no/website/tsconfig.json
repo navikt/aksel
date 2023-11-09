@@ -18,7 +18,9 @@
     "types": ["node", "jest", "@testing-library/jest-dom"],
     "baseUrl": ".",
     "paths": {
-      "@/components": ["components/index.ts"],
+      "@/web/*": ["./components/website-modules/*"],
+      "@/cms/*": ["./components/sanity-modules/*"],
+
       "@/sb-util": [".storybook/utils.tsx"],
       "@/types": ["components/types/index.ts"],
       "@/pages/*": ["pages/*"],
