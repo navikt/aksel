@@ -1,6 +1,6 @@
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getAkselDocuments } from "@/sanity/interface";
+import { getDocuments } from "@/sanity/interface";
 import {
   contributorsAll,
   contributorsSingle,
@@ -14,19 +14,19 @@ import {
   ResolveSlugT,
   ResolveTemaT,
 } from "@/types";
+import { abbrName, dateStr } from "@/utils";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
+import Footer from "components/layout/footer/Footer";
 import { Header } from "components/layout/header/Header";
 import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
+import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
 import { SEO } from "components/website-modules/seo/SEO";
+import TableOfContents from "components/website-modules/toc/TOC";
 import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../../404";
-import Footer from "components/layout/footer/Footer";
-import { abbrName, dateStr } from "@/utils";
-import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
-import TableOfContents from "components/website-modules/toc/TOC";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
@@ -64,8 +64,8 @@ export const query = `{
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getAkselDocuments("aksel_artikkel").then((paths) =>
-      paths.map((slug) => ({
+    paths: await getDocuments("aksel_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
         params: {
           slug: slug.replace("god-praksis/artikler/", ""),
         },

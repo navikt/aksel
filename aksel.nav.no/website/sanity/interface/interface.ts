@@ -47,31 +47,6 @@ export async function sitemapPages(
   ];
 }
 
-export const getAkselDocuments = async (
-  source:
-    | "aksel_artikkel"
-    | "aksel_blogg"
-    | "aksel_prinsipp"
-    | "aksel_standalone"
-    | "komponent_artikkel"
-    | "all",
-  token?: string
-): Promise<string[]> => {
-  if (!source) return [];
-  const docs = await getDocuments(source, token);
-
-  return docs.map((x) => x.slug);
-};
-
-/* export const getDocumentsTmp = async (
-  source: "komponent_artikkel" | "ds_artikkel" | "templates_artikkel",
-  token?: string
-): Promise<string[]> => {
-  const docs = await getDocuments(source, token);
-
-  return docs.map((x) => x.slug);
-}; */
-
 export async function getAkselTema(
   token?: string
 ): Promise<{ path: string; lastmod: string }[]> {
