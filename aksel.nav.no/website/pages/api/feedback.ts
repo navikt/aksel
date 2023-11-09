@@ -1,7 +1,7 @@
 import { noCdnClient } from "@/sanity/client.server";
 import { FeedbackT } from "@/types";
 import dotenv from "dotenv";
-import { logger } from "logger";
+import { logger } from "config/logger";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 dotenv.config();
