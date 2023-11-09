@@ -1,12 +1,12 @@
 import { useMedia } from "@/hooks/useMedia";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
+import { SEO } from "@/web/seo/SEO";
+import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { HGrid, Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
 import cl from "clsx";
-import { SEO } from "components/website-modules/seo/SEO";
-import { SuggestionBlock } from "components/website-modules/suggestionblock/SuggestionBlock";
 import Fuse from "fuse.js";
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";

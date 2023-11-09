@@ -1,8 +1,10 @@
 import { ChangelogIcon, FigmaIcon, GithubIcon, YarnIcon } from "@/assets/Icons";
+import ComponentOverview from "@/cms/component-overview/ComponentOverview";
+import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
-import { amplitude, AmplitudeEvents } from "@/logging";
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
@@ -16,14 +18,12 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { dateStr } from "@/utils";
+import { StatusTag } from "@/web/StatusTag";
+import { SEO } from "@/web/seo/SEO";
+import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
-import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
-import { SEO } from "components/website-modules/seo/SEO";
-import { StatusTag } from "components/website-modules/StatusTag";
-import { SuggestionBlock } from "components/website-modules/suggestionblock/SuggestionBlock";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { lazy, Suspense } from "react";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 const kodepakker = {

@@ -1,15 +1,12 @@
-import { getClient } from "@/sanity/client.server";
-import { useLiveQuery, LiveQueryProvider } from "next-sanity/preview";
-import { useMemo, ComponentType } from "react";
-import dynamic from "next/dynamic";
 import { useCheckAuth } from "@/hooks/useCheckAuth";
+import { getClient } from "@/sanity/client.server";
+import { LiveQueryProvider, useLiveQuery } from "next-sanity/preview";
+import dynamic from "next/dynamic";
+import { ComponentType, useMemo } from "react";
 
-const PreviewBanner = dynamic(
-  () => import("components/website-modules/PreviewBanner"),
-  {
-    ssr: false,
-  }
-);
+const PreviewBanner = dynamic(() => import("@/web/PreviewBanner"), {
+  ssr: false,
+});
 
 function PreviewProvider({ children }: { children: React.ReactNode }) {
   const client = useMemo(() => {

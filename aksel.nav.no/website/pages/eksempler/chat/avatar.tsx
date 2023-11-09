@@ -1,6 +1,6 @@
-import { PersonIcon, PersonHeadsetIcon } from "@navikt/aksel-icons";
+import { withDsExample } from "@/web/examples/withDsExample";
+import { PersonHeadsetIcon, PersonIcon } from "@navikt/aksel-icons";
 import { Chat } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (

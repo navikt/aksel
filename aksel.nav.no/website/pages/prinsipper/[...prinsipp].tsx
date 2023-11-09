@@ -1,3 +1,4 @@
+import Bilde from "@/cms/bilde/Bilde";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
@@ -10,12 +11,11 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { abbrName, dateStr } from "@/utils";
+import { BreadCrumbs } from "@/web/BreadCrumbs";
+import { SEO } from "@/web/seo/SEO";
+import TableOfContents from "@/web/toc/TOC";
 import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
-import Bilde from "components/sanity-modules/bilde/Bilde";
-import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
-import { SEO } from "components/website-modules/seo/SEO";
-import TableOfContents from "components/website-modules/toc/TOC";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";

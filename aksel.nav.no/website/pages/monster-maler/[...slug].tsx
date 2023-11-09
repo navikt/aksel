@@ -1,3 +1,4 @@
+import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
@@ -15,11 +16,10 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { dateStr } from "@/utils";
+import { StatusTag } from "@/web/StatusTag";
+import { AkselTable, AkselTableRow } from "@/web/Table";
+import { SEO } from "@/web/seo/SEO";
 import { Detail, Heading } from "@navikt/ds-react";
-import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
-import { StatusTag } from "components/website-modules/StatusTag";
-import { AkselTable, AkselTableRow } from "components/website-modules/Table";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";

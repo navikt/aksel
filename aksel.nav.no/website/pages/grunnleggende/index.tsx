@@ -1,3 +1,4 @@
+import ComponentOverview from "@/cms/component-overview/ComponentOverview";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
@@ -10,10 +11,9 @@ import {
   ArticleListT,
   NextPageT,
 } from "@/types";
+import { SEO } from "@/web/seo/SEO";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { grunnleggendeKategorier } from "../../sanity/config";

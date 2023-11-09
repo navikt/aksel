@@ -1,9 +1,16 @@
+import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
+import FrontpageBlock, {
+  BlocksT,
+} from "@/cms/frontpage-blocks/FrontpageBlocks";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
 import { userPrefersReducedMotion } from "@/utils";
+import { IntroCards } from "@/web/IntroCards";
+import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
 import {
   CompassIcon,
   ComponentIcon,
@@ -13,13 +20,6 @@ import {
 } from "@navikt/aksel-icons";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
-import FrontpageBlock, {
-  BlocksT,
-} from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
-import { IntroCards } from "components/website-modules/IntroCards";
-import { AkselCubeAnimated } from "components/website-modules/aksel-cube/AkselCube";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy, useEffect, useState } from "react";
 

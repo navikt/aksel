@@ -1,7 +1,7 @@
 import { removeEmojies } from "@/utils";
+import { useToc } from "@/web/toc/useToc";
 import { BodyShort, Link } from "@navikt/ds-react";
 import cl from "clsx";
-import { useToc } from "components/website-modules/toc/useToc";
 import * as React from "react";
 
 export function TableOfContentsv2() {

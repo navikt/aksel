@@ -1,10 +1,10 @@
+import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
 import { urlFor } from "@/sanity/interface";
 import { SearchHitT, searchOptions } from "@/types";
+import { StatusTag } from "@/web/StatusTag";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Chips } from "@navikt/ds-react";
 import cl from "clsx";
-import { Tag } from "components/sanity-modules/frontpage-blocks/latest-articles/Tag";
-import { StatusTag } from "components/website-modules/StatusTag";
 import Image from "next/legacy/image";
 import { default as Link, default as NextLink } from "next/link";
 import { forwardRef, useContext } from "react";

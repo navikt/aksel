@@ -1,8 +1,8 @@
 import ErrorBoundary from "@/error-boundary";
 import { UUTableT } from "@/types";
-import KBD from "components/website-modules/KBD";
+import KBD from "@/web/KBD";
 
-import { AkselTable, AkselTableRow } from "components/website-modules/Table";
+import { AkselTable, AkselTableRow } from "@/web/Table";
 import React from "react";
 
 type UUTableProps = { node: UUTableT };

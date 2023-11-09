@@ -1,3 +1,4 @@
+import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
@@ -6,11 +7,10 @@ import { getAkselTema, urlFor } from "@/sanity/interface";
 import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
 import { abbrName } from "@/utils";
+import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
-import { SEO } from "components/website-modules/seo/SEO";
 import Image from "next/legacy/image";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";

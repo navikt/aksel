@@ -1,3 +1,4 @@
+import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
@@ -9,12 +10,11 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
+import { BloggAd } from "@/web/BloggAd";
+import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { LatestBloggposts } from "@/web/blogg-page/BloggPage";
+import { SEO } from "@/web/seo/SEO";
 import { Heading } from "@navikt/ds-react";
-import BloggCard from "components/sanity-modules/cards/BloggCard";
-import { BloggAd } from "components/website-modules/BloggAd";
-import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
-import { LatestBloggposts } from "components/website-modules/blogg-page/BloggPage";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";

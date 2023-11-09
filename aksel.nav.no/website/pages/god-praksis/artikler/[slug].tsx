@@ -1,3 +1,4 @@
+import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
@@ -17,12 +18,11 @@ import {
   ResolveTemaT,
 } from "@/types";
 import { abbrName, dateStr } from "@/utils";
+import { BreadCrumbs } from "@/web/BreadCrumbs";
+import { SEO } from "@/web/seo/SEO";
+import TableOfContents from "@/web/toc/TOC";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { BreadCrumbs } from "components/website-modules/BreadCrumbs";
-import { SEO } from "components/website-modules/seo/SEO";
-import TableOfContents from "components/website-modules/toc/TOC";
 import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";

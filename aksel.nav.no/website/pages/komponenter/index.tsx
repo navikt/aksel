@@ -5,6 +5,7 @@ import {
   StorybookIcon,
   YarnIcon,
 } from "@/assets/Icons";
+import ComponentOverview from "@/cms/component-overview/ComponentOverview";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
@@ -18,12 +19,11 @@ import {
   ArticleListT,
   NextPageT,
 } from "@/types";
+import { IntroCards } from "@/web/IntroCards";
+import { SEO } from "@/web/seo/SEO";
 import { CodeIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
-import { IntroCards } from "components/website-modules/IntroCards";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";

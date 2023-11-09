@@ -1,7 +1,7 @@
 import { searchOptions } from "@/types";
+import KBD from "@/web/KBD";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Chips, Search } from "@navikt/ds-react";
-import KBD from "components/website-modules/KBD";
 import { useContext, useEffect, useRef } from "react";
 import { useShortcut } from "../hooks";
 import {

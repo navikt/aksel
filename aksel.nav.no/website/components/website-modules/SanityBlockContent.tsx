@@ -1,4 +1,22 @@
+import Accordion from "@/cms/accordion/Accordion";
+import Alert from "@/cms/alert/Alert";
+import Bilde from "@/cms/bilde/Bilde";
+import InnholdsKort from "@/cms/cards/InnholdsKort";
+import CodeExamples from "@/cms/code-examples/CodeExamples";
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
+import DoDont from "@/cms/do-dont/DoDont";
+import ExpansionCard from "@/cms/expansioncard/ExpansionCard";
+import PropsSeksjon from "@/cms/props/PropsSeksjon";
+import RelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
+import SideModul from "@/cms/side-modul/SideModul";
+import Tabell from "@/cms/tabell/Tabell";
+import TastaturModul from "@/cms/tastatur-tabell/TastaturTabell";
+import Tips from "@/cms/tips/Tips";
+import TokenTable from "@/cms/token-tabell/TokenTable";
+import Video from "@/cms/video/Video";
 import { amplitudeLogNavigation } from "@/logging";
+import InlineCode from "@/web/InlineCode";
+import KBD from "@/web/KBD";
 import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
 import {
   PortableText,
@@ -6,24 +24,6 @@ import {
   PortableTextReactComponents,
 } from "@portabletext/react";
 import cl from "clsx";
-import Accordion from "components/sanity-modules/accordion/Accordion";
-import Alert from "components/sanity-modules/alert/Alert";
-import Bilde from "components/sanity-modules/bilde/Bilde";
-import InnholdsKort from "components/sanity-modules/cards/InnholdsKort";
-import CodeExamples from "components/sanity-modules/code-examples/CodeExamples";
-import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
-import DoDont from "components/sanity-modules/do-dont/DoDont";
-import ExpansionCard from "components/sanity-modules/expansioncard/ExpansionCard";
-import PropsSeksjon from "components/sanity-modules/props/PropsSeksjon";
-import RelatertInnhold from "components/sanity-modules/relatert-innhold/RelatertInnhold";
-import SideModul from "components/sanity-modules/side-modul/SideModul";
-import Tabell from "components/sanity-modules/tabell/Tabell";
-import TastaturModul from "components/sanity-modules/tastatur-tabell/TastaturTabell";
-import Tips from "components/sanity-modules/tips/Tips";
-import TokenTable from "components/sanity-modules/token-tabell/TokenTable";
-import Video from "components/sanity-modules/video/Video";
-import InlineCode from "components/website-modules/InlineCode";
-import KBD from "components/website-modules/KBD";
 import NextLink from "next/link";
 import { Children } from "react";
 

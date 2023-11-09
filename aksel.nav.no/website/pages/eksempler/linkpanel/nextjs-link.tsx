@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { LinkPanel } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 import NextLink from "next/link";
 
 const Example = () => {

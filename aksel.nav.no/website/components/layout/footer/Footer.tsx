@@ -4,12 +4,9 @@ import { amplitudeLogNavigation } from "@/logging";
 import { BodyShort, Heading, Link } from "@navikt/ds-react";
 import dynamic from "next/dynamic";
 
-export const EditButton = dynamic(
-  () => import("components/website-modules/EditButton"),
-  {
-    ssr: false,
-  }
-);
+export const EditButton = dynamic(() => import("@/web/EditButton"), {
+  ssr: false,
+});
 
 const Footer = () => {
   return (

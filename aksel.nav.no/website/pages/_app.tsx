@@ -1,11 +1,11 @@
-import { BaseSEO } from "components/website-modules/seo/BaseSEO";
+import { useHashScroll } from "@/hooks/useHashScroll";
+import { SanityDocIdContext } from "@/hooks/useSanityDocId";
+import { useAmplitudeInit } from "@/logging";
+import { BaseSEO } from "@/web/seo/BaseSEO";
 import { AppProps } from "next/app";
 import { useEffect } from "react";
 import { hotjar } from "react-hotjar";
-import { SanityDocIdContext } from "@/hooks/useSanityDocId";
-import { useHashScroll } from "@/hooks/useHashScroll";
-import { useAmplitudeInit } from "@/logging";
-import "components/styles/index.css";
+import "../components/styles/index.css";
 
 function App({ Component, pageProps, router }: AppProps) {
   useHashScroll();
