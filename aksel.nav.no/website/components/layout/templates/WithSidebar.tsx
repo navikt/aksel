@@ -1,8 +1,8 @@
 import { Sidebar } from "@/layout/sidebar/Sidebar";
 import { urlFor } from "@/sanity/interface";
-import { AkselSidebarT } from "@/types";
+import { AkselSidebarT, TableOfContentsT } from "@/types";
 import { capitalize } from "@/utils";
-import { TableOfContentsv2 } from "@/web/toc/TOCv2";
+import TableOfContents from "@/web/TableOfContents";
 import { Box, Detail, Heading, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import Image from "next/legacy/image";
@@ -16,9 +16,11 @@ export const WithSidebar = ({
   pageProps,
   variant = "landingPage",
   footer,
+  toc,
 }: {
   children: React.ReactNode;
   sidebar: AkselSidebarT;
+  toc: TableOfContentsT;
   pageType: {
     type: "komponenter" | "grunnleggende" | "templates";
     title: string;
@@ -111,8 +113,12 @@ export const WithSidebar = ({
             )}
           </div>
 
-          <div className={cl("sm:px-6 md:px-10", { flex: variant === "page" })}>
-            {variant === "page" && <TableOfContentsv2 />}
+          <div
+            className={cl("sm:px-6 md:px-10", {
+              "flex gap-10": variant === "page",
+            })}
+          >
+            {variant === "page" && <TableOfContents toc={toc} />}
             <div className="w-full">
               {children}
               {footer && <div className="w-full">{footer}</div>}
