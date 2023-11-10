@@ -1,6 +1,6 @@
 import imageUrlBuilder from "@sanity/image-url";
+import { allArticleDocuments } from "../config";
 import { getClient, noCdnClient, sanityClient } from "./client.server";
-import { allArticleDocuments } from "@/sanity/config";
 
 export function urlFor(source: any) {
   return imageUrlBuilder(sanityClient).image(source);
