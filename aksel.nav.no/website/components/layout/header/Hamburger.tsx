@@ -85,6 +85,11 @@ export const Hamburger = () => {
               />
               <LinkElement
                 onClick={() => setOpen(false)}
+                name="Mønster & Maler"
+                href="/monster-maler"
+              />
+              <LinkElement
+                onClick={() => setOpen(false)}
                 name="Blogg"
                 href="/produktbloggen"
               />
