@@ -3,7 +3,13 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
-const ignoredStaticPaths = ["/", "/komponenter"];
+const ignoredStaticPaths = [
+  "/",
+  "/komponenter",
+  "/god-praksis",
+  "/grunnleggende",
+  "/produktbloggen",
+];
 
 export async function middleware(req: NextRequest) {
   if (
