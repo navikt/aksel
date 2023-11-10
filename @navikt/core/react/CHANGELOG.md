@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.10.1
+
+### Patch Changes
+
+- Table: Håndterer nå sjekk for interaktive elementer i ExpandableRow bedre ([#2461](https://github.com/navikt/aksel/pull/2461))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.1
+  - @navikt/aksel-icons@5.10.1
+
 ## 5.10.0
 
 ### Minor Changes
