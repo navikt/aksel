@@ -1,5 +1,10 @@
-export type TableOfContentsT = {
+type TableOfContentsEntryT = {
   title: string;
   id: string;
-  children: Omit<TableOfContentsT, "children">;
-}[];
+};
+
+export type TableOfContentsT = Array<
+  TableOfContentsEntryT & {
+    children: TableOfContentsEntryT[];
+  }
+>;
