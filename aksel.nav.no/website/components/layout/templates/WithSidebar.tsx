@@ -2,7 +2,7 @@ import { Sidebar } from "@/layout/sidebar/Sidebar";
 import { urlFor } from "@/sanity/interface";
 import { AkselSidebarT, TableOfContentsT } from "@/types";
 import { capitalize } from "@/utils";
-import TableOfContents from "@/web/TableOfContents";
+import TableOfContents from "@/web/toc/TableOfContents";
 import { Box, Detail, Heading, Link } from "@navikt/ds-react";
 import cl from "clsx";
 import Image from "next/legacy/image";
