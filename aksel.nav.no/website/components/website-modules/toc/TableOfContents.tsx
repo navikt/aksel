@@ -16,24 +16,20 @@ function TableOfContents({ toc }: TableOfContentsProps) {
 
   /* ring-border-subtle ring-1 rounded-lg */
   return (
-    <aside className="min-w-56 sticky top-20 order-1 hidden self-start overscroll-contain p-2 pt-4 xl:block">
+    <aside className="min-w-56 sticky top-20 order-1 hidden max-h-[80vh] self-start overflow-y-auto overscroll-contain xl:block">
       <Label as="h2" className="text-deepblue-800 px-2 pb-1">
         Innhold på siden
       </Label>
 
       <ul>
         {toc.map((lvl2) => (
-          <li
-            key={lvl2.id}
-            className={cl("toc-lvl2 group", {
-              /* "ring-border-default rounded-xl ring-1": lvl2.id === activeId, */
-            })}
-          >
+          <li key={lvl2.id} className="toc-lvl2 group">
             <>
               <a
                 href={`#${lvl2.id}`}
                 className={cl(
-                  "hover:bg-surface-subtle flex items-center justify-between rounded-lg px-2 py-1"
+                  "hover:bg-surface-subtle focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 outline-none transition-[background-color] ease-out",
+                  { "bg-surface-subtle": lvl2.id === activeId && !activeSubId }
                 )}
               >
                 <BodyShort
@@ -56,9 +52,9 @@ function TableOfContents({ toc }: TableOfContentsProps) {
                       <a
                         href={`#${lvl3.id}`}
                         className={cl(
-                          "hover:bg-surface-subtle flex items-center justify-between rounded-lg px-2 py-1 group-[.toc-lvl2]:pl-4",
+                          "hover:bg-surface-subtle focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 transition-[background-color] ease-out group-[.toc-lvl2]:pl-4",
                           {
-                            /* "bg-surface-subtle": lvl3.id === activeSubId, */
+                            "bg-surface-subtle": lvl3.id === activeSubId,
                           }
                         )}
                       >

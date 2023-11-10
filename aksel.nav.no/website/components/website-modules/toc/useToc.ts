@@ -21,6 +21,7 @@ export const useToc = (toc: TableOfContentsT) => {
         const lvl2 = document.getElementById(x.id);
         if (validPick(lvl2)) {
           active = x.id;
+          activeSub = null;
         }
         if (x?.children) {
           for (const y of x.children) {
