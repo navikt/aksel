@@ -106,6 +106,7 @@ const Header = ({
               <LinkElement name="Grunnleggende" href="/grunnleggende" />
               <LinkElement name="Ikoner" href="/ikoner" prefetch={false} />
               <LinkElement name="Komponenter" href="/komponenter" />
+              <LinkElement name="Mønster & Maler" href="/monster-maler" />
               <LinkElement name="Bloggen" href="/produktbloggen" />
             </ul>
           </nav>

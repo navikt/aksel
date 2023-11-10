@@ -64,7 +64,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
         sidebar={sidebar}
         pageType={{
           type: "templates",
-          title: "Mønster og Maler",
+          title: "Mønster og maler",
           rootUrl: "/monster-maler",
           rootTitle: "Mønster og Maler",
         }}

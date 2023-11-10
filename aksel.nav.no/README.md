@@ -19,7 +19,7 @@ Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no
 
 ### Bidrag
 
-Branch `main` blir pusher rett til prod -> aksel.nav.no. For å utvikle nye features kan branch `next` brukes, som ved push publiseres til devmiljø https://aksel.ekstern.dev.nav.no/. Kan også publisere andre branches til dev ved bruk av workflow-dispatch.
+Branch `main` pusher rett til prod -> aksel.nav.no. For å utvikle nye features kan branch `next` brukes, som ved push publiseres til devmiljø https://aksel.ekstern.dev.nav.no/. Kan også publisere andre branches til dev ved bruk av workflow-dispatch.
 
 ## Kode-eksempler
 
