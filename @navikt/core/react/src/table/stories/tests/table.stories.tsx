@@ -19,6 +19,8 @@ export const ClickableRowTest = {
               <Table.HeaderCell aria-hidden />
               <Table.HeaderCell aria-hidden />
               <Table.HeaderCell aria-hidden />
+              <Table.HeaderCell aria-hidden />
+              <Table.HeaderCell aria-hidden />
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -48,6 +50,15 @@ export const ClickableRowTest = {
                   </div>
                 </div>
               </Table.DataCell>
+              <Table.DataCell>
+                <div>
+                  <div>
+                    <button data-testid="cell4">
+                      <span>2x nested should not be clickable</span>
+                    </button>
+                  </div>
+                </div>
+              </Table.DataCell>
             </Table.ExpandableRow>
           </Table.Body>
         </Table>
@@ -65,6 +76,7 @@ export const ClickableRowTest = {
     const cell2 = canvas.getByText("Should also be clickable");
     const cell3 = canvas.getByText("Should not be clickable");
     const cell4 = canvas.getByText("Nested should not be clickable");
+    const cell5 = canvas.getByText("2x nested should not be clickable");
 
     await userEvent.click(cell1);
     expect(args.onOpenChange.mock.calls).toHaveLength(1);
@@ -80,6 +92,9 @@ export const ClickableRowTest = {
     expect(args.onOpenChange.mock.calls).toHaveLength(4);
 
     await userEvent.click(cell4);
+    expect(args.onOpenChange.mock.calls).toHaveLength(4);
+
+    await userEvent.click(cell5);
     expect(args.onOpenChange.mock.calls).toHaveLength(4);
   },
 };

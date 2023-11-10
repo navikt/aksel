@@ -141,7 +141,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
 );
 
 function isInteractiveTarget(elm: HTMLElement) {
-  if (elm.nodeName === "TD" || elm.nodeName === "TH") {
+  if (elm.nodeName === "TD" || elm.nodeName === "TH" || !elm.parentElement) {
     return false;
   }
   if (
@@ -152,9 +152,6 @@ function isInteractiveTarget(elm: HTMLElement) {
     return true;
   }
 
-  if (!elm.parentElement) {
-    return false;
-  }
   return isInteractiveTarget(elm.parentElement);
 }
 
