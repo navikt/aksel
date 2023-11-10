@@ -58,6 +58,7 @@ export const Hamburger = () => {
         onClose={() => setOpen(false)}
         header={{ heading: "Meny" }}
         width="small"
+        closeOnBackdropClick
       >
         <Modal.Body>
           <nav aria-label="hovedmeny">

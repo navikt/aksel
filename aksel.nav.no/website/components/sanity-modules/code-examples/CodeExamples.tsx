@@ -46,7 +46,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
       if (exampleWrapper && exampleWrapper.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
         clearInterval(waitForExampleContentToRender);
-        setFrameState(newHeight < 300 ? 300 : newHeight);
+        setFrameState(Math.min(Math.max(newHeight, 300), 900));
         setUnloaded(false);
       }
 
@@ -159,7 +159,6 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                       "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                       {
                         invisible: unloaded,
-                        "p-6": demoVariant === "templates",
                       }
                     )}
                     title="Kode-eksempler"

@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.10.0
+
+### Minor Changes
+
+- Primitives: Ny komponent `Page` og `Page.Block` ([#2456](https://github.com/navikt/aksel/pull/2456))
+
 ## 5.9.2
 
 ## 5.9.1
