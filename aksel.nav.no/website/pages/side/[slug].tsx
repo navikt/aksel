@@ -1,12 +1,12 @@
-import { TableOfContents } from "@/components";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
 import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
+import { SEO } from "@/web/seo/SEO";
+import TableOfContents from "@/web/toc/TOC";
 import { Heading } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
@@ -86,7 +86,7 @@ const Page = ({ page }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

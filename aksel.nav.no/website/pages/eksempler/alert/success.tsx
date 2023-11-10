@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { Alert } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return <Alert variant="success">Søknad er sendt inn!</Alert>;

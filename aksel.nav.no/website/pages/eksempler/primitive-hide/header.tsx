@@ -1,3 +1,4 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import {
   BellIcon,
   LeaveIcon,
@@ -6,7 +7,6 @@ import {
   PersonIcon,
 } from "@navikt/aksel-icons";
 import { BodyShort, Button, HStack, Hide } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (

@@ -22,7 +22,7 @@ Ved Ã¥ legge til en `desc` blir en liten tekst vist over eksemplet. Brukes for Ã
 
 ```jsx
 import { Button } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return <Button>Primary</Button>;

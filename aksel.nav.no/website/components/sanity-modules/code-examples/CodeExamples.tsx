@@ -1,6 +1,7 @@
-import { capitalize } from "@/components";
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import ErrorBoundary from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
+import { capitalize } from "@/utils";
 import {
   ExternalLinkIcon,
   LaptopIcon,
@@ -8,7 +9,6 @@ import {
 } from "@navikt/aksel-icons";
 import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import cl from "clsx";
-import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { CodeSandbox } from "./parts/CodeSandbox";

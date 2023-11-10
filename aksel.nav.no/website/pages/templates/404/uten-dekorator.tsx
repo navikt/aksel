@@ -1,3 +1,5 @@
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import {
   BodyShort,
   Box,
@@ -7,8 +9,6 @@ import {
   List,
   Page,
 } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
 
 export default function Example() {
   return (

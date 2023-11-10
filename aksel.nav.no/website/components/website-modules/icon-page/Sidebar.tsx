@@ -1,9 +1,9 @@
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import { AmplitudeEvents, amplitude } from "@/logging";
+import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Button, Heading } from "@navikt/ds-react";
-import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
-import { SuggestionBlock } from "components/website-modules/suggestionblock/SuggestionBlock";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";

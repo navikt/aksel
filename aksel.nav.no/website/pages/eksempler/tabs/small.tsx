@@ -1,10 +1,10 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import {
   ClockDashedIcon,
   InboxDownIcon,
   PaperplaneIcon,
 } from "@navikt/aksel-icons";
 import { Tabs } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (

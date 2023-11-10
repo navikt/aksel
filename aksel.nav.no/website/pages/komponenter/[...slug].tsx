@@ -1,14 +1,13 @@
-import {
-  ChangelogIcon,
-  dateStr,
-  FigmaIcon,
-  GithubIcon,
-  YarnIcon,
-} from "@/components";
-import { amplitude, AmplitudeEvents } from "@/logging";
+import { ChangelogIcon, FigmaIcon, GithubIcon, YarnIcon } from "@/assets/Icons";
+import ComponentOverview from "@/cms/component-overview/ComponentOverview";
+import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocumentsTmp } from "@/sanity/interface";
+import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
@@ -18,17 +17,13 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
+import { dateStr } from "@/utils";
+import { StatusTag } from "@/web/StatusTag";
+import { SEO } from "@/web/seo/SEO";
+import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import { WithSidebar } from "components/layout/WithSidebar";
-import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
-import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
-import { SEO } from "components/website-modules/seo/SEO";
-import { StatusTag } from "components/website-modules/StatusTag";
-import { SuggestionBlock } from "components/website-modules/suggestionblock/SuggestionBlock";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { lazy, Suspense } from "react";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 const kodepakker = {
@@ -108,8 +103,8 @@ export const query = `{
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getDocumentsTmp("komponent_artikkel").then((paths) =>
-      paths.map((slug) => ({
+    paths: await getDocuments("komponent_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
         params: {
           slug: slug.split("/").filter((x) => x !== "komponenter"),
         },
@@ -321,7 +316,7 @@ const Page = ({
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
+import { CodeExampleSchemaT } from "../../components/types";
 import { noCdnClient } from "../../sanity/interface/client.server";
-import { CodeExampleSchemaT } from "../../types";
 import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";

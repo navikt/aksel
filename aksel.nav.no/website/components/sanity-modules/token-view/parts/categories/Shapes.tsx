@@ -1,7 +1,7 @@
 import docs from "@navikt/ds-tokens/docs.json";
-import { Copy } from "../Copy";
 import { Grid } from "../Grid";
 import { sanitizeName } from "../utilities";
+import { CopyButton } from "@navikt/ds-react";
 
 export const ShapesView = ({ cat }: { cat: string }) => {
   const shapes = docs[cat];
@@ -17,9 +17,11 @@ export const ShapesView = ({ cat }: { cat: string }) => {
             />
             <dl className="grid h-full">
               <dt className="inline-flex items-center gap-2">
-                <Copy
+                <CopyButton
                   text={sanitizeName(x.name.replace("border-radius-", ""))}
                   copyText={x.name}
+                  size="small"
+                  iconPosition="right"
                 />
               </dt>
               <dd className="text-text-subtle text-medium mt-auto">

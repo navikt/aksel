@@ -1,7 +1,16 @@
-import { Footer } from "@/layout";
+import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
+import FrontpageBlock, {
+  BlocksT,
+} from "@/cms/frontpage-blocks/FrontpageBlocks";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
+import { userPrefersReducedMotion } from "@/utils";
+import { IntroCards } from "@/web/IntroCards";
+import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
 import {
   CompassIcon,
   ComponentIcon,
@@ -9,17 +18,8 @@ import {
   PauseFillIcon,
   PlayFillIcon,
 } from "@navikt/aksel-icons";
-import { Heading, Ingress } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import { Header } from "components/layout/header/Header";
-import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
-import FrontpageBlock, {
-  BlocksT,
-} from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
-import { IntroCards } from "components/website-modules/IntroCards";
-import { AkselCubeAnimated } from "components/website-modules/aksel-cube/AkselCube";
-import { SEO } from "components/website-modules/seo/SEO";
-import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy, useEffect, useState } from "react";
 
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({
   };
 };
 
-export const query = `*[_type == "aksel_forside"][0]{
+const query = `*[_type == "aksel_forside"][0]{
   "page": {
     ...,
   },
@@ -124,7 +124,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
       navigator.userAgent.indexOf("Safari") !== -1 &&
       navigator.userAgent.indexOf("Chrome") === -1;
 
-    setReducedMotion(PrefersReducedMotion() || disableAnimations);
+    setReducedMotion(userPrefersReducedMotion() || disableAnimations);
     const data = localStorage.getItem("pause-animations");
     if (disableAnimations) {
       setPause(true);
@@ -240,9 +240,9 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                     God praksis
                   </Heading>
                   {page?.god_praksis_intro && (
-                    <Ingress className="max-w-3xl">
+                    <BodyLong size="large" className="max-w-3xl">
                       {page.god_praksis_intro}
-                    </Ingress>
+                    </BodyLong>
                   )}
                 </div>
                 <ul className="mt-12 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
@@ -264,7 +264,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Page = (props: PageProps["props"]) => {
   if (props?.preview) {

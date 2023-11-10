@@ -1,6 +1,6 @@
+import { AkselTable, AkselTableRow } from "@/web/Table";
 import docs from "@navikt/ds-tokens/docs.json";
 import { sanitizeName } from "../utilities";
-import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 
 export const FontView = ({ cat }: { cat: string }) => {
   const fonts = docs[cat];

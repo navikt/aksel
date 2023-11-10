@@ -1,6 +1,6 @@
+import { CopyButton } from "@navikt/ds-react";
 import docs from "@navikt/ds-tokens/docs.json";
 import cl from "clsx";
-import { Copy } from "../Copy";
 import { Grid } from "../Grid";
 import { sanitizeName } from "../utilities";
 
@@ -36,9 +36,11 @@ export const ZindexView = ({ cat }: { cat: string }) => {
             </div>
             <dl className="grid h-full">
               <dt className="inline-flex items-center gap-2">
-                <Copy
+                <CopyButton
                   text={sanitizeName(token.name.replace("z-index-", ""))}
                   copyText={token.name}
+                  size="small"
+                  iconPosition="right"
                 />
               </dt>
               <dd className="text-text-subtle text-medium mt-auto">
