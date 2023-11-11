@@ -14,8 +14,9 @@ import {
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  TableOfContentsT,
 } from "@/types";
-import { dateStr } from "@/utils";
+import { dateStr, generateTableOfContents } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
 import { AkselTable, AkselTableRow } from "@/web/Table";
 import { SEO } from "@/web/seo/SEO";
@@ -30,6 +31,7 @@ type PageProps = NextPageT<{
   seo: any;
   refs: ArticleListT;
   publishDate: string;
+  toc: TableOfContentsT;
 }>;
 
 const query = `{
@@ -82,13 +84,17 @@ export const getStaticProps: GetStaticProps = async ({
       id: page?._id ?? "",
       refs: [],
       publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "templates_artikkel",
+      }),
     },
     notFound: !page && !preview,
     revalidate: 60,
   };
 };
 
-const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
+const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
@@ -108,6 +114,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
+        toc={toc}
         pageType={{
           type: "templates",
           title: page?.heading,

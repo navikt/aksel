@@ -20,7 +20,7 @@ export const WithSidebar = ({
 }: {
   children: React.ReactNode;
   sidebar: AkselSidebarT;
-  toc: TableOfContentsT;
+  toc?: TableOfContentsT;
   pageType: {
     type: "komponenter" | "grunnleggende" | "templates";
     title: string;
@@ -118,7 +118,7 @@ export const WithSidebar = ({
               "flex gap-10": variant === "page",
             })}
           >
-            {variant === "page" && <TableOfContents toc={toc} />}
+            {variant === "page" && toc && <TableOfContents toc={toc} />}
             <div className="w-full">
               {children}
               {footer && <div className="w-full">{footer}</div>}
