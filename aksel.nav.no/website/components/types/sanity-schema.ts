@@ -157,13 +157,19 @@ export interface AkselTemplatesDocT extends DocumentT<"ds_artikkel">, ArticleT {
   };
 }
 
-export type SidebarNodeT = {
+export type SidebarInputNodeT = {
   heading: string;
   slug: string;
   kategori: string;
   tag: "beta" | "new" | "ready" | "deprecated";
   sidebarindex: number | null;
 };
+
+export type SidebarT = {
+  pages: SidebarInputNodeT[];
+  title: string;
+  value: string;
+}[];
 
 export type ArticleListT = Array<{
   _id: string;

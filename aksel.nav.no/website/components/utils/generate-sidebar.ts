@@ -1,25 +1,25 @@
-import { sanityCategoryLookup } from "@/sanity/config";
-import { SidebarNodeT } from "@/types";
+import { sanityCategoryLookup } from "../../sanity/config";
+import { SidebarInputNodeT, SidebarT } from "../types";
 
 export function generateSidebar(
-  input: SidebarNodeT[],
+  input: SidebarInputNodeT[],
   type: "komponenter" | "grunnleggende" | "templates"
-) {
+): SidebarT {
   return sanityCategoryLookup(type)
     .map((x) => ({
       ...x,
       pages: input
         .filter((y) => y?.kategori === x.value)
-        .sort(sortDeprecated)
-        .sort(sortIndex)
         .sort((a, b) => {
           return a?.heading.localeCompare(b?.heading);
-        }),
+        })
+        .sort(sortIndex)
+        .sort(sortDeprecated),
     }))
     .filter((x) => !(!x.pages || x.pages.length === 0));
 }
 
-function sortDeprecated(a: SidebarNodeT, b: SidebarNodeT) {
+export function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {
   if (a?.tag === "deprecated" && b?.tag === "deprecated") {
     return 0;
   } else if (a?.tag === "deprecated") {
@@ -29,7 +29,7 @@ function sortDeprecated(a: SidebarNodeT, b: SidebarNodeT) {
   }
 }
 
-function sortIndex(a: SidebarNodeT, b: SidebarNodeT) {
+export function sortIndex(a: SidebarInputNodeT, b: SidebarInputNodeT) {
   if (a.sidebarindex === null && b.sidebarindex === null) {
     return 0;
   }
