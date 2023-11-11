@@ -35,7 +35,8 @@ function TableOfContents({ toc }: TableOfContentsProps) {
                 <BodyShort
                   size="small"
                   as="span"
-                  className="break-all"
+                  truncate
+                  className="whitespace-break-spaces"
                   weight={
                     lvl2.id === activeId && !activeSubId
                       ? "semibold"
@@ -61,7 +62,8 @@ function TableOfContents({ toc }: TableOfContentsProps) {
                         <BodyShort
                           size="small"
                           as="span"
-                          className="break-all"
+                          truncate
+                          className="whitespace-break-spaces"
                           weight={
                             lvl3.id === activeSubId ? "semibold" : "regular"
                           }
