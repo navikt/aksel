@@ -55,7 +55,7 @@ function TableOfContents({ toc }: TableOfContentsProps) {
                       <a
                         href={`#${lvl3.id}`}
                         className={cl(
-                          "hover:bg-surface-hover focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 transition-[background-color,color] ease-out group-[.toc-lvl2]:pl-4",
+                          "hover:bg-surface-hover focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 outline-none transition-[background-color,color] ease-out group-[.toc-lvl2]:pl-4",
                           {
                             "bg-surface-hover text-deepblue-800 shadow-xsmall":
                               lvl3.id === activeSubId,
