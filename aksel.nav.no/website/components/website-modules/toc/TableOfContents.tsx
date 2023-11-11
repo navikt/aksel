@@ -14,9 +14,8 @@ function TableOfContents({ toc }: TableOfContentsProps) {
     return null;
   }
 
-  /* ring-border-subtle ring-1 rounded-lg */
   return (
-    <aside className="min-w-56 sticky top-20 order-1 hidden max-h-[80vh] w-56 self-start overflow-y-auto overscroll-contain xl:block">
+    <aside className="min-w-56 sticky top-20 order-1 hidden max-h-[80vh] w-56 self-start overflow-y-auto overscroll-contain p-1 xl:block">
       <Label as="h2" className="text-deepblue-800 px-2 pb-1">
         Innhold på siden
       </Label>
@@ -28,8 +27,11 @@ function TableOfContents({ toc }: TableOfContentsProps) {
               <a
                 href={`#${lvl2.id}`}
                 className={cl(
-                  "hover:bg-surface-hover focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 outline-none transition-[background-color] ease-out",
-                  { "bg-surface-hover": lvl2.id === activeId && !activeSubId }
+                  "hover:bg-surface-hover focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 outline-none transition-[background-color,color] ease-out",
+                  {
+                    "bg-surface-hover text-deepblue-800 shadow-xsmall":
+                      lvl2.id === activeId && !activeSubId,
+                  }
                 )}
               >
                 <BodyShort
@@ -53,9 +55,10 @@ function TableOfContents({ toc }: TableOfContentsProps) {
                       <a
                         href={`#${lvl3.id}`}
                         className={cl(
-                          "hover:bg-surface-hover focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 transition-[background-color] ease-out group-[.toc-lvl2]:pl-4",
+                          "hover:bg-surface-hover focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 transition-[background-color,color] ease-out group-[.toc-lvl2]:pl-4",
                           {
-                            "bg-surface-hover": lvl3.id === activeSubId,
+                            "bg-surface-hover text-deepblue-800 shadow-xsmall":
+                              lvl3.id === activeSubId,
                           }
                         )}
                       >
