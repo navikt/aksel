@@ -27,7 +27,7 @@ function TableOfContents({ toc }: TableOfContentsProps) {
               <a
                 href={`#${lvl2.id}`}
                 className={cl(
-                  "hover:bg-surface-hover focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 outline-none transition-[background-color,color] ease-out",
+                  "hover:bg-surface-hover focus-visible:shadow-focus rounded-medium flex w-fit items-center justify-between px-2 py-1 outline-none transition-[background-color,color] duration-150 ease-out",
                   {
                     "bg-surface-hover text-deepblue-800 shadow-xsmall":
                       lvl2.id === activeId && !activeSubId,
@@ -55,7 +55,7 @@ function TableOfContents({ toc }: TableOfContentsProps) {
                       <a
                         href={`#${lvl3.id}`}
                         className={cl(
-                          "hover:bg-surface-hover focus-visible:shadow-focus flex items-center justify-between rounded-lg px-2 py-1 outline-none transition-[background-color,color] ease-out group-[.toc-lvl2]:pl-4",
+                          "hover:bg-surface-hover focus-visible:shadow-focus rounded-medium flex w-fit items-center justify-between px-2 py-1 outline-none transition-[background-color,color] duration-150 ease-out group-[.toc-lvl2]:ml-2",
                           {
                             "bg-surface-hover text-deepblue-800 shadow-xsmall":
                               lvl3.id === activeSubId,
