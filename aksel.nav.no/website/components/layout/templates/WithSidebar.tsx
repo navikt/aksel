@@ -1,4 +1,4 @@
-import Sidebar from "@/layout/sidebar/Sidebar2";
+import Sidebar from "@/layout/sidebar/Sidebar";
 import { urlFor } from "@/sanity/interface";
 import { SidebarT } from "@/types";
 import { capitalize } from "@/utils";

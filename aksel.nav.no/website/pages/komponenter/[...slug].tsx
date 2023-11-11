@@ -11,13 +11,13 @@ import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
-  AkselSidebarT,
   ArticleListT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  SidebarT,
 } from "@/types";
-import { dateStr } from "@/utils";
+import { dateStr, generateSidebar } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
 import { SEO } from "@/web/seo/SEO";
 import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
@@ -55,7 +55,7 @@ const kodepakker = {
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselKomponentDocT>>;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;
@@ -133,7 +133,7 @@ export const getStaticProps: GetStaticProps = async ({
       refs,
       slug: slug.slice(0, 2).join("/"),
       seo,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "komponenter"),
       preview,
       title: page?.heading ?? "",
       id: page?._id ?? "",
