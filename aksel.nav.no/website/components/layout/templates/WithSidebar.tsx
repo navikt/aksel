@@ -1,6 +1,6 @@
-import { Sidebar } from "@/layout/sidebar/Sidebar";
+import Sidebar from "@/layout/sidebar/Sidebar2";
 import { urlFor } from "@/sanity/interface";
-import { AkselSidebarT } from "@/types";
+import { SidebarT } from "@/types";
 import { capitalize } from "@/utils";
 import { TableOfContentsv2 } from "@/web/toc/TOCv2";
 import { Box, Detail, Heading, Link } from "@navikt/ds-react";
@@ -18,7 +18,7 @@ export const WithSidebar = ({
   footer,
 }: {
   children: React.ReactNode;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   pageType: {
     type: "komponenter" | "grunnleggende" | "templates";
     title: string;
