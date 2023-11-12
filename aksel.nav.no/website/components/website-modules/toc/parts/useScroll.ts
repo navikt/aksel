@@ -2,11 +2,12 @@ import { useClientLayoutEffect } from "@navikt/ds-react";
 import throttle from "lodash/throttle";
 import { useState } from "react";
 
-export function useScroll(ref: HTMLElement | null, enabled: boolean) {
+export function useScroll() {
   const [scrollBlock, setScrollBlock] = useState({ start: 0, end: 0 });
 
   useClientLayoutEffect(() => {
-    if (!ref || !enabled) {
+    const ref = document.getElementById("toc-scroll-wrapper");
+    if (!ref) {
       return;
     }
     if (ref.scrollHeight > ref.clientHeight) {
@@ -29,7 +30,7 @@ export function useScroll(ref: HTMLElement | null, enabled: boolean) {
     return () => {
       ref.removeEventListener("scroll", func);
     };
-  }, [ref, enabled]);
+  }, []);
 
   return scrollBlock;
 }
