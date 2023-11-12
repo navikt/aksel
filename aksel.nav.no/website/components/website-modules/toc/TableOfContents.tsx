@@ -15,8 +15,8 @@ function TableOfContents({ toc }: TableOfContentsProps) {
   }
 
   return (
-    <aside className="min-w-56 sticky top-20 order-1 hidden max-h-[80vh] w-56 self-start overflow-y-auto overscroll-contain p-1 xl:block">
-      <Label as="h2" className="text-deepblue-800 px-2 pb-1">
+    <aside className="min-w-60 w-min-w-60 sticky top-20 order-1 hidden max-h-[80vh] self-start overflow-y-auto overscroll-contain p-1 xl:block">
+      <Label as="h2" className="px-2" textColor="subtle">
         Innhold på siden
       </Label>
       <UlList toc={toc} activeId={activeId} activeSubId={activeSubId} />
@@ -33,7 +33,6 @@ function UlList({
   activeId: string | null;
   activeSubId: string | null;
   toc: TableOfContentsT | TableOfContentsT[number]["children"];
-
   nested?: boolean;
 }) {
   const id = nested ? activeSubId : activeId;
@@ -45,7 +44,7 @@ function UlList({
   };
 
   return (
-    <ul>
+    <ul className="pl-3">
       {toc.map((lvl2) => (
         <li key={lvl2.id}>
           <>
@@ -54,10 +53,9 @@ function UlList({
               className={cl(
                 "hover:bg-surface-hover focus-visible:shadow-focus rounded-medium flex w-fit items-center justify-between px-2 py-1 outline-none transition-[background-color,color] duration-150 ease-out",
                 {
-                  "bg-surface-hover text-deepblue-800 shadow-xsmall": isActive(
+                  "bg-surface-hover text-deepblue-700 shadow-xsmall": isActive(
                     lvl2.id
                   ),
-                  "ml-2": nested,
                 }
               )}
             >
