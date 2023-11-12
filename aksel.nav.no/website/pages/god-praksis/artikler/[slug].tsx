@@ -16,11 +16,12 @@ import {
   ResolveRelatedArticlesT,
   ResolveSlugT,
   ResolveTemaT,
+  TableOfContentsT,
 } from "@/types";
-import { abbrName, dateStr } from "@/utils";
+import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
-import TableOfContents from "@/web/toc/TOC";
+import TableOfContents from "@/web/toc/TableOfContents";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import NextLink from "next/link";
@@ -34,6 +35,7 @@ type PageProps = NextPageT<{
   >;
   publishDate: string;
   verifiedDate: string;
+  toc: TableOfContentsT;
 }>;
 
 export const query = `{
@@ -97,6 +99,10 @@ export const getStaticProps: GetStaticProps = async ({
         page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt
       ),
       publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "aksel_artikkel",
+      }),
     },
     notFound: !page && !preview,
     revalidate: 60,
@@ -107,6 +113,7 @@ const Page = ({
   page: data,
   publishDate,
   verifiedDate,
+  toc,
 }: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
@@ -228,7 +235,7 @@ const Page = ({
               )}
             </div>
             <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
-              <TableOfContents hideToc={false} aksel />
+              <TableOfContents toc={toc} variant="subtle" />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                 <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">

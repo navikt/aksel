@@ -226,7 +226,7 @@ function SanitizedBlock({
       return (
         <Heading
           tabIndex={-1}
-          id={`h${value._key}`}
+          id={value._key}
           level="2"
           size="large"
           className="max-w-text text-deepblue-800 mb-4 mt-12 scroll-mt-20 first-of-type:mt-0 focus:outline-none"
@@ -242,7 +242,7 @@ function SanitizedBlock({
           level="3"
           size="medium"
           tabIndex={-1}
-          id={`h${value._key}`}
+          id={value._key}
         >
           {children}
         </Heading>
@@ -254,7 +254,7 @@ function SanitizedBlock({
           spacing
           level="4"
           size="small"
-          id={`h${value._key}`}
+          id={value._key}
         >
           {children}
         </Heading>
