@@ -1,5 +1,6 @@
 import { amplitudeLogNavigation } from "@/logging";
 import { SidebarT } from "@/types";
+import { StatusTag } from "@/web/StatusTag";
 import { Box, Label, Show } from "@navikt/ds-react";
 import cl from "clsx";
 import { useRouter } from "next/router";
@@ -15,7 +16,7 @@ const Sidebar = ({
     <Show asChild above="md">
       <Box
         paddingBlock="0 8"
-        paddingInline="8 2"
+        paddingInline="2"
         aria-label={kategori}
         data-testid="ds-sidebar"
         as="nav"
@@ -23,10 +24,7 @@ const Sidebar = ({
       >
         <ul className="space-y-6">
           {links.map((section) => (
-            <>
-              <Section key={section.value} section={section} />
-              <hr className="bg-border-divider h-px border-none last-of-type:hidden" />
-            </>
+            <Section key={section.value} section={section} />
           ))}
         </ul>
       </Box>
@@ -44,11 +42,13 @@ function Section({ section }: { section: SidebarT[number] }) {
     <li>
       <Label
         as="div"
-        className="min-h-8 text-deepblue-800 flex items-center px-4"
+        size="small"
+        textColor="subtle"
+        className="min-h-8 flex items-center px-4"
       >
         {section.title}
       </Label>
-      <ul className="space-y-px">
+      <ul className="space-y-px pl-3">
         {section.pages.map((page) => (
           <li
             aria-current={isActive(page.slug) ? "page" : undefined}
@@ -56,17 +56,14 @@ function Section({ section }: { section: SidebarT[number] }) {
             className={cl(
               "rounded-medium hover:bg-surface-hover min-h-8 relative mx-2 flex items-center transition-[background-color] ease-out",
               {
-                "bg-surface-selected text-deepblue-800 font-semibold": isActive(
-                  page.slug
-                ),
-                "after:absolute after:-left-2 after:h-6 after:w-1 after:rounded-lg after:bg-blue-700":
+                "bg-surface-selected text-deepblue-800 shadow-xsmall font-semibold":
                   isActive(page.slug),
               }
             )}
           >
             <a
               href={`/${page.slug}`}
-              className="text-medium min-h-8 flex w-full items-center px-2"
+              className="text-medium min-h-8 rounded-medium focus-visible:shadow-focus flex w-full  items-center justify-between gap-2 break-words px-2 focus:outline-none focus-visible:z-10"
               onClick={(e) => {
                 amplitudeLogNavigation(
                   "meny",
@@ -75,6 +72,7 @@ function Section({ section }: { section: SidebarT[number] }) {
               }}
             >
               {page.heading}
+              <StatusTag size="xsmall" status={page.tag} />
             </a>
           </li>
         ))}
