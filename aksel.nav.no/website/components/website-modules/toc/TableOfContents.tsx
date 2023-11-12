@@ -1,6 +1,7 @@
 import { TableOfContentsT } from "@/types";
 import { BodyShort, Label } from "@navikt/ds-react";
 import cl from "clsx";
+import styles from "./table-of-contents.module.css";
 import { useToc } from "./useToc";
 
 type TableOfContentsProps = {
@@ -15,7 +16,12 @@ function TableOfContents({ toc }: TableOfContentsProps) {
   }
 
   return (
-    <aside className="min-w-60 w-min-w-60 sticky top-20 order-1 hidden max-h-[80vh] self-start overflow-y-auto overscroll-contain p-1 xl:block">
+    <aside
+      className={cl(
+        styles.hideScrollbar,
+        "min-w-60 w-min-w-60 sticky top-20 order-1 hidden max-h-[80vh] self-start overflow-y-auto overscroll-contain p-1 xl:block"
+      )}
+    >
       <Label as="h2" className="px-2" textColor="subtle">
         Innhold på siden
       </Label>
