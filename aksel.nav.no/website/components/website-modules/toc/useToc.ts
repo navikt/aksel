@@ -41,16 +41,9 @@ export const useToc = (toc: TableOfContentsT) => {
         setActiveId(null);
         setActiveSubId(null);
       }
-
-      /* if (activeSub) {
-        const dist = document.getElementById(`${activeSub}-parent`).offsetTop;
-        const parent = document.getElementById(`toc-scroll`);
-        if (!parent || !dist) return;
-        parent.scrollTop = dist - 128;
-      } */
     };
 
-    const func = throttle(handleScroll, 50);
+    const func = throttle(handleScroll, 100);
 
     window.addEventListener("scroll", func);
     return () => {

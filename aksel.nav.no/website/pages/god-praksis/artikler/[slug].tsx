@@ -235,7 +235,7 @@ const Page = ({
               )}
             </div>
             <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
-              <TableOfContents toc={toc} />
+              <TableOfContents toc={toc} variant="subtle" />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                 <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
