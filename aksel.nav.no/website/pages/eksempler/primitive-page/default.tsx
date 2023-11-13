@@ -44,5 +44,5 @@ export const Demo = {
 export const args = {
   index: 0,
   title: "Standard",
-  desc: "Page gjør det enklere å bygge opp layout med riktig maksbredde og gutters",
+  desc: "Page gjør det enklere å bygge opp layout med riktig maksbredde og gutters.",
 };

@@ -39,5 +39,5 @@ export const Demo = {
 export const args = {
   index: 3,
   title: "Content Padding",
-  desc: "`contentBlockPadding` på Page sikrer at det alltid vil være minimumspadding mellom innhold og footer.",
+  desc: "contentBlockPadding på Page sikrer at det alltid vil være minimumspadding mellom innhold og footer. Dette vil være en god fallback, men basert på layout vil du selv måtte legge på egen padding top/bottom",
 };

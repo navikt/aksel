@@ -39,5 +39,5 @@ export const Demo = {
 export const args = {
   index: 5,
   title: "Bakgrunn",
-  desc: "`background`-prop lar deg velge mellom `default` og `subtle` bakgrunn",
+  desc: "Background-prop lar deg velge mellom `default` og `subtle` bakgrunn.",
 };

@@ -39,5 +39,5 @@ export const Demo = {
 export const args = {
   index: 1,
   title: "Footer belowFold",
-  desc: "Sikrer at footer aldri vil vises før man begynner å scrolle.",
+  desc: "Sikrer at footer aldri vil vises før man begynner å scrolle. Dette hjelper med å redusere layout-shifts ved navigering mellom sider.",
 };

@@ -38,5 +38,5 @@ export const Demo = {
 export const args = {
   index: 2,
   title: "Gutters",
-  desc: "Gutters-prop på Page.Block legger på responsive gutters",
+  desc: "Gutters-prop på Page.Block setter responsive gutters (padding-inline)",
 };
