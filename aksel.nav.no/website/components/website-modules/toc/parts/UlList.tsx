@@ -1,4 +1,5 @@
 import { TableOfContentsT } from "@/types";
+import { removeEmojies } from "@/utils";
 import { BodyShort } from "@navikt/ds-react";
 import styles from "./table-of-contents.module.css";
 
@@ -42,7 +43,7 @@ function UlList({
                 className="whitespace-break-spaces"
                 weight={isActive(node.id) ? "semibold" : "regular"}
               >
-                {node.title}
+                {removeEmojies(node.title)}
               </BodyShort>
             </a>
             {!nested && node.children.length > 0 && (

@@ -52,14 +52,12 @@ const outputIndex = [
 const outputComplete: SidebarT = [
   {
     pages: [
-      { ...baseItem, kategori: "primitives", heading: "f", sidebarindex: 0 },
-      { ...baseItem, kategori: "primitives", heading: "e", sidebarindex: 1 },
+      { slug: "/123", tag: "beta", heading: "f" },
+      { slug: "/123", tag: "beta", heading: "e" },
       {
-        ...baseItem,
-        kategori: "primitives",
+        slug: "/123",
         heading: "d",
         tag: "deprecated" as const,
-        sidebarindex: 2,
       },
     ],
     title: "Primitives",
@@ -67,10 +65,9 @@ const outputComplete: SidebarT = [
   },
   {
     pages: [
-      { ...baseItem, kategori: "core", heading: "b" },
+      { slug: "/123", tag: "beta", heading: "b" },
       {
-        ...baseItem,
-        kategori: "core",
+        slug: "/123",
         heading: "c",
         tag: "deprecated" as const,
       },
