@@ -2,7 +2,6 @@ import { amplitudeLogNavigation } from "@/logging";
 import { SidebarT } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
 import { Box, Label, Show } from "@navikt/ds-react";
-import cl from "clsx";
 import { useRouter } from "next/router";
 
 const Sidebar = ({
@@ -53,13 +52,8 @@ function Section({ section }: { section: SidebarT[number] }) {
           <li
             aria-current={isActive(page.slug) ? "page" : undefined}
             key={page.slug}
-            className={cl(
-              "rounded-medium hover:bg-surface-hover min-h-8 relative mx-2 flex items-center transition-[background-color] ease-out",
-              {
-                "bg-surface-selected text-deepblue-800 shadow-xsmall font-semibold":
-                  isActive(page.slug),
-              }
-            )}
+            data-active={isActive(page.slug)}
+            className="rounded-medium hover:bg-surface-hover min-h-8 data-active:bg-surface-selected data-active:text-deepblue-800 data-active:shadow-xsmall data-active:font-semibold relative mx-2 flex items-center transition-[background-color] ease-out"
           >
             <a
               href={`/${page.slug}`}
