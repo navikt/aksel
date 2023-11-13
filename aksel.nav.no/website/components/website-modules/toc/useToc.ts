@@ -37,6 +37,17 @@ export const useToc = (toc: TableOfContentsT) => {
 
       active && setActiveId(active);
 
+      const activeEl = activeSub ?? active;
+      if (activeEl) {
+        const parent = document.getElementById(`toc-scroll-wrapper`);
+        const activeNode = document.getElementById(`toc-${activeEl}`);
+        const visible = isVisible(activeNode, parent);
+
+        if (!visible) {
+          parent.scrollTop = activeNode.offsetTop - 128;
+        }
+      }
+
       if (window.scrollY < 300) {
         setActiveId(null);
         setActiveSubId(null);
@@ -57,3 +68,17 @@ export const useToc = (toc: TableOfContentsT) => {
 
   return { activeId, activeSubId };
 };
+
+function isVisible(ele, container) {
+  const eleTop = ele.offsetTop;
+  const eleBottom = ele.offsetTop + ele.clientHeight;
+
+  const containerTop = container.scrollTop + 70;
+  const containerBottom = containerTop + container.clientHeight - 140;
+
+  return (
+    (eleTop >= containerTop && eleBottom <= containerBottom) ||
+    (eleTop < containerTop && containerTop < eleBottom) ||
+    (eleTop < containerBottom && containerBottom < eleBottom)
+  );
+}

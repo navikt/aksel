@@ -32,8 +32,9 @@ function UlList({
         <li key={node.id}>
           <>
             <a
+              id={`toc-${node.id}`}
               href={`#${node.id}`}
-              className="hover:bg-surface-hover data-active:font-semibold focus-visible:shadow-focus rounded-medium data-active:bg-surface-hover data-active:text-deepblue-700 data-active:shadow-xsmall flex w-fit max-w-[13rem] items-center justify-between px-2 py-1 outline-none transition-[background-color,color] duration-150 ease-out"
+              className="hover:bg-surface-hover data-active:font-semibold focus-visible:shadow-focus rounded-medium data-active:bg-surface-hover data-active:text-deepblue-700 data-active:shadow-xsmall flex w-fit max-w-[13rem] scroll-my-6 items-center justify-between px-2 py-1 outline-none transition-[background-color,color] duration-150 ease-out"
               data-active={isActive(node.id)}
             >
               <BodyShort
