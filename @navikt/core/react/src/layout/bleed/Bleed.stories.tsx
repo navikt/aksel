@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react";
 import React from "react";
-import { Box, Button, HStack, VStack } from "../..";
+import { Box, HStack, VStack } from "../..";
 import { BodyLong } from "../../typography";
 import { Bleed } from "./Bleed";
 
@@ -8,18 +8,6 @@ export default {
   title: "ds-react/Primitives/Bleed",
   component: Bleed,
 } satisfies Meta<typeof Bleed>;
-
-export const TestButton = {
-  render: () => {
-    return (
-      <Box background="surface-alt-1-subtle" padding="5">
-        <Bleed marginInline="10 0" asChild>
-          <Button>123</Button>
-        </Bleed>
-      </Box>
-    );
-  },
-};
 
 export const Default = {
   render: () => (
