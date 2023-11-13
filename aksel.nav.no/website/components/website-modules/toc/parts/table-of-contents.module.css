@@ -20,13 +20,13 @@
 .shadowTop {
   top: 0;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  background: linear-gradient(180deg, var(--shadow-color), 80%, transparent);
+  background: linear-gradient(180deg, var(--shadow-color), transparent);
 }
 
 .shadowBottom {
   bottom: 0;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  background: linear-gradient(0deg, var(--shadow-color), 80%, transparent);
+  background: linear-gradient(0deg, var(--shadow-color), transparent);
 }
 
 .listItem {
