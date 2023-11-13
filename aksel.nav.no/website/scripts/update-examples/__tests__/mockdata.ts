@@ -29,7 +29,7 @@ const Example = () => {
 
 export const codeBeforeExpansionCardIcon = `import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
