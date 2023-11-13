@@ -1,5 +1,6 @@
 import { useClientLayoutEffect } from "@navikt/ds-react";
 import throttle from "lodash/throttle";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 function getOpacity(n: number): string {
@@ -8,18 +9,17 @@ function getOpacity(n: number): string {
 
 export function useScrollRangeOpacity() {
   const [scrollBlock, setScrollBlock] = useState({ start: "0", end: "0" });
+  const router = useRouter();
 
   useClientLayoutEffect(() => {
     const ref = document.getElementById("toc-scroll-wrapper");
     if (!ref) {
       return;
     }
-    if (ref.scrollHeight > ref.clientHeight) {
-      setScrollBlock({
-        start: "0",
-        end: getOpacity(ref.scrollHeight - ref.clientHeight),
-      });
-    }
+    setScrollBlock({
+      start: "0",
+      end: getOpacity(ref.scrollHeight - ref.clientHeight),
+    });
 
     const onScroll = (event) =>
       setScrollBlock({
@@ -39,7 +39,7 @@ export function useScrollRangeOpacity() {
     return () => {
       ref.removeEventListener("scroll", func);
     };
-  }, []);
+  }, [router.asPath]);
 
   return scrollBlock;
 }
