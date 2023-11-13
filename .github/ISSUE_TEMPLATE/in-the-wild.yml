@@ -12,7 +12,7 @@ body:
     attributes:
       label: Lenke til side
       description: Lenke til siden hvor eksemplet er
-      placeholder: 
+      placeholder:
     validations:
       required: true
   - type: textarea

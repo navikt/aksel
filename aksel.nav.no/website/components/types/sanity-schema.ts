@@ -323,6 +323,8 @@ export type CodeExampleSchemaT = {
     navn: string;
     index: number;
     description?: string;
+    sandboxEnabled?: boolean;
+    sandboxBase64: string;
   }[];
   metadata?: {
     version: number;

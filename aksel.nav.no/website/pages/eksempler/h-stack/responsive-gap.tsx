@@ -12,6 +12,10 @@ const Example = () => {
   );
 };
 
+const Placeholder = () => {
+  return <div className="aspect-square h-12 rounded bg-teal-500" />;
+};
+
 export default withDsExample(Example, { showBreakpoints: true });
 
 /* Storybook story */
@@ -22,8 +26,4 @@ export const Demo = {
 export const args = {
   index: 4,
   desc: "Med responsive gap kan man redusere/øke mellomrom basert på brekkpunktene våre. Implementasjonen er mobile-first, slik at man 'sm: 8' vil sette gap for 'md', 'lg' og 'xl' også.",
-};
-
-const Placeholder = () => {
-  return <div className="aspect-square h-12 rounded bg-teal-500" />;
 };

@@ -1,6 +1,19 @@
 import { withDsExample } from "@/web/examples/withDsExample";
 import { UNSAFE_Combobox } from "@navikt/ds-react";
 
+const Example = () => {
+  return (
+    <div>
+      <UNSAFE_Combobox
+        allowNewValues
+        label="Hva er dine favorittdrikker? Legg gjerne til flere alternativer."
+        options={initialOptions}
+        isMultiSelect
+      />
+    </div>
+  );
+};
+
 const initialOptions = [
   "tea",
   "coffee",
@@ -15,19 +28,6 @@ const initialOptions = [
   "beer",
   "wine",
 ];
-
-export const Example = () => {
-  return (
-    <div>
-      <UNSAFE_Combobox
-        allowNewValues
-        label="Hva er dine favorittdrikker? Legg gjerne til flere alternativer."
-        options={initialOptions}
-        isMultiSelect
-      />
-    </div>
-  );
-};
 
 export default withDsExample(Example, { variant: "static" });
 

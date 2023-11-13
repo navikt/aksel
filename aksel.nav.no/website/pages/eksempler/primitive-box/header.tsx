@@ -51,21 +51,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, {
-  showBreakpoints: true,
-  variant: "full",
-});
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 8,
-  desc: "Box lar deg enklere bygge opp kjente grensesnitt gjennom felles tokens og brekkpunkt",
-};
-
 function Pictogram() {
   return (
     <svg
@@ -114,3 +99,18 @@ function Pictogram() {
     </svg>
   );
 }
+
+export default withDsExample(Example, {
+  showBreakpoints: true,
+  variant: "full",
+});
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 8,
+  desc: "Box lar deg enklere bygge opp kjente grensesnitt gjennom felles tokens og brekkpunkt",
+};

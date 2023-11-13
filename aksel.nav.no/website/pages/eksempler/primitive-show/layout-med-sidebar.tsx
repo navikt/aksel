@@ -34,21 +34,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, {
-  showBreakpoints: true,
-  variant: "subtle",
-});
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 3,
-  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
-};
-
 const ContentFirst = ({ className }: { className?: string }) => (
   <div className={cl("bg-surface-default h-fit p-10", className)}>
     <VStack gap="6">
@@ -141,3 +126,19 @@ const DesktopSidebar = ({ className }: { className?: string }) => (
 const MobileSidebar = ({ className }: { className?: string }) => (
   <DesktopSidebar className={className} />
 );
+
+export default withDsExample(Example, {
+  showBreakpoints: true,
+  variant: "subtle",
+});
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 3,
+  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
+  sandbox: false,
+};

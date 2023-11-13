@@ -1,4 +1,4 @@
-import { PencilIcon } from "@navikt/aksel-icons";
+import { CodeSandboxLogo } from "@/assets/Icons";
 import { Button } from "@navikt/ds-react";
 import { getParameters } from "codesandbox/lib/api/define";
 
@@ -58,11 +58,10 @@ export const CodeSandbox = ({ code }: { code: string }) => {
       <Button
         variant="tertiary-neutral"
         size="small"
+        aria-label="Codesandbox"
         type="submit"
-        icon={<PencilIcon aria-hidden fontSize="1.5rem" />}
-      >
-        CodeSandbox
-      </Button>
+        icon={<CodeSandboxLogo aria-hidden />}
+      />
     </form>
   );
 };
