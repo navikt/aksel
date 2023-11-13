@@ -1,5 +1,6 @@
-import { abbrName, BreadCrumbs, dateStr, TableOfContents } from "@/components";
-import { Footer } from "@/layout";
+import Bilde from "@/cms/bilde/Bilde";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
@@ -9,13 +10,14 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
-import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
+import { abbrName, dateStr } from "@/utils";
+import { BreadCrumbs } from "@/web/BreadCrumbs";
+import { SEO } from "@/web/seo/SEO";
+import TableOfContents from "@/web/toc/TOC";
+import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
-import { Header } from "components/layout/header/Header";
-import Bilde from "components/sanity-modules/bilde/Bilde";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
-import { lazy, Suspense } from "react";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
@@ -117,9 +119,12 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
                   {data.heading}
                 </Heading>
                 {data?.ingress && (
-                  <Ingress className="override-text-700 mt-5 text-2xl">
+                  <BodyLong
+                    size="large"
+                    className="override-text-700 mt-5 text-2xl"
+                  >
                     {data?.ingress}
-                  </Ingress>
+                  </BodyLong>
                 )}
                 <div className="mt-6 flex gap-3 text-base">
                   <BodyShort
@@ -194,7 +199,7 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

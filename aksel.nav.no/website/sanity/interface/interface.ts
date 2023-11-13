@@ -1,16 +1,10 @@
 import imageUrlBuilder from "@sanity/image-url";
+import { allArticleDocuments } from "../config";
 import { getClient, noCdnClient, sanityClient } from "./client.server";
 
-const imageBuilder = imageUrlBuilder(sanityClient);
-
 export function urlFor(source: any) {
-  return imageBuilder.image(source);
+  return imageUrlBuilder(sanityClient).image(source);
 }
-
-export const getAllPages = async (token?: string) => {
-  const pages = await sitemapPages(token);
-  return pages.map((x) => x.path);
-};
 
 export async function sitemapPages(
   token?: string
@@ -46,31 +40,6 @@ export async function sitemapPages(
   ];
 }
 
-export const getAkselDocuments = async (
-  source:
-    | "aksel_artikkel"
-    | "aksel_blogg"
-    | "aksel_prinsipp"
-    | "aksel_standalone"
-    | "komponent_artikkel"
-    | "all",
-  token?: string
-): Promise<string[]> => {
-  if (!source) return [];
-  const docs = await getDocuments(source, token);
-
-  return docs.map((x) => x.slug);
-};
-
-export const getDocumentsTmp = async (
-  source: "komponent_artikkel" | "ds_artikkel" | "templates_artikkel",
-  token?: string
-): Promise<string[]> => {
-  const docs = await getDocuments(source, token);
-
-  return docs.map((x) => x.slug);
-};
-
 export async function getAkselTema(
   token?: string
 ): Promise<{ path: string; lastmod: string }[]> {
@@ -85,34 +54,15 @@ export async function getAkselTema(
   }));
 }
 
-async function getDocuments(
-  source:
-    | "komponent_artikkel"
-    | "ds_artikkel"
-    | "aksel_artikkel"
-    | "aksel_blogg"
-    | "aksel_prinsipp"
-    | "aksel_standalone"
-    | "templates_artikkel"
-    | "all",
+export async function getDocuments(
+  source: (typeof allArticleDocuments)[number] | "all",
   token?: string
 ): Promise<{ slug: string; lastmod: string }[]> {
   const client = token ? noCdnClient(token) : getClient();
   const documents: any[] | null = await client.fetch(
     `*[_type in $types]{ _type, _id, 'slug': slug.current, _updatedAt }`,
     {
-      types:
-        source === "all"
-          ? [
-              "komponent_artikkel",
-              "ds_artikkel",
-              "aksel_artikkel",
-              "aksel_blogg",
-              "aksel_prinsipp",
-              "aksel_standalone",
-              "templates_artikkel",
-            ]
-          : [source],
+      types: source === "all" ? allArticleDocuments : [source],
     }
   );
   const paths = [];

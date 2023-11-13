@@ -1,5 +1,5 @@
-import { Box, BodyLong } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { withDsExample } from "@/web/examples/withDsExample";
+import { BodyLong, Box } from "@navikt/ds-react";
 
 const Example = () => {
   return (

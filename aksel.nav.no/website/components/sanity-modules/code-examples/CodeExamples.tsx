@@ -1,6 +1,7 @@
-import { capitalize } from "@/components";
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import ErrorBoundary from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
+import { capitalize } from "@/utils";
 import {
   ExternalLinkIcon,
   LaptopIcon,
@@ -8,7 +9,6 @@ import {
 } from "@navikt/aksel-icons";
 import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import cl from "clsx";
-import SnippetLazy from "components/sanity-modules/code-snippet/SnippetLazy";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Sandbox } from "./parts/Sandbox";
@@ -47,7 +47,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
       if (exampleWrapper && exampleWrapper.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
         clearInterval(waitForExampleContentToRender);
-        setFrameState(newHeight < 300 ? 300 : newHeight);
+        setFrameState(Math.min(Math.max(newHeight, 300), 900));
         setUnloaded(false);
       }
 
@@ -160,7 +160,6 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                       "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                       {
                         invisible: unloaded,
-                        "p-6": demoVariant === "templates",
                       }
                     )}
                     title="Kode-eksempler"

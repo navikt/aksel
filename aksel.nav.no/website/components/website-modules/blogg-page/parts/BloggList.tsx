@@ -1,9 +1,8 @@
+import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { urlFor } from "@/sanity/interface";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
-import { getAuthors } from "@/utils";
+import { getAuthors, getImage } from "@/utils";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import { getImage } from "components/website-modules/utils/get-image";
-import { useFormatedDate } from "components/website-modules/utils/getDate";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 

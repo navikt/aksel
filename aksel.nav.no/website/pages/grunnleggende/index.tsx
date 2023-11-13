@@ -1,3 +1,7 @@
+import ComponentOverview from "@/cms/component-overview/ComponentOverview";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
@@ -7,13 +11,9 @@ import {
   ArticleListT,
   NextPageT,
 } from "@/types";
-import { BodyLong, Heading, Ingress } from "@navikt/ds-react";
+import { SEO } from "@/web/seo/SEO";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import { WithSidebar } from "components/layout/WithSidebar";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { grunnleggendeKategorier } from "../../sanity/config";
@@ -68,7 +68,11 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
           rootUrl: "/grunnleggende",
           rootTitle: "Grunnleggende",
         }}
-        intro={<Ingress className="text-text-on-action">{page?.intro}</Ingress>}
+        intro={
+          <BodyLong size="large" className="text-text-on-action">
+            {page?.intro}
+          </BodyLong>
+        }
         pageProps={page}
       >
         {grunnleggendeKategorier
@@ -110,7 +114,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

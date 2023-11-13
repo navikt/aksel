@@ -1,14 +1,14 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import {
+  BodyShort,
   Box,
   Detail,
   HStack,
   Heading,
-  BodyShort,
   Hide,
   Show,
   VStack,
 } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (

@@ -1,6 +1,6 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { HGrid, Show } from "@navikt/ds-react";
 import cl from "clsx";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (

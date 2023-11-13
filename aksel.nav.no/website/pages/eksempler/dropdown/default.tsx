@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { Button, Dropdown } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 import Link from "next/link";
 
 const Example = () => {

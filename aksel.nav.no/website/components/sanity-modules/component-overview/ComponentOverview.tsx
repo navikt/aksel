@@ -1,8 +1,8 @@
 import { urlFor } from "@/sanity/interface";
 import { ArticleListT } from "@/types";
+import { StatusTag } from "@/web/StatusTag";
 import { Heading } from "@navikt/ds-react";
 import cl from "clsx";
-import { StatusTag } from "components/website-modules/StatusTag";
 import Image from "next/legacy/image";
 import Nextlink from "next/link";
 

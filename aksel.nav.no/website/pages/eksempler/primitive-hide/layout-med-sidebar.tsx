@@ -1,18 +1,18 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { LinkIcon } from "@navikt/aksel-icons";
 import {
-  Hide,
-  Show,
+  BodyLong,
+  Box,
+  CopyButton,
   HGrid,
   Heading,
-  BodyLong,
-  Link,
-  CopyButton,
-  VStack,
+  Hide,
   Label,
+  Link,
   List,
-  Box,
+  Show,
+  VStack,
 } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 import cl from "clsx";
 
 const Example = () => {

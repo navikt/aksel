@@ -1,6 +1,6 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { FileIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useRef } from "react";
 
 const Example = () => {

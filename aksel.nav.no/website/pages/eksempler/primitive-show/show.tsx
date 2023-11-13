@@ -1,5 +1,5 @@
-import { Show, HGrid } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { withDsExample } from "@/web/examples/withDsExample";
+import { HGrid, Show } from "@navikt/ds-react";
 import cl from "clsx";
 
 const Example = () => {

@@ -1,18 +1,13 @@
+import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
+import AkselLogo from "@/assets/Logo";
 import { amplitudeLogNavigation } from "@/logging";
 import { BodyShort, Heading, Link } from "@navikt/ds-react";
-import { FigmaIcon, GithubIcon, SlackIcon } from "components/assets";
-import Logo from "components/assets/Logo";
 import dynamic from "next/dynamic";
-/* import FooterForm from "./FooterForm"; */
 
-export const EditButton = dynamic(
-  () => import("components/website-modules/EditButton"),
-  {
-    ssr: false,
-  }
-);
+export const EditButton = dynamic(() => import("@/web/EditButton"), {
+  ssr: false,
+});
 
-/* FooterForm is disabled to better comply with policy */
 const Footer = () => {
   return (
     <footer
@@ -26,7 +21,6 @@ const Footer = () => {
         <Snarveier />
         <SideLenker />
         <Kontakt />
-        {/* <FooterForm /> */}
       </div>
       <EditButton />
     </footer>
@@ -36,7 +30,7 @@ const Footer = () => {
 function LogoBlock() {
   return (
     <div>
-      <Logo className="fill-white" />
+      <AkselLogo className="fill-white" />
       <p className="mt-4">&copy; {new Date().getFullYear()} NAV</p>
       <p>Arbeids- og velferdsetaten</p>
     </div>

@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { Pagination, Table } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 
 const Example = () => {

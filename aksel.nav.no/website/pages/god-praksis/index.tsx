@@ -1,4 +1,7 @@
-import { Footer } from "@/layout";
+import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import GodPraksisCard from "@/cms/cards/GodPraksisCard";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
@@ -11,13 +14,10 @@ import {
   ResolveSlugT,
   ResolveTemaT,
 } from "@/types";
+import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { Heading } from "@navikt/ds-react";
-import { Header } from "components/layout/header/Header";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import GodPraksisCard from "components/sanity-modules/cards/GodPraksisCard";
-import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 
@@ -132,7 +132,7 @@ const Page = ({ temaer, page, resent }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

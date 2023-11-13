@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { Alert, AlertProps } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 import React from "react";
 
 const Example = () => {

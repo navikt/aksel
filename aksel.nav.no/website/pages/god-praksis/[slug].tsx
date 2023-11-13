@@ -1,16 +1,16 @@
-import { abbrName } from "@/components";
-import { Footer } from "@/layout";
+import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getAkselTema, urlFor } from "@/sanity/interface";
 import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
+import { abbrName } from "@/utils";
+import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
-import { Header } from "components/layout/header/Header";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
-import { SEO } from "components/website-modules/seo/SEO";
 import Image from "next/legacy/image";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -218,7 +218,7 @@ const Page = ({ tema: page }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

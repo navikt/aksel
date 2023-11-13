@@ -36,6 +36,10 @@ const StyleMappings = {
       main: primitivesCss,
     },
     {
+      component: "Page",
+      main: primitivesCss,
+    },
+    {
       component: "HGrid",
       main: primitivesCss,
     },

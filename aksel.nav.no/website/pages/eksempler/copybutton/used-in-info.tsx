@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { Box, CopyButton, HGrid } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (

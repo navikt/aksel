@@ -1,6 +1,6 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { PlusCircleFillIcon } from "@navikt/aksel-icons";
 import { BodyLong, Link } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (

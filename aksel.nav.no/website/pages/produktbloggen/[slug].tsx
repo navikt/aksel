@@ -1,3 +1,6 @@
+import BloggCard from "@/cms/cards/BloggCard";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { urlFor } from "@/sanity/interface";
@@ -8,16 +11,12 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
-import { abbrName, dateStr } from "@/utils";
-import { BodyShort, Detail, Heading, Ingress } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import BloggCard from "components/sanity-modules/cards/BloggCard";
-import { BloggAd } from "components/website-modules/BloggAd";
-import { AkselCubeStatic } from "components/website-modules/aksel-cube/AkselCube";
-import { SEO } from "components/website-modules/seo/SEO";
-import TableOfContents from "components/website-modules/toc/TOC";
-import { getImage } from "components/website-modules/utils/get-image";
+import { abbrName, dateStr, getImage } from "@/utils";
+import { BloggAd } from "@/web/BloggAd";
+import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
+import TableOfContents from "@/web/toc/TOC";
+import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -108,9 +107,12 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
               {blogg.heading}
             </Heading>
             {blogg?.ingress && (
-              <Ingress className="text-deepblue-700 mt-4 text-2xl leading-normal">
+              <BodyLong
+                size="large"
+                className="text-deepblue-700 mt-4 text-2xl leading-normal"
+              >
                 {blogg?.ingress}
-              </Ingress>
+              </BodyLong>
             )}
             <div className="mt-8 inline-flex flex-wrap items-center gap-2 text-base">
               <Detail uppercase as="span">
@@ -198,7 +200,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             </BodyShort>
           </div>
           {morePosts && (
-            <div className="max-w-content-w-padding mx-auto mt-32 w-full">
+            <div className="mx-auto mt-32 w-full max-w-4xl">
               <Heading level="2" size="large">
                 Flere blogginnlegg
               </Heading>
@@ -210,7 +212,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             </div>
           )}
 
-          <div className="max-w-content-w-padding mx-auto grid w-full">
+          <div className="mx-auto grid w-full max-w-4xl">
             <BloggAd />
           </div>
         </div>
@@ -220,7 +222,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

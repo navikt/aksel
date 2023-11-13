@@ -1,8 +1,9 @@
-import { BreadCrumbs, TableOfContents, abbrName, dateStr } from "@/components";
-import { Footer } from "@/layout";
+import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getAkselDocuments } from "@/sanity/interface";
+import { getDocuments } from "@/sanity/interface";
 import {
   contributorsAll,
   contributorsSingle,
@@ -16,11 +17,12 @@ import {
   ResolveSlugT,
   ResolveTemaT,
 } from "@/types";
+import { abbrName, dateStr } from "@/utils";
+import { BreadCrumbs } from "@/web/BreadCrumbs";
+import { SEO } from "@/web/seo/SEO";
+import TableOfContents from "@/web/toc/TOC";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
-import { Header } from "components/layout/header/Header";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { SEO } from "components/website-modules/seo/SEO";
+import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -62,8 +64,8 @@ export const query = `{
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getAkselDocuments("aksel_artikkel").then((paths) =>
-      paths.map((slug) => ({
+    paths: await getDocuments("aksel_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
         params: {
           slug: slug.replace("god-praksis/artikler/", ""),
         },
@@ -181,9 +183,12 @@ const Page = ({
                 {data.heading}
               </Heading>
               {data?.ingress && (
-                <Ingress className="override-text-700 mt-4 text-2xl">
+                <BodyLong
+                  size="large"
+                  className="override-text-700 mt-4 text-2xl"
+                >
                   {data?.ingress}
-                </Ingress>
+                </BodyLong>
               )}
 
               <div className="mt-6 inline-flex flex-wrap items-center gap-2 text-base">
@@ -260,7 +265,7 @@ const Page = ({
   );
 };
 
-const WithPreview = lazy(() => import("../../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {
