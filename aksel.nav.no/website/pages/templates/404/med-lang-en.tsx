@@ -144,4 +144,5 @@ export const args = {
   index: 4,
   title: "Flerspråk",
   desc: "En 404-feil kan være frustrerende, spesielt hvis den er på et ukjent språk. En melding på engelsk kan gjøre det lettere å forstå problemet og hva du skal gjøre videre",
+  sandbox: false,
 };
