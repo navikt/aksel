@@ -5,7 +5,7 @@ export interface OverridableComponent<Component, Element extends HTMLElement> {
 
   <As extends React.ElementType>(
     props: {
-      as: As;
+      as?: As;
     } & Component &
       Omit<React.ComponentPropsWithRef<As>, keyof Component | "as">
   ): ReturnType<React.FC>;
