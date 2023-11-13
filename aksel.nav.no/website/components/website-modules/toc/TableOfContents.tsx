@@ -10,7 +10,7 @@ type TableOfContentsProps = {
 };
 
 function TableOfContents({ toc, variant }: TableOfContentsProps) {
-  const { activeId, activeSubId } = useToc(toc);
+  const tocCtx = useToc(toc);
 
   if (toc.length === 0) {
     return null;
@@ -33,7 +33,7 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
       </Label>
       <div className="relative">
         <ScrollFade />
-        <UlList toc={toc} activeId={activeId} activeSubId={activeSubId} />
+        <UlList toc={toc} tocProps={tocCtx} />
       </div>
     </aside>
   );

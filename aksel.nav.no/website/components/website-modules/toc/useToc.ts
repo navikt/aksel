@@ -1,10 +1,13 @@
 import throttle from "lodash/throttle";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TableOfContentsT } from "../../types/toc";
 
 export const useToc = (toc: TableOfContentsT) => {
   const [activeId, setActiveId] = useState(null);
   const [activeSubId, setActiveSubId] = useState(null);
+
+  console.log(activeSubId, activeId);
+  const tempDisableScroll = useRef(false);
 
   useEffect(() => {
     const validPick = (el: HTMLElement) => {
@@ -14,6 +17,9 @@ export const useToc = (toc: TableOfContentsT) => {
     };
 
     const handleScroll = () => {
+      if (tempDisableScroll.current) {
+        return;
+      }
       let active = null;
       let activeSub = null;
 
@@ -66,7 +72,27 @@ export const useToc = (toc: TableOfContentsT) => {
     window.location.hash && setActiveId(window.location.hash.replace("#", ""));
   }, []);
 
-  return { activeId, activeSubId };
+  const scrollToggle = () => {
+    tempDisableScroll.current = true;
+    setTimeout(() => {
+      tempDisableScroll.current = false;
+    }, 50);
+  };
+
+  return {
+    activeId,
+    activeSubId,
+    setActiveId: (id) => {
+      setActiveId(id);
+      setActiveSubId(null);
+      scrollToggle();
+    },
+    setActiveSubId: (id) => {
+      setActiveSubId(id);
+      setActiveId(null);
+      scrollToggle();
+    },
+  };
 };
 
 function isVisible(ele, container) {
