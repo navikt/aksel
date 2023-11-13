@@ -6,7 +6,6 @@ export const useToc = (toc: TableOfContentsT) => {
   const [activeId, setActiveId] = useState(null);
   const [activeSubId, setActiveSubId] = useState(null);
 
-  console.log(activeSubId, activeId);
   const tempDisableScroll = useRef(false);
 
   useEffect(() => {
