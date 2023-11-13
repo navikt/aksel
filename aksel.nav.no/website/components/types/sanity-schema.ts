@@ -165,8 +165,13 @@ export type SidebarInputNodeT = {
   sidebarindex: number | null;
 };
 
+export type SidebarOutputNodeT = Pick<
+  SidebarInputNodeT,
+  "heading" | "slug" | "tag"
+>;
+
 export type SidebarT = {
-  pages: SidebarInputNodeT[];
+  pages: SidebarOutputNodeT[];
   title: string;
   value: string;
 }[];

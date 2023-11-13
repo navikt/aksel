@@ -16,7 +16,15 @@ export function generateSidebar(
         .sort(sortIndex)
         .sort(sortDeprecated),
     }))
-    .filter((x) => !(!x.pages || x.pages.length === 0));
+    .filter((x) => !(!x.pages || x.pages.length === 0))
+    .map((x) => ({
+      ...x,
+      pages: x.pages.map((page) => ({
+        heading: page.heading,
+        slug: page.slug,
+        tag: page.tag,
+      })),
+    }));
 }
 
 export function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {

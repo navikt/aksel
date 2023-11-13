@@ -1,6 +1,5 @@
 import { TableOfContentsT } from "@/types";
 import { BodyShort } from "@navikt/ds-react";
-import cl from "clsx";
 import styles from "./table-of-contents.module.css";
 
 function UlList({
@@ -24,9 +23,8 @@ function UlList({
 
   return (
     <ul
-      className={cl("pl-3", !nested && styles.hideScrollbar, {
-        "max-h-[70vh] overflow-y-scroll overscroll-contain": !nested,
-      })}
+      className={`data-active:max-h-[70vh] data-active:overflow-y-scroll data-active:overscroll-contain pl-3 ${styles.hideScrollbar}`}
+      data-active={!nested}
       id={!nested ? "toc-scroll-wrapper" : undefined}
     >
       {toc.map((node) => (
@@ -34,7 +32,7 @@ function UlList({
           <>
             <a
               href={`#${node.id}`}
-              className="hover:bg-surface-hover data-active:font-semibold focus-visible:shadow-focus rounded-medium data-active:bg-surface-hover data-active:text-deepblue-700 data-active:shadow-xsmall flex w-fit items-center justify-between px-2 py-1 outline-none transition-[background-color,color] duration-150 ease-out"
+              className="hover:bg-surface-hover data-active:font-semibold focus-visible:shadow-focus rounded-medium data-active:bg-surface-hover data-active:text-deepblue-700 data-active:shadow-xsmall flex w-fit max-w-[13rem] items-center justify-between px-2 py-1 outline-none transition-[background-color,color] duration-150 ease-out"
               data-active={isActive(node.id)}
             >
               <BodyShort

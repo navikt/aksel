@@ -17,7 +17,6 @@ const Sidebar = ({
         paddingBlock="0 8"
         paddingInline="2"
         aria-label={kategori}
-        data-testid="ds-sidebar"
         as="nav"
         className="w-sidebar shrink-0 self-start"
       >
