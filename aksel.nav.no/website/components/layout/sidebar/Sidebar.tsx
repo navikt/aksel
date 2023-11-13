@@ -2,6 +2,7 @@ import { amplitudeLogNavigation } from "@/logging";
 import { SidebarT } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
 import { Box, Label, Show } from "@navikt/ds-react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 const Sidebar = ({
@@ -54,7 +55,8 @@ function Section({ section }: { section: SidebarT[number] }) {
             data-active={isActive(page.slug)}
             className="rounded-medium hover:bg-surface-hover min-h-8 data-active:bg-surface-selected data-active:text-deepblue-800 data-active:shadow-xsmall data-active:font-semibold relative mx-2 flex items-center transition-[background-color] ease-out"
           >
-            <a
+            <Link
+              prefetch={false}
               href={`/${page.slug}`}
               className="text-medium min-h-8 rounded-medium focus-visible:shadow-focus flex w-full  items-center justify-between gap-2 break-words px-2 focus:outline-none focus-visible:z-10"
               onClick={(e) => {
@@ -66,7 +68,7 @@ function Section({ section }: { section: SidebarT[number] }) {
             >
               {page.heading}
               <StatusTag size="xsmall" status={page.tag} />
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
