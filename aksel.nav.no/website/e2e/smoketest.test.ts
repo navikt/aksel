@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
 import urls from "./test-urls.json";
+import { getDirectories } from "../scripts/update-examples/parts/get-directories";
+import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-files";
 
 test.describe("Smoketest all pages", () => {
   for (const url of urls) {
@@ -23,4 +25,32 @@ test.describe("Smoketest all pages", () => {
       }
     });
   }
+
+  test.describe("sandbox examples (just a few)", () => {
+    const examples = getDirectories("eksempler");
+    const templates = getDirectories("templates");
+
+    const folders = [...examples, ...templates];
+
+    const randomFolders = [folders[0], folders[20], folders[50]];
+
+    for (const folder of randomFolders) {
+      const files = parseCodeFiles(folder.path, "eksempler");
+
+      const file = files[0];
+      if (!file?.sandboxEnabled) {
+        continue;
+      }
+
+      const url = `/sandbox/preview/index.html?code=${file.sandboxBase64}`;
+
+      test(`check ${folder.path} - ${file.navn}`, async ({ page }) => {
+        await page.goto(`http://localhost:3000${url}`);
+        // await page.waitForLoadState("domcontentloaded");
+        const count = await page.locator("#sandbox-wrapper").count();
+
+        expect(count).toBeGreaterThan(0);
+      });
+    }
+  });
 });

@@ -52,21 +52,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, {
-  variant: "full",
-  showBreakpoints: true,
-});
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 2,
-  desc: "Hide gjør det enklere å konsistent utføre layout-endringer ved konkrete brekkpunkt",
-};
-
 function Logo() {
   return (
     <svg
@@ -85,3 +70,19 @@ function Logo() {
     </svg>
   );
 }
+
+export default withDsExample(Example, {
+  variant: "full",
+  showBreakpoints: true,
+});
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 2,
+  desc: "Hide gjør det enklere å konsistent utføre layout-endringer ved konkrete brekkpunkt",
+  sandbox: false,
+};

@@ -13,18 +13,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, { showBreakpoints: true });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 0,
-  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at Show + child-komponent skal fungere må child kunne ta inn 'className' og 'style' som prop.",
-};
-
 const Placeholder = ({
   text,
   noPadding,
@@ -54,4 +42,17 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+export default withDsExample(Example, { showBreakpoints: true });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 0,
+  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer dom-noder og forenkler output. For at Show + child-komponent skal fungere må child kunne ta inn 'className' og 'style' som prop.",
+  sandbox: false,
 };

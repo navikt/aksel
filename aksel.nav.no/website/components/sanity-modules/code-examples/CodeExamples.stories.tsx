@@ -28,6 +28,7 @@ export const Designsystem: Story = {
             navn: "default",
             title: "title",
             index: 1,
+            sandboxBase64: "fakebase64",
           },
           {
             _key: getKey(),
@@ -37,6 +38,7 @@ export const Designsystem: Story = {
             navn: "neutral",
             title: "title",
             index: 1,
+            sandboxBase64: "fakebase64",
           },
           {
             _key: getKey(),
@@ -46,6 +48,7 @@ export const Designsystem: Story = {
             navn: "small",
             title: "title",
             index: 1,
+            sandboxBase64: "fakebase64",
           },
         ],
       },

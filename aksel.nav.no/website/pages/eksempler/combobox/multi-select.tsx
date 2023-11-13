@@ -1,6 +1,18 @@
 import { withDsExample } from "@/web/examples/withDsExample";
 import { UNSAFE_Combobox } from "@navikt/ds-react";
 
+const Example = () => {
+  return (
+    <div>
+      <UNSAFE_Combobox
+        label="Hva er de kuleste transportmidlene?"
+        options={initialOptions}
+        isMultiSelect
+      />
+    </div>
+  );
+};
+
 const initialOptions = [
   "car",
   "bus",
@@ -15,18 +27,6 @@ const initialOptions = [
   "van",
   "scooter",
 ];
-
-export const Example = () => {
-  return (
-    <div>
-      <UNSAFE_Combobox
-        label="Hva er de kuleste transportmidlene?"
-        options={initialOptions}
-        isMultiSelect
-      />
-    </div>
-  );
-};
 
 export default withDsExample(Example, { variant: "static" });
 

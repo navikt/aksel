@@ -21,6 +21,8 @@ const Example = () => {
   );
 };
 
+const loaded = false;
+
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -31,5 +33,3 @@ export const Demo = {
 export const args = {
   index: 5,
 };
-
-const loaded = false;

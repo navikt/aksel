@@ -18,17 +18,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, { variant: "static" });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 1,
-};
-
 const Innhold = () => (
   <>
     <Label as="p" spacing>
@@ -82,3 +71,14 @@ const Innhold = () => (
     </div>
   </>
 );
+
+export default withDsExample(Example, { variant: "static" });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 1,
+};

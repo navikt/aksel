@@ -13,18 +13,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, { showBreakpoints: true });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 0,
-  desc: "Endre størrelse på nettleservindu for å se komponent i aksjon",
-};
-
 const Placeholder = ({
   text,
   noPadding,
@@ -54,4 +42,17 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+export default withDsExample(Example, { showBreakpoints: true });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 0,
+  desc: "Endre størrelse på nettleservindu for å se komponent i aksjon",
+  sandbox: false,
 };
