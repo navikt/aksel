@@ -29,33 +29,27 @@ function UlList({
       })}
       id={!nested ? "toc-scroll-wrapper" : undefined}
     >
-      {toc.map((lvl2) => (
-        <li key={lvl2.id}>
+      {toc.map((node) => (
+        <li key={node.id}>
           <>
             <a
-              href={`#${lvl2.id}`}
-              className={cl(
-                "hover:bg-surface-hover focus-visible:shadow-focus rounded-medium flex w-fit items-center justify-between px-2 py-1 outline-none transition-[background-color,color] duration-150 ease-out",
-                {
-                  "bg-surface-hover text-deepblue-700 shadow-xsmall": isActive(
-                    lvl2.id
-                  ),
-                }
-              )}
+              href={`#${node.id}`}
+              className="hover:bg-surface-hover data-active:font-semibold focus-visible:shadow-focus rounded-medium data-active:bg-surface-hover data-active:text-deepblue-700 data-active:shadow-xsmall flex w-fit items-center justify-between px-2 py-1 outline-none transition-[background-color,color] duration-150 ease-out"
+              data-active={isActive(node.id)}
             >
               <BodyShort
                 size="small"
                 as="span"
                 truncate
                 className="whitespace-break-spaces"
-                weight={isActive(lvl2.id) ? "semibold" : "regular"}
+                weight={isActive(node.id) ? "semibold" : "regular"}
               >
-                {lvl2.title}
+                {node.title}
               </BodyShort>
             </a>
-            {!nested && lvl2.children.length > 0 && (
+            {!nested && node.children.length > 0 && (
               <UlList
-                toc={lvl2.children}
+                toc={node.children}
                 activeId={activeId}
                 activeSubId={activeSubId}
                 nested
