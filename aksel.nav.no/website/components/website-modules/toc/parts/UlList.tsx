@@ -27,12 +27,12 @@ function UlList({
 
   return (
     <ul
-      className={`data-active:max-h-[70vh] data-active:overflow-y-scroll data-active:overscroll-contain pl-3 ${styles.hideScrollbar}`}
+      className={`data-active:max-h-[70vh] data-active:py-1 data-active:overflow-y-scroll data-active:overscroll-contain pl-3 ${styles.hideScrollbar}`}
       data-active={!nested}
       id={!nested ? "toc-scroll-wrapper" : undefined}
     >
       {toc.map((node) => (
-        <li key={node.id} className="last-of-type:mb-1">
+        <li key={node.id}>
           <>
             <a
               id={`toc-${node.id}`}
