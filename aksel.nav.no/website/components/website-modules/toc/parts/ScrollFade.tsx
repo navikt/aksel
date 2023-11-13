@@ -1,13 +1,13 @@
 import cl from "clsx";
 import styles from "./table-of-contents.module.css";
-import { useScroll } from "./useScroll";
+import { useScrollRange } from "./useScrollRange";
 
 function getOpacity(n: number) {
-  return Math.min(Math.min(Math.max(n, 0), 100) / 70, 1).toFixed(1);
+  return Math.min(Math.min(Math.max(n, 0), 100) / 100, 1).toFixed(1);
 }
 
 function ScrollFade() {
-  const scrollBlock = useScroll();
+  const scrollBlock = useScrollRange();
 
   return (
     <>

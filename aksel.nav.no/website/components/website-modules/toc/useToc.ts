@@ -43,7 +43,7 @@ export const useToc = (toc: TableOfContentsT) => {
       }
     };
 
-    const func = throttle(handleScroll, 100);
+    const func = throttle(handleScroll, 50);
 
     window.addEventListener("scroll", func);
     return () => {

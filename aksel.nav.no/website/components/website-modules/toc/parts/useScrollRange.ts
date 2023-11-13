@@ -2,7 +2,7 @@ import { useClientLayoutEffect } from "@navikt/ds-react";
 import throttle from "lodash/throttle";
 import { useState } from "react";
 
-export function useScroll() {
+export function useScrollRange() {
   const [scrollBlock, setScrollBlock] = useState({ start: 0, end: 0 });
 
   useClientLayoutEffect(() => {
