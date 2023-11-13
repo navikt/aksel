@@ -1,6 +1,6 @@
+import { CodeSandboxLogo } from "@/assets/Icons";
 import { Button } from "@navikt/ds-react";
 import { getParameters } from "codesandbox/lib/api/define";
-import { CodeSandboxLogo } from "components/assets";
 
 const indexTsx = `import React from 'react';
 import ReactDOM from 'react-dom/client';
