@@ -18,10 +18,10 @@ import {
   PauseFillIcon,
   PlayFillIcon,
 } from "@navikt/aksel-icons";
-import { BodyLong, Heading } from "@navikt/ds-react";
+import { BodyLong, Heading, useClientLayoutEffect } from "@navikt/ds-react";
 import cl from "clsx";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 
 type PageProps = NextPageT<{
   tema: Array<AkselTemaT>;
@@ -32,30 +32,6 @@ type PageProps = NextPageT<{
   };
   blocks?: BlocksT[];
 }>;
-
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const client = getClient();
-
-  const { page = null, tema = null, blocks = null } = await client.fetch(query);
-
-  return {
-    props: {
-      tema,
-      page,
-      blocks,
-      slug: "/",
-      preview,
-      id: page?._id ?? "",
-      title: "Forsiden",
-    },
-    revalidate: 600,
-    notFound: false,
-  };
-};
 
 const query = `*[_type == "aksel_forside"][0]{
   "page": {
@@ -115,26 +91,16 @@ const query = `*[_type == "aksel_forside"][0]{
   }
 }`;
 
-const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
-  const [pause, setPause] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+export const getStaticProps: GetStaticProps = async ({
+  preview = false,
+}: {
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const client = getClient();
 
-  useEffect(() => {
-    const disableAnimations =
-      navigator.userAgent.indexOf("Safari") !== -1 &&
-      navigator.userAgent.indexOf("Chrome") === -1;
+  const { page = null, tema = null, blocks = null } = await client.fetch(query);
 
-    setReducedMotion(userPrefersReducedMotion() || disableAnimations);
-    const data = localStorage.getItem("pause-animations");
-    if (disableAnimations) {
-      setPause(true);
-      setPause(true);
-      return;
-    }
-    setPause(JSON.parse(data) ?? false);
-  }, []);
-
-  const validatedTema = tema
+  const validateTema = tema
     .filter(
       (t) =>
         t?.title &&
@@ -145,6 +111,39 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
         )
     )
     .sort((a, b) => a.title.localeCompare(b.title));
+
+  return {
+    props: {
+      tema: validateTema,
+      page,
+      blocks,
+      slug: "/",
+      preview,
+      id: page?._id ?? "",
+      title: "Forsiden",
+    },
+    revalidate: 600,
+    notFound: false,
+  };
+};
+
+const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
+  const [pause, setPause] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useClientLayoutEffect(() => {
+    const disableAnimations =
+      navigator.userAgent.indexOf("Safari") !== -1 &&
+      navigator.userAgent.indexOf("Chrome") === -1;
+
+    setReducedMotion(userPrefersReducedMotion() || disableAnimations);
+    const data = localStorage.getItem("pause-animations");
+    if (disableAnimations) {
+      setPause(true);
+      return;
+    }
+    setPause(JSON.parse(data) ?? false);
+  }, []);
 
   return (
     <>
@@ -246,7 +245,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                   )}
                 </div>
                 <ul className="mt-12 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
-                  {validatedTema.map((t) => (
+                  {tema.map((t) => (
                     <GodPraksisCardSimple key={t._id} node={t} />
                   ))}
                 </ul>
