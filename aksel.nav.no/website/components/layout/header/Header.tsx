@@ -32,7 +32,68 @@ export const GlobalSearch = dynamic(
   }
 );
 
-const LinkElement = ({ name, href, prefetch = undefined }) => {
+const Header = ({
+  variant = "default",
+}: {
+  variant?: "blogg" | "subtle" | "default" | "transparent";
+}) => {
+  return (
+    <header
+      className={cl("h-header z-20", {
+        "bg-[#FEFCE9]": variant === "blogg",
+        "bg-surface-default": variant === "default",
+        "bg-surface-subtle": variant === "subtle",
+        "bg-surface-transparent": variant === "transparent",
+      })}
+    >
+      <a className="skiplink" href="#hovedinnhold">
+        Hopp til innhold
+      </a>
+      <div
+        className={cl(
+          "mx-auto flex h-full max-w-screen-2xl items-center pr-4 lg:pr-6"
+        )}
+      >
+        <div className="flex h-11 items-center pl-4 pr-4 sm:pl-4 sm:pr-6">
+          <Link
+            href="/"
+            passHref
+            onClick={(e) =>
+              amplitudeLogNavigation(
+                "header",
+                e.currentTarget.getAttribute("href")
+              )
+            }
+            className="focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
+          >
+            <AkselLogo className="text-deepblue-800" />
+            <span className="sr-only">Aksel</span>
+          </Link>
+        </div>
+        <nav
+          className="ml-auto hidden h-full pr-2 lg:block lg:pr-8"
+          aria-label="Hovedmeny"
+        >
+          <ul className="hidden h-full items-center gap-2 md:flex">
+            <LinkElement name="God praksis" href="/god-praksis" />
+            <LinkElement name="Grunnleggende" href="/grunnleggende" />
+            <LinkElement name="Ikoner" href="/ikoner" prefetch={false} />
+            <LinkElement name="Komponenter" href="/komponenter" />
+            <LinkElement name="Mønster & Maler" href="/monster-maler" />
+            <LinkElement name="Bloggen" href="/produktbloggen" />
+          </ul>
+        </nav>
+        <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
+          <GlobalSearch />
+        </div>
+
+        <Hamburger />
+      </div>
+    </header>
+  );
+};
+
+function LinkElement({ name, href, prefetch = undefined }) {
   const { asPath } = useRouter();
   return (
     <li>
@@ -56,69 +117,6 @@ const LinkElement = ({ name, href, prefetch = undefined }) => {
       </Link>
     </li>
   );
-};
-
-const Header = ({
-  variant = "default",
-}: {
-  variant?: "blogg" | "subtle" | "default" | "transparent";
-}) => {
-  return (
-    <>
-      <a className="skiplink" href="#hovedinnhold">
-        Hopp til innhold
-      </a>
-      <header
-        className={cl("h-header z-20", {
-          "bg-[#FEFCE9]": variant === "blogg",
-          "bg-surface-default": variant === "default",
-          "bg-surface-subtle": variant === "subtle",
-          "bg-surface-transparent": variant === "transparent",
-        })}
-      >
-        <div
-          className={cl(
-            "mx-auto flex h-full max-w-screen-2xl items-center pr-4 lg:pr-6"
-          )}
-        >
-          <div className="flex h-11 items-center pl-4 pr-4 sm:pl-4 sm:pr-6">
-            <Link
-              href="/"
-              passHref
-              onClick={(e) =>
-                amplitudeLogNavigation(
-                  "header",
-                  e.currentTarget.getAttribute("href")
-                )
-              }
-              className="focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
-            >
-              <AkselLogo className="text-deepblue-800" />
-              <span className="sr-only">Aksel</span>
-            </Link>
-          </div>
-          <nav
-            className="ml-auto hidden h-full pr-2 lg:block lg:pr-8"
-            aria-label="Hovedmeny"
-          >
-            <ul className="hidden h-full items-center gap-2 md:flex">
-              <LinkElement name="God praksis" href="/god-praksis" />
-              <LinkElement name="Grunnleggende" href="/grunnleggende" />
-              <LinkElement name="Ikoner" href="/ikoner" prefetch={false} />
-              <LinkElement name="Komponenter" href="/komponenter" />
-              <LinkElement name="Mønster & Maler" href="/monster-maler" />
-              <LinkElement name="Bloggen" href="/produktbloggen" />
-            </ul>
-          </nav>
-          <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
-            <GlobalSearch />
-          </div>
-
-          <Hamburger />
-        </div>
-      </header>
-    </>
-  );
-};
+}
 
 export default Header;
