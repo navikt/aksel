@@ -1,65 +1,12 @@
-import { useClientLayoutEffect } from "@navikt/ds-react";
 import throttle from "lodash/throttle";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { TableOfContentsT } from "../../types/toc";
 
-export const useToc = () => {
-  const [toc, setToc] = useState<
-    { heading: string; id: string; lvl3: { heading: string; id: string }[] }[]
-  >([]);
-  const router = useRouter();
-
+export const useToc = (toc: TableOfContentsT) => {
   const [activeId, setActiveId] = useState(null);
   const [activeSubId, setActiveSubId] = useState(null);
 
-  useClientLayoutEffect(() => {
-    const time = setTimeout(() => {
-      const main = document.getElementsByTagName("main")?.[0];
-      const tags = main?.getElementsByTagName("h2");
-      const tree = main?.querySelectorAll("h2, h3");
-      if (!tags) return;
-
-      let hit = false;
-
-      const newTree = Array.from(tree)?.filter((x) => {
-        if (x.tagName === "H2") {
-          hit = true;
-          return true;
-        } else if (x.tagName === "H3" && hit === false) {
-          return false;
-        }
-        return true;
-      });
-
-      const filtered = Array.from(newTree)?.filter(
-        (x) =>
-          !Array.from(main.getElementsByClassName("toc-ignore"))?.some((y) =>
-            y.contains(x)
-          )
-      );
-      const newToc: {
-        heading: string;
-        id: string;
-        lvl3: { heading: string; id: string }[];
-      }[] = [];
-      for (const x in filtered) {
-        if (!filtered[x]?.id) continue;
-        filtered[x].tagName === "H2"
-          ? newToc.push({
-              heading: filtered[x].textContent,
-              id: decodeURI(filtered[x].id),
-              lvl3: [],
-            })
-          : newToc[newToc.length - 1].lvl3.push({
-              heading: filtered[x].textContent,
-              id: decodeURI(filtered[x].id),
-            });
-      }
-      setToc([...newToc]);
-    }, 150);
-
-    return () => clearTimeout(time);
-  }, [router.asPath]);
+  const tempDisableScroll = useRef(false);
 
   useEffect(() => {
     const validPick = (el: HTMLElement) => {
@@ -69,18 +16,22 @@ export const useToc = () => {
     };
 
     const handleScroll = () => {
+      if (tempDisableScroll.current) {
+        return;
+      }
       let active = null;
       let activeSub = null;
 
       for (const x of toc) {
-        const el = document.getElementById(x.id);
-        if (validPick(el)) {
+        const lvl2 = document.getElementById(x.id);
+        if (validPick(lvl2)) {
           active = x.id;
+          activeSub = null;
         }
-        if (x?.lvl3) {
-          for (const y of x.lvl3) {
-            const el2 = document.getElementById(y.id);
-            if (validPick(el2)) {
+        if (x?.children) {
+          for (const y of x.children) {
+            const lvl3 = document.getElementById(y.id);
+            if (validPick(lvl3)) {
               activeSub = y.id;
             }
           }
@@ -91,11 +42,20 @@ export const useToc = () => {
 
       active && setActiveId(active);
 
-      if (activeSub) {
-        const dist = document.getElementById(`${activeSub}-parent`).offsetTop;
-        const parent = document.getElementById(`toc-scroll`);
-        if (!parent || !dist) return;
-        parent.scrollTop = dist - 128;
+      const activeEl = activeSub ?? active;
+      if (activeEl) {
+        const parent = document.getElementById(`toc-scroll-wrapper`);
+        const activeNode = document.getElementById(`toc-${activeEl}`);
+        const visible = isVisible(activeNode, parent);
+
+        if (!visible) {
+          parent.scrollTop = activeNode.offsetTop - 128;
+        }
+      }
+
+      if (window.scrollY < 300) {
+        setActiveId(null);
+        setActiveSubId(null);
       }
     };
 
@@ -111,5 +71,39 @@ export const useToc = () => {
     window.location.hash && setActiveId(window.location.hash.replace("#", ""));
   }, []);
 
-  return { toc, activeId, activeSubId };
+  const scrollToggle = () => {
+    tempDisableScroll.current = true;
+    setTimeout(() => {
+      tempDisableScroll.current = false;
+    }, 50);
+  };
+
+  return {
+    activeId,
+    activeSubId,
+    setActiveId: (id) => {
+      setActiveId(id);
+      setActiveSubId(null);
+      scrollToggle();
+    },
+    setActiveSubId: (id) => {
+      setActiveSubId(id);
+      setActiveId(null);
+      scrollToggle();
+    },
+  };
 };
+
+function isVisible(ele, container) {
+  const eleTop = ele.offsetTop;
+  const eleBottom = ele.offsetTop + ele.clientHeight;
+
+  const containerTop = container.scrollTop + 70;
+  const containerBottom = containerTop + container.clientHeight - 140;
+
+  return (
+    (eleTop >= containerTop && eleBottom <= containerBottom) ||
+    (eleTop < containerTop && containerTop < eleBottom) ||
+    (eleTop < containerBottom && containerBottom < eleBottom)
+  );
+}

@@ -14,7 +14,7 @@ const PropTable = ({ komponent }: PropTableProps) => {
         size="xsmall"
         level="3"
         className="scroll-m-8 rounded-t-lg border border-b-0 border-gray-300 bg-gray-50 p-2"
-        id={`${komponent._key}`}
+        id={komponent._key}
       >
         {komponent?.title ? komponent.title : "Props"}
       </Heading>

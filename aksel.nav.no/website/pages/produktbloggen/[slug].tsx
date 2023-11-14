@@ -10,12 +10,13 @@ import {
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  TableOfContentsT,
 } from "@/types";
-import { abbrName, dateStr, getImage } from "@/utils";
+import { abbrName, dateStr, generateTableOfContents, getImage } from "@/utils";
 import { BloggAd } from "@/web/BloggAd";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
-import TableOfContents from "@/web/toc/TOC";
+import TableOfContents from "@/web/toc/TableOfContents";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
@@ -26,6 +27,7 @@ type PageProps = NextPageT<{
   blogg: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
   morePosts: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
   publishDate: string;
+  toc: TableOfContentsT;
 }>;
 
 export const query = `{
@@ -65,12 +67,16 @@ export const getServerSideProps: GetServerSideProps = async (
       id: blogg?._id ?? "",
       title: blogg?.heading ?? "",
       publishDate: await dateStr(blogg?.publishedAt ?? blogg?._createdAt),
+      toc: generateTableOfContents({
+        content: blogg?.content,
+        type: "aksel_blogg",
+      }),
     },
     notFound: !blogg && !context.preview,
   };
 };
 
-const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
+const Page = ({ blogg, morePosts, publishDate, toc }: PageProps["props"]) => {
   if (!blogg) {
     return <NotFotfund />;
   }
@@ -160,7 +166,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
         </div>
         <div className="relative mt-16">
           <AkselCubeStatic className="text-[#FFE78A] opacity-20" />
-          <TableOfContents hideToc />
+          <TableOfContents toc={toc} />
           <div className="mt-8 px-4">
             <SanityBlockContent
               className="dynamic-wrapper-prose"

@@ -9,11 +9,12 @@ import {
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  TableOfContentsT,
 } from "@/types";
-import { abbrName, dateStr } from "@/utils";
+import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
-import TableOfContents from "@/web/toc/TOC";
+import TableOfContents from "@/web/toc/TableOfContents";
 import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { GetServerSideProps } from "next/types";
@@ -23,6 +24,7 @@ import NotFotfund from "../404";
 type PageProps = NextPageT<{
   prinsipp: ResolveContributorsT<ResolveSlugT<AkselPrinsippDocT>>;
   publishDate: string;
+  toc: TableOfContentsT;
 }>;
 
 export const query = `{
@@ -57,13 +59,17 @@ export const getServerSideProps: GetServerSideProps = async (
       id: prinsipp?._id,
       title: prinsipp?.heading ?? "",
       publishDate: await dateStr(prinsipp?.publishedAt ?? prinsipp._createdAt),
+      toc: generateTableOfContents({
+        content: prinsipp?.content,
+        type: "aksel_prinsipp",
+      }),
     },
     notFound:
       (!prinsipp && !context.preview) || context.params.prinsipp.length > 2,
   };
 };
 
-const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
+const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
   }
@@ -155,7 +161,7 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
             <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
               <div className="pb-16 md:pb-32">
                 <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
-                  <TableOfContents hideToc={false} aksel />
+                  <TableOfContents toc={toc} />
                   <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                     {data?.hero_bilde && (
                       <Bilde

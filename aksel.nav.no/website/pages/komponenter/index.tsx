@@ -15,10 +15,11 @@ import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
   AkselLandingPageDocT,
-  AkselSidebarT,
   ArticleListT,
   NextPageT,
+  SidebarT,
 } from "@/types";
+import { generateSidebar } from "@/utils";
 import { IntroCards } from "@/web/IntroCards";
 import { SEO } from "@/web/seo/SEO";
 import { CodeIcon } from "@navikt/aksel-icons";
@@ -30,7 +31,7 @@ import { komponentKategorier } from "../../sanity/config";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   links: ArticleListT;
 }>;
 
@@ -50,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: {
       page,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "komponenter"),
       links,
       slug: "/komponenter",
       preview,

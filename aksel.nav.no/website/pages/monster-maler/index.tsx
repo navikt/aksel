@@ -7,10 +7,11 @@ import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
   AkselLandingPageDocT,
-  AkselSidebarT,
   ArticleListT,
   NextPageT,
+  SidebarT,
 } from "@/types";
+import { generateSidebar } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import cl from "clsx";
@@ -20,7 +21,7 @@ import { templatesKategorier } from "../../sanity/config";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   links: ArticleListT;
 }>;
 
@@ -38,7 +39,7 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: {
       page,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "templates"),
       links,
       slug: "/monster-maler",
       preview,
