@@ -1,7 +1,7 @@
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";
 import { amplitudeLogNavigation } from "@/logging";
-import { BodyShort, Heading, Link } from "@navikt/ds-react";
+import { BodyShort, Box, HGrid, Heading, Link, Page } from "@navikt/ds-react";
 import dynamic from "next/dynamic";
 
 export const EditButton = dynamic(() => import("@/web/EditButton"), {
@@ -10,20 +10,25 @@ export const EditButton = dynamic(() => import("@/web/EditButton"), {
 
 const Footer = () => {
   return (
-    <footer
-      id="aksel-footer"
-      data-hj-suppress
+    <Box
+      as="footer"
       data-theme="dark"
-      className="toc-ignore text-text-on-inverted bg-deepblue-800 relative flex w-full justify-center"
+      id="aksel-footer"
+      className="text-text-on-inverted relative"
+      background="surface-alt-3-strong"
+      paddingBlock="12 16"
     >
-      <div className="relative z-10 mx-auto grid w-full max-w-screen-2xl gap-12 px-4 pb-16 pt-12 md:grid-cols-2 md:px-6 lg:grid-cols-4 xl:grid-cols-4 xl:gap-6">
-        <LogoBlock />
-        <Snarveier />
-        <SideLenker />
-        <Kontakt />
-      </div>
-      <EditButton />
-    </footer>
+      <Page.Block width="2xl" gutters>
+        <HGrid columns={{ xs: 1, md: 2, lg: 4 }} gap={{ xs: "12", xl: "6" }}>
+          <LogoBlock />
+          <Snarveier />
+          <SideLenker />
+          <Kontakt />
+        </HGrid>
+
+        <EditButton />
+      </Page.Block>
+    </Box>
   );
 };
 

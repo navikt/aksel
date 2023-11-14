@@ -22,6 +22,7 @@ import {
   Bleed,
   BodyLong,
   Box,
+  Button,
   Heading,
   Page,
   useClientLayoutEffect,
@@ -210,7 +211,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
           />
         </div>
 
-        <Box background="surface-subtle" paddingBlock="0 20">
+        <Box background="surface-subtle" paddingBlock="0 32">
           {/* God praksis */}
           <Page.Block width="2xl" gutters>
             <Box
@@ -223,8 +224,17 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
               className="-translate-y-48 sm:-translate-y-32"
             >
               {!reducedMotion && (
-                <button
-                  className="focus-visible:shadow-focus text-text-subtle hover:text-text-default absolute right-2 top-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
+                <Button
+                  variant="tertiary-neutral"
+                  size="small"
+                  className="absolute right-2 top-2"
+                  icon={
+                    pause ? (
+                      <PlayFillIcon title="Start animasjon" />
+                    ) : (
+                      <PauseFillIcon title="Stopp animasjon" />
+                    )
+                  }
                   onClick={() => {
                     setPause(!pause);
                     localStorage.setItem(
@@ -232,21 +242,9 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                       JSON.stringify(!pause)
                     );
                   }}
-                >
-                  {pause ? (
-                    <>
-                      <PlayFillIcon aria-hidden />
-                      <span className="sr-only">Start animasjon</span>
-                    </>
-                  ) : (
-                    <>
-                      <PauseFillIcon aria-hidden />
-                      <span className="sr-only">Stopp animasjon</span>
-                    </>
-                  )}
-                </button>
+                />
               )}
-              <Box paddingInline={{ xs: "2", sm: "6" }}>
+              <Box paddingInline={{ xs: "2", sm: "6" }} paddingBlock="0 12">
                 <Heading
                   level="2"
                   size="xlarge"
@@ -255,13 +253,13 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                 >
                   God praksis
                 </Heading>
-                {page?.god_praksis_intro && (
-                  <BodyLong size="large" className="max-w-3xl">
-                    {page.god_praksis_intro}
-                  </BodyLong>
-                )}
+                <BodyLong size="large" className="max-w-3xl">
+                  {page?.god_praksis_intro ??
+                    "Alle som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for andre. Derfor deler vi god praksis med hverandre her."}
+                </BodyLong>
               </Box>
-              <ul className="mt-12 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
+
+              <ul className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
                 {tema.map((t) => (
                   <GodPraksisCardSimple key={t._id} node={t} />
                 ))}
