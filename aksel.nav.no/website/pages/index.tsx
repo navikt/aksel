@@ -20,6 +20,7 @@ import {
 } from "@navikt/aksel-icons";
 import {
   BodyLong,
+  Box,
   Heading,
   Page,
   useClientLayoutEffect,
@@ -208,10 +209,18 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
           />
         </div>
 
-        <div className="bg-surface-subtle min-h-96 relative pb-20">
-          <div className="mx-auto grid w-full max-w-screen-2xl px-4 sm:px-6">
-            {/* God praksis */}
-            <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-48 rounded-2xl px-4 py-12 ring-1 sm:-translate-y-32 sm:px-12 sm:py-20">
+        <Box background="surface-subtle" paddingBlock="0 20">
+          {/* God praksis */}
+          <Page.Block width="2xl" gutters>
+            <Box
+              background="surface-default"
+              borderWidth="1"
+              borderColor="border-subtle"
+              borderRadius="xlarge"
+              paddingBlock={{ xs: "12", sm: "20" }}
+              paddingInline={{ xs: "4", sm: "12" }}
+              className="-translate-y-48 sm:-translate-y-32"
+            >
               {!reducedMotion && (
                 <button
                   className="focus-visible:shadow-focus text-text-subtle hover:text-text-default absolute right-2 top-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
@@ -255,13 +264,13 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                   <GodPraksisCardSimple key={t._id} node={t} />
                 ))}
               </ul>
-            </div>
+            </Box>
 
             <div className="-mt-24 sm:-mt-12">
               <FrontpageBlock blocks={blocks} />
             </div>
-          </div>
-        </div>
+          </Page.Block>
+        </Box>
       </main>
     </Page>
   );
