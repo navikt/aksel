@@ -19,6 +19,7 @@ import {
   PlayFillIcon,
 } from "@navikt/aksel-icons";
 import {
+  Bleed,
   BodyLong,
   Box,
   Heading,
@@ -245,11 +246,12 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                   )}
                 </button>
               )}
-              <div className="px-2 sm:px-6">
+              <Box paddingInline={{ xs: "2", sm: "6" }}>
                 <Heading
                   level="2"
                   size="xlarge"
-                  className="text-deepblue-700 mb-6"
+                  className="text-deepblue-700"
+                  spacing
                 >
                   God praksis
                 </Heading>
@@ -258,7 +260,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                     {page.god_praksis_intro}
                   </BodyLong>
                 )}
-              </div>
+              </Box>
               <ul className="mt-12 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
                 {tema.map((t) => (
                   <GodPraksisCardSimple key={t._id} node={t} />
@@ -266,9 +268,11 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
               </ul>
             </Box>
 
-            <div className="-mt-24 sm:-mt-12">
-              <FrontpageBlock blocks={blocks} />
-            </div>
+            <Bleed marginBlock={{ xs: "24", sm: "12" }} asChild>
+              <Box paddingInline={{ xs: "2", lg: "18" }}>
+                <FrontpageBlock blocks={blocks} />
+              </Box>
+            </Bleed>
           </Page.Block>
         </Box>
       </main>
