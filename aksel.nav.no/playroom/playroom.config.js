@@ -12,7 +12,7 @@ module.exports = {
   // Optional:
   title: "Aksel Sandbox",
   snippets: path.resolve("./src/snippets.ts"),
-  widths: [480, 768, 1024, 1280],
+  widths: [480, 768, 1024, 1280, 1440],
   port: 9000,
   frameComponent: path.resolve("./src/FrameComponent.tsx"),
   useScope: path.resolve("./src/useScope.tsx"),
