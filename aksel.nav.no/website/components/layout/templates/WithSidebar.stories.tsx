@@ -24,6 +24,39 @@ const children = (
   </>
 );
 
+const baseItem = { slug: "/123", tag: "beta" as const, sidebarindex: null };
+
+const sidebar = [
+  {
+    pages: [
+      { ...baseItem, kategori: "primitives", heading: "f", sidebarindex: 0 },
+      { ...baseItem, kategori: "primitives", heading: "e", sidebarindex: 1 },
+      {
+        ...baseItem,
+        kategori: "primitives",
+        heading: "d",
+        tag: "deprecated" as const,
+        sidebarindex: 2,
+      },
+    ],
+    title: "Primitives",
+    value: "primitives",
+  },
+  {
+    pages: [
+      { ...baseItem, kategori: "core", heading: "b" },
+      {
+        ...baseItem,
+        kategori: "core",
+        heading: "c",
+        tag: "deprecated" as const,
+      },
+    ],
+    title: "Core",
+    value: "core",
+  },
+];
+
 export const KomponenterLanding: Story = {
   args: {
     children,
@@ -37,29 +70,7 @@ export const KomponenterLanding: Story = {
     variant: "landingPage",
     footer: "footer",
     intro: "intro",
-    sidebar: [
-      {
-        heading: "Link 1",
-        slug: "#",
-        kategori: "core",
-        tag: "ready",
-        sidebarindex: null,
-      },
-      {
-        heading: "Link 2",
-        slug: "#",
-        kategori: "primitives",
-        tag: "ready",
-        sidebarindex: null,
-      },
-      {
-        heading: "Link e",
-        slug: "#",
-        kategori: "primitives",
-        tag: "ready",
-        sidebarindex: null,
-      },
-    ],
+    sidebar,
   },
 };
 
@@ -76,28 +87,6 @@ export const Komponenter: Story = {
     variant: "page",
     footer: "footer",
     intro: "intro",
-    sidebar: [
-      {
-        heading: "Link 1",
-        slug: "#",
-        kategori: "core",
-        tag: "ready",
-        sidebarindex: null,
-      },
-      {
-        heading: "Link 2",
-        slug: "#",
-        kategori: "primitives",
-        tag: "ready",
-        sidebarindex: null,
-      },
-      {
-        heading: "Link 3",
-        slug: "#",
-        kategori: "primitives",
-        tag: "ready",
-        sidebarindex: null,
-      },
-    ],
+    sidebar,
   },
 };

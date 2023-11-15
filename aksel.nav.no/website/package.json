@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next | pino-pretty",
     "build:old": "next build",
-    "build": "yarn workspace playroom build && next build && yarn update:searchindex && yarn update:rss && yarn cp:assets",
+    "build": "yarn workspace playroom build:playroom && next build && yarn update:searchindex && yarn update:rss && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "cp:playroom": "cross-env mkdir -p public/sandbox && cross-env cp -R ../playroom/dist/* public/sandbox",
     "cp:static": "cross-env cp -R .next/static .next/standalone/aksel.nav.no/website/.next/static",
@@ -48,7 +48,7 @@
     "jscodeshift": "^0.15.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
-    "next": "^13.2.1",
+    "next": "13.2.1",
     "next-logger": "3.0.2",
     "next-sanity": "5.5.8",
     "pino": "^8.14.1",
