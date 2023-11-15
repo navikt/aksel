@@ -19,25 +19,56 @@ function PreviewProvider({ children }: { children: React.ReactNode }) {
   return <LiveQueryProvider client={client}>{children}</LiveQueryProvider>;
 }
 
+type ResolverT = { key: string; cb: (v: any) => any }[];
+
+function runResolvers({
+  resolvers,
+  data,
+}: {
+  resolvers: ResolverT;
+  data: any;
+}) {
+  if (!resolvers) {
+    return data;
+  }
+
+  const _data = { ...data };
+
+  resolvers.forEach((resolver) => {
+    if (resolver.key in _data) {
+      _data[resolver.key] = resolver.cb(_data[resolver.key]);
+    }
+  });
+
+  return _data;
+}
+
 function LiveQuery({
   comp: Comp,
   query,
   params,
   props,
   validUser,
+  resolvers,
 }: {
   comp: ComponentType;
   query: string;
   props: any;
   params?: any;
   validUser: boolean;
+  resolvers?: ResolverT;
 }) {
   const [data, loading] = useLiveQuery(props, query, params);
 
+  const _data = loading
+    ? props
+    : runResolvers({ resolvers, data: { ...data } });
+
+  console.log([props.sidebar, _data.sidebar]);
   return (
     <>
       <PreviewBanner loading={loading} validUser={validUser} />
-      <Comp {...props} {...data} />
+      <Comp {..._data} />
     </>
   );
 }
@@ -47,11 +78,13 @@ const WithPreview = ({
   query,
   params,
   props,
+  resolvers,
 }: {
   comp;
   query: string;
   props: any;
   params?: any;
+  resolvers?: ResolverT;
 }) => {
   const validUser = useCheckAuth();
   return (
@@ -62,6 +95,7 @@ const WithPreview = ({
         params={params}
         comp={comp}
         validUser={validUser}
+        resolvers={resolvers}
       />
     </PreviewProvider>
   );

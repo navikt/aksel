@@ -248,6 +248,9 @@ const Wrapper = (props: any) => {
           params={{
             type: "komponent_artikkel",
           }}
+          resolvers={[
+            { key: "sidebar", cb: (v) => generateSidebar(v, "komponenter") },
+          ]}
         />
       </Suspense>
     );
