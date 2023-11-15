@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { VStack } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -12,6 +12,10 @@ const Example = () => {
   );
 };
 
+const Placeholder = () => {
+  return <div className="aspect-square h-12 rounded bg-teal-500" />;
+};
+
 export default withDsExample(Example, { showBreakpoints: true });
 
 /* Storybook story */
@@ -22,8 +26,4 @@ export const Demo = {
 export const args = {
   index: 0,
   desc: "VStack er en enkel layout-komponent for flexbox med flex-direction: column.",
-};
-
-const Placeholder = () => {
-  return <div className="aspect-square h-12 rounded bg-teal-500" />;
 };

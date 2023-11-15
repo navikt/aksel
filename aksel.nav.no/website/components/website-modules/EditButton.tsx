@@ -1,12 +1,10 @@
-import { Tooltip } from "@navikt/ds-react";
-import { useContext } from "react";
-import { IdContext } from "./utils";
+import { useCheckAuth } from "@/hooks/useCheckAuth";
+import { useSanityDocId } from "@/hooks/useSanityDocId";
 import { PencilIcon } from "@navikt/aksel-icons";
-import { useCheckAuth } from "components/website-modules/utils/useCheckAuth";
+import { Tooltip } from "@navikt/ds-react";
 
 function EditButton() {
-  const idCtx = useContext(IdContext);
-
+  const idCtx = useSanityDocId();
   const validUser = useCheckAuth();
 
   return validUser && idCtx?.id ? (

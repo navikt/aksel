@@ -1,3 +1,4 @@
+import { AkselTable, AkselTableRow } from "@/web/Table";
 import {
   LaptopIcon,
   MobileIcon,
@@ -6,7 +7,6 @@ import {
   TabletIcon,
 } from "@navikt/aksel-icons";
 import docs from "@navikt/ds-tokens/docs.json";
-import { AkselTable, AkselTableRow } from "components/website-modules/Table";
 
 export const BreakpointsView = ({ cat }: { cat: string }) => {
   const breakpoints = docs[cat];

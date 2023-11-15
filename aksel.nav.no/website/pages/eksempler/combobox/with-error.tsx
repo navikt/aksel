@@ -1,5 +1,17 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { UNSAFE_Combobox } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+
+const Example = () => {
+  return (
+    <div>
+      <UNSAFE_Combobox
+        label="Hva er din favorittfrukt?"
+        options={initialOptions}
+        error="Du må velge en favorittfrukt."
+      />
+    </div>
+  );
+};
 
 const initialOptions = [
   "banana",
@@ -15,18 +27,6 @@ const initialOptions = [
   "watermelon",
   "grape fruit",
 ];
-
-export const Example = () => {
-  return (
-    <div>
-      <UNSAFE_Combobox
-        label="Hva er din favorittfrukt?"
-        options={initialOptions}
-        error="Du må velge en favorittfrukt."
-      />
-    </div>
-  );
-};
 
 export default withDsExample(Example, { variant: "static" });
 

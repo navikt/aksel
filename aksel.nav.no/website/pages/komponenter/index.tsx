@@ -1,37 +1,37 @@
-import { AmplitudeEvents, amplitude } from "@/logging";
-import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
-import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
-import {
-  AkselLandingPageDocT,
-  AkselSidebarT,
-  ArticleListT,
-  NextPageT,
-} from "@/types";
-import { CodeIcon } from "@navikt/aksel-icons";
-import { BodyShort, Heading, Ingress } from "@navikt/ds-react";
-import cl from "clsx";
 import {
   ChangelogIcon,
   FigmaIcon,
   GithubIcon,
   StorybookIcon,
   YarnIcon,
-} from "components/assets";
-import { WithSidebar } from "components/layout/WithSidebar";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-
-import ComponentOverview from "components/sanity-modules/component-overview/ComponentOverview";
-import { IntroCards } from "components/website-modules/IntroCards";
-import { SEO } from "components/website-modules/seo/SEO";
+} from "@/assets/Icons";
+import ComponentOverview from "@/cms/component-overview/ComponentOverview";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
+import { AmplitudeEvents, amplitude } from "@/logging";
+import { SanityBlockContent } from "@/sanity-block";
+import { getClient } from "@/sanity/client.server";
+import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
+import {
+  AkselLandingPageDocT,
+  ArticleListT,
+  NextPageT,
+  SidebarT,
+} from "@/types";
+import { generateSidebar } from "@/utils";
+import { IntroCards } from "@/web/IntroCards";
+import { SEO } from "@/web/seo/SEO";
+import { CodeIcon } from "@navikt/aksel-icons";
+import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
+import cl from "clsx";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   links: ArticleListT;
 }>;
 
@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: {
       page,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "komponenter"),
       links,
       slug: "/komponenter",
       preview,
@@ -81,10 +81,10 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
           rootTitle: "Komponenter",
         }}
         intro={
-          <Ingress className="text-text-on-action">
+          <BodyLong size="large" className="text-text-on-action">
             {page?.intro}
             <Links />
-          </Ingress>
+          </BodyLong>
         }
         pageProps={page}
       >
@@ -132,9 +132,9 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
               </Heading>
               <div>
                 {page?.[`ingress_${kat.value}`] && (
-                  <Ingress className="mb-4 only:mb-7">
+                  <BodyLong size="large" className="mb-4 only:mb-7">
                     {page[`ingress_${kat.value}`]}
-                  </Ingress>
+                  </BodyLong>
                 )}
                 {page?.[`intro_${kat.value}`] && (
                   <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
@@ -235,7 +235,7 @@ function Links() {
   );
 }
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

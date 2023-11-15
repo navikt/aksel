@@ -1,35 +1,37 @@
-import { dateStr } from "@/components";
+import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocumentsTmp } from "@/sanity/interface";
+import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
-  AkselSidebarT,
   AkselTemplatesDocT,
   ArticleListT,
   CodeExampleSchemaT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  SidebarT,
+  TableOfContentsT,
 } from "@/types";
+import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
+import { StatusTag } from "@/web/StatusTag";
+import { AkselTable, AkselTableRow } from "@/web/Table";
+import { SEO } from "@/web/seo/SEO";
 import { Detail, Heading } from "@navikt/ds-react";
-import { WithSidebar } from "components/layout/WithSidebar";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import IntroSeksjon from "components/sanity-modules/intro-seksjon/IntroSeksjon";
-import { StatusTag } from "components/website-modules/StatusTag";
-import { AkselTable, AkselTableRow } from "components/website-modules/Table";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselTemplatesDocT>>;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;
+  toc: TableOfContentsT;
 }>;
 
 const query = `{
@@ -48,8 +50,8 @@ const query = `{
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getDocumentsTmp("templates_artikkel").then((paths) =>
-      paths.map((slug) => ({
+    paths: await getDocuments("templates_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
         params: {
           slug: slug.split("/").filter((x) => x !== "monster-maler"),
         },
@@ -76,19 +78,23 @@ export const getStaticProps: GetStaticProps = async ({
       page,
       slug: slug.slice(0, 2).join("/"),
       seo,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "templates"),
       preview,
       title: page?.heading ?? "",
       id: page?._id ?? "",
       refs: [],
       publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "templates_artikkel",
+      }),
     },
     notFound: !page && !preview,
     revalidate: 60,
   };
 };
 
-const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
+const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
@@ -108,6 +114,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
+        toc={toc}
         pageType={{
           type: "templates",
           title: page?.heading,
@@ -169,7 +176,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

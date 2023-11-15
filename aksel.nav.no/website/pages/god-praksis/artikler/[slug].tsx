@@ -1,8 +1,9 @@
-import { BreadCrumbs, TableOfContents, abbrName, dateStr } from "@/components";
-import { Footer } from "@/layout";
+import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getAkselDocuments } from "@/sanity/interface";
+import { getDocuments } from "@/sanity/interface";
 import {
   contributorsAll,
   contributorsSingle,
@@ -15,12 +16,14 @@ import {
   ResolveRelatedArticlesT,
   ResolveSlugT,
   ResolveTemaT,
+  TableOfContentsT,
 } from "@/types";
+import { abbrName, dateStr, generateTableOfContents } from "@/utils";
+import { BreadCrumbs } from "@/web/BreadCrumbs";
+import { SEO } from "@/web/seo/SEO";
+import TableOfContents from "@/web/toc/TableOfContents";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { BodyShort, Detail, Heading, Ingress, Label } from "@navikt/ds-react";
-import { Header } from "components/layout/header/Header";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { SEO } from "components/website-modules/seo/SEO";
+import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -32,6 +35,7 @@ type PageProps = NextPageT<{
   >;
   publishDate: string;
   verifiedDate: string;
+  toc: TableOfContentsT;
 }>;
 
 export const query = `{
@@ -62,8 +66,8 @@ export const query = `{
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getAkselDocuments("aksel_artikkel").then((paths) =>
-      paths.map((slug) => ({
+    paths: await getDocuments("aksel_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
         params: {
           slug: slug.replace("god-praksis/artikler/", ""),
         },
@@ -95,6 +99,10 @@ export const getStaticProps: GetStaticProps = async ({
         page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt
       ),
       publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "aksel_artikkel",
+      }),
     },
     notFound: !page && !preview,
     revalidate: 60,
@@ -105,6 +113,7 @@ const Page = ({
   page: data,
   publishDate,
   verifiedDate,
+  toc,
 }: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
@@ -181,9 +190,12 @@ const Page = ({
                 {data.heading}
               </Heading>
               {data?.ingress && (
-                <Ingress className="override-text-700 mt-4 text-2xl">
+                <BodyLong
+                  size="large"
+                  className="override-text-700 mt-4 text-2xl"
+                >
                   {data?.ingress}
-                </Ingress>
+                </BodyLong>
               )}
 
               <div className="mt-6 inline-flex flex-wrap items-center gap-2 text-base">
@@ -223,7 +235,7 @@ const Page = ({
               )}
             </div>
             <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
-              <TableOfContents hideToc={false} aksel />
+              <TableOfContents toc={toc} variant="subtle" />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                 <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
@@ -260,7 +272,7 @@ const Page = ({
   );
 };
 
-const WithPreview = lazy(() => import("../../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

@@ -1,19 +1,19 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { LinkIcon } from "@navikt/aksel-icons";
 import {
-  Hide,
-  Show,
+  BodyLong,
+  Box,
+  CopyButton,
   HGrid,
   Heading,
-  BodyLong,
-  Link,
-  CopyButton,
-  VStack,
+  Hide,
   Label,
+  Link,
   List,
-  Box,
+  Show,
+  VStack,
 } from "@navikt/ds-react";
 import cl from "clsx";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -32,21 +32,6 @@ const Example = () => {
       </HGrid>
     </div>
   );
-};
-
-export default withDsExample(Example, {
-  showBreakpoints: true,
-  variant: "subtle",
-});
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 3,
-  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
 };
 
 const ContentFirst = ({ className }: { className?: string }) => (
@@ -141,3 +126,19 @@ const DesktopSidebar = ({ className }: { className?: string }) => (
 const MobileSidebar = ({ className }: { className?: string }) => (
   <DesktopSidebar className={className} />
 );
+
+export default withDsExample(Example, {
+  showBreakpoints: true,
+  variant: "subtle",
+});
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 3,
+  desc: "Show/Hide fungerer bra til dynamisk endring av sidelayout basert på brekkpunkt sammen med HGrid",
+  sandbox: false,
+};

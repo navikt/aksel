@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { DatePicker, useRangeDatepicker } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 import format from "date-fns/format";
 import nbLocale from "date-fns/locale/nb";
 

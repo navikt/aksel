@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { HStack, Spacer } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -11,21 +11,6 @@ const Example = () => {
       </HStack>
     </div>
   );
-};
-
-export default withDsExample(Example, {
-  variant: "full",
-  showBreakpoints: true,
-});
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 99,
-  desc: "Spacer lar deg lett legge inn automatisk stretch mellom elementer. Dette kan komme inn nyttig når man f.eks skal plassere knapper i 'InternalHeader'.",
 };
 
 const Placeholder = ({
@@ -43,4 +28,19 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+export default withDsExample(Example, {
+  variant: "full",
+  showBreakpoints: true,
+});
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 99,
+  desc: "Spacer lar deg lett legge inn automatisk stretch mellom elementer. Dette kan komme inn nyttig når man f.eks skal plassere knapper i 'InternalHeader'.",
 };

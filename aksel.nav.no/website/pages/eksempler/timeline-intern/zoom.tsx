@@ -1,3 +1,4 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import {
   HospitalIcon,
   ParasolBeachIcon,
@@ -7,7 +8,6 @@ import {
   VirusIcon,
 } from "@navikt/aksel-icons";
 import { Timeline, TimelinePeriodProps } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -131,5 +131,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Lar deg &quot;zoome&quot; til predefinerte tidsperioder. Bruk 'startDate/endDate'-prop i Timeline for å justere hvilken tidsperiode som blir vist.",
+  desc: "Lar deg \"zoome\" til predefinerte tidsperioder. Bruk 'startDate/endDate'-prop i Timeline for å justere hvilken tidsperiode som blir vist.",
 };

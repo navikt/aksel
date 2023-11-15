@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { BodyShort, VStack } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
@@ -21,6 +21,14 @@ const Example = () => {
   );
 };
 
+function Descriptor({ children }) {
+  return <p className="mb-3 text-xl font-semibold">{children}</p>;
+}
+
+function Divider() {
+  return <hr className="border-border-subtle" />;
+}
+
 export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */
@@ -31,11 +39,3 @@ export const Demo = {
 export const args = {
   index: 0,
 };
-
-function Descriptor({ children }) {
-  return <p className="mb-3 text-xl font-semibold">{children}</p>;
-}
-
-function Divider() {
-  return <hr className="border-border-subtle" />;
-}
