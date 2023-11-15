@@ -1,5 +1,5 @@
-import FooterLink from "@/layout/footer/FooterLink";
 import { BodyShort, Heading } from "@navikt/ds-react";
+import FooterLink from "./FooterLink";
 
 type LinkBlockPropsT = {
   heading: string;

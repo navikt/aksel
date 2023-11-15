@@ -1,8 +1,8 @@
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";
-import LinkBlock from "@/layout/footer/LinkBlock";
 import { Box, HGrid, Page, VStack } from "@navikt/ds-react";
 import dynamic from "next/dynamic";
+import LinkBlock from "./LinkBlock";
 
 export const EditButton = dynamic(() => import("@/web/EditButton"), {
   ssr: false,
