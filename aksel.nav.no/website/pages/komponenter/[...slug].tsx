@@ -340,6 +340,9 @@ const Wrapper = (props: any) => {
             preview: "true",
           }}
           props={props}
+          resolvers={[
+            { key: "sidebar", cb: (v) => generateSidebar(v, "komponenter") },
+          ]}
         />
       </Suspense>
     );

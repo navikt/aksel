@@ -190,6 +190,9 @@ const Wrapper = (props: any) => {
             type: "templates_artikkel",
           }}
           props={props}
+          resolvers={[
+            { key: "sidebar", cb: (v) => generateSidebar(v, "templates") },
+          ]}
         />
       </Suspense>
     );

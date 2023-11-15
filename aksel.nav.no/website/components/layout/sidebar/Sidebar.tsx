@@ -12,7 +12,6 @@ const Sidebar = ({
   kategori: "komponenter" | "grunnleggende" | "templates";
   links: SidebarT;
 }) => {
-  console.log(links);
   return (
     <Show asChild above="md">
       <Box

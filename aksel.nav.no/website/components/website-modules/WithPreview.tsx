@@ -62,9 +62,8 @@ function LiveQuery({
 
   const _data = loading
     ? props
-    : runResolvers({ resolvers, data: { ...data } });
+    : runResolvers({ resolvers, data: { ...props, ...data } });
 
-  console.log([props.sidebar, _data.sidebar]);
   return (
     <>
       <PreviewBanner loading={loading} validUser={validUser} />
