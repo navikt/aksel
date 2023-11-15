@@ -10,6 +10,7 @@ export const FrontpageBlock = ({ blocks }: FrontpageBlockProps) => {
   if (!blocks || !blocks.length) {
     return null;
   }
+
   return (
     <>
       {blocks.map((x) => {
