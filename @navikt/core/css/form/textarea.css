@@ -69,6 +69,20 @@
   resize: both;
 }
 
+.navds-textarea--autoscrollbar {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  /* Makes the box-shadow visible even though overflow is hidden: */
+  padding: 3px;
+  margin: -3px;
+}
+
+.navds-textarea--autoscrollbar .navds-textarea__input {
+  flex-grow: 1;
+}
+
 /**
   Error handling
 */
@@ -95,30 +109,4 @@
   background-color: var(--a-surface-subtle);
   border-color: var(--a-border-subtle);
   cursor: default;
-}
-
-/*
-TODO: Velg strategi for autoscrollbar:
-  1. overflow:hidden (imlementert her)
-      Må ha negativ marg
-      (Parent må være flex)
-  2. Støtte for children
-      Må legge elementene som skal være rett under feltet i children
-*/
-.navds-textarea--autoscrollbar {
-  /* flex-grow: 1; */
-  display: flex;
-  flex-direction: column;
-
-  /* height: 100%; */
-
-  overflow: hidden;
-
-  /* When overflow is hidden, we need this to make the box-shadow visible: (May break if parent has overflow:hidden) */
-  padding: 3px;
-  margin: -3px;
-}
-
-.navds-textarea--autoscrollbar .navds-textarea__input {
-  flex-grow: 1;
 }

@@ -49,8 +49,9 @@ export interface TextareaProps
   /**
    * Textarea will stopp growing and get a scrollbar when there's no more room to grow.
    * Requires `display:flex` on the parent.
+   * Experimental feature that may be removed or get breaking changes in a minor version.
    */
-  autoScrollbar?: boolean;
+  UNSAFE_autoScrollbar?: boolean;
   /**
    * i18n-translations for counter-text
    */
@@ -91,7 +92,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       maxLength,
       hideLabel = false,
       resize,
-      autoScrollbar,
+      UNSAFE_autoScrollbar,
       i18n,
       readOnly,
       ...rest
@@ -128,7 +129,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-textarea--readonly": readOnly,
             "navds-textarea--error": hasError,
             "navds-textarea--resize": resize,
-            "navds-textarea--autoscrollbar": autoScrollbar,
+            "navds-textarea--autoscrollbar": UNSAFE_autoScrollbar,
           }
         )}
       >
@@ -163,7 +164,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               : setControlledValue(e.target.value)
           }
           minRows={getMinRows()}
-          autoScrollbar={autoScrollbar}
+          autoScrollbar={UNSAFE_autoScrollbar}
           ref={ref}
           readOnly={readOnly}
           className={cl(

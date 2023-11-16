@@ -228,8 +228,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
           // Apply the rows prop to get a "correct" first SSR paint
           rows={minRows}
           style={{
-            [/*autoScrollbar ? "maxHeight" : */ "height"]:
-              state.outerHeightStyle,
+            height: state.outerHeightStyle,
             // Need a large enough difference to allow scrolling.
             // This prevents infinite rendering loop.
             ...(state.overflow && !autoScrollbar ? { overflow: "hidden" } : {}),

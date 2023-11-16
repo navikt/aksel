@@ -128,38 +128,26 @@ export const Readonly = () => {
 
 export const AutoScrollbar = () => {
   return (
-    <div style={{ display: "flex", gap: "6rem" }}>
-      <div style={{ border: "1px dashed gray", height: "60vh" }}>
-        <Textarea
-          resize
-          label="Without display:flex on parent"
-          description="TODO remove?"
-          maxLength={30}
-          autoScrollbar
-        />
-        <Button>Send</Button>
+    <div
+      style={{
+        border: "1px solid lightGreen",
+        height: "90vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div style={{ border: "1px dashed gray" }}>
+        <h1>Header</h1>
       </div>
-      <div
-        style={{
-          border: "1px solid lightGreen",
-          height: "90vh",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div style={{ border: "1px dashed gray" }}>
-          <h1>Header</h1>
-        </div>
-        <Textarea
-          resize
-          label="With display:flex on parent"
-          description="Foo bar"
-          maxLength={30}
-          autoScrollbar
-        />
-        <div style={{ border: "1px dashed gray" }}>
-          <Button>Send</Button>
-        </div>
+      <Textarea
+        resize
+        label="Textarea with autoScrollbar"
+        description="Description"
+        maxLength={30}
+        UNSAFE_autoScrollbar
+      />
+      <div style={{ border: "1px dashed gray" }}>
+        <Button>Send</Button>
       </div>
     </div>
   );
