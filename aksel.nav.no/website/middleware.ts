@@ -46,6 +46,16 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL(redirect.destination, req.url));
     }
 
+    const url = req.nextUrl.clone();
+    if (
+      url.pathname.startsWith("/sandbox") &&
+      !url.pathname.includes("index.html") &&
+      !url.pathname.match(/(\..*)$/)
+    ) {
+      url.pathname = url.pathname + "/index.html";
+      return NextResponse.redirect(url);
+    }
+
     return NextResponse.next();
   } catch (e) {
     return NextResponse.next();
