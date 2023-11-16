@@ -23,7 +23,7 @@ import {
 } from "@navikt/aksel-icons";
 import differenceInMonths from "date-fns/differenceInMonths";
 import { GodPraksisPanes } from "./god-praksis";
-import { PanesWithCount } from "./with-count";
+import { Panes } from "./panes";
 
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
@@ -162,12 +162,7 @@ export const structure = async (
                 .schemaType(`grunnleggende_landingsside`)
                 .id(`grunnleggende_landingsside_id1`),
               S.divider(),
-              ...(await PanesWithCount(
-                "ds_artikkel",
-                grunnleggendeKategorier,
-                getClient,
-                S
-              )),
+              ...Panes("ds_artikkel", grunnleggendeKategorier, S),
             ])
         ),
       S.listItem()
@@ -182,12 +177,7 @@ export const structure = async (
                 .schemaType(`templates_landingsside`)
                 .id(`templates_landingsside_id1`),
               S.divider(),
-              ...(await PanesWithCount(
-                "templates_artikkel",
-                templatesKategorier,
-                getClient,
-                S
-              )),
+              ...Panes("templates_artikkel", templatesKategorier, S),
             ])
         ),
       S.listItem()
@@ -202,12 +192,7 @@ export const structure = async (
                 .schemaType(`komponenter_landingsside`)
                 .id(`komponenter_landingsside_id1`),
               S.divider(),
-              ...(await PanesWithCount(
-                "komponent_artikkel",
-                komponentKategorier,
-                getClient,
-                S
-              )),
+              ...Panes("komponent_artikkel", komponentKategorier, S),
             ])
         ),
       S.listItem()
@@ -222,12 +207,7 @@ export const structure = async (
                 .schemaType(`blogg_landingsside`)
                 .id(`blogg_landingsside_id1`),
               S.divider(),
-              ...(await PanesWithCount(
-                "aksel_blogg",
-                [...bloggKategorier],
-                getClient,
-                S
-              )),
+              ...Panes("aksel_blogg", [...bloggKategorier], S),
             ])
         ),
       ...(adminOrDev

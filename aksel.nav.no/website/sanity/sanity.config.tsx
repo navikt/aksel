@@ -89,7 +89,6 @@ function defaultConfig() {
       }),
 
       presentationTool({
-        // Required: set the base URL to the preview location in the front end
         previewUrl: "https://localhost:3000",
         locate,
       }),
