@@ -49,11 +49,11 @@ function defaultConfig() {
           const name = props.schemaType?.name;
 
           if (name === "string" && props.schemaType?.options?.maxLength) {
-            return <InputWithCounter {...props.inputProps} />;
+            return <InputWithCounter {...props} />;
           }
 
           if (name === "text" && props.schemaType?.options?.maxLength) {
-            return <InputWithCounter {...props.inputProps} size="large" />;
+            return <InputWithCounter {...props} size="large" />;
           }
           return props.renderDefault(props);
         },
