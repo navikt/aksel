@@ -1,14 +1,8 @@
+import { getClient } from "@/sanity/client.server";
+import { LiveQueryProvider } from "next-sanity/preview";
+import { useMemo } from "react";
 import LiveQuery from "./parts/LiveQuery";
-import PreviewProvider from "./parts/PreviewProvider";
-import { ResolverT } from "./parts/types";
-
-type WithPreviewProps = {
-  comp;
-  query: string;
-  props: any;
-  params?: any;
-  resolvers?: ResolverT;
-};
+import { PreviewProps } from "./parts/types";
 
 const WithPreview = ({
   comp,
@@ -16,9 +10,17 @@ const WithPreview = ({
   params,
   props,
   resolvers,
-}: WithPreviewProps) => {
+}: PreviewProps) => {
+  const client = useMemo(() => {
+    return getClient().withConfig({
+      useCdn: false,
+      ignoreBrowserTokenWarning: true,
+      perspective: "previewDrafts",
+    });
+  }, []);
+
   return (
-    <PreviewProvider>
+    <LiveQueryProvider client={client}>
       <LiveQuery
         props={props}
         query={query}
@@ -26,7 +28,7 @@ const WithPreview = ({
         comp={comp}
         resolvers={resolvers}
       />
-    </PreviewProvider>
+    </LiveQueryProvider>
   );
 };
 

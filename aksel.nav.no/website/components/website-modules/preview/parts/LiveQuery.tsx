@@ -1,8 +1,7 @@
 import { useLiveQuery } from "next-sanity/preview";
 import dynamic from "next/dynamic";
-import { ComponentType } from "react";
 import { runResolvers } from "./resolvers";
-import { ResolverT } from "./types";
+import { PreviewProps } from "./types";
 
 const PreviewBanner = dynamic(() => import("@/web/PreviewBanner"), {
   ssr: false,
@@ -14,13 +13,7 @@ function LiveQuery({
   params,
   props,
   resolvers,
-}: {
-  comp: ComponentType;
-  query: string;
-  props: any;
-  params?: any;
-  resolvers?: ResolverT;
-}) {
+}: PreviewProps) {
   const [data, loading] = useLiveQuery(props, query, params);
 
   const _data = loading

@@ -1,5 +1,11 @@
 import { ResolverT } from "./types";
 
+/**
+ * `runResolvers` is responsible for executing a set of resolvers for streamed data from sanity.
+ * This allows running functions and parse data both at initial load `getStaticProps` and when streamed `useLiveQuery`
+ * @param {Array<Resolvers>}
+ * @returns any
+ */
 export function runResolvers({
   resolvers,
   data,
@@ -24,6 +30,12 @@ export function runResolvers({
   }, data);
 }
 
+/**
+ * Sets value on obj[path]
+ * @param obj
+ * @param path
+ * @param value
+ */
 function setNestedValue(obj: any, path: string, value: any) {
   const keys = path.split(".");
   let current = obj;
@@ -39,6 +51,12 @@ function setNestedValue(obj: any, path: string, value: any) {
   current[keys[keys.length - 1]] = value;
 }
 
+/**
+ * Finds and returns nested ovject values based on simple `.`-separated string-ley
+ * @param obj
+ * @param path
+ * @returns value:any | undefined
+ */
 function getNestedValue(obj: any, path: string) {
   const keys = path.split(".");
   let current = obj;
