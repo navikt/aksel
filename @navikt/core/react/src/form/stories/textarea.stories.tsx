@@ -15,7 +15,7 @@ export const Default: StoryObj<typeof Textarea> = {
   },
 
   args: {
-    maxLength: 100,
+    maxLength: 0,
     label: "Ipsum enim quis culpa",
     resize: false,
   },
@@ -126,29 +126,34 @@ export const Readonly = () => {
   );
 };
 
-export const AutoScrollbar = () => {
-  return (
-    <div
-      style={{
-        border: "1px solid lightGreen",
-        height: "90vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div style={{ border: "1px dashed gray" }}>
-        <h1>Header</h1>
-      </div>
-      <Textarea
-        resize
-        label="Textarea with autoScrollbar"
-        description="Description"
-        maxLength={30}
-        UNSAFE_autoScrollbar
-      />
-      <div style={{ border: "1px dashed gray" }}>
-        <Button>Send</Button>
-      </div>
+export const AutoScrollbar = (props) => (
+  <div
+    style={{
+      border: "1px solid lightGreen",
+      height: "90vh",
+      display: "flex",
+      flexDirection: "column",
+    }}
+  >
+    <div style={{ border: "1px dashed gray" }}>
+      <h1>Header</h1>
     </div>
-  );
+    <Textarea
+      resize
+      label="Textarea with autoScrollbar"
+      description="Description"
+      maxLength={30}
+      UNSAFE_autoScrollbar
+      {...props}
+    />
+    <div style={{ border: "1px dashed gray" }}>
+      <Button>Send</Button>
+    </div>
+  </div>
+);
+AutoScrollbar.argTypes = {
+  error: { type: "string" },
+  hideLabel: { type: "boolean" },
+  maxRows: { type: "number" },
+  minRows: { type: "number" },
 };

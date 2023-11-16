@@ -27,7 +27,6 @@ export interface TextareaProps
   defaultValue?: string;
   /**
    * Maximum number of character rows to display.
-   * @bug Internal scrolling with `maxLength` scrolls over maxLength-text
    */
   maxRows?: number;
   /**

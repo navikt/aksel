@@ -3,4 +3,4 @@
 "@navikt/ds-css": minor
 ---
 
-:sparkles: Textarea: Støtte for automatisk scrollbar
+:sparkles: Textarea: Eksperimentell støtte for automatisk scrollbar
