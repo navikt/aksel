@@ -13,14 +13,12 @@ function LiveQuery({
   query,
   params,
   props,
-  validUser,
   resolvers,
 }: {
   comp: ComponentType;
   query: string;
   props: any;
   params?: any;
-  validUser: boolean;
   resolvers?: ResolverT;
 }) {
   const [data, loading] = useLiveQuery(props, query, params);
@@ -31,7 +29,7 @@ function LiveQuery({
 
   return (
     <>
-      <PreviewBanner loading={loading} validUser={validUser} />
+      <PreviewBanner loading={loading} />
       <Comp {..._data} />
     </>
   );

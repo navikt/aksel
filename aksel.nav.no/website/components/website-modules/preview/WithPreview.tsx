@@ -1,4 +1,3 @@
-import { useCheckAuth } from "@/hooks/useCheckAuth";
 import LiveQuery, { ResolverT } from "./parts/LiveQuery";
 import PreviewProvider from "./parts/PreviewProvider";
 
@@ -17,7 +16,6 @@ const WithPreview = ({
   props,
   resolvers,
 }: WithPreviewProps) => {
-  const validUser = useCheckAuth();
   return (
     <PreviewProvider>
       <LiveQuery
@@ -25,7 +23,6 @@ const WithPreview = ({
         query={query}
         params={params}
         comp={comp}
-        validUser={validUser}
         resolvers={resolvers}
       />
     </PreviewProvider>
