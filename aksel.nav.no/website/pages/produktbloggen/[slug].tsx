@@ -15,7 +15,6 @@ import { abbrName, dateStr, getImage } from "@/utils";
 import { BloggAd } from "@/web/BloggAd";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
-import TableOfContents from "@/web/toc/TOC";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
@@ -160,7 +159,6 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
         </div>
         <div className="relative mt-16">
           <AkselCubeStatic className="text-[#FFE78A] opacity-20" />
-          <TableOfContents hideToc />
           <div className="mt-8 px-4">
             <SanityBlockContent
               className="dynamic-wrapper-prose"

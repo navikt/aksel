@@ -46,18 +46,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, { showBreakpoints: true });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 3,
-  desc: "Endrer 'justify-content'.",
-};
-
 const Placeholder = ({
   text,
   noPadding,
@@ -73,4 +61,16 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+export default withDsExample(Example, { showBreakpoints: true });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 3,
+  desc: "Endrer 'justify-content'.",
 };

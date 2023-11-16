@@ -50,18 +50,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, { showBreakpoints: true });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 1,
-  desc: "Endrer 'align-items'.",
-};
-
 const Placeholder = ({
   text,
   noPadding,
@@ -77,4 +65,16 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+export default withDsExample(Example, { showBreakpoints: true });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 1,
+  desc: "Endrer 'align-items'.",
 };

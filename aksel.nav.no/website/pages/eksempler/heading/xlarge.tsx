@@ -16,6 +16,14 @@ const Example = () => {
   );
 };
 
+function Descriptor({ children }) {
+  return <p className="mb-3 text-xl font-semibold">{children}</p>;
+}
+
+function Divider() {
+  return <hr className="border-border-subtle" />;
+}
+
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -26,11 +34,3 @@ export const Demo = {
 export const args = {
   index: 1,
 };
-
-function Descriptor({ children }) {
-  return <p className="mb-3 text-xl font-semibold">{children}</p>;
-}
-
-function Divider() {
-  return <hr className="border-border-subtle" />;
-}

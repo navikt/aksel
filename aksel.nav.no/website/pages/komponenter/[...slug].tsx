@@ -11,13 +11,14 @@ import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
-  AkselSidebarT,
   ArticleListT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  SidebarT,
+  TableOfContentsT,
 } from "@/types";
-import { dateStr } from "@/utils";
+import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
 import { SEO } from "@/web/seo/SEO";
 import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
@@ -55,10 +56,11 @@ const kodepakker = {
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselKomponentDocT>>;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;
+  toc: TableOfContentsT;
 }>;
 
 /**
@@ -66,7 +68,7 @@ type PageProps = NextPageT<{
  * preview-funksjonalitet fører til en infinite loop som låser applikasjonen.
  * Dette er på grunn av av hele datasettet blir lastet inn i preview flere ganger som til slutt låser vinduet.
  */
-export const query = `{
+const query = `{
   "page": *[_type == "komponent_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
     {
       ...,
@@ -133,11 +135,16 @@ export const getStaticProps: GetStaticProps = async ({
       refs,
       slug: slug.slice(0, 2).join("/"),
       seo,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "komponenter"),
       preview,
       title: page?.heading ?? "",
       id: page?._id ?? "",
       publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "komponent_artikkel",
+        intro: !!page?.intro,
+      }),
     },
     notFound: !page && !preview,
     revalidate: 60,
@@ -150,6 +157,7 @@ const Page = ({
   refs,
   seo,
   publishDate,
+  toc,
 }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
@@ -256,6 +264,7 @@ const Page = ({
       <Header />
       <WithSidebar
         sidebar={sidebar}
+        toc={toc}
         pageType={{
           type: "komponenter",
           title: page?.heading,

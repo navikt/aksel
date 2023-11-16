@@ -157,13 +157,24 @@ export interface AkselTemplatesDocT extends DocumentT<"ds_artikkel">, ArticleT {
   };
 }
 
-export type AkselSidebarT = Array<{
+export type SidebarInputNodeT = {
   heading: string;
   slug: string;
-  kategori: (typeof komponentKategorier)[number]["value"];
+  kategori: string;
   tag: "beta" | "new" | "ready" | "deprecated";
   sidebarindex: number | null;
-}>;
+};
+
+export type SidebarOutputNodeT = Pick<
+  SidebarInputNodeT,
+  "heading" | "slug" | "tag"
+>;
+
+export type SidebarT = {
+  pages: SidebarOutputNodeT[];
+  title: string;
+  value: string;
+}[];
 
 export type ArticleListT = Array<{
   _id: string;
@@ -312,6 +323,8 @@ export type CodeExampleSchemaT = {
     navn: string;
     index: number;
     description?: string;
+    sandboxEnabled?: boolean;
+    sandboxBase64: string;
   }[];
   metadata?: {
     version: number;

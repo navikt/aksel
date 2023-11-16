@@ -5,7 +5,6 @@ import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
 import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
-import TableOfContents from "@/web/toc/TOC";
 import { Heading } from "@navikt/ds-react";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -72,7 +71,6 @@ const Page = ({ page }: PageProps["props"]) => {
           </div>
         </div>
         <div className="mt-12">
-          <TableOfContents hideToc />
           <div className="mt-8 px-4">
             <SanityBlockContent
               className="dynamic-wrapper-prose"

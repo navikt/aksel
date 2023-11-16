@@ -39,13 +39,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example);
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
 const options = [
   "top",
   "bottom",
@@ -60,6 +53,14 @@ const options = [
   "left-start",
   "left-end",
 ] as const;
+
+export default withDsExample(Example);
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 type Option = (typeof options)[number];
 
 export const args = {

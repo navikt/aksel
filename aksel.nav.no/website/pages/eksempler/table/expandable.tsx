@@ -1,6 +1,5 @@
 import { withDsExample } from "@/web/examples/withDsExample";
 import { Table } from "@navikt/ds-react";
-import { format } from "date-fns";
 
 const Example = () => {
   return (
@@ -22,15 +21,20 @@ const Example = () => {
             >
               <Table.DataCell scope="row">{name}</Table.DataCell>
               <Table.DataCell>{fnr}</Table.DataCell>
-              <Table.DataCell>
-                {format(new Date(start), "dd.MM.yyyy")}
-              </Table.DataCell>
+              <Table.DataCell>{format(new Date(start))}</Table.DataCell>
             </Table.ExpandableRow>
           );
         })}
       </Table.Body>
     </Table>
   );
+};
+
+const format = (date: Date) => {
+  const y = date.getFullYear();
+  const m = (date.getMonth() + 1).toString().padStart(2, "0");
+  const d = date.getDate().toString().padStart(2, "0");
+  return `${d}.${m}.${y}`;
 };
 
 const data = [
