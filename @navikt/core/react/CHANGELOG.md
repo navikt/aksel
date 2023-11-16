@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.10.2
+
+### Patch Changes
+
+- OverridableComponent: Fungerer nå bedre ved bruk av typeof <komponent> ([#2474](https://github.com/navikt/aksel/pull/2474))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.2
+  - @navikt/aksel-icons@5.10.2
+
 ## 5.10.1
 
 ### Patch Changes
