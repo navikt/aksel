@@ -249,7 +249,11 @@ const Wrapper = (props: any) => {
             type: "komponent_artikkel",
           }}
           resolvers={[
-            { key: "sidebar", cb: (v) => generateSidebar(v, "komponenter") },
+            {
+              key: "sidebar",
+              dataKeys: ["sidebar"],
+              cb: (v) => generateSidebar(v[0], "komponenter"),
+            },
           ]}
         />
       </Suspense>

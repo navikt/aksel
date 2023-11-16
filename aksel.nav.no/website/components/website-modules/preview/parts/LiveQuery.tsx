@@ -16,9 +16,7 @@ function LiveQuery({
 }: PreviewProps) {
   const [data, loading] = useLiveQuery(props, query, params);
 
-  const _data = loading
-    ? props
-    : runResolvers({ resolvers, data: { ...props, ...data } });
+  const _data = loading ? props : runResolvers({ resolvers, data });
 
   return (
     <>

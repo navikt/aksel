@@ -129,7 +129,11 @@ const Wrapper = (props: any) => {
             type: "ds_artikkel",
           }}
           resolvers={[
-            { key: "sidebar", cb: (v) => generateSidebar(v, "grunnleggende") },
+            {
+              key: "sidebar",
+              dataKeys: ["sidebar"],
+              cb: (v) => generateSidebar(v[0], "grunnleggende"),
+            },
           ]}
         />
       </Suspense>

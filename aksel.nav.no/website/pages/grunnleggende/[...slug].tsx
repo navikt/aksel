@@ -151,14 +151,19 @@ const Wrapper = (props: any) => {
           }}
           props={props}
           resolvers={[
-            { key: "sidebar", cb: (v) => generateSidebar(v, "grunnleggende") },
             {
-              key: "page.content",
+              key: "sidebar",
+              dataKeys: ["sidebar"],
+              cb: (v) => generateSidebar(v[0], "grunnleggende"),
+            },
+            {
+              key: "toc",
+              dataKeys: ["page.content", "page.intro"],
               cb: (v) =>
                 generateTableOfContents({
-                  content: v,
+                  content: v[0],
                   type: "ds_artikkel",
-                  intro: true,
+                  intro: !!v[1],
                 }),
             },
           ]}

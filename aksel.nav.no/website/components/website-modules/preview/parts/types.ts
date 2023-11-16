@@ -1,6 +1,10 @@
 import { ComponentType } from "react";
 
-export type ResolverT = { key: string; cb: (v: any) => any }[];
+export type ResolverT = {
+  key: string;
+  dataKeys: string[];
+  cb: (v: any[]) => any;
+}[];
 
 export type PreviewProps = {
   /**
@@ -22,11 +26,11 @@ export type PreviewProps = {
   props: any;
   /**
    * Array of functions we want to run on live data when fetched
-   * @example Supports nested objects like `page.content`
+   * @example Supports getting data from nested objects like `page.content`
    * @example
    * Here we run `generateSidebar` function on `sidebar` key every time the data is reloaded
    * resolvers={[
-   *   { key: "sidebar", cb: (v) => generateSidebar(v, "komponenter") },
+   *   { key: "sidebar", dataKeys: ["page.content", "page.intro"], cb: (v) => generateSidebar(v[0], "komponenter") },
    * ]}
    */
   resolvers?: ResolverT;
