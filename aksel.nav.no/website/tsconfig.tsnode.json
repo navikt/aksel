@@ -8,7 +8,7 @@
       "@/types": ["./components/types/index.ts"],
       "@/sanity-block": ["./components/website-modules/SanityBlockContent.tsx"],
       "@/hooks/*": ["./components/hooks/*"],
-      "@/preview": ["./components/website-modules/WithPreview.tsx"],
+      "@/preview": ["./components/website-modules/preview/WithPreview.tsx"],
       "@/logging": ["./components/logging/index.ts"],
       "@/utils": ["./components/utils/index.ts"],
       "@/layout/*": ["./components/layout/*"],

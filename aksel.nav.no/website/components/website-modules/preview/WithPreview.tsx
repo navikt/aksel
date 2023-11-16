@@ -1,5 +1,6 @@
-import LiveQuery, { ResolverT } from "./parts/LiveQuery";
+import LiveQuery from "./parts/LiveQuery";
 import PreviewProvider from "./parts/PreviewProvider";
+import { ResolverT } from "./parts/types";
 
 type WithPreviewProps = {
   comp;

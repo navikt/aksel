@@ -1,12 +1,12 @@
 import { useLiveQuery } from "next-sanity/preview";
 import dynamic from "next/dynamic";
 import { ComponentType } from "react";
+import { runResolvers } from "./resolvers";
+import { ResolverT } from "./types";
 
 const PreviewBanner = dynamic(() => import("@/web/PreviewBanner"), {
   ssr: false,
 });
-
-export type ResolverT = { key: string; cb: (v: any) => any }[];
 
 function LiveQuery({
   comp: Comp,
@@ -36,25 +36,3 @@ function LiveQuery({
 }
 
 export default LiveQuery;
-
-function runResolvers({
-  resolvers,
-  data,
-}: {
-  resolvers: ResolverT;
-  data: any;
-}) {
-  if (!resolvers) {
-    return data;
-  }
-
-  const _data = { ...data };
-
-  resolvers.forEach((resolver) => {
-    if (resolver.key in _data) {
-      _data[resolver.key] = resolver.cb(_data[resolver.key]);
-    }
-  });
-
-  return _data;
-}
