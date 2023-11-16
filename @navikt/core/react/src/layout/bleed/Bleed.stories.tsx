@@ -1,8 +1,8 @@
-import React from "react";
 import type { Meta } from "@storybook/react";
+import React from "react";
+import { Box, HStack, VStack } from "../..";
 import { BodyLong } from "../../typography";
 import { Bleed } from "./Bleed";
-import { Box, HStack, VStack } from "../..";
 
 export default {
   title: "ds-react/Primitives/Bleed",
