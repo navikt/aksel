@@ -342,6 +342,15 @@ const Wrapper = (props: any) => {
           props={props}
           resolvers={[
             { key: "sidebar", cb: (v) => generateSidebar(v, "komponenter") },
+            {
+              key: "page.content",
+              cb: (v) =>
+                generateTableOfContents({
+                  content: v,
+                  type: "komponent_artikkel",
+                  intro: true,
+                }),
+            },
           ]}
         />
       </Suspense>
