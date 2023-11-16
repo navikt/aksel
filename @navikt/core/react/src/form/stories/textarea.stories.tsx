@@ -14,7 +14,7 @@ export const Default: StoryObj<typeof Textarea> = {
   },
 
   args: {
-    maxLength: 100,
+    maxLength: 0,
     label: "Ipsum enim quis culpa",
     resize: false,
   },
@@ -28,6 +28,7 @@ export const Default: StoryObj<typeof Textarea> = {
     error: { type: "string" },
     hideLabel: { type: "boolean" },
     disabled: { type: "boolean" },
+    readOnly: { type: "boolean" },
     maxRows: { type: "number" },
     minRows: { type: "number" },
   },
