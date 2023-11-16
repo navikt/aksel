@@ -287,10 +287,11 @@ const Wrapper = (props: any) => {
           }}
           resolvers={[
             {
-              key: "page.content",
+              key: "toc",
+              dataKeys: ["page.content"],
               cb: (v) =>
                 generateTableOfContents({
-                  content: v,
+                  content: v[0],
                   type: "aksel_artikkel",
                 }),
             },

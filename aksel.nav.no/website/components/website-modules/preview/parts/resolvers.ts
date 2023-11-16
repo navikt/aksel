@@ -23,7 +23,7 @@ export function runResolvers({
     );
     acc[resolver.key] = resolver.cb(dataFromKeys);
     return acc;
-  }, structuredClone(data));
+  }, data);
 }
 
 function getNestedProperty(obj: any, path: string) {
