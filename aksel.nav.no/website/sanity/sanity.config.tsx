@@ -12,9 +12,7 @@ import { InputWithCounter } from "./schema/custom-components";
 import { getTemplates } from "./util";
 
 import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
-import { presentationTool } from "sanity/presentation";
 import { allArticleDocuments } from "./config";
-import { locate } from "./locate";
 import { schema } from "./schema";
 
 const projectId = "hnbe3yhs";
@@ -88,10 +86,6 @@ function defaultConfig() {
         hasPublishedAt: [...allArticleDocuments],
       }),
 
-      presentationTool({
-        previewUrl: "https://localhost:3000",
-        locate,
-      }),
       /* 3rd-party */
       table(),
       codeInput(),
