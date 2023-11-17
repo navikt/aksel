@@ -52,7 +52,7 @@ function UlList({
                 className="whitespace-break-spaces"
                 weight={isActive(node.id) ? "semibold" : "regular"}
               >
-                {removeEmojies(node.title)}
+                {removeEmojies(node.title).trim()}
               </BodyShort>
             </a>
             {!nested && node.children.length > 0 && (
