@@ -1,13 +1,10 @@
+import { useCheckAuth } from "@/hooks/useCheckAuth";
 import { BodyShort, Button } from "@navikt/ds-react";
 import Link from "next/link";
 
-function PreviewBanner({
-  loading = true,
-  validUser,
-}: {
-  loading: boolean;
-  validUser: boolean;
-}) {
+function PreviewBanner({ loading = true }: { loading: boolean }) {
+  const validUser = useCheckAuth();
+
   if (!validUser) {
     return (
       <>
