@@ -10,18 +10,17 @@ import cl from "clsx";
 import { ComponentType, useEffect, useState } from "react";
 import styles from "./examples.module.css";
 
+type withDsT = {
+  variant?: "full" | "inverted" | "static" | "subtle";
+  showBreakpoints?: boolean;
+};
+
 export const withDsExample = (
   Component: ComponentType,
   /**
    * Static: Used for dynamic-height examples like ExpansionCard
    */
-  {
-    variant,
-    showBreakpoints,
-  }: {
-    variant?: "full" | "inverted" | "static" | "subtle";
-    showBreakpoints?: boolean;
-  } = {}
+  { variant, showBreakpoints }: withDsT = {}
 ) => {
   const DsHOC = (props: any) => {
     const [width, setWidth] = useState<number>();
@@ -57,7 +56,12 @@ export const withDsExample = (
         breakpoint = "xl";
       }
       return (
-        <HStack gap="1" className="absolute left-2 top-1" align="center">
+        <HStack
+          gap="05"
+          className="rounded-br-medium absolute left-0 top-0 p-1"
+          align="center"
+          style={{ background: getBg(variant) }}
+        >
           <Icon aria-hidden fontSize="1.5rem" /> {`${breakpoint}`}
         </HStack>
       );
@@ -66,11 +70,10 @@ export const withDsExample = (
     return (
       <div
         className={cl(styles.examples, {
-          "bg-gray-900": variant === "inverted",
-          "bg-bg-subtle": variant === "subtle",
           [styles.containerStatic]: variant === "static",
           [styles.container]: variant !== "static",
         })}
+        style={{ background: getBg(variant) }}
       >
         <style global>{`html {scrollbar-gutter: unset;}`}</style>
         {showBreakpoints && <BreakpointText />}
@@ -92,3 +95,15 @@ export const withDsExample = (
 
   return DsHOC;
 };
+
+function getBg(variant: withDsT["variant"]): string {
+  switch (variant) {
+    case "inverted":
+      return "var(--a-surface-inverted)";
+    case "subtle":
+      return "var(--a-bg-subtle)";
+
+    default:
+      return "var(--a-bg-default)";
+  }
+}
