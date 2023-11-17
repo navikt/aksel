@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tailwind",
-  "version": "5.10.2",
+  "version": "5.10.3",
   "description": "Tailwind config based on @navikt/ds-tokens",
   "author": "Aksel | NAV designsystem team",
   "keywords": [
@@ -8,9 +8,11 @@
     "design-tokens"
   ],
   "main": "tailwind.config.js",
+  "types": "tailwind.config.d.ts",
   "license": "MIT",
   "files": [
-    "tailwind.config.js"
+    "tailwind.config.js",
+    "tailwind.config.d.ts"
   ],
   "scripts": {
     "build": "ts-node ./src",
@@ -22,11 +24,12 @@
     "directory": "@navikt/core/tailwind"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^5.10.2",
+    "@navikt/ds-tokens": "^5.10.3",
     "@types/jest": "^29.0.0",
     "color": "4.2.3",
     "jest": "^29.0.0",
     "lodash": "^4.17.21",
+    "tailwindcss": "^3.3.3",
     "ts-jest": "^29.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"

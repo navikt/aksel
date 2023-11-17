@@ -10,8 +10,9 @@ export const FrontpageBlock = ({ blocks }: FrontpageBlockProps) => {
   if (!blocks || !blocks.length) {
     return null;
   }
+
   return (
-    <div className="lg:px-18 px-2">
+    <>
       {blocks.map((x) => {
         switch (x._type) {
           case "nytt_fra_aksel":
@@ -20,7 +21,7 @@ export const FrontpageBlock = ({ blocks }: FrontpageBlockProps) => {
             return null;
         }
       })}
-    </div>
+    </>
   );
 };
 

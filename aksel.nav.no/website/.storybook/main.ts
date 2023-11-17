@@ -1,7 +1,7 @@
 import { loadCsf } from "@storybook/csf-tools";
 import type { StorybookConfig } from "@storybook/nextjs";
 import { readFileSync } from "fs";
-import { dirname, join } from "path";
+import { dirname, join, resolve } from "path";
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -64,6 +64,75 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: "tag",
+  },
+  webpackFinal: async (sbConfig: any) => {
+    if (!sbConfig.resolve.alias) {
+      return sbConfig;
+    }
+    // Add path aliases
+    sbConfig.resolve.alias["@/sb-util"] = resolve(__dirname, "./utils.tsx");
+    sbConfig.resolve.alias["@/types"] = resolve(
+      __dirname,
+      "../components/types/index.ts"
+    );
+    sbConfig.resolve.alias["@/sanity-block"] = resolve(
+      __dirname,
+      "../components/website-modules/SanityBlockContent.tsx"
+    );
+    sbConfig.resolve.alias["@/hooks"] = resolve(
+      __dirname,
+      "../components/hooks/"
+    );
+    sbConfig.resolve.alias["@/logging"] = resolve(
+      __dirname,
+      "../components/logging/index.ts"
+    );
+    sbConfig.resolve.alias["@/utils"] = resolve(
+      __dirname,
+      "../components/utils/index.ts"
+    );
+    sbConfig.resolve.alias["@/utils"] = resolve(
+      __dirname,
+      "../components/utils/index.ts"
+    );
+    sbConfig.resolve.alias["@/layout"] = resolve(
+      __dirname,
+      "../components/layout/"
+    );
+    sbConfig.resolve.alias["@/assets"] = resolve(
+      __dirname,
+      "../components/assets/"
+    );
+    sbConfig.resolve.alias["@/web"] = resolve(
+      __dirname,
+      "../components/website-modules/"
+    );
+    sbConfig.resolve.alias["@/cms"] = resolve(
+      __dirname,
+      "../components/sanity-modules/"
+    );
+    sbConfig.resolve.alias["@/error-boundary"] = resolve(
+      __dirname,
+      "../components/website-modules/ErrorBoundary.tsx"
+    );
+    sbConfig.resolve.alias["@/sanity/config"] = resolve(
+      __dirname,
+      "../sanity/config.ts"
+    );
+    sbConfig.resolve.alias["@/sanity/client.server"] = resolve(
+      __dirname,
+      "../sanity/interface/client.server.js"
+    );
+    sbConfig.resolve.alias["@/sanity/interface"] = resolve(
+      __dirname,
+      "../sanity/interface/interface.ts"
+    );
+    sbConfig.resolve.alias["@/sanity/queries"] = resolve(
+      __dirname,
+      "../sanity/interface/queries.js"
+    );
+
+    return sbConfig;
   },
 };
 export default config;

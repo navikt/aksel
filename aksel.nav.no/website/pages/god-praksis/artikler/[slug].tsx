@@ -285,6 +285,17 @@ const Wrapper = (props: any) => {
           params={{
             slug: `god-praksis/artikler/${props?.slug}`,
           }}
+          resolvers={[
+            {
+              key: "toc",
+              dataKeys: ["page.content"],
+              cb: (v) =>
+                generateTableOfContents({
+                  content: v[0],
+                  type: "aksel_artikkel",
+                }),
+            },
+          ]}
         />
       </Suspense>
     );
