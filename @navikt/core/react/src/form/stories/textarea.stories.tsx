@@ -68,6 +68,20 @@ export const Error = () => {
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         size="small"
       />
+
+      <Textarea
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        maxLength={20}
+      />
+
+      <Textarea
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        value="Sed dignissim sollicitudin porta."
+        maxLength={20}
+        size="small"
+      />
     </div>
   );
 };

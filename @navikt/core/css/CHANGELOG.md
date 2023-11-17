@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.10.2
+
+### Patch Changes
+
+- Primtives: CSS-import for primitives er nå mer spesifikk ([#2469](https://github.com/navikt/aksel/pull/2469))
+
 ## 5.10.1
 
 ## 5.10.0

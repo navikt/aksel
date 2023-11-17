@@ -2,8 +2,6 @@ name: Nytt ikon
 description: Send et ønske om et eller flere nye ikoner
 title: "[Nytt ikon]: "
 labels: ["nytt ✨", "ikoner 🖼", "forespørsel 🥰"]
-assignees:
-  - KenAJoh
 body:
   - type: markdown
     attributes:
