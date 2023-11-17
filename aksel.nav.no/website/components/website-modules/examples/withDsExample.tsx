@@ -72,6 +72,7 @@ export const withDsExample = (
           [styles.container]: variant !== "static",
         })}
       >
+        <style global>{`html {scrollbar-gutter: unset;}`}</style>
         {showBreakpoints && <BreakpointText />}
         <div
           id="ds-example"

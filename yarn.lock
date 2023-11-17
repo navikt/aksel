@@ -3417,7 +3417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^5.10.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^5.10.3, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3444,8 +3444,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^5.10.2
-    "@navikt/ds-tokens": ^5.10.2
+    "@navikt/ds-css": ^5.10.3
+    "@navikt/ds-tokens": ^5.10.3
     "@types/jest": ^29.0.0
     concurrently: 7.2.1
     copyfiles: 2.4.1
@@ -3463,7 +3463,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 5.10.2
+    "@navikt/ds-css": 5.10.3
     "@types/inquirer": ^9.0.3
     "@types/jest": ^29.0.0
     axios: 1.6.0
@@ -3487,11 +3487,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@5.10.2, @navikt/ds-css@^5.10.2, @navikt/ds-css@^5.9.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@5.10.3, @navikt/ds-css@^5.10.3, @navikt/ds-css@^5.9.2, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^5.10.2
+    "@navikt/ds-tokens": ^5.10.3
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3504,13 +3504,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^5.10.2, @navikt/ds-react@^5.9.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^5.10.3, @navikt/ds-react@^5.9.2, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
-    "@navikt/aksel-icons": ^5.10.2
-    "@navikt/ds-tokens": ^5.10.2
+    "@navikt/aksel-icons": ^5.10.3
+    "@navikt/ds-tokens": ^5.10.3
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3544,11 +3544,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^5.10.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^5.10.3, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^5.10.2
+    "@navikt/ds-tokens": ^5.10.3
     "@types/jest": ^29.0.0
     color: 4.2.3
     jest: ^29.0.0
@@ -3560,7 +3560,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^5.10.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^5.10.3, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -8744,11 +8744,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^5.10.2
-    "@navikt/ds-css": ^5.10.2
-    "@navikt/ds-react": ^5.10.2
-    "@navikt/ds-tailwind": ^5.10.2
-    "@navikt/ds-tokens": ^5.10.2
+    "@navikt/aksel-icons": ^5.10.3
+    "@navikt/ds-css": ^5.10.3
+    "@navikt/ds-react": ^5.10.3
+    "@navikt/ds-tailwind": ^5.10.3
+    "@navikt/ds-tokens": ^5.10.3
     prettier-plugin-tailwindcss: ^0.2.3
   languageName: unknown
   linkType: soft
@@ -24037,9 +24037,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sharp@npm:0.32.5":
-  version: 0.32.5
-  resolution: "sharp@npm:0.32.5"
+"sharp@npm:0.32.6":
+  version: 0.32.6
+  resolution: "sharp@npm:0.32.6"
   dependencies:
     color: ^4.2.3
     detect-libc: ^2.0.2
@@ -24050,7 +24050,7 @@ __metadata:
     simple-get: ^4.0.1
     tar-fs: ^3.0.4
     tunnel-agent: ^0.6.0
-  checksum: 3cd6dc037c9ba126a30af90ac94043c4418bbb4228e15fd446638ff43fc9b14eabb553037988e484162c318f7baff21d896a5bef7dcc453f608e247d468f41e0
+  checksum: 0cca1d16b1920800c0e22d27bc6305f4c67c9ebe44f67daceb30bf645ae39e7fb7dfbd7f5d6cd9f9eebfddd87ac3f7e2695f4eb906d19b7a775286238e6a29fc
   languageName: node
   linkType: hard
 
@@ -27316,7 +27316,7 @@ __metadata:
     sanity: 3.18.0
     sanity-plugin-asset-source-unsplash: ^1.1.1
     sanity-plugin-media: ^2.2.2
-    sharp: 0.32.5
+    sharp: 0.32.6
     showdown: ^2.1.0
     start-server-and-test: ^1.14.0
     styled-components: ^6.0.0
