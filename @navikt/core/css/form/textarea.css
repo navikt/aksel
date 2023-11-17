@@ -22,6 +22,7 @@
 
 .navds-textarea__wrapper {
   position: relative;
+  min-width: 100%;
 }
 
 .navds-textarea__input {
