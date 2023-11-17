@@ -92,6 +92,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   ) => {
     return (
       <div
+        tabIndex={-1}
         {...rest}
         ref={ref}
         className={cl(
