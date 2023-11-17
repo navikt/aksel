@@ -4,6 +4,7 @@ import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit, useId } from "../util";
 import TextareaAutosize from "../util/TextareaAutoSize";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
+import Counter from "./TextareaCounter";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 /**
@@ -193,29 +194,5 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
   }
 );
-
-interface CounterProps {
-  maxLength: number;
-  currentLength: number;
-  size: TextareaProps["size"];
-  i18n: TextareaProps["i18n"];
-}
-const Counter = ({ maxLength, currentLength, size, i18n }: CounterProps) => {
-  const difference = maxLength - currentLength;
-
-  return (
-    <BodyShort
-      className={cl("navds-textarea__counter", {
-        "navds-textarea__counter--error": difference < 0,
-      })}
-      role={difference < 20 ? "status" : undefined}
-      size={size}
-    >
-      {difference < 0
-        ? `${Math.abs(difference)} ${i18n?.counterTooMuch ?? "tegn for mye"}`
-        : `${difference} ${i18n?.counterLeft ?? "tegn igjen"}`}
-    </BodyShort>
-  );
-};
 
 export default Textarea;
