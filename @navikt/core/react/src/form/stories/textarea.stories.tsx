@@ -16,10 +16,13 @@ export const Default: StoryObj<typeof Textarea> = {
   args: {
     maxLength: 0,
     label: "Ipsum enim quis culpa",
-    resize: false,
   },
 
   argTypes: {
+    resize: {
+      control: { type: "radio" },
+      options: [true, "vertical", "horizontal"],
+    },
     size: {
       control: { type: "radio" },
       options: ["medium", "small"],

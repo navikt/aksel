@@ -45,7 +45,7 @@ export interface TextareaProps
   /**
    * Enables resizing of field
    */
-  resize?: boolean;
+  resize?: boolean | "vertical" | "horizontal";
   /**
    * i18n-translations for counter-text
    */
@@ -121,7 +121,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-form-field--readonly": readOnly,
             "navds-textarea--readonly": readOnly,
             "navds-textarea--error": hasError,
-            "navds-textarea--resize": resize,
+            [`navds-textarea--resize-${resize === true ? "both" : resize}`]:
+              resize,
           }
         )}
       >
