@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React from "react";
 import { BodyShort } from "../typography";
-import { TextareaProps } from "./Textarea";
+import type { TextareaProps } from "./Textarea";
 
 interface Props {
   maxLength: number;
