@@ -7,15 +7,16 @@ import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
-  AkselSidebarT,
   AkselTemplatesDocT,
   ArticleListT,
   CodeExampleSchemaT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  SidebarT,
+  TableOfContentsT,
 } from "@/types";
-import { dateStr } from "@/utils";
+import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
 import { AkselTable, AkselTableRow } from "@/web/Table";
 import { SEO } from "@/web/seo/SEO";
@@ -26,10 +27,11 @@ import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselTemplatesDocT>>;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;
+  toc: TableOfContentsT;
 }>;
 
 const query = `{
@@ -76,19 +78,23 @@ export const getStaticProps: GetStaticProps = async ({
       page,
       slug: slug.slice(0, 2).join("/"),
       seo,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "templates"),
       preview,
       title: page?.heading ?? "",
       id: page?._id ?? "",
       refs: [],
       publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "templates_artikkel",
+      }),
     },
     notFound: !page && !preview,
     revalidate: 60,
   };
 };
 
-const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
+const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
@@ -108,6 +114,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
+        toc={toc}
         pageType={{
           type: "templates",
           title: page?.heading,
@@ -183,6 +190,23 @@ const Wrapper = (props: any) => {
             type: "templates_artikkel",
           }}
           props={props}
+          resolvers={[
+            {
+              key: "sidebar",
+              dataKeys: ["sidebar"],
+              cb: (v) => generateSidebar(v[0], "templates"),
+            },
+            {
+              key: "toc",
+              dataKeys: ["page.content", "page.intro"],
+              cb: (v) =>
+                generateTableOfContents({
+                  content: v[0],
+                  type: "templates_artikkel",
+                  intro: !!v[1],
+                }),
+            },
+          ]}
         />
       </Suspense>
     );

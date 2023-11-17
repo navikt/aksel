@@ -14,7 +14,7 @@ export const Default: StoryObj<typeof Textarea> = {
   },
 
   args: {
-    maxLength: 100,
+    maxLength: 0,
     label: "Ipsum enim quis culpa",
     resize: false,
   },
@@ -28,6 +28,7 @@ export const Default: StoryObj<typeof Textarea> = {
     error: { type: "string" },
     hideLabel: { type: "boolean" },
     disabled: { type: "boolean" },
+    readOnly: { type: "boolean" },
     maxRows: { type: "number" },
     minRows: { type: "number" },
   },
@@ -64,6 +65,20 @@ export const Error = () => {
       <Textarea
         label="Ipsum enim quis culpa"
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        size="small"
+      />
+
+      <Textarea
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        maxLength={20}
+      />
+
+      <Textarea
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        value="Sed dignissim sollicitudin porta."
+        maxLength={20}
         size="small"
       />
     </div>

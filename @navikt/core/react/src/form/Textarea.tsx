@@ -1,10 +1,11 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label } from "../typography";
-import TextareaAutosize from "../util/TextareaAutoSize";
-import { FormFieldProps, useFormField } from "./useFormField";
-import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import { omit, useId } from "../util";
+import TextareaAutosize from "../util/TextareaAutoSize";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
+import Counter from "./TextareaCounter";
+import { FormFieldProps, useFormField } from "./useFormField";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -27,7 +28,6 @@ export interface TextareaProps
   defaultValue?: string;
   /**
    * Maximum number of character rows to display.
-   * @bug Internal scrolling with `maxLength` scrolls over maxLength-text
    */
   maxRows?: number;
   /**
@@ -50,7 +50,7 @@ export interface TextareaProps
    * i18n-translations for counter-text
    */
   i18n?: {
-    /** @default Antall tegn igjen */
+    /** @default tegn igjen */
     counterLeft?: string;
     /** @default tegn for mye */
     counterTooMuch?: string;
@@ -162,14 +162,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             className={cl(
               "navds-textarea__input",
               "navds-body-short",
-              `navds-body-short--${size ?? "medium"}`,
-              {
-                "navds-textarea--counter": hasMaxLength,
-              }
+              `navds-body-short--${size ?? "medium"}`
             )}
             {...(describedBy ? { "aria-describedby": describedBy } : {})}
           />
-          {hasMaxLength && (
+          {hasMaxLength && !readOnly && !inputProps.disabled && (
             <>
               <span id={maxLengthId} className="navds-sr-only">
                 {`Tekstområde med plass til ${maxLength} tegn.`}
@@ -197,23 +194,5 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
   }
 );
-
-export const Counter = ({ maxLength, currentLength, size, i18n }) => {
-  const difference = maxLength - currentLength;
-
-  return (
-    <BodyShort
-      className={cl("navds-textarea__counter", {
-        "navds-textarea__counter--error": difference < 0,
-      })}
-      aria-live={difference < 20 ? "polite" : "off"}
-      size={size}
-    >
-      {difference < 0
-        ? `${Math.abs(difference)} ${i18n?.counterTooMuch ?? "tegn for mye"}`
-        : `${difference} ${i18n?.counterLeft ?? "tegn igjen"}`}
-    </BodyShort>
-  );
-};
 
 export default Textarea;

@@ -37,10 +37,6 @@
   color: var(--ac-textarea-text, var(--__ac-textarea-text, var(--a-text-default)));
 }
 
-.navds-textarea--counter {
-  padding-bottom: var(--a-spacing-8);
-}
-
 .navds-textarea__input::placeholder {
   color: var(--ac-textarea-placeholder, var(--__ac-textarea-placeholder, var(--a-text-subtle)));
 }
@@ -65,19 +61,9 @@
   padding: var(--a-spacing-1-alt);
 }
 
-.navds-form-field--small .navds-textarea--counter.navds-textarea__input {
-  padding-bottom: var(--a-spacing-7);
-}
-
 .navds-textarea__counter {
-  pointer-events: none;
+  margin-top: var(--a-spacing-05);
   color: var(--ac-textarea-counter-text, var(--__ac-textarea-counter-text, var(--a-text-subtle)));
-  font-style: italic;
-  position: absolute;
-  text-align: left;
-  left: 0.0625rem;
-  bottom: 0.0625rem;
-  padding: var(--a-spacing-1) var(--a-spacing-2);
 }
 
 .navds-textarea__counter--error {

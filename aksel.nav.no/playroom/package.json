@@ -2,7 +2,7 @@
   "name": "playroom",
   "scripts": {
     "start": "playroom start",
-    "build": "playroom build"
+    "build:playroom": "playroom build"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.2",

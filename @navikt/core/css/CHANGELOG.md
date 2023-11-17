@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 5.10.3
+
+### Patch Changes
+
+- :bug: Textarea: Teller flyttet ut av tekstfeltet for å unngå overlapp og misforståelser ([#2483](https://github.com/navikt/aksel/pull/2483))
+
+## 5.10.2
+
+### Patch Changes
+
+- Primtives: CSS-import for primitives er nå mer spesifikk ([#2469](https://github.com/navikt/aksel/pull/2469))
+
 ## 5.10.1
 
 ## 5.10.0

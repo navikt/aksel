@@ -1,13 +1,8 @@
 import { withDsExample } from "@/web/examples/withDsExample";
-import { Link } from "@navikt/ds-react";
-import NextLink from "next/link";
+import { Textarea } from "@navikt/ds-react";
 
 const Example = () => {
-  return (
-    <Link href="#" as={NextLink}>
-      Lenke til ny side
-    </Link>
-  );
+  return <Textarea label="Har du noen tilbakemeldinger?" resize />;
 };
 
 export default withDsExample(Example);
@@ -18,6 +13,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 5,
-  sandbox: false,
+  index: 6,
 };

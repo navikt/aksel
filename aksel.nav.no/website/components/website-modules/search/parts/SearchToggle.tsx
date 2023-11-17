@@ -1,10 +1,10 @@
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, Modal } from "@navikt/ds-react";
 import { useContext } from "react";
+import { SearchContext, SearchNavigationContext } from "../providers";
 import { Error } from "./Error";
 import { SearchForm } from "./Form";
 import { Results } from "./Results";
-import { SearchContext, SearchNavigationContext } from "../providers";
 
 export const Search = () => {
   const { open, setOpen } = useContext(SearchContext);

@@ -3,8 +3,10 @@ import { Tag } from "@navikt/ds-react";
 export const StatusTag = ({
   status,
   showStable = false,
+  size = "small",
   ...rest
 }: {
+  size?: "small" | "xsmall";
   status: string;
   showStable?: boolean;
 }) => {
@@ -13,8 +15,8 @@ export const StatusTag = ({
       return (
         <Tag
           variant="alt1"
-          size="small"
-          className="border-violet-300 bg-violet-50"
+          size={size}
+          className="border-violet-300 bg-violet-50 text-violet-800"
           {...rest}
         >
           Beta
@@ -24,7 +26,7 @@ export const StatusTag = ({
       return (
         <Tag
           variant="alt1"
-          size="small"
+          size={size}
           className="border-amber-400 bg-amber-50"
           {...rest}
         >
@@ -33,19 +35,19 @@ export const StatusTag = ({
       );
     case "new":
       return (
-        <Tag variant="info" size="small" {...rest}>
+        <Tag variant="info" size={size} {...rest}>
           Ny
         </Tag>
       );
     case "ready":
       return showStable ? (
-        <Tag variant="success" size="small" {...rest}>
+        <Tag variant="success" size={size} {...rest}>
           Stabil
         </Tag>
       ) : null;
     case "deprecated":
       return (
-        <Tag variant="neutral" size="small" {...rest}>
+        <Tag variant="neutral" size={size} {...rest}>
           Avviklet
         </Tag>
       );

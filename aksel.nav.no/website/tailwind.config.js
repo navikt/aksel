@@ -7,6 +7,9 @@ module.exports = {
     "./stories/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    data: {
+      active: 'active~="true"',
+    },
     extend: {
       screens: {
         "2xl": "1440px",

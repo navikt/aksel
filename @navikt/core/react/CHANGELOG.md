@@ -1,5 +1,29 @@
 # @navikt/ds-react
 
+## 5.10.3
+
+### Patch Changes
+
+- :wheelchair: Textarea: Byttet fra `aria-live` til `role=status` på telleren for bedre semantikk ([#2483](https://github.com/navikt/aksel/pull/2483))
+
+- :bug: Textarea: Teller flyttet ut av tekstfeltet for å unngå overlapp og misforståelser ([#2483](https://github.com/navikt/aksel/pull/2483))
+
+- ErrorSummary: Gjør det mulig å rendre ErrorSummary.Item conditionally ([#2484](https://github.com/navikt/aksel/pull/2484))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.3
+  - @navikt/aksel-icons@5.10.3
+
+## 5.10.2
+
+### Patch Changes
+
+- OverridableComponent: Fungerer nå bedre ved bruk av typeof <komponent> ([#2474](https://github.com/navikt/aksel/pull/2474))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.2
+  - @navikt/aksel-icons@5.10.2
+
 ## 5.10.1
 
 ### Patch Changes
