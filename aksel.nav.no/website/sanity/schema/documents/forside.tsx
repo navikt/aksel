@@ -37,7 +37,7 @@ export const Forside = defineType({
                   name: "highlight",
                   type: "reference",
                   hidden: ({ value }) => !value,
-                  to: [...allArticleDocsRef],
+                  to: allArticleDocsRef,
                   validation: (Rule) => Rule.required(),
                 }),
               ],
