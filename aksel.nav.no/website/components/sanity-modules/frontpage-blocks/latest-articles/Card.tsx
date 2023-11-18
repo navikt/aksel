@@ -1,4 +1,5 @@
 import ErrorBoundary from "@/error-boundary";
+import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { abbrName, getImage } from "@/utils";
@@ -7,7 +8,6 @@ import cl from "clsx";
 import NextImage from "next/legacy/image";
 import NextLink from "next/link";
 import { Tag } from "./Tag";
-import { useFormatedDate } from "@/hooks/useFormatedDate";
 
 export type ArticleT = {
   _key: string;
@@ -72,6 +72,12 @@ const Card = ({ article, visible, index }: CardProps) => {
             article.status?.bilde ? (
               <NextImage
                 src={urlFor(article.status?.bilde).auto("format").url()}
+                blurDataURL={urlFor(article.status.bilde)
+                  .width(24)
+                  .height(24)
+                  .blur(10)
+                  .url()}
+                placeholder="blur"
                 width="200"
                 height="200"
                 alt={article.heading + " thumbnail"}
@@ -81,6 +87,12 @@ const Card = ({ article, visible, index }: CardProps) => {
               <div className="relative h-[200px] w-full">
                 <NextImage
                   src={urlFor(article.seo?.image).auto("format").url()}
+                  blurDataURL={urlFor(article.seo?.image)
+                    .width(24)
+                    .height(24)
+                    .blur(10)
+                    .url()}
+                  placeholder="blur"
                   layout="fill"
                   objectFit="cover"
                   alt={article.heading + " thumbnail"}

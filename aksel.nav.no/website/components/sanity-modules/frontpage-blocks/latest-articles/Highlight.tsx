@@ -1,3 +1,4 @@
+import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { getAuthors, getImage } from "@/utils";
@@ -7,7 +8,6 @@ import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { ArticleT } from "./Card";
 import { Tag } from "./Tag";
-import { useFormatedDate } from "@/hooks/useFormatedDate";
 
 export const Highlight = ({
   article,
@@ -35,6 +35,12 @@ export const Highlight = ({
         {useStatusImage ? (
           <Image
             src={urlFor(article.status.bilde).quality(100).auto("format").url()}
+            blurDataURL={urlFor(article.status.bilde)
+              .width(24)
+              .height(24)
+              .blur(10)
+              .url()}
+            placeholder="blur"
             quality={100}
             layout="fill"
             aria-hidden
@@ -49,6 +55,12 @@ export const Highlight = ({
         ) : article?.seo?.image ? (
           <Image
             src={urlFor(article.seo.image).quality(100).auto("format").url()}
+            blurDataURL={urlFor(article.seo.image)
+              .width(24)
+              .height(24)
+              .blur(10)
+              .url()}
+            placeholder="blur"
             quality={100}
             layout="fill"
             objectFit="cover"

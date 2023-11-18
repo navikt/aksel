@@ -134,6 +134,12 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
                   .auto("format")
                   .quality(100)
                   .url()}
+                blurDataURL={urlFor(blogg?.seo?.image)
+                  .width(24)
+                  .height(24)
+                  .blur(10)
+                  .url()}
+                placeholder="blur"
                 decoding="sync"
                 layout="fill"
                 objectFit="cover"
