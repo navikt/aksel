@@ -1,4 +1,3 @@
-import { StructureBuilder } from "sanity/desk";
 import {
   SANITY_API_VERSION,
   bloggKategorier,
@@ -23,12 +22,16 @@ import {
   TokenIcon,
 } from "@navikt/aksel-icons";
 import differenceInMonths from "date-fns/differenceInMonths";
+import { StructureResolver } from "sanity/desk";
 import { GodPraksisPanes } from "./god-praksis";
 import { Panes } from "./panes";
 
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
-/* import { WebPreview, JsonView } from './previews' */
+/**
+ * List of document-types added to structure.
+ * If not added to `filtered`, they will be shown as an entry on main studio view
+ */
 const filtered = [
   "ds_artikkel",
   "komponent_artikkel",
@@ -56,8 +59,8 @@ const filtered = [
   "aksel_feedback",
 ];
 
-export const structure = async (
-  S: StructureBuilder,
+export const structure: StructureResolver = async (
+  S,
   { currentUser, getClient }
 ) => {
   const ids = await getClient({ apiVersion: SANITY_API_VERSION })
@@ -74,12 +77,12 @@ export const structure = async (
     ["developer"].includes(x.name)
   );
 
-  let outdated = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
-    `*[$id in contributors[]->user_id.current]{_id, updateInfo}`,
-    { id: currentUser?.id }
-  );
-
-  outdated = outdated.filter((x) => isAfter(x.updateInfo?.lastVerified));
+  const outdated = (
+    await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
+      `*[$id in contributors[]->user_id.current]{_id, updateInfo}`,
+      { id: currentUser?.id }
+    )
+  ).filter((x) => isAfter(x.updateInfo?.lastVerified));
 
   return S.list()
     .title("Innholdstyper")
