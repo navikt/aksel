@@ -80,10 +80,6 @@ export const KomponentArtikkel = defineType({
           type: "image",
         }),
       ],
-      options: {
-        collapsible: true,
-        collapsed: false,
-      },
     }),
     defineField({
       title: "Sidebar index",

@@ -63,10 +63,6 @@ export const GrunnleggendeArtikkel = defineType({
           type: "image",
         },
       ],
-      options: {
-        collapsible: true,
-        collapsed: false,
-      },
     }),
     defineField({
       title: "Sidebar index",
