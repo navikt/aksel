@@ -73,7 +73,7 @@ const Page = (props: PageProps["props"]) => {
         image={props?.page?.seo?.image}
       />
 
-      <div className="bg-[#FEFCE9]">
+      <div className="bg-amber-50">
         <Header variant="blogg" />
         <main
           tabIndex={-1}

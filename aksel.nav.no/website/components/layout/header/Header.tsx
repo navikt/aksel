@@ -40,7 +40,7 @@ const Header = ({
   return (
     <header
       className={cl("z-20", {
-        "bg-[#FEFCE9]": variant === "blogg",
+        "bg-amber-50": variant === "blogg",
         "bg-surface-default": variant === "default",
         "bg-surface-subtle": variant === "subtle",
         "bg-surface-transparent": variant === "transparent",
