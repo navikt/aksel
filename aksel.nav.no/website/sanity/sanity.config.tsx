@@ -1,3 +1,4 @@
+import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
 import { table } from "@sanity/table";
@@ -6,18 +7,15 @@ import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
-import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
-import { InputWithCounter } from "./schema/custom-components";
-
-import { getTemplates } from "./util";
-
-import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,
   SANITY_PROJECT_ID,
   allArticleDocuments,
 } from "./config";
+import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
 import { schema } from "./schema";
+import { InputWithCounter } from "./schema/custom-components";
+import { getTemplates } from "./util";
 
 export const workspaceConfig = defineConfig([
   {
@@ -62,13 +60,7 @@ function defaultConfig() {
       },
     },
     document: {
-      newDocumentOptions: (prev, { currentUser }) => {
-        return currentUser.roles.find((x) =>
-          ["developer", "administrator"].includes(x.name)
-        )
-          ? [...getTemplates(prev), ...prev]
-          : getTemplates();
-      },
+      newDocumentOptions: getTemplates,
       unstable_comments: {
         enabled: true,
       },
