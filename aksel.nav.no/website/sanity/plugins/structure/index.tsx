@@ -1,5 +1,6 @@
 import { StructureBuilder } from "sanity/desk";
 import {
+  SANITY_API_VERSION,
   bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
@@ -59,7 +60,7 @@ export const structure = async (
   S: StructureBuilder,
   { currentUser, getClient }
 ) => {
-  const ids = await getClient({ apiVersion: "2021-06-07" })
+  const ids = await getClient({ apiVersion: SANITY_API_VERSION })
     .fetch(`*[_type == "editor"]{
       _id,
       user_id
@@ -73,7 +74,7 @@ export const structure = async (
     ["developer"].includes(x.name)
   );
 
-  let outdated = await getClient({ apiVersion: "2021-06-07" }).fetch(
+  let outdated = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
     `*[$id in contributors[]->user_id.current]{_id, updateInfo}`,
     { id: currentUser?.id }
   );

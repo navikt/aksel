@@ -5,7 +5,7 @@ export const clientConfig = {
   projectId: SANITY_PROJECT_ID,
   dataset: "production",
   useCdn: false,
-  apiVersion: "2021-05-31",
+  apiVersion: SANITY_API_VERSION,
 };
 
 export const allArticleDocuments = [

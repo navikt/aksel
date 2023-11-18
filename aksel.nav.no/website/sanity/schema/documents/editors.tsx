@@ -1,13 +1,14 @@
+import { SANITY_API_VERSION } from "@/sanity/config";
+import Avatar from "boring-avatars";
 import React from "react";
 import {
-  defineType,
-  defineField,
-  SlugSourceContext,
   InitialValueResolverContext,
+  SlugSourceContext,
+  defineField,
+  defineType,
 } from "sanity";
-import Avatar from "boring-avatars";
-import { EditorPreview } from "../custom-components/EditorPreview";
 import { EditorPage } from "../custom-components/EditorPage";
+import { EditorPreview } from "../custom-components/EditorPreview";
 
 const navn = [
   "Alpesteinbukk",
@@ -116,7 +117,7 @@ const generateName = async (
   ctx: SlugSourceContext | InitialValueResolverContext
 ) => {
   const names = await ctx
-    .getClient({ apiVersion: "2021-06-07" })
+    .getClient({ apiVersion: SANITY_API_VERSION })
     .fetch(`*[_type == "editor"].anon_navn.current`);
 
   let c = 0;

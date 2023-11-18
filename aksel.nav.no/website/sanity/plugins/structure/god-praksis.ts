@@ -1,9 +1,10 @@
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { FileXMarkIcon, TagIcon } from "@navikt/aksel-icons";
-
 import { StructureBuilder } from "sanity/desk";
+
 /* documentStore is in Alpha, so avoid using for now */
 export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
-  let tema = await getClient({ apiVersion: "2021-06-07" }).fetch(
+  let tema = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
     `*[_type == "aksel_tema"]{title,seksjoner, _id}`
   );
   tema = tema
@@ -21,7 +22,7 @@ export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
         )
     );
 
-  const ids = await getClient({ apiVersion: "2021-06-07" }).fetch(
+  const ids = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
     `*[_type == "aksel_artikkel"]{_id, tema}`
   );
 
