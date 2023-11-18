@@ -1,15 +1,15 @@
 import { defineField, defineType } from "sanity";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import { editorField } from "../presets/editors";
-import { groups } from "../presets/groups";
+import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { ingressField } from "../presets/ingress";
+import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 import { relevanteArtiklerField } from "../presets/relevante-artikler";
-import { SEOFields } from "../presets/seo";
+import BaseSEOPreset from "../presets/seo";
 import { skrivehjelp } from "../presets/skrivehjelp";
 import { sanitySlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
-import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 
 const prefix = "god-praksis/artikler/";
 
@@ -17,7 +17,7 @@ export const GodPraksisArtikkel = defineType({
   title: "God praksis artikkel",
   name: "aksel_artikkel",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   ...artikkelPreview("God praksis"),
   fields: [
     oppdateringsvarsel,
@@ -44,7 +44,7 @@ export const GodPraksisArtikkel = defineType({
       group: "innhold",
     }),
     relevanteArtiklerField,
-    SEOFields,
+    BaseSEOPreset,
     skrivehjelp,
   ],
 });

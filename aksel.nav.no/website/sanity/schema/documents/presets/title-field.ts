@@ -1,12 +1,11 @@
 import { defineField } from "sanity";
 
-/* TODO: Max-char counter */
 export const titleField = defineField({
   title: "Sidetittel",
   name: "heading",
   type: "string",
   group: "innhold",
-  description: "Bruk en kort og konsis tittel om mulig.",
+  description: "Bruk en kort og konsis tittel",
 
   validation: (Rule) => [
     Rule.required().min(3).error("Sidetittel må være på minst 3 tegn"),

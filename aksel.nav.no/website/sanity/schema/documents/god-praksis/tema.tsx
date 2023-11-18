@@ -1,14 +1,14 @@
-import { groups } from "../presets/groups";
 import { defineField, defineType } from "sanity";
-import { TemaView } from "../../custom-components/TemaView";
 import { TemaPreview } from "../../custom-components/TemaPreview";
-import { SEOFields } from "../presets/seo";
+import { TemaView } from "../../custom-components/TemaView";
+import SanityTabGroups from "../presets/groups";
+import BaseSEOPreset from "../presets/seo";
 
 export const Tema = defineType({
   title: "Aksel Tema",
   name: "aksel_tema",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   components: {
     preview: TemaPreview,
     item: TemaPreview,
@@ -156,6 +156,6 @@ export const Tema = defineType({
       ],
       validation: (Rule) => Rule.required().error("Tema må ha pictogram"),
     }),
-    SEOFields,
+    BaseSEOPreset,
   ],
 });

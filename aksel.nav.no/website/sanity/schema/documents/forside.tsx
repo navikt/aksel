@@ -1,13 +1,13 @@
 import { defineField, defineType } from "sanity";
 import { allArticleDocsRef } from "../../config";
-import { groups } from "./presets";
-import { SEOFields } from "./presets/seo";
+import SanityTabGroups from "./presets/groups";
+import BaseSEOPreset from "./presets/seo";
 
 export const Forside = defineType({
   title: "Forside Aksel",
   name: "aksel_forside",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   fields: [
     defineField({
       title: "God praksis intro",
@@ -51,7 +51,7 @@ export const Forside = defineType({
         }),
       ],
     }),
-    SEOFields,
+    BaseSEOPreset,
   ],
   preview: {
     prepare() {

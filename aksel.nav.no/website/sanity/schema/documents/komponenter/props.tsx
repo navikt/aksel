@@ -1,5 +1,3 @@
-/* import { ExampleKeys } from "website/component-examples"; */
-
 import { defineField, defineType } from "sanity";
 
 export const Props = defineType({

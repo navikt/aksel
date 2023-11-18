@@ -11,22 +11,25 @@ const decodeAssetId = (id) => {
   };
 };
 
-export const SEOFields = {
-  name: "seo",
-  type: "object",
+const BaseSEOPreset = {
   title: "SEO",
+  type: "object",
+  name: "seo",
   group: "seo",
   fields: [
     {
       name: "meta",
       type: "text",
-      title: "Meta/:og description",
-      description:
-        "Anbefalt maks 150-160 bokstaver. Erstatter ingress som <meta /> description",
+      title: "OG-description (valgfri)",
+      description: "Erstatter ingress som OG-description og meta-tag",
       rows: 3,
+      options: {
+        //@ts-ignore
+        maxLength: 160,
+      },
     },
     {
-      title: "og:Image",
+      title: "OG-image",
       name: "image",
       type: "image",
       description: "Anbefalt størrelse er 1200:630px",
@@ -39,7 +42,7 @@ export const SEOFields = {
           const { dimensions } = decodeAssetId(image.asset._ref);
           const aspectR = dimensions.width / dimensions.height;
           if (aspectR < 1.5 || aspectR > 2.4) {
-            return `Forventet aspect-ration rundt 1.91:1. Er nå: ${aspectR.toFixed(
+            return `Må ha aspect-ratio på ~1.91:1. Er nå: ${aspectR.toFixed(
               2
             )}:1. (${dimensions.width}px/${dimensions.height}px)`;
           }
@@ -48,3 +51,5 @@ export const SEOFields = {
     },
   ],
 };
+
+export default BaseSEOPreset;

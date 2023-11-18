@@ -1,10 +1,10 @@
 import { defineField, defineType } from "sanity";
 import { SANITY_API_VERSION, prinsippKategorier } from "../../../config";
 import { editorField } from "../presets/editors";
-import { groups } from "../presets/groups";
+import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { ingressField } from "../presets/ingress";
-import { SEOFields } from "../presets/seo";
+import BaseSEOPreset from "../presets/seo";
 import { titleField } from "../presets/title-field";
 
 const prefix = "prinsipper/";
@@ -13,7 +13,7 @@ export const Prinsipp = defineType({
   title: "Prinsipp artikkel",
   name: "aksel_prinsipp",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   preview: {
     select: {
       heading: "heading",
@@ -148,6 +148,6 @@ export const Prinsipp = defineType({
       type: "riktekst_prinsipp",
       group: "innhold",
     }),
-    SEOFields,
+    BaseSEOPreset,
   ],
 });
