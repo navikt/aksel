@@ -12,10 +12,12 @@ import { InputWithCounter } from "./schema/custom-components";
 import { getTemplates } from "./util";
 
 import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
-import { allArticleDocuments } from "./config";
+import {
+  SANITY_API_VERSION,
+  SANITY_PROJECT_ID,
+  allArticleDocuments,
+} from "./config";
 import { schema } from "./schema";
-
-const projectId = "hnbe3yhs";
 
 export const workspaceConfig = defineConfig([
   {
@@ -40,8 +42,8 @@ export const workspaceConfig = defineConfig([
 
 function defaultConfig() {
   return {
-    projectId,
-    apiVersion: "2021-10-21",
+    projectId: SANITY_PROJECT_ID,
+    apiVersion: SANITY_API_VERSION,
     schema,
     form: {
       components: {
@@ -101,7 +103,7 @@ function authStore(dataset: string) {
   return {
     redirectOnSingle: false,
     mode: "replace" as const,
-    projectId,
+    projectId: SANITY_PROJECT_ID,
     dataset,
     providers: [
       {

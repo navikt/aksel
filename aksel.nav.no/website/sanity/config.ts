@@ -1,5 +1,8 @@
+export const SANITY_PROJECT_ID = "hnbe3yhs";
+export const SANITY_API_VERSION = "2021-10-21";
+
 export const clientConfig = {
-  projectId: "hnbe3yhs",
+  projectId: SANITY_PROJECT_ID,
   dataset: "production",
   useCdn: false,
   apiVersion: "2021-05-31",

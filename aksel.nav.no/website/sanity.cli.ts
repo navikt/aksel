@@ -1,3 +1,4 @@
+import { SANITY_PROJECT_ID } from "@/sanity/config";
 import { defineCliConfig } from "sanity/cli";
 
 /**
@@ -11,7 +12,7 @@ import { defineCliConfig } from "sanity/cli";
  */
 export default defineCliConfig({
   api: {
-    projectId: "hnbe3yhs",
+    projectId: SANITY_PROJECT_ID,
     dataset: "production",
   },
 });
