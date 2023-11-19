@@ -1,3 +1,4 @@
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import { TerminalIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 
@@ -37,15 +38,13 @@ export const Kode = defineType({
       type: "string",
     }),
   ],
+  components: {
+    preview: (values) => (<SnippetLazy node={values as any} />) as any,
+  },
   preview: {
     select: {
-      code: "code",
       title: "title",
+      code: "code",
     },
-    prepare: ({ code, title }) => ({
-      title: code ? `${code?.code?.slice(0, 50)}...` : "Kode",
-      subtitle: title ?? "kode",
-      media: TerminalIcon,
-    }),
   },
 });

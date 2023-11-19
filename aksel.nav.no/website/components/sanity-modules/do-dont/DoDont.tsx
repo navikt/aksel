@@ -58,7 +58,8 @@ type DoDontProps = {
 };
 
 const DoDont = ({ node }: DoDontProps) => {
-  if (!node) return null;
+  console.log(node);
+  if (!node) return <div>dodont</div>;
 
   return (
     <div className="mb-8 last:mb-0">

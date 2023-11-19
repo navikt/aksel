@@ -28,8 +28,6 @@ export const InternalLinkRenderer = (props) => {
     (query) => client.fetch(query)
   );
 
-  console.log({ data, error, isValidating });
-
   if (
     error ||
     !data ||
