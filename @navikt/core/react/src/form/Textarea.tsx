@@ -47,7 +47,7 @@ export interface TextareaProps
    */
   resize?: boolean;
   /**
-   * Textarea will stopp growing and get a scrollbar when there's no more room to grow.
+   * Textarea will stop growing and get a scrollbar when there's no more room to grow.
    * Requires `display:flex` on the parent.
    * Experimental feature that may be removed or get breaking changes in a minor version.
    */
