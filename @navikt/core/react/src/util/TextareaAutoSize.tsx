@@ -124,11 +124,11 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         getStyleValue(computedStyle.borderTopWidth);
 
       // The height of the inner content
-      const innerHeight = inputShallow.scrollHeight;
+      const innerHeight = inputShallow.scrollHeight - padding;
 
       // Measure height of a textarea with a single row
       inputShallow.value = "x";
-      const singleRowHeight = inputShallow.scrollHeight;
+      const singleRowHeight = inputShallow.scrollHeight - padding;
 
       // The height of the outer content
       let outerHeight = innerHeight;
@@ -260,8 +260,6 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
             // Create a new layer, increase the isolation of the computed values
             transform: "translateZ(0)",
             ...style,
-            paddingTop: 0,
-            paddingBottom: 0,
           }}
         />
       </>
