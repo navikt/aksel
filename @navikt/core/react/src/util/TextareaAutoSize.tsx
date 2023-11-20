@@ -3,6 +3,44 @@ import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { debounce, mergeRefs, useClientLayoutEffect } from "../util";
 
+type State = {
+  outerHeightStyle?: number;
+  overflow?: boolean;
+};
+
+const updateState = (
+  prevState: State,
+  newState: Required<State>,
+  renders: React.MutableRefObject<number>
+) => {
+  const { outerHeightStyle, overflow } = newState;
+  // Need a large enough difference to update the height.
+  // This prevents infinite rendering loop.
+  if (
+    renders.current < 20 &&
+    ((outerHeightStyle > 0 &&
+      Math.abs((prevState.outerHeightStyle || 0) - outerHeightStyle) > 1) ||
+      prevState.overflow !== overflow)
+  ) {
+    renders.current += 1;
+    return {
+      overflow,
+      outerHeightStyle,
+    };
+  }
+  if (process.env.NODE_ENV !== "production") {
+    if (renders.current === 20) {
+      console.error(
+        [
+          "Textarea: Too many re-renders. The layout is unstable.",
+          "TextareaAutosize limits the number of renders to prevent an infinite loop.",
+        ].join("\n")
+      );
+    }
+  }
+  return prevState;
+};
+
 /**
  * https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/ownerDocument.ts
  * https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/ownerWindow.ts
@@ -51,11 +89,11 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
     ref
   ) => {
     const { current: isControlled } = useRef(value != null);
-    const inputRef = useRef<HTMLTextAreaElement | null>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
     const handleRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
-    const shadowRef = useRef<HTMLTextAreaElement | null>(null);
+    const shadowRef = useRef<HTMLTextAreaElement>(null);
     const renders = useRef(0);
-    const [state, setState] = useState<any>({});
+    const [state, setState] = useState<State>({});
 
     const getUpdatedState = React.useCallback(() => {
       if (!inputRef.current || !shadowRef.current) return;
@@ -120,57 +158,28 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
       }
 
       setState((prevState) => {
-        return updateState(prevState, newState);
+        return updateState(prevState, newState, renders);
       });
     }, [getUpdatedState]);
 
-    const updateState = (prevState, newState) => {
-      const { outerHeightStyle, overflow } = newState;
-      // Need a large enough difference to update the height.
-      // This prevents infinite rendering loop.
-      if (
-        renders.current < 20 &&
-        ((outerHeightStyle > 0 &&
-          Math.abs((prevState.outerHeightStyle || 0) - outerHeightStyle) > 1) ||
-          prevState.overflow !== overflow)
-      ) {
-        renders.current += 1;
-        return {
-          overflow,
-          outerHeightStyle,
-        };
-      }
-      if (process.env.NODE_ENV !== "production") {
-        if (renders.current === 20) {
-          console.error(
-            [
-              "Textarea: Too many re-renders. The layout is unstable.",
-              "TextareaAutosize limits the number of renders to prevent an infinite loop.",
-            ].join("\n")
-          );
-        }
-      }
-      return prevState;
-    };
-
-    const withFlushSync = () => {
-      const newState = getUpdatedState();
-
-      if (isEmpty(newState)) {
-        return;
-      }
-
-      // In React 18, state updates in a ResizeObserver's callback are happening after the paint which causes flickering
-      // when doing some visual updates in it. Using flushSync ensures that the dom will be painted after the states updates happen
-      // Related issue - https://github.com/facebook/react/issues/24331
-      ReactDOM.flushSync(() => {
-        setState((prevState) => {
-          return updateState(prevState, newState);
-        });
-      });
-    };
-
     React.useEffect(() => {
+      const withFlushSync = () => {
+        const newState = getUpdatedState();
+
+        if (isEmpty(newState)) {
+          return;
+        }
+
+        // In React 18, state updates in a ResizeObserver's callback are happening after the paint which causes flickering
+        // when doing some visual updates in it. Using flushSync ensures that the dom will be painted after the states updates happen
+        // Related issue - https://github.com/facebook/react/issues/24331
+        ReactDOM.flushSync(() => {
+          setState((prevState) => {
+            return updateState(prevState, newState, renders);
+          });
+        });
+      };
+
       const handleResize = debounce(() => {
         renders.current = 0;
 
@@ -197,7 +206,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
           resizeObserver.disconnect();
         }
       };
-    });
+    }, [getUpdatedState]);
 
     useClientLayoutEffect(() => {
       syncHeight();
@@ -263,7 +272,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
   }
 );
 
-function isEmpty(obj: any) {
+function isEmpty(obj: Record<string, unknown> | undefined): obj is undefined {
   return (
     obj === undefined ||
     obj === null ||
