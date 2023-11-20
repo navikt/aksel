@@ -11,7 +11,6 @@ import {
 import { Iframe } from "./IFrame";
 
 import {
-  ChatIcon,
   CircleSlashIcon,
   ComponentIcon,
   FileTextIcon,
@@ -23,10 +22,8 @@ import {
   TokenIcon,
 } from "@navikt/aksel-icons";
 import differenceInMonths from "date-fns/differenceInMonths";
-import { FeedbackView } from "./FeedbackPreview";
-import { FeedbackPanes } from "./feedback";
 import { GodPraksisPanes } from "./god-praksis";
-import { PanesWithCount } from "./with-count";
+import { Panes } from "./panes";
 
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
@@ -76,11 +73,6 @@ export const structure = async (
     ["developer"].includes(x.name)
   );
 
-  const feedback = await getClient({ apiVersion: "2021-06-07" }).fetch(
-    `*[_type == "aksel_feedback" && $id in doc_ref->contributors[]->user_id.current]{_id, behandlet}`,
-    { id: currentUser?.id }
-  );
-
   let outdated = await getClient({ apiVersion: "2021-06-07" }).fetch(
     `*[$id in contributors[]->user_id.current]{_id, updateInfo}`,
     { id: currentUser?.id }
@@ -112,64 +104,7 @@ export const structure = async (
               ),
           ]
         : []),
-      ...(feedback.length > 0
-        ? [
-            S.listItem()
-              .title(
-                `Tilbakemeldinger (${
-                  feedback.filter(
-                    (x) => !x._id.includes("draft") && x.behandlet === false
-                  ).length
-                })`
-              )
-              .icon(ChatIcon)
-              .child(
-                S.list()
-                  .title("Tilbakemeldinger.")
-                  .items([
-                    S.listItem()
-                      .title(
-                        `Nye tilbakemeldinger (${
-                          feedback.filter(
-                            (x) =>
-                              !x._id.includes("draft") && x.behandlet === false
-                          ).length
-                        })`
-                      )
-                      .child(
-                        S.documentList()
-                          .title(`Nye tilbakemeldinger`)
-                          .filter(
-                            `_type == 'aksel_feedback' && behandlet == false && _id in $ids`
-                          )
-                          .params({
-                            ids: feedback.map((x) => x?._id),
-                          })
-                      ),
-                    S.listItem()
-                      .title(
-                        `Ferdig behandlet (${
-                          feedback.filter(
-                            (x) =>
-                              !x._id.includes("draft") && x.behandlet === true
-                          ).length
-                        })`
-                      )
-                      .child(
-                        S.documentList()
-                          .title("Ferdig")
-                          .filter(
-                            `_type == 'aksel_feedback' && behandlet == true && _id in $ids`
-                          )
-                          .params({
-                            ids: feedback.map((x) => x?._id),
-                          })
-                      ),
-                  ])
-              ),
-            S.divider(),
-          ]
-        : [S.divider()]),
+      ...(outdated.length > 0 || !!editor ? [S.divider()] : []),
       S.listItem()
         .title("God Praksis")
         .icon(PencilBoardIcon)
@@ -227,12 +162,7 @@ export const structure = async (
                 .schemaType(`grunnleggende_landingsside`)
                 .id(`grunnleggende_landingsside_id1`),
               S.divider(),
-              ...(await PanesWithCount(
-                "ds_artikkel",
-                grunnleggendeKategorier,
-                getClient,
-                S
-              )),
+              ...Panes("ds_artikkel", grunnleggendeKategorier, S),
             ])
         ),
       S.listItem()
@@ -247,12 +177,7 @@ export const structure = async (
                 .schemaType(`templates_landingsside`)
                 .id(`templates_landingsside_id1`),
               S.divider(),
-              ...(await PanesWithCount(
-                "templates_artikkel",
-                templatesKategorier,
-                getClient,
-                S
-              )),
+              ...Panes("templates_artikkel", templatesKategorier, S),
             ])
         ),
       S.listItem()
@@ -267,12 +192,7 @@ export const structure = async (
                 .schemaType(`komponenter_landingsside`)
                 .id(`komponenter_landingsside_id1`),
               S.divider(),
-              ...(await PanesWithCount(
-                "komponent_artikkel",
-                komponentKategorier,
-                getClient,
-                S
-              )),
+              ...Panes("komponent_artikkel", komponentKategorier, S),
             ])
         ),
       S.listItem()
@@ -287,12 +207,7 @@ export const structure = async (
                 .schemaType(`blogg_landingsside`)
                 .id(`blogg_landingsside_id1`),
               S.divider(),
-              ...(await PanesWithCount(
-                "aksel_blogg",
-                [...bloggKategorier],
-                getClient,
-                S
-              )),
+              ...Panes("aksel_blogg", [...bloggKategorier], S),
             ])
         ),
       ...(adminOrDev
@@ -310,14 +225,6 @@ export const structure = async (
                       .schemaType(`aksel_forside`)
                       .icon(ImageIcon)
                       .id(`aksel_forside_dokument`),
-                    S.listItem()
-                      .title("Feedback")
-                      .icon(ChatIcon)
-                      .child(
-                        S.list()
-                          .title("Feedback")
-                          .items([...(await FeedbackPanes(getClient, S))])
-                      ),
 
                     S.listItem().title("Standalone-sider").child(
                       S.documentList()
@@ -442,7 +349,6 @@ export const defaultDocumentNode = (S, { schemaType }) => {
           url: (doc) => resolveProductionUrl(doc),
         })
         .title("Forhåndsvisning"),
-      S.view.component(FeedbackView).icon(ChatIcon).title("Tilbakemeldinger"),
     ]);
   }
   if (schemaType === "aksel_forside") {

@@ -1,13 +1,14 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Inverts when the underline appears. If this is false,
-   * the underline does not appear by default, but does appear when the link is hovered.
-   * This makes it more suitable for use when inlined in text.
+   * the underline only appears on hover.
+   *
+   * **NB: Underline can only be removed in menus etc. where it's obvious that it's a link.**
    * @default true
    */
   underline?: boolean;

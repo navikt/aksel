@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.10.4
+
+### Patch Changes
+
+- Gjør lukknapp i Alert til type button ([#2497](https://github.com/navikt/aksel/pull/2497))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.4
+  - @navikt/aksel-icons@5.10.4
+
 ## 5.10.3
 
 ### Patch Changes

@@ -5,22 +5,28 @@ const Example = () => {
   return (
     <Page
       footer={
-        <Box as="footer" background="surface-neutral-moderate" padding="8">
-          <Page.Block gutters>Footer</Page.Block>
-        </Box>
+        <Page.Block gutters as="footer">
+          <Box background="surface-neutral-moderate" padding="8">
+            Footer
+          </Box>
+        </Page.Block>
       }
     >
-      <Box as="header" background="surface-neutral-moderate" padding="8">
-        <Page.Block gutters>Header</Page.Block>
-      </Box>
-      <Box
-        as="main"
-        background="surface-alt-3-moderate"
-        padding="8"
-        paddingBlock="16"
-      >
-        <Page.Block gutters>Content</Page.Block>
-      </Box>
+      <Page.Block gutters as="header">
+        <Box background="surface-neutral-moderate" padding="8">
+          Header
+        </Box>
+      </Page.Block>
+      <Page.Block gutters as="main">
+        <Box background="surface-alt-3-moderate" paddingBlock="16" padding="8">
+          Med gutter
+        </Box>
+      </Page.Block>
+      <Page.Block as="main">
+        <Box background="surface-alt-3-subtle" paddingBlock="16" padding="8">
+          Uten gutter
+        </Box>
+      </Page.Block>
     </Page>
   );
 };
