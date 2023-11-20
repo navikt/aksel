@@ -1,6 +1,5 @@
-import { defineField, defineType } from "sanity";
-import { toPlainText } from "@portabletext/react";
 import { LightBulbIcon } from "@navikt/aksel-icons";
+import { defineField, defineType } from "sanity";
 
 export const Tips = defineType({
   name: "tips",
@@ -16,16 +15,19 @@ export const Tips = defineType({
         Rule.required().error("Tips-modul må ha noe innhold"),
     }),
   ],
+  components: {
+    preview: (values) => (
+      <div className="bg-surface-alt-3-subtle space-y-1 p-2">
+        <div className="flex items-center">
+          <LightBulbIcon aria-hidden className="!text-xl" /> Tips
+        </div>
+        <div>{(values as any)?.body}</div>
+      </div>
+    ),
+  },
   preview: {
     select: {
       body: "body",
-    },
-    prepare(selection) {
-      return {
-        title: toPlainText(selection?.body ?? []) ?? "",
-        subtitle: "Tips",
-        media: LightBulbIcon,
-      };
     },
   },
 });
