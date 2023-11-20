@@ -31,7 +31,7 @@ interface TextareaAutosizeProps
    */
   minRows?: number;
   /**
-   * TODO: Write desc and maybe find better name
+   * If true, textarea will never get `overflow:hidden`
    */
   autoScrollbar?: boolean;
 }

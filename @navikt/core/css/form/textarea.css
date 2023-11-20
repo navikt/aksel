@@ -85,6 +85,10 @@
   margin: -3px;
 }
 
+.navds-textarea--autoscrollbar .navds-textarea__input {
+  scrollbar-gutter: stable; /* Needed to prevent scrollbar from appearing too early */
+}
+
 /**
   Error handling
 */
