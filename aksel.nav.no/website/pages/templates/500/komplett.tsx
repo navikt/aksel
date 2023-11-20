@@ -105,8 +105,8 @@ function useDekorator() {
 }
 
 export const args = {
-  index: 1,
-  title: "Enkel",
-  desc: "I sin enkleste form skal 404-side inneholde en tittel, feilmelding, løsningsforslag og illustrasjon.",
+  index: 2,
+  title: "Komplett",
+  desc: "Burde inneholde et hint om hva som er feil, og en feil-id som kan screenshottes, CTA, og feilmelding på flere språk",
   sandbox: false,
 };

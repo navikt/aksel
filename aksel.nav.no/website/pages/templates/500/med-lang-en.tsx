@@ -35,10 +35,6 @@ export default function Example() {
                 </List.Item>
               </List>
 
-              <Box paddingBlock="8">
-                <BodyShort size="small">Feil-id: ##### </BodyShort>
-              </Box>
-
               <Heading level="1" size="large" spacing>
                 Something went wrong
               </Heading>
@@ -100,8 +96,8 @@ function useDekorator() {
 }
 
 export const args = {
-  index: 1,
-  title: "Enkel",
-  desc: "I sin enkleste form skal 404-side inneholde en tittel, feilmelding, løsningsforslag og illustrasjon.",
+  index: 5,
+  title: "Flerspråk",
+  desc: "Burde inneholde et hint om hva som er feil, og feilmelding på flere språk",
   sandbox: false,
 };

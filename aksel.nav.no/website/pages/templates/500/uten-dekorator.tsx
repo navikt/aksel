@@ -59,7 +59,7 @@ export default function Example() {
 
 export const args = {
   index: 1,
-  title: "Enkel",
-  desc: "I sin enkleste form skal 404-side inneholde en tittel, feilmelding, løsningsforslag og illustrasjon.",
+  title: "Uten Dekoratør",
+  desc: "En renere template som burde inneholde et hint om hva som er feil",
   sandbox: false,
 };

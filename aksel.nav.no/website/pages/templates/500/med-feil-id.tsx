@@ -1,7 +1,6 @@
 import {
   BodyShort,
   Box,
-  Button,
   HGrid,
   Heading,
   Link,
@@ -36,8 +35,8 @@ export default function Example() {
                 </List.Item>
               </List>
 
-              <Box paddingBlock="12 16">
-                <Button>Gå til Min side</Button>
+              <Box paddingBlock="8">
+                <BodyShort size="small">Feil-id: ##### </BodyShort>
               </Box>
             </Box>
           </HGrid>
@@ -92,8 +91,8 @@ function useDekorator() {
 }
 
 export const args = {
-  index: 3,
-  title: "Med CTA til side",
-  desc: "Burde inneholde et hint om hva som er feil, og en CTA til en side som kan være relevant for brukeren",
+  index: 4,
+  title: "Med feil-id",
+  desc: "Burde inneholde et hint om hva som er feil, og en feil-id som kan screenshottes",
   sandbox: false,
 };

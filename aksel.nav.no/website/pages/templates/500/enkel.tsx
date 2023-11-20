@@ -34,10 +34,6 @@ export default function Example() {
                   <Link href="https://nav.no/kontaktoss">kontakte oss</Link>
                 </List.Item>
               </List>
-
-              <Box paddingBlock="8">
-                <BodyShort size="small">Feil-id: ##### </BodyShort>
-              </Box>
             </Box>
           </HGrid>
         </Box>
@@ -93,6 +89,6 @@ function useDekorator() {
 export const args = {
   index: 1,
   title: "Enkel",
-  desc: "I sin enkleste form skal 404-side inneholde en tittel, feilmelding, løsningsforslag og illustrasjon.",
+  desc: "Burde inneholde et hint om hva som er feil",
   sandbox: false,
 };
