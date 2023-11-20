@@ -1,6 +1,7 @@
 import {
   BodyShort,
   Box,
+  Button,
   HGrid,
   Heading,
   Link,
@@ -37,6 +38,10 @@ export default function Example() {
 
               <Box paddingBlock="8">
                 <BodyShort size="small">Feil-id: ##### </BodyShort>
+              </Box>
+
+              <Box paddingBlock="12 16">
+                <Button>Gå til Min side</Button>
               </Box>
             </Box>
           </HGrid>

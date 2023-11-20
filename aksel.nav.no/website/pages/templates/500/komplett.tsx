@@ -1,6 +1,7 @@
 import {
   BodyShort,
   Box,
+  Button,
   HGrid,
   Heading,
   Link,
@@ -38,6 +39,19 @@ export default function Example() {
               <Box paddingBlock="8">
                 <BodyShort size="small">Feil-id: ##### </BodyShort>
               </Box>
+
+              <Box paddingBlock="12 16">
+                <Button>Gå til Min side</Button>
+              </Box>
+
+              <Heading level="1" size="large" spacing>
+                Something went wrong
+              </Heading>
+              <BodyShort>
+                Please refresh this page or try again in a few minutes. If the
+                problem persists,{" "}
+                <Link href="https://nav.no/kontaktoss">contact us</Link>
+              </BodyShort>
             </Box>
           </HGrid>
         </Box>
