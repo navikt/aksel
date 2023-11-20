@@ -99,7 +99,7 @@ export const HideLabel = () => {
 };
 
 export const MaxLength = () => {
-  return <Textarea maxLength={200} label="Ipsum enim quis culpa" />;
+  return <Textarea maxLength={50} label="Ipsum enim quis culpa" />;
 };
 
 export const MinRows = () => {
