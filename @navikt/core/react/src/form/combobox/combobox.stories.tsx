@@ -316,30 +316,26 @@ export const MaxSelectedOptions: StoryFunction = () => {
   );
 };
 
-export const WithError: StoryObject = {
-  args: {
-    error: "Du må velge en favorittfrukt.",
-  },
-  render: (props) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [hasSelectedValue, setHasSelectedValue] = useState(false);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [isLoading, setIsLoading] = useState(false);
-    return (
-      <UNSAFE_Combobox
-        filteredOptions={isLoading ? [] : undefined}
-        options={options}
-        label="Hva er dine favorittfrukter?"
-        error={!hasSelectedValue && props.error}
-        isLoading={isLoading}
-        onChange={() => {
-          setIsLoading(true);
-          setTimeout(() => setIsLoading(false), 2000);
-        }}
-        onToggleSelected={(_, isSelected) => setHasSelectedValue(isSelected)}
-      />
-    );
-  },
+export const WithError: StoryFunction = (props) => {
+  const [hasSelectedValue, setHasSelectedValue] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  return (
+    <UNSAFE_Combobox
+      filteredOptions={isLoading ? [] : undefined}
+      options={options}
+      label="Hva er dine favorittfrukter?"
+      error={!hasSelectedValue && props.error}
+      isLoading={isLoading}
+      onChange={() => {
+        setIsLoading(true);
+        setTimeout(() => setIsLoading(false), 2000);
+      }}
+      onToggleSelected={(_, isSelected) => setHasSelectedValue(isSelected)}
+    />
+  );
+};
+WithError.args = {
+  error: "Du må velge en favorittfrukt.",
 };
 
 function sleep(ms: number) {

@@ -36,6 +36,9 @@ const FilteredOptions = () => {
     maxSelectedMessage,
   } = useSelectedOptionsContext();
 
+  const isDisabled = (option) =>
+    !canSelectMoreOptions && !selectedOptions.includes(option);
+
   return (
     <ul
       ref={setFilteredOptionsRef}
@@ -53,6 +56,7 @@ const FilteredOptions = () => {
           role="option"
           aria-selected={false}
           id={`${id}-max-selected`}
+          data-no-focus="true"
         >
           {maxSelectedMessage && maxSelectedOptions
             ? maxSelectedMessage(selectedOptions.length, maxSelectedOptions)
@@ -89,10 +93,13 @@ const FilteredOptions = () => {
               toggleIsListOpen(false);
           }}
           id={filteredOptionsUtil.getAddNewOptionId(id)}
-          className={cl("navds-combobox__list-item__new-option", {
-            "navds-combobox__list-item__new-option--focus":
-              activeDecendantId === filteredOptionsUtil.getAddNewOptionId(id),
-          })}
+          className={cl(
+            "navds-combobox__list-item navds-combobox__list-item__new-option",
+            {
+              "navds-combobox__list-item__new-option--focus":
+                activeDecendantId === filteredOptionsUtil.getAddNewOptionId(id),
+            }
+          )}
           role="option"
           aria-selected={false}
         >
@@ -124,6 +131,7 @@ const FilteredOptions = () => {
             "navds-combobox__list-item--selected":
               selectedOptions.includes(option),
           })}
+          data-no-focus={isDisabled(option) || undefined}
           id={filteredOptionsUtil.getOptionId(id, option)}
           key={option}
           tabIndex={-1}
@@ -138,6 +146,9 @@ const FilteredOptions = () => {
             }
           }}
           onPointerUp={(event) => {
+            if (isDisabled(option)) {
+              return;
+            }
             toggleOption(option, event);
             if (!isMultiSelect && !selectedOptions.includes(option))
               toggleIsListOpen(false);
