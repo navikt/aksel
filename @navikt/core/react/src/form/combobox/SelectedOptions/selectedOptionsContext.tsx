@@ -19,6 +19,7 @@ type SelectedOptionsContextType = {
   selectedOptions: string[];
   maxSelectedOptions?: number;
   setSelectedOptions: (any) => void;
+  maxSelectedMessage?: (current: number, max: number) => string;
   toggleOption: (
     option: string,
     event: React.KeyboardEvent | React.PointerEvent
@@ -42,6 +43,7 @@ export const SelectedOptionsProvider = ({
     | "selectedOptions"
     | "onToggleSelected"
     | "maxSelectedOptions"
+    | "maxSelectedMessage"
   >;
 }) => {
   const { clearInput, focusInput } = useInputContext();
@@ -58,6 +60,7 @@ export const SelectedOptionsProvider = ({
     onToggleSelected,
     options,
     maxSelectedOptions,
+    maxSelectedMessage,
   } = value;
   const [internalSelectedOptions, setSelectedOptions] = useState<string[]>([]);
   const selectedOptions = useMemo(
@@ -146,6 +149,7 @@ export const SelectedOptionsProvider = ({
     setSelectedOptions,
     toggleOption,
     maxSelectedOptions,
+    maxSelectedMessage,
   };
 
   return (

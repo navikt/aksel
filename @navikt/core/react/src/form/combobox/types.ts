@@ -103,6 +103,14 @@ export interface ComboboxProps
    */
   maxSelectedOptions?: number;
   /**
+   * Message to display when the maximum number of selected options is reached.
+   *
+   * @param current - The current number of selected options
+   * @param max - The maximum number of selected options
+   * @returns The string / interpolated string to display
+   */
+  maxSelectedMessage?: (current: number, max: number) => string;
+  /**
    * Set to "true" to enable inline autocomplete.
    *
    * @default false

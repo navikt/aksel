@@ -33,6 +33,7 @@ const FilteredOptions = () => {
     selectedOptions,
     toggleOption,
     maxSelectedOptions,
+    maxSelectedMessage,
   } = useSelectedOptionsContext();
 
   return (
@@ -53,7 +54,9 @@ const FilteredOptions = () => {
           aria-selected={false}
           id={`${id}-max-selected`}
         >
-          {`${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
+          {maxSelectedMessage && maxSelectedOptions
+            ? maxSelectedMessage(selectedOptions.length, maxSelectedOptions)
+            : `${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
         </li>
       )}
       {isLoading && (
