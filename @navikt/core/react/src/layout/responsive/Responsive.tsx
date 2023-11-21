@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
-import { BreakpointsAlias } from "../utilities/css";
+import { BreakpointsAlias } from "../utilities/types";
 import { Slot } from "../../util/Slot";
 
 export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {

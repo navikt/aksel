@@ -1,6 +1,6 @@
-import { Heading, BodyLong } from "@navikt/ds-react";
+import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import React from "react";
-import { AkselCubeStatic } from "components/website-modules/cube";
 
 const MyError = ({ statusCode }) => {
   return (

@@ -27,7 +27,7 @@ export const BreadCrumbs = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={cl(
-          "transition-width text-deepblue-500 group-hover:text-deepblue-800 mr-2 h-[20px] w-[10px] group-hover:w-[16px]"
+          "text-deepblue-500 group-hover:text-deepblue-800 mr-2 h-[20px] w-[10px] transition-all group-hover:w-[16px]"
         )}
         aria-hidden
       >

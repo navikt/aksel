@@ -36,6 +36,10 @@ const StyleMappings = {
       main: primitivesCss,
     },
     {
+      component: "Page",
+      main: primitivesCss,
+    },
+    {
       component: "HGrid",
       main: primitivesCss,
     },
@@ -183,7 +187,7 @@ const StyleMappings = {
     {
       component: "DatePicker",
       main: "date.css",
-      dependencies: [typoCss, primitivesCss, "button.css", "popover.css"],
+      dependencies: [typoCss, "button.css", "popover.css", primitivesCss],
     },
     {
       component: "MonthPicker",

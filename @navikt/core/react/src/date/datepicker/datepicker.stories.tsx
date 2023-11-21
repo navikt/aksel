@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Meta, StoryObj } from "@storybook/react";
+import isSameDay from "date-fns/isSameDay";
 import React, { useId, useState } from "react";
 import { useDatepicker, useRangeDatepicker } from "..";
-import { Button, HGrid, VStack } from "../..";
+import { BodyLong, Button, HGrid, Modal, VStack } from "../..";
 import DatePicker, { DatePickerProps } from "./DatePicker";
-import isSameDay from "date-fns/isSameDay";
 
 const disabledDays = [
   new Date("Oct 10 2022"),
@@ -18,7 +18,6 @@ export default {
 
 type DefaultStoryProps = DatePickerProps & {
   size: "medium" | "small";
-  openOnFocus: boolean;
   inputfield: boolean;
   standalone: boolean;
 };
@@ -30,13 +29,11 @@ export const Default: StoryObj<DefaultStoryProps> = {
     const rangeCtx = useRangeDatepicker({
       fromDate: new Date("Aug 23 2020"),
       toDate: new Date("Aug 23 2023"),
-      openOnFocus: props.openOnFocus,
     });
 
     const singleCtx = useDatepicker({
       fromDate: new Date("Aug 23 2020"),
       toDate: new Date("Aug 23 2023"),
-      openOnFocus: props.openOnFocus,
     });
 
     const newProps = {
@@ -111,7 +108,6 @@ export const Default: StoryObj<DefaultStoryProps> = {
     disableWeekends: false,
     showWeekNumber: false,
     mode: "single",
-    openOnFocus: true,
     inputfield: true,
     standalone: false,
   },
@@ -181,21 +177,6 @@ export const UseRangedDatepicker = () => {
           <DatePicker.Input {...fromInputProps} label="Fra" />
           <DatePicker.Input {...toInputProps} label="Til" />
         </div>
-      </DatePicker>
-    </div>
-  );
-};
-
-export const OpenOnFocus = () => {
-  const { datepickerProps, inputProps } = useDatepicker({
-    onDateChange: console.log,
-    openOnFocus: false,
-  });
-
-  return (
-    <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...datepickerProps}>
-        <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
     </div>
   );
@@ -333,15 +314,32 @@ export const Size = () => {
     fromDate: new Date("Aug 23 2019"),
     toDate: new Date("Feb 23 2024"),
     onDateChange: console.log,
+    defaultSelected: new Date("Feb 23 2023"),
+  });
+  const { datepickerProps: d2, inputProps: i2 } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+    defaultSelected: new Date("Feb 23 2023"),
   });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...datepickerProps} dropdownCaption>
-        <DatePicker.Input size="medium" {...inputProps} label="Velg dato" />
+        <DatePicker.Input
+          placeholder="10/10/2023"
+          size="medium"
+          {...inputProps}
+          label="Velg dato"
+        />
       </DatePicker>
-      <DatePicker {...datepickerProps} dropdownCaption>
-        <DatePicker.Input size="small" {...inputProps} label="Velg dato" />
+      <DatePicker {...d2} dropdownCaption>
+        <DatePicker.Input
+          placeholder="10/10/2023"
+          size="small"
+          {...i2}
+          label="Velg dato"
+        />
       </DatePicker>
     </div>
   );
@@ -432,3 +430,43 @@ export const WeekDayClick = () => {
     </VStack>
   );
 };
+
+export const ModalDemo = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+  });
+  const [open, setOpen] = useState(true);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(!open)}>Open modal</Button>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        header={{ heading: "Modal-demo" }}
+      >
+        <Modal.Body style={{ position: "relative" }}>
+          <BodyLong spacing>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          </BodyLong>
+
+          <DatePicker {...datepickerProps} dropdownCaption>
+            <DatePicker.Input
+              {...inputProps}
+              label="Velg dato"
+              description="Format: dd.mm.yyyy"
+            />
+          </DatePicker>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button>Neste</Button>
+          <Button variant="secondary">Tilbake</Button>
+          <Button variant="tertiary">Avbryt</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
+ModalDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };

@@ -1,12 +1,9 @@
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
+import { AmplitudeEvents, amplitude } from "@/logging";
+import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Button, Heading } from "@navikt/ds-react";
-import Snippet from "components/sanity-modules/code/Snippet";
-import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import {
-  AmplitudeEvents,
-  logAmplitudeEvent,
-} from "components/website-modules/utils/amplitude";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -52,7 +49,7 @@ export const IconSidebar = ({
   }, [name]);
 
   const logDownload = (icon, format) => {
-    logAmplitudeEvent(AmplitudeEvents.ikonnedlastning, {
+    amplitude.track(AmplitudeEvents.ikonnedlastning, {
       icon,
       format,
     });
@@ -127,7 +124,7 @@ export const IconSidebar = ({
         Last ned
       </Button>
       <div className="mt-6 max-w-md">
-        <Snippet
+        <SnippetLazy
           node={{
             title: "Import",
             code: {
@@ -137,7 +134,7 @@ export const IconSidebar = ({
           }}
         />
 
-        <Snippet
+        <SnippetLazy
           node={{
             title: "React",
             code: {
@@ -147,7 +144,7 @@ export const IconSidebar = ({
           }}
         />
 
-        <Snippet
+        <SnippetLazy
           node={{
             title: "SVG",
             code: {

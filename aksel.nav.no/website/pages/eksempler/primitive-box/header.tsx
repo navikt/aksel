@@ -1,14 +1,14 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import {
+  BodyShort,
   Box,
   Detail,
   HStack,
   Heading,
-  BodyShort,
   Hide,
   Show,
   VStack,
 } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -49,21 +49,6 @@ const Example = () => {
       </div>
     </Box>
   );
-};
-
-export default withDsExample(Example, {
-  showBreakpoints: true,
-  variant: "full",
-});
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 8,
-  desc: "Box lar deg enklere bygge opp kjente grensesnitt gjennom felles tokens og brekkpunkt",
 };
 
 function Pictogram() {
@@ -114,3 +99,18 @@ function Pictogram() {
     </svg>
   );
 }
+
+export default withDsExample(Example, {
+  showBreakpoints: true,
+  variant: "full",
+});
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 8,
+  desc: "Box lar deg enklere bygge opp kjente grensesnitt gjennom felles tokens og brekkpunkt",
+};

@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { HStack, VStack } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -43,18 +43,6 @@ const Example = () => {
   );
 };
 
-export default withDsExample(Example, { showBreakpoints: true });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 2,
-  desc: "Endrer 'align-items'.",
-};
-
 const Placeholder = ({
   text,
   noPadding,
@@ -70,4 +58,16 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+export default withDsExample(Example, { showBreakpoints: true });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 2,
+  desc: "Endrer 'align-items'.",
 };

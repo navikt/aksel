@@ -117,6 +117,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
               size="small"
               variant="tertiary-neutral"
               onClick={onClose}
+              type="button"
               icon={<XMarkIcon title="Lukk Alert" />}
             />
           </div>

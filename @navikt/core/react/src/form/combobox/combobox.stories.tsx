@@ -499,6 +499,50 @@ export const TestThatCallbacksOnlyFireWhenExpected: StoryObj<{
   },
 };
 
+export const TestCasingWhenAutoCompleting = {
+  args: {
+    onChange: jest.fn(),
+    onClear: jest.fn(),
+    onToggleSelected: jest.fn(),
+  },
+  render: (props) => {
+    return (
+      <UNSAFE_Combobox
+        options={["Camel Case", "lowercase", "UPPERCASE"]}
+        label="Liker du best store eller små bokstaver?"
+        shouldAutocomplete
+        allowNewValues
+        {...props}
+      />
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole<HTMLInputElement>("combobox");
+
+    // With exisiting option
+    userEvent.click(input);
+    await userEvent.type(input, "cAmEl CaSe", { delay: 250 });
+    await sleep(250);
+    expect(input.value).toBe("cAmEl CaSe");
+    await userEvent.type(input, "{Enter}");
+    await sleep(250);
+    const chips = canvas.getAllByRole("list")[0];
+    const selectedUpperCaseChip = within(chips).getAllByRole("listitem")[0];
+    expect(selectedUpperCaseChip).toHaveTextContent("Camel Case"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
+
+    // With custom option
+    userEvent.click(input);
+    await userEvent.type(input, "cAmEl{Backspace}", { delay: 250 });
+    await sleep(250);
+    expect(input.value).toBe("cAmEl");
+    await userEvent.type(input, "{Enter}");
+    await sleep(250);
+    const selectedNewValueChip = within(chips).getAllByRole("listitem")[0];
+    expect(selectedNewValueChip).toHaveTextContent("cAmEl"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
+  },
+};
+
 export const TestHoverAndFocusSwitching: StoryObject = {
   render: () => {
     return (

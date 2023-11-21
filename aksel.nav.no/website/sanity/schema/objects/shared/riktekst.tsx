@@ -1,5 +1,5 @@
-import React from "react";
-import { allArticleDocsRef } from "../../../config";
+import InlineCode from "@/web/InlineCode";
+import KBD from "@/web/KBD";
 import {
   BulletListIcon,
   CodeIcon,
@@ -8,8 +8,8 @@ import {
   LinkIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
-import { KBD } from "components/website-modules/KBD";
-import { InlineCode } from "components/website-modules/InlineCode";
+import React from "react";
+import { allArticleDocsRef } from "../../../config";
 
 export const styles = [
   {
@@ -131,6 +131,7 @@ const Riktekst = (
   type:
     | "god-praksis"
     | "grunnleggende"
+    | "templates"
     | "komponent"
     | "prinsipp"
     | "standard"
@@ -169,6 +170,8 @@ const Riktekst = (
     "token_ref",
   ];
 
+  const templates = ["kode_eksempler"];
+
   const grunnleggende = ["spesial_seksjon"];
 
   fields.push(...standard);
@@ -183,11 +186,11 @@ const Riktekst = (
     case "prinsipp":
       fields.push("innholdskort");
       break;
-    case "standalone":
-      fields.push("uufeedback");
-      break;
     case "accordion":
       fields = [...accordion];
+      break;
+    case "templates":
+      fields.push(...templates);
       break;
     default:
       break;
@@ -257,5 +260,13 @@ export const RiktekstStandalone = {
   name: "riktekst_standalone",
   type: "array",
   of: Riktekst("standalone"),
+  icon: FileTextIcon,
+};
+
+export const RiktekstTemplates = {
+  title: "Riktekst",
+  name: "riktekst_templates",
+  type: "array",
+  of: Riktekst("templates"),
   icon: FileTextIcon,
 };

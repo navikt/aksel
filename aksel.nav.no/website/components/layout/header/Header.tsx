@@ -1,123 +1,96 @@
-import cl from "clsx";
-import Logo from "components/assets/Logo";
-import { Hamburger } from "components/layout/header/Hamburger";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { logNav } from "../..";
-import { Button } from "@navikt/ds-react";
-import dynamic from "next/dynamic";
+import AkselLogo from "@/assets/Logo";
+import { amplitudeLogNavigation } from "@/logging";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { Box, Button, HStack, Page, Show, Spacer } from "@navikt/ds-react";
+import cl from "clsx";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { Hamburger } from "./parts/Hamburger";
+import HeaderLink from "./parts/HeaderLink";
 
-export const GlobalSearch = dynamic(() => import("./search"), {
-  loading: () => (
-    <Button
-      variant="primary"
-      className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
-      aria-keyshortcuts="Control+b"
-      icon={
-        <MagnifyingGlassIcon
-          className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
-          aria-label="Åpne meny"
-          aria-hidden
-        />
-      }
-      iconPosition="left"
-    >
-      Søk
-    </Button>
-  ),
-  ssr: false,
-});
-
-const LinkElement = ({ name, href, prefetch = undefined }) => {
-  const { asPath } = useRouter();
-  return (
-    <li>
-      <Link
-        href={href}
-        prefetch={prefetch}
-        className={cl(
-          "text-deepblue-800 focus-visible:shadow-focus relative grid h-11 place-items-center rounded px-2 focus:outline-none",
-          {
-            "before:bg-deepblue-600 font-semibold before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
-              asPath.startsWith(href),
-            "hover:before:bg-border-subtle-hover before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
-              !asPath.startsWith(href),
-          }
-        )}
-        onClick={(e) =>
-          logNav(
-            "header",
-            window.location.pathname,
-            e.currentTarget.getAttribute("href")
-          )
+export const GlobalSearch = dynamic(
+  () => import("../../website-modules/search/Search"),
+  {
+    loading: () => (
+      <Button
+        variant="primary"
+        className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
+        aria-keyshortcuts="Control+b"
+        icon={
+          <MagnifyingGlassIcon
+            className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
+            aria-label="Åpne meny"
+            aria-hidden
+          />
         }
+        iconPosition="left"
       >
-        {name}
-      </Link>
-    </li>
-  );
-};
+        Søk
+      </Button>
+    ),
+    ssr: false,
+  }
+);
 
-export const Header = ({
+const Header = ({
   variant = "default",
 }: {
   variant?: "blogg" | "subtle" | "default" | "transparent";
 }) => {
   return (
-    <>
+    <header
+      className={cl("z-20", {
+        "bg-[#FEFCE9]": variant === "blogg",
+        "bg-surface-default": variant === "default",
+        "bg-surface-subtle": variant === "subtle",
+        "bg-surface-transparent": variant === "transparent",
+      })}
+    >
       <a className="skiplink" href="#hovedinnhold">
         Hopp til innhold
       </a>
-      <header
-        className={cl("h-header z-20", {
-          "bg-[#FEFCE9]": variant === "blogg",
-          "bg-surface-default": variant === "default",
-          "bg-surface-subtle": variant === "subtle",
-          "bg-surface-transparent": variant === "transparent",
-        })}
-      >
-        <div
-          className={cl(
-            "mx-auto flex h-full max-w-screen-2xl items-center pr-4 lg:pr-6"
-          )}
-        >
-          <div className="flex h-11 items-center pl-4 pr-4 sm:pl-4 sm:pr-6">
-            <Link
-              href="/"
-              passHref
-              onClick={(e) =>
-                logNav(
-                  "header",
-                  window.location.pathname,
-                  e.currentTarget.getAttribute("href")
-                )
-              }
-              className="focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
-            >
-              <Logo className="text-deepblue-800" />
-              <span className="sr-only">Aksel</span>
-            </Link>
-          </div>
-          <nav
-            className="ml-auto hidden h-full pr-2 lg:block lg:pr-8"
-            aria-label="Hovedmeny"
+      <Page.Block width="2xl">
+        <div className="h-header flex items-center pr-4 lg:pr-6">
+          <Link
+            href="/"
+            passHref
+            onClick={(e) =>
+              amplitudeLogNavigation(
+                "header",
+                e.currentTarget.getAttribute("href")
+              )
+            }
+            className="focus-visible:shadow-focus mx-4 grid h-11 place-items-center rounded px-2 focus:outline-none sm:mr-6"
           >
-            <ul className="hidden h-full items-center gap-2 md:flex">
-              <LinkElement name="God praksis" href="/god-praksis" />
-              <LinkElement name="Grunnleggende" href="/grunnleggende" />
-              <LinkElement name="Ikoner" href="/ikoner" prefetch={false} />
-              <LinkElement name="Komponenter" href="/komponenter" />
-              <LinkElement name="Bloggen" href="/produktbloggen" />
-            </ul>
-          </nav>
-          <div className="z-[1050] ml-auto mr-4 flex justify-center lg:ml-0 lg:mr-0">
-            <GlobalSearch />
-          </div>
+            <AkselLogo className="text-deepblue-800" />
+            <span className="sr-only">Aksel</span>
+          </Link>
 
-          <Hamburger />
+          <Spacer />
+          <Show above="lg" asChild>
+            <Box
+              as="nav"
+              paddingInline={{ xs: "0 2", lg: "0 8" }}
+              aria-label="Hovedmeny"
+            >
+              <HStack as="ul" gap="2" align="center">
+                <HeaderLink name="God praksis" href="/god-praksis" />
+                <HeaderLink name="Grunnleggende" href="/grunnleggende" />
+                <HeaderLink name="Ikoner" href="/ikoner" prefetch={false} />
+                <HeaderLink name="Komponenter" href="/komponenter" />
+                <HeaderLink name="Mønster & Maler" href="/monster-maler" />
+                <HeaderLink name="Bloggen" href="/produktbloggen" />
+              </HStack>
+            </Box>
+          </Show>
+          <HStack align="center" gap="2">
+            <GlobalSearch />
+            <Hamburger />
+          </HStack>
         </div>
-      </header>
-    </>
+      </Page.Block>
+    </header>
   );
 };
+
+export default Header;

@@ -1,6 +1,6 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -26,18 +26,6 @@ const Example = () => {
         }`}</style>
     </div>
   );
-};
-
-export default withDsExample(Example, { variant: "static" });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 4,
-  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser.",
 };
 
 const Innhold = () => (
@@ -93,3 +81,15 @@ const Innhold = () => (
     </div>
   </>
 );
+
+export default withDsExample(Example, { variant: "static" });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 4,
+  desc: "Tokens lar deg lett gjøre stilendringene du trenger uten å måtte overskrive css-klasser.",
+};

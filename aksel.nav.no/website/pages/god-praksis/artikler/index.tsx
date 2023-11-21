@@ -1,3 +1,6 @@
+import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { contributorsSingle } from "@/sanity/queries";
 import {
@@ -7,12 +10,9 @@ import {
   ResolveSlugT,
   ResolveTemaT,
 } from "@/types";
+import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
 import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import ArtikkelCard from "components/sanity-modules/cards/ArtikkelCard";
-import { AkselCubeStatic } from "components/website-modules/cube";
-import { SEO } from "components/website-modules/seo/SEO";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";

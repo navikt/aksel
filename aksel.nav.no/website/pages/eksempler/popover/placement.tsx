@@ -1,20 +1,17 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { BodyLong, Heading, Popover, Select } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 
 const Example = () => {
   const [anchor, setAnchor] = useState<HTMLSelectElement>(null);
-
-  const [placement, setPlacement] = useState<typeof options[number]>(
-    options[0]
-  );
+  const [placement, setPlacement] = useState<Option>(options[0]);
 
   return (
     <div className="py-32">
       <Select
         ref={setAnchor}
-        label="Velg placement"
-        onChange={(e) => setPlacement(e.target.value as typeof options[number])}
+        label="Velg 'placement'"
+        onChange={(e) => setPlacement(e.target.value as Option)}
       >
         {options.map((x) => (
           <option key={x} value={x}>
@@ -32,21 +29,14 @@ const Example = () => {
           <Heading level="2" size="xsmall" spacing>
             Lorem, ipsum dolor sit amet.
           </Heading>
-          <BodyLong style={{ maxWidth: 300 }}>
+          <BodyLong style={{ maxWidth: 250 }}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt sit,
-            repudiandae tempore fuga minima.
+            repudiandae tempore fuga.
           </BodyLong>
         </Popover.Content>
       </Popover>
     </div>
   );
-};
-
-export default withDsExample(Example);
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
 };
 
 const options = [
@@ -64,6 +54,16 @@ const options = [
   "left-end",
 ] as const;
 
+export default withDsExample(Example);
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+type Option = (typeof options)[number];
+
 export const args = {
-  index: 2,
+  index: 3,
+  desc: "Her kan du teste ulike 'placement'-verdier. Legg merke til at Popover overstyrer valget hvis hvis det ikke er plass i den retningen.",
 };

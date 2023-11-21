@@ -1,6 +1,6 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { PrinterSmallIcon } from "@navikt/aksel-icons";
 import { BodyLong, Link } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -23,5 +23,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 3,
 };

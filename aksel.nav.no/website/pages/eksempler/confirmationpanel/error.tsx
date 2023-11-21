@@ -1,5 +1,5 @@
-import { ConfirmationPanel } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { withDsExample } from "@/web/examples/withDsExample";
+import { ConfirmationPanel, Heading } from "@navikt/ds-react";
 import { useState } from "react";
 
 const Example = () => {
@@ -7,12 +7,13 @@ const Example = () => {
   return (
     <ConfirmationPanel
       checked={state}
-      label="Ja, jeg samtykker."
+      label="Jeg bekrefter at jeg vil svare så godt jeg kan på spørsmålene i søknaden."
       onChange={() => setState((x) => !x)}
-      error={!state && "Du må samtykke før du kan fortsette."}
+      error={!state && "Du må bekrefte før du kan fortsette."}
     >
-      For å komme videre må du gi oss lov til å hente inn og bruke opplysninger
-      om deg.
+      <Heading level="2" size="xsmall">
+        Vi stoler på deg
+      </Heading>
     </ConfirmationPanel>
   );
 };

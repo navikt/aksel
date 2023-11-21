@@ -14,13 +14,26 @@ export const KodeEksempelDoc = defineType({
       validation: (Rule) => Rule.required(),
       readOnly: true,
     }),
+
     defineField({
-      title: "Toggle om eksemplet er et dir eller filnavn",
-      name: "dir",
-      type: "boolean",
+      title: "Variant",
+      name: "variant",
+      type: "string",
       validation: (Rule) => Rule.required(),
-      initialValue: false,
       readOnly: true,
+      options: {
+        list: [
+          {
+            title: "Eksempler",
+            value: "eksempler",
+          },
+          {
+            title: "Templates",
+            value: "templates",
+          },
+        ],
+        layout: "radio",
+      },
     }),
     defineField({
       title: "Filer",
@@ -33,24 +46,62 @@ export const KodeEksempelDoc = defineType({
           name: "fil",
           type: "object",
           fields: [
+            { title: "Title", name: "title", type: "string" },
             { title: "Filnavn", name: "navn", type: "string" },
             { title: "Innhold", name: "innhold", type: "string" },
             { title: "Beskrivelse", name: "description", type: "text" },
+            { title: "Index", name: "index", type: "number" },
+            { title: "Enable Sandbox", name: "sandboxEnabled", type: "string" },
+            {
+              title: "Sandbox Base64-snippet",
+              name: "sandboxBase64",
+              type: "string",
+            },
           ],
         },
+      ],
+    }),
+    defineField({
+      title: "Metadata",
+      name: "metadata",
+      type: "object",
+      readOnly: true,
+      fields: [
+        defineField({
+          title: "Version",
+          name: "version",
+          type: "number",
+        }),
+        defineField({
+          title: "Changelog",
+          name: "changelog",
+          type: "array",
+          of: [
+            {
+              title: "Changelog-entry",
+              name: "entry",
+              type: "object",
+              fields: [
+                { title: "Description", name: "description", type: "string" },
+                { title: "Version", name: "version", type: "number" },
+                { title: "Date", name: "date", type: "string" },
+              ],
+            },
+          ],
+        }),
       ],
     }),
   ],
   preview: {
     select: {
       title: "title",
-      dir: "dir",
+      variant: "variant",
     },
     prepare(selection) {
-      const { title, dir } = selection;
+      const { title, variant } = selection;
       return {
         title,
-        subtitle: dir ? "Alle kode-eksempler" : "Spesifikt kode-eksempel",
+        subtitle: variant,
       };
     },
   },

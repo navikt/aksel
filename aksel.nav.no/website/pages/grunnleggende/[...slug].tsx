@@ -1,33 +1,35 @@
-import { dateStr } from "@/components";
+import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocumentsTmp } from "@/sanity/interface";
+import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselGrunnleggendeDocT,
-  AkselSidebarT,
   ArticleListT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  SidebarT,
+  TableOfContentsT,
 } from "@/types";
+import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
+import { StatusTag } from "@/web/StatusTag";
+import { SEO } from "@/web/seo/SEO";
 import { Detail } from "@navikt/ds-react";
-import { WithSidebar } from "components/layout/WithSidebar";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
-import { SEO } from "components/website-modules/seo/SEO";
-import { StatusTag } from "components/website-modules/StatusTag";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { GetStaticPaths, GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;
+  toc: TableOfContentsT;
 }>;
 
 export const query = `{
@@ -40,14 +42,14 @@ export const query = `{
         ${destructureBlocks}
       },
   },
-  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
+  "seo": *[_type == "grunnleggende_landingsside"][0].seo.image,
   ${sidebarQuery}
 }`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getDocumentsTmp("ds_artikkel").then((paths) =>
-      paths.map((slug) => ({
+    paths: await getDocuments("ds_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
         params: {
           slug: slug.split("/").filter((x) => x !== "grunnleggende"),
         },
@@ -74,19 +76,23 @@ export const getStaticProps: GetStaticProps = async ({
       page,
       slug: slug.slice(0, 2).join("/"),
       seo,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "grunnleggende"),
       preview,
       title: page?.heading ?? "",
       id: page?._id ?? "",
       refs: [],
       publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+      toc: generateTableOfContents({
+        type: "ds_artikkel",
+        content: page?.content,
+      }),
     },
     notFound: !page && !preview,
     revalidate: 60,
   };
 };
 
-const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
+const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
   }
@@ -102,7 +108,13 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Grunnleggende", title: page?.heading }}
+        toc={toc}
+        pageType={{
+          type: "grunnleggende",
+          title: page?.heading,
+          rootUrl: "/grunnleggende",
+          rootTitle: "Grunnleggende",
+        }}
         intro={
           <Detail as="div">
             <div className="mt-2 flex flex-wrap items-center gap-3">
@@ -124,7 +136,7 @@ const Page = ({ page, sidebar, seo, publishDate }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {
@@ -138,6 +150,23 @@ const Wrapper = (props: any) => {
             type: "ds_artikkel",
           }}
           props={props}
+          resolvers={[
+            {
+              key: "sidebar",
+              dataKeys: ["sidebar"],
+              cb: (v) => generateSidebar(v[0], "grunnleggende"),
+            },
+            {
+              key: "toc",
+              dataKeys: ["page.content", "page.intro"],
+              cb: (v) =>
+                generateTableOfContents({
+                  content: v[0],
+                  type: "ds_artikkel",
+                  intro: !!v[1],
+                }),
+            },
+          ]}
         />
       </Suspense>
     );

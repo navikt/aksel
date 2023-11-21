@@ -1,5 +1,147 @@
 # @navikt/ds-react
 
+## 5.10.4
+
+### Patch Changes
+
+- Gjør lukknapp i Alert til type button ([#2497](https://github.com/navikt/aksel/pull/2497))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.4
+  - @navikt/aksel-icons@5.10.4
+
+## 5.10.3
+
+### Patch Changes
+
+- :wheelchair: Textarea: Byttet fra `aria-live` til `role=status` på telleren for bedre semantikk ([#2483](https://github.com/navikt/aksel/pull/2483))
+
+- :bug: Textarea: Teller flyttet ut av tekstfeltet for å unngå overlapp og misforståelser ([#2483](https://github.com/navikt/aksel/pull/2483))
+
+- ErrorSummary: Gjør det mulig å rendre ErrorSummary.Item conditionally ([#2484](https://github.com/navikt/aksel/pull/2484))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.3
+  - @navikt/aksel-icons@5.10.3
+
+## 5.10.2
+
+### Patch Changes
+
+- OverridableComponent: Fungerer nå bedre ved bruk av typeof <komponent> ([#2474](https://github.com/navikt/aksel/pull/2474))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.2
+  - @navikt/aksel-icons@5.10.2
+
+## 5.10.1
+
+### Patch Changes
+
+- Table: Håndterer nå sjekk for interaktive elementer i ExpandableRow bedre ([#2461](https://github.com/navikt/aksel/pull/2461))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.1
+  - @navikt/aksel-icons@5.10.1
+
+## 5.10.0
+
+### Minor Changes
+
+- Primitives: Ny komponent `Page` og `Page.Block` ([#2456](https://github.com/navikt/aksel/pull/2456))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.10.0
+  - @navikt/aksel-icons@5.10.0
+
+## 5.9.2
+
+### Patch Changes
+
+- :bug: Datepicker lukker ikke lenger modalen den er i ([#2451](https://github.com/navikt/aksel/pull/2451))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.9.2
+  - @navikt/aksel-icons@5.9.2
+
+## 5.9.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.9.1
+  - @navikt/aksel-icons@5.9.1
+
+## 5.9.0
+
+### Minor Changes
+
+- Datepicker/Monthpicker: Hvis man bruker komponentene i Modal vil Popover bli erstattet med Modal uansett om man er på desktop eller mobil. ([#2419](https://github.com/navikt/aksel/pull/2419))
+
+- Datepicker/Monthpicker/Popover: Fjernet `bubbleEscape`-prop. ([#2419](https://github.com/navikt/aksel/pull/2419))
+
+- useDatepicker/useMonthPicker/useRangedpicker: Fjernet `openOnFocus`-prop, kan nå bare åpnes ved klikk på date-knapp i input. ([#2419](https://github.com/navikt/aksel/pull/2419))
+
+- Datepicker/Monthpicker: Bytter nå automatisk til Modalvisning på mobil. ([#2419](https://github.com/navikt/aksel/pull/2419))
+
+### Patch Changes
+
+- Added useVirtualFocus hook - used in Combobox for now ([#2394](https://github.com/navikt/aksel/pull/2394))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.9.0
+  - @navikt/aksel-icons@5.9.0
+
+## 5.8.0
+
+### Minor Changes
+
+- :sparkles: Modal: Støtte for å lukke ved klikk utenfor ([#2386](https://github.com/navikt/aksel/pull/2386))
+
+### Patch Changes
+
+- Autocomplete in combobox will not change formatting of the letters while being typed, but will use the casing of the autocompleted word when selecting the option. ([#2207](https://github.com/navikt/aksel/pull/2207))
+
+- Accordion: Fikset dom-validering ved bruk av `div` i `button`. ([#2426](https://github.com/navikt/aksel/pull/2426))
+
+- :bug: Modal: Bedre støtte for Tooltip i Modal ([#2429](https://github.com/navikt/aksel/pull/2429))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.8.0
+  - @navikt/aksel-icons@5.8.0
+
+## 5.7.6
+
+### Patch Changes
+
+- :lipstick: Chips.Toggle: Ikon i uvalgt tilstand ([#2395](https://github.com/navikt/aksel/pull/2395))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.6
+  - @navikt/aksel-icons@5.7.6
+
+## 5.7.5
+
+### Patch Changes
+
+- Loader: Har nå riktig `ref`-type. ([#2391](https://github.com/navikt/aksel/pull/2391))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.5
+  - @navikt/aksel-icons@5.7.5
+
+## 5.7.4
+
+### Patch Changes
+
+- Datepicker: Fungerer nå bedre i Modal ([#2400](https://github.com/navikt/aksel/pull/2400))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.7.4
+  - @navikt/aksel-icons@5.7.4
+
 ## 5.7.3
 
 ### Patch Changes

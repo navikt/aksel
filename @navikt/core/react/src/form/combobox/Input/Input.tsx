@@ -9,6 +9,7 @@ import cl from "clsx";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useInputContext } from "./inputContext";
+import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
@@ -31,44 +32,55 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       allowNewValues,
       currentOption,
       filteredOptions,
+      isValueNew,
       toggleIsListOpen,
       isListOpen,
-      filteredOptionsIndex,
-      moveFocusUp,
-      moveFocusDown,
       ariaDescribedBy,
-      moveFocusToInput,
-      moveFocusToEnd,
-      setFilteredOptionsIndex,
       setIsMouseLastUsedInputDevice,
       shouldAutocomplete,
+      virtualFocus,
     } = useFilteredOptionsContext();
 
     const onEnter = useCallback(
       (event: React.KeyboardEvent) => {
+        const isTextInSelectedOptions = (text: string) => {
+          return selectedOptions.find(
+            (item) => item.toLocaleLowerCase() === text.toLocaleLowerCase()
+          );
+        };
+
         if (currentOption) {
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption, event);
-          if (!isMultiSelect && !selectedOptions.includes(currentOption))
+          if (!isMultiSelect && !isTextInSelectedOptions(currentOption)) {
             toggleIsListOpen(false);
-        } else if (shouldAutocomplete && selectedOptions.includes(value)) {
+          }
+        } else if (shouldAutocomplete && isTextInSelectedOptions(value)) {
           event.preventDefault();
           // Trying to set the same value that is already set, so just clearing the input
           clearInput(event);
         } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
           event.preventDefault();
           // Autocompleting or adding a new value
-          toggleOption(value, event);
-          if (!isMultiSelect && !selectedOptions.includes(value))
+          const selectedValue =
+            allowNewValues && isValueNew ? value : filteredOptions[0];
+          toggleOption(selectedValue, event);
+          if (
+            !isMultiSelect &&
+            !isTextInSelectedOptions(filteredOptions[0] || selectedValue)
+          ) {
             toggleIsListOpen(false);
+          }
         }
       },
       [
         allowNewValues,
         clearInput,
         currentOption,
+        filteredOptions,
         isMultiSelect,
+        isValueNew,
         selectedOptions,
         shouldAutocomplete,
         toggleIsListOpen,
@@ -89,10 +101,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           onEnter(e);
           break;
         case "Home":
-          moveFocusToInput();
+          virtualFocus.moveFocusToTop();
           break;
         case "End":
-          moveFocusToEnd();
+          virtualFocus.moveFocusToBottom();
           break;
         default:
           break;
@@ -113,14 +125,20 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           // so we don't interfere with text editing
           if (e.target.selectionStart === value?.length) {
             e.preventDefault();
-            moveFocusDown();
+            if (virtualFocus.activeElement === null || !isListOpen) {
+              toggleIsListOpen(true);
+            }
+            virtualFocus.moveFocusDown();
           }
         } else if (e.key === "ArrowUp") {
           // Check that the FilteredOptions list is open and has virtual focus.
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
-          if (isListOpen && filteredOptionsIndex !== null) {
+          if (isListOpen && activeDecendantId) {
             e.preventDefault();
-            moveFocusUp();
+            if (virtualFocus.isFocusOnTheTop) {
+              toggleIsListOpen(false);
+            }
+            virtualFocus.moveFocusUp();
           }
         }
       },
@@ -128,11 +146,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         value,
         selectedOptions,
         removeSelectedOption,
-        moveFocusDown,
         isListOpen,
-        filteredOptionsIndex,
-        moveFocusUp,
+        activeDecendantId,
         setIsMouseLastUsedInputDevice,
+        toggleIsListOpen,
+        virtualFocus,
       ]
     );
 
@@ -144,13 +162,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (filteredOptions.length === 0) {
           toggleIsListOpen(false);
         }
+        virtualFocus.moveFocusToTop();
         onChange(event);
       },
-      [filteredOptions.length, onChange, toggleIsListOpen]
+      [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen]
     );
 
     const onBlur = () => {
-      setFilteredOptionsIndex(-1);
+      virtualFocus.moveFocusToTop();
     };
 
     return (
@@ -165,7 +184,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onBlur={onBlur}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
-        aria-controls={`${inputProps.id}-filtered-options`}
+        aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}
         aria-expanded={!!isListOpen}
         autoComplete="off"
         aria-autocomplete={shouldAutocomplete ? "both" : "list"}

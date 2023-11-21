@@ -1,5 +1,5 @@
-import { Search, Spacer, InternalHeader } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { withDsExample } from "@/web/examples/withDsExample";
+import { InternalHeader, Search, Spacer } from "@navikt/ds-react";
 
 const Example = () => {
   return (

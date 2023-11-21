@@ -1,11 +1,9 @@
 import React, {
   useState,
-  useEffect,
   useMemo,
   createContext,
   useContext,
   useCallback,
-  useRef,
   SetStateAction,
 } from "react";
 import cl from "clsx";
@@ -13,26 +11,29 @@ import { useCustomOptionsContext } from "../customOptionsContext";
 import { useInputContext } from "../Input/inputContext";
 import usePrevious from "../../../util/usePrevious";
 import { useClientLayoutEffect } from "../../../util";
+import filteredOptionsUtils from "./filtered-options-util";
+import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
+import { ComboboxProps } from "../types";
 
-const normalizeText = (text: string): string =>
-  typeof text === "string" ? `${text}`.toLowerCase().trim() : "";
-
-const isPartOfText = (value, text) =>
-  normalizeText(text).startsWith(normalizeText(value ?? ""));
-
-const isValueInList = (value, list) =>
-  list?.find((listItem) => normalizeText(value) === normalizeText(listItem));
-
-const getMatchingValuesFromList = (value, list) =>
-  list?.filter((listItem) => isPartOfText(value, listItem));
+type FilteredOptionsProps = {
+  children: any;
+  value: Pick<
+    ComboboxProps,
+    | "allowNewValues"
+    | "filteredOptions"
+    | "isListOpen"
+    | "isLoading"
+    | "options"
+  >;
+};
 
 type FilteredOptionsContextType = {
   activeDecendantId?: string;
   allowNewValues?: boolean;
   ariaDescribedBy?: string;
-  filteredOptionsRef: React.RefObject<HTMLUListElement>;
-  filteredOptionsIndex: number | null;
-  setFilteredOptionsIndex: (index: number) => void;
+  setFilteredOptionsRef: React.Dispatch<
+    React.SetStateAction<HTMLUListElement | null>
+  >;
   isListOpen: boolean;
   isLoading?: boolean;
   filteredOptions: string[];
@@ -40,19 +41,18 @@ type FilteredOptionsContextType = {
   setIsMouseLastUsedInputDevice: React.Dispatch<SetStateAction<boolean>>;
   isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
-  currentOption: string | null;
-  resetFilteredOptionsIndex: () => void;
-  moveFocusUp: () => void;
-  moveFocusDown: () => void;
-  moveFocusToInput: () => void;
-  moveFocusToEnd: () => void;
+  currentOption?: string;
   shouldAutocomplete?: boolean;
+  virtualFocus: VirtualFocusType;
 };
 const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
   {} as FilteredOptionsContextType
 );
 
-export const FilteredOptionsProvider = ({ children, value: props }) => {
+export const FilteredOptionsProvider = ({
+  children,
+  value: props,
+}: FilteredOptionsProps) => {
   const {
     allowNewValues,
     filteredOptions: externalFilteredOptions,
@@ -60,7 +60,9 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     isLoading,
     options,
   } = props;
-  const filteredOptionsRef = useRef<HTMLUListElement | null>(null);
+  const [filteredOptionsRef, setFilteredOptionsRef] =
+    useState<HTMLUListElement | null>(null);
+  const virtualFocus = useVirtualFocus(filteredOptionsRef);
   const {
     inputProps: { "aria-describedby": partialAriaDescribedBy, id },
     value,
@@ -70,9 +72,6 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     shouldAutocomplete,
   } = useInputContext();
 
-  const [filteredOptionsIndex, setFilteredOptionsIndex] = useState<
-    number | null
-  >(null);
   const [isInternalListOpen, setInternalListOpen] = useState(false);
   const { customOptions } = useCustomOptionsContext();
 
@@ -81,8 +80,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
       return externalFilteredOptions;
     }
     const opts = [...customOptions, ...options];
-    setFilteredOptionsIndex(null);
-    return getMatchingValuesFromList(searchTerm, opts);
+    return filteredOptionsUtils.getMatchingValuesFromList(searchTerm, opts);
   }, [customOptions, externalFilteredOptions, options, searchTerm]);
 
   const previousSearchTerm = usePrevious(searchTerm);
@@ -90,13 +88,28 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
   const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] =
     useState(false);
 
+  const filteredOptionsMap = useMemo(
+    () =>
+      options.reduce(
+        (map, _option) => ({
+          ...map,
+          [filteredOptionsUtils.getOptionId(id, _option)]: _option,
+        }),
+        {
+          [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
+            ? value
+            : undefined,
+        }
+      ),
+    [allowNewValues, id, options, value]
+  );
+
   useClientLayoutEffect(() => {
     if (
       shouldAutocomplete &&
-      normalizeText(searchTerm) !== "" &&
+      filteredOptionsUtils.normalizeText(searchTerm) !== "" &&
       (previousSearchTerm?.length || 0) < searchTerm.length &&
-      filteredOptions.length > 0 &&
-      !isValueInList(searchTerm, filteredOptions)
+      filteredOptions.length > 0
     ) {
       setValue(
         `${searchTerm}${filteredOptions[0].substring(searchTerm.length)}`
@@ -116,29 +129,30 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     return isExternalListOpen ?? isInternalListOpen;
   }, [isExternalListOpen, isInternalListOpen]);
 
-  const toggleIsListOpen = useCallback((newState?: boolean) => {
-    setFilteredOptionsIndex(null);
-    setInternalListOpen((oldState) => newState ?? !oldState);
-  }, []);
-
-  const isValueNew = useMemo(
-    () => Boolean(value) && !isValueInList(value, filteredOptions),
-    [value, filteredOptions]
+  const toggleIsListOpen = useCallback(
+    (newState?: boolean) => {
+      virtualFocus.moveFocusToTop();
+      setInternalListOpen((oldState) => newState ?? !oldState);
+    },
+    [virtualFocus]
   );
 
-  const getMinimumIndex = useCallback(() => {
-    return isValueNew && allowNewValues ? -1 : 0;
-  }, [allowNewValues, isValueNew]);
+  const isValueNew = useMemo(
+    () =>
+      Boolean(value) &&
+      !filteredOptionsMap[filteredOptionsUtils.getOptionId(id, value)],
+    [filteredOptionsMap, id, value]
+  );
 
   const ariaDescribedBy = useMemo(() => {
     let activeOption;
     if (!isLoading && filteredOptions.length === 0) {
-      activeOption = `${id}-no-hits`;
+      activeOption = filteredOptionsUtils.getNoHitsId(id);
     } else if ((value && value !== "") || isLoading) {
       if (shouldAutocomplete && filteredOptions[0]) {
-        activeOption = `${id}-option-${filteredOptions[0].replace(" ", "-")}`;
+        activeOption = filteredOptionsUtils.getOptionId(id, filteredOptions[0]);
       } else if (isListOpen && isLoading) {
-        activeOption = `${id}-is-loading`;
+        activeOption = filteredOptionsUtils.getIsLoadingId(id);
       }
     }
     return cl(activeOption, partialAriaDescribedBy) || undefined;
@@ -152,102 +166,21 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     id,
   ]);
 
-  const currentOption = useMemo(() => {
-    if (filteredOptionsIndex == null) {
-      return null;
-    }
-    if (filteredOptionsIndex === -1) {
-      return value;
-    }
-    return filteredOptions[filteredOptionsIndex];
-  }, [filteredOptionsIndex, filteredOptions, value]);
+  const currentOption = useMemo(
+    () =>
+      filteredOptionsMap[virtualFocus.activeElement?.getAttribute("id") || -1],
+    [filteredOptionsMap, virtualFocus]
+  );
 
-  const resetFilteredOptionsIndex = () => {
-    setFilteredOptionsIndex(getMinimumIndex());
-  };
-
-  const scrollToOption = useCallback((newIndex: number) => {
-    if (
-      filteredOptionsRef.current &&
-      filteredOptionsRef.current.children[newIndex]
-    ) {
-      const child = filteredOptionsRef.current.children[newIndex];
-      const { top, bottom } = child.getBoundingClientRect();
-      const parentRect = filteredOptionsRef.current.getBoundingClientRect();
-      if (top < parentRect.top || bottom > parentRect.bottom) {
-        child.scrollIntoView({ block: "nearest" });
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    if (filteredOptionsIndex !== null && isListOpen) {
-      scrollToOption(filteredOptionsIndex);
-    }
-  }, [filteredOptionsIndex, isListOpen, scrollToOption]);
-
-  const moveFocusToInput = useCallback(() => {
-    setFilteredOptionsIndex(null);
-    toggleIsListOpen(false);
-  }, [toggleIsListOpen]);
-
-  const moveFocusToEnd = useCallback(() => {
-    const lastIndex = filteredOptions.length - 1;
-    toggleIsListOpen(true);
-    setFilteredOptionsIndex(lastIndex);
-  }, [filteredOptions.length, toggleIsListOpen]);
-
-  const moveFocusUp = useCallback(() => {
-    if (filteredOptionsIndex === null) {
-      return;
-    }
-    if (filteredOptionsIndex === getMinimumIndex()) {
-      toggleIsListOpen(false);
-      setFilteredOptionsIndex(null);
-    } else {
-      const newIndex = Math.max(getMinimumIndex(), filteredOptionsIndex - 1);
-      setFilteredOptionsIndex(newIndex);
-    }
-  }, [filteredOptionsIndex, getMinimumIndex, toggleIsListOpen]);
-
-  const moveFocusDown = useCallback(() => {
-    if (filteredOptionsIndex === null || !isListOpen) {
-      toggleIsListOpen(true);
-      if (allowNewValues || filteredOptions.length >= 1) {
-        setFilteredOptionsIndex(getMinimumIndex());
-      }
-      return;
-    }
-    const newIndex = Math.min(
-      filteredOptionsIndex + 1,
-      Math.max(getMinimumIndex(), filteredOptions.length - 1)
-    );
-    setFilteredOptionsIndex(newIndex);
-  }, [
-    allowNewValues,
-    filteredOptions.length,
-    filteredOptionsIndex,
-    getMinimumIndex,
-    isListOpen,
-    toggleIsListOpen,
-  ]);
-
-  const activeDecendantId = useMemo(() => {
-    if (filteredOptionsIndex === null) {
-      return undefined;
-    } else if (filteredOptionsIndex === -1) {
-      return `${id}-combobox-new-option`;
-    } else {
-      return `${id}-option-${currentOption?.replace(" ", "-")}`;
-    }
-  }, [filteredOptionsIndex, currentOption, id]);
+  const activeDecendantId = useMemo(
+    () => virtualFocus.activeElement?.getAttribute("id") || undefined,
+    [virtualFocus.activeElement]
+  );
 
   const filteredOptionsState = {
     activeDecendantId,
     allowNewValues,
-    filteredOptionsRef,
-    filteredOptionsIndex,
-    setFilteredOptionsIndex,
+    setFilteredOptionsRef,
     shouldAutocomplete,
     isListOpen,
     isLoading,
@@ -257,11 +190,7 @@ export const FilteredOptionsProvider = ({ children, value: props }) => {
     isValueNew,
     toggleIsListOpen,
     currentOption,
-    resetFilteredOptionsIndex,
-    moveFocusUp,
-    moveFocusDown,
-    moveFocusToInput,
-    moveFocusToEnd,
+    virtualFocus,
     ariaDescribedBy,
   };
 

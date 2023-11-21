@@ -4,8 +4,8 @@ import {
   PaperplaneIcon,
 } from "@navikt/aksel-icons";
 
+import { withDsExample } from "@/web/examples/withDsExample";
 import { Tabs } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 import { useState } from "react";
 
 const Example = () => {

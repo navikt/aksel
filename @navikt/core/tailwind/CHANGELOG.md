@@ -1,5 +1,33 @@
 # @navikt/ds-tailwind
 
+## 5.10.4
+
+## 5.10.3
+
+### Patch Changes
+
+- typescript types for tailwind preset ([#2486](https://github.com/navikt/aksel/pull/2486))
+
+## 5.10.2
+
+## 5.10.1
+
+## 5.10.0
+
+## 5.9.2
+
+## 5.9.1
+
+## 5.9.0
+
+## 5.8.0
+
+## 5.7.6
+
+## 5.7.5
+
+## 5.7.4
+
 ## 5.7.3
 
 ## 5.7.2

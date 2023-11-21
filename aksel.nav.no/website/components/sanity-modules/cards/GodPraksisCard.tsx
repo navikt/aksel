@@ -1,13 +1,17 @@
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
+import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { AkselTemaT } from "@/types";
-import { logNav } from "@/utils";
 import { BodyShort } from "@navikt/ds-react";
 import cl from "clsx";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 
-const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
+type GodPraksisCardProps = {
+  node: AkselTemaT;
+};
+
+const GodPraksisCard = ({ node }: GodPraksisCardProps) => {
   if (
     !node?.pictogram ||
     !node?.slug?.current ||
@@ -33,11 +37,7 @@ const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
         href={`/god-praksis/${node.slug.current}`}
         passHref
         onClick={(e) =>
-          logNav(
-            "card",
-            window.location.pathname,
-            e.currentTarget.getAttribute("href")
-          )
+          amplitudeLogNavigation("card", e.currentTarget.getAttribute("href"))
         }
         className="navds-heading--medium text-deepblue-700 navds-heading  mb-4 underline after:absolute after:inset-0 after:rounded-lg focus:outline-none group-hover:no-underline"
       >
@@ -51,4 +51,10 @@ const GodPraksisCard = ({ node }: { node: AkselTemaT }) => {
   );
 };
 
-export default withErrorBoundary(GodPraksisCard, "GodPraksisCard");
+export default function Component(props: GodPraksisCardProps) {
+  return (
+    <ErrorBoundary boundaryName="GodPraksisCard">
+      <GodPraksisCard {...props} />
+    </ErrorBoundary>
+  );
+}

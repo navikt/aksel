@@ -12,14 +12,15 @@
     "test": "yarn workspace website test"
   },
   "workspaces": [
-    "website"
+    "website",
+    "playroom"
   ],
   "dependencies": {
-    "@navikt/aksel-icons": "^5.7.3",
-    "@navikt/ds-css": "^5.7.3",
-    "@navikt/ds-react": "^5.7.3",
-    "@navikt/ds-tailwind": "^5.7.3",
-    "@navikt/ds-tokens": "^5.7.3"
+    "@navikt/aksel-icons": "^5.10.4",
+    "@navikt/ds-css": "^5.10.4",
+    "@navikt/ds-react": "^5.10.4",
+    "@navikt/ds-tailwind": "^5.10.4",
+    "@navikt/ds-tokens": "^5.10.4"
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.2.3"

@@ -1,4 +1,6 @@
-import { Footer } from "@/layout";
+import BloggCard from "@/cms/cards/BloggCard";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
@@ -8,16 +10,14 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
+import { BloggAd } from "@/web/BloggAd";
+import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { LatestBloggposts } from "@/web/blogg-page/BloggPage";
+import { SEO } from "@/web/seo/SEO";
 import { Heading } from "@navikt/ds-react";
-import { Header } from "components/layout/header/Header";
-import BloggCard from "components/sanity-modules/cards/BloggCard";
-import { BloggAd } from "components/website-modules/BloggAd";
-import { SEO } from "components/website-modules/seo/SEO";
-import { LatestBloggposts } from "components/website-modules/blogg-page";
-import { AkselCubeStatic } from "components/website-modules/cube";
+import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
-import { GetStaticProps } from "next/types";
 
 type PageProps = NextPageT<{
   page: AkselBloggFrontpageT;
@@ -111,7 +111,7 @@ const Page = (props: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

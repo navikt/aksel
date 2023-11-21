@@ -1,6 +1,6 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { ExternalLinkIcon, PlantIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -41,18 +41,6 @@ const Example = () => {
         }`}</style>
     </div>
   );
-};
-
-export default withDsExample(Example, { variant: "static" });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-  desc: "Man kan manuelt legge til ikoner eller illustrasjoner med egen styling.",
-};
-
-export const args = {
-  index: 5,
 };
 
 const Innhold = () => (
@@ -108,3 +96,15 @@ const Innhold = () => (
     </div>
   </>
 );
+
+export default withDsExample(Example, { variant: "static" });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 5,
+  desc: "Man kan manuelt legge til ikoner eller illustrasjoner med egen styling.",
+};

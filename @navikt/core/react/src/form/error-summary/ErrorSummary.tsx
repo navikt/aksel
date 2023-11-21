@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef, HTMLAttributes, isValidElement } from "react";
 import cl from "clsx";
 import { Heading, BodyShort } from "../../typography";
 import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
@@ -100,7 +100,10 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         </Heading>
         <BodyShort as="ul" size={size} className="navds-error-summary__list">
           {React.Children.map(children, (child) => {
-            return <li key={child?.toString()}>{child}</li>;
+            if (!isValidElement(child)) {
+              return null;
+            }
+            return <li key={child.toString()}>{child}</li>;
           })}
         </BodyShort>
       </section>

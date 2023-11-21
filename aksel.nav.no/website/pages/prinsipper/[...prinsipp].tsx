@@ -1,12 +1,6 @@
-import {
-  abbrName,
-  Bilde,
-  BreadCrumbs,
-  dateStr,
-  Feedback,
-  TableOfContents,
-} from "@/components";
-import { Footer } from "@/layout";
+import Bilde from "@/cms/bilde/Bilde";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
@@ -15,18 +9,22 @@ import {
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  TableOfContentsT,
 } from "@/types";
-import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
+import { abbrName, dateStr, generateTableOfContents } from "@/utils";
+import { BreadCrumbs } from "@/web/BreadCrumbs";
+import { SEO } from "@/web/seo/SEO";
+import TableOfContents from "@/web/toc/TableOfContents";
+import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
-import { Header } from "components/layout/header/Header";
-import { SEO } from "components/website-modules/seo/SEO";
 import { GetServerSideProps } from "next/types";
-import { lazy, Suspense } from "react";
+import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
   prinsipp: ResolveContributorsT<ResolveSlugT<AkselPrinsippDocT>>;
   publishDate: string;
+  toc: TableOfContentsT;
 }>;
 
 export const query = `{
@@ -61,13 +59,17 @@ export const getServerSideProps: GetServerSideProps = async (
       id: prinsipp?._id,
       title: prinsipp?.heading ?? "",
       publishDate: await dateStr(prinsipp?.publishedAt ?? prinsipp._createdAt),
+      toc: generateTableOfContents({
+        content: prinsipp?.content,
+        type: "aksel_prinsipp",
+      }),
     },
     notFound:
       (!prinsipp && !context.preview) || context.params.prinsipp.length > 2,
   };
 };
 
-const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
+const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
   }
@@ -123,9 +125,12 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
                   {data.heading}
                 </Heading>
                 {data?.ingress && (
-                  <Ingress className="override-text-700 mt-5 text-2xl">
+                  <BodyLong
+                    size="large"
+                    className="override-text-700 mt-5 text-2xl"
+                  >
                     {data?.ingress}
-                  </Ingress>
+                  </BodyLong>
                 )}
                 <div className="mt-6 flex gap-3 text-base">
                   <BodyShort
@@ -156,11 +161,7 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
             <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
               <div className="pb-16 md:pb-32">
                 <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
-                  <TableOfContents
-                    changedState={data?.content ?? []}
-                    hideToc={false}
-                    aksel
-                  />
+                  <TableOfContents toc={toc} />
                   <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                     {data?.hero_bilde && (
                       <Bilde
@@ -192,13 +193,6 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
                         Publisert: {publishDate}
                       </BodyShort>
                     </div>
-                    <div className="mt-12 md:mt-16">
-                      <Feedback
-                        akselFeedback
-                        docId={data?._id}
-                        docType={data?._type}
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
@@ -211,7 +205,7 @@ const Page = ({ prinsipp: data, publishDate }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {

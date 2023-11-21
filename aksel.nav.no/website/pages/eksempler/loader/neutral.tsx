@@ -1,8 +1,8 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { Loader } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
-  return <Loader size="3xlarge" title="venter..." />;
+  return <Loader size="3xlarge" title="Venter..." />;
 };
 
 export default withDsExample(Example);

@@ -1,8 +1,7 @@
-import { AmplitudeEvents, logAmplitudeEvent, logNav } from "@/utils";
+import { FigmaIcon, GithubIcon } from "@/assets/Icons";
+import { AmplitudeEvents, amplitude, amplitudeLogNavigation } from "@/logging";
 import { BrailleIcon, DownloadIcon, PackageIcon } from "@navikt/aksel-icons";
 import { Link as DsLink } from "@navikt/ds-react";
-
-import { FigmaIcon, GithubIcon } from "components/assets";
 import NextLink from "next/link";
 
 const Divider = () => (
@@ -23,11 +22,7 @@ export const TitleLinks = () => (
         <DsLink
           className="text-text-default no-underline hover:underline"
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
         >
           <FigmaIcon className="ml-1" /> <span className="">Figma</span>
@@ -41,7 +36,7 @@ export const TitleLinks = () => (
         href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
         download="Ikonpakke"
         onClick={() => {
-          logAmplitudeEvent(AmplitudeEvents.ikonnedlastning, {
+          amplitude.track(AmplitudeEvents.ikonnedlastning, {
             icon: "Ikonpakke",
             format: "zip",
           });
@@ -60,11 +55,7 @@ export const TitleLinks = () => (
         <DsLink
           className="text-text-default no-underline hover:underline"
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
         >
           <PackageIcon className="text-2xl" aria-hidden /> Installer med NPM
@@ -81,11 +72,7 @@ export const TitleLinks = () => (
         <DsLink
           className="text-text-default no-underline hover:underline"
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
         >
           <GithubIcon className="ml-[3px] h-[18px] w-[18px]" />{" "}
@@ -103,11 +90,7 @@ export const TitleLinks = () => (
         <DsLink
           className="text-text-default no-underline hover:underline"
           onClick={(e) =>
-            logNav(
-              "link",
-              window.location.pathname,
-              e.currentTarget.getAttribute("href")
-            )
+            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
           }
         >
           <BrailleIcon aria-hidden className="text-2xl" />{" "}

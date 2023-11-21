@@ -1,16 +1,10 @@
 import imageUrlBuilder from "@sanity/image-url";
+import { allArticleDocuments } from "../config";
 import { getClient, noCdnClient, sanityClient } from "./client.server";
 
-const imageBuilder = imageUrlBuilder(sanityClient);
-
 export function urlFor(source: any) {
-  return imageBuilder.image(source);
+  return imageUrlBuilder(sanityClient).image(source);
 }
-
-export const getAllPages = async (token?: string) => {
-  const pages = await sitemapPages(token);
-  return pages.map((x) => x.path);
-};
 
 export async function sitemapPages(
   token?: string
@@ -25,6 +19,7 @@ export async function sitemapPages(
       "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,
       "grunnleggende": *[_type == "grunnleggende_landingsside"][0]._updatedAt,
       "komponenter": *[_type == "komponenter_landingsside"][0]._updatedAt,
+      "templates": *[_type == "templates_landingsside"][0]._updatedAt,
       "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,
     }`
   );
@@ -35,6 +30,7 @@ export async function sitemapPages(
     { path: "ikoner", lastmod: undefined },
     { path: "grunnleggende", lastmod: pages.grunnleggende },
     { path: "komponenter", lastmod: pages.komponenter },
+    { path: "monster-maler", lastmod: pages.templates },
     { path: "produktbloggen", lastmod: pages.blogg },
     ...temaer.map((x) => ({
       path: `god-praksis/${x.path}`,
@@ -43,31 +39,6 @@ export async function sitemapPages(
     ...artikler.map((x) => ({ ...x, path: x.slug })),
   ];
 }
-
-export const getAkselDocuments = async (
-  source:
-    | "aksel_artikkel"
-    | "aksel_blogg"
-    | "aksel_prinsipp"
-    | "aksel_standalone"
-    | "komponent_artikkel"
-    | "all",
-  token?: string
-): Promise<string[]> => {
-  if (!source) return [];
-  const docs = await getDocuments(source, token);
-
-  return docs.map((x) => x.slug);
-};
-
-export const getDocumentsTmp = async (
-  source: "komponent_artikkel" | "ds_artikkel",
-  token?: string
-): Promise<string[]> => {
-  const docs = await getDocuments(source, token);
-
-  return docs.map((x) => x.slug);
-};
 
 export async function getAkselTema(
   token?: string
@@ -83,32 +54,15 @@ export async function getAkselTema(
   }));
 }
 
-async function getDocuments(
-  source:
-    | "komponent_artikkel"
-    | "ds_artikkel"
-    | "aksel_artikkel"
-    | "aksel_blogg"
-    | "aksel_prinsipp"
-    | "aksel_standalone"
-    | "all",
+export async function getDocuments(
+  source: (typeof allArticleDocuments)[number] | "all",
   token?: string
 ): Promise<{ slug: string; lastmod: string }[]> {
   const client = token ? noCdnClient(token) : getClient();
   const documents: any[] | null = await client.fetch(
     `*[_type in $types]{ _type, _id, 'slug': slug.current, _updatedAt }`,
     {
-      types:
-        source === "all"
-          ? [
-              "komponent_artikkel",
-              "ds_artikkel",
-              "aksel_artikkel",
-              "aksel_blogg",
-              "aksel_prinsipp",
-              "aksel_standalone",
-            ]
-          : [source],
+      types: source === "all" ? allArticleDocuments : [source],
     }
   );
   const paths = [];

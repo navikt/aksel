@@ -8,6 +8,7 @@ import React, {
   useRef,
 } from "react";
 import { createPortal } from "react-dom";
+import { DateContext } from "../date/context";
 import { useProvider } from "../provider";
 import { Detail, Heading } from "../typography";
 import { mergeRefs, useId } from "../util";
@@ -82,11 +83,13 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       open,
       onBeforeClose,
       onCancel,
+      closeOnBackdropClick,
       width,
       portal,
       className,
       "aria-labelledby": ariaLabelledby,
       style,
+      onClick,
       ...rest
     }: ModalProps,
     ref
@@ -97,7 +100,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const rootElement = useProvider()?.rootElement;
     const portalNode = useFloatingPortalNode({ root: rootElement });
 
-    if (useContext(ModalContext)) {
+    const dateContext = useContext(DateContext);
+    const modalContext = useContext(ModalContext);
+    if (modalContext && !dateContext) {
       console.error("Modals should not be nested");
     }
 
@@ -108,6 +113,11 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       if (needPolyfill && modalRef.current && portalNode) {
         dialogPolyfill.registerDialog(modalRef.current);
       }
+      // We set autofocus on the dialog element to prevent the default behavior where first focusable element gets focus when modal is opened.
+      // This is mainly to fix an edge case where having a Tooltip as the first focusable element would make it activate when you open the modal.
+      // We have to use JS because it doesn't work to set it with a prop (React bug?)
+      // Currently doesn't seem to work in Chrome. See also Tooltip.tsx
+      if (modalRef.current && portalNode) modalRef.current.autofocus = true;
     }, [modalRef, portalNode]);
 
     useEffect(() => {
@@ -128,34 +138,57 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
 
+    const mergedClassName = cl("navds-modal", className, {
+      "navds-modal--polyfilled": needPolyfill,
+      "navds-modal--autowidth": !width,
+      [`navds-modal--${width}`]: isWidthPreset,
+    });
+
+    const mergedStyle = {
+      ...style,
+      ...(!isWidthPreset ? { width } : {}),
+    };
+
+    const mergedOnCancel: React.DialogHTMLAttributes<HTMLDialogElement>["onCancel"] =
+      (event) => {
+        if (onBeforeClose && onBeforeClose() === false) {
+          event.preventDefault();
+        } else if (onCancel) onCancel(event);
+      };
+
+    const mergedOnClick =
+      closeOnBackdropClick && !needPolyfill // closeOnBackdropClick has issues on polyfill when nesting modals (DatePicker)
+        ? (event: React.MouseEvent<HTMLDialogElement>) => {
+            onClick && onClick(event);
+            if (
+              event.target === modalRef.current &&
+              (!onBeforeClose || onBeforeClose() !== false)
+            ) {
+              modalRef.current.close();
+            }
+          }
+        : onClick;
+
+    const mergedAriaLabelledBy =
+      !ariaLabelledby && !rest["aria-label"] && header
+        ? ariaLabelId
+        : ariaLabelledby;
+
     const component = (
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
       <dialog
         {...rest}
         ref={mergedRef}
-        className={cl("navds-modal", className, {
-          "navds-modal--polyfilled": needPolyfill,
-          "navds-modal--autowidth": !width,
-          [`navds-modal--${width}`]: isWidthPreset,
-        })}
-        style={{
-          ...style,
-          ...(!isWidthPreset ? { width } : {}),
-        }}
-        onCancel={(event) => {
-          // FYI: onCancel fires when you press Esc
-          if (onBeforeClose && onBeforeClose() === false) {
-            event.preventDefault();
-          } else if (onCancel) onCancel(event);
-        }}
-        aria-labelledby={
-          !ariaLabelledby && !rest["aria-label"] && header
-            ? ariaLabelId
-            : ariaLabelledby
-        }
+        className={mergedClassName}
+        style={mergedStyle}
+        onCancel={mergedOnCancel} // FYI: onCancel fires when you press Esc
+        onClick={mergedOnClick}
+        aria-labelledby={mergedAriaLabelledBy}
       >
         <ModalContext.Provider
           value={{
             closeHandler: getCloseHandler(modalRef, header, onBeforeClose),
+            ref: modalRef,
           }}
         >
           {header && (

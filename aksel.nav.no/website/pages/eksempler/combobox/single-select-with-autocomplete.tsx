@@ -1,5 +1,17 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { UNSAFE_Combobox } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+
+const Example = () => {
+  return (
+    <div>
+      <UNSAFE_Combobox
+        label="Hva er den aller kuleste Star Wars-filmen noensinne, helt objektivt?"
+        options={initialOptions}
+        shouldAutocomplete={true}
+      />
+    </div>
+  );
+};
 
 const initialOptions = [
   "A New Hope",
@@ -14,18 +26,6 @@ const initialOptions = [
   "Solo",
   "The Rise of Skywalker",
 ];
-
-export const Example = () => {
-  return (
-    <div>
-      <UNSAFE_Combobox
-        label="Hva er den aller kuleste Star Wars-filmen noensinne, helt objektivt?"
-        options={initialOptions}
-        shouldAutocomplete={true}
-      />
-    </div>
-  );
-};
 
 export default withDsExample(Example, { variant: "static" });
 

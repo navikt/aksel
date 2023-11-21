@@ -1,5 +1,5 @@
-import { Hide, Show, HGrid } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { withDsExample } from "@/web/examples/withDsExample";
+import { HGrid, Hide, Show } from "@navikt/ds-react";
 import cl from "clsx";
 
 const Example = () => {
@@ -14,18 +14,6 @@ const Example = () => {
       </Hide>
     </HGrid>
   );
-};
-
-export default withDsExample(Example, { showBreakpoints: true });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 2,
-  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
 };
 
 const Placeholder = ({
@@ -57,4 +45,17 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+export default withDsExample(Example, { showBreakpoints: true });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 2,
+  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
+  sandbox: false,
 };

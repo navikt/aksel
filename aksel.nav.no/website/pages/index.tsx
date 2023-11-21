@@ -1,7 +1,16 @@
-import { Footer } from "@/layout";
+import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
+import FrontpageBlock, {
+  BlocksT,
+} from "@/cms/frontpage-blocks/FrontpageBlocks";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
+import { userPrefersReducedMotion } from "@/utils";
+import { IntroCards } from "@/web/IntroCards";
+import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
 import {
   CompassIcon,
   ComponentIcon,
@@ -9,19 +18,18 @@ import {
   PauseFillIcon,
   PlayFillIcon,
 } from "@navikt/aksel-icons";
-import { Heading, Ingress } from "@navikt/ds-react";
+import {
+  Bleed,
+  BodyLong,
+  Box,
+  Button,
+  Heading,
+  Page,
+  useClientLayoutEffect,
+} from "@navikt/ds-react";
 import cl from "clsx";
-import { Header } from "components/layout/header/Header";
-import GodPraksisCardSimple from "components/sanity-modules/cards/GodPraksisCardSimple";
-import FrontpageBlock, {
-  BlocksT,
-} from "components/sanity-modules/frontpage-blocks/FrontpageBlocks";
-import { IntroCards } from "components/website-modules/IntroCards";
-import { AkselCube } from "components/website-modules/cube";
-import { SEO } from "components/website-modules/seo/SEO";
-import { PrefersReducedMotion } from "components/website-modules/utils/prefers-reduced-motion";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 
 type PageProps = NextPageT<{
   tema: Array<AkselTemaT>;
@@ -33,31 +41,7 @@ type PageProps = NextPageT<{
   blocks?: BlocksT[];
 }>;
 
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const client = getClient();
-
-  const { page = null, tema = null, blocks = null } = await client.fetch(query);
-
-  return {
-    props: {
-      tema,
-      page,
-      blocks,
-      slug: "/",
-      preview,
-      id: page?._id ?? "",
-      title: "Forsiden",
-    },
-    revalidate: 600,
-    notFound: false,
-  };
-};
-
-export const query = `*[_type == "aksel_forside"][0]{
+const query = `*[_type == "aksel_forside"][0]{
   "page": {
     ...,
   },
@@ -97,7 +81,7 @@ export const query = `*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
           _type,
           _id,
           heading,
@@ -115,26 +99,16 @@ export const query = `*[_type == "aksel_forside"][0]{
   }
 }`;
 
-const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
-  const [pause, setPause] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+export const getStaticProps: GetStaticProps = async ({
+  preview = false,
+}: {
+  preview?: boolean;
+}): Promise<PageProps> => {
+  const client = getClient();
 
-  useEffect(() => {
-    const disableAnimations =
-      navigator.userAgent.indexOf("Safari") !== -1 &&
-      navigator.userAgent.indexOf("Chrome") === -1;
+  const { page = null, tema = null, blocks = null } = await client.fetch(query);
 
-    setReducedMotion(PrefersReducedMotion() || disableAnimations);
-    const data = localStorage.getItem("pause-animations");
-    if (disableAnimations) {
-      setPause(true);
-      setPause(true);
-      return;
-    }
-    setPause(JSON.parse(data) ?? false);
-  }, []);
-
-  const validatedTema = tema
+  const validateTema = tema
     .filter(
       (t) =>
         t?.title &&
@@ -146,8 +120,49 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
     )
     .sort((a, b) => a.title.localeCompare(b.title));
 
+  return {
+    props: {
+      tema: validateTema,
+      page,
+      blocks,
+      slug: "/",
+      preview,
+      id: page?._id ?? "",
+      title: "Forsiden",
+    },
+    revalidate: 600,
+    notFound: false,
+  };
+};
+
+const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
+  const [pause, setPause] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useClientLayoutEffect(() => {
+    const disableAnimations =
+      navigator.userAgent.indexOf("Safari") !== -1 &&
+      navigator.userAgent.indexOf("Chrome") === -1;
+
+    setReducedMotion(userPrefersReducedMotion() || disableAnimations);
+    const data = localStorage.getItem("pause-animations");
+    if (disableAnimations) {
+      setPause(true);
+      return;
+    }
+    setPause(JSON.parse(data) ?? false);
+  }, []);
+
   return (
-    <>
+    <Page
+      footer={<Footer />}
+      footerPosition="belowFold"
+      contentBlockPadding="none"
+      className={cl(
+        "header-animated-bg relative overflow-hidden bg-violet-200",
+        { "animation-stop": pause }
+      )}
+    >
       <SEO
         title="Aksel"
         description={
@@ -156,117 +171,116 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
         }
         image={page?.seo?.image}
       />
-      <div
-        className={cl(
-          "header-animated-bg relative max-w-[100vw] overflow-hidden bg-violet-200",
-          { "animation-stop": pause }
-        )}
-      >
-        <Header />
-
-        <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-          <div className="z-20 pb-28">
-            <div className="relative mx-auto mb-12 mt-20 grid w-full place-items-center px-4 text-center sm:mt-36 sm:max-w-[632px] sm:px-6">
-              <Heading
-                level="1"
-                size="xlarge"
-                className="text-deepblue-700 leading-[1.2] sm:text-[3.5rem]"
-              >
-                Aksel gjør det enklere å lage digitale produkter
-              </Heading>
-              <AkselCube />
-            </div>
-
-            <IntroCards
-              links={[
-                {
-                  title: "Komponenter",
-                  desc: "Bibliotekene Core og Interne flater",
-                  icon: ComponentIcon,
-                  href: "/komponenter",
-                },
-                {
-                  title: "Design Tokens",
-                  desc: "Farger, spacing, shadows, etc.",
-                  icon: PaletteIcon,
-                  href: "/grunnleggende/styling/design-tokens",
-                },
-                {
-                  title: "Ikoner",
-                  desc: "Alle ikonene våre",
-                  icon: CompassIcon,
-                  href: "/ikoner",
-                },
-              ]}
-              className="mx-auto mb-40 w-full max-w-md grid-cols-1 px-4 sm:mb-36 sm:px-6 md:max-w-screen-lg md:grid-cols-3"
-              variant="forside"
-            />
+      <Header />
+      <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
+        <div className="z-20 pb-28">
+          <div className="relative mx-auto mb-12 mt-20 grid w-full place-items-center px-4 text-center sm:mt-36 sm:max-w-[632px] sm:px-6">
+            <Heading
+              level="1"
+              size="xlarge"
+              className="text-deepblue-700 leading-[1.2] sm:text-[3.5rem]"
+            >
+              Aksel gjør det enklere å lage digitale produkter
+            </Heading>
+            <AkselCubeAnimated />
           </div>
 
-          <div className="bg-surface-subtle min-h-96 relative pb-20">
-            <div className="mx-auto grid w-full max-w-screen-2xl px-4 sm:px-6">
-              {/* God praksis */}
-              <div className="bg-surface-default ring-border-subtle mx-auto w-full -translate-y-48 rounded-2xl px-4 py-12 ring-1 sm:-translate-y-32 sm:px-12 sm:py-20">
-                {!reducedMotion && (
-                  <button
-                    className="focus-visible:shadow-focus text-text-subtle hover:text-text-default absolute right-2 top-2 grid h-11 w-11 place-items-center rounded-xl text-2xl focus:outline-none focus-visible:ring-2"
-                    onClick={() => {
-                      setPause(!pause);
-                      localStorage.setItem(
-                        "pause-animations",
-                        JSON.stringify(!pause)
-                      );
-                    }}
-                  >
-                    {pause ? (
-                      <>
-                        <PlayFillIcon aria-hidden />
-                        <span className="sr-only">Start animasjon</span>
-                      </>
+          <IntroCards
+            links={[
+              {
+                title: "Komponenter",
+                desc: "Bibliotekene Core og Interne flater",
+                icon: ComponentIcon,
+                href: "/komponenter",
+              },
+              {
+                title: "Design Tokens",
+                desc: "Farger, spacing, shadows, etc.",
+                icon: PaletteIcon,
+                href: "/grunnleggende/styling/design-tokens",
+              },
+              {
+                title: "Ikoner",
+                desc: "Alle ikonene våre",
+                icon: CompassIcon,
+                href: "/ikoner",
+              },
+            ]}
+            className="mx-auto mb-40 w-full max-w-md grid-cols-1 px-4 sm:mb-36 sm:px-6 md:max-w-screen-lg md:grid-cols-3"
+            variant="forside"
+          />
+        </div>
+
+        <Box background="surface-subtle" paddingBlock="0 32">
+          {/* God praksis */}
+          <Page.Block width="2xl" gutters>
+            <Box
+              background="surface-default"
+              borderWidth="1"
+              borderColor="border-subtle"
+              borderRadius="xlarge"
+              paddingBlock={{ xs: "12", sm: "20" }}
+              paddingInline={{ xs: "4", sm: "12" }}
+              className="-translate-y-48 sm:-translate-y-32"
+            >
+              {!reducedMotion && (
+                <Button
+                  variant="tertiary-neutral"
+                  size="small"
+                  className="absolute right-2 top-2"
+                  icon={
+                    pause ? (
+                      <PlayFillIcon title="Start animasjon" />
                     ) : (
-                      <>
-                        <PauseFillIcon aria-hidden />
-                        <span className="sr-only">Stopp animasjon</span>
-                      </>
-                    )}
-                  </button>
-                )}
-                <div className="px-2 sm:px-6">
-                  <Heading
-                    level="2"
-                    size="xlarge"
-                    className="text-deepblue-700 mb-6"
-                  >
-                    God praksis
-                  </Heading>
-                  {page?.god_praksis_intro && (
-                    <Ingress className="max-w-3xl">
-                      {page.god_praksis_intro}
-                    </Ingress>
-                  )}
-                </div>
-                <ul className="mt-12 grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
-                  {validatedTema.map((t) => (
-                    <GodPraksisCardSimple key={t._id} node={t} />
-                  ))}
-                </ul>
-              </div>
+                      <PauseFillIcon title="Stopp animasjon" />
+                    )
+                  }
+                  onClick={() => {
+                    setPause(!pause);
+                    localStorage.setItem(
+                      "pause-animations",
+                      JSON.stringify(!pause)
+                    );
+                  }}
+                />
+              )}
+              <Box paddingInline={{ xs: "2", sm: "6" }} paddingBlock="0 12">
+                <Heading
+                  level="2"
+                  size="xlarge"
+                  className="text-deepblue-700"
+                  spacing
+                >
+                  God praksis
+                </Heading>
+                <BodyLong size="large" className="max-w-3xl">
+                  {page?.god_praksis_intro ??
+                    "Alle som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for andre. Derfor deler vi god praksis med hverandre her."}
+                </BodyLong>
+              </Box>
 
-              <div className="-mt-24 sm:-mt-12">
+              <ul className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
+                {tema.map((t) => (
+                  <GodPraksisCardSimple key={t._id} node={t} />
+                ))}
+              </ul>
+            </Box>
+
+            <Bleed marginBlock={{ xs: "24", sm: "12" }} asChild>
+              <Box paddingInline={{ xs: "2", lg: "18" }}>
                 <FrontpageBlock blocks={blocks} />
-              </div>
-            </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    </>
+              </Box>
+            </Bleed>
+          </Page.Block>
+        </Box>
+      </main>
+    </Page>
   );
 };
 
-const WithPreview = lazy(() => import("../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
-const Page = (props: PageProps["props"]) => {
+const PagePreview = (props: PageProps["props"]) => {
   if (props?.preview) {
     return (
       <Suspense fallback={<Forside {...props} />}>
@@ -278,4 +292,4 @@ const Page = (props: PageProps["props"]) => {
   return <Forside {...props} />;
 };
 
-export default Page;
+export default PagePreview;

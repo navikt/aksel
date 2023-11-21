@@ -1,2 +1,3 @@
 src/tokens.ts
 tailwind.config.js
+!tailwind.config.d.ts

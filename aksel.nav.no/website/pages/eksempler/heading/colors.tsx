@@ -1,5 +1,5 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import { Heading, VStack } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
 
 const Example = () => {
   const lorem = "Hva kan vi hjelpe deg med?";
@@ -23,6 +23,14 @@ const Example = () => {
   );
 };
 
+function Descriptor({ children }) {
+  return <p className="mb-3 text-xl font-semibold">{children}</p>;
+}
+
+function Divider() {
+  return <hr className="border-border-subtle" />;
+}
+
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -33,11 +41,3 @@ export const Demo = {
 export const args = {
   index: 7,
 };
-
-function Descriptor({ children }) {
-  return <p className="mb-3 text-xl font-semibold">{children}</p>;
-}
-
-function Divider() {
-  return <hr className="border-border-subtle" />;
-}

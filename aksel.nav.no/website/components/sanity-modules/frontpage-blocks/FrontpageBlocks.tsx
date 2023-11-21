@@ -1,13 +1,18 @@
-import Latest, { LatestT } from "./Latest";
-import { withErrorBoundary } from "@/error-boundary";
+import ErrorBoundary from "@/error-boundary";
+import Latest, { LatestT } from "./latest-articles/Latest";
 export type BlocksT = LatestT;
 
-export const FrontpageBlock = ({ blocks }: { blocks: BlocksT[] }) => {
+type FrontpageBlockProps = {
+  blocks: BlocksT[];
+};
+
+export const FrontpageBlock = ({ blocks }: FrontpageBlockProps) => {
   if (!blocks || !blocks.length) {
     return null;
   }
+
   return (
-    <div className="lg:px-18 px-2">
+    <>
       {blocks.map((x) => {
         switch (x._type) {
           case "nytt_fra_aksel":
@@ -16,8 +21,14 @@ export const FrontpageBlock = ({ blocks }: { blocks: BlocksT[] }) => {
             return null;
         }
       })}
-    </div>
+    </>
   );
 };
 
-export default withErrorBoundary(FrontpageBlock, "FrontpageBlock");
+export default function Component(props: FrontpageBlockProps) {
+  return (
+    <ErrorBoundary boundaryName="FrontpageBlock">
+      <FrontpageBlock {...props} />
+    </ErrorBoundary>
+  );
+}

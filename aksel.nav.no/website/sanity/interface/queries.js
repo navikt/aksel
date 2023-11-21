@@ -1,4 +1,4 @@
-import { grunnleggendeKategorier, komponentKategorier } from "../config";
+import { sanityCategoryLookup } from "../config";
 
 const markDef = `
 markDefs[]{
@@ -33,6 +33,7 @@ const introSeksjon = `_type == "intro_komponent" =>{
 }`;
 
 const relatertInnhold = `_type == "relatert_innhold" =>{
+  title,
   lenker[]{
     ...,
     "intern_lenke": intern_lenke->slug.current,
@@ -94,7 +95,6 @@ const defaultBlock = `
  _type == "kode_eksempler" =>{
     ...,
     dir->,
-    filnavn->,
  },
  _type == "kode_ref" => @->,
  ${tips},
@@ -184,12 +184,7 @@ export const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
 }`;
 
 export const landingPageQuery = (t) => {
-  const kat =
-    t === "komponenter"
-      ? komponentKategorier
-      : t === "grunnleggende"
-      ? grunnleggendeKategorier
-      : [];
+  const kat = sanityCategoryLookup(t);
 
   return `"page": *[_type == "${t}_landingsside"][0]{
     ...,

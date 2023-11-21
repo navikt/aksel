@@ -1,5 +1,5 @@
-import { Hide, HGrid } from "@navikt/ds-react";
-import { withDsExample } from "components/website-modules/examples/withDsExample";
+import { withDsExample } from "@/web/examples/withDsExample";
+import { HGrid, Hide } from "@navikt/ds-react";
 import cl from "clsx";
 
 const Example = () => {
@@ -11,18 +11,6 @@ const Example = () => {
       <Placeholder text="Alltid synlig" />
     </HGrid>
   );
-};
-
-export default withDsExample(Example, { showBreakpoints: true });
-
-/* Storybook story */
-export const Demo = {
-  render: Example,
-};
-
-export const args = {
-  index: 0,
-  desc: "Endre størrelse på nettleservindu for å se komponent i aksjon",
 };
 
 const Placeholder = ({
@@ -54,4 +42,17 @@ const Placeholder = ({
       {text}
     </div>
   );
+};
+
+export default withDsExample(Example, { showBreakpoints: true });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 0,
+  desc: "Endre størrelse på nettleservindu for å se komponent i aksjon",
+  sandbox: false,
 };

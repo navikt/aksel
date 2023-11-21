@@ -66,7 +66,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
           size,
         }}
       >
-        <CustomOptionsProvider>
+        <CustomOptionsProvider value={{ isMultiSelect }}>
           <SelectedOptionsProvider
             value={{
               allowNewValues,
@@ -83,7 +83,6 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
                 filteredOptions,
                 isListOpen,
                 isLoading,
-                isMultiSelect,
                 options,
               }}
             >

@@ -1,35 +1,31 @@
-import {
-  ChangelogIcon,
-  dateStr,
-  FigmaIcon,
-  GithubIcon,
-  logAmplitudeEvent,
-  YarnIcon,
-} from "@/components";
+import { ChangelogIcon, FigmaIcon, GithubIcon, YarnIcon } from "@/assets/Icons";
+import ComponentOverview from "@/cms/component-overview/ComponentOverview";
+import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocumentsTmp } from "@/sanity/interface";
+import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
-  AkselSidebarT,
   ArticleListT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
+  SidebarT,
+  TableOfContentsT,
 } from "@/types";
+import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
+import { StatusTag } from "@/web/StatusTag";
+import { SEO } from "@/web/seo/SEO";
+import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import { WithSidebar } from "components/layout/WithSidebar";
-import ComponentOverview from "components/sanity-modules/ComponentOverview";
-import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
-import { SEO } from "components/website-modules/seo/SEO";
-import { StatusTag } from "components/website-modules/StatusTag";
-import { SuggestionBlock } from "components/website-modules/suggestionblock";
-import { lazy, Suspense } from "react";
-import NotFotfund from "../404";
 import { GetStaticPaths, GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
+import NotFotfund from "../404";
 
 const kodepakker = {
   "ds-react": {
@@ -60,10 +56,11 @@ const kodepakker = {
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselKomponentDocT>>;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;
+  toc: TableOfContentsT;
 }>;
 
 /**
@@ -71,7 +68,7 @@ type PageProps = NextPageT<{
  * preview-funksjonalitet fører til en infinite loop som låser applikasjonen.
  * Dette er på grunn av av hele datasettet blir lastet inn i preview flere ganger som til slutt låser vinduet.
  */
-export const query = `{
+const query = `{
   "page": *[_type == "komponent_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
     {
       ...,
@@ -108,8 +105,8 @@ export const query = `{
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: await getDocumentsTmp("komponent_artikkel").then((paths) =>
-      paths.map((slug) => ({
+    paths: await getDocuments("komponent_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
         params: {
           slug: slug.split("/").filter((x) => x !== "komponenter"),
         },
@@ -138,11 +135,16 @@ export const getStaticProps: GetStaticProps = async ({
       refs,
       slug: slug.slice(0, 2).join("/"),
       seo,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "komponenter"),
       preview,
       title: page?.heading ?? "",
       id: page?._id ?? "",
       publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "komponent_artikkel",
+        intro: !!page?.intro,
+      }),
     },
     notFound: !page && !preview,
     revalidate: 60,
@@ -155,6 +157,7 @@ const Page = ({
   refs,
   seo,
   publishDate,
+  toc,
 }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
@@ -186,7 +189,7 @@ const Page = ({
             href={pack.git}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              logAmplitudeEvent("link", {
+              amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
                 til: "github",
               })
@@ -200,7 +203,7 @@ const Page = ({
             href={`https://yarnpkg.com/package/${pack.title}`}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              logAmplitudeEvent("link", {
+              amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
                 til: "yarn",
               })
@@ -219,7 +222,7 @@ const Page = ({
           href={page.figma_link}
           className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
           onClick={() =>
-            logAmplitudeEvent("link", {
+            amplitude.track(AmplitudeEvents.link, {
               kilde: "intro-lenker komponenter",
               til: "figma",
             })
@@ -236,7 +239,7 @@ const Page = ({
             href={pack.changelog}
             className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
             onClick={() =>
-              logAmplitudeEvent("link", {
+              amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
                 til: "endringslogg",
               })
@@ -261,7 +264,13 @@ const Page = ({
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Komponenter", title: page?.heading }}
+        toc={toc}
+        pageType={{
+          type: "komponenter",
+          title: page?.heading,
+          rootUrl: "/komponenter",
+          rootTitle: "Komponenter",
+        }}
         pageProps={page}
         variant="page"
         intro={
@@ -303,7 +312,7 @@ const Page = ({
           />
         )}
         <IntroSeksjon node={page?.intro} internal={internal} />
-        {page?.status?.tag === "ready" && (
+        {page?.status?.tag === "ready" && !page?.hide_feedback && (
           <SuggestionBlock
             variant="komponent"
             reference={`<${page?.heading} />`}
@@ -316,7 +325,7 @@ const Page = ({
   );
 };
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {
@@ -331,6 +340,23 @@ const Wrapper = (props: any) => {
             preview: "true",
           }}
           props={props}
+          resolvers={[
+            {
+              key: "sidebar",
+              dataKeys: ["sidebar"],
+              cb: (v) => generateSidebar(v[0], "komponenter"),
+            },
+            {
+              key: "toc",
+              dataKeys: ["page.content", "page.intro"],
+              cb: (v) =>
+                generateTableOfContents({
+                  content: v[0],
+                  type: "komponent_artikkel",
+                  intro: !!v[1],
+                }),
+            },
+          ]}
         />
       </Suspense>
     );

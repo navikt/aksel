@@ -1,42 +1,43 @@
-import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
-import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
-import {
-  AkselLandingPageDocT,
-  AkselSidebarT,
-  ArticleListT,
-  NextPageT,
-} from "@/types";
-import { logAmplitudeEvent } from "@/utils";
-import { CodeIcon } from "@navikt/aksel-icons";
-import { BodyShort, Heading, Ingress } from "@navikt/ds-react";
-import cl from "clsx";
 import {
   ChangelogIcon,
   FigmaIcon,
   GithubIcon,
   StorybookIcon,
   YarnIcon,
-} from "components/assets";
-import { WithSidebar } from "components/layout/WithSidebar";
-import Footer from "components/layout/footer/Footer";
-import { Header } from "components/layout/header/Header";
-import ComponentOverview from "components/sanity-modules/ComponentOverview";
-import { IntroCards } from "components/website-modules/IntroCards";
-import { SEO } from "components/website-modules/seo/SEO";
+} from "@/assets/Icons";
+import ComponentOverview from "@/cms/component-overview/ComponentOverview";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { WithSidebar } from "@/layout/templates/WithSidebar";
+import { AmplitudeEvents, amplitude } from "@/logging";
+import { SanityBlockContent } from "@/sanity-block";
+import { getClient } from "@/sanity/client.server";
+import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
+import {
+  AkselLandingPageDocT,
+  ArticleListT,
+  NextPageT,
+  SidebarT,
+} from "@/types";
+import { generateSidebar } from "@/utils";
+import { IntroCards } from "@/web/IntroCards";
+import { SEO } from "@/web/seo/SEO";
+import { CodeIcon } from "@navikt/aksel-icons";
+import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
+import cl from "clsx";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
-  sidebar: AkselSidebarT;
+  sidebar: SidebarT;
   links: ArticleListT;
 }>;
 
 export const query = `{${sidebarQuery}, ${landingPageQuery(
   "komponenter"
-)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori}}`;
+)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori, "sidebarindex": sidebarindex}}`;
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
@@ -50,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: {
       page,
-      sidebar,
+      sidebar: generateSidebar(sidebar, "komponenter"),
       links,
       slug: "/komponenter",
       preview,
@@ -73,12 +74,17 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
       <Header />
       <WithSidebar
         sidebar={sidebar}
-        pageType={{ type: "Komponenter", title: "Komponenter" }}
+        pageType={{
+          type: "komponenter",
+          title: "Komponenter",
+          rootUrl: "/komponenter",
+          rootTitle: "Komponenter",
+        }}
         intro={
-          <Ingress className="text-text-on-action">
+          <BodyLong size="large" className="text-text-on-action">
             {page?.intro}
             <Links />
-          </Ingress>
+          </BodyLong>
         }
         pageProps={page}
       >
@@ -126,9 +132,9 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
               </Heading>
               <div>
                 {page?.[`ingress_${kat.value}`] && (
-                  <Ingress className="mb-4 only:mb-7">
+                  <BodyLong size="large" className="mb-4 only:mb-7">
                     {page[`ingress_${kat.value}`]}
-                  </Ingress>
+                  </BodyLong>
                 )}
                 {page?.[`intro_${kat.value}`] && (
                   <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
@@ -158,7 +164,7 @@ function Links() {
         href="https://github.com/navikt/aksel/tree/main/%40navikt"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker ikonside",
             til: "github",
           })
@@ -172,7 +178,7 @@ function Links() {
         href="https://yarnpkg.com/package/@navikt/ds-react"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker ikonside",
             til: "yarn",
           })
@@ -187,7 +193,7 @@ function Links() {
         href="/grunnleggende/kode/endringslogg"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker komponenter",
             til: "endringslogg",
           })
@@ -203,7 +209,7 @@ function Links() {
         href="https://www.figma.com/@nav_aksel"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker ikonside",
             til: "figma",
           })
@@ -217,7 +223,7 @@ function Links() {
         href="/storybook"
         className="hover:text-text-on-inverted focus:text-text-default focus:bg-border-focus-on-inverted group flex items-center gap-1 underline hover:no-underline focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
         onClick={() =>
-          logAmplitudeEvent("link", {
+          amplitude.track(AmplitudeEvents.link, {
             kilde: "intro-lenker ikonside",
             til: "storybook",
           })
@@ -229,7 +235,7 @@ function Links() {
   );
 }
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
+const WithPreview = lazy(() => import("@/preview"));
 
 const Wrapper = (props: any) => {
   if (props?.preview) {
@@ -242,6 +248,13 @@ const Wrapper = (props: any) => {
           params={{
             type: "komponent_artikkel",
           }}
+          resolvers={[
+            {
+              key: "sidebar",
+              dataKeys: ["sidebar"],
+              cb: (v) => generateSidebar(v[0], "komponenter"),
+            },
+          ]}
         />
       </Suspense>
     );
