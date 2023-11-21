@@ -1,0 +1,56 @@
+.navds-fileuploadbutton {
+  position: relative;
+  cursor: pointer;
+}
+
+.navds-fileuploadbox {
+  position: relative;
+  background-color: var(--ac-file-upload-bg, var(--a-surface-action-subtle));
+  padding: var(--a-spacing-5);
+  border: 2px dashed var(--ac-file-upload-border, var(--a-border-action));
+  border-radius: var(--ac-file-upload-border-radius, var(--a-border-radius-medium));
+  color: var(--ac-file-upload-text, var(--a-text-action));
+  transition: 0.2s ease border, 0.2s ease background-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navds-fileuploadbox:hover {
+  background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
+}
+
+.navds-fileuploadbox--error {
+  border-color: var(--ac-file-upload-error-border, var(--a-surface-danger));
+}
+
+.navds-fileuploadbox--error:hover {
+  border-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
+}
+
+.navds-fileuploadbox--error:focus,
+.navds-fileuploadbox--error:focus-within,
+.navds-fileuploadbox:focus,
+.navds-fileuploadbox:focus-within {
+  outline: 3px solid var(--ac-file-upload-action-hover-bg, var(--a-surface-action-hover));
+  outline-offset: 1px;
+}
+
+.navds-fileuploadinput {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.navds-fileuploadbox__icon {
+  margin-right: 0.1em;
+  cursor: pointer;
+}

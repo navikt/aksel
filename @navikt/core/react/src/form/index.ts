@@ -22,3 +22,4 @@ export {
   type RadioProps,
 } from "./radio";
 export { Search, type SearchClearEvent, type SearchProps } from "./search";
+export { FileUpload, type FileUploadProps } from "./file-upload"

@@ -120,6 +120,7 @@ const StyleMappings = {
       dependencies: [typoCss],
     },
     { component: "Fieldset", main: formCss, dependencies: [typoCss] },
+    { component: "FileUpload", main: formCss, dependencies: [typoCss] },
     { component: "Grid", main: "grid.css", dependencies: [typoCss] },
     {
       component: "GuidePanel",
