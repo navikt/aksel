@@ -27,6 +27,10 @@
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
+.navds-fileuploadbox--dragover {
+  background-color: var(--ac-file-upload-dragover-bg, var(--a-surface-action-subtle-hover));
+}
+
 .navds-fileuploadbox--error {
   border-color: var(--ac-file-upload-error-border, var(--a-surface-danger));
 }
