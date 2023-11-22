@@ -72,6 +72,7 @@
 
 .navds-textarea--resize .navds-textarea__input {
   resize: both;
+  border-end-end-radius: 0;
 }
 
 .navds-textarea--autoscrollbar,
