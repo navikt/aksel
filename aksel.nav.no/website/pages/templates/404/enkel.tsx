@@ -1,3 +1,4 @@
+import { withDsExample } from "@/web/examples/withDsExample";
 import {
   BodyShort,
   Box,
@@ -9,7 +10,7 @@ import {
 } from "@navikt/ds-react";
 import { useEffect } from "react";
 
-export default function Example() {
+const Example = () => {
   useDekorator();
 
   return (
@@ -40,7 +41,7 @@ export default function Example() {
       <Env />
     </Page>
   );
-}
+};
 
 function Header() {
   return <div id="decorator-header" />;
@@ -123,6 +124,8 @@ function StatusSvg() {
     </svg>
   );
 }
+
+export default withDsExample(Example);
 
 export const args = {
   index: 1,

@@ -1,5 +1,6 @@
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
+import { withDsExample } from "@/web/examples/withDsExample";
 import {
   BodyShort,
   Box,
@@ -10,7 +11,7 @@ import {
   Page,
 } from "@navikt/ds-react";
 
-export default function Example() {
+const Example = () => {
   return (
     <Page footer={<Footer />}>
       <Header />
@@ -38,7 +39,7 @@ export default function Example() {
       </Page.Block>
     </Page>
   );
-}
+};
 
 function StatusSvg() {
   return (
@@ -78,6 +79,8 @@ function StatusSvg() {
     </svg>
   );
 }
+
+export default withDsExample(Example);
 
 export const args = {
   index: 5,

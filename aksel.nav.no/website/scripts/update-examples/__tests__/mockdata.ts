@@ -19,6 +19,25 @@ export const args = {
 };
 `;
 
+export const codeBeforeWithoutExportDefaultDsExample = `import { Alert } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
+
+const Example = () => {
+  return (
+    <Alert variant="error">Noe gikk galt! Prøv igjen om noen minutter.</Alert>
+  );
+};
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
+export const args = {
+  index: 0,
+};
+`;
+
 export const codeAfter = `import { Alert } from "@navikt/ds-react";
 
 const Example = () => {
