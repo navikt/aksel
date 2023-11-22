@@ -29,7 +29,7 @@ export const Tema = defineType({
       group: "innhold",
 
       options: {
-        //@ts-ignore
+        // @ts-expect-error
         maxLength: 130,
       },
       validation: (Rule) =>

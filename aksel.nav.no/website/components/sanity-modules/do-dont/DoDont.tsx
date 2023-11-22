@@ -27,7 +27,7 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
         <BodyShort
           as="span"
           className={cl(
-            "relative z-[-1] flex items-center gap-1 rounded-t-lg px-4 py-2",
+            "text-text-default relative z-[-1] flex items-center gap-1 rounded-t-lg px-4 py-2",
             {
               "bg-surface-success-moderate": block.variant === "do",
               "bg-surface-danger-moderate": block.variant === "dont",
@@ -58,7 +58,7 @@ type DoDontProps = {
 };
 
 const DoDont = ({ node }: DoDontProps) => {
-  if (!node) return <div>dodont</div>;
+  if (!node) return null;
 
   return (
     <div className="mb-8 last:mb-0">

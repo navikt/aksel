@@ -71,7 +71,7 @@ const Card = ({ article, visible, index }: CardProps) => {
           {article.status?.bilde ?? article.seo?.image ? (
             article.status?.bilde ? (
               <NextImage
-                src={urlFor(article.status?.bilde).auto("format").url()}
+                src={urlFor(article.status.bilde).auto("format").url()}
                 blurDataURL={urlFor(article.status.bilde)
                   .width(24)
                   .height(24)

@@ -8,10 +8,15 @@ import { useClient } from "sanity";
 import useSWR from "swr";
 
 export const ExternalLinkRenderer = (props) => {
+  if (props.validation.length > 0) {
+    return props.renderDefault(props);
+  }
+
   return (
     <Tooltip
       content={props.value?.href || "Ingen lenke definert"}
       placement="bottom"
+      maxChar={999}
     >
       {props.renderDefault(props)}
     </Tooltip>
@@ -30,8 +35,10 @@ export const InternalLinkRenderer = (props) => {
 
   if (
     error ||
+    props.validation.length > 0 ||
     !data ||
-    (data && (data.heading === null || !data.slug === null))
+    data.heading === null ||
+    data.slug === null
   ) {
     return props.renderDefault(props);
   }
@@ -43,7 +50,7 @@ export const InternalLinkRenderer = (props) => {
       }
       /* Unknown how long title + slug will be */
       maxChar={999}
-      placement="bottom"
+      placement="right"
     >
       {props.renderDefault(props)}
     </Tooltip>

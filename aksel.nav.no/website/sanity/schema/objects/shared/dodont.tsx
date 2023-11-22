@@ -1,4 +1,3 @@
-/* import AkselDodont from "@/cms/do-dont/DoDont"; */
 import AkselDoDont from "@/cms/do-dont/DoDont";
 import { CheckmarkCircleIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";

@@ -1,3 +1,5 @@
+import { defineField } from "sanity";
+
 const pattern = /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/;
 
 const decodeAssetId = (id) => {
@@ -17,17 +19,17 @@ const BaseSEOPreset = {
   name: "seo",
   group: "seo",
   fields: [
-    {
+    defineField({
       name: "meta",
       type: "text",
       title: "OG-description (valgfri)",
       description: "Erstatter ingress som OG-description og meta-tag",
       rows: 3,
       options: {
-        //@ts-ignore
+        // @ts-expect-error
         maxLength: 160,
       },
-    },
+    }),
     {
       title: "OG-image",
       name: "image",
