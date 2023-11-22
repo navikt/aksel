@@ -2,6 +2,7 @@ import { UploadIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, ChangeEvent, useState } from "react";
 import { BodyShort, ErrorMessage } from "../../typography";
+import { partitionFiles } from "./partition-files";
 
 export interface OnUploadProps {
   allFiles: File[],
@@ -56,7 +57,7 @@ export interface FileUploadProps {
    * Custom validator that is used to decide
    * if a file is accepted or rejected.
    */
-  customValidator?(file: File): boolean;
+  validator?(file: File): boolean;
 }
 
 /**
@@ -84,7 +85,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       variant = "box",
       multiple = true,
       accept,
-      customValidator
+      validator
     },
     ref
   ) => {
@@ -96,31 +97,12 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
 
     const handleUpload = (event: ChangeEvent<HTMLInputElement>) => {
       const files = Array.from(event.target.files)
-      const { acceptedFiles, rejectedFiles } = partitionFiles(files)
+      const { acceptedFiles, rejectedFiles } = partitionFiles(files, accept, validator)
 
       onUpload({ allFiles: files, acceptedFiles, rejectedFiles })
 
       // Resets the value to make it is possible to upload the same file several consecutive times
       event.target.value = ""
-    }
-
-    const partitionFiles = (files: File[]): { acceptedFiles: File[], rejectedFiles: File[] } => {
-      const acceptedFiles = []
-      const rejectedFiles = []
-
-      files.forEach(file => {
-        const isAccepted = isAcceptedFileType(file, accept) && (customValidator?.(file) ?? true)
-        if (isAccepted) {
-          acceptedFiles.push(file)
-        } else {
-          rejectedFiles.push(file)
-        }
-      })
-
-      return {
-        acceptedFiles,
-        rejectedFiles
-      }
     }
 
     const isBoxVariant = variant === "box"
@@ -158,28 +140,5 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       </div>)
   }
 );
-
-function isAcceptedFileType(file: File, acceptAttribute: string | undefined): boolean {
-  if (acceptAttribute === undefined) {
-    return true
-  }
-  const mimeType = file.type
-  const acceptedTypes = acceptAttribute.split(',')
-
-  return acceptedTypes.some((type) => {
-    const validType = type.trim()
-    const isExtensionType = validType.startsWith('.')
-    const isWildcardMimeType = validType.endsWith('/*')
-
-    if (isExtensionType) {
-      return file.name.toLowerCase().endsWith(validType.toLowerCase());
-    } else if (isWildcardMimeType) {
-      const baseMimeType = mimeType.replace(/\/.*$/, '')
-      const baseValidType = validType.replace(/\/.*$/, '')
-      return baseMimeType === baseValidType
-    }
-    return mimeType === validType;
-  });
-}
 
 export default FileUpload;
