@@ -17,7 +17,7 @@ export const Tips = defineType({
   ],
   components: {
     preview: (values) => (
-      <div className="bg-surface-alt-3-subtle space-y-1 p-2">
+      <div className="bg-surface-alt-3-subtle dark:text-text-default space-y-1 p-2">
         <div className="flex items-center">
           <LightBulbIcon aria-hidden className="!text-xl" /> Tips
         </div>
