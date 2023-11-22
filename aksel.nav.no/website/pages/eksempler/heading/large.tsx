@@ -9,7 +9,7 @@ const Example = () => {
       <Heading size="large">{lorem}</Heading>
       <Divider />
       <div>
-        <Descriptor>Spacing </Descriptor>
+        <Descriptor>Med spacing:</Descriptor>
         <Heading size="large">{lorem}</Heading>
       </div>
     </VStack>
@@ -17,7 +17,7 @@ const Example = () => {
 };
 
 function Descriptor({ children }) {
-  return <p className="mb-3 text-xl font-semibold">{children}</p>;
+  return <p className="mb-3 text-xl">{children}</p>;
 }
 
 function Divider() {
