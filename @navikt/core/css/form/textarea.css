@@ -70,8 +70,18 @@
   color: var(--ac-textarea-counter-error-text, var(--__ac-textarea-counter-error-text, var(--a-text-danger)));
 }
 
-.navds-textarea--resize .navds-textarea__input {
+.navds-textarea--resize-both .navds-textarea__input {
   resize: both;
+  border-end-end-radius: 0;
+}
+
+.navds-textarea--resize-horizontal .navds-textarea__input {
+  resize: horizontal;
+  border-end-end-radius: 0;
+}
+
+.navds-textarea--resize-vertical .navds-textarea__input {
+  resize: vertical;
   border-end-end-radius: 0;
 }
 
