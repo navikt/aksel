@@ -1,5 +1,7 @@
 # @navikt/ds-tailwind
 
+## 5.10.4
+
 ## 5.10.3
 
 ### Patch Changes

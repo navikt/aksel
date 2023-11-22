@@ -1,4 +1,3 @@
-import { InputWithCounter } from "./schema/custom-components";
 import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
 import { table } from "@sanity/table";
@@ -8,12 +7,13 @@ import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
+import { InputWithCounter } from "./schema/custom-components";
 
 import { getTemplates } from "./util";
 
+import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { allArticleDocuments } from "./config";
 import { schema } from "./schema";
-import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 
 const projectId = "hnbe3yhs";
 
@@ -49,11 +49,11 @@ function defaultConfig() {
           const name = props.schemaType?.name;
 
           if (name === "string" && props.schemaType?.options?.maxLength) {
-            return <InputWithCounter {...props.inputProps} />;
+            return <InputWithCounter {...props} />;
           }
 
           if (name === "text" && props.schemaType?.options?.maxLength) {
-            return <InputWithCounter {...props.inputProps} size="large" />;
+            return <InputWithCounter {...props} size="large" />;
           }
           return props.renderDefault(props);
         },
@@ -66,6 +66,9 @@ function defaultConfig() {
         )
           ? [...getTemplates(prev), ...prev]
           : getTemplates();
+      },
+      unstable_comments: {
+        enabled: true,
       },
     },
     plugins: [
