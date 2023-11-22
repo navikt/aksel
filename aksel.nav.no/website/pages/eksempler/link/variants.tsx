@@ -1,19 +1,19 @@
 import { withDsExample } from "@/web/examples/withDsExample";
-import { Link } from "@navikt/ds-react";
+import { Link, VStack } from "@navikt/ds-react";
 
 const Example = () => {
   return (
-    <div className="colgap">
-      {["action", "neutral", "subtle"].map((variant) => (
-        <>
-          <div>
-            <Link variant={variant as "action" | "neutral" | "subtle"}>
-              Ex aliqua incididunt
-            </Link>
-          </div>
-        </>
-      ))}
-    </div>
+    <VStack gap="3">
+      <Link href="#" variant="action">
+        Action variant
+      </Link>
+      <Link href="#" variant="neutral">
+        Neutral variant
+      </Link>
+      <Link href="#" variant="subtle">
+        Subtle variant
+      </Link>
+    </VStack>
   );
 };
 
@@ -26,4 +26,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  desc: "Ikke bruk action-varianten på farget bakgrunn.",
 };

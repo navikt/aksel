@@ -27,4 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "Prop-en 'inlineText' gjør at teksten wrapper.",
 };
