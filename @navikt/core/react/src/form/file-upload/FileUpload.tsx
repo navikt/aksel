@@ -92,7 +92,6 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     const onDragLeave = () => setIsDraggingOver(false)
     const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false)
     const errorId = `${inputId}-error`
-    const buttonClassNames = "navds-button navds-button--secondary navds-fileuploadbutton"
     const ariaDescribedby = error ? errorId : undefined
 
     const handleUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -124,85 +123,41 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       }
     }
 
-    if (variant === "button") {
-      return (
-        <div className={className} onDragOver={onDragOver} onDragLeave={onDragLeave} ref={ref}>
-          <label className={cl(buttonClassNames, { "navds-fileuploadbox--dragover": isDraggingOver })}>
-            <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} />
-            <BodyShort as="span">{label}</BodyShort>
-            <Input
-              inputId={inputId}
-              onChange={handleUpload}
-              accept={accept}
-              ariaDescribedby={ariaDescribedby}
-              multiple={multiple}
-            />
-          </label>
-          <Error error={error} errorId={errorId} />
-        </div>
-      )
-    }
+    const isBoxVariant = variant === "box"
 
     return (
-      <div className={className} onDragOver={onDragOver} onDragLeave={onDragLeave} ref={ref}>
-        <label className={cl('navds-fileuploadbox', { "navds-fileuploadbox--error": !!error, "navds-fileuploadbox--dragover": isDraggingOver })}>
-          <BodyShort className="navds-fileuploadbox__text">Dra og slipp</BodyShort>
-          <BodyShort className="navds-fileuploadbox__text">eller</BodyShort>
-          <div className={buttonClassNames}>
-            <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} className="navds-fileuploadbox__icon" />
+      <div className={cl('navds-fileupload', className)} onDragOver={onDragOver} onDragLeave={onDragLeave} ref={ref}>
+        <label className={
+          cl({
+            'navds-fileuploadbox': isBoxVariant,
+            "navds-fileuploadbox--error": !!error && isBoxVariant,
+            "navds-fileupload--dragover": isDraggingOver
+          })
+        }>
+          {isBoxVariant && (<>
+            <BodyShort className="navds-fileuploadbox__text">Dra og slipp</BodyShort>
+            <BodyShort className="navds-fileuploadbox__text">eller</BodyShort>
+          </>)}
+          <div className={cl("navds-button", "navds-button--secondary", "navds-fileuploadbutton", {
+            "navds-fileupload--dragover": isDraggingOver
+          })}>
+            <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} className="navds-fileupload__icon" />
             {label}
           </div>
-          <Input
-            inputId={inputId}
-            onChange={handleUpload}
-            accept={accept}
-            ariaDescribedby={ariaDescribedby}
+          <input
+            type="file"
+            className="navds-fileuploadinput"
+            id={inputId}
             multiple={multiple}
+            aria-describedby={ariaDescribedby}
+            accept={accept}
+            onChange={handleUpload}
           />
         </label>
-        <Error error={error} errorId={errorId} />
-      </div>
-    )
+        {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
+      </div>)
   }
 );
-
-interface InputProps {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  multiple: boolean | undefined;
-  accept: string | undefined;
-  ariaDescribedby: string | undefined;
-}
-
-const Input = ({
-  onChange,
-  inputId,
-  multiple,
-  ariaDescribedby,
-  accept
-}: InputProps) => (
-    <input
-      type="file"
-      className="navds-fileuploadinput"
-      id={inputId}
-      multiple={multiple}
-      aria-describedby={ariaDescribedby}
-      accept={accept}
-      onChange={onChange}
-    />
-  )
-
-interface ErrorProps {
-  error: string | undefined;
-  errorId: string | undefined;
-}
-
-const Error = ({error, errorId}: ErrorProps) => (error ?
-    <ErrorMessage id={errorId}>{error}</ErrorMessage>
-    : null
-)
-
-export default FileUpload;
 
 function isAcceptedFileType(file: File, acceptAttribute: string | undefined): boolean {
   if (acceptAttribute === undefined) {
@@ -226,3 +181,5 @@ function isAcceptedFileType(file: File, acceptAttribute: string | undefined): bo
     return mimeType === validType;
   });
 }
+
+export default FileUpload;

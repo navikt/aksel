@@ -1,7 +1,12 @@
+.navds-fileupload {
+  position: relative;
+}
+
 .navds-fileuploadbutton {
   position: relative;
   cursor: pointer;
   background-color: var(--ac-file-upload-button-bg, var(--a-bg-default));
+  transition: 0.2s ease all;
 }
 
 .navds-fileuploadbox {
@@ -27,7 +32,7 @@
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-fileuploadbox--dragover {
+.navds-fileupload--dragover {
   background-color: var(--ac-file-upload-dragover-bg, var(--a-surface-action-subtle-hover));
 }
 
@@ -59,7 +64,7 @@
   cursor: pointer;
 }
 
-.navds-fileuploadbox__icon {
+.navds-fileupload__icon {
   margin-right: 0.1em;
   cursor: pointer;
 }
