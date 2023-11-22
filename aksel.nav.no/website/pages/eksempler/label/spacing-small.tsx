@@ -7,10 +7,10 @@ const Example = () => {
 
   return (
     <div>
-      <Label size="small" spacing>
+      <Label size="small" spacing as="p">
         {lorem}
       </Label>
-      <Label size="small" spacing>
+      <Label size="small" spacing as="p">
         {lorem}
       </Label>
     </div>
