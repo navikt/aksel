@@ -7,8 +7,12 @@ const Example = () => {
 
   return (
     <div>
-      <Label spacing>{lorem}</Label>
-      <Label spacing>{lorem}</Label>
+      <Label spacing as="p">
+        {lorem}
+      </Label>
+      <Label spacing as="p">
+        {lorem}
+      </Label>
     </div>
   );
 };

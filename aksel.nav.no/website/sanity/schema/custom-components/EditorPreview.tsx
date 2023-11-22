@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { Tag } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
 import {
@@ -10,7 +11,7 @@ import {
 export function EditorPreview(props) {
   const editors = useFormValue(["contributors"]) as any[];
   const user = useCurrentUser();
-  const client = useClient({ apiVersion: "2021-06-07" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
 
   const [editor, setEditor] = useState<any[]>([]);
 

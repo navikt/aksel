@@ -8,8 +8,11 @@ import {
   LinkIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
-import React from "react";
 import { allArticleDocsRef } from "../../../config";
+import {
+  ExternalLinkRenderer,
+  InternalLinkRenderer,
+} from "../../custom-components/LinkRenderer";
 
 export const styles = [
   {
@@ -89,6 +92,9 @@ export const block = {
             to: allArticleDocsRef,
           },
         ],
+        components: {
+          annotation: InternalLinkRenderer,
+        },
       },
       {
         title: "Lenke",
@@ -106,6 +112,9 @@ export const block = {
               }),
           },
         ],
+        components: {
+          annotation: ExternalLinkRenderer,
+        },
       },
     ],
   },

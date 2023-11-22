@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
+import { Button } from "../../button";
 import { Textarea } from "../index";
 
 const meta: Meta<typeof Textarea> = {
@@ -140,4 +141,36 @@ export const Readonly = () => {
       />
     </div>
   );
+};
+
+export const AutoScrollbar = (props) => (
+  <div
+    style={{
+      border: "1px solid lightGreen",
+      height: "90vh",
+      display: "flex",
+      flexDirection: "column",
+    }}
+  >
+    <div style={{ border: "1px dashed gray" }}>
+      <h1>Header</h1>
+    </div>
+    <Textarea
+      resize
+      label="Textarea with autoScrollbar"
+      description="Description"
+      maxLength={30}
+      UNSAFE_autoScrollbar
+      {...props}
+    />
+    <div style={{ border: "1px dashed gray" }}>
+      <Button>Send</Button>
+    </div>
+  </div>
+);
+AutoScrollbar.argTypes = {
+  error: { type: "string" },
+  hideLabel: { type: "boolean" },
+  maxRows: { type: "number" },
+  minRows: { type: "number" },
 };

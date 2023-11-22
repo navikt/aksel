@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "@/sanity/config";
 import {
   Accordion,
   BodyShort,
@@ -162,7 +163,7 @@ export const EditorPage = () => {
   const user = useCurrentUser();
   const userId = useFormValue([`user_id`]) as { current?: string };
 
-  const client = useClient({ apiVersion: "2021-06-07" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const { data, error } = useSWR(
     `*[count((contributors[]->user_id.current)[@ == "${userId?.current}"]) > 0]`,
     (query) => client.fetch(query)

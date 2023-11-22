@@ -1,13 +1,13 @@
 import { defineField, defineType } from "sanity";
-import { groups } from "../presets/groups";
-import { artikkelPreview } from "../presets/artikkel-preview";
-import { hiddenFields } from "../presets/hidden-fields";
-import { editorField } from "../presets/editors";
-import { titleField } from "../presets/title-field";
-import { SEOFields } from "../presets/seo";
-import { kategoriSlug } from "../presets/slug";
 import { grunnleggendeKategorier } from "../../../config";
+import { artikkelPreview } from "../presets/artikkel-preview";
+import { editorField } from "../presets/editors";
+import SanityTabGroups from "../presets/groups";
+import { hiddenFields } from "../presets/hidden-fields";
 import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
+import BaseSEOPreset from "../presets/seo";
+import { kategoriSlug } from "../presets/slug";
+import { titleField } from "../presets/title-field";
 
 const prefix = "grunnleggende/";
 
@@ -15,7 +15,7 @@ export const GrunnleggendeArtikkel = defineType({
   title: "Grunnleggende artikkel",
   name: "ds_artikkel",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   ...artikkelPreview("Grunnleggende"),
   fields: [
     oppdateringsvarsel,
@@ -63,10 +63,6 @@ export const GrunnleggendeArtikkel = defineType({
           type: "image",
         },
       ],
-      options: {
-        collapsible: true,
-        collapsed: false,
-      },
     }),
     defineField({
       title: "Sidebar index",
@@ -84,6 +80,6 @@ export const GrunnleggendeArtikkel = defineType({
       type: "riktekst_grunnleggende",
       group: "innhold",
     }),
-    SEOFields,
+    BaseSEOPreset,
   ],
 });

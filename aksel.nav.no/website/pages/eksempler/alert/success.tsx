@@ -13,5 +13,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 1,
+  desc: "Bekrefter at en oppgave er fullført som forventet.",
 };

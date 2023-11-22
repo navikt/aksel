@@ -1,21 +1,20 @@
-import { defineField, defineType } from "sanity";
-/* import { bloggKategorier } from "../../../config"; */
-import { SEOFields } from "../presets/seo";
-import { groups } from "../presets/groups";
 import { HouseIcon } from "@navikt/aksel-icons";
+import { defineField, defineType } from "sanity";
+import SanityTabGroups from "../presets/groups";
+import BaseSEOPreset from "../presets/seo";
 
 export const BloggLandingSide = defineType({
   title: "Landingsside Blogg",
   name: "blogg_landingsside",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   fields: [
     defineField({
       title: "Intro",
       name: "intro",
       type: "riktekst_standard",
     }),
-    SEOFields,
+    BaseSEOPreset,
   ],
   preview: {
     prepare: () => ({

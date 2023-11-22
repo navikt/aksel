@@ -22,7 +22,7 @@
 
 .navds-textarea__wrapper {
   position: relative;
-  width: 100%;
+  min-width: 100%;
 }
 
 .navds-textarea__input {
@@ -83,6 +83,21 @@
 .navds-textarea--resize-vertical .navds-textarea__input {
   resize: vertical;
   border-end-end-radius: 0;
+}
+
+.navds-textarea--autoscrollbar,
+.navds-textarea--autoscrollbar .navds-textarea__wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  /* Makes the box-shadow visible even though overflow is hidden: */
+  padding: 3px;
+  margin: -3px;
+}
+
+.navds-textarea--autoscrollbar .navds-textarea__input {
+  scrollbar-gutter: stable; /* Needed to prevent scrollbar from appearing too early */
 }
 
 /**
