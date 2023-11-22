@@ -26,7 +26,6 @@ export const Button = {
     <FileUpload
       onChange={onChange}
       variant="button"
-      label="Last opp filer her"
       inputId="fileupload-input"
     />
   ),
@@ -37,7 +36,6 @@ export const Box = {
     <FileUpload
       onChange={onChange}
       variant="box"
-      label="Last opp filer her"
       inputId="fileupload-input"
     />
   ),
@@ -49,7 +47,6 @@ export const ButtonWithError = {
       onChange={onChange}
       variant="button"
       error="Du må laste opp en fil"
-      label="Last opp filer her"
       inputId="fileupload-input"
     />
   ),
@@ -61,7 +58,6 @@ export const BoxWithError = {
       onChange={onChange}
       variant="box"
       error="Du må laste opp en fil"
-      label="Last opp filer her"
       inputId="fileupload-input"
     />
   ),

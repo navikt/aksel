@@ -2,7 +2,6 @@ import { UploadIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, ChangeEvent } from "react";
 import { BodyShort, ErrorMessage } from "../../typography";
-import { Button } from "../../button";
 
 export interface FileUploadProps {
   /**
@@ -25,7 +24,7 @@ export interface FileUploadProps {
   /**
    * Text shown to the user.
    */
-  label: string;
+  label?: string;
   /**
    * Class name passed to the outermost <div> element.
    */
@@ -66,7 +65,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       onChange,
       error,
       inputId,
-      label,
+      label = "Velg dine filer",
       className,
       variant = "box",
       multiple = true,
@@ -75,19 +74,15 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     ref
   ) => {
     const errorId = `${inputId}-error`
+    const buttonClassNames = "navds-button navds-button--secondary navds-fileuploadbutton"
 
     const accept = acceptedMimeTypes ? acceptedMimeTypes.join(", ") : undefined
     const ariaDescribedby = error ? errorId : undefined
     if (variant === "button") {
       return (
         <div className={className}>
-          <Button
-            as="label"
-            variant="secondary"
-            type="button"
-            className="navds-fileuploadbutton"
-            icon={<UploadIcon focusable={false} aria-hidden={true} />}
-          >
+          <label className={buttonClassNames}>
+            <UploadIcon focusable={false} aria-hidden={true} />
             <BodyShort as="span">{label}</BodyShort>
             <Input
               inputId={inputId}
@@ -96,7 +91,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
               ariaDescribedby={ariaDescribedby}
               multiple={multiple}
             />
-          </Button>
+          </label>
           <Error error={error} errorId={errorId} />
         </div>
       )
@@ -105,8 +100,12 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     return (
       <div className={className}>
         <label className={cl('navds-fileuploadbox', { "navds-fileuploadbox--error": !!error })}>
-          <UploadIcon fontSize="1.5rem" focusable={false} className="navds-fileuploadbox__icon" aria-hidden={true} />
-          <BodyShort as="span">{label}</BodyShort>
+          <BodyShort className="navds-fileuploadbox__text">Dra og slipp</BodyShort>
+          <BodyShort className="navds-fileuploadbox__text">eller</BodyShort>
+          <div className={buttonClassNames}>
+            <UploadIcon fontSize="1.5rem" focusable={false} className="navds-fileuploadbox__icon" aria-hidden={true} />
+            {label}
+          </div>
           <Input
             inputId={inputId}
             onChange={onChange}
@@ -120,7 +119,6 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     )
   }
 );
-
 
 interface InputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
