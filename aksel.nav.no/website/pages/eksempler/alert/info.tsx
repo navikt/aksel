@@ -20,5 +20,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "Skal formidler ren informasjon",
+  desc: "Skal formidle ren informasjon",
 };
