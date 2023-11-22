@@ -16,5 +16,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "Brukes til å informere brukere om noe kritisk har skjedd og vil kreve umiddelbar oppmerksomhet.",
+  desc: "Brukes til å informere brukere om at noe kritisk har skjedd og vil kreve umiddelbar oppmerksomhet.",
 };
