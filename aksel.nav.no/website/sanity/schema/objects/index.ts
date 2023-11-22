@@ -13,7 +13,6 @@ export * from "./shared/expansion-card";
 export * from "./shared/kode";
 export * from "./shared/relatert-innhold";
 export * from "./shared/riktekst";
-export * from "./shared/seo";
 export * from "./shared/tabell";
 export * from "./shared/tips";
 export * from "./shared/unik-sidemodul";

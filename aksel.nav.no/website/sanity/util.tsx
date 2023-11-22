@@ -3,7 +3,7 @@ export const devsOnly = ({ currentUser }) =>
     ["developer", "administrator"].includes(name)
   );
 
-export const getTemplates = (restTemplates: any[] = []) => {
+export const getTemplates = () => {
   const templates = {
     profil: [
       {
@@ -61,7 +61,5 @@ export const getTemplates = (restTemplates: any[] = []) => {
     ],
   };
 
-  return Object.values(templates)
-    .flat()
-    .filter((x) => !restTemplates.find((y) => y.templateId === x.templateId));
+  return Object.values(templates).flat();
 };

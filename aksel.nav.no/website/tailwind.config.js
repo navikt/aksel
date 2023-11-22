@@ -6,6 +6,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./stories/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     data: {
       active: 'active~="true"',
