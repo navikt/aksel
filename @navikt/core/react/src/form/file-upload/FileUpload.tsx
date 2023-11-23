@@ -121,15 +121,15 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
           })
         }>
           {isBoxVariant && (<>
-            <BodyShort className="navds-fileuploadbox__text">Dra og slipp</BodyShort>
-            <BodyShort className="navds-fileuploadbox__text">eller</BodyShort>
+            <BodyShort as="span">Dra og slipp</BodyShort>
+            <BodyShort as="span">eller</BodyShort>
           </>)}
-          <div className={cl("navds-button", "navds-button--secondary", "navds-fileuploadbutton", {
+          <span className={cl("navds-button", "navds-button--secondary", "navds-fileuploadbutton", {
             "navds-fileupload--dragover": isDraggingOver
           })}>
             <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} className="navds-fileupload__icon" />
             {label}
-          </div>
+          </span>
           <input
             type="file"
             className="navds-fileuploadinput"
