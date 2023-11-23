@@ -16,11 +16,11 @@
     "playroom"
   ],
   "dependencies": {
-    "@navikt/aksel-icons": "^5.10.4",
-    "@navikt/ds-css": "^5.10.4",
-    "@navikt/ds-react": "^5.10.4",
-    "@navikt/ds-tailwind": "^5.10.4",
-    "@navikt/ds-tokens": "^5.10.4"
+    "@navikt/aksel-icons": "^5.11.0",
+    "@navikt/ds-css": "^5.11.0",
+    "@navikt/ds-react": "^5.11.0",
+    "@navikt/ds-tailwind": "^5.11.0",
+    "@navikt/ds-tokens": "^5.11.0"
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.2.3"

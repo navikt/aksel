@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 5.11.0
+
+### Minor Changes
+
+- :sparkles: Textarea: Mulighet for å sette resize-retning ([#2494](https://github.com/navikt/aksel/pull/2494))
+
+- :sparkles: Textarea: Eksperimentell støtte for automatisk scrollbar ([#2457](https://github.com/navikt/aksel/pull/2457))
+
+### Patch Changes
+
+- :wheelchair: Textarea: Forsinkelse ved live-opplesning av gjenstående tegn ([#2502](https://github.com/navikt/aksel/pull/2502))
+
 ## 5.10.4
 
 ## 5.10.3
