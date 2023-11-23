@@ -17,5 +17,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 3,
+  desc: "Bruk denne når du vil at brukeren skal foreta en bestemt handling eller for å advare dem om noe viktig.",
 };

@@ -46,7 +46,6 @@ export const schema: SchemaPluginOptions = {
     /* Objects */
     object.RelatertInnhold,
     object.Kode,
-    object.SEOFields,
     object.Tabell,
     object.Bilde,
     object.DoDont,

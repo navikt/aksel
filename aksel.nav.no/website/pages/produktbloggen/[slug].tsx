@@ -94,7 +94,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel group/aksel overflow-hidden bg-[#FEFCE9] pb-16 pt-[8vw] focus:outline-none sm:pb-32"
+        className="aksel-artikkel group/aksel overflow-hidden bg-amber-50 pb-16 pt-[8vw] focus:outline-none sm:pb-32"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose text-center">
@@ -134,6 +134,12 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
                   .auto("format")
                   .quality(100)
                   .url()}
+                blurDataURL={urlFor(blogg?.seo?.image)
+                  .width(24)
+                  .height(24)
+                  .blur(10)
+                  .url()}
+                placeholder="blur"
                 decoding="sync"
                 layout="fill"
                 objectFit="cover"
@@ -158,15 +164,15 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
           </div>
         </div>
         <div className="relative mt-16">
-          <AkselCubeStatic className="text-[#FFE78A] opacity-20" />
-          <div className="mt-8 px-4">
+          <AkselCubeStatic className="z-0 text-amber-300 opacity-20" />
+          <div className="relative z-10 mt-8 px-4">
             <SanityBlockContent
               className="dynamic-wrapper-prose"
               blocks={blogg?.content ?? []}
             />
           </div>
         </div>
-        <div className="mt-16 px-4">
+        <div className="relative z-10 mt-16 px-4">
           <div className="dynamic-wrapper-prose">
             <div className="bg-deepblue-800 mx-auto mb-10 h-2 w-2 rotate-45 rounded-[1px]" />
             {authors?.length > 0 && (

@@ -26,6 +26,7 @@ export const UnikSidemodul = defineType({
       to: [{ type: "token_kategori" }],
     }),
   ],
+
   preview: {
     select: {
       modul: "modul",

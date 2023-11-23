@@ -22,5 +22,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 7,
+  desc: "Husk riktig h-tag ved bruk av heading i Alert",
 };

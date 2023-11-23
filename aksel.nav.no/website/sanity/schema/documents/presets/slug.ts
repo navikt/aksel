@@ -1,3 +1,5 @@
+import { SANITY_API_VERSION } from "@/sanity/config";
+
 export const validateSlug = (Rule, prefix, nesting) =>
   Rule.required().custom((slug) => {
     if (!slug.current.startsWith(prefix)) {
@@ -21,7 +23,7 @@ export const isSlugUnique = (slug, options) => {
   };
 
   const query = `!defined(*[!(_id in [$draft, $published]) && slug.current == $slug][0]._id)`;
-  return getClient({ apiVersion: "2021-06-07" }).fetch(query, params);
+  return getClient({ apiVersion: SANITY_API_VERSION }).fetch(query, params);
 };
 
 export const sanitySlug = (prefix: string, depth: number, source?: string) => ({
