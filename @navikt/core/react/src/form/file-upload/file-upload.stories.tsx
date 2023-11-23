@@ -2,6 +2,7 @@ import React from "react";
 import { Meta } from "@storybook/react";
 import { FileUpload } from "..";
 import { OnUploadProps } from "./FileUpload";
+
 export default {
   title: "ds-react/FileUpload",
   component: FileUpload,
@@ -9,23 +10,29 @@ export default {
     variant: {
       control: {
         type: "radio",
-        options: ["button", "box"]
+        options: ["button", "box"],
       },
     },
     error: {
       control: {
-        type: "text"
-      }
-    }
-  }
+        type: "text",
+      },
+    },
+  },
 } as Meta;
 
-const onUpload = ({ allFiles, acceptedFiles, rejectedFiles }: OnUploadProps) => {
-  alert(`Lastet opp ${allFiles.length} filer. Accepted: ${acceptedFiles.length}. Rejected: ${rejectedFiles.length}`)
-}
+const onUpload = ({
+  allFiles,
+  acceptedFiles,
+  rejectedFiles,
+}: OnUploadProps) => {
+  alert(
+    `Lastet opp ${allFiles.length} filer. Accepted: ${acceptedFiles.length}. Rejected: ${rejectedFiles.length}`
+  );
+};
 
 export const Button = {
-  render: (props) => (
+  render: () => (
     <FileUpload
       onUpload={onUpload}
       variant="button"
@@ -35,17 +42,13 @@ export const Button = {
 };
 
 export const Box = {
-  render: (props) => (
-    <FileUpload
-      onUpload={onUpload}
-      variant="box"
-      inputId="fileupload-input"
-    />
+  render: () => (
+    <FileUpload onUpload={onUpload} variant="box" inputId="fileupload-input" />
   ),
 };
 
 export const Accept = {
-  render: (props) => (
+  render: () => (
     <FileUpload
       onUpload={onUpload}
       variant="box"
@@ -56,7 +59,7 @@ export const Accept = {
 };
 
 export const ButtonWithError = {
-  render: (props) => (
+  render: () => (
     <FileUpload
       onUpload={onUpload}
       variant="button"
@@ -67,7 +70,7 @@ export const ButtonWithError = {
 };
 
 export const BoxWithError = {
-  render: (props) => (
+  render: () => (
     <FileUpload
       onUpload={onUpload}
       variant="box"
