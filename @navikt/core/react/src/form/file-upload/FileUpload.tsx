@@ -1,8 +1,9 @@
 import { UploadIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
-import React, { forwardRef, ChangeEvent, useState } from "react";
+import React, { forwardRef, ChangeEvent, useState, useRef } from "react";
 import { BodyShort, ErrorMessage } from "../../typography";
 import { partitionFiles } from "./partition-files";
+import { useClientLayoutEffect } from "../../util";
 
 export interface OnUploadProps {
   allFiles: File[],
@@ -89,11 +90,35 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     },
     ref
   ) => {
-    const onDragOver = () => setIsDraggingOver(true)
-    const onDragLeave = () => setIsDraggingOver(false)
-    const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false)
+    const isBoxVariant = variant === "box"
     const errorId = `${inputId}-error`
     const ariaDescribedby = error ? errorId : undefined
+
+    const labelRef = useRef<HTMLLabelElement | null>(null)
+    const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false)
+    const [widthOverride, setWidthOverride] = useState<number>()
+    const [heightOverride, setHeightOverride] = useState<number>()
+
+    useClientLayoutEffect(() => {
+      if (isBoxVariant && isDraggingOver) {
+        const requestID = window.requestAnimationFrame(() => {
+          const boundingClientRect = labelRef?.current?.getBoundingClientRect()
+          setWidthOverride(boundingClientRect?.width)
+          setHeightOverride(boundingClientRect?.height)
+        });
+        return () => {
+          setWidthOverride(undefined);
+          setHeightOverride(undefined);
+          cancelAnimationFrame(requestID);
+        };
+      } else {
+        setWidthOverride(undefined);
+        setHeightOverride(undefined);
+      }
+    }, [isDraggingOver, variant]);
+
+    const onDragEnter = () => setIsDraggingOver(true)
+    const onDragEnd = () => setIsDraggingOver(false)
 
     const handleUpload = (event: ChangeEvent<HTMLInputElement>) => {
       const fileList = event.target.files
@@ -109,35 +134,49 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       event.target.value = ""
     }
 
-    const isBoxVariant = variant === "box"
-
     return (
       <div
-        className={cl(
-          "navds-form-field",
-          className)
-        }
-        onDragOver={onDragOver}
-        onDragLeave={onDragLeave}
+        className={cl("navds-form-field", className)}
+        onDragOver={onDragEnter}
+        onDragLeave={onDragEnd}
+        onDragEnd={onDragEnd}
+        onDrop={onDragEnd}
         ref={ref}
       >
-        <label className={
-          cl("navds-fileupload", {
-            'navds-fileupload--box': isBoxVariant,
-            "navds-fileupload--error": !!error,
-            "navds-fileupload--dragover": isDraggingOver
-          })
-        }>
-          {isBoxVariant && (<>
-            <BodyShort as="span">Dra og slipp</BodyShort>
-            <BodyShort as="span">eller</BodyShort>
-          </>)}
-          <span className={cl("navds-button", "navds-button--secondary", "navds-fileuploadbutton", {
-            "navds-fileupload--dragover": isDraggingOver
-          })}>
-            <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} className="navds-fileupload__icon" />
-            {label}
-          </span>
+        <label
+          style={{
+            width: widthOverride,
+            height: heightOverride
+          }}
+          ref={labelRef}
+          className={
+            cl("navds-fileupload", {
+              'navds-fileupload--box': isBoxVariant,
+              "navds-fileupload--error": !!error,
+              "navds-fileupload--dragover": isDraggingOver
+            })
+          }
+        >
+          {widthOverride
+            ? <BodyShort as="span">Slipp</BodyShort>
+            : (<>
+              {isBoxVariant && (<>
+                <BodyShort as="span">Dra og slipp</BodyShort>
+                <BodyShort as="span">eller</BodyShort>
+              </>)}
+              <span
+                className={cl(
+                  "navds-button",
+                  "navds-button--secondary",
+                  "navds-fileuploadbutton",
+                  { "navds-fileuploadbutton--dragover": isDraggingOver }
+                )}
+              >
+                <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} className="navds-fileupload__icon" />
+                  {label}
+              </span>
+            </>)
+          }
           <input
             type="file"
             className="navds-fileuploadinput"
