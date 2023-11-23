@@ -1,5 +1,6 @@
+import { SANITY_PROJECT_ID } from "@/sanity/config";
+import { AkselTheme, getKey } from "@/sb-util";
 import type { Meta, StoryObj } from "@storybook/react";
-import { getKey, AkselTheme } from "@/sb-util";
 import Video from "./Video";
 
 const meta = {
@@ -18,7 +19,7 @@ const args = {
     caption: "caption-tekst",
     transkripsjon: "Transkripsjonstekst",
     webm: {
-      url: "https://cdn.sanity.io/files/hnbe3yhs/production/274a2ceb69b056e1a7048ad1a5a2f8deff53a2f4.webm",
+      url: `https://cdn.sanity.io/files/${SANITY_PROJECT_ID}/production/274a2ceb69b056e1a7048ad1a5a2f8deff53a2f4.webm`,
       extension: "WEBM",
     },
   },

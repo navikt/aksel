@@ -1,3 +1,4 @@
+import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
 import { table } from "@sanity/table";
@@ -6,16 +7,15 @@ import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
+import {
+  SANITY_API_VERSION,
+  SANITY_PROJECT_ID,
+  allArticleDocuments,
+} from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
-import { InputWithCounter } from "./schema/custom-components";
-
-import { getTemplates } from "./util";
-
-import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
-import { allArticleDocuments } from "./config";
 import { schema } from "./schema";
-
-const projectId = "hnbe3yhs";
+import { InputWithCounter } from "./schema/custom-components";
+import { getTemplates } from "./util";
 
 export const workspaceConfig = defineConfig([
   {
@@ -40,8 +40,8 @@ export const workspaceConfig = defineConfig([
 
 function defaultConfig() {
   return {
-    projectId,
-    apiVersion: "2021-10-21",
+    projectId: SANITY_PROJECT_ID,
+    apiVersion: SANITY_API_VERSION,
     schema,
     form: {
       components: {
@@ -60,13 +60,7 @@ function defaultConfig() {
       },
     },
     document: {
-      newDocumentOptions: (prev, { currentUser }) => {
-        return currentUser.roles.find((x) =>
-          ["developer", "administrator"].includes(x.name)
-        )
-          ? [...getTemplates(prev), ...prev]
-          : getTemplates();
-      },
+      newDocumentOptions: getTemplates,
       unstable_comments: {
         enabled: true,
       },
@@ -101,7 +95,7 @@ function authStore(dataset: string) {
   return {
     redirectOnSingle: false,
     mode: "replace" as const,
-    projectId,
+    projectId: SANITY_PROJECT_ID,
     dataset,
     providers: [
       {

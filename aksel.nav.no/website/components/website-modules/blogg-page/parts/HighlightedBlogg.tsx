@@ -19,6 +19,12 @@ export const HighlightedBlogg = ({
           {blogg?.seo?.image ? (
             <Image
               src={urlFor(blogg.seo.image).quality(100).auto("format").url()}
+              blurDataURL={urlFor(blogg.seo.image)
+                .width(24)
+                .height(24)
+                .blur(10)
+                .url()}
+              placeholder="blur"
               quality={100}
               layout="fill"
               objectFit="cover"
@@ -62,6 +68,12 @@ export const HighlightedBlogg = ({
           {blogg?.seo?.image ? (
             <Image
               src={urlFor(blogg.seo.image).quality(100).auto("format").url()}
+              blurDataURL={urlFor(blogg.seo.image)
+                .width(24)
+                .height(24)
+                .blur(10)
+                .url()}
+              placeholder="blur"
               quality={100}
               layout="fill"
               objectFit="cover"

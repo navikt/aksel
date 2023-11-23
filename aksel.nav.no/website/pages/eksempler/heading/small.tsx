@@ -10,7 +10,9 @@ const Example = () => {
       <Divider />
       <div>
         <Descriptor>Spacing </Descriptor>
-        <Heading size="small">{lorem}</Heading>
+        <Heading size="small" spacing>
+          {lorem}
+        </Heading>
       </div>
     </VStack>
   );

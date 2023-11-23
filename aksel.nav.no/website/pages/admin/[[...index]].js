@@ -1,3 +1,4 @@
+import cl from "clsx";
 import { NextStudio } from "next-sanity/studio";
 import { useEffect, useState } from "react";
 import { workspaceConfig } from "../../sanity/sanity.config";
@@ -20,7 +21,9 @@ const StudioPage = () => {
   return (
     <div
       data-theme={scheme}
-      className="aksel-admin h-full min-h-screen"
+      className={cl("aksel-admin h-full min-h-screen", {
+        dark: scheme === "dark",
+      })}
       id="sanity-wrapper"
     >
       <NextStudio

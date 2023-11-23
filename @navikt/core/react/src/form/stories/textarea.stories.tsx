@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
+import { Button } from "../../button";
 import { Textarea } from "../index";
 
 const meta: Meta<typeof Textarea> = {
@@ -16,10 +17,13 @@ export const Default: StoryObj<typeof Textarea> = {
   args: {
     maxLength: 0,
     label: "Ipsum enim quis culpa",
-    resize: false,
   },
 
   argTypes: {
+    resize: {
+      control: { type: "radio" },
+      options: [true, "vertical", "horizontal"],
+    },
     size: {
       control: { type: "radio" },
       options: ["medium", "small"],
@@ -99,7 +103,7 @@ export const HideLabel = () => {
 };
 
 export const MaxLength = () => {
-  return <Textarea maxLength={200} label="Ipsum enim quis culpa" />;
+  return <Textarea maxLength={50} label="Ipsum enim quis culpa" />;
 };
 
 export const MinRows = () => {
@@ -137,4 +141,36 @@ export const Readonly = () => {
       />
     </div>
   );
+};
+
+export const AutoScrollbar = (props) => (
+  <div
+    style={{
+      border: "1px solid lightGreen",
+      height: "90vh",
+      display: "flex",
+      flexDirection: "column",
+    }}
+  >
+    <div style={{ border: "1px dashed gray" }}>
+      <h1>Header</h1>
+    </div>
+    <Textarea
+      resize
+      label="Textarea with autoScrollbar"
+      description="Description"
+      maxLength={30}
+      UNSAFE_autoScrollbar
+      {...props}
+    />
+    <div style={{ border: "1px dashed gray" }}>
+      <Button>Send</Button>
+    </div>
+  </div>
+);
+AutoScrollbar.argTypes = {
+  error: { type: "string" },
+  hideLabel: { type: "boolean" },
+  maxRows: { type: "number" },
+  minRows: { type: "number" },
 };

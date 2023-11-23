@@ -45,7 +45,13 @@ export interface TextareaProps
   /**
    * Enables resizing of field
    */
-  resize?: boolean;
+  resize?: boolean | "vertical" | "horizontal";
+  /**
+   * Textarea will stop growing and get a scrollbar when there's no more room to grow.
+   * Requires `display:flex` on the parent.
+   * Experimental feature that may be removed or get breaking changes in a minor version.
+   */
+  UNSAFE_autoScrollbar?: boolean;
   /**
    * i18n-translations for counter-text
    */
@@ -86,6 +92,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       maxLength,
       hideLabel = false,
       resize,
+      UNSAFE_autoScrollbar,
       i18n,
       readOnly,
       ...rest
@@ -121,7 +128,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-form-field--readonly": readOnly,
             "navds-textarea--readonly": readOnly,
             "navds-textarea--error": hasError,
-            "navds-textarea--resize": resize,
+            "navds-textarea--autoscrollbar": UNSAFE_autoScrollbar,
+            [`navds-textarea--resize-${resize === true ? "both" : resize}`]:
+              resize,
           }
         )}
       >
@@ -157,6 +166,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 : setControlledValue(e.target.value)
             }
             minRows={getMinRows()}
+            autoScrollbar={UNSAFE_autoScrollbar}
             ref={ref}
             readOnly={readOnly}
             className={cl(

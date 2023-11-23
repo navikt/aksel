@@ -1,8 +1,8 @@
+import { HouseIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
 import { komponentKategorier } from "../../../config";
-import { SEOFields } from "../presets/seo";
-import { groups } from "../presets/groups";
-import { HouseIcon } from "@navikt/aksel-icons";
+import SanityTabGroups from "../presets/groups";
+import BaseSEOPreset from "../presets/seo";
 
 const views = () => {
   const list = [];
@@ -30,7 +30,7 @@ export const KomponentLandingSide = defineType({
   title: "Landingsside Komponenter",
   name: "komponenter_landingsside",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   fields: [
     defineField({
       title: "Intro",
@@ -38,7 +38,7 @@ export const KomponentLandingSide = defineType({
       type: "text",
     }),
     ...views(),
-    SEOFields,
+    BaseSEOPreset,
   ],
   preview: {
     prepare: () => ({
