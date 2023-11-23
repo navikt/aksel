@@ -112,11 +112,19 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     const isBoxVariant = variant === "box"
 
     return (
-      <div className={cl('navds-fileupload', className)} onDragOver={onDragOver} onDragLeave={onDragLeave} ref={ref}>
+      <div
+        className={cl(
+          "navds-form-field",
+          className)
+        }
+        onDragOver={onDragOver}
+        onDragLeave={onDragLeave}
+        ref={ref}
+      >
         <label className={
-          cl({
-            'navds-fileuploadbox': isBoxVariant,
-            "navds-fileuploadbox--error": !!error && isBoxVariant,
+          cl("navds-fileupload", {
+            'navds-fileupload--box': isBoxVariant,
+            "navds-fileupload--error": !!error,
             "navds-fileupload--dragover": isDraggingOver
           })
         }>
@@ -140,7 +148,14 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
             onChange={handleUpload}
           />
         </label>
-        {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
+        <div
+          className="navds-form-field__error"
+          id={errorId}
+          aria-relevant="additions removals"
+          aria-live="polite"
+        >
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+        </div>
       </div>)
   }
 );
