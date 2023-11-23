@@ -61,7 +61,7 @@
 
 .navds-switch__input:hover ~ .navds-switch__label-wrapper,
 .navds-switch__label-wrapper:hover {
-  color: var(--ac-switch-action, var(--a-surface-action));
+  color: var(--ac-switch-action, var(--a-surface-action-selected));
 }
 
 .navds-switch__input:disabled:hover ~ .navds-switch__label-wrapper {
@@ -91,7 +91,7 @@
 }
 
 .navds-switch__input:checked ~ .navds-switch__track {
-  background-color: var(--ac-switch-checked-bg, var(--a-surface-success));
+  background-color: var(--ac-switch-checked-bg, var(--a-surface-action-selected));
 }
 
 .navds-switch__input:hover ~ .navds-switch__track {
@@ -99,7 +99,7 @@
 }
 
 .navds-switch__input:hover:checked ~ .navds-switch__track {
-  background-color: var(--ac-switch-checked-hover-bg, var(--a-surface-success-hover));
+  background-color: var(--ac-switch-checked-hover-bg, var(--a-surface-action-selected-hover));
 }
 
 .navds-switch__input:disabled ~ .navds-switch__track {
@@ -107,7 +107,7 @@
 }
 
 .navds-switch__input:checked:disabled ~ .navds-switch__track {
-  background-color: var(--ac-switch-checked-bg, var(--a-border-success));
+  background-color: var(--ac-switch-checked-bg, var(--a-border-action-selected));
 }
 
 .navds-switch__input:focus-visible ~ .navds-switch__track {
@@ -139,7 +139,7 @@
 
 .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(1.25rem);
-  color: var(--ac-switch-thumb-icon-checked, var(--a-icon-success));
+  color: var(--ac-switch-thumb-icon-checked, var(--a-icon-action-selected));
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -158,11 +158,6 @@
 
 .navds-switch__input:checked:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(1.25rem);
-}
-
-/* Loader */
-.navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb .navds-loader__foreground {
-  stroke: var(--ac-switch-thumb-icon-checked, var(--a-icon-success));
 }
 
 /* Disabled */
