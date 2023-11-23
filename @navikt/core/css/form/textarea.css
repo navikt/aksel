@@ -70,6 +70,14 @@
   color: var(--ac-textarea-counter-error-text, var(--__ac-textarea-counter-error-text, var(--a-text-danger)));
 }
 
+.navds-textarea__sr-counter {
+  display: none;
+}
+
+.navds-textarea__wrapper:focus-within .navds-textarea__sr-counter {
+  display: initial;
+}
+
 .navds-textarea--resize-both .navds-textarea__input {
   resize: both;
   border-end-end-radius: 0;
