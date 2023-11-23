@@ -25,6 +25,9 @@ export default function temaTag() {
         type: "reference",
         to: [{ type: "gp.tema" }],
         readOnly: true,
+        options: {
+          disableNew: true,
+        },
       }),
     ],
     orderings: [
@@ -34,13 +37,16 @@ export default function temaTag() {
         by: [{ field: "title", direction: "asc" }],
       },
     ],
+
     preview: {
       select: {
         title: "title",
+        tema: "tema.title",
       },
-      prepare({ title }) {
+      prepare({ title, tema }) {
         return {
-          title,
+          title: `${title} | ${tema}`,
+          subtitle: tema,
         };
       },
     },

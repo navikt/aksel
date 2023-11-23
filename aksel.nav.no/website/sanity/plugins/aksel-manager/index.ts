@@ -1,5 +1,6 @@
 import { definePlugin } from "sanity";
 import { deskTool } from "sanity/desk";
+import artikkel from "./artikkel";
 import innholdsType from "./innholdstype";
 import { defaultDocumentNode, structure } from "./structure";
 import tema from "./tema";
@@ -24,7 +25,7 @@ const akselManager = definePlugin((options?: any) => {
     name: "taxonomyManager",
     options,
     schema: {
-      types: [tema(), temaTag(), innholdsType()],
+      types: [tema(), temaTag(), innholdsType(), artikkel()],
       templates: [
         {
           id: "book.by.author",
@@ -34,6 +35,24 @@ const akselManager = definePlugin((options?: any) => {
           parameters: [{ name: "authorId", type: "string" }],
           value: (params) => ({
             tema: { _type: "reference", _ref: params.authorId },
+          }),
+        },
+        {
+          id: "gp.artikkel.by.tag",
+          title: "God praksis aritkkel med tag",
+          schemaType: "gp.artikkel",
+          parameters: [{ name: "tag_id", type: "string" }],
+          value: (params) => ({
+            tags: [{ _type: "reference", _ref: params.tag_id }],
+          }),
+        },
+        {
+          id: "gp.artikkel.by.innholdstype",
+          title: "God praksis aritkkel med innholdstype",
+          schemaType: "gp.artikkel",
+          parameters: [{ name: "id", type: "string" }],
+          value: (params) => ({
+            innholdstype: { _type: "reference", _ref: params.id },
           }),
         },
       ],
