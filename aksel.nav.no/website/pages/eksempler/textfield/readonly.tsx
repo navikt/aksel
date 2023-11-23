@@ -5,6 +5,7 @@ const Example = () => {
   return <TextField label="Har du noen tilbakemeldinger?" readOnly />;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

@@ -20,6 +20,7 @@ const Placeholder = () => {
   return <div className="aspect-square h-12 rounded bg-teal-500 even:h-8" />;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "full",

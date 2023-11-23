@@ -1,4 +1,3 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import {
   BodyShort,
   Box,
@@ -125,7 +124,9 @@ function StatusSvg() {
   );
 }
 
-export default withDsExample(Example);
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+
+export default Example;
 
 export const args = {
   index: 1,

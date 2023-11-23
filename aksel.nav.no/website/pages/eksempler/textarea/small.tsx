@@ -5,6 +5,7 @@ const Example = () => {
   return <Textarea label="Har du noen tilbakemeldinger?" size="small" />;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

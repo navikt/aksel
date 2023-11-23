@@ -1,12 +1,14 @@
+const FILTER_STRING = "// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE";
+
 export function filterCode(code: string) {
-  if (!code.includes("export default withDsExample")) {
+  if (!code.includes(FILTER_STRING)) {
     throw new Error(
-      "filterCode expects some specific substrings in code. Please check the code."
+      `filterCode expects substring "${FILTER_STRING}" in example code.`
     );
   }
 
   const _code = code
-    .substring(0, code.indexOf("export default withDsExample"))
+    .substring(0, code.indexOf(FILTER_STRING))
     .split("\n")
     .filter((x) => !x.includes("examples/withDsExample"))
     .join("\n");

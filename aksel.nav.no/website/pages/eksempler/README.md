@@ -10,7 +10,7 @@ Eksempler må ligge under `eksempler/[gruppe]/[eksempel].tsx`
 
 ### Kode
 
-Alle linjer som inneholder `withDsExample` + alt under `export default withDsExample(Example);` blir automatisk fjernet fra kode-snippet.
+Alle linjer som inneholder `examples/withDsExample` + alt under `// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE` blir automatisk fjernet fra kode-snippet.
 
 Demo-komponent må ha navn `Example` for at CodeSandbox-knapp skal fungere riktig.
 
@@ -28,10 +28,11 @@ const Example = () => {
   return <Button>Primary</Button>;
 };
 
-export default withDsExample(Example); <- Alt under denne linjen fjernes fra vist kode
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default withDsExample(Example);
 
 export const args = {
   index: 0,
-  desc: "Primærknapp brukes til xyz"
+  desc: "Primærknapp brukes til xyz",
 };
 ```
