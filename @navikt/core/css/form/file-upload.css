@@ -43,8 +43,8 @@
   box-shadow: inset 0 0 0 2px var(--ac-file-upload-error-border, var(--a-surface-danger))
 }
 
-.navds-fileupload:focus .navds-fileuploadbutton,
-.navds-fileupload:focus-within .navds-fileuploadbutton {
+.navds-fileupload:focus:not(.navds-fileupload--dragover) .navds-fileuploadbutton,
+.navds-fileupload:focus-within:not(.navds-fileupload--dragover) .navds-fileuploadbutton {
   box-shadow: inset 0 0 0 2px
     var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
   var(--a-shadow-focus);
