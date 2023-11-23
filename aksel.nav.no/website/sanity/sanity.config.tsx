@@ -6,6 +6,7 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
+import { taxonomyManager } from "sanity-plugin-taxonomy-manager";
 import { deskTool } from "sanity/desk";
 import {
   SANITY_API_VERSION,
@@ -13,6 +14,7 @@ import {
   allArticleDocuments,
 } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
+import { akselManager } from "./plugins/aksel-manager";
 import { schema } from "./schema";
 import { InputWithCounter } from "./schema/custom-components";
 import { getTemplates } from "./util";
@@ -60,7 +62,12 @@ function defaultConfig() {
       },
     },
     document: {
-      newDocumentOptions: getTemplates,
+      newDocumentOptions: (prev, { creationContext }) => {
+        if (creationContext.type === "global") {
+          return getTemplates();
+        }
+        return prev;
+      },
       unstable_comments: {
         enabled: true,
       },
@@ -80,6 +87,11 @@ function defaultConfig() {
         hasPublishedAt: [...allArticleDocuments],
       }),
 
+      taxonomyManager({
+        // Optional: Set a Base URI to use for new concepts & concept schemes
+        baseUri: "https://localhost:3000/",
+      }),
+      akselManager({}),
       /* 3rd-party */
       table(),
       codeInput(),
