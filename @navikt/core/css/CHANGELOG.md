@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.11.1
+
+### Patch Changes
+
+- Switch: Byttet success-farger med action npr checked ([#2511](https://github.com/navikt/aksel/pull/2511))
+
 ## 5.11.0
 
 ### Minor Changes
