@@ -45,5 +45,5 @@ export const Demo = {
 export const args = {
   index: 6,
   title: "Maksbredde",
-  desc: "Width-prop på Page.Block sentrerer innhold og legger på maksbredde. I de fleste løsninger bør 2xl (1440px) være standard.",
+  desc: "Width-prop på Page.Block sentrerer innhold og legger på maksbredde.",
 };

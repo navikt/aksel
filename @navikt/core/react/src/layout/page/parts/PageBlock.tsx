@@ -8,6 +8,7 @@ export interface PageBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Predefined max-width
    * @example
+   * md:  768px
    * lg:  1024px
    * xl:  1280px
    * 2xl: 1440px
