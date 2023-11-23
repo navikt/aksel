@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 5.11.0
+
+### Minor Changes
+
+- :sparkles: Textarea: Mulighet for å sette resize-retning ([#2494](https://github.com/navikt/aksel/pull/2494))
+
+- :sparkles: Textarea: Eksperimentell støtte for automatisk scrollbar ([#2457](https://github.com/navikt/aksel/pull/2457))
+
+### Patch Changes
+
+- :wheelchair: Textarea: Forsinkelse ved live-opplesning av gjenstående tegn ([#2502](https://github.com/navikt/aksel/pull/2502))
+
+- Updated dependencies [[`bc259f5b3`](https://github.com/navikt/aksel/commit/bc259f5b306319c0e08397d5300596fc1d43353e)]:
+  - @navikt/aksel-icons@5.11.0
+  - @navikt/ds-tokens@5.11.0
+
 ## 5.10.4
 
 ### Patch Changes
