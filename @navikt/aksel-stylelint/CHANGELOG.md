@@ -1,5 +1,7 @@
 # @navikt/aksel-stylelint
 
+## 5.11.1
+
 ## 5.11.0
 
 ## 5.10.4
