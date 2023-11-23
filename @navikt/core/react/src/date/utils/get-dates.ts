@@ -54,5 +54,5 @@ export const getYears = (
   }
 
   years.sort((a, b) => a.getFullYear() - b.getFullYear());
-  return years;
+  return years.reverse();
 };

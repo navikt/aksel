@@ -32,7 +32,7 @@ export const MonthCaption = () => {
     if (!years.map((x) => x.getFullYear()).includes(year.getFullYear())) {
       years.push(setYear(startOfYear(new Date()), year.getFullYear()));
     }
-    years.sort((a, b) => a.getFullYear() - b.getFullYear());
+    years.sort((a, b) => a.getFullYear() - b.getFullYear()).reverse();
   }
 
   const handleYearChange = (e) =>
