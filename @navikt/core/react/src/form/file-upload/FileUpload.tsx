@@ -1,9 +1,7 @@
-import { UploadIcon } from "@navikt/aksel-icons";
-import cl from "clsx";
-import React, { forwardRef, ChangeEvent, useState, useRef } from "react";
-import { BodyShort, ErrorMessage } from "../../typography";
+import React, { forwardRef, ChangeEvent, useState } from "react";
 import { partitionFiles } from "./partition-files";
-import { useClientLayoutEffect } from "../../util";
+import ButtonVariant from "./ButtonVariant";
+import BoxVariant from "./BoxVariant";
 
 export interface OnUploadProps {
   allFiles: File[],
@@ -90,32 +88,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     },
     ref
   ) => {
-    const isBoxVariant = variant === "box"
-    const errorId = `${inputId}-error`
-    const ariaDescribedby = error ? errorId : undefined
-
-    const labelRef = useRef<HTMLLabelElement | null>(null)
     const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false)
-    const [widthOverride, setWidthOverride] = useState<number>()
-    const [heightOverride, setHeightOverride] = useState<number>()
-
-    useClientLayoutEffect(() => {
-      if (isBoxVariant && isDraggingOver) {
-        const requestID = window.requestAnimationFrame(() => {
-          const boundingClientRect = labelRef?.current?.getBoundingClientRect()
-          setWidthOverride(boundingClientRect?.width)
-          setHeightOverride(boundingClientRect?.height)
-        });
-        return () => {
-          setWidthOverride(undefined);
-          setHeightOverride(undefined);
-          cancelAnimationFrame(requestID);
-        };
-      } else {
-        setWidthOverride(undefined);
-        setHeightOverride(undefined);
-      }
-    }, [isDraggingOver, variant]);
 
     const onDragEnter = () => setIsDraggingOver(true)
     const onDragEnd = () => setIsDraggingOver(false)
@@ -134,68 +107,35 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       event.target.value = ""
     }
 
-    return (
-      <div
-        className={cl("navds-form-field", className)}
-        onDragOver={onDragEnter}
-        onDragLeave={onDragEnd}
+    if (variant === "button") {
+      return <ButtonVariant
+        label={label}
+        divRef={ref}
+        className={className}
+        error={error}
+        inputId={inputId}
+        multiple={multiple}
+        accept={accept}
+        handleUpload={handleUpload}
+        onDragEnter={onDragEnter}
         onDragEnd={onDragEnd}
-        onDrop={onDragEnd}
-        ref={ref}
-      >
-        <label
-          style={{
-            width: widthOverride,
-            height: heightOverride
-          }}
-          ref={labelRef}
-          className={
-            cl("navds-fileupload", {
-              'navds-fileupload--box': isBoxVariant,
-              "navds-fileupload--error": !!error,
-              "navds-fileupload--dragover": isDraggingOver
-            })
-          }
-        >
-          {widthOverride
-            ? <BodyShort as="span">Slipp</BodyShort>
-            : (<>
-              {isBoxVariant && (<>
-                <BodyShort as="span">Dra og slipp</BodyShort>
-                <BodyShort as="span">eller</BodyShort>
-              </>)}
-              <span
-                className={cl(
-                  "navds-button",
-                  "navds-button--secondary",
-                  "navds-fileuploadbutton",
-                  { "navds-fileuploadbutton--dragover": isDraggingOver }
-                )}
-              >
-                <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} className="navds-fileupload__icon" />
-                  {label}
-              </span>
-            </>)
-          }
-          <input
-            type="file"
-            className="navds-fileuploadinput"
-            id={inputId}
-            multiple={multiple}
-            aria-describedby={ariaDescribedby}
-            accept={accept}
-            onChange={handleUpload}
-          />
-        </label>
-        <div
-          className="navds-form-field__error"
-          id={errorId}
-          aria-relevant="additions removals"
-          aria-live="polite"
-        >
-          {error && <ErrorMessage>{error}</ErrorMessage>}
-        </div>
-      </div>)
+        isDraggingOver={isDraggingOver}
+      />
+    } else {
+      return <BoxVariant
+        label={label}
+        divRef={ref}
+        className={className}
+        error={error}
+        inputId={inputId}
+        multiple={multiple}
+        accept={accept}
+        handleUpload={handleUpload}
+        onDragEnter={onDragEnter}
+        onDragEnd={onDragEnd}
+        isDraggingOver={isDraggingOver}
+      />
+    }
   }
 );
 
