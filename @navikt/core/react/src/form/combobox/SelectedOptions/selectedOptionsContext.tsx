@@ -19,7 +19,7 @@ type SelectedOptionsContextType = {
   selectedOptions: string[];
   maxSelectedOptions?: number;
   setSelectedOptions: (any) => void;
-  maxSelectedMessage?: (current: number, max: number) => string;
+  maxSelectedMessage?: string;
   toggleOption: (
     option: string,
     event: React.KeyboardEvent | React.PointerEvent

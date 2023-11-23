@@ -59,7 +59,7 @@ const FilteredOptions = () => {
           data-no-focus="true"
         >
           {maxSelectedMessage && maxSelectedOptions
-            ? maxSelectedMessage(selectedOptions.length, maxSelectedOptions)
+            ? maxSelectedMessage
             : `${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
         </li>
       )}
