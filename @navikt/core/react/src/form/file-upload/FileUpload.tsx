@@ -96,7 +96,11 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     const ariaDescribedby = error ? errorId : undefined
 
     const handleUpload = (event: ChangeEvent<HTMLInputElement>) => {
-      const files = Array.from(event.target.files)
+      const fileList = event.target.files
+      if (!fileList) {
+        return
+      }
+      const files = Array.from(fileList)
       const { acceptedFiles, rejectedFiles } = partitionFiles(files, accept, validator)
 
       onUpload({ allFiles: files, acceptedFiles, rejectedFiles })
