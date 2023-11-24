@@ -27,6 +27,9 @@ export default function tema() {
           defineArrayMember({
             type: "reference",
             to: [{ type: "gp.tema.tag" }],
+            options: {
+              disableNew: true,
+            },
           }),
         ],
         options: {

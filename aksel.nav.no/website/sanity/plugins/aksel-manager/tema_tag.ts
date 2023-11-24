@@ -29,6 +29,13 @@ export default function temaTag() {
           disableNew: true,
         },
       }),
+      defineField({
+        name: "labels",
+        title: "Labels",
+        type: "array",
+        validation: (Rule) => Rule.unique(),
+        of: [{ type: "string" }],
+      }),
     ],
     orderings: [
       {
@@ -45,7 +52,7 @@ export default function temaTag() {
       },
       prepare({ title, tema }) {
         return {
-          title: `${title} | ${tema}`,
+          title,
           subtitle: tema,
         };
       },

@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { definePlugin } from "sanity";
 import { deskTool } from "sanity/desk";
 import artikkel from "./artikkel";
@@ -28,14 +29,19 @@ const akselManager = definePlugin((options?: any) => {
       types: [tema(), temaTag(), innholdsType(), artikkel()],
       templates: [
         {
-          id: "book.by.author",
-          title: "Book by author",
-          description: "Book by a specific author",
+          id: "gp.tema.tag.by.tema",
+          title: "Tema tag",
           schemaType: "gp.tema.tag",
-          parameters: [{ name: "authorId", type: "string" }],
-          value: (params) => ({
-            tema: { _type: "reference", _ref: params.authorId },
-          }),
+          parameters: [{ name: "id", type: "string" }],
+          value: async (params, { getClient }) => {
+            const title = await getClient({
+              apiVersion: SANITY_API_VERSION,
+            }).fetch(`*[_id == $title][0].title`, { title: params.id });
+            return {
+              tema: { _type: "reference", _ref: params.id },
+              labels: title ? [title] : [],
+            };
+          },
         },
         {
           id: "gp.artikkel.by.tag",

@@ -12,15 +12,18 @@ export const structure: StructureResolver = (S) =>
         schemaType: "gp.tema.tag",
         child: () =>
           S.documentTypeList("gp.tema")
-            .child((authorId) =>
-              S.documentTypeList("gp.tema.tag")
+            .child((id, ...rest) => {
+              console.log({ id, rest: rest[0] });
+              return S.documentTypeList("gp.tema.tag")
                 .title("Tags")
-                .filter("_type == $type && tema._ref == $authorId")
-                .params({ type: "gp.tema.tag", authorId })
+                .filter("_type == $type && tema._ref == $id")
+                .params({ type: "gp.tema.tag", id })
                 .initialValueTemplates([
-                  S.initialValueTemplateItem("book.by.author", { authorId }),
-                ])
-            )
+                  S.initialValueTemplateItem("gp.tema.tag.by.tema", {
+                    id,
+                  }),
+                ]);
+            })
             .initialValueTemplates([]),
       }),
       S.listItem({
