@@ -295,7 +295,11 @@
   background: var(--a-surface-neutral-subtle);
 }
 
-.navds-combobox__list-item:not(.navds-combobox__list-item__max-selected)[data-no-focus="true"] {
+.navds-combobox__list-item:not(
+    .navds-combobox__list-item__max-selected,
+    .navds-combobox__list-item__loading,
+    .navds-combobox__list-item__no-options
+  )[data-no-focus="true"] {
   cursor: not-allowed;
   opacity: 0.4;
 }
