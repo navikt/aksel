@@ -28,6 +28,25 @@ export default defineType({
           to: [{ type: "gp.tema.undertema" }],
           options: {
             disableNew: true,
+            filter: async ({ parent, document }) => {
+              const tags = (
+                parent as {
+                  _key: string;
+                  _ref?: string;
+                  _type: "reference";
+                }[]
+              )
+                .filter((x) => !!x._ref)
+                .map((x) => x._ref);
+
+              return {
+                filter: "!(_id in $tags) && tema._ref in $id",
+                params: {
+                  id: [document._id, document._id.replace("drafts.", "")],
+                  tags,
+                },
+              };
+            },
           },
         }),
       ],
