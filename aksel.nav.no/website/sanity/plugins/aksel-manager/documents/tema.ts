@@ -12,10 +12,9 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "description",
       title: "Beskrivelse",
-      type: "text",
-      rows: 3,
+      name: "beskrivelse",
+      type: "riktekst_enkel",
     }),
     defineField({
       name: "tags",

@@ -1,17 +1,28 @@
 import { SANITY_API_VERSION } from "@/sanity/config";
 import { defineArrayMember, defineField, defineType } from "sanity";
+import SanityTabGroups from "../../../schema/documents/presets/groups";
+import { hiddenFields } from "../../../schema/documents/presets/hidden-fields";
+import { ingressField } from "../../../schema/documents/presets/ingress";
+import { oppdateringsvarsel } from "../../../schema/documents/presets/oppdateringsvarsel";
+import { relevanteArtiklerField } from "../../../schema/documents/presets/relevante-artikler";
+import BaseSEOPreset from "../../../schema/documents/presets/seo";
+import { skrivehjelp } from "../../../schema/documents/presets/skrivehjelp";
+import { sanitySlug } from "../../../schema/documents/presets/slug";
+import { titleField } from "../../../schema/documents/presets/title-field";
+
+const prefix = "god-praksis/artikler/";
 
 export default defineType({
   name: "gp.artikkel",
   title: "Artikkel",
   type: "document",
+  groups: SanityTabGroups,
+
   fields: [
-    defineField({
-      name: "heading",
-      title: "Heading",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
+    oppdateringsvarsel,
+    ...hiddenFields,
+    titleField,
+    sanitySlug(prefix, 3),
     defineField({
       name: "tags",
       title: "Tags",
@@ -57,6 +68,16 @@ export default defineType({
         disableNew: true,
       },
     }),
+    ingressField,
+    defineField({
+      title: "Innhold",
+      name: "content",
+      type: "riktekst_standard",
+      group: "innhold",
+    }),
+    relevanteArtiklerField,
+    BaseSEOPreset,
+    skrivehjelp,
   ],
   orderings: [
     {
@@ -68,10 +89,13 @@ export default defineType({
   preview: {
     select: {
       title: "heading",
+      subtitle: "innholdstype.title",
+      tags: "tags",
     },
-    prepare({ title }) {
+    prepare({ title, subtitle, tags }) {
       return {
         title,
+        subtitle: `${subtitle} | ${tags.length ?? 0} undertema`,
       };
     },
   },
