@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.11.2
+
+### Patch Changes
+
+- ⬆️ upgrade date-fns version & make it minor-version agnostic ([#2514](https://github.com/navikt/aksel/pull/2514))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.11.2
+  - @navikt/aksel-icons@5.11.2
+
 ## 5.11.1
 
 ### Patch Changes
