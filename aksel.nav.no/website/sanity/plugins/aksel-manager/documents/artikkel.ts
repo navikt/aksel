@@ -19,9 +19,9 @@ export default defineType({
       type: "array",
       of: [
         defineArrayMember({
-          title: "Tema tag",
+          title: "Undertema",
           type: "reference",
-          to: [{ type: "gp.tema.tag" }],
+          to: [{ type: "gp.tema.undertema" }],
           options: {
             disableNew: true,
             filter: async ({ getClient, parent }) => {
@@ -35,7 +35,7 @@ export default defineType({
                 .filter((x) => !!x._ref)
                 .map((x) => x._ref);
               const client = getClient({ apiVersion: SANITY_API_VERSION });
-              const temaIds = await client.fetch("*[_id in $ids].tema->_id", {
+              const temaIds = await client.fetch("*[_id in $ids].tema._ref", {
                 ids: tags,
               });
               return {

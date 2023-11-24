@@ -22,9 +22,9 @@ const akselManager = definePlugin((options?: any) => {
       types: [tema, undertema, innholdsType, artikkel],
       templates: [
         {
-          id: "gp.tema.tag.by.tema",
-          title: "Tema tag",
-          schemaType: "gp.tema.tag",
+          id: "gp.tema.undertema.by.tema",
+          title: "Undertema",
+          schemaType: "gp.tema.undertema",
           parameters: [{ name: "id", type: "string" }],
           value: async (params, { getClient }) => {
             const title = await getClient({

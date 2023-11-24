@@ -1,8 +1,8 @@
 import { defineField, defineType } from "sanity";
 
 export default defineType({
-  name: "gp.tema.tag",
-  title: "Tema tag",
+  name: "gp.tema.undertema",
+  title: "Undertema",
   type: "document",
   fields: [
     defineField({

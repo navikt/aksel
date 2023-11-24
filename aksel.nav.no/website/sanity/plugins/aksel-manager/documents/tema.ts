@@ -25,7 +25,7 @@ export default defineType({
       of: [
         defineArrayMember({
           type: "reference",
-          to: [{ type: "gp.tema.tag" }],
+          to: [{ type: "gp.tema.undertema" }],
           options: {
             disableNew: true,
           },

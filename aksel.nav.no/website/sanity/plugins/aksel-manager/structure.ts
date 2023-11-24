@@ -8,18 +8,18 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("gp.tema").title("Tema"),
       S.listItem({
         id: "tema_view",
-        title: "Tema tagger",
-        schemaType: "gp.tema.tag",
+        title: "Undertema",
+        schemaType: "gp.tema.undertema",
         child: () =>
           S.documentTypeList("gp.tema")
             .child((id, ...rest) => {
               console.log({ id, rest: rest[0] });
-              return S.documentTypeList("gp.tema.tag")
+              return S.documentTypeList("gp.tema.undertema")
                 .title("Tags")
                 .filter("_type == $type && tema._ref == $id")
-                .params({ type: "gp.tema.tag", id })
+                .params({ type: "gp.tema.undertema", id })
                 .initialValueTemplates([
-                  S.initialValueTemplateItem("gp.tema.tag.by.tema", {
+                  S.initialValueTemplateItem("gp.tema.undertema.by.tema", {
                     id,
                   }),
                 ]);
@@ -33,10 +33,10 @@ export const structure: StructureResolver = (S) =>
         child: () =>
           S.documentTypeList("gp.tema")
             .child((tema_id) =>
-              S.documentTypeList("gp.tema.tag")
+              S.documentTypeList("gp.tema.undertema")
                 .title("Tags")
                 .filter("_type == $type && tema._ref == $tema_id")
-                .params({ type: "gp.tema.tag", tema_id })
+                .params({ type: "gp.tema.undertema", tema_id })
                 .initialValueTemplates([])
                 .child((tag_id) =>
                   S.documentTypeList("gp.artikkel")
@@ -83,7 +83,7 @@ export const defaultDocumentNode = (
   switch (schemaType) {
     case "gp.tema":
       return S.document().views([S.view.form()]);
-    case "gp.tema.tag":
+    case "gp.tema.undertema":
       return S.document().views([S.view.form()]);
     case "gp.innholdstype":
       return S.document().views([S.view.form()]);
