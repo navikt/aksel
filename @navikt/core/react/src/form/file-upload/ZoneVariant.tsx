@@ -36,6 +36,14 @@ const ZoneVariant = ({
   const dropzoneRef = useRef<HTMLDivElement | null>(null)
   const [widthOverride, setWidthOverride] = useState<number>()
   const [heightOverride, setHeightOverride] = useState<number>()
+  const [minWidth, setMinWidth] = useState<number>()
+
+  useClientLayoutEffect(() => {
+    const height = dropzoneRef?.current?.getBoundingClientRect()?.height
+    if (!!height) {
+      setMinWidth(height * 2)
+    }
+  }, []);
 
   useClientLayoutEffect(() => {
     if (isDraggingOver) {
@@ -65,6 +73,7 @@ const ZoneVariant = ({
     onDragEnd={onDragEnd}
     dropzoneRef={dropzoneRef}
     style={{
+      minWidth,
       width: widthOverride,
       height: heightOverride
     }}
