@@ -278,10 +278,6 @@
   cursor: default;
 }
 
-.navds-combobox__list-item__max-selected:hover {
-  background-color: unset;
-}
-
 .navds-combobox__list-item--focus,
 .navds-combobox__list--with-hover .navds-combobox__list-item:not([data-no-focus="true"]):hover {
   background-color: var(--ac-combobox-list-item-hover-bg, var(--a-surface-hover));
