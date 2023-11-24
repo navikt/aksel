@@ -6,6 +6,7 @@ import UploadButton from "./UploadButton";
 
 interface Props {
   label: string;
+  description: string | undefined;
   className: string | undefined;
   divRef: React.Ref<HTMLDivElement>;
   error: string | undefined;
@@ -18,8 +19,9 @@ interface Props {
   isDraggingOver: boolean;
 }
 
-const BoxVariant = ({
+const ZoneVariant = ({
   label,
+  description,
   className,
   onDragEnter,
   onDragEnd,
@@ -31,14 +33,14 @@ const BoxVariant = ({
   accept,
   handleUpload,
 }: Props) => {
-  const labelRef = useRef<HTMLLabelElement | null>(null)
+  const dropzoneRef = useRef<HTMLDivElement | null>(null)
   const [widthOverride, setWidthOverride] = useState<number>()
   const [heightOverride, setHeightOverride] = useState<number>()
 
   useClientLayoutEffect(() => {
     if (isDraggingOver) {
       const requestID = window.requestAnimationFrame(() => {
-        const boundingClientRect = labelRef?.current?.getBoundingClientRect()
+        const boundingClientRect = dropzoneRef?.current?.getBoundingClientRect()
         setWidthOverride(boundingClientRect?.width)
         setHeightOverride(boundingClientRect?.height)
       });
@@ -54,12 +56,14 @@ const BoxVariant = ({
   }, [isDraggingOver]);
 
   return (<Wrapper
+    label={label}
+    description={description}
     divRef={divRef}
     className={className}
-    labelClassName="navds-fileupload--box"
+    dropzoneClassName="navds-fileupload--zone"
     onDragEnter={onDragEnter}
     onDragEnd={onDragEnd}
-    labelRef={labelRef}
+    dropzoneRef={dropzoneRef}
     style={{
       width: widthOverride,
       height: heightOverride
@@ -70,16 +74,17 @@ const BoxVariant = ({
     multiple={multiple}
     accept={accept}
     handleUpload={handleUpload}
+    fullWidth={true}
   >
-    {widthOverride
+    {isDraggingOver
       ? <BodyShort as="span">Slipp</BodyShort>
       : (<>
         <BodyShort as="span">Dra og slipp</BodyShort>
         <BodyShort as="span">eller</BodyShort>
-        <UploadButton label={label} />
+        <UploadButton />
       </>)
     }
   </Wrapper>)
 }
 
-export default BoxVariant
+export default ZoneVariant

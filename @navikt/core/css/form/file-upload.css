@@ -14,7 +14,7 @@
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-fileupload--box {
+.navds-fileupload--zone {
   position: relative;
   background-color: var(--ac-file-upload-bg, var(--a-surface-subtle));
   padding: var(--a-spacing-5);
@@ -30,7 +30,7 @@
   cursor: pointer;
 }
 
-.navds-fileupload--box:hover {
+.navds-fileupload--zone:hover {
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 

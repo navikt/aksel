@@ -1,31 +1,36 @@
 import cl from "clsx";
-import { ErrorMessage } from "../../typography";
-import React from "react";
+import React, { CSSProperties, MutableRefObject, Ref, useRef } from "react";
+import { ErrorMessage, Label, BodyShort } from "../../typography";
 
 interface Props {
-  className?: string,
-  labelClassName?: string,
+  label: string;
+  description: string | undefined;
+  className: string | undefined;
+  dropzoneClassName?: string;
   onDragEnter?: () => void;
   onDragEnd?: () => void;
   divRef: any;
-  labelRef?: any;
-  style?: any;
-  error: any;
-  isDraggingOver: any;
-  children: any;
-  inputId: any;
-  multiple: any;
-  accept: any;
+  dropzoneRef?: MutableRefObject<HTMLDivElement | null>;
+  style?: CSSProperties;
+  error: string | undefined;
+  isDraggingOver: boolean;
+  children: React.ReactNode;
+  inputId: string;
+  multiple: boolean;
+  accept: string | undefined;
   handleUpload: any;
+  fullWidth: boolean;
 }
 
 const Wrapper = ({
   className,
-  labelClassName,
+  label,
+  description,
+  dropzoneClassName,
   onDragEnter,
   onDragEnd,
   divRef,
-  labelRef,
+  dropzoneRef,
   style,
   error,
   isDraggingOver,
@@ -33,26 +38,40 @@ const Wrapper = ({
   inputId,
   multiple,
   accept,
-  handleUpload
+  handleUpload,
+  fullWidth
 }: Props) => {
   const errorId = `${inputId}-error`
   const ariaDescribedby = error ? errorId : undefined
 
   return <div
     className={cl("navds-form-field", className)}
-    onDragOver={onDragEnter}
-    onDragLeave={onDragEnd}
-    onDragEnd={onDragEnd}
-    onDrop={onDragEnd}
     ref={divRef}
   >
-    <label
-      style={style}
-      ref={labelRef}
+    <Label
+      htmlFor={inputId}
+      className={cl("navds-form-field__label")}
+    >{label}</Label>
+    {!!description && (
+      <BodyShort
+        className={cl("navds-form-field__description")}
+        as="div"
+      >{description}</BodyShort>
+    )}
+    <div
+      onDragOver={onDragEnter}
+      onDragLeave={onDragEnd}
+      onDragEnd={onDragEnd}
+      onDrop={onDragEnd}
+      style={{
+        width: style?.width ? style.width : fullWidth ? "100%" : "auto",
+        height: style?.height
+      }}
+      ref={dropzoneRef}
       className={
         cl(
           "navds-fileupload",
-          labelClassName,
+          dropzoneClassName,
           {
             "navds-fileupload--error": !!error,
             "navds-fileupload--dragover": isDraggingOver
@@ -64,13 +83,14 @@ const Wrapper = ({
       <input
         type="file"
         className="navds-fileupload__input"
+        style={style}
         id={inputId}
         multiple={multiple}
         aria-describedby={ariaDescribedby}
         accept={accept}
         onChange={handleUpload}
       />
-    </label>
+    </div>
     <div
       className="navds-form-field__error"
       id={errorId}

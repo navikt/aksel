@@ -1,7 +1,7 @@
 import React, { forwardRef, ChangeEvent, useState } from "react";
 import { partitionFiles } from "./partition-files";
 import ButtonVariant from "./ButtonVariant";
-import BoxVariant from "./BoxVariant";
+import ZoneVariant from "./ZoneVariant";
 
 export interface OnUploadProps {
   allFiles: File[],
@@ -12,11 +12,13 @@ export interface OnUploadProps {
 export interface FileUploadProps {
   /**
    * Changes styling when changed.
-   * The "box" variant takes up the full
+   * The "zone" variant takes up the full
    * width of its parent, while the "button"
    * variant takes up width based on its content.
+   * Both styles support opening a file viewer
+   * and drag-and-drop.
    */
-  variant: "box" | "button";
+  variant: "zone" | "button";
   /**
    * ID of the input element. Required to properly
    * connect input element to potential error message.
@@ -25,7 +27,11 @@ export interface FileUploadProps {
   /**
    * Text shown to the user.
    */
-  label?: string;
+  label: string;
+  /**
+   * Adds a description to extend labling of FileUpload
+   */
+  description?: string;
   /**
    * Class name passed to the outermost <div> element.
    */
@@ -79,9 +85,10 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       onUpload,
       error,
       inputId,
-      label = "Velg dine filer",
+      label,
+      description,
       className,
-      variant = "box",
+      variant = "zone",
       multiple = true,
       accept,
       validator
@@ -110,6 +117,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     if (variant === "button") {
       return <ButtonVariant
         label={label}
+        description={description}
         divRef={ref}
         className={className}
         error={error}
@@ -122,8 +130,9 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
         isDraggingOver={isDraggingOver}
       />
     } else {
-      return <BoxVariant
+      return <ZoneVariant
         label={label}
+        description={description}
         divRef={ref}
         className={className}
         error={error}

@@ -4,6 +4,7 @@ import UploadButton from "./UploadButton";
 
 interface Props {
   label: string;
+  description: string | undefined;
   className: string | undefined;
   divRef: React.Ref<HTMLDivElement>;
   error: string | undefined;
@@ -18,6 +19,7 @@ interface Props {
 
 const ButtonVariant = ({
   label,
+  description,
   className,
   onDragEnter,
   onDragEnd,
@@ -30,6 +32,8 @@ const ButtonVariant = ({
   handleUpload
 }: Props) => (
   <Wrapper
+    label={label}
+    description={description}
     divRef={divRef}
     className={className}
     error={error}
@@ -40,8 +44,9 @@ const ButtonVariant = ({
     onDragEnter={onDragEnter}
     onDragEnd={onDragEnd}
     isDraggingOver={isDraggingOver}
+    fullWidth={false}
   >
-    <UploadButton label={label} />
+    <UploadButton />
   </Wrapper>
 )
 

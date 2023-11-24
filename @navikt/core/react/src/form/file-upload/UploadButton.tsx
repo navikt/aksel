@@ -1,14 +1,10 @@
 import { UploadIcon } from "@navikt/aksel-icons";
 import React from "react";
 
-interface Props {
-  label: string
-}
-
-const UploadButton = ({ label }: Props) => (
+const UploadButton = () => (
   <span className="navds-button navds-button--secondary navds-fileupload__button">
     <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} className="navds-fileupload__icon" />
-    {label}
+    Velg dine filer
   </span>
 )
 

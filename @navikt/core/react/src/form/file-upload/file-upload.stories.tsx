@@ -10,7 +10,7 @@ export default {
     variant: {
       control: {
         type: "radio",
-        options: ["button", "box"],
+        options: ["button", "zone"],
       },
     },
     error: {
@@ -31,9 +31,33 @@ const onUpload = ({
   );
 };
 
+export const Zone = {
+  render: () => (
+    <FileUpload
+      label="Last opp filer"
+      onUpload={onUpload}
+      variant="zone"
+      inputId="fileupload-input"
+    />
+  ),
+};
+
+export const ZoneWithDescription = {
+  render: () => (
+    <FileUpload
+      label="Last opp filer"
+      description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
+      onUpload={onUpload}
+      variant="zone"
+      inputId="fileupload-input"
+    />
+  ),
+};
+
 export const Button = {
   render: () => (
     <FileUpload
+      label="Last opp filer"
       onUpload={onUpload}
       variant="button"
       inputId="fileupload-input"
@@ -41,17 +65,24 @@ export const Button = {
   ),
 };
 
-export const Box = {
+export const ButtonWithDescription = {
   render: () => (
-    <FileUpload onUpload={onUpload} variant="box" inputId="fileupload-input" />
+    <FileUpload
+      label="Last opp filer"
+      description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
+      onUpload={onUpload}
+      variant="button"
+      inputId="fileupload-input"
+    />
   ),
 };
 
 export const Accept = {
   render: () => (
     <FileUpload
+      label="Last opp filer"
       onUpload={onUpload}
-      variant="box"
+      variant="zone"
       accept=".png"
       inputId="fileupload-input"
     />
@@ -61,6 +92,7 @@ export const Accept = {
 export const ButtonWithError = {
   render: () => (
     <FileUpload
+      label="Last opp filer"
       onUpload={onUpload}
       variant="button"
       error="Du må laste opp en fil"
@@ -69,11 +101,12 @@ export const ButtonWithError = {
   ),
 };
 
-export const BoxWithError = {
+export const ZoneWithError = {
   render: () => (
     <FileUpload
+      label="Last opp filer"
       onUpload={onUpload}
-      variant="box"
+      variant="zone"
       error="Du må laste opp en fil"
       inputId="fileupload-input"
     />
