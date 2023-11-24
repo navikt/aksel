@@ -12,8 +12,7 @@ export const structure: StructureResolver = (S) =>
         schemaType: "gp.tema.undertema",
         child: () =>
           S.documentTypeList("gp.tema")
-            .child((id, ...rest) => {
-              console.log({ id, rest: rest[0] });
+            .child((id) => {
               return S.documentTypeList("gp.tema.undertema")
                 .title("Tags")
                 .filter("_type == $type && tema._ref == $id")
