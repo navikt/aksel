@@ -1,6 +1,8 @@
 export const SANITY_PROJECT_ID = "hnbe3yhs";
 export const SANITY_API_VERSION = "2021-10-21";
-export const SANITY_DATASET = "production";
+
+// TODO: PROD er slått av. For å hindre redigering av PROD ved migrering
+export const SANITY_DATASET = "development";
 
 export const clientConfig = {
   projectId: SANITY_PROJECT_ID,
