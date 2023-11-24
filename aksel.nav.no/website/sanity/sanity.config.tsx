@@ -13,6 +13,7 @@ import {
   allArticleDocuments,
 } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
+import { akselManager } from "./plugins/aksel-manager";
 import { schema } from "./schema";
 import { InputWithCounter } from "./schema/custom-components";
 import { getTemplates } from "./util";
@@ -60,7 +61,12 @@ function defaultConfig() {
       },
     },
     document: {
-      newDocumentOptions: getTemplates,
+      newDocumentOptions: (prev, { creationContext }) => {
+        if (creationContext.type === "global") {
+          return getTemplates();
+        }
+        return prev;
+      },
       unstable_comments: {
         enabled: true,
       },
@@ -80,6 +86,7 @@ function defaultConfig() {
         hasPublishedAt: [...allArticleDocuments],
       }),
 
+      akselManager({}),
       /* 3rd-party */
       table(),
       codeInput(),
