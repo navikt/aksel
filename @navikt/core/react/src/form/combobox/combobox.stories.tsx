@@ -298,7 +298,6 @@ export const MaxSelectedOptions: StoryFunction = () => {
       label="Komboboks med begrenset antall valg"
       options={options}
       maxSelectedOptions={2}
-      maxSelectedMessage="2 av MAKS 2 er valgt."
       selectedOptions={selectedOptions}
       onToggleSelected={(option, isSelected) =>
         isSelected
