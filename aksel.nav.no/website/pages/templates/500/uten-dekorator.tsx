@@ -50,7 +50,7 @@ export default function Example() {
               <BodyShort>
                 Please refresh this page or try again in a few minutes.{" "}
                 <Link href="https://nav.no/kontaktoss">Contact us</Link> if the
-                problem persists
+                problem persists.
               </BodyShort>
             </Box>
           </HGrid>
