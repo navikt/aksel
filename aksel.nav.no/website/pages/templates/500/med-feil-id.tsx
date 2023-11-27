@@ -25,7 +25,9 @@ export default function Example() {
               <List.Item>
                 Dersom problemet vedvarer kan du{" "}
                 {/* https://nav.no/kontaktoss for eksterne flater */}
-                <Link href="#">kontakte oss</Link>
+                <Link href="#" target="_blank">
+                  kontakte oss (åpnes i ny fane)
+                </Link>
               </List.Item>
             </List>
 

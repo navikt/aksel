@@ -34,8 +34,11 @@ export default function Example() {
             </Heading>
             <BodyShort>
               Please refresh this page or try again in a few minutes.{" "}
-              <Link href="https://nav.no/kontaktoss">Contact us</Link> if the
-              problem persists.
+              {/* https://www.nav.no/kontaktoss/en for eksterne flater */}
+              <Link target="_blank" href="#">
+                Contact us (opens in new tab)
+              </Link>{" "}
+              if the problem persists.
             </BodyShort>
           </Box>
         </Box>
