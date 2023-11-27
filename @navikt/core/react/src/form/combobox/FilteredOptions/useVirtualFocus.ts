@@ -21,7 +21,7 @@ const useVirtualFocus = (
 
   const getListOfAllChildren = (): Array<HTMLElement> =>
     containerRef?.children
-      ? Array.prototype.slice.call(containerRef?.children)
+      ? Array.from(containerRef?.children)
       : [];
   const getElementsAbleToReceiveFocus = () =>
     getListOfAllChildren().filter(
