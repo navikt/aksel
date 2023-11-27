@@ -8,7 +8,7 @@ const UploadButton = () => {
 
   if (context === null) {
     console.error(
-      "<UploadButton> has to be used within <FileUpload.Button> or <FileUpload.Zone>, which in turn must be within an <FileUpload>"
+      "You are using <FileUpload.Button> or <FileUpload.Zone> outside of a <FileUpload>"
     );
     return null;
   }

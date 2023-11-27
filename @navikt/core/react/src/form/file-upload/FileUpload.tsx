@@ -79,7 +79,9 @@ export interface FileUploadProps {
  *   onUpload={onUpload}
  *   label="Last opp filer her"
  *   inputId="fileupload-input"
- * />
+ * >
+ *    <FileUpload.Zone />
+ * </FileUpload>
  * ```
  */
 export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
