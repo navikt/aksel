@@ -90,6 +90,6 @@ function useDekorator() {
 export const args = {
   index: 1,
   title: "Enkel",
-  desc: "Burde inneholde et hint om hva som er feil",
+  desc: "Burde inneholde et hint om hva som er feil. For bruker vil det viktigste være å få et hint om hvordan de kan løse feilen, eller berolige dem om at feilen ikke er deres skyld.",
   sandbox: false,
 };
