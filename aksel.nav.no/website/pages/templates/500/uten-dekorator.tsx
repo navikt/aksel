@@ -31,6 +31,7 @@ export default function Example() {
                 <List.Item>Prøv igjen om noen minutter</List.Item>
                 <List.Item>
                   Dersom problemet vedvarer kan du{" "}
+                  {/* https://nav.no/kontaktoss for eksterne flater */}
                   <Link href="#">kontakte oss</Link>
                 </List.Item>
               </List>
@@ -62,6 +63,6 @@ export default function Example() {
 export const args = {
   index: 1,
   title: "Uten Dekoratør",
-  desc: "Malen fungerer ved bruk av andre sidemaler, også da uten dekoratøren",
+  desc: "Malen fungerer ved bruk av andre sidemaler, også da uten dekoratøren.",
   sandbox: false,
 };

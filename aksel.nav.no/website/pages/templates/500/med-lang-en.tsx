@@ -33,6 +33,7 @@ export default function Example() {
                 <List.Item>Prøv igjen om noen minutter</List.Item>
                 <List.Item>
                   Dersom problemet vedvarer kan du{" "}
+                  {/* https://nav.no/kontaktoss for eksterne flater */}
                   <Link href="#">kontakte oss</Link>
                 </List.Item>
               </List>
@@ -100,6 +101,6 @@ function useDekorator() {
 export const args = {
   index: 5,
   title: "Flerspråk",
-  desc: "Man har ofte ikke kontroll på kontekst bruker ender opp med feilmelding. Ved å legge til flere språk kan man være sikrere på at alle forstår hva som gikk feil",
+  desc: "Man har ofte ikke kontroll på kontekst bruker ender opp med feilmelding. Ved å legge til flere språk kan man være sikrere på at alle forstår hva som gikk feil.",
   sandbox: false,
 };
