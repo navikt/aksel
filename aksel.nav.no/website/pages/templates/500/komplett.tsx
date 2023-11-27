@@ -14,7 +14,7 @@ export default function Example() {
   useDekorator();
 
   return (
-    <Page footer={<Footer />}>
+    <Page data-aksel-template="500-v1" footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 8">
