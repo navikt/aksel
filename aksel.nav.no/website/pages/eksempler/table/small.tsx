@@ -7,7 +7,7 @@ const Example = () => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Fødseslnr.</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
           <Table.HeaderCell scope="col">Start</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -70,4 +70,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "Small brukes på interne flater der det er behov for et mer komprimert grensesnitt.",
 };
