@@ -8,29 +8,32 @@ export default function Example() {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
-        <Box paddingBlock="20 8">
-          <Box>
-            <BodyShort textColor="subtle" size="small">
-              Statuskode 500
-            </BodyShort>
-            <Heading level="1" size="large" spacing>
-              Beklager, det har skjedd en feil
-            </Heading>
-            <BodyShort>
-              En teknisk feil gjør at siden er utilgjengelig.
-            </BodyShort>
-            <List>
-              <List.Item>Last siden på nytt (det kan hjelpe)</List.Item>
-              <List.Item>Prøv igjen om noen minutter</List.Item>
-              <List.Item>
-                Dersom problemet vedvarer kan du{" "}
-                {/* https://nav.no/kontaktoss for eksterne flater */}
-                <Link href="#" target="_blank">
-                  kontakte oss (åpnes i ny fane)
-                </Link>
-              </List.Item>
-            </List>
-          </Box>
+        <Box paddingBlock="20 16">
+          <BodyShort textColor="subtle" size="small">
+            Statuskode 500
+          </BodyShort>
+          <Heading level="1" size="large" spacing>
+            Beklager, noe gikk galt.
+          </Heading>
+          {/* Tekster bør tilpasses den aktuelle 500-feilen. Teksten under er for en generisk 500-feil. */}
+          <BodyShort spacing>
+            En teknisk feil på våre servere gjør at siden er utilgjengelig.
+            Dette skyldes ikke noe du gjorde.
+          </BodyShort>
+
+          <BodyShort>Her er noen forslag på hvordan du løser feilen:</BodyShort>
+          <List>
+            <List.Item>Prøv igjen om noen minutter</List.Item>
+            <List.Item>Gå tilbake til forrige side</List.Item>
+          </List>
+          <BodyShort>
+            Hvis problemet vedvarer, kan du{" "}
+            {/* https://nav.no/kontaktoss for eksterne flater */}
+            <Link href="#" target="_blank">
+              kontakte oss (åpnes i ny fane)
+            </Link>
+            .
+          </BodyShort>
         </Box>
       </Page.Block>
       <Env />
