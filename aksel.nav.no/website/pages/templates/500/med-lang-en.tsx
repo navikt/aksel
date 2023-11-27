@@ -99,6 +99,6 @@ function useDekorator() {
 export const args = {
   index: 5,
   title: "Flerspråk",
-  desc: "Burde inneholde et hint om hva som er feil, og feilmelding på flere språk",
+  desc: "Man har ofte ikke kontroll på kontekst bruker ender opp med feilmelding. Ved å legge til flere språk kan man være sikrere på at alle forstår hva som gikk feil.",
   sandbox: false,
 };
