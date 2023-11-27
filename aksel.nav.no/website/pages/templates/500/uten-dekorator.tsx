@@ -61,6 +61,6 @@ export default function Example() {
 export const args = {
   index: 1,
   title: "Uten Dekoratør",
-  desc: "En renere template som burde inneholde et hint om hva som er feil",
+  desc: "Malen fungerer ved bruk av andre sidemaler, også da uten dekoratøren.",
   sandbox: false,
 };
