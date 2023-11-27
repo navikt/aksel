@@ -110,6 +110,6 @@ function useDekorator() {
 export const args = {
   index: 2,
   title: "Komplett",
-  desc: "I sin fullstendige form inneholder denne et hint om hva som er feil, feil-id, CTA, og feilmelding på flere språk",
+  desc: "Burde inneholde et hint om hva som er feil, feil-id, CTA, og feilmelding på flere språk",
   sandbox: false,
 };
