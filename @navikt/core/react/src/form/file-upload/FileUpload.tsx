@@ -172,13 +172,7 @@ export interface FileUploadComponent
   extends React.ForwardRefExoticComponent<
     FileUploadProps & React.RefAttributes<HTMLDivElement>
   > {
-  /**
-   * @see 🏷️ {@link FileUploadProps}
-   */
   Zone: typeof ZoneVariant;
-  /**
-   * @see 🏷️ {@link FileUploadProps}
-   */
   Button: typeof ButtonVariant;
 }
 
