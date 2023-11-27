@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { CSSProperties, MutableRefObject, Ref, useRef } from "react";
+import React, { CSSProperties, MutableRefObject } from "react";
 import { ErrorMessage, Label, BodyShort } from "../../typography";
 
 interface Props {

@@ -40,7 +40,7 @@ const ZoneVariant = ({
 
   useClientLayoutEffect(() => {
     const height = dropzoneRef?.current?.getBoundingClientRect()?.height
-    if (!!height) {
+    if (height) {
       setMinWidth(height * 2)
     }
   }, []);
