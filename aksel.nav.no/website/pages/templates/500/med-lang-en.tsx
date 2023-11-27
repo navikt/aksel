@@ -31,7 +31,8 @@ export default function Example() {
                 <List.Item>Prøv igjen om noen minutter</List.Item>
                 <List.Item>
                   Dersom problemet vedvarer kan du{" "}
-                  <Link href="https://nav.no/kontaktoss">kontakte oss</Link>
+                  {/* https://nav.no/kontaktoss for eksterne flater */}
+                  <Link href="#">kontakte oss</Link>
                 </List.Item>
               </List>
 
