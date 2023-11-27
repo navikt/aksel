@@ -17,7 +17,9 @@ export default function Example() {
         <Box paddingBlock="20 8">
           <HGrid gap="12" columns={{ sm: 1, md: 2 }}>
             <Box>
-              <BodyShort size="small">Statuskode 500</BodyShort>
+              <BodyShort textColor="subtle" size="small">
+                Statuskode 500
+              </BodyShort>
               <Heading level="1" size="large" spacing>
                 Beklager, det har skjedd en feil
               </Heading>
@@ -29,7 +31,7 @@ export default function Example() {
                 <List.Item>Prøv igjen om noen minutter</List.Item>
                 <List.Item>
                   Dersom problemet vedvarer kan du{" "}
-                  <Link href="https://nav.no/kontaktoss">kontakte oss</Link>
+                  <Link href="#">kontakte oss</Link>
                 </List.Item>
               </List>
 
@@ -45,9 +47,9 @@ export default function Example() {
                 Something went wrong
               </Heading>
               <BodyShort>
-                Please refresh this page or try again in a few minutes. If the
-                problem persists,{" "}
-                <Link href="https://nav.no/kontaktoss">contact us</Link>
+                <Link href="#">Contact us</Link> if the problem persists. You
+                can try to remedy the problem by refreshing this again in a few
+                minutes.
               </BodyShort>
             </Box>
           </HGrid>
@@ -60,6 +62,6 @@ export default function Example() {
 export const args = {
   index: 1,
   title: "Uten Dekoratør",
-  desc: "En renere template som burde inneholde et hint om hva som er feil",
+  desc: "Malen fungerer ved bruk av andre sidemaler, også da uten dekoratøren",
   sandbox: false,
 };

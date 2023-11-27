@@ -19,7 +19,9 @@ export default function Example() {
         <Box paddingBlock="20 8">
           <HGrid gap="12" columns={{ sm: 1, md: 2 }}>
             <Box>
-              <BodyShort size="small">Statuskode 500</BodyShort>
+              <BodyShort textColor="subtle" size="small">
+                Statuskode 500
+              </BodyShort>
               <Heading level="1" size="large" spacing>
                 Beklager, det har skjedd en feil
               </Heading>
@@ -31,7 +33,7 @@ export default function Example() {
                 <List.Item>Prøv igjen om noen minutter</List.Item>
                 <List.Item>
                   Dersom problemet vedvarer kan du{" "}
-                  <Link href="https://nav.no/kontaktoss">kontakte oss</Link>
+                  <Link href="#">kontakte oss</Link>
                 </List.Item>
               </List>
             </Box>
