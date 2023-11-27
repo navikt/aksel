@@ -40,9 +40,9 @@ export default function Example() {
                 Something went wrong
               </Heading>
               <BodyShort>
-                Please refresh this page or try again in a few minutes. If the
-                problem persists,{" "}
-                <Link href="https://nav.no/kontaktoss">contact us</Link>
+                Please refresh this page or try again in a few minutes.{" "}
+                <Link href="https://nav.no/kontaktoss">Contact us</Link> if the
+                problem persists
               </BodyShort>
             </Box>
           </HGrid>
