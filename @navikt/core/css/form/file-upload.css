@@ -18,7 +18,7 @@
   position: relative;
   background-color: var(--ac-file-upload-bg, var(--a-surface-subtle));
   padding: var(--a-spacing-5);
-  border: 1px dashed #0067C5;
+  border: 1px dashed var(--ac-file-upload-border, var(--a-border-action));
   border-radius: var(--ac-file-upload-border-radius, var(--a-border-radius-medium));
   color: var(--ac-file-upload-text, var(--a-text-action));
   transition: 0.2s ease border, 0.2s ease background-color;
@@ -28,6 +28,10 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.navds-fileupload--zone.navds-fileupload--error {
+  border-color: var(--ac-file-upload-error-border, var(--a-surface-danger))
 }
 
 .navds-fileupload--zone:hover {
