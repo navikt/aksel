@@ -1,7 +1,9 @@
 import React, { forwardRef, ChangeEvent, useState } from "react";
-import { partitionFiles } from "./partition-files";
-import ButtonVariant from "./ButtonVariant";
+import cl from "clsx";
+import { partitionFiles } from "./utils/partition-files";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
 import ZoneVariant from "./ZoneVariant";
+import ButtonVariant from "./ButtonVariant";
 
 export interface OnUploadProps {
   allFiles: File[],
@@ -11,14 +13,10 @@ export interface OnUploadProps {
 
 export interface FileUploadProps {
   /**
-   * Changes styling when changed.
-   * The "zone" variant takes up the full
-   * width of its parent, while the "button"
-   * variant takes up width based on its content.
-   * Both styles support opening a file viewer
-   * and drag-and-drop.
+   * Represents the type of FileUpload component that
+   * should be rendered.
    */
-  variant: "zone" | "button";
+  children: React.ReactNode;
   /**
    * ID of the input element. Required to properly
    * connect input element to potential error message.
@@ -73,7 +71,6 @@ export interface FileUploadProps {
  * ```jsx
  * <FileUpload
  *   onUpload={onUpload}
- *   variant="button"
  *   label="Last opp filer her"
  *   inputId="fileupload-input"
  * />
@@ -88,14 +85,17 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       label,
       description,
       className,
-      variant = "zone",
       multiple = true,
       accept,
-      validator
+      validator,
+      children
     },
     ref
   ) => {
     const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false)
+
+    const errorId = `${inputId}-error`
+    const ariaDescribedby = error ? errorId : undefined
 
     const onDragEnter = () => setIsDraggingOver(true)
     const onDragEnd = () => setIsDraggingOver(false)
@@ -114,38 +114,75 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       event.target.value = ""
     }
 
-    if (variant === "button") {
-      return <ButtonVariant
-        label={label}
-        description={description}
-        divRef={ref}
-        className={className}
-        error={error}
-        inputId={inputId}
-        multiple={multiple}
-        accept={accept}
-        handleUpload={handleUpload}
-        onDragEnter={onDragEnter}
-        onDragEnd={onDragEnd}
-        isDraggingOver={isDraggingOver}
-      />
-    } else {
-      return <ZoneVariant
-        label={label}
-        description={description}
-        divRef={ref}
-        className={className}
-        error={error}
-        inputId={inputId}
-        multiple={multiple}
-        accept={accept}
-        handleUpload={handleUpload}
-        onDragEnter={onDragEnter}
-        onDragEnd={onDragEnd}
-        isDraggingOver={isDraggingOver}
-      />
-    }
+    return (
+      <div
+        className={cl("navds-form-field", className)}
+        ref={ref}
+      >
+        <Label
+          htmlFor={inputId}
+          className={cl("navds-form-field__label")}
+        >{label}</Label>
+        {!!description && (
+          <BodyShort
+            className={cl("navds-form-field__description")}
+            as="div"
+          >{description}</BodyShort>
+        )}
+        <div
+          onDragOver={onDragEnter}
+          onDragLeave={onDragEnd}
+          onDragEnd={onDragEnd}
+          onDrop={onDragEnd}
+          className={
+            cl(
+              "navds-fileupload",
+              {
+                "navds-fileupload--error": !!error,
+                "navds-fileupload--dragover": isDraggingOver
+              }
+            )
+          }
+        >
+          {children}
+          <input
+            type="file"
+            className="navds-fileupload__input"
+            id={inputId}
+            multiple={multiple}
+            aria-describedby={ariaDescribedby}
+            accept={accept}
+            onChange={handleUpload}
+          />
+        </div>
+        <div
+          className="navds-form-field__error"
+          id={errorId}
+          aria-relevant="additions removals"
+          aria-live="polite"
+        >
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+        </div>
+      </div>
+    )
   }
-);
+) as FileUploadComponent;
+
+export interface FileUploadComponent
+  extends React.ForwardRefExoticComponent<
+    FileUploadProps & React.RefAttributes<HTMLDivElement>
+  > {
+  /**
+   * @see 🏷️ {@link FileUploadProps}
+   */
+  Zone: typeof ZoneVariant;
+  /**
+   * @see 🏷️ {@link FileUploadProps}
+   */
+  Button: typeof ButtonVariant;
+}
+
+FileUpload.Zone = ZoneVariant
+FileUpload.Button = ButtonVariant
 
 export default FileUpload;

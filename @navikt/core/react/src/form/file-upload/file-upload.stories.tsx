@@ -7,12 +7,6 @@ export default {
   title: "ds-react/FileUpload",
   component: FileUpload,
   argTypes: {
-    variant: {
-      control: {
-        type: "radio",
-        options: ["button", "zone"],
-      },
-    },
     error: {
       control: {
         type: "text",
@@ -36,9 +30,10 @@ export const Zone = {
     <FileUpload
       label="Last opp filer"
       onUpload={onUpload}
-      variant="zone"
       inputId="fileupload-input"
-    />
+    >
+      <FileUpload.Zone />
+    </FileUpload>
   ),
 };
 
@@ -48,9 +43,10 @@ export const ZoneWithDescription = {
       label="Last opp filer"
       description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
       onUpload={onUpload}
-      variant="zone"
       inputId="fileupload-input"
-    />
+    >
+      <FileUpload.Zone />
+    </FileUpload>
   ),
 };
 
@@ -59,9 +55,10 @@ export const Button = {
     <FileUpload
       label="Last opp filer"
       onUpload={onUpload}
-      variant="button"
       inputId="fileupload-input"
-    />
+    >
+      <FileUpload.Button />
+    </FileUpload>
   ),
 };
 
@@ -71,9 +68,10 @@ export const ButtonWithDescription = {
       label="Last opp filer"
       description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
       onUpload={onUpload}
-      variant="button"
       inputId="fileupload-input"
-    />
+    >
+      <FileUpload.Button />
+    </FileUpload>
   ),
 };
 
@@ -82,10 +80,11 @@ export const Accept = {
     <FileUpload
       label="Last opp filer"
       onUpload={onUpload}
-      variant="zone"
       accept=".png"
       inputId="fileupload-input"
-    />
+    >
+      <FileUpload.Zone />
+    </FileUpload>
   ),
 };
 
@@ -94,10 +93,11 @@ export const ButtonWithError = {
     <FileUpload
       label="Last opp filer"
       onUpload={onUpload}
-      variant="button"
       error="Du må laste opp en fil"
       inputId="fileupload-input"
-    />
+    >
+      <FileUpload.Button />
+    </FileUpload>
   ),
 };
 
@@ -106,9 +106,10 @@ export const ZoneWithError = {
     <FileUpload
       label="Last opp filer"
       onUpload={onUpload}
-      variant="zone"
       error="Du må laste opp en fil"
       inputId="fileupload-input"
-    />
+    >
+      <FileUpload.Zone />
+    </FileUpload>
   ),
 };

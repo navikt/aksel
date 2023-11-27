@@ -14,7 +14,7 @@
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-fileupload--zone {
+.navds-fileupload__zone {
   position: relative;
   background-color: var(--ac-file-upload-bg, var(--a-surface-subtle));
   padding: var(--a-spacing-5);
@@ -30,13 +30,13 @@
   cursor: pointer;
 }
 
-.navds-fileupload--zone::after {
+.navds-fileupload__zone::after {
   display: none;
   content: "Slipp";
   pointer-events: none;
 }
 
-.navds-fileupload--dragover.navds-fileupload--zone::after {
+.navds-fileupload--dragover .navds-fileupload__zone::after {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,11 +46,7 @@
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-fileupload--zone.navds-fileupload--error {
-  border-color: var(--ac-file-upload-error-border, var(--a-surface-danger))
-}
-
-.navds-fileupload--zone:hover {
+.navds-fileupload__zone:hover {
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
@@ -61,6 +57,10 @@
 
 .navds-fileupload--error:not(:hover):not(.navds-fileupload--dragover) .navds-fileupload__button {
   box-shadow: inset 0 0 0 2px var(--ac-file-upload-error-border, var(--a-surface-danger))
+}
+
+.navds-fileupload--error:not(:hover):not(.navds-fileupload--dragover) .navds-fileupload__zone {
+  border-color: var(--ac-file-upload-error-border, var(--a-surface-danger))
 }
 
 .navds-fileupload:focus:not(.navds-fileupload--dragover) .navds-fileupload__button,
