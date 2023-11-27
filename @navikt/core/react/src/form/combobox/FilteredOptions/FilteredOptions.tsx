@@ -58,9 +58,7 @@ const FilteredOptions = () => {
           id={`${id}-max-selected`}
           data-no-focus="true"
         >
-          {maxSelectedMessage && maxSelectedOptions
-            ? maxSelectedMessage
-            : `${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
+          {maxSelectedMessage ?? `${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
         </li>
       )}
       {isLoading && (
