@@ -30,7 +30,7 @@ export const Zone = {
     <FileUpload
       label="Last opp filer"
       onUpload={onUpload}
-      inputId="fileupload-input"
+      id="fileupload-input"
     >
       <FileUpload.Zone />
     </FileUpload>
@@ -43,7 +43,7 @@ export const ZoneWithDescription = {
       label="Last opp filer"
       description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
       onUpload={onUpload}
-      inputId="fileupload-input"
+      id="fileupload-input"
     >
       <FileUpload.Zone />
     </FileUpload>
@@ -55,7 +55,7 @@ export const Button = {
     <FileUpload
       label="Last opp filer"
       onUpload={onUpload}
-      inputId="fileupload-input"
+      id="fileupload-input"
     >
       <FileUpload.Button />
     </FileUpload>
@@ -68,7 +68,7 @@ export const ButtonWithDescription = {
       label="Last opp filer"
       description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
       onUpload={onUpload}
-      inputId="fileupload-input"
+      id="fileupload-input"
     >
       <FileUpload.Button />
     </FileUpload>
@@ -81,7 +81,7 @@ export const Accept = {
       label="Last opp filer"
       onUpload={onUpload}
       accept=".png"
-      inputId="fileupload-input"
+      id="fileupload-input"
     >
       <FileUpload.Zone />
     </FileUpload>
@@ -94,7 +94,7 @@ export const ButtonWithError = {
       label="Last opp filer"
       onUpload={onUpload}
       error="Du må laste opp en fil"
-      inputId="fileupload-input"
+      id="fileupload-input"
     >
       <FileUpload.Button />
     </FileUpload>
@@ -107,7 +107,21 @@ export const ZoneWithError = {
       label="Last opp filer"
       onUpload={onUpload}
       error="Du må laste opp en fil"
-      inputId="fileupload-input"
+      id="fileupload-input"
+    >
+      <FileUpload.Zone />
+    </FileUpload>
+  ),
+};
+
+export const ZoneWithErrorAndDescription = {
+  render: () => (
+    <FileUpload
+      label="Last opp filer"
+      onUpload={onUpload}
+      error="Du må laste opp en fil"
+      description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
+      id="fileupload-input"
     >
       <FileUpload.Zone />
     </FileUpload>
@@ -119,7 +133,7 @@ export const LocaleEnglish = {
     <FileUpload
       label="Provide documentation"
       onUpload={onUpload}
-      inputId="fileupload-input"
+      id="fileupload-input"
       locale="en"
     >
       <FileUpload.Zone />
@@ -132,7 +146,7 @@ export const LocaleNynorsk = {
     <FileUpload
       label="Last opp filer"
       onUpload={onUpload}
-      inputId="fileupload-input"
+      id="fileupload-input"
       locale="nn"
     >
       <FileUpload.Zone />

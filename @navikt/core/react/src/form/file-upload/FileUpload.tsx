@@ -5,6 +5,7 @@ import { BodyShort, ErrorMessage, Label } from "../../typography";
 import ZoneVariant from "./ZoneVariant";
 import ButtonVariant from "./ButtonVariant";
 import { FileUploadContext } from "./FileUploadContext";
+import { useFormField } from "../useFormField";
 
 export interface OnUploadProps {
   allFiles: File[],
@@ -22,7 +23,7 @@ export interface FileUploadProps {
    * ID of the input element. Required to properly
    * connect input element to potential error message.
    */
-  inputId: string;
+  id: string;
   /**
    * Text shown to the user.
    */
@@ -78,7 +79,7 @@ export interface FileUploadProps {
  * <FileUpload
  *   onUpload={onUpload}
  *   label="Last opp filer her"
- *   inputId="fileupload-input"
+ *   id="fileupload-input"
  * >
  *    <FileUpload.Zone />
  * </FileUpload>
@@ -86,10 +87,22 @@ export interface FileUploadProps {
  */
 export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
   (
-    {
+    props,
+    ref
+  ) => {
+    const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false)
+
+    const {
+      inputProps,
+      errorId,
+      showErrorMsg,
+      hasError,
+      inputDescriptionId,
+    } = useFormField(props, "fileUpload");
+
+    const {
       onUpload,
       error,
-      inputId,
       label,
       description,
       className,
@@ -98,13 +111,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       validator,
       children,
       locale = "nb"
-    },
-    ref
-  ) => {
-    const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false)
-
-    const errorId = `${inputId}-error`
-    const ariaDescribedby = error ? errorId : undefined
+    } = props
 
     const onDragEnter = () => setIsDraggingOver(true)
     const onDragEnd = () => setIsDraggingOver(false)
@@ -130,11 +137,12 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
           ref={ref}
         >
           <Label
-            htmlFor={inputId}
+            htmlFor={inputProps.id}
             className={cl("navds-form-field__label")}
           >{label}</Label>
           {!!description && (
             <BodyShort
+              id={inputDescriptionId}
               className={cl("navds-form-field__description")}
               as="div"
             >{description}</BodyShort>
@@ -148,7 +156,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
               cl(
                 "navds-fileupload__content",
                 {
-                  "navds-fileupload__content--error": !!error,
+                  "navds-fileupload__content--error": hasError,
                   "navds-fileupload__content--dragover": isDraggingOver
                 }
               )
@@ -158,11 +166,10 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
             <input
               type="file"
               className="navds-fileupload__content__input"
-              id={inputId}
               multiple={multiple}
-              aria-describedby={ariaDescribedby}
               accept={accept}
               onChange={handleUpload}
+              {...inputProps}
             />
           </div>
           <div
@@ -171,7 +178,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
             aria-relevant="additions removals"
             aria-live="polite"
           >
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            {showErrorMsg && <ErrorMessage>{error}</ErrorMessage>}
           </div>
         </div>
       </FileUploadContext.Provider>
