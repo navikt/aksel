@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../../button";
 import { Textarea } from "../index";
 
@@ -122,6 +122,18 @@ export const MaxRows = () => {
 
 export const Resize = () => {
   return <Textarea resize label="Ipsum enim quis culpa" />;
+};
+
+export const Controlled = () => {
+  const [value, setValue] = useState("");
+  return (
+    <Textarea
+      resize
+      label="Ipsum enim quis culpa"
+      value={value}
+      onChange={(event) => setValue(event.currentTarget.value)}
+    />
+  );
 };
 
 export const Readonly = () => {
