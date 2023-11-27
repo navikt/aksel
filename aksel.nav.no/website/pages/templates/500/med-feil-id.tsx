@@ -94,6 +94,6 @@ function useDekorator() {
 export const args = {
   index: 4,
   title: "Med feil-id",
-  desc: "Burde inneholde et hint om hva som er feil, og en feil-id som kan screenshottes",
+  desc: "Ved å legge til en feil-id kan man enklere feilsøke mot logger hvis man får skjermbilde av feilmelding fra bruker.",
   sandbox: false,
 };
