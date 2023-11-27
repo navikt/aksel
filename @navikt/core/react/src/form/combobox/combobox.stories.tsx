@@ -287,7 +287,7 @@ export const ComboboxSizes = () => (
 
 export const MaxSelectedOptions: StoryFunction = () => {
   const id = useId();
-  const [value, setValue] = useState<string | undefined>("a");
+  const [value, setValue] = useState<string | undefined>("");
   const [selectedOptions, setSelectedOptions] = useState([
     options[0],
     options[1],
