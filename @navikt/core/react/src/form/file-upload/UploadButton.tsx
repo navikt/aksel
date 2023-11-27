@@ -1,11 +1,24 @@
 import { UploadIcon } from "@navikt/aksel-icons";
-import React from "react";
+import React, { useContext } from "react";
+import { FileUploadContext } from "./FileUploadContext";
+import { getButtonText } from "./utils/i18n";
 
-const UploadButton = () => (
-  <span className="navds-button navds-button--secondary navds-fileupload__content__button">
+const UploadButton = () => {
+  const context = useContext(FileUploadContext);
+
+  if (context === null) {
+    console.error(
+      "<UploadButton> has to be used within <FileUpload.Button> or <FileUpload.Zone>, which in turn must be within an <FileUpload>"
+    );
+    return null;
+  }
+
+  return (
+    <span className="navds-button navds-button--secondary navds-fileupload__content__button">
     <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} className="navds-fileupload__content__icon" />
-    Velg dine filer
+      {getButtonText(context.locale)}
   </span>
-)
+  )
+}
 
 export default UploadButton

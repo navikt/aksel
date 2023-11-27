@@ -4,6 +4,7 @@ import { partitionFiles } from "./utils/partition-files";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import ZoneVariant from "./ZoneVariant";
 import ButtonVariant from "./ButtonVariant";
+import { FileUploadContext } from "./FileUploadContext";
 
 export interface OnUploadProps {
   allFiles: File[],
@@ -61,6 +62,11 @@ export interface FileUploadProps {
    * if a file is accepted or rejected.
    */
   validator?(file: File): boolean;
+  /**
+   * Changes locale used for component text.
+   * @default "nb" (norsk bokmål)
+   */
+  locale?: "nb" | "nn" | "en";
 }
 
 /**
@@ -88,7 +94,8 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
       multiple = true,
       accept,
       validator,
-      children
+      children,
+      locale = "nb"
     },
     ref
   ) => {
@@ -115,55 +122,57 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     }
 
     return (
-      <div
-        className={cl("navds-form-field", "navds-fileupload", className)}
-        ref={ref}
-      >
-        <Label
-          htmlFor={inputId}
-          className={cl("navds-form-field__label")}
-        >{label}</Label>
-        {!!description && (
-          <BodyShort
-            className={cl("navds-form-field__description")}
-            as="div"
-          >{description}</BodyShort>
-        )}
+      <FileUploadContext.Provider value={{ locale }}>
         <div
-          onDragOver={onDragEnter}
-          onDragLeave={onDragEnd}
-          onDragEnd={onDragEnd}
-          onDrop={onDragEnd}
-          className={
-            cl(
-              "navds-fileupload__content",
-              {
-                "navds-fileupload__content--error": !!error,
-                "navds-fileupload__content--dragover": isDraggingOver
-              }
-            )
-          }
+          className={cl("navds-form-field", "navds-fileupload", className)}
+          ref={ref}
         >
-          {children}
-          <input
-            type="file"
-            className="navds-fileupload__content__input"
-            id={inputId}
-            multiple={multiple}
-            aria-describedby={ariaDescribedby}
-            accept={accept}
-            onChange={handleUpload}
-          />
+          <Label
+            htmlFor={inputId}
+            className={cl("navds-form-field__label")}
+          >{label}</Label>
+          {!!description && (
+            <BodyShort
+              className={cl("navds-form-field__description")}
+              as="div"
+            >{description}</BodyShort>
+          )}
+          <div
+            onDragOver={onDragEnter}
+            onDragLeave={onDragEnd}
+            onDragEnd={onDragEnd}
+            onDrop={onDragEnd}
+            className={
+              cl(
+                "navds-fileupload__content",
+                {
+                  "navds-fileupload__content--error": !!error,
+                  "navds-fileupload__content--dragover": isDraggingOver
+                }
+              )
+            }
+          >
+            {children}
+            <input
+              type="file"
+              className="navds-fileupload__content__input"
+              id={inputId}
+              multiple={multiple}
+              aria-describedby={ariaDescribedby}
+              accept={accept}
+              onChange={handleUpload}
+            />
+          </div>
+          <div
+            className="navds-form-field__error"
+            id={errorId}
+            aria-relevant="additions removals"
+            aria-live="polite"
+          >
+            {error && <ErrorMessage>{error}</ErrorMessage>}
+          </div>
         </div>
-        <div
-          className="navds-form-field__error"
-          id={errorId}
-          aria-relevant="additions removals"
-          aria-live="polite"
-        >
-          {error && <ErrorMessage>{error}</ErrorMessage>}
-        </div>
-      </div>
+      </FileUploadContext.Provider>
     )
   }
 ) as FileUploadComponent;

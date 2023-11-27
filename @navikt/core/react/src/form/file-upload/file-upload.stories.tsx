@@ -113,3 +113,29 @@ export const ZoneWithError = {
     </FileUpload>
   ),
 };
+
+export const LocaleEnglish = {
+  render: () => (
+    <FileUpload
+      label="Provide documentation"
+      onUpload={onUpload}
+      inputId="fileupload-input"
+      locale="en"
+    >
+      <FileUpload.Zone />
+    </FileUpload>
+  ),
+};
+
+export const LocaleNynorsk = {
+  render: () => (
+    <FileUpload
+      label="Last opp filer"
+      onUpload={onUpload}
+      inputId="fileupload-input"
+      locale="nn"
+    >
+      <FileUpload.Zone />
+    </FileUpload>
+  ),
+};
