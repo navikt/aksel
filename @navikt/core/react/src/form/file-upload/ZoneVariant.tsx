@@ -34,8 +34,6 @@ const ZoneVariant = ({
   handleUpload,
 }: Props) => {
   const dropzoneRef = useRef<HTMLDivElement | null>(null)
-  const [widthOverride, setWidthOverride] = useState<number>()
-  const [heightOverride, setHeightOverride] = useState<number>()
   const [minWidth, setMinWidth] = useState<number>()
 
   useClientLayoutEffect(() => {
@@ -45,23 +43,6 @@ const ZoneVariant = ({
     }
   }, []);
 
-  useClientLayoutEffect(() => {
-    if (isDraggingOver) {
-      const requestID = window.requestAnimationFrame(() => {
-        const boundingClientRect = dropzoneRef?.current?.getBoundingClientRect()
-        setWidthOverride(boundingClientRect?.width)
-        setHeightOverride(boundingClientRect?.height)
-      });
-      return () => {
-        setWidthOverride(undefined);
-        setHeightOverride(undefined);
-        cancelAnimationFrame(requestID);
-      };
-    } else {
-      setWidthOverride(undefined);
-      setHeightOverride(undefined);
-    }
-  }, [isDraggingOver]);
 
   return (<Wrapper
     label={label}
@@ -73,9 +54,7 @@ const ZoneVariant = ({
     onDragEnd={onDragEnd}
     dropzoneRef={dropzoneRef}
     style={{
-      minWidth,
-      width: widthOverride,
-      height: heightOverride
+      minWidth
     }}
     error={error}
     isDraggingOver={isDraggingOver}
@@ -85,14 +64,9 @@ const ZoneVariant = ({
     handleUpload={handleUpload}
     fullWidth={true}
   >
-    {isDraggingOver
-      ? <BodyShort as="span">Slipp</BodyShort>
-      : (<>
-        <BodyShort as="span">Dra og slipp</BodyShort>
-        <BodyShort as="span">eller</BodyShort>
-        <UploadButton />
-      </>)
-    }
+      <BodyShort as="span">Dra og slipp</BodyShort>
+      <BodyShort as="span">eller</BodyShort>
+      <UploadButton />
   </Wrapper>)
 }
 

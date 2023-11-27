@@ -64,8 +64,7 @@ const Wrapper = ({
       onDragEnd={onDragEnd}
       onDrop={onDragEnd}
       style={{
-        width: style?.width ? style.width : fullWidth ? "100%" : "auto",
-        height: style?.height,
+        width: fullWidth ? "100%" : "auto",
         minWidth: style?.minWidth
       }}
       ref={dropzoneRef}

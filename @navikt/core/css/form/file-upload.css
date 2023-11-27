@@ -30,6 +30,22 @@
   cursor: pointer;
 }
 
+.navds-fileupload--zone::after {
+  display: none;
+  content: "Slipp";
+  pointer-events: none;
+}
+
+.navds-fileupload--dragover.navds-fileupload--zone::after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
+}
+
 .navds-fileupload--zone.navds-fileupload--error {
   border-color: var(--ac-file-upload-error-border, var(--a-surface-danger))
 }
