@@ -1,4 +1,3 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import {
   BodyShort,
   Box,
@@ -142,11 +141,10 @@ function StatusSvg() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default Example;
 
 export const args = {
   index: 4,
   title: "Flerspråk",
   desc: "En 404-feil kan være frustrerende, spesielt hvis den er på et ukjent språk. En melding på engelsk kan gjøre det lettere å forstå problemet og hva du skal gjøre videre",
-  sandbox: false,
 };

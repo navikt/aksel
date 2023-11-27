@@ -1,4 +1,3 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import {
   BodyShort,
   Box,
@@ -133,11 +132,10 @@ function StatusSvg() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default Example;
 
 export const args = {
   index: 2,
   title: "Med CTA til side",
   desc: "En 404-side kan inneholde en CTA som leder til et relevant område eller side, avhengig av konteksten.",
-  sandbox: false,
 };

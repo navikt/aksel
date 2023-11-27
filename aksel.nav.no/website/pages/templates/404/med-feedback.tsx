@@ -1,4 +1,3 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { BugIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
@@ -134,11 +133,10 @@ function StatusSvg() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default Example;
 
 export const args = {
   index: 3,
   title: "Med tilbakemeldingsfunksjon",
   desc: "Hvis løsningen din støtter det, kan du vurdere å gi brukerne muligheten til å rapportere avvik.",
-  sandbox: false,
 };

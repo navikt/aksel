@@ -3,8 +3,8 @@ import path from "path";
 import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
 import { filterCode } from "./filter-code";
-import { sortResult } from "./sort";
 import { processAndCompressForURI } from "./sandbox-process-base64";
+import { sortResult } from "./sort";
 
 export function parseCodeFiles(
   dirName: string,

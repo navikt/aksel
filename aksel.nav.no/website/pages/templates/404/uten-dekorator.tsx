@@ -1,6 +1,5 @@
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
-import { withDsExample } from "@/web/examples/withDsExample";
 import {
   BodyShort,
   Box,
@@ -81,7 +80,7 @@ function StatusSvg() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default Example;
 
 export const args = {
   index: 5,

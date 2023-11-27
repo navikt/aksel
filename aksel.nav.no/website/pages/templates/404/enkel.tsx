@@ -125,12 +125,10 @@ function StatusSvg() {
 }
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-
 export default Example;
 
 export const args = {
   index: 1,
   title: "Enkel",
   desc: "I sin enkleste form skal 404-side inneholde en tittel, feilmelding, løsningsforslag og illustrasjon.",
-  sandbox: false,
 };
