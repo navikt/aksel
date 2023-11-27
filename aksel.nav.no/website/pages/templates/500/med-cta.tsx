@@ -28,10 +28,10 @@ export default function Example() {
               En teknisk feil på våre servere gjør at siden er utilgjengelig.
               Dette skyldes ikke noe du gjorde.
             </BodyShort>
-
-            <List>
-              <List.Item>Prøv igjen om noen minutter</List.Item>
-              <List.Item>Gå tilbake til forrige side</List.Item>
+            <BodyShort>Du kan prøve å</BodyShort>
+            <List title="">
+              <List.Item>vente noen minutter og laste siden på nytt</List.Item>
+              <List.Item>gå tilbake til forrige side</List.Item>
             </List>
             <BodyShort>
               Hvis problemet vedvarer, kan du{" "}
@@ -41,7 +41,6 @@ export default function Example() {
               </Link>
               .
             </BodyShort>
-
             <Box paddingBlock="12 16">
               <Button>Gå til Min side</Button>
             </Box>
@@ -99,6 +98,6 @@ function useDekorator() {
 export const args = {
   index: 3,
   title: "Med CTA til side",
-  desc: "CTA hjelper brukeren med å finne en vei tilbake hvis de har gjort noe feil.",
+  desc: "En 500-side kan inneholde en CTA som leder til et relevant område eller side, avhengig av konteksten.",
   sandbox: false,
 };

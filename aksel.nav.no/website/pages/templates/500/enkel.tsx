@@ -20,11 +20,10 @@ export default function Example() {
             En teknisk feil på våre servere gjør at siden er utilgjengelig.
             Dette skyldes ikke noe du gjorde.
           </BodyShort>
-
-          <BodyShort>Her er noen forslag på hvordan du løser feilen:</BodyShort>
-          <List>
-            <List.Item>Prøv igjen om noen minutter</List.Item>
-            <List.Item>Gå tilbake til forrige side</List.Item>
+          <BodyShort>Du kan prøve å</BodyShort>
+          <List title="">
+            <List.Item>vente noen minutter og laste siden på nytt</List.Item>
+            <List.Item>gå tilbake til forrige side</List.Item>
           </List>
           <BodyShort>
             Hvis problemet vedvarer, kan du{" "}
@@ -87,6 +86,6 @@ function useDekorator() {
 export const args = {
   index: 1,
   title: "Enkel",
-  desc: "Burde inneholde et hint om hva som er feil. For bruker vil det viktigste være å få et hint om hvordan de kan løse feilen, eller berolige dem om at feilen ikke er deres skyld.",
+  desc: "I sin enkleste form skal 500-side inneholde en tittel, feilmelding, tilbakemeldingsfunksjon og løsningsforslag",
   sandbox: false,
 };

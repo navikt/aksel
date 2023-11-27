@@ -21,10 +21,10 @@ export default function Example() {
               En teknisk feil på våre servere gjør at siden er utilgjengelig.
               Dette skyldes ikke noe du gjorde.
             </BodyShort>
-
-            <List>
-              <List.Item>Prøv igjen om noen minutter</List.Item>
-              <List.Item>Gå tilbake til forrige side</List.Item>
+            <BodyShort>Du kan prøve å</BodyShort>
+            <List title="">
+              <List.Item>vente noen minutter og laste siden på nytt</List.Item>
+              <List.Item>gå tilbake til forrige side</List.Item>
             </List>
             <BodyShort>
               Hvis problemet vedvarer, kan du{" "}
@@ -100,6 +100,6 @@ function useDekorator() {
 export const args = {
   index: 5,
   title: "Flerspråk",
-  desc: "Man har ofte ikke kontroll på kontekst bruker ender opp med feilmelding. Ved å legge til flere språk kan man være sikrere på at alle forstår hva som gikk feil.",
+  desc: "Ved å legge til flere språk kan man være sikrere på at flere forstår hva som gikk feil.",
   sandbox: false,
 };
