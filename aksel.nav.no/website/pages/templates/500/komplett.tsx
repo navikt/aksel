@@ -51,9 +51,9 @@ export default function Example() {
                 Something went wrong
               </Heading>
               <BodyShort>
-                <Link href="#">Contact us</Link> if the problem persists. You
-                can try to remedy the problem by refreshing this again in a few
-                minutes.
+                Please refresh this page or try again in a few minutes.{" "}
+                <Link href="https://nav.no/kontaktoss">Contact us</Link> if the
+                problem persists
               </BodyShort>
             </Box>
           </HGrid>
