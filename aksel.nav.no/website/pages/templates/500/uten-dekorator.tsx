@@ -11,7 +11,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 
-export default function Example() {
+function Example() {
   return (
     <Page data-aksel-template="500-v1" footer={<Footer />}>
       <Header />
@@ -32,7 +32,7 @@ export default function Example() {
                   utilgjengelig. Dette skyldes ikke noe du gjorde.
                 </BodyShort>
                 <BodyShort>Du kan prøve å</BodyShort>
-                <List title="">
+                <List>
                   <List.Item>
                     vente noen minutter og laste siden på nytt
                   </List.Item>
@@ -73,6 +73,9 @@ export default function Example() {
     </Page>
   );
 }
+
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default Example;
 
 export const args = {
   index: 1,

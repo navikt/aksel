@@ -40,7 +40,7 @@ function ErrorPage({ statusCode }) {
                   utilgjengelig. Dette skyldes ikke noe du gjorde.
                 </BodyShort>
                 <BodyShort>Du kan prøve å</BodyShort>
-                <List title="">
+                <List>
                   <List.Item>
                     vente noen minutter og laste siden på nytt
                   </List.Item>

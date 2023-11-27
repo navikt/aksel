@@ -10,7 +10,7 @@ import {
 } from "@navikt/ds-react";
 import { useEffect } from "react";
 
-export default function Example() {
+function Example() {
   useDekorator();
 
   return (
@@ -33,7 +33,7 @@ export default function Example() {
                   utilgjengelig. Dette skyldes ikke noe du gjorde.
                 </BodyShort>
                 <BodyShort>Du kan prøve å</BodyShort>
-                <List title="">
+                <List>
                   <List.Item>
                     vente noen minutter og laste siden på nytt
                   </List.Item>
@@ -125,9 +125,11 @@ function useDekorator() {
   }, []);
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default Example;
+
 export const args = {
   index: 2,
   title: "Komplett",
   desc: "I sin fullstendige form kan en 500-side inneholde tittel, feilmelding, løsningsforslag, tilbakemeldingsfunksjon, feil-id, CTA og flere språk.",
-  sandbox: false,
 };

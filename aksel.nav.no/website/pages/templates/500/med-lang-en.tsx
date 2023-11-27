@@ -9,7 +9,7 @@ import {
 } from "@navikt/ds-react";
 import { useEffect } from "react";
 
-export default function Example() {
+function Example() {
   useDekorator();
 
   return (
@@ -31,7 +31,7 @@ export default function Example() {
                 Dette skyldes ikke noe du gjorde.
               </BodyShort>
               <BodyShort>Du kan prøve å</BodyShort>
-              <List title="">
+              <List>
                 <List.Item>
                   vente noen minutter og laste siden på nytt
                 </List.Item>
@@ -111,9 +111,11 @@ function useDekorator() {
   }, []);
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default Example;
+
 export const args = {
   index: 5,
   title: "Flerspråk",
   desc: "Ved å legge til flere språk kan man være sikrere på at flere forstår hva som gikk feil.",
-  sandbox: false,
 };

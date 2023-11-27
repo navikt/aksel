@@ -1,7 +1,7 @@
 import { BodyShort, Box, Heading, Link, List, Page } from "@navikt/ds-react";
 import { useEffect } from "react";
 
-export default function Example() {
+function Example() {
   useDekorator();
 
   return (
@@ -21,7 +21,7 @@ export default function Example() {
             Dette skyldes ikke noe du gjorde.
           </BodyShort>
           <BodyShort>Du kan prøve å</BodyShort>
-          <List title="">
+          <List>
             <List.Item>vente noen minutter og laste siden på nytt</List.Item>
             <List.Item>gå tilbake til forrige side</List.Item>
           </List>
@@ -83,9 +83,11 @@ function useDekorator() {
   }, []);
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default Example;
+
 export const args = {
   index: 1,
   title: "Enkel",
   desc: "I sin enkleste form skal 500-side inneholde en tittel, feilmelding, tilbakemeldingsfunksjon og løsningsforslag",
-  sandbox: false,
 };
