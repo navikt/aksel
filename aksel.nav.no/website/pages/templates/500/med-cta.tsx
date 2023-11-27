@@ -95,6 +95,6 @@ function useDekorator() {
 export const args = {
   index: 3,
   title: "Med CTA til side",
-  desc: "Burde inneholde et hint om hva som er feil, og en CTA til en side som kan være relevant for brukeren",
+  desc: "CTA hjelper brukeren med å finne en vei tilbake hvis de har gjort noe feil.",
   sandbox: false,
 };
