@@ -116,7 +116,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
 
     return (
       <div
-        className={cl("navds-form-field", className)}
+        className={cl("navds-form-field", "navds-fileupload", className)}
         ref={ref}
       >
         <Label
@@ -136,10 +136,10 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
           onDrop={onDragEnd}
           className={
             cl(
-              "navds-fileupload",
+              "navds-fileupload__content",
               {
-                "navds-fileupload--error": !!error,
-                "navds-fileupload--dragover": isDraggingOver
+                "navds-fileupload__content--error": !!error,
+                "navds-fileupload__content--dragover": isDraggingOver
               }
             )
           }
@@ -147,7 +147,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
           {children}
           <input
             type="file"
-            className="navds-fileupload__input"
+            className="navds-fileupload__content__input"
             id={inputId}
             multiple={multiple}
             aria-describedby={ariaDescribedby}

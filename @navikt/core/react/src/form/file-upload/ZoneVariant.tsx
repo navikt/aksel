@@ -16,7 +16,7 @@ const ZoneVariant = () => {
 
   return (
     <div
-      className="navds-fileupload__zone"
+      className="navds-fileupload__content__zone"
       ref={ref}
       style={{ minWidth }}
     >
