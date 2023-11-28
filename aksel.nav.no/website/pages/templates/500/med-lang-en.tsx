@@ -51,8 +51,12 @@ function Example() {
               <Heading level="1" size="large" spacing>
                 Something went wrong
               </Heading>
+              <BodyShort spacing>
+                This was caused by a technical fault on our servers. Please
+                refresh this page or try again in a few minutes.{" "}
+                {/* https://www.nav.no/kontaktoss/en for eksterne flater */}
+              </BodyShort>
               <BodyShort>
-                Please refresh this page or try again in a few minutes.{" "}
                 {/* https://www.nav.no/kontaktoss/en for eksterne flater */}
                 <Link target="_blank" href="#">
                   Contact us (opens in new tab)

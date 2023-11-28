@@ -62,12 +62,14 @@ function ErrorPage({ statusCode }) {
               <Heading level="1" size="large" spacing>
                 Something went wrong
               </Heading>
+              <BodyShort spacing>
+                This was caused by a technical fault on our servers. Please
+                refresh this page or try again in a few minutes.{" "}
+                {/* https://www.nav.no/kontaktoss/en for eksterne flater */}
+              </BodyShort>
               <BodyShort>
-                Please refresh this page or try again in a few minutes.{" "}
-                <Link
-                  target="_blank"
-                  href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
-                >
+                {/* https://www.nav.no/kontaktoss/en for eksterne flater */}
+                <Link target="_blank" href="#">
                   Contact us (opens in new tab)
                 </Link>{" "}
                 if the problem persists.
