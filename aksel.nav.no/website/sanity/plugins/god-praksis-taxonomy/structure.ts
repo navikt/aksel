@@ -1,7 +1,15 @@
-import { StructureResolver } from "sanity/desk";
+import { CurrentUser } from "sanity";
+import { DefaultDocumentNodeResolver, StructureResolver } from "sanity/desk";
 
-export const structure: StructureResolver = (S) =>
-  S.list()
+const adminOrDev = (user: CurrentUser) =>
+  user.roles.find((role) => ["developer", "administrator"].includes(role.name));
+
+export const structure: StructureResolver = (S, { currentUser }) => {
+  if (!adminOrDev(currentUser)) {
+    return null;
+  }
+
+  return S.list()
     .title("Aksel Manager")
     .items([
       S.documentTypeListItem("gp.innholdstype").title("Innholdstype"),
@@ -73,12 +81,13 @@ export const structure: StructureResolver = (S) =>
             .initialValueTemplates([]),
       }),
     ]);
+};
 
 // set default document node here — so that if users want concepts
 // and schemes elsewhere in desk, they'll get the right views.
-export const defaultDocumentNode = (
-  S: any,
-  { schemaType }: { schemaType: any }
+export const defaultDocumentNode: DefaultDocumentNodeResolver = (
+  S,
+  { schemaType }
 ) => {
   // Conditionally return a different configuration based on the schema type
   switch (schemaType) {

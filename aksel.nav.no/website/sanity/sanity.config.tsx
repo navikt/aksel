@@ -38,6 +38,16 @@ export const workspaceConfig = defineConfig([
     icon: TestFlaskIcon,
     auth: authStore("development"),
   },
+  {
+    ...defaultConfig(),
+    plugins: [...defaultConfig().plugins, godPraksisTaxonomy()],
+    title: "God-praksis staging",
+    name: "gp-staging",
+    dataset: "development",
+    basePath: "/admin/gp-staging",
+    icon: TestFlaskIcon,
+    auth: authStore("development"),
+  },
 ]);
 
 function defaultConfig() {
@@ -86,7 +96,6 @@ function defaultConfig() {
         ],
         hasPublishedAt: [...allArticleDocuments],
       }),
-      godPraksisTaxonomy(),
 
       /* 3rd-party */
       table(),
