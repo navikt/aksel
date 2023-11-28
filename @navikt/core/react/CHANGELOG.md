@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 5.11.3
+
+### Patch Changes
+
+- :bug: Textarea: Skru av autosize ved manuell resize ([#2518](https://github.com/navikt/aksel/pull/2518))
+
+- :bug: Popover: Ikke lukk ved klikk inni når parent er fokuserbar ([#2521](https://github.com/navikt/aksel/pull/2521))
+
+- Page: La til `md`-bredde (768px) ([#2510](https://github.com/navikt/aksel/pull/2510))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.11.3
+  - @navikt/aksel-icons@5.11.3
+
 ## 5.11.2
 
 ### Patch Changes
