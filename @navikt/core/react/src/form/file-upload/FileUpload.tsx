@@ -1,4 +1,4 @@
-import React, { forwardRef, ChangeEvent, useState } from "react";
+import React, { forwardRef, ChangeEvent, useState, useRef } from "react";
 import cl from "clsx";
 import { partitionFiles } from "./utils/partition-files";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
@@ -92,6 +92,12 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
   ) => {
     const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false)
 
+    const inputRef = useRef<HTMLInputElement | null>(null)
+
+    const onButtonClick = () => {
+      inputRef?.current?.click()
+    }
+
     const {
       inputProps,
       errorId,
@@ -131,7 +137,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     }
 
     return (
-      <FileUploadContext.Provider value={{ locale }}>
+      <FileUploadContext.Provider value={{ locale, onButtonClick }}>
         <div
           className={cl("navds-form-field", "navds-fileupload", className)}
           ref={ref}
@@ -169,6 +175,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
               multiple={multiple}
               accept={accept}
               onChange={handleUpload}
+              ref={inputRef}
               {...inputProps}
             />
           </div>
