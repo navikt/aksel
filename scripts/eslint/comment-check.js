@@ -9,9 +9,9 @@ module.exports = {
     schema: [],
   },
   create(context) {
-    const foundComment = !!context.sourceCode
+    const foundComment = context.sourceCode
       .getAllComments()
-      .find(
+      .some(
         ({ value }) =>
           value.trim() === "EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE"
       );
