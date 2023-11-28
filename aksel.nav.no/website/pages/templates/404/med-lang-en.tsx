@@ -10,7 +10,7 @@ import {
 } from "@navikt/ds-react";
 import { useEffect } from "react";
 
-export default function Example() {
+const Example = () => {
   useDekorator();
 
   return (
@@ -56,7 +56,7 @@ export default function Example() {
       <Env />
     </Page>
   );
-}
+};
 
 function Header() {
   return <div id="decorator-header" />;
@@ -140,9 +140,11 @@ function StatusSvg() {
   );
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default Example;
+
 export const args = {
   index: 4,
   title: "Flerspråk",
   desc: "En 404-feil kan være frustrerende, spesielt hvis den er på et ukjent språk. En melding på engelsk kan gjøre det lettere å forstå problemet og hva du skal gjøre videre",
-  sandbox: false,
 };

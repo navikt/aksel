@@ -61,7 +61,7 @@ export async function updateSanity(
   }
 
   await transactionClient
-    .commit()
+    .commit({ dryRun: isDryRun })
     .then(() => console.log(`Successfully deleted unused ${directory}`))
     .catch((e) => {
       /**

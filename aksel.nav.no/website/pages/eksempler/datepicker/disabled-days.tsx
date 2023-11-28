@@ -21,6 +21,7 @@ const isFriday = (date: Date) => {
   return date.getDay() === 5;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

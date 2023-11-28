@@ -5,6 +5,7 @@ const Example = () => {
   return <Alert variant="success">Søknad er sendt inn!</Alert>;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

@@ -127,6 +127,7 @@ const MobileSidebar = ({ className }: { className?: string }) => (
   <DesktopSidebar className={className} />
 );
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "subtle",
