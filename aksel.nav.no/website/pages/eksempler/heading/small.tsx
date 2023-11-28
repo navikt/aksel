@@ -10,7 +10,9 @@ const Example = () => {
       <Divider />
       <div>
         <Descriptor>Spacing </Descriptor>
-        <Heading size="small">{lorem}</Heading>
+        <Heading size="small" spacing>
+          {lorem}
+        </Heading>
       </div>
     </VStack>
   );
@@ -24,6 +26,7 @@ function Divider() {
   return <hr className="border-border-subtle" />;
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

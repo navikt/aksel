@@ -43,7 +43,7 @@
     "boring-avatars": "1.10.1",
     "clsx": "^1.2.1",
     "codesandbox": "^2.2.3",
-    "date-fns": "2.29.3",
+    "date-fns": "^2.30.0",
     "fuse.js": "^6.6.2",
     "jscodeshift": "^0.15.1",
     "lodash": "^4.17.21",

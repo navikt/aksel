@@ -2,10 +2,10 @@ import { defineField, defineType } from "sanity";
 import { templatesKategorier } from "../../../config";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import { editorField } from "../presets/editors";
-import { groups } from "../presets/groups";
+import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
-import { SEOFields } from "../presets/seo";
+import BaseSEOPreset from "../presets/seo";
 import { kategoriSlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
 
@@ -15,7 +15,7 @@ export const TemplatesArtikkel = defineType({
   title: "Mønster/Maler artikkel",
   name: "templates_artikkel",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   ...artikkelPreview("Mønster/Maler"),
   fields: [
     oppdateringsvarsel,
@@ -84,6 +84,6 @@ export const TemplatesArtikkel = defineType({
       type: "riktekst_templates",
       group: "innhold",
     }),
-    SEOFields,
+    BaseSEOPreset,
   ],
 });

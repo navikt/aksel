@@ -21,8 +21,14 @@
 }
 
 .navds-textarea__wrapper {
+  --__ac-textarea-height: initial;
+
   position: relative;
-  width: 100%;
+  min-width: 100%;
+}
+
+.navds-textarea__input:first-child {
+  height: var(--__ac-textarea-height);
 }
 
 .navds-textarea__input {
@@ -70,8 +76,42 @@
   color: var(--ac-textarea-counter-error-text, var(--__ac-textarea-counter-error-text, var(--a-text-danger)));
 }
 
-.navds-textarea--resize .navds-textarea__input {
+.navds-textarea__sr-counter {
+  display: none;
+}
+
+.navds-textarea__wrapper:focus-within .navds-textarea__sr-counter {
+  display: initial;
+}
+
+.navds-textarea--resize-both .navds-textarea__input {
   resize: both;
+  border-end-end-radius: 0;
+}
+
+.navds-textarea--resize-horizontal .navds-textarea__input {
+  resize: horizontal;
+  border-end-end-radius: 0;
+}
+
+.navds-textarea--resize-vertical .navds-textarea__input {
+  resize: vertical;
+  border-end-end-radius: 0;
+}
+
+.navds-textarea--autoscrollbar,
+.navds-textarea--autoscrollbar .navds-textarea__wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  /* Makes the box-shadow visible even though overflow is hidden: */
+  padding: 3px;
+  margin: -3px;
+}
+
+.navds-textarea--autoscrollbar .navds-textarea__input {
+  scrollbar-gutter: stable; /* Needed to prevent scrollbar from appearing too early */
 }
 
 /**

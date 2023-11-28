@@ -1,13 +1,13 @@
 import { defineField, defineType } from "sanity";
-import { groups } from "../presets/groups";
-import { artikkelPreview } from "../presets/artikkel-preview";
-import { hiddenFields } from "../presets/hidden-fields";
-import { editorField } from "../presets/editors";
-import { titleField } from "../presets/title-field";
-import { ingressField } from "../presets/ingress";
-import { SEOFields } from "../presets/seo";
-import { sanitySlug } from "../presets/slug";
 import { bloggKategorier } from "../../../config";
+import { artikkelPreview } from "../presets/artikkel-preview";
+import { editorField } from "../presets/editors";
+import SanityTabGroups from "../presets/groups";
+import { hiddenFields } from "../presets/hidden-fields";
+import { ingressField } from "../presets/ingress";
+import BaseSEOPreset from "../presets/seo";
+import { sanitySlug } from "../presets/slug";
+import { titleField } from "../presets/title-field";
 
 const prefix = "produktbloggen/";
 
@@ -15,7 +15,7 @@ export const Blogg = defineType({
   title: "Bloggpost",
   name: "aksel_blogg",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   ...artikkelPreview("Produktbloggen"),
   fields: [
     ...hiddenFields,
@@ -41,6 +41,6 @@ export const Blogg = defineType({
       type: "riktekst_standard",
       group: "innhold",
     }),
-    SEOFields,
+    BaseSEOPreset,
   ],
 });

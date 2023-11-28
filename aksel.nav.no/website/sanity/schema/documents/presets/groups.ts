@@ -1,4 +1,4 @@
-export const groups = [
+const SanityTabGroups = [
   {
     name: "skrivehjelp",
     title: "Skrivehjelp",
@@ -25,3 +25,5 @@ export const groups = [
     title: "SEO",
   },
 ];
+
+export default SanityTabGroups;

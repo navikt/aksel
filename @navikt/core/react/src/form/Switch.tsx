@@ -5,11 +5,11 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { FormFieldProps, useFormField } from "./useFormField";
-import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import { Loader } from "../loader";
 import { BodyShort } from "../typography";
 import { omit } from "../util";
+import { ReadOnlyIcon } from "./ReadOnlyIcon";
+import { FormFieldProps, useFormField } from "./useFormField";
 
 const SelectedIcon = () => (
   <svg
@@ -134,7 +134,11 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         <span className="navds-switch__track">
           <span className="navds-switch__thumb">
             {loading ? (
-              <Loader size="xsmall" aria-live="polite" />
+              <Loader
+                size="xsmall"
+                aria-live="polite"
+                variant={checked ? "interaction" : "neutral"}
+              />
             ) : checked ? (
               <SelectedIcon />
             ) : null}

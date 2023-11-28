@@ -2,7 +2,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 import { Link } from "@navikt/ds-react";
 
 import NextLink from "next/link";
-const NextExample = () => (
+const Example = () => (
   <Link as={NextLink} href="#">
     Lenke til ny side
   </Link>
@@ -26,11 +26,12 @@ const RemixExample = () => (
 
 */
 
-export default withDsExample(NextExample);
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {
-  render: NextExample,
+  render: Example,
 };
 
 export const args = {

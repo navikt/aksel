@@ -1,5 +1,15 @@
 # @navikt/aksel-icons
 
+## 5.11.2
+
+## 5.11.1
+
+## 5.11.0
+
+### Minor Changes
+
+- Ikoner: Nytt ikon `PushPin` ([#2503](https://github.com/navikt/aksel/pull/2503))
+
 ## 5.10.4
 
 ## 5.10.3

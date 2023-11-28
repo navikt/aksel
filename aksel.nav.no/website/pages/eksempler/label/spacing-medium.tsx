@@ -7,12 +7,17 @@ const Example = () => {
 
   return (
     <div>
-      <Label spacing>{lorem}</Label>
-      <Label spacing>{lorem}</Label>
+      <Label spacing as="p">
+        {lorem}
+      </Label>
+      <Label spacing as="p">
+        {lorem}
+      </Label>
     </div>
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */

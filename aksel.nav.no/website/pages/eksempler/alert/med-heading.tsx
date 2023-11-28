@@ -14,6 +14,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -22,5 +23,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 7,
+  desc: "Husk riktig h-tag ved bruk av heading i Alert",
 };

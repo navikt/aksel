@@ -9,6 +9,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -17,5 +18,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 3,
+  desc: "Bruk denne når du vil at brukeren skal foreta en bestemt handling eller for å advare dem om noe viktig.",
 };
