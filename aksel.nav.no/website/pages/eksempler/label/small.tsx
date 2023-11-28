@@ -8,6 +8,7 @@ const Example = () => {
   return <Label size="small">{lorem}</Label>;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */

@@ -59,6 +59,7 @@ const Divider = () => {
   return <hr className="border-r-border-divider m-0 h-full border-r" />;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { showBreakpoints: true });
 
 /* Storybook story */

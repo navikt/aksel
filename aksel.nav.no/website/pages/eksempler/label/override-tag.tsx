@@ -5,6 +5,7 @@ const Example = () => {
   return <Label as="span">Dette er nå en span!</Label>;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */

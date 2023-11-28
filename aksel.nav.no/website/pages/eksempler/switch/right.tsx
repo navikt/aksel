@@ -5,6 +5,7 @@ const Example = () => {
   return <Switch position="right">Varsle med SMS</Switch>;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

@@ -4,6 +4,7 @@ import {
   codeAfterExpansionCardIcon,
   codeBefore,
   codeBeforeExpansionCardIcon,
+  codeBeforeWithoutExportDefaultDsExample,
 } from "./mockdata";
 
 test("filterCode should remove unwanted code", () => {
@@ -16,4 +17,16 @@ test("filterCode should remove unwanted code again", () => {
   const codeResult = filterCode(codeBeforeExpansionCardIcon);
 
   expect(codeResult).toEqual(codeAfterExpansionCardIcon);
+});
+
+test("filterCode expects to throw if missing some specific substrings", () => {
+  expect(() => {
+    filterCode(codeBeforeWithoutExportDefaultDsExample);
+  }).toThrow();
+});
+
+test("filterCode should throw on an empty string as input (resulting in empty string output)", () => {
+  expect(() => {
+    filterCode("");
+  }).toThrow();
 });

@@ -5,6 +5,7 @@ const Example = () => {
   return <Loader size="3xlarge" title="Venter..." transparent />;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 export const args = {
