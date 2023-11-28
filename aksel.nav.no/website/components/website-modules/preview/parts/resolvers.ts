@@ -18,11 +18,14 @@ export function runResolvers({
   }
 
   return resolvers.reduce((acc, resolver) => {
+    /* Not allowed to edit accumulators directly as its readonly*/
+    const _acc = { ...acc };
     const dataFromKeys = resolver.dataKeys.map((key) =>
-      getNestedProperty(acc, key)
+      getNestedProperty(_acc, key)
     );
-    acc[resolver.key] = resolver.cb(dataFromKeys);
-    return acc;
+
+    _acc[resolver.key] = resolver.cb(dataFromKeys);
+    return _acc;
   }, data);
 }
 
