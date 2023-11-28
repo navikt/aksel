@@ -20,7 +20,11 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["aksel.nav.no", "aksel-icons-figma-plugin"],
+  "ignore": [
+    "aksel.nav.no",
+    "aksel-icons-figma-plugin",
+    "eslint-plugin-aksel-local"
+  ],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"
