@@ -29,7 +29,7 @@
     "playwright": "playwright test",
     "test:watch": "jest --watch --config ./config/jest.config.js",
     "backup": "ts-node scripts/backup.js",
-    "watch:tw": "yarn tailwindcss -i ./styles/index.css -o ./dist/tw.css --watch"
+    "watch:tw": "yarn tailwindcss -i ./components/styles/index.css -o ./dist/tw.css --watch"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.2.3",
