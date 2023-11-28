@@ -37,7 +37,14 @@
           "printWidth": 130
         }
       }
-    ]
+    ],
+    "importOrder": [
+      "^@navikt/(.*)$",
+      "^@/(.*)$",
+      "^[./]"
+    ],
+    "importOrderSeparation": false,
+    "importOrderSortSpecifiers": true
   },
   "lint-staged": {
     "*.js": "eslint",
@@ -134,6 +141,7 @@
     "@storybook/testing-library": "^0.2.2",
     "@storybook/theming": "^7.5.3",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
     "@whitespace/storybook-addon-html": "^5.1.6",
