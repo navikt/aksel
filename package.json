@@ -43,7 +43,6 @@
       "^@/(.*)$",
       "^[./]"
     ],
-    "importOrderSeparation": false,
     "importOrderSortSpecifiers": true
   },
   "lint-staged": {
