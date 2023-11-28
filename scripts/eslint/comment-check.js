@@ -3,7 +3,7 @@ module.exports = {
     type: "problem",
     docs: {
       description:
-        "Enforce that a variable named `foo` can only be assigned a value of 'bar'.",
+        "Checks that every example and template contains the correct comment needed for parsing code for preview",
     },
     fixable: "code",
     schema: [],
