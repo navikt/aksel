@@ -183,7 +183,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         if (inputRef.current?.style.height || inputRef.current?.style.width) {
           // User has resized manually
           if (inputRef.current?.style.overflow === "hidden") {
-            setState((oldState) => ({ ...oldState, overflow: false }));
+            setState((oldState) => ({ ...oldState, overflow: false })); // The state update isn't important, we just need to trigger a rerender
           }
           return;
         }
@@ -199,7 +199,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
 
       let resizeObserver: ResizeObserver;
       if (typeof ResizeObserver !== "undefined") {
-        resizeObserver = new ResizeObserver(debounceHandleResize);
+        resizeObserver = new ResizeObserver(handleResize);
         resizeObserver.observe(input);
       }
 
