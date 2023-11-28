@@ -127,7 +127,7 @@ function useDekorator() {
 export default Example;
 
 export const args = {
-  index: 2,
+  index: 0,
   title: "Komplett",
   desc: "I sin fullstendige form kan en 500-side inneholde tittel, feilmelding, løsningsforslag, tilbakemeldingsfunksjon, feil-id, CTA og flere språk.",
 };

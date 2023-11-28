@@ -102,7 +102,7 @@ function useDekorator() {
 export default Example;
 
 export const args = {
-  index: 3,
+  index: 2,
   title: "Med CTA til side",
   desc: "En 500-side kan inneholde en CTA som leder til et relevant område eller side, avhengig av konteksten.",
 };

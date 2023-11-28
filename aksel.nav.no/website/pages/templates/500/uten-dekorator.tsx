@@ -81,7 +81,7 @@ function Example() {
 export default Example;
 
 export const args = {
-  index: 1,
+  index: 6,
   title: "Uten Dekoratør",
   desc: "Malen fungerer ved bruk av andre sidemaler, også da uten dekoratøren.",
   sandbox: false,
