@@ -17,8 +17,8 @@ export default defineType({
       type: "riktekst_enkel",
     }),
     defineField({
-      name: "tags",
-      title: "Tags",
+      name: "undertema",
+      title: "Undertema",
       type: "array",
       validation: (Rule) => Rule.unique(),
       of: [
@@ -28,7 +28,7 @@ export default defineType({
           options: {
             disableNew: true,
             filter: async ({ parent, document }) => {
-              const tags = (
+              const undertema = (
                 parent as {
                   _key: string;
                   _ref?: string;
@@ -39,10 +39,10 @@ export default defineType({
                 .map((x) => x._ref);
 
               return {
-                filter: "!(_id in $tags) && tema._ref in $id",
+                filter: "!(_id in $undertema) && tema._ref in $id",
                 params: {
                   id: [document._id, document._id.replace("drafts.", "")],
-                  tags,
+                  undertema,
                 },
               };
             },

@@ -14,10 +14,9 @@ export const GP_DOCUMENTS = [
   artikkel.name,
 ];
 
-const akselManager = definePlugin((options?: any) => {
+export const godPraksisTaxonomy = definePlugin(() => {
   return {
-    name: "taxonomyManager",
-    options,
+    name: "gp.taxonomy",
     schema: {
       types: [tema, undertema, innholdsType, artikkel],
       templates: [
@@ -37,12 +36,12 @@ const akselManager = definePlugin((options?: any) => {
           },
         },
         {
-          id: "gp.artikkel.by.tag",
-          title: "God praksis aritkkel med tag",
+          id: "gp.artikkel.by.undertema",
+          title: "God praksis aritkkel med undertema",
           schemaType: "gp.artikkel",
-          parameters: [{ name: "tag_id", type: "string" }],
+          parameters: [{ name: "undertema_id", type: "string" }],
           value: (params) => ({
-            tags: [{ _type: "reference", _ref: params.tag_id }],
+            undertema: [{ _type: "reference", _ref: params.undertema_id }],
           }),
         },
         {
@@ -66,5 +65,3 @@ const akselManager = definePlugin((options?: any) => {
     ],
   };
 });
-
-export { akselManager };

@@ -13,7 +13,7 @@ import {
   allArticleDocuments,
 } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
-import { akselManager } from "./plugins/aksel-manager";
+import { godPraksisTaxonomy } from "./plugins/god-praksis-taxonomy";
 import { schema } from "./schema";
 import { InputWithCounter } from "./schema/custom-components";
 import { getTemplates } from "./util";
@@ -86,8 +86,8 @@ function defaultConfig() {
         ],
         hasPublishedAt: [...allArticleDocuments],
       }),
+      godPraksisTaxonomy(),
 
-      akselManager({}),
       /* 3rd-party */
       table(),
       codeInput(),

@@ -14,7 +14,7 @@ export const structure: StructureResolver = (S) =>
           S.documentTypeList("gp.tema")
             .child((id) => {
               return S.documentTypeList("gp.tema.undertema")
-                .title("Tags")
+                .title("Undertema")
                 .filter("_type == $type && tema._ref == $id")
                 .params({ type: "gp.tema.undertema", id })
                 .initialValueTemplates([
@@ -33,18 +33,20 @@ export const structure: StructureResolver = (S) =>
           S.documentTypeList("gp.tema")
             .child((tema_id) =>
               S.documentTypeList("gp.tema.undertema")
-                .title("Tags")
+                .title("Undertema")
                 .filter("_type == $type && tema._ref == $tema_id")
                 .params({ type: "gp.tema.undertema", tema_id })
                 .initialValueTemplates([])
-                .child((tag_id) =>
+                .child((undertema_id) =>
                   S.documentTypeList("gp.artikkel")
                     .title("Artikler")
-                    .filter("_type == $type && $tag_id in tags[]._ref")
-                    .params({ type: "gp.artikkel", tag_id })
+                    .filter(
+                      "_type == $type && $undertema_id in undertema[]._ref"
+                    )
+                    .params({ type: "gp.artikkel", undertema_id })
                     .initialValueTemplates([
-                      S.initialValueTemplateItem("gp.artikkel.by.tag", {
-                        tag_id,
+                      S.initialValueTemplateItem("gp.artikkel.by.undertema", {
+                        undertema_id,
                       }),
                     ])
                 )

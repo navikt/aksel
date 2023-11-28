@@ -24,8 +24,8 @@ export default defineType({
     titleField,
     sanitySlug(prefix, 3),
     defineField({
-      name: "tags",
-      title: "Tags",
+      name: "undertema",
+      title: "Undertema",
       validation: (Rule) => Rule.required(),
       type: "array",
       of: [
@@ -36,7 +36,7 @@ export default defineType({
           options: {
             disableNew: true,
             filter: async ({ getClient, parent }) => {
-              const tags = (
+              const undertema = (
                 parent as {
                   _key: string;
                   _ref?: string;
@@ -45,9 +45,10 @@ export default defineType({
               )
                 .filter((x) => !!x._ref)
                 .map((x) => x._ref);
+
               const client = getClient({ apiVersion: SANITY_API_VERSION });
               const temaIds = await client.fetch("*[_id in $ids].tema._ref", {
-                ids: tags,
+                ids: undertema,
               });
               return {
                 filter: "!(tema._ref in $temaIds)",
@@ -90,12 +91,12 @@ export default defineType({
     select: {
       title: "heading",
       subtitle: "innholdstype.title",
-      tags: "tags",
+      undertema: "undertema",
     },
-    prepare({ title, subtitle, tags }) {
+    prepare({ title, subtitle, undertema }) {
       return {
         title,
-        subtitle: `${subtitle} | ${tags.length ?? 0} undertema`,
+        subtitle: `${subtitle} | ${undertema.length ?? 0} undertema`,
       };
     },
   },

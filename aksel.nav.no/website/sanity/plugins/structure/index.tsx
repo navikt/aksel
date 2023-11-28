@@ -23,7 +23,7 @@ import {
 } from "@navikt/aksel-icons";
 import differenceInMonths from "date-fns/differenceInMonths";
 import { StructureResolver } from "sanity/desk";
-import { GP_DOCUMENTS } from "../aksel-manager";
+import { GP_DOCUMENTS } from "../god-praksis-taxonomy";
 import { GodPraksisPanes } from "./god-praksis";
 import { Panes } from "./panes";
 
