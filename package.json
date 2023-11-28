@@ -27,7 +27,8 @@
     "@navikt/aksel-icons/figma-plugin",
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
-    "aksel.nav.no"
+    "aksel.nav.no",
+    "scripts/eslint"
   ],
   "prettier": {
     "overrides": [
@@ -141,6 +142,7 @@
     "concurrently": "7.2.1",
     "cross-env": "^7.0.0",
     "eslint": "^8.50.0",
+    "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-jest": "^27.4.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
