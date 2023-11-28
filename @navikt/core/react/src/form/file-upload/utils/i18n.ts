@@ -1,11 +1,11 @@
 export const getButtonText = (locale: "nb" | "nn" | "en") => {
   switch (locale) {
     case "nb":
-      return "Velg dine filer"
+      return "Velg filer"
     case "nn":
-      return "Vel filene dine"
+      return "Vel filer"
     case "en":
-      return "Choose your files"
+      return "Choose files"
   }
 }
 
