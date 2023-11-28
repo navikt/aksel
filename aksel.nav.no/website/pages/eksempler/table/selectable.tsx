@@ -35,7 +35,7 @@ const Example = () => {
             </Table.DataCell>
 
             <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Fødseslnr.</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
             <Table.HeaderCell scope="col">Start</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
