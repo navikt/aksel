@@ -65,11 +65,12 @@ function ErrorPage({ statusCode }) {
               <BodyShort spacing>
                 This was caused by a technical fault on our servers. Please
                 refresh this page or try again in a few minutes.{" "}
-                {/* https://www.nav.no/kontaktoss/en for eksterne flater */}
               </BodyShort>
               <BodyShort>
-                {/* https://www.nav.no/kontaktoss/en for eksterne flater */}
-                <Link target="_blank" href="#">
+                <Link
+                  target="_blank"
+                  href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
+                >
                   Contact us (opens in new tab)
                 </Link>{" "}
                 if the problem persists.
