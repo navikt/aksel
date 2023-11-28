@@ -1,40 +1,32 @@
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
-import { AmplitudeEvents, amplitude } from "@/logging";
 import {
   BodyShort,
   Box,
+  Button,
   Heading,
   Link,
   List,
   Page,
   VStack,
 } from "@navikt/ds-react";
-import { useEffect } from "react";
 
-function ErrorPage({ statusCode }) {
-  useEffect(() => {
-    amplitude.track(AmplitudeEvents.error, {
-      side: window.location.pathname,
-    });
-  }, []);
-
+function Example() {
   return (
-    <Page data-aksel-template="500-v1" footer={<Footer />} id="vk-notFoundId">
+    <Page data-aksel-template="500-v1" footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 8">
           <VStack gap="16">
             <VStack gap="12" align="start">
               <div>
-                {statusCode && (
-                  <BodyShort textColor="subtle" size="small">
-                    Statuskode {statusCode}
-                  </BodyShort>
-                )}
+                <BodyShort textColor="subtle" size="small">
+                  Statuskode 500
+                </BodyShort>
                 <Heading level="1" size="large" spacing>
                   Beklager, noe gikk galt.
                 </Heading>
+                {/* Tekster bør tilpasses den aktuelle 500-feilen. Teksten under er for en generisk 500-feil. */}
                 <BodyShort spacing>
                   En teknisk feil på våre servere gjør at siden er
                   utilgjengelig. Dette skyldes ikke noe du gjorde.
@@ -48,15 +40,19 @@ function ErrorPage({ statusCode }) {
                 </List>
                 <BodyShort>
                   Hvis problemet vedvarer, kan du{" "}
-                  <Link
-                    href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
-                    target="_blank"
-                  >
+                  {/* https://nav.no/kontaktoss for eksterne flater */}
+                  <Link href="#" target="_blank">
                     kontakte oss (åpnes i ny fane)
                   </Link>
                   .
                 </BodyShort>
               </div>
+
+              <BodyShort size="small" textColor="subtle">
+                Feil-id: 12345678-9123-4567-8912-345678912345
+              </BodyShort>
+
+              <Button>Gå til Min side</Button>
             </VStack>
             <div>
               <Heading level="1" size="large" spacing>
@@ -67,10 +63,8 @@ function ErrorPage({ statusCode }) {
                 refresh this page or try again in a few minutes.{" "}
               </BodyShort>
               <BodyShort>
-                <Link
-                  target="_blank"
-                  href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
-                >
+                {/* https://www.nav.no/kontaktoss/en for eksterne flater */}
+                <Link target="_blank" href="#">
                   Contact us (opens in new tab)
                 </Link>{" "}
                 if the problem persists.
@@ -82,4 +76,13 @@ function ErrorPage({ statusCode }) {
     </Page>
   );
 }
-export default ErrorPage;
+
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default Example;
+
+export const args = {
+  index: 6,
+  title: "Uten Dekoratør",
+  desc: "Malen fungerer ved bruk av andre sidemaler, også da uten dekoratøren.",
+  sandbox: false,
+};
