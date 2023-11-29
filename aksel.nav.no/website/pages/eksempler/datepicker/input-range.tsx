@@ -44,5 +44,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "Før du belger å bruke range, vurder om to enkelte datepickere for start/slutt-dato ville vært bedre. Range fungerer bedre for korte perioder innenfor en månede.",
+  desc: "Før du belger å bruke range, vurder om to enkelte datepickere for start/slutt-dato ville vært bedre. Range fungerer bedre for korte perioder innenfor en måned.",
 };

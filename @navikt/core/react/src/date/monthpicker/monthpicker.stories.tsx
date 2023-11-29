@@ -168,7 +168,7 @@ export const FollowYear = () => {
   return (
     <div className="min-h-96">
       <MonthPicker {...monthpickerProps} onYearChange={customYearChange}>
-        <MonthPicker.Input {...inputProps} label="Velg månede" />
+        <MonthPicker.Input {...inputProps} label="Velg måned" />
       </MonthPicker>
       {selectedMonth && <div className="pt-4">{selectedMonth.getMonth()}</div>}
     </div>
