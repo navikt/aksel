@@ -1,3 +1,5 @@
+export type WorkspaceT = "production" | "staging";
+
 /**
  * Cleans up strings to be used as URLs
  * @param input

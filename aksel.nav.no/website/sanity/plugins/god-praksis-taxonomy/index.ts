@@ -7,18 +7,19 @@ import tema from "./documents/tema";
 import undertema from "./documents/undertema";
 import { defaultDocumentNode, structure } from "./structure";
 
-export const GP_DOCUMENTS = [
+export const GP_DOCUMENT_NAMES = [
   tema.name,
   undertema.name,
   innholdsType.name,
   artikkel.name,
 ];
 
+export const GP_DOCUMENTS = [tema, undertema, innholdsType, artikkel];
+
 export const godPraksisTaxonomy = definePlugin(() => {
   return {
     name: "gp.taxonomy",
     schema: {
-      types: [tema, undertema, innholdsType, artikkel],
       templates: [
         {
           id: "gp.tema.undertema.by.tema",

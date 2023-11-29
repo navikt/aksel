@@ -41,6 +41,7 @@ export const workspaceConfig = defineConfig([
   {
     ...defaultConfig(),
     plugins: [...defaultConfig().plugins, godPraksisTaxonomy()],
+    schema: schema("staging"),
     title: "God-praksis staging",
     name: "gp-staging",
     dataset: "development",
@@ -54,7 +55,7 @@ function defaultConfig() {
   return {
     projectId: SANITY_PROJECT_ID,
     apiVersion: SANITY_API_VERSION,
-    schema,
+    schema: schema("production"),
     form: {
       components: {
         field: (props) => {
@@ -96,7 +97,6 @@ function defaultConfig() {
         ],
         hasPublishedAt: [...allArticleDocuments],
       }),
-
       /* 3rd-party */
       table(),
       codeInput(),

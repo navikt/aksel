@@ -23,7 +23,7 @@ import {
 } from "@navikt/aksel-icons";
 import differenceInMonths from "date-fns/differenceInMonths";
 import { StructureResolver } from "sanity/desk";
-import { GP_DOCUMENTS } from "../god-praksis-taxonomy";
+import { GP_DOCUMENT_NAMES } from "../god-praksis-taxonomy";
 import { GodPraksisPanes } from "./god-praksis";
 import { Panes } from "./panes";
 
@@ -58,7 +58,7 @@ const filtered = [
   "skrivehjelp",
   "publication_flow",
   "aksel_feedback",
-  ...GP_DOCUMENTS,
+  ...GP_DOCUMENT_NAMES,
 ];
 
 export const structure: StructureResolver = async (
