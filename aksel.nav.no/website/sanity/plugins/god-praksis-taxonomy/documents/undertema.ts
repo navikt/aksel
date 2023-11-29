@@ -28,13 +28,6 @@ export default defineType({
         disableNew: true,
       },
     }),
-    defineField({
-      name: "labels",
-      title: "Labels",
-      type: "array",
-      validation: (Rule) => Rule.unique(),
-      of: [{ type: "string" }],
-    }),
   ],
   orderings: [
     {
