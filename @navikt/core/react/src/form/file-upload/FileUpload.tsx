@@ -3,7 +3,7 @@ import React, { ChangeEvent, forwardRef, useRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { useFormField } from "../useFormField";
 import { FileUploadContext } from "./context";
-import ButtonVariant from "./parts/ButtonVariant";
+import UploadButton from "./parts/UploadButton";
 import ZoneVariant from "./parts/ZoneVariant";
 import { partitionFiles } from "./utils/partition-files";
 
@@ -75,7 +75,7 @@ interface FileUploadComponent
     FileUploadProps & React.RefAttributes<HTMLDivElement>
   > {
   Zone: typeof ZoneVariant;
-  Button: typeof ButtonVariant;
+  Button: typeof UploadButton;
 }
 
 /**
@@ -196,6 +196,6 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
 ) as FileUploadComponent;
 
 FileUpload.Zone = ZoneVariant;
-FileUpload.Button = ButtonVariant;
+FileUpload.Button = UploadButton;
 
 export default FileUpload;
