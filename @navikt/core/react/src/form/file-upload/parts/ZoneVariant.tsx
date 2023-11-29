@@ -1,26 +1,24 @@
 import React, { useContext, useRef, useState } from "react";
-import { useClientLayoutEffect } from "../../util";
 import { BodyShort } from "../../typography";
+import { useClientLayoutEffect } from "../../util";
+import { FileUploadContext } from "./FileUploadContext";
 import UploadButton from "./UploadButton";
 import { getDragAndLetGoText, getOrText } from "./utils/i18n";
-import { FileUploadContext } from "./FileUploadContext";
 
 const ZoneVariant = () => {
   const context = useContext(FileUploadContext);
-  const ref = useRef<HTMLDivElement | null>(null)
-  const [minWidth, setMinWidth] = useState<number>()
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [minWidth, setMinWidth] = useState<number>();
 
   useClientLayoutEffect(() => {
-    const height = ref?.current?.getBoundingClientRect()?.height
+    const height = ref?.current?.getBoundingClientRect()?.height;
     if (height) {
-      setMinWidth(height * 2)
+      setMinWidth(height * 2);
     }
   }, []);
 
   if (context === null) {
-    console.error(
-      "<FileUpload.Zone> has to be used within a <FileUpload>."
-    );
+    console.error("<FileUpload.Zone> has to be used within a <FileUpload>.");
     return null;
   }
 
@@ -34,7 +32,7 @@ const ZoneVariant = () => {
       <BodyShort as="span">{getOrText(context.locale)}</BodyShort>
       <UploadButton />
     </div>
-  )
-}
+  );
+};
 
-export default ZoneVariant
+export default ZoneVariant;

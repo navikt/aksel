@@ -5,4 +5,6 @@ export type FileUploadContextProps = {
   onButtonClick: () => void;
 };
 
-export const FileUploadContext = createContext<FileUploadContextProps | null>(null);
+export const FileUploadContext = createContext<FileUploadContextProps | null>(
+  null
+);

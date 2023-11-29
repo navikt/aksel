@@ -2,16 +2,16 @@ import cl from "clsx";
 import React, { ChangeEvent, forwardRef, useRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { useFormField } from "../useFormField";
-import ButtonVariant from "./ButtonVariant";
-import { FileUploadContext } from "./FileUploadContext";
-import ZoneVariant from "./ZoneVariant";
+import { FileUploadContext } from "./context";
+import ButtonVariant from "./parts/ButtonVariant";
+import ZoneVariant from "./parts/ZoneVariant";
 import { partitionFiles } from "./utils/partition-files";
 
-export interface OnUploadProps {
+export type OnUploadProps = {
   allFiles: File[];
   acceptedFiles: File[];
   rejectedFiles: File[];
-}
+};
 
 export interface FileUploadProps {
   /**
@@ -80,14 +80,13 @@ interface FileUploadComponent
 
 /**
  * A component for uploading files
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/FileUpload)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/fileupload)
  * @see 🏷️ {@link FileUploadProps}
  * @example
  * ```jsx
  * <FileUpload
  *   onUpload={onUpload}
  *   label="Last opp filer her"
- *   id="fileupload-input"
  * >
  *    <FileUpload.Zone />
  * </FileUpload>
