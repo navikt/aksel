@@ -1,5 +1,5 @@
 import { withDsExample } from "@/web/examples/withDsExample";
-import { MenuGridIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon, MenuGridIcon } from "@navikt/aksel-icons";
 import { Dropdown, InternalHeader, Spacer } from "@navikt/ds-react";
 
 const Example = () => {
@@ -7,7 +7,7 @@ const Example = () => {
     <InternalHeader>
       <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
       <Spacer />
-      <Dropdown>
+      <Dropdown defaultOpen>
         <InternalHeader.Button as={Dropdown.Toggle}>
           <MenuGridIcon
             style={{ fontSize: "1.5rem" }}
@@ -20,8 +20,20 @@ const Example = () => {
             <Dropdown.Menu.GroupedList.Heading>
               Systemer og oppslagsverk
             </Dropdown.Menu.GroupedList.Heading>
-            <Dropdown.Menu.GroupedList.Item>
-              A.Inntekt
+            <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
+              A.Inntekt <ExternalLinkIcon aria-hidden />
+            </Dropdown.Menu.GroupedList.Item>
+            <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
+              Aa-registeret <ExternalLinkIcon aria-hidden />
+            </Dropdown.Menu.GroupedList.Item>
+            <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
+              Gosys <ExternalLinkIcon aria-hidden />
+            </Dropdown.Menu.GroupedList.Item>
+            <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
+              Modia personoversikt <ExternalLinkIcon aria-hidden />
+            </Dropdown.Menu.GroupedList.Item>
+            <Dropdown.Menu.GroupedList.Item as="a" target="_blank" href="#">
+              Oppdrag <ExternalLinkIcon aria-hidden />
             </Dropdown.Menu.GroupedList.Item>
           </Dropdown.Menu.GroupedList>
         </Dropdown.Menu>
@@ -36,4 +48,5 @@ export default withDsExample(Example, { variant: "full" });
 
 export const args = {
   index: 4,
+  desc: "App-menyen inneholder lenker til andre interne systemer",
 };
