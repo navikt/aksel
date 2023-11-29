@@ -3,8 +3,8 @@ import React, { ChangeEvent, forwardRef, useRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { useFormField } from "../useFormField";
 import { FileUploadContext } from "./context";
+import Dropzone from "./parts/Dropzone";
 import UploadButton from "./parts/UploadButton";
-import ZoneVariant from "./parts/ZoneVariant";
 import { partitionFiles } from "./utils/partition-files";
 
 export type OnUploadProps = {
@@ -74,7 +74,7 @@ interface FileUploadComponent
   extends React.ForwardRefExoticComponent<
     FileUploadProps & React.RefAttributes<HTMLDivElement>
   > {
-  Zone: typeof ZoneVariant;
+  Dropzone: typeof Dropzone;
   Button: typeof UploadButton;
 }
 
@@ -195,7 +195,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
   }
 ) as FileUploadComponent;
 
-FileUpload.Zone = ZoneVariant;
+FileUpload.Dropzone = Dropzone;
 FileUpload.Button = UploadButton;
 
 export default FileUpload;

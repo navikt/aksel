@@ -1,5 +1,5 @@
-import React from "react";
 import { Meta } from "@storybook/react";
+import React from "react";
 import { FileUpload } from "..";
 import { OnUploadProps } from "./FileUpload";
 
@@ -32,7 +32,7 @@ export const Zone = {
       onUpload={onUpload}
       id="fileupload-input"
     >
-      <FileUpload.Zone />
+      <FileUpload.Dropzone />
     </FileUpload>
   ),
 };
@@ -45,7 +45,7 @@ export const ZoneWithDescription = {
       onUpload={onUpload}
       id="fileupload-input"
     >
-      <FileUpload.Zone />
+      <FileUpload.Dropzone />
     </FileUpload>
   ),
 };
@@ -83,7 +83,7 @@ export const Accept = {
       accept=".png"
       id="fileupload-input"
     >
-      <FileUpload.Zone />
+      <FileUpload.Dropzone />
     </FileUpload>
   ),
 };
@@ -109,7 +109,7 @@ export const ZoneWithError = {
       error="Du må laste opp en fil"
       id="fileupload-input"
     >
-      <FileUpload.Zone />
+      <FileUpload.Dropzone />
     </FileUpload>
   ),
 };
@@ -123,7 +123,7 @@ export const ZoneWithErrorAndDescription = {
       description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
       id="fileupload-input"
     >
-      <FileUpload.Zone />
+      <FileUpload.Dropzone />
     </FileUpload>
   ),
 };
@@ -136,7 +136,7 @@ export const LocaleEnglish = {
       id="fileupload-input"
       locale="en"
     >
-      <FileUpload.Zone />
+      <FileUpload.Dropzone />
     </FileUpload>
   ),
 };
@@ -149,7 +149,7 @@ export const LocaleNynorsk = {
       id="fileupload-input"
       locale="nn"
     >
-      <FileUpload.Zone />
+      <FileUpload.Dropzone />
     </FileUpload>
   ),
 };

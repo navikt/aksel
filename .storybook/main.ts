@@ -7,7 +7,8 @@ module.exports = {
   ],
   addons: [
     "@storybook/addon-a11y",
-    "@whitespace/storybook-addon-html",
+    //TODO: Fix dependency-error
+    /* "@whitespace/storybook-addon-html", */
     "@storybook/addon-interactions",
     {
       name: "@storybook/addon-storysource",
