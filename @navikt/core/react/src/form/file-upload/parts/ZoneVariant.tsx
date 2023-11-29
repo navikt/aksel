@@ -1,9 +1,9 @@
 import React, { useContext, useRef, useState } from "react";
-import { BodyShort } from "../../typography";
-import { useClientLayoutEffect } from "../../util";
-import { FileUploadContext } from "./FileUploadContext";
+import { BodyShort } from "../../../typography";
+import { useClientLayoutEffect } from "../../../util";
+import { FileUploadContext } from "../context";
+import { getDragAndLetGoText, getOrText } from "../utils/i18n";
 import UploadButton from "./UploadButton";
-import { getDragAndLetGoText, getOrText } from "./utils/i18n";
 
 const ZoneVariant = () => {
   const context = useContext(FileUploadContext);

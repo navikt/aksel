@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
-import { Button } from "../../button";
-import { FileUploadContext } from "./FileUploadContext";
-import { getButtonText } from "./utils/i18n";
+import { Button } from "../../../button";
+import { FileUploadContext } from "../context";
+import { getButtonText } from "../utils/i18n";
 
 const UploadButton = () => {
   const context = useContext(FileUploadContext);
