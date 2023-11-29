@@ -15,17 +15,17 @@ export interface ReadMoreProps
   header: React.ReactNode;
   /**
    * Opens component if 'true', closes if 'false'
-   * Using this props removes automatic control of open-state
+   * Using this prop removes automatic control of open-state
    */
   open?: boolean;
   /**
-   * Defaults the accordion to opened state
+   * Initially open
    * @default false
    */
   defaultOpen?: boolean;
   /**
    * Changes fontsize for content
-   * @default false
+   * @default medium
    */
   size?: "medium" | "small";
 }
