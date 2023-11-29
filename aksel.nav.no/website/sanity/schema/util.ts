@@ -30,10 +30,11 @@ export function sanitizeSlug(input: string) {
           default:
             return "";
         }
-      }) // Replace special characters
-      .replace(/[^\w-]+/g, "")
+      })
       // Replace accented characters with non-accented equivalents
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
+      // Replace any non [a-zA-Z0-9_]
+      .replace(/[^\w-]+/g, "")
   );
 }
