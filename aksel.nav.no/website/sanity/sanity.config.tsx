@@ -7,11 +7,7 @@ import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
-import {
-  SANITY_API_VERSION,
-  SANITY_PROJECT_ID,
-  allArticleDocuments,
-} from "./config";
+import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
 import { godPraksisTaxonomy } from "./plugins/god-praksis-taxonomy";
 import { schema } from "./schema";
@@ -88,14 +84,7 @@ function defaultConfig() {
         structure,
         defaultDocumentNode,
       }),
-      publicationFlow({
-        hasQualityControl: [
-          "komponent_artikkel",
-          "ds_artikkel",
-          "aksel_artikkel",
-        ],
-        hasPublishedAt: [...allArticleDocuments],
-      }),
+      publicationFlow(),
 
       /* 3rd-party */
       table(),

@@ -1,6 +1,7 @@
 import { SANITY_API_VERSION } from "@/sanity/config";
 import { definePlugin } from "sanity";
 import { deskTool } from "sanity/desk";
+import { publicationFlow } from "../publication-flow";
 import innholdsType from "./documents/innholdstype";
 import tema from "./documents/tema";
 import undertema from "./documents/undertema";
@@ -57,6 +58,8 @@ export const godPraksisTaxonomy = definePlugin(() => {
         structure,
         defaultDocumentNode,
       }),
+      /* Needs to be redefined here to avoid duplicate actions for documents */
+      publicationFlow(),
     ],
   };
 });
