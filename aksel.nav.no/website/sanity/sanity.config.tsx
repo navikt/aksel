@@ -1,4 +1,4 @@
-import { TestFlaskIcon } from "@navikt/aksel-icons";
+import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
 import { table } from "@sanity/table";
@@ -19,8 +19,7 @@ import { InputWithCounter } from "./schema/custom-components";
 import { getTemplates } from "./util";
 
 export const workspaceConfig = defineConfig([
-  // TODO: PROD er slått av. For å hindre redigering av PROD ved migrering
-  /*  {
+  {
     ...defaultConfig(),
     title: "Aksel",
     name: "default",
@@ -28,7 +27,7 @@ export const workspaceConfig = defineConfig([
     basePath: "/admin/prod",
     icon: DatabaseIcon,
     auth: authStore("production"),
-  }, */
+  },
   {
     ...defaultConfig(),
     title: "Aksel Dev-miljø",
@@ -97,6 +96,7 @@ function defaultConfig() {
         ],
         hasPublishedAt: [...allArticleDocuments],
       }),
+
       /* 3rd-party */
       table(),
       codeInput(),

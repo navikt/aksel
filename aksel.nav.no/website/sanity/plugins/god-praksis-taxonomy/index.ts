@@ -1,20 +1,14 @@
 import { SANITY_API_VERSION } from "@/sanity/config";
 import { definePlugin } from "sanity";
 import { deskTool } from "sanity/desk";
-import artikkel from "./documents/artikkel";
 import innholdsType from "./documents/innholdstype";
 import tema from "./documents/tema";
 import undertema from "./documents/undertema";
 import { defaultDocumentNode, structure } from "./structure";
 
-export const GP_DOCUMENT_NAMES = [
-  tema.name,
-  undertema.name,
-  innholdsType.name,
-  artikkel.name,
-];
+export const GP_DOCUMENT_NAMES = [tema.name, undertema.name, innholdsType.name];
 
-export const GP_DOCUMENTS = [tema, undertema, innholdsType, artikkel];
+export const GP_DOCUMENTS = [tema, undertema, innholdsType];
 
 export const godPraksisTaxonomy = definePlugin(() => {
   return {

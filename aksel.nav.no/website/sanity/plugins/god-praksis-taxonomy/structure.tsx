@@ -6,7 +6,7 @@ const adminOrDev = (user: CurrentUser) =>
 
 export const structure: StructureResolver = (S, { currentUser }) => {
   if (!adminOrDev(currentUser)) {
-    return null;
+    return S.list().title("Ingen tilgang");
   }
 
   return S.list()
@@ -33,7 +33,7 @@ export const structure: StructureResolver = (S, { currentUser }) => {
             })
             .initialValueTemplates([]),
       }),
-      S.listItem({
+      /* S.listItem({
         id: "artikkel_view",
         title: "Artikler (tema)",
         schemaType: "gp.artikkel",
@@ -79,7 +79,7 @@ export const structure: StructureResolver = (S, { currentUser }) => {
                 ])
             )
             .initialValueTemplates([]),
-      }),
+      }), */
     ]);
 };
 
