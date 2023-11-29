@@ -25,7 +25,7 @@ const onUpload = ({
   );
 };
 
-export const Zone = {
+export const Dropzone = {
   render: () => (
     <FileUpload
       label="Last opp filer"
@@ -37,7 +37,7 @@ export const Zone = {
   ),
 };
 
-export const ZoneWithDescription = {
+export const DropzoneWithDescription = {
   render: () => (
     <FileUpload
       label="Last opp filer"
@@ -101,7 +101,7 @@ export const ButtonWithError = {
   ),
 };
 
-export const ZoneWithError = {
+export const DropzoneWithError = {
   render: () => (
     <FileUpload
       label="Last opp filer"
@@ -114,7 +114,7 @@ export const ZoneWithError = {
   ),
 };
 
-export const ZoneWithErrorAndDescription = {
+export const DropzoneWithErrorAndDescription = {
   render: () => (
     <FileUpload
       label="Last opp filer"
