@@ -1,4 +1,5 @@
-import { defineField, defineType } from "sanity";
+import { SANITY_API_VERSION } from "@/sanity/config";
+import { defineArrayMember, defineField, defineType } from "sanity";
 import { WorkspaceT } from "../../util";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import { editorField } from "../presets/editors";
@@ -37,6 +38,61 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
     fields: [
       oppdateringsvarsel,
       ...hiddenFields,
+      defineField({
+        name: "innholdstype",
+        title: "Innholdstype",
+        type: "reference",
+        to: [{ type: "gp.innholdstype" }],
+        options: {
+          disableNew: true,
+        },
+        /* TODO: Remove after God-praksis update */
+        hidden: () => workspace !== "staging",
+        group: "staging",
+        /* Add required after update */
+        /* validation: (Rule) => Rule.required(), */
+      }),
+      defineField({
+        name: "undertema",
+        title: "Undertema",
+        type: "array",
+        /* TODO: Remove after God-praksis update */
+        hidden: () => workspace !== "staging",
+        group: "staging",
+        /* Add required after update */
+        /* validation: (Rule) => Rule.required(), */
+        /*  */
+        of: [
+          defineArrayMember({
+            title: "Undertema",
+            type: "reference",
+            to: [{ type: "gp.tema.undertema" }],
+            options: {
+              disableNew: true,
+              filter: async ({ getClient, parent }) => {
+                const undertema = (
+                  parent as {
+                    _key: string;
+                    _ref?: string;
+                    _type: "reference";
+                  }[]
+                )
+                  .filter((x) => !!x._ref)
+                  .map((x) => x._ref);
+
+                const client = getClient({ apiVersion: SANITY_API_VERSION });
+                const temaIds = await client.fetch("*[_id in $ids].tema._ref", {
+                  ids: undertema,
+                });
+                return {
+                  filter: "!(tema._ref in $temaIds)",
+                  params: { temaIds },
+                };
+              },
+            },
+          }),
+        ],
+      }),
       titleField,
       editorField,
       sanitySlug(prefix, 3),
@@ -61,18 +117,5 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
       relevanteArtiklerField,
       BaseSEOPreset,
       skrivehjelp,
-      defineField({
-        name: "undertema",
-        title: "Undertema",
-        validation: (Rule) => Rule.required(),
-        type: "reference",
-        to: [{ type: "gp.tema.undertema" }],
-        options: {
-          disableNew: true,
-        },
-        /* TODO: Remove after God-praksis update */
-        hidden: () => workspace !== "staging",
-        group: "staging",
-      }),
     ],
   });
