@@ -143,6 +143,7 @@ const jobb: TimelinePeriodProps[] = [
   },
 ];
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

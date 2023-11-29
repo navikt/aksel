@@ -1,3 +1,5 @@
+import { SanityBlockContent } from "@/sanity-block";
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { Button } from "@navikt/ds-react";
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
@@ -9,7 +11,6 @@ import {
   useDocumentOperation,
 } from "sanity";
 import useSWR from "swr";
-import { SanityBlockContent } from "@/sanity-block";
 
 export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   const WrappedFocus = (
@@ -157,7 +158,7 @@ interface QualityCheckContentProps {
 }
 
 export const QualityCheckContent = ({ type }: QualityCheckContentProps) => {
-  const client = useClient({ apiVersion: "2021-06-07" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const { data, error } = useSWR(`*[_id == "publication_flow"][0]`, (query) =>
     client.fetch(query)
   );

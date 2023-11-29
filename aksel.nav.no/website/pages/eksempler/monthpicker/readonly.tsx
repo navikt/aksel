@@ -11,11 +11,12 @@ const Example = () => {
 
   return (
     <MonthPicker {...monthpickerProps}>
-      <MonthPicker.Input {...inputProps} label="Velg månede" readOnly />
+      <MonthPicker.Input {...inputProps} label="Velg måned" readOnly />
     </MonthPicker>
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

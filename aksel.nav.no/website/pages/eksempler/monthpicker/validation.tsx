@@ -18,14 +18,15 @@ const Example = () => {
       <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input
           {...inputProps}
-          label="Velg månede"
-          error={hasError && "Du må velge månede"}
+          label="Velg måned"
+          error={hasError && "Du må velge måned"}
         />
       </MonthPicker>
     </div>
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

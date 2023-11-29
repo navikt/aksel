@@ -14,7 +14,7 @@ export const Publiseringsflyt = defineType({
       of: [
         {
           ...block,
-          //@ts-ignore
+          // @ts-expect-error
           styles: [...headingStyles],
         },
       ],
@@ -28,7 +28,7 @@ export const Publiseringsflyt = defineType({
       of: [
         {
           ...block,
-          //@ts-ignore
+          // @ts-expect-error
           styles: [...headingStyles],
         },
       ],
@@ -42,7 +42,7 @@ export const Publiseringsflyt = defineType({
       of: [
         {
           ...block,
-          //@ts-ignore
+          // @ts-expect-error
           styles: [...headingStyles],
         },
       ],

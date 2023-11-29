@@ -27,7 +27,8 @@
     "@navikt/aksel-icons/figma-plugin",
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
-    "aksel.nav.no"
+    "aksel.nav.no",
+    "scripts/eslint"
   ],
   "prettier": {
     "overrides": [
@@ -37,7 +38,13 @@
           "printWidth": 130
         }
       }
-    ]
+    ],
+    "importOrder": [
+      "^@navikt/(.*)$",
+      "^@/(.*)$",
+      "^[./]"
+    ],
+    "importOrderSortSpecifiers": true
   },
   "lint-staged": {
     "*.js": "eslint",
@@ -134,6 +141,7 @@
     "@storybook/testing-library": "^0.2.2",
     "@storybook/theming": "^7.5.3",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
     "@whitespace/storybook-addon-html": "^5.1.6",
@@ -141,6 +149,7 @@
     "concurrently": "7.2.1",
     "cross-env": "^7.0.0",
     "eslint": "^8.50.0",
+    "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-jest": "^27.4.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",

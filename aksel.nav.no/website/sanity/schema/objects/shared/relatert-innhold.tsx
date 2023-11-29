@@ -1,8 +1,7 @@
+import AkselRelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
 import { LinkIcon } from "@navikt/aksel-icons";
-import { allArticleDocsRef } from "../../../config";
-
-import React from "react";
 import { defineField, defineType } from "sanity";
+import { allArticleDocsRef } from "../../../config";
 
 export const RelatertInnhold = defineType({
   name: "relatert_innhold",
@@ -75,12 +74,13 @@ export const RelatertInnhold = defineType({
       ],
     }),
   ],
+  components: {
+    preview: (values) => <AkselRelatertInnhold node={values as any} />,
+  },
   preview: {
     select: {
-      links: "links",
-    },
-    prepare() {
-      return { title: "Relatert innhold kort", media: () => <LinkIcon /> };
+      lenker: "lenker",
+      title: "title",
     },
   },
 });

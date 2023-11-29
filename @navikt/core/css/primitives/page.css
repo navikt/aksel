@@ -27,6 +27,10 @@
   padding-block-end: var(--a-spacing-8);
 }
 
+.navds-pageblock--md {
+  max-width: 768px;
+}
+
 .navds-pageblock--lg {
   max-width: 1024px;
 }

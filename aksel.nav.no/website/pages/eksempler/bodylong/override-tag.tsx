@@ -5,6 +5,7 @@ const Example = () => {
   return <BodyLong as="span">Dette er nå en span!</BodyLong>;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */

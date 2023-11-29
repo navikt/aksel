@@ -1,27 +1,20 @@
 import { withDsExample } from "@/web/examples/withDsExample";
-import { Alert } from "@navikt/ds-react";
+import { Alert, VStack } from "@navikt/ds-react";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
-      <Alert size="small" variant="info">
-        Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha hatt
-        en pensjonsgivende inntekt som tilsvarer x G, året før du fikk nedsatt
-        arbeidsevnen.
-      </Alert>
+    <VStack gap="4" align="center">
       <Alert size="small" variant="success">
         Søknad er sendt inn!
       </Alert>
-      <Alert size="small" variant="warning">
-        Du må være registrert hos NAV for å bruke aktivitetsplanen.
+      <Alert size="small" variant="success" inline>
+        Søknad er sendt inn!
       </Alert>
-      <Alert size="small" variant="error">
-        Noe gikk galt! Prøv igjen om noen minutter.
-      </Alert>
-    </div>
+    </VStack>
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -30,5 +23,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 5,
 };

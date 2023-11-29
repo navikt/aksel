@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Popover } from "../index";
 import { Button } from "../button";
+import { Popover } from "../index";
 
 const placements = [
   "top",
@@ -47,9 +47,9 @@ export default {
 
 export const Default = (props: any) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>();
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
   return (
-    <div>
+    <div tabIndex={-1}>
       <Button ref={(el) => setAnchorEl(el)} onClick={() => setOpen((x) => !x)}>
         Open
       </Button>
@@ -57,10 +57,12 @@ export const Default = (props: any) => {
         {...props}
         open={props.open ?? open}
         anchorEl={anchorEl}
-        onClose={(e) => setOpen(e)}
+        onClose={() => setOpen(false)}
       >
         <Popover.Content>Velit in consequat</Popover.Content>
       </Popover>
+      &nbsp;
+      <Button variant="secondary">Another button</Button>
     </div>
   );
 };

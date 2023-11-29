@@ -11,8 +11,10 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
 
 export const args = {
   index: 1,
+  title: "Hjem-lenke",
 };

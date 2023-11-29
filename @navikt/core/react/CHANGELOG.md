@@ -1,5 +1,55 @@
 # @navikt/ds-react
 
+## 5.11.3
+
+### Patch Changes
+
+- :bug: Textarea: Skru av autosize ved manuell resize ([#2518](https://github.com/navikt/aksel/pull/2518))
+
+- :bug: Popover: Ikke lukk ved klikk inni når parent er fokuserbar ([#2521](https://github.com/navikt/aksel/pull/2521))
+
+- Page: La til `md`-bredde (768px) ([#2510](https://github.com/navikt/aksel/pull/2510))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.11.3
+  - @navikt/aksel-icons@5.11.3
+
+## 5.11.2
+
+### Patch Changes
+
+- ⬆️ upgrade date-fns version & make it minor-version agnostic ([#2514](https://github.com/navikt/aksel/pull/2514))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.11.2
+  - @navikt/aksel-icons@5.11.2
+
+## 5.11.1
+
+### Patch Changes
+
+- Switch: Byttet success-farger med action npr checked ([#2511](https://github.com/navikt/aksel/pull/2511))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.11.1
+  - @navikt/aksel-icons@5.11.1
+
+## 5.11.0
+
+### Minor Changes
+
+- :sparkles: Textarea: Mulighet for å sette resize-retning ([#2494](https://github.com/navikt/aksel/pull/2494))
+
+- :sparkles: Textarea: Eksperimentell støtte for automatisk scrollbar ([#2457](https://github.com/navikt/aksel/pull/2457))
+
+### Patch Changes
+
+- :wheelchair: Textarea: Forsinkelse ved live-opplesning av gjenstående tegn ([#2502](https://github.com/navikt/aksel/pull/2502))
+
+- Updated dependencies [[`bc259f5b3`](https://github.com/navikt/aksel/commit/bc259f5b306319c0e08397d5300596fc1d43353e)]:
+  - @navikt/aksel-icons@5.11.0
+  - @navikt/ds-tokens@5.11.0
+
 ## 5.10.4
 
 ### Patch Changes

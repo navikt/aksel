@@ -46,7 +46,7 @@ const Example = () => {
             <Table.ColumnHeader sortKey="name" sortable>
               Navn
             </Table.ColumnHeader>
-            <Table.HeaderCell scope="col">Fødseslnr.</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
             <Table.ColumnHeader sortKey="start" sortable>
               Start
             </Table.ColumnHeader>
@@ -103,6 +103,7 @@ const data = [
   },
 ];
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

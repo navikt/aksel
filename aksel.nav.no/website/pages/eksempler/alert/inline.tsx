@@ -22,6 +22,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -30,5 +31,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
+  index: 9,
+  desc: "Bruk inline om varselet er en del av annet innhold eller når panelet og bakgrunnsfarge blir støy for brukeren.",
 };

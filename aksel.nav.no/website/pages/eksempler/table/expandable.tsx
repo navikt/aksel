@@ -8,7 +8,7 @@ const Example = () => {
         <Table.Row>
           <Table.HeaderCell />
           <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Fødseslnr.</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
           <Table.HeaderCell scope="col">Start</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -65,6 +65,7 @@ const data = [
   },
 ];
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -74,4 +75,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
+  desc: "Rader kan utvides for å vise ekstra informasjon. Man kan velge om knappen for å utvide/lukke vises i starten eller enden av raden.",
 };

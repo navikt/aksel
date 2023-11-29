@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { Heading, VStack } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
 import {
@@ -10,7 +11,7 @@ import {
 } from "sanity";
 
 export function TemaView() {
-  const client = useClient({ apiVersion: "2021-06-07" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const title = useFormValue([`title`]);
   const schema = useSchema();
 

@@ -47,6 +47,7 @@ module.exports = {
       files: ["**/*.test.*", "**/__tests__/*"],
       extends: ["plugin:jest/recommended", "plugin:testing-library/react"],
     },
+
     {
       files: ["aksel.nav.no/website/**"],
       env: {
@@ -76,6 +77,16 @@ module.exports = {
       files: ["aksel.nav.no/website/pages/eksempler/**"],
       rules: {
         "jsx-a11y/anchor-is-valid": "off",
+      },
+    },
+    {
+      files: [
+        "aksel.nav.no/website/pages/eksempler/**/*.tsx",
+        "aksel.nav.no/website/pages/templates/**/*.tsx",
+      ],
+      plugins: ["aksel-local"],
+      rules: {
+        "aksel-local/comment-check": ["error"],
       },
     },
   ],

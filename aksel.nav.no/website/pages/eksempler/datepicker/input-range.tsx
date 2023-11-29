@@ -34,6 +34,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -43,5 +44,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "Før du belger å bruke range, vurder om to enkelte datepickere for start/slutt-dato ville vært bedre. Range fungerer bedre for korte perioder innenfor en månede.",
+  desc: "Før du belger å bruke range, vurder om to enkelte datepickere for start/slutt-dato ville vært bedre. Range fungerer bedre for korte perioder innenfor en måned.",
 };

@@ -15,7 +15,7 @@ const Example = () => {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Fødseslnr.</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
             <Table.HeaderCell scope="col">Start</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -101,6 +101,7 @@ const data = [
   },
 ];
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

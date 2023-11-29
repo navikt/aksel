@@ -1,11 +1,11 @@
 import { defineField, defineType } from "sanity";
-import { groups } from "../presets/groups";
-import { hiddenFields } from "../presets/hidden-fields";
+import { SANITY_API_VERSION, prinsippKategorier } from "../../../config";
 import { editorField } from "../presets/editors";
-import { titleField } from "../presets/title-field";
+import SanityTabGroups from "../presets/groups";
+import { hiddenFields } from "../presets/hidden-fields";
 import { ingressField } from "../presets/ingress";
-import { SEOFields } from "../presets/seo";
-import { prinsippKategorier } from "../../../config";
+import BaseSEOPreset from "../presets/seo";
+import { titleField } from "../presets/title-field";
 
 const prefix = "prinsipper/";
 
@@ -13,7 +13,7 @@ export const Prinsipp = defineType({
   title: "Prinsipp artikkel",
   name: "aksel_prinsipp",
   type: "document",
-  groups,
+  groups: SanityTabGroups,
   preview: {
     select: {
       heading: "heading",
@@ -115,10 +115,9 @@ export const Prinsipp = defineType({
                 };
 
                 const query = `*[!(_id in [$draft, $published]) && _type == "aksel_prinsipp" && prinsipp.prinsippvalg == $prinsipp && prinsipp.hovedside == true][0]{heading,_id}`;
-                const res = await getClient({ apiVersion: "2021-06-07" }).fetch(
-                  query,
-                  params
-                );
+                const res = await getClient({
+                  apiVersion: SANITY_API_VERSION,
+                }).fetch(query, params);
 
                 if (parent?.hovedside && !!res?._id) {
                   return `Kan bare ha 1 hovedside for hvert prinsipp. Hovedsiden er nå: ${
@@ -149,6 +148,6 @@ export const Prinsipp = defineType({
       type: "riktekst_prinsipp",
       group: "innhold",
     }),
-    SEOFields,
+    BaseSEOPreset,
   ],
 });
