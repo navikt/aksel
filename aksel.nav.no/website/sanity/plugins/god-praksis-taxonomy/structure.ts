@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { CurrentUser } from "sanity";
 import { DefaultDocumentNodeResolver, StructureResolver } from "sanity/desk";
 
@@ -24,6 +25,7 @@ export const structure: StructureResolver = (S, { currentUser }) => {
               return S.documentTypeList("gp.tema.undertema")
                 .title("Undertema")
                 .filter("_type == $type && tema._ref == $id")
+                .apiVersion(SANITY_API_VERSION)
                 .params({ type: "gp.tema.undertema", id })
                 .initialValueTemplates([
                   S.initialValueTemplateItem("gp.tema.undertema.by.tema", {

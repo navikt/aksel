@@ -48,6 +48,7 @@ export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
             .title(`${title}`)
             .filter(`_type == 'aksel_artikkel' && $undertema in tema[]._ref`)
             .params({ undertema: _id.replace("drafts.", "") })
+            .apiVersion(SANITY_API_VERSION)
           /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
         )
     ),
@@ -59,6 +60,7 @@ export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
         S.documentList()
           .title(`Artikler uten tema`)
           .filter(`_type == 'aksel_artikkel' && !defined(tema)`)
+          .apiVersion(SANITY_API_VERSION)
         /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
       ),
   ];

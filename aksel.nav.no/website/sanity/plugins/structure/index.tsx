@@ -107,6 +107,7 @@ export const structure: StructureResolver = async (
                   .params({
                     ids: outdated.map((x) => x?._id),
                   })
+                  .apiVersion(SANITY_API_VERSION)
               ),
           ]
         : []),
@@ -146,6 +147,7 @@ export const structure: StructureResolver = async (
                       `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`
                     )
                     .params({ value })
+                    .apiVersion(SANITY_API_VERSION)
                   /* .menuItems([
                         ...S.documentTypeList("aksel_prinsipp").getMenuItems(),
                       ]) */
@@ -236,6 +238,7 @@ export const structure: StructureResolver = async (
                       S.documentList()
                         .title("Sider")
                         .filter(`_type == 'aksel_standalone'`)
+                        .apiVersion(SANITY_API_VERSION)
                       /* .menuItems([
                             ...S.documentTypeList(
                               "aksel_standalone"
@@ -246,6 +249,7 @@ export const structure: StructureResolver = async (
                       S.documentList()
                         .title("Forfattere")
                         .filter(`_type == 'editor'`)
+                        .apiVersion(SANITY_API_VERSION)
                       /* .menuItems([
                             ...S.documentTypeList("editor").getMenuItems(),
                           ]) */
@@ -254,6 +258,7 @@ export const structure: StructureResolver = async (
                       S.documentList()
                         .title("Redirects")
                         .filter(`_type == 'redirect'`)
+                        .apiVersion(SANITY_API_VERSION)
                       /* .menuItems([
                             ...S.documentTypeList("redirect").getMenuItems(),
                           ]) */
@@ -264,6 +269,7 @@ export const structure: StructureResolver = async (
                         S.documentList()
                           .title("Eksempler")
                           .filter(`_type == 'kode_eksempler_fil'`)
+                          .apiVersion(SANITY_API_VERSION)
                       ),
                     S.listItem()
                       .title("Token-grupper Designsystemet")
@@ -271,6 +277,7 @@ export const structure: StructureResolver = async (
                         S.documentList()
                           .title("Grupper")
                           .filter(`_type == 'token_kategori'`)
+                          .apiVersion(SANITY_API_VERSION)
                       ),
                     S.listItem()
                       .title("Props Designsystemet")
@@ -278,6 +285,7 @@ export const structure: StructureResolver = async (
                         S.documentList()
                           .title("Props")
                           .filter(`_type == 'ds_props'`)
+                          .apiVersion(SANITY_API_VERSION)
                       ),
                     S.documentListItem()
                       .title(`Skrivehjelp`)
