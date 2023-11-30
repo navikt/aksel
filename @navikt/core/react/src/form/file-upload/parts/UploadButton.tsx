@@ -30,7 +30,7 @@ const UploadButton = forwardRef<HTMLButtonElement, FileUploadButtonProps>(
         onClick={context.onButtonClick}
         tabIndex={-1}
         icon={
-          <UploadIcon fontSize="1.5rem" focusable={false} aria-hidden={true} />
+          <UploadIcon fontSize="1.5rem"  aria-hidden />
         }
       >
         {children ?? getButtonText(context.locale)}
