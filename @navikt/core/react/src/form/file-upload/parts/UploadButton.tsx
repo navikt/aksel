@@ -30,7 +30,7 @@ const UploadButton = forwardRef<HTMLButtonElement, FileUploadButtonProps>(
         onClick={(e) => {
             rest.onClick?.(e);
             context.onButtonClick();
-        )}
+        }}
         tabIndex={-1}
         icon={
           <UploadIcon fontSize="1.5rem"  aria-hidden />
