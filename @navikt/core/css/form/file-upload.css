@@ -13,7 +13,7 @@
   position: relative;
   cursor: pointer;
   background-color: var(--ac-file-upload-button-bg, var(--a-bg-default));
-  transition: 0.2s ease all;
+  transition: background-color 0.2s ease;
 }
 
 .navds-fileupload__content:hover .navds-fileupload__content__button {
