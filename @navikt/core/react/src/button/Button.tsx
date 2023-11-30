@@ -71,7 +71,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         variant = "primary",
         className,
         children,
-        size = "false",
+        size = "medium",
         loading = false,
         disabled,
         style,
