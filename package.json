@@ -178,5 +178,6 @@
     "vite": "^4.2.0",
     "yarn": "^1.22.10"
   },
+  "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",
   "packageManager": "yarn@3.2.1"
 }
