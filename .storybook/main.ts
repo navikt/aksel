@@ -1,3 +1,6 @@
+import { mergeConfig } from "vite";
+import turbosnap from "vite-plugin-turbosnap";
+
 module.exports = {
   staticDirs: ["./public"],
 
@@ -41,5 +44,19 @@ module.exports = {
     check: false,
     checkOptions: {},
     reactDocgen: false,
+  },
+
+  async viteFinal(config, { configType }) {
+    return mergeConfig(config, {
+      plugins:
+        configType === "PRODUCTION"
+          ? [
+              turbosnap({
+                // This should be the base path of your storybook.  In monorepos, you may only need process.cwd().
+                rootDir: config.root ?? process.cwd(),
+              }),
+            ]
+          : [],
+    });
   },
 };
