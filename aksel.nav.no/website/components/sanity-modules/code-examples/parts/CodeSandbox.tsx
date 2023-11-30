@@ -1,6 +1,6 @@
-import { CodeSandboxLogo } from "@/assets/Icons";
-import { Button } from "@navikt/ds-react";
 import { getParameters } from "codesandbox/lib/api/define";
+import { Button } from "@navikt/ds-react";
+import { CodeSandboxLogo } from "@/assets/Icons";
 
 const indexTsx = `import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -20,6 +20,7 @@ export const CodeSandbox = ({ code }: { code: string }) => {
   const parameters = getParameters({
     files: {
       "package.json": {
+        // @ts-expect-error
         content: {
           dependencies: {
             react: "latest",
@@ -28,7 +29,7 @@ export const CodeSandbox = ({ code }: { code: string }) => {
             "@navikt/ds-css": "latest",
             "@navikt/aksel-icons": "latest",
           },
-        } as any,
+        },
         isBinary: false,
       },
       "App.tsx": {
@@ -58,9 +59,9 @@ export const CodeSandbox = ({ code }: { code: string }) => {
       <Button
         variant="tertiary-neutral"
         size="small"
-        aria-label="Codesandbox"
         type="submit"
-        icon={<CodeSandboxLogo aria-hidden />}
+        title="Åpne eksempel i CodeSandbox"
+        icon={<CodeSandboxLogo />}
       />
     </form>
   );

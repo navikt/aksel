@@ -6,6 +6,7 @@ export type FileArrayT = {
   description?: string;
   sandboxEnabled?: boolean;
   sandboxBase64: string;
+  compact: boolean;
 }[];
 
 export type DirectoryDataT = { path: string }[];
@@ -15,5 +16,6 @@ export type ArgsT = {
   index?: number;
   desc?: string;
   sandbox?: boolean;
+  compact?: boolean;
 };
 export type RootDirectoriesT = "eksempler" | "templates";

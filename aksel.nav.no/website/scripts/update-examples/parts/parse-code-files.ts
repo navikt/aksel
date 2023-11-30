@@ -35,12 +35,13 @@ export function parseCodeFiles(
 
     return {
       innhold: code,
-      title: args?.title ?? file.replace(".tsx", ""),
+      title: args.title ?? file.replace(".tsx", ""),
       navn: file.replace(".tsx", ""),
-      description: args?.desc,
-      index: args?.index ?? 1,
+      description: args.desc,
+      index: args.index ?? 1,
       sandboxBase64: processAndCompressForURI(filterCode(code)),
-      sandboxEnabled: args?.sandbox ?? true,
+      sandboxEnabled: args.sandbox ?? true,
+      compact: args.compact ?? false,
     };
   });
 

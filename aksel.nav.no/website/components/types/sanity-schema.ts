@@ -325,6 +325,7 @@ export type CodeExampleSchemaT = {
     description?: string;
     sandboxEnabled?: boolean;
     sandboxBase64: string;
+    compact: boolean;
   }[];
   metadata?: {
     version: number;

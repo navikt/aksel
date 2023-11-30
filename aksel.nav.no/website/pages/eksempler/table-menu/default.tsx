@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { MenuElipsisHorizontalCircleIcon } from "@navikt/aksel-icons";
 import { Button, Dropdown, HStack, Link, Table } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -91,4 +91,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  compact: true,
 };

@@ -1,4 +1,4 @@
-import { PencilIcon } from "@navikt/aksel-icons";
+import { SandboxIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 
 export const Sandbox = ({ code }: { code: string }) => {
@@ -10,9 +10,9 @@ export const Sandbox = ({ code }: { code: string }) => {
       as="a"
       variant="tertiary-neutral"
       size="small"
-      icon={<PencilIcon aria-hidden fontSize="1.5rem" />}
+      icon={<SandboxIcon aria-hidden />}
     >
-      Sandbox
+      Aksel playroom
     </Button>
   );
 };
