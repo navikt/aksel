@@ -27,7 +27,10 @@ const UploadButton = forwardRef<HTMLButtonElement, FileUploadButtonProps>(
         ref={ref}
         className={cl("navds-fileupload__content__button", className)}
         variant="secondary"
-        onClick={context.onButtonClick}
+        onClick={(e) => {
+            rest.onClick?.(e);
+            context.onButtonClick();
+        )}
         tabIndex={-1}
         icon={
           <UploadIcon fontSize="1.5rem"  aria-hidden />
