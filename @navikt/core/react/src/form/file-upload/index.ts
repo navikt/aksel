@@ -1,5 +1,7 @@
 export {
   default as FileUpload,
-  type FileUploadProps,
-  type OnUploadProps,
 } from "./FileUpload";
+export {
+  type DropzoneProps,
+  type OnUploadProps
+} from "./Dropzone";
