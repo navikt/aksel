@@ -12,7 +12,7 @@ import Header from "@/layout/header/Header";
 
 const Example = () => {
   return (
-    <Page footer={<Footer />}>
+    <Page data-aksel-template="404-v1" footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 16">
@@ -32,35 +32,12 @@ const Example = () => {
                 </List.Item>
               </List>
             </div>
-            <StatusSvg />
           </HGrid>
         </Box>
       </Page.Block>
     </Page>
   );
 };
-
-function StatusSvg() {
-  return (
-    <svg
-      data-aksel-template="404-v1"
-      width="min(100%, 500px)"
-      viewBox="0 0 550 340"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-labelledby="404-illustration"
-    >
-      <path
-        d="m60 244 36 1 1-23a541 541 0 0 1 4-49h-1a1233 1233 0 0 1-19 36l-21 35Zm31 91 2-47-88-5 2-39 77-118 70 3-6 119 22 1-2 43-22-1-3 47-52-3Zm175-76c-23 0-42-10-57-28-14-19-21-46-21-82 0-35 7-62 21-80 15-18 34-27 57-27s41 9 56 27c14 18 21 45 21 80 0 36-7 63-21 82a67 67 0 0 1-56 28Zm0-44c4 0 8-2 12-5s7-9 9-19c2-9 3-23 3-42 0-18-1-32-3-41s-5-15-9-18-8-5-12-5c-5 0-9 2-12 5-4 3-7 9-9 18-3 9-4 23-4 41 0 19 1 33 4 42 2 10 5 16 9 19 3 3 7 5 12 5Zm164-86 35-2-1-23a541 541 0 0 1 0-50h-2a1244 1244 0 0 1-15 39l-17 36Zm40 88-2-47-89 5-2-40L441 9l71-3 6 119 22-1 3 42-23 1 3 47-53 3Z"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeDasharray="6.57 8.76"
-        stroke="rgba(203, 207, 213, 1)"
-      />
-    </svg>
-  );
-}
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default Example;
