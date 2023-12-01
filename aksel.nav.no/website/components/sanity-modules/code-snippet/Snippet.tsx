@@ -1,9 +1,9 @@
-import ErrorBoundary from "@/error-boundary";
-import { CodeSnippetT } from "@/types";
-import { ChevronRightIcon, TerminalIcon } from "@navikt/aksel-icons";
-import { CopyButton, Label } from "@navikt/ds-react";
 import cl from "clsx";
 import { Highlight, Language } from "prism-react-renderer";
+import { ChevronRightIcon, TerminalIcon } from "@navikt/aksel-icons";
+import { CopyButton, Label } from "@navikt/ds-react";
+import ErrorBoundary from "@/error-boundary";
+import { CodeSnippetT } from "@/types";
 import theme from "./theme";
 
 type CodeSnippetProps = {
@@ -45,7 +45,7 @@ const CodeSnippet = ({ node: { code, title } }: CodeSnippetProps) => {
   return (
     <section
       aria-label="Kode"
-      className="aksel-codesnippet bg-surface-inverted relative mb-7 grid rounded-lg last:mb-0"
+      className="aksel-codesnippet bg-surface-inverted relative mb-7 grid rounded-lg last:mb-0 animate-slideDown"
     >
       <div className="text-text-on-inverted text-medium relative flex leading-6">
         <div className="mt-2 flex flex-none items-center border-b border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">

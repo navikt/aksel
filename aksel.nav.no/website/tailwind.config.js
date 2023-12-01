@@ -96,10 +96,21 @@ module.exports = {
           "0%": { opacity: 0.2 },
           "100%": { opacity: 1 },
         },
+        slideDown: {
+          from: {
+            opacity: 0,
+            transform: "translateY(-0.75rem)",
+          },
+          to: {
+            opacity: 1,
+            transform: "none",
+          },
+        },
       },
       animation: {
         fadeIn: "fadeIn 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
         toc: "toc 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
+        slideDown: "slideDown 0.35s cubic-bezier(0.15, 1, 0.3, 1)",
       },
     },
   },
