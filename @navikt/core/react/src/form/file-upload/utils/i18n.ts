@@ -1,22 +1,33 @@
 export const getButtonText = (locale: "nb" | "nn" | "en") => {
   switch (locale) {
     case "nb":
-      return "Velg filer"
+      return "Last opp filer"
     case "nn":
-      return "Vel filer"
+      return "Last opp filer"
     case "en":
-      return "Choose files"
+      return "Upload files"
   }
 }
 
-export const getDragAndLetGoText = (locale: "nb" | "nn" | "en") => {
+export const getDragAndDropText = (locale: "nb" | "nn" | "en") => {
   switch (locale) {
     case "nb":
-      return "Dra og slipp"
+      return "Dra og slipp filer"
     case "nn":
-      return "Dra og slepp"
+      return "Dra og slepp filer"
     case "en":
-      return "Drag and drop"
+      return "Drag and drop files"
+  }
+}
+
+export const getDropText = (locale: "nb" | "nn" | "en") => {
+  switch (locale) {
+    case "nb":
+      return "Slipp"
+    case "nn":
+      return "Slepp"
+    case "en":
+      return "Drop"
   }
 }
 

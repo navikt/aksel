@@ -7,10 +7,15 @@ import React, {
 } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { mergeRefs } from "../../util";
-import { getButtonText, getDragAndLetGoText, getOrText } from "./utils/i18n";
+import {
+  getButtonText,
+  getDragAndDropText,
+  getDropText,
+  getOrText
+} from "./utils/i18n";
 import { useFormField } from "../useFormField";
 import { partitionFiles } from "./utils/partition-files";
-import { UploadIcon } from "@navikt/aksel-icons";
+import { UploadIcon, CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 
 export type OnUploadProps = {
@@ -152,8 +157,19 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           })}
         >
           <div className="navds-fileupload__content-zone">
-            <BodyShort as="span">{getDragAndLetGoText(locale)}</BodyShort>
-            <BodyShort as="span">{getOrText(locale)}</BodyShort>
+            {isDraggingOver &&
+              <div className="navds-fileupload__content-zone-dragover">
+                <CloudUpIcon fontSize="1.5rem" aria-hidden />
+                <BodyShort as="span">{getDropText(locale)}</BodyShort>
+              </div>
+            }
+            <div className="navds-fileupload__content-zone-icon">
+              <UploadIcon fontSize="1.5rem" aria-hidden />
+            </div>
+            <div className="navds-fileupload__content-zone-text">
+              <BodyShort as="span">{getDragAndDropText(locale)}</BodyShort>
+              <BodyShort as="span">{getOrText(locale)}</BodyShort>
+            </div>
             <Button
               className="navds-fileupload__content-zone-button"
               variant="secondary"
@@ -161,9 +177,6 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
                 onButtonClick();
               }}
               tabIndex={-1}
-              icon={
-                <UploadIcon fontSize="1.5rem" aria-hidden />
-              }
             >
               {getButtonText(locale)}
             </Button>
