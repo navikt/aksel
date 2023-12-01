@@ -325,7 +325,6 @@ export type CodeExampleSchemaT = {
     description?: string;
     sandboxEnabled?: boolean;
     sandboxBase64: string;
-    compact: boolean;
   }[];
   metadata?: {
     version: number;
@@ -341,6 +340,7 @@ export interface CodeExamplesT {
     metadata?: CodeExampleSchemaT["metadata"];
     variant: CodeExampleSchemaT["variant"];
   };
+  compact?: boolean;
 }
 
 export type PropTableT = ArrayObjectT<{

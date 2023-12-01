@@ -25,17 +25,13 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
   const [activeExample, setActiveExample] = useState("");
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
-  const [showCode, setShowCode] = useState(
-    node?.dir?.filer?.[0]?.compact ? false : true
-  );
+  const [showCode, setShowCode] = useState(!node.compact);
+
   const router = useRouter();
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleExampleLoad = () => {
-    const currentExample = node.dir.filer.find(
-      (fil) => fil.navn === activeExample
-    );
-    const iframePadding = currentExample.compact
+    const iframePadding = node.compact
       ? iframePaddingCompact
       : iframePaddingNormal;
     let attempts = 0;
@@ -69,7 +65,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
   };
 
   useEffect(() => {
-    node?.dir?.filer?.[0]?.navn && setActiveExample(node.dir.filer[0].navn);
+    node.dir?.filer?.[0]?.navn && setActiveExample(node.dir.filer[0].navn);
   }, [node]);
 
   useEffect(() => {
@@ -88,7 +84,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
     return null;
   }
 
-  const active = activeExample || node?.dir?.filer?.[0]?.navn;
+  const active = activeExample || node.dir?.filer?.[0]?.navn;
   const demoVariant = node.dir?.variant;
 
   return (
@@ -142,21 +138,18 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                 )}
               >
                 <iframe
-                  src={`/${demoVariant}/${node.dir.title}/${fil.navn.replace(
-                    ".tsx",
-                    ""
-                  )}`}
+                  ref={iframeRef}
+                  src={`/${demoVariant}/${node.dir.title}/${fil.navn}`}
                   height={frameState}
                   onLoad={handleExampleLoad}
-                  aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
+                  aria-label={`${node.dir?.title} ${fil.title} eksempel`}
+                  title="Demo"
                   className={cl(
                     "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                     {
                       invisible: unloaded,
                     }
                   )}
-                  title="Forhåndsvisning"
-                  ref={iframeRef}
                 />
                 {unloaded && (
                   <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">

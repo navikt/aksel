@@ -51,7 +51,6 @@ export function parseCodeFiles(
       index: args.index ?? 1,
       sandboxBase64: processAndCompressForURI(filterCode(code)),
       sandboxEnabled: args.sandbox ?? true,
-      compact: args.compact ?? false,
     };
   });
 
