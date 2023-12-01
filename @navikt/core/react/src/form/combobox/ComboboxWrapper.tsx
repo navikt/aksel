@@ -47,7 +47,7 @@ const ComboboxWrapper = ({
       ref={wrapperRef}
       className={cl(
         className,
-        "navds-form-field",
+        "navds-combobox-form-field",
         `navds-form-field--${inputSize}`,
         {
           "navds-combobox--error": hasError,
@@ -57,7 +57,6 @@ const ComboboxWrapper = ({
       )}
       onFocus={onFocusInsideWrapper}
       onBlur={onBlurWrapper}
-      tabIndex={-1}
     >
       {children}
     </div>

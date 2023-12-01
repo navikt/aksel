@@ -1,3 +1,8 @@
+.navds-combobox-form-field {
+  display: flex;
+  flex-direction: column;
+}
+
 .navds-combobox__wrapper {
   display: flex;
   flex-direction: column;
