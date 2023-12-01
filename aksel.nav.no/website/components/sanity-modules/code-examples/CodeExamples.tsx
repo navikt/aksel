@@ -130,7 +130,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
             <>
               <div
                 className={cl(
-                  "overflow-hidden rounded-t-lg border border-b-0 border-gray-300 ",
+                  "overflow-hidden rounded-t-lg border border-b-0 border-gray-300",
                   {
                     "relative animate-pulse": unloaded,
                     "bg-gray-50": !unloaded,
