@@ -59,7 +59,7 @@ export interface DropzoneProps extends Omit<React.HTMLAttributes<HTMLInputElemen
   /**
    * Sets a ref on the outermost div.
    */
-  ref?: React.Ref<HTMLDivElement>;
+  ref?: React.Ref<HTMLInputElement>;
   /**
    * Callback triggered on file upload
    */
