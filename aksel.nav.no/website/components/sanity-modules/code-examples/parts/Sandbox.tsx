@@ -1,7 +1,10 @@
-import { SandboxIcon } from "@navikt/aksel-icons";
+import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
+import { useMedia } from "@/hooks/useMedia";
 
 export const Sandbox = ({ code }: { code: string }) => {
+  const showLabel = useMedia("(min-width: 1024px)");
+
   return (
     <Button
       href={`/sandbox/index.html?code=${code}`}
@@ -10,9 +13,11 @@ export const Sandbox = ({ code }: { code: string }) => {
       as="a"
       variant="tertiary-neutral"
       size="small"
-      icon={<SandboxIcon aria-hidden />}
+      icon={
+        <PencilIcon aria-hidden={showLabel} title={!showLabel && "Sandbox"} />
+      }
     >
-      Aksel playroom
+      {showLabel && "Sandbox"}
     </Button>
   );
 };

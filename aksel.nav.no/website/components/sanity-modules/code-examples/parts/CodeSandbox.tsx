@@ -60,8 +60,7 @@ export const CodeSandbox = ({ code }: { code: string }) => {
         variant="tertiary-neutral"
         size="small"
         type="submit"
-        title="Åpne eksempel i CodeSandbox"
-        icon={<CodeSandboxLogo />}
+        icon={<CodeSandboxLogo title="CodeSandbox" />}
       />
     </form>
   );

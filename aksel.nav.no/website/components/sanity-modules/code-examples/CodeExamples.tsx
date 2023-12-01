@@ -11,7 +11,6 @@ import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import ErrorBoundary from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
-import { capitalize } from "@/utils";
 import { CodeSandbox } from "./parts/CodeSandbox";
 import { Sandbox } from "./parts/Sandbox";
 
@@ -85,14 +84,6 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
     }
   }, [router, node]);
 
-  const fixName = (str: string) =>
-    capitalize(
-      str
-        .replace(/[^\wæøå]|_/g, " ")
-        .replace(/\s+/g, " ")
-        .trim()
-    ) ?? str;
-
   if (!node.dir?.filer || node.dir.filer.length === 0) {
     return null;
   }
@@ -121,9 +112,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   );
                 }}
               >
-                {fil.title[0] === fil.title[0].toLocaleUpperCase()
-                  ? fil.title // If title is capitalized, assume it comes from args.title and use as is
-                  : fixName(fil.title)}
+                {fil.title}
               </Chips.Toggle>
             ))}
           </Chips>
