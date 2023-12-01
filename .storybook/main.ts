@@ -52,7 +52,6 @@ module.exports = {
         configType === "PRODUCTION"
           ? [
               turbosnap({
-                // This should be the base path of your storybook.  In monorepos, you may only need process.cwd().
                 rootDir: config.root ?? process.cwd(),
               }),
             ]
