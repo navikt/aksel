@@ -1,0 +1,44 @@
+.navds-fileitem {
+  display: flex;
+  border: 1px solid var(--ac-file-bg, var(--a-surface-subtle));
+  border-radius: var(--ac-file-border-radius, var(--a-border-radius-large));
+  padding: 10px;
+  gap: 8px;
+}
+
+.navds-fileitem:not(:last-of-type) {
+  margin-bottom: var(--a-spacing-2);
+}
+
+.navds-fileitem--error {
+  border-color: var(--ac-file-error-border, var(--a-surface-danger));
+}
+
+.navds-fileitem__button {
+  margin-left: auto;
+}
+
+.navds-fileitem__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  background-color: var(--ac-file-icon-bg, var(--a-bg-subtle));
+  padding: 4px;
+  border-radius: 100%;
+}
+
+.navds-fileitem__file-info {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.navds-fileitem__error .navds-error-message {
+  display: flex;
+  gap: var(--a-spacing-2);
+}
+
+.navds-fileitem__error .navds-error-message::before {
+  content: "•";
+}

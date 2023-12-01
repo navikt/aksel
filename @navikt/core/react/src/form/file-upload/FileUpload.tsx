@@ -1,5 +1,7 @@
 import React from "react";
 import Dropzone from "./Dropzone";
+import List from "./list/List";
+import Item from "./item/Item";
 
 interface FileUploadProps {
   children: React.ReactNode
@@ -7,6 +9,8 @@ interface FileUploadProps {
 
 interface FileUploadComponent extends React.ExoticComponent<FileUploadProps>{
   Dropzone: typeof Dropzone;
+  List: typeof List;
+  Item: typeof Item;
 }
 
 /**
@@ -21,5 +25,7 @@ interface FileUploadComponent extends React.ExoticComponent<FileUploadProps>{
 export const FileUpload = ((props: FileUploadProps) => props.children) as FileUploadComponent;
 
 FileUpload.Dropzone = Dropzone;
+FileUpload.List = List;
+FileUpload.Item = Item;
 
 export default FileUpload;
