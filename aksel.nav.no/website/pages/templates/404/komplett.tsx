@@ -16,7 +16,7 @@ const Example = () => {
   useDekorator();
 
   return (
-    <Page data-aksel-template="404-v1" footer={<Footer />}>
+    <Page data-aksel-template="404-v2" footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 16">
