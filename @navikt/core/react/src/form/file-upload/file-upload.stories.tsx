@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import React from "react";
 import { FileUpload } from "..";
 import { OnUploadProps } from "./Dropzone";
-import { FileItem } from "./item/Item";
+import { FileItem } from "./item/props";
 
 export default {
   title: "ds-react/FileUpload",

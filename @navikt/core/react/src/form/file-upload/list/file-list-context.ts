@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { FileItem } from "../item/Item";
+import { FileItem } from "../item/props";
 
 export type FileListContextProps = {
   locale: "nb" | "nn" | "en" | undefined;

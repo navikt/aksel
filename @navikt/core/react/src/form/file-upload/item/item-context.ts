@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { FileItem } from "./Item";
+import { FileItem } from "./props";
 
 export type ItemContextProps = {
   file: FileItem;

@@ -1,4 +1,4 @@
-import { FileItem } from "../Item";
+import { FileItem } from "../props";
 
 const MAX_MEGA_BYTES = 500;
 
@@ -17,7 +17,7 @@ export function formatFileSize(file: FileItem): string | null {
 
 function roundUpToFixed(value) {
   const decimalsToKeep = 2
-  var factor = Math.pow(10, decimalsToKeep);
-  var rounded = Math.ceil(value * factor) / factor;
+  const factor = Math.pow(10, decimalsToKeep);
+  const rounded = Math.ceil(value * factor) / factor;
   return rounded.toFixed(decimalsToKeep);
 }

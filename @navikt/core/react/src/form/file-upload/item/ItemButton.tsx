@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ItemContext } from "./item-context";
 import { Button } from "../../../button";
-import { ArrowsCirclepathIcon, TrashIcon, XMarkIcon } from "@navikt/aksel-icons";
+import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
 
 const ItemButton = () => {
   const context = useContext(ItemContext)

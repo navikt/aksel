@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { ErrorMessage } from "../../../typography";
-import { FileItem } from "../item/Item";
+import { FileItem } from "../item/props";
 import { FileListContext } from "./file-list-context";
 
 export interface FileListProps {
@@ -16,6 +16,7 @@ export interface FileListProps {
    * @default "nb" (norsk bokmål)
    */
   locale?: "nb" | "nn" | "en";
+  children: React.ReactNode;
 }
 
 export const FileList = forwardRef<HTMLDivElement, FileListProps>(

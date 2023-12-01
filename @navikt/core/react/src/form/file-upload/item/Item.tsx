@@ -6,21 +6,7 @@ import ItemIcon from "./ItemIcon";
 import { ItemContext } from "./item-context";
 import { formatFileSize } from "./utils/format-file-size";
 import { FileListContext } from "../list/file-list-context";
-
-interface FileWithoutInteraction {
-  name: string;
-  size?: number;
-}
-interface FileWithClick extends FileWithoutInteraction {
-  onClick: () => void
-}
-interface FileWithLink extends FileWithoutInteraction {
-  href: string;
-}
-
-type FileMetadata = FileWithLink | FileWithClick | FileWithoutInteraction
-
-export type FileItem = File | FileMetadata
+import { FileItem } from "./props";
 
 export interface FileProps {
   file: FileItem;

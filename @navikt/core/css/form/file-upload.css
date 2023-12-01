@@ -48,6 +48,7 @@
   width: 100%;
   box-sizing: border-box;
 }
+
 .navds-fileupload__content-zone-dragover {
   color: var(--ac-file-upload-dragover-text, var(--a-text-action));
   pointer-events: none;
