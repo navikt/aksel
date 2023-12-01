@@ -75,7 +75,6 @@
 
 .navds-fileupload__content--error:not(:hover):not(.navds-fileupload__content--dragover) .navds-fileupload__content-zone {
   border-color: var(--ac-file-upload-error-border, var(--a-surface-danger));
-  border-width: 2px;
 }
 
 .navds-fileupload__content:focus:not(.navds-fileupload__content--dragover) .navds-fileupload__content-zone-button,
