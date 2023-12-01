@@ -24,6 +24,7 @@ export const Combobox = forwardRef<
     label,
     clearButton = true,
     clearButtonLabel,
+    iconMap,
     toggleListButton = true,
     toggleListButtonLabel,
     inputClassName,
@@ -130,7 +131,7 @@ export const Combobox = forwardRef<
             )}
           </div>
         </div>
-        <FilteredOptions />
+        <FilteredOptions iconMap={iconMap} />
       </div>
       <div
         className="navds-form-field__error"

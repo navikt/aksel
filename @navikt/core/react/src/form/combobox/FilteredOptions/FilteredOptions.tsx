@@ -7,8 +7,9 @@ import { useInputContext } from "../Input/inputContext";
 import { Loader } from "../../../loader";
 import { BodyShort, Label } from "../../../typography";
 import filteredOptionsUtil from "./filtered-options-util";
+import { ComboboxProps } from "../types";
 
-const FilteredOptions = () => {
+const FilteredOptions = ({ iconMap }: Pick<ComboboxProps, "iconMap">) => {
   const {
     inputProps: { id },
     size,
@@ -127,6 +128,7 @@ const FilteredOptions = () => {
           role="option"
           aria-selected={selectedOptions.includes(option)}
         >
+          {iconMap?.[option]}
           <BodyShort size={size}>{option}</BodyShort>
           {selectedOptions.includes(option) && <CheckmarkIcon />}
         </li>

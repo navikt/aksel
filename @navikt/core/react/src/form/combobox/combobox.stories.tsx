@@ -553,3 +553,47 @@ export const TestHoverAndFocusSwitching: StoryObject = {
     );
   },
 };
+
+export const Landvelger = {
+  render: () => {
+    const countries = [
+      {
+        label: "Norge",
+        icon: (
+          <img
+            src="https://www.worldometers.info/img/flags/no-flag.gif"
+            alt=""
+          />
+        ),
+      },
+      {
+        label: "Sverige",
+        icon: (
+          <img
+            src="https://www.worldometers.info/img/flags/sw-flag.gif"
+            alt=""
+          />
+        ),
+      },
+      {
+        label: "Danmark",
+        icon: (
+          <img
+            src="https://www.worldometers.info/img/flags/da-flag.gif"
+            alt=""
+          />
+        ),
+      },
+    ];
+    return (
+      <UNSAFE_Combobox
+        options={countries.map((option) => option.label)}
+        label="Hva er dine favorittfrukter?"
+        iconMap={countries.reduce(
+          (acc, option) => ({ ...acc, [option.label]: option.icon }),
+          {}
+        )}
+      />
+    );
+  },
+};

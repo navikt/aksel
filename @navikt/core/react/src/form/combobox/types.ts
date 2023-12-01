@@ -38,6 +38,12 @@ export interface ComboboxProps
    */
   hideLabel?: boolean;
   /**
+   *  A map of icons to display for each option.
+   */
+  iconMap?: {
+    [label: string]: React.ReactNode;
+  };
+  /**
    * Custom class name for the input field.
    *
    * If used for styling, please consider using tokens instead.
