@@ -1,5 +1,5 @@
-import { BodyShort, Box, Heading, Link, List, Page } from "@navikt/ds-react";
 import { useEffect } from "react";
+import { BodyShort, Box, Heading, Link, List, Page } from "@navikt/ds-react";
 
 function Example() {
   useDekorator();

@@ -1,7 +1,7 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { DatePicker, useRangeDatepicker } from "@navikt/ds-react";
 import format from "date-fns/format";
 import nbLocale from "date-fns/locale/nb";
+import { DatePicker, useRangeDatepicker } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const { datepickerProps, toInputProps, fromInputProps, selectedRange } =

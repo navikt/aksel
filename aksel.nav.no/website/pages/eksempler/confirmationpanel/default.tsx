@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { ConfirmationPanel, Heading } from "@navikt/ds-react";
 import { useState } from "react";
+import { ConfirmationPanel, Heading } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [state, setState] = useState(false);

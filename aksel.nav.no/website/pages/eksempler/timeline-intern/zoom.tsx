@@ -1,4 +1,3 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import {
   HospitalIcon,
   ParasolBeachIcon,
@@ -8,6 +7,7 @@ import {
   VirusIcon,
 } from "@navikt/aksel-icons";
 import { Timeline, TimelinePeriodProps } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (

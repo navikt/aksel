@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Button, MonthPicker } from "@navikt/ds-react";
 import { useState } from "react";
+import { Button, MonthPicker } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [month, setMonth] = useState<Date>();
