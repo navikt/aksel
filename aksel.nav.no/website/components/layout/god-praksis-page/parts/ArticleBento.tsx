@@ -1,5 +1,5 @@
 import { ArrowRightIcon } from "@navikt/aksel-icons";
-import { Box, Button, HStack, Heading, VStack } from "@navikt/ds-react";
+import { Box, Button, HGrid, HStack, Heading } from "@navikt/ds-react";
 import { ArticleCard } from "./ArticleCard";
 
 function ArticleBento({ name }) {
@@ -27,7 +27,7 @@ function ArticleBento({ name }) {
           </Button>
         </HStack>
         <Box paddingBlock="5 0">
-          <HStack gap="6" wrap={false} className="aksel-bento">
+          <HGrid gap="6" columns="1fr 1fr 1fr" className="aksel-bento">
             <ArticleCard
               title="New things"
               main
@@ -45,10 +45,10 @@ function ArticleBento({ name }) {
                 are not effective against their shields. Well, keep up the
                 barrage.`}
             />
-            <VStack gap="6" wrap={false}>
-              <ArticleCard
-                title="New things"
-                content={`Return to the fleet. What is the point of all this? We can't blow
+
+            <ArticleCard
+              title="New things"
+              content={`Return to the fleet. What is the point of all this? We can't blow
                 up three tiny cruisers? They are faster and lighter, sir. They
                 can't lose us but they can keep at a range where, that our cannons
                 are not effective against their shields. Well, keep up the
@@ -61,10 +61,10 @@ function ArticleBento({ name }) {
                 can't lose us but they can keep at a range where, that our cannons
                 are not effective against their shields. Well, keep up the
                 barrage.`}
-              />
-              <ArticleCard
-                title="New things"
-                content={`Return to the fleet. What is the point of all this? We can't blow
+            />
+            <ArticleCard
+              title="New things"
+              content={`Return to the fleet. What is the point of all this? We can't blow
                 up three tiny cruisers? They are faster and lighter, sir. They
                 can't lose us but they can keep at a range where, that our cannons
                 are not effective against their shields. Well, keep up the
@@ -77,9 +77,8 @@ function ArticleBento({ name }) {
                 can't lose us but they can keep at a range where, that our cannons
                 are not effective against their shields. Well, keep up the
                 barrage.`}
-              />
-            </VStack>
-          </HStack>
+            />
+          </HGrid>
         </Box>
       </Box>
     </>

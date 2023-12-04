@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { BodyLong, Box, Heading } from "@navikt/ds-react";
 
 const trunc = (text, num_chars) => {
@@ -33,7 +34,7 @@ export const ArticleCard = ({
       <Box
         as="a"
         href="#"
-        className="gp-article-card"
+        className={clsx("gp-article-card", main && "gp-article-card-main")}
         paddingBlock="10"
         paddingInline="10"
         borderRadius="xlarge"

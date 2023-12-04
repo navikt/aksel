@@ -10,6 +10,10 @@ function ArticleGrid({ name }) {
           .aksel-bento {
               height: 350px;
           }
+          .gp-article-card-main {
+            grid-column: span 2;
+            grid-row: span 2;
+          }
           `}
       </style>
       <Box>
