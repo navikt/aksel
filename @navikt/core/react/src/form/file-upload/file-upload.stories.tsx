@@ -109,10 +109,10 @@ export const ListWithDownloading = {
           name: "withHref.docx",
           size: 2000000
         }}
+        href="https://www.nav.no"
       />
       <FileUpload.Item
         file={filePdf}
-        onClick={() => alert("hoi!")}
       />
     </FileUpload.List>
   ),

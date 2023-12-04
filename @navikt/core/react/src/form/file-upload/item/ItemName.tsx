@@ -23,13 +23,10 @@ const ItemName = () => {
 
   if (context.onClick) {
     return <Link
-      as="button"
-      type="button"
-      className="navds-fileitem__file-info-download-button"
-      onClick={() => {
-        if (context?.onClick) {
-          context.onClick(file)
-        }
+      href="#"
+      onClick={(event) => {
+        event.preventDefault();
+        context?.onClick?.(file);
       }}
     >
       {file.name}
