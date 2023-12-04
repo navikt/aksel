@@ -5,16 +5,24 @@ export function extractArgs(
   code: string,
   fileName: string,
   env?: "test"
-): ArgsT | null {
+): ArgsT {
   const args = code.match(/export const args = {([^}]+)}/)?.[1];
 
   if (!args) {
     env !== "test" &&
       console.warn(
-        `Missing args when parsing code for examples/template: ${fileName}`
+        `Missing args when parsing code for example/template: ${fileName}`
       );
-    return null;
+    return {};
   }
 
-  return JSON5.parse(`{${args}}`) ?? null;
+  const parsedArgs = JSON5.parse(`{${args}}`);
+
+  if (!parsedArgs) {
+    env !== "test" &&
+      console.warn(`Unable to parse args for example/template: ${fileName}`);
+    return {};
+  }
+
+  return parsedArgs;
 }

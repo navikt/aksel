@@ -1,5 +1,5 @@
-import { ComponentIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { ComponentIcon } from "@navikt/aksel-icons";
 
 export const KodeEksempler = defineType({
   title: "Komponent-eksempel",
@@ -20,6 +20,13 @@ export const KodeEksempler = defineType({
       name: "dir",
       type: "reference",
       to: [{ type: "kode_eksempler_fil" }],
+    }),
+    defineField({
+      title: "Kompakt visning",
+      description:
+        "Mindre padding i forhåndsvisningen, og koden er skjult som standard.",
+      name: "compact",
+      type: "boolean",
     }),
   ],
   preview: {
