@@ -5,13 +5,6 @@ import { ArticleCard } from "./ArticleCard";
 function ArticleBento({ name }) {
   return (
     <>
-      <style>
-        {`
-          .aksel-bento {
-              height: 350px;
-          }
-          `}
-      </style>
       <Box>
         <HStack justify="space-between">
           <Heading level="2" size="medium" className="text-aksel-heading">
