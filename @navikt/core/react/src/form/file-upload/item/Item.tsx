@@ -1,16 +1,14 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "clsx";
-import { ErrorMessage } from "../../../typography";
 import ItemButton from "./ItemButton";
 import ItemIcon from "./ItemIcon";
 import { ItemContext } from "./item-context";
-import { formatFileSize } from "./utils/format-file-size";
 import { FileListContext } from "../list/file-list-context";
 import { FileItem } from "./props";
 import ItemDescription from "./ItemDescription";
 import ItemName from "./ItemName";
 
-export interface FileProps {
+export interface BaseFileItemProps {
   file: FileItem;
   error?: string;
   isLoading?: boolean;
@@ -31,7 +29,17 @@ export interface FileProps {
   locale?: "nb" | "nn" | "en"
 }
 
-export const Item = forwardRef<HTMLLIElement, FileProps>(
+export interface FileItemWithHref extends BaseFileItemProps {
+  href: string;
+}
+
+export interface FileItemWithOnClick extends BaseFileItemProps {
+  onClick: (file: FileItem) => void;
+}
+
+export type FileItemProps = BaseFileItemProps | FileItemWithHref | FileItemWithOnClick
+
+export const Item = forwardRef<HTMLLIElement, FileItemProps>(
   (
     {
       file,
@@ -40,7 +48,9 @@ export const Item = forwardRef<HTMLLIElement, FileProps>(
       onRetry,
       error,
       className,
-      locale = "nb"
+      locale = "nb",
+      href,
+      onClick
     },
     ref
   ) => {
@@ -58,7 +68,9 @@ export const Item = forwardRef<HTMLLIElement, FileProps>(
         error,
         onDelete: onDelete || context.onDelete,
         onRetry: onRetry || context.onRetry,
-        locale: locale || context.locale
+        locale: locale || context.locale,
+        href,
+        onClick
       }}>
         <li
           className={cl("navds-fileitem", className, {

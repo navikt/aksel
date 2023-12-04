@@ -8,6 +8,8 @@ export type ItemContextProps = {
   onDelete: ((file: FileItem) => void) | undefined;
   isLoading: boolean | undefined;
   error: string | undefined;
+  href: string | undefined;
+  onClick: ((file: FileItem) => void) | undefined;
 };
 
 export const ItemContext = createContext<ItemContextProps | null>(null);

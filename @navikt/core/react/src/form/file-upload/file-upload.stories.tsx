@@ -92,27 +92,27 @@ export const ListWithDownloading = {
       <FileUpload.Item
         file={{
           name: "withOnClick.docx",
-          onClick: (file) => alert(`onClick ${file.name}`),
           size: 35700
         }}
+        onClick={(file) => alert(`onClick ${file.name}`)}
       />
       <FileUpload.Item
         file={{
           name: "withOnClickAndDelete.docx",
-          onClick: (file) => alert(`onClick ${file.name}`),
           size: 35700
         }}
+        onClick={(file) => alert(`onClick ${file.name}`)}
         onDelete={onDelete}
       />
       <FileUpload.Item
         file={{
           name: "withHref.docx",
-          href: "https://www.nav.no",
           size: 2000000
         }}
       />
       <FileUpload.Item
         file={filePdf}
+        onClick={() => alert("hoi!")}
       />
     </FileUpload.List>
   ),

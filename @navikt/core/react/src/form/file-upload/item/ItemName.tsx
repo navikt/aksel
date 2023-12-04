@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { ItemContext } from "./item-context";
-import { FileItem, FileWithClick, FileWithLink } from "./props";
 import { Link } from "../../../link";
 
 const ItemName = () => {
@@ -13,23 +12,23 @@ const ItemName = () => {
 
   const { file } = context
 
-  if (isFileWithLink(file)) {
+  if (context.href) {
     return <Link
-      href={file.href}
+      href={context.href}
       target="_blank"
     >
       {file.name}
     </Link>
   }
 
-  if (isFileWithClick(file)) {
+  if (context.onClick) {
     return <Link
       as="button"
       type="button"
       className="navds-fileitem__file-info-download-button"
       onClick={() => {
-        if (isFileWithClick(file)) {
-          file.onClick(file)
+        if (context?.onClick) {
+          context.onClick(file)
         }
       }}
     >
@@ -39,11 +38,5 @@ const ItemName = () => {
 
   return <span>{file.name}</span>
 }
-
-const isFileWithLink = (file: FileItem): file is FileWithLink =>
-  "href" in file
-
-const isFileWithClick = (file: FileItem): file is FileWithClick =>
-  "onClick" in file
 
 export default ItemName
