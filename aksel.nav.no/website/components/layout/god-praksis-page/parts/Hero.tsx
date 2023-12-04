@@ -10,8 +10,7 @@ function Hero() {
       paddingBlock="10 6"
       className="bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 relative overflow-clip pointer-events-none"
     >
-      <Cube />
-      <VStack gap="6" align="start">
+      <VStack gap="6" align="start" className="z-10 relative">
         <Heading
           size="xlarge"
           as="button"
@@ -26,6 +25,7 @@ function Hero() {
           hverandre her.
         </BodyLong>
       </VStack>
+      <Cube />
     </Box>
   );
 }
