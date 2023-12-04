@@ -83,6 +83,41 @@ export const List = {
   ),
 };
 
+export const ListWithDownloading = {
+  render: () => (
+    <FileUpload.List
+      label="Last opp filer"
+      error="hei jeg er en feil og jeg må rettes opp!"
+    >
+      <FileUpload.Item
+        file={{
+          name: "withOnClick.docx",
+          onClick: (file) => alert(`onClick ${file.name}`),
+          size: 35700
+        }}
+      />
+      <FileUpload.Item
+        file={{
+          name: "withOnClickAndDelete.docx",
+          onClick: (file) => alert(`onClick ${file.name}`),
+          size: 35700
+        }}
+        onDelete={onDelete}
+      />
+      <FileUpload.Item
+        file={{
+          name: "withHref.docx",
+          href: "https://www.nav.no",
+          size: 2000000
+        }}
+      />
+      <FileUpload.Item
+        file={filePdf}
+      />
+    </FileUpload.List>
+  ),
+};
+
 export const ListWithOverriding = {
   render: () => (
     <FileUpload.List

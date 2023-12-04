@@ -4,7 +4,7 @@ export interface FileWithoutInteraction {
   size?: number;
 }
 export interface FileWithClick extends FileWithoutInteraction {
-  onClick: () => void
+  onClick: (file: FileWithClick) => void
 }
 export interface FileWithLink extends FileWithoutInteraction {
   href: string;

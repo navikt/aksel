@@ -7,6 +7,8 @@ import { ItemContext } from "./item-context";
 import { formatFileSize } from "./utils/format-file-size";
 import { FileListContext } from "../list/file-list-context";
 import { FileItem } from "./props";
+import ItemDescription from "./ItemDescription";
+import ItemName from "./ItemName";
 
 export interface FileProps {
   file: FileItem;
@@ -66,8 +68,8 @@ export const Item = forwardRef<HTMLLIElement, FileProps>(
         >
           <ItemIcon />
           <div className="navds-fileitem__file-info">
-            <span>{file.name}</span>
-            <Description />
+            <ItemName />
+            <ItemDescription />
           </div>
           <div className="navds-fileitem__button">
             <ItemButton />
@@ -77,40 +79,5 @@ export const Item = forwardRef<HTMLLIElement, FileProps>(
     )
   }
 );
-
-const Description = () => {
-  const context = useContext(ItemContext)
-
-  if (context == null) {
-    console.error("<Description> has to be used within a <File>")
-    return null
-  }
-
-  const { isLoading, error, file, locale } = context
-
-  if (isLoading) {
-    switch(locale) {
-      case "nb":
-      case "nn":
-        return "Laster opp"
-      case "en":
-        return "Uploading"
-    }
-  }
-
-  if (error) {
-    return (
-      <div
-        className="navds-fileitem__error"
-        aria-relevant="additions removals"
-        aria-live="polite"
-      >
-        {!!error && <ErrorMessage>{error}</ErrorMessage>}
-      </div>
-    )
-  }
-
-  return <span>{formatFileSize(file)}</span>
-}
 
 export default Item;
