@@ -45,7 +45,7 @@ const CodeSnippet = ({ node: { code, title } }: CodeSnippetProps) => {
   return (
     <section
       aria-label="Kode"
-      className="aksel-codesnippet bg-surface-inverted relative mb-7 grid rounded-lg last:mb-0 animate-slideDown"
+      className="aksel-codesnippet bg-surface-inverted relative mb-7 grid rounded-lg last:mb-0"
     >
       <div className="text-text-on-inverted text-medium relative flex leading-6">
         <div className="mt-2 flex flex-none items-center border-b border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">
