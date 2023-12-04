@@ -1,4 +1,4 @@
-import { Box, Page } from "@navikt/ds-react";
+import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import ArticleList from "./parts/ArticleList";
@@ -16,9 +16,13 @@ function GodPraksisPage() {
       <Header variant="subtle" />
       <Box paddingBlock="10">
         <Page.Block width="xl" gutters>
-          <Hero />
-          <ChipNav />
-          <ArticleList />
+          <VStack gap="10">
+            <VStack gap="6">
+              <Hero />
+              <ChipNav />
+            </VStack>
+            <ArticleList />
+          </VStack>
         </Page.Block>
       </Box>
     </Page>

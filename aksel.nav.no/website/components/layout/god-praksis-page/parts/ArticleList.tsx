@@ -3,7 +3,7 @@ import { Box, Button, HStack, Heading } from "@navikt/ds-react";
 
 function ArticleList() {
   return (
-    <Box paddingBlock="10 0">
+    <Box>
       <HStack justify="space-between">
         <Heading level="2" size="medium" className="text-aksel-heading">
           Siste
