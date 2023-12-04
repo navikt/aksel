@@ -167,8 +167,8 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
               <UploadIcon fontSize="1.5rem" aria-hidden />
             </div>
             <div className="navds-fileupload__content-zone-text">
-              <BodyShort as="span">{getDragAndDropText(locale)}</BodyShort>
-              <BodyShort as="span">{getOrText(locale)}</BodyShort>
+              <BodyShort as="span" aria-hidden >{getDragAndDropText(locale)}</BodyShort>
+              <BodyShort as="span" aria-hidden >{getOrText(locale)}</BodyShort>
             </div>
             <Button
               className="navds-fileupload__content-zone-button"
