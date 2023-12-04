@@ -1,16 +1,16 @@
-import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
-import ErrorBoundary from "@/error-boundary";
-import { CodeExamplesT } from "@/types";
-import { capitalize } from "@/utils";
+import cl from "clsx";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import {
   ExternalLinkIcon,
   LaptopIcon,
   MobileSmallIcon,
 } from "@navikt/aksel-icons";
 import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
-import cl from "clsx";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
+import ErrorBoundary from "@/error-boundary";
+import { CodeExamplesT } from "@/types";
+import { capitalize } from "@/utils";
 import { CodeSandbox } from "./parts/CodeSandbox";
 import { Sandbox } from "./parts/Sandbox";
 

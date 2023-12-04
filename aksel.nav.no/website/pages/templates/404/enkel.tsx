@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   BodyShort,
   Box,
@@ -7,7 +8,6 @@ import {
   List,
   Page,
 } from "@navikt/ds-react";
-import { useEffect } from "react";
 
 const Example = () => {
   useDekorator();

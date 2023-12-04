@@ -7,12 +7,9 @@ import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
-import {
-  SANITY_API_VERSION,
-  SANITY_PROJECT_ID,
-  allArticleDocuments,
-} from "./config";
+import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
+import { godPraksisTaxonomy } from "./plugins/god-praksis-taxonomy";
 import { schema } from "./schema";
 import { InputWithCounter } from "./schema/custom-components";
 import { getTemplates } from "./util";
@@ -36,13 +33,24 @@ export const workspaceConfig = defineConfig([
     icon: TestFlaskIcon,
     auth: authStore("development"),
   },
+  {
+    ...defaultConfig(),
+    plugins: [...defaultConfig().plugins, godPraksisTaxonomy()],
+    schema: schema("staging"),
+    title: "God-praksis staging",
+    name: "gp-staging",
+    dataset: "production",
+    basePath: "/admin/gp-staging",
+    icon: TestFlaskIcon,
+    auth: authStore("production"),
+  },
 ]);
 
 function defaultConfig() {
   return {
     projectId: SANITY_PROJECT_ID,
     apiVersion: SANITY_API_VERSION,
-    schema,
+    schema: schema("production"),
     form: {
       components: {
         field: (props) => {
@@ -60,7 +68,12 @@ function defaultConfig() {
       },
     },
     document: {
-      newDocumentOptions: getTemplates,
+      newDocumentOptions: (prev, { creationContext }) => {
+        if (creationContext.type === "global") {
+          return getTemplates();
+        }
+        return prev;
+      },
       unstable_comments: {
         enabled: true,
       },
@@ -71,14 +84,7 @@ function defaultConfig() {
         structure,
         defaultDocumentNode,
       }),
-      publicationFlow({
-        hasQualityControl: [
-          "komponent_artikkel",
-          "ds_artikkel",
-          "aksel_artikkel",
-        ],
-        hasPublishedAt: [...allArticleDocuments],
-      }),
+      publicationFlow(),
 
       /* 3rd-party */
       table(),

@@ -1,12 +1,11 @@
+import { useState } from "react";
 import {
   ClockDashedIcon,
   InboxDownIcon,
   PaperplaneIcon,
 } from "@navikt/aksel-icons";
-
-import { withDsExample } from "@/web/examples/withDsExample";
 import { Tabs } from "@navikt/ds-react";
-import { useState } from "react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [state, setState] = useState("logg");

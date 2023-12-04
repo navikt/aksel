@@ -1,6 +1,4 @@
-import Footer from "@/layout/footer/Footer";
-import Header from "@/layout/header/Header";
-import { AmplitudeEvents, amplitude } from "@/logging";
+import { useEffect } from "react";
 import {
   BodyShort,
   Box,
@@ -10,7 +8,9 @@ import {
   Page,
   VStack,
 } from "@navikt/ds-react";
-import { useEffect } from "react";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { AmplitudeEvents, amplitude } from "@/logging";
 
 function ErrorPage({ statusCode }) {
   useEffect(() => {
