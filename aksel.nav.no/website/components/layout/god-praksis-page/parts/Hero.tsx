@@ -1,7 +1,11 @@
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong, Box, Heading, VStack } from "@navikt/ds-react";
 
-function Hero() {
+type HeroProps = {
+  children?: string;
+};
+
+function Hero({ children }: HeroProps) {
   return (
     <Box
       background="surface-alt-3-subtle"
@@ -19,17 +23,16 @@ function Hero() {
           Alle tema{" "}
           <ChevronDownIcon aria-hidden className="shrink-0 w-12 h-12" />
         </Heading>
-        <BodyLong>
-          Alle som jobber med produktutvikling i NAV sitter på kunnskap og
-          erfaring som er nyttig for andre. Derfor deler vi god praksis med
-          hverandre her.
-        </BodyLong>
+        {children && <BodyLong>{children}</BodyLong>}
       </VStack>
       <Cube />
     </Box>
   );
 }
 
+/**
+ * TODO: Svg fungerer ikke ved bruk av lengre tekster
+ */
 function Cube() {
   return (
     <svg

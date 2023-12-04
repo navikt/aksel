@@ -18,7 +18,11 @@ function GodPraksisPage() {
         <Page.Block width="xl" gutters>
           <VStack gap="10">
             <VStack gap="6">
-              <Hero />
+              <Hero>
+                Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+                erfaring som er nyttig for andre. Derfor deler vi god praksis
+                med hverandre her.
+              </Hero>
               <ChipNav />
             </VStack>
             <ArticleList />
