@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { InternalHeader, Search, Spacer } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -30,4 +30,5 @@ export default withDsExample(Example, { variant: "full" });
 
 export const args = {
   index: 5,
+  title: "Søk",
 };
