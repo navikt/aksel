@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { Box, Page } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -26,6 +26,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "full",
@@ -39,5 +40,5 @@ export const Demo = {
 export const args = {
   index: 3,
   title: "Content Padding",
-  desc: "contentBlockPadding på Page sikrer at det alltid vil være minimumspadding mellom innhold og footer. Dette vil være en god fallback, men basert på layout vil du selv måtte legge på egen padding top/bottom",
+  desc: "contentBlockPadding på Page sikrer at det alltid vil være minimumspadding mellom innhold og footer. Dette vil være en god fallback, men layouts vil ofte trenge ekstra padding top/bottom",
 };

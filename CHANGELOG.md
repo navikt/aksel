@@ -4,17 +4,13 @@
 
 ### @navikt/ds-react
 
-- ⬆️ upgrade date-fns version & make it minor-version agnostic ([#2514](https://github.com/navikt/aksel/pull/2514))
+- :bug: Textarea: Skru av autosize ved manuell resize ([#2518](https://github.com/navikt/aksel/pull/2518))
 
-* Switch: Byttet success-farger med action npr checked ([#2511](https://github.com/navikt/aksel/pull/2511))
+- :bug: Popover: Ikke lukk ved klikk inni når parent er fokuserbar ([#2521](https://github.com/navikt/aksel/pull/2521))
 
-- :sparkles: Textarea: Mulighet for å sette resize-retning ([#2494](https://github.com/navikt/aksel/pull/2494))
+- Page: La til `md`-bredde (768px) ([#2510](https://github.com/navikt/aksel/pull/2510))
 
-- :sparkles: Textarea: Eksperimentell støtte for automatisk scrollbar ([#2457](https://github.com/navikt/aksel/pull/2457))
-
-* :wheelchair: Textarea: Forsinkelse ved live-opplesning av gjenstående tegn ([#2502](https://github.com/navikt/aksel/pull/2502))
-
-### @navikt/ds-css
+* ⬆️ upgrade date-fns version & make it minor-version agnostic ([#2514](https://github.com/navikt/aksel/pull/2514))
 
 - Switch: Byttet success-farger med action npr checked ([#2511](https://github.com/navikt/aksel/pull/2511))
 
@@ -23,6 +19,20 @@
 * :sparkles: Textarea: Eksperimentell støtte for automatisk scrollbar ([#2457](https://github.com/navikt/aksel/pull/2457))
 
 - :wheelchair: Textarea: Forsinkelse ved live-opplesning av gjenstående tegn ([#2502](https://github.com/navikt/aksel/pull/2502))
+
+### @navikt/ds-css
+
+- :bug: Textarea: Skru av autosize ved manuell resize ([#2518](https://github.com/navikt/aksel/pull/2518))
+
+- Page: La til `md`-bredde (768px) ([#2510](https://github.com/navikt/aksel/pull/2510))
+
+* Switch: Byttet success-farger med action npr checked ([#2511](https://github.com/navikt/aksel/pull/2511))
+
+- :sparkles: Textarea: Mulighet for å sette resize-retning ([#2494](https://github.com/navikt/aksel/pull/2494))
+
+- :sparkles: Textarea: Eksperimentell støtte for automatisk scrollbar ([#2457](https://github.com/navikt/aksel/pull/2457))
+
+* :wheelchair: Textarea: Forsinkelse ved live-opplesning av gjenstående tegn ([#2502](https://github.com/navikt/aksel/pull/2502))
 
 ### @navikt/aksel-icons
 

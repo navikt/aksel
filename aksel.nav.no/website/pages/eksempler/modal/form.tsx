@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Button, Modal, TextField } from "@navikt/ds-react";
 import { useRef } from "react";
+import { Button, Modal, TextField } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const ref = useRef<HTMLDialogElement>(null);
@@ -30,6 +30,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

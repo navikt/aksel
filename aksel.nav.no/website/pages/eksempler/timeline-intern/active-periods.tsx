@@ -1,4 +1,4 @@
-import { withDsExample } from "@/web/examples/withDsExample";
+import { useState } from "react";
 import {
   HospitalIcon,
   ParasolBeachIcon,
@@ -8,7 +8,7 @@ import {
   VirusIcon,
 } from "@navikt/aksel-icons";
 import { Timeline, TimelinePeriodProps } from "@navikt/ds-react";
-import { useState } from "react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [activePeriod, setActivePeriod] = useState("");
@@ -132,6 +132,7 @@ const jobb: TimelinePeriodProps[] = [
   },
 ];
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

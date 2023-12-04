@@ -179,6 +179,15 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
 
       const handleResize = () => {
         renders.current = 0;
+
+        if (inputRef.current?.style.height || inputRef.current?.style.width) {
+          // User has resized manually
+          if (inputRef.current?.style.overflow === "hidden") {
+            setState((oldState) => ({ ...oldState, overflow: false })); // The state update isn't important, we just need to trigger a rerender
+          }
+          return;
+        }
+
         syncHeightWithFlushSync();
       };
 
@@ -223,6 +232,20 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
       }
     };
 
+    const mainStyle: React.CSSProperties = {
+      ["--__ac-textarea-height"]: state.outerHeightStyle + "px",
+      // Need a large enough difference to allow scrolling.
+      // This prevents infinite rendering loop.
+      overflow:
+        state.overflow &&
+        !autoScrollbar &&
+        !inputRef.current?.style.height &&
+        !inputRef.current?.style.width
+          ? "hidden"
+          : undefined,
+      ...style,
+    };
+
     return (
       <>
         <textarea
@@ -231,13 +254,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
           ref={handleRef}
           // Apply the rows prop to get a "correct" first SSR paint
           rows={minRows}
-          style={{
-            height: state.outerHeightStyle,
-            // Need a large enough difference to allow scrolling.
-            // This prevents infinite rendering loop.
-            overflow: state.overflow && !autoScrollbar ? "hidden" : undefined,
-            ...style,
-          }}
+          style={mainStyle}
           {...other}
           className={className}
         />

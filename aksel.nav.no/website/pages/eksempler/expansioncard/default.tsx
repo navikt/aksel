@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, ExpansionCard, Label, Link } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -69,6 +69,7 @@ const Innhold = () => (
   </>
 );
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "static" });
 
 /* Storybook story */

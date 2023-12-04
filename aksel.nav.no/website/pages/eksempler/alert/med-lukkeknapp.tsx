@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Alert, AlertProps } from "@navikt/ds-react";
 import React from "react";
+import { Alert, AlertProps } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -41,6 +41,7 @@ const AlertWithCloseButton = ({
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

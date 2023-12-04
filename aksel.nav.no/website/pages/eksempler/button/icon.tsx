@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -14,6 +14,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

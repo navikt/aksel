@@ -1,7 +1,7 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { DatePicker, useDatepicker } from "@navikt/ds-react";
 import format from "date-fns/format";
 import nbLocale from "date-fns/locale/nb";
+import { DatePicker, useDatepicker } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const { datepickerProps, inputProps, selectedDay } = useDatepicker({
@@ -22,6 +22,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Button, MonthPicker } from "@navikt/ds-react";
 import { useState } from "react";
+import { Button, MonthPicker } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [month, setMonth] = useState<Date>();
@@ -13,13 +13,14 @@ const Example = () => {
         onClose={() => setOpen(false)}
         open={open}
       >
-        <Button onClick={() => setOpen((x) => !x)}>Velg månede</Button>
+        <Button onClick={() => setOpen((x) => !x)}>Velg måned</Button>
       </MonthPicker>
       {month && <div className="pt-4">{month.getMonth()}</div>}
     </div>
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

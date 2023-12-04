@@ -1,18 +1,18 @@
-import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
-import ErrorBoundary from "@/error-boundary";
-import { CodeExamplesT } from "@/types";
-import { capitalize } from "@/utils";
+import cl from "clsx";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import {
   ExternalLinkIcon,
   LaptopIcon,
   MobileSmallIcon,
 } from "@navikt/aksel-icons";
 import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
-import cl from "clsx";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-import { Sandbox } from "./parts/Sandbox";
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
+import ErrorBoundary from "@/error-boundary";
+import { CodeExamplesT } from "@/types";
+import { capitalize } from "@/utils";
 import { CodeSandbox } from "./parts/CodeSandbox";
+import { Sandbox } from "./parts/Sandbox";
 
 const iframePadding = 192;
 const iframeId = "example-iframe";
@@ -98,10 +98,10 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
 
   return (
     <div>
-      <div className="mb-5 max-w-xl">
-        <Chips>
-          {node.dir.filer.map((fil) => {
-            return (
+      {node.dir.filer.length > 1 && (
+        <div className="mb-5 max-w-xl">
+          <Chips>
+            {node.dir.filer.map((fil) => (
               <Chips.Toggle
                 checkmark={false}
                 key={fil._key}
@@ -119,119 +119,117 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
               >
                 {fixName(fil.title)}
               </Chips.Toggle>
-            );
+            ))}
+          </Chips>
+        </div>
+      )}
+      {node.dir.filer.map((fil) => (
+        <div
+          key={fil._key}
+          className={cl({
+            visible: active === fil.navn,
+            hidden: active !== fil.navn,
           })}
-        </Chips>
-      </div>
-      {node.dir.filer.map((fil) => {
-        return (
-          <div
-            key={fil._key}
-            className={cl({
-              visible: active === fil.navn,
-              hidden: active !== fil.navn,
-            })}
-          >
-            {fil?.description && (
-              <BodyLong className="mb-2">{fil.description}</BodyLong>
-            )}
+        >
+          {fil?.description && (
+            <BodyLong className="mb-2">{fil.description}</BodyLong>
+          )}
 
-            {active === fil.navn && (
-              <>
-                <div
+          {active === fil.navn && (
+            <>
+              <div
+                className={cl(
+                  "overflow-hidden rounded-t-lg border border-b-0 border-gray-300 ",
+                  {
+                    "relative animate-pulse": unloaded,
+                    "bg-gray-50": !unloaded,
+                  }
+                )}
+              >
+                <iframe
+                  src={`/${demoVariant}/${node.dir.title}/${fil.navn.replace(
+                    ".tsx",
+                    ""
+                  )}`}
+                  height={frameState}
+                  onLoad={() => handleExampleLoad()}
+                  id={iframeId}
+                  aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
                   className={cl(
-                    "overflow-hidden rounded-t-lg border border-b-0 border-gray-300 ",
+                    "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                     {
-                      "relative animate-pulse": unloaded,
-                      "bg-gray-50": !unloaded,
+                      invisible: unloaded,
                     }
                   )}
-                >
-                  <iframe
-                    src={`/${demoVariant}/${node.dir.title}/${fil.navn.replace(
-                      ".tsx",
-                      ""
-                    )}`}
-                    height={frameState}
-                    onLoad={() => handleExampleLoad()}
-                    id={iframeId}
-                    aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
-                    className={cl(
-                      "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
-                      {
-                        invisible: unloaded,
-                      }
-                    )}
-                    title="Kode-eksempler"
-                    ref={iframeRef}
-                  />
-                  {unloaded && (
-                    <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
-                      <div className="grid w-3/5 gap-2">
-                        <div className="bg-surface-neutral-subtle h-6 w-2/3 rounded-xl" />
-                        <div className="bg-surface-neutral-subtle h-16 w-full rounded-xl" />
-                      </div>
+                  title="Kode-eksempler"
+                  ref={iframeRef}
+                />
+                {unloaded && (
+                  <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
+                    <div className="grid w-3/5 gap-2">
+                      <div className="bg-surface-neutral-subtle h-6 w-2/3 rounded-xl" />
+                      <div className="bg-surface-neutral-subtle h-16 w-full rounded-xl" />
                     </div>
-                  )}
-                </div>
-                <div className="mb-2 rounded-b-lg border border-gray-300 p-1">
-                  <HStack gap="4" justify="space-between">
-                    <div className="hidden sm:block">
-                      <HStack gap="2">
-                        <Button
-                          variant="tertiary-neutral"
-                          size="small"
-                          icon={
-                            <MobileSmallIcon title="Sett eksempel til mobilbredde" />
-                          }
-                          onClick={() =>
-                            (iframeRef.current.style.width = "360px")
-                          }
-                        />
-
-                        <Button
-                          variant="tertiary-neutral"
-                          size="small"
-                          icon={
-                            <LaptopIcon title="Sett eksempel til desktopbredde" />
-                          }
-                          onClick={() => (iframeRef.current.style.width = "")}
-                        />
-                      </HStack>
-                    </div>
-
+                  </div>
+                )}
+              </div>
+              <div className="mb-2 rounded-b-lg border border-gray-300 p-1">
+                <HStack gap="4" justify="space-between">
+                  <div className="hidden sm:block">
                     <HStack gap="2">
-                      {fil?.sandboxEnabled && (
-                        <Sandbox code={fil?.sandboxBase64} />
-                      )}
-                      <CodeSandbox code={fil.innhold.trim()} />
                       <Button
                         variant="tertiary-neutral"
                         size="small"
                         icon={
-                          <ExternalLinkIcon title="Åpne eksempel i nytt vindu" />
+                          <MobileSmallIcon title="Sett eksempel til mobilbredde" />
                         }
-                        target="_blank"
-                        className="si-ignore"
-                        as="a"
-                        href={`/${demoVariant}/${
-                          node.dir.title
-                        }/${fil.navn.replace(".tsx", "")}`}
+                        onClick={() =>
+                          (iframeRef.current.style.width = "360px")
+                        }
+                      />
+
+                      <Button
+                        variant="tertiary-neutral"
+                        size="small"
+                        icon={
+                          <LaptopIcon title="Sett eksempel til desktopbredde" />
+                        }
+                        onClick={() => (iframeRef.current.style.width = "")}
                       />
                     </HStack>
-                  </HStack>
-                </div>
+                  </div>
 
-                <SnippetLazy
-                  node={{
-                    code: { code: fil.innhold.trim(), language: "tsx" },
-                  }}
-                />
-              </>
-            )}
-          </div>
-        );
-      })}
+                  <HStack gap="2">
+                    {fil?.sandboxEnabled && (
+                      <Sandbox code={fil?.sandboxBase64} />
+                    )}
+                    <CodeSandbox code={fil.innhold.trim()} />
+                    <Button
+                      variant="tertiary-neutral"
+                      size="small"
+                      icon={
+                        <ExternalLinkIcon title="Åpne eksempel i nytt vindu" />
+                      }
+                      target="_blank"
+                      className="si-ignore"
+                      as="a"
+                      href={`/${demoVariant}/${
+                        node.dir.title
+                      }/${fil.navn.replace(".tsx", "")}`}
+                    />
+                  </HStack>
+                </HStack>
+              </div>
+
+              <SnippetLazy
+                node={{
+                  code: { code: fil.innhold.trim(), language: "tsx" },
+                }}
+              />
+            </>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

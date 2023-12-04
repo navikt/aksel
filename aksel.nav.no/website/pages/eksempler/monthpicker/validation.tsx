@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { MonthPicker, useMonthpicker } from "@navikt/ds-react";
 import { useState } from "react";
+import { MonthPicker, useMonthpicker } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [hasError, setHasError] = useState(false);
@@ -18,14 +18,15 @@ const Example = () => {
       <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input
           {...inputProps}
-          label="Velg månede"
-          error={hasError && "Du må velge månede"}
+          label="Velg måned"
+          error={hasError && "Du må velge måned"}
         />
       </MonthPicker>
     </div>
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BugIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
@@ -7,12 +8,11 @@ import {
   Heading,
   Link,
   List,
-  VStack,
   Page,
+  VStack,
 } from "@navikt/ds-react";
-import { useEffect } from "react";
 
-export default function Example() {
+const Example = () => {
   useDekorator();
 
   return (
@@ -67,7 +67,7 @@ export default function Example() {
       <Env />
     </Page>
   );
-}
+};
 
 function Header() {
   return <div id="decorator-header" />;
@@ -151,9 +151,11 @@ function StatusSvg() {
   );
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default Example;
+
 export const args = {
   index: 0,
   title: "Komplett",
   desc: "I sin fullstendige form kan en 404-side inneholde tittel, feilmelding, løsningsforslag, CTA, tilbakemeldingsfunksjon, flere språk og illustrasjon.",
-  sandbox: false,
 };

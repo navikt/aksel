@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 5.11.3
+
+### Patch Changes
+
+- :bug: Textarea: Skru av autosize ved manuell resize ([#2518](https://github.com/navikt/aksel/pull/2518))
+
+- Page: La til `md`-bredde (768px) ([#2510](https://github.com/navikt/aksel/pull/2510))
+
 ## 5.11.2
 
 ## 5.11.1
