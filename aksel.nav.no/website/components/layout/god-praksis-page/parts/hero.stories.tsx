@@ -34,6 +34,16 @@ export const LongDescription: Story = {
     hverandre her.
     Alle som jobber med produktutvikling i NAV sitter på kunnskap og
     erfaring som er nyttig for andre. Derfor deler vi god praksis med
+    hverandre her.
+
+    Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+    erfaring som er nyttig for andre. Derfor deler vi god praksis med
+    hverandre her.
+    Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+    erfaring som er nyttig for andre. Derfor deler vi god praksis med
+    hverandre her.
+    Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+    erfaring som er nyttig for andre. Derfor deler vi god praksis med
     hverandre her.`,
   },
 };

@@ -37,8 +37,8 @@ function Cube() {
   return (
     <svg
       width="720"
-      height="240"
-      viewBox="0 0 720 240"
+      height="409"
+      viewBox="0 0 720 409"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="absolute right-0 top-0"
