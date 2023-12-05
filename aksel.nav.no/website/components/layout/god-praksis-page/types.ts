@@ -14,3 +14,11 @@ export type GpArticleListT = {
     slug: { current: string };
   }[];
 };
+
+export type GpTemaT = {
+  tema: {
+    title: string;
+    slug: string;
+    description?: string;
+  };
+};

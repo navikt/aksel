@@ -1,14 +1,17 @@
 import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong, Box, Heading, Select, VStack } from "@navikt/ds-react";
-import { HeroNavT } from "../types";
+import { GpTemaT, HeroNavT } from "../types";
 
 type HeroProps = {
   children?: string;
+  /* TODO: Fikser tema-type */
+  tema?: GpTemaT["tema"];
 } & HeroNavT;
 
-function Hero({ children, heroNav }: HeroProps) {
+function Hero({ children, heroNav, tema }: HeroProps) {
   const router = useRouter();
+  console.log(tema);
 
   return (
     <Box
@@ -24,14 +27,14 @@ function Hero({ children, heroNav }: HeroProps) {
           as="button"
           className="py-2 pl-6 pr-4 text-aksel-heading bg-surface-subtle flex gap-2 items-center rounded-full shadow-xsmall"
         >
-          Alle tema{" "}
+          {tema?.title ?? "Alle tema"}
           <ChevronDownIcon aria-hidden className="shrink-0 w-12 h-12" />
         </Heading>
         <Select
           label="Tema"
           hideLabel
           onChange={(e) => router.push(`/gp/${e.target.value}`)}
-          defaultValue={router.query.slug ?? ""}
+          defaultValue={tema?.slug ?? ""}
         >
           <option value="">Alle sider</option>
           {heroNav.map((x) => (
