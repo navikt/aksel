@@ -8602,7 +8602,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^6.7.3
     "@typescript-eslint/parser": ^6.7.3
     "@whitespace/storybook-addon-html": ^5.1.6
-    chromatic: 6.22.0
+    chromatic: 9.1.0
     concurrently: 7.2.1
     cross-env: ^7.0.0
     eslint: ^8.50.0
@@ -8633,6 +8633,7 @@ __metadata:
     stylelint-value-no-unknown-custom-properties: ^4.0.0
     typescript: ^5.1.6
     vite: ^4.2.0
+    vite-plugin-turbosnap: ^1.0.3
     yarn: ^1.22.10
   languageName: unknown
   linkType: soft
@@ -10224,14 +10225,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:6.22.0":
-  version: 6.22.0
-  resolution: "chromatic@npm:6.22.0"
+"chromatic@npm:9.1.0":
+  version: 9.1.0
+  resolution: "chromatic@npm:9.1.0"
   bin:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 8d28d0e4c8a0093bd3a77545257fb99868763d4abb70e895b66ff0811840c97512926ae3def3e5c5317c9e91b84d14d4b84f6ac7dc1fd88304143834158bca85
+  checksum: 4fe6dc7e7011edc655e9a21f496f91679710e37466ffdd3d10debbe87c35af54ccff4eeff1be3bf21a0c03b9871d17b6853083276bd1e71b44b5ec85f22a3bcc
   languageName: node
   linkType: hard
 
@@ -26640,6 +26641,13 @@ __metadata:
   peerDependencies:
     vite: ^2.6.0 || 3 || 4
   checksum: 16b333a728ca9ca1904cad4dd288e1bc5ae50f4def578b94187c70c31eda596fb5bb2bd4c78b2f5bf22b61f9b1f1bbac1f8c464a80d2b887a138dbc187264ad9
+  languageName: node
+  linkType: hard
+
+"vite-plugin-turbosnap@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "vite-plugin-turbosnap@npm:1.0.3"
+  checksum: a66d09ecafef293e78a2bfceed133c3436556f8407c55be2796b5ed6ff6f80a85e1961e67382aa4e3a971f03fa33d7ee318706acc5a6c289bb7ce6a1a49293bc
   languageName: node
   linkType: hard
 
