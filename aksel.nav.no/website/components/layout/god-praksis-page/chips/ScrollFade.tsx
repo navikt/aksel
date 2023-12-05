@@ -34,7 +34,7 @@ function ScrollFade({ wrapperId }: ScrollFadeProps) {
       <Button
         variant="tertiary-neutral"
         size="small"
-        className={cl("absolute right-0 z-20 justify-end", {
+        className={cl("absolute right-0 z-20 w-12 justify-end", {
           hidden: !scrollBlock.end,
         })}
         icon={<ChevronRightIcon fontSize="1.5rem" />}
