@@ -4,11 +4,8 @@ import Header from "@/layout/header/Header";
 import ArticleList from "./articles/ArticleList";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
-import { GpArticleListT } from "./types";
 
-type GodPraksisPageProps = GpArticleListT;
-
-function GodPraksisPage({ articles }: GodPraksisPageProps) {
+function GodPraksisPage() {
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -27,7 +24,7 @@ function GodPraksisPage({ articles }: GodPraksisPageProps) {
                 <ChipNav type="innholdstype" />
               </VStack>
             </VStack>
-            <ArticleList articles={articles} />
+            <ArticleList />
           </VStack>
         </Page.Block>
       </Box>

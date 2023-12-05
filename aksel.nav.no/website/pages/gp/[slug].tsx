@@ -8,6 +8,7 @@ import {
   innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
+  GpArticleListT,
   GpInnholdstypeT,
   GpTemaPageProps,
   GpTemaT,
@@ -30,6 +31,13 @@ const query = groq`
       title,
       description
     }
+  },
+  "articles": *[_type == "aksel_artikkel" && $slug in undertema[]->tema->slug.current] | order(publishedAt desc) {
+    heading,
+    ingress ,
+    "undertema": undertema[]->title,
+    "innholdstype": innholdstype->title,
+    "slug": slug.current
   }
 }
 `;
@@ -37,13 +45,24 @@ const query = groq`
 export const getServerSideProps: GetServerSideProps = async (
   ctx
 ): Promise<PageProps> => {
-  const { heroNav, tema, innholdstype }: HeroNavT & GpTemaT & GpInnholdstypeT =
+  const {
+    heroNav,
+    tema,
+    innholdstype,
+    articles,
+  }: HeroNavT & GpTemaT & GpInnholdstypeT & GpArticleListT =
     await getClient().fetch(query, {
       slug: ctx.params.slug,
     });
 
   return {
     props: {
+      views: [
+        {
+          title: "Siste",
+          articles,
+        },
+      ],
       tema,
       heroNav,
       innholdstype,
@@ -64,7 +83,7 @@ const GpPage = (props: PageProps["props"]) => {
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />
-      <GodPraksisPage articles={[]} />
+      <GodPraksisPage />
     </GpPageContext.Provider>
   );
 };

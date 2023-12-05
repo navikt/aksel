@@ -23,7 +23,7 @@ const query = groq`
 {
   ${heroNavQuery},
   ${innholdstypeQuery},
-  "articles": *[_type == "aksel_artikkel" && defined(undertema)] {
+  "articles": *[_type == "aksel_artikkel" && defined(undertema)] | order(publishedAt desc){
     heading,
     ingress ,
     "undertema": undertema[]->title,
@@ -46,7 +46,12 @@ export const getServerSideProps: GetServerSideProps = async (
 
   return {
     props: {
-      articles,
+      views: [
+        {
+          title: "Siste",
+          articles,
+        },
+      ],
       heroNav,
       innholdstype,
       preview: ctx.preview ?? false,
@@ -65,7 +70,7 @@ const GpPage = (props: PageProps["props"]) => {
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />
-      <GodPraksisPage articles={props.articles} />
+      <GodPraksisPage />
     </GpPageContext.Provider>
   );
 };

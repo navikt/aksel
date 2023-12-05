@@ -31,6 +31,15 @@ export type GpInnholdstypeT = {
   }[];
 };
 
-export type GpFrontPageProps = GpArticleListT & HeroNavT & GpInnholdstypeT;
+export type GpArticleViews = {
+  views: ({
+    title: string;
+  } & GpArticleListT)[];
+};
 
-export type GpTemaPageProps = HeroNavT & GpTemaT & GpInnholdstypeT;
+export type GpFrontPageProps = HeroNavT & GpInnholdstypeT & GpArticleViews;
+
+export type GpTemaPageProps = HeroNavT &
+  GpTemaT &
+  GpInnholdstypeT &
+  GpArticleViews;
