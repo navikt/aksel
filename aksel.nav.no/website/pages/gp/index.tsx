@@ -1,4 +1,3 @@
-import omit from "lodash/omit";
 import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -9,12 +8,9 @@ import { getClient } from "@/sanity/client.server";
 
 const query = groq`
 {
-  "tema": *[_type == "gp.tema" && count(*[references(^._id)]) > 0]{
-    "undertemaValidation": *[references(^._id) && _type == "gp.tema.undertema"]{
-      "nArticles": count(*[references(^._id)])
-    },
+  "tema": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]) > 0]{
     title,
-    description,
+    slug,
   },
   "articles": *[_type == "aksel_artikkel" && defined(undertema)] {
     heading,
@@ -29,16 +25,12 @@ const query = groq`
 export const getServerSideProps: GetServerSideProps = async (
   ctx
 ): Promise<any> => {
-  const results = await getClient().fetch(query);
-
-  const temaList = results.tema.filter((_tema) =>
-    _tema.undertemaValidation.some((underTema) => underTema.nArticles > 0)
-  );
+  const { tema, articles } = await getClient().fetch(query);
 
   return {
     props: {
-      results: results.articles,
-      tema: temaList.map((tema) => omit(tema, ["undertemaValidation"])),
+      results: articles,
+      tema,
       preview: ctx.preview ?? false,
       id: "",
       title: "",
@@ -47,8 +39,8 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-const GPPage = ({ results }) => {
-  return <GodPraksisPage results={results} />;
+const GPPage = ({ results, tema }) => {
+  return <GodPraksisPage results={results} tema={tema} />;
 
   return (
     <>

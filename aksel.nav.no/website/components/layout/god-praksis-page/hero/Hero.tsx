@@ -1,18 +1,22 @@
+import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { BodyLong, Box, Heading, VStack } from "@navikt/ds-react";
+import { BodyLong, Box, Heading, Select, VStack } from "@navikt/ds-react";
 
 type HeroProps = {
   children?: string;
+  tema: { title: string; slug: { current: string } }[];
 };
 
-function Hero({ children }: HeroProps) {
+function Hero({ children, tema }: HeroProps) {
+  const router = useRouter();
+
   return (
     <Box
       background="surface-alt-3-subtle"
       borderRadius="large"
       paddingInline="10"
       paddingBlock="10 6"
-      className="bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 relative overflow-clip pointer-events-none"
+      className="bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 relative overflow-clip"
     >
       <VStack gap="6" align="start" className="z-10 relative">
         <Heading
@@ -23,6 +27,19 @@ function Hero({ children }: HeroProps) {
           Alle tema{" "}
           <ChevronDownIcon aria-hidden className="shrink-0 w-12 h-12" />
         </Heading>
+        <Select
+          label="Tema"
+          hideLabel
+          onChange={(e) => router.push(`/gp/${e.target.value}`)}
+          defaultValue={router.query.slug ?? ""}
+        >
+          <option value="">Alle sider</option>
+          {tema.map((x) => (
+            <option value={x.slug.current} key={x.slug.current}>
+              {x.title}
+            </option>
+          ))}
+        </Select>
         {children && <BodyLong>{children}</BodyLong>}
       </VStack>
       <Cube />
@@ -41,7 +58,7 @@ function Cube() {
       viewBox="0 0 720 409"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-0 top-0"
+      className="absolute right-0 top-0 pointer-events-none"
     >
       <path
         fillRule="evenodd"

@@ -5,7 +5,7 @@ import ArticleList from "./articles/ArticleList";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
 
-function GodPraksisPage({ results }) {
+function GodPraksisPage({ results, tema }) {
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -18,7 +18,7 @@ function GodPraksisPage({ results }) {
         <Page.Block width="xl" gutters>
           <VStack gap="10">
             <VStack gap="6">
-              <Hero>
+              <Hero tema={tema}>
                 Alle som jobber med produktutvikling i NAV sitter på kunnskap og
                 erfaring som er nyttig for andre. Derfor deler vi god praksis
                 med hverandre her.

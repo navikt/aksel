@@ -2,23 +2,26 @@ import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
+import { getClient } from "@/sanity/client.server";
 
 const query = groq`
-*[_type == "gp.tema" && count(*[references(^._id)]) > 0 && count(*[references(^._id) && _type == "gp.tema.undertema"])] {
-  heading,
+{
+  "tema": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]) > 0]{
+    title,
+    description,
+    slug
+  },
 }
 `;
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx
 ): Promise<any> => {
-  console.log(ctx.query);
-  /* const { blogg, morePosts } = await getClient().fetch(query, {
-    slug: `produktbloggen/${ctx.params.slug}`,
-  }); */
+  const { tema } = await getClient().fetch(query);
 
   return {
     props: {
+      tema,
       slug: ctx.params.slug as string,
       preview: ctx.preview ?? false,
       id: "",
@@ -28,8 +31,8 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-const GPPage = ({ results }) => {
-  return <GodPraksisPage results={results} />;
+const GPPage = ({ results, tema }) => {
+  return <GodPraksisPage results={results} tema={tema} />;
 };
 
 const WithPreview = lazy(() => import("@/preview"));
