@@ -1,0 +1,10 @@
+/* IE, Edge and Firefox */
+.chips {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Chrome, Safari and Opera */
+.chips::-webkit-scrollbar {
+  display: none;
+}
