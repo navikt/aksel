@@ -1,9 +1,9 @@
 import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
-import ArticleList from "./parts/ArticleList";
-import ChipNav from "./parts/ChipNav";
-import Hero from "./parts/Hero";
+import ArticleList from "./articles/ArticleList";
+import ChipNav from "./chips/ChipNav";
+import Hero from "./hero/Hero";
 
 function GodPraksisPage() {
   return (
