@@ -48,7 +48,7 @@
     "jscodeshift": "^0.15.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
-    "next": "13.2.1",
+    "next": "13.5.1",
     "next-logger": "3.0.2",
     "next-sanity": "5.5.8",
     "pino": "^8.14.1",
