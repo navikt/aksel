@@ -3,6 +3,7 @@ import omit from "lodash/omit";
 import { useRouter } from "next/router";
 import { useId } from "react";
 import { Chips, HGrid, Label } from "@navikt/ds-react";
+import { capitalize } from "@/utils";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
 
@@ -29,7 +30,7 @@ function ChipNav({ options, type }: ChipsNavProps) {
   return (
     <HGrid gap="2" columns={{ sm: 1, md: "auto 1fr" }} align="center">
       <Label as="p" className="text-aksel-heading">
-        Innholdstyper:
+        {`${capitalize(type)}:`}
       </Label>
 
       <div className="relative overflow-hidden">

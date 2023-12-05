@@ -27,10 +27,18 @@ function GodPraksisPage({ articles, heroNav, tema }: GodPraksisPageProps) {
               <Hero heroNav={heroNav} tema={tema}>
                 {tema?.description}
               </Hero>
-              <ChipNav
-                options={["WCAG", "Testing", "Kompetanse", "Retningslinjer"]}
-                type="innholdstype"
-              />
+              <VStack gap="2">
+                {tema?.undertema?.length > 0 && (
+                  <ChipNav
+                    options={tema.undertema.map((undertema) => undertema.title)}
+                    type="undertema"
+                  />
+                )}
+                <ChipNav
+                  options={["WCAG", "Testing", "Kompetanse", "Retningslinjer"]}
+                  type="innholdstype"
+                />
+              </VStack>
             </VStack>
             <ArticleList articles={articles} />
           </VStack>

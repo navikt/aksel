@@ -20,5 +20,6 @@ export type GpTemaT = {
     title: string;
     slug: string;
     description?: string;
+    undertema: { title: string; description: string }[];
   };
 };

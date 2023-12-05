@@ -14,7 +14,11 @@ const query = groq`
   ${heroNavQuery},
   "tema": *[_type == "gp.tema" && slug.current == $slug][0]{
     ...,
-    "slug": slug.current
+    "slug": slug.current,
+    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug && count(*[_type == "aksel_artikkel" && references(^._id)]) > 0]{
+      title,
+      description
+    }
   }
 }
 `;

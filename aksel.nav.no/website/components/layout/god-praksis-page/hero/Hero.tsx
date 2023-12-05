@@ -5,13 +5,12 @@ import { GpTemaT, HeroNavT } from "../types";
 
 type HeroProps = {
   children?: string;
-  /* TODO: Fikser tema-type */
+  /* TODO: Fikse tema-type */
   tema?: GpTemaT["tema"];
 } & HeroNavT;
 
 function Hero({ children, heroNav, tema }: HeroProps) {
   const router = useRouter();
-  console.log(tema);
 
   return (
     <Box
