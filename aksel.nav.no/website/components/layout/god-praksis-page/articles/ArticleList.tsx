@@ -1,13 +1,13 @@
 import ArticleBento from "./ArticleBento";
 import ArticleGrid from "./ArticleGrid";
 
-function ArticleList({ results }) {
-  if (!results || results.length === 0) {
+function ArticleList({ articles }) {
+  if (!articles || articles.length === 0) {
     return null;
   }
 
-  const popular = results.slice(0, 3);
-  const latest = results.slice(3);
+  const popular = articles.slice(0, 3);
+  const latest = articles.slice(3);
 
   return (
     <>

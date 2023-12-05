@@ -3,15 +3,17 @@ import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { Heading } from "@navikt/ds-react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
+import { heroNavQuery } from "@/layout/god-praksis-page/queries";
+import { GpArticleListT, HeroNavT } from "@/layout/god-praksis-page/types";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
+import { NextPageT } from "@/types";
+
+type PageProps = NextPageT<GpArticleListT & HeroNavT>;
 
 const query = groq`
 {
-  "temaList": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]) > 0]{
-    title,
-    slug,
-  },
+  ${heroNavQuery},
   "articles": *[_type == "aksel_artikkel" && defined(undertema)] {
     heading,
     ingress ,
@@ -24,13 +26,13 @@ const query = groq`
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx
-): Promise<any> => {
-  const { temaList, articles } = await getClient().fetch(query);
+): Promise<PageProps> => {
+  const { heroNav, articles } = await getClient().fetch(query);
 
   return {
     props: {
-      results: articles,
-      temaList,
+      articles,
+      heroNav,
       preview: ctx.preview ?? false,
       id: "",
       title: "",
@@ -39,8 +41,8 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-const GPPage = ({ results, temaList }) => {
-  return <GodPraksisPage results={results} temaList={temaList} />;
+const GPPage = ({ articles, heroNav }: PageProps["props"]) => {
+  return <GodPraksisPage articles={articles} heroNav={heroNav} />;
 
   return (
     <>

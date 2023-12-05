@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong, Box, Heading, Select, VStack } from "@navikt/ds-react";
+import { HeroNavT } from "../types";
 
 type HeroProps = {
   children?: string;
-  temaList: { title: string; slug: { current: string } }[];
-};
+} & HeroNavT;
 
-function Hero({ children, temaList }: HeroProps) {
+function Hero({ children, heroNav }: HeroProps) {
   const router = useRouter();
 
   return (
@@ -34,8 +34,8 @@ function Hero({ children, temaList }: HeroProps) {
           defaultValue={router.query.slug ?? ""}
         >
           <option value="">Alle sider</option>
-          {temaList.map((x) => (
-            <option value={x.slug.current} key={x.slug.current}>
+          {heroNav.map((x) => (
+            <option value={x.slug} key={x.slug}>
               {x.title}
             </option>
           ))}

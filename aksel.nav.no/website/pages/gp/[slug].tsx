@@ -2,26 +2,27 @@ import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
+import { heroNavQuery } from "@/layout/god-praksis-page/queries";
+import { HeroNavT } from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
+import { NextPageT } from "@/types";
+
+type PageProps = NextPageT<HeroNavT>;
 
 const query = groq`
 {
-  "temaList": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]) > 0]{
-    title,
-    description,
-    slug
-  },
+  ${heroNavQuery},
 }
 `;
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx
-): Promise<any> => {
-  const { temaList } = await getClient().fetch(query);
+): Promise<PageProps> => {
+  const { heroNav } = await getClient().fetch(query);
 
   return {
     props: {
-      temaList,
+      heroNav,
       slug: ctx.params.slug as string,
       preview: ctx.preview ?? false,
       id: "",
@@ -31,8 +32,8 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-const GPPage = ({ results, temaList }) => {
-  return <GodPraksisPage results={results} temaList={temaList} />;
+const GPPage = ({ heroNav }: PageProps["props"]) => {
+  return <GodPraksisPage articles={[]} heroNav={heroNav} />;
 };
 
 const WithPreview = lazy(() => import("@/preview"));
