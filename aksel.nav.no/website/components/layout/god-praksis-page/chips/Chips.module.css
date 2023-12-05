@@ -8,3 +8,25 @@
 .chips::-webkit-scrollbar {
   display: none;
 }
+
+.shadow {
+  position: absolute;
+  z-index: 100;
+  height: 100%;
+  width: 68px;
+  pointer-events: none;
+
+  --shadow-color: var(--a-surface-subtle);
+}
+
+.shadowStart {
+  left: 0;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  background: linear-gradient(90deg, var(--shadow-color), transparent);
+}
+
+.shadowEnd {
+  right: 0;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  background: linear-gradient(-90deg, var(--shadow-color), transparent);
+}

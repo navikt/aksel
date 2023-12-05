@@ -7,6 +7,17 @@ const meta = {
   component: ChipNav,
   tags: ["autodocs"],
   decorators: [AkselTheme],
+  parameters: {
+    backgrounds: {
+      default: "god-praksis",
+      values: [
+        {
+          name: "god-praksis",
+          value: "var(--a-surface-subtle)",
+        },
+      ],
+    },
+  },
 } satisfies Meta<typeof ChipNav>;
 
 export default meta;
@@ -34,14 +45,14 @@ export const LongList: Story = {
       "WCAG",
       "Testing",
       "Kompetanse",
-      "Retningslinjer",
-      "WCAG",
-      "Testing",
-      "Kompetanse",
-      "Retningslinjer",
-      "WCAG",
-      "Testing",
-      "Kompetanse",
+      "2Retningslinjer",
+      "2WCAG",
+      "2Testing",
+      "2Kompetanse",
+      "3Retningslinjer",
+      "3WCAG",
+      "3Testing",
+      "3Kompetanse",
     ],
   },
 };
