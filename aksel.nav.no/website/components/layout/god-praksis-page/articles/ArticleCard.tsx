@@ -19,7 +19,7 @@ export const ArticleCard = ({
 }: {
   title: string;
   content: string;
-  slug: any; // TODO: types
+  slug: string;
   main?: boolean;
   innholdstype?: string;
   undertema?: string;
@@ -42,7 +42,7 @@ export const ArticleCard = ({
       </style>
       <Box
         as="a"
-        href={`./${slug.current}`}
+        href={`./${slug}`}
         className={clsx("gp-article-card", main && "gp-article-card-main")}
         paddingBlock="10"
         paddingInline="10"

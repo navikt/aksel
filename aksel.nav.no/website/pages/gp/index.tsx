@@ -28,7 +28,7 @@ const query = groq`
     ingress ,
     "undertema": undertema[]->title,
     "innholdstype": innholdstype->title,
-    slug
+    "slug": slug.current
   }
 }
 `;

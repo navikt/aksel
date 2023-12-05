@@ -11,7 +11,7 @@ export type GpArticleListT = {
     ingress: string;
     undertema: string[];
     innholdstype: string | null;
-    slug: { current: string };
+    slug: string;
   }[];
 };
 
