@@ -169,9 +169,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     };
 
     return (
-      <>
-        <input />
-    <div
+      <div
         className={cl("navds-form-field", "navds-fileupload", className)}
       >
         <Label
@@ -244,7 +242,6 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           {showErrorMsg && <ErrorMessage>{error}</ErrorMessage>}
         </div>
       </div>
-      </>
     );
   }
 );
