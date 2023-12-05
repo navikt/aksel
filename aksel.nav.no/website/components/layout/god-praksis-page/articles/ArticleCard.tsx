@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { BodyLong, Box, HStack, Heading, Tag, VStack } from "@navikt/ds-react";
+import { Sticker } from "./Sticker";
 
 const trunc = (text, num_chars) => {
   return `${text.substring(0, num_chars)}${
@@ -14,6 +15,7 @@ export const ArticleCard = ({
   main = false,
   innholdstype,
   undertema,
+  isNew = false,
 }: {
   title: string;
   content: string;
@@ -21,6 +23,7 @@ export const ArticleCard = ({
   main?: boolean;
   innholdstype?: string;
   undertema?: string;
+  isNew?: boolean;
 }) => {
   return (
     <>
@@ -47,7 +50,7 @@ export const ArticleCard = ({
         background="surface-default"
         shadow="xsmall"
       >
-        <VStack justify="space-between" className="min-h-full">
+        <VStack justify="space-between" className="min-h-full relative">
           <Box paddingBlock="0 5">
             <Heading className="inner-shiny" size={main ? "xlarge" : "medium"}>
               <span className="shiny">{title}</span>
@@ -69,6 +72,7 @@ export const ArticleCard = ({
               </Tag>
             )}
           </HStack>
+          {isNew && <Sticker large={main} />}
         </VStack>
       </Box>
     </>
