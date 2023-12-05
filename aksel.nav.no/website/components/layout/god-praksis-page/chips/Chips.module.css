@@ -11,9 +11,9 @@
 
 .shadow {
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   height: 100%;
-  width: 68px;
+  width: 64px;
   pointer-events: none;
 
   --shadow-color: var(--a-surface-subtle);

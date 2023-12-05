@@ -41,7 +41,7 @@ export const LongList: Story = {
   args: {
     type: "undertema",
     options: [
-      "Retningslinjer",
+      "WCA",
       "WCAG",
       "Testing",
       "Kompetanse",
