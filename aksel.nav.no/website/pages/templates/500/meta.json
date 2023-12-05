@@ -1,6 +1,11 @@
 {
-  "version": 1,
+  "version": 2,
   "changelog": [
+    {
+      "description": "La til lenker på 'laste siden på nytt' og 'gå tilbake til forrige side'",
+      "date": "05.12.2023",
+      "version": 2
+    },
     {
       "description": "Publiserte varianter for enkel, komplett, feil-id, CTA, uten dekoratøren, og flere språk",
       "date": "27.11.2023",

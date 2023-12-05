@@ -5,7 +5,7 @@ function Example() {
   useDekorator();
 
   return (
-    <Page data-aksel-template="500-v1" footer={<Footer />}>
+    <Page data-aksel-template="500-v2" footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 16">
@@ -22,8 +22,19 @@ function Example() {
           </BodyShort>
           <BodyShort>Du kan prøve å</BodyShort>
           <List>
-            <List.Item>vente noen minutter og laste siden på nytt</List.Item>
-            <List.Item>gå tilbake til forrige side</List.Item>
+            <List.Item>
+              vente noen minutter og{" "}
+              {/* Husk at POST-data går tapt når man reloader med JS. For å unngå dette kan dere
+                  fjerne lenken (men beholde teksten) slik at man må bruke nettleserens reload-knapp. */}
+              <Link href="#" onClick={() => location.reload()}>
+                laste siden på nytt
+              </Link>
+            </List.Item>
+            <List.Item>
+              <Link href="#" onClick={() => history.back()}>
+                gå tilbake til forrige side
+              </Link>
+            </List.Item>
           </List>
           <BodyShort>
             Hvis problemet vedvarer, kan du{" "}
