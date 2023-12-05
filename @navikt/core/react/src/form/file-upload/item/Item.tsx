@@ -12,8 +12,8 @@ export interface BaseFileItemProps {
   file: FileItem;
   error?: string;
   isLoading?: boolean;
-  onDelete?: (file: FileItem) => void;
-  onRetry?: (file: FileItem) => void;
+  onDelete?: () => void;
+  onRetry?: () => void;
   /**
    * Class name passed to the outermost <div> element.
    */
@@ -29,18 +29,17 @@ export interface BaseFileItemProps {
   locale?: "nb" | "nn" | "en"
 }
 
-export interface FileItemWithHref extends BaseFileItemProps {
+export interface FileMetadataWithHref extends BaseFileItemProps {
   href: string;
 }
 
-export interface FileItemWithOnClick extends BaseFileItemProps {
-  onClick: (file: FileItem) => void;
+export interface FileMetadataWithOnClick extends BaseFileItemProps {
+  onClick: () => void;
 }
 
-export type FileItemProps = BaseFileItemProps | FileItemWithHref | FileItemWithOnClick
+export type FileItemProps = BaseFileItemProps | FileMetadataWithHref | FileMetadataWithOnClick
 
-export const Item = forwardRef<HTMLLIElement, FileItemProps>(
-  (
+export const Item =   (
     {
       file,
       isLoading,
@@ -48,11 +47,8 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>(
       onRetry,
       error,
       className,
-      locale = "nb",
-      href,
-      onClick
-    },
-    ref
+      locale = "nb"
+    }: FileItemProps
   ) => {
     const context = useContext(FileListContext)
 
@@ -66,17 +62,16 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>(
         file,
         isLoading,
         error,
-        onDelete: onDelete || context.onDelete,
-        onRetry: onRetry || context.onRetry,
+        onDelete,
+        onRetry,
         locale: locale || context.locale,
-        href,
-        onClick
+        href: undefined,
+        onClick: undefined
       }}>
         <li
           className={cl("navds-fileitem", className, {
             "navds-fileitem--error": !!error
           })}
-          ref={ref}
         >
           <ItemIcon />
           <div className="navds-fileitem__file-info">
@@ -90,6 +85,6 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>(
       </ItemContext.Provider>
     )
   }
-);
+;
 
 export default Item;

@@ -55,106 +55,69 @@ export const List = {
       />
       <FileUpload.Item
         file={fileDocx}
-        onDelete={onDelete}
-        onRetry={onRetry}
+        onDelete={() => onDelete(fileDocx)}
+        onRetry={() => onRetry(fileDocx)}
         isLoading
       />
       <FileUpload.Item
         file={fileXlsx}
-        onDelete={onDelete}
+        onDelete={() => onDelete(fileXlsx)}
       />
       <FileUpload.Item
         file={fileCsv}
         error="Åh nei!"
-        onDelete={onDelete}
+        onDelete={() => onDelete(fileCsv)}
       />
       <FileUpload.Item
         file={filePptx}
         error="Huffameg.."
-        onDelete={onDelete}
+        onDelete={() => onDelete(filePptx)}
       />
       <FileUpload.Item
         file={fileWebp}
         error="Au da.."
-        onRetry={onRetry}
-        onDelete={onDelete}
+        onRetry={() => onRetry(fileWebp)}
+        onDelete={() => onDelete(fileWebp)}
       />
     </FileUpload.List>
   ),
 };
 
-export const ListWithDownloading = {
-  render: () => (
-    <FileUpload.List
-      label="Last opp filer"
-      error="hei jeg er en feil og jeg må rettes opp!"
-    >
-      <FileUpload.Item
-        file={{
-          name: "withOnClick.docx",
-          size: 35700
-        }}
-        onClick={(file) => alert(`onClick ${file.name}`)}
-      />
-      <FileUpload.Item
-        file={{
-          name: "withOnClickAndDelete.docx",
-          size: 35700
-        }}
-        onClick={(file) => alert(`onClick ${file.name}`)}
-        onDelete={onDelete}
-      />
-      <FileUpload.Item
-        file={{
-          name: "withHref.docx",
-          size: 2000000
-        }}
-        href="https://www.nav.no"
-      />
-      <FileUpload.Item
-        file={filePdf}
-      />
-    </FileUpload.List>
-  ),
-};
-
-export const ListWithOverriding = {
-  render: () => (
-    <FileUpload.List
-      label="Last opp filer"
-      onDelete={onDelete}
-      onRetry={onRetry}
-      locale="nb"
-    >
-      <FileUpload.Item
-        file={fileDocx}
-      />
-      <FileUpload.Item
-        file={fileDocx}
-        error="Prøv igjen"
-      />
-      <FileUpload.Item
-        file={fileDocx}
-        onDelete={() => alert("delete med override")}
-        onRetry={() => alert("retry med override")}
-      />
-      <FileUpload.Item
-        file={fileDocx}
-        error="Oopsie"
-        onRetry={() => alert("retry med override")}
-      />
-      <FileUpload.Item
-        file={fileDocx}
-        isLoading
-      />
-      <FileUpload.Item
-        file={fileDocx}
-        isLoading
-        locale="en"
-      />
-    </FileUpload.List>
-  ),
-};
+// export const ListWithDownloading = {
+//   render: () => (
+//     <FileUpload.List
+//       label="Last opp filer"
+//       error="hei jeg er en feil og jeg må rettes opp!"
+//     >
+//       <FileUpload.Item
+//         file={{
+//           name: "withOnClick.docx",
+//           size: 35700
+//         }}
+//         onClick={(file) => alert(`onClick ${file.name}`)}
+//       />
+//       <FileUpload.Item
+//         file={{
+//           name: "withOnClickAndDelete.docx",
+//           size: 35700
+//         }}
+//         onClick={(file) => alert(`onClick ${file.name}`)}
+//         onDelete={onDelete}
+//       />
+//       <FileUpload.Item
+//         file={{
+//           name: "withHref.docx",
+//           size: 2000000
+//         }}
+//         href="https://www.nav.no"
+//       />
+//       <FileUpload.Item
+//         file={filePdf}
+//         onClick={2}
+//       />
+//     </FileUpload.List>
+//   ),
+// };
 
 export const Dropzone = {
   render: () => (

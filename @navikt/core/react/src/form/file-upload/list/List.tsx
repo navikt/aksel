@@ -1,7 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { ErrorMessage } from "../../../typography";
-import { FileItem } from "../item/props";
 import { FileListContext } from "./file-list-context";
 
 export interface FileListProps {
@@ -9,8 +8,6 @@ export interface FileListProps {
   error?: string;
   className?: string;
   ref?: React.Ref<HTMLDivElement>;
-  onDelete?: (file: FileItem) => void;
-  onRetry?: (file: FileItem) => void;
   /**
    * Changes locale used for component text.
    * @default "nb" (norsk bokmål)
@@ -23,8 +20,6 @@ export const FileList = forwardRef<HTMLDivElement, FileListProps>(
   (
     {
       locale,
-      onRetry,
-      onDelete,
       children,
       label,
       error,
@@ -35,8 +30,6 @@ export const FileList = forwardRef<HTMLDivElement, FileListProps>(
     return (
       <FileListContext.Provider value={{
         locale,
-        onRetry,
-        onDelete
       }}>
         <div
           className={cl("navds-filelist", className)}

@@ -26,7 +26,7 @@ const ItemName = () => {
       href="#"
       onClick={(event) => {
         event.preventDefault();
-        context?.onClick?.(file);
+        context?.onClick?.();
       }}
     >
       {file.name}
