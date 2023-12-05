@@ -4,14 +4,20 @@ import Header from "@/layout/header/Header";
 import ArticleList from "./articles/ArticleList";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
-import { GpArticleListT, GpTemaT, HeroNavT } from "./types";
+import { GpArticleListT, GpInnholdstypeT, GpTemaT, HeroNavT } from "./types";
 
 type GodPraksisPageProps = GpArticleListT &
-  HeroNavT & {
+  HeroNavT &
+  GpInnholdstypeT & {
     tema?: GpTemaT["tema"];
   };
 
-function GodPraksisPage({ articles, heroNav, tema }: GodPraksisPageProps) {
+function GodPraksisPage({
+  articles,
+  heroNav,
+  tema,
+  innholdstype,
+}: GodPraksisPageProps) {
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -34,10 +40,12 @@ function GodPraksisPage({ articles, heroNav, tema }: GodPraksisPageProps) {
                     type="undertema"
                   />
                 )}
-                <ChipNav
-                  options={["WCAG", "Testing", "Kompetanse", "Retningslinjer"]}
-                  type="innholdstype"
-                />
+                {innholdstype?.length > 0 && (
+                  <ChipNav
+                    options={innholdstype.map((type) => type.title)}
+                    type="innholdstype"
+                  />
+                )}
               </VStack>
             </VStack>
             <ArticleList articles={articles} />

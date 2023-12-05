@@ -3,17 +3,25 @@ import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { Heading } from "@navikt/ds-react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
-import { heroNavQuery } from "@/layout/god-praksis-page/queries";
-import { GpArticleListT, HeroNavT } from "@/layout/god-praksis-page/types";
+import {
+  heroNavQuery,
+  innholdstypeQuery,
+} from "@/layout/god-praksis-page/queries";
+import {
+  GpArticleListT,
+  GpInnholdstypeT,
+  HeroNavT,
+} from "@/layout/god-praksis-page/types";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
 
-type PageProps = NextPageT<GpArticleListT & HeroNavT>;
+type PageProps = NextPageT<GpArticleListT & HeroNavT & GpInnholdstypeT>;
 
 const query = groq`
 {
   ${heroNavQuery},
+  ${innholdstypeQuery},
   "articles": *[_type == "aksel_artikkel" && defined(undertema)] {
     heading,
     ingress ,
@@ -27,12 +35,19 @@ const query = groq`
 export const getServerSideProps: GetServerSideProps = async (
   ctx
 ): Promise<PageProps> => {
-  const { heroNav, articles } = await getClient().fetch(query);
+  const {
+    heroNav,
+    articles,
+    innholdstype,
+  }: GpArticleListT & HeroNavT & GpInnholdstypeT = await getClient().fetch(
+    query
+  );
 
   return {
     props: {
       articles,
       heroNav,
+      innholdstype,
       preview: ctx.preview ?? false,
       id: "",
       title: "",
@@ -41,8 +56,14 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-const GPPage = ({ articles, heroNav }: PageProps["props"]) => {
-  return <GodPraksisPage articles={articles} heroNav={heroNav} />;
+const GPPage = ({ articles, heroNav, innholdstype }: PageProps["props"]) => {
+  return (
+    <GodPraksisPage
+      articles={articles}
+      heroNav={heroNav}
+      innholdstype={innholdstype}
+    />
+  );
 
   return (
     <>

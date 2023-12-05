@@ -23,3 +23,10 @@ export type GpTemaT = {
     undertema: { title: string; description: string }[];
   };
 };
+
+export type GpInnholdstypeT = {
+  innholdstype: {
+    title: string;
+    description?: string;
+  }[];
+};
