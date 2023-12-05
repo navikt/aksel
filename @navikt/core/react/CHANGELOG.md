@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.11.4
+
+### Patch Changes
+
+- Fix issue where clicking in Combobox.FilteredOptions after scrolling selected the wrong element ([#2536](https://github.com/navikt/aksel/pull/2536))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.11.4
+  - @navikt/aksel-icons@5.11.4
+
 ## 5.11.3
 
 ### Patch Changes
