@@ -2,6 +2,8 @@ import cl from "clsx";
 import React, {
   ChangeEvent,
   forwardRef,
+  useCallback,
+  useEffect,
   useMemo,
   useRef, useState
 } from "react";
@@ -84,13 +86,6 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
 
-    const onButtonClick = () => {
-      inputRef?.current?.click();
-    };
-
-    const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
-      useFormField(props, "fileUpload");
-
     const {
       onUpload,
       error,
@@ -104,17 +99,12 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       ...rest
     } = props;
 
+    const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
+      useFormField(props, "fileUpload");
+
     const locale = localeProp || "nb"
 
-    const onDragEnter = () => setIsDraggingOver(true);
-    const onDragEnd = () => setIsDraggingOver(false);
-
-    const handleUpload = (event: ChangeEvent<HTMLInputElement>) => {
-      const fileList = event.target.files;
-      if (!fileList) {
-        return;
-      }
-      const files = Array.from(fileList);
+    const upload = useCallback((files: File[]) => {
       const { acceptedFiles, rejectedFiles } = partitionFiles(
         files,
         accept,
@@ -122,13 +112,66 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       );
 
       onUpload({ allFiles: files, acceptedFiles, rejectedFiles });
+    }, [onUpload, accept, validator])
+
+    const handlePaste = useCallback((event: ClipboardEvent) => {
+      const fileInput = inputRef.current
+      if (fileInput === null || window.document.activeElement !== fileInput) {
+        return
+      }
+      event.preventDefault()
+      if (!event.clipboardData) {
+        return
+      }
+      const items = event.clipboardData.items;
+      const files: File[] = [];
+
+      for (const index in items) {
+        const item = items[index];
+        if (item.kind === 'file') {
+          const file = item.getAsFile();
+          if (file) {
+            files.push(file);
+          }
+        }
+      }
+
+      if (files.length > 0) {
+        upload(files)
+      }
+    }, [upload]);
+
+    useEffect(() => {
+      window.addEventListener("paste", handlePaste)
+
+      return () => {
+        window.removeEventListener("paste", handlePaste)
+      }
+    }, [handlePaste])
+
+    const onButtonClick = () => {
+      inputRef?.current?.click();
+    };
+
+    const onDragEnter = () => setIsDraggingOver(true);
+    const onDragEnd = () => setIsDraggingOver(false);
+
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+      const fileList = event.target.files;
+      if (!fileList) {
+        return;
+      }
+
+      upload(Array.from(fileList))
 
       // Resets the value to make it is possible to upload the same file several consecutive times
       event.target.value = "";
     };
 
     return (
-      <div
+      <>
+        <input />
+    <div
         className={cl("navds-form-field", "navds-fileupload", className)}
       >
         <Label
@@ -186,7 +229,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             className="navds-fileupload__content-input"
             multiple={multiple}
             accept={accept}
-            onChange={handleUpload}
+            onChange={onChange}
             ref={mergedRef}
             {...rest}
             {...inputProps}
@@ -201,6 +244,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           {showErrorMsg && <ErrorMessage>{error}</ErrorMessage>}
         </div>
       </div>
+      </>
     );
   }
 );
