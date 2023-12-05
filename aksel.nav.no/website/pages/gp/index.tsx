@@ -23,6 +23,7 @@ const query = groq`
     "innholdstype": innholdstype->title,
     slug
   }
+}
 `;
 
 export const getServerSideProps: GetServerSideProps = async (
