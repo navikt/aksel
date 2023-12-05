@@ -168,10 +168,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen]
     );
 
-    const onBlur = () => {
-      virtualFocus.moveFocusToTop();
-    };
-
     return (
       <input
         {...rest}
@@ -181,7 +177,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onChange={onChangeHandler}
         type="text"
         role="combobox"
-        onBlur={onBlur}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
         aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}

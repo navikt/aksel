@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.11.4
+
+### Patch Changes
+
+- :bug: Modal: Hindre at elementer med sr-only posisjoneres feil ([#2541](https://github.com/navikt/aksel/pull/2541))
+
 ## 5.11.3
 
 ### Patch Changes

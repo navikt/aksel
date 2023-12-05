@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BugIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
@@ -10,7 +11,6 @@ import {
   Page,
   VStack,
 } from "@navikt/ds-react";
-import { useEffect } from "react";
 
 const Example = () => {
   useDekorator();

@@ -1,3 +1,6 @@
+import { mergeConfig } from "vite";
+import turbosnap from "vite-plugin-turbosnap";
+
 module.exports = {
   staticDirs: ["./public"],
 
@@ -42,5 +45,18 @@ module.exports = {
     check: false,
     checkOptions: {},
     reactDocgen: false,
+  },
+
+  async viteFinal(config, { configType }) {
+    return mergeConfig(config, {
+      plugins:
+        configType === "PRODUCTION"
+          ? [
+              turbosnap({
+                rootDir: config.root ?? process.cwd(),
+              }),
+            ]
+          : [],
+    });
   },
 };

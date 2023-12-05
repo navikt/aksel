@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { MonthPicker, useMonthpicker } from "@navikt/ds-react";
 import { useState } from "react";
+import { MonthPicker, useMonthpicker } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [hasError, setHasError] = useState(false);
