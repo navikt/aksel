@@ -1,7 +1,7 @@
-import React, { forwardRef, useState } from "react";
 import cl from "clsx";
-import { BodyLong } from "../typography";
+import React, { forwardRef, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { BodyLong } from "../typography";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

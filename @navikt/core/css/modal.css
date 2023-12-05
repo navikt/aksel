@@ -118,6 +118,7 @@
   padding: var(--a-spacing-6);
   overflow: auto;
   overscroll-behavior: contain;
+  position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
 }
 
 .navds-modal__header + .navds-modal__body {

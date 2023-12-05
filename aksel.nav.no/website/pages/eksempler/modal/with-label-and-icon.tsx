@@ -1,7 +1,7 @@
-import { withDsExample } from "@/web/examples/withDsExample";
+import { useRef } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
-import { useRef } from "react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const ref = useRef<HTMLDialogElement>(null);

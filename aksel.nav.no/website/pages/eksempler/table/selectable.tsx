@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Checkbox, Table } from "@navikt/ds-react";
 import { useState } from "react";
+import { Checkbox, Table } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [selectedRows, setSelectedRows] = useState([]);

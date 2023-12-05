@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   BodyShort,
   Box,
@@ -8,7 +9,6 @@ import {
   Page,
   VStack,
 } from "@navikt/ds-react";
-import { useEffect } from "react";
 
 function Example() {
   useDekorator();

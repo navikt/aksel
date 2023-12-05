@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Button, Popover } from "@navikt/ds-react";
 import { useRef, useState } from "react";
+import { Button, Popover } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);

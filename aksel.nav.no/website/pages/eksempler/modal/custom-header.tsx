@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
 import { useState } from "react";
+import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [open, setOpen] = useState(false);

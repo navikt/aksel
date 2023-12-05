@@ -1,4 +1,4 @@
-import { withDsExample } from "@/web/examples/withDsExample";
+import cl from "clsx";
 import { LinkIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -13,7 +13,7 @@ import {
   Show,
   VStack,
 } from "@navikt/ds-react";
-import cl from "clsx";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (

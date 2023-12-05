@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { CopyButton } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (

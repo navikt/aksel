@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Table } from "@navikt/ds-react";
 import { useState } from "react";
+import { Table } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [sort, setSort] = useState(null);

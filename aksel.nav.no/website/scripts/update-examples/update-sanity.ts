@@ -5,6 +5,7 @@ import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
 import { RootDirectoriesT } from "./types";
+
 dotenv.config();
 
 const token = process.env.SANITY_WRITE_KEY;

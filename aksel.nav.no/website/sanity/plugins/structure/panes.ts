@@ -1,4 +1,5 @@
 import { FileXMarkIcon } from "@navikt/aksel-icons";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 export const Panes = (
   docType,
@@ -15,6 +16,7 @@ export const Panes = (
             .schemaType(docType)
             .filter(`_type == $docType && $kat == kategori`)
             .params({ kat: value, docType })
+            .apiVersion(SANITY_API_VERSION)
         )
     ),
     S.listItem()
@@ -26,6 +28,7 @@ export const Panes = (
           .schemaType(docType)
           .filter(`_type == $docType && !defined(kategori)`)
           .params({ docType })
+          .apiVersion(SANITY_API_VERSION)
       ),
   ];
 };

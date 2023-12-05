@@ -340,6 +340,7 @@ export interface CodeExamplesT {
     metadata?: CodeExampleSchemaT["metadata"];
     variant: CodeExampleSchemaT["variant"];
   };
+  compact?: boolean;
 }
 
 export type PropTableT = ArrayObjectT<{
