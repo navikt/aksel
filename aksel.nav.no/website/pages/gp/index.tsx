@@ -65,10 +65,7 @@ const GpPage = (props: PageProps["props"]) => {
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />
-      <GodPraksisPage
-        articles={props.articles}
-        innholdstype={props.innholdstype}
-      />
+      <GodPraksisPage articles={props.articles} />
     </GpPageContext.Provider>
   );
 };

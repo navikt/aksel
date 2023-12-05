@@ -3,21 +3,30 @@ import omit from "lodash/omit";
 import { useRouter } from "next/router";
 import { useId } from "react";
 import { Chips, HGrid, Label } from "@navikt/ds-react";
+import { useGpPageContext } from "@/layout/god-praksis-page/context";
 import { capitalize } from "@/utils";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
 
 type ChipsNavProps = {
   type: "innholdstype" | "undertema";
-  options: string[];
 };
 
-function ChipNav({ options, type }: ChipsNavProps) {
+function ChipNav({ type }: ChipsNavProps) {
   const id = useId();
+  const ctx = useGpPageContext();
 
   const { query, replace } = useRouter();
-  if (!options) {
-    console.warn("Missing options");
+
+  if (
+    type == "undertema" &&
+    (ctx.type === "frontpage" ||
+      (ctx.type === "tema-page" && !(ctx.tema?.undertema?.length > 0)))
+  ) {
+    return null;
+  }
+
+  if (type == "innholdstype" && !(ctx.innholdstype?.length > 0)) {
     return null;
   }
 
@@ -27,10 +36,17 @@ function ChipNav({ options, type }: ChipsNavProps) {
       : replace({ query: { ...query, [type]: title } });
   }
 
+  const options =
+    type === "innholdstype"
+      ? ctx.innholdstype.map((t) => t.title)
+      : ctx.type === "tema-page"
+      ? ctx.tema.undertema.map((undertema) => undertema.title)
+      : [];
+
   return (
     <HGrid gap="2" columns={{ sm: 1, md: "auto 1fr" }} align="center">
       <Label as="p" className="text-aksel-heading">
-        {`${capitalize(type)}:`}
+        {`${capitalize(type)}`}
       </Label>
 
       <div className="relative overflow-hidden">
