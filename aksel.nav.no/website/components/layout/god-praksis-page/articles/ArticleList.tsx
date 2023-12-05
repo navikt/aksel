@@ -1,4 +1,3 @@
-import ArticleBento from "./ArticleBento";
 import ArticleGrid from "./ArticleGrid";
 
 const markRandomAsNew = (articles) => {
@@ -10,12 +9,11 @@ function ArticleList({ articles }) {
     return null;
   }
 
-  const popular = articles.slice(0, 3);
-  const latest = markRandomAsNew(articles.slice(3));
+  const latest = markRandomAsNew(articles);
 
   return (
     <>
-      <ArticleBento name="Populære" articles={popular} />
+      {/* <ArticleBento name="Populære" articles={latest} /> */}
       <ArticleGrid name="Siste" articles={latest} />
     </>
   );

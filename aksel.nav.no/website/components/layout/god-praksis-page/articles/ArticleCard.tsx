@@ -43,7 +43,9 @@ export const ArticleCard = ({
       <Box
         as="a"
         href={`./${slug}`}
-        className={clsx("gp-article-card", main && "gp-article-card-main")}
+        className={clsx("gp-article-card", {
+          "col-span-2 row-span-2": main,
+        })}
         paddingBlock="10"
         paddingInline="10"
         borderRadius="xlarge"
