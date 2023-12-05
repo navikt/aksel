@@ -1,21 +1,19 @@
-import omit from "lodash/omit";
 import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { Heading } from "@navikt/ds-react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
+import { heroNavQuery } from "@/layout/god-praksis-page/queries";
+import { GpArticleListT, HeroNavT } from "@/layout/god-praksis-page/types";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
+import { NextPageT } from "@/types";
+
+type PageProps = NextPageT<GpArticleListT & HeroNavT>;
 
 const query = groq`
 {
-  "tema": *[_type == "gp.tema" && count(*[references(^._id)]) > 0]{
-    "undertemaValidation": *[references(^._id) && _type == "gp.tema.undertema"]{
-      "nArticles": count(*[references(^._id)])
-    },
-    title,
-    description,
-  },
+  ${heroNavQuery},
   "articles": *[_type == "aksel_artikkel" && defined(undertema)] {
     heading,
     ingress ,
@@ -23,22 +21,18 @@ const query = groq`
     "innholdstype": innholdstype->title,
     slug
   }
-  }
+}
 `;
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx
-): Promise<any> => {
-  const results = await getClient().fetch(query);
-
-  const temaList = results.tema.filter((_tema) =>
-    _tema.undertemaValidation.some((underTema) => underTema.nArticles > 0)
-  );
+): Promise<PageProps> => {
+  const { heroNav, articles } = await getClient().fetch(query);
 
   return {
     props: {
-      results: results.articles,
-      tema: temaList.map((tema) => omit(tema, ["undertemaValidation"])),
+      articles,
+      heroNav,
       preview: ctx.preview ?? false,
       id: "",
       title: "",
@@ -47,8 +41,8 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-const GPPage = ({ results }) => {
-  return <GodPraksisPage results={results} />;
+const GPPage = ({ articles, heroNav }: PageProps["props"]) => {
+  return <GodPraksisPage articles={articles} heroNav={heroNav} />;
 
   return (
     <>

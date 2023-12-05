@@ -4,8 +4,11 @@ import Header from "@/layout/header/Header";
 import ArticleList from "./articles/ArticleList";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
+import { GpArticleListT, HeroNavT } from "./types";
 
-function GodPraksisPage({ results }) {
+type GodPraksisPageProps = GpArticleListT & HeroNavT;
+
+function GodPraksisPage({ articles, heroNav }: GodPraksisPageProps) {
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -18,7 +21,7 @@ function GodPraksisPage({ results }) {
         <Page.Block width="xl" gutters>
           <VStack gap="10">
             <VStack gap="6">
-              <Hero>
+              <Hero heroNav={heroNav}>
                 Alle som jobber med produktutvikling i NAV sitter på kunnskap og
                 erfaring som er nyttig for andre. Derfor deler vi god praksis
                 med hverandre her.
@@ -28,7 +31,7 @@ function GodPraksisPage({ results }) {
                 type="innholdstype"
               />
             </VStack>
-            <ArticleList results={results} />
+            <ArticleList articles={articles} />
           </VStack>
         </Page.Block>
       </Box>

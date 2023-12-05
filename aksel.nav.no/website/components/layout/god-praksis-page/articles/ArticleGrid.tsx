@@ -2,7 +2,7 @@ import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { Box, Button, HGrid, HStack, Heading } from "@navikt/ds-react";
 import { ArticleCard } from "./ArticleCard";
 
-function ArticleGrid({ name, results }) {
+function ArticleGrid({ name, articles }) {
   return (
     <>
       <style>
@@ -29,8 +29,8 @@ function ArticleGrid({ name, results }) {
         </HStack>
         <Box paddingBlock="5 0">
           <HGrid gap="6" columns={3}>
-            {results &&
-              results.map((article, idx) => (
+            {articles &&
+              articles.map((article, idx) => (
                 <ArticleCard
                   key={idx}
                   title={article.heading}

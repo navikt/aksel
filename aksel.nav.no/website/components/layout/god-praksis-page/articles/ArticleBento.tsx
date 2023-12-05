@@ -2,7 +2,7 @@ import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { Box, Button, HGrid, HStack, Heading } from "@navikt/ds-react";
 import { ArticleCard } from "./ArticleCard";
 
-function ArticleBento({ name, results }) {
+function ArticleBento({ name, articles }) {
   return (
     <>
       <Box>
@@ -23,26 +23,26 @@ function ArticleBento({ name, results }) {
           <HGrid gap="6" columns="1fr 1fr 1fr" className="aksel-bento">
             <ArticleCard
               main
-              title={results[0].heading}
-              content={results[0].ingress}
-              innholdstype={results[0].innholdstype}
-              undertema={results[0].undertema}
-              slug={results[0].slug}
+              title={articles[0].heading}
+              content={articles[0].ingress}
+              innholdstype={articles[0].innholdstype}
+              undertema={articles[0].undertema}
+              slug={articles[0].slug}
             />
 
             <ArticleCard
-              title={results[1].heading}
-              content={results[1].ingress}
-              innholdstype={results[1].innholdstype}
-              undertema={results[1].undertema}
-              slug={results[1].slug}
+              title={articles[1].heading}
+              content={articles[1].ingress}
+              innholdstype={articles[1].innholdstype}
+              undertema={articles[1].undertema}
+              slug={articles[1].slug}
             />
             <ArticleCard
-              title={results[2].heading}
-              content={results[2].ingress}
-              innholdstype={results[2].innholdstype}
-              undertema={results[2].undertema}
-              slug={results[2].slug}
+              title={articles[2].heading}
+              content={articles[2].ingress}
+              innholdstype={articles[2].innholdstype}
+              undertema={articles[2].undertema}
+              slug={articles[2].slug}
             />
           </HGrid>
         </Box>
