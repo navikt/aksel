@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Button, ErrorSummary } from "@navikt/ds-react";
 import { useEffect, useRef, useState } from "react";
+import { Button, ErrorSummary } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const errorRef = useRef(null);

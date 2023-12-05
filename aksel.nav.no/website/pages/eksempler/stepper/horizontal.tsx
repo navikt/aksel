@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Heading, Stepper } from "@navikt/ds-react";
 import { useState } from "react";
+import { Heading, Stepper } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [activeStep, setActiveStep] = useState(1);

@@ -1,4 +1,5 @@
 import { SANITY_API_VERSION } from "@/sanity/config";
+import { sanitizeSlug } from "../../util";
 
 export const validateSlug = (Rule, prefix, nesting) =>
   Rule.required().custom((slug) => {
@@ -35,19 +36,7 @@ export const sanitySlug = (prefix: string, depth: number, source?: string) => ({
   options: {
     isUnique: isSlugUnique,
     source: source ?? "heading",
-    slugify: (input) =>
-      `${prefix}${input}`
-        .toLowerCase()
-        .trim()
-        .slice(0, 200)
-        .trim()
-        .replace(/–+/gm, "")
-        .replace(/\s+/g, "-")
-        .replace(/-+/gm, "-")
-        .replace(/æ/g, "a")
-        .replace(/å/g, "a")
-        .replace(/ø/g, "o")
-        .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, ""),
+    slugify: (s) => prefix + sanitizeSlug(s),
   },
 });
 

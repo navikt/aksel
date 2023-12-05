@@ -1,4 +1,3 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import {
   ChevronDownCircleIcon,
   ChevronUpCircleIcon,
@@ -6,6 +5,7 @@ import {
   ExclamationmarkTriangleIcon,
 } from "@navikt/aksel-icons";
 import { List } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (

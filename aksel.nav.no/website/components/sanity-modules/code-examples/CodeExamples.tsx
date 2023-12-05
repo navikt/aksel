@@ -1,40 +1,43 @@
-import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
-import ErrorBoundary from "@/error-boundary";
-import { CodeExamplesT } from "@/types";
-import { capitalize } from "@/utils";
+import cl from "clsx";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import {
+  CodeIcon,
   ExternalLinkIcon,
   LaptopIcon,
   MobileSmallIcon,
 } from "@navikt/aksel-icons";
 import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
-import cl from "clsx";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
+import ErrorBoundary from "@/error-boundary";
+import { CodeExamplesT } from "@/types";
 import { CodeSandbox } from "./parts/CodeSandbox";
 import { Sandbox } from "./parts/Sandbox";
 
-const iframePadding = 192;
-const iframeId = "example-iframe";
+const iframePaddingNormal = 192;
+const iframePaddingCompact = 60;
 
 type CodeExamplesProps = {
   node: CodeExamplesT;
 };
 
 const ComponentExamples = ({ node }: CodeExamplesProps) => {
-  const [activeExample, setActiveExample] = useState(null);
+  const [activeExample, setActiveExample] = useState("");
   const [frameState, setFrameState] = useState(300);
   const [unloaded, setUnloaded] = useState(true);
+  const [showCode, setShowCode] = useState(!node.compact);
+
   const router = useRouter();
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleExampleLoad = () => {
+    const iframePadding = node.compact
+      ? iframePaddingCompact
+      : iframePaddingNormal;
     let attempts = 0;
+
     const waitForExampleContentToRender = setInterval(() => {
-      const exampleIframe = document.getElementById(
-        iframeId
-      ) as HTMLIFrameElement;
-      const exampleIframeDOM = exampleIframe?.contentDocument;
+      const exampleIframeDOM = iframeRef.current?.contentDocument;
 
       let exampleWrapper: HTMLElement;
 
@@ -62,38 +65,26 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
   };
 
   useEffect(() => {
-    node?.dir?.filer?.[0]?.navn && setActiveExample(node.dir.filer[0].navn);
+    node.dir?.filer?.[0]?.navn && setActiveExample(node.dir.filer[0].navn);
   }, [node]);
 
   useEffect(() => {
-    const hash = router.asPath.split("#")[1];
+    const hash = router.asPath.split("#")[1] || "";
+    const prefix = `${node.dir.title.toLowerCase()}demo-`;
+    const navn = hash.replace(prefix, "");
     if (
-      hash &&
-      hash.startsWith(`${node.dir.title.toLowerCase()}demo-`) &&
-      node.dir.filer.some(
-        (f) =>
-          f.navn === hash.replace(`${node.dir.title.toLowerCase()}demo-`, "")
-      )
+      hash.startsWith(prefix) &&
+      node.dir.filer.some((f) => f.navn === navn)
     ) {
-      setActiveExample(
-        hash.replace(`${node.dir.title.toLowerCase()}demo-`, "") as string
-      );
+      setActiveExample(navn);
     }
   }, [router, node]);
-
-  const fixName = (str: string) =>
-    capitalize(
-      str
-        .replace(/[^\wæøå]|_/g, " ")
-        .replace(/\s+/g, " ")
-        .trim()
-    ) ?? str;
 
   if (!node.dir?.filer || node.dir.filer.length === 0) {
     return null;
   }
 
-  const active = activeExample ?? node?.dir?.filer?.[0]?.navn;
+  const active = activeExample || node.dir?.filer?.[0]?.navn;
   const demoVariant = node.dir?.variant;
 
   return (
@@ -117,7 +108,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   );
                 }}
               >
-                {fixName(fil.title)}
+                {fil.title}
               </Chips.Toggle>
             ))}
           </Chips>
@@ -139,7 +130,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
             <>
               <div
                 className={cl(
-                  "overflow-hidden rounded-t-lg border border-b-0 border-gray-300 ",
+                  "overflow-hidden rounded-t-lg border border-b-0 border-gray-300",
                   {
                     "relative animate-pulse": unloaded,
                     "bg-gray-50": !unloaded,
@@ -147,22 +138,18 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                 )}
               >
                 <iframe
-                  src={`/${demoVariant}/${node.dir.title}/${fil.navn.replace(
-                    ".tsx",
-                    ""
-                  )}`}
+                  ref={iframeRef}
+                  src={`/${demoVariant}/${node.dir.title}/${fil.navn}`}
                   height={frameState}
-                  onLoad={() => handleExampleLoad()}
-                  id={iframeId}
-                  aria-label={`${node?.dir?.title} ${fil.navn} eksempel`}
+                  onLoad={handleExampleLoad}
+                  aria-label={`${node.dir?.title} ${fil.title} eksempel`}
+                  title="Demo"
                   className={cl(
                     "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                     {
                       invisible: unloaded,
                     }
                   )}
-                  title="Kode-eksempler"
-                  ref={iframeRef}
                 />
                 {unloaded && (
                   <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
@@ -200,9 +187,15 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   </div>
 
                   <HStack gap="2">
-                    {fil?.sandboxEnabled && (
-                      <Sandbox code={fil?.sandboxBase64} />
-                    )}
+                    <Button
+                      variant="tertiary-neutral"
+                      size="small"
+                      icon={<CodeIcon aria-hidden />}
+                      onClick={() => setShowCode(!showCode)}
+                    >
+                      {showCode ? "Skjul" : "Vis"} kode
+                    </Button>
+                    {fil.sandboxEnabled && <Sandbox code={fil.sandboxBase64} />}
                     <CodeSandbox code={fil.innhold.trim()} />
                     <Button
                       variant="tertiary-neutral"
@@ -221,11 +214,13 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                 </HStack>
               </div>
 
-              <SnippetLazy
-                node={{
-                  code: { code: fil.innhold.trim(), language: "tsx" },
-                }}
-              />
+              {showCode && (
+                <SnippetLazy
+                  node={{
+                    code: { code: fil.innhold.trim(), language: "tsx" },
+                  }}
+                />
+              )}
             </>
           )}
         </div>
