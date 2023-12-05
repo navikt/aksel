@@ -4,11 +4,8 @@ import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 
 const query = groq`
-*[_type == "aksel_artikkel" && defined(undertema)] {
+*[_type == "gp.tema" && count(*[references(^._id)]) > 0 && count(*[references(^._id) && _type == "gp.tema.undertema"])] {
   heading,
-  ingress ,
-  "undertema": undertema[]->title,
-  "innholdstype": innholdstype->title
 }
 `;
 
