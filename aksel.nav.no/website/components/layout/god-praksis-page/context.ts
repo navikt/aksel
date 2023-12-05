@@ -1,9 +1,11 @@
 import { createContext, useContext } from "react";
 import { GpFrontPageProps, GpTemaPageProps } from "./types";
 
-export const GpPageContext = createContext<GpFrontPageProps | GpTemaPageProps>(
-  null
-);
+type GpPageContextProps =
+  | (GpFrontPageProps & { type: "frontpage" })
+  | (GpTemaPageProps & { type: "tema-page" });
+
+export const GpPageContext = createContext<GpPageContextProps>(null);
 
 export function useGpPageContext() {
   const ctx = useContext(GpPageContext);

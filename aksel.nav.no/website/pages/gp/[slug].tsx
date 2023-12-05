@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
 const GpPage = (props: PageProps["props"]) => {
   return (
-    <GpPageContext.Provider value={props}>
+    <GpPageContext.Provider value={{ ...props, type: "tema-page" }}>
       <SEO
         title={props.tema.title ?? ""}
         /* description={page?.seo?.meta} */
