@@ -1,4 +1,3 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
 import { definePlugin } from "sanity";
 import { deskTool } from "sanity/desk";
 import { publicationFlow } from "../publication-flow";
@@ -21,13 +20,9 @@ export const godPraksisTaxonomy = definePlugin(() => {
           title: "Undertema",
           schemaType: "gp.tema.undertema",
           parameters: [{ name: "id", type: "string" }],
-          value: async (params, { getClient }) => {
-            const title = await getClient({
-              apiVersion: SANITY_API_VERSION,
-            }).fetch(`*[_id == $title][0].title`, { title: params.id });
+          value: async (params) => {
             return {
               tema: { _type: "reference", _ref: params.id },
-              labels: title ? [title] : [],
             };
           },
         },
