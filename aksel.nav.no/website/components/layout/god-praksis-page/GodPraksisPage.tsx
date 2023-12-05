@@ -23,7 +23,10 @@ function GodPraksisPage() {
                 erfaring som er nyttig for andre. Derfor deler vi god praksis
                 med hverandre her.
               </Hero>
-              <ChipNav />
+              <ChipNav
+                options={["WCAG", "Testing", "Kompetanse", "Retningslinjer"]}
+                type="innholdstype"
+              />
             </VStack>
             <ArticleList />
           </VStack>
