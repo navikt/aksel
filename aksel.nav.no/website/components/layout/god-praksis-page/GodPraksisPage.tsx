@@ -4,11 +4,14 @@ import Header from "@/layout/header/Header";
 import ArticleList from "./articles/ArticleList";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
-import { GpArticleListT, HeroNavT } from "./types";
+import { GpArticleListT, GpTemaT, HeroNavT } from "./types";
 
-type GodPraksisPageProps = GpArticleListT & HeroNavT;
+type GodPraksisPageProps = GpArticleListT &
+  HeroNavT & {
+    tema?: GpTemaT["tema"];
+  };
 
-function GodPraksisPage({ articles, heroNav }: GodPraksisPageProps) {
+function GodPraksisPage({ articles, heroNav, tema }: GodPraksisPageProps) {
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -21,10 +24,8 @@ function GodPraksisPage({ articles, heroNav }: GodPraksisPageProps) {
         <Page.Block width="xl" gutters>
           <VStack gap="10">
             <VStack gap="6">
-              <Hero heroNav={heroNav}>
-                Alle som jobber med produktutvikling i NAV sitter på kunnskap og
-                erfaring som er nyttig for andre. Derfor deler vi god praksis
-                med hverandre her.
+              <Hero heroNav={heroNav} tema={tema}>
+                {tema?.description}
               </Hero>
               <ChipNav
                 options={["WCAG", "Testing", "Kompetanse", "Retningslinjer"]}
