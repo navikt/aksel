@@ -1,5 +1,7 @@
 import cl from "clsx";
-import { useId, useState } from "react";
+import omit from "lodash/omit";
+import { useRouter } from "next/router";
+import { useId } from "react";
 import { Chips, HGrid, Label } from "@navikt/ds-react";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
@@ -9,18 +11,25 @@ type ChipsNavProps = {
   options: string[];
 };
 
-function ChipNav({ options }: ChipsNavProps) {
-  const [selected, setSelected] = useState<string | null>(null);
-
+function ChipNav({ options, type }: ChipsNavProps) {
   const id = useId();
 
+  const { query, replace } = useRouter();
   if (!options) {
     console.warn("Missing options");
     return null;
   }
 
-  function handleSelect(title) {
-    setSelected(title);
+  function handleSelect(title: string) {
+    if (query[type] === title) {
+      replace({ query: omit(query, [type]) }, undefined, {
+        shallow: true,
+      });
+      return;
+    }
+    replace({ query: { ...query, [type]: title } }, undefined, {
+      shallow: true,
+    });
   }
 
   return (
@@ -43,8 +52,8 @@ function ChipNav({ options }: ChipsNavProps) {
               <Chips.Toggle
                 variant="neutral"
                 checkmark={false}
-                selected={option === selected}
-                handleSelect={() => handleSelect(option)}
+                selected={encodeURIComponent(option) === query?.[type]}
+                onClick={() => handleSelect(encodeURIComponent(option))}
               >
                 {option}
               </Chips.Toggle>
