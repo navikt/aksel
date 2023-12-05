@@ -21,8 +21,14 @@
 }
 
 .navds-textarea__wrapper {
+  --__ac-textarea-height: initial;
+
   position: relative;
   min-width: 100%;
+}
+
+.navds-textarea__input:first-child {
+  height: var(--__ac-textarea-height);
 }
 
 .navds-textarea__input {

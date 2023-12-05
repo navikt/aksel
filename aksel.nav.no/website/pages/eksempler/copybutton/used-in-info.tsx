@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { Box, CopyButton, HGrid } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -22,6 +22,7 @@ const Row = ({ children, text }: any) => (
   </Box>
 );
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

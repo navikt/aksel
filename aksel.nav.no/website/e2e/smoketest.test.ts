@@ -1,7 +1,7 @@
-import { test, expect } from "@playwright/test";
-import urls from "./test-urls.json";
+import { expect, test } from "@playwright/test";
 import { getDirectories } from "../scripts/update-examples/parts/get-directories";
 import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-files";
+import urls from "./test-urls.json";
 
 test.describe("Smoketest all pages", () => {
   for (const url of urls) {
@@ -28,9 +28,8 @@ test.describe("Smoketest all pages", () => {
 
   test.describe("sandbox examples (just a few)", () => {
     const examples = getDirectories("eksempler");
-    const templates = getDirectories("templates");
 
-    const folders = [...examples, ...templates];
+    const folders = [...examples];
 
     const randomFolders = [folders[0], folders[20], folders[50]];
 

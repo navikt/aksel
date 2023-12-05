@@ -1,4 +1,3 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import {
   BodyShort,
   Box,
@@ -9,6 +8,7 @@ import {
   Show,
   VStack,
 } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -100,6 +100,7 @@ function Pictogram() {
   );
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "full",

@@ -184,9 +184,10 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         (e: FocusEvent) => {
           if (
             e.target instanceof HTMLElement &&
-            ![anchorEl, refs?.floating?.current].some((element) =>
+            ![anchorEl, refs.floating.current].some((element) =>
               element?.contains(e.target as Node)
-            )
+            ) &&
+            !e.target.contains(refs.floating.current)
           ) {
             open && onClose();
           }

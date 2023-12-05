@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { Box, Page } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -32,6 +32,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "full",
@@ -45,5 +46,5 @@ export const Demo = {
 export const args = {
   index: 6,
   title: "Maksbredde",
-  desc: "Width-prop på Page.Block sentrerer innhold og legger på maksbredde. I de fleste løsninger bør 2xl (1440px) være standard.",
+  desc: "Width-prop på Page.Block sentrerer innhold og legger på maksbredde.",
 };

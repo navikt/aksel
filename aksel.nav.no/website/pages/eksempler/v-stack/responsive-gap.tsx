@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { VStack } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -16,6 +16,7 @@ const Placeholder = () => {
   return <div className="aspect-square h-12 rounded bg-teal-500" />;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { showBreakpoints: true });
 
 /* Storybook story */

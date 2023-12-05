@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { BodyLong, Heading, Popover, Select } from "@navikt/ds-react";
 import { useState } from "react";
+import { BodyLong, Heading, Popover, Select } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [anchor, setAnchor] = useState<HTMLSelectElement>(null);
@@ -54,6 +54,7 @@ const options = [
   "left-end",
 ] as const;
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

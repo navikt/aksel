@@ -3,8 +3,18 @@ import path from "path";
 import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
 import { filterCode } from "./filter-code";
-import { sortResult } from "./sort";
 import { processAndCompressForURI } from "./sandbox-process-base64";
+import { sortResult } from "./sort";
+
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+const fixName = (str: string) =>
+  capitalize(
+    str
+      .replace(/[^\wæøå]|_/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+  ) ?? str;
 
 export function parseCodeFiles(
   dirName: string,
@@ -35,12 +45,12 @@ export function parseCodeFiles(
 
     return {
       innhold: code,
-      title: args?.title ?? file.replace(".tsx", ""),
+      title: args.title ?? fixName(file.replace(".tsx", "")),
       navn: file.replace(".tsx", ""),
-      description: args?.desc,
-      index: args?.index ?? 1,
+      description: args.desc,
+      index: args.index ?? 1,
       sandboxBase64: processAndCompressForURI(filterCode(code)),
-      sandboxEnabled: args?.sandbox ?? true,
+      sandboxEnabled: args.sandbox ?? true,
     };
   });
 

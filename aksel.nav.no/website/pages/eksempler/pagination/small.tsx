@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Pagination } from "@navikt/ds-react";
 import { useState } from "react";
+import { Pagination } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [pageState, setPageState] = useState(2);
@@ -16,6 +16,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

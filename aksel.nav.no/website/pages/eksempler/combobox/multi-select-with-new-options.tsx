@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { UNSAFE_Combobox } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -29,6 +29,7 @@ const initialOptions = [
   "wine",
 ];
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "static" });
 
 export const args = {

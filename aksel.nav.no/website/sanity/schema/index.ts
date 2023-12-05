@@ -1,9 +1,15 @@
 import { SchemaPluginOptions } from "sanity";
+import { GP_DOCUMENTS } from "../plugins/god-praksis-taxonomy";
 import * as document from "./documents";
 import * as object from "./objects";
+import { WorkspaceT } from "./util";
 
-export const schema: SchemaPluginOptions = {
+export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
+  workspace
+) => ({
   types: [
+    ...GP_DOCUMENTS,
+
     /* Documents */
     document.Editors,
     document.Forside,
@@ -29,7 +35,7 @@ export const schema: SchemaPluginOptions = {
 
     /* God-praksis */
     document.Tema,
-    document.GodPraksisArtikkel,
+    document.godPraksisArtikkel(workspace),
     document.GodPraksisLandingSide,
 
     /* Blogg */
@@ -78,4 +84,4 @@ export const schema: SchemaPluginOptions = {
     object.HeroBilde,
     object.InnholdsKort,
   ],
-};
+});

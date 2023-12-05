@@ -1,5 +1,3 @@
-import Footer from "@/layout/footer/Footer";
-import Header from "@/layout/header/Header";
 import {
   BodyShort,
   Box,
@@ -9,8 +7,10 @@ import {
   List,
   Page,
 } from "@navikt/ds-react";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
 
-export default function Example() {
+const Example = () => {
   return (
     <Page footer={<Footer />}>
       <Header />
@@ -38,7 +38,7 @@ export default function Example() {
       </Page.Block>
     </Page>
   );
-}
+};
 
 function StatusSvg() {
   return (
@@ -78,6 +78,9 @@ function StatusSvg() {
     </svg>
   );
 }
+
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default Example;
 
 export const args = {
   index: 5,

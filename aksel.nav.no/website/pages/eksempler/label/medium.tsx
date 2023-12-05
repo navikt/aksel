@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { Label } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const lorem =
@@ -8,6 +8,7 @@ const Example = () => {
   return <Label>{lorem}</Label>;
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */

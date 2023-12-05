@@ -1,7 +1,7 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Link } from "@navikt/ds-react";
-
 import NextLink from "next/link";
+import { Link } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
+
 const Example = () => (
   <Link as={NextLink} href="#">
     Lenke til ny side
@@ -26,6 +26,7 @@ const RemixExample = () => (
 
 */
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

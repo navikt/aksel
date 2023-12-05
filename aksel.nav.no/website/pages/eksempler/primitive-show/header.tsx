@@ -1,4 +1,3 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import {
   BellIcon,
   LeaveIcon,
@@ -7,6 +6,7 @@ import {
   PersonIcon,
 } from "@navikt/aksel-icons";
 import { BodyShort, Button, HStack, Show } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -71,6 +71,7 @@ function Logo() {
   );
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   variant: "full",
   showBreakpoints: true,

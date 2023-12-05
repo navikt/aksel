@@ -1,10 +1,12 @@
 import {
-  definePlugin,
   DocumentActionComponent,
   DocumentBadgeComponent,
+  definePlugin,
 } from "sanity";
+import { allArticleDocuments } from "@/sanity/config";
 import {
   createWrappedApproveAction,
+  createWrappedDefaultPublish,
   createWrappedDeleteAction,
   createWrappedDiscardChangesAction,
   createWrappedDuplicateAction,
@@ -12,9 +14,8 @@ import {
   createWrappedRestoreAction,
   createWrappedUnpublishAction,
   createWrappedUpdateAction,
-  createWrappedDefaultPublish,
 } from "./actions";
-import { createBadgeComponent, CreateStatusBadge } from "./badges";
+import { CreateStatusBadge, createBadgeComponent } from "./badges";
 
 const generateBadges = (prev: DocumentBadgeComponent[]) => {
   const defaultBadges = prev.map((badge: DocumentBadgeComponent) => {
@@ -63,7 +64,7 @@ interface PublicationFlowOptions {
   hasPublishedAt: string[];
 }
 
-export const publicationFlow = definePlugin<PublicationFlowOptions>(
+export const publicationFlowConfig = definePlugin<PublicationFlowOptions>(
   ({ hasQualityControl, hasPublishedAt }) => ({
     name: "publication-flow",
     document: {
@@ -77,6 +78,7 @@ export const publicationFlow = definePlugin<PublicationFlowOptions>(
             ? prev
             : [prev[0]];
         }
+
         return prev;
       },
       badges: (prev, { schemaType }) => {
@@ -88,3 +90,9 @@ export const publicationFlow = definePlugin<PublicationFlowOptions>(
     },
   })
 );
+
+export const publicationFlow = () =>
+  publicationFlowConfig({
+    hasQualityControl: ["komponent_artikkel", "ds_artikkel", "aksel_artikkel"],
+    hasPublishedAt: [...allArticleDocuments],
+  });

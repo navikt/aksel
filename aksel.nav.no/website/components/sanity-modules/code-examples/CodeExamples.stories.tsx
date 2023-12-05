@@ -1,5 +1,5 @@
-import { getKey } from "@/sb-util";
 import type { Meta, StoryObj } from "@storybook/react";
+import { getKey } from "@/sb-util";
 import CodeExample from "./CodeExamples";
 
 const meta = {
@@ -29,6 +29,7 @@ export const Designsystem: Story = {
             title: "title",
             index: 1,
             sandboxBase64: "fakebase64",
+            sandboxEnabled: true,
           },
           {
             _key: getKey(),

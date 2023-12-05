@@ -1,7 +1,7 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { DatePicker, useRangeDatepicker } from "@navikt/ds-react";
 import format from "date-fns/format";
 import nbLocale from "date-fns/locale/nb";
+import { DatePicker, useRangeDatepicker } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const { datepickerProps, toInputProps, fromInputProps, selectedRange } =
@@ -34,6 +34,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */
@@ -43,5 +44,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "Før du belger å bruke range, vurder om to enkelte datepickere for start/slutt-dato ville vært bedre. Range fungerer bedre for korte perioder innenfor en månede.",
+  desc: "Før du belger å bruke range, vurder om to enkelte datepickere for start/slutt-dato ville vært bedre. Range fungerer bedre for korte perioder innenfor en måned.",
 };

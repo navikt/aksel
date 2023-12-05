@@ -1,4 +1,3 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import {
   ArrowDownIcon,
   ArrowLeftIcon,
@@ -6,6 +5,7 @@ import {
   ArrowUpIcon,
 } from "@navikt/aksel-icons";
 import { Button, Tooltip } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -26,6 +26,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */
