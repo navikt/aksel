@@ -26,43 +26,33 @@ const onUpload = ({
   );
 };
 
-const onDelete = (file: FileItem) => alert(`Delete ${file.name}`)
-const onRetry = (file: FileItem) => alert(`Retry ${file.name}`)
-const fileTxt = new File(["abc".repeat(10000)], "file.txt")
-const filePng = new File(["abc".repeat(10000)], "file.png")
-const filePdf = new File(["abc".repeat(100000)], "file.pdf")
-const fileDocx = new File(["abc"], "file.docx")
-const fileXlsx = new File(["abc"], "file.xlsx")
-const fileCsv = new File(["abc"], "file.csv")
-const filePptx = new File(["abc"], "file.pptx")
-const fileWebp = new File(["abc"], "file.webp")
+const onDelete = (file: FileItem) => alert(`Delete ${file.name}`);
+const onRetry = (file: FileItem) => alert(`Retry ${file.name}`);
+const fileTxt = new File(["abc".repeat(10000)], "file.txt");
+const filePng = new File(["abc".repeat(10000)], "file.png");
+const filePdf = new File(["abc".repeat(100000)], "file.pdf");
+const fileDocx = new File(["abc"], "file.docx");
+const fileXlsx = new File(["abc"], "file.xlsx");
+const fileCsv = new File(["abc"], "file.csv");
+const filePptx = new File(["abc"], "file.pptx");
+const fileWebp = new File(["abc"], "file.webp");
 
 export const ListIcons = {
   render: () => (
     <FileUpload.List
-      label="Last opp filer"
+      label="Opplastede filer"
       error="hei jeg er en feil og jeg må rettes opp!"
     >
-      <FileUpload.Item
-        file={fileTxt}
-        error="Oopsann"
-      />
-      <FileUpload.Item
-        file={filePng}
-      />
-      <FileUpload.Item
-        file={filePdf}
-      />
+      <FileUpload.Item file={fileTxt} error="Oopsann" />
+      <FileUpload.Item file={filePng} />
+      <FileUpload.Item file={filePdf} />
       <FileUpload.Item
         file={fileDocx}
         onDelete={() => onDelete(fileDocx)}
         onRetry={() => onRetry(fileDocx)}
         isLoading
       />
-      <FileUpload.Item
-        file={fileXlsx}
-        onDelete={() => onDelete(fileXlsx)}
-      />
+      <FileUpload.Item file={fileXlsx} onDelete={() => onDelete(fileXlsx)} />
       <FileUpload.Item
         file={fileCsv}
         error="Åh nei!"
@@ -86,43 +76,43 @@ export const ListIcons = {
 export const ListDownloading = {
   render: () => (
     <FileUpload.List
-      label="Last opp filer"
+      label="Opplastede filer"
       error="hei jeg er en feil og jeg må rettes opp!"
     >
       <FileUpload.Item
         file={{
           name: "withOnClick.txt",
-          size: 35700
+          size: 35700,
         }}
         onClick={() => alert("onClick")}
       />
       <FileUpload.Item
         file={{
           name: "withOnClickAndDelete.txt",
-          size: 35700
+          size: 35700,
         }}
         onClick={() => alert("onClick")}
-        onDelete={() => onDelete({
-          name: "withOnClickAndDelete.txt",
-          size: 35700
-        })}
+        onDelete={() =>
+          onDelete({
+            name: "withOnClickAndDelete.txt",
+            size: 35700,
+          })
+        }
       />
       <FileUpload.Item
         file={{
           name: "withHref.txt",
-          size: 2000000
+          size: 2000000,
         }}
         href="https://www.nav.no"
       />
       <FileUpload.Item
         file={{
           name: "withoutHrefOrOnClick.txt",
-          size: 2000000
+          size: 2000000,
         }}
       />
-      <FileUpload.Item
-        file={fileTxt}
-      />
+      <FileUpload.Item file={fileTxt} />
     </FileUpload.List>
   ),
 };
