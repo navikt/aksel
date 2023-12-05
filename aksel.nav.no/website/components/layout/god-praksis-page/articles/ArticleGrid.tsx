@@ -2,7 +2,7 @@ import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { Box, Button, HGrid, HStack, Heading } from "@navikt/ds-react";
 import { ArticleCard } from "./ArticleCard";
 
-function ArticleGrid({ name }) {
+function ArticleGrid({ name, results }) {
   return (
     <>
       <style>
@@ -29,134 +29,14 @@ function ArticleGrid({ name }) {
         </HStack>
         <Box paddingBlock="5 0">
           <HGrid gap="6" columns={3}>
-            <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
-            />
-            <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
-            />
-            <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
-            />
-            <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
-            />
-            <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
-            />
-            <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
-            />
-            <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
-            />
-            <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
-            />
+            {results &&
+              results.map((article, idx) => (
+                <ArticleCard
+                  key={idx}
+                  title={article.heading}
+                  content={article.ingress}
+                />
+              ))}
           </HGrid>
         </Box>
       </Box>

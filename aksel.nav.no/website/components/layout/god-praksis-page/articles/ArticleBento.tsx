@@ -2,7 +2,7 @@ import { ArrowRightIcon } from "@navikt/aksel-icons";
 import { Box, Button, HGrid, HStack, Heading } from "@navikt/ds-react";
 import { ArticleCard } from "./ArticleCard";
 
-function ArticleBento({ name }) {
+function ArticleBento({ name, results }) {
   return (
     <>
       <Box>
@@ -22,54 +22,20 @@ function ArticleBento({ name }) {
         <Box paddingBlock="5 0">
           <HGrid gap="6" columns="1fr 1fr 1fr" className="aksel-bento">
             <ArticleCard
-              title="New things"
               main
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
+              title={results[0].heading}
+              content={results[0].ingress}
+              innholdstype={results[0].innholdstype}
+              undertema={results[0].undertema}
             />
 
             <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
+              title={results[1].heading}
+              content={results[1].ingress}
             />
             <ArticleCard
-              title="New things"
-              content={`Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage. Return to the fleet. What is the point of all this? We can't blow
-                up three tiny cruisers? They are faster and lighter, sir. They
-                can't lose us but they can keep at a range where, that our cannons
-                are not effective against their shields. Well, keep up the
-                barrage.`}
+              title={results[2].heading}
+              content={results[2].ingress}
             />
           </HGrid>
         </Box>

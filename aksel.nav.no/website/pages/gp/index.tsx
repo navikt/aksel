@@ -1,36 +1,34 @@
+import { groq } from "next-sanity";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { Heading } from "@navikt/ds-react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import Header from "@/layout/header/Header";
-import { NextPageT } from "@/types";
+import { getClient } from "@/sanity/client.server";
 
-type PageProps = NextPageT<{
-  /* page: AkselGodPraksisLandingPageDocT;
-  temaer: Array<AkselTemaT>; */
-}>;
+const query = groq`
+*[_type == "aksel_artikkel" && defined(undertema)] {
+  heading, 
+  ingress ,
+  "undertema": undertema[]->title,
+  "innholdstype": innholdstype->title
+}
+`;
 
-const query = ``;
-
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}): Promise<PageProps> => {
+export const getStaticProps: GetStaticProps = async (): Promise<any> => {
   /* const { temaer, page, resent } = await getClient().fetch(query); */
+
+  const results = await getClient().fetch(query);
 
   return {
     props: {
-      slug: "/gp",
-      preview,
-      title: "Forside God praksis",
-      id: "",
+      results,
     },
-    notFound: false,
-    revalidate: 60,
   };
 };
 
-const GPPage = (/* props: PageProps["props"] */) => {
-  return <GodPraksisPage />;
+const GPPage = ({ results }) => {
+  return <GodPraksisPage results={results} />;
 
   return (
     <>

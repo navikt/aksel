@@ -5,7 +5,7 @@ import ArticleList from "./articles/ArticleList";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
 
-function GodPraksisPage() {
+function GodPraksisPage({ results }) {
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -28,7 +28,7 @@ function GodPraksisPage() {
                 type="innholdstype"
               />
             </VStack>
-            <ArticleList />
+            <ArticleList results={results} />
           </VStack>
         </Page.Block>
       </Box>
