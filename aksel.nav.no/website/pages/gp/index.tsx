@@ -27,7 +27,6 @@ export const getServerSideProps: GetServerSideProps = async (
   return {
     props: {
       results,
-      slug: ctx.params.slug as string,
       preview: ctx.preview ?? false,
       id: "",
       title: "",
