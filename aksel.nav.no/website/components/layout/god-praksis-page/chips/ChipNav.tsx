@@ -42,10 +42,7 @@ function ChipNav({ options, type }: ChipsNavProps) {
         <ScrollFade wrapperId={id} />
         <ul
           id={id}
-          className={cl(
-            "overflow-x-scroll flex gap-2 overscroll-contain",
-            styles.chips
-          )}
+          className={cl("overflow-x-scroll flex gap-2 p-1", styles.chips)}
         >
           {options.map((option) => (
             <li key={option}>
