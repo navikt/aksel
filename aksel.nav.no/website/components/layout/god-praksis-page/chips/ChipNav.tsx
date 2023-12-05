@@ -21,15 +21,9 @@ function ChipNav({ options, type }: ChipsNavProps) {
   }
 
   function handleSelect(title: string) {
-    if (query[type] === title) {
-      replace({ query: omit(query, [type]) }, undefined, {
-        shallow: true,
-      });
-      return;
-    }
-    replace({ query: { ...query, [type]: title } }, undefined, {
-      shallow: true,
-    });
+    query[type] === title
+      ? replace({ query: omit(query, [type]) }, undefined)
+      : replace({ query: { ...query, [type]: title } });
   }
 
   return (

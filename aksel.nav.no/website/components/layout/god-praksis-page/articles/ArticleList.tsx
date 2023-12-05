@@ -2,6 +2,9 @@ import ArticleBento from "./ArticleBento";
 import ArticleGrid from "./ArticleGrid";
 
 function ArticleList({ results }) {
+  if (!results || results.length === 0) {
+    return null;
+  }
   console.log("### ", { results });
 
   // TODO: filter results into two lists (popular and latest)
