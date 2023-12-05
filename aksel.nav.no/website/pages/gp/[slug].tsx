@@ -2,19 +2,22 @@ import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
+import { GpPageContext } from "@/layout/god-praksis-page/context";
 import {
   heroNavQuery,
   innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
   GpInnholdstypeT,
+  GpTemaPageProps,
   GpTemaT,
   HeroNavT,
 } from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
+import { SEO } from "@/web/seo/SEO";
 
-type PageProps = NextPageT<HeroNavT & GpTemaT & GpInnholdstypeT>;
+type PageProps = NextPageT<GpTemaPageProps>;
 
 const query = groq`
 {
@@ -53,14 +56,21 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-const GPPage = ({ heroNav, tema, innholdstype }: PageProps["props"]) => {
+const GpPage = (props: PageProps["props"]) => {
   return (
-    <GodPraksisPage
-      articles={[]}
-      heroNav={heroNav}
-      tema={tema}
-      innholdstype={innholdstype}
-    />
+    <GpPageContext.Provider value={props}>
+      <SEO
+        title={props.tema.title ?? ""}
+        /* description={page?.seo?.meta} */
+        /* image={page?.seo?.image} */
+      />
+      <GodPraksisPage
+        articles={[]}
+        heroNav={props.heroNav}
+        tema={props.tema}
+        innholdstype={props.innholdstype}
+      />
+    </GpPageContext.Provider>
   );
 };
 
@@ -69,13 +79,13 @@ const WithPreview = lazy(() => import("@/preview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <Suspense fallback={<GPPage {...props} />}>
-        <WithPreview comp={GPPage} query={query} props={props} />
+      <Suspense fallback={<GpPage {...props} />}>
+        <WithPreview comp={GpPage} query={query} props={props} />
       </Suspense>
     );
   }
 
-  return <GPPage {...props} />;
+  return <GpPage {...props} />;
 };
 
 export default Wrapper;

@@ -30,3 +30,7 @@ export type GpInnholdstypeT = {
     description?: string;
   }[];
 };
+
+export type GpFrontPageProps = GpArticleListT & HeroNavT & GpInnholdstypeT;
+
+export type GpTemaPageProps = HeroNavT & GpTemaT & GpInnholdstypeT;
