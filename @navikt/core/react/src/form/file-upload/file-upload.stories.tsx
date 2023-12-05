@@ -91,32 +91,32 @@ export const ListDownloading = {
     >
       <FileUpload.Item
         file={{
-          name: "withOnClick.docx",
+          name: "withOnClick.txt",
           size: 35700
         }}
         onClick={() => alert("onClick")}
       />
       <FileUpload.Item
         file={{
-          name: "withOnClickAndDelete.docx",
+          name: "withOnClickAndDelete.txt",
           size: 35700
         }}
         onClick={() => alert("onClick")}
         onDelete={() => onDelete({
-          name: "withOnClickAndDelete.docx",
+          name: "withOnClickAndDelete.txt",
           size: 35700
         })}
       />
       <FileUpload.Item
         file={{
-          name: "withHref.docx",
+          name: "withHref.txt",
           size: 2000000
         }}
         href="https://www.nav.no"
       />
       <FileUpload.Item
         file={{
-          name: "withHref.docx",
+          name: "withoutHrefOrOnClick.txt",
           size: 2000000
         }}
       />
