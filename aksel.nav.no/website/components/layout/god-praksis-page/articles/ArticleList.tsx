@@ -5,9 +5,7 @@ function ArticleList({ results }) {
   if (!results || results.length === 0) {
     return null;
   }
-  console.log("### ", { results });
 
-  // TODO: filter results into two lists (popular and latest)
   const popular = results.slice(0, 3);
   const latest = results.slice(3);
 

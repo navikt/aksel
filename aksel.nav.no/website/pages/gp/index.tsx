@@ -20,9 +20,9 @@ const query = groq`
     heading,
     ingress ,
     "undertema": undertema[]->title,
-    "innholdstype": innholdstype->title
+    "innholdstype": innholdstype->title,
+    slug
   }
-}
 `;
 
 export const getServerSideProps: GetServerSideProps = async (

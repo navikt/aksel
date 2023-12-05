@@ -10,12 +10,14 @@ const trunc = (text, num_chars) => {
 export const ArticleCard = ({
   title,
   content,
+  slug,
   main = false,
   innholdstype,
   undertema,
 }: {
   title: string;
   content: string;
+  slug: any; // TODO: types
   main?: boolean;
   innholdstype?: string;
   undertema?: string;
@@ -37,7 +39,7 @@ export const ArticleCard = ({
       </style>
       <Box
         as="a"
-        href="#"
+        href={`./${slug.current}`}
         className={clsx("gp-article-card", main && "gp-article-card-main")}
         paddingBlock="10"
         paddingInline="10"
@@ -45,16 +47,27 @@ export const ArticleCard = ({
         background="surface-default"
         shadow="xsmall"
       >
-        <VStack justify="space-between">
-          <Box>
-            <Heading size={main ? "xlarge" : "medium"}>{title}</Heading>
-            <BodyLong>
+        <VStack justify="space-between" className="min-h-full">
+          <Box paddingBlock="0 5">
+            <Heading className="inner-shiny" size={main ? "xlarge" : "medium"}>
+              <span className="shiny">{title}</span>
+            </Heading>
+
+            <BodyLong size={main ? "large" : "small"}>
               {main ? trunc(content, 770) : trunc(content, 100)}
             </BodyLong>
           </Box>
           <HStack gap="2">
-            {undertema && <Tag variant="success">{undertema}</Tag>}
-            {innholdstype && <Tag variant="error">{innholdstype}</Tag>}
+            {undertema && (
+              <Tag variant="success" size={main ? "medium" : "xsmall"}>
+                {undertema}
+              </Tag>
+            )}
+            {innholdstype && (
+              <Tag variant="error" size={main ? "medium" : "xsmall"}>
+                {innholdstype}
+              </Tag>
+            )}
           </HStack>
         </VStack>
       </Box>

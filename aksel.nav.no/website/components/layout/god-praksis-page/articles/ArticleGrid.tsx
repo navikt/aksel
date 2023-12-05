@@ -35,6 +35,9 @@ function ArticleGrid({ name, results }) {
                   key={idx}
                   title={article.heading}
                   content={article.ingress}
+                  innholdstype={article.innholdstype}
+                  undertema={article.undertema}
+                  slug={article.slug}
                 />
               ))}
           </HGrid>
