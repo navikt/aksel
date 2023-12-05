@@ -1,10 +1,10 @@
+import { AppProps } from "next/app";
+import { useEffect } from "react";
+import { hotjar } from "react-hotjar";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { SanityDocIdContext } from "@/hooks/useSanityDocId";
 import { useAmplitudeInit } from "@/logging";
 import { BaseSEO } from "@/web/seo/BaseSEO";
-import { AppProps } from "next/app";
-import { useEffect } from "react";
-import { hotjar } from "react-hotjar";
 import "../components/styles/index.css";
 
 function App({ Component, pageProps, router }: AppProps) {
@@ -14,6 +14,10 @@ function App({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
     window.location.host === "design.nav.no" &&
       window.location.replace(`http://aksel.nav.no`);
+
+    !window.location.pathname.startsWith("/templates/") &&
+      !window.location.pathname.startsWith("/eksempler/") &&
+      document.body.classList.add("globalstyles");
 
     hotjar.initialize(148751, 6);
   }, []);
