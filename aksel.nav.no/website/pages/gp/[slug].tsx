@@ -66,7 +66,6 @@ const GpPage = (props: PageProps["props"]) => {
       />
       <GodPraksisPage
         articles={[]}
-        heroNav={props.heroNav}
         tema={props.tema}
         innholdstype={props.innholdstype}
       />
