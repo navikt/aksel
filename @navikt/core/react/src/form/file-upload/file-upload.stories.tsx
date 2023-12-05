@@ -37,7 +37,7 @@ const fileCsv = new File(["abc"], "file.csv")
 const filePptx = new File(["abc"], "file.pptx")
 const fileWebp = new File(["abc"], "file.webp")
 
-export const List = {
+export const ListIcons = {
   render: () => (
     <FileUpload.List
       label="Last opp filer"
@@ -83,7 +83,7 @@ export const List = {
   ),
 };
 
-export const ListWithDownloading = {
+export const ListDownloading = {
   render: () => (
     <FileUpload.List
       label="Last opp filer"
@@ -113,6 +113,12 @@ export const ListWithDownloading = {
           size: 2000000
         }}
         href="https://www.nav.no"
+      />
+      <FileUpload.Item
+        file={{
+          name: "withHref.docx",
+          size: 2000000
+        }}
       />
       <FileUpload.Item
         file={fileTxt}
