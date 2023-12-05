@@ -4,10 +4,10 @@ import { BodyLong, Box, Heading, Select, VStack } from "@navikt/ds-react";
 
 type HeroProps = {
   children?: string;
-  tema: { title: string; slug: { current: string } }[];
+  temaList: { title: string; slug: { current: string } }[];
 };
 
-function Hero({ children, tema }: HeroProps) {
+function Hero({ children, temaList }: HeroProps) {
   const router = useRouter();
 
   return (
@@ -34,7 +34,7 @@ function Hero({ children, tema }: HeroProps) {
           defaultValue={router.query.slug ?? ""}
         >
           <option value="">Alle sider</option>
-          {tema.map((x) => (
+          {temaList.map((x) => (
             <option value={x.slug.current} key={x.slug.current}>
               {x.title}
             </option>

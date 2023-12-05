@@ -8,7 +8,7 @@ import { getClient } from "@/sanity/client.server";
 
 const query = groq`
 {
-  "tema": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]) > 0]{
+  "temaList": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]) > 0]{
     title,
     slug,
   },
@@ -25,12 +25,12 @@ const query = groq`
 export const getServerSideProps: GetServerSideProps = async (
   ctx
 ): Promise<any> => {
-  const { tema, articles } = await getClient().fetch(query);
+  const { temaList, articles } = await getClient().fetch(query);
 
   return {
     props: {
       results: articles,
-      tema,
+      temaList,
       preview: ctx.preview ?? false,
       id: "",
       title: "",
@@ -39,8 +39,8 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-const GPPage = ({ results, tema }) => {
-  return <GodPraksisPage results={results} tema={tema} />;
+const GPPage = ({ results, temaList }) => {
+  return <GodPraksisPage results={results} temaList={temaList} />;
 
   return (
     <>
