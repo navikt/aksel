@@ -38,6 +38,7 @@ function ArticleGrid({ name, results }) {
                   innholdstype={article.innholdstype}
                   undertema={article.undertema}
                   slug={article.slug}
+                  isNew={article.isNew}
                 />
               ))}
           </HGrid>
