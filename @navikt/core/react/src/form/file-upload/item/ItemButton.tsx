@@ -20,14 +20,14 @@ const ItemButton = () => {
   if (error && onRetry) {
     return <Button
       variant={variant}
-      onClick={() => onRetry?.(file)}
+      onClick={() => onRetry?.()}
       icon={<ArrowsCirclepathIcon focusable={false} aria-label={`Prøv å laste opp filen ${file.name} på nytt`} />}
     />
   }
   if (onDelete) {
     return <Button
       variant={variant}
-      onClick={() => onDelete?.(file)}
+      onClick={() => onDelete?.()}
       icon={<TrashIcon focusable={false} aria-label={`Slett ${file.name}`} />}
     />
   }

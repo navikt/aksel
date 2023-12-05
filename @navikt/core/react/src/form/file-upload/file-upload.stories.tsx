@@ -28,7 +28,7 @@ const onUpload = ({
 
 const onDelete = (file: FileItem) => alert(`Delete ${file.name}`)
 const onRetry = (file: FileItem) => alert(`Retry ${file.name}`)
-const fileTxt = new File(["abc".repeat(10000)], "file.docx")
+const fileTxt = new File(["abc".repeat(10000)], "file.txt")
 const filePng = new File(["abc".repeat(10000)], "file.png")
 const filePdf = new File(["abc".repeat(100000)], "file.pdf")
 const fileDocx = new File(["abc"], "file.docx")
@@ -83,41 +83,43 @@ export const List = {
   ),
 };
 
-// export const ListWithDownloading = {
-//   render: () => (
-//     <FileUpload.List
-//       label="Last opp filer"
-//       error="hei jeg er en feil og jeg må rettes opp!"
-//     >
-//       <FileUpload.Item
-//         file={{
-//           name: "withOnClick.docx",
-//           size: 35700
-//         }}
-//         onClick={(file) => alert(`onClick ${file.name}`)}
-//       />
-//       <FileUpload.Item
-//         file={{
-//           name: "withOnClickAndDelete.docx",
-//           size: 35700
-//         }}
-//         onClick={(file) => alert(`onClick ${file.name}`)}
-//         onDelete={onDelete}
-//       />
-//       <FileUpload.Item
-//         file={{
-//           name: "withHref.docx",
-//           size: 2000000
-//         }}
-//         href="https://www.nav.no"
-//       />
-//       <FileUpload.Item
-//         file={filePdf}
-//         onClick={2}
-//       />
-//     </FileUpload.List>
-//   ),
-// };
+export const ListWithDownloading = {
+  render: () => (
+    <FileUpload.List
+      label="Last opp filer"
+      error="hei jeg er en feil og jeg må rettes opp!"
+    >
+      <FileUpload.Item
+        file={{
+          name: "withOnClick.docx",
+          size: 35700
+        }}
+        onClick={() => alert("onClick")}
+      />
+      <FileUpload.Item
+        file={{
+          name: "withOnClickAndDelete.docx",
+          size: 35700
+        }}
+        onClick={() => alert("onClick")}
+        onDelete={() => onDelete({
+          name: "withOnClickAndDelete.docx",
+          size: 35700
+        })}
+      />
+      <FileUpload.Item
+        file={{
+          name: "withHref.docx",
+          size: 2000000
+        }}
+        href="https://www.nav.no"
+      />
+      <FileUpload.Item
+        file={fileTxt}
+      />
+    </FileUpload.List>
+  ),
+};
 
 export const Dropzone = {
   render: () => (

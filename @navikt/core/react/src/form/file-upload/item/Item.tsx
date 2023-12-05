@@ -39,8 +39,11 @@ export interface FileMetadataWithOnClick extends BaseFileItemProps {
 
 export type FileItemProps = BaseFileItemProps | FileMetadataWithHref | FileMetadataWithOnClick
 
-export const Item =   (
-    {
+export const Item = forwardRef<HTMLLIElement, FileItemProps>((
+    props: FileItemProps,
+    ref
+) => {
+    const {
       file,
       isLoading,
       onDelete,
@@ -48,8 +51,7 @@ export const Item =   (
       error,
       className,
       locale = "nb"
-    }: FileItemProps
-  ) => {
+    } = props
     const context = useContext(FileListContext)
 
     if (context == null) {
@@ -65,10 +67,11 @@ export const Item =   (
         onDelete,
         onRetry,
         locale: locale || context.locale,
-        href: undefined,
-        onClick: undefined
+        href: "href" in props ? props.href : undefined,
+        onClick: "onClick" in props ? props.onClick : undefined
       }}>
         <li
+          ref={ref}
           className={cl("navds-fileitem", className, {
             "navds-fileitem--error": !!error
           })}
@@ -84,7 +87,7 @@ export const Item =   (
         </li>
       </ItemContext.Provider>
     )
-  }
-;
+  })
+
 
 export default Item;
