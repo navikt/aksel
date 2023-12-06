@@ -218,9 +218,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             <Button
               className="navds-file-dropzone__content-zone-button"
               variant="secondary"
-              onClick={() => {
-                onButtonClick();
-              }}
+              onClick={onButtonClick}
               tabIndex={-1}
             >
               {getButtonText(locale)}
