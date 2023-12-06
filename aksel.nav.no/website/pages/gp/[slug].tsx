@@ -2,15 +2,14 @@ import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
-import { GpPageContext } from "@/layout/god-praksis-page/context";
 import {
   heroNavQuery,
   innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
   GpArticleListT,
+  GpEntryPageProps,
   GpInnholdstypeT,
-  GpTemaPageProps,
   GpTemaT,
   HeroNavT,
 } from "@/layout/god-praksis-page/types";
@@ -18,7 +17,7 @@ import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
 
-type PageProps = NextPageT<GpTemaPageProps>;
+type PageProps = NextPageT<GpEntryPageProps>;
 
 const query = groq`
 {
@@ -64,8 +63,8 @@ export const getServerSideProps: GetServerSideProps = async (
         },
       ],
       tema,
-      heroNav,
-      innholdstype,
+      heroNav: heroNav.filter((x) => x.refs?.length > 0),
+      innholdstype: innholdstype.filter((x) => x.refs?.length > 0),
       slug: ctx.params.slug as string,
       preview: ctx.preview ?? false,
       id: "",
@@ -77,14 +76,14 @@ export const getServerSideProps: GetServerSideProps = async (
 
 const GpPage = (props: PageProps["props"]) => {
   return (
-    <GpPageContext.Provider value={{ ...props, type: "tema-page" }}>
+    <>
       <SEO
         title={props.tema.title ?? ""}
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />
-      <GodPraksisPage />
-    </GpPageContext.Provider>
+      <GodPraksisPage {...props} type="tema-page" />
+    </>
   );
 };
 
@@ -94,7 +93,14 @@ const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <Suspense fallback={<GpPage {...props} />}>
-        <WithPreview comp={GpPage} query={query} props={props} />
+        <WithPreview
+          comp={GpPage}
+          query={query}
+          props={props}
+          params={{
+            slug: props?.slug,
+          }}
+        />
       </Suspense>
     );
   }

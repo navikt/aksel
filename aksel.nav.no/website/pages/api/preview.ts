@@ -24,6 +24,7 @@ const landingPages = [
   "produktbloggen",
   "prinsipper",
   "monster-maler",
+  "gp",
 ];
 
 export default async function preview(
@@ -51,17 +52,19 @@ export default async function preview(
   }
 
   // Check if the article with the given `slug` exists
-  const { article, godpraksis } = await previewClient.fetch(
+  const { article, godpraksis, gp } = await previewClient.fetch(
     `{"article": *[slug.current == $slug][0].slug.current,
-    "godpraksis": *[slug.current == $gp && _type == "aksel_tema"][0].slug.current}`,
+    "godpraksis": *[slug.current == $godPraksis && _type == "aksel_tema"][0].slug.current},
+    "gp": *[slug.current == $gp && _type == "gp.tema"][0].slug.current}`,
     {
       slug,
-      gp: slug.replace("god-praksis/", ""),
+      godPraksis: slug.replace("god-praksis/", ""),
+      gp: slug.replace("gp/", ""),
     }
   );
 
   // If the slug doesn't exist prevent preview mode from being enabled
-  if (!article && !godpraksis) {
+  if (!article && !godpraksis && !gp) {
     return res.status(401).json({ message: "Invalid slug" });
   }
 
@@ -69,6 +72,8 @@ export default async function preview(
     return redirectToPreview(res, `/${article}`);
   } else if (godpraksis) {
     return redirectToPreview(res, `/god-praksis/${godpraksis}`);
+  } else if (gp) {
+    return redirectToPreview(res, `/gp/${gp}`);
   }
 
   // Redirect to the path from the fetched article

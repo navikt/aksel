@@ -2,14 +2,13 @@ import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
-import { GpPageContext } from "@/layout/god-praksis-page/context";
 import {
   heroNavQuery,
   innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
   GpArticleListT,
-  GpFrontPageProps,
+  GpEntryPageProps,
   GpInnholdstypeT,
   HeroNavT,
 } from "@/layout/god-praksis-page/types";
@@ -17,7 +16,7 @@ import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
 
-type PageProps = NextPageT<GpFrontPageProps>;
+type PageProps = NextPageT<GpEntryPageProps>;
 
 const query = groq`
 {
@@ -46,14 +45,15 @@ export const getServerSideProps: GetServerSideProps = async (
 
   return {
     props: {
+      tema: null,
       views: [
         {
           title: "Siste",
           articles,
         },
       ],
-      heroNav,
-      innholdstype,
+      heroNav: heroNav.filter((x) => x.refs?.length > 0),
+      innholdstype: innholdstype.filter((x) => x.refs?.length > 0),
       preview: ctx.preview ?? false,
       id: "",
       title: "",
@@ -64,14 +64,14 @@ export const getServerSideProps: GetServerSideProps = async (
 
 const GpPage = (props: PageProps["props"]) => {
   return (
-    <GpPageContext.Provider value={{ ...props, type: "frontpage" }}>
+    <>
       <SEO
         title="God praksis"
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />
-      <GodPraksisPage />
-    </GpPageContext.Provider>
+      <GodPraksisPage {...props} type="frontpage" />
+    </>
   );
 };
 

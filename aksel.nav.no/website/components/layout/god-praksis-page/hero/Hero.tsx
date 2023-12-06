@@ -1,12 +1,10 @@
 import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong, Box, Heading, Select, VStack } from "@navikt/ds-react";
-import { useGpPageContext } from "@/layout/god-praksis-page/context";
+import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/types";
 
-function Hero() {
+function Hero({ tema, heroNav }: GpTemaT & HeroNavT) {
   const router = useRouter();
-
-  const ctx = useGpPageContext();
 
   return (
     <Box
@@ -22,25 +20,23 @@ function Hero() {
           as="button"
           className="py-2 pl-6 pr-4 text-aksel-heading bg-surface-subtle flex gap-2 items-center rounded-full shadow-xsmall"
         >
-          {ctx.type === "frontpage" ? "Alle tema" : ctx.tema.title}
+          {tema ? tema.title : "Alle tema"}
           <ChevronDownIcon aria-hidden className="shrink-0 w-12 h-12" />
         </Heading>
         <Select
           label="Tema"
           hideLabel
           onChange={(e) => router.push(`/gp/${e.target.value}`)}
-          defaultValue={ctx.type === "frontpage" ? "" : ctx.tema?.slug}
+          defaultValue={tema ? tema.slug : ""}
         >
           <option value="">Alle sider</option>
-          {ctx.heroNav.map((x) => (
+          {heroNav.map((x) => (
             <option value={x.slug} key={x.slug}>
               {x.title}
             </option>
           ))}
         </Select>
-        {ctx.type === "tema-page" && ctx.tema.description && (
-          <BodyLong>{ctx.tema.description}</BodyLong>
-        )}
+        {tema?.description && <BodyLong>{tema.description}</BodyLong>}
       </VStack>
       <Cube />
     </Box>

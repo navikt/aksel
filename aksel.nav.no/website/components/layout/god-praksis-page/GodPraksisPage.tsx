@@ -1,11 +1,14 @@
 import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
+import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
 import Header from "@/layout/header/Header";
 import ArticleList from "./articles/ArticleList";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
 
-function GodPraksisPage() {
+function GodPraksisPage(
+  props: GpEntryPageProps & { type: "frontpage" | "tema-page" }
+) {
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -18,13 +21,21 @@ function GodPraksisPage() {
         <Page.Block width="xl" gutters>
           <VStack gap="10">
             <VStack gap="6">
-              <Hero />
+              <Hero tema={props.tema} heroNav={props.heroNav} />
               <VStack gap="4">
-                <ChipNav type="undertema" />
-                <ChipNav type="innholdstype" />
+                {props.tema && (
+                  <ChipNav
+                    type="undertema"
+                    options={props.tema.undertema.map((ut) => ut.title)}
+                  />
+                )}
+                <ChipNav
+                  type="innholdstype"
+                  options={props.innholdstype.map((i) => i.title)}
+                />
               </VStack>
             </VStack>
-            <ArticleList />
+            <ArticleList views={props.views} />
           </VStack>
         </Page.Block>
       </Box>

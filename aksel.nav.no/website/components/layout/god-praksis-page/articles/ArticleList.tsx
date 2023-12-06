@@ -1,18 +1,16 @@
-import { useGpPageContext } from "@/layout/god-praksis-page/context";
+import { GpArticleViews } from "@/layout/god-praksis-page/types";
 import ArticleGrid from "./ArticleGrid";
 
 const markRandomAsNew = (articles) => {
   return [...articles].map((a) => ({ ...a, isNew: Math.random() > 0.5 }));
 };
 
-function ArticleList() {
-  const ctx = useGpPageContext();
-
+function ArticleList({ views }: GpArticleViews) {
   return (
     <>
       {/* <ArticleBento name="Populære" articles={latest} /> */}
 
-      {ctx.views.map((view) => (
+      {views.map((view) => (
         <ArticleGrid
           key={view.title}
           name={view.title}

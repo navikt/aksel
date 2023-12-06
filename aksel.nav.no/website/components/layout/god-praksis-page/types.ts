@@ -2,6 +2,7 @@ export type HeroNavT = {
   heroNav: {
     title: string;
     slug: string;
+    refs: string[];
   }[];
 };
 
@@ -21,13 +22,14 @@ export type GpTemaT = {
     slug: string;
     description?: string;
     undertema: { title: string; description: string }[];
-  };
+  } | null;
 };
 
 export type GpInnholdstypeT = {
   innholdstype: {
     title: string;
     description?: string;
+    refs: string[];
   }[];
 };
 
@@ -37,9 +39,7 @@ export type GpArticleViews = {
   } & GpArticleListT)[];
 };
 
-export type GpFrontPageProps = HeroNavT & GpInnholdstypeT & GpArticleViews;
-
-export type GpTemaPageProps = HeroNavT &
-  GpTemaT &
+export type GpEntryPageProps = HeroNavT &
   GpInnholdstypeT &
-  GpArticleViews;
+  GpArticleViews &
+  GpTemaT;
