@@ -1,8 +1,8 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import React, { useState, useId, useMemo } from "react";
-import { userEvent, within } from "@storybook/testing-library";
-import { Chips, UNSAFE_Combobox, ComboboxProps, TextField } from "../../index";
 import { expect, jest } from "@storybook/jest";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/testing-library";
+import React, { useId, useMemo, useState } from "react";
+import { Chips, ComboboxProps, TextField, UNSAFE_Combobox } from "../../index";
 
 export default {
   title: "ds-react/Combobox",
@@ -38,10 +38,15 @@ Default.args = {
   label: "Hva er dine favorittfrukter?",
   shouldAutocomplete: true,
   isLoading: false,
+  isMultiSelect: false,
+  allowNewValues: false,
 };
 Default.argTypes = {
   isListOpen: {
     control: { type: "boolean" },
+  },
+  maxSelectedOptions: {
+    control: { type: "number" },
   },
   size: {
     options: ["medium", "small"],
