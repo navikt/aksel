@@ -9,7 +9,6 @@ import Hero from "./hero/Hero";
 function GodPraksisPage(
   props: GpEntryPageProps & { type: "frontpage" | "tema-page" }
 ) {
-  console.log(props);
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page

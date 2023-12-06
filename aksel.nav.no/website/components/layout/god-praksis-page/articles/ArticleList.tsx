@@ -1,3 +1,4 @@
+import ErrorBoundary from "@/error-boundary";
 import { GpArticleViews } from "@/layout/god-praksis-page/types";
 import ArticleGrid from "./ArticleGrid";
 
@@ -21,4 +22,10 @@ function ArticleList({ views }: GpArticleViews) {
   );
 }
 
-export default ArticleList;
+export default function Component(props: GpArticleViews) {
+  return (
+    <ErrorBoundary boundaryName="Accordion">
+      <ArticleList {...props} />
+    </ErrorBoundary>
+  );
+}

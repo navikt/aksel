@@ -1,9 +1,6 @@
 import clsx from "clsx";
-import dynamic from "next/dynamic";
 
-export const Sticker = dynamic(() => Promise.resolve(_Sticker), { ssr: false });
-
-const _Sticker = ({ text = "NEW!", large = false }) => {
+const Sticker = ({ text = "NEW!", large = false }) => {
   return (
     <>
       <style>
@@ -47,3 +44,5 @@ const _Sticker = ({ text = "NEW!", large = false }) => {
     </>
   );
 };
+
+export default Sticker;

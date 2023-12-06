@@ -1,6 +1,10 @@
 import clsx from "clsx";
+import dynamic from "next/dynamic";
 import { BodyLong, Box, HStack, Heading, Tag, VStack } from "@navikt/ds-react";
-import { Sticker } from "./Sticker";
+
+const Sticker = dynamic(() => import("./Sticker"), {
+  ssr: false,
+});
 
 const trunc = (text, num_chars) => {
   return `${text.substring(0, num_chars)}${
