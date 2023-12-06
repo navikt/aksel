@@ -11,27 +11,24 @@ export default async function gpAarticles(
 
   const page = Number(req.query.page);
 
-  if (!page) {
+  if (!page && page !== 0) {
     return res
       .status(400)
       .json({ message: "Missing page param for pagination" });
   }
 
-  const query = `{
-    "articles": *[_type == "aksel_artikkel" && defined(undertema)][$start...$end] | order(publishedAt desc){
-      heading,
-      ingress ,
-      "undertema": undertema[]->title,
-      "innholdstype": innholdstype->title,
-      "slug": slug.current
-    },
-    "completed": count(*[_type == "aksel_artikkel" && defined(undertema)]) <= $end
-    }`;
+  const query = `*[_type == "aksel_artikkel" && defined(undertema)] | order(publishedAt desc)[$start...$end]{
+    heading,
+    ingress ,
+    "undertema": undertema[]->title,
+    "innholdstype": innholdstype->title,
+    "slug": slug.current
+  }`;
 
   let payload;
 
   await getClient()
-    .fetch(query, { start: page * 9, end: (page + 1) * 9 })
+    .fetch(query, { start: page * 3, end: (page + 1) * 3 })
     .then((data) => {
       payload = data;
     })
@@ -39,7 +36,6 @@ export default async function gpAarticles(
       console.log("Error message: ", err.message);
       return res.status(500).json({ message: "Failed to load data" });
     });
-  console.log(payload);
 
   return res.status(200).json(payload);
 }
