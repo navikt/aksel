@@ -66,6 +66,43 @@ export const ListIcons: StoryObj<ListStoryProps> = {
   },
 };
 
+export const ListWithBreaking: StoryObj<ListStoryProps> = {
+  render: (props) => {
+    const metadataFile = {
+      name: "imafilewithanamethatistoolong.txt",
+    };
+    const nativeFile = new File(["a"], "imafilewithanamethatistoolong.png");
+    const error = "imaverylongerrorandyoushouldfixme!";
+    return (
+      <div style={{ maxWidth: "200px" }}>
+        <FileUpload.List label={props.label}>
+          <FileUpload.Item file={metadataFile} />
+          <FileUpload.Item
+            file={metadataFile}
+            error={error}
+            onDelete={() => {}}
+          />
+          <FileUpload.Item
+            file={metadataFile}
+            error={error}
+            onDelete={() => {}}
+          />
+          <FileUpload.Item
+            file={nativeFile}
+            error={error}
+            onDelete={() => {}}
+          />
+        </FileUpload.List>
+      </div>
+    );
+  },
+  args: {
+    error: "hei jeg er en feil og jeg må rettes opp!",
+    isLoading: true,
+    label: "Opplastede filer",
+  },
+};
+
 export const ListDownloading: StoryObj<ListStoryProps> = {
   render: () => (
     <FileUpload.List

@@ -142,6 +142,7 @@
 }
 
 .navds-file-item__button {
+  display: flex;
   margin-left: auto;
 }
 
@@ -158,6 +159,7 @@
 .navds-file-item__file-info {
   display: flex;
   flex-direction: column;
+  word-break: break-word;
 }
 
 .navds-file-item__error .navds-error-message {
