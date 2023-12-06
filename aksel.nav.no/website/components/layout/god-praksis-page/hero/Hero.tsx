@@ -1,10 +1,12 @@
-import { useRouter } from "next/router";
+import cl from "clsx";
+import Link from "next/link";
+import { useRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { BodyLong, Box, Heading, Select, VStack } from "@navikt/ds-react";
+import { BodyLong, Box, Heading, Modal, VStack } from "@navikt/ds-react";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/types";
 
 function Hero({ tema, heroNav }: GpTemaT & HeroNavT) {
-  const router = useRouter();
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   return (
     <Box
@@ -18,34 +20,69 @@ function Hero({ tema, heroNav }: GpTemaT & HeroNavT) {
         <Heading
           size="xlarge"
           as="button"
-          className="py-2 pl-6 pr-4 text-aksel-heading bg-surface-subtle flex gap-2 items-center rounded-full shadow-xsmall"
+          className="py-2 pl-6 pr-4 focus-visible:shadow-focus focus:outline-none text-aksel-heading bg-surface-subtle flex gap-2 items-center rounded-full shadow-xsmall"
+          onClick={() => modalRef.current?.showModal()}
         >
           {tema ? tema.title : "Alle tema"}
           <ChevronDownIcon aria-hidden className="shrink-0 w-12 h-12" />
         </Heading>
-        <Select
-          label="Tema"
-          hideLabel
-          onChange={(e) => router.push(`/gp/${e.target.value}`)}
-          defaultValue={tema ? tema.slug : ""}
-        >
-          <option value="">Alle sider</option>
-          {heroNav.map((x) => (
-            <option value={x.slug} key={x.slug}>
-              {x.title}
-            </option>
-          ))}
-        </Select>
+
         {tema?.description && <BodyLong>{tema.description}</BodyLong>}
       </VStack>
+      <Modal
+        ref={modalRef}
+        header={{ heading: "Tema" }}
+        width="small"
+        closeOnBackdropClick
+      >
+        <Modal.Body>
+          <nav aria-label="hovedmeny">
+            <ul>
+              <li className="my-2 flex h-11 items-center">
+                <Link
+                  href="/gp"
+                  className={cl(
+                    "hover:bg-surface-action-subtle-hover focus-visible:shadow-focus relative flex h-full w-full items-center rounded px-2 focus:outline-none",
+                    {
+                      "before:bg-surface-action-selected pl-4 font-semibold before:absolute before:left-0 before:h-6 before:w-1 before:rounded-full":
+                        !tema,
+                    }
+                  )}
+                  onClick={() => {
+                    modalRef.current?.close();
+                  }}
+                >
+                  Alle tema
+                </Link>
+              </li>
+              {heroNav.map((x) => (
+                <li className="my-2 flex h-11 items-center" key={x.slug}>
+                  <Link
+                    href={`/gp/${x.slug}`}
+                    className={cl(
+                      "hover:bg-surface-action-subtle-hover focus-visible:shadow-focus relative flex h-full w-full items-center rounded px-2 focus:outline-none",
+                      {
+                        "before:bg-surface-action-selected pl-4 font-semibold before:absolute before:left-0 before:h-6 before:w-1 before:rounded-full":
+                          tema?.slug === x.slug,
+                      }
+                    )}
+                    onClick={() => {
+                      modalRef.current?.close();
+                    }}
+                  >
+                    {x.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Modal.Body>
+      </Modal>
       <Cube />
     </Box>
   );
 }
 
-/**
- * TODO: Svg fungerer ikke ved bruk av lengre tekster
- */
 function Cube() {
   return (
     <svg
