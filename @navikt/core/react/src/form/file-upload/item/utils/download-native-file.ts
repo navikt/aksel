@@ -1,4 +1,4 @@
-export const downloadFile = (file: File) => {
+export const downloadFile = (file: File): void => {
   const url = URL.createObjectURL(file)
   const a = document.createElement("a");
   a.href = url;

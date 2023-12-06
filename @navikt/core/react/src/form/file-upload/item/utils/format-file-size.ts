@@ -15,7 +15,7 @@ export function formatFileSize(file: FileItem): string | null {
   return `> ${MAX_MEGA_BYTES} MB`
 }
 
-function roundUpToFixed(value) {
+function roundUpToFixed(value: number): string {
   const decimalsToKeep = 2
   const factor = Math.pow(10, decimalsToKeep);
   const rounded = Math.ceil(value * factor) / factor;
