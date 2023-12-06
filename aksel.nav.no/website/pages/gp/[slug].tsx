@@ -3,8 +3,10 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import {
+  firstArticlesQuery,
   heroNavQuery,
   innholdstypeQuery,
+  temaQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
   GpArticleListT,
@@ -24,21 +26,8 @@ const query = groq`
 {
   ${heroNavQuery},
   ${innholdstypeQuery},
-  "tema": *[_type == "gp.tema" && slug.current == $slug][0]{
-    ...,
-    "slug": slug.current,
-    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug && count(*[_type == "aksel_artikkel" && references(^._id)]) > 0]{
-      title,
-      description
-    }
-  },
-  "articles": *[_type == "aksel_artikkel" && $slug in undertema[]->tema->slug.current][0...9] | order(publishedAt desc) {
-    heading,
-    ingress ,
-    "undertema": undertema[]->title,
-    "innholdstype": innholdstype->title,
-    "slug": slug.current
-  }
+  ${temaQuery},
+  ${firstArticlesQuery}
 }
 `;
 
