@@ -11,17 +11,32 @@ import ItemName from "./ItemName";
 const DEFAULT_LOCALE = "nb"
 
 export interface BaseFileItemProps {
+  /**
+   * The file to display.
+   */
   file: FileItem;
+  /**
+   * Error message relating to the item.
+   */
   error?: string;
+  /**
+   * Indicates if the file is being uploaded.
+   */
   isLoading?: boolean;
+  /**
+   * Callback called when the delete button is clicked.
+   */
   onDelete?: () => void;
+  /**
+   * Callback called when the retry button is clicked.
+   */
   onRetry?: () => void;
   /**
-   * Class name passed to the outermost <div> element.
+   * Class name passed to the <li> element.
    */
   className?: string;
   /**
-   * Sets a ref on the outermost div.
+   * Sets a ref on the <li> element.
    */
   ref?: React.Ref<HTMLLIElement>;
   /**

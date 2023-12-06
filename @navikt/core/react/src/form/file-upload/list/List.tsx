@@ -4,15 +4,30 @@ import { ErrorMessage } from "../../../typography";
 import { FileListContext } from "./file-list-context";
 
 export interface FileListProps {
+  /**
+   * Label describing the list.
+   */
   label: string;
+  /**
+   * Error message relating to the list.
+   */
   error?: string;
+  /**
+   * Class name passed to the <div> element.
+   */
   className?: string;
+  /**
+   * Sets a ref on the <div> element.
+   */
   ref?: React.Ref<HTMLDivElement>;
   /**
    * Changes locale used for component text.
    * @default "nb" (norsk bokmål)
    */
   locale?: "nb" | "nn" | "en";
+  /**
+   * List items <FileUpload.Item>.
+   */
   children: React.ReactNode;
 }
 
