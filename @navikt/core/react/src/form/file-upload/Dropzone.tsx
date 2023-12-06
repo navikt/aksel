@@ -28,7 +28,10 @@ export type OnUploadProps = {
 };
 
 export interface DropzoneProps
-  extends Omit<React.HTMLAttributes<HTMLInputElement>, "children"> {
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "children" | "size"
+  > {
   /**
    * ID of the input element. Required to properly
    * connect input element to potential error message.
