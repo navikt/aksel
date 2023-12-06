@@ -5,10 +5,10 @@ import { FileItem } from "./item/types";
 
 const meta: Meta<typeof FileUpload.List> = {
   title: "ds-react/FileUpload/List",
-  component: FileUpload.List
-}
+  component: FileUpload.List,
+};
 
-export default meta
+export default meta;
 
 const onDelete = (file: FileItem) => alert(`Delete ${file.name}`);
 const onRetry = (file: FileItem) => alert(`Retry ${file.name}`);
@@ -24,14 +24,13 @@ const fileWebp = new File(["abc"], "file.webp");
 interface ListStoryProps {
   error: string;
   isLoading: boolean;
+  label: string;
+  locale: "nb" | "nn" | "en";
 }
 
 export const ListIcons: StoryObj<ListStoryProps> = {
   render: (props) => (
-    <FileUpload.List
-      label="Opplastede filer"
-      error={props.error}
-    >
+    <FileUpload.List label={props.label} error={props.error}>
       <FileUpload.Item file={fileTxt} error="Oopsann" />
       <FileUpload.Item file={filePng} />
       <FileUpload.Item file={filePdf} />
@@ -62,11 +61,12 @@ export const ListIcons: StoryObj<ListStoryProps> = {
   ),
   args: {
     error: "hei jeg er en feil og jeg må rettes opp!",
-    isLoading: true
-  }
+    isLoading: true,
+    label: "Opplastede filer",
+  },
 };
 
-export const ListDownloading = {
+export const ListDownloading: StoryObj<ListStoryProps> = {
   render: () => (
     <FileUpload.List
       label="Opplastede filer"
@@ -107,18 +107,19 @@ export const ListDownloading = {
       />
       <FileUpload.Item file={fileTxt} onClick={() => {}} />
       <FileUpload.Item file={fileTxt} href="" onClick={() => {}} />
-      <FileUpload.Item file={{ name: "2000000" }} onClick={() => {}} />
-      <FileUpload.Item file={{ name: "2000000" }} />
     </FileUpload.List>
   ),
+  args: {
+    label: "Opplastede filer",
+  },
 };
 
-export const ListLocales = {
-  render: () => (
+export const ListLocales: StoryObj<ListStoryProps> = {
+  render: (props) => (
     <>
       <FileUpload.List
         label="Opplastede filer med standard nynorsk locale"
-        locale="nn"
+        locale={props.locale}
       >
         <FileUpload.Item file={fileTxt} isLoading locale="nb" />
         <FileUpload.Item file={fileTxt} isLoading />
@@ -131,10 +132,7 @@ export const ListLocales = {
       </FileUpload.List>
     </>
   ),
-};
-
-export const OnlyFileItem = {
-  render: () => (
-    <FileUpload.Item file={fileDocx} />
-  ),
+  args: {
+    locale: "nn",
+  },
 };
