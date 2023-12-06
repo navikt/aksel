@@ -4,15 +4,16 @@ import { useRouter } from "next/router";
 import { useId } from "react";
 import { Chips, HGrid, Label } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
+import { GpChipDataT } from "../types";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
 
 type ChipsNavProps = {
   type: "innholdstype" | "undertema";
-  options: string[];
+  data?: GpChipDataT["chipData"];
 };
 
-function ChipNav({ type, options }: ChipsNavProps) {
+function ChipNav({ type, data }: ChipsNavProps) {
   const id = useId();
 
   const { query, replace } = useRouter();
@@ -37,16 +38,16 @@ function ChipNav({ type, options }: ChipsNavProps) {
           id={id}
           className={cl("overflow-x-scroll flex gap-2 p-1", styles.chips)}
         >
-          {options.map((option) => (
-            <li key={option}>
+          {data?.map((entry) => (
+            <li key={entry.title}>
               <Chips.Toggle
                 variant="neutral"
                 checkmark={false}
-                selected={encodeURIComponent(option) === query?.[type]}
-                onClick={() => handleSelect(encodeURIComponent(option))}
+                selected={encodeURIComponent(entry.title) === query?.[type]}
+                onClick={() => handleSelect(encodeURIComponent(entry.title))}
                 className="whitespace-nowrap"
               >
-                {`${option} 4`}
+                {`${entry.title} ${entry.count}`}
               </Chips.Toggle>
             </li>
           ))}

@@ -7,6 +7,7 @@ import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
 
 function GodPraksisPage(props: GpEntryPageProps) {
+  console.log(JSON.stringify(props.chipData));
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -22,15 +23,9 @@ function GodPraksisPage(props: GpEntryPageProps) {
               <Hero tema={props.tema} heroNav={props.heroNav} />
               <VStack gap="4">
                 {props.tema && (
-                  <ChipNav
-                    type="undertema"
-                    options={props.tema.undertema.map((ut) => ut.title)}
-                  />
+                  <ChipNav type="undertema" data={props.chipData} />
                 )}
-                <ChipNav
-                  type="innholdstype"
-                  options={props.innholdstype.map((i) => i.title)}
-                />
+                <ChipNav type="innholdstype" data={props.chipData} />
               </VStack>
             </VStack>
             <ArticleList articles={props.articles} />

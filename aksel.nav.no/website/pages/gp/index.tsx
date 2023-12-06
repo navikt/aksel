@@ -3,11 +3,14 @@ import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import {
+  articlesQuery,
+  chipDataFrontpageQuery,
   heroNavQuery,
   innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
   GpArticleListT,
+  GpChipDataT,
   GpEntryPageProps,
   GpInnholdstypeT,
   HeroNavT,
@@ -22,13 +25,8 @@ const query = groq`
 {
   ${heroNavQuery},
   ${innholdstypeQuery},
-  "articles": *[_type == "aksel_artikkel" && defined(undertema)][0...9] | order(publishedAt desc){
-    heading,
-    ingress ,
-    "undertema": undertema[]->title,
-    "innholdstype": innholdstype->title,
-    "slug": slug.current
-  }
+  ${articlesQuery},
+  ${chipDataFrontpageQuery}
 }
 `;
 
@@ -39,9 +37,9 @@ export const getStaticProps: GetStaticProps = async ({
     heroNav,
     articles,
     innholdstype,
-  }: GpArticleListT & HeroNavT & GpInnholdstypeT = await getClient().fetch(
-    query
-  );
+    chipData,
+  }: GpArticleListT & HeroNavT & GpInnholdstypeT & GpChipDataT =
+    await getClient().fetch(query);
 
   return {
     props: {
@@ -49,6 +47,7 @@ export const getStaticProps: GetStaticProps = async ({
       articles,
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
+      chipData,
       preview,
       id: "",
       title: "",
