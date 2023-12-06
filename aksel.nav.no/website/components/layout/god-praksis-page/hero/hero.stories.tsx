@@ -14,36 +14,59 @@ type Story = StoryObj<typeof meta>;
 
 export const Description: Story = {
   args: {
-    children: `Alle som jobber med produktutvikling i NAV sitter på kunnskap og
-    erfaring som er nyttig for andre. Derfor deler vi god praksis med
-    hverandre her.`,
+    heroNav: [
+      { refs: [], slug: "universell-utforming", title: "Universell utforming" },
+    ],
+    tema: {
+      slug: "universell-utforming",
+      title: "Universell utforming",
+      undertema: [
+        { description: "Lorem ipsum", title: "WCAG" },
+        { description: "Lorem ipsum", title: "Testing" },
+      ],
+      description: `Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      erfaring som er nyttig for andre. Derfor deler vi god praksis med
+      hverandre her.`,
+    },
   },
 };
 
 export const NoDescription: Story = {
-  args: {},
+  args: {
+    heroNav: [
+      { refs: [], slug: "universell-utforming", title: "Universell utforming" },
+    ],
+    tema: null,
+  },
 };
 
 export const LongDescription: Story = {
   args: {
-    children: `Alle som jobber med produktutvikling i NAV sitter på kunnskap og
-    erfaring som er nyttig for andre. Derfor deler vi god praksis med
-    hverandre her.
-    Alle som jobber med produktutvikling i NAV sitter på kunnskap og
-    erfaring som er nyttig for andre. Derfor deler vi god praksis med
-    hverandre her.
-    Alle som jobber med produktutvikling i NAV sitter på kunnskap og
-    erfaring som er nyttig for andre. Derfor deler vi god praksis med
-    hverandre her.
-
-    Alle som jobber med produktutvikling i NAV sitter på kunnskap og
-    erfaring som er nyttig for andre. Derfor deler vi god praksis med
-    hverandre her.
-    Alle som jobber med produktutvikling i NAV sitter på kunnskap og
-    erfaring som er nyttig for andre. Derfor deler vi god praksis med
-    hverandre her.
-    Alle som jobber med produktutvikling i NAV sitter på kunnskap og
-    erfaring som er nyttig for andre. Derfor deler vi god praksis med
-    hverandre her.`,
+    heroNav: [
+      { refs: [], slug: "universell-utforming", title: "Universell utforming" },
+    ],
+    tema: {
+      slug: "universell-utforming",
+      title: "Universell utforming",
+      undertema: [
+        { description: "Lorem ipsum", title: "WCAG" },
+        { description: "Lorem ipsum", title: "Testing" },
+      ],
+      description: `Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      erfaring som er nyttig for andre. Derfor deler vi god praksis med
+      hverandre her.
+      Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      erfaring som er nyttig for andre. Derfor deler vi god praksis med
+      hverandre her.
+      Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      erfaring som er nyttig for andre. Derfor deler vi god praksis med
+      hverandre her.
+      Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      erfaring som er nyttig for andre. Derfor deler vi god praksis med
+      hverandre her.
+      Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      erfaring som er nyttig for andre. Derfor deler vi god praksis med
+      hverandre her.`,
+    },
   },
 };
