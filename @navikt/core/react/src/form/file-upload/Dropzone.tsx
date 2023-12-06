@@ -119,21 +119,21 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     );
 
     useEffect(() => {
-      const fileInput = inputRef.current
+      const fileInput = inputRef.current;
 
       const handlePaste = (event: ClipboardEvent) => {
         if (fileInput === null || window.document.activeElement !== fileInput) {
-          return
+          return;
         }
-        event.preventDefault()
+        event.preventDefault();
         if (!event.clipboardData) {
-          return
+          return;
         }
 
         const files = Array.from(event.clipboardData.items)
-          .filter(item => item.kind === "file")
-            .map(item => item.getAsFile())
-            .filter((item): item is File => item !== null)
+          .filter((item) => item.kind === "file")
+          .map((item) => item.getAsFile())
+          .filter((item): item is File => item !== null);
 
         if (files.length > 0) {
           upload(files);
@@ -168,7 +168,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     };
 
     return (
-      <div className={cl("navds-form-field", "navds-fileupload", className)}>
+      <div className={cl("navds-form-field", "navds-file-dropzone", className)}>
         <Label
           htmlFor={inputProps.id}
           className={cl("navds-form-field__label")}
@@ -189,22 +189,22 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           onDragLeave={onDragEnd}
           onDragEnd={onDragEnd}
           onDrop={onDragEnd}
-          className={cl("navds-fileupload__content", {
-            "navds-fileupload__content--error": hasError,
-            "navds-fileupload__content--dragover": isDraggingOver,
+          className={cl("navds-file-dropzone__content", {
+            "navds-file-dropzone__content--error": hasError,
+            "navds-file-dropzone__content--dragover": isDraggingOver,
           })}
         >
-          <div className="navds-fileupload__content-zone">
+          <div className="navds-file-dropzone__content-zone">
             {isDraggingOver && (
-              <div className="navds-fileupload__content-zone-dragover">
+              <div className="navds-file-dropzone__content-zone-dragover">
                 <CloudUpIcon fontSize="1.5rem" aria-hidden />
                 <BodyShort as="span">{getDropText(locale)}</BodyShort>
               </div>
             )}
-            <div className="navds-fileupload__content-zone-icon">
+            <div className="navds-file-dropzone__content-zone-icon">
               <UploadIcon fontSize="1.5rem" aria-hidden />
             </div>
-            <div className="navds-fileupload__content-zone-text">
+            <div className="navds-file-dropzone__content-zone-text">
               <BodyShort as="span" aria-hidden>
                 {getDragAndDropText(locale)}
               </BodyShort>
@@ -213,7 +213,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
               </BodyShort>
             </div>
             <Button
-              className="navds-fileupload__content-zone-button"
+              className="navds-file-dropzone__content-zone-button"
               variant="secondary"
               onClick={() => {
                 onButtonClick();
@@ -225,7 +225,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           </div>
           <input
             type="file"
-            className="navds-fileupload__content-input"
+            className="navds-file-dropzone__content-input"
             multiple={multiple}
             accept={accept}
             onChange={onChange}

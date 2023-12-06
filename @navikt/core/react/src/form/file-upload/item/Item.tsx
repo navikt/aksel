@@ -84,16 +84,16 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
       >
         <div
           ref={ref}
-          className={cl("navds-fileitem", className, {
-            "navds-fileitem--error": !!error,
+          className={cl("navds-file-item", className, {
+            "navds-file-item--error": !!error,
           })}
         >
           <ItemIcon />
-          <div className="navds-fileitem__file-info">
+          <div className="navds-file-item__file-info">
             <ItemName />
             <ItemDescription />
           </div>
-          <div className="navds-fileitem__button">
+          <div className="navds-file-item__button">
             <ItemButton />
           </div>
         </div>

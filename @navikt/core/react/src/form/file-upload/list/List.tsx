@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { ErrorMessage } from "../../../typography";
 import { FileListContext } from "./file-list-context";
 
@@ -32,32 +32,22 @@ export interface FileListProps {
 }
 
 export const FileList = forwardRef<HTMLDivElement, FileListProps>(
-  (
-    {
-      locale,
-      children,
-      label,
-      error,
-      className
-    },
-    ref
-  ) => {
+  ({ locale, children, label, error, className }, ref) => {
     return (
-      <FileListContext.Provider value={{
-        locale,
-      }}>
-        <div
-          className={cl("navds-filelist", className)}
-          ref={ref}
-        >
+      <FileListContext.Provider
+        value={{
+          locale,
+        }}
+      >
+        <div className={cl("navds-file-list", className)} ref={ref}>
           <span className="navds-heading navds-heading--small">{label}</span>
-          <ul className="navds-filelist__list">
-            {React.Children.map(children, item => (
+          <ul className="navds-file-list__list">
+            {React.Children.map(children, (item) => (
               <li>{item}</li>
             ))}
           </ul>
           <div
-            className="navds-filelist__error"
+            className="navds-file-list__error"
             aria-relevant="additions removals"
             aria-live="polite"
           >
@@ -65,7 +55,7 @@ export const FileList = forwardRef<HTMLDivElement, FileListProps>(
           </div>
         </div>
       </FileListContext.Provider>
-    )
+    );
   }
 );
 
