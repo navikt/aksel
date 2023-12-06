@@ -32,7 +32,7 @@ const query = groq`
       description
     }
   },
-  "articles": *[_type == "aksel_artikkel" && $slug in undertema[]->tema->slug.current] | order(publishedAt desc) {
+  "articles": *[_type == "aksel_artikkel" && $slug in undertema[]->tema->slug.current][0...9] | order(publishedAt desc) {
     heading,
     ingress ,
     "undertema": undertema[]->title,

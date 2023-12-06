@@ -22,7 +22,7 @@ const query = groq`
 {
   ${heroNavQuery},
   ${innholdstypeQuery},
-  "articles": *[_type == "aksel_artikkel" && defined(undertema)] | order(publishedAt desc){
+  "articles": *[_type == "aksel_artikkel" && defined(undertema)][0...9] | order(publishedAt desc){
     heading,
     ingress ,
     "undertema": undertema[]->title,
