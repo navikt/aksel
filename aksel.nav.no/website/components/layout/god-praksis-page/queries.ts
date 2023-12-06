@@ -17,18 +17,13 @@ export const innholdstypeQuery = groq`"innholdstype": *[_type == "gp.innholdstyp
 export const chipDataQuery = groq`
 "chipData": *[_type == "gp.tema.undertema"] {
   title,
+  "slug": tema->slug.current,
   "types": *[_type== "gp.innholdstype"] {
     title,
     "count": count(*[_type == "aksel_artikkel"
       && (^._id == innholdstype._ref ) && (^.^._id in undertema[]._ref)])
   }
 }`;
-
-export const chipDataFrontpageQuery = groq`
- "chipData": *[_type== "gp.innholdstype"] {
-    title,
-    "count": count(*[_type == "aksel_artikkel" && (^._id == innholdstype._ref )])
-  }`;
 
 export const articlesQuery = groq`
 "articles": *[_type == "aksel_artikkel"

@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import {
+  chipDataQuery,
   firstArticlesQuery,
   heroNavQuery,
   innholdstypeQuery,
@@ -10,6 +11,7 @@ import {
 } from "@/layout/god-praksis-page/queries";
 import {
   GpArticleListT,
+  GpChipDataRawT,
   GpEntryPageProps,
   GpInnholdstypeT,
   GpTemaT,
@@ -27,7 +29,8 @@ const query = groq`
   ${heroNavQuery},
   ${innholdstypeQuery},
   ${temaQuery},
-  ${firstArticlesQuery}
+  ${firstArticlesQuery},
+  ${chipDataQuery}
 }
 `;
 
@@ -56,18 +59,20 @@ export const getStaticProps: GetStaticProps = async ({
     tema,
     innholdstype,
     articles,
-  }: HeroNavT & GpTemaT & GpInnholdstypeT & GpArticleListT =
+    chipData,
+  }: HeroNavT & GpTemaT & GpInnholdstypeT & GpArticleListT & GpChipDataRawT =
     await getClient().fetch(query, {
       slug,
     });
 
+  console.log("getStaticProps", { slug });
   return {
     props: {
-      chipData: [],
       articles,
       tema,
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
+      chipData: chipData.find((x) => x.slug === slug).types,
       slug,
       preview,
       id: "",

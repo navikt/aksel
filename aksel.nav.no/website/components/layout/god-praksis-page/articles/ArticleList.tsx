@@ -9,7 +9,6 @@ import ArticleGrid from "./ArticleGrid";
 }; */
 
 const getKey = (pageIndex, previousPageData) => {
-  console.log({ pageIndex, previousPageData });
   if (previousPageData && previousPageData.length < 3) {
     return null;
   }

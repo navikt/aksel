@@ -4,16 +4,19 @@ import { useRouter } from "next/router";
 import { useId } from "react";
 import { Chips, HGrid, Label } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
-import { GpChipDataT } from "../types";
+import { GpChipDataRawT } from "../types";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
 
 type ChipsNavProps = {
   type: "innholdstype" | "undertema";
-  data?: GpChipDataT["chipData"];
+  data?: GpChipDataRawT["chipData"];
+  slug?: string;
 };
 
-function ChipNav({ type, data }: ChipsNavProps) {
+function ChipNav({ type, data, slug }: ChipsNavProps) {
+  console.log({ slug });
+
   const id = useId();
 
   const { query, replace } = useRouter();

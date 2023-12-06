@@ -33,6 +33,17 @@ export type GpInnholdstypeT = {
   }[];
 };
 
+export type GpChipDataRawT = {
+  chipData: {
+    title: string;
+    slug: string;
+    types: {
+      title: string;
+      count: number;
+    }[];
+  }[];
+};
+
 export type GpChipDataT = {
   chipData: {
     title: string;
