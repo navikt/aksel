@@ -93,7 +93,7 @@ const Wrapper = (props: any) => {
                 return [
                   {
                     title: "Siste",
-                    articles: v,
+                    articles: v[0],
                   },
                 ];
               },

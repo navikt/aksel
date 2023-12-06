@@ -104,12 +104,21 @@ const Wrapper = (props: any) => {
             {
               key: "views",
               dataKeys: ["articles"],
-              cb: (v) => [
-                {
-                  title: "Siste",
-                  articles: v,
-                },
-              ],
+              cb: (v) => {
+                return [
+                  {
+                    title: "Siste",
+                    articles: v[0],
+                  },
+                ];
+              },
+            },
+            {
+              key: "articles",
+              dataKeys: ["articles"],
+              cb: () => {
+                return undefined;
+              },
             },
           ]}
         />
