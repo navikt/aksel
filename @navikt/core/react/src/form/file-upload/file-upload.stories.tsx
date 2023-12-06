@@ -5,10 +5,10 @@ import { OnUploadProps } from "./Dropzone";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload/Dropzone",
-  component: FileUpload.Dropzone
-}
+  component: FileUpload.Dropzone,
+};
 
-export default meta
+export default meta;
 
 const onUpload = ({
   allFiles,
