@@ -46,7 +46,6 @@ const Icon = () => {
 
   const iconProps = {
     fontSize: "1.5rem",
-    focusable: false,
     ariaHidden: true
   }
 
