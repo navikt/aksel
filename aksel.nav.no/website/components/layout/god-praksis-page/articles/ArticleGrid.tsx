@@ -19,7 +19,7 @@ function ArticleGrid({ name, articles }) {
         </Button>
       </HStack>
       <Box paddingBlock="5 0">
-        <HGrid gap="6" columns={3}>
+        <HGrid gap="6" columns={{ xs: 1, md: 2, lg: 3 }}>
           {articles &&
             articles.map((article, idx) => (
               <ArticleCard
