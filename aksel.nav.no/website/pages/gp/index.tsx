@@ -46,12 +46,7 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: {
       tema: null,
-      views: [
-        {
-          title: "Siste",
-          articles,
-        },
-      ],
+      articles,
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
       preview,
@@ -82,32 +77,7 @@ const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <Suspense fallback={<GpPage {...props} />}>
-        <WithPreview
-          comp={GpPage}
-          query={query}
-          props={props}
-          resolvers={[
-            {
-              key: "views",
-              dataKeys: ["articles"],
-              cb: (v) => {
-                return [
-                  {
-                    title: "Siste",
-                    articles: v[0],
-                  },
-                ];
-              },
-            },
-            {
-              key: "articles",
-              dataKeys: ["articles"],
-              cb: () => {
-                return undefined;
-              },
-            },
-          ]}
-        />
+        <WithPreview comp={GpPage} query={query} props={props} />
       </Suspense>
     );
   }

@@ -19,8 +19,10 @@ function ChipNav({ type, options }: ChipsNavProps) {
 
   function handleSelect(title: string) {
     query[type] === title
-      ? replace({ query: omit(query, [type]) }, undefined)
-      : replace({ query: { ...query, [type]: title } });
+      ? replace({ query: omit(query, [type]) }, undefined, { shallow: true })
+      : replace({ query: { ...query, [type]: title } }, undefined, {
+          shallow: true,
+        });
   }
 
   return (
@@ -42,8 +44,9 @@ function ChipNav({ type, options }: ChipsNavProps) {
                 checkmark={false}
                 selected={encodeURIComponent(option) === query?.[type]}
                 onClick={() => handleSelect(encodeURIComponent(option))}
+                className="whitespace-nowrap"
               >
-                {option}
+                {`${option} 4`}
               </Chips.Toggle>
             </li>
           ))}

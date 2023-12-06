@@ -74,12 +74,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   return {
     props: {
-      views: [
-        {
-          title: "Siste",
-          articles,
-        },
-      ],
+      articles,
       tema,
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
@@ -119,27 +114,6 @@ const Wrapper = (props: any) => {
           params={{
             slug: props?.slug,
           }}
-          resolvers={[
-            {
-              key: "views",
-              dataKeys: ["articles"],
-              cb: (v) => {
-                return [
-                  {
-                    title: "Siste",
-                    articles: v[0],
-                  },
-                ];
-              },
-            },
-            {
-              key: "articles",
-              dataKeys: ["articles"],
-              cb: () => {
-                return undefined;
-              },
-            },
-          ]}
         />
       </Suspense>
     );

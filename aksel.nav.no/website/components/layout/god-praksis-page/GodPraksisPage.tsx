@@ -33,7 +33,7 @@ function GodPraksisPage(props: GpEntryPageProps) {
                 />
               </VStack>
             </VStack>
-            <ArticleList views={props.views} />
+            <ArticleList articles={props.articles} />
           </VStack>
         </Page.Block>
       </Box>
