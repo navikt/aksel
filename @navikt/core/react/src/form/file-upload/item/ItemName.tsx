@@ -37,11 +37,7 @@ const ItemName = () => {
       href="#"
       onClick={async (event) => {
         event.preventDefault();
-        await downloadFile(file);
-        /**
-         * TODO vise en indikator på nedlasting? Kan dette potensielt ta tid ved større filer,
-         * eller går det insta siden fila ligger lokalt?
-         */
+        downloadFile(file);
       }}
     >
       {file.name}
