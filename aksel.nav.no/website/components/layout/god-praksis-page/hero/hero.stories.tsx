@@ -15,7 +15,11 @@ type Story = StoryObj<typeof meta>;
 export const Description: Story = {
   args: {
     heroNav: [
-      { refs: [], slug: "universell-utforming", title: "Universell utforming" },
+      {
+        hasRefs: true,
+        slug: "universell-utforming",
+        title: "Universell utforming",
+      },
     ],
     tema: {
       slug: "universell-utforming",
@@ -34,7 +38,11 @@ export const Description: Story = {
 export const NoDescription: Story = {
   args: {
     heroNav: [
-      { refs: [], slug: "universell-utforming", title: "Universell utforming" },
+      {
+        hasRefs: true,
+        slug: "universell-utforming",
+        title: "Universell utforming",
+      },
     ],
     tema: null,
   },
@@ -43,7 +51,11 @@ export const NoDescription: Story = {
 export const LongDescription: Story = {
   args: {
     heroNav: [
-      { refs: [], slug: "universell-utforming", title: "Universell utforming" },
+      {
+        hasRefs: true,
+        slug: "universell-utforming",
+        title: "Universell utforming",
+      },
     ],
     tema: {
       slug: "universell-utforming",

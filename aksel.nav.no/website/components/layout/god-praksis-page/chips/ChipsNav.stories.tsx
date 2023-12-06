@@ -26,33 +26,45 @@ type Story = StoryObj<typeof meta>;
 export const Innholdstype: Story = {
   args: {
     type: "innholdstype",
-    options: ["Metode", "Teori", "Verktøy", "Strategi", "Prinsipp"],
+    data: [
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+    ],
   },
 };
 
 export const Undertema: Story = {
   args: {
     type: "undertema",
-    options: ["Retningslinjer", "WCAG", "Testing", "Kompetanse"],
+    data: [
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+    ],
   },
 };
 
 export const LongList: Story = {
   args: {
-    type: "undertema",
-    options: [
-      "WCA",
-      "WCAG",
-      "Testing",
-      "Kompetanse",
-      "2Retningslinjer",
-      "2WCAG",
-      "2Testing",
-      "2Kompetanse",
-      "3Retningslinjer",
-      "3WCAG",
-      "3Testing",
-      "3Kompetanse",
+    type: "innholdstype",
+    data: [
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
+      { title: "Title 1", count: 10 },
+      { title: "Title 2", count: 20 },
     ],
   },
 };

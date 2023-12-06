@@ -74,6 +74,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   return {
     props: {
+      chipData: [],
       articles,
       tema,
       heroNav: heroNav.filter((x) => x.hasRefs),
