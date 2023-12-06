@@ -27,13 +27,6 @@ function ArticleList({ articles }: GpArticleListT) {
 
   const atEnd = data && data[data.length - 1]?.length < 3;
 
-  console.log({
-    data,
-    atEnd,
-    concat: [].concat(
-      ...(atEnd || data.length === 1 ? data : data.toSpliced(-1))
-    ),
-  });
   return (
     <>
       <ArticleGrid
