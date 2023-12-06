@@ -118,43 +118,34 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       [onUpload, accept, validator]
     );
 
-    const handlePaste = useCallback(
-      (event: ClipboardEvent) => {
-        const fileInput = inputRef.current;
-        if (fileInput === null || window.document.activeElement !== fileInput) {
-          return;
-        }
-        event.preventDefault();
-        if (!event.clipboardData) {
-          return;
-        }
-        const items = event.clipboardData.items;
-        const files: File[] = [];
+    useEffect(() => {
+      const fileInput = inputRef.current
 
-        for (const index in items) {
-          const item = items[index];
-          if (item.kind === "file") {
-            const file = item.getAsFile();
-            if (file) {
-              files.push(file);
-            }
-          }
+      const handlePaste = (event: ClipboardEvent) => {
+        if (fileInput === null || window.document.activeElement !== fileInput) {
+          return
         }
+        event.preventDefault()
+        if (!event.clipboardData) {
+          return
+        }
+
+        const files = Array.from(event.clipboardData.items)
+          .filter(item => item.kind === "file")
+            .map(item => item.getAsFile())
+            .filter((item): item is File => item !== null)
 
         if (files.length > 0) {
           upload(files);
         }
-      },
-      [upload]
-    );
+      };
 
-    useEffect(() => {
       window.addEventListener("paste", handlePaste);
 
       return () => {
         window.removeEventListener("paste", handlePaste);
       };
-    }, [handlePaste]);
+    }, [upload]);
 
     const onButtonClick = () => {
       inputRef?.current?.click();
