@@ -33,7 +33,15 @@ export type GpInnholdstypeT = {
   }[];
 };
 
+export type GpChipDataT = {
+  chipData: {
+    title: string;
+    count: number;
+  }[];
+};
+
 export type GpEntryPageProps = HeroNavT &
   GpInnholdstypeT &
   GpArticleListT &
-  GpTemaT;
+  GpTemaT &
+  GpChipDataT;
