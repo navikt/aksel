@@ -81,7 +81,23 @@ const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <Suspense fallback={<GpPage {...props} />}>
-        <WithPreview comp={GpPage} query={query} props={props} />
+        <WithPreview
+          comp={GpPage}
+          query={query}
+          props={props}
+          resolvers={[
+            {
+              key: "views",
+              dataKeys: ["articles"],
+              cb: (v) => [
+                {
+                  title: "Siste",
+                  articles: v,
+                },
+              ],
+            },
+          ]}
+        />
       </Suspense>
     );
   }

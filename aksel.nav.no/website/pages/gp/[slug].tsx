@@ -100,6 +100,18 @@ const Wrapper = (props: any) => {
           params={{
             slug: props?.slug,
           }}
+          resolvers={[
+            {
+              key: "views",
+              dataKeys: ["articles"],
+              cb: (v) => [
+                {
+                  title: "Siste",
+                  articles: v,
+                },
+              ],
+            },
+          ]}
         />
       </Suspense>
     );
