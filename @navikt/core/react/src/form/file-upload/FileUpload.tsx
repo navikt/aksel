@@ -1,25 +1,45 @@
 import React from "react";
 import Dropzone from "./Dropzone";
+import Item from "./item/Item";
+import List from "./list/List";
 
 interface FileUploadProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-interface FileUploadComponent extends React.ExoticComponent<FileUploadProps>{
+interface FileUploadComponent extends React.ExoticComponent<FileUploadProps> {
   Dropzone: typeof Dropzone;
+  List: typeof List;
+  Item: typeof Item;
 }
 
 /**
- * A component for uploading files. Only used as a namespace. You should
- * use FileUpload.Dropzone instead.
+ * A set of components used to upload files and display files.
+ * FileUpload is only a namespace, only use the subcomponents.
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/fileupload)
  * @example
  * ```jsx
- *  <FileUpload.Zone />
+ *  <FileUpload.Dropzone />
+ * ```
+ *
+ * @example
+ * ```jsx
+ *  <FileUpload.List>
+ *    <FileUpload.Item file={myFile} />
+ *    <FileUpload.Item file={mySecondFile} />
+ *  </FileUpload.List>
+ * ```
+ *
+ * @example
+ * ```jsx
+ *  <FileUpload.Item file={myStandaloneFile} />
  * ```
  */
-export const FileUpload = ((props: FileUploadProps) => props.children) as FileUploadComponent;
+export const FileUpload = ((props: FileUploadProps) =>
+  props.children) as FileUploadComponent;
 
 FileUpload.Dropzone = Dropzone;
+FileUpload.List = List;
+FileUpload.Item = Item;
 
 export default FileUpload;

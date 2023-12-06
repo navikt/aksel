@@ -6,20 +6,20 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from "react";
+import { CloudUpIcon, UploadIcon } from "@navikt/aksel-icons";
+import { Button } from "../../button";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { mergeRefs } from "../../util";
+import { useFormField } from "../useFormField";
 import {
   getButtonText,
   getDragAndDropText,
   getDropText,
-  getOrText
+  getOrText,
 } from "./utils/i18n";
-import { useFormField } from "../useFormField";
 import { partitionFiles } from "./utils/partition-files";
-import { UploadIcon, CloudUpIcon } from "@navikt/aksel-icons";
-import { Button } from "../../button";
 
 export type OnUploadProps = {
   allFiles: File[];
@@ -27,7 +27,11 @@ export type OnUploadProps = {
   rejectedFiles: File[];
 };
 
-export interface DropzoneProps extends Omit<React.HTMLAttributes<HTMLInputElement>, "children"> {
+export interface DropzoneProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "children" | "size"
+  > {
   /**
    * ID of the input element. Required to properly
    * connect input element to potential error message.
@@ -81,7 +85,6 @@ export interface DropzoneProps extends Omit<React.HTMLAttributes<HTMLInputElemen
 
 const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
   (props: DropzoneProps, ref) => {
-
     const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
 
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -103,52 +106,56 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
       useFormField(props, "fileUpload");
 
-    const locale = localeProp || "nb"
+    const locale = localeProp || "nb";
 
-    const upload = useCallback((files: File[]) => {
-      const { acceptedFiles, rejectedFiles } = partitionFiles(
-        files,
-        accept,
-        validator
-      );
+    const upload = useCallback(
+      (files: File[]) => {
+        const { acceptedFiles, rejectedFiles } = partitionFiles(
+          files,
+          accept,
+          validator
+        );
 
-      onUpload({ allFiles: files, acceptedFiles, rejectedFiles });
-    }, [onUpload, accept, validator])
+        onUpload({ allFiles: files, acceptedFiles, rejectedFiles });
+      },
+      [onUpload, accept, validator]
+    );
 
     useEffect(() => {
-      const fileInput = inputRef.current
+      const fileInput = inputRef.current;
 
       const handlePaste = (event: ClipboardEvent) => {
         if (fileInput === null || window.document.activeElement !== fileInput) {
-          return
+          return;
         }
-        event.preventDefault()
+        event.preventDefault();
         if (!event.clipboardData) {
-          return
+          return;
         }
 
         const files = Array.from(event.clipboardData.items)
-          .filter(item => item.kind === 'file')
-          .map(item => item.getAsFile())
-          .filter((item): item is File => item !== null)
+          .filter((item) => item.kind === "file")
+          .map((item) => item.getAsFile())
+          .filter((item): item is File => item !== null);
 
         if (files.length > 0) {
-          upload(files)
+          upload(files);
         }
       };
 
-      window.addEventListener("paste", handlePaste)
+      window.addEventListener("paste", handlePaste);
 
       return () => {
-        window.removeEventListener("paste", handlePaste)
-      }
-    }, [upload])
+        window.removeEventListener("paste", handlePaste);
+      };
+    }, [upload]);
 
     const onButtonClick = () => {
       inputRef?.current?.click();
     };
 
     const onDragEnter = () => setIsDraggingOver(true);
+
     const onDragEnd = () => setIsDraggingOver(false);
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -157,16 +164,14 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
         return;
       }
 
-      upload(Array.from(fileList))
+      upload(Array.from(fileList));
 
       // Resets the value to make it is possible to upload the same file several consecutive times
       event.target.value = "";
     };
 
     return (
-      <div
-        className={cl("navds-form-field", "navds-fileupload", className)}
-      >
+      <div className={cl("navds-form-field", "navds-file-dropzone", className)}>
         <Label
           htmlFor={inputProps.id}
           className={cl("navds-form-field__label")}
@@ -187,31 +192,33 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           onDragLeave={onDragEnd}
           onDragEnd={onDragEnd}
           onDrop={onDragEnd}
-          className={cl("navds-fileupload__content", {
-            "navds-fileupload__content--error": hasError,
-            "navds-fileupload__content--dragover": isDraggingOver,
+          className={cl("navds-file-dropzone__content", {
+            "navds-file-dropzone__content--error": hasError,
+            "navds-file-dropzone__content--dragover": isDraggingOver,
           })}
         >
-          <div className="navds-fileupload__content-zone">
-            {isDraggingOver &&
-              <div className="navds-fileupload__content-zone-dragover">
+          <div className="navds-file-dropzone__content-zone">
+            {isDraggingOver && (
+              <div className="navds-file-dropzone__content-zone-dragover">
                 <CloudUpIcon fontSize="1.5rem" aria-hidden />
                 <BodyShort as="span">{getDropText(locale)}</BodyShort>
               </div>
-            }
-            <div className="navds-fileupload__content-zone-icon">
+            )}
+            <div className="navds-file-dropzone__content-zone-icon">
               <UploadIcon fontSize="1.5rem" aria-hidden />
             </div>
-            <div className="navds-fileupload__content-zone-text">
-              <BodyShort as="span" aria-hidden >{getDragAndDropText(locale)}</BodyShort>
-              <BodyShort as="span" aria-hidden >{getOrText(locale)}</BodyShort>
+            <div className="navds-file-dropzone__content-zone-text">
+              <BodyShort as="span" aria-hidden>
+                {getDragAndDropText(locale)}
+              </BodyShort>
+              <BodyShort as="span" aria-hidden>
+                {getOrText(locale)}
+              </BodyShort>
             </div>
             <Button
-              className="navds-fileupload__content-zone-button"
+              className="navds-file-dropzone__content-zone-button"
               variant="secondary"
-              onClick={() => {
-                onButtonClick();
-              }}
+              onClick={onButtonClick}
               tabIndex={-1}
             >
               {getButtonText(locale)}
@@ -219,7 +226,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           </div>
           <input
             type="file"
-            className="navds-fileupload__content-input"
+            className="navds-file-dropzone__content-input"
             multiple={multiple}
             accept={accept}
             onChange={onChange}

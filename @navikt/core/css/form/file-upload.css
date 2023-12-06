@@ -1,44 +1,47 @@
-.navds-fileupload.navds-form-field {
+/**
+ * FileUpload.Dropzone
+ */
+
+.navds-file-dropzone.navds-form-field {
   display: flex;
   flex-direction: column;
 }
 
-.navds-fileupload__content {
+.navds-file-dropzone__content {
   display: flex;
   position: relative;
   text-align: center;
 }
 
-.navds-fileupload__content-zone-button {
+.navds-file-dropzone__content-zone-button {
   position: relative;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-.navds-fileupload__content-zone-icon {
+.navds-file-dropzone__content-zone-icon {
   display: flex;
   padding: var(--a-spacing-3);
-  border-radius: 100%;
+  border-radius: var(--a-border-radius-full);
   background-color: var(--ac-file-upload-icon-bg, var(--a-surface-neutral-subtle));
 }
 
-.navds-fileupload__content-zone-text {
+.navds-file-dropzone__content-zone-text {
   display: flex;
   flex-direction: column;
   gap: var(--a-spacing-1);
 }
 
-.navds-fileupload__content:hover .navds-fileupload__content-zone-button {
+.navds-file-dropzone__content:hover .navds-file-dropzone__content-zone-button {
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-fileupload__content-zone {
+.navds-file-dropzone__content-zone {
   position: relative;
   background-color: var(--ac-file-upload-bg, var(--a-surface-subtle));
   padding: var(--a-spacing-6);
   border: 1px dashed var(--ac-file-upload-border, var(--a-border-subtle));
   border-radius: var(--ac-file-upload-border-radius, var(--a-border-radius-large));
-  transition: 0.2s ease border, 0.2s ease background-color;
   display: flex;
   flex-direction: column;
   gap: var(--a-spacing-4);
@@ -49,7 +52,7 @@
   box-sizing: border-box;
 }
 
-.navds-fileupload__content-zone-dragover {
+.navds-file-dropzone__content-zone-dragover {
   color: var(--ac-file-upload-dragover-text, var(--a-text-action));
   pointer-events: none;
   align-items: center;
@@ -65,25 +68,25 @@
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-fileupload__content--dragover .navds-fileupload__content-zone-button {
+.navds-file-dropzone__content--dragover .navds-file-dropzone__content-zone-button {
   visibility: hidden;
 }
 
-.navds-fileupload__content-zone:hover {
+.navds-file-dropzone__content-zone:hover {
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-fileupload__content--error:not(:hover):not(.navds-fileupload__content--dragover) .navds-fileupload__content-zone {
+.navds-file-dropzone__content--error:not(:hover):not(.navds-file-dropzone__content--dragover) .navds-file-dropzone__content-zone {
   border-color: var(--ac-file-upload-error-border, var(--a-surface-danger));
 }
 
-.navds-fileupload__content:focus-within .navds-fileupload__content-zone-button {
+.navds-file-dropzone__content:focus-within .navds-file-dropzone__content-zone-button {
   box-shadow: inset 0 0 0 2px
-    var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
-  var(--a-shadow-focus);
+      var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
+    var(--a-shadow-focus);
 }
 
-.navds-fileupload__content-input {
+.navds-file-dropzone__content-input {
   position: absolute;
   top: 0;
   right: 0;
@@ -93,4 +96,75 @@
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+/**
+ * FileUpload.List
+ */
+
+.navds-file-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.navds-file-list__list {
+  padding: var(--a-spacing-0);
+  list-style: none;
+}
+
+.navds-file-list__error .navds-error-message {
+  display: flex;
+  gap: var(--a-spacing-2);
+}
+
+.navds-file-list__error .navds-error-message::before {
+  content: "•";
+}
+
+.navds-file-list li:not(:last-of-type) {
+  margin-bottom: var(--a-spacing-2);
+}
+
+/**
+ * FileUpload.Item
+ */
+
+.navds-file-item {
+  display: flex;
+  border: 1px solid var(--ac-file-bg, var(--a-surface-subtle));
+  border-radius: var(--ac-file-border-radius, var(--a-border-radius-large));
+  padding: var(--a-spacing-2) var(--a-spacing-3);
+  gap: var(--a-spacing-2);
+}
+
+.navds-file-item--error {
+  border-color: var(--ac-file-error-border, var(--a-surface-danger));
+}
+
+.navds-file-item__button {
+  margin-left: auto;
+}
+
+.navds-file-item__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  background-color: var(--ac-file-icon-bg, var(--a-bg-subtle));
+  padding: var(--a-spacing-1);
+  border-radius: var(--a-border-radius-full);
+}
+
+.navds-file-item__file-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.navds-file-item__error .navds-error-message {
+  display: flex;
+  gap: var(--a-spacing-2);
+}
+
+.navds-file-item__error .navds-error-message::before {
+  content: "•";
 }

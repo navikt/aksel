@@ -3,17 +3,12 @@ import React from "react";
 import { FileUpload } from "..";
 import { OnUploadProps } from "./Dropzone";
 
-export default {
-  title: "ds-react/FileUpload",
-  component: FileUpload,
-  argTypes: {
-    error: {
-      control: {
-        type: "text",
-      },
-    },
-  },
-} as Meta;
+const meta: Meta<typeof FileUpload.Dropzone> = {
+  title: "ds-react/FileUpload/Dropzone",
+  component: FileUpload.Dropzone,
+};
+
+export default meta;
 
 const onUpload = ({
   allFiles,
