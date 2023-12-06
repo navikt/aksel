@@ -1,49 +1,65 @@
 import React, { useContext } from "react";
-import { ItemContext } from "./item-context";
 import { Link } from "../../../link";
-import { isNativeFile } from "./utils/is-native-file";
+import { ItemContext } from "./item-context";
 import { downloadFile } from "./utils/download-native-file";
+import { isNativeFile } from "./utils/is-native-file";
 
 const ItemName = () => {
-  const context = useContext(ItemContext)
+  const context = useContext(ItemContext);
 
   if (context == null) {
-    console.error("<ItemName> has to be used within a <File>")
-    return null
+    console.error("<ItemName> has to be used within a <File>");
+    return null;
   }
 
-  const { file } = context
+  const { file } = context;
 
-  if (context.href) {
-    return <Link href={context.href}>
-      {file.name}
-    </Link>
+  if (context.onClick && context.href) {
+    return (
+      <Link
+        href={context.href}
+        onClick={(event) => {
+          context.onClick?.(event);
+        }}
+      >
+        {file.name}
+      </Link>
+    );
   }
 
   if (context.onClick) {
-    return <Link
-      href="#"
-      onClick={(event) => {
-        event.preventDefault();
-        context?.onClick?.();
-      }}
-    >
-      {file.name}
-    </Link>
+    return (
+      <Link
+        href="#"
+        onClick={(event) => {
+          event.preventDefault();
+          context.onClick?.(event);
+        }}
+      >
+        {file.name}
+      </Link>
+    );
+  }
+
+  if (context.href) {
+    return <Link href={context.href}>{file.name}</Link>;
   }
 
   if (isNativeFile(file)) {
-    return <Link
-      href="#"
-      onClick={async (event) => {
-        event.preventDefault();
-        downloadFile(file);
-      }}
-    >
-      {file.name}
-    </Link>  }
+    return (
+      <Link
+        href="#"
+        onClick={async (event) => {
+          event.preventDefault();
+          downloadFile(file);
+        }}
+      >
+        {file.name}
+      </Link>
+    );
+  }
 
-  return <span>{file.name}</span>
-}
+  return <span>{file.name}</span>;
+};
 
-export default ItemName
+export default ItemName;

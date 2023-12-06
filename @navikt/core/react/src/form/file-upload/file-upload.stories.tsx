@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import React from "react";
 import { FileUpload } from "..";
 import { OnUploadProps } from "./Dropzone";
-import { FileItem } from "./item/props";
+import { FileItem } from "./item/types";
 
 export default {
   title: "ds-react/FileUpload",
@@ -112,7 +112,10 @@ export const ListDownloading = {
           size: 2000000,
         }}
       />
-      <FileUpload.Item file={fileTxt} />
+      <FileUpload.Item file={fileTxt} onClick={() => {}} />
+      <FileUpload.Item file={fileTxt} href="" onClick={() => {}} />
+      <FileUpload.Item file={{ name: "2000000" }} onClick={() => {}} />
+      <FileUpload.Item file={{ name: "2000000" }} />
     </FileUpload.List>
   ),
 };
@@ -128,15 +131,13 @@ export const ListLocales = {
         <FileUpload.Item file={fileTxt} isLoading />
         <FileUpload.Item file={fileTxt} isLoading locale="en" />
       </FileUpload.List>
-      <FileUpload.List
-        label="Opplastede filer uten standard locale"
-      >
+      <FileUpload.List label="Opplastede filer uten standard locale">
         <FileUpload.Item file={fileTxt} isLoading />
         <FileUpload.Item file={fileTxt} isLoading locale="nn" />
         <FileUpload.Item file={fileTxt} isLoading locale="en" />
       </FileUpload.List>
     </>
-  )
+  ),
 };
 
 export const Dropzone = {

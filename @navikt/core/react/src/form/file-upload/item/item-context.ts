@@ -1,15 +1,15 @@
-import { createContext } from "react";
+import { MouseEvent, createContext } from "react";
 import { FileItem } from "./types";
 
 export type ItemContextProps = {
   file: FileItem;
   locale: "nb" | "nn" | "en";
-  onRetry: (() => void) | undefined;
-  onDelete: (() => void) | undefined;
+  onRetry: ((event: MouseEvent<HTMLButtonElement>) => void) | undefined;
+  onDelete: ((event: MouseEvent<HTMLButtonElement>) => void) | undefined;
   isLoading: boolean | undefined;
   error: string | undefined;
   href: string | undefined;
-  onClick: (() => void) | undefined;
+  onClick: ((event: MouseEvent<HTMLAnchorElement>) => void) | undefined;
 };
 
 export const ItemContext = createContext<ItemContextProps | null>(null);

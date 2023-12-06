@@ -1,20 +1,19 @@
-import React, { forwardRef, useContext } from "react";
 import cl from "clsx";
-import ItemButton from "./ItemButton";
-import ItemIcon from "./ItemIcon";
-import { ItemContext } from "./item-context";
+import React, { MouseEvent, forwardRef, useContext } from "react";
 import { FileListContext } from "../list/file-list-context";
-import { FileItem } from "./types";
+import ItemButton from "./ItemButton";
 import ItemDescription from "./ItemDescription";
+import ItemIcon from "./ItemIcon";
 import ItemName from "./ItemName";
+import { ItemContext } from "./item-context";
+import { FileItem } from "./types";
 
-const DEFAULT_LOCALE = "nb"
+const DEFAULT_LOCALE = "nb";
 
-export interface BaseFileItemProps {
-  /**
-   * The file to display.
-   */
+export interface FileItemProps {
   file: FileItem;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+  href?: string;
   /**
    * Error message relating to the item.
    */
@@ -26,11 +25,11 @@ export interface BaseFileItemProps {
   /**
    * Callback called when the delete button is clicked.
    */
-  onDelete?: () => void;
+  onDelete?: (event: MouseEvent<HTMLButtonElement>) => void;
   /**
    * Callback called when the retry button is clicked.
    */
-  onRetry?: () => void;
+  onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
   /**
    * Class name passed to the <li> element.
    */
@@ -43,23 +42,11 @@ export interface BaseFileItemProps {
    * Changes locale used for component text.
    * @default "nb" (norsk bokmål)
    */
-  locale?: "nb" | "nn" | "en"
+  locale?: "nb" | "nn" | "en";
 }
 
-export interface FileMetadataWithHref extends BaseFileItemProps {
-  href: string;
-}
-
-export interface FileMetadataWithOnClick extends BaseFileItemProps {
-  onClick: () => void;
-}
-
-export type FileItemProps = BaseFileItemProps | FileMetadataWithHref | FileMetadataWithOnClick
-
-export const Item = forwardRef<HTMLLIElement, FileItemProps>((
-    props: FileItemProps,
-    ref
-) => {
+export const Item = forwardRef<HTMLLIElement, FileItemProps>(
+  (props: FileItemProps, ref) => {
     const {
       file,
       isLoading,
@@ -67,30 +54,36 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>((
       onRetry,
       error,
       className,
-      locale
-    } = props
-    const context = useContext(FileListContext)
+      href,
+      onClick,
+      locale,
+    } = props;
+    const context = useContext(FileListContext);
 
     if (context == null) {
-      console.error("<FileUpload.Item> has to be used within a <FileUpload.List>")
-      return null
+      console.error(
+        "<FileUpload.Item> has to be used within a <FileUpload.List>"
+      );
+      return null;
     }
 
     return (
-      <ItemContext.Provider value={{
-        file,
-        isLoading,
-        error,
-        onDelete,
-        onRetry,
-        locale: locale || context.locale || DEFAULT_LOCALE,
-        href: "href" in props ? props.href : undefined,
-        onClick: "onClick" in props ? props.onClick : undefined
-      }}>
+      <ItemContext.Provider
+        value={{
+          file,
+          isLoading,
+          error,
+          onDelete,
+          onRetry,
+          href,
+          onClick,
+          locale: locale || context.locale || DEFAULT_LOCALE,
+        }}
+      >
         <li
           ref={ref}
           className={cl("navds-fileitem", className, {
-            "navds-fileitem--error": !!error
+            "navds-fileitem--error": !!error,
           })}
         >
           <ItemIcon />
@@ -103,8 +96,8 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>((
           </div>
         </li>
       </ItemContext.Provider>
-    )
-  })
-
+    );
+  }
+);
 
 export default Item;
