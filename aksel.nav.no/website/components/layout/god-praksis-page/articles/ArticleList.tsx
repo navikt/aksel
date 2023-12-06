@@ -9,13 +9,17 @@ import ArticleGrid from "./ArticleGrid";
 }; */
 
 const getKey = (pageIndex, previousPageData) => {
-  console.log({ pageIndex, previousPageData });
   if (previousPageData && previousPageData.length < 3) {
     return null;
   }
   return `/api/gp-articles?page=${pageIndex}`;
 };
 
+/**
+ * TODO:
+ * - Handle errors
+ * - Skeleton while loading/validating
+ */
 function ArticleList({ articles }: GpArticleListT) {
   const { data, size, setSize, isValidating } = useSWRInfinite<
     GpArticleListT["articles"]
