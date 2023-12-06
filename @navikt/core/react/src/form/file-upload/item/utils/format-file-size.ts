@@ -1,4 +1,4 @@
-import { FileItem } from "../props";
+import { FileItem } from "../types";
 
 const MAX_MEGA_BYTES = 500;
 
