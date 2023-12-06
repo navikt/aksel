@@ -8,8 +8,17 @@ interface FileUploadProps {
 }
 
 interface FileUploadComponent extends React.ExoticComponent<FileUploadProps>{
+  /**
+   * @see 🏷️ {@link DropzoneProps}
+   */
   Dropzone: typeof Dropzone;
+  /**
+   * @see 🏷️ {@link FileListProps}
+   */
   List: typeof List;
+  /**
+   * @see 🏷️ {@link FileItemProps}
+   */
   Item: typeof Item;
 }
 

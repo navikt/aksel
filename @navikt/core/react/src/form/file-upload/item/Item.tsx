@@ -4,7 +4,7 @@ import ItemButton from "./ItemButton";
 import ItemIcon from "./ItemIcon";
 import { ItemContext } from "./item-context";
 import { FileListContext } from "../list/file-list-context";
-import { FileItem } from "./props";
+import { FileItem } from "./types";
 import ItemDescription from "./ItemDescription";
 import ItemName from "./ItemName";
 
