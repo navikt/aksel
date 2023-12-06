@@ -6,10 +6,6 @@
   gap: 8px;
 }
 
-.navds-fileitem:not(:last-of-type) {
-  margin-bottom: var(--a-spacing-2);
-}
-
 .navds-fileitem--error {
   border-color: var(--ac-file-error-border, var(--a-surface-danger));
 }

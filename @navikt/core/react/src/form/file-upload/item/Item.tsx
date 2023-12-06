@@ -11,8 +11,17 @@ import { FileItem } from "./types";
 const DEFAULT_LOCALE = "nb";
 
 export interface FileItemProps {
+  /**
+   * Either a native File or file metadata.
+   */
   file: FileItem;
+  /**
+   * Callback called when the file named is clicked.
+   */
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+  /**
+   * Href to use on the <a> tag displaying the file name.
+   */
   href?: string;
   /**
    * Error message relating to the item.
@@ -31,13 +40,13 @@ export interface FileItemProps {
    */
   onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
   /**
-   * Class name passed to the <li> element.
+   * Class name passed to the <div> element.
    */
   className?: string;
   /**
-   * Sets a ref on the <li> element.
+   * Sets a ref on the <div> element.
    */
-  ref?: React.Ref<HTMLLIElement>;
+  ref?: React.Ref<HTMLDivElement>;
   /**
    * Changes locale used for component text.
    * @default "nb" (norsk bokmål)
@@ -45,7 +54,7 @@ export interface FileItemProps {
   locale?: "nb" | "nn" | "en";
 }
 
-export const Item = forwardRef<HTMLLIElement, FileItemProps>(
+export const Item = forwardRef<HTMLDivElement, FileItemProps>(
   (props: FileItemProps, ref) => {
     const {
       file,
@@ -60,13 +69,6 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>(
     } = props;
     const context = useContext(FileListContext);
 
-    if (context == null) {
-      console.error(
-        "<FileUpload.Item> has to be used within a <FileUpload.List>"
-      );
-      return null;
-    }
-
     return (
       <ItemContext.Provider
         value={{
@@ -77,10 +79,10 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>(
           onRetry,
           href,
           onClick,
-          locale: locale || context.locale || DEFAULT_LOCALE,
+          locale: locale || context?.locale || DEFAULT_LOCALE,
         }}
       >
-        <li
+        <div
           ref={ref}
           className={cl("navds-fileitem", className, {
             "navds-fileitem--error": !!error,
@@ -94,7 +96,7 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>(
           <div className="navds-fileitem__button">
             <ItemButton />
           </div>
-        </li>
+        </div>
       </ItemContext.Provider>
     );
   }

@@ -16,3 +16,7 @@
 .navds-filelist__error .navds-error-message::before {
   content: "•";
 }
+
+.navds-filelist li:not(:last-of-type) {
+  margin-bottom: var(--a-spacing-2);
+}

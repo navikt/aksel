@@ -46,7 +46,7 @@ const Icon = () => {
 
   const iconProps = {
     fontSize: "1.5rem",
-    ariaHidden: true
+    "aria-hidden": true
   }
 
   switch (extension) {

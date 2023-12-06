@@ -52,7 +52,9 @@ export const FileList = forwardRef<HTMLDivElement, FileListProps>(
         >
           <span className="navds-heading navds-heading--small">{label}</span>
           <ul className="navds-filelist__list">
-            {children}
+            {React.Children.map(children, item => (
+              <li>{item}</li>
+            ))}
           </ul>
           <div
             className="navds-filelist__error"
