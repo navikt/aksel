@@ -4,13 +4,13 @@ import { useRouter } from "next/router";
 import { useId } from "react";
 import { Chips, HGrid, Label } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
-import { GpChipDataRawT } from "../types";
+import { GpChipDataT } from "../types";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
 
 type ChipsNavProps = {
   type: "innholdstype" | "undertema";
-  data?: GpChipDataRawT["chipData"];
+  data?: GpChipDataT["chipData"];
   slug?: string;
 };
 
@@ -41,7 +41,7 @@ function ChipNav({ type, data, slug }: ChipsNavProps) {
           id={id}
           className={cl("overflow-x-scroll flex gap-2 p-1", styles.chips)}
         >
-          {data?.map((entry) => (
+          {data.map((entry) => (
             <li key={entry.title}>
               <Chips.Toggle
                 variant="neutral"
