@@ -1,5 +1,5 @@
 import { groq } from "next-sanity";
-import { GetServerSideProps } from "next/types";
+import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import {
@@ -32,9 +32,9 @@ const query = groq`
 }
 `;
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx
-): Promise<PageProps> => {
+export const getStaticProps: GetStaticProps = async ({
+  preview = false,
+}): Promise<PageProps> => {
   const {
     heroNav,
     articles,
@@ -54,11 +54,12 @@ export const getServerSideProps: GetServerSideProps = async (
       ],
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
-      preview: ctx.preview ?? false,
+      preview,
       id: "",
       title: "",
     },
     notFound: false,
+    revalidate: 60,
   };
 };
 
