@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { Label, VStack } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const lorem =
@@ -28,6 +28,7 @@ function Divider() {
   return <hr className="border-border-subtle" />;
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */

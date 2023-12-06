@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   BodyShort,
   Box,
@@ -9,9 +10,8 @@ import {
   Page,
   VStack,
 } from "@navikt/ds-react";
-import { useEffect } from "react";
 
-export default function Example() {
+const Example = () => {
   useDekorator();
 
   return (
@@ -47,7 +47,7 @@ export default function Example() {
       <Env />
     </Page>
   );
-}
+};
 
 function Header() {
   return <div id="decorator-header" />;
@@ -131,9 +131,11 @@ function StatusSvg() {
   );
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
+export default Example;
+
 export const args = {
   index: 2,
   title: "Med CTA til side",
   desc: "En 404-side kan inneholde en CTA som leder til et relevant område eller side, avhengig av konteksten.",
-  sandbox: false,
 };

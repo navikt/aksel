@@ -1,4 +1,4 @@
-import { withDsExample } from "@/web/examples/withDsExample";
+import cl from "clsx";
 import { LinkIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -13,7 +13,7 @@ import {
   Show,
   VStack,
 } from "@navikt/ds-react";
-import cl from "clsx";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -127,6 +127,7 @@ const MobileSidebar = ({ className }: { className?: string }) => (
   <DesktopSidebar className={className} />
 );
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "subtle",

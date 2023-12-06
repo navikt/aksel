@@ -12,7 +12,7 @@
     "dev": "yarn workspace aksel.nav.no dev",
     "docgen": "yarn workspaces foreach -p run docgen",
     "changelog": "deno run --allow-read --allow-write --no-config scripts/deno/createMainChangelog.ts",
-    "chromatic": "npx chromatic --project-token x3xqdfgkujg --build-script-name build:storybook",
+    "chromatic": "npx chromatic --only-changed --project-token x3xqdfgkujg --build-script-name build:storybook",
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -p run test",
     "lint": "yarn eslint --rule \"import/no-cycle:error\" . && yarn stylelint @navikt/**/*.css",
@@ -27,7 +27,8 @@
     "@navikt/aksel-icons/figma-plugin",
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
-    "aksel.nav.no"
+    "aksel.nav.no",
+    "scripts/eslint"
   ],
   "prettier": {
     "overrides": [
@@ -37,7 +38,13 @@
           "printWidth": 130
         }
       }
-    ]
+    ],
+    "importOrder": [
+      "^@navikt/(.*)$",
+      "^@/(.*)$",
+      "^[./]"
+    ],
+    "importOrderSortSpecifiers": true
   },
   "lint-staged": {
     "*.js": "eslint",
@@ -120,27 +127,29 @@
   },
   "devDependencies": {
     "@changesets/cli": "2.26.2",
-    "@storybook/addon-a11y": "^7.5.3",
-    "@storybook/addon-essentials": "^7.5.3",
-    "@storybook/addon-interactions": "^7.5.3",
-    "@storybook/addon-storysource": "^7.5.3",
-    "@storybook/blocks": "^7.5.3",
-    "@storybook/csf-tools": "^7.5.3",
+    "@storybook/addon-a11y": "^7.6.1",
+    "@storybook/addon-essentials": "^7.6.1",
+    "@storybook/addon-interactions": "^7.6.1",
+    "@storybook/addon-storysource": "^7.6.1",
+    "@storybook/blocks": "^7.6.1",
+    "@storybook/csf-tools": "^7.6.1",
     "@storybook/jest": "^0.2.3",
-    "@storybook/manager-api": "^7.5.3",
-    "@storybook/nextjs": "^7.5.3",
-    "@storybook/react": "^7.5.3",
-    "@storybook/react-vite": "^7.5.3",
+    "@storybook/manager-api": "^7.6.1",
+    "@storybook/nextjs": "^7.6.1",
+    "@storybook/react": "^7.6.1",
+    "@storybook/react-vite": "^7.6.1",
     "@storybook/testing-library": "^0.2.2",
-    "@storybook/theming": "^7.5.3",
+    "@storybook/theming": "^7.6.1",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
     "@whitespace/storybook-addon-html": "^5.1.6",
-    "chromatic": "6.22.0",
+    "chromatic": "9.1.0",
     "concurrently": "7.2.1",
     "cross-env": "^7.0.0",
     "eslint": "^8.50.0",
+    "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-jest": "^27.4.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
@@ -158,7 +167,8 @@
     "react": "^18.0.0",
     "react-docgen-typescript": "2.2.2",
     "react-dom": "^18.0.0",
-    "storybook": "^7.5.3",
+    "react-syntax-highlighter": "^15.5.0",
+    "storybook": "^7.6.1",
     "stylelint": "^14.8.5",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",
@@ -166,7 +176,9 @@
     "stylelint-value-no-unknown-custom-properties": "^4.0.0",
     "typescript": "^5.1.6",
     "vite": "^4.2.0",
+    "vite-plugin-turbosnap": "^1.0.3",
     "yarn": "^1.22.10"
   },
+  "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",
   "packageManager": "yarn@3.2.1"
 }

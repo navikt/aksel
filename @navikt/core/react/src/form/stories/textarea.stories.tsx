@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import React, { useState } from "react";
 import { Button } from "../../button";
 import { Textarea } from "../index";
 
@@ -38,11 +38,11 @@ export const Default: StoryObj<typeof Textarea> = {
   },
 };
 
-export const Small = () => {
+export const Small: StoryFn = () => {
   return <Textarea size="small" label="Ipsum enim quis culpa" />;
 };
 
-export const Description = () => {
+export const Description: StoryFn = () => {
   return (
     <div className="colgap">
       <Textarea
@@ -58,7 +58,7 @@ export const Description = () => {
   );
 };
 
-export const Error = () => {
+export const Error: StoryFn = () => {
   return (
     <div className="colgap">
       <Textarea
@@ -89,7 +89,7 @@ export const Error = () => {
   );
 };
 
-export const Disabled = () => {
+export const Disabled: StoryFn = () => {
   return (
     <div className="colgap">
       <Textarea label="Ipsum enim quis culpa" disabled />
@@ -98,19 +98,19 @@ export const Disabled = () => {
   );
 };
 
-export const HideLabel = () => {
+export const HideLabel: StoryFn = () => {
   return <Textarea label="Ipsum enim quis culpa" hideLabel />;
 };
 
-export const MaxLength = () => {
+export const MaxLength: StoryFn = () => {
   return <Textarea maxLength={50} label="Ipsum enim quis culpa" />;
 };
 
-export const MinRows = () => {
+export const MinRows: StoryFn = () => {
   return <Textarea minRows={5} label="Ipsum enim quis culpa" />;
 };
 
-export const MaxRows = () => {
+export const MaxRows: StoryFn = () => {
   return (
     <Textarea
       maxRows={3}
@@ -120,11 +120,23 @@ export const MaxRows = () => {
   );
 };
 
-export const Resize = () => {
+export const Resize: StoryFn = () => {
   return <Textarea resize label="Ipsum enim quis culpa" />;
 };
 
-export const Readonly = () => {
+export const Controlled: StoryFn = () => {
+  const [value, setValue] = useState("");
+  return (
+    <Textarea
+      resize
+      label="Ipsum enim quis culpa"
+      value={value}
+      onChange={(event) => setValue(event.currentTarget.value)}
+    />
+  );
+};
+
+export const Readonly: StoryFn = () => {
   return (
     <div className="colgap">
       <Textarea
@@ -143,7 +155,7 @@ export const Readonly = () => {
   );
 };
 
-export const AutoScrollbar = (props) => (
+export const AutoScrollbar: StoryFn<typeof Textarea> = (props) => (
   <div
     style={{
       border: "1px solid lightGreen",
@@ -156,12 +168,12 @@ export const AutoScrollbar = (props) => (
       <h1>Header</h1>
     </div>
     <Textarea
+      {...props}
       resize
       label="Textarea with autoScrollbar"
       description="Description"
       maxLength={30}
       UNSAFE_autoScrollbar
-      {...props}
     />
     <div style={{ border: "1px dashed gray" }}>
       <Button>Send</Button>

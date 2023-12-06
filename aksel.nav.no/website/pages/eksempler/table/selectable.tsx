@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
-import { Checkbox, Table } from "@navikt/ds-react";
 import { useState } from "react";
+import { Checkbox, Table } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -35,7 +35,7 @@ const Example = () => {
             </Table.DataCell>
 
             <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Fødseslnr.</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
             <Table.HeaderCell scope="col">Start</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -104,6 +104,7 @@ const data = [
   },
 ];
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

@@ -1,6 +1,6 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Bleed, Box, HStack, VStack } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -34,6 +34,7 @@ const Example = () => {
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
 });

@@ -5,6 +5,7 @@ import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
 import { RootDirectoriesT } from "./types";
+
 dotenv.config();
 
 const token = process.env.SANITY_WRITE_KEY;
@@ -61,7 +62,7 @@ export async function updateSanity(
   }
 
   await transactionClient
-    .commit()
+    .commit({ dryRun: isDryRun })
     .then(() => console.log(`Successfully deleted unused ${directory}`))
     .catch((e) => {
       /**

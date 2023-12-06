@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { BodyShort, VStack } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
@@ -32,6 +32,7 @@ function Divider() {
   return <hr className="border-border-subtle" />;
 }
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */

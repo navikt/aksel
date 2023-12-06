@@ -1,15 +1,15 @@
-import { omit } from "../../../util";
-import React, {
-  useCallback,
-  forwardRef,
-  InputHTMLAttributes,
-  ChangeEvent,
-} from "react";
 import cl from "clsx";
-import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
-import { useInputContext } from "./inputContext";
+import React, {
+  ChangeEvent,
+  InputHTMLAttributes,
+  forwardRef,
+  useCallback,
+} from "react";
+import { omit } from "../../../util";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
+import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
+import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { useInputContext } from "./inputContext";
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
@@ -168,10 +168,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen]
     );
 
-    const onBlur = () => {
-      virtualFocus.moveFocusToTop();
-    };
-
     return (
       <input
         {...rest}
@@ -181,7 +177,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onChange={onChangeHandler}
         type="text"
         role="combobox"
-        onBlur={onBlur}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
         aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}

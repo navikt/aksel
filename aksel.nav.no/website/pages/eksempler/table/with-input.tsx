@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { Table, TextField } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
@@ -7,7 +7,7 @@ const Example = () => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Fødseslnr.</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
           <Table.HeaderCell scope="col">Start</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -18,7 +18,7 @@ const Example = () => {
               <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
               <Table.DataCell>
                 <TextField
-                  label="Fødseslnr"
+                  label="Fødselsnr."
                   hideLabel
                   defaultValue={`${fnr.substring(0, 6)} ${fnr.substring(6)}`}
                   size="small"
@@ -70,6 +70,7 @@ const data = [
   },
 ];
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */

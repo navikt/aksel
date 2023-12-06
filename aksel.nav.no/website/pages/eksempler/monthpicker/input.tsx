@@ -1,5 +1,5 @@
-import { withDsExample } from "@/web/examples/withDsExample";
 import { MonthPicker, useMonthpicker } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const { monthpickerProps, inputProps, selectedMonth } = useMonthpicker({
@@ -11,13 +11,14 @@ const Example = () => {
   return (
     <div className="min-h-96">
       <MonthPicker {...monthpickerProps}>
-        <MonthPicker.Input {...inputProps} label="Velg månede" />
+        <MonthPicker.Input {...inputProps} label="Velg måned" />
       </MonthPicker>
       {selectedMonth && <div className="pt-4">{selectedMonth.getMonth()}</div>}
     </div>
   );
 };
 
+// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
 /* Storybook story */
