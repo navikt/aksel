@@ -3,7 +3,8 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import {
-  chipDataQuery,
+  chipsInnholdstypeQuery,
+  chipsUndertemaQuery,
   firstArticlesQuery,
   heroNavQuery,
   innholdstypeQuery,
@@ -11,7 +12,8 @@ import {
 } from "@/layout/god-praksis-page/queries";
 import {
   GpArticleListT,
-  GpChipDataRawT,
+  GpChipsInnholdstypeRawT,
+  GpChipsUndertemaRawT,
   GpEntryPageProps,
   GpInnholdstypeT,
   GpTemaT,
@@ -30,7 +32,8 @@ const query = groq`
   ${innholdstypeQuery},
   ${temaQuery},
   ${firstArticlesQuery},
-  ${chipDataQuery}
+  ${chipsInnholdstypeQuery},
+  ${chipsUndertemaQuery}
 }
 `;
 
@@ -59,20 +62,29 @@ export const getStaticProps: GetStaticProps = async ({
     tema,
     innholdstype,
     articles,
-    chipData,
-  }: HeroNavT & GpTemaT & GpInnholdstypeT & GpArticleListT & GpChipDataRawT =
-    await getClient().fetch(query, {
-      slug,
-    });
+    chipsInnholdstype,
+    chipsUndertema,
+  }: HeroNavT &
+    GpTemaT &
+    GpInnholdstypeT &
+    GpArticleListT &
+    GpChipsInnholdstypeRawT &
+    GpChipsUndertemaRawT = await getClient().fetch(query, {
+    slug,
+  });
 
-  console.log("getStaticProps", { slug });
+  console.log({ slug, chipsUndertema });
+
   return {
     props: {
       articles,
       tema,
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
-      chipData: chipData.find((x) => x.slug === slug).types,
+      chipsInnholdstype: chipsInnholdstype.find((x) => x.slug === slug).types,
+      chipsUndertema: chipsUndertema
+        .filter((c) => c.tema === slug)
+        .map((c) => ({ title: c.title, count: c.count })),
       slug,
       preview,
       id: "",

@@ -1,6 +1,7 @@
 import { groq } from "next-sanity";
 
-export const heroNavQuery = groq`"heroNav": *[_type == "gp.tema"]{
+export const heroNavQuery = groq`
+"heroNav": *[_type == "gp.tema"]{
   title,
   "slug": slug.current,
   "hasRefs": count(*[_type=="aksel_artikkel"
@@ -8,14 +9,23 @@ export const heroNavQuery = groq`"heroNav": *[_type == "gp.tema"]{
 }
 `;
 
-export const innholdstypeQuery = groq`"innholdstype": *[_type == "gp.innholdstype"]{
+export const innholdstypeQuery = groq`
+"innholdstype": *[_type == "gp.innholdstype"]{
   ...,
   "hasRefs": count(*[_type=="aksel_artikkel"
       && ^._id == innholdstype._ref]) > 0
 }`;
 
-export const chipDataQuery = groq`
-"chipData": *[_type == "gp.tema.undertema"] {
+export const chipsUndertemaQuery = groq`
+"chipsUndertema": *[_type == "gp.tema.undertema"]{
+  title,
+  "tema": tema->slug.current,
+  "count": count(*[_type=="aksel_artikkel"
+      && ^._id in undertema[]._ref])
+}`;
+
+export const chipsInnholdstypeQuery = groq`
+"chipsInnholdstype": *[_type == "gp.tema.undertema"] {
   title,
   "slug": tema->slug.current,
   "types": *[_type== "gp.innholdstype"] {
