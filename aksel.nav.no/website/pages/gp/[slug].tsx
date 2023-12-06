@@ -1,5 +1,5 @@
 import { groq } from "next-sanity";
-import { GetServerSideProps } from "next/types";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import {
@@ -14,6 +14,7 @@ import {
   HeroNavT,
 } from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
+import { getGpTema } from "@/sanity/interface";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
 
@@ -41,9 +42,26 @@ const query = groq`
 }
 `;
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx
-): Promise<PageProps> => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: await getGpTema().then((paths) =>
+      paths.map(({ path }) => ({
+        params: {
+          slug: path,
+        },
+      }))
+    ),
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  preview = false,
+}: {
+  params: { slug: string };
+  preview?: boolean;
+}): Promise<PageProps> => {
   const {
     heroNav,
     tema,
@@ -51,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (
     articles,
   }: HeroNavT & GpTemaT & GpInnholdstypeT & GpArticleListT =
     await getClient().fetch(query, {
-      slug: ctx.params.slug,
+      slug,
     });
 
   return {
@@ -65,12 +83,13 @@ export const getServerSideProps: GetServerSideProps = async (
       tema,
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
-      slug: ctx.params.slug as string,
-      preview: ctx.preview ?? false,
+      slug,
+      preview,
       id: "",
       title: "",
     },
-    notFound: !tema || !heroNav.some((nav) => nav.slug === ctx.params.slug),
+    notFound: !tema || !heroNav.some((nav) => nav.slug === slug),
+    revalidate: 60,
   };
 };
 
