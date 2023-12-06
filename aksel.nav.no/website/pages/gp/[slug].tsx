@@ -63,8 +63,8 @@ export const getServerSideProps: GetServerSideProps = async (
         },
       ],
       tema,
-      heroNav: heroNav.filter((x) => x.refs?.length > 0),
-      innholdstype: innholdstype.filter((x) => x.refs?.length > 0),
+      heroNav: heroNav.filter((x) => x.hasRefs),
+      innholdstype: innholdstype.filter((x) => x.hasRefs),
       slug: ctx.params.slug as string,
       preview: ctx.preview ?? false,
       id: "",
@@ -82,7 +82,7 @@ const GpPage = (props: PageProps["props"]) => {
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />
-      <GodPraksisPage {...props} type="tema-page" />
+      <GodPraksisPage {...props} />
     </>
   );
 };

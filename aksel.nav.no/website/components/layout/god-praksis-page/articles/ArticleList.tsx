@@ -9,8 +9,6 @@ const markRandomAsNew = (articles) => {
 function ArticleList({ views }: GpArticleViews) {
   return (
     <>
-      {/* <ArticleBento name="Populære" articles={latest} /> */}
-
       {views.map((view) => (
         <ArticleGrid
           key={view.title}

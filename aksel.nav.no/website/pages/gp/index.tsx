@@ -52,8 +52,8 @@ export const getServerSideProps: GetServerSideProps = async (
           articles,
         },
       ],
-      heroNav: heroNav.filter((x) => x.refs?.length > 0),
-      innholdstype: innholdstype.filter((x) => x.refs?.length > 0),
+      heroNav: heroNav.filter((x) => x.hasRefs),
+      innholdstype: innholdstype.filter((x) => x.hasRefs),
       preview: ctx.preview ?? false,
       id: "",
       title: "",
@@ -70,7 +70,7 @@ const GpPage = (props: PageProps["props"]) => {
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />
-      <GodPraksisPage {...props} type="frontpage" />
+      <GodPraksisPage {...props} />
     </>
   );
 };

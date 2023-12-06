@@ -2,7 +2,7 @@ export type HeroNavT = {
   heroNav: {
     title: string;
     slug: string;
-    refs: string[];
+    hasRefs: boolean;
   }[];
 };
 
@@ -29,7 +29,7 @@ export type GpInnholdstypeT = {
   innholdstype: {
     title: string;
     description?: string;
-    refs: string[];
+    hasRefs: boolean;
   }[];
 };
 

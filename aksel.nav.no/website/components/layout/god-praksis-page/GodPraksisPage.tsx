@@ -6,9 +6,7 @@ import ArticleList from "./articles/ArticleList";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
 
-function GodPraksisPage(
-  props: GpEntryPageProps & { type: "frontpage" | "tema-page" }
-) {
+function GodPraksisPage(props: GpEntryPageProps) {
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
