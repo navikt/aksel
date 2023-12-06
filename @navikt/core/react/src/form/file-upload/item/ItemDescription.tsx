@@ -16,8 +16,9 @@ const ItemDescription = () => {
   if (isLoading) {
     switch(locale) {
       case "nb":
-      case "nn":
         return "Laster opp"
+      case "nn":
+        return "Lastar opp"
       case "en":
         return "Uploading"
     }

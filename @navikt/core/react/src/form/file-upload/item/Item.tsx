@@ -8,6 +8,8 @@ import { FileItem } from "./props";
 import ItemDescription from "./ItemDescription";
 import ItemName from "./ItemName";
 
+const DEFAULT_LOCALE = "nb"
+
 export interface BaseFileItemProps {
   file: FileItem;
   error?: string;
@@ -50,7 +52,7 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>((
       onRetry,
       error,
       className,
-      locale = "nb"
+      locale
     } = props
     const context = useContext(FileListContext)
 
@@ -66,7 +68,7 @@ export const Item = forwardRef<HTMLLIElement, FileItemProps>((
         error,
         onDelete,
         onRetry,
-        locale: locale || context.locale,
+        locale: locale || context.locale || DEFAULT_LOCALE,
         href: "href" in props ? props.href : undefined,
         onClick: "onClick" in props ? props.onClick : undefined
       }}>

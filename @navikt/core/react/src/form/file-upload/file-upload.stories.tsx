@@ -117,6 +117,28 @@ export const ListDownloading = {
   ),
 };
 
+export const ListLocales = {
+  render: () => (
+    <>
+      <FileUpload.List
+        label="Opplastede filer med standard nynorsk locale"
+        locale="nn"
+      >
+        <FileUpload.Item file={fileTxt} isLoading locale="nb" />
+        <FileUpload.Item file={fileTxt} isLoading />
+        <FileUpload.Item file={fileTxt} isLoading locale="en" />
+      </FileUpload.List>
+      <FileUpload.List
+        label="Opplastede filer uten standard locale"
+      >
+        <FileUpload.Item file={fileTxt} isLoading />
+        <FileUpload.Item file={fileTxt} isLoading locale="nn" />
+        <FileUpload.Item file={fileTxt} isLoading locale="en" />
+      </FileUpload.List>
+    </>
+  )
+};
+
 export const Dropzone = {
   render: () => (
     <FileUpload.Dropzone
