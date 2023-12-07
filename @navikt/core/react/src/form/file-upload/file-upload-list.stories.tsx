@@ -142,8 +142,14 @@ export const ListDownloading: StoryObj<ListStoryProps> = {
           size: 2000000,
         }}
       />
-      <FileUpload.Item file={fileTxt} onClick={() => {}} />
-      <FileUpload.Item file={fileTxt} href="" onClick={() => {}} />
+      <FileUpload.Item
+        file={{
+          name: "withBase64.txt",
+          size: 2000000,
+          base64: "data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==",
+        }}
+      />
+      <FileUpload.Item file={fileTxt} />
     </FileUpload.List>
   ),
   args: {

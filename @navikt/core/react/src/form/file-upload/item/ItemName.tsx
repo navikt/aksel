@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "../../../link";
 import { ItemContext } from "./item-context";
-import { downloadFile } from "./utils/download-native-file";
-import { isNativeFile } from "./utils/is-native-file";
+import { downloadFile } from "./utils/download-file";
+import { isFileWithData } from "./utils/file-type-checker";
 
 const ItemName = () => {
   const context = useContext(ItemContext);
@@ -45,7 +45,7 @@ const ItemName = () => {
     return <Link href={context.href}>{file.name}</Link>;
   }
 
-  if (isNativeFile(file)) {
+  if (isFileWithData(file)) {
     return (
       <Link
         href="#"

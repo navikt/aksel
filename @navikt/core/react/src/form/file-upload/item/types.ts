@@ -3,4 +3,8 @@ export interface FileMetadata {
   size?: number;
 }
 
-export type FileItem = File | FileMetadata;
+export interface FileBase64 extends FileMetadata {
+  base64: string;
+}
+
+export type FileItem = FileMetadata | File | FileBase64;
