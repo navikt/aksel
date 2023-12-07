@@ -27,7 +27,7 @@ html:has(.globalstyles) {
   @apply max-w-none;
 }
 
-.globalstyles a {
+:where(.globalstyles) a {
   color: inherit;
   text-decoration: inherit;
   text-underline-offset: 2px;

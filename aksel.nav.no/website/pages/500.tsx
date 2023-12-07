@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   BodyShort,
   Box,
@@ -13,10 +13,13 @@ import Header from "@/layout/header/Header";
 import { AmplitudeEvents, amplitude } from "@/logging";
 
 function ErrorPage({ statusCode }) {
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
     amplitude.track(AmplitudeEvents.error, {
       side: window.location.pathname,
     });
+    setIsClient(true);
   }, []);
 
   return (
@@ -48,9 +51,13 @@ function ErrorPage({ statusCode }) {
                     </Link>
                   </List.Item>
                   <List.Item>
-                    <Link href="#" onClick={() => history.back()}>
-                      gå tilbake til forrige side
-                    </Link>
+                    {isClient && history.length > 1 ? (
+                      <Link href="#" onClick={() => history.back()}>
+                        gå tilbake til forrige side
+                      </Link>
+                    ) : (
+                      "gå tilbake til forrige side"
+                    )}
                   </List.Item>
                 </List>
                 <BodyShort>
