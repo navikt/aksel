@@ -101,7 +101,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             <Heading
               level="1"
               size="xlarge"
-              className="text-deepblue-800 mt-1 break-words balance text-5xl leading-[1.2] [hyphens:_auto] text-wrap-balance"
+              className="text-deepblue-800 mt-1 break-words text-5xl leading-[1.2] [hyphens:_auto] text-wrap-balance"
             >
               {blogg.heading}
             </Heading>

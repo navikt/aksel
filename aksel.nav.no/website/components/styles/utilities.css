@@ -83,9 +83,7 @@ p.override-text-no-max {
   display: none;
 }
 
-/* Not in tailwindcss yet
-   https://github.com/tailwindlabs/tailwindcss/discussions/11486
-*/
+/* Not in tailwindcss yet: https://github.com/tailwindlabs/tailwindcss/discussions/11486 */
 .text-wrap-balance {
   text-wrap: balance;
 }
