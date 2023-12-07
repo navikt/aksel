@@ -15,12 +15,12 @@ function App({ Component, pageProps, router }: AppProps) {
     window.location.host === "design.nav.no" &&
       window.location.replace(`http://aksel.nav.no`);
 
-    (window.location.pathname.startsWith("/templates/") ||
-      window.location.pathname.startsWith("/eksempler/")) &&
-      document.body.classList.remove("globalstyles");
-
     hotjar.initialize(148751, 6);
   }, []);
+
+  const useGlobalStyles =
+    !router.pathname.startsWith("/templates/") &&
+    !router.pathname.startsWith("/eksempler/");
 
   return (
     <>
@@ -28,7 +28,13 @@ function App({ Component, pageProps, router }: AppProps) {
       <SanityDocIdContext.Provider
         value={{ id: pageProps?.id ?? pageProps?.page?._id }}
       >
-        <Component {...pageProps} />
+        {useGlobalStyles ? (
+          <div className="globalstyles">
+            <Component {...pageProps} />
+          </div>
+        ) : (
+          <Component {...pageProps} />
+        )}
       </SanityDocIdContext.Provider>
     </>
   );

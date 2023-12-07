@@ -15,7 +15,7 @@ export default function Document() {
           crossOrigin="anonymous"
         />
       </Head>
-      <body data-theme="light" className="aksel antialiased globalstyles">
+      <body data-theme="light" className="aksel antialiased">
         <Main />
         <NextScript />
       </body>
