@@ -15,37 +15,17 @@ type GroupArticlesInputT = {
 type GroupArticlesOutT = {
   innholdstype: string | null;
   undertema: string | null;
-  articles: GpArticleListT["articles"];
+  article: GpArticleListT["articles"][number];
 }[];
 
-/*
-type GroupArticlesOutT = {
-  innholdstype: "teori";
-  undertema: null;
-  articles: 6;
-}[];
-
-type GroupArticlesOutT = {
-  innholdstype: retningslinje;
-  undertema: "testing";
-  articles: 5;
-}[];
-
-type GroupArticlesOutT = {
-  innholdstype: null;
-  undertema: "Etterlevelse";
-  articles: 6;
-}[];
-
-
-*/
-
+/**
+ * De-duplicates re-occuring articles and maps the to the matching innholdstype and undertema
+ * This reduces amount for data sent to user on load.
+ */
 export function groupArticles({
-  innholdstyper,
-  undertema,
+  innholdstyper = [],
+  undertema = [],
 }: GroupArticlesInputT): GroupArticlesOutT {
-  const output: GroupArticlesOutT = [];
-
   const articleMap = new Map<
     string,
     {
@@ -78,5 +58,7 @@ export function groupArticles({
     });
   });
 
-  return output;
+  /* console.log([...articleMap.values()]); */
+
+  return [...articleMap.values()];
 }
