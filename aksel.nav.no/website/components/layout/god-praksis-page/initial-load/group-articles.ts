@@ -1,31 +1,17 @@
-import { GpArticleListT } from "../types";
-
-type GroupArticlesInputT = {
-  innholdstyper: {
-    title: string;
-    articles: GpArticleListT["articles"];
-  }[];
-
-  undertema: {
-    title: string;
-    articles: GpArticleListT["articles"];
-  }[];
-};
-
-export type GpGroupedArticlesT = {
-  innholdstype: string | null;
-  undertema: string | null;
-  article: GpArticleListT["articles"][number];
-}[];
+import {
+  GpArticleListT,
+  GpGroupedArticlesInputT,
+  GpGroupedArticlesT,
+} from "../types";
 
 /**
  * De-duplicates re-occuring articles and maps the to the matching innholdstype and undertema
  * This reduces amount for data sent to user on load.
  */
 export function groupArticles({
-  innholdstyper = [],
-  undertema = [],
-}: GroupArticlesInputT): GpGroupedArticlesT {
+  initialInnholdstype = [],
+  initialUndertema = [],
+}: GpGroupedArticlesInputT): GpGroupedArticlesT {
   const articleMap = new Map<
     string,
     {
@@ -35,7 +21,7 @@ export function groupArticles({
     }
   >();
 
-  innholdstyper.forEach((innholdstype) => {
+  initialInnholdstype.forEach((innholdstype) => {
     innholdstype.articles.forEach((article) => {
       articleMap.set(article._id, {
         article,
@@ -45,7 +31,7 @@ export function groupArticles({
     });
   });
 
-  undertema.forEach((tema) => {
+  initialUndertema.forEach((tema) => {
     tema.articles.forEach((article) => {
       const found = articleMap.get(article._id);
       found
@@ -57,8 +43,6 @@ export function groupArticles({
           });
     });
   });
-
-  /* console.log([...articleMap.values()]); */
 
   return [...articleMap.values()];
 }

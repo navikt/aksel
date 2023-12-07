@@ -2,11 +2,13 @@ import { groq } from "next-sanity";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
+import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
 import {
   chipsInnholdstypeQuery,
   chipsUndertemaQuery,
   firstArticlesQuery,
   heroNavQuery,
+  initialTemaPageArticles,
   innholdstypeQuery,
   temaQuery,
 } from "@/layout/god-praksis-page/queries";
@@ -15,6 +17,7 @@ import {
   GpChipsInnholdstypeRawT,
   GpChipsUndertemaRawT,
   GpEntryPageProps,
+  GpGroupedArticlesInputT,
   GpInnholdstypeT,
   GpTemaT,
   HeroNavT,
@@ -33,7 +36,8 @@ const query = groq`
   ${temaQuery},
   ${firstArticlesQuery},
   ${chipsInnholdstypeQuery},
-  ${chipsUndertemaQuery}
+  ${chipsUndertemaQuery},
+  ${initialTemaPageArticles},
 }
 `;
 
@@ -64,16 +68,17 @@ export const getStaticProps: GetStaticProps = async ({
     articles,
     chipsInnholdstype,
     chipsUndertema,
+    initialInnholdstype,
+    initialUndertema,
   }: HeroNavT &
     GpTemaT &
     GpInnholdstypeT &
     GpArticleListT &
     GpChipsInnholdstypeRawT &
-    GpChipsUndertemaRawT = await getClient().fetch(query, {
+    GpChipsUndertemaRawT &
+    GpGroupedArticlesInputT = await getClient().fetch(query, {
     slug,
   });
-
-  console.log({ slug, chipsUndertema });
 
   return {
     props: {
@@ -85,6 +90,7 @@ export const getStaticProps: GetStaticProps = async ({
       chipsUndertema: chipsUndertema
         .filter((c) => c.tema === slug)
         .map((c) => ({ title: c.title, count: c.count })),
+      initialArticles: groupArticles({ initialInnholdstype, initialUndertema }),
       slug,
       preview,
       id: "",

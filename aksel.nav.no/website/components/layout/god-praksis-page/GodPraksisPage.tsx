@@ -7,6 +7,7 @@ import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
 
 function GodPraksisPage(props: GpEntryPageProps) {
+  console.log(props);
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page

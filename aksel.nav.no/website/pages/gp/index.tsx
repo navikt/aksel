@@ -2,16 +2,19 @@ import { groq } from "next-sanity";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
+import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
 import {
   articlesQuery,
   chipsInnholdstypeQuery,
   heroNavQuery,
+  initialGpMainPageArticles,
   innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
   GpArticleListT,
   GpChipsInnholdstypeRawT,
   GpEntryPageProps,
+  GpGroupedArticlesInputT,
   GpInnholdstypeT,
   HeroNavT,
 } from "@/layout/god-praksis-page/types";
@@ -26,7 +29,8 @@ const query = groq`
   ${heroNavQuery},
   ${innholdstypeQuery},
   ${articlesQuery},
-  ${chipsInnholdstypeQuery}
+  ${chipsInnholdstypeQuery},
+  ${initialGpMainPageArticles}
 }
 `;
 
@@ -55,9 +59,20 @@ export const getStaticProps: GetStaticProps = async ({
     articles,
     innholdstype,
     chipsInnholdstype,
-  }: GpArticleListT & HeroNavT & GpInnholdstypeT & GpChipsInnholdstypeRawT =
-    await getClient().fetch(query);
+    initialInnholdstype,
+  }: GpArticleListT &
+    HeroNavT &
+    GpInnholdstypeT &
+    GpChipsInnholdstypeRawT & {
+      initialInnholdstype: GpGroupedArticlesInputT["initialInnholdstype"];
+    } = await getClient().fetch(query);
 
+  console.log({
+    initialArticles: groupArticles({
+      initialInnholdstype,
+      initialUndertema: [],
+    }),
+  });
   return {
     props: {
       tema: null,
@@ -65,6 +80,10 @@ export const getStaticProps: GetStaticProps = async ({
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
       chipsInnholdstype: chipDataForMain(chipsInnholdstype),
+      initialArticles: groupArticles({
+        initialInnholdstype,
+        initialUndertema: [],
+      }),
       preview,
       id: "",
       title: "",

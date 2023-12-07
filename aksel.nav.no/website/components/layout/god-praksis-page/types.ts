@@ -64,9 +64,27 @@ export type ChipsDataT = {
   count: number;
 }[];
 
+export type GpGroupedArticlesT = {
+  innholdstype: string | null;
+  undertema: string | null;
+  article: GpArticleListT["articles"][number];
+}[];
+
+export type GpGroupedArticlesInputT = {
+  initialInnholdstype: {
+    title: string;
+    articles: GpArticleListT["articles"];
+  }[];
+
+  initialUndertema: {
+    title: string;
+    articles: GpArticleListT["articles"];
+  }[];
+};
+
 export type GpEntryPageProps = HeroNavT &
   GpInnholdstypeT &
   GpArticleListT &
   GpTemaT &
   GpChipsInnholdstypeT &
-  GpChipsUndertemaT;
+  GpChipsUndertemaT & { initialArticles: GpGroupedArticlesT };

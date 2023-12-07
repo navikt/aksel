@@ -1,4 +1,4 @@
-import { GpGroupedArticlesT } from "./group-articles";
+import { GpGroupedArticlesT } from "@/layout/god-praksis-page/types";
 
 export function getArticleList(
   articles: GpGroupedArticlesT,

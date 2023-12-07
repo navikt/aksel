@@ -13,18 +13,21 @@ const baseArticle = (id: string): GpArticleListT["articles"][number] => ({
 
 describe("groupArticles function", () => {
   test("should return an empty array when both innholdstyper and undertema are empty", () => {
-    const result = groupArticles({ innholdstyper: [], undertema: [] });
+    const result = groupArticles({
+      initialInnholdstype: [],
+      initialUndertema: [],
+    });
     expect(result).toEqual([]);
   });
 
   test("should correctly group articles by innholdstype", () => {
-    const innholdstyper = [
+    const initialInnholdstype = [
       {
         title: "type1",
         articles: [baseArticle("1"), baseArticle("2")],
       },
     ];
-    const result = groupArticles({ innholdstyper, undertema: [] });
+    const result = groupArticles({ initialInnholdstype, initialUndertema: [] });
 
     expect(result).toEqual([
       {
@@ -41,13 +44,13 @@ describe("groupArticles function", () => {
   });
 
   test("should correctly group articles by undertema", () => {
-    const undertema = [
+    const initialUndertema = [
       {
         title: "tema1",
         articles: [baseArticle("1"), baseArticle("2")],
       },
     ];
-    const result = groupArticles({ innholdstyper: [], undertema });
+    const result = groupArticles({ initialInnholdstype: [], initialUndertema });
     expect(result).toEqual([
       {
         innholdstype: null,
@@ -63,19 +66,19 @@ describe("groupArticles function", () => {
   });
 
   test("should correctly group overlapping articles", () => {
-    const innholdstyper = [
+    const initialInnholdstype = [
       {
         title: "type1",
         articles: [baseArticle("1")],
       },
     ];
-    const undertema = [
+    const initialUndertema = [
       {
         title: "tema1",
         articles: [baseArticle("1")],
       },
     ];
-    const result = groupArticles({ innholdstyper, undertema });
+    const result = groupArticles({ initialInnholdstype, initialUndertema });
     expect(result).toEqual([
       {
         innholdstype: "type1",
@@ -87,14 +90,14 @@ describe("groupArticles function", () => {
 
   test("should return an empty array when innholdstyper and undertema have no articles", () => {
     const result = groupArticles({
-      innholdstyper: [{ title: "type1", articles: [] }],
-      undertema: [{ title: "tema1", articles: [] }],
+      initialInnholdstype: [{ title: "type1", articles: [] }],
+      initialUndertema: [{ title: "tema1", articles: [] }],
     });
     expect(result).toEqual([]);
   });
 
   test("should correctly group multiple articles from multiple innholdstyper and undertema", () => {
-    const innholdstyper = [
+    const initialInnholdstype = [
       {
         title: "type1",
         articles: [baseArticle("1"), baseArticle("2")],
@@ -104,7 +107,7 @@ describe("groupArticles function", () => {
         articles: [baseArticle("3"), baseArticle("4")],
       },
     ];
-    const undertema = [
+    const initialUndertema = [
       {
         title: "tema1",
         articles: [baseArticle("1"), baseArticle("2")],
@@ -114,7 +117,7 @@ describe("groupArticles function", () => {
         articles: [baseArticle("3"), baseArticle("4")],
       },
     ];
-    const result = groupArticles({ innholdstyper, undertema });
+    const result = groupArticles({ initialInnholdstype, initialUndertema });
     expect(result).toEqual([
       {
         innholdstype: "type1",
