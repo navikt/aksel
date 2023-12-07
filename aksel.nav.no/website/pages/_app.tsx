@@ -15,9 +15,9 @@ function App({ Component, pageProps, router }: AppProps) {
     window.location.host === "design.nav.no" &&
       window.location.replace(`http://aksel.nav.no`);
 
-    !window.location.pathname.startsWith("/templates/") &&
-      !window.location.pathname.startsWith("/eksempler/") &&
-      document.body.classList.add("globalstyles");
+    (window.location.pathname.startsWith("/templates/") ||
+      window.location.pathname.startsWith("/eksempler/")) &&
+      document.body.classList.remove("globalstyles");
 
     hotjar.initialize(148751, 6);
   }, []);
