@@ -3,11 +3,17 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import {
+  chipsInnholdstypeQuery,
+  chipsUndertemaQuery,
+  firstArticlesQuery,
   heroNavQuery,
   innholdstypeQuery,
+  temaQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
   GpArticleListT,
+  GpChipsInnholdstypeRawT,
+  GpChipsUndertemaRawT,
   GpEntryPageProps,
   GpInnholdstypeT,
   GpTemaT,
@@ -24,21 +30,10 @@ const query = groq`
 {
   ${heroNavQuery},
   ${innholdstypeQuery},
-  "tema": *[_type == "gp.tema" && slug.current == $slug][0]{
-    ...,
-    "slug": slug.current,
-    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug && count(*[_type == "aksel_artikkel" && references(^._id)]) > 0]{
-      title,
-      description
-    }
-  },
-  "articles": *[_type == "aksel_artikkel" && $slug in undertema[]->tema->slug.current][0...9] | order(publishedAt desc) {
-    heading,
-    ingress ,
-    "undertema": undertema[]->title,
-    "innholdstype": innholdstype->title,
-    "slug": slug.current
-  }
+  ${temaQuery},
+  ${firstArticlesQuery},
+  ${chipsInnholdstypeQuery},
+  ${chipsUndertemaQuery}
 }
 `;
 
@@ -67,18 +62,29 @@ export const getStaticProps: GetStaticProps = async ({
     tema,
     innholdstype,
     articles,
-  }: HeroNavT & GpTemaT & GpInnholdstypeT & GpArticleListT =
-    await getClient().fetch(query, {
-      slug,
-    });
+    chipsInnholdstype,
+    chipsUndertema,
+  }: HeroNavT &
+    GpTemaT &
+    GpInnholdstypeT &
+    GpArticleListT &
+    GpChipsInnholdstypeRawT &
+    GpChipsUndertemaRawT = await getClient().fetch(query, {
+    slug,
+  });
+
+  console.log({ slug, chipsUndertema });
 
   return {
     props: {
-      chipData: [],
       articles,
       tema,
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
+      chipsInnholdstype: chipsInnholdstype.find((x) => x.slug === slug).types,
+      chipsUndertema: chipsUndertema
+        .filter((c) => c.tema === slug)
+        .map((c) => ({ title: c.title, count: c.count })),
       slug,
       preview,
       id: "",

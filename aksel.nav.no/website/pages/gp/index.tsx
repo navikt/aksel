@@ -4,13 +4,13 @@ import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import {
   articlesQuery,
-  chipDataFrontpageQuery,
+  chipsInnholdstypeQuery,
   heroNavQuery,
   innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
   GpArticleListT,
-  GpChipDataT,
+  GpChipsInnholdstypeRawT,
   GpEntryPageProps,
   GpInnholdstypeT,
   HeroNavT,
@@ -26,9 +26,26 @@ const query = groq`
   ${heroNavQuery},
   ${innholdstypeQuery},
   ${articlesQuery},
-  ${chipDataFrontpageQuery}
+  ${chipsInnholdstypeQuery}
 }
 `;
+
+const chipDataForMain = (
+  dataRaw: GpChipsInnholdstypeRawT["chipsInnholdstype"]
+) => {
+  const map = new Map<string, number>();
+  for (const entry of dataRaw) {
+    for (const innholdstype of entry.types) {
+      const count = map.get(innholdstype.title) || 0;
+      map.set(innholdstype.title, count + innholdstype.count);
+    }
+  }
+  const chipData = [];
+  for (const [key, value] of map.entries()) {
+    chipData.push({ title: key, count: value });
+  }
+  return chipData;
+};
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
@@ -37,8 +54,8 @@ export const getStaticProps: GetStaticProps = async ({
     heroNav,
     articles,
     innholdstype,
-    chipData,
-  }: GpArticleListT & HeroNavT & GpInnholdstypeT & GpChipDataT =
+    chipsInnholdstype,
+  }: GpArticleListT & HeroNavT & GpInnholdstypeT & GpChipsInnholdstypeRawT =
     await getClient().fetch(query);
 
   return {
@@ -47,10 +64,11 @@ export const getStaticProps: GetStaticProps = async ({
       articles,
       heroNav: heroNav.filter((x) => x.hasRefs),
       innholdstype: innholdstype.filter((x) => x.hasRefs),
-      chipData,
+      chipsInnholdstype: chipDataForMain(chipsInnholdstype),
       preview,
       id: "",
       title: "",
+      chipsUndertema: [],
     },
     notFound: false,
     revalidate: 60,

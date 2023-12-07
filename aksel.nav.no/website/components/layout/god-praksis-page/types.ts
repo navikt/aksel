@@ -33,15 +33,38 @@ export type GpInnholdstypeT = {
   }[];
 };
 
-export type GpChipDataT = {
-  chipData: {
+export type GpChipsInnholdstypeRawT = {
+  chipsInnholdstype: {
     title: string;
+    slug: string;
+    types: ChipsDataT;
+  }[];
+};
+
+export type GpChipsInnholdstypeT = {
+  chipsInnholdstype: ChipsDataT;
+};
+
+export type GpChipsUndertemaRawT = {
+  chipsUndertema: {
+    title: string;
+    tema: string;
     count: number;
   }[];
 };
+
+export type GpChipsUndertemaT = {
+  chipsUndertema: ChipsDataT;
+};
+
+export type ChipsDataT = {
+  title: string;
+  count: number;
+}[];
 
 export type GpEntryPageProps = HeroNavT &
   GpInnholdstypeT &
   GpArticleListT &
   GpTemaT &
-  GpChipDataT;
+  GpChipsInnholdstypeT &
+  GpChipsUndertemaT;

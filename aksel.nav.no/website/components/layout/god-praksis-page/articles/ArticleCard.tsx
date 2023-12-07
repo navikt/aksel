@@ -58,12 +58,17 @@ export const ArticleCard = ({
       >
         <VStack justify="space-between" className="min-h-full relative">
           <Box paddingBlock="0 5">
-            <Heading className="inner-shiny" size={main ? "xlarge" : "medium"}>
-              <span className="shiny">{title}</span>
-            </Heading>
+            <Box paddingBlock="0 2">
+              <Heading
+                className="inner-shiny"
+                size={main ? "xlarge" : "medium"}
+              >
+                <span className="shiny">{title}</span>
+              </Heading>
+            </Box>
 
             <BodyLong size={main ? "large" : "small"}>
-              {main ? trunc(content, 770) : trunc(content, 100)}
+              {main ? trunc(content, 770) : trunc(content, 200)}
             </BodyLong>
           </Box>
           <HStack gap="2">
