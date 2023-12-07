@@ -35,7 +35,8 @@
 
 aksel.nav.no/
 ├── website # NEXT.JS app (v13)
-└── website/sanity # Sanity CMS-app (v3)
+├── website/sanity # Sanity CMS-app (v3)
+└── playroom # aksel.nav.no/sandbox
 
 ```
 

@@ -1,6 +1,6 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
 import { definePlugin } from "sanity";
 import { deskTool } from "sanity/desk";
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { publicationFlow } from "../publication-flow";
 import innholdsType from "./documents/innholdstype";
 import tema from "./documents/tema";

@@ -1,6 +1,6 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
 import { CurrentUser } from "sanity";
 import { DefaultDocumentNodeResolver, StructureResolver } from "sanity/desk";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 const adminOrDev = (user: CurrentUser) =>
   user.roles.find((role) => ["developer", "administrator"].includes(role.name));
