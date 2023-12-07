@@ -1,3 +1,5 @@
+import cl from "clsx";
+import { ComponentType, useEffect, useState } from "react";
 import {
   LaptopIcon,
   MobileIcon,
@@ -6,8 +8,6 @@ import {
   TabletIcon,
 } from "@navikt/aksel-icons";
 import { HStack } from "@navikt/ds-react";
-import cl from "clsx";
-import { ComponentType, useEffect, useState } from "react";
 import styles from "./examples.module.css";
 
 type withDsT = {
@@ -31,6 +31,7 @@ export const withDsExample = (
       };
       window.addEventListener("resize", updateWidth);
       updateWidth();
+
       return () => {
         window.removeEventListener("resize", updateWidth);
       };

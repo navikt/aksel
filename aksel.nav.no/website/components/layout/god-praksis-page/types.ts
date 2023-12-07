@@ -8,6 +8,7 @@ export type HeroNavT = {
 
 export type GpArticleListT = {
   articles: {
+    _id: string;
     heading: string;
     ingress: string;
     undertema: string[];
