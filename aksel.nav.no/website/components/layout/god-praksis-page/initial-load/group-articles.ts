@@ -12,7 +12,7 @@ type GroupArticlesInputT = {
   }[];
 };
 
-type GroupArticlesOutT = {
+export type GpGroupedArticlesT = {
   innholdstype: string | null;
   undertema: string | null;
   article: GpArticleListT["articles"][number];
@@ -25,7 +25,7 @@ type GroupArticlesOutT = {
 export function groupArticles({
   innholdstyper = [],
   undertema = [],
-}: GroupArticlesInputT): GroupArticlesOutT {
+}: GroupArticlesInputT): GpGroupedArticlesT {
   const articleMap = new Map<
     string,
     {

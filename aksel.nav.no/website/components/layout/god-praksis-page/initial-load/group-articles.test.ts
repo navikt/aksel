@@ -8,6 +8,7 @@ const baseArticle = (id: string): GpArticleListT["articles"][number] => ({
   undertema: ["tema1", "tema2"],
   innholdstype: "metode",
   slug: "url",
+  publishedAt: null,
 });
 
 describe("groupArticles function", () => {

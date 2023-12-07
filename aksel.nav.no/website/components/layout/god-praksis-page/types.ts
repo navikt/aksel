@@ -14,6 +14,7 @@ export type GpArticleListT = {
     undertema: string[];
     innholdstype: string | null;
     slug: string;
+    publishedAt: string | null;
   }[];
 };
 
