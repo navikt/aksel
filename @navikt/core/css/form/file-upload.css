@@ -142,7 +142,6 @@
 }
 
 .navds-file-item__button {
-  display: flex;
   margin-left: auto;
 }
 
@@ -150,7 +149,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: center;
+  align-self: start;
+  margin-top: var(--a-spacing-2);
   background-color: var(--ac-file-icon-bg, var(--a-bg-subtle));
   padding: var(--a-spacing-1);
   border-radius: var(--a-border-radius-full);
