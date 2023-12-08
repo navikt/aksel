@@ -1,7 +1,11 @@
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 
-function useGpQuery(): { innholdstypeQuery: string; undertemaQuery: string } {
+function useGpQuery(): {
+  innholdstypeQuery: string;
+  undertemaQuery: string;
+  temaQuery: string;
+} {
   const { query } = useRouter();
 
   const innholdstypeQuery = useMemo(() => {
@@ -14,7 +18,12 @@ function useGpQuery(): { innholdstypeQuery: string; undertemaQuery: string } {
     return q.length > 0 ? q : null;
   }, [query?.undertema]);
 
-  return { innholdstypeQuery, undertemaQuery };
+  const temaQuery = useMemo(() => {
+    const q = decodeURIComponent(query?.slug?.toString?.() ?? "");
+    return q.length > 0 ? q : null;
+  }, [query?.slug]);
+
+  return { innholdstypeQuery, undertemaQuery, temaQuery };
 }
 
 export default useGpQuery;

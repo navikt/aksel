@@ -69,7 +69,7 @@ export const temaQuery = groq`
     }
   }`;
 
-const baseArticleData = groq`{
+export const baseGpArticleData = groq`{
   _id,
   heading,
   ingress,
@@ -83,15 +83,15 @@ const baseArticleData = groq`{
 export const initialGpMainPageArticles = groq`
   "initialInnholdstype": *[_type == "gp.innholdstype"]{
     title,
-    "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id]| order(publishedAt desc)[0...9]${baseArticleData}
+    "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id]| order(publishedAt desc)[0...9]${baseGpArticleData}
   }`;
 
 export const initialTemaPageArticles = groq`
   "initialUndertema": *[_type == "gp.tema.undertema" && $slug == tema->slug.current]{
     title,
-    "articles": *[_type == "aksel_artikkel" && ^._id in undertema[]._ref] | order(publishedAt desc)[0...9]${baseArticleData}
+    "articles": *[_type == "aksel_artikkel" && ^._id in undertema[]._ref] | order(publishedAt desc)[0...9]${baseGpArticleData}
   },
   "initialInnholdstype": *[_type == "gp.innholdstype"]{
     title,
-    "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id && $slug in undertema[]->tema->slug.current]| order(publishedAt desc)[0...9]${baseArticleData}
+    "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id && $slug in undertema[]->tema->slug.current]| order(publishedAt desc)[0...9]${baseGpArticleData}
   }`;

@@ -16,21 +16,25 @@ const getKey = ({
   input: { pageIndex, previousPageData },
   innholdstypeQuery,
   undertemaQuery,
+  temaQuery,
 }: {
   input: { pageIndex: number; previousPageData: any[] };
   innholdstypeQuery: string | null;
   undertemaQuery: string | null;
+  temaQuery: string | null;
 }) => {
-  /* TODO: Disabled for testing of inital data-load */
-  return null;
   if (previousPageData && previousPageData.length < 3) {
     return null;
   }
 
+  console.count("Sent query");
+
   /* TODO: Implement this in API */
   return `/api/gp-articles?page=${pageIndex}${
-    innholdstypeQuery ? `&innholdstype=${innholdstypeQuery}` : ""
-  }${undertemaQuery ? `&undertema=${undertemaQuery}` : ""}`;
+    temaQuery ? `&tema=${temaQuery}` : ""
+  }${innholdstypeQuery ? `&innholdstype=${innholdstypeQuery}` : ""}${
+    undertemaQuery ? `&undertema=${undertemaQuery}` : ""
+  }`;
 };
 
 type ArticleListT = {
@@ -42,7 +46,17 @@ type ArticleListT = {
  * - Handle errors
  */
 function ArticleList({ articles }: ArticleListT) {
-  const { innholdstypeQuery, undertemaQuery } = useGpQuery();
+  const { innholdstypeQuery, undertemaQuery, temaQuery } = useGpQuery();
+
+  /* TODO: Getting flash from data-change since queries are memos */
+  const initialData = useMemo(
+    () =>
+      getArticleList(articles, innholdstypeQuery, undertemaQuery).map(
+        (x) => x.article
+      ),
+    [articles, innholdstypeQuery, undertemaQuery]
+  );
+  console.log({ initialData });
 
   const {
     data = [],
@@ -51,24 +65,19 @@ function ArticleList({ articles }: ArticleListT) {
     isValidating,
   } = useSWRInfinite<GpArticleListT["articles"]>(
     (pageIndex, previousPageData) =>
-      getKey({
-        input: { pageIndex: pageIndex + INITIAL_PAGE, previousPageData },
-        innholdstypeQuery,
-        undertemaQuery,
-      }),
+      initialData.length < 9
+        ? null
+        : getKey({
+            input: { pageIndex: pageIndex + INITIAL_PAGE, previousPageData },
+            innholdstypeQuery,
+            undertemaQuery,
+            temaQuery,
+          }),
     (query) => fetch(query).then((res) => res.json()),
     {
       revalidateFirstPage: false,
       initialSize: 1,
     }
-  );
-
-  const initialData = useMemo(
-    () =>
-      getArticleList(articles, innholdstypeQuery, undertemaQuery).map(
-        (x) => x.article
-      ),
-    [articles, innholdstypeQuery, undertemaQuery]
   );
 
   const atEndOfLazy = data && data[data.length - 1]?.length < 3;
@@ -80,6 +89,7 @@ function ArticleList({ articles }: ArticleListT) {
 
   const concatArticles = [].concat(initialData, ...lazyData);
 
+  console.log(data);
   return (
     <>
       <ArticleGrid name="Siste" articles={concatArticles} />
