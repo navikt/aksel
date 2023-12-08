@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 import { Button } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
@@ -49,14 +48,11 @@ function ArticleList({ articles }: ArticleListT) {
   const { innholdstypeQuery, undertemaQuery, temaQuery } = useGpQuery();
 
   /* TODO: Getting flash from data-change since queries are memos */
-  const initialData = useMemo(
-    () =>
-      getArticleList(articles, innholdstypeQuery, undertemaQuery).map(
-        (x) => x.article
-      ),
-    [articles, innholdstypeQuery, undertemaQuery]
-  );
-  console.log({ initialData });
+  const initialData = getArticleList(
+    articles,
+    innholdstypeQuery,
+    undertemaQuery
+  ).map((x) => x.article);
 
   const {
     data = [],

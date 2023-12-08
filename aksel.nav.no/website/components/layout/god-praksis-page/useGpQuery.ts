@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useMemo } from "react";
 
 function useGpQuery(): {
   innholdstypeQuery: string;
@@ -8,22 +7,26 @@ function useGpQuery(): {
 } {
   const { query } = useRouter();
 
-  const innholdstypeQuery = useMemo(() => {
+  const innholdstypeQuery = () => {
     const q = decodeURIComponent(query?.innholdstype?.toString?.() ?? "");
     return q.length > 0 ? q : null;
-  }, [query?.innholdstype]);
+  };
 
-  const undertemaQuery = useMemo(() => {
+  const undertemaQuery = () => {
     const q = decodeURIComponent(query?.undertema?.toString?.() ?? "");
     return q.length > 0 ? q : null;
-  }, [query?.undertema]);
+  };
 
-  const temaQuery = useMemo(() => {
+  const temaQuery = () => {
     const q = decodeURIComponent(query?.slug?.toString?.() ?? "");
     return q.length > 0 ? q : null;
-  }, [query?.slug]);
+  };
 
-  return { innholdstypeQuery, undertemaQuery, temaQuery };
+  return {
+    innholdstypeQuery: innholdstypeQuery(),
+    undertemaQuery: undertemaQuery(),
+    temaQuery: temaQuery(),
+  };
 }
 
 export default useGpQuery;
