@@ -28,4 +28,5 @@ export {
   type OnFileUploadProps,
   type FileMetadata,
   type FileBase64,
+  type FileItem,
 } from "./file-upload";
