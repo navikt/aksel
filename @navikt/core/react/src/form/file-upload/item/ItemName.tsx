@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "../../../link";
+import { Link } from "@navikt/ds-react";
 import { ItemContext } from "./item-context";
 import { downloadFile } from "./utils/download-file";
 import { isFileWithData } from "./utils/file-type-checker";

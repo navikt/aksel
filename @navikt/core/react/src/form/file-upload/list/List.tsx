@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, isValidElement } from "react";
-import { ErrorMessage } from "../../../typography";
+import { ErrorMessage } from "@navikt/ds-react";
 import { FileListContext } from "./file-list-context";
 
 export interface FileListProps {

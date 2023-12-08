@@ -8,7 +8,7 @@ import {
   FileTextIcon,
   FileWordIcon,
 } from "@navikt/aksel-icons";
-import { Loader } from "../../../loader";
+import { Loader } from "@navikt/ds-react";
 import { ItemContext } from "./item-context";
 
 const ItemIcon = () => {
