@@ -16,12 +16,7 @@ const ItemName = () => {
 
   if (context.onClick && context.href) {
     return (
-      <Link
-        href={context.href}
-        onClick={(event) => {
-          context.onClick?.(event);
-        }}
-      >
+      <Link href={context.href} onClick={context.onClick}>
         {file.name}
       </Link>
     );

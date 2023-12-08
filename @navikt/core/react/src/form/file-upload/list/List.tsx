@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef } from "react";
+import React, { forwardRef, isValidElement } from "react";
 import { ErrorMessage } from "../../../typography";
 import { FileListContext } from "./file-list-context";
 
@@ -42,9 +42,13 @@ export const FileList = forwardRef<HTMLDivElement, FileListProps>(
         <div className={cl("navds-file-list", className)} ref={ref}>
           <span className="navds-heading navds-heading--small">{label}</span>
           <ul className="navds-file-list__list">
-            {React.Children.map(children, (item) => (
-              <li>{item}</li>
-            ))}
+            {React.Children.map(children, (child) => {
+              if (!isValidElement(child)) {
+                return null;
+              }
+
+              return <li>{child}</li>;
+            })}
           </ul>
           <div
             className="navds-file-list__error"
