@@ -1,11 +1,11 @@
 export const getButtonText = (locale: "nb" | "nn" | "en") => {
   switch (locale) {
     case "nb":
-      return "Last opp filer";
+      return "Velg filer";
     case "nn":
-      return "Last opp filer";
+      return "Vel filer";
     case "en":
-      return "Upload files";
+      return "Choose files";
   }
 };
 
