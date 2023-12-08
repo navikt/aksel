@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-import { useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 import { Button } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
@@ -8,11 +6,8 @@ import {
   GpArticleListT,
   GpGroupedArticlesT,
 } from "@/layout/god-praksis-page/types";
+import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
 import ArticleGrid from "./ArticleGrid";
-
-/* const markRandomAsNew = (articles: GpArticleListT["articles"]) => {
-  return [...articles].map((a) => ({ ...a, isNew: Math.random() > 0.5 }));
-}; */
 
 const getKey = ({
   input: { pageIndex, previousPageData },
@@ -45,19 +40,7 @@ type ArticleListT = {
  * - Skeleton while loading/validating
  */
 function ArticleList({ articles }: ArticleListT) {
-  const router = useRouter();
-
-  const innholdstypeQuery = useMemo(() => {
-    return (
-      decodeURIComponent(router.query?.innholdstype?.toString?.() ?? "") ?? null
-    );
-  }, [router.query?.innholdstype]);
-
-  const undertemaQuery = useMemo(() => {
-    return (
-      decodeURIComponent(router.query?.undertema?.toString?.() ?? "") ?? null
-    );
-  }, [router.query?.undertema]);
+  const { innholdstypeQuery, undertemaQuery } = useGpQuery();
 
   const { data, size, setSize, isValidating } = useSWRInfinite<
     GpArticleListT["articles"]
