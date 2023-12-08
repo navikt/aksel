@@ -110,6 +110,7 @@
 .navds-file-list__list {
   padding: var(--a-spacing-0);
   list-style: none;
+  margin: var(--a-spacing-2) 0;
 }
 
 .navds-file-list__error .navds-error-message {
