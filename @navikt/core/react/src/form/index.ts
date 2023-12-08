@@ -25,7 +25,7 @@ export { Search, type SearchClearEvent, type SearchProps } from "./search";
 export {
   FileUpload,
   type DropzoneProps,
-  type OnFileUploadProps,
+  type OnFileSelectProps,
   type FileMetadata,
   type FileBase64,
   type FileItem,

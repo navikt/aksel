@@ -21,7 +21,7 @@ import {
 } from "./utils/i18n";
 import { partitionFiles } from "./utils/partition-files";
 
-export interface OnFileUploadProps {
+export interface OnFileSelectProps {
   allFiles: File[];
   acceptedFiles: File[];
   rejectedFiles: File[];
@@ -30,7 +30,7 @@ export interface OnFileUploadProps {
 export interface DropzoneProps
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "children" | "size"
+    "children" | "size" | "onSelect"
   > {
   /**
    * ID of the input element. Required to properly
@@ -70,7 +70,7 @@ export interface DropzoneProps
   /**
    * Callback triggered on file upload
    */
-  onUpload({ allFiles, acceptedFiles, rejectedFiles }: OnFileUploadProps): void;
+  onSelect({ allFiles, acceptedFiles, rejectedFiles }: OnFileSelectProps): void;
   /**
    * Custom validator that is used to decide
    * if a file is accepted or rejected.
@@ -91,7 +91,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
 
     const {
-      onUpload,
+      onSelect,
       error,
       label,
       description,
@@ -116,9 +116,9 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           validator
         );
 
-        onUpload({ allFiles: files, acceptedFiles, rejectedFiles });
+        onSelect({ allFiles: files, acceptedFiles, rejectedFiles });
       },
-      [onUpload, accept, validator]
+      [onSelect, accept, validator]
     );
 
     useEffect(() => {

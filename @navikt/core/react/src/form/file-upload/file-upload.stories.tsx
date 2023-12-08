@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import React from "react";
 import { FileUpload } from "..";
-import { OnFileUploadProps } from "./Dropzone";
+import { OnFileSelectProps } from "./Dropzone";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload/Dropzone",
@@ -10,11 +10,11 @@ const meta: Meta<typeof FileUpload.Dropzone> = {
 
 export default meta;
 
-const onUpload = ({
+const onSelect = ({
   allFiles,
   acceptedFiles,
   rejectedFiles,
-}: OnFileUploadProps) => {
+}: OnFileSelectProps) => {
   alert(
     `Lastet opp ${allFiles.length} filer. Accepted: ${acceptedFiles.length}. Rejected: ${rejectedFiles.length}`
   );
@@ -24,7 +24,7 @@ export const Dropzone = {
   render: () => (
     <FileUpload.Dropzone
       label="Last opp filer"
-      onUpload={onUpload}
+      onSelect={onSelect}
       id="fileupload-input"
     />
   ),
@@ -35,7 +35,7 @@ export const DropzoneWithDescription = {
     <FileUpload.Dropzone
       label="Last opp filer"
       description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
-      onUpload={onUpload}
+      onSelect={onSelect}
       id="fileupload-input"
     />
   ),
@@ -44,7 +44,7 @@ export const Accept = {
   render: () => (
     <FileUpload.Dropzone
       label="Last opp filer"
-      onUpload={onUpload}
+      onSelect={onSelect}
       accept=".png"
       id="fileupload-input"
     />
@@ -55,7 +55,7 @@ export const DropzoneWithError = {
   render: () => (
     <FileUpload.Dropzone
       label="Last opp filer"
-      onUpload={onUpload}
+      onSelect={onSelect}
       error="Du må laste opp en fil"
       id="fileupload-input"
     />
@@ -66,7 +66,7 @@ export const DropzoneWithErrorAndDescription = {
   render: () => (
     <FileUpload.Dropzone
       label="Last opp filer"
-      onUpload={onUpload}
+      onSelect={onSelect}
       error="Du må laste opp en fil"
       description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
       id="fileupload-input"
@@ -78,7 +78,7 @@ export const LocaleEnglish = {
   render: () => (
     <FileUpload.Dropzone
       label="Provide documentation"
-      onUpload={onUpload}
+      onSelect={onSelect}
       id="fileupload-input"
       locale="en"
     />
@@ -89,7 +89,7 @@ export const LocaleNynorsk = {
   render: () => (
     <FileUpload.Dropzone
       label="Last opp filer"
-      onUpload={onUpload}
+      onSelect={onSelect}
       id="fileupload-input"
       locale="nn"
     />
