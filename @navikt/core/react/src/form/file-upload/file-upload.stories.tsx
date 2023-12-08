@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import React from "react";
 import { FileUpload } from "..";
-import { OnUploadProps } from "./Dropzone";
+import { OnFileUploadProps } from "./Dropzone";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload/Dropzone",
@@ -14,7 +14,7 @@ const onUpload = ({
   allFiles,
   acceptedFiles,
   rejectedFiles,
-}: OnUploadProps) => {
+}: OnFileUploadProps) => {
   alert(
     `Lastet opp ${allFiles.length} filer. Accepted: ${acceptedFiles.length}. Rejected: ${rejectedFiles.length}`
   );

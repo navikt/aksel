@@ -21,11 +21,11 @@ import {
 } from "./utils/i18n";
 import { partitionFiles } from "./utils/partition-files";
 
-export type OnUploadProps = {
+export interface OnFileUploadProps {
   allFiles: File[];
   acceptedFiles: File[];
   rejectedFiles: File[];
-};
+}
 
 export interface DropzoneProps
   extends Omit<
@@ -70,7 +70,7 @@ export interface DropzoneProps
   /**
    * Callback triggered on file upload
    */
-  onUpload({ allFiles, acceptedFiles, rejectedFiles }: OnUploadProps): void;
+  onUpload({ allFiles, acceptedFiles, rejectedFiles }: OnFileUploadProps): void;
   /**
    * Custom validator that is used to decide
    * if a file is accepted or rejected.
