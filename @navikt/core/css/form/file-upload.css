@@ -131,14 +131,14 @@
 
 .navds-file-item {
   display: flex;
-  border: 1px solid var(--ac-file-bg, var(--a-surface-subtle));
-  border-radius: var(--ac-file-border-radius, var(--a-border-radius-large));
+  border: 1px solid var(--ac-file-upload-file-border, var(--a-border-subtle));
+  border-radius: var(--ac-file-upload-file-border-radius, var(--a-border-radius-large));
   padding: var(--a-spacing-2) var(--a-spacing-3);
   gap: var(--a-spacing-2);
 }
 
 .navds-file-item--error {
-  border-color: var(--ac-file-error-border, var(--a-surface-danger));
+  border-color: var(--ac-file-upload-file-error-border, var(--a-surface-danger));
 }
 
 .navds-file-item__button {
@@ -151,7 +151,7 @@
   align-items: center;
   align-self: start;
   margin-top: var(--a-spacing-2);
-  background-color: var(--ac-file-icon-bg, var(--a-bg-subtle));
+  background-color: var(--ac-file-upload-file-icon-bg, var(--a-bg-subtle));
   padding: var(--a-spacing-1);
   border-radius: var(--a-border-radius-full);
 }
