@@ -66,8 +66,8 @@ export const ListIcons: StoryObj<ListStoryProps> = {
   },
 };
 
-export const ListWithBreaking: StoryObj<ListStoryProps> = {
-  render: (props) => {
+export const ListWithBreaking: StoryObj = {
+  render: () => {
     const metadataFile = {
       name: "imafilewithanamethatistoolong.txt",
     };
@@ -75,7 +75,7 @@ export const ListWithBreaking: StoryObj<ListStoryProps> = {
     const error = "imaverylongerrorandyoushouldfixme!";
     return (
       <div style={{ maxWidth: "200px" }}>
-        <FileUpload.List label={props.label}>
+        <FileUpload.List label="Opplastede filer">
           <FileUpload.Item file={metadataFile} />
           <FileUpload.Item
             file={metadataFile}
