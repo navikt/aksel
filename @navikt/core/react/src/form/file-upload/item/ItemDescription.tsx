@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ErrorMessage } from "@navikt/ds-react";
+import { ErrorMessage } from "../../../typography";
 import { ItemContext } from "./item-context";
 import { formatFileSize } from "./utils/format-file-size";
 

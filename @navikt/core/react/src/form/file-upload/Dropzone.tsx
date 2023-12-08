@@ -9,7 +9,8 @@ import React, {
   useState,
 } from "react";
 import { CloudUpIcon, UploadIcon } from "@navikt/aksel-icons";
-import { BodyShort, Button, ErrorMessage, Label } from "@navikt/ds-react";
+import { Button } from "../../button";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { mergeRefs } from "../../util";
 import { useFormField } from "../useFormField";
 import {

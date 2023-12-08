@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
-import { Button } from "@navikt/ds-react";
+import { Button } from "../../../button";
 import { ItemContext } from "./item-context";
 
 const ItemButton = () => {
