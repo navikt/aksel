@@ -96,11 +96,6 @@ export const ListWithBreaking: StoryObj<ListStoryProps> = {
       </div>
     );
   },
-  args: {
-    error: "hei jeg er en feil og jeg må rettes opp!",
-    isLoading: true,
-    label: "Opplastede filer",
-  },
 };
 
 export const ListDownloading: StoryObj<ListStoryProps> = {
@@ -152,9 +147,6 @@ export const ListDownloading: StoryObj<ListStoryProps> = {
       <FileUpload.Item file={fileTxt} />
     </FileUpload.List>
   ),
-  args: {
-    label: "Opplastede filer",
-  },
 };
 
 export const ListLocales: StoryObj<ListStoryProps> = {
