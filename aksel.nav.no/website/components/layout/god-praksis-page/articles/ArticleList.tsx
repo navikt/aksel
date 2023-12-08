@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 import { Button } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
@@ -8,6 +9,8 @@ import {
 } from "@/layout/god-praksis-page/types";
 import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
 import ArticleGrid from "./ArticleGrid";
+
+const INITIAL_PAGE = 3;
 
 const getKey = ({
   input: { pageIndex, previousPageData },
@@ -37,45 +40,50 @@ type ArticleListT = {
 /**
  * TODO:
  * - Handle errors
- * - Skeleton while loading/validating
  */
 function ArticleList({ articles }: ArticleListT) {
   const { innholdstypeQuery, undertemaQuery } = useGpQuery();
 
-  const { data, size, setSize, isValidating } = useSWRInfinite<
-    GpArticleListT["articles"]
-  >(
+  const {
+    data = [],
+    size,
+    setSize,
+    isValidating,
+  } = useSWRInfinite<GpArticleListT["articles"]>(
     (pageIndex, previousPageData) =>
       getKey({
-        input: { pageIndex, previousPageData },
+        input: { pageIndex: pageIndex + INITIAL_PAGE, previousPageData },
         innholdstypeQuery,
         undertemaQuery,
       }),
     (query) => fetch(query).then((res) => res.json()),
     {
-      fallbackData: [
-        getArticleList(articles, innholdstypeQuery, undertemaQuery).map(
-          (x) => x.article
-        ),
-      ],
       revalidateFirstPage: false,
-      initialSize: 4,
+      initialSize: 1,
     }
   );
 
-  const atEnd = data && data[data.length - 1]?.length < 3;
+  const initialData = useMemo(
+    () =>
+      getArticleList(articles, innholdstypeQuery, undertemaQuery).map(
+        (x) => x.article
+      ),
+    [articles, innholdstypeQuery, undertemaQuery]
+  );
+
+  const atEndOfLazy = data && data[data.length - 1]?.length < 3;
+
+  const lazyData =
+    atEndOfLazy || data.length === 1 || size > data.length
+      ? data
+      : data.toSpliced(-1);
+
+  const concatArticles = [].concat(initialData, ...lazyData);
 
   return (
     <>
-      <ArticleGrid
-        name="Siste"
-        articles={[].concat(
-          ...(atEnd || data.length === 1 || size > data.length
-            ? data
-            : data.toSpliced(-1))
-        )}
-      />
-      {!atEnd && (
+      <ArticleGrid name="Siste" articles={concatArticles} />
+      {!atEndOfLazy && initialData.length === 9 && (
         <Button
           variant="tertiary-neutral"
           onClick={() => setSize(size + 1)}
