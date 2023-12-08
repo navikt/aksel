@@ -30,6 +30,17 @@ export const Dropzone = {
   ),
 };
 
+export const DropzoneSingle = {
+  render: () => (
+    <FileUpload.Dropzone
+      label="Last opp fil"
+      multiple={false}
+      onSelect={onSelect}
+      id="fileupload-input"
+    />
+  ),
+};
+
 export const DropzoneWithDescription = {
   render: () => (
     <FileUpload.Dropzone

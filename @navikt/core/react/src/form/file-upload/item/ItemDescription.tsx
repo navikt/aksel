@@ -16,11 +16,13 @@ const ItemDescription = () => {
   if (isLoading) {
     switch (locale) {
       case "nb":
-        return "Laster opp";
+        return "Laster opp…";
       case "nn":
-        return "Lastar opp";
+        return "Lastar opp…";
       case "en":
-        return "Uploading";
+        return "Uploading…";
+      default:
+        return "Laster opp…";
     }
   }
 

@@ -55,12 +55,13 @@ export interface DropzoneProps
   error?: string;
   /**
    * Indicates if it is possible
-   * to upload multiple files at once.
+   * to select multiple files at once.
+   * @default true
    */
   multiple?: boolean;
   /**
-   * Indicates which MIME types are
-   * selectable in the file browser.
+   * Indicates which MIME types to accept.
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept
    */
   accept?: string;
   /**
@@ -68,14 +69,14 @@ export interface DropzoneProps
    */
   ref?: React.Ref<HTMLInputElement>;
   /**
-   * Callback triggered on file upload
+   * Callback triggered on file select
    */
-  onSelect({ allFiles, acceptedFiles, rejectedFiles }: OnFileSelectProps): void;
+  onSelect: (files: OnFileSelectProps) => void;
   /**
    * Custom validator that is used to decide
    * if a file is accepted or rejected.
    */
-  validator?(file: File): boolean;
+  validator?: (file: File) => boolean;
   /**
    * Changes locale used for component text.
    * @default "nb" (norsk bokmål)
@@ -85,7 +86,7 @@ export interface DropzoneProps
 
 const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
   (props: DropzoneProps, ref) => {
-    const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
+    const [isDraggingOver, setIsDraggingOver] = useState(false);
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
@@ -151,7 +152,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     }, [upload]);
 
     const onButtonClick = () => {
-      inputRef?.current?.click();
+      inputRef.current?.click();
     };
 
     const onDragEnter = () => setIsDraggingOver(true);
@@ -172,16 +173,13 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
 
     return (
       <div className={cl("navds-form-field", "navds-file-dropzone", className)}>
-        <Label
-          htmlFor={inputProps.id}
-          className={cl("navds-form-field__label")}
-        >
+        <Label htmlFor={inputProps.id} className="navds-form-field__label">
           {label}
         </Label>
         {!!description && (
           <BodyShort
             id={inputDescriptionId}
-            className={cl("navds-form-field__description")}
+            className="navds-form-field__description"
             as="div"
           >
             {description}
@@ -207,13 +205,9 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             <div className="navds-file-dropzone__content-zone-icon">
               <UploadIcon fontSize="1.5rem" aria-hidden />
             </div>
-            <div className="navds-file-dropzone__content-zone-text">
-              <BodyShort as="span" aria-hidden>
-                {getDragAndDropText(locale)}
-              </BodyShort>
-              <BodyShort as="span" aria-hidden>
-                {getOrText(locale)}
-              </BodyShort>
+            <div aria-hidden className="navds-file-dropzone__content-zone-text">
+              <BodyShort as="span">{getDragAndDropText(locale)}</BodyShort>
+              <BodyShort as="span">{getOrText(locale)}</BodyShort>
             </div>
             <Button
               className="navds-file-dropzone__content-zone-button"
