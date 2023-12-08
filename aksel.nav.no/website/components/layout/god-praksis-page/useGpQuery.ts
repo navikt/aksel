@@ -1,20 +1,32 @@
 import { useRouter } from "next/router";
-import { useMemo } from "react";
 
-function useGpQuery(): { innholdstypeQuery: string; undertemaQuery: string } {
+function useGpQuery(): {
+  innholdstypeQuery: string;
+  undertemaQuery: string;
+  temaQuery: string;
+} {
   const { query } = useRouter();
 
-  const innholdstypeQuery = useMemo(() => {
+  const innholdstypeQuery = () => {
     const q = decodeURIComponent(query?.innholdstype?.toString?.() ?? "");
     return q.length > 0 ? q : null;
-  }, [query?.innholdstype]);
+  };
 
-  const undertemaQuery = useMemo(() => {
+  const undertemaQuery = () => {
     const q = decodeURIComponent(query?.undertema?.toString?.() ?? "");
     return q.length > 0 ? q : null;
-  }, [query?.undertema]);
+  };
 
-  return { innholdstypeQuery, undertemaQuery };
+  const temaQuery = () => {
+    const q = decodeURIComponent(query?.slug?.toString?.() ?? "");
+    return q.length > 0 ? q : null;
+  };
+
+  return {
+    innholdstypeQuery: innholdstypeQuery(),
+    undertemaQuery: undertemaQuery(),
+    temaQuery: temaQuery(),
+  };
 }
 
 export default useGpQuery;

@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { groq } from "next-sanity";
+import { baseGpArticleData } from "@/layout/god-praksis-page/queries";
 import { getClient } from "@/sanity/client.server";
 
 export default async function gpAarticles(
@@ -10,6 +12,9 @@ export default async function gpAarticles(
   }
 
   const page = Number(req.query.page);
+  const innholdstype = req.query?.innholdstype?.toString?.() ?? "";
+  const undertema = req.query?.undertema?.toString?.() ?? "";
+  const tema = req.query?.tema?.toString?.() ?? "";
 
   if (!page && page !== 0) {
     return res
@@ -17,20 +22,51 @@ export default async function gpAarticles(
       .json({ message: "Missing page param for pagination" });
   }
 
-  const query = `*[_type == "aksel_artikkel" && defined(undertema)] | order(publishedAt desc)[$start...$end]{
-    heading,
-    ingress ,
-    "undertema": undertema[]->title,
-    "innholdstype": innholdstype->title,
-    "slug": slug.current
-  }`;
+  const temaPageQuery = groq`
+    {
+      "articles": {
+        $undertema == "" && $innholdstype == "" => {
+          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        },
+        $undertema != "" && $innholdstype == "" => {
+          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current && $undertema in undertema[]->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        },
+        $undertema == "" && $innholdstype != "" => {
+          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current && $innholdstype == innholdstype->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        },
+        $undertema != "" && $innholdstype != "" => {
+          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current && $undertema in undertema[]->title && $innholdstype == innholdstype->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        }
+      }
+    }
+  `;
+
+  const mainPageQuery = groq`
+    {
+      "articles": {
+        $innholdstype == "" => {
+          "articles": *[_type == 'aksel_artikkel' ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        },
+        $innholdstype != "" => {
+          "articles": *[_type == 'aksel_artikkel' && $innholdstype == innholdstype->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        }
+      }
+    }
+`;
 
   let payload;
 
   await getClient()
-    .fetch(query, { start: page * 3, end: (page + 1) * 3 })
+    .fetch(tema.length > 0 ? temaPageQuery : mainPageQuery, {
+      start: page * 3,
+      end: (page + 1) * 3,
+      innholdstype,
+      undertema,
+      tema,
+    })
     .then((data) => {
-      payload = data;
+      /* TODO: Better way to do this query? */
+      payload = data.articles.articles;
     })
     .catch((err) => {
       console.log("Error message: ", err.message);
