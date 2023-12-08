@@ -1,0 +1,21 @@
+.articleGrid {
+  animation: articleGridFadeUp 600ms forwards;
+}
+
+.articleGridLazy {
+  animation: articleGridFadeUpLazy 600ms forwards;
+}
+
+@keyframes articleGridFadeUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0);
+  }
+}
+
+@keyframes articleGridFadeUpLazy {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+}

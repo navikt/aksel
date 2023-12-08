@@ -1,10 +1,10 @@
-import clsx from "clsx";
-import dynamic from "next/dynamic";
-import { BodyLong, Box, HStack, Heading, Tag, VStack } from "@navikt/ds-react";
-
-const Sticker = dynamic(() => import("./Sticker"), {
-  ssr: false,
-});
+import cl from "clsx";
+import Link from "next/link";
+import { CSSProperties } from "react";
+import { BodyLong, Heading, VStack } from "@navikt/ds-react";
+import { useFormatedDate } from "@/hooks/useFormatedDate";
+import { GpArticleListT } from "@/layout/god-praksis-page/types";
+import styles from "./articles.module.css";
 
 const trunc = (text, num_chars) => {
   return `${text.substring(0, num_chars)}${
@@ -13,76 +13,49 @@ const trunc = (text, num_chars) => {
 };
 
 export const ArticleCard = ({
-  title,
-  content,
+  heading,
+  ingress,
   slug,
-  main = false,
-  innholdstype,
-  undertema,
-  isNew = false,
-}: {
-  title: string;
-  content: string;
-  slug: string;
-  main?: boolean;
-  innholdstype?: string;
-  undertema?: string;
-  isNew?: boolean;
+  publishedAt,
+  group,
+  delay,
+}: GpArticleListT["articles"][number] & {
+  group: "initial" | "lazy";
+  delay?: number;
 }) => {
-  return (
-    <>
-      <style>
-        {`
-        .gp-article-card {
-            width: 100%;
-            flex-shrink: ${main ? 1 : 1};
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .gp-article-card:hover {
-            box-shadow: var(--a-shadow-xlarge);
-        }
-        `}
-      </style>
-      <Box
-        as="a"
-        href={`./${slug}`}
-        className={clsx("gp-article-card", {
-          "col-span-2 row-span-2": main,
-        })}
-        paddingBlock="10"
-        paddingInline="10"
-        borderRadius="xlarge"
-        background="surface-default"
-        shadow="xsmall"
-      >
-        <VStack justify="space-between" className="min-h-full relative">
-          <Box paddingBlock="0 5">
-            <Box paddingBlock="0 2">
-              <Heading size={main ? "xlarge" : "medium"}>
-                <span>{title}</span>
-              </Heading>
-            </Box>
+  const date = useFormatedDate(publishedAt);
 
-            <BodyLong size={main ? "large" : "small"}>
-              {main ? trunc(content, 770) : trunc(content, 200)}
-            </BodyLong>
-          </Box>
-          <HStack gap="2">
-            {undertema && (
-              <Tag variant="success" size={main ? "medium" : "xsmall"}>
-                {undertema}
-              </Tag>
-            )}
-            {innholdstype && (
-              <Tag variant="error" size={main ? "medium" : "xsmall"}>
-                {innholdstype}
-              </Tag>
-            )}
-          </HStack>
-          {isNew && <Sticker large={main} />}
-        </VStack>
-      </Box>
-    </>
+  const tDelay: CSSProperties = delay
+    ? { transitionDuration: `${delay}ms` }
+    : undefined;
+
+  return (
+    <Link
+      href={`./${slug}`}
+      className={cl(
+        "flex-shrink w-full overflow-hidden text-ellipsis hover:shadow-large p-10 rounded-xlarge bg-surface-default shadow-small",
+        {
+          [styles.articleGrid]: group === "initial",
+          [styles.articleGridLazy]: group === "lazy",
+        }
+      )}
+      style={tDelay}
+    >
+      <VStack justify="space-between" className="min-h-full relative">
+        <div>
+          <Heading
+            size="medium"
+            level="2"
+            spacing
+            className="text-aksel-heading underline"
+          >
+            {heading}
+          </Heading>
+          {ingress && <BodyLong>{trunc(ingress, 100)}</BodyLong>}
+        </div>
+
+        {date && <div className="pt-2">{date}</div>}
+      </VStack>
+    </Link>
   );
 };

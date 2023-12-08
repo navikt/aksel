@@ -78,12 +78,13 @@ function ArticleList({ articles }: ArticleListT) {
 
   const atEndOfLazy = data && data[data.length - 1]?.length < 3;
 
-  const concatArticles = [].concat(initialData, ...data);
-
-  /* console.log(data); */
   return (
     <>
-      <ArticleGrid name="Siste" articles={concatArticles} />
+      <ArticleGrid
+        name="Siste"
+        initialData={initialData}
+        data={[].concat(...data)}
+      />
       {!atEndOfLazy && initialData.length === 9 && (
         <Button
           variant="tertiary-neutral"
