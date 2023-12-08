@@ -59,11 +59,8 @@ export const ArticleCard = ({
         <VStack justify="space-between" className="min-h-full relative">
           <Box paddingBlock="0 5">
             <Box paddingBlock="0 2">
-              <Heading
-                className="inner-shiny"
-                size={main ? "xlarge" : "medium"}
-              >
-                <span className="shiny">{title}</span>
+              <Heading size={main ? "xlarge" : "medium"}>
+                <span>{title}</span>
               </Heading>
             </Box>
 
