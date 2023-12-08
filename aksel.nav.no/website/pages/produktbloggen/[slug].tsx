@@ -1,3 +1,7 @@
+import Image from "next/legacy/image";
+import { GetServerSideProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -15,10 +19,6 @@ import { abbrName, dateStr, getImage } from "@/utils";
 import { BloggAd } from "@/web/BloggAd";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
-import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
-import Image from "next/legacy/image";
-import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
@@ -101,7 +101,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             <Heading
               level="1"
               size="xlarge"
-              className="text-deepblue-800 mt-1 break-words text-5xl leading-[1.2] [hyphens:_auto]"
+              className="text-deepblue-800 mt-1 break-words text-5xl leading-[1.2] [hyphens:_auto] text-wrap-balance"
             >
               {blogg.heading}
             </Heading>
