@@ -72,20 +72,15 @@ function ArticleList({ articles }: ArticleListT) {
     (query) => fetch(query).then((res) => res.json()),
     {
       revalidateFirstPage: false,
-      initialSize: 1,
+      initialSize: 0,
     }
   );
 
   const atEndOfLazy = data && data[data.length - 1]?.length < 3;
 
-  const lazyData =
-    atEndOfLazy || data.length === 1 || size > data.length
-      ? data
-      : data.toSpliced(-1);
+  const concatArticles = [].concat(initialData, ...data);
 
-  const concatArticles = [].concat(initialData, ...lazyData);
-
-  console.log(data);
+  /* console.log(data); */
   return (
     <>
       <ArticleGrid name="Siste" articles={concatArticles} />
