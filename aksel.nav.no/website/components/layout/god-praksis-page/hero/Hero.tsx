@@ -5,7 +5,7 @@ import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong, Box, Heading, Modal, VStack } from "@navikt/ds-react";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/types";
 
-function Hero({ tema, heroNav }: GpTemaT & HeroNavT) {
+function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   return (

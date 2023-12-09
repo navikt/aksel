@@ -8,21 +8,19 @@ export type GpArticleT = {
   publishedAt: string | null;
 };
 
+export type GpTemaT = {
+  title: string;
+  slug: string;
+  description?: string;
+  undertema: { title: string; description: string }[];
+};
+
 export type HeroNavT = {
   heroNav: {
     title: string;
     slug: string;
     hasRefs: boolean;
   }[];
-};
-
-export type GpTemaT = {
-  tema: {
-    title: string;
-    slug: string;
-    description?: string;
-    undertema: { title: string; description: string }[];
-  } | null;
 };
 
 export type GpInnholdstypeT = {
@@ -81,6 +79,7 @@ export type GpGroupedArticlesInputT = {
 };
 
 export type GpEntryPageProps = HeroNavT &
-  GpInnholdstypeT & { articles: GpArticleT[] } & GpTemaT &
-  GpChipsInnholdstypeT &
+  GpInnholdstypeT & { articles: GpArticleT[] } & {
+    tema: GpTemaT | null;
+  } & GpChipsInnholdstypeT &
   GpChipsUndertemaT & { initialArticles: GpGroupedArticlesT };
