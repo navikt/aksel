@@ -65,12 +65,12 @@ export type GpGroupedArticlesT = {
 }[];
 
 export type GpGroupedArticlesInputT = {
-  initialInnholdstype: {
+  initialInnholdstype?: {
     title: string;
     articles: GpArticleT[];
   }[];
 
-  initialUndertema: {
+  initialUndertema?: {
     title: string;
     articles: GpArticleT[];
   }[];

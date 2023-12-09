@@ -12,16 +12,7 @@ import {
   innholdstypeQuery,
   temaQuery,
 } from "@/layout/god-praksis-page/queries";
-import {
-  GpArticleT,
-  GpChipsInnholdstypeRawT,
-  GpChipsUndertemaRawT,
-  GpEntryPageProps,
-  GpGroupedArticlesInputT,
-  GpInnholdstypeT,
-  GpTemaT,
-  HeroNavT,
-} from "@/layout/god-praksis-page/types";
+import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
 import { getGpTema } from "@/sanity/interface";
 import { NextPageT } from "@/types";
@@ -70,13 +61,7 @@ export const getStaticProps: GetStaticProps = async ({
     chipsUndertema,
     initialInnholdstype,
     initialUndertema,
-  }: HeroNavT & { tema: GpTemaT | null } & {
-    innholdstype: GpInnholdstypeT[];
-  } & {
-    articles: GpArticleT[];
-  } & GpChipsInnholdstypeRawT &
-    GpChipsUndertemaRawT &
-    GpGroupedArticlesInputT = await getClient().fetch(query, {
+  } = await getClient().fetch(query, {
     slug,
   });
 

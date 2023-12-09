@@ -11,12 +11,8 @@ import {
   innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
-  GpArticleT,
   GpChipsInnholdstypeRawT,
   GpEntryPageProps,
-  GpGroupedArticlesInputT,
-  GpInnholdstypeT,
-  HeroNavT,
 } from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
@@ -60,11 +56,7 @@ export const getStaticProps: GetStaticProps = async ({
     innholdstype,
     chipsInnholdstype,
     initialInnholdstype,
-  }: { articles: GpArticleT[] } & HeroNavT & {
-      innholdstype: GpInnholdstypeT[];
-    } & GpChipsInnholdstypeRawT & {
-      initialInnholdstype: GpGroupedArticlesInputT["initialInnholdstype"];
-    } = await getClient().fetch(query);
+  } = await getClient().fetch(query);
 
   return {
     props: {
@@ -75,7 +67,6 @@ export const getStaticProps: GetStaticProps = async ({
       chipsInnholdstype: chipDataForMain(chipsInnholdstype),
       initialArticles: groupArticles({
         initialInnholdstype,
-        initialUndertema: [],
       }),
       preview,
       id: "",
