@@ -4,6 +4,7 @@
 
 .articleGridLazy {
   animation: articleGridFadeUpLazy 600ms forwards;
+  transition: none;
 }
 
 @keyframes articleGridFadeUp {
@@ -18,4 +19,42 @@
     opacity: 0;
     transform: translateY(2rem);
   }
+}
+
+.initialGrid {
+  display: grid;
+  gap: var(--a-spacing-6);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.initialGrid > :is(:nth-child(9n + 1)) {
+  grid-row: span 2 / span 2;
+}
+
+.initialGrid > :is(:nth-child(9n + 2), :nth-child(9n + 3)) {
+  grid-column: span 2 / span 2;
+}
+
+.initialGrid > :is(:nth-child(9n + 4)) {
+  grid-column: span 2 / span 2;
+}
+
+.initialGrid > :is(:nth-child(9n + 5)) {
+  grid-row: span 2 / span 2;
+}
+
+.initialGrid > :is(:nth-child(9n + 6)) {
+  grid-column: span 2 / span 2;
+}
+
+.initialGrid > :is(:nth-child(9n + 7)) {
+  grid-row: span 2 / span 2;
+}
+
+.initialGrid > :is(:nth-child(9n + 8)) {
+  grid-column: span 2 / span 2;
+}
+
+.initialGrid > :is(:nth-child(9n + 9)) {
+  grid-column: span 2 / span 2;
 }
