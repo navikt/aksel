@@ -15,18 +15,16 @@ export type GpTemaT = {
   undertema: { title: string; description: string }[];
 };
 
+export type GpInnholdstypeT = {
+  title: string;
+  description?: string;
+  hasRefs: boolean;
+};
+
 export type HeroNavT = {
   heroNav: {
     title: string;
     slug: string;
-    hasRefs: boolean;
-  }[];
-};
-
-export type GpInnholdstypeT = {
-  innholdstype: {
-    title: string;
-    description?: string;
     hasRefs: boolean;
   }[];
 };
@@ -78,8 +76,9 @@ export type GpGroupedArticlesInputT = {
   }[];
 };
 
-export type GpEntryPageProps = HeroNavT &
-  GpInnholdstypeT & { articles: GpArticleT[] } & {
-    tema: GpTemaT | null;
-  } & GpChipsInnholdstypeT &
+export type GpEntryPageProps = HeroNavT & {
+  innholdstype: GpInnholdstypeT[];
+} & { articles: GpArticleT[] } & {
+  tema: GpTemaT | null;
+} & GpChipsInnholdstypeT &
   GpChipsUndertemaT & { initialArticles: GpGroupedArticlesT };

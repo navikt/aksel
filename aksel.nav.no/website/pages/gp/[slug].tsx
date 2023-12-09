@@ -70,9 +70,11 @@ export const getStaticProps: GetStaticProps = async ({
     chipsUndertema,
     initialInnholdstype,
     initialUndertema,
-  }: HeroNavT & { tema: GpTemaT | null } & GpInnholdstypeT & {
-      articles: GpArticleT[];
-    } & GpChipsInnholdstypeRawT &
+  }: HeroNavT & { tema: GpTemaT | null } & {
+    innholdstype: GpInnholdstypeT[];
+  } & {
+    articles: GpArticleT[];
+  } & GpChipsInnholdstypeRawT &
     GpChipsUndertemaRawT &
     GpGroupedArticlesInputT = await getClient().fetch(query, {
     slug,
