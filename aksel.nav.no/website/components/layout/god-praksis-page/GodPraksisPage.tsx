@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { Box, Heading, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
+import useInitialState from "@/layout/god-praksis-page/useInitialState";
 import Header from "@/layout/header/Header";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
@@ -11,6 +12,8 @@ const ArticleList = dynamic(() => import("./articles/ArticleList"), {
 });
 
 function GodPraksisPage(props: GpEntryPageProps) {
+  const { initialData } = useInitialState(props.initialArticles);
+
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -35,7 +38,7 @@ function GodPraksisPage(props: GpEntryPageProps) {
               <Heading level="2" size="medium" className="text-aksel-heading">
                 Siste
               </Heading>
-              <ArticleList articles={props.initialArticles} />
+              <ArticleList initialArticles={initialData} />
             </div>
           </VStack>
         </Page.Block>

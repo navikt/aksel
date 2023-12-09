@@ -4,11 +4,7 @@ import useSWRInfinite from "swr/infinite";
 import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
-import { getArticleList } from "@/layout/god-praksis-page/initial-load/get-article-list";
-import {
-  GpArticleT,
-  GpGroupedArticlesT,
-} from "@/layout/god-praksis-page/types";
+import { GpArticleT } from "@/layout/god-praksis-page/types";
 import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
 import ArticleGrid from "./ArticleGrid";
 import styles from "./articles.module.css";
@@ -38,23 +34,16 @@ const getKey = ({
 };
 
 type ArticleListT = {
-  articles: GpGroupedArticlesT;
+  initialArticles: GpArticleT[];
 };
 
 /**
  * TODO:
  * - Handle errors
  */
-function ArticleList({ articles }: ArticleListT) {
-  const { innholdstypeQuery, undertemaQuery, temaQuery } = useGpQuery();
+function ArticleList({ initialArticles }: ArticleListT) {
   const router = useRouter();
-
-  /* TODO: Getting flash from data-change since queries are memos */
-  const initialData = router.isReady
-    ? getArticleList(articles, innholdstypeQuery, undertemaQuery).map(
-        (x) => x.article
-      )
-    : [];
+  const { innholdstypeQuery, undertemaQuery, temaQuery } = useGpQuery();
 
   const {
     data = [],
@@ -63,7 +52,7 @@ function ArticleList({ articles }: ArticleListT) {
     isValidating,
   } = useSWRInfinite<GpArticleT[]>(
     (pageIndex, previousPageData) =>
-      initialData.length < 9
+      initialArticles.length < 9
         ? null
         : getKey({
             input: { pageIndex: pageIndex + INITIAL_PAGE, previousPageData },
@@ -83,11 +72,11 @@ function ArticleList({ articles }: ArticleListT) {
   return (
     <div>
       <ArticleGrid
-        initialData={initialData}
+        initialData={initialArticles}
         data={[].concat(...data)}
         loaded={router.isReady}
       />
-      {!atEndOfLazy && initialData.length === 9 && router.isReady && (
+      {!atEndOfLazy && initialArticles.length === 9 && router.isReady && (
         <div className={cl("pt-8 flex justify-center", styles.articleGrid)}>
           <Button
             variant="tertiary-neutral"
