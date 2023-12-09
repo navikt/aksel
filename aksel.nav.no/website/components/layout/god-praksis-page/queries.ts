@@ -9,13 +9,6 @@ export const heroNavQuery = groq`
 }
 `;
 
-export const innholdstypeQuery = groq`
-"innholdstype": *[_type == "gp.innholdstype"]{
-  ...,
-  "hasRefs": count(*[_type=="aksel_artikkel"
-      && ^._id == innholdstype._ref]) > 0
-}`;
-
 export const chipsUndertemaQuery = groq`
 "chipsUndertema": *[_type == "gp.tema.undertema"]{
   title,

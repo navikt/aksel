@@ -9,7 +9,6 @@ import {
   firstArticlesQuery,
   heroNavQuery,
   initialTemaPageArticles,
-  innholdstypeQuery,
   temaQuery,
 } from "@/layout/god-praksis-page/queries";
 import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
@@ -23,7 +22,6 @@ type PageProps = NextPageT<GpEntryPageProps>;
 const query = groq`
 {
   ${heroNavQuery},
-  ${innholdstypeQuery},
   ${temaQuery},
   ${firstArticlesQuery},
   ${chipsInnholdstypeQuery},
@@ -55,7 +53,6 @@ export const getStaticProps: GetStaticProps = async ({
   const {
     heroNav,
     tema,
-    innholdstype,
     articles,
     chipsInnholdstype,
     chipsUndertema,
@@ -70,7 +67,6 @@ export const getStaticProps: GetStaticProps = async ({
       articles,
       tema,
       heroNav: heroNav.filter((x) => x.hasRefs),
-      innholdstype: innholdstype.filter((x) => x.hasRefs),
       chipsInnholdstype: chipsInnholdstype.find((x) => x.slug === slug).types,
       chipsUndertema: chipsUndertema
         .filter((c) => c.tema === slug)

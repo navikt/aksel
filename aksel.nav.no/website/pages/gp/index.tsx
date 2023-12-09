@@ -8,7 +8,6 @@ import {
   chipsInnholdstypeQuery,
   heroNavQuery,
   initialGpMainPageArticles,
-  innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
   GpChipsInnholdstypeRawT,
@@ -23,7 +22,6 @@ type PageProps = NextPageT<GpEntryPageProps>;
 const query = groq`
 {
   ${heroNavQuery},
-  ${innholdstypeQuery},
   ${articlesQuery},
   ${chipsInnholdstypeQuery},
   ${initialGpMainPageArticles}
@@ -50,20 +48,14 @@ const chipDataForMain = (
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
-  const {
-    heroNav,
-    articles,
-    innholdstype,
-    chipsInnholdstype,
-    initialInnholdstype,
-  } = await getClient().fetch(query);
+  const { heroNav, articles, chipsInnholdstype, initialInnholdstype } =
+    await getClient().fetch(query);
 
   return {
     props: {
       tema: null,
       articles,
       heroNav: heroNav.filter((x) => x.hasRefs),
-      innholdstype: innholdstype.filter((x) => x.hasRefs),
       chipsInnholdstype: chipDataForMain(chipsInnholdstype),
       initialArticles: groupArticles({
         initialInnholdstype,
