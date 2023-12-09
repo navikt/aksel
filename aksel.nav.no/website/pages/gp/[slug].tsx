@@ -6,7 +6,6 @@ import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-arti
 import {
   chipsInnholdstypeQuery,
   chipsUndertemaQuery,
-  firstArticlesQuery,
   heroNavQuery,
   initialTemaPageArticles,
   temaQuery,
@@ -23,7 +22,6 @@ const query = groq`
 {
   ${heroNavQuery},
   ${temaQuery},
-  ${firstArticlesQuery},
   ${chipsInnholdstypeQuery},
   ${chipsUndertemaQuery},
   ${initialTemaPageArticles},
@@ -53,7 +51,6 @@ export const getStaticProps: GetStaticProps = async ({
   const {
     heroNav,
     tema,
-    articles,
     chipsInnholdstype,
     chipsUndertema,
     initialInnholdstype,
@@ -64,7 +61,6 @@ export const getStaticProps: GetStaticProps = async ({
 
   return {
     props: {
-      articles,
       tema,
       heroNav: heroNav.filter((x) => x.hasRefs),
       chipsInnholdstype: chipsInnholdstype.find((x) => x.slug === slug).types,

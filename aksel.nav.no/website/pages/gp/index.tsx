@@ -4,7 +4,6 @@ import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
 import {
-  articlesQuery,
   chipsInnholdstypeQuery,
   heroNavQuery,
   initialGpMainPageArticles,
@@ -22,7 +21,6 @@ type PageProps = NextPageT<GpEntryPageProps>;
 const query = groq`
 {
   ${heroNavQuery},
-  ${articlesQuery},
   ${chipsInnholdstypeQuery},
   ${initialGpMainPageArticles}
 }
@@ -48,13 +46,12 @@ const chipDataForMain = (
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
-  const { heroNav, articles, chipsInnholdstype, initialInnholdstype } =
+  const { heroNav, chipsInnholdstype, initialInnholdstype } =
     await getClient().fetch(query);
 
   return {
     props: {
       tema: null,
-      articles,
       heroNav: heroNav.filter((x) => x.hasRefs),
       chipsInnholdstype: chipDataForMain(chipsInnholdstype),
       initialArticles: groupArticles({

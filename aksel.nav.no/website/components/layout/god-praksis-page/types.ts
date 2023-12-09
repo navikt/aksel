@@ -76,7 +76,7 @@ export type GpGroupedArticlesInputT = {
   }[];
 };
 
-export type GpEntryPageProps = HeroNavT & { articles: GpArticleT[] } & {
+export type GpEntryPageProps = HeroNavT & {
   tema: GpTemaT | null;
 } & GpChipsInnholdstypeT &
   GpChipsUndertemaT & { initialArticles: GpGroupedArticlesT };

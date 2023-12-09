@@ -28,28 +28,6 @@ export const chipsInnholdstypeQuery = groq`
   }
 }`;
 
-export const articlesQuery = groq`
-"articles": *[_type == "aksel_artikkel"
-    && defined(undertema)]
-    | order(publishedAt desc)[0...9]{
-  heading,
-  ingress ,
-  "undertema": undertema[]->title,
-  "innholdstype": innholdstype->title,
-  "slug": slug.current
-}`;
-
-export const firstArticlesQuery = groq`
-  "articles": *[_type == "aksel_artikkel"
-      && $slug in undertema[]->tema->slug.current][0...9]
-      | order(publishedAt desc) {
-    heading,
-    ingress ,
-    "undertema": undertema[]->title,
-    "innholdstype": innholdstype->title,
-    "slug": slug.current
-  }`;
-
 export const temaQuery = groq`
 "tema": *[_type == "gp.tema" && slug.current == $slug][0]{
     ...,
