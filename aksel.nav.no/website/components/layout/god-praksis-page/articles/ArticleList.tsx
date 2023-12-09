@@ -1,4 +1,7 @@
+import cl from "clsx";
+import { useRouter } from "next/router";
 import useSWRInfinite from "swr/infinite";
+import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { getArticleList } from "@/layout/god-praksis-page/initial-load/get-article-list";
@@ -8,6 +11,7 @@ import {
 } from "@/layout/god-praksis-page/types";
 import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
 import ArticleGrid from "./ArticleGrid";
+import styles from "./articles.module.css";
 
 const INITIAL_PAGE = 3;
 
@@ -26,9 +30,6 @@ const getKey = ({
     return null;
   }
 
-  console.count("Sent query");
-
-  /* TODO: Implement this in API */
   return `/api/gp-articles?page=${pageIndex}${
     temaQuery ? `&tema=${temaQuery}` : ""
   }${innholdstypeQuery ? `&innholdstype=${innholdstypeQuery}` : ""}${
@@ -46,13 +47,14 @@ type ArticleListT = {
  */
 function ArticleList({ articles }: ArticleListT) {
   const { innholdstypeQuery, undertemaQuery, temaQuery } = useGpQuery();
+  const router = useRouter();
 
   /* TODO: Getting flash from data-change since queries are memos */
-  const initialData = getArticleList(
-    articles,
-    innholdstypeQuery,
-    undertemaQuery
-  ).map((x) => x.article);
+  const initialData = router.isReady
+    ? getArticleList(articles, innholdstypeQuery, undertemaQuery).map(
+        (x) => x.article
+      )
+    : [];
 
   const {
     data = [],
@@ -79,23 +81,25 @@ function ArticleList({ articles }: ArticleListT) {
   const atEndOfLazy = data && data[data.length - 1]?.length < 3;
 
   return (
-    <>
+    <div>
       <ArticleGrid
-        name="Siste"
         initialData={initialData}
         data={[].concat(...data)}
+        loaded={router.isReady}
       />
-      {!atEndOfLazy && initialData.length === 9 && (
-        <Button
-          variant="tertiary-neutral"
-          onClick={() => setSize(size + 1)}
-          className="mx-auto"
-          loading={isValidating}
-        >
-          Last flere artikler
-        </Button>
+      {!atEndOfLazy && initialData.length === 9 && router.isReady && (
+        <div className={cl("pt-8 flex justify-center", styles.articleGrid)}>
+          <Button
+            variant="tertiary-neutral"
+            onClick={() => setSize(size + 1)}
+            disabled={isValidating}
+            icon={<ChevronDownCircleIcon aria-hidden />}
+          >
+            Last flere artikler
+          </Button>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

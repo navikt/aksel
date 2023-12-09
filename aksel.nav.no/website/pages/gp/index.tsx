@@ -67,12 +67,6 @@ export const getStaticProps: GetStaticProps = async ({
       initialInnholdstype: GpGroupedArticlesInputT["initialInnholdstype"];
     } = await getClient().fetch(query);
 
-  console.log({
-    initialArticles: groupArticles({
-      initialInnholdstype,
-      initialUndertema: [],
-    }),
-  });
   return {
     props: {
       tema: null,

@@ -31,7 +31,7 @@ export const ArticleCard = ({
 
   return (
     <Link
-      href={`./${slug}`}
+      href={`/${slug}`}
       className={cl(
         "flex-shrink w-full overflow-hidden text-ellipsis hover:shadow-large p-10 rounded-xlarge bg-surface-default shadow-small",
         {

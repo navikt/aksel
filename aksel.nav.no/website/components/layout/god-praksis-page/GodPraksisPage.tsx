@@ -1,10 +1,14 @@
-import { Box, Page, VStack } from "@navikt/ds-react";
+import dynamic from "next/dynamic";
+import { Box, Heading, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
 import Header from "@/layout/header/Header";
-import ArticleList from "./articles/ArticleList";
 import ChipNav from "./chips/ChipNav";
 import Hero from "./hero/Hero";
+
+const ArticleList = dynamic(() => import("./articles/ArticleList"), {
+  ssr: false,
+});
 
 function GodPraksisPage(props: GpEntryPageProps) {
   return (
@@ -27,7 +31,12 @@ function GodPraksisPage(props: GpEntryPageProps) {
                 <ChipNav type="innholdstype" data={props.chipsInnholdstype} />
               </VStack>
             </VStack>
-            <ArticleList articles={props.initialArticles} />
+            <div>
+              <Heading level="2" size="medium" className="text-aksel-heading">
+                Siste
+              </Heading>
+              <ArticleList articles={props.initialArticles} />
+            </div>
           </VStack>
         </Page.Block>
       </Box>

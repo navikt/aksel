@@ -1,3 +1,8 @@
+import NextLink from "next/link";
+import { GetStaticPaths, GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -22,11 +27,6 @@ import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
-import NextLink from "next/link";
-import { GetStaticPaths, GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import NotFotfund from "../../404";
 
 type PageProps = NextPageT<{

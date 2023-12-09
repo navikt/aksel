@@ -19,7 +19,7 @@ function ChipNav({ type, data, slug }: ChipsNavProps) {
 
   const id = useId();
 
-  const { query, replace } = useRouter();
+  const { query, replace, isReady } = useRouter();
 
   function handleSelect(title: string) {
     query[type] === title
@@ -31,14 +31,6 @@ function ChipNav({ type, data, slug }: ChipsNavProps) {
 
   return (
     <>
-      <style>{`
-    .chips__toggle--disabled {
-      pointer-events: none;
-      opacity: 0.5;
-      aria-disabled: true;
-      text-decoration: line-through;
-    }
-    `}</style>
       <HGrid gap="2" columns={{ sm: 1, md: "auto 1fr" }} align="center">
         <Label as="p" className="text-aksel-heading">
           {`${capitalize(type)}`}
@@ -58,7 +50,8 @@ function ChipNav({ type, data, slug }: ChipsNavProps) {
                   selected={encodeURIComponent(entry.title) === query?.[type]}
                   onClick={() => handleSelect(encodeURIComponent(entry.title))}
                   className={cl("whitespace-nowrap", {
-                    "chips__toggle--disabled": entry.count === 0,
+                    invisible: !isReady,
+                    [styles.fadeIn]: isReady,
                   })}
                 >
                   {`${entry.title} ${entry.count}`}
