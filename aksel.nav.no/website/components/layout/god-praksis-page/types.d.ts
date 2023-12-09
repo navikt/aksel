@@ -1,20 +1,18 @@
+export type GpArticleT = {
+  _id: string;
+  heading: string;
+  ingress: string;
+  undertema: string[];
+  slug: string;
+  innholdstype: string | null;
+  publishedAt: string | null;
+};
+
 export type HeroNavT = {
   heroNav: {
     title: string;
     slug: string;
     hasRefs: boolean;
-  }[];
-};
-
-export type GpArticleListT = {
-  articles: {
-    _id: string;
-    heading: string;
-    ingress: string;
-    undertema: string[];
-    innholdstype: string | null;
-    slug: string;
-    publishedAt: string | null;
   }[];
 };
 
@@ -67,24 +65,22 @@ export type ChipsDataT = {
 export type GpGroupedArticlesT = {
   innholdstype: string | null;
   undertema: string | null;
-  article: GpArticleListT["articles"][number];
+  article: GpArticleT;
 }[];
 
 export type GpGroupedArticlesInputT = {
   initialInnholdstype: {
     title: string;
-    articles: GpArticleListT["articles"];
+    articles: GpArticleT[];
   }[];
 
   initialUndertema: {
     title: string;
-    articles: GpArticleListT["articles"];
+    articles: GpArticleT[];
   }[];
 };
 
 export type GpEntryPageProps = HeroNavT &
-  GpInnholdstypeT &
-  GpArticleListT &
-  GpTemaT &
+  GpInnholdstypeT & { articles: GpArticleT[] } & GpTemaT &
   GpChipsInnholdstypeT &
   GpChipsUndertemaT & { initialArticles: GpGroupedArticlesT };

@@ -1,12 +1,12 @@
 import cl from "clsx";
 import { HGrid } from "@navikt/ds-react";
-import { GpArticleListT } from "@/layout/god-praksis-page/types";
+import { GpArticleT } from "@/layout/god-praksis-page/types";
 import { ArticleCard } from "./ArticleCard";
 import styles from "./articles.module.css";
 
 type ArticleGridT = {
-  initialData: GpArticleListT["articles"];
-  data: GpArticleListT["articles"];
+  initialData: GpArticleT[];
+  data: GpArticleT[];
   loaded: boolean;
 };
 

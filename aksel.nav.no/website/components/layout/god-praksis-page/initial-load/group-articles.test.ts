@@ -1,7 +1,7 @@
-import { GpArticleListT } from "../types";
+import { GpArticleT } from "../types";
 import { groupArticles } from "./group-articles";
 
-const baseArticle = (id: string): GpArticleListT["articles"][number] => ({
+const baseArticle = (id: string): GpArticleT => ({
   _id: id,
   heading: `Article ${id}`,
   ingress: "ingress",

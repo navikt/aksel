@@ -1,5 +1,5 @@
 import {
-  GpArticleListT,
+  GpArticleT,
   GpGroupedArticlesInputT,
   GpGroupedArticlesT,
 } from "../types";
@@ -17,7 +17,7 @@ export function groupArticles({
     {
       innholdstype: string | null;
       undertema: string | null;
-      article: GpArticleListT["articles"][number];
+      article: GpArticleT;
     }
   >();
 

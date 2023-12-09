@@ -11,7 +11,7 @@ import {
   innholdstypeQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
-  GpArticleListT,
+  GpArticleT,
   GpChipsInnholdstypeRawT,
   GpEntryPageProps,
   GpGroupedArticlesInputT,
@@ -60,8 +60,7 @@ export const getStaticProps: GetStaticProps = async ({
     innholdstype,
     chipsInnholdstype,
     initialInnholdstype,
-  }: GpArticleListT &
-    HeroNavT &
+  }: { articles: GpArticleT[] } & HeroNavT &
     GpInnholdstypeT &
     GpChipsInnholdstypeRawT & {
       initialInnholdstype: GpGroupedArticlesInputT["initialInnholdstype"];

@@ -13,7 +13,7 @@ import {
   temaQuery,
 } from "@/layout/god-praksis-page/queries";
 import {
-  GpArticleListT,
+  GpArticleT,
   GpChipsInnholdstypeRawT,
   GpChipsUndertemaRawT,
   GpEntryPageProps,
@@ -72,9 +72,7 @@ export const getStaticProps: GetStaticProps = async ({
     initialUndertema,
   }: HeroNavT &
     GpTemaT &
-    GpInnholdstypeT &
-    GpArticleListT &
-    GpChipsInnholdstypeRawT &
+    GpInnholdstypeT & { articles: GpArticleT[] } & GpChipsInnholdstypeRawT &
     GpChipsUndertemaRawT &
     GpGroupedArticlesInputT = await getClient().fetch(query, {
     slug,

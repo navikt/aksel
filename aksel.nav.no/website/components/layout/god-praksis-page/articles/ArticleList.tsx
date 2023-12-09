@@ -6,7 +6,7 @@ import { Button } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { getArticleList } from "@/layout/god-praksis-page/initial-load/get-article-list";
 import {
-  GpArticleListT,
+  GpArticleT,
   GpGroupedArticlesT,
 } from "@/layout/god-praksis-page/types";
 import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
@@ -61,7 +61,7 @@ function ArticleList({ articles }: ArticleListT) {
     size,
     setSize,
     isValidating,
-  } = useSWRInfinite<GpArticleListT["articles"]>(
+  } = useSWRInfinite<GpArticleT[]>(
     (pageIndex, previousPageData) =>
       initialData.length < 9
         ? null

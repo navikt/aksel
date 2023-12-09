@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CSSProperties } from "react";
 import { BodyLong, Heading, VStack } from "@navikt/ds-react";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-import { GpArticleListT } from "@/layout/god-praksis-page/types";
+import { GpArticleT } from "@/layout/god-praksis-page/types";
 import styles from "./articles.module.css";
 
 const trunc = (text, num_chars) => {
@@ -19,7 +19,7 @@ export const ArticleCard = ({
   publishedAt,
   group,
   delay,
-}: GpArticleListT["articles"][number] & {
+}: GpArticleT & {
   group: "initial" | "lazy";
   delay?: number;
 }) => {
