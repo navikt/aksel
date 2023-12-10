@@ -12,7 +12,7 @@ function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
     <Box
       background="surface-alt-3-subtle"
       borderRadius="large"
-      paddingInline="10"
+      paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
       className="bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 relative overflow-clip"
     >
@@ -20,11 +20,14 @@ function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
         <Heading
           size="xlarge"
           as="button"
-          className="py-2 pl-6 pr-4 focus-visible:shadow-focus focus:outline-none text-aksel-heading bg-surface-subtle flex gap-2 items-center rounded-full shadow-xsmall"
+          className="py-1 w-full justify-between sm:justify-start sm:w-fit sm:py-2 pl-4 pr-2 sm:pl-6 sm:pr-4 [font-size:min(8vw,2.5rem)] focus-visible:shadow-focus focus:outline-none text-aksel-heading bg-surface-subtle flex gap-1 sm:gap-2 items-center rounded-full shadow-xsmall"
           onClick={() => modalRef.current?.showModal()}
         >
           {tema ? tema.title : "Alle tema"}
-          <ChevronDownIcon aria-hidden className="shrink-0 w-12 h-12" />
+          <ChevronDownIcon
+            aria-hidden
+            className="shrink-0 [font-size:min(8vw,3rem)]"
+          />
         </Heading>
 
         {tema?.description && <BodyLong>{tema.description}</BodyLong>}
