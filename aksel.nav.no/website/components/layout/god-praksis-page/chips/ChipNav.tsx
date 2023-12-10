@@ -11,9 +11,12 @@ import ScrollFade from "./ScrollFade";
 type ChipsNavProps = {
   type: "innholdstype" | "undertema";
   data?: GpChipsInnholdstypeT["chipsInnholdstype"];
-  slug?: string;
 };
 
+/**
+ * TODO:
+ * - Chips seems to not update correctly based on selection atm
+ */
 function ChipNav({ type, data }: ChipsNavProps) {
   const id = useId();
 
@@ -28,35 +31,33 @@ function ChipNav({ type, data }: ChipsNavProps) {
   }
 
   return (
-    <>
-      <HGrid gap="2" columns={{ sm: 1, md: "auto 1fr" }} align="center">
-        <Label as="p" className="text-aksel-heading">
-          {`${capitalize(type)}`}
-        </Label>
+    <HGrid gap="2" columns={{ sm: 1, md: "auto 1fr" }} align="center">
+      <Label as="p" className="text-aksel-heading">
+        {capitalize(type)}
+      </Label>
 
-        <div className="relative overflow-hidden">
-          <ScrollFade wrapperId={id} />
-          <ul
-            id={id}
-            className={cl("overflow-x-scroll flex gap-2 p-1", styles.chips)}
-          >
-            {data.map((entry) => (
-              <li key={entry.title}>
-                <Chips.Toggle
-                  variant="neutral"
-                  checkmark={false}
-                  selected={encodeURIComponent(entry.title) === query?.[type]}
-                  onClick={() => handleSelect(encodeURIComponent(entry.title))}
-                  className="whitespace-nowrap"
-                >
-                  {`${entry.title} ${entry.count}`}
-                </Chips.Toggle>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </HGrid>
-    </>
+      <div className="relative overflow-hidden">
+        <ScrollFade id={id} />
+        <ul
+          id={id}
+          className={cl("overflow-x-scroll flex gap-2 p-1", styles.chips)}
+        >
+          {data.map((entry) => (
+            <li key={entry.title}>
+              <Chips.Toggle
+                variant="neutral"
+                checkmark={false}
+                selected={encodeURIComponent(entry.title) === query?.[type]}
+                onClick={() => handleSelect(encodeURIComponent(entry.title))}
+                className="whitespace-nowrap"
+              >
+                {`${entry.title} ${entry.count}`}
+              </Chips.Toggle>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </HGrid>
   );
 }
 

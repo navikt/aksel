@@ -9,9 +9,17 @@ type ArticleGridT = {
   loaded: boolean;
 };
 
+/**
+ * TODO:
+ * - Does this need to be a separate component from `ArticleList`?
+ * - Don`t use `loaded` as a prop here. Parent-component rendering this should just not render it if !loaded
+ */
 function ArticleGrid({ data, initialData, loaded }: ArticleGridT) {
   if (!initialData) {
-    /* TODO: Emptystate? */
+    /**
+     * TODO:
+     * - Add content for emptystate here
+     */
     return null;
   }
   return (
@@ -35,9 +43,6 @@ function ArticleGrid({ data, initialData, loaded }: ArticleGridT) {
               />
             ))}
           </div>
-          {/* <HGrid gap="6" columns={{ xs: 1, md: 2, lg: 3 }}>
-
-          </HGrid> */}
         </div>
       )}
     </div>

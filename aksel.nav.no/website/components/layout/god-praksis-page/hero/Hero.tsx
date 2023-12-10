@@ -5,6 +5,14 @@ import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong, Box, Heading, Modal, VStack } from "@navikt/ds-react";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/types";
 
+/**
+ * TODO:
+ * - Handle dynamic resize better than vw fontsize?
+ * - - Can flex-shrink be used here?
+ *
+ * - Replace liste-elements with chips like in figma
+ * - Better aria-label for <nav>
+ */
 function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
   const modalRef = useRef<HTMLDialogElement>(null);
 

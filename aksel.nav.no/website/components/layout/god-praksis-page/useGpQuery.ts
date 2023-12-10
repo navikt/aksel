@@ -1,5 +1,10 @@
 import { useRouter } from "next/router";
 
+/**
+ * TODO
+ * - Is this the best way to get current query? Refactor
+ * - Replace temaQuery with already known tema from initialProps, should not be needed here
+ */
 function useGpQuery(): {
   innholdstypeQuery: string;
   undertemaQuery: string;

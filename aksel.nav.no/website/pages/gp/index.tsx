@@ -26,6 +26,9 @@ const query = groq`
 }
 `;
 
+/**
+ * TODO: Move to separate file
+ */
 const chipDataForMain = (
   dataRaw: GpChipsInnholdstypeRawT["chipsInnholdstype"]
 ) => {
@@ -70,6 +73,7 @@ export const getStaticProps: GetStaticProps = async ({
 const GpPage = (props: PageProps["props"]) => {
   return (
     <>
+      {/* TODO: Find out how we want to handle SEO for these pages */}
       <SEO
         title="God praksis"
         /* description={page?.seo?.meta} */
@@ -82,6 +86,9 @@ const GpPage = (props: PageProps["props"]) => {
 
 const WithPreview = lazy(() => import("@/preview"));
 
+/**
+ * TODO: Preview does not work atm becase of funcitions used in getStaticProps now
+ */
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (

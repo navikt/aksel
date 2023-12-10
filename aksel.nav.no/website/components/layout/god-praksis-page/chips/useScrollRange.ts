@@ -3,6 +3,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useClientLayoutEffect } from "@navikt/ds-react";
 
+/**
+ * TODO: Add resizeObserver here?
+ * - Will user actually resize app? If not, ignore
+ */
 export function useScrollRangeOpacity(id: string) {
   const [scrollInline, setScrollInline] = useState({
     start: false,

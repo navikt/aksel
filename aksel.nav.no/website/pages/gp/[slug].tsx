@@ -81,6 +81,7 @@ export const getStaticProps: GetStaticProps = async ({
 const GpPage = (props: PageProps["props"]) => {
   return (
     <>
+      {/* TODO: Find out how we want to handle SEO for these pages */}
       <SEO
         title={props.tema.title ?? ""}
         /* description={page?.seo?.meta} */
@@ -93,6 +94,18 @@ const GpPage = (props: PageProps["props"]) => {
 
 const WithPreview = lazy(() => import("@/preview"));
 
+/**
+ * TODO:
+ * - Preview does not work atm because of
+ * ```heroNav: heroNav.filter((x) => x.hasRefs),
+      chipsInnholdstype: chipsInnholdstype.find((x) => x.slug === slug).types,
+      chipsUndertema: chipsUndertema
+        .filter((c) => c.tema === slug)
+        .map((c) => ({ title: c.title, count: c.count })),
+      initialArticles: groupArticles({ initialInnholdstype, initialUndertema }),
+      ```
+      Where data is resolves in initialProps
+ */
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (

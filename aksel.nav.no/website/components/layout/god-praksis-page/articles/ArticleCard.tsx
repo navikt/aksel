@@ -12,6 +12,13 @@ const trunc = (text, num_chars) => {
   }`;
 };
 
+/**
+ * TODO:
+ * - Implement reference-design from Figma (WIP)
+ * - Implement better screen-reader ux
+ * - - Only Heading should be a Link(<a>) with ::after for click-area
+ * - - (see `components/sanity-modules/cards/ArtikkelCard.tsx`)
+ */
 export const ArticleCard = ({
   heading,
   ingress,
@@ -25,6 +32,9 @@ export const ArticleCard = ({
   group: "initial" | "lazy";
   delay?: number;
 }) => {
+  /**
+   * TODO: This might be better resolved server-side in `initialProps`
+   */
   const date = useFormatedDate(publishedAt);
 
   const tDelay: CSSProperties = delay
@@ -62,6 +72,7 @@ export const ArticleCard = ({
             {heading}
           </Heading>
 
+          {/* TODO: Can do this serverside in initialProps (saves data sent to user) */}
           {ingress && <BodyLong>{trunc(ingress, 100)}</BodyLong>}
         </div>
 

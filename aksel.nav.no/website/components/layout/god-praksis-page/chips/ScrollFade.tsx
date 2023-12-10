@@ -5,13 +5,13 @@ import styles from "./Chips.module.css";
 import { useScrollRangeOpacity } from "./useScrollRange";
 
 type ScrollFadeProps = {
-  wrapperId: string;
+  id: string;
 };
 /**
  * TODO: Implement button functionality, scroll snap?
  */
-function ScrollFade({ wrapperId }: ScrollFadeProps) {
-  const scrollBlock = useScrollRangeOpacity(wrapperId);
+function ScrollFade({ id }: ScrollFadeProps) {
+  const scrollBlock = useScrollRangeOpacity(id);
 
   return (
     <>
