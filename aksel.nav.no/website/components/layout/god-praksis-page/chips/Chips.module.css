@@ -30,14 +30,3 @@
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   background: linear-gradient(-90deg, var(--shadow-color), transparent);
 }
-
-.fadeIn {
-  animation: fadeIn 800ms forwards;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translate3d(-1rem, 0, 0);
-  }
-}

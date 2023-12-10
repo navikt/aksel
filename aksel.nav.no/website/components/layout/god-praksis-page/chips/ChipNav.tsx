@@ -14,12 +14,10 @@ type ChipsNavProps = {
   slug?: string;
 };
 
-function ChipNav({ type, data, slug }: ChipsNavProps) {
-  console.log({ slug });
-
+function ChipNav({ type, data }: ChipsNavProps) {
   const id = useId();
 
-  const { query, replace, isReady } = useRouter();
+  const { query, replace } = useRouter();
 
   function handleSelect(title: string) {
     query[type] === title
@@ -49,10 +47,7 @@ function ChipNav({ type, data, slug }: ChipsNavProps) {
                   checkmark={false}
                   selected={encodeURIComponent(entry.title) === query?.[type]}
                   onClick={() => handleSelect(encodeURIComponent(entry.title))}
-                  className={cl("whitespace-nowrap", {
-                    invisible: !isReady,
-                    [styles.fadeIn]: isReady,
-                  })}
+                  className="whitespace-nowrap"
                 >
                   {`${entry.title} ${entry.count}`}
                 </Chips.Toggle>
