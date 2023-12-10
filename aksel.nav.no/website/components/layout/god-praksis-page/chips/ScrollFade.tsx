@@ -7,7 +7,9 @@ import { useScrollRangeOpacity } from "./useScrollRange";
 type ScrollFadeProps = {
   wrapperId: string;
 };
-
+/**
+ * TODO: Implement button functionality, scroll snap?
+ */
 function ScrollFade({ wrapperId }: ScrollFadeProps) {
   const scrollBlock = useScrollRangeOpacity(wrapperId);
 
@@ -34,7 +36,7 @@ function ScrollFade({ wrapperId }: ScrollFadeProps) {
       <Button
         variant="tertiary-neutral"
         size="small"
-        className={cl("absolute right-0 z-20 w-12 justify-end", {
+        className={cl("absolute right-0 z-20 w-12 h-full justify-end", {
           hidden: !scrollBlock.end,
         })}
         icon={<ChevronRightIcon fontSize="1.5rem" />}
