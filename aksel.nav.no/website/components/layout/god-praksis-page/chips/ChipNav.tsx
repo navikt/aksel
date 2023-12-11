@@ -51,7 +51,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
                 onClick={() => handleSelect(encodeURIComponent(entry.title))}
                 className="whitespace-nowrap"
               >
-                {`${entry.title} ${entry.count}`}
+                {`${entry.title} (${entry.count})`}
               </Chips.Toggle>
             </li>
           ))}
