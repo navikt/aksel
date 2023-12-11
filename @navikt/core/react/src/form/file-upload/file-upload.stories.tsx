@@ -22,11 +22,7 @@ const onSelect = ({
 
 export const Dropzone = {
   render: () => (
-    <FileUpload.Dropzone
-      label="Last opp filer"
-      onSelect={onSelect}
-      id="fileupload-input"
-    />
+    <FileUpload.Dropzone label="Last opp filer" onSelect={onSelect} />
   ),
 };
 
@@ -36,7 +32,6 @@ export const DropzoneSingle = {
       label="Last opp fil"
       multiple={false}
       onSelect={onSelect}
-      id="fileupload-input"
     />
   ),
 };
@@ -47,7 +42,6 @@ export const DropzoneWithDescription = {
       label="Last opp filer"
       description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
       onSelect={onSelect}
-      id="fileupload-input"
     />
   ),
 };
@@ -57,7 +51,6 @@ export const Accept = {
       label="Last opp filer"
       onSelect={onSelect}
       accept=".png"
-      id="fileupload-input"
     />
   ),
 };
@@ -68,7 +61,6 @@ export const DropzoneWithError = {
       label="Last opp filer"
       onSelect={onSelect}
       error="Du må laste opp en fil"
-      id="fileupload-input"
     />
   ),
 };
@@ -80,7 +72,6 @@ export const DropzoneWithErrorAndDescription = {
       onSelect={onSelect}
       error="Du må laste opp en fil"
       description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
-      id="fileupload-input"
     />
   ),
 };
@@ -90,7 +81,6 @@ export const LocaleEnglish = {
     <FileUpload.Dropzone
       label="Provide documentation"
       onSelect={onSelect}
-      id="fileupload-input"
       locale="en"
     />
   ),
@@ -101,7 +91,6 @@ export const LocaleNynorsk = {
     <FileUpload.Dropzone
       label="Last opp filer"
       onSelect={onSelect}
-      id="fileupload-input"
       locale="nn"
     />
   ),

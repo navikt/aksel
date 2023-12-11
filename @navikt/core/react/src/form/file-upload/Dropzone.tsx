@@ -33,11 +33,6 @@ export interface DropzoneProps
     "children" | "size" | "onSelect"
   > {
   /**
-   * ID of the input element. Required to properly
-   * connect input element to potential error message.
-   */
-  id: string;
-  /**
    * Text shown to the user.
    */
   label: string;
