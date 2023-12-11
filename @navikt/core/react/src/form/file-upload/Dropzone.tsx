@@ -60,7 +60,7 @@ export interface DropzoneProps
    */
   multiple?: boolean;
   /**
-   * Indicates which MIME types to accept.
+   * Indicates which file types to accept.
    * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept
    */
   accept?: string;
