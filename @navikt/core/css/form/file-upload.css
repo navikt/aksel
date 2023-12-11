@@ -111,17 +111,17 @@
   margin: var(--a-spacing-0);
 }
 
-.navds-file-list__error .navds-error-message {
+.navds-file-list__list li:not(:last-of-type) {
+  margin-bottom: var(--a-spacing-2);
+}
+
+.navds-file-list .navds-error-message {
   display: flex;
   gap: var(--a-spacing-2);
 }
 
-.navds-file-list__error .navds-error-message::before {
+.navds-file-list .navds-error-message::before {
   content: "•";
-}
-
-.navds-file-list li:not(:last-of-type) {
-  margin-bottom: var(--a-spacing-2);
 }
 
 /**

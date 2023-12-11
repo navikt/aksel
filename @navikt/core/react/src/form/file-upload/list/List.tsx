@@ -56,7 +56,7 @@ export const FileList = forwardRef<HTMLDivElement, FileListProps>(
             })}
           </ul>
           <div
-            className="navds-file-list__error"
+            className="navds-form-field__error"
             aria-relevant="additions removals"
             aria-live="polite"
           >
