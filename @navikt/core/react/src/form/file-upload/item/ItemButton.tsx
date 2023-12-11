@@ -2,16 +2,25 @@ import React from "react";
 import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { FileItem } from "./types";
+import { getDeleteText, getRetryText } from "./utils/i18n";
 
 interface Props {
   file: FileItem;
+  locale: "nb" | "nn" | "en";
   onRetry?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isLoading?: boolean;
   error?: string;
 }
 
-const ItemButton = ({ file, onRetry, onDelete, isLoading, error }: Props) => {
+const ItemButton = ({
+  file,
+  locale,
+  onRetry,
+  onDelete,
+  isLoading,
+  error,
+}: Props) => {
   if (isLoading) {
     return null;
   }
@@ -21,11 +30,7 @@ const ItemButton = ({ file, onRetry, onDelete, isLoading, error }: Props) => {
         type="button"
         variant="tertiary-neutral"
         onClick={onRetry}
-        icon={
-          <ArrowsCirclepathIcon
-            title={`Prøv å laste opp filen ${file.name} på nytt`}
-          />
-        }
+        icon={<ArrowsCirclepathIcon title={getRetryText(locale, file.name)} />}
       />
     );
   }
@@ -35,7 +40,7 @@ const ItemButton = ({ file, onRetry, onDelete, isLoading, error }: Props) => {
         type="button"
         variant="tertiary-neutral"
         onClick={onDelete}
-        icon={<TrashIcon title={`Slett ${file.name}`} />}
+        icon={<TrashIcon title={getDeleteText(locale, file.name)} />}
       />
     );
   }

@@ -69,6 +69,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
     ref
   ) => {
     const context = useContext(FileListContext);
+    const finalLocale = locale || context?.locale || DEFAULT_LOCALE;
 
     return (
       <div
@@ -82,7 +83,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
           <ItemName file={file} href={href} onClick={onClick} />
           <ItemDescription
             file={file}
-            locale={locale || context?.locale || DEFAULT_LOCALE}
+            locale={finalLocale}
             isLoading={isLoading}
             error={error}
           />
@@ -90,6 +91,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
         <div className="navds-file-item__button">
           <ItemButton
             file={file}
+            locale={finalLocale}
             onRetry={onRetry}
             onDelete={onDelete}
             isLoading={isLoading}
