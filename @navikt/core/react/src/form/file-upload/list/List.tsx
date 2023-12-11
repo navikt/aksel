@@ -1,13 +1,18 @@
 import cl from "clsx";
 import React, { forwardRef, isValidElement } from "react";
-import { ErrorMessage } from "../../../typography";
+import { ErrorMessage, Heading } from "../../../typography";
 import { FileListContext } from "./file-list-context";
 
 export interface FileListProps {
   /**
    * Label describing the list.
    */
-  label: string;
+  label?: string;
+  /**
+   * HTML tag to use for the label
+   * @default "span"
+   */
+  labelTag?: React.ElementType;
   /**
    * Error message relating to the list.
    */
@@ -32,11 +37,15 @@ export interface FileListProps {
 }
 
 export const FileList = forwardRef<HTMLDivElement, FileListProps>(
-  ({ locale, children, label, error, className }, ref) => {
+  ({ locale, children, label, labelTag = "span", error, className }, ref) => {
     return (
       <FileListContext.Provider value={{ locale }}>
         <div className={cl("navds-file-list", className)} ref={ref}>
-          <span className="navds-heading navds-heading--small">{label}</span>
+          {label && (
+            <Heading size="xsmall" as={labelTag}>
+              {label}
+            </Heading>
+          )}
           <ul className="navds-file-list__list">
             {React.Children.map(children, (child) => {
               if (!isValidElement(child)) {

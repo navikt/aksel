@@ -68,10 +68,7 @@ export const ListIcons: StoryObj<ListStoryProps> = {
 
 export const ListDownloading: StoryObj<ListStoryProps> = {
   render: () => (
-    <FileUpload.List
-      label="Opplastede filer"
-      error="hei jeg er en feil og jeg må rettes opp!"
-    >
+    <FileUpload.List error="hei jeg er en feil og jeg må rettes opp!">
       <FileUpload.Item
         file={{
           name: "withOnClick.txt",
