@@ -144,6 +144,10 @@
   margin-left: auto;
 }
 
+.navds-file-item__loader {
+  margin-top: var(--a-spacing-2);
+}
+
 .navds-file-item__icon {
   display: flex;
   justify-content: center;
