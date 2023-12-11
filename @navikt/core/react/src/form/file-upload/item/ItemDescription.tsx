@@ -1,18 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ErrorMessage } from "../../../typography";
-import { ItemContext } from "./item-context";
+import { FileItem } from "./types";
 import { formatFileSize } from "./utils/format-file-size";
 
-const ItemDescription = () => {
-  const context = useContext(ItemContext);
+interface Props {
+  file: FileItem;
+  locale: "nb" | "nn" | "en";
+  isLoading?: boolean;
+  error?: string;
+}
 
-  if (context == null) {
-    console.error("<ItemDescription> has to be used within a <File>");
-    return null;
-  }
-
-  const { isLoading, error, file, locale } = context;
-
+const ItemDescription = ({ file, locale, isLoading, error }: Props) => {
   if (isLoading) {
     switch (locale) {
       case "nb":

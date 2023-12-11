@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   FileCsvIcon,
   FileExcelIcon,
@@ -9,18 +9,14 @@ import {
   FileWordIcon,
 } from "@navikt/aksel-icons";
 import { Loader } from "../../../loader";
-import { ItemContext } from "./item-context";
+import { FileItem } from "./types";
 
-const ItemIcon = () => {
-  const context = useContext(ItemContext);
+interface ItemIconProps {
+  isLoading?: boolean;
+  file: FileItem;
+}
 
-  if (context == null) {
-    console.error("<ItemIcon> has to be used within a <Item>");
-    return null;
-  }
-
-  const { isLoading } = context;
-
+const ItemIcon = ({ isLoading, file }: ItemIconProps) => {
   if (isLoading) {
     return (
       <div>
@@ -31,21 +27,12 @@ const ItemIcon = () => {
 
   return (
     <div className="navds-file-item__icon">
-      <Icon />
+      <Icon file={file} />
     </div>
   );
 };
 
-const Icon = () => {
-  const context = useContext(ItemContext);
-
-  if (context == null) {
-    console.error("<ItemIcon> has to be used within a <Item>");
-    return null;
-  }
-
-  const { file } = context;
-
+const Icon = ({ file }: { file: FileItem }) => {
   const extension = file.name.substring(file.name.lastIndexOf(".") + 1);
 
   const iconProps = {

@@ -1,34 +1,31 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "../../../link";
-import { ItemContext } from "./item-context";
+import { FileItem } from "./types";
 import { downloadFile } from "./utils/download-file";
 import { isFileWithData } from "./utils/file-type-checker";
 
-const ItemName = () => {
-  const context = useContext(ItemContext);
+interface Props {
+  file: FileItem;
+  href?: string;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+}
 
-  if (context == null) {
-    console.error("<ItemName> has to be used within a <File>");
-    return null;
-  }
-
-  const { file } = context;
-
-  if (context.onClick && context.href) {
+const ItemName = ({ file, href, onClick }: Props) => {
+  if (onClick && href) {
     return (
-      <Link href={context.href} onClick={context.onClick}>
+      <Link href={href} onClick={onClick}>
         {file.name}
       </Link>
     );
   }
 
-  if (context.onClick) {
+  if (onClick) {
     return (
       <Link
         href="#"
         onClick={(event) => {
           event.preventDefault();
-          context.onClick?.(event);
+          onClick(event);
         }}
       >
         {file.name}
@@ -36,15 +33,15 @@ const ItemName = () => {
     );
   }
 
-  if (context.href) {
-    return <Link href={context.href}>{file.name}</Link>;
+  if (href) {
+    return <Link href={href}>{file.name}</Link>;
   }
 
   if (isFileWithData(file)) {
     return (
       <Link
         href="#"
-        onClick={async (event) => {
+        onClick={(event) => {
           event.preventDefault();
           downloadFile(file);
         }}

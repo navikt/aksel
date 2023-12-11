@@ -5,7 +5,6 @@ import ItemButton from "./ItemButton";
 import ItemDescription from "./ItemDescription";
 import ItemIcon from "./ItemIcon";
 import ItemName from "./ItemName";
-import { ItemContext } from "./item-context";
 import { FileItem } from "./types";
 
 const DEFAULT_LOCALE = "nb";
@@ -55,8 +54,8 @@ export interface FileItemProps {
 }
 
 export const Item = forwardRef<HTMLDivElement, FileItemProps>(
-  (props: FileItemProps, ref) => {
-    const {
+  (
+    {
       file,
       isLoading,
       onDelete,
@@ -66,38 +65,38 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
       href,
       onClick,
       locale,
-    } = props;
+    }: FileItemProps,
+    ref
+  ) => {
     const context = useContext(FileListContext);
 
     return (
-      <ItemContext.Provider
-        value={{
-          file,
-          isLoading,
-          error,
-          onDelete,
-          onRetry,
-          href,
-          onClick,
-          locale: locale || context?.locale || DEFAULT_LOCALE,
-        }}
+      <div
+        ref={ref}
+        className={cl("navds-file-item", className, {
+          "navds-file-item--error": error,
+        })}
       >
-        <div
-          ref={ref}
-          className={cl("navds-file-item", className, {
-            "navds-file-item--error": !!error,
-          })}
-        >
-          <ItemIcon />
-          <div className="navds-file-item__file-info">
-            <ItemName />
-            <ItemDescription />
-          </div>
-          <div className="navds-file-item__button">
-            <ItemButton />
-          </div>
+        <ItemIcon isLoading={isLoading} file={file} />
+        <div className="navds-file-item__file-info">
+          <ItemName file={file} href={href} onClick={onClick} />
+          <ItemDescription
+            file={file}
+            locale={locale || context?.locale || DEFAULT_LOCALE}
+            isLoading={isLoading}
+            error={error}
+          />
         </div>
-      </ItemContext.Provider>
+        <div className="navds-file-item__button">
+          <ItemButton
+            file={file}
+            onRetry={onRetry}
+            onDelete={onDelete}
+            isLoading={isLoading}
+            error={error}
+          />
+        </div>
+      </div>
     );
   }
 );

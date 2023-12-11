@@ -1,19 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
-import { ItemContext } from "./item-context";
+import { FileItem } from "./types";
 
-const ItemButton = () => {
-  const context = useContext(ItemContext);
+interface Props {
+  file: FileItem;
+  onRetry?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isLoading?: boolean;
+  error?: string;
+}
 
-  if (context == null) {
-    console.error("<ItemButton> has to be used within a <Item>");
-    return null;
-  }
-
-  const { file, error, isLoading, onDelete, onRetry } = context;
-  const variant = "tertiary-neutral";
-
+const ItemButton = ({ file, onRetry, onDelete, isLoading, error }: Props) => {
   if (isLoading) {
     return null;
   }
@@ -21,11 +19,11 @@ const ItemButton = () => {
     return (
       <Button
         type="button"
-        variant={variant}
+        variant="tertiary-neutral"
         onClick={onRetry}
         icon={
           <ArrowsCirclepathIcon
-            aria-label={`Prøv å laste opp filen ${file.name} på nytt`}
+            title={`Prøv å laste opp filen ${file.name} på nytt`}
           />
         }
       />
@@ -35,9 +33,9 @@ const ItemButton = () => {
     return (
       <Button
         type="button"
-        variant={variant}
+        variant="tertiary-neutral"
         onClick={onDelete}
-        icon={<TrashIcon aria-label={`Slett ${file.name}`} />}
+        icon={<TrashIcon title={`Slett ${file.name}`} />}
       />
     );
   }
