@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "../../../link";
 import { FileItem } from "./types";
 import { downloadFile } from "./utils/download-file";
-import { isFileWithData } from "./utils/file-type-checker";
+import { isNativeFile } from "./utils/file-type-checker";
 
 interface Props {
   file: FileItem;
@@ -37,7 +37,7 @@ const ItemName = ({ file, href, onClick }: Props) => {
     return <Link href={href}>{file.name}</Link>;
   }
 
-  if (isFileWithData(file)) {
+  if (isNativeFile(file) || "base64" in file) {
     return (
       <Link
         href="#"
