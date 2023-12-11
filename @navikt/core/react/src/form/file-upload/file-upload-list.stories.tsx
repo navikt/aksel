@@ -75,40 +75,40 @@ export const ListDownloading: StoryObj<ListStoryProps> = {
       <FileUpload.Item
         file={{
           name: "withOnClick.txt",
-          size: 35700,
+          size: 1_048_576,
         }}
         onClick={() => alert("onClick")}
       />
       <FileUpload.Item
         file={{
           name: "withOnClickAndDelete.txt",
-          size: 35700,
+          size: 600_000_000,
         }}
         onClick={() => alert("onClick")}
         onDelete={() =>
           onDelete({
             name: "withOnClickAndDelete.txt",
-            size: 35700,
+            size: 600_000_000,
           })
         }
       />
       <FileUpload.Item
         file={{
           name: "withHref.txt",
-          size: 2000000,
+          size: 1,
         }}
         href="https://www.nav.no"
       />
       <FileUpload.Item
         file={{
           name: "withoutHrefOrOnClick.txt",
-          size: 2000000,
+          size: 2_000_000,
         }}
       />
       <FileUpload.Item
         file={{
           name: "withBase64.txt",
-          size: 2000000,
+          size: 500_000_000,
           base64: "data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==",
         }}
       />

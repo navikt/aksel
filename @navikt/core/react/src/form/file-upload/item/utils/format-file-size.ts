@@ -9,15 +9,17 @@ export function formatFileSize(file: FileItem): string | null {
   const megaBytes = file.size / (1024 * 1024);
 
   if (megaBytes <= MAX_MEGA_BYTES) {
-    return `${roundUpToFixed(megaBytes)} MB`.replace(".", ",");
+    return formatter.format(megaBytes);
   }
 
   return `> ${MAX_MEGA_BYTES} MB`;
 }
 
-function roundUpToFixed(value: number): string {
-  const decimalsToKeep = 2;
-  const factor = Math.pow(10, decimalsToKeep);
-  const rounded = Math.ceil(value * factor) / factor;
-  return rounded.toFixed(decimalsToKeep);
-}
+const formatter = new Intl.NumberFormat("nb-NO", {
+  style: "unit",
+  unit: "megabyte",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+  // @ts-expect-error - Looks like roundingMode hasn't been added to TypeScript yet
+  roundingMode: "ceil",
+});
