@@ -19,3 +19,16 @@ export const getDeleteText = (locale: "nb" | "nn" | "en", name: string) => {
       return `Slett ${name}`;
   }
 };
+
+export const getLoadingText = (locale: "nb" | "nn" | "en") => {
+  switch (locale) {
+    case "nb":
+      return "Laster opp…";
+    case "nn":
+      return "Lastar opp…";
+    case "en":
+      return "Uploading…";
+    default:
+      return "Laster opp…";
+  }
+};

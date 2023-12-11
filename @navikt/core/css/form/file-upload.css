@@ -115,12 +115,12 @@
   margin-bottom: var(--a-spacing-2);
 }
 
-.navds-file-list .navds-error-message {
+.navds-file-list__error .navds-error-message {
   display: flex;
   gap: var(--a-spacing-2);
 }
 
-.navds-file-list .navds-error-message::before {
+.navds-file-list__error .navds-error-message::before {
   content: "•";
 }
 
@@ -145,6 +145,10 @@
   margin-left: auto;
 }
 
+.navds-file-item__button:empty {
+  display: none;
+}
+
 .navds-file-item__loader {
   margin-top: var(--a-spacing-2);
 }
@@ -161,8 +165,6 @@
 }
 
 .navds-file-item__file-info {
-  display: flex;
-  flex-direction: column;
   word-break: break-word;
 }
 

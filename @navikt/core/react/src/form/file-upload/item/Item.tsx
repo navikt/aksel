@@ -1,11 +1,13 @@
 import cl from "clsx";
 import React, { MouseEvent, forwardRef, useContext } from "react";
+import { ErrorMessage } from "../../../typography";
 import { FileListContext } from "../list/file-list-context";
 import ItemButton from "./ItemButton";
-import ItemDescription from "./ItemDescription";
 import ItemIcon from "./ItemIcon";
 import ItemName from "./ItemName";
 import { FileItem } from "./types";
+import { formatFileSize } from "./utils/format-file-size";
+import { getLoadingText } from "./utils/i18n";
 
 const DEFAULT_LOCALE = "nb";
 
@@ -81,12 +83,18 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
         <ItemIcon isLoading={isLoading} file={file} />
         <div className="navds-file-item__file-info">
           <ItemName file={file} href={href} onClick={onClick} />
-          <ItemDescription
-            file={file}
-            locale={finalLocale}
-            isLoading={isLoading}
-            error={error}
-          />
+          {!error && (
+            <div>
+              {isLoading ? getLoadingText(finalLocale) : formatFileSize(file)}
+            </div>
+          )}
+          <div
+            className="navds-file-item__error"
+            aria-relevant="additions removals"
+            aria-live="polite"
+          >
+            {!!error && <ErrorMessage>{error}</ErrorMessage>}
+          </div>
         </div>
         <div className="navds-file-item__button">
           <ItemButton
