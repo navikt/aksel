@@ -30,7 +30,7 @@ export const BreakingText: StoryObj = {
           error={error}
           onDelete={() => {}}
         />
-        <FileUpload.Item file={metadataFile} isLoading />
+        <FileUpload.Item file={metadataFile} isUploading />
         <FileUpload.Item file={nativeFile} error={error} onDelete={() => {}} />
       </VStack>
     );

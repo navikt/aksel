@@ -9,21 +9,10 @@ interface Props {
   locale: "nb" | "nn" | "en";
   onRetry?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  isLoading?: boolean;
   error?: string;
 }
 
-const ItemButton = ({
-  file,
-  locale,
-  onRetry,
-  onDelete,
-  isLoading,
-  error,
-}: Props) => {
-  if (isLoading) {
-    return null;
-  }
+const ItemButton = ({ file, locale, onRetry, onDelete, error }: Props) => {
   if (error && onRetry) {
     return (
       <Button

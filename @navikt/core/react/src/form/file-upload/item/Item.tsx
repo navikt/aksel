@@ -7,7 +7,7 @@ import ItemIcon from "./ItemIcon";
 import ItemName from "./ItemName";
 import { FileItem } from "./types";
 import { formatFileSize } from "./utils/format-file-size";
-import { getLoadingText } from "./utils/i18n";
+import { getDownloadingText, getUploadingText } from "./utils/i18n";
 
 const DEFAULT_LOCALE = "nb";
 
@@ -31,7 +31,11 @@ export interface FileItemProps {
   /**
    * Indicates if the file is being uploaded.
    */
-  isLoading?: boolean;
+  isUploading?: boolean;
+  /**
+   * Indicates if the file is being downloaded.
+   */
+  isDownloading?: boolean;
   /**
    * Callback called when the delete button is clicked.
    */
@@ -59,7 +63,8 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
   (
     {
       file,
-      isLoading,
+      isUploading,
+      isDownloading,
       onDelete,
       onRetry,
       error,
@@ -80,12 +85,12 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
           "navds-file-item--error": error,
         })}
       >
-        <ItemIcon isLoading={isLoading} file={file} />
+        <ItemIcon isLoading={isUploading || isDownloading} file={file} />
         <div className="navds-file-item__file-info">
           <ItemName file={file} href={href} onClick={onClick} />
           {!error && (
             <div>
-              {isLoading ? getLoadingText(finalLocale) : formatFileSize(file)}
+              {getStatusText(file, finalLocale, isUploading, isDownloading)}
             </div>
           )}
           <div
@@ -97,18 +102,34 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
           </div>
         </div>
         <div className="navds-file-item__button">
-          <ItemButton
-            file={file}
-            locale={finalLocale}
-            onRetry={onRetry}
-            onDelete={onDelete}
-            isLoading={isLoading}
-            error={error}
-          />
+          {!isUploading && !isDownloading && (
+            <ItemButton
+              file={file}
+              locale={finalLocale}
+              onRetry={onRetry}
+              onDelete={onDelete}
+              error={error}
+            />
+          )}
         </div>
       </div>
     );
   }
 );
+
+function getStatusText(
+  file: FileItem,
+  finalLocale: "nb" | "nn" | "en",
+  isUploading?: boolean,
+  isDownloading?: boolean
+) {
+  if (isUploading) {
+    return getUploadingText(finalLocale);
+  }
+  if (isDownloading) {
+    return getDownloadingText(finalLocale);
+  }
+  return formatFileSize(file);
+}
 
 export default Item;

@@ -20,7 +20,7 @@ export const getDeleteText = (locale: "nb" | "nn" | "en", name: string) => {
   }
 };
 
-export const getLoadingText = (locale: "nb" | "nn" | "en") => {
+export const getUploadingText = (locale: "nb" | "nn" | "en") => {
   switch (locale) {
     case "nb":
       return "Laster opp…";
@@ -30,5 +30,18 @@ export const getLoadingText = (locale: "nb" | "nn" | "en") => {
       return "Uploading…";
     default:
       return "Laster opp…";
+  }
+};
+
+export const getDownloadingText = (locale: "nb" | "nn" | "en") => {
+  switch (locale) {
+    case "nb":
+      return "Laster ned…";
+    case "nn":
+      return "Lastar ned…";
+    case "en":
+      return "Downloading…";
+    default:
+      return "Laster ned…";
   }
 };
