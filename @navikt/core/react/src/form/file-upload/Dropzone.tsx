@@ -206,7 +206,9 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
               <UploadIcon fontSize="1.5rem" aria-hidden />
             </div>
             <div aria-hidden className="navds-file-dropzone__content-zone-text">
-              <BodyShort as="span">{getDragAndDropText(locale)}</BodyShort>
+              <BodyShort as="span">
+                {getDragAndDropText(locale, multiple)}
+              </BodyShort>
               <BodyShort as="span">{getOrText(locale)}</BodyShort>
             </div>
             <Button
@@ -215,7 +217,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
               onClick={onButtonClick}
               tabIndex={-1}
             >
-              {getButtonText(locale)}
+              {getButtonText(locale, multiple)}
             </Button>
           </div>
           <input

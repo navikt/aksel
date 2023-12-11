@@ -34,11 +34,7 @@ export interface FileListProps {
 export const FileList = forwardRef<HTMLDivElement, FileListProps>(
   ({ locale, children, label, error, className }, ref) => {
     return (
-      <FileListContext.Provider
-        value={{
-          locale,
-        }}
-      >
+      <FileListContext.Provider value={{ locale }}>
         <div className={cl("navds-file-list", className)} ref={ref}>
           <span className="navds-heading navds-heading--small">{label}</span>
           <ul className="navds-file-list__list">
