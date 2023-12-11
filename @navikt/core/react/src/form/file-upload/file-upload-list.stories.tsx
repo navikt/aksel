@@ -32,7 +32,11 @@ interface ListStoryProps {
 
 export const ListIcons: StoryObj<ListStoryProps> = {
   render: (props) => (
-    <FileUpload.List label={props.label} error={props.error}>
+    <FileUpload.List
+      label={props.label}
+      error={props.error}
+      locale={props.locale}
+    >
       <FileUpload.Item file={fileTxt} error="Oopsann" />
       <FileUpload.Item file={filePng} />
       <FileUpload.Item file={filePdf} />
@@ -68,10 +72,11 @@ export const ListIcons: StoryObj<ListStoryProps> = {
     </FileUpload.List>
   ),
   args: {
+    label: "Opplastede filer",
     error: "hei jeg er en feil og jeg må rettes opp!",
+    locale: "nb",
     isUploading: true,
     isDownloading: true,
-    label: "Opplastede filer",
   },
 };
 

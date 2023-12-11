@@ -12,8 +12,15 @@ export default meta;
 
 const fileDocx = new File(["abc"], "file.docx");
 
-export const StandaloneFileItem: StoryObj = {
-  render: () => <FileUpload.Item file={fileDocx} />,
+export const StandaloneFileItem: StoryObj<typeof FileUpload.Item> = {
+  render: (props) => <FileUpload.Item {...props} file={fileDocx} />,
+  args: {
+    isUploading: false,
+    isDownloading: false,
+    error: "",
+    href: "",
+    locale: "nb",
+  },
 };
 
 export const BreakingText: StoryObj = {
