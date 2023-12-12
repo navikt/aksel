@@ -1,16 +1,16 @@
 import { PencilIcon } from "@navikt/aksel-icons";
-import { Button } from "@navikt/ds-react";
+import { Button, HStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="flex flex-wrap gap-2">
+    <HStack gap="6">
       <Button icon={<PencilIcon aria-hidden />}>Rediger</Button>
-      <Button icon={<PencilIcon aria-hidden />} />
+      <Button icon={<PencilIcon title="Rediger" />} />
       <Button iconPosition="right" icon={<PencilIcon aria-hidden />}>
         Rediger
       </Button>
-    </div>
+    </HStack>
   );
 };
 
