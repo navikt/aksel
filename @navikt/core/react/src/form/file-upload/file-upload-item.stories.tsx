@@ -15,11 +15,15 @@ const fileDocx = new File(["abc"], "file.docx");
 export const StandaloneFileItem: StoryObj<typeof FileUpload.Item> = {
   render: (props) => <FileUpload.Item {...props} file={fileDocx} />,
   args: {
-    isUploading: false,
-    isDownloading: false,
     error: "",
     href: "",
     locale: "nb",
+  },
+  argTypes: {
+    status: {
+      options: ["uploading", "downloading"],
+      control: { type: "select" },
+    },
   },
 };
 
@@ -37,7 +41,7 @@ export const BreakingText: StoryObj = {
           error={error}
           onDelete={() => {}}
         />
-        <FileUpload.Item file={metadataFile} isUploading />
+        <FileUpload.Item file={metadataFile} status="uploading" />
         <FileUpload.Item file={nativeFile} error={error} onDelete={() => {}} />
       </VStack>
     );

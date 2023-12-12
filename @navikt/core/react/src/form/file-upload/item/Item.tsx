@@ -29,13 +29,9 @@ export interface FileItemProps {
    */
   error?: string;
   /**
-   * Indicates if the file is being uploaded.
+   * Indicates if the file is being uploaded or downloaded.
    */
-  isUploading?: boolean;
-  /**
-   * Indicates if the file is being downloaded.
-   */
-  isDownloading?: boolean;
+  status?: "uploading" | "downloading";
   /**
    * Callback called when the delete button is clicked.
    */
@@ -63,8 +59,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
   (
     {
       file,
-      isUploading,
-      isDownloading,
+      status,
       onDelete,
       onRetry,
       error,
@@ -85,14 +80,10 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
           "navds-file-item--error": error,
         })}
       >
-        <ItemIcon isLoading={isUploading || isDownloading} file={file} />
+        <ItemIcon isLoading={!!status} file={file} />
         <div className="navds-file-item__file-info">
           <ItemName file={file} href={href} onClick={onClick} />
-          {!error && (
-            <div>
-              {getStatusText(file, finalLocale, isUploading, isDownloading)}
-            </div>
-          )}
+          {!error && <div>{getStatusText(file, finalLocale, status)}</div>}
           <div
             className="navds-file-item__error"
             aria-relevant="additions removals"
@@ -102,7 +93,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
           </div>
         </div>
         <div className="navds-file-item__button">
-          {!isUploading && !isDownloading && (
+          {!status && (
             <ItemButton
               file={file}
               locale={finalLocale}
@@ -119,15 +110,14 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
 
 function getStatusText(
   file: FileItem,
-  finalLocale: "nb" | "nn" | "en",
-  isUploading?: boolean,
-  isDownloading?: boolean
+  locale: "nb" | "nn" | "en",
+  status?: FileItemProps["status"]
 ) {
-  if (isUploading) {
-    return getUploadingText(finalLocale);
+  if (status === "uploading") {
+    return getUploadingText(locale);
   }
-  if (isDownloading) {
-    return getDownloadingText(finalLocale);
+  if (status === "downloading") {
+    return getDownloadingText(locale);
   }
   return formatFileSize(file);
 }

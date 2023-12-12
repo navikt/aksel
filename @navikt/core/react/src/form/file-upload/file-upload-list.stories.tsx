@@ -22,21 +22,9 @@ const fileCsv = new File(["abc"], "file.csv");
 const filePptx = new File(["abc"], "file.pptx");
 const fileWebp = new File(["abc"], "file.webp");
 
-interface ListStoryProps {
-  error: string;
-  isUploading: boolean;
-  isDownloading: boolean;
-  label: string;
-  locale: "nb" | "nn" | "en";
-}
-
-export const ListIcons: StoryObj<ListStoryProps> = {
+export const ListIcons: StoryObj<typeof FileUpload.List> = {
   render: (props) => (
-    <FileUpload.List
-      label={props.label}
-      error={props.error}
-      locale={props.locale}
-    >
+    <FileUpload.List {...props}>
       <FileUpload.Item file={fileTxt} error="Oopsann" />
       <FileUpload.Item file={filePng} />
       <FileUpload.Item file={filePdf} />
@@ -44,13 +32,13 @@ export const ListIcons: StoryObj<ListStoryProps> = {
         file={fileDocx}
         onDelete={() => onDelete(fileDocx)}
         onRetry={() => onRetry(fileDocx)}
-        isUploading={props.isUploading}
+        status="uploading"
       />
       <FileUpload.Item
         file={fileDocx}
         onDelete={() => onDelete(fileDocx)}
         onRetry={() => onRetry(fileDocx)}
-        isDownloading={props.isDownloading}
+        status="downloading"
       />
       <FileUpload.Item file={fileXlsx} onDelete={() => onDelete(fileXlsx)} />
       <FileUpload.Item
@@ -75,12 +63,10 @@ export const ListIcons: StoryObj<ListStoryProps> = {
     label: "Opplastede filer",
     error: "hei jeg er en feil og jeg må rettes opp!",
     locale: "nb",
-    isUploading: true,
-    isDownloading: true,
   },
 };
 
-export const ListDownloading: StoryObj<ListStoryProps> = {
+export const ListDownloading: StoryObj = {
   render: () => (
     <FileUpload.List error="hei jeg er en feil og jeg må rettes opp!">
       <FileUpload.Item
@@ -128,21 +114,21 @@ export const ListDownloading: StoryObj<ListStoryProps> = {
   ),
 };
 
-export const ListLocales: StoryObj<ListStoryProps> = {
+export const ListLocales: StoryObj<{ locale: "nb" | "nn" | "en" }> = {
   render: (props) => (
     <HStack gap="12">
       <FileUpload.List
         label="Opplastede filer med standard nynorsk locale"
         locale={props.locale}
       >
-        <FileUpload.Item file={fileTxt} isUploading locale="nb" />
-        <FileUpload.Item file={fileTxt} isUploading />
-        <FileUpload.Item file={fileTxt} isUploading locale="en" />
+        <FileUpload.Item file={fileTxt} status="uploading" locale="nb" />
+        <FileUpload.Item file={fileTxt} status="uploading" />
+        <FileUpload.Item file={fileTxt} status="uploading" locale="en" />
       </FileUpload.List>
       <FileUpload.List label="Opplastede filer uten standard locale">
-        <FileUpload.Item file={fileTxt} isUploading />
-        <FileUpload.Item file={fileTxt} isUploading locale="nn" />
-        <FileUpload.Item file={fileTxt} isUploading locale="en" />
+        <FileUpload.Item file={fileTxt} status="uploading" />
+        <FileUpload.Item file={fileTxt} status="uploading" locale="nn" />
+        <FileUpload.Item file={fileTxt} status="uploading" locale="en" />
       </FileUpload.List>
     </HStack>
   ),
