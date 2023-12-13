@@ -25,7 +25,7 @@ function ArticleGrid({ data, initialData, loaded }: ArticleGridT) {
   return (
     <div>
       {loaded && (
-        <div className="grid gap-5">
+        <div className="grid gap-6">
           <div className={cl("pt-5", styles.initialGrid, styles.articleGrid)}>
             {initialData.map((article, idx) => (
               <ArticleCard

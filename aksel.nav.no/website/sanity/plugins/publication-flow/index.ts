@@ -1,9 +1,9 @@
-import { allArticleDocuments } from "@/sanity/config";
 import {
-  definePlugin,
   DocumentActionComponent,
   DocumentBadgeComponent,
+  definePlugin,
 } from "sanity";
+import { allArticleDocuments } from "@/sanity/config";
 import {
   createWrappedApproveAction,
   createWrappedDefaultPublish,
@@ -15,7 +15,7 @@ import {
   createWrappedUnpublishAction,
   createWrappedUpdateAction,
 } from "./actions";
-import { createBadgeComponent, CreateStatusBadge } from "./badges";
+import { CreateStatusBadge, createBadgeComponent } from "./badges";
 
 const generateBadges = (prev: DocumentBadgeComponent[]) => {
   const defaultBadges = prev.map((badge: DocumentBadgeComponent) => {

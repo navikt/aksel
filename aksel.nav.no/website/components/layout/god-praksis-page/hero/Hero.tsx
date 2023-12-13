@@ -28,7 +28,7 @@ function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
         <Heading
           size="xlarge"
           as="button"
-          className="py-1 w-full justify-between sm:justify-start sm:w-fit sm:py-2 pl-4 pr-2 sm:pl-6 sm:pr-4 [font-size:min(8vw,2.5rem)] focus-visible:shadow-focus focus:outline-none text-aksel-heading bg-surface-subtle flex gap-1 sm:gap-2 items-center rounded-full shadow-xsmall"
+          className="py-1 w-full hover:shadow-small transition-shadow justify-between sm:justify-start sm:w-fit sm:py-2 pl-4 pr-2 sm:pl-6 sm:pr-4 [font-size:min(8vw,2.5rem)] focus-visible:shadow-focus focus:outline-none text-aksel-heading bg-surface-subtle flex gap-1 sm:gap-2 items-center rounded-full shadow-xsmall"
           onClick={() => modalRef.current?.showModal()}
         >
           {tema ? tema.title : "Alle tema"}

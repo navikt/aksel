@@ -1,4 +1,3 @@
-import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
 import { table } from "@sanity/table";
@@ -7,6 +6,7 @@ import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
+import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
 import { godPraksisTaxonomy } from "./plugins/god-praksis-taxonomy";

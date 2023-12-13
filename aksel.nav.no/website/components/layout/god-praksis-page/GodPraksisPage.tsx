@@ -63,9 +63,11 @@ function GodPraksisPage(props: GpEntryPageProps) {
               </VStack>
             </VStack>
             <div>
-              <Heading level="2" size="medium" className="text-aksel-heading">
-                Siste
-              </Heading>
+              {initialData?.length > 0 && (
+                <Heading level="2" size="medium" className="text-aksel-heading">
+                  Siste
+                </Heading>
+              )}
               <ArticleList initialArticles={initialData} />
             </div>
           </VStack>

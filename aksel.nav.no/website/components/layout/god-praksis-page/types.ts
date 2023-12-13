@@ -3,6 +3,7 @@ export type GpArticleT = {
   heading: string;
   ingress: string;
   undertema: string[];
+  currentUndertema: string;
   slug: string;
   innholdstype: string | null;
   publishedAt: string | null;

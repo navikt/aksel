@@ -1,6 +1,6 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
-import { FileXMarkIcon, TagIcon } from "@navikt/aksel-icons";
 import { StructureBuilder } from "sanity/desk";
+import { FileXMarkIcon, TagIcon } from "@navikt/aksel-icons";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 /* documentStore is in Alpha, so avoid using for now */
 export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {

@@ -1,5 +1,5 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
 import { FileXMarkIcon } from "@navikt/aksel-icons";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 export const Panes = (
   docType,

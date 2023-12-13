@@ -1,7 +1,9 @@
-import { FileIcon } from "@navikt/aksel-icons";
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useRef, useState } from "react";
+import { FileIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, Heading, Tooltip } from "..";
+import { Checkbox, CheckboxGroup } from "../form/checkbox";
+import { VStack } from "../layout/stack";
 import Modal from "./Modal";
 
 const meta: Meta<typeof Modal> = {
@@ -202,6 +204,51 @@ export const WithTooltip: StoryFn = () => {
     </div>
   );
 };
+
+export const WithSrOnlyElement: StoryFn = () => (
+  <Modal open width={300} header={{ heading: "Simple header" }}>
+    <Modal.Body>
+      <VStack gap="16">
+        <BodyLong>
+          The modal body needs to have position:relative to make sr-only
+          elements position themselves correctly when the modal body is
+          overflowing (i.e. has a scrollbar).
+        </BodyLong>
+        <BodyLong>
+          If the modal body (and other parents of the sr-only element inside the
+          modal body) does not have position:relative (or equivalent), the
+          sr-only element is pushed downwards relative to the height of the
+          overflowing content.
+        </BodyLong>
+        <BodyLong>
+          In the most extreme cases, an additional scrollbar appears bc. the
+          dialog element (parent of modal body) starts overflowing. (We have
+          overflow:auto on the dialog element in case you are on a small screen
+          and header/footer has a lot of content.)
+        </BodyLong>
+        <BodyLong>Example: CheckboxGroup with a hidden legend:</BodyLong>
+        <CheckboxGroup legend="What fruits do you like?" hideLegend>
+          <Checkbox>Banana</Checkbox>
+          <Checkbox>Apple</Checkbox>
+          <Checkbox>Orange</Checkbox>
+          <Checkbox>Pear</Checkbox>
+        </CheckboxGroup>
+        <BodyLong>
+          Try to remove position:relative from the modal body and see what
+          happens. (Use DevTools to find the legend element.) You might need to
+          make the viewport shorter to get the full effect (double scrollbar).
+        </BodyLong>
+        <BodyLong>
+          Note: The large amount of gap has been added on purpose to force
+          overflow.
+        </BodyLong>
+      </VStack>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary">Dummy button</Button>
+    </Modal.Footer>
+  </Modal>
+);
 
 export const ChromaticViewportTesting: StoryFn = () => (
   <div id="modal-story-wrapper" style={{ width: "100vw", height: "100vh" }}>

@@ -1,5 +1,5 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { WorkspaceT } from "../../util";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import { editorField } from "../presets/editors";

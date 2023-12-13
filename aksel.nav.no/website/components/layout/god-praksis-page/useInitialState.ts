@@ -20,9 +20,10 @@ function useInitialState(articles: GpGroupedArticlesT): {
   const { isReady } = useRouter();
 
   const initialData = isReady
-    ? getArticleList(articles, innholdstypeQuery, undertemaQuery).map(
-        (x) => x.article
-      )
+    ? getArticleList(articles, innholdstypeQuery, undertemaQuery).map((x) => ({
+        ...x.article,
+        currentUndertema: x.undertema,
+      }))
     : [];
 
   return {
