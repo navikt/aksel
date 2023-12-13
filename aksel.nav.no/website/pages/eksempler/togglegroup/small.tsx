@@ -15,7 +15,7 @@ const Example = () => {
       </ToggleGroup.Item>
       <ToggleGroup.Item value="lest">
         <EnvelopeOpenIcon aria-hidden />
-        Leste
+        Lest
       </ToggleGroup.Item>
       <ToggleGroup.Item value="sendt">
         <PaperplaneIcon aria-hidden />

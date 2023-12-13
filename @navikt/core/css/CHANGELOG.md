@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.11.5
+
+### Patch Changes
+
+- Chips: La til token for checkmark-circle ([#2558](https://github.com/navikt/aksel/pull/2558))
+
 ## 5.11.4
 
 ### Patch Changes
