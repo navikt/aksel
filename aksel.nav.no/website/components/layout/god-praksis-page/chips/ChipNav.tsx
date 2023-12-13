@@ -12,6 +12,7 @@ type ChipsNavProps = {
   type: "innholdstype" | "undertema";
   // data?: GpChipsInnholdstypeT["chipsInnholdstype"];
   data?: ChipsData;
+  setSelection: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type ChipsRenderData = { title: string; count: number }[];
@@ -34,22 +35,26 @@ const countUniques = (
   return chipData;
 };
 
-/**
- * TODO:
- * - Chips seems to not update correctly based on selection atm
- */
-function ChipNav({ type, data }: ChipsNavProps) {
+function ChipNav({ type, data, setSelection }: ChipsNavProps) {
   const id = useId();
 
   const { query, replace } = useRouter();
 
-  function handleSelect(title: string) {
-    query[type] === title
-      ? replace({ query: omit(query, [type]) }, undefined, { shallow: true })
+  const handleClick = async (titleRaw: string) => {
+    const title = encodeURIComponent(titleRaw);
+
+    (await query[type]) === title
+      ? replace({ query: omit(query, [type]) }, undefined, {
+          shallow: true,
+        }).then(() => {
+          setSelection(undefined);
+        })
       : replace({ query: { ...query, [type]: title } }, undefined, {
           shallow: true,
+        }).then(() => {
+          setSelection(titleRaw);
         });
-  }
+  };
 
   const selectionCount = countUniques(type, data);
 
@@ -71,7 +76,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
                 variant="neutral"
                 checkmark={false}
                 selected={encodeURIComponent(entry.title) === query?.[type]}
-                onClick={() => handleSelect(encodeURIComponent(entry.title))}
+                onClick={() => handleClick(entry.title)}
                 className="whitespace-nowrap"
               >
                 {`${entry.title} (${entry.count})`}
