@@ -4,14 +4,34 @@ import { useRouter } from "next/router";
 import { useId } from "react";
 import { Chips, HGrid, Label } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
-import { ChipsRenderData } from "../GodPraksisPage";
+import { ChipsData } from "../types";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
 
 type ChipsNavProps = {
   type: "innholdstype" | "undertema";
   // data?: GpChipsInnholdstypeT["chipsInnholdstype"];
-  data?: ChipsRenderData;
+  data?: ChipsData;
+};
+
+export type ChipsRenderData = { title: string; count: number }[];
+
+const countUniques = (
+  type: "innholdstype" | "undertema",
+  data: ChipsData
+): ChipsRenderData => {
+  const lens =
+    type == "innholdstype" ? "innholdstype-title" : "undertema-title";
+  const map = new Map<string, number>();
+  for (const entry of data) {
+    const count = map.get(entry[lens]) || 0;
+    map.set(entry[lens], count + 1);
+  }
+  const chipData = [];
+  for (const [key, value] of map.entries()) {
+    chipData.push({ title: key, count: value });
+  }
+  return chipData;
 };
 
 /**
@@ -31,6 +51,8 @@ function ChipNav({ type, data }: ChipsNavProps) {
         });
   }
 
+  const selectionCount = countUniques(type, data);
+
   return (
     <HGrid gap="2" columns={{ sm: 1, md: "auto 1fr" }} align="center">
       <Label as="p" className="text-aksel-heading">
@@ -43,7 +65,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
           id={id}
           className={cl("overflow-x-scroll flex gap-2 p-1", styles.chips)}
         >
-          {data.map((entry) => (
+          {selectionCount.map((entry) => (
             <li key={entry.title}>
               <Chips.Toggle
                 variant="neutral"

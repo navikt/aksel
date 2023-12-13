@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { Box, Heading, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
-import { ChipsData, GpEntryPageProps } from "@/layout/god-praksis-page/types";
+import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
 import useInitialState from "@/layout/god-praksis-page/useInitialState";
 import Header from "@/layout/header/Header";
 import ChipNav from "./chips/ChipNav";
@@ -10,24 +10,6 @@ import Hero from "./hero/Hero";
 const ArticleList = dynamic(() => import("./articles/ArticleList"), {
   ssr: false,
 });
-
-export type ChipsRenderData = { title: string; count: number }[];
-
-const countUniques = (
-  lens: "innholdstype-title" | "undertema-title",
-  chipDatas: ChipsData
-): ChipsRenderData => {
-  const map = new Map<string, number>();
-  for (const entry of chipDatas) {
-    const count = map.get(entry[lens]) || 0;
-    map.set(entry[lens], count + 1);
-  }
-  const chipData = [];
-  for (const [key, value] of map.entries()) {
-    chipData.push({ title: key, count: value });
-  }
-  return chipData;
-};
 
 function GodPraksisPage(props: GpEntryPageProps) {
   const { initialData } = useInitialState(props.initialArticles);
@@ -46,15 +28,9 @@ function GodPraksisPage(props: GpEntryPageProps) {
               <Hero tema={props.tema} heroNav={props.heroNav} />
               <VStack gap="4">
                 {props.tema && (
-                  <ChipNav
-                    type="undertema"
-                    data={countUniques("undertema-title", props.chipsData)}
-                  />
+                  <ChipNav type="undertema" data={props.chipsData} />
                 )}
-                <ChipNav
-                  type="innholdstype"
-                  data={countUniques("innholdstype-title", props.chipsData)}
-                />
+                <ChipNav type="innholdstype" data={props.chipsData} />
               </VStack>
             </VStack>
             <div>
