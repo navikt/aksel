@@ -1,9 +1,9 @@
-import { Button, HStack } from "@navikt/ds-react";
+import { Button, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="6" align="center">
+    <VStack gap="6" align="center">
       <Button variant="danger">Danger</Button>
       <Button variant="danger" size="small">
         Danger
@@ -11,7 +11,7 @@ const Example = () => {
       <Button variant="danger" size="xsmall">
         Danger
       </Button>
-    </HStack>
+    </VStack>
   );
 };
 
