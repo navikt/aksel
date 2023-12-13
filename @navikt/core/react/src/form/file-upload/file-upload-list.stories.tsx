@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { FileUpload } from "..";
-import { HStack } from "../../layout/stack";
-import { FileItem } from "./item/types";
+import { VStack } from "../../layout/stack";
 
 const meta: Meta<typeof FileUpload.List> = {
   title: "ds-react/FileUpload/List",
@@ -11,52 +10,40 @@ const meta: Meta<typeof FileUpload.List> = {
 
 export default meta;
 
-const onDelete = (file: FileItem) => alert(`Delete ${file.name}`);
-const onRetry = (file: FileItem) => alert(`Retry ${file.name}`);
 const fileTxt = new File(["abc".repeat(10000)], "file.txt");
-const filePng = new File(["abc".repeat(10000)], "file.png");
-const filePdf = new File(["abc".repeat(100000)], "file.pdf");
 const fileDocx = new File(["abc"], "file.docx");
-const fileXlsx = new File(["abc"], "file.xlsx");
-const fileCsv = new File(["abc"], "file.csv");
-const filePptx = new File(["abc"], "file.pptx");
-const fileWebp = new File(["abc"], "file.webp");
 
-export const ListIcons: StoryObj<typeof FileUpload.List> = {
+export const Default: StoryObj<typeof FileUpload.List> = {
   render: (props) => (
     <FileUpload.List {...props}>
-      <FileUpload.Item file={fileTxt} error="Oopsann" />
-      <FileUpload.Item file={filePng} />
-      <FileUpload.Item file={filePdf} />
-      <FileUpload.Item
-        file={fileDocx}
-        onDelete={() => onDelete(fileDocx)}
-        onRetry={() => onRetry(fileDocx)}
-        status="uploading"
-      />
-      <FileUpload.Item
-        file={fileDocx}
-        onDelete={() => onDelete(fileDocx)}
-        onRetry={() => onRetry(fileDocx)}
-        status="downloading"
-      />
-      <FileUpload.Item file={fileXlsx} onDelete={() => onDelete(fileXlsx)} />
-      <FileUpload.Item
-        file={fileCsv}
-        error="Åh nei!"
-        onDelete={() => onDelete(fileCsv)}
-      />
-      <FileUpload.Item
-        file={filePptx}
-        error="Huffameg.."
-        onDelete={() => onDelete(filePptx)}
-      />
-      <FileUpload.Item
-        file={fileWebp}
-        error="Au da.."
-        onRetry={() => onRetry(fileWebp)}
-        onDelete={() => onDelete(fileWebp)}
-      />
+      <FileUpload.Item file={fileTxt} />
+      <FileUpload.Item file={fileDocx} />
+    </FileUpload.List>
+  ),
+  args: {
+    label: "Opplastede filer",
+    error: "",
+    locale: "nb",
+  },
+};
+
+export const WithoutLabel: StoryObj<typeof FileUpload.List> = {
+  render: (props) => (
+    <FileUpload.List {...props}>
+      <FileUpload.Item file={fileTxt} />
+      <FileUpload.Item file={fileDocx} />
+    </FileUpload.List>
+  ),
+  args: {
+    locale: "nb",
+  },
+};
+
+export const WithError: StoryObj<typeof FileUpload.List> = {
+  render: (props) => (
+    <FileUpload.List {...props}>
+      <FileUpload.Item file={fileTxt} />
+      <FileUpload.Item file={fileDocx} />
     </FileUpload.List>
   ),
   args: {
@@ -66,73 +53,31 @@ export const ListIcons: StoryObj<typeof FileUpload.List> = {
   },
 };
 
-export const ListDownloading: StoryObj = {
+export const Locales: StoryObj<typeof FileUpload.List> = {
   render: () => (
-    <FileUpload.List error="hei jeg er en feil og jeg må rettes opp!">
-      <FileUpload.Item
-        file={{
-          name: "withOnClick.txt",
-          size: 1_048_576,
-        }}
-        onClick={() => alert("onClick")}
-      />
-      <FileUpload.Item
-        file={{
-          name: "withOnClickAndDelete.txt",
-          size: 600_000_000,
-        }}
-        onClick={() => alert("onClick")}
-        onDelete={() =>
-          onDelete({
-            name: "withOnClickAndDelete.txt",
-            size: 600_000_000,
-          })
-        }
-      />
-      <FileUpload.Item
-        file={{
-          name: "withHref.txt",
-          size: 1,
-        }}
-        href="https://www.nav.no"
-      />
-      <FileUpload.Item
-        file={{
-          name: "withoutHrefOrOnClick.txt",
-          size: 2_000_000,
-        }}
-      />
-      <FileUpload.Item
-        file={{
-          name: "withBase64.txt",
-          size: 500_000_000,
-          base64: "data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==",
-        }}
-      />
-      <FileUpload.Item file={fileTxt} />
-    </FileUpload.List>
-  ),
-};
+    <VStack gap="10">
+      <FileUpload.List label="Bokmål" locale="nb">
+        <FileUpload.Item file={fileTxt} status="uploading" />
+        <FileUpload.Item file={fileDocx} />
+      </FileUpload.List>
 
-export const ListLocales: StoryObj<{ locale: "nb" | "nn" | "en" }> = {
-  render: (props) => (
-    <HStack gap="12">
+      <FileUpload.List label="Nynorsk" locale="nn">
+        <FileUpload.Item file={fileTxt} status="uploading" />
+        <FileUpload.Item file={fileDocx} />
+      </FileUpload.List>
+
       <FileUpload.List
-        label="Opplastede filer med standard nynorsk locale"
-        locale={props.locale}
+        label="Nynorsk med engelsk override på ett item"
+        locale="nn"
       >
-        <FileUpload.Item file={fileTxt} status="uploading" locale="nb" />
-        <FileUpload.Item file={fileTxt} status="uploading" />
-        <FileUpload.Item file={fileTxt} status="uploading" locale="en" />
+        <FileUpload.Item file={fileTxt} locale="en" status="uploading" />
+        <FileUpload.Item file={fileDocx} status="uploading" />
       </FileUpload.List>
-      <FileUpload.List label="Opplastede filer uten standard locale">
+
+      <FileUpload.List label="Engelsk" locale="en">
         <FileUpload.Item file={fileTxt} status="uploading" />
-        <FileUpload.Item file={fileTxt} status="uploading" locale="nn" />
-        <FileUpload.Item file={fileTxt} status="uploading" locale="en" />
+        <FileUpload.Item file={fileDocx} />
       </FileUpload.List>
-    </HStack>
+    </VStack>
   ),
-  args: {
-    locale: "nn",
-  },
 };
