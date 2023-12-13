@@ -28,15 +28,6 @@
 @media (max-width: 767px) {
   .initialGrid {
     gap: var(--a-spacing-4);
-    grid-template-columns: 24;
-  }
-
-  .initialGrid > :is(:nth-child(2n + 1)) {
-    grid-column: 1 / span 23;
-  }
-
-  .initialGrid > :is(:nth-child(2n + 2)) {
-    grid-column: 2 / span 23;
   }
 }
 
@@ -57,11 +48,11 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .initialGrid > :is(:nth-child(6n + 1), :nth-child(6n + 5)) {
-    grid-row: span 2 / span 2;
+  .initialGrid > :is(:nth-child(6n + 4), :nth-child(6n + 6)) {
+    grid-column: span 2 / span 2;
   }
 
-  .initialGrid > :is(:nth-child(6n + 2), :nth-child(6n + 3), :nth-child(6n + 4), :nth-child(6n + 6), ) {
-    grid-column: span 2 / span 2;
+  .initialGrid > :is(:nth-child(6n + 5)) {
+    grid-row: span 2 / span 2;
   }
 }
