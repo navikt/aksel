@@ -71,7 +71,6 @@ export interface DropzoneProps
 const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
   (props: DropzoneProps, ref) => {
     const [isDraggingOver, setIsDraggingOver] = useState(false);
-
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
 
@@ -91,17 +90,26 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
       useFormField(props, "fileUpload");
 
+    /**
+     * Put callbacks in refs so that we don't re-add the paste event listener on every
+     * render when consumer creates new onSelect/validator function(s) on every render
+     */
+    const onSelectRef = useRef(onSelect);
+    const validatorRef = useRef(validator);
+    onSelectRef.current = onSelect;
+    validatorRef.current = validator;
+
     const upload = useCallback(
       (files: File[]) => {
         const { acceptedFiles, rejectedFiles } = partitionFiles(
           files,
           accept,
-          validator
+          validatorRef.current
         );
 
-        onSelect({ allFiles: files, acceptedFiles, rejectedFiles });
+        onSelectRef.current({ allFiles: files, acceptedFiles, rejectedFiles });
       },
-      [onSelect, accept, validator]
+      [accept]
     );
 
     useEffect(() => {
