@@ -81,17 +81,17 @@ export const ArticleCard = ({
         <div className="flex gap-2 justify-between items-center mt-6">
           <div className="flex gap-3 flex-wrap items-center font-semibold">
             {currentUndertema && (
-              <span className="text-deepblue-500 flex gap-05 items-center">
+              <span className="text-teal-700 flex gap-05 items-center">
                 <TagFillIcon aria-hidden />
                 <span>{currentUndertema}</span>
               </span>
             )}
-            <span className="text-teal-700 flex gap-05 items-center">
+            <span className="text-violet-600 flex gap-05 items-center">
               <FileFillIcon aria-hidden />
               <span>{innholdstype}</span>
             </span>
           </div>
-          <ChevronRightIcon aria-hidden className="flex-shrink-0" />
+          <ChevronRightIcon aria-hidden className="flex-shrink-0 text-2xl" />
         </div>
       </VStack>
     </Link>
