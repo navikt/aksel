@@ -2,6 +2,7 @@ import { groq } from "next-sanity";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
+import { groupByTema } from "@/layout/god-praksis-page/chips/dataTransforms";
 import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
 import {
   chipsDataAllQuery,
@@ -13,10 +14,7 @@ import {
   temaQuery,
   temaQueryResponse,
 } from "@/layout/god-praksis-page/queries";
-import {
-  ChipDataGroupedByTema,
-  GpEntryPageProps,
-} from "@/layout/god-praksis-page/types";
+import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
 import { getGpTema } from "@/sanity/interface";
 import { NextPageT } from "@/types";
@@ -32,6 +30,10 @@ const query = groq`
   ${initialTemaPageArticles},
 }
 `;
+type QueryResponse = chipsDataAllQueryResponse &
+  heroNavQueryResponse &
+  temaQueryResponse &
+  initialTemaPageArticlesResponse;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -45,47 +47,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: "blocking",
   };
 };
-
-export const groupByTema = (
-  chipsData: chipsDataAllQueryResponse["chipsDataAll"]
-): ChipDataGroupedByTema => {
-  console.log(`chipsData.length: ${chipsData.length}`);
-  console.log(`chipsData: ${JSON.stringify(chipsData, null, 2)}`);
-
-  const chipNavData: ChipDataGroupedByTema = {};
-  for (const entry of chipsData) {
-    for (const undertema of entry.undertema) {
-      if (!chipNavData[undertema.temaSlug]) {
-        chipNavData[undertema.temaSlug] = [
-          {
-            "undertema-title": undertema.title,
-            "innholdstype-title": entry.innholdstype,
-          },
-        ];
-        continue;
-      }
-      chipNavData[undertema.temaSlug].push({
-        "undertema-title": undertema.title,
-        "innholdstype-title": entry.innholdstype,
-      });
-    }
-  }
-  console.log("--- after processing chipsData: ", { chipNavData });
-  return chipNavData;
-  // return {
-  //   navno: [
-  //     {
-  //       "undertema-title": "undertema-title",
-  //       "innholdstype-title": "innholdstype-title",
-  //     },
-  //   ],
-  // };
-};
-
-type QueryResponse = chipsDataAllQueryResponse &
-  heroNavQueryResponse &
-  temaQueryResponse &
-  initialTemaPageArticlesResponse;
 
 export const getStaticProps: GetStaticProps = async ({
   params: { slug },
@@ -108,7 +69,7 @@ export const getStaticProps: GetStaticProps = async ({
       preview,
       id: "",
       title: "",
-      chipsDataAll: groupByTema(chipsDataAll)[slug],
+      chipsData: groupByTema(chipsDataAll)[slug],
     },
     notFound: !tema || !heroNav.some((nav) => nav.slug === slug),
     revalidate: 60,

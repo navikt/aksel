@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { Box, Heading, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
-import { ChipData, GpEntryPageProps } from "@/layout/god-praksis-page/types";
+import { ChipsData, GpEntryPageProps } from "@/layout/god-praksis-page/types";
 import useInitialState from "@/layout/god-praksis-page/useInitialState";
 import Header from "@/layout/header/Header";
 import ChipNav from "./chips/ChipNav";
@@ -15,9 +15,8 @@ export type ChipsRenderData = { title: string; count: number }[];
 
 const countUniques = (
   lens: "innholdstype-title" | "undertema-title",
-  chipDatas: ChipData
+  chipDatas: ChipsData
 ): ChipsRenderData => {
-  console.log({ lens, chipDatas });
   const map = new Map<string, number>();
   for (const entry of chipDatas) {
     const count = map.get(entry[lens]) || 0;
@@ -32,10 +31,6 @@ const countUniques = (
 
 function GodPraksisPage(props: GpEntryPageProps) {
   const { initialData } = useInitialState(props.initialArticles);
-
-  console.log("#### GodPraksisPage ####");
-  console.log({ chipsDataAll: props.chipsDataAll });
-
   return (
     /* TODO: Add surface-subtle to page-component props */
     <Page
@@ -53,12 +48,12 @@ function GodPraksisPage(props: GpEntryPageProps) {
                 {props.tema && (
                   <ChipNav
                     type="undertema"
-                    data={countUniques("undertema-title", props.chipsDataAll)}
+                    data={countUniques("undertema-title", props.chipsData)}
                   />
                 )}
                 <ChipNav
                   type="innholdstype"
-                  data={countUniques("innholdstype-title", props.chipsDataAll)}
+                  data={countUniques("innholdstype-title", props.chipsData)}
                 />
               </VStack>
             </VStack>

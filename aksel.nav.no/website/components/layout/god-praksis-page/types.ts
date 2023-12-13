@@ -30,11 +30,6 @@ export type HeroNavT = {
   }[];
 };
 
-export type ChipsDataT = {
-  title: string;
-  count: number;
-}[];
-
 export type GpGroupedArticlesT = {
   innholdstype: string | null;
   undertema: string | null;
@@ -53,11 +48,11 @@ export type GpGroupedArticlesInputT = {
   }[];
 };
 
-export type ChipDataGroupedByTema = {
-  [temaSlug: string]: ChipData;
+export type ChipsDataGroupedByTema = {
+  [temaSlug: string]: ChipsData;
 };
 
-export type ChipData = {
+export type ChipsData = {
   "undertema-title": string;
   "innholdstype-title": string;
 }[];
@@ -66,4 +61,4 @@ export type GpEntryPageProps = HeroNavT & {
   tema: GpTemaT | null;
 } & {
   initialArticles: GpGroupedArticlesT;
-} & { chipsDataAll: ChipData };
+} & { chipsData: ChipsData };
