@@ -68,24 +68,25 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
   ) => {
     const context = useContext(FileListContext);
     const finalLocale = locale || context?.locale || DEFAULT_LOCALE;
+    const isError = !!error && !status;
 
     return (
       <div
         ref={ref}
         className={cl("navds-file-item", className, {
-          "navds-file-item--error": error,
+          "navds-file-item--error": isError,
         })}
       >
         <ItemIcon isLoading={!!status} file={file} />
         <div className="navds-file-item__file-info">
           <ItemName file={file} href={href} onClick={onClick} />
-          {!error && <div>{getStatusText(file, finalLocale, status)}</div>}
+          {!isError && <div>{getStatusText(file, finalLocale, status)}</div>}
           <div
             className="navds-file-item__error"
             aria-relevant="additions removals"
             aria-live="polite"
           >
-            {!!error && <ErrorMessage>{error}</ErrorMessage>}
+            {isError && <ErrorMessage>{error}</ErrorMessage>}
           </div>
         </div>
         <div className="navds-file-item__button">
