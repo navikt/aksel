@@ -70,7 +70,7 @@ export const Default: StoryFn = () => {
 };
 
 function getError(file: File, rejectedFiles: File[]) {
-  if (file.size > MAX_SIZE) return "Filen er større enn 4 MB";
+  if (file.size > MAX_SIZE) return `Filen er større enn ${MAX_SIZE} MB`;
   if (rejectedFiles.includes(file)) return "Filformatet støttes ikke";
   return undefined;
 }

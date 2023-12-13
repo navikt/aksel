@@ -2,57 +2,39 @@
  * FileUpload.Dropzone
  */
 
-.navds-file-dropzone.navds-form-field {
-  display: flex;
-  flex-direction: column;
-}
-
-.navds-file-dropzone__content {
+.navds-file-dropzone__zone {
   display: flex;
   position: relative;
   text-align: center;
+  background-color: var(--ac-file-upload-bg, var(--a-surface-subtle));
+  padding: var(--a-spacing-6);
+  border: 1px dashed var(--ac-file-upload-border, var(--a-border-subtle));
+  border-radius: var(--ac-file-upload-border-radius, var(--a-border-radius-large));
+  flex-direction: column;
+  gap: var(--a-spacing-4);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.navds-file-dropzone__content-zone-button {
-  position: relative;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.navds-file-dropzone__content-zone-icon {
+.navds-file-dropzone__zone-icon {
   display: flex;
   padding: var(--a-spacing-3);
   border-radius: var(--a-border-radius-full);
   background-color: var(--ac-file-upload-icon-bg, var(--a-surface-neutral-subtle));
 }
 
-.navds-file-dropzone__content-zone-text {
+.navds-file-dropzone__zone-text {
   display: flex;
   flex-direction: column;
   gap: var(--a-spacing-1);
 }
 
-.navds-file-dropzone__content:hover .navds-file-dropzone__content-zone-button {
+.navds-file-dropzone__zone:hover .navds-file-dropzone__button {
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-file-dropzone__content-zone {
-  position: relative;
-  background-color: var(--ac-file-upload-bg, var(--a-surface-subtle));
-  padding: var(--a-spacing-6);
-  border: 1px dashed var(--ac-file-upload-border, var(--a-border-subtle));
-  border-radius: var(--ac-file-upload-border-radius, var(--a-border-radius-large));
-  display: flex;
-  flex-direction: column;
-  gap: var(--a-spacing-4);
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.navds-file-dropzone__content-zone-dragover {
+.navds-file-dropzone__dragover {
   color: var(--ac-file-upload-dragover-text, var(--a-text-action));
   pointer-events: none;
   align-items: center;
@@ -68,30 +50,28 @@
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-file-dropzone__content--dragover .navds-file-dropzone__content-zone-button {
-  visibility: hidden;
-}
-
-.navds-file-dropzone__content-zone:hover {
-  background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
-}
-
-.navds-file-dropzone__content--error:not(:hover):not(.navds-file-dropzone__content--dragover) .navds-file-dropzone__content-zone {
+.navds-file-dropzone__zone--error:not(:hover):not(.navds-file-dropzone__zone--dragging-over) {
   border-color: var(--ac-file-upload-error-border, var(--a-surface-danger));
+  border-width: 2px;
+  margin: -1px 0;
 }
 
-.navds-file-dropzone__content:focus-within .navds-file-dropzone__content-zone-button {
+.navds-file-dropzone__zone:focus-within .navds-file-dropzone__button {
   box-shadow: inset 0 0 0 2px
       var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
     var(--a-shadow-focus);
 }
 
-.navds-file-dropzone__content-input {
+.navds-file-dropzone__input {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
+  cursor: pointer;
+}
+
+.navds-file-dropzone__input::file-selector-button {
   cursor: pointer;
 }
 

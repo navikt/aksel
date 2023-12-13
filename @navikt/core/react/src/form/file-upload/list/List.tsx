@@ -22,10 +22,6 @@ export interface FileListProps {
    */
   className?: string;
   /**
-   * Sets a ref on the <div> element.
-   */
-  ref?: React.Ref<HTMLDivElement>;
-  /**
    * Changes locale used for component text.
    * @default "nb" (norsk bokmål)
    */

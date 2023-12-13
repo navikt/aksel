@@ -60,10 +60,6 @@ export interface DropzoneProps
    */
   accept?: string;
   /**
-   * Sets a ref on the outermost div.
-   */
-  ref?: React.Ref<HTMLInputElement>;
-  /**
    * Callback triggered on file select
    */
   onSelect: (files: OnFileSelectProps) => void;
@@ -95,14 +91,12 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       multiple = true,
       accept,
       validator,
-      locale: localeProp,
+      locale = "nb",
       ...rest
     } = props;
 
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
       useFormField(props, "fileUpload");
-
-    const locale = localeProp || "nb";
 
     const upload = useCallback(
       (files: File[]) => {
@@ -185,39 +179,38 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           onDragLeave={onDragEnd}
           onDragEnd={onDragEnd}
           onDrop={onDragEnd}
-          className={cl("navds-file-dropzone__content", {
-            "navds-file-dropzone__content--error": hasError,
-            "navds-file-dropzone__content--dragover": isDraggingOver,
+          className={cl("navds-file-dropzone__zone", {
+            "navds-file-dropzone__zone--error": hasError,
+            "navds-file-dropzone__zone--dragging-over": isDraggingOver,
           })}
         >
-          <div className="navds-file-dropzone__content-zone">
-            {isDraggingOver && (
-              <div className="navds-file-dropzone__content-zone-dragover">
-                <CloudUpIcon fontSize="1.5rem" aria-hidden />
-                <BodyShort as="span">{getDropText(locale)}</BodyShort>
-              </div>
-            )}
-            <div className="navds-file-dropzone__content-zone-icon">
-              <UploadIcon fontSize="1.5rem" aria-hidden />
+          {isDraggingOver && (
+            <div className="navds-file-dropzone__dragover">
+              <CloudUpIcon fontSize="1.5rem" aria-hidden />
+              <BodyShort as="span">{getDropText(locale)}</BodyShort>
             </div>
-            <div aria-hidden className="navds-file-dropzone__content-zone-text">
-              <BodyShort as="span">
-                {getDragAndDropText(locale, multiple)}
-              </BodyShort>
-              <BodyShort as="span">{getOrText(locale)}</BodyShort>
-            </div>
-            <Button
-              className="navds-file-dropzone__content-zone-button"
-              variant="secondary"
-              onClick={onButtonClick}
-              tabIndex={-1}
-            >
-              {getButtonText(locale, multiple)}
-            </Button>
+          )}
+          <div className="navds-file-dropzone__zone-icon">
+            <UploadIcon fontSize="1.5rem" aria-hidden />
           </div>
+          <div aria-hidden className="navds-file-dropzone__zone-text">
+            <BodyShort as="span">
+              {getDragAndDropText(locale, multiple)}
+            </BodyShort>
+            <BodyShort as="span">{getOrText(locale)}</BodyShort>
+          </div>
+          <Button
+            className="navds-file-dropzone__button"
+            variant="secondary"
+            onClick={onButtonClick}
+            tabIndex={-1}
+          >
+            {getButtonText(locale, multiple)}
+          </Button>
+
           <input
             type="file"
-            className="navds-file-dropzone__content-input"
+            className="navds-file-dropzone__input"
             multiple={multiple}
             accept={accept}
             onChange={onChange}
