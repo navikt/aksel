@@ -11,8 +11,8 @@ import React, {
 import { CloudUpIcon, UploadIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { mergeRefs } from "../../util";
-import { useFormField } from "../useFormField";
+import { mergeRefs, omit } from "../../util";
+import { FormFieldProps, useFormField } from "../useFormField";
 import {
   getButtonText,
   getDragAndDropText,
@@ -28,26 +28,19 @@ export interface OnFileSelectProps {
 }
 
 export interface DropzoneProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    "children" | "size" | "onSelect"
-  > {
+  extends Omit<FormFieldProps, "size" | "disabled" | "readOnly">,
+    Omit<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      "children" | "size" | "onSelect"
+    > {
   /**
    * Text shown to the user.
    */
   label: string;
   /**
-   * Adds a description to extend labling of FileUpload
-   */
-  description?: string;
-  /**
    * Class name passed to the outermost <div> element.
    */
   className?: string;
-  /**
-   * Error message.
-   */
-  error?: string;
   /**
    * Indicates if it is possible
    * to select multiple files at once.
@@ -209,14 +202,14 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           </Button>
 
           <input
+            {...omit(rest, ["errorId"])}
+            {...inputProps}
             type="file"
             className="navds-file-dropzone__input"
             multiple={multiple}
             accept={accept}
             onChange={onChange}
             ref={mergedRef}
-            {...rest}
-            {...inputProps}
           />
         </div>
         <div
