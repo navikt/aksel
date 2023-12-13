@@ -3,8 +3,8 @@ import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { Loader } from "../loader";
 import { Label } from "../typography";
 import {
-  mergeRefs,
   OverridableComponent,
+  mergeRefs,
   omit,
   useClientLayoutEffect,
 } from "../util";

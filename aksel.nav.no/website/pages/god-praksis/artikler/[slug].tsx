@@ -185,7 +185,7 @@ const Page = ({
               <Heading
                 level="1"
                 size="large"
-                className="text-deepblue-800 mt-4 md:text-5xl"
+                className="text-deepblue-800 mt-4 md:text-5xl text-wrap-balance"
               >
                 {data.heading}
               </Heading>

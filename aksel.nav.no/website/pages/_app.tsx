@@ -18,7 +18,9 @@ function App({ Component, pageProps, router }: AppProps) {
     hotjar.initialize(148751, 6);
   }, []);
 
-  const isTemplate = true;
+  const useGlobalStyles =
+    !router.pathname.startsWith("/templates/") &&
+    !router.pathname.startsWith("/eksempler/");
 
   return (
     <>
@@ -26,12 +28,12 @@ function App({ Component, pageProps, router }: AppProps) {
       <SanityDocIdContext.Provider
         value={{ id: pageProps?.id ?? pageProps?.page?._id }}
       >
-        {isTemplate ? (
-          <Component {...pageProps} />
-        ) : (
-          <div className="global-styling">
+        {useGlobalStyles ? (
+          <div className="globalstyles">
             <Component {...pageProps} />
           </div>
+        ) : (
+          <Component {...pageProps} />
         )}
       </SanityDocIdContext.Provider>
     </>

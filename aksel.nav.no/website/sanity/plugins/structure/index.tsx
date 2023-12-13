@@ -1,15 +1,5 @@
-import {
-  SANITY_API_VERSION,
-  bloggKategorier,
-  grunnleggendeKategorier,
-  komponentKategorier,
-  landingsider,
-  previews,
-  prinsippKategorier,
-  templatesKategorier,
-} from "../../config";
-import { Iframe } from "./IFrame";
-
+import differenceInMonths from "date-fns/differenceInMonths";
+import { StructureResolver } from "sanity/desk";
 import {
   CircleSlashIcon,
   ComponentIcon,
@@ -21,9 +11,18 @@ import {
   RectangleSectionsIcon,
   TokenIcon,
 } from "@navikt/aksel-icons";
-import differenceInMonths from "date-fns/differenceInMonths";
-import { StructureResolver } from "sanity/desk";
+import {
+  SANITY_API_VERSION,
+  bloggKategorier,
+  grunnleggendeKategorier,
+  komponentKategorier,
+  landingsider,
+  previews,
+  prinsippKategorier,
+  templatesKategorier,
+} from "../../config";
 import { GP_DOCUMENT_NAMES } from "../god-praksis-taxonomy";
+import { Iframe } from "./IFrame";
 import { GodPraksisPanes } from "./god-praksis";
 import { Panes } from "./panes";
 

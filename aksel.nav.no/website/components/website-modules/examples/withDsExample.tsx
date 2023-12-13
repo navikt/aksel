@@ -76,7 +76,6 @@ export const withDsExample = (
         })}
         style={{ background: getBg(variant) }}
       >
-        <style global>{`html {scrollbar-gutter: unset;}`}</style>
         {showBreakpoints && <BreakpointText />}
         <div
           id="ds-example"

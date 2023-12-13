@@ -53,6 +53,8 @@ jobs:
           projectToken: x3xqdfgkujg
           exitZeroOnChanges: false
           buildScriptName: "build:storybook"
+          onlyChanged: true
+          externals: \@navikt/core/css/**/*.css
         env:
           STORYBOOK_GITHUB_SHA: ${{ github.sha }}
 
