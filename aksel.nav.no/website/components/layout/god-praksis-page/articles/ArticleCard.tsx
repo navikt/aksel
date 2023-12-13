@@ -32,7 +32,7 @@ export const ArticleCard = ({
   group,
   delay,
   innholdstype,
-  undertema,
+  currentUndertema,
 }: GpArticleT & {
   group: "initial" | "lazy";
   delay?: number;
@@ -80,10 +80,12 @@ export const ArticleCard = ({
         </div>
         <div className="flex gap-2 justify-between items-center mt-6">
           <div className="flex gap-3 flex-wrap items-center font-semibold">
-            <span className="text-deepblue-500 flex gap-05 items-center">
-              <TagFillIcon aria-hidden />
-              <span>{undertema}</span>
-            </span>
+            {currentUndertema && (
+              <span className="text-deepblue-500 flex gap-05 items-center">
+                <TagFillIcon aria-hidden />
+                <span>{currentUndertema}</span>
+              </span>
+            )}
             <span className="text-teal-700 flex gap-05 items-center">
               <FileFillIcon aria-hidden />
               <span>{innholdstype}</span>
