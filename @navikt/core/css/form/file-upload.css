@@ -56,9 +56,29 @@
   margin: -1px 0;
 }
 
-.navds-file-dropzone__zone:focus-within .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:focus-visible) .navds-file-dropzone__button {
   box-shadow: inset 0 0 0 2px
       var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
+    var(--a-shadow-focus);
+}
+
+@supports (not selector(:focus-visible)) or (not selector(:has(a))) {
+  .navds-file-dropzone__zone:focus-within .navds-file-dropzone__button {
+    box-shadow: inset 0 0 0 2px
+        var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-file-dropzone__zone:has(:active) .navds-file-dropzone__button {
+  color: var(--ac-button-secondary-active-text, var(--__ac-button-secondary-active-text, var(--a-text-on-action)));
+  background-color: var(--ac-button-secondary-active-bg, var(--__ac-button-secondary-active-bg, var(--a-surface-action-active)));
+  box-shadow: none;
+}
+
+.navds-file-dropzone__zone:has(:focus-visible:active) .navds-file-dropzone__button {
+  box-shadow: inset 0 0 0 1px
+      var(--ac-button-secondary-active-focus-border, var(--__ac-button-secondary-active-focus-border, var(--a-surface-default))),
     var(--a-shadow-focus);
 }
 
