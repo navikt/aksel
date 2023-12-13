@@ -50,7 +50,7 @@ export const ArticleCard = ({
     <Link
       href={`/${slug}`}
       className={cl(
-        "flex-shrink w-full focus:outline-none focus-visible:shadow-focus overflow-hidden text-ellipsis hover:shadow-large p-5 rounded-large bg-surface-default shadow-small",
+        "flex-shrink w-full focus:outline-none focus-visible:shadow-focus overflow-hidden text-ellipsis transition-shadow ease-out hover:shadow-large p-5 rounded-large bg-surface-default shadow-small",
         {
           [styles.articleGrid]: group === "initial",
           [styles.articleGridLazy]: group === "lazy",
