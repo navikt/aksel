@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.12
+
+### @navikt/aksel-icons
+
+- Ikoner: Oppdatert ikonpakke med diverse bugdfixes og oppdateringer av stroke ([#2538](https://github.com/navikt/aksel/pull/2538))
+
 ## 5.11
 
 ### @navikt/ds-css
