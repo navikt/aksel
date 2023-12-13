@@ -53,16 +53,6 @@ export const WithDescription: StoryObj = {
   ),
 };
 
-export const Accept: StoryObj = {
-  render: () => (
-    <FileUpload.Dropzone
-      label="Last opp png-filer"
-      onSelect={onSelect}
-      accept=".png"
-    />
-  ),
-};
-
 export const WithError: StoryObj = {
   render: () => (
     <FileUpload.Dropzone
