@@ -18,7 +18,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
     >
       <input
         {...omit(props, ["children", "size", "description", "readOnly"])}
-        {...inputProps}
+        {...omit(inputProps, ["aria-invalid"])}
         className="navds-radio__input"
         ref={ref}
       />

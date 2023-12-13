@@ -61,14 +61,17 @@ export const Group = () => (
 );
 
 export const GroupError = () => (
-  <RadioGroup
-    legend="Group legend"
-    defaultValue="tekst2"
-    error="Group errormelding"
-  >
-    <Radio value="tekst">Radiotekst</Radio>
-    <Radio value="tekst2">Radiotekst</Radio>
-  </RadioGroup>
+  <>
+    <button>Stop her</button>
+    <RadioGroup
+      legend="Group legend"
+      defaultValue="tekst2"
+      error="Group errormelding"
+    >
+      <Radio value="tekst">Radiotekst</Radio>
+      <Radio value="tekst2">Radiotekst</Radio>
+    </RadioGroup>
+  </>
 );
 
 export const GroupSmall = () => (
