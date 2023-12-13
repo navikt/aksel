@@ -1,13 +1,16 @@
 name: PinFill
-category: Transportation
-sub_category: Travel
+category: Law and security
+sub_category: Security
 keywords:
-  - kart
-  - pinn
-  - sted
-  - map
-  - location
-  - lokasjon
+  - code
+  - passcode
+  - pin-nummer
+  - sikkerhet
+  - security
+  - login
+  - logout
+  - logg inn
+  - logg ut
 variant: Fill
-updated_at: 19.08.2023
+updated_at: 04.12.2023
 created_at: 07.03.2023

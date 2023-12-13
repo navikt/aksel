@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   BodyShort,
   Box,
@@ -13,14 +13,17 @@ import Header from "@/layout/header/Header";
 import { AmplitudeEvents, amplitude } from "@/logging";
 
 function ErrorPage({ statusCode }) {
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
     amplitude.track(AmplitudeEvents.error, {
       side: window.location.pathname,
     });
+    setIsClient(true);
   }, []);
 
   return (
-    <Page data-aksel-template="500-v1" footer={<Footer />} id="vk-notFoundId">
+    <Page data-aksel-template="500-v2" footer={<Footer />} id="vk-notFoundId">
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 8">
@@ -42,9 +45,20 @@ function ErrorPage({ statusCode }) {
                 <BodyShort>Du kan prøve å</BodyShort>
                 <List>
                   <List.Item>
-                    vente noen minutter og laste siden på nytt
+                    vente noen minutter og{" "}
+                    <Link href="#" onClick={() => location.reload()}>
+                      laste siden på nytt
+                    </Link>
                   </List.Item>
-                  <List.Item>gå tilbake til forrige side</List.Item>
+                  <List.Item>
+                    {isClient && history.length > 1 ? (
+                      <Link href="#" onClick={() => history.back()}>
+                        gå tilbake til forrige side
+                      </Link>
+                    ) : (
+                      "gå tilbake til forrige side"
+                    )}
+                  </List.Item>
                 </List>
                 <BodyShort>
                   Hvis problemet vedvarer, kan du{" "}
