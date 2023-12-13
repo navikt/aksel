@@ -4,13 +4,19 @@ import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
 import {
-  chipsInnholdstypeQuery,
-  chipsUndertemaQuery,
+  chipsDataAllQuery,
+  chipsDataAllQueryResponse,
   heroNavQuery,
+  heroNavQueryResponse,
   initialTemaPageArticles,
+  initialTemaPageArticlesResponse,
   temaQuery,
+  temaQueryResponse,
 } from "@/layout/god-praksis-page/queries";
-import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
+import {
+  ChipDataGroupedByTema,
+  GpEntryPageProps,
+} from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
 import { getGpTema } from "@/sanity/interface";
 import { NextPageT } from "@/types";
@@ -22,8 +28,7 @@ const query = groq`
 {
   ${heroNavQuery},
   ${temaQuery},
-  ${chipsInnholdstypeQuery},
-  ${chipsUndertemaQuery},
+  ${chipsDataAllQuery},
   ${initialTemaPageArticles},
 }
 `;
@@ -41,6 +46,47 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+export const groupByTema = (
+  chipsData: chipsDataAllQueryResponse["chipsDataAll"]
+): ChipDataGroupedByTema => {
+  console.log(`chipsData.length: ${chipsData.length}`);
+  console.log(`chipsData: ${JSON.stringify(chipsData, null, 2)}`);
+
+  const chipNavData: ChipDataGroupedByTema = {};
+  for (const entry of chipsData) {
+    for (const undertema of entry.undertema) {
+      if (!chipNavData[undertema.temaSlug]) {
+        chipNavData[undertema.temaSlug] = [
+          {
+            "undertema-title": undertema.title,
+            "innholdstype-title": entry.innholdstype,
+          },
+        ];
+        continue;
+      }
+      chipNavData[undertema.temaSlug].push({
+        "undertema-title": undertema.title,
+        "innholdstype-title": entry.innholdstype,
+      });
+    }
+  }
+  console.log("--- after processing chipsData: ", { chipNavData });
+  return chipNavData;
+  // return {
+  //   navno: [
+  //     {
+  //       "undertema-title": "undertema-title",
+  //       "innholdstype-title": "innholdstype-title",
+  //     },
+  //   ],
+  // };
+};
+
+type QueryResponse = chipsDataAllQueryResponse &
+  heroNavQueryResponse &
+  temaQueryResponse &
+  initialTemaPageArticlesResponse;
+
 export const getStaticProps: GetStaticProps = async ({
   params: { slug },
   preview = false,
@@ -48,30 +94,21 @@ export const getStaticProps: GetStaticProps = async ({
   params: { slug: string };
   preview?: boolean;
 }): Promise<PageProps> => {
-  const {
-    heroNav,
-    tema,
-    chipsInnholdstype,
-    chipsUndertema,
-    initialInnholdstype,
-    initialUndertema,
-  } = await getClient().fetch(query, {
-    slug,
-  });
+  const { heroNav, tema, initialInnholdstype, initialUndertema, chipsDataAll } =
+    await getClient().fetch<QueryResponse>(query, {
+      slug,
+    });
 
   return {
     props: {
       tema,
       heroNav: heroNav.filter((x) => x.hasRefs),
-      chipsInnholdstype: chipsInnholdstype.find((x) => x.slug === slug).types,
-      chipsUndertema: chipsUndertema
-        .filter((c) => c.tema === slug)
-        .map((c) => ({ title: c.title, count: c.count })),
       initialArticles: groupArticles({ initialInnholdstype, initialUndertema }),
       slug,
       preview,
       id: "",
       title: "",
+      chipsDataAll: groupByTema(chipsDataAll)[slug],
     },
     notFound: !tema || !heroNav.some((nav) => nav.slug === slug),
     revalidate: 60,

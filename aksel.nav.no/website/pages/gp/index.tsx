@@ -4,14 +4,11 @@ import { Suspense, lazy } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
 import {
-  chipsInnholdstypeQuery,
+  chipsDataAllQuery,
   heroNavQuery,
   initialGpMainPageArticles,
 } from "@/layout/god-praksis-page/queries";
-import {
-  GpChipsInnholdstypeRawT,
-  GpEntryPageProps,
-} from "@/layout/god-praksis-page/types";
+import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
@@ -21,7 +18,7 @@ type PageProps = NextPageT<GpEntryPageProps>;
 const query = groq`
 {
   ${heroNavQuery},
-  ${chipsInnholdstypeQuery},
+  ${chipsDataAllQuery},
   ${initialGpMainPageArticles}
 }
 `;
@@ -29,41 +26,40 @@ const query = groq`
 /**
  * TODO: Move to separate file
  */
-const chipDataForMain = (
-  dataRaw: GpChipsInnholdstypeRawT["chipsInnholdstype"]
-) => {
-  const map = new Map<string, number>();
-  for (const entry of dataRaw) {
-    for (const innholdstype of entry.types) {
-      const count = map.get(innholdstype.title) || 0;
-      map.set(innholdstype.title, count + innholdstype.count);
-    }
-  }
-  const chipData = [];
-  for (const [key, value] of map.entries()) {
-    chipData.push({ title: key, count: value });
-  }
-  return chipData;
-};
+// const chipDataForMain = (
+//   dataRaw: GpChipsInnholdstypeRawT["chipsInnholdstype"]
+// ) => {
+//   const map = new Map<string, number>();
+//   for (const entry of dataRaw) {
+//     for (const innholdstype of entry.types) {
+//       const count = map.get(innholdstype.title) || 0;
+//       map.set(innholdstype.title, count + innholdstype.count);
+//     }
+//   }
+//   const chipData = [];
+//   for (const [key, value] of map.entries()) {
+//     chipData.push({ title: key, count: value });
+//   }
+//   return chipData;
+// };
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
-  const { heroNav, chipsInnholdstype, initialInnholdstype } =
+  const { heroNav, initialInnholdstype, chipsDataAll } =
     await getClient().fetch(query);
 
   return {
     props: {
       tema: null,
       heroNav: heroNav.filter((x) => x.hasRefs),
-      chipsInnholdstype: chipDataForMain(chipsInnholdstype),
       initialArticles: groupArticles({
         initialInnholdstype,
       }),
       preview,
       id: "",
       title: "",
-      chipsUndertema: [],
+      chipsDataAll,
     },
     notFound: false,
     revalidate: 60,

@@ -43,6 +43,5 @@ export function groupArticles({
           });
     });
   });
-
   return [...articleMap.values()];
 }

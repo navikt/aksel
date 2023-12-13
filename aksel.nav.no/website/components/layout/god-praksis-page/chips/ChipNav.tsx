@@ -4,13 +4,14 @@ import { useRouter } from "next/router";
 import { useId } from "react";
 import { Chips, HGrid, Label } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
-import { GpChipsInnholdstypeT } from "../types";
+import { ChipsRenderData } from "../GodPraksisPage";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
 
 type ChipsNavProps = {
   type: "innholdstype" | "undertema";
-  data?: GpChipsInnholdstypeT["chipsInnholdstype"];
+  // data?: GpChipsInnholdstypeT["chipsInnholdstype"];
+  data?: ChipsRenderData;
 };
 
 /**

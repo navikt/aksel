@@ -29,30 +29,6 @@ export type HeroNavT = {
   }[];
 };
 
-export type GpChipsInnholdstypeRawT = {
-  chipsInnholdstype: {
-    title: string;
-    slug: string;
-    types: ChipsDataT;
-  }[];
-};
-
-export type GpChipsInnholdstypeT = {
-  chipsInnholdstype: ChipsDataT;
-};
-
-export type GpChipsUndertemaRawT = {
-  chipsUndertema: {
-    title: string;
-    tema: string;
-    count: number;
-  }[];
-};
-
-export type GpChipsUndertemaT = {
-  chipsUndertema: ChipsDataT;
-};
-
 export type ChipsDataT = {
   title: string;
   count: number;
@@ -76,7 +52,17 @@ export type GpGroupedArticlesInputT = {
   }[];
 };
 
+export type ChipDataGroupedByTema = {
+  [temaSlug: string]: ChipData;
+};
+
+export type ChipData = {
+  "undertema-title": string;
+  "innholdstype-title": string;
+}[];
+
 export type GpEntryPageProps = HeroNavT & {
   tema: GpTemaT | null;
-} & GpChipsInnholdstypeT &
-  GpChipsUndertemaT & { initialArticles: GpGroupedArticlesT };
+} & {
+  initialArticles: GpGroupedArticlesT;
+} & { chipsDataAll: ChipData };
