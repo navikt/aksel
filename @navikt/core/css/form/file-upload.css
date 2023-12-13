@@ -50,7 +50,7 @@
   background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
-.navds-file-dropzone__zone--error:not(:hover):not(.navds-file-dropzone__zone--dragging-over) {
+.navds-file-dropzone__zone--error:not(.navds-file-dropzone__zone--dragging-over) {
   border-color: var(--ac-file-upload-error-border, var(--a-surface-danger));
   border-width: 2px;
   margin: -1px 0;
