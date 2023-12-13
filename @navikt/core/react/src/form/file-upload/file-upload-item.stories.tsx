@@ -21,8 +21,8 @@ export const StandaloneFileItem: StoryObj<typeof FileUpload.Item> = {
   },
   argTypes: {
     status: {
-      options: ["uploading", "downloading"],
-      control: { type: "select" },
+      options: [undefined, "uploading", "downloading"],
+      control: { type: "radio" },
     },
   },
 };
