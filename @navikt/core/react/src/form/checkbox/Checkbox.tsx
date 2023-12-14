@@ -54,8 +54,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <span className="navds-checkbox__icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="13"
-              height="10"
+              width="calc(0.8125*1rem)"
+              height="calc(0.625*1rem)"
               viewBox="0 0 13 10"
               fill="none"
               focusable={false}
