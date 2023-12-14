@@ -1,9 +1,9 @@
-import { Button } from "@navikt/ds-react";
+import { Button, HStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="flex flex-wrap gap-2">
+    <HStack gap="2">
       <Button disabled variant="primary">
         Primary
       </Button>
@@ -16,7 +16,7 @@ const Example = () => {
       <Button disabled variant="danger">
         Danger
       </Button>
-    </div>
+    </HStack>
   );
 };
 

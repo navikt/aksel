@@ -5,29 +5,29 @@ const Example = () => {
   return (
     <VStack gap="6" align="center">
       <HStack gap="2">
-        <Button variant="primary-neutral">Primary</Button>
-        <Button variant="secondary-neutral">Secondary</Button>
-        <Button variant="tertiary-neutral">Tertiary</Button>
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="tertiary">Tertiary</Button>
       </HStack>
       <HStack gap="2">
-        <Button variant="primary-neutral" size="small">
+        <Button variant="primary" size="small">
           Primary
         </Button>
-        <Button variant="secondary-neutral" size="small">
+        <Button variant="secondary" size="small">
           Secondary
         </Button>
-        <Button variant="tertiary-neutral" size="small">
+        <Button variant="tertiary" size="small">
           Tertiary
         </Button>
       </HStack>
       <HStack gap="2">
-        <Button variant="primary-neutral" size="xsmall">
+        <Button variant="primary" size="xsmall">
           Primary
         </Button>
-        <Button variant="secondary-neutral" size="xsmall">
+        <Button variant="secondary" size="xsmall">
           Secondary
         </Button>
-        <Button variant="tertiary-neutral" size="xsmall">
+        <Button variant="tertiary" size="xsmall">
           Tertiary
         </Button>
       </HStack>
@@ -44,5 +44,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 0,
 };
