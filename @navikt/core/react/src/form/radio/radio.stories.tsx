@@ -64,12 +64,15 @@ export const GroupError = () => (
   <>
     <button>Stop her</button>
     <RadioGroup
-      legend="Group legend"
-      defaultValue="tekst2"
-      error="Group errormelding"
+      legend="Velg din aldersgruppe"
+      description="Informasjonen blir brukt for å gi deg bedre søketreff."
+      error="Du må svare på hvor gammel du er"
     >
-      <Radio value="tekst">Radiotekst</Radio>
-      <Radio value="tekst2">Radiotekst</Radio>
+      <Radio value="0-20">0-20 år</Radio>
+      <Radio value="21-45" description="Gjelder fra året man blir 21">
+        21-45 år
+      </Radio>
+      <Radio value="46-100">46-100 år</Radio>
     </RadioGroup>
   </>
 );
