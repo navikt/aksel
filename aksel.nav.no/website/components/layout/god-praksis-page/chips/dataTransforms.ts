@@ -28,6 +28,8 @@ export const groupByTema = (
 export const chipsDataForAllTema = (
   chipsData: chipsDataAllQueryResponse["chipsDataAll"]
 ): ChipsData => {
+  console.log("#### before processing");
+  console.log("chipsData", chipsData);
   const chipNavData: ChipsData = [];
   for (const entry of chipsData) {
     for (const undertema of entry.undertema) {
@@ -37,5 +39,7 @@ export const chipsDataForAllTema = (
       });
     }
   }
+  console.log("#### after processing");
+  console.log("chipNavData", chipNavData);
   return chipNavData;
 };

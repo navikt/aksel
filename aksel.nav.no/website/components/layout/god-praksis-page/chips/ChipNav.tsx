@@ -2,7 +2,8 @@ import cl from "clsx";
 import omit from "lodash/omit";
 import { useRouter } from "next/router";
 import { useId } from "react";
-import { Chips, HGrid, Label } from "@navikt/ds-react";
+import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
+import { Chips, HGrid, HStack, Label } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
 import { ChipsData } from "../types";
 import styles from "./Chips.module.css";
@@ -60,8 +61,15 @@ function ChipNav({ type, data, setSelection }: ChipsNavProps) {
 
   return (
     <HGrid gap="2" columns={{ sm: 1, md: "auto 1fr" }} align="center">
-      <Label as="p" className="text-aksel-heading">
-        {capitalize(type)}
+      <Label
+        as="p"
+        className={cl("text-aksel-heading", styles[`label--${type}`])}
+      >
+        <HStack gap="2" align="center">
+          {type == "undertema" && <TagFillIcon fontSize="20" aria-hidden />}
+          {type == "innholdstype" && <FileFillIcon fontSize="20" aria-hidden />}
+          {capitalize(type)}
+        </HStack>
       </Label>
 
       <div className="relative overflow-hidden">
@@ -77,7 +85,7 @@ function ChipNav({ type, data, setSelection }: ChipsNavProps) {
                 checkmark={false}
                 selected={encodeURIComponent(entry.title) === query?.[type]}
                 onClick={() => handleClick(entry.title)}
-                className="whitespace-nowrap"
+                className={cl("whitespace-nowrap", styles[`chip--${type}`])}
               >
                 {`${entry.title} (${entry.count})`}
               </Chips.Toggle>
