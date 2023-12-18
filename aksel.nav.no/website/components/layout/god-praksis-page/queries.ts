@@ -95,14 +95,16 @@ export const baseGpArticleData = groq`{
   publishedAt
 }
 `;
-export type baseGpArticleDataResponse = {
+
+export type GpArticleT = {
   _id: string;
   heading: string;
   ingress: string;
   undertema: string[];
-  innholdstype: string;
   slug: string;
-  publishedAt: string;
+  innholdstype: string | null;
+  publishedAt: string | null;
+  currentUndertema?: string;
 };
 
 export const initialGpMainPageArticles = groq`
@@ -113,7 +115,7 @@ export const initialGpMainPageArticles = groq`
 export type initialGpMainPageArticlesResponse = {
   initialInnholdstype: {
     title: string;
-    articles: baseGpArticleDataResponse[];
+    articles: GpArticleT[];
   }[];
 };
 
@@ -129,10 +131,10 @@ export const initialTemaPageArticles = groq`
 export type initialTemaPageArticlesResponse = {
   initialUndertema: {
     title: string;
-    articles: baseGpArticleDataResponse[];
+    articles: GpArticleT[];
   }[];
   initialInnholdstype: {
     title: string;
-    articles: baseGpArticleDataResponse[];
+    articles: GpArticleT[];
   }[];
 };

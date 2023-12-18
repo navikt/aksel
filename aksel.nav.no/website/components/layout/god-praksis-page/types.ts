@@ -1,13 +1,4 @@
-export type GpArticleT = {
-  _id: string;
-  heading: string;
-  ingress: string;
-  undertema: string[];
-  currentUndertema: string;
-  slug: string;
-  innholdstype: string | null;
-  publishedAt: string | null;
-};
+import { GpArticleT } from "@/layout/god-praksis-page/queries";
 
 export type GpTemaT = {
   title: string;

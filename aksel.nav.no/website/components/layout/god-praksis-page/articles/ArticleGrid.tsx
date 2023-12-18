@@ -1,6 +1,6 @@
 import cl from "clsx";
 import { Heading } from "@navikt/ds-react";
-import { GpArticleT } from "@/layout/god-praksis-page/types";
+import { GpArticleT } from "@/layout/god-praksis-page/queries";
 import { ArticleCard } from "./ArticleCard";
 import styles from "./articles.module.css";
 

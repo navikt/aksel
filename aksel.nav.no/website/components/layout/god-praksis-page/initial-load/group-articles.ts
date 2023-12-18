@@ -1,8 +1,5 @@
-import {
-  GpArticleT,
-  GpGroupedArticlesInputT,
-  GpGroupedArticlesT,
-} from "../types";
+import { GpArticleT } from "@/layout/god-praksis-page/queries";
+import { GpGroupedArticlesInputT, GpGroupedArticlesT } from "../types";
 
 /**
  * De-duplicates re-occuring articles and maps the to the matching innholdstype and undertema

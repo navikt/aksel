@@ -8,7 +8,7 @@ import {
 } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading, VStack } from "@navikt/ds-react";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-import { GpArticleT } from "@/layout/god-praksis-page/types";
+import { GpArticleT } from "@/layout/god-praksis-page/queries";
 import styles from "./articles.module.css";
 
 const trunc = (text, num_chars) => {
