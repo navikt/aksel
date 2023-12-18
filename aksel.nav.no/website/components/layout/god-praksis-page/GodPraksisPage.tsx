@@ -1,13 +1,16 @@
 import dynamic from "next/dynamic";
-import { Box, Heading, Page, VStack } from "@navikt/ds-react";
+import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
 import useInitialState from "@/layout/god-praksis-page/useInitialState";
 import Header from "@/layout/header/Header";
-import ChipsGroup from "./chips/ChipGroup";
 import Hero from "./hero/Hero";
 
 const ArticleList = dynamic(() => import("./articles/ArticleList"), {
+  ssr: false,
+});
+
+const ChipGroup = dynamic(() => import("./chips/ChipGroup"), {
   ssr: false,
 });
 
@@ -27,16 +30,9 @@ function GodPraksisPage(props: GpEntryPageProps) {
           <VStack gap="10">
             <VStack gap="6">
               <Hero tema={props.tema} heroNav={props.heroNav} />
-              <ChipsGroup data={props.chipsData} showTema={!!props.tema} />
+              <ChipGroup data={props.chipsData} showTema={!!props.tema} />
             </VStack>
-            <div>
-              {initialData?.length > 0 && (
-                <Heading level="2" size="medium" className="text-aksel-heading">
-                  Siste
-                </Heading>
-              )}
-              <ArticleList initialArticles={initialData} />
-            </div>
+            <ArticleList initialArticles={initialData} />
           </VStack>
         </Page.Block>
       </Box>

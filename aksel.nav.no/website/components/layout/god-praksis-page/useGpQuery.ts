@@ -9,8 +9,9 @@ function useGpQuery(): {
   innholdstypeQuery: string;
   undertemaQuery: string;
   temaQuery: string;
+  isReady: boolean;
 } {
-  const { query } = useRouter();
+  const { query, isReady } = useRouter();
 
   const innholdstypeQuery = () => {
     const q = decodeURIComponent(query?.innholdstype?.toString?.() ?? "");
@@ -31,6 +32,7 @@ function useGpQuery(): {
     innholdstypeQuery: innholdstypeQuery(),
     undertemaQuery: undertemaQuery(),
     temaQuery: temaQuery(),
+    isReady,
   };
 }
 

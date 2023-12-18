@@ -1,3 +1,7 @@
+.articleFade {
+  animation: articleGridFadeUp 600ms forwards;
+}
+
 .articleGrid {
   animation: articleGridFadeUp 600ms forwards;
 }

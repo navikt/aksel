@@ -1,4 +1,5 @@
 import cl from "clsx";
+import { Heading } from "@navikt/ds-react";
 import { GpArticleT } from "@/layout/god-praksis-page/types";
 import { ArticleCard } from "./ArticleCard";
 import styles from "./articles.module.css";
@@ -22,29 +23,32 @@ function ArticleGrid({ data, initialData, loaded }: ArticleGridT) {
      */
     return null;
   }
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
-    <div>
-      {loaded && (
-        <div className="grid gap-6">
-          <div className={cl("pt-5", styles.initialGrid, styles.articleGrid)}>
-            {initialData.map((article, idx) => (
-              <ArticleCard
-                key={article._id + idx}
-                group="initial"
-                {...article}
-              />
-            ))}
-            {data.map((article, idx) => (
-              <ArticleCard
-                key={idx}
-                group="lazy"
-                delay={((idx % 3) + 1) * 300}
-                {...article}
-              />
-            ))}
-          </div>
+    <div className={styles.articleFade}>
+      <Heading level="2" size="medium" className="text-aksel-heading">
+        Siste
+      </Heading>
+
+      <div className="grid gap-6">
+        <div className={cl("pt-5", styles.initialGrid)}>
+          {initialData.map((article, idx) => (
+            <ArticleCard key={article._id + idx} group="initial" {...article} />
+          ))}
+          {data.map((article, idx) => (
+            <ArticleCard
+              key={idx}
+              group="lazy"
+              delay={((idx % 3) + 1) * 300}
+              {...article}
+            />
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }

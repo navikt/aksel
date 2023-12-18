@@ -1,54 +1,38 @@
-import React, { useEffect } from "react";
+import { useMemo } from "react";
 import { VStack } from "@navikt/ds-react";
 import { ChipsData } from "@/layout/god-praksis-page/types";
+import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
 import ChipNav from "./ChipNav";
 
 type ChipsGroupProps = { data: ChipsData; showTema: boolean };
 
 function ChipsGroup(props: ChipsGroupProps) {
-  console.log(props.data);
-  const [undertemaSelection, setUndertemaSelection] = React.useState<string>();
-  const [innholdstypeSelection, setInnholdstypeSelection] =
-    React.useState<string>();
+  const { innholdstypeQuery, undertemaQuery } = useGpQuery();
 
-  const [filteredUndertema, setFilteredUndertema] = React.useState([]);
-  const [filteredInnholdstype, setFilteredInnholdstype] = React.useState([]);
+  const undertemaList = useMemo(
+    () =>
+      undertemaQuery
+        ? props.data.filter((entry) => {
+            return entry["undertema-title"] === undertemaQuery;
+          })
+        : props.data,
+    [props.data, undertemaQuery]
+  );
 
-  useEffect(() => {
-    if (undertemaSelection) {
-      setFilteredUndertema(
-        props.data.filter((entry) => {
-          return entry["undertema-title"] === undertemaSelection;
-        })
-      );
-    } else {
-      setFilteredUndertema(props.data);
-    }
-    if (innholdstypeSelection) {
-      setFilteredInnholdstype(
-        props.data.filter((entry) => {
-          return entry["innholdstype-title"] === innholdstypeSelection;
-        })
-      );
-    } else {
-      setFilteredInnholdstype(props.data);
-    }
-  }, [props.data, undertemaSelection, innholdstypeSelection]);
+  const innholdstypeList = useMemo(
+    () =>
+      innholdstypeQuery
+        ? props.data.filter((entry) => {
+            return entry["innholdstype-title"] === innholdstypeQuery;
+          })
+        : props.data,
+    [props.data, innholdstypeQuery]
+  );
 
   return (
     <VStack gap="4">
-      {props.showTema && (
-        <ChipNav
-          type="undertema"
-          data={filteredInnholdstype}
-          setSelection={setUndertemaSelection}
-        />
-      )}
-      <ChipNav
-        type="innholdstype"
-        data={filteredUndertema}
-        setSelection={setInnholdstypeSelection}
-      />
+      {props.showTema && <ChipNav type="undertema" data={undertemaList} />}
+      <ChipNav type="innholdstype" data={innholdstypeList} />
     </VStack>
   );
 }

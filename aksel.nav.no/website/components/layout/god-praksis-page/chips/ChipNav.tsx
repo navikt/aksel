@@ -11,9 +11,7 @@ import ScrollFade from "./ScrollFade";
 
 type ChipsNavProps = {
   type: "innholdstype" | "undertema";
-  // data?: GpChipsInnholdstypeT["chipsInnholdstype"];
   data?: ChipsData;
-  setSelection: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type ChipsRenderData = { title: string; count: number }[];
@@ -36,7 +34,7 @@ const countUniques = (
   return chipData;
 };
 
-function ChipNav({ type, data, setSelection }: ChipsNavProps) {
+function ChipNav({ type, data }: ChipsNavProps) {
   const id = useId();
 
   const { query, replace } = useRouter();
@@ -44,16 +42,12 @@ function ChipNav({ type, data, setSelection }: ChipsNavProps) {
   const handleClick = async (titleRaw: string) => {
     const title = encodeURIComponent(titleRaw);
 
-    (await query[type]) === title
+    query[type] === title
       ? replace({ query: omit(query, [type]) }, undefined, {
           shallow: true,
-        }).then(() => {
-          setSelection(undefined);
         })
       : replace({ query: { ...query, [type]: title } }, undefined, {
           shallow: true,
-        }).then(() => {
-          setSelection(titleRaw);
         });
   };
 
@@ -62,10 +56,10 @@ function ChipNav({ type, data, setSelection }: ChipsNavProps) {
   return (
     <HGrid gap="2" columns={{ sm: 1, md: "auto 1fr" }} align="center">
       <Label
-        as="p"
+        as="span"
         className={cl("text-aksel-heading", styles[`label--${type}`])}
       >
-        <HStack gap="2" align="center">
+        <HStack as="span" gap="2" align="center">
           {type == "undertema" && <TagFillIcon fontSize="20" aria-hidden />}
           {type == "innholdstype" && <FileFillIcon fontSize="20" aria-hidden />}
           {capitalize(type)}
