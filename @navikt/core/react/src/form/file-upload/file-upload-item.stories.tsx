@@ -187,7 +187,7 @@ export const Download: StoryObj = {
         file={{
           name: "withBase64.txt",
           size: 500_000_000,
-          base64: "data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==",
+          base64DataUrl: "data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==",
         }}
       />
       <FileUpload.Item file={fileTxt} />
