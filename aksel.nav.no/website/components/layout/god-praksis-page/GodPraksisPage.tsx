@@ -23,7 +23,6 @@ function GodPraksisPage(props: GpEntryPageProps) {
   const [filteredInnholdstype, setFilteredInnholdstype] = React.useState([]);
 
   useEffect(() => {
-    console.log(undertemaSelection, innholdstypeSelection);
     if (undertemaSelection) {
       setFilteredUndertema(
         props.chipsData.filter((entry) => {
