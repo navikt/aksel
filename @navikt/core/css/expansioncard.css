@@ -64,7 +64,7 @@
     0 -1px 0 0 var(--__ac-expansioncard-border-color);
 }
 
-.navds-expansioncard--open > :where(.navds-expansioncard__header:not(:hover))::after {
+.navds-expansioncard--open > :where(.navds-expansioncard__header)::after {
   content: "";
   background-color: var(--a-border-divider);
   bottom: 0;
@@ -72,6 +72,12 @@
   height: 1px;
   width: calc(100% - 2 * var(--__ac-expansioncard-padding-inline));
   position: absolute;
+  opacity: 1;
+  transition: opacity 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.navds-expansioncard--open > :where(.navds-expansioncard__header:hover)::after {
+  opacity: 0;
 }
 
 /*************************
