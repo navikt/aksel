@@ -19,7 +19,7 @@ module.exports = {
   useScope: path.resolve("./src/useScope.tsx"),
   openBrowser: false,
   paramType: "search", // default is 'hash'
-  iframeSandbox: "allow-scripts allow-same-origin",
+  iframeSandbox: "allow-scripts allow-same-origin allow-modals",
   exampleCode: `
   <Heading>This is a sandbox!</Heading>
   <HStack gap="10">
