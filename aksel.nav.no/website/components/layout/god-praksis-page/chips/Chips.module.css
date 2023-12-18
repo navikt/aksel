@@ -64,11 +64,11 @@
 .shadowStart {
   left: 0;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  background: linear-gradient(90deg, var(--shadow-color), transparent);
+  background: linear-gradient(90deg, var(--shadow-color), var(--shadow-color), transparent);
 }
 
 .shadowEnd {
   right: 0;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  background: linear-gradient(-90deg, var(--shadow-color), transparent);
+  background: linear-gradient(-90deg, var(--shadow-color), var(--shadow-color), transparent);
 }

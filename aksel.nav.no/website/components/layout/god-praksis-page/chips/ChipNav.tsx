@@ -54,7 +54,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
   const selectionCount = countUniques(type, data);
 
   return (
-    <HGrid gap="2" columns={{ sm: 1, md: "auto 1fr" }} align="center">
+    <HGrid gap="2" columns={{ md: 1, lg: "auto 1fr" }} align="center">
       <Label
         as="span"
         className={cl("text-aksel-heading", styles[`label--${type}`])}
