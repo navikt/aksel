@@ -8,14 +8,14 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ToggleGroup defaultValue="lest" onChange={console.log} label="inbox">
+    <ToggleGroup defaultValue="lest" onChange={console.log} label="Inbox">
       <ToggleGroup.Item value="ulest">
         <EnvelopeClosedIcon aria-hidden />
         Ulest
       </ToggleGroup.Item>
       <ToggleGroup.Item value="lest">
         <EnvelopeOpenIcon aria-hidden />
-        Leste
+        Lest
       </ToggleGroup.Item>
       <ToggleGroup.Item value="sendt">
         <PaperplaneIcon aria-hidden />

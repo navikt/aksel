@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
       <ToggleGroup.Item value="ulest">Ulest</ToggleGroup.Item>
-      <ToggleGroup.Item value="lest">Leste</ToggleGroup.Item>
+      <ToggleGroup.Item value="lest">Lest</ToggleGroup.Item>
       <ToggleGroup.Item value="sendt">Sendt</ToggleGroup.Item>
     </ToggleGroup>
   );

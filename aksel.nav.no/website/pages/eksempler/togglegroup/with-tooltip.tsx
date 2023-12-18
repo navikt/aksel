@@ -11,17 +11,17 @@ const Example = () => {
     <ToggleGroup defaultValue="lest" onChange={console.log}>
       <Tooltip content="Uleste meldinger">
         <ToggleGroup.Item value="ulest">
-          <EnvelopeClosedIcon title="ulest" />
+          <EnvelopeClosedIcon title="Ulest" />
         </ToggleGroup.Item>
       </Tooltip>
       <Tooltip content="Leste meldinger">
         <ToggleGroup.Item value="lest">
-          <EnvelopeOpenIcon title="lest" />
+          <EnvelopeOpenIcon title="Lest" />
         </ToggleGroup.Item>
       </Tooltip>
       <Tooltip content="Sendte meldinger">
         <ToggleGroup.Item value="sendt">
-          <PaperplaneIcon title="sendt" />
+          <PaperplaneIcon title="Sendt" />
         </ToggleGroup.Item>
       </Tooltip>
     </ToggleGroup>
