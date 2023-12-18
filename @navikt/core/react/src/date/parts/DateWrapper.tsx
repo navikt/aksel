@@ -74,6 +74,7 @@ export const DateWrapper = ({
           variant="tertiary"
           onClick={() => modalRef?.current?.close()}
           size="small"
+          type="button"
         >
           {modalCloseButtonLabel(locale)}
         </Button>
