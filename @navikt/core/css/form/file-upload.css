@@ -31,11 +31,16 @@
 }
 
 .navds-file-dropzone__zone:hover .navds-file-dropzone__button {
-  background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
+  color: var(--ac-button-secondary-hover-text, var(--__ac-button-secondary-hover-text, var(--a-text-action-on-action-subtle)));
+  background-color: var(
+    --ac-button-secondary-hover-bg,
+    var(--__ac-button-secondary-hover-bg, var(--a-surface-action-subtle-hover))
+  );
 }
 
 .navds-file-dropzone__dragover {
   color: var(--ac-file-upload-dragover-text, var(--a-text-action));
+  background-color: var(--ac-file-upload-dragover-bg, var(--a-surface-action-subtle-hover));
   pointer-events: none;
   align-items: center;
   display: flex;
@@ -47,7 +52,6 @@
   width: 100%;
   height: 100%;
   inset: 0;
-  background-color: var(--ac-file-upload-action-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-file-dropzone__zone--error:not(.navds-file-dropzone__zone--dragging-over) {
