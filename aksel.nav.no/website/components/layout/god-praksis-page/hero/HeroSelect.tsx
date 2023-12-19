@@ -19,7 +19,7 @@ function HeroSelect({
       <BodyShort
         size="large"
         as="button"
-        className="shadow-xsmall flex gap-05 py-05 pl-4 pr-2 items-center bg-surface-subtle rounded-full focus:outline-none focus:shadow-focus"
+        className="shadow-xsmall flex gap-05 py-05 pl-4 pr-2 items-center bg-surface-subtle rounded-full focus:outline-none focus-visible:shadow-focus"
         onClick={() => modalRef.current?.showModal()}
       >
         Tema

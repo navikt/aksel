@@ -17,40 +17,6 @@
   display: none;
 }
 
-.chip--undertema {
-  border: 1px solid rgba(15 118 110 / 0.5);
-}
-
-.chip--innholdstype {
-  border: 1px solid rgb(123 66 194 / 0.5);
-}
-
-.chip--undertema:hover {
-  background: rgba(15 118 110 / 0.2);
-}
-
-.chip--innholdstype:hover {
-  background: rgb(123 66 194 / 0.2);
-}
-
-.chip--undertema[aria-pressed="true"] {
-  color: rgb(255 255 255);
-  background: rgba(15 118 110 / 1);
-}
-
-.chip--innholdstype[aria-pressed="true"] {
-  color: rgb(255 255 255);
-  background: rgb(123 66 194 / 1);
-}
-
-.chip--undertema:hover[aria-pressed="true"] {
-  background: rgba(15 118 110 / 0.8);
-}
-
-.chip--innholdstype:hover[aria-pressed="true"] {
-  background: rgb(123 66 194 / 0.8);
-}
-
 .shadow {
   position: absolute;
   z-index: 10;

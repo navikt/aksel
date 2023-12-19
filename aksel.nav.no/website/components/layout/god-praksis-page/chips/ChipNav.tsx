@@ -3,7 +3,7 @@ import omit from "lodash/omit";
 import { useRouter } from "next/router";
 import { useId } from "react";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
-import { Chips, HGrid, HStack, Label } from "@navikt/ds-react";
+import { HGrid, Label } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
 import { ChipsData } from "../types";
 import styles from "./Chips.module.css";
@@ -61,13 +61,14 @@ function ChipNav({ type, data }: ChipsNavProps) {
     <HGrid gap="2" columns={{ md: 1, lg: "auto 1fr" }} align="center">
       <Label
         as="span"
-        className={cl("text-aksel-heading", styles[`label--${type}`])}
+        className={cl("text-aksel-heading flex gap-2 items-center", {
+          "text-violet-600": type === "innholdstype",
+          "text-teal-700": type === "undertema",
+        })}
       >
-        <HStack as="span" gap="2" align="center">
-          {type == "undertema" && <TagFillIcon fontSize="20" aria-hidden />}
-          {type == "innholdstype" && <FileFillIcon fontSize="20" aria-hidden />}
-          {capitalize(type)}
-        </HStack>
+        {type == "undertema" && <TagFillIcon fontSize="20" aria-hidden />}
+        {type == "innholdstype" && <FileFillIcon fontSize="20" aria-hidden />}
+        {capitalize(type)}
       </Label>
 
       <div className="relative overflow-hidden">
@@ -78,15 +79,21 @@ function ChipNav({ type, data }: ChipsNavProps) {
         >
           {selectionCount.map((entry) => (
             <li key={entry.title}>
-              <Chips.Toggle
-                variant="neutral"
-                checkmark={false}
-                selected={encodeURIComponent(entry.title) === query?.[type]}
+              <button
+                aria-pressed={encodeURIComponent(entry.title) === query?.[type]}
                 onClick={() => handleClick(entry.title)}
-                className={cl("whitespace-nowrap", styles[`chip--${type}`])}
+                className={cl(
+                  "whitespace-nowrap focus:outline-none focus-visible:shadow-focus ring-1 ring-inset px-3 py-1 min-h-8 grid aria-pressed:text-text-on-inverted place-content-center bg-surface-neutral-subtle rounded-full",
+                  {
+                    "hover:bg-violet-50 ring-violet-700/50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
+                      type === "innholdstype",
+                    "hover:bg-teal-50 ring-teal-700/50 aria-pressed:bg-teal-700 hover:aria-pressed:bg-teal-800":
+                      type === "undertema",
+                  }
+                )}
               >
                 {`${entry.title} (${entry.count})`}
-              </Chips.Toggle>
+              </button>
             </li>
           ))}
         </ul>
