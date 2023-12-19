@@ -36,7 +36,7 @@ export interface ModalProps
   /**
    * Called when the user tries to close the modal by one of the built-in methods.
    * Used if you want to ask the user for confirmation before closing.
-   * @warning Will not always be called when pressing Esc. Refer to the JSDoc for `onCancel` for more info.
+   * @warning Will not always be called when pressing Esc. See `onCancel` for more info.
    * @returns Whether to close the modal
    */
   onBeforeClose?: () => boolean | void;
