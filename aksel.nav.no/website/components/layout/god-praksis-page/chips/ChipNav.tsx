@@ -5,33 +5,14 @@ import { useId } from "react";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import { HGrid, Label } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
-import { ChipsData } from "../types";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
 
-type ChipsNavProps = {
-  type: "innholdstype" | "undertema";
-  data?: ChipsData;
-};
-
 export type ChipsRenderData = { title: string; count: number }[];
 
-const countUniques = (
-  type: "innholdstype" | "undertema",
-  data: ChipsData
-): ChipsRenderData => {
-  const lens =
-    type == "innholdstype" ? "innholdstype-title" : "undertema-title";
-  const map = new Map<string, number>();
-  for (const entry of data) {
-    const count = map.get(entry[lens]) || 0;
-    map.set(entry[lens], count + 1);
-  }
-  const chipData = [];
-  for (const [key, value] of map.entries()) {
-    chipData.push({ title: key, count: value });
-  }
-  return chipData;
+type ChipsNavProps = {
+  type: "innholdstype" | "undertema";
+  data?: ChipsRenderData;
 };
 
 /**
@@ -55,8 +36,6 @@ function ChipNav({ type, data }: ChipsNavProps) {
         });
   };
 
-  const selectionCount = countUniques(type, data);
-
   return (
     <HGrid gap="2" columns={{ md: 1, lg: "auto 1fr" }} align="center">
       <Label
@@ -77,13 +56,14 @@ function ChipNav({ type, data }: ChipsNavProps) {
           id={id}
           className={cl("overflow-x-scroll flex gap-2 p-1", styles.chips)}
         >
-          {selectionCount.map((entry) => (
+          {data.map((entry) => (
             <li key={entry.title}>
               <button
                 aria-pressed={encodeURIComponent(entry.title) === query?.[type]}
                 onClick={() => handleClick(entry.title)}
                 className={cl(
-                  "whitespace-nowrap focus:outline-none focus-visible:shadow-focus ring-1 ring-inset px-3 py-1 min-h-8 grid aria-pressed:text-text-on-inverted place-content-center bg-surface-neutral-subtle rounded-full",
+                  "whitespace-nowrap focus:outline-none focus-visible:shadow-focus-gap ring-1 ring-inset px-3 py-1 min-h-8 grid aria-pressed:text-text-on-inverted place-content-center bg-surface-neutral-subtle rounded-full",
+                  "disabled:bg-surface-neutral-subtle disabled:ring-border-default disabled:opacity-40",
                   {
                     "hover:bg-violet-50 ring-violet-700/50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
                       type === "innholdstype",
@@ -91,6 +71,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
                       type === "undertema",
                   }
                 )}
+                disabled={entry.count === 0}
               >
                 {`${entry.title} (${entry.count})`}
               </button>
