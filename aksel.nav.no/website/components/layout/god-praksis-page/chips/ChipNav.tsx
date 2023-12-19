@@ -62,7 +62,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
                 aria-pressed={encodeURIComponent(entry.title) === query?.[type]}
                 onClick={() => handleClick(entry.title)}
                 className={cl(
-                  "whitespace-nowrap focus:outline-none focus-visible:shadow-focus-gap ring-1 ring-inset px-3 py-1 min-h-8 grid aria-pressed:text-text-on-inverted place-content-center bg-surface-neutral-subtle rounded-full",
+                  "whitespace-nowrap focus:outline-none transition-opacity focus-visible:shadow-focus-gap ring-1 ring-inset px-3 py-1 min-h-8 grid aria-pressed:text-text-on-inverted place-content-center bg-surface-neutral-subtle rounded-full",
                   "disabled:bg-surface-neutral-subtle disabled:ring-border-default disabled:opacity-40",
                   {
                     "hover:bg-violet-50 ring-violet-700/50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
