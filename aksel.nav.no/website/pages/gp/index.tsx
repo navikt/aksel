@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import { chipsDataForAllTema } from "@/layout/god-praksis-page/chips/dataTransforms";
 import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
@@ -54,6 +54,11 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 const GpPage = (props: PageProps["props"]) => {
+  useEffect(() => {
+    window.location.host === "aksel.nav.no" &&
+      window.location.replace(`http://aksel.nav.no/404`);
+  }, []);
+
   return (
     <>
       {/* TODO: Find out how we want to handle SEO for these pages */}
@@ -70,7 +75,7 @@ const GpPage = (props: PageProps["props"]) => {
 const WithPreview = lazy(() => import("@/preview"));
 
 /**
- * TODO: Preview does not work atm becase of funcitions used in getStaticProps now
+ * TODO: Preview does not work atm because of funcitions used in getStaticProps
  */
 const Wrapper = (props: any) => {
   if (props?.preview) {
