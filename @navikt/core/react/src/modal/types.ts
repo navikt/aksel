@@ -35,10 +35,9 @@ export interface ModalProps
   onClose?: React.ReactEventHandler<HTMLDialogElement>;
   /**
    * Called when the user tries to close the modal by one of the built-in ways.
+   * Use this if you want to ask the user for confirmation before closing.
    * @warning Will not always be called when pressing Esc. Refer to the JSDoc for `onCancel` for more info.
    * @returns Whether to close the modal
-   * @deprecated The modal should be implemented in such a way that closing it doesn't cause data loss.
-   *  Use `onClose` if you just need to know when the modal has closed.
    */
   onBeforeClose?: () => boolean | void;
   /**
