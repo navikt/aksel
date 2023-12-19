@@ -34,6 +34,10 @@ const countUniques = (
   return chipData;
 };
 
+/**
+ * TODO:
+ * - On initial load, scroll selected into view
+ */
 function ChipNav({ type, data }: ChipsNavProps) {
   const id = useId();
 
