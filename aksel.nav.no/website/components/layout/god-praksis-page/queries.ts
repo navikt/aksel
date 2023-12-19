@@ -128,6 +128,7 @@ export const initialTemaPageArticles = groq`
     title,
     "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id && $slug in undertema[]->tema->slug.current]| order(publishedAt desc)[0...9]${baseGpArticleData}
   }`;
+
 export type initialTemaPageArticlesResponse = {
   initialUndertema: {
     title: string;

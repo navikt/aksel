@@ -4,6 +4,9 @@ import { GpGroupedArticlesInputT, GpGroupedArticlesT } from "../types";
 /**
  * De-duplicates re-occuring articles and maps the to the matching innholdstype and undertema
  * This reduces amount for data sent to user on load.
+ * TODO:
+ * - Returns 0 articles for url /gp/brukerinnsikt?undertema=Innsikt&innholdstype=How-to
+ * - - Innnholdstype gets 1 less article resovled from initial query
  */
 export function groupArticles({
   initialInnholdstype = [],
@@ -19,6 +22,7 @@ export function groupArticles({
   >();
 
   initialInnholdstype.forEach((innholdstype) => {
+    console.log(innholdstype.articles.length);
     innholdstype.articles.forEach((article) => {
       articleMap.set(article._id, {
         article,
@@ -28,9 +32,12 @@ export function groupArticles({
     });
   });
 
+  console.log("\n\n");
   initialUndertema.forEach((tema) => {
+    console.log(tema.articles.length);
     tema.articles.forEach((article) => {
       const found = articleMap.get(article._id);
+      /* !found && console.log(article.heading); */
       found
         ? articleMap.set(article._id, { ...found, undertema: tema.title })
         : articleMap.set(article._id, {
