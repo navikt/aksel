@@ -17,8 +17,33 @@ export const Description: Story = {
     heroNav: [
       {
         hasRefs: true,
+        slug: "b",
+        title: "Brukerinnsikt",
+      },
+      {
+        hasRefs: true,
+        slug: "c",
+        title: "Produktutvikling",
+      },
+      {
+        hasRefs: true,
         slug: "universell-utforming",
         title: "Universell utforming",
+      },
+      {
+        hasRefs: true,
+        slug: "c",
+        title: "Design",
+      },
+      {
+        hasRefs: true,
+        slug: "c",
+        title: "Innholdsarbeid",
+      },
+      {
+        hasRefs: true,
+        slug: "c",
+        title: "Skjemaer",
       },
     ],
     tema: {
