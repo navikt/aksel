@@ -37,7 +37,7 @@ const ItemName = ({ file, href, onClick }: Props) => {
     return <Link href={href}>{file.name}</Link>;
   }
 
-  if (isNativeFile(file) || "base64DataUrl" in file) {
+  if (isNativeFile(file)) {
     return (
       <Link
         href="#"

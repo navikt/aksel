@@ -29,6 +29,5 @@ export {
   type FileListProps,
   type FileItemProps,
   type FileMetadata,
-  type FileBase64,
   type FileItem,
 } from "./file-upload";

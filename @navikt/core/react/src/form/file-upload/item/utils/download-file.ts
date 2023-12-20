@@ -1,11 +1,6 @@
-import { FileBase64 } from "../types";
-import { isNativeFile } from "./file-type-checker";
-
-export const downloadFile = (file: File | FileBase64): void => {
+export const downloadFile = (file: File): void => {
   const a = document.createElement("a");
-  const url = isNativeFile(file)
-    ? URL.createObjectURL(file)
-    : file.base64DataUrl;
+  const url = URL.createObjectURL(file);
   a.href = url;
   a.download = file.name;
   a.click();
