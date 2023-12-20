@@ -10,7 +10,8 @@
 
 /* Page.Block */
 .navds-pageblock {
-  --__ac-page-padding-inline: 0;
+  /* stylelint-disable-next-line length-zero-no-unit */
+  --__ac-page-padding-inline: 0px;
 
   margin-inline: auto;
   width: 100%;
@@ -30,7 +31,7 @@
 }
 
 .navds-pageblock--text {
-  max-width: calc(var(--a-max-width-text) + var(--__ac-page-padding-inline) * 2);
+  max-width: calc(var(--a-max-width-text) + var(--__ac-page-padding-inline) + var(--__ac-page-padding-inline));
 }
 
 .navds-pageblock--md {
