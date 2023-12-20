@@ -135,14 +135,14 @@ export const SingleSmall = () => (
 );
 
 export const SingleDescription = () => (
-  <div className="colspan">
-    <Checkbox value="tekst" description="checkboxdescription">
-      Checkboxtekst
+  <CheckboxGroup legend="Hvor vil du sitte?" className="colspan">
+    <Checkbox value="foran" description="Tilgjengelig med rullestol">
+      Foran
     </Checkbox>
-    <Checkbox value="tekst" defaultChecked description="checkboxdescription">
-      Checkboxtekst
+    <Checkbox value="tekst" description="Adgang via trapp med to trinn">
+      Bak
     </Checkbox>
-  </div>
+  </CheckboxGroup>
 );
 
 export const SingleError = () => (
