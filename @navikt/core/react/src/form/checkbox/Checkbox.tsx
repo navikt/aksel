@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useId } from "react";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
@@ -9,6 +9,9 @@ import useCheckbox from "./useCheckbox";
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const { inputProps, hasError, size, readOnly, nested } = useCheckbox(props);
+
+    const labelId = useId();
+    const descriptionId = useId();
 
     return (
       <div
@@ -50,7 +53,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             }
           }}
         />
-        <label htmlFor={inputProps.id} className="navds-checkbox__label">
+        <label
+          htmlFor={inputProps.id}
+          className="navds-checkbox__label"
+          aria-labelledby={cl(labelId, {
+            [descriptionId]: props.description,
+          })}
+        >
           <span className="navds-checkbox__icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -75,8 +84,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           >
             <BodyShort
               as="span"
+              id={labelId}
               size={size}
               className="navds-checkbox__label-text"
+              aria-hidden
             >
               {!nested && (
                 <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
@@ -86,8 +97,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {props.description && (
               <BodyShort
                 as="span"
+                id={descriptionId}
                 size={size}
                 className="navds-form-field__subdescription navds-checkbox__description"
+                aria-hidden
               >
                 {props.description}
               </BodyShort>
