@@ -30,7 +30,7 @@
 }
 
 .navds-pageblock--text {
-  max-width: calc(var(--a-max-width-text) + var(--__ac-page-padding-inline));
+  max-width: calc(var(--a-max-width-text) + var(--__ac-page-padding-inline) * 2);
 }
 
 .navds-pageblock--md {
