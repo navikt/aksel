@@ -1,6 +1,6 @@
-import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import { OverridableComponent } from "../../util";
 import { PageBlock } from "./parts/PageBlock";
 
@@ -14,7 +14,7 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * Background color. Accepts a color token.
    * @default bg-default
    */
-  background?: keyof typeof bgColors.a;
+  background?: keyof typeof bgColors.a | "surface-subtle";
   /**
    * Allows better positioning of footer
    */
