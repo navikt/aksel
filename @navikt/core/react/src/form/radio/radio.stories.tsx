@@ -60,22 +60,33 @@ export const Group = () => (
   </RadioGroup>
 );
 
-export const GroupError = () => (
-  <>
-    <button>Stop her</button>
-    <RadioGroup
-      legend="Velg din aldersgruppe"
-      description="Informasjonen blir brukt for å gi deg bedre søketreff."
-      error="Du må svare på hvor gammel du er"
-    >
-      <Radio value="0-20">0-20 år</Radio>
-      <Radio value="21-45" description="Gjelder fra året man blir 21">
-        21-45 år
-      </Radio>
-      <Radio value="46-100">46-100 år</Radio>
-    </RadioGroup>
-  </>
-);
+export const GroupError = () => {
+  const [isValueSelected, setValueSelected] = useState(false);
+  return (
+    <>
+      <button>Stop her</button>
+      <RadioGroup
+        legend="Velg din aldersgruppe"
+        description="Informasjonen blir brukt for å gi deg bedre søketreff."
+        error={!isValueSelected ? "Du må velge en aldersgruppe" : undefined}
+      >
+        <Radio onChange={() => setValueSelected(true)} value="0-20">
+          0-20 år
+        </Radio>
+        <Radio
+          onChange={() => setValueSelected(true)}
+          value="21-45"
+          description="Gjelder fra året man blir 21"
+        >
+          21-45 år
+        </Radio>
+        <Radio onChange={() => setValueSelected(true)} value="46-100">
+          46-100 år
+        </Radio>
+      </RadioGroup>
+    </>
+  );
+};
 
 export const GroupSmall = () => (
   <RadioGroup legend="Group legend" defaultValue="tekst2" size="small">
