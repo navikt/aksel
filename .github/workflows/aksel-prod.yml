@@ -100,7 +100,7 @@ jobs:
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Wait for e2e-tests to succeed
-        uses: lewagon/wait-on-check-action@v1.2.0
+        uses: lewagon/wait-on-check-action@v1.3.3
         with:
           ref: ${{ github.ref }}
           check-name: "Smoketest Aksel"
