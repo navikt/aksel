@@ -37,7 +37,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "errorId",
             "readOnly",
           ])}
-          {...inputProps}
+          {...omit(inputProps, ["aria-invalid"])}
           type="checkbox"
           className="navds-checkbox__input"
           aria-checked={props.indeterminate ? "mixed" : inputProps.checked}
