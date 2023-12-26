@@ -20,12 +20,12 @@ import React, {
   useContext,
   useMemo,
   useRef,
-  useState,
 } from "react";
 import { ModalContext } from "../modal/ModalContext";
 import { useProvider } from "../provider";
 import { Detail } from "../typography";
 import { mergeRefs, useId } from "../util";
+import { useControllableState } from "../util/hooks/useControllableState";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -43,6 +43,10 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * @note "open"-prop overwrites this
    */
   defaultOpen?: boolean;
+  /**
+   * Change handler for open
+   */
+  onOpenChange?: (open: boolean) => void;
   /**
    * Orientation for tooltip
    * @default "top"
@@ -98,8 +102,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       className,
       arrow: _arrow = true,
       placement: _placement = "top",
-      open: userOpen,
+      open,
       defaultOpen = false,
+      onOpenChange,
       offset: _offset,
       content,
       delay = 150,
@@ -110,7 +115,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref
   ) => {
-    const [open, setOpen] = useState(defaultOpen);
+    const [_open, _setOpen] = useControllableState({
+      defaultValue: defaultOpen,
+      value: open,
+      onChange: onOpenChange,
+    });
+
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const modalContext = useContext(ModalContext);
     const providerRootElement = useProvider()?.rootElement;
@@ -131,8 +141,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       refs,
     } = useFloating({
       placement: _placement,
-      open: userOpen ?? open,
-      onOpenChange: (_open) => setOpen(_open),
+      open: _open,
+      onOpenChange: (newState) => _setOpen(newState),
       middleware: [
         offset(_offset ? _offset : _arrow ? 10 : 2),
         shift(),
@@ -177,7 +187,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }
 
     if (content?.length > maxChar) {
-      (userOpen ?? open) &&
+      _open &&
         console.warn(
           `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop\n\nLength:${content.length}\nTooltip-content: ${content}`
         );
@@ -190,14 +200,13 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           getReferenceProps({
             ...children.props,
             ref: childMergedRef,
-            "aria-describedby":
-              userOpen ?? open
-                ? cl(ariaId, children?.props["aria-describedby"])
-                : children?.props["aria-describedby"],
+            "aria-describedby": _open
+              ? cl(ariaId, children?.props["aria-describedby"])
+              : children?.props["aria-describedby"],
           })
         )}
         <FloatingPortal root={rootElement}>
-          {(userOpen ?? open) && (
+          {_open && (
             <div
               {...getFloatingProps({
                 ...rest,
