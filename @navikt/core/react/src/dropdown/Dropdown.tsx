@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useControllableState } from "../util/hooks/useControllableState";
 import Menu, { MenuType } from "./Menu";
 import Toggle, { ToggleProps } from "./Toggle";
 import { DropdownContext } from "./context";
@@ -22,6 +23,10 @@ export interface DropdownProps {
    * Controlled state of the dropdown. When set, you will need to handle onClose and onSelect manually.
    */
   open?: boolean;
+  /**
+   * Change handler for open
+   */
+  onOpenChange?: (open: boolean) => void;
 }
 
 export interface DropdownType extends React.FC<DropdownProps> {
@@ -74,28 +79,28 @@ export const Dropdown = (({
   closeOnSelect = true,
   defaultOpen = false,
   open,
+  onOpenChange,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
-  const handleToggle = (v: boolean) => {
-    if (open === undefined) {
-      setIsOpen(v);
-    }
-  };
+  const [_open, _setOpen] = useControllableState({
+    defaultValue: defaultOpen,
+    value: open,
+    onChange: onOpenChange,
+  });
+
+  const handleToggle = (v: boolean) => _setOpen(v);
 
   return (
     <DropdownContext.Provider
       value={{
-        isOpen: open ?? isOpen,
+        isOpen: _open,
         handleToggle,
         anchorEl,
         setAnchorEl,
         onSelect: (event) => {
           onSelect?.(event);
-          if (closeOnSelect) {
-            open === undefined && setIsOpen(false);
-          }
+          closeOnSelect && _setOpen(false);
         },
       }}
     >
