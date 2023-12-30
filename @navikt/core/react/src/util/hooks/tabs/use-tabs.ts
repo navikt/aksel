@@ -1,11 +1,4 @@
-import {
-  Children,
-  createElement,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useClientLayoutEffect } from "../../useClientLayoutEffect";
 import { useId } from "../../useId";
 import { createContext } from "../context/create-context";
@@ -21,7 +14,7 @@ export const [
   useTabsDescendantsContext,
   useTabsDescendants,
   useTabsDescendant,
-] = createDescendantContext<HTMLButtonElement>();
+] = createDescendantContext<HTMLButtonElement, { value: string }>();
 
 /* -------------------------------------------------------------------------------------------------
  * useTabs - The root react hook that manages all tab items
@@ -41,15 +34,15 @@ export interface UseTabsProps {
   /**
    * Callback when the index (controlled or un-controlled) changes.
    */
-  onChange?: (index: number) => void;
+  onChange?: (value: string) => void;
   /**
    * The index of the selected tab (in controlled mode)
    */
-  index?: number;
+  value?: string;
   /**
    * The initial index of the selected tab (in uncontrolled mode)
    */
-  defaultIndex?: number;
+  defaultValue?: string;
   /**
    * The id of the tab
    */
@@ -73,7 +66,7 @@ export interface UseTabsProps {
  * @see WAI-ARIA https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
  */
 export function useTabs(props: UseTabsProps) {
-  const { defaultIndex, onChange, index, isManual, isLazy, ...htmlProps } =
+  const { defaultValue, onChange, value, isManual, isLazy, ...htmlProps } =
     props;
 
   /**
@@ -88,22 +81,22 @@ export function useTabs(props: UseTabsProps) {
    *
    * This is why we need to keep track of the `focusedIndex` and `selectedIndex`
    */
-  const [focusedIndex, setFocusedIndex] = useState(defaultIndex ?? 0);
+  const [focusedValue, setFocusedValue] = useState(defaultValue ?? "");
 
-  const [selectedIndex, setSelectedIndex] = useControllableState({
-    defaultValue: defaultIndex ?? 0,
-    value: index,
+  const [selectedValue, setSelectedValue] = useControllableState({
+    defaultValue: defaultValue ?? "",
+    value,
     onChange,
   });
 
   /**
-   * Sync focused `index` with controlled `selectedIndex` (which is the `props.index`)
+   * Sync focused `value` with controlled `selectedValue` (which is the `props.value`)
    */
   useEffect(() => {
-    if (index != null) {
-      setFocusedIndex(index);
+    if (value != null) {
+      setFocusedValue(value);
     }
-  }, [index]);
+  }, [value]);
 
   /**
    * Think of `useDescendants` as a register for the tab nodes.
@@ -119,10 +112,10 @@ export function useTabs(props: UseTabsProps) {
 
   return {
     id,
-    selectedIndex,
-    focusedIndex,
-    setSelectedIndex,
-    setFocusedIndex,
+    selectedValue,
+    focusedValue,
+    setSelectedValue,
+    setFocusedValue,
     isManual,
     isLazy,
     descendants,
@@ -154,18 +147,21 @@ export interface UseTabListProps {
  * @param props props object for the tablist
  */
 export function useTabList<P extends UseTabListProps>(props: P) {
-  const { focusedIndex } = useTabsContext();
+  const { focusedValue } = useTabsContext();
 
   const descendants = useTabsDescendantsContext();
 
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
+      const idx = descendants
+        .values()
+        .findIndex((x) => x.value === focusedValue);
       const nextTab = () => {
-        const next = descendants.nextEnabled(focusedIndex);
+        const next = descendants.nextEnabled(idx);
         if (next) next.node?.focus();
       };
       const prevTab = () => {
-        const prev = descendants.prevEnabled(focusedIndex);
+        const prev = descendants.prevEnabled(idx);
         if (prev) prev.node?.focus();
       };
       const firstTab = () => {
@@ -196,7 +192,7 @@ export function useTabList<P extends UseTabListProps>(props: P) {
         action(event);
       }
     },
-    [descendants, focusedIndex]
+    [descendants, focusedValue]
   );
 
   return {
@@ -229,6 +225,7 @@ export interface UseTabProps extends UseTabOptions {
   onClick?: React.MouseEventHandler;
   onFocus?: React.FocusEventHandler;
   ref?: React.Ref<HTMLButtonElement>;
+  value: string;
 }
 
 /**
@@ -240,25 +237,26 @@ export interface UseTabProps extends UseTabOptions {
 export function useTab<P extends UseTabProps>(props: P) {
   const { isDisabled = false, isFocusable = false, ...htmlProps } = props;
 
-  const { setSelectedIndex, isManual, id, setFocusedIndex, selectedIndex } =
+  const { setSelectedValue, isManual, id, setFocusedValue, selectedValue } =
     useTabsContext();
 
-  const { index, register } = useTabsDescendant({
+  const { register } = useTabsDescendant({
     disabled: isDisabled && !isFocusable,
+    value: htmlProps?.value ?? "",
   });
 
-  const isSelected = index === selectedIndex;
+  const isSelected = htmlProps?.value === selectedValue;
 
   const onClick = () => {
-    setSelectedIndex(index);
+    setSelectedValue(htmlProps?.value);
   };
 
   const onFocus = () => {
-    setFocusedIndex(index);
+    setFocusedValue(htmlProps.value);
     const isDisabledButFocusable = isDisabled && isFocusable;
     const shouldSelect = !isManual && !isDisabledButFocusable;
     if (shouldSelect) {
-      setSelectedIndex(index);
+      setSelectedValue(htmlProps.value);
     }
   };
 
@@ -277,12 +275,12 @@ export function useTab<P extends UseTabProps>(props: P) {
 
   return {
     ...clickableProps,
-    id: makeTabId(id, index),
+    id: makeTabId(id, htmlProps?.value),
     role: "tab",
     tabIndex: isSelected ? 0 : -1,
     type,
     "aria-selected": isSelected,
-    "aria-controls": makeTabPanelId(id, index),
+    "aria-controls": makeTabPanelId(id, htmlProps?.value),
     onFocus: isDisabled
       ? undefined
       : (e) => {
@@ -296,48 +294,6 @@ export interface UseTabPanelsProps {
   children?: React.ReactNode;
 }
 
-const [TabPanelProvider, useTabPanelContext] = createContext<{
-  isSelected: boolean;
-  id: string;
-  tabId: string;
-  selectedIndex: number;
-}>({});
-
-/**
- * Tabs hook for managing the visibility of multiple tab panels.
- *
- * Since only one panel can be show at a time, we use `cloneElement`
- * to inject `selected` panel to each TabPanel.
- *
- * It returns a cloned version of its children with
- * all functionality included.
- */
-export function useTabPanels<P extends UseTabPanelsProps>(props: P) {
-  const context = useTabsContext();
-
-  const { id, selectedIndex } = context;
-
-  const validChildren = Children.toArray(props.children);
-
-  const children = validChildren.map((child, index) =>
-    createElement(
-      TabPanelProvider,
-      {
-        key: index,
-        value: {
-          isSelected: index === selectedIndex,
-          id: makeTabPanelId(id, index),
-          tabId: makeTabId(id, index),
-          selectedIndex,
-        },
-      },
-      child
-    )
-  );
-
-  return { ...props, children };
-}
-
 /**
  * Tabs hook for managing the visible/hidden states
  * of the tab panel.
@@ -345,25 +301,20 @@ export function useTabPanels<P extends UseTabPanelsProps>(props: P) {
  * @param props props object for the tab panel
  */
 export function useTabPanel(props: Record<string, any>) {
+  const context = useTabsContext();
+
+  const { id, selectedValue } = context;
+
   const { children, ...htmlProps } = props;
-  const { isSelected, id, tabId } = useTabPanelContext();
-
-  const hasBeenSelected = useRef(false);
-  if (isSelected) {
-    hasBeenSelected.current = true;
-  }
-
-  const shouldRenderChildren = true;
 
   return {
-    // Puts the tabpanel in the page `Tab` sequence.
     tabIndex: 0,
     ...htmlProps,
-    children: shouldRenderChildren ? children : null,
+    children,
     role: "tabpanel",
-    "aria-labelledby": tabId,
-    hidden: !isSelected,
-    id,
+    "aria-labelledby": makeTabId(id, htmlProps.value),
+    hidden: selectedValue !== htmlProps.value,
+    id: makeTabPanelId(id, htmlProps.value),
   };
 }
 
@@ -379,7 +330,7 @@ export function useTabIndicator(): React.CSSProperties {
   const context = useTabsContext();
   const descendants = useTabsDescendantsContext();
 
-  const { selectedIndex } = context;
+  const { selectedValue } = context;
 
   // Get the clientRect of the selected tab
   const [rect, setRect] = useState(() => {
@@ -390,9 +341,9 @@ export function useTabIndicator(): React.CSSProperties {
 
   // Update the selected tab rect when the selectedIndex changes
   useClientLayoutEffect(() => {
-    if (selectedIndex == null) return;
+    if (selectedValue == null) return;
 
-    const tab = descendants.item(selectedIndex);
+    const tab = descendants.values().find((x) => x.value === selectedValue);
     if (tab == null) return;
 
     // Horizontal Tab: Calculate width and left distance
@@ -409,7 +360,7 @@ export function useTabIndicator(): React.CSSProperties {
         cancelAnimationFrame(id);
       }
     };
-  }, [selectedIndex, descendants]);
+  }, [descendants, selectedValue]);
 
   return {
     position: "absolute",
@@ -420,10 +371,10 @@ export function useTabIndicator(): React.CSSProperties {
   };
 }
 
-function makeTabId(id: string, index: number) {
-  return `${id}--tab-${index}`;
+function makeTabId(id: string, value: string) {
+  return `${id}--tab-${value}`;
 }
 
-function makeTabPanelId(id: string, index: number) {
-  return `${id}--tabpanel-${index}`;
+function makeTabPanelId(id: string, value: string) {
+  return `${id}--tabpanel-${value}`;
 }
