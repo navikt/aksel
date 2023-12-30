@@ -22,8 +22,11 @@ export interface TabProps
 
 export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
   forwardRef(
-    ({ className, as: Component = "button", label, icon, ...rest }, ref) => {
-      const ctx = useTab(rest);
+    (
+      { className, as: Component = "button", label, icon, ...rest },
+      ref: React.ForwardedRef<HTMLButtonElement>
+    ) => {
+      const tabProps = useTab(rest, ref);
 
       if (!label && !icon) {
         console.error("<Tabs.Tab/> needs label/icon");
@@ -32,8 +35,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
 
       return (
         <Component
-          {...ctx}
-          ref={ref}
+          {...tabProps}
           className={cl(
             "navds-tabs__tab",
             /* `navds-tabs__tab--${context?.size ?? "medium"}`,

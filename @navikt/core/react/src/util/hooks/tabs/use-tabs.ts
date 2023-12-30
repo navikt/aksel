@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import mergeRefs from "../../mergeRefs";
 import { useClientLayoutEffect } from "../../useClientLayoutEffect";
 import { useId } from "../../useId";
 import { createContext } from "../context/create-context";
@@ -151,11 +152,17 @@ export function useTabList<P extends UseTabListProps>(props: P) {
 
   const descendants = useTabsDescendantsContext();
 
+  console.log(descendants.values());
+
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       const idx = descendants
         .values()
         .findIndex((x) => x.value === focusedValue);
+
+      console.log(descendants.values());
+
+      console.log(idx);
       const nextTab = () => {
         const next = descendants.nextEnabled(idx);
         if (next) next.node?.focus();
@@ -213,18 +220,12 @@ export interface UseTabOptions {
    * If `true`, the `Tab` won't be toggleable
    * @default false
    */
-  isDisabled?: boolean;
-  /**
-   * If `true` and `isDisabled`, the `Tab` will be focusable but not interactive.
-   * @default false
-   */
-  isFocusable?: boolean;
+  disabled?: boolean;
 }
 
 export interface UseTabProps extends UseTabOptions {
   onClick?: React.MouseEventHandler;
   onFocus?: React.FocusEventHandler;
-  ref?: React.Ref<HTMLButtonElement>;
   value: string;
 }
 
@@ -234,54 +235,46 @@ export interface UseTabProps extends UseTabOptions {
  * A tab can be disabled and focusable, or both,
  * hence the use of `useClickable` to handle this scenario
  */
-export function useTab<P extends UseTabProps>(props: P) {
-  const { isDisabled = false, isFocusable = false, ...htmlProps } = props;
+export function useTab<P extends UseTabProps>(
+  props: P,
+  ref: React.ForwardedRef<HTMLButtonElement>
+) {
+  const { disabled = false, value, ...htmlProps } = props;
 
   const { setSelectedValue, isManual, id, setFocusedValue, selectedValue } =
     useTabsContext();
 
   const { register } = useTabsDescendant({
-    disabled: isDisabled && !isFocusable,
-    value: htmlProps?.value ?? "",
+    disabled,
+    value: value ?? "",
   });
 
-  const isSelected = htmlProps?.value === selectedValue;
+  const isSelected = value === selectedValue;
 
-  const onClick = () => {
-    setSelectedValue(htmlProps?.value);
-  };
+  const onClick = () => setSelectedValue(value);
 
   const onFocus = () => {
-    setFocusedValue(htmlProps.value);
-    const isDisabledButFocusable = isDisabled && isFocusable;
-    const shouldSelect = !isManual && !isDisabledButFocusable;
+    setFocusedValue(value);
+    const shouldSelect = !isManual && !disabled;
     if (shouldSelect) {
-      setSelectedValue(htmlProps.value);
+      setSelectedValue(value);
     }
   };
 
-  const clickableProps = {
+  return {
     ...htmlProps,
-    ref: register, //mergeRefs([register, props?.ref]),
-    isDisabled,
-    isFocusable,
+    ref: mergeRefs([register, ref]),
     onClick: (e) => {
       props?.onClick?.(e);
       onClick();
     },
-  };
-
-  const type: "button" | "submit" | "reset" = "button";
-
-  return {
-    ...clickableProps,
-    id: makeTabId(id, htmlProps?.value),
+    id: makeTabId(id, value),
     role: "tab",
     tabIndex: isSelected ? 0 : -1,
-    type,
+    type: "button",
     "aria-selected": isSelected,
-    "aria-controls": makeTabPanelId(id, htmlProps?.value),
-    onFocus: isDisabled
+    "aria-controls": makeTabPanelId(id, value),
+    onFocus: disabled
       ? undefined
       : (e) => {
           props?.onFocus?.(e);

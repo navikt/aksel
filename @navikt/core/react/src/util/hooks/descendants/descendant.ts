@@ -145,7 +145,9 @@ export class DescendantsManager<
   };
 
   private registerNode = (node: T | null, options?: DescendantOptions<K>) => {
+    console.log("pre-registered");
     if (!node || this.descendants.has(node)) return;
+    console.log("after-registered");
 
     const keys = Array.from(this.descendants.keys()).concat(node);
     const sorted = sortNodes(keys);
@@ -159,5 +161,6 @@ export class DescendantsManager<
     this.descendants.set(node, descendant as Descendant<T, K>);
 
     this.assignIndex(sorted);
+    console.log("registered");
   };
 }
