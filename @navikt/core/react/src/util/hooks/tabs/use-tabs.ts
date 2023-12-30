@@ -283,10 +283,6 @@ export function useTab<P extends UseTabProps>(
   };
 }
 
-export interface UseTabPanelsProps {
-  children?: React.ReactNode;
-}
-
 /**
  * Tabs hook for managing the visible/hidden states
  * of the tab panel.
@@ -298,16 +294,15 @@ export function useTabPanel(props: Record<string, any>) {
 
   const { id, selectedValue } = context;
 
-  const { children, ...htmlProps } = props;
+  const { value, ...htmlProps } = props;
 
   return {
     tabIndex: 0,
     ...htmlProps,
-    children,
     role: "tabpanel",
-    "aria-labelledby": makeTabId(id, htmlProps.value),
-    hidden: selectedValue !== htmlProps.value,
-    id: makeTabPanelId(id, htmlProps.value),
+    "aria-labelledby": makeTabId(id, value),
+    hidden: selectedValue !== value,
+    id: makeTabPanelId(id, value),
   };
 }
 
