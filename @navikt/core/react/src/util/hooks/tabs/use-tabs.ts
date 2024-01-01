@@ -170,7 +170,7 @@ export function useTabList<P extends UseTabListProps>(props: P) {
         action(event);
       }
     },
-    [descendants, focusedValue]
+    [descendants, focusedValue, loop]
   );
 
   return {
