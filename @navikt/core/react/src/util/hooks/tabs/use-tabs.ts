@@ -6,10 +6,9 @@ import { createContext } from "../context/create-context";
 import { createDescendantContext } from "../descendants/useDescendant";
 import { useControllableState } from "../useControllableState";
 
-/* -------------------------------------------------------------------------------------------------
- * Create context to track descendants and their indices
- * -----------------------------------------------------------------------------------------------*/
-
+/**
+ * Descendant context used to track active tab/tabpanels and implement rowing-tabindex
+ */
 export const [
   TabsDescendantsProvider,
   useTabsDescendantsContext,
@@ -17,21 +16,7 @@ export const [
   useTabsDescendant,
 ] = createDescendantContext<HTMLButtonElement, { value: string }>();
 
-/* -------------------------------------------------------------------------------------------------
- * useTabs - The root react hook that manages all tab items
- * -----------------------------------------------------------------------------------------------*/
-
 export interface UseTabsProps {
-  /**
-   * If `true`, the tabs will be manually activated and
-   * display its panel by pressing Space or Enter.
-   *
-   * If `false`, the tabs will be automatically activated
-   * and their panel is displayed when they receive focus.
-   *
-   * @default false
-   */
-  isManual?: boolean;
   /**
    * Callback when the index (controlled or un-controlled) changes.
    */
@@ -49,26 +34,33 @@ export interface UseTabsProps {
    */
   id?: string;
   /**
-   * Performance 🚀:
-   * If `true`, rendering of the tab panel's will be deferred until it is selected.
+   * Automatically activates tab on focus/navigation
    * @default false
    */
-  isLazy?: boolean;
+  selectionFollowsFocus?: boolean;
+  /**
+   * Loops back to start when navigating past last item
+   * @default false
+   */
+  loop?: boolean;
 }
 
 /**
- * Tabs hook that provides all the states, and accessibility
- * helpers to keep all things working properly.
+ * Tabs hook that provides all the states for tab and tabpanel
  *
  * Its returned object will be passed unto a Context Provider
  * so all child components can read from it.
- * There is no document link yet
- * @see Docs https://chakra-ui.com/docs/components/useTabs
  * @see WAI-ARIA https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
  */
 export function useTabs(props: UseTabsProps) {
-  const { defaultValue, onChange, value, isManual, isLazy, ...htmlProps } =
-    props;
+  const {
+    defaultValue,
+    onChange,
+    value,
+    selectionFollowsFocus = false,
+    loop = true,
+    ...htmlProps
+  } = props;
 
   /**
    * We use this to keep track of the index of the focused tab.
@@ -117,12 +109,24 @@ export function useTabs(props: UseTabsProps) {
     focusedValue,
     setSelectedValue,
     setFocusedValue,
-    isManual,
-    isLazy,
     descendants,
     htmlProps,
+    selectionFollowsFocus,
+    loop,
   };
 }
+
+export type UseInternalTabsReturn = {
+  size: "medium" | "small";
+  iconPosition: "left" | "top";
+};
+
+export const [InternalTabsProvider, useInternalTabsContext] =
+  createContext<UseInternalTabsReturn>({
+    name: "InternalTabsContext",
+    errorMessage:
+      "useInternalTabsContext: `context` is undefined. Seems you forgot to wrap all tabs components within <Tabs />",
+  });
 
 export type UseTabsReturn = Omit<
   ReturnType<typeof useTabs>,
@@ -148,11 +152,9 @@ export interface UseTabListProps {
  * @param props props object for the tablist
  */
 export function useTabList<P extends UseTabListProps>(props: P) {
-  const { focusedValue } = useTabsContext();
+  const { focusedValue, loop = true } = useTabsContext();
 
   const descendants = useTabsDescendantsContext();
-
-  console.log(descendants.values());
 
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
@@ -160,15 +162,12 @@ export function useTabList<P extends UseTabListProps>(props: P) {
         .values()
         .findIndex((x) => x.value === focusedValue);
 
-      console.log(descendants.values());
-
-      console.log(idx);
       const nextTab = () => {
-        const next = descendants.nextEnabled(idx);
+        const next = descendants.nextEnabled(idx, loop);
         if (next) next.node?.focus();
       };
       const prevTab = () => {
-        const prev = descendants.prevEnabled(idx);
+        const prev = descendants.prevEnabled(idx, loop);
         if (prev) prev.node?.focus();
       };
       const firstTab = () => {
@@ -241,8 +240,13 @@ export function useTab<P extends UseTabProps>(
 ) {
   const { disabled = false, value, ...htmlProps } = props;
 
-  const { setSelectedValue, isManual, id, setFocusedValue, selectedValue } =
-    useTabsContext();
+  const {
+    setSelectedValue,
+    selectionFollowsFocus,
+    id,
+    setFocusedValue,
+    selectedValue,
+  } = useTabsContext();
 
   const { register } = useTabsDescendant({
     disabled,
@@ -255,7 +259,7 @@ export function useTab<P extends UseTabProps>(
 
   const onFocus = () => {
     setFocusedValue(value);
-    const shouldSelect = !isManual && !disabled;
+    const shouldSelect = selectionFollowsFocus && !disabled;
     if (shouldSelect) {
       setSelectedValue(value);
     }

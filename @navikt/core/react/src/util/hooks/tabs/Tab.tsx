@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../../typography";
 import { OverridableComponent } from "../../OverridableComponent";
-import { useTab } from "./use-tabs";
+import { useInternalTabsContext, useTab } from "./use-tabs";
 
 export interface TabProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> {
@@ -27,6 +27,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
       ref: React.ForwardedRef<HTMLButtonElement>
     ) => {
       const tabProps = useTab(rest, ref);
+      const context = useInternalTabsContext();
 
       if (!label && !icon) {
         console.error("<Tabs.Tab/> needs label/icon");
@@ -38,8 +39,8 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
           {...tabProps}
           className={cl(
             "navds-tabs__tab",
-            /* `navds-tabs__tab--${context?.size ?? "medium"}`,
-              `navds-tabs__tab-icon--${context?.iconPosition}`, */
+            `navds-tabs__tab--${context?.size ?? "medium"}`,
+            `navds-tabs__tab-icon--${context?.iconPosition}`,
             className,
             {
               "navds-tabs__tab--icon-only": icon && !label,
@@ -49,7 +50,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
           <BodyShort
             as="span"
             className="navds-tabs__tab-inner"
-            /* size={context?.size} */
+            size={context?.size}
           >
             {icon}
             {label}

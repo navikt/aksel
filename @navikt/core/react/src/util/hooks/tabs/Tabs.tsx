@@ -3,7 +3,12 @@ import React, { HTMLAttributes, forwardRef, useMemo } from "react";
 import Tab from "./Tab";
 import TabPanel from "./TabPanel";
 import TabsList from "./TabsList";
-import { TabsDescendantsProvider, TabsProvider, useTabs } from "./use-tabs";
+import {
+  InternalTabsProvider,
+  TabsDescendantsProvider,
+  TabsProvider,
+  useTabs,
+} from "./use-tabs";
 
 export interface TabsProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -62,24 +67,28 @@ interface TabsComponent
 }
 
 export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
-  ({ className, children, size = "medium", ...rest }, ref) => {
+  (
+    { className, children, iconPosition = "left", size = "medium", ...rest },
+    ref
+  ) => {
     const { htmlProps, descendants, ...ctx } = useTabs(rest);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { isFitted: _, ...rootProps } = htmlProps as any;
+    const rootProps = htmlProps as any;
 
     const context = useMemo(() => ctx, [ctx]);
 
     return (
       <TabsDescendantsProvider value={descendants}>
         <TabsProvider value={context}>
-          <div
-            className={cl("navds-tabs", className, `navds-tabs--${size}`)}
-            ref={ref}
-            {...rootProps}
-          >
-            {children}
-          </div>
+          <InternalTabsProvider value={{ iconPosition, size }}>
+            <div
+              className={cl("navds-tabs", className, `navds-tabs--${size}`)}
+              ref={ref}
+              {...rootProps}
+            >
+              {children}
+            </div>
+          </InternalTabsProvider>
         </TabsProvider>
       </TabsDescendantsProvider>
     );
