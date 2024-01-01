@@ -1,51 +1,15 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef, useMemo } from "react";
+import React, { forwardRef, useMemo } from "react";
 import Tab from "./Tab";
 import TabPanel from "./TabPanel";
 import TabsList from "./TabsList";
+import { TabsProps } from "./types";
 import {
   InternalTabsProvider,
   TabsDescendantsProvider,
   TabsProvider,
   useTabs,
 } from "./use-tabs";
-
-export interface TabsProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
-  children: React.ReactNode;
-  /**
-   * Changes padding and font-size
-   * @default "medium"
-   */
-  size?: "medium" | "small";
-  /**
-   * onChange callback for selected Tab
-   */
-  onChange?: (value: string) => void;
-  /**
-   * Controlled selected value
-   */
-  value?: string;
-  /**
-   * If not controlled, a default-value needs to be set
-   */
-  defaultValue?: string;
-  /**
-   * Automatically activates tab on focus/navigation
-   * @default false
-   */
-  selectionFollowsFocus?: boolean;
-  /**
-   * Loops back to start when navigating past last item
-   * @default false
-   */
-  loop?: boolean;
-  /**
-   * Icon position in Tab
-   * @default "left"
-   */
-  iconPosition?: "left" | "top";
-}
 
 interface TabsComponent
   extends React.ForwardRefExoticComponent<
@@ -73,8 +37,6 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
   ) => {
     const { htmlProps, descendants, ...ctx } = useTabs(rest);
 
-    const rootProps = htmlProps as any;
-
     const context = useMemo(() => ctx, [ctx]);
 
     return (
@@ -84,7 +46,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
             <div
               className={cl("navds-tabs", className, `navds-tabs--${size}`)}
               ref={ref}
-              {...rootProps}
+              {...htmlProps}
             >
               {children}
             </div>

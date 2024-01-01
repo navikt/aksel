@@ -5,6 +5,7 @@ import { useId } from "../../useId";
 import { createContext } from "../context/create-context";
 import { createDescendantContext } from "../descendants/useDescendant";
 import { useControllableState } from "../useControllableState";
+import { UseTabsProps } from "./types";
 
 /**
  * Descendant context used to track active tab/tabpanels and implement rowing-tabindex
@@ -15,35 +16,6 @@ export const [
   useTabsDescendants,
   useTabsDescendant,
 ] = createDescendantContext<HTMLButtonElement, { value: string }>();
-
-export interface UseTabsProps {
-  /**
-   * Callback when the index (controlled or un-controlled) changes.
-   */
-  onChange?: (value: string) => void;
-  /**
-   * The index of the selected tab (in controlled mode)
-   */
-  value?: string;
-  /**
-   * The initial index of the selected tab (in uncontrolled mode)
-   */
-  defaultValue?: string;
-  /**
-   * The id of the tab
-   */
-  id?: string;
-  /**
-   * Automatically activates tab on focus/navigation
-   * @default false
-   */
-  selectionFollowsFocus?: boolean;
-  /**
-   * Loops back to start when navigating past last item
-   * @default false
-   */
-  loop?: boolean;
-}
 
 /**
  * Tabs hook that provides all the states for tab and tabpanel
