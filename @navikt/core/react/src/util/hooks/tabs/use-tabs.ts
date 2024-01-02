@@ -8,7 +8,7 @@ import { useControllableState } from "../useControllableState";
 import { UseTabListProps, UseTabProps, UseTabsProps } from "./types";
 
 /**
- * Descendant context used to track active tab/tabpanels and implement rowing-tabindex
+ * Descendant-context used to track active tab/tabpanels and implement rowing-tabindex
  */
 export const [
   TabsDescendantsProvider,
@@ -18,11 +18,8 @@ export const [
 ] = createDescendantContext<HTMLButtonElement, { value: string }>();
 
 /**
- * Tabs hook that provides all the states for tab and tabpanel
- *
- * Its returned object will be passed unto a Context Provider
- * so all child components can read from it.
- * @see WAI-ARIA https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
+ * Tabs hook that providing states for tabs-component and hooks
+ * Returned object will be passed unto a Context Provider.
  */
 export function useTabs(props: UseTabsProps) {
   const {
@@ -35,27 +32,21 @@ export function useTabs(props: UseTabsProps) {
   } = props;
 
   /**
-   * We use this to keep track of the index of the focused tab.
-   *
-   * Tabs can be automatically activated, this means selection follows focus.
-   * When we navigate with the arrow keys, we move focus and selection to next/prev tab
-   *
-   * Tabs can also be manually activated, this means selection does not follow focus.
-   * When we navigate with the arrow keys, we only move focus NOT selection. The user
-   * will need not manually activate the tab using `Enter` or `Space`.
-   *
-   * This is why we need to keep track of the `focusedIndex` and `selectedIndex`
+   * Based on `selectionFolowsFocus` focus might or might not match selectedValue.
+   * So a separate state is needed for those cases
    */
+  // TODO: fallback to null or ""?
   const [focusedValue, setFocusedValue] = useState(defaultValue ?? "");
 
   const [selectedValue, setSelectedValue] = useControllableState({
+    // TODO: fallback to null or ""?
     defaultValue: defaultValue ?? "",
     value,
     onChange,
   });
 
   /**
-   * Sync focused `value` with controlled `selectedValue` (which is the `props.value`)
+   * Sync focused `value` with controlled `selectedValue`
    */
   useEffect(() => {
     if (value != null) {
@@ -64,13 +55,14 @@ export function useTabs(props: UseTabsProps) {
   }, [value]);
 
   /**
-   * Think of `useDescendants` as a register for the tab nodes.
+   * `useDescendants` is the controller for tab-nodes
    */
   const descendants = useTabsDescendants();
 
   /**
    * Generate a unique id or use user-provided id for the tabs widget
    */
+  // TODO: Users ID will now be overwritten
   const uuid = useId();
   const uid = props.id ?? uuid;
   const id = `tabs-${uid}`;
@@ -88,13 +80,13 @@ export function useTabs(props: UseTabsProps) {
   };
 }
 
-export type UseInternalTabsReturn = {
+export type UseInternalTabs = {
   size: "medium" | "small";
   iconPosition: "left" | "top";
 };
 
 export const [InternalTabsProvider, useInternalTabsContext] =
-  createContext<UseInternalTabsReturn>({
+  createContext<UseInternalTabs>({
     name: "InternalTabsContext",
     errorMessage:
       "useInternalTabsContext: `context` is undefined. Seems you forgot to wrap all tabs components within <Tabs />",
@@ -112,52 +104,52 @@ export const [TabsProvider, useTabsContext] = createContext<UseTabsReturn>({
 });
 
 /**
- * Tabs hook to manage multiple tab buttons,
- * and ensures only one tab is selected per time.
- *
- * @param props props object for the tablist
+ * TabList hook to manage multiple tab buttons,
+ * and ensures only one tab is selected at a time.
  */
 export function useTabList<P extends UseTabListProps>(props: P) {
   const { focusedValue, loop = true } = useTabsContext();
 
   const descendants = useTabsDescendantsContext();
 
+  /**
+   * Implements rowing-tabindex for horizontal tabs
+   */
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
+      /**
+       * Tabs.Tab is registered with its prop 'value'.
+       * We can then use it to find the current focuses descendant
+       */
       const idx = descendants
         .values()
         .findIndex((x) => x.value === focusedValue);
 
       const nextTab = () => {
         const next = descendants.nextEnabled(idx, loop);
-        if (next) next.node?.focus();
+        next && next.node?.focus();
       };
       const prevTab = () => {
         const prev = descendants.prevEnabled(idx, loop);
-        if (prev) prev.node?.focus();
+        prev && prev.node?.focus();
       };
       const firstTab = () => {
         const first = descendants.firstEnabled();
-        if (first) first.node?.focus();
+        first && first.node?.focus();
       };
       const lastTab = () => {
         const last = descendants.lastEnabled();
-        if (last) last.node?.focus();
+        last && last.node?.focus();
       };
 
-      const eventKey = event.key;
-
-      const ArrowStart = "ArrowLeft";
-      const ArrowEnd = "ArrowRight";
-
       const keyMap: Record<string, React.KeyboardEventHandler> = {
-        [ArrowStart]: () => prevTab(),
-        [ArrowEnd]: () => nextTab(),
+        ArrowLeft: prevTab,
+        ArrowRight: nextTab,
         Home: firstTab,
         End: lastTab,
       };
 
-      const action = keyMap[eventKey];
+      const action = keyMap[event.key];
 
       if (action) {
         event.preventDefault();
@@ -181,10 +173,7 @@ export function useTabList<P extends UseTabListProps>(props: P) {
 export type UseTabListReturn = ReturnType<typeof useTabList>;
 
 /**
- * Tabs hook to manage each tab button.
- *
- * A tab can be disabled and focusable, or both,
- * hence the use of `useClickable` to handle this scenario
+ * Tabs hook to manage each tab.
  */
 export function useTab<P extends UseTabProps>(
   props: P,
@@ -202,6 +191,7 @@ export function useTab<P extends UseTabProps>(
 
   const { register } = useTabsDescendant({
     disabled,
+    // TODO: Fallback to null or ""?
     value: value ?? "",
   });
 
@@ -211,15 +201,15 @@ export function useTab<P extends UseTabProps>(
 
   const onFocus = () => {
     setFocusedValue(value);
+
     const shouldSelect = selectionFollowsFocus && !disabled;
-    if (shouldSelect) {
-      setSelectedValue(value);
-    }
+    shouldSelect && setSelectedValue(value);
   };
 
   return {
     ...htmlProps,
     ref: mergeRefs([register, ref]),
+    // TODO: Create util-function to handle cases where user and local function should be called
     onClick: (e) => {
       props?.onClick?.(e);
       onClick();
@@ -233,6 +223,7 @@ export function useTab<P extends UseTabProps>(
     onFocus: disabled
       ? undefined
       : (e) => {
+          // TODO: Create util-function to handle cases where user and local function should be called
           props?.onFocus?.(e);
           onFocus();
         },
@@ -240,10 +231,7 @@ export function useTab<P extends UseTabProps>(
 }
 
 /**
- * Tabs hook for managing the visible/hidden states
- * of the tab panel.
- *
- * @param props props object for the tab panel
+ * Tabs hook for managing the visible/hidden state of Tabs.Panel
  */
 export function useTabPanel(props: Record<string, any>) {
   const context = useTabsContext();
@@ -263,12 +251,7 @@ export function useTabPanel(props: Record<string, any>) {
 }
 
 /**
- * Tabs hook to show an animated indicators that
- * follows the active tab.
- *
- * The way we do it is by measuring the DOM Rect (or dimensions)
- * of the active tab, and return that as CSS style for
- * the indicator.
+ * Tabs hook creating an animated indicator for active tab.
  */
 export function useTabIndicator(): React.CSSProperties {
   const context = useTabsContext();
@@ -300,9 +283,7 @@ export function useTabIndicator(): React.CSSProperties {
     });
 
     return () => {
-      if (id) {
-        cancelAnimationFrame(id);
-      }
+      id && cancelAnimationFrame(id);
     };
   }, [descendants, selectedValue]);
 
