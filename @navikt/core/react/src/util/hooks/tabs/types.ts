@@ -41,3 +41,57 @@ export type UseTabsProps = Omit<
   TabsProps,
   "size" | "iconPosition" | "className" | "children"
 >;
+
+export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * <Tabs.Tab /> elements
+   */
+  children: React.ReactNode;
+}
+
+export interface UseTabListProps {
+  children?: React.ReactNode;
+  onKeyDown?: React.KeyboardEventHandler;
+  ref?: React.Ref<any>;
+}
+
+export interface TabProps
+  extends Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> {
+  /**
+   * Tab label
+   */
+  label?: React.ReactNode;
+  /**
+   * Tab Icon
+   */
+  icon?: React.ReactNode;
+  /**
+   * Value for state-handling
+   */
+  value: string;
+}
+
+export interface UseTabOptions {
+  /**
+   * If `true`, the `Tab` won't be toggleable
+   * @default false
+   */
+  disabled?: boolean;
+}
+
+export interface UseTabProps extends UseTabOptions {
+  onClick?: React.MouseEventHandler;
+  onFocus?: React.FocusEventHandler;
+  value: string;
+}
+
+export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Tab panel content
+   */
+  children: React.ReactNode;
+  /**
+   * Value for state-handling
+   */
+  value: string;
+}

@@ -1,13 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { TabListProps } from "./types";
 import { useTabList } from "./use-tabs";
-
-export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * <Tabs.Tab /> elements
-   */
-  children: React.ReactNode;
-}
 
 export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, children, ...rest }, ref) => {

@@ -1,17 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { TabPanelProps } from "./types";
 import { useTabPanel } from "./use-tabs";
-
-export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Tab panel content
-   */
-  children: React.ReactNode;
-  /**
-   * Value for state-handling
-   */
-  value: string;
-}
 
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   ({ className, children, ...rest }, ref) => {

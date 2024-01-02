@@ -5,7 +5,7 @@ import { useId } from "../../useId";
 import { createContext } from "../context/create-context";
 import { createDescendantContext } from "../descendants/useDescendant";
 import { useControllableState } from "../useControllableState";
-import { UseTabsProps } from "./types";
+import { UseTabListProps, UseTabProps, UseTabsProps } from "./types";
 
 /**
  * Descendant context used to track active tab/tabpanels and implement rowing-tabindex
@@ -111,12 +111,6 @@ export const [TabsProvider, useTabsContext] = createContext<UseTabsReturn>({
     "useTabsContext: `context` is undefined. Seems you forgot to wrap all tabs components within <Tabs />",
 });
 
-export interface UseTabListProps {
-  children?: React.ReactNode;
-  onKeyDown?: React.KeyboardEventHandler;
-  ref?: React.Ref<any>;
-}
-
 /**
  * Tabs hook to manage multiple tab buttons,
  * and ensures only one tab is selected per time.
@@ -185,20 +179,6 @@ export function useTabList<P extends UseTabListProps>(props: P) {
 }
 
 export type UseTabListReturn = ReturnType<typeof useTabList>;
-
-export interface UseTabOptions {
-  /**
-   * If `true`, the `Tab` won't be toggleable
-   * @default false
-   */
-  disabled?: boolean;
-}
-
-export interface UseTabProps extends UseTabOptions {
-  onClick?: React.MouseEventHandler;
-  onFocus?: React.FocusEventHandler;
-  value: string;
-}
 
 /**
  * Tabs hook to manage each tab button.

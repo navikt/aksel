@@ -2,23 +2,8 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../../typography";
 import { OverridableComponent } from "../../OverridableComponent";
+import { TabProps } from "./types";
 import { useInternalTabsContext, useTab } from "./use-tabs";
-
-export interface TabProps
-  extends Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> {
-  /**
-   * Tab label
-   */
-  label?: React.ReactNode;
-  /**
-   * Tab Icon
-   */
-  icon?: React.ReactNode;
-  /**
-   * Value for state-handling
-   */
-  value: string;
-}
 
 export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
   forwardRef(
