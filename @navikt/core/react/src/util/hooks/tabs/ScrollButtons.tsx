@@ -3,11 +3,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import debounce from "../../debounce";
 
-const ScrollButtons = ({
-  listRef,
-}: {
+interface ScrollButtonsProps {
   listRef: React.RefObject<HTMLDivElement>;
-}) => {
+}
+
+const ScrollButtons = ({ listRef }: ScrollButtonsProps) => {
   const [displayScroll, setDisplayScroll] = useState({
     start: false,
     end: false,
@@ -56,7 +56,28 @@ const ScrollButtons = ({
     updateScrollButtonState();
   });
 
-  const ScrollButton = ({ dir, hidden }: { dir: 1 | -1; hidden: boolean }) => (
+  const showSteppers = displayScroll.end || displayScroll.start;
+
+  if (!showSteppers) {
+    return null;
+  }
+
+  return (
+    <>
+      <ScrollButton dir={-1} hidden={!displayScroll.start} listRef={listRef} />
+      <ScrollButton dir={1} hidden={!displayScroll.end} listRef={listRef} />
+    </>
+  );
+};
+
+interface ScrollButtonProps {
+  dir: 1 | -1;
+  hidden: boolean;
+  listRef: React.RefObject<HTMLDivElement>;
+}
+
+function ScrollButton({ dir, hidden, listRef }: ScrollButtonProps) {
+  return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       className={cl("navds-tabs__scroll-button", {
@@ -74,19 +95,6 @@ const ScrollButtons = ({
       )}
     </div>
   );
-
-  const showSteppers = displayScroll.end || displayScroll.start;
-
-  if (!showSteppers) {
-    return null;
-  }
-
-  return (
-    <>
-      <ScrollButton dir={-1} hidden={!displayScroll.start} />
-      <ScrollButton dir={1} hidden={!displayScroll.end} />
-    </>
-  );
-};
+}
 
 export default ScrollButtons;
