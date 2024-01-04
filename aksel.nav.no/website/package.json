@@ -16,7 +16,6 @@
     "update:searchindex": "ts-node --project tsconfig.json ./scripts/create-index",
     "e2e": "yarn build && yarn start-server-and-test start http://localhost:3000 playwright",
     "e2e:full": "yarn build && ts-node ./e2e/genUrls.ts && FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
-    "e2e:ci": " yarn start-server-and-test start http://localhost:3000 playwright",
     "e2e:ci-full": "ts-node ./e2e/genUrls.ts && FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "update:rss": "ts-node --project tsconfig.tsnode.json ./scripts/generate-rss-feed",
     "update:props": "ts-node --project tsconfig.tsnode.json ./scripts/update-props",
