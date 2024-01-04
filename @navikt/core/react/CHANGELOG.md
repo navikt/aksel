@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.12.2
+
+### Patch Changes
+
+- :memo: Modal: Oppdatert JSDoc ([#2567](https://github.com/navikt/aksel/pull/2567))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.2
+  - @navikt/aksel-icons@5.12.2
+
 ## 5.12.1
 
 ### Patch Changes

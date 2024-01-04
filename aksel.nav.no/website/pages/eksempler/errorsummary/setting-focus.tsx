@@ -3,11 +3,11 @@ import { Button, ErrorSummary } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const errorRef = useRef(null);
+  const errorRef = useRef<HTMLDivElement>(null);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    errorRef?.current && errorRef.current.focus();
+    errorRef.current && errorRef.current.focus();
   }, [hasError]);
 
   return (
@@ -40,4 +40,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
+  desc: "Sett fokus på ErrorSummary ved submit. Hvis du gjør en ny sidelasting kan du også sette en ID på ErrorSummary og referere til den i URLens hash.",
 };
