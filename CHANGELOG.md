@@ -14,6 +14,10 @@
 
 * Datepicker: Lukk-knapp i modal har nå type button for å unngå form-submition ([#2568](https://github.com/navikt/aksel/pull/2568))
 
+### @navikt/ds-css
+
+- ExpansionCard: Divider mellom header og innhold ([#2566](https://github.com/navikt/aksel/pull/2566))
+
 ## 5.11
 
 ### @navikt/aksel-icons
