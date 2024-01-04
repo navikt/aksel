@@ -1,6 +1,5 @@
 .header-animated-bg {
   z-index: 0;
-  background-color: #dccaf3;
   animation: animated-bg 60s ease infinite;
 
   --bg-animated-1: #dccaf3;
