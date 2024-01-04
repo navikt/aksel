@@ -22,16 +22,17 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
       <input
         {...omit(props, ["children", "size", "description", "readOnly"])}
         {...omit(inputProps, ["aria-invalid"])}
+        aria-labelledby={cl(
+          labelId,
+          !!props["aria-labelledby"] && props["aria-labelledby"],
+          {
+            [descriptionId]: props.description,
+          }
+        )}
         className="navds-radio__input"
         ref={ref}
       />
-      <label
-        htmlFor={inputProps.id}
-        className="navds-radio__label"
-        aria-labelledby={cl(labelId, {
-          [descriptionId]: props.description,
-        })}
-      >
+      <label htmlFor={inputProps.id} className="navds-radio__label">
         <span className="navds-radio__content">
           <BodyShort as="span" id={labelId} size={size} aria-hidden>
             {props.children}

@@ -52,14 +52,15 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               ref.current = el;
             }
           }}
+          aria-labelledby={cl(
+            labelId,
+            !!props["aria-labelledby"] && props["aria-labelledby"],
+            {
+              [descriptionId]: props.description,
+            }
+          )}
         />
-        <label
-          htmlFor={inputProps.id}
-          className="navds-checkbox__label"
-          aria-labelledby={cl(labelId, {
-            [descriptionId]: props.description,
-          })}
-        >
+        <label htmlFor={inputProps.id} className="navds-checkbox__label">
           <span className="navds-checkbox__icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
