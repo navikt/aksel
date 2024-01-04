@@ -1,35 +1,44 @@
 .header-animated-bg {
-  animation: animated-bg 60s ease infinite;
   z-index: 0;
+  background-color: #dccaf3;
+  animation: animated-bg 60s ease infinite;
+
+  --bg-animated-1: #dccaf3;
+  --bg-animated-2: #b2f0e4;
+}
+
+/* Allows dark-reader to show frontpage: https://nav-it.slack.com/archives/C7NE7A8UF/p1704272426011129 */
+[data-darkreader-scheme] .header-animated-bg {
+  animation: none;
 }
 
 @keyframes animated-bg {
   0% {
-    background-color: #dccaf3;
+    background-color: var(--bg-animated-1);
   }
 
   10% {
-    background-color: #dccaf3;
+    background-color: var(--bg-animated-1);
   }
 
   33% {
-    background-color: #dccaf3;
+    background-color: var(--bg-animated-1);
   }
 
   45% {
-    background-color: #b2f0e4;
+    background-color: var(--bg-animated-2);
   }
 
   60% {
-    background-color: #b2f0e4;
+    background-color: var(--bg-animated-2);
   }
 
   90% {
-    background-color: #dccaf3;
+    background-color: var(--bg-animated-1);
   }
 
   100% {
-    background-color: #dccaf3;
+    background-color: var(--bg-animated-1);
   }
 }
 
