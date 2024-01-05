@@ -50,6 +50,8 @@
   .initialGrid {
     gap: var(--a-spacing-6);
     grid-template-columns: repeat(3, 1fr);
+
+    --text-clamp-lines: 2;
   }
 
   .initialGrid > :is(:nth-child(6n + 4), :nth-child(6n + 6)) {
@@ -58,5 +60,11 @@
 
   .initialGrid > :is(:nth-child(6n + 5)) {
     grid-row: span 2 / span 2;
+
+    --text-clamp-lines: 10;
   }
+}
+
+.lineClamp {
+  -webkit-line-clamp: var(--text-clamp-lines);
 }

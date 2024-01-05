@@ -11,12 +11,6 @@ import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { GpArticleT } from "@/layout/god-praksis-page/queries";
 import styles from "./articles.module.css";
 
-const trunc = (text, num_chars) => {
-  return `${text.substring(0, num_chars)}${
-    text.length > num_chars ? "..." : ""
-  }`;
-};
-
 /**
  * TODO:
  * - Implement reference-design from Figma (WIP)
@@ -75,7 +69,9 @@ export const ArticleCard = ({
           )}
 
           {ingress && (
-            <BodyLong className="mt-2">{trunc(ingress, 100)}</BodyLong>
+            <BodyLong className={cl("mt-2 line-clamp-2", styles.lineClamp)}>
+              {ingress}
+            </BodyLong>
           )}
         </div>
         <div className="flex gap-2 justify-between items-center mt-6">
