@@ -81,7 +81,31 @@ const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
       <Suspense fallback={<GpPage {...props} />}>
-        <WithPreview comp={GpPage} query={query} props={props} />
+        <WithPreview
+          comp={GpPage}
+          query={query}
+          props={props}
+          resolvers={[
+            {
+              key: "heroNav",
+              dataKeys: ["heroNav"],
+              cb: (v) => v[0]?.filter((x) => x.hasRefs),
+            },
+            {
+              key: "initialArticles",
+              dataKeys: ["initialInnholdstype"],
+              cb: (v) =>
+                groupArticles({
+                  initialInnholdstype: v[0],
+                }),
+            },
+            {
+              key: "chipsData",
+              dataKeys: ["chipsDataAll"],
+              cb: (v) => chipsDataForAllTema(v[0]),
+            },
+          ]}
+        />
       </Suspense>
     );
   }
