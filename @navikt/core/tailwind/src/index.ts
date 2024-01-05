@@ -26,7 +26,8 @@ const config = {
       lineHeight: Reducer(tokens, ["font-line-height"]),
       fontFamily: Reducer(tokens, ["font-family"]),
       borderRadius: Reducer(tokens, ["border-radius"]),
-      maxWidth: Reducer(tokens, ["max-width"]),
+      // TODO: Add next major-release
+      // maxWidth: Reducer(tokens, ["max-width"]),
     },
   },
 };

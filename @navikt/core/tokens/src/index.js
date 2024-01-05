@@ -15,7 +15,7 @@ module.exports = {
       "xl-down": { value: "1279px" },
     },
     maxWidth: {
-      text: { value: "36rem" },
+      text: { value: "576px" },
     },
     font: {
       family: { value: "'Source Sans Pro', Arial, sans-serif" },
