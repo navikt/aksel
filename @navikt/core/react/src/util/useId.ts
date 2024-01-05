@@ -27,7 +27,7 @@ const maybeReactUseId: undefined | (() => string) = (React as any)[
  * @param idOverride
  * @returns {string}
  */
-export function useId(idOverride?: string): string | undefined {
+export function useId(idOverride?: string): string {
   if (maybeReactUseId !== undefined) {
     const reactId = maybeReactUseId();
     return idOverride ?? reactId.replace(/(:)/g, "");
