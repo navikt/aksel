@@ -89,7 +89,7 @@ function ArticleList({ initialArticles }: ArticleListT) {
         loaded={router.isReady}
       />
       {!atEndOfLazy && initialArticles.length === 9 && router.isReady && (
-        <div className={cl("pt-8 flex justify-center", styles.articleGrid)}>
+        <div className={cl("pt-8 flex justify-center", styles.animatedFade)}>
           <Button
             variant="tertiary-neutral"
             onClick={() => setSize(size + 1)}

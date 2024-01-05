@@ -29,13 +29,13 @@ function ArticleGrid({ data, initialData, loaded }: ArticleGridT) {
   }
 
   return (
-    <div className={styles.articleFade}>
+    <div className={styles.animatedFade}>
       <Heading level="2" size="medium" className="text-aksel-heading">
         Siste
       </Heading>
 
       <div className="grid gap-6">
-        <div className={cl("pt-5", styles.initialGrid)}>
+        <div className={cl("pt-5", styles.cardGrid)}>
           {initialData.map((article, idx) => (
             <ArticleCard key={article._id + idx} group="initial" {...article} />
           ))}

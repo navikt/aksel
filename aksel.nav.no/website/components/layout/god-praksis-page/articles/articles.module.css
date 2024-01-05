@@ -1,64 +1,60 @@
-.articleFade {
-  animation: articleGridFadeUp 600ms forwards;
+.animatedFade {
+  animation: fadeUpKeyFrames 600ms forwards;
 }
 
-.articleGrid {
-  animation: articleGridFadeUp 600ms forwards;
-}
-
-.articleGridLazy {
-  animation: articleGridFadeUpLazy 600ms forwards;
+.animatedFadeLazy {
+  animation: fadeUpKeyFramesLazy 600ms forwards;
   transition: none;
 }
 
-@keyframes articleGridFadeUp {
+@keyframes fadeUpKeyFrames {
   0% {
     opacity: 0;
     transform: translate3d(0, 1rem, 0);
   }
 }
 
-@keyframes articleGridFadeUpLazy {
+@keyframes fadeUpKeyFramesLazy {
   0% {
     opacity: 0;
     transform: translateY(2rem);
   }
 }
 
-.initialGrid {
+.cardGrid {
   display: grid;
 }
 
 @media (max-width: 767px) {
-  .initialGrid {
+  .cardGrid {
     gap: var(--a-spacing-4);
   }
 }
 
 @media (min-width: 768px) and (max-width: 1279px) {
-  .initialGrid {
+  .cardGrid {
     gap: var(--a-spacing-4);
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .initialGrid > :is(:nth-child(5n + 1)) {
+  .cardGrid > :is(:nth-child(5n + 1)) {
     grid-column: span 2 / span 2;
   }
 }
 
 @media (min-width: 1280px) {
-  .initialGrid {
+  .cardGrid {
     gap: var(--a-spacing-6);
     grid-template-columns: repeat(3, 1fr);
 
     --text-clamp-lines: 2;
   }
 
-  .initialGrid > :is(:nth-child(6n + 4), :nth-child(6n + 6)) {
+  .cardGrid > :is(:nth-child(6n + 4), :nth-child(6n + 6)) {
     grid-column: span 2 / span 2;
   }
 
-  .initialGrid > :is(:nth-child(6n + 5)) {
+  .cardGrid > :is(:nth-child(6n + 5)) {
     grid-row: span 2 / span 2;
 
     --text-clamp-lines: 10;
