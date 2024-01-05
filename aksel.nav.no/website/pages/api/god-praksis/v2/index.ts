@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { groq } from "next-sanity";
 import {
   GP_LAZYLOADED_ARTICLES,
-  baseGpArticleData,
+  apiMainPageQuery,
+  apiTemaPageQuery,
 } from "@/layout/god-praksis-page/interface";
 import { getClient } from "@/sanity/client.server";
 
@@ -25,42 +25,10 @@ export default async function gpArticles(
       .json({ message: "Missing page param for pagination" });
   }
 
-  const temaPageQuery = groq`
-    {
-      "articles": {
-        $undertema == "" && $innholdstype == "" => {
-          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
-        },
-        $undertema != "" && $innholdstype == "" => {
-          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current && $undertema in undertema[]->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
-        },
-        $undertema == "" && $innholdstype != "" => {
-          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current && $innholdstype == innholdstype->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
-        },
-        $undertema != "" && $innholdstype != "" => {
-          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current && $undertema in undertema[]->title && $innholdstype == innholdstype->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
-        }
-      }
-    }
-  `;
-
-  const mainPageQuery = groq`
-    {
-      "articles": {
-        $innholdstype == "" => {
-          "articles": *[_type == 'aksel_artikkel' ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
-        },
-        $innholdstype != "" => {
-          "articles": *[_type == 'aksel_artikkel' && $innholdstype == innholdstype->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
-        }
-      }
-    }
-`;
-
   let payload;
 
   await getClient()
-    .fetch(tema.length > 0 ? temaPageQuery : mainPageQuery, {
+    .fetch(tema.length > 0 ? apiTemaPageQuery : apiMainPageQuery, {
       start: page * GP_LAZYLOADED_ARTICLES,
       end: (page + 1) * GP_LAZYLOADED_ARTICLES,
       innholdstype,

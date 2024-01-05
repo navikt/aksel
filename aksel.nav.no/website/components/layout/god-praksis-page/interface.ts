@@ -204,3 +204,49 @@ export type initialTemaPageArticlesResponse = {
     articles: GpArticleT[];
   }[];
 };
+
+/**
+ * API-queries
+ */
+/**
+ * @arguments innholdstype: string
+ * @arguments undertema: string
+ * @arguments start: number
+ * @arguments end: number
+ */
+export const apiTemaPageQuery = groq`
+    {
+      "articles": {
+        $undertema == "" && $innholdstype == "" => {
+          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        },
+        $undertema != "" && $innholdstype == "" => {
+          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current && $undertema in undertema[]->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        },
+        $undertema == "" && $innholdstype != "" => {
+          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current && $innholdstype == innholdstype->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        },
+        $undertema != "" && $innholdstype != "" => {
+          "articles": *[_type == 'aksel_artikkel' && $tema in undertema[]->tema->slug.current && $undertema in undertema[]->title && $innholdstype == innholdstype->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        }
+      }
+    }
+  `;
+
+/**
+ * @arguments innholdstype: string
+ * @arguments start: number
+ * @arguments end: number
+ */
+export const apiMainPageQuery = groq`
+    {
+      "articles": {
+        $innholdstype == "" => {
+          "articles": *[_type == 'aksel_artikkel' ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        },
+        $innholdstype != "" => {
+          "articles": *[_type == 'aksel_artikkel' && $innholdstype == innholdstype->title ] | order(publishedAt desc)[$start...$end]${baseGpArticleData},
+        }
+      }
+    }
+`;
