@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { groq } from "next-sanity";
-import { baseGpArticleData } from "@/layout/god-praksis-page/queries";
-import { GP_LAZYLOADED_ARTICLES } from "@/layout/god-praksis-page/types";
+import {
+  GP_LAZYLOADED_ARTICLES,
+  baseGpArticleData,
+} from "@/layout/god-praksis-page/interface";
 import { getClient } from "@/sanity/client.server";
 
 export default async function gpArticles(

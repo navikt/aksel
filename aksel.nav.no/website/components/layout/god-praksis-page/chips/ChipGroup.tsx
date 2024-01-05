@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { VStack } from "@navikt/ds-react";
-import { ChipsData } from "@/layout/god-praksis-page/types";
+import { ChipsData } from "@/layout/god-praksis-page/interface";
 import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
 import ChipNav from "./ChipNav";
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, Modal } from "@navikt/ds-react";
-import { HeroNavT } from "@/layout/god-praksis-page/types";
+import { HeroNavT } from "@/layout/god-praksis-page/interface";
 
 function HeroSelect({
   heroNav,

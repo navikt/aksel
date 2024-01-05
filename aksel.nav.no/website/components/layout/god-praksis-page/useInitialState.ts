@@ -1,6 +1,8 @@
 import { getArticleList } from "@/layout/god-praksis-page/initial-load/get-article-list";
-import { GpArticleT } from "@/layout/god-praksis-page/queries";
-import { GpGroupedArticlesT } from "@/layout/god-praksis-page/types";
+import {
+  GpArticleT,
+  GpGroupedArticlesT,
+} from "@/layout/god-praksis-page/interface";
 import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
 
 /**

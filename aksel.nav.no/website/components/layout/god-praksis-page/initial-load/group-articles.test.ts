@@ -1,4 +1,4 @@
-import { GpArticleT } from "..//queries";
+import { GpArticleT } from "../interface";
 import { groupArticles } from "./group-articles";
 
 const baseArticle = (id: string): GpArticleT => ({

@@ -4,8 +4,10 @@ import useSWRInfinite from "swr/infinite";
 import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
-import { GpArticleT } from "@/layout/god-praksis-page/queries";
-import { GP_LAZYLOADED_ARTICLES } from "@/layout/god-praksis-page/types";
+import {
+  GP_LAZYLOADED_ARTICLES,
+  GpArticleT,
+} from "@/layout/god-praksis-page/interface";
 import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
 import ArticleGrid from "./ArticleGrid";
 import styles from "./articles.module.css";

@@ -1,7 +1,7 @@
 import { BodyLong, Box, Heading } from "@navikt/ds-react";
 import Cube from "@/layout/god-praksis-page/hero/Cube";
 import HeroSelect from "@/layout/god-praksis-page/hero/HeroSelect";
-import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/types";
+import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
 
 /**
  * TODO:

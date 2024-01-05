@@ -1,7 +1,7 @@
 import {
   GP_INITIAL_ARTICLES,
   GpGroupedArticlesT,
-} from "@/layout/god-praksis-page/types";
+} from "@/layout/god-praksis-page/interface";
 
 export function getArticleList(
   articles: GpGroupedArticlesT,

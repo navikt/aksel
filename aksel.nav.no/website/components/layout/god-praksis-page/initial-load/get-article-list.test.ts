@@ -1,4 +1,4 @@
-import { GpGroupedArticlesT } from "../types";
+import { GpGroupedArticlesT } from "../interface";
 import { getArticleList } from "./get-article-list";
 
 const baseArticle = (

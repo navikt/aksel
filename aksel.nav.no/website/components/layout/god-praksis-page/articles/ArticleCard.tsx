@@ -8,7 +8,7 @@ import {
 } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading, VStack } from "@navikt/ds-react";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-import { GpArticleT } from "@/layout/god-praksis-page/queries";
+import { GpArticleT } from "@/layout/god-praksis-page/interface";
 import styles from "./articles.module.css";
 
 /**

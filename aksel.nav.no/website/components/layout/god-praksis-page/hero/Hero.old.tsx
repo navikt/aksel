@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong, Box, Heading, Modal, VStack } from "@navikt/ds-react";
-import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/types";
+import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
 
 /**
  * TODO:

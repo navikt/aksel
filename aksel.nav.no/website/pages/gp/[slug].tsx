@@ -5,6 +5,7 @@ import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import { groupByTema } from "@/layout/god-praksis-page/chips/dataTransforms";
 import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
 import {
+  GpEntryPageProps,
   chipsDataAllQuery,
   chipsDataAllQueryResponse,
   heroNavQuery,
@@ -13,8 +14,7 @@ import {
   initialTemaPageArticlesResponse,
   temaQuery,
   temaQueryResponse,
-} from "@/layout/god-praksis-page/queries";
-import { GpEntryPageProps } from "@/layout/god-praksis-page/types";
+} from "@/layout/god-praksis-page/interface";
 import { getClient } from "@/sanity/client.server";
 import { getGpTema } from "@/sanity/interface";
 import { NextPageT } from "@/types";
