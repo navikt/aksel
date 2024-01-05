@@ -61,6 +61,7 @@ export const chipsDataAllQuery = groq`
   "innholdstype": innholdstype->title,
   "undertema": undertema[]->{title, "temaSlug": tema->slug.current}
 }`;
+
 export type chipsDataAllQueryResponse = {
   chipsDataAll: {
     innholdstype: string;
@@ -132,13 +133,12 @@ export const temaQuery = groq`
 "tema": *[_type == "gp.tema" && slug.current == $slug][0]{
     ...,
     "slug": slug.current,
-    "undertema": *[_type == "gp.tema.undertema"
-        && tema->slug.current == $slug
-        && count(*[_type == "aksel_artikkel" && references(^._id)]) > 0]{
+    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{
       title,
       description
     }
   }`;
+
 export type temaQueryResponse = {
   tema: {
     [key: string]: any;

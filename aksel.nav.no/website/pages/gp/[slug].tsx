@@ -97,18 +97,6 @@ const GpPage = (props: PageProps["props"]) => {
 
 const WithPreview = lazy(() => import("@/preview"));
 
-/**
- * TODO:
- * - Preview does not work atm because of
- * ```heroNav: heroNav.filter((x) => x.hasRefs),
-      chipsInnholdstype: chipsInnholdstype.find((x) => x.slug === slug).types,
-      chipsUndertema: chipsUndertema
-        .filter((c) => c.tema === slug)
-        .map((c) => ({ title: c.title, count: c.count })),
-      initialArticles: groupArticles({ initialInnholdstype, initialUndertema }),
-      ```
-      Where data is resolves in initialProps
- */
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
@@ -120,6 +108,27 @@ const Wrapper = (props: any) => {
           params={{
             slug: props?.slug,
           }}
+          resolvers={[
+            {
+              key: "heroNav",
+              dataKeys: ["heroNav"],
+              cb: (v) => v[0]?.filter((x) => x.hasRefs),
+            },
+            {
+              key: "initialArticles",
+              dataKeys: ["initialInnholdstype", "initialUndertema"],
+              cb: (v) =>
+                groupArticles({
+                  initialInnholdstype: v[0],
+                  initialUndertema: v[1],
+                }),
+            },
+            {
+              key: "chipsData",
+              dataKeys: ["chipsDataAll"],
+              cb: (v) => groupByTema(v[0])[props?.slug],
+            },
+          ]}
         />
       </Suspense>
     );

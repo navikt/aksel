@@ -1,7 +1,4 @@
-import {
-  GP_INITIAL_ARTICLES,
-  GpGroupedArticlesT,
-} from "@/layout/god-praksis-page/interface";
+import { GP_INITIAL_ARTICLES, GpGroupedArticlesT } from "../interface";
 
 export function getArticleList(
   articles: GpGroupedArticlesT,

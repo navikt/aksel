@@ -53,9 +53,11 @@ export default async function preview(
 
   // Check if the article with the given `slug` exists
   const { article, godpraksis, gp } = await previewClient.fetch(
-    `{"article": *[slug.current == $slug][0].slug.current,
-    "godpraksis": *[slug.current == $godPraksis && _type == "aksel_tema"][0].slug.current},
-    "gp": *[slug.current == $gp && _type == "gp.tema"][0].slug.current}`,
+    `{
+      "article": *[slug.current == $slug][0].slug.current,
+      "godpraksis": *[slug.current == $godPraksis && _type == "aksel_tema"][0].slug.current,
+      "gp": *[slug.current == $gp && _type == "gp.tema"][0].slug.current
+      }`,
     {
       slug,
       godPraksis: slug.replace("god-praksis/", ""),
