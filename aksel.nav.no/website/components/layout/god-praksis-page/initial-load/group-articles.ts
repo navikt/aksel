@@ -22,7 +22,6 @@ export function groupArticles({
   >();
 
   initialInnholdstype.forEach((innholdstype) => {
-    console.log(innholdstype.articles.length);
     innholdstype.articles.forEach((article) => {
       articleMap.set(article._id, {
         article,
@@ -32,9 +31,7 @@ export function groupArticles({
     });
   });
 
-  console.log("\n\n");
   initialUndertema.forEach((tema) => {
-    console.log(tema.articles.length);
     tema.articles.forEach((article) => {
       const found = articleMap.get(article._id);
 

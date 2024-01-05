@@ -1,4 +1,4 @@
-import { GpGroupedArticlesT } from "@/layout/god-praksis-page/types";
+import { GpGroupedArticlesT } from "../types";
 import { getArticleList } from "./get-article-list";
 
 const baseArticle = (

@@ -1,4 +1,4 @@
-import { GpArticleT } from "@/layout/god-praksis-page/queries";
+import { GpArticleT } from "..//queries";
 import { groupArticles } from "./group-articles";
 
 const baseArticle = (id: string): GpArticleT => ({
