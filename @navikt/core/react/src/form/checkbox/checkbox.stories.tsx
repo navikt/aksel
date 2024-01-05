@@ -134,27 +134,31 @@ export const SingleSmall = () => (
   </div>
 );
 
-export const SingleDescription = () => (
-  <div className="colspan">
-    <Checkbox value="tekst" description="checkboxdescription">
-      Checkboxtekst
-    </Checkbox>
-    <Checkbox value="tekst" defaultChecked description="checkboxdescription">
-      Checkboxtekst
-    </Checkbox>
-  </div>
-);
-
-export const SingleError = () => (
-  <div className="colspan">
-    <Checkbox value="tekst" error>
-      Checkboxtekst
-    </Checkbox>
-    <Checkbox value="tekst" defaultChecked error>
-      Checkboxtekst
-    </Checkbox>
-  </div>
-);
+export const SingleDescription = () => {
+  const [isValueSelected, setValueSelected] = useState(false);
+  return (
+    <CheckboxGroup
+      legend="Hvor vil du sitte?"
+      className="colspan"
+      error={!isValueSelected ? "Du må velge en sitteplass" : undefined}
+    >
+      <Checkbox
+        onChange={() => setValueSelected(true)}
+        value="foran"
+        description="Tilgjengelig med rullestol"
+      >
+        Foran
+      </Checkbox>
+      <Checkbox
+        onChange={() => setValueSelected(true)}
+        value="tekst"
+        description="Adgang via trapp med to trinn"
+      >
+        Bak
+      </Checkbox>
+    </CheckboxGroup>
+  );
+};
 
 export const Indeterminate = () => {
   const [checked, setChecked] = useState([true, false]);
