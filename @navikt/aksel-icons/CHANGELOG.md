@@ -1,5 +1,17 @@
 # @navikt/aksel-icons
 
+## 5.12.3
+
+## 5.12.2
+
+## 5.12.1
+
+## 5.12.0
+
+### Minor Changes
+
+- Ikoner: Oppdatert ikonpakke med diverse bugdfixes og oppdateringer av stroke ([#2538](https://github.com/navikt/aksel/pull/2538))
+
 ## 5.11.5
 
 ## 5.11.4

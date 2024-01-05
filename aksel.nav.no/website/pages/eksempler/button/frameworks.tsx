@@ -10,6 +10,24 @@ const Example = () => {
   );
 };
 
+/*
+
+import { Link as ReactRouterLink } from "react-router-dom";
+const ReactRouterExample = () => (
+  <Button as={ReactRouterLink} to="#">
+    Lenke
+  </Button>
+);
+
+import { Link as RemixLink } from "@remix-run/react";
+const RemixExample = () => (
+  <Button as={RemixLink} to="#">
+    Lenke
+  </Button>
+);
+
+*/
+
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
