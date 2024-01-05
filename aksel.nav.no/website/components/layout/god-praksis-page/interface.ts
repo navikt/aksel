@@ -1,5 +1,9 @@
 import { groq } from "next-sanity";
 
+/**
+ * `GP_LAZYLOADED_ARTICLES`: Number of articles loaded when clicking "load more"
+ * `GP_INITIAL_ARTICLES`: Initial list-length of articles fetched in getStaticProps
+ */
 export const GP_LAZYLOADED_ARTICLES = 3;
 export const GP_INITIAL_ARTICLES = 9;
 
@@ -16,6 +20,9 @@ export type GpInnholdstypeT = {
   hasRefs: boolean;
 };
 
+/**
+ * Page Hero
+ */
 export type HeroNavT = {
   heroNav: {
     title: string;
@@ -23,39 +30,6 @@ export type HeroNavT = {
     hasRefs: boolean;
   }[];
 };
-
-export type GpGroupedArticlesT = {
-  innholdstype: string | null;
-  undertema: string | null;
-  article: GpArticleT;
-}[];
-
-export type GpGroupedArticlesInputT = {
-  initialInnholdstype?: {
-    title: string;
-    articles: GpArticleT[];
-  }[];
-
-  initialUndertema?: {
-    title: string;
-    articles: GpArticleT[];
-  }[];
-};
-
-export type ChipsDataGroupedByTema = {
-  [temaSlug: string]: ChipsData;
-};
-
-export type ChipsData = {
-  "undertema-title": string;
-  "innholdstype-title": string;
-}[];
-
-export type GpEntryPageProps = HeroNavT & {
-  tema: GpTemaT | null;
-} & {
-  initialArticles: GpGroupedArticlesT;
-} & { chipsData: ChipsData };
 
 export const heroNavQuery = groq`
 "heroNav": *[_type == "gp.tema"]{
@@ -65,6 +39,7 @@ export const heroNavQuery = groq`
       && (^._id in undertema[]->tema._ref)]) > 0
 }
 `;
+
 export type heroNavQueryResponse = {
   heroNav: {
     title: string;
@@ -72,6 +47,14 @@ export type heroNavQueryResponse = {
     hasRefs: boolean;
   }[];
 };
+
+/**
+ * Chips navigation
+ */
+export type ChipsData = {
+  "undertema-title": string;
+  "innholdstype-title": string;
+}[];
 
 export const chipsDataAllQuery = groq`
 "chipsDataAll": *[_type == "aksel_artikkel" && defined(innholdstype) && defined(undertema)]{
@@ -120,6 +103,30 @@ export type chipsInnholdstypeQueryResponse = {
     }[];
   }[];
 };
+
+export type GpGroupedArticlesT = {
+  innholdstype: string | null;
+  undertema: string | null;
+  article: GpArticleT;
+}[];
+
+export type GpGroupedArticlesInputT = {
+  initialInnholdstype?: {
+    title: string;
+    articles: GpArticleT[];
+  }[];
+
+  initialUndertema?: {
+    title: string;
+    articles: GpArticleT[];
+  }[];
+};
+
+export type GpEntryPageProps = HeroNavT & {
+  tema: GpTemaT | null;
+} & {
+  initialArticles: GpGroupedArticlesT;
+} & { chipsData: ChipsData };
 
 export const temaQuery = groq`
 "tema": *[_type == "gp.tema" && slug.current == $slug][0]{

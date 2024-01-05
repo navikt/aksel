@@ -1,8 +1,8 @@
-import {
-  ChipsData,
-  ChipsDataGroupedByTema,
-  chipsDataAllQueryResponse,
-} from "../interface";
+import { ChipsData, chipsDataAllQueryResponse } from "../interface";
+
+type ChipsDataGroupedByTema = {
+  [temaSlug: string]: ChipsData;
+};
 
 export const groupByTema = (
   chipsData: chipsDataAllQueryResponse["chipsDataAll"]
