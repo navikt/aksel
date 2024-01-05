@@ -4,7 +4,7 @@ import { baseGpArticleData } from "@/layout/god-praksis-page/queries";
 import { GP_LAZYLOADED_ARTICLES } from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
 
-export default async function gpAarticles(
+export default async function gpArticles(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
