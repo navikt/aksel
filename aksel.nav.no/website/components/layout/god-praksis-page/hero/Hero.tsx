@@ -20,6 +20,7 @@ function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
       paddingBlock="10 6"
       className="bg-gradient-to-tr isolate from-deepblue-200 via-deepblue-100 to-deepblue-100 relative overflow-clip"
     >
+      <Cube />
       <HeroSelect heroNav={heroNav} currentSlug={tema?.slug} />
       <Heading level="1" size="xlarge" className="text-aksel-heading z-10 mt-2">
         {tema?.title ?? "Alle tema"}
@@ -29,7 +30,6 @@ function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
           {tema.description}
         </BodyLong>
       )}
-      <Cube />
     </Box>
   );
 }

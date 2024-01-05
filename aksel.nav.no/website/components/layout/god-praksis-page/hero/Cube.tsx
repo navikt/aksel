@@ -6,7 +6,7 @@ function Cube() {
       viewBox="0 0 720 409"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-0 top-0 pointer-events-none"
+      className="absolute right-0 top-0 pointer-events-none -z-10"
     >
       <path
         fillRule="evenodd"
