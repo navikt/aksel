@@ -1,14 +1,17 @@
-import { Button } from "@navikt/ds-react";
+import { Button, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="flex flex-wrap gap-2">
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="tertiary">Tertiary</Button>
+    <VStack gap="6" align="center">
       <Button variant="danger">Danger</Button>
-    </div>
+      <Button variant="danger" size="small">
+        Danger
+      </Button>
+      <Button variant="danger" size="xsmall">
+        Danger
+      </Button>
+    </VStack>
   );
 };
 
@@ -21,5 +24,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 2,
 };

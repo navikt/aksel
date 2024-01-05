@@ -1,5 +1,35 @@
 # @navikt/ds-react
 
+## 5.12.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.3
+  - @navikt/aksel-icons@5.12.3
+
+## 5.12.2
+
+### Patch Changes
+
+- :memo: Modal: Oppdatert JSDoc ([#2567](https://github.com/navikt/aksel/pull/2567))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.2
+  - @navikt/aksel-icons@5.12.2
+
+## 5.12.1
+
+### Patch Changes
+
+- Checkbox: Checkmark tilpasses bedre fontsize ([#2563](https://github.com/navikt/aksel/pull/2563))
+
+- Datepicker: Lukk-knapp i modal har nå type button for å unngå form-submition ([#2568](https://github.com/navikt/aksel/pull/2568))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.1
+  - @navikt/aksel-icons@5.12.1
+
 ## 5.12.0
 
 ### Patch Changes
