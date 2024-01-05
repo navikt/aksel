@@ -18,7 +18,7 @@ function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
-      className="bg-gradient-to-tr isolate from-deepblue-200 via-deepblue-100 to-deepblue-100 relative overflow-clip"
+      className="bg-gradient-to-tr isolate from-deepblue-200 via-deepblue-100 to-deepblue-100 relative overflow-clip transition-[height]"
     >
       <Cube />
       <HeroSelect heroNav={heroNav} currentSlug={tema?.slug} />

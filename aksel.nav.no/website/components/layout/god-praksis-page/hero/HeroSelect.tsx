@@ -1,8 +1,7 @@
-import cl from "clsx";
 import Link from "next/link";
 import { useRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { BodyShort, Modal } from "@navikt/ds-react";
+import { BodyShort, Chips, Modal } from "@navikt/ds-react";
 import { HeroNavT } from "@/layout/god-praksis-page/interface";
 
 function HeroSelect({
@@ -29,49 +28,40 @@ function HeroSelect({
       <Modal
         ref={modalRef}
         header={{ heading: "Tema" }}
-        width="small"
+        width={500}
         closeOnBackdropClick
       >
         <Modal.Body>
           <nav aria-label="hovedmeny">
-            <ul>
-              <li className="my-2 flex h-11 items-center">
-                <Link
-                  href="/gp"
-                  className={cl(
-                    "hover:bg-surface-action-subtle-hover text-text-default focus-visible:shadow-focus relative flex h-full w-full items-center rounded px-2 focus:outline-none",
-                    {
-                      "before:bg-surface-action-selected pl-4 font-semibold before:absolute before:left-0 before:h-6 before:w-1 before:rounded-full":
-                        false,
-                    }
-                  )}
+            <Chips className="justify-center">
+              <Chips.Toggle
+                as={Link}
+                href="/gp"
+                onClick={() => {
+                  modalRef.current?.close();
+                }}
+                checkmark={false}
+                variant="neutral"
+                selected={!currentSlug}
+              >
+                Alle tema
+              </Chips.Toggle>
+              {heroNav.map((x) => (
+                <Chips.Toggle
+                  key={x.slug}
+                  as={Link}
+                  href={`/gp/${x.slug}`}
                   onClick={() => {
                     modalRef.current?.close();
                   }}
+                  checkmark={false}
+                  variant="neutral"
+                  selected={currentSlug === x.slug}
                 >
-                  Alle tema
-                </Link>
-              </li>
-              {heroNav.map((x) => (
-                <li className="my-2 flex h-11 items-center" key={x.slug}>
-                  <Link
-                    href={`/gp/${x.slug}`}
-                    className={cl(
-                      "hover:bg-surface-action-subtle-hover text-text-default focus-visible:shadow-focus relative flex h-full w-full items-center rounded px-2 focus:outline-none",
-                      {
-                        "before:bg-surface-action-selected pl-4 font-semibold before:absolute before:left-0 before:h-6 before:w-1 before:rounded-full":
-                          currentSlug === x.slug,
-                      }
-                    )}
-                    onClick={() => {
-                      modalRef.current?.close();
-                    }}
-                  >
-                    {x.title}
-                  </Link>
-                </li>
+                  {x.title}
+                </Chips.Toggle>
               ))}
-            </ul>
+            </Chips>
           </nav>
         </Modal.Body>
       </Modal>
