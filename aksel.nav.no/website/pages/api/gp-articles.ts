@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { groq } from "next-sanity";
 import { baseGpArticleData } from "@/layout/god-praksis-page/queries";
+import { GP_LAZYLOADED_ARTICLES } from "@/layout/god-praksis-page/types";
 import { getClient } from "@/sanity/client.server";
 
 export default async function gpAarticles(
@@ -58,14 +59,13 @@ export default async function gpAarticles(
 
   await getClient()
     .fetch(tema.length > 0 ? temaPageQuery : mainPageQuery, {
-      start: page * 3,
-      end: (page + 1) * 3,
+      start: page * GP_LAZYLOADED_ARTICLES,
+      end: (page + 1) * GP_LAZYLOADED_ARTICLES,
       innholdstype,
       undertema,
       tema,
     })
     .then((data) => {
-      /* TODO: Better way to do this query? */
       payload = data.articles.articles;
     })
     .catch((err) => {

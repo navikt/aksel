@@ -5,18 +5,10 @@ import { ChevronDownCircleIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { GpArticleT } from "@/layout/god-praksis-page/queries";
+import { GP_LAZYLOADED_ARTICLES } from "@/layout/god-praksis-page/types";
 import useGpQuery from "@/layout/god-praksis-page/useGpQuery";
 import ArticleGrid from "./ArticleGrid";
 import styles from "./articles.module.css";
-
-/**
- * TODO:
- * - Extract hardcoded values for initial article-length size (now 9),
- *   and articles fetched for each lazy-load (now 3).
- * Consts should be used here, in relevant `/god-praksis-page`-components,
- * `pages/gp/*.tsx` and `api/gp-articles.ts`
- */
-const INITIAL_PAGE = 3;
 
 const getKey = ({
   input: { pageIndex, previousPageData },
@@ -67,7 +59,10 @@ function ArticleList({ initialArticles }: ArticleListT) {
       initialArticles.length < 9
         ? null
         : getKey({
-            input: { pageIndex: pageIndex + INITIAL_PAGE, previousPageData },
+            input: {
+              pageIndex: pageIndex + GP_LAZYLOADED_ARTICLES,
+              previousPageData,
+            },
             innholdstypeQuery,
             undertemaQuery,
             temaQuery,

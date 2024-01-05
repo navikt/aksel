@@ -1,4 +1,7 @@
-import { GpGroupedArticlesT } from "@/layout/god-praksis-page/types";
+import {
+  GP_INITIAL_ARTICLES,
+  GpGroupedArticlesT,
+} from "@/layout/god-praksis-page/types";
 
 export function getArticleList(
   articles: GpGroupedArticlesT,
@@ -16,5 +19,5 @@ export function getArticleList(
         new Date(b.article?.publishedAt || "1970-01-01").getTime() -
         new Date(a.article?.publishedAt || "1970-01-01").getTime()
     )
-    .slice(0, 9);
+    .slice(0, GP_INITIAL_ARTICLES);
 }

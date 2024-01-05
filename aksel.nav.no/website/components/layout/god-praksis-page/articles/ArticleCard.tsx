@@ -31,9 +31,6 @@ export const ArticleCard = ({
   group: "initial" | "lazy";
   delay?: number;
 }) => {
-  /**
-   * TODO: This might be better resolved server-side in `initialProps`
-   */
   const date = useFormatedDate(publishedAt);
 
   const tDelay: CSSProperties = delay

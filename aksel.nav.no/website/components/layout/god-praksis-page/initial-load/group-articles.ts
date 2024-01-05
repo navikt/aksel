@@ -37,7 +37,7 @@ export function groupArticles({
     console.log(tema.articles.length);
     tema.articles.forEach((article) => {
       const found = articleMap.get(article._id);
-      /* !found && console.log(article.heading); */
+
       found
         ? articleMap.set(article._id, { ...found, undertema: tema.title })
         : articleMap.set(article._id, {

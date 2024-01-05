@@ -1,4 +1,5 @@
 import { groq } from "next-sanity";
+import { GP_INITIAL_ARTICLES } from "@/layout/god-praksis-page/types";
 
 export const heroNavQuery = groq`
 "heroNav": *[_type == "gp.tema"]{
@@ -110,8 +111,9 @@ export type GpArticleT = {
 export const initialGpMainPageArticles = groq`
   "initialInnholdstype": *[_type == "gp.innholdstype"]{
     title,
-    "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id]| order(publishedAt desc)[0...9]${baseGpArticleData}
+    "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id]| order(publishedAt desc)[0...${GP_INITIAL_ARTICLES}]${baseGpArticleData}
   }`;
+
 export type initialGpMainPageArticlesResponse = {
   initialInnholdstype: {
     title: string;
@@ -122,11 +124,11 @@ export type initialGpMainPageArticlesResponse = {
 export const initialTemaPageArticles = groq`
   "initialUndertema": *[_type == "gp.tema.undertema" && $slug == tema->slug.current]{
     title,
-    "articles": *[_type == "aksel_artikkel" && ^._id in undertema[]._ref] | order(publishedAt desc)[0...9]${baseGpArticleData}
+    "articles": *[_type == "aksel_artikkel" && ^._id in undertema[]._ref] | order(publishedAt desc)[0...${GP_INITIAL_ARTICLES}]${baseGpArticleData}
   },
   "initialInnholdstype": *[_type == "gp.innholdstype"]{
     title,
-    "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id && $slug in undertema[]->tema->slug.current]| order(publishedAt desc)[0...9]${baseGpArticleData}
+    "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id && $slug in undertema[]->tema->slug.current]| order(publishedAt desc)[0...${GP_INITIAL_ARTICLES}]${baseGpArticleData}
   }`;
 
 export type initialTemaPageArticlesResponse = {

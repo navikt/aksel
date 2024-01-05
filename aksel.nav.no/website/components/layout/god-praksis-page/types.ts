@@ -1,5 +1,15 @@
 import { GpArticleT } from "@/layout/god-praksis-page/queries";
 
+/**
+ * TODO:
+ * - Extract hardcoded values for initial article-length size (now 9),
+ *   and articles fetched for each lazy-load (now 3).
+ * Consts should be used here, in relevant `/god-praksis-page`-components,
+ * `pages/gp/*.tsx` and `api/gp-articles.ts`
+ */
+export const GP_LAZYLOADED_ARTICLES = 3;
+export const GP_INITIAL_ARTICLES = 9;
+
 export type GpTemaT = {
   title: string;
   slug: string;
