@@ -19,20 +19,17 @@ export function useScrollRangeOpacity(id: string) {
     if (!ref) {
       return;
     }
-    setScrollInline({
-      start: false,
-      end: ref.scrollWidth - ref.clientWidth - ref.scrollLeft > 0,
-    });
 
     const onScroll = () => {
       setScrollInline({
-        start: ref.scrollLeft > 0,
-        end: ref.scrollWidth - ref.clientWidth - ref.scrollLeft > 0,
+        start: ref.scrollLeft > 1,
+        end: ref.scrollLeft < ref.scrollWidth - ref.clientWidth - 1,
       });
     };
 
     const func = throttle(onScroll, 50);
 
+    onScroll();
     ref.addEventListener("scroll", func);
     return () => {
       ref.removeEventListener("scroll", func);

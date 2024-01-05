@@ -32,6 +32,11 @@ function ScrollFade({ id }: ScrollFadeProps) {
           hidden: !scrollBlock.start,
         })}
         icon={<ChevronLeftIcon fontSize="1.5rem" />}
+        onClick={() => {
+          const ref = document.getElementById(id);
+          if (!ref) return;
+          ref.scrollLeft -= 100;
+        }}
       />
       <Button
         variant="tertiary-neutral"
@@ -40,6 +45,11 @@ function ScrollFade({ id }: ScrollFadeProps) {
           hidden: !scrollBlock.end,
         })}
         icon={<ChevronRightIcon fontSize="1.5rem" />}
+        onClick={() => {
+          const ref = document.getElementById(id);
+          if (!ref) return;
+          ref.scrollLeft += 100;
+        }}
       />
     </>
   );

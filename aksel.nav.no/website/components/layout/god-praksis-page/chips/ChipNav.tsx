@@ -50,7 +50,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
         {capitalize(type)}
       </Label>
 
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden scroll-smooth">
         <ScrollFade id={id} />
         <ul
           id={id}
