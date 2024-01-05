@@ -5,4 +5,4 @@ const rulesPlugins = Object.keys(rules).map((ruleName) => {
   return createPlugin(`${ruleName}`, rules[ruleName]);
 });
 
-export default rulesPlugins;
+module.exports = rulesPlugins;
