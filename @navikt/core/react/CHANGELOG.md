@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.12.4
+
+### Patch Changes
+
+- Accessibility improvements to Radio and Checkbox component, so each label is only announced once with screen readers ([#2562](https://github.com/navikt/aksel/pull/2562))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.4
+  - @navikt/aksel-icons@5.12.4
+
 ## 5.12.3
 
 ### Patch Changes
