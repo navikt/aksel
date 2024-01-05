@@ -23,7 +23,7 @@ Branch `main` pusher rett til prod -> aksel.nav.no. For å utvikle nye features 
 
 ## Kode-eksempler
 
-Alle eksemplene våre ligger under `/website/pages/eksempler`. For å se endringene live kan man starte opp storybook med `yarn storybook:aksel`.
+Alle eksemplene våre ligger under `/website/pages/eksempler` og `/website/pages/templates`. For å se endringene live kan man starte opp storybook med `yarn storybook:aksel`.
 
 > Du trenger ikke secrets for å teste storybook
 
