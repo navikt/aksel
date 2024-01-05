@@ -27,7 +27,7 @@ const getKey = ({
     return null;
   }
 
-  return `/api/gp-articles?page=${pageIndex}${
+  return `/api/god-praksis/v2?page=${pageIndex}${
     temaQuery ? `&tema=${temaQuery}` : ""
   }${innholdstypeQuery ? `&innholdstype=${innholdstypeQuery}` : ""}${
     undertemaQuery ? `&undertema=${undertemaQuery}` : ""
