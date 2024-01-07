@@ -1,11 +1,15 @@
 import { defineArrayMember, defineField } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import { TaxonomyInput } from "./TaxonomyInput";
 
 export const gpTaxonomyObject = {
   title: "God praksis struktur (versjon 2)",
   name: "gp_taxonomy",
   type: "object",
   group: "staging",
+  components: {
+    input: TaxonomyInput,
+  },
   fields: [
     defineField({
       name: "innholdstype",
