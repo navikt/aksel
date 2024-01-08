@@ -318,3 +318,15 @@
     gap: var(--a-spacing-1);
   }
 }
+
+.navds-combobox__list-item:has(> img) {
+  display: grid;
+  grid-template-columns: 4rem auto 2rem;
+  gap: 0.5rem;
+  justify-content: unset;
+}
+
+.navds-combobox__list-item > img {
+  height: 2rem;
+  margin-right: var(--a-spacing-2);
+}
