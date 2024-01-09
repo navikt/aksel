@@ -5,7 +5,6 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   const [checkedValue, setCheckedValue] = useState("");
 
-  console.log(checkedValue);
   return (
     <Switch
       value="sms"
