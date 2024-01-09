@@ -1,3 +1,8 @@
+import { useRouter } from "next/router";
+import { GetStaticProps } from "next/types";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -12,11 +17,6 @@ import {
 } from "@/types";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
-import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
-import { useRouter } from "next/router";
-import { GetStaticProps } from "next/types";
-import { useEffect, useState } from "react";
-import useSWR from "swr";
 
 type ArticleT = ResolveContributorsSingleT<
   ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
@@ -80,7 +80,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
 
   const { data, error, isValidating } = useSWR(
     fetchMore
-      ? () => `/api/aksel-articles?lastPublishedAt=${lastPublishedAt}`
+      ? () => `/api/god-praksis/v1?lastPublishedAt=${lastPublishedAt}`
       : null,
     (query) => fetch(query).then((res) => res.json())
   );

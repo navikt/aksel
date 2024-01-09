@@ -16,6 +16,7 @@ module.exports = {
         "2xl": "1440px",
       },
       colors: {
+        "aksel-heading": "var(--a-deepblue-800)",
         pink: {
           50: "#fdf2f8",
           100: "#fce7f3",
