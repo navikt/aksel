@@ -43,6 +43,7 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
       oppdateringsvarsel,
       ...hiddenFields,
       defineField({
+        hidden: () => workspace !== "staging",
         name: "innholdstype",
         title: "Innholdstype",
         type: "reference",
@@ -55,6 +56,7 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
         /* validation: (Rule) => Rule.required(), */
       }),
       defineField({
+        hidden: () => workspace !== "staging",
         name: "undertema",
         title: "Undertema",
         type: "array",
