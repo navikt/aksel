@@ -1,6 +1,6 @@
 **/nais-dev.yaml
 **/nais-prod.yaml
-codemod/**/tests/**
+codemod/**/tests/**/*.js
 node_modules
 .next
 dist
