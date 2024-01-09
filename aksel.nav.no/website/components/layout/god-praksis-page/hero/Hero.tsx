@@ -18,15 +18,15 @@ function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
-      className="bg-gradient-to-tr isolate from-deepblue-200 via-deepblue-100 to-deepblue-100 relative overflow-clip transition-[height]"
+      className="relative isolate overflow-clip bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[height]"
     >
       <Cube />
       <HeroSelect heroNav={heroNav} currentSlug={tema?.slug} />
-      <Heading level="1" size="xlarge" className="text-aksel-heading z-10 mt-2">
+      <Heading level="1" size="xlarge" className="z-10 mt-2 text-aksel-heading">
         {tema?.title ?? "Alle tema"}
       </Heading>
       {tema?.description && (
-        <BodyLong size="large" className="mt-4 z-10 relative">
+        <BodyLong size="large" className="relative z-10 mt-4">
           {tema.description}
         </BodyLong>
       )}

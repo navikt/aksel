@@ -21,8 +21,5 @@
     "@navikt/ds-react": "^5.12.4",
     "@navikt/ds-tailwind": "^5.12.4",
     "@navikt/ds-tokens": "^5.12.4"
-  },
-  "devDependencies": {
-    "prettier-plugin-tailwindcss": "^0.2.3"
   }
 }
