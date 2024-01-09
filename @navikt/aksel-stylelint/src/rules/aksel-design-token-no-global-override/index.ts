@@ -1,11 +1,10 @@
-import stylelint from "stylelint";
 import { readFileSync } from "node:fs";
-
 import { Node as PostCSSNode } from "postcss";
+import stylelint from "stylelint";
 import { isCustomProperty } from "../../utils";
 
 const packageJson = JSON.parse(
-  readFileSync(`${__dirname}/../../../package.json`).toString()
+  readFileSync(`${__dirname}/../../../package.json`).toString(),
 );
 
 const ruleName = "aksel/design-token-no-global-override";
@@ -27,7 +26,7 @@ const checkDeclProp = (
   controlledPrefixes: string[],
   prop: string,
   postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode
+  rootNode: PostCSSNode,
 ) => {
   if (
     isCustomProperty(prop) &&

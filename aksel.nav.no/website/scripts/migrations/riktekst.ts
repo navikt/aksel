@@ -74,7 +74,7 @@ const main = async () => {
   const transactionClient = noCdnClient(token).transaction();
 
   const docs = await noCdnClient(token).fetch(
-    `*[_type in ["komponent_artikkel"]]`
+    `*[_type in ["komponent_artikkel"]]`,
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

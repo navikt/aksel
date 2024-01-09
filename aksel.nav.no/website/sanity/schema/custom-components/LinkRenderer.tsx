@@ -30,7 +30,7 @@ export const InternalLinkRenderer = (props) => {
 
   const { data, error, isValidating } = useSWR(
     `*[_id == "${props.value?.reference?._ref}"]{heading, 'slug': slug.current}[0]`,
-    (query) => client.fetch(query)
+    (query) => client.fetch(query),
   );
 
   if (

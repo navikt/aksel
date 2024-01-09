@@ -11,7 +11,7 @@ type State = {
 const updateState = (
   prevState: State,
   newState: State,
-  renders: React.MutableRefObject<number>
+  renders: React.MutableRefObject<number>,
 ) => {
   const { outerHeightStyle, overflow } = newState;
   // Need a large enough difference to update the height.
@@ -34,7 +34,7 @@ const updateState = (
         [
           "Textarea: Too many re-renders. The layout is unstable.",
           "TextareaAutosize limits the number of renders to prevent an infinite loop.",
-        ].join("\n")
+        ].join("\n"),
       );
     }
   }
@@ -86,7 +86,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
       value,
       ...other
     }: TextareaAutosizeProps,
-    ref
+    ref,
   ) => {
     const { current: isControlled } = useRef(value != null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -281,7 +281,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         />
       </>
     );
-  }
+  },
 );
 
 function isEmpty(obj: State) {

@@ -94,7 +94,7 @@ const allowedTokenNames = [];
 
 export const tokenExists = (
   controlledPrefixes: string[],
-  inputToken: string
+  inputToken: string,
 ) => {
   // "singleton" if statement (attempt at caching file parsing)
   if (!allowedTokenNames.length) {
@@ -119,7 +119,7 @@ export const tokenExists = (
 };
 
 const packageJson = JSON.parse(
-  readFileSync(`${__dirname}/../package.json`).toString()
+  readFileSync(`${__dirname}/../package.json`).toString(),
 );
 
 export const getPackageVersion = () => {

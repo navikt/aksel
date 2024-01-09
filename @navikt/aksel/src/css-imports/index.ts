@@ -1,13 +1,11 @@
-import { StyleMappings } from "@navikt/ds-css/config/_mappings";
-import { generateImportOutput } from "./generate-output";
-import { AnswersT, ComponentPrefix } from "./config";
-
-import { inquiry } from "./inquiry";
-import { exec } from "child_process";
-
 import chalk from "chalk";
+import { exec } from "child_process";
+import { StyleMappings } from "@navikt/ds-css/config/_mappings";
+import { AnswersT, ComponentPrefix } from "./config";
+import { generateImportOutput } from "./generate-output";
 import { getDirectories } from "./get-directories";
 import { getAllVersions } from "./get-version";
+import { inquiry } from "./inquiry";
 
 export async function cssImportsCommand() {
   const answers: AnswersT = {
@@ -36,10 +34,10 @@ export async function cssImportsCommand() {
       footer() {
         return chalk.grey(
           `${chalk.cyan(
-            `\n  Documentation:`
+            `\n  Documentation:`,
           )}\n  Regular: https://aksel.nav.no/grunnleggende/kode/css-import
   Partial: https://aksel.nav.no/grunnleggende/kode/css-import#h64650b1a4ad6
-  Full: https://aksel.nav.no/grunnleggende/kode/css-import#h4037598416ef\n`
+  Full: https://aksel.nav.no/grunnleggende/kode/css-import#h4037598416ef\n`,
         );
       },
     },
@@ -94,7 +92,7 @@ export async function cssImportsCommand() {
         choices: versions,
         footer() {
           return chalk.grey(
-            'Remember to match version with @navikt/ds-react!\nNote: CDN was introduced in v2.9.0, older versions not available.\nUse "static" import instead.'
+            'Remember to match version with @navikt/ds-react!\nNote: CDN was introduced in v2.9.0, older versions not available.\nUse "static" import instead.',
           );
         },
       },
@@ -131,7 +129,7 @@ export async function cssImportsCommand() {
         choices: getDirectories(),
         footer() {
           return chalk.grey(
-            "filtered out: node_moduels, dist, build, lib, .* (dotfiles)"
+            "filtered out: node_moduels, dist, build, lib, .* (dotfiles)",
           );
         },
       },
@@ -143,7 +141,7 @@ export async function cssImportsCommand() {
     foundComponents = await new Promise((resolve) => {
       exec(`node ${__dirname}/scan-code.js ${answers.scandir}`, (_, stdout) => {
         resolve(
-          stdout ? JSON.parse(stdout.trim().split("\n").slice(1).join("")) : []
+          stdout ? JSON.parse(stdout.trim().split("\n").slice(1).join("")) : [],
         );
       });
     });

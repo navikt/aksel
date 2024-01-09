@@ -26,7 +26,7 @@ const fuseStroke = new Fuse(
       { name: "variant", weight: 1 },
     ],
     shouldSort: false,
-  }
+  },
 );
 
 const fuseFill = new Fuse(getFillIcon(Object.values(meta)), {
@@ -47,7 +47,7 @@ export const IconPage = ({ name }: { name: string }) => {
   const focusRef = useRef(null);
 
   const [strokeIcons] = useState(
-    Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke")
+    Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),
   );
 
   const [fillIcons] = useState(getFillIcon(Object.values(meta)));
@@ -59,13 +59,13 @@ export const IconPage = ({ name }: { name: string }) => {
       return categorizeIcons(
         query
           ? fuseFill.search(query).map((result) => result.item as any)
-          : fillIcons
+          : fillIcons,
       );
     }
     return categorizeIcons(
       query
         ? fuseStroke.search(query).map((result) => result.item as any)
-        : strokeIcons
+        : strokeIcons,
     );
   }, [toggle, query, strokeIcons, fillIcons]);
 
@@ -73,10 +73,10 @@ export const IconPage = ({ name }: { name: string }) => {
     () =>
       Math.max(
         ...categorizeIcons(strokeIcons).map((cat) =>
-          Math.max(...cat.sub_categories.map((sub) => sub.sub_category.length))
-        )
+          Math.max(...cat.sub_categories.map((sub) => sub.sub_category.length)),
+        ),
       ),
-    [strokeIcons]
+    [strokeIcons],
   );
 
   return (
@@ -98,7 +98,7 @@ export const IconPage = ({ name }: { name: string }) => {
           <div className="mx-auto grid w-full max-w-screen-2xl px-4 pb-40 pt-20 sm:px-6">
             <div>
               <div>
-                <h1 className="text-deepblue-700 my-0 w-fit text-5xl font-bold">
+                <h1 className="my-0 w-fit text-5xl font-bold text-deepblue-700">
                   Aksel ikoner
                 </h1>
                 <div className="override-text-no-max mt-4 text-xl">
@@ -110,8 +110,8 @@ export const IconPage = ({ name }: { name: string }) => {
               <TitleLinks />
             </div>
 
-            <div className="bg-surface-default shadow-large z-10 mb-8 mt-16 h-full w-full rounded-2xl">
-              <div className="border-b-border-subtle bg-surface-default sticky top-0 z-20 grid items-center rounded-t-2xl border-b p-1">
+            <div className="z-10 mb-8 mt-16 h-full w-full rounded-2xl bg-surface-default shadow-large">
+              <div className="sticky top-0 z-20 grid items-center rounded-t-2xl border-b border-b-border-subtle bg-surface-default p-1">
                 <form
                   onSubmit={(e) => e.preventDefault()}
                   className="flex w-full flex-wrap-reverse items-center  gap-4 px-4 py-2 sm:flex-nowrap"
@@ -142,11 +142,11 @@ export const IconPage = ({ name }: { name: string }) => {
               <div className="flex">
                 <div
                   className={cl(
-                    "animate-fadeIn grid w-full place-content-start justify-stretch gap-8 px-6 py-8",
+                    "grid w-full animate-fadeIn place-content-start justify-stretch gap-8 px-6 py-8",
                     {
-                      "border-r-border-subtle border-r": !!name,
+                      "border-r border-r-border-subtle": !!name,
                       "basis-2/3": name,
-                    }
+                    },
                   )}
                 >
                   {categories.length === 0 && (
@@ -170,7 +170,7 @@ export const IconPage = ({ name }: { name: string }) => {
                             return (
                               <div
                                 key={sub.sub_category}
-                                className="border-t-border-subtle border-t py-2"
+                                className="border-t border-t-border-subtle py-2"
                               >
                                 <HGrid
                                   columns={{
@@ -182,12 +182,12 @@ export const IconPage = ({ name }: { name: string }) => {
                                   <Heading
                                     level="3"
                                     size="xsmall"
-                                    className="text-text-subtle leading-[44px]"
+                                    className="leading-[44px] text-text-subtle"
                                   >
                                     {sub.sub_category}
                                   </Heading>
 
-                                  <div className="gap-05 flex flex-wrap">
+                                  <div className="flex flex-wrap gap-05">
                                     {sub.icons.map((i) => {
                                       const T = Icons[`${i.id}Icon`]; // eslint-disable-line import/namespace
                                       if (T === undefined) {
@@ -207,11 +207,11 @@ export const IconPage = ({ name }: { name: string }) => {
                                             }
                                           }}
                                           className={cl(
-                                            "hover:bg-surface-neutral-subtle-hover bg-surface-subtle active:bg-surface-neutral-subtle-hover group relative grid aspect-square w-11 shrink-0 place-items-center rounded focus:outline-none focus:ring-blue-800 focus-visible:ring-2",
+                                            "group relative grid aspect-square w-11 shrink-0 place-items-center rounded bg-surface-subtle hover:bg-surface-neutral-subtle-hover focus:outline-none focus:ring-blue-800 focus-visible:ring-2 active:bg-surface-neutral-subtle-hover",
                                             {
-                                              "from-surface-selected bg-surface-selected ring-border-alt-3 z-10 bg-gradient-to-br to-teal-50 ring-1":
+                                              "z-10 bg-surface-selected bg-gradient-to-br from-surface-selected to-teal-50 ring-1 ring-border-alt-3":
                                                 i.id === name,
-                                            }
+                                            },
                                           )}
                                         >
                                           <span className="navds-sr-only">

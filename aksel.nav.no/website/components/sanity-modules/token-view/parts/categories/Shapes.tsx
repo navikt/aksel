@@ -13,7 +13,7 @@ export const ShapesView = ({ cat }: { cat: string }) => {
           <div key={x.name} id={x.name} className="flex w-fit items-center">
             <div
               style={{ borderRadius: x.value }}
-              className="bg-surface-alt-3-strong mr-3 grid h-16 w-16 place-content-center rounded-lg text-4xl leading-none"
+              className="mr-3 grid h-16 w-16 place-content-center rounded-lg bg-surface-alt-3-strong text-4xl leading-none"
             />
             <dl className="grid h-full">
               <dt className="inline-flex items-center gap-2">
@@ -24,7 +24,7 @@ export const ShapesView = ({ cat }: { cat: string }) => {
                   iconPosition="right"
                 />
               </dt>
-              <dd className="text-text-subtle text-medium mt-auto">
+              <dd className="mt-auto text-medium text-text-subtle">
                 {x.value}
               </dd>
             </dl>

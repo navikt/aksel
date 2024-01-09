@@ -45,14 +45,14 @@ export const SearchForm = () => {
     .filter((x) => !x[1].hidden)
     .filter(
       ([key]) =>
-        !(noHitsAndQuery(key) && noHits(key) && results?.hits[key] === 0)
+        !(noHitsAndQuery(key) && noHits(key) && results?.hits[key] === 0),
     );
 
   return (
     <form
       role="search"
       onSubmit={(e) => e.preventDefault()}
-      className="bg-surface-default grid w-full gap-2"
+      className="grid w-full gap-2 bg-surface-default"
     >
       <div className="flex items-center gap-1 p-1">
         <Search

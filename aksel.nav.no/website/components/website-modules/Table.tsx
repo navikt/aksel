@@ -14,24 +14,24 @@ export function AkselTable({
   withCopy?: boolean;
 }) {
   return (
-    <table className="border-border-subtle mb-7 w-full border-separate border-spacing-0 rounded-lg border">
+    <table className="mb-7 w-full border-separate border-spacing-0 rounded-lg border border-border-subtle">
       <thead>
         <tr className="rounded-t-lg text-left">
           {th.map((x) => (
             <th
               key={x.text}
               className={cl(
-                "font-regular bg-surface-subtle p-2 first-of-type:rounded-tl-lg last-of-type:rounded-tr-lg",
+                "bg-surface-subtle p-2 font-regular first-of-type:rounded-tl-lg last-of-type:rounded-tr-lg",
                 {
                   "hidden sm:table-cell": !!x.hideOnSm,
-                }
+                },
               )}
             >
               {x?.sronly ? <span className="sr-only">{x.text}</span> : x.text}
             </th>
           ))}
           {withCopy && (
-            <th className="font-regular bg-surface-subtle hidden p-2 last-of-type:rounded-tr-lg sm:table-cell">
+            <th className="hidden bg-surface-subtle p-2 font-regular last-of-type:rounded-tr-lg sm:table-cell">
               <span className="sr-only">Kopi</span>
             </th>
           )}

@@ -45,7 +45,7 @@ const BaseSEOPreset = {
           const aspectR = dimensions.width / dimensions.height;
           if (aspectR < 1.5 || aspectR > 2.4) {
             return `Må ha aspect-ratio på ~1.91:1. Er nå: ${aspectR.toFixed(
-              2
+              2,
             )}:1. (${dimensions.width}px/${dimensions.height}px)`;
           }
           return true;

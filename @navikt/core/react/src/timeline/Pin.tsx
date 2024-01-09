@@ -83,7 +83,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
 
     const mergedRef = useMemo(
       () => mergeRefs([refs.setReference, ref]),
-      [ref, refs.setReference]
+      [ref, refs.setReference],
     );
 
     const staticSide = {
@@ -148,7 +148,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
         )}
       </>
     );
-  }
+  },
 ) as PinType;
 
 Pin.componentType = "pin";

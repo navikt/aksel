@@ -44,19 +44,21 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
       <ul className="grid grid-cols-[repeat(auto-fill,_minmax(min(17rem,_100%),_1fr))] gap-6">
         {sorted.map((x) => (
           <li key={x._id}>
-            <div className="bg-surface-subtle focus-within:ring-border-focus shadow-xsmall hover:shadow-small min-h-56 group relative rounded-2xl focus-within:ring-[3px]">
+            <div className="group relative min-h-56 rounded-2xl bg-surface-subtle shadow-xsmall focus-within:ring-[3px] focus-within:ring-border-focus hover:shadow-small">
               <div
                 className={cl(
                   "flex max-h-44 items-center justify-center overflow-hidden rounded-t-2xl filter",
                   {
                     "hue-rotate-[65deg]": x?.status?.tag === "beta",
                     grayscale: x?.status?.tag === "deprecated",
-                  }
+                  },
                 )}
               >
                 {x.status?.bilde ? (
                   <Image
-                    src={urlFor(x.status?.bilde).auto("format").url()}
+                    src={urlFor(x.status?.bilde)
+                      .auto("format")
+                      .url()}
                     width="200"
                     height="200"
                     layout="fixed"

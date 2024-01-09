@@ -1,14 +1,14 @@
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
+import styles from "@navikt/ds-css/dist/index.css?inline";
 import {
-  Provider,
   Button,
   Checkbox,
   CheckboxGroup,
   Modal,
+  Provider,
   Tooltip,
 } from "@navikt/ds-react";
-import styles from "@navikt/ds-css/dist/index.css?inline";
-import React, { useState } from "react";
 
 class CustomComponent extends HTMLElement {
   connectedCallback() {
@@ -30,7 +30,7 @@ class CustomComponent extends HTMLElement {
         </Tooltip>
         <ModalWrapper />
         <br />
-      </Provider>
+      </Provider>,
     );
   }
 }

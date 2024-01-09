@@ -73,7 +73,7 @@ function ArticleList({ initialArticles }: ArticleListT) {
     {
       revalidateFirstPage: false,
       initialSize: 0,
-    }
+    },
   );
 
   const atEndOfLazy = data && data[data.length - 1]?.length < 3;
@@ -86,7 +86,7 @@ function ArticleList({ initialArticles }: ArticleListT) {
         loaded={router.isReady}
       />
       {!atEndOfLazy && initialArticles.length === 9 && router.isReady && (
-        <div className={cl("pt-8 flex justify-center", styles.animatedFade)}>
+        <div className={cl("flex justify-center pt-8", styles.animatedFade)}>
           <Button
             variant="tertiary-neutral"
             onClick={() => setSize(size + 1)}

@@ -45,7 +45,7 @@ const upsertEntry = (
     lastSeenPackage: string;
     lastSeenVersion: string;
   },
-  value: Node
+  value: Node,
 ) => {
   const v = lastSeenVersion.split(".");
   lastSeenVersion = `${v[0]}.${v[1]}`;
@@ -65,7 +65,7 @@ const processNode = (node: Root) => {
   visitParents(node, (childNode, ancestors) => {
     if (childNode.type === "text" && childNode.value.startsWith("! -")) {
       const parent = ancestors.findLast(
-        (ancestor) => ancestor.type === "paragraph"
+        (ancestor) => ancestor.type === "paragraph",
       ) as Paragraph;
       visit(parent, (node2, index, parent2) => {
         if (
@@ -105,7 +105,7 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
         node.children[0].value.startsWith("Updated dependencies")
       ) {
         const listIndex = ancestors.findLastIndex(
-          (ancestor) => ancestor.type === "list"
+          (ancestor) => ancestor.type === "list",
         );
         const parent = ancestors[listIndex] as List;
 
@@ -180,7 +180,7 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
         upsertEntry(
           changelog,
           { lastSeenPackage, lastSeenVersion },
-          structuredClone(node)
+          structuredClone(node),
         );
       }
       return SKIP;

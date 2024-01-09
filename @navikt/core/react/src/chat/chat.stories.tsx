@@ -1,6 +1,6 @@
+import { Meta } from "@storybook/react";
 import React from "react";
 import { Chat } from "../index";
-import { Meta } from "@storybook/react";
 import { POSITIONS, SIZES } from "./Chat";
 
 export default {

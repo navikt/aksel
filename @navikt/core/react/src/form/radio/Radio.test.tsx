@@ -1,7 +1,7 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import faker from "faker";
+import React from "react";
 import { Radio, RadioGroup } from ".";
 
 const value1 = faker.datatype.string();

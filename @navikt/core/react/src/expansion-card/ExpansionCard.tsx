@@ -114,7 +114,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       size = "medium",
       ...rest
     },
-    ref
+    ref,
   ) => {
     const [_open, _setOpen] = useState(defaultOpen);
 
@@ -144,13 +144,13 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
             {
               "navds-expansioncard--open": open ?? _open,
               "navds-expansioncard--no-animation": !shouldFade.current,
-            }
+            },
           )}
           ref={ref}
         />
       </ExpansionCardContext.Provider>
     );
-  }
+  },
 ) as ExpansionCardComponent;
 
 ExpansionCard.Header = ExpansionCardHeader;

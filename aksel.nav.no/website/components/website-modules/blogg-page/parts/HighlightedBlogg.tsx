@@ -56,7 +56,7 @@ export const HighlightedBlogg = ({
           {blogg?.ingress}
         </BodyLong>
         {getAuthors(blogg).length > 0 && (
-          <BodyShort size="small" className="text-text-subtle mt-4 flex gap-2">
+          <BodyShort size="small" className="mt-4 flex gap-2 text-text-subtle">
             <span className="font-semibold">{getAuthors(blogg)[0]}</span>
             <span>{date}</span>
           </BodyShort>
@@ -103,7 +103,7 @@ export const HighlightedBlogg = ({
           {blogg?.ingress}
         </BodyLong>
         {getAuthors(blogg).length > 0 && (
-          <BodyShort size="small" className="text-text-subtle mt-4 flex gap-2">
+          <BodyShort size="small" className="mt-4 flex gap-2 text-text-subtle">
             <span className="font-semibold">{getAuthors(blogg)[0]}</span>
             <span>{date}</span>
           </BodyShort>

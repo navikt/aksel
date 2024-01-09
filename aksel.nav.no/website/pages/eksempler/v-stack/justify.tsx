@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="bg-deepblue-50 flex h-72">
+    <div className="flex h-72 bg-deepblue-50">
       <HStack gap="2" wrap={false}>
         <VStack justify="center">
           <Placeholder text="center" />
@@ -47,7 +47,7 @@ const Placeholder = ({
 }) => {
   return (
     <div
-      className="min-h-4 text-text-on-action h-auto w-auto rounded bg-teal-600 p-2"
+      className="h-auto min-h-4 w-auto rounded bg-teal-600 p-2 text-text-on-action"
       style={{ padding: noPadding && 0 }}
     >
       {text}
@@ -56,7 +56,7 @@ const Placeholder = ({
 };
 
 const Divider = () => {
-  return <hr className="border-r-border-divider m-0 h-full border-r" />;
+  return <hr className="m-0 h-full border-r border-r-border-divider" />;
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

@@ -30,7 +30,7 @@ describe("Testing generateTableOfContent function", () => {
       generateTableOfContents({
         type: "aksel_artikkel",
         content: komponentPage,
-      })
+      }),
     ).toEqual(generalPageOut);
   });
 
@@ -40,7 +40,7 @@ describe("Testing generateTableOfContent function", () => {
         type: "komponent_artikkel",
         content: komponentPage,
         intro: true,
-      })
+      }),
     ).toEqual(komponentOutWithIntro);
   });
 });

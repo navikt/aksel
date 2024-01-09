@@ -7,12 +7,12 @@ import NextLink from "next/link";
 const Divider = () => (
   <div
     aria-hidden
-    className="bg-border-divider hidden h-2/3 w-[1px] rounded-md md:block"
+    className="hidden h-2/3 w-[1px] rounded-md bg-border-divider md:block"
   />
 );
 
 export const TitleLinks = () => (
-  <ul className="text-medium item-start mt-12 flex flex-col gap-4 md:flex-row md:items-center">
+  <ul className="item-start mt-12 flex flex-col gap-4 text-medium md:flex-row md:items-center">
     <li className="flex items-center gap-2 leading-none">
       <NextLink
         href="https://www.figma.com/community/file/1214869602572392330"

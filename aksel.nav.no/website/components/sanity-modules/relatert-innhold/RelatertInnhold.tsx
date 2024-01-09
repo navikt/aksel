@@ -18,9 +18,9 @@ const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
     x?.intern ? `/${x.intern_lenke}` : x.ekstern_link;
 
   return (
-    <div className="ring-border-subtle toc-ignore bg-surface-neutral-subtle my-7 max-w-2xl rounded-lg p-4 ring-1 ring-inset dark:bg-gray-800 sm:p-6">
+    <div className="toc-ignore my-7 max-w-2xl rounded-lg bg-surface-neutral-subtle p-4 ring-1 ring-inset ring-border-subtle dark:bg-gray-800 sm:p-6">
       <Heading
-        className="override-text-no-max text-text-subtle dark:text-text-on-inverted flex items-center gap-2"
+        className="override-text-no-max flex items-center gap-2 text-text-subtle dark:text-text-on-inverted"
         size="small"
         as="p"
         spacing
@@ -37,10 +37,10 @@ const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
               onClick={(e) =>
                 amplitudeLogNavigation(
                   "relatert-innhold",
-                  e.currentTarget.getAttribute("href")
+                  e.currentTarget.getAttribute("href"),
                 )
               }
-              className="dark:text-text-on-inverted text-xl font-semibold text-gray-800"
+              className="text-xl font-semibold text-gray-800 dark:text-text-on-inverted"
             >
               {x.title}
             </Link>

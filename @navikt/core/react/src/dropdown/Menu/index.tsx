@@ -86,7 +86,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
         }}
       />
     );
-  }
+  },
 ) as MenuType;
 
 Menu.List = List;

@@ -40,7 +40,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
     <HGrid gap="2" columns={{ md: 1, lg: "auto 1fr" }} align="center">
       <Label
         as="span"
-        className={cl("text-aksel-heading flex gap-2 items-center", {
+        className={cl("flex items-center gap-2 text-aksel-heading", {
           "text-violet-600": type === "innholdstype",
           "text-teal-700": type === "undertema",
         })}
@@ -54,7 +54,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
         <ScrollFade id={id} />
         <ul
           id={id}
-          className={cl("overflow-x-scroll flex gap-2 p-1", styles.chips)}
+          className={cl("flex gap-2 overflow-x-scroll p-1", styles.chips)}
         >
           {data.map((entry) => (
             <li key={entry.title}>
@@ -62,14 +62,14 @@ function ChipNav({ type, data }: ChipsNavProps) {
                 aria-pressed={encodeURIComponent(entry.title) === query?.[type]}
                 onClick={() => handleClick(entry.title)}
                 className={cl(
-                  "whitespace-nowrap focus:outline-none transition-opacity focus-visible:shadow-focus-gap ring-1 ring-inset px-3 py-1 min-h-8 grid aria-pressed:text-text-on-inverted place-content-center bg-surface-neutral-subtle rounded-full",
-                  "disabled:bg-surface-neutral-subtle disabled:ring-border-default disabled:opacity-40",
+                  "grid min-h-8 place-content-center whitespace-nowrap rounded-full bg-surface-neutral-subtle px-3 py-1 ring-1 ring-inset transition-opacity focus:outline-none focus-visible:shadow-focus-gap aria-pressed:text-text-on-inverted",
+                  "disabled:bg-surface-neutral-subtle disabled:opacity-40 disabled:ring-border-default",
                   {
-                    "hover:bg-violet-50 ring-violet-700/50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
+                    "ring-violet-700/50 hover:bg-violet-50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
                       type === "innholdstype",
-                    "hover:bg-teal-50 ring-teal-700/50 aria-pressed:bg-teal-700 hover:aria-pressed:bg-teal-800":
+                    "ring-teal-700/50 hover:bg-teal-50 aria-pressed:bg-teal-700 hover:aria-pressed:bg-teal-800":
                       type === "undertema",
-                  }
+                  },
                 )}
                 disabled={entry.count === 0}
               >

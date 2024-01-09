@@ -78,7 +78,7 @@ export const Iframe = (props: IframeProps) => {
 
   return (
     <div className="flex h-full w-full flex-col items-center">
-      <div className="border-b-border-subtle place-self-stretch border-b p-2">
+      <div className="place-self-stretch border-b border-b-border-subtle p-2">
         <HStack align="center" gap="2">
           <CopyButton copyText={displayUrl} size="small" text="Kopier url" />
           <Spacer />
@@ -112,7 +112,7 @@ export const Iframe = (props: IframeProps) => {
       </div>
       <div className="h-full w-full">
         {loading && (
-          <div className="bg-surface-backdrop absolute inset-0 grid h-full w-full place-content-center">
+          <div className="absolute inset-0 grid h-full w-full place-content-center bg-surface-backdrop">
             <Loader size="2xlarge" variant="inverted" />
           </div>
         )}

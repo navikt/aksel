@@ -1,6 +1,5 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyShort } from "../typography";
 import PaginationItem, {
@@ -72,7 +71,7 @@ export const getSteps = ({
 
   const siblingsStart = Math.max(
     Math.min(page - siblingCount, count - boundaryCount - siblingCount * 2 - 1),
-    boundaryCount + 2
+    boundaryCount + 2,
   );
   const siblingsEnd = siblingsStart + siblingCount * 2;
 
@@ -122,7 +121,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       ),
       ...rest
     },
-    ref
+    ref,
   ) => {
     if (page < 1) {
       console.error("page cannot be less than 1");
@@ -148,7 +147,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
         className={cl(
           "navds-pagination",
           `navds-pagination--${size}`,
-          className
+          className,
         )}
       >
         <ul className="navds-pagination__list">
@@ -204,7 +203,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                   </Item>
                 </li>
               );
-            }
+            },
           )}
           <li>
             <Item
@@ -239,7 +238,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
         </ul>
       </nav>
     );
-  }
+  },
 ) as PaginationType;
 
 Pagination.Item = PaginationItem;

@@ -52,7 +52,7 @@ export const ConfirmationPanel = forwardRef<
 >(({ className, children, label, ...props }, ref) => {
   const { errorId, showErrorMsg, hasError, size, inputProps } = useFormField(
     props,
-    "confirmation-panel"
+    "confirmation-panel",
   );
 
   const id = useId();
@@ -82,7 +82,7 @@ export const ConfirmationPanel = forwardRef<
           {...inputProps}
           aria-describedby={cl(
             inputProps["aria-describedby"],
-            children && `confirmation-panel-${id}`
+            children && `confirmation-panel-${id}`,
           )}
           error={hasError}
           size={size}

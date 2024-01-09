@@ -1,9 +1,9 @@
+import chalk from "chalk";
 import { Command } from "commander";
 import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "path";
 import { getMigrationPath, getWarning } from "./migrations";
-import chalk from "chalk";
 
 const ignoreNodeModules = [
   "**/node_modules/**",
@@ -16,11 +16,11 @@ const ignoreNodeModules = [
 export async function runCodeshift(
   input: string,
   options: any,
-  program: Command
+  program: Command,
 ) {
   const codemodPath = path.join(
     __dirname,
-    `./transforms/${getMigrationPath(input)}.js`
+    `./transforms/${getMigrationPath(input)}.js`,
   );
 
   const filepaths = fg.sync([options.glob ?? getDefaultGlob(options?.ext)], {

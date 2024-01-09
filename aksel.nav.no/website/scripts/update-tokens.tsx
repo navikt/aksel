@@ -20,13 +20,13 @@ export const updateTokens = async () => {
   // first let's fetch the current state from sanity,
   // So that we can delete old/changed tokens
   const remoteTokens = await noCdnClient(writeKey).fetch(
-    `*[_type == "token_kategori"]`
+    `*[_type == "token_kategori"]`,
   );
 
   for (const token of remoteTokens) {
     if (
       !allTokens.find(
-        (x) => token._id === `${x.title.split("-").join("_")}_tokenkategori`
+        (x) => token._id === `${x.title.split("-").join("_")}_tokenkategori`,
       )
     ) {
       transactionClient.delete(token._id);
@@ -38,7 +38,7 @@ export const updateTokens = async () => {
       _id: `${c.title.split("-").join("_")}_tokenkategori`,
       _type: "token_kategori",
       ...c,
-    })
+    }),
   );
 
   await transactionClient

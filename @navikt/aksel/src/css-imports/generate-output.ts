@@ -1,18 +1,18 @@
-import { AnswersT, ComponentPrefix, layerSuffix } from "./config.js";
-import {
-  formCss,
-  typoCss,
-  componentsCss,
-  StyleMappings,
-  componentDir,
-  rootDir,
-  globalDir,
-  primitivesCss,
-} from "@navikt/ds-css/config/_mappings";
-import { inquiry } from "./inquiry";
+import chalk from "chalk";
 import clipboard from "clipboardy";
 import lodash from "lodash";
-import chalk from "chalk";
+import {
+  StyleMappings,
+  componentDir,
+  componentsCss,
+  formCss,
+  globalDir,
+  primitivesCss,
+  rootDir,
+  typoCss,
+} from "@navikt/ds-css/config/_mappings";
+import { AnswersT, ComponentPrefix, layerSuffix } from "./config.js";
+import { inquiry } from "./inquiry";
 
 export async function generateImportOutput(answers: AnswersT) {
   const useCdn = answers.cdn === "yes";
@@ -39,7 +39,7 @@ export async function generateImportOutput(answers: AnswersT) {
   answers["config-type"] === "regular"
     ? imports.push(simpleOutput(useCdn, answers.layers === "yes", version))
     : imports.push(
-        ...advancedOutput(answers, useCdn, answers.layers === "yes", version)
+        ...advancedOutput(answers, useCdn, answers.layers === "yes", version),
       );
 
   if (useTailwind) {
@@ -63,7 +63,7 @@ ${imports.join("\n")}
     console.log(
       `We recommend using Static imports, then uploading the your bundled static-files to your own CDN-instance.
 ✔︎ This allows you to control the version of the CSS-files with package.json, and avoids desync between ds-react/ds-css.
-✔︎ Remember to add 'https://cdn.nav.no' to your applications CSP!`
+✔︎ Remember to add 'https://cdn.nav.no' to your applications CSP!`,
     );
   }
 
@@ -71,17 +71,17 @@ ${imports.join("\n")}
     console.log(chalk.bold.underline.cyan(`\nNotes on Tailwind-use 📝`));
     console.log(
       `When using tailwind with Aksel, you will need to add the postcss plugin ${chalk.cyan(
-        "postcss-import"
+        "postcss-import",
       )}
 ✔︎ NPM: https://www.npmjs.com/package/postcss-import
-✔︎ Read more here: https://aksel.nav.no/grunnleggende/kode/tailwind`
+✔︎ Read more here: https://aksel.nav.no/grunnleggende/kode/tailwind`,
     );
   }
 
   if (answers.layers === "yes") {
     console.log(chalk.bold.underline.cyan(`\nNotes on Layers 📝`));
     console.log(
-      `Layers is not yet supported in Safari <= 15.3. (https://caniuse.com/css-cascade-layers)`
+      `Layers is not yet supported in Safari <= 15.3. (https://caniuse.com/css-cascade-layers)`,
     );
   }
 
@@ -101,11 +101,11 @@ function advancedOutput(
   answers: AnswersT,
   cdn: boolean,
   layers: boolean,
-  version: string
+  version: string,
 ) {
   const imports = ["/* Defaults */"];
   const baselineImports = answers.imports.filter(
-    (x) => !x.startsWith(ComponentPrefix) && x !== "default"
+    (x) => !x.startsWith(ComponentPrefix) && x !== "default",
   );
 
   const componentImports = answers.imports
@@ -146,7 +146,7 @@ function advancedOutput(
 
   if (componentImportsList.find((x) => x === primitivesCss)) {
     componentImportsList = componentImportsList.filter(
-      (x) => x !== primitivesCss
+      (x) => x !== primitivesCss,
     );
     componentImportsList.unshift(primitivesCss);
   }

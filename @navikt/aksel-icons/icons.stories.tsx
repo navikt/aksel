@@ -1,7 +1,7 @@
-import * as AkselIcons from "@navikt/aksel-icons";
-import { StarFillIcon } from "@navikt/aksel-icons";
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
+import * as AkselIcons from "@navikt/aksel-icons";
+import { StarFillIcon } from "@navikt/aksel-icons";
 
 const meta = {
   title: "aksel-icons/Icons",

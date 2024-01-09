@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { BodyShort } from "../typography";
 
 export interface DataCellProps
@@ -30,7 +30,7 @@ export const DataCell: DataCellType = forwardRef(
         {children}
       </BodyShort>
     );
-  }
+  },
 );
 
 export default DataCell;

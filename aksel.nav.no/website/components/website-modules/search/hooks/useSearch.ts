@@ -11,7 +11,7 @@ export const useSearch = () => {
 
   const { data, error, isValidating } = useSWRImmutable(
     `/searchindex.json`,
-    (query) => fetch(query).then((res) => res.json())
+    (query) => fetch(query).then((res) => res.json()),
   );
 
   const updateResults = useMemo(
@@ -26,9 +26,9 @@ export const useSearch = () => {
         const formatedResults = formatResults(
           rawResults.filter((x) =>
             (tags.length > 0 ? tags : allArticleDocuments).includes(
-              x.item._type
-            )
-          )
+              x.item._type,
+            ),
+          ),
         );
 
         setFuseResults({
@@ -42,7 +42,7 @@ export const useSearch = () => {
           filter: tags,
         });
       }),
-    [data]
+    [data],
   );
 
   return {

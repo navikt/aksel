@@ -4,7 +4,7 @@ export default function removePropsFromComponent(
   j: core.JSCodeshift,
   root: Collection<any>,
   componentName: string,
-  propsToRemove: string[]
+  propsToRemove: string[],
 ) {
   const component = root.findJSXElements(componentName);
 

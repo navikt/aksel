@@ -41,15 +41,15 @@ export const ArticleCard = ({
     <Link
       href={`/${slug}`}
       className={cl(
-        "flex-shrink w-full focus:outline-none focus-visible:shadow-focus overflow-hidden text-ellipsis transition-shadow ease-out hover:shadow-large p-5 rounded-large bg-surface-default shadow-small",
+        "w-full flex-shrink overflow-hidden text-ellipsis rounded-large bg-surface-default p-5 shadow-small transition-shadow ease-out hover:shadow-large focus:outline-none focus-visible:shadow-focus",
         {
           [styles.animatedFade]: group === "initial",
           [styles.animatedFadeLazy]: group === "lazy",
-        }
+        },
       )}
       style={tDelay}
     >
-      <VStack justify="space-between" className="min-h-full relative">
+      <VStack justify="space-between" className="relative min-h-full">
         <div>
           <Heading
             size="small"
@@ -71,15 +71,15 @@ export const ArticleCard = ({
             </BodyLong>
           )}
         </div>
-        <div className="flex gap-2 justify-between items-center mt-6">
-          <div className="flex gap-3 flex-wrap items-center font-semibold">
+        <div className="mt-6 flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-3 font-semibold">
             {currentUndertema && (
-              <span className="text-teal-700 flex gap-05 items-center">
+              <span className="flex items-center gap-05 text-teal-700">
                 <TagFillIcon aria-hidden />
                 <span>{currentUndertema}</span>
               </span>
             )}
-            <span className="text-violet-600 flex gap-05 items-center">
+            <span className="flex items-center gap-05 text-violet-600">
               <FileFillIcon aria-hidden />
               <span>{innholdstype}</span>
             </span>

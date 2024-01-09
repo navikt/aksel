@@ -2,7 +2,7 @@ import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
 import React, { createContext, useContext, useState } from "react";
 import { useDayPicker } from "react-day-picker";
-import { getInitialYear, Matcher } from "../utils";
+import { Matcher, getInitialYear } from "../utils";
 
 export type SharedMonthContextType = {
   hasDropdown: boolean;

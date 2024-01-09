@@ -1,6 +1,6 @@
-import { CalendarIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
-import React, { forwardRef, InputHTMLAttributes, useRef } from "react";
+import React, { InputHTMLAttributes, forwardRef, useRef } from "react";
+import { CalendarIcon } from "@navikt/aksel-icons";
 import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
@@ -84,7 +84,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "navds-form-field--readonly": readOnly,
           "navds-text-field--readonly": readOnly,
           "navds-date__field--readonly": readOnly,
-        }
+        },
       )}
     >
       <Label
@@ -121,7 +121,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
             "navds-date__field-input",
             "navds-text-field__input",
             "navds-body-short",
-            `navds-body-short--${size}`
+            `navds-body-short--${size}`,
           )}
           size={isDatepickerVariant ? 11 : 14}
         />
@@ -159,9 +159,9 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
 });
 
 export const DatePickerInput = forwardRef<HTMLInputElement, DateInputProps>(
-  (props, ref) => <DateInput {...props} ref={ref} />
+  (props, ref) => <DateInput {...props} ref={ref} />,
 );
 
 export const MonthPickerInput = forwardRef<HTMLInputElement, DateInputProps>(
-  (props, ref) => <DateInput {...props} variant="monthpicker" ref={ref} />
+  (props, ref) => <DateInput {...props} variant="monthpicker" ref={ref} />,
 );

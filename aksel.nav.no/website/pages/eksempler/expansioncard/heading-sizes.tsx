@@ -52,26 +52,26 @@ const Innhold = () => (
     <Label as="p" spacing>
       Slik beregner vi sykepengene
     </Label>
-    <dl className="border-border-subtle grid gap-1 border-b pb-6">
-      <div className="border-border-default flex justify-between border-b py-1">
+    <dl className="grid gap-1 border-b border-border-subtle pb-6">
+      <div className="flex justify-between border-b border-border-default py-1">
         <dt>Beregnet månedslønn</dt>
         <dd>27 256 kr</dd>
       </div>
-      <div className="border-border-default flex justify-between border-b py-1">
+      <div className="flex justify-between border-b border-border-default py-1">
         <dt>Omgregnet til årslønn</dt>
         <dd>327 072 kr</dd>
       </div>
-      <div className="border-border-default flex justify-between border-b py-1">
+      <div className="flex justify-between border-b border-border-default py-1">
         <dt className="font-semibold">Daglig sykepengebeløp</dt>
         <dd>1 258 kr</dd>
       </div>
     </dl>
     <dl className="pt-6">
-      <div className="border-border-default flex justify-between border-b py-1">
+      <div className="flex justify-between border-b border-border-default py-1">
         <dt>Utbetalinger totalt</dt>
         <dd>5 dager</dd>
       </div>
-      <div className="border-border-default flex justify-between border-b py-1">
+      <div className="flex justify-between border-b border-border-default py-1">
         <dt className="font-semibold">Sykepengebeløp</dt>
         <dd>5 384 kr</dd>
       </div>

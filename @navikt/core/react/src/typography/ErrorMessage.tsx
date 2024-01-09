@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -49,10 +49,10 @@ export const ErrorMessage: OverridableComponent<
         }),
         {
           "navds-label--small": size === "small",
-        }
+        },
       )}
     />
-  )
+  ),
 );
 
 export default ErrorMessage;

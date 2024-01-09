@@ -12,7 +12,7 @@ import { SealCheckmarkIcon } from "@navikt/aksel-icons";
 
 export const createWrappedApproveAction = () => {
   const WrappedApprove = (
-    props: DocumentActionProps
+    props: DocumentActionProps,
   ): DocumentActionDescription | null => {
     const { patch, publish } = useDocumentOperation(props.id, props.type);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -32,7 +32,7 @@ export const createWrappedApproveAction = () => {
             },
           },
         ],
-        props.published
+        props.published,
       );
     };
 

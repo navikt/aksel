@@ -27,7 +27,7 @@ const Example = () => {
             setSelected(
               selected.includes(c)
                 ? selected.filter((x) => x !== c)
-                : [...selected, c]
+                : [...selected, c],
             )
           }
         >

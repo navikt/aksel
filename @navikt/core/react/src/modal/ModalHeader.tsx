@@ -1,5 +1,5 @@
-import React, { forwardRef, useContext } from "react";
 import cl from "clsx";
+import React, { forwardRef, useContext } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { ModalContext } from "./ModalContext";
@@ -36,7 +36,7 @@ const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 
 export default ModalHeader;

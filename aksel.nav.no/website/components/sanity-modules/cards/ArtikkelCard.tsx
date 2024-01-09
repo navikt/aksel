@@ -34,11 +34,11 @@ const ArtikkelCard = ({
   ...rest
 }: ArtikkelCardProps) => {
   const date = useFormatedDate(
-    (rest as any)?.updateInfo?.lastVerified ?? publishedAt ?? _updatedAt
+    (rest as any)?.updateInfo?.lastVerified ?? publishedAt ?? _updatedAt,
   );
 
   return (
-    <div className="shadow-xsmall hover:shadow-small focus-within:ring-border-focus bg-surface-default group relative rounded-lg p-3 pb-16 focus-within:ring-[3px] sm:p-5 sm:pb-16">
+    <div className="group relative rounded-lg bg-surface-default p-3 pb-16 shadow-xsmall focus-within:ring-[3px] focus-within:ring-border-focus hover:shadow-small sm:p-5 sm:pb-16">
       <NextLink
         href={{
           pathname: `/${slug}`,
@@ -51,7 +51,7 @@ const ArtikkelCard = ({
         onClick={(e) =>
           amplitudeLogNavigation(
             "artikkel-kort",
-            e.currentTarget.getAttribute("href")
+            e.currentTarget.getAttribute("href"),
           )
         }
       >
@@ -84,7 +84,7 @@ const ArtikkelCard = ({
             <Detail
               as="span"
               uppercase
-              className="text-text-subtle absolute bottom-5"
+              className="absolute bottom-5 text-text-subtle"
             >
               {tema[0]}
             </Detail>

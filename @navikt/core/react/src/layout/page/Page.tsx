@@ -1,6 +1,6 @@
-import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import { OverridableComponent } from "../../util";
 import { PageBlock } from "./parts/PageBlock";
 
@@ -49,7 +49,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
         contentBlockPadding = "end",
         ...rest
       },
-      ref
+      ref,
     ) => {
       const style: React.CSSProperties = {
         ..._style,
@@ -77,7 +77,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
           {footer}
         </Component>
       );
-    }
+    },
   );
 
 /**

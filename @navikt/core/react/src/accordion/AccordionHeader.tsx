@@ -1,6 +1,6 @@
-import { ChevronDownIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Heading } from "../typography";
 import { AccordionContext } from "./AccordionContext";
 import { AccordionItemContext } from "./AccordionItem";
@@ -20,7 +20,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     if (itemContext === null) {
       console.error(
-        "<Accordion.Header> has to be used within an <Accordion.Item>, which in turn must be within an <Accordion>"
+        "<Accordion.Header> has to be used within an <Accordion.Item>, which in turn must be within an <Accordion>",
       );
       return null;
     }
@@ -53,7 +53,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         </Heading>
       </button>
     );
-  }
+  },
 );
 
 export default AccordionHeader;

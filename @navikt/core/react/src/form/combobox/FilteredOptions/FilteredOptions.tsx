@@ -1,12 +1,12 @@
-import React from "react";
 import cl from "clsx";
+import React from "react";
 import { CheckmarkIcon, PlusIcon } from "@navikt/aksel-icons";
-import { useFilteredOptionsContext } from "./filteredOptionsContext";
-import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { useInputContext } from "../Input/inputContext";
 import { Loader } from "../../../loader";
 import { BodyShort, Label } from "../../../typography";
+import { useInputContext } from "../Input/inputContext";
+import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import filteredOptionsUtil from "./filtered-options-util";
+import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const FilteredOptions = () => {
   const {
@@ -60,7 +60,7 @@ const FilteredOptions = () => {
               activeDecendantId !== filteredOptionsUtil.getAddNewOptionId(id)
             ) {
               virtualFocus.moveFocusToElement(
-                filteredOptionsUtil.getAddNewOptionId(id)
+                filteredOptionsUtil.getAddNewOptionId(id),
               );
               setIsMouseLastUsedInputDevice(true);
             }
@@ -114,7 +114,7 @@ const FilteredOptions = () => {
               activeDecendantId !== filteredOptionsUtil.getOptionId(id, option)
             ) {
               virtualFocus.moveFocusToElement(
-                filteredOptionsUtil.getOptionId(id, option)
+                filteredOptionsUtil.getOptionId(id, option),
               );
               setIsMouseLastUsedInputDevice(true);
             }

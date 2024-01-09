@@ -29,7 +29,7 @@ const landingPages = [
 
 export default async function preview(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const { slug } = req.query;
 
@@ -62,7 +62,7 @@ export default async function preview(
       slug,
       godPraksis: slug.replace("god-praksis/", ""),
       gp: slug.replace("gp/", ""),
-    }
+    },
   );
 
   // If the slug doesn't exist prevent preview mode from being enabled

@@ -82,7 +82,9 @@
 
 .navds-chips__toggle[aria-pressed="true"]:focus-visible,
 .navds-chips__toggle:active:focus-visible {
-  box-shadow: inset 0 0 0 1px var(--a-surface-default), 0 0 0 2px var(--ac-chip-toggle-focus, var(--a-border-focus));
+  box-shadow:
+    inset 0 0 0 1px var(--a-surface-default),
+    0 0 0 2px var(--ac-chip-toggle-focus, var(--a-border-focus));
 }
 
 @supports not selector(:focus-visible) {
@@ -93,7 +95,9 @@
 
   .navds-chips__toggle[aria-pressed="true"]:focus,
   .navds-chips__toggle:active:focus {
-    box-shadow: inset 0 0 0 1px var(--a-surface-default), 0 0 0 2px var(--ac-chip-toggle-focus, var(--a-border-focus));
+    box-shadow:
+      inset 0 0 0 1px var(--a-surface-default),
+      0 0 0 2px var(--ac-chip-toggle-focus, var(--a-border-focus));
   }
 }
 
@@ -144,7 +148,9 @@
 }
 
 .navds-chips__removable--action:focus-visible {
-  box-shadow: inset 0 0 0 1px var(--a-surface-default), 0 0 0 2px var(--a-border-focus);
+  box-shadow:
+    inset 0 0 0 1px var(--a-surface-default),
+    0 0 0 2px var(--a-border-focus);
 }
 
 .navds-chips__removable--neutral:focus-visible {
@@ -154,7 +160,9 @@
 @supports not selector(:focus-visible) {
   .navds-chips__removable--action:focus {
     outline: none;
-    box-shadow: inset 0 0 0 1px var(--a-surface-default), 0 0 0 2px var(--a-border-focus);
+    box-shadow:
+      inset 0 0 0 1px var(--a-surface-default),
+      0 0 0 2px var(--a-border-focus);
   }
 
   .navds-chips__removable--neutral:focus {

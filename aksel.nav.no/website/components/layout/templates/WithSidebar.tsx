@@ -49,12 +49,12 @@ export const WithSidebar = ({
             className={cl(
               "relative mb-10 min-h-[12.5rem] overflow-hidden rounded-xl pl-6 pr-4 md:pl-10 lg:pr-10",
               {
-                "bg-surface-subtle flex items-center justify-between":
+                "flex items-center justify-between bg-surface-subtle":
                   variant === "page",
-                "bg-deepblue-700/70 grid py-[4.25rem] pb-6": variant !== "page",
-                "before:from-deepblue-700 before:absolute before:inset-0 before:-z-10 before:rounded-xl before:bg-gradient-to-br before:via-blue-500 before:to-violet-700":
+                "grid bg-deepblue-700/70 py-[4.25rem] pb-6": variant !== "page",
+                "before:absolute before:inset-0 before:-z-10 before:rounded-xl before:bg-gradient-to-br before:from-deepblue-700 before:via-blue-500 before:to-violet-700":
                   variant !== "page",
-              }
+              },
             )}
           >
             <div className="z-[1]">
@@ -74,7 +74,7 @@ export const WithSidebar = ({
                 size="xlarge"
                 className={cl({
                   "text-deepblue-800": variant === "page",
-                  "text-text-on-action  w-fit": variant !== "page",
+                  "w-fit  text-text-on-action": variant !== "page",
                 })}
               >
                 {pageType.title}
@@ -93,11 +93,13 @@ export const WithSidebar = ({
                   "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
                   {
                     "hue-rotate-[65deg]": pageProps?.status?.tag === "beta",
-                  }
+                  },
                 )}
               >
                 <Image
-                  src={urlFor(pageProps.status?.bilde).auto("format").url()}
+                  src={urlFor(pageProps.status?.bilde)
+                    .auto("format")
+                    .url()}
                   decoding="async"
                   layout="fill"
                   objectFit="contain"
@@ -139,7 +141,7 @@ function HeaderCube() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
-      className="text-deepblue-300 z-[-1] max-h-full"
+      className="z-[-1] max-h-full text-deepblue-300"
     >
       <path
         d="M507.265 293.265L389.355 175.355V293.089L507.265 410.999V293.265Z"

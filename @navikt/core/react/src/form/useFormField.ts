@@ -55,7 +55,7 @@ export interface FormFieldType {
  */
 export const useFormField = (
   props: FormFieldProps,
-  prefix: string
+  prefix: string,
 ): FormFieldType => {
   const { size, error, errorId: propErrorId } = props;
 
@@ -80,10 +80,10 @@ export const useFormField = (
 
   if ((props as any)?.required && process.env.NODE_ENV !== "production") {
     console.warn(
-      "Aksel: Use of 'required' in form-elements is heavily discuouraged. Docs about why here:"
+      "Aksel: Use of 'required' in form-elements is heavily discuouraged. Docs about why here:",
     );
     console.warn(
-      "https://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#h3bfe00453471"
+      "https://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#h3bfe00453471",
     );
   }
 

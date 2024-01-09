@@ -1,6 +1,6 @@
-import { ChevronDownIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
-import React, { forwardRef, SelectHTMLAttributes } from "react";
+import React, { SelectHTMLAttributes, forwardRef } from "react";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
@@ -83,7 +83,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         if (
           readOnly &&
           ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", " "].includes(
-            evt.key
+            evt.key,
           )
         ) {
           evt.preventDefault();
@@ -102,7 +102,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             "navds-form-field--readonly": readOnly,
             "navds-select--error": hasError,
             "navds-select--readonly": readOnly,
-          }
+          },
         )}
       >
         <Label
@@ -136,7 +136,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className={cl(
               "navds-select__input",
               "navds-body-short",
-              `navds-body-short--${size ?? "medium"}`
+              `navds-body-short--${size ?? "medium"}`,
             )}
             size={htmlSize}
           >
@@ -156,7 +156,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default Select;

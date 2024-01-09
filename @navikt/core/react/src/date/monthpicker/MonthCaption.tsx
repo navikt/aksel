@@ -1,10 +1,10 @@
-import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { isAfter, isBefore } from "date-fns";
 import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
 import startOfYear from "date-fns/startOfYear";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Select } from "../../form/Select";
 import { useSharedMonthContext } from "../context";

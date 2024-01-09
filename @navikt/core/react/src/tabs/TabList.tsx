@@ -1,4 +1,3 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "clsx";
 import React, {
@@ -9,6 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { debounce, mergeRefs } from "../util";
 import { TabsContext } from "./context";
 
@@ -43,10 +43,10 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
             showStartScroll === oldDisplayScroll.start &&
             showEndScroll === oldDisplayScroll.end
               ? oldDisplayScroll
-              : { start: showStartScroll, end: showEndScroll }
+              : { start: showStartScroll, end: showEndScroll },
           );
         }),
-      []
+      [],
     );
 
     useEffect(() => {
@@ -120,7 +120,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
         {showSteppers && <ScrollButton dir={1} hidden={!displayScroll.end} />}
       </div>
     );
-  }
+  },
 );
 
 export default TabList;

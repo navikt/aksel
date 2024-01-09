@@ -1,5 +1,5 @@
-import { StarIcon } from "@navikt/aksel-icons";
 import React from "react";
+import { StarIcon } from "@navikt/aksel-icons";
 import { Button } from "./index";
 
 export default {

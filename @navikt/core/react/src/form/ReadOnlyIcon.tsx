@@ -1,5 +1,5 @@
-import { PadlockLockedFillIcon } from "@navikt/aksel-icons";
 import React from "react";
+import { PadlockLockedFillIcon } from "@navikt/aksel-icons";
 
 export const ReadOnlyIcon = ({
   readOnly,

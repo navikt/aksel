@@ -13,16 +13,16 @@ const fixName = (str: string) =>
     str
       .replace(/[^\wæøå]|_/g, " ")
       .replace(/\s+/g, " ")
-      .trim()
+      .trim(),
   ) ?? str;
 
 export function parseCodeFiles(
   dirName: string,
-  rootDir: RootDirectoriesT
+  rootDir: RootDirectoriesT,
 ): FileArrayT {
   const codeDirPath = path.resolve(
     process.cwd(),
-    `pages/${rootDir}/${dirName}`
+    `pages/${rootDir}/${dirName}`,
   );
 
   if (!fs.existsSync(codeDirPath)) {
@@ -38,7 +38,7 @@ export function parseCodeFiles(
 
     code = fs.readFileSync(
       path.resolve(process.cwd(), `pages/${rootDir}/${dirName}/${file}`),
-      "utf-8"
+      "utf-8",
     );
 
     const args = extractArgs(code, `pages/${rootDir}/${dirName}/${file}`);

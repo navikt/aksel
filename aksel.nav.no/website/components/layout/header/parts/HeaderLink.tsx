@@ -11,13 +11,13 @@ function HeaderLink({ name, href, prefetch = undefined }) {
         href={href}
         prefetch={prefetch}
         className={cl(
-          "text-deepblue-800 focus-visible:shadow-focus relative grid h-11 place-items-center rounded px-2 focus:outline-none",
+          "relative grid h-11 place-items-center rounded px-2 text-deepblue-800 focus:outline-none focus-visible:shadow-focus",
           {
-            "before:bg-deepblue-600 font-semibold before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
+            "font-semibold before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full before:bg-deepblue-600":
               asPath.startsWith(href),
-            "hover:before:bg-border-subtle-hover before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full":
+            "before:absolute before:bottom-[1px] before:z-10 before:h-1 before:w-[calc(100%_-_16px)] before:rounded-full hover:before:bg-border-subtle-hover":
               !asPath.startsWith(href),
-          }
+          },
         )}
         onClick={(e) =>
           amplitudeLogNavigation("header", e.currentTarget.getAttribute("href"))

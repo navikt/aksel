@@ -24,7 +24,7 @@ const Example = () => {
           variant="action"
           onClick={() =>
             setFilter((x) =>
-              x.length === 1 ? options : x.filter((y) => y !== c)
+              x.length === 1 ? options : x.filter((y) => y !== c),
             )
           }
         >

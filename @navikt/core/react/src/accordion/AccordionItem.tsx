@@ -6,8 +6,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { AccordionContext } from "./AccordionContext";
 import { omit } from "../util";
+import { AccordionContext } from "./AccordionContext";
 
 export interface AccordionItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -78,7 +78,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         </AccordionItemContext.Provider>
       </div>
     );
-  }
+  },
 );
 
 export default AccordionItem;

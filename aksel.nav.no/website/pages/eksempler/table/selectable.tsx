@@ -9,7 +9,7 @@ const Example = () => {
     setSelectedRows((list) =>
       list.includes(value)
         ? list.filter((id) => id !== value)
-        : [...list, value]
+        : [...list, value],
     );
 
   return (

@@ -1,5 +1,5 @@
-import * as AllIcons from "@navikt/aksel-icons";
 import React from "react";
+import * as AllIcons from "@navikt/aksel-icons";
 
 // eslint-disable-next-line import/namespace
 const icons = Object.keys(AllIcons).map((key) => AllIcons[key]);

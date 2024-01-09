@@ -12,13 +12,13 @@ export const isVisible = ({ horizontalPosition }: Positioned): boolean =>
 
 export const getFirstDate = (periods: any) => {
   return periods.sort(
-    (a: PeriodProps, b: PeriodProps) => a.start.getTime() - b.start.getTime()
+    (a: PeriodProps, b: PeriodProps) => a.start.getTime() - b.start.getTime(),
   )[0].start;
 };
 
 export const getLastDate = (periods: any) => {
   return periods.sort(
-    (a: PeriodProps, b: PeriodProps) => a.end.getTime() - b.end.getTime()
+    (a: PeriodProps, b: PeriodProps) => a.end.getTime() - b.end.getTime(),
   )[periods.length - 1].end;
 };
 

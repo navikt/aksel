@@ -92,7 +92,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       onClick,
       ...rest
     }: ModalProps,
-    ref
+    ref,
   ) => {
     const modalRef = useRef<HTMLDialogElement>(null);
     const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
@@ -217,7 +217,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       return null;
     }
     return component;
-  }
+  },
 ) as ModalComponent;
 
 Modal.Header = ModalHeader;

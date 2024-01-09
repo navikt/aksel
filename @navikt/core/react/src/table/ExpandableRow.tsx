@@ -1,6 +1,6 @@
-import { ChevronDownIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { useId } from "../util";
 import AnimateHeight from "../util/AnimateHeight";
 import DataCell from "./DataCell";
@@ -67,7 +67,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       colSpan = 999,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
     const id = useId();
@@ -137,7 +137,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         </tr>
       </>
     );
-  }
+  },
 );
 
 function isInteractiveTarget(elm: HTMLElement) {
@@ -146,7 +146,7 @@ function isInteractiveTarget(elm: HTMLElement) {
   }
   if (
     ["BUTTON", "DETAILS", "LABEL", "SELECT", "TEXTAREA", "INPUT", "A"].includes(
-      elm.nodeName
+      elm.nodeName,
     )
   ) {
     return true;

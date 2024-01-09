@@ -4,7 +4,7 @@ import type { ModalProps } from "./types";
 export function getCloseHandler(
   modalRef: React.RefObject<HTMLDialogElement>,
   header: ModalProps["header"],
-  onBeforeClose: ModalProps["onBeforeClose"]
+  onBeforeClose: ModalProps["onBeforeClose"],
 ) {
   if (header && header.closeButton === false) return undefined;
   if (onBeforeClose) {
@@ -17,7 +17,7 @@ export const BODY_CLASS = "navds-modal__document-body";
 
 export function useBodyScrollLock(
   modalRef: React.RefObject<HTMLDialogElement>,
-  portalNode: HTMLElement | null
+  portalNode: HTMLElement | null,
 ) {
   React.useEffect(() => {
     if (!modalRef.current || !portalNode) return; // We check both to avoid running this twice when not using portal

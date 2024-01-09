@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
 
 export interface LinkPanelTitleProps
@@ -18,7 +18,7 @@ export const LinkPanelTitle: OverridableComponent<
       "navds-link-panel__title",
       "navds-heading",
       "navds-heading--medium",
-      className
+      className,
     )}
   />
 ));

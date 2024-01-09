@@ -82,7 +82,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onWeekNumberClick,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
@@ -181,7 +181,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         </div>
       </DateContext.Provider>
     );
-  }
+  },
 ) as DatePickerComponent;
 
 DatePicker.Standalone = DatePickerStandalone;

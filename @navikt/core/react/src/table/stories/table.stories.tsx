@@ -164,7 +164,7 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
         setList((oldList) =>
           oldList.includes(value)
             ? oldList.filter((id) => id !== value)
-            : [...oldList, value]
+            : [...oldList, value],
         ),
     ];
   };

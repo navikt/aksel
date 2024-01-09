@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { Button, ButtonProps } from "../button";
 import { OverridableComponent } from "../util";
 
@@ -35,7 +35,7 @@ export const Item: PaginationItemType = forwardRef(
       className,
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <Button
@@ -52,7 +52,7 @@ export const Item: PaginationItemType = forwardRef(
         {children}
       </Button>
     );
-  }
+  },
 );
 
 export default Item;

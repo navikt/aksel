@@ -45,10 +45,10 @@ export const Highlight = ({
             layout="fill"
             aria-hidden
             className={cl(
-              "bg-deepblue-200 rounded-lg object-cover sm:object-contain",
+              "rounded-lg bg-deepblue-200 object-cover sm:object-contain",
               {
                 "hue-rotate-[65deg]": article?.status?.tag === "beta",
-              }
+              },
             )}
             decoding="auto"
           />
@@ -93,11 +93,11 @@ export const Highlight = ({
             onClick={(e) =>
               amplitudeLogNavigation(
                 "artikkel-kort",
-                e.currentTarget.getAttribute("href")
+                e.currentTarget.getAttribute("href"),
               )
             }
             href={`/${article.slug.current}`}
-            className="text-text-default mb-5 mt-2 underline hover:no-underline"
+            className="mb-5 mt-2 text-text-default underline hover:no-underline"
           >
             {article?.heading}
           </Link>
@@ -106,7 +106,7 @@ export const Highlight = ({
           {article?.ingress ?? article.seo?.meta}
         </BodyLong>
         {showFooter && getAuthors(article as any).length > 0 && (
-          <BodyShort size="small" className="text-text-subtle flex gap-2">
+          <BodyShort size="small" className="flex gap-2 text-text-subtle">
             <span className="font-semibold">
               {getAuthors(article as any)[0]}
             </span>

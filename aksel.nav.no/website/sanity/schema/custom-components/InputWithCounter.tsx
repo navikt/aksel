@@ -5,7 +5,7 @@ import { StringInputProps, TextInputProps } from "sanity";
 export function InputWithCounter(
   props: (StringInputProps | TextInputProps) & {
     size?: "medium" | "large";
-  }
+  },
 ) {
   const { value, schemaType } = props;
 

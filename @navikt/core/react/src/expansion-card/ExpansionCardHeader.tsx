@@ -1,6 +1,6 @@
-import { ChevronDownIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { ExpansionCardContext } from "./context";
 
 export interface ExpansionCardHeaderProps
@@ -16,7 +16,7 @@ const ExpansionCardHeader = forwardRef<
 
   if (panelContext === null) {
     console.error(
-      "<ExpansionCard.Header> has to be used within an <ExpansionCard>"
+      "<ExpansionCard.Header> has to be used within an <ExpansionCard>",
     );
     return null;
   }

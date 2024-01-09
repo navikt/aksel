@@ -16,7 +16,7 @@ export function getBlocks({
   let blocks: any[] = [];
 
   [...Array(length).keys()].forEach((_, idx) =>
-    blocks.push(getParagraph(link, idx))
+    blocks.push(getParagraph(link, idx)),
   );
 
   if (heading) {

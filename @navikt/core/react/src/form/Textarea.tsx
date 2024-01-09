@@ -102,7 +102,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
     const [controlledValue, setControlledValue] = useState<string>(
-      props?.defaultValue ?? ""
+      props?.defaultValue ?? "",
     );
 
     const getMinRows = () => {
@@ -131,7 +131,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-textarea--autoscrollbar": UNSAFE_autoScrollbar,
             [`navds-textarea--resize-${resize === true ? "both" : resize}`]:
               resize,
-          }
+          },
         )}
       >
         <Label
@@ -172,7 +172,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             className={cl(
               "navds-textarea__input",
               "navds-body-short",
-              `navds-body-short--${size ?? "medium"}`
+              `navds-body-short--${size ?? "medium"}`,
             )}
             {...(describedBy ? { "aria-describedby": describedBy } : {})}
           />
@@ -202,7 +202,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default Textarea;

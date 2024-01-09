@@ -1,4 +1,3 @@
-import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, {
   ButtonHTMLAttributes,
@@ -7,8 +6,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import copy from "../util/copy";
+import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import { Label } from "../typography";
+import copy from "../util/copy";
 
 export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
@@ -99,7 +99,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       iconPosition = "left",
       ...rest
     },
-    ref
+    ref,
   ) => {
     const [active, setActive] = useState(false);
     const timeoutRef = useRef<number>();
@@ -111,7 +111,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     }, []);
 
     const handleClick = (
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     ) => {
       timeoutRef.current && clearTimeout(timeoutRef.current);
       copy(copyText);
@@ -158,7 +158,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
             "navds-copybutton--icon-only": !text,
             "navds-copybutton--icon-right": iconPosition === "right",
             "navds-copybutton--active": active,
-          }
+          },
         )}
         onClick={handleClick}
       >
@@ -186,7 +186,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         </span>
       </button>
     );
-  }
+  },
 );
 
 export default CopyButton;

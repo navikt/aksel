@@ -9,13 +9,13 @@ describe("Returns if date is in current month", () => {
 
   test("Date should not be within current month (false)", () => {
     expect(
-      dateIsInCurrentMonth(new Date("Sep 2 2021"), selectedDate)
+      dateIsInCurrentMonth(new Date("Sep 2 2021"), selectedDate),
     ).toBeFalsy();
     expect(
-      dateIsInCurrentMonth(new Date("Sep 1 2021"), selectedDate)
+      dateIsInCurrentMonth(new Date("Sep 1 2021"), selectedDate),
     ).toBeFalsy();
     expect(
-      dateIsInCurrentMonth(new Date("Sep 30 2021"), selectedDate)
+      dateIsInCurrentMonth(new Date("Sep 30 2021"), selectedDate),
     ).toBeFalsy();
   });
 });

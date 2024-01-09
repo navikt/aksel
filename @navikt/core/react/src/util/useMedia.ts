@@ -11,7 +11,7 @@ export const noMatchMedia =
  */
 export const useMedia = (
   media: string,
-  fallback?: boolean
+  fallback?: boolean,
 ): boolean | undefined => {
   const [matches, setMatches] = useState(fallback);
 
