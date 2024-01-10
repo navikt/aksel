@@ -59,7 +59,5 @@
 @media (min-width: 1024px) {
   .navds-pageblock--gutters {
     --__ac-page-padding-inline: var(--a-spacing-12);
-
-    padding-inline: var(--__ac-page-padding-inline);
   }
 }
