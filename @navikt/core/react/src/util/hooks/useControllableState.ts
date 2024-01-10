@@ -36,5 +36,5 @@ export function useControllableState<T>({
     [controlled, onChangeProp, value]
   );
 
-  return [value, setValue] as [T, React.Dispatch<React.SetStateAction<T>>];
+  return [value, setValue] as const;
 }
