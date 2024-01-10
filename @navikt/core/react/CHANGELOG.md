@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.12.5
+
+### Patch Changes
+
+- MonthPicker: MonthCaption satt forrige/neste-knapper til `disabled` når de skulle være `enabled`. ([#2601](https://github.com/navikt/aksel/pull/2601))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.5
+  - @navikt/aksel-icons@5.12.5
+
 ## 5.12.4
 
 ### Patch Changes
