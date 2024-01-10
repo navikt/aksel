@@ -31,6 +31,7 @@ export const withDsExample = (
       };
       window.addEventListener("resize", updateWidth);
       updateWidth();
+
       return () => {
         window.removeEventListener("resize", updateWidth);
       };

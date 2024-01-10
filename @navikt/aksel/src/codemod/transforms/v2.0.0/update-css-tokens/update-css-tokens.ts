@@ -1,4 +1,4 @@
-import { tokens } from "../../../tokens-map.mjs";
+import { tokens } from "../../../tokens-map.js";
 
 /**
  * @param {import('jscodeshift').FileInfo} file

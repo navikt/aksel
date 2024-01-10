@@ -1,15 +1,15 @@
-import { omit } from "../../../util";
-import React, {
-  useCallback,
-  forwardRef,
-  InputHTMLAttributes,
-  ChangeEvent,
-} from "react";
 import cl from "clsx";
-import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
-import { useInputContext } from "./inputContext";
+import React, {
+  ChangeEvent,
+  InputHTMLAttributes,
+  forwardRef,
+  useCallback,
+} from "react";
+import { omit } from "../../../util";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
+import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
+import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { useInputContext } from "./inputContext";
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {

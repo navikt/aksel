@@ -13,8 +13,8 @@ export const structure: StructureResolver = (S, { currentUser }) => {
   return S.list()
     .title("Aksel Manager")
     .items([
-      S.documentTypeListItem("gp.innholdstype").title("Innholdstype"),
       S.documentTypeListItem("gp.tema").title("Tema"),
+      S.divider(),
       S.listItem({
         id: "tema_view",
         title: "Undertema",
@@ -35,6 +35,70 @@ export const structure: StructureResolver = (S, { currentUser }) => {
             })
             .initialValueTemplates([]),
       }),
+      S.listItem({
+        id: "article_undertema_view",
+        title: "Artikler",
+        schemaType: "aksel_artikkel",
+        child: () =>
+          S.documentTypeList("gp.tema")
+            .child((id) => {
+              return S.documentTypeList("gp.tema.undertema")
+                .title("Undertema")
+                .filter("_type == $type && tema._ref == $id")
+                .apiVersion(SANITY_API_VERSION)
+                .params({ type: "gp.tema.undertema", id })
+                .child((undertema_id) => {
+                  return S.documentTypeList("aksel_artikkel")
+                    .title("Artikler")
+                    .filter("_type == $type && $id in undertema[]._ref")
+                    .apiVersion(SANITY_API_VERSION)
+                    .params({ type: "aksel_artikkel", id: undertema_id });
+                });
+            })
+            .initialValueTemplates([]),
+      }),
+      S.listItem({
+        id: "article_no_undertema_view",
+        title: "Uten undertema",
+        schemaType: "aksel_artikkel",
+        child: () =>
+          S.documentTypeList("aksel_artikkel")
+            .title("Artikler")
+            .filter("_type == $type && !defined(undertema)")
+            .apiVersion(SANITY_API_VERSION)
+            .params({ type: "aksel_artikkel" })
+            .initialValueTemplates([]),
+      }),
+      S.divider(),
+      S.documentTypeListItem("gp.innholdstype").title("Innholdstype"),
+      S.listItem({
+        id: "article_innholdstype_view",
+        title: "Artikler",
+        schemaType: "aksel_artikkel",
+        child: () =>
+          S.documentTypeList("gp.innholdstype")
+            .child((id) => {
+              return S.documentTypeList("aksel_artikkel")
+                .title("Artikler")
+                .filter("_type == $type && $id == innholdstype._ref")
+                .apiVersion(SANITY_API_VERSION)
+                .params({ type: "aksel_artikkel", id });
+            })
+            .initialValueTemplates([]),
+      }),
+      S.listItem({
+        id: "article_no_innholdstype_view",
+        title: "Uten innholdstype",
+        schemaType: "aksel_artikkel",
+        child: () =>
+          S.documentTypeList("aksel_artikkel")
+            .title("Artikler")
+            .filter("_type == $type && !defined(innholdstype)")
+            .apiVersion(SANITY_API_VERSION)
+            .params({ type: "aksel_artikkel" })
+            .initialValueTemplates([]),
+      }),
+
       /* S.listItem({
         id: "artikkel_view",
         title: "Artikler (tema)",

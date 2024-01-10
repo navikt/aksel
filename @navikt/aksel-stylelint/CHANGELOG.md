@@ -1,5 +1,17 @@
 # @navikt/aksel-stylelint
 
+## 5.12.5
+
+## 5.12.4
+
+### Patch Changes
+
+- Stylelint: Støtter nå stylelint v16 ([#2591](https://github.com/navikt/aksel/pull/2591))
+
+## 5.12.3
+
+## 5.12.2
+
 ## 5.12.1
 
 ## 5.12.0
