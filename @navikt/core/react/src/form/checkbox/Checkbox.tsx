@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
-import { omit } from "../../util";
+import { omit, useId } from "../../util";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { CheckboxProps } from "./types";
 import useCheckbox from "./useCheckbox";
@@ -9,6 +9,9 @@ import useCheckbox from "./useCheckbox";
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const { inputProps, hasError, size, readOnly, nested } = useCheckbox(props);
+
+    const labelId = useId();
+    const descriptionId = useId();
 
     return (
       <div
@@ -34,7 +37,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "errorId",
             "readOnly",
           ])}
-          {...inputProps}
+          {...omit(inputProps, ["aria-invalid"])}
           type="checkbox"
           className="navds-checkbox__input"
           aria-checked={props.indeterminate ? "mixed" : inputProps.checked}
@@ -49,6 +52,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               ref.current = el;
             }
           }}
+          aria-labelledby={cl(
+            labelId,
+            !!props["aria-labelledby"] && props["aria-labelledby"],
+            {
+              [descriptionId]: props.description,
+            }
+          )}
         />
         <label htmlFor={inputProps.id} className="navds-checkbox__label">
           <span className="navds-checkbox__icon">
@@ -75,8 +85,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           >
             <BodyShort
               as="span"
+              id={labelId}
               size={size}
               className="navds-checkbox__label-text"
+              aria-hidden
             >
               {!nested && (
                 <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
@@ -86,8 +98,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {props.description && (
               <BodyShort
                 as="span"
+                id={descriptionId}
                 size={size}
                 className="navds-form-field__subdescription navds-checkbox__description"
+                aria-hidden
               >
                 {props.description}
               </BodyShort>

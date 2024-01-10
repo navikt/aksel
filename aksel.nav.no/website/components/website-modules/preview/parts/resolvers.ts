@@ -24,7 +24,13 @@ export function runResolvers({
       getNestedProperty(_acc, key)
     );
 
-    _acc[resolver.key] = resolver.cb(dataFromKeys);
+    /**
+     * In some cases the data can be undefined. This filters this out and avoids overriding it
+     */
+    if (dataFromKeys.filter((x) => !!x).length > 0) {
+      _acc[resolver.key] = resolver.cb(dataFromKeys);
+    }
+
     return _acc;
   }, data);
 }

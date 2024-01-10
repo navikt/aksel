@@ -1,6 +1,6 @@
-import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import faker from "faker";
+import React from "react";
 import { Checkbox, CheckboxGroup } from ".";
 
 const firstArgumentOfFirstCall = (fn: jest.Mock) => fn.mock.calls[0][0];
