@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 5.13.0
+
+### Minor Changes
+
+- Accordion.Item, Dropdown, ReadMore og Tooltip: Har en ny prop `onOpenChange?: (open: boolean) => void;` som forteller nå-state når `open`-state endrer seg. Dette vil være nyttig hvis man ikke bruker controlled-state, men fortsatt ønsker å vite om komponenten er `open` eller ikke (f.eks logging). ([#2585](https://github.com/navikt/aksel/pull/2585))
+
+- Controlled-state: Accordion.Item, Dropdown, ReadMore, Table.ExpandableRow og Tooltip har oppdatert intern håndtering av controlled state. Endringen skal ikke påvirke dagens API. ([#2585](https://github.com/navikt/aksel/pull/2585))
+
+### Patch Changes
+
+- Page: Lagt til ny bakgrunnsfarge `surface-subtle` og ny maksbredde på Page.Block `text` ([#2572](https://github.com/navikt/aksel/pull/2572))
+
+- Updated dependencies [[`145ce2e5f`](https://github.com/navikt/aksel/commit/145ce2e5f71d397acfa3306ed7b0e4253b9e02f6)]:
+  - @navikt/ds-tokens@5.13.0
+  - @navikt/aksel-icons@5.13.0
+
 ## 5.12.5
 
 ### Patch Changes
