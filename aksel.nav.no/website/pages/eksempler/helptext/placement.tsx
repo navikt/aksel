@@ -1,22 +1,22 @@
-import { HelpText } from "@navikt/ds-react";
+import { HelpText, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
-      <HelpText title="Hvor kommer dette fra?">
-        Informasjonen er hentet fra X sin statistikk fra 2021
+    <VStack gap="4">
+      <HelpText title="top" placement="top">
+        placement = top
       </HelpText>
-      <HelpText title="Hvor kommer dette fra?" placement="right">
-        Informasjonen er hentet fra X sin statistikk fra 2021
+      <HelpText title="right" placement="right">
+        placement = right
       </HelpText>
-      <HelpText title="Hvor kommer dette fra?" placement="bottom">
-        Informasjonen er hentet fra X sin statistikk fra 2021
+      <HelpText title="bottom" placement="bottom">
+        placement = bottom
       </HelpText>
-      <HelpText title="Hvor kommer dette fra?" placement="left">
-        Informasjonen er hentet fra X sin statistikk fra 2021
+      <HelpText title="left" placement="left">
+        placement = left
       </HelpText>
-    </div>
+    </VStack>
   );
 };
 

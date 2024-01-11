@@ -14,23 +14,6 @@ export interface HelpTextProps
    */
   title?: string;
   /**
-   * Default dialog-placement on open
-   * @default "top"
-   */
-  placement?:
-    | "top"
-    | "bottom"
-    | "right"
-    | "left"
-    | "top-start"
-    | "top-end"
-    | "bottom-start"
-    | "bottom-end"
-    | "right-start"
-    | "right-end"
-    | "left-start"
-    | "left-end";
-  /**
    * Classname for wrapper
    */
   wrapperClassName?: string;
@@ -54,7 +37,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     {
       className,
       children,
-      placement = "top",
+      placement,
       strategy = "absolute",
       title = "hjelp",
       onClick,
