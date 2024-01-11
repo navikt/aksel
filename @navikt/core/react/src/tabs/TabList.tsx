@@ -9,7 +9,8 @@ import React, {
   useState,
 } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
-import { debounce, mergeRefs } from "../util";
+import { debounce } from "../util";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { TabsContext } from "./context";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -23,7 +24,8 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, ...rest }, ref) => {
     const context = useContext(TabsContext);
     const listRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([listRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(listRef, ref);
+
     const [displayScroll, setDisplayScroll] = useState({
       start: false,
       end: false,

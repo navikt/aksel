@@ -1,7 +1,7 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
-import { mergeRefs } from "../util";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { HelpTextIcon } from "./HelpTextIcon";
 
 export interface HelpTextProps
@@ -47,7 +47,8 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     ref,
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(buttonRef, ref);
+
     const [open, setOpen] = useState(false);
 
     return (

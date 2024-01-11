@@ -8,7 +8,9 @@ type PossibleRef<T> = React.Ref<T> | undefined;
  * Use `useMergeRefs`
  * @internal
  */
-function mergeRefs<T>(refs: Array<PossibleRef<T>>): React.RefCallback<T> {
+export function mergeRefs<T>(
+  refs: Array<PossibleRef<T>>,
+): React.RefCallback<T> {
   return (value) => {
     refs.forEach((ref) => {
       if (typeof ref === "function") {

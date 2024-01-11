@@ -3,7 +3,7 @@ import React, { forwardRef, useRef, useState } from "react";
 import { Loader } from "../loader";
 import { Label } from "../typography";
 import { OverridableComponent, omit, useClientLayoutEffect } from "../util";
-import { useMergeRefs } from "../util/mergeRefs";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
