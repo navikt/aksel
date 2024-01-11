@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel",
-  "version": "5.12.2",
+  "version": "5.12.5",
   "description": "Aksel command line interface. Handles css-imports, codemods and more",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -18,8 +18,8 @@
     "clean": "rimraf dist",
     "build": "yarn clean && tsc -p tsconfig.json",
     "dev": "tsc --watch -p tsconfig.json",
-    "test": "yarn build && jest",
-    "test:watch": "jest --watch"
+    "test": "yarn build && NODE_OPTIONS=--experimental-vm-modules yarn jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules yarn jest --watch"
   },
   "bin": "./dist/index.js",
   "repository": {
@@ -29,7 +29,7 @@
   },
   "homepage": "https://aksel.nav.no/grunnleggende/kode/kommandolinje",
   "dependencies": {
-    "@navikt/ds-css": "5.12.2",
+    "@navikt/ds-css": "5.12.5",
     "axios": "1.6.0",
     "chalk": "4.1.0",
     "clipboardy": "^2.3.0",

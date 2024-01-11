@@ -1,5 +1,5 @@
 import type { JSCodeshift } from "jscodeshift";
-import { tokens } from "../../../tokens-map.mjs";
+import { tokens } from "../../../tokens-map.js";
 import {
   getImportSpecifier,
   getImportSpecifierName,

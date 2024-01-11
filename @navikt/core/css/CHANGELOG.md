@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 5.12.5
+
+## 5.12.4
+
+## 5.12.3
+
+### Patch Changes
+
+- ExpansionCard: Divider mellom header og innhold ([#2566](https://github.com/navikt/aksel/pull/2566))
+
 ## 5.12.2
 
 ## 5.12.1

@@ -70,7 +70,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       >
         <fieldset
           {...omit(rest, ["errorId", "error", "size", "readOnly"])}
-          {...inputProps}
+          {...omit(inputProps, ["aria-describedby", "aria-invalid"])}
           ref={ref}
           className={cl(
             className,
