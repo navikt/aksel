@@ -1,55 +1,28 @@
-import { HStack, Tag, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 import { ComponentIcon } from "@navikt/aksel-icons";
+import { HStack, Tag } from "@navikt/ds-react";
 
 const Example = () => {
   return (
-    <VStack gap="4">
-      <HStack gap="2" align="start">
-        <Tag variant="neutral-moderate" icon={<ComponentIcon aria-hidden />}>
-          Ikon
-        </Tag>
-        <Tag
-          size="small"
-          variant="neutral-moderate"
-          icon={<ComponentIcon aria-hidden />}
-        >
-          Ikon
-        </Tag>
-        <Tag
-          size="xsmall"
-          variant="neutral-moderate"
-          icon={<ComponentIcon aria-hidden />}
-        >
-          Ikon
-        </Tag>
-      </HStack>
-      <HStack gap="2" align="start">
-        <Tag
-          variant="neutral-moderate"
-          icon={<ComponentIcon aria-hidden />}
-          iconPosition="right"
-        >
-          Ikon
-        </Tag>
-        <Tag
-          size="small"
-          variant="neutral-moderate"
-          icon={<ComponentIcon aria-hidden />}
-          iconPosition="right"
-        >
-          Ikon
-        </Tag>
-        <Tag
-          size="xsmall"
-          variant="neutral-moderate"
-          icon={<ComponentIcon aria-hidden />}
-          iconPosition="right"
-        >
-          Ikon
-        </Tag>
-      </HStack>
-    </VStack>
+    <HStack gap="2" align="start">
+      <Tag variant="neutral-moderate" icon={<ComponentIcon aria-hidden />}>
+        Ikon
+      </Tag>
+      <Tag
+        size="small"
+        variant="neutral-moderate"
+        icon={<ComponentIcon aria-hidden />}
+      >
+        Ikon
+      </Tag>
+      <Tag
+        size="xsmall"
+        variant="neutral-moderate"
+        icon={<ComponentIcon aria-hidden />}
+      >
+        Ikon
+      </Tag>
+    </HStack>
   );
 };
 
