@@ -10,6 +10,9 @@
 
 /* Page.Block */
 .navds-pageblock {
+  /* stylelint-disable-next-line length-zero-no-unit */
+  --__ac-page-padding-inline: 0px;
+
   margin-inline: auto;
   width: 100%;
 }
@@ -25,6 +28,10 @@
 
 .navds-page__content--padding {
   padding-block-end: var(--a-spacing-8);
+}
+
+.navds-pageblock--text {
+  max-width: calc(var(--a-text-width-max) + var(--__ac-page-padding-inline) + var(--__ac-page-padding-inline));
 }
 
 .navds-pageblock--md {
@@ -44,11 +51,13 @@
 }
 
 .navds-pageblock--gutters {
-  padding-inline: var(--a-spacing-4);
+  --__ac-page-padding-inline: var(--a-spacing-4);
+
+  padding-inline: var(--__ac-page-padding-inline);
 }
 
 @media (min-width: 1024px) {
   .navds-pageblock--gutters {
-    padding-inline: var(--a-spacing-12);
+    --__ac-page-padding-inline: var(--a-spacing-12);
   }
 }

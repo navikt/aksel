@@ -38,7 +38,7 @@ export const AccordionItemContext =
 const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   (
     { children, className, open, defaultOpen = false, onOpenChange, ...rest },
-    ref,
+    ref
   ) => {
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
@@ -78,7 +78,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         </AccordionItemContext.Provider>
       </div>
     );
-  },
+  }
 );
 
 export default AccordionItem;

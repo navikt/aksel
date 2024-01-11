@@ -42,7 +42,7 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
         className={cl("navds-dropdown__toggle", className)}
       />
     );
-  },
+  }
 );
 
 export default Toggle;

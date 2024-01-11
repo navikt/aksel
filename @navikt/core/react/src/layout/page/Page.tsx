@@ -14,7 +14,7 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * Background color. Accepts a color token.
    * @default bg-default
    */
-  background?: keyof typeof bgColors.a;
+  background?: keyof typeof bgColors.a | "surface-subtle";
   /**
    * Allows better positioning of footer
    */
