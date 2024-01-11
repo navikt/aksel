@@ -27,22 +27,14 @@
   --__ac-tag-icon-margin: -1px;
 }
 
-.navds-tag:has(.navds-tag__icon--left, .navds-tag__icon--right) {
+.navds-tag:has(.navds-tag__icon--left) {
   gap: var(--a-spacing-05);
 }
 
-.navds-tag__icon--left,
-.navds-tag__icon--right {
-  font-size: var(--__ac-tag-icon-size);
-  display: flex;
-}
-
 .navds-tag__icon--left {
+  font-size: var(--__ac-tag-icon-size);
   margin-inline-start: var(--__ac-tag-icon-margin);
-}
-
-.navds-tag__icon--right {
-  margin-inline-end: var(--__ac-tag-icon-margin);
+  display: flex;
 }
 
 .navds-tag--error {
