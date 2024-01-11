@@ -85,14 +85,14 @@ const serializers: Partial<PortableTextReactComponents> = {
 
   list: {
     bullet: ({ children }) => (
-      <ul className="aksel-list-ul list-margin max-w-text relative mb-7 list-disc last:mb-0">
+      <ul className="aksel-list-ul list-margin relative mb-7 max-w-text list-disc last:mb-0">
         {children}
       </ul>
     ),
     number: ({ children }) => (
       <ol
         type="1"
-        className="aksel-list-ol list-margin max-w-text mb-7 list-decimal last:mb-0"
+        className="aksel-list-ol list-margin mb-7 max-w-text list-decimal last:mb-0"
       >
         {children}
       </ol>
@@ -177,7 +177,7 @@ export const SanityBlockContent = ({
     <div
       className={cl(
         className,
-        isIngress && "aksel-block-ingress group/ingress"
+        isIngress && "aksel-block-ingress group/ingress",
       )}
     >
       <PortableText
@@ -229,7 +229,7 @@ function SanitizedBlock({
           id={value._key}
           level="2"
           size="large"
-          className="max-w-text text-deepblue-800 mb-4 mt-12 scroll-mt-20 first-of-type:mt-0 focus:outline-none"
+          className="mb-4 mt-12 max-w-text scroll-mt-20 text-deepblue-800 first-of-type:mt-0 focus:outline-none"
         >
           {children}
         </Heading>
@@ -237,7 +237,7 @@ function SanitizedBlock({
     case "h3":
       return (
         <Heading
-          className="max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
+          className="mt-8 max-w-text scroll-mt-20 text-deepblue-800 focus:outline-none"
           spacing
           level="3"
           size="medium"
@@ -250,7 +250,7 @@ function SanitizedBlock({
     case "h4":
       return (
         <Heading
-          className="max-w-text text-deepblue-800 mt-6"
+          className="mt-6 max-w-text text-deepblue-800"
           spacing
           level="4"
           size="small"

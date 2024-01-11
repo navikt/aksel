@@ -25,7 +25,7 @@ export async function simulateHover(el: HTMLElement, user: any) {
 export const renderWithStyles = (element: ReactElement) => {
   const stylesheetFile = fs.readFileSync(
     path.resolve(__dirname, "../../css/dist/index.css"),
-    "utf-8"
+    "utf-8",
   );
 
   const styleTag = document.createElement("style");

@@ -43,7 +43,7 @@ function Section({ section }: { section: SidebarT[number] }) {
         as="div"
         size="small"
         textColor="subtle"
-        className="min-h-8 flex items-center px-4"
+        className="flex min-h-8 items-center px-4"
       >
         {section.title}
       </Label>
@@ -53,16 +53,16 @@ function Section({ section }: { section: SidebarT[number] }) {
             aria-current={isActive(page.slug) ? "page" : undefined}
             key={page.slug}
             data-active={isActive(page.slug)}
-            className="rounded-medium hover:bg-surface-hover min-h-8 data-active:bg-surface-selected data-active:text-deepblue-800 data-active:shadow-xsmall data-active:font-semibold relative mx-2 flex items-center transition-[background-color] ease-out"
+            className="relative mx-2 flex min-h-8 items-center rounded-medium transition-[background-color] ease-out hover:bg-surface-hover data-active:bg-surface-selected data-active:font-semibold data-active:text-deepblue-800 data-active:shadow-xsmall"
           >
             <Link
               prefetch={false}
               href={`/${page.slug}`}
-              className="text-medium min-h-8 rounded-medium focus-visible:shadow-focus flex w-full  items-center justify-between gap-2 break-words px-2 focus:outline-none focus-visible:z-10"
+              className="flex min-h-8 w-full items-center justify-between gap-2  break-words rounded-medium px-2 text-medium focus:outline-none focus-visible:z-10 focus-visible:shadow-focus"
               onClick={(e) => {
                 amplitudeLogNavigation(
                   "meny",
-                  e.currentTarget.getAttribute("href")
+                  e.currentTarget.getAttribute("href"),
                 );
               }}
             >

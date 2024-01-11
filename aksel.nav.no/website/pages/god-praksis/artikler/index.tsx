@@ -82,7 +82,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
     fetchMore
       ? () => `/api/god-praksis/v1?lastPublishedAt=${lastPublishedAt}`
       : null,
-    (query) => fetch(query).then((res) => res.json())
+    (query) => fetch(query).then((res) => res.json()),
   );
 
   if (data) {
@@ -94,7 +94,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
   return (
     <>
       <SEO title="Artikler" />
-      <div className="bg-surface-subtle overflow-clip">
+      <div className="overflow-clip bg-surface-subtle">
         <Header variant="subtle" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="relative grid overflow-x-clip pb-40">
@@ -103,7 +103,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
               <Heading
                 level="1"
                 size="xlarge"
-                className="text-deepblue-800 my-20 md:text-[3rem]"
+                className="my-20 text-deepblue-800 md:text-[3rem]"
               >
                 Artikler
               </Heading>

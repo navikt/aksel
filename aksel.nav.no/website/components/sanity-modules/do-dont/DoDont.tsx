@@ -18,21 +18,21 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
   return (
     <BodyShort
       as="figure"
-      className={cl("sm:min-w-80 z-10 flex min-w-full flex-1 flex-col", {
+      className={cl("z-10 flex min-w-full flex-1 flex-col sm:min-w-80", {
         "basis-full": block?.fullwidth,
         "max-w-sm": !block?.fullwidth,
       })}
     >
-      <div className="shadow-xsmall ring-border-subtle relative rounded-lg ring-1 ring-inset ">
+      <div className="relative rounded-lg shadow-xsmall ring-1 ring-inset ring-border-subtle ">
         <BodyShort
           as="span"
           className={cl(
-            "text-text-default relative z-[-1] flex items-center gap-1 rounded-t-lg px-4 py-2",
+            "relative z-[-1] flex items-center gap-1 rounded-t-lg px-4 py-2 text-text-default",
             {
               "bg-surface-success-moderate": block.variant === "do",
               "bg-surface-danger-moderate": block.variant === "dont",
               "bg-surface-warning-moderate": block.variant === "warning",
-            }
+            },
           )}
         >
           <span>{getIcon(block.variant)}</span>

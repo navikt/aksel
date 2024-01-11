@@ -23,7 +23,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "navds-checkbox--error": hasError,
             "navds-checkbox--disabled": inputProps.disabled,
             "navds-checkbox--readonly": readOnly,
-          }
+          },
         )}
       >
         <input
@@ -57,7 +57,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             !!props["aria-labelledby"] && props["aria-labelledby"],
             {
               [descriptionId]: props.description,
-            }
+            },
           )}
         />
         <label htmlFor={inputProps.id} className="navds-checkbox__label">
@@ -110,7 +110,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         </label>
       </div>
     );
-  }
+  },
 );
 
 export default Checkbox;

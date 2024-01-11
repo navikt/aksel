@@ -14,7 +14,7 @@ export const GlobalSearch = dynamic(
     loading: () => (
       <Button
         variant="primary"
-        className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
+        className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
         aria-keyshortcuts="Control+b"
         icon={
           <MagnifyingGlassIcon
@@ -29,7 +29,7 @@ export const GlobalSearch = dynamic(
       </Button>
     ),
     ssr: false,
-  }
+  },
 );
 
 const Header = ({
@@ -50,17 +50,17 @@ const Header = ({
         Hopp til innhold
       </a>
       <Page.Block width="2xl">
-        <div className="h-header flex items-center pr-4 lg:pr-6">
+        <div className="flex h-header items-center pr-4 lg:pr-6">
           <Link
             href="/"
             passHref
             onClick={(e) =>
               amplitudeLogNavigation(
                 "header",
-                e.currentTarget.getAttribute("href")
+                e.currentTarget.getAttribute("href"),
               )
             }
-            className="focus-visible:shadow-focus mx-4 grid h-11 place-items-center rounded px-2 focus:outline-none sm:mr-6"
+            className="mx-4 grid h-11 place-items-center rounded px-2 focus:outline-none focus-visible:shadow-focus sm:mr-6"
           >
             <AkselLogo className="text-deepblue-800" />
             <span className="sr-only">Aksel</span>

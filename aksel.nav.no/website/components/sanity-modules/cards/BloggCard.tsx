@@ -15,7 +15,7 @@ const BloggCard = ({ blog }: BloggCardProps) => {
   return (
     <li
       key={blog._id}
-      className="border-b-border-subtle flex h-full flex-col place-content-start border-b pb-8"
+      className="flex h-full flex-col place-content-start border-b border-b-border-subtle pb-8"
     >
       <Heading size="medium" as="div">
         <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
@@ -24,7 +24,7 @@ const BloggCard = ({ blog }: BloggCardProps) => {
             onClick={(e) =>
               amplitudeLogNavigation(
                 "blogg-card",
-                e.currentTarget.getAttribute("href")
+                e.currentTarget.getAttribute("href"),
               )
             }
           >
@@ -36,7 +36,7 @@ const BloggCard = ({ blog }: BloggCardProps) => {
       {getAuthors(blog).length > 0 && (
         <BodyShort
           size="small"
-          className="text-text-subtle mt-auto flex gap-2 justify-self-end"
+          className="mt-auto flex gap-2 justify-self-end text-text-subtle"
         >
           <span className="font-semibold">{getAuthors(blog)[0]}</span>
           <span>{date}</span>

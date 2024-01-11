@@ -12,18 +12,18 @@ const useCheckbox = (props: CheckboxProps) => {
 
   const { inputProps, readOnly, ...rest } = useFormField(
     omit(props, ["description", "children"]),
-    "checkbox"
+    "checkbox",
   );
 
   if (checkboxGroup) {
     if (props.checked) {
       console.warn(
-        "`checked` is unsupported on <Checkbox> elements within a <CheckboxGroup>. Please set a `value` or `defaultValue` on <CheckboxGroup> instead."
+        "`checked` is unsupported on <Checkbox> elements within a <CheckboxGroup>. Please set a `value` or `defaultValue` on <CheckboxGroup> instead.",
       );
     }
     if (props.value === undefined) {
       console.warn(
-        "A <Checkbox> element within a <CheckboxGroup> requires a `value` property."
+        "A <Checkbox> element within a <CheckboxGroup> requires a `value` property.",
       );
     }
   }

@@ -1,6 +1,6 @@
-import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import type { Meta, StoryFn } from "@storybook/react";
 import React, { useEffect } from "react";
+import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import { Box } from "../box";
 import { HGrid } from "../grid";
 import Page from "./Page";

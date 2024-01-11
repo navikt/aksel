@@ -39,7 +39,9 @@
 
 .navds-combobox--error
   .navds-text-field__input:not(:hover):not(:disabled):not(.navds-combobox__wrapper-inner--virtually-unfocused):focus-within {
-  box-shadow: 0 0 0 1px var(--ac-combobox-error-border, var(--a-border-danger)), var(--a-shadow-focus);
+  box-shadow:
+    0 0 0 1px var(--ac-combobox-error-border, var(--a-border-danger)),
+    var(--a-shadow-focus);
 }
 
 .navds-combobox__selected-options {
@@ -89,7 +91,9 @@
 }
 
 .navds-combobox__wrapper-inner:has(.navds-combobox__input:focus-visible) {
-  box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
+  box-shadow:
+    0 0 0 1px var(--a-surface-default) inset,
+    var(--a-shadow-focus);
   box-shadow: var(--a-shadow-focus);
 }
 
@@ -105,7 +109,9 @@
   }
 
   .navds-combobox__wrapper-inner:has(.navds-combobox__input:focus) {
-    box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
+    box-shadow:
+      0 0 0 1px var(--a-surface-default) inset,
+      var(--a-shadow-focus);
     box-shadow: var(--a-shadow-focus);
   }
 
@@ -116,7 +122,9 @@
 
 @supports not selector(:has) {
   .navds-combobox--focused .navds-combobox__wrapper-inner {
-    box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
+    box-shadow:
+      0 0 0 1px var(--a-surface-default) inset,
+      var(--a-shadow-focus);
     box-shadow: var(--a-shadow-focus);
   }
 
@@ -171,14 +179,18 @@
 }
 
 .navds-combobox__button-toggle-list:focus-visible {
-  box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
+  box-shadow:
+    0 0 0 1px var(--a-surface-default) inset,
+    var(--a-shadow-focus);
   box-shadow: var(--a-shadow-focus);
   outline: none;
 }
 
 @supports not selector(:focus-visible) {
   .navds-combobox__button-toggle-list:focus {
-    box-shadow: 0 0 0 1px var(--a-surface-default) inset, var(--a-shadow-focus);
+    box-shadow:
+      0 0 0 1px var(--a-surface-default) inset,
+      var(--a-shadow-focus);
     box-shadow: var(--a-shadow-focus);
     outline: none;
   }
@@ -297,7 +309,9 @@
 }
 
 .navds-combobox__list-item__new-option--focus {
-  box-shadow: var(--a-shadow-focus) inset, var(--a-border-action) 0 0 0 5px inset;
+  box-shadow:
+    var(--a-shadow-focus) inset,
+    var(--a-border-action) 0 0 0 5px inset;
   border-radius: calc(var(--a-border-radius-medium) - 1px);
 }
 

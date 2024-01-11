@@ -114,7 +114,7 @@ const adjektiv = [
 ];
 
 const generateName = async (
-  ctx: SlugSourceContext | InitialValueResolverContext
+  ctx: SlugSourceContext | InitialValueResolverContext,
 ) => {
   const names = await ctx
     .getClient({ apiVersion: SANITY_API_VERSION })
@@ -178,7 +178,7 @@ export const Editors = defineType({
       type: "slug",
       validation: (Rule) =>
         Rule.required().error(
-          "Fant allerede en bruker med denne ID-en. Slett dokumentet/brukeren nede i høyre, og last siden på nytt."
+          "Fant allerede en bruker med denne ID-en. Slett dokumentet/brukeren nede i høyre, og last siden på nytt.",
         ),
       options: {
         source: (_, { currentUser }) => {
@@ -216,7 +216,7 @@ export const Editors = defineType({
         const { id, roles } = currentUser;
         return (
           !roles.find(({ name }) =>
-            ["developer", "administrator"].includes(name)
+            ["developer", "administrator"].includes(name),
           ) && parent?.user_id?.current !== id
         );
       },

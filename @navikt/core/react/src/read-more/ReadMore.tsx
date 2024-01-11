@@ -65,7 +65,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       onOpenChange,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
@@ -79,7 +79,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           "navds-read-more",
           `navds-read-more--${size}`,
           className,
-          { "navds-read-more--open": _open }
+          { "navds-read-more--open": _open },
         )}
       >
         <button
@@ -114,7 +114,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
         </BodyLong>
       </div>
     );
-  }
+  },
 );
 
 export default ReadMore;

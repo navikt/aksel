@@ -28,8 +28,8 @@ export function useScrollRangeOpacity() {
           Math.floor(
             event.target.scrollHeight -
               event.target.scrollTop -
-              event.target.clientHeight
-          )
+              event.target.clientHeight,
+          ),
         ),
       });
 

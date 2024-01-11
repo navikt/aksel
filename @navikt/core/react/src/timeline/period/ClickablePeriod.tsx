@@ -24,7 +24,7 @@ import { PeriodProps } from "./types";
 
 interface TimelineClickablePeriodProps extends PeriodProps {
   onSelectPeriod?: (
-    e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
+    e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>,
   ) => void;
   isActive?: boolean;
   periodRef: React.ForwardedRef<HTMLButtonElement>;
@@ -91,7 +91,7 @@ const ClickablePeriod = React.memo(
 
     const mergedRef = useMemo(
       () => mergeRefs([refs.setReference, periodRef]),
-      [periodRef, refs.setReference]
+      [periodRef, refs.setReference],
     );
 
     const staticSide = {
@@ -117,7 +117,7 @@ const ClickablePeriod = React.memo(
             restProps?.className,
             {
               "navds-timeline__period--selected": isActive,
-            }
+            },
           )}
           aria-expanded={children ? open : undefined}
           aria-current={isActive || undefined}
@@ -179,7 +179,7 @@ const ClickablePeriod = React.memo(
         )}
       </>
     );
-  }
+  },
 );
 
 export default ClickablePeriod;

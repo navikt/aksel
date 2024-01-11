@@ -23,7 +23,7 @@ export const LatestBloggposts = ({
         level="1"
         size="xlarge"
         spacing
-        className="text-deepblue-700 mx-auto w-full text-5xl md:mx-0 md:max-w-none"
+        className="mx-auto w-full text-5xl text-deepblue-700 md:mx-0 md:max-w-none"
       >
         {title}
       </Heading>

@@ -1,5 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
+import React, { HTMLAttributes, forwardRef } from "react";
 
 export interface GridProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -17,7 +17,7 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
     <div ref={ref} className={cl("navds-grid", className)} {...rest}>
       {children}
     </div>
-  )
+  ),
 );
 
 export default Grid;

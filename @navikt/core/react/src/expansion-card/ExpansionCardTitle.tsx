@@ -25,8 +25,8 @@ export const ExpansionCardTitle: OverridableComponent<
         `navds-expansioncard__title--${size}`,
         "navds-heading",
         `navds-heading--${size}`,
-        className
+        className,
       )}
     />
-  )
+  ),
 );

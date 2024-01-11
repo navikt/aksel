@@ -9,7 +9,7 @@ const replaceKey = (s: string, keys: string[]) => {
 /* Cherry-picks object keys we want */
 const Reducer = (
   tokens: { [key: string]: string | number },
-  replace: string[]
+  replace: string[],
 ) =>
   Object.entries(tokens).reduce((old, [key, value]) => {
     return replace.find((v) => key.startsWith(v))

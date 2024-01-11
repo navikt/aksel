@@ -21,18 +21,18 @@ export const Slot = React.forwardRef<HTMLElement, SlotProps>(
 
     if (React.Children.count(children) > 1) {
       console.error(
-        "Aksel: Components using 'asChild' expects to recieve a single React element child."
+        "Aksel: Components using 'asChild' expects to recieve a single React element child.",
       );
       return React.Children.only(null);
     }
 
     return null;
-  }
+  },
 );
 
 function mergeProps(
   slotProps: Record<string, any>,
-  childProps: Record<string, any>
+  childProps: Record<string, any>,
 ) {
   // all child props should override
   const overrideProps = { ...childProps };

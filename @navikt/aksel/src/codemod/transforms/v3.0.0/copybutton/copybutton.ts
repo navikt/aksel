@@ -1,7 +1,7 @@
 import chalk from "chalk";
+import { getLineTerminator } from "../../../utils/lineterminator";
 import moveAndRenameImport from "../../../utils/moveAndRenameImport";
 import removePropsFromComponent from "../../../utils/removeProps";
-import { getLineTerminator } from "../../../utils/lineterminator";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
@@ -48,22 +48,22 @@ export default function transformer(file, api) {
       if (
         children.length > 0 &&
         !node.node.openingElement.attributes.some(
-          (attr) => attr.name.name === "text"
+          (attr) => attr.name.name === "text",
         )
       ) {
         if (children.length === 1 && children[0].type === "JSXText") {
           node.node.openingElement.attributes.push(
             j.jsxAttribute(
               j.jsxIdentifier("text"),
-              j.literal(children[0].value.trim())
-            )
+              j.literal(children[0].value.trim()),
+            ),
           );
         } else {
           flagged = true;
           console.log(
             chalk.yellow(
-              `\n\nWarning: Detected advanced children-type!\nCodemod can't convert into "text" prop so you will need to update this manually.`
-            )
+              `\n\nWarning: Detected advanced children-type!\nCodemod can't convert into "text" prop so you will need to update this manually.`,
+            ),
           );
         }
       }

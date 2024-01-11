@@ -1,9 +1,9 @@
-import React from "react";
-import { userEvent, within } from "@storybook/testing-library";
 import { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/testing-library";
+import React from "react";
 import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
-import { Tooltip } from "../tooltip";
 import { CopyButton } from ".";
+import { Tooltip } from "../tooltip";
 
 const meta: Meta<typeof CopyButton> = {
   title: "ds-react/CopyButton",

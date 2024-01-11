@@ -123,7 +123,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       flip: _flip = true,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useContext(ModalContext) !== null;
@@ -165,7 +165,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const floatingRef = useMemo(
       () => mergeRefs([refs.setFloating, ref]),
-      [refs.setFloating, ref]
+      [refs.setFloating, ref],
     );
 
     useClientLayoutEffect(() => {
@@ -173,7 +173,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       const cleanup = autoUpdate(
         refs.reference.current,
         refs.floating.current,
-        update
+        update,
       );
       return () => cleanup();
     }, [refs.floating, refs.reference, update, open, anchorEl]);
@@ -184,16 +184,16 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         (e: FocusEvent) => {
           if (
             e.target instanceof HTMLElement &&
-            ![anchorEl, refs.floating.current].some((element) =>
-              element?.contains(e.target as Node)
+            ![anchorEl, refs.floating.current].some(
+              (element) => element?.contains(e.target as Node),
             ) &&
             !e.target.contains(refs.floating.current)
           ) {
             open && onClose();
           }
         },
-        [anchorEl, refs, open, onClose]
-      )
+        [anchorEl, refs, open, onClose],
+      ),
     );
 
     const staticSide = {
@@ -237,7 +237,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         )}
       </div>
     );
-  }
+  },
 ) as PopoverComponent;
 
 Popover.Content = PopoverContent;

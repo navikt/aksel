@@ -1,9 +1,7 @@
+import { applyTransform } from "jscodeshift/dist/testUtils";
 import fs from "node:fs";
 import path from "node:path";
-
 import prettier from "prettier";
-
-import { applyTransform } from "jscodeshift/dist/testUtils";
 
 interface TestT {
   fixture: string;

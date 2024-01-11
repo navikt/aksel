@@ -3,7 +3,7 @@ import { DocumentBadgeDescription, DocumentBadgeProps } from "sanity";
 
 export const CreateStatusBadge = () => {
   const WrappedStatusBadge = (
-    props: DocumentBadgeProps
+    props: DocumentBadgeProps,
   ): DocumentBadgeDescription | null => {
     const { published, draft } = props;
     const lastVerified = draft?.updateInfo?.["lastVerified"];

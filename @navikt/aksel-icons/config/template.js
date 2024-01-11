@@ -18,7 +18,7 @@ const template = (variables, { tpl }) => {
   });
 
   variables.props[0].properties.find(
-    (prop) => prop.key.name === "titleId"
+    (prop) => prop.key.name === "titleId",
   ).value = {
     type: "Identifier",
     name: "_titleId",

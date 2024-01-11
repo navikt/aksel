@@ -28,7 +28,7 @@ export const ListItem: OverridableComponent<ListItemProps, HTMLButtonElement> =
             "navds-dropdown__item",
             "navds-body-short",
             "navds-body-short--small",
-            className
+            className,
           )}
         />
       </li>

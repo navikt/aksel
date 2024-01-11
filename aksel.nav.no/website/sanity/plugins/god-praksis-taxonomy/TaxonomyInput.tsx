@@ -13,7 +13,7 @@ export function TaxonomyInput(props) {
     {
       params: { type: "gp.innholdstype" },
       initialValue: [],
-    }
+    },
   );
 
   console.log(props);
@@ -33,7 +33,7 @@ export function TaxonomyInput(props) {
                   props.onChange(
                     set({ _ref: type._id, _type: "reference" }, [
                       "innholdstype",
-                    ])
+                    ]),
                   );
                 }}
                 checkmark={false}

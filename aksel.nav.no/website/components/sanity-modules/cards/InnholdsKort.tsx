@@ -15,13 +15,13 @@ const InnholdsKort = ({ node }: InnholdsKortProps) => {
   }
 
   return (
-    <article className="last-of-type:mb-18 focus-within:ring-border-focus shadow-xsmall hover:shadow-small group relative mb-7 rounded-lg bg-white p-4 focus-within:ring sm:p-8">
+    <article className="group relative mb-7 rounded-lg bg-white p-4 shadow-xsmall last-of-type:mb-18 focus-within:ring focus-within:ring-border-focus hover:shadow-small sm:p-8">
       <Heading
         spacing
         size="small"
         level="3"
         id={node._key}
-        className="text-deepblue-500 scroll-mt-28 underline focus:outline-none group-hover:no-underline"
+        className="scroll-mt-28 text-deepblue-500 underline focus:outline-none group-hover:no-underline"
       >
         <NextLink
           href={`/${node?.lenke}`}
@@ -30,7 +30,7 @@ const InnholdsKort = ({ node }: InnholdsKortProps) => {
             amplitudeLogNavigation(
               "prinsipp-kort",
 
-              e.currentTarget.getAttribute("href")
+              e.currentTarget.getAttribute("href"),
             )
           }
           className="z-10 before:absolute before:inset-0 focus:outline-none"

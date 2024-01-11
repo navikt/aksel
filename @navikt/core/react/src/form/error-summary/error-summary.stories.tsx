@@ -1,6 +1,7 @@
-import React from "react";
 import { Meta } from "@storybook/react";
+import React from "react";
 import { ErrorSummary } from "..";
+
 export default {
   title: "ds-react/Errorsummary",
   component: ErrorSummary,

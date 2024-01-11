@@ -31,7 +31,7 @@ export const GroupedItem: OverridableComponent<
           "navds-dropdown__item",
           "navds-body-short",
           "navds-body-short--small",
-          className
+          className,
         )}
       />
     </dd>

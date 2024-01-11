@@ -68,7 +68,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       colSpan = 999,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
@@ -139,7 +139,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         </tr>
       </>
     );
-  }
+  },
 );
 
 function isInteractiveTarget(elm: HTMLElement) {
@@ -148,7 +148,7 @@ function isInteractiveTarget(elm: HTMLElement) {
   }
   if (
     ["BUTTON", "DETAILS", "LABEL", "SELECT", "TEXTAREA", "INPUT", "A"].includes(
-      elm.nodeName
+      elm.nodeName,
     )
   ) {
     return true;

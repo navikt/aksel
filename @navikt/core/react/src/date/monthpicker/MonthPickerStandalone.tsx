@@ -40,10 +40,10 @@ export const MonthPickerStandalone = forwardRef<
       year,
       onYearChange,
     },
-    ref
+    ref,
   ) => {
     const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
-      defaultSelected
+      defaultSelected,
     );
 
     const handleSelect = (month?: Date) => {
@@ -81,7 +81,7 @@ export const MonthPickerStandalone = forwardRef<
         </RootProvider>
       </div>
     );
-  }
+  },
 );
 
 export default MonthPickerStandalone;

@@ -10,7 +10,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <header className="bg-surface-default grid h-20">
+    <header className="grid h-20 bg-surface-default">
       <HStack as="nav" justify="space-between" align="center">
         <a href="#" className="px-2 py-5">
           <Logo />

@@ -1,7 +1,8 @@
-import React from "react";
-import { Fieldset } from "../index";
 import { Meta } from "@storybook/react";
+import React from "react";
 import { TextField } from "../../index";
+import { Fieldset } from "../index";
+
 export default {
   title: "ds-react/Fieldset",
   component: Fieldset,

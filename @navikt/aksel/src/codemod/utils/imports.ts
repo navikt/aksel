@@ -4,7 +4,7 @@ export function getImportSpecifier(
   j: core.JSCodeshift,
   source: Collection<any>,
   specifier: string,
-  sourcePath: string
+  sourcePath: string,
 ) {
   return source
     .find(j.ImportDeclaration)
@@ -18,10 +18,10 @@ export function renameImportSpecifier(
   source: Collection<any>,
   specifier: string,
   newSpecifier: string,
-  sourcePath: string
+  sourcePath: string,
 ) {
   getImportSpecifier(j, source, specifier, sourcePath).replaceWith(
-    j.importSpecifier(j.identifier(newSpecifier))
+    j.importSpecifier(j.identifier(newSpecifier)),
   );
 }
 
@@ -29,7 +29,7 @@ export function getImportSpecifierName(
   j: core.JSCodeshift,
   source: Collection<any>,
   specifier: string,
-  sourcePath: string
+  sourcePath: string,
 ) {
   const specifiers = getImportSpecifier(j, source, specifier, sourcePath);
 

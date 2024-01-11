@@ -10,8 +10,8 @@ describe("Check correct parsing of tailwind tokens", () => {
           "blue-300": "rgba(102, 165, 244, 1)",
           "surface-action": "var(--a-blue-300)",
         },
-        ["shadow"]
-      )
+        ["shadow"],
+      ),
     ).toEqual({
       "focus-inverted": "0 0 0 3px var(--a-border-focus-inverted)",
     });

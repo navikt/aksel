@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import React, { useState } from "react";
 import { Button, Modal } from "..";
 import { BODY_CLASS } from "./ModalUtils";
 
@@ -34,7 +34,7 @@ describe("Modal", () => {
 
     fireEvent.click(screen.getByText("Close"));
     await waitFor(() =>
-      expect(document.body.classList).not.toContain(BODY_CLASS)
+      expect(document.body.classList).not.toContain(BODY_CLASS),
     );
   });
 
@@ -42,13 +42,13 @@ describe("Modal", () => {
     render(
       <Modal portal open>
         <Modal.Header />
-      </Modal>
+      </Modal>,
     );
     expect(document.body.classList).toContain(BODY_CLASS);
 
     fireEvent.click(screen.getByRole("button"));
     await waitFor(() =>
-      expect(document.body.classList).not.toContain(BODY_CLASS)
+      expect(document.body.classList).not.toContain(BODY_CLASS),
     );
   });
 });

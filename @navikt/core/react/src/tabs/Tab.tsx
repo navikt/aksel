@@ -25,7 +25,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
   forwardRef(
     (
       { className, as: Component = "button", label, icon, value, ...rest },
-      ref
+      ref,
     ) => {
       const context = useContext(TabsContext);
 
@@ -45,7 +45,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
               className,
               {
                 "navds-tabs__tab--icon-only": icon && !label,
-              }
+              },
             )}
             {...rest}
           >
@@ -60,7 +60,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
           </Component>
         </RadixTabs.Trigger>
       );
-    }
+    },
   );
 
 export default Tab;

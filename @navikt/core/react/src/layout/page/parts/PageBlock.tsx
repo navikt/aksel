@@ -64,10 +64,10 @@ export const PageBlock: OverridableComponent<PageBlockProps, HTMLDivElement> =
             "navds-pageblock",
             `navds-pageblock--${width}`,
             className,
-            { "navds-pageblock--gutters": gutters }
+            { "navds-pageblock--gutters": gutters },
           )}
           ref={ref}
         />
       );
-    }
+    },
   );

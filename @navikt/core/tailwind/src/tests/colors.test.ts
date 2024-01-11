@@ -9,7 +9,7 @@ describe("Check correct parsing of tailwind tokens", () => {
         "blue-300": "rgba(102, 165, 244, 1)",
         "surface-action": "rgba(0, 103, 197, 1)",
         transparent: "rgba(255, 255, 255, 0)",
-      })
+      }),
     ).toEqual({
       "blue-300": "rgba(102, 165, 244, 1)",
       "surface-action": "rgba(0, 103, 197, 1)",

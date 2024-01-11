@@ -58,7 +58,7 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
         interactive,
         ...rest
       },
-      ref
+      ref,
     ) => {
       const context = useContext(StepperContext);
       if (context === null) {
@@ -105,7 +105,7 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
           </Label>
         </Comp>
       );
-    }
+    },
   );
 
 export default Step;

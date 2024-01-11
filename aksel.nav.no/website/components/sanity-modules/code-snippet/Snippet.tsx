@@ -45,9 +45,9 @@ const CodeSnippet = ({ node: { code, title } }: CodeSnippetProps) => {
   return (
     <section
       aria-label="Kode"
-      className="aksel-codesnippet bg-surface-inverted relative mb-7 grid rounded-lg last:mb-0"
+      className="aksel-codesnippet relative mb-7 grid rounded-lg bg-surface-inverted last:mb-0"
     >
-      <div className="text-text-on-inverted text-medium relative flex leading-6">
+      <div className="relative flex text-medium leading-6 text-text-on-inverted">
         <div className="mt-2 flex flex-none items-center border-b border-b-gray-200 border-t-transparent px-4 py-1.5 text-gray-100">
           {!title ? (
             <Label as="span" className="uppercase">
@@ -68,7 +68,7 @@ const CodeSnippet = ({ node: { code, title } }: CodeSnippetProps) => {
       </div>
       <Highlight code={code.code} language={language} theme={theme}>
         {({ tokens, getLineProps, getTokenProps }) => (
-          <pre className="text-medium m-0 flex overflow-auto rounded-lg leading-6">
+          <pre className="m-0 flex overflow-auto rounded-lg text-medium leading-6">
             <code className="max-h-80 min-w-full flex-none p-4 pb-0">
               {tokens.map((line, i) => (
                 <span
@@ -76,7 +76,7 @@ const CodeSnippet = ({ node: { code, title } }: CodeSnippetProps) => {
                   {...getLineProps({ line, key: i })}
                   className={cl(
                     "last-of-type:pb-4",
-                    terminalStyling(language) ? "flex items-center" : "block"
+                    terminalStyling(language) ? "flex items-center" : "block",
                   )}
                 >
                   {terminalStyling(language) && (

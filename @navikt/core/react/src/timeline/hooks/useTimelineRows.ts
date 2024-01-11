@@ -1,16 +1,13 @@
-import { useMemo } from "react";
-
 import { addDays, endOfDay, isAfter, startOfDay, subDays } from "date-fns";
-
+import { useMemo } from "react";
+import { horizontalPositionAndWidth } from "../utils/calc";
+import { invisiblePeriods, withinADay } from "../utils/filter";
 import { lastPeriod } from "../utils/sort";
 import { Period } from "../utils/types.external";
 import {
   InternalSimpleTimeline,
   PositionedPeriod,
 } from "../utils/types.internal";
-
-import { horizontalPositionAndWidth } from "../utils/calc";
-import { invisiblePeriods, withinADay } from "../utils/filter";
 
 const spatialPeriod = (
   period: Period,
@@ -19,7 +16,7 @@ const spatialPeriod = (
   direction: "left" | "right" = "left",
   i: number,
   periods: PositionedPeriod[],
-  rowIndex: number
+  rowIndex: number,
 ): PositionedPeriod => {
   const start = period.start;
   const endInclusive = period.end;
@@ -30,10 +27,12 @@ const spatialPeriod = (
   const { horizontalPosition, width } = horizontalPositionAndWidth(
     startOfDay(start),
     endOfDay(
-      rightOverlap ? startOfDay(subDays(periods[i + 1].start, 1)) : endInclusive
+      rightOverlap
+        ? startOfDay(subDays(periods[i + 1].start, 1))
+        : endInclusive,
     ),
     timelineStart,
-    timelineEndInclusive
+    timelineEndInclusive,
   );
 
   return {
@@ -56,7 +55,7 @@ const spatialPeriod = (
 const adjustedEdges = (
   period: PositionedPeriod,
   i: number,
-  allPeriods: PositionedPeriod[]
+  allPeriods: PositionedPeriod[],
 ): PositionedPeriod => {
   const left =
     i > 0 && withinADay(period.start, allPeriods[i - 1].endInclusive);
@@ -67,10 +66,10 @@ const adjustedEdges = (
   return left && right
     ? { ...period, cropped: "both" }
     : left
-    ? { ...period, cropped: "left" }
-    : right
-    ? { ...period, cropped: "right" }
-    : period;
+      ? { ...period, cropped: "left" }
+      : right
+        ? { ...period, cropped: "right" }
+        : period;
 };
 
 const trimmedPeriods = (period: PositionedPeriod) => {
@@ -97,7 +96,7 @@ export const useTimelineRows = (
   rows: any,
   startDate: Date,
   endDate: Date,
-  direction: "left" | "right"
+  direction: "left" | "right",
 ): InternalSimpleTimeline[] =>
   useMemo(
     () =>
@@ -112,7 +111,7 @@ export const useTimelineRows = (
               direction,
               i,
               periods.periods,
-              rowIndex
+              rowIndex,
             ),
             restProps: period?.restProps,
             ref: period?.ref,
@@ -132,7 +131,7 @@ export const useTimelineRows = (
           ref: periods?.ref,
         };
       }),
-    [rows, startDate, endDate, direction]
+    [rows, startDate, endDate, direction],
   );
 
 const earliestDate = (earliest: Date, period: Period) =>
@@ -144,7 +143,7 @@ const earliestFomDate = (rader: Period[][]) =>
 export const useEarliestDate = ({ startDate, rows }: any) =>
   useMemo(
     () => (startDate ? startDate : earliestFomDate(rows)),
-    [startDate, rows]
+    [startDate, rows],
   );
 
 const latestDate = (latest: Date, period: Period) =>
@@ -156,5 +155,5 @@ const latestTomDate = (rows: Period[][]) =>
 export const useLatestDate = ({ endDate, rows }: any) =>
   useMemo(
     () => (endDate ? endDate : addDays(latestTomDate(rows), 1)),
-    [endDate, rows]
+    [endDate, rows],
   );

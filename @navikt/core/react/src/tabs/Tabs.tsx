@@ -1,11 +1,11 @@
 import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "clsx";
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { OverridableComponent } from "../util/OverridableComponent";
-import { TabsContext } from "./context";
 import Tab, { TabProps } from "./Tab";
 import TabList, { TabListProps } from "./TabList";
 import TabPanel, { TabPanelProps } from "./TabPanel";
+import { TabsContext } from "./context";
 
 export interface TabsProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -105,7 +105,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       iconPosition = "left",
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <RadixTabs.Root
@@ -126,7 +126,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         </TabsContext.Provider>
       </RadixTabs.Root>
     );
-  }
+  },
 ) as TabsComponent;
 
 Tabs.Tab = Tab;

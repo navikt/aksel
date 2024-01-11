@@ -1,10 +1,10 @@
 import { Rule } from "stylelint";
 import designTokenExists from "./aksel-design-token-exists";
-import internalTokens from "./aksel-no-internal-tokens";
+import noComponentReference from "./aksel-design-token-no-component-reference";
+import noGlobalOverride from "./aksel-design-token-no-global-override";
 import classOverride from "./aksel-no-class-override";
 import deprecatedClasses from "./aksel-no-deprecated-classes";
-import noGlobalOverride from "./aksel-design-token-no-global-override";
-import noComponentReference from "./aksel-design-token-no-component-reference";
+import internalTokens from "./aksel-no-internal-tokens";
 
 export const rules: Record<string, Rule> = {
   "aksel/design-token-exists": designTokenExists,

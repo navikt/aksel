@@ -79,7 +79,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             {
               "navds-fieldset--error": hasError,
               "navds-fieldset--readonly": readOnly,
-            }
+            },
           )}
         >
           <Label
@@ -118,7 +118,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
         </fieldset>
       </FieldsetContext.Provider>
     );
-  }
+  },
 );
 
 export default Fieldset;

@@ -6,7 +6,7 @@ import {
 
 export const createBadgeComponent = (badgeAction: DocumentBadgeComponent) => {
   const WrappedBadge = (
-    props: DocumentBadgeProps
+    props: DocumentBadgeProps,
   ): DocumentBadgeDescription | null => {
     const originalBadgeDescription = badgeAction(props);
 

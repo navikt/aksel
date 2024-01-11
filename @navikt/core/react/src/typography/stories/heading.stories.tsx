@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
-
 import { expect } from "@storybook/jest";
+import type { Meta, StoryObj } from "@storybook/react";
 import { within } from "@storybook/testing-library";
 import { default as React } from "react";
 import { Heading } from "..";

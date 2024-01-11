@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { InformationSquareIcon } from "@navikt/aksel-icons";
 import { Checkbox, CheckboxGroup } from "../../form";
 import { BodyLong, Detail, Heading } from "../../typography";
 import { Box } from "../box";
 import { HStack, VStack } from "../stack";
-import { InformationSquareIcon } from "@navikt/aksel-icons";
 
 export function FilterCard() {
   const [filter, setFilter] = useState<any[]>([]);

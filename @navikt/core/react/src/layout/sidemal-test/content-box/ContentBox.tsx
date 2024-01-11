@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { OverridableComponent } from "../../../util";
 
 export interface ContentBoxProps extends HTMLAttributes<HTMLDivElement> {
@@ -14,10 +14,10 @@ export const ContentBox: OverridableComponent<ContentBoxProps, HTMLDivElement> =
         return maxWidth === "3xl"
           ? "1920px"
           : maxWidth === "2xl"
-          ? "1440px"
-          : maxWidth === "xl"
-          ? "1280px"
-          : "1024px";
+            ? "1440px"
+            : maxWidth === "xl"
+              ? "1280px"
+              : "1024px";
       };
 
       return (
@@ -40,7 +40,7 @@ export const ContentBox: OverridableComponent<ContentBoxProps, HTMLDivElement> =
           </style>
         </>
       );
-    }
+    },
   );
 
 export default ContentBox;

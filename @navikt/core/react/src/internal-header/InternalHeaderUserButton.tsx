@@ -1,6 +1,6 @@
-import { ChevronDownIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail } from "../typography";
 import { OverridableComponent } from "../util/OverridableComponent";
 import InternalHeaderButton from "./InternalHeaderButton";

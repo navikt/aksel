@@ -31,6 +31,9 @@
     "scripts/eslint"
   ],
   "prettier": {
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ],
     "overrides": [
       {
         "files": "./aksel.nav.no/website/**",

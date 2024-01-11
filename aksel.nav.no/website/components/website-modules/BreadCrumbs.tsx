@@ -21,13 +21,13 @@ export const BreadCrumbs = ({
     <NextLink
       href={href ?? `/god-praksis/${router.query.tema}`}
       passHref
-      className="text-deepblue-500 hover:text-deepblue-800 group mb-1 flex w-fit items-center justify-start focus:underline focus:outline-none"
+      className="group mb-1 flex w-fit items-center justify-start text-deepblue-500 hover:text-deepblue-800 focus:underline focus:outline-none"
     >
       <svg
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={cl(
-          "text-deepblue-500 group-hover:text-deepblue-800 mr-2 h-[20px] w-[10px] transition-all group-hover:w-[16px]"
+          "mr-2 h-[20px] w-[10px] text-deepblue-500 transition-all group-hover:w-[16px] group-hover:text-deepblue-800",
         )}
         aria-hidden
       >
@@ -45,7 +45,7 @@ export const BreadCrumbs = ({
       </svg>
       {text ??
         (router.query.tema as string).replace(/(^\w|\s\w)/g, (m) =>
-          m.toUpperCase()
+          m.toUpperCase(),
         )}
     </NextLink>
   );

@@ -9,7 +9,7 @@ export interface CheckboxGroupState {
 }
 
 export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
-  null
+  null,
 );
 
 export interface CheckboxGroupProps
@@ -56,7 +56,7 @@ export const CheckboxGroup = forwardRef<
 >(
   (
     { value, defaultValue, onChange = () => {}, children, className, ...rest },
-    ref
+    ref,
   ) => {
     const fieldset = useContext(FieldsetContext);
 
@@ -79,7 +79,7 @@ export const CheckboxGroup = forwardRef<
         className={cl(
           className,
           "navds-checkbox-group",
-          `navds-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`
+          `navds-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`,
         )}
         nativeReadOnly={false}
       >
@@ -94,7 +94,7 @@ export const CheckboxGroup = forwardRef<
         </CheckboxGroupContext.Provider>
       </Fieldset>
     );
-  }
+  },
 );
 
 export default CheckboxGroup;

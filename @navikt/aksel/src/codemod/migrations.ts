@@ -104,7 +104,7 @@ export function getWarning(str: string) {
 export function getMigrationNames() {
   return Object.values(migrations).reduce(
     (acc, val) => [...val.map((x) => x.value), ...acc],
-    [] as string[]
+    [] as string[],
   );
 }
 

@@ -21,12 +21,14 @@ ymlList.forEach((file) => {
 
 fs.writeFileSync(
   path.resolve(__dirname, "../dist/metadata.js"),
-  `const metadata = ${JSON.stringify(metadata)};\n\n module.exports = metadata;`
+  `const metadata = ${JSON.stringify(
+    metadata,
+  )};\n\n module.exports = metadata;`,
 );
 
 fs.writeFileSync(
   path.resolve(__dirname, "../dist/metadata.mjs"),
-  `const metadata = ${JSON.stringify(metadata)};\n\n export default metadata;`
+  `const metadata = ${JSON.stringify(metadata)};\n\n export default metadata;`,
 );
 
 fs.writeFileSync(
@@ -46,5 +48,5 @@ fs.writeFileSync(
     [iconId: string]: AkselIcon;
   };
 
-  export default metadata;`
+  export default metadata;`,
 );

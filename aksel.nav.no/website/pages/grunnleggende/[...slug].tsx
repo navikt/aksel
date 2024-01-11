@@ -53,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         params: {
           slug: slug.split("/").filter((x) => x !== "grunnleggende"),
         },
-      }))
+      })),
     ),
     fallback: "blocking",
   };

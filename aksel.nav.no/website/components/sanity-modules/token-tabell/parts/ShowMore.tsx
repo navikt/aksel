@@ -78,7 +78,7 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
       "aria-labelledby": ariaLabelledby,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const localRef = useRef<HTMLElement>(null);
     const mergedRef = useMemo(() => mergeRefs([localRef, ref]), [ref]);
@@ -94,7 +94,7 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
           "navds-show-more",
           `navds-show-more--${variant}`,
           className,
-          { "navds-show-more--closed": !isOpen }
+          { "navds-show-more--closed": !isOpen },
         )}
         aria-labelledby={
           !ariaLabelledby && !rest["aria-label"] ? ariaLabelId : ariaLabelledby
@@ -136,7 +136,7 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
         </div>
       </Component>
     );
-  }
+  },
 );
 
 export default ShowMore;

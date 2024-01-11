@@ -52,7 +52,7 @@ const Placeholder = ({
 }) => {
   return (
     <div
-      className="min-h-4 text-text-on-action h-auto w-auto rounded bg-teal-600 p-2"
+      className="h-auto min-h-4 w-auto rounded bg-teal-600 p-2 text-text-on-action"
       style={{ padding: noPadding && 0 }}
     >
       {text}

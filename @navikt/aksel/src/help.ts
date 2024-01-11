@@ -6,7 +6,7 @@ export function helpCommand() {
   console.log(`
 📝 Documentation
    - ${chalk.blueBright(
-     "https://aksel.nav.no/grunnleggende/kode/kommandolinje"
+     "https://aksel.nav.no/grunnleggende/kode/kommandolinje",
    )}
 
 💻 Commands:
@@ -16,7 +16,7 @@ export function helpCommand() {
    ✔︎ Handles cascading, tailwind and @layer rules
 
    - ${chalk.cyan(
-     `npx @navikt/aksel ${chalk.green("codemod")} ${chalk.gray("<migration>")}`
+     `npx @navikt/aksel ${chalk.green("codemod")} ${chalk.gray("<migration>")}`,
    )}
    ✔︎ Code-transformations for breaking changes when updating Aksel
    ✔︎ Run with ${chalk.cyan(`${chalk.green("--help")}`)} to get started!

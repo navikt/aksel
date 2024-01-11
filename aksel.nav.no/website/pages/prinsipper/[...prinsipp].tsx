@@ -44,7 +44,7 @@ export const query = `{
 }`;
 
 export const getServerSideProps: GetServerSideProps = async (
-  context
+  context,
 ): Promise<PageProps> => {
   const { prinsipp } = await getClient().fetch(query, {
     slug: `prinsipper/${(context.params?.prinsipp as string[]).join("/")}`,
@@ -78,7 +78,7 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
     console.warn(
       `Artikkelen har ikke ${
         !data.content ? "innhold" : "overskrift"
-      }, så den kan ikke vises.`
+      }, så den kan ikke vises.`,
     );
     return null;
   }
@@ -105,7 +105,7 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
       >
         <article className="overflow-x-clip">
           <div
-            className={cl("max-w-aksel mx-auto px-4 sm:w-[90%]", {
+            className={cl("mx-auto max-w-aksel px-4 sm:w-[90%]", {
               "pb-32": mainPage,
             })}
           >
@@ -120,7 +120,7 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
                 <Heading
                   level="1"
                   size="large"
-                  className="text-deepblue-700 mt-4 md:text-5xl"
+                  className="mt-4 text-deepblue-700 md:text-5xl"
                 >
                   {data.heading}
                 </Heading>
@@ -158,7 +158,7 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
               "bg-gray-100": mainPage,
             })}
           >
-            <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
+            <div className="mx-auto max-w-aksel px-4 sm:w-[90%]">
               <div className="pb-16 md:pb-32">
                 <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
                   <TableOfContents toc={toc} />
@@ -172,14 +172,14 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
                     <SanityBlockContent blocks={data?.content ?? []} />
                     <div className="mt-12">
                       {authors?.length > 0 && (
-                        <Label className="text-deepblue-700 mb-2" as="p">
+                        <Label className="mb-2 text-deepblue-700" as="p">
                           Bidragsytere
                         </Label>
                       )}
                       {authors?.length > 0 && (
                         <BodyShort
                           as="div"
-                          className="text-text-subtle mb-1 flex flex-wrap gap-1"
+                          className="mb-1 flex flex-wrap gap-1 text-text-subtle"
                         >
                           {authors.map(abbrName).map((x, y) => (
                             <address className="not-italic" key={x}>

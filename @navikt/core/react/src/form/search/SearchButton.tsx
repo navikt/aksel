@@ -1,6 +1,6 @@
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, ButtonProps } from "../../button";
 import { SearchContext } from "./context";
 
@@ -49,7 +49,7 @@ const SearchButton: SearchButtonType = forwardRef(
         {children}
       </Button>
     );
-  }
+  },
 );
 
 export default SearchButton;

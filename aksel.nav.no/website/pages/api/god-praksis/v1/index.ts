@@ -4,7 +4,7 @@ import { getClient } from "@/sanity/client.server";
 
 export default async function akselAarticles(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed" });

@@ -28,7 +28,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
       size,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const ariaId = useId();
 
@@ -73,7 +73,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
         </div>
       </ListContext.Provider>
     );
-  }
+  },
 ) as ListComponent;
 
 List.Item = ListItem;

@@ -9,12 +9,12 @@ export const horizontalPositionAndWidth = (
   start: Date,
   endInclusive: Date,
   timelineStart: Date,
-  timelineEndInclusive: Date
+  timelineEndInclusive: Date,
 ) => {
   const horizontalPosition = position(
     start,
     timelineStart,
-    timelineEndInclusive
+    timelineEndInclusive,
   );
   const width =
     position(endInclusive, timelineStart, timelineEndInclusive) -

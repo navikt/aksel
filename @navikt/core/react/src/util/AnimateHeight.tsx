@@ -75,7 +75,7 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   const prefersReducedMotion = useRef<boolean>(
     isBrowser && window.matchMedia
       ? window.matchMedia("(prefers-reduced-motion)").matches
-      : false
+      : false,
   );
 
   const duration = prefersReducedMotion.current ? 0 : userDuration;

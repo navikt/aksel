@@ -38,11 +38,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                     iconPosition="right"
                   />
                 </dt>
-                <dd className="text-text-subtle text-medium mt-auto">
+                <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
                     <Link
                       href={`#${ref.name}`}
-                      className="focus-visible:bg-border-focus focus-visible:text-text-on-action hover:underline focus:outline-none"
+                      className="hover:underline focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action"
                     >
                       {sanitizeName(ref.name)}
                     </Link>
@@ -89,11 +89,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                     iconPosition="right"
                   />
                 </dt>
-                <dd className="text-text-subtle text-medium mt-auto">
+                <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
                     <Link
                       href={`#${ref.name}`}
-                      className="focus-visible:bg-border-focus focus-visible:text-text-on-action hover:underline focus:outline-none"
+                      className="hover:underline focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action"
                     >
                       {sanitizeName(ref.name)}
                     </Link>
@@ -132,11 +132,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                     iconPosition="right"
                   />
                 </dt>
-                <dd className="text-text-subtle text-medium mt-auto">
+                <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
                     <Link
                       href={`#${ref.name}`}
-                      className="focus-visible:bg-border-focus focus-visible:text-text-on-action hover:underline focus:outline-none"
+                      className="hover:underline focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action"
                     >
                       {sanitizeName(ref.name)}
                     </Link>
@@ -165,32 +165,32 @@ export const SemanticView = ({ cat }: { cat: string }) => {
             >
               <div className="mr-3 flex h-16 w-16 items-end justify-evenly rounded-lg text-4xl leading-none">
                 <span
-                  className="rounded-t-small h-full w-3"
+                  className="h-full w-3 rounded-t-small"
                   style={{
                     border: `1px solid var(${x.name})`,
                     backgroundColor: `var(${x.name.replace(
                       "border",
-                      "surface"
+                      "surface",
                     )}-subtle)`,
                   }}
                 />
                 <span
-                  className="rounded-t-small h-2/4 w-3"
+                  className="h-2/4 w-3 rounded-t-small"
                   style={{
                     border: `1px solid var(${x.name})`,
                     backgroundColor: `var(${x.name.replace(
                       "border",
-                      "surface"
+                      "surface",
                     )}-subtle)`,
                   }}
                 />
                 <span
-                  className="rounded-t-small h-2/3 w-3"
+                  className="h-2/3 w-3 rounded-t-small"
                   style={{
                     border: `1px solid var(${x.name})`,
                     backgroundColor: `var(${x.name.replace(
                       "border",
-                      "surface"
+                      "surface",
                     )}-subtle)`,
                   }}
                 />
@@ -204,11 +204,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                     iconPosition="right"
                   />
                 </dt>
-                <dd className="text-text-subtle text-medium mt-auto">
+                <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
                     <Link
                       href={`#${ref.name}`}
-                      className="focus-visible:bg-border-focus focus-visible:text-text-on-action hover:underline focus:outline-none"
+                      className="hover:underline focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action"
                     >
                       {sanitizeName(ref.name)}
                     </Link>
@@ -237,15 +237,15 @@ export const SemanticView = ({ cat }: { cat: string }) => {
             >
               <div className="mr-3 flex h-16 w-16 items-end justify-evenly rounded-lg text-4xl leading-none">
                 <span
-                  className="rounded-t-small h-full w-3"
+                  className="h-full w-3 rounded-t-small"
                   style={{ backgroundColor: `var(${x.name})` }}
                 />
                 <span
-                  className="rounded-t-small h-2/4 w-3"
+                  className="h-2/4 w-3 rounded-t-small"
                   style={{ backgroundColor: `var(${x.name})` }}
                 />
                 <span
-                  className="rounded-t-small h-2/3 w-3"
+                  className="h-2/3 w-3 rounded-t-small"
                   style={{ backgroundColor: `var(${x.name})` }}
                 />
               </div>
@@ -258,11 +258,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                     iconPosition="right"
                   />
                 </dt>
-                <dd className="text-text-subtle text-medium mt-auto">
+                <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
                     <Link
                       href={`#${ref.name}`}
-                      className="focus-visible:bg-border-focus focus-visible:text-text-on-action hover:underline focus:outline-none"
+                      className="hover:underline focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action"
                     >
                       {sanitizeName(ref.name)}
                     </Link>
@@ -303,11 +303,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   iconPosition="right"
                 />
               </dt>
-              <dd className="text-text-subtle text-medium mt-auto">
+              <dd className="mt-auto text-medium text-text-subtle">
                 {ref ? (
                   <Link
                     href={`#${ref.name}`}
-                    className="focus-visible:bg-border-focus focus-visible:text-text-on-action hover:underline focus:outline-none"
+                    className="hover:underline focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action"
                   >
                     {sanitizeName(ref.name)}
                   </Link>

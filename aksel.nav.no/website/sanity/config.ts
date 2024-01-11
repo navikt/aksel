@@ -69,7 +69,7 @@ export const prinsippKategorier = [
 ];
 
 export const sanityCategoryLookup = (
-  category: "komponenter" | "grunnleggende" | "templates"
+  category: "komponenter" | "grunnleggende" | "templates",
 ) => {
   const _category = category.toLowerCase();
 

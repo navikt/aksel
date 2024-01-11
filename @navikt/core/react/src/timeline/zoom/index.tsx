@@ -21,7 +21,7 @@ export const Zoom = forwardRef<HTMLUListElement, ZoomProps>(
         {children}
       </ul>
     );
-  }
+  },
 ) as ZoomType;
 
 Zoom.Button = ZoomButton;

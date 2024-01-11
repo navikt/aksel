@@ -79,7 +79,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         iconPosition = "left",
         ...rest
       },
-      ref
+      ref,
     ) => {
       const buttonRef = useRef<HTMLButtonElement | null>(null);
       const [widthOverride, setWidthOverride] = useState<number>();
@@ -90,7 +90,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         if (loading) {
           const requestID = window.requestAnimationFrame(() => {
             setWidthOverride(
-              buttonRef?.current?.getBoundingClientRect()?.width
+              buttonRef?.current?.getBoundingClientRect()?.width,
             );
           });
           return () => {
@@ -128,7 +128,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
               "navds-button--loading": widthOverride,
               "navds-button--icon-only": !!icon && !children,
               "navds-button--disabled": disabled ?? widthOverride,
-            }
+            },
           )}
           style={{
             ...style,
@@ -155,7 +155,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           )}
         </Component>
       );
-    }
+    },
   );
 
 export default Button;

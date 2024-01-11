@@ -57,7 +57,7 @@ export const Feedback = defineType({
       weak: true,
       hidden: ({ value }) => !value,
       to: [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].map(
-        (x) => ({ type: x })
+        (x) => ({ type: x }),
       ),
       readOnly: true,
     }),
@@ -94,8 +94,8 @@ export const Feedback = defineType({
           feedback_type === "footer"
             ? "footer"
             : feedback_type === "artikkel_feedback"
-            ? "Innhold"
-            : "uu-feedback"
+              ? "Innhold"
+              : "uu-feedback"
         }`,
         media: ChatIcon,
       };

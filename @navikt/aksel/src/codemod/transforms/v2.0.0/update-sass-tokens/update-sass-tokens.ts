@@ -1,5 +1,5 @@
-import { translateToken } from "../../../utils/translate-token";
 import { tokens } from "../../../tokens-map.js";
+import { translateToken } from "../../../utils/translate-token";
 
 /**
  * @param {import('jscodeshift').FileInfo} file

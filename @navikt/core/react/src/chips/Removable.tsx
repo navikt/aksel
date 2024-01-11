@@ -1,6 +1,6 @@
-import { XMarkIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { XMarkIcon } from "@navikt/aksel-icons";
 
 export interface RemovableChipsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -35,7 +35,7 @@ export const RemovableChips = forwardRef<
       type = "button",
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <button
@@ -45,7 +45,7 @@ export const RemovableChips = forwardRef<
         className={cl(
           "navds-chips__chip navds-chips__removable navds-chips--icon-right",
           className,
-          `navds-chips__removable--${variant}`
+          `navds-chips__removable--${variant}`,
         )}
         aria-label={`${children} ${removeLabel}`}
         onClick={(e) => {
@@ -59,7 +59,7 @@ export const RemovableChips = forwardRef<
         </span>
       </button>
     );
-  }
+  },
 );
 
 export default RemovableChips;

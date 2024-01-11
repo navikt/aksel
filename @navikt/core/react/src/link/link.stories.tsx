@@ -1,5 +1,5 @@
-import { PlusCircleFillIcon } from "@navikt/aksel-icons";
 import React from "react";
+import { PlusCircleFillIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   Alert as DsAlert,

@@ -1,4 +1,5 @@
 import {
+  Locale,
   addDays,
   addWeeks,
   differenceInCalendarDays,
@@ -6,7 +7,6 @@ import {
   endOfWeek,
   getWeek,
   getWeeksInMonth,
-  Locale,
   startOfMonth,
   startOfWeek,
 } from "date-fns";
@@ -23,7 +23,7 @@ export function getMonthWeeks(
   options: {
     locale: Locale;
     useFixedWeeks?: boolean;
-  }
+  },
 ): MonthWeek[] {
   const _options = {
     ...options,
@@ -32,7 +32,7 @@ export function getMonthWeeks(
   const weeksInMonth: MonthWeek[] = daysToMonthWeeks(
     startOfMonth(month),
     endOfMonth(month),
-    _options
+    _options,
   );
 
   if (_options?.useFixedWeeks) {
@@ -45,7 +45,7 @@ export function getMonthWeeks(
       const extraWeeks = daysToMonthWeeks(
         addWeeks(lastDate, 1),
         toDate,
-        _options
+        _options,
       );
       weeksInMonth.push(...extraWeeks);
     }
@@ -60,7 +60,7 @@ export function daysToMonthWeeks(
   options?: {
     locale?: Locale;
     weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-  }
+  },
 ): MonthWeek[] {
   const toWeek = endOfWeek(toDate, options);
   const fromWeek = startOfWeek(fromDate, options);
@@ -76,7 +76,7 @@ export function daysToMonthWeeks(
     const weekNumber = getWeek(date, options);
 
     const existingWeek = result.find(
-      (value) => value.weekNumber === weekNumber
+      (value) => value.weekNumber === weekNumber,
     );
     if (existingWeek) {
       existingWeek.dates.push(date);

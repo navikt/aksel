@@ -28,7 +28,7 @@ export function TemaView() {
     .find((x) => x.title === title)
     ?.["seksjoner"]?.reduce(
       (b, n) => [...b, ...(n?.sider?.map((x) => x._ref) ?? [])],
-      []
+      [],
     );
   const artikler = tema.find((x) => x.title === title)?.["artikler"];
 

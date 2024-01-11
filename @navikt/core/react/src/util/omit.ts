@@ -6,5 +6,5 @@ export const omit = (obj: object, props: string[]) =>
         ...prevObj,
         [key]: value,
       }),
-      {}
+      {},
     );

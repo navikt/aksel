@@ -4,7 +4,7 @@ import { SANITY_API_VERSION } from "@/sanity/config";
 export const Panes = (
   docType,
   categories: { title: string; value: string }[],
-  S
+  S,
 ) => {
   return [
     ...categories.map(({ value, title }) =>
@@ -16,8 +16,8 @@ export const Panes = (
             .schemaType(docType)
             .filter(`_type == $docType && $kat == kategori`)
             .params({ kat: value, docType })
-            .apiVersion(SANITY_API_VERSION)
-        )
+            .apiVersion(SANITY_API_VERSION),
+        ),
     ),
     S.listItem()
       .title(`Uten kategori`)
@@ -28,7 +28,7 @@ export const Panes = (
           .schemaType(docType)
           .filter(`_type == $docType && !defined(kategori)`)
           .params({ docType })
-          .apiVersion(SANITY_API_VERSION)
+          .apiVersion(SANITY_API_VERSION),
       ),
   ];
 };

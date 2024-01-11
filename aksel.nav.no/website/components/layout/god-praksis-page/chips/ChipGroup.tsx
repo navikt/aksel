@@ -10,7 +10,7 @@ const countUniques = (
   type: "innholdstype" | "undertema",
   data: ChipsData,
   query: string,
-  comparisonQuery: string
+  comparisonQuery: string,
 ): ChipsRenderData => {
   const lens =
     type === "innholdstype" ? "innholdstype-title" : "undertema-title";
@@ -55,13 +55,13 @@ function ChipsGroup(props: ChipsGroupProps) {
         "innholdstype",
         props.data,
         innholdstypeQuery,
-        undertemaQuery
+        undertemaQuery,
       ),
       undertema: countUniques(
         "undertema",
         props.data,
         undertemaQuery,
-        innholdstypeQuery
+        innholdstypeQuery,
       ),
     };
   }, [props.data, innholdstypeQuery, undertemaQuery]);

@@ -75,7 +75,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       onYearChange,
       strategy = "absolute",
     },
-    ref
+    ref,
   ) => {
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
@@ -84,7 +84,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
     const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
-      defaultSelected
+      defaultSelected,
     );
 
     const handleSelect = (month?: Date) => {
@@ -151,7 +151,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
         </div>
       </DateContext.Provider>
     );
-  }
+  },
 ) as MonthPickerComponent;
 
 MonthPicker.Standalone = MonthPickerStandalone;

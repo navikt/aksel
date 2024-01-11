@@ -1,9 +1,9 @@
-import { basename } from "path";
-import { unified } from "unified";
-import parse from "rehype-parse";
 import fastglob from "fast-glob";
 import { readFileSync } from "fs";
 import { select, selectAll } from "hast-util-select";
+import { basename } from "path";
+import parse from "rehype-parse";
+import { unified } from "unified";
 
 const basePath = "./icons";
 
@@ -20,11 +20,11 @@ describe(`Each icons has a valid code`, () => {
 
       it(`has valid attributes on root-node`, () => {
         const properties = Object.keys(
-          select(":root", iconAst).properties
+          select(":root", iconAst).properties,
         ).sort();
 
         expect(properties).toStrictEqual(
-          ["viewBox", "xmlns", "height", "width", "fill"].sort()
+          ["viewBox", "xmlns", "height", "width", "fill"].sort(),
         );
       });
 

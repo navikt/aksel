@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util";
 
 export interface ErrorSummaryItemProps
@@ -30,7 +30,7 @@ export const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
         {children}
       </Component>
     );
-  }
+  },
 );
 
 export default ErrorSummaryItem;

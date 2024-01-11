@@ -1,5 +1,5 @@
-import React from "react";
 import type { Meta } from "@storybook/react";
+import React from "react";
 import { Tag, TagProps } from ".";
 
 const variants: TagProps["variant"][] = [

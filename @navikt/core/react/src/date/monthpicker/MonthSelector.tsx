@@ -46,7 +46,7 @@ export const MonthSelector = () => {
   };
 
   const [tabRoot, setTabRoot] = useState(
-    hasSelected ? selected : getRootFallback()
+    hasSelected ? selected : getRootFallback(),
   );
 
   if (tabRoot?.getFullYear() !== year.getFullYear()) {

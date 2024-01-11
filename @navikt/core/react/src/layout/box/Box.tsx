@@ -3,13 +3,13 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/OverridableComponent";
 import { getResponsiveProps } from "../utilities/css";
 import {
-  SpaceDelimitedAttribute,
-  ResponsiveProp,
-  SpacingScale,
   BackgroundToken,
   BorderColorToken,
-  ShadowToken,
   BorderRadiiToken,
+  ResponsiveProp,
+  ShadowToken,
+  SpaceDelimitedAttribute,
+  SpacingScale,
 } from "../utilities/types";
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -105,7 +105,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       style: _style,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const style: React.CSSProperties = {
       ..._style,
@@ -128,7 +128,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         "border-radius",
         borderRadius,
         false,
-        ["0"]
+        ["0"],
       ),
       ...getResponsiveProps("box", "padding", "spacing", padding),
       ...getResponsiveProps("box", "padding-inline", "spacing", paddingInline),
@@ -143,5 +143,5 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
         style={style}
       />
     );
-  }
+  },
 );

@@ -60,7 +60,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         inlineText = false,
         ...rest
       },
-      ref
+      ref,
     ) => (
       <Component
         {...rest}
@@ -70,7 +70,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
           "navds-link--inline-text": inlineText,
         })}
       />
-    )
+    ),
   );
 
 export default Link;

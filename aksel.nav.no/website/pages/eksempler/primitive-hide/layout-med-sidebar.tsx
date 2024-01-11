@@ -35,7 +35,7 @@ const Example = () => {
 };
 
 const ContentFirst = ({ className }: { className?: string }) => (
-  <div className={cl("bg-surface-default h-fit p-10", className)}>
+  <div className={cl("h-fit bg-surface-default p-10", className)}>
     <VStack gap="6">
       <VStack gap="2" align="start">
         <Heading size="large">Kort om pleiepenger for sykt barn</Heading>
@@ -66,7 +66,7 @@ const ContentFirst = ({ className }: { className?: string }) => (
 );
 
 const ContentLast = () => (
-  <div className="bg-surface-default h-fit p-10">
+  <div className="h-fit bg-surface-default p-10">
     <VStack gap="6">
       <VStack gap="2" align="start">
         <Heading size="large">Hvor lenge?</Heading>
@@ -93,7 +93,7 @@ const LinkElement = ({ children }) => {
   return (
     <Label
       as="li"
-      className="text-text-action hover:bg-surface-action-subtle hover:text-text-default cursor-pointer px-4 py-3 hover:underline"
+      className="cursor-pointer px-4 py-3 text-text-action hover:bg-surface-action-subtle hover:text-text-default hover:underline"
     >
       {children}
     </Label>

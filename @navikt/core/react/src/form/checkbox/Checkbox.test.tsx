@@ -16,7 +16,7 @@ test("checkbox group chains onChange calls", async () => {
       <Checkbox onChange={onChange} value={value}>
         {label}
       </Checkbox>
-    </CheckboxGroup>
+    </CheckboxGroup>,
   );
 
   fireEvent.click(screen.getByLabelText(label));
@@ -42,11 +42,11 @@ describe("Checkbox handles controlled-state correctly", () => {
     fireEvent.click(screen.getByLabelText("label2"));
 
     expect((screen.getByLabelText("label1") as HTMLInputElement).checked).toBe(
-      true
+      true,
     );
 
     expect((screen.getByLabelText("label2") as HTMLInputElement).checked).toBe(
-      true
+      true,
     );
   });
 
@@ -57,7 +57,7 @@ describe("Checkbox handles controlled-state correctly", () => {
       <CheckboxComponent
         onChange={onGroupChange}
         value={["value1", "value2"]}
-      />
+      />,
     );
 
     fireEvent.click(screen.getByLabelText("label1"));
@@ -71,19 +71,19 @@ describe("Checkbox handles controlled-state correctly", () => {
     const { rerender } = render(<CheckboxComponent value={[]} />);
 
     expect((screen.getByLabelText("label1") as HTMLInputElement).checked).toBe(
-      false
+      false,
     );
     expect((screen.getByLabelText("label2") as HTMLInputElement).checked).toBe(
-      false
+      false,
     );
 
     rerender(<CheckboxComponent value={["value1", "value2"]} />);
 
     expect((screen.getByLabelText("label1") as HTMLInputElement).checked).toBe(
-      true
+      true,
     );
     expect((screen.getByLabelText("label2") as HTMLInputElement).checked).toBe(
-      true
+      true,
     );
   });
 });

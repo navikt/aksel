@@ -61,7 +61,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
       wrapperClassName,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
@@ -98,7 +98,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
         </Popover>
       </div>
     );
-  }
+  },
 );
 
 export default HelpText;
