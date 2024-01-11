@@ -113,7 +113,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       maxChar = 80,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
@@ -168,11 +168,11 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const mergedRef = useMemo(
       () => mergeRefs([ref, refs.setFloating]),
-      [refs.setFloating, ref]
+      [refs.setFloating, ref],
     );
     const childMergedRef = useMemo(
       () => mergeRefs([(children as any).ref, refs.setReference]),
-      [children, refs.setReference]
+      [children, refs.setReference],
     );
 
     if (
@@ -181,7 +181,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       (children as any) === React.Fragment
     ) {
       console.error(
-        "<Tooltip> children needs to be a single ReactElement and not: <React.Fragment/> | <></>"
+        "<Tooltip> children needs to be a single ReactElement and not: <React.Fragment/> | <></>",
       );
       return null;
     }
@@ -189,7 +189,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     if (content?.length > maxChar) {
       _open &&
         console.warn(
-          `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop\n\nLength:${content.length}\nTooltip-content: ${content}`
+          `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop\n\nLength:${content.length}\nTooltip-content: ${content}`,
         );
     }
 
@@ -203,7 +203,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             "aria-describedby": _open
               ? cl(ariaId, children?.props["aria-describedby"])
               : children?.props["aria-describedby"],
-          })
+          }),
         )}
         <FloatingPortal root={rootElement}>
           {_open && (
@@ -222,7 +222,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 className: cl(
                   "navds-tooltip",
                   "navds-detail navds-detail--small",
-                  className
+                  className,
                 ),
               })}
               data-side={placement}
@@ -267,7 +267,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         </FloatingPortal>
       </>
     );
-  }
+  },
 );
 
 export default Tooltip;

@@ -4,7 +4,7 @@ import { useCallbackRef } from "./useCallbackRef";
 
 export interface UseControllableStateProps<T> {
   value?: T;
-  defaultValue?: T | (() => T);
+  defaultValue: T | (() => T);
   onChange?: (value: T) => void;
 }
 
@@ -18,7 +18,7 @@ export function useControllableState<T>({
 }: UseControllableStateProps<T>) {
   const onChangeProp = useCallbackRef(onChange);
 
-  const [uncontrolledState, setUncontrolledState] = useState(defaultValue as T);
+  const [uncontrolledState, setUncontrolledState] = useState(defaultValue);
   const controlled = valueProp !== undefined;
   const value = controlled ? valueProp : uncontrolledState;
 
