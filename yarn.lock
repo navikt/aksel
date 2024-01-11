@@ -8290,7 +8290,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xfinx/storybook-addon-html@npm:^5.1.10":
+"@xfinx/storybook-addon-html@npm:5.1.10":
   version: 5.1.10
   resolution: "@xfinx/storybook-addon-html@npm:5.1.10"
   peerDependencies:
@@ -8658,7 +8658,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.3.0
     "@typescript-eslint/eslint-plugin": ^6.7.3
     "@typescript-eslint/parser": ^6.7.3
-    "@xfinx/storybook-addon-html": ^5.1.10
+    "@xfinx/storybook-addon-html": 5.1.10
     chromatic: 9.1.0
     concurrently: 7.2.1
     cross-env: ^7.0.0
