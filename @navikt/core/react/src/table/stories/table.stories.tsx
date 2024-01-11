@@ -14,8 +14,8 @@ const TableComponent = (props) => (
         {props.button && <Table.HeaderCell>Action</Table.HeaderCell>}
         <Table.HeaderCell>ID</Table.HeaderCell>
         <Table.HeaderCell>Fornavn</Table.HeaderCell>
-        <Table.HeaderCell>Etternavn</Table.HeaderCell>
-        <Table.HeaderCell>Rolle</Table.HeaderCell>
+        <Table.HeaderCell size="medium">Etternavn</Table.HeaderCell>
+        <Table.HeaderCell size="small">Rolle</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
     <Table.Body>
@@ -64,8 +64,8 @@ const TableComponent = (props) => (
         )}
         <Table.HeaderCell>3</Table.HeaderCell>
         <Table.DataCell>Geordi</Table.DataCell>
-        <Table.DataCell>La Forge</Table.DataCell>
-        <Table.DataCell>Sjefsingeniør</Table.DataCell>
+        <Table.DataCell size="medium">La Forge</Table.DataCell>
+        <Table.DataCell size="small">Sjefsingeniør</Table.DataCell>
       </Table.Row>
     </Table.Body>
   </Table>

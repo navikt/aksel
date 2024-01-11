@@ -1,6 +1,5 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { LabelProps } from "../typography";
 
 export interface HeaderCellProps
   extends React.ThHTMLAttributes<HTMLTableCellElement> {
@@ -13,7 +12,7 @@ export interface HeaderCellProps
   /**
    * Adjust font-size
    */
-  size?: LabelProps["size"];
+  size?: "medium" | "small";
 }
 
 export interface HeaderCellType

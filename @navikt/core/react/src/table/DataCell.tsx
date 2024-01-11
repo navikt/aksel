@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BodyShort, BodyShortProps } from "../typography";
+import { BodyShort } from "../typography";
 
 export interface DataCellProps
   extends React.TdHTMLAttributes<HTMLTableCellElement> {
@@ -12,7 +12,7 @@ export interface DataCellProps
   /**
    * Adjust font-size
    */
-  size?: BodyShortProps["size"];
+  size?: "medium" | "small";
 }
 
 export interface DataCellType
