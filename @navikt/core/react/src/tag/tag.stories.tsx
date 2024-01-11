@@ -1,5 +1,6 @@
 import type { Meta } from "@storybook/react";
 import React from "react";
+import { ComponentIcon } from "@navikt/aksel-icons";
 import { Tag, TagProps } from ".";
 
 const variants: TagProps["variant"][] = [
@@ -47,12 +48,24 @@ export default {
       },
       options: ["xsmall", "small", "medium"],
     },
+    iconPosition: {
+      defaultValue: "left",
+      control: {
+        type: "radio",
+      },
+      options: ["left", "right"],
+    },
   },
 } satisfies Meta<typeof Tag>;
 
 export const Default = {
   render: (props) => (
-    <Tag variant={props.variant} size={props.size}>
+    <Tag
+      variant={props.variant}
+      size={props.size}
+      iconPosition={props.iconPosition}
+      icon={props.icon && <ComponentIcon aria-hidden />}
+    >
       {props.children}
     </Tag>
   ),
@@ -60,6 +73,7 @@ export const Default = {
   args: {
     children: "Id elit esse",
     variant: "info",
+    icon: false,
   },
 };
 
