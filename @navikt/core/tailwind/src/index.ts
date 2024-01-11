@@ -27,7 +27,7 @@ const config = {
       fontFamily: Reducer(tokens, ["font-family"]),
       borderRadius: Reducer(tokens, ["border-radius"]),
       // TODO: Add next major-release
-      // maxWidth: Reducer(tokens, ["max-width"]),
+      // maxWidth: Reducer(tokens, ["text-width"]),
     },
   },
 };

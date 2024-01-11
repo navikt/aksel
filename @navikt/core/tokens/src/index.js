@@ -14,8 +14,10 @@ module.exports = {
       xl: { value: "1280px" },
       "xl-down": { value: "1279px" },
     },
-    maxWidth: {
-      text: { value: "576px" },
+    text: {
+      width: {
+        max: { value: "576px" },
+      },
     },
     font: {
       family: { value: "'Source Sans Pro', Arial, sans-serif" },

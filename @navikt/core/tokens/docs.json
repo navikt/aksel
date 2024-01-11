@@ -42,7 +42,7 @@
       "description": "@media (max-width: 1279px)"
     }
   ],
-  "max-width": [{ "name": "--a-max-width-text", "value": "576px" }],
+  "max-width": [{ "name": "--a-text-width-max", "value": "576px" }],
   "font": [
     {
       "name": "--a-font-family",
