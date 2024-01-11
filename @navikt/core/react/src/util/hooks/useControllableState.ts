@@ -33,7 +33,7 @@ export function useControllableState<T>({
 
       onChangeProp(nextValue);
     },
-    [controlled, onChangeProp, value]
+    [controlled, onChangeProp, value],
   );
 
   return [value, setValue] as const;

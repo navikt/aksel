@@ -21,7 +21,7 @@ export default function transformer(file: JSCodeshift, api) {
 
   const jsImport = root.find(j.ImportDeclaration).filter((x) => {
     return ["@navikt/ds-tokens/dist/tokens"].includes(
-      x.node.source.value as string
+      x.node.source.value as string,
     );
   });
 
@@ -36,7 +36,7 @@ export default function transformer(file: JSCodeshift, api) {
     let foundName: string = "";
 
     getImportSpecifier(j, root, name, "@navikt/ds-tokens/dist/tokens").forEach(
-      (x) => (foundName = x.node.imported.name)
+      (x) => (foundName = x.node.imported.name),
     );
 
     if (name === foundName) {
@@ -45,7 +45,7 @@ export default function transformer(file: JSCodeshift, api) {
           j,
           root,
           name,
-          "@navikt/ds-tokens/dist/tokens"
+          "@navikt/ds-tokens/dist/tokens",
         ) || name;
 
       renameImportSpecifier(
@@ -53,7 +53,7 @@ export default function transformer(file: JSCodeshift, api) {
         root,
         name,
         out,
-        "@navikt/ds-tokens/dist/tokens"
+        "@navikt/ds-tokens/dist/tokens",
       );
 
       let code = root.toSource(getLineTerminator(file.source));
