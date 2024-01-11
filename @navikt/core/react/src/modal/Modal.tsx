@@ -12,6 +12,7 @@ import { DateContext } from "../date/context";
 import { useProvider } from "../provider";
 import { Detail, Heading } from "../typography";
 import { mergeRefs, useId } from "../util";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 import ModalBody from "./ModalBody";
 import { ModalContext } from "./ModalContext";
 import ModalFooter from "./ModalFooter";
@@ -149,25 +150,24 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       ...(!isWidthPreset ? { width } : {}),
     };
 
-    const mergedOnCancel: React.DialogHTMLAttributes<HTMLDialogElement>["onCancel"] =
-      (event) => {
-        if (onBeforeClose && onBeforeClose() === false) {
-          event.preventDefault();
-        } else if (onCancel) onCancel(event);
-      };
+    const handleModalClick = (event: React.MouseEvent<HTMLDialogElement>) => {
+      if (!(closeOnBackdropClick && !needPolyfill)) {
+        return;
+      }
 
-    const mergedOnClick =
-      closeOnBackdropClick && !needPolyfill // closeOnBackdropClick has issues on polyfill when nesting modals (DatePicker)
-        ? (event: React.MouseEvent<HTMLDialogElement>) => {
-            onClick && onClick(event);
-            if (
-              event.target === modalRef.current &&
-              (!onBeforeClose || onBeforeClose() !== false)
-            ) {
-              modalRef.current.close();
-            }
-          }
-        : onClick;
+      if (
+        event.target === modalRef.current &&
+        (!onBeforeClose || onBeforeClose() !== false)
+      ) {
+        modalRef.current.close();
+      }
+    };
+
+    const handleModalCancel = (
+      event: React.SyntheticEvent<HTMLDialogElement, Event>,
+    ) => {
+      onBeforeClose && onBeforeClose() === false && event.preventDefault();
+    };
 
     const mergedAriaLabelledBy =
       !ariaLabelledby && !rest["aria-label"] && header
@@ -181,8 +181,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         ref={mergedRef}
         className={mergedClassName}
         style={mergedStyle}
-        onCancel={mergedOnCancel} // FYI: onCancel fires when you press Esc
-        onClick={mergedOnClick}
+        onCancel={composeEventHandlers(onCancel, handleModalCancel)}
+        onClick={composeEventHandlers(onClick, handleModalClick)}
         aria-labelledby={mergedAriaLabelledBy}
       >
         <ModalContext.Provider

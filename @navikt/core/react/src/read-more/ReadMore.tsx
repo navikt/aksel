@@ -2,6 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong } from "../typography";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useControllableState } from "../util/hooks/useControllableState";
 
 export interface ReadMoreProps
@@ -89,10 +90,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           className={cl("navds-read-more__button", "navds-body-short", {
             "navds-body-short--small": size === "small",
           })}
-          onClick={(e) => {
-            _setOpen((x) => !x);
-            onClick?.(e);
-          }}
+          onClick={composeEventHandlers(onClick, () => _setOpen((x) => !x))}
           aria-expanded={_open}
         >
           <ChevronDownIcon

@@ -2,6 +2,7 @@ import cl from "clsx";
 import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
 import { mergeRefs } from "../util";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 import { HelpTextIcon } from "./HelpTextIcon";
 
 export interface HelpTextProps
@@ -55,10 +56,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
         <button
           {...rest}
           ref={mergedRef}
-          onClick={(e) => {
-            setOpen((x) => !x);
-            onClick?.(e);
-          }}
+          onClick={composeEventHandlers(onClick, () => setOpen((x) => x))}
           className={cl(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
