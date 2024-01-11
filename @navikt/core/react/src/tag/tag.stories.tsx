@@ -2,6 +2,9 @@ import type { Meta } from "@storybook/react";
 import React from "react";
 import { ComponentIcon } from "@navikt/aksel-icons";
 import { Tag, TagProps } from ".";
+import { HStack, VStack } from "../layout/stack";
+
+const sizes: TagProps["size"][] = ["xsmall", "small", "medium"];
 
 const variants: TagProps["variant"][] = [
   "warning",
@@ -110,5 +113,38 @@ export const Variants = () => {
         </Tag>
       ))}
     </div>
+  );
+};
+
+export const WithIcons = () => {
+  return (
+    <VStack gap="4">
+      <HStack gap="2" align="start">
+        {sizes.reverse().map((size) => (
+          <Tag
+            key={size}
+            variant="neutral-moderate"
+            size={size}
+            iconPosition="left"
+            icon={<ComponentIcon aria-hidden />}
+          >
+            {size}
+          </Tag>
+        ))}
+      </HStack>
+      <HStack gap="2" align="start">
+        {sizes.map((size) => (
+          <Tag
+            key={size}
+            variant="neutral-moderate"
+            size={size}
+            iconPosition="right"
+            icon={<ComponentIcon aria-hidden />}
+          >
+            {size}
+          </Tag>
+        ))}
+      </HStack>
+    </VStack>
   );
 };
