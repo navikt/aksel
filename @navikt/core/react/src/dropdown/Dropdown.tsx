@@ -89,13 +89,11 @@ export const Dropdown = (({
     onChange: onOpenChange,
   });
 
-  const handleToggle = (v: boolean) => _setOpen(v);
-
   return (
     <DropdownContext.Provider
       value={{
         isOpen: _open,
-        handleToggle,
+        handleToggle: _setOpen,
         anchorEl,
         setAnchorEl,
         onSelect: (event) => {
