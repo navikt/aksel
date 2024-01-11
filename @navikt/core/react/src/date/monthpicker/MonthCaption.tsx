@@ -43,23 +43,23 @@ export const MonthCaption = () => {
     toYear(setYear(year, newYear));
   };
 
-  const hasPrevYear = () => {
+  const disablePreviousYear = () => {
     return fromDate
       ? isBefore(year?.getFullYear() - 1, fromDate?.getFullYear())
-      : true;
+      : false;
   };
 
-  const hasNextYear = () => {
+  const disableNextYear = () => {
     return toDate
       ? isAfter(year?.getFullYear() + 1, toDate?.getFullYear())
-      : true;
+      : false;
   };
 
   return (
     <div className="navds-date__caption">
       <Button
         className="navds-date__caption-button"
-        disabled={hasPrevYear()}
+        disabled={disablePreviousYear()}
         onClick={() => handleButtonClick(-1)}
         aria-label={labelPrevYear(locale?.code)}
         icon={<ArrowLeftIcon aria-hidden />}
@@ -88,7 +88,7 @@ export const MonthCaption = () => {
       )}
       <Button
         className="navds-date__caption-button"
-        disabled={hasNextYear()}
+        disabled={disableNextYear()}
         onClick={() => handleButtonClick(1)}
         aria-label={labelNextYear(locale?.code)}
         icon={<ArrowRightIcon aria-hidden />}

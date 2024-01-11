@@ -1,8 +1,9 @@
 import cl from "clsx";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { useId } from "../util";
 import AnimateHeight from "../util/AnimateHeight";
+import { useControllableState } from "../util/hooks/useControllableState";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
 
@@ -69,15 +70,16 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     },
     ref,
   ) => {
-    const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
+    const [_open, _setOpen] = useControllableState({
+      defaultValue: defaultOpen,
+      value: open,
+      onChange: onOpenChange,
+    });
+
     const id = useId();
-    const isOpen = open ?? internalOpen;
 
     const expansionHandler = (e) => {
-      onOpenChange?.(!isOpen);
-      if (open === undefined) {
-        setInternalOpen((oldOpen) => !oldOpen);
-      }
+      _setOpen((x) => !x);
       e.stopPropagation();
     };
 
@@ -90,7 +92,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           {...rest}
           ref={ref}
           className={cl("navds-table__expandable-row", className, {
-            "navds-table__expandable-row--open": isOpen,
+            "navds-table__expandable-row--open": _open,
             "navds-table__expandable-row--expansion-disabled":
               expansionDisabled,
             "navds-table__expandable-row--clickable": expandOnRowClick,
@@ -103,7 +105,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           {togglePlacement === "right" && children}
           <DataCell
             className={cl("navds-table__toggle-expand-cell", {
-              "navds-table__toggle-expand-cell--open": isOpen,
+              "navds-table__toggle-expand-cell--open": _open,
             })}
           >
             {!expansionDisabled && (
@@ -111,24 +113,24 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
                 className="navds-table__toggle-expand-button"
                 type="button"
                 aria-controls={id}
-                aria-expanded={isOpen}
+                aria-expanded={_open}
                 onClick={expansionHandler}
               >
                 <ChevronDownIcon
                   className="navds-table__expandable-icon"
-                  title={isOpen ? "Vis mindre" : "Vis mer"}
+                  title={_open ? "Vis mindre" : "Vis mer"}
                 />
               </button>
             )}
           </DataCell>
           {togglePlacement === "left" && children}
         </Row>
-        <tr className="navds-table__expanded-row" aria-hidden={!isOpen} id={id}>
+        <tr className="navds-table__expanded-row" aria-hidden={!_open} id={id}>
           <td colSpan={colSpan} className="navds-table__expanded-row-cell">
             <AnimateHeight
               className="navds-table__expanded-row-collapse"
               innerClassName="navds-table__expanded-row-content"
-              height={isOpen ? "auto" : 0}
+              height={_open ? "auto" : 0}
               duration={250}
             >
               {content}
