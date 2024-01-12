@@ -1,17 +1,12 @@
 import { useFloatingPortalNode } from "@floating-ui/react";
 import cl from "clsx";
-import React, {
-  forwardRef,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
+import React, { forwardRef, useContext, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { DateContext } from "../date/context";
 import { useProvider } from "../provider";
 import { Detail, Heading } from "../typography";
-import { mergeRefs, useId } from "../util";
+import { useId } from "../util";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import ModalBody from "./ModalBody";
 import { ModalContext } from "./ModalContext";
 import ModalFooter from "./ModalFooter";
@@ -95,7 +90,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     ref,
   ) => {
     const modalRef = useRef<HTMLDialogElement>(null);
-    const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(modalRef, ref);
+
     const ariaLabelId = useId();
     const rootElement = useProvider()?.rootElement;
     const portalNode = useFloatingPortalNode({ root: rootElement });
