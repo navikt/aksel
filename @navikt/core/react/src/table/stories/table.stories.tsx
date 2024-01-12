@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table } from "../";
+import { Table, TableProps } from "../";
 import { Alert, Button, Checkbox, Link } from "../..";
 
 export default {
@@ -7,20 +7,24 @@ export default {
   component: Table,
 };
 
-const TableComponent = (props) => (
-  <Table {...props}>
+interface Props extends TableProps {
+  button?: boolean;
+  shadeOnHover?: boolean;
+}
+const TableComponent = ({ button, shadeOnHover, ...rest }: Props) => (
+  <Table {...rest}>
     <Table.Header>
       <Table.Row>
-        {props.button && <Table.HeaderCell>Action</Table.HeaderCell>}
-        <Table.HeaderCell>ID</Table.HeaderCell>
+        {button && <Table.HeaderCell>Action</Table.HeaderCell>}
+        <Table.HeaderCell>ID1</Table.HeaderCell>
         <Table.HeaderCell>Fornavn</Table.HeaderCell>
         <Table.HeaderCell>Etternavn</Table.HeaderCell>
         <Table.HeaderCell>Rolle</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      <Table.Row shadeOnHover={props.shadeOnHover}>
-        {props.button && (
+      <Table.Row shadeOnHover={shadeOnHover}>
+        {button && (
           <Table.DataCell
             style={{
               paddingTop: 6,
@@ -35,8 +39,8 @@ const TableComponent = (props) => (
         <Table.DataCell>Picard</Table.DataCell>
         <Table.DataCell>Kaptein</Table.DataCell>
       </Table.Row>
-      <Table.Row shadeOnHover={props.shadeOnHover}>
-        {props.button && (
+      <Table.Row shadeOnHover={shadeOnHover}>
+        {button && (
           <Table.DataCell
             style={{
               paddingTop: 6,
@@ -51,8 +55,8 @@ const TableComponent = (props) => (
         <Table.DataCell>Riker</Table.DataCell>
         <Table.DataCell>Kommandør</Table.DataCell>
       </Table.Row>
-      <Table.Row shadeOnHover={props.shadeOnHover}>
-        {props.button && (
+      <Table.Row shadeOnHover={shadeOnHover}>
+        {button && (
           <Table.DataCell
             style={{
               paddingTop: 6,
