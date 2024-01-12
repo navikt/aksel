@@ -6,7 +6,7 @@ const Example = () => {
   const [checked, setChecked] = useState(false);
 
   return (
-    <Switch checked={checked} onChange={() => setChecked((x) => !x)}>
+    <Switch checked={checked} onChange={(e) => setChecked(e.target.checked)}>
       Varsle med SMS
     </Switch>
   );

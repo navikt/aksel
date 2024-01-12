@@ -9,7 +9,7 @@ const Example = () => {
     <Switch
       value="sms"
       checked={checkedValue === "sms"}
-      onChange={(v) => setCheckedValue((x) => (x ? "" : v.target.value))}
+      onChange={(e) => setCheckedValue((x) => (x ? "" : e.target.value))}
     >
       Varsle med SMS
     </Switch>
