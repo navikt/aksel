@@ -16,7 +16,7 @@ const TableComponent = ({ button, shadeOnHover, ...rest }: Props) => (
     <Table.Header>
       <Table.Row>
         {button && <Table.HeaderCell>Action</Table.HeaderCell>}
-        <Table.HeaderCell>ID1</Table.HeaderCell>
+        <Table.HeaderCell>ID</Table.HeaderCell>
         <Table.HeaderCell>Fornavn</Table.HeaderCell>
         <Table.HeaderCell>Etternavn</Table.HeaderCell>
         <Table.HeaderCell>Rolle</Table.HeaderCell>
