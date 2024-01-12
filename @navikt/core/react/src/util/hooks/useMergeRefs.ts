@@ -9,7 +9,7 @@ type PossibleRef<T> = React.Ref<T> | undefined;
  * @internal
  */
 export function mergeRefs<T>(
-  refs: Array<PossibleRef<T>>,
+  refs: PossibleRef<T>[],
 ): React.RefCallback<T> {
   return (value) => {
     refs.forEach((ref) => {
