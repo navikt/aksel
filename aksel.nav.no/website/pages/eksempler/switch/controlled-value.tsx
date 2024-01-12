@@ -1,8 +1,19 @@
+import { useState } from "react";
 import { Switch } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  return <Switch loading>Varsle med SMS</Switch>;
+  const [checkedValue, setCheckedValue] = useState("");
+
+  return (
+    <Switch
+      value="sms"
+      checked={checkedValue === "sms"}
+      onChange={(e) => setCheckedValue((x) => (x ? "" : e.target.value))}
+    >
+      Varsle med SMS
+    </Switch>
+  );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
@@ -14,5 +25,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 8,
+  index: 6,
 };

@@ -1,6 +1,10 @@
 import type { Meta } from "@storybook/react";
 import React from "react";
+import { ComponentIcon } from "@navikt/aksel-icons";
 import { Tag, TagProps } from ".";
+import { HStack } from "../layout/stack";
+
+const sizes: TagProps["size"][] = ["xsmall", "small", "medium"];
 
 const variants: TagProps["variant"][] = [
   "warning",
@@ -52,7 +56,11 @@ export default {
 
 export const Default = {
   render: (props) => (
-    <Tag variant={props.variant} size={props.size}>
+    <Tag
+      variant={props.variant}
+      size={props.size}
+      icon={props.icon && <ComponentIcon aria-hidden />}
+    >
       {props.children}
     </Tag>
   ),
@@ -60,6 +68,7 @@ export const Default = {
   args: {
     children: "Id elit esse",
     variant: "info",
+    icon: false,
   },
 };
 
@@ -96,5 +105,22 @@ export const Variants = () => {
         </Tag>
       ))}
     </div>
+  );
+};
+
+export const WithIcons = () => {
+  return (
+    <HStack gap="2" align="start">
+      {sizes.reverse().map((size) => (
+        <Tag
+          key={size}
+          variant="neutral-moderate"
+          size={size}
+          icon={<ComponentIcon aria-hidden />}
+        >
+          {size}
+        </Tag>
+      ))}
+    </HStack>
   );
 };

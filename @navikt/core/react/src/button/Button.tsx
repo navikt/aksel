@@ -1,14 +1,10 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { Loader } from "../loader";
 import { Label } from "../typography";
-import {
-  OverridableComponent,
-  mergeRefs,
-  omit,
-  useClientLayoutEffect,
-} from "../util";
+import { OverridableComponent, omit, useClientLayoutEffect } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -85,7 +81,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       const buttonRef = useRef<HTMLButtonElement | null>(null);
       const [widthOverride, setWidthOverride] = useState<number>();
 
-      const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
+      const mergedRef = useMergeRefs(buttonRef, ref);
 
       useClientLayoutEffect(() => {
         if (loading) {

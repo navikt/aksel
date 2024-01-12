@@ -18,14 +18,14 @@ import React, {
   cloneElement,
   forwardRef,
   useContext,
-  useMemo,
   useRef,
 } from "react";
 import { ModalContext } from "../modal/ModalContext";
 import { useProvider } from "../provider";
 import { Detail } from "../typography";
-import { mergeRefs, useId } from "../util";
+import { useId } from "../util";
 import { useControllableState } from "../util/hooks/useControllableState";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -166,14 +166,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const ariaId = useId(id);
 
-    const mergedRef = useMemo(
-      () => mergeRefs([ref, refs.setFloating]),
-      [refs.setFloating, ref],
-    );
-    const childMergedRef = useMemo(
-      () => mergeRefs([(children as any).ref, refs.setReference]),
-      [children, refs.setReference],
-    );
+    const mergedRef = useMergeRefs(ref, refs.setFloating);
+    const childMergedRef = useMergeRefs(children.ref, refs.setReference);
 
     if (
       !children ||
