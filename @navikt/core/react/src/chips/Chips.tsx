@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
-import { OverridableComponent } from "../util";
+import { OverridableComponent } from "../util/types";
 import RemovableChips, { RemovableChipsProps } from "./Removable";
 import ToggleChips, { ToggleChipsProps } from "./Toggle";
 

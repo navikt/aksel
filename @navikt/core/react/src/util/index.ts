@@ -1,4 +1,4 @@
-export * from "./OverridableComponent";
+export type * from "./types";
 export { default as debounce } from "./debounce";
 export * from "./omit";
 export { useClientLayoutEffect } from "./hooks/useClientLayoutEffect";
