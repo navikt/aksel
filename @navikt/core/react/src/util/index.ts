@@ -1,6 +1,6 @@
 export * from "./OverridableComponent";
 export { default as debounce } from "./debounce";
 export * from "./omit";
-export * from "./useClientLayoutEffect";
-export * from "./useEventListener";
+export { useClientLayoutEffect } from "./hooks/useClientLayoutEffect";
+export { useEventListener } from "./hooks/useEventListener";
 export * from "./useId";
