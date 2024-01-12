@@ -150,12 +150,13 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       ...(!isWidthPreset ? { width } : {}),
     };
 
+    /**
+     * @note `closeOnBackdropClick` has issues on polyfill when nesting modals (DatePicker)
+     */
     const handleModalClick = (event: React.MouseEvent<HTMLDialogElement>) => {
-      if (!(closeOnBackdropClick && !needPolyfill)) {
-        return;
-      }
-
       if (
+        closeOnBackdropClick &&
+        !needPolyfill &&
         event.target === modalRef.current &&
         (!onBeforeClose || onBeforeClose() !== false)
       ) {
@@ -163,6 +164,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     };
 
+    /**
+     * @note onCancel fires when you press `Esc`
+     */
     const handleModalCancel = (
       event: React.SyntheticEvent<HTMLDialogElement, Event>,
     ) => {
