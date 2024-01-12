@@ -1,8 +1,9 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label } from "../typography";
-import { omit, useId } from "../util";
+import { omit } from "../util";
 import TextareaAutosize from "../util/TextareaAutoSize";
+import { useId } from "../util/hooks";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import Counter from "./TextareaCounter";
 import { FormFieldProps, useFormField } from "./useFormField";

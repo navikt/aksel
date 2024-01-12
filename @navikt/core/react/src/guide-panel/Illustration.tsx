@@ -1,5 +1,5 @@
 import React, { SVGProps } from "react";
-import { useId } from "../util";
+import { useId } from "../util/hooks";
 
 interface SVGRProps {
   title?: string;

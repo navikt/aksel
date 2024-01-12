@@ -7,8 +7,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { useClientLayoutEffect } from "../../../util";
-import usePrevious from "../../../util/usePrevious";
+import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/inputContext";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { ComboboxProps } from "../types";

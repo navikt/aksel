@@ -1,10 +1,10 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { useId } from "../util";
-import AnimateHeight from "../util/AnimateHeight";
 import { composeEventHandlers } from "../util/composeEventHandlers";
+import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
+import AnimateHeight from "./AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
 

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import { useMedia } from "../useMedia";
+import { useMedia } from "../hooks";
 
 function TestComponent({ fallback }: { fallback?: boolean }) {
   const media = useMedia("screen and (min-width: 1024px)", fallback);
