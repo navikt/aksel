@@ -225,12 +225,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               {keys && (
                 <span className="navds-tooltip__keys">
                   {keys.map((key) => (
-                    <Detail
-                      size="small"
-                      as="kbd"
-                      key={key}
-                      className="navds-tooltip__key"
-                    >
+                    <Detail as="kbd" key={key} className="navds-tooltip__key">
                       {key}
                     </Detail>
                   ))}
