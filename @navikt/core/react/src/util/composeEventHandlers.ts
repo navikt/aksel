@@ -12,10 +12,7 @@ export function composeEventHandlers<T extends React.SyntheticEvent>(
   return function handleEvent(event: T) {
     originalEventHandler?.(event);
 
-    if (
-      checkForDefaultPrevented === false ||
-      !(event as unknown as Event).defaultPrevented
-    ) {
+    if (checkForDefaultPrevented === false || !event.defaultPrevented) {
       return ourEventHandler?.(event);
     }
   };
