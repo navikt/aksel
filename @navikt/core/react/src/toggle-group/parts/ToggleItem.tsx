@@ -1,8 +1,8 @@
-import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import cl from "clsx";
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography/BodyShort";
-import { ToggleGroupContext } from "../context";
+import { useToggleGroupContext } from "../context";
+import { useToggleItem } from "./useToggleItem";
 
 export interface ToggleItemProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -17,23 +17,33 @@ export interface ToggleItemProps
 }
 
 const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
-  ({ className, children, ...rest }, ref) => {
-    const context = useContext(ToggleGroupContext);
+  ({ className, children, value, onClick, onFocus, ...rest }, forwardedRef) => {
+    const itemCtx = useToggleItem(
+      { value, onClick, onFocus, disabled: false },
+      forwardedRef,
+    );
+    const ctx = useToggleGroupContext();
 
     return (
-      <RadixToggleGroup.Item
+      <button
         {...rest}
-        ref={ref}
+        ref={itemCtx.ref}
         className={cl("navds-toggle-group__button", className)}
+        type="button"
+        role="radio"
+        aria-checked={itemCtx.isSelected}
+        tabIndex={itemCtx.isSelected ? 0 : -1}
+        onClick={itemCtx.onClick}
+        onFocus={itemCtx.onFocus}
       >
         <BodyShort
           as="span"
           className="navds-toggle-group__button-inner"
-          size={context?.size}
+          size={ctx?.size}
         >
           {children}
         </BodyShort>
-      </RadixToggleGroup.Item>
+      </button>
     );
   },
 );
