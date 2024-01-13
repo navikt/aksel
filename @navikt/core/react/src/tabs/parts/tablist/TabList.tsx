@@ -26,18 +26,11 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
     return (
       <div className="navds-tabs__tablist-wrapper">
         {ctx.show && (
-          <>
-            <ScrollButton
-              dir="left"
-              hidden={!ctx.start}
-              onClick={ctx.scrollLeft}
-            />
-            <ScrollButton
-              dir="right"
-              hidden={!ctx.end}
-              onClick={ctx.scrollRight}
-            />
-          </>
+          <ScrollButton
+            dir="left"
+            hidden={!ctx.start}
+            onClick={ctx.scrollLeft}
+          />
         )}
         <div
           ref={mergedRef}
@@ -48,6 +41,13 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
           aria-orientation="horizontal"
           onKeyDown={composeEventHandlers(onKeyDown, _onKeyDown)}
         />
+        {ctx.show && (
+          <ScrollButton
+            dir="right"
+            hidden={!ctx.end}
+            onClick={ctx.scrollRight}
+          />
+        )}
       </div>
     );
   },
