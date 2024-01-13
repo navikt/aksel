@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import cl from "clsx";
 import React, { forwardRef, useMemo } from "react";
 import { Label } from "../typography";

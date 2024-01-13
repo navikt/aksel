@@ -16,10 +16,14 @@ export interface ToggleItemProps
   value: string;
 }
 
+// TODO: reset focusedItem on focus-loss
 const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
-  ({ className, children, value, onClick, onFocus, ...rest }, forwardedRef) => {
+  (
+    { className, children, value, onClick, onFocus, onKeyDown, ...rest },
+    forwardedRef,
+  ) => {
     const itemCtx = useToggleItem(
-      { value, onClick, onFocus, disabled: false },
+      { value, onClick, onFocus, disabled: false, onKeyDown },
       forwardedRef,
     );
     const ctx = useToggleGroupContext();
@@ -32,9 +36,10 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
         type="button"
         role="radio"
         aria-checked={itemCtx.isSelected}
-        tabIndex={itemCtx.isSelected ? 0 : -1}
+        tabIndex={itemCtx.isFocused ? 0 : -1}
         onClick={itemCtx.onClick}
         onFocus={itemCtx.onFocus}
+        onKeyDown={itemCtx.onKeyDown}
       >
         <BodyShort
           as="span"
