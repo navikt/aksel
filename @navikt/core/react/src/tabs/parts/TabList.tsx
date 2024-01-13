@@ -1,17 +1,9 @@
-import { TabsList } from "@radix-ui/react-tabs";
 import cl from "clsx";
-import React, {
-  forwardRef,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
-import { debounce } from "../../util";
+import React, { forwardRef, useRef } from "react";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { TabsContext } from "../context";
+import ScrollButtons from "./ScrollButtons";
+import { useTabList } from "./useTabList";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -21,105 +13,25 @@ export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const TabList = forwardRef<HTMLDivElement, TabListProps>(
-  ({ className, ...rest }, ref) => {
-    const context = useContext(TabsContext);
-    const listRef = useRef<HTMLDivElement | null>(null);
+  ({ className, onKeyDown, ...rest }, ref) => {
+    const { onKeyDown: _onKeyDown } = useTabList();
+
+    const listRef = useRef<HTMLDivElement>(null);
     const mergedRef = useMergeRefs(listRef, ref);
 
-    const [displayScroll, setDisplayScroll] = useState({
-      start: false,
-      end: false,
-    });
-
-    const updateScrollButtonState = useMemo(
-      () =>
-        debounce(() => {
-          if (!listRef?.current) return;
-          const { scrollWidth, clientWidth } = listRef.current;
-          const scrollLeft = listRef.current.scrollLeft;
-          // use 1 for the potential rounding error with browser zooms.
-          const showStartScroll = scrollLeft > 1;
-          const showEndScroll = scrollLeft < scrollWidth - clientWidth - 1;
-
-          setDisplayScroll((oldDisplayScroll) =>
-            showStartScroll === oldDisplayScroll.start &&
-            showEndScroll === oldDisplayScroll.end
-              ? oldDisplayScroll
-              : { start: showStartScroll, end: showEndScroll },
-          );
-        }),
-      [],
-    );
-
-    useEffect(() => {
-      const handleResize = () => updateScrollButtonState();
-      const win = listRef.current?.ownerDocument ?? document ?? window;
-      win.addEventListener("resize", handleResize);
-
-      let resizeObserver;
-
-      if (typeof ResizeObserver !== "undefined") {
-        resizeObserver = new ResizeObserver(handleResize);
-        resizeObserver.observe(listRef.current);
-      }
-
-      return () => {
-        win.removeEventListener("resize", handleResize);
-        if (resizeObserver) {
-          resizeObserver.disconnect();
-        }
-      };
-    }, [updateScrollButtonState]);
-
-    useEffect(() => {
-      updateScrollButtonState();
-    });
-
-    useEffect(() => {
-      return () => {
-        updateScrollButtonState.clear();
-      };
-    }, [updateScrollButtonState]);
-
-    const ScrollButton = ({
-      dir,
-      hidden,
-    }: {
-      dir: 1 | -1;
-      hidden: boolean;
-    }) => (
-      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-      <div
-        className={cl("navds-tabs__scroll-button", {
-          "navds-tabs__scroll-button--hidden": hidden,
-        })}
-        onClick={() => {
-          if (!listRef.current) return;
-          listRef.current.scrollLeft += dir * 100;
-        }}
-      >
-        {dir === -1 ? (
-          <ChevronLeftIcon title="scroll tilbake" />
-        ) : (
-          <ChevronRightIcon title="scroll neste" />
-        )}
-      </div>
-    );
-
-    const showSteppers = displayScroll.end || displayScroll.start;
     return (
       <div className="navds-tabs__tablist-wrapper">
-        {showSteppers && (
-          <ScrollButton dir={-1} hidden={!displayScroll.start} />
-        )}
-        <TabsList
-          {...rest}
+        <ScrollButtons listRef={listRef} />
+        <div
           ref={mergedRef}
-          onScroll={updateScrollButtonState}
-          loop={context?.loop}
+          {...rest}
+          tabIndex={0}
+          /* onScroll={updateScrollButtonState} */
           className={cl("navds-tabs__tablist", className)}
+          role="tablist"
+          aria-orientation="horizontal"
+          onKeyDown={composeEventHandlers(onKeyDown, _onKeyDown)}
         />
-        {showSteppers && <ScrollButton dir={1} hidden={!displayScroll.end} />}
       </div>
     );
   },

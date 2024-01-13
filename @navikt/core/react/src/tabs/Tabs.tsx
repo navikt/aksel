@@ -67,7 +67,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       onChange,
       id,
       selectionFollowsFocus = false,
-      loop = false,
+      loop = true,
       iconPosition = "left",
       ...rest
     },
