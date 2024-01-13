@@ -40,7 +40,6 @@
     "@floating-ui/react": "0.25.4",
     "@navikt/aksel-icons": "^5.13.0",
     "@navikt/ds-tokens": "^5.13.0",
-    "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
