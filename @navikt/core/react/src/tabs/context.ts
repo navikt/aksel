@@ -16,7 +16,10 @@ export const [
 ] = createDescendantContext<HTMLButtonElement, { value: string }>();
 
 type TabsProviderProps = ReturnType<typeof useTabs> &
-  Pick<TabsProps, "selectionFollowsFocus" | "loop" | "size" | "iconPosition">;
+  Pick<
+    TabsProps,
+    "selectionFollowsFocus" | "loop" | "size" | "iconPosition" | "fitted"
+  >;
 
 /* State context */
 export const [TabsProvider, useTabsContext] = createContext<TabsProviderProps>({

@@ -189,3 +189,29 @@ export const Overflow = () => {
     </Tabs>
   );
 };
+
+export const Fitted = {
+  render: () => (
+    <div className="colgap">
+      <Tabs defaultValue="test2" fitted>
+        <Tabs.List>
+          <Tabs.Tab value="test1" icon={<MugIcon aria-hidden />} label="Skap" />
+          <Tabs.Tab
+            value="test2"
+            icon={<DishwasherIcon aria-hidden />}
+            label="Oppvaskmaskin"
+          />
+          <Tabs.Tab
+            value="test3"
+            icon={<FreezerIcon aria-hidden />}
+            label="Fryser"
+          />
+        </Tabs.List>
+        <Panel />
+      </Tabs>
+    </div>
+  ),
+  parameters: {
+    layout: "fullscreen",
+  },
+};
