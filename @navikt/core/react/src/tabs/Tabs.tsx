@@ -1,47 +1,15 @@
-import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef } from "react";
-import { TabsContext } from "./context";
+import React, { forwardRef, useMemo } from "react";
+import {
+  TabsDescendantsProvider,
+  TabsProvider,
+  useTabsDescendants,
+} from "./context";
 import Tab from "./parts/Tab";
 import TabList from "./parts/TabList";
 import TabPanel from "./parts/TabPanel";
-
-export interface TabsProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
-  children: React.ReactNode;
-  /**
-   * Changes padding and font-size
-   * @default "medium"
-   */
-  size?: "medium" | "small";
-  /**
-   * onChange callback for selected Tab
-   */
-  onChange?: (value: string) => void;
-  /**
-   * Controlled selected value
-   */
-  value?: string;
-  /**
-   * If not controlled, a default-value needs to be set
-   */
-  defaultValue?: string;
-  /**
-   * Automatically activates tab on focus/navigation
-   * @default false
-   */
-  selectionFollowsFocus?: boolean;
-  /**
-   * Loops back to start when navigating past last item
-   * @default false
-   */
-  loop?: boolean;
-  /**
-   * Icon position in Tab
-   * @default "left"
-   */
-  iconPosition?: "left" | "top";
-}
+import { TabsProps } from "./types";
+import { useTabs } from "./useTabs";
 
 interface TabsComponent
   extends React.ForwardRefExoticComponent<
@@ -93,8 +61,11 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     {
       className,
       children,
-      onChange,
       size = "medium",
+      defaultValue = "",
+      value,
+      onChange,
+      id,
       selectionFollowsFocus = false,
       loop = false,
       iconPosition = "left",
@@ -102,24 +73,34 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     },
     ref,
   ) => {
+    const descendants = useTabsDescendants();
+
+    const tabsContext = useTabs({ defaultValue, value, onChange, id });
+
+    const context = useMemo(
+      () => ({
+        ...tabsContext,
+        selectionFollowsFocus,
+        loop,
+        size,
+        iconPosition,
+      }),
+      [iconPosition, loop, selectionFollowsFocus, size, tabsContext],
+    );
+
     return (
-      <RadixTabs.Root
-        {...rest}
-        ref={ref}
-        className={cl("navds-tabs", className, `navds-tabs--${size}`)}
-        activationMode={selectionFollowsFocus ? "automatic" : "manual"}
-        onValueChange={onChange}
-      >
-        <TabsContext.Provider
-          value={{
-            size,
-            loop,
-            iconPosition,
-          }}
-        >
-          {children}
-        </TabsContext.Provider>
-      </RadixTabs.Root>
+      <TabsDescendantsProvider value={descendants}>
+        <TabsProvider value={context}>
+          <div
+            ref={ref}
+            {...rest}
+            id={id}
+            className={cl("navds-tabs", className, `navds-tabs--${size}`)}
+          >
+            {children}
+          </div>
+        </TabsProvider>
+      </TabsDescendantsProvider>
     );
   },
 ) as TabsComponent;
