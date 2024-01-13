@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
-import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { composeEventHandlers } from "../../../util/composeEventHandlers";
+import { useMergeRefs } from "../../../util/hooks/useMergeRefs";
 import ScrollButtons from "./ScrollButtons";
 import { useTabList } from "./useTabList";
 

@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { useEffect, useMemo, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
-import { debounce } from "../../util";
+import { debounce } from "../../../util";
 
 interface ScrollButtonsProps {
   listRef: React.RefObject<HTMLDivElement>;
