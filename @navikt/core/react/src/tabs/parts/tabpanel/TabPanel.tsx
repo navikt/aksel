@@ -14,13 +14,13 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
-  ({ className, value, ...rest }, ref) => {
+  ({ className, value, children, ...rest }, ref) => {
     const ctx = useTabPanel({ value });
 
     return (
       <div
-        {...rest}
         ref={ref}
+        {...rest}
         className={cl("navds-tabs__tabpanel", className, {
           "navds-tabs__tabpanel--hidden": ctx.hidden,
         })}
@@ -29,7 +29,9 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
         aria-labelledby={ctx.labelledbyId}
         id={ctx.id}
         hidden={ctx.hidden}
-      />
+      >
+        {!ctx.hidden && children}
+      </div>
     );
   },
 );
