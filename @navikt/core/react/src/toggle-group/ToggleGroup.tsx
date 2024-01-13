@@ -106,7 +106,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               )}
               {...(describeBy && { "aria-describedby": describeBy })}
               role="radiogroup"
-              tabIndex={0}
             >
               {children}
             </div>
