@@ -37,5 +37,15 @@ export function useTabs({
     setSelectedValue,
     focusedValue,
     setFocusedValue,
+    makeTabId,
+    makeTabPanelId,
   };
+}
+
+function makeTabId(id: string, value: string) {
+  return `${id}--tab-${value}`;
+}
+
+function makeTabPanelId(id: string, value: string) {
+  return `${id}--tabpanel-${value}`;
 }
