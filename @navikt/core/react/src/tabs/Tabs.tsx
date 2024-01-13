@@ -5,9 +5,9 @@ import {
   TabsProvider,
   useTabsDescendants,
 } from "./context";
-import TabPanel from "./parts/TabPanel";
 import Tab from "./parts/tab/Tab";
 import TabList from "./parts/tablist/TabList";
+import TabPanel from "./parts/tabpanel/TabPanel";
 import { TabsProps } from "./types";
 import { useTabs } from "./useTabs";
 
