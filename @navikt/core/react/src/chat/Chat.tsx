@@ -1,7 +1,7 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
-import Bubble from "./Bubble";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { BodyLong } from "../typography";
+import Bubble from "./Bubble";
 
 export const POSITIONS = ["left", "right"] as const;
 export const SIZES = ["medium", "small"] as const;
@@ -99,7 +99,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       size = "medium",
       ...rest
     }: ChatProps,
-    ref
+    ref,
   ) => (
     <div
       ref={ref}
@@ -109,7 +109,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
         `navds-chat--${position}`,
         `navds-chat--top-text-${toptextPosition ?? position}`,
         `navds-chat--${size}`,
-        `navds-chat--${variant}`
+        `navds-chat--${variant}`,
       )}
       {...rest}
     >
@@ -139,7 +139,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
         })}
       </ol>
     </div>
-  )
+  ),
 ) as ChatComponent;
 
 Chat.Bubble = Bubble;

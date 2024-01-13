@@ -14,8 +14,8 @@ import {
   useRole,
 } from "@floating-ui/react";
 import { format } from "date-fns";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
-import { mergeRefs } from "../util";
+import React, { forwardRef, useRef, useState } from "react";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";
@@ -81,10 +81,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
       role,
     ]);
 
-    const mergedRef = useMemo(
-      () => mergeRefs([refs.setReference, ref]),
-      [ref, refs.setReference]
-    );
+    const mergedRef = useMergeRefs(refs.setReference, ref);
 
     const staticSide = {
       top: "bottom",
@@ -148,7 +145,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
         )}
       </>
     );
-  }
+  },
 ) as PinType;
 
 Pin.componentType = "pin";

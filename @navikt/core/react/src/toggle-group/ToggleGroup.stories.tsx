@@ -1,10 +1,10 @@
+import { Meta } from "@storybook/react";
+import React, { useState } from "react";
 import {
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
   InboxUpIcon,
 } from "@navikt/aksel-icons";
-import { Meta } from "@storybook/react";
-import React, { useState } from "react";
 import { ToggleGroup } from "../index";
 
 const meta: Meta<typeof ToggleGroup> = {

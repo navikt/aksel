@@ -1,7 +1,8 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
-import { mergeRefs, useId } from "../../util";
+import { useId } from "../../util";
+import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { DateContext, SharedMonthProvider } from "../context";
 import { MonthPickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
@@ -75,16 +76,16 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       onYearChange,
       strategy = "absolute",
     },
-    ref
+    ref,
   ) => {
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(wrapperRef, ref);
 
     const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
-      defaultSelected
+      defaultSelected,
     );
 
     const handleSelect = (month?: Date) => {
@@ -151,7 +152,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
         </div>
       </DateContext.Provider>
     );
-  }
+  },
 ) as MonthPickerComponent;
 
 MonthPicker.Standalone = MonthPickerStandalone;

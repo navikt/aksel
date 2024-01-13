@@ -38,7 +38,7 @@ export async function middleware(req: NextRequest) {
     redirects
   }
 `,
-      { source: decodeURIComponent(req.nextUrl.pathname) }
+      { source: decodeURIComponent(req.nextUrl.pathname) },
     );
 
     if (redirect) {

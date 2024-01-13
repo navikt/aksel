@@ -25,7 +25,7 @@ export const Default = (props) => {
               setSelected(
                 selected.includes(c)
                   ? selected.filter((x) => x !== c)
-                  : [...selected, c]
+                  : [...selected, c],
               )
             }
           >
@@ -72,7 +72,7 @@ export const Toggle = ({ size }) => {
               setSelected(
                 selected.includes(y)
                   ? selected.filter((x) => x !== y)
-                  : [...selected, y]
+                  : [...selected, y],
               )
             }
             key={y}
@@ -90,7 +90,7 @@ export const Toggle = ({ size }) => {
               setSelected(
                 selected.includes(y)
                   ? selected.filter((x) => x !== y)
-                  : [...selected, y]
+                  : [...selected, y],
               )
             }
             key={y}
@@ -178,7 +178,7 @@ export const Regular = () => {
               setSelected(
                 selected.includes(y)
                   ? selected.filter((x) => x !== y)
-                  : [...selected, y]
+                  : [...selected, y],
               )
             }
             key={y}
@@ -208,7 +208,7 @@ export const Small = () => {
               setSelected(
                 selected.includes(y)
                   ? selected.filter((x) => x !== y)
-                  : [...selected, y]
+                  : [...selected, y],
               )
             }
             key={y}

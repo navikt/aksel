@@ -12,9 +12,9 @@ const Tips = ({ node }: TipsProps) => {
   }
 
   return (
-    <div className="ring-border-subtle link-color-override bg-surface-alt-3-subtle my-7 max-w-2xl rounded-lg p-4 ring-1 ring-inset sm:p-6">
+    <div className="link-color-override my-7 max-w-2xl rounded-lg bg-surface-alt-3-subtle p-4 ring-1 ring-inset ring-border-subtle sm:p-6">
       <Heading
-        className="override-text-no-max text-icon-alt-3 -ml-[2px] flex items-center gap-1"
+        className="override-text-no-max -ml-[2px] flex items-center gap-1 text-icon-alt-3"
         size="small"
         as="p"
         spacing

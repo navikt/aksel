@@ -22,9 +22,9 @@ const AkselLink = ({
       href={href}
       passHref
       className={cl("group relative w-fit pr-5 focus:outline-none", className, {
-        "white focus-visible:text-text-default focus-visible:bg-blue-200 focus-visible:shadow-[0_0_0_3px_var(--a-blue-200)]":
+        "white focus-visible:bg-blue-200 focus-visible:text-text-default focus-visible:shadow-[0_0_0_3px_var(--a-blue-200)]":
           inverted,
-        "text-deepblue-500 focus-visible:text-text-on-action group-hover:text-deepblue-800 focus-visible:bg-blue-800 focus-visible:shadow-[0_0_0_3px_var(--a-blue-800)]":
+        "text-deepblue-500 focus-visible:bg-blue-800 focus-visible:text-text-on-action focus-visible:shadow-[0_0_0_3px_var(--a-blue-800)] group-hover:text-deepblue-800":
           !inverted,
       })}
       onClick={(e) =>
@@ -37,7 +37,7 @@ const AkselLink = ({
         xmlns="http://www.w3.org/2000/svg"
         className={cl(
           "ml-2 h-[20px] w-[10px] scale-[0.85] transition-[width,right] group-hover:w-[16px]",
-          "absolute right-[5px] top-1/2 -translate-y-1/2 rotate-180 group-hover:right-0"
+          "absolute right-[5px] top-1/2 -translate-y-1/2 rotate-180 group-hover:right-0",
         )}
         aria-hidden
       >

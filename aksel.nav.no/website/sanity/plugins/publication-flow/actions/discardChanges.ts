@@ -5,10 +5,10 @@ import {
 } from "sanity";
 
 export const createWrappedDiscardChangesAction = (
-  discardChangesAction: DocumentActionComponent
+  discardChangesAction: DocumentActionComponent,
 ) => {
   const WrappedDiscardChanges = (
-    props: DocumentActionProps
+    props: DocumentActionProps,
   ): DocumentActionDescription | null => {
     const originalDiscardChangesDescription = discardChangesAction(props);
 

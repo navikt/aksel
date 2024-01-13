@@ -29,7 +29,7 @@ export const HeaderCell: HeaderCellType = forwardRef(
         {children}
       </th>
     );
-  }
+  },
 );
 
 export default HeaderCell;

@@ -8,7 +8,7 @@ export const fetchIcons = async () => {
         "Content-type": "application/json",
         "X-FIGMA-TOKEN": process.env.FIGMA_TOKEN,
       },
-    }
+    },
   )
     .then((x) => x.json())
     .catch((e) => {
@@ -33,7 +33,7 @@ export const fetchDownloadUrls = async (idArray) => {
           "Content-type": "application/json",
           "X-FIGMA-TOKEN": process.env.FIGMA_TOKEN,
         },
-      }
+      },
     )
       .then((x) => x.json())
       .then((x) => {

@@ -47,7 +47,7 @@ export const Tag = ({
       return <Comp className="text-pink-700">Blogg</Comp>;
     case "komponent_artikkel":
       return (
-        <Comp className="text-deepblue-600 flex items-center gap-3">
+        <Comp className="flex items-center gap-3 text-deepblue-600">
           Komponent
           {beta && (
             <DsTag
@@ -62,7 +62,7 @@ export const Tag = ({
       );
     case "ds_artikkel":
       return (
-        <Comp className="text-deepblue-600 flex items-center gap-3">
+        <Comp className="flex items-center gap-3 text-deepblue-600">
           Grunnleggende
           {beta && (
             <DsTag
@@ -77,7 +77,7 @@ export const Tag = ({
       );
     case "templates_artikkel":
       return (
-        <Comp className="text-deepblue-600 flex items-center gap-3">
+        <Comp className="flex items-center gap-3 text-deepblue-600">
           Mønster og Maler
           {beta && (
             <DsTag

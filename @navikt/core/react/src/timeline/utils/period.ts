@@ -4,7 +4,7 @@ import { format } from "date-fns";
 export const getConditionalClasses = (
   cropped: string,
   direction: string,
-  status: string
+  status: string,
 ) => {
   return cl(`navds-timeline__period navds-timeline__period--${status}`, {
     "navds-timeline__period--connected-both": cropped === "both",
@@ -38,7 +38,7 @@ export const ariaLabel = (
   startDate: Date,
   endDate: Date,
   status: string,
-  statusLabel?: string
+  statusLabel?: string,
 ): string => {
   const start = format(startDate, "dd.MM.yyyy");
   const end = format(endDate, "dd.MM.yyyy");

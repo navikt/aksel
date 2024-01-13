@@ -1,17 +1,17 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo, useRef } from "react";
+import React, { forwardRef, useRef } from "react";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
+import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import ClearButton from "./ClearButton";
+import ComboboxWrapper from "./ComboboxWrapper";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
+import Input from "./Input/Input";
+import { useInputContext } from "./Input/inputContext";
 import SelectedOptions from "./SelectedOptions/SelectedOptions";
+import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 import ToggleListButton from "./ToggleListButton";
 import { ComboboxProps } from "./types";
-import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
-import ComboboxWrapper from "./ComboboxWrapper";
-import { useInputContext } from "./Input/inputContext";
-import Input from "./Input/Input";
-import { mergeRefs } from "../../util";
-import { BodyShort, ErrorMessage, Label } from "../../typography";
 
 export const Combobox = forwardRef<
   HTMLInputElement,
@@ -50,10 +50,7 @@ export const Combobox = forwardRef<
     size = "medium",
   } = useInputContext();
 
-  const mergedInputRef = useMemo(
-    () => mergeRefs([inputRef, ref]),
-    [inputRef, ref]
-  );
+  const mergedInputRef = useMergeRefs(inputRef, ref);
 
   return (
     <ComboboxWrapper
@@ -93,7 +90,7 @@ export const Combobox = forwardRef<
             {
               "navds-combobox__wrapper-inner--virtually-unfocused":
                 activeDecendantId !== null,
-            }
+            },
           )}
           onClick={focusInput}
         >

@@ -1,10 +1,10 @@
-import React, { ReactNode } from "react";
 import type { Meta } from "@storybook/react";
-import { BodyLong, Detail, Heading } from "../../typography";
-import { Box } from "./Box";
-import { HGrid, HStack, VStack } from "../..";
-import { BackgroundToken, BorderRadiiToken } from "../utilities/types";
+import React, { ReactNode } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { HGrid, HStack, VStack } from "../..";
+import { BodyLong, Detail, Heading } from "../../typography";
+import { BackgroundToken, BorderRadiiToken } from "../utilities/types";
+import { Box } from "./Box";
 
 const meta: Meta<typeof Box> = {
   title: "ds-react/Primitives/Box",

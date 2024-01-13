@@ -5,10 +5,10 @@ import {
 } from "sanity";
 
 export const createWrappedUnpublishAction = (
-  unpublishAction: DocumentActionComponent
+  unpublishAction: DocumentActionComponent,
 ) => {
   const WrappedUnpublish = (
-    props: DocumentActionProps
+    props: DocumentActionProps,
   ): DocumentActionDescription | null => {
     const originalUnpublishDescription = unpublishAction(props);
 

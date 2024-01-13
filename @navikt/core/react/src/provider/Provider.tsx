@@ -8,7 +8,7 @@ export interface ProviderContextType {
 }
 
 export const ProviderContext = createContext<ProviderContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export interface ProviderProps {

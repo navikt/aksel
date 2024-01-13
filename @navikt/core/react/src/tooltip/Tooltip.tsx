@@ -18,14 +18,14 @@ import React, {
   cloneElement,
   forwardRef,
   useContext,
-  useMemo,
   useRef,
-  useState,
 } from "react";
 import { ModalContext } from "../modal/ModalContext";
 import { useProvider } from "../provider";
 import { Detail } from "../typography";
-import { mergeRefs, useId } from "../util";
+import { useId } from "../util";
+import { useControllableState } from "../util/hooks/useControllableState";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -43,6 +43,10 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * @note "open"-prop overwrites this
    */
   defaultOpen?: boolean;
+  /**
+   * Change handler for open
+   */
+  onOpenChange?: (open: boolean) => void;
   /**
    * Orientation for tooltip
    * @default "top"
@@ -98,8 +102,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       className,
       arrow: _arrow = true,
       placement: _placement = "top",
-      open: userOpen,
+      open,
       defaultOpen = false,
+      onOpenChange,
       offset: _offset,
       content,
       delay = 150,
@@ -108,9 +113,14 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       maxChar = 80,
       ...rest
     },
-    ref
+    ref,
   ) => {
-    const [open, setOpen] = useState(defaultOpen);
+    const [_open, _setOpen] = useControllableState({
+      defaultValue: defaultOpen,
+      value: open,
+      onChange: onOpenChange,
+    });
+
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const modalContext = useContext(ModalContext);
     const providerRootElement = useProvider()?.rootElement;
@@ -131,8 +141,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       refs,
     } = useFloating({
       placement: _placement,
-      open: userOpen ?? open,
-      onOpenChange: (_open) => setOpen(_open),
+      open: _open,
+      onOpenChange: (newState) => _setOpen(newState),
       middleware: [
         offset(_offset ? _offset : _arrow ? 10 : 2),
         shift(),
@@ -156,14 +166,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const ariaId = useId(id);
 
-    const mergedRef = useMemo(
-      () => mergeRefs([ref, refs.setFloating]),
-      [refs.setFloating, ref]
-    );
-    const childMergedRef = useMemo(
-      () => mergeRefs([(children as any).ref, refs.setReference]),
-      [children, refs.setReference]
-    );
+    const mergedRef = useMergeRefs(ref, refs.setFloating);
+    const childMergedRef = useMergeRefs(children.ref, refs.setReference);
 
     if (
       !children ||
@@ -171,15 +175,15 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       (children as any) === React.Fragment
     ) {
       console.error(
-        "<Tooltip> children needs to be a single ReactElement and not: <React.Fragment/> | <></>"
+        "<Tooltip> children needs to be a single ReactElement and not: <React.Fragment/> | <></>",
       );
       return null;
     }
 
     if (content?.length > maxChar) {
-      (userOpen ?? open) &&
+      _open &&
         console.warn(
-          `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop\n\nLength:${content.length}\nTooltip-content: ${content}`
+          `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop\n\nLength:${content.length}\nTooltip-content: ${content}`,
         );
     }
 
@@ -190,14 +194,13 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           getReferenceProps({
             ...children.props,
             ref: childMergedRef,
-            "aria-describedby":
-              userOpen ?? open
-                ? cl(ariaId, children?.props["aria-describedby"])
-                : children?.props["aria-describedby"],
-          })
+            "aria-describedby": _open
+              ? cl(ariaId, children?.props["aria-describedby"])
+              : children?.props["aria-describedby"],
+          }),
         )}
         <FloatingPortal root={rootElement}>
-          {(userOpen ?? open) && (
+          {_open && (
             <div
               {...getFloatingProps({
                 ...rest,
@@ -213,7 +216,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 className: cl(
                   "navds-tooltip",
                   "navds-detail navds-detail--small",
-                  className
+                  className,
                 ),
               })}
               data-side={placement}
@@ -222,12 +225,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               {keys && (
                 <span className="navds-tooltip__keys">
                   {keys.map((key) => (
-                    <Detail
-                      size="small"
-                      as="kbd"
-                      key={key}
-                      className="navds-tooltip__key"
-                    >
+                    <Detail as="kbd" key={key} className="navds-tooltip__key">
                       {key}
                     </Detail>
                   ))}
@@ -258,7 +256,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         </FloatingPortal>
       </>
     );
-  }
+  },
 );
 
 export default Tooltip;

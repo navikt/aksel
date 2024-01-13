@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useState } from "react";
+import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
 import * as Icons from "../../../";
 import meta from "../../../dist/metadata";
 import "./app.css";
@@ -19,7 +19,7 @@ const fuseStroke = new Fuse(
       { name: "variant", weight: 1 },
     ],
     shouldSort: false,
-  }
+  },
 );
 
 const fuseFill = new Fuse(getFillIcon(Object.values(meta)), {
@@ -39,7 +39,7 @@ const App = () => {
   const [toggle, setToggle] = useState<"stroke" | "fill">("stroke");
 
   const [strokeIcons] = useState(
-    Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke")
+    Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),
   );
 
   const [fillIcons] = useState(getFillIcon(Object.values(meta)));
@@ -49,13 +49,13 @@ const App = () => {
       return categorizeIcons(
         query
           ? fuseFill.search(query).map((result) => result.item as any)
-          : fillIcons
+          : fillIcons,
       );
     }
     return categorizeIcons(
       query
         ? fuseStroke.search(query).map((result) => result.item as any)
-        : strokeIcons
+        : strokeIcons,
     );
   }, [toggle, query, strokeIcons, fillIcons]);
 
@@ -71,7 +71,7 @@ const App = () => {
           name,
         },
       },
-      "*"
+      "*",
     );
   };
 
@@ -95,7 +95,7 @@ const App = () => {
             name: e.target.id,
           },
         },
-        "*"
+        "*",
       );
     };
 

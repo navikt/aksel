@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { Accordion, AccordionProps } from ".";
+import { Table } from "..";
 import AccordionContent from "./AccordionContent";
 import AccordionHeader from "./AccordionHeader";
 import AccordionItem from "./AccordionItem";
-import { Accordion, AccordionProps } from ".";
-import { Table } from "..";
 
 export default {
   title: "ds-react/Accordion",
@@ -78,7 +78,10 @@ const Item = (props) => {
 
   if (props.defaultOpen) {
     return (
-      <Accordion.Item defaultOpen={props.defaultOpen}>
+      <Accordion.Item
+        defaultOpen={props.defaultOpen}
+        onOpenChange={console.log}
+      >
         <Accordion.Header>Accordion header text</Accordion.Header>
         <SmallContent />
       </Accordion.Item>
@@ -86,14 +89,14 @@ const Item = (props) => {
   }
 
   return props.controlled ? (
-    <Accordion.Item open={open}>
+    <Accordion.Item open={open} onOpenChange={console.log}>
       <Accordion.Header onClick={() => setOpen(!open)}>
         Accordion header text
       </Accordion.Header>
       <Content />
     </Accordion.Item>
   ) : (
-    <Accordion.Item>
+    <Accordion.Item onOpenChange={console.log}>
       <Accordion.Header>Accordion header text</Accordion.Header>
       <Content />
     </Accordion.Item>

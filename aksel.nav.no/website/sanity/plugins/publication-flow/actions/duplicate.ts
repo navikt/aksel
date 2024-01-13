@@ -5,10 +5,10 @@ import {
 } from "sanity";
 
 export const createWrappedDuplicateAction = (
-  duplicateAction: DocumentActionComponent
+  duplicateAction: DocumentActionComponent,
 ) => {
   const WrappedDuplicate = (
-    props: DocumentActionProps
+    props: DocumentActionProps,
   ): DocumentActionDescription | null => {
     const originalDuplicateDescription = duplicateAction(props);
 

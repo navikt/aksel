@@ -1,8 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { Slot } from "../../util/Slot";
 import { getResponsiveProps } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
-import { Slot } from "../../util/Slot";
 
 export type BleedSpacingInline = "0" | "full" | "px" | SpacingScale;
 export type BleedSpacingBlock = "0" | "px" | SpacingScale;
@@ -66,7 +66,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       asChild,
       ...rest
     },
-    ref
+    ref,
   ) => {
     let style: React.CSSProperties = {
       ..._style,
@@ -76,7 +76,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         "spacing",
         marginInline,
         true,
-        ["0", "full", "px"]
+        ["0", "full", "px"],
       ),
 
       ...getResponsiveProps(
@@ -85,7 +85,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         "spacing",
         marginBlock,
         true,
-        ["0", "px"]
+        ["0", "px"],
       ),
     };
 
@@ -98,7 +98,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
           "spacing",
           marginInline,
           false,
-          ["0", "full", "px"]
+          ["0", "full", "px"],
         ),
         ...getResponsiveProps(
           "bleed",
@@ -106,7 +106,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
           "spacing",
           marginBlock,
           false,
-          ["0", "px"]
+          ["0", "px"],
         ),
       };
     }
@@ -123,5 +123,5 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
         style={style}
       />
     );
-  }
+  },
 );

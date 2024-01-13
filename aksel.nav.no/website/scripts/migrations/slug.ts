@@ -23,7 +23,7 @@ const main = async () => {
   const transactionClient = noCdnClient(token).transaction();
 
   const docs = await noCdnClient(token).fetch(
-    `*[_type in ["ds_artikkel", "komponent_artikkel"]]`
+    `*[_type in ["ds_artikkel", "komponent_artikkel"]]`,
   );
 
   docs.forEach((data) => {

@@ -5,5 +5,5 @@ interface ToggleContextProps {
 }
 
 export const ToggleGroupContext = createContext<ToggleContextProps | null>(
-  null
+  null,
 );

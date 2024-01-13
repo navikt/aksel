@@ -35,7 +35,7 @@ export const ToggleChips: OverridableComponent<
       as: Component = "button",
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <Component
@@ -45,7 +45,7 @@ export const ToggleChips: OverridableComponent<
           "navds-chips__chip navds-chips__toggle",
           className,
           `navds-chips__toggle--${variant}`,
-          { "navds-chips__toggle--with-checkmark": checkmark }
+          { "navds-chips__toggle--with-checkmark": checkmark },
         )}
         aria-pressed={selected}
       >
@@ -81,7 +81,7 @@ export const ToggleChips: OverridableComponent<
         <span className="navds-chips__chip-text">{children}</span>
       </Component>
     );
-  }
+  },
 );
 
 export default ToggleChips;

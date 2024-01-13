@@ -45,7 +45,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       (event: React.KeyboardEvent) => {
         const isTextInSelectedOptions = (text: string) => {
           return selectedOptions.find(
-            (item) => item.toLocaleLowerCase() === text.toLocaleLowerCase()
+            (item) => item.toLocaleLowerCase() === text.toLocaleLowerCase(),
           );
         };
 
@@ -86,7 +86,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         toggleIsListOpen,
         toggleOption,
         value,
-      ]
+      ],
     );
 
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -151,7 +151,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         setIsMouseLastUsedInputDevice,
         toggleIsListOpen,
         virtualFocus,
-      ]
+      ],
     );
 
     const onChangeHandler = useCallback(
@@ -165,7 +165,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         virtualFocus.moveFocusToTop();
         onChange(event);
       },
-      [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen]
+      [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen],
     );
 
     return (
@@ -190,11 +190,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           inputClassName,
           "navds-combobox__input",
           "navds-body-short",
-          `navds-body-short--${size}`
+          `navds-body-short--${size}`,
         )}
       />
     );
-  }
+  },
 );
 
 export default Input;

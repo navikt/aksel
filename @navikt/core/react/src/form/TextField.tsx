@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes, forwardRef } from "react";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
@@ -81,7 +81,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "navds-form-field--disabled": !!inputProps.disabled,
             "navds-form-field--readonly": readOnly,
             "navds-text-field--readonly": readOnly,
-          }
+          },
         )}
       >
         <Label
@@ -116,7 +116,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           className={cl(
             "navds-text-field__input",
             "navds-body-short",
-            `navds-body-short--${size ?? "medium"}`
+            `navds-body-short--${size ?? "medium"}`,
           )}
           size={htmlSize}
         />
@@ -132,7 +132,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default TextField;

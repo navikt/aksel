@@ -1,5 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { Detail } from "../typography";
 
 export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
@@ -37,7 +37,7 @@ const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
       toptextPosition,
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -50,7 +50,7 @@ const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
           <h3
             className={cl(
               `navds-chat__top-text`,
-              toptextPosition && `navds-chat__top-text--${toptextPosition}`
+              toptextPosition && `navds-chat__top-text--${toptextPosition}`,
             )}
           >
             {name && <Detail as="span">{name}</Detail>}
@@ -65,7 +65,7 @@ const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 
 export default Bubble;

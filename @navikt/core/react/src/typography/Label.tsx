@@ -44,7 +44,7 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
         textColor,
         ...rest
       },
-      ref
+      ref,
     ) => (
       <Component
         {...rest}
@@ -59,10 +59,10 @@ export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
           }),
           {
             "navds-label--small": size === "small",
-          }
+          },
         )}
       />
-    )
+    ),
   );
 
 export default Label;

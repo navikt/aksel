@@ -337,8 +337,10 @@ button.navds-internalheader__title:active,
   border: none;
   cursor: pointer;
   background: var(--a-surface-default);
-  box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
-    0 0 0 4px var(--ac-timeline-pin-bg, var(--a-surface-danger)), 0 0 0 5px var(--a-surface-default);
+  box-shadow:
+    inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
+    0 0 0 4px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
+    0 0 0 5px var(--a-surface-default);
   z-index: 2;
   border-radius: var(--a-border-radius-full);
   padding: 3.5px;
@@ -357,34 +359,44 @@ button.navds-internalheader__title:active,
 }
 
 .navds-timeline__pin-button:focus-visible {
-  box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
-    0 0 0 3px var(--ac-timeline-pin-bg, var(--a-surface-danger)), 0 0 0 4px var(--a-surface-default),
+  box-shadow:
+    inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
+    0 0 0 3px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
+    0 0 0 4px var(--a-surface-default),
     0 0 0 6px var(--a-border-focus);
   outline: none;
 }
 
 .navds-timeline__pin-button:hover {
-  box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
-    0 0 0 4px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)), 0 0 0 5px var(--a-surface-default);
+  box-shadow:
+    inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
+    0 0 0 4px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
+    0 0 0 5px var(--a-surface-default);
 }
 
 .navds-timeline__pin-button:hover:focus-visible {
-  box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
-    0 0 0 3px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)), 0 0 0 4px var(--a-surface-default),
+  box-shadow:
+    inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
+    0 0 0 3px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
+    0 0 0 4px var(--a-surface-default),
     0 0 0 6px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-timeline__pin-button:focus {
-    box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
-      0 0 0 3px var(--ac-timeline-pin-bg, var(--a-surface-danger)), 0 0 0 4px var(--a-surface-default),
+    box-shadow:
+      inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
+      0 0 0 3px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
+      0 0 0 4px var(--a-surface-default),
       0 0 0 6px var(--a-border-focus);
     outline: none;
   }
 
   .navds-timeline__pin-button:hover:focus {
-    box-shadow: inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
-      0 0 0 3px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)), 0 0 0 4px var(--a-surface-default),
+    box-shadow:
+      inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
+      0 0 0 3px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
+      0 0 0 4px var(--a-surface-default),
       0 0 0 6px var(--a-border-focus);
   }
 }
@@ -443,7 +455,8 @@ button.navds-internalheader__title:active,
 }
 
 .navds-timeline__period--selected:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--ac-timeline-period-selected-border, var(--a-border-action-selected)),
+  box-shadow:
+    inset 0 0 0 2px var(--ac-timeline-period-selected-border, var(--a-border-action-selected)),
     0 0 0 2px var(--a-border-focus);
   z-index: 3;
 }
@@ -453,7 +466,9 @@ button.navds-internalheader__title:active,
 }
 
 .navds-timeline__zoom-button:focus-visible {
-  box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 3px var(--a-border-focus);
+  box-shadow:
+    0 0 0 1px var(--a-surface-default),
+    0 0 0 3px var(--a-border-focus);
   border-width: 1px;
 }
 
@@ -470,13 +485,16 @@ button.navds-internalheader__title:active,
   }
 
   .navds-timeline__period--selected:focus {
-    box-shadow: inset 0 0 0 2px var(--ac-timeline-period-selected-border, var(--a-border-action-selected)),
+    box-shadow:
+      inset 0 0 0 2px var(--ac-timeline-period-selected-border, var(--a-border-action-selected)),
       0 0 0 2px var(--a-border-focus);
     z-index: 3;
   }
 
   .navds-timeline__zoom-button:focus {
-    box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 3px var(--a-border-focus);
+    box-shadow:
+      0 0 0 1px var(--a-surface-default),
+      0 0 0 3px var(--a-border-focus);
     border-width: 1px;
   }
 

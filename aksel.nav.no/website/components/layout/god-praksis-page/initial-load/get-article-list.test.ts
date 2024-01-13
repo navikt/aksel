@@ -3,7 +3,7 @@ import { getArticleList } from "./get-article-list";
 
 const baseArticle = (
   id: string,
-  publishedAt: string | null
+  publishedAt: string | null,
 ): GpGroupedArticlesT[number] => ({
   innholdstype: "type1",
   undertema: "tema1",
@@ -64,7 +64,7 @@ describe("getArticleList function", () => {
 
   test("should correctly limit the number of articles to 9", () => {
     const articles = Array.from({ length: 10 }, (_, i) =>
-      baseArticle(String(i + 1), `2022-01-0${i + 1}`)
+      baseArticle(String(i + 1), `2022-01-0${i + 1}`),
     );
     const result = getArticleList(articles, "type1", "tema1");
     expect(result.length).toEqual(9);
@@ -72,7 +72,7 @@ describe("getArticleList function", () => {
 
   test("should return all articles when no filter is set", () => {
     const articles = Array.from({ length: 10 }, (_, i) =>
-      baseArticle(String(i + 1), `2022-01-0${i + 1}`)
+      baseArticle(String(i + 1), `2022-01-0${i + 1}`),
     );
     const result = getArticleList(articles, null, null);
     expect(result.length).toEqual(9);

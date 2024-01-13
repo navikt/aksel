@@ -60,7 +60,9 @@
 
 .navds-expansioncard--open > :where(.navds-expansioncard__header):hover {
   background-color: var(--ac-expansioncard-header-bg-hover, var(--a-surface-hover));
-  box-shadow: 1px 0 0 0 var(--__ac-expansioncard-border-color), -1px 0 0 0 var(--__ac-expansioncard-border-color),
+  box-shadow:
+    1px 0 0 0 var(--__ac-expansioncard-border-color),
+    -1px 0 0 0 var(--__ac-expansioncard-border-color),
     0 -1px 0 0 var(--__ac-expansioncard-border-color);
 }
 
@@ -190,7 +192,9 @@
 }
 
 :where(.navds-expansioncard__header):hover + .navds-expansioncard__content {
-  box-shadow: 1px 0 0 0 var(--__ac-expansioncard-border-color), -1px 0 0 0 var(--__ac-expansioncard-border-color),
+  box-shadow:
+    1px 0 0 0 var(--__ac-expansioncard-border-color),
+    -1px 0 0 0 var(--__ac-expansioncard-border-color),
     0 1px 0 0 var(--__ac-expansioncard-border-color);
 }
 

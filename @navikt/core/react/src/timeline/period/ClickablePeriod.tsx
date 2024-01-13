@@ -14,8 +14,8 @@ import {
   useRole,
 } from "@floating-ui/react";
 import cl from "clsx";
-import React, { useMemo, useRef, useState } from "react";
-import { mergeRefs } from "../../util";
+import React, { useRef, useState } from "react";
+import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -24,7 +24,7 @@ import { PeriodProps } from "./types";
 
 interface TimelineClickablePeriodProps extends PeriodProps {
   onSelectPeriod?: (
-    e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
+    e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>,
   ) => void;
   isActive?: boolean;
   periodRef: React.ForwardedRef<HTMLButtonElement>;
@@ -89,10 +89,7 @@ const ClickablePeriod = React.memo(
       role,
     ]);
 
-    const mergedRef = useMemo(
-      () => mergeRefs([refs.setReference, periodRef]),
-      [periodRef, refs.setReference]
-    );
+    const mergedRef = useMergeRefs(refs.setReference, periodRef);
 
     const staticSide = {
       top: "bottom",
@@ -117,7 +114,7 @@ const ClickablePeriod = React.memo(
             restProps?.className,
             {
               "navds-timeline__period--selected": isActive,
-            }
+            },
           )}
           aria-expanded={children ? open : undefined}
           aria-current={isActive || undefined}
@@ -179,7 +176,7 @@ const ClickablePeriod = React.memo(
         )}
       </>
     );
-  }
+  },
 );
 
 export default ClickablePeriod;

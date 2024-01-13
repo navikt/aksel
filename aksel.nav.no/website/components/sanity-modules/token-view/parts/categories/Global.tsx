@@ -28,7 +28,7 @@ export const GlobalView = ({ cat }: { cat: string }) => {
                   iconPosition="right"
                 />
               </dt>
-              <dd className="text-text-subtle text-medium mt-auto">
+              <dd className="mt-auto text-medium text-text-subtle">
                 {getColorString(x.value)}
               </dd>
             </dl>

@@ -51,7 +51,7 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
         textColor,
         ...rest
       },
-      ref
+      ref,
     ) => (
       <Component
         {...rest}
@@ -70,10 +70,10 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
           }),
           {
             "navds-detail--small": size === "small",
-          }
+          },
         )}
       />
-    )
+    ),
   );
 
 export default Detail;

@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import Combobox from "./Combobox";
 import { FilteredOptionsProvider } from "./FilteredOptions/filteredOptionsContext";
-import { CustomOptionsProvider } from "./customOptionsContext";
-import { SelectedOptionsProvider } from "./SelectedOptions/selectedOptionsContext";
 import { InputContextProvider } from "./Input/inputContext";
+import { SelectedOptionsProvider } from "./SelectedOptions/selectedOptionsContext";
+import { CustomOptionsProvider } from "./customOptionsContext";
 import { ComboboxProps } from "./types";
 
 /**
@@ -92,7 +92,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
         </CustomOptionsProvider>
       </InputContextProvider>
     );
-  }
+  },
 );
 
 export default ComboboxProvider;

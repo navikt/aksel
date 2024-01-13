@@ -21,7 +21,7 @@ export function runResolvers({
     /* Not allowed to edit accumulators directly as its readonly*/
     const _acc = { ...acc };
     const dataFromKeys = resolver.dataKeys.map((key) =>
-      getNestedProperty(_acc, key)
+      getNestedProperty(_acc, key),
     );
 
     /**

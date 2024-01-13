@@ -27,7 +27,7 @@ function UlList({
 
   return (
     <ul
-      className={`data-active:max-h-[70vh] data-active:py-1 data-active:overflow-y-scroll data-active:overscroll-contain pl-3 pr-1 ${styles.hideScrollbar}`}
+      className={`pl-3 pr-1 data-active:max-h-[70vh] data-active:overflow-y-scroll data-active:overscroll-contain data-active:py-1 ${styles.hideScrollbar}`}
       data-active={!nested}
       id={!nested ? "toc-scroll-wrapper" : undefined}
     >

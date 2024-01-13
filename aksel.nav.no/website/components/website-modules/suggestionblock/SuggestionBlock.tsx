@@ -25,7 +25,7 @@ const SuggestionBlockComponent = ({
           {
             "text-lightblue-800": variant === "komponent-ny",
             "text-violet-800": variant === "komponent-beta",
-          }
+          },
         )}
       >
         {options[variant]?.icon}
@@ -125,11 +125,11 @@ export const SuggestionBlock = ({
   return (
     <div
       className={cl(
-        "bg-surface-neutral-subtle flex max-w-2xl flex-wrap justify-between gap-3 rounded-lg p-4 ring-1",
+        "flex max-w-2xl flex-wrap justify-between gap-3 rounded-lg bg-surface-neutral-subtle p-4 ring-1",
         {
-          "ring-border-subtle mb-12": variant !== "ikon-not-found",
+          "mb-12 ring-border-subtle": variant !== "ikon-not-found",
           "bg-teal-100 ring-teal-300": variant === "ikon-not-found",
-        }
+        },
       )}
     >
       <BodyShort className="-ml-[2px] flex items-center gap-2">

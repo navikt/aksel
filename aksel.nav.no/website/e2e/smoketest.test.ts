@@ -17,10 +17,10 @@ test.describe("Smoketest all pages", () => {
       for (let i = 0; i < (await linkList.count()); i++) {
         expect(await linkList.nth(i).getAttribute("href")).not.toBeNull();
         expect(await linkList.nth(i).getAttribute("href")).not.toBe(
-          "/[object%20Object]"
+          "/[object%20Object]",
         );
         expect(await linkList.nth(i).getAttribute("href")).not.toBe(
-          "/undefined"
+          "/undefined",
         );
       }
     });

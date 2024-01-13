@@ -27,7 +27,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
           !!props["aria-labelledby"] && props["aria-labelledby"],
           {
             [descriptionId]: props.description,
-          }
+          },
         )}
         className="navds-radio__input"
         ref={ref}

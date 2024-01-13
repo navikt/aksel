@@ -1,9 +1,9 @@
+import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/testing-library";
 import React from "react";
 import { Alert, AlertProps } from ".";
 import { BodyLong, Heading as DsHeading, Link } from "..";
-import { within, userEvent } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
 
 const meta: Meta<typeof Alert> = {
   title: "ds-react/Alert",
@@ -55,7 +55,7 @@ export const Small: Story = {
             closeButton={props.closeButton}
           >
             {new Array(i + 1).fill(
-              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
             )}
           </Alert>
         ))}
@@ -74,14 +74,14 @@ export const FullWidth = () => {
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant} fullWidth>
           {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
           )}
         </Alert>
       ))}
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant} fullWidth size="small">
           {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
           )}
         </Alert>
       ))}
@@ -95,14 +95,14 @@ export const Inline = () => {
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant} inline>
           {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
           )}
         </Alert>
       ))}
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant} inline size="small">
           {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
           )}
         </Alert>
       ))}

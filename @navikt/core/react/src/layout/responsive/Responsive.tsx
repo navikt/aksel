@@ -1,7 +1,7 @@
 import cl from "clsx";
-import React, { forwardRef, HTMLAttributes } from "react";
-import { BreakpointsAlias } from "../utilities/types";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { Slot } from "../../util/Slot";
+import { BreakpointsAlias } from "../utilities/types";
 
 export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -40,7 +40,7 @@ const Responsive = forwardRef<
       asChild,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const aboveProp = variant === "show" ? above : below;
     const belowProp = variant === "show" ? below : above;
@@ -57,7 +57,7 @@ const Responsive = forwardRef<
         })}
       />
     );
-  }
+  },
 );
 
 /**
@@ -82,7 +82,7 @@ const Responsive = forwardRef<
  * </HGrid>
  */
 export const Hide = forwardRef<HTMLDivElement, ResponsiveProps>(
-  (props, ref) => <Responsive {...props} ref={ref} variant="hide" />
+  (props, ref) => <Responsive {...props} ref={ref} variant="hide" />,
 );
 
 /**
@@ -107,5 +107,5 @@ export const Hide = forwardRef<HTMLDivElement, ResponsiveProps>(
  * </HGrid>
  */
 export const Show = forwardRef<HTMLDivElement, ResponsiveProps>(
-  (props, ref) => <Responsive {...props} ref={ref} variant="show" />
+  (props, ref) => <Responsive {...props} ref={ref} variant="show" />,
 );

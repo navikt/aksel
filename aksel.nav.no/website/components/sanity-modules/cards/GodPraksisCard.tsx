@@ -22,10 +22,12 @@ const GodPraksisCard = ({ node }: GodPraksisCardProps) => {
   }
 
   return (
-    <li className="bg-surface-default focus-within:ring-border-focus shadow-xsmall hover:shadow-small group relative grid rounded-lg p-6 focus-within:ring-[3px]">
+    <li className="group relative grid rounded-lg bg-surface-default p-6 shadow-xsmall focus-within:ring-[3px] focus-within:ring-border-focus hover:shadow-small">
       <div className="relative mb-4 h-16 w-16">
         <Image
-          src={urlFor(node?.pictogram).auto("format").url()}
+          src={urlFor(node?.pictogram)
+            .auto("format")
+            .url()}
           decoding="sync"
           layout="fill"
           objectFit="contain"
@@ -39,7 +41,7 @@ const GodPraksisCard = ({ node }: GodPraksisCardProps) => {
         onClick={(e) =>
           amplitudeLogNavigation("card", e.currentTarget.getAttribute("href"))
         }
-        className="navds-heading--medium text-deepblue-700 navds-heading  mb-4 underline after:absolute after:inset-0 after:rounded-lg focus:outline-none group-hover:no-underline"
+        className="navds-heading--medium navds-heading mb-4  text-deepblue-700 underline after:absolute after:inset-0 after:rounded-lg focus:outline-none group-hover:no-underline"
       >
         {node.title}
       </NextLink>

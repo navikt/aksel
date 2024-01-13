@@ -15,7 +15,7 @@ async function createIndex() {
   const data = await noCdnClient(process.env.SANITY_PRIVATE_NO_DRAFTS)
     .fetch(
       `*[_type in [${allArticleDocuments.map(
-        (x) => `"${x}"`
+        (x) => `"${x}"`,
       )}]]| order(publishedAt desc){
     heading,
     "slug": slug.current,
@@ -27,7 +27,7 @@ async function createIndex() {
     content,
     publishedAt,
     seo
-  }`
+  }`,
     )
     .catch((err) => {
       throw new Error(err);
@@ -35,13 +35,13 @@ async function createIndex() {
 
   if (data.length === 0) {
     throw new Error(
-      "Searchindex is empty, something went wrong when retrieving data from Sanity."
+      "Searchindex is empty, something went wrong when retrieving data from Sanity.",
     );
   }
 
   fs.writeFileSync(
     "./public/searchindex.json",
-    JSON.stringify(sanitzeSanityData(data))
+    JSON.stringify(sanitzeSanityData(data)),
   );
 }
 
@@ -103,7 +103,7 @@ function mapContent(blocks: any[]) {
     (prev: { id?: string; text: string }[], [key, value]) => {
       return [...prev, { id: key, text: value.map((x) => x.text).join(" ") }];
     },
-    []
+    [],
   );
 
   return mapped;

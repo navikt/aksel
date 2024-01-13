@@ -1,6 +1,6 @@
 export const devsOnly = ({ currentUser }) =>
   !currentUser.roles.find(({ name }) =>
-    ["developer", "administrator"].includes(name)
+    ["developer", "administrator"].includes(name),
   );
 
 export const getTemplates = () => {

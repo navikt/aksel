@@ -59,7 +59,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         params: {
           slug: path,
         },
-      }))
+      })),
     ),
     fallback: "blocking",
   };
@@ -146,7 +146,7 @@ const Page = ({ tema: page }: PageProps["props"]) => {
                 <div
                   className={cl(
                     "max-w relative z-10 mb-2 h-fit sm:w-96 xl:mt-[10px]",
-                    { invisible: !hasAnsvarlig }
+                    { invisible: !hasAnsvarlig },
                   )}
                   aria-hidden={!hasAnsvarlig}
                 >
@@ -161,7 +161,7 @@ const Page = ({ tema: page }: PageProps["props"]) => {
                           : ""}
                       </Label>
                       {page?.ansvarlig?.roller?.length > 0 ? (
-                        <div className="text-medium mt-[2px]">
+                        <div className="mt-[2px] text-medium">
                           {page?.ansvarlig?.roller.join(", ")}
                         </div>
                       ) : (
@@ -200,7 +200,7 @@ const Page = ({ tema: page }: PageProps["props"]) => {
                         ))}
                       </div>
                     </div>
-                  ) : null
+                  ) : null,
                 )}
               </div>
             ) : (

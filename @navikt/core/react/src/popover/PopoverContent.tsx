@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 
 export interface PopoverContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,7 +17,7 @@ const PopoverContent: PopoverContentType = forwardRef(
       ref={ref}
       className={cl("navds-popover__content", className)}
     />
-  )
+  ),
 );
 
 export default PopoverContent;

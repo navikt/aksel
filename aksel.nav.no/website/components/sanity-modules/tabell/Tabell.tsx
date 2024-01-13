@@ -26,13 +26,15 @@ const TableComponent = ({ node }: TableProps) => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {node?.rows?.slice?.(1)?.map((row) => (
-            <Table.Row key={row?._key}>
-              {row?.cells?.map((cell, y) => (
-                <Table.DataCell key={y}>{cell}</Table.DataCell>
-              ))}
-            </Table.Row>
-          ))}
+          {node?.rows
+            ?.slice?.(1)
+            ?.map((row) => (
+              <Table.Row key={row?._key}>
+                {row?.cells?.map((cell, y) => (
+                  <Table.DataCell key={y}>{cell}</Table.DataCell>
+                ))}
+              </Table.Row>
+            ))}
         </Table.Body>
       </Table>
       <style global jsx>{`

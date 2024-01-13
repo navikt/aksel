@@ -10,7 +10,7 @@ export const useCheckAuth = () => {
         `https://${clientConfig.projectId}.api.sanity.io/v1/users/me`,
         {
           credentials: "include",
-        }
+        },
       ).then((x) => x.text());
       try {
         setUser(!!JSON.parse(response)?.id);

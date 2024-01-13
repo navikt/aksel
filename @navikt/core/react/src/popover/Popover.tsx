@@ -15,12 +15,12 @@ import React, {
   forwardRef,
   useCallback,
   useContext,
-  useMemo,
   useRef,
 } from "react";
 import { DateContext } from "../date/context";
 import { ModalContext } from "../modal/ModalContext";
-import { mergeRefs, useClientLayoutEffect, useEventListener } from "../util";
+import { useClientLayoutEffect, useEventListener } from "../util";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
@@ -41,7 +41,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   onClose: () => void;
   /**
-   * Orientation for popover
+   * Default orientation of popover
    * @note Try to keep general usage to "top", "bottom", "left", "right"
    * @default "top"
    */
@@ -123,7 +123,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       flip: _flip = true,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useContext(ModalContext) !== null;
@@ -163,17 +163,14 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       refs.setReference(anchorEl);
     }, [anchorEl]);
 
-    const floatingRef = useMemo(
-      () => mergeRefs([refs.setFloating, ref]),
-      [refs.setFloating, ref]
-    );
+    const floatingRef = useMergeRefs(refs.setFloating, ref);
 
     useClientLayoutEffect(() => {
       if (!refs.reference.current || !refs.floating.current || !open) return;
       const cleanup = autoUpdate(
         refs.reference.current,
         refs.floating.current,
-        update
+        update,
       );
       return () => cleanup();
     }, [refs.floating, refs.reference, update, open, anchorEl]);
@@ -184,16 +181,16 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         (e: FocusEvent) => {
           if (
             e.target instanceof HTMLElement &&
-            ![anchorEl, refs.floating.current].some((element) =>
-              element?.contains(e.target as Node)
+            ![anchorEl, refs.floating.current].some(
+              (element) => element?.contains(e.target as Node),
             ) &&
             !e.target.contains(refs.floating.current)
           ) {
             open && onClose();
           }
         },
-        [anchorEl, refs, open, onClose]
-      )
+        [anchorEl, refs, open, onClose],
+      ),
     );
 
     const staticSide = {
@@ -237,7 +234,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         )}
       </div>
     );
-  }
+  },
 ) as PopoverComponent;
 
 Popover.Content = PopoverContent;

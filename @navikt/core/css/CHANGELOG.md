@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.13.0
+
+### Patch Changes
+
+- Page: Lagt til ny bakgrunnsfarge `surface-subtle` og ny maksbredde på Page.Block `text` ([#2572](https://github.com/navikt/aksel/pull/2572))
+
 ## 5.12.5
 
 ## 5.12.4

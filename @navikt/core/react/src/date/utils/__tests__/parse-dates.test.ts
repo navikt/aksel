@@ -1,7 +1,7 @@
 /* eslint-disable jest/expect-expect */
-import { parseDate, isValidDate } from "..";
-import nb from "date-fns/locale/nb";
 import getMonth from "date-fns/getMonth";
+import nb from "date-fns/locale/nb";
+import { isValidDate, parseDate } from "..";
 
 const check = (inp: string) =>
   // eslint-disable-next-line jest/valid-expect

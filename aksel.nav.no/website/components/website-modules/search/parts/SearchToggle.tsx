@@ -14,7 +14,7 @@ export const Search = () => {
     <>
       <Button
         variant="primary"
-        className="hover:bg-deepblue-700 bg-deepblue-600 h-11"
+        className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
         aria-keyshortcuts="Control+b"
         icon={
           <MagnifyingGlassIcon

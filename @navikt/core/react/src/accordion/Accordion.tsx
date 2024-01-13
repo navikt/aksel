@@ -1,9 +1,9 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import AccordionItem, { AccordionItemProps } from "./AccordionItem";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
-import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
 import { AccordionContext } from "./AccordionContext";
+import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
+import AccordionItem, { AccordionItemProps } from "./AccordionItem";
 
 interface AccordionComponent
   extends React.ForwardRefExoticComponent<
@@ -83,7 +83,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       indent = true,
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <AccordionContext.Provider
@@ -100,13 +100,13 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
             "navds-accordion",
             className,
             `navds-accordion--${size}`,
-            { "navds-accordion--indent": indent }
+            { "navds-accordion--indent": indent },
           )}
           ref={ref}
         />
       </AccordionContext.Provider>
     );
-  }
+  },
 ) as AccordionComponent;
 
 Accordion.Header = AccordionHeader;

@@ -71,7 +71,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         params: {
           slug: slug.replace("god-praksis/artikler/", ""),
         },
-      }))
+      })),
     ),
     fallback: "blocking",
   };
@@ -96,7 +96,7 @@ export const getStaticProps: GetStaticProps = async ({
       id: page?._id ?? "",
       title: page?.heading ?? "",
       verifiedDate: await dateStr(
-        page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt
+        page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt,
       ),
       publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
       toc: generateTableOfContents({
@@ -123,7 +123,7 @@ const Page = ({
     console.warn(
       `Artikkelen har ikke ${
         !data.content ? "innhold" : "overskrift"
-      }, så den kan ikke vises.`
+      }, så den kan ikke vises.`,
     );
     return null;
   }
@@ -142,7 +142,7 @@ const Page = ({
           <Heading
             level="2"
             size="medium"
-            className="text-deepblue-700 px-4"
+            className="px-4 text-deepblue-700"
             id="relevante-artikler-aside"
           >
             {data?.relevante_artikler?.length === 1
@@ -151,7 +151,9 @@ const Page = ({
           </Heading>
           <div className="card-grid-3-1 mt-6 px-4">
             {data.relevante_artikler.map((x: any) =>
-              x && x?._id ? <ArtikkelCard level="3" {...x} key={x._id} /> : null
+              x && x?._id ? (
+                <ArtikkelCard level="3" {...x} key={x._id} />
+              ) : null,
             )}
           </div>
         </div>
@@ -178,14 +180,14 @@ const Page = ({
         id="hovedinnhold"
         className="aksel-artikkel group/aksel bg-surface-subtle pt-4 focus:outline-none"
       >
-        <div className="max-w-aksel mx-auto px-4 sm:w-[90%]">
+        <div className="mx-auto max-w-aksel px-4 sm:w-[90%]">
           <article className="pb-16 pt-12 md:pb-32">
             <div className="mx-auto mb-16 max-w-prose lg:ml-0">
               <BreadCrumbs auto />
               <Heading
                 level="1"
                 size="large"
-                className="text-deepblue-800 mt-4 md:text-5xl text-wrap-balance"
+                className="text-wrap-balance mt-4 text-deepblue-800 md:text-5xl"
               >
                 {data.heading}
               </Heading>
@@ -204,7 +206,7 @@ const Page = ({
                 </Detail>
                 {authors?.length > 0 && (
                   <>
-                    <span className="bg-deepblue-700 h-2 w-2 rotate-45 rounded-[1px] opacity-25" />
+                    <span className="h-2 w-2 rotate-45 rounded-[1px] bg-deepblue-700 opacity-25" />
                     <BodyShort
                       size="small"
                       as="div"
@@ -224,7 +226,7 @@ const Page = ({
                         key={title}
                         size="small"
                         as={NextLink}
-                        className="min-h-8 text-deepblue-800 focus-visible:shadow-focus bg-surface-neutral-subtle hover:bg-surface-neutral-subtle-hover ring-border-subtle flex items-center  justify-center gap-[2px] rounded-full pl-4 pr-1 ring-1 ring-inset focus:outline-none"
+                        className="flex min-h-8 items-center justify-center gap-[2px] rounded-full bg-surface-neutral-subtle pl-4  pr-1 text-deepblue-800 ring-1 ring-inset ring-border-subtle hover:bg-surface-neutral-subtle-hover focus:outline-none focus-visible:shadow-focus"
                       >
                         {title}
                         <ChevronRightIcon aria-hidden fontSize="1.25rem" />
@@ -240,14 +242,14 @@ const Page = ({
                 <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
                   {authors?.length > 0 && (
-                    <Label className="text-deepblue-700 mb-2" as="p">
+                    <Label className="mb-2 text-deepblue-700" as="p">
                       Bidragsytere
                     </Label>
                   )}
                   {authors?.length > 0 && (
                     <BodyShort
                       as="div"
-                      className="text-text-subtle mb-1 flex flex-wrap gap-1"
+                      className="mb-1 flex flex-wrap gap-1 text-text-subtle"
                     >
                       {authors.map(abbrName).map((x, y) => (
                         <address className="not-italic" key={x}>

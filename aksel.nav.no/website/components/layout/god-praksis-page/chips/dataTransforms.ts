@@ -5,7 +5,7 @@ type ChipsDataGroupedByTema = {
 };
 
 export const groupByTema = (
-  chipsData: chipsDataAllQueryResponse["chipsDataAll"]
+  chipsData: chipsDataAllQueryResponse["chipsDataAll"],
 ): ChipsDataGroupedByTema => {
   const chipNavData: ChipsDataGroupedByTema = {};
   for (const entry of chipsData) {
@@ -29,7 +29,7 @@ export const groupByTema = (
 };
 
 export const chipsDataForAllTema = (
-  chipsData: chipsDataAllQueryResponse["chipsDataAll"]
+  chipsData: chipsDataAllQueryResponse["chipsDataAll"],
 ): ChipsData => {
   const chipNavData: ChipsData = [];
   for (const entry of chipsData) {

@@ -26,7 +26,7 @@ type PageProps = NextPageT<{
 }>;
 
 export const query = `{${sidebarQuery}, ${landingPageQuery(
-  "grunnleggende"
+  "grunnleggende",
 )}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
 
 export const getStaticProps: GetStaticProps = async ({
@@ -78,7 +78,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
       >
         {grunnleggendeKategorier
           .filter(
-            (kat) => links?.filter((x) => x.kategori === kat.value).length > 0
+            (kat) => links?.filter((x) => x.kategori === kat.value).length > 0,
           )
           .map((kat, i) => (
             <div
@@ -89,7 +89,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
                 level="2"
                 size="large"
                 spacing
-                className="text-deepblue-800 scoll-mt-20"
+                className="scoll-mt-20 text-deepblue-800"
                 id={kat.value}
               >
                 {kat.title}

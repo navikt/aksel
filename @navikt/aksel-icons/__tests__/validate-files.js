@@ -16,7 +16,7 @@ describe(`Each SVG-file has a matching YML file`, () => {
     expect(
       ymlList
         .map((yml) => yml.replace(".yml", ".svg"))
-        .filter((file) => !svgList.includes(file))
+        .filter((file) => !svgList.includes(file)),
     ).toStrictEqual([]);
   });
 });
@@ -26,7 +26,7 @@ describe(`Each YML-file has a matching SVG file`, () => {
     expect(
       svgList
         .map((svg) => svg.replace(".svg", ".yml"))
-        .filter((file) => !ymlList.includes(file))
+        .filter((file) => !ymlList.includes(file)),
     ).toStrictEqual([]);
   });
 });

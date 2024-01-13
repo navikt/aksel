@@ -17,7 +17,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
 
     if (context === null) {
       console.error(
-        "<Accordion.Content> has to be used within an <Accordion.Item>"
+        "<Accordion.Content> has to be used within an <Accordion.Item>",
       );
       return null;
     }
@@ -32,7 +32,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
           {
             "navds-accordion__content--closed": !context.open,
           },
-          className
+          className,
         )}
         aria-hidden={
           !context.open || undefined
@@ -41,7 +41,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
         {children}
       </BodyLong>
     );
-  }
+  },
 );
 
 export default AccordionContent;

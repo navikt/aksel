@@ -49,7 +49,7 @@ export const BodyShort: OverridableComponent<
       textColor,
       ...rest
     },
-    ref
+    ref,
   ) => (
     <Component
       {...rest}
@@ -65,10 +65,10 @@ export const BodyShort: OverridableComponent<
           align,
           visuallyHidden,
           textColor,
-        })
+        }),
       )}
     />
-  )
+  ),
 );
 
 export default BodyShort;

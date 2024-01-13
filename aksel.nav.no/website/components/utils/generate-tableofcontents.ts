@@ -8,7 +8,7 @@ type GeneralPageToc = {
 };
 
 export function generateTableOfContents(
-  input: GeneralPageToc
+  input: GeneralPageToc,
 ): TableOfContentsT {
   if (!input.content) {
     return [];

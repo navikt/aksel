@@ -1,14 +1,14 @@
-import {
-  InformationSquareFillIcon,
-  CheckmarkCircleFillIcon,
-  ExclamationmarkTriangleFillIcon,
-  XMarkOctagonFillIcon,
-  XMarkIcon,
-} from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BodyLong } from "../typography";
+import {
+  CheckmarkCircleFillIcon,
+  ExclamationmarkTriangleFillIcon,
+  InformationSquareFillIcon,
+  XMarkIcon,
+  XMarkOctagonFillIcon,
+} from "@navikt/aksel-icons";
 import { Button } from "../button";
+import { BodyLong } from "../typography";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -88,7 +88,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       onClose,
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -103,7 +103,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             "navds-alert--full-width": fullWidth,
             "navds-alert--inline": inline,
             "navds-alert--close-button": closeButton,
-          }
+          },
         )}
       >
         <Icon variant={variant} className="navds-alert__icon" />
@@ -124,7 +124,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 export default Alert;

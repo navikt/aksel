@@ -153,7 +153,7 @@ export const structure: StructureResolver = (S, { currentUser }) => {
 // and schemes elsewhere in desk, they'll get the right views.
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (
   S,
-  { schemaType }
+  { schemaType },
 ) => {
   // Conditionally return a different configuration based on the schema type
   switch (schemaType) {

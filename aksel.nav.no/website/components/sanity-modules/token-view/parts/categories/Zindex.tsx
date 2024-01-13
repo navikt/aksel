@@ -18,7 +18,7 @@ export const ZindexView = ({ cat }: { cat: string }) => {
           >
             <div
               style={{ boxShadow: `inset 0 2px 4px 0 rgba(0,0,0,0.06)` }}
-              className="bg-surface-subtle mr-3 flex h-16 w-16 flex-col-reverse justify-between overflow-hidden rounded-lg text-4xl leading-none"
+              className="mr-3 flex h-16 w-16 flex-col-reverse justify-between overflow-hidden rounded-lg bg-surface-subtle text-4xl leading-none"
             >
               {zindex.map((token2, index2) => (
                 <div
@@ -29,7 +29,7 @@ export const ZindexView = ({ cat }: { cat: string }) => {
                     {
                       "bg-surface-alt-3-strong": index === index2,
                       "bg-surface-neutral-subtle": index !== index2,
-                    }
+                    },
                   )}
                 />
               ))}
@@ -43,7 +43,7 @@ export const ZindexView = ({ cat }: { cat: string }) => {
                   iconPosition="right"
                 />
               </dt>
-              <dd className="text-text-subtle text-medium mt-auto">
+              <dd className="mt-auto text-medium text-text-subtle">
                 {token.value}
               </dd>
             </dl>

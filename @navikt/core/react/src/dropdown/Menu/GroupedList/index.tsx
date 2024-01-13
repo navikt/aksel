@@ -34,7 +34,7 @@ export const DescriptionList = forwardRef(
     <dl {...rest} ref={ref} className={cl("navds-dropdown__list", className)}>
       {children}
     </dl>
-  )
+  ),
 ) as GroupedListType;
 
 DescriptionList.Heading = GroupedHeading;

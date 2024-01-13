@@ -58,8 +58,8 @@ export const Default: StoryObj<DefaultStoryProps> = {
           {...(props.mode === "single"
             ? singleCtx.datepickerProps
             : props.mode === "range"
-            ? rangeCtx.datepickerProps
-            : {})}
+              ? rangeCtx.datepickerProps
+              : {})}
           {...newProps}
           locale={props.locale}
           disableWeekends={props.disableWeekends}

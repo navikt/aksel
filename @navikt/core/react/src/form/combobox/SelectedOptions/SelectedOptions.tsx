@@ -1,7 +1,7 @@
 import React from "react";
 import { Chips } from "../../../chips";
-import { useSelectedOptionsContext } from "./selectedOptionsContext";
 import { useInputContext } from "../Input/inputContext";
+import { useSelectedOptionsContext } from "./selectedOptionsContext";
 
 interface SelectedOptionsProps {
   selectedOptions?: string[];
