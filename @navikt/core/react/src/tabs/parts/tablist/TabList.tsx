@@ -2,7 +2,8 @@ import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks/useMergeRefs";
-import ScrollButtons from "./ScrollButtons";
+import ScrollButton from "./ScrollButtons";
+import { useScrollButtons } from "./useScrollButtons";
 import { useTabList } from "./useTabList";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -19,14 +20,29 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
     const listRef = useRef<HTMLDivElement>(null);
     const mergedRef = useMergeRefs(listRef, ref);
 
+    const ctx = useScrollButtons(listRef);
+
     return (
       <div className="navds-tabs__tablist-wrapper">
-        <ScrollButtons listRef={listRef} />
+        {ctx.show && (
+          <>
+            <ScrollButton
+              dir="left"
+              hidden={!ctx.start}
+              onClick={ctx.scrollLeft}
+            />
+            <ScrollButton
+              dir="right"
+              hidden={!ctx.end}
+              onClick={ctx.scrollRight}
+            />
+          </>
+        )}
         <div
           ref={mergedRef}
           {...rest}
           tabIndex={0}
-          /* onScroll={updateScrollButtonState} */
+          onScroll={ctx.update}
           className={cl("navds-tabs__tablist", className)}
           role="tablist"
           aria-orientation="horizontal"
