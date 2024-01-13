@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useControllableState } from "../../esm/util/hooks";
 import { useId } from "../util";
+import { useControllableState } from "../util/hooks/useControllableState";
 import { TabsProps } from "./types";
 
 export function useTabs({
