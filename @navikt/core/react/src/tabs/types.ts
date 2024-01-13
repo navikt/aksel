@@ -45,6 +45,7 @@ export interface TabsProps
   iconPosition?: "left" | "top";
   /**
    * Stretches each tab to fill avaliable space
+   * @default false
    */
   fitted?: boolean;
 }

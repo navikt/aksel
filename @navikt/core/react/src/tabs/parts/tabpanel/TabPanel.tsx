@@ -11,10 +11,15 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
    * Value for state-handling
    */
   value: string;
+  /**
+   * If true, will only render children when selected
+   * @default true
+   */
+  lazy?: boolean;
 }
 
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
-  ({ className, value, children, ...rest }, ref) => {
+  ({ className, value, children, lazy = true, ...rest }, ref) => {
     const ctx = useTabPanel({ value });
 
     return (
@@ -30,7 +35,7 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
         id={ctx.id}
         hidden={ctx.hidden}
       >
-        {!ctx.hidden && children}
+        {lazy ? <>{!ctx.hidden && children}</> : children}
       </div>
     );
   },
