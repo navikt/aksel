@@ -65,7 +65,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
           aria-controls={tabCtx.controlsId}
           id={tabCtx.id}
           onFocus={tabCtx.onFocus}
-          onOnClick={tabCtx.onClick}
+          onClick={tabCtx.onClick}
         >
           <BodyShort
             as="span"
