@@ -47,7 +47,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
 
       return (
         <Component
-          ref={ref}
+          ref={tabCtx.ref}
           {...rest}
           className={cl(
             "navds-tabs__tab",

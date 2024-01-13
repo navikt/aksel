@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
@@ -41,7 +42,6 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
         <div
           ref={mergedRef}
           {...rest}
-          tabIndex={0}
           onScroll={ctx.update}
           className={cl("navds-tabs__tablist", className)}
           role="tablist"
