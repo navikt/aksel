@@ -1,54 +1,46 @@
 // https://github.com/chakra-ui/chakra-ui/tree/5ec0be610b5a69afba01a9c22365155c1b519136/packages/components/descendant
 import { useRef, useState } from "react";
-import mergeRefs from "../../mergeRefs";
 import { useClientLayoutEffect } from "../../useClientLayoutEffect";
 import { createContext } from "../context/create-context";
+import { mergeRefs } from "../useMergeRefs";
 import { DescendantOptions, DescendantsManager } from "./descendant";
 import { cast } from "./utils";
 
 /**
  * @internal
- * React hook that initializes the DescendantsManager
+ * Initializing DescendantsManager
  */
 function useDescendants<
   T extends HTMLElement = HTMLElement,
-  K extends Record<string, any> = object
+  K extends Record<string, any> = object,
 >() {
-  const descendants = useRef(new DescendantsManager<T, K>());
+  const descendants = useRef(new DescendantsManager<T, K>()).current;
   useClientLayoutEffect(() => {
-    return () => descendants.current.destroy();
+    return () => {
+      descendants.destroy();
+    };
   });
-  return descendants.current;
+
+  return descendants;
 }
 
-export interface UseDescendantsReturn
-  extends ReturnType<typeof useDescendants> {}
-
-/* -------------------------------------------------------------------------------------------------
- * Descendants context to be used in component-land.
-  - Mount the `DescendantsContextProvider` at the root of the component
-  - Call `useDescendantsContext` anywhere you need access to the descendants information
-
-  NB:  I recommend using `createDescendantContext` below
- * -----------------------------------------------------------------------------------------------*/
-
-const [DescendantsContextProvider, useDescendantsContext] =
-  createContext<UseDescendantsReturn>({
-    name: "DescendantsProvider",
-    errorMessage:
-      "useDescendantsContext must be used within DescendantsProvider",
-  });
+const [DescendantsContextProvider, useDescendantsContext] = createContext<
+  ReturnType<typeof useDescendants>
+>({
+  name: "DescendantsProvider",
+  errorMessage: "useDescendantsContext must be used within DescendantsProvider",
+});
 
 /**
  * @internal
- * This hook provides information a descendant such as:
- * - Its index compared to other descendants
+ * This hook provides information to descendant component:
+ * - Index compared to other descendants
  * - ref callback to register the descendant
  * - Its enabled index compared to other enabled descendants
  */
 function useDescendant<
   T extends HTMLElement = HTMLElement,
-  K extends Record<string, any> = object
+  K extends Record<string, any> = object,
 >(options?: DescendantOptions<K>) {
   const descendants = useDescendantsContext();
   const [index, setIndex] = useState(-1);
@@ -81,17 +73,16 @@ function useDescendant<
   };
 }
 
-/* -------------------------------------------------------------------------------------------------
- * Function that provides strongly typed versions of the context provider and hooks above.
-   To be used in component-land
- * -----------------------------------------------------------------------------------------------*/
-
+/**
+ * Provides strongly typed versions of the context provider and hooks above.
+ */
 export function createDescendantContext<
   T extends HTMLElement = HTMLElement,
-  K extends Record<string, any> = object
+  K extends Record<string, any> = object,
 >() {
-  type ContextProviderType = React.Provider<DescendantsManager<T, K>>;
-  const ContextProvider = cast<ContextProviderType>(DescendantsContextProvider);
+  const ContextProvider = cast<React.Provider<DescendantsManager<T, K>>>(
+    DescendantsContextProvider,
+  );
 
   const _useDescendantsContext = () =>
     cast<DescendantsManager<T, K>>(useDescendantsContext());

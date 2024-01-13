@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
 import { Box } from "../../../layout/box";
+import { HStack } from "../../../layout/stack";
 import { createDescendantContext } from "./useDescendant";
 
 export default {
-  title: "System / Descendants / Async",
+  title: "Utilities/Descendants",
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 
 const [
@@ -41,6 +45,8 @@ function Option({ value, disabled }: { value?: string; disabled?: boolean }) {
       onKeyDown={(event) => {
         if (event.key === "ArrowDown") {
           descendants.next(index)?.node.focus();
+        } else if (event.key === "ArrowUp") {
+          descendants.prev(index)?.node.focus();
         }
       }}
     >
@@ -49,7 +55,7 @@ function Option({ value, disabled }: { value?: string; disabled?: boolean }) {
   );
 }
 
-export const DescendantsWithInterval = () => {
+export const DynamicUpdates = () => {
   const [done, setDone] = React.useState(false);
 
   React.useEffect(() => {
@@ -80,5 +86,62 @@ export const DescendantsWithInterval = () => {
         </div>
       )}
     </Select>
+  );
+};
+
+function NumberInputWrapper({ children }: { children?: React.ReactNode }) {
+  const descendants = useDescendants();
+
+  React.useEffect(() => {
+    descendants.first()?.node.focus();
+  }, [descendants]);
+
+  return (
+    <DescendantsProvider value={descendants}>
+      <HStack gap="1">{children}</HStack>
+    </DescendantsProvider>
+  );
+}
+
+function Input() {
+  const [focused, setFocused] = React.useState(false);
+  const { register, index, descendants } = useDescendant();
+
+  return (
+    <input
+      style={{
+        width: "3rem",
+        height: "3rem",
+        borderRadius: "4px",
+        textAlign: "center",
+        border: "1px solid var(--a-border-default)",
+      }}
+      placeholder={focused ? "" : "0"}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+      ref={register}
+      type="tel"
+      autoCapitalize="none"
+      autoComplete="false"
+      inputMode="numeric"
+      onKeyDown={(event) => {
+        if (event.key === "ArrowRight") {
+          descendants.next(index, false)?.node.focus();
+        }
+        if (event.key === "ArrowLeft") {
+          descendants.prev(index, false)?.node.focus();
+        }
+      }}
+    />
+  );
+}
+
+export const NumberInput = () => {
+  return (
+    <NumberInputWrapper>
+      <Input />
+      <Input />
+      <Input />
+    </NumberInputWrapper>
   );
 };
