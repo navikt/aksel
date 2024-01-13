@@ -1,10 +1,11 @@
 import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
+import { OverridableComponent } from "../util/OverridableComponent";
+import Tab, { TabProps } from "./Tab";
+import TabList, { TabListProps } from "./TabList";
+import TabPanel, { TabPanelProps } from "./TabPanel";
 import { TabsContext } from "./context";
-import Tab from "./parts/Tab";
-import TabList from "./parts/TabList";
-import TabPanel from "./parts/TabPanel";
 
 export interface TabsProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -51,15 +52,19 @@ interface TabsComponent
    * @see 🏷️ {@link TabProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Tab: typeof Tab;
+  Tab: OverridableComponent<TabProps, HTMLButtonElement>;
   /**
    * @see 🏷️ {@link TabListProps}
    */
-  List: typeof TabList;
+  List: React.ForwardRefExoticComponent<
+    TabListProps & React.RefAttributes<HTMLDivElement>
+  >;
   /**
    * @see 🏷️ {@link TabPanelProps}
    */
-  Panel: typeof TabPanel;
+  Panel: React.ForwardRefExoticComponent<
+    TabPanelProps & React.RefAttributes<HTMLDivElement>
+  >;
 }
 
 /**
