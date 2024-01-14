@@ -35,9 +35,7 @@ export function useToggleItem<P extends UseToggleItemProps>(
 
   const isSelected = value === selectedValue;
 
-  const onFocus = () => {
-    setFocusedValue(value);
-  };
+  const onFocus = () => setFocusedValue(value);
 
   /**
    * Implements rowing-tabindex for horizontal tabs
@@ -45,7 +43,7 @@ export function useToggleItem<P extends UseToggleItemProps>(
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       /**
-       * Tabs.Tab is registered with its prop 'value'.
+       * ToggleGroup.Item is registered with its prop 'value'.
        * We can then use it to find the current focuses descendant
        */
       const idx = descendants
@@ -81,9 +79,15 @@ export function useToggleItem<P extends UseToggleItemProps>(
       if (action) {
         event.preventDefault();
         action(event);
+      } else if (event.key === "Tab") {
+        /**
+         * Imperative focus during keydown is risky so we prevent React's batching updates
+         * to avoid potential bugs. See: https://github.com/facebook/react/issues/20332
+         */
+        selectedValue && setTimeout(() => setFocusedValue(selectedValue));
       }
     },
-    [descendants, focusedValue],
+    [descendants, focusedValue, selectedValue, setFocusedValue],
   );
 
   return {
