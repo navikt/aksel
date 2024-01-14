@@ -21,6 +21,7 @@ export function useTab<P extends UseTabProps>(
     id,
     setSelectedValue,
     selectionFollowsFocus,
+    focusedValue,
     setFocusedValue,
     selectedValue,
     makeTabId,
@@ -44,6 +45,7 @@ export function useTab<P extends UseTabProps>(
   return {
     ref: mergeRefs([register, ref]),
     isSelected,
+    isFocused: focusedValue === value,
     id: makeTabId(id, value),
     controlsId: makeTabPanelId(id, value),
     onClick: composeEventHandlers(onClick, () => setSelectedValue(value)),

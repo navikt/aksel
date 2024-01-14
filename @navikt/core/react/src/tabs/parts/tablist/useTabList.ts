@@ -6,7 +6,8 @@ import { useTabsContext, useTabsDescendantsContext } from "../../context";
  * and ensures only one tab is selected at a time.
  */
 export function useTabList() {
-  const { focusedValue, loop } = useTabsContext();
+  const { focusedValue, loop, selectedValue, setFocusedValue } =
+    useTabsContext();
 
   const descendants = useTabsDescendantsContext();
 
@@ -52,9 +53,15 @@ export function useTabList() {
       if (action) {
         event.preventDefault();
         action(event);
+      } else if (event.key === "Tab") {
+        /**
+         * Imperative focus during keydown is risky so we prevent React's batching updates
+         * to avoid potential bugs. See: https://github.com/facebook/react/issues/20332
+         */
+        selectedValue && setTimeout(() => setFocusedValue(selectedValue));
       }
     },
-    [descendants, focusedValue, loop],
+    [descendants, focusedValue, loop, selectedValue, setFocusedValue],
   );
 
   return { onKeyDown };
