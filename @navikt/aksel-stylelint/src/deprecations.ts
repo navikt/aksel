@@ -52,6 +52,7 @@ export const deprecations: DeprecatedList = [
   },
   {
     classes: ["navds-grid", "navds-content-container"],
+    deprecatePrefix: true,
     message:
       "Components were replaced by `HGrid` and `Page.Block` in version 6",
   },
