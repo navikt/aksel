@@ -5,8 +5,8 @@ import {
   Alert as DsAlert,
   ConfirmationPanel as DsConfirmationPanel,
   Link,
-} from "..";
-import { RandomIcon } from "../util/RandomIcon";
+} from "../..";
+import { RandomIcon } from "./RandomIcon";
 
 export default {
   title: "ds-react/Link",
