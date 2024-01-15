@@ -10,7 +10,7 @@ export interface DataCellProps
    */
   align?: "left" | "center" | "right";
   /**
-   * Adjust font-size
+   * Adjusts font-size
    */
   textSize?: "medium" | "small";
 }
