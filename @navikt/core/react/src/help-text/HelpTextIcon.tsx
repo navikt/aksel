@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React from "react";
-import { useId } from "../util/useId";
+import { useId } from "../util/hooks";
 
 export const HelpTextIcon = ({
   title,

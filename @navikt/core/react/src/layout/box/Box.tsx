@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../../util/OverridableComponent";
+import { OverridableComponent } from "../../util/types";
 import { getResponsiveProps } from "../utilities/css";
 import {
   BackgroundToken,

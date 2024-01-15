@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import usePrevious from "../../../util/usePrevious";
+import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/inputContext";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { ComboboxProps } from "../types";
