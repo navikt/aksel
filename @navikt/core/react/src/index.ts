@@ -8,7 +8,6 @@ export * from "./date";
 export * from "./dropdown";
 export * from "./expansion-card";
 export * from "./form";
-export * from "./grid";
 export * from "./guide-panel";
 export * from "./help-text";
 export * from "./internal-header";
