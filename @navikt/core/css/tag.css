@@ -1,4 +1,7 @@
 .navds-tag {
+  --__ac-tag-icon-size: 1.5rem;
+  --__ac-tag-icon-margin: -2px;
+
   border: 1px solid;
   border-radius: var(--a-border-radius-small);
   display: inline-flex;
@@ -12,11 +15,26 @@
 .navds-tag--small {
   min-height: 1.5rem;
   padding: 0 var(--a-spacing-1-alt);
+
+  --__ac-tag-icon-size: 1.25rem;
 }
 
 .navds-tag--xsmall {
   min-height: 1.25rem;
   padding: 0 var(--a-spacing-1);
+
+  --__ac-tag-icon-size: 1rem;
+  --__ac-tag-icon-margin: -1px;
+}
+
+.navds-tag:has(.navds-tag__icon--left) {
+  gap: var(--a-spacing-05);
+}
+
+.navds-tag__icon--left {
+  font-size: var(--__ac-tag-icon-size);
+  margin-inline-start: var(--__ac-tag-icon-margin);
+  display: flex;
 }
 
 .navds-tag--error {

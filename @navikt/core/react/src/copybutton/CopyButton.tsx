@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import { Label } from "../typography";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
 
 export interface CopyButtonProps
@@ -97,6 +98,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       title = "Kopier",
       activeTitle = "Kopiert",
       iconPosition = "left",
+      onClick,
       ...rest
     },
     ref,
@@ -110,14 +112,11 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       };
     }, []);
 
-    const handleClick = (
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    ) => {
+    const handleClick = () => {
       timeoutRef.current && clearTimeout(timeoutRef.current);
       copy(copyText);
       setActive(true);
       onActiveChange?.(true);
-      rest.onClick?.(event);
 
       timeoutRef.current = window.setTimeout(() => {
         setActive(false);
@@ -160,7 +159,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
             "navds-copybutton--active": active,
           },
         )}
-        onClick={handleClick}
+        onClick={composeEventHandlers(onClick, handleClick)}
       >
         <span className="navds-copybutton__content">
           {iconPosition === "left" && copyIcon}

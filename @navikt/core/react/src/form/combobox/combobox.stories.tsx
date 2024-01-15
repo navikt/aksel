@@ -1,6 +1,5 @@
-import { expect, jest } from "@storybook/jest";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { userEvent, within } from "@storybook/testing-library";
+import { expect, fn, userEvent, within } from "@storybook/test";
 import React, { useId, useMemo, useState } from "react";
 import { Chips, ComboboxProps, TextField, UNSAFE_Combobox } from "../../index";
 
@@ -427,14 +426,14 @@ export const AddWhenAddNewDisabledTest: StoryObject = {
 };
 
 export const TestThatCallbacksOnlyFireWhenExpected: StoryObj<{
-  onChange: ReturnType<typeof jest.fn>;
-  onClear: ReturnType<typeof jest.fn>;
-  onToggleSelected: ReturnType<typeof jest.fn>;
+  onChange: ReturnType<typeof fn>;
+  onClear: ReturnType<typeof fn>;
+  onToggleSelected: ReturnType<typeof fn>;
 }> = {
   args: {
-    onChange: jest.fn(),
-    onClear: jest.fn(),
-    onToggleSelected: jest.fn(),
+    onChange: fn(),
+    onClear: fn(),
+    onToggleSelected: fn(),
   },
   render: (props) => {
     return (
@@ -469,9 +468,9 @@ export const TestThatCallbacksOnlyFireWhenExpected: StoryObj<{
 
 export const TestCasingWhenAutoCompleting = {
   args: {
-    onChange: jest.fn(),
-    onClear: jest.fn(),
-    onToggleSelected: jest.fn(),
+    onChange: fn(),
+    onClear: fn(),
+    onToggleSelected: fn(),
   },
   render: (props) => {
     return (

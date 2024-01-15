@@ -3,6 +3,7 @@ import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { useId } from "../util";
 import AnimateHeight from "../util/AnimateHeight";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useControllableState } from "../util/hooks/useControllableState";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
@@ -66,6 +67,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       expansionDisabled = false,
       expandOnRowClick = false,
       colSpan = 999,
+      onClick,
       ...rest
     },
     ref,
@@ -86,6 +88,12 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     const onRowClick = (e) =>
       !isInteractiveTarget(e.target) && expansionHandler(e);
 
+    const handleRowClick = (
+      e: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+    ) => {
+      !expansionDisabled && expandOnRowClick && onRowClick(e);
+    };
+
     return (
       <>
         <Row
@@ -97,10 +105,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
               expansionDisabled,
             "navds-table__expandable-row--clickable": expandOnRowClick,
           })}
-          onClick={(e) => {
-            !expansionDisabled && expandOnRowClick && onRowClick(e);
-            rest?.onClick?.(e);
-          }}
+          onClick={composeEventHandlers(onClick, handleRowClick)}
         >
           {togglePlacement === "right" && children}
           <DataCell

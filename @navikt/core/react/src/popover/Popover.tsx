@@ -15,12 +15,12 @@ import React, {
   forwardRef,
   useCallback,
   useContext,
-  useMemo,
   useRef,
 } from "react";
 import { DateContext } from "../date/context";
 import { ModalContext } from "../modal/ModalContext";
-import { mergeRefs, useClientLayoutEffect, useEventListener } from "../util";
+import { useClientLayoutEffect, useEventListener } from "../util";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
@@ -163,10 +163,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       refs.setReference(anchorEl);
     }, [anchorEl]);
 
-    const floatingRef = useMemo(
-      () => mergeRefs([refs.setFloating, ref]),
-      [refs.setFloating, ref],
-    );
+    const floatingRef = useMergeRefs(refs.setFloating, ref);
 
     useClientLayoutEffect(() => {
       if (!refs.reference.current || !refs.floating.current || !open) return;
