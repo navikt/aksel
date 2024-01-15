@@ -18,8 +18,8 @@ const TableComponent = ({ button, shadeOnHover, ...rest }: Props) => (
         {button && <Table.HeaderCell>Action</Table.HeaderCell>}
         <Table.HeaderCell>ID</Table.HeaderCell>
         <Table.HeaderCell>Fornavn</Table.HeaderCell>
-        <Table.HeaderCell>Etternavn</Table.HeaderCell>
-        <Table.HeaderCell>Rolle</Table.HeaderCell>
+        <Table.HeaderCell textSize="medium">Etternavn</Table.HeaderCell>
+        <Table.HeaderCell textSize="small">Rolle</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
     <Table.Body>
@@ -68,8 +68,8 @@ const TableComponent = ({ button, shadeOnHover, ...rest }: Props) => (
         )}
         <Table.HeaderCell>3</Table.HeaderCell>
         <Table.DataCell>Geordi</Table.DataCell>
-        <Table.DataCell>La Forge</Table.DataCell>
-        <Table.DataCell>Sjefsingeniør</Table.DataCell>
+        <Table.DataCell textSize="medium">La Forge</Table.DataCell>
+        <Table.DataCell textSize="small">Sjefsingeniør</Table.DataCell>
       </Table.Row>
     </Table.Body>
   </Table>
