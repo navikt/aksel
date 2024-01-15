@@ -1,5 +1,4 @@
-import { expect, jest } from "@storybook/jest";
-import { userEvent, within } from "@storybook/testing-library";
+import { expect, fn, userEvent, within } from "@storybook/test";
 import React from "react";
 import { Table } from "../..";
 
@@ -66,7 +65,7 @@ export const ClickableRowTest = {
     );
   },
   args: {
-    onOpenChange: jest.fn(),
+    onOpenChange: fn(),
   },
   play: async ({ canvasElement, args }) => {
     args.onOpenChange.mockClear();

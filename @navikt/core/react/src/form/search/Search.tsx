@@ -3,13 +3,13 @@ import React, {
   InputHTMLAttributes,
   forwardRef,
   useCallback,
-  useMemo,
   useRef,
   useState,
 } from "react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { mergeRefs, omit } from "../../util";
+import { omit } from "../../util";
+import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 import { SearchContext } from "./context";
@@ -118,7 +118,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     } = props;
 
     const searchRef = useRef<HTMLInputElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([searchRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(searchRef, ref);
 
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
 

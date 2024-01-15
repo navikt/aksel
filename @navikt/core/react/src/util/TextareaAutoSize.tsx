@@ -1,7 +1,8 @@
 /* https://github.com/mui/material-ui/blob/master/packages/mui-base/src/TextareaAutosize/TextareaAutosize.tsx */
-import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { debounce, mergeRefs, useClientLayoutEffect } from "../util";
+import { debounce, useClientLayoutEffect } from "../util";
+import { useMergeRefs } from "./hooks/useMergeRefs";
 
 type State = {
   outerHeightStyle: number;
@@ -90,7 +91,9 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
   ) => {
     const { current: isControlled } = useRef(value != null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    const handleRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
+
+    const handleRef = useMergeRefs(inputRef, ref);
+
     const shadowRef = useRef<HTMLTextAreaElement>(null);
     const renders = useRef(0);
     const [state, setState] = useState<State>({ outerHeightStyle: 0 });

@@ -2,6 +2,7 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Label } from "../typography";
 import { OverridableComponent } from "../util";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 import { StepperContext } from "./context";
 
 export interface StepperStepProps
@@ -56,6 +57,7 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
         unsafe_index = 0,
         completed = false,
         interactive,
+        onClick,
         ...rest
       },
       ref,
@@ -71,6 +73,10 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
 
       const Comp = isInteractive ? Component : "div";
 
+      const handleStepClick = () => {
+        isInteractive && context.onStepChange(unsafe_index + 1);
+      };
+
       return (
         <Comp
           {...rest}
@@ -82,10 +88,7 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
             "navds-stepper__step--non-interactive": !isInteractive,
             "navds-stepper__step--completed": completed,
           })}
-          onClick={(e) => {
-            isInteractive && context.onStepChange(unsafe_index + 1);
-            rest?.onClick?.(e);
-          }}
+          onClick={composeEventHandlers(onClick, handleStepClick)}
         >
           {completed ? (
             <span className="navds-stepper__circle navds-stepper__circle--success">

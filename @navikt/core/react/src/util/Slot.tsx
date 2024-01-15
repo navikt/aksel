@@ -1,6 +1,6 @@
 // https://github.com/radix-ui/primitives/blob/main/packages/react/slot/src/Slot.tsx
 import * as React from "react";
-import mergeRefs from "./mergeRefs";
+import { mergeRefs } from "./hooks/useMergeRefs";
 
 interface SlotProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
