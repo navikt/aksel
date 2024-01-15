@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, within } from "@storybook/test";
 import React from "react";
 import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { CopyButton } from ".";
