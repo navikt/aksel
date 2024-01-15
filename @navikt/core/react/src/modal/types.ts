@@ -41,7 +41,7 @@ export interface ModalProps
    */
   onBeforeClose?: () => boolean | void;
   /**
-   * *Sometimes** called when the user presses the Esc key, unless you return `false` in `onBeforeClose()`.
+   * *Sometimes** called when the user presses the Esc key.
    * @warning *Some browsers does not always trigger this event. Chrome only triggers it if you have
    *  interacted with the modal, and will not trigger it a second time if you press Esc twice in a row.
    */

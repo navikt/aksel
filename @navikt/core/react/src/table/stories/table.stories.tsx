@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table, TableProps } from "../";
-import { Alert, Button, Checkbox, Link } from "../..";
+import { Alert, Button, Checkbox, CheckboxGroup, Link } from "../..";
 
 export default {
   title: "ds-react/Table",
@@ -233,22 +233,32 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
         </Table.Row>
         <Table.Row selected={selectedRows.includes("3")}>
           <Table.DataCell>
-            <Checkbox
-              size={size}
-              hideLabel
-              checked={selectedRows.includes("3")}
-              onChange={() => toggleSelectedRow("3")}
-              aria-labelledby={`x_r3-${size}`}
-            >
-              {" "}
-            </Checkbox>
+            <CheckboxGroup legend="velg flere felt" hideLegend>
+              <Checkbox
+                size={size}
+                hideLabel
+                checked={selectedRows.includes("3")}
+                onChange={() => toggleSelectedRow("3")}
+                aria-labelledby={`x_r3-${size}`}
+              >
+                {" "}
+              </Checkbox>
+              <Checkbox
+                size={size}
+                hideLabel
+                checked={selectedRows.includes("3")}
+                onChange={() => toggleSelectedRow("3")}
+                aria-labelledby={`x_r3-${size}`}
+              >
+                {" "}
+              </Checkbox>
+            </CheckboxGroup>
           </Table.DataCell>
-          <Table.HeaderCell scope="row">
-            <span id={`x_r3-${size}`}>Rudolph Bachenmeier</span>
+          <Table.HeaderCell scope="row" colSpan={4}>
+            <span id={`x_r3-${size}`}>
+              Don&apos;t stack multiple checkboxes
+            </span>
           </Table.HeaderCell>
-          <Table.DataCell>32</Table.DataCell>
-          <Table.DataCell>Germany</Table.DataCell>
-          <Table.DataCell>70</Table.DataCell>
         </Table.Row>
       </Table.Body>
     </Table>
