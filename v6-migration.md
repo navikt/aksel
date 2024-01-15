@@ -2,6 +2,10 @@
 
 ## Grid
 
+### CSS
+
+Alle klasser med `.navds-grid`-prefix er fjernet
+
 ### Brekkpunkt er oppdatert
 
 Før:
@@ -43,3 +47,25 @@ Etter:
 ```
 
 ## ContentContainer
+
+### CSS
+
+Alle klasser med `.navds-content-container`-prefix er fjernet
+
+`--navds-content-container-max-width`-token er fjernet
+
+### Eksempel
+
+`width="xl"` er nærmeste ekvalient til ContentContainer
+
+```jsx
+// Før
+<ContentContainer>Innhold</ContentContainer>
+
+// Etter
+<Page>
+  <Page.Block width="xl">
+    Innhold
+  </Page.Block>
+</Page>
+```

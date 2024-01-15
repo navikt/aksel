@@ -35,6 +35,5 @@ export * from "./layout/bleed";
 export * from "./layout/box";
 export * from "./layout/stack";
 export * from "./layout/grid";
-export * from "./layout/content-container";
 export * from "./layout/responsive";
 export * from "./layout/page";

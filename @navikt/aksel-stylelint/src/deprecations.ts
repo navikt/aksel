@@ -50,4 +50,9 @@ export const deprecations: DeprecatedList = [
     message:
       "There is no 1:1 replacement for this, the size will depend on the 'poster' prop and the viewport width",
   },
+  {
+    classes: ["navds-grid", "navds-content-container"],
+    message:
+      "Components were replaced by `HGrid` and `Page.Block` in version 6",
+  },
 ];
