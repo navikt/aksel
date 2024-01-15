@@ -8,6 +8,25 @@ export const ArticleViews = defineType({
     defineField({
       type: "number",
       name: "views",
+      description: "total lifetime views",
+      readOnly: true,
+    }),
+    defineField({
+      type: "number",
+      name: "views_week",
+      description: "views in the last week",
+      readOnly: true,
+    }),
+    defineField({
+      type: "number",
+      name: "views_month",
+      description: "views in the last month",
+      readOnly: true,
+    }),
+    defineField({
+      type: "number",
+      name: "views_year",
+      description: "views in the last year",
       readOnly: true,
     }),
     defineField({
