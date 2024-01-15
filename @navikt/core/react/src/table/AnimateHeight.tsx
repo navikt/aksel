@@ -9,6 +9,18 @@ type Overflow = "auto" | "visible" | "hidden" | undefined;
 
 // ------------------ Helpers
 
+let prefersReducedMotionQuery: MediaQueryList;
+function prefersReducedMotion() {
+  if (!prefersReducedMotionQuery) {
+    if (typeof window === "undefined" || !window.matchMedia) {
+      return false;
+    }
+    const query = "(prefers-reduced-motion: reduce)";
+    prefersReducedMotionQuery = window.matchMedia(query);
+  }
+  return prefersReducedMotionQuery.matches;
+}
+
 function isNumber(n: string) {
   const number = parseFloat(n);
   return !isNaN(number) && isFinite(number);
@@ -70,15 +82,7 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   const animationClassesTimeoutID = useRef<Timeout>();
   const timeoutID = useRef<Timeout>();
 
-  const isBrowser = typeof window !== "undefined";
-
-  const prefersReducedMotion = useRef<boolean>(
-    isBrowser && window.matchMedia
-      ? window.matchMedia("(prefers-reduced-motion)").matches
-      : false,
-  );
-
-  const duration = prefersReducedMotion.current ? 0 : userDuration;
+  const duration = prefersReducedMotion() ? 0 : userDuration;
 
   let initHeight: Height = height;
   let initOverflow: Overflow = "visible";
