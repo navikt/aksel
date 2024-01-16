@@ -1,5 +1,11 @@
 # Aksel v6 migrations
 
+## Chat
+
+### Props
+
+Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. Om dette ikke dekker behovet eksponerer komponenten css-variabler som kan overstyres.
+
 ## Grid
 
 ### CSS
