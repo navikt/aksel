@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.15
+
+### @navikt/aksel-icons
+
+- Ikoner: Synket ikoner med Figma. Lagt til nytt ikon `FigureChild` ([#2629](https://github.com/navikt/aksel/pull/2629))
+
 ## 5.14
 
 ### @navikt/ds-react
