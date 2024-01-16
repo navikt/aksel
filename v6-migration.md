@@ -69,3 +69,9 @@ Alle klasser med `.navds-content-container`-prefix er fjernet
   </Page.Block>
 </Page>
 ```
+
+## Tokens
+
+Fjernet `--a-z-index-modal`-token da systemet nå bruker native `dialog`-element.
+
+(Unødvendig med codemod da bare 1 løsning bruker den: https://github.com/search?type=code&q=org%3Anavikt+a-z-index-modal)
