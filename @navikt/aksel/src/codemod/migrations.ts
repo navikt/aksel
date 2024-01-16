@@ -87,6 +87,16 @@ export const migrations: {
       path: "v4.0.0/date/date",
     },
   ],
+  "v5.0.0": [
+    {
+      description:
+        "Removed deprecated props from `<Chat />` and `<Chat.Bubble />`",
+      value: "v5-chat",
+      path: "v5.0.0/chat/chat",
+      warning:
+        "Remember to also run 'v4-internal-css' if you have overwritten any css-classes!",
+    },
+  ],
 };
 
 export function getMigrationPath(str: string) {
