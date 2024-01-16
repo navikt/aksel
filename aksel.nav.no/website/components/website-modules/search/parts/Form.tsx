@@ -102,7 +102,7 @@ export const SearchForm = () => {
                 const newTags = (tags as string[]).includes(key)
                   ? tags.filter((y) => y !== key)
                   : [...tags, key];
-                setTags(newTags as Array<keyof typeof searchOptions>);
+                setTags(newTags as (keyof typeof searchOptions)[]);
                 update(query, newTags);
               }}
             >
