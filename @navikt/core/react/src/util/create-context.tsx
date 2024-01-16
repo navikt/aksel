@@ -1,5 +1,9 @@
-// https://github.com/chakra-ui/chakra-ui/blob/5ec0be610b5a69afba01a9c22365155c1b519136/packages/hooks/context/src/index.ts
-// https://github.com/radix-ui/primitives/blob/main/packages/react/context/src/createContext.tsx
+/**
+ * Custom createContext to consolidate context-implementation across the system
+ * Inspired by:
+ * - https://github.com/radix-ui/primitives/blob/main/packages/react/context/src/createContext.tsx
+ * - https://github.com/chakra-ui/chakra-ui/blob/5ec0be610b5a69afba01a9c22365155c1b519136/packages/hooks/context/src/index.ts
+ */
 import React, {
   createContext as createReactContext,
   useContext as useReactContext,
