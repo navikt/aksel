@@ -22255,13 +22255,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hotjar@npm:^6.1.0":
-  version: 6.2.0
-  resolution: "react-hotjar@npm:6.2.0"
-  checksum: b3429a4fff968f959ffbe89a3f12dbbd40593bc0ed137b5c0a670c934476f2a814430d2cc990c4736580c4efdfd1002d42de66cbd93d563686180c836d177a02
-  languageName: node
-  linkType: hard
-
 "react-infinite-scroll-component@npm:6.1.0":
   version: 6.1.0
   resolution: "react-infinite-scroll-component@npm:6.1.0"
@@ -27260,7 +27253,6 @@ __metadata:
     prism-react-renderer: ^2.0.0
     react: ^18.0.0
     react-dom: ^18.0.0
-    react-hotjar: ^6.1.0
     react-responsive-masonry: ^2.1.7
     rss: ^1.2.2
     sanity: 3.20.0
