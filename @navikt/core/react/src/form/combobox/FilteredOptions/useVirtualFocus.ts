@@ -36,19 +36,9 @@ const useVirtualFocus = (
       getElementsAbleToReceiveFocus().length - 1
     : false;
 
-  const scrollToOption = (_element?: HTMLElement) => {
-    if (containerRef && _element) {
-      const { top, bottom } = _element.getBoundingClientRect();
-      const parentRect = containerRef.getBoundingClientRect();
-      if (top < parentRect.top || bottom > parentRect.bottom) {
-        _element.scrollIntoView({ block: "nearest" });
-      }
-    }
-  };
-
   const _moveFocusAndScrollTo = (_element?: HTMLElement) => {
     setActiveElement(_element);
-    scrollToOption(_element);
+    _element?.scrollIntoView({ block: "nearest" });
   };
 
   const moveFocusUp = () => {
