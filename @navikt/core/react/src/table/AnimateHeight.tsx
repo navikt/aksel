@@ -9,10 +9,9 @@ type Overflow = "auto" | "visible" | "hidden" | undefined;
 
 // ------------------ Helpers
 
-const prefersReducedMotion =
-  typeof window !== "undefined" && window.matchMedia
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
+const prefersReducedMotion = globalThis?.matchMedia
+  ? globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches
+  : false;
 
 function isNumber(n: string) {
   const number = parseFloat(n);
