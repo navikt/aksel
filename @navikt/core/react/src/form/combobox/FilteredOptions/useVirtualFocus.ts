@@ -18,7 +18,7 @@ const useVirtualFocus = (
 ): VirtualFocusType => {
   const [index, setIndex] = useState(-1);
 
-  const listOfAllChildren: Array<HTMLElement> = containerRef?.children
+  const listOfAllChildren: HTMLElement[] = containerRef?.children
     ? Array.prototype.slice.call(containerRef?.children)
     : [];
   const elementsAbleToReceiveFocus = listOfAllChildren.filter(

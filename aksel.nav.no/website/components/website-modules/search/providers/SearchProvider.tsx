@@ -13,8 +13,8 @@ type SearchContextType = {
   os: "mac" | "windows";
   open: boolean;
   setOpen: (v) => void;
-  tags: Array<keyof typeof searchOptions>;
-  setTags: Dispatch<SetStateAction<Array<keyof typeof searchOptions>>>;
+  tags: (keyof typeof searchOptions)[];
+  setTags: Dispatch<SetStateAction<(keyof typeof searchOptions)[]>>;
   query: string;
   setQuery: (v: string) => void;
 };

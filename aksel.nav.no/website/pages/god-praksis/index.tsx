@@ -23,10 +23,10 @@ import { Suspense, lazy } from "react";
 
 type PageProps = NextPageT<{
   page: AkselGodPraksisLandingPageDocT;
-  temaer: Array<AkselTemaT>;
-  resent: Array<
-    ResolveTemaT<ResolveContributorsT<ResolveSlugT<AkselGodPraksisDocT>>>
-  >;
+  temaer: AkselTemaT[];
+  resent: ResolveTemaT<
+    ResolveContributorsT<ResolveSlugT<AkselGodPraksisDocT>>
+  >[];
 }>;
 
 export const query = `*[_type == "godpraksis_landingsside"][0]{
