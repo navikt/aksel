@@ -598,7 +598,7 @@ dialogPolyfill.registerDialog = function (element) {
  * @constructor
  */
 dialogPolyfill.DialogManager = function () {
-  /** @type {!Array<!dialogPolyfillInfo>} */
+  /** @type {!dialogPolyfillInfo[]} */
   this.pendingDialogStack = [];
 
   var checkDOM = this.checkDOM_.bind(this);
@@ -769,7 +769,7 @@ dialogPolyfill.DialogManager.prototype.handleKey_ = function (event) {
  * Finds and downgrades any known modal dialogs that are no longer displayed. Dialogs that are
  * removed and immediately readded don't stay modal, they become normal.
  *
- * @param {!Array<!HTMLDialogElement>} removed that have definitely been removed
+ * @param {!HTMLDialogElement[]} removed that have definitely been removed
  */
 dialogPolyfill.DialogManager.prototype.checkDOM_ = function (removed) {
   // This operates on a clone because it may cause it to change. Each change also calls

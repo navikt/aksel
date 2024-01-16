@@ -32,7 +32,7 @@ import { GetStaticProps } from "next/types";
 import { Suspense, lazy, useState } from "react";
 
 type PageProps = NextPageT<{
-  tema: Array<AkselTemaT>;
+  tema: AkselTemaT[];
   page: {
     title: string;
     god_praksis_intro: string;
