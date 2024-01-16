@@ -22,18 +22,16 @@ export type ResolveTemaT<T> = Omit<T, "tema"> & {
 };
 
 export type ResolveRelatedArticlesT<T> = Omit<T, "relevante_artikler"> & {
-  relevante_artikler?: Array<
-    ResolveContributorsSingleT<
-      ResolveSlugT<
-        ResolveTemaT<
-          | AkselBloggDocT
-          | AkselGodPraksisDocT
-          | AkselKomponentDocT
-          | AkselGrunnleggendeDocT
-        >
+  relevante_artikler?: ResolveContributorsSingleT<
+    ResolveSlugT<
+      ResolveTemaT<
+        | AkselBloggDocT
+        | AkselGodPraksisDocT
+        | AkselKomponentDocT
+        | AkselGrunnleggendeDocT
       >
     >
-  >;
+  >[];
 };
 
 type DocumentT<T> = {
@@ -176,7 +174,7 @@ export type SidebarT = {
   value: string;
 }[];
 
-export type ArticleListT = Array<{
+export type ArticleListT = {
   _id: string;
   heading: string;
   slug: { current: string };
@@ -187,7 +185,7 @@ export type ArticleListT = Array<{
     bilde?: any;
   };
   sidebarindex?: number;
-}>;
+}[];
 
 export type LandingPageTypeT<T extends string> = `${T}_landingsside`;
 export type IngressT<T extends string> = `${T}_ingress`;
@@ -211,28 +209,22 @@ export interface AkselTemaT extends DocumentT<"aksel_tema"> {
   refCount?: number;
   slug: { current: string };
   ansvarlig?: { _ref: string };
-  seksjoner: Array<
-    ArrayObjectT<{
-      title: string;
-      beskrivelse: any;
-      sider: Array<
-        ResolveContributorsSingleT<
-          ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
-        >
-      >;
-    }>
-  >;
+  seksjoner: ArrayObjectT<{
+    title: string;
+    beskrivelse: any;
+    sider: ResolveContributorsSingleT<
+      ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
+    >[];
+  }>[];
   pictogram: any;
   seo?: ArticleT["seo"];
 }
 
 export interface AccordionT {
-  list: Array<
-    ArrayObjectT<{
-      title: string;
-      content: any[];
-    }>
-  >;
+  list: ArrayObjectT<{
+    title: string;
+    content: any[];
+  }>[];
 }
 
 export interface AlertT {
@@ -243,15 +235,13 @@ export interface AlertT {
 }
 
 export interface DoDontT {
-  blokker: Array<
-    ArrayObjectT<{
-      fullwidth: boolean;
-      picture: any;
-      alt: string;
-      description?: string;
-      variant: "do" | "dont" | "warning";
-    }>
-  >;
+  blokker: ArrayObjectT<{
+    fullwidth: boolean;
+    picture: any;
+    alt: string;
+    description?: string;
+    variant: "do" | "dont" | "warning";
+  }>[];
 }
 
 export interface CodeSnippetT {
@@ -263,11 +253,11 @@ export interface CodeSnippetT {
 }
 
 export interface TableT {
-  rows?: Array<ArrayObjectT<{ cells: Array<string> }>>;
+  rows?: ArrayObjectT<{ cells: string[] }>[];
 }
 
 export interface UUTableT {
-  tastatur?: Array<ArrayObjectT<{ key: string; action: string }>>;
+  tastatur?: ArrayObjectT<{ key: string; action: string }>[];
 }
 
 export interface TokenTableT {
@@ -301,15 +291,13 @@ export type InnholdsKortPrinsipperT = ArrayObjectT<{
 
 export interface RelatertInnholdT {
   title?: string;
-  lenker: Array<
-    ArrayObjectT<{
-      title: string;
-      intern: boolean;
-      intern_lenke?: string;
-      ekstern_link?: string;
-      ekstern_domene?: boolean;
-    }>
-  >;
+  lenker: ArrayObjectT<{
+    title: string;
+    intern: boolean;
+    intern_lenke?: string;
+    ekstern_link?: string;
+    ekstern_domene?: boolean;
+  }>[];
 }
 
 export type CodeExampleSchemaT = {
@@ -336,7 +324,7 @@ export interface CodeExamplesT {
   title: string;
   dir: {
     title: string;
-    filer: Array<ArrayObjectT<CodeExampleSchemaT["filer"][0]>>;
+    filer: ArrayObjectT<CodeExampleSchemaT["filer"][0]>[];
     metadata?: CodeExampleSchemaT["metadata"];
     variant: CodeExampleSchemaT["variant"];
   };
@@ -350,17 +338,15 @@ export type PropTableT = ArrayObjectT<{
     title?: string;
     displayname?: string;
     filepath?: string;
-    proplist?: Array<
-      ArrayObjectT<{
-        _type: "prop";
-        name?: string;
-        defaultValue?: string;
-        description?: string;
-        required?: boolean;
-        type?: string;
-        ref?: boolean;
-      }>
-    >;
+    proplist?: ArrayObjectT<{
+      _type: "prop";
+      name?: string;
+      defaultValue?: string;
+      description?: string;
+      required?: boolean;
+      type?: string;
+      ref?: boolean;
+    }>[];
   };
 }>;
 
