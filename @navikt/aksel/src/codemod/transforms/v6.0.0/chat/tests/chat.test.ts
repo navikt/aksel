@@ -1,7 +1,7 @@
 import { check } from "../../../../utils/check";
 
-const migration = "internal-react";
-const fixtures = ["import", "import-add", "import-alias", "import-edgecase"];
+const migration = "chat";
+const fixtures = ["import-alias"];
 
 for (const fixture of fixtures) {
   check(__dirname, {
