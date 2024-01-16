@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { OverridableComponent } from "../../../util";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
+import { OverridableComponent } from "../../../util/types";
 import { DropdownContext } from "../../context";
 
 export interface GroupedItemProps

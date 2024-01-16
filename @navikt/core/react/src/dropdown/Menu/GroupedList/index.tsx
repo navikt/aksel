@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../../../util";
+import { OverridableComponent } from "../../../util/types";
 import GroupedHeading, { GroupedHeadingProps } from "./GroupedHeading";
 import GroupedItem, { GroupedItemProps } from "./GroupedItem";
 

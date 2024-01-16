@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Panel } from "../panel";
-import { OverridableComponent } from "../util";
+import { OverridableComponent } from "../util/types";
 import {
   LinkPanelDescription,
   LinkPanelDescriptionProps,
