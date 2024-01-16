@@ -1,5 +1,6 @@
 // https://github.com/chakra-ui/chakra-ui/blob/5ec0be610b5a69afba01a9c22365155c1b519136/packages/hooks/context/src/index.ts
-import {
+// https://github.com/radix-ui/primitives/blob/main/packages/react/context/src/createContext.tsx
+import React, {
   createContext as createReactContext,
   useContext as useReactContext,
 } from "react";
@@ -12,10 +13,11 @@ export interface CreateContextOptions<T> {
   defaultValue?: T;
 }
 
+type ProviderProps<T> = T & { children: React.ReactNode };
+
 export type CreateContextReturn<T> = [
-  React.Provider<T>,
+  (contextValues: ProviderProps<T>) => React.JSX.Element,
   () => T,
-  React.Context<T>,
 ];
 
 function getErrorMessage(hook: string, provider: string) {
@@ -33,7 +35,12 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
 
   const Context = createReactContext<T | undefined>(defaultValue);
 
-  Context.displayName = name;
+  function Provider({ children, ...context }: ProviderProps<T>) {
+    // Only re-memoize when prop values change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const value = React.useMemo(() => context, Object.values(context)) as T;
+    return <Context.Provider value={value}>{children}</Context.Provider>;
+  }
 
   function useContext() {
     const context = useReactContext(Context);
@@ -50,5 +57,7 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
     return context;
   }
 
-  return [Context.Provider, useContext, Context] as CreateContextReturn<T>;
+  Context.displayName = name;
+
+  return [Provider, useContext] as CreateContextReturn<T>;
 }
