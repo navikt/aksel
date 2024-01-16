@@ -94,7 +94,7 @@ export const migrations: {
       value: "v6-chat",
       path: "v6.0.0/chat/chat",
       warning:
-        "Remember to also run 'v4-internal-css' if you have overwritten any css-classes!",
+        "Remember to update use of `variant`-prop to match previous use of colors. If needed the component exposes css-variables for custom overrides",
     },
   ],
 };
