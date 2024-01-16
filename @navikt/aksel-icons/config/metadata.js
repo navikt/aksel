@@ -15,6 +15,10 @@ ymlList.forEach((file) => {
   const ymlData = jsYaml.load(fs.readFileSync(`${basePath}/${file}`), {
     schema: jsYaml.JSON_SCHEMA,
   });
+  if (ymlData.keywords && ymlData.keywords.includes("[ignore-docs]")) {
+    return;
+  }
+
   const iconName = file.replace(".yml", "");
   metadata[iconName] = { id: iconName, ...ymlData };
 });
