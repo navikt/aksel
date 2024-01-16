@@ -3,7 +3,7 @@ import { ResolverT } from "./types";
 /**
  * `runResolvers` is responsible for executing a set of resolvers for streamed data from sanity.
  * This allows running functions and parse data both at initial load `getStaticProps` and when streamed `useLiveQuery`
- * @param {Array<Resolvers>}
+ * @param {Resolvers[]}
  * @returns any
  */
 export function runResolvers({
