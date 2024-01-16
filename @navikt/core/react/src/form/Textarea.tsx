@@ -157,40 +157,38 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             {description}
           </BodyShort>
         )}
-        <div className="navds-textarea__wrapper">
-          <TextareaAutosize
-            {...omit(rest, ["error", "errorId", "size"])}
-            {...inputProps}
-            onChange={(e) =>
-              props.onChange
-                ? props.onChange(e)
-                : setControlledValue(e.target.value)
-            }
-            minRows={getMinRows()}
-            autoScrollbar={UNSAFE_autoScrollbar}
-            ref={ref}
-            readOnly={readOnly}
-            className={cl(
-              "navds-textarea__input",
-              "navds-body-short",
-              `navds-body-short--${size ?? "medium"}`,
-            )}
-            {...(describedBy ? { "aria-describedby": describedBy } : {})}
-          />
-          {hasMaxLength && !readOnly && !inputProps.disabled && (
-            <>
-              <span id={maxLengthId} className="navds-sr-only">
-                {`Tekstområde med plass til ${maxLength} tegn.`}
-              </span>
-              <Counter
-                maxLength={maxLength}
-                currentLength={props.value?.length ?? controlledValue?.length}
-                size={size}
-                i18n={i18n}
-              />
-            </>
+        <TextareaAutosize
+          {...omit(rest, ["error", "errorId", "size"])}
+          {...inputProps}
+          onChange={(e) =>
+            props.onChange
+              ? props.onChange(e)
+              : setControlledValue(e.target.value)
+          }
+          minRows={getMinRows()}
+          autoScrollbar={UNSAFE_autoScrollbar}
+          ref={ref}
+          readOnly={readOnly}
+          className={cl(
+            "navds-textarea__input",
+            "navds-body-short",
+            `navds-body-short--${size ?? "medium"}`,
           )}
-        </div>
+          {...(describedBy ? { "aria-describedby": describedBy } : {})}
+        />
+        {hasMaxLength && !readOnly && !inputProps.disabled && (
+          <>
+            <span id={maxLengthId} className="navds-sr-only">
+              {`Tekstområde med plass til ${maxLength} tegn.`}
+            </span>
+            <Counter
+              maxLength={maxLength}
+              currentLength={props.value?.length ?? controlledValue?.length}
+              size={size}
+              i18n={i18n}
+            />
+          </>
+        )}
         <div
           className="navds-form-field__error"
           id={errorId}

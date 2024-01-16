@@ -56,4 +56,8 @@ export const deprecations: DeprecatedList = [
     message:
       "Components were replaced by `HGrid` and `Page.Block` in version 6",
   },
+  {
+    classes: ["navds-textarea__wrapper"],
+    message: "Removed in v6.0.0",
+  },
 ];
