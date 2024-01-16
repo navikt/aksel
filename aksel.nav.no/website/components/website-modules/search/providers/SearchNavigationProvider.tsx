@@ -8,7 +8,7 @@ type SearchNavigationProviderT = { close: () => void };
 export const SearchNavigationContext = createContext<SearchNavigationProviderT>(
   {
     close: () => null,
-  }
+  },
 );
 
 export const SearchNavigationProvider = ({

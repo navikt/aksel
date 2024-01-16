@@ -23,7 +23,7 @@ const config: StorybookConfig = {
 
       code = code.replace(
         /^\s*export default withDsExample\(Example[\s\S]*?;\s*/gm,
-        ""
+        "",
       );
 
       code = code.replace("export const args =", "const args =");
@@ -73,63 +73,63 @@ const config: StorybookConfig = {
     sbConfig.resolve.alias["@/sb-util"] = resolve(__dirname, "./utils.tsx");
     sbConfig.resolve.alias["@/types"] = resolve(
       __dirname,
-      "../components/types/index.ts"
+      "../components/types/index.ts",
     );
     sbConfig.resolve.alias["@/sanity-block"] = resolve(
       __dirname,
-      "../components/website-modules/SanityBlockContent.tsx"
+      "../components/website-modules/SanityBlockContent.tsx",
     );
     sbConfig.resolve.alias["@/hooks"] = resolve(
       __dirname,
-      "../components/hooks/"
+      "../components/hooks/",
     );
     sbConfig.resolve.alias["@/logging"] = resolve(
       __dirname,
-      "../components/logging/index.ts"
+      "../components/logging/index.ts",
     );
     sbConfig.resolve.alias["@/utils"] = resolve(
       __dirname,
-      "../components/utils/index.ts"
+      "../components/utils/index.ts",
     );
     sbConfig.resolve.alias["@/utils"] = resolve(
       __dirname,
-      "../components/utils/index.ts"
+      "../components/utils/index.ts",
     );
     sbConfig.resolve.alias["@/layout"] = resolve(
       __dirname,
-      "../components/layout/"
+      "../components/layout/",
     );
     sbConfig.resolve.alias["@/assets"] = resolve(
       __dirname,
-      "../components/assets/"
+      "../components/assets/",
     );
     sbConfig.resolve.alias["@/web"] = resolve(
       __dirname,
-      "../components/website-modules/"
+      "../components/website-modules/",
     );
     sbConfig.resolve.alias["@/cms"] = resolve(
       __dirname,
-      "../components/sanity-modules/"
+      "../components/sanity-modules/",
     );
     sbConfig.resolve.alias["@/error-boundary"] = resolve(
       __dirname,
-      "../components/website-modules/ErrorBoundary.tsx"
+      "../components/website-modules/ErrorBoundary.tsx",
     );
     sbConfig.resolve.alias["@/sanity/config"] = resolve(
       __dirname,
-      "../sanity/config.ts"
+      "../sanity/config.ts",
     );
     sbConfig.resolve.alias["@/sanity/client.server"] = resolve(
       __dirname,
-      "../sanity/interface/client.server.js"
+      "../sanity/interface/client.server.js",
     );
     sbConfig.resolve.alias["@/sanity/interface"] = resolve(
       __dirname,
-      "../sanity/interface/interface.ts"
+      "../sanity/interface/interface.ts",
     );
     sbConfig.resolve.alias["@/sanity/queries"] = resolve(
       __dirname,
-      "../sanity/interface/queries.js"
+      "../sanity/interface/queries.js",
     );
 
     return sbConfig;

@@ -1,10 +1,11 @@
 import { config } from "dotenv";
-import { fetchIcons, fetchDownloadUrls, fetchIcon } from "./fetch-icons.mjs";
-import { makeConfig } from "./make-configs.mjs";
-import { existsSync, writeFileSync, mkdirSync, rmSync, readdirSync } from "fs";
+import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "fs";
 import { resolve } from "path";
+import { fetchDownloadUrls, fetchIcon, fetchIcons } from "./fetch-icons.mjs";
 import { resolveName } from "./icon-name.mjs";
+import { makeConfig } from "./make-configs.mjs";
 import { paginate } from "./paginate.mjs";
+
 config();
 /* https://www.figma.com/file/wEdyFjCQSBR3U7FvrMbPXa/Core-Icons-Next?node-id=277%3A1221&t=mUJzFvnsceYYXNL5-0 */
 
@@ -22,8 +23,8 @@ async function main() {
   const { images } = await fetchDownloadUrls(
     paginate(
       icons.map((x) => x.node_id),
-      400
-    ).map((x) => x.join(","))
+      400,
+    ).map((x) => x.join(",")),
   );
 
   if (existsSync(iconFolder)) {
@@ -46,7 +47,7 @@ async function main() {
         icon,
         {
           encoding: "utf8",
-        }
+        },
       );
   }
 

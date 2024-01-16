@@ -8,7 +8,7 @@ import {
 
 export const createWrappedUpdateAction = (): DocumentActionComponent => {
   const WrappedUpdate = (
-    props: DocumentActionProps
+    props: DocumentActionProps,
   ): DocumentActionDescription | null => {
     const { publish } = useDocumentOperation(props.id, props.type);
 

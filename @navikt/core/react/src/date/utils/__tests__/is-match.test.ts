@@ -21,22 +21,22 @@ describe("Returns if date is disabled", () => {
   });
   test("Date should be disabled type After (same month)(true)", () => {
     expect(
-      isMatch(new Date("Aug 5 2018"), [{ after: new Date("Aug 2 2018") }])
+      isMatch(new Date("Aug 5 2018"), [{ after: new Date("Aug 2 2018") }]),
     ).toBeTruthy();
   });
   test("Date should be disabled type After (true)", () => {
     expect(
-      isMatch(new Date("Oct 5 2018"), [{ after: new Date("Aug 2 2018") }])
+      isMatch(new Date("Oct 5 2018"), [{ after: new Date("Aug 2 2018") }]),
     ).toBeTruthy();
   });
   test("Date should be disabled type Before (true)", () => {
     expect(
-      isMatch(new Date("Aug 1 2018"), [{ before: new Date("Aug 2 2018") }])
+      isMatch(new Date("Aug 1 2018"), [{ before: new Date("Aug 2 2018") }]),
     ).toBeTruthy();
   });
   test("Date should be disabled type Before (false)", () => {
     expect(
-      isMatch(new Date("Jul 1 2018"), [{ before: new Date("Aug 2 2018") }])
+      isMatch(new Date("Jul 1 2018"), [{ before: new Date("Aug 2 2018") }]),
     ).toBeTruthy();
   });
 });

@@ -8,7 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useClientLayoutEffect } from "../../../util";
+import { useClientLayoutEffect } from "../../../util/hooks";
 import { FormFieldType, useFormField } from "../../useFormField";
 
 interface InputContextType extends FormFieldType {
@@ -49,14 +49,14 @@ export const InputContextProvider = ({ children, value: props }) => {
       id: externalId,
       size,
     },
-    "comboboxfield"
+    "comboboxfield",
   );
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
 
   const value = useMemo(
     () => String(externalValue ?? internalValue),
-    [externalValue, internalValue]
+    [externalValue, internalValue],
   );
 
   const [searchTerm, setSearchTerm] = useState(value);
@@ -68,14 +68,14 @@ export const InputContextProvider = ({ children, value: props }) => {
       externalOnChange?.(event);
       setSearchTerm(newValue);
     },
-    [externalValue, externalOnChange]
+    [externalValue, externalOnChange],
   );
 
   const setValue = useCallback(
     (text) => {
       setInternalValue(text);
     },
-    [setInternalValue]
+    [setInternalValue],
   );
 
   const clearInput = useCallback(
@@ -85,7 +85,7 @@ export const InputContextProvider = ({ children, value: props }) => {
       setValue("");
       setSearchTerm("");
     },
-    [externalOnChange, onClear, setValue]
+    [externalOnChange, onClear, setValue],
   );
 
   const focusInput = useCallback(() => {
@@ -123,7 +123,7 @@ export const useInputContext = () => {
   const context = useContext(InputContext);
   if (!context) {
     throw new Error(
-      "useInputContext must be used within an InputContextProvider"
+      "useInputContext must be used within an InputContextProvider",
     );
   }
   return context;

@@ -1,5 +1,5 @@
-import parse from "date-fns/parse";
 import isBefore from "date-fns/isBefore";
+import parse from "date-fns/parse";
 import sub from "date-fns/sub";
 import { isValidDate } from "./check-dates";
 
@@ -29,7 +29,7 @@ export const parseDate = (
   today: Date,
   locale: Locale,
   type: "date" | "month",
-  allowTwoDigitYear: boolean
+  allowTwoDigitYear: boolean,
 ): Date => {
   let parsed;
   const ALLOWED_FORMATS =
@@ -93,20 +93,20 @@ function assignCenturyToDate(
   dateStr: string,
   format: string,
   today: Date,
-  locale: Locale
+  locale: Locale,
 ) {
   const date20Century = parse(
     appendCenturyToTwoYearDigitDateString(dateStr, "19"),
     format.replace("yy", "yyyy"),
     today,
-    { locale }
+    { locale },
   );
 
   const date21Century = parse(
     appendCenturyToTwoYearDigitDateString(dateStr, "20"),
     format.replace("yy", "yyyy"),
     today,
-    { locale }
+    { locale },
   );
 
   if (isValidDate(date20Century) && isValidDate(date21Century)) {
@@ -114,7 +114,7 @@ function assignCenturyToDate(
       date20Century,
       sub(new Date(), {
         years: 80,
-      })
+      }),
     )
       ? date21Century
       : date20Century;
@@ -125,11 +125,11 @@ function assignCenturyToDate(
 
 function appendCenturyToTwoYearDigitDateString(
   dateString: string,
-  century: "19" | "20"
+  century: "19" | "20",
 ) {
   const twoDigitYear = dateString.slice(-2);
   return `${dateString.slice(
     0,
-    dateString.length - 2
+    dateString.length - 2,
   )}${century}${twoDigitYear}`;
 }

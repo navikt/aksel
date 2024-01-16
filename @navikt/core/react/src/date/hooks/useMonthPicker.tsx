@@ -127,7 +127,7 @@ const getIsAfter = (opt: { toDate?: Date; date?: Date }) =>
  * });
  */
 export const useMonthpicker = (
-  opt: UseMonthPickerOptions = {}
+  opt: UseMonthPickerOptions = {},
 ): UseMonthPickerValue => {
   const {
     locale: _locale = "nb",
@@ -166,7 +166,7 @@ export const useMonthpicker = (
       newOpen &&
         setYear(selectedMonth ?? defaultSelected ?? defaultYear ?? today);
     },
-    [defaultSelected, defaultYear, selectedMonth, today]
+    [defaultSelected, defaultYear, selectedMonth, today],
   );
 
   const updateMonth = (date?: Date) => {
@@ -188,7 +188,7 @@ export const useMonthpicker = (
     updateMonth(date);
     setYear(date ?? defaultYear ?? today);
     setInputValue(
-      date ? formatDateForInput(date, locale, "month", inputFormat) : ""
+      date ? formatDateForInput(date, locale, "month", inputFormat) : "",
     );
   };
 
@@ -202,7 +202,7 @@ export const useMonthpicker = (
       today,
       locale,
       "month",
-      allowTwoDigitYear
+      allowTwoDigitYear,
     );
     const isBefore = getIsBefore({ fromDate, date: day });
     const isAfter = getIsAfter({ toDate, date: day });
@@ -221,7 +221,7 @@ export const useMonthpicker = (
       today,
       locale,
       "month",
-      allowTwoDigitYear
+      allowTwoDigitYear,
     );
     isValidDate(day) &&
       setInputValue(formatDateForInput(day, locale, "month", inputFormat));
@@ -245,7 +245,7 @@ export const useMonthpicker = (
     updateMonth(month);
     updateValidation();
     setInputValue(
-      month ? formatDateForInput(month, locale, "month", inputFormat) : ""
+      month ? formatDateForInput(month, locale, "month", inputFormat) : "",
     );
   };
 
@@ -259,7 +259,7 @@ export const useMonthpicker = (
       today,
       locale,
       "month",
-      allowTwoDigitYear
+      allowTwoDigitYear,
     );
 
     const isBefore = getIsBefore({ fromDate, date: month });

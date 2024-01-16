@@ -8,8 +8,8 @@ function generateSiteMap(pages) {
          return `
        <url>
            <loc>${`https://aksel.nav.no/${path}`}</loc>${
-           lastmod ? `\n<lastmod>${`${lastmod.split("T")[0]}`}</lastmod>` : ""
-         }
+             lastmod ? `\n<lastmod>${`${lastmod.split("T")[0]}`}</lastmod>` : ""
+           }
        </url>
      `;
        })

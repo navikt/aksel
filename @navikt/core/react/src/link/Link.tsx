@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util/OverridableComponent";
+import { OverridableComponent } from "../util/types";
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -60,7 +60,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         inlineText = false,
         ...rest
       },
-      ref
+      ref,
     ) => (
       <Component
         {...rest}
@@ -70,7 +70,7 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
           "navds-link--inline-text": inlineText,
         })}
       />
-    )
+    ),
   );
 
 export default Link;

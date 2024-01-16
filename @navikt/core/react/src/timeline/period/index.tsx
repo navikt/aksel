@@ -109,7 +109,7 @@ export const Period = forwardRef<HTMLDivElement, TimelinePeriodProps>(
         restProps={restProps}
       />
     );
-  }
+  },
 ) as PeriodType;
 
 Period.componentType = "period";

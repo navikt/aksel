@@ -20,7 +20,7 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
       ref={ref}
       className={cl("navds-tabs__tabpanel", className)}
     />
-  )
+  ),
 );
 
 export default TabPanel;

@@ -104,7 +104,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   await router.replace(
                     `${
                       router.asPath.split("#")[0]
-                    }#${node.dir.title.toLowerCase()}demo-${fil.navn}`
+                    }#${node.dir.title.toLowerCase()}demo-${fil.navn}`,
                   );
                 }}
               >
@@ -134,7 +134,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   {
                     "relative animate-pulse": unloaded,
                     "bg-gray-50": !unloaded,
-                  }
+                  },
                 )}
               >
                 <iframe
@@ -145,17 +145,17 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   aria-label={`${node.dir?.title} ${fil.title} eksempel`}
                   title="Demo"
                   className={cl(
-                    "min-w-80 block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                    "block w-full min-w-80 max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                     {
                       invisible: unloaded,
-                    }
+                    },
                   )}
                 />
                 {unloaded && (
                   <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
                     <div className="grid w-3/5 gap-2">
-                      <div className="bg-surface-neutral-subtle h-6 w-2/3 rounded-xl" />
-                      <div className="bg-surface-neutral-subtle h-16 w-full rounded-xl" />
+                      <div className="h-6 w-2/3 rounded-xl bg-surface-neutral-subtle" />
+                      <div className="h-16 w-full rounded-xl bg-surface-neutral-subtle" />
                     </div>
                   </div>
                 )}

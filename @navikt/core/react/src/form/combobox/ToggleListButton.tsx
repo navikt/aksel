@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
-import { ChevronUpIcon, ChevronDownIcon } from "@navikt/aksel-icons";
-
+import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
 
 interface ToggleListButtonProps {

@@ -7,7 +7,7 @@ export function urlFor(source: any) {
 }
 
 export async function sitemapPages(
-  token?: string
+  token?: string,
 ): Promise<{ path: string; lastmod: string }[]> {
   const client = token ? noCdnClient(token) : getClient();
   const artikler = await getDocuments("all", token);
@@ -21,7 +21,7 @@ export async function sitemapPages(
       "komponenter": *[_type == "komponenter_landingsside"][0]._updatedAt,
       "templates": *[_type == "templates_landingsside"][0]._updatedAt,
       "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,
-    }`
+    }`,
   );
 
   return [
@@ -41,12 +41,12 @@ export async function sitemapPages(
 }
 
 export async function getAkselTema(
-  token?: string
+  token?: string,
 ): Promise<{ path: string; lastmod: string }[]> {
   const client = token ? noCdnClient(token) : getClient();
   const tags: { slug: { current: string }; _updatedAt: string }[] =
     await client.fetch(
-      `*[_type == "aksel_tema" && count(*[references(^._id)]) > 0]{slug,_updatedAt}`
+      `*[_type == "aksel_tema" && count(*[references(^._id)]) > 0]{slug,_updatedAt}`,
     );
   return tags.map((x) => ({
     path: x?.slug.current,
@@ -54,16 +54,39 @@ export async function getAkselTema(
   }));
 }
 
+export async function getGpTema(
+  token?: string,
+): Promise<{ path: string; lastmod: string }[]> {
+  const client = token ? noCdnClient(token) : getClient();
+  const tags: {
+    slug: { current: string };
+    _updatedAt: string;
+    hasRefs: boolean;
+  }[] = await client.fetch(
+    `*[_type == "gp.tema"]{
+        slug,
+        _updatedAt,
+        "hasRefs": count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]) > 0
+      }`,
+  );
+  return tags
+    .filter((x) => x.hasRefs)
+    .map((x) => ({
+      path: x?.slug.current,
+      lastmod: x?._updatedAt,
+    }));
+}
+
 export async function getDocuments(
   source: (typeof allArticleDocuments)[number] | "all",
-  token?: string
+  token?: string,
 ): Promise<{ slug: string; lastmod: string }[]> {
   const client = token ? noCdnClient(token) : getClient();
   const documents: any[] | null = await client.fetch(
     `*[_type in $types]{ _type, _id, 'slug': slug.current, _updatedAt }`,
     {
       types: source === "all" ? allArticleDocuments : [source],
-    }
+    },
   );
   const paths = [];
 

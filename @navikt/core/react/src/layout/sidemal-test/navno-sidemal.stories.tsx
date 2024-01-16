@@ -6,8 +6,8 @@ import { FilterCard } from "./Filter";
 import { Header } from "./Header";
 import { IntroCard } from "./Intro";
 import { Sidebar } from "./Sidebar";
-import "./styling.css";
 import { ContentBox } from "./content-box";
+import "./styling.css";
 
 const meta = {
   title: "kitchen sink/navno-sidemal",

@@ -1,5 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { DefaultIllustration } from "./Illustration";
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
@@ -49,7 +49,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
       </div>
       <div className="navds-guide-panel__content">{children}</div>
     </div>
-  )
+  ),
 );
 
 export default GuidePanel;

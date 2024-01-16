@@ -1,6 +1,6 @@
 import cl from "clsx";
-import React, { forwardRef, HTMLAttributes } from "react";
-import { OverridableComponent } from "../../util/OverridableComponent";
+import React, { HTMLAttributes, forwardRef } from "react";
+import { OverridableComponent } from "../../util/types";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -52,7 +52,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
         direction = "row",
         ...rest
       },
-      ref
+      ref,
     ) => {
       const style: React.CSSProperties = {
         ..._style,
@@ -74,5 +74,5 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
           })}
         />
       );
-    }
+    },
   );

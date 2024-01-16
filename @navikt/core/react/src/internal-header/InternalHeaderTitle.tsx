@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
-import { OverridableComponent } from "../util/OverridableComponent";
+import React, { forwardRef } from "react";
+import { OverridableComponent } from "../util/types";
 
 export interface InternalHeaderTitleProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

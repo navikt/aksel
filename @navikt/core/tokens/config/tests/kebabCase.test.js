@@ -13,7 +13,7 @@ describe("kebabCase", () => {
   ].forEach((string) =>
     test(`${string} is converted to foo-bar`, () => {
       expect(kebabCase(string)).toBe("foo-bar");
-    })
+    }),
   );
 
   test(`spacing 3xl is converted to spacing-3xl`, () => {

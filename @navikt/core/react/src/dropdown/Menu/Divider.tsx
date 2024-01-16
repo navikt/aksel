@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 
 export const Divider = forwardRef<
   HTMLHRElement,

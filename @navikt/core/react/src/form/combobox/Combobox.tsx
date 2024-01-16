@@ -1,7 +1,7 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo, useRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { mergeRefs } from "../../util";
+import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import ClearButton from "./ClearButton";
 import ComboboxWrapper from "./ComboboxWrapper";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
@@ -50,10 +50,7 @@ export const Combobox = forwardRef<
     size = "medium",
   } = useInputContext();
 
-  const mergedInputRef = useMemo(
-    () => mergeRefs([inputRef, ref]),
-    [inputRef, ref]
-  );
+  const mergedInputRef = useMergeRefs(inputRef, ref);
 
   return (
     <ComboboxWrapper
@@ -93,7 +90,7 @@ export const Combobox = forwardRef<
             {
               "navds-combobox__wrapper-inner--virtually-unfocused":
                 activeDecendantId !== undefined,
-            }
+            },
           )}
           onClick={focusInput}
         >

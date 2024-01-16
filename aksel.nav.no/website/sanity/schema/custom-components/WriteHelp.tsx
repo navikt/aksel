@@ -6,7 +6,7 @@ import useSWR from "swr";
 export const WriteHelp = () => {
   const client = useClient({ apiVersion: SANITY_API_VERSION });
   const { data, error } = useSWR(`*[_id == "skrivehjelp"][0]`, (query) =>
-    client.fetch(query)
+    client.fetch(query),
   );
 
   if (error) {

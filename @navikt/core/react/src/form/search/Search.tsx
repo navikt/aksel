@@ -1,15 +1,15 @@
-import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, {
   InputHTMLAttributes,
   forwardRef,
   useCallback,
-  useMemo,
   useRef,
   useState,
 } from "react";
+import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { mergeRefs, omit } from "../../util";
+import { omit } from "../../util";
+import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 import { SearchContext } from "./context";
@@ -118,7 +118,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     } = props;
 
     const searchRef = useRef<HTMLInputElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([searchRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(searchRef, ref);
 
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
 
@@ -127,7 +127,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         value === undefined && setInternalValue(v);
         onChange?.(v);
       },
-      [onChange, value]
+      [onChange, value],
     );
 
     const handleClear = useCallback(
@@ -136,7 +136,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         handleChange("");
         searchRef.current && searchRef.current?.focus?.();
       },
-      [handleChange, onClear]
+      [handleChange, onClear],
     );
 
     const handleClick = () => {
@@ -166,7 +166,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             "navds-search--error": hasError,
             "navds-search--disabled": !!inputProps.disabled,
             "navds-search--with-size": !!htmlSize,
-          }
+          },
         )}
       >
         <Label
@@ -212,7 +212,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
                 `navds-search__input--${variant}`,
                 "navds-text-field__input",
                 "navds-body-short",
-                `navds-body-short--${size}`
+                `navds-body-short--${size}`,
               )}
               {...(htmlSize ? { size: Number(htmlSize) } : {})}
             />
@@ -252,7 +252,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         </div>
       </div>
     );
-  }
+  },
 ) as SearchComponent;
 
 Search.Button = SearchButton;

@@ -40,7 +40,7 @@ export const getMonths = (start: Date, end: Date, current: Date): Date[] => {
 export const getYears = (
   start: Date,
   end: Date,
-  currentYear: number
+  currentYear: number,
 ): Date[] => {
   const years: Date[] = [];
   const fromYear = start.getFullYear();

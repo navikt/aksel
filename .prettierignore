@@ -1,2 +1,13 @@
 **/nais-dev.yaml
 **/nais-prod.yaml
+**/codemod/**/tests/**/*.js
+node_modules
+.next
+dist
+public
+static
+cjs
+esm
+aksel-icons/template
+aksel-icons/icons/*.svg
+

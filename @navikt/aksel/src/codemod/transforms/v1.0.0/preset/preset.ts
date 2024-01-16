@@ -1,6 +1,6 @@
-import transformTabs from "../tabs/tabs";
 import transformChat from "../chat/chat";
 import transformPagination from "../pagination/pagination";
+import transformTabs from "../tabs/tabs";
 
 /**
  * @param {import('jscodeshift').FileInfo} file

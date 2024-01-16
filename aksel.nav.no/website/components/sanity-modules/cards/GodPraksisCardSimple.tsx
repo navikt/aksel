@@ -18,7 +18,9 @@ const GodPraksisCardSimple = ({ node }: GodPraksisCardSimpleProps) => {
     <li className="flex items-center gap-2 px-2 py-4 sm:gap-4 sm:px-6">
       <div className="relative h-8 w-8 shrink-0 sm:h-12 sm:w-12">
         <Image
-          src={urlFor(node?.pictogram).auto("format").url()}
+          src={urlFor(node?.pictogram)
+            .auto("format")
+            .url()}
           decoding="sync"
           layout="fill"
           objectFit="contain"
@@ -32,7 +34,7 @@ const GodPraksisCardSimple = ({ node }: GodPraksisCardSimpleProps) => {
         onClick={(e) =>
           amplitudeLogNavigation("card", e.currentTarget.getAttribute("href"))
         }
-        className="navds-heading--small navds-link text-deepblue-700 navds-heading flex-wrap break-all no-underline hover:underline focus:outline-none"
+        className="navds-heading--small navds-link navds-heading flex-wrap break-all text-deepblue-700 no-underline hover:underline focus:outline-none"
       >
         {node.title}
       </NextLink>

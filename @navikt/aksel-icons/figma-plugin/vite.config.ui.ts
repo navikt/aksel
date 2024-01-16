@@ -1,9 +1,7 @@
-import { defineConfig } from "vite";
-import path from "path";
-
-import { viteSingleFile } from "vite-plugin-singlefile";
 import react from "@vitejs/plugin-react";
-
+import path from "path";
+import { defineConfig } from "vite";
+import { viteSingleFile } from "vite-plugin-singlefile";
 import inlineSvg from "./scripts/vite/vite-inline-svg";
 import svgComponent from "./scripts/vite/vite-svgr-component";
 

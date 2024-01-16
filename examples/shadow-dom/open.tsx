@@ -1,7 +1,7 @@
-import styles from "@navikt/ds-css/dist/index.css?inline";
-import { DatePicker, Provider, useDatepicker } from "@navikt/ds-react";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import styles from "@navikt/ds-css/dist/index.css?inline";
+import { DatePicker, Provider, useDatepicker } from "@navikt/ds-react";
 
 class CustomComponent extends HTMLElement {
   connectedCallback() {
@@ -14,7 +14,7 @@ class CustomComponent extends HTMLElement {
       <Provider rootElement={rootElement}>
         <style>{styles}</style>
         <DateWrapper />
-      </Provider>
+      </Provider>,
     );
   }
 }

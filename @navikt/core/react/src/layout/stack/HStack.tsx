@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../../util/OverridableComponent";
-import { StackProps, Stack } from "./Stack";
+import { OverridableComponent } from "../../util/types";
+import { Stack, StackProps } from "./Stack";
 
 export type HStackProps = Omit<StackProps, "direction">;
 

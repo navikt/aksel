@@ -1,5 +1,5 @@
-import { FuseItemT } from "@/types";
 import Fuse from "fuse.js";
+import { FuseItemT } from "@/types";
 
 export function fuseSearch(results: any[], query: string) {
   /* https://fusejs.io/api/options.html */
@@ -19,7 +19,6 @@ export function fuseSearch(results: any[], query: string) {
     minMatchCharLength: 2,
     includeMatches: true,
     threshold: 0.3,
-    location: 120,
   });
   return fuse.search(query).filter((x) => x.score < 0.3);
 }

@@ -1,3 +1,7 @@
+import Image from "next/legacy/image";
+import { GetServerSideProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -15,10 +19,6 @@ import { abbrName, dateStr, getImage } from "@/utils";
 import { BloggAd } from "@/web/BloggAd";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
-import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
-import Image from "next/legacy/image";
-import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
@@ -49,7 +49,7 @@ export const query = `{
 }`;
 
 export const getServerSideProps: GetServerSideProps = async (
-  context
+  context,
 ): Promise<PageProps> => {
   const { blogg, morePosts } = await getClient().fetch(query, {
     slug: `produktbloggen/${context.params.slug}`,
@@ -101,14 +101,14 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             <Heading
               level="1"
               size="xlarge"
-              className="text-deepblue-800 mt-1 break-words text-5xl leading-[1.2] [hyphens:_auto]"
+              className="text-wrap-balance mt-1 break-words text-5xl leading-[1.2] text-deepblue-800 [hyphens:_auto]"
             >
               {blogg.heading}
             </Heading>
             {blogg?.ingress && (
               <BodyLong
                 size="large"
-                className="text-deepblue-700 mt-4 text-2xl leading-normal"
+                className="mt-4 text-2xl leading-normal text-deepblue-700"
               >
                 {blogg?.ingress}
               </BodyLong>
@@ -119,7 +119,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
               </Detail>
               {authors?.[0] && (
                 <>
-                  <span className="bg-deepblue-700 h-2 w-2 rotate-45 rounded-[1px] opacity-50" />
+                  <span className="h-2 w-2 rotate-45 rounded-[1px] bg-deepblue-700 opacity-50" />
                   <BodyShort size="small" as="address" className="not-italic">
                     {authors?.[0]}
                   </BodyShort>
@@ -174,10 +174,10 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
         </div>
         <div className="relative z-10 mt-16 px-4">
           <div className="dynamic-wrapper-prose">
-            <div className="bg-deepblue-800 mx-auto mb-10 h-2 w-2 rotate-45 rounded-[1px]" />
+            <div className="mx-auto mb-10 h-2 w-2 rotate-45 rounded-[1px] bg-deepblue-800" />
             {authors?.length > 0 && (
               <Detail
-                className="text-deepblue-700 mb-2 text-center uppercase"
+                className="mb-2 text-center uppercase text-deepblue-700"
                 as="p"
               >
                 Bidragsytere
@@ -186,7 +186,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             {authors?.length > 0 && (
               <BodyShort
                 as="div"
-                className="text-text-subtle mb-1 flex flex-wrap justify-center gap-1"
+                className="mb-1 flex flex-wrap justify-center gap-1 text-text-subtle"
               >
                 {authors.map(abbrName).map((x, y) => (
                   <address className="not-italic" key={x}>
@@ -198,7 +198,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             )}
             <BodyShort
               as="span"
-              className="text-text-subtle flex justify-center"
+              className="flex justify-center text-text-subtle"
             >
               Publisert: {publishDate}
             </BodyShort>

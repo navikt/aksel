@@ -1,7 +1,8 @@
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, ButtonProps } from "../../button";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { SearchContext } from "./context";
 
 export interface SearchButtonProps
@@ -36,10 +37,7 @@ const SearchButton: SearchButtonType = forwardRef(
         variant={variant === "secondary" ? "secondary" : "primary"}
         className={cl("navds-search__button-search", className)}
         disabled={context?.disabled ?? disabled}
-        onClick={(e) => {
-          handleClick();
-          onClick?.(e);
-        }}
+        onClick={composeEventHandlers(onClick, handleClick)}
         icon={
           <MagnifyingGlassIcon
             {...(children ? { "aria-hidden": true } : { title: "Søk" })}
@@ -49,7 +47,7 @@ const SearchButton: SearchButtonType = forwardRef(
         {children}
       </Button>
     );
-  }
+  },
 );
 
 export default SearchButton;

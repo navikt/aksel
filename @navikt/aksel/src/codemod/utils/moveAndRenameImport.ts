@@ -15,7 +15,7 @@ export default function moveAndRenameImport(
     fromName: string;
     toName: string;
     ignoreAlias?: boolean;
-  }
+  },
 ) {
   /* Does package-name exist */
   const existingFromImport = root.find(j.ImportDeclaration, {
@@ -36,7 +36,7 @@ export default function moveAndRenameImport(
         localname = node.local.name;
       }
       return node.imported.name === fromName;
-    }
+    },
   );
 
   if (!existingFromImport.length || !existingFromImportSpecifier?.length) {
@@ -79,7 +79,7 @@ export default function moveAndRenameImport(
     } else {
       const newImport = j.importDeclaration(
         [newImportSpecifier],
-        j.stringLiteral(toImport)
+        j.stringLiteral(toImport),
       );
 
       const lastImport = root.find(j.ImportDeclaration).at(-1);

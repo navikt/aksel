@@ -4,14 +4,14 @@ import { ArgsT } from "../types";
 export function extractArgs(
   code: string,
   fileName: string,
-  env?: "test"
+  env?: "test",
 ): ArgsT {
   const args = code.match(/export const args = {([^}]+)}/)?.[1];
 
   if (!args) {
     env !== "test" &&
       console.warn(
-        `Missing args when parsing code for example/template: ${fileName}`
+        `Missing args when parsing code for example/template: ${fileName}`,
       );
     return {};
   }

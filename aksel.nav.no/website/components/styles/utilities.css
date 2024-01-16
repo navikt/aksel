@@ -22,7 +22,7 @@ p.override-text-no-max {
 }
 
 .dynamic-wrapper {
-  @apply max-w-aksel mx-auto sm:w-[90%];
+  @apply mx-auto max-w-aksel sm:w-[90%];
 }
 
 .dynamic-wrapper-prose {
@@ -70,7 +70,9 @@ p.override-text-no-max {
       rgb(241 241 241/ 0.8) 75%,
       rgb(241 241 241/ 0.8)
     );
-  background-position: 0 0, 10px 10px;
+  background-position:
+    0 0,
+    10px 10px;
   background-size: 20px 20px;
 }
 
@@ -81,4 +83,9 @@ p.override-text-no-max {
 
 [id] > code > .inline-code-amp {
   display: none;
+}
+
+/* Not in tailwindcss yet: https://github.com/tailwindlabs/tailwindcss/discussions/11486 */
+.text-wrap-balance {
+  text-wrap: balance;
 }

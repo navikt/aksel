@@ -31,7 +31,7 @@ const Latest = ({ block }: LatestArticlesProps) => {
       ([entry]) => {
         entry.isIntersecting && setIntersected(entry.isIntersecting);
       },
-      { rootMargin: "0px 0px 100px 0px" }
+      { rootMargin: "0px 0px 100px 0px" },
     );
     observer.observe(section.current);
     return () => observer.disconnect();
@@ -41,7 +41,7 @@ const Latest = ({ block }: LatestArticlesProps) => {
 
   return (
     <>
-      <Heading level="2" size="xlarge" className="text-deepblue-800 mb-10">
+      <Heading level="2" size="xlarge" className="mb-10 text-deepblue-800">
         Siste fra Aksel
       </Heading>
 

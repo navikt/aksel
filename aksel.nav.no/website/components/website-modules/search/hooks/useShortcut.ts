@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect } from "react";
 export const useShortcut = (
   open: boolean,
   setOpen: (value: boolean) => void,
-  inputRef: MutableRefObject<HTMLInputElement>
+  inputRef: MutableRefObject<HTMLInputElement>,
 ) => {
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {

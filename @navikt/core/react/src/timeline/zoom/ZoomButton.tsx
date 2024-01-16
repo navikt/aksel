@@ -1,4 +1,3 @@
-import { Detail } from "../../typography/Detail";
 import {
   addMonths,
   addYears,
@@ -8,6 +7,7 @@ import {
   subYears,
 } from "date-fns";
 import React, { forwardRef } from "react";
+import { Detail } from "../../typography/Detail";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 
 export interface TimelineZoomButtonProps {
@@ -61,7 +61,7 @@ export const ZoomButton: ZoomButtonType = forwardRef(
             !currentZoom
               ? `Zoom tidslinjen ${format(
                   startOfRange,
-                  "dd.MM.yyyy"
+                  "dd.MM.yyyy",
                 )} til ${format(endDate, "dd.MM.yyyy")}`
               : "Tilbakestill til initiell tidsperspektiv"
           }
@@ -77,7 +77,7 @@ export const ZoomButton: ZoomButtonType = forwardRef(
         </button>
       </Detail>
     );
-  }
+  },
 );
 
 export default ZoomButton;

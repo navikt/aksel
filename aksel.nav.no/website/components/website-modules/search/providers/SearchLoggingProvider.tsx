@@ -39,7 +39,7 @@ export const SearchLoggingProvider = ({
       tags,
       context?.results?.totalHits,
       context?.results?.topResults?.length,
-    ]
+    ],
   );
 
   return (

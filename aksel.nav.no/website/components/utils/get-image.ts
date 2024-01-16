@@ -5,7 +5,7 @@ export const getImage = (key: string, variant: "OG" | "thumbnail") => {
     key.split("").reduce(function (a, b) {
       a = (a << 5) - a + b.charCodeAt(0);
       return a & a;
-    }, 0)
+    }, 0),
   );
 
   const ogSrc = "https://aksel.nav.no/images/og/blogg";

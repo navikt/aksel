@@ -11,7 +11,7 @@ const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
 
 if (!token) {
   throw new Error(
-    "Missing token 'SANITY_PRIVATE_NO_DRAFTS' when updating RSS-feed"
+    "Missing token 'SANITY_PRIVATE_NO_DRAFTS' when updating RSS-feed",
   );
 }
 

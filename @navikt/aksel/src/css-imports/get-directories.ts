@@ -17,6 +17,6 @@ export async function getDirectories() {
   directories.sort((a, b) => a.length - b.length);
 
   return [baseDir, ...directories].map((x) =>
-    x.replace(baseDir, path.basename(baseDir))
+    x.replace(baseDir, path.basename(baseDir)),
   );
 }

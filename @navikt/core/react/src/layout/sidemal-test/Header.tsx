@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, BodyShort, Detail } from "../../typography";
+import { BodyShort, Detail, Heading } from "../../typography";
 import { Box } from "../box";
 import { Hide, Show } from "../responsive";
 import { HStack, VStack } from "../stack";

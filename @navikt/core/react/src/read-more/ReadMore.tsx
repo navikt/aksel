@@ -1,7 +1,9 @@
 import cl from "clsx";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyLong } from "../typography";
+import { composeEventHandlers } from "../util/composeEventHandlers";
+import { useControllableState } from "../util/hooks/useControllableState";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -23,6 +25,10 @@ export interface ReadMoreProps
    * @default false
    */
   defaultOpen?: boolean;
+  /**
+   * Callback for current open-state
+   */
+  onOpenChange?: (open: boolean) => void;
   /**
    * Changes fontsize for content
    * @default medium
@@ -57,13 +63,16 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       defaultOpen = false,
       onClick,
       size = "medium",
+      onOpenChange,
       ...rest
     },
-    ref
+    ref,
   ) => {
-    const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
-
-    const isOpened = open ?? internalOpen;
+    const [_open, _setOpen] = useControllableState({
+      defaultValue: defaultOpen,
+      value: open,
+      onChange: onOpenChange,
+    });
 
     return (
       <div
@@ -71,7 +80,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           "navds-read-more",
           `navds-read-more--${size}`,
           className,
-          { "navds-read-more--open": isOpened }
+          { "navds-read-more--open": _open },
         )}
       >
         <button
@@ -81,13 +90,8 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           className={cl("navds-read-more__button", "navds-body-short", {
             "navds-body-short--small": size === "small",
           })}
-          onClick={(e) => {
-            if (open === undefined) {
-              setInternalOpen((isOpen) => !isOpen);
-            }
-            onClick?.(e);
-          }}
-          aria-expanded={isOpened}
+          onClick={composeEventHandlers(onClick, () => _setOpen((x) => !x))}
+          aria-expanded={_open}
         >
           <ChevronDownIcon
             className="navds-read-more__expand-icon"
@@ -98,9 +102,9 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
 
         <BodyLong
           as="div"
-          aria-hidden={!isOpened}
+          aria-hidden={!_open}
           className={cl("navds-read-more__content", {
-            "navds-read-more__content--closed": !isOpened,
+            "navds-read-more__content--closed": !_open,
           })}
           size={size}
         >
@@ -108,7 +112,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
         </BodyLong>
       </div>
     );
-  }
+  },
 );
 
 export default ReadMore;

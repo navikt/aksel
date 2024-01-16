@@ -1,5 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
+import React, { HTMLAttributes, forwardRef } from "react";
 
 type Column = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export interface CellProps extends HTMLAttributes<HTMLDivElement> {
@@ -41,13 +41,13 @@ export const Cell = forwardRef<HTMLDivElement, CellProps>(
           sm && `navds-grid__cell--sm-${sm}`,
           md && `navds-grid__cell--md-${md}`,
           lg && `navds-grid__cell--lg-${lg}`,
-          className
+          className,
         )}
       >
         {children}
       </div>
     );
-  }
+  },
 );
 
 export default Cell;

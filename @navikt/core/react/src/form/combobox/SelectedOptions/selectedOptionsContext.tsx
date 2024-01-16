@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import usePrevious from "../../../util/usePrevious";
+import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/inputContext";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { ComboboxProps } from "../types";
@@ -22,12 +22,12 @@ type SelectedOptionsContextType = {
   maxSelectedMessage?: string;
   toggleOption: (
     option: string,
-    event: React.KeyboardEvent | React.PointerEvent
+    event: React.KeyboardEvent | React.PointerEvent,
   ) => void;
 };
 
 const SelectedOptionsContext = createContext<SelectedOptionsContextType>(
-  {} as SelectedOptionsContextType
+  {} as SelectedOptionsContextType,
 );
 
 export const SelectedOptionsProvider = ({
@@ -66,7 +66,7 @@ export const SelectedOptionsProvider = ({
   const selectedOptions = useMemo(
     () =>
       externalSelectedOptions ?? [...customOptions, ...internalSelectedOptions],
-    [customOptions, externalSelectedOptions, internalSelectedOptions]
+    [customOptions, externalSelectedOptions, internalSelectedOptions],
   );
 
   const addSelectedOption = useCallback(
@@ -95,7 +95,7 @@ export const SelectedOptionsProvider = ({
       onToggleSelected,
       options,
       setCustomOptions,
-    ]
+    ],
   );
 
   const removeSelectedOption = useCallback(
@@ -106,13 +106,13 @@ export const SelectedOptionsProvider = ({
       } else {
         setSelectedOptions((oldSelectedOptions) =>
           oldSelectedOptions.filter(
-            (selectedOption) => selectedOption !== option
-          )
+            (selectedOption) => selectedOption !== option,
+          ),
         );
       }
       onToggleSelected?.(option, false, isCustomOption);
     },
-    [customOptions, onToggleSelected, removeCustomOption]
+    [customOptions, onToggleSelected, removeCustomOption],
   );
 
   const toggleOption = useCallback(
@@ -131,7 +131,7 @@ export const SelectedOptionsProvider = ({
       focusInput,
       removeSelectedOption,
       selectedOptions,
-    ]
+    ],
   );
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
@@ -163,7 +163,7 @@ export const useSelectedOptionsContext = () => {
   const context = useContext(SelectedOptionsContext);
   if (!context) {
     throw new Error(
-      "useSelectedOptionsContext must be used within a SelectedOptionsProvider"
+      "useSelectedOptionsContext must be used within a SelectedOptionsProvider",
     );
   }
   return context;

@@ -145,7 +145,7 @@ const Riktekst = (
     | "prinsipp"
     | "standard"
     | "standalone"
-    | "accordion"
+    | "accordion",
 ) => {
   let fields: string[] = [];
   const standard = [

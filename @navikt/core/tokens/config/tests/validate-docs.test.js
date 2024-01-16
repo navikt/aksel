@@ -13,8 +13,8 @@ describe("Validate tokens dokumentation", () => {
     it(`${x.name} should be documented`, () => {
       expect(
         Object.keys(DsTokens).find(
-          (y) => `--${kebabCase(y)}`.replace("--az-", "--a-z-") === x.name
-        )
+          (y) => `--${kebabCase(y)}`.replace("--az-", "--a-z-") === x.name,
+        ),
       ).toBeDefined();
     });
   });
@@ -31,7 +31,7 @@ describe("Validate tokens dokumentation", () => {
 
 flatten.forEach((x) => {
   !Object.keys(DsTokens).find(
-    (y) => `--${kebabCase(y)}`.replace("--az-", "--a-z-") === x.name
+    (y) => `--${kebabCase(y)}`.replace("--az-", "--a-z-") === x.name,
   ) && removed.push(x.name);
 });
 

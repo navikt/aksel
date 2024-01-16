@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-
 import { Search } from "../index";
+
 export default {
   title: "ds-react/Search",
   component: Search,

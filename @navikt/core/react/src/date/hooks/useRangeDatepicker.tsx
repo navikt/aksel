@@ -148,7 +148,7 @@ const fromValidation = (day: Date, opt?: UseRangeDatepickerOptions) => {
 const toValidation = (
   day: Date,
   from: Date,
-  opt?: UseRangeDatepickerOptions
+  opt?: UseRangeDatepickerOptions,
 ) => {
   const isBefore =
     opt?.fromDate && day && differenceInCalendarDays(opt?.fromDate, day) > 0;
@@ -185,12 +185,12 @@ const toValidation = (
 
 const initialValidation = (
   range?: DateRange,
-  opt?: UseRangeDatepickerOptions
+  opt?: UseRangeDatepickerOptions,
 ): RangeValidationT => {
   if (!range || !range?.from) {
     return getValidationMessage(
       { isEmpty: true, isValidDate: false },
-      { isEmpty: true, isValidDate: false }
+      { isEmpty: true, isValidDate: false },
     );
   }
 
@@ -215,7 +215,7 @@ const initialValidation = (
  * });
  */
 export const useRangeDatepicker = (
-  opt: UseRangeDatepickerOptions = {}
+  opt: UseRangeDatepickerOptions = {},
 ): UseRangeDatepickerValue => {
   const {
     locale: _locale = "nb",
@@ -240,26 +240,26 @@ export const useRangeDatepicker = (
 
   // Initialize states
   const [month, setMonth] = useState(
-    defaultSelected ? defaultSelected?.from : defaultMonth ?? today
+    defaultSelected ? defaultSelected?.from : defaultMonth ?? today,
   );
   const [selectedRange, setSelectedRange] = useState<DateRange | undefined>(
-    defaultSelected ?? { from: undefined, to: undefined }
+    defaultSelected ?? { from: undefined, to: undefined },
   );
 
   const [fromInputValue, setFromInputValue] = useState(
     defaultSelected?.from
       ? formatDateForInput(defaultSelected.from, locale, "date", inputFormat)
-      : ""
+      : "",
   );
 
   const [toInputValue, setToInputValue] = useState(
     defaultSelected?.to
       ? formatDateForInput(defaultSelected.to, locale, "date", inputFormat)
-      : ""
+      : "",
   );
 
   const [validation, setValidation] = useState<RangeValidationT>(
-    initialValidation(selectedRange, opt)
+    initialValidation(selectedRange, opt),
   );
 
   const [open, setOpen] = useState(false);
@@ -271,7 +271,7 @@ export const useRangeDatepicker = (
 
   const updateValidation = (
     from: Partial<RangeValidationT["from"]> = {},
-    to: Partial<RangeValidationT["to"]> = {}
+    to: Partial<RangeValidationT["to"]> = {},
   ) => {
     const msg = getValidationMessage(from, to);
     setValidation(msg);
@@ -284,18 +284,18 @@ export const useRangeDatepicker = (
     setValidation(
       initialValidation(
         defaultSelected ?? { from: undefined, to: undefined },
-        opt
-      )
+        opt,
+      ),
     );
     setFromInputValue(
       defaultSelected?.from
         ? formatDateForInput(defaultSelected.from, locale, "date", inputFormat)
-        : ""
+        : "",
     );
     setToInputValue(
       defaultSelected?.to
         ? formatDateForInput(defaultSelected.to, locale, "date", inputFormat)
-        : ""
+        : "",
     );
     setDefaultSelected(_defaultSelected);
   };
@@ -305,12 +305,12 @@ export const useRangeDatepicker = (
     setFromInputValue(
       range?.from
         ? formatDateForInput(range.from, locale, "date", inputFormat)
-        : ""
+        : "",
     );
     setToInputValue(
       range?.to
         ? formatDateForInput(range?.to, locale, "date", inputFormat)
-        : ""
+        : "",
     );
     setValidation(initialValidation(range, opt));
   };
@@ -324,12 +324,12 @@ export const useRangeDatepicker = (
       today,
       locale,
       "date",
-      allowTwoDigitYear
+      allowTwoDigitYear,
     );
     if (isValidDate(day)) {
       src === RANGE.FROM
         ? setFromInputValue(
-            formatDateForInput(day, locale, "date", inputFormat)
+            formatDateForInput(day, locale, "date", inputFormat),
           )
         : setToInputValue(formatDateForInput(day, locale, "date", inputFormat));
 
@@ -348,7 +348,7 @@ export const useRangeDatepicker = (
       today,
       locale,
       "date",
-      allowTwoDigitYear
+      allowTwoDigitYear,
     );
     if (!isValidDate(day)) {
       return;
@@ -381,18 +381,18 @@ export const useRangeDatepicker = (
 
     range?.from
       ? setFromInputValue(
-          formatDateForInput(range?.from, locale, "date", inputFormat)
+          formatDateForInput(range?.from, locale, "date", inputFormat),
         )
       : setFromInputValue("");
     prevToRange && !resetTo
       ? setToInputValue(
-          formatDateForInput(prevToRange, locale, "date", inputFormat)
+          formatDateForInput(prevToRange, locale, "date", inputFormat),
         )
       : setToInputValue("");
     updateRange({ from: range?.from, to: resetTo ? undefined : prevToRange });
     updateValidation(
       { isValidDate: !!range?.from, isEmpty: !range?.from },
-      { isValidDate: !!range?.to, isEmpty: !prevToRange || resetTo }
+      { isValidDate: !!range?.to, isEmpty: !prevToRange || resetTo },
     );
   };
 
@@ -400,7 +400,7 @@ export const useRangeDatepicker = (
     val: string = "",
     day: Date,
     isBefore = false,
-    isAfter = false
+    isAfter = false,
   ) => {
     setFromInputValue(val);
     if (!validateDay(day)) {
@@ -415,7 +415,7 @@ export const useRangeDatepicker = (
           isBefore,
           isAfter,
         },
-        validation.to
+        validation.to,
       );
       return;
     }
@@ -427,7 +427,7 @@ export const useRangeDatepicker = (
           isBefore,
           isAfter,
         },
-        validation.to
+        validation.to,
       );
       return;
     }
@@ -449,7 +449,7 @@ export const useRangeDatepicker = (
         today,
         locale,
         "date",
-        allowTwoDigitYear
+        allowTwoDigitYear,
       );
       if (validateDay(toDay)) {
         updateRange({ from: day, to: toDay });
@@ -467,7 +467,7 @@ export const useRangeDatepicker = (
     val: string = "",
     day: Date,
     isBefore = false,
-    isAfter = false
+    isAfter = false,
   ) => {
     setToInputValue(val);
     if (!validateDay(day)) {
@@ -518,7 +518,7 @@ export const useRangeDatepicker = (
       today,
       locale,
       "date",
-      allowTwoDigitYear
+      allowTwoDigitYear,
     );
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;

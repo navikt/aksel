@@ -26,7 +26,7 @@ const NonClickablePeriod = ({
       {...restProps}
       className={cl(
         getConditionalClasses(cropped, direction, status),
-        restProps?.className
+        restProps?.className,
       )}
       style={{
         width: `${width}%`,

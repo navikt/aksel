@@ -7,10 +7,10 @@ import {
 } from "sanity";
 
 export const createWrappedDefaultPublish = (
-  publishAction: DocumentActionComponent
+  publishAction: DocumentActionComponent,
 ) => {
   const DefaultPublish = (
-    props: DocumentActionProps
+    props: DocumentActionProps,
   ): DocumentActionDescription | null => {
     const originalAction = publishAction(props);
     const { patch, publish } = useDocumentOperation(props.id, props.type);
@@ -31,7 +31,7 @@ export const createWrappedDefaultPublish = (
         !props.published &&
           patch.execute(
             [{ set: { publishedAt: new Date().toISOString() } }],
-            props.published
+            props.published,
           );
         publish.execute();
 

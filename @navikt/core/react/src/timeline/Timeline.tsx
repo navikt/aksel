@@ -89,7 +89,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       axisLabelTemplates,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const isMultipleRows = Array.isArray(children);
 
@@ -101,7 +101,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       children = [children];
     }
     const rowChildren = React.Children.toArray(children).filter(
-      (c: any) => c?.type?.componentType === "row"
+      (c: any) => c?.type?.componentType === "row",
     );
 
     const pins = React.Children.toArray(children)
@@ -109,7 +109,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       .map((x) => () => x);
 
     const zoomComponent = React.Children.toArray(children).find(
-      (c: any) => c?.type?.componentType === "zoom"
+      (c: any) => c?.type?.componentType === "zoom",
     );
 
     const rowsRaw = useMemo(() => {
@@ -127,7 +127,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     const [start, setStart] = useState(initialStartDate);
     const [activeRow, setActiveRow] = useState<number | null>(null);
     const [endInclusive, setEndInclusive] = useState(
-      endOfDay(useLatestDate({ endDate, rows }))
+      endOfDay(useLatestDate({ endDate, rows })),
     );
 
     const initialEndDate = endOfDay(useLatestDate({ endDate, rows }));
@@ -135,14 +135,14 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       rowsRaw,
       startDate ?? start,
       endDate ?? endInclusive,
-      direction
+      direction,
     );
 
     const handleZoomChange = (zoomStart: Date) => {
       if (startDate || endDate) {
         if (process.env.NODE_ENV !== "production") {
           console.warn(
-            "Zooming is not supported when startDate or endDate is set"
+            "Zooming is not supported when startDate or endDate is set",
           );
         }
         return;
@@ -242,7 +242,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         </div>
       </TimelineContext.Provider>
     );
-  }
+  },
 ) as TimelineComponent;
 
 Timeline.Row = TimelineRow;

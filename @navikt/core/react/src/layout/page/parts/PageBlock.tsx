@@ -1,17 +1,18 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../../../util/OverridableComponent";
+import { OverridableComponent } from "../../../util/types";
 
-export const widths = ["md", "lg", "xl", "2xl"] as const;
+export const widths = ["text", "md", "lg", "xl", "2xl"] as const;
 
 export interface PageBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Predefined max-width
    * @example
-   * md:  768px
-   * lg:  1024px
-   * xl:  1280px
-   * 2xl: 1440px
+   * text: 576px + dynamic gutters
+   * md:   768px
+   * lg:   1024px
+   * xl:   1280px
+   * 2xl:  1440px
    * @default max-width: 100%;
    */
   width?: (typeof widths)[number];
@@ -64,10 +65,10 @@ export const PageBlock: OverridableComponent<PageBlockProps, HTMLDivElement> =
             "navds-pageblock",
             `navds-pageblock--${width}`,
             className,
-            { "navds-pageblock--gutters": gutters }
+            { "navds-pageblock--gutters": gutters },
           )}
           ref={ref}
         />
       );
-    }
+    },
   );

@@ -1,13 +1,8 @@
 import cl from "clsx";
-import React, {
-  createContext,
-  forwardRef,
-  useContext,
-  useRef,
-  useState,
-} from "react";
-import { AccordionContext } from "./AccordionContext";
+import React, { createContext, forwardRef, useContext, useRef } from "react";
 import { omit } from "../util";
+import { useControllableState } from "../util/hooks/useControllableState";
+import { AccordionContext } from "./AccordionContext";
 
 export interface AccordionItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,6 +21,10 @@ export interface AccordionItemProps
    * @default false
    */
   defaultOpen?: boolean;
+  /**
+   * Callback for current open-state
+   */
+  onOpenChange?: (open: boolean) => void;
 }
 
 export interface AccordionItemContextProps {
@@ -37,20 +36,21 @@ export const AccordionItemContext =
   createContext<AccordionItemContextProps | null>(null);
 
 const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
-  ({ children, className, open, defaultOpen = false, ...rest }, ref) => {
-    const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
-    const context = useContext(AccordionContext);
+  (
+    { children, className, open, defaultOpen = false, onOpenChange, ...rest },
+    ref,
+  ) => {
+    const [_open, _setOpen] = useControllableState({
+      defaultValue: defaultOpen,
+      value: open,
+      onChange: onOpenChange,
+    });
 
-    const [_open, _setOpen] = useState(defaultOpen);
+    const context = useContext(AccordionContext);
     const shouldAnimate = useRef<boolean>(!(Boolean(open) || defaultOpen));
+
     const handleOpen = () => {
-      if (open === undefined) {
-        const newOpen = !_open;
-        _setOpen(newOpen);
-        setInternalOpen(newOpen);
-      } else {
-        setInternalOpen(!open);
-      }
+      _setOpen((x) => !x);
       shouldAnimate.current = true;
     };
 
@@ -61,7 +61,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
     return (
       <div
         className={cl("navds-accordion__item", className, {
-          "navds-accordion__item--open": open ?? internalOpen,
+          "navds-accordion__item--open": _open,
           "navds-accordion__item--neutral": context?.variant === "neutral",
           "navds-accordion__item--no-animation": !shouldAnimate.current,
         })}
@@ -70,7 +70,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       >
         <AccordionItemContext.Provider
           value={{
-            open: open ?? internalOpen,
+            open: _open,
             toggleOpen: handleOpen,
           }}
         >
@@ -78,7 +78,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         </AccordionItemContext.Provider>
       </div>
     );
-  }
+  },
 );
 
 export default AccordionItem;

@@ -2,8 +2,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
-import { UNSAFE_Combobox } from "..";
 import { act } from "react-dom/test-utils";
+import { UNSAFE_Combobox } from "..";
 
 const options = [
   "banana",
@@ -42,7 +42,9 @@ describe("Render combobox", () => {
 
       await act(async () => {
         await userEvent.click(
-          screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+          screen.getByRole("combobox", {
+            name: "Hva er dine favorittfrukter?",
+          }),
         );
       });
       await act(async () => {
@@ -50,20 +52,20 @@ describe("Render combobox", () => {
           screen.getByRole("combobox", {
             name: "Hva er dine favorittfrukter?",
           }),
-          "apple"
+          "apple",
         );
       });
       await act(async () => {
         await userEvent.click(
-          await screen.findByRole("option", { name: "apple" })
+          await screen.findByRole("option", { name: "apple" }),
         );
       });
       expect(
-        await screen.findByRole("option", { name: "apple", selected: true })
+        await screen.findByRole("option", { name: "apple", selected: true }),
       ).toBeInTheDocument();
       await act(async () => {
         await userEvent.click(
-          await screen.findByRole("button", { name: "apple slett" })
+          await screen.findByRole("button", { name: "apple slett" }),
         );
       });
     });
@@ -73,7 +75,7 @@ describe("Render combobox", () => {
     render(<App options={[]} isListOpen isLoading />);
 
     expect(
-      await screen.findByRole("option", { name: "venter..." })
+      await screen.findByRole("option", { name: "venter..." }),
     ).toBeInTheDocument();
   });
 });
@@ -84,13 +86,13 @@ describe("Combobox state-handling", () => {
 
     await act(async () => {
       await userEvent.click(
-        screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+        screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
       );
     });
     await act(async () => {
       await userEvent.type(
         screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
-        "ban"
+        "ban",
       );
       await userEvent.keyboard("{ArrowDown}");
       await userEvent.keyboard("{ArrowUp}");
@@ -105,13 +107,13 @@ describe("Combobox state-handling", () => {
 
     await act(async () => {
       await userEvent.click(
-        screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" })
+        screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
       );
     });
     await act(async () => {
       await userEvent.type(
         screen.getByRole("combobox", { name: "Hva er dine favorittfrukter?" }),
-        "apple"
+        "apple",
       );
       await userEvent.keyboard("{ArrowDown}");
       await userEvent.keyboard("{Escape}");
@@ -119,7 +121,7 @@ describe("Combobox state-handling", () => {
     });
 
     expect(
-      await screen.findByRole("option", { name: "banana" })
+      await screen.findByRole("option", { name: "banana" }),
     ).toBeInTheDocument();
   });
 });

@@ -1,7 +1,6 @@
-import stylelint from "stylelint";
 import { Node as PostCSSNode } from "postcss";
 import valueParser from "postcss-value-parser";
-
+import stylelint from "stylelint";
 import { getPackageVersion, isCustomProperty, tokenExists } from "../../utils";
 
 const ruleName = "aksel/design-token-no-component-reference";
@@ -23,7 +22,7 @@ const checkDeclValue = (
   controlledPrefixes: string[],
   value: string,
   postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode
+  rootNode: PostCSSNode,
 ) => {
   valueParser(value).walk((node) => {
     if (

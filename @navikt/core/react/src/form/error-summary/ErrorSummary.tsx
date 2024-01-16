@@ -1,8 +1,8 @@
-import React, { forwardRef, HTMLAttributes, isValidElement } from "react";
 import cl from "clsx";
-import { Heading, BodyShort } from "../../typography";
+import React, { HTMLAttributes, forwardRef, isValidElement } from "react";
+import { BodyShort, Heading } from "../../typography";
+import { useId } from "../../util/hooks";
 import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
-import { useId } from "../../util";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -72,7 +72,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       heading,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const headingId = useId();
 
@@ -83,7 +83,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         className={cl(
           className,
           "navds-error-summary",
-          `navds-error-summary--${size}`
+          `navds-error-summary--${size}`,
         )}
         tabIndex={-1}
         aria-live="polite"
@@ -108,7 +108,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         </BodyShort>
       </section>
     );
-  }
+  },
 ) as ErrorSummaryComponent;
 
 ErrorSummary.Item = ErrorSummaryItem;

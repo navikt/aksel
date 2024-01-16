@@ -1,3 +1,8 @@
+import { useRouter } from "next/router";
+import { GetStaticProps } from "next/types";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -12,18 +17,13 @@ import {
 } from "@/types";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
-import { Button, ErrorMessage, Heading } from "@navikt/ds-react";
-import { useRouter } from "next/router";
-import { GetStaticProps } from "next/types";
-import { useEffect, useState } from "react";
-import useSWR from "swr";
 
 type ArticleT = ResolveContributorsSingleT<
   ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
 >;
 
 type PageProps = NextPageT<{
-  articles: Array<ArticleT>;
+  articles: ArticleT[];
 }>;
 
 const getQuery = (boundry = "") => {
@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 const Artikler = ({ articles }: PageProps["props"]) => {
-  const [allArticles, setAllArticles] = useState<Array<ArticleT>>(articles);
+  const [allArticles, setAllArticles] = useState<ArticleT[]>(articles);
   const [hasFetched, setHasFetched] = useState<boolean>(false);
   const { alleArtikler } = useRouter().query;
 
@@ -80,9 +80,9 @@ const Artikler = ({ articles }: PageProps["props"]) => {
 
   const { data, error, isValidating } = useSWR(
     fetchMore
-      ? () => `/api/aksel-articles?lastPublishedAt=${lastPublishedAt}`
+      ? () => `/api/god-praksis/v1?lastPublishedAt=${lastPublishedAt}`
       : null,
-    (query) => fetch(query).then((res) => res.json())
+    (query) => fetch(query).then((res) => res.json()),
   );
 
   if (data) {
@@ -94,7 +94,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
   return (
     <>
       <SEO title="Artikler" />
-      <div className="bg-surface-subtle overflow-clip">
+      <div className="overflow-clip bg-surface-subtle">
         <Header variant="subtle" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="relative grid overflow-x-clip pb-40">
@@ -103,7 +103,7 @@ const Artikler = ({ articles }: PageProps["props"]) => {
               <Heading
                 level="1"
                 size="xlarge"
-                className="text-deepblue-800 my-20 md:text-[3rem]"
+                className="my-20 text-deepblue-800 md:text-[3rem]"
               >
                 Artikler
               </Heading>

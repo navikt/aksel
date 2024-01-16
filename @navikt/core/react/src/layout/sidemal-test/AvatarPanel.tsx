@@ -1,5 +1,5 @@
-import { PersonIcon } from "@navikt/aksel-icons";
 import React from "react";
+import { PersonIcon } from "@navikt/aksel-icons";
 import { Box } from "../box";
 import { HStack } from "../stack";
 

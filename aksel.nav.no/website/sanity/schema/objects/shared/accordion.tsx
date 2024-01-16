@@ -42,7 +42,7 @@ export const Accordion = defineType({
         Rule.required()
           .min(2)
           .error(
-            "Accordion modul må ha minst 2 elementer. Bruk ExpansionCard om du bare trenger 1"
+            "Accordion modul må ha minst 2 elementer. Bruk ExpansionCard om du bare trenger 1",
           ),
     }),
   ],

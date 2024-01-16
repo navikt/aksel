@@ -19,7 +19,7 @@ updateSanity("eksempler", false);
 
 export async function updateSanity(
   directory: RootDirectoriesT,
-  isDryRun: boolean = false
+  isDryRun: boolean = false,
 ) {
   const transactionClient = noCdnClient(token).transaction();
   const folders = getDirectories(directory);
@@ -49,7 +49,7 @@ export async function updateSanity(
     });
 
   const oldSanityDocuments = await noCdnClient(token).fetch(
-    `*[_type == "kode_eksempler_fil" && variant == "${directory}"]`
+    `*[_type == "kode_eksempler_fil" && variant == "${directory}"]`,
   );
 
   let deletedIds: string[] = [];
@@ -76,20 +76,20 @@ export async function updateSanity(
     How to fix:
     - Go to links provided under and try to manually delete document.
     - You will then be prompted to update referenced document before deleting.
-    - After updating reference(s) and deleting document(s) there is no need to run the script again.`
+    - After updating reference(s) and deleting document(s) there is no need to run the script again.`,
       );
       console.log(
         JSON.stringify(
           deletedIds.map(
             (x) =>
-              `https://aksel.nav.no/admin/prod/desk/admin;eksemplerTemplates;${x}`
+              `https://aksel.nav.no/admin/prod/desk/admin;eksemplerTemplates;${x}`,
           ),
           null,
-          2
-        )
+          2,
+        ),
       );
       throw new Error(
-        `Failed when deleting old ${directory}-documentation from sanity, see warning above.`
+        `Failed when deleting old ${directory}-documentation from sanity, see warning above.`,
       );
     });
 }

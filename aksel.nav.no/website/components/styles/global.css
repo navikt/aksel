@@ -1,25 +1,25 @@
-html {
+html:has(.globalstyles) {
   scrollbar-gutter: stable;
 }
 
-code,
-pre {
+.globalstyles code,
+.globalstyles pre {
   @apply !font-mono;
 }
 
 /* stylelint-disable-next-line aksel/no-class-override */
-.navds-heading + .navds-heading {
+.globalstyles .navds-heading + .navds-heading {
   margin-top: 0;
 }
 
 /* stylelint-disable-next-line aksel/no-class-override */
-.navds-alert code {
+.globalstyles .navds-alert code {
   color: var(--a-red-500);
   background-color: transparent;
   padding: 0;
 }
 
-p {
+.globalstyles p {
   @apply max-w-text;
 }
 
@@ -27,21 +27,21 @@ p {
   @apply max-w-none;
 }
 
-a {
+:where(.globalstyles) a {
   color: inherit;
   text-decoration: inherit;
   text-underline-offset: 2px;
   text-decoration-thickness: 0.0625em;
 }
 
-[id] {
+.globalstyles [id] {
   scroll-margin-block: 5rem;
 }
 
 /* Improves rendering of images for chrome on Windows */
 /* stylelint-disable-next-line media-feature-name-no-vendor-prefix */
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
-  img {
+  .globalstyles img {
     transform: translateZ(0);
     /* stylelint-disable-next-line value-no-vendor-prefix */
     image-rendering: -webkit-optimize-contrast !important;
@@ -51,12 +51,12 @@ a {
 /* Unset for Safari 11+ */
 @media not all and (min-resolution: 0.001dpcm) {
   @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-    img {
+    .globalstyles img {
       image-rendering: unset !important;
     }
   }
 }
 
 .skiplink {
-  @apply z-modal bg-border-focus text-text-on-inverted absolute left-0 -translate-y-full p-4 no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
+  @apply absolute left-0 z-modal -translate-y-full bg-border-focus p-4 text-text-on-inverted no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
 }

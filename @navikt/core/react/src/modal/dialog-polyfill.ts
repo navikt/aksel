@@ -273,7 +273,7 @@ function dialogPolyfillInfo(dialog) {
     ["DOMAttrModified", "DOMNodeRemoved", "DOMNodeRemovedFromDocument"].forEach(
       function (name) {
         dialog.addEventListener(name, delayModel);
-      }
+      },
     );
   }
   // Note that the DOM is observed inside DialogManager while any dialog
@@ -288,11 +288,11 @@ function dialogPolyfillInfo(dialog) {
   this.backdrop_.className = "backdrop";
   this.backdrop_.addEventListener(
     "mouseup",
-    this.backdropMouseEvent_.bind(this)
+    this.backdropMouseEvent_.bind(this),
   );
   this.backdrop_.addEventListener(
     "mousedown",
-    this.backdropMouseEvent_.bind(this)
+    this.backdropMouseEvent_.bind(this),
   );
   this.backdrop_.addEventListener("click", this.backdropMouseEvent_.bind(this));
 }
@@ -387,7 +387,7 @@ dialogPolyfillInfo.prototype = /** @type {HTMLDialogElement.prototype} */ {
       e.shiftKey,
       e.metaKey,
       e.button,
-      e.relatedTarget
+      e.relatedTarget,
     );
     this.dialog_.dispatchEvent(redirectedEvent);
     e.stopPropagation();
@@ -440,17 +440,17 @@ dialogPolyfillInfo.prototype = /** @type {HTMLDialogElement.prototype} */ {
   showModal: function () {
     if (this.dialog_.hasAttribute("open")) {
       throw new Error(
-        "Failed to execute 'showModal' on dialog: The element is already open, and therefore cannot be opened modally."
+        "Failed to execute 'showModal' on dialog: The element is already open, and therefore cannot be opened modally.",
       );
     }
     if (!isConnected(this.dialog_)) {
       throw new Error(
-        "Failed to execute 'showModal' on dialog: The element is not in a Document."
+        "Failed to execute 'showModal' on dialog: The element is not in a Document.",
       );
     }
     if (!dialogPolyfill.dm.pushDialog(this)) {
       throw new Error(
-        "Failed to execute 'showModal' on dialog: There are too many open modal dialogs."
+        "Failed to execute 'showModal' on dialog: There are too many open modal dialogs.",
       );
     }
 
@@ -468,7 +468,7 @@ dialogPolyfillInfo.prototype = /** @type {HTMLDialogElement.prototype} */ {
     // Insert backdrop.
     this.dialog_.parentNode.insertBefore(
       this.backdrop_,
-      this.dialog_.nextSibling
+      this.dialog_.nextSibling,
     );
 
     // Focus on whatever inside the dialog.
@@ -484,7 +484,7 @@ dialogPolyfillInfo.prototype = /** @type {HTMLDialogElement.prototype} */ {
   close: function (opt_returnValue) {
     if (!this.dialog_.hasAttribute("open")) {
       throw new Error(
-        "Failed to execute 'close' on dialog: The element does not have an 'open' attribute, and therefore cannot be closed."
+        "Failed to execute 'close' on dialog: The element does not have an 'open' attribute, and therefore cannot be closed.",
       );
     }
     this.setOpen(false);
@@ -576,7 +576,7 @@ dialogPolyfill.forceRegisterDialog = function (element) {
     console.warn(
       "This browser already supports <dialog>, the polyfill " +
         "may not work correctly",
-      element
+      element,
     );
   }
   if (element.localName !== "dialog") {
@@ -598,7 +598,7 @@ dialogPolyfill.registerDialog = function (element) {
  * @constructor
  */
 dialogPolyfill.DialogManager = function () {
-  /** @type {!Array<!dialogPolyfillInfo>} */
+  /** @type {!dialogPolyfillInfo[]} */
   this.pendingDialogStack = [];
 
   var checkDOM = this.checkDOM_.bind(this);
@@ -616,7 +616,7 @@ dialogPolyfill.DialogManager = function () {
       this.forwardTab_ = undefined;
       e.stopPropagation();
       checkDOM([]); // sanity-check DOM
-    }.bind(this)
+    }.bind(this),
   );
 
   this.handleKey_ = this.handleKey_.bind(this);
@@ -663,7 +663,7 @@ dialogPolyfill.DialogManager.prototype.unblockDocument = function () {
   document.documentElement.removeEventListener(
     "focus",
     this.handleFocus_,
-    true
+    true,
   );
   document.removeEventListener("keydown", this.handleKey_);
   this.mo_ && this.mo_.disconnect();
@@ -697,7 +697,7 @@ dialogPolyfill.DialogManager.prototype.updateStacking = function () {
  * @return {boolean} whether candidate is contained in top dialog
  */
 dialogPolyfill.DialogManager.prototype.containedByTopDialog_ = function (
-  candidate
+  candidate,
 ) {
   while ((candidate = findNearestDialog(candidate))) {
     for (var i = 0, dpi; (dpi = this.pendingDialogStack[i]); ++i) {
@@ -769,7 +769,7 @@ dialogPolyfill.DialogManager.prototype.handleKey_ = function (event) {
  * Finds and downgrades any known modal dialogs that are no longer displayed. Dialogs that are
  * removed and immediately readded don't stay modal, they become normal.
  *
- * @param {!Array<!HTMLDialogElement>} removed that have definitely been removed
+ * @param {!HTMLDialogElement[]} removed that have definitely been removed
  */
 dialogPolyfill.DialogManager.prototype.checkDOM_ = function (removed) {
   // This operates on a clone because it may cause it to change. Each change also calls
@@ -837,7 +837,7 @@ if (needPolyfill) {
   if (testForm.method !== "dialog") {
     var methodDescriptor = Object.getOwnPropertyDescriptor(
       HTMLFormElement.prototype,
-      "method"
+      "method",
     );
     if (methodDescriptor) {
       // nb. Some older iOS and older PhantomJS fail to return the descriptor. Don't do anything
@@ -860,7 +860,7 @@ if (needPolyfill) {
       Object.defineProperty(
         HTMLFormElement.prototype,
         "method",
-        methodDescriptor
+        methodDescriptor,
       );
     }
   }
@@ -906,7 +906,7 @@ if (needPolyfill) {
 
       dialogPolyfill.formSubmitter = target;
     },
-    false
+    false,
   );
 
   /**

@@ -188,7 +188,7 @@ const modalLabelMonth = (localeCode?: string): string => {
 
 export const modalLabel = (
   localeCode: string,
-  variant: "single" | "multiple" | "range" | "month"
+  variant: "single" | "multiple" | "range" | "month",
 ) => {
   switch (variant) {
     case "single":

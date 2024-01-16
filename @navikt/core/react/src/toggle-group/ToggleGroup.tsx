@@ -1,10 +1,10 @@
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import cl from "clsx";
-import React, { forwardRef, HTMLAttributes, useState } from "react";
+import React, { HTMLAttributes, forwardRef, useState } from "react";
 import { Label } from "../typography";
-import { useId } from "../util";
-import { ToggleGroupContext } from "./context";
+import { useId } from "../util/hooks";
 import ToggleItem, { ToggleItemProps } from "./ToggleItem";
+import { ToggleGroupContext } from "./context";
 
 export interface ToggleGroupProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -81,7 +81,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       variant = "action",
       ...rest
     },
-    ref
+    ref,
   ) => {
     const [groupValue, setGroupValue] = useState(defaultValue);
     const labelId = useId();
@@ -131,7 +131,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
             className={cl(
               "navds-toggle-group",
               `navds-toggle-group--${size}`,
-              `navds-toggle-group--${variant}`
+              `navds-toggle-group--${variant}`,
             )}
             {...(describeBy && { "aria-describedby": describeBy })}
             role="radiogroup"
@@ -142,7 +142,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
         </div>
       </ToggleGroupContext.Provider>
     );
-  }
+  },
 ) as ToggleGroupComponent;
 
 ToggleGroup.Item = ToggleItem;

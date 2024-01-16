@@ -11,17 +11,17 @@ function HamburgerLink({ name, href, onClick }) {
         href={href}
         passHref
         className={cl(
-          "hover:bg-surface-action-subtle-hover focus-visible:shadow-focus relative flex h-full w-full items-center rounded px-2 focus:outline-none",
+          "relative flex h-full w-full items-center rounded px-2 hover:bg-surface-action-subtle-hover focus:outline-none focus-visible:shadow-focus",
           {
-            "before:bg-surface-action-selected pl-4 font-semibold before:absolute before:left-0 before:h-6 before:w-1 before:rounded-full":
+            "pl-4 font-semibold before:absolute before:left-0 before:h-6 before:w-1 before:rounded-full before:bg-surface-action-selected":
               asPath.startsWith(href),
             "": !asPath.startsWith(href),
-          }
+          },
         )}
         onClick={(e) => {
           amplitudeLogNavigation(
             "header",
-            e.currentTarget.getAttribute("href")
+            e.currentTarget.getAttribute("href"),
           );
           onClick();
         }}

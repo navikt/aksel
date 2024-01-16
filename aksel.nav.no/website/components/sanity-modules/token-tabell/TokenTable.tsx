@@ -42,7 +42,7 @@ const TokenTable = ({ node }: TokenTableProps) => {
             <AkselTableRow key={key} tr={[{ text: key }, { text: val }]} />
           ))}
         </AkselTable>
-        <div className="border-border-subtle bg-surface-default relative -mt-9 w-full rounded-b-lg border border-t-0 p-2 pr-14">
+        <div className="relative -mt-9 w-full rounded-b-lg border border-t-0 border-border-subtle bg-surface-default p-2 pr-14">
           <CopyButton
             copyText={Object.entries(tokens).reduce(
               (prev, cur) =>
@@ -50,7 +50,7 @@ const TokenTable = ({ node }: TokenTableProps) => {
                 `${cur[0]}: ${
                   cur[1].startsWith("--") ? `var(${cur[1]})` : `${cur[1]}`
                 };\n`,
-              ""
+              "",
             )}
             className="absolute right-2 top-2 z-10"
           />

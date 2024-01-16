@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util";
+import { OverridableComponent } from "../util/types";
 
 export interface ToggleChipsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -35,7 +35,7 @@ export const ToggleChips: OverridableComponent<
       as: Component = "button",
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <Component
@@ -45,7 +45,7 @@ export const ToggleChips: OverridableComponent<
           "navds-chips__chip navds-chips__toggle",
           className,
           `navds-chips__toggle--${variant}`,
-          { "navds-chips__toggle--with-checkmark": checkmark }
+          { "navds-chips__toggle--with-checkmark": checkmark },
         )}
         aria-pressed={selected}
       >
@@ -73,7 +73,7 @@ export const ToggleChips: OverridableComponent<
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M10 3.125C6.20304 3.125 3.125 6.20304 3.125 10C3.125 13.797 6.20304 16.875 10 16.875C13.797 16.875 16.875 13.797 16.875 10C16.875 6.20304 13.797 3.125 10 3.125ZM1.875 10C1.875 5.51269 5.51269 1.875 10 1.875C14.4873 1.875 18.125 5.51269 18.125 10C18.125 14.4873 14.4873 18.125 10 18.125C5.51269 18.125 1.875 14.4873 1.875 10Z"
-                fill="var(--a-border-default)"
+                fill="var(--ac-chip-toggle-circle-border, var(--a-border-default))"
               />
             )}
           </svg>
@@ -81,7 +81,7 @@ export const ToggleChips: OverridableComponent<
         <span className="navds-chips__chip-text">{children}</span>
       </Component>
     );
-  }
+  },
 );
 
 export default ToggleChips;

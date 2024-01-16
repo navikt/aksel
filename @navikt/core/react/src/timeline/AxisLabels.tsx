@@ -1,4 +1,3 @@
-import { Detail } from "../typography/Detail";
 import {
   addDays,
   addMonths,
@@ -16,6 +15,7 @@ import {
 } from "date-fns";
 import nbLocale from "date-fns/locale/nb";
 import React from "react";
+import { Detail } from "../typography/Detail";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { isVisible } from "./utils";
 import { horizontalPositionAndWidth } from "./utils/calc";
@@ -26,7 +26,7 @@ export const dayLabels = (
   end: Date,
   totalDays: number,
   direction: "left" | "right",
-  template: string = "dd.MM"
+  template: string = "dd.MM",
 ): AxisLabel[] => {
   const increment = Math.ceil(totalDays / 10);
   const lastDay = startOfDay(end);
@@ -39,7 +39,7 @@ export const dayLabels = (
         day,
         addDays(day, 1),
         start,
-        end
+        end,
       );
       return {
         direction,
@@ -56,7 +56,7 @@ export const monthLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right",
-  template: string = "MMM yy"
+  template: string = "MMM yy",
 ): AxisLabel[] => {
   const startMonth = startOfMonth(start);
   const endMonth = endOfMonth(end);
@@ -67,7 +67,7 @@ export const monthLabels = (
       month,
       addMonths(month, 1),
       start,
-      end
+      end,
     );
     return {
       direction,
@@ -83,7 +83,7 @@ export const yearLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right",
-  template: string = "yyyy"
+  template: string = "yyyy",
 ): AxisLabel[] => {
   const firstYear = startOfYear(start);
   const lastYear = endOfYear(end);
@@ -94,7 +94,7 @@ export const yearLabels = (
       year,
       addYears(year, 1),
       start,
-      end
+      end,
     );
     return {
       direction,
@@ -110,7 +110,7 @@ const axisLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right",
-  templates?: AxisLabelTemplates
+  templates?: AxisLabelTemplates,
 ): AxisLabel[] => {
   const totalDays = differenceInDays(end, start);
   if (totalDays < 40) {
@@ -129,7 +129,7 @@ export const AxisLabels = ({
 }) => {
   const { endDate, startDate, direction } = useTimelineContext();
   const labels = axisLabels(startDate, endDate, direction, templates).filter(
-    isVisible
+    isVisible,
   );
 
   return (

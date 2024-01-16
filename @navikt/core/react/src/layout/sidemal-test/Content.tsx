@@ -1,14 +1,14 @@
-import { LinkIcon } from "@navikt/aksel-icons";
 import React from "react";
+import { LinkIcon } from "@navikt/aksel-icons";
 import { Accordion } from "../../accordion";
 import { CopyButton } from "../../copybutton";
+import { Link } from "../../link";
+import { List } from "../../list";
 import { ReadMore } from "../../read-more";
-import { Heading, BodyLong } from "../../typography";
+import { BodyLong, Heading } from "../../typography";
 import { Box } from "../box";
 import { VStack } from "../stack";
 import { AvatarPanel } from "./AvatarPanel";
-import { List } from "../../list";
-import { Link } from "../../link";
 
 export function Content() {
   return (

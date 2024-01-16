@@ -1,6 +1,5 @@
-import { expect, jest } from "@storybook/jest";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { userEvent, within } from "@storybook/testing-library";
+import { expect, fn, userEvent, within } from "@storybook/test";
 import React, { useId, useMemo, useState } from "react";
 import { Chips, ComboboxProps, TextField, UNSAFE_Combobox } from "../../index";
 
@@ -212,11 +211,11 @@ export const Controlled: StoryFn<{
   const id = useId();
   const [value, setValue] = useState(props.value);
   const [selectedOptions, setSelectedOptions] = useState(
-    props.initialSelectedOptions
+    props.initialSelectedOptions,
   );
   const filteredOptions = useMemo(
     () => props.options.filter((option) => option.includes(value)),
-    [props.options, value]
+    [props.options, value],
   );
 
   const onToggleSelected = (option: string, isSelected: boolean) => {
@@ -460,14 +459,14 @@ export const AddWhenAddNewDisabledTest: StoryObject = {
 };
 
 export const TestThatCallbacksOnlyFireWhenExpected: StoryObj<{
-  onChange: ReturnType<typeof jest.fn>;
-  onClear: ReturnType<typeof jest.fn>;
-  onToggleSelected: ReturnType<typeof jest.fn>;
+  onChange: ReturnType<typeof fn>;
+  onClear: ReturnType<typeof fn>;
+  onToggleSelected: ReturnType<typeof fn>;
 }> = {
   args: {
-    onChange: jest.fn(),
-    onClear: jest.fn(),
-    onToggleSelected: jest.fn(),
+    onChange: fn(),
+    onClear: fn(),
+    onToggleSelected: fn(),
   },
   render: (props) => {
     return (
@@ -502,9 +501,9 @@ export const TestThatCallbacksOnlyFireWhenExpected: StoryObj<{
 
 export const TestCasingWhenAutoCompleting = {
   args: {
-    onChange: jest.fn(),
-    onClear: jest.fn(),
-    onToggleSelected: jest.fn(),
+    onChange: fn(),
+    onClear: fn(),
+    onToggleSelected: fn(),
   },
   render: (props) => {
     return (
@@ -569,20 +568,20 @@ export const TestHoverAndFocusSwitching: StoryObject = {
     await sleep(250);
     const bananaOption = canvas.getByRole("option", { name: "banana" });
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
-      bananaOption.getAttribute("id")
+      bananaOption.getAttribute("id"),
     );
 
     userEvent.keyboard("{ArrowDown}");
     await sleep(250);
     const appleOption = canvas.getByRole("option", { name: "apple" });
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
-      appleOption.getAttribute("id")
+      appleOption.getAttribute("id"),
     );
 
     userEvent.hover(bananaOption);
     await sleep(250);
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
-      bananaOption.getAttribute("id")
+      bananaOption.getAttribute("id"),
     );
   },
 };

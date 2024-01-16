@@ -1,5 +1,5 @@
-import stylelint from "stylelint";
 import selectorParser from "postcss-selector-parser";
+import stylelint from "stylelint";
 import { deprecations } from "../../deprecations";
 
 const ruleName = "aksel/no-deprecated-classes";
@@ -31,7 +31,7 @@ const ruleFunction: stylelint.Rule = () => {
             stylelint.utils.report({
               message: messages.unexpected(
                 className.value,
-                deprecation.message
+                deprecation.message,
               ),
               node,
               result: postcssResult,

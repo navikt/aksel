@@ -79,7 +79,7 @@ export const Stepper: StepperComponent = forwardRef<
       interactive = true,
       ...rest
     },
-    ref
+    ref,
   ) => {
     activeStep = activeStep - 1;
     return (
@@ -89,7 +89,7 @@ export const Stepper: StepperComponent = forwardRef<
         className={cl(
           "navds-stepper",
           orientation === "horizontal" ? "navds-stepper--horizontal" : "",
-          className
+          className,
         )}
       >
         <StepperContext.Provider
@@ -129,7 +129,7 @@ export const Stepper: StepperComponent = forwardRef<
         </StepperContext.Provider>
       </ol>
     );
-  }
+  },
 ) as StepperComponent;
 
 Stepper.Step = Step;

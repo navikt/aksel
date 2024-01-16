@@ -5,10 +5,10 @@ import {
 } from "sanity";
 
 export const createWrappedDeleteAction = (
-  deleteAction: DocumentActionComponent
+  deleteAction: DocumentActionComponent,
 ) => {
   const WrappedDelete = (
-    props: DocumentActionProps
+    props: DocumentActionProps,
   ): DocumentActionDescription | null => {
     const originalDeleteDescription = deleteAction(props);
 

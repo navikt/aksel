@@ -39,9 +39,9 @@ export const SearchResultProvider = ({
     return formatRawResults(
       context.rawData
         .filter((x) =>
-          (tags.length > 0 ? tags : allArticleDocuments).includes(x._type)
+          (tags.length > 0 ? tags : allArticleDocuments).includes(x._type),
         )
-        .slice(0, 20)
+        .slice(0, 20),
     );
   }, [context.rawData, tags]);
 

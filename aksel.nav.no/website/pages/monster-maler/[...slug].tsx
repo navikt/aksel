@@ -55,7 +55,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         params: {
           slug: slug.split("/").filter((x) => x !== "monster-maler"),
         },
-      }))
+      })),
     ),
     fallback: "blocking",
   };
@@ -100,7 +100,7 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   }
 
   const metadata: CodeExampleSchemaT["metadata"] = page.content.find(
-    (x) => x._type === "kode_eksempler"
+    (x) => x._type === "kode_eksempler",
   )?.dir?.metadata;
 
   return (
@@ -144,7 +144,7 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
               id="changelog"
               level="2"
               size="large"
-              className="max-w-text text-deepblue-800 mb-4 mt-12 scroll-mt-20 focus:outline-none"
+              className="mb-4 mt-12 max-w-text scroll-mt-20 text-deepblue-800 focus:outline-none"
             >
               Endringer
             </Heading>

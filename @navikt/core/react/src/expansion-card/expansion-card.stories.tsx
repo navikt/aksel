@@ -1,6 +1,6 @@
-import { PlantIcon } from "@navikt/aksel-icons";
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
+import { PlantIcon } from "@navikt/aksel-icons";
 import { ExpansionCard, ExpansionCardProps } from ".";
 import { BodyLong } from "../typography";
 

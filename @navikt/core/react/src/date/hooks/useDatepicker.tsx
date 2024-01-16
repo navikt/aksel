@@ -132,7 +132,7 @@ const getValidationMessage = (val = {}): DateValidationT => ({
  * });
  */
 export const useDatepicker = (
-  opt: UseDatepickerOptions = {}
+  opt: UseDatepickerOptions = {},
 ): UseDatepickerValue => {
   const {
     locale: _locale = "nb",
@@ -171,7 +171,7 @@ export const useDatepicker = (
       newOpen &&
         setMonth(selectedDay ?? defaultSelected ?? defaultMonth ?? today);
     },
-    [defaultMonth, defaultSelected, selectedDay, today]
+    [defaultMonth, defaultSelected, selectedDay, today],
   );
 
   const updateDate = (date?: Date) => {
@@ -193,7 +193,7 @@ export const useDatepicker = (
     updateDate(date);
     setMonth(date ?? defaultMonth ?? today);
     setInputValue(
-      date ? formatDateForInput(date, locale, "date", inputFormat) : ""
+      date ? formatDateForInput(date, locale, "date", inputFormat) : "",
     );
   };
 
@@ -206,7 +206,7 @@ export const useDatepicker = (
       today,
       locale,
       "date",
-      allowTwoDigitYear
+      allowTwoDigitYear,
     );
     if (isValidDate(day)) {
       setInputValue(formatDateForInput(day, locale, "date", inputFormat));
@@ -226,7 +226,7 @@ export const useDatepicker = (
       today,
       locale,
       "date",
-      allowTwoDigitYear
+      allowTwoDigitYear,
     );
     isValidDate(day) &&
       setInputValue(formatDateForInput(day, locale, "date", inputFormat));
@@ -249,7 +249,7 @@ export const useDatepicker = (
     updateValidation();
     setMonth(day);
     setInputValue(
-      day ? formatDateForInput(day, locale, "date", inputFormat) : ""
+      day ? formatDateForInput(day, locale, "date", inputFormat) : "",
     );
   };
 
@@ -263,7 +263,7 @@ export const useDatepicker = (
       today,
       locale,
       "date",
-      allowTwoDigitYear
+      allowTwoDigitYear,
     );
 
     const isBefore =

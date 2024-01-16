@@ -8,7 +8,7 @@ type GeneralPageToc = {
 };
 
 export function generateTableOfContents(
-  input: GeneralPageToc
+  input: GeneralPageToc,
 ): TableOfContentsT {
   if (!input.content) {
     return [];
@@ -72,7 +72,7 @@ export function generateTableOfContents(
  * @param content: Sanity blockcontent
  */
 function parsedContent(content: any[]) {
-  const _content: Array<{ id: string; lvl: "h2" | "h3"; text: string }> = [];
+  const _content: { id: string; lvl: "h2" | "h3"; text: string }[] = [];
 
   content.forEach((node) => {
     if (

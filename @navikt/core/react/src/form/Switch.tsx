@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, {
-  forwardRef,
   InputHTMLAttributes,
+  forwardRef,
   useEffect,
   useState,
 } from "react";
@@ -86,7 +86,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     } = props;
 
     const [checked, setChecked] = useState(
-      defaultChecked ?? checkedProp ?? false
+      defaultChecked ?? checkedProp ?? false,
     );
 
     useEffect(() => {
@@ -104,7 +104,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             "navds-switch--loading": loading,
             "navds-switch--disabled": inputProps.disabled ?? loading,
             "navds-switch--readonly": readOnly,
-          }
+          },
         )}
       >
         <input
@@ -168,7 +168,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         </label>
       </div>
     );
-  }
+  },
 );
 
 export default Switch;

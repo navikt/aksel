@@ -3,7 +3,7 @@ import { ResolverT } from "./types";
 /**
  * `runResolvers` is responsible for executing a set of resolvers for streamed data from sanity.
  * This allows running functions and parse data both at initial load `getStaticProps` and when streamed `useLiveQuery`
- * @param {Array<Resolvers>}
+ * @param {Resolvers[]}
  * @returns any
  */
 export function runResolvers({
@@ -21,10 +21,16 @@ export function runResolvers({
     /* Not allowed to edit accumulators directly as its readonly*/
     const _acc = { ...acc };
     const dataFromKeys = resolver.dataKeys.map((key) =>
-      getNestedProperty(_acc, key)
+      getNestedProperty(_acc, key),
     );
 
-    _acc[resolver.key] = resolver.cb(dataFromKeys);
+    /**
+     * In some cases the data can be undefined. This filters this out and avoids overriding it
+     */
+    if (dataFromKeys.filter((x) => !!x).length > 0) {
+      _acc[resolver.key] = resolver.cb(dataFromKeys);
+    }
+
     return _acc;
   }, data);
 }

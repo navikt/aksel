@@ -35,7 +35,7 @@ const DocumentList = ({
 
   const list = useMemo(
     () => data.filter((x) => x._type === type),
-    [data, type]
+    [data, type],
   );
 
   return (
@@ -77,10 +77,10 @@ const OutDatedList = ({ data }: { data: any[] }) => {
         (x) =>
           isAfter(x?.updateInfo?.lastVerified) &&
           ["ds_artikkel", "aksel_artikkel", "komponent_artikkel"].includes(
-            x._type
-          )
+            x._type,
+          ),
       ),
-    [data]
+    [data],
   );
 
   return (
@@ -123,7 +123,7 @@ const DraftList = ({ data }: { data: any[] }) => {
 
   const list = useMemo(
     () => data.filter((x) => x._id.startsWith("draft")),
-    [data]
+    [data],
   );
 
   return (
@@ -166,7 +166,7 @@ export const EditorPage = () => {
   const client = useClient({ apiVersion: SANITY_API_VERSION });
   const { data, error } = useSWR(
     `*[count((contributors[]->user_id.current)[@ == "${userId?.current}"]) > 0]`,
-    (query) => client.fetch(query)
+    (query) => client.fetch(query),
   );
 
   if (error || !user) {

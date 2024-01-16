@@ -1,5 +1,5 @@
-import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import { writeFileSync } from "fs";
+import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import { getColors } from "./colors";
 import { getBreakpoints } from "./getBreakpoints";
 import kebabCase from "./kebabCase";
@@ -10,7 +10,7 @@ const tokens = Object.entries(TokensBuild).reduce(
     ...old,
     [kebabCase(key).replace("a-", "").replace("az-index-", "z-index-")]: val,
   }),
-  {}
+  {},
 );
 
 const config = {
@@ -26,6 +26,8 @@ const config = {
       lineHeight: Reducer(tokens, ["font-line-height"]),
       fontFamily: Reducer(tokens, ["font-family"]),
       borderRadius: Reducer(tokens, ["border-radius"]),
+      // TODO: Add next major-release
+      // maxWidth: Reducer(tokens, ["text-width"]),
     },
   },
 };

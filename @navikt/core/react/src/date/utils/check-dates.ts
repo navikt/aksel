@@ -1,9 +1,9 @@
-import setYear from "date-fns/setYear";
 import isThisMonth from "date-fns/isThisMonth";
+import setYear from "date-fns/setYear";
 
 export const dateIsInCurrentMonth = (
   date: Date,
-  dateToCompare: Date
+  dateToCompare: Date,
 ): boolean => {
   return isThisMonth(setYear(date, Number(dateToCompare.getFullYear())));
 };

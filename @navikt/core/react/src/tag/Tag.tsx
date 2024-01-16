@@ -1,5 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { BodyShort } from "../typography";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
@@ -36,6 +36,10 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
    * @default "medium"
    */
   size?: "medium" | "small" | "xsmall";
+  /**
+   * Tag Icon
+   */
+  icon?: React.ReactNode;
 }
 
 /**
@@ -50,7 +54,7 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
  * ```
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
-  ({ className, variant, size = "medium", ...rest }, ref) => (
+  ({ children, className, variant, size = "medium", icon, ...rest }, ref) => (
     <BodyShort
       {...rest}
       ref={ref}
@@ -60,10 +64,13 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
         "navds-tag",
         className,
         `navds-tag--${variant}`,
-        `navds-tag--${size}`
+        `navds-tag--${size}`,
       )}
-    />
-  )
+    >
+      {icon && <span className="navds-tag__icon--left">{icon}</span>}
+      {children}
+    </BodyShort>
+  ),
 );
 
 export default Tag;

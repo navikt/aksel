@@ -5,7 +5,7 @@ describe("getSteps", () => {
   it("lists all pages when count is <= 7", () => {
     const count = faker.datatype.number({ min: 1, max: 7 });
     expect(getSteps({ page: 1, count })).toEqual(
-      Array.from({ length: count }, (_, i) => i + 1)
+      Array.from({ length: count }, (_, i) => i + 1),
     );
   });
 
@@ -16,7 +16,7 @@ describe("getSteps", () => {
       getSteps({
         page,
         count,
-      })
+      }),
     ).toEqual([1, 2, 3, 4, 5, "ellipsis", count]);
   });
 
@@ -27,7 +27,7 @@ describe("getSteps", () => {
       getSteps({
         page,
         count,
-      })
+      }),
     ).toEqual([
       1,
       "ellipsis",
@@ -46,7 +46,7 @@ describe("getSteps", () => {
       getSteps({
         page,
         count,
-      })
+      }),
     ).toEqual([1, "ellipsis", page - 1, page, page + 1, "ellipsis", count]);
   });
 
@@ -58,7 +58,7 @@ describe("getSteps", () => {
         page,
         count,
         siblingCount: 0,
-      })
+      }),
     ).toEqual([1, "ellipsis", page, "ellipsis", count]);
   });
 
@@ -70,7 +70,7 @@ describe("getSteps", () => {
         page,
         count,
         siblingCount: 2,
-      })
+      }),
     ).toEqual([
       1,
       "ellipsis",
@@ -92,7 +92,7 @@ describe("getSteps", () => {
         page,
         count,
         boundaryCount: 0,
-      })
+      }),
     ).toEqual(["ellipsis", page - 1, page, page + 1, "ellipsis"]);
   });
 
@@ -104,7 +104,7 @@ describe("getSteps", () => {
         page,
         count,
         boundaryCount: 2,
-      })
+      }),
     ).toEqual([
       1,
       2,

@@ -1,6 +1,6 @@
-import { InformationIcon } from "@navikt/aksel-icons";
 import { Meta } from "@storybook/react";
 import React from "react";
+import { InformationIcon } from "@navikt/aksel-icons";
 import { BodyLong, GuidePanel, VStack } from "../index";
 
 export default {
