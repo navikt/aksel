@@ -17,7 +17,7 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Heading above links
    */
-  heading?: React.ReactNode;
+  heading: React.ReactNode;
   /**
    * Allows setting a different HTML h-tag
    * @default "h2"
