@@ -67,7 +67,7 @@ const FilteredOptions = () => {
             id={filteredOptionsUtil.getIsLoadingId(id)}
             data-no-focus="true"
           >
-            <Loader aria-label="Søker..." />
+            <Loader title="Søker..." />
           </div>
         )}
         {!isLoading && filteredOptions.length === 0 && (
@@ -95,7 +95,7 @@ const FilteredOptions = () => {
                 activeDecendantId !== filteredOptionsUtil.getAddNewOptionId(id)
               ) {
                 virtualFocus.moveFocusToElement(
-                  filteredOptionsUtil.getAddNewOptionId(id)
+                  filteredOptionsUtil.getAddNewOptionId(id),
                 );
                 setIsMouseLastUsedInputDevice(true);
               }
@@ -112,7 +112,7 @@ const FilteredOptions = () => {
                 "navds-combobox__list-item__new-option--focus":
                   activeDecendantId ===
                   filteredOptionsUtil.getAddNewOptionId(id),
-              }
+              },
             )}
             role="option"
             aria-selected={false}
@@ -145,7 +145,7 @@ const FilteredOptions = () => {
                 filteredOptionsUtil.getOptionId(id, option)
               ) {
                 virtualFocus.moveFocusToElement(
-                  filteredOptionsUtil.getOptionId(id, option)
+                  filteredOptionsUtil.getOptionId(id, option),
                 );
                 setIsMouseLastUsedInputDevice(true);
               }
