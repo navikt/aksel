@@ -1,17 +1,17 @@
 import cl from "clsx";
 import React, { forwardRef, useMemo, useRef } from "react";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
+import { mergeRefs } from "../../util";
 import ClearButton from "./ClearButton";
+import ComboboxWrapper from "./ComboboxWrapper";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
+import Input from "./Input/Input";
+import { useInputContext } from "./Input/inputContext";
 import SelectedOptions from "./SelectedOptions/SelectedOptions";
+import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
 import ToggleListButton from "./ToggleListButton";
 import { ComboboxProps } from "./types";
-import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
-import ComboboxWrapper from "./ComboboxWrapper";
-import { useInputContext } from "./Input/inputContext";
-import Input from "./Input/Input";
-import { mergeRefs } from "../../util";
-import { BodyShort, ErrorMessage, Label } from "../../typography";
 
 export const Combobox = forwardRef<
   HTMLInputElement,
@@ -92,7 +92,7 @@ export const Combobox = forwardRef<
             "navds-combobox__wrapper-inner navds-text-field__input",
             {
               "navds-combobox__wrapper-inner--virtually-unfocused":
-                activeDecendantId !== null,
+                activeDecendantId !== undefined,
             }
           )}
           onClick={focusInput}

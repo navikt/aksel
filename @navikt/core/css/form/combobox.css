@@ -234,6 +234,7 @@
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
   gap: inherit;
   background-color: inherit;
   display: inherit;
@@ -247,6 +248,7 @@
   padding: var(--a-spacing-3);
   width: 100%;
   background-color: var(--ac-combobox-list-item-bg, var(--a-surface-default));
+  scroll-margin-top: 50px;
 }
 
 .navds-form-field--small .navds-combobox__list-item,
