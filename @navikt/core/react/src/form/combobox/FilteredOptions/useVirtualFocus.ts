@@ -38,7 +38,7 @@ const useVirtualFocus = (
 
   const _moveFocusAndScrollTo = (_element?: HTMLElement) => {
     setActiveElement(_element);
-    _element?.scrollIntoView({ block: "nearest" });
+    _element?.scrollIntoView?.({ block: "nearest" });
   };
 
   const moveFocusUp = () => {
