@@ -1,11 +1,11 @@
+import { Meta } from "@storybook/react";
+import React from "react";
 import {
   BabyWrappedIcon,
   BrailleIcon,
   HeadHeartIcon,
   RecycleIcon,
 } from "@navikt/aksel-icons";
-import { Meta } from "@storybook/react";
-import React from "react";
 import { List, VStack } from "..";
 
 export default {

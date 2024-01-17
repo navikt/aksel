@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 
 export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
@@ -29,7 +29,7 @@ export const Row: RowType = forwardRef(
         "navds-table__row--shade-on-hover": shadeOnHover,
       })}
     />
-  )
+  ),
 );
 
 export default Row;

@@ -1,6 +1,6 @@
-import React from "react";
 import type { Meta } from "@storybook/react";
-import { HStack, VStack, Spacer, Stack } from ".";
+import React from "react";
+import { HStack, Spacer, Stack, VStack } from ".";
 import { Box } from "../box";
 
 export default {

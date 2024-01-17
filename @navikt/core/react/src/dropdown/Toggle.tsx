@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 import { DropdownContext } from "./context";
 
 export interface ToggleProps
@@ -21,6 +22,13 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
 
     const { setAnchorEl, handleToggle, isOpen } = context;
 
+    const handleClick = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    ) => {
+      setAnchorEl(e.currentTarget);
+      handleToggle(!isOpen);
+    };
+
     return (
       <button
         {...rest}
@@ -33,16 +41,12 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
             ref.current = el;
           }
         }}
-        onClick={(e) => {
-          setAnchorEl(e.currentTarget);
-          handleToggle(!isOpen);
-          onClick && onClick(e);
-        }}
+        onClick={composeEventHandlers(onClick, handleClick)}
         aria-expanded={isOpen}
         className={cl("navds-dropdown__toggle", className)}
       />
     );
-  }
+  },
 );
 
 export default Toggle;

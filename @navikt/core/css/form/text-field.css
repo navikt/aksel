@@ -65,12 +65,16 @@
 }
 
 .navds-text-field--error > .navds-text-field__input:focus-visible:not(:hover):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--a-border-danger), var(--a-shadow-focus);
+  box-shadow:
+    0 0 0 1px var(--a-border-danger),
+    var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-text-field--error > .navds-text-field__input:focus:not(:hover):not(:disabled) {
-    box-shadow: 0 0 0 1px var(--a-border-danger), var(--a-shadow-focus);
+    box-shadow:
+      0 0 0 1px var(--a-border-danger),
+      var(--a-shadow-focus);
   }
 }
 

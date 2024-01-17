@@ -1,4 +1,4 @@
-import { createFilter, FilterPattern } from "@rollup/pluginutils";
+import { FilterPattern, createFilter } from "@rollup/pluginutils";
 import type { Config } from "@svgr/core";
 import fs from "fs";
 import type { Plugin } from "vite";
@@ -27,7 +27,7 @@ export default function viteSvgr({
         const { transform } = await import("@svgr/core");
         const svgCode = await fs.promises.readFile(
           id.replace(/\?.*$/, ""),
-          "utf8"
+          "utf8",
         );
 
         const componentCode = await transform(svgCode, svgrOptions, {

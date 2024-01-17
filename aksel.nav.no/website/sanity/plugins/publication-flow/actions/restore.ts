@@ -5,10 +5,10 @@ import {
 } from "sanity";
 
 export const createWrappedRestoreAction = (
-  restoreAction: DocumentActionComponent
+  restoreAction: DocumentActionComponent,
 ) => {
   const WrappedRestore = (
-    props: DocumentActionProps
+    props: DocumentActionProps,
   ): DocumentActionDescription | null => {
     const originalRestoreDescription = restoreAction(props);
 

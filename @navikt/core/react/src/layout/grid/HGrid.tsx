@@ -1,5 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -69,11 +69,11 @@ export const HGrid = forwardRef<HTMLDivElement, HGridProps>(
         style={styles}
       />
     );
-  }
+  },
 );
 
 function formatGrid(
-  props?: ResponsiveProp<number | string>
+  props?: ResponsiveProp<number | string>,
 ): ResponsiveProp<number | string> {
   if (!props) {
     return {};
@@ -87,7 +87,7 @@ function formatGrid(
     Object.entries(props).map(([breakpointToken, columnValue]) => [
       breakpointToken,
       getColumnValue(columnValue),
-    ])
+    ]),
   );
 }
 

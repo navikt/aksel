@@ -3,8 +3,6 @@ type TableOfContentsEntryT = {
   id: string;
 };
 
-export type TableOfContentsT = Array<
-  TableOfContentsEntryT & {
-    children: TableOfContentsEntryT[];
-  }
->;
+export type TableOfContentsT = (TableOfContentsEntryT & {
+  children: TableOfContentsEntryT[];
+})[];

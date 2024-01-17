@@ -20,7 +20,7 @@ const Video = ({ node }: VideoProps) => {
     <figure className="mb-7 grid gap-2">
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <video
-        className="focus-visible:shadow-focus-gap w-full rounded-lg focus:outline-none"
+        className="w-full rounded-lg focus:outline-none focus-visible:shadow-focus-gap"
         title={node.alt}
         playsInline
         controls

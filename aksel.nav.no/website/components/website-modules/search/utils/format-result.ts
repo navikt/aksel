@@ -17,7 +17,7 @@ export function formatResults(res: Fuse.FuseResult<FuseItemT>[]): SearchHitT[] {
 }
 
 export function formatRawResults(
-  res: FuseItemT[]
+  res: FuseItemT[],
 ): Omit<SearchHitT, "score" | "anchor">[] {
   return res.map((x) => ({
     item: omit(x, ["intro", "ingress"]) as Omit<FuseItemT, "ingress" | "intro">,

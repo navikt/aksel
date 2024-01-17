@@ -14,13 +14,17 @@
 
 .navds-help-text__button:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 1px var(--a-border-focus), inset 0 0 0 1px var(--a-border-focus);
+  box-shadow:
+    0 0 0 1px var(--a-border-focus),
+    inset 0 0 0 1px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-help-text__button:focus {
     outline: none;
-    box-shadow: 0 0 0 1px var(--a-border-focus), inset 0 0 0 1px var(--a-border-focus);
+    box-shadow:
+      0 0 0 1px var(--a-border-focus),
+      inset 0 0 0 1px var(--a-border-focus);
   }
 }
 

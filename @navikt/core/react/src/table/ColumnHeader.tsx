@@ -1,9 +1,9 @@
+import React, { forwardRef, useContext } from "react";
 import {
   ArrowDownIcon,
   ArrowUpIcon,
   ArrowsUpDownIcon,
 } from "@navikt/aksel-icons";
-import React, { forwardRef, useContext } from "react";
 import HeaderCell, { HeaderCellProps } from "./HeaderCell";
 import { TableContext } from "./context";
 
@@ -72,7 +72,7 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
         )}
       </HeaderCell>
     );
-  }
+  },
 );
 
 export default ColumnHeader;

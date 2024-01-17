@@ -1,13 +1,12 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { Loader } from "../loader";
 import { Label } from "../typography";
-import {
-  OverridableComponent,
-  mergeRefs,
-  omit,
-  useClientLayoutEffect,
-} from "../util";
+import { omit } from "../util";
+import { composeEventHandlers } from "../util/composeEventHandlers";
+import { useClientLayoutEffect } from "../util/hooks";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { OverridableComponent } from "../util/types";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -79,18 +78,18 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         iconPosition = "left",
         ...rest
       },
-      ref
+      ref,
     ) => {
       const buttonRef = useRef<HTMLButtonElement | null>(null);
       const [widthOverride, setWidthOverride] = useState<number>();
 
-      const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
+      const mergedRef = useMergeRefs(buttonRef, ref);
 
       useClientLayoutEffect(() => {
         if (loading) {
           const requestID = window.requestAnimationFrame(() => {
             setWidthOverride(
-              buttonRef?.current?.getBoundingClientRect()?.width
+              buttonRef?.current?.getBoundingClientRect()?.width,
             );
           });
           return () => {
@@ -103,22 +102,18 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
         disabled ?? widthOverride ? omit(rest, ["href"]) : rest;
 
+      const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (e.key === " " && !disabled && !widthOverride) {
+          e.currentTarget.click();
+        }
+      };
+
       return (
         <Component
           {...(Component !== "button" ? { role: "button" } : {})}
           {...filterProps}
           ref={mergedRef}
-          onKeyUp={(e: React.KeyboardEvent<HTMLButtonElement>) => {
-            filterProps.onKeyUp?.(e);
-            if (
-              e.key === " " &&
-              !disabled &&
-              !widthOverride &&
-              !e.isDefaultPrevented()
-            ) {
-              e.currentTarget.click();
-            }
-          }}
+          onKeyUp={composeEventHandlers(filterProps.onKeyUp, handleKeyUp)}
           className={cl(
             className,
             "navds-button",
@@ -128,7 +123,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
               "navds-button--loading": widthOverride,
               "navds-button--icon-only": !!icon && !children,
               "navds-button--disabled": disabled ?? widthOverride,
-            }
+            },
           )}
           style={{
             ...style,
@@ -155,7 +150,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           )}
         </Component>
       );
-    }
+    },
   );
 
 export default Button;

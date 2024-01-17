@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { Button } from "../../button";
 import { Slot } from "../Slot";
@@ -10,7 +10,7 @@ describe("Slot", () => {
       render(
         <Slot onClick={handleClick}>
           <Button>Button</Button>
-        </Slot>
+        </Slot>,
       );
       fireEvent.click(screen.getByRole("button"));
       expect(handleClick).toHaveBeenCalledTimes(1);
@@ -21,7 +21,7 @@ describe("Slot", () => {
       render(
         <Slot>
           <Button onClick={handleClick}>Button</Button>
-        </Slot>
+        </Slot>,
       );
       fireEvent.click(screen.getByRole("button"));
       expect(handleClick).toHaveBeenCalledTimes(1);
@@ -33,7 +33,7 @@ describe("Slot", () => {
       render(
         <Slot onClick={handleClickSlot}>
           <Button onClick={handleClick}>Button</Button>
-        </Slot>
+        </Slot>,
       );
       fireEvent.click(screen.getByRole("button"));
       expect(handleClickSlot).toHaveBeenCalledTimes(1);
@@ -45,7 +45,7 @@ describe("Slot", () => {
       render(
         <Slot onClick={undefined}>
           <Button onClick={handleClick}>Button</Button>
-        </Slot>
+        </Slot>,
       );
       fireEvent.click(screen.getByRole("button"));
       expect(handleClick).toHaveBeenCalledTimes(1);
@@ -56,7 +56,7 @@ describe("Slot", () => {
       render(
         <Slot onClick={handleClick}>
           <Button onClick={undefined}>Button</Button>
-        </Slot>
+        </Slot>,
       );
       fireEvent.click(screen.getByRole("button"));
       expect(handleClick).toHaveBeenCalledTimes(1);
@@ -68,10 +68,10 @@ describe("Slot", () => {
       render(
         <Slot className="class1">
           <button className="class2 class2--inline">Button</button>
-        </Slot>
+        </Slot>,
       );
       expect(screen.getByRole("button").className).toEqual(
-        "class1 class2 class2--inline"
+        "class1 class2 class2--inline",
       );
     });
 
@@ -79,10 +79,10 @@ describe("Slot", () => {
       render(
         <Slot className={undefined}>
           <button className="class2 class2--inline">Button</button>
-        </Slot>
+        </Slot>,
       );
       expect(screen.getByRole("button").className).toEqual(
-        "class2 class2--inline"
+        "class2 class2--inline",
       );
     });
 
@@ -90,7 +90,7 @@ describe("Slot", () => {
       render(
         <Slot className="class1">
           <button className={undefined}>Button</button>
-        </Slot>
+        </Slot>,
       );
       expect(screen.getByRole("button").className).toEqual("class1");
     });

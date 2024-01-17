@@ -57,12 +57,13 @@ const filtered = [
   "skrivehjelp",
   "publication_flow",
   "aksel_feedback",
+  "article_views",
   ...GP_DOCUMENT_NAMES,
 ];
 
 export const structure: StructureResolver = async (
   S,
-  { currentUser, getClient }
+  { currentUser, getClient },
 ) => {
   const ids = await getClient({ apiVersion: SANITY_API_VERSION })
     .fetch(`*[_type == "editor"]{
@@ -72,16 +73,16 @@ export const structure: StructureResolver = async (
 
   const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
   const adminOrDev = currentUser.roles.find((x) =>
-    ["developer", "administrator"].includes(x.name)
+    ["developer", "administrator"].includes(x.name),
   );
   const developer = currentUser.roles.find((x) =>
-    ["developer"].includes(x.name)
+    ["developer"].includes(x.name),
   );
 
   const outdated = (
     await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
       `*[$id in contributors[]->user_id.current]{_id, updateInfo}`,
-      { id: currentUser?.id }
+      { id: currentUser?.id },
     )
   ).filter((x) => isAfter(x.updateInfo?.lastVerified));
 
@@ -97,7 +98,7 @@ export const structure: StructureResolver = async (
               .title(
                 `Utdaterte artikler (${
                   outdated.filter((x) => !x._id.includes("draft")).length
-                })`
+                })`,
               )
               .child(
                 S.documentList()
@@ -106,7 +107,7 @@ export const structure: StructureResolver = async (
                   .params({
                     ids: outdated.map((x) => x?._id),
                   })
-                  .apiVersion(SANITY_API_VERSION)
+                  .apiVersion(SANITY_API_VERSION),
               ),
           ]
         : []),
@@ -124,7 +125,7 @@ export const structure: StructureResolver = async (
                 .id(`godpraksis_landingsside_id1`),
               S.divider(),
               ...(await GodPraksisPanes(getClient, S)),
-            ])
+            ]),
         ),
       S.listItem()
         .title("Prinsipper")
@@ -143,19 +144,19 @@ export const structure: StructureResolver = async (
                   S.documentList()
                     .title(title)
                     .filter(
-                      `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`
+                      `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`,
                     )
                     .params({ value })
-                    .apiVersion(SANITY_API_VERSION)
+                    .apiVersion(SANITY_API_VERSION),
                   /* .menuItems([
                         ...S.documentTypeList("aksel_prinsipp").getMenuItems(),
                       ]) */
-                )
+                ),
               ),
               S.listItem()
                 .title("Alle artikler")
                 .child(S.documentTypeList("aksel_prinsipp")),
-            ])
+            ]),
         ),
       S.listItem()
         .title("Grunnleggende")
@@ -170,7 +171,7 @@ export const structure: StructureResolver = async (
                 .id(`grunnleggende_landingsside_id1`),
               S.divider(),
               ...Panes("ds_artikkel", grunnleggendeKategorier, S),
-            ])
+            ]),
         ),
       S.listItem()
         .title("Mønster og Maler")
@@ -185,7 +186,7 @@ export const structure: StructureResolver = async (
                 .id(`templates_landingsside_id1`),
               S.divider(),
               ...Panes("templates_artikkel", templatesKategorier, S),
-            ])
+            ]),
         ),
       S.listItem()
         .title("Komponenter")
@@ -200,7 +201,7 @@ export const structure: StructureResolver = async (
                 .id(`komponenter_landingsside_id1`),
               S.divider(),
               ...Panes("komponent_artikkel", komponentKategorier, S),
-            ])
+            ]),
         ),
       S.listItem()
         .title("Produktbloggen")
@@ -215,7 +216,7 @@ export const structure: StructureResolver = async (
                 .id(`blogg_landingsside_id1`),
               S.divider(),
               ...Panes("aksel_blogg", [...bloggKategorier], S),
-            ])
+            ]),
         ),
       ...(adminOrDev
         ? [
@@ -237,7 +238,7 @@ export const structure: StructureResolver = async (
                       S.documentList()
                         .title("Sider")
                         .filter(`_type == 'aksel_standalone'`)
-                        .apiVersion(SANITY_API_VERSION)
+                        .apiVersion(SANITY_API_VERSION),
                       /* .menuItems([
                             ...S.documentTypeList(
                               "aksel_standalone"
@@ -248,7 +249,7 @@ export const structure: StructureResolver = async (
                       S.documentList()
                         .title("Forfattere")
                         .filter(`_type == 'editor'`)
-                        .apiVersion(SANITY_API_VERSION)
+                        .apiVersion(SANITY_API_VERSION),
                       /* .menuItems([
                             ...S.documentTypeList("editor").getMenuItems(),
                           ]) */
@@ -257,7 +258,7 @@ export const structure: StructureResolver = async (
                       S.documentList()
                         .title("Redirects")
                         .filter(`_type == 'redirect'`)
-                        .apiVersion(SANITY_API_VERSION)
+                        .apiVersion(SANITY_API_VERSION),
                       /* .menuItems([
                             ...S.documentTypeList("redirect").getMenuItems(),
                           ]) */
@@ -268,7 +269,7 @@ export const structure: StructureResolver = async (
                         S.documentList()
                           .title("Eksempler")
                           .filter(`_type == 'kode_eksempler_fil'`)
-                          .apiVersion(SANITY_API_VERSION)
+                          .apiVersion(SANITY_API_VERSION),
                       ),
                     S.listItem()
                       .title("Token-grupper Designsystemet")
@@ -276,7 +277,7 @@ export const structure: StructureResolver = async (
                         S.documentList()
                           .title("Grupper")
                           .filter(`_type == 'token_kategori'`)
-                          .apiVersion(SANITY_API_VERSION)
+                          .apiVersion(SANITY_API_VERSION),
                       ),
                     S.listItem()
                       .title("Props Designsystemet")
@@ -284,7 +285,7 @@ export const structure: StructureResolver = async (
                         S.documentList()
                           .title("Props")
                           .filter(`_type == 'ds_props'`)
-                          .apiVersion(SANITY_API_VERSION)
+                          .apiVersion(SANITY_API_VERSION),
                       ),
                     S.documentListItem()
                       .title(`Skrivehjelp`)
@@ -296,7 +297,20 @@ export const structure: StructureResolver = async (
                       .schemaType(`publication_flow`)
                       .icon(FileTextIcon)
                       .id(`publication_flow`),
-                  ])
+                    S.listItem()
+                      .title("Artikkel Visninger")
+                      .child(
+                        S.documentList()
+                          .title("Artikkel Visninger")
+                          .filter(`_type == 'article_views'`)
+                          .apiVersion(SANITY_API_VERSION)
+                          .menuItems([
+                            ...S.documentTypeList(
+                              "article_views",
+                            ).getMenuItems(),
+                          ]),
+                      ),
+                  ]),
               ),
           ]
         : []),
@@ -304,7 +318,7 @@ export const structure: StructureResolver = async (
       S.divider(),
       ...(developer
         ? S.documentTypeListItems().filter(
-            (listItem) => !filtered.includes(listItem.getId())
+            (listItem) => !filtered.includes(listItem.getId()),
           )
         : []),
     ]);
@@ -350,7 +364,7 @@ export const resolveProductionUrl = (doc) => {
 export const defaultDocumentNode = (S, { schemaType }) => {
   if (
     [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
-      schemaType
+      schemaType,
     )
   ) {
     return S.document().views([

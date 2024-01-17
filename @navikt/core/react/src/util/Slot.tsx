@@ -1,6 +1,6 @@
 // https://github.com/radix-ui/primitives/blob/main/packages/react/slot/src/Slot.tsx
 import * as React from "react";
-import mergeRefs from "./mergeRefs";
+import { mergeRefs } from "./hooks/useMergeRefs";
 
 interface SlotProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
@@ -21,18 +21,18 @@ export const Slot = React.forwardRef<HTMLElement, SlotProps>(
 
     if (React.Children.count(children) > 1) {
       console.error(
-        "Aksel: Components using 'asChild' expects to recieve a single React element child."
+        "Aksel: Components using 'asChild' expects to recieve a single React element child.",
       );
       return React.Children.only(null);
     }
 
     return null;
-  }
+  },
 );
 
 function mergeProps(
   slotProps: Record<string, any>,
-  childProps: Record<string, any>
+  childProps: Record<string, any>,
 ) {
   // all child props should override
   const overrideProps = { ...childProps };

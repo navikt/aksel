@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
-import { OverridableComponent } from "../util/OverridableComponent";
+import React, { forwardRef } from "react";
+import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
@@ -51,7 +51,7 @@ export const BodyLong: OverridableComponent<
       textColor,
       ...rest
     },
-    ref
+    ref,
   ) => (
     <Component
       {...rest}
@@ -67,10 +67,10 @@ export const BodyLong: OverridableComponent<
           align,
           visuallyHidden,
           textColor,
-        })
+        }),
       )}
     />
-  )
+  ),
 );
 
 export default BodyLong;

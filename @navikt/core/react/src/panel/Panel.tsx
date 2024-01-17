@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
-import { OverridableComponent } from "../util/OverridableComponent";
+import React, { forwardRef } from "react";
+import { OverridableComponent } from "../util/types";
 
 export interface PanelProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -38,7 +38,7 @@ export type PanelType = OverridableComponent<PanelProps, HTMLElement>;
 export const Panel: PanelType = forwardRef(
   (
     { children, className, border = false, as: Component = "div", ...rest },
-    ref
+    ref,
   ) => {
     return (
       <Component
@@ -51,7 +51,7 @@ export const Panel: PanelType = forwardRef(
         {children}
       </Component>
     );
-  }
+  },
 );
 
 export default Panel;

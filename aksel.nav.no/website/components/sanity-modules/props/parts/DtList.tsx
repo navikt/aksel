@@ -39,7 +39,7 @@ export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
         <dd className="text-base">
           {`${parent} extends ${prop.type.slice(
             prop.type.indexOf("<") + 1,
-            prop.type.lastIndexOf(">")
+            prop.type.lastIndexOf(">"),
           )}`}
         </dd>
       )}

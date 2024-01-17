@@ -1,6 +1,6 @@
-import { Tooltip } from "@navikt/ds-react";
 import { Meta } from "@storybook/react";
 import React from "react";
+import { Tooltip } from "@navikt/ds-react";
 import * as tokens from "../dist/tokens.js";
 
 export default {
@@ -11,11 +11,11 @@ export const Spacing = () => {
   const allSpacing: { [key: string]: string } = Object.entries(tokens).reduce(
     (old, [key, val]) =>
       key.startsWith("ASpacing") ? { ...old, [key]: val } : { ...old },
-    {}
+    {},
   );
 
   const sorted = Object.entries(allSpacing).sort(
-    (a, b) => Number(a[1].replace("rem", "")) - Number(b[1].replace("rem", ""))
+    (a, b) => Number(a[1].replace("rem", "")) - Number(b[1].replace("rem", "")),
   );
 
   const fontSize = 16;

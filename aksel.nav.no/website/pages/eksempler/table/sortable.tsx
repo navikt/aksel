@@ -15,7 +15,7 @@ const Example = () => {
               sort && sortKey === sort.orderBy && sort.direction === "ascending"
                 ? "descending"
                 : "ascending",
-          }
+          },
     );
   };
 

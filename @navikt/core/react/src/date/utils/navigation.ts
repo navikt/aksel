@@ -1,5 +1,5 @@
 import setYear from "date-fns/setYear";
-import { isMatch, Matcher } from "./is-match";
+import { Matcher, isMatch } from "./is-match";
 
 export const nextEnabled = (
   months,
@@ -10,7 +10,7 @@ export const nextEnabled = (
   yearState: Date,
   dropdownCaption: boolean,
   fromDate?: Date,
-  toDate?: Date
+  toDate?: Date,
 ): Date => {
   const currentIndex = currentMonth.getMonth();
 
@@ -20,7 +20,7 @@ export const nextEnabled = (
       months,
       yearState,
       disabled,
-      "home"
+      "home",
     );
     if (nextDate) {
       return nextDate;
@@ -32,7 +32,7 @@ export const nextEnabled = (
       months,
       yearState,
       disabled,
-      "end"
+      "end",
     );
     if (nextDate) {
       return nextDate;
@@ -64,7 +64,7 @@ export const nextEnabled = (
       false,
       dropdownCaption,
       fromDate,
-      toDate
+      toDate,
     );
     if (nextMonth) {
       return setYear(months[nextMonth.index], nextMonth.year);
@@ -80,7 +80,7 @@ export const nextEnabled = (
       false,
       dropdownCaption,
       fromDate,
-      toDate
+      toDate,
     );
     if (prevMonth) {
       return setYear(months[prevMonth.index], prevMonth.year);
@@ -91,7 +91,7 @@ export const nextEnabled = (
       months[currentIndex + 4] &&
       !isMatch(
         setYear(months[currentIndex + 4], yearState.getFullYear()),
-        disabled
+        disabled,
       )
     ) {
       return setYear(months[currentIndex + 4], yearState.getFullYear());
@@ -106,7 +106,7 @@ export const nextEnabled = (
       true,
       dropdownCaption,
       fromDate,
-      toDate
+      toDate,
     );
 
     if (
@@ -122,7 +122,7 @@ export const nextEnabled = (
       months[currentIndex - 4] &&
       !isMatch(
         setYear(months[currentIndex - 4], Number(yearState.getFullYear())),
-        disabled
+        disabled,
       )
     )
       return setYear(months[currentIndex - 4], Number(yearState.getFullYear()));
@@ -135,7 +135,7 @@ export const nextEnabled = (
       true,
       dropdownCaption,
       fromDate,
-      toDate
+      toDate,
     );
     if (fallbackPrev)
       return setYear(months[fallbackPrev.index], fallbackPrev.year);
@@ -152,7 +152,7 @@ const loopBack = (
   rowCheck: boolean,
   dropdownCaption: boolean,
   fromDate?: Date,
-  toDate?: Date
+  toDate?: Date,
 ): { index: number; year: number } | undefined => {
   let currentYear = setYear(yearState, Number(yearState.getFullYear()));
   for (let i = currentIndex; i >= -1; i--) {
@@ -162,7 +162,7 @@ const loopBack = (
           dropdownCaption,
           setYear(currentYear, Number(currentYear.getFullYear() - 1)),
           fromDate,
-          toDate
+          toDate,
         )
       )
         return;
@@ -173,7 +173,7 @@ const loopBack = (
     const month = months[i];
     const isDisabled = !isMatch(
       setYear(month, Number(currentYear.getFullYear())),
-      disabled
+      disabled,
     );
     if (rowCheck) {
       if (isDisabled && getRow(i) !== getRow(currentIndex)) {
@@ -196,7 +196,7 @@ const loopForward = (
   rowCheck: boolean,
   dropdownCaption: boolean,
   fromDate?: Date,
-  toDate?: Date
+  toDate?: Date,
 ): { index: number; year: number } | undefined => {
   let currentYear = setYear(yearState, Number(yearState.getFullYear()));
   for (let i = currentIndex + 1; i < months.length + 1; i++) {
@@ -206,7 +206,7 @@ const loopForward = (
           dropdownCaption,
           setYear(currentYear, Number(currentYear.getFullYear() + 1)),
           fromDate,
-          toDate
+          toDate,
         )
       )
         return;
@@ -217,7 +217,7 @@ const loopForward = (
     const month = months[i];
     const isDisabled = !isMatch(
       setYear(month, Number(currentYear.getFullYear())),
-      disabled
+      disabled,
     );
     if (rowCheck) {
       if (isDisabled && getRow(i) !== getRow(currentIndex)) {
@@ -241,7 +241,7 @@ const isOutOfRange = (
   dropdownCaption: boolean,
   year: Date,
   fromDate?: Date,
-  toDate?: Date
+  toDate?: Date,
 ): boolean => {
   if (
     dropdownCaption &&
@@ -261,7 +261,7 @@ const nextOnRow = (
   months,
   yearState: Date,
   disabled: Matcher[],
-  mode: "home" | "end"
+  mode: "home" | "end",
 ) => {
   const row = getRow(currentIndex);
   let monthsOfRow;

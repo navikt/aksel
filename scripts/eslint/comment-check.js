@@ -13,7 +13,7 @@ module.exports = {
       .getAllComments()
       .some(
         ({ value }) =>
-          value.trim() === "EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE"
+          value.trim() === "EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE",
       );
 
     return {
@@ -27,7 +27,7 @@ Add comment above default export:
             fix(fixer) {
               return fixer.insertTextBefore(
                 node,
-                "// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE\n"
+                "// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE\n",
               );
             },
           });

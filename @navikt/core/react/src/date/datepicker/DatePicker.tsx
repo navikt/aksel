@@ -1,8 +1,10 @@
 import cl from "clsx";
 import isWeekend from "date-fns/isWeekend";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
-import { mergeRefs, omit, useId } from "../../util";
+import { omit } from "../../util";
+import { useId } from "../../util/hooks";
+import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { DateContext } from "../context";
 import { DatePickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
@@ -82,13 +84,13 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onWeekNumberClick,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(wrapperRef, ref);
 
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
@@ -181,7 +183,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         </div>
       </DateContext.Provider>
     );
-  }
+  },
 ) as DatePickerComponent;
 
 DatePicker.Standalone = DatePickerStandalone;

@@ -30,7 +30,6 @@ spec:
         - host: hnbe3yhs.apicdn.sanity.io
         - host: cdn.sanity.io
       rules: []
-      env:
   gcp:
     buckets:
       - name: aksel-website-prod

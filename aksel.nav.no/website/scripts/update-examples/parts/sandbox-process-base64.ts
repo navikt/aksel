@@ -59,6 +59,6 @@ export const processAndCompressForURI = (code: string) => {
   return compressToEncodedURIComponent(
     JSON.stringify({
       code: processedCode,
-    })
+    }),
   );
 };

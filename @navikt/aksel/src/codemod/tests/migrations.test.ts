@@ -1,6 +1,6 @@
-import { getMigrationNames, getMigrationPath } from "../migrations";
-import path from "path";
 import fs from "fs";
+import path from "path";
+import { getMigrationNames, getMigrationPath } from "../migrations";
 
 describe("migrations", () => {
   const values = getMigrationNames();
@@ -10,7 +10,7 @@ describe("migrations", () => {
     const checkPath = path.join(
       process.cwd(),
       "dist/codemod",
-      `transforms/${x}.js`
+      `transforms/${x}.js`,
     );
     test(`Check transform-path: ${checkPath}`, () => {
       expect(fs.existsSync(checkPath)).toBeTruthy();

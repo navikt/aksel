@@ -3,7 +3,7 @@ import Fuse from "fuse.js";
 
 export function createSearchResult(
   result: SearchHitT[],
-  rawResults: Fuse.FuseResult<FuseItemT>[]
+  rawResults: Fuse.FuseResult<FuseItemT>[],
 ) {
   const groupedHits: GroupedHitsT = result?.reduce((prev, cur) => {
     if (cur.item._type in prev) {
@@ -20,23 +20,23 @@ export function createSearchResult(
     totalHits: result?.length ?? 0,
     hits: {
       komponent_artikkel: rawResults.filter(
-        (x: any) => x.item._type === "komponent_artikkel"
+        (x: any) => x.item._type === "komponent_artikkel",
       ).length,
       aksel_artikkel: rawResults.filter(
-        (x: any) => x.item._type === "aksel_artikkel"
+        (x: any) => x.item._type === "aksel_artikkel",
       ).length,
       ds_artikkel: rawResults.filter((x: any) => x.item._type === "ds_artikkel")
         .length,
       aksel_blogg: rawResults.filter((x: any) => x.item._type === "aksel_blogg")
         .length,
       templates_artikkel: rawResults.filter(
-        (x: any) => x.item._type === "templates_artikkel"
+        (x: any) => x.item._type === "templates_artikkel",
       ).length,
       aksel_prinsipp: rawResults.filter(
-        (x: any) => x.item._type === "aksel_prinsipp"
+        (x: any) => x.item._type === "aksel_prinsipp",
       ).length,
       aksel_standalone: rawResults.filter(
-        (x: any) => x.item._type === "aksel_prinsipp"
+        (x: any) => x.item._type === "aksel_prinsipp",
       ).length,
     },
   };

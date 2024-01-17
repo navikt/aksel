@@ -1,5 +1,117 @@
 # @navikt/ds-react
 
+## 5.15.1
+
+### Patch Changes
+
+- HelpText: HelpText-state ble ikke riktig oppdatert ved klikk ([#2643](https://github.com/navikt/aksel/pull/2643))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.15.1
+  - @navikt/aksel-icons@5.15.1
+
+## 5.15.0
+
+### Patch Changes
+
+- Updated dependencies [[`9c5288c40`](https://github.com/navikt/aksel/commit/9c5288c40559499fa4940e491890bc5dcabfe5da)]:
+  - @navikt/aksel-icons@5.15.0
+  - @navikt/ds-tokens@5.15.0
+
+## 5.14.0
+
+### Minor Changes
+
+- Intern state: Komponenter respekterer nå `e.preventDefault()` bedre når event overskrives internt i komponent. ([#2610](https://github.com/navikt/aksel/pull/2610))
+
+- Tag: Har nå innebygd støtte for ikoner ([#2611](https://github.com/navikt/aksel/pull/2611))
+
+- Table: Table.DataCell og Table.HeaderCell har nå `textSize`-prop for å justere font-size mellom 18px og 16px. ([#2613](https://github.com/navikt/aksel/pull/2613))
+
+### Patch Changes
+
+- Internt API: Oppdatert intern import/export av hooks og typer fra utils ([#2618](https://github.com/navikt/aksel/pull/2618))
+
+- Intern-API: Erstattet `mergeRefs` i `useMemo` med lokal `useMergeRefs`-hook ([#2609](https://github.com/navikt/aksel/pull/2609))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.14.0
+  - @navikt/aksel-icons@5.14.0
+
+## 5.13.0
+
+### Minor Changes
+
+- Accordion.Item, Dropdown, ReadMore og Tooltip: Har en ny prop `onOpenChange?: (open: boolean) => void;` som forteller nå-state når `open`-state endrer seg. Dette vil være nyttig hvis man ikke bruker controlled-state, men fortsatt ønsker å vite om komponenten er `open` eller ikke (f.eks logging). ([#2585](https://github.com/navikt/aksel/pull/2585))
+
+- Controlled-state: Accordion.Item, Dropdown, ReadMore, Table.ExpandableRow og Tooltip har oppdatert intern håndtering av controlled state. Endringen skal ikke påvirke dagens API. ([#2585](https://github.com/navikt/aksel/pull/2585))
+
+### Patch Changes
+
+- Page: Lagt til ny bakgrunnsfarge `surface-subtle` og ny maksbredde på Page.Block `text` ([#2572](https://github.com/navikt/aksel/pull/2572))
+
+- Updated dependencies [[`145ce2e5f`](https://github.com/navikt/aksel/commit/145ce2e5f71d397acfa3306ed7b0e4253b9e02f6)]:
+  - @navikt/ds-tokens@5.13.0
+  - @navikt/aksel-icons@5.13.0
+
+## 5.12.5
+
+### Patch Changes
+
+- MonthPicker: MonthCaption satt forrige/neste-knapper til `disabled` når de skulle være `enabled`. ([#2601](https://github.com/navikt/aksel/pull/2601))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.5
+  - @navikt/aksel-icons@5.12.5
+
+## 5.12.4
+
+### Patch Changes
+
+- Accessibility improvements to Radio and Checkbox component, so each label is only announced once with screen readers ([#2562](https://github.com/navikt/aksel/pull/2562))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.4
+  - @navikt/aksel-icons@5.12.4
+
+## 5.12.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.3
+  - @navikt/aksel-icons@5.12.3
+
+## 5.12.2
+
+### Patch Changes
+
+- :memo: Modal: Oppdatert JSDoc ([#2567](https://github.com/navikt/aksel/pull/2567))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.2
+  - @navikt/aksel-icons@5.12.2
+
+## 5.12.1
+
+### Patch Changes
+
+- Checkbox: Checkmark tilpasses bedre fontsize ([#2563](https://github.com/navikt/aksel/pull/2563))
+
+- Datepicker: Lukk-knapp i modal har nå type button for å unngå form-submition ([#2568](https://github.com/navikt/aksel/pull/2568))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.12.1
+  - @navikt/aksel-icons@5.12.1
+
+## 5.12.0
+
+### Patch Changes
+
+- Updated dependencies [[`7ff93e389`](https://github.com/navikt/aksel/commit/7ff93e389f7a399c5ceee463c1f463eb2971104b)]:
+  - @navikt/aksel-icons@5.12.0
+  - @navikt/ds-tokens@5.12.0
+
 ## 5.11.5
 
 ### Patch Changes

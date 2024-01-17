@@ -73,7 +73,7 @@ async function bundleComponents() {
     {
       from: indexSrc,
       to: indexDist,
-    }
+    },
   );
 
   fs.writeFileSync(indexDist, result.css);
@@ -108,7 +108,7 @@ function buildFragmentFiles() {
         __dirname,
         `../${componentDir}/${camelCase(x.replace("css", ""))
           .toLowerCase()
-          .replace(/ /g, "")}.css`
+          .replace(/ /g, "")}.css`,
       ),
     }));
 

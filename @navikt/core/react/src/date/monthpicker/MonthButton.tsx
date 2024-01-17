@@ -84,7 +84,7 @@ export const MonthButton = ({
           year,
           hasDropdown,
           fromDate,
-          toDate
+          toDate,
         );
         setFocus(next);
         setTabRoot(next);

@@ -9,7 +9,7 @@ StyleDictionary.registerTransform({
 });
 
 const StyleDictionaryExtended = StyleDictionary.extend(
-  __dirname + "/config.js"
+  __dirname + "/config.js",
 );
 
 StyleDictionaryExtended.buildAllPlatforms();

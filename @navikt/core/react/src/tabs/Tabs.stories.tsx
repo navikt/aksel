@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
+import { DishwasherIcon, FreezerIcon, MugIcon } from "@navikt/aksel-icons";
 import { Tabs } from ".";
-import { FreezerIcon, MugIcon, DishwasherIcon } from "@navikt/aksel-icons";
 
 export default {
   title: "ds-react/Tabs",

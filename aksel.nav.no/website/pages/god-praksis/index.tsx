@@ -23,10 +23,10 @@ import { Suspense, lazy } from "react";
 
 type PageProps = NextPageT<{
   page: AkselGodPraksisLandingPageDocT;
-  temaer: Array<AkselTemaT>;
-  resent: Array<
-    ResolveTemaT<ResolveContributorsT<ResolveSlugT<AkselGodPraksisDocT>>>
-  >;
+  temaer: AkselTemaT[];
+  resent: ResolveTemaT<
+    ResolveContributorsT<ResolveSlugT<AkselGodPraksisDocT>>
+  >[];
 }>;
 
 export const query = `*[_type == "godpraksis_landingsside"][0]{
@@ -83,14 +83,14 @@ const Page = ({ temaer, page, resent }: PageProps["props"]) => {
         image={page?.seo?.image}
       />
 
-      <div className="bg-surface-subtle relative overflow-hidden">
+      <div className="relative overflow-hidden bg-surface-subtle">
         <Header variant="transparent" />
         <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">
           <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 pt-20 sm:px-6">
             <Heading
               level="1"
               size="xlarge"
-              className="text-deepblue-800 mb-4 text-5xl"
+              className="mb-4 text-5xl text-deepblue-800"
             >
               God praksis
             </Heading>
@@ -108,7 +108,7 @@ const Page = ({ temaer, page, resent }: PageProps["props"]) => {
               <Heading
                 level="2"
                 size="medium"
-                className="text-deepblue-800 flex items-center gap-2"
+                className="flex items-center gap-2 text-deepblue-800"
               >
                 <SparklesIcon aria-hidden className="shrink-0" /> Nyeste
                 artikler

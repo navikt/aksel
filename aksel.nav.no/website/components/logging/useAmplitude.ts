@@ -13,7 +13,7 @@ export let amplitude: Partial<Pick<Types.BrowserClient, "init" | "track">> = {
           event: { event_type: "MockEvent" },
           code: 200,
           message: "Success: pre-batched amplitude-tracking",
-        })
+        }),
       ),
     };
   },
@@ -57,7 +57,7 @@ const useAmplitudeInit = () => {
         .promise.then(() =>
           batchedEvents
             .splice(0, batchedEvents.length)
-            .forEach(([event, eventData]) => amplitude.track(event, eventData))
+            .forEach(([event, eventData]) => amplitude.track(event, eventData)),
         )
         .catch(async () => {
           const { logger } = await import("../../config/logger");
@@ -75,7 +75,7 @@ function mockAmplitude() {
   amplitude = {
     track: (
       eventInput: Types.BaseEvent | string,
-      eventProperties?: Record<string, any>
+      eventProperties?: Record<string, any>,
     ) => {
       console.group("Mocked amplitude-event");
       console.table({ eventInput, ...eventProperties });
@@ -86,7 +86,7 @@ function mockAmplitude() {
             event: { event_type: "MockEvent" },
             code: 200,
             message: "Success: mocked amplitude-tracking",
-          })
+          }),
         ),
       };
     },

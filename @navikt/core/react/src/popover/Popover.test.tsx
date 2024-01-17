@@ -13,7 +13,7 @@ describe("Popover", () => {
         data-testid="popover-id"
       >
         <div />
-      </Popover>
+      </Popover>,
     );
 
     expect(screen.getByTestId("popover-id")).toBeVisible();
@@ -28,7 +28,7 @@ describe("Popover", () => {
         data-testid="popover-id"
       >
         <div />
-      </Popover>
+      </Popover>,
     );
 
     expect(screen.getByTestId("popover-id")).not.toBeVisible();
@@ -47,7 +47,7 @@ describe("Popover", () => {
           <div />
         </Popover>
         <a href="/#">link</a>
-      </div>
+      </div>,
     );
 
     await act(async () => {
@@ -70,14 +70,14 @@ describe("Popover", () => {
         >
           <div />
         </Popover>
-      </div>
+      </div>,
     );
 
     expect(screen.getByTestId("popover-id")).toBeVisible();
     fireEvent.keyDown(
       // Should work anywhere
       container,
-      { key: "Escape" }
+      { key: "Escape" },
     );
 
     expect(fn).toHaveBeenCalled();
@@ -95,7 +95,7 @@ describe("Popover", () => {
         >
           <div />
         </Popover>
-      </div>
+      </div>,
     );
 
     await act(async () => {
@@ -118,7 +118,7 @@ describe("Popover", () => {
         >
           <div />
         </Popover>
-      </div>
+      </div>,
     );
 
     expect(screen.getByTestId("popover-id")).toBeVisible();

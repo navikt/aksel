@@ -1,6 +1,7 @@
-import { BodyShort } from "../typography/BodyShort";
+import cl from "clsx";
 import { format } from "date-fns";
 import React, { forwardRef } from "react";
+import { BodyShort } from "../typography/BodyShort";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";
@@ -9,7 +10,6 @@ import {
   PositionedPeriod,
   TimelineComponentTypes,
 } from "./utils/types.internal";
-import cl from "clsx";
 
 export interface TimelineRowProps
   extends React.HTMLAttributes<HTMLOListElement> {
@@ -49,7 +49,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
     }, {} as PositionedPeriod);
 
     const firstFocusable = periods.find(
-      (p) => !!p.children || !!p.onSelectPeriod
+      (p) => !!p.children || !!p.onSelectPeriod,
     );
 
     return (
@@ -80,7 +80,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                 ? "Ingen perioder"
                 : `${format(earliest.start, "dd.MM.yyyy")} til ${format(
                     latest.end,
-                    "dd.MM.yyyy"
+                    "dd.MM.yyyy",
                   )}`
             }
             className={cl("navds-timeline__row-periods", className)}
@@ -116,7 +116,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
         </div>
       </>
     );
-  }
+  },
 ) as TimelineRowType;
 
 TimelineRow.componentType = "row";

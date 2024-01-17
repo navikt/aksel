@@ -18,7 +18,7 @@ const createPackageJsonsWithESMPointers = async () => {
       const packageJsonPath = path.join(
         buildDir,
         directoryPackage,
-        "package.json"
+        "package.json",
       );
 
       const depth = packageJsonPath.split(path.sep).length - 1;
@@ -34,7 +34,7 @@ const createPackageJsonsWithESMPointers = async () => {
       await checkPaths(packageJsonPath, packageJson);
 
       return packageJsonPath;
-    })
+    }),
   ).catch((e) => console.error(e));
 };
 
@@ -42,13 +42,13 @@ const checkPaths = async (packageJsonPath, packageJson) => {
   const [typingsEntryExist, moduleEntryExists, mainEntryExists] =
     await Promise.all([
       fse.pathExists(
-        path.resolve(path.dirname(packageJsonPath), packageJson.types)
+        path.resolve(path.dirname(packageJsonPath), packageJson.types),
       ),
       fse.pathExists(
-        path.resolve(path.dirname(packageJsonPath), packageJson.module)
+        path.resolve(path.dirname(packageJsonPath), packageJson.module),
       ),
       fse.pathExists(
-        path.resolve(path.dirname(packageJsonPath), packageJson.main)
+        path.resolve(path.dirname(packageJsonPath), packageJson.main),
       ),
       fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2)),
     ]).catch(() => null);

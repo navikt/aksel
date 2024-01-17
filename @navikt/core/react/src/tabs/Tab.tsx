@@ -2,7 +2,7 @@ import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { BodyShort } from "../typography";
-import { OverridableComponent } from "../util";
+import { OverridableComponent } from "../util/types";
 import { TabsContext } from "./context";
 
 export interface TabProps
@@ -25,7 +25,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
   forwardRef(
     (
       { className, as: Component = "button", label, icon, value, ...rest },
-      ref
+      ref,
     ) => {
       const context = useContext(TabsContext);
 
@@ -45,7 +45,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
               className,
               {
                 "navds-tabs__tab--icon-only": icon && !label,
-              }
+              },
             )}
             {...rest}
           >
@@ -60,7 +60,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
           </Component>
         </RadixTabs.Trigger>
       );
-    }
+    },
   );
 
 export default Tab;

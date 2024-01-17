@@ -1,5 +1,5 @@
-import { writeFileSync } from "fs";
 import fg from "fast-glob";
+import { writeFileSync } from "fs";
 import * as docgen from "react-docgen-typescript";
 
 const options: docgen.ParserOptions = {
@@ -15,7 +15,7 @@ const options: docgen.ParserOptions = {
             !declaration.fileName.includes("node_modules") ||
             declaration.name === "RefAttributes"
           );
-        }
+        },
       );
 
       return hasPropAdditionalDescription;
@@ -33,7 +33,7 @@ const genDocs = () => {
     .filter(
       (x) =>
         !x.toLowerCase().includes("illustration") &&
-        !x.toLowerCase().includes("pictogram")
+        !x.toLowerCase().includes("pictogram"),
     );
 
   const res: any[] = [];
@@ -59,7 +59,7 @@ const genDocs = () => {
         props: cur.props,
       },
     ],
-    []
+    [],
   );
 
   writeFileSync(`_docs.json`, JSON.stringify(cleaned, null, 2));

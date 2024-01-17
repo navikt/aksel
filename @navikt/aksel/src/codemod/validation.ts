@@ -2,9 +2,9 @@ import chalk from "chalk";
 import { Command } from "commander";
 import isGitClean from "is-git-clean";
 import {
-  getMigrationString,
   getMigrationNames,
   getMigrationPath,
+  getMigrationString,
 } from "./migrations.js";
 
 export function validateMigration(str: string, program: Command) {
@@ -12,9 +12,9 @@ export function validateMigration(str: string, program: Command) {
     program.error(
       chalk.red(
         `Migration <${str}> not found!\n${chalk.gray(
-          `\nAvailable migrations:\n${getMigrationString()}`
-        )}`
-      )
+          `\nAvailable migrations:\n${getMigrationString()}`,
+        )}`,
+      ),
     );
   }
   const path = getMigrationPath(str);
@@ -22,9 +22,9 @@ export function validateMigration(str: string, program: Command) {
     program.error(
       chalk.red(
         `Code for migration <${str}> not found!\n${chalk.gray(
-          `\nContact creator (Aksel) to get it fixed!\n`
-        )}`
-      )
+          `\nContact creator (Aksel) to get it fixed!\n`,
+        )}`,
+      ),
     );
   }
 }
@@ -51,8 +51,8 @@ export function validateGit(options: any, program: Command) {
   if (!clean) {
     program.error(
       `${chalk.yellow(
-        "\nBefore we continue, please stash or commit your git changes."
-      )}${"\nYou can use the --force flag to override this safety check."}`
+        "\nBefore we continue, please stash or commit your git changes.",
+      )}${"\nYou can use the --force flag to override this safety check."}`,
     );
   }
 }

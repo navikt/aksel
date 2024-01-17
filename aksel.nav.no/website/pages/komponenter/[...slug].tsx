@@ -110,7 +110,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         params: {
           slug: slug.split("/").filter((x) => x !== "komponenter"),
         },
-      }))
+      })),
     ),
     fallback: "blocking",
   };
@@ -169,8 +169,8 @@ const Page = ({
     page?.status?.tag === "beta"
       ? "komponent-beta"
       : page?.status?.tag === "new"
-      ? "komponent-ny"
-      : null;
+        ? "komponent-ny"
+        : null;
 
   const unsafe = page?.status?.unsafe;
   const internal = page?.status?.internal;
@@ -179,7 +179,7 @@ const Page = ({
     <BodyShort
       as="span"
       size="small"
-      className="text-text-subtle mt-4 flex flex-wrap gap-4"
+      className="mt-4 flex flex-wrap gap-4 text-text-subtle"
     >
       {pack && (
         <>
@@ -187,7 +187,7 @@ const Page = ({
             target="_blank"
             rel="noreferrer noopener"
             href={pack.git}
-            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
             onClick={() =>
               amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
@@ -201,7 +201,7 @@ const Page = ({
             target="_blank"
             rel="noreferrer noopener"
             href={`https://yarnpkg.com/package/${pack.title}`}
-            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
             onClick={() =>
               amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
@@ -220,7 +220,7 @@ const Page = ({
           target="_blank"
           rel="noreferrer noopener"
           href={page.figma_link}
-          className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+          className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
           onClick={() =>
             amplitude.track(AmplitudeEvents.link, {
               kilde: "intro-lenker komponenter",
@@ -237,7 +237,7 @@ const Page = ({
             target="_blank"
             rel="noreferrer noopener"
             href={pack.changelog}
-            className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+            className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
             onClick={() =>
               amplitude.track(AmplitudeEvents.link, {
                 kilde: "intro-lenker komponenter",
@@ -295,7 +295,7 @@ const Page = ({
                 level="2"
                 size="large"
                 id="relaterte-komponenter"
-                className="text-deepblue-800 mb-6 scroll-m-20"
+                className="mb-6 scroll-m-20 text-deepblue-800"
               >
                 Relaterte komponenter
               </Heading>

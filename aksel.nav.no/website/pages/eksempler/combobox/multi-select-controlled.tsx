@@ -9,17 +9,17 @@ const Example = () => {
   };
 
   const [selectedOptions, setSelectedOptions] = useState(
-    initialSelectedOptions
+    initialSelectedOptions,
   );
   const filteredOptions = useMemo(
     () => initialOptions.filter((option) => option.includes(value)),
-    [value]
+    [value],
   );
 
   const onToggleSelected = (
     option: string,
     isSelected: boolean,
-    isCustomOption: boolean
+    isCustomOption: boolean,
   ) => {
     if (isSelected) {
       setSelectedOptions([...selectedOptions, option]);

@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { useId } from "../../util";
+import { useId } from "../../util/hooks";
 import { Fieldset, FieldsetContext, FieldsetProps } from "../Fieldset";
 
 export interface RadioGroupContextProps {
@@ -68,7 +68,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       readOnly,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const fieldset = useContext(FieldsetContext);
 
@@ -82,7 +82,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
         className={cl(
           className,
           "navds-radio-group",
-          `navds-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`
+          `navds-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`,
         )}
         nativeReadOnly={false}
       >
@@ -99,7 +99,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
         </RadioGroupContext.Provider>
       </Fieldset>
     );
-  }
+  },
 );
 
 export default RadioGroup;

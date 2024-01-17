@@ -12,7 +12,7 @@ export const useRadio = (props: RadioProps) => {
 
   const { inputProps, readOnly, ...rest } = useFormField(
     omit(props, ["description"]),
-    "radio"
+    "radio",
   );
 
   if (!radioGroup) {

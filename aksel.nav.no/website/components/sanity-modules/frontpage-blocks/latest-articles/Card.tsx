@@ -48,13 +48,13 @@ const Card = ({ article, visible, index }: CardProps) => {
   return (
     <div
       className={cl(
-        "bg-surface-default group relative rounded-lg",
-        "focus-within:ring-border-focus ring-border-subtle-hover shadow-xsmall hover:shadow-small focus-within:ring-[3px]",
+        "group relative rounded-lg bg-surface-default",
+        "shadow-xsmall ring-border-subtle-hover focus-within:ring-[3px] focus-within:ring-border-focus hover:shadow-small",
         `transition-[opacity,transform] duration-700`,
         {
           "translate-y-0 opacity-100": visible,
           "translate-y-12 opacity-0": !visible,
-        }
+        },
       )}
       style={{ transitionDelay: `${index * 70}ms` }}
     >
@@ -65,7 +65,7 @@ const Card = ({ article, visible, index }: CardProps) => {
             "bg-deepblue-200 filter",
             {
               "hue-rotate-[65deg]": article?.status?.tag === "beta",
-            }
+            },
           )}
         >
           {article.status?.bilde ?? article.seo?.image ? (
@@ -86,7 +86,9 @@ const Card = ({ article, visible, index }: CardProps) => {
             ) : (
               <div className="relative h-[200px] w-full">
                 <NextImage
-                  src={urlFor(article.seo?.image).auto("format").url()}
+                  src={urlFor(article.seo?.image)
+                    .auto("format")
+                    .url()}
                   blurDataURL={urlFor(article.seo?.image)
                     .width(24)
                     .height(24)
@@ -124,7 +126,7 @@ const Card = ({ article, visible, index }: CardProps) => {
             onClick={(e) =>
               amplitudeLogNavigation(
                 "forside-masonary",
-                e.currentTarget.getAttribute("href")
+                e.currentTarget.getAttribute("href"),
               )
             }
           >
@@ -149,7 +151,7 @@ const Card = ({ article, visible, index }: CardProps) => {
           <BodyShort className="mt-2">{article.seo.meta}</BodyShort>
         ) : null}
         {showFooter && (
-          <span className="text-text-subtle absolute bottom-5 flex gap-2">
+          <span className="absolute bottom-5 flex gap-2 text-text-subtle">
             {article?.contributors && (
               <Detail as="span" className="font-semibold">
                 {abbrName(article?.contributors[0]?.title)}

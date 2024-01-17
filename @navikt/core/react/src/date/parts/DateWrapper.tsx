@@ -4,7 +4,7 @@ import { Button } from "../../button";
 import { Modal } from "../../modal";
 import { ModalContext } from "../../modal/ModalContext";
 import { Popover } from "../../popover";
-import { useMedia } from "../../util/useMedia";
+import { useMedia } from "../../util/hooks";
 import { modalCloseButtonLabel, modalLabel } from "../utils/labels";
 
 type DateWrapperProps = {
@@ -74,6 +74,7 @@ export const DateWrapper = ({
           variant="tertiary"
           onClick={() => modalRef?.current?.close()}
           size="small"
+          type="button"
         >
           {modalCloseButtonLabel(locale)}
         </Button>

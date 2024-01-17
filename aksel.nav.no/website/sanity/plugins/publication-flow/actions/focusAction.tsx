@@ -14,7 +14,7 @@ import useSWR from "swr";
 
 export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   const WrappedFocus = (
-    props: DocumentActionProps
+    props: DocumentActionProps,
   ): DocumentActionDescription | null => {
     const { patch, publish } = useDocumentOperation(props.id, props.type);
     const originalPublishDescription = action(props);
@@ -40,7 +40,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
                 },
               },
             ],
-            props.published
+            props.published,
           )
         : patch.execute(
             [
@@ -53,7 +53,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
                 },
               },
             ],
-            props.published
+            props.published,
           );
     };
 
@@ -160,7 +160,7 @@ interface QualityCheckContentProps {
 export const QualityCheckContent = ({ type }: QualityCheckContentProps) => {
   const client = useClient({ apiVersion: SANITY_API_VERSION });
   const { data, error } = useSWR(`*[_id == "publication_flow"][0]`, (query) =>
-    client.fetch(query)
+    client.fetch(query),
   );
 
   if (error) {

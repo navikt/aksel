@@ -1,5 +1,5 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { BodyShort, Detail } from "../typography";
 
 export interface InternalHeaderUserProps

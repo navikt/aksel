@@ -62,7 +62,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       onWeekNumberClick,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
@@ -122,7 +122,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
         />
       </div>
     );
-  }
+  },
 );
 
 export default DatePickerStandalone;

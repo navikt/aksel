@@ -16,7 +16,7 @@ const ExpansionCardContent = forwardRef<
 
   if (panelContext === null) {
     console.error(
-      "<ExpansionCard.Content> has to be used within an <ExpansionCard>"
+      "<ExpansionCard.Content> has to be used within an <ExpansionCard>",
     );
     return null;
   }

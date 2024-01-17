@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 import { BodyShort } from "../typography";
 
 export interface DataCellProps
@@ -9,6 +9,10 @@ export interface DataCellProps
    * @default "left"
    */
   align?: "left" | "center" | "right";
+  /**
+   * Adjusts font-size
+   */
+  textSize?: "medium" | "small";
 }
 
 export interface DataCellType
@@ -17,7 +21,7 @@ export interface DataCellType
   > {}
 
 export const DataCell: DataCellType = forwardRef(
-  ({ className, children = "", align, ...rest }, ref) => {
+  ({ className, children = "", align, textSize, ...rest }, ref) => {
     return (
       <BodyShort
         as="td"
@@ -25,12 +29,13 @@ export const DataCell: DataCellType = forwardRef(
         className={cl("navds-table__data-cell", className, {
           [`navds-table__data-cell--align-${align}`]: align,
         })}
+        size={textSize}
         {...rest}
       >
         {children}
       </BodyShort>
     );
-  }
+  },
 );
 
 export default DataCell;

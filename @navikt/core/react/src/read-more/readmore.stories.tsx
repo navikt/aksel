@@ -11,6 +11,7 @@ export default meta;
 export const Default: StoryFn<{
   controlled: boolean;
   size: "medium" | "small";
+  defaultOpen: boolean;
 }> = (props) => {
   const [state, setState] = useState(false);
 
@@ -20,6 +21,8 @@ export const Default: StoryFn<{
       onClick={() => setState((x) => !x)}
       header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
       size={props.size}
+      onOpenChange={console.log}
+      defaultOpen={props.defaultOpen}
     >
       <div style={{ maxWidth: 300 }}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia,
@@ -32,6 +35,7 @@ export const Default: StoryFn<{
 Default.args = {
   controlled: false,
   size: "medium",
+  defaultOpen: false,
 };
 Default.argTypes = {
   size: {

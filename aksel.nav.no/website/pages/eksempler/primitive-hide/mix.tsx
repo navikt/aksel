@@ -32,13 +32,13 @@ const Placeholder = ({
   return (
     <div
       className={cl(
-        "min-h-24 text-text-on-action grid aspect-video h-auto w-auto place-content-center rounded p-2",
+        "grid aspect-video h-auto min-h-24 w-auto place-content-center rounded p-2 text-text-on-action",
         className,
         {
           "bg-pink-600": mobil,
           "bg-violet-600": desktop,
           "bg-teal-600": !desktop && !mobil,
-        }
+        },
       )}
       style={{ padding: noPadding && 0 }}
     >

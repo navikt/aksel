@@ -88,7 +88,7 @@ export const publicationFlowConfig = definePlugin<PublicationFlowOptions>(
         return prev;
       },
     },
-  })
+  }),
 );
 
 export const publicationFlow = () =>

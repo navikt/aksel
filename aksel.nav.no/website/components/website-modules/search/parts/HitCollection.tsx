@@ -24,7 +24,7 @@ export function CollectionMapper({
           (
             [key, val]: [key: keyof typeof searchOptions, val: SearchHitT[]],
             index,
-            arr
+            arr,
           ) => {
             const prev = arr.slice(0, index);
             const total =
@@ -40,7 +40,7 @@ export function CollectionMapper({
                 hits={val}
               />
             );
-          }
+          },
         )}
     </>
   );
@@ -84,10 +84,10 @@ export function Collection({
         <h3
           className={cl("sticky top-0 z-10 p-2 px-4 md:px-10", {
             "bg-deepblue-50": ["komponent_artikkel", "ds_artikkel"].includes(
-              tag
+              tag,
             ),
             "bg-violet-50": ["aksel_prinsipp", "aksel_standalone"].includes(
-              tag
+              tag,
             ),
             "bg-teal-50": tag === "aksel_artikkel",
             "bg-pink-50": tag === "aksel_blogg",
@@ -98,7 +98,7 @@ export function Collection({
       )}
       {heading && !tag && (
         <Heading
-          className="bg-surface-subtle sticky top-0 z-10 p-2 px-4  md:px-10"
+          className="sticky top-0 z-10 bg-surface-subtle p-2 px-4  md:px-10"
           size="small"
           level="3"
         >

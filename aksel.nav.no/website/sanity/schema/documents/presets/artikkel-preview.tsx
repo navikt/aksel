@@ -18,7 +18,7 @@ export const artikkelPreview = (_type: string) => {
         const { heading, tema, kategori, type, updateInfo } = selection;
         if (
           ["ds_artikkel", "aksel_artikkel", "komponent_artikkel"].includes(
-            type
+            type,
           ) &&
           updateInfo
         ) {

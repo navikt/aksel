@@ -1,10 +1,10 @@
-import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { max, min } from "date-fns";
 import setMonth from "date-fns/setMonth";
 import setYear from "date-fns/setYear";
 import startOfMonth from "date-fns/startOfMonth";
 import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/Select";
 import { getMonths, getYears } from "../../utils/get-dates";
@@ -32,7 +32,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const handleYearChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
     const newMonth = setYear(
       startOfMonth(displayMonth),
-      Number(e.target.value)
+      Number(e.target.value),
     );
     goToMonth(startOfMonth(min([max([newMonth, fromDate]), toDate])));
   };

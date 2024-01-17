@@ -23,7 +23,7 @@ export const IconSidebar = ({
 
   const currentIcon = useMemo(
     () => Object.values(meta).find((x) => x.name === name),
-    [name]
+    [name],
   );
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export const IconSidebar = ({
         focusRef?.current?.focus?.();
       }
     },
-    [focusRef, router]
+    [focusRef, router],
   );
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export const IconSidebar = ({
   return (
     <section
       ref={wrapperRef}
-      className="animate-fadeIn min-h-96 h-fit w-full basis-1/3 py-8 focus:outline-none sm:px-6 lg:sticky lg:top-16"
+      className="h-fit min-h-96 w-full basis-1/3 animate-fadeIn py-8 focus:outline-none sm:px-6 lg:sticky lg:top-16"
       tabIndex={-1}
       aria-labelledby="icon-details"
     >
@@ -84,7 +84,7 @@ export const IconSidebar = ({
         href="/ikoner"
         scroll={false}
         prefetch={false}
-        className="min-h-11 hover:bg-surface-hover focus-visible:shadow-focus active:bg-surface-neutral-subtle-hover absolute right-2 top-4 grid aspect-square place-content-center rounded text-xl focus:outline-none"
+        className="absolute right-2 top-4 grid aspect-square min-h-11 place-content-center rounded text-xl hover:bg-surface-hover focus:outline-none focus-visible:shadow-focus active:bg-surface-neutral-subtle-hover"
         onClick={() => {
           focusRef?.current?.focus?.();
         }}

@@ -6,11 +6,11 @@ import { RootDirectoriesT } from "../types";
 
 export function extractMetadata(
   dirName: string,
-  rootDir: RootDirectoriesT
+  rootDir: RootDirectoriesT,
 ): CodeExampleSchemaT["metadata"] {
   const codeDirPath = path.resolve(
     process.cwd(),
-    `pages/${rootDir}/${dirName}`
+    `pages/${rootDir}/${dirName}`,
   );
 
   if (
@@ -22,7 +22,7 @@ export function extractMetadata(
 
   const metadata = fs.readFileSync(
     path.resolve(process.cwd(), `pages/${rootDir}/${dirName}/meta.json`),
-    "utf-8"
+    "utf-8",
   );
 
   return JSON5.parse(metadata);

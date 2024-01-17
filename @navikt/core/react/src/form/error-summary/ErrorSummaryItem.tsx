@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
-import { OverridableComponent } from "../../util";
+import React, { forwardRef } from "react";
+import { OverridableComponent } from "../../util/types";
 
 export interface ErrorSummaryItemProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -30,7 +30,7 @@ export const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
         {children}
       </Component>
     );
-  }
+  },
 );
 
 export default ErrorSummaryItem;

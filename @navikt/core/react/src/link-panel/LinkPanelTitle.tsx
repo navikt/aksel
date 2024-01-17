@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
-import { OverridableComponent } from "../util/OverridableComponent";
+import React, { forwardRef } from "react";
+import { OverridableComponent } from "../util/types";
 
 export interface LinkPanelTitleProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,7 +18,7 @@ export const LinkPanelTitle: OverridableComponent<
       "navds-link-panel__title",
       "navds-heading",
       "navds-heading--medium",
-      className
+      className,
     )}
   />
 ));

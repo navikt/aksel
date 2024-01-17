@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util";
+import { OverridableComponent } from "../util/types";
 
 export interface ExpansionCardTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement> {
@@ -25,8 +25,8 @@ export const ExpansionCardTitle: OverridableComponent<
         `navds-expansioncard__title--${size}`,
         "navds-heading",
         `navds-heading--${size}`,
-        className
+        className,
       )}
     />
-  )
+  ),
 );

@@ -3,7 +3,7 @@ import { SidebarInputNodeT, SidebarT } from "../types";
 
 export function generateSidebar(
   input: SidebarInputNodeT[],
-  type: "komponenter" | "grunnleggende" | "templates"
+  type: "komponenter" | "grunnleggende" | "templates",
 ): SidebarT {
   return sanityCategoryLookup(type)
     .map((x) => ({

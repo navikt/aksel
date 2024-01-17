@@ -17,6 +17,7 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
     document.Skrivehjelp,
     document.Publiseringsflyt,
     document.Feedback,
+    document.ArticleViews,
 
     /* Komponentsider */
     document.KodeEksempelDoc,

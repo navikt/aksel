@@ -34,18 +34,21 @@ export interface ModalProps
    */
   onClose?: React.ReactEventHandler<HTMLDialogElement>;
   /**
-   * Called when the user wants to close the modal (clicked the close button or pressed Esc).
+   * Called when the user tries to close the modal by one of the built-in methods.
+   * Used if you want to ask the user for confirmation before closing.
+   * @warning Will not always be called when pressing Esc. See `onCancel` for more info.
    * @returns Whether to close the modal
    */
   onBeforeClose?: () => boolean | void;
   /**
-   * Called when the user presses the Esc key, unless `onBeforeClose()` returns `false`.
+   * *Sometimes** called when the user presses the Esc key.
+   * @warning *Some browsers does not always trigger this event. Chrome only triggers it if you have
+   *  interacted with the modal, and will not trigger it a second time if you press Esc twice in a row.
    */
   onCancel?: React.ReactEventHandler<HTMLDialogElement>;
   /**
    * Whether to close when clicking on the backdrop.
-   *
-   * **WARNING:** Users may click outside by accident. Don't use if closing can cause data loss, or the modal contains important info.
+   * @warning Users may click outside by accident. Don't use if closing can cause data loss, or the modal contains important info.
    * @default false
    */
   closeOnBackdropClick?: boolean;

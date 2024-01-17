@@ -1,6 +1,6 @@
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Dropdown } from "..";
-import { Meta } from "@storybook/react";
 import { Button } from "../button";
 
 export default {

@@ -25,7 +25,7 @@ const updateData = async (url: string) => {
   const comparator = (
     a: Record<string, string | number | null>,
     b: Record<string, string | number | null>,
-    orderBy: string
+    orderBy: string,
   ) => {
     if ((b[orderBy] ?? "") < (a[orderBy] ?? "")) {
       return -1;
@@ -40,7 +40,7 @@ const updateData = async (url: string) => {
   const sort = newUrl.searchParams.get("sort");
 
   await new Promise((resolve) =>
-    setTimeout(resolve, Math.round(Math.random() * (1000 - 200) + 200))
+    setTimeout(resolve, Math.round(Math.random() * (1000 - 200) + 200)),
   );
 
   return {
@@ -69,7 +69,7 @@ export const Async = () => {
       page,
       sort: sort ? `${sort.orderBy}:${sort.direction}` : undefined,
     })}`,
-    (url) => updateData(url)
+    (url) => updateData(url),
   );
 
   if (!data) {
@@ -125,7 +125,7 @@ export const Async = () => {
                       sort?.direction === "ascending"
                         ? "descending"
                         : "ascending",
-                  }
+                  },
             )
           }
         >

@@ -8,7 +8,7 @@ export const formatDateForInput = (
   date: Date,
   locale: Locale,
   type: "date" | "month",
-  inputFormat?: string
+  inputFormat?: string,
 ) => {
   const INPUT_DATE_STRING_FORMAT =
     inputFormat ??

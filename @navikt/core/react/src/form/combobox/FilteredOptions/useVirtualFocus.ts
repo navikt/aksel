@@ -14,15 +14,15 @@ export type VirtualFocusType = {
 };
 
 const useVirtualFocus = (
-  containerRef: HTMLElement | null
+  containerRef: HTMLElement | null,
 ): VirtualFocusType => {
   const [index, setIndex] = useState(-1);
 
-  const listOfAllChildren: Array<HTMLElement> = containerRef?.children
+  const listOfAllChildren: HTMLElement[] = containerRef?.children
     ? Array.prototype.slice.call(containerRef?.children)
     : [];
   const elementsAbleToReceiveFocus = listOfAllChildren.filter(
-    (child) => child.getAttribute("data-no-focus") !== "true"
+    (child) => child.getAttribute("data-no-focus") !== "true",
   );
 
   const activeElement = elementsAbleToReceiveFocus[index];
@@ -34,7 +34,7 @@ const useVirtualFocus = (
   const scrollToOption = (newIndex: number) => {
     const indexOfElementToScrollTo = Math.min(
       Math.max(newIndex, 0),
-      containerRef?.children.length || 0
+      containerRef?.children.length || 0,
     );
     if (containerRef?.children[indexOfElementToScrollTo]) {
       const child = containerRef.children[indexOfElementToScrollTo];
@@ -53,14 +53,14 @@ const useVirtualFocus = (
   const moveFocusUp = () => _moveFocusAndScrollTo(Math.max(index - 1, -1));
   const moveFocusDown = () =>
     _moveFocusAndScrollTo(
-      Math.min(index + 1, elementsAbleToReceiveFocus.length - 1)
+      Math.min(index + 1, elementsAbleToReceiveFocus.length - 1),
     );
   const moveFocusToTop = () => _moveFocusAndScrollTo(-1);
   const moveFocusToBottom = () =>
     _moveFocusAndScrollTo(elementsAbleToReceiveFocus.length - 1);
   const moveFocusToElement = (id: string) => {
     const thisElement = elementsAbleToReceiveFocus.find(
-      (_element) => _element.getAttribute("id") === id
+      (_element) => _element.getAttribute("id") === id,
     );
     const indexOfElement = thisElement
       ? elementsAbleToReceiveFocus.indexOf(thisElement)

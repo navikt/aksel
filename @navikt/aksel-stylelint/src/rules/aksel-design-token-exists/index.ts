@@ -2,11 +2,10 @@ import { readFileSync } from "node:fs";
 import { Node as PostCSSNode } from "postcss";
 import valueParser from "postcss-value-parser";
 import stylelint from "stylelint";
-
 import { isCustomProperty, tokenExists } from "../../utils";
 
 const packageJson = JSON.parse(
-  readFileSync(`${__dirname}/../../../package.json`).toString()
+  readFileSync(`${__dirname}/../../../package.json`).toString(),
 );
 
 const ruleName = "aksel/design-token-exists";
@@ -36,7 +35,7 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
 const checkDeclValue = (
   value: string,
   postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode
+  rootNode: PostCSSNode,
 ) => {
   valueParser(value).walk((node) => {
     if (
@@ -59,7 +58,7 @@ const checkDeclValue = (
 const checkDeclProp = (
   prop: string,
   postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode
+  rootNode: PostCSSNode,
 ) => {
   if (
     isCustomProperty(prop) &&

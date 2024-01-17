@@ -21,7 +21,7 @@ getTestRule()({
       description: "selector with deprecated class name 1",
       message: messages.unexpected(
         "navdsi-deprecated-example",
-        deprecations[0].message
+        deprecations[0].message,
       ),
       line: 2,
       endLine: 2,
@@ -33,7 +33,7 @@ getTestRule()({
       description: "selector with deprecated class name 2",
       message: messages.unexpected(
         "navdsi-other-deprecated-example",
-        deprecations[0].message
+        deprecations[0].message,
       ),
       line: 1,
       endLine: 1,
@@ -45,7 +45,7 @@ getTestRule()({
       description: "selector with deprecated class name 1",
       message: messages.unexpected(
         "navdsi-dropdown-example",
-        deprecations[1].message
+        deprecations[1].message,
       ),
       line: 2,
       endLine: 2,

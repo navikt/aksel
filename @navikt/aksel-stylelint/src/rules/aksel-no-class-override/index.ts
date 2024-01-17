@@ -1,5 +1,5 @@
-import stylelint from "stylelint";
 import selectorParser from "postcss-selector-parser";
+import stylelint from "stylelint";
 
 const ruleName = "aksel/no-class-override";
 const url =

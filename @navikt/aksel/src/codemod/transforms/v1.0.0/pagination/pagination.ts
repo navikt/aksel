@@ -16,12 +16,12 @@ export default function transformer(file, api) {
       (attr) =>
         attr.type === "JSXAttribute" &&
         attr.name.name === "data-version" &&
-        attr.value.value === "v1"
+        attr.value.value === "v1",
     );
 
     if (!isMigrated) {
       attributes.push(
-        j.jsxAttribute(j.jsxIdentifier("data-version"), j.literal("v1"))
+        j.jsxAttribute(j.jsxIdentifier("data-version"), j.literal("v1")),
       );
     }
   }
@@ -30,12 +30,12 @@ export default function transformer(file, api) {
   function addExplicitStandardProp(node) {
     const attributes = node.openingElement.attributes;
     const variant = attributes.find(
-      (attr) => attr.type === "JSXAttribute" && attr.name.name === "size"
+      (attr) => attr.type === "JSXAttribute" && attr.name.name === "size",
     );
 
     if (!variant) {
       attributes.unshift(
-        j.jsxAttribute(j.jsxIdentifier("size"), j.literal("small"))
+        j.jsxAttribute(j.jsxIdentifier("size"), j.literal("small")),
       );
       addMigrationTag(node);
     }
@@ -59,7 +59,7 @@ export default function transformer(file, api) {
   if (j(file.source).findJSXElements(localName)) {
     root.findJSXElements(`${localName}`).forEach((parent) => {
       const skip = !!parent.value.openingElement?.attributes.find(
-        (x) => x.name.name === "data-version" && x.value.value === "v1"
+        (x) => x.name.name === "data-version" && x.value.value === "v1",
       );
 
       parent.value.openingElement?.attributes.forEach((x) => {
