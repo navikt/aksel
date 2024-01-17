@@ -145,3 +145,9 @@ export const NumberInput = () => {
     </NumberInputWrapper>
   );
 };
+
+const Comp = (props: any) => {
+  return <div>abc</div>;
+};
+
+type asdasd = typeof Comp;

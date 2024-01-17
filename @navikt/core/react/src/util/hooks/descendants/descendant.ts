@@ -1,4 +1,6 @@
-// https://github.com/chakra-ui/chakra-ui/tree/5ec0be610b5a69afba01a9c22365155c1b519136/packages/components/descendant
+/**
+ * https://github.com/chakra-ui/chakra-ui/tree/5ec0be610b5a69afba01a9c22365155c1b519136/packages/components/descendant
+ */
 import { getNextIndex, getPrevIndex, isElement, sortNodes } from "./utils";
 
 export type DescendantOptions<T = object> = T & {
@@ -32,7 +34,7 @@ export type Descendant<T, K> = DescendantOptions<K> & {
  */
 export class DescendantsManager<
   T extends HTMLElement,
-  K extends Record<string, any> = object
+  K extends Record<string, any> = object,
 > {
   private descendants = new Map<T, Descendant<T, K>>();
 
@@ -122,7 +124,7 @@ export class DescendantsManager<
     const nextEnabledIndex = getNextIndex(
       enabledIndex,
       this.enabledCount(),
-      loop
+      loop,
     );
     return this.enabledItem(nextEnabledIndex);
   };
@@ -139,7 +141,7 @@ export class DescendantsManager<
     const prevEnabledIndex = getPrevIndex(
       enabledIndex,
       this.enabledCount() - 1,
-      loop
+      loop,
     );
     return this.enabledItem(prevEnabledIndex);
   };
