@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { BodyShort, Heading } from "../../typography";
 import { useId } from "../../util/hooks";
-import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
+import ErrorSummaryItem from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -41,7 +41,7 @@ interface ErrorSummaryComponent
    * </ErrorSummary.Item>
    * ```
    */
-  Item: ErrorSummaryItemType;
+  Item: typeof ErrorSummaryItem;
 }
 
 /**

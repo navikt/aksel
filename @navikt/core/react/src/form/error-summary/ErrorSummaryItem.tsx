@@ -14,7 +14,7 @@ export interface ErrorSummaryItemProps
   href?: string;
 }
 
-export type ErrorSummaryItemType = OverridableComponent<
+type ErrorSummaryItemType = OverridableComponent<
   ErrorSummaryItemProps,
   HTMLAnchorElement
 >;
