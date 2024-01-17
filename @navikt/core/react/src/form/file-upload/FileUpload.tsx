@@ -1,16 +1,16 @@
 import React from "react";
+import { FileUploadLocaleContextProvider } from "./FileUpload.context";
 import Dropzone from "./parts/Dropzone";
 import Item from "./parts/item/Item";
 import List from "./parts/list/List";
 
 interface FileUploadProps {
   children: React.ReactNode;
-}
-
-interface FileUploadComponent extends React.ExoticComponent<FileUploadProps> {
-  Dropzone: typeof Dropzone;
-  List: typeof List;
-  Item: typeof Item;
+  /**
+   * Changes locale used for component text.
+   * @default "nb" (norsk bokmål)
+   */
+  locale?: "nb" | "nn" | "en";
 }
 
 /**
@@ -35,8 +35,11 @@ interface FileUploadComponent extends React.ExoticComponent<FileUploadProps> {
  *  <FileUpload.Item file={myStandaloneFile} />
  * ```
  */
-export const FileUpload = ((props: FileUploadProps) =>
-  props.children) as FileUploadComponent;
+export const FileUpload = ({ children, locale }: FileUploadProps) => (
+  <FileUploadLocaleContextProvider locale={locale}>
+    {children}
+  </FileUploadLocaleContextProvider>
+);
 
 FileUpload.Dropzone = Dropzone;
 FileUpload.List = List;

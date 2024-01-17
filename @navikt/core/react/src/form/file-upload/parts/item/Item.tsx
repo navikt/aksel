@@ -1,7 +1,7 @@
 import cl from "clsx";
-import React, { MouseEvent, forwardRef, useContext } from "react";
+import React, { MouseEvent, forwardRef } from "react";
 import { ErrorMessage } from "../../../../typography";
-import { FileListContext } from "../list/file-list-context";
+import { useFileUploadLocale } from "../../FileUpload.context";
 import ItemButton from "./ItemButton";
 import ItemIcon from "./ItemIcon";
 import ItemName from "./ItemName";
@@ -44,11 +44,6 @@ export interface FileItemProps {
    * Class name passed to the <div> element.
    */
   className?: string;
-  /**
-   * Changes locale used for component text.
-   * @default "nb" (norsk bokmål)
-   */
-  locale?: "nb" | "nn" | "en";
 }
 
 export const Item = forwardRef<HTMLDivElement, FileItemProps>(
@@ -62,12 +57,10 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
       className,
       href,
       onClick,
-      locale,
     }: FileItemProps,
     ref,
   ) => {
-    const context = useContext(FileListContext);
-    const finalLocale = locale || context?.locale || DEFAULT_LOCALE;
+    const locale = useFileUploadLocale()?.locale ?? DEFAULT_LOCALE;
     const isError = !!error && !status;
 
     return (
@@ -80,7 +73,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
         <ItemIcon isLoading={!!status} file={file} />
         <div className="navds-file-item__file-info">
           <ItemName file={file} href={href} onClick={onClick} />
-          {!isError && <div>{getStatusText(file, finalLocale, status)}</div>}
+          {!isError && <div>{getStatusText(file, locale, status)}</div>}
           <div
             className="navds-file-item__error"
             aria-relevant="additions removals"
@@ -93,7 +86,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
           {!status && (
             <ItemButton
               file={file}
-              locale={finalLocale}
+              locale={locale}
               onRetry={onRetry}
               onDelete={onDelete}
               error={error}

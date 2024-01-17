@@ -15,15 +15,17 @@ const fileDocx = new File(["abc"], "file.docx");
 
 export const Default: StoryObj<typeof FileUpload.List> = {
   render: (props) => (
-    <FileUpload.List {...props}>
+    <>
       <FileUpload.Item file={fileTxt} />
-      <FileUpload.Item file={fileDocx} />
-    </FileUpload.List>
+      <FileUpload.List {...props}>
+        <FileUpload.Item file={fileTxt} />
+        <FileUpload.Item file={fileDocx} />
+      </FileUpload.List>
+    </>
   ),
   args: {
     label: "Opplastede filer",
     error: "",
-    locale: "nb",
   },
 };
 
@@ -34,9 +36,6 @@ export const WithoutLabel: StoryObj<typeof FileUpload.List> = {
       <FileUpload.Item file={fileDocx} />
     </FileUpload.List>
   ),
-  args: {
-    locale: "nb",
-  },
 };
 
 export const WithError: StoryObj<typeof FileUpload.List> = {
@@ -49,32 +48,28 @@ export const WithError: StoryObj<typeof FileUpload.List> = {
   args: {
     label: "Opplastede filer",
     error: "hei jeg er en feil og jeg må rettes opp!",
-    locale: "nb",
   },
 };
 
 export const Locales: StoryObj<typeof FileUpload.List> = {
   render: () => (
     <VStack gap="10">
-      <FileUpload.List label="Bokmål" locale="nb">
+      <FileUpload.List label="Bokmål">
         <FileUpload.Item file={fileTxt} status="uploading" />
         <FileUpload.Item file={fileDocx} />
       </FileUpload.List>
 
-      <FileUpload.List label="Nynorsk" locale="nn">
+      <FileUpload.List label="Nynorsk">
         <FileUpload.Item file={fileTxt} status="uploading" />
         <FileUpload.Item file={fileDocx} />
       </FileUpload.List>
 
-      <FileUpload.List
-        label="Nynorsk med engelsk override på ett item"
-        locale="nn"
-      >
-        <FileUpload.Item file={fileTxt} locale="en" status="uploading" />
+      <FileUpload.List label="Nynorsk med engelsk override på ett item">
+        <FileUpload.Item file={fileTxt} status="uploading" />
         <FileUpload.Item file={fileDocx} status="uploading" />
       </FileUpload.List>
 
-      <FileUpload.List label="Engelsk" locale="en">
+      <FileUpload.List label="Engelsk">
         <FileUpload.Item file={fileTxt} status="uploading" />
         <FileUpload.Item file={fileDocx} />
       </FileUpload.List>

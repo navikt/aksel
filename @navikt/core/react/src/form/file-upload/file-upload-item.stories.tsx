@@ -34,7 +34,6 @@ export const Default: StoryObj<typeof FileUpload.Item> = {
   args: {
     error: "",
     href: "",
-    locale: "nb",
   },
   argTypes: {
     status: {
@@ -178,16 +177,16 @@ export const Locale: StoryObj<{ locale: "nb" | "nn" | "en" }> = {
   render: () => (
     <VStack gap="12">
       <Heading size="medium">Laster opp</Heading>
-      <FileUpload.Item file={fileTxt} status="uploading" locale="nb" />
       <FileUpload.Item file={fileTxt} status="uploading" />
-      <FileUpload.Item file={fileTxt} status="uploading" locale="nn" />
-      <FileUpload.Item file={fileTxt} status="uploading" locale="en" />
+      <FileUpload.Item file={fileTxt} status="uploading" />
+      <FileUpload.Item file={fileTxt} status="uploading" />
+      <FileUpload.Item file={fileTxt} status="uploading" />
 
       <Heading size="medium">Laster ned</Heading>
-      <FileUpload.Item file={fileTxt} status="downloading" locale="nb" />
       <FileUpload.Item file={fileTxt} status="downloading" />
-      <FileUpload.Item file={fileTxt} status="downloading" locale="nn" />
-      <FileUpload.Item file={fileTxt} status="downloading" locale="en" />
+      <FileUpload.Item file={fileTxt} status="downloading" />
+      <FileUpload.Item file={fileTxt} status="downloading" />
+      <FileUpload.Item file={fileTxt} status="downloading" />
     </VStack>
   ),
 };
