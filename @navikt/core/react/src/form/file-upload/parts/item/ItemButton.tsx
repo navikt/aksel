@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
-import { Button } from "../../../button";
+import { Button } from "../../../../button";
 import { FileItem } from "./types";
 import { getDeleteText, getRetryText } from "./utils/i18n";
 

@@ -1,7 +1,7 @@
 import React from "react";
-import Dropzone from "./Dropzone";
-import Item from "./item/Item";
-import List from "./list/List";
+import Dropzone from "./parts/Dropzone";
+import Item from "./parts/item/Item";
+import List from "./parts/list/List";
 
 interface FileUploadProps {
   children: React.ReactNode;

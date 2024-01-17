@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { MouseEvent, forwardRef, useContext } from "react";
-import { ErrorMessage } from "../../../typography";
+import { ErrorMessage } from "../../../../typography";
 import { FileListContext } from "../list/file-list-context";
 import ItemButton from "./ItemButton";
 import ItemIcon from "./ItemIcon";
@@ -64,7 +64,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
       onClick,
       locale,
     }: FileItemProps,
-    ref
+    ref,
   ) => {
     const context = useContext(FileListContext);
     const finalLocale = locale || context?.locale || DEFAULT_LOCALE;
@@ -102,13 +102,13 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 function getStatusText(
   file: FileItem,
   locale: "nb" | "nn" | "en",
-  status?: FileItemProps["status"]
+  status?: FileItemProps["status"],
 ) {
   if (status === "uploading") {
     return getUploadingText(locale);

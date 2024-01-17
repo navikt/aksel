@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "../../../link";
+import { Link } from "../../../../link";
 import { FileItem } from "./types";
 import { downloadFile } from "./utils/download-file";
 import { isNativeFile } from "./utils/file-type-checker";

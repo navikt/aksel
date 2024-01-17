@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, isValidElement } from "react";
-import { ErrorMessage, Heading } from "../../../typography";
+import { ErrorMessage, Heading } from "../../../../typography";
 import { FileListContext } from "./file-list-context";
 
 export interface FileListProps {
@@ -61,7 +61,7 @@ export const FileList = forwardRef<HTMLDivElement, FileListProps>(
         </div>
       </FileListContext.Provider>
     );
-  }
+  },
 );
 
 export default FileList;

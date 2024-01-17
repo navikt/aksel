@@ -8,18 +8,18 @@ import React, {
   useState,
 } from "react";
 import { CloudUpIcon, UploadIcon } from "@navikt/aksel-icons";
-import { Button } from "../../button";
-import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { useMergeRefs } from "../../util/hooks";
-import { omit } from "../../util/omit";
-import { FormFieldProps, useFormField } from "../useFormField";
+import { Button } from "../../../button";
+import { BodyShort, ErrorMessage, Label } from "../../../typography";
+import { useMergeRefs } from "../../../util/hooks";
+import { omit } from "../../../util/omit";
+import { FormFieldProps, useFormField } from "../../useFormField";
 import {
   getButtonText,
   getDragAndDropText,
   getDropText,
   getOrText,
-} from "./utils/i18n";
-import { partitionFiles } from "./utils/partition-files";
+} from "../utils/i18n";
+import { partitionFiles } from "../utils/partition-files";
 
 export interface OnFileSelectProps {
   allFiles: File[];
