@@ -48,16 +48,24 @@
 }
 
 .navds-accordion__item:last-child > :where(.navds-accordion__header) {
-  box-shadow: var(--__ac-accordion-header-shadow), inset 0 -2px 0 0 var(--__ac-accordion-header-shadow-color);
+  box-shadow:
+    var(--__ac-accordion-header-shadow),
+    inset 0 -2px 0 0 var(--__ac-accordion-header-shadow-color);
 }
 
 .navds-accordion__item:last-child:where(.navds-accordion__item--open) :where(.navds-accordion__header) {
-  box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent), inset 0 2px 0 0 var(--a-transparent),
+  box-shadow:
+    inset 2px 0 0 0 var(--a-transparent),
+    inset -2px 0 0 0 var(--a-transparent),
+    inset 0 2px 0 0 var(--a-transparent),
     inset 0 2px 0 0 var(--__ac-accordion-header-shadow-color);
 }
 
 .navds-accordion__item:last-child:where(.navds-accordion__item--open) {
-  box-shadow: inset 2px 0 0 0 var(--a-transparent), inset -2px 0 0 0 var(--a-transparent), inset 0 2px 0 0 var(--a-transparent),
+  box-shadow:
+    inset 2px 0 0 0 var(--a-transparent),
+    inset -2px 0 0 0 var(--a-transparent),
+    inset 0 2px 0 0 var(--a-transparent),
     inset 0 -2px 0 0 var(--__ac-accordion-header-shadow-color);
 }
 

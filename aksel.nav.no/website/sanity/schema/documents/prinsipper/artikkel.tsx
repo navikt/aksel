@@ -127,7 +127,7 @@ export const Prinsipp = defineType({
                   return `Hvert prinsipp må ha minst en hovedside. Velg en hovedside før du fortsetter`;
                 }
                 return true;
-              }
+              },
             ),
         }),
       ],

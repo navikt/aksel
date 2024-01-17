@@ -16,7 +16,7 @@ export const ExpansionCardDescription = forwardRef<
 
   if (panelContext === null) {
     console.error(
-      "<ExpansionCard.Description> has to be used within an <ExpansionCard>"
+      "<ExpansionCard.Description> has to be used within an <ExpansionCard>",
     );
     return null;
   }

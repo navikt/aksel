@@ -1,8 +1,9 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label } from "../typography";
-import { omit, useId } from "../util";
+import { omit } from "../util";
 import TextareaAutosize from "../util/TextareaAutoSize";
+import { useId } from "../util/hooks";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import Counter from "./TextareaCounter";
 import { FormFieldProps, useFormField } from "./useFormField";
@@ -102,7 +103,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
     const [controlledValue, setControlledValue] = useState<string>(
-      props?.defaultValue ?? ""
+      props?.defaultValue ?? "",
     );
 
     const getMinRows = () => {
@@ -131,7 +132,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-textarea--autoscrollbar": UNSAFE_autoScrollbar,
             [`navds-textarea--resize-${resize === true ? "both" : resize}`]:
               resize,
-          }
+          },
         )}
       >
         <Label
@@ -172,7 +173,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             className={cl(
               "navds-textarea__input",
               "navds-body-short",
-              `navds-body-short--${size ?? "medium"}`
+              `navds-body-short--${size ?? "medium"}`,
             )}
             {...(describedBy ? { "aria-describedby": describedBy } : {})}
           />
@@ -202,7 +203,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default Textarea;

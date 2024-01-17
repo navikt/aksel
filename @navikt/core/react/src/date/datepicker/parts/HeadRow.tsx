@@ -1,5 +1,5 @@
+import { Locale, addDays, startOfWeek } from "date-fns";
 import React from "react";
-import { addDays, Locale, startOfWeek } from "date-fns";
 import { useDayPicker } from "react-day-picker";
 import { Hide } from "../../../layout/responsive";
 

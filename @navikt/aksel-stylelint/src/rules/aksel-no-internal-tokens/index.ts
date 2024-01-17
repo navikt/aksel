@@ -1,5 +1,5 @@
-import stylelint from "stylelint";
 import valueParser from "postcss-value-parser";
+import stylelint from "stylelint";
 
 const ruleName = "aksel/no-internal-tokens";
 const url =

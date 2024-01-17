@@ -1,11 +1,11 @@
 import { act, fireEvent, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import React from "react";
 import {
   focusVisible,
-  simulatePointerDown,
   renderWithStyles as render,
+  simulatePointerDown,
 } from "../../tests/utils";
-import userEvent from "@testing-library/user-event";
 import Tooltip from "./Tooltip";
 
 describe("Tooltip", () => {
@@ -15,7 +15,7 @@ describe("Tooltip", () => {
         <button id="testChild" type="submit">
           Hello World
         </button>
-      </Tooltip>
+      </Tooltip>,
     );
 
     expect(screen.getByRole("tooltip")).toBeVisible();
@@ -27,7 +27,7 @@ describe("Tooltip", () => {
         <button id="testChild" type="submit">
           Hello World
         </button>
-      </Tooltip>
+      </Tooltip>,
     );
 
     expect(screen.getByRole("tooltip")).toBeVisible();
@@ -39,7 +39,7 @@ describe("Tooltip", () => {
         <button id="testChild" type="submit">
           Hello World
         </button>
-      </Tooltip>
+      </Tooltip>,
     );
     simulatePointerDown();
 
@@ -53,7 +53,7 @@ describe("Tooltip", () => {
         <button id="testChild" type="submit">
           Hello World
         </button>
-      </Tooltip>
+      </Tooltip>,
     );
     simulatePointerDown();
 
@@ -72,7 +72,7 @@ describe("Tooltip", () => {
         <button id="testChild" type="submit">
           Hello World
         </button>
-      </Tooltip>
+      </Tooltip>,
     );
 
     await act(async () => {
@@ -94,7 +94,7 @@ describe("Tooltip", () => {
           </button>
         </Tooltip>
         <a href="/#">link</a>
-      </div>
+      </div>,
     );
 
     simulatePointerDown(screen.getByRole("button"));
@@ -116,7 +116,7 @@ describe("Tooltip", () => {
             Hello World
           </button>
         </Tooltip>
-      </div>
+      </div>,
     );
 
     simulatePointerDown(screen.getByRole("button"));
@@ -137,7 +137,7 @@ describe("Tooltip", () => {
           </button>
         </Tooltip>
         <a href="/#">link</a>
-      </div>
+      </div>,
     );
 
     simulatePointerDown(screen.getByRole("button"));

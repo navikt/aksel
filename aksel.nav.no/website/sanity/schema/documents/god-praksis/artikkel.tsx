@@ -1,5 +1,7 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
+
+/* import { gpTaxonomyObject } from "../../../plugins/god-praksis-taxonomy/taxonomy-object"; */
 import { WorkspaceT } from "../../util";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import { editorField } from "../presets/editors";
@@ -36,9 +38,12 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
           ],
     ...artikkelPreview("God praksis"),
     fields: [
+      // TODO: This will be the new data for "widget"-input when picking taxonomy
+      /* gpTaxonomyObject, */
       oppdateringsvarsel,
       ...hiddenFields,
       defineField({
+        hidden: () => workspace !== "staging",
         name: "innholdstype",
         title: "Innholdstype",
         type: "reference",
@@ -46,18 +51,15 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
         options: {
           disableNew: true,
         },
-        /* TODO: Remove after God-praksis update */
-        hidden: () => workspace !== "staging",
         group: "staging",
         /* Add required after update */
         /* validation: (Rule) => Rule.required(), */
       }),
       defineField({
+        hidden: () => workspace !== "staging",
         name: "undertema",
         title: "Undertema",
         type: "array",
-        /* TODO: Remove after God-praksis update */
-        hidden: () => workspace !== "staging",
         group: "staging",
         /* Add required after update */
         /* validation: (Rule) => Rule.required(), */

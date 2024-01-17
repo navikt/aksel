@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -43,7 +43,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
       as: As = "div",
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <As
@@ -58,7 +58,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
             "navds-skeleton--no-height": !height,
             "navds-skeleton--no-width": !width,
             "navds-skeleton--inline": As === "span",
-          }
+          },
         )}
         style={{ ...style, width, height }}
         aria-hidden
@@ -66,7 +66,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
         {children}
       </As>
     );
-  }
+  },
 );
 
 export default Skeleton;

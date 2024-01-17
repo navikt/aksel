@@ -1,5 +1,5 @@
-import startCase from "lodash.startcase";
 import camelCase from "lodash.camelCase";
+import startCase from "lodash.startcase";
 
 export const resolveName = (icon) => {
   const isVariant = icon.name.startsWith("Variant=");

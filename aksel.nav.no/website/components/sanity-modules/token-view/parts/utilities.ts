@@ -14,7 +14,7 @@ export const getColorString = (s: string) => {
 };
 
 export const getGlobalReference = (
-  semanticValue: string
+  semanticValue: string,
 ): { name: string; value: string } => {
   const globalRefs = Object.entries(docs)
     .filter(([key]) => key.startsWith("global-"))

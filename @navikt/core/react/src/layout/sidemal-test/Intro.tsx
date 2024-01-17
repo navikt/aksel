@@ -1,7 +1,7 @@
-import { LinkIcon } from "@navikt/aksel-icons";
 import React from "react";
+import { LinkIcon } from "@navikt/aksel-icons";
 import { CopyButton } from "../../copybutton";
-import { Heading, BodyLong, Detail, Label } from "../../typography";
+import { BodyLong, Detail, Heading, Label } from "../../typography";
 import { Box } from "../box";
 import { HStack, VStack } from "../stack";
 

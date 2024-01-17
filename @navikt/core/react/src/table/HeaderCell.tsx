@@ -9,6 +9,10 @@ export interface HeaderCellProps
    * @default "left"
    */
   align?: "left" | "center" | "right";
+  /**
+   * Adjusts font-size
+   */
+  textSize?: "medium" | "small";
 }
 
 export interface HeaderCellType
@@ -17,19 +21,20 @@ export interface HeaderCellType
   > {}
 
 export const HeaderCell: HeaderCellType = forwardRef(
-  ({ className, children, align, ...rest }, ref) => {
+  ({ className, children, align, textSize, ...rest }, ref) => {
     return (
       <th
         ref={ref}
         className={cl("navds-table__header-cell", "navds-label", className, {
           [`navds-table__header-cell--align-${align}`]: align,
+          "navds-label--small": textSize === "small",
         })}
         {...rest}
       >
         {children}
       </th>
     );
-  }
+  },
 );
 
 export default HeaderCell;

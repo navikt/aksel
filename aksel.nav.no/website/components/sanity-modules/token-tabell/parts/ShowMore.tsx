@@ -1,7 +1,7 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
-import { Button, mergeRefs, useId, type HeadingProps } from "@navikt/ds-react";
+import { Button, useId, type HeadingProps } from "@navikt/ds-react";
 import cl from "clsx";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 
 export interface ShowMoreProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "onClick"> {
@@ -78,10 +78,10 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
       "aria-labelledby": ariaLabelledby,
       ...rest
     },
-    ref
+    /* ref, */
   ) => {
     const localRef = useRef<HTMLElement>(null);
-    const mergedRef = useMemo(() => mergeRefs([localRef, ref]), [ref]);
+    /* const mergedRef = useMemo(() => mergeRefs([localRef, ref]), [ref]); */
     const [isOpen, setIsOpen] = useState(false);
     const ariaLabelId = useId();
 
@@ -89,12 +89,12 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
 
     return (
       <Component
-        ref={mergedRef}
+        ref={localRef}
         className={cl(
           "navds-show-more",
           `navds-show-more--${variant}`,
           className,
-          { "navds-show-more--closed": !isOpen }
+          { "navds-show-more--closed": !isOpen },
         )}
         aria-labelledby={
           !ariaLabelledby && !rest["aria-label"] ? ariaLabelId : ariaLabelledby
@@ -136,7 +136,7 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
         </div>
       </Component>
     );
-  }
+  },
 );
 
 export default ShowMore;

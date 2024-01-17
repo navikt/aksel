@@ -1,8 +1,8 @@
-import React from "react";
 import { getUnixTime } from "date-fns";
-import { useDayPicker, Day } from "react-day-picker";
-import WeekNumber from "./WeekNumber";
+import React from "react";
+import { Day, useDayPicker } from "react-day-picker";
 import { Hide } from "../../../layout/responsive";
+import WeekNumber from "./WeekNumber";
 
 /**
  * The props for the {@link Row} component.

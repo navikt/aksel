@@ -10,8 +10,8 @@ sitemapPages(token)
   .then((pages) =>
     fs.writeFileSync(
       "./e2e/sitemap-urls.json",
-      JSON.stringify(pages.map(({ path }) => `/${path}`))
-    )
+      JSON.stringify(pages.map(({ path }) => `/${path}`)),
+    ),
   )
   .catch((e) => {
     console.error("Failed generating urls for e2e tests");

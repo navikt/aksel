@@ -51,13 +51,13 @@ export const BloggList = ({
           {getAuthors(blogg).length > 0 ? (
             <BodyShort
               size="small"
-              className="text-text-subtle mt-4 flex gap-2"
+              className="mt-4 flex gap-2 text-text-subtle"
             >
               <span className="font-semibold">{getAuthors(blogg)[0]}</span>
               <span className="animate-fadeIn">{date}</span>
             </BodyShort>
           ) : (
-            <BodyShort size="small" className="text-text-subtle mt-4">
+            <BodyShort size="small" className="mt-4 text-text-subtle">
               <span className="animate-fadeIn">{date}</span>
             </BodyShort>
           )}
@@ -99,13 +99,13 @@ export const BloggList = ({
           {getAuthors(blogg).length > 0 ? (
             <BodyShort
               size="small"
-              className="text-text-subtle mt-4 flex gap-2"
+              className="mt-4 flex gap-2 text-text-subtle"
             >
               <span className="font-semibold">{getAuthors(blogg)[0]}</span>
               <span>{date}</span>
             </BodyShort>
           ) : (
-            <BodyShort size="small" className="text-text-subtle mt-4">
+            <BodyShort size="small" className="mt-4 text-text-subtle">
               <span>{date}</span>
             </BodyShort>
           )}

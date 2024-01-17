@@ -1,12 +1,12 @@
+import { Meta } from "@storybook/react";
+import React from "react";
 import {
   ChevronDownIcon,
   ExternalLinkIcon,
   MenuGridIcon,
 } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail } from "@navikt/ds-react";
-import { Meta } from "@storybook/react";
-import React from "react";
-import { InternalHeader, Dropdown } from "..";
+import { Dropdown, InternalHeader } from "..";
 
 export default {
   title: "ds-react/InternalHeader",

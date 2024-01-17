@@ -1,19 +1,18 @@
-import React, {
-  useState,
-  useMemo,
-  createContext,
-  useContext,
-  useCallback,
-  SetStateAction,
-} from "react";
 import cl from "clsx";
-import { useCustomOptionsContext } from "../customOptionsContext";
+import React, {
+  SetStateAction,
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
+import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/inputContext";
-import usePrevious from "../../../util/usePrevious";
-import { useClientLayoutEffect } from "../../../util";
+import { useCustomOptionsContext } from "../customOptionsContext";
+import { ComboboxProps } from "../types";
 import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
-import { ComboboxProps } from "../types";
 
 type FilteredOptionsProps = {
   children: any;
@@ -46,7 +45,7 @@ type FilteredOptionsContextType = {
   virtualFocus: VirtualFocusType;
 };
 const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
-  {} as FilteredOptionsContextType
+  {} as FilteredOptionsContextType,
 );
 
 export const FilteredOptionsProvider = ({
@@ -99,9 +98,9 @@ export const FilteredOptionsProvider = ({
           [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
             ? value
             : undefined,
-        }
+        },
       ),
-    [allowNewValues, id, options, value]
+    [allowNewValues, id, options, value],
   );
 
   useClientLayoutEffect(() => {
@@ -112,7 +111,7 @@ export const FilteredOptionsProvider = ({
       filteredOptions.length > 0
     ) {
       setValue(
-        `${searchTerm}${filteredOptions[0].substring(searchTerm.length)}`
+        `${searchTerm}${filteredOptions[0].substring(searchTerm.length)}`,
       );
       setSearchTerm(searchTerm);
     }
@@ -134,14 +133,14 @@ export const FilteredOptionsProvider = ({
       virtualFocus.moveFocusToTop();
       setInternalListOpen((oldState) => newState ?? !oldState);
     },
-    [virtualFocus]
+    [virtualFocus],
   );
 
   const isValueNew = useMemo(
     () =>
       Boolean(value) &&
       !filteredOptionsMap[filteredOptionsUtils.getOptionId(id, value)],
-    [filteredOptionsMap, id, value]
+    [filteredOptionsMap, id, value],
   );
 
   const ariaDescribedBy = useMemo(() => {
@@ -169,12 +168,12 @@ export const FilteredOptionsProvider = ({
   const currentOption = useMemo(
     () =>
       filteredOptionsMap[virtualFocus.activeElement?.getAttribute("id") || -1],
-    [filteredOptionsMap, virtualFocus]
+    [filteredOptionsMap, virtualFocus],
   );
 
   const activeDecendantId = useMemo(
     () => virtualFocus.activeElement?.getAttribute("id") || undefined,
-    [virtualFocus.activeElement]
+    [virtualFocus.activeElement],
   );
 
   const filteredOptionsState = {
@@ -205,7 +204,7 @@ export const useFilteredOptionsContext = () => {
   const context = useContext(FilteredOptionsContext);
   if (!context) {
     throw new Error(
-      "useFilteredOptionsContext must be used within a FilteredOptionsProvider"
+      "useFilteredOptionsContext must be used within a FilteredOptionsProvider",
     );
   }
   return context;

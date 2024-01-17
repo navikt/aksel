@@ -10,7 +10,7 @@ module.exports = {
   ],
   addons: [
     "@storybook/addon-a11y",
-    "@whitespace/storybook-addon-html",
+    "@xfinx/storybook-addon-html",
     "@storybook/addon-interactions",
     {
       name: "@storybook/addon-storysource",

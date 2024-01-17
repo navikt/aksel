@@ -1,6 +1,7 @@
 import cl from "clsx";
-import React, { forwardRef, SVGProps } from "react";
-import { omit, useId } from "../util";
+import React, { SVGProps, forwardRef } from "react";
+import { omit } from "../util";
+import { useId } from "../util/hooks";
 
 export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
   /**
@@ -66,7 +67,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
       id,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const internalId = useId();
 
@@ -81,7 +82,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
           `navds-loader--${variant}`,
           {
             "navds-loader--transparent": transparent,
-          }
+          },
         )}
         focusable="false"
         viewBox="0 0 50 50"
@@ -107,7 +108,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
         />
       </svg>
     );
-  }
+  },
 );
 
 export default Loader;

@@ -1,17 +1,13 @@
 import { useFloatingPortalNode } from "@floating-ui/react";
 import cl from "clsx";
-import React, {
-  forwardRef,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
+import React, { forwardRef, useContext, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { DateContext } from "../date/context";
 import { useProvider } from "../provider";
 import { Detail, Heading } from "../typography";
-import { mergeRefs, useId } from "../util";
+import { composeEventHandlers } from "../util/composeEventHandlers";
+import { useId } from "../util/hooks";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import ModalBody from "./ModalBody";
 import { ModalContext } from "./ModalContext";
 import ModalFooter from "./ModalFooter";
@@ -92,10 +88,11 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       onClick,
       ...rest
     }: ModalProps,
-    ref
+    ref,
   ) => {
     const modalRef = useRef<HTMLDialogElement>(null);
-    const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(modalRef, ref);
+
     const ariaLabelId = useId();
     const rootElement = useProvider()?.rootElement;
     const portalNode = useFloatingPortalNode({ root: rootElement });
@@ -149,25 +146,28 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       ...(!isWidthPreset ? { width } : {}),
     };
 
-    const mergedOnCancel: React.DialogHTMLAttributes<HTMLDialogElement>["onCancel"] =
-      (event) => {
-        if (onBeforeClose && onBeforeClose() === false) {
-          event.preventDefault();
-        } else if (onCancel) onCancel(event);
-      };
+    /**
+     * @note `closeOnBackdropClick` has issues on polyfill when nesting modals (DatePicker)
+     */
+    const handleModalClick = (event: React.MouseEvent<HTMLDialogElement>) => {
+      if (
+        closeOnBackdropClick &&
+        !needPolyfill &&
+        event.target === modalRef.current &&
+        (!onBeforeClose || onBeforeClose() !== false)
+      ) {
+        modalRef.current.close();
+      }
+    };
 
-    const mergedOnClick =
-      closeOnBackdropClick && !needPolyfill // closeOnBackdropClick has issues on polyfill when nesting modals (DatePicker)
-        ? (event: React.MouseEvent<HTMLDialogElement>) => {
-            onClick && onClick(event);
-            if (
-              event.target === modalRef.current &&
-              (!onBeforeClose || onBeforeClose() !== false)
-            ) {
-              modalRef.current.close();
-            }
-          }
-        : onClick;
+    /**
+     * @note onCancel fires when you press `Esc`
+     */
+    const handleModalCancel = (
+      event: React.SyntheticEvent<HTMLDialogElement, Event>,
+    ) => {
+      onBeforeClose && onBeforeClose() === false && event.preventDefault();
+    };
 
     const mergedAriaLabelledBy =
       !ariaLabelledby && !rest["aria-label"] && header
@@ -181,8 +181,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         ref={mergedRef}
         className={mergedClassName}
         style={mergedStyle}
-        onCancel={mergedOnCancel} // FYI: onCancel fires when you press Esc
-        onClick={mergedOnClick}
+        onCancel={composeEventHandlers(onCancel, handleModalCancel)}
+        onClick={composeEventHandlers(onClick, handleModalClick)}
         aria-labelledby={mergedAriaLabelledBy}
       >
         <ModalContext.Provider
@@ -217,7 +217,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       return null;
     }
     return component;
-  }
+  },
 ) as ModalComponent;
 
 Modal.Header = ModalHeader;

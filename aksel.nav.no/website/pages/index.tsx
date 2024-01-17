@@ -32,7 +32,7 @@ import { GetStaticProps } from "next/types";
 import { Suspense, lazy, useState } from "react";
 
 type PageProps = NextPageT<{
-  tema: Array<AkselTemaT>;
+  tema: AkselTemaT[];
   page: {
     title: string;
     god_praksis_intro: string;
@@ -68,19 +68,34 @@ const query = `*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...4]{
-          _type,
-          _id,
-          heading,
-          _createdAt,
-          _updatedAt,
-          publishedAt,
-          "slug": slug.current,
-          "tema": tema[]->title,
-          ingress,
-          seo,
-          ${contributorsAll}
-        },
+        "artikler": select(
+          $preview == "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...4]{
+            _type,
+            _id,
+            heading,
+            _createdAt,
+            _updatedAt,
+            publishedAt,
+            "slug": slug.current,
+            "tema": tema[]->title,
+            ingress,
+            seo,
+            ${contributorsAll}
+          },
+          $preview != "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref) && count(*[references(^._id)]) > 0] | order(publishedAt desc)[0...4]{
+            _type,
+            _id,
+            heading,
+            _createdAt,
+            _updatedAt,
+            publishedAt,
+            "slug": slug.current,
+            "tema": tema[]->title,
+            ingress,
+            seo,
+            ${contributorsAll}
+          }
+        ),
         "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
           _type,
           _id,
@@ -106,7 +121,13 @@ export const getStaticProps: GetStaticProps = async ({
 }): Promise<PageProps> => {
   const client = getClient();
 
-  const { page = null, tema = null, blocks = null } = await client.fetch(query);
+  const {
+    page = null,
+    tema = null,
+    blocks = null,
+  } = await client.fetch(query, {
+    preview: "false",
+  });
 
   const validateTema = tema
     .filter(
@@ -114,9 +135,9 @@ export const getStaticProps: GetStaticProps = async ({
         t?.title &&
         t?.slug &&
         t?.pictogram &&
-        t?.seksjoner.some((seksjon) =>
-          seksjon?.sider.some((side: any) => side?._ref)
-        )
+        t?.seksjoner.some(
+          (seksjon) => seksjon?.sider.some((side: any) => side?._ref),
+        ),
     )
     .sort((a, b) => a.title.localeCompare(b.title));
 
@@ -160,7 +181,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
       contentBlockPadding="none"
       className={cl(
         "header-animated-bg relative overflow-hidden bg-violet-200",
-        { "animation-stop": pause }
+        { "animation-stop": pause },
       )}
     >
       <SEO
@@ -178,7 +199,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
             <Heading
               level="1"
               size="xlarge"
-              className="text-deepblue-700 leading-[1.2] sm:text-[3.5rem]"
+              className="leading-[1.2] text-deepblue-700 sm:text-[3.5rem]"
             >
               Aksel gjør det enklere å lage digitale produkter
             </Heading>
@@ -239,7 +260,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                     setPause(!pause);
                     localStorage.setItem(
                       "pause-animations",
-                      JSON.stringify(!pause)
+                      JSON.stringify(!pause),
                     );
                   }}
                 />
@@ -284,7 +305,12 @@ const PagePreview = (props: PageProps["props"]) => {
   if (props?.preview) {
     return (
       <Suspense fallback={<Forside {...props} />}>
-        <WithPreview comp={Forside} query={query} props={props} />
+        <WithPreview
+          comp={Forside}
+          query={query}
+          props={props}
+          params={{ preview: "true" }}
+        />
       </Suspense>
     );
   }

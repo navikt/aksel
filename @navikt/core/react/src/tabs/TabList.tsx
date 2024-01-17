@@ -1,4 +1,3 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "clsx";
 import React, {
@@ -9,7 +8,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { debounce, mergeRefs } from "../util";
+import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import { debounce } from "../util";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { TabsContext } from "./context";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -23,7 +24,8 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, ...rest }, ref) => {
     const context = useContext(TabsContext);
     const listRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([listRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(listRef, ref);
+
     const [displayScroll, setDisplayScroll] = useState({
       start: false,
       end: false,
@@ -43,10 +45,10 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
             showStartScroll === oldDisplayScroll.start &&
             showEndScroll === oldDisplayScroll.end
               ? oldDisplayScroll
-              : { start: showStartScroll, end: showEndScroll }
+              : { start: showStartScroll, end: showEndScroll },
           );
         }),
-      []
+      [],
     );
 
     useEffect(() => {
@@ -120,7 +122,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
         {showSteppers && <ScrollButton dir={1} hidden={!displayScroll.end} />}
       </div>
     );
-  }
+  },
 );
 
 export default TabList;

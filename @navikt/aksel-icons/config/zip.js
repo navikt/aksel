@@ -33,7 +33,7 @@ async function generateFile() {
       ymlData.category,
       categories.get(ymlData.category)
         ? [...categories.get(ymlData.category), ymlData.name]
-        : [ymlData.name]
+        : [ymlData.name],
     );
   });
 
@@ -42,8 +42,8 @@ async function generateFile() {
     value.forEach((icon) =>
       copyFileSync(
         `${basePath}/${icon}.svg`,
-        `${iconFolder}/${key}/${icon}.svg`
-      )
+        `${iconFolder}/${key}/${icon}.svg`,
+      ),
     );
   });
 }

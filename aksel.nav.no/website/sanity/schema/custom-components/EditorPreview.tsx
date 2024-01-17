@@ -32,8 +32,8 @@ export function EditorPreview(props) {
               ? "Din profil | Anonym"
               : "Din profil"
             : anonym
-            ? "Anonym"
-            : "",
+              ? "Anonym"
+              : "",
       })}
       {editors &&
         editors.length > 0 &&

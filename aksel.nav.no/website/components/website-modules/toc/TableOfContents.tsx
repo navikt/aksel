@@ -25,7 +25,7 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
 
   return (
     <aside
-      className="min-w-60 sticky top-20 order-1 hidden self-start p-1 xl:block"
+      className="sticky top-20 order-1 hidden min-w-60 self-start p-1 xl:block"
       style={style}
     >
       <Label as="h2" className="px-2" textColor="subtle">

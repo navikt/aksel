@@ -34,7 +34,7 @@ export const Hit = forwardRef<
     <li
       ref={ref}
       className={cl(
-        "border-border-subtle relative flex scroll-my-10  items-center justify-between gap-3 border-b px-2 last-of-type:border-b-0"
+        "relative flex scroll-my-10 items-center  justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0",
       )}
     >
       <div className="w-full truncate px-2 py-4">
@@ -47,7 +47,7 @@ export const Hit = forwardRef<
           <NextLink
             href={getHref()}
             onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
-            className="focus-visible:shadow-focus focus-visible:bg-border-focus focus-visible:text-text-on-action group scroll-my-32 text-xl font-semibold focus:outline-none"
+            className="group scroll-my-32 text-xl font-semibold focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action focus-visible:shadow-focus"
           >
             <span className="group-hover:underline">
               {highlightStr(hit.item.heading, query, tag)}
@@ -106,7 +106,7 @@ function HeadingLinks({
     }
 
     return (
-      <span className="font-regular text-text-subtle max-w-full text-lg">
+      <span className="max-w-full text-lg font-regular text-text-subtle">
         {hit.description}
       </span>
     );
@@ -120,7 +120,7 @@ function HeadingLinks({
           {hit.item.lvl2
             .filter(
               (x) =>
-                !!x.id && highlightedHeadings.includes(x.text.toLowerCase())
+                !!x.id && highlightedHeadings.includes(x.text.toLowerCase()),
             )
             .map((x) => (
               <Link
@@ -130,7 +130,7 @@ function HeadingLinks({
                 onClick={() =>
                   logSuccess(index, `/${(hit.item as any).slug}`, x.text)
                 }
-                className="min-h-6 bg-surface-neutral-subtle focus-visible:shadow-focus hover:bg-surface-neutral-subtle-hover ring-border-subtle flex items-center justify-center rounded-full px-2 ring-1 ring-inset focus:outline-none"
+                className="flex min-h-6 items-center justify-center rounded-full bg-surface-neutral-subtle px-2 ring-1 ring-inset ring-border-subtle hover:bg-surface-neutral-subtle-hover focus:outline-none focus-visible:shadow-focus"
               >
                 <span>{x.text}</span>
                 <ChevronRightIcon aria-hidden className="-mr-1" />

@@ -15,18 +15,24 @@ ymlList.forEach((file) => {
   const ymlData = jsYaml.load(fs.readFileSync(`${basePath}/${file}`), {
     schema: jsYaml.JSON_SCHEMA,
   });
+  if (ymlData.keywords && ymlData.keywords.includes("[ignore-docs]")) {
+    return;
+  }
+
   const iconName = file.replace(".yml", "");
   metadata[iconName] = { id: iconName, ...ymlData };
 });
 
 fs.writeFileSync(
   path.resolve(__dirname, "../dist/metadata.js"),
-  `const metadata = ${JSON.stringify(metadata)};\n\n module.exports = metadata;`
+  `const metadata = ${JSON.stringify(
+    metadata,
+  )};\n\n module.exports = metadata;`,
 );
 
 fs.writeFileSync(
   path.resolve(__dirname, "../dist/metadata.mjs"),
-  `const metadata = ${JSON.stringify(metadata)};\n\n export default metadata;`
+  `const metadata = ${JSON.stringify(metadata)};\n\n export default metadata;`,
 );
 
 fs.writeFileSync(
@@ -46,5 +52,5 @@ fs.writeFileSync(
     [iconId: string]: AkselIcon;
   };
 
-  export default metadata;`
+  export default metadata;`,
 );

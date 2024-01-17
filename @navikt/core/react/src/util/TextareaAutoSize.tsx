@@ -1,7 +1,9 @@
 /* https://github.com/mui/material-ui/blob/master/packages/mui-base/src/TextareaAutosize/TextareaAutosize.tsx */
-import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { debounce, mergeRefs, useClientLayoutEffect } from "../util";
+import { useClientLayoutEffect } from "../util/hooks";
+import debounce from "./debounce";
+import { useMergeRefs } from "./hooks/useMergeRefs";
 
 type State = {
   outerHeightStyle: number;
@@ -11,7 +13,7 @@ type State = {
 const updateState = (
   prevState: State,
   newState: State,
-  renders: React.MutableRefObject<number>
+  renders: React.MutableRefObject<number>,
 ) => {
   const { outerHeightStyle, overflow } = newState;
   // Need a large enough difference to update the height.
@@ -34,7 +36,7 @@ const updateState = (
         [
           "Textarea: Too many re-renders. The layout is unstable.",
           "TextareaAutosize limits the number of renders to prevent an infinite loop.",
-        ].join("\n")
+        ].join("\n"),
       );
     }
   }
@@ -86,11 +88,13 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
       value,
       ...other
     }: TextareaAutosizeProps,
-    ref
+    ref,
   ) => {
     const { current: isControlled } = useRef(value != null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    const handleRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
+
+    const handleRef = useMergeRefs(inputRef, ref);
+
     const shadowRef = useRef<HTMLTextAreaElement>(null);
     const renders = useRef(0);
     const [state, setState] = useState<State>({ outerHeightStyle: 0 });
@@ -281,7 +285,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         />
       </>
     );
-  }
+  },
 );
 
 function isEmpty(obj: State) {

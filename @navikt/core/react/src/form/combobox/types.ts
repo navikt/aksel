@@ -68,7 +68,7 @@ export interface ComboboxProps
    */
   onChange?: (
     event: ChangeEvent<HTMLInputElement> | null,
-    value?: string
+    value?: string,
   ) => void;
   /**
    * Callback function triggered whenever the input field is cleared
@@ -88,7 +88,7 @@ export interface ComboboxProps
   onToggleSelected?: (
     option: string,
     isSelected: boolean,
-    isCustomOption: boolean
+    isCustomOption: boolean,
   ) => void;
   /**
    * List of selected options.

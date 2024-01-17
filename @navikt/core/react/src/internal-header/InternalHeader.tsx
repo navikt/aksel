@@ -1,6 +1,6 @@
 import cl from "clsx";
-import React, { forwardRef, HTMLAttributes } from "react";
-import { OverridableComponent } from "../util/OverridableComponent";
+import React, { HTMLAttributes, forwardRef } from "react";
+import { OverridableComponent } from "../util/types";
 import InternalHeaderButton, {
   InternalHeaderButtonProps,
 } from "./InternalHeaderButton";

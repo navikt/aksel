@@ -13,17 +13,17 @@ export type VirtualFocusType = {
 };
 
 const useVirtualFocus = (
-  containerRef: HTMLElement | null
+  containerRef: HTMLElement | null,
 ): VirtualFocusType => {
   const [activeElement, setActiveElement] = useState<HTMLElement | undefined>(
-    undefined
+    undefined,
   );
 
-  const getListOfAllChildren = (): Array<HTMLElement> =>
-    Array.from(containerRef?.children ?? []) as Array<HTMLElement>;
+  const getListOfAllChildren = (): HTMLElement[] =>
+    Array.from(containerRef?.children ?? []) as HTMLElement[];
   const getElementsAbleToReceiveFocus = () =>
     getListOfAllChildren().filter(
-      (child) => child.getAttribute("data-no-focus") !== "true"
+      (child) => child.getAttribute("data-no-focus") !== "true",
     );
 
   const getElementById = (id: string) =>
@@ -74,11 +74,11 @@ const useVirtualFocus = (
     _moveFocusAndScrollTo(
       getElementsAbleToReceiveFocus()[
         getElementsAbleToReceiveFocus().length - 1
-      ]
+      ],
     );
   const moveFocusToElement = (id: string) => {
     const _element = getElementsAbleToReceiveFocus().find(
-      (_focusableElement) => _focusableElement.getAttribute("id") === id
+      (_focusableElement) => _focusableElement.getAttribute("id") === id,
     );
     if (_element) {
       setActiveElement(_element);

@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util/OverridableComponent";
+import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
@@ -49,7 +49,7 @@ export const BodyShort: OverridableComponent<
       textColor,
       ...rest
     },
-    ref
+    ref,
   ) => (
     <Component
       {...rest}
@@ -65,10 +65,10 @@ export const BodyShort: OverridableComponent<
           align,
           visuallyHidden,
           textColor,
-        })
+        }),
       )}
     />
-  )
+  ),
 );
 
 export default BodyShort;

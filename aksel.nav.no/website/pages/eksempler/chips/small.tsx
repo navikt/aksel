@@ -28,7 +28,7 @@ const Example = () => {
               setSelected(
                 selected.includes(c)
                   ? selected.filter((x) => x !== c)
-                  : [...selected, c]
+                  : [...selected, c],
               )
             }
           >
@@ -42,7 +42,7 @@ const Example = () => {
             key={c}
             onClick={() =>
               setFilter((x) =>
-                x.length === 1 ? options : x.filter((y) => y !== c)
+                x.length === 1 ? options : x.filter((y) => y !== c),
               )
             }
           >

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, createContext, useContext } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import { useInputContext } from "./Input/inputContext";
 
 type CustomOptionsContextType = {
@@ -9,7 +9,7 @@ type CustomOptionsContextType = {
 };
 
 const CustomOptionsContext = createContext<CustomOptionsContextType>(
-  {} as CustomOptionsContextType
+  {} as CustomOptionsContextType,
 );
 
 export const CustomOptionsProvider = ({
@@ -26,11 +26,11 @@ export const CustomOptionsProvider = ({
   const removeCustomOption = useCallback(
     (option: string) => {
       setCustomOptions((prevCustomOptions) =>
-        prevCustomOptions.filter((o) => o !== option)
+        prevCustomOptions.filter((o) => o !== option),
       );
       focusInput();
     },
-    [focusInput, setCustomOptions]
+    [focusInput, setCustomOptions],
   );
 
   const addCustomOption = useCallback(
@@ -42,7 +42,7 @@ export const CustomOptionsProvider = ({
       }
       focusInput();
     },
-    [focusInput, isMultiSelect, setCustomOptions]
+    [focusInput, isMultiSelect, setCustomOptions],
   );
 
   const customOptionsState = {
@@ -63,7 +63,7 @@ export const useCustomOptionsContext = () => {
   const context = useContext(CustomOptionsContext);
   if (!context) {
     throw new Error(
-      "useCustomOptionsContext must be used within a CustomOptionsProvider"
+      "useCustomOptionsContext must be used within a CustomOptionsProvider",
     );
   }
   return context;

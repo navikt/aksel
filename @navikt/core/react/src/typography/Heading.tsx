@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util/OverridableComponent";
+import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
@@ -50,7 +50,7 @@ export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
         textColor,
         ...rest
       },
-      ref
+      ref,
     ) => {
       const HeadingTag = as ?? (`h${level}` as React.ElementType);
 
@@ -67,11 +67,11 @@ export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
               align,
               visuallyHidden,
               textColor,
-            })
+            }),
           )}
         />
       );
-    }
+    },
   );
 
 export default Heading;

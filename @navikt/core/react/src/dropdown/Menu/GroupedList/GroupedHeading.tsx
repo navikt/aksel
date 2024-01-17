@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 
 export interface GroupedHeadingProps
   extends React.HTMLAttributes<HTMLDetailsElement> {
@@ -20,7 +20,7 @@ export const GroupedHeading = forwardRef<
       "navds-dropdown__list-heading",
       "navds-heading",
       "navds-heading--xsmall",
-      className
+      className,
     )}
   />
 ));

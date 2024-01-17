@@ -20,7 +20,7 @@ export const withDsExample = (
   /**
    * Static: Used for dynamic-height examples like ExpansionCard
    */
-  { variant, showBreakpoints }: withDsT = {}
+  { variant, showBreakpoints }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
     const [width, setWidth] = useState<number>();
@@ -31,6 +31,7 @@ export const withDsExample = (
       };
       window.addEventListener("resize", updateWidth);
       updateWidth();
+
       return () => {
         window.removeEventListener("resize", updateWidth);
       };
@@ -58,7 +59,7 @@ export const withDsExample = (
       return (
         <HStack
           gap="05"
-          className="rounded-br-medium absolute left-0 top-0 p-1"
+          className="absolute left-0 top-0 rounded-br-medium p-1"
           align="center"
           style={{ background: getBg(variant) }}
         >

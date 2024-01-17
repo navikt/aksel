@@ -87,7 +87,7 @@ export const Table = forwardRef(
       sort,
       ...rest
     },
-    ref
+    ref,
   ) => (
     <TableContext.Provider value={{ onSortChange, sort }}>
       <table
@@ -98,7 +98,7 @@ export const Table = forwardRef(
         })}
       />
     </TableContext.Provider>
-  )
+  ),
 ) as TableType;
 
 Table.Header = Header;

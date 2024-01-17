@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
 import cl from "clsx";
+import React, { forwardRef } from "react";
 
 export interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ export interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
 const ModalBody = forwardRef<HTMLDivElement, ModalBodyProps>(
   ({ className, ...rest }, ref) => (
     <div {...rest} ref={ref} className={cl("navds-modal__body", className)} />
-  )
+  ),
 );
 
 export default ModalBody;

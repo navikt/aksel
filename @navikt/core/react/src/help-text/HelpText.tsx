@@ -1,7 +1,8 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
-import { mergeRefs } from "../util";
+import { composeEventHandlers } from "../util/composeEventHandlers";
+import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { HelpTextIcon } from "./HelpTextIcon";
 
 export interface HelpTextProps
@@ -13,23 +14,6 @@ export interface HelpTextProps
    * @default "hjelp"
    */
   title?: string;
-  /**
-   * Default dialog-placement on open
-   * @default "top"
-   */
-  placement?:
-    | "top"
-    | "bottom"
-    | "right"
-    | "left"
-    | "top-start"
-    | "top-end"
-    | "bottom-start"
-    | "bottom-end"
-    | "right-start"
-    | "right-end"
-    | "left-start"
-    | "left-end";
   /**
    * Classname for wrapper
    */
@@ -54,17 +38,18 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     {
       className,
       children,
-      placement = "top",
+      placement,
       strategy = "absolute",
       title = "hjelp",
       onClick,
       wrapperClassName,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(buttonRef, ref);
+
     const [open, setOpen] = useState(false);
 
     return (
@@ -72,10 +57,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
         <button
           {...rest}
           ref={mergedRef}
-          onClick={(e) => {
-            setOpen((x) => !x);
-            onClick?.(e);
-          }}
+          onClick={composeEventHandlers(onClick, () => setOpen((x) => !x))}
           className={cl(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
@@ -98,7 +80,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
         </Popover>
       </div>
     );
-  }
+  },
 );
 
 export default HelpText;

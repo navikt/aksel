@@ -3,7 +3,7 @@ import { ResponsiveProp } from "./types";
 export function getResponsiveValue<T = string>(
   componentName: string,
   componentProp: string,
-  responsiveProp?: ResponsiveProp<T>
+  responsiveProp?: ResponsiveProp<T>,
 ) {
   if (!responsiveProp) {
     return {};
@@ -19,7 +19,7 @@ export function getResponsiveValue<T = string>(
     Object.entries(responsiveProp).map(([breakpointAlias, responsiveValue]) => [
       `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
       responsiveValue,
-    ])
+    ]),
   );
 }
 
@@ -36,7 +36,7 @@ const translateTokenStringToCSS = (
   tokenString: string,
   tokenSubgroup: string,
   tokenExceptions: string[],
-  invert: boolean
+  invert: boolean,
 ) => {
   return tokenString
     .split(" ")
@@ -67,7 +67,7 @@ export function getResponsiveProps<T extends string>(
   tokenSubgroup: string,
   responsiveProp?: ResponsiveProp<T>,
   invert = false,
-  tokenExceptions: string[] = []
+  tokenExceptions: string[] = [],
 ) {
   if (!responsiveProp) {
     return {};
@@ -81,7 +81,7 @@ export function getResponsiveProps<T extends string>(
           responsiveProp,
           tokenSubgroup,
           tokenExceptions,
-          invert
+          invert,
         ),
     };
   }
@@ -94,7 +94,7 @@ export function getResponsiveProps<T extends string>(
         aliasOrScale,
         tokenSubgroup,
         tokenExceptions,
-        invert
+        invert,
       );
   });
   return styleProps;

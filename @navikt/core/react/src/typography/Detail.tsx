@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util/OverridableComponent";
+import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
@@ -51,7 +51,7 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
         textColor,
         ...rest
       },
-      ref
+      ref,
     ) => (
       <Component
         {...rest}
@@ -70,10 +70,10 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
           }),
           {
             "navds-detail--small": size === "small",
-          }
+          },
         )}
       />
-    )
+    ),
   );
 
 export default Detail;

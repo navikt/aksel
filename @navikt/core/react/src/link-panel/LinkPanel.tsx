@@ -1,14 +1,13 @@
-import React, { forwardRef } from "react";
-
 import cl from "clsx";
-import { LinkPanelTitle, LinkPanelTitleProps } from "./LinkPanelTitle";
+import React, { forwardRef } from "react";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { Panel } from "../panel";
+import { OverridableComponent } from "../util/types";
 import {
   LinkPanelDescription,
   LinkPanelDescriptionProps,
 } from "./LinkPanelDescription";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { OverridableComponent } from "../util";
-import { Panel } from "../panel";
+import { LinkPanelTitle, LinkPanelTitleProps } from "./LinkPanelTitle";
 
 export interface LinkPanelProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -72,7 +71,7 @@ export const LinkPanelComponent: OverridableComponent<
         <ChevronRightIcon className="navds-link-panel__chevron" aria-hidden />
       </Panel>
     );
-  }
+  },
 );
 
 const LinkPanel = LinkPanelComponent as LinkPanelComponentType;

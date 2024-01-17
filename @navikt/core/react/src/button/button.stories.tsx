@@ -1,5 +1,5 @@
-import { StarIcon } from "@navikt/aksel-icons";
 import React from "react";
+import { StarIcon } from "@navikt/aksel-icons";
 import { Button } from "./index";
 
 export default {
@@ -10,7 +10,7 @@ export default {
   },
 };
 
-const variants: Array<
+const variants: (
   | "primary"
   | "secondary"
   | "tertiary"
@@ -18,7 +18,7 @@ const variants: Array<
   | "secondary-neutral"
   | "tertiary-neutral"
   | "danger"
-> = [
+)[] = [
   "primary",
   "secondary",
   "tertiary",

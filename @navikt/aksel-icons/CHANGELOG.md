@@ -1,5 +1,27 @@
 # @navikt/aksel-icons
 
+## 5.15.1
+
+## 5.15.0
+
+### Minor Changes
+
+- Ikoner: Synket ikoner med Figma. Lagt til nytt ikon `FigureChild` ([#2629](https://github.com/navikt/aksel/pull/2629))
+
+## 5.14.0
+
+## 5.13.0
+
+## 5.12.5
+
+## 5.12.4
+
+## 5.12.3
+
+## 5.12.2
+
+## 5.12.1
+
 ## 5.12.0
 
 ### Minor Changes

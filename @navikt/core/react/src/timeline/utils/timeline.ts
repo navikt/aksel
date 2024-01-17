@@ -1,5 +1,5 @@
-import { omit } from "../../util";
 import React, { ReactNode } from "react";
+import { omit } from "../../util";
 import { Period } from "./types.external";
 
 type ParsedChild = {

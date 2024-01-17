@@ -23,7 +23,7 @@ getTestRule()({
       description: "attempt to use '--ac-' token",
       message: messages.valueRefComponent(
         { prop: "width" },
-        "--ac-button-padding"
+        "--ac-button-padding",
       ),
       line: 1,
       endLine: 1,

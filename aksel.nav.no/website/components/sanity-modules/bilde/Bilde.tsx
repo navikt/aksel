@@ -24,7 +24,7 @@ const Bilde = ({ node, className }: BildeProps) => {
           className,
           {
             "md:max-w-text": node?.small,
-          }
+          },
         )}
       >
         <div

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BodyLong, Grid, Cell, ContentContainer } from "../index";
+import { BodyLong, Cell, ContentContainer, Grid } from "../index";
 
 export default {
   title: "ds-react/Primitives/Grid",

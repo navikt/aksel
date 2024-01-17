@@ -35,7 +35,7 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
         </BodyShort>
       </RadixToggleGroup.Item>
     );
-  }
+  },
 );
 
 export default ToggleItem;

@@ -11,7 +11,7 @@ function splitStr(str: string, query: string) {
 export function highlightStr(
   str: string,
   query: string,
-  tag: keyof typeof searchOptions
+  tag: keyof typeof searchOptions,
 ) {
   if (!query) {
     return str;
@@ -34,7 +34,7 @@ export function highlightStr(
         "bg-deepblue-100": ["komponent_artikkel", "ds_artikkel"].includes(tag),
         "bg-violet-100": ["aksel_prinsipp", "aksel_standalone"].includes(tag),
         "bg-pink-100": tag === "aksel_blogg",
-      }
+      },
     );
   };
   return (
@@ -82,7 +82,7 @@ export function highlightMatches(hitMatch: Fuse.FuseResultMatch) {
         <span
           key={i}
           className={cl({
-            "text-text-default font-semibold": part.highlight,
+            "font-semibold text-text-default": part.highlight,
           })}
         >
           {part.text}

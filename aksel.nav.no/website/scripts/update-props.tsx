@@ -17,7 +17,7 @@ async function updateProps() {
 
   if (checkIfDuplicateExists(propList().map((x) => x._id))) {
     throw new Error(
-      "Duplicate _id found for prop-list. This should not be possible..."
+      "Duplicate _id found for prop-list. This should not be possible...",
     );
   }
 
@@ -57,20 +57,20 @@ async function updateProps() {
     How to fix:
     - Go to links provided under and try to manually delete document.
     - You will then be prompted to update referenced document before deleting.
-    - After updating reference(s) and deleting document(s) there is no need to run the script again.`
+    - After updating reference(s) and deleting document(s) there is no need to run the script again.`,
       );
       console.log(
         JSON.stringify(
           deletedIds.map(
             (x) =>
-              `https://aksel.nav.no/admin/prod/desk/admin;propsDesignsystemet;${x}`
+              `https://aksel.nav.no/admin/prod/desk/admin;propsDesignsystemet;${x}`,
           ),
           null,
-          2
-        )
+          2,
+        ),
       );
       throw new Error(
-        "Failed when deleting old prop-documentation from sanity, see warning above."
+        "Failed when deleting old prop-documentation from sanity, see warning above.",
       );
     });
 }

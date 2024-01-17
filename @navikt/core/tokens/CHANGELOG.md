@@ -1,5 +1,27 @@
 # @navikt/ds-tokens
 
+## 5.15.1
+
+## 5.15.0
+
+## 5.14.0
+
+## 5.13.0
+
+### Patch Changes
+
+- Tokens: Ny token `--a-text-width-max: 576px` ([#2572](https://github.com/navikt/aksel/pull/2572))
+
+## 5.12.5
+
+## 5.12.4
+
+## 5.12.3
+
+## 5.12.2
+
+## 5.12.1
+
 ## 5.12.0
 
 ## 5.11.5
