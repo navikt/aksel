@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { LineGraphIcon } from "@navikt/aksel-icons";
 
 export const ArticleViews = defineType({
   title: "Artikkel Visninger",
@@ -6,6 +7,39 @@ export const ArticleViews = defineType({
   type: "document",
   readOnly: ({ currentUser }) =>
     !currentUser.roles.find((x) => x.name === "developer"),
+  preview: {
+    select: {
+      title: "article_ref.heading",
+      url: "article_ref.slug.current",
+    },
+    prepare: (selected) => ({
+      title: selected.title,
+      subtitle: selected.url,
+      media: LineGraphIcon,
+    }),
+  },
+  orderings: [
+    {
+      title: "Views total",
+      name: "views",
+      by: [{ field: "views", direction: "desc" }],
+    },
+    {
+      title: "Views week",
+      name: "views_week",
+      by: [{ field: "views_week", direction: "desc" }],
+    },
+    {
+      title: "Views month",
+      name: "views_month",
+      by: [{ field: "views_month", direction: "desc" }],
+    },
+    {
+      title: "Views year",
+      name: "views_year",
+      by: [{ field: "views_year", direction: "desc" }],
+    },
+  ],
   fields: [
     defineField({
       type: "number",
