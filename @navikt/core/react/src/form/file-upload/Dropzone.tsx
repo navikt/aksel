@@ -4,14 +4,14 @@ import React, {
   forwardRef,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
 import { CloudUpIcon, UploadIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { mergeRefs, omit } from "../../util";
+import { useMergeRefs } from "../../util/hooks";
+import { omit } from "../../util/omit";
 import { FormFieldProps, useFormField } from "../useFormField";
 import {
   getButtonText,
@@ -72,7 +72,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
   (props: DropzoneProps, ref) => {
     const [isDraggingOver, setIsDraggingOver] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
+    const mergedRef = useMergeRefs(inputRef, ref);
 
     const {
       onSelect,
@@ -104,12 +104,12 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
         const { acceptedFiles, rejectedFiles } = partitionFiles(
           files,
           accept,
-          validatorRef.current
+          validatorRef.current,
         );
 
         onSelectRef.current({ allFiles: files, acceptedFiles, rejectedFiles });
       },
-      [accept]
+      [accept],
     );
 
     useEffect(() => {
@@ -230,7 +230,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default Dropzone;
