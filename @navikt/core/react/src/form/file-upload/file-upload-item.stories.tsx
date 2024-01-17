@@ -7,6 +7,13 @@ import { Heading } from "../../typography";
 const meta: Meta<typeof FileUpload.Item> = {
   title: "ds-react/FileUpload/Item",
   component: FileUpload.Item,
+  decorators: [
+    (Story) => (
+      <div style={{ width: 400, maxWidth: "100%" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
@@ -34,27 +41,6 @@ export const Default: StoryObj<typeof FileUpload.Item> = {
       options: [undefined, "uploading", "downloading"],
       control: { type: "radio" },
     },
-  },
-};
-
-export const BreakingText: StoryObj = {
-  render: () => {
-    const metadataFile = { name: "imafilewithanamethatistoolong.txt" };
-    const nativeFile = new File(["a"], "imafilewithanamethatistoolong.png");
-    const error = "imaverylongerrorandyoushouldfixme!";
-
-    return (
-      <VStack gap="3" style={{ maxWidth: "200px" }}>
-        <FileUpload.Item file={metadataFile} />
-        <FileUpload.Item
-          file={metadataFile}
-          error={error}
-          onDelete={() => {}}
-        />
-        <FileUpload.Item file={metadataFile} status="uploading" />
-        <FileUpload.Item file={nativeFile} error={error} onDelete={() => {}} />
-      </VStack>
-    );
   },
 };
 
