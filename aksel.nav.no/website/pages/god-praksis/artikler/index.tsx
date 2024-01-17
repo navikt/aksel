@@ -23,7 +23,7 @@ type ArticleT = ResolveContributorsSingleT<
 >;
 
 type PageProps = NextPageT<{
-  articles: Array<ArticleT>;
+  articles: ArticleT[];
 }>;
 
 const getQuery = (boundry = "") => {
@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 const Artikler = ({ articles }: PageProps["props"]) => {
-  const [allArticles, setAllArticles] = useState<Array<ArticleT>>(articles);
+  const [allArticles, setAllArticles] = useState<ArticleT[]>(articles);
   const [hasFetched, setHasFetched] = useState<boolean>(false);
   const { alleArtikler } = useRouter().query;
 

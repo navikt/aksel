@@ -1,5 +1,19 @@
 # @navikt/ds-css
 
+## 5.15.1
+
+## 5.15.0
+
+## 5.14.0
+
+### Minor Changes
+
+- Tag: Har nå innebygd støtte for ikoner ([#2611](https://github.com/navikt/aksel/pull/2611))
+
+### Patch Changes
+
+- Table: Checkbox nested i CheckboxGroup mister nå ikke padding ([#2612](https://github.com/navikt/aksel/pull/2612))
+
 ## 5.13.0
 
 ### Patch Changes
