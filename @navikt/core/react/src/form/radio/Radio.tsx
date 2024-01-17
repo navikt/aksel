@@ -1,7 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
-import { omit, useId } from "../../util";
+import { omit } from "../../util";
+import { useId } from "../../util/hooks";
 import { RadioProps } from "./types";
 import { useRadio } from "./useRadio";
 

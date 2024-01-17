@@ -2,7 +2,7 @@ import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
-import { useId } from "../../../util";
+import { useId } from "../../../util/hooks";
 import { getMonthWeeks } from "../../utils/get-month-weeks";
 import { labelWeek } from "../../utils/labels";
 import WeekNumber from "./WeekNumber";

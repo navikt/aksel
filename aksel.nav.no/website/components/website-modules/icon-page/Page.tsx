@@ -116,17 +116,16 @@ export const IconPage = ({ name }: { name: string }) => {
                   onSubmit={(e) => e.preventDefault()}
                   className="flex w-full flex-wrap-reverse items-center  gap-4 px-4 py-2 sm:flex-nowrap"
                 >
-                  <div className="w-fit">
-                    <ToggleGroup
-                      value={toggle}
-                      onChange={(v) => setToggle(v as any)}
-                      variant="neutral"
-                      aria-label="Velg ikonvariant"
-                    >
-                      <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
-                      <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
-                    </ToggleGroup>
-                  </div>
+                  <ToggleGroup
+                    value={toggle}
+                    onChange={(v) => setToggle(v as any)}
+                    variant="neutral"
+                    aria-label="Velg ikonvariant"
+                    className="shrink-0"
+                  >
+                    <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
+                    <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
+                  </ToggleGroup>
                   <Search
                     variant="simple"
                     label="Ikonsøk"

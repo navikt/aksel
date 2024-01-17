@@ -5,7 +5,7 @@ import * as object from "./objects";
 import { WorkspaceT } from "./util";
 
 export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
-  workspace,
+  workspace
 ) => ({
   types: [
     ...GP_DOCUMENTS,
@@ -17,6 +17,7 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
     document.Skrivehjelp,
     document.Publiseringsflyt,
     document.Feedback,
+    document.ArticleViews,
 
     /* Komponentsider */
     document.KodeEksempelDoc,

@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
-import { useId } from "../../util";
+import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { DateContext, SharedMonthProvider } from "../context";
 import { MonthPickerInput } from "../parts/DateInput";

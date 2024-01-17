@@ -2,7 +2,7 @@ import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useState } from "react";
 import { Label } from "../typography";
-import { useId } from "../util";
+import { useId } from "../util/hooks";
 import ToggleItem, { ToggleItemProps } from "./ToggleItem";
 import { ToggleGroupContext } from "./context";
 

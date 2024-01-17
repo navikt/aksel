@@ -3,7 +3,7 @@ import { isDateRange } from "react-day-picker";
 
 // TODO: ((date: Date) => boolean)
 export const disableDate = (
-  disabledSelection: Date | Array<any>,
+  disabledSelection: Date | any[],
   date: Date,
 ): boolean => {
   let result: boolean = false;

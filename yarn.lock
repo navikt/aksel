@@ -3462,7 +3462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^5.13.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^5.15.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3489,8 +3489,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^5.13.0
-    "@navikt/ds-tokens": ^5.13.0
+    "@navikt/ds-css": ^5.15.0
+    "@navikt/ds-tokens": ^5.15.0
     "@types/jest": ^29.0.0
     concurrently: 7.2.1
     copyfiles: 2.4.1
@@ -3508,7 +3508,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 5.13.0
+    "@navikt/ds-css": 5.15.0
     "@types/inquirer": ^9.0.3
     "@types/jest": ^29.0.0
     axios: 1.6.0
@@ -3532,11 +3532,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@5.13.0, @navikt/ds-css@^5.13.0, @navikt/ds-css@^5.9.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@5.15.0, @navikt/ds-css@^5.15.0, @navikt/ds-css@^5.9.2, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^5.13.0
+    "@navikt/ds-tokens": ^5.15.0
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3549,13 +3549,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^5.13.0, @navikt/ds-react@^5.9.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^5.15.0, @navikt/ds-react@^5.9.2, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
-    "@navikt/aksel-icons": ^5.13.0
-    "@navikt/ds-tokens": ^5.13.0
+    "@navikt/aksel-icons": ^5.15.0
+    "@navikt/ds-tokens": ^5.15.0
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3589,11 +3589,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^5.13.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^5.15.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^5.13.0
+    "@navikt/ds-tokens": ^5.15.0
     "@types/jest": ^29.0.0
     color: 4.2.3
     jest: ^29.0.0
@@ -3605,7 +3605,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^5.13.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^5.15.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -8718,11 +8718,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^5.13.0
-    "@navikt/ds-css": ^5.13.0
-    "@navikt/ds-react": ^5.13.0
-    "@navikt/ds-tailwind": ^5.13.0
-    "@navikt/ds-tokens": ^5.13.0
+    "@navikt/aksel-icons": ^5.15.0
+    "@navikt/ds-css": ^5.15.0
+    "@navikt/ds-react": ^5.15.0
+    "@navikt/ds-tailwind": ^5.15.0
+    "@navikt/ds-tokens": ^5.15.0
   languageName: unknown
   linkType: soft
 
@@ -22255,13 +22255,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hotjar@npm:^6.1.0":
-  version: 6.2.0
-  resolution: "react-hotjar@npm:6.2.0"
-  checksum: b3429a4fff968f959ffbe89a3f12dbbd40593bc0ed137b5c0a670c934476f2a814430d2cc990c4736580c4efdfd1002d42de66cbd93d563686180c836d177a02
-  languageName: node
-  linkType: hard
-
 "react-infinite-scroll-component@npm:6.1.0":
   version: 6.1.0
   resolution: "react-infinite-scroll-component@npm:6.1.0"
@@ -27260,7 +27253,6 @@ __metadata:
     prism-react-renderer: ^2.0.0
     react: ^18.0.0
     react-dom: ^18.0.0
-    react-hotjar: ^6.1.0
     react-responsive-masonry: ^2.1.7
     rss: ^1.2.2
     sanity: 3.20.0
