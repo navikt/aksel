@@ -1,6 +1,5 @@
 import { AppProps } from "next/app";
 import { useEffect } from "react";
-import { hotjar } from "react-hotjar";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { SanityDocIdContext } from "@/hooks/useSanityDocId";
 import { useAmplitudeInit } from "@/logging";
@@ -15,7 +14,12 @@ function App({ Component, pageProps, router }: AppProps) {
     window.location.host === "design.nav.no" &&
       window.location.replace(`http://aksel.nav.no`);
 
-    hotjar.initialize(148751, 6);
+    /**
+     * Midlertidig utkommentert for å unngå lasting av hotjar-bundle
+     * Package.json: "react-hotjar": "^6.1.0",
+     * Import: import { hotjar } from "react-hotjar";
+     * Script: hotjar.initialize(148751, 6);
+     */
   }, []);
 
   const useGlobalStyles =
