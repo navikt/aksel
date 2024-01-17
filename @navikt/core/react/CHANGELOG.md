@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.15.1
+
+### Patch Changes
+
+- HelpText: HelpText-state ble ikke riktig oppdatert ved klikk ([#2643](https://github.com/navikt/aksel/pull/2643))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.15.1
+  - @navikt/aksel-icons@5.15.1
+
 ## 5.15.0
 
 ### Patch Changes

@@ -6,6 +6,10 @@
 
 - Ikoner: Synket ikoner med Figma. Lagt til nytt ikon `FigureChild` ([#2629](https://github.com/navikt/aksel/pull/2629))
 
+### @navikt/ds-react
+
+- HelpText: HelpText-state ble ikke riktig oppdatert ved klikk ([#2643](https://github.com/navikt/aksel/pull/2643))
+
 ## 5.14
 
 ### @navikt/ds-react
