@@ -1,5 +1,10 @@
 # Aksel v6 migrations
 
+## ErrorSummary
+
+- Ny prop `focusTargetRef` for å bedre håndtere fokushåntering
+- Hinte om at neste major-versjon kommer til å potensielt endre hvordan ref settes på section (tabIndex fjernes) og at de bør bruke `focusTargetRef`.
+
 ## Chat
 
 ### Props
