@@ -173,20 +173,24 @@ export const Download: StoryObj = {
   ),
 };
 
-export const Locale: StoryObj<{ locale: "nb" | "nn" | "en" }> = {
+export const Locale: StoryObj<{ locale: "nb" | "en" }> = {
   render: () => (
     <VStack gap="12">
       <Heading size="medium">Laster opp</Heading>
-      <FileUpload.Item file={fileTxt} status="uploading" />
-      <FileUpload.Item file={fileTxt} status="uploading" />
-      <FileUpload.Item file={fileTxt} status="uploading" />
-      <FileUpload.Item file={fileTxt} status="uploading" />
+      <FileUpload locale="nb">
+        <FileUpload.Item file={fileTxt} status="uploading" />
+        <FileUpload.Item file={fileTxt} status="uploading" />
+        <FileUpload.Item file={fileTxt} status="uploading" />
+        <FileUpload.Item file={fileTxt} status="uploading" />
+      </FileUpload>
 
       <Heading size="medium">Laster ned</Heading>
-      <FileUpload.Item file={fileTxt} status="downloading" />
-      <FileUpload.Item file={fileTxt} status="downloading" />
-      <FileUpload.Item file={fileTxt} status="downloading" />
-      <FileUpload.Item file={fileTxt} status="downloading" />
+      <FileUpload locale="en">
+        <FileUpload.Item file={fileTxt} status="downloading" />
+        <FileUpload.Item file={fileTxt} status="downloading" />
+        <FileUpload.Item file={fileTxt} status="downloading" />
+        <FileUpload.Item file={fileTxt} status="downloading" />
+      </FileUpload>
     </VStack>
   ),
 };

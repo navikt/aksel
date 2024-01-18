@@ -13,6 +13,7 @@ import { BodyShort, ErrorMessage, Label } from "../../../typography";
 import { useMergeRefs } from "../../../util/hooks";
 import { omit } from "../../../util/omit";
 import { FormFieldProps, useFormField } from "../../useFormField";
+import { useFileUploadLocale } from "../FileUpload.context";
 import {
   getButtonText,
   getDragAndDropText,
@@ -61,11 +62,6 @@ export interface DropzoneProps
    * if a file is accepted or rejected.
    */
   validator?: (file: File) => boolean;
-  /**
-   * Changes locale used for component text.
-   * @default "nb" (norsk bokmål)
-   */
-  locale?: "nb" | "nn" | "en";
 }
 
 const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
@@ -83,12 +79,13 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       multiple = true,
       accept,
       validator,
-      locale = "nb",
       ...rest
     } = props;
 
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
       useFormField(props, "fileUpload");
+
+    const localeCtx = useFileUploadLocale()?.locale ?? "nb";
 
     /**
      * Put callbacks in refs so that we don't re-add the paste event listener on every
@@ -188,7 +185,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           {isDraggingOver && (
             <div className="navds-file-dropzone__dragover">
               <CloudUpIcon fontSize="1.5rem" aria-hidden />
-              <BodyShort as="span">{getDropText(locale)}</BodyShort>
+              <BodyShort as="span">{getDropText(localeCtx)}</BodyShort>
             </div>
           )}
           <div className="navds-file-dropzone__zone-icon">
@@ -196,9 +193,9 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           </div>
           <div aria-hidden className="navds-file-dropzone__zone-text">
             <BodyShort as="span">
-              {getDragAndDropText(locale, multiple)}
+              {getDragAndDropText(localeCtx, multiple)}
             </BodyShort>
-            <BodyShort as="span">{getOrText(locale)}</BodyShort>
+            <BodyShort as="span">{getOrText(localeCtx)}</BodyShort>
           </div>
           <Button
             className="navds-file-dropzone__button"
@@ -206,7 +203,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             onClick={onButtonClick}
             tabIndex={-1}
           >
-            {getButtonText(locale, multiple)}
+            {getButtonText(localeCtx, multiple)}
           </Button>
 
           <input

@@ -9,8 +9,6 @@ import { FileItem } from "./types";
 import { formatFileSize } from "./utils/format-file-size";
 import { getDownloadingText, getUploadingText } from "./utils/i18n";
 
-const DEFAULT_LOCALE = "nb";
-
 export interface FileItemBaseProps {
   /**
    * Either a native File or file metadata.
@@ -60,7 +58,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
     }: FileItemProps,
     ref,
   ) => {
-    const locale = useFileUploadLocale()?.locale ?? DEFAULT_LOCALE;
+    const locale = useFileUploadLocale()?.locale ?? "nb";
     const isError = !!error && !status;
 
     return (

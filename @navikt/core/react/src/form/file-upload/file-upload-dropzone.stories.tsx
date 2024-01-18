@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { FileUpload } from "..";
 import { HStack } from "../../layout/stack";
-import { OnFileSelectProps } from "./Dropzone";
+import { OnFileSelectProps } from "./parts/Dropzone";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload/Dropzone",
@@ -17,7 +17,7 @@ const onSelect = ({
   rejectedFiles,
 }: OnFileSelectProps) => {
   alert(
-    `Lastet opp ${allFiles.length} filer. Accepted: ${acceptedFiles.length}. Rejected: ${rejectedFiles.length}`
+    `Lastet opp ${allFiles.length} filer. Accepted: ${acceptedFiles.length}. Rejected: ${rejectedFiles.length}`,
   );
 };
 
@@ -29,7 +29,6 @@ export const Default: StoryObj<typeof FileUpload.Dropzone> = {
     error: "",
     multiple: true,
     accept: "",
-    locale: "nb",
   },
 };
 
@@ -77,8 +76,12 @@ export const WithErrorAndDescription: StoryObj = {
 export const Locales: StoryObj = {
   render: () => (
     <HStack gap="12">
-      <FileUpload.Dropzone label="English" onSelect={onSelect} locale="en" />
-      <FileUpload.Dropzone label="Nynorsk" onSelect={onSelect} locale="nn" />
+      <FileUpload locale="nb">
+        <FileUpload.Dropzone label="English" onSelect={onSelect} />
+      </FileUpload>
+      <FileUpload locale="en">
+        <FileUpload.Dropzone label="Nynorsk" onSelect={onSelect} />
+      </FileUpload>
     </HStack>
   ),
 };

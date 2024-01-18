@@ -54,25 +54,26 @@ export const WithError: StoryObj<typeof FileUpload.List> = {
 export const Locales: StoryObj<typeof FileUpload.List> = {
   render: () => (
     <VStack gap="10">
-      <FileUpload.List label="Bokmål">
-        <FileUpload.ListItem file={fileTxt} status="uploading" />
-        <FileUpload.ListItem file={fileDocx} />
-      </FileUpload.List>
+      <FileUpload locale="nb">
+        <FileUpload.List label="Bokmål">
+          <FileUpload.ListItem file={fileTxt} status="uploading" />
+          <FileUpload.ListItem file={fileDocx} />
+        </FileUpload.List>
+      </FileUpload>
 
-      <FileUpload.List label="Nynorsk">
-        <FileUpload.ListItem file={fileTxt} status="uploading" />
-        <FileUpload.ListItem file={fileDocx} />
-      </FileUpload.List>
+      <FileUpload locale="en">
+        <FileUpload.List label="Nynorsk med engelsk override på ett ListItem">
+          <FileUpload.ListItem file={fileTxt} status="uploading" />
+          <FileUpload.ListItem file={fileDocx} status="uploading" />
+        </FileUpload.List>
+      </FileUpload>
 
-      <FileUpload.List label="Nynorsk med engelsk override på ett ListItem">
-        <FileUpload.ListItem file={fileTxt} status="uploading" />
-        <FileUpload.ListItem file={fileDocx} status="uploading" />
-      </FileUpload.List>
-
-      <FileUpload.List label="Engelsk">
-        <FileUpload.ListItem file={fileTxt} status="uploading" />
-        <FileUpload.ListItem file={fileDocx} />
-      </FileUpload.List>
+      <FileUpload locale="en">
+        <FileUpload.List label="Engelsk">
+          <FileUpload.ListItem file={fileTxt} status="uploading" />
+          <FileUpload.ListItem file={fileDocx} />
+        </FileUpload.List>
+      </FileUpload>
     </VStack>
   ),
 };
