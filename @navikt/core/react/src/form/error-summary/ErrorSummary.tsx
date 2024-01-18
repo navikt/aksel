@@ -26,7 +26,7 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * When manually setting focus to `<ErrorSummary />` use the
    * `focusTargetRef`-prop and not ref.
-   * This directs focus to heading-element, improving screenreader-experience
+   * This directs focus to heading, improving screen reader experience
    */
   focusTargetRef?: React.RefObject<HTMLElement>;
 }
