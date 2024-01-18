@@ -57,6 +57,7 @@ const filtered = [
   "skrivehjelp",
   "publication_flow",
   "aksel_feedback",
+  "article_views",
   ...GP_DOCUMENT_NAMES,
 ];
 
@@ -296,6 +297,19 @@ export const structure: StructureResolver = async (
                       .schemaType(`publication_flow`)
                       .icon(FileTextIcon)
                       .id(`publication_flow`),
+                    S.listItem()
+                      .title("Artikkel Visninger")
+                      .child(
+                        S.documentList()
+                          .title("Artikkel Visninger")
+                          .filter(`_type == 'article_views'`)
+                          .apiVersion(SANITY_API_VERSION)
+                          .menuItems([
+                            ...S.documentTypeList(
+                              "article_views",
+                            ).getMenuItems(),
+                          ]),
+                      ),
                   ]),
               ),
           ]
