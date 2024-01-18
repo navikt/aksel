@@ -11,7 +11,7 @@ interface FileUploadProps {
    * Changes locale used for component text.
    * @default "nb" (norsk bokmål)
    */
-  locale?: "nb" | "nn" | "en";
+  locale?: "nb" | "en";
 }
 
 /**

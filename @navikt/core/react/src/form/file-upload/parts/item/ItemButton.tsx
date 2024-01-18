@@ -1,25 +1,28 @@
 import React from "react";
 import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
+import { useFileUploadLocale } from "../../FileUpload.context";
 import { FileItem } from "./types";
 import { getDeleteText, getRetryText } from "./utils/i18n";
 
 interface Props {
   file: FileItem;
-  locale: "nb" | "nn" | "en";
   onRetry?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   error?: string;
 }
 
-const ItemButton = ({ file, locale, onRetry, onDelete, error }: Props) => {
+const ItemButton = ({ file, onRetry, onDelete, error }: Props) => {
+  const localeCtx = useFileUploadLocale().locale ?? "nb";
   if (error && onRetry) {
     return (
       <Button
         type="button"
         variant="tertiary-neutral"
         onClick={onRetry}
-        icon={<ArrowsCirclepathIcon title={getRetryText(locale, file.name)} />}
+        icon={
+          <ArrowsCirclepathIcon title={getRetryText(localeCtx, file.name)} />
+        }
       />
     );
   }
@@ -29,7 +32,7 @@ const ItemButton = ({ file, locale, onRetry, onDelete, error }: Props) => {
         type="button"
         variant="tertiary-neutral"
         onClick={onDelete}
-        icon={<TrashIcon title={getDeleteText(locale, file.name)} />}
+        icon={<TrashIcon title={getDeleteText(localeCtx, file.name)} />}
       />
     );
   }

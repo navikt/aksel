@@ -84,7 +84,6 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
           {!status && (
             <ItemButton
               file={file}
-              locale={locale}
               onRetry={onRetry}
               onDelete={onDelete}
               error={error}
@@ -98,7 +97,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
 
 function getStatusText(
   file: FileItem,
-  locale: "nb" | "nn" | "en",
+  locale: "nb" | "en",
   status?: FileItemProps["status"],
 ) {
   if (status === "uploading") {

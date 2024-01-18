@@ -1,9 +1,7 @@
-export const getRetryText = (locale: "nb" | "nn" | "en", name: string) => {
+export const getRetryText = (locale: "nb" | "en", name: string) => {
   switch (locale) {
     case "nb":
       return `Prøv å laste opp filen ${name} på nytt`;
-    case "nn":
-      return `Prøv å laste opp fila ${name} på nytt`;
     case "en":
       return `Try to upload the file ${name} again`;
     default:
@@ -11,7 +9,7 @@ export const getRetryText = (locale: "nb" | "nn" | "en", name: string) => {
   }
 };
 
-export const getDeleteText = (locale: "nb" | "nn" | "en", name: string) => {
+export const getDeleteText = (locale: "nb" | "en", name: string) => {
   switch (locale) {
     case "en":
       return `Delete ${name}`;
@@ -20,12 +18,10 @@ export const getDeleteText = (locale: "nb" | "nn" | "en", name: string) => {
   }
 };
 
-export const getUploadingText = (locale: "nb" | "nn" | "en") => {
+export const getUploadingText = (locale: "nb" | "en") => {
   switch (locale) {
     case "nb":
       return "Laster opp…";
-    case "nn":
-      return "Lastar opp…";
     case "en":
       return "Uploading…";
     default:
@@ -33,12 +29,10 @@ export const getUploadingText = (locale: "nb" | "nn" | "en") => {
   }
 };
 
-export const getDownloadingText = (locale: "nb" | "nn" | "en") => {
+export const getDownloadingText = (locale: "nb" | "en") => {
   switch (locale) {
     case "nb":
       return "Laster ned…";
-    case "nn":
-      return "Lastar ned…";
     case "en":
       return "Downloading…";
     default:
