@@ -19,5 +19,6 @@ Disallow: /*.js$
 Disallow: /eksempler
 Disallow: /templates
 Disallow: /admin
+Disallow: /gp
 
 Sitemap: https://aksel.nav.no/sitemap.xml
