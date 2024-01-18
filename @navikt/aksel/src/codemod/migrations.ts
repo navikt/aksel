@@ -90,7 +90,7 @@ export const migrations: {
   "v6.0.0": [
     {
       description:
-        "Removed deprecated props from `<Chat />` and `<Chat.Bubble />`",
+        "Removed deprecated props from `<Chat />` and `<Chat.Bubble />`. Removes `backgroundColor` and `avatarColor` properties",
       value: "v6-chat",
       path: "v6.0.0/chat/chat",
       warning:
