@@ -62,13 +62,6 @@ export const Locales: StoryObj<typeof FileUpload.List> = {
       </FileUpload>
 
       <FileUpload locale="en">
-        <FileUpload.List label="Nynorsk med engelsk override på ett ListItem">
-          <FileUpload.ListItem file={fileTxt} status="uploading" />
-          <FileUpload.ListItem file={fileDocx} status="uploading" />
-        </FileUpload.List>
-      </FileUpload>
-
-      <FileUpload locale="en">
         <FileUpload.List label="Engelsk">
           <FileUpload.ListItem file={fileTxt} status="uploading" />
           <FileUpload.ListItem file={fileDocx} />
