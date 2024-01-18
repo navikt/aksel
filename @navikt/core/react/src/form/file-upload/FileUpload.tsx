@@ -14,6 +14,7 @@ interface FileUploadProps {
   locale?: "nb" | "en";
 }
 
+// TODO: Update jsdoc
 /**
  * A set of components used to upload files and display files.
  * FileUpload is only a namespace, only use the subcomponents.
