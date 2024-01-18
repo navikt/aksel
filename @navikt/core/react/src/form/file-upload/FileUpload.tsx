@@ -3,7 +3,6 @@ import { FileUploadLocaleContextProvider } from "./FileUpload.context";
 import Dropzone from "./parts/Dropzone";
 import Item from "./parts/item/Item";
 import List from "./parts/list/List";
-import ListItem from "./parts/list/ListItem";
 
 interface FileUploadProps {
   children: React.ReactNode;
@@ -46,6 +45,5 @@ export const FileUpload = ({ children, locale }: FileUploadProps) => (
 FileUpload.Dropzone = Dropzone;
 FileUpload.List = List;
 FileUpload.Item = Item;
-FileUpload.ListItem = ListItem;
 
 export default FileUpload;

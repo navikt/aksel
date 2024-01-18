@@ -18,8 +18,8 @@ export const Default: StoryObj<typeof FileUpload.List> = {
     <>
       <FileUpload.Item file={fileTxt} />
       <FileUpload.List {...props}>
-        <FileUpload.ListItem file={fileTxt} />
-        <FileUpload.ListItem file={fileDocx} />
+        <FileUpload.Item file={fileTxt} />
+        <FileUpload.Item file={fileDocx} />
       </FileUpload.List>
     </>
   ),
@@ -32,8 +32,8 @@ export const Default: StoryObj<typeof FileUpload.List> = {
 export const WithoutLabel: StoryObj<typeof FileUpload.List> = {
   render: (props) => (
     <FileUpload.List {...props}>
-      <FileUpload.ListItem file={fileTxt} />
-      <FileUpload.ListItem file={fileDocx} />
+      <FileUpload.Item file={fileTxt} />
+      <FileUpload.Item file={fileDocx} />
     </FileUpload.List>
   ),
 };
@@ -41,8 +41,8 @@ export const WithoutLabel: StoryObj<typeof FileUpload.List> = {
 export const WithError: StoryObj<typeof FileUpload.List> = {
   render: (props) => (
     <FileUpload.List {...props}>
-      <FileUpload.ListItem file={fileTxt} />
-      <FileUpload.ListItem file={fileDocx} />
+      <FileUpload.Item file={fileTxt} />
+      <FileUpload.Item file={fileDocx} />
     </FileUpload.List>
   ),
   args: {
@@ -56,15 +56,15 @@ export const Locales: StoryObj<typeof FileUpload.List> = {
     <VStack gap="10">
       <FileUpload locale="nb">
         <FileUpload.List label="Bokmål">
-          <FileUpload.ListItem file={fileTxt} status="uploading" />
-          <FileUpload.ListItem file={fileDocx} />
+          <FileUpload.Item file={fileTxt} status="uploading" />
+          <FileUpload.Item file={fileDocx} />
         </FileUpload.List>
       </FileUpload>
 
       <FileUpload locale="en">
         <FileUpload.List label="Engelsk">
-          <FileUpload.ListItem file={fileTxt} status="uploading" />
-          <FileUpload.ListItem file={fileDocx} />
+          <FileUpload.Item file={fileTxt} status="uploading" />
+          <FileUpload.Item file={fileDocx} />
         </FileUpload.List>
       </FileUpload>
     </VStack>
