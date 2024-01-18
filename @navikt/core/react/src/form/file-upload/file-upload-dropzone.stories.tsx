@@ -7,6 +7,13 @@ import { OnFileSelectProps } from "./parts/Dropzone";
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload/Dropzone",
   component: FileUpload.Dropzone,
+  decorators: [
+    (Story) => (
+      <div style={{ width: 500, maxWidth: "100%" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;

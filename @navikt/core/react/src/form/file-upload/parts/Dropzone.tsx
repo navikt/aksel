@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import { CloudUpIcon, UploadIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
-import { BodyShort, ErrorMessage, Label } from "../../../typography";
+import { BodyShort, ErrorMessage, Heading, Label } from "../../../typography";
 import { useMergeRefs } from "../../../util/hooks";
 import { omit } from "../../../util/omit";
 import { FormFieldProps, useFormField } from "../../useFormField";
@@ -184,8 +184,10 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
         >
           {isDraggingOver && (
             <div className="navds-file-dropzone__dragover">
-              <CloudUpIcon fontSize="1.5rem" aria-hidden />
-              <BodyShort as="span">{getDropText(localeCtx)}</BodyShort>
+              <CloudUpIcon fontSize="3rem" aria-hidden />
+              <Heading size="small" as="span">
+                {getDropText(localeCtx)}
+              </Heading>
             </div>
           )}
           <div className="navds-file-dropzone__zone-icon">
