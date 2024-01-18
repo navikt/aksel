@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { FileUpload } from "..";
 import { VStack } from "../../layout/stack";
+import { Heading } from "../../typography";
 
 const meta: Meta<typeof FileUpload.List> = {
   title: "ds-react/FileUpload/List",
@@ -51,21 +52,17 @@ export const WithError: StoryObj<typeof FileUpload.List> = {
   },
 };
 
-export const Locales: StoryObj<typeof FileUpload.List> = {
+export const Locales = {
   render: () => (
     <VStack gap="10">
       <FileUpload locale="nb">
-        <FileUpload.List label="Bokmål">
+        <Heading level="3" size="xsmall">
+          Bokmål
+        </Heading>
+        <VStack gap="2" as="ul">
           <FileUpload.Item file={fileTxt} status="uploading" />
           <FileUpload.Item file={fileDocx} />
-        </FileUpload.List>
-      </FileUpload>
-
-      <FileUpload locale="en">
-        <FileUpload.List label="Engelsk">
-          <FileUpload.Item file={fileTxt} status="uploading" />
-          <FileUpload.Item file={fileDocx} />
-        </FileUpload.List>
+        </VStack>
       </FileUpload>
     </VStack>
   ),
