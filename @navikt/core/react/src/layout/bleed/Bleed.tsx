@@ -23,7 +23,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * @example
    * marginBlock='4'
    * marginBlock='4 5'
-   * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6', 2xl: '6'}}
+   * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6', 2xl: '12'}}
    */
   marginBlock?: ResponsiveProp<
     BleedSpacingBlock | `${BleedSpacingBlock} ${BleedSpacingBlock}`
