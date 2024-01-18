@@ -54,7 +54,7 @@ export const A11yDemo = {
         <button onClick={() => ref.current?.focus()}>
           Fokuser Errorsummary på klikk
         </button>
-        <ErrorSummary heading="Feiloppsummering tittel" focusTarget={ref}>
+        <ErrorSummary heading="Feiloppsummering tittel" focusTargetRef={ref}>
           <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
           <ErrorSummary.Item href="#2">
             Tekstfeltet må ha en godkjent e-mail
@@ -72,7 +72,7 @@ export const FocusDemo = {
     return (
       <div>
         <button onClick={() => ref.current?.focus()}>Focus summary</button>
-        <ErrorSummary heading="Feiloppsummering tittel" focusTarget={ref}>
+        <ErrorSummary heading="Feiloppsummering tittel" focusTargetRef={ref}>
           <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
           <ErrorSummary.Item href="#2">
             Tekstfeltet må ha en godkjent e-mail
