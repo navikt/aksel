@@ -89,6 +89,21 @@
   }
 }
 
+.navds-file-dropzone__dragover-icon {
+  transform: translateY(0);
+  animation: akselFileUploadDragoverIcon 3s cubic-bezier(0.3, 1.75, 0.3, 1) infinite;
+}
+
+@keyframes akselFileUploadDragoverIcon {
+  90% {
+    transform: translateY(-4px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .navds-file-dropzone__zone--error:not(.navds-file-dropzone__zone--dragging-over) {
   border-color: var(--ac-file-upload-error-border, var(--a-surface-danger));
   border-width: 2px;
