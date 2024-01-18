@@ -92,7 +92,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           "navds-error-summary",
           `navds-error-summary--${size}`,
         )}
-        tabIndex={-1}
+        tabIndex={ref ? -1 : undefined}
         aria-live="polite"
         aria-relevant="all"
         aria-labelledby={headingId}
