@@ -1,7 +1,6 @@
 import cl from "clsx";
-import React, { forwardRef, isValidElement } from "react";
+import React, { forwardRef } from "react";
 import { ErrorMessage, Heading } from "../../../../typography";
-import { useFileUploadLocale } from "../../FileUpload.context";
 
 export interface FileListProps {
   /**
@@ -29,8 +28,6 @@ export interface FileListProps {
 
 export const FileList = forwardRef<HTMLDivElement, FileListProps>(
   ({ children, label, labelTag = "span", error, className }, ref) => {
-    const localeCtx = useFileUploadLocale();
-    console.log(localeCtx);
     return (
       <div className={cl("navds-file-list", className)} ref={ref}>
         {label && (
@@ -38,15 +35,7 @@ export const FileList = forwardRef<HTMLDivElement, FileListProps>(
             {label}
           </Heading>
         )}
-        <ul className="navds-file-list__list">
-          {React.Children.map(children, (child) => {
-            if (!isValidElement(child)) {
-              return null;
-            }
-
-            return <li>{child}</li>;
-          })}
-        </ul>
+        <ul className="navds-file-list__list">{children}</ul>
         <div
           className="navds-form-field__error navds-file-list__error"
           aria-relevant="additions removals"

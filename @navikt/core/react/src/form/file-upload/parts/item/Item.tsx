@@ -11,7 +11,7 @@ import { getDownloadingText, getUploadingText } from "./utils/i18n";
 
 const DEFAULT_LOCALE = "nb";
 
-export interface FileItemProps {
+export interface FileItemBaseProps {
   /**
    * Either a native File or file metadata.
    */
@@ -19,7 +19,7 @@ export interface FileItemProps {
   /**
    * Callback called when the file named is clicked.
    */
-  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+  onFileClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
   /**
    * Href to use on the <a> tag displaying the file name.
    */
@@ -40,11 +40,11 @@ export interface FileItemProps {
    * Callback called when the retry button is clicked.
    */
   onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
-  /**
-   * Class name passed to the <div> element.
-   */
-  className?: string;
 }
+
+export interface FileItemProps
+  extends FileItemBaseProps,
+    React.HTMLAttributes<HTMLDivElement> {}
 
 export const Item = forwardRef<HTMLDivElement, FileItemProps>(
   (
@@ -56,7 +56,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
       error,
       className,
       href,
-      onClick,
+      onFileClick,
     }: FileItemProps,
     ref,
   ) => {
@@ -72,7 +72,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
       >
         <ItemIcon isLoading={!!status} file={file} />
         <div className="navds-file-item__file-info">
-          <ItemName file={file} href={href} onClick={onClick} />
+          <ItemName file={file} href={href} onClick={onFileClick} />
           {!isError && <div>{getStatusText(file, locale, status)}</div>}
           <div
             className="navds-file-item__error"

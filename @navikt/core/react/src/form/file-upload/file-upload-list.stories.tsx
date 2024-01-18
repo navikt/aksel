@@ -18,8 +18,8 @@ export const Default: StoryObj<typeof FileUpload.List> = {
     <>
       <FileUpload.Item file={fileTxt} />
       <FileUpload.List {...props}>
-        <FileUpload.Item file={fileTxt} />
-        <FileUpload.Item file={fileDocx} />
+        <FileUpload.ListItem file={fileTxt} />
+        <FileUpload.ListItem file={fileDocx} />
       </FileUpload.List>
     </>
   ),
@@ -32,8 +32,8 @@ export const Default: StoryObj<typeof FileUpload.List> = {
 export const WithoutLabel: StoryObj<typeof FileUpload.List> = {
   render: (props) => (
     <FileUpload.List {...props}>
-      <FileUpload.Item file={fileTxt} />
-      <FileUpload.Item file={fileDocx} />
+      <FileUpload.ListItem file={fileTxt} />
+      <FileUpload.ListItem file={fileDocx} />
     </FileUpload.List>
   ),
 };
@@ -41,8 +41,8 @@ export const WithoutLabel: StoryObj<typeof FileUpload.List> = {
 export const WithError: StoryObj<typeof FileUpload.List> = {
   render: (props) => (
     <FileUpload.List {...props}>
-      <FileUpload.Item file={fileTxt} />
-      <FileUpload.Item file={fileDocx} />
+      <FileUpload.ListItem file={fileTxt} />
+      <FileUpload.ListItem file={fileDocx} />
     </FileUpload.List>
   ),
   args: {
@@ -55,23 +55,23 @@ export const Locales: StoryObj<typeof FileUpload.List> = {
   render: () => (
     <VStack gap="10">
       <FileUpload.List label="Bokmål">
-        <FileUpload.Item file={fileTxt} status="uploading" />
-        <FileUpload.Item file={fileDocx} />
+        <FileUpload.ListItem file={fileTxt} status="uploading" />
+        <FileUpload.ListItem file={fileDocx} />
       </FileUpload.List>
 
       <FileUpload.List label="Nynorsk">
-        <FileUpload.Item file={fileTxt} status="uploading" />
-        <FileUpload.Item file={fileDocx} />
+        <FileUpload.ListItem file={fileTxt} status="uploading" />
+        <FileUpload.ListItem file={fileDocx} />
       </FileUpload.List>
 
-      <FileUpload.List label="Nynorsk med engelsk override på ett item">
-        <FileUpload.Item file={fileTxt} status="uploading" />
-        <FileUpload.Item file={fileDocx} status="uploading" />
+      <FileUpload.List label="Nynorsk med engelsk override på ett ListItem">
+        <FileUpload.ListItem file={fileTxt} status="uploading" />
+        <FileUpload.ListItem file={fileDocx} status="uploading" />
       </FileUpload.List>
 
       <FileUpload.List label="Engelsk">
-        <FileUpload.Item file={fileTxt} status="uploading" />
-        <FileUpload.Item file={fileDocx} />
+        <FileUpload.ListItem file={fileTxt} status="uploading" />
+        <FileUpload.ListItem file={fileDocx} />
       </FileUpload.List>
     </VStack>
   ),

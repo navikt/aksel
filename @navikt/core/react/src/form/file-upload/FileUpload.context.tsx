@@ -5,4 +5,7 @@ export type FileUploadLocaleContextProps = {
 };
 
 export const [FileUploadLocaleContextProvider, useFileUploadLocale] =
-  createContext<FileUploadLocaleContextProps>({ strict: false });
+  createContext<FileUploadLocaleContextProps>({
+    strict: false,
+    defaultValue: { locale: "nb" },
+  });
