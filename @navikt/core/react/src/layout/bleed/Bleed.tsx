@@ -13,7 +13,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * @example
    * marginInline='4'
    * marginInline='4 5'
-   * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6', 2xl: '6'}}
+   * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6', 2xl: '12'}}
    */
   marginInline?: ResponsiveProp<
     BleedSpacingInline | `${BleedSpacingInline} ${BleedSpacingInline}`
