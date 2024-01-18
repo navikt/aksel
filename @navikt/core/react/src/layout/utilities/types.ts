@@ -14,7 +14,7 @@ export type BorderRadiiToken =
   | "0";
 export type ShadowToken = keyof typeof shadows.a.shadow;
 
-export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl";
+export type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 
 export type SpacingScale = keyof (typeof Spacing)["a"]["spacing"];
 
