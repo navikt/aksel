@@ -75,3 +75,19 @@ Alle klasser med `.navds-content-container`-prefix er fjernet
   </Page.Block>
 </Page>
 ```
+
+## Tokens
+
+Nytt brekkpunkt for 1440px `--a-breakpoint-2xl`. Alle primitives støtter også nå 2xl-brekkpunkt for responsive props.
+
+For brukere av vår tailwind-config vil dette også si at `screen` er oppdatert. Dette vil overskrive default tailwind-config som er `1536px`, og de tilfellene der man manuelt har overskrevet f.eks `max-w-screen-2xl` til å være noe annet.
+
+```
+"screen": {
+  "sm": "480px",
+  "md": "768px",
+  "lg": "1024px",
+  "xl": "1280px",
+  "2xl": "1440px"
+},
+```
