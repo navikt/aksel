@@ -86,7 +86,7 @@ Alle klasser med `.navds-content-container`-prefix er fjernet
 
 ### Z-index
 
-Fjernet `--a-z-index-modal`-token da systemet nå bruker native `dialog`-element.
+Fjernet `--a-z-index-modal`-token da systemet nå bruker native `dialog`-element. Dette vil også påvirke brukere av `z-modal` i tailwind.
 
 (Unødvendig med codemod da bare 1 løsning bruker den: https://github.com/search?type=code&q=org%3Anavikt+a-z-index-modal)
 
