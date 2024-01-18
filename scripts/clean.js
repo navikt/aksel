@@ -3,20 +3,21 @@ const fs = require("fs");
 const glob = require("glob");
 
 function deleteFolder(folder) {
+  if (!fs.existsSync(folder)) {
+    throw new Error(`path: ${folder} does not exist`);
+  }
   if (!fs.lstatSync(folder).isDirectory()) {
     throw new Error(`path: ${folder} is not a directory`);
   }
-  if (fs.existsSync(folder)) {
-    fs.readdirSync(folder).forEach((file) => {
-      const currentPath = path.join(folder, file);
-      if (fs.lstatSync(currentPath).isDirectory()) {
-        deleteFolder(currentPath);
-      } else {
-        fs.unlinkSync(currentPath);
-      }
-    });
-    fs.rmdirSync(folder);
-  }
+  fs.readdirSync(folder).forEach((file) => {
+    const currentPath = path.join(folder, file);
+    if (fs.lstatSync(currentPath).isDirectory()) {
+      deleteFolder(currentPath);
+    } else {
+      fs.unlinkSync(currentPath);
+    }
+  });
+  fs.rmdirSync(folder);
 }
 
 function getGlobFiles(globPattern, options) {
@@ -31,25 +32,28 @@ function getGlobFiles(globPattern, options) {
   });
 }
 
-Promise.all([
-  getGlobFiles("./@navikt/**/dist", { dot: true }),
-  getGlobFiles("./@navikt/**/lib", { dot: true }),
-  getGlobFiles("./@navikt/**/esm", { dot: true }),
-  getGlobFiles("./@navikt/**/cjs", { dot: true }),
-  getGlobFiles("./@navikt/aksel-icons/src", { dot: true }),
-]).then(([dist, libvnext, esmvnext, cjsvnext, akselIconsSrc]) => {
-  const folders = [
-    ...dist,
-    ...libvnext,
-    ...esmvnext,
-    ...cjsvnext,
-    ...akselIconsSrc,
-  ].filter((folder) => !folder.includes("node_modules"));
+async function clean() {
+  const globPatterns = [
+    "./@navikt/**/dist",
+    "./@navikt/**/lib",
+    "./@navikt/**/esm",
+    "./@navikt/**/cjs",
+    "./@navikt/aksel-icons/src",
+  ];
+  let deletedFoldersCount = 0;
 
-  folders.forEach((folder) => {
-    console.log(`Deleting folder ${folder}`);
-    deleteFolder(folder);
-  });
+  for (const globPattern of globPatterns) {
+    const folders = await getGlobFiles(globPattern, { dot: true });
+    folders
+      .filter((folder) => !folder.includes("node_modules"))
+      .forEach((folder) => {
+        console.log(`Deleting folder ${folder}`);
+        deleteFolder(folder);
+        deletedFoldersCount++;
+      });
+  }
 
-  console.log(`Deleted ${folders.length} folders`);
-});
+  console.log(`Deleted ${deletedFoldersCount} folders`);
+}
+
+clean();
