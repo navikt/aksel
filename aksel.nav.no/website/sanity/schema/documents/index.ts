@@ -21,3 +21,4 @@ export * from "./skrivehjelp";
 export * from "./standalone-artikkel";
 export * from "./templates/artikkel";
 export * from "./templates/landingsside";
+export * from "./articleViews";
