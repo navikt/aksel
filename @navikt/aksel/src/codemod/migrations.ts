@@ -90,7 +90,7 @@ export const migrations: {
   "v6.0.0": [
     {
       description:
-        "Removes `backgroundColor` and `avatarColor` properties from `Chat` and `Chat.Bubble`",
+        "Removes `backgroundColor` and `avatarBgColor` properties from `Chat` and `Chat.Bubble`",
       value: "v6-chat",
       path: "v6.0.0/chat/chat",
       warning:
