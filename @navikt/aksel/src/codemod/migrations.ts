@@ -87,6 +87,16 @@ export const migrations: {
       path: "v4.0.0/date/date",
     },
   ],
+  "v6.0.0": [
+    {
+      description:
+        "Removes `backgroundColor` and `avatarBgColor` properties from `Chat` and `Chat.Bubble`",
+      value: "v6-chat",
+      path: "v6.0.0/chat/chat",
+      warning:
+        "Remember to update use of `variant`-prop to match previous use of colors. If needed the component exposes css-variables for custom overrides",
+    },
+  ],
 };
 
 export function getMigrationPath(str: string) {
