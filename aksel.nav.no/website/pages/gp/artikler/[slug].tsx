@@ -1,3 +1,4 @@
+import differenceInMonths from "date-fns/differenceInMonths";
 import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -88,12 +89,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-async function isOutdated(verifiedDate: Date) {
-  const differenceInMonths = (await import("date-fns/differenceInMonths"))
-    .default;
-  return differenceInMonths(new Date(), new Date(verifiedDate)) >= 12;
-}
-
 export const getStaticProps: GetStaticProps = async ({
   params: { slug },
   preview = false,
@@ -116,7 +111,7 @@ export const getStaticProps: GetStaticProps = async ({
       id: page?._id ?? "",
       title: page?.heading ?? "",
       verifiedDate: await dateStr(verifiedDate),
-      outdated: await isOutdated(verifiedDate),
+      outdated: differenceInMonths(new Date(), new Date(verifiedDate)) >= 12,
       publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
       toc: generateTableOfContents({
         content: page?.content,
