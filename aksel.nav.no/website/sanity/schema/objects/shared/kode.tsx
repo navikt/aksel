@@ -28,6 +28,7 @@ export const Kode = defineType({
           { value: "less", title: "LESS" },
           { value: "bash", title: "Terminal" },
           { value: "markdown", title: "Markdown" },
+          { value: "yaml", title: "YAML" },
         ],
       },
     }),
