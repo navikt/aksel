@@ -61,11 +61,11 @@
 @media (min-width: 1440px) {
   .navds-hgrid {
     --__ac-hgrid-columns: var(
-      --__ac-hgrid-columns-2xl
-        var(
-          --__ac-hgrid-columns-xl,
-          var(--__ac-hgrid-columns-lg, var(--__ac-hgrid-columns-md, var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs))))
-        )
+      --__ac-hgrid-columns-2xl,
+      var(
+        --__ac-hgrid-columns-xl,
+        var(--__ac-hgrid-columns-lg, var(--__ac-hgrid-columns-md, var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs))))
+      )
     );
     --__ac-hgrid-gap: var(
       --__ac-hgrid-gap-2xl,
