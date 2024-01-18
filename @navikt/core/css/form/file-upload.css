@@ -47,7 +47,7 @@
 }
 
 .navds-file-dropzone__dragover {
-  color: var(--ac-file-upload-dragover-text, var(--a-text-action));
+  color: var(--ac-file-upload-dragover-text, var(--a-text-action-selected));
   background: var(--a-surface-transparent);
   pointer-events: none;
   align-items: center;
