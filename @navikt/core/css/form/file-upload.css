@@ -1,3 +1,8 @@
+.navds-file-upload :is(ul, li) {
+  list-style: none;
+  margin: 0;
+}
+
 /**
  * FileUpload.Dropzone
  */
@@ -98,26 +103,6 @@
 
 .navds-file-dropzone__input::file-selector-button {
   cursor: pointer;
-}
-
-/**
- * FileUpload.List
- */
-
-.navds-file-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--a-spacing-2);
-}
-
-.navds-file-list__list {
-  padding: var(--a-spacing-0);
-  list-style: none;
-  margin: var(--a-spacing-0);
-}
-
-.navds-file-list__list li:not(:last-of-type) {
-  margin-bottom: var(--a-spacing-2);
 }
 
 /**

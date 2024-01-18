@@ -2,11 +2,19 @@ import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
 import { FileUpload } from "..";
 import { VStack } from "../../layout/stack";
+import { ErrorMessage, Heading } from "../../typography";
 import { OnFileSelectProps } from "./parts/Dropzone";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload",
   component: FileUpload.Dropzone,
+  decorators: [
+    (Story) => (
+      <div style={{ width: 500, maxWidth: "100%" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
@@ -51,19 +59,25 @@ export const Default: StoryFn = () => {
       />
 
       {files.allFiles.length > 0 && (
-        <FileUpload.List
-          label={`Valgte filer (${files.allFiles.length} av ${MAX_FILES})`}
-          error={getListError(files)}
-        >
-          {files.allFiles.map((file, index) => (
-            <FileUpload.Item
-              key={index}
-              file={file}
-              error={getError(file, files.rejectedFiles)}
-              onDelete={() => removeFile(file)}
-            />
-          ))}
-        </FileUpload.List>
+        <VStack gap="2">
+          <Heading level="3" size="xsmall">
+            {" "}
+            {`Valgte filer (${files.allFiles.length} av ${MAX_FILES})`}
+          </Heading>
+          <VStack gap="2">
+            {files.allFiles.map((file, index) => (
+              <FileUpload.Item
+                key={index}
+                file={file}
+                error={getError(file, files.rejectedFiles)}
+                onDelete={() => removeFile(file)}
+              />
+            ))}
+          </VStack>
+          {getListError(files) && (
+            <ErrorMessage>{getListError(files)}</ErrorMessage>
+          )}
+        </VStack>
       )}
     </VStack>
   );

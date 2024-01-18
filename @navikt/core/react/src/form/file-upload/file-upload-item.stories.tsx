@@ -43,7 +43,7 @@ export const Default: StoryObj<typeof FileUpload.Item> = {
   },
 };
 
-export const Icons: StoryObj<typeof FileUpload.List> = {
+export const Icons: StoryObj<typeof FileUpload.Item> = {
   render: () => (
     <VStack gap="5">
       <FileUpload.Item file={fileTxt} />
@@ -60,7 +60,7 @@ export const Icons: StoryObj<typeof FileUpload.List> = {
   ),
 };
 
-export const Error: StoryObj<typeof FileUpload.List> = {
+export const Error: StoryObj<typeof FileUpload.Item> = {
   render: () => (
     <VStack gap="5">
       <Heading size="small">Vanlig error</Heading>
@@ -77,7 +77,7 @@ export const Error: StoryObj<typeof FileUpload.List> = {
   ),
 };
 
-export const Buttons: StoryObj<typeof FileUpload.List> = {
+export const Buttons: StoryObj<typeof FileUpload.Item> = {
   render: () => (
     <VStack gap="5">
       <FileUpload.Item file={fileXlsx} onRetry={() => onRetry(fileXlsx)} />
