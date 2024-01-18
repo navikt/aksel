@@ -37,7 +37,7 @@ interface FileUploadProps {
  */
 export const FileUpload = ({ children, locale }: FileUploadProps) => (
   <FileUploadLocaleContextProvider locale={locale}>
-    {children}
+    <div className="navds-file-upload">{children}</div>
   </FileUploadLocaleContextProvider>
 );
 
