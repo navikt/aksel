@@ -1,7 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { FileItem, FileUpload } from "..";
-import { VStack } from "../../layout/stack";
+import { Button } from "../../button";
+import { HStack, VStack } from "../../layout/stack";
 import { Heading } from "../../typography";
 
 const meta: Meta<typeof FileUpload.Item> = {
@@ -193,4 +194,119 @@ export const Locale: StoryObj<{ locale: "nb" | "en" }> = {
       </FileUpload>
     </VStack>
   ),
+};
+
+export const Animated: StoryObj = {
+  render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [files, setFiles] = useState<any>({
+      first: {
+        file: fileTxt,
+        status: undefined,
+        error: undefined,
+        onRetry: undefined,
+        onDelete: undefined,
+      },
+      second: {
+        file: filePdf,
+        status: undefined,
+        error: undefined,
+        onRetry: undefined,
+        onDelete: undefined,
+      },
+    });
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const timeout = useRef<NodeJS.Timeout>();
+
+    const start = () => {
+      setFiles({
+        first: {
+          file: fileTxt,
+          status: "uploading",
+          error: undefined,
+          onRetry: undefined,
+          onDelete: undefined,
+        },
+        second: {
+          file: filePdf,
+          status: "uploading",
+          error: undefined,
+          onRetry: undefined,
+          onDelete: undefined,
+        },
+      });
+
+      timeout.current = setTimeout(() => {
+        setFiles({
+          first: {
+            file: fileTxt,
+            status: undefined,
+            error: "Failed to upload",
+            onRetry: () => null,
+            onDelete: undefined,
+          },
+          second: {
+            file: filePdf,
+            status: "uploading",
+            error: undefined,
+            onRetry: undefined,
+            onDelete: undefined,
+          },
+        });
+        timeout.current = setTimeout(
+          () =>
+            setFiles({
+              first: {
+                file: fileTxt,
+                status: undefined,
+                error: "Failed to upload",
+                onRetry: () => null,
+                onDelete: undefined,
+              },
+              second: {
+                file: filePdf,
+                status: undefined,
+                error: "File is to large",
+                onRetry: undefined,
+                onDelete: () => null,
+              },
+            }),
+          1500,
+        );
+      }, 2000);
+    };
+
+    return (
+      <VStack gap="6">
+        <FileUpload locale="nb">
+          <VStack gap="3">
+            <FileUpload.Item
+              file={files.first.file}
+              status={files.first.status}
+              error={files.first.error}
+              onRetry={files.first.onRetry}
+            />
+            <FileUpload.Item
+              file={files.second.file}
+              status={files.second.status}
+              error={files.second.error}
+              onRetry={files.second.onRetry}
+            />
+          </VStack>
+        </FileUpload>
+        <HStack gap="2">
+          <Button onClick={start}>Start</Button>
+          <Button
+            onClick={() => {
+              timeout.current && clearTimeout(timeout.current);
+              start();
+            }}
+          >
+            Restart
+          </Button>
+        </HStack>
+      </VStack>
+    );
+  },
 };
