@@ -65,6 +65,7 @@ export const ArticleViews = defineType({
       title: "articleRef",
       name: "article_ref",
       type: "reference",
+      weak: true,
       to: { type: "aksel_artikkel" },
     }),
     defineField({

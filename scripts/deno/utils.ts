@@ -21,3 +21,13 @@ export const getChangelogs = (path: string) => {
   walkFiles(path);
   return changelogs;
 };
+
+export const hashString = (str: string) => {
+  let output = 1;
+  for (let i = 0; i < str.length; i++) {
+    output *= str[i].charCodeAt(0);
+    output %= Number.MAX_SAFE_INTEGER;
+  }
+
+  return output;
+};
