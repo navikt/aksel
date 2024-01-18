@@ -30,16 +30,6 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   variant?: "subtle" | "info" | "neutral";
   /**
-   * Background color on bubbles
-   * @deprecated Use `variant` instead
-   */
-  backgroundColor?: string;
-  /**
-   * Background color for avatar
-   * @deprecated Use `variant` instead
-   */
-  avatarBgColor?: string;
-  /**
    * Positions avatar and bubbles
    * @default "left"
    */
@@ -93,8 +83,6 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       avatar,
       position = "left",
       variant = "neutral",
-      avatarBgColor,
-      backgroundColor,
       toptextPosition,
       size = "medium",
       ...rest
@@ -114,11 +102,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       {...rest}
     >
       {avatar && (
-        <div
-          className="navds-chat__avatar"
-          aria-hidden
-          style={{ backgroundColor: avatarBgColor }}
-        >
+        <div className="navds-chat__avatar" aria-hidden>
           {avatar}
         </div>
       )}
@@ -130,7 +114,6 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
                 {React.cloneElement(child, {
                   name: name && i === 0 ? name : undefined,
                   timestamp: timestamp && i === 0 ? timestamp : undefined,
-                  backgroundColor,
                   ...child.props,
                 })}
               </BodyLong>

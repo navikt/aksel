@@ -13,6 +13,7 @@ const meta = {
   title: "kitchen sink/navno-sidemal",
   parameters: {
     layout: "fullscreen",
+    chromatic: { disableSnapshot: true },
   },
 } satisfies Meta;
 
