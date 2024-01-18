@@ -21,6 +21,10 @@
   width: 100%;
 }
 
+.navds-file-dropzone__zone:has(.navds-file-dropzone__dragover) {
+  background-color: var(--ac-file-upload-dragover-bg, var(--a-surface-action-subtle));
+}
+
 .navds-file-dropzone__zone-icon {
   display: flex;
   padding: var(--a-spacing-3);
@@ -34,7 +38,7 @@
   gap: var(--a-spacing-1);
 }
 
-.navds-file-dropzone__zone:hover .navds-file-dropzone__button {
+.navds-file-dropzone__zone:hover:not(:has(.navds-file-dropzone__dragover)) .navds-file-dropzone__button {
   color: var(--ac-button-secondary-hover-text, var(--__ac-button-secondary-hover-text, var(--a-text-action-on-action-subtle)));
   background-color: var(
     --ac-button-secondary-hover-bg,
@@ -44,7 +48,7 @@
 
 .navds-file-dropzone__dragover {
   color: var(--ac-file-upload-dragover-text, var(--a-text-action));
-  background-color: var(--ac-file-upload-dragover-bg, var(--a-surface-action-subtle-hover));
+  background: var(--a-surface-transparent);
   pointer-events: none;
   align-items: center;
   display: flex;
@@ -52,12 +56,37 @@
   gap: var(--a-spacing-2);
   justify-content: center;
   position: absolute;
-  width: 100%;
-  height: 100%;
   inset: 0;
+  z-index: 0;
+}
+
+.navds-file-dropzone__dragover::before {
+  z-index: -1;
+  content: "";
+  inset: 0;
+  position: absolute;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: var(--a-surface-hover);
+  box-shadow: inset 0 2px 7px 3px rgb(11 11 11/ 0.1);
 
   /* Radius - border-width */
   border-radius: calc(var(--a-border-radius-large) - 1px);
+  animation: akselFileUploadDragover 250ms cubic-bezier(0.3, 1.75, 0.3, 1);
+}
+
+@keyframes akselFileUploadDragover {
+  0% {
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    background-color: var(--a-surface-transparent);
+  }
+
+  100% {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: var(--a-surface-hover);
+  }
 }
 
 .navds-file-dropzone__zone--error:not(.navds-file-dropzone__zone--dragging-over) {
@@ -66,7 +95,7 @@
   margin: -1px 0;
 }
 
-.navds-file-dropzone__zone:has(:focus-visible) .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:focus-visible):not(:has(.navds-file-dropzone__dragover)) .navds-file-dropzone__button {
   box-shadow:
     inset 0 0 0 2px var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
     var(--a-shadow-focus);
@@ -80,13 +109,13 @@
   }
 }
 
-.navds-file-dropzone__zone:has(:active) .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:active):not(:has(.navds-file-dropzone__dragover)) .navds-file-dropzone__button {
   color: var(--ac-button-secondary-active-text, var(--__ac-button-secondary-active-text, var(--a-text-on-action)));
   background-color: var(--ac-button-secondary-active-bg, var(--__ac-button-secondary-active-bg, var(--a-surface-action-active)));
   box-shadow: none;
 }
 
-.navds-file-dropzone__zone:has(:focus-visible:active) .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:focus-visible:active):not(:has(.navds-file-dropzone__dragover)) .navds-file-dropzone__button {
   box-shadow:
     inset 0 0 0 1px
       var(--ac-button-secondary-active-focus-border, var(--__ac-button-secondary-active-focus-border, var(--a-surface-default))),
