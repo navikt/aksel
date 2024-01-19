@@ -25,6 +25,11 @@ export const ArticleViews = defineType({
       by: [{ field: "views", direction: "desc" }],
     },
     {
+      title: "Views day",
+      name: "views_day",
+      by: [{ field: "views_day", direction: "desc" }],
+    },
+    {
       title: "Views week",
       name: "views_week",
       by: [{ field: "views_week", direction: "desc" }],
@@ -45,6 +50,11 @@ export const ArticleViews = defineType({
       type: "number",
       name: "views",
       description: "total lifetime views",
+    }),
+    defineField({
+      type: "number",
+      name: "views_day",
+      description: "views in the last 24h",
     }),
     defineField({
       type: "number",

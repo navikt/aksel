@@ -49,6 +49,7 @@ for (const article of articles) {
     },
     url,
     views: -1,
+    views_day: 10,
     views_week: 20,
     views_month: 30,
     views_year: 80,
