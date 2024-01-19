@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { CloudUpIcon, UploadIcon } from "@navikt/aksel-icons";
+import { CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { BodyShort, ErrorMessage, Heading, Label } from "../../../typography";
 import { useMergeRefs } from "../../../util/hooks";
@@ -195,13 +195,13 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             </div>
           )}
           <div className="navds-file-dropzone__zone-icon">
-            <UploadIcon fontSize="1.5rem" aria-hidden />
+            <CloudUpIcon fontSize="2rem" aria-hidden />
           </div>
           <div aria-hidden className="navds-file-dropzone__zone-text">
-            <BodyShort as="span">
+            <BodyShort as="div" spacing>
               {getDragAndDropText(localeCtx, multiple)}
             </BodyShort>
-            <BodyShort as="span">{getOrText(localeCtx)}</BodyShort>
+            <BodyShort as="div">{getOrText(localeCtx)}</BodyShort>
           </div>
           <Button
             className="navds-file-dropzone__button"

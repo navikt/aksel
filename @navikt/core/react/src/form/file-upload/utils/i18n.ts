@@ -34,6 +34,7 @@ export const getDropText = (locale: "nb" | "en") => {
 export const getOrText = (locale: "nb" | "en") => {
   switch (locale) {
     case "nb":
+      return "eller";
     case "en":
       return "or";
     default:
