@@ -1,6 +1,5 @@
 import * as path from "https://deno.land/std@0.102.0/path/mod.ts";
 import { load } from "https://deno.land/std@0.212.0/dotenv/mod.ts";
-import { rangeDelay } from "npm:delay";
 import { createClient } from "npm:next-sanity";
 import { clientConfig } from "../../aksel.nav.no/website/sanity/config.ts";
 import { hashString, queryArticleURLs } from "./utils.ts";
@@ -34,7 +33,7 @@ const noCdnClient = createClient({
 
 const transactionClient = noCdnClient.transaction();
 
-let documents = [];
+const documents = [];
 
 const articles = await noCdnClient.fetch(queryArticleURLs);
 for (const article of articles) {
@@ -49,19 +48,19 @@ for (const article of articles) {
       _weak: true,
     },
     url,
-    views: 10,
+    views: -1,
     views_week: 20,
     views_month: 30,
-    views_year: 40,
+    views_year: 80,
   });
 }
 
 // TODO this slice & the dryRun below is only useful during development
-documents = documents.slice(0, 10);
+// documents = documents.slice(0, 10);
 // console.log({ documents });
 documents.forEach(async (doc) => {
-  await rangeDelay(100, 150);
-  const result = await transactionClient.createOrReplace(doc);
-  const res_commit = await result.commit({ dryRun: false });
-  console.log({ res_commit });
+  // await rangeDelay(100, 150);
+  await transactionClient.createOrReplace(doc);
 });
+const res_commit = await transactionClient.commit({ dryRun: false });
+console.log({ res_commit });

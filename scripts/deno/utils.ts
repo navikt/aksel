@@ -38,3 +38,9 @@ export const queryArticleURLs = `
   "slug": slug.current
 }
 `;
+
+export const queryArticleViews = `
+*[_type == "article_views"] {
+  _id,
+}
+`;
