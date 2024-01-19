@@ -5,7 +5,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <div className="subtle-card">
-      <ExpansionCard aria-label="Demo med custom-styling">
+      <ExpansionCard aria-label="Demo med custom styling">
         <ExpansionCard.Header>
           <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
           <ExpansionCard.Description>
