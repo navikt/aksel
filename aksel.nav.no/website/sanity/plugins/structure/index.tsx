@@ -25,6 +25,7 @@ import { GP_DOCUMENT_NAMES } from "../god-praksis-taxonomy";
 import { Iframe } from "./IFrame";
 import { GodPraksisPanes } from "./god-praksis";
 import { Panes } from "./panes";
+import { EyeIcon } from "@navikt/aksel-icons";
 
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
@@ -299,6 +300,7 @@ export const structure: StructureResolver = async (
                       .id(`publication_flow`),
                     S.listItem()
                       .title("Artikkel Visninger")
+                      .icon(EyeIcon)
                       .child(
                         S.documentList()
                           .title("Artikkel Visninger")
