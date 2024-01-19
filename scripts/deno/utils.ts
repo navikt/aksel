@@ -31,3 +31,10 @@ export const hashString = (str: string) => {
 
   return output;
 };
+
+export const queryArticleURLs = `
+*[_type == "aksel_artikkel"] {
+  _id,
+  "slug": slug.current
+}
+`;

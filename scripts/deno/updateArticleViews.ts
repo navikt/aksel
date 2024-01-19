@@ -1,12 +1,12 @@
 import * as path from "https://deno.land/std@0.102.0/path/mod.ts";
 import { load } from "https://deno.land/std@0.212.0/dotenv/mod.ts";
+import { rangeDelay } from "npm:delay";
 import { createClient } from "npm:next-sanity";
 import { clientConfig } from "../../aksel.nav.no/website/sanity/config.ts";
-import { hashString } from "./utils.ts";
+import { hashString, queryArticleURLs } from "./utils.ts";
 
 const mainModuleDir = path.dirname(path.fromFileUrl(Deno.mainModule));
 await load({
-  // envPath: "../../aksel.nav.no/website/.env",
   envPath: `${mainModuleDir}/../../aksel.nav.no/website/.env`,
   export: true,
 });
@@ -21,8 +21,6 @@ await load({
 //   "https://reops-proxy.intern.nav.no/amplitude/api/3/chart/e-sna3bc31/query",
 // );
 
-// console.log({ data_days });
-
 const token = Deno.env.get("SANITY_WRITE_KEY");
 if (!token) {
   throw new Error("Missing SANITY_WRITE_KEY");
@@ -30,31 +28,40 @@ if (!token) {
 
 const noCdnClient = createClient({
   ...clientConfig,
+  maxRetries: 10,
   token,
 });
 
 const transactionClient = noCdnClient.transaction();
 
-const url = "https://aksel.nav.no/god-praksis/artikler/teamtopologi-i-nav";
+let documents = [];
 
-const documents = [
-  {
+const articles = await noCdnClient.fetch(queryArticleURLs);
+for (const article of articles) {
+  const url = `https://aksel.nav.no/${article.slug}`;
+
+  documents.push({
     _id: `${hashString(url)}`,
     _type: "article_views",
     article_ref: {
-      _ref: "dad26c2c-41a2-46de-9af3-8cdb9abf70a1",
+      _ref: article._id,
       _type: "reference",
+      _weak: true,
     },
     url,
     views: 10,
     views_week: 20,
     views_month: 30,
     views_year: 40,
-  },
-];
+  });
+}
 
+// TODO this slice & the dryRun below is only useful during development
+documents = documents.slice(0, 10);
+// console.log({ documents });
 documents.forEach(async (doc) => {
+  await rangeDelay(100, 150);
   const result = await transactionClient.createOrReplace(doc);
-  const res_commit = result.commit();
+  const res_commit = await result.commit({ dryRun: false });
   console.log({ res_commit });
 });

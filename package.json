@@ -12,6 +12,7 @@
     "dev": "yarn workspace aksel.nav.no dev",
     "docgen": "yarn workspaces foreach -p run docgen",
     "changelog": "deno run --allow-read --allow-write --no-config scripts/deno/createMainChangelog.ts",
+    "updateArticleViews": "deno run --allow-net --allow-read --allow-env --no-config scripts/deno/updateArticleViews.ts",
     "chromatic": "npx chromatic --only-changed --project-token x3xqdfgkujg --build-script-name build:storybook",
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -p run test",
