@@ -104,6 +104,8 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           validatorRef.current,
         );
 
+        console.log(acceptedFiles.length > 0);
+
         onSelectRef.current({ allFiles: files, acceptedFiles, rejectedFiles });
       },
       [accept],

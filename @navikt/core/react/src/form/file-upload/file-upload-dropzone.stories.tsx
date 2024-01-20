@@ -92,3 +92,7 @@ export const Locales: StoryObj = {
     </HStack>
   ),
 };
+
+export const Widget: StoryObj = {
+  render: () => <FileUpload.Dropzone label="Widget" onSelect={console.log} />,
+};
