@@ -33,8 +33,7 @@
 .navds-file-dropzone__zone-icon {
   display: flex;
   padding: var(--a-spacing-2);
-  border-radius: var(--a-border-radius-full);
-  background-color: var(--ac-file-upload-icon-bg, var(--a-surface-neutral-subtle));
+  visibility: hidden;
 }
 
 .navds-file-dropzone__zone:hover:not(:has(.navds-file-dropzone__dragover)) .navds-file-dropzone__button {
@@ -195,4 +194,31 @@
 
 .navds-file-item__file-info {
   word-break: break-word;
+}
+
+.aware-animation {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: var(--a-spacing-6);
+  transition:
+    top 0.6s cubic-bezier(0.3, 1.4, 0.3, 1),
+    transform 0.6s cubic-bezier(0.3, 1.4, 0.3, 1);
+}
+
+.aware-animation-icon {
+  display: flex;
+  padding: var(--a-spacing-2);
+  border-radius: var(--a-border-radius-full);
+  background-color: var(--ac-file-upload-icon-bg, var(--a-surface-neutral-subtle));
+  transition: background-color 0.6s cubic-bezier(0.3, 1.4, 0.3, 1);
+}
+
+.navds-file-dropzone__dragover ~ .aware-animation > .aware-animation-icon {
+  background-color: transparent;
+}
+
+.navds-file-dropzone__dragover ~ .aware-animation {
+  top: 50%;
+  transform: translateY(-50%);
 }
