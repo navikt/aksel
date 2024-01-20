@@ -19,7 +19,9 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  transition: box-shadow 250ms cubic-bezier(0.3, 1.75, 0.3, 1);
+  transition:
+    box-shadow 250ms cubic-bezier(0.3, 1, 0.3, 1),
+    background-color 0.6s cubic-bezier(0.3, 1, 0.3, 1);
 }
 
 .navds-file-dropzone__zone:hover {
@@ -27,7 +29,7 @@
 }
 
 .navds-file-dropzone__zone:has(.navds-file-dropzone__dragover) {
-  background-color: var(--ac-file-upload-dragover-bg, var(--a-surface-action-subtle));
+  background-color: var(--ac-file-upload-dragover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-file-dropzone__zone-icon {
@@ -197,6 +199,7 @@
 }
 
 .aware-animation {
+  color: var(--a-text-action-selected);
   display: flex;
   flex-direction: column;
   position: absolute;
