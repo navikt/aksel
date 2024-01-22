@@ -88,20 +88,21 @@ for (const [idx, view_entry] of json_obj_365d.data.series.entries()) {
   });
 }
 
-// strip and aggregate all fragments (#1234...) from the URL,
+// strip and aggregate all fragments (.../some/url#1234...) from the URL,
 // we count all the fragment views as views towards the URL without the fragment
+const merged_fragments_view_datas = new Map<string, ViewData>();
 for (const view_data of view_datas) {
+  let url = view_data[0];
   if (view_data[0].includes("#")) {
-    const url = view_data[0].split("#")[0];
-    const existing_data = view_datas.get(url);
-    view_datas.set(url, {
-      views_day: (existing_data?.views_day ?? 0) + view_data[1].views_day,
-      views_week: (existing_data?.views_week ?? 0) + view_data[1].views_week,
-      views_month: (existing_data?.views_month ?? 0) + view_data[1].views_month,
-      views_year: (existing_data?.views_year ?? 0) + view_data[1].views_year,
-    });
-    view_datas.delete(view_data[0]);
+    url = view_data[0].split("#")[0];
   }
+  const existing_data = merged_fragments_view_datas.get(url);
+  merged_fragments_view_datas.set(url, {
+    views_day: (existing_data?.views_day ?? 0) + view_data[1].views_day,
+    views_week: (existing_data?.views_week ?? 0) + view_data[1].views_week,
+    views_month: (existing_data?.views_month ?? 0) + view_data[1].views_month,
+    views_year: (existing_data?.views_year ?? 0) + view_data[1].views_year,
+  });
 }
 
 const token = Deno.env.get("SANITY_WRITE_KEY");
@@ -121,7 +122,7 @@ const articles = await noCdnClient.fetch(queryArticleURLs);
 for (const article of articles) {
   const url = `https://aksel.nav.no/${article.slug}`;
 
-  const data = view_datas.get(url);
+  const data = merged_fragments_view_datas.get(url);
 
   documents.push({
     _id: `${hashString(url)}`,
