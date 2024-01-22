@@ -135,7 +135,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
           if (isListOpen && activeDecendantId) {
             e.preventDefault();
-            if (virtualFocus.isFocusOnTheTop) {
+            if (virtualFocus.isFocusOnTheTop()) {
               toggleIsListOpen(false);
             }
             virtualFocus.moveFocusUp();
