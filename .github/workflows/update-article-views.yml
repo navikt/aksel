@@ -1,0 +1,25 @@
+name: Update article views
+on:
+  workflow_dispatch:
+  schedule:
+    # 12.00 every day
+    - cron: "0 0 * * *"
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+      - name: Install dependencies
+        run: cd aksel.nav.no && yarn updateArticleViews
