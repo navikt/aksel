@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/inputContext";
+import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { ComboboxProps } from "../types";
 import filteredOptionsUtils from "./filtered-options-util";
@@ -70,6 +71,7 @@ export const FilteredOptionsProvider = ({
     setSearchTerm,
     shouldAutocomplete,
   } = useInputContext();
+  const { selectedOptions } = useSelectedOptionsContext();
 
   const [isInternalListOpen, setInternalListOpen] = useState(false);
   const { customOptions } = useCustomOptionsContext();
@@ -79,8 +81,18 @@ export const FilteredOptionsProvider = ({
       return externalFilteredOptions;
     }
     const opts = [...customOptions, ...options];
-    return filteredOptionsUtils.getMatchingValuesFromList(searchTerm, opts);
-  }, [customOptions, externalFilteredOptions, options, searchTerm]);
+    return filteredOptionsUtils.getMatchingValuesFromList(
+      searchTerm,
+      opts,
+      selectedOptions,
+    );
+  }, [
+    customOptions,
+    externalFilteredOptions,
+    options,
+    searchTerm,
+    selectedOptions,
+  ]);
 
   const previousSearchTerm = usePrevious(searchTerm);
 

@@ -7,8 +7,11 @@ const isPartOfText = (value, text) =>
 const isValueInList = (value, list) =>
   list?.find((listItem) => normalizeText(value) === normalizeText(listItem));
 
-const getMatchingValuesFromList = (value, list) =>
-  list?.filter((listItem) => isPartOfText(value, listItem));
+const getMatchingValuesFromList = (value, list, alwaysIncluded) =>
+  list?.filter(
+    (listItem) =>
+      isPartOfText(value, listItem) || alwaysIncluded.includes(listItem),
+  );
 
 const getFilteredOptionsId = (comboboxId: string) =>
   `${comboboxId}-filtered-options`;
