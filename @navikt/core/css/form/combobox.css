@@ -264,30 +264,30 @@
 }
 
 .navds-form-field--small .navds-combobox__list-item,
-.navds-form-field--small .navds-combobox__list-item__no-options,
-.navds-form-field--small .navds-combobox__list-item__new-option {
+.navds-form-field--small .navds-combobox__list-item--no-options,
+.navds-form-field--small .navds-combobox__list-item--new-option {
   padding: calc(var(--a-spacing-3) / 2) var(--a-spacing-2);
 }
 
-.navds-combobox__list-item__loading {
+.navds-combobox__list-item--loading {
   justify-content: center;
   background-color: var(--ac-combobox-list-item-loading-bg, var(--a-surface-default));
 }
 
-.navds-combobox__list-item__max-selected {
+.navds-combobox__list-item--max-selected {
   background: var(--ac-combobox-list-item-max-selected-bg, var(--a-surface-info-subtle));
   border-radius: 3px 3px 0 0; /* TODO: Change to default 4px border-radius when we refactor styling of dropdown */
   border: 1px solid var(--ac-combobox-list-item-max-selected-border, var(--a-border-info));
   margin-bottom: calc(var(--a-spacing-1) * -1);
 }
 
-.navds-combobox__list-item__max-selected + li {
+.navds-combobox__list-item--max-selected + li {
   margin-top: 0;
 }
 
-.navds-combobox__list-item__no-options:hover,
-.navds-combobox__list-item__loading:hover,
-.navds-combobox__list-item__max-selected:hover {
+.navds-combobox__list-item--no-options:hover,
+.navds-combobox__list-item--loading:hover,
+.navds-combobox__list-item--max-selected:hover {
   cursor: default;
 }
 
@@ -327,9 +327,9 @@
 }
 
 .navds-combobox__list-item:not(
-    .navds-combobox__list-item__max-selected,
-    .navds-combobox__list-item__loading,
-    .navds-combobox__list-item__no-options
+    .navds-combobox__list-item--max-selected,
+    .navds-combobox__list-item--loading,
+    .navds-combobox__list-item--no-options
   )[data-no-focus="true"] {
   cursor: not-allowed;
   opacity: 0.4;
@@ -350,7 +350,7 @@
   padding-left: calc(var(--a-spacing-3) - 4px);
 }
 
-.navds-combobox__list-item__new-option {
+.navds-combobox__list-item--new-option {
   border-bottom: 1px solid var(--a-border-divider);
   background: var(--a-surface-neutral-subtle);
   cursor: pointer;
@@ -358,12 +358,12 @@
   gap: 0.25rem;
 }
 
-.navds-combobox__list--with-hover .navds-combobox__list-item__new-option:hover {
+.navds-combobox__list--with-hover .navds-combobox__list-item--new-option:hover {
   border-bottom: 1px solid var(--a-border-divider);
   background: var(--a-surface-neutral-subtle-hover);
 }
 
-.navds-combobox__list-item__new-option--focus {
+.navds-combobox__list-item--new-option--focus {
   box-shadow:
     var(--a-shadow-focus) inset,
     var(--a-border-action) 0 0 0 5px inset;

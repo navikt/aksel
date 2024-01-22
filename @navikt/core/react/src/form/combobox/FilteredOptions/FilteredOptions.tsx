@@ -45,7 +45,7 @@ const FilteredOptions = () => {
       <div className="navds-combobox__list_non-selectables">
         {maxSelected?.isLimitReached && (
           <div
-            className="navds-combobox__list-item navds-combobox__list-item__max-selected sticky"
+            className="navds-combobox__list-item navds-combobox__list-item--max-selected sticky"
             aria-selected={false}
             id={`${id}-max-selected`}
             data-no-focus="true"
@@ -56,7 +56,7 @@ const FilteredOptions = () => {
         )}
         {isLoading && (
           <div
-            className="navds-combobox__list-item navds-combobox__list-item__loading sticky"
+            className="navds-combobox__list-item navds-combobox__list-item--loading sticky"
             aria-selected={false}
             id={filteredOptionsUtil.getIsLoadingId(id)}
             data-no-focus="true"
@@ -66,7 +66,7 @@ const FilteredOptions = () => {
         )}
         {!isLoading && filteredOptions.length === 0 && (
           <div
-            className="navds-combobox__list-item navds-combobox__list-item__no-options sticky"
+            className="navds-combobox__list-item navds-combobox__list-item--no-options sticky"
             aria-selected={false}
             id={filteredOptionsUtil.getNoHitsId(id)}
             data-no-focus="true"
@@ -101,9 +101,9 @@ const FilteredOptions = () => {
             }}
             id={filteredOptionsUtil.getAddNewOptionId(id)}
             className={cl(
-              "navds-combobox__list-item navds-combobox__list-item__new-option",
+              "navds-combobox__list-item navds-combobox__list-item--new-option",
               {
-                "navds-combobox__list-item__new-option--focus":
+                "navds-combobox__list-item--new-option--focus":
                   activeDecendantId ===
                   filteredOptionsUtil.getAddNewOptionId(id),
               },
