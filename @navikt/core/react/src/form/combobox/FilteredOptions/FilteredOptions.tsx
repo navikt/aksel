@@ -27,17 +27,11 @@ const FilteredOptions = () => {
     activeDecendantId,
     virtualFocus,
   } = useFilteredOptionsContext();
-  const {
-    canSelectMoreOptions,
-    isMultiSelect,
-    selectedOptions,
-    toggleOption,
-    maxSelectedOptions,
-    maxSelectedMessage,
-  } = useSelectedOptionsContext();
+  const { isMultiSelect, selectedOptions, toggleOption, maxSelected } =
+    useSelectedOptionsContext();
 
   const isDisabled = (option) =>
-    !canSelectMoreOptions && !selectedOptions.includes(option);
+    maxSelected?.isLimitReached && !selectedOptions.includes(option);
 
   return (
     <div
@@ -49,15 +43,15 @@ const FilteredOptions = () => {
       tabIndex={-1}
     >
       <div className="navds-combobox__list_non-selectables">
-        {!canSelectMoreOptions && (
+        {maxSelected?.isLimitReached && (
           <div
             className="navds-combobox__list-item navds-combobox__list-item__max-selected sticky"
             aria-selected={false}
             id={`${id}-max-selected`}
             data-no-focus="true"
           >
-            {maxSelectedMessage ??
-              `${selectedOptions.length} av ${maxSelectedOptions} er valgt.`}
+            {maxSelected.message ??
+              `${selectedOptions.length} av ${maxSelected.limit} er valgt.`}
           </div>
         )}
         {isLoading && (
@@ -87,7 +81,7 @@ const FilteredOptions = () => {
         role="listbox"
         className="navds-combobox__list-options"
       >
-        {isValueNew && canSelectMoreOptions && allowNewValues && (
+        {isValueNew && !maxSelected?.isLimitReached && allowNewValues && (
           <li
             tabIndex={-1}
             onMouseMove={() => {

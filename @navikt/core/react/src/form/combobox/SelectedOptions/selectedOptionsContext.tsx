@@ -8,18 +8,16 @@ import React, {
 import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/inputContext";
 import { useCustomOptionsContext } from "../customOptionsContext";
-import { ComboboxProps } from "../types";
+import { ComboboxProps, MaxSelected } from "../types";
 
 type SelectedOptionsContextType = {
   addSelectedOption: (option: string) => void;
-  canSelectMoreOptions: boolean;
   isMultiSelect?: boolean;
   removeSelectedOption: (option: string) => void;
   prevSelectedOptions?: string[];
   selectedOptions: string[];
-  maxSelectedOptions?: number;
+  maxSelected?: MaxSelected & { isLimitReached: boolean };
   setSelectedOptions: (any) => void;
-  maxSelectedMessage?: string;
   toggleOption: (
     option: string,
     event: React.KeyboardEvent | React.PointerEvent,
@@ -42,8 +40,7 @@ export const SelectedOptionsProvider = ({
     | "options"
     | "selectedOptions"
     | "onToggleSelected"
-    | "maxSelectedOptions"
-    | "maxSelectedMessage"
+    | "maxSelected"
   >;
 }) => {
   const { clearInput, focusInput } = useInputContext();
@@ -59,8 +56,7 @@ export const SelectedOptionsProvider = ({
     selectedOptions: externalSelectedOptions,
     onToggleSelected,
     options,
-    maxSelectedOptions,
-    maxSelectedMessage,
+    maxSelected,
   } = value;
   const [internalSelectedOptions, setSelectedOptions] = useState<string[]>([]);
   const selectedOptions = useMemo(
@@ -136,20 +132,21 @@ export const SelectedOptionsProvider = ({
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
 
-  const canSelectMoreOptions =
-    !maxSelectedOptions || selectedOptions.length < maxSelectedOptions;
+  const isLimitReached =
+    !!maxSelected?.limit && selectedOptions.length >= maxSelected.limit;
 
   const selectedOptionsState = {
     addSelectedOption,
-    canSelectMoreOptions,
     isMultiSelect,
     removeSelectedOption,
     prevSelectedOptions,
     selectedOptions,
     setSelectedOptions,
     toggleOption,
-    maxSelectedOptions,
-    maxSelectedMessage,
+    maxSelected: maxSelected && {
+      ...maxSelected,
+      isLimitReached,
+    },
   };
 
   return (

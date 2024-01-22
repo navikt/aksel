@@ -301,7 +301,7 @@ export const MaxSelectedOptions: StoryFunction = () => {
       id={id}
       label="Komboboks med begrenset antall valg"
       options={options}
-      maxSelectedOptions={2}
+      maxSelected={{ limit: 2 }}
       selectedOptions={selectedOptions}
       onToggleSelected={(option, isSelected) =>
         isSelected
