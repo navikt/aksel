@@ -15,7 +15,6 @@ await load({
 });
 
 type ViewData = {
-  views: number;
   views_day: number;
   views_week: number;
   views_month: number;
@@ -41,7 +40,6 @@ for (const [idx, view_entry] of json_obj_days.data.series.entries()) {
     .slice(0, -1)
     .reduce((a: number, b: { value: number }) => a + b.value, 0);
   view_datas.set(url, {
-    views: -1,
     views_day: view_entry[7].value,
     views_week,
     views_month: -1,
@@ -68,7 +66,6 @@ for (const [idx, view_entry] of json_obj_months.data.series.entries()) {
   // currently I try to detect when this happens by checking if the bigger time-period
   // has a smaller value than the smaller time-period, and if so, set -1 for "i don't know"
   view_datas.set(url, {
-    views: -1,
     views_day: existing_data?.views_day ?? -1,
     views_week: existing_data?.views_week ?? -1,
     views_month:
@@ -109,7 +106,6 @@ for (const article of articles) {
       _weak: true,
     },
     url,
-    views: data?.views ?? -1,
     views_day: data?.views_day ?? -1,
     views_week: data?.views_week ?? -1,
     views_month: data?.views_month ?? -1,

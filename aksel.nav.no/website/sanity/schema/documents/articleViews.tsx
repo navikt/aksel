@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 import { LineGraphIcon } from "@navikt/aksel-icons";
 
 export const ArticleViews = defineType({
-  title: "Artikkel Visninger",
+  title: "Artikkelvisninger",
   name: "article_views",
   type: "document",
   readOnly: ({ currentUser }) =>
@@ -19,11 +19,6 @@ export const ArticleViews = defineType({
     }),
   },
   orderings: [
-    {
-      title: "Views total",
-      name: "views",
-      by: [{ field: "views", direction: "desc" }],
-    },
     {
       title: "Views day",
       name: "views_day",
@@ -48,28 +43,23 @@ export const ArticleViews = defineType({
   fields: [
     defineField({
       type: "number",
-      name: "views",
-      description: "total lifetime views",
-    }),
-    defineField({
-      type: "number",
       name: "views_day",
-      description: "views in the last 24h",
+      title: "Visninger i de siste 24 timer",
     }),
     defineField({
       type: "number",
       name: "views_week",
-      description: "views in the last week",
+      title: "Visninger siste 7 dager",
     }),
     defineField({
       type: "number",
       name: "views_month",
-      description: "views in the last month",
+      title: "Visninger siste 30 dager",
     }),
     defineField({
       type: "number",
       name: "views_year",
-      description: "views in the last year",
+      title: "Visninger siste 365 dager",
     }),
     defineField({
       title: "articleRef",
