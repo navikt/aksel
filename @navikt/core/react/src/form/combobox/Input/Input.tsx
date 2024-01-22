@@ -101,9 +101,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           onEnter(e);
           break;
         case "Home":
+          toggleIsListOpen(false);
           virtualFocus.moveFocusToTop();
           break;
         case "End":
+          toggleIsListOpen(true);
           virtualFocus.moveFocusToBottom();
           break;
         default:
