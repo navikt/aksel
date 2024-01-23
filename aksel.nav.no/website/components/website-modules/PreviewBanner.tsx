@@ -34,7 +34,7 @@ function PreviewBanner({ loading = true }: { loading: boolean }) {
           </div>
 
           <Link
-            href="https://aksel.nav.no/god-praksis/artikler/ny-redaktor-i-aksel"
+            href="https://aksel.nav.no/god-praksis/artikler/slik-publiserer-du-i-sanity"
             passHref
             className="underline"
           >
