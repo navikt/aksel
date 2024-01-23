@@ -77,7 +77,7 @@ export const DynamicUpdates = () => {
             </div>
           )}
         </div>
-        <Option value="option 5" />
+        <Option value="option 5" disabled />
       </div>
       {done && (
         <div>
