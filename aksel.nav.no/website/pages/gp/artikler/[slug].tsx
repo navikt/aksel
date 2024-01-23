@@ -7,13 +7,13 @@ import {
   Alert,
   BodyLong,
   BodyShort,
+  Button,
   Detail,
   Heading,
   Label,
-  Link,
-  ReadMore,
 } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import { useSanityData } from "@/hooks/useSanityData";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
@@ -37,7 +37,7 @@ import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
-import NotFotfund from "../../404";
+import NotFound from "../../404";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
@@ -131,8 +131,10 @@ const Page = ({
   id,
   toc,
 }: PageProps["props"]) => {
+  const validUser = useSanityData().validUser;
+
   if (!data) {
-    return <NotFotfund />;
+    return <NotFound />;
   }
 
   if (!data.content || !data.heading) {
@@ -257,19 +259,31 @@ const Page = ({
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                 {outdated && (
                   <Alert variant="warning" className="mb-8">
-                    Det er mer enn et år siden denne artikkelen ble revidert.
-                    <ReadMore header="Kan du bidra? (Kun for NAV-ansatte)">
-                      Hvis du har kompetanse innen dette området, setter vi stor
-                      pris på om du kan bidra med å{" "}
-                      <Link
-                        href={`https://aksel.nav.no/admin/prod/intent/edit/id=${id}`}
-                        target="_blank"
-                      >
-                        revidere artikkelen
-                      </Link>
-                      .<br />
-                      <Link>Link til artikkel om hvordan bidra</Link>.
-                    </ReadMore>
+                    <Heading level="2" size="small" spacing>
+                      Innholdet kan være utdatert
+                    </Heading>
+                    <BodyLong spacing={validUser}>
+                      Det er over 1 år siden innholdet ble endret. Vi kan ikke
+                      være helt sikre på hvor nøyaktig artikkelen er lenger.
+                    </BodyLong>
+                    {validUser && (
+                      <>
+                        <BodyLong className="mb-2">
+                          Du ser også dette fordi du kan redigere denne
+                          artikkelen. Har du lyst til å kontrollere innholdet
+                          nå?
+                        </BodyLong>
+                        <Button
+                          as="a"
+                          href={`https://aksel.nav.no/admin/prod/intent/edit/id=${id}`}
+                          target="_blank"
+                          size="small"
+                          variant="secondary-neutral"
+                        >
+                          Kontroller innholdet
+                        </Button>
+                      </>
+                    )}
                   </Alert>
                 )}
                 <SanityBlockContent blocks={data?.content ?? []} />

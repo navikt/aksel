@@ -1,9 +1,9 @@
-import { useCheckAuth } from "@/hooks/useCheckAuth";
-import { BodyShort, Button } from "@navikt/ds-react";
 import Link from "next/link";
+import { BodyShort, Button } from "@navikt/ds-react";
+import { useSanityData } from "@/hooks/useSanityData";
 
 function PreviewBanner({ loading = true }: { loading: boolean }) {
-  const validUser = useCheckAuth();
+  const validUser = useSanityData().validUser;
 
   if (!validUser) {
     return (
@@ -11,7 +11,7 @@ function PreviewBanner({ loading = true }: { loading: boolean }) {
         <div className="fixed inset-0 z-[9999] bg-gray-900/80 backdrop-blur-md" />
         <div className="fixed top-0 z-[9999] grid w-full justify-center bg-gray-900 px-4 py-4 text-center font-semibold text-text-on-inverted no-underline">
           <BodyShort spacing>
-            Preview ikke tilgjengelig, finner ikke innlogget Sanity bruker.
+            Preview ikke tilgjengelig, finner ikke innlogget Sanity-bruker.
           </BodyShort>
 
           <div data-theme="dark" className="mb-3 flex justify-center gap-2">
