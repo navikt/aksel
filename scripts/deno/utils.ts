@@ -50,3 +50,9 @@ export const amplitudeFetchJSON = async (chart_id: string) => {
   console.log({ url });
   return await (await fetch(url)).json();
 };
+
+export const sum_last_n = (view_entry: { value: number }[], last_n: number) => {
+  return view_entry
+    .slice(-last_n) // the query holds more than 24 hours of data, but we only want the last 24
+    .reduce((a: number, b: { value: number }) => a + b.value, 0);
+};

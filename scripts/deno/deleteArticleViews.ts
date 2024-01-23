@@ -17,7 +17,7 @@ if (!token) {
 
 const noCdnClient = createClient({
   ...clientConfig,
-  maxRetries: 10,
+  maxRetries: 5,
   token,
 });
 

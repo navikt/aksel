@@ -3,14 +3,19 @@ import { load } from "https://deno.land/std@0.212.0/dotenv/mod.ts";
 import { createClient } from "npm:next-sanity";
 import { clientConfig } from "../../aksel.nav.no/website/sanity/config.ts";
 import { amplitudeFetchJSON, hashString, queryArticleURLs } from "./utils.ts";
+import { sum_last_n } from "./utils.ts";
 
-// this part is a bit silly: script "plumbing" essentially. ModuleDir is the root of this
-// current file, it's used so relative paths from this file into the rest of the repo will
-// work as expected regardless of where it is called from (disregarding CWD of caller)
-// it's a WEB-first API, so we get files in URL format, these must be converted to a path
-const mainModuleDir = path.dirname(path.fromFileUrl(Deno.mainModule));
+/*
+  this part is a bit silly: script "plumbing" essentially. ModuleDir is the root of this
+  current file, it's used so relative paths from this file into the rest of the repo will
+  work as expected regardless of where it is called from (disregarding CWD of caller)
+  it's a WEB-first API, so we get files in URL format, these must be converted to a path
+
+  Currently the script is located `scripts/deno/`, so we go up ../../ to get to the project root
+*/
+const project_root = `${path.dirname(path.fromFileUrl(Deno.mainModule))}/../..`;
 await load({
-  envPath: `${mainModuleDir}/../../aksel.nav.no/website/.env`,
+  envPath: `${project_root}/aksel.nav.no/website/.env`,
   export: true,
 });
 
@@ -38,9 +43,7 @@ const json_obj_30d = queries[2];
 const json_obj_365d = queries[3];
 for (const [idx, view_entry] of json_obj_24h.data.series.entries()) {
   const url = json_obj_24h.data.seriesLabels[idx][1];
-  const views_day = view_entry
-    .slice(-24) // the query holds more than 24 hours of data, but we only want the last 24
-    .reduce((a: number, b: { value: number }) => a + b.value, 0);
+  const views_day = sum_last_n(view_entry, 24);
   view_datas.set(url, {
     views_day,
     views_week: -1,
@@ -51,9 +54,7 @@ for (const [idx, view_entry] of json_obj_24h.data.series.entries()) {
 for (const [idx, view_entry] of json_obj_7d.data.series.entries()) {
   const url = json_obj_7d.data.seriesLabels[idx][1];
   const existing_data = view_datas.get(url);
-  const views_week = view_entry
-    .slice(-7)
-    .reduce((a: number, b: { value: number }) => a + b.value, 0);
+  const views_week = sum_last_n(view_entry, 7);
   view_datas.set(url, {
     views_day: existing_data?.views_day ?? -1,
     views_week,
@@ -64,9 +65,7 @@ for (const [idx, view_entry] of json_obj_7d.data.series.entries()) {
 for (const [idx, view_entry] of json_obj_30d.data.series.entries()) {
   const url = json_obj_30d.data.seriesLabels[idx][1];
   const existing_data = view_datas.get(url);
-  const views_month = view_entry
-    .slice(-30)
-    .reduce((a: number, b: { value: number }) => a + b.value, 0);
+  const views_month = sum_last_n(view_entry, 30);
   view_datas.set(url, {
     views_day: existing_data?.views_day ?? -1,
     views_week: existing_data?.views_week ?? -1,
