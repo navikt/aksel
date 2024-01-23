@@ -221,6 +221,15 @@
   background-color: transparent;
 }
 
+.aware-animation-text {
+  visibility: hidden;
+}
+
+.navds-file-dropzone__dragover ~ .aware-animation > .aware-animation-text {
+  transition: visibility 0.6s cubic-bezier(0.3, 1.4, 0.3, 1);
+  visibility: visible;
+}
+
 .navds-file-dropzone__dragover ~ .aware-animation {
   top: 50%;
   transform: translateY(-50%);

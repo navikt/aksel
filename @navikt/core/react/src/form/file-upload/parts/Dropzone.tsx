@@ -201,7 +201,12 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             <div className="aware-animation-icon">
               <CloudUpIcon fontSize="2rem" aria-hidden />
             </div>
-            {isDraggingOver && getDropText(localeCtx)}
+            <span
+              aria-hidden={!isDraggingOver}
+              className="aware-animation-text"
+            >
+              {getDropText(localeCtx)}
+            </span>
           </div>
           <div aria-hidden className="navds-file-dropzone__zone-text">
             <BodyShort as="div" spacing>
