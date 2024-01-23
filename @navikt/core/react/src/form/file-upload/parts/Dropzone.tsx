@@ -64,6 +64,14 @@ export interface DropzoneProps
   validator?: (file: File) => boolean;
 }
 
+/**
+ * TODO:
+ * - Make locale-return a "pre"-resolved object
+ * - Extract logic to hooks
+ * - Update classNames
+ * - Update i18n
+ * - Update CSS
+ */
 const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
   (props: DropzoneProps, ref) => {
     const [isDraggingOver, setIsDraggingOver] = useState(false);
