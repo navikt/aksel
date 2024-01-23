@@ -2,8 +2,12 @@ import * as path from "https://deno.land/std@0.102.0/path/mod.ts";
 import { load } from "https://deno.land/std@0.212.0/dotenv/mod.ts";
 import { createClient } from "npm:next-sanity";
 import { clientConfig } from "../../aksel.nav.no/website/sanity/config.ts";
-import { amplitudeFetchJSON, hashString, queryArticleURLs } from "./utils.ts";
-import { sum_last_n } from "./utils.ts";
+import {
+  amplitudeFetchJSON,
+  hashString,
+  queryArticleURLs,
+  sum_last_n,
+} from "./utils.ts";
 
 /*
   this part is a bit silly: script "plumbing" essentially. ModuleDir is the root of this
@@ -41,6 +45,7 @@ const json_obj_24h = queries[0];
 const json_obj_7d = queries[1];
 const json_obj_30d = queries[2];
 const json_obj_365d = queries[3];
+
 for (const [idx, view_entry] of json_obj_24h.data.series.entries()) {
   const url = json_obj_24h.data.seriesLabels[idx][1];
   const views_day = sum_last_n(view_entry, 24);
