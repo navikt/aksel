@@ -32,23 +32,15 @@ type ViewData = {
 
 const view_datas = new Map<string, ViewData>();
 
-const _queries = [
-  await amplitudeFetchJSON("e-f5vcqiqk"), // last 24h
-  await amplitudeFetchJSON("e-69mzf301"), // last 7d
-  await amplitudeFetchJSON("e-wwh3n9l1"), // last 30d
-  await amplitudeFetchJSON("e-rzw8jk6j"), // last 365d
-];
-// const queries = await Promise.all(_queries); // can't do this... it overloads the Proxy
-const queries = _queries;
-
-const json_obj_24h = queries[0];
-const json_obj_7d = queries[1];
-const json_obj_30d = queries[2];
-const json_obj_365d = queries[3];
+// NOTE: serial fetches don't overload the Proxy
+const json_obj_24h = await amplitudeFetchJSON("e-f5vcqiqk");
+const json_obj_7d = await amplitudeFetchJSON("e-69mzf301");
+const json_obj_30d = await amplitudeFetchJSON("e-wwh3n9l1");
+const json_obj_365d = await amplitudeFetchJSON("e-rzw8jk6j");
 
 for (const [idx, view_entry] of json_obj_24h.data.series.entries()) {
   const url = json_obj_24h.data.seriesLabels[idx][1];
-  const views_day = sum_last_n(view_entry, 24);
+  const views_day = sum_last_n(view_entry, 24); // 24 hours in a day
   view_datas.set(url, {
     views_day,
     views_week: -1,
@@ -59,7 +51,7 @@ for (const [idx, view_entry] of json_obj_24h.data.series.entries()) {
 for (const [idx, view_entry] of json_obj_7d.data.series.entries()) {
   const url = json_obj_7d.data.seriesLabels[idx][1];
   const existing_data = view_datas.get(url);
-  const views_week = sum_last_n(view_entry, 7);
+  const views_week = sum_last_n(view_entry, 7); // 7 days in a week
   view_datas.set(url, {
     views_day: existing_data?.views_day ?? -1,
     views_week,
@@ -70,7 +62,7 @@ for (const [idx, view_entry] of json_obj_7d.data.series.entries()) {
 for (const [idx, view_entry] of json_obj_30d.data.series.entries()) {
   const url = json_obj_30d.data.seriesLabels[idx][1];
   const existing_data = view_datas.get(url);
-  const views_month = sum_last_n(view_entry, 30);
+  const views_month = sum_last_n(view_entry, 30); // 30 days in a month
   view_datas.set(url, {
     views_day: existing_data?.views_day ?? -1,
     views_week: existing_data?.views_week ?? -1,
@@ -81,9 +73,7 @@ for (const [idx, view_entry] of json_obj_30d.data.series.entries()) {
 for (const [idx, view_entry] of json_obj_365d.data.series.entries()) {
   const url = json_obj_365d.data.seriesLabels[idx][1];
   const existing_data = view_datas.get(url);
-  const views_year = view_entry
-    .slice(-4) // the query holds 4 quarters == 1 year
-    .reduce((a: number, b: { value: number }) => a + b.value, 0);
+  const views_year = sum_last_n(view_entry, 4); // 4 quarters in a year
   view_datas.set(url, {
     views_day: existing_data?.views_day ?? -1,
     views_week: existing_data?.views_week ?? -1,
