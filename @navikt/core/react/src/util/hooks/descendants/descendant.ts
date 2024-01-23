@@ -9,10 +9,6 @@ export type DescendantOptions<T = object> = T & {
    * but omitted from enabled nodes map
    */
   disabled?: boolean;
-  /**
-   * The id of the item
-   */
-  id?: string;
 };
 
 export type Descendant<T, K> = DescendantOptions<K> & {
