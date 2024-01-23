@@ -183,16 +183,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           })}
         >
           {isDraggingOver && (
-            <div className="navds-file-dropzone__dragover">
-              {/* <CloudUpIcon
-                fontSize="3rem"
-                aria-hidden
-                className="navds-file-dropzone__dragover-icon"
-              />
-              <Heading size="small" as="span">
-                {getDropText(localeCtx)}
-              </Heading> */}
-            </div>
+            <div className="navds-file-dropzone__dragover"></div>
           )}
           <div className="navds-file-dropzone__zone-icon">
             <CloudUpIcon fontSize="2rem" aria-hidden />
