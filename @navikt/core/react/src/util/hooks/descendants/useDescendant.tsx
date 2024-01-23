@@ -1,8 +1,7 @@
 /**
  * https://github.com/chakra-ui/chakra-ui/tree/5ec0be610b5a69afba01a9c22365155c1b519136/packages/components/descendant
  */
-import { useRef, useState } from "react";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { createContext } from "../../create-context";
 import { useClientLayoutEffect } from "../useClientLayoutEffect";
 import { mergeRefs } from "../useMergeRefs";
@@ -84,7 +83,11 @@ export function createDescendantContext<
   K extends Record<string, any> = object,
 >() {
   const ContextProvider = cast<React.Provider<DescendantsManager<T, K>>>(
-    (props) => <DescendantsContextProvider {...props} />,
+    (props) => (
+      <DescendantsContextProvider {...props.value}>
+        {props.children}
+      </DescendantsContextProvider>
+    ),
   );
 
   const _useDescendantsContext = () =>
