@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
 import { Box } from "../../../layout/box";
 import { HStack } from "../../../layout/stack";
@@ -13,6 +12,7 @@ export default {
 
 const [
   DescendantsProvider,
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   _useDescendantsContext,
   useDescendants,
   useDescendant,
@@ -145,9 +145,3 @@ export const NumberInput = () => {
     </NumberInputWrapper>
   );
 };
-
-const Comp = (props: any) => {
-  return <div>abc</div>;
-};
-
-type asdasd = typeof Comp;
