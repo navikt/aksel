@@ -5,7 +5,7 @@ import { useSanityData } from "@/hooks/useSanityData";
 function PreviewBanner({ loading = true }: { loading: boolean }) {
   const validUser = useSanityData().validUser;
 
-  if (!validUser) {
+  if (validUser === false) {
     return (
       <>
         <div className="fixed inset-0 z-[9999] bg-gray-900/80 backdrop-blur-md" />
