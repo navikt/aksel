@@ -2,20 +2,9 @@ import differenceInMonths from "date-fns/differenceInMonths";
 import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
-import {
-  ChevronRightIcon,
-  HourglassBottomFilledIcon,
-} from "@navikt/aksel-icons";
-import {
-  BodyLong,
-  BodyShort,
-  Button,
-  Detail,
-  Heading,
-  Label,
-} from "@navikt/ds-react";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
-import { useSanityData } from "@/hooks/useSanityData";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
@@ -37,6 +26,7 @@ import {
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
+import OutdatedAlert from "@/web/OutdatedAlert";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFound from "../../404";
@@ -48,7 +38,6 @@ type PageProps = NextPageT<{
   publishDate: string;
   verifiedDate: string;
   outdated: boolean;
-  id: string;
   toc: TableOfContentsT;
 }>;
 
@@ -130,11 +119,8 @@ const Page = ({
   publishDate,
   verifiedDate,
   outdated,
-  id,
   toc,
 }: PageProps["props"]) => {
-  const validUser = useSanityData().validUser;
-
   if (!data) {
     return <NotFound />;
   }
@@ -259,43 +245,7 @@ const Page = ({
             <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
               <TableOfContents toc={toc} variant="subtle" />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
-                {outdated && (
-                  <div className="flex gap-3 p-4 rounded-md ring-1 bg-amber-50 ring-amber-300 mb-12">
-                    <div>
-                      <HourglassBottomFilledIcon
-                        aria-hidden
-                        fontSize="1.5rem"
-                      />
-                    </div>
-                    <div>
-                      <Heading level="2" size="small" className="mb-2">
-                        Innholdet kan være utdatert
-                      </Heading>
-                      <BodyLong className={validUser ? "mb-4" : undefined}>
-                        Det er over 1 år siden innholdet ble endret. Vi kan ikke
-                        være helt sikre på hvor nøyaktig artikkelen er lenger.
-                      </BodyLong>
-                      {validUser && (
-                        <>
-                          <BodyLong className="mb-2">
-                            Du ser også dette fordi du kan redigere denne
-                            artikkelen. Har du lyst til å kontrollere innholdet
-                            nå?
-                          </BodyLong>
-                          <Button
-                            as="a"
-                            href={`https://aksel.nav.no/admin/prod/intent/edit/id=${id}`}
-                            target="_blank"
-                            size="small"
-                            variant="secondary-neutral"
-                          >
-                            Kontroller innholdet
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                )}
+                {outdated && <OutdatedAlert />}
                 <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
                   {authors?.length > 0 && (
