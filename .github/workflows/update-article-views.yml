@@ -21,5 +21,8 @@ jobs:
           key: ${{ runner.os }}-build-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-build-
+      - name: add tokens to .env
+        run: |
+          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_UTILITY_WRITE }}" >> aksel.nav.no/website/.env
       - name: Install dependencies
         run: deno run --allow-net --allow-read --allow-env --no-config scripts/deno/updateArticleViews.ts
