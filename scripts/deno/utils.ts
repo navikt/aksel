@@ -48,7 +48,11 @@ export const queryArticleViews = `
 export const amplitudeFetchJSON = async (chart_id: string) => {
   const url = `https://reops-proxy.intern.nav.no/amplitude/100002016/api/3/chart/${chart_id}/query`;
   console.log({ url });
-  return await (await fetch(url)).json();
+  return await fetch(url)
+    .then((res) => res.json())
+    .catch((e) => {
+      throw new Error(e);
+    });
 };
 
 export const sum_last_n = (view_entry: { value: number }[], last_n: number) => {
