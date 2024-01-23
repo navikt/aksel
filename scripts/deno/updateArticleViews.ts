@@ -35,19 +35,19 @@ const view_datas = new Map<string, Partial<ViewData>>();
 const views = {
   views_day: {
     chart_id: "e-f5vcqiqk",
-    sum: (serieEntry: any) => sum_last_n(serieEntry, 24), // 24 hours in a day
+    sum_last_n: 24, // 24 hours in a day
   },
   views_week: {
     chart_id: "e-69mzf301",
-    sum: (serieEntry: any) => sum_last_n(serieEntry, 7), // 7 days in a week
+    sum_last_n: 7, // 7 days in a week
   },
   views_month: {
     chart_id: "e-wwh3n9l1",
-    sum: (serieEntry: any) => sum_last_n(serieEntry, 30), // 30 days in a month
+    sum_last_n: 30, // 30 days in a month
   },
   views_year: {
     chart_id: "e-rzw8jk6j",
-    sum: (serieEntry: any) => sum_last_n(serieEntry, 4), // 4 quarters in a year
+    sum_last_n: 4, // 4 quarters in a year
   },
 };
 
@@ -55,7 +55,7 @@ for (const [view, config] of Object.entries(views)) {
   const chartResult = await amplitudeFetchJSON(config.chart_id);
   for (const [idx, view_entry] of chartResult.data.series.entries()) {
     const url = chartResult.data.seriesLabels[idx][1];
-    const viewsN = config.sum(view_entry);
+    const viewsN = sum_last_n(view_entry, config.sum_last_n);
 
     const existing_data = view_datas.get(url) ?? {};
     view_datas.set(url, {
