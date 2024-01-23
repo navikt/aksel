@@ -2,9 +2,11 @@ import differenceInMonths from "date-fns/differenceInMonths";
 import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
 import {
-  Alert,
+  ChevronRightIcon,
+  HourglassBottomFilledIcon,
+} from "@navikt/aksel-icons";
+import {
   BodyLong,
   BodyShort,
   Button,
@@ -258,33 +260,41 @@ const Page = ({
               <TableOfContents toc={toc} variant="subtle" />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                 {outdated && (
-                  <Alert variant="warning" className="mb-8">
-                    <Heading level="2" size="small" spacing>
-                      Innholdet kan være utdatert
-                    </Heading>
-                    <BodyLong spacing={validUser}>
-                      Det er over 1 år siden innholdet ble endret. Vi kan ikke
-                      være helt sikre på hvor nøyaktig artikkelen er lenger.
-                    </BodyLong>
-                    {validUser && (
-                      <>
-                        <BodyLong className="mb-2">
-                          Du ser også dette fordi du kan redigere denne
-                          artikkelen. Har du lyst til å kontrollere innholdet
-                          nå?
-                        </BodyLong>
-                        <Button
-                          as="a"
-                          href={`https://aksel.nav.no/admin/prod/intent/edit/id=${id}`}
-                          target="_blank"
-                          size="small"
-                          variant="secondary-neutral"
-                        >
-                          Kontroller innholdet
-                        </Button>
-                      </>
-                    )}
-                  </Alert>
+                  <div className="flex gap-3 p-4 rounded-md ring-1 bg-amber-50 ring-amber-300 mb-8">
+                    <div>
+                      <HourglassBottomFilledIcon
+                        aria-hidden
+                        fontSize="1.5rem"
+                      />
+                    </div>
+                    <div>
+                      <Heading level="2" size="small" className="mb-2">
+                        Innholdet kan være utdatert
+                      </Heading>
+                      <BodyLong className={validUser ? "mb-4" : undefined}>
+                        Det er over 1 år siden innholdet ble endret. Vi kan ikke
+                        være helt sikre på hvor nøyaktig artikkelen er lenger.
+                      </BodyLong>
+                      {validUser && (
+                        <>
+                          <BodyLong className="mb-2">
+                            Du ser også dette fordi du kan redigere denne
+                            artikkelen. Har du lyst til å kontrollere innholdet
+                            nå?
+                          </BodyLong>
+                          <Button
+                            as="a"
+                            href={`https://aksel.nav.no/admin/prod/intent/edit/id=${id}`}
+                            target="_blank"
+                            size="small"
+                            variant="secondary-neutral"
+                          >
+                            Kontroller innholdet
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  </div>
                 )}
                 <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
