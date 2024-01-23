@@ -118,7 +118,7 @@ const serializers: Partial<PortableTextReactComponents> = {
   },
   marks: {
     kbd: ({ text }) => <KBD>{text}</KBD>,
-    code: ({ text }) => <InlineCode>{text}</InlineCode>,
+    code: ({ text }) => <InlineCode noAmps>{text}</InlineCode>,
     link: ({ text, value: { href } }: PortableTextMarkComponentProps<any>) => {
       if (!href) {
         return <span>{text}</span>;
