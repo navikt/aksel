@@ -182,9 +182,6 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             "navds-file-dropzone__zone--dragging-over": isDraggingOver,
           })}
         >
-          {isDraggingOver && (
-            <div className="navds-file-dropzone__dragover"></div>
-          )}
           <div className="navds-file-dropzone__zone-icon">
             <CloudUpIcon fontSize="2rem" aria-hidden />
           </div>
