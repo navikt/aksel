@@ -5,6 +5,9 @@ export const useCheckAuth = (skipCheck?: boolean) => {
   const [user, setUser] = useState(true);
 
   useEffect(() => {
+    if (skipCheck) {
+      return;
+    }
     const fetchUser = async () => {
       const response = await fetch(
         `https://${clientConfig.projectId}.api.sanity.io/v1/users/me`,
@@ -20,9 +23,7 @@ export const useCheckAuth = (skipCheck?: boolean) => {
       }
       setUser(false);
     };
-    if (!skipCheck) {
-      fetchUser();
-    }
+    fetchUser();
   }, [skipCheck]);
 
   return user;
