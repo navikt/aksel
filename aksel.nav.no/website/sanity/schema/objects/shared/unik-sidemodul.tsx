@@ -1,6 +1,6 @@
-import { StarIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
+import { StarIcon } from "@navikt/aksel-icons";
 
 export const UnikSidemodul = defineType({
   title: "Unik Sidemodul",

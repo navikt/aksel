@@ -1,3 +1,6 @@
+import { GetStaticPaths, GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { Detail, Heading } from "@navikt/ds-react";
 import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -20,9 +23,6 @@ import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
 import { AkselTable, AkselTableRow } from "@/web/Table";
 import { SEO } from "@/web/seo/SEO";
-import { Detail, Heading } from "@navikt/ds-react";
-import { GetStaticPaths, GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{

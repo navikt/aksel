@@ -1,6 +1,6 @@
-import { IconPage } from "@/web/icon-page/Page";
-import meta from "@navikt/aksel-icons/metadata";
 import { useRouter } from "next/router";
+import meta from "@navikt/aksel-icons/metadata";
+import { IconPage } from "@/web/icon-page/Page";
 import NotFound from "../404";
 
 const Page = () => {

@@ -1,5 +1,5 @@
-import { Tag as DsTag, Heading, Label } from "@navikt/ds-react";
 import cl from "clsx";
+import { Tag as DsTag, Heading, Label } from "@navikt/ds-react";
 
 export const Tag = ({
   type,

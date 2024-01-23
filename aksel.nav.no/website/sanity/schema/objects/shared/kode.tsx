@@ -1,6 +1,6 @@
-import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
-import { TerminalIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { TerminalIcon } from "@navikt/aksel-icons";
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 
 export const Kode = defineType({
   title: "Kode",

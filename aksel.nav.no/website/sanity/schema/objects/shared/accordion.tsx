@@ -1,7 +1,6 @@
+import { defineField, defineType } from "sanity";
 import { ChevronDownIcon, Density3Icon } from "@navikt/aksel-icons";
 import { Label } from "@navikt/ds-react";
-
-import { defineField, defineType } from "sanity";
 
 export const Accordion = defineType({
   name: "accordion",

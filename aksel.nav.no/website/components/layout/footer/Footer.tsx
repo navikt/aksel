@@ -1,7 +1,7 @@
+import dynamic from "next/dynamic";
+import { Box, HGrid, Page, VStack } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";
-import { Box, HGrid, Page, VStack } from "@navikt/ds-react";
-import dynamic from "next/dynamic";
 import LinkBlock from "./parts/LinkBlock";
 
 export const EditButton = dynamic(() => import("@/web/EditButton"), {

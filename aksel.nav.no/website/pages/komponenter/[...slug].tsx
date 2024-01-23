@@ -1,3 +1,6 @@
+import { GetStaticPaths, GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { ChangelogIcon, FigmaIcon, GithubIcon, YarnIcon } from "@/assets/Icons";
 import ComponentOverview from "@/cms/component-overview/ComponentOverview";
 import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
@@ -22,9 +25,6 @@ import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
 import { SEO } from "@/web/seo/SEO";
 import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
-import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import { GetStaticPaths, GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 const kodepakker = {

@@ -1,7 +1,7 @@
-import { ChangeLogIconOutline } from "@/assets/Icons";
+import cl from "clsx";
 import { LightBulbIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Button, Heading } from "@navikt/ds-react";
-import cl from "clsx";
+import { ChangeLogIconOutline } from "@/assets/Icons";
 
 const SuggestionBlockComponent = ({
   variant,

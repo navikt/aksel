@@ -40,6 +40,7 @@
         "options": {
           "tailwindConfig": "./aksel.nav.no/website/tailwind.config.js",
           "plugins": [
+            "@trivago/prettier-plugin-sort-imports",
             "prettier-plugin-tailwindcss"
           ]
         }

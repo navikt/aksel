@@ -1,5 +1,5 @@
-import { LightBulbIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { LightBulbIcon } from "@navikt/aksel-icons";
 
 export const Tips = defineType({
   name: "tips",
