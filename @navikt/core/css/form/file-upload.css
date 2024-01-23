@@ -99,7 +99,7 @@
   margin: -1px 0;
 }
 
-.navds-file-dropzone__zone:has(:focus-visible):not(:has(.navds-file-dropzone__dragover)) .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:focus-visible):not(.navds-file-dropzone__zone--dragging-over) .navds-file-dropzone__button {
   box-shadow:
     inset 0 0 0 2px var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
     var(--a-shadow-focus);
@@ -113,13 +113,14 @@
   }
 }
 
-.navds-file-dropzone__zone:has(:active):not(:has(.navds-file-dropzone__dragover)) .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:active):not(.navds-file-dropzone__zone--dragging-over) .navds-file-dropzone__button {
   color: var(--ac-button-secondary-active-text, var(--__ac-button-secondary-active-text, var(--a-text-on-action)));
   background-color: var(--ac-button-secondary-active-bg, var(--__ac-button-secondary-active-bg, var(--a-surface-action-active)));
   box-shadow: none;
 }
 
-.navds-file-dropzone__zone:has(:focus-visible:active):not(:has(.navds-file-dropzone__dragover)) .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:focus-visible:active):not(.navds-file-dropzone__zone--dragging-over)
+  .navds-file-dropzone__button {
   box-shadow:
     inset 0 0 0 1px
       var(--ac-button-secondary-active-focus-border, var(--__ac-button-secondary-active-focus-border, var(--a-surface-default))),
@@ -202,7 +203,7 @@
   transition: background-color 0.6s cubic-bezier(0.3, 1.4, 0.3, 1);
 }
 
-.navds-file-dropzone__dragover ~ .aware-animation > .aware-animation-icon {
+.navds-file-dropzone__zone--dragging-over > .aware-animation > .aware-animation-icon {
   background-color: transparent;
 }
 
@@ -210,12 +211,12 @@
   visibility: hidden;
 }
 
-.navds-file-dropzone__dragover ~ .aware-animation > .aware-animation-text {
+.navds-file-dropzone__zone--dragging-over > .aware-animation > .aware-animation-text {
   transition: visibility 0.6s cubic-bezier(0.3, 1.4, 0.3, 1);
   visibility: visible;
 }
 
-.navds-file-dropzone__dragover ~ .aware-animation {
+.navds-file-dropzone__zone--dragging-over > .aware-animation {
   top: 50%;
   transform: translateY(-50%);
 }
