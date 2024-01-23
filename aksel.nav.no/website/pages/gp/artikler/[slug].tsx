@@ -260,7 +260,7 @@ const Page = ({
               <TableOfContents toc={toc} variant="subtle" />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
                 {outdated && (
-                  <div className="flex gap-3 p-4 rounded-md ring-1 bg-amber-50 ring-amber-300 mb-8">
+                  <div className="flex gap-3 p-4 rounded-md ring-1 bg-amber-50 ring-amber-300 mb-12">
                     <div>
                       <HourglassBottomFilledIcon
                         aria-hidden
