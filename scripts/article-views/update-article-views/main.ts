@@ -1,13 +1,9 @@
 import * as path from "https://deno.land/std@0.102.0/path/mod.ts";
 import { load } from "https://deno.land/std@0.212.0/dotenv/mod.ts";
 import { createClient } from "npm:next-sanity";
-import { clientConfig } from "../../aksel.nav.no/website/sanity/config.ts";
-import {
-  amplitudeFetchJSON,
-  hashString,
-  queryArticleURLs,
-  sum_last_n,
-} from "./utils.ts";
+import { clientConfig } from "../../../aksel.nav.no/website/sanity/config.ts";
+import { queryArticleURLs } from "../queries.ts";
+import { amplitudeFetchJSON, hashString, sum_last_n } from "./utils.ts";
 
 /*
   this part is a bit silly: script "plumbing" essentially. ModuleDir is the root of this
@@ -17,9 +13,9 @@ import {
 
   Currently the script is located `scripts/deno/`, so we go up ../../ to get to the project root
 */
-const project_root = `${path.dirname(path.fromFileUrl(Deno.mainModule))}/../..`;
+const env_file = `${path.dirname(path.fromFileUrl(Deno.mainModule))}/../.env`;
 await load({
-  envPath: `${project_root}/aksel.nav.no/website/.env`,
+  envPath: `${env_file}`,
   export: true,
 });
 
@@ -32,7 +28,7 @@ type ViewData = {
 
 const view_datas = new Map<string, Partial<ViewData>>();
 
-const views = {
+const views_config = {
   views_day: {
     chart_id: "e-f5vcqiqk",
     sum_last_n: 24, // 24 hours in a day
@@ -51,7 +47,7 @@ const views = {
   },
 };
 
-for (const [view, config] of Object.entries(views)) {
+for (const [view, config] of Object.entries(views_config)) {
   const chartResult = await amplitudeFetchJSON(config.chart_id);
   for (const [idx, view_entry] of chartResult.data.series.entries()) {
     const url = chartResult.data.seriesLabels[idx][1];
